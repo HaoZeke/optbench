@@ -278,6 +278,8 @@ def _sota_html(root: Path) -> str:
         record = json.loads(path.read_text(encoding="utf-8"))
         if record.get("status") != "sota":
             continue
+        if record.get("problem") not in (None, "", "minimization/lj38"):
+            continue
         accepted.extend(record.get("runs") or [])
     lines = [
         '<section class="bench" id="sota">',

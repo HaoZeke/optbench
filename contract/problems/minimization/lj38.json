@@ -27,7 +27,7 @@
   },
   "metrics": ["force_calls", "force_calls_max", "force_calls_min", "nfailed"],
   "sota_requires": [
-    "The code commit is the present tip named in codes/registry.toml.",
+    "The code commit is the one named in codes/registry.toml.",
     "The geometries are this sha256, all of them.",
     "The stop is this convergence block, not a per-atom force and not a step cap added after the first pass.",
     "The reducer is this reducer.",

@@ -7,6 +7,19 @@
   "host": "rg.terra",
   "runs": [
     {
+      "entry": "eon-3.5.0-lbfgs",
+      "code": "eOn",
+      "algorithm": "LBFGS",
+      "code_version": "3.5.0",
+      "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
+      "present_source": true,
+      "starts": 1000,
+      "nfailed": 0,
+      "method": {"client": "pyeonclient 0.4.2", "potential": "ljcluster", "convergence_metric": "norm", "force_norm": 0.01, "max_move": 0.2, "max_iterations": 10000},
+      "metrics": {"force_calls": 201, "force_calls_min": 100, "force_calls_max": 551, "nfailed": 0},
+      "notes": "Python client 0.4.2, OptType LBFGS. Every run ended at an L2 force norm at or below 0.01."
+    },
+    {
       "entry": "rgmin-lbfgs-0.3.0",
       "code": "rgmin",
       "algorithm": "LBFGS",
@@ -15,14 +28,87 @@
       "present_source": true,
       "starts": 1000,
       "nfailed": 0,
+      "method": {"max_move": 0.2, "gtol": 0.01, "maxiter": 10000, "linesearch": "Wolfe", "memory": 10},
+      "metrics": {"force_calls": 216, "force_calls_min": 103, "force_calls_max": 548, "nfailed": 0},
+      "notes": "Present main. L-BFGS with step cap 0.2. Stop is the L2 norm of the gradient at 0.01. All 1000 energies lie between -170.88 and -151.92."
+    },
+    {
+      "entry": "eon-3.5.0-cg",
+      "code": "eOn",
+      "algorithm": "CG",
+      "code_version": "3.5.0",
+      "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
+      "present_source": true,
+      "starts": 1000,
+      "nfailed": 0,
+      "method": {"client": "pyeonclient 0.4.2", "potential": "ljcluster", "convergence_metric": "norm", "force_norm": 0.01, "max_move": 0.2, "max_iterations": 10000},
+      "metrics": {"force_calls": 454, "force_calls_min": 207, "force_calls_max": 1135, "nfailed": 0},
+      "notes": "Python client 0.4.2, OptType CG. Same count as the 3.5.0 eonclient binary on these geometries."
+    },
+    {
+      "entry": "rgmin-bfgs-0.3.0",
+      "code": "rgmin",
+      "algorithm": "BFGS",
+      "code_version": "0.3.0",
+      "commit": "e089a136910f5a3a32dbf447ff23a2eba674bc83",
+      "present_source": true,
+      "starts": 1000,
+      "nfailed": 0,
       "method": {"max_move": 0.2, "gtol": 0.01, "maxiter": 10000, "linesearch": "Wolfe"},
-      "metrics": {
-        "force_calls": 216,
-        "force_calls_min": 103,
-        "force_calls_max": 548,
-        "nfailed": 0
-      },
-      "notes": "Present main. L-BFGS with eOn's default step cap of 0.2, declared in the driver. Stop is the L2 norm of the gradient at 0.01. All 1000 energies lie between -170.88 and -151.92."
+      "metrics": {"force_calls": 538, "force_calls_min": 366, "force_calls_max": 887, "nfailed": 0},
+      "notes": "Dense BFGS. Same geometries, gradient tolerance, and step cap as the L-BFGS entry."
+    },
+    {
+      "entry": "rgmin-bb-0.3.0",
+      "code": "rgmin",
+      "algorithm": "BB",
+      "code_version": "0.3.0",
+      "commit": "e089a136910f5a3a32dbf447ff23a2eba674bc83",
+      "present_source": true,
+      "starts": 1000,
+      "nfailed": 0,
+      "method": {"max_move": 0.2, "gtol": 0.01, "maxiter": 10000},
+      "metrics": {"force_calls": 541, "force_calls_min": 171, "force_calls_max": 1809, "nfailed": 0},
+      "notes": "Barzilai-Borwein. Energies lie between -173.93 and -145.90."
+    },
+    {
+      "entry": "rgmin-sr1-0.3.0",
+      "code": "rgmin",
+      "algorithm": "SR1",
+      "code_version": "0.3.0",
+      "commit": "e089a136910f5a3a32dbf447ff23a2eba674bc83",
+      "present_source": true,
+      "starts": 1000,
+      "nfailed": 0,
+      "method": {"max_move": 0.2, "gtol": 0.01, "maxiter": 10000, "linesearch": "Wolfe"},
+      "metrics": {"force_calls": 566, "force_calls_min": 351, "force_calls_max": 1032, "nfailed": 0},
+      "notes": "Inverse SR1."
+    },
+    {
+      "entry": "rgmin-fire2-0.3.0",
+      "code": "rgmin",
+      "algorithm": "FIRE2",
+      "code_version": "0.3.0",
+      "commit": "e089a136910f5a3a32dbf447ff23a2eba674bc83",
+      "present_source": true,
+      "starts": 1000,
+      "nfailed": 0,
+      "method": {"max_move": 0.2, "gtol": 0.01, "maxiter": 10000, "kind": "V2"},
+      "metrics": {"force_calls": 694, "force_calls_min": 191, "force_calls_max": 2680, "nfailed": 0},
+      "notes": "FIRE 2.0."
+    },
+    {
+      "entry": "rgmin-fire-0.3.0",
+      "code": "rgmin",
+      "algorithm": "FIRE",
+      "code_version": "0.3.0",
+      "commit": "e089a136910f5a3a32dbf447ff23a2eba674bc83",
+      "present_source": true,
+      "starts": 1000,
+      "nfailed": 0,
+      "method": {"max_move": 0.2, "gtol": 0.01, "maxiter": 10000, "kind": "V1"},
+      "metrics": {"force_calls": 699, "force_calls_min": 198, "force_calls_max": 2592, "nfailed": 0},
+      "notes": "FIRE 1.0."
     },
     {
       "entry": "ase-fire-3.29.0",
@@ -34,13 +120,99 @@
       "starts": 1000,
       "nfailed": 0,
       "method": {"fmax_check": "l2", "force_norm": 0.01, "rc": 40.0},
-      "metrics": {
-        "force_calls": 706,
-        "force_calls_min": 199,
-        "force_calls_max": 2340,
-        "nfailed": 0
-      },
+      "metrics": {"force_calls": 706, "force_calls_min": 199, "force_calls_max": 2340, "nfailed": 0},
       "notes": "The registry pin is the 3.29.0 release. Force calls are calculator evaluations. Every kept run ended with an L2 norm at or below 0.01."
+    },
+    {
+      "entry": "eon-3.5.0-fire",
+      "code": "eOn",
+      "algorithm": "FIRE",
+      "code_version": "3.5.0",
+      "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
+      "present_source": true,
+      "starts": 1000,
+      "nfailed": 0,
+      "method": {"client": "pyeonclient 0.4.2", "potential": "ljcluster", "convergence_metric": "norm", "force_norm": 0.01, "max_move": 0.2, "max_iterations": 10000},
+      "metrics": {"force_calls": 731, "force_calls_min": 227, "force_calls_max": 2918, "nfailed": 0},
+      "notes": "Python client 0.4.2, OptType FIRE."
+    },
+    {
+      "entry": "rgmin-nlcg-0.3.0",
+      "code": "rgmin",
+      "algorithm": "NLCG",
+      "code_version": "0.3.0",
+      "commit": "e089a136910f5a3a32dbf447ff23a2eba674bc83",
+      "present_source": true,
+      "starts": 1000,
+      "nfailed": 0,
+      "method": {"max_move": 0.2, "gtol": 0.01, "maxiter": 10000, "conjugacy": "Polak-Ribiere", "linesearch": "Wolfe"},
+      "metrics": {"force_calls": 733, "force_calls_min": 281, "force_calls_max": 2307, "nfailed": 0},
+      "notes": "Polak-Ribiere nonlinear conjugate gradient."
+    },
+    {
+      "entry": "rgmin-sd-0.3.0",
+      "code": "rgmin",
+      "algorithm": "SD",
+      "code_version": "0.3.0",
+      "commit": "e089a136910f5a3a32dbf447ff23a2eba674bc83",
+      "present_source": true,
+      "starts": 1000,
+      "nfailed": 0,
+      "method": {"max_move": 0.2, "gtol": 0.01, "maxiter": 10000, "linesearch": "Wolfe"},
+      "metrics": {"force_calls": 1260, "force_calls_min": 459, "force_calls_max": 3758, "nfailed": 0},
+      "notes": "Steepest descent with a Wolfe line search."
+    },
+    {
+      "entry": "rgmin-quickmin-0.3.0",
+      "code": "rgmin",
+      "algorithm": "QuickMin",
+      "code_version": "0.3.0",
+      "commit": "e089a136910f5a3a32dbf447ff23a2eba674bc83",
+      "present_source": true,
+      "starts": 1000,
+      "nfailed": 1,
+      "method": {"max_move": 0.2, "gtol": 0.01, "maxiter": 10000},
+      "metrics": {"force_calls": 1849, "force_calls_min": 377, "force_calls_max": 7301, "nfailed": 1},
+      "notes": "One start did not reach the gradient tolerance within 10000 evaluations. The mean is the other 999."
+    },
+    {
+      "entry": "eon-3.5.0-qm",
+      "code": "eOn",
+      "algorithm": "QuickMin",
+      "code_version": "3.5.0",
+      "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
+      "present_source": true,
+      "starts": 1000,
+      "nfailed": 25,
+      "method": {"client": "eonclient 3.5.0", "potential": "ljcluster", "time_step": 0.01, "convergence_metric": "norm", "force_norm": 0.01, "max_move": 0.2, "max_iterations": 10000},
+      "metrics": {"force_calls": 3514, "force_calls_min": 682, "force_calls_max": 9926, "nfailed": 25},
+      "notes": "QuickMin timestep 0.01. Twenty-five starts did not reach the force norm within 10000 calls."
+    },
+    {
+      "entry": "eon-3.5.0-sd",
+      "code": "eOn",
+      "algorithm": "SD",
+      "code_version": "3.5.0",
+      "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
+      "present_source": true,
+      "starts": 1000,
+      "nfailed": 96,
+      "method": {"client": "eonclient 3.5.0", "potential": "ljcluster", "sd_alpha": 0.001, "sd_twopoint": false, "convergence_metric": "norm", "force_norm": 0.01, "max_move": 0.2, "max_iterations": 10000},
+      "metrics": {"force_calls": 4901, "force_calls_min": 1355, "force_calls_max": 9982, "nfailed": 96},
+      "notes": "Steepest descent with sd_alpha 0.001. Ninety-six starts did not reach the force norm within 10000 calls."
+    },
+    {
+      "entry": "eon-3.5.0-sd-twopoint",
+      "code": "eOn",
+      "algorithm": "SD-twopoint",
+      "code_version": "3.5.0",
+      "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
+      "present_source": true,
+      "starts": 1000,
+      "nfailed": 0,
+      "method": {"client": "eonclient 3.5.0", "potential": "ljcluster", "sd_alpha": 0.001, "sd_twopoint": true, "convergence_metric": "norm", "force_norm": 0.01, "max_move": 0.2, "max_iterations": 10000},
+      "metrics": {"force_calls": 532, "force_calls_min": 181, "force_calls_max": 2498, "nfailed": 0},
+      "notes": "Two-point steepest descent, sd_alpha 0.001. Every run converged."
     }
   ]
 }
