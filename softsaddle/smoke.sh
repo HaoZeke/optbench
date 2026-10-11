@@ -20,7 +20,8 @@ compile_lib() {
         for src in *.cpp; do
             g++ -O3 -fPIC -std=c++14 -DBOOST_BIND_GLOBAL_PLACEHOLDERS -c "$src"
         done
-        for src in tridiag.c tridiagv.c qrstep.c; do
+        # qrstep.c is included by tridiag.c. It is not a standalone file.
+        for src in tridiag.c tridiagv.c; do
             gcc -O3 -fPIC -std=c11 -c "$src"
         done
         g++ -O3 -shared -o "$libdir/$soname" ./*.o -lgsl -lgslcblas
