@@ -4,3 +4,7 @@ __pycache__/
 .pytest_cache/
 softsaddle/work/
 softsaddle/lib/
+docs/build/
+docs/doctrees/
+docs/source/index.rst
+docs/source/generated/

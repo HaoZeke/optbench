@@ -1,0 +1,35 @@
+#+TITLE: OptBench
+#+AUTHOR: OptBench
+#+OPTIONS: toc:nil num:nil author:nil title:nil
+
+OptBench ranks geometry optimizers, saddle searches, and global
+optimization by the cost of a finished answer.
+Chill, Stevenson, Ruehle, Shang, Xiao, Farrell, Wales, and Henkelman
+set the problems in J. Chem. Theory Comput. 2014, 10, 5476-5482
+([[https://doi.org/10.1021/ct5008718][doi:10.1021/ct5008718]]).
+The table on this page is one thousand Lennard-Jones 38 minimizations.
+A run in the archive counts as finished when it stops under 10000 force
+calls.
+A new run also has to bring the norm of the force to 0.01.
+
+#+INCLUDE: "generated/featured.org"
+
+The same rule, a contract above a rank, is repeated for every problem
+in the contents.
+
+#+begin_export rst
+.. toctree::
+   :maxdepth: 1
+   :caption: Problems
+
+   generated/suites/minimization
+   generated/suites/saddle-search
+   generated/suites/double-ended-saddle-search
+   generated/suites/globalopt
+   generated/suites/lowest-eigenvector
+   generated/suites/tsopt
+   generated/suites/mlopt
+   generated/suites/neb
+   generated/suites/hTST
+   generated/suites/accelerated-md
+#+end_export

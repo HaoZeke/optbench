@@ -10,3 +10,22 @@ python = "3.12.*"
 [tasks]
 test = "python -m unittest discover -s tests -v"
 check = "python -m optbench check"
+
+[environments]
+docs = { features = ["docs"] }
+
+[feature.docs]
+platforms = ["linux-64"]
+
+[feature.docs.dependencies]
+python = "3.12.*"
+sphinx = ">=8.2,<9"
+emacs = ">=30.2,<31"
+
+[feature.docs.pypi-dependencies]
+shibuya = ">=2026.1.9,<2027"
+
+[feature.docs.tasks]
+tables = { cmd = "python -m optbench.site" }
+rst = { cmd = "emacs --batch --load docs/export.el" }
+html = { cmd = "sphinx-build -d docs/doctrees docs/source docs/build", depends-on = ["tables", "rst"] }

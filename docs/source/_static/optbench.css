@@ -1,0 +1,75 @@
+.bench {
+  margin: 2.5rem 0 3.5rem;
+}
+
+.bench h2 {
+  margin: 0 0 0.75rem;
+}
+
+.bench-rule {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.35rem 1rem;
+  margin: 0 0 1.25rem;
+  max-width: 68ch;
+}
+
+.bench-rule dt {
+  font-weight: 650;
+}
+
+.bench-rule dd {
+  margin: 0;
+}
+
+.bench-smoke {
+  max-width: 68ch;
+  margin: 0 0 1.25rem;
+}
+
+.bench table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.bench caption {
+  caption-side: bottom;
+  text-align: left;
+  padding-top: 0.75rem;
+  max-width: 68ch;
+  color: color-mix(in srgb, CanvasText 72%, Canvas);
+}
+
+.bench th,
+.bench td {
+  padding: 0.45rem 0.6rem;
+  border-bottom: 1px solid color-mix(in srgb, CanvasText 18%, Canvas);
+  vertical-align: top;
+}
+
+.bench th {
+  font-size: 0.78rem;
+  font-weight: 650;
+  letter-spacing: 0.01em;
+}
+
+.bench th.num,
+.bench td.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.bench tr.best {
+  background: color-mix(in srgb, LinkText 14%, Canvas);
+}
+
+.bench tr.held td {
+  color: color-mix(in srgb, CanvasText 78%, Canvas);
+}
+
+.bench ::selection {
+  background: color-mix(in srgb, CanvasText 20%, Canvas);
+  color: CanvasText;
+}
