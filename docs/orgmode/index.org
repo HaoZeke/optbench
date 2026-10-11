@@ -12,7 +12,7 @@ A run in the archive counts as finished when it stops under 10000 force
 calls.
 A new run also has to bring the norm of the force to 0.01.
 
-#+INCLUDE: "generated/featured.org"
+#+INCLUDE: "../include/featured.org"
 
 The same rule, a contract above a rank, is repeated for every problem
 in the contents.

@@ -20,7 +20,7 @@ class SiteTests(unittest.TestCase):
 
     def test_render_writes_the_front_page_table(self):
         render(ROOT)
-        featured = (ROOT / "docs" / "orgmode" / "generated" / "featured.org").read_text(encoding="utf-8")
+        featured = (ROOT / "docs" / "include" / "featured.org").read_text(encoding="utf-8")
         self.assertIn("Lennard-Jones 38 clusters", featured)
         self.assertIn("eon-cg", featured)
 

@@ -229,7 +229,9 @@ def render(root: Path) -> None:
 
     featured = problems["minimization/lj38"]
     featured_html = problem_html(featured, oracle)
-    (out / "featured.org").write_text(_raw(featured_html), encoding="utf-8")
+    include = root / "docs" / "include"
+    include.mkdir(parents=True, exist_ok=True)
+    (include / "featured.org").write_text(_raw(featured_html), encoding="utf-8")
 
     order = list(SUITE_ORDER) + sorted(set(by_suite) - set(SUITE_ORDER))
     for suite in order:
