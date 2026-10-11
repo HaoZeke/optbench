@@ -53,6 +53,20 @@ def _blob(bare: Path, sha: str) -> bytes:
     return subprocess.check_output(["git", "-C", str(bare), "cat-file", "blob", sha])
 
 
+def _keep_geometry(raw: bytes, name: str) -> bool:
+    """Structures stay. Code snapshots and path stubs do not."""
+    if name.startswith("eon_"):
+        return False
+    if len(raw) < 128:
+        try:
+            text = raw.decode("ascii")
+        except UnicodeDecodeError:
+            return True
+        if text.startswith("../") or text.endswith((".tgz", ".tar.gz", ".tar.bz2")):
+            return False
+    return True
+
+
 def _is_geometry(path: str) -> bool:
     if path.startswith("website/codes/"):
         return False
@@ -184,8 +198,10 @@ def import_archive(bare: Path, dest: Path) -> None:
     lines = []
     for path, sha, size, branch in sorted(geometries, key=lambda item: (item[3], item[0])):
         raw = _blob(bare, sha)
-        digest = hashlib.sha256(raw).hexdigest()
         name = path.rsplit("/", 1)[-1]
+        if not _keep_geometry(raw, name):
+            continue
+        digest = hashlib.sha256(raw).hexdigest()
         stored = dest / "inputs" / "sha256" / digest / name
         if digest not in seen:
             stored.parent.mkdir(parents=True, exist_ok=True)
