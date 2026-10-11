@@ -1,0 +1,41 @@
+#+begin_export rst
+.. raw:: html
+
+   <section class="bench" id="current-codes">
+   <h2>Current codes</h2>
+   <p class="bench-smoke">These pins can write a new score. They are not rows in the archived rank. The benchmark contributor is Rohit Goswami.</p>
+   <div class="bench-table"><table>
+   <caption>No force-call number is listed until a run writes benchmark.dat under the problem rule.</caption>
+   <thead><tr><th>Code</th><th>Role</th><th>Source</th><th>Commit</th></tr></thead><tbody>
+   <tr>
+   <td>eOn</td>
+   <td>minimization and saddle search</td>
+   <td><a href="https://github.com/TheochemUI/eon">eon develop</a></td>
+   <td class="num">97c9992f65cc</td>
+   </tr>
+   <tr>
+   <td>rgmin</td>
+   <td>minimization</td>
+   <td><a href="https://github.com/OmniPotentRPC/rgmin">rgmin main</a></td>
+   <td class="num">e089a136910f</td>
+   </tr>
+   <tr>
+   <td>rgsaddle</td>
+   <td>saddle search</td>
+   <td><a href="https://github.com/OmniPotentRPC/rgsaddle">rgsaddle main</a></td>
+   <td class="num">8bea1002b06a</td>
+   </tr>
+   <tr>
+   <td>ASE</td>
+   <td>minimization and saddle search</td>
+   <td><a href="https://gitlab.com/ase/ase">ase 3.29.0</a></td>
+   <td class="num">3.29.0</td>
+   </tr>
+   <tr>
+   <td>pARTn</td>
+   <td>saddle search</td>
+   <td><a href="https://gitlab.com/mammasmias/artn-plugin">artn-plugin DEVEL</a></td>
+   <td class="num">9b753517c6c0</td>
+   </tr>
+   </tbody></table></div></section>
+#+end_export

@@ -1,0 +1,11 @@
+#+TITLE: Current codes
+#+OPTIONS: toc:nil num:nil author:nil title:nil
+
+eOn is TheochemUI develop.
+rgmin and rgsaddle are the current main commits.
+ASE is release 3.29.0.
+pARTn is the DEVEL branch of the plugin.
+A new score from any of them is entered by Rohit Goswami.
+The number is written only after the run finishes under the problem rule.
+
+#+INCLUDE: "../include/codes.org"

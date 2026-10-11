@@ -19,7 +19,7 @@ python -m unittest discover -s tests -v
 
 ## How a run is handled
 
-The problem file says what a new `benchmark.dat` must contain. The oracle says what the archive recorded. Those two stay in git. The public site is that pair, rendered. Prose is org-mode under `docs/orgmode`. `python -m optbench.site` writes the ranks. Emacs exports the org to reStructuredText, and Sphinx builds the HTML.
+The problem file says what a new `benchmark.dat` must contain. The oracle says what the archive recorded. Those two stay in git. The public site is that pair, rendered. Current eOn develop, rgmin, rgsaddle, ASE 3.29.0, and pARTn DEVEL are pinned in `codes/registry.toml`. A new score from those pins is entered by Rohit Goswami, and only after the run writes `benchmark.dat`. Prose is org-mode under `docs/orgmode`. `python -m optbench.site` writes the ranks. Emacs exports the org to reStructuredText, and Sphinx builds the HTML.
 
 Every push to `main`, and every pull request, runs `pixi run test` and `pixi run check` on a hosted runner. That job does not start MATLAB and does not run a campaign.
 

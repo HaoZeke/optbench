@@ -25,6 +25,13 @@ class SiteTests(unittest.TestCase):
         featured = (ROOT / "docs" / "include" / "featured.org").read_text(encoding="utf-8")
         self.assertIn("Lennard-Jones 38 clusters", featured)
         self.assertIn("eon-cg", featured)
+        codes = (ROOT / "docs" / "include" / "codes.org").read_text(encoding="utf-8")
+        self.assertIn("Rohit Goswami", codes)
+        self.assertIn("97c9992f65cc", codes)
+        self.assertIn("e089a136910f", codes)
+        self.assertIn("8bea1002b06a", codes)
+        self.assertIn("9b753517c6c0", codes)
+        self.assertIn("3.29.0", codes)
 
 
 if __name__ == "__main__":

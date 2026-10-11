@@ -1,0 +1,55 @@
+# Codes that can write a new OptBench score.
+# The benchmark contributor is the person who runs the entry.
+# A score is added only after that run writes benchmark.dat.
+
+benchmark_contributor = "Rohit Goswami"
+
+[[code]]
+id = "eon"
+name = "eOn"
+role = "minimization and saddle search"
+repository = "https://github.com/TheochemUI/eon"
+ref = "develop"
+commit = "97c9992f65cc598da58416a9131709e2c415f635"
+committed = "2026-10-10"
+note = "TheochemUI develop, maintained by Rohit Goswami."
+
+[[code]]
+id = "rgmin"
+name = "rgmin"
+role = "minimization"
+repository = "https://github.com/OmniPotentRPC/rgmin"
+ref = "main"
+commit = "e089a136910f5a3a32dbf447ff23a2eba674bc83"
+committed = "2026-10-11"
+note = "Minimizers. A Lennard-Jones 38 entry uses L-BFGS or FIRE to the problem force norm."
+
+[[code]]
+id = "rgsaddle"
+name = "rgsaddle"
+role = "saddle search"
+repository = "https://github.com/OmniPotentRPC/rgsaddle"
+ref = "main"
+commit = "8bea1002b06a52f7b2260fed57469b2a45395997"
+committed = "2026-10-11"
+note = "Dimer and band saddle search. It does not replace a minimization score."
+
+[[code]]
+id = "ase"
+name = "ASE"
+role = "minimization and saddle search"
+repository = "https://gitlab.com/ase/ase"
+ref = "3.29.0"
+commit = ""
+committed = "2026"
+note = "Atomic Simulation Environment 3.29.0. FIRE or LBFGS to the problem force norm. Force calls are calculator evaluations."
+
+[[code]]
+id = "artn"
+name = "pARTn"
+role = "saddle search"
+repository = "https://gitlab.com/mammasmias/artn-plugin"
+ref = "DEVEL"
+commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
+committed = "2026-10-05"
+note = "Activation-relaxation technique nouveau, plugin branch DEVEL. The benchmark contributor of a new entry is Rohit Goswami."

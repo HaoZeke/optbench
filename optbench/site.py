@@ -267,6 +267,38 @@ def _raw(fragment: str) -> str:
     return "\n".join(lines)
 
 
+def _codes_html(path: Path) -> str:
+    import tomllib
+
+    record = tomllib.loads(path.read_text(encoding="utf-8"))
+    contributor = record.get("benchmark_contributor", "")
+    lines = [
+        '<section class="bench" id="current-codes">',
+        "<h2>Current codes</h2>",
+        "<p class=\"bench-smoke\">These pins can write a new score. "
+        "They are not rows in the archived rank. "
+        f"The benchmark contributor is {html.escape(contributor)}.</p>",
+        '<div class="bench-table"><table>',
+        "<caption>No force-call number is listed until a run writes benchmark.dat under the problem rule.</caption>",
+        "<thead><tr><th>Code</th><th>Role</th><th>Source</th><th>Commit</th></tr></thead><tbody>",
+    ]
+    for code in record.get("code", []):
+        commit = code.get("commit") or code.get("ref", "")
+        short = commit[:12]
+        lines.append("<tr>")
+        lines.append(f"<td>{html.escape(code.get('name', ''))}</td>")
+        lines.append(f"<td>{html.escape(code.get('role', ''))}</td>")
+        repo = code.get("repository", "")
+        ref = code.get("ref", "")
+        lines.append(
+            f'<td><a href="{html.escape(repo)}">{html.escape(repo.split("/")[-1])} {html.escape(ref)}</a></td>'
+        )
+        lines.append(f'<td class="num">{html.escape(short)}</td>')
+        lines.append("</tr>")
+    lines.append("</tbody></table></div></section>")
+    return "\n".join(lines)
+
+
 def render(root: Path) -> None:
     """Write ``docs/orgmode/generated`` from ``problems`` and ``oracle``."""
     problems = load_all(root / "problems")
@@ -292,10 +324,12 @@ def render(root: Path) -> None:
     for problem in problems.values():
         by_suite.setdefault(problem["suite"], []).append(problem)
 
-    featured = problems["minimization/lj38"]
-    featured_html = problem_html(featured, oracle)
     include = root / "docs" / "include"
     include.mkdir(parents=True, exist_ok=True)
+    (include / "codes.org").write_text(_raw(_codes_html(root / "codes" / "registry.toml")), encoding="utf-8")
+
+    featured = problems["minimization/lj38"]
+    featured_html = problem_html(featured, oracle)
     (include / "featured.org").write_text(_raw(featured_html), encoding="utf-8")
 
     order = list(SUITE_ORDER) + sorted(set(by_suite) - set(SUITE_ORDER))
