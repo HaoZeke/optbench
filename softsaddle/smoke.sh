@@ -15,8 +15,16 @@ compile_lib() {
     soname=$2
     (
         cd "$srcdir"
-        set -- *.cpp tridiag.c tridiagv.c qrstep.c
-        g++ -O3 -shared -fPIC -std=c++14 -o "$libdir/$soname" "$@" -lgsl -lgslcblas
+        # The C files are GSL sources. g++ treats them as C++ and rejects
+        # size_t. Compile them as C, then link with the C++ objects.
+        for src in *.cpp; do
+            g++ -O3 -fPIC -std=c++14 -DBOOST_BIND_GLOBAL_PLACEHOLDERS -c "$src"
+        done
+        for src in tridiag.c tridiagv.c qrstep.c; do
+            gcc -O3 -fPIC -std=c11 -c "$src"
+        done
+        g++ -O3 -shared -o "$libdir/$soname" ./*.o -lgsl -lgslcblas
+        rm -f ./*.o
     )
 }
 
