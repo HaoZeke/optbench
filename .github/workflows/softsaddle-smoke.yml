@@ -29,7 +29,9 @@ jobs:
       - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v3
         with:
-          products: Parallel_Computing_Toolbox
+          products: >
+            Parallel_Computing_Toolbox
+            Statistics_and_Machine_Learning_Toolbox
 
       - name: Run one batch
         uses: matlab-actions/run-command@v3
