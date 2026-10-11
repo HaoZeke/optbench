@@ -1,0 +1,46 @@
+{
+  "schema": "optbench.result/v1",
+  "status": "sota",
+  "problem": "minimization/lj38",
+  "submitter": "Rohit Goswami",
+  "date": "2026-10-11",
+  "host": "rg.terra",
+  "runs": [
+    {
+      "entry": "rgmin-lbfgs-0.3.0",
+      "code": "rgmin",
+      "algorithm": "LBFGS",
+      "code_version": "0.3.0",
+      "commit": "e089a136910f5a3a32dbf447ff23a2eba674bc83",
+      "present_source": true,
+      "starts": 1000,
+      "nfailed": 0,
+      "method": {"max_move": 0.2, "gtol": 0.01, "maxiter": 10000, "linesearch": "Wolfe"},
+      "metrics": {
+        "force_calls": 216,
+        "force_calls_min": 103,
+        "force_calls_max": 548,
+        "nfailed": 0
+      },
+      "notes": "Present main. L-BFGS with eOn's default step cap of 0.2, declared in the driver. Stop is the L2 norm of the gradient at 0.01. All 1000 energies lie between -170.88 and -151.92."
+    },
+    {
+      "entry": "ase-fire-3.29.0",
+      "code": "ASE",
+      "algorithm": "FIRE",
+      "code_version": "3.29.0",
+      "commit": "",
+      "present_source": true,
+      "starts": 1000,
+      "nfailed": 0,
+      "method": {"fmax_check": "l2", "force_norm": 0.01, "rc": 40.0},
+      "metrics": {
+        "force_calls": 706,
+        "force_calls_min": 199,
+        "force_calls_max": 2340,
+        "nfailed": 0
+      },
+      "notes": "The registry pin is the 3.29.0 release. Force calls are calculator evaluations. Every kept run ended with an L2 norm at or below 0.01."
+    }
+  ]
+}

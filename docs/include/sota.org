@@ -3,6 +3,9 @@
 
    <section class="bench" id="sota">
    <h2>Lennard-Jones 38</h2>
-   <p class="bench-smoke">No run of a present source has been accepted. The contract is contract/problems/minimization/lj38.json. A result is optbench.result/v1 with status sota.</p>
+   <table><caption>Present sources. Fewest mean force calls first.</caption><thead><tr><th>Entry</th><th>Code</th><th class="num">Mean</th><th class="num">Min</th><th class="num">Max</th><th class="num">Failed</th><th>Commit</th></tr></thead><tbody>
+   <tr><td>rgmin-lbfgs-0.3.0</td><td>rgmin</td><td class="num">216</td><td class="num">103</td><td class="num">548</td><td class="num">0</td><td>e089a136910f</td></tr>
+   <tr><td>ase-fire-3.29.0</td><td>ASE</td><td class="num">706</td><td class="num">199</td><td class="num">2340</td><td class="num">0</td><td>3.29.0</td></tr>
+   </tbody></table>
    </section>
 #+end_export

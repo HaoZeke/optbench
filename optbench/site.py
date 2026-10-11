@@ -290,14 +290,26 @@ def _sota_html(root: Path) -> str:
             "A result is optbench.result/v1 with status sota.</p>"
         )
     else:
-        lines.append("<table><thead><tr><th>Entry</th><th>Code</th><th class=\"num\">Force calls</th></tr></thead><tbody>")
-        for run in accepted:
+        lines.append(
+            "<table><caption>Present sources. Fewest mean force calls first.</caption>"
+            "<thead><tr><th>Entry</th><th>Code</th><th class=\"num\">Mean</th>"
+            "<th class=\"num\">Min</th><th class=\"num\">Max</th><th class=\"num\">Failed</th>"
+            "<th>Commit</th></tr></thead><tbody>"
+        )
+        ordered = sorted(accepted, key=lambda run: float((run.get("metrics") or {}).get("force_calls", 1e99)))
+        for run in ordered:
             metrics = run.get("metrics") or {}
+            commit = str(run.get("commit") or run.get("code_version") or "")
             lines.append(
-                "<tr><td>{}</td><td>{}</td><td class=\"num\">{}</td></tr>".format(
+                "<tr><td>{}</td><td>{}</td><td class=\"num\">{}</td><td class=\"num\">{}</td>"
+                "<td class=\"num\">{}</td><td class=\"num\">{}</td><td>{}</td></tr>".format(
                     html.escape(str(run.get("entry", ""))),
                     html.escape(str(run.get("code", ""))),
                     html.escape(str(metrics.get("force_calls", ""))),
+                    html.escape(str(metrics.get("force_calls_min", ""))),
+                    html.escape(str(metrics.get("force_calls_max", ""))),
+                    html.escape(str(metrics.get("nfailed", run.get("nfailed", "")))),
+                    html.escape(commit[:12]),
                 )
             )
         lines.append("</tbody></table>")
