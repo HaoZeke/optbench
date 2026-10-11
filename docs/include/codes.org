@@ -3,7 +3,7 @@
 
    <section class="bench" id="current-codes">
    <h2>Current codes</h2>
-   <p class="bench-smoke">Lennard-Jones 38 scores from these codes are in the minimization rank. Saddle-search codes are listed here and are not in that rank until a saddle run finishes. The benchmark contributor is Rohit Goswami.</p>
+   <p class="bench-smoke">A score from one of these pins is SOTA only when the result names this commit, the problem geometries, and the problem stop. The benchmark contributor is Rohit Goswami.</p>
    <div class="bench-table"><table>
    <caption>No force-call number is listed until a run writes benchmark.dat under the problem rule.</caption>
    <thead><tr><th>Code</th><th>Role</th><th>Source</th><th>Commit</th></tr></thead><tbody>

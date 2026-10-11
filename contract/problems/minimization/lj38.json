@@ -1,0 +1,36 @@
+{
+  "schema": "optbench.problem/v1",
+  "id": "minimization/lj38",
+  "title": "Lennard-Jones 38 clusters",
+  "geometries": {
+    "archive_path": "website/minimization/lj38/lj38-clusters.tgz",
+    "sha256": "86bf774955b906c486d37282c48e42628e8fe4af3579222f6e07fcf5913157b1",
+    "count": 1000,
+    "atoms": 38
+  },
+  "potential": {
+    "kind": "lennard-jones",
+    "epsilon": 1.0,
+    "sigma": 1.0,
+    "cutoff": 40.0
+  },
+  "convergence": {
+    "metric": "l2",
+    "force_norm": 0.01,
+    "max_force_calls": 10000
+  },
+  "reducer": {
+    "failure": "L2 norm of the force above force_norm, or total_force_calls >= max_force_calls",
+    "force_calls": "half-even mean of total_force_calls on the runs that are not failures",
+    "force_calls_min": "minimum total_force_calls on those runs",
+    "force_calls_max": "maximum total_force_calls on those runs"
+  },
+  "metrics": ["force_calls", "force_calls_max", "force_calls_min", "nfailed"],
+  "sota_requires": [
+    "The code commit is the present tip named in codes/registry.toml.",
+    "The geometries are this sha256, all of them.",
+    "The stop is this convergence block, not a per-atom force and not a step cap added after the first pass.",
+    "The reducer is this reducer.",
+    "The build identity is recorded on the result."
+  ]
+}

@@ -1,0 +1,8 @@
+#+begin_export rst
+.. raw:: html
+
+   <section class="bench" id="sota">
+   <h2>Lennard-Jones 38</h2>
+   <p class="bench-smoke">No run of a present source has been accepted. The contract is contract/problems/minimization/lj38.json. A result is optbench.result/v1 with status sota.</p>
+   </section>
+#+end_export

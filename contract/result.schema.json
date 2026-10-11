@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lode-org.github.io/optbench/contract/result.schema.json",
+  "title": "OptBench result",
+  "type": "object",
+  "required": ["schema", "status", "problem", "submitter", "date", "runs"],
+  "properties": {
+    "schema": { "const": "optbench.result/v1" },
+    "status": { "enum": ["sota", "archive"] },
+    "problem": { "type": "string" },
+    "submitter": { "type": "string" },
+    "date": { "type": "string" },
+    "runs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["entry", "code", "algorithm", "metrics", "starts", "nfailed", "present_source"],
+        "properties": {
+          "entry": { "type": "string" },
+          "code": { "type": "string" },
+          "algorithm": { "type": "string" },
+          "code_version": { "type": "string" },
+          "commit": { "type": "string" },
+          "present_source": { "type": "boolean" },
+          "starts": { "type": "integer" },
+          "nfailed": { "type": "integer" },
+          "metrics": { "type": "object" },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  }
+}

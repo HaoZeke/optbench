@@ -9,7 +9,7 @@
    <dt>Starts</dt><dd>1000</dd>
    <dt>Archived rule</dt><dd>total_force_calls &gt;= max_force_calls</dd>
    </dl>
-   <figure class="bench-plot"><figcaption>force calls, same order as the table.</figcaption><div class="bench-plot-mount"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "minimization-lj38-newton-method", "entry": "newton-method", "code": "", "value": 79.0, "best": true, "held": false}, {"id": "minimization-lj38-tsase-sdlbfgs", "entry": "tsase-sdlbfgs", "code": "", "value": 166.0, "best": false, "held": false}, {"id": "minimization-lj38-optim", "entry": "optim", "code": "OPTIM", "value": 176.0, "best": false, "held": false}, {"id": "minimization-lj38-pele-lbfgs-m100-maxstep0-2", "entry": "pele-lbfgs-M100-maxstep0.2", "code": "", "value": 179.0, "best": false, "held": false}, {"id": "minimization-lj38-eon-lbfgs", "entry": "eon-lbfgs", "code": "Eon r2025", "value": 181.0, "best": false, "held": false}, {"id": "minimization-lj38-rgmin-lbfgs-0-3-0", "entry": "rgmin-lbfgs-0.3.0", "code": "rgmin 0.3.0 e089a136910f", "value": 216.0, "best": false, "held": false}, {"id": "minimization-lj38-pele-lbfgs-m20-maxstep0-1", "entry": "pele-lbfgs-M20-maxstep0.1", "code": "", "value": 222.0, "best": false, "held": true}, {"id": "minimization-lj38-pele-lbfgs-m4-maxstep0-2", "entry": "pele-lbfgs-M4-maxstep0.2", "code": "", "value": 230.0, "best": false, "held": true}, {"id": "minimization-lj38-scipy-lbfgs", "entry": "scipy-lbfgs", "code": "pele", "value": 230.0, "best": false, "held": false}, {"id": "minimization-lj38-pele-lbfgs-m10-maxstep0-1", "entry": "pele-lbfgs-M10-maxstep0.1", "code": "", "value": 235.0, "best": false, "held": true}, {"id": "minimization-lj38-pele-lbfgs-m4-maxstep0-1", "entry": "pele-lbfgs-M4-maxstep0.1", "code": "", "value": 249.0, "best": false, "held": true}, {"id": "minimization-lj38-pele-lbfgs-m1-maxstep0-1", "entry": "pele-lbfgs-M1-maxstep0.1", "code": "", "value": 287.0, "best": false, "held": true}, {"id": "minimization-lj38-ase-lbfgs", "entry": "ase-lbfgs", "code": "ASE 3.6.1", "value": 355.0, "best": false, "held": false}, {"id": "minimization-lj38-pele-lbfgs-m4-maxstep0-05", "entry": "pele-lbfgs-M4-maxstep0.05", "code": "", "value": 379.0, "best": false, "held": true}, {"id": "minimization-lj38-ase-lbfgslinesearch", "entry": "ase-lbfgslinesearch", "code": "ASE 3.6.0", "value": 417.0, "best": false, "held": false}, {"id": "minimization-lj38-eon-cg", "entry": "eon-cg", "code": "Eon r2025", "value": 453.0, "best": false, "held": false}, {"id": "minimization-lj38-eon-cg-3-5-0", "entry": "eon-cg-3.5.0", "code": "Eon 3.5.0 4d8b34baf", "value": 454.0, "best": false, "held": false}, {"id": "minimization-lj38-ase-bfgs", "entry": "ase-BFGS", "code": "", "value": 463.0, "best": false, "held": false}, {"id": "minimization-lj38-ase-bfgslinesearch", "entry": "ase-bfgslinesearch", "code": "ASE 3.6.0", "value": 500.0, "best": false, "held": true}, {"id": "minimization-lj38-eon-sd-twopoint", "entry": "eon-sd-twopoint", "code": "Eon r2025", "value": 539.0, "best": false, "held": false}, {"id": "minimization-lj38-ase-fire", "entry": "ase-fire", "code": "ASE 3.6.0", "value": 656.0, "best": false, "held": false}, {"id": "minimization-lj38-ase-fire-3-29-0", "entry": "ase-fire-3.29.0", "code": "ASE 3.29.0", "value": 706.0, "best": false, "held": false}, {"id": "minimization-lj38-pele-fire", "entry": "pele-fire", "code": "", "value": 709.0, "best": false, "held": false}, {"id": "minimization-lj38-eon-fire", "entry": "eon-fire", "code": "Eon r2025", "value": 731.0, "best": false, "held": false}, {"id": "minimization-lj38-ase-preconlbfgs", "entry": "ase-preconlbfgs", "code": "", "value": 2686.0, "best": false, "held": false}, {"id": "minimization-lj38-eon-qm", "entry": "eon-qm", "code": "Eon r2025", "value": 3523.0, "best": false, "held": false}, {"id": "minimization-lj38-eon-sd", "entry": "eon-sd", "code": "Eon r2025", "value": 4901.0, "best": false, "held": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>force calls, same order as the table.</figcaption><div class="bench-plot-mount"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "minimization-lj38-newton-method", "entry": "newton-method", "code": "", "value": 79.0, "best": true, "held": false}, {"id": "minimization-lj38-tsase-sdlbfgs", "entry": "tsase-sdlbfgs", "code": "", "value": 166.0, "best": false, "held": false}, {"id": "minimization-lj38-optim", "entry": "optim", "code": "OPTIM", "value": 176.0, "best": false, "held": false}, {"id": "minimization-lj38-pele-lbfgs-m100-maxstep0-2", "entry": "pele-lbfgs-M100-maxstep0.2", "code": "", "value": 179.0, "best": false, "held": false}, {"id": "minimization-lj38-eon-lbfgs", "entry": "eon-lbfgs", "code": "Eon r2025", "value": 181.0, "best": false, "held": false}, {"id": "minimization-lj38-pele-lbfgs-m20-maxstep0-1", "entry": "pele-lbfgs-M20-maxstep0.1", "code": "", "value": 222.0, "best": false, "held": true}, {"id": "minimization-lj38-pele-lbfgs-m4-maxstep0-2", "entry": "pele-lbfgs-M4-maxstep0.2", "code": "", "value": 230.0, "best": false, "held": true}, {"id": "minimization-lj38-scipy-lbfgs", "entry": "scipy-lbfgs", "code": "pele", "value": 230.0, "best": false, "held": false}, {"id": "minimization-lj38-pele-lbfgs-m10-maxstep0-1", "entry": "pele-lbfgs-M10-maxstep0.1", "code": "", "value": 235.0, "best": false, "held": true}, {"id": "minimization-lj38-pele-lbfgs-m4-maxstep0-1", "entry": "pele-lbfgs-M4-maxstep0.1", "code": "", "value": 249.0, "best": false, "held": true}, {"id": "minimization-lj38-pele-lbfgs-m1-maxstep0-1", "entry": "pele-lbfgs-M1-maxstep0.1", "code": "", "value": 287.0, "best": false, "held": true}, {"id": "minimization-lj38-ase-lbfgs", "entry": "ase-lbfgs", "code": "ASE 3.6.1", "value": 355.0, "best": false, "held": false}, {"id": "minimization-lj38-pele-lbfgs-m4-maxstep0-05", "entry": "pele-lbfgs-M4-maxstep0.05", "code": "", "value": 379.0, "best": false, "held": true}, {"id": "minimization-lj38-ase-lbfgslinesearch", "entry": "ase-lbfgslinesearch", "code": "ASE 3.6.0", "value": 417.0, "best": false, "held": false}, {"id": "minimization-lj38-eon-cg", "entry": "eon-cg", "code": "Eon r2025", "value": 453.0, "best": false, "held": false}, {"id": "minimization-lj38-ase-bfgs", "entry": "ase-BFGS", "code": "", "value": 463.0, "best": false, "held": false}, {"id": "minimization-lj38-ase-bfgslinesearch", "entry": "ase-bfgslinesearch", "code": "ASE 3.6.0", "value": 500.0, "best": false, "held": true}, {"id": "minimization-lj38-eon-sd-twopoint", "entry": "eon-sd-twopoint", "code": "Eon r2025", "value": 539.0, "best": false, "held": false}, {"id": "minimization-lj38-ase-fire", "entry": "ase-fire", "code": "ASE 3.6.0", "value": 656.0, "best": false, "held": false}, {"id": "minimization-lj38-pele-fire", "entry": "pele-fire", "code": "", "value": 709.0, "best": false, "held": false}, {"id": "minimization-lj38-eon-fire", "entry": "eon-fire", "code": "Eon r2025", "value": 731.0, "best": false, "held": false}, {"id": "minimization-lj38-ase-preconlbfgs", "entry": "ase-preconlbfgs", "code": "", "value": 2686.0, "best": false, "held": false}, {"id": "minimization-lj38-eon-qm", "entry": "eon-qm", "code": "Eon r2025", "value": 3523.0, "best": false, "held": false}, {"id": "minimization-lj38-eon-sd", "entry": "eon-sd", "code": "Eon r2025", "value": 4901.0, "best": false, "held": false}]}</script></figure>
    <div class="bench-table"><table>
    <caption>Archived scores, fewest force calls first.</caption>
    <thead><tr>
@@ -78,19 +78,8 @@
    <td class="text">Sam Chill</td>
    <td class="text">27 Aug 2013</td>
    </tr>
-   <tr id="minimization-lj38-rgmin-lbfgs-0-3-0" class="current">
-   <td class="num">6</td>
-   <td class="text">rgmin-lbfgs-0.3.0</td>
-   <td class="text">rgmin 0.3.0 e089a136910f</td>
-   <td class="num">216</td>
-   <td class="num">548</td>
-   <td class="num">103</td>
-   <td class="num">0</td>
-   <td class="text">Rohit Goswami</td>
-   <td class="text">2026-10-11</td>
-   </tr>
    <tr id="minimization-lj38-pele-lbfgs-m20-maxstep0-1" class="held">
-   <td class="num">7</td>
+   <td class="num">6</td>
    <td class="text">pele-lbfgs-M20-maxstep0.1 (held out of the original table)</td>
    <td class="text"></td>
    <td class="num">2.22000e+02</td>
@@ -101,7 +90,7 @@
    <td class="text">06 Aug 2014</td>
    </tr>
    <tr id="minimization-lj38-pele-lbfgs-m4-maxstep0-2" class="held">
-   <td class="num">8</td>
+   <td class="num">7</td>
    <td class="text">pele-lbfgs-M4-maxstep0.2 (held out of the original table)</td>
    <td class="text"></td>
    <td class="num">2.30000e+02</td>
@@ -112,7 +101,7 @@
    <td class="text">06 Aug 2014</td>
    </tr>
    <tr id="minimization-lj38-scipy-lbfgs">
-   <td class="num">9</td>
+   <td class="num">8</td>
    <td class="text">scipy-lbfgs</td>
    <td class="text">pele</td>
    <td class="num">2.30000e+02</td>
@@ -123,7 +112,7 @@
    <td class="text">28 Aug 2013</td>
    </tr>
    <tr id="minimization-lj38-pele-lbfgs-m10-maxstep0-1" class="held">
-   <td class="num">10</td>
+   <td class="num">9</td>
    <td class="text">pele-lbfgs-M10-maxstep0.1 (held out of the original table)</td>
    <td class="text"></td>
    <td class="num">2.35000e+02</td>
@@ -134,7 +123,7 @@
    <td class="text">06 Aug 2014</td>
    </tr>
    <tr id="minimization-lj38-pele-lbfgs-m4-maxstep0-1" class="held">
-   <td class="num">11</td>
+   <td class="num">10</td>
    <td class="text">pele-lbfgs-M4-maxstep0.1 (held out of the original table)</td>
    <td class="text"></td>
    <td class="num">2.49000e+02</td>
@@ -145,7 +134,7 @@
    <td class="text">06 Aug 2014</td>
    </tr>
    <tr id="minimization-lj38-pele-lbfgs-m1-maxstep0-1" class="held">
-   <td class="num">12</td>
+   <td class="num">11</td>
    <td class="text">pele-lbfgs-M1-maxstep0.1 (held out of the original table)</td>
    <td class="text"></td>
    <td class="num">2.87000e+02</td>
@@ -156,7 +145,7 @@
    <td class="text">06 Aug 2014</td>
    </tr>
    <tr id="minimization-lj38-ase-lbfgs">
-   <td class="num">13</td>
+   <td class="num">12</td>
    <td class="text">ase-lbfgs</td>
    <td class="text">ASE 3.6.1</td>
    <td class="num">355</td>
@@ -167,7 +156,7 @@
    <td class="text">27 Aug 2013</td>
    </tr>
    <tr id="minimization-lj38-pele-lbfgs-m4-maxstep0-05" class="held">
-   <td class="num">14</td>
+   <td class="num">13</td>
    <td class="text">pele-lbfgs-M4-maxstep0.05 (held out of the original table)</td>
    <td class="text"></td>
    <td class="num">3.79000e+02</td>
@@ -178,7 +167,7 @@
    <td class="text">06 Aug 2014</td>
    </tr>
    <tr id="minimization-lj38-ase-lbfgslinesearch">
-   <td class="num">15</td>
+   <td class="num">14</td>
    <td class="text">ase-lbfgslinesearch</td>
    <td class="text">ASE 3.6.0</td>
    <td class="num">417</td>
@@ -189,7 +178,7 @@
    <td class="text">27 Aug 2013</td>
    </tr>
    <tr id="minimization-lj38-eon-cg">
-   <td class="num">16</td>
+   <td class="num">15</td>
    <td class="text">eon-cg</td>
    <td class="text">Eon r2025</td>
    <td class="num">453</td>
@@ -199,19 +188,8 @@
    <td class="text">Sam Chill</td>
    <td class="text">24 Jun 2013</td>
    </tr>
-   <tr id="minimization-lj38-eon-cg-3-5-0" class="current">
-   <td class="num">17</td>
-   <td class="text">eon-cg-3.5.0</td>
-   <td class="text">Eon 3.5.0 4d8b34baf</td>
-   <td class="num">454</td>
-   <td class="num">1135</td>
-   <td class="num">207</td>
-   <td class="num">0</td>
-   <td class="text">Rohit Goswami</td>
-   <td class="text">2026-10-11</td>
-   </tr>
    <tr id="minimization-lj38-ase-bfgs">
-   <td class="num">18</td>
+   <td class="num">16</td>
    <td class="text">ase-BFGS</td>
    <td class="text"></td>
    <td class="num">463</td>
@@ -222,7 +200,7 @@
    <td class="text">01 Jun 2020</td>
    </tr>
    <tr id="minimization-lj38-ase-bfgslinesearch" class="held">
-   <td class="num">19</td>
+   <td class="num">17</td>
    <td class="text">ase-bfgslinesearch (held out of the original table)</td>
    <td class="text">ASE 3.6.0</td>
    <td class="num">500</td>
@@ -233,7 +211,7 @@
    <td class="text">15 Oct 2012</td>
    </tr>
    <tr id="minimization-lj38-eon-sd-twopoint">
-   <td class="num">20</td>
+   <td class="num">18</td>
    <td class="text">eon-sd-twopoint</td>
    <td class="text">Eon r2025</td>
    <td class="num">539</td>
@@ -244,7 +222,7 @@
    <td class="text">24 Jun 2013</td>
    </tr>
    <tr id="minimization-lj38-ase-fire">
-   <td class="num">21</td>
+   <td class="num">19</td>
    <td class="text">ase-fire</td>
    <td class="text">ASE 3.6.0</td>
    <td class="num">656</td>
@@ -254,19 +232,8 @@
    <td class="text">Sam Chill</td>
    <td class="text">23 Aug 2013</td>
    </tr>
-   <tr id="minimization-lj38-ase-fire-3-29-0" class="current">
-   <td class="num">22</td>
-   <td class="text">ase-fire-3.29.0</td>
-   <td class="text">ASE 3.29.0</td>
-   <td class="num">706</td>
-   <td class="num">2340</td>
-   <td class="num">199</td>
-   <td class="num">0</td>
-   <td class="text">Rohit Goswami</td>
-   <td class="text">2026-10-11</td>
-   </tr>
    <tr id="minimization-lj38-pele-fire">
-   <td class="num">23</td>
+   <td class="num">20</td>
    <td class="text">pele-fire</td>
    <td class="text"></td>
    <td class="num">7.09000e+02</td>
@@ -277,7 +244,7 @@
    <td class="text">06 Aug 2014</td>
    </tr>
    <tr id="minimization-lj38-eon-fire">
-   <td class="num">24</td>
+   <td class="num">21</td>
    <td class="text">eon-fire</td>
    <td class="text">Eon r2025</td>
    <td class="num">731</td>
@@ -288,7 +255,7 @@
    <td class="text">24 Jun 2013</td>
    </tr>
    <tr id="minimization-lj38-ase-preconlbfgs">
-   <td class="num">25</td>
+   <td class="num">22</td>
    <td class="text">ase-preconlbfgs</td>
    <td class="text"></td>
    <td class="num">2686</td>
@@ -299,7 +266,7 @@
    <td class="text">16 Jun 2020</td>
    </tr>
    <tr id="minimization-lj38-eon-qm">
-   <td class="num">26</td>
+   <td class="num">23</td>
    <td class="text">eon-qm</td>
    <td class="text">Eon r2025</td>
    <td class="num">3523</td>
@@ -310,7 +277,7 @@
    <td class="text">24 Jun 2013</td>
    </tr>
    <tr id="minimization-lj38-eon-sd">
-   <td class="num">27</td>
+   <td class="num">24</td>
    <td class="text">eon-sd</td>
    <td class="text">Eon r2025</td>
    <td class="num">4901</td>

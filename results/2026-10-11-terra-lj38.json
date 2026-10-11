@@ -1,0 +1,61 @@
+{
+  "schema": "optbench.result/v1",
+  "status": "archive",
+  "problem": "minimization/lj38",
+  "submitter": "Rohit Goswami",
+  "date": "2026-10-11",
+  "host": "rg.terra",
+  "runs": [
+    {
+      "entry": "eon-cg-3.5.0",
+      "code": "Eon",
+      "algorithm": "Conjugate Gradients",
+      "code_version": "3.5.0",
+      "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
+      "present_source": false,
+      "starts": 1000,
+      "nfailed": 0,
+      "metrics": {
+        "force_calls": 454,
+        "force_calls_min": 207,
+        "force_calls_max": 1135,
+        "nfailed": 0
+      },
+      "notes": "The binary is develop commit 4d8b34baf from 2 October. The present tip 97c9992f65cc did not compile in that pixi sysroot."
+    },
+    {
+      "entry": "ase-fire-3.29.0",
+      "code": "ASE",
+      "algorithm": "FIRE",
+      "code_version": "3.29.0",
+      "commit": "",
+      "present_source": false,
+      "starts": 1000,
+      "nfailed": 0,
+      "metrics": {
+        "force_calls": 706,
+        "force_calls_min": 199,
+        "force_calls_max": 2340,
+        "nfailed": 0
+      },
+      "notes": "ASE has no commit pin. The driver checked the L2 norm around FIRE. A release version is not a present source tree."
+    },
+    {
+      "entry": "rgmin-lbfgs-0.3.0",
+      "code": "rgmin",
+      "algorithm": "LBFGS",
+      "code_version": "0.3.0 e089a136910f",
+      "commit": "e089a136910f5a3a32dbf447ff23a2eba674bc83",
+      "present_source": false,
+      "starts": 1000,
+      "nfailed": 0,
+      "metrics": {
+        "force_calls": 216,
+        "force_calls_min": 103,
+        "force_calls_max": 548,
+        "nfailed": 0
+      },
+      "notes": "The commit matches the pin. The first pass unbound the clusters. This pass added a 0.2 step cap after that, which is eOn's default max move and was not the method as first run."
+    }
+  ]
+}

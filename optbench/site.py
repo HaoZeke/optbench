@@ -270,6 +270,72 @@ def _raw(fragment: str) -> str:
     return "\n".join(lines)
 
 
+def _sota_html(root: Path) -> str:
+    accepted = []
+    for path in sorted((root / "results").glob("*.json")):
+        import json
+
+        record = json.loads(path.read_text(encoding="utf-8"))
+        if record.get("status") != "sota":
+            continue
+        accepted.extend(record.get("runs") or [])
+    lines = [
+        '<section class="bench" id="sota">',
+        "<h2>Lennard-Jones 38</h2>",
+    ]
+    if not accepted:
+        lines.append(
+            "<p class=\"bench-smoke\">No run of a present source has been accepted. "
+            "The contract is contract/problems/minimization/lj38.json. "
+            "A result is optbench.result/v1 with status sota.</p>"
+        )
+    else:
+        lines.append("<table><thead><tr><th>Entry</th><th>Code</th><th class=\"num\">Force calls</th></tr></thead><tbody>")
+        for run in accepted:
+            metrics = run.get("metrics") or {}
+            lines.append(
+                "<tr><td>{}</td><td>{}</td><td class=\"num\">{}</td></tr>".format(
+                    html.escape(str(run.get("entry", ""))),
+                    html.escape(str(run.get("code", ""))),
+                    html.escape(str(metrics.get("force_calls", ""))),
+                )
+            )
+        lines.append("</tbody></table>")
+    lines.append("</section>")
+    return "\n".join(lines)
+
+
+def _submission_html(root: Path) -> str:
+    import json
+
+    lines = ['<section class="bench" id="terra-pass">', "<h2>11 October Terra pass</h2>"]
+    lines.append(
+        "<p class=\"bench-smoke\">These numbers are real and they are not the SOTA board. "
+        "Each run missed the present-source rule in the Lennard-Jones 38 contract.</p>"
+    )
+    lines.append(
+        "<table><caption>Mean force calls on 1000 starts. None failed the force cap.</caption>"
+        "<thead><tr><th>Entry</th><th>Code</th><th class=\"num\">Mean</th>"
+        "<th class=\"num\">Min</th><th class=\"num\">Max</th><th>Why it stays here</th></tr></thead><tbody>"
+    )
+    for path in sorted((root / "results").glob("*.json")):
+        record = json.loads(path.read_text(encoding="utf-8"))
+        if record.get("status") != "archive":
+            continue
+        for run in record.get("runs") or []:
+            metrics = run.get("metrics") or {}
+            lines.append("<tr>")
+            lines.append(f"<td>{html.escape(str(run.get('entry', '')))}</td>")
+            lines.append(f"<td>{html.escape(str(run.get('code', '')))}</td>")
+            lines.append(f"<td class=\"num\">{html.escape(str(metrics.get('force_calls', '')))}</td>")
+            lines.append(f"<td class=\"num\">{html.escape(str(metrics.get('force_calls_min', '')))}</td>")
+            lines.append(f"<td class=\"num\">{html.escape(str(metrics.get('force_calls_max', '')))}</td>")
+            lines.append(f"<td>{html.escape(str(run.get('notes', '')))}</td>")
+            lines.append("</tr>")
+    lines.append("</tbody></table></section>")
+    return "\n".join(lines)
+
+
 def _codes_html(path: Path) -> str:
     import tomllib
 
@@ -278,8 +344,8 @@ def _codes_html(path: Path) -> str:
     lines = [
         '<section class="bench" id="current-codes">',
         "<h2>Current codes</h2>",
-        "<p class=\"bench-smoke\">Lennard-Jones 38 scores from these codes are in the minimization rank. "
-        "Saddle-search codes are listed here and are not in that rank until a saddle run finishes. "
+        "<p class=\"bench-smoke\">A score from one of these pins is SOTA only when the result "
+        "names this commit, the problem geometries, and the problem stop. "
         f"The benchmark contributor is {html.escape(contributor)}.</p>",
         '<div class="bench-table"><table>',
         "<caption>No force-call number is listed until a run writes benchmark.dat under the problem rule.</caption>",
@@ -306,9 +372,6 @@ def render(root: Path) -> None:
     """Write ``docs/orgmode/generated`` from ``problems`` and ``oracle``."""
     problems = load_all(root / "problems")
     oracle = load_oracle(root / "oracle" / "entries.jsonl")
-    current = root / "oracle" / "current.jsonl"
-    if current.exists():
-        oracle.extend(load_oracle(current))
     smoke = ""
     smoke_path = root / "softsaddle" / "entry.toml"
     if smoke_path.exists():
@@ -337,6 +400,8 @@ def render(root: Path) -> None:
     featured = problems["minimization/lj38"]
     featured_html = problem_html(featured, oracle)
     (include / "featured.org").write_text(_raw(featured_html), encoding="utf-8")
+    (include / "sota.org").write_text(_raw(_sota_html(root)), encoding="utf-8")
+    (include / "terra-pass.org").write_text(_raw(_submission_html(root)), encoding="utf-8")
 
     order = list(SUITE_ORDER) + sorted(set(by_suite) - set(SUITE_ORDER))
     for suite in order:

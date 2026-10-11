@@ -1,0 +1,31 @@
+#+TITLE: Archive
+#+OPTIONS: toc:nil num:nil author:nil title:nil
+
+The 2014 archive is the public OptBench site at the commit named in
+the oracle.
+Chill, Stevenson, Ruehle, Shang, Xiao, Farrell, Wales, and Henkelman
+set those problems in J. Chem. Theory Comput. 2014, 10, 5476-5482
+([[https://doi.org/10.1021/ct5008718][doi:10.1021/ct5008718]]).
+A run in that archive counts as finished when it stops under 10000
+force calls.
+
+#+INCLUDE: "../include/featured.org"
+
+#+INCLUDE: "../include/terra-pass.org"
+
+#+begin_export rst
+.. toctree::
+   :maxdepth: 1
+   :caption: 2014 problems
+
+   generated/suites/minimization
+   generated/suites/saddle-search
+   generated/suites/double-ended-saddle-search
+   generated/suites/globalopt
+   generated/suites/lowest-eigenvector
+   generated/suites/tsopt
+   generated/suites/mlopt
+   generated/suites/neb
+   generated/suites/hTST
+   generated/suites/accelerated-md
+#+end_export
