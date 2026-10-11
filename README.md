@@ -17,4 +17,6 @@ python -m unittest discover -s tests -v
 
 `python -m optbench import-archive --bare ARCHIVE --dest .` rebuilds the oracle, the geometry store, and any problem file that does not already exist. `ARCHIVE` is a bare clone of the public GitLab project.
 
-Nothing in this tree submits jobs. `benchmark.dat` is the file a run has to write.
+Nothing in this tree submits the published campaigns. `benchmark.dat` is the file a run has to write.
+
+`softsaddle/` is the 2019 Pt-island SoftSaddle entry, without the 72 MB hypersphere database and without the old compiled libraries. `softsaddle/smoke.sh` builds `libmorse`, `libdavidson`, and `liblanczos`, then writes a one-batch configuration: one search, one repetition, stop after 600 seconds. The archived score is ten repetitions and a mean of about 4.2e5 force calls. The smoke does not claim that number. A public GitHub Actions run can start MATLAB for it. The archived `run.sh` looks for MATLAB R2017b on a fixed path, and the current setup action provides R2021a or later.

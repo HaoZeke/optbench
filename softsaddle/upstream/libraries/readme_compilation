@@ -1,0 +1,15 @@
+%  Carlos Argaez 
+%  email: carlos@hi.is
+
+
+To compile this library it is necessary to have Boost, GSL and blitz++ installed
+
+It is necessary to make the libeigen.a file. Follow the Makefile in the folder <eigen> provided to this code. Modify the Makefile to be adjusted to your computer's enviroment
+
+Compile against your Boost, GSL and blitz++ libraries: g++ -shared -Wl,-soname,libdson.so -o libdavidson.so -L /your/libraries/path -fPIC *.cpp ./eigen/libeigen.a -lgsl -lgslcblas
+
+
+According to the library the name can be:
+libdavidson.so
+liblanczos.so
+libmorse.so
