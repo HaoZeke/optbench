@@ -242,8 +242,9 @@ for repetition=1:n_repetition
         % coppy all files
         for i=1:length(my_list)
             origin_f = my_list{i};
-            % fullpath omits the .m suffix. cp needs the file.
-            if exist(origin_f, 'file') ~= 2 && exist([origin_f '.m'], 'file') == 2
+            % fullpath omits the .m suffix. exist() still resolves it,
+            % so cp must see the suffix on disk.
+            if ~isfile(origin_f) && isfile([origin_f '.m'])
                 origin_f = [origin_f '.m'];
             end
             err_code = system(['cp ', origin_f, ' ', my_paths_for_func]);
