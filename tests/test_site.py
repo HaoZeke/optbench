@@ -30,6 +30,8 @@ class SiteTests(unittest.TestCase):
         self.assertIn("rgmin-lbfgs-0.3.0", sota)
         self.assertIn("ase-fire-3.29.0", sota)
         self.assertIn("eon-3.5.0-fire", sota)
+        self.assertIn("bench-plot-mount", sota)
+        self.assertIn("bench-plot-data", sota)
         self.assertIn(">731<", sota)
         self.assertIn(">4901<", sota)
         self.assertNotIn("eon-cg-3.5.0", sota)

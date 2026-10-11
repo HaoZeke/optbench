@@ -292,19 +292,44 @@ def _sota_html(root: Path) -> str:
             "A result is optbench.result/v1 with status sota.</p>"
         )
     else:
+        ordered = sorted(
+            accepted,
+            key=lambda run: float((run.get("metrics") or {}).get("force_calls") or 1e99),
+        )
+        points = []
+        numbered = []
+        for run in ordered:
+            metrics = run.get("metrics") or {}
+            value = metrics.get("force_calls")
+            if isinstance(value, (int, float)):
+                numbered.append(float(value))
+                points.append(
+                    {
+                        "id": _slug(str(run.get("entry", ""))),
+                        "entry": str(run.get("entry", "")),
+                        "code": str(run.get("code", "")),
+                        "value": float(value),
+                        "best": False,
+                        "held": False,
+                    }
+                )
+        best = min(numbered) if numbered else None
+        for point in points:
+            point["best"] = best is not None and point["value"] == best
+        lines.append(_plot(points, "force_calls"))
         lines.append(
             "<table><caption>Present sources. Fewest mean force calls first.</caption>"
             "<thead><tr><th>Entry</th><th>Code</th><th class=\"num\">Mean</th>"
             "<th class=\"num\">Min</th><th class=\"num\">Max</th><th class=\"num\">Failed</th>"
             "<th>Commit</th></tr></thead><tbody>"
         )
-        ordered = sorted(accepted, key=lambda run: float((run.get("metrics") or {}).get("force_calls", 1e99)))
         for run in ordered:
             metrics = run.get("metrics") or {}
             commit = str(run.get("commit") or run.get("code_version") or "")
             lines.append(
-                "<tr><td>{}</td><td>{}</td><td class=\"num\">{}</td><td class=\"num\">{}</td>"
-                "<td class=\"num\">{}</td><td class=\"num\">{}</td><td>{}</td></tr>".format(
+                '<tr id="{}"><td>{}</td><td>{}</td><td class="num">{}</td><td class="num">{}</td>'
+                '<td class="num">{}</td><td class="num">{}</td><td>{}</td></tr>'.format(
+                    html.escape(_slug(str(run.get("entry", "")))),
                     html.escape(str(run.get("entry", ""))),
                     html.escape(str(run.get("code", ""))),
                     html.escape(str(metrics.get("force_calls", ""))),
