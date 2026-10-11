@@ -1,0 +1,8 @@
+force_calls 2.30000e+02
+force_calls_min 1.0500e+02
+force_calls_max 5.4500e+02
+nfailed 0
+algorithm lbfgs_scipy
+code pele
+contributor Jacob Stevenson
+date 28 Aug 2013

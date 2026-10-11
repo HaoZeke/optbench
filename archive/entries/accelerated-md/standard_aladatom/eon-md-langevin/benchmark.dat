@@ -1,0 +1,8 @@
+true_rate 8.359e+05
+uncertainty 7.211e+04
+percent_uncertainty 8.627e+00
+code Eon
+contributer Juliana Duncan
+date 26 Oct 2012
+thermostat langevin_0.001
+algorithm parallel replica

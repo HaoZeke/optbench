@@ -1,0 +1,10 @@
+force_calls 1.03000e+02
+force_calls_median 9.80000e+01
+force_calls_min 5.9000e+01
+force_calls_max 1.9400e+02
+nfailed 0
+date 06 Aug 2014
+algorithm DNEB + hybrid eigenvector following
+code OPTIM
+contributor Jacob Stevenson & Cheng Shang
+code_file wales-27058.tar.bz2

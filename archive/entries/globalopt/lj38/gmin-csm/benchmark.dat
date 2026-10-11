@@ -1,0 +1,11 @@
+force_calls 6.42100e+03
+force_calls_median 4.77100e+03
+force_calls_min 7.7000e+01
+force_calls_max 2.6977e+04
+nfailed 0
+date 06 Aug 2014
+algorithm basin-hopping with symmetrise csm moves
+code GMIN
+contributor Jacob Stevenson and David Wales
+
+code_file wales-27058.tar.bz2

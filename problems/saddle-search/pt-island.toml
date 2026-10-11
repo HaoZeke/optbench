@@ -1,0 +1,29 @@
+id = "saddle-search/pt-island"
+title = "Pt heptamer island"
+suite = "saddle-search"
+problem = "pt-island"
+contract = "stated"
+entry_count = 12
+
+[potential]
+kind = "morse"
+D = 0.7102
+alpha = 1.6047
+r0 = 2.897
+
+[goal]
+connected_saddles = 27
+barrier_below_eV = 1.5
+
+[convergence]
+force_norm = 1.0e-3
+force_unit = "eV/Angstrom"
+
+[input]
+geometries = [
+  "website/saddle-search/pt-island/pt-island.con",
+  "website/saddle-search/pt-island/POSCAR_pt_island",
+]
+
+[metrics]
+required = ["force_calls", "force_calls_mean_error", "fraction_connected", "total_searches", "unique_saddles"]

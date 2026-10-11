@@ -1,0 +1,18 @@
+id = "globalopt/lj38"
+title = "Lennard-Jones 38 global minimum"
+suite = "globalopt"
+problem = "lj38"
+contract = "stated"
+entry_count = 5
+
+[sample]
+starts = 100
+
+[convergence]
+energy_above_minimum = 0.001
+
+[input]
+archive_path = "website/globalopt/lj38/100_lj38.tar.gz"
+
+[metrics]
+required = ["force_calls", "force_calls_min", "force_calls_max", "nfailed"]

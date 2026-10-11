@@ -1,0 +1,10 @@
+barrier_jobs 1170 
+barrier_force_calls 3.239e+06 
+average over 4 
+rate_jobs 95 
+rate_force_calls  2.627e+05 
+average over 60 
+algorithm Dimer-QM rotation: max=50, tol=5
+code TSASE
+date 28 Jan 2013
+contributor Penghao Xiao

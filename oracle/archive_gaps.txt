@@ -1,0 +1,32 @@
+spelling website/accelerated-md/aladatom/true_standard/eon-pr-langevin/benchmark.dat contributer -> contributor
+spelling website/accelerated-md/aladatom/true_standard/eon-pr-langevin/benchmark.dat uncertanity -> uncertainty
+spelling website/accelerated-md/standard_aladatom/eon-md-langevin/benchmark.dat contributer -> contributor
+missing website/globalopt/lj38/eon-basinhopping/benchmark.dat nfailed
+duplicate website/hTST/Al/eon-dimer-cg/benchmark.dat average kept 'over 639' also 'over 20'
+duplicate website/hTST/Al/eon-dimer-cg2/benchmark.dat average kept 'over 432' also 'over 11'
+duplicate website/hTST/Pt/alpha_dimer-qm/benchmark.dat average kept 'over 1' also 'over 142'
+duplicate website/hTST/Pt/eon-dimer-cg/benchmark.dat average kept 'over 13' also 'over 276'
+duplicate website/hTST/Pt/eon-dimer-cg2/benchmark.dat average kept 'over 9' also 'over 271'
+duplicate website/hTST/Pt/eon-dimer-lbfgs/benchmark.dat average kept 'over 13' also 'over 224'
+duplicate website/hTST/Pt/eon-dimer-lbfgs2/benchmark.dat average kept 'over 9' also 'over 220'
+duplicate website/hTST/Pt/eon-lanczos-cg/benchmark.dat average kept 'over 10' also 'over 275'
+duplicate website/hTST/Pt/eon-lanczos-cg2/benchmark.dat average kept 'over 11' also 'over 282'
+duplicate website/hTST/Pt/eon-lanczos-lbfgs/benchmark.dat average kept 'over 8' also 'over 233'
+duplicate website/hTST/Pt/eon-lanczos-lbfgs2/benchmark.dat average kept 'over 6' also 'over 251'
+duplicate website/hTST/Pt/quench_dimer-qm/benchmark.dat average kept 'over 10' also 'over 20'
+duplicate website/hTST/Pt/tsase-dimer-qm/benchmark.dat average kept 'over 4' also 'over 60'
+spelling website/minimization/lj38/pele-lbfgs-M1-maxstep0.1/benchmark.dat hiden -> hidden
+spelling website/minimization/lj38/pele-lbfgs-M10-maxstep0.1/benchmark.dat hiden -> hidden
+spelling website/minimization/lj38/pele-lbfgs-M20-maxstep0.1/benchmark.dat hiden -> hidden
+spelling website/minimization/lj38/pele-lbfgs-M4-maxstep0.05/benchmark.dat hiden -> hidden
+spelling website/minimization/lj38/pele-lbfgs-M4-maxstep0.1/benchmark.dat hiden -> hidden
+spelling website/minimization/lj38/pele-lbfgs-M4-maxstep0.2/benchmark.dat hiden -> hidden
+missing website/minimization/morse-bulk/ase-fire/benchmark.dat nfailed
+missing website/minimization/morse-bulk/ase-lbfgs/benchmark.dat nfailed
+duplicate website/saddle-search/pt-island/eon-dimer-cg-20-rotations/benchmark.dat code kept 'Eon' also 'eon_r2213_cg.tgz'
+duplicate website/saddle-search/pt-island/eon-dimer-cg-20-rotations-20-bowl_breakout/benchmark.dat code kept 'Eon' also 'eon_r2213_cg_bowl_breakout_20.tgz'
+duplicate website/saddle-search/pt-island/eon-dimer-cg-5-rotations-20-bowl_breakout/benchmark.dat code kept 'Eon' also 'eon_r2213_cg_bowl_breakout_20.tgz'
+duplicate website/saddle-search/pt-island/eon-dimer-lbfgs-20-rotations/benchmark.dat code kept 'Eon' also 'eon_r2213_lbfgs.tgz'
+duplicate website/saddle-search/pt-island/eon-dimer-lbfgs-20-rotations-20-bowl_breakout/benchmark.dat code kept 'Eon' also 'eon_r2213_lbfgs_bowl_breakout_20.tgz'
+duplicate website/saddle-search/pt-island/eon-dimer-lbfgs-5-rotations/benchmark.dat code kept 'Eon' also 'eon_r2213_lbfgs.tgz'
+duplicate website/saddle-search/pt-island/eon-dimer-lbfgs-5-rotations-20-bowl_breakout/benchmark.dat code kept 'Eon' also 'eon_r2213_lbfgs_bowl_breakout_20.tgz'

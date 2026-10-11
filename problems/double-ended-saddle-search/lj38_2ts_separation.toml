@@ -1,0 +1,9 @@
+id = "double-ended-saddle-search/lj38_2ts_separation"
+title = "lj38_2ts_separation"
+suite = "double-ended-saddle-search"
+problem = "lj38_2ts_separation"
+contract = "partial"
+entry_count = 2
+
+[metrics]
+required = ["force_calls", "force_calls_max", "force_calls_median", "force_calls_min", "nfailed", "transition_states"]

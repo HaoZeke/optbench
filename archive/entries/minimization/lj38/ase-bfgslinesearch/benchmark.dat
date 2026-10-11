@@ -1,0 +1,11 @@
+force_calls 500
+force_calls_max 799
+force_calls_min 304
+force_calls_per_second 165.81
+nfailed 0
+algorithm BFGS Line Search
+code ASE
+code_version 3.6.0
+date 15 Oct 2012
+contributor Sam Chill
+hidden true

@@ -1,0 +1,6 @@
+This method uses DNEB to get an image close to the saddle point, then uses
+hybrid eigenvector following method to optimize to that saddle point.
+This uses Rayleigh-Ritz minimization to find the lowest eigenvector and moves
+using the hybrid eigenvector following method. The Rayleigh-Ritz minimization
+uses a first order (forward finite differences) expansion.
+Six images are used in DNEB 

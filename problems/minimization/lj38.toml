@@ -1,0 +1,42 @@
+id = "minimization/lj38"
+title = "Lennard-Jones 38 clusters"
+suite = "minimization"
+problem = "lj38"
+contract = "stated"
+entry_count = 24
+
+[potential]
+kind = "lennard-jones"
+epsilon = 1.0
+sigma = 1.0
+cutoff = 40.0
+pair_style = "lj/cut/opt"
+
+[sample]
+starts = 1000
+geometry = "cluster_%.4i.con"
+
+[input]
+archive_path = "website/minimization/lj38/lj38-clusters.tgz"
+
+[convergence]
+norm = "l2"
+force_norm = 0.01
+force_unit = "energy/distance"
+max_force_calls = 10000
+
+[metrics]
+required = ["force_calls", "force_calls_max", "force_calls_min", "nfailed"]
+
+[scoring.archive]
+failure = "total_force_calls >= max_force_calls"
+force_calls = "mean of total_force_calls on the other runs, rounded with awk printf %.0f"
+
+[scoring.run]
+failure = "force norm above force_norm, or total_force_calls >= max_force_calls"
+
+[reference_entry]
+path = "archive/entries/minimization/lj38/eon-cg"
+code = "Eon"
+code_version = "r2025"
+algorithm = "Conjugate Gradients"

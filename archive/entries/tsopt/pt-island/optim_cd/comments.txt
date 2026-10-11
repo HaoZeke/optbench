@@ -1,0 +1,4 @@
+The hybrid eigenvector following method. 
+This uses Rayleigh-Ritz minimization to find the lowest eigenvector and moves
+using the hybrid eigenvector following method. The Rayleigh-Ritz minimization
+uses a second order (central differences) expansion.

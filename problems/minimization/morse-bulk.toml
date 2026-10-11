@@ -1,0 +1,21 @@
+id = "minimization/morse-bulk"
+title = "Morse bulk"
+suite = "minimization"
+problem = "morse-bulk"
+contract = "stated"
+entry_count = 11
+
+[convergence]
+force_norm = 1.0e-3
+force_unit = "eV/Ang"
+
+[input]
+archive_path = "website/minimization/morse-bulk/morse-bulk.tgz"
+
+[metrics]
+required = ["force_calls", "force_calls_max", "force_calls_min", "nfailed"]
+
+[reference_entry]
+path = "archive/entries/minimization/morse-bulk/eon-cg"
+potential = "morse_pt"
+report_cap = 10000

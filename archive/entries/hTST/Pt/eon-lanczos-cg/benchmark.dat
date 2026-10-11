@@ -1,0 +1,10 @@
+barrier_jobs 1419 
+barrier_force_calls 6.737e+05 
+average over 10 
+rate_jobs 54 
+rate_force_calls  2.586e+04 
+average over 275 
+algorithm Lanczos-CG rotation: max=10, tol=0.05
+code Eon r2006
+date 28 Jan 2013
+contributor Penghao Xiao

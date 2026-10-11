@@ -1,0 +1,4 @@
+This uses Rayleigh-Ritz minimization to find the lowest eigenvector and
+moves towards the transition state using the hybrid eigenvector following
+method.  The Rayleigh-Ritz minimization uses a first order (forward finite
+differences) expansion.

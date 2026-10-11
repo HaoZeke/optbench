@@ -1,0 +1,9 @@
+id = "globalopt/lj75"
+title = "lj75"
+suite = "globalopt"
+problem = "lj75"
+contract = "partial"
+entry_count = 1
+
+[metrics]
+required = ["force_calls", "force_calls_max", "force_calls_median", "force_calls_min", "nfailed"]

@@ -1,0 +1,3 @@
+This benchmark uses Rayleigh-Ritz minimization to find the lowest eigenvalue
+and eigenvector.  The eigenvalue and derivatives are computed using the
+second order (central differences) expansion.

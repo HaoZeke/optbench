@@ -1,0 +1,9 @@
+id = "mlopt/C2H4"
+title = "C2H4"
+suite = "mlopt"
+problem = "C2H4"
+contract = "partial"
+entry_count = 6
+
+[metrics]
+required = ["mean_energy_rmse", "mean_epoch", "mean_force_rmse", "median_energy_rmse", "median_epoch", "median_force_rmse", "nfailed"]

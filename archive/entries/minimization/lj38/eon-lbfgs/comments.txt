@@ -1,0 +1,5 @@
+L-BFGS with an initial diagonal inverse hessian equal to 0.004 distance squared
+per energy. The memory length was set to 100 steps and the maximum move
+distance was 0.2 distance units. The LBFGS history was reset when the angle
+between the descent direction and the force became greater than 90&#186; or a
+step greater than the max move was taken.

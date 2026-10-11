@@ -1,0 +1,9 @@
+id = "globalopt/tip4p15"
+title = "tip4p15"
+suite = "globalopt"
+problem = "tip4p15"
+contract = "partial"
+entry_count = 2
+
+[metrics]
+required = ["force_calls", "force_calls_max", "force_calls_median", "force_calls_min", "nfailed"]

@@ -1,0 +1,18 @@
+This steepest descent algoirthm uses the Barzilai and Borwein method for
+determining the step size. The next position is determinied by
+
+$$ x_{k+1} = x_k - \mathbf{S}_k g_k $$
+
+where the step size $\mathbf{S}_k$ is
+
+$$ S_k = \alpha_k \mathbf{I} $$
+
+where $\mathbf{I}$ is the identity matrix and $\alpha_k$ is given by
+
+$$ \alpha_k = \frac{\Delta x \cdot \Delta x}{\Delta x \cdot \Delta g} $$
+
+with $\Delta x = x_k - x_{k-1}$ and $\Delta g = g_k - g_{k-1}$. For this
+problem, $\alpha_0$ was set to 0.04. 
+
+<br>
+Barzilai, J.; Borwein, J. M. "<a href="http://pages.cs.wisc.edu/~swright/726/handouts/barzilai-borwein.pdf">Two-point step size gradient methods</a>" <i>IMA J. Numer. Anal.</i> <b>1988</b>, 8, 141-148.

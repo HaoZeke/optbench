@@ -1,0 +1,8 @@
+force_calls 34
+force_calls_max 47
+force_calls_min 17
+force_calls_per_second 8.52045
+nfailed 0
+algorithm ase-PreconLBFGS maxstep=0.1
+date 17 Jun 2020
+contributor R Ciufo

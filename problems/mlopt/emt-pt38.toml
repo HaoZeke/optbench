@@ -1,0 +1,27 @@
+id = "mlopt/emt-pt38"
+title = "EMT Pt 38 nanoparticle"
+suite = "mlopt"
+problem = "emt-pt38"
+contract = "stated"
+entry_count = 6
+
+[sample]
+initializations = 50
+initialization = "uniform[-1, 1)"
+structure_source = "EMT molecular dynamics at 300 K"
+
+[convergence]
+max_epochs = 10000
+energy_only_grad_norm = 0.02
+force_training_grad_norm = 0.1
+
+[input]
+archive_path = "website/mlopt/emt-pt38/pt_md.traj"
+
+[metrics]
+required = ["mean_epoch", "median_epoch", "mean_energy_rmse", "median_energy_rmse", "mean_force_rmse", "median_force_rmse", "nfailed"]
+website_said = ["mean_epochs", "median_epochs"]
+
+[missing_force_rmse]
+value = -1.0
+meaning = "energies were trained and forces were not"

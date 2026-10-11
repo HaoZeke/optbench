@@ -1,0 +1,9 @@
+id = "accelerated-md/aladatom"
+title = "aladatom"
+suite = "accelerated-md"
+problem = "aladatom"
+contract = "partial"
+entry_count = 1
+
+[metrics]
+required = ["percent_uncertainty", "thermostat", "true_rate", "uncertainty"]

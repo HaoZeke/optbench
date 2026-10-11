@@ -1,0 +1,23 @@
+#FP type
+BP
+#Elements
+C H
+0.0 0.0
+#nG1s nG2s
+6 8
+#type    CentralElement    Neighbor    eta      Rs      Rc
+G1     C     C     0.049999999999999996     0.0     6.5     
+G1     C     H     0.049999999999999996     0.0     6.5     
+G1     C     H     5.000000000000001     0.0     6.5     
+G1     H     C     0.049999999999999996     0.0     6.5     
+G1     H     C     5.000000000000001     0.0     6.5     
+G1     H     H     0.049999999999999996     0.0     6.5     
+#G2    centralElemnt neighbor1 neighbor2 eta   zeta  lambda thetas  Rc
+G2     C     C C     0.005     1.0     1.0     0.0     6.5     
+G2     C     C H     0.005     1.0     1.0     0.0     6.5     
+G2     C     H C     0.005     1.0     1.0     0.0     6.5     
+G2     C     H H     0.005     1.0     1.0     0.0     6.5     
+G2     H     C C     0.005     1.0     1.0     0.0     6.5     
+G2     H     C H     0.005     1.0     1.0     0.0     6.5     
+G2     H     H C     0.005     1.0     1.0     0.0     6.5     
+G2     H     H H     0.005     1.0     1.0     0.0     6.5     

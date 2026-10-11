@@ -1,0 +1,10 @@
+barrier_jobs 1050 
+barrier_force_calls 4.960e+05 
+average over 13 
+rate_jobs 54 
+rate_force_calls  2.563e+04 
+average over 276 
+algorithm Dimer-CG rotation: max=10, tol=1
+code Eon r2006
+date 28 Jan 2013
+contributor Penghao Xiao

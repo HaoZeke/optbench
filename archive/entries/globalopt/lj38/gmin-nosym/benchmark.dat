@@ -1,0 +1,10 @@
+force_calls 2.65951e+05
+force_calls_median 2.02167e+05
+force_calls_min 6.4570e+03
+force_calls_max 1.1705e+06
+nfailed 0
+date 06 Aug 2014
+algorithm basin-hopping
+code GMIN
+contributor Jacob Stevenson and David Wales
+code_file wales-27058.tar.bz2

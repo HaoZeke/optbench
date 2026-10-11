@@ -1,0 +1,10 @@
+barrier_jobs 6192 
+barrier_force_calls 1.908e+07 
+average over 1 
+rate_jobs 49 
+rate_force_calls  1.509e+05 
+average over 142 
+algorithm alphaDimer-QM
+code TSASE
+date 28 Jan 2013
+contributor Penghao Xiao

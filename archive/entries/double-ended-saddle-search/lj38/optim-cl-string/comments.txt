@@ -1,0 +1,4 @@
+This method uses climbing-string method to get an image close to the saddle 
+point, then uses inexact newton method to accelerate the convergence.
+The final state is used as the inpute of the initial guessed saddle point for
+climbing-string. 

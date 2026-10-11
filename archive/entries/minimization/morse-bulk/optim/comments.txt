@@ -1,0 +1,4 @@
+The L-BFGS memory length was set to 100 steps and the maximum move distance
+was 2.0 distance units.  Steps that increase energy are never accepted.  This
+is enforced by ensuring the step direction points downhill and, if necesary,
+reducing the step size.

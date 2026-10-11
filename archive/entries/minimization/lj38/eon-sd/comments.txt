@@ -1,0 +1,6 @@
+This steepest descent algoirthm calculates the step size by assuming a constant curvature
+of the potential energy:
+
+$$ x_{k+1} = x_k - \alpha g_k $$
+
+where $x_k$ is the current position, $g_k$ is the current gradient and $\alpha = 0.001$.

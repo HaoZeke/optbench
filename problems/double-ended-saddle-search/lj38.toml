@@ -1,0 +1,18 @@
+id = "double-ended-saddle-search/lj38"
+title = "LJ38 double-ended saddle"
+suite = "double-ended-saddle-search"
+problem = "lj38"
+contract = "stated"
+entry_count = 8
+
+[task]
+statement = "A refined saddle between the given end points. It need not be the transition state that joins them directly."
+
+[convergence]
+gradient_norm = 0.001
+
+[input]
+archive_path = "website/double-ended-saddle-search/lj38/coords.tgz"
+
+[metrics]
+required = ["force_calls", "force_calls_min", "force_calls_median", "force_calls_max", "nfailed"]

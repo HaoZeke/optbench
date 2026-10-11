@@ -1,0 +1,2 @@
+This uses Rayleigh-Ritz minimization to find the lowest eigenvalue and eigenvector.
+The Rayleigh-Ritz minimization uses the first order (front finite differences) expansion.

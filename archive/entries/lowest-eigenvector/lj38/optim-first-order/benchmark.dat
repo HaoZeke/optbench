@@ -1,0 +1,10 @@
+force_calls 2.50000e+01
+force_calls_median 2.30000e+01
+force_calls_min 1.3000e+01
+force_calls_max 5.8000e+01
+nfailed 0
+date 06 Aug 2014
+algorithm hybrid eigenvector following
+code OPTIM
+contributor Jacob Stevenson and Cheng Shang
+code_file wales-27058.tar.bz2
