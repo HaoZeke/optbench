@@ -281,6 +281,11 @@ def _sota_html(root: Path) -> str:
         if record.get("problem") not in (None, "", "minimization/lj38"):
             continue
         accepted.extend(record.get("runs") or [])
+    chart_runs = list(accepted)
+    for path in sorted((root / "results").glob("*.json")):
+        record = json.loads(path.read_text(encoding="utf-8"))
+        if record.get("on_chart") and record.get("problem") in (None, "", "minimization/lj38"):
+            chart_runs.extend(record.get("runs") or [])
     lines = [
         '<section class="bench" id="sota">',
         "<h2>Lennard-Jones 38</h2>",
@@ -298,7 +303,11 @@ def _sota_html(root: Path) -> str:
         )
         points = []
         numbered = []
-        for run in ordered:
+        chart_ordered = sorted(
+            chart_runs,
+            key=lambda run: float((run.get("metrics") or {}).get("force_calls") or 1e99),
+        )
+        for run in chart_ordered:
             metrics = run.get("metrics") or {}
             value = metrics.get("force_calls")
             if isinstance(value, (int, float)):

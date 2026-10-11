@@ -1,0 +1,63 @@
+{
+  "schema": "optbench.result/v1",
+  "status": "archive",
+  "on_chart": true,
+  "problem": "minimization/lj38",
+  "submitter": "Rohit Goswami",
+  "date": "2026-10-11",
+  "host": "rg.terra",
+  "runs": [
+    {
+      "entry": "eon-svn-r2549-lbfgs-m100",
+      "code": "Eon svn",
+      "algorithm": "LBFGS",
+      "code_version": "r2549",
+      "commit": "db8bca9e1e579b24e17fc3a05561182165c92cf1",
+      "present_source": false,
+      "starts": 1000,
+      "nfailed": 0,
+      "method": {"potential": "lj_cluster", "convergence_metric": "norm", "force_norm": 0.01, "max_move": 0.2, "max_iterations": 10000, "lbfgs_memory": 100},
+      "metrics": {"force_calls": 181, "force_calls_min": 90, "force_calls_max": 417, "nfailed": 0},
+      "notes": "Henkelman SVN r2549, the same sources as henkelmangroup/eon db8bca9e. L-BFGS memory 100."
+    },
+    {
+      "entry": "eon-svn-r2549-lbfgs-m20",
+      "code": "Eon svn",
+      "algorithm": "LBFGS",
+      "code_version": "r2549",
+      "commit": "db8bca9e1e579b24e17fc3a05561182165c92cf1",
+      "present_source": false,
+      "starts": 1000,
+      "nfailed": 0,
+      "method": {"potential": "lj_cluster", "convergence_metric": "norm", "force_norm": 0.01, "max_move": 0.2, "max_iterations": 10000, "lbfgs_memory": 20},
+      "metrics": {"force_calls": 202, "force_calls_min": 100, "force_calls_max": 463, "nfailed": 0},
+      "notes": "Same client at the default memory of 20."
+    },
+    {
+      "entry": "eon-svn-r2549-cg",
+      "code": "Eon svn",
+      "algorithm": "CG",
+      "code_version": "r2549",
+      "commit": "db8bca9e1e579b24e17fc3a05561182165c92cf1",
+      "present_source": false,
+      "starts": 1000,
+      "nfailed": 0,
+      "method": {"potential": "lj_cluster", "convergence_metric": "norm", "force_norm": 0.01, "max_move": 0.2, "max_iterations": 10000},
+      "metrics": {"force_calls": 453, "force_calls_min": 207, "force_calls_max": 1141, "nfailed": 0},
+      "notes": "926 of 1000 starts take the same number of calls as eOn 3.5.0."
+    },
+    {
+      "entry": "eon-svn-r2549-fire",
+      "code": "Eon svn",
+      "algorithm": "FIRE",
+      "code_version": "r2549",
+      "commit": "db8bca9e1e579b24e17fc3a05561182165c92cf1",
+      "present_source": false,
+      "starts": 1000,
+      "nfailed": 0,
+      "method": {"potential": "lj_cluster", "convergence_metric": "norm", "force_norm": 0.01, "max_move": 0.2, "max_iterations": 10000},
+      "metrics": {"force_calls": 731, "force_calls_min": 227, "force_calls_max": 2918, "nfailed": 0},
+      "notes": "998 of 1000 starts match eOn 3.5.0. The mean, minimum, and maximum match the r2025 table."
+    }
+  ]
+}

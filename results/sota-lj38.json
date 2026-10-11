@@ -7,6 +7,19 @@
   "host": "rg.terra",
   "runs": [
     {
+      "entry": "eon-3.5.0-lbfgs-m100",
+      "code": "eOn",
+      "algorithm": "LBFGS",
+      "code_version": "3.5.0",
+      "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
+      "present_source": true,
+      "starts": 1000,
+      "nfailed": 0,
+      "method": {"client": "eonclient 3.5.0", "potential": "ljcluster", "convergence_metric": "norm", "force_norm": 0.01, "max_move": 0.2, "max_iterations": 10000, "lbfgs_memory": 100},
+      "metrics": {"force_calls": 181, "force_calls_min": 90, "force_calls_max": 403, "nfailed": 0},
+      "notes": "L-BFGS memory 100, the archived setting. Mean 181 and minimum 90 match the Henkelman SVN client and the r2025 table."
+    },
+    {
       "entry": "eon-3.5.0-lbfgs",
       "code": "eOn",
       "algorithm": "LBFGS",
@@ -15,9 +28,9 @@
       "present_source": true,
       "starts": 1000,
       "nfailed": 0,
-      "method": {"client": "pyeonclient 0.4.2", "potential": "ljcluster", "convergence_metric": "norm", "force_norm": 0.01, "max_move": 0.2, "max_iterations": 10000},
+      "method": {"client": "pyeonclient 0.4.2", "potential": "ljcluster", "convergence_metric": "norm", "force_norm": 0.01, "max_move": 0.2, "max_iterations": 10000, "lbfgs_memory": 20},
       "metrics": {"force_calls": 201, "force_calls_min": 100, "force_calls_max": 551, "nfailed": 0},
-      "notes": "Python client 0.4.2, OptType LBFGS. Every run ended at an L2 force norm at or below 0.01."
+      "notes": "L-BFGS at the client default memory of 20. The SVN client at that memory scores 202."
     },
     {
       "entry": "rgmin-lbfgs-0.3.0",
