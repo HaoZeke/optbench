@@ -1,0 +1,34 @@
+# SoftSaddle on the Pt heptamer. The problem contract is
+# problems/saddle-search/pt-island.toml. This file says which run is which.
+
+id = "saddle-search/pt-island/softsaddle"
+problem = "saddle-search/pt-island"
+code = "SoftSaddle"
+contributor = "Manuel Plasencia Gutierrez"
+
+[archived]
+entry = "adaptive_HSphere-lbfgs-davidson-sm50"
+date = "April 2019"
+repetitions = 10
+desired_saddle_points = 10500
+runtime_cap_s = 864000
+force_calls = 423491.1
+force_calls_mean_error = 179062.2
+fraction_connected = 0.8
+total_searches = 1737.5
+unique_saddles = 114.9
+library = "libdavidson"
+
+[smoke]
+workflow = ".github/workflows/softsaddle-smoke.yml"
+repetitions = 1
+searches = 2
+runtime_cap_s = 600
+library = "libdavidson"
+matlab = "R2021a or later"
+toolboxes = ["Parallel_Computing_Toolbox", "Statistics_and_Machine_Learning_Toolbox"]
+run = "https://github.com/lode-org/optbench/actions/runs/38163258508"
+elapsed_s = 3.4957
+unique_saddles = 2
+unique_minima = 4
+force_column = 134

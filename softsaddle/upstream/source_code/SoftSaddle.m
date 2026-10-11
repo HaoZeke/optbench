@@ -241,7 +241,11 @@ for repetition=1:n_repetition
         end
         % coppy all files
         for i=1:length(my_list)
-            origin_f = my_list{i}; 
+            origin_f = my_list{i};
+            % fullpath omits the .m suffix. cp needs the file.
+            if exist(origin_f, 'file') ~= 2 && exist([origin_f '.m'], 'file') == 2
+                origin_f = [origin_f '.m'];
+            end
             err_code = system(['cp ', origin_f, ' ', my_paths_for_func]);
             if (err_code ~= 0)
             disp('Warning! Problem copying matlab functions..')

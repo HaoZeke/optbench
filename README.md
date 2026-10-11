@@ -17,6 +17,14 @@ python -m unittest discover -s tests -v
 
 `python -m optbench import-archive --bare ARCHIVE --dest .` rebuilds the oracle, the geometry store, and any problem file that does not already exist. `ARCHIVE` is a bare clone of the public GitLab project.
 
-Nothing in this tree submits the published campaigns. `benchmark.dat` is the file a run has to write.
+## How a run is handled
 
-`softsaddle/` is the 2019 Pt-island SoftSaddle entry, without the 72 MB hypersphere database and without the old compiled libraries. `softsaddle/smoke.sh` builds `libmorse`, `libdavidson`, and `liblanczos`, then writes a one-batch configuration: two searches, one repetition, stop after 600 seconds. Two is the smallest set the distance call accepts. The archived score is ten repetitions and a mean of about 4.2e5 force calls. The smoke does not claim that number. A public GitHub Actions run can start MATLAB for it. The archived `run.sh` looks for MATLAB R2017b on a fixed path, and the current setup action provides R2021a or later.
+The problem file says what a new `benchmark.dat` must contain. The oracle says what the archive recorded. Those two stay in git.
+
+Every push to `main`, and every pull request, runs `pixi run test` and `pixi run check` on a hosted runner. That job does not start MATLAB and does not run a campaign.
+
+A MATLAB code is a smoke, not a score. SoftSaddle is `.github/workflows/softsaddle-smoke.yml`. It builds `libmorse`, `libdavidson`, and `liblanczos`, then runs two searches with a 600 second cap. `softsaddle/entry.toml` keeps that smoke next to the April 2019 score of 423491.1 force calls. The smoke does not replace that score.
+
+A published score uses the full problem: every start, the stopping rule, and one `benchmark.dat`. That job runs on a cluster. The hosted runner is the wrong machine for the thousand LJ38 minimizations and for the ten-repetition SoftSaddle campaign.
+
+Code tarballs from the GitLab archive stay there. A new output that is too large for git is checkpointed with `tt`. The git tree keeps the pointer and the score file.
