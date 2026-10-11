@@ -1,0 +1,18 @@
+id = "eon-client/fire"
+engine = "eon-client"
+code = "eOn"
+code_version = "3.5.0"
+algorithm = "FIRE"
+
+[ini.Main]
+job = "minimization"
+
+[ini.Potential]
+potential = "ljcluster"
+
+[ini.Optimizer]
+opt_method = "fire"
+convergence_metric = "norm"
+converged_force = 0.01
+max_move = 0.2
+max_iterations = 10000

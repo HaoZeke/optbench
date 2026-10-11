@@ -10,6 +10,7 @@ python = "3.12.*"
 [tasks]
 test = "python -m unittest discover -s tests -v"
 check = "python -m optbench check"
+campaign = "python -m optbench run"
 
 [environments]
 docs = { features = ["docs"] }

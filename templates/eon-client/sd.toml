@@ -1,0 +1,22 @@
+id = "eon-client/sd"
+engine = "eon-client"
+code = "eOn"
+code_version = "3.5.0"
+algorithm = "SD"
+
+[ini.Main]
+job = "minimization"
+
+[ini.Potential]
+potential = "ljcluster"
+
+[ini.Optimizer]
+opt_method = "sd"
+convergence_metric = "norm"
+converged_force = 0.01
+max_move = 0.2
+max_iterations = 10000
+
+[ini.SD]
+sd_alpha = 0.001
+sd_twopoint = false
