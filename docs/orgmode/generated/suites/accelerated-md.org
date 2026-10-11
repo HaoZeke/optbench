@@ -4,5 +4,65 @@
 #+begin_export rst
 .. raw:: html
 
-   <section class="bench" id="aladatom"><h2>aladatom</h2><dl class="bench-rule"><dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd></dl><table><caption>Archived scores, lowest rate first.</caption><thead><tr><th class="num" scope="col"></th><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="num" scope="col">percent uncertainty</th><th class="num" scope="col">thermostat</th><th class="num" scope="col">true rate</th><th class="num" scope="col">uncertainty</th><th class="text" scope="col">Contributor</th><th class="text" scope="col">Date</th></tr></thead><tbody><tr class="best"><td class="num">1</td><td class="text">true_standard/eon-pr-langevin</td><td class="text">Eon</td><td class="num">7.021105e-01</td><td class="num">langevin_0.001</td><td class="num">2.542941e+08</td><td class="num">1.785425e+06</td><td class="text">Juliana Duncan</td><td class="text">18 Oct 2012</td></tr></tbody></table></section><section class="bench" id="standard_aladatom"><h2>standard_aladatom</h2><dl class="bench-rule"><dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd></dl><table><caption>Archived scores, lowest rate first.</caption><thead><tr><th class="num" scope="col"></th><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="num" scope="col">percent uncertainty</th><th class="num" scope="col">thermostat</th><th class="num" scope="col">true rate</th><th class="num" scope="col">uncertainty</th><th class="text" scope="col">Contributor</th><th class="text" scope="col">Date</th></tr></thead><tbody><tr class="best"><td class="num">1</td><td class="text">eon-md-langevin</td><td class="text">Eon</td><td class="num">8.627e+00</td><td class="num">langevin_0.001</td><td class="num">8.359e+05</td><td class="num">7.211e+04</td><td class="text">Juliana Duncan</td><td class="text">26 Oct 2012</td></tr></tbody></table></section>
+   <section class="bench" id="aladatom">
+   <h2>aladatom</h2>
+   <dl class="bench-rule">
+   <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
+   </dl>
+   
+   <div class="bench-table"><table>
+   <caption>Archived scores, lowest rate first.</caption>
+   <thead><tr>
+   <th class="num" scope="col"></th>
+   <th class="text" scope="col">Entry</th>
+   <th class="text" scope="col">Code</th>
+   <th class="num" scope="col">percent uncertainty</th>
+   <th class="num" scope="col">thermostat</th>
+   <th class="num" scope="col">true rate</th>
+   <th class="num" scope="col">uncertainty</th>
+   <th class="text" scope="col">Contributor</th>
+   <th class="text" scope="col">Date</th>
+   </tr></thead><tbody>
+   <tr id="accelerated-md-aladatom-true-standard-eon-pr-langevin" class="best">
+   <td class="num">1</td>
+   <td class="text">true_standard/eon-pr-langevin</td>
+   <td class="text">Eon</td>
+   <td class="num">7.021105e-01</td>
+   <td class="num">langevin_0.001</td>
+   <td class="num">2.542941e+08</td>
+   <td class="num">1.785425e+06</td>
+   <td class="text">Juliana Duncan</td>
+   <td class="text">18 Oct 2012</td>
+   </tr>
+   </tbody></table></div></section><section class="bench" id="standard_aladatom">
+   <h2>standard_aladatom</h2>
+   <dl class="bench-rule">
+   <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
+   </dl>
+   
+   <div class="bench-table"><table>
+   <caption>Archived scores, lowest rate first.</caption>
+   <thead><tr>
+   <th class="num" scope="col"></th>
+   <th class="text" scope="col">Entry</th>
+   <th class="text" scope="col">Code</th>
+   <th class="num" scope="col">percent uncertainty</th>
+   <th class="num" scope="col">thermostat</th>
+   <th class="num" scope="col">true rate</th>
+   <th class="num" scope="col">uncertainty</th>
+   <th class="text" scope="col">Contributor</th>
+   <th class="text" scope="col">Date</th>
+   </tr></thead><tbody>
+   <tr id="accelerated-md-standard-aladatom-eon-md-langevin" class="best">
+   <td class="num">1</td>
+   <td class="text">eon-md-langevin</td>
+   <td class="text">Eon</td>
+   <td class="num">8.627e+00</td>
+   <td class="num">langevin_0.001</td>
+   <td class="num">8.359e+05</td>
+   <td class="num">7.211e+04</td>
+   <td class="text">Juliana Duncan</td>
+   <td class="text">26 Oct 2012</td>
+   </tr>
+   </tbody></table></div></section>
 #+end_export

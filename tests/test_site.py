@@ -17,6 +17,8 @@ class SiteTests(unittest.TestCase):
         self.assertIn(">453<", html)
         self.assertIn("held out of the original table", html)
         self.assertIn("0.01", html)
+        self.assertIn("bench-plot-data", html)
+        self.assertIn('"scale": "log"', html)
 
     def test_render_writes_the_front_page_table(self):
         render(ROOT)

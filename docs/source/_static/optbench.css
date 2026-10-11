@@ -27,8 +27,40 @@
   margin: 0 0 1.25rem;
 }
 
+.bench-plot {
+  margin: 0 0 1.5rem;
+}
+
+.bench-plot figcaption {
+  margin: 0 0 0.4rem;
+  max-width: 68ch;
+}
+
+.bench-plot svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.bench-plot .label,
+.bench-plot .value {
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.bench-plot a:focus-visible rect {
+  outline: 2px solid CanvasText;
+  outline-offset: 2px;
+}
+
+.bench-table {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
 .bench table {
   width: 100%;
+  min-width: 40rem;
   border-collapse: collapse;
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum" 1;

@@ -4,5 +4,171 @@
 #+begin_export rst
 .. raw:: html
 
-   <section class="bench" id="pt-island"><h2>Pt heptamer island</h2><dl class="bench-rule"><dt>Stop</dt><dd>norm of the force at or below 0.001 eV/Angstrom</dd><dt>Goal</dt><dd>27 connected saddles below 1.5 eV</dd></dl><p class="bench-smoke">A 2-search SoftSaddle smoke is not in this rank. The April 2019 adaptive_HSphere-lbfgs-davidson-sm50 entry records 423491.1 force calls.</p><table><caption>Archived scores, fewest force calls first.</caption><thead><tr><th class="num" scope="col"></th><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="num" scope="col">force calls</th><th class="num" scope="col">force calls mean error</th><th class="num" scope="col">fraction connected</th><th class="num" scope="col">total searches</th><th class="num" scope="col">unique saddles</th><th class="text" scope="col">Contributor</th><th class="text" scope="col">Date</th></tr></thead><tbody><tr class="best"><td class="num">1</td><td class="text">adaptive_HSphere-lbfgs-davidson-sm50</td><td class="text">SoftSaddle</td><td class="num">423491.1</td><td class="num">179062.2</td><td class="num">0.8</td><td class="num">1737.5</td><td class="num">114.9</td><td class="text">Manuel Plasencia Gutierrez</td><td class="text">April 2019</td></tr><tr><td class="num">2</td><td class="text">adaptive_HSphere-lbfgs-lanczos-sm50</td><td class="text">SoftSaddle</td><td class="num">814519.3</td><td class="num">314659.7</td><td class="num">0.9</td><td class="num">3072.5</td><td class="num">142.6</td><td class="text">Manuel Plasencia Gutierrez</td><td class="text">April 2019</td></tr><tr><td class="num">3</td><td class="text">adaptive_HSphere-lbfgs-lanczos-sm0</td><td class="text">SoftSaddle</td><td class="num">1003433.0</td><td class="num">417022.4</td><td class="num">0.9</td><td class="num">2752.5</td><td class="num">130.4</td><td class="text">Manuel Plasencia Gutierrez</td><td class="text">April 2019</td></tr><tr><td class="num">4</td><td class="text">eon-dimer-lbfgs-5-rotations-20-bowl_breakout</td><td class="text">Eon r2213</td><td class="num">1345465.88889</td><td class="num">410358.337095</td><td class="num">0.853230777778</td><td class="num">6560.44444444</td><td class="num">126.222222222</td><td class="text">Andreas Pedersen</td><td class="text">13 Jun 2014</td></tr><tr><td class="num">5</td><td class="text">eon-md</td><td class="text">Eon r2205</td><td class="num">1478168</td><td class="num">118736</td><td class="num">0.886966</td><td class="num">800.222</td><td class="num">51.6667</td><td class="text">Sam Chill</td><td class="text">15 Jul 2014</td></tr><tr><td class="num">6</td><td class="text">eon-dimer-lbfgs-5-rotations</td><td class="text">Eon r2213</td><td class="num">1684436.77778</td><td class="num">547855.076197</td><td class="num">0.747722</td><td class="num">4664.88888889</td><td class="num">113.111111111</td><td class="text">Andreas Pedersen</td><td class="text">13 Jun 2014</td></tr><tr><td class="num">7</td><td class="text">eon-dimer-lbfgs-20-rotations-20-bowl_breakout</td><td class="text">Eon r2213</td><td class="num">2732309.11111</td><td class="num">1153317.06817</td><td class="num">0.796864222222</td><td class="num">7772.22222222</td><td class="num">101.333333333</td><td class="text">Andreas Pedersen</td><td class="text">13 Jun 2014</td></tr><tr><td class="num">8</td><td class="text">eon-dimer-lbfgs-20-rotations</td><td class="text">Eon r2213</td><td class="num">3341488.0</td><td class="num">1631366.42158</td><td class="num">0.745814111111</td><td class="num">9666.11111111</td><td class="num">108.0</td><td class="text">Andreas Pedersen</td><td class="text">13 Jun 2014</td></tr><tr><td class="num">9</td><td class="text">eon-dimer-cg-5-rotations-20-bowl_breakout</td><td class="text">Eon r2213</td><td class="num">3463700.66667</td><td class="num">2213422.22677</td><td class="num">0.703835111111</td><td class="num">5311.66666667</td><td class="num">124.777777778</td><td class="text">Andreas Pedersen</td><td class="text">13 Jun 2014</td></tr><tr><td class="num">10</td><td class="text">eon-dimer</td><td class="text">Eon r2205</td><td class="num">3.77888e+06</td><td class="num">527337</td><td class="num">0.746017</td><td class="num">11366.8</td><td class="num">109.222</td><td class="text">Sam Chill</td><td class="text">15 Jul 2014</td></tr><tr><td class="num">11</td><td class="text">eon-dimer-cg-20-rotations-20-bowl_breakout</td><td class="text">Eon r2213</td><td class="num">7174213.66667</td><td class="num">2857406.52963</td><td class="num">0.746989444444</td><td class="num">11849.7777778</td><td class="num">123.222222222</td><td class="text">Andreas Pedersen</td><td class="text">13 Jun 2014</td></tr><tr><td class="num">12</td><td class="text">eon-dimer-cg-20-rotations</td><td class="text">Eon r2213</td><td class="num">7947070.11111</td><td class="num">2659757.27959</td><td class="num">0.634205777778</td><td class="num">12618.2222222</td><td class="num">121.888888889</td><td class="text">Andreas Pedersen</td><td class="text">13 Jun 2014</td></tr></tbody></table></section>
+   <section class="bench" id="pt-island">
+   <h2>Pt heptamer island</h2>
+   <dl class="bench-rule">
+   <dt>Stop</dt><dd>norm of the force at or below 0.001 eV/Angstrom</dd>
+   <dt>Goal</dt><dd>27 connected saddles below 1.5 eV</dd>
+   </dl>
+   <p class="bench-smoke">A 2-search SoftSaddle smoke is not in this rank. The April 2019 adaptive_HSphere-lbfgs-davidson-sm50 entry records 423491.1 force calls.</p>
+   <figure class="bench-plot"><figcaption>force calls, same order as the table.</figcaption><div class="bench-plot-mount"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "saddle-search-pt-island-adaptive-hsphere-lbfgs-davidson-sm50", "entry": "adaptive_HSphere-lbfgs-davidson-sm50", "code": "SoftSaddle", "value": 423491.1, "best": true, "held": false}, {"id": "saddle-search-pt-island-adaptive-hsphere-lbfgs-lanczos-sm50", "entry": "adaptive_HSphere-lbfgs-lanczos-sm50", "code": "SoftSaddle", "value": 814519.3, "best": false, "held": false}, {"id": "saddle-search-pt-island-adaptive-hsphere-lbfgs-lanczos-sm0", "entry": "adaptive_HSphere-lbfgs-lanczos-sm0", "code": "SoftSaddle", "value": 1003433.0, "best": false, "held": false}, {"id": "saddle-search-pt-island-eon-dimer-lbfgs-5-rotations-20-bowl-breakout", "entry": "eon-dimer-lbfgs-5-rotations-20-bowl_breakout", "code": "Eon r2213", "value": 1345465.88889, "best": false, "held": false}, {"id": "saddle-search-pt-island-eon-md", "entry": "eon-md", "code": "Eon r2205", "value": 1478168.0, "best": false, "held": false}, {"id": "saddle-search-pt-island-eon-dimer-lbfgs-5-rotations", "entry": "eon-dimer-lbfgs-5-rotations", "code": "Eon r2213", "value": 1684436.77778, "best": false, "held": false}, {"id": "saddle-search-pt-island-eon-dimer-lbfgs-20-rotations-20-bowl-breakout", "entry": "eon-dimer-lbfgs-20-rotations-20-bowl_breakout", "code": "Eon r2213", "value": 2732309.11111, "best": false, "held": false}, {"id": "saddle-search-pt-island-eon-dimer-lbfgs-20-rotations", "entry": "eon-dimer-lbfgs-20-rotations", "code": "Eon r2213", "value": 3341488.0, "best": false, "held": false}, {"id": "saddle-search-pt-island-eon-dimer-cg-5-rotations-20-bowl-breakout", "entry": "eon-dimer-cg-5-rotations-20-bowl_breakout", "code": "Eon r2213", "value": 3463700.66667, "best": false, "held": false}, {"id": "saddle-search-pt-island-eon-dimer", "entry": "eon-dimer", "code": "Eon r2205", "value": 3778880.0, "best": false, "held": false}, {"id": "saddle-search-pt-island-eon-dimer-cg-20-rotations-20-bowl-breakout", "entry": "eon-dimer-cg-20-rotations-20-bowl_breakout", "code": "Eon r2213", "value": 7174213.66667, "best": false, "held": false}, {"id": "saddle-search-pt-island-eon-dimer-cg-20-rotations", "entry": "eon-dimer-cg-20-rotations", "code": "Eon r2213", "value": 7947070.11111, "best": false, "held": false}]}</script></figure>
+   <div class="bench-table"><table>
+   <caption>Archived scores, fewest force calls first.</caption>
+   <thead><tr>
+   <th class="num" scope="col"></th>
+   <th class="text" scope="col">Entry</th>
+   <th class="text" scope="col">Code</th>
+   <th class="num" scope="col">force calls</th>
+   <th class="num" scope="col">force calls mean error</th>
+   <th class="num" scope="col">fraction connected</th>
+   <th class="num" scope="col">total searches</th>
+   <th class="num" scope="col">unique saddles</th>
+   <th class="text" scope="col">Contributor</th>
+   <th class="text" scope="col">Date</th>
+   </tr></thead><tbody>
+   <tr id="saddle-search-pt-island-adaptive-hsphere-lbfgs-davidson-sm50" class="best">
+   <td class="num">1</td>
+   <td class="text">adaptive_HSphere-lbfgs-davidson-sm50</td>
+   <td class="text">SoftSaddle</td>
+   <td class="num">423491.1</td>
+   <td class="num">179062.2</td>
+   <td class="num">0.8</td>
+   <td class="num">1737.5</td>
+   <td class="num">114.9</td>
+   <td class="text">Manuel Plasencia Gutierrez</td>
+   <td class="text">April 2019</td>
+   </tr>
+   <tr id="saddle-search-pt-island-adaptive-hsphere-lbfgs-lanczos-sm50">
+   <td class="num">2</td>
+   <td class="text">adaptive_HSphere-lbfgs-lanczos-sm50</td>
+   <td class="text">SoftSaddle</td>
+   <td class="num">814519.3</td>
+   <td class="num">314659.7</td>
+   <td class="num">0.9</td>
+   <td class="num">3072.5</td>
+   <td class="num">142.6</td>
+   <td class="text">Manuel Plasencia Gutierrez</td>
+   <td class="text">April 2019</td>
+   </tr>
+   <tr id="saddle-search-pt-island-adaptive-hsphere-lbfgs-lanczos-sm0">
+   <td class="num">3</td>
+   <td class="text">adaptive_HSphere-lbfgs-lanczos-sm0</td>
+   <td class="text">SoftSaddle</td>
+   <td class="num">1003433.0</td>
+   <td class="num">417022.4</td>
+   <td class="num">0.9</td>
+   <td class="num">2752.5</td>
+   <td class="num">130.4</td>
+   <td class="text">Manuel Plasencia Gutierrez</td>
+   <td class="text">April 2019</td>
+   </tr>
+   <tr id="saddle-search-pt-island-eon-dimer-lbfgs-5-rotations-20-bowl-breakout">
+   <td class="num">4</td>
+   <td class="text">eon-dimer-lbfgs-5-rotations-20-bowl_breakout</td>
+   <td class="text">Eon r2213</td>
+   <td class="num">1345465.88889</td>
+   <td class="num">410358.337095</td>
+   <td class="num">0.853230777778</td>
+   <td class="num">6560.44444444</td>
+   <td class="num">126.222222222</td>
+   <td class="text">Andreas Pedersen</td>
+   <td class="text">13 Jun 2014</td>
+   </tr>
+   <tr id="saddle-search-pt-island-eon-md">
+   <td class="num">5</td>
+   <td class="text">eon-md</td>
+   <td class="text">Eon r2205</td>
+   <td class="num">1478168</td>
+   <td class="num">118736</td>
+   <td class="num">0.886966</td>
+   <td class="num">800.222</td>
+   <td class="num">51.6667</td>
+   <td class="text">Sam Chill</td>
+   <td class="text">15 Jul 2014</td>
+   </tr>
+   <tr id="saddle-search-pt-island-eon-dimer-lbfgs-5-rotations">
+   <td class="num">6</td>
+   <td class="text">eon-dimer-lbfgs-5-rotations</td>
+   <td class="text">Eon r2213</td>
+   <td class="num">1684436.77778</td>
+   <td class="num">547855.076197</td>
+   <td class="num">0.747722</td>
+   <td class="num">4664.88888889</td>
+   <td class="num">113.111111111</td>
+   <td class="text">Andreas Pedersen</td>
+   <td class="text">13 Jun 2014</td>
+   </tr>
+   <tr id="saddle-search-pt-island-eon-dimer-lbfgs-20-rotations-20-bowl-breakout">
+   <td class="num">7</td>
+   <td class="text">eon-dimer-lbfgs-20-rotations-20-bowl_breakout</td>
+   <td class="text">Eon r2213</td>
+   <td class="num">2732309.11111</td>
+   <td class="num">1153317.06817</td>
+   <td class="num">0.796864222222</td>
+   <td class="num">7772.22222222</td>
+   <td class="num">101.333333333</td>
+   <td class="text">Andreas Pedersen</td>
+   <td class="text">13 Jun 2014</td>
+   </tr>
+   <tr id="saddle-search-pt-island-eon-dimer-lbfgs-20-rotations">
+   <td class="num">8</td>
+   <td class="text">eon-dimer-lbfgs-20-rotations</td>
+   <td class="text">Eon r2213</td>
+   <td class="num">3341488.0</td>
+   <td class="num">1631366.42158</td>
+   <td class="num">0.745814111111</td>
+   <td class="num">9666.11111111</td>
+   <td class="num">108.0</td>
+   <td class="text">Andreas Pedersen</td>
+   <td class="text">13 Jun 2014</td>
+   </tr>
+   <tr id="saddle-search-pt-island-eon-dimer-cg-5-rotations-20-bowl-breakout">
+   <td class="num">9</td>
+   <td class="text">eon-dimer-cg-5-rotations-20-bowl_breakout</td>
+   <td class="text">Eon r2213</td>
+   <td class="num">3463700.66667</td>
+   <td class="num">2213422.22677</td>
+   <td class="num">0.703835111111</td>
+   <td class="num">5311.66666667</td>
+   <td class="num">124.777777778</td>
+   <td class="text">Andreas Pedersen</td>
+   <td class="text">13 Jun 2014</td>
+   </tr>
+   <tr id="saddle-search-pt-island-eon-dimer">
+   <td class="num">10</td>
+   <td class="text">eon-dimer</td>
+   <td class="text">Eon r2205</td>
+   <td class="num">3.77888e+06</td>
+   <td class="num">527337</td>
+   <td class="num">0.746017</td>
+   <td class="num">11366.8</td>
+   <td class="num">109.222</td>
+   <td class="text">Sam Chill</td>
+   <td class="text">15 Jul 2014</td>
+   </tr>
+   <tr id="saddle-search-pt-island-eon-dimer-cg-20-rotations-20-bowl-breakout">
+   <td class="num">11</td>
+   <td class="text">eon-dimer-cg-20-rotations-20-bowl_breakout</td>
+   <td class="text">Eon r2213</td>
+   <td class="num">7174213.66667</td>
+   <td class="num">2857406.52963</td>
+   <td class="num">0.746989444444</td>
+   <td class="num">11849.7777778</td>
+   <td class="num">123.222222222</td>
+   <td class="text">Andreas Pedersen</td>
+   <td class="text">13 Jun 2014</td>
+   </tr>
+   <tr id="saddle-search-pt-island-eon-dimer-cg-20-rotations">
+   <td class="num">12</td>
+   <td class="text">eon-dimer-cg-20-rotations</td>
+   <td class="text">Eon r2213</td>
+   <td class="num">7947070.11111</td>
+   <td class="num">2659757.27959</td>
+   <td class="num">0.634205777778</td>
+   <td class="num">12618.2222222</td>
+   <td class="num">121.888888889</td>
+   <td class="text">Andreas Pedersen</td>
+   <td class="text">13 Jun 2014</td>
+   </tr>
+   </tbody></table></div></section>
 #+end_export

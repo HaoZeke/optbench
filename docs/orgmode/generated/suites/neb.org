@@ -4,5 +4,143 @@
 #+begin_export rst
 .. raw:: html
 
-   <section class="bench" id="Pt-heptamer"><h2>Pt-heptamer</h2><dl class="bench-rule"><dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd></dl><table><caption>Archived scores, fewest force calls first.</caption><thead><tr><th class="num" scope="col"></th><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="num" scope="col">force calls</th><th class="num" scope="col">force calls max</th><th class="num" scope="col">force calls min</th><th class="text" scope="col">Contributor</th><th class="text" scope="col">Date</th></tr></thead><tbody><tr class="best"><td class="num">1</td><td class="text">eon-lbfgs</td><td class="text">Eon r2090</td><td class="num">42</td><td class="num">55</td><td class="num">29</td><td class="text">Sam Chill</td><td class="text">03 Apr 2013</td></tr><tr><td class="num">2</td><td class="text">gman-glbfgs-hess</td><td class="text">Gman r235</td><td class="num">48</td><td class="num">62</td><td class="num">26</td><td class="text">Rye Terrell</td><td class="text">Wed Apr 10 13:59:51 2013</td></tr><tr><td class="num">3</td><td class="text">gman-fire</td><td class="text">Gman r235</td><td class="num">82</td><td class="num">119</td><td class="num">54</td><td class="text">Rye Terrell</td><td class="text">Thu Apr  4 12:31:59 2013</td></tr><tr><td class="num">4</td><td class="text">eon-fire</td><td class="text">Eon r2090</td><td class="num">86</td><td class="num">102</td><td class="num">66</td><td class="text">Sam Chill</td><td class="text">03 Apr 2013</td></tr><tr><td class="num">5</td><td class="text">gman-glbfgs-line</td><td class="text">Gman r235</td><td class="num">100</td><td class="num">135</td><td class="num">57</td><td class="text">Rye Terrell</td><td class="text">Wed Apr 10 13:55:49 2013</td></tr><tr><td class="num">6</td><td class="text">gman-lbfgs-line</td><td class="text">Gman r235</td><td class="num">108</td><td class="num">155</td><td class="num">63</td><td class="text">Rye Terrell</td><td class="text">Thu Apr  4 11:43:17 2013</td></tr><tr><td class="num">7</td><td class="text">gman-cg</td><td class="text">Gman r235</td><td class="num">111</td><td class="num">215</td><td class="num">57</td><td class="text">Rye Terrell</td><td class="text">Wed Apr 10 13:47:22 2013</td></tr><tr><td class="num">8</td><td class="text">eon-cg</td><td class="text">Eon r2090</td><td class="num">120</td><td class="num">211</td><td class="num">53</td><td class="text">Sam Chill</td><td class="text">03 Apr 2013</td></tr><tr><td class="num">9</td><td class="text">eon-qm</td><td class="text">Eon r2090</td><td class="num">164</td><td class="num">227</td><td class="num">89</td><td class="text">Sam Chill</td><td class="text">03 Apr 2013</td></tr><tr><td class="num">10</td><td class="text">gman-qm</td><td class="text">Gman r235</td><td class="num">190</td><td class="num">316</td><td class="num">103</td><td class="text">Rye Terrell</td><td class="text">Thu Apr  4 12:16:39 2013</td></tr><tr><td class="num">11</td><td class="text">gman-lbfgs-hess</td><td class="text">Gman r235</td><td class="num">217</td><td class="num">704</td><td class="num">108</td><td class="text">Rye Terrell</td><td class="text">Wed Apr 10 14:10:04 2013</td></tr><tr><td class="num">12</td><td class="text">gman-sd</td><td class="text">Gman r235</td><td class="num">412</td><td class="num">697</td><td class="num">214</td><td class="text">Rye Terrell</td><td class="text">Thu Apr  4 12:06:22 2013</td></tr></tbody></table></section>
+   <section class="bench" id="Pt-heptamer">
+   <h2>Pt-heptamer</h2>
+   <dl class="bench-rule">
+   <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
+   </dl>
+   <figure class="bench-plot"><figcaption>force calls, same order as the table.</figcaption><div class="bench-plot-mount"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "neb-pt-heptamer-eon-lbfgs", "entry": "eon-lbfgs", "code": "Eon r2090", "value": 42.0, "best": true, "held": false}, {"id": "neb-pt-heptamer-gman-glbfgs-hess", "entry": "gman-glbfgs-hess", "code": "Gman r235", "value": 48.0, "best": false, "held": false}, {"id": "neb-pt-heptamer-gman-fire", "entry": "gman-fire", "code": "Gman r235", "value": 82.0, "best": false, "held": false}, {"id": "neb-pt-heptamer-eon-fire", "entry": "eon-fire", "code": "Eon r2090", "value": 86.0, "best": false, "held": false}, {"id": "neb-pt-heptamer-gman-glbfgs-line", "entry": "gman-glbfgs-line", "code": "Gman r235", "value": 100.0, "best": false, "held": false}, {"id": "neb-pt-heptamer-gman-lbfgs-line", "entry": "gman-lbfgs-line", "code": "Gman r235", "value": 108.0, "best": false, "held": false}, {"id": "neb-pt-heptamer-gman-cg", "entry": "gman-cg", "code": "Gman r235", "value": 111.0, "best": false, "held": false}, {"id": "neb-pt-heptamer-eon-cg", "entry": "eon-cg", "code": "Eon r2090", "value": 120.0, "best": false, "held": false}, {"id": "neb-pt-heptamer-eon-qm", "entry": "eon-qm", "code": "Eon r2090", "value": 164.0, "best": false, "held": false}, {"id": "neb-pt-heptamer-gman-qm", "entry": "gman-qm", "code": "Gman r235", "value": 190.0, "best": false, "held": false}, {"id": "neb-pt-heptamer-gman-lbfgs-hess", "entry": "gman-lbfgs-hess", "code": "Gman r235", "value": 217.0, "best": false, "held": false}, {"id": "neb-pt-heptamer-gman-sd", "entry": "gman-sd", "code": "Gman r235", "value": 412.0, "best": false, "held": false}]}</script></figure>
+   <div class="bench-table"><table>
+   <caption>Archived scores, fewest force calls first.</caption>
+   <thead><tr>
+   <th class="num" scope="col"></th>
+   <th class="text" scope="col">Entry</th>
+   <th class="text" scope="col">Code</th>
+   <th class="num" scope="col">force calls</th>
+   <th class="num" scope="col">force calls max</th>
+   <th class="num" scope="col">force calls min</th>
+   <th class="text" scope="col">Contributor</th>
+   <th class="text" scope="col">Date</th>
+   </tr></thead><tbody>
+   <tr id="neb-pt-heptamer-eon-lbfgs" class="best">
+   <td class="num">1</td>
+   <td class="text">eon-lbfgs</td>
+   <td class="text">Eon r2090</td>
+   <td class="num">42</td>
+   <td class="num">55</td>
+   <td class="num">29</td>
+   <td class="text">Sam Chill</td>
+   <td class="text">03 Apr 2013</td>
+   </tr>
+   <tr id="neb-pt-heptamer-gman-glbfgs-hess">
+   <td class="num">2</td>
+   <td class="text">gman-glbfgs-hess</td>
+   <td class="text">Gman r235</td>
+   <td class="num">48</td>
+   <td class="num">62</td>
+   <td class="num">26</td>
+   <td class="text">Rye Terrell</td>
+   <td class="text">Wed Apr 10 13:59:51 2013</td>
+   </tr>
+   <tr id="neb-pt-heptamer-gman-fire">
+   <td class="num">3</td>
+   <td class="text">gman-fire</td>
+   <td class="text">Gman r235</td>
+   <td class="num">82</td>
+   <td class="num">119</td>
+   <td class="num">54</td>
+   <td class="text">Rye Terrell</td>
+   <td class="text">Thu Apr  4 12:31:59 2013</td>
+   </tr>
+   <tr id="neb-pt-heptamer-eon-fire">
+   <td class="num">4</td>
+   <td class="text">eon-fire</td>
+   <td class="text">Eon r2090</td>
+   <td class="num">86</td>
+   <td class="num">102</td>
+   <td class="num">66</td>
+   <td class="text">Sam Chill</td>
+   <td class="text">03 Apr 2013</td>
+   </tr>
+   <tr id="neb-pt-heptamer-gman-glbfgs-line">
+   <td class="num">5</td>
+   <td class="text">gman-glbfgs-line</td>
+   <td class="text">Gman r235</td>
+   <td class="num">100</td>
+   <td class="num">135</td>
+   <td class="num">57</td>
+   <td class="text">Rye Terrell</td>
+   <td class="text">Wed Apr 10 13:55:49 2013</td>
+   </tr>
+   <tr id="neb-pt-heptamer-gman-lbfgs-line">
+   <td class="num">6</td>
+   <td class="text">gman-lbfgs-line</td>
+   <td class="text">Gman r235</td>
+   <td class="num">108</td>
+   <td class="num">155</td>
+   <td class="num">63</td>
+   <td class="text">Rye Terrell</td>
+   <td class="text">Thu Apr  4 11:43:17 2013</td>
+   </tr>
+   <tr id="neb-pt-heptamer-gman-cg">
+   <td class="num">7</td>
+   <td class="text">gman-cg</td>
+   <td class="text">Gman r235</td>
+   <td class="num">111</td>
+   <td class="num">215</td>
+   <td class="num">57</td>
+   <td class="text">Rye Terrell</td>
+   <td class="text">Wed Apr 10 13:47:22 2013</td>
+   </tr>
+   <tr id="neb-pt-heptamer-eon-cg">
+   <td class="num">8</td>
+   <td class="text">eon-cg</td>
+   <td class="text">Eon r2090</td>
+   <td class="num">120</td>
+   <td class="num">211</td>
+   <td class="num">53</td>
+   <td class="text">Sam Chill</td>
+   <td class="text">03 Apr 2013</td>
+   </tr>
+   <tr id="neb-pt-heptamer-eon-qm">
+   <td class="num">9</td>
+   <td class="text">eon-qm</td>
+   <td class="text">Eon r2090</td>
+   <td class="num">164</td>
+   <td class="num">227</td>
+   <td class="num">89</td>
+   <td class="text">Sam Chill</td>
+   <td class="text">03 Apr 2013</td>
+   </tr>
+   <tr id="neb-pt-heptamer-gman-qm">
+   <td class="num">10</td>
+   <td class="text">gman-qm</td>
+   <td class="text">Gman r235</td>
+   <td class="num">190</td>
+   <td class="num">316</td>
+   <td class="num">103</td>
+   <td class="text">Rye Terrell</td>
+   <td class="text">Thu Apr  4 12:16:39 2013</td>
+   </tr>
+   <tr id="neb-pt-heptamer-gman-lbfgs-hess">
+   <td class="num">11</td>
+   <td class="text">gman-lbfgs-hess</td>
+   <td class="text">Gman r235</td>
+   <td class="num">217</td>
+   <td class="num">704</td>
+   <td class="num">108</td>
+   <td class="text">Rye Terrell</td>
+   <td class="text">Wed Apr 10 14:10:04 2013</td>
+   </tr>
+   <tr id="neb-pt-heptamer-gman-sd">
+   <td class="num">12</td>
+   <td class="text">gman-sd</td>
+   <td class="text">Gman r235</td>
+   <td class="num">412</td>
+   <td class="num">697</td>
+   <td class="num">214</td>
+   <td class="text">Rye Terrell</td>
+   <td class="text">Thu Apr  4 12:06:22 2013</td>
+   </tr>
+   </tbody></table></div></section>
 #+end_export

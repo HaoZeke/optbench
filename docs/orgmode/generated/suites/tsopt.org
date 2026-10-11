@@ -4,5 +4,225 @@
 #+begin_export rst
 .. raw:: html
 
-   <section class="bench" id="LJ38"><h2>LJ38</h2><dl class="bench-rule"><dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd></dl><table><caption>Archived scores, fewest force calls first.</caption><thead><tr><th class="num" scope="col"></th><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="num" scope="col">force calls</th><th class="num" scope="col">force calls max</th><th class="num" scope="col">force calls median</th><th class="num" scope="col">force calls min</th><th class="num" scope="col">nfailed</th><th class="text" scope="col">Contributor</th><th class="text" scope="col">Date</th></tr></thead><tbody><tr class="best"><td class="num">1</td><td class="text">sella</td><td class="text">Sella 0.1.1</td><td class="num">69.55</td><td class="num">158</td><td class="num">64.0</td><td class="num">24</td><td class="num">0</td><td class="text">Eric D. Hermes, Khachik Sargsyan, Habib Najm, Judit Zádor</td><td class="text">2019-12-10</td></tr><tr><td class="num">2</td><td class="text">optim_ffd</td><td class="text">OPTIM</td><td class="num">1.45000e+02</td><td class="num">5.6500e+02</td><td class="num">1.19000e+02</td><td class="num">5.7000e+01</td><td class="num">0</td><td class="text">Jacob Stevenson and Cheng Shang</td><td class="text">06 Aug 2014</td></tr><tr><td class="num">3</td><td class="text">pele_ffd</td><td class="text">pele</td><td class="num">1.92000e+02</td><td class="num">1.4880e+03</td><td class="num">1.50000e+02</td><td class="num">5.9000e+01</td><td class="num">0</td><td class="text">Jacob Stevenson</td><td class="text">19 Sep 2014</td></tr><tr><td class="num">4</td><td class="text">optim_cd</td><td class="text">OPTIM</td><td class="num">2.23000e+02</td><td class="num">7.7200e+02</td><td class="num">1.83000e+02</td><td class="num">7.7000e+01</td><td class="num">0</td><td class="text">Victor Ruehle, Jacob Stevenson and Cheng Shang</td><td class="text">06 Aug 2014</td></tr><tr><td class="num">5</td><td class="text">eon-lanczos-improved</td><td class="text">Eon r2156</td><td class="num">237</td><td class="num">1898</td><td class="num">181</td><td class="num">65</td><td class="num">0</td><td class="text">Sam Chill</td><td class="text">29 Aug 2013</td></tr><tr class="held"><td class="num">6</td><td class="text">pele_cd (held out of the original table)</td><td class="text">pele</td><td class="num">2.54000e+02</td><td class="num">1.0960e+03</td><td class="num">1.93000e+02</td><td class="num">8.0000e+01</td><td class="num">0</td><td class="text">Jacob Stevenson</td><td class="text">06 Aug 2014</td></tr><tr><td class="num">7</td><td class="text">eon-lanczos</td><td class="text">Eon r2156</td><td class="num">321</td><td class="num">8857</td><td class="num">220.5</td><td class="num">83</td><td class="num">0</td><td class="text">Sam Chill</td><td class="text">29 Aug 2013</td></tr><tr><td class="num">8</td><td class="text">eon-dimer</td><td class="text">Eon r2156</td><td class="num">528</td><td class="num">3581</td><td class="num">388.5</td><td class="num">92</td><td class="num">0</td><td class="text">Sam Chill</td><td class="text">02 Jul 2013</td></tr></tbody></table></section><section class="bench" id="pt-island"><h2>pt-island</h2><dl class="bench-rule"><dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd></dl><table><caption>Archived scores, fewest force calls first.</caption><thead><tr><th class="num" scope="col"></th><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="num" scope="col">force calls</th><th class="num" scope="col">force calls max</th><th class="num" scope="col">force calls median</th><th class="num" scope="col">force calls min</th><th class="num" scope="col">nfailed</th><th class="text" scope="col">Contributor</th><th class="text" scope="col">Date</th></tr></thead><tbody><tr class="best"><td class="num">1</td><td class="text">sella</td><td class="text">Sella 0.1.1</td><td class="num">53</td><td class="num">108</td><td class="num">51.0</td><td class="num">31</td><td class="num">0</td><td class="text">Eric D. Hermes, Khachik Sargsyan, Habib Najm, Judit Zádor</td><td class="text">2019-12-11</td></tr><tr><td class="num">2</td><td class="text">optim_ffd</td><td class="text">OPTIM</td><td class="num">7.10000e+01</td><td class="num">1.4300e+02</td><td class="num">7.00000e+01</td><td class="num">4.3000e+01</td><td class="num">0</td><td class="text">Jacob Stevenson and Cheng Shang</td><td class="text">06 Aug 2014</td></tr><tr><td class="num">3</td><td class="text">pele</td><td class="text">pele</td><td class="num">8.80000e+01</td><td class="num">1.9800e+02</td><td class="num">7.80000e+01</td><td class="num">5.2000e+01</td><td class="num">0</td><td class="text">Jacob Stevenson</td><td class="text">06 Aug 2014</td></tr><tr class="held"><td class="num">4</td><td class="text">optim_cd (held out of the original table)</td><td class="text">OPTIM</td><td class="num">9.00000e+01</td><td class="num">1.9900e+02</td><td class="num">8.60000e+01</td><td class="num">5.2000e+01</td><td class="num">0</td><td class="text">Jacob Stevenson and Cheng Shang</td><td class="text">06 Aug 2014</td></tr><tr><td class="num">5</td><td class="text">eon-lanczos-improved</td><td class="text">Eon r2156</td><td class="num">106</td><td class="num">163</td><td class="num">100</td><td class="num">71</td><td class="num">0</td><td class="text">Sam Chill</td><td class="text">19 Jun 2014</td></tr><tr><td class="num">6</td><td class="text">eon-dimer</td><td class="text">Eon r2156</td><td class="num">116</td><td class="num">160</td><td class="num">114</td><td class="num">83</td><td class="num">0</td><td class="text">Sam Chill</td><td class="text">20 Jun 2014</td></tr><tr><td class="num">7</td><td class="text">eon-lanczos</td><td class="text">Eon r2156</td><td class="num">143</td><td class="num">292</td><td class="num">139</td><td class="num">106</td><td class="num">0</td><td class="text">Sam Chill</td><td class="text">29 Aug 2013</td></tr></tbody></table></section>
+   <section class="bench" id="LJ38">
+   <h2>LJ38</h2>
+   <dl class="bench-rule">
+   <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
+   </dl>
+   <figure class="bench-plot"><figcaption>force calls, same order as the table.</figcaption><div class="bench-plot-mount"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "tsopt-lj38-sella", "entry": "sella", "code": "Sella 0.1.1", "value": 69.55, "best": true, "held": false}, {"id": "tsopt-lj38-optim-ffd", "entry": "optim_ffd", "code": "OPTIM", "value": 145.0, "best": false, "held": false}, {"id": "tsopt-lj38-pele-ffd", "entry": "pele_ffd", "code": "pele", "value": 192.0, "best": false, "held": false}, {"id": "tsopt-lj38-optim-cd", "entry": "optim_cd", "code": "OPTIM", "value": 223.0, "best": false, "held": false}, {"id": "tsopt-lj38-eon-lanczos-improved", "entry": "eon-lanczos-improved", "code": "Eon r2156", "value": 237.0, "best": false, "held": false}, {"id": "tsopt-lj38-pele-cd", "entry": "pele_cd", "code": "pele", "value": 254.0, "best": false, "held": true}, {"id": "tsopt-lj38-eon-lanczos", "entry": "eon-lanczos", "code": "Eon r2156", "value": 321.0, "best": false, "held": false}, {"id": "tsopt-lj38-eon-dimer", "entry": "eon-dimer", "code": "Eon r2156", "value": 528.0, "best": false, "held": false}]}</script></figure>
+   <div class="bench-table"><table>
+   <caption>Archived scores, fewest force calls first.</caption>
+   <thead><tr>
+   <th class="num" scope="col"></th>
+   <th class="text" scope="col">Entry</th>
+   <th class="text" scope="col">Code</th>
+   <th class="num" scope="col">force calls</th>
+   <th class="num" scope="col">force calls max</th>
+   <th class="num" scope="col">force calls median</th>
+   <th class="num" scope="col">force calls min</th>
+   <th class="num" scope="col">nfailed</th>
+   <th class="text" scope="col">Contributor</th>
+   <th class="text" scope="col">Date</th>
+   </tr></thead><tbody>
+   <tr id="tsopt-lj38-sella" class="best">
+   <td class="num">1</td>
+   <td class="text">sella</td>
+   <td class="text">Sella 0.1.1</td>
+   <td class="num">69.55</td>
+   <td class="num">158</td>
+   <td class="num">64.0</td>
+   <td class="num">24</td>
+   <td class="num">0</td>
+   <td class="text">Eric D. Hermes, Khachik Sargsyan, Habib Najm, Judit Zádor</td>
+   <td class="text">2019-12-10</td>
+   </tr>
+   <tr id="tsopt-lj38-optim-ffd">
+   <td class="num">2</td>
+   <td class="text">optim_ffd</td>
+   <td class="text">OPTIM</td>
+   <td class="num">1.45000e+02</td>
+   <td class="num">5.6500e+02</td>
+   <td class="num">1.19000e+02</td>
+   <td class="num">5.7000e+01</td>
+   <td class="num">0</td>
+   <td class="text">Jacob Stevenson and Cheng Shang</td>
+   <td class="text">06 Aug 2014</td>
+   </tr>
+   <tr id="tsopt-lj38-pele-ffd">
+   <td class="num">3</td>
+   <td class="text">pele_ffd</td>
+   <td class="text">pele</td>
+   <td class="num">1.92000e+02</td>
+   <td class="num">1.4880e+03</td>
+   <td class="num">1.50000e+02</td>
+   <td class="num">5.9000e+01</td>
+   <td class="num">0</td>
+   <td class="text">Jacob Stevenson</td>
+   <td class="text">19 Sep 2014</td>
+   </tr>
+   <tr id="tsopt-lj38-optim-cd">
+   <td class="num">4</td>
+   <td class="text">optim_cd</td>
+   <td class="text">OPTIM</td>
+   <td class="num">2.23000e+02</td>
+   <td class="num">7.7200e+02</td>
+   <td class="num">1.83000e+02</td>
+   <td class="num">7.7000e+01</td>
+   <td class="num">0</td>
+   <td class="text">Victor Ruehle, Jacob Stevenson and Cheng Shang</td>
+   <td class="text">06 Aug 2014</td>
+   </tr>
+   <tr id="tsopt-lj38-eon-lanczos-improved">
+   <td class="num">5</td>
+   <td class="text">eon-lanczos-improved</td>
+   <td class="text">Eon r2156</td>
+   <td class="num">237</td>
+   <td class="num">1898</td>
+   <td class="num">181</td>
+   <td class="num">65</td>
+   <td class="num">0</td>
+   <td class="text">Sam Chill</td>
+   <td class="text">29 Aug 2013</td>
+   </tr>
+   <tr id="tsopt-lj38-pele-cd" class="held">
+   <td class="num">6</td>
+   <td class="text">pele_cd (held out of the original table)</td>
+   <td class="text">pele</td>
+   <td class="num">2.54000e+02</td>
+   <td class="num">1.0960e+03</td>
+   <td class="num">1.93000e+02</td>
+   <td class="num">8.0000e+01</td>
+   <td class="num">0</td>
+   <td class="text">Jacob Stevenson</td>
+   <td class="text">06 Aug 2014</td>
+   </tr>
+   <tr id="tsopt-lj38-eon-lanczos">
+   <td class="num">7</td>
+   <td class="text">eon-lanczos</td>
+   <td class="text">Eon r2156</td>
+   <td class="num">321</td>
+   <td class="num">8857</td>
+   <td class="num">220.5</td>
+   <td class="num">83</td>
+   <td class="num">0</td>
+   <td class="text">Sam Chill</td>
+   <td class="text">29 Aug 2013</td>
+   </tr>
+   <tr id="tsopt-lj38-eon-dimer">
+   <td class="num">8</td>
+   <td class="text">eon-dimer</td>
+   <td class="text">Eon r2156</td>
+   <td class="num">528</td>
+   <td class="num">3581</td>
+   <td class="num">388.5</td>
+   <td class="num">92</td>
+   <td class="num">0</td>
+   <td class="text">Sam Chill</td>
+   <td class="text">02 Jul 2013</td>
+   </tr>
+   </tbody></table></div></section><section class="bench" id="pt-island">
+   <h2>pt-island</h2>
+   <dl class="bench-rule">
+   <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
+   </dl>
+   <figure class="bench-plot"><figcaption>force calls, same order as the table.</figcaption><div class="bench-plot-mount"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "tsopt-pt-island-sella", "entry": "sella", "code": "Sella 0.1.1", "value": 53.0, "best": true, "held": false}, {"id": "tsopt-pt-island-optim-ffd", "entry": "optim_ffd", "code": "OPTIM", "value": 71.0, "best": false, "held": false}, {"id": "tsopt-pt-island-pele", "entry": "pele", "code": "pele", "value": 88.0, "best": false, "held": false}, {"id": "tsopt-pt-island-optim-cd", "entry": "optim_cd", "code": "OPTIM", "value": 90.0, "best": false, "held": true}, {"id": "tsopt-pt-island-eon-lanczos-improved", "entry": "eon-lanczos-improved", "code": "Eon r2156", "value": 106.0, "best": false, "held": false}, {"id": "tsopt-pt-island-eon-dimer", "entry": "eon-dimer", "code": "Eon r2156", "value": 116.0, "best": false, "held": false}, {"id": "tsopt-pt-island-eon-lanczos", "entry": "eon-lanczos", "code": "Eon r2156", "value": 143.0, "best": false, "held": false}]}</script></figure>
+   <div class="bench-table"><table>
+   <caption>Archived scores, fewest force calls first.</caption>
+   <thead><tr>
+   <th class="num" scope="col"></th>
+   <th class="text" scope="col">Entry</th>
+   <th class="text" scope="col">Code</th>
+   <th class="num" scope="col">force calls</th>
+   <th class="num" scope="col">force calls max</th>
+   <th class="num" scope="col">force calls median</th>
+   <th class="num" scope="col">force calls min</th>
+   <th class="num" scope="col">nfailed</th>
+   <th class="text" scope="col">Contributor</th>
+   <th class="text" scope="col">Date</th>
+   </tr></thead><tbody>
+   <tr id="tsopt-pt-island-sella" class="best">
+   <td class="num">1</td>
+   <td class="text">sella</td>
+   <td class="text">Sella 0.1.1</td>
+   <td class="num">53</td>
+   <td class="num">108</td>
+   <td class="num">51.0</td>
+   <td class="num">31</td>
+   <td class="num">0</td>
+   <td class="text">Eric D. Hermes, Khachik Sargsyan, Habib Najm, Judit Zádor</td>
+   <td class="text">2019-12-11</td>
+   </tr>
+   <tr id="tsopt-pt-island-optim-ffd">
+   <td class="num">2</td>
+   <td class="text">optim_ffd</td>
+   <td class="text">OPTIM</td>
+   <td class="num">7.10000e+01</td>
+   <td class="num">1.4300e+02</td>
+   <td class="num">7.00000e+01</td>
+   <td class="num">4.3000e+01</td>
+   <td class="num">0</td>
+   <td class="text">Jacob Stevenson and Cheng Shang</td>
+   <td class="text">06 Aug 2014</td>
+   </tr>
+   <tr id="tsopt-pt-island-pele">
+   <td class="num">3</td>
+   <td class="text">pele</td>
+   <td class="text">pele</td>
+   <td class="num">8.80000e+01</td>
+   <td class="num">1.9800e+02</td>
+   <td class="num">7.80000e+01</td>
+   <td class="num">5.2000e+01</td>
+   <td class="num">0</td>
+   <td class="text">Jacob Stevenson</td>
+   <td class="text">06 Aug 2014</td>
+   </tr>
+   <tr id="tsopt-pt-island-optim-cd" class="held">
+   <td class="num">4</td>
+   <td class="text">optim_cd (held out of the original table)</td>
+   <td class="text">OPTIM</td>
+   <td class="num">9.00000e+01</td>
+   <td class="num">1.9900e+02</td>
+   <td class="num">8.60000e+01</td>
+   <td class="num">5.2000e+01</td>
+   <td class="num">0</td>
+   <td class="text">Jacob Stevenson and Cheng Shang</td>
+   <td class="text">06 Aug 2014</td>
+   </tr>
+   <tr id="tsopt-pt-island-eon-lanczos-improved">
+   <td class="num">5</td>
+   <td class="text">eon-lanczos-improved</td>
+   <td class="text">Eon r2156</td>
+   <td class="num">106</td>
+   <td class="num">163</td>
+   <td class="num">100</td>
+   <td class="num">71</td>
+   <td class="num">0</td>
+   <td class="text">Sam Chill</td>
+   <td class="text">19 Jun 2014</td>
+   </tr>
+   <tr id="tsopt-pt-island-eon-dimer">
+   <td class="num">6</td>
+   <td class="text">eon-dimer</td>
+   <td class="text">Eon r2156</td>
+   <td class="num">116</td>
+   <td class="num">160</td>
+   <td class="num">114</td>
+   <td class="num">83</td>
+   <td class="num">0</td>
+   <td class="text">Sam Chill</td>
+   <td class="text">20 Jun 2014</td>
+   </tr>
+   <tr id="tsopt-pt-island-eon-lanczos">
+   <td class="num">7</td>
+   <td class="text">eon-lanczos</td>
+   <td class="text">Eon r2156</td>
+   <td class="num">143</td>
+   <td class="num">292</td>
+   <td class="num">139</td>
+   <td class="num">106</td>
+   <td class="num">0</td>
+   <td class="text">Sam Chill</td>
+   <td class="text">29 Aug 2013</td>
+   </tr>
+   </tbody></table></div></section>
 #+end_export

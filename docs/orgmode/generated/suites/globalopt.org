@@ -4,5 +4,383 @@
 #+begin_export rst
 .. raw:: html
 
-   <section class="bench" id="lj100-binary"><h2>Binary Lennard-Jones 100</h2><dl class="bench-rule"><dt>Starts</dt><dd>100</dd><dt>Note</dt><dd>The archived files record energies. They do not record force calls.</dd></dl><table><caption>Archived scores, lowest energy first.</caption><thead><tr><th class="num" scope="col"></th><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="num" scope="col">avg energy</th><th class="num" scope="col">min energy</th><th class="num" scope="col">max energy</th><th class="text" scope="col">Contributor</th><th class="text" scope="col">Date</th></tr></thead><tbody><tr class="best"><td class="num">1</td><td class="text">gmin</td><td class="text">GMIN</td><td class="num">-5.89507e+02</td><td class="num">-5.99034e+02</td><td class="num">-5.78557e+02</td><td class="text">David Wales and Jacob Stevenson</td><td class="text">07 Aug 2014</td></tr><tr><td class="num">2</td><td class="text">eon-basinhopping</td><td class="text">Eon r2156</td><td class="num">-584.579</td><td class="num">-5.9613e+02</td><td class="num">-5.7414e+02</td><td class="text">Sam Chill</td><td class="text">21 May 2014</td></tr></tbody></table></section><section class="bench" id="lj150"><h2>lj150</h2><dl class="bench-rule"><dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd></dl><table><caption>Archived scores.</caption><thead><tr><th class="num" scope="col"></th><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="num" scope="col">basin hopping steps mean</th><th class="num" scope="col">basin hopping steps stddev</th><th class="num" scope="col">cpu time mean</th><th class="num" scope="col">cpu time stddev</th><th class="num" scope="col">energy calls mean</th><th class="num" scope="col">energy calls stddev</th><th class="num" scope="col">nfailed</th><th class="text" scope="col">Contributor</th><th class="text" scope="col">Date</th></tr></thead><tbody><tr class="best"><td class="num">1</td><td class="text">gmin-symmetrise</td><td class="text">GMIN</td><td class="num">6.6738e+02</td><td class="num">5.4347e+02</td><td class="num">5.159e+01</td><td class="num">4.291e+01</td><td class="num">1.2755870e+05</td><td class="num">1.0638724e+05</td><td class="num">0</td><td class="text">David Wales</td><td class="text">03 Oct 2022</td></tr><tr><td class="num">2</td><td class="text">gmin-nosym</td><td class="text">GMIN</td><td class="num">3.28089e+03</td><td class="num">2.72295e+03</td><td class="num">2.8136e+02</td><td class="num">2.3615e+02</td><td class="num">6.9596491e+05</td><td class="num">5.8454129e+05</td><td class="num">0</td><td class="text">David Wales</td><td class="text">03 Oct 2022</td></tr></tbody></table></section><section class="bench" id="lj38"><h2>Lennard-Jones 38 global minimum</h2><dl class="bench-rule"><dt>Stop</dt><dd>within 0.001 of the known minimum</dd><dt>Starts</dt><dd>100</dd></dl><table><caption>Archived scores, fewest force calls first.</caption><thead><tr><th class="num" scope="col"></th><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="num" scope="col">force calls</th><th class="num" scope="col">force calls min</th><th class="num" scope="col">force calls max</th><th class="num" scope="col">nfailed</th><th class="text" scope="col">Contributor</th><th class="text" scope="col">Date</th></tr></thead><tbody><tr class="best"><td class="num">1</td><td class="text">gmin-csm</td><td class="text">GMIN</td><td class="num">6.42100e+03</td><td class="num">7.7000e+01</td><td class="num">2.6977e+04</td><td class="num">0</td><td class="text">Jacob Stevenson and David Wales</td><td class="text">06 Aug 2014</td></tr><tr><td class="num">2</td><td class="text">gmin-symmetrise</td><td class="text">GMIN</td><td class="num">2.27110e+04</td><td class="num">7.2000e+02</td><td class="num">1.2118e+05</td><td class="num">0</td><td class="text">Jacob Stevenson and David Wales</td><td class="text">06 Aug 2014</td></tr><tr><td class="num">3</td><td class="text">gmin-nosym</td><td class="text">GMIN</td><td class="num">2.65951e+05</td><td class="num">6.4570e+03</td><td class="num">1.1705e+06</td><td class="num">0</td><td class="text">Jacob Stevenson and David Wales</td><td class="text">06 Aug 2014</td></tr><tr><td class="num">4</td><td class="text">eon-basinhopping</td><td class="text">Eon r2156</td><td class="num">508011</td><td class="num">4579</td><td class="num">1795901</td><td class="num"></td><td class="text">Sam Chill</td><td class="text">20 Aug 2013</td></tr><tr><td class="num">5</td><td class="text">pele-basinhopping</td><td class="text">pele</td><td class="num">5.21595e+05</td><td class="num">9.4470e+03</td><td class="num">2.5339e+06</td><td class="num">0</td><td class="text">Jacob Stevenson</td><td class="text">29 Aug 2013</td></tr></tbody></table></section><section class="bench" id="lj75"><h2>lj75</h2><dl class="bench-rule"><dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd></dl><table><caption>Archived scores, fewest force calls first.</caption><thead><tr><th class="num" scope="col"></th><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="num" scope="col">force calls</th><th class="num" scope="col">force calls max</th><th class="num" scope="col">force calls median</th><th class="num" scope="col">force calls min</th><th class="num" scope="col">nfailed</th><th class="text" scope="col">Contributor</th><th class="text" scope="col">Date</th></tr></thead><tbody><tr class="best"><td class="num">1</td><td class="text">gmin</td><td class="text">GMIN</td><td class="num">6.06920e+04</td><td class="num">3.1011e+05</td><td class="num">3.81180e+04</td><td class="num">1.1000e+03</td><td class="num">0</td><td class="text">David Wales</td><td class="text">09 Jan 2014</td></tr></tbody></table></section><section class="bench" id="lj98"><h2>lj98</h2><dl class="bench-rule"><dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd></dl><table><caption>Archived scores.</caption><thead><tr><th class="num" scope="col"></th><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="num" scope="col">basin hopping steps mean</th><th class="num" scope="col">basin hopping steps stddev</th><th class="num" scope="col">cpu time mean</th><th class="num" scope="col">cpu time stddev</th><th class="num" scope="col">energy calls mean</th><th class="num" scope="col">energy calls stddev</th><th class="num" scope="col">nfailed</th><th class="text" scope="col">Contributor</th><th class="text" scope="col">Date</th></tr></thead><tbody><tr class="best"><td class="num">1</td><td class="text">gmin-symmetrise</td><td class="text">GMIN</td><td class="num">1.28192e+03</td><td class="num">1.06356e+03</td><td class="num">4.369e+01</td><td class="num">3.601e+01</td><td class="num">2.4953780e+05</td><td class="num">2.0578948e+05</td><td class="num">0</td><td class="text">David Wales</td><td class="text">03 Oct 2022</td></tr><tr><td class="num">2</td><td class="text">gmin-nosym</td><td class="text">GMIN</td><td class="num">4.381976e+04</td><td class="num">4.566034e+04</td><td class="num">1.19484e+03</td><td class="num">1.25446e+03</td><td class="num">5.98857238e+07</td><td class="num">6.21561817e+07</td><td class="num">0</td><td class="text">David Wales</td><td class="text">03 Oct 2022</td></tr></tbody></table></section><section class="bench" id="tip4p10"><h2>tip4p10</h2><dl class="bench-rule"><dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd></dl><table><caption>Archived scores, fewest force calls first.</caption><thead><tr><th class="num" scope="col"></th><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="num" scope="col">force calls</th><th class="num" scope="col">force calls max</th><th class="num" scope="col">force calls median</th><th class="num" scope="col">force calls min</th><th class="num" scope="col">nfailed</th><th class="text" scope="col">Contributor</th><th class="text" scope="col">Date</th></tr></thead><tbody><tr class="best"><td class="num">1</td><td class="text">gmin-tbp</td><td class="text">GMIN</td><td class="num">1.60990e+04</td><td class="num">1.4512e+05</td><td class="num">1.13870e+04</td><td class="num">1.2100e+02</td><td class="num">0</td><td class="text">James Farrell</td><td class="text">05 May 2014</td></tr><tr><td class="num">2</td><td class="text">gmin</td><td class="text">GMIN</td><td class="num">1.62360e+04</td><td class="num">1.4836e+05</td><td class="num">1.14440e+04</td><td class="num">1.2100e+02</td><td class="num">0</td><td class="text">James Farrell</td><td class="text">05 May 2014</td></tr></tbody></table></section><section class="bench" id="tip4p15"><h2>tip4p15</h2><dl class="bench-rule"><dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd></dl><table><caption>Archived scores, fewest force calls first.</caption><thead><tr><th class="num" scope="col"></th><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="num" scope="col">force calls</th><th class="num" scope="col">force calls max</th><th class="num" scope="col">force calls median</th><th class="num" scope="col">force calls min</th><th class="num" scope="col">nfailed</th><th class="text" scope="col">Contributor</th><th class="text" scope="col">Date</th></tr></thead><tbody><tr class="best"><td class="num">1</td><td class="text">gmin-tbp</td><td class="text">GMIN</td><td class="num">6.25362e+05</td><td class="num">6.1769e+06</td><td class="num">4.16929e+05</td><td class="num">2.3450e+03</td><td class="num">0</td><td class="text">James Farrell</td><td class="text">05 May 2014</td></tr><tr><td class="num">2</td><td class="text">gmin</td><td class="text">GMIN</td><td class="num">6.70645e+05</td><td class="num">5.0265e+06</td><td class="num">4.90919e+05</td><td class="num">4.5490e+03</td><td class="num">0</td><td class="text">James Farrell</td><td class="text">05 May 2014</td></tr></tbody></table></section><section class="bench" id="tip4p20"><h2>tip4p20</h2><dl class="bench-rule"><dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd></dl><table><caption>Archived scores, fewest force calls first.</caption><thead><tr><th class="num" scope="col"></th><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="num" scope="col">force calls</th><th class="num" scope="col">force calls max</th><th class="num" scope="col">force calls median</th><th class="num" scope="col">force calls min</th><th class="num" scope="col">nfailed</th><th class="text" scope="col">Contributor</th><th class="text" scope="col">Date</th></tr></thead><tbody><tr class="best"><td class="num">1</td><td class="text">gmin-tbp</td><td class="text">GMIN</td><td class="num">2.55667e+07</td><td class="num">1.4340e+08</td><td class="num">1.81821e+07</td><td class="num">5.9734e+05</td><td class="num">0</td><td class="text">James Farrell</td><td class="text">09 May 2014</td></tr><tr><td class="num">2</td><td class="text">gmin</td><td class="text">GMIN</td><td class="num">2.85967e+07</td><td class="num">1.4191e+08</td><td class="num">1.94671e+07</td><td class="num">4.4115e+05</td><td class="num">0</td><td class="text">James Farrell</td><td class="text">09 May 2014</td></tr></tbody></table></section>
+   <section class="bench" id="lj100-binary">
+   <h2>Binary Lennard-Jones 100</h2>
+   <dl class="bench-rule">
+   <dt>Starts</dt><dd>100</dd>
+   <dt>Note</dt><dd>The archived files record energies. They do not record force calls.</dd>
+   </dl>
+   
+   <div class="bench-table"><table>
+   <caption>Archived scores, lowest energy first.</caption>
+   <thead><tr>
+   <th class="num" scope="col"></th>
+   <th class="text" scope="col">Entry</th>
+   <th class="text" scope="col">Code</th>
+   <th class="num" scope="col">avg energy</th>
+   <th class="num" scope="col">min energy</th>
+   <th class="num" scope="col">max energy</th>
+   <th class="text" scope="col">Contributor</th>
+   <th class="text" scope="col">Date</th>
+   </tr></thead><tbody>
+   <tr id="globalopt-lj100-binary-gmin" class="best">
+   <td class="num">1</td>
+   <td class="text">gmin</td>
+   <td class="text">GMIN</td>
+   <td class="num">-5.89507e+02</td>
+   <td class="num">-5.99034e+02</td>
+   <td class="num">-5.78557e+02</td>
+   <td class="text">David Wales and Jacob Stevenson</td>
+   <td class="text">07 Aug 2014</td>
+   </tr>
+   <tr id="globalopt-lj100-binary-eon-basinhopping">
+   <td class="num">2</td>
+   <td class="text">eon-basinhopping</td>
+   <td class="text">Eon r2156</td>
+   <td class="num">-584.579</td>
+   <td class="num">-5.9613e+02</td>
+   <td class="num">-5.7414e+02</td>
+   <td class="text">Sam Chill</td>
+   <td class="text">21 May 2014</td>
+   </tr>
+   </tbody></table></div></section><section class="bench" id="lj150">
+   <h2>lj150</h2>
+   <dl class="bench-rule">
+   <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
+   </dl>
+   <figure class="bench-plot"><figcaption>basin hopping steps mean, same order as the table.</figcaption><div class="bench-plot-mount"></div><script type="application/json" class="bench-plot-data">{"metric": "basin_hopping_steps_mean", "scale": "linear", "points": [{"id": "globalopt-lj150-gmin-symmetrise", "entry": "gmin-symmetrise", "code": "GMIN", "value": 667.38, "best": true, "held": false}, {"id": "globalopt-lj150-gmin-nosym", "entry": "gmin-nosym", "code": "GMIN", "value": 3280.89, "best": false, "held": false}]}</script></figure>
+   <div class="bench-table"><table>
+   <caption>Archived scores.</caption>
+   <thead><tr>
+   <th class="num" scope="col"></th>
+   <th class="text" scope="col">Entry</th>
+   <th class="text" scope="col">Code</th>
+   <th class="num" scope="col">basin hopping steps mean</th>
+   <th class="num" scope="col">basin hopping steps stddev</th>
+   <th class="num" scope="col">cpu time mean</th>
+   <th class="num" scope="col">cpu time stddev</th>
+   <th class="num" scope="col">energy calls mean</th>
+   <th class="num" scope="col">energy calls stddev</th>
+   <th class="num" scope="col">nfailed</th>
+   <th class="text" scope="col">Contributor</th>
+   <th class="text" scope="col">Date</th>
+   </tr></thead><tbody>
+   <tr id="globalopt-lj150-gmin-symmetrise" class="best">
+   <td class="num">1</td>
+   <td class="text">gmin-symmetrise</td>
+   <td class="text">GMIN</td>
+   <td class="num">6.6738e+02</td>
+   <td class="num">5.4347e+02</td>
+   <td class="num">5.159e+01</td>
+   <td class="num">4.291e+01</td>
+   <td class="num">1.2755870e+05</td>
+   <td class="num">1.0638724e+05</td>
+   <td class="num">0</td>
+   <td class="text">David Wales</td>
+   <td class="text">03 Oct 2022</td>
+   </tr>
+   <tr id="globalopt-lj150-gmin-nosym">
+   <td class="num">2</td>
+   <td class="text">gmin-nosym</td>
+   <td class="text">GMIN</td>
+   <td class="num">3.28089e+03</td>
+   <td class="num">2.72295e+03</td>
+   <td class="num">2.8136e+02</td>
+   <td class="num">2.3615e+02</td>
+   <td class="num">6.9596491e+05</td>
+   <td class="num">5.8454129e+05</td>
+   <td class="num">0</td>
+   <td class="text">David Wales</td>
+   <td class="text">03 Oct 2022</td>
+   </tr>
+   </tbody></table></div></section><section class="bench" id="lj38">
+   <h2>Lennard-Jones 38 global minimum</h2>
+   <dl class="bench-rule">
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
+   <dt>Starts</dt><dd>100</dd>
+   </dl>
+   <figure class="bench-plot"><figcaption>force calls, same order as the table.</figcaption><div class="bench-plot-mount"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "globalopt-lj38-gmin-csm", "entry": "gmin-csm", "code": "GMIN", "value": 6421.0, "best": true, "held": false}, {"id": "globalopt-lj38-gmin-symmetrise", "entry": "gmin-symmetrise", "code": "GMIN", "value": 22711.0, "best": false, "held": false}, {"id": "globalopt-lj38-gmin-nosym", "entry": "gmin-nosym", "code": "GMIN", "value": 265951.0, "best": false, "held": false}, {"id": "globalopt-lj38-eon-basinhopping", "entry": "eon-basinhopping", "code": "Eon r2156", "value": 508011.0, "best": false, "held": false}, {"id": "globalopt-lj38-pele-basinhopping", "entry": "pele-basinhopping", "code": "pele", "value": 521595.0, "best": false, "held": false}]}</script></figure>
+   <div class="bench-table"><table>
+   <caption>Archived scores, fewest force calls first.</caption>
+   <thead><tr>
+   <th class="num" scope="col"></th>
+   <th class="text" scope="col">Entry</th>
+   <th class="text" scope="col">Code</th>
+   <th class="num" scope="col">force calls</th>
+   <th class="num" scope="col">force calls min</th>
+   <th class="num" scope="col">force calls max</th>
+   <th class="num" scope="col">nfailed</th>
+   <th class="text" scope="col">Contributor</th>
+   <th class="text" scope="col">Date</th>
+   </tr></thead><tbody>
+   <tr id="globalopt-lj38-gmin-csm" class="best">
+   <td class="num">1</td>
+   <td class="text">gmin-csm</td>
+   <td class="text">GMIN</td>
+   <td class="num">6.42100e+03</td>
+   <td class="num">7.7000e+01</td>
+   <td class="num">2.6977e+04</td>
+   <td class="num">0</td>
+   <td class="text">Jacob Stevenson and David Wales</td>
+   <td class="text">06 Aug 2014</td>
+   </tr>
+   <tr id="globalopt-lj38-gmin-symmetrise">
+   <td class="num">2</td>
+   <td class="text">gmin-symmetrise</td>
+   <td class="text">GMIN</td>
+   <td class="num">2.27110e+04</td>
+   <td class="num">7.2000e+02</td>
+   <td class="num">1.2118e+05</td>
+   <td class="num">0</td>
+   <td class="text">Jacob Stevenson and David Wales</td>
+   <td class="text">06 Aug 2014</td>
+   </tr>
+   <tr id="globalopt-lj38-gmin-nosym">
+   <td class="num">3</td>
+   <td class="text">gmin-nosym</td>
+   <td class="text">GMIN</td>
+   <td class="num">2.65951e+05</td>
+   <td class="num">6.4570e+03</td>
+   <td class="num">1.1705e+06</td>
+   <td class="num">0</td>
+   <td class="text">Jacob Stevenson and David Wales</td>
+   <td class="text">06 Aug 2014</td>
+   </tr>
+   <tr id="globalopt-lj38-eon-basinhopping">
+   <td class="num">4</td>
+   <td class="text">eon-basinhopping</td>
+   <td class="text">Eon r2156</td>
+   <td class="num">508011</td>
+   <td class="num">4579</td>
+   <td class="num">1795901</td>
+   <td class="num"></td>
+   <td class="text">Sam Chill</td>
+   <td class="text">20 Aug 2013</td>
+   </tr>
+   <tr id="globalopt-lj38-pele-basinhopping">
+   <td class="num">5</td>
+   <td class="text">pele-basinhopping</td>
+   <td class="text">pele</td>
+   <td class="num">5.21595e+05</td>
+   <td class="num">9.4470e+03</td>
+   <td class="num">2.5339e+06</td>
+   <td class="num">0</td>
+   <td class="text">Jacob Stevenson</td>
+   <td class="text">29 Aug 2013</td>
+   </tr>
+   </tbody></table></div></section><section class="bench" id="lj75">
+   <h2>lj75</h2>
+   <dl class="bench-rule">
+   <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
+   </dl>
+   
+   <div class="bench-table"><table>
+   <caption>Archived scores, fewest force calls first.</caption>
+   <thead><tr>
+   <th class="num" scope="col"></th>
+   <th class="text" scope="col">Entry</th>
+   <th class="text" scope="col">Code</th>
+   <th class="num" scope="col">force calls</th>
+   <th class="num" scope="col">force calls max</th>
+   <th class="num" scope="col">force calls median</th>
+   <th class="num" scope="col">force calls min</th>
+   <th class="num" scope="col">nfailed</th>
+   <th class="text" scope="col">Contributor</th>
+   <th class="text" scope="col">Date</th>
+   </tr></thead><tbody>
+   <tr id="globalopt-lj75-gmin" class="best">
+   <td class="num">1</td>
+   <td class="text">gmin</td>
+   <td class="text">GMIN</td>
+   <td class="num">6.06920e+04</td>
+   <td class="num">3.1011e+05</td>
+   <td class="num">3.81180e+04</td>
+   <td class="num">1.1000e+03</td>
+   <td class="num">0</td>
+   <td class="text">David Wales</td>
+   <td class="text">09 Jan 2014</td>
+   </tr>
+   </tbody></table></div></section><section class="bench" id="lj98">
+   <h2>lj98</h2>
+   <dl class="bench-rule">
+   <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
+   </dl>
+   <figure class="bench-plot"><figcaption>basin hopping steps mean, same order as the table.</figcaption><div class="bench-plot-mount"></div><script type="application/json" class="bench-plot-data">{"metric": "basin_hopping_steps_mean", "scale": "log", "points": [{"id": "globalopt-lj98-gmin-symmetrise", "entry": "gmin-symmetrise", "code": "GMIN", "value": 1281.92, "best": true, "held": false}, {"id": "globalopt-lj98-gmin-nosym", "entry": "gmin-nosym", "code": "GMIN", "value": 43819.76, "best": false, "held": false}]}</script></figure>
+   <div class="bench-table"><table>
+   <caption>Archived scores.</caption>
+   <thead><tr>
+   <th class="num" scope="col"></th>
+   <th class="text" scope="col">Entry</th>
+   <th class="text" scope="col">Code</th>
+   <th class="num" scope="col">basin hopping steps mean</th>
+   <th class="num" scope="col">basin hopping steps stddev</th>
+   <th class="num" scope="col">cpu time mean</th>
+   <th class="num" scope="col">cpu time stddev</th>
+   <th class="num" scope="col">energy calls mean</th>
+   <th class="num" scope="col">energy calls stddev</th>
+   <th class="num" scope="col">nfailed</th>
+   <th class="text" scope="col">Contributor</th>
+   <th class="text" scope="col">Date</th>
+   </tr></thead><tbody>
+   <tr id="globalopt-lj98-gmin-symmetrise" class="best">
+   <td class="num">1</td>
+   <td class="text">gmin-symmetrise</td>
+   <td class="text">GMIN</td>
+   <td class="num">1.28192e+03</td>
+   <td class="num">1.06356e+03</td>
+   <td class="num">4.369e+01</td>
+   <td class="num">3.601e+01</td>
+   <td class="num">2.4953780e+05</td>
+   <td class="num">2.0578948e+05</td>
+   <td class="num">0</td>
+   <td class="text">David Wales</td>
+   <td class="text">03 Oct 2022</td>
+   </tr>
+   <tr id="globalopt-lj98-gmin-nosym">
+   <td class="num">2</td>
+   <td class="text">gmin-nosym</td>
+   <td class="text">GMIN</td>
+   <td class="num">4.381976e+04</td>
+   <td class="num">4.566034e+04</td>
+   <td class="num">1.19484e+03</td>
+   <td class="num">1.25446e+03</td>
+   <td class="num">5.98857238e+07</td>
+   <td class="num">6.21561817e+07</td>
+   <td class="num">0</td>
+   <td class="text">David Wales</td>
+   <td class="text">03 Oct 2022</td>
+   </tr>
+   </tbody></table></div></section><section class="bench" id="tip4p10">
+   <h2>tip4p10</h2>
+   <dl class="bench-rule">
+   <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
+   </dl>
+   <figure class="bench-plot"><figcaption>force calls, same order as the table.</figcaption><div class="bench-plot-mount"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "globalopt-tip4p10-gmin-tbp", "entry": "gmin-tbp", "code": "GMIN", "value": 16099.0, "best": true, "held": false}, {"id": "globalopt-tip4p10-gmin", "entry": "gmin", "code": "GMIN", "value": 16236.0, "best": false, "held": false}]}</script></figure>
+   <div class="bench-table"><table>
+   <caption>Archived scores, fewest force calls first.</caption>
+   <thead><tr>
+   <th class="num" scope="col"></th>
+   <th class="text" scope="col">Entry</th>
+   <th class="text" scope="col">Code</th>
+   <th class="num" scope="col">force calls</th>
+   <th class="num" scope="col">force calls max</th>
+   <th class="num" scope="col">force calls median</th>
+   <th class="num" scope="col">force calls min</th>
+   <th class="num" scope="col">nfailed</th>
+   <th class="text" scope="col">Contributor</th>
+   <th class="text" scope="col">Date</th>
+   </tr></thead><tbody>
+   <tr id="globalopt-tip4p10-gmin-tbp" class="best">
+   <td class="num">1</td>
+   <td class="text">gmin-tbp</td>
+   <td class="text">GMIN</td>
+   <td class="num">1.60990e+04</td>
+   <td class="num">1.4512e+05</td>
+   <td class="num">1.13870e+04</td>
+   <td class="num">1.2100e+02</td>
+   <td class="num">0</td>
+   <td class="text">James Farrell</td>
+   <td class="text">05 May 2014</td>
+   </tr>
+   <tr id="globalopt-tip4p10-gmin">
+   <td class="num">2</td>
+   <td class="text">gmin</td>
+   <td class="text">GMIN</td>
+   <td class="num">1.62360e+04</td>
+   <td class="num">1.4836e+05</td>
+   <td class="num">1.14440e+04</td>
+   <td class="num">1.2100e+02</td>
+   <td class="num">0</td>
+   <td class="text">James Farrell</td>
+   <td class="text">05 May 2014</td>
+   </tr>
+   </tbody></table></div></section><section class="bench" id="tip4p15">
+   <h2>tip4p15</h2>
+   <dl class="bench-rule">
+   <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
+   </dl>
+   <figure class="bench-plot"><figcaption>force calls, same order as the table.</figcaption><div class="bench-plot-mount"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "globalopt-tip4p15-gmin-tbp", "entry": "gmin-tbp", "code": "GMIN", "value": 625362.0, "best": true, "held": false}, {"id": "globalopt-tip4p15-gmin", "entry": "gmin", "code": "GMIN", "value": 670645.0, "best": false, "held": false}]}</script></figure>
+   <div class="bench-table"><table>
+   <caption>Archived scores, fewest force calls first.</caption>
+   <thead><tr>
+   <th class="num" scope="col"></th>
+   <th class="text" scope="col">Entry</th>
+   <th class="text" scope="col">Code</th>
+   <th class="num" scope="col">force calls</th>
+   <th class="num" scope="col">force calls max</th>
+   <th class="num" scope="col">force calls median</th>
+   <th class="num" scope="col">force calls min</th>
+   <th class="num" scope="col">nfailed</th>
+   <th class="text" scope="col">Contributor</th>
+   <th class="text" scope="col">Date</th>
+   </tr></thead><tbody>
+   <tr id="globalopt-tip4p15-gmin-tbp" class="best">
+   <td class="num">1</td>
+   <td class="text">gmin-tbp</td>
+   <td class="text">GMIN</td>
+   <td class="num">6.25362e+05</td>
+   <td class="num">6.1769e+06</td>
+   <td class="num">4.16929e+05</td>
+   <td class="num">2.3450e+03</td>
+   <td class="num">0</td>
+   <td class="text">James Farrell</td>
+   <td class="text">05 May 2014</td>
+   </tr>
+   <tr id="globalopt-tip4p15-gmin">
+   <td class="num">2</td>
+   <td class="text">gmin</td>
+   <td class="text">GMIN</td>
+   <td class="num">6.70645e+05</td>
+   <td class="num">5.0265e+06</td>
+   <td class="num">4.90919e+05</td>
+   <td class="num">4.5490e+03</td>
+   <td class="num">0</td>
+   <td class="text">James Farrell</td>
+   <td class="text">05 May 2014</td>
+   </tr>
+   </tbody></table></div></section><section class="bench" id="tip4p20">
+   <h2>tip4p20</h2>
+   <dl class="bench-rule">
+   <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
+   </dl>
+   <figure class="bench-plot"><figcaption>force calls, same order as the table.</figcaption><div class="bench-plot-mount"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "globalopt-tip4p20-gmin-tbp", "entry": "gmin-tbp", "code": "GMIN", "value": 25566700.0, "best": true, "held": false}, {"id": "globalopt-tip4p20-gmin", "entry": "gmin", "code": "GMIN", "value": 28596700.0, "best": false, "held": false}]}</script></figure>
+   <div class="bench-table"><table>
+   <caption>Archived scores, fewest force calls first.</caption>
+   <thead><tr>
+   <th class="num" scope="col"></th>
+   <th class="text" scope="col">Entry</th>
+   <th class="text" scope="col">Code</th>
+   <th class="num" scope="col">force calls</th>
+   <th class="num" scope="col">force calls max</th>
+   <th class="num" scope="col">force calls median</th>
+   <th class="num" scope="col">force calls min</th>
+   <th class="num" scope="col">nfailed</th>
+   <th class="text" scope="col">Contributor</th>
+   <th class="text" scope="col">Date</th>
+   </tr></thead><tbody>
+   <tr id="globalopt-tip4p20-gmin-tbp" class="best">
+   <td class="num">1</td>
+   <td class="text">gmin-tbp</td>
+   <td class="text">GMIN</td>
+   <td class="num">2.55667e+07</td>
+   <td class="num">1.4340e+08</td>
+   <td class="num">1.81821e+07</td>
+   <td class="num">5.9734e+05</td>
+   <td class="num">0</td>
+   <td class="text">James Farrell</td>
+   <td class="text">09 May 2014</td>
+   </tr>
+   <tr id="globalopt-tip4p20-gmin">
+   <td class="num">2</td>
+   <td class="text">gmin</td>
+   <td class="text">GMIN</td>
+   <td class="num">2.85967e+07</td>
+   <td class="num">1.4191e+08</td>
+   <td class="num">1.94671e+07</td>
+   <td class="num">4.4115e+05</td>
+   <td class="num">0</td>
+   <td class="text">James Farrell</td>
+   <td class="text">09 May 2014</td>
+   </tr>
+   </tbody></table></div></section>
 #+end_export

@@ -11,6 +11,8 @@ The table on this page is one thousand Lennard-Jones 38 minimizations.
 A run in the archive counts as finished when it stops under 10000 force
 calls.
 A new run also has to bring the norm of the force to 0.01.
+The bars are those force-call counts.
+The table under them is the record.
 
 #+INCLUDE: "../include/featured.org"
 

@@ -4,5 +4,186 @@
 #+begin_export rst
 .. raw:: html
 
-   <section class="bench" id="Al"><h2>Al</h2><dl class="bench-rule"><dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd></dl><table><caption>Archived scores, fewest barrier force calls first.</caption><thead><tr><th class="num" scope="col"></th><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="num" scope="col">barrier force calls</th><th class="num" scope="col">barrier jobs</th><th class="num" scope="col">rate force calls</th><th class="num" scope="col">rate jobs</th><th class="text" scope="col">Contributor</th><th class="text" scope="col">Date</th></tr></thead><tbody><tr class="best"><td class="num">1</td><td class="text">eon-dimer-cg2</td><td class="text">Eon r2006</td><td class="num">2.107e+04</td><td class="num">46</td><td class="num">7.663e+05</td><td class="num">1671</td><td class="text">Penghao Xiao</td><td class="text">29 Jan 2013</td></tr><tr><td class="num">2</td><td class="text">eon-dimer-cg</td><td class="text">Eon r2006</td><td class="num">2.887e+04</td><td class="num">48</td><td class="num">8.979e+05</td><td class="num">1511</td><td class="text">Penghao Xiao</td><td class="text">28 Jan 2013</td></tr></tbody></table></section><section class="bench" id="Pt"><h2>Pt</h2><dl class="bench-rule"><dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd></dl><table><caption>Archived scores, fewest barrier force calls first.</caption><thead><tr><th class="num" scope="col"></th><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="num" scope="col">barrier force calls</th><th class="num" scope="col">barrier jobs</th><th class="num" scope="col">rate force calls</th><th class="num" scope="col">rate jobs</th><th class="text" scope="col">Contributor</th><th class="text" scope="col">Date</th></tr></thead><tbody><tr class="best"><td class="num">1</td><td class="text">quench_dimer-qm</td><td class="text">TSASE</td><td class="num">2.932e+05</td><td class="num">100</td><td class="num">1.455e+05</td><td class="num">49</td><td class="text">Penghao Xiao</td><td class="text">28 Jan 2013</td></tr><tr><td class="num">2</td><td class="text">eon-dimer-cg</td><td class="text">Eon r2006</td><td class="num">4.960e+05</td><td class="num">1050</td><td class="num">2.563e+04</td><td class="num">54</td><td class="text">Penghao Xiao</td><td class="text">28 Jan 2013</td></tr><tr><td class="num">3</td><td class="text">eon-lanczos-cg2</td><td class="text">Eon r2006</td><td class="num">6.530e+05</td><td class="num">1361</td><td class="num">2.541e+04</td><td class="num">52</td><td class="text">Penghao Xiao</td><td class="text">29 Jan 2013</td></tr><tr><td class="num">4</td><td class="text">eon-lanczos-cg</td><td class="text">Eon r2006</td><td class="num">6.737e+05</td><td class="num">1419</td><td class="num">2.586e+04</td><td class="num">54</td><td class="text">Penghao Xiao</td><td class="text">28 Jan 2013</td></tr><tr><td class="num">5</td><td class="text">eon-dimer-cg2</td><td class="text">Eon r2006</td><td class="num">7.271e+05</td><td class="num">1478</td><td class="num">2.720e+04</td><td class="num">55</td><td class="text">Penghao Xiao</td><td class="text">29 Jan 2013</td></tr><tr><td class="num">6</td><td class="text">eon-dimer-lbfgs</td><td class="text">Eon r2006</td><td class="num">7.788e+05</td><td class="num">1101</td><td class="num">4.705e+04</td><td class="num">66</td><td class="text">Penghao Xiao</td><td class="text">28 Jan 2013</td></tr><tr><td class="num">7</td><td class="text">eon-dimer-lbfgs2</td><td class="text">Eon r2006</td><td class="num">1.122e+06</td><td class="num">1626</td><td class="num">4.703e+04</td><td class="num">68</td><td class="text">Penghao Xiao</td><td class="text">29 Jan 2013</td></tr><tr><td class="num">8</td><td class="text">eon-lanczos-lbfgs</td><td class="text">Eon r2006</td><td class="num">1.284e+06</td><td class="num">1827</td><td class="num">4.524e+04</td><td class="num">64</td><td class="text">Penghao Xiao</td><td class="text">29 Jan 2013</td></tr><tr><td class="num">9</td><td class="text">eon-lanczos-lbfgs2</td><td class="text">Eon r2006</td><td class="num">1.497e+06</td><td class="num">2047</td><td class="num">4.371e+04</td><td class="num">59</td><td class="text">Penghao Xiao</td><td class="text">29 Jan 2013</td></tr><tr><td class="num">10</td><td class="text">tsase-dimer-qm</td><td class="text">TSASE</td><td class="num">3.239e+06</td><td class="num">1170</td><td class="num">2.627e+05</td><td class="num">95</td><td class="text">Penghao Xiao</td><td class="text">28 Jan 2013</td></tr><tr><td class="num">11</td><td class="text">alpha_dimer-qm</td><td class="text">TSASE</td><td class="num">1.908e+07</td><td class="num">6192</td><td class="num">1.509e+05</td><td class="num">49</td><td class="text">Penghao Xiao</td><td class="text">28 Jan 2013</td></tr></tbody></table></section>
+   <section class="bench" id="Al">
+   <h2>Al</h2>
+   <dl class="bench-rule">
+   <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
+   </dl>
+   <figure class="bench-plot"><figcaption>barrier force calls, same order as the table.</figcaption><div class="bench-plot-mount"></div><script type="application/json" class="bench-plot-data">{"metric": "barrier_force_calls", "scale": "linear", "points": [{"id": "htst-al-eon-dimer-cg2", "entry": "eon-dimer-cg2", "code": "Eon r2006", "value": 21070.0, "best": true, "held": false}, {"id": "htst-al-eon-dimer-cg", "entry": "eon-dimer-cg", "code": "Eon r2006", "value": 28870.0, "best": false, "held": false}]}</script></figure>
+   <div class="bench-table"><table>
+   <caption>Archived scores, fewest barrier force calls first.</caption>
+   <thead><tr>
+   <th class="num" scope="col"></th>
+   <th class="text" scope="col">Entry</th>
+   <th class="text" scope="col">Code</th>
+   <th class="num" scope="col">barrier force calls</th>
+   <th class="num" scope="col">barrier jobs</th>
+   <th class="num" scope="col">rate force calls</th>
+   <th class="num" scope="col">rate jobs</th>
+   <th class="text" scope="col">Contributor</th>
+   <th class="text" scope="col">Date</th>
+   </tr></thead><tbody>
+   <tr id="htst-al-eon-dimer-cg2" class="best">
+   <td class="num">1</td>
+   <td class="text">eon-dimer-cg2</td>
+   <td class="text">Eon r2006</td>
+   <td class="num">2.107e+04</td>
+   <td class="num">46</td>
+   <td class="num">7.663e+05</td>
+   <td class="num">1671</td>
+   <td class="text">Penghao Xiao</td>
+   <td class="text">29 Jan 2013</td>
+   </tr>
+   <tr id="htst-al-eon-dimer-cg">
+   <td class="num">2</td>
+   <td class="text">eon-dimer-cg</td>
+   <td class="text">Eon r2006</td>
+   <td class="num">2.887e+04</td>
+   <td class="num">48</td>
+   <td class="num">8.979e+05</td>
+   <td class="num">1511</td>
+   <td class="text">Penghao Xiao</td>
+   <td class="text">28 Jan 2013</td>
+   </tr>
+   </tbody></table></div></section><section class="bench" id="Pt">
+   <h2>Pt</h2>
+   <dl class="bench-rule">
+   <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
+   </dl>
+   <figure class="bench-plot"><figcaption>barrier force calls, same order as the table.</figcaption><div class="bench-plot-mount"></div><script type="application/json" class="bench-plot-data">{"metric": "barrier_force_calls", "scale": "log", "points": [{"id": "htst-pt-quench-dimer-qm", "entry": "quench_dimer-qm", "code": "TSASE", "value": 293200.0, "best": true, "held": false}, {"id": "htst-pt-eon-dimer-cg", "entry": "eon-dimer-cg", "code": "Eon r2006", "value": 496000.0, "best": false, "held": false}, {"id": "htst-pt-eon-lanczos-cg2", "entry": "eon-lanczos-cg2", "code": "Eon r2006", "value": 653000.0, "best": false, "held": false}, {"id": "htst-pt-eon-lanczos-cg", "entry": "eon-lanczos-cg", "code": "Eon r2006", "value": 673700.0, "best": false, "held": false}, {"id": "htst-pt-eon-dimer-cg2", "entry": "eon-dimer-cg2", "code": "Eon r2006", "value": 727100.0, "best": false, "held": false}, {"id": "htst-pt-eon-dimer-lbfgs", "entry": "eon-dimer-lbfgs", "code": "Eon r2006", "value": 778800.0, "best": false, "held": false}, {"id": "htst-pt-eon-dimer-lbfgs2", "entry": "eon-dimer-lbfgs2", "code": "Eon r2006", "value": 1122000.0, "best": false, "held": false}, {"id": "htst-pt-eon-lanczos-lbfgs", "entry": "eon-lanczos-lbfgs", "code": "Eon r2006", "value": 1284000.0, "best": false, "held": false}, {"id": "htst-pt-eon-lanczos-lbfgs2", "entry": "eon-lanczos-lbfgs2", "code": "Eon r2006", "value": 1497000.0, "best": false, "held": false}, {"id": "htst-pt-tsase-dimer-qm", "entry": "tsase-dimer-qm", "code": "TSASE", "value": 3239000.0, "best": false, "held": false}, {"id": "htst-pt-alpha-dimer-qm", "entry": "alpha_dimer-qm", "code": "TSASE", "value": 19080000.0, "best": false, "held": false}]}</script></figure>
+   <div class="bench-table"><table>
+   <caption>Archived scores, fewest barrier force calls first.</caption>
+   <thead><tr>
+   <th class="num" scope="col"></th>
+   <th class="text" scope="col">Entry</th>
+   <th class="text" scope="col">Code</th>
+   <th class="num" scope="col">barrier force calls</th>
+   <th class="num" scope="col">barrier jobs</th>
+   <th class="num" scope="col">rate force calls</th>
+   <th class="num" scope="col">rate jobs</th>
+   <th class="text" scope="col">Contributor</th>
+   <th class="text" scope="col">Date</th>
+   </tr></thead><tbody>
+   <tr id="htst-pt-quench-dimer-qm" class="best">
+   <td class="num">1</td>
+   <td class="text">quench_dimer-qm</td>
+   <td class="text">TSASE</td>
+   <td class="num">2.932e+05</td>
+   <td class="num">100</td>
+   <td class="num">1.455e+05</td>
+   <td class="num">49</td>
+   <td class="text">Penghao Xiao</td>
+   <td class="text">28 Jan 2013</td>
+   </tr>
+   <tr id="htst-pt-eon-dimer-cg">
+   <td class="num">2</td>
+   <td class="text">eon-dimer-cg</td>
+   <td class="text">Eon r2006</td>
+   <td class="num">4.960e+05</td>
+   <td class="num">1050</td>
+   <td class="num">2.563e+04</td>
+   <td class="num">54</td>
+   <td class="text">Penghao Xiao</td>
+   <td class="text">28 Jan 2013</td>
+   </tr>
+   <tr id="htst-pt-eon-lanczos-cg2">
+   <td class="num">3</td>
+   <td class="text">eon-lanczos-cg2</td>
+   <td class="text">Eon r2006</td>
+   <td class="num">6.530e+05</td>
+   <td class="num">1361</td>
+   <td class="num">2.541e+04</td>
+   <td class="num">52</td>
+   <td class="text">Penghao Xiao</td>
+   <td class="text">29 Jan 2013</td>
+   </tr>
+   <tr id="htst-pt-eon-lanczos-cg">
+   <td class="num">4</td>
+   <td class="text">eon-lanczos-cg</td>
+   <td class="text">Eon r2006</td>
+   <td class="num">6.737e+05</td>
+   <td class="num">1419</td>
+   <td class="num">2.586e+04</td>
+   <td class="num">54</td>
+   <td class="text">Penghao Xiao</td>
+   <td class="text">28 Jan 2013</td>
+   </tr>
+   <tr id="htst-pt-eon-dimer-cg2">
+   <td class="num">5</td>
+   <td class="text">eon-dimer-cg2</td>
+   <td class="text">Eon r2006</td>
+   <td class="num">7.271e+05</td>
+   <td class="num">1478</td>
+   <td class="num">2.720e+04</td>
+   <td class="num">55</td>
+   <td class="text">Penghao Xiao</td>
+   <td class="text">29 Jan 2013</td>
+   </tr>
+   <tr id="htst-pt-eon-dimer-lbfgs">
+   <td class="num">6</td>
+   <td class="text">eon-dimer-lbfgs</td>
+   <td class="text">Eon r2006</td>
+   <td class="num">7.788e+05</td>
+   <td class="num">1101</td>
+   <td class="num">4.705e+04</td>
+   <td class="num">66</td>
+   <td class="text">Penghao Xiao</td>
+   <td class="text">28 Jan 2013</td>
+   </tr>
+   <tr id="htst-pt-eon-dimer-lbfgs2">
+   <td class="num">7</td>
+   <td class="text">eon-dimer-lbfgs2</td>
+   <td class="text">Eon r2006</td>
+   <td class="num">1.122e+06</td>
+   <td class="num">1626</td>
+   <td class="num">4.703e+04</td>
+   <td class="num">68</td>
+   <td class="text">Penghao Xiao</td>
+   <td class="text">29 Jan 2013</td>
+   </tr>
+   <tr id="htst-pt-eon-lanczos-lbfgs">
+   <td class="num">8</td>
+   <td class="text">eon-lanczos-lbfgs</td>
+   <td class="text">Eon r2006</td>
+   <td class="num">1.284e+06</td>
+   <td class="num">1827</td>
+   <td class="num">4.524e+04</td>
+   <td class="num">64</td>
+   <td class="text">Penghao Xiao</td>
+   <td class="text">29 Jan 2013</td>
+   </tr>
+   <tr id="htst-pt-eon-lanczos-lbfgs2">
+   <td class="num">9</td>
+   <td class="text">eon-lanczos-lbfgs2</td>
+   <td class="text">Eon r2006</td>
+   <td class="num">1.497e+06</td>
+   <td class="num">2047</td>
+   <td class="num">4.371e+04</td>
+   <td class="num">59</td>
+   <td class="text">Penghao Xiao</td>
+   <td class="text">29 Jan 2013</td>
+   </tr>
+   <tr id="htst-pt-tsase-dimer-qm">
+   <td class="num">10</td>
+   <td class="text">tsase-dimer-qm</td>
+   <td class="text">TSASE</td>
+   <td class="num">3.239e+06</td>
+   <td class="num">1170</td>
+   <td class="num">2.627e+05</td>
+   <td class="num">95</td>
+   <td class="text">Penghao Xiao</td>
+   <td class="text">28 Jan 2013</td>
+   </tr>
+   <tr id="htst-pt-alpha-dimer-qm">
+   <td class="num">11</td>
+   <td class="text">alpha_dimer-qm</td>
+   <td class="text">TSASE</td>
+   <td class="num">1.908e+07</td>
+   <td class="num">6192</td>
+   <td class="num">1.509e+05</td>
+   <td class="num">49</td>
+   <td class="text">Penghao Xiao</td>
+   <td class="text">28 Jan 2013</td>
+   </tr>
+   </tbody></table></div></section>
 #+end_export

@@ -124,30 +124,11 @@ def _rows_for(problem: dict, oracle: list[dict]) -> list[dict]:
     return sorted(rows, key=sort_key)
 
 
-def problem_html(problem: dict, oracle: list[dict], smoke_note: str = "") -> str:
-    """One problem: the stopping rule, then the rank."""
-    canonical_rows = []
-    for row in _rows_for(problem, oracle):
-        fields, _renamed = normalize(row["fields"])
-        canonical_rows.append((row, fields))
-    metrics = list(problem["metrics"]["required"])
-    primary = _primary(problem)
-    best = None
-    if primary:
-        values = [_float(fields.get(primary, "")) for _row, fields in canonical_rows]
-        numbers = [value for value in values if value is not None]
-        best = min(numbers) if numbers else None
+def _slug(text: str) -> str:
+    return "".join(ch.lower() if ch.isalnum() else "-" for ch in text).strip("-")
 
-    parts = ["<section class=\"bench\" id=\"" + html.escape(problem["problem"]) + "\">"]
-    parts.append(f"<h2>{html.escape(str(problem.get('title') or problem['problem']))}</h2>")
-    bits = _bits(problem)
-    if bits:
-        parts.append("<dl class=\"bench-rule\">")
-        for label, text in bits:
-            parts.append(f"<dt>{html.escape(label)}</dt><dd>{html.escape(text)}</dd>")
-        parts.append("</dl>")
-    if smoke_note:
-        parts.append(f"<p class=\"bench-smoke\">{html.escape(smoke_note)}</p>")
+
+def _caption(primary: str | None) -> str:
     captions = {
         "force_calls": "Archived scores, fewest force calls first.",
         "mean_epoch": "Archived scores, fewest epochs first.",
@@ -156,41 +137,125 @@ def problem_html(problem: dict, oracle: list[dict], smoke_note: str = "") -> str
         "barrier_force_calls": "Archived scores, fewest barrier force calls first.",
         "true_rate": "Archived scores, lowest rate first.",
     }
-    parts.append("<table>")
-    parts.append(f"<caption>{html.escape(captions.get(primary or '', 'Archived scores.'))}</caption>")
-    headers = ["", "Entry", "Code", *metrics, "Contributor", "Date"]
-    parts.append("<thead><tr>")
-    for index, header in enumerate(headers):
-        kind = "num" if index == 0 or header in metrics else "text"
-        parts.append(f"<th class=\"{kind}\" scope=\"col\">{html.escape(header.replace('_', ' '))}</th>")
-    parts.append("</tr></thead><tbody>")
+    return captions.get(primary or "", "Archived scores.")
+
+
+def _plot(points: list[dict], primary: str | None) -> str:
+    numbers = [point["value"] for point in points if point["value"] is not None and point["value"] > 0]
+    if len(numbers) < 2:
+        return ""
+    scale = "linear"
+    if numbers and min(numbers) > 0 and max(numbers) / min(numbers) >= 8:
+        scale = "log"
+    if any(point["value"] is not None and point["value"] <= 0 for point in points):
+        scale = "linear"
+    payload = {
+        "metric": primary or "",
+        "scale": scale,
+        "points": [
+            {
+                "id": point["id"],
+                "entry": point["entry"],
+                "code": point["code"],
+                "value": point["value"],
+                "best": point["best"],
+                "held": point["held"],
+            }
+            for point in points
+            if point["value"] is not None
+        ],
+    }
+    import json
+
+    data = json.dumps(payload, ensure_ascii=True)
+    label = (primary or "score").replace("_", " ")
+    return (
+        '<figure class="bench-plot">'
+        f"<figcaption>{html.escape(label)}, same order as the table.</figcaption>"
+        '<div class="bench-plot-mount"></div>'
+        f'<script type="application/json" class="bench-plot-data">{data}</script>'
+        "</figure>"
+    )
+
+
+def problem_html(problem: dict, oracle: list[dict], smoke_note: str = "") -> str:
+    """One problem: the stopping rule, the bar chart, then the rank."""
+    canonical_rows = []
+    for row in _rows_for(problem, oracle):
+        fields, _renamed = normalize(row["fields"])
+        canonical_rows.append((row, fields))
+    metrics = list(problem["metrics"]["required"])
+    primary = _primary(problem)
+    best = None
+    if primary:
+        numbers = [
+            value
+            for value in (_float(fields.get(primary, "")) for _row, fields in canonical_rows)
+            if value is not None
+        ]
+        best = min(numbers) if numbers else None
+
+    lines = [f'<section class="bench" id="{html.escape(problem["problem"])}">']
+    lines.append(f"<h2>{html.escape(str(problem.get('title') or problem['problem']))}</h2>")
+    bits = _bits(problem)
+    if bits:
+        lines.append('<dl class="bench-rule">')
+        for label, text in bits:
+            lines.append(f"<dt>{html.escape(label)}</dt><dd>{html.escape(text)}</dd>")
+        lines.append("</dl>")
+    if smoke_note:
+        lines.append(f'<p class="bench-smoke">{html.escape(smoke_note)}</p>')
+
+    prepared = []
     for rank, (row, fields) in enumerate(canonical_rows, 1):
         value = _float(fields.get(primary, "")) if primary else None
-        classes = []
-        if best is not None and value == best:
-            classes.append("best")
-        if _held(fields):
-            classes.append("held")
-        class_attr = f" class=\"{' '.join(classes)}\"" if classes else ""
-        entry = row["entry"]
-        if _held(fields):
-            entry = f"{entry} (held out of the original table)"
+        held = _held(fields)
         code = fields.get("code", "")
         version = fields.get("code_version", "")
         if version:
             code = f"{code} {version}".strip()
-        cells = [str(rank), entry, code]
+        row_id = _slug(f"{problem['id']}-{row['entry']}")
+        prepared.append(
+            {
+                "id": row_id,
+                "rank": rank,
+                "entry": row["entry"],
+                "label": f"{row['entry']} (held out of the original table)" if held else row["entry"],
+                "code": code,
+                "fields": fields,
+                "value": value,
+                "best": best is not None and value == best,
+                "held": held,
+            }
+        )
+    lines.append(_plot(prepared, primary))
+    lines.append(f"<div class=\"bench-table\"><table>")
+    lines.append(f"<caption>{html.escape(_caption(primary))}</caption>")
+    headers = ["", "Entry", "Code", *metrics, "Contributor", "Date"]
+    lines.append("<thead><tr>")
+    for index, header in enumerate(headers):
+        kind = "num" if index == 0 or header in metrics else "text"
+        lines.append(f'<th class="{kind}" scope="col">{html.escape(header.replace("_", " "))}</th>')
+    lines.append("</tr></thead><tbody>")
+    for point in prepared:
+        classes = []
+        if point["best"]:
+            classes.append("best")
+        if point["held"]:
+            classes.append("held")
+        class_attr = f' class="{" ".join(classes)}"' if classes else ""
+        cells = [str(point["rank"]), point["label"], point["code"]]
         for metric in metrics:
-            cells.append(fields.get(metric, ""))
-        cells.append(fields.get("contributor", ""))
-        cells.append(fields.get("date", ""))
-        parts.append(f"<tr{class_attr}>")
+            cells.append(point["fields"].get(metric, ""))
+        cells.append(point["fields"].get("contributor", ""))
+        cells.append(point["fields"].get("date", ""))
+        lines.append(f'<tr id="{html.escape(point["id"])}"{class_attr}>')
         for index, cell in enumerate(cells):
             kind = "num" if index == 0 or headers[index] in metrics else "text"
-            parts.append(f"<td class=\"{kind}\">{html.escape(cell)}</td>")
-        parts.append("</tr>")
-    parts.append("</tbody></table></section>")
-    return "".join(parts)
+            lines.append(f'<td class="{kind}">{html.escape(cell)}</td>')
+        lines.append("</tr>")
+    lines.append("</tbody></table></div></section>")
+    return "\n".join(lines)
 
 
 def _raw(fragment: str) -> str:
