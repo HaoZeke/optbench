@@ -9,9 +9,10 @@ extensions = []
 exclude_patterns = ["_build"]
 
 html_theme = "shibuya"
+templates_path = ["_templates"]
 html_static_path = ["_static"]
 html_css_files = ["optbench.css"]
-html_js_files = ["d3.min.js", "bench.js"]
+html_js_files = ["bench.js"]
 html_theme_options = {
     "accent_color": "blue",
     "github_url": "https://github.com/lode-org/optbench",

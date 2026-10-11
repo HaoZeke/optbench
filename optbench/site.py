@@ -169,10 +169,11 @@ def _plot(points: list[dict], primary: str | None) -> str:
 
     data = json.dumps(payload, ensure_ascii=True)
     label = (primary or "score").replace("_", " ")
+    rows = len(payload["points"])
     return (
         '<figure class="bench-plot">'
         f"<figcaption>{html.escape(label)}, same order as the table.</figcaption>"
-        '<div class="bench-plot-mount"></div>'
+        f'<div class="bench-plot-mount" style="--bench-rows:{rows}"></div>'
         f'<script type="application/json" class="bench-plot-data">{data}</script>'
         "</figure>"
     )
@@ -229,8 +230,7 @@ def problem_html(problem: dict, oracle: list[dict], smoke_note: str = "") -> str
                 "current": bool(row.get("current")),
             }
         )
-    lines.append(_plot(prepared, primary))
-    lines.append(f"<div class=\"bench-table\"><table>")
+    lines.append('<div class="bench-table"><table>')
     lines.append(f"<caption>{html.escape(_caption(primary))}</caption>")
     headers = ["", "Entry", "Code", *metrics, "Contributor", "Date"]
     lines.append("<thead><tr>")
@@ -257,7 +257,9 @@ def problem_html(problem: dict, oracle: list[dict], smoke_note: str = "") -> str
             kind = "num" if index == 0 or headers[index] in metrics else "text"
             lines.append(f'<td class="{kind}">{html.escape(cell)}</td>')
         lines.append("</tr>")
-    lines.append("</tbody></table></div></section>")
+    lines.append("</tbody></table></div>")
+    lines.append(_plot(prepared, primary))
+    lines.append("</section>")
     return "\n".join(lines)
 
 
@@ -290,6 +292,16 @@ def _sota_html(root: Path) -> str:
         '<section class="bench" id="sota">',
         "<h2>Lennard-Jones 38</h2>",
     ]
+    rule_path = root / "problems" / "minimization" / "lj38.toml"
+    if rule_path.is_file():
+        from .problems import load_problem
+
+        bits = _bits(load_problem(rule_path))
+        if bits:
+            lines.append('<dl class="bench-rule">')
+            for label, text in bits:
+                lines.append(f"<dt>{html.escape(label)}</dt><dd>{html.escape(text)}</dd>")
+            lines.append("</dl>")
     if not accepted:
         lines.append(
             "<p class=\"bench-smoke\">No run of a present source has been accepted. "
@@ -325,7 +337,6 @@ def _sota_html(root: Path) -> str:
         best = min(numbered) if numbered else None
         for point in points:
             point["best"] = best is not None and point["value"] == best
-        lines.append(_plot(points, "force_calls"))
         lines.append(
             "<table><caption>Present sources. Fewest mean force calls first.</caption>"
             "<thead><tr><th>Entry</th><th>Code</th><th class=\"num\">Mean</th>"
@@ -349,6 +360,7 @@ def _sota_html(root: Path) -> str:
                 )
             )
         lines.append("</tbody></table>")
+        lines.append(_plot(points, "force_calls"))
     lines.append("</section>")
     return "\n".join(lines)
 

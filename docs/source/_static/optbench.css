@@ -28,7 +28,12 @@
 }
 
 .bench-plot {
-  margin: 0 0 1.5rem;
+  margin: 1.5rem 0 0;
+}
+
+.bench-plot-mount {
+  height: calc(var(--bench-rows, 8) * 26px + 36px);
+  contain: layout paint;
 }
 
 .bench-plot figcaption {
@@ -39,7 +44,7 @@
 .bench-plot svg {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 
 .bench-plot .label,
@@ -56,6 +61,8 @@
 .bench-table {
   overflow-x: auto;
   max-width: 100%;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 32rem;
 }
 
 .bench table {

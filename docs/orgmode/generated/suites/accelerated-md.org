@@ -9,7 +9,6 @@
    <dl class="bench-rule">
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
-   
    <div class="bench-table"><table>
    <caption>Archived scores, lowest rate first.</caption>
    <thead><tr>
@@ -34,12 +33,13 @@
    <td class="text">Juliana Duncan</td>
    <td class="text">18 Oct 2012</td>
    </tr>
-   </tbody></table></div></section><section class="bench" id="standard_aladatom">
+   </tbody></table></div>
+   
+   </section><section class="bench" id="standard_aladatom">
    <h2>standard_aladatom</h2>
    <dl class="bench-rule">
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
-   
    <div class="bench-table"><table>
    <caption>Archived scores, lowest rate first.</caption>
    <thead><tr>
@@ -64,5 +64,7 @@
    <td class="text">Juliana Duncan</td>
    <td class="text">26 Oct 2012</td>
    </tr>
-   </tbody></table></div></section>
+   </tbody></table></div>
+   
+   </section>
 #+end_export

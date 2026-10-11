@@ -10,7 +10,6 @@
    <dt>Starts</dt><dd>100</dd>
    <dt>Note</dt><dd>The archived files record energies. They do not record force calls.</dd>
    </dl>
-   
    <div class="bench-table"><table>
    <caption>Archived scores, lowest energy first.</caption>
    <thead><tr>
@@ -43,12 +42,13 @@
    <td class="text">Sam Chill</td>
    <td class="text">21 May 2014</td>
    </tr>
-   </tbody></table></div></section><section class="bench" id="lj150">
+   </tbody></table></div>
+   
+   </section><section class="bench" id="lj150">
    <h2>lj150</h2>
    <dl class="bench-rule">
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
-   <figure class="bench-plot"><figcaption>basin hopping steps mean, same order as the table.</figcaption><div class="bench-plot-mount"></div><script type="application/json" class="bench-plot-data">{"metric": "basin_hopping_steps_mean", "scale": "linear", "points": [{"id": "globalopt-lj150-gmin-symmetrise", "entry": "gmin-symmetrise", "code": "GMIN", "value": 667.38, "best": true, "held": false}, {"id": "globalopt-lj150-gmin-nosym", "entry": "gmin-nosym", "code": "GMIN", "value": 3280.89, "best": false, "held": false}]}</script></figure>
    <div class="bench-table"><table>
    <caption>Archived scores.</caption>
    <thead><tr>
@@ -93,13 +93,14 @@
    <td class="text">David Wales</td>
    <td class="text">03 Oct 2022</td>
    </tr>
-   </tbody></table></div></section><section class="bench" id="lj38">
+   </tbody></table></div>
+   <figure class="bench-plot"><figcaption>basin hopping steps mean, same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "basin_hopping_steps_mean", "scale": "linear", "points": [{"id": "globalopt-lj150-gmin-symmetrise", "entry": "gmin-symmetrise", "code": "GMIN", "value": 667.38, "best": true, "held": false}, {"id": "globalopt-lj150-gmin-nosym", "entry": "gmin-nosym", "code": "GMIN", "value": 3280.89, "best": false, "held": false}]}</script></figure>
+   </section><section class="bench" id="lj38">
    <h2>Lennard-Jones 38 global minimum</h2>
    <dl class="bench-rule">
    <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
    <dt>Starts</dt><dd>100</dd>
    </dl>
-   <figure class="bench-plot"><figcaption>force calls, same order as the table.</figcaption><div class="bench-plot-mount"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "globalopt-lj38-gmin-csm", "entry": "gmin-csm", "code": "GMIN", "value": 6421.0, "best": true, "held": false}, {"id": "globalopt-lj38-gmin-symmetrise", "entry": "gmin-symmetrise", "code": "GMIN", "value": 22711.0, "best": false, "held": false}, {"id": "globalopt-lj38-gmin-nosym", "entry": "gmin-nosym", "code": "GMIN", "value": 265951.0, "best": false, "held": false}, {"id": "globalopt-lj38-eon-basinhopping", "entry": "eon-basinhopping", "code": "Eon r2156", "value": 508011.0, "best": false, "held": false}, {"id": "globalopt-lj38-pele-basinhopping", "entry": "pele-basinhopping", "code": "pele", "value": 521595.0, "best": false, "held": false}]}</script></figure>
    <div class="bench-table"><table>
    <caption>Archived scores, fewest force calls first.</caption>
    <thead><tr>
@@ -168,12 +169,13 @@
    <td class="text">Jacob Stevenson</td>
    <td class="text">29 Aug 2013</td>
    </tr>
-   </tbody></table></div></section><section class="bench" id="lj75">
+   </tbody></table></div>
+   <figure class="bench-plot"><figcaption>force calls, same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:5"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "globalopt-lj38-gmin-csm", "entry": "gmin-csm", "code": "GMIN", "value": 6421.0, "best": true, "held": false}, {"id": "globalopt-lj38-gmin-symmetrise", "entry": "gmin-symmetrise", "code": "GMIN", "value": 22711.0, "best": false, "held": false}, {"id": "globalopt-lj38-gmin-nosym", "entry": "gmin-nosym", "code": "GMIN", "value": 265951.0, "best": false, "held": false}, {"id": "globalopt-lj38-eon-basinhopping", "entry": "eon-basinhopping", "code": "Eon r2156", "value": 508011.0, "best": false, "held": false}, {"id": "globalopt-lj38-pele-basinhopping", "entry": "pele-basinhopping", "code": "pele", "value": 521595.0, "best": false, "held": false}]}</script></figure>
+   </section><section class="bench" id="lj75">
    <h2>lj75</h2>
    <dl class="bench-rule">
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
-   
    <div class="bench-table"><table>
    <caption>Archived scores, fewest force calls first.</caption>
    <thead><tr>
@@ -200,12 +202,13 @@
    <td class="text">David Wales</td>
    <td class="text">09 Jan 2014</td>
    </tr>
-   </tbody></table></div></section><section class="bench" id="lj98">
+   </tbody></table></div>
+   
+   </section><section class="bench" id="lj98">
    <h2>lj98</h2>
    <dl class="bench-rule">
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
-   <figure class="bench-plot"><figcaption>basin hopping steps mean, same order as the table.</figcaption><div class="bench-plot-mount"></div><script type="application/json" class="bench-plot-data">{"metric": "basin_hopping_steps_mean", "scale": "log", "points": [{"id": "globalopt-lj98-gmin-symmetrise", "entry": "gmin-symmetrise", "code": "GMIN", "value": 1281.92, "best": true, "held": false}, {"id": "globalopt-lj98-gmin-nosym", "entry": "gmin-nosym", "code": "GMIN", "value": 43819.76, "best": false, "held": false}]}</script></figure>
    <div class="bench-table"><table>
    <caption>Archived scores.</caption>
    <thead><tr>
@@ -250,12 +253,13 @@
    <td class="text">David Wales</td>
    <td class="text">03 Oct 2022</td>
    </tr>
-   </tbody></table></div></section><section class="bench" id="tip4p10">
+   </tbody></table></div>
+   <figure class="bench-plot"><figcaption>basin hopping steps mean, same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "basin_hopping_steps_mean", "scale": "log", "points": [{"id": "globalopt-lj98-gmin-symmetrise", "entry": "gmin-symmetrise", "code": "GMIN", "value": 1281.92, "best": true, "held": false}, {"id": "globalopt-lj98-gmin-nosym", "entry": "gmin-nosym", "code": "GMIN", "value": 43819.76, "best": false, "held": false}]}</script></figure>
+   </section><section class="bench" id="tip4p10">
    <h2>tip4p10</h2>
    <dl class="bench-rule">
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
-   <figure class="bench-plot"><figcaption>force calls, same order as the table.</figcaption><div class="bench-plot-mount"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "globalopt-tip4p10-gmin-tbp", "entry": "gmin-tbp", "code": "GMIN", "value": 16099.0, "best": true, "held": false}, {"id": "globalopt-tip4p10-gmin", "entry": "gmin", "code": "GMIN", "value": 16236.0, "best": false, "held": false}]}</script></figure>
    <div class="bench-table"><table>
    <caption>Archived scores, fewest force calls first.</caption>
    <thead><tr>
@@ -294,12 +298,13 @@
    <td class="text">James Farrell</td>
    <td class="text">05 May 2014</td>
    </tr>
-   </tbody></table></div></section><section class="bench" id="tip4p15">
+   </tbody></table></div>
+   <figure class="bench-plot"><figcaption>force calls, same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "globalopt-tip4p10-gmin-tbp", "entry": "gmin-tbp", "code": "GMIN", "value": 16099.0, "best": true, "held": false}, {"id": "globalopt-tip4p10-gmin", "entry": "gmin", "code": "GMIN", "value": 16236.0, "best": false, "held": false}]}</script></figure>
+   </section><section class="bench" id="tip4p15">
    <h2>tip4p15</h2>
    <dl class="bench-rule">
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
-   <figure class="bench-plot"><figcaption>force calls, same order as the table.</figcaption><div class="bench-plot-mount"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "globalopt-tip4p15-gmin-tbp", "entry": "gmin-tbp", "code": "GMIN", "value": 625362.0, "best": true, "held": false}, {"id": "globalopt-tip4p15-gmin", "entry": "gmin", "code": "GMIN", "value": 670645.0, "best": false, "held": false}]}</script></figure>
    <div class="bench-table"><table>
    <caption>Archived scores, fewest force calls first.</caption>
    <thead><tr>
@@ -338,12 +343,13 @@
    <td class="text">James Farrell</td>
    <td class="text">05 May 2014</td>
    </tr>
-   </tbody></table></div></section><section class="bench" id="tip4p20">
+   </tbody></table></div>
+   <figure class="bench-plot"><figcaption>force calls, same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "globalopt-tip4p15-gmin-tbp", "entry": "gmin-tbp", "code": "GMIN", "value": 625362.0, "best": true, "held": false}, {"id": "globalopt-tip4p15-gmin", "entry": "gmin", "code": "GMIN", "value": 670645.0, "best": false, "held": false}]}</script></figure>
+   </section><section class="bench" id="tip4p20">
    <h2>tip4p20</h2>
    <dl class="bench-rule">
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
-   <figure class="bench-plot"><figcaption>force calls, same order as the table.</figcaption><div class="bench-plot-mount"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "globalopt-tip4p20-gmin-tbp", "entry": "gmin-tbp", "code": "GMIN", "value": 25566700.0, "best": true, "held": false}, {"id": "globalopt-tip4p20-gmin", "entry": "gmin", "code": "GMIN", "value": 28596700.0, "best": false, "held": false}]}</script></figure>
    <div class="bench-table"><table>
    <caption>Archived scores, fewest force calls first.</caption>
    <thead><tr>
@@ -382,5 +388,7 @@
    <td class="text">James Farrell</td>
    <td class="text">09 May 2014</td>
    </tr>
-   </tbody></table></div></section>
+   </tbody></table></div>
+   <figure class="bench-plot"><figcaption>force calls, same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "globalopt-tip4p20-gmin-tbp", "entry": "gmin-tbp", "code": "GMIN", "value": 25566700.0, "best": true, "held": false}, {"id": "globalopt-tip4p20-gmin", "entry": "gmin", "code": "GMIN", "value": 28596700.0, "best": false, "held": false}]}</script></figure>
+   </section>
 #+end_export

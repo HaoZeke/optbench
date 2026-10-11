@@ -9,7 +9,6 @@
    <dl class="bench-rule">
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
-   <figure class="bench-plot"><figcaption>mean epoch, same order as the table.</figcaption><div class="bench-plot-mount"></div><script type="application/json" class="bench-plot-data">{"metric": "mean_epoch", "scale": "log", "points": [{"id": "mlopt-c2h4-pyamff-rprop10-7-fcoeff0", "entry": "pyamff-rprop10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 184.56, "best": true, "held": false}, {"id": "mlopt-c2h4-pyamff-lbfgs10-7-fcoeff0", "entry": "pyamff-lbfgs10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 2157.14, "best": false, "held": false}, {"id": "mlopt-c2h4-pyamff-adam10-7-fcoeff0", "entry": "pyamff-adam10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 4395.3, "best": false, "held": false}, {"id": "mlopt-c2h4-pyamff-rprop10-7-fcoeff0-1", "entry": "pyamff-rprop10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 12926.88, "best": false, "held": false}, {"id": "mlopt-c2h4-pyamff-adam10-7-fcoeff0-1", "entry": "pyamff-adam10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 13876.7, "best": false, "held": false}, {"id": "mlopt-c2h4-pyamff-lbfgs10-7-fcoeff0-1", "entry": "pyamff-lbfgs10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 23314.46, "best": false, "held": false}]}</script></figure>
    <div class="bench-table"><table>
    <caption>Archived scores, fewest epochs first.</caption>
    <thead><tr>
@@ -110,12 +109,13 @@
    <td class="text">Henkelman Group</td>
    <td class="text">13 Dec 2022</td>
    </tr>
-   </tbody></table></div></section><section class="bench" id="emt-pt38">
+   </tbody></table></div>
+   <figure class="bench-plot"><figcaption>mean epoch, same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:6"></div><script type="application/json" class="bench-plot-data">{"metric": "mean_epoch", "scale": "log", "points": [{"id": "mlopt-c2h4-pyamff-rprop10-7-fcoeff0", "entry": "pyamff-rprop10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 184.56, "best": true, "held": false}, {"id": "mlopt-c2h4-pyamff-lbfgs10-7-fcoeff0", "entry": "pyamff-lbfgs10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 2157.14, "best": false, "held": false}, {"id": "mlopt-c2h4-pyamff-adam10-7-fcoeff0", "entry": "pyamff-adam10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 4395.3, "best": false, "held": false}, {"id": "mlopt-c2h4-pyamff-rprop10-7-fcoeff0-1", "entry": "pyamff-rprop10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 12926.88, "best": false, "held": false}, {"id": "mlopt-c2h4-pyamff-adam10-7-fcoeff0-1", "entry": "pyamff-adam10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 13876.7, "best": false, "held": false}, {"id": "mlopt-c2h4-pyamff-lbfgs10-7-fcoeff0-1", "entry": "pyamff-lbfgs10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 23314.46, "best": false, "held": false}]}</script></figure>
+   </section><section class="bench" id="emt-pt38">
    <h2>EMT Pt 38 nanoparticle</h2>
    <dl class="bench-rule">
    <dt>Cap</dt><dd>10000 epochs</dd>
    </dl>
-   <figure class="bench-plot"><figcaption>mean epoch, same order as the table.</figcaption><div class="bench-plot-mount"></div><script type="application/json" class="bench-plot-data">{"metric": "mean_epoch", "scale": "log", "points": [{"id": "mlopt-emt-pt38-pyamff-rprop10-7-fcoeff0", "entry": "pyamff-rprop10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 97.58, "best": true, "held": false}, {"id": "mlopt-emt-pt38-pyamff-rprop10-7-fcoeff0-1", "entry": "pyamff-rprop10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 1022.86, "best": false, "held": false}, {"id": "mlopt-emt-pt38-pyamff-adam10-7-fcoeff0", "entry": "pyamff-adam10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 1103.24, "best": false, "held": false}, {"id": "mlopt-emt-pt38-pyamff-adam10-7-fcoeff0-1", "entry": "pyamff-adam10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 1708.8, "best": false, "held": false}, {"id": "mlopt-emt-pt38-pyamff-lbfgs10-7-fcoeff0", "entry": "pyamff-lbfgs10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 1791.8, "best": false, "held": false}, {"id": "mlopt-emt-pt38-pyamff-lbfgs10-7-fcoeff0-1", "entry": "pyamff-lbfgs10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 1943.34, "best": false, "held": false}]}</script></figure>
    <div class="bench-table"><table>
    <caption>Archived scores, fewest epochs first.</caption>
    <thead><tr>
@@ -216,5 +216,7 @@
    <td class="text">Henkelman Group</td>
    <td class="text">09 Dec 2022</td>
    </tr>
-   </tbody></table></div></section>
+   </tbody></table></div>
+   <figure class="bench-plot"><figcaption>mean epoch, same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:6"></div><script type="application/json" class="bench-plot-data">{"metric": "mean_epoch", "scale": "log", "points": [{"id": "mlopt-emt-pt38-pyamff-rprop10-7-fcoeff0", "entry": "pyamff-rprop10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 97.58, "best": true, "held": false}, {"id": "mlopt-emt-pt38-pyamff-rprop10-7-fcoeff0-1", "entry": "pyamff-rprop10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 1022.86, "best": false, "held": false}, {"id": "mlopt-emt-pt38-pyamff-adam10-7-fcoeff0", "entry": "pyamff-adam10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 1103.24, "best": false, "held": false}, {"id": "mlopt-emt-pt38-pyamff-adam10-7-fcoeff0-1", "entry": "pyamff-adam10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 1708.8, "best": false, "held": false}, {"id": "mlopt-emt-pt38-pyamff-lbfgs10-7-fcoeff0", "entry": "pyamff-lbfgs10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 1791.8, "best": false, "held": false}, {"id": "mlopt-emt-pt38-pyamff-lbfgs10-7-fcoeff0-1", "entry": "pyamff-lbfgs10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 1943.34, "best": false, "held": false}]}</script></figure>
+   </section>
 #+end_export
