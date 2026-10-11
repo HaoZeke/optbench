@@ -1,7 +1,8 @@
 #!/bin/sh
 # One SoftSaddle batch on the Pt Morse island.
 # The archived score is ten repetitions and up to 10500 saddle points.
-# This run asks for one search and stops after ten minutes.
+# This run asks for one batch of two searches and stops after ten minutes.
+# Two searches are the smallest set pdist can measure.
 set -eu
 
 root=$(CDPATH= cd -- "$(dirname "$0")" && pwd)
@@ -44,9 +45,9 @@ cp "$upstream/source_code/morse.h" "$work/morse.h"
 sed -i \
     -e 's/do_repetition = true;/do_repetition = false;/' \
     -e 's/desired_number_sp = 10500;/desired_number_sp = 1;/' \
-    -e 's/parall_search_per_min=25;/parall_search_per_min=1;/' \
+    -e 's/parall_search_per_min=25;/parall_search_per_min=2;/' \
     -e 's/max_attempts = 220;/max_attempts = 1;/' \
-    -e 's/real_n_cores=25;/real_n_cores=1;/' \
+    -e 's/real_n_cores=25;/real_n_cores=2;/' \
     -e 's/RUNTIME = 86400\*10;/RUNTIME = 600;/' \
     -e 's/read_from_database = true;/read_from_database = false;/' \
     -e 's/n_repetition = 10;/n_repetition = 1;/' \
