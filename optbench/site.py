@@ -226,6 +226,7 @@ def problem_html(problem: dict, oracle: list[dict], smoke_note: str = "") -> str
                 "value": value,
                 "best": best is not None and value == best,
                 "held": held,
+                "current": bool(row.get("current")),
             }
         )
     lines.append(_plot(prepared, primary))
@@ -243,6 +244,8 @@ def problem_html(problem: dict, oracle: list[dict], smoke_note: str = "") -> str
             classes.append("best")
         if point["held"]:
             classes.append("held")
+        if point.get("current"):
+            classes.append("current")
         class_attr = f' class="{" ".join(classes)}"' if classes else ""
         cells = [str(point["rank"]), point["label"], point["code"]]
         for metric in metrics:
@@ -275,8 +278,8 @@ def _codes_html(path: Path) -> str:
     lines = [
         '<section class="bench" id="current-codes">',
         "<h2>Current codes</h2>",
-        "<p class=\"bench-smoke\">These pins can write a new score. "
-        "They are not rows in the archived rank. "
+        "<p class=\"bench-smoke\">Lennard-Jones 38 scores from these codes are in the minimization rank. "
+        "Saddle-search codes are listed here and are not in that rank until a saddle run finishes. "
         f"The benchmark contributor is {html.escape(contributor)}.</p>",
         '<div class="bench-table"><table>',
         "<caption>No force-call number is listed until a run writes benchmark.dat under the problem rule.</caption>",
@@ -303,6 +306,9 @@ def render(root: Path) -> None:
     """Write ``docs/orgmode/generated`` from ``problems`` and ``oracle``."""
     problems = load_all(root / "problems")
     oracle = load_oracle(root / "oracle" / "entries.jsonl")
+    current = root / "oracle" / "current.jsonl"
+    if current.exists():
+        oracle.extend(load_oracle(current))
     smoke = ""
     smoke_path = root / "softsaddle" / "entry.toml"
     if smoke_path.exists():
