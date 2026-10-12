@@ -27,6 +27,23 @@ pixi run campaign -- minimization/lj38 eon-svn/lbfgs-m100 --client /path/to/eonc
 
 `eon-client/*` speaks the 3.5.0 potential name `ljcluster`. `eon-svn/*` speaks revision 2549, potential name `lj_cluster`. `optbench templates` lists them. `EONCLIENT` may replace `--client`.
 
+The problem file owns the stop and the geometries. The template owns only the client. eOn 3.5.0 and SVN r2549 do not read the same keys, and a key in the wrong section is not a different setting. It is ignored.
+
+eOn 3.5.0, `templates/eon-client/`:
+
+- QuickMin reads `time_step` from `[QuickMin]`. FIRE reads `time_step` and `time_step_max` from `[FIRE]`. The same keys under `[Optimizer]` do nothing.
+- Steepest descent reads `sd_alpha` and `sd_twopoint` from `[SD]`.
+- L-BFGS reads `lbfgs_memory` from `[LBFGS]`, or from `[Optimizer]` when `[LBFGS]` is absent. Memory 100 is the 2014 mean of 181. The client default is 20, and that default scores about 201.
+- A nudged elastic band reads `opt_method` from `[Nudged Elastic Band]`. With that key absent the band is L-BFGS, including when `[Optimizer]` names CG, FIRE, or QuickMin. `converged_force` on `[Optimizer]` is the band tolerance when the band section does not set one.
+
+SVN r2549, `templates/eon-svn/`:
+
+- `sd_alpha`, `sd_twopoint`, and the QuickMin `time_step` are read from `[Optimizer]`.
+
+`python -m optbench.archive_eon` copies an archived `[Optimizer]` timestep into `[QuickMin]` or `[FIRE]`, and copies `opt_method` into `[Nudged Elastic Band]`, then runs that entry's `report.sh`. The values stay the archived values.
+
+The LJ38 templates name `ljcluster` or `lj_cluster`. They do not pass the problem cutoff of 40. Every pair in that cluster is inside the cutoff, and the all-pairs potential matches the archived means. A geometry whose pairs reach the cutoff has to use `lammps` and the archived `in.lammps`.
+
 The problem file says what a new `benchmark.dat` must contain. The oracle says what the archive recorded. Those two stay in git. The public site has two boards. The front page is SOTA: a result whose status is sota and whose commit is the present source in `codes/registry.toml`. The archive page is the 2014 scores plus later passes that do not meet that rule. A problem contract is `contract/problems/<suite>/<id>.json`. A submission is `optbench.result/v1`. eOn 3.5.0, rgmin, rgsaddle, ASE 3.29.0, and pARTn DEVEL are pinned in `codes/registry.toml`. A new score from those pins is entered by Rohit Goswami, and only after the run writes `benchmark.dat`. Prose is org-mode under `docs/orgmode`. `python -m optbench.site` writes the ranks. Emacs exports the org to reStructuredText, and Sphinx builds the HTML.
 
 Every push to `main`, and every pull request, runs `pixi run test` and `pixi run check` on a hosted runner. That job does not start MATLAB and does not run a campaign.
