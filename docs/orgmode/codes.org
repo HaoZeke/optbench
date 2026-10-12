@@ -2,7 +2,7 @@
 #+OPTIONS: toc:nil num:nil author:nil title:nil
 
 eOn is version 3.5.0, commit 4d8b34baf.
-The template sections that client reads are in the README.
+The sections each client reads, and the commands that rerun a score, are in the README and on the Run a score page.
 A timestep or a band method in the wrong section is ignored.
 rgmin and rgsaddle are the current main commits.
 ASE is release 3.29.0.

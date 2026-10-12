@@ -403,7 +403,7 @@ def _sota_html(root: Path) -> str:
 def _submission_html(root: Path) -> str:
     import json
 
-    lines = ['<section class="bench" id="terra-pass">', "<h2>11 October Terra pass</h2>"]
+    lines = ['<section class="bench" id="recorded-passes">', "<h2>Other recorded runs</h2>"]
     lines.append(
         "<p class=\"bench-smoke\">These numbers are real and they are not the SOTA board. "
         "Each run missed the present-source rule in the Lennard-Jones 38 contract.</p>"
