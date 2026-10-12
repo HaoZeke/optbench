@@ -1,0 +1,19 @@
+id = "eon-svn/qm"
+engine = "eon-client"
+code = "Eon svn"
+code_version = "r2549"
+algorithm = "QuickMin"
+
+[ini.Main]
+job = "minimization"
+
+[ini.Potential]
+potential = "lj_cluster"
+
+[ini.Optimizer]
+opt_method = "qm"
+convergence_metric = "norm"
+converged_force = 0.01
+max_move = 0.2
+max_iterations = 10000
+time_step = 0.01
