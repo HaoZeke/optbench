@@ -2,6 +2,7 @@ __pycache__/
 *.py[cod]
 .pixi/
 .venv/
+.asv/
 .pytest_cache/
 softsaddle/work/
 softsaddle/lib/

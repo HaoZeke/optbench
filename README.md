@@ -168,6 +168,20 @@ The front page is a result whose status is `sota` and whose commit is the presen
 
 `uv run optbench import-archive ARCHIVE` rebuilds the oracle and the geometry store from a bare clone of the public GitLab project. It does not replace a problem file that already exists.
 
+## Statistics
+
+`benchmark.dat` keeps the rounded mean, because that is the 2014 record. ASV stores the unrounded mean and the per-start counts for the same run. It does not build `eonclient` and it does not time the client. The tracked value is force calls.
+
+```bash
+uv sync
+# eonclient on PATH, or EONCLIENT set to that binary
+asv machine --yes
+asv run HEAD -E "existing:$(which python)" -b Lj38EonLbfgsM100
+asv publish
+```
+
+`asv run` needs the binary and all 1000 starts. `asv publish` only reads `.asv/results`. One ASV repeat is one full pass over those starts. It is not 1000 noise repeats, and it is not a shorter problem.
+
 ## Build the site
 
 Org-mode under `docs/orgmode` is the prose. `uv run python -m optbench.site` writes the rank tables. Emacs exports the org to reStructuredText, and Sphinx builds the HTML. Emacs is not a Python package, so the site build stays on pixi:

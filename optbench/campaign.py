@@ -205,6 +205,9 @@ def run(
     # A missing result is a failure at the cap, so it stays out of the mean.
     counts = [cap if call is None else call for call in calls]
     summary = summarize_capped(counts, cap)
+    ok = [count for count in counts if count < cap]
+    summary["counts"] = counts
+    summary["mean_unrounded"] = (sum(ok) / len(ok)) if ok else None
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(benchmark_text(summary, template), encoding="utf-8")
     summary["starts"] = len(counts)
