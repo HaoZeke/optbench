@@ -15,17 +15,17 @@ concurrency:
 
 jobs:
   check:
-    name: oracle and unit tests
+    name: oracle and pytest
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
 
-      - uses: prefix-dev/setup-pixi@v0.9.4
+      - uses: astral-sh/setup-uv@v6
         with:
-          cache: true
+          enable-cache: true
 
-      - name: Unit tests
-        run: pixi run test
+      - name: Tests
+        run: uv run pytest
 
       - name: Oracle check
-        run: pixi run check
+        run: uv run optbench check

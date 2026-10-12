@@ -7,7 +7,6 @@ archived ones. The archived report.sh reduces the starts.
 
 from __future__ import annotations
 
-import argparse
 import shutil
 import subprocess
 import tarfile
@@ -259,55 +258,3 @@ def run_pairs(
     return text
 
 
-def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="optbench.archive_eon")
-    sub = parser.add_subparsers(dest="kind", required=True)
-    neb = sub.add_parser("neb")
-    neb.add_argument("--entry", type=Path, required=True)
-    neb.add_argument("--minima", type=Path, required=True)
-    neb.add_argument("--client", type=Path, required=True)
-    neb.add_argument("--work", type=Path, required=True)
-    neb.add_argument("--output", type=Path, required=True)
-    neb.add_argument("--workers", type=int, default=1)
-    neb.add_argument("--code", default="Eon")
-    neb.add_argument("--version", default="3.5.0")
-    pairs = sub.add_parser("pairs")
-    pairs.add_argument("--entry", type=Path, required=True)
-    pairs.add_argument("--coords", type=Path, required=True)
-    pairs.add_argument("--client", type=Path, required=True)
-    pairs.add_argument("--work", type=Path, required=True)
-    pairs.add_argument("--output", type=Path, required=True)
-    pairs.add_argument("--workers", type=int, default=1)
-    pairs.add_argument("--count", type=int, default=50)
-    pairs.add_argument("--code", default="Eon")
-    pairs.add_argument("--version", default="3.5.0")
-    args = parser.parse_args(argv)
-    if args.kind == "neb":
-        text = run_minima(
-            args.entry,
-            args.minima,
-            args.client,
-            args.work,
-            args.output,
-            workers=args.workers,
-            code=args.code,
-            version=args.version,
-        )
-    else:
-        text = run_pairs(
-            args.entry,
-            args.coords,
-            args.client,
-            args.work,
-            args.output,
-            workers=args.workers,
-            count=args.count,
-            code=args.code,
-            version=args.version,
-        )
-    print(text, end="")
-    return 0
-
-
-if __name__ == "__main__":
-    raise SystemExit(main())

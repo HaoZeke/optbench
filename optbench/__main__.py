@@ -2,79 +2,154 @@
 
 from __future__ import annotations
 
-import argparse
-import sys
+import os
+import shutil
 from pathlib import Path
 
+import cyclopts
 
-def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="optbench")
-    sub = parser.add_subparsers(dest="cmd", required=True)
+app = cyclopts.App(
+    name="optbench",
+    help="Run one OptBench problem and write benchmark.dat.",
+)
 
-    check = sub.add_parser("check", help="compare the oracle with the problem files")
-    check.add_argument("--problems", type=Path, default=Path("problems"))
-    check.add_argument("--oracle", type=Path, default=Path("oracle/entries.jsonl"))
 
-    importer = sub.add_parser(
-        "import-archive",
-        help="copy scores and geometries out of a bare clone of the public archive",
+def _eon_client(client: Path | None) -> Path:
+    if client is not None:
+        return client
+    found = shutil.which("eonclient")
+    if found:
+        return Path(found)
+    env = os.environ.get("EONCLIENT")
+    if env:
+        return Path(env)
+    raise SystemExit("pass --client, set EONCLIENT, or put eonclient on PATH")
+
+
+@app.command
+def check(
+    problems: Path = Path("problems"),
+    oracle: Path = Path("oracle/entries.jsonl"),
+) -> None:
+    """Compare the oracle with the problem files."""
+    from optbench.check import check as run_check
+
+    raise SystemExit(run_check(problems, oracle))
+
+
+@app.command(name="import-archive")
+def import_archive(
+    bare: Path,
+    dest: Path = Path("."),
+) -> None:
+    """Copy scores and geometries out of a bare clone of the public archive."""
+    from optbench.import_archive import import_archive as copy_archive
+
+    copy_archive(bare, dest)
+
+
+@app.command
+def templates(root: Path = Path(".")) -> None:
+    """List run templates."""
+    from optbench.campaign import list_templates
+
+    for template in list_templates(root):
+        print(template["id"])
+
+
+@app.command
+def run(
+    problem: str,
+    template: str,
+    *,
+    root: Path = Path("."),
+    client: Path | None = None,
+    geometries: Path | None = None,
+    output: Path = Path("benchmark.dat"),
+    workers: int = 1,
+    work: Path | None = None,
+) -> None:
+    """Run one problem template and write benchmark.dat."""
+    from optbench.campaign import run as run_campaign
+
+    summary = run_campaign(
+        root,
+        problem,
+        template,
+        client=_eon_client(client),
+        geometries=geometries,
+        output=output,
+        workers=workers,
+        work=work,
     )
-    importer.add_argument("--bare", type=Path, required=True)
-    importer.add_argument("--dest", type=Path, default=Path("."))
-
-    sub.add_parser("templates", help="list run templates")
-
-    campaign = sub.add_parser(
-        "run",
-        help="run one problem template and write benchmark.dat",
+    print(
+        f"{summary['problem']} {summary['template']} "
+        f"force_calls={summary['force_calls']} nfailed={summary['nfailed']} "
+        f"starts={summary['starts']}"
     )
-    campaign.add_argument("problem")
-    campaign.add_argument("template")
-    campaign.add_argument("--root", type=Path, default=Path("."))
-    campaign.add_argument("--client", type=Path, default=None)
-    campaign.add_argument("--geometries", type=Path, default=None)
-    campaign.add_argument("--output", type=Path, default=Path("benchmark.dat"))
-    campaign.add_argument("--workers", type=int, default=1)
-    campaign.add_argument("--work", type=Path, default=None)
 
-    args = parser.parse_args(argv)
-    if args.cmd == "check":
-        from .check import check as run_check
 
-        return run_check(args.problems, args.oracle)
-    if args.cmd == "import-archive":
-        from .import_archive import import_archive
+@app.command
+def neb(
+    entry: Path,
+    minima: Path,
+    *,
+    client: Path | None = None,
+    work: Path,
+    output: Path,
+    workers: int = 1,
+    code: str = "Eon",
+    version: str = "3.5.0",
+) -> None:
+    """Run an archived minima-directory NEB entry."""
+    from optbench.archive_eon import run_minima
 
-        import_archive(args.bare, args.dest)
-        return 0
-    if args.cmd == "templates":
-        from .campaign import list_templates
+    text = run_minima(
+        entry,
+        minima,
+        _eon_client(client),
+        work,
+        output,
+        workers=workers,
+        code=code,
+        version=version,
+    )
+    print(text, end="")
 
-        for template in list_templates(Path(".")):
-            print(template["id"])
-        return 0
-    if args.cmd == "run":
-        from .campaign import main_run
 
-        forwarded = [
-            args.problem,
-            args.template,
-            "--root",
-            str(args.root),
-            "--output",
-            str(args.output),
-            "--workers",
-            str(args.workers),
-        ]
-        if args.client is not None:
-            forwarded.extend(["--client", str(args.client)])
-        if args.geometries is not None:
-            forwarded.extend(["--geometries", str(args.geometries)])
-        if args.work is not None:
-            forwarded.extend(["--work", str(args.work)])
-        return main_run(forwarded)
-    return 2
+@app.command
+def pairs(
+    entry: Path,
+    coords: Path,
+    *,
+    client: Path | None = None,
+    work: Path,
+    output: Path,
+    workers: int = 1,
+    count: int = 50,
+    code: str = "Eon",
+    version: str = "3.5.0",
+) -> None:
+    """Run an archived reactant/product saddle or band entry."""
+    from optbench.archive_eon import run_pairs
+
+    text = run_pairs(
+        entry,
+        coords,
+        _eon_client(client),
+        work,
+        output,
+        workers=workers,
+        count=count,
+        code=code,
+        version=version,
+    )
+    print(text, end="")
+
+
+def main(argv: list[str] | None = None) -> None:
+    app(argv)
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    main()

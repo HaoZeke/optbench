@@ -1,15 +1,16 @@
 #+TITLE: Run a score
 #+OPTIONS: toc:nil num:nil author:nil title:nil
 
-The harness is this repository. It needs Python 3.11 or newer and no
-third-party packages. The geometries are already in the clone.
+The harness is this repository. It needs uv and Python 3.11 or newer.
+=uv run= installs the command-line library from =pyproject.toml= and
+runs the command. The geometries are already in the clone.
 
 #+begin_src sh
 git clone https://github.com/lode-org/optbench
 cd optbench
-python -m optbench check
-python -m unittest discover -s tests -v
-python -m optbench templates
+uv run pytest
+uv run optbench check
+uv run optbench templates
 #+end_src
 
 A campaign is one problem id and one template id. It writes one
@@ -24,8 +25,17 @@ The Lennard-Jones 38 L-BFGS mean of 181 is eOn 3.5.0, commit
 does not call it.
 
 #+begin_src sh
-python -m optbench run minimization/lj38 eon-client/lbfgs-m100 \
-  --client "$(command -v eonclient)" \
+uv run optbench run minimization/lj38 eon-client/lbfgs-m100 \
+  --workers 4 \
+  --output benchmark.dat
+#+end_src
+
+=eonclient= is taken from =PATH=. One line installs that binary and
+runs the same command:
+
+#+begin_src sh
+pixi exec --spec eon --spec uv -- uv run optbench run \
+  minimization/lj38 eon-client/lbfgs-m100 \
   --workers 4 \
   --output benchmark.dat
 #+end_src
@@ -40,8 +50,7 @@ Morse bulk, same client, template =eon-client/morse-lbfgs=, is mean 52
 on 100 starts at force norm 0.001 eV/Ang:
 
 #+begin_src sh
-python -m optbench run minimization/morse-bulk eon-client/morse-lbfgs \
-  --client "$(command -v eonclient)" \
+uv run optbench run minimization/morse-bulk eon-client/morse-lbfgs \
   --workers 4 \
   --output morse-lbfgs.dat
 #+end_src
@@ -49,9 +58,12 @@ python -m optbench run minimization/morse-bulk eon-client/morse-lbfgs \
 pele 0.1.2 (https://github.com/pele-python/pele) on the same Lennard-Jones
 starts:
 
+The pele script declares its own dependencies, so =uv run= on that file
+installs pele for the script:
+
 #+begin_src sh
 tar -xzf inputs/sha256/86bf774955b906c486d37282c48e42628e8fe4af3579222f6e07fcf5913157b1/lj38-clusters.tgz -C "$WORKDIR"
-python -m optbench.pele_lj38 \
+uv run optbench/pele_lj38.py \
   --geometries "$WORKDIR/lj38-clusters" \
   --output-dir "$WORKDIR/pele" \
   --workers 4
@@ -63,7 +75,7 @@ Sella 2.6.0 needs =sella==2.6.0= and ASE. Two hundred geometries, force
 norm 0.001, cutoff 40:
 
 #+begin_src sh
-python -m optbench.sella_lj38 \
+uv run optbench/sella_lj38.py \
   --coords inputs/sha256/bda818f7fd3c2ee47ad4d4fd74524881814544c1a805054656f612724d9d5ce6/coords-con.tar.gz \
   --output sella.dat \
   --workers 4 \
@@ -73,10 +85,9 @@ python -m optbench.sella_lj38 \
 Pt-heptamer L-BFGS, thirteen Morse bands:
 
 #+begin_src sh
-python -m optbench.archive_eon neb \
+uv run optbench neb \
   --entry archive/entries/neb/Pt-heptamer/eon-lbfgs \
   --minima inputs/sha256/135c83a17e5a1769182e9a6cdb3ad98657a62a6cd20ef8ae0440e876e24c5e1b/minima.tgz \
-  --client "$(command -v eonclient)" \
   --work "$WORKDIR/heptamer-lbfgs" \
   --output heptamer-lbfgs.dat \
   --workers 4 \
@@ -87,10 +98,9 @@ The LJ38 climbing-image band needs =liblammps.so= on =LD_LIBRARY_PATH=.
 The client loads it at run time. The Morse heptamer runs do not.
 
 #+begin_src sh
-python -m optbench.archive_eon pairs \
+uv run optbench pairs \
   --entry archive/entries/double-ended-saddle-search/lj38/eon-ci-neb \
   --coords inputs/sha256/d1c74db6a00956a4e30487fb80e6331b9515e5f93bba1c6f823e38c3b2986dfc/coords-con.tgz \
-  --client "$(command -v eonclient)" \
   --work "$WORKDIR/ci-neb" \
   --output ci-neb.dat \
   --workers 4 \

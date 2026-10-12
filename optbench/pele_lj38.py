@@ -1,3 +1,12 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#     "cyclopts>=3.24",
+#     "numpy",
+#     "pele>=0.1.2",
+# ]
+# ///
 """pele L-BFGS on the Lennard-Jones 38 starts.
 
 The stop is the Euclidean norm of the force at 0.01, or 10000 gradient
@@ -7,10 +16,10 @@ clusters is inside the problem cutoff of 40.
 
 from __future__ import annotations
 
-import argparse
 from multiprocessing import Pool
 from pathlib import Path
 
+import cyclopts
 import numpy as np
 from pele.optimize._lbfgs_py import LBFGS
 from pele.potentials import LJ
@@ -88,26 +97,25 @@ def write_dat(calls: list[int], memory: int, maxstep: float, template: str, outp
     print(text, end="")
 
 
-def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--geometries", type=Path, required=True)
-    parser.add_argument("--output-dir", type=Path, required=True)
-    parser.add_argument("--workers", type=int, default=1)
-    args = parser.parse_args(argv)
-    paths = sorted(str(path) for path in args.geometries.glob("*.con"))
+app = cyclopts.App(name="pele-lj38", help="pele L-BFGS on the 1000 Lennard-Jones 38 starts.")
+
+
+@app.default
+def main(geometries: Path, output_dir: Path, workers: int = 1) -> None:
+    """Write one benchmark.dat for each archived memory and step cap."""
+    paths = sorted(str(path) for path in geometries.glob("*.con"))
     if len(paths) != 1000:
-        raise SystemExit(f"{args.geometries} has {len(paths)} con files, the problem has 1000")
-    args.output_dir.mkdir(parents=True, exist_ok=True)
+        raise SystemExit(f"{geometries} has {len(paths)} con files, the problem has 1000")
+    output_dir.mkdir(parents=True, exist_ok=True)
     for name, memory, maxstep in VARIANTS:
         jobs = [(path, memory, maxstep) for path in paths]
         print(f"BEGIN pele {name}", flush=True)
-        with Pool(args.workers) as pool:
+        with Pool(workers) as pool:
             calls = list(pool.map(run_one, jobs))
-        write_dat(calls, memory, maxstep, f"pele-lbfgs-{name}", args.output_dir / f"pele-{name}.dat")
+        write_dat(calls, memory, maxstep, f"pele-lbfgs-{name}", output_dir / f"pele-{name}.dat")
         print(f"DONE pele {name}", flush=True)
     print("DONE", flush=True)
-    return 0
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    app()

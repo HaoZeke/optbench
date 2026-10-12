@@ -8,7 +8,6 @@ benchmark.dat.
 from __future__ import annotations
 
 import json
-import os
 import shutil
 import subprocess
 import tarfile
@@ -214,38 +213,3 @@ def run(
     return summary
 
 
-def main_run(argv: list[str] | None = None) -> int:
-    import argparse
-
-    parser = argparse.ArgumentParser(prog="optbench run")
-    parser.add_argument("problem", help="problem id, such as minimization/lj38")
-    parser.add_argument("template", help="template id, such as eon-client/lbfgs-m100")
-    parser.add_argument("--root", type=Path, default=Path("."))
-    parser.add_argument("--client", type=Path, default=None, help="eon client binary")
-    parser.add_argument("--geometries", type=Path, default=None)
-    parser.add_argument("--output", type=Path, default=Path("benchmark.dat"))
-    parser.add_argument("--workers", type=int, default=1)
-    parser.add_argument("--work", type=Path, default=None)
-    args = parser.parse_args(argv)
-    client = args.client
-    if client is None:
-        env = os.environ.get("EONCLIENT")
-        if not env:
-            raise SystemExit("pass --client or set EONCLIENT")
-        client = Path(env)
-    summary = run(
-        args.root,
-        args.problem,
-        args.template,
-        client=client,
-        geometries=args.geometries,
-        output=args.output,
-        workers=args.workers,
-        work=args.work,
-    )
-    print(
-        f"{summary['problem']} {summary['template']} "
-        f"force_calls={summary['force_calls']} nfailed={summary['nfailed']} "
-        f"starts={summary['starts']}"
-    )
-    return 0

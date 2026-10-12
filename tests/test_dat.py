@@ -1,7 +1,6 @@
-import unittest
+import pytest
 
 from optbench.dat import DatError, normalize, parse
-
 
 SAMPLE = """\
 force_calls 453
@@ -14,23 +13,20 @@ contributor Sam Chill
 """
 
 
-class ParseTests(unittest.TestCase):
-    def test_sample_keeps_internal_spaces(self):
-        fields = parse(SAMPLE)
-        self.assertEqual(fields["force_calls"], "453")
-        self.assertEqual(fields["algorithm"], "Conjugate Gradients")
-        self.assertEqual(fields["contributor"], "Sam Chill")
-
-    def test_duplicate_key_is_an_error(self):
-        with self.assertRaises(DatError):
-            parse("force_calls 1\nforce_calls 2\n")
-
-    def test_spelling_aliases(self):
-        fields, renamed = normalize({"contributer": "Sam Chill", "uncertanity": "1"})
-        self.assertEqual(fields["contributor"], "Sam Chill")
-        self.assertEqual(fields["uncertainty"], "1")
-        self.assertEqual(renamed, [("contributer", "contributor"), ("uncertanity", "uncertainty")])
+def test_sample_keeps_internal_spaces():
+    fields = parse(SAMPLE)
+    assert fields["force_calls"] == "453"
+    assert fields["algorithm"] == "Conjugate Gradients"
+    assert fields["contributor"] == "Sam Chill"
 
 
-if __name__ == "__main__":
-    unittest.main()
+def test_duplicate_key_is_an_error():
+    with pytest.raises(DatError):
+        parse("force_calls 1\nforce_calls 2\n")
+
+
+def test_spelling_aliases():
+    fields, renamed = normalize({"contributer": "Sam Chill", "uncertanity": "1"})
+    assert fields["contributor"] == "Sam Chill"
+    assert fields["uncertainty"] == "1"
+    assert renamed == [("contributer", "contributor"), ("uncertanity", "uncertainty")]

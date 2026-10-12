@@ -6,17 +6,17 @@ A problem file under `problems/` states the potential, the stopping rule, and th
 
 ## Install the harness
 
-The harness needs Python 3.11 or newer and no third-party packages. From a clone:
+The harness needs [uv](https://docs.astral.sh/uv/) and Python 3.11 or newer. From a clone:
 
 ```bash
 git clone https://github.com/lode-org/optbench
 cd optbench
-python -m optbench check
-python -m unittest discover -s tests -v
-python -m optbench templates
+uv run pytest
+uv run optbench check
+uv run optbench templates
 ```
 
-`check` exits 0 when every partial contract covers its archived rows and `oracle/archive_gaps.txt` matches the departures. `templates` prints every template id. On linux-64, `pixi run test` and `pixi run check` are the same two commands with Python 3.12.
+`uv run` reads `pyproject.toml`, installs the command-line library, and runs that command. `pytest` is the test runner. `check` exits 0 when every partial contract covers its archived rows and `oracle/archive_gaps.txt` matches the departures. `templates` prints every template id.
 
 The harness does not contain eOn, pele, or Sella. Those are installed separately, and the commands below say which release produced the files in `results/campaign/`.
 
@@ -50,13 +50,21 @@ A run prints `Eon version 3.5.0`. `pip install pyeonclient` is a different inter
 From this repository, with `eonclient` on `PATH`:
 
 ```bash
-python -m optbench run minimization/lj38 eon-client/lbfgs-m100 \
-  --client "$(command -v eonclient)" \
+uv run optbench run minimization/lj38 eon-client/lbfgs-m100 \
   --workers 4 \
   --output benchmark.dat
 ```
 
-`EONCLIENT` may replace `--client`. `pixi run campaign -- minimization/lj38 eon-client/lbfgs-m100 --client "$(command -v eonclient)"` is the same command. `--workers` is the number of client processes. The default is 1. The problem file names `website/minimization/lj38/lj38-clusters.tgz`, and the manifest stores that archive at `inputs/sha256/86bf774955b906c486d37282c48e42628e8fe4af3579222f6e07fcf5913157b1/lj38-clusters.tgz`. The command unpacks it. `--work` chooses the scratch directory. The default is next to `--output`.
+The command uses `eonclient` from `PATH`. `--client` or `EONCLIENT` overrides that. One line does both the binary and the Python command, which is the pixi-and-uv form:
+
+```bash
+pixi exec --spec eon --spec uv -- uv run optbench run \
+  minimization/lj38 eon-client/lbfgs-m100 \
+  --workers 4 \
+  --output benchmark.dat
+```
+
+The recorded 181 is commit `4d8b34baf`. Read the version line the client prints before treating another build as that score. `--workers` is the number of client processes. The default is 1. The problem file names `website/minimization/lj38/lj38-clusters.tgz`, and the manifest stores that archive at `inputs/sha256/86bf774955b906c486d37282c48e42628e8fe4af3579222f6e07fcf5913157b1/lj38-clusters.tgz`. The command unpacks it. `--work` chooses the scratch directory. The default is next to `--output`.
 
 `benchmark.dat` is the result. `force_calls` is the mean over starts that finished under the cap. Compare it to the file quoted above.
 
@@ -69,8 +77,7 @@ Each command writes one `benchmark.dat`. The published copy is under `results/ca
 Morse bulk is 100 starts, force norm 0.001 eV/Ang, cap 10000. The same `eonclient` and `eon-client/morse-lbfgs` produce mean 52:
 
 ```bash
-python -m optbench run minimization/morse-bulk eon-client/morse-lbfgs \
-  --client "$(command -v eonclient)" \
+uv run optbench run minimization/morse-bulk eon-client/morse-lbfgs \
   --workers 4 \
   --output morse-lbfgs.dat
 ```
@@ -79,9 +86,11 @@ The Morse geometries are `inputs/sha256/db1ed9c0a17de8c1cf7dbf55f8b1d2baed263ad8
 
 pele 0.1.2 is <https://github.com/pele-python/pele>. The driver imports `pele.optimize._lbfgs_py.LBFGS` and `pele.potentials.LJ`. Install that release, unpack the same Lennard-Jones archive, and run every archived memory and step cap:
 
+The script declares its own dependencies. `uv run` installs them for that file:
+
 ```bash
 tar -xzf inputs/sha256/86bf774955b906c486d37282c48e42628e8fe4af3579222f6e07fcf5913157b1/lj38-clusters.tgz -C "$WORKDIR"
-python -m optbench.pele_lj38 \
+uv run optbench/pele_lj38.py \
   --geometries "$WORKDIR/lj38-clusters" \
   --output-dir "$WORKDIR/pele" \
   --workers 4
@@ -92,7 +101,7 @@ Memory 100 at step 0.2 averages 178 calls. The 2014 file is 179. The other six f
 Sella 2.6.0 needs `sella==2.6.0` and ASE. The stop is the Euclidean norm of the force at 0.001, or 1000 steps, on 200 geometries, with cutoff 40 and the archived trust-region numbers:
 
 ```bash
-python -m optbench.sella_lj38 \
+uv run optbench/sella_lj38.py \
   --coords inputs/sha256/bda818f7fd3c2ee47ad4d4fd74524881814544c1a805054656f612724d9d5ce6/coords-con.tar.gz \
   --output sella.dat \
   --workers 4 \
@@ -104,10 +113,9 @@ The recorded file is `results/campaign/sella-2.6.0-ts-lj38.dat`: mean 93, two st
 Pt-heptamer NEB is 13 bands, Morse, eight images. The band method has to be the one named in the template. `eon-lbfgs` averages 40:
 
 ```bash
-python -m optbench.archive_eon neb \
+uv run optbench neb \
   --entry archive/entries/neb/Pt-heptamer/eon-lbfgs \
   --minima inputs/sha256/135c83a17e5a1769182e9a6cdb3ad98657a62a6cd20ef8ae0440e876e24c5e1b/minima.tgz \
-  --client "$(command -v eonclient)" \
   --work "$WORKDIR/heptamer-lbfgs" \
   --output heptamer-lbfgs.dat \
   --workers 4 \
@@ -119,10 +127,9 @@ The same command with `eon-cg`, `eon-fire`, or `eon-qm` is the other three rows.
 The LJ38 climbing-image band is 50 reactant-product pairs and `potential = lammps` with `in.lammps` cutoff 40. eOn 3.5.0 loads `liblammps.so` at run time. Put a LAMMPS build on `LD_LIBRARY_PATH` before this command. Without that library the client cannot start these entries. The Morse heptamer runs do not need it.
 
 ```bash
-python -m optbench.archive_eon pairs \
+uv run optbench pairs \
   --entry archive/entries/double-ended-saddle-search/lj38/eon-ci-neb \
   --coords inputs/sha256/d1c74db6a00956a4e30487fb80e6331b9515e5f93bba1c6f823e38c3b2986dfc/coords-con.tgz \
-  --client "$(command -v eonclient)" \
   --work "$WORKDIR/ci-neb" \
   --output ci-neb.dat \
   --workers 4 \
@@ -149,7 +156,7 @@ SVN r2549, `templates/eon-svn/`:
 
 - `sd_alpha`, `sd_twopoint`, and the QuickMin `time_step` are read from `[Optimizer]`.
 
-`python -m optbench.archive_eon` copies an archived `[Optimizer]` timestep into `[QuickMin]` or `[FIRE]`, and copies `opt_method` into `[Nudged Elastic Band]`, then runs that entry's `report.sh`. The values stay the archived values.
+`uv run optbench neb` and `uv run optbench pairs` copy an archived `[Optimizer]` timestep into `[QuickMin]` or `[FIRE]`, and copy `opt_method` into `[Nudged Elastic Band]`, then run that entry's `report.sh`. The values stay the archived values.
 
 The LJ38 minimization templates name `ljcluster` or `lj_cluster`. They do not pass the problem cutoff of 40. Every pair in that cluster is inside the cutoff, and the all-pairs potential matches the archived means. A geometry whose pairs reach the cutoff has to use `lammps` and the archived `in.lammps`, as the climbing-image command does.
 
@@ -159,16 +166,16 @@ The LJ38 minimization templates name `ljcluster` or `lj_cluster`. They do not pa
 
 The front page is a result whose status is `sota` and whose commit is the present source in `codes/registry.toml`. The archive page is the 2014 scores plus later passes that do not meet that rule. A local `benchmark.dat` is a score whether or not it has been added to the front page. Adding it there means a `results/*.json` record with `optbench.result/v1`, the problem geometries, and the pinned commit.
 
-`python -m optbench import-archive --bare ARCHIVE --dest .` rebuilds the oracle and the geometry store from a bare clone of the public GitLab project. It does not replace a problem file that already exists.
+`uv run optbench import-archive ARCHIVE` rebuilds the oracle and the geometry store from a bare clone of the public GitLab project. It does not replace a problem file that already exists.
 
 ## Build the site
 
-Org-mode under `docs/orgmode` is the prose. `python -m optbench.site` writes the rank tables. Emacs exports the org to reStructuredText, and Sphinx builds the HTML.
+Org-mode under `docs/orgmode` is the prose. `uv run python -m optbench.site` writes the rank tables. Emacs exports the org to reStructuredText, and Sphinx builds the HTML. Emacs is not a Python package, so the site build stays on pixi:
 
 ```bash
 pixi run -e docs html
 ```
 
-Without pixi, the same three steps are `python -m optbench.site`, `emacs --batch --load docs/export.el`, and `sphinx-build -d docs/doctrees docs/source docs/build`. Open `docs/build/index.html`.
+Open `docs/build/index.html`.
 
-The hosted test run is `pixi run test` and `pixi run check`. It does not run a campaign. A published score uses every start in the problem. SoftSaddle is a MATLAB smoke in `.github/workflows/softsaddle-smoke.yml`: it builds `libmorse`, `libdavidson`, and `liblanczos`, then runs two searches with a 600 second cap. That smoke does not replace the April 2019 score of 423491.1 force calls in `softsaddle/entry.toml`.
+The hosted test run is `uv run pytest` and `uv run optbench check`. It does not run a campaign. A published score uses every start in the problem. SoftSaddle is a MATLAB smoke in `.github/workflows/softsaddle-smoke.yml`: it builds `libmorse`, `libdavidson`, and `liblanczos`, then runs two searches with a 600 second cap. That smoke does not replace the April 2019 score of 423491.1 force calls in `softsaddle/entry.toml`.
