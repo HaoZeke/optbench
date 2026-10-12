@@ -17,5 +17,7 @@ convergence_metric = "norm"
 converged_force = 0.001
 max_move = 0.2
 max_iterations = 10000
+
+[ini.SD]
 sd_alpha = 0.001
 sd_twopoint = false
