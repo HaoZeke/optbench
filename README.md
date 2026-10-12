@@ -170,17 +170,17 @@ The front page is a result whose status is `sota` and whose commit is the presen
 
 ## Statistics
 
-`benchmark.dat` keeps the rounded mean, because that is the 2014 record. ASV stores the unrounded mean and the per-start counts for the same run. It does not build `eonclient` and it does not time the client. The tracked value is force calls.
+`benchmark.dat` keeps the rounded mean, because that is the 2014 record. ASV stores every start. The parameter is the geometry. Each value is the force-call count from one `eonclient` subprocess. Repeating a deterministic count is not a distribution, so `repeat` is 1.
+
+The environment type is `uv-pip`, from `optbench.asv_uv`. It creates the environment with `uv venv` and installs with `uv pip`. ASV's own `uv` type still installs with `pip`. `eonclient` is not part of that environment. It has to be on `PATH`, or `EONCLIENT` has to name it. The seven Lennard-Jones 38 minimizers under `templates/eon-client/` are the benchmark classes in `benchmarks/bench_lj38.py`.
 
 ```bash
-uv sync
-# eonclient on PATH, or EONCLIENT set to that binary
-asv machine --yes
-asv run HEAD -E "existing:$(which python)" -b Lj38EonLbfgsM100
-asv publish
+uv run asv machine --yes
+uv run asv run HEAD -E uv-pip:3.12 -b Lj38EonLbfgsM100.track_force_calls
+uv run asv publish
 ```
 
-`asv run` needs the binary and all 1000 starts. `asv publish` only reads `.asv/results`. One ASV repeat is one full pass over those starts. It is not 1000 noise repeats, and it is not a shorter problem.
+`asv run` needs the binary and runs all 1000 starts, one subprocess each. `asv publish` only reads `.asv/results`. `optbench.samples.sample_stats` is the mean, standard deviation, and quartiles of that vector.
 
 ## Build the site
 

@@ -123,8 +123,8 @@ def parse_client_dat(text: str) -> tuple[int | None, str | None]:
     return calls, reason
 
 
-def _one(job: tuple[str, str, str, str]) -> int | None:
-    client, ini, con, work = job
+def run_client(client: str, ini: str, con: str, work: str) -> int | None:
+    """Run one eonclient subprocess on one geometry. A bad termination is None."""
     dest = Path(work)
     if dest.exists():
         shutil.rmtree(dest)
@@ -145,6 +145,10 @@ def _one(job: tuple[str, str, str, str]) -> int | None:
     if calls is None or (reason is not None and reason != "0"):
         return None
     return calls
+
+
+def _one(job: tuple[str, str, str, str]) -> int | None:
+    return run_client(*job)
 
 
 def benchmark_text(summary: dict, template: dict) -> str:

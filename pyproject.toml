@@ -10,7 +10,7 @@ dependencies = ["cyclopts>=3.24"]
 optbench = "optbench.__main__:main"
 
 [dependency-groups]
-dev = ["pytest>=8.3"]
+dev = ["pytest>=8.3", "asv>=0.6.4"]
 
 [build-system]
 requires = ["hatchling"]

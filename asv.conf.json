@@ -3,13 +3,18 @@
     "project": "optbench",
     "project_url": "https://github.com/lode-org/optbench",
     "repo": ".",
-    "environment_type": "existing",
+    "plugins": [".optbench.asv_uv"],
+    "environment_type": "uv-pip",
+    "pythons": ["3.12"],
+    "matrix": {},
     "benchmark_dir": "benchmarks",
     "results_dir": ".asv/results",
     "html_dir": ".asv/html",
     "branches": ["HEAD"],
     "build_command": [],
-    "install_command": [],
+    "install_command": [
+        "in-dir={env_dir} uv pip install --python {env_dir}/bin/python {build_dir}"
+    ],
     "uninstall_command": [],
     "show_commit_url": "https://github.com/lode-org/optbench/commit/"
 }
