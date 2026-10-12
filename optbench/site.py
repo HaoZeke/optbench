@@ -172,7 +172,7 @@ def _plot(points: list[dict], primary: str | None) -> str:
     rows = len(payload["points"])
     return (
         '<figure class="bench-plot">'
-        f"<figcaption>{html.escape(label)}, same order as the table.</figcaption>"
+        f"<figcaption>{html.escape(label)}, lower is better, same order as the table.</figcaption>"
         f'<div class="bench-plot-mount" style="--bench-rows:{rows}"></div>'
         f'<script type="application/json" class="bench-plot-data">{data}</script>'
         "</figure>"
@@ -338,24 +338,41 @@ def _sota_html(root: Path) -> str:
         for point in points:
             point["best"] = best is not None and point["value"] == best
         lines.append(
-            "<table><caption>Present sources. Fewest mean force calls first.</caption>"
-            "<thead><tr><th>Entry</th><th>Code</th><th class=\"num\">Mean</th>"
-            "<th class=\"num\">Min</th><th class=\"num\">Max</th><th class=\"num\">Failed</th>"
+            f"<p class=\"bench-count\">{len(ordered)} methods. Lower force calls is better.</p>"
+        )
+        lines.append(
+            "<table><caption>Present sources. The cell is the record.</caption>"
+            "<thead><tr><th>Entry</th><th>Code</th>"
+            "<th class=\"num\">Mean (force calls)</th>"
+            "<th class=\"num\">Min (force calls)</th>"
+            "<th class=\"num\">Max (force calls)</th>"
+            "<th class=\"num\">Failed</th>"
             "<th>Commit</th></tr></thead><tbody>"
         )
         for run in ordered:
             metrics = run.get("metrics") or {}
             commit = str(run.get("commit") or run.get("code_version") or "")
+            nfailed = metrics.get("nfailed", run.get("nfailed", 0))
+            fail_mark = ""
+            try:
+                failed_n = int(nfailed)
+            except (TypeError, ValueError):
+                failed_n = 0
+            if failed_n > 0:
+                fail_mark = " bench-row-fail"
             lines.append(
-                '<tr id="{}"><td>{}</td><td>{}</td><td class="num">{}</td><td class="num">{}</td>'
-                '<td class="num">{}</td><td class="num">{}</td><td>{}</td></tr>'.format(
+                '<tr id="{}" class="{}">'.format(
                     html.escape(_slug(str(run.get("entry", "")))),
+                    fail_mark.strip(),
+                )
+                + "<td>{}</td><td>{}</td><td class=\"num\">{}</td><td class=\"num\">{}</td>"
+                "<td class=\"num\">{}</td><td class=\"num\">{}</td><td>{}</td></tr>".format(
                     html.escape(str(run.get("entry", ""))),
                     html.escape(str(run.get("code", ""))),
                     html.escape(str(metrics.get("force_calls", ""))),
                     html.escape(str(metrics.get("force_calls_min", ""))),
                     html.escape(str(metrics.get("force_calls_max", ""))),
-                    html.escape(str(metrics.get("nfailed", run.get("nfailed", "")))),
+                    html.escape(str(nfailed)),
                     html.escape(commit[:12]),
                 )
             )

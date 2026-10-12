@@ -94,10 +94,26 @@
   letter-spacing: 0.01em;
 }
 
+.bench-count {
+  margin: 0 0 0.75rem;
+  max-width: 68ch;
+}
+
 .bench th.num,
 .bench td.num {
   text-align: right;
   font-variant-numeric: tabular-nums;
+}
+
+.bench tr.bench-row-fail td:nth-child(6)::before {
+  content: "";
+  display: inline-block;
+  width: 0.45rem;
+  height: 0.45rem;
+  margin-right: 0.35rem;
+  border-radius: 50%;
+  background: CanvasText;
+  vertical-align: 0.05em;
 }
 
 .bench tr.best {
