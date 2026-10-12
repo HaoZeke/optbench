@@ -1,0 +1,7 @@
+force_calls 40
+force_calls_min 27
+force_calls_max 51
+nfailed 0
+code Eon
+code_version 3.5.0
+template eon-lbfgs
