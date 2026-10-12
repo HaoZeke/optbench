@@ -33,16 +33,41 @@ def _sections(text: str) -> dict[str, dict[str, str]]:
     return found
 
 
-def adapt_optimizer_sections(text: str) -> str:
-    """Put an archived timestep where version 3.5.0 reads it.
+def _inject(text: str, section: str, keys: list[str]) -> str:
+    """Insert keys into an existing section. A second copy of the section is not added."""
+    out: list[str] = []
+    in_section = False
+    injected = False
+    for line in text.splitlines():
+        stripped = line.strip()
+        if stripped.startswith("[") and stripped.endswith("]"):
+            if in_section and not injected:
+                out.extend(keys)
+                injected = True
+            in_section = stripped[1:-1].strip() == section
+        out.append(line)
+    if in_section and not injected:
+        out.extend(keys)
+    body = "\n".join(out)
+    return body if body.endswith("\n") else body + "\n"
 
-    Version 3.5.0 reads ``time_step`` from ``[QuickMin]`` or ``[FIRE]``.
-    An archived file that stored the same number under ``[Optimizer]`` keeps
-    that number and gains the section the client reads.
+
+def adapt_optimizer_sections(text: str) -> str:
+    """Put archived optimizer keys where version 3.5.0 reads them.
+
+    Version 3.5.0 reads ``time_step`` from ``[QuickMin]`` or ``[FIRE]``, and
+    the NEB band reads ``opt_method`` from ``[Nudged Elastic Band]``. An
+    archived file that stored those under ``[Optimizer]`` keeps the same
+    values and gains the keys the client reads. The band default is L-BFGS,
+    so a missing band key would run L-BFGS under every archived name.
     """
     sections = _sections(text)
     optimizer = sections.get("Optimizer") or {}
     method = optimizer.get("opt_method", "").lower()
+    neb = sections.get("Nudged Elastic Band")
+    if neb is not None and "opt_method" not in neb and "opt_method" in optimizer:
+        text = _inject(text, "Nudged Elastic Band", [f"opt_method = {optimizer['opt_method']}"])
+        sections = _sections(text)
     extra: list[str] = []
     if method == "qm" and "QuickMin" not in sections and "time_step" in optimizer:
         extra.append(f"[QuickMin]\ntime_step = {optimizer['time_step']}")
@@ -58,6 +83,21 @@ def adapt_optimizer_sections(text: str) -> str:
         return text if text.endswith("\n") else text + "\n"
     body = text if text.endswith("\n") else text + "\n"
     return body + "\n" + "\n\n".join(extra) + "\n"
+
+
+def count_failures(paths: list[Path]) -> int:
+    """Count starts whose termination_reason value is not 0.
+
+    Version 3.5.0 also writes termination_reason_text. A substring match on
+    that name counts the text line as a second failure.
+    """
+    failed = 0
+    for path in paths:
+        for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+            parts = line.split()
+            if len(parts) >= 2 and parts[1] == "termination_reason" and parts[0] != "0":
+                failed += 1
+    return failed
 
 
 def _extract(archive: Path, dest: Path) -> None:
@@ -112,6 +152,15 @@ def _reduce(report: Path, cwd: Path, code: str, version: str, template: str) -> 
         "nfailed",
     ]
     lines = [f"{key} {fields[key]}" for key in kept if key in fields and fields[key] not in ("", "nan")]
+    results = list(cwd.rglob("results.dat"))
+    failed = count_failures(results)
+    lines = [line for line in lines if not line.startswith("nfailed ")]
+    # Keep the force-call lines, then the exact failure count.
+    insert_at = 0
+    for index, line in enumerate(lines):
+        if line.startswith("force_calls"):
+            insert_at = index + 1
+    lines.insert(insert_at, f"nfailed {failed}")
     lines.append(f"code {code}")
     lines.append(f"code_version {version}")
     lines.append(f"template {template}")

@@ -26,6 +26,15 @@ class ArchiveEonTests(unittest.TestCase):
         self.assertIn("[QuickMin]", adapted)
         self.assertIn("time_step = 1.527", adapted)
 
+    def test_neb_opt_method_is_copied_into_the_band_section(self):
+        text = (
+            "[Nudged Elastic Band]\nimages=8\n\n[Optimizer]\nopt_method=cg\n"
+        )
+        adapted = adapt_optimizer_sections(text)
+        band = adapted.split("[Optimizer]")[0]
+        self.assertIn("opt_method = cg", band)
+        self.assertEqual(adapted.count("opt_method"), 2)
+
     def test_lbfgs_is_unchanged(self):
         text = "[Optimizer]\nopt_method=lbfgs\nconverged_force=0.01\n"
         self.assertEqual(adapt_optimizer_sections(text), text if text.endswith("\n") else text + "\n")
