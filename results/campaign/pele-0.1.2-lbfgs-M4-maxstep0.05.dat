@@ -1,0 +1,8 @@
+force_calls 381
+force_calls_min 211
+force_calls_max 797
+nfailed 0
+code pele
+code_version 0.1.2
+algorithm L-BFGS M=4 maxstep=0.05
+template pele-lbfgs-M4-maxstep0.05
