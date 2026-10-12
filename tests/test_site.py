@@ -7,6 +7,22 @@ from optbench.site import problem_html, render
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def test_nav_pages_have_titles_and_the_suites_fold_under_archive():
+    org = ROOT / "docs" / "orgmode"
+    for name in ("index.org", "run.org", "archive.org", "codes.org"):
+        text = (org / name).read_text(encoding="utf-8")
+        assert "title:nil" not in text
+        assert text.startswith("#+TITLE:")
+    index = (org / "index.org").read_text(encoding="utf-8")
+    assert ":hidden:" in index
+    assert "\n   run\n   archive\n   codes\n" in index
+    archive = (org / "archive.org").read_text(encoding="utf-8")
+    assert "generated/suites/minimization" in archive
+    assert "generated/suites/accelerated-md" in archive
+    conf = (ROOT / "docs" / "source" / "conf.py").read_text(encoding="utf-8")
+    assert '"globaltoc_expand_depth": 0' in conf
+
+
 def test_lj38_table_ranks_the_archived_scores():
     problem = load_problem(ROOT / "problems" / "minimization" / "lj38.toml")
     oracle = load_oracle(ROOT / "oracle" / "entries.jsonl")

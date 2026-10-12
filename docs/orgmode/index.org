@@ -1,5 +1,5 @@
 #+TITLE: OptBench
-#+OPTIONS: toc:nil num:nil author:nil title:nil
+#+OPTIONS: toc:nil num:nil author:nil
 
 The SOTA board is a run of the present source of a code, on the
 problem geometries, stopped by the problem rule.
@@ -16,8 +16,8 @@ The commands that write a new =benchmark.dat= are on the Run a score page.
 
 #+begin_export rst
 .. toctree::
-   :maxdepth: 1
-   :caption: Boards
+   :hidden:
+   :maxdepth: 2
 
    run
    archive

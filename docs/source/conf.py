@@ -19,6 +19,6 @@ html_theme_options = {
     "accent_color": "blue",
     "github_url": "https://github.com/lode-org/optbench",
     "dark_code": True,
-    "globaltoc_expand_depth": 1,
+    "globaltoc_expand_depth": 0,
 }
 html_baseurl = "https://lode-org.github.io/optbench/"

@@ -1,5 +1,5 @@
 #+TITLE: Current codes
-#+OPTIONS: toc:nil num:nil author:nil title:nil
+#+OPTIONS: toc:nil num:nil author:nil
 
 eOn is version 3.5.0, commit 4d8b34baf.
 The sections each client reads, and the commands that rerun a score, are in the README and on the Run a score page.

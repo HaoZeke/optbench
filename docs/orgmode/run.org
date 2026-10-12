@@ -1,5 +1,5 @@
 #+TITLE: Run a score
-#+OPTIONS: toc:nil num:nil author:nil title:nil
+#+OPTIONS: toc:nil num:nil author:nil
 
 The harness is this repository. It needs uv and Python 3.11 or newer.
 =uv run= installs the command-line library from =pyproject.toml= and
