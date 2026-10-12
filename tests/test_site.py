@@ -32,6 +32,8 @@ def test_collection_shows_present_runs_beyond_the_front_page():
     assert campaign_problem("eon-3.5.0-neb-pt-lbfgs") == "neb/Pt-heptamer"
     assert campaign_problem("sella-2.6.0-ts-lj38") == "tsopt/LJ38"
     assert campaign_problem("eon-3.5.0-de-lj38-ci-neb") == "double-ended-saddle-search/lj38"
+    assert campaign_problem("eon-3.5.0-saddle-pt-dimer") == "saddle-search/pt-island"
+    assert campaign_problem("eon-3.5.0-saddle-pt-classic") == "saddle-search/pt-island"
     render(ROOT)
     collection = (ROOT / "docs" / "include" / "collection.org").read_text(encoding="utf-8")
     assert "Morse bulk" in collection

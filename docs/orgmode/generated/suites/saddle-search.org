@@ -12,7 +12,29 @@
    </dl>
    <p class="bench-smoke">A 2-search SoftSaddle smoke is not in this rank. The April 2019 adaptive_HSphere-lbfgs-davidson-sm50 entry records 423491.1 force calls.</p>
    <h3>Present runs</h3>
-   <p>No present run is recorded.</p>
+   <div class="bench-table"><table>
+   <caption>Present runs. Fewer force calls first. The 2014 scores follow.</caption>
+   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th></tr></thead><tbody>
+   <tr>
+   <td class="text">eon-3.5.0-saddle-pt-dimer</td>
+   <td class="text">Eon</td>
+   <td class="text">3.5.0</td>
+   <td class="num">4982564.3</td>
+   <td class="num">1996871</td>
+   <td class="num">10514681</td>
+   <td class="num">0</td>
+   </tr>
+   <tr>
+   <td class="text">eon-3.5.0-saddle-pt-classic</td>
+   <td class="text">Eon</td>
+   <td class="text">3.5.0</td>
+   <td class="num">6974880.9</td>
+   <td class="num">2934964</td>
+   <td class="num">17881288</td>
+   <td class="num">0</td>
+   </tr>
+   </tbody></table></div>
+   <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "eon-3.5.0-saddle-pt-dimer", "entry": "Eon 3.5.0 eon-3.5.0-saddle-pt-dimer", "code": "Eon", "value": 4982564.3, "best": true, "held": false, "failed": false}, {"id": "eon-3.5.0-saddle-pt-classic", "entry": "Eon 3.5.0 eon-3.5.0-saddle-pt-classic", "code": "Eon", "value": 6974880.9, "best": false, "held": false, "failed": false}]}</script></figure>
    <div class="bench-table"><table>
    <caption>Archived scores, fewest force calls first.</caption>
    <thead><tr>

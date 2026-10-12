@@ -1,0 +1,27 @@
+# rep 1 force_calls 2611052 unique_saddles 65 fraction_connected 0.7537238325281803 total_searches 9936
+# rep 2 force_calls 8929626 unique_saddles 93 fraction_connected 0.7495052721741442 total_searches 33857
+# rep 3 force_calls 10514681 unique_saddles 92 fraction_connected 0.7492447129909365 total_searches 39720
+# rep 4 force_calls 5065314 unique_saddles 81 fraction_connected 0.7495281040268457 total_searches 19072
+# rep 5 force_calls 2816408 unique_saddles 69 fraction_connected 0.7527411261847240 total_searches 10762
+# rep 6 force_calls 6454525 unique_saddles 82 fraction_connected 0.7478121533341551 total_searches 24339
+# rep 7 force_calls 2764233 unique_saddles 72 fraction_connected 0.7486528098537336 total_searches 10392
+# rep 8 force_calls 5369998 unique_saddles 83 fraction_connected 0.7544048551292091 total_searches 20432
+# rep 9 force_calls 3302935 unique_saddles 70 fraction_connected 0.7536323436512951 total_searches 12664
+# rep 10 force_calls 1996871 unique_saddles 64 fraction_connected 0.7579542466473836 total_searches 7606
+code Eon
+code_version 3.5.0
+commit 4d8b34baf1ba8d2d980df29838bac1f969d1662c
+date 12 Oct 2026
+contributor Rohit Goswami
+repetitions 10
+min_mode_method dimer
+dimer_improved true
+communicator_jobs 8
+force_calls 4982564.3
+force_calls_mean_error 868792.5441
+force_calls_min 1996871
+force_calls_max 10514681
+unique_saddles 77.1
+fraction_connected 0.7517199457
+total_searches 18878
+nfailed 0

@@ -195,6 +195,8 @@ def campaign_problem(stem: str) -> str | None:
         return "neb/Pt-heptamer"
     if stem.startswith("eon-3.5.0-de"):
         return "double-ended-saddle-search/lj38"
+    if stem.startswith("eon-3.5.0-saddle-pt"):
+        return "saddle-search/pt-island"
     if stem.startswith("sella-"):
         return "tsopt/LJ38"
     if stem.startswith(("pele-", "eon-client-", "eon-svn-")):
