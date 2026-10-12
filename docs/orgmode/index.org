@@ -20,6 +20,16 @@ The commands that write a new =benchmark.dat= are on the Run a score page.
    :maxdepth: 2
 
    run
+   generated/suites/minimization
+   generated/suites/saddle-search
+   generated/suites/double-ended-saddle-search
+   generated/suites/globalopt
+   generated/suites/lowest-eigenvector
+   generated/suites/tsopt
+   generated/suites/mlopt
+   generated/suites/neb
+   generated/suites/hTST
+   generated/suites/accelerated-md
    archive
    codes
 #+end_export

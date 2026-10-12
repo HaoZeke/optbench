@@ -15,7 +15,9 @@ def test_nav_pages_have_titles_and_the_suites_fold_under_archive():
         assert text.startswith("#+TITLE:")
     index = (org / "index.org").read_text(encoding="utf-8")
     assert ":hidden:" in index
-    assert "\n   run\n   archive\n   codes\n" in index
+    assert "generated/suites/minimization" in index
+    assert "generated/suites/neb" in index
+    assert "generated/suites/accelerated-md" in index
     archive = (org / "archive.org").read_text(encoding="utf-8")
     assert "generated/suites/minimization" in archive
     assert "generated/suites/accelerated-md" in archive
@@ -38,8 +40,9 @@ def test_collection_shows_present_runs_beyond_the_front_page():
     assert "Sella" in collection
     assert "No present run is recorded." in collection
     neb = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "neb.org").read_text(encoding="utf-8")
-    assert "Present runs" in neb
+    assert "Present codes. Fewer calls is to the left." in neb
     assert "eon-3.5.0-neb-pt-lbfgs" in neb
+    assert "2014 scores. Fewer calls is to the left." in neb
     featured = (ROOT / "docs" / "include" / "featured.org").read_text(encoding="utf-8")
     assert "rgmin-lbfgs-0.3.0" not in featured
 

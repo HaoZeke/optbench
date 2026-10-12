@@ -16,9 +16,9 @@
     return (Math.log(value) - Math.log(lo)) / (Math.log(hi) - Math.log(lo));
   }
 
-  function draw(section) {
-    var mount = section.querySelector(".bench-plot-mount");
-    var dataEl = section.querySelector(".bench-plot-data");
+  function draw(figure) {
+    var mount = figure.querySelector(".bench-plot-mount");
+    var dataEl = figure.querySelector(".bench-plot-data");
     if (!mount || !dataEl) {
       return;
     }
@@ -72,7 +72,7 @@
   }
 
   function drawAll() {
-    document.querySelectorAll(".bench").forEach(draw);
+    document.querySelectorAll(".bench-plot").forEach(draw);
   }
 
   if (document.readyState === "loading") {

@@ -147,7 +147,7 @@ def _marked_failed(value: object) -> bool:
         return False
 
 
-def _plot(points: list[dict], primary: str | None) -> str:
+def _plot(points: list[dict], primary: str | None, caption: str | None = None) -> str:
     numbers = [point["value"] for point in points if point["value"] is not None and point["value"] > 0]
     if len(numbers) < 2:
         return ""
@@ -167,6 +167,7 @@ def _plot(points: list[dict], primary: str | None) -> str:
                 "value": point["value"],
                 "best": point["best"],
                 "held": point["held"],
+                "failed": bool(point.get("failed")),
             }
             for point in points
             if point["value"] is not None
@@ -175,7 +176,7 @@ def _plot(points: list[dict], primary: str | None) -> str:
     import json
 
     data = json.dumps(payload, ensure_ascii=True)
-    label = (primary or "score").replace("_", " ")
+    label = caption or (primary or "score").replace("_", " ")
     rows = len(payload["points"])
     return (
         '<figure class="bench-plot">'
@@ -296,6 +297,31 @@ def _present_block(rows: list[dict], heading: str | None = "Present runs") -> st
             lines.append(f'<td class="{kind}">{html.escape(str(row.get(key, "")))}</td>')
         lines.append("</tr>")
     lines.append("</tbody></table></div>")
+    points = []
+    values = []
+    for row in rows:
+        try:
+            value = float(row["mean"])
+        except (TypeError, ValueError):
+            continue
+        if value <= 0:
+            continue
+        values.append(value)
+        points.append(row)
+    best = min(values) if values else None
+    plot_points = [
+        {
+            "id": str(row["entry"]),
+            "entry": f"{row['code']} {row['version']} {row['entry']}".strip(),
+            "code": str(row["code"]),
+            "value": float(row["mean"]),
+            "best": best is not None and float(row["mean"]) == best,
+            "held": False,
+            "failed": _marked_failed(row.get("failed")),
+        }
+        for row in points
+    ]
+    lines.append(_plot(plot_points, "force_calls", "Present codes"))
     return "\n".join(lines)
 
 
@@ -415,7 +441,7 @@ def problem_html(
             lines.append(f'<td class="{kind}">{html.escape(cell)}</td>')
         lines.append("</tr>")
     lines.append("</tbody></table></div>")
-    lines.append(_plot(prepared, primary))
+    lines.append(_plot(prepared, primary, "2014 scores"))
     lines.append("</section>")
     return "\n".join(lines)
 
