@@ -1,0 +1,20 @@
+id = "eon-client/morse-lbfgs"
+engine = "eon-client"
+problem = "minimization/morse-bulk"
+code = "eOn"
+code_version = "3.5.0"
+algorithm = "LBFGS"
+
+[ini.Main]
+job = "minimization"
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+convergence_metric = "norm"
+converged_force = 0.001
+max_move = 0.2
+max_iterations = 10000
+lbfgs_memory = 100

@@ -8,6 +8,7 @@ entry_count = 11
 [convergence]
 force_norm = 1.0e-3
 force_unit = "eV/Ang"
+max_force_calls = 10000
 
 [input]
 archive_path = "website/minimization/morse-bulk/morse-bulk.tgz"

@@ -10,11 +10,11 @@ ROOT = Path(__file__).resolve().parents[1]
 
 class CampaignTests(unittest.TestCase):
     def test_shipped_templates_use_the_lj38_stop(self):
-        problem = resolve_problem(ROOT, "minimization/lj38")
         ids = []
         for template in list_templates(ROOT):
             ids.append(template["id"])
-            _check_stop(problem, template)
+            problem_name = template.get("problem", "minimization/lj38")
+            _check_stop(resolve_problem(ROOT, problem_name), template)
         self.assertIn("eon-client/lbfgs-m100", ids)
         self.assertIn("eon-svn/lbfgs-m100", ids)
 
