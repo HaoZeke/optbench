@@ -1,0 +1,8 @@
+force_calls 106
+force_calls_min 67
+force_calls_max 183
+nfailed 0
+code Eon svn
+code_version r2549
+algorithm CG
+template eon-svn/morse-cg

@@ -1,0 +1,8 @@
+force_calls 52
+force_calls_min 36
+force_calls_max 108
+nfailed 0
+code eOn
+code_version 3.5.0
+algorithm LBFGS
+template eon-client/morse-lbfgs
