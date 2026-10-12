@@ -140,6 +140,13 @@ def _caption(primary: str | None) -> str:
     return captions.get(primary or "", "Archived scores.")
 
 
+def _marked_failed(value: object) -> bool:
+    try:
+        return int(value or 0) > 0
+    except (TypeError, ValueError):
+        return False
+
+
 def _plot(points: list[dict], primary: str | None) -> str:
     numbers = [point["value"] for point in points if point["value"] is not None and point["value"] > 0]
     if len(numbers) < 2:
@@ -172,7 +179,7 @@ def _plot(points: list[dict], primary: str | None) -> str:
     rows = len(payload["points"])
     return (
         '<figure class="bench-plot">'
-        f"<figcaption>{html.escape(label)}, lower is better, same order as the table.</figcaption>"
+        f"<figcaption>{html.escape(label)}. Fewer calls is to the left. Same order as the table.</figcaption>"
         f'<div class="bench-plot-mount" style="--bench-rows:{rows}"></div>'
         f'<script type="application/json" class="bench-plot-data">{data}</script>'
         "</figure>"
@@ -302,6 +309,16 @@ def _sota_html(root: Path) -> str:
             for label, text in bits:
                 lines.append(f"<dt>{html.escape(label)}</dt><dd>{html.escape(text)}</dd>")
             lines.append("</dl>")
+    structure = root / "docs" / "source" / "_static" / "lj38.svg"
+    if structure.is_file():
+        lines.append(
+            '<figure class="bench-structure">'
+            '<img src="_static/lj38.svg" width="176" height="155" '
+            'alt="Thirty-eight particles in Lennard-Jones start cluster_0000.">'
+            "<figcaption>Start cluster_0000, one of the 1,000 geometries. "
+            "Particles only. The potential has no bonds.</figcaption>"
+            "</figure>"
+        )
     if not accepted:
         lines.append(
             "<p class=\"bench-smoke\">No run of a present source has been accepted. "
@@ -332,6 +349,7 @@ def _sota_html(root: Path) -> str:
                         "value": float(value),
                         "best": False,
                         "held": False,
+                        "failed": _marked_failed(metrics.get("nfailed")),
                     }
                 )
         best = min(numbered) if numbered else None
