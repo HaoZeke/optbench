@@ -38,7 +38,7 @@ def run_one(path: str) -> tuple[int, int]:
         if np.linalg.norm(atoms.get_forces()) < GRADTOL:
             break
     failed = int(dyn.nsteps == MAXITER)
-    return int(dyn.pes.calls), failed
+    return int(dyn.pes.neval), failed
 
 
 def main(argv: list[str] | None = None) -> int:
