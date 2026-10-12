@@ -61,5 +61,29 @@
    <td class="num">2918</td>
    <td>998 of 1000 starts match eOn 3.5.0. The mean, minimum, and maximum match the r2025 table.</td>
    </tr>
+   <tr>
+   <td>eon-svn-r2549-sd</td>
+   <td>Eon svn</td>
+   <td class="num">4901</td>
+   <td class="num">1355</td>
+   <td class="num">9982</td>
+   <td>Same mean, minimum, maximum, and failure count as eOn 3.5.0 and as the r2025 table.</td>
+   </tr>
+   <tr>
+   <td>eon-svn-r2549-sd-twopoint</td>
+   <td>Eon svn</td>
+   <td class="num">539</td>
+   <td class="num">173</td>
+   <td class="num">3189</td>
+   <td>Two-point steepest descent. The r2025 mean is 539.</td>
+   </tr>
+   <tr>
+   <td>eon-svn-r2549-qm</td>
+   <td>Eon svn</td>
+   <td class="num">3547</td>
+   <td class="num">679</td>
+   <td class="num">9985</td>
+   <td>QuickMin timestep 0.01. eOn 3.5.0 on the same template family is 3514 with 25 failures.</td>
+   </tr>
    </tbody></table></section>
 #+end_export

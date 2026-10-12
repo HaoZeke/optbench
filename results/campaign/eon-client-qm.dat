@@ -1,0 +1,8 @@
+force_calls 3514
+force_calls_min 682
+force_calls_max 9926
+nfailed 25
+code eOn
+code_version 3.5.0
+algorithm QuickMin
+template eon-client/qm

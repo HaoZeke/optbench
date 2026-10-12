@@ -1,0 +1,8 @@
+force_calls 532
+force_calls_min 181
+force_calls_max 2498
+nfailed 0
+code eOn
+code_version 3.5.0
+algorithm SD-twopoint
+template eon-client/sd-twopoint

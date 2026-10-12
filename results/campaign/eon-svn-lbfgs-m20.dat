@@ -1,0 +1,8 @@
+force_calls 202
+force_calls_min 100
+force_calls_max 463
+nfailed 0
+code Eon svn
+code_version r2549
+algorithm LBFGS
+template eon-svn/lbfgs-m20

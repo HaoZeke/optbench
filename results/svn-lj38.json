@@ -58,6 +58,45 @@
       "method": {"potential": "lj_cluster", "convergence_metric": "norm", "force_norm": 0.01, "max_move": 0.2, "max_iterations": 10000},
       "metrics": {"force_calls": 731, "force_calls_min": 227, "force_calls_max": 2918, "nfailed": 0},
       "notes": "998 of 1000 starts match eOn 3.5.0. The mean, minimum, and maximum match the r2025 table."
+    },
+    {
+      "entry": "eon-svn-r2549-sd",
+      "code": "Eon svn",
+      "algorithm": "SD",
+      "code_version": "r2549",
+      "commit": "r2549",
+      "present_source": false,
+      "starts": 1000,
+      "nfailed": 96,
+      "method": {"potential": "lj_cluster", "sd_alpha": 0.001, "sd_twopoint": false, "convergence_metric": "norm", "force_norm": 0.01, "max_move": 0.2, "max_iterations": 10000},
+      "metrics": {"force_calls": 4901, "force_calls_min": 1355, "force_calls_max": 9982, "nfailed": 96},
+      "notes": "Same mean, minimum, maximum, and failure count as eOn 3.5.0 and as the r2025 table."
+    },
+    {
+      "entry": "eon-svn-r2549-sd-twopoint",
+      "code": "Eon svn",
+      "algorithm": "SD-twopoint",
+      "code_version": "r2549",
+      "commit": "r2549",
+      "present_source": false,
+      "starts": 1000,
+      "nfailed": 0,
+      "method": {"potential": "lj_cluster", "sd_alpha": 0.001, "sd_twopoint": true, "convergence_metric": "norm", "force_norm": 0.01, "max_move": 0.2, "max_iterations": 10000},
+      "metrics": {"force_calls": 539, "force_calls_min": 173, "force_calls_max": 3189, "nfailed": 0},
+      "notes": "Two-point steepest descent. The r2025 mean is 539."
+    },
+    {
+      "entry": "eon-svn-r2549-qm",
+      "code": "Eon svn",
+      "algorithm": "QuickMin",
+      "code_version": "r2549",
+      "commit": "r2549",
+      "present_source": false,
+      "starts": 1000,
+      "nfailed": 22,
+      "method": {"potential": "lj_cluster", "time_step": 0.01, "convergence_metric": "norm", "force_norm": 0.01, "max_move": 0.2, "max_iterations": 10000},
+      "metrics": {"force_calls": 3547, "force_calls_min": 679, "force_calls_max": 9985, "nfailed": 22},
+      "notes": "QuickMin timestep 0.01. eOn 3.5.0 on the same template family is 3514 with 25 failures."
     }
   ]
 }
