@@ -1,0 +1,81 @@
+"""Sella on the archived LJ38 transition-state geometries.
+
+The stop is the Euclidean norm of the force at 1e-3, or 1000 steps.
+The pair cutoff is 40. The trust-region numbers are the archived ones.
+"""
+
+from __future__ import annotations
+
+import argparse
+import os
+import tarfile
+from multiprocessing import Pool
+from pathlib import Path
+
+import numpy as np
+from ase.calculators.lj import LennardJones
+from ase.io import read
+from sella import Sella
+
+MAXITER = 1000
+GRADTOL = 1e-3
+HYPER = dict(
+    eta=1e-6,
+    gamma=0.4,
+    rho_inc=1.035,
+    rho_dec=5.0,
+    sigma_inc=1.15,
+    sigma_dec=0.65,
+    delta0=1.3e-3,
+)
+
+
+def run_one(path: str) -> tuple[int, int]:
+    atoms = read(path, format="eon")
+    atoms.calc = LennardJones(epsilon=1.0, sigma=1.0, rc=40.0)
+    dyn = Sella(atoms, logfile=os.devnull, **HYPER)
+    for _ in dyn.irun(0.0, MAXITER):
+        if np.linalg.norm(atoms.get_forces()) < GRADTOL:
+            break
+    failed = int(dyn.nsteps == MAXITER)
+    return int(dyn.pes.calls), failed
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--coords", type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--workers", type=int, default=1)
+    parser.add_argument("--version", default="2.6.0")
+    args = parser.parse_args(argv)
+    work = args.output.parent / "sella-geometries"
+    if not work.is_dir():
+        work.mkdir(parents=True)
+        with tarfile.open(args.coords) as packed:
+            packed.extractall(work, filter="data")
+    paths = [str(work / "coords-con" / f"{index:04d}.con") for index in range(200)]
+    missing = [path for path in paths if not Path(path).is_file()]
+    if missing:
+        raise FileNotFoundError(missing[0])
+    with Pool(args.workers) as pool:
+        rows = pool.map(run_one, paths)
+    calls = np.asarray([row[0] for row in rows], dtype=float)
+    failed = sum(row[1] for row in rows)
+    lines = [
+        f"force_calls {calls.mean():.0f}",
+        f"force_calls_min {int(calls.min())}",
+        f"force_calls_median {float(np.median(calls))}",
+        f"force_calls_max {int(calls.max())}",
+        f"nfailed {failed}",
+        "code Sella",
+        f"code_version {args.version}",
+        "template sella-lj38",
+    ]
+    text = "\n".join(lines) + "\n"
+    args.output.write_text(text, encoding="utf-8")
+    print(text, end="")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
