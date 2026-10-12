@@ -23,6 +23,27 @@ def test_nav_pages_have_titles_and_the_suites_fold_under_archive():
     assert '"globaltoc_expand_depth": 0' in conf
 
 
+def test_collection_shows_present_runs_beyond_the_front_page():
+    from optbench.site import campaign_problem, render
+
+    assert campaign_problem("eon-client-morse-lbfgs") == "minimization/morse-bulk"
+    assert campaign_problem("eon-3.5.0-neb-pt-lbfgs") == "neb/Pt-heptamer"
+    assert campaign_problem("sella-2.6.0-ts-lj38") == "tsopt/LJ38"
+    assert campaign_problem("eon-3.5.0-de-lj38-ci-neb") == "double-ended-saddle-search/lj38"
+    render(ROOT)
+    collection = (ROOT / "docs" / "include" / "collection.org").read_text(encoding="utf-8")
+    assert "Morse bulk" in collection
+    assert "Pt-heptamer" in collection
+    assert ">52<" in collection
+    assert "Sella" in collection
+    assert "No present run is recorded." in collection
+    neb = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "neb.org").read_text(encoding="utf-8")
+    assert "Present runs" in neb
+    assert "eon-3.5.0-neb-pt-lbfgs" in neb
+    featured = (ROOT / "docs" / "include" / "featured.org").read_text(encoding="utf-8")
+    assert "rgmin-lbfgs-0.3.0" not in featured
+
+
 def test_lj38_table_ranks_the_archived_scores():
     problem = load_problem(ROOT / "problems" / "minimization" / "lj38.toml")
     oracle = load_oracle(ROOT / "oracle" / "entries.jsonl")

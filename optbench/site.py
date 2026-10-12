@@ -10,7 +10,7 @@ import html
 from pathlib import Path
 
 from .check import load_oracle
-from .dat import normalize
+from .dat import normalize, parse_lenient
 from .problems import load_all
 
 SUITE_ORDER = (
@@ -186,7 +186,155 @@ def _plot(points: list[dict], primary: str | None) -> str:
     )
 
 
-def problem_html(problem: dict, oracle: list[dict], smoke_note: str = "") -> str:
+def campaign_problem(stem: str) -> str | None:
+    """Map a results/campaign file name to a problem id."""
+    if "morse" in stem:
+        return "minimization/morse-bulk"
+    if stem.startswith("eon-3.5.0-neb-pt"):
+        return "neb/Pt-heptamer"
+    if stem.startswith("eon-3.5.0-de"):
+        return "double-ended-saddle-search/lj38"
+    if stem.startswith("sella-"):
+        return "tsopt/LJ38"
+    if stem.startswith(("pele-", "eon-client-", "eon-svn-")):
+        return "minimization/lj38"
+    return None
+
+
+def _mean_key(row: dict) -> tuple[int, float]:
+    try:
+        return (0, float(row["mean"]))
+    except (TypeError, ValueError):
+        return (1, 0.0)
+
+
+def _load_present(root: Path) -> dict[str, list[dict]]:
+    """Present runs from campaign files, plus JSON rows those files do not already name."""
+    grouped: dict[str, list[dict]] = {}
+    seen: set[str] = set()
+    campaign = root / "results" / "campaign"
+    if campaign.is_dir():
+        for path in sorted(campaign.glob("*.dat")):
+            problem = campaign_problem(path.stem)
+            if problem is None:
+                continue
+            fields, _duplicates = parse_lenient(path.read_text(encoding="utf-8"))
+            seen.add(path.stem)
+            grouped.setdefault(problem, []).append(
+                {
+                    "entry": path.stem,
+                    "code": fields.get("code", ""),
+                    "version": fields.get("code_version", ""),
+                    "mean": fields.get("force_calls", ""),
+                    "min": fields.get("force_calls_min", ""),
+                    "max": fields.get("force_calls_max", ""),
+                    "failed": fields.get("nfailed", ""),
+                }
+            )
+    import json
+
+    for path in sorted((root / "results").glob("*.json")):
+        record = json.loads(path.read_text(encoding="utf-8"))
+        problem = record.get("problem")
+        if not problem:
+            continue
+        for run in record.get("runs") or []:
+            entry = str(run.get("entry") or "")
+            if not entry or entry in seen:
+                continue
+            seen.add(entry)
+            metrics = run.get("metrics") or {}
+            grouped.setdefault(str(problem), []).append(
+                {
+                    "entry": entry,
+                    "code": str(run.get("code") or ""),
+                    "version": str(run.get("code_version") or ""),
+                    "mean": metrics.get("force_calls", ""),
+                    "min": metrics.get("force_calls_min", ""),
+                    "max": metrics.get("force_calls_max", ""),
+                    "failed": metrics.get("nfailed", run.get("nfailed", "")),
+                }
+            )
+    for rows in grouped.values():
+        rows.sort(key=_mean_key)
+    return grouped
+
+
+def _present_block(rows: list[dict], heading: str | None = "Present runs") -> str:
+    lines = []
+    if heading:
+        lines.append(f"<h3>{html.escape(heading)}</h3>")
+    if not rows:
+        lines.append("<p>No present run is recorded.</p>")
+        return "\n".join(lines)
+    lines.append('<div class="bench-table"><table>')
+    lines.append("<caption>Present runs. Fewer force calls first. The 2014 scores follow.</caption>")
+    lines.append(
+        "<thead><tr>"
+        '<th class="text" scope="col">Entry</th>'
+        '<th class="text" scope="col">Code</th>'
+        '<th class="text" scope="col">Version</th>'
+        '<th class="num" scope="col">Mean (force calls)</th>'
+        '<th class="num" scope="col">Min</th>'
+        '<th class="num" scope="col">Max</th>'
+        '<th class="num" scope="col">Failed</th>'
+        "</tr></thead><tbody>"
+    )
+    for row in rows:
+        failed = str(row.get("failed") or "0")
+        mark = ' class="bench-row-fail"' if failed not in ("", "0") else ""
+        lines.append(f"<tr{mark}>")
+        for key, kind in (
+            ("entry", "text"),
+            ("code", "text"),
+            ("version", "text"),
+            ("mean", "num"),
+            ("min", "num"),
+            ("max", "num"),
+            ("failed", "num"),
+        ):
+            lines.append(f'<td class="{kind}">{html.escape(str(row.get(key, "")))}</td>')
+        lines.append("</tr>")
+    lines.append("</tbody></table></div>")
+    return "\n".join(lines)
+
+
+def _collection_html(order: list[str], by_suite: dict[str, list[dict]], present: dict[str, list[dict]]) -> str:
+    lines = [
+        '<section class="bench" id="collection">',
+        "<p>Each suite is a heading. Each problem under it is a subheading. "
+        "A present run is a score recorded in this repository. "
+        "The 2014 table for that problem is on the suite page.</p>",
+    ]
+    for suite in order:
+        group = by_suite.get(suite)
+        if not group:
+            continue
+        lines.append(f'<h2 id="suite-{html.escape(suite)}">{html.escape(suite_title(suite))}</h2>')
+        for problem in sorted(group, key=lambda item: str(item.get("title") or item["problem"]).lower()):
+            title = str(problem.get("title") or problem["problem"])
+            rows = present.get(problem["id"], [])
+            lines.append(f"<h3>{html.escape(title)}</h3>")
+            count = "no present run" if not rows else f"{len(rows)} present run" + ("s" if len(rows) != 1 else "")
+            href = f"generated/suites/{suite}.html#{problem['problem']}"
+            lines.append(
+                f'<p>{html.escape(count)}. '
+                f'<a href="{html.escape(href)}">2014 scores and the present table</a>.</p>'
+            )
+            if rows:
+                lines.append(_present_block(rows, heading=None))
+            else:
+                lines.append("<p>No present run is recorded.</p>")
+    lines.append("</section>")
+    return "\n".join(lines)
+
+
+def problem_html(
+    problem: dict,
+    oracle: list[dict],
+    smoke_note: str = "",
+    present: list[dict] | None = None,
+) -> str:
     """One problem: the stopping rule, the bar chart, then the rank."""
     canonical_rows = []
     for row in _rows_for(problem, oracle):
@@ -213,6 +361,8 @@ def problem_html(problem: dict, oracle: list[dict], smoke_note: str = "") -> str
         lines.append("</dl>")
     if smoke_note:
         lines.append(f'<p class="bench-smoke">{html.escape(smoke_note)}</p>')
+    if present is not None:
+        lines.append(_present_block(present))
 
     prepared = []
     for rank, (row, fields) in enumerate(canonical_rows, 1):
@@ -497,8 +647,13 @@ def render(root: Path) -> None:
     (include / "featured.org").write_text(_raw(featured_html), encoding="utf-8")
     (include / "sota.org").write_text(_raw(_sota_html(root)), encoding="utf-8")
     (include / "terra-pass.org").write_text(_raw(_submission_html(root)), encoding="utf-8")
+    present = _load_present(root)
 
     order = list(SUITE_ORDER) + sorted(set(by_suite) - set(SUITE_ORDER))
+    (include / "collection.org").write_text(
+        _raw(_collection_html(order, by_suite, present)),
+        encoding="utf-8",
+    )
     for suite in order:
         group = by_suite.get(suite)
         if not group:
@@ -506,7 +661,7 @@ def render(root: Path) -> None:
         sections = []
         for problem in sorted(group, key=lambda item: item["problem"].lower()):
             note = smoke if problem["id"] == "saddle-search/pt-island" else ""
-            sections.append(problem_html(problem, oracle, note))
+            sections.append(problem_html(problem, oracle, note, present.get(problem["id"], [])))
         body = [
             f"#+TITLE: {suite_title(suite)}",
             "#+OPTIONS: toc:nil num:nil author:nil",

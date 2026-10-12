@@ -9,12 +9,14 @@ set those problems in J. Chem. Theory Comput. 2014, 10, 5476-5482
 A run in that archive counts as finished when it stops under 10000
 force calls.
 
-#+INCLUDE: "../include/featured.org"
+The suites below are the collection. A problem with no present run has not been rerun.
+The 2014 scores for that problem are linked from the subheading.
 
-#+INCLUDE: "../include/terra-pass.org"
+#+INCLUDE: "../include/collection.org"
 
 #+begin_export rst
 .. toctree::
+   :hidden:
    :maxdepth: 1
    :caption: 2014 problems
 

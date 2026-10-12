@@ -9,6 +9,47 @@
    <dl class="bench-rule">
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
+   <h3>Present runs</h3>
+   <div class="bench-table"><table>
+   <caption>Present runs. Fewer force calls first. The 2014 scores follow.</caption>
+   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th></tr></thead><tbody>
+   <tr>
+   <td class="text">eon-3.5.0-neb-pt-lbfgs</td>
+   <td class="text">Eon</td>
+   <td class="text">3.5.0</td>
+   <td class="num">40</td>
+   <td class="num">27</td>
+   <td class="num">51</td>
+   <td class="num">0</td>
+   </tr>
+   <tr>
+   <td class="text">eon-3.5.0-neb-pt-fire</td>
+   <td class="text">Eon</td>
+   <td class="text">3.5.0</td>
+   <td class="num">85</td>
+   <td class="num">68</td>
+   <td class="num">95</td>
+   <td class="num">0</td>
+   </tr>
+   <tr>
+   <td class="text">eon-3.5.0-neb-pt-cg</td>
+   <td class="text">Eon</td>
+   <td class="text">3.5.0</td>
+   <td class="num">142</td>
+   <td class="num">51</td>
+   <td class="num">317</td>
+   <td class="num">0</td>
+   </tr>
+   <tr>
+   <td class="text">eon-3.5.0-neb-pt-qm</td>
+   <td class="text">Eon</td>
+   <td class="text">3.5.0</td>
+   <td class="num">165</td>
+   <td class="num">89</td>
+   <td class="num">247</td>
+   <td class="num">0</td>
+   </tr>
+   </tbody></table></div>
    <div class="bench-table"><table>
    <caption>Archived scores, fewest force calls first.</caption>
    <thead><tr>

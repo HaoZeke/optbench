@@ -9,6 +9,29 @@
    <dl class="bench-rule">
    <dt>Stop</dt><dd>gradient norm below 0.001</dd>
    </dl>
+   <h3>Present runs</h3>
+   <div class="bench-table"><table>
+   <caption>Present runs. Fewer force calls first. The 2014 scores follow.</caption>
+   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th></tr></thead><tbody>
+   <tr class="bench-row-fail">
+   <td class="text">eon-3.5.0-de-lj38-ci-swdneb</td>
+   <td class="text">Eon</td>
+   <td class="text">3.5.0</td>
+   <td class="num">708</td>
+   <td class="num">332</td>
+   <td class="num">1707</td>
+   <td class="num">5</td>
+   </tr>
+   <tr class="bench-row-fail">
+   <td class="text">eon-3.5.0-de-lj38-ci-neb</td>
+   <td class="text">Eon</td>
+   <td class="text">3.5.0</td>
+   <td class="num">809</td>
+   <td class="num">337</td>
+   <td class="num">2252</td>
+   <td class="num">2</td>
+   </tr>
+   </tbody></table></div>
    <div class="bench-table"><table>
    <caption>Archived scores, fewest force calls first.</caption>
    <thead><tr>
@@ -126,6 +149,8 @@
    <dl class="bench-rule">
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
+   <h3>Present runs</h3>
+   <p>No present run is recorded.</p>
    <div class="bench-table"><table>
    <caption>Archived scores, fewest force calls first.</caption>
    <thead><tr>
@@ -174,6 +199,8 @@
    <dl class="bench-rule">
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
+   <h3>Present runs</h3>
+   <p>No present run is recorded.</p>
    <div class="bench-table"><table>
    <caption>Archived scores, fewest force calls first.</caption>
    <thead><tr>
