@@ -1,0 +1,970 @@
+{
+  "schema": "optbench.result/v1",
+  "status": "sota",
+  "problem": "double-ended-saddle-search/lj38",
+  "submitter": "Rohit Goswami",
+  "date": "2026-10-15",
+  "host": "cursor",
+  "runs": [
+    {
+      "entry": "eon-main-de-lj38-lbfgs",
+      "code": "eOn",
+      "algorithm": "LBFGS",
+      "code_version": "3.6.0",
+      "commit": "1d71c944501832bfafb955ffe13b9aae50c8efd4",
+      "present_source": true,
+      "starts": 50,
+      "nfailed": 20,
+      "method": {
+        "client": "eonclient 3.6.0 (1d71c94), compiled Thu Oct 15 09:00:20 AM GMT 2026",
+        "reducer": "report-capped",
+        "ini": {
+          "Main": {
+            "job": "nudged_elastic_band"
+          },
+          "Potential": {
+            "potential": "lammps"
+          },
+          "Optimizer": {
+            "opt_method": "lbfgs",
+            "convergence_metric": "norm",
+            "converged_force": 0.001,
+            "max_move": 0.05,
+            "max_iterations": 1000
+          },
+          "Nudged Elastic Band": {
+            "images": 5,
+            "spring": 5.0,
+            "climbing_image_method": true,
+            "climbing_image_converged_only": true,
+            "climbing_image_band_slack": 10.0,
+            "doubly_nudged": false,
+            "doubly_nudged_switching": false,
+            "old_tangent": false,
+            "opt_method": "lbfgs",
+            "converged_force": 0.001,
+            "max_iterations": 1000,
+            "setup_mmf_peaks": true
+          },
+          "LBFGS": {
+            "lbfgs_memory": 20,
+            "lbfgs_inverse_curvature": 0.01,
+            "lbfgs_max_inverse_curvature": 0.0,
+            "lbfgs_auto_scale": true,
+            "lbfgs_angle_reset": true,
+            "lbfgs_distance_reset": true,
+            "lbfgs_curvature": "reset",
+            "lbfgs_project_rigid": false,
+            "lbfgs_secant": "standard",
+            "lbfgs_precon": "none",
+            "lbfgs_step": "lbfgs",
+            "lbfgs_h0": "sy_yy",
+            "lbfgs_accept": "energy",
+            "lbfgs_extra_updates": 0,
+            "lbfgs_cautious_eps": 1e-06,
+            "lbfgs_cautious_alpha": 0.01,
+            "lbfgs_precon_A": 3.0,
+            "lbfgs_precon_mu": 1.0,
+            "lbfgs_precon_rcut": 0.0
+          }
+        },
+        "note": "Default L-BFGS climbing-image NEB on the 50 LJ38 pairs. Memory 20 is the struct default. The archived file listed max_iterations as 1000 and then 600. This client keeps the first value, 1000. Potential lammps uses the archived in.lammps, pair_style lj/cut/opt 40.0. The mean keeps total_force_calls under 2500.",
+        "failure_cap": 2500,
+        "images_for_mean": 1
+      },
+      "metrics": {
+        "force_calls": 1343,
+        "force_calls_min": 1062,
+        "force_calls_max": 1867,
+        "force_calls_median": 1184.5,
+        "nfailed": 20,
+        "mean_unrounded": 1342.8333333333333,
+        "n_in_mean": 6,
+        "failure_cap": 2500
+      },
+      "per_start": [
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 7197.0,
+          "geometry": "pair_00",
+          "raw": 7197,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 15032.0,
+          "geometry": "pair_01",
+          "raw": 15032,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 20637.0,
+          "geometry": "pair_02",
+          "raw": 20637,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 28687.0,
+          "geometry": "pair_03",
+          "raw": 28687,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 7712.0,
+          "geometry": "pair_04",
+          "raw": 7712,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 28507.0,
+          "geometry": "pair_05",
+          "raw": 28507,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 7397.0,
+          "geometry": "pair_06",
+          "raw": 7397,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 25712.0,
+          "geometry": "pair_07",
+          "raw": 25712,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 12002.0,
+          "geometry": "pair_08",
+          "raw": 12002,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 11782.0,
+          "geometry": "pair_09",
+          "raw": 11782,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 1867.0,
+          "geometry": "pair_10",
+          "raw": 1867,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 15867.0,
+          "geometry": "pair_11",
+          "raw": 15867,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 26707.0,
+          "geometry": "pair_12",
+          "raw": 26707,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 26912.0,
+          "geometry": "pair_13",
+          "raw": 26912,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 15782.0,
+          "geometry": "pair_14",
+          "raw": 15782,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 5127.0,
+          "geometry": "pair_15",
+          "raw": 5127,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 13027.0,
+          "geometry": "pair_16",
+          "raw": 13027,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 21357.0,
+          "geometry": "pair_17",
+          "raw": 21357,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 27332.0,
+          "geometry": "pair_18",
+          "raw": 27332,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 23772.0,
+          "geometry": "pair_19",
+          "raw": 23772,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 5637.0,
+          "geometry": "pair_20",
+          "raw": 5637,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 10837.0,
+          "geometry": "pair_21",
+          "raw": 10837,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 29207.0,
+          "geometry": "pair_22",
+          "raw": 29207,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 27237.0,
+          "geometry": "pair_23",
+          "raw": 27237,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 29357.0,
+          "geometry": "pair_24",
+          "raw": 29357,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 10392.0,
+          "geometry": "pair_25",
+          "raw": 10392,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 25312.0,
+          "geometry": "pair_26",
+          "raw": 25312,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 32027.0,
+          "geometry": "pair_27",
+          "raw": 32027,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 30787.0,
+          "geometry": "pair_28",
+          "raw": 30787,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 1192.0,
+          "geometry": "pair_29",
+          "raw": 1192,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 7007.0,
+          "geometry": "pair_30",
+          "raw": 7007,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 14407.0,
+          "geometry": "pair_31",
+          "raw": 14407,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 29107.0,
+          "geometry": "pair_32",
+          "raw": 29107,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 6482.0,
+          "geometry": "pair_33",
+          "raw": 6482,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 15222.0,
+          "geometry": "pair_34",
+          "raw": 15222,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 28227.0,
+          "geometry": "pair_35",
+          "raw": 28227,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 1667.0,
+          "geometry": "pair_36",
+          "raw": 1667,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 1062.0,
+          "geometry": "pair_37",
+          "raw": 1062,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 18187.0,
+          "geometry": "pair_38",
+          "raw": 18187,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 14792.0,
+          "geometry": "pair_39",
+          "raw": 14792,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 28462.0,
+          "geometry": "pair_40",
+          "raw": 28462,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 32177.0,
+          "geometry": "pair_41",
+          "raw": 32177,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 28737.0,
+          "geometry": "pair_42",
+          "raw": 28737,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 1177.0,
+          "geometry": "pair_43",
+          "raw": 1177,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 13057.0,
+          "geometry": "pair_44",
+          "raw": 13057,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 28447.0,
+          "geometry": "pair_45",
+          "raw": 28447,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 29072.0,
+          "geometry": "pair_46",
+          "raw": 29072,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 29312.0,
+          "geometry": "pair_47",
+          "raw": 29312,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 1092.0,
+          "geometry": "pair_48",
+          "raw": 1092,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 14847.0,
+          "geometry": "pair_49",
+          "raw": 14847,
+          "reason": "0"
+        }
+      ],
+      "notes": "Default L-BFGS climbing-image NEB on the 50 LJ38 pairs. Memory 20 is the struct default. The archived file listed max_iterations as 1000 and then 600. This client keeps the first value, 1000. Potential lammps uses the archived in.lammps, pair_style lj/cut/opt 40.0. The mean keeps total_force_calls under 2500. 6 of 50 pairs are under the cap of 2500 and enter the mean. 20 pairs terminated FAIL_MAX_ITERATIONS. The other pairs above the cap have termination_reason 0 and stay out of nfailed. Unrounded mean 1342.8333333333333. 6 starts enter the mean. Per-start rows are in results/campaign/eon-main-de-lj38-lbfgs.starts. Run on host cursor."
+    },
+    {
+      "entry": "eon-main-de-lj38-lbfgs-m100",
+      "code": "eOn",
+      "algorithm": "LBFGS",
+      "code_version": "3.6.0",
+      "commit": "1d71c944501832bfafb955ffe13b9aae50c8efd4",
+      "present_source": true,
+      "starts": 50,
+      "nfailed": 20,
+      "method": {
+        "client": "eonclient 3.6.0 (1d71c94), compiled Thu Oct 15 09:00:20 AM GMT 2026",
+        "reducer": "report-capped",
+        "ini": {
+          "Main": {
+            "job": "nudged_elastic_band"
+          },
+          "Potential": {
+            "potential": "lammps"
+          },
+          "Optimizer": {
+            "opt_method": "lbfgs",
+            "convergence_metric": "norm",
+            "converged_force": 0.001,
+            "max_move": 0.05,
+            "max_iterations": 1000
+          },
+          "Nudged Elastic Band": {
+            "images": 5,
+            "spring": 5.0,
+            "climbing_image_method": true,
+            "climbing_image_converged_only": true,
+            "climbing_image_band_slack": 10.0,
+            "doubly_nudged": false,
+            "doubly_nudged_switching": false,
+            "old_tangent": false,
+            "opt_method": "lbfgs",
+            "converged_force": 0.001,
+            "max_iterations": 1000,
+            "setup_mmf_peaks": true
+          },
+          "LBFGS": {
+            "lbfgs_memory": 100,
+            "lbfgs_inverse_curvature": 0.01,
+            "lbfgs_max_inverse_curvature": 0.0,
+            "lbfgs_auto_scale": true,
+            "lbfgs_angle_reset": true,
+            "lbfgs_distance_reset": true,
+            "lbfgs_curvature": "reset",
+            "lbfgs_project_rigid": false,
+            "lbfgs_secant": "standard",
+            "lbfgs_precon": "none",
+            "lbfgs_step": "lbfgs",
+            "lbfgs_h0": "sy_yy",
+            "lbfgs_accept": "energy",
+            "lbfgs_extra_updates": 0,
+            "lbfgs_cautious_eps": 1e-06,
+            "lbfgs_cautious_alpha": 0.01,
+            "lbfgs_precon_A": 3.0,
+            "lbfgs_precon_mu": 1.0,
+            "lbfgs_precon_rcut": 0.0
+          }
+        },
+        "note": "Tuned L-BFGS climbing-image NEB. Memory 100 is the only change from eon/de-lj38-lbfgs.",
+        "failure_cap": 2500,
+        "images_for_mean": 1
+      },
+      "metrics": {
+        "force_calls": 1328,
+        "force_calls_min": 1092,
+        "force_calls_max": 1597,
+        "force_calls_median": 1372.0,
+        "nfailed": 20,
+        "mean_unrounded": 1327.7142857142858,
+        "n_in_mean": 7,
+        "failure_cap": 2500
+      },
+      "per_start": [
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 8162.0,
+          "geometry": "pair_00",
+          "raw": 8162,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 15032.0,
+          "geometry": "pair_01",
+          "raw": 15032,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 20637.0,
+          "geometry": "pair_02",
+          "raw": 20637,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 20042.0,
+          "geometry": "pair_03",
+          "raw": 20042,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 7712.0,
+          "geometry": "pair_04",
+          "raw": 7712,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 28712.0,
+          "geometry": "pair_05",
+          "raw": 28712,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 7397.0,
+          "geometry": "pair_06",
+          "raw": 7397,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 25712.0,
+          "geometry": "pair_07",
+          "raw": 25712,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 5867.0,
+          "geometry": "pair_08",
+          "raw": 5867,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 8217.0,
+          "geometry": "pair_09",
+          "raw": 8217,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 1372.0,
+          "geometry": "pair_10",
+          "raw": 1372,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 15867.0,
+          "geometry": "pair_11",
+          "raw": 15867,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 26632.0,
+          "geometry": "pair_12",
+          "raw": 26632,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 26427.0,
+          "geometry": "pair_13",
+          "raw": 26427,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 17272.0,
+          "geometry": "pair_14",
+          "raw": 17272,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 5482.0,
+          "geometry": "pair_15",
+          "raw": 5482,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 13027.0,
+          "geometry": "pair_16",
+          "raw": 13027,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 21627.0,
+          "geometry": "pair_17",
+          "raw": 21627,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 24957.0,
+          "geometry": "pair_18",
+          "raw": 24957,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 26757.0,
+          "geometry": "pair_19",
+          "raw": 26757,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 5067.0,
+          "geometry": "pair_20",
+          "raw": 5067,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 12587.0,
+          "geometry": "pair_21",
+          "raw": 12587,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 29197.0,
+          "geometry": "pair_22",
+          "raw": 29197,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 27237.0,
+          "geometry": "pair_23",
+          "raw": 27237,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 29357.0,
+          "geometry": "pair_24",
+          "raw": 29357,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 4802.0,
+          "geometry": "pair_25",
+          "raw": 4802,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 25517.0,
+          "geometry": "pair_26",
+          "raw": 25517,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 31237.0,
+          "geometry": "pair_27",
+          "raw": 31237,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 11022.0,
+          "geometry": "pair_28",
+          "raw": 11022,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 1597.0,
+          "geometry": "pair_29",
+          "raw": 1597,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 1117.0,
+          "geometry": "pair_30",
+          "raw": 1117,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 28122.0,
+          "geometry": "pair_31",
+          "raw": 28122,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 28962.0,
+          "geometry": "pair_32",
+          "raw": 28962,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 1512.0,
+          "geometry": "pair_33",
+          "raw": 1512,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 13122.0,
+          "geometry": "pair_34",
+          "raw": 13122,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 28422.0,
+          "geometry": "pair_35",
+          "raw": 28422,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 5822.0,
+          "geometry": "pair_36",
+          "raw": 5822,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 1142.0,
+          "geometry": "pair_37",
+          "raw": 1142,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 19582.0,
+          "geometry": "pair_38",
+          "raw": 19582,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 7097.0,
+          "geometry": "pair_39",
+          "raw": 7097,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 28307.0,
+          "geometry": "pair_40",
+          "raw": 28307,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 31537.0,
+          "geometry": "pair_41",
+          "raw": 31537,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 28717.0,
+          "geometry": "pair_42",
+          "raw": 28717,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 1462.0,
+          "geometry": "pair_43",
+          "raw": 1462,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 14312.0,
+          "geometry": "pair_44",
+          "raw": 14312,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 30252.0,
+          "geometry": "pair_45",
+          "raw": 30252,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 29202.0,
+          "geometry": "pair_46",
+          "raw": 29202,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 29312.0,
+          "geometry": "pair_47",
+          "raw": 29312,
+          "reason": "1"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 1092.0,
+          "geometry": "pair_48",
+          "raw": 1092,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": true,
+          "force_calls": 23727.0,
+          "geometry": "pair_49",
+          "raw": 23727,
+          "reason": "0"
+        }
+      ],
+      "notes": "Tuned L-BFGS climbing-image NEB. Memory 100 is the only change from eon/de-lj38-lbfgs. 7 of 50 pairs are under the cap of 2500 and enter the mean. 20 pairs terminated FAIL_MAX_ITERATIONS. Unrounded mean 1327.7142857142858. 7 starts enter the mean. Per-start rows are in results/campaign/eon-main-de-lj38-lbfgs-m100.starts. Run on host cursor."
+    }
+  ]
+}

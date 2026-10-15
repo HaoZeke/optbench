@@ -11,7 +11,7 @@
    </dl>
    <h3>Present runs</h3>
    <div class="bench-table"><table>
-   <caption>Present runs. Fewer force calls first. The 2014 scores follow.</caption>
+   <caption>Present runs. Fewer force calls first. The legacy 2014 scores follow.</caption>
    <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th></tr></thead><tbody>
    <tr class="bench-row-fail">
    <td class="text">sella-2.6.0-ts-lj38</td>
@@ -22,8 +22,26 @@
    <td class="num">1846</td>
    <td class="num">2</td>
    </tr>
+   <tr class="bench-row-fail">
+   <td class="text">eon-main-ts-lj38-dimer-m100</td>
+   <td class="text">eOn</td>
+   <td class="text">3.6.0</td>
+   <td class="num">2015</td>
+   <td class="num">151</td>
+   <td class="num">9299</td>
+   <td class="num">12</td>
+   </tr>
+   <tr class="bench-row-fail">
+   <td class="text">eon-main-ts-lj38-dimer</td>
+   <td class="text">eOn</td>
+   <td class="text">3.6.0</td>
+   <td class="num">2083</td>
+   <td class="num">151</td>
+   <td class="num">9833</td>
+   <td class="num">14</td>
+   </tr>
    </tbody></table></div>
-   
+   <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:3"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "sella-2.6.0-ts-lj38", "entry": "Sella 2.6.0 sella-2.6.0-ts-lj38", "code": "Sella", "value": 93.0, "best": true, "held": false, "failed": true}, {"id": "eon-main-ts-lj38-dimer-m100", "entry": "eOn 3.6.0 eon-main-ts-lj38-dimer-m100", "code": "eOn", "value": 2015.0, "best": false, "held": false, "failed": true}, {"id": "eon-main-ts-lj38-dimer", "entry": "eOn 3.6.0 eon-main-ts-lj38-dimer", "code": "eOn", "value": 2083.0, "best": false, "held": false, "failed": true}]}</script></figure>
    <div class="bench-table"><table>
    <caption>Archived scores, fewest force calls first.</caption>
    <thead><tr>
@@ -135,14 +153,36 @@
    <td class="text">02 Jul 2013</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:8"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "tsopt-lj38-sella", "entry": "sella", "code": "Sella 0.1.1", "value": 69.55, "best": true, "held": false, "failed": false}, {"id": "tsopt-lj38-optim-ffd", "entry": "optim_ffd", "code": "OPTIM", "value": 145.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-lj38-pele-ffd", "entry": "pele_ffd", "code": "pele", "value": 192.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-lj38-optim-cd", "entry": "optim_cd", "code": "OPTIM", "value": 223.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-lj38-eon-lanczos-improved", "entry": "eon-lanczos-improved", "code": "Eon r2156", "value": 237.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-lj38-pele-cd", "entry": "pele_cd", "code": "pele", "value": 254.0, "best": false, "held": true, "failed": false}, {"id": "tsopt-lj38-eon-lanczos", "entry": "eon-lanczos", "code": "Eon r2156", "value": 321.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-lj38-eon-dimer", "entry": "eon-dimer", "code": "Eon r2156", "value": 528.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:8"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "tsopt-lj38-sella", "entry": "sella", "code": "Sella 0.1.1", "value": 69.55, "best": true, "held": false, "failed": false}, {"id": "tsopt-lj38-optim-ffd", "entry": "optim_ffd", "code": "OPTIM", "value": 145.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-lj38-pele-ffd", "entry": "pele_ffd", "code": "pele", "value": 192.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-lj38-optim-cd", "entry": "optim_cd", "code": "OPTIM", "value": 223.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-lj38-eon-lanczos-improved", "entry": "eon-lanczos-improved", "code": "Eon r2156", "value": 237.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-lj38-pele-cd", "entry": "pele_cd", "code": "pele", "value": 254.0, "best": false, "held": true, "failed": false}, {"id": "tsopt-lj38-eon-lanczos", "entry": "eon-lanczos", "code": "Eon r2156", "value": 321.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-lj38-eon-dimer", "entry": "eon-dimer", "code": "Eon r2156", "value": 528.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </section><section class="bench" id="pt-island">
    <h2>pt-island</h2>
    <dl class="bench-rule">
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <h3>Present runs</h3>
-   <p>No present run is recorded.</p>
+   <div class="bench-table"><table>
+   <caption>Present runs. Fewer force calls first. The legacy 2014 scores follow.</caption>
+   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th></tr></thead><tbody>
+   <tr>
+   <td class="text">eon-main-ts-pt-dimer</td>
+   <td class="text">eOn</td>
+   <td class="text">3.6.0</td>
+   <td class="num">1659</td>
+   <td class="num">100</td>
+   <td class="num">5894</td>
+   <td class="num">0</td>
+   </tr>
+   <tr>
+   <td class="text">eon-main-ts-pt-dimer-m100</td>
+   <td class="text">eOn</td>
+   <td class="text">3.6.0</td>
+   <td class="num">1680</td>
+   <td class="num">100</td>
+   <td class="num">5889</td>
+   <td class="num">0</td>
+   </tr>
+   </tbody></table></div>
+   <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "eon-main-ts-pt-dimer", "entry": "eOn 3.6.0 eon-main-ts-pt-dimer", "code": "eOn", "value": 1659.0, "best": true, "held": false, "failed": false}, {"id": "eon-main-ts-pt-dimer-m100", "entry": "eOn 3.6.0 eon-main-ts-pt-dimer-m100", "code": "eOn", "value": 1680.0, "best": false, "held": false, "failed": false}]}</script></figure>
    <div class="bench-table"><table>
    <caption>Archived scores, fewest force calls first.</caption>
    <thead><tr>
@@ -242,6 +282,6 @@
    <td class="text">29 Aug 2013</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:7"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "tsopt-pt-island-sella", "entry": "sella", "code": "Sella 0.1.1", "value": 53.0, "best": true, "held": false, "failed": false}, {"id": "tsopt-pt-island-optim-ffd", "entry": "optim_ffd", "code": "OPTIM", "value": 71.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-pele", "entry": "pele", "code": "pele", "value": 88.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-optim-cd", "entry": "optim_cd", "code": "OPTIM", "value": 90.0, "best": false, "held": true, "failed": false}, {"id": "tsopt-pt-island-eon-lanczos-improved", "entry": "eon-lanczos-improved", "code": "Eon r2156", "value": 106.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-eon-dimer", "entry": "eon-dimer", "code": "Eon r2156", "value": 116.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-eon-lanczos", "entry": "eon-lanczos", "code": "Eon r2156", "value": 143.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:7"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "tsopt-pt-island-sella", "entry": "sella", "code": "Sella 0.1.1", "value": 53.0, "best": true, "held": false, "failed": false}, {"id": "tsopt-pt-island-optim-ffd", "entry": "optim_ffd", "code": "OPTIM", "value": 71.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-pele", "entry": "pele", "code": "pele", "value": 88.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-optim-cd", "entry": "optim_cd", "code": "OPTIM", "value": 90.0, "best": false, "held": true, "failed": false}, {"id": "tsopt-pt-island-eon-lanczos-improved", "entry": "eon-lanczos-improved", "code": "Eon r2156", "value": 106.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-eon-dimer", "entry": "eon-dimer", "code": "Eon r2156", "value": 116.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-eon-lanczos", "entry": "eon-lanczos", "code": "Eon r2156", "value": 143.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </section>
 #+end_export

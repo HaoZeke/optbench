@@ -218,10 +218,10 @@ def _load_present(root: Path) -> dict[str, list[dict]]:
     campaign = root / "results" / "campaign"
     if campaign.is_dir():
         for path in sorted(campaign.glob("*.dat")):
-            problem = campaign_problem(path.stem)
+            fields, _duplicates = parse_lenient(path.read_text(encoding="utf-8"))
+            problem = fields.get("problem") or campaign_problem(path.stem)
             if problem is None:
                 continue
-            fields, _duplicates = parse_lenient(path.read_text(encoding="utf-8"))
             seen.add(path.stem)
             grouped.setdefault(problem, []).append(
                 {
@@ -271,7 +271,7 @@ def _present_block(rows: list[dict], heading: str | None = "Present runs") -> st
         lines.append("<p>No present run is recorded.</p>")
         return "\n".join(lines)
     lines.append('<div class="bench-table"><table>')
-    lines.append("<caption>Present runs. Fewer force calls first. The 2014 scores follow.</caption>")
+    lines.append("<caption>Present runs. Fewer force calls first. The legacy 2014 scores follow.</caption>")
     lines.append(
         "<thead><tr>"
         '<th class="text" scope="col">Entry</th>'
@@ -332,7 +332,7 @@ def _collection_html(order: list[str], by_suite: dict[str, list[dict]], present:
         '<section class="bench" id="collection">',
         "<p>Each suite is a heading. Each problem under it is a subheading. "
         "A present run is a score recorded in this repository. "
-        "The 2014 table for that problem is on the suite page.</p>",
+        "The legacy 2014 table for that problem is on the suite page.</p>",
     ]
     for suite in order:
         group = by_suite.get(suite)
@@ -347,7 +347,7 @@ def _collection_html(order: list[str], by_suite: dict[str, list[dict]], present:
             href = f"generated/suites/{suite}.html#{problem['problem']}"
             lines.append(
                 f'<p>{html.escape(count)}. '
-                f'<a href="{html.escape(href)}">2014 scores and the present table</a>.</p>'
+                f'<a href="{html.escape(href)}">Legacy 2014 scores and the present table</a>.</p>'
             )
             if rows:
                 lines.append(_present_block(rows, heading=None))
@@ -443,7 +443,7 @@ def problem_html(
             lines.append(f'<td class="{kind}">{html.escape(cell)}</td>')
         lines.append("</tr>")
     lines.append("</tbody></table></div>")
-    lines.append(_plot(prepared, primary, "2014 scores"))
+    lines.append(_plot(prepared, primary, "Legacy 2014 scores"))
     lines.append("</section>")
     return "\n".join(lines)
 

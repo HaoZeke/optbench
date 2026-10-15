@@ -1,0 +1,43 @@
+id = "eon/lj38-lbfgs-m100"
+engine = "eon"
+problem = "minimization/lj38"
+code = "eOn"
+code_version = "3.6.0"
+commit = "1d71c944501832bfafb955ffe13b9aae50c8efd4"
+algorithm = "LBFGS"
+reducer = "harness-capped"
+note = "Tuned L-BFGS. Memory 100 is the setting that scored 181 on eOn 3.5.0. Every other key matches eon/lj38-lbfgs."
+
+[ini.Main]
+job = "minimization"
+
+[ini.Potential]
+potential = "ljcluster"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+convergence_metric = "norm"
+converged_force = 0.01
+max_move = 0.2
+max_iterations = 10000
+
+[ini.LBFGS]
+lbfgs_memory = 100
+lbfgs_inverse_curvature = 0.01
+lbfgs_max_inverse_curvature = 0.0
+lbfgs_auto_scale = true
+lbfgs_angle_reset = true
+lbfgs_distance_reset = true
+lbfgs_curvature = "reset"
+lbfgs_project_rigid = false
+lbfgs_secant = "standard"
+lbfgs_precon = "none"
+lbfgs_step = "lbfgs"
+lbfgs_h0 = "sy_yy"
+lbfgs_accept = "energy"
+lbfgs_extra_updates = 0
+lbfgs_cautious_eps = 1.0e-6
+lbfgs_cautious_alpha = 0.01
+lbfgs_precon_A = 3.0
+lbfgs_precon_mu = 1.0
+lbfgs_precon_rcut = 0.0

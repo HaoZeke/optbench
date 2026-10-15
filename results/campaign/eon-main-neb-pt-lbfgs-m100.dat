@@ -1,0 +1,12 @@
+force_calls 440
+force_calls_min 32
+force_calls_max 801
+force_calls_median 464.0
+nfailed 0
+code eOn
+code_version 3.6.0
+commit 1d71c944501832bfafb955ffe13b9aae50c8efd4
+algorithm LBFGS
+template eon/neb-pt-lbfgs-m100
+problem neb/Pt-heptamer
+reducer report-neb

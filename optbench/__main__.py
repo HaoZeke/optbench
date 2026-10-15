@@ -89,6 +89,29 @@ def run(
     )
 
 
+@app.command(name="eon-job")
+def eon_job(
+    name: str,
+    *,
+    root: Path = Path("."),
+    client: Path | None = None,
+    output: Path = Path("benchmark.dat"),
+    workers: int = 1,
+    work: Path | None = None,
+) -> None:
+    """Run one named eOn band or saddle job and write benchmark.dat."""
+    from optbench.eon_jobs import run_named
+
+    run_named(
+        root,
+        name,
+        _eon_client(client),
+        output,
+        workers=workers,
+        work=work,
+    )
+
+
 @app.command
 def neb(
     entry: Path,

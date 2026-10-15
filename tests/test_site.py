@@ -44,6 +44,7 @@ def test_collection_shows_present_runs_beyond_the_front_page():
     neb = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "neb.org").read_text(encoding="utf-8")
     assert "Present codes. Fewer calls is to the left." in neb
     assert "eon-3.5.0-neb-pt-lbfgs" in neb
+    assert "Legacy 2014 scores. Fewer calls is to the left." in neb
     assert "2014 scores. Fewer calls is to the left." in neb
     featured = (ROOT / "docs" / "include" / "featured.org").read_text(encoding="utf-8")
     assert "rgmin-lbfgs-0.3.0" not in featured
@@ -87,5 +88,6 @@ def test_render_writes_the_front_page_table():
     codes = (ROOT / "docs" / "include" / "codes.org").read_text(encoding="utf-8")
     assert "Rohit Goswami" in codes
     assert "4d8b34baf1ba" in codes
+    assert "1d71c9445018" in codes
     assert "e089a136910f" in codes
     assert "8bea1002b06a" in codes

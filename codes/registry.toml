@@ -12,7 +12,17 @@ repository = "https://github.com/TheochemUI/eon"
 ref = "3.5.0"
 commit = "4d8b34baf1ba8d2d980df29838bac1f969d1662c"
 committed = "2026-10-02"
-note = "Version string 3.5.0 and Python client 0.4.2. Lennard-Jones scores use this client."
+note = "Version string 3.5.0 and Python client 0.4.2. The Lennard-Jones scores filed before October 2026 use this client."
+
+[[code]]
+id = "eon-main"
+name = "eOn"
+role = "minimization and saddle search"
+repository = "https://github.com/TheochemUI/eon"
+ref = "main"
+commit = "1d71c944501832bfafb955ffe13b9aae50c8efd4"
+committed = "2026-10-15"
+note = "Current main, including merged pull request 776. The version string is 3.6.0. Templates under templates/eon/ use this commit. The 3.5.0 pin above stays for the scores that were run on it."
 
 [[code]]
 id = "rgmin"
