@@ -229,7 +229,7 @@ def _load_present(root: Path) -> dict[str, list[dict]]:
     if campaign.is_dir():
         for path in sorted(campaign.glob("*.dat")):
             fields, _duplicates = parse_lenient(path.read_text(encoding="utf-8"))
-            if fields.get("partial") == "true":
+            if fields.get("partial") == "true" or fields.get("ranked") == "false":
                 continue
             problem = fields.get("problem") or campaign_problem(path.stem)
             if problem is None:

@@ -563,7 +563,7 @@ def _dimer_specs() -> list[dict]:
                     "norm": "l2",
                     "force_norm": 0.001,
                     "max_force_calls": 10000,
-                    "max_steps": 500,
+                    "max_steps": 2000,
                 },
                 "input": {
                     "archive_path": "website/saddle-search/pt-island/pt-island.con",

@@ -775,25 +775,50 @@ def _run_neb(payload: dict, bucket: list[int]) -> dict:
     return row
 
 
+def _free_mask(atoms) -> list[bool]:
+    """True where the dimer may displace an atom. Fixed atoms stay put."""
+    import numpy as np
+    from ase.constraints import FixAtoms
+
+    free = np.ones(len(atoms), dtype=bool)
+    for constraint in atoms.constraints:
+        if isinstance(constraint, FixAtoms):
+            free[np.asarray(constraint.index, dtype=int)] = False
+    return [bool(value) for value in free]
+
+
 def _run_dimer(payload: dict, bucket: list[int]) -> dict:
     from ase.mep import DimerControl, MinModeAtoms, MinModeTranslate
 
     atoms = _attach(_read_atoms(Path(payload["paths"][0])), payload["potential"], bucket)
-    control = DimerControl(logfile=os.devnull, **dict(payload["optimizer"].get("parameters") or {}))
+    mask = _free_mask(atoms)
+    control = DimerControl(
+        logfile=os.devnull,
+        mask=mask,
+        **dict(payload["optimizer"].get("parameters") or {}),
+    )
     mode_atoms = MinModeAtoms(atoms, control, random_seed=int(payload["seed"]))
     opt = MinModeTranslate(mode_atoms, logfile=None)
-    converged = False
+    norm = None
+    curvature = None
     try:
-        for converged in opt.irun(fmax=payload["tol"], steps=payload["max_steps"]):
+        # ASE stops on the largest force component. The problem stop is the
+        # Euclidean norm, so the fmax gate stays open and this loop applies it.
+        for _ase_converged in opt.irun(fmax=0.0, steps=payload["max_steps"]):
             if bucket[0] >= bucket[1]:
-                converged = False
                 raise ForceCap()
+            norm = _cached_l2(atoms.calc, atoms)
+            curvature = float(mode_atoms.get_curvature())
+            if norm is not None and norm <= payload["tol"] and curvature < 0.0:
+                break
     except ForceCap:
-        converged = False
-    curvature = float(mode_atoms.get_curvature())
-    norm = _cached_l2(atoms.calc, atoms)
+        pass
+    if curvature is None:
+        curvature = float(mode_atoms.get_curvature())
+    if norm is None:
+        norm = _cached_l2(atoms.calc, atoms)
     saddle = curvature < 0.0 and norm is not None and norm <= payload["tol"]
-    failed = (not converged) or (not saddle) or bucket[0] >= bucket[1]
+    failed = (not saddle) or bucket[0] >= bucket[1]
     row = {
         "failed": failed,
         "force_norm": norm,
@@ -803,6 +828,7 @@ def _run_dimer(payload: dict, bucket: list[int]) -> dict:
     if payload.get("snapshot"):
         params = dict(DIMER_DEFAULTS)
         params.update(payload["optimizer"].get("parameters") or {})
+        params["mask"] = "free" if not all(mask) else "all"
         row["parameters"] = params
     return row
 
@@ -960,6 +986,8 @@ def _write_dat(
     ]
     if partial:
         fields.append(("partial", "true"))
+    if template.get("ranked") is False:
+        fields.append(("ranked", "false"))
     if template["problem"] == "double-ended-saddle-search/lj38_2ts_separation":
         kept = starts - int(summary.get("nfailed") or 0)
         fields.append(("transition_states", kept))
