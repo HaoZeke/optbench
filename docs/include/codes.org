@@ -29,7 +29,13 @@
    <td>ASE</td>
    <td>minimization and saddle search</td>
    <td><a href="https://gitlab.com/ase/ase">ase 3.29.0</a></td>
-   <td class="num">3.29.0</td>
+   <td class="num">f27c0005ae6a</td>
+   </tr>
+   <tr>
+   <td>Sella</td>
+   <td>minimization and saddle search</td>
+   <td><a href="https://github.com/zadorlab/sella">sella 2.6.0</a></td>
+   <td class="num">6cfb60cdb100</td>
    </tr>
    <tr>
    <td>pARTn</td>

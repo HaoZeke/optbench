@@ -68,19 +68,26 @@ def run(
     output: Path = Path("benchmark.dat"),
     workers: int = 1,
     work: Path | None = None,
+    limit: int = 0,
+    resume: bool = False,
 ) -> None:
     """Run one problem template and write benchmark.dat."""
+    from optbench.campaign import load_template
     from optbench.campaign import run as run_campaign
 
+    loaded = load_template(root, template)
+    client_path = _eon_client(client) if loaded["engine"] == "eon-client" else client
     summary = run_campaign(
         root,
         problem,
         template,
-        client=_eon_client(client),
+        client=client_path,
         geometries=geometries,
         output=output,
         workers=workers,
         work=work,
+        limit=limit,
+        resume=resume,
     )
     print(
         f"{summary['problem']} {summary['template']} "
@@ -145,6 +152,37 @@ def pairs(
         version=version,
     )
     print(text, end="")
+
+
+@app.command(name="campaign-ase")
+def campaign_ase(
+    *,
+    root: Path = Path("."),
+    output_dir: Path = Path("results/campaign"),
+    workers: int = 1,
+    limit: int = 0,
+    match: str = "",
+    ranked_only: bool = True,
+    resume: bool = False,
+) -> None:
+    """Run the ranked ASE and Sella templates."""
+    from optbench.ase_sella import run_many
+
+    summaries = run_many(
+        root,
+        output_dir,
+        workers=workers,
+        limit=limit,
+        match=match,
+        ranked_only=ranked_only,
+        resume=resume,
+    )
+    for summary in summaries:
+        print(
+            f"{summary['problem']} {summary['template']} "
+            f"force_calls={summary['force_calls']} nfailed={summary['nfailed']} "
+            f"starts={summary['starts']}"
+        )
 
 
 def main(argv: list[str] | None = None) -> None:
