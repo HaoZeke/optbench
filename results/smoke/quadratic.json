@@ -10,7 +10,7 @@
       "cap": 5000,
       "code": "optbench",
       "code_version": "0.0.0",
-      "commit": "07a5a5e614ca2cc99bbf4468dd115a391db865a2",
+      "commit": "267959adba9e98e2f3002a4868ed44a66329ac84",
       "entry": "gd-step-0.05",
       "metrics": {
         "bootstrap_resamples": 2000,
@@ -46,7 +46,7 @@
       "provenance": {
         "code": "optbench",
         "code_version": "0.0.0",
-        "commit": "07a5a5e614ca2cc99bbf4468dd115a391db865a2",
+        "commit": "267959adba9e98e2f3002a4868ed44a66329ac84",
         "machine": {
           "machine": "x86_64",
           "node": "cursor",
@@ -101,7 +101,7 @@
       "cap": 20000,
       "code": "optbench",
       "code_version": "0.0.0",
-      "commit": "07a5a5e614ca2cc99bbf4468dd115a391db865a2",
+      "commit": "267959adba9e98e2f3002a4868ed44a66329ac84",
       "entry": "gd-step-0.01",
       "metrics": {
         "bootstrap_resamples": 2000,
@@ -137,7 +137,7 @@
       "provenance": {
         "code": "optbench",
         "code_version": "0.0.0",
-        "commit": "07a5a5e614ca2cc99bbf4468dd115a391db865a2",
+        "commit": "267959adba9e98e2f3002a4868ed44a66329ac84",
         "machine": {
           "machine": "x86_64",
           "node": "cursor",
@@ -176,7 +176,7 @@
       "cap": 200,
       "code": "optbench",
       "code_version": "0.0.0",
-      "commit": "07a5a5e614ca2cc99bbf4468dd115a391db865a2",
+      "commit": "267959adba9e98e2f3002a4868ed44a66329ac84",
       "entry": "gd-step-0.001-cap-200",
       "metrics": {
         "bootstrap_resamples": 2000,
@@ -212,7 +212,7 @@
       "provenance": {
         "code": "optbench",
         "code_version": "0.0.0",
-        "commit": "07a5a5e614ca2cc99bbf4468dd115a391db865a2",
+        "commit": "267959adba9e98e2f3002a4868ed44a66329ac84",
         "machine": {
           "machine": "x86_64",
           "node": "cursor",
@@ -256,7 +256,7 @@
       "cap": 100,
       "code": "optbench",
       "code_version": "0.0.0",
-      "commit": "07a5a5e614ca2cc99bbf4468dd115a391db865a2",
+      "commit": "267959adba9e98e2f3002a4868ed44a66329ac84",
       "entry": "newton-saddle",
       "metrics": {
         "bootstrap_resamples": 2000,
@@ -292,7 +292,7 @@
       "provenance": {
         "code": "optbench",
         "code_version": "0.0.0",
-        "commit": "07a5a5e614ca2cc99bbf4468dd115a391db865a2",
+        "commit": "267959adba9e98e2f3002a4868ed44a66329ac84",
         "machine": {
           "machine": "x86_64",
           "node": "cursor",
@@ -331,7 +331,7 @@
       "cap": 5000,
       "code": "optbench",
       "code_version": "0.0.0",
-      "commit": "07a5a5e614ca2cc99bbf4468dd115a391db865a2",
+      "commit": "267959adba9e98e2f3002a4868ed44a66329ac84",
       "entry": "bowl-reported-as-saddle",
       "metrics": {
         "bootstrap_resamples": 2000,
@@ -367,7 +367,7 @@
       "provenance": {
         "code": "optbench",
         "code_version": "0.0.0",
-        "commit": "07a5a5e614ca2cc99bbf4468dd115a391db865a2",
+        "commit": "267959adba9e98e2f3002a4868ed44a66329ac84",
         "machine": {
           "machine": "x86_64",
           "node": "cursor",
