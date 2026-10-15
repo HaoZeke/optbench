@@ -23,6 +23,24 @@
    <td class="num">0</td>
    </tr>
    <tr>
+   <td class="text">ase-3.29.0-neb-pt-heptamer-tuned</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num">55</td>
+   <td class="num">31</td>
+   <td class="num">74</td>
+   <td class="num">0</td>
+   </tr>
+   <tr>
+   <td class="text">ase-3.29.0-neb-pt-heptamer-default</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num">76</td>
+   <td class="num">47</td>
+   <td class="num">99</td>
+   <td class="num">0</td>
+   </tr>
+   <tr>
    <td class="text">eon-3.5.0-neb-pt-fire</td>
    <td class="text">Eon</td>
    <td class="text">3.5.0</td>
@@ -50,7 +68,7 @@
    <td class="num">0</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:4"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "eon-3.5.0-neb-pt-lbfgs", "entry": "Eon 3.5.0 eon-3.5.0-neb-pt-lbfgs", "code": "Eon", "value": 40.0, "best": true, "held": false, "failed": false}, {"id": "eon-3.5.0-neb-pt-fire", "entry": "Eon 3.5.0 eon-3.5.0-neb-pt-fire", "code": "Eon", "value": 85.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-neb-pt-cg", "entry": "Eon 3.5.0 eon-3.5.0-neb-pt-cg", "code": "Eon", "value": 142.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-neb-pt-qm", "entry": "Eon 3.5.0 eon-3.5.0-neb-pt-qm", "code": "Eon", "value": 165.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:6"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "eon-3.5.0-neb-pt-lbfgs", "entry": "Eon 3.5.0 eon-3.5.0-neb-pt-lbfgs", "code": "Eon", "value": 40.0, "best": true, "held": false, "failed": false}, {"id": "ase-3.29.0-neb-pt-heptamer-tuned", "entry": "ASE 3.29.0 ase-3.29.0-neb-pt-heptamer-tuned", "code": "ASE", "value": 55.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-neb-pt-heptamer-default", "entry": "ASE 3.29.0 ase-3.29.0-neb-pt-heptamer-default", "code": "ASE", "value": 76.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-neb-pt-fire", "entry": "Eon 3.5.0 eon-3.5.0-neb-pt-fire", "code": "Eon", "value": 85.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-neb-pt-cg", "entry": "Eon 3.5.0 eon-3.5.0-neb-pt-cg", "code": "Eon", "value": 142.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-neb-pt-qm", "entry": "Eon 3.5.0 eon-3.5.0-neb-pt-qm", "code": "Eon", "value": 165.0, "best": false, "held": false, "failed": false}]}</script></figure>
    <div class="bench-table"><table>
    <caption>Archived scores, fewest force calls first.</caption>
    <thead><tr>

@@ -13,6 +13,24 @@
    <div class="bench-table"><table>
    <caption>Present runs. Fewer force calls first. The 2014 scores follow.</caption>
    <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th></tr></thead><tbody>
+   <tr>
+   <td class="text">sella-2.6.0-lj38-ts-default</td>
+   <td class="text">Sella</td>
+   <td class="text">2.6.0</td>
+   <td class="num">69</td>
+   <td class="num">25</td>
+   <td class="num">257</td>
+   <td class="num">0</td>
+   </tr>
+   <tr class="bench-row-fail">
+   <td class="text">sella-2.6.0-lj38-ts-tuned</td>
+   <td class="text">Sella</td>
+   <td class="text">2.6.0</td>
+   <td class="num">93</td>
+   <td class="num">34</td>
+   <td class="num">1840</td>
+   <td class="num">2</td>
+   </tr>
    <tr class="bench-row-fail">
    <td class="text">sella-2.6.0-ts-lj38</td>
    <td class="text">Sella</td>
@@ -23,7 +41,7 @@
    <td class="num">2</td>
    </tr>
    </tbody></table></div>
-   
+   <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:3"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "sella-2.6.0-lj38-ts-default", "entry": "Sella 2.6.0 sella-2.6.0-lj38-ts-default", "code": "Sella", "value": 69.0, "best": true, "held": false, "failed": false}, {"id": "sella-2.6.0-lj38-ts-tuned", "entry": "Sella 2.6.0 sella-2.6.0-lj38-ts-tuned", "code": "Sella", "value": 93.0, "best": false, "held": false, "failed": true}, {"id": "sella-2.6.0-ts-lj38", "entry": "Sella 2.6.0 sella-2.6.0-ts-lj38", "code": "Sella", "value": 93.0, "best": false, "held": false, "failed": true}]}</script></figure>
    <div class="bench-table"><table>
    <caption>Archived scores, fewest force calls first.</caption>
    <thead><tr>
@@ -142,7 +160,29 @@
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <h3>Present runs</h3>
-   <p>No present run is recorded.</p>
+   <div class="bench-table"><table>
+   <caption>Present runs. Fewer force calls first. The 2014 scores follow.</caption>
+   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th></tr></thead><tbody>
+   <tr>
+   <td class="text">sella-2.6.0-pt-island-ts-default</td>
+   <td class="text">Sella</td>
+   <td class="text">2.6.0</td>
+   <td class="num">74</td>
+   <td class="num">41</td>
+   <td class="num">128</td>
+   <td class="num">0</td>
+   </tr>
+   <tr>
+   <td class="text">sella-2.6.0-pt-island-ts-tuned</td>
+   <td class="text">Sella</td>
+   <td class="text">2.6.0</td>
+   <td class="num">88</td>
+   <td class="num">67</td>
+   <td class="num">141</td>
+   <td class="num">0</td>
+   </tr>
+   </tbody></table></div>
+   <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "sella-2.6.0-pt-island-ts-default", "entry": "Sella 2.6.0 sella-2.6.0-pt-island-ts-default", "code": "Sella", "value": 74.0, "best": true, "held": false, "failed": false}, {"id": "sella-2.6.0-pt-island-ts-tuned", "entry": "Sella 2.6.0 sella-2.6.0-pt-island-ts-tuned", "code": "Sella", "value": 88.0, "best": false, "held": false, "failed": false}]}</script></figure>
    <div class="bench-table"><table>
    <caption>Archived scores, fewest force calls first.</caption>
    <thead><tr>
