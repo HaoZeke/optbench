@@ -38,24 +38,17 @@ def minimize_one(positions: np.ndarray):
     from ase.calculators.lj import LennardJones
     from ase.optimize import FIRE
 
-    class Counted(LennardJones):
-        calls = 0
-
-        def calculate(self, atoms=None, properties=("energy", "forces"), system_changes=("positions",)):
-            self.calls += 1
-            if self.calls > MAX_CALLS:
-                raise RuntimeError("force-call cap")
-            return super().calculate(atoms, properties, system_changes)
+    from optbench.counter import attach_ase_counter
 
     atoms = Atoms(symbols=["H"] * len(positions), positions=positions, pbc=False)
-    calc = Counted(epsilon=1.0, sigma=1.0, rc=40.0)
+    calc = attach_ase_counter(LennardJones(epsilon=1.0, sigma=1.0, rc=40.0), cap=MAX_CALLS)
     atoms.calc = calc
     try:
         FIRE(atoms, logfile=None).run(fmax=FORCE_NORM, steps=MAX_CALLS)
         failed = float(np.linalg.norm(atoms.get_forces())) > FORCE_NORM
     except RuntimeError:
         failed = True
-    return calc.calls, failed
+    return calc.optbench_counter["calls"], failed
 
 
 def run(root: Path) -> dict[str, str]:

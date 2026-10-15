@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lode-org.github.io/optbench/contract/score.v2.schema.json",
+  "title": "OptBench v2 run",
+  "type": "object",
+  "required": [
+    "entry",
+    "code",
+    "code_version",
+    "commit",
+    "tuning",
+    "parameters",
+    "provenance",
+    "metrics",
+    "starts"
+  ],
+  "properties": {
+    "entry": { "type": "string" },
+    "code": { "type": "string" },
+    "algorithm": { "type": "string" },
+    "code_version": { "type": "string" },
+    "commit": { "type": "string" },
+    "tuning": { "enum": ["default", "tuned"] },
+    "present_source": { "type": "boolean" },
+    "cap": { "type": ["integer", "null"] },
+    "parameters": { "type": "object" },
+    "provenance": {
+      "type": "object",
+      "required": ["code", "code_version", "commit", "parameters", "machine"],
+      "properties": {
+        "code": { "type": "string" },
+        "code_version": { "type": "string" },
+        "commit": { "type": "string" },
+        "parameters": { "type": "object" },
+        "machine": { "type": "object" }
+      }
+    },
+    "metrics": { "$ref": "#/$defs/metrics" },
+    "starts": {
+      "type": "array",
+      "items": { "$ref": "https://lode-org.github.io/optbench/contract/start.v2.schema.json" }
+    }
+  },
+  "$defs": {
+    "metrics": {
+      "type": "object",
+      "required": [
+        "scoring",
+        "successes",
+        "n",
+        "nfailed",
+        "success_rate",
+        "wilson_low",
+        "wilson_high",
+        "par_factor",
+        "par_applied",
+        "median",
+        "median_low",
+        "median_high",
+        "iqr",
+        "bootstrap_resamples",
+        "bootstrap_seed"
+      ],
+      "properties": {
+        "scoring": { "const": "par2-wilson-bootstrap" },
+        "successes": { "type": "integer" },
+        "n": { "type": "integer" },
+        "nfailed": { "type": "integer" },
+        "success_rate": { "type": "number" },
+        "wilson_low": { "type": "number" },
+        "wilson_high": { "type": "number" },
+        "par_factor": { "const": 2 },
+        "par_applied": { "type": "boolean" },
+        "par2_mean": { "type": ["number", "null"] },
+        "cap": { "type": ["integer", "null"] },
+        "mean": { "type": "number" },
+        "median": { "type": "number" },
+        "median_low": { "type": "number" },
+        "median_high": { "type": "number" },
+        "q25": { "type": "number" },
+        "q75": { "type": "number" },
+        "iqr": { "type": "number" },
+        "iqr_low": { "type": "number" },
+        "iqr_high": { "type": "number" },
+        "bootstrap_resamples": { "type": "integer" },
+        "bootstrap_seed": { "type": "integer" }
+      }
+    }
+  }
+}

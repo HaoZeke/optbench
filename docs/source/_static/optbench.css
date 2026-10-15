@@ -22,7 +22,8 @@
   margin: 0;
 }
 
-.bench-smoke {
+.bench-smoke,
+.bench-legacy {
   max-width: 68ch;
   margin: 0 0 1.25rem;
 }

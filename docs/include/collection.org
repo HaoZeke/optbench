@@ -7,8 +7,8 @@
    <h3>Lennard-Jones 38 clusters</h3>
    <p>46 present runs. <a href="generated/suites/minimization.html#lj38">2014 scores and the present table</a>.</p>
    <div class="bench-table"><table>
-   <caption>Present runs. Fewer force calls first. The 2014 scores follow.</caption>
-   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th></tr></thead><tbody>
+   <caption>Present runs. Fewer force calls first. The legacy 2014 scores follow.</caption>
+   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th><th class="text" scope="col">Tuning</th></tr></thead><tbody>
    <tr>
    <td class="text">pele-0.1.2-lbfgs-M100-maxstep0.2</td>
    <td class="text">pele</td>
@@ -17,6 +17,7 @@
    <td class="num">89</td>
    <td class="num">393</td>
    <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    <tr>
    <td class="text">eon-client-lbfgs-m100</td>
@@ -26,6 +27,7 @@
    <td class="num">90</td>
    <td class="num">403</td>
    <td class="num">0</td>
+   <td class="text">tuned</td>
    </tr>
    <tr>
    <td class="text">eon-svn-lbfgs-m100</td>
@@ -35,6 +37,7 @@
    <td class="num">90</td>
    <td class="num">417</td>
    <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    <tr>
    <td class="text">eon-3.5.0-lbfgs-m100</td>
@@ -44,6 +47,7 @@
    <td class="num">90</td>
    <td class="num">403</td>
    <td class="num">0</td>
+   <td class="text">tuned</td>
    </tr>
    <tr>
    <td class="text">eon-svn-r2549-lbfgs-m100</td>
@@ -53,6 +57,7 @@
    <td class="num">90</td>
    <td class="num">417</td>
    <td class="num">0</td>
+   <td class="text">unlabelled</td>
    </tr>
    <tr>
    <td class="text">eon-client-lbfgs-m20</td>
@@ -62,6 +67,7 @@
    <td class="num">100</td>
    <td class="num">551</td>
    <td class="num">0</td>
+   <td class="text">default</td>
    </tr>
    <tr>
    <td class="text">eon-3.5.0-lbfgs</td>
@@ -71,6 +77,7 @@
    <td class="num">100</td>
    <td class="num">551</td>
    <td class="num">0</td>
+   <td class="text">default</td>
    </tr>
    <tr>
    <td class="text">eon-svn-lbfgs-m20</td>
@@ -80,6 +87,7 @@
    <td class="num">100</td>
    <td class="num">463</td>
    <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    <tr>
    <td class="text">eon-svn-r2549-lbfgs-m20</td>
@@ -89,6 +97,7 @@
    <td class="num">100</td>
    <td class="num">463</td>
    <td class="num">0</td>
+   <td class="text">unlabelled</td>
    </tr>
    <tr>
    <td class="text">rgmin-lbfgs-0.3.0</td>
@@ -98,6 +107,7 @@
    <td class="num">103</td>
    <td class="num">548</td>
    <td class="num">0</td>
+   <td class="text">unlabelled</td>
    </tr>
    <tr>
    <td class="text">pele-0.1.2-lbfgs-M20-maxstep0.1</td>
@@ -107,6 +117,7 @@
    <td class="num">114</td>
    <td class="num">529</td>
    <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    <tr>
    <td class="text">pele-0.1.2-lbfgs-M4-maxstep0.2</td>
@@ -116,6 +127,7 @@
    <td class="num">102</td>
    <td class="num">585</td>
    <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    <tr>
    <td class="text">pele-0.1.2-lbfgs-M10-maxstep0.1</td>
@@ -125,6 +137,7 @@
    <td class="num">113</td>
    <td class="num">566</td>
    <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    <tr>
    <td class="text">pele-0.1.2-lbfgs-M4-maxstep0.1</td>
@@ -134,6 +147,7 @@
    <td class="num">127</td>
    <td class="num">618</td>
    <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    <tr>
    <td class="text">pele-0.1.2-lbfgs-M1-maxstep0.1</td>
@@ -143,6 +157,7 @@
    <td class="num">134</td>
    <td class="num">737</td>
    <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    <tr>
    <td class="text">pele-0.1.2-lbfgs-M4-maxstep0.05</td>
@@ -152,6 +167,7 @@
    <td class="num">211</td>
    <td class="num">797</td>
    <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    <tr>
    <td class="text">eon-svn-cg</td>
@@ -161,6 +177,7 @@
    <td class="num">207</td>
    <td class="num">1141</td>
    <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    <tr>
    <td class="text">eon-svn-r2549-cg</td>
@@ -170,6 +187,7 @@
    <td class="num">207</td>
    <td class="num">1141</td>
    <td class="num">0</td>
+   <td class="text">unlabelled</td>
    </tr>
    <tr>
    <td class="text">eon-client-cg</td>
@@ -179,6 +197,7 @@
    <td class="num">207</td>
    <td class="num">1135</td>
    <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    <tr>
    <td class="text">eon-cg-3.5.0</td>
@@ -188,6 +207,7 @@
    <td class="num">207</td>
    <td class="num">1135</td>
    <td class="num">0</td>
+   <td class="text">unlabelled</td>
    </tr>
    <tr>
    <td class="text">eon-3.5.0-cg</td>
@@ -197,6 +217,7 @@
    <td class="num">207</td>
    <td class="num">1135</td>
    <td class="num">0</td>
+   <td class="text">unlabelled</td>
    </tr>
    <tr>
    <td class="text">eon-client-sd-twopoint</td>
@@ -206,6 +227,7 @@
    <td class="num">181</td>
    <td class="num">2498</td>
    <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    <tr>
    <td class="text">eon-3.5.0-sd-twopoint</td>
@@ -215,6 +237,7 @@
    <td class="num">181</td>
    <td class="num">2498</td>
    <td class="num">0</td>
+   <td class="text">unlabelled</td>
    </tr>
    <tr>
    <td class="text">rgmin-bfgs-0.3.0</td>
@@ -224,6 +247,7 @@
    <td class="num">366</td>
    <td class="num">887</td>
    <td class="num">0</td>
+   <td class="text">unlabelled</td>
    </tr>
    <tr>
    <td class="text">eon-svn-sd-twopoint</td>
@@ -233,6 +257,7 @@
    <td class="num">173</td>
    <td class="num">3189</td>
    <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    <tr>
    <td class="text">eon-svn-r2549-sd-twopoint</td>
@@ -242,6 +267,7 @@
    <td class="num">173</td>
    <td class="num">3189</td>
    <td class="num">0</td>
+   <td class="text">unlabelled</td>
    </tr>
    <tr>
    <td class="text">rgmin-bb-0.3.0</td>
@@ -251,6 +277,7 @@
    <td class="num">171</td>
    <td class="num">1809</td>
    <td class="num">0</td>
+   <td class="text">unlabelled</td>
    </tr>
    <tr>
    <td class="text">rgmin-sr1-0.3.0</td>
@@ -260,6 +287,7 @@
    <td class="num">351</td>
    <td class="num">1032</td>
    <td class="num">0</td>
+   <td class="text">unlabelled</td>
    </tr>
    <tr>
    <td class="text">rgmin-fire2-0.3.0</td>
@@ -269,6 +297,7 @@
    <td class="num">191</td>
    <td class="num">2680</td>
    <td class="num">0</td>
+   <td class="text">unlabelled</td>
    </tr>
    <tr>
    <td class="text">rgmin-fire-0.3.0</td>
@@ -278,6 +307,7 @@
    <td class="num">198</td>
    <td class="num">2592</td>
    <td class="num">0</td>
+   <td class="text">unlabelled</td>
    </tr>
    <tr>
    <td class="text">ase-fire-3.29.0</td>
@@ -287,6 +317,7 @@
    <td class="num">199</td>
    <td class="num">2340</td>
    <td class="num">0</td>
+   <td class="text">unlabelled</td>
    </tr>
    <tr>
    <td class="text">eon-client-fire</td>
@@ -296,6 +327,7 @@
    <td class="num">227</td>
    <td class="num">2918</td>
    <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    <tr>
    <td class="text">eon-svn-fire</td>
@@ -305,6 +337,7 @@
    <td class="num">227</td>
    <td class="num">2918</td>
    <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    <tr>
    <td class="text">eon-3.5.0-fire</td>
@@ -314,6 +347,7 @@
    <td class="num">227</td>
    <td class="num">2918</td>
    <td class="num">0</td>
+   <td class="text">unlabelled</td>
    </tr>
    <tr>
    <td class="text">eon-svn-r2549-fire</td>
@@ -323,6 +357,7 @@
    <td class="num">227</td>
    <td class="num">2918</td>
    <td class="num">0</td>
+   <td class="text">unlabelled</td>
    </tr>
    <tr>
    <td class="text">rgmin-nlcg-0.3.0</td>
@@ -332,6 +367,7 @@
    <td class="num">281</td>
    <td class="num">2307</td>
    <td class="num">0</td>
+   <td class="text">unlabelled</td>
    </tr>
    <tr>
    <td class="text">rgmin-sd-0.3.0</td>
@@ -341,6 +377,7 @@
    <td class="num">459</td>
    <td class="num">3758</td>
    <td class="num">0</td>
+   <td class="text">unlabelled</td>
    </tr>
    <tr class="bench-row-fail">
    <td class="text">rgmin-quickmin-0.3.0</td>
@@ -350,6 +387,7 @@
    <td class="num">377</td>
    <td class="num">7301</td>
    <td class="num">1</td>
+   <td class="text">unlabelled</td>
    </tr>
    <tr class="bench-row-fail">
    <td class="text">eon-client-qm</td>
@@ -359,6 +397,7 @@
    <td class="num">682</td>
    <td class="num">9926</td>
    <td class="num">25</td>
+   <td class="text"></td>
    </tr>
    <tr class="bench-row-fail">
    <td class="text">eon-3.5.0-qm</td>
@@ -368,6 +407,7 @@
    <td class="num">682</td>
    <td class="num">9926</td>
    <td class="num">25</td>
+   <td class="text">unlabelled</td>
    </tr>
    <tr class="bench-row-fail">
    <td class="text">eon-svn-qm</td>
@@ -377,6 +417,7 @@
    <td class="num">679</td>
    <td class="num">9985</td>
    <td class="num">22</td>
+   <td class="text"></td>
    </tr>
    <tr class="bench-row-fail">
    <td class="text">eon-svn-r2549-qm</td>
@@ -386,6 +427,7 @@
    <td class="num">679</td>
    <td class="num">9985</td>
    <td class="num">22</td>
+   <td class="text">unlabelled</td>
    </tr>
    <tr class="bench-row-fail">
    <td class="text">eon-client-sd</td>
@@ -395,6 +437,7 @@
    <td class="num">1355</td>
    <td class="num">9982</td>
    <td class="num">96</td>
+   <td class="text"></td>
    </tr>
    <tr class="bench-row-fail">
    <td class="text">eon-svn-sd</td>
@@ -404,6 +447,7 @@
    <td class="num">1355</td>
    <td class="num">9982</td>
    <td class="num">96</td>
+   <td class="text"></td>
    </tr>
    <tr class="bench-row-fail">
    <td class="text">eon-3.5.0-sd</td>
@@ -413,6 +457,7 @@
    <td class="num">1355</td>
    <td class="num">9982</td>
    <td class="num">96</td>
+   <td class="text">unlabelled</td>
    </tr>
    <tr class="bench-row-fail">
    <td class="text">eon-svn-r2549-sd</td>
@@ -422,14 +467,15 @@
    <td class="num">1355</td>
    <td class="num">9982</td>
    <td class="num">96</td>
+   <td class="text">unlabelled</td>
    </tr>
    </tbody></table></div>
    <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:46"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "pele-0.1.2-lbfgs-M100-maxstep0.2", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M100-maxstep0.2", "code": "pele", "value": 178.0, "best": true, "held": false, "failed": false}, {"id": "eon-client-lbfgs-m100", "entry": "eOn 3.5.0 eon-client-lbfgs-m100", "code": "eOn", "value": 181.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-lbfgs-m100", "entry": "Eon svn r2549 eon-svn-lbfgs-m100", "code": "Eon svn", "value": 181.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-lbfgs-m100", "entry": "eOn 3.5.0 eon-3.5.0-lbfgs-m100", "code": "eOn", "value": 181.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-lbfgs-m100", "entry": "Eon svn r2549 eon-svn-r2549-lbfgs-m100", "code": "Eon svn", "value": 181.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-lbfgs-m20", "entry": "eOn 3.5.0 eon-client-lbfgs-m20", "code": "eOn", "value": 201.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-lbfgs", "entry": "eOn 3.5.0 eon-3.5.0-lbfgs", "code": "eOn", "value": 201.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-lbfgs-m20", "entry": "Eon svn r2549 eon-svn-lbfgs-m20", "code": "Eon svn", "value": 202.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-lbfgs-m20", "entry": "Eon svn r2549 eon-svn-r2549-lbfgs-m20", "code": "Eon svn", "value": 202.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lbfgs-0.3.0", "entry": "rgmin 0.3.0 e089a136910f rgmin-lbfgs-0.3.0", "code": "rgmin", "value": 216.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M20-maxstep0.1", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M20-maxstep0.1", "code": "pele", "value": 223.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M4-maxstep0.2", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M4-maxstep0.2", "code": "pele", "value": 228.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M10-maxstep0.1", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M10-maxstep0.1", "code": "pele", "value": 235.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M4-maxstep0.1", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M4-maxstep0.1", "code": "pele", "value": 248.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M1-maxstep0.1", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M1-maxstep0.1", "code": "pele", "value": 286.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M4-maxstep0.05", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M4-maxstep0.05", "code": "pele", "value": 381.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-cg", "entry": "Eon svn r2549 eon-svn-cg", "code": "Eon svn", "value": 453.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-cg", "entry": "Eon svn r2549 eon-svn-r2549-cg", "code": "Eon svn", "value": 453.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-cg", "entry": "eOn 3.5.0 eon-client-cg", "code": "eOn", "value": 454.0, "best": false, "held": false, "failed": false}, {"id": "eon-cg-3.5.0", "entry": "Eon 3.5.0 eon-cg-3.5.0", "code": "Eon", "value": 454.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-cg", "entry": "eOn 3.5.0 eon-3.5.0-cg", "code": "eOn", "value": 454.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-sd-twopoint", "entry": "eOn 3.5.0 eon-client-sd-twopoint", "code": "eOn", "value": 532.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-sd-twopoint", "entry": "eOn 3.5.0 eon-3.5.0-sd-twopoint", "code": "eOn", "value": 532.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-bfgs-0.3.0", "entry": "rgmin 0.3.0 rgmin-bfgs-0.3.0", "code": "rgmin", "value": 538.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-sd-twopoint", "entry": "Eon svn r2549 eon-svn-sd-twopoint", "code": "Eon svn", "value": 539.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-sd-twopoint", "entry": "Eon svn r2549 eon-svn-r2549-sd-twopoint", "code": "Eon svn", "value": 539.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-bb-0.3.0", "entry": "rgmin 0.3.0 rgmin-bb-0.3.0", "code": "rgmin", "value": 541.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-sr1-0.3.0", "entry": "rgmin 0.3.0 rgmin-sr1-0.3.0", "code": "rgmin", "value": 566.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-fire2-0.3.0", "entry": "rgmin 0.3.0 rgmin-fire2-0.3.0", "code": "rgmin", "value": 694.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-fire-0.3.0", "entry": "rgmin 0.3.0 rgmin-fire-0.3.0", "code": "rgmin", "value": 699.0, "best": false, "held": false, "failed": false}, {"id": "ase-fire-3.29.0", "entry": "ASE 3.29.0 ase-fire-3.29.0", "code": "ASE", "value": 706.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-fire", "entry": "eOn 3.5.0 eon-client-fire", "code": "eOn", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-fire", "entry": "Eon svn r2549 eon-svn-fire", "code": "Eon svn", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-fire", "entry": "eOn 3.5.0 eon-3.5.0-fire", "code": "eOn", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-fire", "entry": "Eon svn r2549 eon-svn-r2549-fire", "code": "Eon svn", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-nlcg-0.3.0", "entry": "rgmin 0.3.0 rgmin-nlcg-0.3.0", "code": "rgmin", "value": 733.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-sd-0.3.0", "entry": "rgmin 0.3.0 rgmin-sd-0.3.0", "code": "rgmin", "value": 1260.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-quickmin-0.3.0", "entry": "rgmin 0.3.0 rgmin-quickmin-0.3.0", "code": "rgmin", "value": 1849.0, "best": false, "held": false, "failed": true}, {"id": "eon-client-qm", "entry": "eOn 3.5.0 eon-client-qm", "code": "eOn", "value": 3514.0, "best": false, "held": false, "failed": true}, {"id": "eon-3.5.0-qm", "entry": "eOn 3.5.0 eon-3.5.0-qm", "code": "eOn", "value": 3514.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-qm", "entry": "Eon svn r2549 eon-svn-qm", "code": "Eon svn", "value": 3547.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-r2549-qm", "entry": "Eon svn r2549 eon-svn-r2549-qm", "code": "Eon svn", "value": 3547.0, "best": false, "held": false, "failed": true}, {"id": "eon-client-sd", "entry": "eOn 3.5.0 eon-client-sd", "code": "eOn", "value": 4901.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-sd", "entry": "Eon svn r2549 eon-svn-sd", "code": "Eon svn", "value": 4901.0, "best": false, "held": false, "failed": true}, {"id": "eon-3.5.0-sd", "entry": "eOn 3.5.0 eon-3.5.0-sd", "code": "eOn", "value": 4901.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-r2549-sd", "entry": "Eon svn r2549 eon-svn-r2549-sd", "code": "Eon svn", "value": 4901.0, "best": false, "held": false, "failed": true}]}</script></figure>
    <h3>Morse bulk</h3>
    <p>8 present runs. <a href="generated/suites/minimization.html#morse-bulk">2014 scores and the present table</a>.</p>
    <div class="bench-table"><table>
-   <caption>Present runs. Fewer force calls first. The 2014 scores follow.</caption>
-   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th></tr></thead><tbody>
+   <caption>Present runs. Fewer force calls first. The legacy 2014 scores follow.</caption>
+   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th><th class="text" scope="col">Tuning</th></tr></thead><tbody>
    <tr>
    <td class="text">eon-client-morse-lbfgs</td>
    <td class="text">eOn</td>
@@ -438,6 +484,7 @@
    <td class="num">36</td>
    <td class="num">108</td>
    <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    <tr>
    <td class="text">eon-svn-morse-lbfgs</td>
@@ -447,6 +494,7 @@
    <td class="num">36</td>
    <td class="num">103</td>
    <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    <tr>
    <td class="text">eon-client-morse-cg</td>
@@ -456,6 +504,7 @@
    <td class="num">67</td>
    <td class="num">183</td>
    <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    <tr>
    <td class="text">eon-svn-morse-cg</td>
@@ -465,6 +514,7 @@
    <td class="num">67</td>
    <td class="num">183</td>
    <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    <tr>
    <td class="text">eon-client-morse-fire</td>
@@ -474,6 +524,7 @@
    <td class="num">107</td>
    <td class="num">212</td>
    <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    <tr>
    <td class="text">eon-svn-morse-fire</td>
@@ -483,6 +534,7 @@
    <td class="num">107</td>
    <td class="num">212</td>
    <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    <tr class="bench-row-fail">
    <td class="text">eon-client-morse-sd</td>
@@ -492,6 +544,7 @@
    <td class="num">4026</td>
    <td class="num">9851</td>
    <td class="num">19</td>
+   <td class="text"></td>
    </tr>
    <tr class="bench-row-fail">
    <td class="text">eon-svn-morse-sd</td>
@@ -501,6 +554,7 @@
    <td class="num">4026</td>
    <td class="num">9851</td>
    <td class="num">19</td>
+   <td class="text"></td>
    </tr>
    </tbody></table></div>
    <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:8"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "eon-client-morse-lbfgs", "entry": "eOn 3.5.0 eon-client-morse-lbfgs", "code": "eOn", "value": 52.0, "best": true, "held": false, "failed": false}, {"id": "eon-svn-morse-lbfgs", "entry": "Eon svn r2549 eon-svn-morse-lbfgs", "code": "Eon svn", "value": 52.0, "best": true, "held": false, "failed": false}, {"id": "eon-client-morse-cg", "entry": "eOn 3.5.0 eon-client-morse-cg", "code": "eOn", "value": 106.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-morse-cg", "entry": "Eon svn r2549 eon-svn-morse-cg", "code": "Eon svn", "value": 106.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-morse-fire", "entry": "eOn 3.5.0 eon-client-morse-fire", "code": "eOn", "value": 156.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-morse-fire", "entry": "Eon svn r2549 eon-svn-morse-fire", "code": "Eon svn", "value": 156.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-morse-sd", "entry": "eOn 3.5.0 eon-client-morse-sd", "code": "eOn", "value": 7038.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-morse-sd", "entry": "Eon svn r2549 eon-svn-morse-sd", "code": "Eon svn", "value": 7038.0, "best": false, "held": false, "failed": true}]}</script></figure>
@@ -508,8 +562,8 @@
    <h3>Pt heptamer island</h3>
    <p>2 present runs. <a href="generated/suites/saddle-search.html#pt-island">2014 scores and the present table</a>.</p>
    <div class="bench-table"><table>
-   <caption>Present runs. Fewer force calls first. The 2014 scores follow.</caption>
-   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th></tr></thead><tbody>
+   <caption>Present runs. Fewer force calls first. The legacy 2014 scores follow.</caption>
+   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th><th class="text" scope="col">Tuning</th></tr></thead><tbody>
    <tr>
    <td class="text">eon-3.5.0-saddle-pt-dimer</td>
    <td class="text">Eon</td>
@@ -518,6 +572,7 @@
    <td class="num">1996871</td>
    <td class="num">10514681</td>
    <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    <tr>
    <td class="text">eon-3.5.0-saddle-pt-classic</td>
@@ -527,6 +582,7 @@
    <td class="num">2934964</td>
    <td class="num">17881288</td>
    <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    </tbody></table></div>
    <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "eon-3.5.0-saddle-pt-dimer", "entry": "Eon 3.5.0 eon-3.5.0-saddle-pt-dimer", "code": "Eon", "value": 4982564.3, "best": true, "held": false, "failed": false}, {"id": "eon-3.5.0-saddle-pt-classic", "entry": "Eon 3.5.0 eon-3.5.0-saddle-pt-classic", "code": "Eon", "value": 6974880.9, "best": false, "held": false, "failed": false}]}</script></figure>
@@ -534,8 +590,8 @@
    <h3>LJ38 double-ended saddle</h3>
    <p>2 present runs. <a href="generated/suites/double-ended-saddle-search.html#lj38">2014 scores and the present table</a>.</p>
    <div class="bench-table"><table>
-   <caption>Present runs. Fewer force calls first. The 2014 scores follow.</caption>
-   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th></tr></thead><tbody>
+   <caption>Present runs. Fewer force calls first. The legacy 2014 scores follow.</caption>
+   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th><th class="text" scope="col">Tuning</th></tr></thead><tbody>
    <tr class="bench-row-fail">
    <td class="text">eon-3.5.0-de-lj38-ci-swdneb</td>
    <td class="text">Eon</td>
@@ -544,6 +600,7 @@
    <td class="num">332</td>
    <td class="num">1707</td>
    <td class="num">5</td>
+   <td class="text"></td>
    </tr>
    <tr class="bench-row-fail">
    <td class="text">eon-3.5.0-de-lj38-ci-neb</td>
@@ -553,6 +610,7 @@
    <td class="num">337</td>
    <td class="num">2252</td>
    <td class="num">2</td>
+   <td class="text"></td>
    </tr>
    </tbody></table></div>
    <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "eon-3.5.0-de-lj38-ci-swdneb", "entry": "Eon 3.5.0 eon-3.5.0-de-lj38-ci-swdneb", "code": "Eon", "value": 708.0, "best": true, "held": false, "failed": true}, {"id": "eon-3.5.0-de-lj38-ci-neb", "entry": "Eon 3.5.0 eon-3.5.0-de-lj38-ci-neb", "code": "Eon", "value": 809.0, "best": false, "held": false, "failed": true}]}</script></figure>
@@ -595,8 +653,8 @@
    <h3>LJ38</h3>
    <p>1 present run. <a href="generated/suites/tsopt.html#LJ38">2014 scores and the present table</a>.</p>
    <div class="bench-table"><table>
-   <caption>Present runs. Fewer force calls first. The 2014 scores follow.</caption>
-   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th></tr></thead><tbody>
+   <caption>Present runs. Fewer force calls first. The legacy 2014 scores follow.</caption>
+   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th><th class="text" scope="col">Tuning</th></tr></thead><tbody>
    <tr class="bench-row-fail">
    <td class="text">sella-2.6.0-ts-lj38</td>
    <td class="text">Sella</td>
@@ -605,6 +663,7 @@
    <td class="num">34</td>
    <td class="num">1846</td>
    <td class="num">2</td>
+   <td class="text"></td>
    </tr>
    </tbody></table></div>
    
@@ -622,8 +681,8 @@
    <h3>Pt-heptamer</h3>
    <p>4 present runs. <a href="generated/suites/neb.html#Pt-heptamer">2014 scores and the present table</a>.</p>
    <div class="bench-table"><table>
-   <caption>Present runs. Fewer force calls first. The 2014 scores follow.</caption>
-   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th></tr></thead><tbody>
+   <caption>Present runs. Fewer force calls first. The legacy 2014 scores follow.</caption>
+   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th><th class="text" scope="col">Tuning</th></tr></thead><tbody>
    <tr>
    <td class="text">eon-3.5.0-neb-pt-lbfgs</td>
    <td class="text">Eon</td>
@@ -632,6 +691,7 @@
    <td class="num">27</td>
    <td class="num">51</td>
    <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    <tr>
    <td class="text">eon-3.5.0-neb-pt-fire</td>
@@ -641,6 +701,7 @@
    <td class="num">68</td>
    <td class="num">95</td>
    <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    <tr>
    <td class="text">eon-3.5.0-neb-pt-cg</td>
@@ -650,6 +711,7 @@
    <td class="num">51</td>
    <td class="num">317</td>
    <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    <tr>
    <td class="text">eon-3.5.0-neb-pt-qm</td>
@@ -659,6 +721,7 @@
    <td class="num">89</td>
    <td class="num">247</td>
    <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    </tbody></table></div>
    <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:4"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "eon-3.5.0-neb-pt-lbfgs", "entry": "Eon 3.5.0 eon-3.5.0-neb-pt-lbfgs", "code": "Eon", "value": 40.0, "best": true, "held": false, "failed": false}, {"id": "eon-3.5.0-neb-pt-fire", "entry": "Eon 3.5.0 eon-3.5.0-neb-pt-fire", "code": "Eon", "value": 85.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-neb-pt-cg", "entry": "Eon 3.5.0 eon-3.5.0-neb-pt-cg", "code": "Eon", "value": 142.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-neb-pt-qm", "entry": "Eon 3.5.0 eon-3.5.0-neb-pt-qm", "code": "Eon", "value": 165.0, "best": false, "held": false, "failed": false}]}</script></figure>

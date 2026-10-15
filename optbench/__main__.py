@@ -147,6 +147,53 @@ def pairs(
     print(text, end="")
 
 
+def _head(root: Path) -> str:
+    import subprocess
+
+    try:
+        return subprocess.check_output(
+            ["git", "rev-parse", "HEAD"],
+            cwd=root,
+            text=True,
+            stderr=subprocess.DEVNULL,
+        ).strip()
+    except (OSError, subprocess.CalledProcessError):
+        return ""
+
+
+@app.command
+def smoke(
+    output: Path = Path("results/smoke/quadratic.json"),
+    root: Path = Path("."),
+    commit: str = "",
+) -> None:
+    """Run the quadratic v2 smoke. This is not a campaign."""
+    from optbench.smoke import write_smoke
+
+    document = write_smoke(output, commit=commit or _head(root))
+    print(f"wrote {output} runs={len(document['runs'])}")
+
+
+@app.command
+def score(
+    starts: Path,
+    cap: int | None = None,
+    output: Path = Path("score.json"),
+) -> None:
+    """Reduce a per-start JSONL file to a v2 score."""
+    import json
+
+    from optbench.score import score_v2
+
+    records = [json.loads(line) for line in starts.read_text(encoding="utf-8").splitlines() if line.strip()]
+    summary = score_v2(records, cap)
+    output.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    print(
+        f"successes={summary['successes']}/{summary['n']} "
+        f"par2_mean={summary['par2_mean']} median={summary['median']}"
+    )
+
+
 def main(argv: list[str] | None = None) -> None:
     app(argv)
 

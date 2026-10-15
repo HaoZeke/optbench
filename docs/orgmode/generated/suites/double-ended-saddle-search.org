@@ -11,8 +11,8 @@
    </dl>
    <h3>Present runs</h3>
    <div class="bench-table"><table>
-   <caption>Present runs. Fewer force calls first. The 2014 scores follow.</caption>
-   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th></tr></thead><tbody>
+   <caption>Present runs. Fewer force calls first. The legacy 2014 scores follow.</caption>
+   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th><th class="text" scope="col">Tuning</th></tr></thead><tbody>
    <tr class="bench-row-fail">
    <td class="text">eon-3.5.0-de-lj38-ci-swdneb</td>
    <td class="text">Eon</td>
@@ -21,6 +21,7 @@
    <td class="num">332</td>
    <td class="num">1707</td>
    <td class="num">5</td>
+   <td class="text"></td>
    </tr>
    <tr class="bench-row-fail">
    <td class="text">eon-3.5.0-de-lj38-ci-neb</td>
@@ -30,11 +31,13 @@
    <td class="num">337</td>
    <td class="num">2252</td>
    <td class="num">2</td>
+   <td class="text"></td>
    </tr>
    </tbody></table></div>
    <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "eon-3.5.0-de-lj38-ci-swdneb", "entry": "Eon 3.5.0 eon-3.5.0-de-lj38-ci-swdneb", "code": "Eon", "value": 708.0, "best": true, "held": false, "failed": true}, {"id": "eon-3.5.0-de-lj38-ci-neb", "entry": "Eon 3.5.0 eon-3.5.0-de-lj38-ci-neb", "code": "Eon", "value": 809.0, "best": false, "held": false, "failed": true}]}</script></figure>
-   <div class="bench-table"><table>
-   <caption>Archived scores, fewest force calls first.</caption>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-legacy">
+   <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -144,7 +147,7 @@
    <td class="text">22 Aug 2013</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:8"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "double-ended-saddle-search-lj38-optim", "entry": "optim", "code": "OPTIM", "value": 131.0, "best": true, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-eon-lanczos-improved", "entry": "eon-lanczos-improved", "code": "Eon r2156", "value": 287.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-pele", "entry": "pele", "code": "pele", "value": 293.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-eon-dimer", "entry": "eon-dimer", "code": "Eon r2156", "value": 337.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-eon-lanczos", "entry": "eon-lanczos", "code": "Eon r2156", "value": 364.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-optim-cl-string", "entry": "optim-cl-string", "code": "OPTIM", "value": 786.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-eon-ci-neb", "entry": "eon-ci-neb", "code": "Eon r2156", "value": 827.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-eon-ci-swdneb", "entry": "eon-ci-swdneb", "code": "Eon r2156", "value": 861.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:8"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "double-ended-saddle-search-lj38-optim", "entry": "optim", "code": "OPTIM", "value": 131.0, "best": true, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-eon-lanczos-improved", "entry": "eon-lanczos-improved", "code": "Eon r2156", "value": 287.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-pele", "entry": "pele", "code": "pele", "value": 293.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-eon-dimer", "entry": "eon-dimer", "code": "Eon r2156", "value": 337.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-eon-lanczos", "entry": "eon-lanczos", "code": "Eon r2156", "value": 364.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-optim-cl-string", "entry": "optim-cl-string", "code": "OPTIM", "value": 786.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-eon-ci-neb", "entry": "eon-ci-neb", "code": "Eon r2156", "value": 827.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-eon-ci-swdneb", "entry": "eon-ci-swdneb", "code": "Eon r2156", "value": 861.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </section><section class="bench" id="lj38_2ts_separation">
    <h2>lj38_2ts_separation</h2>
    <dl class="bench-rule">
@@ -152,8 +155,9 @@
    </dl>
    <h3>Present runs</h3>
    <p>No present run is recorded.</p>
-   <div class="bench-table"><table>
-   <caption>Archived scores, fewest force calls first.</caption>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-legacy">
+   <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -194,7 +198,7 @@
    <td class="text">06 Aug 2014</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "double-ended-saddle-search-lj38-2ts-separation-optim", "entry": "optim", "code": "OPTIM", "value": 2885.0, "best": true, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-2ts-separation-pele", "entry": "pele", "code": "pele", "value": 25022.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "double-ended-saddle-search-lj38-2ts-separation-optim", "entry": "optim", "code": "OPTIM", "value": 2885.0, "best": true, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-2ts-separation-pele", "entry": "pele", "code": "pele", "value": 25022.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </section><section class="bench" id="pt-island">
    <h2>pt-island</h2>
    <dl class="bench-rule">
@@ -202,8 +206,9 @@
    </dl>
    <h3>Present runs</h3>
    <p>No present run is recorded.</p>
-   <div class="bench-table"><table>
-   <caption>Archived scores, fewest force calls first.</caption>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-legacy">
+   <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -349,6 +354,6 @@
    <td class="text">23 Aug 2013</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:11"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "double-ended-saddle-search-pt-island-optim", "entry": "optim", "code": "OPTIM", "value": 103.0, "best": true, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-eon-ci-neb-single", "entry": "eon-ci-neb-single", "code": "Eon r2156", "value": 110.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-optim-6", "entry": "optim-6", "code": "OPTIM", "value": 117.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-eon-dimer", "entry": "eon-dimer", "code": "Eon r2156", "value": 182.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-eon-lanczos-improved", "entry": "eon-lanczos-improved", "code": "Eon r2156", "value": 222.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-eon-ci-neb", "entry": "eon-ci-neb", "code": "Eon r2156", "value": 248.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-pele", "entry": "pele", "code": "pele", "value": 255.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-eon-ci-swdneb", "entry": "eon-ci-swdneb", "code": "Eon r2156", "value": 256.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-optim-cl-string", "entry": "optim-cl-string", "code": "OPTIM", "value": 319.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-eon-lanczos", "entry": "eon-lanczos", "code": "Eon r2156", "value": 325.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-eon-ci-neb-5", "entry": "eon-ci-neb-5", "code": "Eon r2156", "value": 391.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:11"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "double-ended-saddle-search-pt-island-optim", "entry": "optim", "code": "OPTIM", "value": 103.0, "best": true, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-eon-ci-neb-single", "entry": "eon-ci-neb-single", "code": "Eon r2156", "value": 110.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-optim-6", "entry": "optim-6", "code": "OPTIM", "value": 117.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-eon-dimer", "entry": "eon-dimer", "code": "Eon r2156", "value": 182.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-eon-lanczos-improved", "entry": "eon-lanczos-improved", "code": "Eon r2156", "value": 222.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-eon-ci-neb", "entry": "eon-ci-neb", "code": "Eon r2156", "value": 248.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-pele", "entry": "pele", "code": "pele", "value": 255.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-eon-ci-swdneb", "entry": "eon-ci-swdneb", "code": "Eon r2156", "value": 256.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-optim-cl-string", "entry": "optim-cl-string", "code": "OPTIM", "value": 319.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-eon-lanczos", "entry": "eon-lanczos", "code": "Eon r2156", "value": 325.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-eon-ci-neb-5", "entry": "eon-ci-neb-5", "code": "Eon r2156", "value": 391.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </section>
 #+end_export

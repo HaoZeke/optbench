@@ -1,0 +1,411 @@
+{
+  "bootstrap_resamples": 2000,
+  "bootstrap_seed": 20261015,
+  "note": "Quadratic smoke of the harness counter and the v2 score. Not a Lennard-Jones campaign.",
+  "par_factor": 2,
+  "problem": "smoke/quadratic",
+  "runs": [
+    {
+      "algorithm": "gradient descent",
+      "cap": 5000,
+      "code": "optbench",
+      "code_version": "0.0.0",
+      "commit": "07a5a5e614ca2cc99bbf4468dd115a391db865a2",
+      "entry": "gd-step-0.05",
+      "metrics": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 5000,
+        "iqr": 0.0,
+        "iqr_high": 0.0,
+        "iqr_low": 0.0,
+        "mean": 139.0,
+        "median": 139.0,
+        "median_high": 139.0,
+        "median_low": 139.0,
+        "n": 2,
+        "nfailed": 0,
+        "par2_mean": 139.0,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 139.0,
+        "q75": 139.0,
+        "scoring": "par2-wilson-bootstrap",
+        "success_rate": 1.0,
+        "successes": 2,
+        "wilson_high": 1.0,
+        "wilson_low": 0.34238022750665303
+      },
+      "parameters": {
+        "cap": 5000,
+        "force_norm": 1e-06,
+        "kind": "minimum",
+        "step": 0.05
+      },
+      "present_source": false,
+      "provenance": {
+        "code": "optbench",
+        "code_version": "0.0.0",
+        "commit": "07a5a5e614ca2cc99bbf4468dd115a391db865a2",
+        "machine": {
+          "machine": "x86_64",
+          "node": "cursor",
+          "python": "3.12.3",
+          "system": "Linux"
+        },
+        "parameters": {
+          "cap": 5000,
+          "force_norm": 1e-06,
+          "kind": "minimum",
+          "step": 0.05
+        }
+      },
+      "starts": [
+        {
+          "comparable": true,
+          "converged": true,
+          "counter": "harness",
+          "energy": 2.3492682280878404e-13,
+          "expected_index": 0,
+          "force_calls": 139,
+          "force_norm": 9.693850067105103e-07,
+          "hessian_index": 0,
+          "reasons": [],
+          "rmsd": 4.846925033552552e-07,
+          "schema": "optbench.start/v2",
+          "start": "origin",
+          "success": true,
+          "verify_calls": 4
+        },
+        {
+          "comparable": true,
+          "converged": true,
+          "counter": "harness",
+          "energy": 2.349268227011607e-13,
+          "expected_index": 0,
+          "force_calls": 139,
+          "force_norm": 9.693850064884657e-07,
+          "hessian_index": 0,
+          "reasons": [],
+          "rmsd": 4.846925032442329e-07,
+          "schema": "optbench.start/v2",
+          "start": "other",
+          "success": true,
+          "verify_calls": 4
+        }
+      ],
+      "tuning": "default"
+    },
+    {
+      "algorithm": "gradient descent",
+      "cap": 20000,
+      "code": "optbench",
+      "code_version": "0.0.0",
+      "commit": "07a5a5e614ca2cc99bbf4468dd115a391db865a2",
+      "entry": "gd-step-0.01",
+      "metrics": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 20000,
+        "iqr": 0.0,
+        "iqr_high": 0.0,
+        "iqr_low": 0.0,
+        "mean": 720.0,
+        "median": 720.0,
+        "median_high": 720.0,
+        "median_low": 720.0,
+        "n": 1,
+        "nfailed": 0,
+        "par2_mean": 720.0,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 720.0,
+        "q75": 720.0,
+        "scoring": "par2-wilson-bootstrap",
+        "success_rate": 1.0,
+        "successes": 1,
+        "wilson_high": 1.0,
+        "wilson_low": 0.20654931437723745
+      },
+      "parameters": {
+        "cap": 20000,
+        "force_norm": 1e-06,
+        "kind": "minimum",
+        "step": 0.01
+      },
+      "present_source": false,
+      "provenance": {
+        "code": "optbench",
+        "code_version": "0.0.0",
+        "commit": "07a5a5e614ca2cc99bbf4468dd115a391db865a2",
+        "machine": {
+          "machine": "x86_64",
+          "node": "cursor",
+          "python": "3.12.3",
+          "system": "Linux"
+        },
+        "parameters": {
+          "cap": 20000,
+          "force_norm": 1e-06,
+          "kind": "minimum",
+          "step": 0.01
+        }
+      },
+      "starts": [
+        {
+          "comparable": true,
+          "converged": true,
+          "counter": "harness",
+          "energy": 2.415999533079068e-13,
+          "expected_index": 0,
+          "force_calls": 720,
+          "force_norm": 9.830563632018396e-07,
+          "hessian_index": 0,
+          "reasons": [],
+          "rmsd": 4.915281816009198e-07,
+          "schema": "optbench.start/v2",
+          "start": "origin",
+          "success": true,
+          "verify_calls": 4
+        }
+      ],
+      "tuning": "tuned"
+    },
+    {
+      "algorithm": "gradient descent",
+      "cap": 200,
+      "code": "optbench",
+      "code_version": "0.0.0",
+      "commit": "07a5a5e614ca2cc99bbf4468dd115a391db865a2",
+      "entry": "gd-step-0.001-cap-200",
+      "metrics": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 200,
+        "iqr": 0.0,
+        "iqr_high": 0.0,
+        "iqr_low": 0.0,
+        "mean": 400.0,
+        "median": 400.0,
+        "median_high": 400.0,
+        "median_low": 400.0,
+        "n": 1,
+        "nfailed": 1,
+        "par2_mean": 400.0,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 400.0,
+        "q75": 400.0,
+        "scoring": "par2-wilson-bootstrap",
+        "success_rate": 0.0,
+        "successes": 0,
+        "wilson_high": 0.7934506856227626,
+        "wilson_low": 0.0
+      },
+      "parameters": {
+        "cap": 200,
+        "force_norm": 1e-06,
+        "kind": "minimum",
+        "step": 0.001
+      },
+      "present_source": false,
+      "provenance": {
+        "code": "optbench",
+        "code_version": "0.0.0",
+        "commit": "07a5a5e614ca2cc99bbf4468dd115a391db865a2",
+        "machine": {
+          "machine": "x86_64",
+          "node": "cursor",
+          "python": "3.12.3",
+          "system": "Linux"
+        },
+        "parameters": {
+          "cap": 200,
+          "force_norm": 1e-06,
+          "kind": "minimum",
+          "step": 0.001
+        }
+      },
+      "starts": [
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": 0.46365406999692377,
+          "expected_index": 0,
+          "force_calls": 200,
+          "force_norm": 1.5226381133752007,
+          "hessian_index": 0,
+          "reasons": [
+            "energy",
+            "rmsd",
+            "cap",
+            "force_norm"
+          ],
+          "rmsd": 0.6723531857506487,
+          "schema": "optbench.start/v2",
+          "start": "origin",
+          "success": false,
+          "verify_calls": 4
+        }
+      ],
+      "tuning": "tuned"
+    },
+    {
+      "algorithm": "newton",
+      "cap": 100,
+      "code": "optbench",
+      "code_version": "0.0.0",
+      "commit": "07a5a5e614ca2cc99bbf4468dd115a391db865a2",
+      "entry": "newton-saddle",
+      "metrics": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 100,
+        "iqr": 0.0,
+        "iqr_high": 0.0,
+        "iqr_low": 0.0,
+        "mean": 2.0,
+        "median": 2.0,
+        "median_high": 2.0,
+        "median_low": 2.0,
+        "n": 1,
+        "nfailed": 0,
+        "par2_mean": 2.0,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 2.0,
+        "q75": 2.0,
+        "scoring": "par2-wilson-bootstrap",
+        "success_rate": 1.0,
+        "successes": 1,
+        "wilson_high": 1.0,
+        "wilson_low": 0.20654931437723745
+      },
+      "parameters": {
+        "cap": 100,
+        "force_norm": 1e-06,
+        "kind": "saddle",
+        "step": null
+      },
+      "present_source": false,
+      "provenance": {
+        "code": "optbench",
+        "code_version": "0.0.0",
+        "commit": "07a5a5e614ca2cc99bbf4468dd115a391db865a2",
+        "machine": {
+          "machine": "x86_64",
+          "node": "cursor",
+          "python": "3.12.3",
+          "system": "Linux"
+        },
+        "parameters": {
+          "cap": 100,
+          "force_norm": 1e-06,
+          "kind": "saddle",
+          "step": null
+        }
+      },
+      "starts": [
+        {
+          "comparable": true,
+          "converged": true,
+          "counter": "harness",
+          "energy": 0.0,
+          "expected_index": 1,
+          "force_calls": 2,
+          "force_norm": 0.0,
+          "hessian_index": 1,
+          "reasons": [],
+          "rmsd": 0.0,
+          "schema": "optbench.start/v2",
+          "start": "offset",
+          "success": true,
+          "verify_calls": 4
+        }
+      ],
+      "tuning": "default"
+    },
+    {
+      "algorithm": "gradient descent",
+      "cap": 5000,
+      "code": "optbench",
+      "code_version": "0.0.0",
+      "commit": "07a5a5e614ca2cc99bbf4468dd115a391db865a2",
+      "entry": "bowl-reported-as-saddle",
+      "metrics": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 5000,
+        "iqr": 0.0,
+        "iqr_high": 0.0,
+        "iqr_low": 0.0,
+        "mean": 10000.0,
+        "median": 10000.0,
+        "median_high": 10000.0,
+        "median_low": 10000.0,
+        "n": 1,
+        "nfailed": 1,
+        "par2_mean": 10000.0,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 10000.0,
+        "q75": 10000.0,
+        "scoring": "par2-wilson-bootstrap",
+        "success_rate": 0.0,
+        "successes": 0,
+        "wilson_high": 0.7934506856227626,
+        "wilson_low": 0.0
+      },
+      "parameters": {
+        "cap": 5000,
+        "force_norm": 1e-06,
+        "kind": "saddle",
+        "step": 0.05
+      },
+      "present_source": false,
+      "provenance": {
+        "code": "optbench",
+        "code_version": "0.0.0",
+        "commit": "07a5a5e614ca2cc99bbf4468dd115a391db865a2",
+        "machine": {
+          "machine": "x86_64",
+          "node": "cursor",
+          "python": "3.12.3",
+          "system": "Linux"
+        },
+        "parameters": {
+          "cap": 5000,
+          "force_norm": 1e-06,
+          "kind": "saddle",
+          "step": 0.05
+        }
+      },
+      "starts": [
+        {
+          "comparable": true,
+          "converged": true,
+          "counter": "harness",
+          "energy": 2.3492682280878404e-13,
+          "expected_index": 1,
+          "force_calls": 139,
+          "force_norm": 9.693850067105103e-07,
+          "hessian_index": 0,
+          "reasons": [
+            "hessian_index",
+            "rmsd"
+          ],
+          "rmsd": 2.2360677607387545,
+          "schema": "optbench.start/v2",
+          "start": "origin",
+          "success": false,
+          "verify_calls": 4
+        }
+      ],
+      "tuning": "tuned"
+    }
+  ],
+  "schema": "optbench.result/v2",
+  "scoring": "par2-wilson-bootstrap",
+  "status": "smoke"
+}

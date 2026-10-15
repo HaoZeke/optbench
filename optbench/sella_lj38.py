@@ -17,6 +17,7 @@ The pair cutoff is 40. The trust-region numbers are the archived ones.
 from __future__ import annotations
 
 import os
+import sys
 import tarfile
 from multiprocessing import Pool
 from pathlib import Path
@@ -26,6 +27,10 @@ import numpy as np
 from ase.calculators.lj import LennardJones
 from ase.io import read
 from sella import Sella
+
+# The script's own environment does not install this repository.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from optbench.counter import attach_ase_counter
 
 MAXITER = 1000
 GRADTOL = 1e-3
@@ -42,13 +47,16 @@ HYPER = dict(
 
 def run_one(path: str) -> tuple[int, int]:
     atoms = read(path, format="eon")
-    atoms.calc = LennardJones(epsilon=1.0, sigma=1.0, rc=40.0)
+    atoms.calc = attach_ase_counter(LennardJones(epsilon=1.0, sigma=1.0, rc=40.0))
     dyn = Sella(atoms, logfile=os.devnull, **HYPER)
     for _ in dyn.irun(0.0, MAXITER):
         if np.linalg.norm(atoms.get_forces()) < GRADTOL:
             break
     failed = int(dyn.nsteps == MAXITER)
-    return int(dyn.pes.neval), failed
+    harness_calls = int(atoms.calc.optbench_counter["calls"])
+    if harness_calls == 0 and int(dyn.pes.neval) > 0:
+        raise RuntimeError("the harness counter did not see the Sella potential")
+    return harness_calls, failed
 
 
 app = cyclopts.App(

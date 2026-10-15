@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lode-org.github.io/optbench/contract/start.v2.schema.json",
+  "title": "OptBench start v2",
+  "type": "object",
+  "required": ["schema", "start", "force_calls", "counter", "comparable", "success"],
+  "properties": {
+    "schema": { "const": "optbench.start/v2" },
+    "start": { "type": "string" },
+    "force_calls": { "type": "number" },
+    "verify_calls": { "type": "integer", "minimum": 0 },
+    "counter": { "enum": ["harness", "client"] },
+    "comparable": { "type": "boolean" },
+    "success": { "type": "boolean" },
+    "reasons": { "type": "array", "items": { "type": "string" } },
+    "energy": { "type": "number" },
+    "force_norm": { "type": "number" },
+    "hessian_index": { "type": "integer" },
+    "expected_index": { "type": "integer" },
+    "rmsd": { "type": "number" },
+    "converged": { "type": "boolean" }
+  }
+}

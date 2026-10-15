@@ -17,6 +17,7 @@ from pathlib import Path
 
 from .problems import load_problem
 from .score import summarize_capped
+from .v2 import client_start_records, write_starts
 
 _INI_ORDER = ("Main", "Potential", "Optimizer")
 
@@ -214,6 +215,10 @@ def run(
     summary["mean_unrounded"] = (sum(ok) / len(ok)) if ok else None
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(benchmark_text(summary, template), encoding="utf-8")
+    write_starts(
+        output.with_suffix(".starts.jsonl"),
+        client_start_records([con.stem for con in cons], counts, cap),
+    )
     summary["starts"] = len(counts)
     summary["template"] = template["id"]
     summary["problem"] = problem["id"]

@@ -45,11 +45,32 @@ def test_run_writes_one_benchmark_dat(tmp_path: Path):
         output=output,
         work=tmp_path / "work",
     )
-    fields = parse(output.read_text(encoding="utf-8"))
+    text = output.read_text(encoding="utf-8")
+    assert text == (
+        "force_calls 181\n"
+        "force_calls_min 181\n"
+        "force_calls_max 181\n"
+        "nfailed 0\n"
+        "code Eon svn\n"
+        "code_version r2549\n"
+        "algorithm LBFGS\n"
+        "template eon-svn/lbfgs-m100\n"
+    )
+    fields = parse(text)
     assert fields["force_calls"] == "181"
     assert fields["nfailed"] == "0"
     assert fields["template"] == "eon-svn/lbfgs-m100"
     assert summary["starts"] == 2
+    import json
+
+    starts = [
+        json.loads(line)
+        for line in (tmp_path / "benchmark.starts.jsonl").read_text(encoding="utf-8").splitlines()
+    ]
+    assert [row["start"] for row in starts] == ["cluster_0000", "cluster_0001"]
+    assert {row["force_calls"] for row in starts} == {181}
+    assert {row["counter"] for row in starts} == {"client"}
+    assert {row["comparable"] for row in starts} == {False}
     assert "potential = lj_cluster" in (tmp_path / "work" / "cluster_0000" / "config.ini").read_text()
 
 

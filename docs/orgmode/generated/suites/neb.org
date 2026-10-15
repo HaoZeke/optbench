@@ -11,8 +11,8 @@
    </dl>
    <h3>Present runs</h3>
    <div class="bench-table"><table>
-   <caption>Present runs. Fewer force calls first. The 2014 scores follow.</caption>
-   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th></tr></thead><tbody>
+   <caption>Present runs. Fewer force calls first. The legacy 2014 scores follow.</caption>
+   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th><th class="text" scope="col">Tuning</th></tr></thead><tbody>
    <tr>
    <td class="text">eon-3.5.0-neb-pt-lbfgs</td>
    <td class="text">Eon</td>
@@ -21,6 +21,7 @@
    <td class="num">27</td>
    <td class="num">51</td>
    <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    <tr>
    <td class="text">eon-3.5.0-neb-pt-fire</td>
@@ -30,6 +31,7 @@
    <td class="num">68</td>
    <td class="num">95</td>
    <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    <tr>
    <td class="text">eon-3.5.0-neb-pt-cg</td>
@@ -39,6 +41,7 @@
    <td class="num">51</td>
    <td class="num">317</td>
    <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    <tr>
    <td class="text">eon-3.5.0-neb-pt-qm</td>
@@ -48,11 +51,13 @@
    <td class="num">89</td>
    <td class="num">247</td>
    <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    </tbody></table></div>
    <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:4"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "eon-3.5.0-neb-pt-lbfgs", "entry": "Eon 3.5.0 eon-3.5.0-neb-pt-lbfgs", "code": "Eon", "value": 40.0, "best": true, "held": false, "failed": false}, {"id": "eon-3.5.0-neb-pt-fire", "entry": "Eon 3.5.0 eon-3.5.0-neb-pt-fire", "code": "Eon", "value": 85.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-neb-pt-cg", "entry": "Eon 3.5.0 eon-3.5.0-neb-pt-cg", "code": "Eon", "value": 142.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-neb-pt-qm", "entry": "Eon 3.5.0 eon-3.5.0-neb-pt-qm", "code": "Eon", "value": 165.0, "best": false, "held": false, "failed": false}]}</script></figure>
-   <div class="bench-table"><table>
-   <caption>Archived scores, fewest force calls first.</caption>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-legacy">
+   <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -184,6 +189,6 @@
    <td class="text">Thu Apr  4 12:06:22 2013</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:12"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "neb-pt-heptamer-eon-lbfgs", "entry": "eon-lbfgs", "code": "Eon r2090", "value": 42.0, "best": true, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-glbfgs-hess", "entry": "gman-glbfgs-hess", "code": "Gman r235", "value": 48.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-fire", "entry": "gman-fire", "code": "Gman r235", "value": 82.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-eon-fire", "entry": "eon-fire", "code": "Eon r2090", "value": 86.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-glbfgs-line", "entry": "gman-glbfgs-line", "code": "Gman r235", "value": 100.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-lbfgs-line", "entry": "gman-lbfgs-line", "code": "Gman r235", "value": 108.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-cg", "entry": "gman-cg", "code": "Gman r235", "value": 111.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-eon-cg", "entry": "eon-cg", "code": "Eon r2090", "value": 120.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-eon-qm", "entry": "eon-qm", "code": "Eon r2090", "value": 164.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-qm", "entry": "gman-qm", "code": "Gman r235", "value": 190.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-lbfgs-hess", "entry": "gman-lbfgs-hess", "code": "Gman r235", "value": 217.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-sd", "entry": "gman-sd", "code": "Gman r235", "value": 412.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:12"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "neb-pt-heptamer-eon-lbfgs", "entry": "eon-lbfgs", "code": "Eon r2090", "value": 42.0, "best": true, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-glbfgs-hess", "entry": "gman-glbfgs-hess", "code": "Gman r235", "value": 48.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-fire", "entry": "gman-fire", "code": "Gman r235", "value": 82.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-eon-fire", "entry": "eon-fire", "code": "Eon r2090", "value": 86.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-glbfgs-line", "entry": "gman-glbfgs-line", "code": "Gman r235", "value": 100.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-lbfgs-line", "entry": "gman-lbfgs-line", "code": "Gman r235", "value": 108.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-cg", "entry": "gman-cg", "code": "Gman r235", "value": 111.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-eon-cg", "entry": "eon-cg", "code": "Eon r2090", "value": 120.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-eon-qm", "entry": "eon-qm", "code": "Eon r2090", "value": 164.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-qm", "entry": "gman-qm", "code": "Gman r235", "value": 190.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-lbfgs-hess", "entry": "gman-lbfgs-hess", "code": "Gman r235", "value": 217.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-sd", "entry": "gman-sd", "code": "Gman r235", "value": 412.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </section>
 #+end_export
