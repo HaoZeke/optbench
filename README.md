@@ -2,7 +2,7 @@
 
 OptBench compares geometry optimizers, saddle searches, and global optimization on a fixed set of problems. Chill, Stevenson, Ruehle, Shang, Xiao, Farrell, Wales, and Henkelman set the suite out in J. Chem. Theory Comput. 2014, 10, 5476-5482 (doi:10.1021/ct5008718). The 2014 tables are at <https://theory.cm.utexas.edu/benchmarks/>. This repository is a replay of that suite. The public board is <https://lode-org.github.io/optbench/>.
 
-A problem file under `problems/` states the potential, the stopping rule, and the keys a result must carry. A result is one `benchmark.dat`: the first whitespace on a line splits the key from the value. The geometries are already in this clone, under `inputs/`. A campaign reads them from `inputs/manifest.jsonl`. Nothing else has to be downloaded to run a problem that ships here.
+A problem file under `problems/` is TOML. It states the potential, the stopping rule, and the keys a result must carry. The JSON schemas are under `contract/`, and `contract/README.md` lists them. A result is one `benchmark.dat`: the first whitespace on a line splits the key from the value. The geometries are already in this clone, under `inputs/`. A campaign reads them from `inputs/manifest.jsonl`. Nothing else has to be downloaded to run a problem that ships here.
 
 ## Install the harness
 
@@ -183,6 +183,18 @@ The LJ38 minimization templates name `ljcluster` or `lj_cluster`. They do not pa
 The front page is a result whose status is `sota` and whose commit is the present source in `codes/registry.toml`. The archive page is the 2014 scores plus later passes that do not meet that rule. A local `benchmark.dat` is a score whether or not it has been added to the front page. Adding it there means a `results/*.json` record with `optbench.result/v1`, the problem geometries, and the pinned commit.
 
 `uv run optbench import-archive ARCHIVE` rebuilds the oracle and the geometry store from a bare clone of the public GitLab project. It does not replace a problem file that already exists.
+
+## v2 score
+
+The 2014 mean leaves out failures. The comparable score does not. It is specified in `docs/design/decision.md` and run as described in `docs/harness.md`.
+
+A force call is one entry to the potential wrapper in `optbench.counter`. The same wrapper is what ASE, pele, and Sella are charged for. A subprocess client still writes the legacy `benchmark.dat` from its own counter, and the per-start file next to it is marked `counter` `client`. That file is not a v2 score.
+
+A v2 success is under the cap, at the force stop, and, when a reference is supplied, at Hessian index 0 for a minimum or index 1 for a saddle, with the energy and Kabsch RMSD inside the tolerances. A failure costs `2` times the cap. The table shows that PAR-2 mean, the Wilson 95% interval on the success rate, and the median and interquartile range with a bootstrap of 2000 resamples seeded by `20261015`.
+
+Pt-island cost is force calls in a repetition divided by the searches in that repetition. `eon-client/lbfgs-m20` is `tuning` `default`. `eon-client/lbfgs-m100` is `tuning` `tuned`.
+
+`uv run optbench smoke` writes `results/smoke/quadratic.json`. That file is a quadratic check of the counter and the score. It is not a Lennard-Jones campaign. Those campaigns stay on rg.terra.
 
 ## Statistics
 

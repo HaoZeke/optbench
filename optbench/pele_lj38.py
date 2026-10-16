@@ -16,6 +16,7 @@ clusters is inside the problem cutoff of 40.
 
 from __future__ import annotations
 
+import sys
 from multiprocessing import Pool
 from pathlib import Path
 
@@ -23,6 +24,10 @@ import cyclopts
 import numpy as np
 from pele.optimize._lbfgs_py import LBFGS
 from pele.potentials import LJ
+
+# The script's own environment does not install this repository.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from optbench.counter import PeleCounter
 
 FORCE = 0.01
 CAP = 10000
@@ -58,7 +63,7 @@ def _stop(energy, gradient, tol, coords) -> bool:
 
 def run_one(job: tuple[str, int, float]) -> int:
     path, memory, maxstep = job
-    pot = LJ(eps=1.0, sig=1.0)
+    pot = PeleCounter(LJ(eps=1.0, sig=1.0))
     coords = read_con(Path(path).read_text(encoding="utf-8"))
     quench = LBFGS(
         coords,
@@ -70,7 +75,9 @@ def run_one(job: tuple[str, int, float]) -> int:
         iprint=-1,
     )
     result = quench.run()
-    calls = int(result.nfev)
+    # The published 0.1.2 files used result.nfev. A new run is charged
+    # for entries to the wrapped potential.
+    calls = int(pot.calls)
     if (not result.success) or calls >= CAP:
         return CAP
     return calls

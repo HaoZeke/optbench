@@ -2,9 +2,22 @@
 
 The archive mean is awk ``printf "%.0f"``. On halves that rounds to even,
 which is what Python ``round`` does for these ties.
+
+The v2 cost is the PAR-2 mean. A failure is charged ``2 * cap`` instead
+of being dropped. The Wilson interval and the bootstrap median sit
+beside that mean. See ``docs/design/decision.md``.
 """
 
 from __future__ import annotations
+
+import math
+import random
+import statistics
+
+WILSON_Z = 1.959963984540054
+PAR_FACTOR = 2
+BOOTSTRAP_RESAMPLES = 2000
+BOOTSTRAP_SEED = 20261015
 
 
 def half_even(value: float) -> int:
@@ -117,3 +130,161 @@ def summarize_capped(counts: list[int], cap: int) -> dict[str, int | None]:
         "force_calls_max": max(ok),
         "nfailed": failed,
     }
+
+
+def wilson_interval(successes: int, starts: int, z: float = WILSON_Z) -> tuple[float, float]:
+    """Wilson score interval for ``successes / starts``.
+
+    ``z`` is the standard-normal quantile. The default is the 95% value.
+    """
+    if starts <= 0:
+        raise ValueError("starts must be positive")
+    if successes < 0 or successes > starts:
+        raise ValueError("successes must lie between 0 and starts")
+    phat = successes / starts
+    z2 = z * z
+    denom = 1.0 + z2 / starts
+    center = (phat + z2 / (2.0 * starts)) / denom
+    margin = z * math.sqrt(phat * (1.0 - phat) / starts + z2 / (4.0 * starts * starts)) / denom
+    low = max(0.0, center - margin)
+    high = min(1.0, center + margin)
+    # k = 0 and k = n are exactly 0 and 1. Float error can land just inside.
+    if successes == 0:
+        low = 0.0
+    if successes == starts:
+        high = 1.0
+    return low, high
+
+
+def penalised_cost(force_calls: float, success: bool, cap: int | None, factor: int = PAR_FACTOR) -> float:
+    """PAR cost. A failure, or a success at or above the cap, costs ``factor * cap``."""
+    if cap is not None and (not success or force_calls >= cap):
+        return float(factor * cap)
+    if not success:
+        raise ValueError("a failure needs a cap")
+    return float(force_calls)
+
+
+def quantile(values: list[float], fraction: float) -> float:
+    """Linear quantile, the same ranks as ``sample_stats``."""
+    if not values:
+        raise ValueError("values is empty")
+    ordered = sorted(float(value) for value in values)
+    count = len(ordered)
+    if count == 1:
+        return ordered[0]
+    position = (count - 1) * fraction
+    low = int(position)
+    high = min(low + 1, count - 1)
+    weight = position - low
+    return ordered[low] * (1.0 - weight) + ordered[high] * weight
+
+
+def _percentile(sorted_values: list[float], fraction: float) -> float:
+    return quantile(sorted_values, fraction)
+
+
+def bootstrap_interval(
+    values: list[float],
+    statistic,
+    *,
+    resamples: int = BOOTSTRAP_RESAMPLES,
+    seed: int = BOOTSTRAP_SEED,
+    alpha: float = 0.05,
+) -> tuple[float, float, float]:
+    """Point estimate and percentile bootstrap interval.
+
+    Returns ``(statistic(values), low, high)``. Resamples are drawn with
+    replacement from a fixed seed so a published interval can be recomputed.
+    """
+    if not values:
+        raise ValueError("values is empty")
+    if resamples <= 0:
+        raise ValueError("resamples must be positive")
+    point = float(statistic(values))
+    rng = random.Random(seed)
+    count = len(values)
+    samples = []
+    for _ in range(resamples):
+        draw = [values[rng.randrange(count)] for _ in range(count)]
+        samples.append(float(statistic(draw)))
+    samples.sort()
+    low = _percentile(samples, alpha / 2.0)
+    high = _percentile(samples, 1.0 - alpha / 2.0)
+    return point, low, high
+
+
+def _iqr(values: list[float]) -> float:
+    return quantile(values, 0.75) - quantile(values, 0.25)
+
+
+def distribution_summary(
+    values: list[float],
+    *,
+    resamples: int = BOOTSTRAP_RESAMPLES,
+    seed: int = BOOTSTRAP_SEED,
+) -> dict[str, float | int]:
+    """Median, interquartile range, and bootstrap intervals of a cost sample."""
+    if not values:
+        raise ValueError("values is empty")
+    median, median_low, median_high = bootstrap_interval(
+        values, statistics.median, resamples=resamples, seed=seed
+    )
+    iqr, iqr_low, iqr_high = bootstrap_interval(values, _iqr, resamples=resamples, seed=seed)
+    return {
+        "n": len(values),
+        "mean": statistics.fmean(values),
+        "median": median,
+        "median_low": median_low,
+        "median_high": median_high,
+        "q25": quantile(values, 0.25),
+        "q75": quantile(values, 0.75),
+        "iqr": iqr,
+        "iqr_low": iqr_low,
+        "iqr_high": iqr_high,
+        "bootstrap_resamples": resamples,
+        "bootstrap_seed": seed,
+    }
+
+
+def score_v2(
+    records: list[dict],
+    cap: int | None,
+    *,
+    factor: int = PAR_FACTOR,
+    resamples: int = BOOTSTRAP_RESAMPLES,
+    seed: int = BOOTSTRAP_SEED,
+) -> dict:
+    """PAR-2 mean, Wilson success interval, and bootstrap median of one run.
+
+    Each record has ``force_calls`` and ``success``. When ``cap`` is
+    ``None`` every record must be a success, and ``par_applied`` is false.
+    That is the Pt-island per-search sample: the problem states no cap.
+    """
+    if not records:
+        raise ValueError("records is empty")
+    successes = 0
+    costs: list[float] = []
+    for record in records:
+        success = bool(record["success"])
+        if success:
+            successes += 1
+        costs.append(penalised_cost(float(record["force_calls"]), success, cap, factor))
+    starts = len(records)
+    low, high = wilson_interval(successes, starts)
+    summary = distribution_summary(costs, resamples=resamples, seed=seed)
+    summary.update(
+        {
+            "scoring": "par2-wilson-bootstrap",
+            "successes": successes,
+            "nfailed": starts - successes,
+            "success_rate": successes / starts,
+            "wilson_low": low,
+            "wilson_high": high,
+            "par_factor": factor,
+            "cap": cap,
+            "par_applied": cap is not None,
+            "par2_mean": summary["mean"] if cap is not None else None,
+        }
+    )
+    return summary

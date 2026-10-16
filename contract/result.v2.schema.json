@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lode-org.github.io/optbench/contract/result.v2.schema.json",
+  "title": "OptBench result v2",
+  "type": "object",
+  "required": ["schema", "status", "problem", "scoring", "par_factor", "bootstrap_resamples", "bootstrap_seed", "runs"],
+  "properties": {
+    "schema": { "const": "optbench.result/v2" },
+    "status": { "enum": ["sota", "archive", "smoke"] },
+    "problem": { "type": "string" },
+    "scoring": { "const": "par2-wilson-bootstrap" },
+    "par_factor": { "const": 2 },
+    "bootstrap_resamples": { "type": "integer", "minimum": 1 },
+    "bootstrap_seed": { "type": "integer" },
+    "note": { "type": "string" },
+    "runs": {
+      "type": "array",
+      "items": { "$ref": "https://lode-org.github.io/optbench/contract/score.v2.schema.json" }
+    }
+  }
+}

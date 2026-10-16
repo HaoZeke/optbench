@@ -8,7 +8,9 @@
    <dt>Cap</dt><dd>10000 force calls</dd>
    <dt>Starts</dt><dd>1000</dd>
    <dt>Archived rule</dt><dd>total_force_calls &gt;= max_force_calls</dd>
+   <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    </dl>
+   <p>The result file names the host rg.terra.</p>
    <figure class="bench-structure"><img src="_static/lj38.svg" width="176" height="155" alt="Thirty-eight particles in Lennard-Jones start cluster_0000."><figcaption>Start cluster_0000, one of the 1,000 geometries. Particles only. The potential has no bonds.</figcaption></figure>
    <p class="bench-count">17 methods. Lower force calls is better.</p>
    <table><caption>Present sources. The cell is the record.</caption><thead><tr><th>Entry</th><th>Code</th><th class="num">Mean (force calls)</th><th class="num">Min (force calls)</th><th class="num">Max (force calls)</th><th class="num">Failed</th><th>Commit</th></tr></thead><tbody>
@@ -30,6 +32,214 @@
    <tr id="eon-3-5-0-qm" class="bench-row-fail"><td>eon-3.5.0-qm</td><td>eOn</td><td class="num">3514</td><td class="num">682</td><td class="num">9926</td><td class="num">25</td><td>4d8b34baf1ba</td></tr>
    <tr id="eon-3-5-0-sd" class="bench-row-fail"><td>eon-3.5.0-sd</td><td>eOn</td><td class="num">4901</td><td class="num">1355</td><td class="num">9982</td><td class="num">96</td><td>4d8b34baf1ba</td></tr>
    </tbody></table>
+   <h3>v2 success rate</h3>
+   <p class="bench-legacy">Wilson 95% intervals from the published start and failure counts. PAR-2, the median, and the bootstrap interval need the per-start harness record, which these rows do not have. eOn L-BFGS memory 20 is default. Memory 100 is tuned. Other rows are unlabelled.</p>
+   <div class="bench-table"><table>
+   <caption>v2 success rate. The legacy mean is unchanged.</caption>
+   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Tuning</th><th class="num" scope="col">Successes</th><th class="num" scope="col">Wilson low</th><th class="num" scope="col">Wilson high</th><th class="num" scope="col">Legacy mean</th></tr></thead><tbody>
+   <tr>
+   <td class="text">eon-3.5.0-lbfgs-m100</td>
+   <td class="text">tuned</td>
+   <td class="num">1000/1000</td>
+   <td class="num">0.996173</td>
+   <td class="num">1.000000</td>
+   <td class="num">181</td>
+   </tr>
+   <tr>
+   <td class="text">eon-3.5.0-lbfgs</td>
+   <td class="text">default</td>
+   <td class="num">1000/1000</td>
+   <td class="num">0.996173</td>
+   <td class="num">1.000000</td>
+   <td class="num">201</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-lbfgs-0.3.0</td>
+   <td class="text">unlabelled</td>
+   <td class="num">1000/1000</td>
+   <td class="num">0.996173</td>
+   <td class="num">1.000000</td>
+   <td class="num">216</td>
+   </tr>
+   <tr>
+   <td class="text">eon-3.5.0-cg</td>
+   <td class="text">unlabelled</td>
+   <td class="num">1000/1000</td>
+   <td class="num">0.996173</td>
+   <td class="num">1.000000</td>
+   <td class="num">454</td>
+   </tr>
+   <tr>
+   <td class="text">eon-3.5.0-sd-twopoint</td>
+   <td class="text">unlabelled</td>
+   <td class="num">1000/1000</td>
+   <td class="num">0.996173</td>
+   <td class="num">1.000000</td>
+   <td class="num">532</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-bfgs-0.3.0</td>
+   <td class="text">unlabelled</td>
+   <td class="num">1000/1000</td>
+   <td class="num">0.996173</td>
+   <td class="num">1.000000</td>
+   <td class="num">538</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-bb-0.3.0</td>
+   <td class="text">unlabelled</td>
+   <td class="num">1000/1000</td>
+   <td class="num">0.996173</td>
+   <td class="num">1.000000</td>
+   <td class="num">541</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-sr1-0.3.0</td>
+   <td class="text">unlabelled</td>
+   <td class="num">1000/1000</td>
+   <td class="num">0.996173</td>
+   <td class="num">1.000000</td>
+   <td class="num">566</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-fire2-0.3.0</td>
+   <td class="text">unlabelled</td>
+   <td class="num">1000/1000</td>
+   <td class="num">0.996173</td>
+   <td class="num">1.000000</td>
+   <td class="num">694</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-fire-0.3.0</td>
+   <td class="text">unlabelled</td>
+   <td class="num">1000/1000</td>
+   <td class="num">0.996173</td>
+   <td class="num">1.000000</td>
+   <td class="num">699</td>
+   </tr>
+   <tr>
+   <td class="text">ase-fire-3.29.0</td>
+   <td class="text">unlabelled</td>
+   <td class="num">1000/1000</td>
+   <td class="num">0.996173</td>
+   <td class="num">1.000000</td>
+   <td class="num">706</td>
+   </tr>
+   <tr>
+   <td class="text">eon-3.5.0-fire</td>
+   <td class="text">unlabelled</td>
+   <td class="num">1000/1000</td>
+   <td class="num">0.996173</td>
+   <td class="num">1.000000</td>
+   <td class="num">731</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-nlcg-0.3.0</td>
+   <td class="text">unlabelled</td>
+   <td class="num">1000/1000</td>
+   <td class="num">0.996173</td>
+   <td class="num">1.000000</td>
+   <td class="num">733</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-sd-0.3.0</td>
+   <td class="text">unlabelled</td>
+   <td class="num">1000/1000</td>
+   <td class="num">0.996173</td>
+   <td class="num">1.000000</td>
+   <td class="num">1260</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-quickmin-0.3.0</td>
+   <td class="text">unlabelled</td>
+   <td class="num">999/1000</td>
+   <td class="num">0.994357</td>
+   <td class="num">0.999823</td>
+   <td class="num">1849</td>
+   </tr>
+   <tr>
+   <td class="text">eon-3.5.0-qm</td>
+   <td class="text">unlabelled</td>
+   <td class="num">975/1000</td>
+   <td class="num">0.963355</td>
+   <td class="num">0.983010</td>
+   <td class="num">3514</td>
+   </tr>
+   <tr>
+   <td class="text">eon-3.5.0-sd</td>
+   <td class="text">unlabelled</td>
+   <td class="num">904/1000</td>
+   <td class="num">0.884165</td>
+   <td class="num">0.920743</td>
+   <td class="num">4901</td>
+   </tr>
+   </tbody></table></div>
    <figure class="bench-plot"><figcaption>force calls. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:24"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "eon-3-5-0-lbfgs-m100", "entry": "eon-3.5.0-lbfgs-m100", "code": "eOn", "value": 181.0, "best": true, "held": false, "failed": false}, {"id": "eon-svn-r2549-lbfgs-m100", "entry": "eon-svn-r2549-lbfgs-m100", "code": "Eon svn", "value": 181.0, "best": true, "held": false, "failed": false}, {"id": "eon-3-5-0-lbfgs", "entry": "eon-3.5.0-lbfgs", "code": "eOn", "value": 201.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-lbfgs-m20", "entry": "eon-svn-r2549-lbfgs-m20", "code": "Eon svn", "value": 202.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lbfgs-0-3-0", "entry": "rgmin-lbfgs-0.3.0", "code": "rgmin", "value": 216.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-cg", "entry": "eon-svn-r2549-cg", "code": "Eon svn", "value": 453.0, "best": false, "held": false, "failed": false}, {"id": "eon-3-5-0-cg", "entry": "eon-3.5.0-cg", "code": "eOn", "value": 454.0, "best": false, "held": false, "failed": false}, {"id": "eon-3-5-0-sd-twopoint", "entry": "eon-3.5.0-sd-twopoint", "code": "eOn", "value": 532.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-bfgs-0-3-0", "entry": "rgmin-bfgs-0.3.0", "code": "rgmin", "value": 538.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-sd-twopoint", "entry": "eon-svn-r2549-sd-twopoint", "code": "Eon svn", "value": 539.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-bb-0-3-0", "entry": "rgmin-bb-0.3.0", "code": "rgmin", "value": 541.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-sr1-0-3-0", "entry": "rgmin-sr1-0.3.0", "code": "rgmin", "value": 566.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-fire2-0-3-0", "entry": "rgmin-fire2-0.3.0", "code": "rgmin", "value": 694.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-fire-0-3-0", "entry": "rgmin-fire-0.3.0", "code": "rgmin", "value": 699.0, "best": false, "held": false, "failed": false}, {"id": "ase-fire-3-29-0", "entry": "ase-fire-3.29.0", "code": "ASE", "value": 706.0, "best": false, "held": false, "failed": false}, {"id": "eon-3-5-0-fire", "entry": "eon-3.5.0-fire", "code": "eOn", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-fire", "entry": "eon-svn-r2549-fire", "code": "Eon svn", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-nlcg-0-3-0", "entry": "rgmin-nlcg-0.3.0", "code": "rgmin", "value": 733.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-sd-0-3-0", "entry": "rgmin-sd-0.3.0", "code": "rgmin", "value": 1260.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-quickmin-0-3-0", "entry": "rgmin-quickmin-0.3.0", "code": "rgmin", "value": 1849.0, "best": false, "held": false, "failed": true}, {"id": "eon-3-5-0-qm", "entry": "eon-3.5.0-qm", "code": "eOn", "value": 3514.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-r2549-qm", "entry": "eon-svn-r2549-qm", "code": "Eon svn", "value": 3547.0, "best": false, "held": false, "failed": true}, {"id": "eon-3-5-0-sd", "entry": "eon-3.5.0-sd", "code": "eOn", "value": 4901.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-r2549-sd", "entry": "eon-svn-r2549-sd", "code": "Eon svn", "value": 4901.0, "best": false, "held": false, "failed": true}]}</script></figure>
+   <h3>v2 smoke</h3>
+   <p class="bench-smoke">Quadratic bowl and saddle. Not a campaign score. A failure costs 2 times the cap. Provenance is optbench commit 267959adba9e on cursor.</p>
+   <div class="bench-table"><table>
+   <caption>Harness force calls and the PAR-2 mean. The false saddle is charged the penalty.</caption>
+   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Tuning</th><th class="num" scope="col">Successes</th><th class="num" scope="col">Wilson low</th><th class="num" scope="col">Wilson high</th><th class="num" scope="col">Harness calls</th><th class="num" scope="col">PAR-2 mean</th><th class="num" scope="col">Median</th><th class="num" scope="col">Median low</th><th class="num" scope="col">Median high</th></tr></thead><tbody>
+   <tr>
+   <td class="text">gd-step-0.05</td>
+   <td class="text">default</td>
+   <td class="num">2/2</td>
+   <td class="num">0.342380</td>
+   <td class="num">1.000000</td>
+   <td class="num">139, 139</td>
+   <td class="num">139</td>
+   <td class="num">139</td>
+   <td class="num">139</td>
+   <td class="num">139</td>
+   </tr>
+   <tr>
+   <td class="text">gd-step-0.01</td>
+   <td class="text">tuned</td>
+   <td class="num">1/1</td>
+   <td class="num">0.206549</td>
+   <td class="num">1.000000</td>
+   <td class="num">720</td>
+   <td class="num">720</td>
+   <td class="num">720</td>
+   <td class="num">720</td>
+   <td class="num">720</td>
+   </tr>
+   <tr>
+   <td class="text">gd-step-0.001-cap-200</td>
+   <td class="text">tuned</td>
+   <td class="num">0/1</td>
+   <td class="num">0.000000</td>
+   <td class="num">0.793451</td>
+   <td class="num">200</td>
+   <td class="num">400</td>
+   <td class="num">400</td>
+   <td class="num">400</td>
+   <td class="num">400</td>
+   </tr>
+   <tr>
+   <td class="text">newton-saddle</td>
+   <td class="text">default</td>
+   <td class="num">1/1</td>
+   <td class="num">0.206549</td>
+   <td class="num">1.000000</td>
+   <td class="num">2</td>
+   <td class="num">2</td>
+   <td class="num">2</td>
+   <td class="num">2</td>
+   <td class="num">2</td>
+   </tr>
+   <tr>
+   <td class="text">bowl-reported-as-saddle</td>
+   <td class="text">tuned</td>
+   <td class="num">0/1</td>
+   <td class="num">0.000000</td>
+   <td class="num">0.793451</td>
+   <td class="num">139</td>
+   <td class="num">10000</td>
+   <td class="num">10000</td>
+   <td class="num">10000</td>
+   <td class="num">10000</td>
+   </tr>
+   </tbody></table></div>
    </section>
 #+end_export

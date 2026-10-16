@@ -95,3 +95,35 @@ def test_render_writes_the_front_page_table():
     assert "4d8b34baf1ba" in codes
     assert "e089a136910f" in codes
     assert "8bea1002b06a" in codes
+
+
+def test_legacy_rows_stay_and_v2_tables_use_recorded_counts():
+    render(ROOT)
+    featured = (ROOT / "docs" / "include" / "featured.org").read_text(encoding="utf-8")
+    assert "Legacy 2014 archive" in featured
+    assert "eon-cg" in featured
+    assert ">453<" in featured
+    assert "par2-wilson-bootstrap" in featured
+    sota = (ROOT / "docs" / "include" / "sota.org").read_text(encoding="utf-8")
+    assert "rg.terra" in sota
+    assert "v2 success rate" in sota
+    assert "0.996173" in sota
+    assert "0.963355" in sota
+    assert "0.884165" in sota
+    assert ">181<" in sota
+    assert ">4901<" in sota
+    assert "default" in sota
+    assert "tuned" in sota
+    saddle = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "saddle-search.org").read_text(encoding="utf-8")
+    assert "Per-search cost" in saddle
+    assert "263.284133" in saddle
+    assert "469.759056" in saddle
+    assert "Legacy 2014 scores. Fewer calls is to the left." in saddle
+    assert "v2 smoke" in sota
+    assert "139, 139" in sota
+    assert "bowl-reported-as-saddle" in sota
+    assert ">10000<" in sota
+    assert ">139<" in sota
+    assert ">720<" in sota
+    assert ">400<" in sota
+    assert ">2<" in sota
