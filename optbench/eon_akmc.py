@@ -145,6 +145,21 @@ def _one_repetition(
                 break
         else:
             progress["passes"] = passes
+        # akmc() registers the previous pass, then submits this one.
+        # A last call with an empty buffer records the searches that
+        # already finished and does not start another batch.
+        if not progress.get("reached"):
+            config.comm_job_buffer_size = 0
+            try:
+                akmc(config)
+            except SystemExit as exc:
+                last_error = last_error or f"akmc exit {exc.code}"
+            except Exception as exc:
+                last_error = last_error or f"{type(exc).__name__}: {exc}"
+            results = work / "states" / "0" / "search_results.txt"
+            if results.is_file():
+                progress = saddle_progress(results.read_text(encoding="utf-8", errors="replace"))
+                progress["passes"] = passes
     finally:
         os.chdir(previous)
     progress["seed"] = seed

@@ -457,8 +457,11 @@ def _run_akmc(template: dict, seed: int, work: Path, server, wrapper: Path, cap:
     from optbench.eon_akmc import _one_repetition
     from optbench.potserver import remote_count
 
-    patched = json.loads(json.dumps(template))
-    patched["ini"]["Potential"] = {"potential": "ext_pot", "ext_pot_path": str(wrapper)}
+    # ``load_template`` stores a Path on ``_path``. Copy the ini only.
+    ini = json.loads(json.dumps(template["ini"]))
+    ini["Potential"] = {"potential": "ext_pot", "ext_pot_path": str(wrapper)}
+    patched = dict(template)
+    patched["ini"] = ini
     row = _one_repetition(
         ROOT,
         patched,
