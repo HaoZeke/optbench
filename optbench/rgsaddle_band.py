@@ -5,10 +5,10 @@ This module calls ``librgsaddle.so`` (``RGSADDLE_LIBRARY`` or the
 release build under ``/tmp/rgsaddle``). A missing library raises when
 a search starts; unit tests that only check geometry skip that path.
 
-Cost is ``CountedPotential.energy_forces`` on the free atoms. That is
-the harness counter. The initial-path IDPP and S-IDPP relaxations use
-the surrogate and are not potential calls. Hessian finite differences
-go through ``verification`` and are not search cost.
+Cost is ``RgpotCounter.calculate`` on a ``HarnessCounter`` for the
+free atoms. The initial-path IDPP and S-IDPP relaxations use the
+surrogate and are not potential calls. Hessian finite differences go
+through ``verification`` and are not search cost.
 
 The band stores raw potential evaluations, not a per-image quotient.
 Energy-weighted springs are the eOn constants from one initial
@@ -32,7 +32,8 @@ from pathlib import Path
 import numpy as np
 
 from .campaign import geometry_archive, load_template, resolve_problem
-from .counter import CountedPotential
+from .counter import HarnessCounter
+from .failures import classify_failure
 from .pes import (
     energy_weighted_springs,
     evaluate,
@@ -41,6 +42,7 @@ from .pes import (
     load_pairs,
     pair_distances,
 )
+from .potserver import RgpotCounter
 from .score import score_v2
 from .stationary import negative_index, numerical_hessian
 from .v2 import collect_provenance, write_starts
@@ -260,9 +262,9 @@ def _project_rigid(hessian: np.ndarray, coords: np.ndarray) -> np.ndarray:
 class _Surface:
     """One callback target. The C session calls it on the stepping thread."""
 
-    def __init__(self, kind: str, potential: CountedPotential | None, cap: int):
+    def __init__(self, kind: str, rgpot: RgpotCounter | None, cap: int):
         self.kind = kind
-        self.potential = potential
+        self.rgpot = rgpot
         self.cap = cap
         self.n_band = 0
         self.slots: list[int] = []
@@ -270,17 +272,27 @@ class _Surface:
         self.template: np.ndarray | None = None
         self.free: np.ndarray | None = None
         self.box: np.ndarray | None = None
+        self.box_flat: tuple[float, ...] | None = None
         self.d_reactant: np.ndarray | None = None
         self.d_product: np.ndarray | None = None
         self.hit_cap = False
+        self.crashed = False
+        self.crash_name = ""
         self.last_point: np.ndarray | None = None
         self.last_energy = float("nan")
         self.last_grad: np.ndarray | None = None
 
+    def calls(self) -> int:
+        if self.rgpot is None:
+            return 0
+        return int(self.rgpot.counter.calls)
+
     def __call__(self, _user, raw) -> int:
         try:
             return self._fill(_Request.from_address(raw))
-        except Exception:
+        except Exception as exc:
+            self.crashed = True
+            self.crash_name = type(exc).__name__
             traceback.print_exc()
             return _SURFACE_FAILED
 
@@ -292,7 +304,7 @@ class _Surface:
         gradients = np.ctypeslib.as_array(req.gradients, shape=(n_rows * dof,)).reshape(n_rows, dof)
         whole = n_rows == self.n_band
         for row in range(n_rows):
-            if self.potential is not None and self.potential.calls >= self.cap:
+            if self.rgpot is not None and self.calls() >= self.cap:
                 self.hit_cap = True
                 return _SURFACE_FAILED
             image = row if whole else row + 1
@@ -305,8 +317,8 @@ class _Surface:
 
     def _row(self, flat: np.ndarray, image: int) -> tuple[float, np.ndarray]:
         if self.kind == "pes":
-            assert self.potential is not None
-            energy, grad = self.potential.energy_forces(flat)
+            assert self.rgpot is not None
+            energy, grad = self.rgpot.calculate(flat, None, self.box_flat)
             vector = np.asarray(grad, dtype=np.float64)
             self.last_point = np.array(flat, dtype=np.float64, copy=True)
             self.last_energy = float(energy)
@@ -495,7 +507,7 @@ def _relax(
     grads = None
     try:
         for _ in range(max_steps):
-            if surface.potential is not None and surface.potential.calls >= surface.cap:
+            if surface.rgpot is not None and surface.calls() >= surface.cap:
                 surface.hit_cap = True
                 break
             rc, report = session.step()
@@ -706,7 +718,7 @@ def _sidpp_springs(frames, left, right, n_images, spring_k: float, d_id: float) 
 
 def _refine_minmode(
     lib,
-    potential: CountedPotential,
+    rgpot: RgpotCounter,
     surface: _Surface,
     point: np.ndarray,
     mode: np.ndarray,
@@ -736,7 +748,7 @@ def _refine_minmode(
     cfg.reserved = 0
     surface.n_band = 1
     surface.kind = "pes"
-    surface.potential = potential
+    surface.rgpot = rgpot
     held = np.ascontiguousarray(point, dtype=np.float64)
     direction = np.ascontiguousarray(mode, dtype=np.float64)
     callback = _SURFACE(surface)
@@ -753,7 +765,7 @@ def _refine_minmode(
         if rc != _OK:
             raise RuntimeError(f"rgsaddle_minmode_set_force_gate returned {rc}")
         converged = False
-        while potential.calls < cap:
+        while rgpot.counter.calls < cap:
             report = Report()
             rc = int(lib.rgsaddle_minmode_step(handle, callback, None, ctypes.byref(report)))
             if rc != _OK:
@@ -787,6 +799,30 @@ def _candidate(positions: np.ndarray, energies: np.ndarray, report: Report | Non
     return 1 + int(np.argmax(interior)), "highest"
 
 
+def _crash_record(name: str, calls: int, verify: int, crash: str) -> dict:
+    """A search that raised. The class is crash and the calls are those already charged."""
+    return {
+        "schema": "optbench.start/v2",
+        "start": name,
+        "force_calls": int(calls),
+        "verify_calls": int(verify),
+        "counter": "harness",
+        "comparable": True,
+        "success": False,
+        "failure": "crash",
+        "reasons": ["crash"],
+        "crash": crash,
+        "energy": float("nan"),
+        "force_norm": float("nan"),
+        "hessian_index": None,
+        "converged": False,
+        "candidate": "crash",
+        "ci_index": None,
+        "refined": False,
+        "surrogate_steps": 0,
+    }
+
+
 def run_band_search(
     *,
     name: str,
@@ -818,6 +854,76 @@ def run_band_search(
     keep_translation: bool,
 ) -> dict:
     """One reactant/product pair. The record uses the harness counter."""
+    state: dict = {"counter": None}
+    try:
+        return _run_band_search(
+            name=name,
+            reactant=reactant,
+            product=product,
+            free=free,
+            box=box,
+            evaluate_full=evaluate_full,
+            n_interior=n_interior,
+            force_norm=force_norm,
+            cap=cap,
+            max_move=max_move,
+            climbing=climbing,
+            spring=spring,
+            path=path,
+            refine=refine,
+            method=method,
+            memory=memory,
+            spring_k=spring_k,
+            k_min=k_min,
+            k_max=k_max,
+            ci_trigger_factor=ci_trigger_factor,
+            ci_trigger_force=ci_trigger_force,
+            idpp_spring_k=idpp_spring_k,
+            idpp_force_tol=idpp_force_tol,
+            idpp_max_steps=idpp_max_steps,
+            sidpp_stage_steps=sidpp_stage_steps,
+            project_rigid=project_rigid,
+            keep_translation=keep_translation,
+            state=state,
+        )
+    except Exception as exc:
+        counter = state["counter"]
+        calls = 0 if counter is None else int(counter.calls)
+        verify = 0 if counter is None else int(counter.verify_calls)
+        return _crash_record(name, calls, verify, type(exc).__name__)
+
+
+def _run_band_search(
+    *,
+    name: str,
+    reactant: np.ndarray,
+    product: np.ndarray,
+    free: np.ndarray,
+    box: np.ndarray | None,
+    evaluate_full,
+    n_interior: int,
+    force_norm: float,
+    cap: int,
+    max_move: float,
+    climbing: bool,
+    spring: str,
+    path: str,
+    refine: str,
+    method: str,
+    memory: int,
+    spring_k: float,
+    k_min: float,
+    k_max: float,
+    ci_trigger_factor: float,
+    ci_trigger_force: float,
+    idpp_spring_k: float,
+    idpp_force_tol: float,
+    idpp_max_steps: int,
+    sidpp_stage_steps: int,
+    project_rigid: bool,
+    keep_translation: bool,
+    state: dict,
+) -> dict:
     lib = _load_library()
     linear = interpolate_free(reactant, product, free, n_interior, box)
     surrogate_steps = 0
@@ -848,14 +954,24 @@ def run_band_search(
         energy, grad = evaluate_full(full)
         return float(energy), np.asarray(grad, dtype=np.float64)[mask].reshape(-1)
 
-    potential = CountedPotential(evaluate_free)
+    counter = HarnessCounter(cache=True)
+    state["counter"] = counter
+    box_flat = None if box is None else tuple(float(value) for value in np.asarray(box, dtype=np.float64).reshape(-1))
+
+    def evaluate_rgpot(coords, _atomic_numbers, _box):
+        energy, grad = evaluate_free(coords)
+        gradient = tuple(float(item) for item in np.asarray(grad, dtype=np.float64).reshape(-1))
+        return float(energy), gradient
+
+    rgpot = RgpotCounter(evaluate_rgpot, counter)
     spring_ks = None
     if spring == "weighted":
-        energies = [potential.energy_forces(row)[0] for row in band_path]
+        energies = [rgpot.calculate(row, None, box_flat)[0] for row in band_path]
         spring_ks = energy_weighted_springs(np.asarray(energies, dtype=np.float64), k_min, k_max)
     elif spring != "uniform":
         raise ValueError(f"unknown spring {spring}")
-    surface = _Surface("pes", potential, cap)
+    surface = _Surface("pes", rgpot, cap)
+    surface.box_flat = box_flat
     positions, report, early, band_energies, band_grads = _relax(
         lib,
         band_path,
@@ -881,11 +997,11 @@ def run_band_search(
         # new search cost, so a start that already spent the cap stops here.
         index, candidate = 1, "highest"
         point = positions[index]
-        if potential.calls >= cap or surface.hit_cap:
+        if counter.calls >= cap or surface.hit_cap:
             energy = float("nan")
             grad = np.full(point.shape, np.nan)
         else:
-            energy, grad = potential.energy_forces(point)
+            energy, grad = rgpot.calculate(point, None, box_flat)
             grad = np.asarray(grad, dtype=np.float64)
     else:
         index, candidate = _candidate(positions, band_energies, report)
@@ -894,11 +1010,11 @@ def run_band_search(
         grad = np.asarray(band_grads[index], dtype=np.float64)
     refined = False
     minmode_converged = False
-    if refine and potential.calls < cap:
+    if refine and counter.calls < cap:
         mode = _mode_between(positions, index)
         point, minmode_converged = _refine_minmode(
             lib,
-            potential,
+            rgpot,
             surface,
             point,
             mode,
@@ -912,21 +1028,23 @@ def run_band_search(
             energy = surface.last_energy
             grad = surface.last_grad if surface.last_grad is not None else grad
         else:
-            energy, grad = potential.energy_forces(point)
+            energy, grad = rgpot.calculate(point, None, box_flat)
             grad = np.asarray(grad, dtype=np.float64)
         candidate = "min-mode"
         refined = True
     force = float(np.linalg.norm(grad))
     reasons: list[str] = []
-    if potential.calls >= cap or surface.hit_cap:
+    if surface.crashed:
+        reasons.append("crash")
+    if counter.calls >= cap or surface.hit_cap:
         reasons.append("cap")
     if not np.isfinite(force) or force > force_norm:
         reasons.append("force_norm")
     hessian_index = None
-    if "cap" not in reasons and "force_norm" not in reasons:
-        with potential.verification():
+    if "crash" not in reasons and "cap" not in reasons and "force_norm" not in reasons:
+        with counter.verification():
             hessian = numerical_hessian(
-                lambda coords: potential.energy_forces(coords)[1],
+                lambda coords: rgpot.calculate(coords, None, box_flat)[1],
                 np.asarray(point, dtype=np.float64).tolist(),
                 step=_FD_STEP,
             )
@@ -938,14 +1056,16 @@ def run_band_search(
         if hessian_index != 1:
             reasons.append("hessian_index")
     converged = (report is not None and int(report.status) == _STATUS_CONVERGED) or early or minmode_converged
+    failure = classify_failure(reasons)
     return {
         "schema": "optbench.start/v2",
         "start": name,
-        "force_calls": int(potential.calls),
-        "verify_calls": int(potential.verify_calls),
+        "force_calls": int(counter.calls),
+        "verify_calls": int(counter.verify_calls),
         "counter": "harness",
         "comparable": True,
-        "success": not reasons,
+        "success": failure is None,
+        "failure": failure,
         "reasons": reasons,
         "energy": float(energy),
         "force_norm": force,
@@ -1061,7 +1181,7 @@ def _dat(records: list[dict], template: dict, settings: dict) -> str:
     successes = [row for row in records if row["success"]]
     calls = [int(row["force_calls"]) for row in successes]
     lines = [
-        "# counter harness CountedPotential.energy_forces",
+        "# counter harness RgpotCounter.calculate",
         "# force_calls count raw potential evaluations and are not divided by the image count",
         "# the mean is round-half-even over successes; cap, force, or Hessian index other than 1 is a failure",
     ]

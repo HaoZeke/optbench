@@ -1,13 +1,12 @@
 """Geometry, band layout, and asv shape for the rgsaddle entries."""
 
 import json
-import shutil
+import os
 from pathlib import Path
 
 import numpy as np
 import pytest
 
-from benchmarks.bench_lj38 import start_names
 from benchmarks.bench_rgsaddle import (
     PROBLEMS,
     TEMPLATES,
@@ -15,6 +14,7 @@ from benchmarks.bench_rgsaddle import (
     HeptamerRgsaddleCiNeb,
     verify_asv_tracks,
 )
+from optbench.asv_tracks import TrackedSearch
 from optbench.campaign import geometry_archive, list_templates, load_template, resolve_problem
 from optbench.pes import (
     energy_weighted_springs,
@@ -209,7 +209,8 @@ def test_dat_mean_is_half_even_over_successes_only():
     assert not any(line.startswith("force_calls ") for line in failed.splitlines())
 
 
-def test_asv_classes_parameterize_seed_and_every_start():
+def test_asv_classes_parameterize_seed_and_the_selected_start(monkeypatch):
+    assert issubclass(HeptamerRgsaddleCiNeb, TrackedSearch)
     assert HeptamerRgsaddleCiNeb.param_names == ["seed", "start"]
     assert HeptamerRgsaddleCiNeb.params[0] == ["0"]
     assert HeptamerRgsaddleCiNeb.repeat == 1
@@ -217,21 +218,39 @@ def test_asv_classes_parameterize_seed_and_every_start():
     assert HeptamerRgsaddleCiNeb.number == 1
     assert HeptamerRgsaddleCiNeb.min_run_count == 1
     assert HeptamerRgsaddleCiNeb.warmup_time == 0
+    assert HeptamerRgsaddleCiNeb.sample_time == 0
+    assert HeptamerRgsaddleCiNeb.timeout == 1800
+    assert HeptamerRgsaddleCiNeb.cap == 10000
     assert HeptamerRgsaddleCiNeb.track_force_calls.unit == "force calls"
+    assert HeptamerRgsaddleCiNeb.track_success.unit == "fraction"
+    assert HeptamerRgsaddleCiNeb.track_failure_divergence.unit == "count"
+    assert os.environ.get("OPTBENCH_ASV_FULL") != "1"
     counts = {name: count for name, count in (
         ("neb/Pt-heptamer", 13),
         ("double-ended-saddle-search/pt-island", 59),
         ("double-ended-saddle-search/lj38", 50),
         ("double-ended-saddle-search/lj38_2ts_separation", 51),
     )}
+    caps = {
+        "neb/Pt-heptamer": 10000,
+        "double-ended-saddle-search/pt-island": 3000,
+        "double-ended-saddle-search/lj38": 2500,
+        "double-ended-saddle-search/lj38_2ts_separation": 10000,
+    }
     import benchmarks.bench_rgsaddle as bench
 
     assert len(bench.CLASS_TEMPLATE) == len(PROBLEMS) * len(TEMPLATES)
     for prefix, problem_name in PROBLEMS:
+        names = [pair.name for pair in _problem_pairs(problem_name)]
+        assert len(names) == counts[problem_name]
+        assert bench.selected_starts(names) == names[:1]
+        monkeypatch.setenv("OPTBENCH_ASV_FULL", "1")
+        assert bench.selected_starts(names) == names
+        monkeypatch.delenv("OPTBENCH_ASV_FULL")
         for template_prefix, template_name in TEMPLATES:
             cls = getattr(bench, f"{prefix}Rgsaddle{template_prefix}")
-            assert cls.params[1] == [pair.name for pair in _problem_pairs(problem_name)]
-            assert len(cls.params[1]) == counts[problem_name]
+            assert cls.params[1] == names[:1]
+            assert cls.cap == caps[problem_name]
             assert cls.template_name == template_name
             for track in TRACKS:
                 assert hasattr(cls, track)
@@ -288,16 +307,6 @@ def test_verify_asv_tracks_reads_the_sidecar(tmp_path: Path, monkeypatch):
         verify_asv_tracks(document)
 
 
-def test_missing_eonclient_iterates_one_archived_start(monkeypatch):
-    monkeypatch.delenv("EONCLIENT", raising=False)
-    if shutil.which("eonclient"):
-        pytest.skip("eonclient is installed")
-    names = start_names()
-    assert len(names) == 1000
-    assert list(names) == [names[0]]
-    assert names == start_names()
-
-
 def _fake_record(name: str, index: int) -> dict:
     success = index % 13 != 0
     return {
@@ -309,6 +318,7 @@ def _fake_record(name: str, index: int) -> dict:
         "counter": "harness",
         "comparable": True,
         "success": success,
+        "failure": None if success else "divergence",
         "reasons": [] if success else ["force_norm"],
         "energy": 0.0,
         "force_norm": 0.0 if success else 1.0,
@@ -335,8 +345,18 @@ def _write_fake(directory: Path, name: str, index: int) -> None:
 
 
 @pytest.mark.skipif(library_path() is None, reason="librgsaddle.so is not built")
-def test_double_well_ci_neb_is_an_index_one_saddle():
+def test_double_well_ci_neb_is_an_index_one_saddle(monkeypatch):
+    from optbench.potserver import RgpotCounter
     from optbench.rgsaddle_band import run_band_search
+
+    charged = {"n": 0}
+    real_calculate = RgpotCounter.calculate
+
+    def _calculate(self, positions, atomic_numbers=None, box=None):
+        charged["n"] += 1
+        return real_calculate(self, positions, atomic_numbers, box)
+
+    monkeypatch.setattr(RgpotCounter, "calculate", _calculate)
 
     def evaluate_full(coords):
         # Minima at (+-1, 0, 0). The valley bows out to y = 0.5, so the
@@ -384,8 +404,10 @@ def test_double_well_ci_neb_is_an_index_one_saddle():
         keep_translation=True,
     )
     assert record["success"], record
+    assert record["failure"] is None
     assert record["hessian_index"] == 1
     assert record["verify_calls"] == 6
     assert record["force_calls"] < 2000
     assert record["counter"] == "harness"
+    assert charged["n"] >= record["force_calls"] + record["verify_calls"]
     assert record["energy"] == pytest.approx(1.0, abs=1e-3)

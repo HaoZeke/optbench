@@ -1,20 +1,20 @@
 """rgsaddle band entries as airspeed-velocity benchmarks.
 
 One class is one problem and one template. Parameters are the seed and
-the archived start. ``time_search`` runs that start once and writes a
-sidecar. The ``track_*`` methods read the sidecar, so a full ``asv run``
-records force calls, success, failure causes, and wall time from the
-same search.
+the archived start. The default grid is one seed and the first geometry.
+``OPTBENCH_ASV_FULL=1`` selects every start, and it is read at import.
 
-The seed is the string ``"0"``. The band does not draw random numbers;
-the parameter is there so every entry has the same seed and start axes.
-Set ``OPTBENCH_RESULT_ROOT`` to the repository that should keep the
-sidecars. The benchmark process itself runs with a temporary working
-directory.
+``time_search`` is the timed search. It writes a sidecar. The ``track_*``
+methods read that sidecar, so a full ``asv run`` records force calls,
+success, the four failure classes, and wall time from the same search.
+``setup`` does not search: the parent ``TrackedSearch.setup`` would run
+the band again before the timer. A track whose sidecar is missing
+searches, so a track-only run is a real number.
 
-``setup`` raises ``NotImplementedError`` when ``librgsaddle.so`` is
-absent, which asv records as a skip. This module does not configure
-the shared ``asv.conf.json``.
+The seed is the string ``"0"``. The band does not draw random numbers.
+The parameter is there so every entry has the same seed and start axes.
+Sidecars live under ``results/rgsaddle-asv`` and are not the published
+store. The published numbers are the asv result file.
 """
 
 from __future__ import annotations
@@ -30,6 +30,8 @@ os.environ.setdefault("OMP_NUM_THREADS", "1")
 os.environ.setdefault("OPENBLAS_NUM_THREADS", "1")
 os.environ.setdefault("MKL_NUM_THREADS", "1")
 os.environ.setdefault("RAYON_NUM_THREADS", "1")
+
+from optbench.asv_tracks import TrackedSearch as _TrackedSearch
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -59,14 +61,15 @@ TRACKS = (
     "track_force_calls",
     "track_success",
     "track_failure_cap",
-    "track_failure_force_norm",
-    "track_failure_hessian_index",
-    "track_failure_other",
+    "track_failure_wrong_stationary",
+    "track_failure_divergence",
+    "track_failure_crash",
 )
 
-_KNOWN_REASONS = ("cap", "force_norm", "hessian_index")
+_FAILURES = ("cap", "wrong_stationary", "divergence", "crash")
 CLASS_PROBLEM: dict[str, str] = {}
 CLASS_TEMPLATE: dict[str, str] = {}
+CLASS_CAP: dict[str, int] = {}
 
 
 def result_root() -> Path:
@@ -74,9 +77,6 @@ def result_root() -> Path:
     env = os.environ.get("OPTBENCH_RESULT_ROOT")
     if env:
         return Path(env)
-    workspace = Path("/workspace")
-    if (workspace / "optbench").is_dir():
-        return workspace
     return ROOT
 
 
@@ -86,7 +86,8 @@ def sidecar_path(template_name: str, seed: str, start: str) -> Path:
     return result_root() / "results" / "rgsaddle-asv" / slug / str(seed) / f"{start}.json"
 
 
-def _start_names(problem_name: str) -> list[str]:
+def all_starts(problem_name: str) -> list[str]:
+    """Every archived pair name for ``problem_name``, in archive order."""
     from optbench.campaign import geometry_archive, resolve_problem
     from optbench.pes import load_pairs
 
@@ -99,88 +100,34 @@ def _start_names(problem_name: str) -> list[str]:
     return [pair.name for pair in pairs]
 
 
-def _failure_flag(record: dict, reason: str) -> float:
-    reasons = list(record["reasons"])
-    if reason == "other":
-        return 1.0 if any(item not in _KNOWN_REASONS for item in reasons) else 0.0
-    return 1.0 if reason in reasons else 0.0
+def problem_cap(problem_name: str) -> int:
+    from optbench.campaign import resolve_problem
+
+    return int(resolve_problem(ROOT, problem_name)["convergence"]["max_force_calls"])
 
 
-def _bind(class_name: str, problem: str, template: str, starts: list[str]):
-    class _Benchmark:
-        param_names = ["seed", "start"]
-        params = [["0"], list(starts)]
-        timeout = 1800
-        repeat = 1
-        rounds = 1
-        number = 1
-        min_run_count = 1
-        warmup_time = 0
-        processes = 1
-        problem_name = problem
-        template_name = template
+def selected_starts(names: list[str]) -> list[str]:
+    """The first geometry, or every name when ``OPTBENCH_ASV_FULL=1``."""
+    if os.environ.get("OPTBENCH_ASV_FULL") == "1":
+        return list(names)
+    return list(names[:1])
 
-        def setup(self, seed: str, start: str) -> None:
-            from optbench.rgsaddle_band import library_path
 
-            if library_path() is None:
-                raise NotImplementedError("librgsaddle.so is not available")
-            if start not in self.params[1]:
-                raise KeyError(start)
+def _write_sidecar(template_name: str, seed: str, start: str, record: dict) -> None:
+    path = sidecar_path(template_name, seed, start)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(record, sort_keys=True) + "\n", encoding="utf-8")
 
-        def time_search(self, seed: str, start: str) -> None:
-            from optbench.rgsaddle_band import search_named
 
-            print(f"start {self.template_name} {start}", file=sys.stderr, flush=True)
-            began = time.perf_counter()
-            record = search_named(ROOT, self.problem_name, self.template_name, start, seed)
-            record["search_seconds"] = time.perf_counter() - began
-            path = sidecar_path(self.template_name, seed, start)
-            path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_text(json.dumps(record, sort_keys=True) + "\n", encoding="utf-8")
-            print(
-                f"done {self.template_name} {start} calls={record['force_calls']} "
-                f"success={record['success']} reasons={record['reasons']}",
-                file=sys.stderr,
-                flush=True,
-            )
+def _failure_of(record: dict) -> str | None:
+    if record.get("success"):
+        return None
+    label = record.get("failure")
+    if label in _FAILURES:
+        return str(label)
+    from optbench.failures import classify_failure
 
-        def _record(self, seed: str, start: str) -> dict:
-            path = sidecar_path(self.template_name, seed, start)
-            if not path.is_file():
-                raise FileNotFoundError(path)
-            return json.loads(path.read_text(encoding="utf-8"))
-
-        def track_force_calls(self, seed: str, start: str) -> float:
-            return float(self._record(seed, start)["force_calls"])
-
-        def track_success(self, seed: str, start: str) -> float:
-            return 1.0 if self._record(seed, start)["success"] else 0.0
-
-        def track_failure_cap(self, seed: str, start: str) -> float:
-            return _failure_flag(self._record(seed, start), "cap")
-
-        def track_failure_force_norm(self, seed: str, start: str) -> float:
-            return _failure_flag(self._record(seed, start), "force_norm")
-
-        def track_failure_hessian_index(self, seed: str, start: str) -> float:
-            return _failure_flag(self._record(seed, start), "hessian_index")
-
-        def track_failure_other(self, seed: str, start: str) -> float:
-            return _failure_flag(self._record(seed, start), "other")
-
-    _Benchmark.track_force_calls.unit = "force calls"
-    _Benchmark.track_success.unit = "success"
-    _Benchmark.track_failure_cap.unit = "failure"
-    _Benchmark.track_failure_force_norm.unit = "failure"
-    _Benchmark.track_failure_hessian_index.unit = "failure"
-    _Benchmark.track_failure_other.unit = "failure"
-    _Benchmark.__name__ = class_name
-    _Benchmark.__qualname__ = class_name
-    _Benchmark.__module__ = __name__
-    CLASS_PROBLEM[class_name] = problem
-    CLASS_TEMPLATE[class_name] = template
-    return _Benchmark
+    return classify_failure([str(reason) for reason in record.get("reasons") or []]) or "crash"
 
 
 def _expected_track(record: dict, method: str) -> float:
@@ -188,15 +135,112 @@ def _expected_track(record: dict, method: str) -> float:
         return float(record["force_calls"])
     if method == "track_success":
         return 1.0 if record["success"] else 0.0
-    if method == "track_failure_cap":
-        return _failure_flag(record, "cap")
-    if method == "track_failure_force_norm":
-        return _failure_flag(record, "force_norm")
-    if method == "track_failure_hessian_index":
-        return _failure_flag(record, "hessian_index")
-    if method == "track_failure_other":
-        return _failure_flag(record, "other")
-    raise KeyError(method)
+    failure = _failure_of(record)
+    name = method.removeprefix("track_failure_")
+    return 1.0 if failure == name else 0.0
+
+
+def _bind(class_name: str, problem: str, template: str, starts: list[str], cap: int):
+    class _Benchmark(_TrackedSearch):
+        param_names = ["seed", "start"]
+        params = [["0"], list(starts)]
+        timeout = 1800
+        problem_name = problem
+        template_name = template
+
+        def setup(self, seed, start):
+            from optbench.rgsaddle_band import library_path
+
+            if library_path() is None:
+                raise NotImplementedError("librgsaddle.so is not available")
+            path = sidecar_path(self.template_name, str(seed), str(start))
+            if path.is_file():
+                self.record = json.loads(path.read_text(encoding="utf-8"))
+            else:
+                self.record = None
+
+        def measure(self, seed, start):
+            from optbench.rgsaddle_band import search_named
+
+            try:
+                record = search_named(ROOT, self.problem_name, self.template_name, str(start), str(seed))
+            except Exception as exc:
+                record = {
+                    "schema": "optbench.start/v2",
+                    "start": str(start),
+                    "seed": str(seed),
+                    "force_calls": 0,
+                    "verify_calls": 0,
+                    "counter": "harness",
+                    "comparable": True,
+                    "success": False,
+                    "failure": "crash",
+                    "reasons": ["crash"],
+                    "crash": type(exc).__name__,
+                    "problem": self.problem_name,
+                    "template": self.template_name,
+                }
+            record["force_calls"] = float(record["force_calls"])
+            record["success"] = bool(record["success"])
+            record["failure"] = _failure_of(record)
+            if record["success"]:
+                record["failure"] = None
+            return record
+
+        def time_search(self, seed, start):
+            print(f"start {self.template_name} {start}", file=sys.stderr, flush=True)
+            began = time.perf_counter()
+            record = self.measure(seed, start)
+            record["search_seconds"] = time.perf_counter() - began
+            _write_sidecar(self.template_name, str(seed), str(start), record)
+            self.record = record
+            print(
+                f"done {self.template_name} {start} calls={record['force_calls']} "
+                f"success={record['success']} failure={record['failure']}",
+                file=sys.stderr,
+                flush=True,
+            )
+
+        def _ready(self, seed, start) -> dict:
+            record = getattr(self, "record", None)
+            if record is None:
+                record = self.measure(seed, start)
+                _write_sidecar(self.template_name, str(seed), str(start), record)
+                self.record = record
+            return record
+
+        def track_force_calls(self, seed, start) -> float:
+            return float(self._ready(seed, start)["force_calls"])
+
+        def track_success(self, seed, start) -> float:
+            return 1.0 if self._ready(seed, start)["success"] else 0.0
+
+        def track_failure_cap(self, seed, start) -> float:
+            return 1.0 if self._ready(seed, start)["failure"] == "cap" else 0.0
+
+        def track_failure_wrong_stationary(self, seed, start) -> float:
+            return 1.0 if self._ready(seed, start)["failure"] == "wrong_stationary" else 0.0
+
+        def track_failure_divergence(self, seed, start) -> float:
+            return 1.0 if self._ready(seed, start)["failure"] == "divergence" else 0.0
+
+        def track_failure_crash(self, seed, start) -> float:
+            return 1.0 if self._ready(seed, start)["failure"] == "crash" else 0.0
+
+    _Benchmark.cap = cap
+    _Benchmark.track_force_calls.unit = "force calls"
+    _Benchmark.track_success.unit = "fraction"
+    _Benchmark.track_failure_cap.unit = "count"
+    _Benchmark.track_failure_wrong_stationary.unit = "count"
+    _Benchmark.track_failure_divergence.unit = "count"
+    _Benchmark.track_failure_crash.unit = "count"
+    _Benchmark.__name__ = class_name
+    _Benchmark.__qualname__ = class_name
+    _Benchmark.__module__ = __name__
+    CLASS_PROBLEM[class_name] = problem
+    CLASS_TEMPLATE[class_name] = template
+    CLASS_CAP[class_name] = cap
+    return _Benchmark
 
 
 def _asv_column(document: dict, benchmark: str, column: str):
@@ -265,7 +309,9 @@ def attach_wall_seconds(document: dict, directory: Path) -> int:
 
 
 for _problem_prefix, _problem_name in PROBLEMS:
-    _starts = _start_names(_problem_name)
+    _names = all_starts(_problem_name)
+    _cap = problem_cap(_problem_name)
+    _selected = selected_starts(_names)
     for _template_prefix, _template_name in TEMPLATES:
         _class_name = f"{_problem_prefix}Rgsaddle{_template_prefix}"
-        globals()[_class_name] = _bind(_class_name, _problem_name, _template_name, _starts)
+        globals()[_class_name] = _bind(_class_name, _problem_name, _template_name, _selected, _cap)
