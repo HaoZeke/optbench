@@ -45,6 +45,11 @@ EON_VERSION_TOKEN = "7095b23"
 MORSE_D = 0.7102
 MORSE_A = 1.6047
 MORSE_RE = 2.897
+# rgpot MorsePot defaults. eOn ``morse_pt`` is that kernel: cutoff 9.5,
+# energy shifted so a pair at the cutoff is zero, no quintic switch.
+MORSE_CUTOFF = 9.5
+_MORSE_GAP_CUT = 1.0 - math.exp(-MORSE_A * (MORSE_CUTOFF - MORSE_RE))
+MORSE_SHIFT = MORSE_D * _MORSE_GAP_CUT * _MORSE_GAP_CUT - MORSE_D
 _CACHE = Path(os.environ.get("OPTBENCH_ASV_CACHE", "/tmp/optbench-asv"))
 _CLIENT_OK = False
 
@@ -54,25 +59,78 @@ def full_grid() -> bool:
 
 
 def selected(values: list) -> list:
-    """Import-time parameter slice. One entry unless the full flag is set."""
+    """Import-time parameter slice. One entry unless the full flag is set.
+
+    ``OPTBENCH_ASV_SLICE=worker/count`` strides an axis that already has
+    more than one entry. A length-1 axis is left whole, so the only seed
+    or the only start stays on every worker.
+    """
     if full_grid():
-        return list(values)
-    return list(values[:1])
+        chosen = list(values)
+    else:
+        chosen = list(values[:1])
+    spec = os.environ.get("OPTBENCH_ASV_SLICE", "")
+    if not spec or len(chosen) <= 1:
+        return chosen
+    worker_text, count_text = spec.split("/")
+    worker = int(worker_text)
+    count = int(count_text)
+    if count <= 0 or worker < 0 or worker >= count:
+        raise ValueError(f"OPTBENCH_ASV_SLICE must be worker/count, got {spec}")
+    return chosen[worker::count]
+
+
+def _morse_lengths(box) -> tuple[float, float, float] | None:
+    """Orthogonal periodic widths, or ``None`` for a free cluster.
+
+    eOn writes the cell column-major, which is how ``read_extpot`` stores
+    the nine floats. A zero cell is the non-periodic box ``Matter`` hands
+    a potential. Widths sit on the diagonal (indices 0, 4, 8), the same
+    places rgpot reads for an orthorhombic cell.
+    """
+    if box is None:
+        return None
+    vals = [float(value) for value in box]
+    if len(vals) != 9:
+        raise ValueError("box is nine floats")
+    if all(value == 0.0 for value in vals):
+        return None
+    off = (vals[1], vals[2], vals[3], vals[5], vals[6], vals[7])
+    if any(value != 0.0 for value in off):
+        raise ValueError("morse_pt minimum image is implemented for an orthogonal cell")
+    lengths = (vals[0], vals[4], vals[8])
+    if any(length <= 0.0 for length in lengths):
+        raise ValueError("morse_pt box lengths must be positive")
+    return lengths
+
+
+def _morse_fold(delta: float, length: float) -> float:
+    """Nearest image. Half-integers round away from zero, as rgpot ``visit_round``."""
+    scaled = delta / length
+    image = float(int(scaled + math.copysign(0.5, scaled)))
+    return delta - length * image
 
 
 def morse_cluster(positions, atomic_numbers=None, box=None):
-    """Pair Morse used by eOn ``morse_pt`` (D, a, r_e) = (0.7102, 1.6047, 2.897).
+    """Pair Morse used by eOn ``morse_pt``, the rgpot ``MorsePot`` defaults.
 
-    Energy is ``D (1 - exp(-a (r - r_e)))^2``. The returned forces are
-    the negative gradient. There is no cutoff. The box is ignored.
+    ``(D, a, r_e, cutoff)`` = (0.7102, 1.6047, 2.897, 9.5). The pair energy
+    is ``D (1 - exp(-a (r - r_e)))^2 - D``, shifted so the cutoff is zero.
+    Pairs at or beyond the cutoff are left out. A non-zero orthogonal box
+    is periodic in all three directions and uses the minimum image. A
+    missing or zero box is a free cluster, which is what eOn passes when
+    periodic boundaries are off.
     """
-    del atomic_numbers, box
+    del atomic_numbers
     count = len(positions)
     if count % 3 != 0:
         raise ValueError("positions must be x, y, z triples")
     atoms = count // 3
+    lengths = _morse_lengths(box)
+    cutoff2 = MORSE_CUTOFF * MORSE_CUTOFF
     forces = [0.0] * count
     energy = 0.0
+    two_de_a = 2.0 * MORSE_D * MORSE_A
     for i in range(atoms):
         ix = 3 * i
         for j in range(i + 1, atoms):
@@ -80,15 +138,17 @@ def morse_cluster(positions, atomic_numbers=None, box=None):
             dx = float(positions[ix]) - float(positions[jx])
             dy = float(positions[ix + 1]) - float(positions[jx + 1])
             dz = float(positions[ix + 2]) - float(positions[jx + 2])
+            if lengths is not None:
+                dx = _morse_fold(dx, lengths[0])
+                dy = _morse_fold(dy, lengths[1])
+                dz = _morse_fold(dz, lengths[2])
             r2 = dx * dx + dy * dy + dz * dz
-            if r2 <= 0.0:
+            if r2 <= 0.0 or r2 > cutoff2:
                 continue
             r = math.sqrt(r2)
-            e1 = math.exp(-MORSE_A * (r - MORSE_RE))
-            gap = 1.0 - e1
-            energy += MORSE_D * gap * gap
-            dv_dr = 2.0 * MORSE_D * MORSE_A * (e1 - e1 * e1)
-            scale = -dv_dr / r
+            gap = 1.0 - math.exp(-MORSE_A * (r - MORSE_RE))
+            energy += MORSE_D * gap * gap - MORSE_D - MORSE_SHIFT
+            scale = two_de_a * gap * (gap - 1.0) / r
             fx = scale * dx
             fy = scale * dy
             fz = scale * dz
@@ -696,6 +756,8 @@ def _specs() -> list[dict]:
         }
         if kind == "akmc":
             spec["passes"] = _akmc_passes(int(template.get("pass_limit", 1)))
+        if not spec["seeds"] or not spec["starts"]:
+            continue
         specs.append(spec)
     return specs
 
