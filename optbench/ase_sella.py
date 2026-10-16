@@ -22,7 +22,8 @@ os.environ["MKL_NUM_THREADS"] = "1"
 os.environ["NUMEXPR_NUM_THREADS"] = "1"
 
 from .campaign import load_template, resolve_problem
-from .score import summarize_all, summarize_capped, summarize_divided
+from .counter import attach_ase_counter
+from .score import score_v2, summarize_all, summarize_capped, summarize_divided
 
 CONTRIBUTOR = "Rohit Goswami"
 
@@ -163,6 +164,117 @@ class ForceCap(RuntimeError):
     """The harness force-call cap was reached."""
 
 
+class CallCounter:
+    """One shared harness counter.
+
+    ``attach_ase_counter`` increments ``state``. Index 0 is the call
+    count and index 1 is the cap, which is what the drivers already read.
+    """
+
+    def __init__(self, cap: int):
+        self.state = {
+            "calls": 0,
+            "verify_calls": 0,
+            "verifying": False,
+            "cap": int(cap),
+        }
+
+    def __getitem__(self, index: int) -> int:
+        if index == 0:
+            return int(self.state["calls"])
+        if index == 1:
+            return int(self.state["cap"])
+        raise IndexError(index)
+
+
+def _cap_error(exc: BaseException) -> bool:
+    return isinstance(exc, ForceCap) or (
+        isinstance(exc, RuntimeError) and "force-call cap" in str(exc)
+    )
+
+
+def _project_rigid(hessian, positions, n_rot: int):
+    """Remove translation, and rotation when ``n_rot`` is 3.
+
+    A free cluster has six rigid modes. A periodic cell keeps translations
+    and loses rotations. Modes that are linearly dependent are dropped.
+    """
+    import numpy as np
+
+    count = len(positions)
+    modes = []
+    for axis in range(3):
+        vector = np.zeros((count, 3))
+        vector[:, axis] = 1.0
+        modes.append(vector.ravel())
+    if n_rot:
+        centered = np.asarray(positions, dtype=float) - np.mean(positions, axis=0)
+        for axis in range(3):
+            unit = np.zeros(3)
+            unit[axis] = 1.0
+            modes.append(np.cross(centered, unit).ravel())
+    basis = np.stack(modes, axis=1)
+    orthogonal, triangular = np.linalg.qr(basis)
+    keep = np.abs(np.diag(triangular)) > 1e-8
+    if not np.any(keep):
+        return hessian
+    axes = orthogonal[:, keep]
+    projector = np.eye(hessian.shape[0]) - axes @ axes.T
+    return projector @ hessian @ projector
+
+
+def vibrational_index(atoms, step: float = 1e-4, tol: float = 1e-6) -> int:
+    """Hessian index on the free atoms.
+
+    The difference is central. Calls made here must already be marked as
+    verification on the attached counter. Fixed atoms are left out of the
+    matrix. Rigid modes are projected only when every atom is free, because
+    a fixed substrate removes those zeros itself.
+    """
+    import numpy as np
+
+    positions = np.array(atoms.get_positions(), dtype=float, copy=True)
+    free = np.asarray(_free_mask(atoms), dtype=bool)
+    free_index = np.flatnonzero(free)
+    if len(free_index) == 0:
+        return 0
+    dimension = 3 * len(free_index)
+    hessian = np.zeros((dimension, dimension))
+    try:
+        for local, atom in enumerate(free_index):
+            for axis in range(3):
+                column = 3 * local + axis
+                for sign in (1.0, -1.0):
+                    trial = positions.copy()
+                    trial[atom, axis] += sign * step
+                    atoms.set_positions(trial)
+                    forces = np.asarray(atoms.get_forces(), dtype=float)[free].ravel()
+                    hessian[:, column] += -sign * forces / (2.0 * step)
+    finally:
+        atoms.set_positions(positions)
+    atoms.get_forces()
+    hessian = 0.5 * (hessian + hessian.T)
+    if bool(free.all()):
+        rotations = 0 if np.any(atoms.pbc) else 3
+        hessian = _project_rigid(hessian, positions, rotations)
+    values = np.linalg.eigvalsh(hessian)
+    return int(np.sum(values < -float(tol)))
+
+
+def _verify_index(atoms, expected: int) -> int:
+    """Count a Hessian as verification, not as search cost."""
+    state = getattr(getattr(atoms, "calc", None), "optbench_counter", None)
+    previous = False
+    if state is not None:
+        previous = bool(state.get("verifying", False))
+        state["verifying"] = True
+    try:
+        return vibrational_index(atoms)
+    finally:
+        if state is not None:
+            state["verifying"] = previous
+
+
 def entry_id(template: dict) -> str:
     prefix = "ase" if template["engine"] == "ase" else "sella"
     rest = template["id"].split("/", 1)[1]
@@ -203,6 +315,8 @@ def _jsonable(value: object) -> object:
 def format_metric(value: object) -> str | None:
     if value is None:
         return None
+    if isinstance(value, bool):
+        return "true" if value else "false"
     if isinstance(value, float):
         if value.is_integer():
             return str(int(value))
@@ -250,11 +364,12 @@ def _prefer_con(paths: list[Path]) -> Path:
 def discover(material: Path, template: dict) -> list[tuple[str, list[Path], int | None]]:
     """Return (start name, geometry paths, seed) in a stable order."""
     task = template["task"]
-    if task == "dimer":
+    if task in {"dimer", "sella-search"}:
         path = material if material.is_file() else _prefer_con(sorted(material.rglob("*.con")))
-        searches = int((template.get("dimer") or {}).get("searches", 1))
+        block = template.get("dimer") if task == "dimer" else template.get("sella_search")
+        searches = int((block or {}).get("searches", 1))
         return [(f"seed-{seed:04d}", [path], seed) for seed in range(searches)]
-    if task == "neb":
+    if task in {"neb", "sella-neb"}:
         return _discover_neb(material, template["neb"])
     select = (template.get("input") or {}).get("select", "con")
     if material.is_file():
@@ -460,32 +575,6 @@ def _morse_arrays(positions, cell, pbc, D, alpha, r0, rc, form):
     return energy, forces
 
 
-class _Counter:
-    def __init__(self, inner, bucket: list[int]):
-        from ase.calculators.calculator import Calculator
-
-        class _Calc(Calculator):
-            implemented_properties = ["energy", "forces"]
-
-            def __init__(self):
-                super().__init__()
-                self.inner = inner
-                self.bucket = bucket
-
-            def calculate(self, atoms=None, properties=("energy", "forces"), system_changes=None):
-                from ase.calculators.calculator import all_changes
-
-                changes = all_changes if system_changes is None else system_changes
-                super().calculate(atoms, properties, changes)
-                if self.bucket[0] + 1 > self.bucket[1]:
-                    raise ForceCap()
-                self.inner.calculate(atoms, ("energy", "forces"), changes)
-                self.bucket[0] += 1
-                self.results = dict(self.inner.results)
-
-        self.calc = _Calc()
-
-
 def _inner_calculator(potential: dict):
     if potential["kind"] == "lennard-jones":
         from ase.calculators.lj import LennardJones
@@ -506,9 +595,11 @@ def _inner_calculator(potential: dict):
     raise ValueError(potential["kind"])
 
 
-def _attach(atoms, potential: dict, bucket: list[int]):
+def _attach(atoms, potential: dict, counter: CallCounter):
     _apply_pbc(atoms, potential)
-    atoms.calc = _Counter(_inner_calculator(potential), bucket).calc
+    calculator = _inner_calculator(potential)
+    attach_ase_counter(calculator, cap=counter[1], state=counter.state)
+    atoms.calc = calculator
     return atoms
 
 
@@ -623,59 +714,105 @@ def _snapshot_sella(opt, order: int, requested: dict) -> dict:
     return params
 
 
-def _drive_l2(opt, calc, bucket: list[int], tol: float, max_steps: int, atoms=None) -> tuple[bool, float | None]:
+def _drive_l2(
+    opt,
+    calc,
+    bucket: CallCounter,
+    tol: float,
+    max_steps: int,
+    atoms=None,
+    norm_of=None,
+) -> tuple[bool, float | None]:
     from ase.optimize.optimize import Optimizer
 
+    measure = norm_of or (lambda: _cached_l2(calc, atoms))
     if type(opt).step is Optimizer.step:
-        return _drive_l2_scipy(opt, calc, bucket, tol, max_steps, atoms)
+        return _drive_l2_scipy(opt, calc, bucket, tol, max_steps, atoms, measure)
     norm = None
     try:
         for _converged in opt.irun(fmax=0.0, steps=max_steps):
-            norm = _cached_l2(calc, atoms)
+            norm = measure()
             if bucket[0] >= bucket[1]:
                 raise ForceCap()
             if norm is not None and norm <= tol:
                 return False, norm
-    except ForceCap:
-        return True, _cached_l2(calc, atoms)
-    norm = _cached_l2(calc, atoms)
+    except Exception as exc:
+        if not _cap_error(exc):
+            raise
+        return True, measure()
+    norm = measure()
     failed = norm is None or norm > tol or bucket[0] >= bucket[1]
     return failed, norm
 
 
-def _drive_l2_scipy(opt, calc, bucket: list[int], tol: float, max_steps: int, atoms=None) -> tuple[bool, float | None]:
+def _drive_l2_scipy(
+    opt,
+    calc,
+    bucket: CallCounter,
+    tol: float,
+    max_steps: int,
+    atoms=None,
+    measure=None,
+) -> tuple[bool, float | None]:
+    measure = measure or (lambda: _cached_l2(calc, atoms))
+
     def gradient_converged(_gradient) -> bool:
         if bucket[0] >= bucket[1]:
             raise ForceCap()
-        norm = _cached_l2(calc, atoms)
+        norm = measure()
         return norm is not None and norm <= tol
 
     opt.gradient_converged = gradient_converged
     try:
         opt.run(fmax=tol, steps=max_steps)
-    except ForceCap:
-        return True, _cached_l2(calc, atoms)
-    norm = _cached_l2(calc, atoms)
+    except Exception as exc:
+        if not _cap_error(exc):
+            raise
+        return True, measure()
+    norm = measure()
     return norm is None or norm > tol or bucket[0] >= bucket[1], norm
 
 
-def _run_minimize(payload: dict, bucket: list[int]) -> dict:
+def _fmax(atoms) -> float | None:
+    import numpy as np
+
+    if getattr(atoms, "calc", None) is None:
+        return None
+    results = getattr(atoms.calc, "results", None) or {}
+    if "forces" not in results:
+        return None
+    forces = np.asarray(atoms.get_forces(), dtype=float)
+    if forces.size == 0:
+        return None
+    return float(np.sqrt((forces * forces).sum(axis=1)).max())
+
+
+def _cap_row(row: dict, atoms, message: str = "force-call cap") -> dict:
+    row["failed"] = True
+    row["error"] = message
+    if atoms is not None and row.get("force_norm") is None:
+        row["force_norm"] = _cached_l2(getattr(atoms, "calc", None), atoms)
+    return row
+
+
+def _run_minimize(payload: dict, bucket: CallCounter) -> dict:
     atoms = _attach(_read_atoms(Path(payload["paths"][0])), payload["potential"], bucket)
     opt = _build_optimizer(payload["optimizer"], atoms)
-    row = {"failed": True, "force_norm": None}
+    row = {"failed": True, "force_norm": None, "expected_index": 0}
     if payload.get("snapshot"):
         row["parameters"] = _snapshot_optimizer(opt, payload["optimizer"])
     try:
         failed, norm = _drive_l2(opt, atoms.calc, bucket, payload["tol"], payload["max_steps"], atoms)
-    except ForceCap:
-        row["error"] = "force-call cap"
-        row["force_norm"] = _cached_l2(atoms.calc, atoms)
-        return row
     except Exception as exc:
+        if _cap_error(exc):
+            return _cap_row(row, atoms)
         row["error"] = f"{type(exc).__name__}: {exc}"[:500]
         return row
     row["failed"] = failed
     row["force_norm"] = norm
+    row["energy"] = _safe_energy(atoms)
+    if not failed and bucket[0] < bucket[1]:
+        _attach_index(row, atoms, 0)
     return row
 
 
@@ -701,7 +838,26 @@ def _reactant_mode(atoms, reference) -> object:
     return vector / scale
 
 
-def _run_sella(payload: dict, bucket: list[int]) -> dict:
+def _safe_energy(atoms) -> float | None:
+    try:
+        return float(atoms.get_potential_energy())
+    except Exception:
+        return None
+
+
+def _attach_index(row: dict, atoms, expected: int) -> None:
+    row["expected_index"] = int(expected)
+    try:
+        row["hessian_index"] = int(_verify_index(atoms, expected))
+    except Exception as exc:
+        row["error"] = f"Hessian {type(exc).__name__}: {exc}"[:500]
+        row["failed"] = True
+        return
+    if row["hessian_index"] != expected:
+        row["failed"] = True
+
+
+def _run_sella(payload: dict, bucket: CallCounter) -> dict:
     from sella import Sella
 
     atoms = _attach(_read_atoms(Path(payload["paths"][0])), payload["potential"], bucket)
@@ -710,7 +866,7 @@ def _run_sella(payload: dict, bucket: list[int]) -> dict:
     v0 = _reactant_mode(atoms, payload.get("reactant_positions"))
     kwargs = {key: value for key, value in requested.items() if value is not None}
     opt = Sella(atoms, logfile=None, order=order, v0=v0, **kwargs)
-    row = {"failed": True, "force_norm": None}
+    row = {"failed": True, "force_norm": None, "expected_index": order}
     if payload.get("snapshot"):
         snapped = _snapshot_sella(opt, order, requested)
         if payload.get("sella", {}).get("v0") not in (None, "none"):
@@ -718,22 +874,23 @@ def _run_sella(payload: dict, bucket: list[int]) -> dict:
         row["parameters"] = snapped
     try:
         failed, norm = _drive_l2(opt, atoms.calc, bucket, payload["tol"], payload["max_steps"], atoms)
-    except ForceCap:
-        row["error"] = "force-call cap"
-        row["force_norm"] = _cached_l2(atoms.calc, atoms)
-        return row
     except Exception as exc:
+        if _cap_error(exc):
+            return _cap_row(row, atoms)
         row["error"] = f"{type(exc).__name__}: {exc}"[:500]
         return row
     row["failed"] = failed
     row["force_norm"] = norm
+    row["energy"] = _safe_energy(atoms)
     library = getattr(opt, "pes", None)
     if library is not None and hasattr(library, "neval"):
         row["library_neval"] = int(library.neval)
+    if not failed and bucket[0] < bucket[1]:
+        _attach_index(row, atoms, order)
     return row
 
 
-def _run_neb(payload: dict, bucket: list[int]) -> dict:
+def _make_band(payload: dict, bucket: CallCounter):
     from ase.mep import NEB
 
     neb_spec = payload["neb"]
@@ -744,34 +901,70 @@ def _run_neb(payload: dict, bucket: list[int]) -> dict:
     for _ in range(moving):
         images.append(left.copy())
     images.append(right)
+    climb_after = neb_spec.get("climb_after")
+    climb = bool(neb_spec["climb"]) if climb_after is None else False
     band = NEB(
         images,
         k=float(neb_spec["spring"]),
-        climb=bool(neb_spec["climb"]),
+        climb=climb,
         method=str(neb_spec.get("method", "improvedtangent")),
     )
-    band.interpolate()
+    band.interpolate(method=str(neb_spec.get("interpolate", "linear")))
     for image in images:
         _attach(image, payload["potential"], bucket)
+    return band, images
+
+
+def _neb_parameters(opt, payload: dict, neb_spec: dict) -> dict:
+    params = _snapshot_optimizer(opt, payload["optimizer"])
+    params["spring"] = float(neb_spec["spring"])
+    params["climb"] = bool(neb_spec["climb"])
+    params["moving_images"] = int(neb_spec["moving_images"])
+    params["method"] = str(neb_spec.get("method", "improvedtangent"))
+    if neb_spec.get("interpolate"):
+        params["interpolate"] = str(neb_spec["interpolate"])
+    if neb_spec.get("climb_after") is not None:
+        params["climb_after"] = float(neb_spec["climb_after"])
+        params["climb"] = False
+    return params
+
+
+def _highest_moving(images):
+    best = images[1]
+    best_energy = float("-inf")
+    for image in images[1:-1]:
+        energy = float(image.get_potential_energy())
+        if energy > best_energy:
+            best = image
+            best_energy = energy
+    return best
+
+
+def _run_neb(payload: dict, bucket: CallCounter, band_limit: int | None = None) -> dict:
+    neb_spec = payload["neb"]
+    band, images = _make_band(payload, bucket)
     opt = _build_optimizer(payload["optimizer"], band)
+    climb_after = neb_spec.get("climb_after")
+    limit = bucket[1] if band_limit is None else int(band_limit)
     converged = False
     try:
         for converged in opt.irun(fmax=payload["tol"], steps=payload["max_steps"]):
-            if bucket[0] >= bucket[1]:
+            if bucket[0] >= limit:
                 converged = False
                 raise ForceCap()
-    except ForceCap:
+            if climb_after is not None and not band.climb:
+                residuals = [float(value) for value in getattr(band, "residuals", []) or []]
+                if residuals and max(residuals) <= float(climb_after):
+                    band.climb = True
+    except Exception as exc:
+        if not _cap_error(exc):
+            raise
         converged = False
     residuals = [float(value) for value in getattr(band, "residuals", []) or []]
     failed = (not converged) or bucket[0] >= bucket[1]
-    row = {"failed": failed, "force_norm": max(residuals) if residuals else None}
+    row = {"failed": failed, "force_norm": max(residuals) if residuals else None, "images": images}
     if payload.get("snapshot"):
-        params = _snapshot_optimizer(opt, payload["optimizer"])
-        params["spring"] = float(neb_spec["spring"])
-        params["climb"] = bool(neb_spec["climb"])
-        params["moving_images"] = moving
-        params["method"] = str(neb_spec.get("method", "improvedtangent"))
-        row["parameters"] = params
+        row["parameters"] = _neb_parameters(opt, payload, neb_spec)
     return row
 
 
@@ -787,7 +980,120 @@ def _free_mask(atoms) -> list[bool]:
     return [bool(value) for value in free]
 
 
-def _run_dimer(payload: dict, bucket: list[int]) -> dict:
+def _displace_free(atoms, seed: int, std: float) -> None:
+    import numpy as np
+
+    mask = np.asarray(_free_mask(atoms), dtype=bool)
+    rng = np.random.default_rng(int(seed))
+    noise = rng.normal(0.0, float(std), size=atoms.positions.shape)
+    noise[~mask] = 0.0
+    atoms.set_positions(atoms.positions + noise)
+
+
+def _run_sella_neb(payload: dict, bucket: CallCounter) -> dict:
+    """Relax the band, then refine the highest image with Sella.
+
+    The band stops at ``reserve`` of the cap so the saddle step has calls
+    left. ``v0`` stays unset: on a free cluster Sella drops the rigid modes
+    and a full Cartesian mode has the wrong length.
+    """
+    from sella import Sella
+
+    neb_spec = payload["neb"]
+    reserve = float((payload.get("sella") or {}).get("reserve", 0.2))
+    band_limit = max(1, int(bucket[1] * (1.0 - reserve)))
+    band_payload = dict(payload)
+    band_payload["optimizer"] = {
+        "name": str(neb_spec.get("band_optimizer", "FIRE")),
+        "parameters": dict(neb_spec.get("band_parameters") or {}),
+    }
+    try:
+        band_row = _run_neb(band_payload, bucket, band_limit=band_limit)
+    except Exception as exc:
+        if _cap_error(exc):
+            return _cap_row({"failed": True, "force_norm": None}, None)
+        return {"failed": True, "force_norm": None, "error": f"{type(exc).__name__}: {exc}"[:500]}
+    images = band_row.pop("images", None)
+    if bucket[0] >= bucket[1] or not images:
+        band_row["failed"] = True
+        return band_row
+    chosen = _highest_moving(images)
+    requested = dict(payload["optimizer"].get("parameters") or {})
+    order = int(requested.pop("order", 1))
+    kwargs = {key: value for key, value in requested.items() if value is not None}
+    try:
+        opt = Sella(chosen, logfile=None, order=order, v0=None, **kwargs)
+        failed, _norm = _drive_l2(
+            opt,
+            chosen.calc,
+            bucket,
+            payload["tol"],
+            payload["max_steps"],
+            chosen,
+            norm_of=lambda: _fmax(chosen),
+        )
+    except Exception as exc:
+        if _cap_error(exc):
+            band_row["failed"] = True
+            band_row["error"] = "force-call cap"
+            band_row["force_norm"] = _fmax(chosen)
+            return band_row
+        band_row["failed"] = True
+        band_row["error"] = f"{type(exc).__name__}: {exc}"[:500]
+        return band_row
+    force_norm = _fmax(chosen)
+    failed = failed or force_norm is None or force_norm > payload["tol"] or bucket[0] >= bucket[1]
+    band_row["failed"] = failed
+    band_row["force_norm"] = force_norm
+    band_row["energy"] = _safe_energy(chosen)
+    if payload.get("snapshot"):
+        params = dict(band_row.get("parameters") or {})
+        params.update(_snapshot_sella(opt, order, requested))
+        params["v0"] = "none"
+        params["reserve"] = reserve
+        params["band_optimizer"] = band_payload["optimizer"]["name"]
+        band_row["parameters"] = params
+    return band_row
+
+
+def _run_sella_search(payload: dict, bucket: CallCounter) -> dict:
+    """One Sella order-1 search from a Gaussian kick of the free atoms."""
+    spec = payload.get("sella_search") or {}
+    atoms = _read_atoms(Path(payload["paths"][0]))
+    _apply_pbc(atoms, payload["potential"])
+    _displace_free(atoms, int(payload["seed"]), float(spec.get("gauss_std", 0.1)))
+    _attach(atoms, payload["potential"], bucket)
+    search = dict(payload)
+    search["paths"] = payload["paths"]
+    # The geometry is already displaced and attached. Run Sella on it.
+    from sella import Sella
+
+    requested = dict(payload["optimizer"].get("parameters") or {})
+    order = int(requested.pop("order", 1))
+    kwargs = {key: value for key, value in requested.items() if value is not None}
+    row = {"failed": True, "force_norm": None, "expected_index": order}
+    try:
+        opt = Sella(atoms, logfile=None, order=order, v0=None, **kwargs)
+        if payload.get("snapshot"):
+            snapped = _snapshot_sella(opt, order, requested)
+            snapped["v0"] = "none"
+            snapped["gauss_std"] = float(spec.get("gauss_std", 0.1))
+            row["parameters"] = snapped
+        failed, norm = _drive_l2(opt, atoms.calc, bucket, payload["tol"], payload["max_steps"], atoms)
+    except Exception as exc:
+        if _cap_error(exc):
+            return _cap_row(row, atoms)
+        row["error"] = f"{type(exc).__name__}: {exc}"[:500]
+        return row
+    row["failed"] = failed
+    row["force_norm"] = norm
+    row["energy"] = _safe_energy(atoms)
+    if not failed and bucket[0] < bucket[1]:
+        _attach_index(row, atoms, order)
+    return row
+
+
+def _run_dimer(payload: dict, bucket: CallCounter) -> dict:
     from ase.mep import DimerControl, MinModeAtoms, MinModeTranslate
 
     atoms = _attach(_read_atoms(Path(payload["paths"][0])), payload["potential"], bucket)
@@ -811,8 +1117,9 @@ def _run_dimer(payload: dict, bucket: list[int]) -> dict:
             curvature = float(mode_atoms.get_curvature())
             if norm is not None and norm <= payload["tol"] and curvature < 0.0:
                 break
-    except ForceCap:
-        pass
+    except Exception as exc:
+        if not _cap_error(exc):
+            raise
     if curvature is None:
         curvature = float(mode_atoms.get_curvature())
     if norm is None:
@@ -824,7 +1131,13 @@ def _run_dimer(payload: dict, bucket: list[int]) -> dict:
         "force_norm": norm,
         "curvature": curvature,
         "saddle": saddle,
+        "expected_index": 1,
     }
+    if saddle and bucket[0] < bucket[1]:
+        _attach_index(row, atoms, 1)
+        if row.get("hessian_index") != 1:
+            row["saddle"] = False
+            row["failed"] = True
     if payload.get("snapshot"):
         params = dict(DIMER_DEFAULTS)
         params.update(payload["optimizer"].get("parameters") or {})
@@ -833,18 +1146,44 @@ def _run_dimer(payload: dict, bucket: list[int]) -> dict:
     return row
 
 
+def _reason_list(row: dict, cap: int, tol: float) -> list[str]:
+    reasons: list[str] = []
+    if int(row.get("force_calls") or 0) >= cap or row.get("error") == "force-call cap":
+        reasons.append("cap")
+    error = row.get("error")
+    if error and error != "force-call cap":
+        reasons.append("error")
+    norm = row.get("force_norm")
+    if norm is None or float(norm) > float(tol):
+        reasons.append("force_norm")
+    if row.get("expected_index") is not None and "hessian_index" in row:
+        if int(row["hessian_index"]) != int(row["expected_index"]):
+            reasons.append("hessian_index")
+    elif row.get("expected_index") is not None and "hessian_index" not in row and "error" not in reasons:
+        if "cap" not in reasons and "force_norm" not in reasons:
+            reasons.append("hessian_index")
+    return reasons
+
+
 def _run_start(payload: dict) -> dict:
     import logging
     import warnings
 
     warnings.filterwarnings("ignore", message="The system is likely too small")
     logging.getLogger("sella").setLevel(logging.ERROR)
-    bucket = [0, int(payload["raw_cap"])]
+    bucket = CallCounter(int(payload["raw_cap"]))
     row = {
+        "schema": "optbench.start/v2",
         "start": payload["start"],
+        "seed": int(payload.get("seed") or 0),
         "force_calls": 0,
+        "verify_calls": 0,
+        "counter": "harness",
+        "comparable": True,
+        "success": False,
         "failed": True,
         "force_norm": None,
+        "reference": "none",
     }
     try:
         task = payload["task"]
@@ -854,20 +1193,33 @@ def _run_start(payload: dict) -> dict:
             extra = _run_sella(payload, bucket)
         elif task == "neb":
             extra = _run_neb(payload, bucket)
+        elif task == "sella-neb":
+            extra = _run_sella_neb(payload, bucket)
+        elif task == "sella-search":
+            extra = _run_sella_search(payload, bucket)
         elif task == "dimer":
             extra = _run_dimer(payload, bucket)
         else:
             raise ValueError(task)
+        extra.pop("images", None)
         row.update(extra)
-    except ForceCap:
-        row["failed"] = True
-        row["error"] = "force-call cap"
     except Exception as exc:
-        row["failed"] = True
-        row["error"] = f"{type(exc).__name__}: {exc}"[:500]
+        if _cap_error(exc):
+            row["failed"] = True
+            row["error"] = "force-call cap"
+        else:
+            row["failed"] = True
+            row["error"] = f"{type(exc).__name__}: {exc}"[:500]
     row["force_calls"] = int(bucket[0])
-    if row["force_calls"] >= bucket[1]:
-        row["failed"] = True
+    row["verify_calls"] = int(bucket.state["verify_calls"])
+    reasons = _reason_list(row, bucket[1], float(payload["tol"]))
+    # NEB success is the band residual, not a Hessian index.
+    if payload["task"] in {"neb", "sella-neb"}:
+        reasons = [reason for reason in reasons if reason != "hessian_index"]
+    row["reasons"] = reasons
+    row["success"] = not reasons
+    row["failed"] = not row["success"]
+    row["converged"] = "force_norm" not in reasons and "cap" not in reasons and "error" not in reasons
     return row
 
 
@@ -881,6 +1233,26 @@ def _load_rows(path: Path) -> dict[str, dict]:
         row = json.loads(line)
         rows[str(row["start"])] = row
     return rows
+
+
+def _v2_records(rows: list[dict], template: dict) -> tuple[list[dict], int]:
+    """Costs that enter PAR-2.
+
+    A per-image row is scored as calls per moving image against the
+    per-image cap. Every other row uses the harness total and the
+    template cap. Failures are marked unsuccessful so the penalty is
+    ``2 * cap`` rather than the raw count.
+    """
+    cap = int(template["stop"]["max_force_calls"])
+    images = 1
+    if template.get("reducer") == "per_image":
+        images = int(template["neb"]["moving_images"])
+    records = []
+    for row in rows:
+        calls = float(row["force_calls"]) / images
+        success = bool(row.get("success")) and calls < cap
+        records.append({"force_calls": calls, "success": success})
+    return records, cap
 
 
 def _summarize(rows: list[dict], template: dict) -> dict:
@@ -933,12 +1305,30 @@ def _baseline_parameters(template: dict) -> dict:
     params.update(requested)
     if isinstance(precon, dict):
         params["precon"] = f"{precon.get('name', 'Exp')} A={float(precon.get('A', 3.0))}"
-    if task == "neb":
+    if task in {"neb", "sella-neb"}:
         neb = template["neb"]
+        if task == "sella-neb":
+            order = int(requested.get("order", (template.get("sella") or {}).get("order", 1)))
+            params = dict(SELLA_SADDLE if order else SELLA_MINIMUM)
+            params.update(requested)
+            params["band_optimizer"] = str(neb.get("band_optimizer", "FIRE"))
+            params["band_parameters"] = dict(neb.get("band_parameters") or {})
+            params["reserve"] = float((template.get("sella") or {}).get("reserve", 0.2))
+            params["v0"] = "none"
         params["spring"] = float(neb["spring"])
         params["climb"] = bool(neb["climb"])
         params["moving_images"] = int(neb["moving_images"])
         params["method"] = str(neb.get("method", "improvedtangent"))
+        if neb.get("interpolate"):
+            params["interpolate"] = str(neb["interpolate"])
+        if neb.get("climb_after") is not None:
+            params["climb_after"] = float(neb["climb_after"])
+    if task == "sella-search":
+        order = int(requested.get("order", 1))
+        params = dict(SELLA_SADDLE if order else SELLA_MINIMUM)
+        params.update(requested)
+        params["v0"] = "none"
+        params["gauss_std"] = float((template.get("sella_search") or {}).get("gauss_std", 0.1))
     return params
 
 
@@ -950,16 +1340,31 @@ def _write_dat(
     *,
     starts: int,
     partial: bool,
+    scored: dict | None = None,
 ) -> None:
     method = {
         "profile": template["profile"],
         "parameter_source": template.get("parameter_source", ""),
-        "counter": "harness calculator force evaluations",
+        "counter": "harness attach_ase_counter",
         "reducer": template["reducer"],
         "parameters": parameters,
         "potential": template.get("potential") or {},
         "stop": template.get("stop") or {},
     }
+    note = template.get("note", "")
+    if template["task"] in {"minimize", "sella", "sella-search", "dimer"}:
+        note = (
+            note
+            + " v2 success is the harness cap, the stop norm, and the Hessian index"
+            + " (0 minimum, 1 saddle) after rigid modes are projected out when no atom is fixed."
+            + " Energy and Kabsch RMSD are not applied: these starts have no reference geometry."
+        ).strip()
+    elif template["task"] in {"neb", "sella-neb"}:
+        note = (
+            note
+            + " v2 success is the harness cap and the template fmax stop."
+            + " The band has no reference saddle, so the Hessian and Kabsch RMSD are not applied."
+        ).strip()
     fields = [
         ("force_calls", summary.get("force_calls")),
         ("force_calls_min", summary.get("force_calls_min")),
@@ -979,11 +1384,29 @@ def _write_dat(
         ("reducer", template["reducer"]),
         ("parameter_source", template.get("parameter_source", "")),
         ("method", json.dumps(_jsonable(method), sort_keys=True, separators=(",", ":"))),
-        ("note", template.get("note", "")),
+        ("note", note),
         ("host", socket.gethostname()),
         ("date", date.today().isoformat()),
         ("contributor", CONTRIBUTOR),
     ]
+    if scored:
+        fields.extend(
+            [
+                ("scoring", scored.get("scoring")),
+                ("par2_mean", scored.get("par2_mean")),
+                ("par2_median", scored.get("median")),
+                ("par2_median_low", scored.get("median_low")),
+                ("par2_median_high", scored.get("median_high")),
+                ("par2_iqr", scored.get("iqr")),
+                ("success_rate", scored.get("success_rate")),
+                ("wilson_low", scored.get("wilson_low")),
+                ("wilson_high", scored.get("wilson_high")),
+                ("par_applied", scored.get("par_applied")),
+                ("par_factor", scored.get("par_factor")),
+                ("bootstrap_resamples", scored.get("bootstrap_resamples")),
+                ("bootstrap_seed", scored.get("bootstrap_seed")),
+            ]
+        )
     if partial:
         fields.append(("partial", "true"))
     if template.get("ranked") is False:
@@ -1047,6 +1470,7 @@ def run_template(
                 "optimizer": template["optimizer"],
                 "neb": template.get("neb"),
                 "sella": template.get("sella"),
+                "sella_search": template.get("sella_search"),
                 "reactant_positions": reactant_positions,
                 "seed": 0 if seed is None else seed,
                 "tol": tol,
@@ -1096,6 +1520,10 @@ def run_template(
     for row in errors[:5]:
         print(f"error {template['id']} {row['start']}: {row['error']}", flush=True)
     summary = _summarize(ordered, template)
+    records, score_cap = _v2_records(ordered, template)
+    scored = score_v2(records, score_cap)
+    summary["par2_mean"] = scored.get("par2_mean")
+    summary["scoring"] = scored.get("scoring")
     parameters = _baseline_parameters(template)
     for row in ordered:
         if row.get("parameters"):
@@ -1108,8 +1536,105 @@ def run_template(
         parameters,
         starts=len(ordered),
         partial=limit > 0,
+        scored=scored,
     )
     summary["starts"] = len(ordered)
+    summary["template"] = template["id"]
+    summary["problem"] = template["problem"]
+    summary["entry"] = entry_id(template)
+    summary["output"] = str(output)
+    return summary
+
+
+def run_point(root: Path, template_name: str, start: str, seed: int, *, cache: Path | None = None) -> dict:
+    """Run one start and return its v2 record, including wall time.
+
+    ``start`` is the geometry name, or the geometry file name for a search
+    that varies ``seed``. The record's ``start`` stays the discover name,
+    so a dimer seed is still ``seed-0000``.
+    """
+    import time
+
+    template = load_template(root, template_name)
+    problem = resolve_problem(root, template["problem"])
+    cache = cache or Path("/tmp/optbench-geometry")
+    material = materialize(root, template, problem, cache)
+    jobs = discover(material, template)
+    chosen = None
+    for name, paths, job_seed in jobs:
+        job_seed_i = 0 if job_seed is None else int(job_seed)
+        if template["task"] in {"dimer", "sella-search"}:
+            if job_seed_i == int(seed):
+                chosen = (name, paths, job_seed_i)
+                break
+        elif name == start and job_seed_i == int(seed):
+            chosen = (name, paths, job_seed_i)
+            break
+    if chosen is None:
+        raise KeyError(f"{template_name} has no start {start!r} seed {seed}")
+    name, paths, job_seed_i = chosen
+    reactant_positions = None
+    if (template.get("sella") or {}).get("v0") == "reactant":
+        reactant = next(path for path in material.rglob("reactant.con") if path.is_file())
+        reactant_positions = _read_positions(reactant)
+    tol = float(template["stop"].get("force_norm", template["stop"].get("gradient_norm")))
+    payload = {
+        "start": name,
+        "task": template["task"],
+        "paths": [str(path) for path in paths],
+        "potential": template["potential"],
+        "optimizer": template["optimizer"],
+        "neb": template.get("neb"),
+        "sella": template.get("sella"),
+        "sella_search": template.get("sella_search"),
+        "reactant_positions": reactant_positions,
+        "seed": job_seed_i,
+        "tol": tol,
+        "max_steps": int(template["stop"]["max_steps"]),
+        "raw_cap": raw_cap(template),
+        "snapshot": True,
+    }
+    started = time.perf_counter()
+    row = _run_start(payload)
+    row["wall_seconds"] = time.perf_counter() - started
+    row["template"] = template["id"]
+    row["problem"] = template["problem"]
+    return row
+
+
+def write_rows(root: Path, template_name: str, rows: list[dict], output: Path) -> dict:
+    """Write one campaign dat and its starts file from finished v2 rows."""
+    template = load_template(root, template_name)
+    for row in rows:
+        row["failed"] = not bool(row.get("success"))
+        row.setdefault("schema", "optbench.start/v2")
+        row.setdefault("counter", "harness")
+        row.setdefault("comparable", True)
+    starts_path = output.with_name(output.stem + ".starts.jsonl")
+    starts_path.parent.mkdir(parents=True, exist_ok=True)
+    starts_path.write_text(
+        "".join(json.dumps(_jsonable(row), sort_keys=True) + "\n" for row in rows),
+        encoding="utf-8",
+    )
+    summary = _summarize(rows, template)
+    records, score_cap = _v2_records(rows, template)
+    scored = score_v2(records, score_cap)
+    summary["par2_mean"] = scored.get("par2_mean")
+    parameters = _baseline_parameters(template)
+    for row in rows:
+        if row.get("parameters"):
+            parameters = row["parameters"]
+            break
+    _write_dat(
+        output,
+        template,
+        summary,
+        parameters,
+        starts=len(rows),
+        partial=False,
+        scored=scored,
+    )
+    summary["starts"] = len(rows)
     summary["template"] = template["id"]
     summary["problem"] = template["problem"]
     summary["entry"] = entry_id(template)

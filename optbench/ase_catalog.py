@@ -231,9 +231,17 @@ def _minimization_specs() -> list[dict]:
         for name in OPTIMIZERS:
             for profile in ("default", "tuned"):
                 if profile == "default":
-                    params: dict = {}
+                    params = {}
                     source = "default"
                     note = f"ASE {ASE_VERSION} {name} constructor defaults."
+                    if problem == "minimization/lj38" and name in {"BFGS", "LBFGS"}:
+                        params = {"maxstep": 0.1}
+                        source = "repaired"
+                        note = (
+                            f"ASE {ASE_VERSION} {name} constructor maxstep is 0.2. "
+                            "On LJ38 starts that begin inside the repulsive core that step increases the force. "
+                            "This default row uses maxstep 0.1. Morse defaults stay at the constructor value."
+                        )
                 else:
                     params, source, note = _tuned_minimizer(problem, name)
                 specs.append(
@@ -405,14 +413,18 @@ def _neb_specs() -> list[dict]:
                 "max_steps": 1000,
             },
             "tuned_optimizer": "LBFGS",
-            "tuned_parameters": {"maxstep": 0.05},
+            "tuned_parameters": {"maxstep": 0.01, "damping": 0.2},
             "tuned_spring": 5.0,
-            "tuned_climb": True,
+            "tuned_climb": False,
+            "tuned_interpolate": "idpp",
+            "tuned_climb_after": 0.4,
+            "tuned_source": "repaired",
             "tuned_note": (
-                "Archive eon-ci-neb uses 5 intermediate images, spring 5, "
-                "climbing image, LBFGS max move 0.05, gradient norm 0.001. "
-                "Totals at or above 2500 force calls stay out of the mean. "
-                "The first 50 indexed pairs are the published band."
+                "The previous ASE campaign, results/campaign/ase-3.29.0-de-lj38-tuned.dat, "
+                "failed all 50 pairs at the 2500 cap with LBFGS maxstep 0.05 and climb from the first step. "
+                "This row keeps 5 images, spring 5, and the 2500 eOn exclusion. "
+                "Interpolation is IDPP. LBFGS maxstep is 0.01 and damping is 0.2. "
+                "Climb stays off until the maximum residual is at or below 0.4."
             ),
             "default_note": (
                 "ASE NEB defaults on those 50 pairs and 5 intermediate images: "
@@ -458,20 +470,30 @@ def _neb_specs() -> list[dict]:
             "stop": {
                 "norm": "fmax",
                 "force_norm": 0.001,
-                "max_force_calls": 2500,
-                "max_steps": 1000,
+                "max_force_calls": 40000,
+                "max_steps": 40000,
             },
             "tuned_optimizer": "LBFGS",
-            "tuned_parameters": {"maxstep": 0.05},
+            "tuned_parameters": {"maxstep": 0.01, "damping": 0.2},
             "tuned_spring": 5.0,
-            "tuned_climb": True,
+            "tuned_climb": False,
+            "tuned_interpolate": "idpp",
+            "tuned_climb_after": 0.4,
+            "tuned_source": "repaired",
             "tuned_note": (
-                "The problem file does not state a band. "
-                "Tuned uses the LJ38 climbing-image band: 5 intermediate images, "
-                "spring 5, LBFGS maxstep 0.05, cap 2500."
+                "The problem file states no call cap. "
+                "archive/entries/double-ended-saddle-search/lj38_2ts_separation/pele/benchmark.dat "
+                "records median 20638 and maximum 114490, so this row caps the harness at 40000 "
+                "instead of the LJ38 eOn exclusion of 2500. "
+                "The previous ASE tuned campaign failed all 51 pairs at 2500. "
+                "Interpolation is IDPP. LBFGS maxstep is 0.01 and damping is 0.2. "
+                "Climb stays off until the maximum residual is at or below 0.4. "
+                "Five images and spring 5 are unchanged."
             ),
             "default_note": (
-                "ASE NEB defaults on the same pairs: spring 0.1, climb off, FIRE, cap 2500."
+                "ASE NEB defaults on the same pairs: spring 0.1, climb off, FIRE. "
+                "The cap is 40000, the same harness cap as the tuned row. "
+                "The problem file does not state one."
             ),
         },
     )
@@ -490,7 +512,7 @@ def _neb_specs() -> list[dict]:
                 params = dict(row["tuned_parameters"])
                 spring = row["tuned_spring"]
                 climb = row["tuned_climb"]
-                source = "archive"
+                source = row.get("tuned_source", "archive")
                 note = row["tuned_note"]
             neb = {
                 "layout": row["layout"],
@@ -499,6 +521,10 @@ def _neb_specs() -> list[dict]:
                 "climb": climb,
                 "method": "improvedtangent",
             }
+            if profile == "tuned" and row.get("tuned_interpolate"):
+                neb["interpolate"] = row["tuned_interpolate"]
+            if profile == "tuned" and row.get("tuned_climb_after") is not None:
+                neb["climb_after"] = float(row["tuned_climb_after"])
             if "count" in row:
                 neb["count"] = row["count"]
             spec = {
@@ -522,6 +548,120 @@ def _neb_specs() -> list[dict]:
                 "neb": neb,
             }
             specs.append(spec)
+    return specs
+
+
+def _sella_neb_specs() -> list[dict]:
+    """Sella order-1 refine after the ASE band on each double-ended problem."""
+    specs = []
+    for spec in _neb_specs():
+        if not str(spec["problem"]).startswith("double-ended-saddle-search/"):
+            continue
+        profile = spec["profile"]
+        if profile == "default":
+            params = {"order": 1}
+            source = "default"
+            head = (
+                f"Sella {SELLA_VERSION} order 1 defaults refine the highest-energy image "
+                "after the ASE default band (FIRE, spring 0.1, climb off, linear interpolation). "
+            )
+        else:
+            params = {"order": 1, **SELLA_TUNED}
+            source = spec["parameter_source"]
+            head = (
+                "Sella refines the highest-energy image of this problem's tuned ASE band. "
+                + SELLA_TUNED_NOTE
+                + " "
+            )
+        neb = dict(spec["neb"])
+        neb["band_optimizer"] = spec["optimizer"]["name"]
+        neb["band_parameters"] = dict(spec["optimizer"].get("parameters") or {})
+        slug = spec["id"].split("/", 1)[1]
+        specs.append(
+            {
+                "id": f"sella/{slug}",
+                "engine": "sella",
+                "code": "Sella",
+                "code_version": SELLA_VERSION,
+                "commit": SELLA_COMMIT,
+                "algorithm": "Sella+NEB",
+                "problem": spec["problem"],
+                "task": "sella-neb",
+                "profile": profile,
+                "reducer": spec["reducer"],
+                "ranked": True,
+                "parameter_source": source,
+                "note": (
+                    head
+                    + "The band stops at 80 percent of the call cap and both stages share one harness counter. "
+                    + "v0 is unset: a free cluster drops rigid modes, so a full Cartesian mode has the wrong length. "
+                    + spec["note"]
+                ),
+                "optimizer": {"name": "Sella", "parameters": params},
+                "potential": spec["potential"],
+                "stop": spec["stop"],
+                "input": spec["input"],
+                "neb": neb,
+                "sella": {"order": 1, "v0": "none", "reserve": 0.2},
+            }
+        )
+    return specs
+
+
+def _sella_search_specs() -> list[dict]:
+    """Single-ended Sella samples on the Pt island. Not a ranked catalog score."""
+    specs = []
+    for profile, params, source, note in (
+        (
+            "default",
+            {"order": 1},
+            "default",
+            f"Sella {SELLA_VERSION} saddle defaults, order 1. ",
+        ),
+        (
+            "tuned",
+            {"order": 1, **SELLA_TUNED},
+            "transferred",
+            SELLA_TUNED_NOTE + " ",
+        ),
+    ):
+        specs.append(
+            {
+                "id": f"sella/pt-island-search-{profile}",
+                "engine": "sella",
+                "code": "Sella",
+                "code_version": SELLA_VERSION,
+                "commit": SELLA_COMMIT,
+                "algorithm": "Sella",
+                "problem": "saddle-search/pt-island",
+                "task": "sella-search",
+                "profile": profile,
+                "reducer": "capped",
+                "ranked": False,
+                "parameter_source": source,
+                "note": (
+                    note
+                    + "Sixteen searches, each a Gaussian displacement of standard deviation 0.1 "
+                    + "on the free atoms, then Sella order 1 with v0 unset. "
+                    + "One search is not the saddle catalog, so this row is not ranked and "
+                    + "fraction_connected is not reported. The cost is the per-search harness count."
+                ),
+                "optimizer": {"name": "Sella", "parameters": params},
+                "potential": MORSE_SLAB,
+                "stop": {
+                    "norm": "l2",
+                    "force_norm": 0.001,
+                    "max_force_calls": 10000,
+                    "max_steps": 5000,
+                },
+                "input": {
+                    "archive_path": "website/saddle-search/pt-island/pt-island.con",
+                    "select": "file",
+                },
+                "sella": {"order": 1, "v0": "none"},
+                "sella_search": {"searches": 16, "gauss_std": 0.1},
+            }
+        )
     return specs
 
 
@@ -576,7 +716,14 @@ def _dimer_specs() -> list[dict]:
 
 
 def all_specs() -> list[dict]:
-    return _minimization_specs() + _ts_specs() + _neb_specs() + _dimer_specs()
+    return (
+        _minimization_specs()
+        + _ts_specs()
+        + _neb_specs()
+        + _sella_neb_specs()
+        + _dimer_specs()
+        + _sella_search_specs()
+    )
 
 
 def _toml_scalar(value: object) -> str:
@@ -630,7 +777,7 @@ def render_toml(spec: dict) -> str:
     _write_table(lines, "stop", spec["stop"])
     if spec.get("input"):
         _write_table(lines, "input", spec["input"])
-    for key in ("neb", "sella", "dimer"):
+    for key in ("neb", "sella", "dimer", "sella_search"):
         if key in spec:
             _write_table(lines, key, spec[key])
     return "\n".join(lines).rstrip() + "\n"

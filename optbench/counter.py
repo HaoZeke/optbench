@@ -68,15 +68,19 @@ class _Verification:
         self._potential._verifying = self._previous
 
 
-def attach_ase_counter(calculator: object, cap: int | None = None) -> object:
+def attach_ase_counter(calculator: object, cap: int | None = None, state: dict | None = None) -> object:
     """Count ASE ``calculate`` entries on this calculator instance.
 
     ASE skips ``calculate`` when the atoms have not changed, so an energy
     request and a force request at the same geometry are one call. A
     call past ``cap`` raises ``RuntimeError`` before the potential runs.
+    ``state`` is shared when several images must increment one counter.
     """
     original = calculator.calculate
-    state = {"calls": 0, "verify_calls": 0, "verifying": False, "cap": cap}
+    if state is None:
+        state = {"calls": 0, "verify_calls": 0, "verifying": False, "cap": cap}
+    elif cap is not None:
+        state["cap"] = cap
 
     def calculate(atoms=None, properties=("energy", "forces"), system_changes=("positions",)):
         if state["verifying"]:

@@ -264,6 +264,7 @@ def _load_present(root: Path) -> dict[str, list[dict]]:
                 "min": fields.get("force_calls_min", ""),
                 "max": fields.get("force_calls_max", ""),
                 "failed": fields.get("nfailed", ""),
+                "par2": fields.get("par2_mean", ""),
                 "tuning": tuning_from_template(root, fields.get("template", "")),
             }
             repetitions = parse_repetitions(text)
@@ -308,9 +309,10 @@ def _present_block(rows: list[dict], heading: str | None = "Present runs") -> st
     if not rows:
         lines.append("<p>No present run is recorded.</p>")
         return "\n".join(lines)
+    show_par2 = any(str(row.get("par2") or "") not in ("", "None") for row in rows)
     lines.append('<div class="bench-table"><table>')
     lines.append("<caption>Present runs. Fewer force calls first. The legacy 2014 scores follow.</caption>")
-    lines.append(
+    header = (
         "<thead><tr>"
         '<th class="text" scope="col">Entry</th>'
         '<th class="text" scope="col">Code</th>'
@@ -319,14 +321,16 @@ def _present_block(rows: list[dict], heading: str | None = "Present runs") -> st
         '<th class="num" scope="col">Min</th>'
         '<th class="num" scope="col">Max</th>'
         '<th class="num" scope="col">Failed</th>'
-        '<th class="text" scope="col">Tuning</th>'
-        "</tr></thead><tbody>"
     )
+    if show_par2:
+        header += '<th class="num" scope="col">PAR-2</th>'
+    header += '<th class="text" scope="col">Tuning</th></tr></thead><tbody>'
+    lines.append(header)
     for row in rows:
         failed = str(row.get("failed") or "0")
         mark = ' class="bench-row-fail"' if failed not in ("", "0") else ""
         lines.append(f"<tr{mark}>")
-        for key, kind in (
+        columns = [
             ("entry", "text"),
             ("code", "text"),
             ("version", "text"),
@@ -334,8 +338,11 @@ def _present_block(rows: list[dict], heading: str | None = "Present runs") -> st
             ("min", "num"),
             ("max", "num"),
             ("failed", "num"),
-            ("tuning", "text"),
-        ):
+        ]
+        if show_par2:
+            columns.append(("par2", "num"))
+        columns.append(("tuning", "text"))
+        for key, kind in columns:
             lines.append(f'<td class="{kind}">{html.escape(str(row.get(key, "")))}</td>')
         lines.append("</tr>")
     lines.append("</tbody></table></div>")

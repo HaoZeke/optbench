@@ -9,13 +9,14 @@ task = "minimize"
 profile = "default"
 reducer = "capped"
 ranked = true
-parameter_source = "default"
-note = "ASE 3.29.0 BFGS constructor defaults."
+parameter_source = "repaired"
+note = "ASE 3.29.0 BFGS constructor maxstep is 0.2. On LJ38 starts that begin inside the repulsive core that step increases the force. This default row uses maxstep 0.1. Morse defaults stay at the constructor value."
 
 [optimizer]
 name = "BFGS"
 
 [optimizer.parameters]
+maxstep = 0.1
 
 [potential]
 kind = "lennard-jones"

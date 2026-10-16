@@ -1,0 +1,52 @@
+id = "sella/de-lj38-default"
+engine = "sella"
+code = "Sella"
+code_version = "2.6.0"
+commit = "6cfb60cdb100a146c3c6f0587d5308b247aa8010"
+algorithm = "Sella+NEB"
+problem = "double-ended-saddle-search/lj38"
+task = "sella-neb"
+profile = "default"
+reducer = "capped"
+ranked = true
+parameter_source = "default"
+note = "Sella 2.6.0 order 1 defaults refine the highest-energy image after the ASE default band (FIRE, spring 0.1, climb off, linear interpolation). The band stops at 80 percent of the call cap and both stages share one harness counter. v0 is unset: a free cluster drops rigid modes, so a full Cartesian mode has the wrong length. ASE NEB defaults on those 50 pairs and 5 intermediate images: spring 0.1, climb off, FIRE. The same 2500 cap applies."
+
+[optimizer]
+name = "Sella"
+
+[optimizer.parameters]
+order = 1
+
+[potential]
+kind = "lennard-jones"
+epsilon = 1.0
+sigma = 1.0
+rc = 40.0
+pbc = [false, false, false]
+
+[stop]
+norm = "fmax"
+gradient_norm = 0.001
+force_norm = 0.001
+max_force_calls = 2500
+max_steps = 1000
+
+[input]
+archive_path = "website/double-ended-saddle-search/lj38/coords-con.tgz"
+
+[neb]
+layout = "indexed"
+moving_images = 5
+spring = 0.1
+climb = false
+method = "improvedtangent"
+count = 50
+band_optimizer = "FIRE"
+
+[neb.band_parameters]
+
+[sella]
+order = 1
+v0 = "none"
+reserve = 0.2

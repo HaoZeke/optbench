@@ -451,6 +451,54 @@ task = "neb"
 ranked = true
 
 [[template]]
+id = "sella/de-lj38-default"
+code = "sella"
+problem = "double-ended-saddle-search/lj38"
+profile = "default"
+task = "sella-neb"
+ranked = true
+
+[[template]]
+id = "sella/de-lj38-tuned"
+code = "sella"
+problem = "double-ended-saddle-search/lj38"
+profile = "tuned"
+task = "sella-neb"
+ranked = true
+
+[[template]]
+id = "sella/de-pt-island-default"
+code = "sella"
+problem = "double-ended-saddle-search/pt-island"
+profile = "default"
+task = "sella-neb"
+ranked = true
+
+[[template]]
+id = "sella/de-pt-island-tuned"
+code = "sella"
+problem = "double-ended-saddle-search/pt-island"
+profile = "tuned"
+task = "sella-neb"
+ranked = true
+
+[[template]]
+id = "sella/de-lj38-2ts-default"
+code = "sella"
+problem = "double-ended-saddle-search/lj38_2ts_separation"
+profile = "default"
+task = "sella-neb"
+ranked = true
+
+[[template]]
+id = "sella/de-lj38-2ts-tuned"
+code = "sella"
+problem = "double-ended-saddle-search/lj38_2ts_separation"
+profile = "tuned"
+task = "sella-neb"
+ranked = true
+
+[[template]]
 id = "ase/dimer-pt-island-default"
 code = "ase"
 problem = "saddle-search/pt-island"
@@ -464,4 +512,20 @@ code = "ase"
 problem = "saddle-search/pt-island"
 profile = "tuned"
 task = "dimer"
+ranked = false
+
+[[template]]
+id = "sella/pt-island-search-default"
+code = "sella"
+problem = "saddle-search/pt-island"
+profile = "default"
+task = "sella-search"
+ranked = false
+
+[[template]]
+id = "sella/pt-island-search-tuned"
+code = "sella"
+problem = "saddle-search/pt-island"
+profile = "tuned"
+task = "sella-search"
 ranked = false

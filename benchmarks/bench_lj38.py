@@ -74,6 +74,8 @@ def _bind(template_name: str, limit: int):
         number = 1
 
         def setup(self, start: str) -> None:
+            if shutil.which("eonclient") is None and not os.environ.get("EONCLIENT"):
+                raise NotImplementedError("eonclient is not on PATH")
             self.work = Path(tempfile.mkdtemp(prefix="optbench-lj38-"))
             self.ini = _ini(template_name)
             self.cap = _cap(template_name)
