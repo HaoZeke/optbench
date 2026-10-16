@@ -15,6 +15,26 @@ committed = "2026-10-02"
 note = "Version string 3.5.0 and Python client 0.4.2. Lennard-Jones scores use this client. The subset counter check uses the conda-forge binary, which prints 3.5.0 (7ec1840). That check is not a published mean."
 
 [[code]]
+id = "eon-main"
+name = "eOn"
+role = "minimization and saddle search"
+repository = "https://github.com/TheochemUI/eon"
+ref = "main"
+commit = "1d71c944501832bfafb955ffe13b9aae50c8efd4"
+committed = "2026-10-15"
+note = "Current main, including merged pull request 776. The version string is 3.6.0. Templates under templates/eon/ use this commit. The 3.5.0 pin above stays for the scores that were run on it."
+
+[[code]]
+id = "eon-develop"
+name = "eOn"
+role = "minimization and saddle search"
+repository = "https://github.com/TheochemUI/eon"
+ref = "develop"
+commit = "7095b23ac17d49f434a5e08ccb072897ceca698e"
+committed = "2026-10-16"
+note = "develop HEAD built from source. The version string is 3.6.0 (7095b23a). GPR-dimer is absent: TheochemUI/gpr_optim is private and eonclient reports GPRD disabled. This pin is not the conda-forge 3.5.0 binary."
+
+[[code]]
 id = "rgmin"
 name = "rgmin"
 role = "minimization"

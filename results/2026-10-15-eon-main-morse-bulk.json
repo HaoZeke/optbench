@@ -1,0 +1,1340 @@
+{
+  "schema": "optbench.result/v1",
+  "status": "sota",
+  "problem": "minimization/morse-bulk",
+  "submitter": "Rohit Goswami",
+  "date": "2026-10-15",
+  "host": "cursor",
+  "runs": [
+    {
+      "entry": "eon-main-morse-lbfgs",
+      "code": "eOn",
+      "algorithm": "LBFGS",
+      "code_version": "3.6.0",
+      "commit": "1d71c944501832bfafb955ffe13b9aae50c8efd4",
+      "present_source": true,
+      "starts": 100,
+      "nfailed": 0,
+      "method": {
+        "client": "eonclient 3.6.0 (1d71c94), compiled Thu Oct 15 09:00:20 AM GMT 2026",
+        "reducer": "harness-capped",
+        "ini": {
+          "Main": {
+            "job": "minimization"
+          },
+          "Potential": {
+            "potential": "morse_pt"
+          },
+          "Optimizer": {
+            "opt_method": "lbfgs",
+            "convergence_metric": "norm",
+            "converged_force": 0.001,
+            "max_move": 0.2,
+            "max_iterations": 10000
+          },
+          "LBFGS": {
+            "lbfgs_memory": 20,
+            "lbfgs_inverse_curvature": 0.01,
+            "lbfgs_max_inverse_curvature": 0.0,
+            "lbfgs_auto_scale": true,
+            "lbfgs_angle_reset": true,
+            "lbfgs_distance_reset": true,
+            "lbfgs_curvature": "reset",
+            "lbfgs_project_rigid": false,
+            "lbfgs_secant": "standard",
+            "lbfgs_precon": "none",
+            "lbfgs_step": "lbfgs",
+            "lbfgs_h0": "sy_yy",
+            "lbfgs_accept": "energy",
+            "lbfgs_extra_updates": 0,
+            "lbfgs_cautious_eps": 1e-06,
+            "lbfgs_cautious_alpha": 0.01,
+            "lbfgs_precon_A": 3.0,
+            "lbfgs_precon_mu": 1.0,
+            "lbfgs_precon_rcut": 0.0
+          }
+        },
+        "note": "Default L-BFGS on the Morse bulk stop. Memory 20 and lbfgs_accept energy are the struct defaults at this commit.",
+        "failure_cap": 10000,
+        "images_for_mean": 1
+      },
+      "metrics": {
+        "force_calls": 54,
+        "force_calls_min": 35,
+        "force_calls_max": 85,
+        "nfailed": 0,
+        "mean_unrounded": 54.31,
+        "n_in_mean": 100,
+        "failure_cap": 10000
+      },
+      "per_start": [
+        {
+          "failed": false,
+          "force_calls": 53,
+          "geometry": "pos_0000.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 43,
+          "geometry": "pos_0001.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 36,
+          "geometry": "pos_0002.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 41,
+          "geometry": "pos_0003.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 45,
+          "geometry": "pos_0004.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 39,
+          "geometry": "pos_0005.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 71,
+          "geometry": "pos_0006.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 50,
+          "geometry": "pos_0007.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 45,
+          "geometry": "pos_0008.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 54,
+          "geometry": "pos_0009.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 47,
+          "geometry": "pos_0010.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 47,
+          "geometry": "pos_0011.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 35,
+          "geometry": "pos_0012.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 66,
+          "geometry": "pos_0013.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 35,
+          "geometry": "pos_0014.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 57,
+          "geometry": "pos_0015.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 41,
+          "geometry": "pos_0016.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 42,
+          "geometry": "pos_0017.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 41,
+          "geometry": "pos_0018.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 39,
+          "geometry": "pos_0019.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 40,
+          "geometry": "pos_0020.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 42,
+          "geometry": "pos_0021.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 67,
+          "geometry": "pos_0022.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 72,
+          "geometry": "pos_0023.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 55,
+          "geometry": "pos_0024.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 43,
+          "geometry": "pos_0025.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 37,
+          "geometry": "pos_0026.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 42,
+          "geometry": "pos_0027.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 51,
+          "geometry": "pos_0028.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 58,
+          "geometry": "pos_0029.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 50,
+          "geometry": "pos_0030.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 59,
+          "geometry": "pos_0031.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 68,
+          "geometry": "pos_0032.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 81,
+          "geometry": "pos_0033.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 45,
+          "geometry": "pos_0034.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 67,
+          "geometry": "pos_0035.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 55,
+          "geometry": "pos_0036.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 48,
+          "geometry": "pos_0037.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 49,
+          "geometry": "pos_0038.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 85,
+          "geometry": "pos_0039.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 81,
+          "geometry": "pos_0040.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 79,
+          "geometry": "pos_0041.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 49,
+          "geometry": "pos_0042.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 65,
+          "geometry": "pos_0043.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 53,
+          "geometry": "pos_0044.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 44,
+          "geometry": "pos_0045.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 54,
+          "geometry": "pos_0046.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 51,
+          "geometry": "pos_0047.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 53,
+          "geometry": "pos_0048.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 77,
+          "geometry": "pos_0049.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 54,
+          "geometry": "pos_0050.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 51,
+          "geometry": "pos_0051.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 43,
+          "geometry": "pos_0052.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 47,
+          "geometry": "pos_0053.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 53,
+          "geometry": "pos_0054.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 40,
+          "geometry": "pos_0055.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 42,
+          "geometry": "pos_0056.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 46,
+          "geometry": "pos_0057.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 48,
+          "geometry": "pos_0058.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 43,
+          "geometry": "pos_0059.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 46,
+          "geometry": "pos_0060.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 61,
+          "geometry": "pos_0061.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 39,
+          "geometry": "pos_0062.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 41,
+          "geometry": "pos_0063.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 52,
+          "geometry": "pos_0064.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 61,
+          "geometry": "pos_0065.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 58,
+          "geometry": "pos_0066.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 60,
+          "geometry": "pos_0067.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 64,
+          "geometry": "pos_0068.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 52,
+          "geometry": "pos_0069.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 57,
+          "geometry": "pos_0070.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 80,
+          "geometry": "pos_0071.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 64,
+          "geometry": "pos_0072.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 80,
+          "geometry": "pos_0073.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 65,
+          "geometry": "pos_0074.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 60,
+          "geometry": "pos_0075.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 74,
+          "geometry": "pos_0076.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 53,
+          "geometry": "pos_0077.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 71,
+          "geometry": "pos_0078.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 76,
+          "geometry": "pos_0079.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 69,
+          "geometry": "pos_0080.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 59,
+          "geometry": "pos_0081.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 51,
+          "geometry": "pos_0082.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 46,
+          "geometry": "pos_0083.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 65,
+          "geometry": "pos_0084.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 62,
+          "geometry": "pos_0085.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 59,
+          "geometry": "pos_0086.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 52,
+          "geometry": "pos_0087.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 46,
+          "geometry": "pos_0088.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 53,
+          "geometry": "pos_0089.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 62,
+          "geometry": "pos_0090.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 51,
+          "geometry": "pos_0091.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 48,
+          "geometry": "pos_0092.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 60,
+          "geometry": "pos_0093.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 47,
+          "geometry": "pos_0094.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 43,
+          "geometry": "pos_0095.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 51,
+          "geometry": "pos_0096.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 55,
+          "geometry": "pos_0097.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 72,
+          "geometry": "pos_0098.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 52,
+          "geometry": "pos_0099.con",
+          "reason": "0"
+        }
+      ],
+      "notes": "Default L-BFGS on the Morse bulk stop. Memory 20 and lbfgs_accept energy are the struct defaults at this commit. Median of the 100 counts is 52. Unrounded mean 54.31. 100 starts enter the mean. Per-start rows are in results/campaign/eon-main-morse-lbfgs.starts. Run on host cursor."
+    },
+    {
+      "entry": "eon-main-morse-lbfgs-m100",
+      "code": "eOn",
+      "algorithm": "LBFGS",
+      "code_version": "3.6.0",
+      "commit": "1d71c944501832bfafb955ffe13b9aae50c8efd4",
+      "present_source": true,
+      "starts": 100,
+      "nfailed": 0,
+      "method": {
+        "client": "eonclient 3.6.0 (1d71c94), compiled Thu Oct 15 09:00:20 AM GMT 2026",
+        "reducer": "harness-capped",
+        "ini": {
+          "Main": {
+            "job": "minimization"
+          },
+          "Potential": {
+            "potential": "morse_pt"
+          },
+          "Optimizer": {
+            "opt_method": "lbfgs",
+            "convergence_metric": "norm",
+            "converged_force": 0.001,
+            "max_move": 0.2,
+            "max_iterations": 10000
+          },
+          "LBFGS": {
+            "lbfgs_memory": 100,
+            "lbfgs_inverse_curvature": 0.01,
+            "lbfgs_max_inverse_curvature": 0.0,
+            "lbfgs_auto_scale": true,
+            "lbfgs_angle_reset": true,
+            "lbfgs_distance_reset": true,
+            "lbfgs_curvature": "reset",
+            "lbfgs_project_rigid": false,
+            "lbfgs_secant": "standard",
+            "lbfgs_precon": "none",
+            "lbfgs_step": "lbfgs",
+            "lbfgs_h0": "sy_yy",
+            "lbfgs_accept": "energy",
+            "lbfgs_extra_updates": 0,
+            "lbfgs_cautious_eps": 1e-06,
+            "lbfgs_cautious_alpha": 0.01,
+            "lbfgs_precon_A": 3.0,
+            "lbfgs_precon_mu": 1.0,
+            "lbfgs_precon_rcut": 0.0
+          }
+        },
+        "note": "Tuned L-BFGS on Morse bulk. Memory 100 matches the archived eon-client/morse-lbfgs setting. Every other key matches eon/morse-lbfgs.",
+        "failure_cap": 10000,
+        "images_for_mean": 1
+      },
+      "metrics": {
+        "force_calls": 54,
+        "force_calls_min": 36,
+        "force_calls_max": 101,
+        "nfailed": 0,
+        "mean_unrounded": 54.18,
+        "n_in_mean": 100,
+        "failure_cap": 10000
+      },
+      "per_start": [
+        {
+          "failed": false,
+          "force_calls": 49,
+          "geometry": "pos_0000.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 42,
+          "geometry": "pos_0001.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 37,
+          "geometry": "pos_0002.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 41,
+          "geometry": "pos_0003.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 52,
+          "geometry": "pos_0004.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 36,
+          "geometry": "pos_0005.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 73,
+          "geometry": "pos_0006.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 43,
+          "geometry": "pos_0007.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 48,
+          "geometry": "pos_0008.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 51,
+          "geometry": "pos_0009.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 49,
+          "geometry": "pos_0010.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 46,
+          "geometry": "pos_0011.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 36,
+          "geometry": "pos_0012.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 64,
+          "geometry": "pos_0013.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 38,
+          "geometry": "pos_0014.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 44,
+          "geometry": "pos_0015.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 42,
+          "geometry": "pos_0016.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 39,
+          "geometry": "pos_0017.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 41,
+          "geometry": "pos_0018.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 39,
+          "geometry": "pos_0019.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 39,
+          "geometry": "pos_0020.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 42,
+          "geometry": "pos_0021.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 61,
+          "geometry": "pos_0022.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 76,
+          "geometry": "pos_0023.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 54,
+          "geometry": "pos_0024.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 43,
+          "geometry": "pos_0025.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 37,
+          "geometry": "pos_0026.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 43,
+          "geometry": "pos_0027.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 54,
+          "geometry": "pos_0028.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 53,
+          "geometry": "pos_0029.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 46,
+          "geometry": "pos_0030.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 56,
+          "geometry": "pos_0031.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 61,
+          "geometry": "pos_0032.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 77,
+          "geometry": "pos_0033.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 45,
+          "geometry": "pos_0034.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 67,
+          "geometry": "pos_0035.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 54,
+          "geometry": "pos_0036.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 55,
+          "geometry": "pos_0037.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 54,
+          "geometry": "pos_0038.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 82,
+          "geometry": "pos_0039.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 73,
+          "geometry": "pos_0040.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 82,
+          "geometry": "pos_0041.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 50,
+          "geometry": "pos_0042.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 52,
+          "geometry": "pos_0043.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 49,
+          "geometry": "pos_0044.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 49,
+          "geometry": "pos_0045.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 52,
+          "geometry": "pos_0046.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 61,
+          "geometry": "pos_0047.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 51,
+          "geometry": "pos_0048.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 68,
+          "geometry": "pos_0049.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 54,
+          "geometry": "pos_0050.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 50,
+          "geometry": "pos_0051.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 50,
+          "geometry": "pos_0052.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 51,
+          "geometry": "pos_0053.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 47,
+          "geometry": "pos_0054.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 69,
+          "geometry": "pos_0055.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 42,
+          "geometry": "pos_0056.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 45,
+          "geometry": "pos_0057.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 39,
+          "geometry": "pos_0058.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 42,
+          "geometry": "pos_0059.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 47,
+          "geometry": "pos_0060.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 63,
+          "geometry": "pos_0061.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 39,
+          "geometry": "pos_0062.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 53,
+          "geometry": "pos_0063.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 53,
+          "geometry": "pos_0064.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 52,
+          "geometry": "pos_0065.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 57,
+          "geometry": "pos_0066.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 56,
+          "geometry": "pos_0067.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 74,
+          "geometry": "pos_0068.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 53,
+          "geometry": "pos_0069.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 63,
+          "geometry": "pos_0070.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 71,
+          "geometry": "pos_0071.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 66,
+          "geometry": "pos_0072.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 101,
+          "geometry": "pos_0073.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 65,
+          "geometry": "pos_0074.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 63,
+          "geometry": "pos_0075.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 70,
+          "geometry": "pos_0076.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 53,
+          "geometry": "pos_0077.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 73,
+          "geometry": "pos_0078.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 55,
+          "geometry": "pos_0079.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 80,
+          "geometry": "pos_0080.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 53,
+          "geometry": "pos_0081.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 49,
+          "geometry": "pos_0082.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 46,
+          "geometry": "pos_0083.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 58,
+          "geometry": "pos_0084.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 62,
+          "geometry": "pos_0085.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 61,
+          "geometry": "pos_0086.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 53,
+          "geometry": "pos_0087.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 47,
+          "geometry": "pos_0088.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 54,
+          "geometry": "pos_0089.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 59,
+          "geometry": "pos_0090.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 60,
+          "geometry": "pos_0091.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 53,
+          "geometry": "pos_0092.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 60,
+          "geometry": "pos_0093.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 46,
+          "geometry": "pos_0094.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 43,
+          "geometry": "pos_0095.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 52,
+          "geometry": "pos_0096.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 54,
+          "geometry": "pos_0097.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 67,
+          "geometry": "pos_0098.con",
+          "reason": "0"
+        },
+        {
+          "failed": false,
+          "force_calls": 49,
+          "geometry": "pos_0099.con",
+          "reason": "0"
+        }
+      ],
+      "notes": "Tuned L-BFGS on Morse bulk. Memory 100 matches the archived eon-client/morse-lbfgs setting. Every other key matches eon/morse-lbfgs. Median of the 100 counts is 53. Unrounded mean 54.18. 100 starts enter the mean. Per-start rows are in results/campaign/eon-main-morse-lbfgs-m100.starts. Run on host cursor."
+    }
+  ]
+}

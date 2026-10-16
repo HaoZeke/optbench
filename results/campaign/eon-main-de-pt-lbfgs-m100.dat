@@ -1,0 +1,12 @@
+force_calls 1312
+force_calls_min 395
+force_calls_max 2873
+force_calls_median 1031.0
+nfailed 1
+code eOn
+code_version 3.6.0
+commit 1d71c944501832bfafb955ffe13b9aae50c8efd4
+algorithm LBFGS
+template eon/de-pt-lbfgs-m100
+problem double-ended-saddle-search/pt-island
+reducer report-capped

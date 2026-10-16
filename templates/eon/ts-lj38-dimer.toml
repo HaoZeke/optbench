@@ -1,0 +1,60 @@
+id = "eon/ts-lj38-dimer"
+engine = "eon"
+problem = "tsopt/LJ38"
+code = "eOn"
+code_version = "3.6.0"
+commit = "1d71c944501832bfafb955ffe13b9aae50c8efd4"
+algorithm = "LBFGS"
+reducer = "report-capped"
+failure_cap = 10000
+note = "Default L-BFGS dimer on the 200 LJ38 starts. Memory 20 is the struct default. Potential ljcluster. The farthest pair among these geometries is under the cutoff of 40, so ljcluster matches lj/cut 40. client_displace_type is load. pos.con and displacement.con are the same geometry. direction.dat is Python random.Random(index), three draws in [0, 1) per atom. The mean keeps total_force_calls under 10000. Dimer improved is the binary default."
+
+[ini.Main]
+job = "saddle_search"
+finite_difference = 0.001
+
+[ini.Potential]
+potential = "ljcluster"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+convergence_metric = "norm"
+converged_force = 0.001
+max_move = 0.1
+max_iterations = 3000
+
+[ini."Saddle Search"]
+min_mode_method = "dimer"
+client_displace_type = "load"
+converged_force = 0.001
+max_iterations = 3000
+displace_magnitude = 0.1
+
+[ini.Dimer]
+opt_method = "cg"
+improved = true
+finite_angle = 0.005
+converged_angle = 0.1
+rotations_max = 20
+rotations_min = 1
+
+[ini.LBFGS]
+lbfgs_memory = 20
+lbfgs_inverse_curvature = 0.01
+lbfgs_max_inverse_curvature = 0.0
+lbfgs_auto_scale = true
+lbfgs_angle_reset = true
+lbfgs_distance_reset = true
+lbfgs_curvature = "reset"
+lbfgs_project_rigid = false
+lbfgs_secant = "standard"
+lbfgs_precon = "none"
+lbfgs_step = "lbfgs"
+lbfgs_h0 = "sy_yy"
+lbfgs_accept = "energy"
+lbfgs_extra_updates = 0
+lbfgs_cautious_eps = 1.0e-6
+lbfgs_cautious_alpha = 0.01
+lbfgs_precon_A = 3.0
+lbfgs_precon_mu = 1.0
+lbfgs_precon_rcut = 0.0

@@ -24,8 +24,28 @@
    <td class="num">2</td>
    <td class="text"></td>
    </tr>
+   <tr class="bench-row-fail">
+   <td class="text">eon-main-ts-lj38-dimer-m100</td>
+   <td class="text">eOn</td>
+   <td class="text">3.6.0</td>
+   <td class="num">2015</td>
+   <td class="num">151</td>
+   <td class="num">9299</td>
+   <td class="num">12</td>
+   <td class="text"></td>
+   </tr>
+   <tr class="bench-row-fail">
+   <td class="text">eon-main-ts-lj38-dimer</td>
+   <td class="text">eOn</td>
+   <td class="text">3.6.0</td>
+   <td class="num">2083</td>
+   <td class="num">151</td>
+   <td class="num">9833</td>
+   <td class="num">14</td>
+   <td class="text"></td>
+   </tr>
    </tbody></table></div>
-   
+   <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:3"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "sella-2.6.0-ts-lj38", "entry": "Sella 2.6.0 sella-2.6.0-ts-lj38", "code": "Sella", "value": 93.0, "best": true, "held": false, "failed": true}, {"id": "eon-main-ts-lj38-dimer-m100", "entry": "eOn 3.6.0 eon-main-ts-lj38-dimer-m100", "code": "eOn", "value": 2015.0, "best": false, "held": false, "failed": true}, {"id": "eon-main-ts-lj38-dimer", "entry": "eOn 3.6.0 eon-main-ts-lj38-dimer", "code": "eOn", "value": 2083.0, "best": false, "held": false, "failed": true}]}</script></figure>
    <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
@@ -146,7 +166,31 @@
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <h3>Present runs</h3>
-   <p>No present run is recorded.</p>
+   <div class="bench-table"><table>
+   <caption>Present runs. Fewer force calls first. The legacy 2014 scores follow.</caption>
+   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th><th class="text" scope="col">Tuning</th></tr></thead><tbody>
+   <tr>
+   <td class="text">eon-main-ts-pt-dimer</td>
+   <td class="text">eOn</td>
+   <td class="text">3.6.0</td>
+   <td class="num">1659</td>
+   <td class="num">100</td>
+   <td class="num">5894</td>
+   <td class="num">0</td>
+   <td class="text"></td>
+   </tr>
+   <tr>
+   <td class="text">eon-main-ts-pt-dimer-m100</td>
+   <td class="text">eOn</td>
+   <td class="text">3.6.0</td>
+   <td class="num">1680</td>
+   <td class="num">100</td>
+   <td class="num">5889</td>
+   <td class="num">0</td>
+   <td class="text"></td>
+   </tr>
+   </tbody></table></div>
+   <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "eon-main-ts-pt-dimer", "entry": "eOn 3.6.0 eon-main-ts-pt-dimer", "code": "eOn", "value": 1659.0, "best": true, "held": false, "failed": false}, {"id": "eon-main-ts-pt-dimer-m100", "entry": "eOn 3.6.0 eon-main-ts-pt-dimer-m100", "code": "eOn", "value": 1680.0, "best": false, "held": false, "failed": false}]}</script></figure>
    <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>

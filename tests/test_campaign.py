@@ -17,6 +17,16 @@ def test_shipped_templates_use_the_lj38_stop():
         _check_stop(resolve_problem(ROOT, problem_name), template)
     assert "eon-client/lbfgs-m100" in ids
     assert "eon-svn/lbfgs-m100" in ids
+    assert "eon/lj38-lbfgs" in ids
+    assert "eon/lj38-lbfgs-m100" in ids
+    assert "eon/neb-pt-lbfgs" in ids
+    assert "eon/de-lj38-lbfgs-m100" in ids
+    assert "eon/ts-pt-dimer" in ids
+    assert "eon/develop-ts-lj38-lanczos" in ids
+    assert "eon/develop-de-lj38-cap" in ids
+    assert "eon/develop-low-lj38-dimer" in ids
+    assert "eon/develop-saddle-pt-lanczos" in ids
+    assert "eon/develop-de-2ts" in ids
 
 
 def test_run_writes_one_benchmark_dat(tmp_path: Path):
@@ -72,6 +82,46 @@ def test_run_writes_one_benchmark_dat(tmp_path: Path):
     assert {row["counter"] for row in starts} == {"client"}
     assert {row["comparable"] for row in starts} == {False}
     assert "potential = lj_cluster" in (tmp_path / "work" / "cluster_0000" / "config.ini").read_text()
+
+
+def test_modern_eon_template_records_commit_and_each_start(tmp_path: Path):
+    geometries = tmp_path / "geometries"
+    geometries.mkdir()
+    (geometries / "cluster_0000.con").write_text("pos\n", encoding="utf-8")
+    (geometries / "cluster_0001.con").write_text("pos\n", encoding="utf-8")
+    client = tmp_path / "client"
+    client.write_text(
+        "#!/usr/bin/env python3\n"
+        "from pathlib import Path\n"
+        "text = Path('config.ini').read_text()\n"
+        "assert '[LBFGS]' in text\n"
+        "assert 'lbfgs_accept = energy' in text\n"
+        "calls = 181 if 'lbfgs_memory = 100' in text else 201\n"
+        "Path('results.dat').write_text("
+        "'0 termination_reason\\n%f total_force_calls\\n' % calls)\n",
+        encoding="utf-8",
+    )
+    client.chmod(client.stat().st_mode | stat.S_IEXEC)
+    output = tmp_path / "benchmark.dat"
+    summary = run(
+        ROOT,
+        "minimization/lj38",
+        "eon/lj38-lbfgs-m100",
+        client=client,
+        geometries=geometries,
+        output=output,
+        work=tmp_path / "work",
+    )
+    fields = parse(output.read_text(encoding="utf-8"))
+    assert fields["force_calls"] == "181"
+    assert fields["commit"] == "1d71c944501832bfafb955ffe13b9aae50c8efd4"
+    assert fields["problem"] == "minimization/lj38"
+    assert fields["template"] == "eon/lj38-lbfgs-m100"
+    assert summary["starts"] == 2
+    starts = (tmp_path / "benchmark.starts").read_text(encoding="utf-8").splitlines()
+    assert len(starts) == 2
+    assert '"failed": false' in starts[0]
+    assert "cluster_0000.con" in starts[0]
 
 
 def test_a_short_iteration_cap_is_refused():
