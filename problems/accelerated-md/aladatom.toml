@@ -7,3 +7,38 @@ entry_count = 1
 
 [metrics]
 required = ["percent_uncertainty", "thermostat", "true_rate", "uncertainty"]
+
+[scoring.legacy]
+label = "legacy"
+rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean. The row stays labelled legacy."
+
+[scoring.v2]
+version = "par2-wilson-bootstrap"
+par_factor = 2
+bootstrap_resamples = 2000
+bootstrap_seed = 20261015
+counter = "harness"
+required = [
+  "schema",
+  "counter",
+  "force_calls",
+  "success",
+  "failure",
+  "comparable",
+  "code",
+  "code_version",
+  "commit",
+  "tuning",
+  "par2_mean",
+  "median",
+  "median_low",
+  "median_high",
+  "wilson_low",
+  "wilson_high",
+  "n",
+  "nfailed",
+  "n_cap",
+  "n_wrong_stationary",
+  "n_divergence",
+  "n_crash",
+]

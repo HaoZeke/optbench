@@ -7,6 +7,7 @@
    <section class="bench" id="C2H4">
    <h2>C2H4</h2>
    <dl class="bench-rule">
+   <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <h3>Present runs</h3>
@@ -118,6 +119,7 @@
    <h2>EMT Pt 38 nanoparticle</h2>
    <dl class="bench-rule">
    <dt>Cap</dt><dd>10000 epochs</dd>
+   <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    </dl>
    <h3>Present runs</h3>
    <p>No present run is recorded.</p>

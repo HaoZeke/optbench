@@ -83,7 +83,13 @@
         "iqr_low": { "type": "number" },
         "iqr_high": { "type": "number" },
         "bootstrap_resamples": { "type": "integer" },
-        "bootstrap_seed": { "type": "integer" }
+        "bootstrap_seed": { "type": "integer" },
+        "includes_failures": { "type": "boolean" },
+        "success_only_mean": { "type": ["number", "null"] },
+        "n_cap": { "type": "integer" },
+        "n_wrong_stationary": { "type": "integer" },
+        "n_divergence": { "type": "integer" },
+        "n_crash": { "type": "integer" }
       }
     }
   }

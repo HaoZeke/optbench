@@ -232,6 +232,49 @@ def score(
     )
 
 
+@app.command
+def statistics(
+    output: Path = Path("results/validation/statistics.json"),
+    root: Path = Path("."),
+    results: Path = Path("results/asv"),
+    commit: str = "",
+) -> None:
+    """Score the quadratic sample from saved asv tracks. This does not rerun it."""
+    from optbench.asv_score import write_statistics_from_asv
+
+    document = write_statistics_from_asv(output, root=root, results_dir=root / results)
+    recorded = document["provenance"]["commit"]
+    if commit and not recorded.startswith(commit):
+        raise SystemExit(f"asv results are commit {recorded}, not {commit}")
+    displacement = document["displacement"]["metrics"]
+    dimer = document["dimer"]["metrics"]
+    print(
+        f"wrote {output} commit={recorded} displacement_median={displacement['median']} "
+        f"dimer_median={dimer['median']} "
+        f"displacement_failed={displacement['nfailed']} dimer_failed={dimer['nfailed']}"
+    )
+
+
+@app.command(name="validate-counter")
+def validate_counter(
+    output: Path = Path("results/validation/lj38-counter.dat"),
+    *,
+    root: Path = Path("."),
+    client: Path | None = None,
+    limit: int = 3,
+    work: Path | None = None,
+) -> None:
+    """Compare the harness counter with eonclient on an LJ38 subset."""
+    from optbench.validate_counter import validate_subset
+
+    summary = validate_subset(root, _eon_client(client), output, limit=limit, work=work)
+    print(
+        f"wrote {output} version={summary['version']} commit={summary['commit']} "
+        f"matched_client={summary['matched_client']}/{limit} "
+        f"matched_builtin={summary['matched_builtin']}/{limit}"
+    )
+
+
 def main(argv: list[str] | None = None) -> None:
     app(argv)
 

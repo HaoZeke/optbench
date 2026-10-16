@@ -8,6 +8,7 @@
    <h2>Binary Lennard-Jones 100</h2>
    <dl class="bench-rule">
    <dt>Starts</dt><dd>100</dd>
+   <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    <dt>Note</dt><dd>The archived files record energies. They do not record force calls.</dd>
    </dl>
    <h3>Present runs</h3>
@@ -50,6 +51,7 @@
    </section><section class="bench" id="lj150">
    <h2>lj150</h2>
    <dl class="bench-rule">
+   <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <h3>Present runs</h3>
@@ -106,6 +108,7 @@
    <dl class="bench-rule">
    <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
    <dt>Starts</dt><dd>100</dd>
+   <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    </dl>
    <h3>Present runs</h3>
    <p>No present run is recorded.</p>
@@ -183,6 +186,7 @@
    </section><section class="bench" id="lj75">
    <h2>lj75</h2>
    <dl class="bench-rule">
+   <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <h3>Present runs</h3>
@@ -219,6 +223,7 @@
    </section><section class="bench" id="lj98">
    <h2>lj98</h2>
    <dl class="bench-rule">
+   <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <h3>Present runs</h3>
@@ -273,6 +278,7 @@
    </section><section class="bench" id="tip4p10">
    <h2>tip4p10</h2>
    <dl class="bench-rule">
+   <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <h3>Present runs</h3>
@@ -321,6 +327,7 @@
    </section><section class="bench" id="tip4p15">
    <h2>tip4p15</h2>
    <dl class="bench-rule">
+   <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <h3>Present runs</h3>
@@ -369,6 +376,7 @@
    </section><section class="bench" id="tip4p20">
    <h2>tip4p20</h2>
    <dl class="bench-rule">
+   <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <h3>Present runs</h3>

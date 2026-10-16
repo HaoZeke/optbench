@@ -987,6 +987,7 @@ campaign = [
 ]
 dev = [
     { name = "asv" },
+    { name = "asv-runner" },
     { name = "pytest" },
 ]
 
@@ -1001,7 +1002,8 @@ campaign = [
     { name = "sella", specifier = "==2.6.0" },
 ]
 dev = [
-    { name = "asv", specifier = ">=0.6.4" },
+    { name = "asv", specifier = "==0.6.6" },
+    { name = "asv-runner", specifier = "==0.3.1" },
     { name = "pytest", specifier = ">=8.3" },
 ]
 

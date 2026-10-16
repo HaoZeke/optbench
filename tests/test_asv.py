@@ -1,33 +1,84 @@
 import json
+import os
 import stat
 from pathlib import Path
 
-from benchmarks.bench_lj38 import Lj38EonLbfgsM100, start_names
+import pytest
+
+from benchmarks.bench_lj38 import Lj38EonLbfgsM100, selected_starts, start_names
+from benchmarks.pending import code_ids, problem_ids
+from benchmarks.quadratic import QuadraticDisplacement, QuadraticDimer
+from optbench.asv_score import statistics_from_asv
 from optbench.asv_uv import Uv
 from optbench.campaign import run_client
 from optbench.samples import sample_stats
+from optbench.statistics import DISPLACEMENT_SAMPLES, SEED
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_asv_uses_the_uv_environment():
     conf = json.loads((ROOT / "asv.conf.json").read_text(encoding="utf-8"))
+    text = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
     assert conf["environment_type"] == "uv-pip"
     assert conf["plugins"] == [".optbench.asv_uv"]
     assert conf["pythons"] == ["3.12"]
+    assert conf["results_dir"] == "results/asv"
     assert "uv pip install" in conf["install_command"][0]
+    assert "asv==0.6.6" in text
+    assert "asv-runner==0.3.1" in text
+    assert "uv==0.13.1" in (ROOT / "optbench" / "asv_uv.py").read_text(encoding="utf-8")
+    assert "env/" in (ROOT / ".gitignore").read_text(encoding="utf-8").splitlines()
     assert Uv.tool_name == "uv-pip"
     assert Uv.matches("3.12") is True
     assert Uv.matches("not-a-version") is False
+    workflow = (ROOT / ".github" / "workflows" / "asv.yml").read_text(encoding="utf-8")
+    assert "HaoZeke/asv-perch@v1" in workflow
+    assert "results/asv" in workflow
 
 
-def test_each_lj38_start_is_one_asv_parameter():
+def test_each_lj38_start_is_one_asv_parameter(monkeypatch):
     names = start_names()
     assert len(names) == 1000
-    assert Lj38EonLbfgsM100.params == names
+    assert os.environ.get("OPTBENCH_ASV_FULL") != "1"
+    assert Lj38EonLbfgsM100.params[0] == ["0"]
+    assert Lj38EonLbfgsM100.params[1] == [names[0]]
+    assert Lj38EonLbfgsM100.param_names == ["seed", "start"]
     assert Lj38EonLbfgsM100.repeat == 1
-    assert Lj38EonLbfgsM100.param_names == ["start"]
     assert Lj38EonLbfgsM100.track_force_calls.unit == "force calls"
+    assert selected_starts() == names[:1]
+    monkeypatch.setenv("OPTBENCH_ASV_FULL", "1")
+    assert selected_starts() == names
+
+
+def test_quadratic_grid_uses_the_sample_seeds():
+    assert QuadraticDisplacement.param_names == ["seed", "start"]
+    assert QuadraticDisplacement.params[0] == [str(SEED + index) for index in range(DISPLACEMENT_SAMPLES)]
+    assert QuadraticDisplacement.params[1] == ["0"]
+    assert QuadraticDisplacement.track_success.unit == "fraction"
+    assert QuadraticDisplacement.track_failure_cap.unit == "count"
+    record = QuadraticDisplacement().measure(str(SEED), "0")
+    assert record["force_calls"] == 139
+    assert record["success"] is True
+    dimer = QuadraticDimer().measure(str(SEED), "0")
+    assert dimer["success"] is True
+    assert dimer["hessian_index"] == 1
+
+
+def test_pending_grid_is_every_problem_and_code():
+    from benchmarks.pending import Pending
+
+    assert Pending.param_names == ["problem", "code", "seed", "start"]
+    assert len(Pending.params[0]) == len(problem_ids())
+    assert len(problem_ids()) >= 25
+    assert code_ids() == ["eon", "rgmin", "rgsaddle", "ase", "sella", "artn"]
+    assert Pending.params[1] == code_ids()
+    assert Pending.track_force_calls.unit == "force calls"
+
+
+def test_statistics_refuses_to_invent_a_document(tmp_path: Path):
+    with pytest.raises(SystemExit):
+        statistics_from_asv(ROOT, tmp_path)
 
 
 def test_one_client_subprocess_returns_its_force_calls(tmp_path: Path):

@@ -1,0 +1,75 @@
+id = "minimization/lj38-noise"
+title = "Lennard-Jones 38 clusters with Gaussian force noise"
+suite = "minimization"
+problem = "lj38-noise"
+contract = "stated"
+remark = "No campaign is recorded for this variant. The quadratic sample is results/validation/statistics.json."
+
+[potential]
+kind = "lennard-jones"
+epsilon = 1.0
+sigma = 1.0
+cutoff = 40.0
+pair_style = "lj/cut/opt"
+
+[sample]
+starts = 1000
+geometry = "cluster_%.4i.con"
+
+[input]
+archive_path = "website/minimization/lj38/lj38-clusters.tgz"
+
+[convergence]
+norm = "l2"
+force_norm = 0.01
+force_unit = "energy/distance"
+max_force_calls = 10000
+
+[noise]
+distribution = "gaussian"
+component = "force"
+energy = "clean"
+sigma = [0.0, 1e-4, 1e-3, 1e-2]
+kappa = 3.0
+window = 5
+seed = 20261016
+rule = "Stop when the noisy force norm is at most max(clean tolerance, kappa * sigma * sqrt(components)) and, when sigma is positive, the clean energy over the last window evaluations spans at most the energy tolerance. The Hessian is the clean force. One force sample inside the floor does not stop the search."
+
+[metrics]
+required = ["force_calls", "force_calls_max", "force_calls_min", "nfailed"]
+
+[scoring.legacy]
+label = "legacy"
+rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean. The row stays labelled legacy."
+
+[scoring.v2]
+version = "par2-wilson-bootstrap"
+par_factor = 2
+bootstrap_resamples = 2000
+bootstrap_seed = 20261015
+counter = "harness"
+success = "harness force calls under the cap, the noisy force norm at the noise-aware stop, a clean Hessian index 0, and clean energy and Kabsch RMSD against the reference within max(clean tolerance, kappa * sigma)"
+required = [
+  "schema",
+  "counter",
+  "force_calls",
+  "success",
+  "failure",
+  "comparable",
+  "code",
+  "code_version",
+  "commit",
+  "tuning",
+  "par2_mean",
+  "median",
+  "median_low",
+  "median_high",
+  "wilson_low",
+  "wilson_high",
+  "n",
+  "nfailed",
+  "n_cap",
+  "n_wrong_stationary",
+  "n_divergence",
+  "n_crash",
+]

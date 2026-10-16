@@ -14,7 +14,18 @@ Verification of the Hessian uses `CountedPotential.verification`. Those calls in
 
 `optbench/runners/ase_lj38.py`, `optbench/pele_lj38.py`, and `optbench/sella_lj38.py` take the number from that wrapper. The pele files already in `results/campaign/` were charged with `result.nfev`. A new pele run is charged with wrapper entries. The stored files are not rewritten.
 
-`uv run optbench run` still shells out to `eonclient`. The client potential is inside the binary, so the harness cannot wrap it. The command writes the legacy `benchmark.dat` unchanged and a sibling `benchmark.starts.jsonl`. Each line has `counter` `client` and `comparable` false.
+`uv run optbench run` still shells out to `eonclient` and leaves the client's potential in the binary. That command writes the legacy `benchmark.dat` unchanged and a sibling `benchmark.starts.jsonl`. Each line has `counter` `client` and `comparable` false. It is not a v2 score.
+
+eonclient can be scored with the harness counter without rebuilding it. `optbench.potserver` serves one `HarnessCounter`. `python -m optbench.extpot` is the `ext_pot` program eOn already runs: one force evaluation is one socket `calculate`. `RgpotCounter.calculate` is the same counter for an rgpot client. The wire protocol, the seed sample, the failure classes, and the noise rule are `docs/v2.md`.
+
+```bash
+uv run optbench validate-counter --limit 3 --output results/validation/lj38-counter.dat
+uv run optbench statistics --output results/validation/statistics.json
+```
+
+`optbench statistics` reads asv tracks in `results/asv`. It does not rerun the sample. `docs/asv.md` is the run that produces those files.
+
+`validate-counter` needs `eonclient` on `PATH`. The output is a subset. A published Lennard-Jones 38 mean still uses all 1000 starts.
 
 ## One start
 

@@ -22,7 +22,7 @@ os.environ["MKL_NUM_THREADS"] = "1"
 os.environ["NUMEXPR_NUM_THREADS"] = "1"
 
 from .campaign import load_template, resolve_problem
-from .counter import attach_ase_counter
+from .counter import HarnessCounter, attach_ase_counter
 from .score import score_v2, summarize_all, summarize_capped, summarize_divided
 
 CONTRIBUTOR = "Rohit Goswami"
@@ -165,13 +165,14 @@ class ForceCap(RuntimeError):
 
 
 class CallCounter:
-    """One shared harness counter.
+    """One shared ``HarnessCounter`` for every calculator in a search.
 
-    ``attach_ase_counter`` increments ``state``. Index 0 is the call
-    count and index 1 is the cap, which is what the drivers already read.
+    Index 0 is the call count and index 1 is the cap, which is what the
+    drivers already read. NEB images attach this same counter.
     """
 
     def __init__(self, cap: int):
+        self.harness = HarnessCounter(cache=False)
         self.state = {
             "calls": 0,
             "verify_calls": 0,
@@ -181,7 +182,7 @@ class CallCounter:
 
     def __getitem__(self, index: int) -> int:
         if index == 0:
-            return int(self.state["calls"])
+            return int(self.harness.calls)
         if index == 1:
             return int(self.state["cap"])
         raise IndexError(index)
@@ -598,7 +599,12 @@ def _inner_calculator(potential: dict):
 def _attach(atoms, potential: dict, counter: CallCounter):
     _apply_pbc(atoms, potential)
     calculator = _inner_calculator(potential)
-    attach_ase_counter(calculator, cap=counter[1], state=counter.state)
+    attach_ase_counter(
+        calculator,
+        cap=counter[1],
+        state=counter.state,
+        counter=counter.harness,
+    )
     atoms.calc = calculator
     return atoms
 

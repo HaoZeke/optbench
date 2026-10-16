@@ -12,12 +12,17 @@
     "counter": { "enum": ["harness", "client"] },
     "comparable": { "type": "boolean" },
     "success": { "type": "boolean" },
+    "failure": {
+      "type": ["string", "null"],
+      "enum": ["cap", "wrong_stationary", "divergence", "crash", null]
+    },
     "reasons": { "type": "array", "items": { "type": "string" } },
-    "energy": { "type": "number" },
-    "force_norm": { "type": "number" },
-    "hessian_index": { "type": "integer" },
-    "expected_index": { "type": "integer" },
-    "rmsd": { "type": "number" },
+    "energy": { "type": ["number", "null"] },
+    "force_norm": { "type": ["number", "null"] },
+    "hessian_index": { "type": ["integer", "null"] },
+    "expected_index": { "type": ["integer", "null"] },
+    "rmsd": { "type": ["number", "null"] },
+    "error": { "type": "string" },
     "converged": { "type": "boolean" }
   }
 }

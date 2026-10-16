@@ -14,6 +14,8 @@ import math
 import random
 import statistics
 
+from .failures import FAILURES, failure_tally
+
 WILSON_Z = 1.959963984540054
 PAR_FACTOR = 2
 BOOTSTRAP_RESAMPLES = 2000
@@ -273,11 +275,16 @@ def score_v2(
     starts = len(records)
     low, high = wilson_interval(successes, starts)
     summary = distribution_summary(costs, resamples=resamples, seed=seed)
+    tally = failure_tally(records, cap)
+    failed = starts - successes
+    if sum(tally.values()) != failed:
+        raise RuntimeError("failure classes dropped a start")
+    finished = [float(record["force_calls"]) for record in records if record["success"]]
     summary.update(
         {
             "scoring": "par2-wilson-bootstrap",
             "successes": successes,
-            "nfailed": starts - successes,
+            "nfailed": failed,
             "success_rate": successes / starts,
             "wilson_low": low,
             "wilson_high": high,
@@ -285,6 +292,9 @@ def score_v2(
             "cap": cap,
             "par_applied": cap is not None,
             "par2_mean": summary["mean"] if cap is not None else None,
+            "includes_failures": True,
+            "success_only_mean": (sum(finished) / len(finished)) if finished else None,
+            **{f"n_{name}": tally[name] for name in FAILURES},
         }
     )
     return summary
