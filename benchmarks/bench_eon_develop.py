@@ -8,10 +8,18 @@ clock. ``setup`` does not run the client, because asv does not time
 so a suite that runs ``time_search`` first times the search once.
 
 Every force evaluation goes through ``HarnessCounter``. eonclient is
-started with ``potential = ext_pot``. ``python -m optbench.extpot``
-forwards each call to a ``PotServer`` in this process. The client's
-``total_force_calls`` is stored beside the harness count and is not the
-track. The binary is the develop source build named by ``EONCLIENT``
+started with ``potential = ext_pot`` and ``Main.parallel`` false, so one
+``ExtPot`` serves every image. A per-image clone would put dimer
+rotations and the forward image on a second instance. Saddle-search
+``results.dat`` stores only the primary ``forceCallCounter``, and the
+harness would then disagree with that field. One instance records the
+same calls in both. An AKMC repetition still stores ``sad-fcs`` plus
+``mins-fcs`` beside the harness. That sum starts after the reactant
+evaluation, one real force call per search. ``python -m optbench.extpot`` forwards each ``force()``
+to a ``PotServer`` in this process. The server refuses a search call at
+``failure_cap`` before the potential runs, and that run is ``cap``. The
+client's ``total_force_calls`` is stored beside the harness count. The
+binary is the develop source build named by ``EONCLIENT``
 (commit 7095b23ac17d49f434a5e08ccb072897ceca698e). The conda-forge 3.5.0
 pin is a different environment.
 
@@ -168,13 +176,13 @@ def classify_client(*, calls, reason, cap, overlap_ok=None, crashed=False) -> di
     """Map one client result onto the v2 failure order.
 
     ``cap`` wins when the harness count reached the budget, including a
-    non-zero client reason at that budget. A non-zero reason under the
-    cap is ``divergence``. A lowest-mode overlap miss under the cap is
-    ``wrong_stationary``. Overlap success ignores client reason 5, which
-    is the climb cap after the mode was computed.
+    client that died when the counter refused the next call. A non-zero
+    reason under the cap is ``divergence``. A lowest-mode overlap miss
+    under the cap is ``wrong_stationary``. Overlap success ignores client
+    reason 5, which is the climb cap after the mode was computed.
     """
-    if crashed or calls is None:
-        return {"force_calls": float(calls or 0), "success": False, "failure": "crash"}
+    if calls is None:
+        return {"force_calls": 0.0, "success": False, "failure": "crash"}
     count = int(calls)
     if overlap_ok is True and count < cap:
         return {"force_calls": float(count), "success": True, "failure": None}
@@ -182,6 +190,8 @@ def classify_client(*, calls, reason, cap, overlap_ok=None, crashed=False) -> di
         return {"force_calls": float(count), "success": False, "failure": "wrong_stationary"}
     if count >= cap:
         return {"force_calls": float(count), "success": False, "failure": "cap"}
+    if crashed:
+        return {"force_calls": float(count), "success": False, "failure": "crash"}
     if reason in (None, ""):
         return {"force_calls": float(count), "success": False, "failure": "crash"}
     if str(reason) != "0":
@@ -190,11 +200,19 @@ def classify_client(*, calls, reason, cap, overlap_ok=None, crashed=False) -> di
 
 
 def classify_akmc(*, calls, cap, reached, crashed) -> dict:
-    """A repetition that misses 27 saddles spent the pass budget."""
-    if crashed or calls is None:
-        return {"force_calls": float(calls or 0), "success": False, "failure": "crash"}
+    """A repetition that misses 27 saddles spent the pass budget.
+
+    A harness count at the force cap is ``cap`` even when the client
+    process died on the refused call. A crash under the cap stays a crash.
+    """
+    if calls is None:
+        return {"force_calls": 0.0, "success": False, "failure": "crash"}
     count = int(calls)
-    if reached and count < cap:
+    if count >= cap:
+        return {"force_calls": float(count), "success": False, "failure": "cap"}
+    if crashed:
+        return {"force_calls": float(count), "success": False, "failure": "crash"}
+    if reached:
         return {"force_calls": float(count), "success": True, "failure": None}
     return {"force_calls": float(count), "success": False, "failure": "cap"}
 
@@ -253,8 +271,9 @@ def _write_wrapper(path: Path) -> None:
 
 
 class _Bridge:
-    def __init__(self, potential: str):
+    def __init__(self, potential: str, cap: int):
         self.potential = potential
+        self.cap = cap
         self.server = None
         self.directory = None
 
@@ -264,7 +283,7 @@ class _Bridge:
         self.directory = Path(tempfile.mkdtemp(prefix="optbench-extpot-"))
         wrapper = self.directory / "extpot-bridge"
         _write_wrapper(wrapper)
-        self.server = PotServer(_evaluate(self.potential)).start()
+        self.server = PotServer(_evaluate(self.potential), cap=self.cap).start()
         os.environ["OPTBENCH_POTSERVER"] = self.server.endpoint()
         os.environ["OPTBENCH_ROOT"] = str(ROOT)
         return self.server, wrapper
@@ -278,13 +297,46 @@ class _Bridge:
         return False
 
 
+def _one_potential(sections: dict) -> dict:
+    """Record every ``force()`` on the instance ``results.dat`` reads.
+
+    ``ExtPot`` needs one instance per image when ``Main.parallel`` is
+    true, and that flag defaults to true. The forward image and the
+    dimer rotation trials then run on a second potential. Each of those
+    calls is one force evaluation. A saddle-search ``total_force_calls``
+    is only the primary counter, so it omits them. The harness counts
+    every subprocess. Turning parallel off keeps one ``ExtPot`` and the
+    two numbers are the same count.
+    """
+    sections.setdefault("Main", {})["parallel"] = False
+    return sections
+
+
 def _ini(template: dict, seed: int, wrapper: Path) -> str:
     from optbench.campaign import format_ini
 
     sections = json.loads(json.dumps(template["ini"]))
-    sections.setdefault("Main", {})["random_seed"] = int(seed)
+    main = sections.setdefault("Main", {})
+    main["random_seed"] = int(seed)
+    _one_potential(sections)
     sections["Potential"] = {"potential": "ext_pot", "ext_pot_path": str(wrapper)}
     return format_ini(sections)
+
+
+def kept_lowest(attempts: list[tuple], threshold: float) -> int | None:
+    """Index of the first attempt whose overlap meets ``threshold``.
+
+    Each attempt is ``(calls, overlap)`` after the counter was reset, so
+    the kept count is that attempt alone. Earlier attempts are not added.
+    The index is the last attempt when none of them meet the threshold,
+    and ``None`` when ``attempts`` is empty.
+    """
+    if not attempts:
+        return None
+    for index, (_calls, overlap) in enumerate(attempts):
+        if overlap is not None and overlap >= threshold:
+            return index
+    return len(attempts) - 1
 
 
 def _index(start: str) -> int:
@@ -398,13 +450,13 @@ def _run_lowest(template: dict, seed: int, start: str, work: Path, server, wrapp
     direction = _numpy_direction()
     sections = json.loads(json.dumps(template["ini"]))
     sections.setdefault("Main", {})["random_seed"] = int(seed)
+    _one_potential(sections)
     sections["Potential"] = {"potential": "ext_pot", "ext_pot_path": str(wrapper)}
     method = sections["Saddle Search"]["min_mode_method"]
     limit = int(template.get("iteration_limit", 1000))
     threshold = float(template.get("overlap", 0.99))
     client = _client()
-    last = None
-    kept = None
+    records = []
     for attempt in range(1, limit + 1):
         sections_k = json.loads(json.dumps(sections))
         if method == "dimer":
@@ -422,24 +474,25 @@ def _run_lowest(template: dict, seed: int, start: str, work: Path, server, wrapp
                 overlap = abs_overlap(flat_floats(found["mode_text"]), reference)
             except ValueError:
                 overlap = None
-        last = (calls, found, overlap, attempt)
+        records.append({"calls": calls, "overlap": overlap, "found": found, "attempt": attempt})
         if overlap is not None and overlap >= threshold:
-            kept = last
             break
-    chosen = kept if kept is not None else last
-    if chosen is None:
-        record = classify_client(calls=None, reason=None, cap=cap, crashed=True)
-        return record
-    calls, found, overlap, attempt = chosen
+    index = kept_lowest([(row["calls"], row["overlap"]) for row in records], threshold)
+    if index is None:
+        return classify_client(calls=None, reason=None, cap=cap, crashed=True)
+    chosen = records[index]
+    found = chosen["found"]
+    overlap = chosen["overlap"]
+    reached = overlap is not None and overlap >= threshold
     record = classify_client(
-        calls=calls,
+        calls=chosen["calls"],
         reason=found.get("reason"),
         cap=cap,
-        overlap_ok=kept is not None,
+        overlap_ok=reached,
     )
     record["client_calls"] = found.get("raw")
     record["client_reason"] = found.get("reason")
-    record["k"] = attempt if kept is not None else None
+    record["k"] = chosen["attempt"] if reached else None
     record["overlap"] = overlap
     return _guard_uncounted(record)
 
@@ -459,6 +512,7 @@ def _run_akmc(template: dict, seed: int, work: Path, server, wrapper: Path, cap:
 
     # ``load_template`` stores a Path on ``_path``. Copy the ini only.
     ini = json.loads(json.dumps(template["ini"]))
+    _one_potential(ini)
     ini["Potential"] = {"potential": "ext_pot", "ext_pot_path": str(wrapper)}
     patched = dict(template)
     patched["ini"] = ini
@@ -496,7 +550,7 @@ def run_case(template_name: str, kind: str, seed: int, start: str, *, passes: in
     started = time.monotonic()
     work = Path(tempfile.mkdtemp(prefix="optbench-eon-"))
     try:
-        with _Bridge(potential) as (server, wrapper):
+        with _Bridge(potential, cap) as (server, wrapper):
             if kind == "lowest":
                 record = _run_lowest(template, seed, start, work, server, wrapper, cap)
             elif kind == "akmc":

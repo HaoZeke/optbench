@@ -4,16 +4,20 @@ import pytest
 
 from benchmarks.bench_eon_develop import (
     EonDevelopDe2ts,
+    EonDevelopDeLj38Cap,
     EonDevelopSaddlePtDimer,
     EonDevelopSaddlePtLanczos,
     EonDevelopTsLj38Lanczos,
+    _ini,
     classify_akmc,
     classify_client,
+    kept_lowest,
     lj_cut,
     morse_cluster,
     selected,
 )
 from optbench.asv_tracks import TrackedSearch as _TrackedSearch
+from optbench.counter import HarnessCounter
 
 
 def test_default_grid_is_one_real_start():
@@ -74,6 +78,49 @@ def test_failure_classes_follow_the_harness_order():
     stalled = classify_akmc(calls=50, cap=100, reached=False, crashed=False)
     assert stalled["failure"] == "cap"
     assert stalled["success"] is False
+    spent = classify_client(calls=2500, reason=None, cap=2500, crashed=True)
+    assert spent["failure"] == "cap"
+    assert spent["success"] is False
+    assert spent["force_calls"] == 2500
+    assert classify_client(calls=2499, reason=None, cap=2500)["failure"] == "crash"
+    assert EonDevelopDeLj38Cap.cap == 2500
+
+
+def test_ext_pot_ini_uses_one_potential(tmp_path):
+    text = _ini({"ini": {"Main": {"job": "dimer"}, "Potential": {"potential": "ljcluster"}}}, 1, tmp_path / "bridge")
+    assert "potential = ext_pot" in text
+    assert "parallel = false" in text
+    assert "ext_pot_path" in text
+
+
+def test_lowest_mode_keeps_one_attempt_not_the_sum():
+    # The first attempt misses the overlap. The counter is reset before
+    # the second, so the kept cost is 2, not 28 + 2.
+    index = kept_lowest([(28, 0.2), (2, 0.995)], 0.99)
+    assert index == 1
+    attempts = [(28, 0.2), (2, 0.995)]
+    assert attempts[index][0] == 2
+    assert attempts[index][0] != sum(calls for calls, _overlap in attempts)
+    assert kept_lowest([(10, 0.1), (4, 0.4)], 0.99) == 1
+    assert kept_lowest([], 0.99) is None
+
+
+def test_reactant_prefetch_is_one_force_call_per_search():
+    """The AKMC reactant energy is a real evaluation outside sad-fcs.
+
+    Thirty-two searches add thirty-two calls. A later pass that does not
+    evaluate the potential does not add them again.
+    """
+    counter = HarnessCounter(cache=False)
+    searches = 32
+    for index in range(searches):
+        counter.charge((float(index),))
+        for step in range(3):
+            counter.charge((float(index), float(step)))
+    window = counter.calls - searches
+    assert counter.calls == searches * 4
+    assert window == searches * 3
+    assert counter.calls - window == searches
 
 
 def test_morse_and_lj_cut_kernels():
