@@ -193,7 +193,7 @@ uv run optbench statistics --output results/validation/statistics.json
 uv run asv publish
 ```
 
-`asv run --quick` does not save. `optbench statistics` reads the saved tracks and does not rerun the optimizers. CI runs the quadratic suite with `HaoZeke/asv-perch@v1` (`.github/workflows/asv.yml`).
+`optbench statistics` reads the saved tracks and does not rerun the optimizers. The saved file comes from `asv run` without `--quick`. CI runs the quadratic suite with `HaoZeke/asv-perch@v1` (`.github/workflows/asv.yml`).
 
 ## Build the site
 

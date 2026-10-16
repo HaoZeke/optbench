@@ -24,6 +24,8 @@ force calls: '139'
 seconds: '1.50s'
 ```
 
+`asv compare d4513f42 d4513f42` prints the same omission. `quadratic.QuadraticDisplacement.track_force_calls('20261016', '0')` is `139.0` on both sides. `quadratic.QuadraticKept.time_search('0', '0')` is `322±0μs`.
+
 ## 2. Per-parameter failure cause is not in the result file
 
 `Results.add_result` keeps `errcode` and `stderr` in memory. `Results.save` does not write them. The comment in `asv/results.py` says so. A failed parameter becomes `None`. A `NotImplementedError` in `setup` becomes NaN. Neither carries the exception class.
@@ -132,11 +134,36 @@ uv run python docs/asv-gaps/install_executable.py
 This run of the script printed:
 
 ```
-Could not find 'uv' in /tmp/tmpp9cby4c8/bin
+Could not find 'uv' in /tmp/tmpa0820ny2/bin
 ```
 
 The same lookup, from `asv run a20986fa^! -b quadratic` before `uv` was installed into the environment:
 
 ```
 OSError: Could not find 'uv' in /workspace/env/88db567784e3bd521507a26797493af6/bin
+```
+
+## 8. `--quick` saves, and the help says it does not
+
+`asv run --help` says a quick run's results "are not saved." `Run.run` still calls `result.save` unless the run is a dry run or an `ExistingEnvironment` without `--set-commit-hash`. `quick` is not part of that condition. `--quick` only forces `number`, `repeat`, `warmup_time`, and `rounds` to one via `extra_params` in `asv/runner.py`.
+
+Upstream: `airspeed-velocity/asv`, `asv/commands/run.py`. Set `skip_save` when `quick` is true, before `load_data` and `save`, so a smoke run cannot rewrite a result file. The help text can stay.
+
+On this tree, `uv run asv run --quick` exited 0 after 149 benchmarks and rewrote `results/asv/cursor/d4513f42-uv-pip-py3.12.json`. sha256 before that command was `b94dd44605cdf3cccd91aa87e6de147bcbbae3c15c5d4a10fc8879b59c4a2df6`. sha256 after was `74836b8328cc1fc68b440fbf390c70b3e2186ce05a27005bee744b91d4ac9daa`. The force-call tracks were the same. `started_at` and `duration` were not. The file committed after that is a run without `--quick`.
+
+```bash
+uv run python docs/asv-gaps/quick_saves.py
+```
+
+```
+help:
+Do a "quick" run, where each benchmark function is
+            run only once.  This is useful to find basic errors in the
+            benchmark functions faster.  The results are unlikely to
+            be useful, and thus are not saved.
+skip_save:
+skip_save = dry_run or (
+                            isinstance(env, environment.ExistingEnvironment)
+                            and set_commit_hash is None
+                        )
 ```

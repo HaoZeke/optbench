@@ -9,6 +9,7 @@ That gap is ``docs/asv-gaps.md``.
 
 from __future__ import annotations
 
+import ast
 import itertools
 import json
 import math
@@ -64,6 +65,16 @@ def _quadratic(root: Path):
     import benchmarks.quadratic as quadratic
 
     return quadratic
+
+
+def _unwrap(value):
+    """asv stores parameter values with ``repr`` quotes inside the JSON string."""
+    if isinstance(value, str):
+        try:
+            return ast.literal_eval(value)
+        except (SyntaxError, ValueError):
+            return value
+    return value
 
 
 def _count(value: float) -> int | float:
@@ -126,7 +137,7 @@ def track_rows(result, class_name: str) -> list[dict]:
             raise SystemExit(f"{class_name} {combo} success track is {success}")
         rows.append(
             {
-                "params": tuple(str(part) for part in combo),
+                "params": tuple(str(_unwrap(part)) for part in combo),
                 "force_calls": _count(raw["track_force_calls"]),
                 "success": ok,
                 "failure": failure,
@@ -148,7 +159,7 @@ def load_quadratic_result(results_dir: Path):
     if not found:
         raise SystemExit(
             f"{results_dir} has no QuadraticDisplacement tracks. "
-            "asv run --quick does not save. Run asv run on the commit that contains benchmarks/quadratic.py."
+            "Run asv run without --quick on the commit that contains benchmarks/quadratic.py."
         )
     commits = {result.commit_hash for result in found}
     if len(commits) != 1 or len(found) != 1:

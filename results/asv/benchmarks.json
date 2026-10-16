@@ -1,0 +1,3369 @@
+{
+    "bench_lj38.Lj38EonCg.time_search": {
+        "code": "class TrackedSearch:\n    def time_search(self, *params):\n        self.measure(*params)\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "min_run_count": 1,
+        "name": "bench_lj38.Lj38EonCg.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 1800,
+        "type": "time",
+        "unit": "seconds",
+        "version": "fa2497443f0d63056655666560b1b940a793d2f91f58eaaf9b6dd78634f86c15",
+        "warmup_time": 0
+    },
+    "bench_lj38.Lj38EonCg.track_failure_cap": {
+        "code": "class TrackedSearch:\n    def track_failure_cap(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonCg.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "373d7cf83e6f15c1e9d2c744717df93edf6bf9382d62e9a38d10d547e8cca9e1"
+    },
+    "bench_lj38.Lj38EonCg.track_failure_crash": {
+        "code": "class TrackedSearch:\n    def track_failure_crash(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonCg.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "cffe524df0a3ed978b8d05b25d97957d40c7cdde6026513b4dfa9fd770a47a92"
+    },
+    "bench_lj38.Lj38EonCg.track_failure_divergence": {
+        "code": "class TrackedSearch:\n    def track_failure_divergence(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonCg.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "d14e3c71e50f637c4ab7a4bc6b5af42271eb47a4aa55635b9d2039b30a1cf58b"
+    },
+    "bench_lj38.Lj38EonCg.track_failure_wrong_stationary": {
+        "code": "class TrackedSearch:\n    def track_failure_wrong_stationary(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonCg.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "5c6a9d026c5fb80591a0ac9c273086d5a61b536de60b5b45b4f7479a1adbac3e"
+    },
+    "bench_lj38.Lj38EonCg.track_force_calls": {
+        "code": "class TrackedSearch:\n    def track_force_calls(self, *params) -> float:\n        return float(self.record[\"force_calls\"])\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonCg.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "force calls",
+        "version": "cc592df53c84d2e319aec7ecd5e73d561fa0a01d5d6bfb8cb76f31f001e29c3f"
+    },
+    "bench_lj38.Lj38EonCg.track_success": {
+        "code": "class TrackedSearch:\n    def track_success(self, *params) -> float:\n        return 1.0 if self.record[\"success\"] else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonCg.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "fraction",
+        "version": "54289beee97255c41b6c66e2b89008ae5007043ad1c9d7012fb42f0495113694"
+    },
+    "bench_lj38.Lj38EonFire.time_search": {
+        "code": "class TrackedSearch:\n    def time_search(self, *params):\n        self.measure(*params)\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "min_run_count": 1,
+        "name": "bench_lj38.Lj38EonFire.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 1800,
+        "type": "time",
+        "unit": "seconds",
+        "version": "fa2497443f0d63056655666560b1b940a793d2f91f58eaaf9b6dd78634f86c15",
+        "warmup_time": 0
+    },
+    "bench_lj38.Lj38EonFire.track_failure_cap": {
+        "code": "class TrackedSearch:\n    def track_failure_cap(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonFire.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "373d7cf83e6f15c1e9d2c744717df93edf6bf9382d62e9a38d10d547e8cca9e1"
+    },
+    "bench_lj38.Lj38EonFire.track_failure_crash": {
+        "code": "class TrackedSearch:\n    def track_failure_crash(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonFire.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "cffe524df0a3ed978b8d05b25d97957d40c7cdde6026513b4dfa9fd770a47a92"
+    },
+    "bench_lj38.Lj38EonFire.track_failure_divergence": {
+        "code": "class TrackedSearch:\n    def track_failure_divergence(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonFire.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "d14e3c71e50f637c4ab7a4bc6b5af42271eb47a4aa55635b9d2039b30a1cf58b"
+    },
+    "bench_lj38.Lj38EonFire.track_failure_wrong_stationary": {
+        "code": "class TrackedSearch:\n    def track_failure_wrong_stationary(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonFire.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "5c6a9d026c5fb80591a0ac9c273086d5a61b536de60b5b45b4f7479a1adbac3e"
+    },
+    "bench_lj38.Lj38EonFire.track_force_calls": {
+        "code": "class TrackedSearch:\n    def track_force_calls(self, *params) -> float:\n        return float(self.record[\"force_calls\"])\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonFire.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "force calls",
+        "version": "cc592df53c84d2e319aec7ecd5e73d561fa0a01d5d6bfb8cb76f31f001e29c3f"
+    },
+    "bench_lj38.Lj38EonFire.track_success": {
+        "code": "class TrackedSearch:\n    def track_success(self, *params) -> float:\n        return 1.0 if self.record[\"success\"] else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonFire.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "fraction",
+        "version": "54289beee97255c41b6c66e2b89008ae5007043ad1c9d7012fb42f0495113694"
+    },
+    "bench_lj38.Lj38EonLbfgsM100.time_search": {
+        "code": "class TrackedSearch:\n    def time_search(self, *params):\n        self.measure(*params)\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "min_run_count": 1,
+        "name": "bench_lj38.Lj38EonLbfgsM100.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 600,
+        "type": "time",
+        "unit": "seconds",
+        "version": "fa2497443f0d63056655666560b1b940a793d2f91f58eaaf9b6dd78634f86c15",
+        "warmup_time": 0
+    },
+    "bench_lj38.Lj38EonLbfgsM100.track_failure_cap": {
+        "code": "class TrackedSearch:\n    def track_failure_cap(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonLbfgsM100.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 600,
+        "type": "track",
+        "unit": "count",
+        "version": "373d7cf83e6f15c1e9d2c744717df93edf6bf9382d62e9a38d10d547e8cca9e1"
+    },
+    "bench_lj38.Lj38EonLbfgsM100.track_failure_crash": {
+        "code": "class TrackedSearch:\n    def track_failure_crash(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonLbfgsM100.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 600,
+        "type": "track",
+        "unit": "count",
+        "version": "cffe524df0a3ed978b8d05b25d97957d40c7cdde6026513b4dfa9fd770a47a92"
+    },
+    "bench_lj38.Lj38EonLbfgsM100.track_failure_divergence": {
+        "code": "class TrackedSearch:\n    def track_failure_divergence(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonLbfgsM100.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 600,
+        "type": "track",
+        "unit": "count",
+        "version": "d14e3c71e50f637c4ab7a4bc6b5af42271eb47a4aa55635b9d2039b30a1cf58b"
+    },
+    "bench_lj38.Lj38EonLbfgsM100.track_failure_wrong_stationary": {
+        "code": "class TrackedSearch:\n    def track_failure_wrong_stationary(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonLbfgsM100.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 600,
+        "type": "track",
+        "unit": "count",
+        "version": "5c6a9d026c5fb80591a0ac9c273086d5a61b536de60b5b45b4f7479a1adbac3e"
+    },
+    "bench_lj38.Lj38EonLbfgsM100.track_force_calls": {
+        "code": "class TrackedSearch:\n    def track_force_calls(self, *params) -> float:\n        return float(self.record[\"force_calls\"])\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonLbfgsM100.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 600,
+        "type": "track",
+        "unit": "force calls",
+        "version": "cc592df53c84d2e319aec7ecd5e73d561fa0a01d5d6bfb8cb76f31f001e29c3f"
+    },
+    "bench_lj38.Lj38EonLbfgsM100.track_success": {
+        "code": "class TrackedSearch:\n    def track_success(self, *params) -> float:\n        return 1.0 if self.record[\"success\"] else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonLbfgsM100.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 600,
+        "type": "track",
+        "unit": "fraction",
+        "version": "54289beee97255c41b6c66e2b89008ae5007043ad1c9d7012fb42f0495113694"
+    },
+    "bench_lj38.Lj38EonLbfgsM20.time_search": {
+        "code": "class TrackedSearch:\n    def time_search(self, *params):\n        self.measure(*params)\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "min_run_count": 1,
+        "name": "bench_lj38.Lj38EonLbfgsM20.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 600,
+        "type": "time",
+        "unit": "seconds",
+        "version": "fa2497443f0d63056655666560b1b940a793d2f91f58eaaf9b6dd78634f86c15",
+        "warmup_time": 0
+    },
+    "bench_lj38.Lj38EonLbfgsM20.track_failure_cap": {
+        "code": "class TrackedSearch:\n    def track_failure_cap(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonLbfgsM20.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 600,
+        "type": "track",
+        "unit": "count",
+        "version": "373d7cf83e6f15c1e9d2c744717df93edf6bf9382d62e9a38d10d547e8cca9e1"
+    },
+    "bench_lj38.Lj38EonLbfgsM20.track_failure_crash": {
+        "code": "class TrackedSearch:\n    def track_failure_crash(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonLbfgsM20.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 600,
+        "type": "track",
+        "unit": "count",
+        "version": "cffe524df0a3ed978b8d05b25d97957d40c7cdde6026513b4dfa9fd770a47a92"
+    },
+    "bench_lj38.Lj38EonLbfgsM20.track_failure_divergence": {
+        "code": "class TrackedSearch:\n    def track_failure_divergence(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonLbfgsM20.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 600,
+        "type": "track",
+        "unit": "count",
+        "version": "d14e3c71e50f637c4ab7a4bc6b5af42271eb47a4aa55635b9d2039b30a1cf58b"
+    },
+    "bench_lj38.Lj38EonLbfgsM20.track_failure_wrong_stationary": {
+        "code": "class TrackedSearch:\n    def track_failure_wrong_stationary(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonLbfgsM20.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 600,
+        "type": "track",
+        "unit": "count",
+        "version": "5c6a9d026c5fb80591a0ac9c273086d5a61b536de60b5b45b4f7479a1adbac3e"
+    },
+    "bench_lj38.Lj38EonLbfgsM20.track_force_calls": {
+        "code": "class TrackedSearch:\n    def track_force_calls(self, *params) -> float:\n        return float(self.record[\"force_calls\"])\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonLbfgsM20.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 600,
+        "type": "track",
+        "unit": "force calls",
+        "version": "cc592df53c84d2e319aec7ecd5e73d561fa0a01d5d6bfb8cb76f31f001e29c3f"
+    },
+    "bench_lj38.Lj38EonLbfgsM20.track_success": {
+        "code": "class TrackedSearch:\n    def track_success(self, *params) -> float:\n        return 1.0 if self.record[\"success\"] else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonLbfgsM20.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 600,
+        "type": "track",
+        "unit": "fraction",
+        "version": "54289beee97255c41b6c66e2b89008ae5007043ad1c9d7012fb42f0495113694"
+    },
+    "bench_lj38.Lj38EonQm.time_search": {
+        "code": "class TrackedSearch:\n    def time_search(self, *params):\n        self.measure(*params)\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "min_run_count": 1,
+        "name": "bench_lj38.Lj38EonQm.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 3600,
+        "type": "time",
+        "unit": "seconds",
+        "version": "fa2497443f0d63056655666560b1b940a793d2f91f58eaaf9b6dd78634f86c15",
+        "warmup_time": 0
+    },
+    "bench_lj38.Lj38EonQm.track_failure_cap": {
+        "code": "class TrackedSearch:\n    def track_failure_cap(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonQm.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "373d7cf83e6f15c1e9d2c744717df93edf6bf9382d62e9a38d10d547e8cca9e1"
+    },
+    "bench_lj38.Lj38EonQm.track_failure_crash": {
+        "code": "class TrackedSearch:\n    def track_failure_crash(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonQm.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "cffe524df0a3ed978b8d05b25d97957d40c7cdde6026513b4dfa9fd770a47a92"
+    },
+    "bench_lj38.Lj38EonQm.track_failure_divergence": {
+        "code": "class TrackedSearch:\n    def track_failure_divergence(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonQm.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "d14e3c71e50f637c4ab7a4bc6b5af42271eb47a4aa55635b9d2039b30a1cf58b"
+    },
+    "bench_lj38.Lj38EonQm.track_failure_wrong_stationary": {
+        "code": "class TrackedSearch:\n    def track_failure_wrong_stationary(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonQm.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "5c6a9d026c5fb80591a0ac9c273086d5a61b536de60b5b45b4f7479a1adbac3e"
+    },
+    "bench_lj38.Lj38EonQm.track_force_calls": {
+        "code": "class TrackedSearch:\n    def track_force_calls(self, *params) -> float:\n        return float(self.record[\"force_calls\"])\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonQm.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "force calls",
+        "version": "cc592df53c84d2e319aec7ecd5e73d561fa0a01d5d6bfb8cb76f31f001e29c3f"
+    },
+    "bench_lj38.Lj38EonQm.track_success": {
+        "code": "class TrackedSearch:\n    def track_success(self, *params) -> float:\n        return 1.0 if self.record[\"success\"] else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonQm.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "fraction",
+        "version": "54289beee97255c41b6c66e2b89008ae5007043ad1c9d7012fb42f0495113694"
+    },
+    "bench_lj38.Lj38EonSd.time_search": {
+        "code": "class TrackedSearch:\n    def time_search(self, *params):\n        self.measure(*params)\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "min_run_count": 1,
+        "name": "bench_lj38.Lj38EonSd.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 3600,
+        "type": "time",
+        "unit": "seconds",
+        "version": "fa2497443f0d63056655666560b1b940a793d2f91f58eaaf9b6dd78634f86c15",
+        "warmup_time": 0
+    },
+    "bench_lj38.Lj38EonSd.track_failure_cap": {
+        "code": "class TrackedSearch:\n    def track_failure_cap(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonSd.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "373d7cf83e6f15c1e9d2c744717df93edf6bf9382d62e9a38d10d547e8cca9e1"
+    },
+    "bench_lj38.Lj38EonSd.track_failure_crash": {
+        "code": "class TrackedSearch:\n    def track_failure_crash(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonSd.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "cffe524df0a3ed978b8d05b25d97957d40c7cdde6026513b4dfa9fd770a47a92"
+    },
+    "bench_lj38.Lj38EonSd.track_failure_divergence": {
+        "code": "class TrackedSearch:\n    def track_failure_divergence(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonSd.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "d14e3c71e50f637c4ab7a4bc6b5af42271eb47a4aa55635b9d2039b30a1cf58b"
+    },
+    "bench_lj38.Lj38EonSd.track_failure_wrong_stationary": {
+        "code": "class TrackedSearch:\n    def track_failure_wrong_stationary(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonSd.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "5c6a9d026c5fb80591a0ac9c273086d5a61b536de60b5b45b4f7479a1adbac3e"
+    },
+    "bench_lj38.Lj38EonSd.track_force_calls": {
+        "code": "class TrackedSearch:\n    def track_force_calls(self, *params) -> float:\n        return float(self.record[\"force_calls\"])\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonSd.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "force calls",
+        "version": "cc592df53c84d2e319aec7ecd5e73d561fa0a01d5d6bfb8cb76f31f001e29c3f"
+    },
+    "bench_lj38.Lj38EonSd.track_success": {
+        "code": "class TrackedSearch:\n    def track_success(self, *params) -> float:\n        return 1.0 if self.record[\"success\"] else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonSd.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "fraction",
+        "version": "54289beee97255c41b6c66e2b89008ae5007043ad1c9d7012fb42f0495113694"
+    },
+    "bench_lj38.Lj38EonSdTwopoint.time_search": {
+        "code": "class TrackedSearch:\n    def time_search(self, *params):\n        self.measure(*params)\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "min_run_count": 1,
+        "name": "bench_lj38.Lj38EonSdTwopoint.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 1800,
+        "type": "time",
+        "unit": "seconds",
+        "version": "fa2497443f0d63056655666560b1b940a793d2f91f58eaaf9b6dd78634f86c15",
+        "warmup_time": 0
+    },
+    "bench_lj38.Lj38EonSdTwopoint.track_failure_cap": {
+        "code": "class TrackedSearch:\n    def track_failure_cap(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonSdTwopoint.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "373d7cf83e6f15c1e9d2c744717df93edf6bf9382d62e9a38d10d547e8cca9e1"
+    },
+    "bench_lj38.Lj38EonSdTwopoint.track_failure_crash": {
+        "code": "class TrackedSearch:\n    def track_failure_crash(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonSdTwopoint.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "cffe524df0a3ed978b8d05b25d97957d40c7cdde6026513b4dfa9fd770a47a92"
+    },
+    "bench_lj38.Lj38EonSdTwopoint.track_failure_divergence": {
+        "code": "class TrackedSearch:\n    def track_failure_divergence(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonSdTwopoint.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "d14e3c71e50f637c4ab7a4bc6b5af42271eb47a4aa55635b9d2039b30a1cf58b"
+    },
+    "bench_lj38.Lj38EonSdTwopoint.track_failure_wrong_stationary": {
+        "code": "class TrackedSearch:\n    def track_failure_wrong_stationary(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonSdTwopoint.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "5c6a9d026c5fb80591a0ac9c273086d5a61b536de60b5b45b4f7479a1adbac3e"
+    },
+    "bench_lj38.Lj38EonSdTwopoint.track_force_calls": {
+        "code": "class TrackedSearch:\n    def track_force_calls(self, *params) -> float:\n        return float(self.record[\"force_calls\"])\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonSdTwopoint.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "force calls",
+        "version": "cc592df53c84d2e319aec7ecd5e73d561fa0a01d5d6bfb8cb76f31f001e29c3f"
+    },
+    "bench_lj38.Lj38EonSdTwopoint.track_success": {
+        "code": "class TrackedSearch:\n    def track_success(self, *params) -> float:\n        return 1.0 if self.record[\"success\"] else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "bench_lj38.Lj38EonSdTwopoint.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'lj38-clusters/cluster_0000.con'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "fraction",
+        "version": "54289beee97255c41b6c66e2b89008ae5007043ad1c9d7012fb42f0495113694"
+    },
+    "pending.Pending.time_search": {
+        "code": "class Pending:\n    def time_search(self, problem, code, seed, start):\n        raise NotImplementedError(problem)\n\n    def setup(self, problem, code, seed, start):\n        raise NotImplementedError(\n            f\"no benchmark for {problem} with {code}; copy benchmarks/quadratic.py\"\n        )",
+        "min_run_count": 1,
+        "name": "pending.Pending.time_search",
+        "number": 1,
+        "param_names": [
+            "problem",
+            "code",
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'accelerated-md/aladatom'",
+                "'accelerated-md/standard_aladatom'",
+                "'double-ended-saddle-search/lj38'",
+                "'double-ended-saddle-search/lj38_2ts_separation'",
+                "'double-ended-saddle-search/pt-island'",
+                "'globalopt/lj100-binary'",
+                "'globalopt/lj150'",
+                "'globalopt/lj38'",
+                "'globalopt/lj75'",
+                "'globalopt/lj98'",
+                "'globalopt/tip4p10'",
+                "'globalopt/tip4p15'",
+                "'globalopt/tip4p20'",
+                "'hTST/Al'",
+                "'hTST/Pt'",
+                "'lowest-eigenvector/lj38'",
+                "'minimization/lj38-noise'",
+                "'minimization/lj38'",
+                "'minimization/morse-bulk'",
+                "'mlopt/C2H4'",
+                "'mlopt/emt-pt38'",
+                "'neb/Pt-heptamer'",
+                "'saddle-search/pt-island'",
+                "'tsopt/LJ38'",
+                "'tsopt/pt-island'"
+            ],
+            [
+                "'eon'",
+                "'rgmin'",
+                "'rgsaddle'",
+                "'ase'",
+                "'artn'"
+            ],
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 60,
+        "type": "time",
+        "unit": "seconds",
+        "version": "7a185655d710d2d5732bc4c9b1a8b338680348544fd6cc36f62eea8aaaa228ac",
+        "warmup_time": 0
+    },
+    "pending.Pending.track_force_calls": {
+        "code": "class Pending:\n    def track_force_calls(self, problem, code, seed, start) -> float:\n        raise NotImplementedError(problem)\n\n    def setup(self, problem, code, seed, start):\n        raise NotImplementedError(\n            f\"no benchmark for {problem} with {code}; copy benchmarks/quadratic.py\"\n        )",
+        "name": "pending.Pending.track_force_calls",
+        "param_names": [
+            "problem",
+            "code",
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'accelerated-md/aladatom'",
+                "'accelerated-md/standard_aladatom'",
+                "'double-ended-saddle-search/lj38'",
+                "'double-ended-saddle-search/lj38_2ts_separation'",
+                "'double-ended-saddle-search/pt-island'",
+                "'globalopt/lj100-binary'",
+                "'globalopt/lj150'",
+                "'globalopt/lj38'",
+                "'globalopt/lj75'",
+                "'globalopt/lj98'",
+                "'globalopt/tip4p10'",
+                "'globalopt/tip4p15'",
+                "'globalopt/tip4p20'",
+                "'hTST/Al'",
+                "'hTST/Pt'",
+                "'lowest-eigenvector/lj38'",
+                "'minimization/lj38-noise'",
+                "'minimization/lj38'",
+                "'minimization/morse-bulk'",
+                "'mlopt/C2H4'",
+                "'mlopt/emt-pt38'",
+                "'neb/Pt-heptamer'",
+                "'saddle-search/pt-island'",
+                "'tsopt/LJ38'",
+                "'tsopt/pt-island'"
+            ],
+            [
+                "'eon'",
+                "'rgmin'",
+                "'rgsaddle'",
+                "'ase'",
+                "'artn'"
+            ],
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 60,
+        "type": "track",
+        "unit": "force calls",
+        "version": "62109408bf41ee867fa858b93c253cff7a35866fcd818265d6de33652badb4b5"
+    },
+    "quadratic.QuadraticDimer.time_search": {
+        "code": "class TrackedSearch:\n    def time_search(self, *params):\n        self.measure(*params)\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "min_run_count": 1,
+        "name": "quadratic.QuadraticDimer.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'",
+                "'20261017'",
+                "'20261018'",
+                "'20261019'",
+                "'20261020'",
+                "'20261021'",
+                "'20261022'",
+                "'20261023'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 120,
+        "type": "time",
+        "unit": "seconds",
+        "version": "fa2497443f0d63056655666560b1b940a793d2f91f58eaaf9b6dd78634f86c15",
+        "warmup_time": 0
+    },
+    "quadratic.QuadraticDimer.track_failure_cap": {
+        "code": "class TrackedSearch:\n    def track_failure_cap(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticDimer.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'",
+                "'20261017'",
+                "'20261018'",
+                "'20261019'",
+                "'20261020'",
+                "'20261021'",
+                "'20261022'",
+                "'20261023'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "373d7cf83e6f15c1e9d2c744717df93edf6bf9382d62e9a38d10d547e8cca9e1"
+    },
+    "quadratic.QuadraticDimer.track_failure_crash": {
+        "code": "class TrackedSearch:\n    def track_failure_crash(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticDimer.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'",
+                "'20261017'",
+                "'20261018'",
+                "'20261019'",
+                "'20261020'",
+                "'20261021'",
+                "'20261022'",
+                "'20261023'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "cffe524df0a3ed978b8d05b25d97957d40c7cdde6026513b4dfa9fd770a47a92"
+    },
+    "quadratic.QuadraticDimer.track_failure_divergence": {
+        "code": "class TrackedSearch:\n    def track_failure_divergence(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticDimer.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'",
+                "'20261017'",
+                "'20261018'",
+                "'20261019'",
+                "'20261020'",
+                "'20261021'",
+                "'20261022'",
+                "'20261023'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "d14e3c71e50f637c4ab7a4bc6b5af42271eb47a4aa55635b9d2039b30a1cf58b"
+    },
+    "quadratic.QuadraticDimer.track_failure_wrong_stationary": {
+        "code": "class TrackedSearch:\n    def track_failure_wrong_stationary(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticDimer.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'",
+                "'20261017'",
+                "'20261018'",
+                "'20261019'",
+                "'20261020'",
+                "'20261021'",
+                "'20261022'",
+                "'20261023'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "5c6a9d026c5fb80591a0ac9c273086d5a61b536de60b5b45b4f7479a1adbac3e"
+    },
+    "quadratic.QuadraticDimer.track_force_calls": {
+        "code": "class TrackedSearch:\n    def track_force_calls(self, *params) -> float:\n        return float(self.record[\"force_calls\"])\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticDimer.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'",
+                "'20261017'",
+                "'20261018'",
+                "'20261019'",
+                "'20261020'",
+                "'20261021'",
+                "'20261022'",
+                "'20261023'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "force calls",
+        "version": "cc592df53c84d2e319aec7ecd5e73d561fa0a01d5d6bfb8cb76f31f001e29c3f"
+    },
+    "quadratic.QuadraticDimer.track_success": {
+        "code": "class TrackedSearch:\n    def track_success(self, *params) -> float:\n        return 1.0 if self.record[\"success\"] else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticDimer.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'",
+                "'20261017'",
+                "'20261018'",
+                "'20261019'",
+                "'20261020'",
+                "'20261021'",
+                "'20261022'",
+                "'20261023'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "fraction",
+        "version": "54289beee97255c41b6c66e2b89008ae5007043ad1c9d7012fb42f0495113694"
+    },
+    "quadratic.QuadraticDisplacement.time_search": {
+        "code": "class TrackedSearch:\n    def time_search(self, *params):\n        self.measure(*params)\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "min_run_count": 1,
+        "name": "quadratic.QuadraticDisplacement.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'",
+                "'20261017'",
+                "'20261018'",
+                "'20261019'",
+                "'20261020'",
+                "'20261021'",
+                "'20261022'",
+                "'20261023'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 120,
+        "type": "time",
+        "unit": "seconds",
+        "version": "fa2497443f0d63056655666560b1b940a793d2f91f58eaaf9b6dd78634f86c15",
+        "warmup_time": 0
+    },
+    "quadratic.QuadraticDisplacement.track_failure_cap": {
+        "code": "class TrackedSearch:\n    def track_failure_cap(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticDisplacement.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'",
+                "'20261017'",
+                "'20261018'",
+                "'20261019'",
+                "'20261020'",
+                "'20261021'",
+                "'20261022'",
+                "'20261023'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "373d7cf83e6f15c1e9d2c744717df93edf6bf9382d62e9a38d10d547e8cca9e1"
+    },
+    "quadratic.QuadraticDisplacement.track_failure_crash": {
+        "code": "class TrackedSearch:\n    def track_failure_crash(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticDisplacement.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'",
+                "'20261017'",
+                "'20261018'",
+                "'20261019'",
+                "'20261020'",
+                "'20261021'",
+                "'20261022'",
+                "'20261023'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "cffe524df0a3ed978b8d05b25d97957d40c7cdde6026513b4dfa9fd770a47a92"
+    },
+    "quadratic.QuadraticDisplacement.track_failure_divergence": {
+        "code": "class TrackedSearch:\n    def track_failure_divergence(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticDisplacement.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'",
+                "'20261017'",
+                "'20261018'",
+                "'20261019'",
+                "'20261020'",
+                "'20261021'",
+                "'20261022'",
+                "'20261023'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "d14e3c71e50f637c4ab7a4bc6b5af42271eb47a4aa55635b9d2039b30a1cf58b"
+    },
+    "quadratic.QuadraticDisplacement.track_failure_wrong_stationary": {
+        "code": "class TrackedSearch:\n    def track_failure_wrong_stationary(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticDisplacement.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'",
+                "'20261017'",
+                "'20261018'",
+                "'20261019'",
+                "'20261020'",
+                "'20261021'",
+                "'20261022'",
+                "'20261023'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "5c6a9d026c5fb80591a0ac9c273086d5a61b536de60b5b45b4f7479a1adbac3e"
+    },
+    "quadratic.QuadraticDisplacement.track_force_calls": {
+        "code": "class TrackedSearch:\n    def track_force_calls(self, *params) -> float:\n        return float(self.record[\"force_calls\"])\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticDisplacement.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'",
+                "'20261017'",
+                "'20261018'",
+                "'20261019'",
+                "'20261020'",
+                "'20261021'",
+                "'20261022'",
+                "'20261023'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "force calls",
+        "version": "cc592df53c84d2e319aec7ecd5e73d561fa0a01d5d6bfb8cb76f31f001e29c3f"
+    },
+    "quadratic.QuadraticDisplacement.track_success": {
+        "code": "class TrackedSearch:\n    def track_success(self, *params) -> float:\n        return 1.0 if self.record[\"success\"] else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticDisplacement.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'",
+                "'20261017'",
+                "'20261018'",
+                "'20261019'",
+                "'20261020'",
+                "'20261021'",
+                "'20261022'",
+                "'20261023'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "fraction",
+        "version": "54289beee97255c41b6c66e2b89008ae5007043ad1c9d7012fb42f0495113694"
+    },
+    "quadratic.QuadraticFailureCap.time_search": {
+        "code": "class TrackedSearch:\n    def time_search(self, *params):\n        self.measure(*params)\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "min_run_count": 1,
+        "name": "quadratic.QuadraticFailureCap.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 120,
+        "type": "time",
+        "unit": "seconds",
+        "version": "fa2497443f0d63056655666560b1b940a793d2f91f58eaaf9b6dd78634f86c15",
+        "warmup_time": 0
+    },
+    "quadratic.QuadraticFailureCap.track_failure_cap": {
+        "code": "class TrackedSearch:\n    def track_failure_cap(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticFailureCap.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "373d7cf83e6f15c1e9d2c744717df93edf6bf9382d62e9a38d10d547e8cca9e1"
+    },
+    "quadratic.QuadraticFailureCap.track_failure_crash": {
+        "code": "class TrackedSearch:\n    def track_failure_crash(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticFailureCap.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "cffe524df0a3ed978b8d05b25d97957d40c7cdde6026513b4dfa9fd770a47a92"
+    },
+    "quadratic.QuadraticFailureCap.track_failure_divergence": {
+        "code": "class TrackedSearch:\n    def track_failure_divergence(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticFailureCap.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "d14e3c71e50f637c4ab7a4bc6b5af42271eb47a4aa55635b9d2039b30a1cf58b"
+    },
+    "quadratic.QuadraticFailureCap.track_failure_wrong_stationary": {
+        "code": "class TrackedSearch:\n    def track_failure_wrong_stationary(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticFailureCap.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "5c6a9d026c5fb80591a0ac9c273086d5a61b536de60b5b45b4f7479a1adbac3e"
+    },
+    "quadratic.QuadraticFailureCap.track_force_calls": {
+        "code": "class TrackedSearch:\n    def track_force_calls(self, *params) -> float:\n        return float(self.record[\"force_calls\"])\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticFailureCap.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "force calls",
+        "version": "cc592df53c84d2e319aec7ecd5e73d561fa0a01d5d6bfb8cb76f31f001e29c3f"
+    },
+    "quadratic.QuadraticFailureCap.track_success": {
+        "code": "class TrackedSearch:\n    def track_success(self, *params) -> float:\n        return 1.0 if self.record[\"success\"] else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticFailureCap.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "fraction",
+        "version": "54289beee97255c41b6c66e2b89008ae5007043ad1c9d7012fb42f0495113694"
+    },
+    "quadratic.QuadraticFailureCrash.time_search": {
+        "code": "class TrackedSearch:\n    def time_search(self, *params):\n        self.measure(*params)\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "min_run_count": 1,
+        "name": "quadratic.QuadraticFailureCrash.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 120,
+        "type": "time",
+        "unit": "seconds",
+        "version": "fa2497443f0d63056655666560b1b940a793d2f91f58eaaf9b6dd78634f86c15",
+        "warmup_time": 0
+    },
+    "quadratic.QuadraticFailureCrash.track_failure_cap": {
+        "code": "class TrackedSearch:\n    def track_failure_cap(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticFailureCrash.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "373d7cf83e6f15c1e9d2c744717df93edf6bf9382d62e9a38d10d547e8cca9e1"
+    },
+    "quadratic.QuadraticFailureCrash.track_failure_crash": {
+        "code": "class TrackedSearch:\n    def track_failure_crash(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticFailureCrash.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "cffe524df0a3ed978b8d05b25d97957d40c7cdde6026513b4dfa9fd770a47a92"
+    },
+    "quadratic.QuadraticFailureCrash.track_failure_divergence": {
+        "code": "class TrackedSearch:\n    def track_failure_divergence(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticFailureCrash.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "d14e3c71e50f637c4ab7a4bc6b5af42271eb47a4aa55635b9d2039b30a1cf58b"
+    },
+    "quadratic.QuadraticFailureCrash.track_failure_wrong_stationary": {
+        "code": "class TrackedSearch:\n    def track_failure_wrong_stationary(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticFailureCrash.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "5c6a9d026c5fb80591a0ac9c273086d5a61b536de60b5b45b4f7479a1adbac3e"
+    },
+    "quadratic.QuadraticFailureCrash.track_force_calls": {
+        "code": "class TrackedSearch:\n    def track_force_calls(self, *params) -> float:\n        return float(self.record[\"force_calls\"])\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticFailureCrash.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "force calls",
+        "version": "cc592df53c84d2e319aec7ecd5e73d561fa0a01d5d6bfb8cb76f31f001e29c3f"
+    },
+    "quadratic.QuadraticFailureCrash.track_success": {
+        "code": "class TrackedSearch:\n    def track_success(self, *params) -> float:\n        return 1.0 if self.record[\"success\"] else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticFailureCrash.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "fraction",
+        "version": "54289beee97255c41b6c66e2b89008ae5007043ad1c9d7012fb42f0495113694"
+    },
+    "quadratic.QuadraticFailureDivergence.time_search": {
+        "code": "class TrackedSearch:\n    def time_search(self, *params):\n        self.measure(*params)\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "min_run_count": 1,
+        "name": "quadratic.QuadraticFailureDivergence.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 120,
+        "type": "time",
+        "unit": "seconds",
+        "version": "fa2497443f0d63056655666560b1b940a793d2f91f58eaaf9b6dd78634f86c15",
+        "warmup_time": 0
+    },
+    "quadratic.QuadraticFailureDivergence.track_failure_cap": {
+        "code": "class TrackedSearch:\n    def track_failure_cap(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticFailureDivergence.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "373d7cf83e6f15c1e9d2c744717df93edf6bf9382d62e9a38d10d547e8cca9e1"
+    },
+    "quadratic.QuadraticFailureDivergence.track_failure_crash": {
+        "code": "class TrackedSearch:\n    def track_failure_crash(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticFailureDivergence.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "cffe524df0a3ed978b8d05b25d97957d40c7cdde6026513b4dfa9fd770a47a92"
+    },
+    "quadratic.QuadraticFailureDivergence.track_failure_divergence": {
+        "code": "class TrackedSearch:\n    def track_failure_divergence(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticFailureDivergence.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "d14e3c71e50f637c4ab7a4bc6b5af42271eb47a4aa55635b9d2039b30a1cf58b"
+    },
+    "quadratic.QuadraticFailureDivergence.track_failure_wrong_stationary": {
+        "code": "class TrackedSearch:\n    def track_failure_wrong_stationary(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticFailureDivergence.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "5c6a9d026c5fb80591a0ac9c273086d5a61b536de60b5b45b4f7479a1adbac3e"
+    },
+    "quadratic.QuadraticFailureDivergence.track_force_calls": {
+        "code": "class TrackedSearch:\n    def track_force_calls(self, *params) -> float:\n        return float(self.record[\"force_calls\"])\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticFailureDivergence.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "force calls",
+        "version": "cc592df53c84d2e319aec7ecd5e73d561fa0a01d5d6bfb8cb76f31f001e29c3f"
+    },
+    "quadratic.QuadraticFailureDivergence.track_success": {
+        "code": "class TrackedSearch:\n    def track_success(self, *params) -> float:\n        return 1.0 if self.record[\"success\"] else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticFailureDivergence.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "fraction",
+        "version": "54289beee97255c41b6c66e2b89008ae5007043ad1c9d7012fb42f0495113694"
+    },
+    "quadratic.QuadraticFailureWrongStationary.time_search": {
+        "code": "class TrackedSearch:\n    def time_search(self, *params):\n        self.measure(*params)\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "min_run_count": 1,
+        "name": "quadratic.QuadraticFailureWrongStationary.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 120,
+        "type": "time",
+        "unit": "seconds",
+        "version": "fa2497443f0d63056655666560b1b940a793d2f91f58eaaf9b6dd78634f86c15",
+        "warmup_time": 0
+    },
+    "quadratic.QuadraticFailureWrongStationary.track_failure_cap": {
+        "code": "class TrackedSearch:\n    def track_failure_cap(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticFailureWrongStationary.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "373d7cf83e6f15c1e9d2c744717df93edf6bf9382d62e9a38d10d547e8cca9e1"
+    },
+    "quadratic.QuadraticFailureWrongStationary.track_failure_crash": {
+        "code": "class TrackedSearch:\n    def track_failure_crash(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticFailureWrongStationary.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "cffe524df0a3ed978b8d05b25d97957d40c7cdde6026513b4dfa9fd770a47a92"
+    },
+    "quadratic.QuadraticFailureWrongStationary.track_failure_divergence": {
+        "code": "class TrackedSearch:\n    def track_failure_divergence(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticFailureWrongStationary.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "d14e3c71e50f637c4ab7a4bc6b5af42271eb47a4aa55635b9d2039b30a1cf58b"
+    },
+    "quadratic.QuadraticFailureWrongStationary.track_failure_wrong_stationary": {
+        "code": "class TrackedSearch:\n    def track_failure_wrong_stationary(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticFailureWrongStationary.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "5c6a9d026c5fb80591a0ac9c273086d5a61b536de60b5b45b4f7479a1adbac3e"
+    },
+    "quadratic.QuadraticFailureWrongStationary.track_force_calls": {
+        "code": "class TrackedSearch:\n    def track_force_calls(self, *params) -> float:\n        return float(self.record[\"force_calls\"])\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticFailureWrongStationary.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "force calls",
+        "version": "cc592df53c84d2e319aec7ecd5e73d561fa0a01d5d6bfb8cb76f31f001e29c3f"
+    },
+    "quadratic.QuadraticFailureWrongStationary.track_success": {
+        "code": "class TrackedSearch:\n    def track_success(self, *params) -> float:\n        return 1.0 if self.record[\"success\"] else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticFailureWrongStationary.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "fraction",
+        "version": "54289beee97255c41b6c66e2b89008ae5007043ad1c9d7012fb42f0495113694"
+    },
+    "quadratic.QuadraticKept.time_search": {
+        "code": "class TrackedSearch:\n    def time_search(self, *params):\n        self.measure(*params)\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "min_run_count": 1,
+        "name": "quadratic.QuadraticKept.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 120,
+        "type": "time",
+        "unit": "seconds",
+        "version": "fa2497443f0d63056655666560b1b940a793d2f91f58eaaf9b6dd78634f86c15",
+        "warmup_time": 0
+    },
+    "quadratic.QuadraticKept.track_failure_cap": {
+        "code": "class TrackedSearch:\n    def track_failure_cap(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticKept.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "373d7cf83e6f15c1e9d2c744717df93edf6bf9382d62e9a38d10d547e8cca9e1"
+    },
+    "quadratic.QuadraticKept.track_failure_crash": {
+        "code": "class TrackedSearch:\n    def track_failure_crash(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticKept.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "cffe524df0a3ed978b8d05b25d97957d40c7cdde6026513b4dfa9fd770a47a92"
+    },
+    "quadratic.QuadraticKept.track_failure_divergence": {
+        "code": "class TrackedSearch:\n    def track_failure_divergence(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticKept.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "d14e3c71e50f637c4ab7a4bc6b5af42271eb47a4aa55635b9d2039b30a1cf58b"
+    },
+    "quadratic.QuadraticKept.track_failure_wrong_stationary": {
+        "code": "class TrackedSearch:\n    def track_failure_wrong_stationary(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticKept.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "5c6a9d026c5fb80591a0ac9c273086d5a61b536de60b5b45b4f7479a1adbac3e"
+    },
+    "quadratic.QuadraticKept.track_force_calls": {
+        "code": "class TrackedSearch:\n    def track_force_calls(self, *params) -> float:\n        return float(self.record[\"force_calls\"])\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticKept.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "force calls",
+        "version": "cc592df53c84d2e319aec7ecd5e73d561fa0a01d5d6bfb8cb76f31f001e29c3f"
+    },
+    "quadratic.QuadraticKept.track_success": {
+        "code": "class TrackedSearch:\n    def track_success(self, *params) -> float:\n        return 1.0 if self.record[\"success\"] else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticKept.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "fraction",
+        "version": "54289beee97255c41b6c66e2b89008ae5007043ad1c9d7012fb42f0495113694"
+    },
+    "quadratic.QuadraticNoise0.time_search": {
+        "code": "class TrackedSearch:\n    def time_search(self, *params):\n        self.measure(*params)\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "min_run_count": 1,
+        "name": "quadratic.QuadraticNoise0.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 120,
+        "type": "time",
+        "unit": "seconds",
+        "version": "fa2497443f0d63056655666560b1b940a793d2f91f58eaaf9b6dd78634f86c15",
+        "warmup_time": 0
+    },
+    "quadratic.QuadraticNoise0.track_failure_cap": {
+        "code": "class TrackedSearch:\n    def track_failure_cap(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticNoise0.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "373d7cf83e6f15c1e9d2c744717df93edf6bf9382d62e9a38d10d547e8cca9e1"
+    },
+    "quadratic.QuadraticNoise0.track_failure_crash": {
+        "code": "class TrackedSearch:\n    def track_failure_crash(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticNoise0.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "cffe524df0a3ed978b8d05b25d97957d40c7cdde6026513b4dfa9fd770a47a92"
+    },
+    "quadratic.QuadraticNoise0.track_failure_divergence": {
+        "code": "class TrackedSearch:\n    def track_failure_divergence(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticNoise0.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "d14e3c71e50f637c4ab7a4bc6b5af42271eb47a4aa55635b9d2039b30a1cf58b"
+    },
+    "quadratic.QuadraticNoise0.track_failure_wrong_stationary": {
+        "code": "class TrackedSearch:\n    def track_failure_wrong_stationary(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticNoise0.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "5c6a9d026c5fb80591a0ac9c273086d5a61b536de60b5b45b4f7479a1adbac3e"
+    },
+    "quadratic.QuadraticNoise0.track_force_calls": {
+        "code": "class TrackedSearch:\n    def track_force_calls(self, *params) -> float:\n        return float(self.record[\"force_calls\"])\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticNoise0.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "force calls",
+        "version": "cc592df53c84d2e319aec7ecd5e73d561fa0a01d5d6bfb8cb76f31f001e29c3f"
+    },
+    "quadratic.QuadraticNoise0.track_success": {
+        "code": "class TrackedSearch:\n    def track_success(self, *params) -> float:\n        return 1.0 if self.record[\"success\"] else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticNoise0.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "fraction",
+        "version": "54289beee97255c41b6c66e2b89008ae5007043ad1c9d7012fb42f0495113694"
+    },
+    "quadratic.QuadraticNoise1em02.time_search": {
+        "code": "class TrackedSearch:\n    def time_search(self, *params):\n        self.measure(*params)\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "min_run_count": 1,
+        "name": "quadratic.QuadraticNoise1em02.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 120,
+        "type": "time",
+        "unit": "seconds",
+        "version": "fa2497443f0d63056655666560b1b940a793d2f91f58eaaf9b6dd78634f86c15",
+        "warmup_time": 0
+    },
+    "quadratic.QuadraticNoise1em02.track_failure_cap": {
+        "code": "class TrackedSearch:\n    def track_failure_cap(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticNoise1em02.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "373d7cf83e6f15c1e9d2c744717df93edf6bf9382d62e9a38d10d547e8cca9e1"
+    },
+    "quadratic.QuadraticNoise1em02.track_failure_crash": {
+        "code": "class TrackedSearch:\n    def track_failure_crash(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticNoise1em02.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "cffe524df0a3ed978b8d05b25d97957d40c7cdde6026513b4dfa9fd770a47a92"
+    },
+    "quadratic.QuadraticNoise1em02.track_failure_divergence": {
+        "code": "class TrackedSearch:\n    def track_failure_divergence(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticNoise1em02.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "d14e3c71e50f637c4ab7a4bc6b5af42271eb47a4aa55635b9d2039b30a1cf58b"
+    },
+    "quadratic.QuadraticNoise1em02.track_failure_wrong_stationary": {
+        "code": "class TrackedSearch:\n    def track_failure_wrong_stationary(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticNoise1em02.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "5c6a9d026c5fb80591a0ac9c273086d5a61b536de60b5b45b4f7479a1adbac3e"
+    },
+    "quadratic.QuadraticNoise1em02.track_force_calls": {
+        "code": "class TrackedSearch:\n    def track_force_calls(self, *params) -> float:\n        return float(self.record[\"force_calls\"])\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticNoise1em02.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "force calls",
+        "version": "cc592df53c84d2e319aec7ecd5e73d561fa0a01d5d6bfb8cb76f31f001e29c3f"
+    },
+    "quadratic.QuadraticNoise1em02.track_success": {
+        "code": "class TrackedSearch:\n    def track_success(self, *params) -> float:\n        return 1.0 if self.record[\"success\"] else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticNoise1em02.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "fraction",
+        "version": "54289beee97255c41b6c66e2b89008ae5007043ad1c9d7012fb42f0495113694"
+    },
+    "quadratic.QuadraticNoise1em03.time_search": {
+        "code": "class TrackedSearch:\n    def time_search(self, *params):\n        self.measure(*params)\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "min_run_count": 1,
+        "name": "quadratic.QuadraticNoise1em03.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 120,
+        "type": "time",
+        "unit": "seconds",
+        "version": "fa2497443f0d63056655666560b1b940a793d2f91f58eaaf9b6dd78634f86c15",
+        "warmup_time": 0
+    },
+    "quadratic.QuadraticNoise1em03.track_failure_cap": {
+        "code": "class TrackedSearch:\n    def track_failure_cap(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticNoise1em03.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "373d7cf83e6f15c1e9d2c744717df93edf6bf9382d62e9a38d10d547e8cca9e1"
+    },
+    "quadratic.QuadraticNoise1em03.track_failure_crash": {
+        "code": "class TrackedSearch:\n    def track_failure_crash(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticNoise1em03.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "cffe524df0a3ed978b8d05b25d97957d40c7cdde6026513b4dfa9fd770a47a92"
+    },
+    "quadratic.QuadraticNoise1em03.track_failure_divergence": {
+        "code": "class TrackedSearch:\n    def track_failure_divergence(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticNoise1em03.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "d14e3c71e50f637c4ab7a4bc6b5af42271eb47a4aa55635b9d2039b30a1cf58b"
+    },
+    "quadratic.QuadraticNoise1em03.track_failure_wrong_stationary": {
+        "code": "class TrackedSearch:\n    def track_failure_wrong_stationary(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticNoise1em03.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "5c6a9d026c5fb80591a0ac9c273086d5a61b536de60b5b45b4f7479a1adbac3e"
+    },
+    "quadratic.QuadraticNoise1em03.track_force_calls": {
+        "code": "class TrackedSearch:\n    def track_force_calls(self, *params) -> float:\n        return float(self.record[\"force_calls\"])\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticNoise1em03.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "force calls",
+        "version": "cc592df53c84d2e319aec7ecd5e73d561fa0a01d5d6bfb8cb76f31f001e29c3f"
+    },
+    "quadratic.QuadraticNoise1em03.track_success": {
+        "code": "class TrackedSearch:\n    def track_success(self, *params) -> float:\n        return 1.0 if self.record[\"success\"] else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticNoise1em03.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "fraction",
+        "version": "54289beee97255c41b6c66e2b89008ae5007043ad1c9d7012fb42f0495113694"
+    },
+    "quadratic.QuadraticNoise1em04.time_search": {
+        "code": "class TrackedSearch:\n    def time_search(self, *params):\n        self.measure(*params)\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "min_run_count": 1,
+        "name": "quadratic.QuadraticNoise1em04.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 120,
+        "type": "time",
+        "unit": "seconds",
+        "version": "fa2497443f0d63056655666560b1b940a793d2f91f58eaaf9b6dd78634f86c15",
+        "warmup_time": 0
+    },
+    "quadratic.QuadraticNoise1em04.track_failure_cap": {
+        "code": "class TrackedSearch:\n    def track_failure_cap(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticNoise1em04.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "373d7cf83e6f15c1e9d2c744717df93edf6bf9382d62e9a38d10d547e8cca9e1"
+    },
+    "quadratic.QuadraticNoise1em04.track_failure_crash": {
+        "code": "class TrackedSearch:\n    def track_failure_crash(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticNoise1em04.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "cffe524df0a3ed978b8d05b25d97957d40c7cdde6026513b4dfa9fd770a47a92"
+    },
+    "quadratic.QuadraticNoise1em04.track_failure_divergence": {
+        "code": "class TrackedSearch:\n    def track_failure_divergence(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticNoise1em04.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "d14e3c71e50f637c4ab7a4bc6b5af42271eb47a4aa55635b9d2039b30a1cf58b"
+    },
+    "quadratic.QuadraticNoise1em04.track_failure_wrong_stationary": {
+        "code": "class TrackedSearch:\n    def track_failure_wrong_stationary(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticNoise1em04.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "5c6a9d026c5fb80591a0ac9c273086d5a61b536de60b5b45b4f7479a1adbac3e"
+    },
+    "quadratic.QuadraticNoise1em04.track_force_calls": {
+        "code": "class TrackedSearch:\n    def track_force_calls(self, *params) -> float:\n        return float(self.record[\"force_calls\"])\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticNoise1em04.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "force calls",
+        "version": "cc592df53c84d2e319aec7ecd5e73d561fa0a01d5d6bfb8cb76f31f001e29c3f"
+    },
+    "quadratic.QuadraticNoise1em04.track_success": {
+        "code": "class TrackedSearch:\n    def track_success(self, *params) -> float:\n        return 1.0 if self.record[\"success\"] else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticNoise1em04.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261016'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "fraction",
+        "version": "54289beee97255c41b6c66e2b89008ae5007043ad1c9d7012fb42f0495113694"
+    },
+    "quadratic.QuadraticProfileCap30.time_search": {
+        "code": "class TrackedSearch:\n    def time_search(self, *params):\n        self.measure(*params)\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "min_run_count": 1,
+        "name": "quadratic.QuadraticProfileCap30.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'11'"
+            ],
+            [
+                "'0'",
+                "'1'",
+                "'2'",
+                "'3'",
+                "'4'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 120,
+        "type": "time",
+        "unit": "seconds",
+        "version": "fa2497443f0d63056655666560b1b940a793d2f91f58eaaf9b6dd78634f86c15",
+        "warmup_time": 0
+    },
+    "quadratic.QuadraticProfileCap30.track_failure_cap": {
+        "code": "class TrackedSearch:\n    def track_failure_cap(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticProfileCap30.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'11'"
+            ],
+            [
+                "'0'",
+                "'1'",
+                "'2'",
+                "'3'",
+                "'4'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "373d7cf83e6f15c1e9d2c744717df93edf6bf9382d62e9a38d10d547e8cca9e1"
+    },
+    "quadratic.QuadraticProfileCap30.track_failure_crash": {
+        "code": "class TrackedSearch:\n    def track_failure_crash(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticProfileCap30.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'11'"
+            ],
+            [
+                "'0'",
+                "'1'",
+                "'2'",
+                "'3'",
+                "'4'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "cffe524df0a3ed978b8d05b25d97957d40c7cdde6026513b4dfa9fd770a47a92"
+    },
+    "quadratic.QuadraticProfileCap30.track_failure_divergence": {
+        "code": "class TrackedSearch:\n    def track_failure_divergence(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticProfileCap30.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'11'"
+            ],
+            [
+                "'0'",
+                "'1'",
+                "'2'",
+                "'3'",
+                "'4'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "d14e3c71e50f637c4ab7a4bc6b5af42271eb47a4aa55635b9d2039b30a1cf58b"
+    },
+    "quadratic.QuadraticProfileCap30.track_failure_wrong_stationary": {
+        "code": "class TrackedSearch:\n    def track_failure_wrong_stationary(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticProfileCap30.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'11'"
+            ],
+            [
+                "'0'",
+                "'1'",
+                "'2'",
+                "'3'",
+                "'4'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "5c6a9d026c5fb80591a0ac9c273086d5a61b536de60b5b45b4f7479a1adbac3e"
+    },
+    "quadratic.QuadraticProfileCap30.track_force_calls": {
+        "code": "class TrackedSearch:\n    def track_force_calls(self, *params) -> float:\n        return float(self.record[\"force_calls\"])\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticProfileCap30.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'11'"
+            ],
+            [
+                "'0'",
+                "'1'",
+                "'2'",
+                "'3'",
+                "'4'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "force calls",
+        "version": "cc592df53c84d2e319aec7ecd5e73d561fa0a01d5d6bfb8cb76f31f001e29c3f"
+    },
+    "quadratic.QuadraticProfileCap30.track_success": {
+        "code": "class TrackedSearch:\n    def track_success(self, *params) -> float:\n        return 1.0 if self.record[\"success\"] else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticProfileCap30.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'11'"
+            ],
+            [
+                "'0'",
+                "'1'",
+                "'2'",
+                "'3'",
+                "'4'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "fraction",
+        "version": "54289beee97255c41b6c66e2b89008ae5007043ad1c9d7012fb42f0495113694"
+    },
+    "quadratic.QuadraticProfileStep001.time_search": {
+        "code": "class TrackedSearch:\n    def time_search(self, *params):\n        self.measure(*params)\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "min_run_count": 1,
+        "name": "quadratic.QuadraticProfileStep001.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'11'"
+            ],
+            [
+                "'0'",
+                "'1'",
+                "'2'",
+                "'3'",
+                "'4'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 120,
+        "type": "time",
+        "unit": "seconds",
+        "version": "fa2497443f0d63056655666560b1b940a793d2f91f58eaaf9b6dd78634f86c15",
+        "warmup_time": 0
+    },
+    "quadratic.QuadraticProfileStep001.track_failure_cap": {
+        "code": "class TrackedSearch:\n    def track_failure_cap(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticProfileStep001.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'11'"
+            ],
+            [
+                "'0'",
+                "'1'",
+                "'2'",
+                "'3'",
+                "'4'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "373d7cf83e6f15c1e9d2c744717df93edf6bf9382d62e9a38d10d547e8cca9e1"
+    },
+    "quadratic.QuadraticProfileStep001.track_failure_crash": {
+        "code": "class TrackedSearch:\n    def track_failure_crash(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticProfileStep001.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'11'"
+            ],
+            [
+                "'0'",
+                "'1'",
+                "'2'",
+                "'3'",
+                "'4'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "cffe524df0a3ed978b8d05b25d97957d40c7cdde6026513b4dfa9fd770a47a92"
+    },
+    "quadratic.QuadraticProfileStep001.track_failure_divergence": {
+        "code": "class TrackedSearch:\n    def track_failure_divergence(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticProfileStep001.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'11'"
+            ],
+            [
+                "'0'",
+                "'1'",
+                "'2'",
+                "'3'",
+                "'4'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "d14e3c71e50f637c4ab7a4bc6b5af42271eb47a4aa55635b9d2039b30a1cf58b"
+    },
+    "quadratic.QuadraticProfileStep001.track_failure_wrong_stationary": {
+        "code": "class TrackedSearch:\n    def track_failure_wrong_stationary(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticProfileStep001.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'11'"
+            ],
+            [
+                "'0'",
+                "'1'",
+                "'2'",
+                "'3'",
+                "'4'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "5c6a9d026c5fb80591a0ac9c273086d5a61b536de60b5b45b4f7479a1adbac3e"
+    },
+    "quadratic.QuadraticProfileStep001.track_force_calls": {
+        "code": "class TrackedSearch:\n    def track_force_calls(self, *params) -> float:\n        return float(self.record[\"force_calls\"])\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticProfileStep001.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'11'"
+            ],
+            [
+                "'0'",
+                "'1'",
+                "'2'",
+                "'3'",
+                "'4'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "force calls",
+        "version": "cc592df53c84d2e319aec7ecd5e73d561fa0a01d5d6bfb8cb76f31f001e29c3f"
+    },
+    "quadratic.QuadraticProfileStep001.track_success": {
+        "code": "class TrackedSearch:\n    def track_success(self, *params) -> float:\n        return 1.0 if self.record[\"success\"] else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticProfileStep001.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'11'"
+            ],
+            [
+                "'0'",
+                "'1'",
+                "'2'",
+                "'3'",
+                "'4'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "fraction",
+        "version": "54289beee97255c41b6c66e2b89008ae5007043ad1c9d7012fb42f0495113694"
+    },
+    "quadratic.QuadraticProfileStep005.time_search": {
+        "code": "class TrackedSearch:\n    def time_search(self, *params):\n        self.measure(*params)\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "min_run_count": 1,
+        "name": "quadratic.QuadraticProfileStep005.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'11'"
+            ],
+            [
+                "'0'",
+                "'1'",
+                "'2'",
+                "'3'",
+                "'4'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 120,
+        "type": "time",
+        "unit": "seconds",
+        "version": "fa2497443f0d63056655666560b1b940a793d2f91f58eaaf9b6dd78634f86c15",
+        "warmup_time": 0
+    },
+    "quadratic.QuadraticProfileStep005.track_failure_cap": {
+        "code": "class TrackedSearch:\n    def track_failure_cap(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticProfileStep005.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'11'"
+            ],
+            [
+                "'0'",
+                "'1'",
+                "'2'",
+                "'3'",
+                "'4'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "373d7cf83e6f15c1e9d2c744717df93edf6bf9382d62e9a38d10d547e8cca9e1"
+    },
+    "quadratic.QuadraticProfileStep005.track_failure_crash": {
+        "code": "class TrackedSearch:\n    def track_failure_crash(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticProfileStep005.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'11'"
+            ],
+            [
+                "'0'",
+                "'1'",
+                "'2'",
+                "'3'",
+                "'4'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "cffe524df0a3ed978b8d05b25d97957d40c7cdde6026513b4dfa9fd770a47a92"
+    },
+    "quadratic.QuadraticProfileStep005.track_failure_divergence": {
+        "code": "class TrackedSearch:\n    def track_failure_divergence(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticProfileStep005.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'11'"
+            ],
+            [
+                "'0'",
+                "'1'",
+                "'2'",
+                "'3'",
+                "'4'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "d14e3c71e50f637c4ab7a4bc6b5af42271eb47a4aa55635b9d2039b30a1cf58b"
+    },
+    "quadratic.QuadraticProfileStep005.track_failure_wrong_stationary": {
+        "code": "class TrackedSearch:\n    def track_failure_wrong_stationary(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticProfileStep005.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'11'"
+            ],
+            [
+                "'0'",
+                "'1'",
+                "'2'",
+                "'3'",
+                "'4'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "count",
+        "version": "5c6a9d026c5fb80591a0ac9c273086d5a61b536de60b5b45b4f7479a1adbac3e"
+    },
+    "quadratic.QuadraticProfileStep005.track_force_calls": {
+        "code": "class TrackedSearch:\n    def track_force_calls(self, *params) -> float:\n        return float(self.record[\"force_calls\"])\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticProfileStep005.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'11'"
+            ],
+            [
+                "'0'",
+                "'1'",
+                "'2'",
+                "'3'",
+                "'4'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "force calls",
+        "version": "cc592df53c84d2e319aec7ecd5e73d561fa0a01d5d6bfb8cb76f31f001e29c3f"
+    },
+    "quadratic.QuadraticProfileStep005.track_success": {
+        "code": "class TrackedSearch:\n    def track_success(self, *params) -> float:\n        return 1.0 if self.record[\"success\"] else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+        "name": "quadratic.QuadraticProfileStep005.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'11'"
+            ],
+            [
+                "'0'",
+                "'1'",
+                "'2'",
+                "'3'",
+                "'4'"
+            ]
+        ],
+        "timeout": 120,
+        "type": "track",
+        "unit": "fraction",
+        "version": "54289beee97255c41b6c66e2b89008ae5007043ad1c9d7012fb42f0495113694"
+    },
+    "version": 2
+}

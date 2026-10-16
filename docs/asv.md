@@ -28,9 +28,9 @@ asv is the measurement store. A result file is keyed to the commit asv checked o
 5. Set `repeat = 1`, `rounds = 1`, `number = 1`, `sample_time = 0`, `warmup_time = 0`. `repeat == 0` means up to ten repeats.
 6. Commit the benchmark. `asv run` installs that commit. Uncommitted edits are not the run.
 7. `uv run asv machine --yes` once on the machine. That writes `~/.asv-machine.json`. The copy that is committed is `results/asv/<machine>/machine.json`.
-8. `uv run asv run <commit>^! -b YourClass`. Do not pass `--quick`. `--quick` runs each function once and does not save.
+8. `uv run asv run <commit>^! -b YourClass`. Do not pass `--quick`. On asv 0.6.6 a quick run still writes `results/asv`. The help text says it does not. That is `docs/asv-gaps.md`. The committed file is the run without `--quick`.
 9. Commit the new files under `results/asv`.
-10. Score with `asv.results.iter_results` and `Results.get_result_value`, then `score_v2`. `optbench.asv_score` does that for the quadratic sample. `uv run optbench statistics` refuses to write a document when those tracks are absent.
+10. Score with `asv.results.iter_results` and `Results.get_result_value`, then `score_v2`. `optbench.asv_score` does that for the quadratic sample. Parameter strings in the result JSON are wrapped in `repr` quotes; the reader unwraps them with `ast.literal_eval`. `uv run optbench statistics` refuses to write a document when those tracks are absent.
 
 `benchmarks/pending.py` is one skipped parameter for every problem id and every registry code, with `track_force_calls` and `time_search` only. `setup` raises `NotImplementedError`, which asv-runner stores as NaN. Replace that pair with a real class when the code runs. The Lennard-Jones classes in `benchmarks/bench_lj38.py` are separate: they call eonclient when `OPTBENCH_ASV_EON=1`. The default parameter list is one seed and the first geometry. `OPTBENCH_ASV_FULL=1` selects all 1000 starts, and it is read at import, so it has to be set in the process that launches asv.
 
@@ -48,7 +48,7 @@ uv run asv publish
 uv run asv compare COMMIT COMMIT
 ```
 
-`asv check` imports the suite. `asv run --quick` is the smoke gate and leaves `results/asv` unchanged. `asv compare` on one commit compares that commit with itself.
+`asv check` imports the suite. `asv run --quick` is the smoke gate. Run it before the saved `asv run`, because asv 0.6.6 rewrites the result file. `asv compare` on one commit compares that commit with itself.
 
 ## CI
 
