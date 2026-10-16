@@ -1,4 +1,2520 @@
 {
+    "bench_eon_develop.EonDevelopDe2ts.time_search": {
+        "code": "class _Benchmark:\n    def time_search(self, seed, start):\n        self.measure(seed, start)\n\n    def setup(self, seed, start):\n        return None",
+        "min_run_count": 1,
+        "name": "bench_eon_develop.EonDevelopDe2ts.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 3600,
+        "type": "time",
+        "unit": "seconds",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e",
+        "warmup_time": 0
+    },
+    "bench_eon_develop.EonDevelopDe2ts.track_extrema": {
+        "code": "class <locals>:\n    def track_extrema(self, seed, start) -> float:\n        return _optional(self.measure(seed, start), \"extrema\")\n\nclass _Benchmark:\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDe2ts.track_extrema",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDe2ts.track_failure_cap": {
+        "code": "class _Benchmark:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDe2ts.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDe2ts.track_failure_crash": {
+        "code": "class _Benchmark:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDe2ts.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDe2ts.track_failure_divergence": {
+        "code": "class _Benchmark:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDe2ts.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDe2ts.track_failure_wrong_stationary": {
+        "code": "class _Benchmark:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDe2ts.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDe2ts.track_force_calls": {
+        "code": "class _Benchmark:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self.measure(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDe2ts.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "force calls",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDe2ts.track_success": {
+        "code": "class _Benchmark:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDe2ts.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "fraction",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDe2tsEw.time_search": {
+        "code": "class _Benchmark:\n    def time_search(self, seed, start):\n        self.measure(seed, start)\n\n    def setup(self, seed, start):\n        return None",
+        "min_run_count": 1,
+        "name": "bench_eon_develop.EonDevelopDe2tsEw.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 3600,
+        "type": "time",
+        "unit": "seconds",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e",
+        "warmup_time": 0
+    },
+    "bench_eon_develop.EonDevelopDe2tsEw.track_extrema": {
+        "code": "class <locals>:\n    def track_extrema(self, seed, start) -> float:\n        return _optional(self.measure(seed, start), \"extrema\")\n\nclass _Benchmark:\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDe2tsEw.track_extrema",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDe2tsEw.track_failure_cap": {
+        "code": "class _Benchmark:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDe2tsEw.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDe2tsEw.track_failure_crash": {
+        "code": "class _Benchmark:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDe2tsEw.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDe2tsEw.track_failure_divergence": {
+        "code": "class _Benchmark:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDe2tsEw.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDe2tsEw.track_failure_wrong_stationary": {
+        "code": "class _Benchmark:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDe2tsEw.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDe2tsEw.track_force_calls": {
+        "code": "class _Benchmark:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self.measure(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDe2tsEw.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "force calls",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDe2tsEw.track_success": {
+        "code": "class _Benchmark:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDe2tsEw.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "fraction",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDe2tsOci.time_search": {
+        "code": "class _Benchmark:\n    def time_search(self, seed, start):\n        self.measure(seed, start)\n\n    def setup(self, seed, start):\n        return None",
+        "min_run_count": 1,
+        "name": "bench_eon_develop.EonDevelopDe2tsOci.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 3600,
+        "type": "time",
+        "unit": "seconds",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e",
+        "warmup_time": 0
+    },
+    "bench_eon_develop.EonDevelopDe2tsOci.track_extrema": {
+        "code": "class <locals>:\n    def track_extrema(self, seed, start) -> float:\n        return _optional(self.measure(seed, start), \"extrema\")\n\nclass _Benchmark:\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDe2tsOci.track_extrema",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDe2tsOci.track_failure_cap": {
+        "code": "class _Benchmark:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDe2tsOci.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDe2tsOci.track_failure_crash": {
+        "code": "class _Benchmark:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDe2tsOci.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDe2tsOci.track_failure_divergence": {
+        "code": "class _Benchmark:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDe2tsOci.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDe2tsOci.track_failure_wrong_stationary": {
+        "code": "class _Benchmark:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDe2tsOci.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDe2tsOci.track_force_calls": {
+        "code": "class _Benchmark:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self.measure(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDe2tsOci.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "force calls",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDe2tsOci.track_success": {
+        "code": "class _Benchmark:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDe2tsOci.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "fraction",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDeLj38Cap.time_search": {
+        "code": "class _Benchmark:\n    def time_search(self, seed, start):\n        self.measure(seed, start)\n\n    def setup(self, seed, start):\n        return None",
+        "min_run_count": 1,
+        "name": "bench_eon_develop.EonDevelopDeLj38Cap.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e",
+        "warmup_time": 0
+    },
+    "bench_eon_develop.EonDevelopDeLj38Cap.track_failure_cap": {
+        "code": "class _Benchmark:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDeLj38Cap.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDeLj38Cap.track_failure_crash": {
+        "code": "class _Benchmark:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDeLj38Cap.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDeLj38Cap.track_failure_divergence": {
+        "code": "class _Benchmark:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDeLj38Cap.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDeLj38Cap.track_failure_wrong_stationary": {
+        "code": "class _Benchmark:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDeLj38Cap.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDeLj38Cap.track_force_calls": {
+        "code": "class _Benchmark:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self.measure(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDeLj38Cap.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDeLj38Cap.track_success": {
+        "code": "class _Benchmark:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDeLj38Cap.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDeLj38Ew.time_search": {
+        "code": "class _Benchmark:\n    def time_search(self, seed, start):\n        self.measure(seed, start)\n\n    def setup(self, seed, start):\n        return None",
+        "min_run_count": 1,
+        "name": "bench_eon_develop.EonDevelopDeLj38Ew.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 3600,
+        "type": "time",
+        "unit": "seconds",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e",
+        "warmup_time": 0
+    },
+    "bench_eon_develop.EonDevelopDeLj38Ew.track_failure_cap": {
+        "code": "class _Benchmark:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDeLj38Ew.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDeLj38Ew.track_failure_crash": {
+        "code": "class _Benchmark:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDeLj38Ew.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDeLj38Ew.track_failure_divergence": {
+        "code": "class _Benchmark:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDeLj38Ew.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDeLj38Ew.track_failure_wrong_stationary": {
+        "code": "class _Benchmark:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDeLj38Ew.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDeLj38Ew.track_force_calls": {
+        "code": "class _Benchmark:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self.measure(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDeLj38Ew.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "force calls",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDeLj38Ew.track_success": {
+        "code": "class _Benchmark:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDeLj38Ew.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "fraction",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDeLj38Oci.time_search": {
+        "code": "class _Benchmark:\n    def time_search(self, seed, start):\n        self.measure(seed, start)\n\n    def setup(self, seed, start):\n        return None",
+        "min_run_count": 1,
+        "name": "bench_eon_develop.EonDevelopDeLj38Oci.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 3600,
+        "type": "time",
+        "unit": "seconds",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e",
+        "warmup_time": 0
+    },
+    "bench_eon_develop.EonDevelopDeLj38Oci.track_failure_cap": {
+        "code": "class _Benchmark:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDeLj38Oci.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDeLj38Oci.track_failure_crash": {
+        "code": "class _Benchmark:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDeLj38Oci.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDeLj38Oci.track_failure_divergence": {
+        "code": "class _Benchmark:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDeLj38Oci.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDeLj38Oci.track_failure_wrong_stationary": {
+        "code": "class _Benchmark:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDeLj38Oci.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDeLj38Oci.track_force_calls": {
+        "code": "class _Benchmark:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self.measure(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDeLj38Oci.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "force calls",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDeLj38Oci.track_success": {
+        "code": "class _Benchmark:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDeLj38Oci.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "fraction",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDePtEw.time_search": {
+        "code": "class _Benchmark:\n    def time_search(self, seed, start):\n        self.measure(seed, start)\n\n    def setup(self, seed, start):\n        return None",
+        "min_run_count": 1,
+        "name": "bench_eon_develop.EonDevelopDePtEw.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'product_0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 3600,
+        "type": "time",
+        "unit": "seconds",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e",
+        "warmup_time": 0
+    },
+    "bench_eon_develop.EonDevelopDePtEw.track_failure_cap": {
+        "code": "class _Benchmark:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDePtEw.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'product_0'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDePtEw.track_failure_crash": {
+        "code": "class _Benchmark:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDePtEw.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'product_0'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDePtEw.track_failure_divergence": {
+        "code": "class _Benchmark:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDePtEw.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'product_0'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDePtEw.track_failure_wrong_stationary": {
+        "code": "class _Benchmark:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDePtEw.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'product_0'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDePtEw.track_force_calls": {
+        "code": "class _Benchmark:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self.measure(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDePtEw.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'product_0'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "force calls",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDePtEw.track_success": {
+        "code": "class _Benchmark:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDePtEw.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'product_0'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "fraction",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDePtOci.time_search": {
+        "code": "class _Benchmark:\n    def time_search(self, seed, start):\n        self.measure(seed, start)\n\n    def setup(self, seed, start):\n        return None",
+        "min_run_count": 1,
+        "name": "bench_eon_develop.EonDevelopDePtOci.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'product_0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 3600,
+        "type": "time",
+        "unit": "seconds",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e",
+        "warmup_time": 0
+    },
+    "bench_eon_develop.EonDevelopDePtOci.track_failure_cap": {
+        "code": "class _Benchmark:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDePtOci.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'product_0'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDePtOci.track_failure_crash": {
+        "code": "class _Benchmark:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDePtOci.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'product_0'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDePtOci.track_failure_divergence": {
+        "code": "class _Benchmark:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDePtOci.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'product_0'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDePtOci.track_failure_wrong_stationary": {
+        "code": "class _Benchmark:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDePtOci.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'product_0'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDePtOci.track_force_calls": {
+        "code": "class _Benchmark:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self.measure(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDePtOci.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'product_0'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "force calls",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopDePtOci.track_success": {
+        "code": "class _Benchmark:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopDePtOci.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'product_0'"
+            ]
+        ],
+        "timeout": 3600,
+        "type": "track",
+        "unit": "fraction",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopLowLj38Dimer.time_search": {
+        "code": "class _Benchmark:\n    def time_search(self, seed, start):\n        self.measure(seed, start)\n\n    def setup(self, seed, start):\n        return None",
+        "min_run_count": 1,
+        "name": "bench_eon_develop.EonDevelopLowLj38Dimer.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 1800,
+        "type": "time",
+        "unit": "seconds",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e",
+        "warmup_time": 0
+    },
+    "bench_eon_develop.EonDevelopLowLj38Dimer.track_failure_cap": {
+        "code": "class _Benchmark:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopLowLj38Dimer.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopLowLj38Dimer.track_failure_crash": {
+        "code": "class _Benchmark:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopLowLj38Dimer.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopLowLj38Dimer.track_failure_divergence": {
+        "code": "class _Benchmark:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopLowLj38Dimer.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopLowLj38Dimer.track_failure_wrong_stationary": {
+        "code": "class _Benchmark:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopLowLj38Dimer.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopLowLj38Dimer.track_force_calls": {
+        "code": "class _Benchmark:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self.measure(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopLowLj38Dimer.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "force calls",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopLowLj38Dimer.track_success": {
+        "code": "class _Benchmark:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopLowLj38Dimer.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "fraction",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopLowLj38Lanczos.time_search": {
+        "code": "class _Benchmark:\n    def time_search(self, seed, start):\n        self.measure(seed, start)\n\n    def setup(self, seed, start):\n        return None",
+        "min_run_count": 1,
+        "name": "bench_eon_develop.EonDevelopLowLj38Lanczos.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 1800,
+        "type": "time",
+        "unit": "seconds",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e",
+        "warmup_time": 0
+    },
+    "bench_eon_develop.EonDevelopLowLj38Lanczos.track_failure_cap": {
+        "code": "class _Benchmark:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopLowLj38Lanczos.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopLowLj38Lanczos.track_failure_crash": {
+        "code": "class _Benchmark:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopLowLj38Lanczos.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopLowLj38Lanczos.track_failure_divergence": {
+        "code": "class _Benchmark:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopLowLj38Lanczos.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopLowLj38Lanczos.track_failure_wrong_stationary": {
+        "code": "class _Benchmark:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopLowLj38Lanczos.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopLowLj38Lanczos.track_force_calls": {
+        "code": "class _Benchmark:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self.measure(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopLowLj38Lanczos.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "force calls",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopLowLj38Lanczos.track_success": {
+        "code": "class _Benchmark:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopLowLj38Lanczos.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "fraction",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopSaddlePtDimer.time_search": {
+        "code": "class _Benchmark:\n    def time_search(self, seed, start):\n        self.measure(seed, start)\n\n    def setup(self, seed, start):\n        return None",
+        "min_run_count": 1,
+        "name": "bench_eon_develop.EonDevelopSaddlePtDimer.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1000'"
+            ],
+            [
+                "'pt-island'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e",
+        "warmup_time": 0
+    },
+    "bench_eon_develop.EonDevelopSaddlePtDimer.track_failure_cap": {
+        "code": "class _Benchmark:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopSaddlePtDimer.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1000'"
+            ],
+            [
+                "'pt-island'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopSaddlePtDimer.track_failure_crash": {
+        "code": "class _Benchmark:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopSaddlePtDimer.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1000'"
+            ],
+            [
+                "'pt-island'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopSaddlePtDimer.track_failure_divergence": {
+        "code": "class _Benchmark:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopSaddlePtDimer.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1000'"
+            ],
+            [
+                "'pt-island'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopSaddlePtDimer.track_failure_wrong_stationary": {
+        "code": "class _Benchmark:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopSaddlePtDimer.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1000'"
+            ],
+            [
+                "'pt-island'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopSaddlePtDimer.track_force_calls": {
+        "code": "class _Benchmark:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self.measure(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopSaddlePtDimer.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1000'"
+            ],
+            [
+                "'pt-island'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopSaddlePtDimer.track_fraction_connected": {
+        "code": "class <locals>:\n    def track_fraction_connected(self, seed, start) -> float:\n        return _optional(self.measure(seed, start), \"fraction_connected\")\n\nclass _Benchmark:\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopSaddlePtDimer.track_fraction_connected",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1000'"
+            ],
+            [
+                "'pt-island'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopSaddlePtDimer.track_success": {
+        "code": "class _Benchmark:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopSaddlePtDimer.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1000'"
+            ],
+            [
+                "'pt-island'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopSaddlePtDimer.track_total_searches": {
+        "code": "class <locals>:\n    def track_total_searches(self, seed, start) -> float:\n        return _optional(self.measure(seed, start), \"total_searches\")\n\nclass _Benchmark:\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopSaddlePtDimer.track_total_searches",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1000'"
+            ],
+            [
+                "'pt-island'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "searches",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopSaddlePtDimer.track_unique_saddles": {
+        "code": "class <locals>:\n    def track_unique_saddles(self, seed, start) -> float:\n        return _optional(self.measure(seed, start), \"unique_saddles\")\n\nclass _Benchmark:\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopSaddlePtDimer.track_unique_saddles",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1000'"
+            ],
+            [
+                "'pt-island'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "saddles",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopSaddlePtLanczos.time_search": {
+        "code": "class _Benchmark:\n    def time_search(self, seed, start):\n        self.measure(seed, start)\n\n    def setup(self, seed, start):\n        return None",
+        "min_run_count": 1,
+        "name": "bench_eon_develop.EonDevelopSaddlePtLanczos.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1000'"
+            ],
+            [
+                "'pt-island'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e",
+        "warmup_time": 0
+    },
+    "bench_eon_develop.EonDevelopSaddlePtLanczos.track_failure_cap": {
+        "code": "class _Benchmark:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopSaddlePtLanczos.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1000'"
+            ],
+            [
+                "'pt-island'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopSaddlePtLanczos.track_failure_crash": {
+        "code": "class _Benchmark:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopSaddlePtLanczos.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1000'"
+            ],
+            [
+                "'pt-island'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopSaddlePtLanczos.track_failure_divergence": {
+        "code": "class _Benchmark:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopSaddlePtLanczos.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1000'"
+            ],
+            [
+                "'pt-island'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopSaddlePtLanczos.track_failure_wrong_stationary": {
+        "code": "class _Benchmark:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopSaddlePtLanczos.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1000'"
+            ],
+            [
+                "'pt-island'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopSaddlePtLanczos.track_force_calls": {
+        "code": "class _Benchmark:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self.measure(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopSaddlePtLanczos.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1000'"
+            ],
+            [
+                "'pt-island'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopSaddlePtLanczos.track_fraction_connected": {
+        "code": "class <locals>:\n    def track_fraction_connected(self, seed, start) -> float:\n        return _optional(self.measure(seed, start), \"fraction_connected\")\n\nclass _Benchmark:\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopSaddlePtLanczos.track_fraction_connected",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1000'"
+            ],
+            [
+                "'pt-island'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopSaddlePtLanczos.track_success": {
+        "code": "class _Benchmark:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopSaddlePtLanczos.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1000'"
+            ],
+            [
+                "'pt-island'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopSaddlePtLanczos.track_total_searches": {
+        "code": "class <locals>:\n    def track_total_searches(self, seed, start) -> float:\n        return _optional(self.measure(seed, start), \"total_searches\")\n\nclass _Benchmark:\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopSaddlePtLanczos.track_total_searches",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1000'"
+            ],
+            [
+                "'pt-island'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "searches",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopSaddlePtLanczos.track_unique_saddles": {
+        "code": "class <locals>:\n    def track_unique_saddles(self, seed, start) -> float:\n        return _optional(self.measure(seed, start), \"unique_saddles\")\n\nclass _Benchmark:\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopSaddlePtLanczos.track_unique_saddles",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1000'"
+            ],
+            [
+                "'pt-island'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "saddles",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopTsLj38Dimer.time_search": {
+        "code": "class _Benchmark:\n    def time_search(self, seed, start):\n        self.measure(seed, start)\n\n    def setup(self, seed, start):\n        return None",
+        "min_run_count": 1,
+        "name": "bench_eon_develop.EonDevelopTsLj38Dimer.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 900,
+        "type": "time",
+        "unit": "seconds",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e",
+        "warmup_time": 0
+    },
+    "bench_eon_develop.EonDevelopTsLj38Dimer.track_failure_cap": {
+        "code": "class _Benchmark:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopTsLj38Dimer.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 900,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopTsLj38Dimer.track_failure_crash": {
+        "code": "class _Benchmark:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopTsLj38Dimer.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 900,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopTsLj38Dimer.track_failure_divergence": {
+        "code": "class _Benchmark:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopTsLj38Dimer.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 900,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopTsLj38Dimer.track_failure_wrong_stationary": {
+        "code": "class _Benchmark:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopTsLj38Dimer.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 900,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopTsLj38Dimer.track_force_calls": {
+        "code": "class _Benchmark:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self.measure(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopTsLj38Dimer.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 900,
+        "type": "track",
+        "unit": "force calls",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopTsLj38Dimer.track_success": {
+        "code": "class _Benchmark:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopTsLj38Dimer.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 900,
+        "type": "track",
+        "unit": "fraction",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopTsLj38Lanczos.time_search": {
+        "code": "class _Benchmark:\n    def time_search(self, seed, start):\n        self.measure(seed, start)\n\n    def setup(self, seed, start):\n        return None",
+        "min_run_count": 1,
+        "name": "bench_eon_develop.EonDevelopTsLj38Lanczos.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 900,
+        "type": "time",
+        "unit": "seconds",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e",
+        "warmup_time": 0
+    },
+    "bench_eon_develop.EonDevelopTsLj38Lanczos.track_failure_cap": {
+        "code": "class _Benchmark:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopTsLj38Lanczos.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 900,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopTsLj38Lanczos.track_failure_crash": {
+        "code": "class _Benchmark:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopTsLj38Lanczos.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 900,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopTsLj38Lanczos.track_failure_divergence": {
+        "code": "class _Benchmark:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopTsLj38Lanczos.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 900,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopTsLj38Lanczos.track_failure_wrong_stationary": {
+        "code": "class _Benchmark:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopTsLj38Lanczos.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 900,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopTsLj38Lanczos.track_force_calls": {
+        "code": "class _Benchmark:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self.measure(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopTsLj38Lanczos.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 900,
+        "type": "track",
+        "unit": "force calls",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopTsLj38Lanczos.track_success": {
+        "code": "class _Benchmark:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopTsLj38Lanczos.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 900,
+        "type": "track",
+        "unit": "fraction",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopTsPtDimer.time_search": {
+        "code": "class _Benchmark:\n    def time_search(self, seed, start):\n        self.measure(seed, start)\n\n    def setup(self, seed, start):\n        return None",
+        "min_run_count": 1,
+        "name": "bench_eon_develop.EonDevelopTsPtDimer.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'initial_0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 1800,
+        "type": "time",
+        "unit": "seconds",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e",
+        "warmup_time": 0
+    },
+    "bench_eon_develop.EonDevelopTsPtDimer.track_failure_cap": {
+        "code": "class _Benchmark:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopTsPtDimer.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'initial_0'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopTsPtDimer.track_failure_crash": {
+        "code": "class _Benchmark:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopTsPtDimer.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'initial_0'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopTsPtDimer.track_failure_divergence": {
+        "code": "class _Benchmark:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopTsPtDimer.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'initial_0'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopTsPtDimer.track_failure_wrong_stationary": {
+        "code": "class _Benchmark:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopTsPtDimer.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'initial_0'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopTsPtDimer.track_force_calls": {
+        "code": "class _Benchmark:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self.measure(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopTsPtDimer.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'initial_0'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "force calls",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopTsPtDimer.track_success": {
+        "code": "class _Benchmark:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopTsPtDimer.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'initial_0'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "fraction",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopTsPtLanczos.time_search": {
+        "code": "class _Benchmark:\n    def time_search(self, seed, start):\n        self.measure(seed, start)\n\n    def setup(self, seed, start):\n        return None",
+        "min_run_count": 1,
+        "name": "bench_eon_develop.EonDevelopTsPtLanczos.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'initial_0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 1800,
+        "type": "time",
+        "unit": "seconds",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e",
+        "warmup_time": 0
+    },
+    "bench_eon_develop.EonDevelopTsPtLanczos.track_failure_cap": {
+        "code": "class _Benchmark:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopTsPtLanczos.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'initial_0'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopTsPtLanczos.track_failure_crash": {
+        "code": "class _Benchmark:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopTsPtLanczos.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'initial_0'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopTsPtLanczos.track_failure_divergence": {
+        "code": "class _Benchmark:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopTsPtLanczos.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'initial_0'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopTsPtLanczos.track_failure_wrong_stationary": {
+        "code": "class _Benchmark:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopTsPtLanczos.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'initial_0'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopTsPtLanczos.track_force_calls": {
+        "code": "class _Benchmark:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self.measure(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopTsPtLanczos.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'initial_0'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "force calls",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
+    "bench_eon_develop.EonDevelopTsPtLanczos.track_success": {
+        "code": "class _Benchmark:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self.measure(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        return None",
+        "name": "bench_eon_develop.EonDevelopTsPtLanczos.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'1'"
+            ],
+            [
+                "'initial_0'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "fraction",
+        "version": "7095b23ac17d49f434a5e08ccb072897ceca698e"
+    },
     "bench_lj38.Lj38EonCg.time_search": {
         "code": "class TrackedSearch:\n    def time_search(self, *params):\n        self.measure(*params)\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
         "min_run_count": 1,
@@ -1062,6 +3578,8 @@
             ],
             [
                 "'eon'",
+                "'eon-main'",
+                "'eon-develop'",
                 "'rgmin'",
                 "'rgsaddle'",
                 "'ase'",
@@ -1122,6 +3640,8 @@
             ],
             [
                 "'eon'",
+                "'eon-main'",
+                "'eon-develop'",
                 "'rgmin'",
                 "'rgsaddle'",
                 "'ase'",
