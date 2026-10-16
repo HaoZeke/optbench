@@ -13,7 +13,7 @@ from benchmarks.bench_eon_develop import (
     morse_cluster,
     selected,
 )
-from optbench.asv_tracks import TrackedSearch
+from optbench.asv_tracks import TrackedSearch as _TrackedSearch
 
 
 def test_default_grid_is_one_real_start():
@@ -35,8 +35,8 @@ def test_default_grid_is_one_real_start():
     assert bench.track_failure_wrong_stationary.unit == "count"
     assert bench.track_failure_divergence.unit == "count"
     assert bench.track_failure_crash.unit == "count"
-    assert bench.measure is not TrackedSearch.measure
-    assert bench.time_search is not TrackedSearch.time_search
+    assert bench.measure is not _TrackedSearch.measure
+    assert bench.time_search is not _TrackedSearch.time_search
     assert not hasattr(bench, "time_run")
     assert not hasattr(bench, "track_failure_cause")
     assert EonDevelopDe2ts.campaign_starts[-1] == "pair_50"

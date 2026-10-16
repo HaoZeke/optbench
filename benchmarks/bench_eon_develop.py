@@ -37,7 +37,7 @@ import tempfile
 import time
 from pathlib import Path
 
-from optbench.asv_tracks import TrackedSearch
+from optbench.asv_tracks import TrackedSearch as _TrackedSearch
 
 ROOT = Path(__file__).resolve().parents[1]
 EON_COMMIT = "7095b23ac17d49f434a5e08ccb072897ceca698e"
@@ -551,7 +551,7 @@ def _optional(row: dict, key: str) -> float:
 
 
 def _bind(spec: dict):
-    class _Benchmark(TrackedSearch):
+    class _Benchmark(_TrackedSearch):
         param_names = ["seed", "start"]
         params = [spec["seeds"], spec["starts"]]
         timeout = spec["timeout"]
