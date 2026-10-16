@@ -80,9 +80,13 @@ def result_root() -> Path:
     return ROOT
 
 
-def sidecar_path(template_name: str, seed: str, start: str) -> Path:
-    """One JSON record for one asv parameter pair."""
-    slug = template_name.replace("/", "-")
+def sidecar_path(problem_name: str, template_name: str, seed: str, start: str) -> Path:
+    """One JSON record for one asv parameter pair.
+
+    The problem is part of the path. LJ38 and the two-saddle set both
+    name their first geometry ``pair_00``.
+    """
+    slug = problem_name.replace("/", "-") + "--" + template_name.replace("/", "-")
     return result_root() / "results" / "rgsaddle-asv" / slug / str(seed) / f"{start}.json"
 
 
@@ -113,8 +117,8 @@ def selected_starts(names: list[str]) -> list[str]:
     return list(names[:1])
 
 
-def _write_sidecar(template_name: str, seed: str, start: str, record: dict) -> None:
-    path = sidecar_path(template_name, seed, start)
+def _write_sidecar(problem_name: str, template_name: str, seed: str, start: str, record: dict) -> None:
+    path = sidecar_path(problem_name, template_name, seed, start)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(record, sort_keys=True) + "\n", encoding="utf-8")
 
@@ -153,7 +157,7 @@ def _bind(class_name: str, problem: str, template: str, starts: list[str], cap: 
 
             if library_path() is None:
                 raise NotImplementedError("librgsaddle.so is not available")
-            path = sidecar_path(self.template_name, str(seed), str(start))
+            path = sidecar_path(self.problem_name, self.template_name, str(seed), str(start))
             if path.is_file():
                 self.record = json.loads(path.read_text(encoding="utf-8"))
             else:
@@ -192,7 +196,7 @@ def _bind(class_name: str, problem: str, template: str, starts: list[str], cap: 
             began = time.perf_counter()
             record = self.measure(seed, start)
             record["search_seconds"] = time.perf_counter() - began
-            _write_sidecar(self.template_name, str(seed), str(start), record)
+            _write_sidecar(self.problem_name, self.template_name, str(seed), str(start), record)
             self.record = record
             print(
                 f"done {self.template_name} {start} calls={record['force_calls']} "
@@ -205,7 +209,7 @@ def _bind(class_name: str, problem: str, template: str, starts: list[str], cap: 
             record = getattr(self, "record", None)
             if record is None:
                 record = self.measure(seed, start)
-                _write_sidecar(self.template_name, str(seed), str(start), record)
+                _write_sidecar(self.problem_name, self.template_name, str(seed), str(start), record)
                 self.record = record
             return record
 
@@ -270,7 +274,9 @@ def verify_asv_tracks(document: dict) -> None:
         for (seed, start), value in zip(pairs, values, strict=True):
             if value is None or value != value:
                 raise ValueError(f"{name}({seed}, {start}) has no result")
-            record = json.loads(sidecar_path(template_name, seed, start).read_text(encoding="utf-8"))
+            record = json.loads(
+                sidecar_path(CLASS_PROBLEM[class_name], template_name, seed, start).read_text(encoding="utf-8")
+            )
             expected = _expected_track(record, method)
             if float(value) != expected:
                 raise ValueError(f"{name}({seed}, {start}) is {value}, the sidecar has {expected}")
@@ -298,9 +304,14 @@ def attach_wall_seconds(document: dict, directory: Path) -> int:
         for (seed, start), value in zip(itertools.product(*params), values, strict=True):
             if value is None or value != value:
                 raise ValueError(f"{name}({seed}, {start}) has no wall time")
-            path = directory / template_name.replace("/", "-") / str(seed) / f"{start}.json"
+            path = (
+                directory
+                / (CLASS_PROBLEM[class_name].replace("/", "-") + "--" + template_name.replace("/", "-"))
+                / str(seed)
+                / f"{start}.json"
+            )
             if not path.is_file():
-                path = sidecar_path(template_name, seed, start)
+                path = sidecar_path(CLASS_PROBLEM[class_name], template_name, seed, start)
             record = json.loads(path.read_text(encoding="utf-8"))
             record["wall_seconds"] = float(value)
             path.write_text(json.dumps(record, sort_keys=True) + "\n", encoding="utf-8")

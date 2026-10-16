@@ -288,7 +288,14 @@ def test_publish_writes_the_full_set(tmp_path: Path):
 def test_verify_asv_tracks_reads_the_sidecar(tmp_path: Path, monkeypatch):
     monkeypatch.setenv("OPTBENCH_RESULT_ROOT", str(tmp_path))
     record = _fake_record(HeptamerRgsaddleCiNeb.params[1][0], 0)
-    path = tmp_path / "results" / "rgsaddle-asv" / "rgsaddle-ci-neb" / "0" / f"{record['start']}.json"
+    path = (
+        tmp_path
+        / "results"
+        / "rgsaddle-asv"
+        / "neb-Pt-heptamer--rgsaddle-ci-neb"
+        / "0"
+        / f"{record['start']}.json"
+    )
     path.parent.mkdir(parents=True)
     path.write_text(json.dumps(record) + "\n", encoding="utf-8")
     benchmark = "bench_rgsaddle.HeptamerRgsaddleCiNeb.track_force_calls"

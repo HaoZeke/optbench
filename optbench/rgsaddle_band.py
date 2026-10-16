@@ -1027,6 +1027,9 @@ def _run_band_search(
         if surface.last_point is not None and np.array_equal(point, surface.last_point):
             energy = surface.last_energy
             grad = surface.last_grad if surface.last_grad is not None else grad
+        elif counter.calls >= cap or surface.hit_cap:
+            energy = float("nan")
+            grad = np.full(point.shape, np.nan)
         else:
             energy, grad = rgpot.calculate(point, None, box_flat)
             grad = np.asarray(grad, dtype=np.float64)
