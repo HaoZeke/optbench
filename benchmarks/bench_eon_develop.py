@@ -8,8 +8,9 @@ clock. ``setup`` does not run the client, because asv does not time
 so a suite that runs ``time_search`` first times the search once.
 
 Every force evaluation goes through ``HarnessCounter``. eonclient is
-started with ``potential = ext_pot``. ``python -m optbench.extpot``
-forwards each call to a ``PotServer`` in this process. The client's
+started with ``potential = ext_pot``. A native bridge forwards each
+call to a ``PotServer`` in this process, and ``python -m optbench.extpot``
+does that when the bridge is not built. The client's
 ``total_force_calls`` is stored beside the harness count and is not the
 track. The binary is the develop source build named by ``EONCLIENT``
 (commit 7095b23ac17d49f434a5e08ccb072897ceca698e). The conda-forge 3.5.0
@@ -111,7 +112,7 @@ def _morse_fold(delta: float, length: float) -> float:
     return delta - length * image
 
 
-def morse_cluster(positions, atomic_numbers=None, box=None):
+def _morse_python(positions, atomic_numbers=None, box=None):
     """Pair Morse used by eOn ``morse_pt``, the rgpot ``MorsePot`` defaults.
 
     ``(D, a, r_e, cutoff)`` = (0.7102, 1.6047, 2.897, 9.5). The pair energy
@@ -161,7 +162,19 @@ def morse_cluster(positions, atomic_numbers=None, box=None):
     return energy, tuple(forces)
 
 
-def lj_cut(positions, atomic_numbers=None, box=None, *, epsilon=1.0, sigma=1.0, cutoff=40.0):
+def morse_cluster(positions, atomic_numbers=None, box=None):
+    """``morse_pt`` energy and forces. The native kernel matches ``_morse_python``."""
+    if os.environ.get("OPTBENCH_FASTPOT") != "0":
+        from optbench.fastpot import morse_forces
+
+        lengths = _morse_lengths(box)
+        got = morse_forces(positions, lengths, MORSE_D, MORSE_A, MORSE_RE, MORSE_CUTOFF, MORSE_SHIFT)
+        if got is not None:
+            return got
+    return _morse_python(positions, atomic_numbers, box)
+
+
+def _lj_cut_python(positions, atomic_numbers=None, box=None, *, epsilon=1.0, sigma=1.0, cutoff=40.0):
     """Unshifted Lennard-Jones, the archived ``pair_style lj/cut`` kernel.
 
     ``in.lammps`` sets ``lj/cut/opt`` with cutoff 40 and ``pair_coeff * * 1 1``.
@@ -205,6 +218,17 @@ def lj_cut(positions, atomic_numbers=None, box=None, *, epsilon=1.0, sigma=1.0, 
             forces[jx + 1] -= fy
             forces[jx + 2] -= fz
     return energy, tuple(forces)
+
+
+def lj_cut(positions, atomic_numbers=None, box=None, *, epsilon=1.0, sigma=1.0, cutoff=40.0):
+    """``lj/cut`` energy and forces. The native kernel matches ``_lj_cut_python``."""
+    if os.environ.get("OPTBENCH_FASTPOT") != "0":
+        from optbench.fastpot import lj_cut_forces
+
+        got = lj_cut_forces(positions, epsilon, sigma, cutoff)
+        if got is not None:
+            return got
+    return _lj_cut_python(positions, atomic_numbers, box, epsilon=epsilon, sigma=sigma, cutoff=cutoff)
 
 
 def lammps_lj_params(path: Path) -> tuple[float, float, float]:
@@ -298,6 +322,16 @@ def _evaluate(potential: str):
 
 
 def _write_wrapper(path: Path) -> None:
+    from optbench.fastpot import bridge_executable
+
+    binary = bridge_executable()
+    if binary is not None:
+        try:
+            path.unlink()
+        except FileNotFoundError:
+            pass
+        path.symlink_to(binary)
+        return
     path.write_text(
         "#!/usr/bin/env python3\n"
         "import os\n"
