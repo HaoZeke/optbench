@@ -17,7 +17,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-from optbench.asv_tracks import TrackedSearch
+from optbench.asv_tracks import TrackedSearch as _TrackedSearch
 from optbench.failures import failure_of
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -52,7 +52,11 @@ def _axes(spec: dict) -> tuple[list[str], list[str]]:
 def _timeout(spec: dict) -> int:
     if spec["task"] in {"neb", "sella-neb"}:
         return 1800
-    if spec["task"] in {"dimer", "sella-search"}:
+    if spec["task"] == "sella-search":
+        # Two searches (setup and the timed call) on the Pt island do not
+        # fit in 900s. The class timeout has to cover both.
+        return 3600
+    if spec["task"] == "dimer":
         return 900
     return 600
 
@@ -109,7 +113,7 @@ def _bind(spec: dict):
     if spec.get("reducer") == "per_image":
         images = int(spec["neb"]["moving_images"])
 
-    class _Benchmark(TrackedSearch):
+    class _Benchmark(_TrackedSearch):
         param_names = ["seed", "start"]
         params = [seeds, starts]
         timeout = _timeout(spec)
