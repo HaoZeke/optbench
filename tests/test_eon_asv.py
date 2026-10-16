@@ -32,5 +32,8 @@ def test_develop_benchmarks_parametrize_seed_and_start():
     assert hasattr(EonDevelopDe2ts, "track_extrema")
     assert EonDevelopSaddlePtDimer.params[0] == list(range(1000, 1010))
     assert EonDevelopSaddlePtDimer.params[1] == ["pt-island"]
+    from benchmarks.bench_eon_develop import EonDevelopSaddlePtLanczos
+
+    assert EonDevelopSaddlePtLanczos.params[0] == [1000, 1001]
     assert hasattr(EonDevelopSaddlePtDimer, "track_total_searches")
     assert hasattr(EonDevelopSaddlePtDimer, "time_run")

@@ -491,9 +491,9 @@ def _specs() -> list[dict]:
             "cls": "EonDevelopSaddlePtLanczos",
             "template": "eon/develop-saddle-pt-lanczos",
             "kind": "akmc",
-            "seeds": list(range(1000, 1010)),
+            "seeds": [1000, 1001],
             "starts": ["pt-island"],
-            "timeout": 7200,
+            "timeout": 3600,
         },
     ]
 
