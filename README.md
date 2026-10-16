@@ -170,9 +170,9 @@ The front page is a result whose status is `sota` and whose commit is the presen
 
 ## v2 score
 
-The 2014 mean leaves out failures. The comparable score does not. It is specified in `docs/design/decision.md` and run as described in `docs/harness.md`.
+The 2014 mean leaves out failures. The comparable score does not. It is specified in `docs/design/decision.md` and `docs/v2.md`, and the in-process wrapper is `docs/harness.md`.
 
-A force call is one entry to the potential wrapper in `optbench.counter`. The same wrapper is what ASE, pele, and Sella are charged for. A subprocess client still writes the legacy `benchmark.dat` from its own counter, and the per-start file next to it is marked `counter` `client`. That file is not a v2 score.
+A force call is one entry to `HarnessCounter`. ASE, pele, and Sella are charged through that counter. A compiled client reaches the same counter: eonclient through the `ext_pot` bridge in `optbench.extpot`, and an rgpot client through `RgpotCounter.calculate`. `uv run optbench run` still writes the legacy `benchmark.dat` from the client's own counter, and the per-start file next to it is marked `counter` `client`. That file is not a v2 score. `uv run optbench validate-counter` is the subset check that the server count matches eonclient. A subset is not a published mean.
 
 A v2 success is under the cap, at the force stop, and, when a reference is supplied, at Hessian index 0 for a minimum or index 1 for a saddle, with the energy and Kabsch RMSD inside the tolerances. A failure costs `2` times the cap. The table shows that PAR-2 mean, the Wilson 95% interval on the success rate, and the median and interquartile range with a bootstrap of 2000 resamples seeded by `20261015`.
 
@@ -182,17 +182,18 @@ Pt-island cost is force calls in a repetition divided by the searches in that re
 
 ## Statistics
 
-`benchmark.dat` keeps the rounded mean, because that is the 2014 record. ASV stores every start. The parameter is the geometry. Each value is the force-call count from one `eonclient` subprocess. Repeating a deterministic count is not a distribution, so `repeat` is 1.
+`benchmark.dat` keeps the rounded mean, because that is the 2014 record. A v2 measurement is an asv track. Force calls, the success bit, and the four failure classes are `track_*` values. Wall time is `time_*`. The parameters are the seed and the start. `results/asv` is asv's result tree, one file per commit and environment, with `machine.json` beside it. `uv.lock` pins `asv==0.6.6` and `asv-runner==0.3.1`. `environments/eon-3.5.0.yml` pins the conda-forge eOn binary. `docs/asv.md` is how another unit adds a code. `docs/asv-gaps.md` is the upstream list.
 
-The environment type is `uv-pip`, from `optbench.asv_uv`. It creates the environment with `uv venv` and installs with `uv pip`. ASV's own `uv` type still installs with `pip`. `eonclient` is not part of that environment. It has to be on `PATH`, or `EONCLIENT` has to name it. The seven Lennard-Jones 38 minimizers under `templates/eon-client/` are the benchmark classes in `benchmarks/bench_lj38.py`.
+The environment type is `uv-pip`, from `optbench.asv_uv`. It creates the environment with `uv venv` and installs with `uv pip`. The committed quadratic sample is that environment. eonclient is not part of it. The seven Lennard-Jones 38 classes in `benchmarks/bench_lj38.py` skip unless `OPTBENCH_ASV_EON=1`, and the default grid is one start unless `OPTBENCH_ASV_FULL=1`.
 
 ```bash
 uv run asv machine --yes
-uv run asv run HEAD -E uv-pip:3.12 -b Lj38EonLbfgsM100.track_force_calls
+uv run asv run COMMIT^! -b quadratic
+uv run optbench statistics --output results/validation/statistics.json
 uv run asv publish
 ```
 
-`asv run` needs the binary and runs all 1000 starts, one subprocess each. `asv publish` only reads `.asv/results`. `optbench.samples.sample_stats` is the mean, standard deviation, and quartiles of that vector.
+`asv run --quick` does not save. `optbench statistics` reads the saved tracks and does not rerun the optimizers. CI runs the quadratic suite with `HaoZeke/asv-perch@v1` (`.github/workflows/asv.yml`).
 
 ## Build the site
 

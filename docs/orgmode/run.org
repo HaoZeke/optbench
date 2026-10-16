@@ -114,3 +114,14 @@ eOn 3.5.0 reads a QuickMin step from =[QuickMin]=, a FIRE step from
 reads the steepest-descent step from =[Optimizer]= and calls the
 Lennard-Jones potential =lj_cluster=. The 3.5.0 name is =ljcluster=.
 The repository README is the longer form of these rules.
+
+The v2 counter, the seed sample, and the noise rule are =docs/v2.md=.
+=optbench statistics= reads asv tracks from =results/asv= (=docs/asv.md=).
+These two commands write under =results/validation/=. Neither file is
+a published mean.
+
+#+begin_src sh
+uv run optbench statistics --output results/validation/statistics.json
+uv run optbench validate-counter --limit 3 \
+  --output results/validation/lj38-counter.dat
+#+end_src

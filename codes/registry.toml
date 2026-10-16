@@ -12,7 +12,7 @@ repository = "https://github.com/TheochemUI/eon"
 ref = "3.5.0"
 commit = "4d8b34baf1ba8d2d980df29838bac1f969d1662c"
 committed = "2026-10-02"
-note = "Version string 3.5.0 and Python client 0.4.2. Lennard-Jones scores use this client."
+note = "Version string 3.5.0 and Python client 0.4.2. Lennard-Jones scores use this client. The subset counter check uses the conda-forge binary, which prints 3.5.0 (7ec1840). That check is not a published mean."
 
 [[code]]
 id = "rgmin"

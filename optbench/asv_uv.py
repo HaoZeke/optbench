@@ -48,6 +48,13 @@ class Uv(environment.Environment):
             ["uv", "venv", f"--python={self._python}", "--no-project", "--seed", self._path],
             env=env,
         )
+        # asv runs install_command by searching the environment's bin, not PATH.
+        # The pinned uv is what `uv pip install` in asv.conf.json executes.
+        python = os.path.join(self._path, "bin", "python")
+        util.check_call(
+            ["uv", "pip", "install", "--python", python, "uv==0.13.1"],
+            env=env,
+        )
         self._install_requirements()
 
     def _spec(self, key: str, val: str) -> str:

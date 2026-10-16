@@ -7,14 +7,43 @@ comparable only when ``counter`` is ``harness``.
 from __future__ import annotations
 
 import json
+import math
 import platform
 import tomllib
 from collections.abc import Callable, Sequence
 from pathlib import Path
 
 from .counter import CountedPotential
+from .failures import classify_failure
 from .score import score_v2
 from .stationary import jacobi_eigenvalues, judge_stationary, numerical_hessian
+
+# Keys a v2 result must carry, taken from the run, its metrics, its
+# provenance, and one start. Problem files list the same names.
+V2_KEYS = (
+    "schema",
+    "counter",
+    "force_calls",
+    "success",
+    "failure",
+    "comparable",
+    "code",
+    "code_version",
+    "commit",
+    "tuning",
+    "par2_mean",
+    "median",
+    "median_low",
+    "median_high",
+    "wilson_low",
+    "wilson_high",
+    "n",
+    "nfailed",
+    "n_cap",
+    "n_wrong_stationary",
+    "n_divergence",
+    "n_crash",
+)
 
 
 def collect_provenance(
@@ -58,6 +87,31 @@ def embed_point(coords: Sequence[float]) -> list[list[float]]:
     raise ValueError("embed a 2-vector or a 3-vector")
 
 
+def _finite(values) -> bool:
+    return all(math.isfinite(float(value)) for value in values)
+
+
+def _crash_record(name: str, potential: CountedPotential, error: str) -> dict:
+    return {
+        "schema": "optbench.start/v2",
+        "start": name,
+        "force_calls": potential.calls,
+        "verify_calls": potential.verify_calls,
+        "counter": "harness",
+        "comparable": True,
+        "success": False,
+        "failure": "crash",
+        "reasons": ["crash"],
+        "error": error,
+        "energy": None,
+        "force_norm": None,
+        "hessian_index": None,
+        "expected_index": None,
+        "rmsd": None,
+        "converged": False,
+    }
+
+
 def record_start(
     name: str,
     evaluate: Callable,
@@ -80,32 +134,48 @@ def record_start(
     evaluations go through ``verification`` and are not search calls.
     """
     potential = CountedPotential(evaluate)
-    outcome = optimize(potential)
+    try:
+        outcome = optimize(potential)
+    except Exception as exc:
+        return _crash_record(name, potential, exc.__class__.__name__)
     point = [float(value) for value in outcome["x"]]
-    with potential.verification():
-        hessian = numerical_hessian(
-            lambda coords: potential.energy_forces(coords)[1],
-            point,
-            step=fd_step,
+    energy = float(outcome["energy"])
+    observed_force = float(outcome["force_norm"])
+    finite = _finite([energy, observed_force, *point])
+    judged = {
+        "hessian_index": None,
+        "expected_index": None,
+        "rmsd": None,
+        "reasons": [],
+    }
+    if finite:
+        with potential.verification():
+            hessian = numerical_hessian(
+                lambda coords: potential.energy_forces(coords)[1],
+                point,
+                step=fd_step,
+            )
+            eigenvalues, _vectors = jacobi_eigenvalues(hessian)
+        coords = embed_point(point)
+        judged = judge_stationary(
+            kind=kind,
+            eigenvalues=eigenvalues,
+            energy=energy,
+            coords=coords,
+            reference_energy=reference_energy,
+            reference_coords=reference_coords,
+            energy_tol=energy_tol,
+            rmsd_tol=rmsd_tol,
+            eigenvalue_tol=eigenvalue_tol,
         )
-        eigenvalues, _vectors = jacobi_eigenvalues(hessian)
-    coords = embed_point(point)
-    judged = judge_stationary(
-        kind=kind,
-        eigenvalues=eigenvalues,
-        energy=float(outcome["energy"]),
-        coords=coords,
-        reference_energy=reference_energy,
-        reference_coords=reference_coords,
-        energy_tol=energy_tol,
-        rmsd_tol=rmsd_tol,
-        eigenvalue_tol=eigenvalue_tol,
-    )
     reasons = list(judged["reasons"])
+    if not finite or outcome.get("diverged"):
+        reasons.append("divergence")
     if potential.calls >= cap:
         reasons.append("cap")
-    if (not outcome["converged"]) or float(outcome["force_norm"]) > force_norm:
+    if (not outcome["converged"]) or (not finite) or observed_force > force_norm:
         reasons.append("force_norm")
+    failure = classify_failure(reasons)
     return {
         "schema": "optbench.start/v2",
         "start": name,
@@ -113,14 +183,15 @@ def record_start(
         "verify_calls": potential.verify_calls,
         "counter": "harness",
         "comparable": True,
-        "success": not reasons,
+        "success": failure is None,
+        "failure": failure,
         "reasons": reasons,
-        "energy": float(outcome["energy"]),
-        "force_norm": float(outcome["force_norm"]),
+        "energy": energy if finite else None,
+        "force_norm": observed_force if math.isfinite(observed_force) else None,
         "hessian_index": judged["hessian_index"],
         "expected_index": judged["expected_index"],
         "rmsd": judged["rmsd"],
-        "converged": bool(outcome["converged"]),
+        "converged": bool(outcome["converged"]) and finite,
     }
 
 
@@ -212,7 +283,13 @@ def tuning_label(run: dict) -> str:
 
 
 def summarise_run(starts: list[dict], cap: int | None) -> dict:
-    return score_v2(
-        [{"force_calls": start["force_calls"], "success": start["success"]} for start in starts],
-        cap,
-    )
+    """PAR-2 of these starts. A stored failure class is kept."""
+    records = []
+    for start in starts:
+        record = {"force_calls": start["force_calls"], "success": start["success"]}
+        if "failure" in start:
+            record["failure"] = start["failure"]
+        if start.get("reasons"):
+            record["reasons"] = start["reasons"]
+        records.append(record)
+    return score_v2(records, cap)

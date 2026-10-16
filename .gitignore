@@ -3,6 +3,7 @@ __pycache__/
 .pixi/
 .venv/
 .asv/
+env/
 .pytest_cache/
 softsaddle/work/
 softsaddle/lib/

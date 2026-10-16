@@ -7,6 +7,7 @@
    <section class="bench" id="aladatom">
    <h2>aladatom</h2>
    <dl class="bench-rule">
+   <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <h3>Present runs</h3>
@@ -41,6 +42,7 @@
    </section><section class="bench" id="standard_aladatom">
    <h2>standard_aladatom</h2>
    <dl class="bench-rule">
+   <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <h3>Present runs</h3>

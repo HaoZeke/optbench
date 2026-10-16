@@ -1,0 +1,23 @@
+kind validation
+problem minimization/lj38
+template eon-client/lbfgs-m100
+subset 3
+published_mean false
+counter harness
+client_counter eonclient
+code eOn
+code_version 3.5.0
+commit 7ec1840
+version_line 3.5.0 (7ec1840)
+lbfgs_memory 100
+lj_u0 1.0
+lj_psi 1.0
+lj_cutoff 15.0
+n 3
+matched_client 3
+matched_builtin 1
+potential ljcluster
+point_start cluster_0000
+point_server_energy 67118.5220749884
+point_client_energy 67118.5220749884
+note subset comparison of the harness counter and eonclient; not a published mean

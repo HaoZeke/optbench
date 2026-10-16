@@ -8,7 +8,7 @@
     "pythons": ["3.12"],
     "matrix": {},
     "benchmark_dir": "benchmarks",
-    "results_dir": ".asv/results",
+    "results_dir": "results/asv",
     "html_dir": ".asv/html",
     "branches": ["HEAD"],
     "build_command": [],

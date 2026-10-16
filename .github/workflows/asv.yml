@@ -1,0 +1,54 @@
+name: asv
+
+on:
+  push:
+    branches:
+      - main
+      - "design/**"
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: asv-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  bench:
+    name: asv-perch
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      - uses: HaoZeke/asv-perch@v1
+        with:
+          results-path: results/asv
+          post-comment: ${{ github.event_name == 'pull_request' && 'true' || 'false' }}
+          init-command: >-
+            uv python install 3.12 &&
+            uv sync --frozen --group dev &&
+            uv run asv machine --yes
+          benchmark-command: >-
+            uv run asv run --skip-existing --bench quadratic {sha}^!
+          baseline: |
+            label: base
+            sha: ${{ github.event.pull_request.base.sha || github.sha }}
+            env: uv-pip
+            description: Pinned uv environment from uv.lock and asv.conf.json
+          contenders: |
+            - label: head
+              sha: ${{ github.event.pull_request.head.sha || github.sha }}
+              env: uv-pip
+              description: Pinned uv environment from uv.lock and asv.conf.json
+          label-before: base
+          label-after: head
+          runner-info: ubuntu-latest

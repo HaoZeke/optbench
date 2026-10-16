@@ -1,8 +1,12 @@
 """One eonclient subprocess per Lennard-Jones 38 start.
 
-ASV stores the force-call count of every start as its own result.
-Repeating a deterministic count does not make a distribution.
-The start index is the parameter.
+The default grid is one seed and the first archive geometry. All 1000
+starts are selected when ``OPTBENCH_ASV_FULL=1`` at import time. The
+client runs only when ``OPTBENCH_ASV_EON=1``. Otherwise ``measure``
+raises ``NotImplementedError`` and asv-runner skips the parameter.
+
+The seed is on the grid so a later seeded displacement uses the same
+parameter names. This client invocation does not draw from it.
 """
 
 from __future__ import annotations
@@ -12,6 +16,8 @@ import shutil
 import tarfile
 import tempfile
 from pathlib import Path
+
+from optbench.asv_tracks import TrackedSearch as _TrackedSearch
 
 ROOT = Path(__file__).resolve().parents[1]
 ARCHIVE = (
@@ -35,6 +41,13 @@ TEMPLATES = (
 def start_names() -> list[str]:
     with tarfile.open(ARCHIVE) as packed:
         return sorted(name for name in packed.getnames() if name.endswith(".con"))
+
+
+def selected_starts() -> list[str]:
+    names = start_names()
+    if os.environ.get("OPTBENCH_ASV_FULL") == "1":
+        return names
+    return names[:1]
 
 
 def client_path() -> str:
@@ -61,40 +74,46 @@ def _cap(template_name: str) -> int:
     return _check_stop(resolve_problem(ROOT, problem_name), template)
 
 
-STARTS = start_names()
+_STARTS = selected_starts()
 
 
 def _bind(template_name: str, limit: int):
-    class _Benchmark:
-        param_names = ["start"]
-        params = STARTS
+    class _Benchmark(_TrackedSearch):
+        param_names = ["seed", "start"]
+        params = [["0"], _STARTS]
         timeout = limit
-        repeat = 1
-        rounds = 1
-        number = 1
 
-        def setup(self, start: str) -> None:
+        def measure(self, seed, start):
+            if os.environ.get("OPTBENCH_ASV_EON") != "1":
+                raise NotImplementedError("eonclient benchmarks run when OPTBENCH_ASV_EON=1")
             self.work = Path(tempfile.mkdtemp(prefix="optbench-lj38-"))
-            self.ini = _ini(template_name)
-            self.cap = _cap(template_name)
-            self.client = client_path()
-            with tarfile.open(ARCHIVE) as packed:
-                packed.extract(start, self.work, filter="data")
-            self.con = self.work / start
-
-        def teardown(self, start: str) -> None:
-            shutil.rmtree(self.work, ignore_errors=True)
-
-        def track_force_calls(self, start: str) -> float:
+            ini = _ini(self.template_name)
             from optbench.campaign import run_client
 
-            calls = run_client(self.client, self.ini, str(self.con), str(self.work / "run"))
+            with tarfile.open(ARCHIVE) as packed:
+                packed.extract(start, self.work, filter="data")
+            calls = run_client(
+                client_path(),
+                ini,
+                str(self.work / start),
+                str(self.work / "run"),
+            )
             if calls is None:
-                return float(self.cap)
-            return float(calls)
+                raise RuntimeError("eonclient returned no force-call count")
+            success = calls < self.cap
+            return {
+                "force_calls": float(calls),
+                "success": success,
+                "failure": None if success else "cap",
+            }
 
-        track_force_calls.unit = "force calls"
+        def teardown(self, seed, start):
+            work = getattr(self, "work", None)
+            if work is not None:
+                shutil.rmtree(work, ignore_errors=True)
 
+    _Benchmark.template_name = template_name
+    _Benchmark.cap = _cap(template_name)
     return _Benchmark
 
 

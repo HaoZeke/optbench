@@ -19,6 +19,6 @@ These pieces are shared with the designs that were not selected, and they are pa
 - `tuning` of `default` or `tuned`
 - provenance of code, version, commit, parameters, and machine
 
-The harness counts a force call by wrapping the potential. A code's own counter is not the v2 cost. The legacy half-even mean stays in `benchmark.dat` and on the archive tables, labelled legacy.
+The harness counts a force call by wrapping the potential. A compiled client uses the same `HarnessCounter`, through the socket or through `RgpotCounter.calculate`. A code's own counter is not the v2 cost. The legacy half-even mean stays in `benchmark.dat` and on the archive tables, labelled legacy. `docs/v2.md` is the spec for that counter, the seed sample, the failure classes, and the noise rule. Those per-start counts are asv tracks under `results/asv`, keyed to the commit asv ran. `docs/asv.md` is how to add one. `docs/asv-gaps.md` is the upstream work that file does not paper over.
 
 Illustrations in `par2.md` that rebuild a PAR-2 mean from a rounded legacy mean are not v2 scores. A v2 score is computed from the per-start harness record.

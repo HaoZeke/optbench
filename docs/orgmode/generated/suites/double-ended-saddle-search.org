@@ -8,6 +8,7 @@
    <h2>LJ38 double-ended saddle</h2>
    <dl class="bench-rule">
    <dt>Stop</dt><dd>gradient norm below 0.001</dd>
+   <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    </dl>
    <h3>Present runs</h3>
    <div class="bench-table"><table>
@@ -151,6 +152,7 @@
    </section><section class="bench" id="lj38_2ts_separation">
    <h2>lj38_2ts_separation</h2>
    <dl class="bench-rule">
+   <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <h3>Present runs</h3>
@@ -202,6 +204,7 @@
    </section><section class="bench" id="pt-island">
    <h2>pt-island</h2>
    <dl class="bench-rule">
+   <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <h3>Present runs</h3>

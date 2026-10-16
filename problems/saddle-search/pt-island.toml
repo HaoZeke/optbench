@@ -28,8 +28,37 @@ geometries = [
 [metrics]
 required = ["force_calls", "force_calls_mean_error", "fraction_connected", "total_searches", "unique_saddles"]
 
+[scoring.legacy]
+label = "legacy"
+rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean. The row stays labelled legacy."
+
 [scoring.v2]
 version = "par2-wilson-bootstrap"
 cost = "force_calls divided by total_searches in that repetition"
 success = "index 1, energy, and Kabsch RMSD when the search records a stationary point"
 note = "The legacy force_calls value is the mean of the campaign totals. The recorded files have no per-search cap, so PAR-2 is not applied to those ratios."
+counter = "harness"
+required = [
+  "schema",
+  "counter",
+  "force_calls",
+  "success",
+  "failure",
+  "comparable",
+  "code",
+  "code_version",
+  "commit",
+  "tuning",
+  "par2_mean",
+  "median",
+  "median_low",
+  "median_high",
+  "wilson_low",
+  "wilson_high",
+  "n",
+  "nfailed",
+  "n_cap",
+  "n_wrong_stationary",
+  "n_divergence",
+  "n_crash",
+]
