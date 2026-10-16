@@ -70,13 +70,16 @@ def run(
     work: Path | None = None,
 ) -> None:
     """Run one problem template and write benchmark.dat."""
-    from optbench.campaign import run as run_campaign
+    from optbench.campaign import load_template, run as run_campaign
 
+    loaded = load_template(root, template)
+    if loaded["engine"] == "eon-client":
+        client = _eon_client(client)
     summary = run_campaign(
         root,
         problem,
         template,
-        client=_eon_client(client),
+        client=client,
         geometries=geometries,
         output=output,
         workers=workers,

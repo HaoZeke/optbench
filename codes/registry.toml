@@ -30,9 +30,9 @@ name = "rgsaddle"
 role = "saddle search"
 repository = "https://github.com/OmniPotentRPC/rgsaddle"
 ref = "main"
-commit = "8bea1002b06a52f7b2260fed57469b2a45395997"
-committed = "2026-10-11"
-note = "Dimer and band saddle search. It does not replace a minimization score."
+commit = "c0db2b8d333c557251635cb8bb7b3d81f0088a71"
+committed = "2026-10-15"
+note = "Dimer, Lanczos, and P-RFO saddle search at main c0db2b8d. Lennard-Jones and Pt-island scores use this commit. Nonlinear CG is refused by check_force_driven; the min-mode translators are L-BFGS and FIRE."
 
 [[code]]
 id = "ase"

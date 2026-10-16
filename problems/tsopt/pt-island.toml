@@ -5,6 +5,29 @@ problem = "pt-island"
 contract = "partial"
 entry_count = 7
 
+[potential]
+kind = "morse"
+D = 0.7102
+alpha = 1.6047
+r0 = 2.897
+cutoff = 9.5
+pair_style = "morse/smooth/linear"
+pbc = [true, true, false]
+
+[sample]
+starts = 49
+geometry = "pt-island-con/initial_%d.con"
+reactant = "pt-island-con/reactant.con"
+
+[input]
+archive_path = "website/tsopt/pt-island/pt-island-con.tgz"
+
+[convergence]
+norm = "l2"
+force_norm = 0.001
+force_unit = "eV/Angstrom"
+max_force_calls = 10000
+
 [metrics]
 required = ["force_calls", "force_calls_max", "force_calls_median", "force_calls_min", "nfailed"]
 
@@ -18,6 +41,7 @@ par_factor = 2
 bootstrap_resamples = 2000
 bootstrap_seed = 20261015
 counter = "harness"
+success = "harness force calls under the cap, Euclidean force norm at the stop, and Hessian index 1"
 required = [
   "schema",
   "counter",

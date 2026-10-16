@@ -98,11 +98,22 @@ def iter_geometries(path: Path) -> list[Path]:
 
 
 def _check_stop(problem: dict, template: dict) -> int:
+    """Force-call cap shared by the problem and the template.
+
+    A problem that states ``max_force_calls`` owns the cap. The template
+    may not undercut it. A problem with no cap uses the template
+    ``max_iterations`` (the saddle-search repetitions are one of these).
+    """
     convergence = problem.get("convergence") or {}
-    cap = int(convergence["max_force_calls"])
     optimizer = (template.get("ini") or {}).get("Optimizer") or {}
-    if "max_iterations" in optimizer and int(optimizer["max_iterations"]) < cap:
-        raise ValueError("template max_iterations is below the problem force-call cap")
+    if "max_force_calls" in convergence:
+        cap = int(convergence["max_force_calls"])
+        if "max_iterations" in optimizer and int(optimizer["max_iterations"]) < cap:
+            raise ValueError("template max_iterations is below the problem force-call cap")
+    elif "max_iterations" in optimizer:
+        cap = int(optimizer["max_iterations"])
+    else:
+        raise ValueError(f"{problem['id']} has no force-call cap")
     if "force_norm" in convergence and "converged_force" in optimizer:
         if abs(float(optimizer["converged_force"]) - float(convergence["force_norm"])) > 1e-12:
             raise ValueError("template converged_force is not the problem force norm")
@@ -174,7 +185,7 @@ def run(
     problem_name: str,
     template_name: str,
     *,
-    client: Path,
+    client: Path | None = None,
     geometries: Path | None = None,
     output: Path,
     workers: int = 1,
@@ -182,8 +193,21 @@ def run(
 ) -> dict:
     problem = resolve_problem(root, problem_name)
     template = load_template(root, template_name)
+    if template["engine"] == "rgsaddle":
+        from .rgsaddle_minmode import run_template
+
+        return run_template(
+            root,
+            problem,
+            template,
+            output=output,
+            workers=workers,
+            work=work,
+        )
     if template["engine"] != "eon-client":
         raise ValueError(f"unknown engine {template['engine']}")
+    if client is None:
+        raise ValueError("eon-client needs a client binary")
     cap = _check_stop(problem, template)
     ini = format_ini(template["ini"])
     if geometries is None:

@@ -5,7 +5,9 @@ from pathlib import Path
 
 import pytest
 
+from benchmarks import bench_rgsaddle
 from benchmarks.bench_lj38 import Lj38EonLbfgsM100, selected_starts, start_names
+from benchmarks.bench_rgsaddle import RgsaddleLj38DimerLbfgs, RgsaddlePtDimerLbfgs
 from benchmarks.pending import code_ids, problem_ids
 from benchmarks.quadratic import QuadraticDisplacement, QuadraticDimer
 from optbench.asv_score import statistics_from_asv
@@ -35,6 +37,43 @@ def test_asv_uses_the_uv_environment():
     workflow = (ROOT / ".github" / "workflows" / "asv.yml").read_text(encoding="utf-8")
     assert "HaoZeke/asv-perch@v1" in workflow
     assert "results/asv" in workflow
+
+
+def test_rgsaddle_grid_is_seed_then_one_start_until_full(monkeypatch):
+    classes = [
+        value
+        for value in vars(bench_rgsaddle).values()
+        if isinstance(value, type) and getattr(value, "template_id", "").startswith("rgsaddle/")
+    ]
+    assert len(classes) == 22
+    for benchmark in classes:
+        assert benchmark.param_names == ["seed", "start"]
+        assert benchmark.params[0] == ["0"]
+        assert len(benchmark.params[1]) == 1
+        assert benchmark.repeat == 1
+        assert benchmark.rounds == 1
+        assert benchmark.number == 1
+        assert benchmark.sample_time == 0
+        assert benchmark.warmup_time == 0
+        assert benchmark.cap >= 1000
+        assert benchmark.track_force_calls.unit == "force calls"
+        assert benchmark.track_success.unit == "fraction"
+        assert benchmark.track_failure_cap.unit == "count"
+        assert benchmark.track_failure_wrong_stationary.unit == "count"
+        assert benchmark.track_failure_divergence.unit == "count"
+        assert benchmark.track_failure_crash.unit == "count"
+        assert issubclass(benchmark, bench_rgsaddle._TrackedSearch)
+    assert RgsaddleLj38DimerLbfgs.params[1] == ["0000"]
+    assert RgsaddleLj38DimerLbfgs.cap == 10000
+    assert RgsaddlePtDimerLbfgs.params[1] == ["initial_0"]
+    assert len(bench_rgsaddle.lj38_start_names()) == 200
+    assert len(bench_rgsaddle.pt_start_names()) == 49
+    monkeypatch.setenv("OPTBENCH_ASV_FULL", "1")
+    assert bench_rgsaddle.selected_lj38() == bench_rgsaddle.lj38_start_names()
+    assert bench_rgsaddle.selected_pt() == bench_rgsaddle.pt_start_names()
+    monkeypatch.delenv("RGSADDLE_LIB", raising=False)
+    with pytest.raises(RuntimeError):
+        RgsaddleLj38DimerLbfgs().setup("0", "0000")
 
 
 def test_each_lj38_start_is_one_asv_parameter(monkeypatch):
