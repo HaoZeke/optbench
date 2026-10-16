@@ -48,6 +48,13 @@ class Uv(environment.Environment):
             ["uv", "venv", f"--python={self._python}", "--no-project", "--seed", self._path],
             env=env,
         )
+        # asv.conf.json installs the project with ``uv pip``. ASV resolves that
+        # executable inside the environment, so the uv binary has to live there.
+        uv_path = shutil.which("uv")
+        if uv_path:
+            dest = os.path.join(self._path, "bin", "uv")
+            if not os.path.exists(dest):
+                os.symlink(uv_path, dest)
         self._install_requirements()
 
     def _spec(self, key: str, val: str) -> str:
