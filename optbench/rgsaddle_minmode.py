@@ -571,6 +571,7 @@ def _run_minmode(spec: dict) -> dict:
             previous = None
             report = None
             while potential.calls < cap:
+                before = potential.calls
                 report = _blank_report(lib)
                 rc = lib.rgsaddle_minmode_estimate(session, callback, None, ctypes.byref(report))
                 steps += 1
@@ -585,6 +586,10 @@ def _run_minmode(spec: dict) -> dict:
                     converged = True
                     break
                 if previous is not None and float(np.linalg.norm(current - previous)) < 1e-8:
+                    break
+                # A repeated geometry is a cache hit. The harness count
+                # stays put and the estimate is not moving.
+                if potential.calls == before:
                     break
                 previous = current
             point = _position(lib, lib.rgsaddle_minmode_position, session, dof)
@@ -635,6 +640,7 @@ def _run_minmode(spec: dict) -> dict:
             return record
         report = None
         while potential.calls < cap:
+            before = potential.calls
             report = _blank_report(lib)
             rc = lib.rgsaddle_minmode_step(session, callback, None, ctypes.byref(report))
             steps += 1
@@ -645,6 +651,10 @@ def _run_minmode(spec: dict) -> dict:
             library_evals += int(report.evaluations)
             if int(report.status) == 1:
                 converged = True
+                break
+            # FIRE can sit on one geometry. Those repeats are cache hits,
+            # so the cap never arrives. Stop and judge the point we have.
+            if potential.calls == before:
                 break
         point = _position(lib, lib.rgsaddle_minmode_position, session, dof)
         if spec.get("defer_hessian"):
@@ -783,6 +793,7 @@ def _run_prfo(spec: dict) -> dict:
     library_evals = 0
     try:
         while potential.calls < cap:
+            before = potential.calls
             report = _blank_report(lib)
             rc = lib.rgsaddle_sella_saddle_step(session, callback, None, ctypes.byref(report))
             steps += 1
@@ -791,6 +802,8 @@ def _run_prfo(spec: dict) -> dict:
             library_evals += int(report.evaluations)
             if int(report.status) == 1:
                 converged = True
+                break
+            if potential.calls == before:
                 break
         point = _position(lib, lib.rgsaddle_sella_saddle_position, session, dof)
     finally:
