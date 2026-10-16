@@ -11,6 +11,7 @@ what ``archive/entries/neb/Pt-heptamer/eon-lbfgs/report.sh`` does.
 from __future__ import annotations
 
 import json
+import os
 import random
 import shutil
 import statistics
@@ -86,6 +87,15 @@ def _read_dat(path: Path) -> dict[str, str]:
     return found
 
 
+def _client_env(client: str) -> dict[str, str]:
+    env = os.environ.copy()
+    binary = Path(client).resolve()
+    lib = binary.parent.parent / "lib"
+    env["PATH"] = str(binary.parent) + os.pathsep + env.get("PATH", "")
+    env["LD_LIBRARY_PATH"] = str(lib) + os.pathsep + env.get("LD_LIBRARY_PATH", "")
+    return env
+
+
 def _execute(spec: tuple) -> dict:
     client, ini, work, copies, texts, count_key = spec
     dest = Path(work)
@@ -102,6 +112,7 @@ def _execute(spec: tuple) -> dict:
     proc = subprocess.run(
         [client],
         cwd=dest,
+        env=_client_env(client),
         stdout=subprocess.DEVNULL,
         stderr=subprocess.PIPE,
         check=False,
@@ -113,12 +124,15 @@ def _execute(spec: tuple) -> dict:
     base = client_result(dest)
     raw_text = fields.get(count_key)
     raw = int(float(raw_text)) if raw_text is not None else None
+    extrema_text = fields.get("number_of_extrema")
+    extrema = int(float(extrema_text)) if extrema_text is not None else None
     return {
         "geometry": dest.name,
         "force_calls": base["force_calls"],
         "raw": raw,
         "reason": base["reason"] if fields else None,
         "count_key": count_key,
+        "extrema": extrema,
     }
 
 
@@ -199,28 +213,39 @@ def _finish(
     rows: list[dict],
     output: Path,
     images: int,
+    extras: dict | None = None,
 ) -> dict:
     cap = int(template["failure_cap"])
     summary = report_summary(rows, cap, images)
-    summary_for_text = dict(summary)
+    if extras:
+        summary.update(extras)
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(benchmark_text(summary_for_text, template), encoding="utf-8")
+    body = benchmark_text(summary, template)
+    extra_lines = []
+    for key in ("transition_states", "extrema_total"):
+        if summary.get(key) is not None:
+            extra_lines.append(f"{key} {summary[key]}")
+    if extra_lines:
+        body = body.rstrip("\n") + "\n" + "\n".join(extra_lines) + "\n"
+    output.write_text(body, encoding="utf-8")
     start_rows = []
     for row in rows:
         raw = row["raw"]
         reason = row["reason"]
         bad = raw is None or (reason is not None and reason != "0") or (raw is not None and raw >= cap)
         recorded = None if raw is None else raw / images
-        start_rows.append(
-            {
-                "failed": bad,
-                "force_calls": recorded,
-                "geometry": row["geometry"],
-                "raw": raw,
-                "reason": reason,
-                "count_key": row.get("count_key"),
-            }
-        )
+        item = {
+            "failed": bad,
+            "force_calls": recorded,
+            "geometry": row["geometry"],
+            "raw": raw,
+            "reason": reason,
+            "count_key": row.get("count_key"),
+        }
+        for key in ("extrema", "overlap", "k", "client_reason", "last_force_calls", "seconds", "seed"):
+            if key in row and row[key] is not None:
+                item[key] = row[key]
+        start_rows.append(item)
     write_starts(output.with_suffix(".starts"), start_rows)
     summary["starts"] = len(rows)
     summary["template"] = template["id"]
@@ -342,6 +367,203 @@ def run_ts_pt(root: Path, template_name: str, client: Path, output: Path, work: 
     return _finish(template, rows, output, 1)
 
 
+def _pair_count(rows: list[dict]) -> dict:
+    """Pairs with at least two band extrema, and the sum of that counter.
+
+    ``number_of_extrema`` is the climbing-image count written by the
+    client. The 2014 optim and pele ``transition_states`` values are a
+    different code's statistic. This row does not reuse those numbers.
+    """
+    found = 0
+    total = 0
+    for row in rows:
+        extrema = row.get("extrema")
+        if extrema is None:
+            continue
+        total += int(extrema)
+        if int(extrema) >= 2:
+            found += 1
+    return {"transition_states": found, "extrema_total": total}
+
+
+def run_de_2ts(root: Path, template_name: str, client: Path, output: Path, work: Path, workers: int) -> dict:
+    """All 51 xyz pairs, 0 through 50, converted to free-cluster con files."""
+    from .eon_parse import xyz_to_con
+
+    template, ini = _template(root, template_name)
+    unpacked = _extract(
+        _stored(root, "website/double-ended-saddle-search/lj38_2ts_separation/coords.tgz"),
+        work / "unpacked",
+    )
+    folder = unpacked / "coords"
+    specs = []
+    for index in range(51):
+        start = folder / f"start_{index}.xyz"
+        end = folder / f"end_{index}.xyz"
+        if not start.is_file() or not end.is_file():
+            raise FileNotFoundError(f"missing pair {index} in {folder}")
+        specs.append(
+            (
+                str(work / "runs" / f"pair_{index:02d}"),
+                [],
+                [
+                    ("reactant.con", xyz_to_con(start.read_text(encoding="utf-8"))),
+                    ("product.con", xyz_to_con(end.read_text(encoding="utf-8"))),
+                ],
+                "total_force_calls",
+            )
+        )
+    rows = _run_specs(client, ini, specs, workers)
+    return _finish(template, rows, output, 1, _pair_count(rows))
+
+
+def _numpy_direction() -> str:
+    """The archived ``random_mode.py`` vector. The seed is not the geometry index."""
+    import io
+    import sys
+
+    try:
+        import numpy as np
+    except ImportError:
+        bundled = Path.home() / "opt" / "eon" / "py"
+        sys.path.insert(0, str(bundled))
+        import numpy as np
+
+    np.random.seed(314159)
+    mode = np.random.random((38, 3))
+    mode /= np.linalg.norm(mode)
+    buffer = io.StringIO()
+    np.savetxt(buffer, mode)
+    return buffer.getvalue()
+
+
+def _lowest_once(client: str, ini: str, work: str, con: str, direction: str) -> dict:
+    dest = Path(work)
+    dest.mkdir(parents=True, exist_ok=True)
+    (dest / "config.ini").write_text(ini, encoding="utf-8")
+    shutil.copy(con, dest / "pos.con")
+    shutil.copy(con, dest / "displacement.con")
+    (dest / "direction.dat").write_text(direction, encoding="utf-8")
+    proc = subprocess.run(
+        [client],
+        cwd=dest,
+        env=_client_env(client),
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.PIPE,
+        check=False,
+        text=True,
+    )
+    if proc.returncode != 0:
+        (dest / "stderr.txt").write_text(proc.stderr or "", encoding="utf-8")
+    fields = _read_dat(dest / "results.dat")
+    raw_text = fields.get("total_force_calls")
+    raw = int(float(raw_text)) if raw_text is not None else None
+    mode_path = dest / "mode.dat"
+    mode_text = mode_path.read_text(encoding="utf-8", errors="replace") if mode_path.is_file() else ""
+    return {
+        "raw": raw,
+        "reason": fields.get("termination_reason"),
+        "mode_text": mode_text,
+    }
+
+
+def _lowest_job(spec: tuple) -> dict:
+    from .eon_parse import abs_overlap, flat_floats
+
+    client, sections, work, con, reference_text, direction, method, limit, threshold = spec
+    reference = flat_floats(reference_text)
+    base = json.loads(sections)
+
+    def evaluate(k: int):
+        sections_k = json.loads(sections)
+        if method == "dimer":
+            sections_k.setdefault("Dimer", {})["rotations_max"] = k
+        elif method == "lanczos":
+            sections_k.setdefault("Lanczos", {})["max_iterations"] = k
+        else:
+            raise ValueError(f"unknown lowest mode {method}")
+        found = _lowest_once(client, format_ini(sections_k), work, con, direction)
+        overlap = None
+        if found["mode_text"]:
+            try:
+                overlap = abs_overlap(flat_floats(found["mode_text"]), reference)
+            except ValueError:
+                overlap = None
+        ok = overlap is not None and overlap >= threshold
+        return ok, {"raw": found["raw"], "reason": found["reason"], "overlap": overlap, "k": k}
+
+    # Walk k = 1, 2, ... and stop at the first overlap. That is the
+    # archived protocol. A doubling search can skip the smallest k when
+    # the overlap is not monotonic.
+    del base
+    k = None
+    payload = None
+    for attempt in range(1, limit + 1):
+        ok_k, payload = evaluate(attempt)
+        if ok_k:
+            k = attempt
+            break
+    ok = k is not None
+    last_raw = None if payload is None else payload.get("raw")
+    return {
+        "geometry": Path(work).name,
+        "force_calls": last_raw if ok else None,
+        "raw": last_raw if ok else None,
+        "last_force_calls": last_raw,
+        "reason": "0" if ok else "no-overlap",
+        "client_reason": None if payload is None else payload.get("reason"),
+        "count_key": "total_force_calls",
+        "overlap": None if payload is None else payload.get("overlap"),
+        "k": k,
+    }
+
+
+def run_lowest(root: Path, template_name: str, client: Path, output: Path, work: Path, workers: int) -> dict:
+    """Smallest iteration count whose mode overlaps the reference by 0.99.
+
+    ``saddle_search`` ``max_iterations`` is 0, so the client stops after
+    the mode. A termination reason of 5 is the climb limit, not a failed
+    mode. ``nfailed`` counts geometries that never reach the overlap.
+    The recorded calls are that successful run's ``total_force_calls``.
+    """
+    template = load_template(root, template_name)
+    method = template["ini"]["Saddle Search"]["min_mode_method"]
+    limit = int(template.get("iteration_limit", 1000))
+    threshold = float(template.get("overlap", 0.99))
+    unpacked = _extract(
+        _stored(root, "website/lowest-eigenvector/lj38/coords-con.tar.gz"),
+        work / "unpacked",
+    )
+    folder = unpacked / "coords-con"
+    direction = _numpy_direction()
+    sections = json.dumps(template["ini"])
+    specs = []
+    for index in range(200):
+        con = folder / f"{index:04d}.con"
+        mode = folder / f"{index:04d}_mode"
+        if not con.is_file() or not mode.is_file():
+            raise FileNotFoundError(f"missing lowest-mode geometry {index}")
+        specs.append(
+            (
+                str(client),
+                sections,
+                str(work / "runs" / f"{index:04d}"),
+                str(con),
+                mode.read_text(encoding="utf-8", errors="replace"),
+                direction,
+                method,
+                limit,
+                threshold,
+            )
+        )
+    if workers <= 1:
+        rows = [_lowest_job(spec) for spec in specs]
+    else:
+        with ProcessPoolExecutor(max_workers=workers) as pool:
+            rows = list(pool.map(_lowest_job, specs))
+    return _finish(template, rows, output, 1)
+
+
 JOBS = {
     "neb-pt-lbfgs": ("eon/neb-pt-lbfgs", run_neb_pt),
     "neb-pt-lbfgs-m100": ("eon/neb-pt-lbfgs-m100", run_neb_pt),
@@ -353,6 +575,22 @@ JOBS = {
     "ts-lj38-dimer-m100": ("eon/ts-lj38-dimer-m100", run_ts_lj38),
     "ts-pt-dimer": ("eon/ts-pt-dimer", run_ts_pt),
     "ts-pt-dimer-m100": ("eon/ts-pt-dimer-m100", run_ts_pt),
+    "ts-lj38-lanczos": ("eon/develop-ts-lj38-lanczos", run_ts_lj38),
+    "ts-lj38-dimer-develop": ("eon/develop-ts-lj38-dimer", run_ts_lj38),
+    "ts-pt-lanczos": ("eon/develop-ts-pt-lanczos", run_ts_pt),
+    "ts-pt-dimer-develop": ("eon/develop-ts-pt-dimer", run_ts_pt),
+    "de-lj38-ew": ("eon/develop-de-lj38-ew", run_de_lj38),
+    "de-lj38-oci": ("eon/develop-de-lj38-oci", run_de_lj38),
+    "de-lj38-cap": ("eon/develop-de-lj38-cap", run_de_lj38),
+    "de-pt-ew": ("eon/develop-de-pt-ew", run_de_pt),
+    "de-pt-oci": ("eon/develop-de-pt-oci", run_de_pt),
+    "de-2ts": ("eon/develop-de-2ts", run_de_2ts),
+    "de-2ts-oci": ("eon/develop-de-2ts-oci", run_de_2ts),
+    "de-2ts-ew": ("eon/develop-de-2ts-ew", run_de_2ts),
+    "low-lj38-dimer": ("eon/develop-low-lj38-dimer", run_lowest),
+    "low-lj38-lanczos": ("eon/develop-low-lj38-lanczos", run_lowest),
+    "saddle-pt-dimer": ("eon/develop-saddle-pt-dimer", None),
+    "saddle-pt-lanczos": ("eon/develop-saddle-pt-lanczos", None),
 }
 
 
@@ -364,13 +602,21 @@ def run_named(
     *,
     workers: int = 1,
     work: Path | None = None,
+    repetitions: int | None = None,
 ) -> dict:
     if name not in JOBS:
         known = ", ".join(sorted(JOBS))
         raise SystemExit(f"unknown eon job {name}. known: {known}")
     template_name, fn = JOBS[name]
     scratch = work or output.parent / "work" / name
-    summary = fn(root, template_name, client, output, scratch, workers)
+    if fn is None:
+        from .eon_akmc import run_saddle
+
+        fn = run_saddle
+    if repetitions is None:
+        summary = fn(root, template_name, client, output, scratch, workers)
+    else:
+        summary = fn(root, template_name, client, output, scratch, workers, repetitions)
     print(
         f"{summary['problem']} {summary['template']} "
         f"force_calls={summary['force_calls']} nfailed={summary['nfailed']} "

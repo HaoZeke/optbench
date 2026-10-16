@@ -98,6 +98,7 @@ def eon_job(
     output: Path = Path("benchmark.dat"),
     workers: int = 1,
     work: Path | None = None,
+    repetitions: int | None = None,
 ) -> None:
     """Run one named eOn band or saddle job and write benchmark.dat."""
     from optbench.eon_jobs import run_named
@@ -109,6 +110,7 @@ def eon_job(
         output,
         workers=workers,
         work=work,
+        repetitions=repetitions,
     )
 
 

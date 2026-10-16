@@ -48,6 +48,11 @@ class Uv(environment.Environment):
             ["uv", "venv", f"--python={self._python}", "--no-project", "--seed", self._path],
             env=env,
         )
+        # asv resolves install_command only inside the environment bin.
+        # The config runs `uv pip install`, so the uv binary has to live there.
+        uv_link = os.path.join(self._path, "bin", "uv")
+        if not os.path.exists(uv_link):
+            os.symlink(shutil.which("uv"), uv_link)
         self._install_requirements()
 
     def _spec(self, key: str, val: str) -> str:

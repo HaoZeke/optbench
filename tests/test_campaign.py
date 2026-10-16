@@ -22,6 +22,11 @@ def test_shipped_templates_use_the_lj38_stop():
     assert "eon/neb-pt-lbfgs" in ids
     assert "eon/de-lj38-lbfgs-m100" in ids
     assert "eon/ts-pt-dimer" in ids
+    assert "eon/develop-ts-lj38-lanczos" in ids
+    assert "eon/develop-de-lj38-cap" in ids
+    assert "eon/develop-low-lj38-dimer" in ids
+    assert "eon/develop-saddle-pt-lanczos" in ids
+    assert "eon/develop-de-2ts" in ids
 
 
 def test_run_writes_one_benchmark_dat(tmp_path: Path):

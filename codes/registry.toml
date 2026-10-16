@@ -25,6 +25,16 @@ committed = "2026-10-15"
 note = "Current main, including merged pull request 776. The version string is 3.6.0. Templates under templates/eon/ use this commit. The 3.5.0 pin above stays for the scores that were run on it."
 
 [[code]]
+id = "eon-develop"
+name = "eOn"
+role = "minimization and saddle search"
+repository = "https://github.com/TheochemUI/eon"
+ref = "develop"
+commit = "7095b23ac17d49f434a5e08ccb072897ceca698e"
+committed = "2026-10-16"
+note = "develop HEAD used for the eon-full-2 rows. The version string is 3.6.0. GPR-dimer is absent: TheochemUI/gpr_optim is private and was not in the tree, and eonclient reports GPRD disabled. No GPR-dimer score is filed."
+
+[[code]]
 id = "rgmin"
 name = "rgmin"
 role = "minimization"
