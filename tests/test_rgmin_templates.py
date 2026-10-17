@@ -4,7 +4,7 @@ from pathlib import Path
 from optbench.campaign import _check_stop, list_templates, resolve_problem, run
 
 ROOT = Path(__file__).resolve().parents[1]
-COMMIT = "24236559f3815847cac89ba0a7be634ce0beb4a9"
+COMMIT = "fd26a60ddd48796dcad4af26e4609f64c1c8a842"
 METHODS = {
     "lbfgs",
     "fire",
@@ -33,7 +33,7 @@ def test_rgmin_templates_cover_both_problems_and_both_tunings():
     for template in found:
         assert template["engine"] == "rgmin"
         assert template["commit"] == COMMIT
-        assert template["code_version"] == "0.4.0"
+        assert template["code_version"] == "0.4.1"
         assert template["tuning"] in ("default", "tuned")
         assert template["rgmin"]["method"] in METHODS
         problem = resolve_problem(ROOT, template["problem"])

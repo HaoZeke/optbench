@@ -1,7 +1,7 @@
 """rgmin minimization, one class per template.
 
 ``param_names`` are the seed and the start index. Seed ``0`` is the
-archived geometry. rgmin 0.4.0 has no optimizer seed, so the seed is not
+archived geometry. rgmin 0.4.1 has no optimizer seed, so the seed is not
 passed into the solver.
 
 The default grid is that seed and start ``0``, which keeps ``asv check``
