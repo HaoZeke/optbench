@@ -18,6 +18,8 @@ uv run optbench templates
 
 `uv run` reads `pyproject.toml`, installs the command-line library, and runs that command. `pytest` is the test runner. `check` exits 0 when every partial contract covers its archived rows and `oracle/archive_gaps.txt` matches the departures. `templates` prints every template id.
 
+`uv run optbench board` reads `results/campaign` and `results/asv` and writes `results/board` plus the v2 table on the Board page. It does not start a search. A row that used fewer starts than the problem's full set is marked partial and left off the ranked table.
+
 The harness does not contain eOn, pele, or Sella. Those are installed separately, and the commands below say which release produced the files in `results/campaign/`.
 
 ## Reproduce the Lennard-Jones 38 L-BFGS mean

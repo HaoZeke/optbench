@@ -1,0 +1,1105 @@
+"""Leaderboard from committed campaign files and asv tracks.
+
+``uv run optbench board`` does not run a search. It reads
+``results/campaign`` and ``results/asv``, scores each row with the v2
+PAR-2 reducer, and writes one table per problem plus the Dolan-Moré
+profile and a cost-versus-success scatter.
+
+A row whose start count is below the problem's full set is partial.
+One-start asv grids are partial. The full set is the problem file's
+sample, or the Morse archive when that file gives no sample count.
+It is not the largest campaign file. A result that sets ``ranked false``
+stays off the ranked table. Partial rows stay in the output.
+Two files for the same problem, template, and code version are both
+kept; the one that matches ``codes/registry.toml`` is marked current.
+"""
+
+from __future__ import annotations
+
+import html
+import json
+import math
+import re
+import shutil
+import subprocess
+import tarfile
+import tomllib
+from collections import defaultdict
+from pathlib import Path
+
+from .campaign import geometry_archive, list_templates
+from .dat import DatError, parse_lenient
+from .failures import FAILURES
+from .problems import load_all
+from .profile import performance_profile, profile_cost
+from .score import score_v2
+from .site import campaign_problem
+from .v2 import parse_repetitions
+
+BOARD_SCHEMA = "optbench.board/v1"
+
+
+def _slug(problem_id: str) -> str:
+    return problem_id.replace("/", "-")
+
+
+def _float_field(fields: dict[str, str], key: str) -> float | None:
+    raw = fields.get(key)
+    if raw is None or raw == "":
+        return None
+    try:
+        return float(raw)
+    except ValueError:
+        return None
+
+
+def _json_lines(path: Path) -> list[dict]:
+    rows = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        value = json.loads(line)
+        if isinstance(value, dict):
+            rows.append(value)
+    return rows
+
+
+def stated_full_n(root: Path, problem: dict) -> int | None:
+    """How many starts the problem file calls a complete score.
+
+    ``sample.starts`` or ``sample.pairs`` wins. A minimization archive
+    with no sample count uses the number of ``.con`` files, which is
+    the Morse bulk set.
+    """
+    sample = problem.get("sample") or {}
+    for key in ("starts", "pairs", "repetitions"):
+        value = sample.get(key)
+        if value not in (None, "", 0, "0"):
+            return int(value)
+    archive_path = (problem.get("input") or {}).get("archive_path")
+    if not archive_path:
+        return None
+    try:
+        archive = geometry_archive(root, problem)
+    except (OSError, ValueError, FileNotFoundError):
+        return None
+    if not tarfile.is_tarfile(archive):
+        return None
+    with tarfile.open(archive) as packed:
+        count = sum(
+            1
+            for member in packed.getmembers()
+            if member.isfile() and member.name.endswith(".con")
+        )
+    return count or None
+
+
+def _registry(root: Path) -> list[dict]:
+    path = root / "codes" / "registry.toml"
+    if not path.is_file():
+        return []
+    record = tomllib.loads(path.read_text(encoding="utf-8"))
+    return [code for code in record.get("code") or [] if isinstance(code, dict)]
+
+
+def _registry_match(row: dict, registry: list[dict]) -> bool:
+    """True when this row's commit is the pin for its code.
+
+    Several registry entries share the name eOn. The commit selects which pin.
+    """
+    recorded = str(row.get("commit") or "")
+    code = str(row.get("code") or "").lower()
+    if not recorded or not code:
+        return False
+    for pin in registry:
+        names = {str(pin.get("id") or "").lower(), str(pin.get("name") or "").lower()}
+        names.discard("")
+        if code not in names:
+            continue
+        pinned = str(pin.get("commit") or "")
+        if pinned and (recorded.startswith(pinned) or pinned.startswith(recorded)):
+            return True
+    return False
+
+
+def _template_at_commit(root: Path, commit: str, template_id: str) -> dict | None:
+    """Template as it was when an asv result was recorded.
+
+    The working tree can move the code pin forward. The result's commit still
+    names the pin that produced the track.
+    """
+    cache = getattr(_template_at_commit, "_cache", None)
+    if cache is None:
+        cache = {}
+        setattr(_template_at_commit, "_cache", cache)
+    key = (str(root.resolve()), commit, template_id)
+    if key in cache:
+        return cache[key]
+    loaded = None
+    if commit and template_id:
+        rel = f"templates/{template_id}.toml"
+        try:
+            text = subprocess.check_output(
+                ["git", "-C", str(root), "show", f"{commit}:{rel}"],
+                stderr=subprocess.DEVNULL,
+                text=True,
+            )
+        except (subprocess.CalledProcessError, FileNotFoundError, OSError):
+            text = ""
+        if text:
+            try:
+                loaded = tomllib.loads(text)
+            except tomllib.TOMLDecodeError:
+                loaded = None
+    cache[key] = loaded
+    return loaded
+
+
+def _geometry_key(start) -> str:
+    """One token per geometry so campaign names and asv indexes line up.
+
+    ``cluster_0000.con``, ``pos_0000``, and asv start ``0`` are the same index.
+    """
+    if isinstance(start, tuple):
+        start = start[-1] if start else ""
+    text = str(start if start is not None else "").strip()
+    if text.endswith(".con"):
+        text = text[: -len(".con")]
+    if re.fullmatch(r"\d+", text):
+        return str(int(text))
+    match = re.fullmatch(r"[A-Za-z][A-Za-z0-9]*[_-](\d+)", text)
+    if match:
+        return str(int(match.group(1)))
+    return text
+
+
+def _image_count(problem: dict | None, template: dict | None, fields: dict[str, str]) -> int | None:
+    """Images that turn a band total into the per-image cost the table uses."""
+    reducer = str(fields.get("reducer") or (template or {}).get("reducer") or "")
+    if reducer != "per_image":
+        return None
+    neb = (template or {}).get("neb") or {}
+    raw = neb.get("moving_images")
+    if raw in (None, ""):
+        raw = ((problem or {}).get("band") or {}).get("interior_images")
+    if raw in (None, ""):
+        return None
+    images = int(raw)
+    return images if images > 0 else None
+
+
+def _scale_raw(raw: dict, images: int | None) -> dict:
+    """Divide a band total by the image count.
+
+    A start that already stores ``raw`` beside a per-image ``force_calls``,
+    or names ``force_calls_neb``, is left as recorded.
+    """
+    if not images or "raw" in raw or raw.get("count_key") == "force_calls_neb":
+        return raw
+    if raw.get("force_calls") is None:
+        return raw
+    try:
+        per_image = float(raw["force_calls"]) / images
+    except (TypeError, ValueError):
+        return raw
+    scaled = dict(raw)
+    scaled["force_calls"] = per_image
+    return scaled
+
+
+def _cap_of(problem: dict | None, template: dict | None, fields: dict[str, str]) -> int | None:
+    if problem is not None:
+        stated = (problem.get("convergence") or {}).get("max_force_calls")
+        if stated not in (None, ""):
+            return int(stated)
+    if template is not None:
+        if template.get("failure_cap") not in (None, ""):
+            return int(template["failure_cap"])
+        stop = template.get("stop") or {}
+        raw = stop.get("max_force_calls", stop.get("max_steps"))
+        if raw not in (None, ""):
+            return int(raw)
+    raw_field = _float_field(fields, "cap")
+    if raw_field is not None:
+        return int(raw_field)
+    return None
+
+
+def _force_tol(problem: dict | None, template: dict | None) -> float | None:
+    convergence = (problem or {}).get("convergence") or {}
+    for key in ("force_norm", "gradient_norm"):
+        if key in convergence:
+            return float(convergence[key])
+    stop = (template or {}).get("stop") or {}
+    for key in ("force_norm", "gradient_norm", "fmax"):
+        if key in stop:
+            return float(stop[key])
+    return None
+
+
+def _record_from_raw(raw: dict, cap: int | None, force_tol: float | None) -> dict | None:
+    if not isinstance(raw, dict):
+        return None
+    calls = raw.get("force_calls", raw.get("raw", raw.get("per_search")))
+    if calls is None:
+        return None
+    try:
+        calls = float(calls)
+    except (TypeError, ValueError):
+        return None
+    if not math.isfinite(calls):
+        return None
+    failure = raw.get("failure")
+    if "success" in raw and raw.get("success") is not None:
+        success = bool(raw["success"])
+    elif "failed" in raw:
+        success = not bool(raw["failed"])
+    elif "reason" in raw:
+        success = str(raw.get("reason")) in {"0", "0.0"}
+        failure = None
+    else:
+        return None
+    if cap is not None and calls >= cap:
+        success = False
+    record: dict = {"force_calls": calls, "success": success, "start": raw.get("start") or raw.get("geometry")}
+    if success:
+        return record
+    if failure in FAILURES:
+        record["failure"] = failure
+        return record
+    reasons = raw.get("reasons")
+    if isinstance(reasons, list) and reasons:
+        record["reasons"] = [str(item) for item in reasons]
+        return record
+    if raw.get("error"):
+        record["failure"] = "crash"
+    elif cap is not None and calls >= cap:
+        record["failure"] = "cap"
+    elif force_tol is not None and raw.get("force_norm") not in (None, ""):
+        try:
+            above = float(raw["force_norm"]) > force_tol
+        except (TypeError, ValueError):
+            above = True
+        record["failure"] = "divergence" if above else "wrong_stationary"
+    return record
+
+
+def _records_from_repetitions(text: str, fields: dict[str, str]) -> list[dict]:
+    rows = parse_repetitions(text)
+    if not rows:
+        return []
+    failed = int(float(fields.get("nfailed") or 0))
+    if failed:
+        return []
+    return [
+        {"force_calls": float(row["per_search"]), "success": True, "failure": None, "start": str(row["repetition"])}
+        for row in rows
+    ]
+
+
+def _load_group_records(
+    group: dict[str, Path],
+    cap: int | None,
+    force_tol: float | None,
+    images: int | None = None,
+) -> tuple[list[dict], str]:
+    if "starts_jsonl" in group:
+        collected = []
+        for raw in _json_lines(group["starts_jsonl"]):
+            record = _record_from_raw(_scale_raw(raw, images), cap, force_tol)
+            if record is not None:
+                collected.append(record)
+        if collected:
+            return collected, "starts.jsonl"
+    if "starts" in group:
+        collected = []
+        for raw in _json_lines(group["starts"]):
+            record = _record_from_raw(_scale_raw(raw, images), cap, force_tol)
+            if record is not None:
+                collected.append(record)
+        if collected:
+            return collected, "starts"
+    if "v2" in group:
+        document = json.loads(group["v2"].read_text(encoding="utf-8"))
+        runs = document.get("runs") or []
+        collected = []
+        for run in runs:
+            for raw in run.get("starts") or []:
+                record = _record_from_raw(_scale_raw(raw, images), cap, force_tol)
+                if record is not None:
+                    collected.append(record)
+        if collected:
+            return collected, "v2.json"
+    if "dat" in group:
+        text = group["dat"].read_text(encoding="utf-8")
+        fields, _duplicates = parse_lenient(text)
+        collected = _records_from_repetitions(text, fields)
+        if collected:
+            return collected, "repetitions"
+    return [], ""
+
+
+def _campaign_groups(directory: Path) -> dict[str, dict[str, Path]]:
+    groups: dict[str, dict[str, Path]] = {}
+    if not directory.is_dir():
+        return groups
+    for path in sorted(directory.iterdir()):
+        name = path.name
+        if not path.is_file():
+            continue
+        if name.endswith(".starts.jsonl"):
+            stem, kind = name[: -len(".starts.jsonl")], "starts_jsonl"
+        elif name.endswith(".v2.json"):
+            stem, kind = name[: -len(".v2.json")], "v2"
+        elif name.endswith(".starts"):
+            stem, kind = name[: -len(".starts")], "starts"
+        elif name.endswith(".dat"):
+            stem, kind = name[: -len(".dat")], "dat"
+        else:
+            continue
+        groups.setdefault(stem, {})[kind] = path
+    return groups
+
+
+def _comparable(fields: dict[str, str], raw_rows: list[dict]) -> bool:
+    counter = str(fields.get("counter") or "").lower()
+    reducer = str(fields.get("reducer") or "").lower()
+    if counter == "client":
+        return False
+    if counter == "harness" or reducer.startswith("harness"):
+        return True
+    for raw in raw_rows:
+        if str(raw.get("counter") or "").lower() == "harness":
+            return True
+    return False
+
+
+def _first_raw(group: dict[str, Path]) -> dict:
+    for kind in ("starts_jsonl", "starts"):
+        path = group.get(kind)
+        if path is None:
+            continue
+        try:
+            for line in path.read_text(encoding="utf-8").splitlines():
+                if line.strip():
+                    value = json.loads(line)
+                    return value if isinstance(value, dict) else {}
+        except (json.JSONDecodeError, OSError):
+            return {}
+    return {}
+
+
+def _blank_row(**values) -> dict:
+    row = {
+        "problem": "",
+        "template": "",
+        "code": "",
+        "code_version": "",
+        "commit": "",
+        "tuning": "",
+        "entry": "",
+        "source": "campaign",
+        "path": "",
+        "asv_commit": "",
+        "counter": "",
+        "comparable": False,
+        "partial": False,
+        "partial_reason": "",
+        "current": True,
+        "registry_match": False,
+        "n": 0,
+        "full_n": None,
+        "par2_mean": None,
+        "success_rate": None,
+        "wilson_low": None,
+        "wilson_high": None,
+        "median": None,
+        "median_low": None,
+        "median_high": None,
+        "mean_calls": None,
+        "median_calls": None,
+        "nfailed": None,
+        "min_calls": None,
+        "max_calls": None,
+        "failures": {},
+        "cap": None,
+        "scored": False,
+        "note": "",
+    }
+    row.update(values)
+    return row
+
+
+def _score_records(records: list[dict], cap: int | None) -> dict:
+    summary = score_v2(records, cap)
+    calls = [float(record["force_calls"]) for record in records]
+    ordered = sorted(calls)
+    mid = len(ordered) // 2
+    if len(ordered) % 2:
+        median_calls = ordered[mid]
+    else:
+        median_calls = (ordered[mid - 1] + ordered[mid]) / 2
+    summary["mean_calls"] = sum(calls) / len(calls)
+    summary["median_calls"] = median_calls
+    summary["min_calls"] = ordered[0]
+    summary["max_calls"] = ordered[-1]
+    return summary
+
+
+def _apply_summary(row: dict, summary: dict, records: list[dict]) -> None:
+    row["scored"] = True
+    row["n"] = int(summary["n"])
+    row["par2_mean"] = summary["par2_mean"]
+    row["success_rate"] = summary["success_rate"]
+    row["wilson_low"] = summary["wilson_low"]
+    row["wilson_high"] = summary["wilson_high"]
+    row["median"] = summary["median"]
+    row["median_low"] = summary["median_low"]
+    row["median_high"] = summary["median_high"]
+    row["mean_calls"] = summary["mean_calls"]
+    row["median_calls"] = summary["median_calls"]
+    row["min_calls"] = summary["min_calls"]
+    row["max_calls"] = summary["max_calls"]
+    row["nfailed"] = summary["nfailed"]
+    row["failures"] = {name: summary[f"n_{name}"] for name in FAILURES}
+    row["_profile"] = [(_geometry_key(record.get("start")), profile_cost(record)) for record in records]
+
+
+def _mark_partial(row: dict, full_n: int | None) -> None:
+    row["full_n"] = full_n
+    n = int(row.get("n") or 0)
+    if full_n is not None and n < full_n:
+        row["partial"] = True
+        row["partial_reason"] = f"scored {n} of {full_n} starts"
+        return
+    if full_n is None and row.get("source") == "asv" and n <= 1:
+        row["partial"] = True
+        row["partial_reason"] = "one-start grid; the problem states no full set"
+        return
+    row["partial"] = False
+    row["partial_reason"] = ""
+
+
+def _mark_current(rows: list[dict]) -> None:
+    groups: dict[tuple, list[dict]] = defaultdict(list)
+    for row in rows:
+        template = row.get("template") or ""
+        if not template:
+            row["current"] = True
+            continue
+        groups[(row.get("problem"), template, row.get("code_version") or "")].append(row)
+    for group in groups.values():
+        if len(group) == 1:
+            group[0]["current"] = True
+            continue
+        matching = [row for row in group if row.get("registry_match") and not row.get("partial") and row.get("comparable")]
+        pool = matching or [row for row in group if not row.get("partial") and row.get("comparable")] or list(group)
+        pool.sort(key=lambda row: (row.get("source") != "campaign", -len(str(row.get("commit") or "")), str(row.get("path"))))
+        winner = pool[0]
+        for row in group:
+            row["current"] = row is winner
+
+
+def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, dict]) -> tuple[list[dict], list[dict]]:
+    rows: list[dict] = []
+    unparsed: list[dict] = []
+    for stem, group in _campaign_groups(root / "results" / "campaign").items():
+        path = group.get("dat") or group.get("v2") or group.get("starts_jsonl") or group.get("starts")
+        fields: dict[str, str] = {}
+        parse_note = ""
+        if "dat" in group:
+            try:
+                fields, _duplicates = parse_lenient(group["dat"].read_text(encoding="utf-8"))
+            except DatError as exc:
+                unparsed.append(
+                    _blank_row(
+                        entry=stem,
+                        path=str(group["dat"].relative_to(root)),
+                        note=str(exc),
+                        source="campaign",
+                    )
+                )
+                continue
+        probe = _first_raw(group)
+        template_id = fields.get("template") or str(probe.get("template") or "")
+        template = templates.get(template_id)
+        problem_id = (
+            fields.get("problem")
+            or str(probe.get("problem") or "")
+            or (template or {}).get("problem")
+            or campaign_problem(stem)
+            or ""
+        )
+        problem = problems.get(problem_id)
+        cap = _cap_of(problem, template, fields)
+        force_tol = _force_tol(problem, template)
+        images = _image_count(problem, template, fields)
+        try:
+            records, record_source = _load_group_records(group, cap, force_tol, images)
+        except (json.JSONDecodeError, OSError, ValueError) as exc:
+            unparsed.append(
+                _blank_row(
+                    problem=problem_id,
+                    template=template_id,
+                    entry=stem,
+                    path=str(path.relative_to(root)) if path else "",
+                    note=str(exc),
+                    code=fields.get("code", ""),
+                    code_version=fields.get("code_version", ""),
+                    commit=fields.get("commit", ""),
+                )
+            )
+            continue
+        counter = fields.get("counter") or str(probe.get("counter") or "")
+        if not counter and str(fields.get("reducer") or "").lower().startswith("harness"):
+            counter = "harness"
+        tuning = (
+            fields.get("tuning")
+            or fields.get("profile")
+            or str(probe.get("tuning") or "")
+            or str((template or {}).get("tuning") or (template or {}).get("profile") or "")
+        )
+        row = _blank_row(
+            problem=problem_id,
+            template=template_id or str((template or {}).get("id") or ""),
+            code=fields.get("code") or str(probe.get("code") or (template or {}).get("code") or ""),
+            code_version=fields.get("code_version") or str(probe.get("code_version") or (template or {}).get("code_version") or ""),
+            commit=fields.get("commit") or str(probe.get("commit") or (template or {}).get("commit") or ""),
+            tuning=tuning,
+            entry=stem,
+            source="campaign",
+            path=str(path.relative_to(root)) if path else "",
+            counter=counter,
+            comparable=_comparable(fields, [probe] if probe else []),
+            cap=cap,
+            note=parse_note or record_source,
+        )
+        if str(fields.get("ranked") or "").lower() == "false":
+            row["_declared_partial"] = "result file sets ranked false"
+        elif str(fields.get("partial") or "").lower() == "true":
+            row["_declared_partial"] = "result file sets partial true"
+        if not records:
+            row["note"] = "no per-start record"
+            unparsed.append(row)
+            continue
+        try:
+            summary = _score_records(records, cap)
+        except (ValueError, RuntimeError) as exc:
+            row["note"] = str(exc)
+            unparsed.append(row)
+            continue
+        _apply_summary(row, summary, records)
+        rows.append(row)
+    return rows, unparsed
+
+
+def _benchmark_index() -> dict[str, dict]:
+    import importlib
+
+    index: dict[str, dict] = {}
+    modules = (
+        "benchmarks.bench_lj38",
+        "benchmarks.bench_eon_develop",
+        "benchmarks.bench_rgmin",
+        "benchmarks.bench_ase_sella",
+        "benchmarks.bench_rgsaddle",
+        "benchmarks.quadratic",
+    )
+    for module_name in modules:
+        try:
+            module = importlib.import_module(module_name)
+        except Exception:
+            continue
+        short = module_name.split(".")[-1]
+        for name, value in vars(module).items():
+            if not isinstance(value, type):
+                continue
+            spec = getattr(value, "spec", None)
+            template = getattr(value, "template_id", None) or getattr(value, "template_name", None)
+            problem = getattr(value, "problem_id", None) or getattr(value, "problem_name", None)
+            cap = getattr(value, "cap", None)
+            if isinstance(spec, dict):
+                template = template or spec.get("template_id") or spec.get("template")
+                problem = problem or spec.get("problem_id") or spec.get("problem")
+                if cap is None:
+                    cap = spec.get("cap")
+            index[f"{short}.{name}"] = {
+                "template": str(template) if template else "",
+                "problem": str(problem) if problem else "",
+                "cap": int(cap) if isinstance(cap, int) or (isinstance(cap, float) and float(cap).is_integer()) else None,
+            }
+    return index
+
+
+def _asv_rows(root: Path, problems: dict[str, dict], templates: dict[str, dict]) -> tuple[list[dict], list[dict], list[dict]]:
+    results_dir = root / "results" / "asv"
+    if not results_dir.is_dir():
+        return [], [], []
+    from asv.results import iter_results
+
+    from .asv_score import track_rows
+
+    index = _benchmark_index()
+    rows: list[dict] = []
+    unparsed: list[dict] = []
+    unmapped: list[dict] = []
+    for result in iter_results(str(results_dir)):
+        keys = [key for key in result.get_all_result_keys() if str(key).endswith("track_force_calls")]
+        seen: set[str] = set()
+        for key in keys:
+            head = str(key)[: -len(".track_force_calls")] if str(key).endswith(".track_force_calls") else str(key)
+            parts = head.split(".")
+            class_name = parts[-1]
+            if class_name in seen:
+                continue
+            seen.add(class_name)
+            module_name = parts[-2] if len(parts) >= 2 else ""
+            described = index.get(f"{module_name}.{class_name}") or index.get(class_name) or {}
+            template_id = described.get("template") or ""
+            template = templates.get(template_id)
+            pinned = _template_at_commit(root, str(result.commit_hash), template_id) if template_id else None
+            source_template = pinned or template
+            problem_id = (
+                described.get("problem")
+                or (source_template or {}).get("problem")
+                or (template or {}).get("problem")
+                or ""
+            )
+            problem = problems.get(problem_id)
+            cap = described.get("cap")
+            if cap is None:
+                cap = _cap_of(problem, source_template or template, {})
+            pin_note = "asv track_force_calls"
+            if template_id and pinned is None:
+                pin_note = "asv track_force_calls; code pin is the working-tree template"
+            try:
+                tracked = track_rows(result, class_name)
+            except SystemExit as exc:
+                unparsed.append(
+                    _blank_row(
+                        problem=problem_id,
+                        template=template_id,
+                        entry=class_name,
+                        source="asv",
+                        path=f"results/asv/{result.commit_hash}",
+                        asv_commit=str(result.commit_hash),
+                        note=str(exc),
+                    )
+                )
+                continue
+            records = []
+            for item in tracked:
+                raw = {"force_calls": item["force_calls"], "success": item["success"], "failure": item["failure"]}
+                record = _record_from_raw(raw, cap, _force_tol(problem, source_template or template))
+                if record is not None:
+                    record["start"] = tuple(item.get("params") or ())
+                    records.append(record)
+            client_counter = module_name == "bench_lj38"
+            row = _blank_row(
+                problem=problem_id,
+                template=template_id,
+                code=str((source_template or {}).get("code") or ""),
+                code_version=str((source_template or {}).get("code_version") or ""),
+                commit=str((source_template or {}).get("commit") or ""),
+                tuning=str((source_template or {}).get("tuning") or (source_template or {}).get("profile") or ""),
+                entry=f"{module_name}.{class_name}",
+                source="asv",
+                path=f"results/asv/{result.commit_hash}",
+                asv_commit=str(result.commit_hash),
+                counter="client" if client_counter else "harness",
+                comparable=bool(template_id) and bool(problem_id) and not client_counter,
+                cap=cap,
+                note=pin_note,
+            )
+            if not problem_id or not template_id:
+                row["note"] = f"benchmark {row['entry']} is not a problem template"
+                row["n"] = len(records)
+                unmapped.append(row)
+                continue
+            if not records:
+                row["note"] = "asv track has no starts"
+                unparsed.append(row)
+                continue
+            try:
+                summary = _score_records(records, cap)
+            except (ValueError, RuntimeError) as exc:
+                row["note"] = str(exc)
+                unparsed.append(row)
+                continue
+            _apply_summary(row, summary, records)
+            rows.append(row)
+    return rows, unparsed, unmapped
+
+
+def _public(row: dict) -> dict:
+    return {key: value for key, value in row.items() if not key.startswith("_")}
+
+
+def _rank_key(row: dict) -> tuple:
+    score = row["par2_mean"] if row["par2_mean"] is not None else row["median"]
+    return (
+        score is None,
+        float(score) if score is not None else 0.0,
+        row.get("template") or "",
+        not row.get("current"),
+        row.get("source") != "campaign",
+        row.get("path") or "",
+    )
+
+
+def build_board(root: Path) -> dict:
+    """Score every committed campaign file and asv track under ``root``."""
+    root = Path(root)
+    problems = load_all(root / "problems") if (root / "problems").is_dir() else {}
+    templates = {item["id"]: item for item in list_templates(root)} if (root / "templates").is_dir() else {}
+    registry = _registry(root)
+    campaign, unparsed = _campaign_rows(root, problems, templates)
+    asv_rows, asv_unparsed, unmapped = _asv_rows(root, problems, templates)
+    unparsed.extend(asv_unparsed)
+    rows = campaign + asv_rows
+    full_n: dict[str, int | None] = {}
+    for problem_id, problem in problems.items():
+        full_n[problem_id] = stated_full_n(root, problem)
+    by_problem: dict[str, list[dict]] = defaultdict(list)
+    for row in rows:
+        by_problem[row["problem"]].append(row)
+    for problem_id, group in by_problem.items():
+        stated = full_n.get(problem_id)
+        if problem_id and problem_id not in problems and stated is None:
+            for row in group:
+                row["partial"] = True
+                row["partial_reason"] = row.get("_declared_partial") or "no problem file states the full set"
+                row["full_n"] = None
+            continue
+        for row in group:
+            _mark_partial(row, stated)
+            if row.get("_declared_partial"):
+                row["partial"] = True
+                row["partial_reason"] = row["_declared_partial"]
+    for row in rows:
+        row["registry_match"] = _registry_match(row, registry)
+    _mark_current(rows)
+
+    problems_out: dict[str, dict] = {}
+    partial: list[dict] = []
+    not_comparable: list[dict] = []
+    for problem_id in sorted(by_problem):
+        group = by_problem[problem_id]
+        ranked = []
+        held_partial = []
+        held_client = []
+        for row in group:
+            if row.get("partial"):
+                held_partial.append(row)
+                partial.append(row)
+            elif not row.get("comparable"):
+                held_client.append(row)
+                not_comparable.append(row)
+            else:
+                ranked.append(row)
+        ranked.sort(key=_rank_key)
+        problem = problems.get(problem_id) or {}
+        problems_out[problem_id] = {
+            "id": problem_id,
+            "title": problem.get("title", problem_id),
+            "full_n": full_n.get(problem_id),
+            "ranked": [_public(row) for row in ranked],
+            "partial": [_public(row) for row in held_partial],
+            "not_comparable": [_public(row) for row in held_client],
+            "_ranked_rows": ranked,
+        }
+    return {
+        "schema": BOARD_SCHEMA,
+        "problems": problems_out,
+        "partial": [_public(row) for row in partial],
+        "unparsed": [_public(row) for row in unparsed],
+        "unmapped": [_public(row) for row in unmapped],
+        "not_comparable": [_public(row) for row in not_comparable],
+        "ranked_count": sum(len(item["ranked"]) for item in problems_out.values()),
+    }
+
+
+def _series_label(row: dict, used: set[str]) -> str:
+    parts = [str(row.get("template") or row.get("entry") or "row")]
+    if row.get("code_version"):
+        parts.append(str(row["code_version"]))
+    if row.get("tuning"):
+        parts.append(str(row["tuning"]))
+    if row.get("source"):
+        parts.append(str(row["source"]))
+    commit = str(row.get("commit") or "")
+    if commit:
+        parts.append(commit[:7])
+    label = " ".join(parts)
+    if label in used:
+        label = f"{label} {row.get('path') or row.get('asv_commit') or len(used)}"
+    used.add(label)
+    return label
+
+
+def _keyed_costs(row: dict) -> list[tuple[str, float]]:
+    ordered = []
+    seen = set()
+    for start, cost in row.get("_profile") or []:
+        key = str(start)
+        if key in seen:
+            continue
+        seen.add(key)
+        ordered.append((key, float(cost)))
+    return ordered
+
+
+def _profile_for(rows: list[dict]) -> dict | None:
+    usable = [row for row in rows if row.get("_profile")]
+    if not usable:
+        return None
+    used: set[str] = set()
+    series = []
+    for row in usable:
+        keyed = _keyed_costs(row)
+        if keyed:
+            series.append((_series_label(row, used), keyed))
+    if not series:
+        return None
+    key_sets = [{key for key, _cost in keyed} for _label, keyed in series]
+    common = set.intersection(*key_sets)
+    shortest = min(len(keys) for keys in key_sets)
+    if common and len(common) >= shortest:
+        order = [key for key, _cost in series[0][1] if key in common]
+        costs = {}
+        for label, keyed in series:
+            found = dict(keyed)
+            costs[label] = [found[key] for key in order]
+    elif len({len(keyed) for _label, keyed in series}) == 1:
+        costs = {label: [cost for _key, cost in keyed] for label, keyed in series}
+    else:
+        return None
+    try:
+        return performance_profile(costs)
+    except ValueError:
+        return None
+
+
+def _write_plots(problem_id: str, ranked: list[dict], profile: dict | None, directory: Path) -> list[str]:
+    import matplotlib
+
+    matplotlib.use("Agg", force=False)
+    import matplotlib.pyplot as plt
+
+    directory.mkdir(parents=True, exist_ok=True)
+    slug = _slug(problem_id)
+    written = []
+    if profile is not None:
+        figure, axis = plt.subplots(figsize=(7.2, 4.2))
+        for label, values in profile["rho"].items():
+            axis.step(profile["taus"], values, where="post", label=label)
+        axis.set_xscale("log", base=2)
+        axis.set_xlabel("tau")
+        axis.set_ylabel("fraction of starts")
+        axis.set_ylim(0.0, 1.05)
+        axis.set_title(f"Dolan-More profile: {problem_id}")
+        if len(profile["rho"]) <= 12:
+            axis.legend(fontsize=7, loc="lower right")
+        figure.tight_layout()
+        for suffix in ("svg", "png"):
+            path = directory / f"{slug}-profile.{suffix}"
+            figure.savefig(path)
+            written.append(str(path))
+        plt.close(figure)
+    if ranked:
+        figure, axis = plt.subplots(figsize=(7.2, 4.2))
+        rates = [float(row["success_rate"]) for row in ranked]
+        costs = [
+            float(row["par2_mean"] if row["par2_mean"] is not None else row["median"])
+            for row in ranked
+        ]
+        axis.scatter(rates, costs)
+        for index, (rate, cost) in enumerate(zip(rates, costs), start=1):
+            axis.annotate(str(index), (rate, cost), fontsize=7, textcoords="offset points", xytext=(3, 3))
+        axis.set_xlabel("success rate")
+        axis.set_ylabel("PAR-2 mean" if any(row["par2_mean"] is not None for row in ranked) else "median calls")
+        axis.set_title(f"Cost and success: {problem_id}")
+        figure.tight_layout()
+        for suffix in ("svg", "png"):
+            path = directory / f"{slug}-cost.{suffix}"
+            figure.savefig(path)
+            written.append(str(path))
+        plt.close(figure)
+    return written
+
+
+def _org_html(fragment: str) -> str:
+    lines = ["#+begin_export rst", ".. raw:: html", ""]
+    for line in fragment.splitlines():
+        lines.append("   " + line)
+    lines.append("#+end_export")
+    lines.append("")
+    return "\n".join(lines)
+
+
+def _format_number(value) -> str:
+    if value is None:
+        return ""
+    if isinstance(value, float):
+        return f"{value:.6g}"
+    return str(value)
+
+
+def _failure_text(failures: dict) -> str:
+    parts = [f"{name} {failures.get(name, 0)}" for name in FAILURES]
+    return ", ".join(parts)
+
+
+def _cell(value) -> str:
+    return html.escape(str(value))
+
+
+def _table(problem: dict, plots: set[str]) -> str:
+    lines = [
+        f'<section class="bench" id="{_slug(problem["id"])}">',
+        f"<h2>{_cell(problem['title'])}</h2>",
+        "<p>Ranked by the v2 PAR-2 mean. A partial row used fewer starts than the problem's full set and is not in this table.</p>",
+        "<table>",
+        "<caption>Lower PAR-2 is better. Wilson bounds are the 95% interval on the success rate.</caption>",
+        "<thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Current</th>"
+        "<th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th>"
+        "<th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>",
+    ]
+    for row in problem["ranked"]:
+        lines.append(
+            "<tr>"
+            f"<td>{_cell(row['template'] or row['entry'])}</td>"
+            f"<td>{_cell(row['code'])} {_cell(row['code_version'])}</td>"
+            f"<td>{_cell((row['commit'] or '')[:12])}</td>"
+            f"<td>{'yes' if row['current'] else 'no'}</td>"
+            f"<td>{_format_number(row['par2_mean'])}</td>"
+            f"<td>{_format_number(row['success_rate'])}</td>"
+            f"<td>{_format_number(row['wilson_low'])}</td>"
+            f"<td>{_format_number(row['wilson_high'])}</td>"
+            f"<td>{_format_number(row['median_calls'])}</td>"
+            f"<td>{_format_number(row['mean_calls'])}</td>"
+            f"<td>{_cell(_failure_text(row['failures']))}</td>"
+            f"<td>{row['n']}</td>"
+            "</tr>"
+        )
+    if not problem["ranked"]:
+        lines.append('<tr><td colspan="12">No full harness row.</td></tr>')
+    lines.append("</tbody></table>")
+    if problem["partial"]:
+        lines.append("<h3>Partial</h3><ul>")
+        for row in problem["partial"]:
+            lines.append(
+                "<li>"
+                f"{_cell(row['template'] or row['entry'])} {_cell(row['source'])} "
+                f"n={row['n']} {_cell(row['partial_reason'])}"
+                "</li>"
+            )
+        lines.append("</ul>")
+    if problem["not_comparable"]:
+        lines.append("<h3>Not a harness score</h3><ul>")
+        for row in problem["not_comparable"]:
+            lines.append(
+                f"<li>{_cell(row['template'] or row['entry'])} n={row['n']} counter={_cell(row['counter'] or 'unset')}</li>"
+            )
+        lines.append("</ul>")
+    slug = _slug(problem["id"])
+    for kind, label in (("profile", "Dolan-More profile"), ("cost", "Cost versus success")):
+        name = f"{slug}-{kind}.svg"
+        if name in plots:
+            lines.append(f'<img src="_static/board/{name}" alt="{_cell(label)} for {_cell(problem["id"])}">')
+    lines.append("</section>")
+    return "\n".join(lines)
+
+
+def _drop_unwritten(directory: Path, keep_names: set[str]) -> None:
+    """Remove plot files left by an earlier board that this run did not write."""
+    if not directory.is_dir():
+        return
+    for path in directory.iterdir():
+        if path.is_file() and path.name not in keep_names:
+            path.unlink()
+
+
+def _strip_private(document: dict) -> dict:
+    public_problems = {}
+    for problem_id, problem in document["problems"].items():
+        public_problems[problem_id] = {
+            key: value for key, value in problem.items() if not key.startswith("_")
+        }
+    return {
+        "schema": document["schema"],
+        "ranked_count": document["ranked_count"],
+        "problems": public_problems,
+        "partial": document["partial"],
+        "unparsed": document["unparsed"],
+        "unmapped": document["unmapped"],
+        "not_comparable": document["not_comparable"],
+    }
+
+
+def write_board(root: Path, output: Path) -> dict:
+    """Write the leaderboard JSON, the plots, and the site include."""
+    root = Path(root)
+    output = Path(output)
+    document = build_board(root)
+    output.mkdir(parents=True, exist_ok=True)
+    plot_dir = output / "plots"
+    site_plots = root / "docs" / "source" / "_static" / "board"
+    sections = []
+    plot_names: set[str] = set()
+    written_names: set[str] = set()
+    for problem_id, problem in document["problems"].items():
+        ranked_rows = problem.get("_ranked_rows") or []
+        profile = _profile_for(ranked_rows)
+        if profile is not None:
+            problem["profile"] = {
+                "taus": profile["taus"],
+                "rho": profile["rho"],
+                "solved": profile["solved"],
+                "area_log10": profile["area_log10"],
+            }
+        written = _write_plots(problem_id, ranked_rows, profile, plot_dir) if ranked_rows else []
+        for path in written:
+            name = Path(path).name
+            written_names.add(name)
+            if name.endswith(".svg"):
+                plot_names.add(name)
+        sections.append(_table(problem, plot_names))
+    _drop_unwritten(plot_dir, written_names)
+    if document["unparsed"]:
+        items = [
+            f"<li>{_cell(row.get('path') or row.get('entry'))}: {_cell(row.get('note') or '')}</li>"
+            for row in document["unparsed"]
+        ]
+        sections.append("<section id=\"unparsed\"><h2>Not scored</h2><ul>" + "".join(items) + "</ul></section>")
+    if document["unmapped"]:
+        items = [
+            f"<li>{_cell(row.get('entry') or row.get('path'))}: {_cell(row.get('note') or '')}</li>"
+            for row in document["unmapped"]
+        ]
+        sections.append(
+            "<section id=\"unmapped\"><h2>Not a problem template</h2><ul>" + "".join(items) + "</ul></section>"
+        )
+    if site_plots != plot_dir and plot_dir.is_dir():
+        site_plots.mkdir(parents=True, exist_ok=True)
+        for path in plot_dir.iterdir():
+            if path.is_file():
+                shutil.copy(path, site_plots / path.name)
+        _drop_unwritten(site_plots, written_names)
+    public = _strip_private(document)
+    (output / "index.json").write_text(
+        json.dumps(public, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    problem_dir = output / "problems"
+    problem_dir.mkdir(parents=True, exist_ok=True)
+    for problem_id, problem in public["problems"].items():
+        (problem_dir / f"{_slug(problem_id)}.json").write_text(
+            json.dumps(problem, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+    include = root / "docs" / "include" / "v2-board.org"
+    include.parent.mkdir(parents=True, exist_ok=True)
+    html = "\n".join(sections) if sections else "<p>No committed results.</p>"
+    include.write_text(_org_html(html), encoding="utf-8")
+    return public

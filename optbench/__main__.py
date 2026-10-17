@@ -292,6 +292,38 @@ def statistics(
     )
 
 
+@app.command
+def board(
+    root: Path = Path("."),
+    output: Path = Path("results/board"),
+) -> None:
+    """Score committed results and write the v2 leaderboard. This does not run a campaign."""
+    from optbench.board import write_board
+
+    destination = output if output.is_absolute() else root / output
+    document = write_board(root, destination)
+    print(
+        f"wrote {destination} problems={len(document['problems'])} "
+        f"ranked={document['ranked_count']} partial={len(document['partial'])} "
+        f"unparsed={len(document['unparsed'])} unmapped={len(document['unmapped'])}"
+    )
+    for problem in document["problems"].values():
+        ranked = problem["ranked"]
+        if not ranked:
+            continue
+        print(problem["id"])
+        for index, row in enumerate(ranked[:3], start=1):
+            score = row["par2_mean"] if row["par2_mean"] is not None else row["median"]
+            print(
+                f"  {index} {row['template'] or row['entry']} "
+                f"par2_mean={row['par2_mean']} median={row['median']} "
+                f"mean_calls={row['mean_calls']} median_calls={row['median_calls']} "
+                f"min_calls={row['min_calls']} max_calls={row['max_calls']} "
+                f"success_rate={row['success_rate']} "
+                f"n={row['n']} nfailed={row['nfailed']} score={score}"
+            )
+
+
 @app.command(name="validate-counter")
 def validate_counter(
     output: Path = Path("results/validation/lj38-counter.dat"),

@@ -9,12 +9,13 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def test_nav_pages_have_titles_and_the_suites_fold_under_archive():
     org = ROOT / "docs" / "orgmode"
-    for name in ("index.org", "run.org", "archive.org", "codes.org"):
+    for name in ("index.org", "run.org", "archive.org", "codes.org", "board.org"):
         text = (org / name).read_text(encoding="utf-8")
         assert "title:nil" not in text
         assert text.startswith("#+TITLE:")
     index = (org / "index.org").read_text(encoding="utf-8")
     assert ":hidden:" in index
+    assert "\n   board\n" in index
     assert "generated/suites/minimization" in index
     assert "generated/suites/neb" in index
     assert "generated/suites/accelerated-md" in index

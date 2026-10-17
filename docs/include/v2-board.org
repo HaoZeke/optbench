@@ -1,0 +1,513 @@
+#+begin_export rst
+.. raw:: html
+
+   <section class="bench" id="double-ended-saddle-search-lj38">
+   <h2>LJ38 double-ended saddle</h2>
+   <p>Ranked by the v2 PAR-2 mean. A partial row used fewer starts than the problem's full set and is not in this table.</p>
+   <table>
+   <caption>Lower PAR-2 is better. Wilson bounds are the 95% interval on the success rate.</caption>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td>rgsaddle/ew-ci-neb-lbfgs</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>853.56</td><td>0.94</td><td>0.837829</td><td>0.979385</td><td>529</td><td>673.94</td><td>crash 0, divergence 1, cap 2, wrong_stationary 0</td><td>50</td></tr>
+   <tr><td>rgsaddle/ci-neb-lbfgs</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>1208.52</td><td>0.86</td><td>0.738138</td><td>0.930492</td><td>522</td><td>767.34</td><td>crash 0, divergence 3, cap 4, wrong_stationary 0</td><td>50</td></tr>
+   <tr><td>rgsaddle/oci-neb-lbfgs</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>1230.8</td><td>0.86</td><td>0.738138</td><td>0.930492</td><td>553</td><td>880.8</td><td>crash 0, divergence 0, cap 7, wrong_stationary 0</td><td>50</td></tr>
+   <tr><td>rgsaddle/idpp-ci-neb-lbfgs</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>1253.92</td><td>0.86</td><td>0.738138</td><td>0.930492</td><td>522</td><td>811.24</td><td>crash 0, divergence 3, cap 4, wrong_stationary 0</td><td>50</td></tr>
+   <tr><td>rgsaddle/sidpp-ci-neb-lbfgs</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>1282.98</td><td>0.84</td><td>0.714858</td><td>0.916626</td><td>534.5</td><td>793.8</td><td>crash 0, divergence 3, cap 5, wrong_stationary 0</td><td>50</td></tr>
+   <tr><td>rgsaddle/ew-ci-neb</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>2145.72</td><td>0.78</td><td>0.647585</td><td>0.872461</td><td>1461.5</td><td>1595.72</td><td>crash 0, divergence 0, cap 11, wrong_stationary 0</td><td>50</td></tr>
+   <tr><td>rgsaddle/ci-neb</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>2272.18</td><td>0.74</td><td>0.604468</td><td>0.841285</td><td>1484.5</td><td>1617.82</td><td>crash 0, divergence 1, cap 12, wrong_stationary 0</td><td>50</td></tr>
+   <tr><td>rgsaddle/oci-neb</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>2289.86</td><td>0.74</td><td>0.604468</td><td>0.841285</td><td>1508.5</td><td>1639.86</td><td>crash 0, divergence 0, cap 13, wrong_stationary 0</td><td>50</td></tr>
+   <tr><td>rgsaddle/idpp-ci-neb</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>2374.04</td><td>0.72</td><td>0.583349</td><td>0.825258</td><td>1614.5</td><td>1670.18</td><td>crash 0, divergence 1, cap 13, wrong_stationary 0</td><td>50</td></tr>
+   <tr><td>rgsaddle/sidpp-ci-neb</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>2473.46</td><td>0.68</td><td>0.541897</td><td>0.792418</td><td>1454.5</td><td>1664.2</td><td>crash 0, divergence 1, cap 15, wrong_stationary 0</td><td>50</td></tr>
+   <tr><td>ase/de-lj38-default</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>4912.84</td><td>0.02</td><td>0.00353926</td><td>0.104954</td><td>2500</td><td>2462.84</td><td>crash 0, divergence 0, cap 49, wrong_stationary 0</td><td>50</td></tr>
+   <tr><td>ase/de-lj38-tuned</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>5000</td><td>0</td><td>0</td><td>0.0713476</td><td>2500</td><td>2500</td><td>crash 0, divergence 0, cap 50, wrong_stationary 0</td><td>50</td></tr>
+   <tr><td>rgsaddle/neb</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>5000</td><td>0</td><td>0</td><td>0.0713476</td><td>2478.5</td><td>2126.6</td><td>crash 0, divergence 25, cap 25, wrong_stationary 0</td><td>50</td></tr>
+   <tr><td>rgsaddle/neb-lbfgs</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>5000</td><td>0</td><td>0</td><td>0.0713476</td><td>649.5</td><td>951.72</td><td>crash 0, divergence 43, cap 7, wrong_stationary 0</td><td>50</td></tr>
+   </tbody></table>
+   <h3>Partial</h3><ul>
+   <li>eon/develop-de-lj38-cap asv n=1 scored 1 of 50 starts</li>
+   <li>eon/develop-de-lj38-ew asv n=1 scored 1 of 50 starts</li>
+   <li>eon/develop-de-lj38-oci asv n=1 scored 1 of 50 starts</li>
+   <li>ase/de-lj38-default asv n=1 scored 1 of 50 starts</li>
+   <li>sella/de-lj38-default asv n=1 scored 1 of 50 starts</li>
+   <li>sella/de-lj38-tuned asv n=1 scored 1 of 50 starts</li>
+   <li>ase/de-lj38-tuned asv n=1 scored 1 of 50 starts</li>
+   <li>eon/develop-de-lj38-cap asv n=1 scored 1 of 50 starts</li>
+   <li>eon/develop-de-lj38-ew asv n=1 scored 1 of 50 starts</li>
+   <li>eon/develop-de-lj38-oci asv n=1 scored 1 of 50 starts</li>
+   </ul>
+   <h3>Not a harness score</h3><ul>
+   <li>eon/de-lj38-lbfgs-m100 n=50 counter=unset</li>
+   <li>eon/de-lj38-lbfgs n=50 counter=unset</li>
+   </ul>
+   <img src="_static/board/double-ended-saddle-search-lj38-cost.svg" alt="Cost versus success for double-ended-saddle-search/lj38">
+   </section>
+   <section class="bench" id="double-ended-saddle-search-lj38_2ts_separation">
+   <h2>lj38_2ts_separation</h2>
+   <p>Ranked by the v2 PAR-2 mean. A partial row used fewer starts than the problem's full set and is not in this table.</p>
+   <table>
+   <caption>Lower PAR-2 is better. Wilson bounds are the 95% interval on the success rate.</caption>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td>rgsaddle/ew-ci-neb-lbfgs</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>8024.43</td><td>0.666667</td><td>0.529684</td><td>0.780301</td><td>2414</td><td>4639.8</td><td>crash 0, divergence 0, cap 16, wrong_stationary 1</td><td>51</td></tr>
+   <tr><td>rgsaddle/ew-ci-neb</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>12098.1</td><td>0.470588</td><td>0.34053</td><td>0.604767</td><td>10000</td><td>6803.94</td><td>crash 0, divergence 0, cap 27, wrong_stationary 0</td><td>51</td></tr>
+   <tr><td>rgsaddle/sidpp-ci-neb-lbfgs</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>15922.3</td><td>0.235294</td><td>0.140049</td><td>0.367622</td><td>10000</td><td>8154.75</td><td>crash 0, divergence 0, cap 35, wrong_stationary 4</td><td>51</td></tr>
+   <tr><td>rgsaddle/idpp-ci-neb-lbfgs</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>16111.7</td><td>0.235294</td><td>0.140049</td><td>0.367622</td><td>10000</td><td>8109.35</td><td>crash 0, divergence 0, cap 35, wrong_stationary 4</td><td>51</td></tr>
+   <tr><td>rgsaddle/ci-neb</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>16662.7</td><td>0.196078</td><td>0.110153</td><td>0.324581</td><td>10000</td><td>8309.86</td><td>crash 0, divergence 0, cap 37, wrong_stationary 4</td><td>51</td></tr>
+   <tr><td>rgsaddle/oci-neb</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>16682.1</td><td>0.196078</td><td>0.110153</td><td>0.324581</td><td>10000</td><td>8470.33</td><td>crash 0, divergence 0, cap 38, wrong_stationary 3</td><td>51</td></tr>
+   <tr><td>rgsaddle/ci-neb-lbfgs</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>16919.2</td><td>0.176471</td><td>0.095724</td><td>0.302541</td><td>10000</td><td>8211.92</td><td>crash 0, divergence 0, cap 37, wrong_stationary 5</td><td>51</td></tr>
+   <tr><td>rgsaddle/oci-neb-lbfgs</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>16924.7</td><td>0.176471</td><td>0.095724</td><td>0.302541</td><td>10000</td><td>8228.18</td><td>crash 0, divergence 0, cap 37, wrong_stationary 5</td><td>51</td></tr>
+   <tr><td>rgsaddle/idpp-ci-neb</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>17645.9</td><td>0.137255</td><td>0.068111</td><td>0.257217</td><td>10000</td><td>8882.94</td><td>crash 0, divergence 0, cap 41, wrong_stationary 3</td><td>51</td></tr>
+   <tr><td>rgsaddle/sidpp-ci-neb</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>17925.5</td><td>0.117647</td><td>0.0550507</td><td>0.233808</td><td>10000</td><td>8880.2</td><td>crash 0, divergence 0, cap 41, wrong_stationary 4</td><td>51</td></tr>
+   <tr><td>ase/de-lj38-2ts-default</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>20000</td><td>0</td><td>0</td><td>0.0700466</td><td>2500</td><td>2500</td><td>crash 0, divergence 51, cap 0, wrong_stationary 0</td><td>51</td></tr>
+   <tr><td>ase/de-lj38-2ts-tuned</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>20000</td><td>0</td><td>0</td><td>0.0700466</td><td>2500</td><td>2500</td><td>crash 0, divergence 51, cap 0, wrong_stationary 0</td><td>51</td></tr>
+   <tr><td>rgsaddle/neb</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>20000</td><td>0</td><td>0</td><td>0.0700466</td><td>10000</td><td>9773.86</td><td>crash 0, divergence 3, cap 45, wrong_stationary 3</td><td>51</td></tr>
+   <tr><td>rgsaddle/neb-lbfgs</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>20000</td><td>0</td><td>0</td><td>0.0700466</td><td>10000</td><td>8351.53</td><td>crash 0, divergence 3, cap 27, wrong_stationary 21</td><td>51</td></tr>
+   </tbody></table>
+   <h3>Partial</h3><ul>
+   <li>eon/develop-de-2ts asv n=1 scored 1 of 51 starts</li>
+   <li>eon/develop-de-2ts-ew asv n=1 scored 1 of 51 starts</li>
+   <li>eon/develop-de-2ts-oci asv n=1 scored 1 of 51 starts</li>
+   <li>sella/de-lj38-2ts-default asv n=1 scored 1 of 51 starts</li>
+   <li>sella/de-lj38-2ts-tuned asv n=1 scored 1 of 51 starts</li>
+   <li>ase/de-lj38-2ts-default asv n=1 scored 1 of 51 starts</li>
+   <li>ase/de-lj38-2ts-tuned asv n=1 scored 1 of 51 starts</li>
+   <li>eon/develop-de-2ts asv n=1 scored 1 of 51 starts</li>
+   <li>eon/develop-de-2ts-ew asv n=1 scored 1 of 51 starts</li>
+   <li>eon/develop-de-2ts-oci asv n=1 scored 1 of 51 starts</li>
+   </ul>
+   <img src="_static/board/double-ended-saddle-search-lj38_2ts_separation-cost.svg" alt="Cost versus success for double-ended-saddle-search/lj38_2ts_separation">
+   </section>
+   <section class="bench" id="double-ended-saddle-search-pt-island">
+   <h2>pt-island</h2>
+   <p>Ranked by the v2 PAR-2 mean. A partial row used fewer starts than the problem's full set and is not in this table.</p>
+   <table>
+   <caption>Lower PAR-2 is better. Wilson bounds are the 95% interval on the success rate.</caption>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td>rgsaddle/ew-ci-neb-lbfgs</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>422.136</td><td>0.966102</td><td>0.884564</td><td>0.990654</td><td>226</td><td>224.017</td><td>crash 0, divergence 2, cap 0, wrong_stationary 0</td><td>59</td></tr>
+   <tr><td>rgsaddle/oci-neb-lbfgs</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>677.831</td><td>0.932203</td><td>0.838245</td><td>0.973321</td><td>238</td><td>474.441</td><td>crash 0, divergence 0, cap 4, wrong_stationary 0</td><td>59</td></tr>
+   <tr><td>rgsaddle/idpp-ci-neb-lbfgs</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>707.847</td><td>0.915254</td><td>0.816482</td><td>0.963258</td><td>206</td><td>213.373</td><td>crash 0, divergence 5, cap 0, wrong_stationary 0</td><td>59</td></tr>
+   <tr><td>rgsaddle/ci-neb-lbfgs</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>733.576</td><td>0.915254</td><td>0.816482</td><td>0.963258</td><td>197</td><td>238.085</td><td>crash 0, divergence 5, cap 0, wrong_stationary 0</td><td>59</td></tr>
+   <tr><td>rgsaddle/sidpp-ci-neb-lbfgs</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>741.458</td><td>0.915254</td><td>0.816482</td><td>0.963258</td><td>209</td><td>247.237</td><td>crash 0, divergence 5, cap 0, wrong_stationary 0</td><td>59</td></tr>
+   <tr><td>ase/de-pt-island-tuned</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>847.678</td><td>0.915254</td><td>0.816482</td><td>0.963258</td><td>374</td><td>593.864</td><td>crash 0, divergence 0, cap 5, wrong_stationary 0</td><td>59</td></tr>
+   <tr><td>ase/de-pt-island-default</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>926.475</td><td>0.983051</td><td>0.910043</td><td>0.997002</td><td>707</td><td>875.712</td><td>crash 0, divergence 0, cap 1, wrong_stationary 0</td><td>59</td></tr>
+   <tr><td>rgsaddle/ew-ci-neb</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>938.102</td><td>0.932203</td><td>0.838245</td><td>0.973321</td><td>478</td><td>561.644</td><td>crash 0, divergence 2, cap 0, wrong_stationary 2</td><td>59</td></tr>
+   <tr><td>rgsaddle/oci-neb</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>975.983</td><td>0.949153</td><td>0.860835</td><td>0.982557</td><td>602</td><td>823.441</td><td>crash 0, divergence 0, cap 3, wrong_stationary 0</td><td>59</td></tr>
+   <tr><td>rgsaddle/idpp-ci-neb</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>1062.46</td><td>0.915254</td><td>0.816482</td><td>0.963258</td><td>491</td><td>585.729</td><td>crash 0, divergence 5, cap 0, wrong_stationary 0</td><td>59</td></tr>
+   <tr><td>rgsaddle/ci-neb</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>1078.42</td><td>0.915254</td><td>0.816482</td><td>0.963258</td><td>479</td><td>601.542</td><td>crash 0, divergence 5, cap 0, wrong_stationary 0</td><td>59</td></tr>
+   <tr><td>rgsaddle/sidpp-ci-neb</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>1134.93</td><td>0.898305</td><td>0.795362</td><td>0.952552</td><td>461</td><td>607.153</td><td>crash 0, divergence 5, cap 1, wrong_stationary 0</td><td>59</td></tr>
+   <tr><td>rgsaddle/neb</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>6000</td><td>0</td><td>0</td><td>0.0611294</td><td>533</td><td>744.475</td><td>crash 0, divergence 56, cap 3, wrong_stationary 0</td><td>59</td></tr>
+   <tr><td>rgsaddle/neb-lbfgs</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>6000</td><td>0</td><td>0</td><td>0.0611294</td><td>197</td><td>222.169</td><td>crash 0, divergence 59, cap 0, wrong_stationary 0</td><td>59</td></tr>
+   </tbody></table>
+   <h3>Partial</h3><ul>
+   <li>eon/develop-de-pt-ew asv n=1 scored 1 of 59 starts</li>
+   <li>eon/develop-de-pt-oci asv n=1 scored 1 of 59 starts</li>
+   <li>ase/de-pt-island-tuned asv n=1 scored 1 of 59 starts</li>
+   <li>sella/de-pt-island-default asv n=1 scored 1 of 59 starts</li>
+   <li>sella/de-pt-island-tuned asv n=1 scored 1 of 59 starts</li>
+   <li>ase/de-pt-island-default asv n=1 scored 1 of 59 starts</li>
+   <li>eon/develop-de-pt-ew asv n=1 scored 1 of 59 starts</li>
+   <li>eon/develop-de-pt-oci asv n=1 scored 1 of 59 starts</li>
+   </ul>
+   <h3>Not a harness score</h3><ul>
+   <li>eon/de-pt-lbfgs-m100 n=59 counter=unset</li>
+   <li>eon/de-pt-lbfgs n=59 counter=unset</li>
+   </ul>
+   <img src="_static/board/double-ended-saddle-search-pt-island-profile.svg" alt="Dolan-More profile for double-ended-saddle-search/pt-island">
+   <img src="_static/board/double-ended-saddle-search-pt-island-cost.svg" alt="Cost versus success for double-ended-saddle-search/pt-island">
+   </section>
+   <section class="bench" id="lowest-eigenvector-lj38">
+   <h2>lj38</h2>
+   <p>Ranked by the v2 PAR-2 mean. A partial row used fewer starts than the problem's full set and is not in this table.</p>
+   <table>
+   <caption>Lower PAR-2 is better. Wilson bounds are the 95% interval on the success rate.</caption>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td>rgsaddle/mode-lanczos</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>26.12</td><td>1</td><td>0.981155</td><td>1</td><td>26</td><td>26.12</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>200</td></tr>
+   <tr><td>rgsaddle/mode-lanczos</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>no</td><td>26.12</td><td>1</td><td>0.981155</td><td>1</td><td>26</td><td>26.12</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>200</td></tr>
+   <tr><td>rgsaddle/mode-dimer</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>31.4</td><td>1</td><td>0.981155</td><td>1</td><td>23</td><td>31.4</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>200</td></tr>
+   <tr><td>rgsaddle/mode-dimer</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>no</td><td>31.4</td><td>1</td><td>0.981155</td><td>1</td><td>23</td><td>31.4</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>200</td></tr>
+   <tr><td>rgsaddle/mode-lanczos-tuned</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>36.56</td><td>1</td><td>0.981155</td><td>1</td><td>34</td><td>36.56</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>200</td></tr>
+   <tr><td>rgsaddle/mode-lanczos-tuned</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>no</td><td>36.56</td><td>1</td><td>0.981155</td><td>1</td><td>34</td><td>36.56</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>200</td></tr>
+   <tr><td>rgsaddle/mode-dimer-tuned</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>45.555</td><td>1</td><td>0.981155</td><td>1</td><td>33</td><td>45.555</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>200</td></tr>
+   <tr><td>rgsaddle/mode-dimer-tuned</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>no</td><td>45.555</td><td>1</td><td>0.981155</td><td>1</td><td>33</td><td>45.555</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>200</td></tr>
+   </tbody></table>
+   <h3>Partial</h3><ul>
+   <li>eon/develop-low-lj38-dimer asv n=1 scored 1 of 200 starts</li>
+   <li>eon/develop-low-lj38-lanczos asv n=1 scored 1 of 200 starts</li>
+   <li>eon/develop-low-lj38-dimer asv n=1 scored 1 of 200 starts</li>
+   <li>eon/develop-low-lj38-lanczos asv n=1 scored 1 of 200 starts</li>
+   </ul>
+   <img src="_static/board/lowest-eigenvector-lj38-profile.svg" alt="Dolan-More profile for lowest-eigenvector/lj38">
+   <img src="_static/board/lowest-eigenvector-lj38-cost.svg" alt="Cost versus success for lowest-eigenvector/lj38">
+   </section>
+   <section class="bench" id="minimization-lj38">
+   <h2>Lennard-Jones 38 clusters</h2>
+   <p>Ranked by the v2 PAR-2 mean. A partial row used fewer starts than the problem's full set and is not in this table.</p>
+   <table>
+   <caption>Lower PAR-2 is better. Wilson bounds are the 95% interval on the success rate.</caption>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td>rgmin/lj38-dogleg</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>81.881</td><td>1</td><td>0.996173</td><td>1</td><td>79</td><td>81.881</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-dogleg</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>81.881</td><td>1</td><td>0.996173</td><td>1</td><td>79</td><td>81.881</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-dogleg-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>81.881</td><td>1</td><td>0.996173</td><td>1</td><td>79</td><td>81.881</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-dogleg-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>81.881</td><td>1</td><td>0.996173</td><td>1</td><td>79</td><td>81.881</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-newton</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>166.337</td><td>0.995</td><td>0.988349</td><td>0.997862</td><td>64</td><td>66.649</td><td>crash 0, divergence 0, cap 0, wrong_stationary 5</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-newton</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>166.337</td><td>0.995</td><td>0.988349</td><td>0.997862</td><td>64</td><td>66.649</td><td>crash 0, divergence 0, cap 0, wrong_stationary 5</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-newton-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>166.337</td><td>0.995</td><td>0.988349</td><td>0.997862</td><td>64</td><td>66.649</td><td>crash 0, divergence 0, cap 0, wrong_stationary 5</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-newton-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>166.337</td><td>0.995</td><td>0.988349</td><td>0.997862</td><td>64</td><td>66.649</td><td>crash 0, divergence 0, cap 0, wrong_stationary 5</td><td>1000</td></tr>
+   <tr><td>eon/lj38-lbfgs-m100</td><td>eOn 3.6.0</td><td>1d71c9445018</td><td>yes</td><td>180.137</td><td>1</td><td>0.996173</td><td>1</td><td>171</td><td>180.137</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-lbfgs-m100</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>197.228</td><td>0.999</td><td>0.994357</td><td>0.999823</td><td>170</td><td>177.367</td><td>crash 0, divergence 0, cap 0, wrong_stationary 1</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-lbfgs-m100</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>197.228</td><td>0.999</td><td>0.994357</td><td>0.999823</td><td>170</td><td>177.367</td><td>crash 0, divergence 0, cap 0, wrong_stationary 1</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-lbfgs-m100-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>197.228</td><td>0.999</td><td>0.994357</td><td>0.999823</td><td>170</td><td>177.367</td><td>crash 0, divergence 0, cap 0, wrong_stationary 1</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-lbfgs-m100-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>197.228</td><td>0.999</td><td>0.994357</td><td>0.999823</td><td>170</td><td>177.367</td><td>crash 0, divergence 0, cap 0, wrong_stationary 1</td><td>1000</td></tr>
+   <tr><td>eon/lj38-lbfgs</td><td>eOn 3.6.0</td><td>1d71c9445018</td><td>yes</td><td>203.898</td><td>1</td><td>0.996173</td><td>1</td><td>190</td><td>203.898</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>sella/lj38-min-tuned</td><td>Sella 2.6.0</td><td>6cfb60cdb100</td><td>yes</td><td>253.921</td><td>1</td><td>0.996173</td><td>1</td><td>248</td><td>253.921</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-lbfgs-m20</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>282.64</td><td>0.996</td><td>0.98976</td><td>0.998443</td><td>192</td><td>203.366</td><td>crash 0, divergence 0, cap 0, wrong_stationary 4</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-lbfgs-m20</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>282.64</td><td>0.996</td><td>0.98976</td><td>0.998443</td><td>192</td><td>203.366</td><td>crash 0, divergence 0, cap 0, wrong_stationary 4</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-lbfgs-m20-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>282.64</td><td>0.996</td><td>0.98976</td><td>0.998443</td><td>192</td><td>203.366</td><td>crash 0, divergence 0, cap 0, wrong_stationary 4</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-lbfgs-m20-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>282.64</td><td>0.996</td><td>0.98976</td><td>0.998443</td><td>192</td><td>203.366</td><td>crash 0, divergence 0, cap 0, wrong_stationary 4</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-lbfgs</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>294.105</td><td>0.996</td><td>0.98976</td><td>0.998443</td><td>206</td><td>214.951</td><td>crash 0, divergence 0, cap 0, wrong_stationary 4</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-lbfgs</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>294.105</td><td>0.996</td><td>0.98976</td><td>0.998443</td><td>206</td><td>214.951</td><td>crash 0, divergence 0, cap 0, wrong_stationary 4</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-lbfgs-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>294.105</td><td>0.996</td><td>0.98976</td><td>0.998443</td><td>206</td><td>214.951</td><td>crash 0, divergence 0, cap 0, wrong_stationary 4</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-lbfgs-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>294.105</td><td>0.996</td><td>0.98976</td><td>0.998443</td><td>206</td><td>214.951</td><td>crash 0, divergence 0, cap 0, wrong_stationary 4</td><td>1000</td></tr>
+   <tr><td>ase/lj38-lbfgs-tuned</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>395.645</td><td>0.998</td><td>0.992737</td><td>0.999451</td><td>319</td><td>375.645</td><td>crash 0, divergence 0, cap 2, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>ase/lj38-bfgslinesearch-tuned</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>506.049</td><td>1</td><td>0.996173</td><td>1</td><td>490.5</td><td>506.049</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>ase/lj38-bfgs-tuned</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>519.938</td><td>0.997</td><td>0.991217</td><td>0.998979</td><td>414.5</td><td>489.938</td><td>crash 0, divergence 0, cap 3, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>ase/lj38-bfgslinesearch-default</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>561.466</td><td>1</td><td>0.996173</td><td>1</td><td>551</td><td>561.466</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-bb</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>639.474</td><td>0.994</td><td>0.986972</td><td>0.997247</td><td>471.5</td><td>521.461</td><td>crash 0, divergence 0, cap 0, wrong_stationary 6</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-bb</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>639.474</td><td>0.994</td><td>0.986972</td><td>0.997247</td><td>471.5</td><td>521.461</td><td>crash 0, divergence 0, cap 0, wrong_stationary 6</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-bb-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>639.474</td><td>0.994</td><td>0.986972</td><td>0.997247</td><td>471.5</td><td>521.461</td><td>crash 0, divergence 0, cap 0, wrong_stationary 6</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-bb-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>639.474</td><td>0.994</td><td>0.986972</td><td>0.997247</td><td>471.5</td><td>521.461</td><td>crash 0, divergence 0, cap 0, wrong_stationary 6</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-cg</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>669.237</td><td>0.996</td><td>0.98976</td><td>0.998443</td><td>538</td><td>591.346</td><td>crash 0, divergence 0, cap 0, wrong_stationary 4</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-cg</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>669.237</td><td>0.996</td><td>0.98976</td><td>0.998443</td><td>538</td><td>591.346</td><td>crash 0, divergence 0, cap 0, wrong_stationary 4</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-cg-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>669.237</td><td>0.996</td><td>0.98976</td><td>0.998443</td><td>538</td><td>591.346</td><td>crash 0, divergence 0, cap 0, wrong_stationary 4</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-cg-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>669.237</td><td>0.996</td><td>0.98976</td><td>0.998443</td><td>538</td><td>591.346</td><td>crash 0, divergence 0, cap 0, wrong_stationary 4</td><td>1000</td></tr>
+   <tr><td>ase/lj38-preconlbfgs-default</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>690.119</td><td>1</td><td>0.996173</td><td>1</td><td>652.5</td><td>690.119</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>ase/lj38-fire-default</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>706.005</td><td>1</td><td>0.996173</td><td>1</td><td>604</td><td>706.005</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>sella/lj38-min-default</td><td>Sella 2.6.0</td><td>6cfb60cdb100</td><td>yes</td><td>710.089</td><td>1</td><td>0.996173</td><td>1</td><td>692.5</td><td>710.089</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>ase/lj38-fire-tuned</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>719.638</td><td>1</td><td>0.996173</td><td>1</td><td>610.5</td><td>719.638</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-fire</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>769.36</td><td>0.997</td><td>0.991217</td><td>0.998979</td><td>625.5</td><td>711.609</td><td>crash 0, divergence 0, cap 0, wrong_stationary 3</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-fire</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>769.36</td><td>0.997</td><td>0.991217</td><td>0.998979</td><td>625.5</td><td>711.609</td><td>crash 0, divergence 0, cap 0, wrong_stationary 3</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-fire-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>769.36</td><td>0.997</td><td>0.991217</td><td>0.998979</td><td>625.5</td><td>711.609</td><td>crash 0, divergence 0, cap 0, wrong_stationary 3</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-fire-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>769.36</td><td>0.997</td><td>0.991217</td><td>0.998979</td><td>625.5</td><td>711.609</td><td>crash 0, divergence 0, cap 0, wrong_stationary 3</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-fire2</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>845.947</td><td>0.994</td><td>0.986972</td><td>0.997247</td><td>639.5</td><td>730.952</td><td>crash 0, divergence 0, cap 0, wrong_stationary 6</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-fire2</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>845.947</td><td>0.994</td><td>0.986972</td><td>0.997247</td><td>639.5</td><td>730.952</td><td>crash 0, divergence 0, cap 0, wrong_stationary 6</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-fire2-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>845.947</td><td>0.994</td><td>0.986972</td><td>0.997247</td><td>639.5</td><td>730.952</td><td>crash 0, divergence 0, cap 0, wrong_stationary 6</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-fire2-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>845.947</td><td>0.994</td><td>0.986972</td><td>0.997247</td><td>639.5</td><td>730.952</td><td>crash 0, divergence 0, cap 0, wrong_stationary 6</td><td>1000</td></tr>
+   <tr><td>ase/lj38-bfgs-default</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>1004</td><td>0.982</td><td>0.971727</td><td>0.988584</td><td>458</td><td>823.995</td><td>crash 0, divergence 0, cap 18, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-bfgs</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>1010.45</td><td>1</td><td>0.996173</td><td>1</td><td>970</td><td>1010.45</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-bfgs</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>1010.45</td><td>1</td><td>0.996173</td><td>1</td><td>970</td><td>1010.45</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-bfgs-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>1010.45</td><td>1</td><td>0.996173</td><td>1</td><td>970</td><td>1010.45</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-bfgs-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>1010.45</td><td>1</td><td>0.996173</td><td>1</td><td>970</td><td>1010.45</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>ase/lj38-lbfgs-default</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>1189.65</td><td>0.958</td><td>0.943716</td><td>0.968779</td><td>319</td><td>769.647</td><td>crash 0, divergence 0, cap 42, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>ase/lj38-preconfire-default</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>1816.59</td><td>1</td><td>0.996173</td><td>1</td><td>1562</td><td>1816.59</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-quickmin</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>1933</td><td>0.998</td><td>0.992737</td><td>0.999451</td><td>1598</td><td>1897.22</td><td>crash 0, divergence 0, cap 0, wrong_stationary 2</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-quickmin</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>1933</td><td>0.998</td><td>0.992737</td><td>0.999451</td><td>1598</td><td>1897.22</td><td>crash 0, divergence 0, cap 0, wrong_stationary 2</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-quickmin-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>1933</td><td>0.998</td><td>0.992737</td><td>0.999451</td><td>1598</td><td>1897.22</td><td>crash 0, divergence 0, cap 0, wrong_stationary 2</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-quickmin-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>1933</td><td>0.998</td><td>0.992737</td><td>0.999451</td><td>1598</td><td>1897.22</td><td>crash 0, divergence 0, cap 0, wrong_stationary 2</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-diis</td><td>rgmin 0.4.1</td><td>fd26a60ddd48</td><td>yes</td><td>1967.42</td><td>0.998</td><td>0.992737</td><td>0.999451</td><td>1652</td><td>1930.92</td><td>crash 0, divergence 0, cap 0, wrong_stationary 2</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-sr1</td><td>rgmin 0.4.1</td><td>fd26a60ddd48</td><td>yes</td><td>2185.66</td><td>0.994</td><td>0.986972</td><td>0.997247</td><td>1728</td><td>2093.01</td><td>crash 0, divergence 0, cap 2, wrong_stationary 4</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-sr2</td><td>rgmin 0.4.1</td><td>fd26a60ddd48</td><td>yes</td><td>2298.44</td><td>0.994</td><td>0.986972</td><td>0.997247</td><td>1837.5</td><td>2230.07</td><td>crash 0, divergence 0, cap 5, wrong_stationary 1</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-sd</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>8392.75</td><td>0.797</td><td>0.770955</td><td>0.820772</td><td>6099</td><td>6350.19</td><td>crash 0, divergence 0, cap 200, wrong_stationary 3</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-sd</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>8392.75</td><td>0.797</td><td>0.770955</td><td>0.820772</td><td>6099</td><td>6350.19</td><td>crash 0, divergence 0, cap 200, wrong_stationary 3</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-sd-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>8392.75</td><td>0.797</td><td>0.770955</td><td>0.820772</td><td>6099</td><td>6350.19</td><td>crash 0, divergence 0, cap 200, wrong_stationary 3</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-sd-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>8392.75</td><td>0.797</td><td>0.770955</td><td>0.820772</td><td>6099</td><td>6350.19</td><td>crash 0, divergence 0, cap 200, wrong_stationary 3</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-adam</td><td>rgmin 0.4.1</td><td>fd26a60ddd48</td><td>yes</td><td>13835.7</td><td>0.453</td><td>0.422386</td><td>0.483974</td><td>10000</td><td>8365.68</td><td>crash 0, divergence 0, cap 547, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-adam</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>16420.2</td><td>0.269</td><td>0.242438</td><td>0.29733</td><td>10000</td><td>9110.16</td><td>crash 0, divergence 0, cap 731, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-adam</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>16420.2</td><td>0.269</td><td>0.242438</td><td>0.29733</td><td>10000</td><td>9110.16</td><td>crash 0, divergence 0, cap 731, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-adam-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>16420.2</td><td>0.269</td><td>0.242438</td><td>0.29733</td><td>10000</td><td>9110.16</td><td>crash 0, divergence 0, cap 731, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-adam-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>16420.2</td><td>0.269</td><td>0.242438</td><td>0.29733</td><td>10000</td><td>9110.16</td><td>crash 0, divergence 0, cap 731, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-sr1</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>19908.9</td><td>0.005</td><td>0.00213754</td><td>0.011651</td><td>10000</td><td>8133.1</td><td>crash 0, divergence 196, cap 799, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-sr1</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>19908.9</td><td>0.005</td><td>0.00213754</td><td>0.011651</td><td>10000</td><td>8133.1</td><td>crash 0, divergence 196, cap 799, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-sr1-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>19908.9</td><td>0.005</td><td>0.00213754</td><td>0.011651</td><td>10000</td><td>8133.1</td><td>crash 0, divergence 196, cap 799, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-sr1-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>19908.9</td><td>0.005</td><td>0.00213754</td><td>0.011651</td><td>10000</td><td>8133.1</td><td>crash 0, divergence 196, cap 799, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-diis</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>19945</td><td>0.004</td><td>0.00155659</td><td>0.0102396</td><td>10000</td><td>9836.21</td><td>crash 0, divergence 0, cap 964, wrong_stationary 32</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-diis</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>19945</td><td>0.004</td><td>0.00155659</td><td>0.0102396</td><td>10000</td><td>9836.21</td><td>crash 0, divergence 0, cap 964, wrong_stationary 32</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-diis-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>19945</td><td>0.004</td><td>0.00155659</td><td>0.0102396</td><td>10000</td><td>9836.21</td><td>crash 0, divergence 0, cap 964, wrong_stationary 32</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-diis-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>19945</td><td>0.004</td><td>0.00155659</td><td>0.0102396</td><td>10000</td><td>9836.21</td><td>crash 0, divergence 0, cap 964, wrong_stationary 32</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-sr2</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>20000</td><td>0</td><td>0</td><td>0.00382676</td><td>10000</td><td>9990.45</td><td>crash 0, divergence 1, cap 999, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-sr2</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>20000</td><td>0</td><td>0</td><td>0.00382676</td><td>10000</td><td>9990.45</td><td>crash 0, divergence 1, cap 999, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-sr2-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>20000</td><td>0</td><td>0</td><td>0.00382676</td><td>10000</td><td>9990.45</td><td>crash 0, divergence 1, cap 999, wrong_stationary 0</td><td>1000</td></tr>
+   <tr><td>rgmin/lj38-sr2-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>20000</td><td>0</td><td>0</td><td>0.00382676</td><td>10000</td><td>9990.45</td><td>crash 0, divergence 1, cap 999, wrong_stationary 0</td><td>1000</td></tr>
+   </tbody></table>
+   <h3>Partial</h3><ul>
+   <li>ase/lj38-lbfgs-default asv n=1 scored 1 of 1000 starts</li>
+   <li>ase/lj38-gpmin-default asv n=1 scored 1 of 1000 starts</li>
+   <li>ase/lj38-bfgs-default asv n=1 scored 1 of 1000 starts</li>
+   <li>ase/lj38-bfgslinesearch-default asv n=1 scored 1 of 1000 starts</li>
+   <li>ase/lj38-fire-default asv n=1 scored 1 of 1000 starts</li>
+   <li>ase/lj38-lbfgs-tuned asv n=1 scored 1 of 1000 starts</li>
+   <li>ase/lj38-preconfire-tuned asv n=1 scored 1 of 1000 starts</li>
+   <li>sella/lj38-min-default asv n=1 scored 1 of 1000 starts</li>
+   <li>ase/lj38-gpmin-tuned asv n=1 scored 1 of 1000 starts</li>
+   <li>ase/lj38-preconode12r-tuned asv n=1 scored 1 of 1000 starts</li>
+   <li>ase/lj38-preconlbfgs-default asv n=1 scored 1 of 1000 starts</li>
+   <li>sella/lj38-min-tuned asv n=1 scored 1 of 1000 starts</li>
+   <li>ase/lj38-preconode12r-default asv n=1 scored 1 of 1000 starts</li>
+   <li>ase/lj38-bfgs-tuned asv n=1 scored 1 of 1000 starts</li>
+   <li>ase/lj38-bfgslinesearch-tuned asv n=1 scored 1 of 1000 starts</li>
+   <li>ase/lj38-fire-tuned asv n=1 scored 1 of 1000 starts</li>
+   <li>ase/lj38-preconfire-default asv n=1 scored 1 of 1000 starts</li>
+   <li>ase/lj38-preconlbfgs-tuned asv n=1 scored 1 of 1000 starts</li>
+   </ul>
+   <img src="_static/board/minimization-lj38-profile.svg" alt="Dolan-More profile for minimization/lj38">
+   <img src="_static/board/minimization-lj38-cost.svg" alt="Cost versus success for minimization/lj38">
+   </section>
+   <section class="bench" id="minimization-morse-bulk">
+   <h2>Morse bulk</h2>
+   <p>Ranked by the v2 PAR-2 mean. A partial row used fewer starts than the problem's full set and is not in this table.</p>
+   <table>
+   <caption>Lower PAR-2 is better. Wilson bounds are the 95% interval on the success rate.</caption>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td>rgmin/morse-newton-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>8.35</td><td>1</td><td>0.963007</td><td>1</td><td>9</td><td>8.35</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-newton-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>8.35</td><td>1</td><td>0.963007</td><td>1</td><td>9</td><td>8.35</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-dogleg</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>10.11</td><td>1</td><td>0.963007</td><td>1</td><td>10</td><td>10.11</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-dogleg</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>10.11</td><td>1</td><td>0.963007</td><td>1</td><td>10</td><td>10.11</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-lbfgs-m20-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>26.87</td><td>1</td><td>0.963007</td><td>1</td><td>27</td><td>26.87</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-lbfgs-m20-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>26.87</td><td>1</td><td>0.963007</td><td>1</td><td>27</td><td>26.87</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-lbfgs-m100-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>26.91</td><td>1</td><td>0.963007</td><td>1</td><td>27</td><td>26.91</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-lbfgs-m100-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>26.91</td><td>1</td><td>0.963007</td><td>1</td><td>27</td><td>26.91</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-lbfgs-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>26.93</td><td>1</td><td>0.963007</td><td>1</td><td>27</td><td>26.93</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-lbfgs-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>26.93</td><td>1</td><td>0.963007</td><td>1</td><td>27</td><td>26.93</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-lbfgs-m20</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>27.05</td><td>1</td><td>0.963007</td><td>1</td><td>27</td><td>27.05</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-lbfgs-m20</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>27.05</td><td>1</td><td>0.963007</td><td>1</td><td>27</td><td>27.05</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-lbfgs-m100</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>27.12</td><td>1</td><td>0.963007</td><td>1</td><td>27</td><td>27.12</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-lbfgs-m100</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>27.12</td><td>1</td><td>0.963007</td><td>1</td><td>27</td><td>27.12</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-lbfgs</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>27.18</td><td>1</td><td>0.963007</td><td>1</td><td>27.5</td><td>27.18</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-lbfgs</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>27.18</td><td>1</td><td>0.963007</td><td>1</td><td>27.5</td><td>27.18</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-diis-tuned</td><td>rgmin 0.4.1</td><td>fd26a60ddd48</td><td>yes</td><td>27.44</td><td>1</td><td>0.963007</td><td>1</td><td>28</td><td>27.44</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>sella/morse-min-default</td><td>Sella 2.6.0</td><td>6cfb60cdb100</td><td>yes</td><td>28.89</td><td>1</td><td>0.963007</td><td>1</td><td>28</td><td>28.89</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>ase/morse-bfgslinesearch-default</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>28.91</td><td>1</td><td>0.963007</td><td>1</td><td>28</td><td>28.91</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-diis</td><td>rgmin 0.4.1</td><td>fd26a60ddd48</td><td>yes</td><td>28.94</td><td>1</td><td>0.963007</td><td>1</td><td>29</td><td>28.94</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>ase/morse-preconlbfgs-tuned</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>28.98</td><td>1</td><td>0.963007</td><td>1</td><td>29</td><td>28.98</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-dogleg-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>31.26</td><td>1</td><td>0.963007</td><td>1</td><td>32.5</td><td>31.26</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-dogleg-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>31.26</td><td>1</td><td>0.963007</td><td>1</td><td>32.5</td><td>31.26</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>ase/morse-lbfgs-tuned</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>32.03</td><td>1</td><td>0.963007</td><td>1</td><td>32</td><td>32.03</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-bb-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>33.22</td><td>1</td><td>0.963007</td><td>1</td><td>34</td><td>33.22</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-bb-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>33.22</td><td>1</td><td>0.963007</td><td>1</td><td>34</td><td>33.22</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>ase/morse-preconode12r-default</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>41.78</td><td>1</td><td>0.963007</td><td>1</td><td>44</td><td>41.78</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>ase/morse-preconode12r-tuned</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>41.78</td><td>1</td><td>0.963007</td><td>1</td><td>44</td><td>41.78</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-cg-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>50.49</td><td>1</td><td>0.963007</td><td>1</td><td>50</td><td>50.49</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-cg-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>50.49</td><td>1</td><td>0.963007</td><td>1</td><td>50</td><td>50.49</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>ase/morse-bfgs-default</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>53.36</td><td>1</td><td>0.963007</td><td>1</td><td>54</td><td>53.36</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>ase/morse-lbfgs-default</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>53.36</td><td>1</td><td>0.963007</td><td>1</td><td>54</td><td>53.36</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-bfgs</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>54.04</td><td>1</td><td>0.963007</td><td>1</td><td>50</td><td>54.04</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-bfgs</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>54.04</td><td>1</td><td>0.963007</td><td>1</td><td>50</td><td>54.04</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>eon/morse-lbfgs-m100</td><td>eOn 3.6.0</td><td>1d71c9445018</td><td>yes</td><td>54.18</td><td>1</td><td>0.963007</td><td>1</td><td>53</td><td>54.18</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>eon/morse-lbfgs</td><td>eOn 3.6.0</td><td>1d71c9445018</td><td>yes</td><td>54.31</td><td>1</td><td>0.963007</td><td>1</td><td>52</td><td>54.31</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-cg</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>54.72</td><td>1</td><td>0.963007</td><td>1</td><td>54</td><td>54.72</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-cg</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>54.72</td><td>1</td><td>0.963007</td><td>1</td><td>54</td><td>54.72</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>ase/morse-bfgs-tuned</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>54.92</td><td>1</td><td>0.963007</td><td>1</td><td>55</td><td>54.92</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-sr2-tuned</td><td>rgmin 0.4.1</td><td>fd26a60ddd48</td><td>yes</td><td>59.53</td><td>1</td><td>0.963007</td><td>1</td><td>61</td><td>59.53</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>ase/morse-preconlbfgs-default</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>59.83</td><td>1</td><td>0.963007</td><td>1</td><td>44</td><td>59.83</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-sr2</td><td>rgmin 0.4.1</td><td>fd26a60ddd48</td><td>yes</td><td>60.2</td><td>1</td><td>0.963007</td><td>1</td><td>60</td><td>60.2</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-sr1-tuned</td><td>rgmin 0.4.1</td><td>fd26a60ddd48</td><td>yes</td><td>61.53</td><td>1</td><td>0.963007</td><td>1</td><td>65.5</td><td>61.53</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-quickmin-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>61.75</td><td>1</td><td>0.963007</td><td>1</td><td>61</td><td>61.75</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-quickmin-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>61.75</td><td>1</td><td>0.963007</td><td>1</td><td>61</td><td>61.75</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-quickmin</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>62.03</td><td>1</td><td>0.963007</td><td>1</td><td>62</td><td>62.03</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-quickmin</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>62.03</td><td>1</td><td>0.963007</td><td>1</td><td>62</td><td>62.03</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-sr1</td><td>rgmin 0.4.1</td><td>fd26a60ddd48</td><td>yes</td><td>66.77</td><td>1</td><td>0.963007</td><td>1</td><td>71.5</td><td>66.77</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-bfgs-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>70.53</td><td>1</td><td>0.963007</td><td>1</td><td>71</td><td>70.53</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-bfgs-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>70.53</td><td>1</td><td>0.963007</td><td>1</td><td>71</td><td>70.53</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>sella/morse-min-tuned</td><td>Sella 2.6.0</td><td>6cfb60cdb100</td><td>yes</td><td>71.43</td><td>1</td><td>0.963007</td><td>1</td><td>72.5</td><td>71.43</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-sd-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>90.48</td><td>1</td><td>0.963007</td><td>1</td><td>89</td><td>90.48</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-sd-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>90.48</td><td>1</td><td>0.963007</td><td>1</td><td>89</td><td>90.48</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>ase/morse-bfgslinesearch-tuned</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>93.44</td><td>1</td><td>0.963007</td><td>1</td><td>95</td><td>93.44</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-sd</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>96.59</td><td>1</td><td>0.963007</td><td>1</td><td>97</td><td>96.59</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-sd</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>96.59</td><td>1</td><td>0.963007</td><td>1</td><td>97</td><td>96.59</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-fire-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>113.19</td><td>1</td><td>0.963007</td><td>1</td><td>113</td><td>113.19</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-fire-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>113.19</td><td>1</td><td>0.963007</td><td>1</td><td>113</td><td>113.19</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>ase/morse-fire-default</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>113.36</td><td>1</td><td>0.963007</td><td>1</td><td>112</td><td>113.36</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>ase/morse-fire-tuned</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>113.36</td><td>1</td><td>0.963007</td><td>1</td><td>112</td><td>113.36</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-fire</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>116.19</td><td>1</td><td>0.963007</td><td>1</td><td>119</td><td>116.19</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-fire</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>116.19</td><td>1</td><td>0.963007</td><td>1</td><td>119</td><td>116.19</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-fire2</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>121.85</td><td>1</td><td>0.963007</td><td>1</td><td>124</td><td>121.85</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-fire2</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>121.85</td><td>1</td><td>0.963007</td><td>1</td><td>124</td><td>121.85</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-fire2-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>121.87</td><td>1</td><td>0.963007</td><td>1</td><td>124</td><td>121.87</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-fire2-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>121.87</td><td>1</td><td>0.963007</td><td>1</td><td>124</td><td>121.87</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-adam</td><td>rgmin 0.4.1</td><td>fd26a60ddd48</td><td>yes</td><td>219.34</td><td>1</td><td>0.963007</td><td>1</td><td>222</td><td>219.34</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-adam-tuned</td><td>rgmin 0.4.1</td><td>fd26a60ddd48</td><td>yes</td><td>219.34</td><td>1</td><td>0.963007</td><td>1</td><td>222</td><td>219.34</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-adam</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>285.73</td><td>1</td><td>0.963007</td><td>1</td><td>285</td><td>285.73</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-adam</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>285.73</td><td>1</td><td>0.963007</td><td>1</td><td>285</td><td>285.73</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-adam-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>285.73</td><td>1</td><td>0.963007</td><td>1</td><td>285</td><td>285.73</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-adam-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>285.73</td><td>1</td><td>0.963007</td><td>1</td><td>285</td><td>285.73</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-sr2</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>341.13</td><td>1</td><td>0.963007</td><td>1</td><td>334</td><td>341.13</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-sr2</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>341.13</td><td>1</td><td>0.963007</td><td>1</td><td>334</td><td>341.13</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>ase/morse-preconfire-default</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>363.32</td><td>1</td><td>0.963007</td><td>1</td><td>371</td><td>363.32</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>ase/morse-preconfire-tuned</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>365.52</td><td>1</td><td>0.963007</td><td>1</td><td>372</td><td>365.52</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-newton</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>396.69</td><td>0.99</td><td>0.945514</td><td>0.998233</td><td>8</td><td>296.69</td><td>crash 0, divergence 0, cap 1, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-newton</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>396.69</td><td>0.99</td><td>0.945514</td><td>0.998233</td><td>8</td><td>296.69</td><td>crash 0, divergence 0, cap 1, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-sr1</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>566.31</td><td>0.98</td><td>0.929988</td><td>0.994498</td><td>137</td><td>366.31</td><td>crash 0, divergence 0, cap 2, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-sr1</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>566.31</td><td>0.98</td><td>0.929988</td><td>0.994498</td><td>137</td><td>366.31</td><td>crash 0, divergence 0, cap 2, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-sr1-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>1187.31</td><td>0.96</td><td>0.901629</td><td>0.984337</td><td>160.5</td><td>787.31</td><td>crash 0, divergence 0, cap 4, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-sr1-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>1187.31</td><td>0.96</td><td>0.901629</td><td>0.984337</td><td>160.5</td><td>787.31</td><td>crash 0, divergence 0, cap 4, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-sr2-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>1198.65</td><td>0.96</td><td>0.901629</td><td>0.984337</td><td>362.5</td><td>798.65</td><td>crash 0, divergence 0, cap 4, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-sr2-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>1198.65</td><td>0.96</td><td>0.901629</td><td>0.984337</td><td>362.5</td><td>798.65</td><td>crash 0, divergence 0, cap 4, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-bb</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>15606.6</td><td>0.22</td><td>0.150013</td><td>0.310704</td><td>10000</td><td>7806.64</td><td>crash 0, divergence 0, cap 78, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-bb</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>15606.6</td><td>0.22</td><td>0.150013</td><td>0.310704</td><td>10000</td><td>7806.64</td><td>crash 0, divergence 0, cap 78, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-diis-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>15819.4</td><td>0.22</td><td>0.150013</td><td>0.310704</td><td>10000</td><td>8019.42</td><td>crash 0, divergence 0, cap 78, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-diis-tuned</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>15819.4</td><td>0.22</td><td>0.150013</td><td>0.310704</td><td>10000</td><td>8019.42</td><td>crash 0, divergence 0, cap 78, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-diis</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>yes</td><td>16153.4</td><td>0.2</td><td>0.133367</td><td>0.288829</td><td>10000</td><td>8153.43</td><td>crash 0, divergence 0, cap 80, wrong_stationary 0</td><td>100</td></tr>
+   <tr><td>rgmin/morse-diis</td><td>rgmin 0.4.0</td><td>24236559f381</td><td>no</td><td>16153.4</td><td>0.2</td><td>0.133367</td><td>0.288829</td><td>10000</td><td>8153.43</td><td>crash 0, divergence 0, cap 80, wrong_stationary 0</td><td>100</td></tr>
+   </tbody></table>
+   <h3>Partial</h3><ul>
+   <li>ase/morse-preconode12r-tuned asv n=1 scored 1 of 100 starts</li>
+   <li>ase/morse-bfgs-default asv n=1 scored 1 of 100 starts</li>
+   <li>ase/morse-bfgslinesearch-default asv n=1 scored 1 of 100 starts</li>
+   <li>ase/morse-bfgslinesearch-tuned asv n=1 scored 1 of 100 starts</li>
+   <li>ase/morse-fire-tuned asv n=1 scored 1 of 100 starts</li>
+   <li>ase/morse-preconfire-default asv n=1 scored 1 of 100 starts</li>
+   <li>ase/morse-bfgs-tuned asv n=1 scored 1 of 100 starts</li>
+   <li>ase/morse-fire-default asv n=1 scored 1 of 100 starts</li>
+   <li>ase/morse-lbfgs-default asv n=1 scored 1 of 100 starts</li>
+   <li>ase/morse-preconlbfgs-default asv n=1 scored 1 of 100 starts</li>
+   <li>sella/morse-min-tuned asv n=1 scored 1 of 100 starts</li>
+   <li>ase/morse-preconode12r-default asv n=1 scored 1 of 100 starts</li>
+   <li>ase/morse-preconfire-tuned asv n=1 scored 1 of 100 starts</li>
+   <li>sella/morse-min-default asv n=1 scored 1 of 100 starts</li>
+   <li>ase/morse-lbfgs-tuned asv n=1 scored 1 of 100 starts</li>
+   <li>ase/morse-preconlbfgs-tuned asv n=1 scored 1 of 100 starts</li>
+   </ul>
+   <img src="_static/board/minimization-morse-bulk-profile.svg" alt="Dolan-More profile for minimization/morse-bulk">
+   <img src="_static/board/minimization-morse-bulk-cost.svg" alt="Cost versus success for minimization/morse-bulk">
+   </section>
+   <section class="bench" id="neb-Pt-heptamer">
+   <h2>Pt-heptamer</h2>
+   <p>Ranked by the v2 PAR-2 mean. A partial row used fewer starts than the problem's full set and is not in this table.</p>
+   <table>
+   <caption>Lower PAR-2 is better. Wilson bounds are the 95% interval on the success rate.</caption>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td>ase/neb-pt-heptamer-tuned</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>55.3269</td><td>1</td><td>0.771905</td><td>1</td><td>56.25</td><td>55.3269</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>13</td></tr>
+   <tr><td>ase/neb-pt-heptamer-default</td><td>ASE 3.29.0</td><td>f27c0005ae6a</td><td>yes</td><td>75.8654</td><td>1</td><td>0.771905</td><td>1</td><td>77.25</td><td>75.8654</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>13</td></tr>
+   <tr><td>rgsaddle/idpp-ci-neb-lbfgs</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>318.308</td><td>1</td><td>0.771905</td><td>1</td><td>314</td><td>318.308</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>13</td></tr>
+   <tr><td>rgsaddle/sidpp-ci-neb-lbfgs</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>318.923</td><td>1</td><td>0.771905</td><td>1</td><td>314</td><td>318.923</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>13</td></tr>
+   <tr><td>rgsaddle/ci-neb-lbfgs</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>319.538</td><td>1</td><td>0.771905</td><td>1</td><td>330</td><td>319.538</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>13</td></tr>
+   <tr><td>rgsaddle/oci-neb-lbfgs</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>345.538</td><td>1</td><td>0.771905</td><td>1</td><td>356</td><td>345.538</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>13</td></tr>
+   <tr><td>rgsaddle/ew-ci-neb-lbfgs</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>357.231</td><td>1</td><td>0.771905</td><td>1</td><td>332</td><td>357.231</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>13</td></tr>
+   <tr><td>rgsaddle/sidpp-ci-neb</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>732.462</td><td>1</td><td>0.771905</td><td>1</td><td>682</td><td>732.462</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>13</td></tr>
+   <tr><td>rgsaddle/idpp-ci-neb</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>735.538</td><td>1</td><td>0.771905</td><td>1</td><td>706</td><td>735.538</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>13</td></tr>
+   <tr><td>rgsaddle/ci-neb</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>736.769</td><td>1</td><td>0.771905</td><td>1</td><td>698</td><td>736.769</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>13</td></tr>
+   <tr><td>rgsaddle/ew-ci-neb</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>759.692</td><td>1</td><td>0.771905</td><td>1</td><td>740</td><td>759.692</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>13</td></tr>
+   <tr><td>rgsaddle/oci-neb</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>760.769</td><td>1</td><td>0.771905</td><td>1</td><td>722</td><td>760.769</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>13</td></tr>
+   <tr><td>rgsaddle/neb</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>20000</td><td>0</td><td>0</td><td>0.228095</td><td>962</td><td>970.615</td><td>crash 0, divergence 13, cap 0, wrong_stationary 0</td><td>13</td></tr>
+   <tr><td>rgsaddle/neb-lbfgs</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>20000</td><td>0</td><td>0</td><td>0.228095</td><td>410</td><td>422.923</td><td>crash 0, divergence 13, cap 0, wrong_stationary 0</td><td>13</td></tr>
+   </tbody></table>
+   <h3>Partial</h3><ul>
+   <li>ase/neb-pt-heptamer-default asv n=1 scored 1 of 13 starts</li>
+   <li>ase/neb-pt-heptamer-tuned asv n=1 scored 1 of 13 starts</li>
+   </ul>
+   <h3>Not a harness score</h3><ul>
+   <li>eon/neb-pt-lbfgs-m100 n=13 counter=unset</li>
+   <li>eon/neb-pt-lbfgs n=13 counter=unset</li>
+   </ul>
+   <img src="_static/board/neb-Pt-heptamer-profile.svg" alt="Dolan-More profile for neb/Pt-heptamer">
+   <img src="_static/board/neb-Pt-heptamer-cost.svg" alt="Cost versus success for neb/Pt-heptamer">
+   </section>
+   <section class="bench" id="saddle-search-pt-island">
+   <h2>Pt heptamer island</h2>
+   <p>Ranked by the v2 PAR-2 mean. A partial row used fewer starts than the problem's full set and is not in this table.</p>
+   <table>
+   <caption>Lower PAR-2 is better. Wilson bounds are the 95% interval on the success rate.</caption>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td colspan="12">No full harness row.</td></tr>
+   </tbody></table>
+   <h3>Partial</h3><ul>
+   <li>ase/dimer-pt-island-default campaign n=16 result file sets ranked false</li>
+   <li>ase/dimer-pt-island-tuned campaign n=16 result file sets ranked false</li>
+   <li>eon/develop-saddle-pt-dimer asv n=1 one-start grid; the problem states no full set</li>
+   <li>eon/develop-saddle-pt-lanczos asv n=1 one-start grid; the problem states no full set</li>
+   <li>ase/dimer-pt-island-default asv n=1 one-start grid; the problem states no full set</li>
+   <li>sella/pt-island-search-tuned asv n=1 one-start grid; the problem states no full set</li>
+   <li>ase/dimer-pt-island-tuned asv n=1 one-start grid; the problem states no full set</li>
+   <li>sella/pt-island-search-default asv n=1 one-start grid; the problem states no full set</li>
+   <li>eon/develop-saddle-pt-dimer asv n=1 one-start grid; the problem states no full set</li>
+   <li>eon/develop-saddle-pt-lanczos asv n=1 one-start grid; the problem states no full set</li>
+   </ul>
+   <h3>Not a harness score</h3><ul>
+   <li>eon-3.5.0-saddle-pt-classic n=10 counter=unset</li>
+   <li>eon-3.5.0-saddle-pt-dimer n=10 counter=unset</li>
+   </ul>
+   </section>
+   <section class="bench" id="tsopt-LJ38">
+   <h2>LJ38</h2>
+   <p>Ranked by the v2 PAR-2 mean. A partial row used fewer starts than the problem's full set and is not in this table.</p>
+   <table>
+   <caption>Lower PAR-2 is better. Wilson bounds are the 95% interval on the success rate.</caption>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td>sella/lj38-ts-default</td><td>Sella 2.6.0</td><td>6cfb60cdb100</td><td>yes</td><td>68.74</td><td>1</td><td>0.981155</td><td>1</td><td>59.5</td><td>68.74</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>200</td></tr>
+   <tr><td>rgsaddle/prfo-tuned</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>192.6</td><td>1</td><td>0.981155</td><td>1</td><td>173</td><td>192.6</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>200</td></tr>
+   <tr><td>rgsaddle/prfo-tuned</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>no</td><td>192.6</td><td>1</td><td>0.981155</td><td>1</td><td>173</td><td>192.6</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>200</td></tr>
+   <tr><td>sella/lj38-ts-tuned</td><td>Sella 2.6.0</td><td>6cfb60cdb100</td><td>yes</td><td>274.46</td><td>0.99</td><td>0.964278</td><td>0.997253</td><td>68</td><td>92.775</td><td>crash 0, divergence 2, cap 0, wrong_stationary 0</td><td>200</td></tr>
+   <tr><td>rgsaddle/dimer-rotskip</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>7803.19</td><td>0.63</td><td>0.561226</td><td>0.693874</td><td>856.5</td><td>2926.82</td><td>crash 0, divergence 0, cap 27, wrong_stationary 47</td><td>200</td></tr>
+   <tr><td>rgsaddle/dimer-rotskip</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>no</td><td>7803.19</td><td>0.63</td><td>0.561226</td><td>0.693874</td><td>856.5</td><td>2926.82</td><td>crash 0, divergence 0, cap 27, wrong_stationary 47</td><td>200</td></tr>
+   <tr><td>rgsaddle/prfo</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>15147</td><td>0.25</td><td>0.195082</td><td>0.314341</td><td>460.5</td><td>723.265</td><td>crash 0, divergence 0, cap 3, wrong_stationary 147</td><td>200</td></tr>
+   <tr><td>rgsaddle/prfo</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>no</td><td>15147</td><td>0.25</td><td>0.195082</td><td>0.314341</td><td>460.5</td><td>723.265</td><td>crash 0, divergence 0, cap 3, wrong_stationary 147</td><td>200</td></tr>
+   <tr><td>rgsaddle/dimer-fire-tuned</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>16339</td><td>0.235</td><td>0.181574</td><td>0.298414</td><td>2795.5</td><td>3321.32</td><td>crash 0, divergence 146, cap 7, wrong_stationary 0</td><td>200</td></tr>
+   <tr><td>rgsaddle/dimer-fire-tuned</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>no</td><td>16339</td><td>0.235</td><td>0.181574</td><td>0.298414</td><td>2795.5</td><td>3321.32</td><td>crash 0, divergence 146, cap 7, wrong_stationary 0</td><td>200</td></tr>
+   <tr><td>rgsaddle/dimer-rotskip-tuned</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>16738.1</td><td>0.17</td><td>0.124279</td><td>0.228159</td><td>8407</td><td>6506.53</td><td>crash 0, divergence 0, cap 96, wrong_stationary 70</td><td>200</td></tr>
+   <tr><td>rgsaddle/dimer-rotskip-tuned</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>no</td><td>16738.1</td><td>0.17</td><td>0.124279</td><td>0.228159</td><td>8407</td><td>6506.53</td><td>crash 0, divergence 0, cap 96, wrong_stationary 70</td><td>200</td></tr>
+   <tr><td>rgsaddle/lanczos-tuned</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>19146.1</td><td>0.05</td><td>0.0273826</td><td>0.0895781</td><td>10000</td><td>9646.12</td><td>crash 0, divergence 0, cap 190, wrong_stationary 0</td><td>200</td></tr>
+   <tr><td>rgsaddle/lanczos-tuned</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>no</td><td>19146.1</td><td>0.05</td><td>0.0273826</td><td>0.0895781</td><td>10000</td><td>9646.12</td><td>crash 0, divergence 0, cap 190, wrong_stationary 0</td><td>200</td></tr>
+   <tr><td>rgsaddle/lanczos</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>19418.8</td><td>0.035</td><td>0.0170555</td><td>0.0704706</td><td>10011</td><td>9779.39</td><td>crash 0, divergence 0, cap 193, wrong_stationary 0</td><td>200</td></tr>
+   <tr><td>rgsaddle/lanczos</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>no</td><td>19418.8</td><td>0.035</td><td>0.0170555</td><td>0.0704706</td><td>10011</td><td>9779.39</td><td>crash 0, divergence 0, cap 193, wrong_stationary 0</td><td>200</td></tr>
+   <tr><td>rgsaddle/dimer-fire</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>19455</td><td>0.04</td><td>0.0204056</td><td>0.0769321</td><td>3666</td><td>4792.34</td><td>crash 0, divergence 164, cap 28, wrong_stationary 0</td><td>200</td></tr>
+   <tr><td>rgsaddle/dimer-fire</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>no</td><td>19455</td><td>0.04</td><td>0.0204056</td><td>0.0769321</td><td>3666</td><td>4792.34</td><td>crash 0, divergence 164, cap 28, wrong_stationary 0</td><td>200</td></tr>
+   <tr><td>rgsaddle/dimer-lbfgs-tuned</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>19924.8</td><td>0.005</td><td>0.000883169</td><td>0.0277737</td><td>10009</td><td>9983.53</td><td>crash 0, divergence 0, cap 199, wrong_stationary 0</td><td>200</td></tr>
+   <tr><td>rgsaddle/dimer-lbfgs-tuned</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>no</td><td>19924.8</td><td>0.005</td><td>0.000883169</td><td>0.0277737</td><td>10009</td><td>9983.53</td><td>crash 0, divergence 0, cap 199, wrong_stationary 0</td><td>200</td></tr>
+   <tr><td>rgsaddle/dimer-lbfgs</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>20000</td><td>0</td><td>0</td><td>0.0188453</td><td>10011</td><td>9991.44</td><td>crash 0, divergence 0, cap 199, wrong_stationary 1</td><td>200</td></tr>
+   <tr><td>rgsaddle/dimer-lbfgs</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>no</td><td>20000</td><td>0</td><td>0</td><td>0.0188453</td><td>10011</td><td>9991.44</td><td>crash 0, divergence 0, cap 199, wrong_stationary 1</td><td>200</td></tr>
+   </tbody></table>
+   <h3>Partial</h3><ul>
+   <li>eon/develop-ts-lj38-dimer asv n=1 scored 1 of 200 starts</li>
+   <li>eon/develop-ts-lj38-lanczos asv n=1 scored 1 of 200 starts</li>
+   <li>sella/lj38-ts-default asv n=1 scored 1 of 200 starts</li>
+   <li>sella/lj38-ts-tuned asv n=1 scored 1 of 200 starts</li>
+   <li>eon/develop-ts-lj38-dimer asv n=1 scored 1 of 200 starts</li>
+   <li>eon/develop-ts-lj38-lanczos asv n=1 scored 1 of 200 starts</li>
+   </ul>
+   <h3>Not a harness score</h3><ul>
+   <li>eon/ts-lj38-dimer-m100 n=200 counter=unset</li>
+   <li>eon/ts-lj38-dimer n=200 counter=unset</li>
+   </ul>
+   <img src="_static/board/tsopt-LJ38-profile.svg" alt="Dolan-More profile for tsopt/LJ38">
+   <img src="_static/board/tsopt-LJ38-cost.svg" alt="Cost versus success for tsopt/LJ38">
+   </section>
+   <section class="bench" id="tsopt-pt-island">
+   <h2>pt-island</h2>
+   <p>Ranked by the v2 PAR-2 mean. A partial row used fewer starts than the problem's full set and is not in this table.</p>
+   <table>
+   <caption>Lower PAR-2 is better. Wilson bounds are the 95% interval on the success rate.</caption>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td>sella/pt-island-ts-default</td><td>Sella 2.6.0</td><td>6cfb60cdb100</td><td>yes</td><td>74.2857</td><td>1</td><td>0.927302</td><td>1</td><td>71</td><td>74.2857</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>49</td></tr>
+   <tr><td>sella/pt-island-ts-tuned</td><td>Sella 2.6.0</td><td>6cfb60cdb100</td><td>yes</td><td>87.551</td><td>1</td><td>0.927302</td><td>1</td><td>88</td><td>87.551</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>49</td></tr>
+   <tr><td>rgsaddle/pt-dimer-rotskip</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>223.898</td><td>1</td><td>0.927302</td><td>1</td><td>145</td><td>223.898</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>49</td></tr>
+   <tr><td>rgsaddle/pt-dimer-rotskip</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>no</td><td>223.898</td><td>1</td><td>0.927302</td><td>1</td><td>145</td><td>223.898</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>49</td></tr>
+   <tr><td>rgsaddle/pt-dimer-rotskip-tuned</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>299.633</td><td>1</td><td>0.927302</td><td>1</td><td>167</td><td>299.633</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>49</td></tr>
+   <tr><td>rgsaddle/pt-dimer-rotskip-tuned</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>no</td><td>299.633</td><td>1</td><td>0.927302</td><td>1</td><td>167</td><td>299.633</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>49</td></tr>
+   <tr><td>rgsaddle/pt-dimer-fire-tuned</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>1096.9</td><td>1</td><td>0.927302</td><td>1</td><td>918</td><td>1096.9</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>49</td></tr>
+   <tr><td>rgsaddle/pt-dimer-fire-tuned</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>no</td><td>1096.9</td><td>1</td><td>0.927302</td><td>1</td><td>918</td><td>1096.9</td><td>crash 0, divergence 0, cap 0, wrong_stationary 0</td><td>49</td></tr>
+   <tr><td>rgsaddle/pt-dimer-fire</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>3274.14</td><td>0.979592</td><td>0.893065</td><td>0.996388</td><td>2337</td><td>3070.14</td><td>crash 0, divergence 0, cap 1, wrong_stationary 0</td><td>49</td></tr>
+   <tr><td>rgsaddle/pt-dimer-fire</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>no</td><td>3274.14</td><td>0.979592</td><td>0.893065</td><td>0.996388</td><td>2337</td><td>3070.14</td><td>crash 0, divergence 0, cap 1, wrong_stationary 0</td><td>49</td></tr>
+   <tr><td>rgsaddle/pt-dimer-lbfgs-tuned</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>7701.71</td><td>0.632653</td><td>0.492671</td><td>0.753348</td><td>542</td><td>4031.55</td><td>crash 0, divergence 0, cap 18, wrong_stationary 0</td><td>49</td></tr>
+   <tr><td>rgsaddle/pt-dimer-lbfgs-tuned</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>no</td><td>7701.71</td><td>0.632653</td><td>0.492671</td><td>0.753348</td><td>542</td><td>4031.55</td><td>crash 0, divergence 0, cap 18, wrong_stationary 0</td><td>49</td></tr>
+   <tr><td>rgsaddle/pt-lanczos</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>9736.8</td><td>0.530612</td><td>0.393809</td><td>0.662965</td><td>974</td><td>5048.08</td><td>crash 0, divergence 0, cap 23, wrong_stationary 0</td><td>49</td></tr>
+   <tr><td>rgsaddle/pt-lanczos</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>no</td><td>9736.8</td><td>0.530612</td><td>0.393809</td><td>0.662965</td><td>974</td><td>5048.08</td><td>crash 0, divergence 0, cap 23, wrong_stationary 0</td><td>49</td></tr>
+   <tr><td>rgsaddle/pt-lanczos-tuned</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>9990.33</td><td>0.510204</td><td>0.374676</td><td>0.644249</td><td>635</td><td>5092.37</td><td>crash 0, divergence 0, cap 24, wrong_stationary 0</td><td>49</td></tr>
+   <tr><td>rgsaddle/pt-lanczos-tuned</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>no</td><td>9990.33</td><td>0.510204</td><td>0.374676</td><td>0.644249</td><td>635</td><td>5092.37</td><td>crash 0, divergence 0, cap 24, wrong_stationary 0</td><td>49</td></tr>
+   <tr><td>rgsaddle/pt-dimer-lbfgs</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>yes</td><td>11854.5</td><td>0.428571</td><td>0.300233</td><td>0.567295</td><td>10011</td><td>6146.45</td><td>crash 0, divergence 0, cap 28, wrong_stationary 0</td><td>49</td></tr>
+   <tr><td>rgsaddle/pt-dimer-lbfgs</td><td>rgsaddle 0.2.2</td><td>c0db2b8d333c</td><td>no</td><td>11854.5</td><td>0.428571</td><td>0.300233</td><td>0.567295</td><td>10011</td><td>6146.45</td><td>crash 0, divergence 0, cap 28, wrong_stationary 0</td><td>49</td></tr>
+   </tbody></table>
+   <h3>Partial</h3><ul>
+   <li>eon/develop-ts-pt-dimer asv n=1 scored 1 of 49 starts</li>
+   <li>eon/develop-ts-pt-lanczos asv n=1 scored 1 of 49 starts</li>
+   <li>sella/pt-island-ts-default asv n=1 scored 1 of 49 starts</li>
+   <li>sella/pt-island-ts-tuned asv n=1 scored 1 of 49 starts</li>
+   <li>eon/develop-ts-pt-dimer asv n=1 scored 1 of 49 starts</li>
+   <li>eon/develop-ts-pt-lanczos asv n=1 scored 1 of 49 starts</li>
+   </ul>
+   <h3>Not a harness score</h3><ul>
+   <li>eon/ts-pt-dimer-m100 n=49 counter=unset</li>
+   <li>eon/ts-pt-dimer n=49 counter=unset</li>
+   </ul>
+   <img src="_static/board/tsopt-pt-island-profile.svg" alt="Dolan-More profile for tsopt/pt-island">
+   <img src="_static/board/tsopt-pt-island-cost.svg" alt="Cost versus success for tsopt/pt-island">
+   </section>
+   <section id="unparsed"><h2>Not scored</h2><ul><li>results/campaign/eon-3.5.0-de-lj38-ci-neb.dat: no per-start record</li><li>results/campaign/eon-3.5.0-de-lj38-ci-swdneb.dat: no per-start record</li><li>results/campaign/eon-3.5.0-neb-pt-cg.dat: no per-start record</li><li>results/campaign/eon-3.5.0-neb-pt-fire.dat: no per-start record</li><li>results/campaign/eon-3.5.0-neb-pt-lbfgs.dat: no per-start record</li><li>results/campaign/eon-3.5.0-neb-pt-qm.dat: no per-start record</li><li>results/campaign/eon-client-cg.dat: no per-start record</li><li>results/campaign/eon-client-fire.dat: no per-start record</li><li>results/campaign/eon-client-lbfgs-m100.dat: no per-start record</li><li>results/campaign/eon-client-lbfgs-m20.dat: no per-start record</li><li>results/campaign/eon-client-morse-cg.dat: no per-start record</li><li>results/campaign/eon-client-morse-fire.dat: no per-start record</li><li>results/campaign/eon-client-morse-lbfgs.dat: no per-start record</li><li>results/campaign/eon-client-morse-sd.dat: no per-start record</li><li>results/campaign/eon-client-qm.dat: no per-start record</li><li>results/campaign/eon-client-sd-twopoint.dat: no per-start record</li><li>results/campaign/eon-client-sd.dat: no per-start record</li><li>results/campaign/eon-svn-cg.dat: no per-start record</li><li>results/campaign/eon-svn-fire.dat: no per-start record</li><li>results/campaign/eon-svn-lbfgs-m100.dat: no per-start record</li><li>results/campaign/eon-svn-lbfgs-m20.dat: no per-start record</li><li>results/campaign/eon-svn-morse-cg.dat: no per-start record</li><li>results/campaign/eon-svn-morse-fire.dat: no per-start record</li><li>results/campaign/eon-svn-morse-lbfgs.dat: no per-start record</li><li>results/campaign/eon-svn-morse-sd.dat: no per-start record</li><li>results/campaign/eon-svn-qm.dat: no per-start record</li><li>results/campaign/eon-svn-sd-twopoint.dat: no per-start record</li><li>results/campaign/eon-svn-sd.dat: no per-start record</li><li>results/campaign/pele-0.1.2-lbfgs-M1-maxstep0.1.dat: no per-start record</li><li>results/campaign/pele-0.1.2-lbfgs-M10-maxstep0.1.dat: no per-start record</li><li>results/campaign/pele-0.1.2-lbfgs-M100-maxstep0.2.dat: no per-start record</li><li>results/campaign/pele-0.1.2-lbfgs-M20-maxstep0.1.dat: no per-start record</li><li>results/campaign/pele-0.1.2-lbfgs-M4-maxstep0.05.dat: no per-start record</li><li>results/campaign/pele-0.1.2-lbfgs-M4-maxstep0.1.dat: no per-start record</li><li>results/campaign/pele-0.1.2-lbfgs-M4-maxstep0.2.dat: no per-start record</li><li>results/campaign/sella-2.6.0-ts-lj38.dat: no per-start record</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Lj38EonCg (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;lj38-clusters/cluster_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Lj38EonFire (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;lj38-clusters/cluster_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Lj38EonLbfgsM100 (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;lj38-clusters/cluster_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Lj38EonLbfgsM20 (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;lj38-clusters/cluster_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Lj38EonQm (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;lj38-clusters/cluster_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Lj38EonSd (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;lj38-clusters/cluster_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Lj38EonSdTwopoint (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;lj38-clusters/cluster_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Pending.track_success matched nothing in commit d4513f42b39edd0b69ade46ce63fd106e0f406c3</li></ul></section>
+   <section id="unmapped"><h2>Not a problem template</h2><ul><li>quadratic.QuadraticDimer: benchmark quadratic.QuadraticDimer is not a problem template</li><li>quadratic.QuadraticDisplacement: benchmark quadratic.QuadraticDisplacement is not a problem template</li><li>quadratic.QuadraticFailureCap: benchmark quadratic.QuadraticFailureCap is not a problem template</li><li>quadratic.QuadraticFailureCrash: benchmark quadratic.QuadraticFailureCrash is not a problem template</li><li>quadratic.QuadraticFailureDivergence: benchmark quadratic.QuadraticFailureDivergence is not a problem template</li><li>quadratic.QuadraticFailureWrongStationary: benchmark quadratic.QuadraticFailureWrongStationary is not a problem template</li><li>quadratic.QuadraticKept: benchmark quadratic.QuadraticKept is not a problem template</li><li>quadratic.QuadraticNoise0: benchmark quadratic.QuadraticNoise0 is not a problem template</li><li>quadratic.QuadraticNoise1em02: benchmark quadratic.QuadraticNoise1em02 is not a problem template</li><li>quadratic.QuadraticNoise1em03: benchmark quadratic.QuadraticNoise1em03 is not a problem template</li><li>quadratic.QuadraticNoise1em04: benchmark quadratic.QuadraticNoise1em04 is not a problem template</li><li>quadratic.QuadraticProfileCap30: benchmark quadratic.QuadraticProfileCap30 is not a problem template</li><li>quadratic.QuadraticProfileStep001: benchmark quadratic.QuadraticProfileStep001 is not a problem template</li><li>quadratic.QuadraticProfileStep005: benchmark quadratic.QuadraticProfileStep005 is not a problem template</li></ul></section>
+#+end_export
