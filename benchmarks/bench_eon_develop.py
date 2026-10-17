@@ -755,13 +755,15 @@ def _specs() -> list[dict]:
         ("EonDevelopDe2tsEw", "eon/develop-de-2ts-ew", "de-2ts", ["1"], [f"pair_{i:02d}" for i in range(51)], 3600),
         ("EonDevelopLowLj38Dimer", "eon/develop-low-lj38-dimer", "lowest", ["1"], lj, 1800),
         ("EonDevelopLowLj38Lanczos", "eon/develop-low-lj38-lanczos", "lowest", ["1"], lj, 1800),
+        # Asv bound for one repetition, not the problem cap. pass_limit is
+        # what stops a search that has not reached 27 saddles.
         (
             "EonDevelopSaddlePtDimer",
             "eon/develop-saddle-pt-dimer",
             "akmc",
             [str(seed) for seed in range(1000, 1010)],
             ["pt-island"],
-            7200,
+            21600,
         ),
         (
             "EonDevelopSaddlePtLanczos",
@@ -769,7 +771,7 @@ def _specs() -> list[dict]:
             "akmc",
             ["1000", "1001"],
             ["pt-island"],
-            7200,
+            21600,
         ),
     ]
     specs = []
