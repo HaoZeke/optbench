@@ -28,6 +28,6 @@ emacs = ">=30.2,<31"
 shibuya = ">=2026.1.9,<2027"
 
 [feature.docs.tasks]
-tables = { cmd = "python -m optbench.site" }
+tables = { cmd = "uv run python -m optbench.site" }
 rst = { cmd = "emacs --batch --load docs/export.el" }
 html = { cmd = "sphinx-build -d docs/doctrees docs/source docs/build", depends-on = ["tables", "rst"] }

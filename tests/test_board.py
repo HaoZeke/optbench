@@ -435,6 +435,24 @@ def test_profile_lines_up_the_same_starts(tmp_path: Path):
     assert page["ranked_count"] == 2
 
 
+def test_plot_bytes_match_across_two_writes(tmp_path: Path):
+    from optbench.board import _write_plots
+
+    profile = {"taus": [1.0, 2.0], "rho": {"a": [0.0, 1.0]}, "solved": 1, "area_log10": 0.0}
+    ranked = [{"success_rate": 1.0, "par2_mean": 3.0, "median": 3.0}]
+    first = tmp_path / "a"
+    second = tmp_path / "b"
+    _write_plots("minimization/toy", ranked, profile, first)
+    _write_plots("minimization/toy", ranked, profile, second)
+    for name in (
+        "minimization-toy-profile.svg",
+        "minimization-toy-cost.svg",
+        "minimization-toy-profile.png",
+        "minimization-toy-cost.png",
+    ):
+        assert (first / name).read_bytes() == (second / name).read_bytes()
+
+
 def test_a_partial_problem_drops_a_plot_left_from_an_earlier_run(tmp_path: Path):
     _problem(tmp_path, starts=4, cap=10)
     _template(tmp_path)

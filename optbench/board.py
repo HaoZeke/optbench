@@ -1003,10 +1003,11 @@ def _keyed_costs(row: dict) -> list[tuple[str, float]]:
     return ordered
 
 
-def _profile_for(rows: list[dict]) -> dict | None:
+def _aligned_costs(rows: list[dict]) -> tuple[dict[str, list[float]] | None, str]:
+    """Start-aligned costs for a Dolan-Moré profile, or the reason there is none."""
     usable = [row for row in rows if row.get("_profile")]
     if not usable:
-        return None
+        return None, "The ranked rows have no per-start record."
     used: set[str] = set()
     series = []
     for row in usable:
@@ -1014,19 +1015,25 @@ def _profile_for(rows: list[dict]) -> dict | None:
         if keyed:
             series.append((_series_label(row, used), keyed))
     if not series:
-        return None
+        return None, "The ranked rows have no per-start record."
     key_sets = [{key for key, _cost in keyed} for _label, keyed in series]
     common = set.intersection(*key_sets)
     shortest = min(len(keys) for keys in key_sets)
     if common and len(common) >= shortest:
         order = [key for key, _cost in series[0][1] if key in common]
-        costs = {}
+        costs: dict[str, list[float]] = {}
         for label, keyed in series:
             found = dict(keyed)
             costs[label] = [found[key] for key in order]
-    elif len({len(keyed) for _label, keyed in series}) == 1:
-        costs = {label: [cost for _key, cost in keyed] for label, keyed in series}
-    else:
+        return costs, ""
+    if len({len(keyed) for _label, keyed in series}) == 1:
+        return {label: [cost for _key, cost in keyed] for label, keyed in series}, ""
+    return None, "The ranked rows do not share one start set."
+
+
+def _profile_for(rows: list[dict]) -> dict | None:
+    costs, _reason = _aligned_costs(rows)
+    if costs is None:
         return None
     try:
         return performance_profile(costs)
@@ -1034,10 +1041,38 @@ def _profile_for(rows: list[dict]) -> dict | None:
         return None
 
 
+def profile_gap(rows: list[dict]) -> str:
+    """Why a ranked problem has no Dolan-Moré profile. Empty when one exists."""
+    costs, reason = _aligned_costs(rows)
+    if costs is None:
+        return f"No performance profile. {reason}"
+    try:
+        performance_profile(costs)
+    except ValueError as exc:
+        return f"No performance profile. {_profile_reason(exc)}"
+    return ""
+
+
+def _profile_reason(exc: ValueError) -> str:
+    text = str(exc)
+    if text.startswith("problem ") and text.endswith(" has no finite cost"):
+        return "One start has no finite cost."
+    if not text:
+        return "The profile could not be built."
+    if text[-1] not in ".!?":
+        text += "."
+    return text[0].upper() + text[1:]
+
+
 def _write_plots(problem_id: str, ranked: list[dict], profile: dict | None, directory: Path) -> list[str]:
+    import os
+
     import matplotlib
 
     matplotlib.use("Agg", force=False)
+    matplotlib.rcParams["svg.hashsalt"] = "optbench"
+    # Same bytes on the next render. The date is metadata, not a score.
+    os.environ.setdefault("SOURCE_DATE_EPOCH", "0")
     import matplotlib.pyplot as plt
 
     directory.mkdir(parents=True, exist_ok=True)
@@ -1133,28 +1168,149 @@ def _headers(problem: dict) -> list[str]:
     return headers
 
 
-def _row_cells(row: dict, per_image: bool) -> str:
+def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
+    """Visible ranked-table cells, in column order.
+
+    The site check compares these strings with the rendered table.
+    """
     cells = [
-        _cell(row["template"] or row["entry"]),
-        f"{_cell(row['code'])} {_cell(row['code_version'])}",
-        _cell((row["commit"] or "")[:12]),
-        _cell(row.get("source") or ""),
-        "yes" if row.get("current") else "no",
-        _format_number(row["par2_mean"]),
-        _format_number(row["success_rate"]),
-        _format_number(row["wilson_low"]),
-        _format_number(row["wilson_high"]),
-        _format_number(row["median_calls"]),
-        _format_number(row["mean_calls"]),
+        ("template", str(row.get("template") or row.get("entry") or "")),
+        ("version", f"{row.get('code') or ''} {row.get('code_version') or ''}"),
+        ("commit", str(row.get("commit") or "")[:12]),
+        ("source", str(row.get("source") or "")),
+        ("current", "yes" if row.get("current") else "no"),
+        ("par2_mean", _format_number(row.get("par2_mean"))),
+        ("success_rate", _format_number(row.get("success_rate"))),
+        ("wilson_low", _format_number(row.get("wilson_low"))),
+        ("wilson_high", _format_number(row.get("wilson_high"))),
+        ("median_calls", _format_number(row.get("median_calls"))),
+        ("mean_calls", _format_number(row.get("mean_calls"))),
     ]
     if per_image:
-        cells.append(_format_number(row.get("mean_per_image")))
-    cells.append(_cell(_failure_text(row["failures"])))
-    cells.append(str(row["n"]))
-    return "".join(f"<td>{cell}</td>" for cell in cells)
+        cells.append(("mean_per_image", _format_number(row.get("mean_per_image"))))
+    cells.append(("failures", _failure_text(row.get("failures") or {})))
+    cells.append(("n", str(row.get("n"))))
+    return cells
 
 
-def _table(problem: dict, plots: set[str]) -> str:
+def _row_cells(row: dict, per_image: bool) -> str:
+    return "".join(
+        f'<td data-field="{field}">{_cell(value)}</td>' for field, value in ranked_cells(row, per_image)
+    )
+
+
+def _off_harness(row: dict) -> bool:
+    return str(row.get("counter") or "unset") in {"", "unset", "client"}
+
+
+def _joined_names(rows: list[dict]) -> str:
+    names: list[str] = []
+    for row in rows:
+        name = str(row.get("code") or "").strip()
+        if not name:
+            template = str(row.get("template") or row.get("entry") or "")
+            name = template.split("/")[0] if template else "unknown"
+        if name not in names:
+            names.append(name)
+    if not names:
+        return "These codes"
+    if len(names) == 1:
+        return names[0]
+    if len(names) == 2:
+        return f"{names[0]} and {names[1]}"
+    return ", ".join(names[:-1]) + ", and " + names[-1]
+
+
+def gap_paragraph(problem: dict, unparsed: list[dict] | None = None) -> str:
+    """Why a code is off the ranked table for this problem."""
+    bits: list[str] = []
+    missing = [row for row in problem.get("not_comparable") or [] if _off_harness(row)]
+    other = [row for row in problem.get("not_comparable") or [] if not _off_harness(row)]
+    suite = str(problem.get("id") or "").split("/")[0]
+    kind = "band rows" if suite in {"neb", "double-ended-saddle-search"} else "rows"
+    if missing:
+        bits.append(f"{_joined_names(missing)} {kind} are not yet on the harness counter")
+    if other:
+        bits.append(f"{_joined_names(other)} {kind} are off the ranked table")
+    if problem.get("partial"):
+        bits.append("Partial rows stay off the ranked table")
+    if unparsed:
+        bits.append("Files with no per-start harness record stay off the ranked table")
+    if not bits and not problem.get("ranked"):
+        bits.append("No committed harness run")
+    if not bits:
+        return ""
+    return '<p class="bench-gaps">' + ". ".join(bits) + ".</p>"
+
+
+def _reason_text(row: dict) -> str:
+    if row.get("partial"):
+        return str(row.get("partial_reason") or "partial")
+    if _off_harness(row):
+        return "not yet on the harness counter"
+    return f"counter {row.get('counter') or 'unset'}"
+
+
+def plot_names_for(problem: dict) -> set[str]:
+    """SVG files ``write_board`` emits for this problem."""
+    slug = _slug(str(problem.get("id") or ""))
+    names: set[str] = set()
+    if problem.get("ranked"):
+        names.add(f"{slug}-cost.svg")
+    if problem.get("profile"):
+        names.add(f"{slug}-profile.svg")
+    return names
+
+
+def headline_table(problem: dict) -> str:
+    """One ranked row: the best full harness run."""
+    per_image = _show_per_image(problem)
+    headers = _headers(problem)
+    lines = [
+        f'<table data-board-table="headline" data-problem="{_cell(problem["id"])}">',
+        "<thead><tr>" + "".join(f"<th>{_cell(header)}</th>" for header in headers) + "</tr></thead><tbody>",
+    ]
+    ranked = list(problem.get("ranked") or [])
+    if ranked:
+        lines.append(f"<tr>{_row_cells(ranked[0], per_image)}</tr>")
+    else:
+        lines.append(f'<tr><td colspan="{len(headers)}">No full harness row.</td></tr>')
+    lines.append("</tbody></table>")
+    return "\n".join(lines)
+
+
+def render_problem_section(
+    problem: dict,
+    plots: set[str],
+    *,
+    asset_prefix: str = "_static/board",
+    preamble: str = "",
+    section_id: str | None = None,
+    unparsed: list[dict] | None = None,
+    heading: str = "h2",
+) -> str:
+    """Ranked table, gap list, history, and the performance-profile plot."""
+    return _table(
+        problem,
+        plots,
+        asset_prefix=asset_prefix,
+        preamble=preamble,
+        section_id=section_id,
+        unparsed=unparsed,
+        heading=heading,
+    )
+
+
+def _table(
+    problem: dict,
+    plots: set[str],
+    *,
+    asset_prefix: str = "_static/board",
+    preamble: str = "",
+    section_id: str | None = None,
+    unparsed: list[dict] | None = None,
+    heading: str = "h2",
+) -> str:
     per_image = _show_per_image(problem)
     headers = _headers(problem)
     caption = (
@@ -1163,21 +1319,31 @@ def _table(problem: dict, plots: set[str]) -> str:
     )
     if per_image:
         caption += " Per-image mean divides that total by the problem's moving images, the same way for every code."
+    ident = section_id or _slug(problem["id"])
     lines = [
-        f'<section class="bench" id="{_slug(problem["id"])}">',
-        f"<h2>{_cell(problem['title'])}</h2>",
-        "<p>Ranked by the v2 PAR-2 mean of the harness total. "
-        "Only the newest full version of a template is in this table. "
-        "A partial row, including a one-start asv smoke run, is not.</p>",
-        "<table>",
-        f"<caption>{caption}</caption>",
-        "<thead><tr>" + "".join(f"<th>{_cell(header)}</th>" for header in headers) + "</tr></thead><tbody>",
+        f'<section class="bench" id="{_cell(ident)}" data-problem="{_cell(problem["id"])}">',
+        f"<{heading}>{_cell(problem['title'])}</{heading}>",
     ]
-    for row in problem["ranked"]:
+    if preamble:
+        lines.append(preamble)
+    lines.extend(
+        [
+            "<p>Ranked by the v2 PAR-2 mean of the harness total. "
+            "Only the newest full version of a template is in this table. "
+            "A partial row, including a one-start asv smoke run, is not.</p>",
+            f'<table data-board-table="ranked" data-problem="{_cell(problem["id"])}">',
+            f"<caption>{caption}</caption>",
+            "<thead><tr>" + "".join(f"<th>{_cell(header)}</th>" for header in headers) + "</tr></thead><tbody>",
+        ]
+    )
+    for row in problem.get("ranked") or []:
         lines.append(f"<tr>{_row_cells(row, per_image)}</tr>")
-    if not problem["ranked"]:
+    if not problem.get("ranked"):
         lines.append(f'<tr><td colspan="{len(headers)}">No full harness row.</td></tr>')
     lines.append("</tbody></table>")
+    lead = gap_paragraph(problem, unparsed)
+    if lead:
+        lines.append(lead)
     if problem.get("history"):
         lines.append("<h3>History</h3><ul>")
         for row in problem["history"]:
@@ -1189,28 +1355,42 @@ def _table(problem: dict, plots: set[str]) -> str:
                 "</li>"
             )
         lines.append("</ul>")
-    if problem["partial"]:
+    if problem.get("partial"):
         lines.append("<h3>Partial</h3><ul>")
         for row in problem["partial"]:
             lines.append(
                 "<li>"
-                f"{_cell(row['template'] or row['entry'])} {_cell(row['source'])} "
-                f"n={row['n']} {_cell(row['partial_reason'])}"
+                f"{_cell(row['template'] or row['entry'])} {_cell(row.get('code') or '')} "
+                f"{_cell(row['source'])} n={row['n']}, {_cell(row['partial_reason'])}."
                 "</li>"
             )
         lines.append("</ul>")
-    if problem["not_comparable"]:
+    held = list(problem.get("not_comparable") or [])
+    if held:
         lines.append("<h3>Not a harness score</h3><ul>")
-        for row in problem["not_comparable"]:
+        for row in held:
             lines.append(
-                f"<li>{_cell(row['template'] or row['entry'])} n={row['n']} counter={_cell(row['counter'] or 'unset')}</li>"
+                "<li>"
+                f"{_cell(row['template'] or row['entry'])} {_cell(row.get('code') or '')} "
+                f"n={row['n']}, {_cell(_reason_text(row))}."
+                "</li>"
             )
         lines.append("</ul>")
+    pending = list(unparsed or [])
+    if pending:
+        lines.append("<h3>Not scored</h3><ul>")
+        for row in pending:
+            label = row.get("template") or row.get("entry") or row.get("path")
+            lines.append(f"<li>{_cell(label)}: {_cell(row.get('note') or '')}</li>")
+        lines.append("</ul>")
     slug = _slug(problem["id"])
+    prefix = asset_prefix.rstrip("/")
     for kind, label in (("profile", "Dolan-More profile"), ("cost", "Cost versus success")):
         name = f"{slug}-{kind}.svg"
         if name in plots:
-            lines.append(f'<img src="_static/board/{name}" alt="{_cell(label)} for {_cell(problem["id"])}">')
+            lines.append(f'<img src="{prefix}/{name}" alt="{_cell(label)} for {_cell(problem["id"])}">')
+    if problem.get("profile_gap") and f"{slug}-profile.svg" not in plots:
+        lines.append(f'<p class="bench-gaps">{_cell(problem["profile_gap"])}</p>')
     lines.append("</section>")
     return "\n".join(lines)
 
@@ -1253,6 +1433,10 @@ def write_board(root: Path, output: Path) -> dict:
     sections = []
     plot_names: set[str] = set()
     written_names: set[str] = set()
+    unparsed_by: dict[str, list[dict]] = defaultdict(list)
+    for row in document["unparsed"]:
+        if row.get("problem"):
+            unparsed_by[str(row["problem"])].append(row)
     for problem_id, problem in document["problems"].items():
         ranked_rows = problem.get("_ranked_rows") or []
         profile = _profile_for(ranked_rows)
@@ -1264,12 +1448,16 @@ def write_board(root: Path, output: Path) -> dict:
                 "area_log10": profile["area_log10"],
             }
         written = _write_plots(problem_id, ranked_rows, profile, plot_dir) if ranked_rows else []
+        if ranked_rows and profile is None:
+            gap = profile_gap(ranked_rows)
+            if gap:
+                problem["profile_gap"] = gap
         for path in written:
             name = Path(path).name
             written_names.add(name)
             if name.endswith(".svg"):
                 plot_names.add(name)
-        sections.append(_table(problem, plot_names))
+        sections.append(_table(problem, plot_names, unparsed=unparsed_by.get(problem_id)))
     _drop_unwritten(plot_dir, written_names)
     if document["unparsed"]:
         items = [

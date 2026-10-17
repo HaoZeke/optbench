@@ -1,17 +1,15 @@
 #+TITLE: OptBench
 #+OPTIONS: toc:nil num:nil author:nil
 
-The SOTA board is a run of the present source of a code, on the
-problem geometries, stopped by the problem rule.
-The contract for Lennard-Jones 38 is a JSON document,
-contract/problems/minimization/lj38.json.
-A submission is optbench.result/v1.
-status sota is the only value that appears here.
+The score on this site is the v2 PAR-2 mean of harness force calls
+on the problem's full start set.
+A row with fewer starts stays off the ranked table.
+=python -m optbench.site= writes these pages from that scorer.
+The same numbers are in =results/board/index.json=.
 
 #+INCLUDE: "../include/sota.org"
 
-The legacy 2014 scores and the later recorded passes stay on the archive page.
-A present run that matches one of them is on this page as well.
+The 2014 archive is labelled legacy on each problem page and on the archive page.
 The commands that write a new =benchmark.dat= are on the Run a score page.
 
 #+begin_export rst
