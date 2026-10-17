@@ -38,7 +38,7 @@ def test_rgmin_templates_cover_both_problems_and_both_tunings():
         assert template["rgmin"]["method"] in METHODS
         problem = resolve_problem(ROOT, template["problem"])
         _check_stop(problem, template)
-        if template["tuning"] == "tuned":
+        if template["problem"] == "minimization/lj38" or template["tuning"] == "tuned":
             assert template["rgmin"]["maxstep"] == 0.2
         else:
             assert "maxstep" not in template["rgmin"]

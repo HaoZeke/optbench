@@ -8,6 +8,7 @@ from benchmarks.bench_rgmin import (
     SEED,
     asv_benchmark_pattern,
     selected_indices,
+    RgminLj38Bb,
     RgminLj38LbfgsTuned,
     RgminMorseLbfgs,
     _specs,
@@ -47,6 +48,26 @@ def test_asv_class_filter_is_anchored_and_literal():
         for other in names:
             if other != name:
                 assert pattern.search(f"bench_rgmin.{other}.time_search('0', '0')") is None
+
+
+def test_default_lj38_bb_does_not_leave_the_cutoff():
+    """An uncapped ``istep * g`` trial on cluster 0000 is a vacuum in two calls.
+
+    The start sits in the repulsive core. rgmin's default session takes one
+    trial of ``-istep * g`` with ``istep`` 0.1 and ``Accept::None``. Without
+    the per-atom cap that step moves atoms past the cutoff of 40, the next
+    evaluation is exactly zero, and a zero Hessian is index 0. The LJ38
+    default row sets ``maxstep`` 0.2, the same cap as eOn ``max_move`` and
+    the rgmin ASE wrapper.
+    """
+    pytest.importorskip("rgmin")
+    bench = RgminLj38Bb()
+    bench.setup(SEED, "0")
+    bench.time_search(SEED, "0")
+    record = bench.record
+    assert record["force_calls"] > 10
+    assert record["energy"] < -10.0
+    assert bench.track_force_calls(SEED, "0") == record["force_calls"]
 
 
 def test_one_tuned_lbfgs_start_is_a_harness_count():

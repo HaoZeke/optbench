@@ -286,6 +286,13 @@ def run_template(
         raise ValueError("template maxiter is below the problem force-call cap")
     options.pop("gtol", None)
     options.pop("maxiter", None)
+    if problem["id"] == "minimization/lj38":
+        step = options.get("maxstep")
+        if step is None or float(step) <= 0.0:
+            raise ValueError(
+                f"{template['id']} needs rgmin.maxstep, the per-atom displacement cap. "
+                "An uncapped istep*g trial leaves the Lennard-Jones cutoff."
+            )
     return _run(
         problem,
         template,
