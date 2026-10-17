@@ -18,6 +18,8 @@ uv run optbench templates
 
 `uv run` reads `pyproject.toml`, installs the command-line library, and runs that command. `pytest` is the test runner. `check` exits 0 when every partial contract covers its archived rows and `oracle/archive_gaps.txt` matches the departures. `templates` prints every template id.
 
+`uv run optbench board` reads `results/campaign` and `results/asv` and writes `results/board` plus the v2 table on the Board page. It does not start a search. A band method is ranked on the harness force-call total across every image, and the per-image mean is a second column from that same total. Only the newest version of a code and template is ranked. A run that is both a campaign file and an asv track is one row, with the source kept as a column. A row that used fewer starts than the problem's full set is partial. An asv result that covers one start is a smoke run and stays out of the ranked mean.
+
 The harness does not contain eOn, pele, or Sella. Those are installed separately, and the commands below say which release produced the files in `results/campaign/`.
 
 ## Reproduce the Lennard-Jones 38 L-BFGS mean

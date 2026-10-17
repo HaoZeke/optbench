@@ -1193,6 +1193,11 @@ def _dat(records: list[dict], template: dict, settings: dict) -> str:
         lines.append(f"force_calls_min {min(calls)}")
         lines.append(f"force_calls_max {max(calls)}")
         lines.append(f"force_calls_median {_number(statistics.median(calls))}")
+        images = int(settings["n_interior"])
+        if images > 0:
+            per_image = [count / images for count in calls]
+            lines.append(f"force_calls_per_image {_number(round(statistics.fmean(per_image)))}")
+            lines.append("call_unit total")
     lines.append(f"successes {len(calls)}")
     lines.append(f"nfailed {len(records) - len(calls)}")
     lines.append(f"n {len(records)}")

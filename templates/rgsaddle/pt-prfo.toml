@@ -1,0 +1,27 @@
+id = "rgsaddle/pt-prfo"
+engine = "rgsaddle"
+problem = "tsopt/pt-island"
+code = "rgsaddle"
+code_version = "0.2.2"
+commit = "c0db2b8d333c557251635cb8bb7b3d81f0088a71"
+algorithm = "P-RFO"
+tuning = "default"
+
+[ini.Main]
+job = "saddle_search"
+session = "prfo"
+
+[ini.Optimizer]
+opt_method = "prfo"
+convergence_metric = "norm"
+converged_force = 0.001
+max_move = 0.2
+max_iterations = 10000
+
+[ini.Sella]
+delta = 0.0
+hess_update = "bfgs"
+expand = "jd0"
+restricted = "trust-region"
+order = 1
+mode_seed = "reactant"

@@ -10,7 +10,7 @@ profile = "default"
 reducer = "per_image"
 ranked = true
 parameter_source = "default"
-note = "ASE NEB defaults on the archived 8 intermediate images: spring 0.1, climb off, FIRE. The reported force_calls value is the harness total divided by 8."
+note = "ASE NEB defaults on the archived 8 intermediate images: spring 0.1, climb off, FIRE. force_calls is the harness total across the 8 images. force_calls_per_image divides that total by 8."
 
 [optimizer]
 name = "FIRE"

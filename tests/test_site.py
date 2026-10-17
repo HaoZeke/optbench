@@ -1,20 +1,24 @@
+import json
 from pathlib import Path
 
+from optbench.board import ranked_cells
 from optbench.check import load_oracle
 from optbench.problems import load_problem
-from optbench.site import problem_html, render
+from optbench.site import campaign_problem, problem_html, render
+from optbench.site_check import check_site
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_nav_pages_have_titles_and_the_suites_fold_under_archive():
     org = ROOT / "docs" / "orgmode"
-    for name in ("index.org", "run.org", "archive.org", "codes.org"):
+    for name in ("index.org", "run.org", "archive.org", "codes.org", "board.org"):
         text = (org / name).read_text(encoding="utf-8")
         assert "title:nil" not in text
         assert text.startswith("#+TITLE:")
     index = (org / "index.org").read_text(encoding="utf-8")
     assert ":hidden:" in index
+    assert "\n   board\n" in index
     assert "generated/suites/minimization" in index
     assert "generated/suites/neb" in index
     assert "generated/suites/accelerated-md" in index
@@ -25,35 +29,17 @@ def test_nav_pages_have_titles_and_the_suites_fold_under_archive():
     assert '"globaltoc_expand_depth": 0' in conf
 
 
-def test_collection_shows_present_runs_beyond_the_front_page():
-    from optbench.site import campaign_problem, render
-
+def test_campaign_names_map_to_problems():
     assert campaign_problem("eon-client-morse-lbfgs") == "minimization/morse-bulk"
     assert campaign_problem("eon-3.5.0-neb-pt-lbfgs") == "neb/Pt-heptamer"
     assert campaign_problem("sella-2.6.0-ts-lj38") == "tsopt/LJ38"
     assert campaign_problem("eon-3.5.0-de-lj38-ci-neb") == "double-ended-saddle-search/lj38"
     assert campaign_problem("eon-3.5.0-saddle-pt-dimer") == "saddle-search/pt-island"
     assert campaign_problem("eon-3.5.0-saddle-pt-classic") == "saddle-search/pt-island"
-    render(ROOT)
-    collection = (ROOT / "docs" / "include" / "collection.org").read_text(encoding="utf-8")
-    assert "Morse bulk" in collection
-    assert "Pt-heptamer" in collection
-    assert ">52<" in collection
-    assert "Sella" in collection
-    assert "No present run is recorded." in collection
-    neb = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "neb.org").read_text(encoding="utf-8")
-    assert "Present codes. Fewer calls is to the left." in neb
-    assert "eon-3.5.0-neb-pt-lbfgs" in neb
-    assert "Legacy 2014 scores. Fewer calls is to the left." in neb
-    assert "2014 scores. Fewer calls is to the left." in neb
-    tsopt = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "tsopt.org").read_text(encoding="utf-8")
-    assert "Sella 0.1.1 legacy" in tsopt
-    assert "2.6.0 legacy" not in tsopt
-    saddle = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "saddle-search.org").read_text(encoding="utf-8")
-    assert "eon-3.5.0-saddle-pt-dimer" in saddle
-    assert "ase-3.29.0-dimer-pt-island-default" not in saddle
-    featured = (ROOT / "docs" / "include" / "featured.org").read_text(encoding="utf-8")
-    assert "rgmin-lbfgs-0.3.0" not in featured
+    assert campaign_problem("rgsaddle-0.2.2-dimer-lbfgs-ts-lj38") == "tsopt/LJ38"
+    assert campaign_problem("rgsaddle-0.2.2-dimer-lbfgs-ts-pt") == "tsopt/pt-island"
+    assert campaign_problem("rgsaddle-0.2.2-mode-dimer-loweig") == "lowest-eigenvector/lj38"
+    assert campaign_problem("rgsaddle-0.2.2-dimer-lbfgs-saddle-pt") == "saddle-search/pt-island"
 
 
 def test_lj38_table_ranks_the_archived_scores():
@@ -68,64 +54,77 @@ def test_lj38_table_ranks_the_archived_scores():
     assert '"scale": "log"' in html
 
 
-def test_render_writes_the_front_page_table():
+def test_rendered_pages_use_the_board_rank():
     render(ROOT)
-    featured = (ROOT / "docs" / "include" / "featured.org").read_text(encoding="utf-8")
-    assert "Lennard-Jones 38 clusters" in featured
-    assert "eon-cg" in featured
-    assert "rgmin-lbfgs-0.3.0" not in featured
+    document = json.loads((ROOT / "results" / "board" / "index.json").read_text(encoding="utf-8"))
+    lj38 = document["problems"]["minimization/lj38"]["ranked"][0]
+    morse = document["problems"]["minimization/morse-bulk"]["ranked"][0]
+    neb = document["problems"]["neb/Pt-heptamer"]["ranked"][0]
+    cells = dict(ranked_cells(lj38, False))
     sota = (ROOT / "docs" / "include" / "sota.org").read_text(encoding="utf-8")
-    assert "rgmin-lbfgs-0.3.0" in sota
-    assert "ase-fire-3.29.0" in sota
-    assert "eon-3.5.0-fire" in sota
-    assert "bench-plot-mount" in sota
-    assert "bench-plot-data" in sota
-    assert ">731<" in sota
-    assert "eon-3.5.0-lbfgs-m100" in sota
-    assert "eon-svn-r2549-lbfgs-m100" in sota
-    assert ">181<" in sota
-    assert ">4901<" in sota
-    assert "eon-cg-3.5.0" not in sota
-    recorded = (ROOT / "docs" / "include" / "terra-pass.org").read_text(encoding="utf-8")
-    assert "rgmin-lbfgs-0.3.0" in recorded
-    assert ">216<" in recorded
-    assert ">454<" in recorded
-    assert ">706<" in recorded
+    assert f'data-board-table="headline" data-problem="minimization/lj38"' in sota
+    assert cells["template"] in sota
+    assert f'data-field="par2_mean">{cells["par2_mean"]}<' in sota
+    assert "Present sources. The cell is the record." not in sota
+    assert "rgmin-lbfgs-0.3.0" not in sota
+    assert "eon-3.5.0-lbfgs-m100" not in sota
+    collection = (ROOT / "docs" / "include" / "collection.org").read_text(encoding="utf-8")
+    assert "Morse bulk" in collection
+    assert morse["template"] in collection
+    assert "No present run is recorded." not in collection
+    assert "No committed harness run." in collection
+    minimization = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "minimization.org").read_text(encoding="utf-8")
+    assert f'data-board-table="ranked" data-problem="minimization/lj38"' in minimization
+    assert f'data-field="par2_mean">{cells["par2_mean"]}<' in minimization
+    assert "minimization-lj38-profile.svg" in minimization
+    assert "Legacy 2014 archive" in minimization
+    assert "eon-cg" in minimization
+    assert "par2-wilson-bootstrap" in minimization
+    assert "Present runs. Fewer force calls first." not in minimization
+    neb_page = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "neb.org").read_text(encoding="utf-8")
+    assert neb["template"] in neb_page
+    assert "not yet on the harness counter" in neb_page
+    assert "Legacy 2014 scores. Fewer calls is to the left." in neb_page
+    tsopt = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "tsopt.org").read_text(encoding="utf-8")
+    assert "Sella 0.1.1 legacy" in tsopt
+    assert "2.6.0 legacy" not in tsopt
+    assert "tsopt-LJ38-profile.svg" in tsopt
+    saddle = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "saddle-search.org").read_text(encoding="utf-8")
+    assert "No full harness row." in saddle
+    assert "eon-3.5.0-saddle-pt-dimer" in saddle
+    assert "not yet on the harness counter" in saddle
+    assert "Per-search cost" not in saddle
     codes = (ROOT / "docs" / "include" / "codes.org").read_text(encoding="utf-8")
     assert "Rohit Goswami" in codes
     assert "4d8b34baf1ba" in codes
     assert "1d71c9445018" in codes
     assert "f15726f1c798" in codes
     assert "c0db2b8d333c" in codes
+    assert 'data-board-table="code-best"' in codes
+    assert not (ROOT / "docs" / "include" / "featured.org").exists()
+    assert not (ROOT / "docs" / "include" / "terra-pass.org").exists()
+    for problem in document["problems"].values():
+        if problem.get("ranked") and not problem.get("profile"):
+            suite = problem["id"].split("/")[0]
+            page = (ROOT / "docs" / "orgmode" / "generated" / "suites" / f"{suite}.org").read_text(encoding="utf-8")
+            assert problem["profile_gap"]
+            assert problem["profile_gap"] in page
+    assert check_site(ROOT) == []
 
 
-def test_legacy_rows_stay_and_v2_tables_use_recorded_counts():
+def test_a_stale_ranked_number_fails_the_check():
     render(ROOT)
-    featured = (ROOT / "docs" / "include" / "featured.org").read_text(encoding="utf-8")
-    assert "Legacy 2014 archive" in featured
-    assert "eon-cg" in featured
-    assert ">453<" in featured
-    assert "par2-wilson-bootstrap" in featured
-    sota = (ROOT / "docs" / "include" / "sota.org").read_text(encoding="utf-8")
-    assert "rg.terra" in sota
-    assert "v2 success rate" in sota
-    assert "0.996173" in sota
-    assert "0.963355" in sota
-    assert "0.884165" in sota
-    assert ">181<" in sota
-    assert ">4901<" in sota
-    assert "default" in sota
-    assert "tuned" in sota
-    saddle = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "saddle-search.org").read_text(encoding="utf-8")
-    assert "Per-search cost" in saddle
-    assert "263.284133" in saddle
-    assert "469.759056" in saddle
-    assert "Legacy 2014 scores. Fewer calls is to the left." in saddle
-    assert "v2 smoke" in sota
-    assert "139, 139" in sota
-    assert "bowl-reported-as-saddle" in sota
-    assert ">10000<" in sota
-    assert ">139<" in sota
-    assert ">720<" in sota
-    assert ">400<" in sota
-    assert ">2<" in sota
+    document = json.loads((ROOT / "results" / "board" / "index.json").read_text(encoding="utf-8"))
+    top = document["problems"]["minimization/lj38"]["ranked"][0]
+    par2 = dict(ranked_cells(top, False))["par2_mean"]
+    path = ROOT / "docs" / "orgmode" / "generated" / "suites" / "minimization.org"
+    original = path.read_text(encoding="utf-8")
+    needle = f'data-field="par2_mean">{par2}<'
+    assert needle in original
+    path.write_text(original.replace(needle, 'data-field="par2_mean">1<', 1), encoding="utf-8")
+    try:
+        errors = check_site(ROOT)
+        assert errors
+        assert any("par2_mean" in line and "minimization/lj38" in line for line in errors)
+    finally:
+        path.write_text(original, encoding="utf-8")

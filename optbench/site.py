@@ -1,19 +1,18 @@
-"""Render the public site from the problem files and the oracle.
+"""Render the public site from the v2 board.
 
-Prose stays in ``docs/orgmode``. This module writes the comparison
-tables those pages include.
+Prose stays in ``docs/orgmode``. This module writes the ranked tables,
+the code page, and the labelled 2014 archive those pages include.
 """
 
 from __future__ import annotations
 
 import html
+import tomllib
 from pathlib import Path
 
 from .check import load_oracle
-from .dat import normalize, parse_lenient
+from .dat import normalize
 from .problems import load_all
-from .score import distribution_summary, wilson_interval
-from .v2 import parse_repetitions, tuning_from_template, tuning_label
 
 SUITE_ORDER = (
     "minimization",
@@ -149,24 +148,6 @@ def _caption(primary: str | None) -> str:
     return f"Legacy 2014 archive. {detail}"
 
 
-def _fmt(value: object, digits: int = 6) -> str:
-    return f"{float(value):.{digits}f}"
-
-
-def _whole(value: object) -> str:
-    number = float(value)
-    if number.is_integer():
-        return str(int(number))
-    return _fmt(number)
-
-
-def _marked_failed(value: object) -> bool:
-    try:
-        return int(value or 0) > 0
-    except (TypeError, ValueError):
-        return False
-
-
 def _plot(points: list[dict], primary: str | None, caption: str | None = None) -> str:
     numbers = [point["value"] for point in points if point["value"] is not None and point["value"] > 0]
     if len(numbers) < 2:
@@ -229,179 +210,17 @@ def campaign_problem(stem: str) -> str | None:
         return "saddle-search/pt-island"
     if stem == "sella-2.6.0-ts-lj38":
         return "tsopt/LJ38"
+    if stem.startswith("rgsaddle-") and "loweig" in stem:
+        return "lowest-eigenvector/lj38"
+    if stem.startswith("rgsaddle-") and "saddle-pt" in stem:
+        return "saddle-search/pt-island"
+    if stem.startswith("rgsaddle-") and "ts-pt" in stem:
+        return "tsopt/pt-island"
+    if stem.startswith("rgsaddle-") and "ts-lj38" in stem:
+        return "tsopt/LJ38"
     if stem.startswith(("pele-", "eon-client-", "eon-svn-", "rgmin-")):
         return "minimization/lj38"
     return None
-
-
-def _mean_key(row: dict) -> tuple[int, float]:
-    try:
-        return (0, float(row["mean"]))
-    except (TypeError, ValueError):
-        return (1, 0.0)
-
-
-def _load_present(root: Path) -> dict[str, list[dict]]:
-    """Present runs from campaign files, plus JSON rows those files do not already name."""
-    grouped: dict[str, list[dict]] = {}
-    seen: set[str] = set()
-    campaign = root / "results" / "campaign"
-    if campaign.is_dir():
-        for path in sorted(campaign.glob("*.dat")):
-            fields, _duplicates = parse_lenient(path.read_text(encoding="utf-8"))
-            if fields.get("partial") == "true" or fields.get("ranked") == "false":
-                continue
-            problem = fields.get("problem") or campaign_problem(path.stem)
-            if problem is None:
-                continue
-            text = path.read_text(encoding="utf-8")
-            seen.add(path.stem)
-            row = {
-                "entry": path.stem,
-                "code": fields.get("code", ""),
-                "version": fields.get("code_version", ""),
-                "mean": fields.get("force_calls", ""),
-                "min": fields.get("force_calls_min", ""),
-                "max": fields.get("force_calls_max", ""),
-                "failed": fields.get("nfailed", ""),
-                "par2": fields.get("par2_mean", ""),
-                "tuning": tuning_from_template(root, fields.get("template", "")),
-            }
-            repetitions = parse_repetitions(text)
-            if repetitions:
-                row["per_search"] = distribution_summary([item["per_search"] for item in repetitions])
-                row["repetition_count"] = len(repetitions)
-            grouped.setdefault(problem, []).append(row)
-    import json
-
-    for path in sorted((root / "results").glob("*.json")):
-        record = json.loads(path.read_text(encoding="utf-8"))
-        problem = record.get("problem")
-        if not problem:
-            continue
-        for run in record.get("runs") or []:
-            entry = str(run.get("entry") or "")
-            if not entry or entry in seen:
-                continue
-            seen.add(entry)
-            metrics = run.get("metrics") or {}
-            grouped.setdefault(str(problem), []).append(
-                {
-                    "entry": entry,
-                    "code": str(run.get("code") or ""),
-                    "version": str(run.get("code_version") or ""),
-                    "mean": metrics.get("force_calls", ""),
-                    "min": metrics.get("force_calls_min", ""),
-                    "max": metrics.get("force_calls_max", ""),
-                    "failed": metrics.get("nfailed", run.get("nfailed", "")),
-                    "tuning": tuning_label(run),
-                }
-            )
-    for rows in grouped.values():
-        rows.sort(key=_mean_key)
-    return grouped
-
-
-def _present_block(rows: list[dict], heading: str | None = "Present runs") -> str:
-    lines = []
-    if heading:
-        lines.append(f"<h3>{html.escape(heading)}</h3>")
-    if not rows:
-        lines.append("<p>No present run is recorded.</p>")
-        return "\n".join(lines)
-    show_par2 = any(str(row.get("par2") or "") not in ("", "None") for row in rows)
-    lines.append('<div class="bench-table"><table>')
-    lines.append("<caption>Present runs. Fewer force calls first. The legacy 2014 scores follow.</caption>")
-    header = (
-        "<thead><tr>"
-        '<th class="text" scope="col">Entry</th>'
-        '<th class="text" scope="col">Code</th>'
-        '<th class="text" scope="col">Version</th>'
-        '<th class="num" scope="col">Mean (force calls)</th>'
-        '<th class="num" scope="col">Min</th>'
-        '<th class="num" scope="col">Max</th>'
-        '<th class="num" scope="col">Failed</th>'
-    )
-    if show_par2:
-        header += '<th class="num" scope="col">PAR-2</th>'
-    header += '<th class="text" scope="col">Tuning</th></tr></thead><tbody>'
-    lines.append(header)
-    for row in rows:
-        failed = str(row.get("failed") or "0")
-        mark = ' class="bench-row-fail"' if failed not in ("", "0") else ""
-        lines.append(f"<tr{mark}>")
-        columns = [
-            ("entry", "text"),
-            ("code", "text"),
-            ("version", "text"),
-            ("mean", "num"),
-            ("min", "num"),
-            ("max", "num"),
-            ("failed", "num"),
-        ]
-        if show_par2:
-            columns.append(("par2", "num"))
-        columns.append(("tuning", "text"))
-        for key, kind in columns:
-            lines.append(f'<td class="{kind}">{html.escape(str(row.get(key, "")))}</td>')
-        lines.append("</tr>")
-    lines.append("</tbody></table></div>")
-    points = []
-    values = []
-    for row in rows:
-        try:
-            value = float(row["mean"])
-        except (TypeError, ValueError):
-            continue
-        if value <= 0:
-            continue
-        values.append(value)
-        points.append(row)
-    best = min(values) if values else None
-    plot_points = [
-        {
-            "id": str(row["entry"]),
-            "entry": f"{row['code']} {row['version']} {row['entry']}".strip(),
-            "code": str(row["code"]),
-            "value": float(row["mean"]),
-            "best": best is not None and float(row["mean"]) == best,
-            "held": False,
-            "failed": _marked_failed(row.get("failed")),
-        }
-        for row in points
-    ]
-    lines.append(_plot(plot_points, "force_calls", "Present codes"))
-    return "\n".join(lines)
-
-
-def _collection_html(order: list[str], by_suite: dict[str, list[dict]], present: dict[str, list[dict]]) -> str:
-    lines = [
-        '<section class="bench" id="collection">',
-        "<p>Each suite is a heading. Each problem under it is a subheading. "
-        "A present run is a score recorded in this repository. "
-        "The legacy 2014 table for that problem is on the suite page.</p>",
-    ]
-    for suite in order:
-        group = by_suite.get(suite)
-        if not group:
-            continue
-        lines.append(f'<h2 id="suite-{html.escape(suite)}">{html.escape(suite_title(suite))}</h2>')
-        for problem in sorted(group, key=lambda item: str(item.get("title") or item["problem"]).lower()):
-            title = str(problem.get("title") or problem["problem"])
-            rows = present.get(problem["id"], [])
-            lines.append(f"<h3>{html.escape(title)}</h3>")
-            count = "no present run" if not rows else f"{len(rows)} present run" + ("s" if len(rows) != 1 else "")
-            href = f"generated/suites/{suite}.html#{problem['problem']}"
-            lines.append(
-                f'<p>{html.escape(count)}. '
-                f'<a href="{html.escape(href)}">Legacy 2014 scores and the present table</a>.</p>'
-            )
-            if rows:
-                lines.append(_present_block(rows, heading=None))
-            else:
-                lines.append("<p>No present run is recorded.</p>")
-    lines.append("</section>")
-    return "\n".join(lines)
 
 
 def problem_html(
@@ -409,8 +228,13 @@ def problem_html(
     oracle: list[dict],
     smoke_note: str = "",
     present: list[dict] | None = None,
+    *,
+    section_id: str | None = None,
+    heading: str = "h2",
+    heading_text: str | None = None,
+    include_rule: bool = True,
 ) -> str:
-    """One problem: the stopping rule, the bar chart, then the rank."""
+    """Legacy 2014 table for one problem. The v2 rank is a separate section."""
     canonical_rows = []
     for row in _rows_for(problem, oracle):
         fields, _renamed = normalize(row["fields"])
@@ -426,21 +250,19 @@ def problem_html(
         ]
         best = min(numbers) if numbers else None
 
-    lines = [f'<section class="bench" id="{html.escape(problem["problem"])}">']
-    lines.append(f"<h2>{html.escape(str(problem.get('title') or problem['problem']))}</h2>")
-    bits = _bits(problem)
-    if bits:
-        lines.append('<dl class="bench-rule">')
-        for label, text in bits:
-            lines.append(f"<dt>{html.escape(label)}</dt><dd>{html.escape(text)}</dd>")
-        lines.append("</dl>")
+    ident = section_id or str(problem["problem"])
+    title = heading_text or str(problem.get("title") or problem["problem"])
+    lines = [f'<section class="bench bench-legacy-section" id="{html.escape(ident)}">']
+    lines.append(f"<{heading}>{html.escape(title)}</{heading}>")
+    if include_rule:
+        bits = _bits(problem)
+        if bits:
+            lines.append('<dl class="bench-rule">')
+            for label, text in bits:
+                lines.append(f"<dt>{html.escape(label)}</dt><dd>{html.escape(text)}</dd>")
+            lines.append("</dl>")
     if smoke_note:
         lines.append(f'<p class="bench-smoke">{html.escape(smoke_note)}</p>')
-    if present is not None:
-        lines.append(_present_block(present))
-        per_search = _per_search_block(present)
-        if per_search:
-            lines.append(per_search)
 
     prepared = []
     for rank, (row, fields) in enumerate(canonical_rows, 1):
@@ -508,382 +330,315 @@ def _raw(fragment: str) -> str:
     return "\n".join(lines)
 
 
-def _per_search_block(rows: list[dict]) -> str:
-    scored = [row for row in rows if row.get("per_search")]
-    if not scored:
-        return ""
-    lines = [
-        "<h3>Per-search cost</h3>",
-        '<p class="bench-legacy">Each repetition contributes its force calls divided by the searches in that repetition. '
-        "The legacy number above is the mean of the campaign totals. "
-        "These files record no per-search cap, so PAR-2 is not applied, and they record no Hessian index or RMSD.</p>",
-        '<div class="bench-table"><table>',
-        "<caption>v2 per-search cost across the recorded repetitions. Lower is better.</caption>",
-        "<thead><tr>"
-        '<th class="text" scope="col">Entry</th>'
-        '<th class="num" scope="col">Repetitions</th>'
-        '<th class="num" scope="col">Mean</th>'
-        '<th class="num" scope="col">Median</th>'
-        '<th class="num" scope="col">Median low</th>'
-        '<th class="num" scope="col">Median high</th>'
-        '<th class="num" scope="col">IQR</th>'
-        '<th class="num" scope="col">Legacy total</th>'
-        "</tr></thead><tbody>",
-    ]
-    for row in scored:
-        summary = row["per_search"]
-        cells = [
-            ("text", row.get("entry", "")),
-            ("num", row.get("repetition_count", "")),
-            ("num", _fmt(summary["mean"])),
-            ("num", _fmt(summary["median"])),
-            ("num", _fmt(summary["median_low"])),
-            ("num", _fmt(summary["median_high"])),
-            ("num", _fmt(summary["iqr"])),
-            ("num", row.get("mean", "")),
-        ]
-        lines.append("<tr>")
-        for kind, value in cells:
-            lines.append(f'<td class="{kind}">{html.escape(str(value))}</td>')
-        lines.append("</tr>")
-    lines.append("</tbody></table></div>")
+def _board_view(problem: dict, document: dict) -> dict:
+    found = (document.get("problems") or {}).get(problem["id"])
+    if found:
+        return found
+    return {
+        "id": problem["id"],
+        "title": str(problem.get("title") or problem["problem"]),
+        "ranked": [],
+        "history": [],
+        "partial": [],
+        "not_comparable": [],
+    }
+
+
+def _unparsed_by_problem(document: dict) -> dict[str, list[dict]]:
+    grouped: dict[str, list[dict]] = {}
+    for row in document.get("unparsed") or []:
+        problem_id = str(row.get("problem") or "")
+        if problem_id:
+            grouped.setdefault(problem_id, []).append(row)
+    return grouped
+
+
+def _rule_html(problem: dict, smoke_note: str = "") -> str:
+    lines: list[str] = []
+    bits = _bits(problem)
+    if bits:
+        lines.append('<dl class="bench-rule">')
+        for label, text in bits:
+            lines.append(f"<dt>{html.escape(label)}</dt><dd>{html.escape(text)}</dd>")
+        lines.append("</dl>")
+    if smoke_note:
+        lines.append(f'<p class="bench-smoke">{html.escape(smoke_note)}</p>')
     return "\n".join(lines)
 
 
-def _success_table(runs: list[dict]) -> str:
-    lines = [
-        "<h3>v2 success rate</h3>",
-        '<p class="bench-legacy">Wilson 95% intervals from the published start and failure counts. '
-        "PAR-2, the median, and the bootstrap interval need the per-start harness record, which these rows do not have. "
-        "eOn L-BFGS memory 20 is default. Memory 100 is tuned. Other rows are unlabelled.</p>",
-        '<div class="bench-table"><table>',
-        "<caption>v2 success rate. The legacy mean is unchanged.</caption>",
-        "<thead><tr>"
-        '<th class="text" scope="col">Entry</th>'
-        '<th class="text" scope="col">Tuning</th>'
-        '<th class="num" scope="col">Successes</th>'
-        '<th class="num" scope="col">Wilson low</th>'
-        '<th class="num" scope="col">Wilson high</th>'
-        '<th class="num" scope="col">Legacy mean</th>'
-        "</tr></thead><tbody>",
-    ]
-    for run in runs:
-        metrics = run.get("metrics") or {}
-        starts = int(run["starts"])
-        failed = int(metrics.get("nfailed", run.get("nfailed", 0)))
-        low, high = wilson_interval(starts - failed, starts)
-        cells = [
-            ("text", run.get("entry", "")),
-            ("text", tuning_label(run)),
-            ("num", f"{starts - failed}/{starts}"),
-            ("num", _fmt(low)),
-            ("num", _fmt(high)),
-            ("num", metrics.get("force_calls", "")),
-        ]
-        lines.append("<tr>")
-        for kind, value in cells:
-            lines.append(f'<td class="{kind}">{html.escape(str(value))}</td>')
-        lines.append("</tr>")
-    lines.append("</tbody></table></div>")
-    return "\n".join(lines)
-
-
-def _smoke_html(path: Path) -> str:
-    if not path.is_file():
-        return ""
-    import json
-
-    record = json.loads(path.read_text(encoding="utf-8"))
-    runs = record.get("runs") or []
-    if not runs:
-        return ""
-    provenance = runs[0].get("provenance") or {}
-    machine = provenance.get("machine") or {}
-    node = str(machine.get("node", ""))
-    commit = str(provenance.get("commit") or "")[:12]
-    lines = [
-        "<h3>v2 smoke</h3>",
-        '<p class="bench-smoke">Quadratic bowl and saddle. Not a campaign score. '
-        "A failure costs 2 times the cap. "
-        f"Provenance is optbench commit {html.escape(commit)} on {html.escape(node)}.</p>",
-        '<div class="bench-table"><table>',
-        "<caption>Harness force calls and the PAR-2 mean. The false saddle is charged the penalty.</caption>",
-        "<thead><tr>"
-        '<th class="text" scope="col">Entry</th>'
-        '<th class="text" scope="col">Tuning</th>'
-        '<th class="num" scope="col">Successes</th>'
-        '<th class="num" scope="col">Wilson low</th>'
-        '<th class="num" scope="col">Wilson high</th>'
-        '<th class="num" scope="col">Harness calls</th>'
-        '<th class="num" scope="col">PAR-2 mean</th>'
-        '<th class="num" scope="col">Median</th>'
-        '<th class="num" scope="col">Median low</th>'
-        '<th class="num" scope="col">Median high</th>'
-        "</tr></thead><tbody>",
-    ]
-    for run in runs:
-        metrics = run.get("metrics") or {}
-        calls = ", ".join(str(start.get("force_calls", "")) for start in run.get("starts") or [])
-        cells = [
-            ("text", run.get("entry", "")),
-            ("text", run.get("tuning", "")),
-            ("num", f"{metrics.get('successes', '')}/{metrics.get('n', '')}"),
-            ("num", _fmt(metrics.get("wilson_low", 0.0))),
-            ("num", _fmt(metrics.get("wilson_high", 0.0))),
-            ("num", calls),
-            ("num", _whole(metrics.get("par2_mean", ""))),
-            ("num", _whole(metrics.get("median", ""))),
-            ("num", _whole(metrics.get("median_low", ""))),
-            ("num", _whole(metrics.get("median_high", ""))),
-        ]
-        lines.append("<tr>")
-        for kind, value in cells:
-            lines.append(f'<td class="{kind}">{html.escape(str(value))}</td>')
-        lines.append("</tr>")
-    lines.append("</tbody></table></div>")
-    return "\n".join(lines)
-
-
-def _sota_html(root: Path) -> str:
-    accepted = []
-    host = ""
-    for path in sorted((root / "results").glob("*.json")):
-        import json
-
-        record = json.loads(path.read_text(encoding="utf-8"))
-        if record.get("status") != "sota":
-            continue
-        if record.get("problem") not in (None, "", "minimization/lj38"):
-            continue
-        if record.get("host"):
-            host = str(record["host"])
-        accepted.extend(record.get("runs") or [])
-    chart_runs = list(accepted)
-    for path in sorted((root / "results").glob("*.json")):
-        record = json.loads(path.read_text(encoding="utf-8"))
-        if record.get("on_chart") and record.get("problem") in (None, "", "minimization/lj38"):
-            chart_runs.extend(record.get("runs") or [])
-    lines = [
-        '<section class="bench" id="sota">',
-        "<h2>Lennard-Jones 38</h2>",
-    ]
-    rule_path = root / "problems" / "minimization" / "lj38.toml"
-    if rule_path.is_file():
-        from .problems import load_problem
-
-        bits = _bits(load_problem(rule_path))
-        if bits:
-            lines.append('<dl class="bench-rule">')
-            for label, text in bits:
-                lines.append(f"<dt>{html.escape(label)}</dt><dd>{html.escape(text)}</dd>")
-            lines.append("</dl>")
-    if host:
-        lines.append(f"<p>The result file names the host {html.escape(host)}.</p>")
-    structure = root / "docs" / "source" / "_static" / "lj38.svg"
-    if structure.is_file():
-        lines.append(
-            '<figure class="bench-structure">'
-            '<img src="_static/lj38.svg" width="176" height="155" '
-            'alt="Thirty-eight particles in Lennard-Jones start cluster_0000.">'
-            "<figcaption>Start cluster_0000, one of the 1,000 geometries. "
-            "Particles only. The potential has no bonds.</figcaption>"
-            "</figure>"
-        )
-    if not accepted:
-        lines.append(
-            "<p class=\"bench-smoke\">No run of a present source has been accepted. "
-            "The contract is contract/problems/minimization/lj38.json. "
-            "A result is optbench.result/v1 with status sota.</p>"
-        )
-    else:
-        ordered = sorted(
-            accepted,
-            key=lambda run: float((run.get("metrics") or {}).get("force_calls") or 1e99),
-        )
-        points = []
-        numbered = []
-        chart_ordered = sorted(
-            chart_runs,
-            key=lambda run: float((run.get("metrics") or {}).get("force_calls") or 1e99),
-        )
-        for run in chart_ordered:
-            metrics = run.get("metrics") or {}
-            value = metrics.get("force_calls")
-            if isinstance(value, (int, float)):
-                numbered.append(float(value))
-                points.append(
-                    {
-                        "id": _slug(str(run.get("entry", ""))),
-                        "entry": str(run.get("entry", "")),
-                        "code": str(run.get("code", "")),
-                        "value": float(value),
-                        "best": False,
-                        "held": False,
-                        "failed": _marked_failed(metrics.get("nfailed")),
-                    }
-                )
-        best = min(numbered) if numbered else None
-        for point in points:
-            point["best"] = best is not None and point["value"] == best
-        lines.append(
-            f"<p class=\"bench-count\">{len(ordered)} methods. Lower force calls is better.</p>"
-        )
-        lines.append(
-            "<table><caption>Present sources. The cell is the record.</caption>"
-            "<thead><tr><th>Entry</th><th>Code</th>"
-            "<th class=\"num\">Mean (force calls)</th>"
-            "<th class=\"num\">Min (force calls)</th>"
-            "<th class=\"num\">Max (force calls)</th>"
-            "<th class=\"num\">Failed</th>"
-            "<th>Commit</th></tr></thead><tbody>"
-        )
-        for run in ordered:
-            metrics = run.get("metrics") or {}
-            commit = str(run.get("commit") or run.get("code_version") or "")
-            nfailed = metrics.get("nfailed", run.get("nfailed", 0))
-            fail_mark = ""
-            try:
-                failed_n = int(nfailed)
-            except (TypeError, ValueError):
-                failed_n = 0
-            if failed_n > 0:
-                fail_mark = " bench-row-fail"
-            lines.append(
-                '<tr id="{}" class="{}">'.format(
-                    html.escape(_slug(str(run.get("entry", "")))),
-                    fail_mark.strip(),
-                )
-                + "<td>{}</td><td>{}</td><td class=\"num\">{}</td><td class=\"num\">{}</td>"
-                "<td class=\"num\">{}</td><td class=\"num\">{}</td><td>{}</td></tr>".format(
-                    html.escape(str(run.get("entry", ""))),
-                    html.escape(str(run.get("code", ""))),
-                    html.escape(str(metrics.get("force_calls", ""))),
-                    html.escape(str(metrics.get("force_calls_min", ""))),
-                    html.escape(str(metrics.get("force_calls_max", ""))),
-                    html.escape(str(nfailed)),
-                    html.escape(commit[:12]),
-                )
-            )
-        lines.append("</tbody></table>")
-        lines.append(_success_table(ordered))
-        lines.append(_plot(points, "force_calls"))
-    lines.append(_smoke_html(root / "results" / "smoke" / "quadratic.json"))
-    lines.append("</section>")
-    return "\n".join(lines)
-
-
-def _submission_html(root: Path) -> str:
-    import json
-
-    lines = ['<section class="bench" id="recorded-passes">', "<h2>Other recorded runs</h2>"]
-    lines.append(
-        "<p class=\"bench-smoke\">These numbers are real and they are not the SOTA board. "
-        "Each run missed the present-source rule in the Lennard-Jones 38 contract.</p>"
+def _legacy_section(problem: dict, oracle: list[dict]) -> str:
+    return problem_html(
+        problem,
+        oracle,
+        section_id=f"{problem['problem']}-legacy",
+        heading="h3",
+        heading_text="Legacy 2014 archive",
+        include_rule=False,
     )
-    lines.append(
-        "<table><caption>Mean force calls on 1000 starts. None failed the force cap.</caption>"
-        "<thead><tr><th>Entry</th><th>Code</th><th class=\"num\">Mean</th>"
-        "<th class=\"num\">Min</th><th class=\"num\">Max</th><th>Why it stays here</th></tr></thead><tbody>"
-    )
-    for path in sorted((root / "results").glob("*.json")):
-        record = json.loads(path.read_text(encoding="utf-8"))
-        if record.get("status") != "archive":
-            continue
-        for run in record.get("runs") or []:
-            metrics = run.get("metrics") or {}
-            lines.append("<tr>")
-            lines.append(f"<td>{html.escape(str(run.get('entry', '')))}</td>")
-            lines.append(f"<td>{html.escape(str(run.get('code', '')))}</td>")
-            lines.append(f"<td class=\"num\">{html.escape(str(metrics.get('force_calls', '')))}</td>")
-            lines.append(f"<td class=\"num\">{html.escape(str(metrics.get('force_calls_min', '')))}</td>")
-            lines.append(f"<td class=\"num\">{html.escape(str(metrics.get('force_calls_max', '')))}</td>")
-            lines.append(f"<td>{html.escape(str(run.get('notes', '')))}</td>")
-            lines.append("</tr>")
-    lines.append("</tbody></table></section>")
-    return "\n".join(lines)
 
 
-def _codes_html(path: Path) -> str:
-    import tomllib
+def _sorted_problems(group: list[dict]) -> list[dict]:
+    return sorted(group, key=lambda item: str(item.get("title") or item["problem"]).lower())
 
-    record = tomllib.loads(path.read_text(encoding="utf-8"))
-    contributor = record.get("benchmark_contributor", "")
+
+def _headlines_html(
+    order: list[str],
+    by_suite: dict[str, list[dict]],
+    document: dict,
+    pending: dict[str, list[dict]],
+) -> str:
+    from .board import gap_paragraph, headline_table
+
     lines = [
-        '<section class="bench" id="current-codes">',
-        "<h2>Current codes</h2>",
-        "<p class=\"bench-smoke\">A score from one of these pins is SOTA only when the result "
-        "names this commit, the problem geometries, and the problem stop. "
-        f"The benchmark contributor is {html.escape(contributor)}.</p>",
-        '<div class="bench-table"><table>',
-        "<caption>No force-call number is listed until a run writes benchmark.dat under the problem rule.</caption>",
-        "<thead><tr><th>Code</th><th>Role</th><th>Source</th><th>Commit</th></tr></thead><tbody>",
+        '<section class="bench" id="headlines">',
+        "<p>The first row of each problem is the best full harness run, ranked by PAR-2. "
+        "The ranked table and the performance profile are on the problem page. "
+        "The 2014 archive is labelled legacy on that page.</p>",
     ]
-    for code in record.get("code", []):
-        commit = code.get("commit") or code.get("ref", "")
-        short = commit[:12]
-        lines.append("<tr>")
-        lines.append(f"<td>{html.escape(code.get('name', ''))}</td>")
-        lines.append(f"<td>{html.escape(code.get('role', ''))}</td>")
-        repo = code.get("repository", "")
-        ref = code.get("ref", "")
-        lines.append(
-            f'<td><a href="{html.escape(repo)}">{html.escape(repo.split("/")[-1])} {html.escape(ref)}</a></td>'
-        )
-        lines.append(f'<td class="num">{html.escape(short)}</td>')
-        lines.append("</tr>")
-    lines.append("</tbody></table></div></section>")
-    return "\n".join(lines)
-
-
-def render(root: Path) -> None:
-    """Write ``docs/orgmode/generated`` from ``problems`` and ``oracle``."""
-    problems = load_all(root / "problems")
-    oracle = load_oracle(root / "oracle" / "entries.jsonl")
-    smoke = ""
-    smoke_path = root / "softsaddle" / "entry.toml"
-    if smoke_path.exists():
-        import tomllib
-
-        record = tomllib.loads(smoke_path.read_text(encoding="utf-8"))
-        archived = record.get("archived") or {}
-        smoke_run = record.get("smoke") or {}
-        if archived and smoke_run:
-            smoke = (
-                f"A {smoke_run.get('searches')}-search SoftSaddle smoke is not in this rank. "
-                f"The {archived.get('date')} {archived.get('entry')} entry records "
-                f"{archived.get('force_calls')} force calls."
-            )
-    out = root / "docs" / "orgmode" / "generated"
-    suite_dir = out / "suites"
-    suite_dir.mkdir(parents=True, exist_ok=True)
-    by_suite: dict[str, list[dict]] = {}
-    for problem in problems.values():
-        by_suite.setdefault(problem["suite"], []).append(problem)
-
-    include = root / "docs" / "include"
-    include.mkdir(parents=True, exist_ok=True)
-    (include / "codes.org").write_text(_raw(_codes_html(root / "codes" / "registry.toml")), encoding="utf-8")
-
-    featured = problems["minimization/lj38"]
-    featured_html = problem_html(featured, oracle)
-    (include / "featured.org").write_text(_raw(featured_html), encoding="utf-8")
-    (include / "sota.org").write_text(_raw(_sota_html(root)), encoding="utf-8")
-    (include / "terra-pass.org").write_text(_raw(_submission_html(root)), encoding="utf-8")
-    present = _load_present(root)
-
-    order = list(SUITE_ORDER) + sorted(set(by_suite) - set(SUITE_ORDER))
-    (include / "collection.org").write_text(
-        _raw(_collection_html(order, by_suite, present)),
-        encoding="utf-8",
-    )
     for suite in order:
         group = by_suite.get(suite)
         if not group:
             continue
-        sections = []
+        lines.append(f'<h2 id="suite-{html.escape(suite)}">{html.escape(suite_title(suite))}</h2>')
+        for problem in _sorted_problems(group):
+            view = _board_view(problem, document)
+            title = str(problem.get("title") or problem["problem"])
+            href = f"generated/suites/{suite}.html#{problem['problem']}"
+            lines.append(f"<h3>{html.escape(title)}</h3>")
+            lines.append(headline_table(view))
+            lead = gap_paragraph(view, pending.get(problem["id"]))
+            if lead:
+                lines.append(lead)
+            lines.append(
+                f'<p><a href="{html.escape(href)}">Ranked table, performance profile, and the 2014 archive</a>.</p>'
+            )
+    lines.append("</section>")
+    return "\n".join(lines)
+
+
+def _collection_html(
+    order: list[str],
+    by_suite: dict[str, list[dict]],
+    document: dict,
+    pending: dict[str, list[dict]],
+    oracle: list[dict],
+) -> str:
+    from .board import gap_paragraph, headline_table
+
+    lines = [
+        '<section class="bench" id="collection">',
+        "<p>Each problem leads with the current v2 rank. "
+        "The 2014 rows follow, in the published order.</p>",
+    ]
+    for suite in order:
+        group = by_suite.get(suite)
+        if not group:
+            continue
+        lines.append(f'<h2 id="suite-{html.escape(suite)}">{html.escape(suite_title(suite))}</h2>')
+        for problem in _sorted_problems(group):
+            view = _board_view(problem, document)
+            title = str(problem.get("title") or problem["problem"])
+            href = f"generated/suites/{suite}.html#{problem['problem']}"
+            lines.append(f"<h3>{html.escape(title)}</h3>")
+            lines.append(headline_table(view))
+            lead = gap_paragraph(view, pending.get(problem["id"]))
+            if lead:
+                lines.append(lead)
+            lines.append(f'<p><a href="{html.escape(href)}">Full ranked table and performance profile</a>.</p>')
+            lines.append(_legacy_section(problem, oracle))
+    lines.append("</section>")
+    return "\n".join(lines)
+
+
+def _code_keys(pins: list[dict]) -> set[str]:
+    keys: set[str] = set()
+    for pin in pins:
+        keys.add(str(pin.get("id") or "").lower())
+        keys.add(str(pin.get("name") or "").lower())
+    keys.discard("")
+    return keys
+
+
+def _matches_code(row: dict, keys: set[str]) -> bool:
+    return str(row.get("code") or "").lower() in keys
+
+
+def _codes_html(root: Path, document: dict) -> str:
+    from .board import ranked_cells
+
+    record = tomllib.loads((root / "codes" / "registry.toml").read_text(encoding="utf-8"))
+    contributor = str(record.get("benchmark_contributor") or "")
+    pins = [code for code in record.get("code") or [] if isinstance(code, dict)]
+    grouped: dict[str, list[dict]] = {}
+    order: list[str] = []
+    for pin in pins:
+        name = str(pin.get("name") or pin.get("id") or "")
+        if name not in grouped:
+            grouped[name] = []
+            order.append(name)
+        grouped[name].append(pin)
+    lines = [
+        '<section class="bench" id="current-codes">',
+        "<h2>Current codes</h2>",
+        f"<p>The benchmark contributor is {html.escape(contributor)}. "
+        "A ranked row is a full harness run. "
+        "The commit on that row is the commit that produced the score.</p>",
+    ]
+    score_fields = (
+        "template",
+        "version",
+        "commit",
+        "par2_mean",
+        "mean_calls",
+        "median_calls",
+        "failures",
+        "n",
+    )
+    for name in order:
+        group = grouped[name]
+        keys = _code_keys(group)
+        lines.append(f"<h3>{html.escape(name)}</h3>")
+        lines.append("<table>")
+        lines.append("<caption>Registry pins.</caption>")
+        lines.append(
+            "<thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>"
+        )
+        for pin in group:
+            commit = str(pin.get("commit") or "")
+            repo = str(pin.get("repository") or "")
+            lines.append("<tr>")
+            lines.append(f"<td>{html.escape(str(pin.get('role') or ''))}</td>")
+            lines.append(f"<td>{html.escape(str(pin.get('ref') or ''))}</td>")
+            lines.append(f"<td>{html.escape(commit[:12])}</td>")
+            lines.append(f'<td><a href="{html.escape(repo)}">{html.escape(repo)}</a></td>')
+            lines.append("</tr>")
+        lines.append("</tbody></table>")
+        best: list[tuple[dict, dict]] = []
+        for problem in (document.get("problems") or {}).values():
+            matched = [row for row in problem.get("ranked") or [] if _matches_code(row, keys)]
+            if not matched:
+                continue
+            matched.sort(key=lambda row: (row.get("par2_mean") is None, float(row.get("par2_mean") or 0)))
+            best.append((problem, matched[0]))
+        best.sort(key=lambda item: item[0]["id"])
+        if best:
+            lines.append('<table data-board-table="code-best">')
+            lines.append("<caption>Best full harness run on each problem.</caption>")
+            lines.append(
+                "<thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th>"
+                "<th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th>"
+                "</tr></thead><tbody>"
+            )
+            for problem, row in best:
+                cells = dict(ranked_cells(row, False))
+                template = str(row.get("template") or row.get("entry") or "")
+                lines.append(
+                    "<tr "
+                    f'data-problem="{html.escape(str(problem["id"]))}" '
+                    f'data-template="{html.escape(template)}">'
+                )
+                lines.append(f"<td>{html.escape(str(problem.get('title') or problem['id']))}</td>")
+                for field in score_fields:
+                    lines.append(f'<td data-field="{field}">{html.escape(cells[field])}</td>')
+                lines.append("</tr>")
+            lines.append("</tbody></table>")
+        else:
+            lines.append("<p>No full ranked run.</p>")
+        missing: list[str] = []
+        for problem in (document.get("problems") or {}).values():
+            partial = [row for row in problem.get("partial") or [] if _matches_code(row, keys)]
+            off = [row for row in problem.get("not_comparable") or [] if _matches_code(row, keys)]
+            if not partial and not off:
+                continue
+            reasons = []
+            if off:
+                reasons.append("not yet on the harness counter")
+            if partial:
+                reasons.append("partial")
+            title = str(problem.get("title") or problem["id"])
+            missing.append(f"<li>{html.escape(title)}: {html.escape(', '.join(reasons))}.</li>")
+        for row in document.get("unparsed") or []:
+            if not _matches_code(row, keys) or not row.get("problem"):
+                continue
+            label = str(row.get("template") or row.get("entry") or row.get("path") or "")
+            note = str(row.get("note") or "no per-start record")
+            missing.append(f"<li>{html.escape(label)}: {html.escape(note)}.</li>")
+        if missing:
+            lines.append("<p>No full ranked run</p><ul>")
+            lines.extend(missing)
+            lines.append("</ul>")
+    lines.append("</section>")
+    return "\n".join(lines)
+
+
+def _smoke_note(root: Path) -> str:
+    smoke_path = root / "softsaddle" / "entry.toml"
+    if not smoke_path.is_file():
+        return ""
+    record = tomllib.loads(smoke_path.read_text(encoding="utf-8"))
+    archived = record.get("archived") or {}
+    smoke_run = record.get("smoke") or {}
+    if not archived or not smoke_run:
+        return ""
+    return (
+        f"A {smoke_run.get('searches')}-search SoftSaddle smoke is outside this rank. "
+        f"The {archived.get('date')} {archived.get('entry')} entry records "
+        f"{archived.get('force_calls')} force calls."
+    )
+
+
+def render(root: Path) -> None:
+    """Write the site tables from the v2 scorer."""
+    from .board import plot_names_for, render_problem_section, write_board
+
+    root = Path(root)
+    document = write_board(root, root / "results" / "board")
+    problems = load_all(root / "problems")
+    oracle = load_oracle(root / "oracle" / "entries.jsonl")
+    smoke = _smoke_note(root)
+    pending = _unparsed_by_problem(document)
+    by_suite: dict[str, list[dict]] = {}
+    for problem in problems.values():
+        by_suite.setdefault(problem["suite"], []).append(problem)
+    order = list(SUITE_ORDER) + sorted(set(by_suite) - set(SUITE_ORDER))
+
+    include = root / "docs" / "include"
+    include.mkdir(parents=True, exist_ok=True)
+    (include / "codes.org").write_text(_raw(_codes_html(root, document)), encoding="utf-8")
+    (include / "sota.org").write_text(
+        _raw(_headlines_html(order, by_suite, document, pending)),
+        encoding="utf-8",
+    )
+    (include / "collection.org").write_text(
+        _raw(_collection_html(order, by_suite, document, pending, oracle)),
+        encoding="utf-8",
+    )
+    for stale in ("featured.org", "terra-pass.org"):
+        path = include / stale
+        if path.exists():
+            path.unlink()
+
+    suite_dir = root / "docs" / "orgmode" / "generated" / "suites"
+    suite_dir.mkdir(parents=True, exist_ok=True)
+    for suite in order:
+        group = by_suite.get(suite)
+        if not group:
+            continue
+        sections: list[str] = []
         for problem in sorted(group, key=lambda item: item["problem"].lower()):
+            view = _board_view(problem, document)
             note = smoke if problem["id"] == "saddle-search/pt-island" else ""
-            sections.append(problem_html(problem, oracle, note, present.get(problem["id"], [])))
+            sections.append(
+                render_problem_section(
+                    view,
+                    plot_names_for(view),
+                    asset_prefix="../../_static/board",
+                    preamble=_rule_html(problem, note),
+                    section_id=str(problem["problem"]),
+                    unparsed=pending.get(problem["id"]),
+                )
+            )
+            sections.append(_legacy_section(problem, oracle))
         body = [
             f"#+TITLE: {suite_title(suite)}",
             "#+OPTIONS: toc:nil num:nil author:nil",
@@ -900,3 +655,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+

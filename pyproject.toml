@@ -4,7 +4,7 @@ version = "0.0.0"
 description = "Replay the OptBench geometry and saddle suites."
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = ["cyclopts>=3.24", "numpy>=1.26"]
+dependencies = ["cyclopts>=3.24", "numpy>=1.26", "matplotlib>=3.8"]
 
 [project.scripts]
 optbench = "optbench.__main__:main"
