@@ -3,6 +3,7 @@
 # v2 success is under the cap, at the force stop, and Hessian index 0.
 # energy and Kabsch RMSD were not applied: the problem file has no energy_tol, rmsd_tol, or per-start reference.
 # energy_min and energy_max are the final potential values on the recorded points.
+# LJ38 index removes the six rigid modes. A curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6).
 # Tuned row. One parameter set for every start: maxstep 0.2, the per-atom displacement cap (rgmin atom_maxmove, the same quantity as the eOn max move). gtol and the iteration budget are the problem stop. No other knob is changed, and nothing is chosen per start.
 force_calls 591
 force_calls_min 191
@@ -16,14 +17,14 @@ algorithm CG
 template rgmin/lj38-cg-tuned
 tuning tuned
 counter harness
-par2_mean 19843.929
-wilson_low 0.00405919581881
-wilson_high 0.015706334531
-par2_median 20000
-par2_median_low 20000
-par2_median_high 20000
-v2_nfailed 992
-v2_successes 8
+par2_mean 669.237
+wilson_low 0.989760443723
+wilson_high 0.99844341186
+par2_median 539
+par2_median_low 523
+par2_median_high 554.5
+v2_nfailed 4
+v2_successes 996
 n 1000
 energy_min -171.180454812
 energy_max -147.181862671

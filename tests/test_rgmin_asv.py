@@ -70,6 +70,32 @@ def test_default_lj38_bb_does_not_leave_the_cutoff():
     assert bench.track_force_calls(SEED, "0") == record["force_calls"]
 
 
+def test_lj38_lbfgs_index_drops_rigid_rotation_and_keeps_a_real_saddle():
+    """Start 1 is a minimum whose raw negative curvature is rotational.
+
+    Start 827 keeps one vibrational eigenvalue below -1 after the same
+    projection. Both finals are the capped L-BFGS row.
+    """
+    pytest.importorskip("rgmin")
+    from benchmarks.bench_rgmin import _job, _specs
+    from optbench.runners.rgmin_min import _minimize_job
+
+    spec = next(row for row in _specs() if row["template_id"] == "rgmin/lj38-lbfgs")
+    minimum = _minimize_job(_job(spec, "1"))
+    assert minimum["force_calls"] == 375
+    assert minimum["energy"] == pytest.approx(-169.737668749, abs=1e-6)
+    assert minimum["hessian_index"] == 0
+    assert minimum["success"] is True
+    assert minimum["min_eigenvalues"][0] > -0.01
+
+    saddle = _minimize_job(_job(spec, "827"))
+    assert saddle["force_calls"] == 133
+    assert saddle["energy"] == pytest.approx(-160.842180602, abs=1e-6)
+    assert saddle["hessian_index"] == 1
+    assert saddle["failure"] == "wrong_stationary"
+    assert saddle["min_eigenvalues"][0] < -1.0
+
+
 def test_one_tuned_lbfgs_start_is_a_harness_count():
     pytest.importorskip("rgmin")
     bench = RgminLj38LbfgsTuned()

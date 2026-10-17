@@ -72,6 +72,77 @@ def negative_index(eigenvalues: Sequence[float], tol: float = 1e-6) -> int:
     return sum(1 for value in eigenvalues if value < -tol)
 
 
+def curvature_tolerance(force_stop: float, hessian_norm: float) -> float:
+    """Curvature the force stop can separate from zero.
+
+    A unit displacement along a mode of curvature λ changes the force by λ.
+    Anything shallower than the force stop is not resolved by that stop.
+    ``1e-8 * ||H||_F`` is the roundoff floor on a stiff matrix, and
+    ``1e-6`` is the floor at an exact critical point. The threshold is the
+    largest of the three.
+    """
+    return max(1e-6, abs(float(force_stop)), 1e-8 * abs(float(hessian_norm)))
+
+
+def vibrational_eigenvalues(hessian, coords, *, rotations: bool) -> list[float]:
+    """Eigenvalues with rigid motions taken out of the Hessian.
+
+    A free cluster drops three translations and three rotations about the
+    centroid. A periodic cell drops translations and keeps rotations: the
+    cell orientation is not a symmetry of the pair distances. A collinear
+    geometry drops the rotation about its axis. The returned values are
+    ascending curvatures of the complement.
+    """
+    import numpy as np
+
+    matrix = np.asarray(hessian, dtype=np.float64)
+    matrix = 0.5 * (matrix + matrix.T)
+    points = np.asarray(coords, dtype=np.float64)
+    if points.ndim == 1:
+        points = points.reshape(-1, 3)
+    if matrix.shape != (points.shape[0] * 3, points.shape[0] * 3):
+        raise ValueError("hessian shape does not match the coordinates")
+    modes = _rigid_basis(points, rotations=rotations)
+    if modes.shape[1] == 0:
+        values = np.linalg.eigvalsh(matrix)
+        return [float(value) for value in values]
+    left, singular, _right = np.linalg.svd(modes, full_matrices=True)
+    rank = int(np.sum(singular > 1e-8))
+    complement = left[:, rank:]
+    reduced = complement.T @ matrix @ complement
+    values = np.linalg.eigvalsh(reduced)
+    return [float(value) for value in values]
+
+
+def _rigid_basis(coords, *, rotations: bool):
+    """Orthonormal rigid modes. Columns are translations, then rotations."""
+    import numpy as np
+
+    n_atoms = int(coords.shape[0])
+    if n_atoms == 0:
+        return np.zeros((0, 0))
+    seeds = []
+    for axis in range(3):
+        translation = np.zeros(n_atoms * 3, dtype=np.float64)
+        translation[axis::3] = 1.0
+        seeds.append(translation)
+    if rotations and n_atoms >= 2:
+        centered = coords - coords.mean(axis=0)
+        for axis in range(3):
+            seeds.append(np.cross(centered, np.eye(3)[axis]).reshape(-1))
+    basis = []
+    for seed in seeds:
+        mode = seed.copy()
+        for kept in basis:
+            mode = mode - np.dot(kept, mode) * kept
+        norm = float(np.linalg.norm(mode))
+        if norm > 1e-8:
+            basis.append(mode / norm)
+    if not basis:
+        return np.zeros((n_atoms * 3, 0))
+    return np.column_stack(basis)
+
+
 def numerical_hessian(gradient, point: Sequence[float], step: float = 1e-5) -> Matrix:
     """Central-difference Hessian. The gradient is called ``2 * len(point)`` times."""
     size = len(point)

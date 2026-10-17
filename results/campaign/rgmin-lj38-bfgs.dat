@@ -3,6 +3,7 @@
 # v2 success is under the cap, at the force stop, and Hessian index 0.
 # energy and Kabsch RMSD were not applied: the problem file has no energy_tol, rmsd_tol, or per-start reference.
 # energy_min and energy_max are the final potential values on the recorded points.
+# LJ38 index removes the six rigid modes. A curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6).
 # Default row. gtol and the iteration budget are the problem force norm and the force-call cap. maxstep is 0.2, the per-atom displacement cap (rgmin atom_maxmove, the same quantity as the eOn max move and the rgmin ASE default). istep is 0.1. BB, DIIS, FIRE, and quickmin take that gradient trial with no line search. L-BFGS, BFGS, CG, steepest descent, Adam, SR1, and SR2 use the session strong Wolfe search, and the first trial is still sized by istep. Newton and dogleg take a Hessian step inside the same cap. Without the cap, an uncapped gradient trial on these starts leaves the Lennard-Jones cutoff. The same values are used for every start.
 force_calls 1010
 force_calls_min 595
@@ -16,14 +17,14 @@ algorithm BFGS
 template rgmin/lj38-bfgs
 tuning default
 counter harness
-par2_mean 15104.34
-wilson_low 0.231844034394
-wilson_high 0.286008116713
-par2_median 20000
-par2_median_low 20000
-par2_median_high 20000
-v2_nfailed 742
-v2_successes 258
+par2_mean 1010.446
+wilson_low 0.996173241514
+wilson_high 1
+par2_median 970
+par2_median_low 957
+par2_median_high 981
+v2_nfailed 0
+v2_successes 1000
 n 1000
 energy_min -173.134316679
 energy_max -149.393668633

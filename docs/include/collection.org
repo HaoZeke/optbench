@@ -17,7 +17,7 @@
    <td class="num">35</td>
    <td class="num">128</td>
    <td class="num">0</td>
-   <td class="num">12784.212</td>
+   <td class="num">166.337</td>
    <td class="text">tuned</td>
    </tr>
    <tr>
@@ -28,7 +28,7 @@
    <td class="num">35</td>
    <td class="num">128</td>
    <td class="num">0</td>
-   <td class="num">12784.212</td>
+   <td class="num">166.337</td>
    <td class="text">default</td>
    </tr>
    <tr>
@@ -39,7 +39,7 @@
    <td class="num">45</td>
    <td class="num">162</td>
    <td class="num">0</td>
-   <td class="num">10260.071</td>
+   <td class="num">81.881</td>
    <td class="text">tuned</td>
    </tr>
    <tr>
@@ -50,7 +50,7 @@
    <td class="num">45</td>
    <td class="num">162</td>
    <td class="num">0</td>
-   <td class="num">10260.071</td>
+   <td class="num">81.881</td>
    <td class="text">default</td>
    </tr>
    <tr>
@@ -61,7 +61,7 @@
    <td class="num">96</td>
    <td class="num">468</td>
    <td class="num">0</td>
-   <td class="num">18533.477</td>
+   <td class="num">197.228</td>
    <td class="text">tuned</td>
    </tr>
    <tr>
@@ -72,7 +72,7 @@
    <td class="num">96</td>
    <td class="num">468</td>
    <td class="num">0</td>
-   <td class="num">18533.477</td>
+   <td class="num">197.228</td>
    <td class="text">default</td>
    </tr>
    <tr>
@@ -193,7 +193,7 @@
    <td class="num">94</td>
    <td class="num">464</td>
    <td class="num">0</td>
-   <td class="num">18376.623</td>
+   <td class="num">282.64</td>
    <td class="text">tuned</td>
    </tr>
    <tr>
@@ -204,7 +204,7 @@
    <td class="num">94</td>
    <td class="num">464</td>
    <td class="num">0</td>
-   <td class="num">18376.623</td>
+   <td class="num">282.64</td>
    <td class="text">default</td>
    </tr>
    <tr>
@@ -226,7 +226,7 @@
    <td class="num">91</td>
    <td class="num">477</td>
    <td class="num">0</td>
-   <td class="num">18238.995</td>
+   <td class="num">294.105</td>
    <td class="text">tuned</td>
    </tr>
    <tr>
@@ -237,7 +237,7 @@
    <td class="num">91</td>
    <td class="num">477</td>
    <td class="num">0</td>
-   <td class="num">18238.995</td>
+   <td class="num">294.105</td>
    <td class="text">default</td>
    </tr>
    <tr>
@@ -435,7 +435,7 @@
    <td class="num">172</td>
    <td class="num">1596</td>
    <td class="num">0</td>
-   <td class="num">15541.574</td>
+   <td class="num">639.474</td>
    <td class="text">tuned</td>
    </tr>
    <tr>
@@ -446,7 +446,7 @@
    <td class="num">172</td>
    <td class="num">1596</td>
    <td class="num">0</td>
-   <td class="num">15541.574</td>
+   <td class="num">639.474</td>
    <td class="text">default</td>
    </tr>
    <tr>
@@ -545,7 +545,7 @@
    <td class="num">191</td>
    <td class="num">2329</td>
    <td class="num">0</td>
-   <td class="num">19843.929</td>
+   <td class="num">669.237</td>
    <td class="text">tuned</td>
    </tr>
    <tr>
@@ -556,7 +556,7 @@
    <td class="num">191</td>
    <td class="num">2329</td>
    <td class="num">0</td>
-   <td class="num">19843.929</td>
+   <td class="num">669.237</td>
    <td class="text">default</td>
    </tr>
    <tr class="bench-row-fail">
@@ -644,7 +644,7 @@
    <td class="num">230</td>
    <td class="num">2802</td>
    <td class="num">0</td>
-   <td class="num">19960.839</td>
+   <td class="num">769.36</td>
    <td class="text">tuned</td>
    </tr>
    <tr>
@@ -655,7 +655,7 @@
    <td class="num">230</td>
    <td class="num">2802</td>
    <td class="num">0</td>
-   <td class="num">19960.839</td>
+   <td class="num">769.36</td>
    <td class="text">default</td>
    </tr>
    <tr>
@@ -699,7 +699,7 @@
    <td class="num">236</td>
    <td class="num">2637</td>
    <td class="num">0</td>
-   <td class="num">19922.731</td>
+   <td class="num">845.947</td>
    <td class="text">tuned</td>
    </tr>
    <tr>
@@ -710,7 +710,7 @@
    <td class="num">236</td>
    <td class="num">2637</td>
    <td class="num">0</td>
-   <td class="num">19922.731</td>
+   <td class="num">845.947</td>
    <td class="text">default</td>
    </tr>
    <tr>
@@ -754,7 +754,7 @@
    <td class="num">595</td>
    <td class="num">2985</td>
    <td class="num">0</td>
-   <td class="num">15104.34</td>
+   <td class="num">1010.446</td>
    <td class="text">tuned</td>
    </tr>
    <tr>
@@ -765,7 +765,7 @@
    <td class="num">595</td>
    <td class="num">2985</td>
    <td class="num">0</td>
-   <td class="num">15104.34</td>
+   <td class="num">1010.446</td>
    <td class="text">default</td>
    </tr>
    <tr>
@@ -787,7 +787,7 @@
    <td class="num">1314</td>
    <td class="num">2064</td>
    <td class="num">995</td>
-   <td class="num">19982.064</td>
+   <td class="num">19908.901</td>
    <td class="text">tuned</td>
    </tr>
    <tr class="bench-row-fail">
@@ -798,7 +798,7 @@
    <td class="num">1314</td>
    <td class="num">2064</td>
    <td class="num">995</td>
-   <td class="num">19982.064</td>
+   <td class="num">19908.901</td>
    <td class="text">default</td>
    </tr>
    <tr>
@@ -831,7 +831,7 @@
    <td class="num">467</td>
    <td class="num">8671</td>
    <td class="num">0</td>
-   <td class="num">19982.327</td>
+   <td class="num">1932.997</td>
    <td class="text">tuned</td>
    </tr>
    <tr>
@@ -842,7 +842,7 @@
    <td class="num">467</td>
    <td class="num">8671</td>
    <td class="num">0</td>
-   <td class="num">19982.327</td>
+   <td class="num">1932.997</td>
    <td class="text">default</td>
    </tr>
    <tr class="bench-row-fail">
@@ -941,7 +941,7 @@
    <td class="num">1141</td>
    <td class="num">9993</td>
    <td class="num">200</td>
-   <td class="num">20000</td>
+   <td class="num">8392.748</td>
    <td class="text">tuned</td>
    </tr>
    <tr class="bench-row-fail">
@@ -952,7 +952,7 @@
    <td class="num">1141</td>
    <td class="num">9993</td>
    <td class="num">200</td>
-   <td class="num">20000</td>
+   <td class="num">8392.748</td>
    <td class="text">default</td>
    </tr>
    <tr class="bench-row-fail">
@@ -963,7 +963,7 @@
    <td class="num">1690</td>
    <td class="num">9525</td>
    <td class="num">964</td>
-   <td class="num">20000</td>
+   <td class="num">19945.03</td>
    <td class="text">tuned</td>
    </tr>
    <tr class="bench-row-fail">
@@ -974,7 +974,7 @@
    <td class="num">1690</td>
    <td class="num">9525</td>
    <td class="num">964</td>
-   <td class="num">20000</td>
+   <td class="num">19945.03</td>
    <td class="text">default</td>
    </tr>
    <tr class="bench-row-fail">
@@ -985,7 +985,7 @@
    <td class="num">2033</td>
    <td class="num">9973</td>
    <td class="num">731</td>
-   <td class="num">19916.611</td>
+   <td class="num">16420.159</td>
    <td class="text">tuned</td>
    </tr>
    <tr class="bench-row-fail">
@@ -996,7 +996,7 @@
    <td class="num">2033</td>
    <td class="num">9973</td>
    <td class="num">731</td>
-   <td class="num">19916.611</td>
+   <td class="num">16420.159</td>
    <td class="text">default</td>
    </tr>
    <tr class="bench-row-fail">

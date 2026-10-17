@@ -8,9 +8,11 @@ separately.
 
 A legacy success is a start whose harness count is under the cap and whose
 force norm is at the problem stop. A v2 success also has Hessian index 0.
-The problem files do not give ``energy_tol``, ``rmsd_tol``, or a per-start
-reference geometry, so energy and Kabsch RMSD are not applied. The primary
-failure class is ``optbench.failures.classify_failure``.
+On LJ38 that index is the vibrational index: translations and rotations are
+removed, and a curvature counts only below ``-curvature_tolerance`` of the
+force stop. The problem files do not give ``energy_tol``, ``rmsd_tol``, or a
+per-start reference geometry, so energy and Kabsch RMSD are not applied. The
+primary failure class is ``optbench.failures.classify_failure``.
 """
 
 from __future__ import annotations
@@ -32,7 +34,7 @@ from optbench.potentials import (
 )
 from optbench.potserver import RgpotCounter
 from optbench.score import score_v2, summarize_capped
-from optbench.stationary import negative_index
+from optbench.stationary import curvature_tolerance, negative_index, vibrational_eigenvalues
 from optbench.v2 import collect_provenance, write_starts
 
 EIGENVALUE_TOL = 1e-6
@@ -57,15 +59,20 @@ def _options(template: dict) -> tuple[str, dict]:
     return method, options
 
 
-def _index_at(kind: str, point: list[float], box) -> tuple[int, list[float]]:
+def _index_at(kind: str, point: list[float], box, force_stop: float) -> tuple[int, list[float]]:
     import numpy as np
 
     if kind == "lj":
         matrix = lennard_jones_hessian(point)
+        # A free cluster. The six rigid modes are not vibrational curvature,
+        # and at a 0.01 stop the rotations are not an exact kernel.
+        values = vibrational_eigenvalues(matrix, point, rotations=True)
+        tolerance = curvature_tolerance(force_stop, float(np.linalg.norm(matrix)))
     else:
         matrix = morse_bulk_hessian(point, box)
-    values = np.linalg.eigvalsh(matrix)
-    return negative_index(values.tolist(), EIGENVALUE_TOL), [float(value) for value in values[:8]]
+        values = np.linalg.eigvalsh(matrix).tolist()
+        tolerance = EIGENVALUE_TOL
+    return negative_index(values, tolerance), [float(value) for value in values[:8]]
 
 
 def _minimize_job(job: dict) -> dict:
@@ -139,16 +146,16 @@ def _minimize_job(job: dict) -> dict:
             except Exception as exc:
                 if not error:
                     error = f"{type(exc).__name__}: {exc}"
+    gtol = float(job["gtol"])
+    cap = int(job["cap"])
     hessian_index = None
     min_eigenvalues: list[float] = []
     if point is not None and (not error or "force-call cap" in error):
         try:
-            hessian_index, min_eigenvalues = _index_at(job["kind"], point, job["box"])
+            hessian_index, min_eigenvalues = _index_at(job["kind"], point, job["box"], gtol)
         except Exception as exc:
             if not error:
                 error = f"{type(exc).__name__}: {exc}"
-    gtol = float(job["gtol"])
-    cap = int(job["cap"])
     stopped = report is not None and report.stop == rgmin.Stop.Tolerance
     finite = (
         point is not None
@@ -245,6 +252,11 @@ def _dat(summary: dict, template: dict, metrics: dict, commit: str, version: str
         "# energy and Kabsch RMSD were not applied: the problem file has no energy_tol, rmsd_tol, or per-start reference.",
         "# energy_min and energy_max are the final potential values on the recorded points.",
     ]
+    if str(template.get("problem")) == "minimization/lj38":
+        lines.append(
+            "# LJ38 index removes the six rigid modes. A curvature is negative only below "
+            "-max(force_norm, 1e-8*||H||_F, 1e-6)."
+        )
     note = str(template.get("note") or "").strip()
     if note:
         lines.append("# " + note.replace("\n", " "))
