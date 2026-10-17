@@ -40,6 +40,52 @@ def _fmt(value: float) -> str:
     return f"{value:.10g}"
 
 
+def _installed_python_dirs(root: Path) -> list[Path]:
+    """Site directories for a prefix, plus paths named by editable ``.pth`` files.
+
+    A pixi prefix stores the server package in ``lib/python3.12/site-packages``.
+    The Debian layout is ``lib/python3/dist-packages``. An editable schema
+    checkout is a path written into a ``.pth`` file and is only imported
+    when that path is on ``sys.path``.
+    """
+    lib = root / "lib"
+    sites: list[Path] = []
+    seen: set[Path] = set()
+    if lib.is_dir():
+        for child in sorted(lib.glob("python*")):
+            for name in ("site-packages", "dist-packages"):
+                path = child / name
+                if not path.is_dir():
+                    continue
+                resolved = path.resolve()
+                if resolved in seen:
+                    continue
+                seen.add(resolved)
+                sites.append(path)
+    extras: list[Path] = []
+    for site in sites:
+        for pth in sorted(site.glob("*.pth")):
+            try:
+                lines = pth.read_text(encoding="utf-8").splitlines()
+            except OSError:
+                continue
+            for line in lines:
+                entry = line.strip()
+                if not entry or entry.startswith("#") or entry.startswith("import "):
+                    continue
+                path = Path(entry)
+                if path.is_dir() and path not in extras:
+                    extras.append(path)
+    ordered: list[Path] = []
+    for path in extras + sites:
+        if path not in ordered:
+            ordered.append(path)
+    py_deps = root / "py"
+    if py_deps.is_dir() and py_deps not in ordered:
+        ordered.append(py_deps)
+    return ordered
+
+
 def prepare_client_env(client: Path) -> None:
     """Put the installed eOn libraries on the path this process already uses.
 
@@ -48,9 +94,7 @@ def prepare_client_env(client: Path) -> None:
     """
     root = client.resolve().parent.parent
     lib = root / "lib"
-    py_pkg = lib / "python3" / "dist-packages"
-    py_deps = root / "py"
-    entries = [str(py_pkg), str(py_deps)]
+    entries = [str(path) for path in _installed_python_dirs(root)]
     for entry in reversed(entries):
         if entry not in sys.path:
             sys.path.insert(0, entry)
