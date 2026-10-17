@@ -86,8 +86,8 @@
    <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
    <td>minimization</td>
-   <td>optbench/lj38-robustness</td>
-   <td>fd26a60ddd48</td>
+   <td>optbench/rgmin-0.4.1</td>
+   <td>9a2e7ff11fa6</td>
    <td><a href="https://github.com/OmniPotentRPC/rgmin">https://github.com/OmniPotentRPC/rgmin</a></td>
    </tr>
    </tbody></table>
@@ -97,19 +97,19 @@
    <tr data-problem="minimization/lj38" data-template="rgmin/lj38-dogleg">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="template">rgmin/lj38-dogleg</td>
-   <td data-field="version">rgmin 0.4.0</td>
-   <td data-field="commit">24236559f381</td>
+   <td data-field="version">rgmin 0.4.1</td>
+   <td data-field="commit">9a2e7ff11fa6</td>
    <td data-field="par2_mean">81.881</td>
    <td data-field="mean_calls">81.881</td>
    <td data-field="median_calls">79</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/morse-bulk" data-template="rgmin/morse-newton-tuned">
+   <tr data-problem="minimization/morse-bulk" data-template="rgmin/morse-newton">
    <td>Morse bulk</td>
-   <td data-field="template">rgmin/morse-newton-tuned</td>
-   <td data-field="version">rgmin 0.4.0</td>
-   <td data-field="commit">24236559f381</td>
+   <td data-field="template">rgmin/morse-newton</td>
+   <td data-field="version">rgmin 0.4.1</td>
+   <td data-field="commit">9a2e7ff11fa6</td>
    <td data-field="par2_mean">8.35</td>
    <td data-field="mean_calls">8.35</td>
    <td data-field="median_calls">9</td>

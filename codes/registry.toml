@@ -39,10 +39,10 @@ id = "rgmin"
 name = "rgmin"
 role = "minimization"
 repository = "https://github.com/OmniPotentRPC/rgmin"
-ref = "optbench/lj38-robustness"
-commit = "fd26a60ddd48796dcad4af26e4609f64c1c8a842"
+ref = "optbench/rgmin-0.4.1"
+commit = "9a2e7ff11fa65826f9e847856bee10d3d70b7156"
 committed = "2026-10-17"
-note = "Minimizers, version 0.4.1, branch optbench/lj38-robustness. A Lennard-Jones 38 entry uses the harness force counter. L-BFGS memory defaults to 10. SR1 and SR2 step in a trust region. DIIS searches the GDIIS image. Adam scales its direction to unit per-atom length."
+note = "Minimizers, version 0.4.1, branch optbench/rgmin-0.4.1. A Lennard-Jones 38 entry uses the harness force counter. L-BFGS memory defaults to 10. A Cartesian solver starts with a per-atom cap of 0.2. SR1 and SR2 step in a trust region sized to that cap. DIIS searches the GDIIS image. Adam scales its direction to unit per-atom length."
 
 [[code]]
 id = "rgsaddle"
