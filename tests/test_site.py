@@ -90,7 +90,7 @@ def test_render_writes_the_front_page_table():
     assert "4d8b34baf1ba" in codes
     assert "1d71c9445018" in codes
     assert "e089a136910f" in codes
-    assert "8bea1002b06a" in codes
+    assert "c0db2b8d333c" in codes
 
 
 def test_legacy_rows_stay_and_v2_tables_use_recorded_counts():

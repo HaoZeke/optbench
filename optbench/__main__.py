@@ -70,21 +70,35 @@ def run(
     work: Path | None = None,
 ) -> None:
     """Run one problem template and write benchmark.dat."""
+    from optbench.campaign import load_template
     from optbench.campaign import run as run_campaign
 
-    summary = run_campaign(
-        root,
-        problem,
-        template,
-        client=_eon_client(client),
-        geometries=geometries,
-        output=output,
-        workers=workers,
-        work=work,
-    )
+    loaded = load_template(root, template)
+    if loaded["engine"] == "rgsaddle-band":
+        from optbench.rgsaddle_band import run as run_band
+
+        summary = run_band(
+            root,
+            problem,
+            template,
+            output=output,
+            workers=workers,
+        )
+    else:
+        summary = run_campaign(
+            root,
+            problem,
+            template,
+            client=_eon_client(client),
+            geometries=geometries,
+            output=output,
+            workers=workers,
+            work=work,
+        )
+    calls = summary.get("force_calls")
     print(
         f"{summary['problem']} {summary['template']} "
-        f"force_calls={summary['force_calls']} nfailed={summary['nfailed']} "
+        f"force_calls={calls} nfailed={summary['nfailed']} "
         f"starts={summary['starts']}"
     )
 
