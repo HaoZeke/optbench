@@ -1,0 +1,16 @@
+id = "rgmin/lj38-bfgs"
+engine = "rgmin"
+problem = "minimization/lj38"
+code = "rgmin"
+code_version = "0.4.0"
+commit = "24236559f3815847cac89ba0a7be634ce0beb4a9"
+algorithm = "BFGS"
+tuning = "default"
+note = "Default row. gtol and the iteration budget are the problem force norm and the force-call cap. No displacement cap. istep is 0.1. The session line search is strong Wolfe. The same values are used for every start."
+
+[rgmin]
+method = "bfgs"
+
+[ini.Optimizer]
+converged_force = 0.01
+max_iterations = 10000

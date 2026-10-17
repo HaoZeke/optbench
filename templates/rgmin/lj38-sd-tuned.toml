@@ -1,0 +1,17 @@
+id = "rgmin/lj38-sd-tuned"
+engine = "rgmin"
+problem = "minimization/lj38"
+code = "rgmin"
+code_version = "0.4.0"
+commit = "24236559f3815847cac89ba0a7be634ce0beb4a9"
+algorithm = "SD"
+tuning = "tuned"
+note = "Tuned row. One parameter set for every start: maxstep 0.2, the per-atom displacement cap (rgmin atom_maxmove, the same quantity as the eOn max move). gtol and the iteration budget are the problem stop. No other knob is changed, and nothing is chosen per start."
+
+[rgmin]
+method = "sd"
+maxstep = 0.2
+
+[ini.Optimizer]
+converged_force = 0.01
+max_iterations = 10000

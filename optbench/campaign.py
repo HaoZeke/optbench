@@ -255,6 +255,22 @@ def run(
     resume: bool = False,
 ) -> dict:
     template = load_template(root, template_name)
+    if template["engine"] == "rgmin":
+        from .runners.rgmin_min import run_template
+
+        problem = resolve_problem(root, problem_name)
+        stated = template.get("problem")
+        if stated and stated != problem["id"]:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return run_template(
+            root,
+            problem,
+            template,
+            geometries=geometries,
+            output=output,
+            workers=workers,
+            work=work,
+        )
     if template["engine"] in {"ase", "sella"}:
         from .ase_sella import run_template
 
