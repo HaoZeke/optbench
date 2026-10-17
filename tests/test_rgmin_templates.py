@@ -4,7 +4,7 @@ from pathlib import Path
 from optbench.campaign import _check_stop, list_templates, resolve_problem, run
 
 ROOT = Path(__file__).resolve().parents[1]
-COMMIT = "9a2e7ff11fa65826f9e847856bee10d3d70b7156"
+COMMIT = "f15726f1c7983b3656c5dbc2f812e2394e144500"
 METHODS = {
     "lbfgs",
     "fire",
