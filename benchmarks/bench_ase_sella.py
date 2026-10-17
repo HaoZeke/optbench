@@ -109,9 +109,6 @@ def _bind(spec: dict):
     seeds, starts = _axes(spec)
     template_id = spec["id"]
     cap = int(spec["stop"]["max_force_calls"])
-    images = 1
-    if spec.get("reducer") == "per_image":
-        images = int(spec["neb"]["moving_images"])
 
     class _Benchmark(_TrackedSearch):
         param_names = ["seed", "start"]
@@ -123,7 +120,7 @@ def _bind(spec: dict):
             from optbench.ase_sella import run_point
 
             record = run_point(ROOT, template_id, start, int(seed))
-            calls = float(record["force_calls"]) / images
+            calls = float(record["force_calls"])
             success = bool(record["success"]) and calls < cap
             reasons = [str(reason) for reason in record.get("reasons") or []]
             if "error" in reasons and "crash" not in reasons:

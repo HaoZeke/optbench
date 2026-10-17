@@ -219,6 +219,11 @@ def benchmark_text(summary: dict, template: dict) -> str:
         "force_calls_min",
         "force_calls_max",
         "force_calls_median",
+        "force_calls_per_image",
+        "force_calls_per_image_min",
+        "force_calls_per_image_max",
+        "force_calls_per_image_median",
+        "call_unit",
         "nfailed",
     ):
         value = summary.get(key)

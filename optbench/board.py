@@ -5,13 +5,18 @@
 PAR-2 reducer, and writes one table per problem plus the Dolan-Moré
 profile and a cost-versus-success scatter.
 
+The ranked cost of a band method is the harness force-call total across
+every image. The per-image mean divides that same total by the problem's
+image count, and every code on the problem uses that divisor.
+
 A row whose start count is below the problem's full set is partial.
-One-start asv grids are partial. The full set is the problem file's
-sample, or the Morse archive when that file gives no sample count.
-It is not the largest campaign file. A result that sets ``ranked false``
-stays off the ranked table. Partial rows stay in the output.
-Two files for the same problem, template, and code version are both
-kept; the one that matches ``codes/registry.toml`` is marked current.
+An asv result that covers one start is a smoke run and is partial.
+The full set is the problem file's sample, or the Morse archive when
+that file gives no sample count. It is not the largest campaign file.
+A result that sets ``ranked false`` stays off the ranked table.
+Partial rows stay in the output. A campaign file and an asv track for
+the same run are one row. Only the newest full version of a template
+is ranked. Older full versions stay in the history list.
 """
 
 from __future__ import annotations
@@ -32,7 +37,7 @@ from .dat import DatError, parse_lenient
 from .failures import FAILURES
 from .problems import load_all
 from .profile import performance_profile, profile_cost
-from .score import score_v2
+from .score import normalize_start, score_v2
 from .site import campaign_problem
 from .v2 import parse_repetitions
 
@@ -174,37 +179,45 @@ def _geometry_key(start) -> str:
 
 
 def _image_count(problem: dict | None, template: dict | None, fields: dict[str, str]) -> int | None:
-    """Images that turn a band total into the per-image cost the table uses."""
-    reducer = str(fields.get("reducer") or (template or {}).get("reducer") or "")
-    if reducer != "per_image":
-        return None
-    neb = (template or {}).get("neb") or {}
-    raw = neb.get("moving_images")
+    """Moving images for this problem. Every code uses the same divisor."""
+    band = (problem or {}).get("band") or {}
+    raw = band.get("interior_images")
     if raw in (None, ""):
-        raw = ((problem or {}).get("band") or {}).get("interior_images")
+        neb = (template or {}).get("neb") or {}
+        raw = neb.get("moving_images")
+    if raw in (None, ""):
+        raw = fields.get("images")
     if raw in (None, ""):
         return None
     images = int(raw)
     return images if images > 0 else None
 
 
-def _scale_raw(raw: dict, images: int | None) -> dict:
-    """Divide a band total by the image count.
+_PER_IMAGE_TRACK = 'float(record["force_calls"]) / images'
 
-    A start that already stores ``raw`` beside a per-image ``force_calls``,
-    or names ``force_calls_neb``, is left as recorded.
-    """
-    if not images or "raw" in raw or raw.get("count_key") == "force_calls_neb":
-        return raw
-    if raw.get("force_calls") is None:
-        return raw
-    try:
-        per_image = float(raw["force_calls"]) / images
-    except (TypeError, ValueError):
-        return raw
-    scaled = dict(raw)
-    scaled["force_calls"] = per_image
-    return scaled
+
+def _commit_divides_band(root: Path, commit: str) -> bool:
+    """True when that commit's ASE benchmark stored a per-image quotient."""
+    cache = getattr(_commit_divides_band, "_cache", None)
+    if cache is None:
+        cache = {}
+        setattr(_commit_divides_band, "_cache", cache)
+    key = (str(root.resolve()), commit)
+    if key in cache:
+        return cache[key]
+    divides = False
+    if commit:
+        try:
+            text = subprocess.check_output(
+                ["git", "-C", str(root), "show", f"{commit}:benchmarks/bench_ase_sella.py"],
+                stderr=subprocess.DEVNULL,
+                text=True,
+            )
+        except (subprocess.CalledProcessError, FileNotFoundError, OSError):
+            text = ""
+        divides = _PER_IMAGE_TRACK in text
+    cache[key] = divides
+    return divides
 
 
 def _cap_of(problem: dict | None, template: dict | None, fields: dict[str, str]) -> int | None:
@@ -262,6 +275,13 @@ def _record_from_raw(raw: dict, cap: int | None, force_tol: float | None) -> dic
     if cap is not None and calls >= cap:
         success = False
     record: dict = {"force_calls": calls, "success": success, "start": raw.get("start") or raw.get("geometry")}
+    if raw.get("per_image") is not None:
+        try:
+            record["per_image"] = float(raw["per_image"])
+        except (TypeError, ValueError):
+            pass
+    if raw.get("call_unit"):
+        record["call_unit"] = str(raw["call_unit"])
     if success:
         return record
     if failure in FAILURES:
@@ -306,7 +326,7 @@ def _load_group_records(
     if "starts_jsonl" in group:
         collected = []
         for raw in _json_lines(group["starts_jsonl"]):
-            record = _record_from_raw(_scale_raw(raw, images), cap, force_tol)
+            record = _record_from_raw(normalize_start(raw, images), cap, force_tol)
             if record is not None:
                 collected.append(record)
         if collected:
@@ -314,7 +334,7 @@ def _load_group_records(
     if "starts" in group:
         collected = []
         for raw in _json_lines(group["starts"]):
-            record = _record_from_raw(_scale_raw(raw, images), cap, force_tol)
+            record = _record_from_raw(normalize_start(raw, images), cap, force_tol)
             if record is not None:
                 collected.append(record)
         if collected:
@@ -325,7 +345,7 @@ def _load_group_records(
         collected = []
         for run in runs:
             for raw in run.get("starts") or []:
-                record = _record_from_raw(_scale_raw(raw, images), cap, force_tol)
+                record = _record_from_raw(normalize_start(raw, images), cap, force_tol)
                 if record is not None:
                     collected.append(record)
         if collected:
@@ -405,8 +425,12 @@ def _blank_row(**values) -> dict:
         "comparable": False,
         "partial": False,
         "partial_reason": "",
-        "current": True,
+        "current": False,
+        "history": False,
         "registry_match": False,
+        "call_unit": "",
+        "mean_per_image": None,
+        "median_per_image": None,
         "n": 0,
         "full_n": None,
         "par2_mean": None,
@@ -443,6 +467,17 @@ def _score_records(records: list[dict], cap: int | None) -> dict:
     summary["median_calls"] = median_calls
     summary["min_calls"] = ordered[0]
     summary["max_calls"] = ordered[-1]
+    summary["call_unit"] = "total"
+    per_image = [record["per_image"] for record in records if record.get("per_image") is not None]
+    if len(per_image) == len(records):
+        per_ordered = sorted(per_image)
+        per_mid = len(per_ordered) // 2
+        if len(per_ordered) % 2:
+            median_per = per_ordered[per_mid]
+        else:
+            median_per = (per_ordered[per_mid - 1] + per_ordered[per_mid]) / 2
+        summary["mean_per_image"] = sum(per_image) / len(per_image)
+        summary["median_per_image"] = median_per
     return summary
 
 
@@ -461,43 +496,130 @@ def _apply_summary(row: dict, summary: dict, records: list[dict]) -> None:
     row["min_calls"] = summary["min_calls"]
     row["max_calls"] = summary["max_calls"]
     row["nfailed"] = summary["nfailed"]
+    row["call_unit"] = summary.get("call_unit") or "total"
+    row["mean_per_image"] = summary.get("mean_per_image")
+    row["median_per_image"] = summary.get("median_per_image")
     row["failures"] = {name: summary[f"n_{name}"] for name in FAILURES}
     row["_profile"] = [(_geometry_key(record.get("start")), profile_cost(record)) for record in records]
+
+
+def _source_parts(row: dict) -> set[str]:
+    return {part.strip() for part in str(row.get("source") or "").split(",") if part.strip()}
 
 
 def _mark_partial(row: dict, full_n: int | None) -> None:
     row["full_n"] = full_n
     n = int(row.get("n") or 0)
+    if row.get("_declared_partial"):
+        row["partial"] = True
+        row["partial_reason"] = row["_declared_partial"]
+        return
+    if _source_parts(row) == {"asv"} and n <= 1:
+        row["partial"] = True
+        if full_n:
+            row["partial_reason"] = f"smoke run; scored {n} of {full_n} starts"
+        else:
+            row["partial_reason"] = "smoke run; one start"
+        return
     if full_n is not None and n < full_n:
         row["partial"] = True
         row["partial_reason"] = f"scored {n} of {full_n} starts"
-        return
-    if full_n is None and row.get("source") == "asv" and n <= 1:
-        row["partial"] = True
-        row["partial_reason"] = "one-start grid; the problem states no full set"
         return
     row["partial"] = False
     row["partial_reason"] = ""
 
 
-def _mark_current(rows: list[dict]) -> None:
+def _version_key(text: str) -> tuple[int, ...]:
+    parts = [int(piece) for piece in re.split(r"[^0-9]+", str(text)) if piece]
+    return tuple(parts)
+
+
+def _mark_versions(rows: list[dict]) -> None:
+    """The newest full version of a template is current. Older full versions are history."""
     groups: dict[tuple, list[dict]] = defaultdict(list)
     for row in rows:
         template = row.get("template") or ""
         if not template:
-            row["current"] = True
+            row["history"] = False
+            row["current"] = bool(row.get("comparable") and not row.get("partial"))
             continue
-        groups[(row.get("problem"), template, row.get("code_version") or "")].append(row)
+        groups[(row.get("problem"), template)].append(row)
     for group in groups.values():
-        if len(group) == 1:
-            group[0]["current"] = True
-            continue
-        matching = [row for row in group if row.get("registry_match") and not row.get("partial") and row.get("comparable")]
-        pool = matching or [row for row in group if not row.get("partial") and row.get("comparable")] or list(group)
-        pool.sort(key=lambda row: (row.get("source") != "campaign", -len(str(row.get("commit") or "")), str(row.get("path"))))
-        winner = pool[0]
+        eligible = [row for row in group if row.get("comparable") and not row.get("partial")]
+        eligible_ids = {id(row) for row in eligible}
+        newest = max((_version_key(str(row.get("code_version") or "")) for row in eligible), default=None)
         for row in group:
-            row["current"] = row is winner
+            if id(row) in eligible_ids and _version_key(str(row.get("code_version") or "")) == newest:
+                row["current"] = True
+                row["history"] = False
+            elif id(row) in eligible_ids:
+                row["current"] = False
+                row["history"] = True
+            else:
+                row["current"] = False
+                row["history"] = False
+
+
+def _dedup_key(row: dict) -> tuple:
+    commit = str(row.get("commit") or "")
+    identity = commit[:12] if commit else str(row.get("path") or "")
+    return (
+        row.get("problem"),
+        row.get("template"),
+        row.get("code_version") or "",
+        identity,
+        row.get("n"),
+        row.get("par2_mean"),
+        row.get("mean_calls"),
+        row.get("median_calls"),
+        row.get("min_calls"),
+        row.get("max_calls"),
+        row.get("nfailed"),
+    )
+
+
+def _join_sources(rows: list[dict]) -> str:
+    found: list[str] = []
+    for row in rows:
+        for part in str(row.get("source") or "").split(","):
+            part = part.strip()
+            if part and part not in found:
+                found.append(part)
+    found.sort(key=lambda name: (name != "campaign", name))
+    return ", ".join(found)
+
+
+def _collapse_run(group: list[dict]) -> dict:
+    ordered = sorted(
+        group,
+        key=lambda row: ("campaign" not in _source_parts(row), str(row.get("path") or "")),
+    )
+    base = dict(ordered[0])
+    paths: list[str] = []
+    asv_commits: list[str] = []
+    for row in ordered:
+        path = str(row.get("path") or "")
+        if path and path not in paths:
+            paths.append(path)
+        asv_commit = str(row.get("asv_commit") or "")
+        if asv_commit and asv_commit not in asv_commits:
+            asv_commits.append(asv_commit)
+    base["source"] = _join_sources(ordered)
+    base["path"] = "; ".join(paths)
+    if asv_commits:
+        base["asv_commit"] = asv_commits[0]
+    return base
+
+
+def _dedup(rows: list[dict]) -> list[dict]:
+    """One row per run. A campaign file and its asv track share that row."""
+    groups: dict[tuple, list[dict]] = defaultdict(list)
+    for row in rows:
+        groups[_dedup_key(row)].append(row)
+    merged = []
+    for group in groups.values():
+        merged.append(group[0] if len(group) == 1 else _collapse_run(group))
+    return merged
 
 
 def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, dict]) -> tuple[list[dict], list[dict]]:
@@ -687,13 +809,35 @@ def _asv_rows(root: Path, problems: dict[str, dict], templates: dict[str, dict])
                     )
                 )
                 continue
+            reducer = str((source_template or template or {}).get("reducer") or "")
+            images = _image_count(problem, source_template or template, {})
+            per_image_track = reducer == "per_image" and _commit_divides_band(root, str(result.commit_hash))
             records = []
-            for item in tracked:
-                raw = {"force_calls": item["force_calls"], "success": item["success"], "failure": item["failure"]}
-                record = _record_from_raw(raw, cap, _force_tol(problem, source_template or template))
-                if record is not None:
-                    record["start"] = tuple(item.get("params") or ())
-                    records.append(record)
+            try:
+                for item in tracked:
+                    raw = {
+                        "force_calls": item["force_calls"],
+                        "success": item["success"],
+                        "failure": item["failure"],
+                    }
+                    raw = normalize_start(raw, images, per_image_track=per_image_track)
+                    record = _record_from_raw(raw, cap, _force_tol(problem, source_template or template))
+                    if record is not None:
+                        record["start"] = tuple(item.get("params") or ())
+                        records.append(record)
+            except ValueError as exc:
+                unparsed.append(
+                    _blank_row(
+                        problem=problem_id,
+                        template=template_id,
+                        entry=f"{module_name}.{class_name}",
+                        source="asv",
+                        path=f"results/asv/{result.commit_hash}",
+                        asv_commit=str(result.commit_hash),
+                        note=str(exc),
+                    )
+                )
+                continue
             client_counter = module_name == "bench_lj38"
             row = _blank_row(
                 problem=problem_id,
@@ -741,8 +885,6 @@ def _rank_key(row: dict) -> tuple:
         score is None,
         float(score) if score is not None else 0.0,
         row.get("template") or "",
-        not row.get("current"),
-        row.get("source") != "campaign",
         row.get("path") or "",
     )
 
@@ -756,7 +898,7 @@ def build_board(root: Path) -> dict:
     campaign, unparsed = _campaign_rows(root, problems, templates)
     asv_rows, asv_unparsed, unmapped = _asv_rows(root, problems, templates)
     unparsed.extend(asv_unparsed)
-    rows = campaign + asv_rows
+    rows = _dedup(campaign + asv_rows)
     full_n: dict[str, int | None] = {}
     for problem_id, problem in problems.items():
         full_n[problem_id] = stated_full_n(root, problem)
@@ -767,26 +909,32 @@ def build_board(root: Path) -> dict:
         stated = full_n.get(problem_id)
         if problem_id and problem_id not in problems and stated is None:
             for row in group:
-                row["partial"] = True
-                row["partial_reason"] = row.get("_declared_partial") or "no problem file states the full set"
                 row["full_n"] = None
+                if row.get("_declared_partial"):
+                    row["partial"] = True
+                    row["partial_reason"] = row["_declared_partial"]
+                elif _source_parts(row) == {"asv"} and int(row.get("n") or 0) <= 1:
+                    row["partial"] = True
+                    row["partial_reason"] = "smoke run; one start"
+                else:
+                    row["partial"] = True
+                    row["partial_reason"] = "no problem file states the full set"
             continue
         for row in group:
             _mark_partial(row, stated)
-            if row.get("_declared_partial"):
-                row["partial"] = True
-                row["partial_reason"] = row["_declared_partial"]
     for row in rows:
         row["registry_match"] = _registry_match(row, registry)
-    _mark_current(rows)
+    _mark_versions(rows)
 
     problems_out: dict[str, dict] = {}
     partial: list[dict] = []
+    history: list[dict] = []
     not_comparable: list[dict] = []
     for problem_id in sorted(by_problem):
         group = by_problem[problem_id]
         ranked = []
         held_partial = []
+        held_history = []
         held_client = []
         for row in group:
             if row.get("partial"):
@@ -795,15 +943,20 @@ def build_board(root: Path) -> dict:
             elif not row.get("comparable"):
                 held_client.append(row)
                 not_comparable.append(row)
+            elif row.get("history"):
+                held_history.append(row)
+                history.append(row)
             else:
                 ranked.append(row)
         ranked.sort(key=_rank_key)
+        held_history.sort(key=_rank_key)
         problem = problems.get(problem_id) or {}
         problems_out[problem_id] = {
             "id": problem_id,
             "title": problem.get("title", problem_id),
             "full_n": full_n.get(problem_id),
             "ranked": [_public(row) for row in ranked],
+            "history": [_public(row) for row in held_history],
             "partial": [_public(row) for row in held_partial],
             "not_comparable": [_public(row) for row in held_client],
             "_ranked_rows": ranked,
@@ -812,6 +965,7 @@ def build_board(root: Path) -> dict:
         "schema": BOARD_SCHEMA,
         "problems": problems_out,
         "partial": [_public(row) for row in partial],
+        "history": [_public(row) for row in history],
         "unparsed": [_public(row) for row in unparsed],
         "unmapped": [_public(row) for row in unmapped],
         "not_comparable": [_public(row) for row in not_comparable],
@@ -954,37 +1108,87 @@ def _cell(value) -> str:
     return html.escape(str(value))
 
 
+def _show_per_image(problem: dict) -> bool:
+    rows = list(problem.get("ranked") or []) + list(problem.get("history") or [])
+    return any(row.get("mean_per_image") is not None for row in rows)
+
+
+def _headers(problem: dict) -> list[str]:
+    headers = [
+        "Template",
+        "Version",
+        "Commit",
+        "Source",
+        "Current",
+        "PAR-2",
+        "Success",
+        "Wilson low",
+        "Wilson high",
+        "Median calls",
+        "Mean calls",
+    ]
+    if _show_per_image(problem):
+        headers.append("Per-image mean")
+    headers.extend(["Failures", "n"])
+    return headers
+
+
+def _row_cells(row: dict, per_image: bool) -> str:
+    cells = [
+        _cell(row["template"] or row["entry"]),
+        f"{_cell(row['code'])} {_cell(row['code_version'])}",
+        _cell((row["commit"] or "")[:12]),
+        _cell(row.get("source") or ""),
+        "yes" if row.get("current") else "no",
+        _format_number(row["par2_mean"]),
+        _format_number(row["success_rate"]),
+        _format_number(row["wilson_low"]),
+        _format_number(row["wilson_high"]),
+        _format_number(row["median_calls"]),
+        _format_number(row["mean_calls"]),
+    ]
+    if per_image:
+        cells.append(_format_number(row.get("mean_per_image")))
+    cells.append(_cell(_failure_text(row["failures"])))
+    cells.append(str(row["n"]))
+    return "".join(f"<td>{cell}</td>" for cell in cells)
+
+
 def _table(problem: dict, plots: set[str]) -> str:
+    per_image = _show_per_image(problem)
+    headers = _headers(problem)
+    caption = (
+        "Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. "
+        "Wilson bounds are the 95% interval on the success rate."
+    )
+    if per_image:
+        caption += " Per-image mean divides that total by the problem's moving images, the same way for every code."
     lines = [
         f'<section class="bench" id="{_slug(problem["id"])}">',
         f"<h2>{_cell(problem['title'])}</h2>",
-        "<p>Ranked by the v2 PAR-2 mean. A partial row used fewer starts than the problem's full set and is not in this table.</p>",
+        "<p>Ranked by the v2 PAR-2 mean of the harness total. "
+        "Only the newest full version of a template is in this table. "
+        "A partial row, including a one-start asv smoke run, is not.</p>",
         "<table>",
-        "<caption>Lower PAR-2 is better. Wilson bounds are the 95% interval on the success rate.</caption>",
-        "<thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Current</th>"
-        "<th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th>"
-        "<th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>",
+        f"<caption>{caption}</caption>",
+        "<thead><tr>" + "".join(f"<th>{_cell(header)}</th>" for header in headers) + "</tr></thead><tbody>",
     ]
     for row in problem["ranked"]:
-        lines.append(
-            "<tr>"
-            f"<td>{_cell(row['template'] or row['entry'])}</td>"
-            f"<td>{_cell(row['code'])} {_cell(row['code_version'])}</td>"
-            f"<td>{_cell((row['commit'] or '')[:12])}</td>"
-            f"<td>{'yes' if row['current'] else 'no'}</td>"
-            f"<td>{_format_number(row['par2_mean'])}</td>"
-            f"<td>{_format_number(row['success_rate'])}</td>"
-            f"<td>{_format_number(row['wilson_low'])}</td>"
-            f"<td>{_format_number(row['wilson_high'])}</td>"
-            f"<td>{_format_number(row['median_calls'])}</td>"
-            f"<td>{_format_number(row['mean_calls'])}</td>"
-            f"<td>{_cell(_failure_text(row['failures']))}</td>"
-            f"<td>{row['n']}</td>"
-            "</tr>"
-        )
+        lines.append(f"<tr>{_row_cells(row, per_image)}</tr>")
     if not problem["ranked"]:
-        lines.append('<tr><td colspan="12">No full harness row.</td></tr>')
+        lines.append(f'<tr><td colspan="{len(headers)}">No full harness row.</td></tr>')
     lines.append("</tbody></table>")
+    if problem.get("history"):
+        lines.append("<h3>History</h3><ul>")
+        for row in problem["history"]:
+            lines.append(
+                "<li>"
+                f"{_cell(row['template'] or row['entry'])} {_cell(row['code'])} {_cell(row['code_version'])} "
+                f"{_cell(row['source'])} n={row['n']} PAR-2={_format_number(row['par2_mean'])} "
+                f"mean={_format_number(row['mean_calls'])}"
+                "</li>"
+            )
+        lines.append("</ul>")
     if problem["partial"]:
         lines.append("<h3>Partial</h3><ul>")
         for row in problem["partial"]:
@@ -1031,6 +1235,7 @@ def _strip_private(document: dict) -> dict:
         "ranked_count": document["ranked_count"],
         "problems": public_problems,
         "partial": document["partial"],
+        "history": document["history"],
         "unparsed": document["unparsed"],
         "unmapped": document["unmapped"],
         "not_comparable": document["not_comparable"],

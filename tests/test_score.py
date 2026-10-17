@@ -19,11 +19,15 @@ def test_summarize_all_keeps_a_failed_start_in_the_mean():
     assert summary["force_calls"] == round((34 + 68 + 1846) / 3)
 
 
-def test_divided_heptamer_mean_is_per_image():
+def test_divided_heptamer_mean_is_the_band_total():
     summary = summarize_divided([80, 160, 80000], [False, False, False], images=8, cap=10000)
     assert summary["nfailed"] == 1
-    assert summary["force_calls"] == 15
+    assert summary["force_calls"] == 120
     assert summary["force_calls_raw"] == 120
+    assert summary["force_calls_min"] == 80
+    assert summary["force_calls_max"] == 160
+    assert summary["force_calls_per_image"] == 15
+    assert summary["call_unit"] == "total"
 
 
 def test_half_even_matches_awk_printf():

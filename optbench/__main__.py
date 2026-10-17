@@ -312,12 +312,14 @@ def board(
         if not ranked:
             continue
         print(problem["id"])
-        for index, row in enumerate(ranked[:3], start=1):
+        for index, row in enumerate(ranked[:5], start=1):
             score = row["par2_mean"] if row["par2_mean"] is not None else row["median"]
             print(
                 f"  {index} {row['template'] or row['entry']} "
+                f"source={row['source']} "
                 f"par2_mean={row['par2_mean']} median={row['median']} "
                 f"mean_calls={row['mean_calls']} median_calls={row['median_calls']} "
+                f"mean_per_image={row.get('mean_per_image')} "
                 f"min_calls={row['min_calls']} max_calls={row['max_calls']} "
                 f"success_rate={row['success_rate']} "
                 f"n={row['n']} nfailed={row['nfailed']} score={score}"

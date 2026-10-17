@@ -283,10 +283,8 @@ def entry_id(template: dict) -> str:
 
 
 def raw_cap(template: dict) -> int:
-    cap = int(template["stop"]["max_force_calls"])
-    if template.get("reducer") == "per_image":
-        return cap * int(template["neb"]["moving_images"])
-    return cap
+    """Harness-call cap. A band stops on the total across every image."""
+    return int(template["stop"]["max_force_calls"])
 
 
 def _plain(value: object) -> object:
@@ -1244,18 +1242,14 @@ def _load_rows(path: Path) -> dict[str, dict]:
 def _v2_records(rows: list[dict], template: dict) -> tuple[list[dict], int]:
     """Costs that enter PAR-2.
 
-    A per-image row is scored as calls per moving image against the
-    per-image cap. Every other row uses the harness total and the
-    template cap. Failures are marked unsuccessful so the penalty is
-    ``2 * cap`` rather than the raw count.
+    The cost is the harness total, including a band that used to be
+    reported per image. Failures are marked unsuccessful so the penalty
+    is ``2 * cap`` rather than the raw count.
     """
     cap = int(template["stop"]["max_force_calls"])
-    images = 1
-    if template.get("reducer") == "per_image":
-        images = int(template["neb"]["moving_images"])
     records = []
     for row in rows:
-        calls = float(row["force_calls"]) / images
+        calls = float(row["force_calls"])
         success = bool(row.get("success")) and calls < cap
         records.append({"force_calls": calls, "success": success})
     return records, cap
@@ -1378,6 +1372,11 @@ def _write_dat(
         ("force_calls_max", summary.get("force_calls_max")),
         ("nfailed", summary.get("nfailed")),
         ("force_calls_raw", summary.get("force_calls_raw")),
+        ("force_calls_per_image", summary.get("force_calls_per_image")),
+        ("force_calls_per_image_min", summary.get("force_calls_per_image_min")),
+        ("force_calls_per_image_max", summary.get("force_calls_per_image_max")),
+        ("force_calls_per_image_median", summary.get("force_calls_per_image_median")),
+        ("call_unit", summary.get("call_unit")),
         ("starts", starts),
         ("code", template["code"]),
         ("code_version", template["code_version"]),
