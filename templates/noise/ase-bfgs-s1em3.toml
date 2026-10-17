@@ -1,0 +1,18 @@
+id = "noise/ase-bfgs-s1em3"
+engine = "noise"
+problem = "minimization/lj38-noise"
+code = "ASE"
+code_version = "3.29.0"
+commit = "f27c0005ae6a67ea419f996e728668865bfc1f86"
+algorithm = "BFGS"
+tuning = "default"
+note = "Default profile. BFGS and LBFGS use maxstep 0.1, the repaired LJ38 step. FIRE keeps the constructor defaults. The index is the clean Hessian with the rigid-mode rule."
+
+[solver]
+family = "ase"
+name = "BFGS"
+maxstep = 0.1
+
+[noise]
+sigma = 0.001
+seed = 20261016
