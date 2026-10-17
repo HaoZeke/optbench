@@ -8,15 +8,18 @@ clock. ``setup`` does not run the client, because asv does not time
 so a suite that runs ``time_search`` first times the search once.
 
 Every force evaluation goes through ``HarnessCounter``. eonclient is
-started with ``potential = ext_pot`` and ``Main.parallel`` false, so one
-``ExtPot`` serves every image. A per-image clone would put dimer
-rotations and the forward image on a second instance. Saddle-search
-``results.dat`` stores only the primary ``forceCallCounter``, and the
-harness would then disagree with that field. One instance records the
-same calls in both. An AKMC repetition still stores ``sad-fcs`` plus
-``mins-fcs`` beside the harness. That sum starts after the reactant
-evaluation, one real force call per search. ``python -m optbench.extpot`` forwards each ``force()``
-to a ``PotServer`` in this process. The server refuses a search call at
+started with ``potential = ext_pot``. Client inis set ``Main.parallel``
+false, so one ``ExtPot`` serves every image. A per-image clone would put
+dimer rotations and the forward image on a second instance.
+Saddle-search ``results.dat`` stores only the primary
+``forceCallCounter``, and the harness would then disagree with that
+field. One instance records the same calls in both. The AKMC server
+ini does not set ``parallel``: the Python schema rejects the option and
+exits before the first search. Those jobs keep the client default. The
+harness still counts every ``force()``. ``sad-fcs`` plus ``mins-fcs``
+starts after the reactant evaluation, one real force call per search.
+``python -m optbench.extpot`` forwards each ``force()`` to a
+``PotServer`` in this process. The server refuses a search call at
 ``failure_cap`` before the potential runs, and that run is ``cap``. The
 client's ``total_force_calls`` is stored beside the harness count. The
 binary is the develop source build named by ``EONCLIENT``
@@ -506,16 +509,26 @@ def _guard_uncounted(record: dict) -> dict:
     return record
 
 
+def _akmc_server_ini(template: dict, wrapper: Path) -> dict:
+    """Server config for one AKMC repetition.
+
+    ``Main.parallel`` stays unset. The Python schema has no such option
+    and ``ConfigClass.init`` exits when it is present. The C++ client
+    then keeps its default. ``_ini`` still sets the flag for the runs
+    the client parses itself.
+    """
+    ini = json.loads(json.dumps(template["ini"]))
+    ini["Potential"] = {"potential": "ext_pot", "ext_pot_path": str(wrapper)}
+    return ini
+
+
 def _run_akmc(template: dict, seed: int, work: Path, server, wrapper: Path, cap: int, passes: int, workers: int) -> dict:
     from optbench.eon_akmc import _one_repetition
     from optbench.potserver import remote_count
 
     # ``load_template`` stores a Path on ``_path``. Copy the ini only.
-    ini = json.loads(json.dumps(template["ini"]))
-    _one_potential(ini)
-    ini["Potential"] = {"potential": "ext_pot", "ext_pot_path": str(wrapper)}
     patched = dict(template)
-    patched["ini"] = ini
+    patched["ini"] = _akmc_server_ini(template, wrapper)
     row = _one_repetition(
         ROOT,
         patched,

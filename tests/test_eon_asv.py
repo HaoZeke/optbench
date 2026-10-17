@@ -8,6 +8,7 @@ from benchmarks.bench_eon_develop import (
     EonDevelopSaddlePtDimer,
     EonDevelopSaddlePtLanczos,
     EonDevelopTsLj38Lanczos,
+    _akmc_server_ini,
     _ini,
     classify_akmc,
     classify_client,
@@ -91,6 +92,18 @@ def test_ext_pot_ini_uses_one_potential(tmp_path):
     assert "potential = ext_pot" in text
     assert "parallel = false" in text
     assert "ext_pot_path" in text
+
+
+def test_akmc_server_ini_omits_parallel(tmp_path):
+    # The Python AKMC schema rejects Main.parallel and exits before a search.
+    bridge = tmp_path / "bridge"
+    ini = _akmc_server_ini(
+        {"ini": {"Main": {"job": "akmc", "random_seed": 1}, "Potential": {"potential": "morse_pt"}}},
+        bridge,
+    )
+    assert "parallel" not in ini["Main"]
+    assert ini["Main"]["job"] == "akmc"
+    assert ini["Potential"] == {"potential": "ext_pot", "ext_pot_path": str(bridge)}
 
 
 def test_lowest_mode_keeps_one_attempt_not_the_sum():
