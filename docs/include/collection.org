@@ -10,72 +10,6 @@
    <caption>Present runs. Fewer force calls first. The legacy 2014 scores follow.</caption>
    <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th><th class="num" scope="col">PAR-2</th><th class="text" scope="col">Tuning</th></tr></thead><tbody>
    <tr>
-   <td class="text">rgmin-lj38-bb</td>
-   <td class="text">rgmin</td>
-   <td class="text">0.4.0</td>
-   <td class="num">2</td>
-   <td class="num">2</td>
-   <td class="num">93</td>
-   <td class="num">0</td>
-   <td class="num">22.089</td>
-   <td class="text">default</td>
-   </tr>
-   <tr>
-   <td class="text">rgmin-lj38-diis</td>
-   <td class="text">rgmin</td>
-   <td class="text">0.4.0</td>
-   <td class="num">2</td>
-   <td class="num">2</td>
-   <td class="num">7</td>
-   <td class="num">0</td>
-   <td class="num">41.996</td>
-   <td class="text">default</td>
-   </tr>
-   <tr>
-   <td class="text">rgmin-lj38-fire</td>
-   <td class="text">rgmin</td>
-   <td class="text">0.4.0</td>
-   <td class="num">3</td>
-   <td class="num">2</td>
-   <td class="num">116</td>
-   <td class="num">0</td>
-   <td class="num">9721.133</td>
-   <td class="text">default</td>
-   </tr>
-   <tr>
-   <td class="text">rgmin-lj38-quickmin</td>
-   <td class="text">rgmin</td>
-   <td class="text">0.4.0</td>
-   <td class="num">3</td>
-   <td class="num">2</td>
-   <td class="num">116</td>
-   <td class="num">0</td>
-   <td class="num">9761.127</td>
-   <td class="text">default</td>
-   </tr>
-   <tr class="bench-row-fail">
-   <td class="text">rgmin-lj38-sr2</td>
-   <td class="text">rgmin</td>
-   <td class="text">0.4.0</td>
-   <td class="num">19</td>
-   <td class="num">5</td>
-   <td class="num">263</td>
-   <td class="num">831</td>
-   <td class="num">20000</td>
-   <td class="text">default</td>
-   </tr>
-   <tr>
-   <td class="text">rgmin-lj38-fire2</td>
-   <td class="text">rgmin</td>
-   <td class="text">0.4.0</td>
-   <td class="num">47</td>
-   <td class="num">2</td>
-   <td class="num">1704</td>
-   <td class="num">0</td>
-   <td class="num">19700.29</td>
-   <td class="text">default</td>
-   </tr>
-   <tr>
    <td class="text">rgmin-lj38-newton-tuned</td>
    <td class="text">rgmin</td>
    <td class="text">0.4.0</td>
@@ -87,14 +21,14 @@
    <td class="text">tuned</td>
    </tr>
    <tr>
-   <td class="text">rgmin-lj38-dogleg</td>
+   <td class="text">rgmin-lj38-newton</td>
    <td class="text">rgmin</td>
    <td class="text">0.4.0</td>
-   <td class="num">73</td>
+   <td class="num">67</td>
    <td class="num">35</td>
-   <td class="num">149</td>
+   <td class="num">128</td>
    <td class="num">0</td>
-   <td class="num">11451.713</td>
+   <td class="num">12784.212</td>
    <td class="text">default</td>
    </tr>
    <tr>
@@ -109,6 +43,17 @@
    <td class="text">tuned</td>
    </tr>
    <tr>
+   <td class="text">rgmin-lj38-dogleg</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.0</td>
+   <td class="num">82</td>
+   <td class="num">45</td>
+   <td class="num">162</td>
+   <td class="num">0</td>
+   <td class="num">10260.071</td>
+   <td class="text">default</td>
+   </tr>
+   <tr>
    <td class="text">rgmin-lj38-lbfgs-m100-tuned</td>
    <td class="text">rgmin</td>
    <td class="text">0.4.0</td>
@@ -118,6 +63,17 @@
    <td class="num">0</td>
    <td class="num">18533.477</td>
    <td class="text">tuned</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-lj38-lbfgs-m100</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.0</td>
+   <td class="num">177</td>
+   <td class="num">96</td>
+   <td class="num">468</td>
+   <td class="num">0</td>
+   <td class="num">18533.477</td>
+   <td class="text">default</td>
    </tr>
    <tr>
    <td class="text">pele-0.1.2-lbfgs-M100-maxstep0.2</td>
@@ -241,6 +197,17 @@
    <td class="text">tuned</td>
    </tr>
    <tr>
+   <td class="text">rgmin-lj38-lbfgs-m20</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.0</td>
+   <td class="num">203</td>
+   <td class="num">94</td>
+   <td class="num">464</td>
+   <td class="num">0</td>
+   <td class="num">18376.623</td>
+   <td class="text">default</td>
+   </tr>
+   <tr>
    <td class="text">eon-main-lj38-lbfgs</td>
    <td class="text">eOn</td>
    <td class="text">3.6.0</td>
@@ -261,6 +228,17 @@
    <td class="num">0</td>
    <td class="num">18238.995</td>
    <td class="text">tuned</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-lj38-lbfgs</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.0</td>
+   <td class="num">215</td>
+   <td class="num">91</td>
+   <td class="num">477</td>
+   <td class="num">0</td>
+   <td class="num">18238.995</td>
+   <td class="text">default</td>
    </tr>
    <tr>
    <td class="text">rgmin-lbfgs-0.3.0</td>
@@ -339,61 +317,6 @@
    <td class="num"></td>
    <td class="text"></td>
    </tr>
-   <tr>
-   <td class="text">rgmin-lj38-bfgs</td>
-   <td class="text">rgmin</td>
-   <td class="text">0.4.0</td>
-   <td class="num">295</td>
-   <td class="num">5</td>
-   <td class="num">1090</td>
-   <td class="num">0</td>
-   <td class="num">20000</td>
-   <td class="text">default</td>
-   </tr>
-   <tr class="bench-row-fail">
-   <td class="text">rgmin-lj38-sr1</td>
-   <td class="text">rgmin</td>
-   <td class="text">0.4.0</td>
-   <td class="num">304</td>
-   <td class="num">5</td>
-   <td class="num">1958</td>
-   <td class="num">625</td>
-   <td class="num">19924.839</td>
-   <td class="text">default</td>
-   </tr>
-   <tr>
-   <td class="text">rgmin-lj38-lbfgs-m100</td>
-   <td class="text">rgmin</td>
-   <td class="text">0.4.0</td>
-   <td class="num">305</td>
-   <td class="num">5</td>
-   <td class="num">2418</td>
-   <td class="num">0</td>
-   <td class="num">20000</td>
-   <td class="text">default</td>
-   </tr>
-   <tr>
-   <td class="text">rgmin-lj38-lbfgs-m20</td>
-   <td class="text">rgmin</td>
-   <td class="text">0.4.0</td>
-   <td class="num">311</td>
-   <td class="num">5</td>
-   <td class="num">2394</td>
-   <td class="num">0</td>
-   <td class="num">20000</td>
-   <td class="text">default</td>
-   </tr>
-   <tr>
-   <td class="text">rgmin-lj38-lbfgs</td>
-   <td class="text">rgmin</td>
-   <td class="text">0.4.0</td>
-   <td class="num">316</td>
-   <td class="num">5</td>
-   <td class="num">2410</td>
-   <td class="num">0</td>
-   <td class="num">19980.221</td>
-   <td class="text">default</td>
-   </tr>
    <tr class="bench-row-fail">
    <td class="text">ase-3.29.0-lj38-lbfgs-tuned</td>
    <td class="text">ASE</td>
@@ -415,17 +338,6 @@
    <td class="num">42</td>
    <td class="num"></td>
    <td class="text"></td>
-   </tr>
-   <tr>
-   <td class="text">rgmin-lj38-cg</td>
-   <td class="text">rgmin</td>
-   <td class="text">0.4.0</td>
-   <td class="num">376</td>
-   <td class="num">5</td>
-   <td class="num">4230</td>
-   <td class="num">0</td>
-   <td class="num">19880.217</td>
-   <td class="text">default</td>
    </tr>
    <tr>
    <td class="text">pele-0.1.2-lbfgs-M4-maxstep0.05</td>
@@ -527,6 +439,17 @@
    <td class="text">tuned</td>
    </tr>
    <tr>
+   <td class="text">rgmin-lj38-bb</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.0</td>
+   <td class="num">521</td>
+   <td class="num">172</td>
+   <td class="num">1596</td>
+   <td class="num">0</td>
+   <td class="num">15541.574</td>
+   <td class="text">default</td>
+   </tr>
+   <tr>
    <td class="text">eon-client-sd-twopoint</td>
    <td class="text">eOn</td>
    <td class="text">3.5.0</td>
@@ -625,6 +548,17 @@
    <td class="num">19843.929</td>
    <td class="text">tuned</td>
    </tr>
+   <tr>
+   <td class="text">rgmin-lj38-cg</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.0</td>
+   <td class="num">591</td>
+   <td class="num">191</td>
+   <td class="num">2329</td>
+   <td class="num">0</td>
+   <td class="num">19843.929</td>
+   <td class="text">default</td>
+   </tr>
    <tr class="bench-row-fail">
    <td class="text">ase-3.29.0-lj38-bfgs-default</td>
    <td class="text">ASE</td>
@@ -714,6 +648,17 @@
    <td class="text">tuned</td>
    </tr>
    <tr>
+   <td class="text">rgmin-lj38-fire</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.0</td>
+   <td class="num">712</td>
+   <td class="num">230</td>
+   <td class="num">2802</td>
+   <td class="num">0</td>
+   <td class="num">19960.839</td>
+   <td class="text">default</td>
+   </tr>
+   <tr>
    <td class="text">ase-3.29.0-lj38-fire-tuned</td>
    <td class="text">ASE</td>
    <td class="text">3.29.0</td>
@@ -758,6 +703,17 @@
    <td class="text">tuned</td>
    </tr>
    <tr>
+   <td class="text">rgmin-lj38-fire2</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.0</td>
+   <td class="num">731</td>
+   <td class="num">236</td>
+   <td class="num">2637</td>
+   <td class="num">0</td>
+   <td class="num">19922.731</td>
+   <td class="text">default</td>
+   </tr>
+   <tr>
    <td class="text">eon-3.5.0-fire</td>
    <td class="text">eOn</td>
    <td class="text">3.5.0</td>
@@ -791,17 +747,6 @@
    <td class="text">unlabelled</td>
    </tr>
    <tr>
-   <td class="text">rgmin-lj38-newton</td>
-   <td class="text">rgmin</td>
-   <td class="text">0.4.0</td>
-   <td class="num">893</td>
-   <td class="num">7</td>
-   <td class="num">2962</td>
-   <td class="num">0</td>
-   <td class="num">19502.742</td>
-   <td class="text">default</td>
-   </tr>
-   <tr>
    <td class="text">rgmin-lj38-bfgs-tuned</td>
    <td class="text">rgmin</td>
    <td class="text">0.4.0</td>
@@ -811,6 +756,17 @@
    <td class="num">0</td>
    <td class="num">15104.34</td>
    <td class="text">tuned</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-lj38-bfgs</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.0</td>
+   <td class="num">1010</td>
+   <td class="num">595</td>
+   <td class="num">2985</td>
+   <td class="num">0</td>
+   <td class="num">15104.34</td>
+   <td class="text">default</td>
    </tr>
    <tr>
    <td class="text">rgmin-sd-0.3.0</td>
@@ -833,6 +789,17 @@
    <td class="num">995</td>
    <td class="num">19982.064</td>
    <td class="text">tuned</td>
+   </tr>
+   <tr class="bench-row-fail">
+   <td class="text">rgmin-lj38-sr1</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.0</td>
+   <td class="num">1780</td>
+   <td class="num">1314</td>
+   <td class="num">2064</td>
+   <td class="num">995</td>
+   <td class="num">19982.064</td>
+   <td class="text">default</td>
    </tr>
    <tr>
    <td class="text">ase-3.29.0-lj38-preconfire-default</td>
@@ -867,15 +834,15 @@
    <td class="num">19982.327</td>
    <td class="text">tuned</td>
    </tr>
-   <tr class="bench-row-fail">
-   <td class="text">rgmin-lj38-sd</td>
+   <tr>
+   <td class="text">rgmin-lj38-quickmin</td>
    <td class="text">rgmin</td>
    <td class="text">0.4.0</td>
-   <td class="num">2812</td>
-   <td class="num">5</td>
-   <td class="num">9995</td>
-   <td class="num">294</td>
-   <td class="num">20000</td>
+   <td class="num">1897</td>
+   <td class="num">467</td>
+   <td class="num">8671</td>
+   <td class="num">0</td>
+   <td class="num">19982.327</td>
    <td class="text">default</td>
    </tr>
    <tr class="bench-row-fail">
@@ -978,6 +945,17 @@
    <td class="text">tuned</td>
    </tr>
    <tr class="bench-row-fail">
+   <td class="text">rgmin-lj38-sd</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.0</td>
+   <td class="num">5438</td>
+   <td class="num">1141</td>
+   <td class="num">9993</td>
+   <td class="num">200</td>
+   <td class="num">20000</td>
+   <td class="text">default</td>
+   </tr>
+   <tr class="bench-row-fail">
    <td class="text">rgmin-lj38-diis-tuned</td>
    <td class="text">rgmin</td>
    <td class="text">0.4.0</td>
@@ -987,6 +965,17 @@
    <td class="num">964</td>
    <td class="num">20000</td>
    <td class="text">tuned</td>
+   </tr>
+   <tr class="bench-row-fail">
+   <td class="text">rgmin-lj38-diis</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.0</td>
+   <td class="num">5450</td>
+   <td class="num">1690</td>
+   <td class="num">9525</td>
+   <td class="num">964</td>
+   <td class="num">20000</td>
+   <td class="text">default</td>
    </tr>
    <tr class="bench-row-fail">
    <td class="text">rgmin-lj38-adam-tuned</td>
@@ -1003,11 +992,11 @@
    <td class="text">rgmin-lj38-adam</td>
    <td class="text">rgmin</td>
    <td class="text">0.4.0</td>
-   <td class="num">6703</td>
-   <td class="num">2301</td>
-   <td class="num">9991</td>
-   <td class="num">733</td>
-   <td class="num">19904.065</td>
+   <td class="num">6692</td>
+   <td class="num">2033</td>
+   <td class="num">9973</td>
+   <td class="num">731</td>
+   <td class="num">19916.611</td>
    <td class="text">default</td>
    </tr>
    <tr class="bench-row-fail">
@@ -1021,8 +1010,19 @@
    <td class="num">20000</td>
    <td class="text">tuned</td>
    </tr>
+   <tr class="bench-row-fail">
+   <td class="text">rgmin-lj38-sr2</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.0</td>
+   <td class="num"></td>
+   <td class="num"></td>
+   <td class="num"></td>
+   <td class="num">1000</td>
+   <td class="num">20000</td>
+   <td class="text">default</td>
+   </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:91"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "rgmin-lj38-bb", "entry": "rgmin 0.4.0 rgmin-lj38-bb", "code": "rgmin", "value": 2.0, "best": true, "held": false, "failed": false}, {"id": "rgmin-lj38-diis", "entry": "rgmin 0.4.0 rgmin-lj38-diis", "code": "rgmin", "value": 2.0, "best": true, "held": false, "failed": false}, {"id": "rgmin-lj38-fire", "entry": "rgmin 0.4.0 rgmin-lj38-fire", "code": "rgmin", "value": 3.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-quickmin", "entry": "rgmin 0.4.0 rgmin-lj38-quickmin", "code": "rgmin", "value": 3.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-sr2", "entry": "rgmin 0.4.0 rgmin-lj38-sr2", "code": "rgmin", "value": 19.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-lj38-fire2", "entry": "rgmin 0.4.0 rgmin-lj38-fire2", "code": "rgmin", "value": 47.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-newton-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-newton-tuned", "code": "rgmin", "value": 67.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-dogleg", "entry": "rgmin 0.4.0 rgmin-lj38-dogleg", "code": "rgmin", "value": 73.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-dogleg-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-dogleg-tuned", "code": "rgmin", "value": 82.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-lbfgs-m100-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-lbfgs-m100-tuned", "code": "rgmin", "value": 177.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M100-maxstep0.2", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M100-maxstep0.2", "code": "pele", "value": 178.0, "best": false, "held": false, "failed": false}, {"id": "eon-main-lj38-lbfgs-m100", "entry": "eOn 3.6.0 eon-main-lj38-lbfgs-m100", "code": "eOn", "value": 180.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-lbfgs-m100", "entry": "eOn 3.5.0 eon-client-lbfgs-m100", "code": "eOn", "value": 181.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-lbfgs-m100", "entry": "Eon svn r2549 eon-svn-lbfgs-m100", "code": "Eon svn", "value": 181.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-lbfgs-m100", "entry": "eOn 3.5.0 eon-3.5.0-lbfgs-m100", "code": "eOn", "value": 181.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-lbfgs-m100", "entry": "Eon svn r2549 eon-svn-r2549-lbfgs-m100", "code": "Eon svn", "value": 181.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-lbfgs-m20", "entry": "eOn 3.5.0 eon-client-lbfgs-m20", "code": "eOn", "value": 201.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-lbfgs", "entry": "eOn 3.5.0 eon-3.5.0-lbfgs", "code": "eOn", "value": 201.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-lbfgs-m20", "entry": "Eon svn r2549 eon-svn-lbfgs-m20", "code": "Eon svn", "value": 202.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-lbfgs-m20", "entry": "Eon svn r2549 eon-svn-r2549-lbfgs-m20", "code": "Eon svn", "value": 202.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-lbfgs-m20-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-lbfgs-m20-tuned", "code": "rgmin", "value": 203.0, "best": false, "held": false, "failed": false}, {"id": "eon-main-lj38-lbfgs", "entry": "eOn 3.6.0 eon-main-lj38-lbfgs", "code": "eOn", "value": 204.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-lbfgs-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-lbfgs-tuned", "code": "rgmin", "value": 215.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lbfgs-0.3.0", "entry": "rgmin 0.3.0 e089a136910f rgmin-lbfgs-0.3.0", "code": "rgmin", "value": 216.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M20-maxstep0.1", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M20-maxstep0.1", "code": "pele", "value": 223.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M4-maxstep0.2", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M4-maxstep0.2", "code": "pele", "value": 228.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M10-maxstep0.1", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M10-maxstep0.1", "code": "pele", "value": 235.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M4-maxstep0.1", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M4-maxstep0.1", "code": "pele", "value": 248.0, "best": false, "held": false, "failed": false}, {"id": "sella-2.6.0-lj38-min-tuned", "entry": "Sella 2.6.0 sella-2.6.0-lj38-min-tuned", "code": "Sella", "value": 254.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M1-maxstep0.1", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M1-maxstep0.1", "code": "pele", "value": 286.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-bfgs", "entry": "rgmin 0.4.0 rgmin-lj38-bfgs", "code": "rgmin", "value": 295.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-sr1", "entry": "rgmin 0.4.0 rgmin-lj38-sr1", "code": "rgmin", "value": 304.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-lj38-lbfgs-m100", "entry": "rgmin 0.4.0 rgmin-lj38-lbfgs-m100", "code": "rgmin", "value": 305.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-lbfgs-m20", "entry": "rgmin 0.4.0 rgmin-lj38-lbfgs-m20", "code": "rgmin", "value": 311.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-lbfgs", "entry": "rgmin 0.4.0 rgmin-lj38-lbfgs", "code": "rgmin", "value": 316.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-lj38-lbfgs-tuned", "entry": "ASE 3.29.0 ase-3.29.0-lj38-lbfgs-tuned", "code": "ASE", "value": 356.0, "best": false, "held": false, "failed": true}, {"id": "ase-3.29.0-lj38-lbfgs-default", "entry": "ASE 3.29.0 ase-3.29.0-lj38-lbfgs-default", "code": "ASE", "value": 365.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-lj38-cg", "entry": "rgmin 0.4.0 rgmin-lj38-cg", "code": "rgmin", "value": 376.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M4-maxstep0.05", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M4-maxstep0.05", "code": "pele", "value": 381.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-cg", "entry": "Eon svn r2549 eon-svn-cg", "code": "Eon svn", "value": 453.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-cg", "entry": "Eon svn r2549 eon-svn-r2549-cg", "code": "Eon svn", "value": 453.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-cg", "entry": "eOn 3.5.0 eon-client-cg", "code": "eOn", "value": 454.0, "best": false, "held": false, "failed": false}, {"id": "eon-cg-3.5.0", "entry": "Eon 3.5.0 eon-cg-3.5.0", "code": "Eon", "value": 454.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-cg", "entry": "eOn 3.5.0 eon-3.5.0-cg", "code": "eOn", "value": 454.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-lj38-bfgs-tuned", "entry": "ASE 3.29.0 ase-3.29.0-lj38-bfgs-tuned", "code": "ASE", "value": 461.0, "best": false, "held": false, "failed": true}, {"id": "ase-3.29.0-lj38-bfgslinesearch-tuned", "entry": "ASE 3.29.0 ase-3.29.0-lj38-bfgslinesearch-tuned", "code": "ASE", "value": 506.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-bb-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-bb-tuned", "code": "rgmin", "value": 521.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-sd-twopoint", "entry": "eOn 3.5.0 eon-client-sd-twopoint", "code": "eOn", "value": 532.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-sd-twopoint", "entry": "eOn 3.5.0 eon-3.5.0-sd-twopoint", "code": "eOn", "value": 532.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-bfgs-0.3.0", "entry": "rgmin 0.3.0 rgmin-bfgs-0.3.0", "code": "rgmin", "value": 538.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-sd-twopoint", "entry": "Eon svn r2549 eon-svn-sd-twopoint", "code": "Eon svn", "value": 539.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-sd-twopoint", "entry": "Eon svn r2549 eon-svn-r2549-sd-twopoint", "code": "Eon svn", "value": 539.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-bb-0.3.0", "entry": "rgmin 0.3.0 rgmin-bb-0.3.0", "code": "rgmin", "value": 541.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-lj38-bfgslinesearch-default", "entry": "ASE 3.29.0 ase-3.29.0-lj38-bfgslinesearch-default", "code": "ASE", "value": 561.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-sr1-0.3.0", "entry": "rgmin 0.3.0 rgmin-sr1-0.3.0", "code": "rgmin", "value": 566.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-cg-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-cg-tuned", "code": "rgmin", "value": 591.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-lj38-bfgs-default", "entry": "ASE 3.29.0 ase-3.29.0-lj38-bfgs-default", "code": "ASE", "value": 656.0, "best": false, "held": false, "failed": true}, {"id": "ase-3.29.0-lj38-preconlbfgs-default", "entry": "ASE 3.29.0 ase-3.29.0-lj38-preconlbfgs-default", "code": "ASE", "value": 690.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-fire2-0.3.0", "entry": "rgmin 0.3.0 rgmin-fire2-0.3.0", "code": "rgmin", "value": 694.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-fire-0.3.0", "entry": "rgmin 0.3.0 rgmin-fire-0.3.0", "code": "rgmin", "value": 699.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-lj38-fire-default", "entry": "ASE 3.29.0 ase-3.29.0-lj38-fire-default", "code": "ASE", "value": 706.0, "best": false, "held": false, "failed": false}, {"id": "ase-fire-3.29.0", "entry": "ASE 3.29.0 ase-fire-3.29.0", "code": "ASE", "value": 706.0, "best": false, "held": false, "failed": false}, {"id": "sella-2.6.0-lj38-min-default", "entry": "Sella 2.6.0 sella-2.6.0-lj38-min-default", "code": "Sella", "value": 710.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-fire-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-fire-tuned", "code": "rgmin", "value": 712.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-lj38-fire-tuned", "entry": "ASE 3.29.0 ase-3.29.0-lj38-fire-tuned", "code": "ASE", "value": 720.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-fire", "entry": "eOn 3.5.0 eon-client-fire", "code": "eOn", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-fire", "entry": "Eon svn r2549 eon-svn-fire", "code": "Eon svn", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-fire2-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-fire2-tuned", "code": "rgmin", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-fire", "entry": "eOn 3.5.0 eon-3.5.0-fire", "code": "eOn", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-fire", "entry": "Eon svn r2549 eon-svn-r2549-fire", "code": "Eon svn", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-nlcg-0.3.0", "entry": "rgmin 0.3.0 rgmin-nlcg-0.3.0", "code": "rgmin", "value": 733.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-newton", "entry": "rgmin 0.4.0 rgmin-lj38-newton", "code": "rgmin", "value": 893.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-bfgs-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-bfgs-tuned", "code": "rgmin", "value": 1010.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-sd-0.3.0", "entry": "rgmin 0.3.0 rgmin-sd-0.3.0", "code": "rgmin", "value": 1260.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-sr1-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-sr1-tuned", "code": "rgmin", "value": 1780.0, "best": false, "held": false, "failed": true}, {"id": "ase-3.29.0-lj38-preconfire-default", "entry": "ASE 3.29.0 ase-3.29.0-lj38-preconfire-default", "code": "ASE", "value": 1817.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-quickmin-0.3.0", "entry": "rgmin 0.3.0 rgmin-quickmin-0.3.0", "code": "rgmin", "value": 1849.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-lj38-quickmin-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-quickmin-tuned", "code": "rgmin", "value": 1897.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-sd", "entry": "rgmin 0.4.0 rgmin-lj38-sd", "code": "rgmin", "value": 2812.0, "best": false, "held": false, "failed": true}, {"id": "eon-client-qm", "entry": "eOn 3.5.0 eon-client-qm", "code": "eOn", "value": 3514.0, "best": false, "held": false, "failed": true}, {"id": "eon-3.5.0-qm", "entry": "eOn 3.5.0 eon-3.5.0-qm", "code": "eOn", "value": 3514.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-qm", "entry": "Eon svn r2549 eon-svn-qm", "code": "Eon svn", "value": 3547.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-r2549-qm", "entry": "Eon svn r2549 eon-svn-r2549-qm", "code": "Eon svn", "value": 3547.0, "best": false, "held": false, "failed": true}, {"id": "eon-client-sd", "entry": "eOn 3.5.0 eon-client-sd", "code": "eOn", "value": 4901.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-sd", "entry": "Eon svn r2549 eon-svn-sd", "code": "Eon svn", "value": 4901.0, "best": false, "held": false, "failed": true}, {"id": "eon-3.5.0-sd", "entry": "eOn 3.5.0 eon-3.5.0-sd", "code": "eOn", "value": 4901.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-r2549-sd", "entry": "Eon svn r2549 eon-svn-r2549-sd", "code": "Eon svn", "value": 4901.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-lj38-sd-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-sd-tuned", "code": "rgmin", "value": 5438.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-lj38-diis-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-diis-tuned", "code": "rgmin", "value": 5450.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-lj38-adam-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-adam-tuned", "code": "rgmin", "value": 6692.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-lj38-adam", "entry": "rgmin 0.4.0 rgmin-lj38-adam", "code": "rgmin", "value": 6703.0, "best": false, "held": false, "failed": true}]}</script></figure>
+   <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:90"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "rgmin-lj38-newton-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-newton-tuned", "code": "rgmin", "value": 67.0, "best": true, "held": false, "failed": false}, {"id": "rgmin-lj38-newton", "entry": "rgmin 0.4.0 rgmin-lj38-newton", "code": "rgmin", "value": 67.0, "best": true, "held": false, "failed": false}, {"id": "rgmin-lj38-dogleg-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-dogleg-tuned", "code": "rgmin", "value": 82.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-dogleg", "entry": "rgmin 0.4.0 rgmin-lj38-dogleg", "code": "rgmin", "value": 82.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-lbfgs-m100-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-lbfgs-m100-tuned", "code": "rgmin", "value": 177.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-lbfgs-m100", "entry": "rgmin 0.4.0 rgmin-lj38-lbfgs-m100", "code": "rgmin", "value": 177.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M100-maxstep0.2", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M100-maxstep0.2", "code": "pele", "value": 178.0, "best": false, "held": false, "failed": false}, {"id": "eon-main-lj38-lbfgs-m100", "entry": "eOn 3.6.0 eon-main-lj38-lbfgs-m100", "code": "eOn", "value": 180.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-lbfgs-m100", "entry": "eOn 3.5.0 eon-client-lbfgs-m100", "code": "eOn", "value": 181.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-lbfgs-m100", "entry": "Eon svn r2549 eon-svn-lbfgs-m100", "code": "Eon svn", "value": 181.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-lbfgs-m100", "entry": "eOn 3.5.0 eon-3.5.0-lbfgs-m100", "code": "eOn", "value": 181.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-lbfgs-m100", "entry": "Eon svn r2549 eon-svn-r2549-lbfgs-m100", "code": "Eon svn", "value": 181.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-lbfgs-m20", "entry": "eOn 3.5.0 eon-client-lbfgs-m20", "code": "eOn", "value": 201.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-lbfgs", "entry": "eOn 3.5.0 eon-3.5.0-lbfgs", "code": "eOn", "value": 201.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-lbfgs-m20", "entry": "Eon svn r2549 eon-svn-lbfgs-m20", "code": "Eon svn", "value": 202.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-lbfgs-m20", "entry": "Eon svn r2549 eon-svn-r2549-lbfgs-m20", "code": "Eon svn", "value": 202.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-lbfgs-m20-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-lbfgs-m20-tuned", "code": "rgmin", "value": 203.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-lbfgs-m20", "entry": "rgmin 0.4.0 rgmin-lj38-lbfgs-m20", "code": "rgmin", "value": 203.0, "best": false, "held": false, "failed": false}, {"id": "eon-main-lj38-lbfgs", "entry": "eOn 3.6.0 eon-main-lj38-lbfgs", "code": "eOn", "value": 204.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-lbfgs-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-lbfgs-tuned", "code": "rgmin", "value": 215.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-lbfgs", "entry": "rgmin 0.4.0 rgmin-lj38-lbfgs", "code": "rgmin", "value": 215.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lbfgs-0.3.0", "entry": "rgmin 0.3.0 e089a136910f rgmin-lbfgs-0.3.0", "code": "rgmin", "value": 216.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M20-maxstep0.1", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M20-maxstep0.1", "code": "pele", "value": 223.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M4-maxstep0.2", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M4-maxstep0.2", "code": "pele", "value": 228.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M10-maxstep0.1", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M10-maxstep0.1", "code": "pele", "value": 235.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M4-maxstep0.1", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M4-maxstep0.1", "code": "pele", "value": 248.0, "best": false, "held": false, "failed": false}, {"id": "sella-2.6.0-lj38-min-tuned", "entry": "Sella 2.6.0 sella-2.6.0-lj38-min-tuned", "code": "Sella", "value": 254.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M1-maxstep0.1", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M1-maxstep0.1", "code": "pele", "value": 286.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-lj38-lbfgs-tuned", "entry": "ASE 3.29.0 ase-3.29.0-lj38-lbfgs-tuned", "code": "ASE", "value": 356.0, "best": false, "held": false, "failed": true}, {"id": "ase-3.29.0-lj38-lbfgs-default", "entry": "ASE 3.29.0 ase-3.29.0-lj38-lbfgs-default", "code": "ASE", "value": 365.0, "best": false, "held": false, "failed": true}, {"id": "pele-0.1.2-lbfgs-M4-maxstep0.05", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M4-maxstep0.05", "code": "pele", "value": 381.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-cg", "entry": "Eon svn r2549 eon-svn-cg", "code": "Eon svn", "value": 453.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-cg", "entry": "Eon svn r2549 eon-svn-r2549-cg", "code": "Eon svn", "value": 453.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-cg", "entry": "eOn 3.5.0 eon-client-cg", "code": "eOn", "value": 454.0, "best": false, "held": false, "failed": false}, {"id": "eon-cg-3.5.0", "entry": "Eon 3.5.0 eon-cg-3.5.0", "code": "Eon", "value": 454.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-cg", "entry": "eOn 3.5.0 eon-3.5.0-cg", "code": "eOn", "value": 454.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-lj38-bfgs-tuned", "entry": "ASE 3.29.0 ase-3.29.0-lj38-bfgs-tuned", "code": "ASE", "value": 461.0, "best": false, "held": false, "failed": true}, {"id": "ase-3.29.0-lj38-bfgslinesearch-tuned", "entry": "ASE 3.29.0 ase-3.29.0-lj38-bfgslinesearch-tuned", "code": "ASE", "value": 506.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-bb-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-bb-tuned", "code": "rgmin", "value": 521.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-bb", "entry": "rgmin 0.4.0 rgmin-lj38-bb", "code": "rgmin", "value": 521.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-sd-twopoint", "entry": "eOn 3.5.0 eon-client-sd-twopoint", "code": "eOn", "value": 532.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-sd-twopoint", "entry": "eOn 3.5.0 eon-3.5.0-sd-twopoint", "code": "eOn", "value": 532.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-bfgs-0.3.0", "entry": "rgmin 0.3.0 rgmin-bfgs-0.3.0", "code": "rgmin", "value": 538.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-sd-twopoint", "entry": "Eon svn r2549 eon-svn-sd-twopoint", "code": "Eon svn", "value": 539.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-sd-twopoint", "entry": "Eon svn r2549 eon-svn-r2549-sd-twopoint", "code": "Eon svn", "value": 539.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-bb-0.3.0", "entry": "rgmin 0.3.0 rgmin-bb-0.3.0", "code": "rgmin", "value": 541.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-lj38-bfgslinesearch-default", "entry": "ASE 3.29.0 ase-3.29.0-lj38-bfgslinesearch-default", "code": "ASE", "value": 561.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-sr1-0.3.0", "entry": "rgmin 0.3.0 rgmin-sr1-0.3.0", "code": "rgmin", "value": 566.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-cg-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-cg-tuned", "code": "rgmin", "value": 591.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-cg", "entry": "rgmin 0.4.0 rgmin-lj38-cg", "code": "rgmin", "value": 591.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-lj38-bfgs-default", "entry": "ASE 3.29.0 ase-3.29.0-lj38-bfgs-default", "code": "ASE", "value": 656.0, "best": false, "held": false, "failed": true}, {"id": "ase-3.29.0-lj38-preconlbfgs-default", "entry": "ASE 3.29.0 ase-3.29.0-lj38-preconlbfgs-default", "code": "ASE", "value": 690.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-fire2-0.3.0", "entry": "rgmin 0.3.0 rgmin-fire2-0.3.0", "code": "rgmin", "value": 694.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-fire-0.3.0", "entry": "rgmin 0.3.0 rgmin-fire-0.3.0", "code": "rgmin", "value": 699.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-lj38-fire-default", "entry": "ASE 3.29.0 ase-3.29.0-lj38-fire-default", "code": "ASE", "value": 706.0, "best": false, "held": false, "failed": false}, {"id": "ase-fire-3.29.0", "entry": "ASE 3.29.0 ase-fire-3.29.0", "code": "ASE", "value": 706.0, "best": false, "held": false, "failed": false}, {"id": "sella-2.6.0-lj38-min-default", "entry": "Sella 2.6.0 sella-2.6.0-lj38-min-default", "code": "Sella", "value": 710.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-fire-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-fire-tuned", "code": "rgmin", "value": 712.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-fire", "entry": "rgmin 0.4.0 rgmin-lj38-fire", "code": "rgmin", "value": 712.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-lj38-fire-tuned", "entry": "ASE 3.29.0 ase-3.29.0-lj38-fire-tuned", "code": "ASE", "value": 720.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-fire", "entry": "eOn 3.5.0 eon-client-fire", "code": "eOn", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-fire", "entry": "Eon svn r2549 eon-svn-fire", "code": "Eon svn", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-fire2-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-fire2-tuned", "code": "rgmin", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-fire2", "entry": "rgmin 0.4.0 rgmin-lj38-fire2", "code": "rgmin", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-fire", "entry": "eOn 3.5.0 eon-3.5.0-fire", "code": "eOn", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-fire", "entry": "Eon svn r2549 eon-svn-r2549-fire", "code": "Eon svn", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-nlcg-0.3.0", "entry": "rgmin 0.3.0 rgmin-nlcg-0.3.0", "code": "rgmin", "value": 733.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-bfgs-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-bfgs-tuned", "code": "rgmin", "value": 1010.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-bfgs", "entry": "rgmin 0.4.0 rgmin-lj38-bfgs", "code": "rgmin", "value": 1010.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-sd-0.3.0", "entry": "rgmin 0.3.0 rgmin-sd-0.3.0", "code": "rgmin", "value": 1260.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-sr1-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-sr1-tuned", "code": "rgmin", "value": 1780.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-lj38-sr1", "entry": "rgmin 0.4.0 rgmin-lj38-sr1", "code": "rgmin", "value": 1780.0, "best": false, "held": false, "failed": true}, {"id": "ase-3.29.0-lj38-preconfire-default", "entry": "ASE 3.29.0 ase-3.29.0-lj38-preconfire-default", "code": "ASE", "value": 1817.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-quickmin-0.3.0", "entry": "rgmin 0.3.0 rgmin-quickmin-0.3.0", "code": "rgmin", "value": 1849.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-lj38-quickmin-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-quickmin-tuned", "code": "rgmin", "value": 1897.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-quickmin", "entry": "rgmin 0.4.0 rgmin-lj38-quickmin", "code": "rgmin", "value": 1897.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-qm", "entry": "eOn 3.5.0 eon-client-qm", "code": "eOn", "value": 3514.0, "best": false, "held": false, "failed": true}, {"id": "eon-3.5.0-qm", "entry": "eOn 3.5.0 eon-3.5.0-qm", "code": "eOn", "value": 3514.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-qm", "entry": "Eon svn r2549 eon-svn-qm", "code": "Eon svn", "value": 3547.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-r2549-qm", "entry": "Eon svn r2549 eon-svn-r2549-qm", "code": "Eon svn", "value": 3547.0, "best": false, "held": false, "failed": true}, {"id": "eon-client-sd", "entry": "eOn 3.5.0 eon-client-sd", "code": "eOn", "value": 4901.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-sd", "entry": "Eon svn r2549 eon-svn-sd", "code": "Eon svn", "value": 4901.0, "best": false, "held": false, "failed": true}, {"id": "eon-3.5.0-sd", "entry": "eOn 3.5.0 eon-3.5.0-sd", "code": "eOn", "value": 4901.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-r2549-sd", "entry": "Eon svn r2549 eon-svn-r2549-sd", "code": "Eon svn", "value": 4901.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-lj38-sd-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-sd-tuned", "code": "rgmin", "value": 5438.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-lj38-sd", "entry": "rgmin 0.4.0 rgmin-lj38-sd", "code": "rgmin", "value": 5438.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-lj38-diis-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-diis-tuned", "code": "rgmin", "value": 5450.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-lj38-diis", "entry": "rgmin 0.4.0 rgmin-lj38-diis", "code": "rgmin", "value": 5450.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-lj38-adam-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-adam-tuned", "code": "rgmin", "value": 6692.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-lj38-adam", "entry": "rgmin 0.4.0 rgmin-lj38-adam", "code": "rgmin", "value": 6692.0, "best": false, "held": false, "failed": true}]}</script></figure>
    <h3>Lennard-Jones 38 clusters with Gaussian force noise</h3>
    <p>no present run. <a href="generated/suites/minimization.html#lj38-noise">Legacy 2014 scores and the present table</a>.</p>
    <p>No present run is recorded.</p>

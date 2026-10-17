@@ -3,12 +3,12 @@
 # v2 success is under the cap, at the force stop, and Hessian index 0.
 # energy and Kabsch RMSD were not applied: the problem file has no energy_tol, rmsd_tol, or per-start reference.
 # energy_min and energy_max are the final potential values on the recorded points.
-# Default row. gtol and the iteration budget are the problem force norm and the force-call cap. No displacement cap. istep is 0.1. The session line search is strong Wolfe. The same values are used for every start.
-force_calls 304
-force_calls_min 5
-force_calls_max 1958
-nfailed 625
-median 92
+# Default row. gtol and the iteration budget are the problem force norm and the force-call cap. maxstep is 0.2, the per-atom displacement cap (rgmin atom_maxmove, the same quantity as the eOn max move and the rgmin ASE default). The session takes one trial of -istep*g with istep 0.1 and no line search; without this cap that trial leaves the Lennard-Jones cutoff. The same values are used for every start.
+force_calls 1780
+force_calls_min 1314
+force_calls_max 2064
+nfailed 995
+median 1941
 code rgmin
 code_version 0.4.0
 commit 24236559f3815847cac89ba0a7be634ce0beb4a9
@@ -16,14 +16,14 @@ algorithm SR1
 template rgmin/lj38-sr1
 tuning default
 counter harness
-par2_mean 19924.839
-wilson_low 0.00155658814041
-wilson_high 0.0102395562773
+par2_mean 19982.064
+wilson_low 0.000176546370626
+wilson_high 0.00564255859796
 par2_median 20000
 par2_median_low 20000
 par2_median_high 20000
-v2_nfailed 996
-v2_successes 4
+v2_nfailed 999
+v2_successes 1
 n 1000
-energy_min -161.093359461
-energy_max -1.91025076551e-05
+energy_min -168.160600589
+energy_max -119.434167165
