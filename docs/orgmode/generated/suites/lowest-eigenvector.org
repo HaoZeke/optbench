@@ -7,11 +7,61 @@
    <section class="bench" id="lj38">
    <h2>lj38</h2>
    <dl class="bench-rule">
+   <dt>Cap</dt><dd>10000 force calls</dd>
+   <dt>Starts</dt><dd>200</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <h3>Present runs</h3>
-   <p>No present run is recorded.</p>
+   <div class="bench-table"><table>
+   <caption>Present runs. Fewer force calls first. The legacy 2014 scores follow.</caption>
+   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th><th class="num" scope="col">PAR-2</th><th class="text" scope="col">Tuning</th></tr></thead><tbody>
+   <tr>
+   <td class="text">rgsaddle-0.2.2-mode-lanczos-loweig</td>
+   <td class="text">rgsaddle</td>
+   <td class="text">0.2.2</td>
+   <td class="num">26</td>
+   <td class="num">14</td>
+   <td class="num">98</td>
+   <td class="num">0</td>
+   <td class="num">26.1200000000</td>
+   <td class="text">default</td>
+   </tr>
+   <tr>
+   <td class="text">rgsaddle-0.2.2-mode-dimer-loweig</td>
+   <td class="text">rgsaddle</td>
+   <td class="text">0.2.2</td>
+   <td class="num">31</td>
+   <td class="num">23</td>
+   <td class="num">65</td>
+   <td class="num">0</td>
+   <td class="num">31.4000000000</td>
+   <td class="text">default</td>
+   </tr>
+   <tr>
+   <td class="text">rgsaddle-0.2.2-mode-lanczos-tuned-loweig</td>
+   <td class="text">rgsaddle</td>
+   <td class="text">0.2.2</td>
+   <td class="num">37</td>
+   <td class="num">18</td>
+   <td class="num">130</td>
+   <td class="num">0</td>
+   <td class="num">36.5600000000</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr>
+   <td class="text">rgsaddle-0.2.2-mode-dimer-tuned-loweig</td>
+   <td class="text">rgsaddle</td>
+   <td class="text">0.2.2</td>
+   <td class="num">46</td>
+   <td class="num">33</td>
+   <td class="num">126</td>
+   <td class="num">0</td>
+   <td class="num">45.5550000000</td>
+   <td class="text">tuned</td>
+   </tr>
+   </tbody></table></div>
+   <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:4"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "rgsaddle-0.2.2-mode-lanczos-loweig", "entry": "rgsaddle 0.2.2 rgsaddle-0.2.2-mode-lanczos-loweig", "code": "rgsaddle", "value": 26.0, "best": true, "held": false, "failed": false}, {"id": "rgsaddle-0.2.2-mode-dimer-loweig", "entry": "rgsaddle 0.2.2 rgsaddle-0.2.2-mode-dimer-loweig", "code": "rgsaddle", "value": 31.0, "best": false, "held": false, "failed": false}, {"id": "rgsaddle-0.2.2-mode-lanczos-tuned-loweig", "entry": "rgsaddle 0.2.2 rgsaddle-0.2.2-mode-lanczos-tuned-loweig", "code": "rgsaddle", "value": 37.0, "best": false, "held": false, "failed": false}, {"id": "rgsaddle-0.2.2-mode-dimer-tuned-loweig", "entry": "rgsaddle 0.2.2 rgsaddle-0.2.2-mode-dimer-tuned-loweig", "code": "rgsaddle", "value": 46.0, "best": false, "held": false, "failed": false}]}</script></figure>
    <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>

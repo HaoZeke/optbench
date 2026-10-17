@@ -122,11 +122,16 @@ def _check_stop(problem: dict, template: dict) -> int | None:
             raise ValueError("template gradient_norm is not the problem gradient norm")
     stated = convergence.get("max_force_calls")
     cap = int(stated) if stated is not None else None
-    # A band step is not one force call, so its iteration limit can sit
-    # under the force budget. A minimizer's iteration limit cannot.
+    # A minimizer step is one force call, so its iteration limit cannot sit
+    # under the force budget. A band step, a dimer rotation, and a saddle
+    # translation are not one force call, and their iteration limits can.
+    job = str(((template.get("ini") or {}).get("Main") or {}).get("job") or "")
+    step_is_force_call = job == "minimization" or (
+        job == "" and problem.get("suite") == "minimization" and "band" not in problem
+    )
     if (
         cap is not None
-        and "band" not in problem
+        and step_is_force_call
         and "max_iterations" in optimizer
         and int(optimizer["max_iterations"]) < cap
     ):
@@ -142,6 +147,8 @@ def _check_stop(problem: dict, template: dict) -> int | None:
         raw = stop.get("max_force_calls", stop.get("max_steps"))
         if raw is not None:
             cap = int(raw)
+    if cap is None and "max_iterations" in optimizer:
+        cap = int(optimizer["max_iterations"])
     return cap
 
 
@@ -267,6 +274,21 @@ def run(
             problem,
             template,
             geometries=geometries,
+            output=output,
+            workers=workers,
+            work=work,
+        )
+    if template["engine"] == "rgsaddle":
+        from .rgsaddle_minmode import run_template
+
+        problem = resolve_problem(root, problem_name)
+        stated = template.get("problem")
+        if stated and stated != problem["id"]:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return run_template(
+            root,
+            problem,
+            template,
             output=output,
             workers=workers,
             work=work,

@@ -7,13 +7,16 @@
    <section class="bench" id="LJ38">
    <h2>LJ38</h2>
    <dl class="bench-rule">
+   <dt>Stop</dt><dd>L2 norm of the force at or below 0.001 energy/distance</dd>
+   <dt>Cap</dt><dd>10000 force calls</dd>
+   <dt>Starts</dt><dd>200</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <h3>Present runs</h3>
    <div class="bench-table"><table>
    <caption>Present runs. Fewer force calls first. The legacy 2014 scores follow.</caption>
-   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th><th class="text" scope="col">Tuning</th></tr></thead><tbody>
+   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th><th class="num" scope="col">PAR-2</th><th class="text" scope="col">Tuning</th></tr></thead><tbody>
    <tr>
    <td class="text">sella-2.6.0-lj38-ts-default</td>
    <td class="text">Sella</td>
@@ -22,6 +25,7 @@
    <td class="num">25</td>
    <td class="num">257</td>
    <td class="num">0</td>
+   <td class="num"></td>
    <td class="text"></td>
    </tr>
    <tr class="bench-row-fail">
@@ -32,6 +36,7 @@
    <td class="num">34</td>
    <td class="num">1840</td>
    <td class="num">2</td>
+   <td class="num"></td>
    <td class="text"></td>
    </tr>
    <tr class="bench-row-fail">
@@ -42,7 +47,52 @@
    <td class="num">34</td>
    <td class="num">1846</td>
    <td class="num">2</td>
+   <td class="num"></td>
    <td class="text"></td>
+   </tr>
+   <tr>
+   <td class="text">rgsaddle-0.2.2-prfo-tuned-ts-lj38</td>
+   <td class="text">rgsaddle</td>
+   <td class="text">0.2.2</td>
+   <td class="num">193</td>
+   <td class="num">135</td>
+   <td class="num">1691</td>
+   <td class="num">0</td>
+   <td class="num">192.6000000000</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr class="bench-row-fail">
+   <td class="text">rgsaddle-0.2.2-prfo-ts-lj38</td>
+   <td class="text">rgsaddle</td>
+   <td class="text">0.2.2</td>
+   <td class="num">588</td>
+   <td class="num">260</td>
+   <td class="num">1592</td>
+   <td class="num">150</td>
+   <td class="num">15146.9950000000</td>
+   <td class="text">default</td>
+   </tr>
+   <tr class="bench-row-fail">
+   <td class="text">rgsaddle-0.2.2-dimer-rotskip-ts-lj38</td>
+   <td class="text">rgsaddle</td>
+   <td class="text">0.2.2</td>
+   <td class="num">640</td>
+   <td class="num">83</td>
+   <td class="num">7349</td>
+   <td class="num">74</td>
+   <td class="num">7803.1900000000</td>
+   <td class="text">default</td>
+   </tr>
+   <tr class="bench-row-fail">
+   <td class="text">rgsaddle-0.2.2-dimer-rotskip-tuned-ts-lj38</td>
+   <td class="text">rgsaddle</td>
+   <td class="text">0.2.2</td>
+   <td class="num">812</td>
+   <td class="num">80</td>
+   <td class="num">9574</td>
+   <td class="num">166</td>
+   <td class="num">16738.1050000000</td>
+   <td class="text">tuned</td>
    </tr>
    <tr class="bench-row-fail">
    <td class="text">eon-main-ts-lj38-dimer-m100</td>
@@ -52,6 +102,7 @@
    <td class="num">151</td>
    <td class="num">9299</td>
    <td class="num">12</td>
+   <td class="num"></td>
    <td class="text"></td>
    </tr>
    <tr class="bench-row-fail">
@@ -62,10 +113,77 @@
    <td class="num">151</td>
    <td class="num">9833</td>
    <td class="num">14</td>
+   <td class="num"></td>
    <td class="text"></td>
    </tr>
+   <tr class="bench-row-fail">
+   <td class="text">rgsaddle-0.2.2-lanczos-tuned-ts-lj38</td>
+   <td class="text">rgsaddle</td>
+   <td class="text">0.2.2</td>
+   <td class="num">2922</td>
+   <td class="num">447</td>
+   <td class="num">8862</td>
+   <td class="num">190</td>
+   <td class="num">19146.1200000000</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr class="bench-row-fail">
+   <td class="text">rgsaddle-0.2.2-lanczos-ts-lj38</td>
+   <td class="text">rgsaddle</td>
+   <td class="text">0.2.2</td>
+   <td class="num">3395</td>
+   <td class="num">860</td>
+   <td class="num">6482</td>
+   <td class="num">193</td>
+   <td class="num">19418.8200000000</td>
+   <td class="text">default</td>
+   </tr>
+   <tr class="bench-row-fail">
+   <td class="text">rgsaddle-0.2.2-dimer-fire-tuned-ts-lj38</td>
+   <td class="text">rgsaddle</td>
+   <td class="text">0.2.2</td>
+   <td class="num">4421</td>
+   <td class="num">1588</td>
+   <td class="num">9816</td>
+   <td class="num">153</td>
+   <td class="num">16338.9650000000</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr class="bench-row-fail">
+   <td class="text">rgsaddle-0.2.2-dimer-lbfgs-tuned-ts-lj38</td>
+   <td class="text">rgsaddle</td>
+   <td class="text">0.2.2</td>
+   <td class="num">4953</td>
+   <td class="num">4953</td>
+   <td class="num">4953</td>
+   <td class="num">199</td>
+   <td class="num">19924.7650000000</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr class="bench-row-fail">
+   <td class="text">rgsaddle-0.2.2-dimer-fire-ts-lj38</td>
+   <td class="text">rgsaddle</td>
+   <td class="text">0.2.2</td>
+   <td class="num">6374</td>
+   <td class="num">4824</td>
+   <td class="num">9108</td>
+   <td class="num">192</td>
+   <td class="num">19454.9800000000</td>
+   <td class="text">default</td>
+   </tr>
+   <tr class="bench-row-fail">
+   <td class="text">rgsaddle-0.2.2-dimer-lbfgs-ts-lj38</td>
+   <td class="text">rgsaddle</td>
+   <td class="text">0.2.2</td>
+   <td class="num"></td>
+   <td class="num"></td>
+   <td class="num"></td>
+   <td class="num">200</td>
+   <td class="num">20000.0000000000</td>
+   <td class="text">default</td>
+   </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:5"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "sella-2.6.0-lj38-ts-default", "entry": "Sella 2.6.0 sella-2.6.0-lj38-ts-default", "code": "Sella", "value": 69.0, "best": true, "held": false, "failed": false}, {"id": "sella-2.6.0-lj38-ts-tuned", "entry": "Sella 2.6.0 sella-2.6.0-lj38-ts-tuned", "code": "Sella", "value": 93.0, "best": false, "held": false, "failed": true}, {"id": "sella-2.6.0-ts-lj38", "entry": "Sella 2.6.0 sella-2.6.0-ts-lj38", "code": "Sella", "value": 93.0, "best": false, "held": false, "failed": true}, {"id": "eon-main-ts-lj38-dimer-m100", "entry": "eOn 3.6.0 eon-main-ts-lj38-dimer-m100", "code": "eOn", "value": 2015.0, "best": false, "held": false, "failed": true}, {"id": "eon-main-ts-lj38-dimer", "entry": "eOn 3.6.0 eon-main-ts-lj38-dimer", "code": "eOn", "value": 2083.0, "best": false, "held": false, "failed": true}]}</script></figure>
+   <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:14"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "sella-2.6.0-lj38-ts-default", "entry": "Sella 2.6.0 sella-2.6.0-lj38-ts-default", "code": "Sella", "value": 69.0, "best": true, "held": false, "failed": false}, {"id": "sella-2.6.0-lj38-ts-tuned", "entry": "Sella 2.6.0 sella-2.6.0-lj38-ts-tuned", "code": "Sella", "value": 93.0, "best": false, "held": false, "failed": true}, {"id": "sella-2.6.0-ts-lj38", "entry": "Sella 2.6.0 sella-2.6.0-ts-lj38", "code": "Sella", "value": 93.0, "best": false, "held": false, "failed": true}, {"id": "rgsaddle-0.2.2-prfo-tuned-ts-lj38", "entry": "rgsaddle 0.2.2 rgsaddle-0.2.2-prfo-tuned-ts-lj38", "code": "rgsaddle", "value": 193.0, "best": false, "held": false, "failed": false}, {"id": "rgsaddle-0.2.2-prfo-ts-lj38", "entry": "rgsaddle 0.2.2 rgsaddle-0.2.2-prfo-ts-lj38", "code": "rgsaddle", "value": 588.0, "best": false, "held": false, "failed": true}, {"id": "rgsaddle-0.2.2-dimer-rotskip-ts-lj38", "entry": "rgsaddle 0.2.2 rgsaddle-0.2.2-dimer-rotskip-ts-lj38", "code": "rgsaddle", "value": 640.0, "best": false, "held": false, "failed": true}, {"id": "rgsaddle-0.2.2-dimer-rotskip-tuned-ts-lj38", "entry": "rgsaddle 0.2.2 rgsaddle-0.2.2-dimer-rotskip-tuned-ts-lj38", "code": "rgsaddle", "value": 812.0, "best": false, "held": false, "failed": true}, {"id": "eon-main-ts-lj38-dimer-m100", "entry": "eOn 3.6.0 eon-main-ts-lj38-dimer-m100", "code": "eOn", "value": 2015.0, "best": false, "held": false, "failed": true}, {"id": "eon-main-ts-lj38-dimer", "entry": "eOn 3.6.0 eon-main-ts-lj38-dimer", "code": "eOn", "value": 2083.0, "best": false, "held": false, "failed": true}, {"id": "rgsaddle-0.2.2-lanczos-tuned-ts-lj38", "entry": "rgsaddle 0.2.2 rgsaddle-0.2.2-lanczos-tuned-ts-lj38", "code": "rgsaddle", "value": 2922.0, "best": false, "held": false, "failed": true}, {"id": "rgsaddle-0.2.2-lanczos-ts-lj38", "entry": "rgsaddle 0.2.2 rgsaddle-0.2.2-lanczos-ts-lj38", "code": "rgsaddle", "value": 3395.0, "best": false, "held": false, "failed": true}, {"id": "rgsaddle-0.2.2-dimer-fire-tuned-ts-lj38", "entry": "rgsaddle 0.2.2 rgsaddle-0.2.2-dimer-fire-tuned-ts-lj38", "code": "rgsaddle", "value": 4421.0, "best": false, "held": false, "failed": true}, {"id": "rgsaddle-0.2.2-dimer-lbfgs-tuned-ts-lj38", "entry": "rgsaddle 0.2.2 rgsaddle-0.2.2-dimer-lbfgs-tuned-ts-lj38", "code": "rgsaddle", "value": 4953.0, "best": false, "held": false, "failed": true}, {"id": "rgsaddle-0.2.2-dimer-fire-ts-lj38", "entry": "rgsaddle 0.2.2 rgsaddle-0.2.2-dimer-fire-ts-lj38", "code": "rgsaddle", "value": 6374.0, "best": false, "held": false, "failed": true}]}</script></figure>
    <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
@@ -182,13 +300,16 @@
    </section><section class="bench" id="pt-island">
    <h2>pt-island</h2>
    <dl class="bench-rule">
+   <dt>Stop</dt><dd>L2 norm of the force at or below 0.001 eV/Angstrom</dd>
+   <dt>Cap</dt><dd>10000 force calls</dd>
+   <dt>Starts</dt><dd>49</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <h3>Present runs</h3>
    <div class="bench-table"><table>
    <caption>Present runs. Fewer force calls first. The legacy 2014 scores follow.</caption>
-   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th><th class="text" scope="col">Tuning</th></tr></thead><tbody>
+   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th><th class="num" scope="col">PAR-2</th><th class="text" scope="col">Tuning</th></tr></thead><tbody>
    <tr>
    <td class="text">sella-2.6.0-pt-island-ts-default</td>
    <td class="text">Sella</td>
@@ -197,6 +318,7 @@
    <td class="num">41</td>
    <td class="num">128</td>
    <td class="num">0</td>
+   <td class="num"></td>
    <td class="text"></td>
    </tr>
    <tr>
@@ -207,7 +329,85 @@
    <td class="num">67</td>
    <td class="num">141</td>
    <td class="num">0</td>
+   <td class="num"></td>
    <td class="text"></td>
+   </tr>
+   <tr>
+   <td class="text">rgsaddle-0.2.2-pt-dimer-rotskip-ts-pt</td>
+   <td class="text">rgsaddle</td>
+   <td class="text">0.2.2</td>
+   <td class="num">224</td>
+   <td class="num">105</td>
+   <td class="num">3962</td>
+   <td class="num">0</td>
+   <td class="num">223.8979591837</td>
+   <td class="text">default</td>
+   </tr>
+   <tr>
+   <td class="text">rgsaddle-0.2.2-pt-dimer-rotskip-tuned-ts-pt</td>
+   <td class="text">rgsaddle</td>
+   <td class="text">0.2.2</td>
+   <td class="num">300</td>
+   <td class="num">103</td>
+   <td class="num">1589</td>
+   <td class="num">0</td>
+   <td class="num">299.6326530612</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr class="bench-row-fail">
+   <td class="text">rgsaddle-0.2.2-pt-lanczos-tuned-ts-pt</td>
+   <td class="text">rgsaddle</td>
+   <td class="text">0.2.2</td>
+   <td class="num">381</td>
+   <td class="num">198</td>
+   <td class="num">635</td>
+   <td class="num">24</td>
+   <td class="num">9990.3265306122</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr class="bench-row-fail">
+   <td class="text">rgsaddle-0.2.2-pt-dimer-lbfgs-tuned-ts-pt</td>
+   <td class="text">rgsaddle</td>
+   <td class="text">0.2.2</td>
+   <td class="num">561</td>
+   <td class="num">225</td>
+   <td class="num">5462</td>
+   <td class="num">18</td>
+   <td class="num">7701.7142857143</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr class="bench-row-fail">
+   <td class="text">rgsaddle-0.2.2-pt-lanczos-ts-pt</td>
+   <td class="text">rgsaddle</td>
+   <td class="text">0.2.2</td>
+   <td class="num">658</td>
+   <td class="num">298</td>
+   <td class="num">1273</td>
+   <td class="num">23</td>
+   <td class="num">9736.7959183673</td>
+   <td class="text">default</td>
+   </tr>
+   <tr class="bench-row-fail">
+   <td class="text">rgsaddle-0.2.2-pt-dimer-lbfgs-ts-pt</td>
+   <td class="text">rgsaddle</td>
+   <td class="text">0.2.2</td>
+   <td class="num">994</td>
+   <td class="num">502</td>
+   <td class="num">1846</td>
+   <td class="num">28</td>
+   <td class="num">11854.5102040816</td>
+   <td class="text">default</td>
+   </tr>
+   <tr>
+   <td class="text">rgsaddle-0.2.2-pt-dimer-fire-tuned-ts-pt</td>
+   <td class="text">rgsaddle</td>
+   <td class="text">0.2.2</td>
+   <td class="num">1097</td>
+   <td class="num">536</td>
+   <td class="num">3039</td>
+   <td class="num">0</td>
+   <td class="num">1096.8979591837</td>
+   <td class="text">tuned</td>
    </tr>
    <tr>
    <td class="text">eon-main-ts-pt-dimer</td>
@@ -217,6 +417,7 @@
    <td class="num">100</td>
    <td class="num">5894</td>
    <td class="num">0</td>
+   <td class="num"></td>
    <td class="text"></td>
    </tr>
    <tr>
@@ -227,10 +428,22 @@
    <td class="num">100</td>
    <td class="num">5889</td>
    <td class="num">0</td>
+   <td class="num"></td>
    <td class="text"></td>
    </tr>
+   <tr class="bench-row-fail">
+   <td class="text">rgsaddle-0.2.2-pt-dimer-fire-ts-pt</td>
+   <td class="text">rgsaddle</td>
+   <td class="text">0.2.2</td>
+   <td class="num">2926</td>
+   <td class="num">1206</td>
+   <td class="num">9879</td>
+   <td class="num">1</td>
+   <td class="num">3274.1428571429</td>
+   <td class="text">default</td>
+   </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:4"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "sella-2.6.0-pt-island-ts-default", "entry": "Sella 2.6.0 sella-2.6.0-pt-island-ts-default", "code": "Sella", "value": 74.0, "best": true, "held": false, "failed": false}, {"id": "sella-2.6.0-pt-island-ts-tuned", "entry": "Sella 2.6.0 sella-2.6.0-pt-island-ts-tuned", "code": "Sella", "value": 88.0, "best": false, "held": false, "failed": false}, {"id": "eon-main-ts-pt-dimer", "entry": "eOn 3.6.0 eon-main-ts-pt-dimer", "code": "eOn", "value": 1659.0, "best": false, "held": false, "failed": false}, {"id": "eon-main-ts-pt-dimer-m100", "entry": "eOn 3.6.0 eon-main-ts-pt-dimer-m100", "code": "eOn", "value": 1680.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:12"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "sella-2.6.0-pt-island-ts-default", "entry": "Sella 2.6.0 sella-2.6.0-pt-island-ts-default", "code": "Sella", "value": 74.0, "best": true, "held": false, "failed": false}, {"id": "sella-2.6.0-pt-island-ts-tuned", "entry": "Sella 2.6.0 sella-2.6.0-pt-island-ts-tuned", "code": "Sella", "value": 88.0, "best": false, "held": false, "failed": false}, {"id": "rgsaddle-0.2.2-pt-dimer-rotskip-ts-pt", "entry": "rgsaddle 0.2.2 rgsaddle-0.2.2-pt-dimer-rotskip-ts-pt", "code": "rgsaddle", "value": 224.0, "best": false, "held": false, "failed": false}, {"id": "rgsaddle-0.2.2-pt-dimer-rotskip-tuned-ts-pt", "entry": "rgsaddle 0.2.2 rgsaddle-0.2.2-pt-dimer-rotskip-tuned-ts-pt", "code": "rgsaddle", "value": 300.0, "best": false, "held": false, "failed": false}, {"id": "rgsaddle-0.2.2-pt-lanczos-tuned-ts-pt", "entry": "rgsaddle 0.2.2 rgsaddle-0.2.2-pt-lanczos-tuned-ts-pt", "code": "rgsaddle", "value": 381.0, "best": false, "held": false, "failed": true}, {"id": "rgsaddle-0.2.2-pt-dimer-lbfgs-tuned-ts-pt", "entry": "rgsaddle 0.2.2 rgsaddle-0.2.2-pt-dimer-lbfgs-tuned-ts-pt", "code": "rgsaddle", "value": 561.0, "best": false, "held": false, "failed": true}, {"id": "rgsaddle-0.2.2-pt-lanczos-ts-pt", "entry": "rgsaddle 0.2.2 rgsaddle-0.2.2-pt-lanczos-ts-pt", "code": "rgsaddle", "value": 658.0, "best": false, "held": false, "failed": true}, {"id": "rgsaddle-0.2.2-pt-dimer-lbfgs-ts-pt", "entry": "rgsaddle 0.2.2 rgsaddle-0.2.2-pt-dimer-lbfgs-ts-pt", "code": "rgsaddle", "value": 994.0, "best": false, "held": false, "failed": true}, {"id": "rgsaddle-0.2.2-pt-dimer-fire-tuned-ts-pt", "entry": "rgsaddle 0.2.2 rgsaddle-0.2.2-pt-dimer-fire-tuned-ts-pt", "code": "rgsaddle", "value": 1097.0, "best": false, "held": false, "failed": false}, {"id": "eon-main-ts-pt-dimer", "entry": "eOn 3.6.0 eon-main-ts-pt-dimer", "code": "eOn", "value": 1659.0, "best": false, "held": false, "failed": false}, {"id": "eon-main-ts-pt-dimer-m100", "entry": "eOn 3.6.0 eon-main-ts-pt-dimer-m100", "code": "eOn", "value": 1680.0, "best": false, "held": false, "failed": false}, {"id": "rgsaddle-0.2.2-pt-dimer-fire-ts-pt", "entry": "rgsaddle 0.2.2 rgsaddle-0.2.2-pt-dimer-fire-ts-pt", "code": "rgsaddle", "value": 2926.0, "best": false, "held": false, "failed": true}]}</script></figure>
    <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>

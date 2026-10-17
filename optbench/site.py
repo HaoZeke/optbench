@@ -229,6 +229,14 @@ def campaign_problem(stem: str) -> str | None:
         return "saddle-search/pt-island"
     if stem == "sella-2.6.0-ts-lj38":
         return "tsopt/LJ38"
+    if stem.startswith("rgsaddle-") and "loweig" in stem:
+        return "lowest-eigenvector/lj38"
+    if stem.startswith("rgsaddle-") and "saddle-pt" in stem:
+        return "saddle-search/pt-island"
+    if stem.startswith("rgsaddle-") and "ts-pt" in stem:
+        return "tsopt/pt-island"
+    if stem.startswith("rgsaddle-") and "ts-lj38" in stem:
+        return "tsopt/LJ38"
     if stem.startswith(("pele-", "eon-client-", "eon-svn-", "rgmin-")):
         return "minimization/lj38"
     return None

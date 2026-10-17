@@ -161,7 +161,7 @@ def test_templates_name_the_registry_commit():
     assert registry["commit"] == COMMIT
     found = []
     for template in list_templates(ROOT):
-        if not str(template["id"]).startswith("rgsaddle/"):
+        if template.get("engine") != "rgsaddle-band":
             continue
         found.append(template["id"])
         loaded = load_template(ROOT, template["id"])

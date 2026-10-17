@@ -7,7 +7,7 @@
    <section class="bench" id="pt-island">
    <h2>Pt heptamer island</h2>
    <dl class="bench-rule">
-   <dt>Stop</dt><dd>norm of the force at or below 0.001 eV/Angstrom</dd>
+   <dt>Stop</dt><dd>L2 norm of the force at or below 0.001 eV/Angstrom</dd>
    <dt>Goal</dt><dd>27 connected saddles below 1.5 eV</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    <dt>v2 cost</dt><dd>force_calls divided by total_searches in that repetition</dd>
