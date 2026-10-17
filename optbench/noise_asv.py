@@ -111,6 +111,7 @@ def write_results(root: Path, commit: str, *, started_at: int | None = None) -> 
         "durations": {},
         "version": 2,
     }
-    dest = root / "results" / "asv" / "cursor" / f"{commit}-uv-pip-py3.12.json"
+    # The other result files use asv's short hash in the name and the full hash inside.
+    dest = root / "results" / "asv" / "cursor" / f"{commit[:8]}-uv-pip-py3.12.json"
     dest.write_text(json.dumps(document, separators=(", ", ": ")), encoding="utf-8")
     return dest
