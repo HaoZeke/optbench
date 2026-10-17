@@ -11,7 +11,7 @@ nfailed 0
 median 222
 code rgmin
 code_version 0.4.1
-commit fd26a60ddd48796dcad4af26e4609f64c1c8a842
+commit 9a2e7ff11fa65826f9e847856bee10d3d70b7156
 algorithm ADAM
 template rgmin/morse-adam-tuned
 tuning tuned

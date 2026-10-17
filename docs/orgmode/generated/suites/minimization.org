@@ -18,6 +18,28 @@
    <caption>Present runs. Fewer force calls first. The legacy 2014 scores follow.</caption>
    <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th><th class="num" scope="col">PAR-2</th><th class="text" scope="col">Tuning</th></tr></thead><tbody>
    <tr>
+   <td class="text">rgmin-0.4.1-lj38-newton-tuned</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">67</td>
+   <td class="num">35</td>
+   <td class="num">128</td>
+   <td class="num">0</td>
+   <td class="num">166.337</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-lj38-newton</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">67</td>
+   <td class="num">35</td>
+   <td class="num">128</td>
+   <td class="num">0</td>
+   <td class="num">166.337</td>
+   <td class="text">default</td>
+   </tr>
+   <tr>
    <td class="text">rgmin-lj38-newton-tuned</td>
    <td class="text">rgmin</td>
    <td class="text">0.4.0</td>
@@ -40,6 +62,28 @@
    <td class="text">default</td>
    </tr>
    <tr>
+   <td class="text">rgmin-0.4.1-lj38-dogleg-tuned</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">82</td>
+   <td class="num">45</td>
+   <td class="num">162</td>
+   <td class="num">0</td>
+   <td class="num">81.881</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-lj38-dogleg</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">82</td>
+   <td class="num">45</td>
+   <td class="num">162</td>
+   <td class="num">0</td>
+   <td class="num">81.881</td>
+   <td class="text">default</td>
+   </tr>
+   <tr>
    <td class="text">rgmin-lj38-dogleg-tuned</td>
    <td class="text">rgmin</td>
    <td class="text">0.4.0</td>
@@ -59,6 +103,28 @@
    <td class="num">162</td>
    <td class="num">0</td>
    <td class="num">81.881</td>
+   <td class="text">default</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-lj38-lbfgs-m100-tuned</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">177</td>
+   <td class="num">96</td>
+   <td class="num">468</td>
+   <td class="num">0</td>
+   <td class="num">197.228</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-lj38-lbfgs-m100</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">177</td>
+   <td class="num">96</td>
+   <td class="num">468</td>
+   <td class="num">0</td>
+   <td class="num">197.228</td>
    <td class="text">default</td>
    </tr>
    <tr>
@@ -194,6 +260,28 @@
    <td class="text">unlabelled</td>
    </tr>
    <tr>
+   <td class="text">rgmin-0.4.1-lj38-lbfgs-m20-tuned</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">203</td>
+   <td class="num">94</td>
+   <td class="num">464</td>
+   <td class="num">0</td>
+   <td class="num">282.64</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-lj38-lbfgs-m20</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">203</td>
+   <td class="num">94</td>
+   <td class="num">464</td>
+   <td class="num">0</td>
+   <td class="num">282.64</td>
+   <td class="text">default</td>
+   </tr>
+   <tr>
    <td class="text">rgmin-lj38-lbfgs-m20-tuned</td>
    <td class="text">rgmin</td>
    <td class="text">0.4.0</td>
@@ -225,6 +313,28 @@
    <td class="num">0</td>
    <td class="num"></td>
    <td class="text"></td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-lj38-lbfgs-tuned</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">215</td>
+   <td class="num">91</td>
+   <td class="num">477</td>
+   <td class="num">0</td>
+   <td class="num">294.105</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-lj38-lbfgs</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">215</td>
+   <td class="num">91</td>
+   <td class="num">477</td>
+   <td class="num">0</td>
+   <td class="num">294.105</td>
+   <td class="text">default</td>
    </tr>
    <tr>
    <td class="text">rgmin-lj38-lbfgs-tuned</td>
@@ -436,6 +546,28 @@
    <td class="text"></td>
    </tr>
    <tr>
+   <td class="text">rgmin-0.4.1-lj38-bb-tuned</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">521</td>
+   <td class="num">172</td>
+   <td class="num">1596</td>
+   <td class="num">0</td>
+   <td class="num">639.474</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-lj38-bb</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">521</td>
+   <td class="num">172</td>
+   <td class="num">1596</td>
+   <td class="num">0</td>
+   <td class="num">639.474</td>
+   <td class="text">default</td>
+   </tr>
+   <tr>
    <td class="text">rgmin-lj38-bb-tuned</td>
    <td class="text">rgmin</td>
    <td class="text">0.4.0</td>
@@ -546,6 +678,28 @@
    <td class="text">unlabelled</td>
    </tr>
    <tr>
+   <td class="text">rgmin-0.4.1-lj38-cg-tuned</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">591</td>
+   <td class="num">191</td>
+   <td class="num">2329</td>
+   <td class="num">0</td>
+   <td class="num">669.237</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-lj38-cg</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">591</td>
+   <td class="num">191</td>
+   <td class="num">2329</td>
+   <td class="num">0</td>
+   <td class="num">669.237</td>
+   <td class="text">default</td>
+   </tr>
+   <tr>
    <td class="text">rgmin-lj38-cg-tuned</td>
    <td class="text">rgmin</td>
    <td class="text">0.4.0</td>
@@ -645,6 +799,28 @@
    <td class="text"></td>
    </tr>
    <tr>
+   <td class="text">rgmin-0.4.1-lj38-fire-tuned</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">712</td>
+   <td class="num">230</td>
+   <td class="num">2802</td>
+   <td class="num">0</td>
+   <td class="num">769.36</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-lj38-fire</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">712</td>
+   <td class="num">230</td>
+   <td class="num">2802</td>
+   <td class="num">0</td>
+   <td class="num">769.36</td>
+   <td class="text">default</td>
+   </tr>
+   <tr>
    <td class="text">rgmin-lj38-fire-tuned</td>
    <td class="text">rgmin</td>
    <td class="text">0.4.0</td>
@@ -700,6 +876,28 @@
    <td class="text"></td>
    </tr>
    <tr>
+   <td class="text">rgmin-0.4.1-lj38-fire2-tuned</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">731</td>
+   <td class="num">236</td>
+   <td class="num">2637</td>
+   <td class="num">0</td>
+   <td class="num">845.947</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-lj38-fire2</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">731</td>
+   <td class="num">236</td>
+   <td class="num">2637</td>
+   <td class="num">0</td>
+   <td class="num">845.947</td>
+   <td class="text">default</td>
+   </tr>
+   <tr>
    <td class="text">rgmin-lj38-fire2-tuned</td>
    <td class="text">rgmin</td>
    <td class="text">0.4.0</td>
@@ -753,6 +951,28 @@
    <td class="num">0</td>
    <td class="num"></td>
    <td class="text">unlabelled</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-lj38-bfgs-tuned</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">1010</td>
+   <td class="num">595</td>
+   <td class="num">2985</td>
+   <td class="num">0</td>
+   <td class="num">1010.446</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-lj38-bfgs</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">1010</td>
+   <td class="num">595</td>
+   <td class="num">2985</td>
+   <td class="num">0</td>
+   <td class="num">1010.446</td>
+   <td class="text">default</td>
    </tr>
    <tr>
    <td class="text">rgmin-lj38-bfgs-tuned</td>
@@ -832,6 +1052,28 @@
    <td class="text">unlabelled</td>
    </tr>
    <tr>
+   <td class="text">rgmin-0.4.1-lj38-quickmin-tuned</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">1897</td>
+   <td class="num">467</td>
+   <td class="num">8671</td>
+   <td class="num">0</td>
+   <td class="num">1932.997</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-lj38-quickmin</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">1897</td>
+   <td class="num">467</td>
+   <td class="num">8671</td>
+   <td class="num">0</td>
+   <td class="num">1932.997</td>
+   <td class="text">default</td>
+   </tr>
+   <tr>
    <td class="text">rgmin-lj38-quickmin-tuned</td>
    <td class="text">rgmin</td>
    <td class="text">0.4.0</td>
@@ -854,6 +1096,17 @@
    <td class="text">default</td>
    </tr>
    <tr>
+   <td class="text">rgmin-0.4.1-lj38-diis-tuned</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">1931</td>
+   <td class="num">395</td>
+   <td class="num">8624</td>
+   <td class="num">0</td>
+   <td class="num">1967.417</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr>
    <td class="text">rgmin-0.4.1-lj38-diis</td>
    <td class="text">rgmin</td>
    <td class="text">0.4.1</td>
@@ -865,6 +1118,17 @@
    <td class="text">default</td>
    </tr>
    <tr class="bench-row-fail">
+   <td class="text">rgmin-0.4.1-lj38-sr1-tuned</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">2077</td>
+   <td class="num">292</td>
+   <td class="num">9696</td>
+   <td class="num">2</td>
+   <td class="num">2185.659</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr class="bench-row-fail">
    <td class="text">rgmin-0.4.1-lj38-sr1</td>
    <td class="text">rgmin</td>
    <td class="text">0.4.1</td>
@@ -874,6 +1138,17 @@
    <td class="num">2</td>
    <td class="num">2185.659</td>
    <td class="text">default</td>
+   </tr>
+   <tr class="bench-row-fail">
+   <td class="text">rgmin-0.4.1-lj38-sr2-tuned</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">2191</td>
+   <td class="num">319</td>
+   <td class="num">9565</td>
+   <td class="num">5</td>
+   <td class="num">2298.441</td>
+   <td class="text">tuned</td>
    </tr>
    <tr class="bench-row-fail">
    <td class="text">rgmin-0.4.1-lj38-sr2</td>
@@ -975,6 +1250,28 @@
    <td class="text">unlabelled</td>
    </tr>
    <tr class="bench-row-fail">
+   <td class="text">rgmin-0.4.1-lj38-sd-tuned</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">5438</td>
+   <td class="num">1141</td>
+   <td class="num">9993</td>
+   <td class="num">200</td>
+   <td class="num">8392.748</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr class="bench-row-fail">
+   <td class="text">rgmin-0.4.1-lj38-sd</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">5438</td>
+   <td class="num">1141</td>
+   <td class="num">9993</td>
+   <td class="num">200</td>
+   <td class="num">8392.748</td>
+   <td class="text">default</td>
+   </tr>
+   <tr class="bench-row-fail">
    <td class="text">rgmin-lj38-sd-tuned</td>
    <td class="text">rgmin</td>
    <td class="text">0.4.0</td>
@@ -1017,6 +1314,17 @@
    <td class="num">964</td>
    <td class="num">19945.03</td>
    <td class="text">default</td>
+   </tr>
+   <tr class="bench-row-fail">
+   <td class="text">rgmin-0.4.1-lj38-adam-tuned</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">6392</td>
+   <td class="num">852</td>
+   <td class="num">9986</td>
+   <td class="num">547</td>
+   <td class="num">13835.677</td>
+   <td class="text">tuned</td>
    </tr>
    <tr class="bench-row-fail">
    <td class="text">rgmin-0.4.1-lj38-adam</td>
@@ -1074,7 +1382,7 @@
    <td class="text">default</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:94"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "rgmin-lj38-newton-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-newton-tuned", "code": "rgmin", "value": 67.0, "best": true, "held": false, "failed": false}, {"id": "rgmin-lj38-newton", "entry": "rgmin 0.4.0 rgmin-lj38-newton", "code": "rgmin", "value": 67.0, "best": true, "held": false, "failed": false}, {"id": "rgmin-lj38-dogleg-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-dogleg-tuned", "code": "rgmin", "value": 82.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-dogleg", "entry": "rgmin 0.4.0 rgmin-lj38-dogleg", "code": "rgmin", "value": 82.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-lbfgs-m100-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-lbfgs-m100-tuned", "code": "rgmin", "value": 177.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-lbfgs-m100", "entry": "rgmin 0.4.0 rgmin-lj38-lbfgs-m100", "code": "rgmin", "value": 177.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M100-maxstep0.2", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M100-maxstep0.2", "code": "pele", "value": 178.0, "best": false, "held": false, "failed": false}, {"id": "eon-main-lj38-lbfgs-m100", "entry": "eOn 3.6.0 eon-main-lj38-lbfgs-m100", "code": "eOn", "value": 180.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-lbfgs-m100", "entry": "eOn 3.5.0 eon-client-lbfgs-m100", "code": "eOn", "value": 181.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-lbfgs-m100", "entry": "Eon svn r2549 eon-svn-lbfgs-m100", "code": "Eon svn", "value": 181.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-lbfgs-m100", "entry": "eOn 3.5.0 eon-3.5.0-lbfgs-m100", "code": "eOn", "value": 181.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-lbfgs-m100", "entry": "Eon svn r2549 eon-svn-r2549-lbfgs-m100", "code": "Eon svn", "value": 181.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-lbfgs-m20", "entry": "eOn 3.5.0 eon-client-lbfgs-m20", "code": "eOn", "value": 201.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-lbfgs", "entry": "eOn 3.5.0 eon-3.5.0-lbfgs", "code": "eOn", "value": 201.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-lbfgs-m20", "entry": "Eon svn r2549 eon-svn-lbfgs-m20", "code": "Eon svn", "value": 202.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-lbfgs-m20", "entry": "Eon svn r2549 eon-svn-r2549-lbfgs-m20", "code": "Eon svn", "value": 202.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-lbfgs-m20-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-lbfgs-m20-tuned", "code": "rgmin", "value": 203.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-lbfgs-m20", "entry": "rgmin 0.4.0 rgmin-lj38-lbfgs-m20", "code": "rgmin", "value": 203.0, "best": false, "held": false, "failed": false}, {"id": "eon-main-lj38-lbfgs", "entry": "eOn 3.6.0 eon-main-lj38-lbfgs", "code": "eOn", "value": 204.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-lbfgs-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-lbfgs-tuned", "code": "rgmin", "value": 215.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-lbfgs", "entry": "rgmin 0.4.0 rgmin-lj38-lbfgs", "code": "rgmin", "value": 215.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lbfgs-0.3.0", "entry": "rgmin 0.3.0 e089a136910f rgmin-lbfgs-0.3.0", "code": "rgmin", "value": 216.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M20-maxstep0.1", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M20-maxstep0.1", "code": "pele", "value": 223.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M4-maxstep0.2", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M4-maxstep0.2", "code": "pele", "value": 228.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M10-maxstep0.1", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M10-maxstep0.1", "code": "pele", "value": 235.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M4-maxstep0.1", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M4-maxstep0.1", "code": "pele", "value": 248.0, "best": false, "held": false, "failed": false}, {"id": "sella-2.6.0-lj38-min-tuned", "entry": "Sella 2.6.0 sella-2.6.0-lj38-min-tuned", "code": "Sella", "value": 254.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M1-maxstep0.1", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M1-maxstep0.1", "code": "pele", "value": 286.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-lj38-lbfgs-tuned", "entry": "ASE 3.29.0 ase-3.29.0-lj38-lbfgs-tuned", "code": "ASE", "value": 356.0, "best": false, "held": false, "failed": true}, {"id": "ase-3.29.0-lj38-lbfgs-default", "entry": "ASE 3.29.0 ase-3.29.0-lj38-lbfgs-default", "code": "ASE", "value": 365.0, "best": false, "held": false, "failed": true}, {"id": "pele-0.1.2-lbfgs-M4-maxstep0.05", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M4-maxstep0.05", "code": "pele", "value": 381.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-cg", "entry": "Eon svn r2549 eon-svn-cg", "code": "Eon svn", "value": 453.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-cg", "entry": "Eon svn r2549 eon-svn-r2549-cg", "code": "Eon svn", "value": 453.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-cg", "entry": "eOn 3.5.0 eon-client-cg", "code": "eOn", "value": 454.0, "best": false, "held": false, "failed": false}, {"id": "eon-cg-3.5.0", "entry": "Eon 3.5.0 eon-cg-3.5.0", "code": "Eon", "value": 454.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-cg", "entry": "eOn 3.5.0 eon-3.5.0-cg", "code": "eOn", "value": 454.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-lj38-bfgs-tuned", "entry": "ASE 3.29.0 ase-3.29.0-lj38-bfgs-tuned", "code": "ASE", "value": 461.0, "best": false, "held": false, "failed": true}, {"id": "ase-3.29.0-lj38-bfgslinesearch-tuned", "entry": "ASE 3.29.0 ase-3.29.0-lj38-bfgslinesearch-tuned", "code": "ASE", "value": 506.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-bb-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-bb-tuned", "code": "rgmin", "value": 521.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-bb", "entry": "rgmin 0.4.0 rgmin-lj38-bb", "code": "rgmin", "value": 521.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-sd-twopoint", "entry": "eOn 3.5.0 eon-client-sd-twopoint", "code": "eOn", "value": 532.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-sd-twopoint", "entry": "eOn 3.5.0 eon-3.5.0-sd-twopoint", "code": "eOn", "value": 532.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-bfgs-0.3.0", "entry": "rgmin 0.3.0 rgmin-bfgs-0.3.0", "code": "rgmin", "value": 538.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-sd-twopoint", "entry": "Eon svn r2549 eon-svn-sd-twopoint", "code": "Eon svn", "value": 539.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-sd-twopoint", "entry": "Eon svn r2549 eon-svn-r2549-sd-twopoint", "code": "Eon svn", "value": 539.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-bb-0.3.0", "entry": "rgmin 0.3.0 rgmin-bb-0.3.0", "code": "rgmin", "value": 541.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-lj38-bfgslinesearch-default", "entry": "ASE 3.29.0 ase-3.29.0-lj38-bfgslinesearch-default", "code": "ASE", "value": 561.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-sr1-0.3.0", "entry": "rgmin 0.3.0 rgmin-sr1-0.3.0", "code": "rgmin", "value": 566.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-cg-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-cg-tuned", "code": "rgmin", "value": 591.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-cg", "entry": "rgmin 0.4.0 rgmin-lj38-cg", "code": "rgmin", "value": 591.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-lj38-bfgs-default", "entry": "ASE 3.29.0 ase-3.29.0-lj38-bfgs-default", "code": "ASE", "value": 656.0, "best": false, "held": false, "failed": true}, {"id": "ase-3.29.0-lj38-preconlbfgs-default", "entry": "ASE 3.29.0 ase-3.29.0-lj38-preconlbfgs-default", "code": "ASE", "value": 690.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-fire2-0.3.0", "entry": "rgmin 0.3.0 rgmin-fire2-0.3.0", "code": "rgmin", "value": 694.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-fire-0.3.0", "entry": "rgmin 0.3.0 rgmin-fire-0.3.0", "code": "rgmin", "value": 699.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-lj38-fire-default", "entry": "ASE 3.29.0 ase-3.29.0-lj38-fire-default", "code": "ASE", "value": 706.0, "best": false, "held": false, "failed": false}, {"id": "ase-fire-3.29.0", "entry": "ASE 3.29.0 ase-fire-3.29.0", "code": "ASE", "value": 706.0, "best": false, "held": false, "failed": false}, {"id": "sella-2.6.0-lj38-min-default", "entry": "Sella 2.6.0 sella-2.6.0-lj38-min-default", "code": "Sella", "value": 710.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-fire-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-fire-tuned", "code": "rgmin", "value": 712.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-fire", "entry": "rgmin 0.4.0 rgmin-lj38-fire", "code": "rgmin", "value": 712.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-lj38-fire-tuned", "entry": "ASE 3.29.0 ase-3.29.0-lj38-fire-tuned", "code": "ASE", "value": 720.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-fire", "entry": "eOn 3.5.0 eon-client-fire", "code": "eOn", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-fire", "entry": "Eon svn r2549 eon-svn-fire", "code": "Eon svn", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-fire2-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-fire2-tuned", "code": "rgmin", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-fire2", "entry": "rgmin 0.4.0 rgmin-lj38-fire2", "code": "rgmin", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-fire", "entry": "eOn 3.5.0 eon-3.5.0-fire", "code": "eOn", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-fire", "entry": "Eon svn r2549 eon-svn-r2549-fire", "code": "Eon svn", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-nlcg-0.3.0", "entry": "rgmin 0.3.0 rgmin-nlcg-0.3.0", "code": "rgmin", "value": 733.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-bfgs-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-bfgs-tuned", "code": "rgmin", "value": 1010.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-bfgs", "entry": "rgmin 0.4.0 rgmin-lj38-bfgs", "code": "rgmin", "value": 1010.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-sd-0.3.0", "entry": "rgmin 0.3.0 rgmin-sd-0.3.0", "code": "rgmin", "value": 1260.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-sr1-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-sr1-tuned", "code": "rgmin", "value": 1780.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-lj38-sr1", "entry": "rgmin 0.4.0 rgmin-lj38-sr1", "code": "rgmin", "value": 1780.0, "best": false, "held": false, "failed": true}, {"id": "ase-3.29.0-lj38-preconfire-default", "entry": "ASE 3.29.0 ase-3.29.0-lj38-preconfire-default", "code": "ASE", "value": 1817.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-quickmin-0.3.0", "entry": "rgmin 0.3.0 rgmin-quickmin-0.3.0", "code": "rgmin", "value": 1849.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-lj38-quickmin-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-quickmin-tuned", "code": "rgmin", "value": 1897.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-quickmin", "entry": "rgmin 0.4.0 rgmin-lj38-quickmin", "code": "rgmin", "value": 1897.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-lj38-diis", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-diis", "code": "rgmin", "value": 1931.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-lj38-sr1", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-sr1", "code": "rgmin", "value": 2077.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-0.4.1-lj38-sr2", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-sr2", "code": "rgmin", "value": 2191.0, "best": false, "held": false, "failed": true}, {"id": "eon-client-qm", "entry": "eOn 3.5.0 eon-client-qm", "code": "eOn", "value": 3514.0, "best": false, "held": false, "failed": true}, {"id": "eon-3.5.0-qm", "entry": "eOn 3.5.0 eon-3.5.0-qm", "code": "eOn", "value": 3514.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-qm", "entry": "Eon svn r2549 eon-svn-qm", "code": "Eon svn", "value": 3547.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-r2549-qm", "entry": "Eon svn r2549 eon-svn-r2549-qm", "code": "Eon svn", "value": 3547.0, "best": false, "held": false, "failed": true}, {"id": "eon-client-sd", "entry": "eOn 3.5.0 eon-client-sd", "code": "eOn", "value": 4901.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-sd", "entry": "Eon svn r2549 eon-svn-sd", "code": "Eon svn", "value": 4901.0, "best": false, "held": false, "failed": true}, {"id": "eon-3.5.0-sd", "entry": "eOn 3.5.0 eon-3.5.0-sd", "code": "eOn", "value": 4901.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-r2549-sd", "entry": "Eon svn r2549 eon-svn-r2549-sd", "code": "Eon svn", "value": 4901.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-lj38-sd-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-sd-tuned", "code": "rgmin", "value": 5438.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-lj38-sd", "entry": "rgmin 0.4.0 rgmin-lj38-sd", "code": "rgmin", "value": 5438.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-lj38-diis-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-diis-tuned", "code": "rgmin", "value": 5450.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-lj38-diis", "entry": "rgmin 0.4.0 rgmin-lj38-diis", "code": "rgmin", "value": 5450.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-0.4.1-lj38-adam", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-adam", "code": "rgmin", "value": 6392.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-lj38-adam-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-adam-tuned", "code": "rgmin", "value": 6692.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-lj38-adam", "entry": "rgmin 0.4.0 rgmin-lj38-adam", "code": "rgmin", "value": 6692.0, "best": false, "held": false, "failed": true}]}</script></figure>
+   <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:122"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "rgmin-0.4.1-lj38-newton-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-newton-tuned", "code": "rgmin", "value": 67.0, "best": true, "held": false, "failed": false}, {"id": "rgmin-0.4.1-lj38-newton", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-newton", "code": "rgmin", "value": 67.0, "best": true, "held": false, "failed": false}, {"id": "rgmin-lj38-newton-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-newton-tuned", "code": "rgmin", "value": 67.0, "best": true, "held": false, "failed": false}, {"id": "rgmin-lj38-newton", "entry": "rgmin 0.4.0 rgmin-lj38-newton", "code": "rgmin", "value": 67.0, "best": true, "held": false, "failed": false}, {"id": "rgmin-0.4.1-lj38-dogleg-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-dogleg-tuned", "code": "rgmin", "value": 82.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-lj38-dogleg", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-dogleg", "code": "rgmin", "value": 82.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-dogleg-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-dogleg-tuned", "code": "rgmin", "value": 82.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-dogleg", "entry": "rgmin 0.4.0 rgmin-lj38-dogleg", "code": "rgmin", "value": 82.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-lj38-lbfgs-m100-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-lbfgs-m100-tuned", "code": "rgmin", "value": 177.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-lj38-lbfgs-m100", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-lbfgs-m100", "code": "rgmin", "value": 177.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-lbfgs-m100-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-lbfgs-m100-tuned", "code": "rgmin", "value": 177.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-lbfgs-m100", "entry": "rgmin 0.4.0 rgmin-lj38-lbfgs-m100", "code": "rgmin", "value": 177.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M100-maxstep0.2", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M100-maxstep0.2", "code": "pele", "value": 178.0, "best": false, "held": false, "failed": false}, {"id": "eon-main-lj38-lbfgs-m100", "entry": "eOn 3.6.0 eon-main-lj38-lbfgs-m100", "code": "eOn", "value": 180.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-lbfgs-m100", "entry": "eOn 3.5.0 eon-client-lbfgs-m100", "code": "eOn", "value": 181.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-lbfgs-m100", "entry": "Eon svn r2549 eon-svn-lbfgs-m100", "code": "Eon svn", "value": 181.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-lbfgs-m100", "entry": "eOn 3.5.0 eon-3.5.0-lbfgs-m100", "code": "eOn", "value": 181.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-lbfgs-m100", "entry": "Eon svn r2549 eon-svn-r2549-lbfgs-m100", "code": "Eon svn", "value": 181.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-lbfgs-m20", "entry": "eOn 3.5.0 eon-client-lbfgs-m20", "code": "eOn", "value": 201.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-lbfgs", "entry": "eOn 3.5.0 eon-3.5.0-lbfgs", "code": "eOn", "value": 201.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-lbfgs-m20", "entry": "Eon svn r2549 eon-svn-lbfgs-m20", "code": "Eon svn", "value": 202.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-lbfgs-m20", "entry": "Eon svn r2549 eon-svn-r2549-lbfgs-m20", "code": "Eon svn", "value": 202.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-lj38-lbfgs-m20-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-lbfgs-m20-tuned", "code": "rgmin", "value": 203.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-lj38-lbfgs-m20", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-lbfgs-m20", "code": "rgmin", "value": 203.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-lbfgs-m20-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-lbfgs-m20-tuned", "code": "rgmin", "value": 203.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-lbfgs-m20", "entry": "rgmin 0.4.0 rgmin-lj38-lbfgs-m20", "code": "rgmin", "value": 203.0, "best": false, "held": false, "failed": false}, {"id": "eon-main-lj38-lbfgs", "entry": "eOn 3.6.0 eon-main-lj38-lbfgs", "code": "eOn", "value": 204.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-lj38-lbfgs-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-lbfgs-tuned", "code": "rgmin", "value": 215.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-lj38-lbfgs", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-lbfgs", "code": "rgmin", "value": 215.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-lbfgs-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-lbfgs-tuned", "code": "rgmin", "value": 215.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-lbfgs", "entry": "rgmin 0.4.0 rgmin-lj38-lbfgs", "code": "rgmin", "value": 215.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lbfgs-0.3.0", "entry": "rgmin 0.3.0 e089a136910f rgmin-lbfgs-0.3.0", "code": "rgmin", "value": 216.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M20-maxstep0.1", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M20-maxstep0.1", "code": "pele", "value": 223.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M4-maxstep0.2", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M4-maxstep0.2", "code": "pele", "value": 228.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M10-maxstep0.1", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M10-maxstep0.1", "code": "pele", "value": 235.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M4-maxstep0.1", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M4-maxstep0.1", "code": "pele", "value": 248.0, "best": false, "held": false, "failed": false}, {"id": "sella-2.6.0-lj38-min-tuned", "entry": "Sella 2.6.0 sella-2.6.0-lj38-min-tuned", "code": "Sella", "value": 254.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M1-maxstep0.1", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M1-maxstep0.1", "code": "pele", "value": 286.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-lj38-lbfgs-tuned", "entry": "ASE 3.29.0 ase-3.29.0-lj38-lbfgs-tuned", "code": "ASE", "value": 356.0, "best": false, "held": false, "failed": true}, {"id": "ase-3.29.0-lj38-lbfgs-default", "entry": "ASE 3.29.0 ase-3.29.0-lj38-lbfgs-default", "code": "ASE", "value": 365.0, "best": false, "held": false, "failed": true}, {"id": "pele-0.1.2-lbfgs-M4-maxstep0.05", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M4-maxstep0.05", "code": "pele", "value": 381.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-cg", "entry": "Eon svn r2549 eon-svn-cg", "code": "Eon svn", "value": 453.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-cg", "entry": "Eon svn r2549 eon-svn-r2549-cg", "code": "Eon svn", "value": 453.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-cg", "entry": "eOn 3.5.0 eon-client-cg", "code": "eOn", "value": 454.0, "best": false, "held": false, "failed": false}, {"id": "eon-cg-3.5.0", "entry": "Eon 3.5.0 eon-cg-3.5.0", "code": "Eon", "value": 454.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-cg", "entry": "eOn 3.5.0 eon-3.5.0-cg", "code": "eOn", "value": 454.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-lj38-bfgs-tuned", "entry": "ASE 3.29.0 ase-3.29.0-lj38-bfgs-tuned", "code": "ASE", "value": 461.0, "best": false, "held": false, "failed": true}, {"id": "ase-3.29.0-lj38-bfgslinesearch-tuned", "entry": "ASE 3.29.0 ase-3.29.0-lj38-bfgslinesearch-tuned", "code": "ASE", "value": 506.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-lj38-bb-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-bb-tuned", "code": "rgmin", "value": 521.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-lj38-bb", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-bb", "code": "rgmin", "value": 521.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-bb-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-bb-tuned", "code": "rgmin", "value": 521.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-bb", "entry": "rgmin 0.4.0 rgmin-lj38-bb", "code": "rgmin", "value": 521.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-sd-twopoint", "entry": "eOn 3.5.0 eon-client-sd-twopoint", "code": "eOn", "value": 532.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-sd-twopoint", "entry": "eOn 3.5.0 eon-3.5.0-sd-twopoint", "code": "eOn", "value": 532.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-bfgs-0.3.0", "entry": "rgmin 0.3.0 rgmin-bfgs-0.3.0", "code": "rgmin", "value": 538.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-sd-twopoint", "entry": "Eon svn r2549 eon-svn-sd-twopoint", "code": "Eon svn", "value": 539.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-sd-twopoint", "entry": "Eon svn r2549 eon-svn-r2549-sd-twopoint", "code": "Eon svn", "value": 539.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-bb-0.3.0", "entry": "rgmin 0.3.0 rgmin-bb-0.3.0", "code": "rgmin", "value": 541.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-lj38-bfgslinesearch-default", "entry": "ASE 3.29.0 ase-3.29.0-lj38-bfgslinesearch-default", "code": "ASE", "value": 561.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-sr1-0.3.0", "entry": "rgmin 0.3.0 rgmin-sr1-0.3.0", "code": "rgmin", "value": 566.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-lj38-cg-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-cg-tuned", "code": "rgmin", "value": 591.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-lj38-cg", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-cg", "code": "rgmin", "value": 591.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-cg-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-cg-tuned", "code": "rgmin", "value": 591.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-cg", "entry": "rgmin 0.4.0 rgmin-lj38-cg", "code": "rgmin", "value": 591.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-lj38-bfgs-default", "entry": "ASE 3.29.0 ase-3.29.0-lj38-bfgs-default", "code": "ASE", "value": 656.0, "best": false, "held": false, "failed": true}, {"id": "ase-3.29.0-lj38-preconlbfgs-default", "entry": "ASE 3.29.0 ase-3.29.0-lj38-preconlbfgs-default", "code": "ASE", "value": 690.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-fire2-0.3.0", "entry": "rgmin 0.3.0 rgmin-fire2-0.3.0", "code": "rgmin", "value": 694.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-fire-0.3.0", "entry": "rgmin 0.3.0 rgmin-fire-0.3.0", "code": "rgmin", "value": 699.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-lj38-fire-default", "entry": "ASE 3.29.0 ase-3.29.0-lj38-fire-default", "code": "ASE", "value": 706.0, "best": false, "held": false, "failed": false}, {"id": "ase-fire-3.29.0", "entry": "ASE 3.29.0 ase-fire-3.29.0", "code": "ASE", "value": 706.0, "best": false, "held": false, "failed": false}, {"id": "sella-2.6.0-lj38-min-default", "entry": "Sella 2.6.0 sella-2.6.0-lj38-min-default", "code": "Sella", "value": 710.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-lj38-fire-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-fire-tuned", "code": "rgmin", "value": 712.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-lj38-fire", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-fire", "code": "rgmin", "value": 712.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-fire-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-fire-tuned", "code": "rgmin", "value": 712.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-fire", "entry": "rgmin 0.4.0 rgmin-lj38-fire", "code": "rgmin", "value": 712.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-lj38-fire-tuned", "entry": "ASE 3.29.0 ase-3.29.0-lj38-fire-tuned", "code": "ASE", "value": 720.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-fire", "entry": "eOn 3.5.0 eon-client-fire", "code": "eOn", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-fire", "entry": "Eon svn r2549 eon-svn-fire", "code": "Eon svn", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-lj38-fire2-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-fire2-tuned", "code": "rgmin", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-lj38-fire2", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-fire2", "code": "rgmin", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-fire2-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-fire2-tuned", "code": "rgmin", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-fire2", "entry": "rgmin 0.4.0 rgmin-lj38-fire2", "code": "rgmin", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-fire", "entry": "eOn 3.5.0 eon-3.5.0-fire", "code": "eOn", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-fire", "entry": "Eon svn r2549 eon-svn-r2549-fire", "code": "Eon svn", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-nlcg-0.3.0", "entry": "rgmin 0.3.0 rgmin-nlcg-0.3.0", "code": "rgmin", "value": 733.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-lj38-bfgs-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-bfgs-tuned", "code": "rgmin", "value": 1010.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-lj38-bfgs", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-bfgs", "code": "rgmin", "value": 1010.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-bfgs-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-bfgs-tuned", "code": "rgmin", "value": 1010.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-bfgs", "entry": "rgmin 0.4.0 rgmin-lj38-bfgs", "code": "rgmin", "value": 1010.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-sd-0.3.0", "entry": "rgmin 0.3.0 rgmin-sd-0.3.0", "code": "rgmin", "value": 1260.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-sr1-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-sr1-tuned", "code": "rgmin", "value": 1780.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-lj38-sr1", "entry": "rgmin 0.4.0 rgmin-lj38-sr1", "code": "rgmin", "value": 1780.0, "best": false, "held": false, "failed": true}, {"id": "ase-3.29.0-lj38-preconfire-default", "entry": "ASE 3.29.0 ase-3.29.0-lj38-preconfire-default", "code": "ASE", "value": 1817.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-quickmin-0.3.0", "entry": "rgmin 0.3.0 rgmin-quickmin-0.3.0", "code": "rgmin", "value": 1849.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-0.4.1-lj38-quickmin-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-quickmin-tuned", "code": "rgmin", "value": 1897.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-lj38-quickmin", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-quickmin", "code": "rgmin", "value": 1897.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-quickmin-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-quickmin-tuned", "code": "rgmin", "value": 1897.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lj38-quickmin", "entry": "rgmin 0.4.0 rgmin-lj38-quickmin", "code": "rgmin", "value": 1897.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-lj38-diis-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-diis-tuned", "code": "rgmin", "value": 1931.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-lj38-diis", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-diis", "code": "rgmin", "value": 1931.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-lj38-sr1-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-sr1-tuned", "code": "rgmin", "value": 2077.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-0.4.1-lj38-sr1", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-sr1", "code": "rgmin", "value": 2077.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-0.4.1-lj38-sr2-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-sr2-tuned", "code": "rgmin", "value": 2191.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-0.4.1-lj38-sr2", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-sr2", "code": "rgmin", "value": 2191.0, "best": false, "held": false, "failed": true}, {"id": "eon-client-qm", "entry": "eOn 3.5.0 eon-client-qm", "code": "eOn", "value": 3514.0, "best": false, "held": false, "failed": true}, {"id": "eon-3.5.0-qm", "entry": "eOn 3.5.0 eon-3.5.0-qm", "code": "eOn", "value": 3514.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-qm", "entry": "Eon svn r2549 eon-svn-qm", "code": "Eon svn", "value": 3547.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-r2549-qm", "entry": "Eon svn r2549 eon-svn-r2549-qm", "code": "Eon svn", "value": 3547.0, "best": false, "held": false, "failed": true}, {"id": "eon-client-sd", "entry": "eOn 3.5.0 eon-client-sd", "code": "eOn", "value": 4901.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-sd", "entry": "Eon svn r2549 eon-svn-sd", "code": "Eon svn", "value": 4901.0, "best": false, "held": false, "failed": true}, {"id": "eon-3.5.0-sd", "entry": "eOn 3.5.0 eon-3.5.0-sd", "code": "eOn", "value": 4901.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-r2549-sd", "entry": "Eon svn r2549 eon-svn-r2549-sd", "code": "Eon svn", "value": 4901.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-0.4.1-lj38-sd-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-sd-tuned", "code": "rgmin", "value": 5438.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-0.4.1-lj38-sd", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-sd", "code": "rgmin", "value": 5438.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-lj38-sd-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-sd-tuned", "code": "rgmin", "value": 5438.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-lj38-sd", "entry": "rgmin 0.4.0 rgmin-lj38-sd", "code": "rgmin", "value": 5438.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-lj38-diis-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-diis-tuned", "code": "rgmin", "value": 5450.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-lj38-diis", "entry": "rgmin 0.4.0 rgmin-lj38-diis", "code": "rgmin", "value": 5450.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-0.4.1-lj38-adam-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-adam-tuned", "code": "rgmin", "value": 6392.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-0.4.1-lj38-adam", "entry": "rgmin 0.4.1 rgmin-0.4.1-lj38-adam", "code": "rgmin", "value": 6392.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-lj38-adam-tuned", "entry": "rgmin 0.4.0 rgmin-lj38-adam-tuned", "code": "rgmin", "value": 6692.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-lj38-adam", "entry": "rgmin 0.4.0 rgmin-lj38-adam", "code": "rgmin", "value": 6692.0, "best": false, "held": false, "failed": true}]}</script></figure>
    <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
@@ -1394,6 +1702,28 @@
    <caption>Present runs. Fewer force calls first. The legacy 2014 scores follow.</caption>
    <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th><th class="num" scope="col">PAR-2</th><th class="text" scope="col">Tuning</th></tr></thead><tbody>
    <tr>
+   <td class="text">rgmin-0.4.1-morse-newton-tuned</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">8</td>
+   <td class="num">4</td>
+   <td class="num">13</td>
+   <td class="num">0</td>
+   <td class="num">8.35</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-morse-newton</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">8</td>
+   <td class="num">4</td>
+   <td class="num">13</td>
+   <td class="num">0</td>
+   <td class="num">8.35</td>
+   <td class="text">default</td>
+   </tr>
+   <tr>
    <td class="text">rgmin-morse-newton-tuned</td>
    <td class="text">rgmin</td>
    <td class="text">0.4.0</td>
@@ -1425,6 +1755,83 @@
    <td class="num">0</td>
    <td class="num">27.44</td>
    <td class="text">tuned</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-morse-diis</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">27</td>
+   <td class="num">21</td>
+   <td class="num">32</td>
+   <td class="num">0</td>
+   <td class="num">27.44</td>
+   <td class="text">default</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-morse-lbfgs-m100-tuned</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">27</td>
+   <td class="num">22</td>
+   <td class="num">31</td>
+   <td class="num">0</td>
+   <td class="num">26.91</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-morse-lbfgs-m100</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">27</td>
+   <td class="num">22</td>
+   <td class="num">31</td>
+   <td class="num">0</td>
+   <td class="num">26.91</td>
+   <td class="text">default</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-morse-lbfgs-m20-tuned</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">27</td>
+   <td class="num">22</td>
+   <td class="num">31</td>
+   <td class="num">0</td>
+   <td class="num">26.87</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-morse-lbfgs-m20</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">27</td>
+   <td class="num">22</td>
+   <td class="num">31</td>
+   <td class="num">0</td>
+   <td class="num">26.87</td>
+   <td class="text">default</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-morse-lbfgs-tuned</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">27</td>
+   <td class="num">22</td>
+   <td class="num">31</td>
+   <td class="num">0</td>
+   <td class="num">26.93</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-morse-lbfgs</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">27</td>
+   <td class="num">22</td>
+   <td class="num">31</td>
+   <td class="num">0</td>
+   <td class="num">26.93</td>
+   <td class="text">default</td>
    </tr>
    <tr>
    <td class="text">rgmin-morse-lbfgs-m100-tuned</td>
@@ -1515,17 +1922,6 @@
    <td class="text"></td>
    </tr>
    <tr>
-   <td class="text">rgmin-0.4.1-morse-diis</td>
-   <td class="text">rgmin</td>
-   <td class="text">0.4.1</td>
-   <td class="num">29</td>
-   <td class="num">21</td>
-   <td class="num">42</td>
-   <td class="num">0</td>
-   <td class="num">28.94</td>
-   <td class="text">default</td>
-   </tr>
-   <tr>
    <td class="text">sella-2.6.0-morse-min-default</td>
    <td class="text">Sella</td>
    <td class="text">2.6.0</td>
@@ -1545,6 +1941,28 @@
    <td class="num">35</td>
    <td class="num">78</td>
    <td class="num">15606.64</td>
+   <td class="text">default</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-morse-dogleg-tuned</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">31</td>
+   <td class="num">7</td>
+   <td class="num">47</td>
+   <td class="num">0</td>
+   <td class="num">31.26</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-morse-dogleg</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">31</td>
+   <td class="num">7</td>
+   <td class="num">47</td>
+   <td class="num">0</td>
+   <td class="num">31.26</td>
    <td class="text">default</td>
    </tr>
    <tr>
@@ -1568,6 +1986,28 @@
    <td class="num">0</td>
    <td class="num"></td>
    <td class="text"></td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-morse-bb-tuned</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">33</td>
+   <td class="num">24</td>
+   <td class="num">39</td>
+   <td class="num">0</td>
+   <td class="num">33.22</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-morse-bb</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">33</td>
+   <td class="num">24</td>
+   <td class="num">39</td>
+   <td class="num">0</td>
+   <td class="num">33.22</td>
+   <td class="text">default</td>
    </tr>
    <tr>
    <td class="text">rgmin-morse-bb-tuned</td>
@@ -1601,6 +2041,28 @@
    <td class="num">0</td>
    <td class="num"></td>
    <td class="text"></td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-morse-cg-tuned</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">50</td>
+   <td class="num">36</td>
+   <td class="num">70</td>
+   <td class="num">0</td>
+   <td class="num">50.49</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-morse-cg</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">50</td>
+   <td class="num">36</td>
+   <td class="num">70</td>
+   <td class="num">0</td>
+   <td class="num">50.49</td>
+   <td class="text">default</td>
    </tr>
    <tr>
    <td class="text">rgmin-morse-cg-tuned</td>
@@ -1739,10 +2201,32 @@
    <td class="text">rgmin</td>
    <td class="text">0.4.1</td>
    <td class="num">60</td>
-   <td class="num">45</td>
-   <td class="num">74</td>
+   <td class="num">40</td>
+   <td class="num">71</td>
    <td class="num">0</td>
-   <td class="num">60.2</td>
+   <td class="num">59.53</td>
+   <td class="text">default</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-morse-quickmin-tuned</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">62</td>
+   <td class="num">45</td>
+   <td class="num">76</td>
+   <td class="num">0</td>
+   <td class="num">61.75</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-morse-quickmin</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">62</td>
+   <td class="num">45</td>
+   <td class="num">76</td>
+   <td class="num">0</td>
+   <td class="num">61.75</td>
    <td class="text">default</td>
    </tr>
    <tr>
@@ -1755,6 +2239,17 @@
    <td class="num">0</td>
    <td class="num">61.53</td>
    <td class="text">tuned</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-morse-sr1</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">62</td>
+   <td class="num">30</td>
+   <td class="num">87</td>
+   <td class="num">0</td>
+   <td class="num">61.53</td>
+   <td class="text">default</td>
    </tr>
    <tr>
    <td class="text">rgmin-morse-quickmin-tuned</td>
@@ -1779,14 +2274,25 @@
    <td class="text">default</td>
    </tr>
    <tr>
-   <td class="text">rgmin-0.4.1-morse-sr1</td>
+   <td class="text">rgmin-0.4.1-morse-bfgs-tuned</td>
    <td class="text">rgmin</td>
    <td class="text">0.4.1</td>
-   <td class="num">67</td>
-   <td class="num">30</td>
-   <td class="num">85</td>
+   <td class="num">71</td>
+   <td class="num">28</td>
+   <td class="num">115</td>
    <td class="num">0</td>
-   <td class="num">66.77</td>
+   <td class="num">70.53</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-morse-bfgs</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">71</td>
+   <td class="num">28</td>
+   <td class="num">115</td>
+   <td class="num">0</td>
+   <td class="num">70.53</td>
    <td class="text">default</td>
    </tr>
    <tr>
@@ -1810,6 +2316,28 @@
    <td class="num">0</td>
    <td class="num"></td>
    <td class="text"></td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-morse-sd-tuned</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">90</td>
+   <td class="num">64</td>
+   <td class="num">111</td>
+   <td class="num">0</td>
+   <td class="num">90.48</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-morse-sd</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">90</td>
+   <td class="num">64</td>
+   <td class="num">111</td>
+   <td class="num">0</td>
+   <td class="num">90.48</td>
+   <td class="text">default</td>
    </tr>
    <tr>
    <td class="text">rgmin-morse-sd-tuned</td>
@@ -1889,6 +2417,28 @@
    <td class="text"></td>
    </tr>
    <tr>
+   <td class="text">rgmin-0.4.1-morse-fire-tuned</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">113</td>
+   <td class="num">92</td>
+   <td class="num">127</td>
+   <td class="num">0</td>
+   <td class="num">113.19</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-morse-fire</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">113</td>
+   <td class="num">92</td>
+   <td class="num">127</td>
+   <td class="num">0</td>
+   <td class="num">113.19</td>
+   <td class="text">default</td>
+   </tr>
+   <tr>
    <td class="text">rgmin-morse-fire-tuned</td>
    <td class="text">rgmin</td>
    <td class="text">0.4.0</td>
@@ -1908,6 +2458,28 @@
    <td class="num">128</td>
    <td class="num">0</td>
    <td class="num">116.19</td>
+   <td class="text">default</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-morse-fire2-tuned</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">122</td>
+   <td class="num">101</td>
+   <td class="num">136</td>
+   <td class="num">0</td>
+   <td class="num">121.87</td>
+   <td class="text">tuned</td>
+   </tr>
+   <tr>
+   <td class="text">rgmin-0.4.1-morse-fire2</td>
+   <td class="text">rgmin</td>
+   <td class="text">0.4.1</td>
+   <td class="num">122</td>
+   <td class="num">101</td>
+   <td class="num">136</td>
+   <td class="num">0</td>
+   <td class="num">121.87</td>
    <td class="text">default</td>
    </tr>
    <tr>
@@ -2120,7 +2692,7 @@
    <td class="text"></td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:66"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "rgmin-morse-newton-tuned", "entry": "rgmin 0.4.0 rgmin-morse-newton-tuned", "code": "rgmin", "value": 8.0, "best": true, "held": false, "failed": false}, {"id": "rgmin-morse-dogleg", "entry": "rgmin 0.4.0 rgmin-morse-dogleg", "code": "rgmin", "value": 10.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-diis-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-diis-tuned", "code": "rgmin", "value": 27.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-lbfgs-m100-tuned", "entry": "rgmin 0.4.0 rgmin-morse-lbfgs-m100-tuned", "code": "rgmin", "value": 27.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-lbfgs-m100", "entry": "rgmin 0.4.0 rgmin-morse-lbfgs-m100", "code": "rgmin", "value": 27.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-lbfgs-m20-tuned", "entry": "rgmin 0.4.0 rgmin-morse-lbfgs-m20-tuned", "code": "rgmin", "value": 27.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-lbfgs-m20", "entry": "rgmin 0.4.0 rgmin-morse-lbfgs-m20", "code": "rgmin", "value": 27.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-lbfgs-tuned", "entry": "rgmin 0.4.0 rgmin-morse-lbfgs-tuned", "code": "rgmin", "value": 27.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-lbfgs", "entry": "rgmin 0.4.0 rgmin-morse-lbfgs", "code": "rgmin", "value": 27.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-bfgslinesearch-default", "entry": "ASE 3.29.0 ase-3.29.0-morse-bfgslinesearch-default", "code": "ASE", "value": 29.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-preconlbfgs-tuned", "entry": "ASE 3.29.0 ase-3.29.0-morse-preconlbfgs-tuned", "code": "ASE", "value": 29.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-diis", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-diis", "code": "rgmin", "value": 29.0, "best": false, "held": false, "failed": false}, {"id": "sella-2.6.0-morse-min-default", "entry": "Sella 2.6.0 sella-2.6.0-morse-min-default", "code": "Sella", "value": 29.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-bb", "entry": "rgmin 0.4.0 rgmin-morse-bb", "code": "rgmin", "value": 30.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-morse-dogleg-tuned", "entry": "rgmin 0.4.0 rgmin-morse-dogleg-tuned", "code": "rgmin", "value": 31.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-lbfgs-tuned", "entry": "ASE 3.29.0 ase-3.29.0-morse-lbfgs-tuned", "code": "ASE", "value": 32.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-bb-tuned", "entry": "rgmin 0.4.0 rgmin-morse-bb-tuned", "code": "rgmin", "value": 33.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-preconode12r-default", "entry": "ASE 3.29.0 ase-3.29.0-morse-preconode12r-default", "code": "ASE", "value": 42.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-preconode12r-tuned", "entry": "ASE 3.29.0 ase-3.29.0-morse-preconode12r-tuned", "code": "ASE", "value": 42.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-cg-tuned", "entry": "rgmin 0.4.0 rgmin-morse-cg-tuned", "code": "rgmin", "value": 50.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-morse-lbfgs", "entry": "eOn 3.5.0 eon-client-morse-lbfgs", "code": "eOn", "value": 52.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-morse-lbfgs", "entry": "Eon svn r2549 eon-svn-morse-lbfgs", "code": "Eon svn", "value": 52.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-bfgs-default", "entry": "ASE 3.29.0 ase-3.29.0-morse-bfgs-default", "code": "ASE", "value": 53.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-lbfgs-default", "entry": "ASE 3.29.0 ase-3.29.0-morse-lbfgs-default", "code": "ASE", "value": 53.0, "best": false, "held": false, "failed": false}, {"id": "eon-main-morse-lbfgs-m100", "entry": "eOn 3.6.0 eon-main-morse-lbfgs-m100", "code": "eOn", "value": 54.0, "best": false, "held": false, "failed": false}, {"id": "eon-main-morse-lbfgs", "entry": "eOn 3.6.0 eon-main-morse-lbfgs", "code": "eOn", "value": 54.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-bfgs", "entry": "rgmin 0.4.0 rgmin-morse-bfgs", "code": "rgmin", "value": 54.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-bfgs-tuned", "entry": "ASE 3.29.0 ase-3.29.0-morse-bfgs-tuned", "code": "ASE", "value": 55.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-cg", "entry": "rgmin 0.4.0 rgmin-morse-cg", "code": "rgmin", "value": 55.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-preconlbfgs-default", "entry": "ASE 3.29.0 ase-3.29.0-morse-preconlbfgs-default", "code": "ASE", "value": 60.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-sr2-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-sr2-tuned", "code": "rgmin", "value": 60.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-sr2", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-sr2", "code": "rgmin", "value": 60.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-sr1-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-sr1-tuned", "code": "rgmin", "value": 62.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-quickmin-tuned", "entry": "rgmin 0.4.0 rgmin-morse-quickmin-tuned", "code": "rgmin", "value": 62.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-quickmin", "entry": "rgmin 0.4.0 rgmin-morse-quickmin", "code": "rgmin", "value": 62.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-sr1", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-sr1", "code": "rgmin", "value": 67.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-bfgs-tuned", "entry": "rgmin 0.4.0 rgmin-morse-bfgs-tuned", "code": "rgmin", "value": 71.0, "best": false, "held": false, "failed": false}, {"id": "sella-2.6.0-morse-min-tuned", "entry": "Sella 2.6.0 sella-2.6.0-morse-min-tuned", "code": "Sella", "value": 71.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-sd-tuned", "entry": "rgmin 0.4.0 rgmin-morse-sd-tuned", "code": "rgmin", "value": 90.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-bfgslinesearch-tuned", "entry": "ASE 3.29.0 ase-3.29.0-morse-bfgslinesearch-tuned", "code": "ASE", "value": 93.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-sd", "entry": "rgmin 0.4.0 rgmin-morse-sd", "code": "rgmin", "value": 97.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-morse-cg", "entry": "eOn 3.5.0 eon-client-morse-cg", "code": "eOn", "value": 106.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-morse-cg", "entry": "Eon svn r2549 eon-svn-morse-cg", "code": "Eon svn", "value": 106.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-fire-default", "entry": "ASE 3.29.0 ase-3.29.0-morse-fire-default", "code": "ASE", "value": 113.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-fire-tuned", "entry": "ASE 3.29.0 ase-3.29.0-morse-fire-tuned", "code": "ASE", "value": 113.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-fire-tuned", "entry": "rgmin 0.4.0 rgmin-morse-fire-tuned", "code": "rgmin", "value": 113.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-fire", "entry": "rgmin 0.4.0 rgmin-morse-fire", "code": "rgmin", "value": 116.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-fire2-tuned", "entry": "rgmin 0.4.0 rgmin-morse-fire2-tuned", "code": "rgmin", "value": 122.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-fire2", "entry": "rgmin 0.4.0 rgmin-morse-fire2", "code": "rgmin", "value": 122.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-morse-fire", "entry": "eOn 3.5.0 eon-client-morse-fire", "code": "eOn", "value": 156.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-morse-fire", "entry": "Eon svn r2549 eon-svn-morse-fire", "code": "Eon svn", "value": 156.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-sr1", "entry": "rgmin 0.4.0 rgmin-morse-sr1", "code": "rgmin", "value": 170.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-morse-newton", "entry": "rgmin 0.4.0 rgmin-morse-newton", "code": "rgmin", "value": 199.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-0.4.1-morse-adam-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-adam-tuned", "code": "rgmin", "value": 219.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-adam", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-adam", "code": "rgmin", "value": 219.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-adam-tuned", "entry": "rgmin 0.4.0 rgmin-morse-adam-tuned", "code": "rgmin", "value": 286.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-adam", "entry": "rgmin 0.4.0 rgmin-morse-adam", "code": "rgmin", "value": 286.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-sr2", "entry": "rgmin 0.4.0 rgmin-morse-sr2", "code": "rgmin", "value": 341.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-preconfire-default", "entry": "ASE 3.29.0 ase-3.29.0-morse-preconfire-default", "code": "ASE", "value": 363.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-preconfire-tuned", "entry": "ASE 3.29.0 ase-3.29.0-morse-preconfire-tuned", "code": "ASE", "value": 366.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-sr1-tuned", "entry": "rgmin 0.4.0 rgmin-morse-sr1-tuned", "code": "rgmin", "value": 403.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-morse-sr2-tuned", "entry": "rgmin 0.4.0 rgmin-morse-sr2-tuned", "code": "rgmin", "value": 415.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-morse-diis", "entry": "rgmin 0.4.0 rgmin-morse-diis", "code": "rgmin", "value": 767.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-morse-diis-tuned", "entry": "rgmin 0.4.0 rgmin-morse-diis-tuned", "code": "rgmin", "value": 997.0, "best": false, "held": false, "failed": true}, {"id": "eon-client-morse-sd", "entry": "eOn 3.5.0 eon-client-morse-sd", "code": "eOn", "value": 7038.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-morse-sd", "entry": "Eon svn r2549 eon-svn-morse-sd", "code": "Eon svn", "value": 7038.0, "best": false, "held": false, "failed": true}]}</script></figure>
+   <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:90"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "rgmin-0.4.1-morse-newton-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-newton-tuned", "code": "rgmin", "value": 8.0, "best": true, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-newton", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-newton", "code": "rgmin", "value": 8.0, "best": true, "held": false, "failed": false}, {"id": "rgmin-morse-newton-tuned", "entry": "rgmin 0.4.0 rgmin-morse-newton-tuned", "code": "rgmin", "value": 8.0, "best": true, "held": false, "failed": false}, {"id": "rgmin-morse-dogleg", "entry": "rgmin 0.4.0 rgmin-morse-dogleg", "code": "rgmin", "value": 10.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-diis-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-diis-tuned", "code": "rgmin", "value": 27.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-diis", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-diis", "code": "rgmin", "value": 27.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-lbfgs-m100-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-lbfgs-m100-tuned", "code": "rgmin", "value": 27.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-lbfgs-m100", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-lbfgs-m100", "code": "rgmin", "value": 27.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-lbfgs-m20-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-lbfgs-m20-tuned", "code": "rgmin", "value": 27.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-lbfgs-m20", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-lbfgs-m20", "code": "rgmin", "value": 27.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-lbfgs-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-lbfgs-tuned", "code": "rgmin", "value": 27.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-lbfgs", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-lbfgs", "code": "rgmin", "value": 27.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-lbfgs-m100-tuned", "entry": "rgmin 0.4.0 rgmin-morse-lbfgs-m100-tuned", "code": "rgmin", "value": 27.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-lbfgs-m100", "entry": "rgmin 0.4.0 rgmin-morse-lbfgs-m100", "code": "rgmin", "value": 27.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-lbfgs-m20-tuned", "entry": "rgmin 0.4.0 rgmin-morse-lbfgs-m20-tuned", "code": "rgmin", "value": 27.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-lbfgs-m20", "entry": "rgmin 0.4.0 rgmin-morse-lbfgs-m20", "code": "rgmin", "value": 27.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-lbfgs-tuned", "entry": "rgmin 0.4.0 rgmin-morse-lbfgs-tuned", "code": "rgmin", "value": 27.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-lbfgs", "entry": "rgmin 0.4.0 rgmin-morse-lbfgs", "code": "rgmin", "value": 27.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-bfgslinesearch-default", "entry": "ASE 3.29.0 ase-3.29.0-morse-bfgslinesearch-default", "code": "ASE", "value": 29.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-preconlbfgs-tuned", "entry": "ASE 3.29.0 ase-3.29.0-morse-preconlbfgs-tuned", "code": "ASE", "value": 29.0, "best": false, "held": false, "failed": false}, {"id": "sella-2.6.0-morse-min-default", "entry": "Sella 2.6.0 sella-2.6.0-morse-min-default", "code": "Sella", "value": 29.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-bb", "entry": "rgmin 0.4.0 rgmin-morse-bb", "code": "rgmin", "value": 30.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-0.4.1-morse-dogleg-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-dogleg-tuned", "code": "rgmin", "value": 31.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-dogleg", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-dogleg", "code": "rgmin", "value": 31.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-dogleg-tuned", "entry": "rgmin 0.4.0 rgmin-morse-dogleg-tuned", "code": "rgmin", "value": 31.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-lbfgs-tuned", "entry": "ASE 3.29.0 ase-3.29.0-morse-lbfgs-tuned", "code": "ASE", "value": 32.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-bb-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-bb-tuned", "code": "rgmin", "value": 33.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-bb", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-bb", "code": "rgmin", "value": 33.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-bb-tuned", "entry": "rgmin 0.4.0 rgmin-morse-bb-tuned", "code": "rgmin", "value": 33.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-preconode12r-default", "entry": "ASE 3.29.0 ase-3.29.0-morse-preconode12r-default", "code": "ASE", "value": 42.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-preconode12r-tuned", "entry": "ASE 3.29.0 ase-3.29.0-morse-preconode12r-tuned", "code": "ASE", "value": 42.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-cg-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-cg-tuned", "code": "rgmin", "value": 50.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-cg", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-cg", "code": "rgmin", "value": 50.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-cg-tuned", "entry": "rgmin 0.4.0 rgmin-morse-cg-tuned", "code": "rgmin", "value": 50.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-morse-lbfgs", "entry": "eOn 3.5.0 eon-client-morse-lbfgs", "code": "eOn", "value": 52.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-morse-lbfgs", "entry": "Eon svn r2549 eon-svn-morse-lbfgs", "code": "Eon svn", "value": 52.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-bfgs-default", "entry": "ASE 3.29.0 ase-3.29.0-morse-bfgs-default", "code": "ASE", "value": 53.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-lbfgs-default", "entry": "ASE 3.29.0 ase-3.29.0-morse-lbfgs-default", "code": "ASE", "value": 53.0, "best": false, "held": false, "failed": false}, {"id": "eon-main-morse-lbfgs-m100", "entry": "eOn 3.6.0 eon-main-morse-lbfgs-m100", "code": "eOn", "value": 54.0, "best": false, "held": false, "failed": false}, {"id": "eon-main-morse-lbfgs", "entry": "eOn 3.6.0 eon-main-morse-lbfgs", "code": "eOn", "value": 54.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-bfgs", "entry": "rgmin 0.4.0 rgmin-morse-bfgs", "code": "rgmin", "value": 54.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-bfgs-tuned", "entry": "ASE 3.29.0 ase-3.29.0-morse-bfgs-tuned", "code": "ASE", "value": 55.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-cg", "entry": "rgmin 0.4.0 rgmin-morse-cg", "code": "rgmin", "value": 55.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-preconlbfgs-default", "entry": "ASE 3.29.0 ase-3.29.0-morse-preconlbfgs-default", "code": "ASE", "value": 60.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-sr2-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-sr2-tuned", "code": "rgmin", "value": 60.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-sr2", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-sr2", "code": "rgmin", "value": 60.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-quickmin-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-quickmin-tuned", "code": "rgmin", "value": 62.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-quickmin", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-quickmin", "code": "rgmin", "value": 62.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-sr1-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-sr1-tuned", "code": "rgmin", "value": 62.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-sr1", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-sr1", "code": "rgmin", "value": 62.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-quickmin-tuned", "entry": "rgmin 0.4.0 rgmin-morse-quickmin-tuned", "code": "rgmin", "value": 62.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-quickmin", "entry": "rgmin 0.4.0 rgmin-morse-quickmin", "code": "rgmin", "value": 62.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-bfgs-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-bfgs-tuned", "code": "rgmin", "value": 71.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-bfgs", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-bfgs", "code": "rgmin", "value": 71.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-bfgs-tuned", "entry": "rgmin 0.4.0 rgmin-morse-bfgs-tuned", "code": "rgmin", "value": 71.0, "best": false, "held": false, "failed": false}, {"id": "sella-2.6.0-morse-min-tuned", "entry": "Sella 2.6.0 sella-2.6.0-morse-min-tuned", "code": "Sella", "value": 71.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-sd-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-sd-tuned", "code": "rgmin", "value": 90.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-sd", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-sd", "code": "rgmin", "value": 90.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-sd-tuned", "entry": "rgmin 0.4.0 rgmin-morse-sd-tuned", "code": "rgmin", "value": 90.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-bfgslinesearch-tuned", "entry": "ASE 3.29.0 ase-3.29.0-morse-bfgslinesearch-tuned", "code": "ASE", "value": 93.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-sd", "entry": "rgmin 0.4.0 rgmin-morse-sd", "code": "rgmin", "value": 97.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-morse-cg", "entry": "eOn 3.5.0 eon-client-morse-cg", "code": "eOn", "value": 106.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-morse-cg", "entry": "Eon svn r2549 eon-svn-morse-cg", "code": "Eon svn", "value": 106.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-fire-default", "entry": "ASE 3.29.0 ase-3.29.0-morse-fire-default", "code": "ASE", "value": 113.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-fire-tuned", "entry": "ASE 3.29.0 ase-3.29.0-morse-fire-tuned", "code": "ASE", "value": 113.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-fire-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-fire-tuned", "code": "rgmin", "value": 113.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-fire", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-fire", "code": "rgmin", "value": 113.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-fire-tuned", "entry": "rgmin 0.4.0 rgmin-morse-fire-tuned", "code": "rgmin", "value": 113.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-fire", "entry": "rgmin 0.4.0 rgmin-morse-fire", "code": "rgmin", "value": 116.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-fire2-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-fire2-tuned", "code": "rgmin", "value": 122.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-fire2", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-fire2", "code": "rgmin", "value": 122.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-fire2-tuned", "entry": "rgmin 0.4.0 rgmin-morse-fire2-tuned", "code": "rgmin", "value": 122.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-fire2", "entry": "rgmin 0.4.0 rgmin-morse-fire2", "code": "rgmin", "value": 122.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-morse-fire", "entry": "eOn 3.5.0 eon-client-morse-fire", "code": "eOn", "value": 156.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-morse-fire", "entry": "Eon svn r2549 eon-svn-morse-fire", "code": "Eon svn", "value": 156.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-sr1", "entry": "rgmin 0.4.0 rgmin-morse-sr1", "code": "rgmin", "value": 170.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-morse-newton", "entry": "rgmin 0.4.0 rgmin-morse-newton", "code": "rgmin", "value": 199.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-0.4.1-morse-adam-tuned", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-adam-tuned", "code": "rgmin", "value": 219.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-0.4.1-morse-adam", "entry": "rgmin 0.4.1 rgmin-0.4.1-morse-adam", "code": "rgmin", "value": 219.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-adam-tuned", "entry": "rgmin 0.4.0 rgmin-morse-adam-tuned", "code": "rgmin", "value": 286.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-adam", "entry": "rgmin 0.4.0 rgmin-morse-adam", "code": "rgmin", "value": 286.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-sr2", "entry": "rgmin 0.4.0 rgmin-morse-sr2", "code": "rgmin", "value": 341.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-preconfire-default", "entry": "ASE 3.29.0 ase-3.29.0-morse-preconfire-default", "code": "ASE", "value": 363.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-preconfire-tuned", "entry": "ASE 3.29.0 ase-3.29.0-morse-preconfire-tuned", "code": "ASE", "value": 366.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-morse-sr1-tuned", "entry": "rgmin 0.4.0 rgmin-morse-sr1-tuned", "code": "rgmin", "value": 403.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-morse-sr2-tuned", "entry": "rgmin 0.4.0 rgmin-morse-sr2-tuned", "code": "rgmin", "value": 415.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-morse-diis", "entry": "rgmin 0.4.0 rgmin-morse-diis", "code": "rgmin", "value": 767.0, "best": false, "held": false, "failed": true}, {"id": "rgmin-morse-diis-tuned", "entry": "rgmin 0.4.0 rgmin-morse-diis-tuned", "code": "rgmin", "value": 997.0, "best": false, "held": false, "failed": true}, {"id": "eon-client-morse-sd", "entry": "eOn 3.5.0 eon-client-morse-sd", "code": "eOn", "value": 7038.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-morse-sd", "entry": "Eon svn r2549 eon-svn-morse-sd", "code": "Eon svn", "value": 7038.0, "best": false, "held": false, "failed": true}]}</script></figure>
    <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
