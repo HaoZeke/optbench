@@ -83,6 +83,31 @@ def test_socket_and_rgpot_share_one_counter(tmp_path):
         server.stop()
 
 
+def test_socket_refuses_the_call_past_the_cap():
+    evaluated = []
+
+    def evaluate(positions, atomic_numbers, box):
+        evaluated.append(tuple(positions))
+        return lj_cluster(positions, atomic_numbers, box)
+
+    server = PotServer(evaluate, cap=2).start()
+    try:
+        box = (0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+        numbers = [1, 1]
+        first = [0.0, 0.0, 0.0, 1.2, 0.0, 0.0]
+        second = [0.0, 0.0, 0.0, 1.3, 0.0, 0.0]
+        third = [0.0, 0.0, 0.0, 1.4, 0.0, 0.0]
+        remote_calculate(server.host, server.port, first, numbers, box)
+        remote_calculate(server.host, server.port, second, numbers, box)
+        with pytest.raises(RuntimeError, match="cap"):
+            remote_calculate(server.host, server.port, third, numbers, box)
+        calls, verify = remote_count(server.host, server.port)
+        assert (calls, verify) == (2, 0)
+        assert evaluated == [tuple(first), tuple(second)]
+    finally:
+        server.stop()
+
+
 def test_profile_keeps_an_unsolved_problem_in_the_denominator():
     costs = {"fast": [10.0, 10.0], "capped": [20.0, math.inf]}
     profile = performance_profile(costs)

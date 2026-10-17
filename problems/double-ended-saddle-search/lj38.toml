@@ -10,9 +10,23 @@ statement = "A refined saddle between the given end points. It need not be the t
 
 [convergence]
 gradient_norm = 0.001
+norm = "l2"
+force_norm = 0.001
+max_force_calls = 2500
+
+[band]
+interior_images = 5
+max_move = 0.05
+potential = "lj"
+
+[sample]
+pairs = 50
 
 [input]
 archive_path = "website/double-ended-saddle-search/lj38/coords.tgz"
+
+[geometry]
+kind = "xyz-pairs"
 
 [metrics]
 required = ["force_calls", "force_calls_min", "force_calls_median", "force_calls_max", "nfailed"]

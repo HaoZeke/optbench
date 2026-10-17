@@ -1,0 +1,16 @@
+{"curvature": -0.5952195520845129, "failed": false, "force_calls": 699, "force_norm": 0.0009822194660212677, "parameters": {"cg_translation": true, "dimer_separation": 0.0001, "displacement_method": "gauss", "eigenmode_method": "dimer", "extrapolate_forces": false, "f_rot_max": 1.0, "f_rot_min": 0.1, "gauss_std": 0.1, "initial_eigenmode_method": "gauss", "mask": "free", "max_num_rot": 1, "maximum_translation": 0.1, "order": 1, "trial_angle": 0.7853981633974483, "trial_trans_step": 0.001, "use_central_forces": true}, "saddle": true, "start": "seed-0000"}
+{"curvature": -0.5841076347724473, "failed": false, "force_calls": 1143, "force_norm": 0.0009946165708556568, "saddle": true, "start": "seed-0001"}
+{"curvature": -0.3222386385310756, "failed": false, "force_calls": 1528, "force_norm": 0.0009908517358054524, "saddle": true, "start": "seed-0002"}
+{"curvature": -0.5771181291492327, "failed": false, "force_calls": 814, "force_norm": 0.0009925936613646253, "saddle": true, "start": "seed-0003"}
+{"curvature": -1.0165466764865603, "failed": false, "force_calls": 1670, "force_norm": 0.0009076954873820276, "saddle": true, "start": "seed-0004"}
+{"curvature": -0.483727950490694, "failed": false, "force_calls": 924, "force_norm": 0.0008894174831628564, "saddle": true, "start": "seed-0005"}
+{"curvature": -0.6062145741398022, "failed": false, "force_calls": 1148, "force_norm": 0.0009509416851267028, "saddle": true, "start": "seed-0006"}
+{"curvature": -0.6146661476531862, "failed": false, "force_calls": 609, "force_norm": 0.0008529589957262586, "saddle": true, "start": "seed-0007"}
+{"curvature": -0.605897003855558, "failed": false, "force_calls": 1133, "force_norm": 0.0009402581789174503, "saddle": true, "start": "seed-0008"}
+{"curvature": -0.482580424436849, "failed": false, "force_calls": 1326, "force_norm": 0.0009063007031865823, "saddle": true, "start": "seed-0009"}
+{"curvature": -0.3279179199195773, "failed": false, "force_calls": 885, "force_norm": 0.0009742797469060671, "saddle": true, "start": "seed-0010"}
+{"curvature": -0.32040832120593304, "failed": false, "force_calls": 1276, "force_norm": 0.0009453118211731846, "saddle": true, "start": "seed-0011"}
+{"curvature": -0.36797376372500107, "failed": false, "force_calls": 1345, "force_norm": 0.0009779307704876658, "saddle": true, "start": "seed-0012"}
+{"curvature": -0.6133474658045048, "failed": false, "force_calls": 918, "force_norm": 0.0009073231257857057, "saddle": true, "start": "seed-0013"}
+{"curvature": -0.4848928335038551, "failed": false, "force_calls": 1037, "force_norm": 0.0009198734517679527, "saddle": true, "start": "seed-0014"}
+{"curvature": -0.3286871599078508, "failed": false, "force_calls": 1434, "force_norm": 0.000922175449972453, "saddle": true, "start": "seed-0015"}

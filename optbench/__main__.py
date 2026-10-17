@@ -68,24 +68,68 @@ def run(
     output: Path = Path("benchmark.dat"),
     workers: int = 1,
     work: Path | None = None,
+    limit: int = 0,
+    resume: bool = False,
 ) -> None:
     """Run one problem template and write benchmark.dat."""
+    from optbench.campaign import load_template
     from optbench.campaign import run as run_campaign
 
-    summary = run_campaign(
-        root,
-        problem,
-        template,
-        client=_eon_client(client),
-        geometries=geometries,
-        output=output,
-        workers=workers,
-        work=work,
-    )
+    loaded = load_template(root, template)
+    if loaded["engine"] == "rgsaddle-band":
+        from optbench.rgsaddle_band import run as run_band
+
+        summary = run_band(
+            root,
+            problem,
+            template,
+            output=output,
+            workers=workers,
+        )
+    else:
+        client_path = _eon_client(client) if loaded["engine"] in {"eon-client", "eon"} else client
+        summary = run_campaign(
+            root,
+            problem,
+            template,
+            client=client_path,
+            geometries=geometries,
+            output=output,
+            workers=workers,
+            work=work,
+            limit=limit,
+            resume=resume,
+        )
+    calls = summary.get("force_calls")
     print(
         f"{summary['problem']} {summary['template']} "
-        f"force_calls={summary['force_calls']} nfailed={summary['nfailed']} "
+        f"force_calls={calls} nfailed={summary['nfailed']} "
         f"starts={summary['starts']}"
+    )
+
+
+@app.command(name="eon-job")
+def eon_job(
+    name: str,
+    *,
+    root: Path = Path("."),
+    client: Path | None = None,
+    output: Path = Path("benchmark.dat"),
+    workers: int = 1,
+    work: Path | None = None,
+    repetitions: int | None = None,
+) -> None:
+    """Run one named eOn band or saddle job and write benchmark.dat."""
+    from optbench.eon_jobs import run_named
+
+    run_named(
+        root,
+        name,
+        _eon_client(client),
+        output,
+        workers=workers,
+        work=work,
+        repetitions=repetitions,
     )
 
 
@@ -159,6 +203,37 @@ def _head(root: Path) -> str:
         ).strip()
     except (OSError, subprocess.CalledProcessError):
         return ""
+
+
+@app.command(name="campaign-ase")
+def campaign_ase(
+    *,
+    root: Path = Path("."),
+    output_dir: Path = Path("results/campaign"),
+    workers: int = 1,
+    limit: int = 0,
+    match: str = "",
+    ranked_only: bool = True,
+    resume: bool = False,
+) -> None:
+    """Run the ranked ASE and Sella templates."""
+    from optbench.ase_sella import run_many
+
+    summaries = run_many(
+        root,
+        output_dir,
+        workers=workers,
+        limit=limit,
+        match=match,
+        ranked_only=ranked_only,
+        resume=resume,
+    )
+    for summary in summaries:
+        print(
+            f"{summary['problem']} {summary['template']} "
+            f"force_calls={summary['force_calls']} nfailed={summary['nfailed']} "
+            f"starts={summary['starts']}"
+        )
 
 
 @app.command

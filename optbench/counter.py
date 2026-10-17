@@ -23,16 +23,23 @@ def _key(coords: Sequence[float]) -> tuple[float, ...]:
     return tuple(float(value) for value in coords)
 
 
+class ForceCallCap(RuntimeError):
+    """A search call at the budget. It is not counted and does not run."""
+
+
 class HarnessCounter:
     """The single force-call tally.
 
     ``cache`` is true for an in-process wrapper and false for the socket,
-    where each request is one client entry.
+    where each request is one client entry. ``cap`` refuses a search call
+    once ``calls`` has reached it. The refused call is not counted, and a
+    verification call does not spend the budget.
     """
 
-    def __init__(self, *, cache: bool = True):
+    def __init__(self, *, cache: bool = True, cap: int | None = None):
         self.calls = 0
         self.verify_calls = 0
+        self.cap = None if cap is None else int(cap)
         self._verifying = False
         self._cache_enabled = cache
         self._cache_key: tuple[float, ...] | None = None
@@ -58,6 +65,8 @@ class HarnessCounter:
             if self._verifying:
                 self.verify_calls += 1
             else:
+                if self.cap is not None and self.calls >= self.cap:
+                    raise ForceCallCap(f"force-call cap {self.cap}")
                 self.calls += 1
             return True, None
 
@@ -119,24 +128,38 @@ class CountedPotential:
         return self._counter.verification()
 
 
-def attach_ase_counter(calculator: object, cap: int | None = None) -> object:
+def attach_ase_counter(
+    calculator: object,
+    cap: int | None = None,
+    state: dict | None = None,
+    counter: HarnessCounter | None = None,
+) -> object:
     """Count ASE ``calculate`` entries on this calculator instance.
 
     ASE skips ``calculate`` when the atoms have not changed, so an energy
     request and a force request at the same geometry are one call. A
     call past ``cap`` raises ``RuntimeError`` before the potential runs.
+    ``counter`` and ``state`` are shared when several images must increment
+    one ``HarnessCounter``.
     """
     original = calculator.calculate
-    counter = HarnessCounter(cache=False)
-    state = {"calls": 0, "verify_calls": 0, "verifying": False, "cap": cap}
+    if counter is None:
+        counter = HarnessCounter(cache=False, cap=cap)
+    elif cap is not None:
+        counter.cap = int(cap)
+    if state is None:
+        state = {"calls": 0, "verify_calls": 0, "verifying": False, "cap": cap}
+    elif cap is not None:
+        state["cap"] = cap
 
     def calculate(atoms=None, properties=("energy", "forces"), system_changes=("positions",)):
         counter._verifying = bool(state["verifying"])
-        counter.charge((float(counter.calls + counter.verify_calls),))
+        try:
+            counter.charge((float(counter.calls + counter.verify_calls),))
+        except ForceCallCap as exc:
+            raise RuntimeError("force-call cap") from exc
         state["calls"] = counter.calls
         state["verify_calls"] = counter.verify_calls
-        if not state["verifying"] and cap is not None and state["calls"] > cap:
-            raise RuntimeError("force-call cap")
         return original(atoms, properties, system_changes)
 
     calculator.calculate = calculate

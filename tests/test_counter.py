@@ -1,4 +1,4 @@
-from optbench.counter import CountedPotential, PeleCounter, attach_ase_counter
+from optbench.counter import CountedPotential, ForceCallCap, HarnessCounter, PeleCounter, attach_ase_counter
 
 
 def test_repeated_coordinates_are_one_force_call():
@@ -58,7 +58,32 @@ def test_ase_style_calculate_counts_one_entry():
         assert "cap" in str(exc)
     else:
         raise AssertionError("cap was not enforced")
-    assert calc.optbench_counter["calls"] == 3
+    assert calc.optbench_counter["calls"] == 2
+
+
+def test_harness_counter_refuses_the_call_past_the_cap():
+    seen = []
+
+    def evaluate(coords):
+        seen.append(coords)
+        return 0.0, (0.0,)
+
+    counter = HarnessCounter(cache=False, cap=2)
+    counter.charge((0.0,))
+    counter.charge((1.0,))
+    try:
+        counter.charge((2.0,))
+    except ForceCallCap as exc:
+        assert "2" in str(exc)
+    else:
+        raise AssertionError("cap was not enforced")
+    assert counter.calls == 2
+    assert seen == []
+    with counter.verification():
+        fresh, _cached = counter.charge((3.0,))
+    assert fresh is True
+    assert counter.calls == 2
+    assert counter.verify_calls == 1
 
 
 def test_pele_energy_is_one_gradient_entry():

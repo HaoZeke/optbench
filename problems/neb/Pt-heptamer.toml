@@ -5,6 +5,26 @@ problem = "Pt-heptamer"
 contract = "partial"
 entry_count = 12
 
+[convergence]
+norm = "l2"
+force_norm = 0.01
+force_unit = "eV/Ang"
+max_force_calls = 10000
+
+[band]
+interior_images = 8
+max_move = 0.2
+potential = "morse_pt"
+
+[sample]
+pairs = 13
+
+[input]
+archive_path = "website/neb/Pt-heptamer/eon-lbfgs/minima.tgz"
+
+[geometry]
+kind = "con-minima-pairs"
+
 [metrics]
 required = ["force_calls", "force_calls_max", "force_calls_min"]
 

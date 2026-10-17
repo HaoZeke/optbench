@@ -1,0 +1,378 @@
+{
+  "schema": "optbench.result/v1",
+  "status": "sota",
+  "problem": "neb/Pt-heptamer",
+  "submitter": "Rohit Goswami",
+  "date": "2026-10-15",
+  "host": "cursor",
+  "runs": [
+    {
+      "entry": "eon-main-neb-pt-lbfgs",
+      "code": "eOn",
+      "algorithm": "LBFGS",
+      "code_version": "3.6.0",
+      "commit": "1d71c944501832bfafb955ffe13b9aae50c8efd4",
+      "present_source": true,
+      "starts": 13,
+      "nfailed": 0,
+      "method": {
+        "client": "eonclient 3.6.0 (1d71c94), compiled Thu Oct 15 09:00:20 AM GMT 2026",
+        "reducer": "report-neb",
+        "ini": {
+          "Main": {
+            "job": "nudged_elastic_band"
+          },
+          "Potential": {
+            "potential": "morse_pt"
+          },
+          "Optimizer": {
+            "opt_method": "lbfgs",
+            "convergence_metric": "norm",
+            "converged_force": 0.01,
+            "max_move": 0.2,
+            "max_iterations": 1000
+          },
+          "Nudged Elastic Band": {
+            "images": 8,
+            "spring": 5.0,
+            "climbing_image_method": true,
+            "climbing_image_converged_only": true,
+            "climbing_image_band_slack": 10.0,
+            "doubly_nudged": false,
+            "doubly_nudged_switching": false,
+            "old_tangent": false,
+            "opt_method": "lbfgs",
+            "converged_force": 0.01,
+            "max_iterations": 1000,
+            "setup_mmf_peaks": true
+          },
+          "LBFGS": {
+            "lbfgs_memory": 20,
+            "lbfgs_inverse_curvature": 0.01,
+            "lbfgs_max_inverse_curvature": 0.0,
+            "lbfgs_auto_scale": true,
+            "lbfgs_angle_reset": true,
+            "lbfgs_distance_reset": true,
+            "lbfgs_curvature": "reset",
+            "lbfgs_project_rigid": false,
+            "lbfgs_secant": "standard",
+            "lbfgs_precon": "none",
+            "lbfgs_step": "lbfgs",
+            "lbfgs_h0": "sy_yy",
+            "lbfgs_accept": "energy",
+            "lbfgs_extra_updates": 0,
+            "lbfgs_cautious_eps": 1e-06,
+            "lbfgs_cautious_alpha": 0.01,
+            "lbfgs_precon_A": 3.0,
+            "lbfgs_precon_mu": 1.0,
+            "lbfgs_precon_rcut": 0.0
+          }
+        },
+        "note": "Default L-BFGS climbing-image NEB on the 13 Pt-heptamer bands. Memory 20 is the struct default. The mean is force_calls_neb divided by 8. A value under 10000 stays in the mean. nfailed counts termination_reason other than 0. climbing_image_converged_only and setup_mmf_peaks are the binary defaults at this commit.",
+        "failure_cap": 10000,
+        "images_for_mean": 8
+      },
+      "metrics": {
+        "force_calls": 439,
+        "force_calls_min": 32,
+        "force_calls_max": 801,
+        "force_calls_median": 467.0,
+        "nfailed": 0,
+        "mean_unrounded": 439.46153846153845,
+        "n_in_mean": 13,
+        "failure_cap": 10000
+      },
+      "per_start": [
+        {
+          "count_key": "force_calls_neb",
+          "failed": false,
+          "force_calls": 36.0,
+          "geometry": "min01",
+          "raw": 288,
+          "reason": "0"
+        },
+        {
+          "count_key": "force_calls_neb",
+          "failed": false,
+          "force_calls": 32.0,
+          "geometry": "min02",
+          "raw": 256,
+          "reason": "0"
+        },
+        {
+          "count_key": "force_calls_neb",
+          "failed": false,
+          "force_calls": 584.0,
+          "geometry": "min03",
+          "raw": 4672,
+          "reason": "0"
+        },
+        {
+          "count_key": "force_calls_neb",
+          "failed": false,
+          "force_calls": 584.0,
+          "geometry": "min04",
+          "raw": 4672,
+          "reason": "0"
+        },
+        {
+          "count_key": "force_calls_neb",
+          "failed": false,
+          "force_calls": 596.0,
+          "geometry": "min05",
+          "raw": 4768,
+          "reason": "0"
+        },
+        {
+          "count_key": "force_calls_neb",
+          "failed": false,
+          "force_calls": 782.0,
+          "geometry": "min06",
+          "raw": 6256,
+          "reason": "0"
+        },
+        {
+          "count_key": "force_calls_neb",
+          "failed": false,
+          "force_calls": 801.0,
+          "geometry": "min07",
+          "raw": 6408,
+          "reason": "0"
+        },
+        {
+          "count_key": "force_calls_neb",
+          "failed": false,
+          "force_calls": 230.0,
+          "geometry": "min08",
+          "raw": 1840,
+          "reason": "0"
+        },
+        {
+          "count_key": "force_calls_neb",
+          "failed": false,
+          "force_calls": 260.0,
+          "geometry": "min09",
+          "raw": 2080,
+          "reason": "0"
+        },
+        {
+          "count_key": "force_calls_neb",
+          "failed": false,
+          "force_calls": 444.0,
+          "geometry": "min10",
+          "raw": 3552,
+          "reason": "0"
+        },
+        {
+          "count_key": "force_calls_neb",
+          "failed": false,
+          "force_calls": 468.0,
+          "geometry": "min11",
+          "raw": 3744,
+          "reason": "0"
+        },
+        {
+          "count_key": "force_calls_neb",
+          "failed": false,
+          "force_calls": 429.0,
+          "geometry": "min12",
+          "raw": 3432,
+          "reason": "0"
+        },
+        {
+          "count_key": "force_calls_neb",
+          "failed": false,
+          "force_calls": 467.0,
+          "geometry": "min13",
+          "raw": 3736,
+          "reason": "0"
+        }
+      ],
+      "notes": "Default L-BFGS climbing-image NEB on the 13 Pt-heptamer bands. Memory 20 is the struct default. The mean is force_calls_neb divided by 8. A value under 10000 stays in the mean. nfailed counts termination_reason other than 0. climbing_image_converged_only and setup_mmf_peaks are the binary defaults at this commit. All 13 bands finished under the cap. The published mean divides force_calls_neb by 8. Unrounded mean 439.46153846153845. 13 starts enter the mean. Per-start rows are in results/campaign/eon-main-neb-pt-lbfgs.starts. Run on host cursor."
+    },
+    {
+      "entry": "eon-main-neb-pt-lbfgs-m100",
+      "code": "eOn",
+      "algorithm": "LBFGS",
+      "code_version": "3.6.0",
+      "commit": "1d71c944501832bfafb955ffe13b9aae50c8efd4",
+      "present_source": true,
+      "starts": 13,
+      "nfailed": 0,
+      "method": {
+        "client": "eonclient 3.6.0 (1d71c94), compiled Thu Oct 15 09:00:20 AM GMT 2026",
+        "reducer": "report-neb",
+        "ini": {
+          "Main": {
+            "job": "nudged_elastic_band"
+          },
+          "Potential": {
+            "potential": "morse_pt"
+          },
+          "Optimizer": {
+            "opt_method": "lbfgs",
+            "convergence_metric": "norm",
+            "converged_force": 0.01,
+            "max_move": 0.2,
+            "max_iterations": 1000
+          },
+          "Nudged Elastic Band": {
+            "images": 8,
+            "spring": 5.0,
+            "climbing_image_method": true,
+            "climbing_image_converged_only": true,
+            "climbing_image_band_slack": 10.0,
+            "doubly_nudged": false,
+            "doubly_nudged_switching": false,
+            "old_tangent": false,
+            "opt_method": "lbfgs",
+            "converged_force": 0.01,
+            "max_iterations": 1000,
+            "setup_mmf_peaks": true
+          },
+          "LBFGS": {
+            "lbfgs_memory": 100,
+            "lbfgs_inverse_curvature": 0.01,
+            "lbfgs_max_inverse_curvature": 0.0,
+            "lbfgs_auto_scale": true,
+            "lbfgs_angle_reset": true,
+            "lbfgs_distance_reset": true,
+            "lbfgs_curvature": "reset",
+            "lbfgs_project_rigid": false,
+            "lbfgs_secant": "standard",
+            "lbfgs_precon": "none",
+            "lbfgs_step": "lbfgs",
+            "lbfgs_h0": "sy_yy",
+            "lbfgs_accept": "energy",
+            "lbfgs_extra_updates": 0,
+            "lbfgs_cautious_eps": 1e-06,
+            "lbfgs_cautious_alpha": 0.01,
+            "lbfgs_precon_A": 3.0,
+            "lbfgs_precon_mu": 1.0,
+            "lbfgs_precon_rcut": 0.0
+          }
+        },
+        "note": "Tuned L-BFGS climbing-image NEB. Memory 100 is the only change from eon/neb-pt-lbfgs.",
+        "failure_cap": 10000,
+        "images_for_mean": 8
+      },
+      "metrics": {
+        "force_calls": 440,
+        "force_calls_min": 32,
+        "force_calls_max": 801,
+        "force_calls_median": 464.0,
+        "nfailed": 0,
+        "mean_unrounded": 440.2307692307692,
+        "n_in_mean": 13,
+        "failure_cap": 10000
+      },
+      "per_start": [
+        {
+          "count_key": "force_calls_neb",
+          "failed": false,
+          "force_calls": 36.0,
+          "geometry": "min01",
+          "raw": 288,
+          "reason": "0"
+        },
+        {
+          "count_key": "force_calls_neb",
+          "failed": false,
+          "force_calls": 32.0,
+          "geometry": "min02",
+          "raw": 256,
+          "reason": "0"
+        },
+        {
+          "count_key": "force_calls_neb",
+          "failed": false,
+          "force_calls": 584.0,
+          "geometry": "min03",
+          "raw": 4672,
+          "reason": "0"
+        },
+        {
+          "count_key": "force_calls_neb",
+          "failed": false,
+          "force_calls": 584.0,
+          "geometry": "min04",
+          "raw": 4672,
+          "reason": "0"
+        },
+        {
+          "count_key": "force_calls_neb",
+          "failed": false,
+          "force_calls": 596.0,
+          "geometry": "min05",
+          "raw": 4768,
+          "reason": "0"
+        },
+        {
+          "count_key": "force_calls_neb",
+          "failed": false,
+          "force_calls": 782.0,
+          "geometry": "min06",
+          "raw": 6256,
+          "reason": "0"
+        },
+        {
+          "count_key": "force_calls_neb",
+          "failed": false,
+          "force_calls": 801.0,
+          "geometry": "min07",
+          "raw": 6408,
+          "reason": "0"
+        },
+        {
+          "count_key": "force_calls_neb",
+          "failed": false,
+          "force_calls": 230.0,
+          "geometry": "min08",
+          "raw": 1840,
+          "reason": "0"
+        },
+        {
+          "count_key": "force_calls_neb",
+          "failed": false,
+          "force_calls": 260.0,
+          "geometry": "min09",
+          "raw": 2080,
+          "reason": "0"
+        },
+        {
+          "count_key": "force_calls_neb",
+          "failed": false,
+          "force_calls": 444.0,
+          "geometry": "min10",
+          "raw": 3552,
+          "reason": "0"
+        },
+        {
+          "count_key": "force_calls_neb",
+          "failed": false,
+          "force_calls": 468.0,
+          "geometry": "min11",
+          "raw": 3744,
+          "reason": "0"
+        },
+        {
+          "count_key": "force_calls_neb",
+          "failed": false,
+          "force_calls": 442.0,
+          "geometry": "min12",
+          "raw": 3536,
+          "reason": "0"
+        },
+        {
+          "count_key": "force_calls_neb",
+          "failed": false,
+          "force_calls": 464.0,
+          "geometry": "min13",
+          "raw": 3712,
+          "reason": "0"
+        }
+      ],
+      "notes": "Tuned L-BFGS climbing-image NEB. Memory 100 is the only change from eon/neb-pt-lbfgs. All 13 bands finished under the cap. The published mean divides force_calls_neb by 8. Unrounded mean 440.2307692307692. 13 starts enter the mean. Per-start rows are in results/campaign/eon-main-neb-pt-lbfgs-m100.starts. Run on host cursor."
+    }
+  ]
+}

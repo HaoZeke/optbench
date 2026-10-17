@@ -1,0 +1,12 @@
+force_calls 2015
+force_calls_min 151
+force_calls_max 9299
+force_calls_median 757.0
+nfailed 12
+code eOn
+code_version 3.6.0
+commit 1d71c944501832bfafb955ffe13b9aae50c8efd4
+algorithm LBFGS
+template eon/ts-lj38-dimer-m100
+problem tsopt/LJ38
+reducer report-capped

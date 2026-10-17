@@ -1,0 +1,42 @@
+id = "sella/pt-island-ts-default"
+engine = "sella"
+code = "Sella"
+code_version = "2.6.0"
+commit = "6cfb60cdb100a146c3c6f0587d5308b247aa8010"
+algorithm = "Sella"
+problem = "tsopt/pt-island"
+task = "sella"
+profile = "default"
+reducer = "all"
+ranked = true
+parameter_source = "default"
+note = "Sella 2.6.0 saddle defaults, order 1. The initial mode is the displacement from reactant.con."
+
+[optimizer]
+name = "Sella"
+
+[optimizer.parameters]
+order = 1
+
+[potential]
+kind = "morse"
+D = 0.7102
+alpha = 1.6047
+r0 = 2.897
+rc = 9.5
+form = "smooth"
+pbc = [true, true, false]
+
+[stop]
+norm = "l2"
+force_norm = 0.001
+max_steps = 1000
+max_force_calls = 100000
+
+[input]
+archive_path = "website/tsopt/pt-island/pt-island-con.tgz"
+select = "initial"
+
+[sella]
+order = 1
+v0 = "reactant"

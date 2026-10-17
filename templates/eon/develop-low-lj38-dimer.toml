@@ -1,0 +1,34 @@
+id = "eon/develop-low-lj38-dimer"
+engine = "eon"
+problem = "lowest-eigenvector/lj38"
+code = "eOn"
+code_version = "3.6.0"
+commit = "7095b23ac17d49f434a5e08ccb072897ceca698e"
+algorithm = "Dimer"
+reducer = "lowest-overlap"
+failure_cap = 10000
+note = "Lowest mode of the 200 LJ38 geometries. Saddle Search max_iterations is 0, so the client returns after the mode. Improved dimer, rotation conjugate gradient, converged_angle 0. The harness raises rotations_max from 1 to 1000 and keeps the smallest value whose absolute overlap with the reference mode is at least 0.99. The recorded total_force_calls are that successful run. A client termination reason of 5 is the climb cap, not a failed mode. nfailed counts geometries that never reach the overlap. Potential ljcluster. direction.dat is numpy np.random.seed(314159) then a normalized 38 by 3 random array, the same vector for every geometry. client_displace_type load. Main random_seed is 1."
+
+overlap = 0.99
+iteration_limit = 1000
+
+[ini.Main]
+job = "saddle_search"
+finite_difference = 0.001
+random_seed = 1
+
+[ini.Potential]
+potential = "ljcluster"
+
+[ini."Saddle Search"]
+max_iterations = 0
+min_mode_method = "dimer"
+client_displace_type = "load"
+displace_magnitude = 0.1
+
+[ini.Dimer]
+improved = true
+opt_method = "cg"
+converged_angle = 0
+rotations_max = 1
+rotations_min = 1

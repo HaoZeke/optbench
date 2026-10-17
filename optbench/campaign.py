@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import shutil
+import statistics
 import subprocess
 import tarfile
 import tomllib
@@ -17,7 +18,7 @@ from pathlib import Path
 
 from .problems import load_problem
 from .score import summarize_capped
-from .v2 import client_start_records, write_starts
+from .v2 import client_start_records
 
 _INI_ORDER = ("Main", "Potential", "Optimizer")
 
@@ -47,8 +48,10 @@ def load_template(root: Path, name: str) -> dict:
     if not path.is_file():
         raise FileNotFoundError(f"no template {name}")
     data = tomllib.loads(path.read_text(encoding="utf-8"))
-    if "id" not in data or "engine" not in data or "ini" not in data:
-        raise ValueError(f"{path} needs id, engine, and ini")
+    if "id" not in data or "engine" not in data:
+        raise ValueError(f"{path} needs id and engine")
+    if data["engine"] == "eon-client" and "ini" not in data:
+        raise ValueError(f"{path} needs ini")
     data["_path"] = path
     return data
 
@@ -97,15 +100,48 @@ def iter_geometries(path: Path) -> list[Path]:
     return found
 
 
-def _check_stop(problem: dict, template: dict) -> int:
+_EON_ENGINES = {"eon-client", "eon"}
+
+
+def _check_stop(problem: dict, template: dict) -> int | None:
+    """Return the force-call cap, or None when the problem does not state one.
+
+    A template ``failure_cap`` fills that gap for an eOn run. It is the cap
+    the archived report used when the problem file left the number out.
+    ASE and Sella templates carry the same number on ``stop``.
+    ``max_iterations`` is checked only against a cap the problem itself states.
+    """
     convergence = problem.get("convergence") or {}
-    cap = int(convergence["max_force_calls"])
     optimizer = (template.get("ini") or {}).get("Optimizer") or {}
-    if "max_iterations" in optimizer and int(optimizer["max_iterations"]) < cap:
+    stop = template.get("stop") or {}
+    if "force_norm" in convergence and "force_norm" in stop:
+        if abs(float(stop["force_norm"]) - float(convergence["force_norm"])) > 1e-12:
+            raise ValueError("template force_norm is not the problem force norm")
+    if "gradient_norm" in convergence and "gradient_norm" in stop:
+        if abs(float(stop["gradient_norm"]) - float(convergence["gradient_norm"])) > 1e-12:
+            raise ValueError("template gradient_norm is not the problem gradient norm")
+    stated = convergence.get("max_force_calls")
+    cap = int(stated) if stated is not None else None
+    # A band step is not one force call, so its iteration limit can sit
+    # under the force budget. A minimizer's iteration limit cannot.
+    if (
+        cap is not None
+        and "band" not in problem
+        and "max_iterations" in optimizer
+        and int(optimizer["max_iterations"]) < cap
+    ):
         raise ValueError("template max_iterations is below the problem force-call cap")
     if "force_norm" in convergence and "converged_force" in optimizer:
         if abs(float(optimizer["converged_force"]) - float(convergence["force_norm"])) > 1e-12:
             raise ValueError("template converged_force is not the problem force norm")
+    if cap is not None and "max_force_calls" in stop and int(stop["max_force_calls"]) < cap:
+        raise ValueError("template max_force_calls is below the problem force-call cap")
+    if cap is None and template.get("failure_cap") is not None:
+        cap = int(template["failure_cap"])
+    if cap is None:
+        raw = stop.get("max_force_calls", stop.get("max_steps"))
+        if raw is not None:
+            cap = int(raw)
     return cap
 
 
@@ -124,8 +160,7 @@ def parse_client_dat(text: str) -> tuple[int | None, str | None]:
     return calls, reason
 
 
-def run_client(client: str, ini: str, con: str, work: str) -> int | None:
-    """Run one eonclient subprocess on one geometry. A bad termination is None."""
+def _launch_client(client: str, ini: str, con: str, work: str) -> Path:
     dest = Path(work)
     if dest.exists():
         shutil.rmtree(dest)
@@ -139,22 +174,46 @@ def run_client(client: str, ini: str, con: str, work: str) -> int | None:
         stderr=subprocess.DEVNULL,
         check=False,
     )
-    dat = dest / "results.dat"
+    return dest
+
+
+def client_result(work: Path) -> dict:
+    """Read one results.dat. Missing output has no call count and no reason."""
+    dat = Path(work) / "results.dat"
     if not dat.is_file():
-        return None
+        return {"force_calls": None, "reason": None}
     calls, reason = parse_client_dat(dat.read_text(encoding="utf-8", errors="replace"))
-    if calls is None or (reason is not None and reason != "0"):
+    return {"force_calls": calls, "reason": reason}
+
+
+def _bad_termination(calls: int | None, reason: str | None) -> bool:
+    return calls is None or (reason is not None and reason != "0")
+
+
+def run_client(client: str, ini: str, con: str, work: str) -> int | None:
+    """Run one eonclient subprocess on one geometry. A bad termination is None."""
+    found = client_result(_launch_client(client, ini, con, work))
+    if _bad_termination(found["force_calls"], found["reason"]):
         return None
-    return calls
+    return found["force_calls"]
 
 
-def _one(job: tuple[str, str, str, str]) -> int | None:
-    return run_client(*job)
+def _one(job: tuple[str, str, str, str]) -> dict:
+    client, ini, con, work = job
+    found = client_result(_launch_client(client, ini, con, work))
+    found["geometry"] = Path(con).name
+    return found
 
 
 def benchmark_text(summary: dict, template: dict) -> str:
     lines = []
-    for key in ("force_calls", "force_calls_min", "force_calls_max", "nfailed"):
+    for key in (
+        "force_calls",
+        "force_calls_min",
+        "force_calls_max",
+        "force_calls_median",
+        "nfailed",
+    ):
         value = summary.get(key)
         if value is None:
             continue
@@ -163,10 +222,23 @@ def benchmark_text(summary: dict, template: dict) -> str:
         lines.append(f"code {template['code']}")
     if template.get("code_version"):
         lines.append(f"code_version {template['code_version']}")
+    if template.get("commit"):
+        lines.append(f"commit {template['commit']}")
     if template.get("algorithm"):
         lines.append(f"algorithm {template['algorithm']}")
     lines.append(f"template {template['id']}")
+    if template.get("problem"):
+        lines.append(f"problem {template['problem']}")
+    if template.get("reducer"):
+        lines.append(f"reducer {template['reducer']}")
     return "\n".join(lines) + "\n"
+
+
+def write_starts(path: Path, rows: list[dict]) -> None:
+    """One JSON object per start, failures included."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    body = "\n".join(json.dumps(row, sort_keys=True) for row in rows)
+    path.write_text(body + ("\n" if body else ""), encoding="utf-8")
 
 
 def run(
@@ -174,17 +246,36 @@ def run(
     problem_name: str,
     template_name: str,
     *,
-    client: Path,
+    client: Path | None = None,
     geometries: Path | None = None,
     output: Path,
     workers: int = 1,
     work: Path | None = None,
+    limit: int = 0,
+    resume: bool = False,
 ) -> dict:
-    problem = resolve_problem(root, problem_name)
     template = load_template(root, template_name)
-    if template["engine"] != "eon-client":
+    if template["engine"] in {"ase", "sella"}:
+        from .ase_sella import run_template
+
+        if template.get("problem") and template["problem"] != problem_name:
+            raise ValueError(f"{template_name} belongs to {template['problem']}")
+        return run_template(
+            root,
+            template_name,
+            output=output,
+            workers=workers,
+            limit=limit,
+            resume=resume,
+        )
+    if template["engine"] not in _EON_ENGINES:
         raise ValueError(f"unknown engine {template['engine']}")
+    if client is None:
+        raise ValueError("eon-client run needs a client")
+    problem = resolve_problem(root, problem_name)
     cap = _check_stop(problem, template)
+    if cap is None:
+        raise ValueError(f"{problem['id']} has no force-call cap")
     ini = format_ini(template["ini"])
     if geometries is None:
         archive = geometry_archive(root, problem)
@@ -203,22 +294,43 @@ def run(
         for con in cons
     ]
     if workers <= 1:
-        calls = [_one(job) for job in jobs]
+        details = [_one(job) for job in jobs]
     else:
         with ProcessPoolExecutor(max_workers=workers) as pool:
-            calls = list(pool.map(_one, jobs))
-    # A missing result is a failure at the cap, so it stays out of the mean.
-    counts = [cap if call is None else call for call in calls]
+            details = list(pool.map(_one, jobs))
+    # A missing result or a bad termination is a failure at the cap, so it
+    # stays out of the mean. The starts file keeps the raw call count.
+    counts = []
+    start_rows = []
+    for detail in details:
+        calls = detail["force_calls"]
+        reason = detail["reason"]
+        bad = _bad_termination(calls, reason)
+        counted = cap if bad else calls
+        counts.append(counted)
+        start_rows.append(
+            {
+                "failed": bad or calls >= cap,
+                "force_calls": calls,
+                "geometry": detail["geometry"],
+                "reason": reason,
+            }
+        )
     summary = summarize_capped(counts, cap)
     ok = [count for count in counts if count < cap]
+    required = (problem.get("metrics") or {}).get("required") or []
+    if "force_calls_median" in required and ok:
+        summary["force_calls_median"] = statistics.median(ok)
     summary["counts"] = counts
     summary["mean_unrounded"] = (sum(ok) / len(ok)) if ok else None
+    summary["start_rows"] = start_rows
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(benchmark_text(summary, template), encoding="utf-8")
     write_starts(
         output.with_suffix(".starts.jsonl"),
         client_start_records([con.stem for con in cons], counts, cap),
     )
+    write_starts(output.with_suffix(".starts"), start_rows)
     summary["starts"] = len(counts)
     summary["template"] = template["id"]
     summary["problem"] = problem["id"]

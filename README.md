@@ -64,7 +64,9 @@ pixi exec --spec eon --spec uv -- uv run optbench run \
   --output benchmark.dat
 ```
 
-The recorded 181 is commit `4d8b34baf`. Read the version line the client prints before treating another build as that score. `--workers` is the number of client processes. The default is 1. The problem file names `website/minimization/lj38/lj38-clusters.tgz`, and the manifest stores that archive at `inputs/sha256/86bf774955b906c486d37282c48e42628e8fe4af3579222f6e07fcf5913157b1/lj38-clusters.tgz`. The command unpacks it. `--work` chooses the scratch directory. The default is next to `--output`.
+The recorded 181 is commit `4d8b34baf`. Read the version line the client prints before treating another build as that score.
+
+`templates/eon/` is current main, commit `1d71c944501832bfafb955ffe13b9aae50c8efd4`, the merge of pull request 776. The version string is 3.6.0. `eon/lj38-lbfgs` is L-BFGS at the struct defaults, including memory 20 and `lbfgs_accept = energy`. `eon/lj38-lbfgs-m100` changes only the memory to 100. Both set the problem stop. The same pair for Morse bulk is `eon/morse-lbfgs` and `eon/morse-lbfgs-m100`. L-BFGS keys sit in `[LBFGS]`. A run writes `benchmark.dat` and `benchmark.starts`, one JSON object per geometry, failures included. The same commit has a default and a memory-100 template for the Pt-heptamer NEB, the LJ38 and Pt-island double-ended bands, and the LJ38 and Pt-island dimer saddle searches. `uv run optbench eon-job neb-pt-lbfgs` runs one of those. The NEB and saddle means follow the archived report: a counter under the cap stays in the mean, and `nfailed` counts a termination reason other than 0. The heptamer mean divides `force_calls_neb` by 8. The 3.5.0 and SVN templates are unchanged. `--workers` is the number of client processes. The default is 1. The problem file names `website/minimization/lj38/lj38-clusters.tgz`, and the manifest stores that archive at `inputs/sha256/86bf774955b906c486d37282c48e42628e8fe4af3579222f6e07fcf5913157b1/lj38-clusters.tgz`. The command unpacks it. `--work` chooses the scratch directory. The default is next to `--output`.
 
 `benchmark.dat` is the result. `force_calls` is the mean over starts that finished under the cap. Compare it to the file quoted above.
 
@@ -108,7 +110,23 @@ uv run optbench/sella_lj38.py \
   --version 2.6.0
 ```
 
-The recorded file is `results/campaign/sella-2.6.0-ts-lj38.dat`: mean 93, two starts at the step cap. Sella 0.1.1 was mean 69.55 with none failed.
+The recorded file is `results/campaign/sella-2.6.0-ts-lj38.dat`: mean 93, two starts at the step cap. Sella 0.1.1 was mean 69.55 with none failed. Those 0.1.1 rows stay on the 2014 tables and are labelled legacy.
+
+ASE 3.29.0 and Sella 2.6.0 templates live under `templates/ase/` and `templates/sella/`. A default row is the library constructor. A tuned row is the archived script when one exists. Force calls are calculator evaluations counted by the harness, for both codes. The ranked set is:
+
+```bash
+uv run --group campaign optbench campaign-ase --workers 4 --output-dir results/campaign
+```
+
+One template is the same command as the eOn runs, with the template id in place of `eon-client/lbfgs-m100`:
+
+```bash
+uv run --group campaign optbench run minimization/lj38 ase/lj38-lbfgs-default \
+  --workers 4 \
+  --output results/campaign/ase-3.29.0-lj38-lbfgs-default.dat
+```
+
+The per-start file is the `.starts.jsonl` next to that `benchmark.dat`. A count at the cap, an exception, or a final force above the problem stop is a failure and is kept in that file. The dimer templates are not in `campaign-ase`. They are single-ended searches, not the Pt-island saddle catalog.
 
 Pt-heptamer NEB is 13 bands, Morse, eight images. The band method has to be the one named in the template. `eon-lbfgs` averages 40:
 

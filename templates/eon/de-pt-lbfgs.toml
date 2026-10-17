@@ -1,0 +1,58 @@
+id = "eon/de-pt-lbfgs"
+engine = "eon"
+problem = "double-ended-saddle-search/pt-island"
+code = "eOn"
+code_version = "3.6.0"
+commit = "1d71c944501832bfafb955ffe13b9aae50c8efd4"
+algorithm = "LBFGS"
+reducer = "report-capped"
+failure_cap = 3000
+note = "Default L-BFGS climbing-image NEB on the 59 Pt-island pairs. Memory 20 is the struct default. The 2014 file spelled climbing_image. This client reads climbing_image_method, whose default is true. The mean keeps total_force_calls under 3000. nfailed counts termination_reason other than 0."
+
+[ini.Main]
+job = "nudged_elastic_band"
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+convergence_metric = "norm"
+converged_force = 0.001
+max_move = 0.2
+max_iterations = 1000
+
+[ini."Nudged Elastic Band"]
+images = 3
+spring = 5.0
+climbing_image_method = true
+climbing_image_converged_only = true
+climbing_image_band_slack = 10.0
+doubly_nudged = false
+doubly_nudged_switching = false
+old_tangent = false
+opt_method = "lbfgs"
+converged_force = 0.001
+max_iterations = 1000
+setup_mmf_peaks = true
+
+[ini.LBFGS]
+lbfgs_memory = 20
+lbfgs_inverse_curvature = 0.01
+lbfgs_max_inverse_curvature = 0.0
+lbfgs_auto_scale = true
+lbfgs_angle_reset = true
+lbfgs_distance_reset = true
+lbfgs_curvature = "reset"
+lbfgs_project_rigid = false
+lbfgs_secant = "standard"
+lbfgs_precon = "none"
+lbfgs_step = "lbfgs"
+lbfgs_h0 = "sy_yy"
+lbfgs_accept = "energy"
+lbfgs_extra_updates = 0
+lbfgs_cautious_eps = 1.0e-6
+lbfgs_cautious_alpha = 0.01
+lbfgs_precon_A = 3.0
+lbfgs_precon_mu = 1.0
+lbfgs_precon_rcut = 0.0

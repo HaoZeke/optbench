@@ -1,0 +1,12 @@
+force_calls 1680
+force_calls_min 100
+force_calls_max 5889
+force_calls_median 575.0
+nfailed 0
+code eOn
+code_version 3.6.0
+commit 1d71c944501832bfafb955ffe13b9aae50c8efd4
+algorithm LBFGS
+template eon/ts-pt-dimer-m100
+problem tsopt/pt-island
+reducer report-capped
