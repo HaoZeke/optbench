@@ -95,7 +95,7 @@ def test_render_writes_the_front_page_table():
     assert "Rohit Goswami" in codes
     assert "4d8b34baf1ba" in codes
     assert "1d71c9445018" in codes
-    assert "24236559f381" in codes
+    assert "fd26a60ddd48" in codes
     assert "c0db2b8d333c" in codes
 
 
