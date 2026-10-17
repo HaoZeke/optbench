@@ -1,0 +1,29 @@
+# counter harness. One force call is one RgpotCounter.calculate entry.
+# Newton and dogleg Hessians are analytic and are not force calls.
+# v2 success is under the cap, at the force stop, and Hessian index 0.
+# energy and Kabsch RMSD were not applied: the problem file has no energy_tol, rmsd_tol, or per-start reference.
+# energy_min and energy_max are the final potential values on the recorded points.
+# Tuned row. One parameter set for every start: maxstep 0.2, the per-atom displacement cap (rgmin atom_maxmove, the same quantity as the eOn max move). gtol and the iteration budget are the problem stop. No other knob is changed, and nothing is chosen per start.
+force_calls 6692
+force_calls_min 2033
+force_calls_max 9973
+nfailed 731
+median 6923
+code rgmin
+code_version 0.4.0
+commit 24236559f3815847cac89ba0a7be634ce0beb4a9
+algorithm ADAM
+template rgmin/lj38-adam-tuned
+tuning tuned
+counter harness
+par2_mean 19916.611
+wilson_low 0.00275266914188
+wilson_high 0.0130281682419
+par2_median 20000
+par2_median_low 20000
+par2_median_high 20000
+v2_nfailed 994
+v2_successes 6
+n 1000
+energy_min -171.473676715
+energy_max -150.617167238
