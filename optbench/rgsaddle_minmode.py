@@ -32,7 +32,7 @@ from .counter import HarnessCounter
 from .failures import classify_failure
 from .potserver import RgpotCounter
 from .score import half_even, score_v2
-from .stationary import jacobi_eigenvalues, judge_stationary, negative_index, numerical_hessian
+from .stationary import judge_stationary, negative_index, numerical_hessian
 from .surfaces import load_con, potential_from_problem, read_mode
 from .v2 import collect_provenance, write_starts
 
@@ -390,11 +390,19 @@ def _vibrational_eigenvalues(point: np.ndarray, eigenvalues: list[float], vector
     return adjusted, removed
 
 
-def _hessian_spectrum(potential: HarnessSurface, point: np.ndarray) -> tuple[list[float], list]:
+def _hessian_spectrum(potential: HarnessSurface, point: np.ndarray) -> tuple[list[float], np.ndarray]:
+    """Central-difference Hessian and its ascending eigenpairs.
+
+    The free-atom Hessian of the Pt island is 525 by 525. A Python Jacobi
+    sweep on that matrix does not finish with the search, so the spectrum
+    is the symmetric LAPACK solve. Eigenvalues match the Jacobi sort.
+    """
     flat = [float(value) for value in np.asarray(point, dtype=np.float64)]
     with potential.verification():
         hessian = numerical_hessian(lambda coords: potential.energy_forces(coords)[1], flat, step=1e-5)
-        eigenvalues, vectors = jacobi_eigenvalues(hessian)
+    matrix = np.asarray(hessian, dtype=np.float64)
+    matrix = 0.5 * (matrix + matrix.T)
+    eigenvalues, vectors = np.linalg.eigh(matrix)
     return [float(value) for value in eigenvalues], vectors
 
 
