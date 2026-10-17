@@ -6,7 +6,7 @@ code_version = "0.4.0"
 commit = "24236559f3815847cac89ba0a7be634ce0beb4a9"
 algorithm = "BB"
 tuning = "default"
-note = "Default row. gtol and the iteration budget are the problem force norm and the force-call cap. maxstep is 0.2, the per-atom displacement cap (rgmin atom_maxmove, the same quantity as the eOn max move and the rgmin ASE default). The session takes one trial of -istep*g with istep 0.1 and no line search; without this cap that trial leaves the Lennard-Jones cutoff. The same values are used for every start."
+note = "Default row. gtol and the iteration budget are the problem force norm and the force-call cap. maxstep is 0.2, the per-atom displacement cap (rgmin atom_maxmove, the same quantity as the eOn max move and the rgmin ASE default). istep is 0.1. BB, DIIS, FIRE, and quickmin take that gradient trial with no line search. L-BFGS, BFGS, CG, steepest descent, Adam, SR1, and SR2 use the session strong Wolfe search, and the first trial is still sized by istep. Newton and dogleg take a Hessian step inside the same cap. Without the cap, an uncapped gradient trial on these starts leaves the Lennard-Jones cutoff. The same values are used for every start."
 
 [rgmin]
 method = "bb"
