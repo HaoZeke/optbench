@@ -128,16 +128,29 @@ class CountedPotential:
         return self._counter.verification()
 
 
-def attach_ase_counter(calculator: object, cap: int | None = None) -> object:
+def attach_ase_counter(
+    calculator: object,
+    cap: int | None = None,
+    state: dict | None = None,
+    counter: HarnessCounter | None = None,
+) -> object:
     """Count ASE ``calculate`` entries on this calculator instance.
 
     ASE skips ``calculate`` when the atoms have not changed, so an energy
     request and a force request at the same geometry are one call. A
     call past ``cap`` raises ``RuntimeError`` before the potential runs.
+    ``counter`` and ``state`` are shared when several images must increment
+    one ``HarnessCounter``.
     """
     original = calculator.calculate
-    counter = HarnessCounter(cache=False, cap=cap)
-    state = {"calls": 0, "verify_calls": 0, "verifying": False, "cap": cap}
+    if counter is None:
+        counter = HarnessCounter(cache=False, cap=cap)
+    elif cap is not None:
+        counter.cap = int(cap)
+    if state is None:
+        state = {"calls": 0, "verify_calls": 0, "verifying": False, "cap": cap}
+    elif cap is not None:
+        state["cap"] = cap
 
     def calculate(atoms=None, properties=("energy", "forces"), system_changes=("positions",)):
         counter._verifying = bool(state["verifying"])

@@ -17,6 +17,16 @@
    <caption>Present runs. Fewer force calls first. The legacy 2014 scores follow.</caption>
    <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th><th class="text" scope="col">Tuning</th></tr></thead><tbody>
    <tr class="bench-row-fail">
+   <td class="text">ase-3.29.0-de-lj38-default</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num">642</td>
+   <td class="num">642</td>
+   <td class="num">642</td>
+   <td class="num">49</td>
+   <td class="text"></td>
+   </tr>
+   <tr class="bench-row-fail">
    <td class="text">eon-3.5.0-de-lj38-ci-swdneb</td>
    <td class="text">Eon</td>
    <td class="text">3.5.0</td>
@@ -56,8 +66,18 @@
    <td class="num">20</td>
    <td class="text"></td>
    </tr>
+   <tr class="bench-row-fail">
+   <td class="text">ase-3.29.0-de-lj38-tuned</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num"></td>
+   <td class="num"></td>
+   <td class="num"></td>
+   <td class="num">50</td>
+   <td class="text"></td>
+   </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:4"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "eon-3.5.0-de-lj38-ci-swdneb", "entry": "Eon 3.5.0 eon-3.5.0-de-lj38-ci-swdneb", "code": "Eon", "value": 708.0, "best": true, "held": false, "failed": true}, {"id": "eon-3.5.0-de-lj38-ci-neb", "entry": "Eon 3.5.0 eon-3.5.0-de-lj38-ci-neb", "code": "Eon", "value": 809.0, "best": false, "held": false, "failed": true}, {"id": "eon-main-de-lj38-lbfgs-m100", "entry": "eOn 3.6.0 eon-main-de-lj38-lbfgs-m100", "code": "eOn", "value": 1328.0, "best": false, "held": false, "failed": true}, {"id": "eon-main-de-lj38-lbfgs", "entry": "eOn 3.6.0 eon-main-de-lj38-lbfgs", "code": "eOn", "value": 1343.0, "best": false, "held": false, "failed": true}]}</script></figure>
+   <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:5"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "ase-3.29.0-de-lj38-default", "entry": "ASE 3.29.0 ase-3.29.0-de-lj38-default", "code": "ASE", "value": 642.0, "best": true, "held": false, "failed": true}, {"id": "eon-3.5.0-de-lj38-ci-swdneb", "entry": "Eon 3.5.0 eon-3.5.0-de-lj38-ci-swdneb", "code": "Eon", "value": 708.0, "best": false, "held": false, "failed": true}, {"id": "eon-3.5.0-de-lj38-ci-neb", "entry": "Eon 3.5.0 eon-3.5.0-de-lj38-ci-neb", "code": "Eon", "value": 809.0, "best": false, "held": false, "failed": true}, {"id": "eon-main-de-lj38-lbfgs-m100", "entry": "eOn 3.6.0 eon-main-de-lj38-lbfgs-m100", "code": "eOn", "value": 1328.0, "best": false, "held": false, "failed": true}, {"id": "eon-main-de-lj38-lbfgs", "entry": "eOn 3.6.0 eon-main-de-lj38-lbfgs", "code": "eOn", "value": 1343.0, "best": false, "held": false, "failed": true}]}</script></figure>
    <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
@@ -180,7 +200,31 @@
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <h3>Present runs</h3>
-   <p>No present run is recorded.</p>
+   <div class="bench-table"><table>
+   <caption>Present runs. Fewer force calls first. The legacy 2014 scores follow.</caption>
+   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th><th class="text" scope="col">Tuning</th></tr></thead><tbody>
+   <tr class="bench-row-fail">
+   <td class="text">ase-3.29.0-de-lj38-2ts-default</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num"></td>
+   <td class="num"></td>
+   <td class="num"></td>
+   <td class="num">51</td>
+   <td class="text"></td>
+   </tr>
+   <tr class="bench-row-fail">
+   <td class="text">ase-3.29.0-de-lj38-2ts-tuned</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num"></td>
+   <td class="num"></td>
+   <td class="num"></td>
+   <td class="num">51</td>
+   <td class="text"></td>
+   </tr>
+   </tbody></table></div>
+   
    <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
@@ -238,6 +282,26 @@
    <caption>Present runs. Fewer force calls first. The legacy 2014 scores follow.</caption>
    <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th><th class="text" scope="col">Tuning</th></tr></thead><tbody>
    <tr class="bench-row-fail">
+   <td class="text">ase-3.29.0-de-pt-island-tuned</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num">371</td>
+   <td class="num">173</td>
+   <td class="num">1043</td>
+   <td class="num">5</td>
+   <td class="text"></td>
+   </tr>
+   <tr class="bench-row-fail">
+   <td class="text">ase-3.29.0-de-pt-island-default</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num">839</td>
+   <td class="num">299</td>
+   <td class="num">2396</td>
+   <td class="num">1</td>
+   <td class="text"></td>
+   </tr>
+   <tr class="bench-row-fail">
    <td class="text">eon-main-de-pt-lbfgs-m100</td>
    <td class="text">eOn</td>
    <td class="text">3.6.0</td>
@@ -258,7 +322,7 @@
    <td class="text"></td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "eon-main-de-pt-lbfgs-m100", "entry": "eOn 3.6.0 eon-main-de-pt-lbfgs-m100", "code": "eOn", "value": 1312.0, "best": true, "held": false, "failed": true}, {"id": "eon-main-de-pt-lbfgs", "entry": "eOn 3.6.0 eon-main-de-pt-lbfgs", "code": "eOn", "value": 1515.0, "best": false, "held": false, "failed": true}]}</script></figure>
+   <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:4"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "ase-3.29.0-de-pt-island-tuned", "entry": "ASE 3.29.0 ase-3.29.0-de-pt-island-tuned", "code": "ASE", "value": 371.0, "best": true, "held": false, "failed": true}, {"id": "ase-3.29.0-de-pt-island-default", "entry": "ASE 3.29.0 ase-3.29.0-de-pt-island-default", "code": "ASE", "value": 839.0, "best": false, "held": false, "failed": true}, {"id": "eon-main-de-pt-lbfgs-m100", "entry": "eOn 3.6.0 eon-main-de-pt-lbfgs-m100", "code": "eOn", "value": 1312.0, "best": false, "held": false, "failed": true}, {"id": "eon-main-de-pt-lbfgs", "entry": "eOn 3.6.0 eon-main-de-pt-lbfgs", "code": "eOn", "value": 1515.0, "best": false, "held": false, "failed": true}]}</script></figure>
    <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>

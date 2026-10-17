@@ -207,6 +207,16 @@ def _plot(points: list[dict], primary: str | None, caption: str | None = None) -
     )
 
 
+def _code_label(fields: dict[str, str]) -> str:
+    """Code column. Sella 0.1.1 stays on the 2014 table and is marked legacy."""
+    code = fields.get("code", "")
+    version = fields.get("code_version", "")
+    label = f"{code} {version}".strip() if version else code
+    if code == "Sella" and version == "0.1.1":
+        label = f"{label} legacy"
+    return label
+
+
 def campaign_problem(stem: str) -> str | None:
     """Map a results/campaign file name to a problem id."""
     if "morse" in stem:
@@ -217,7 +227,7 @@ def campaign_problem(stem: str) -> str | None:
         return "double-ended-saddle-search/lj38"
     if stem.startswith("eon-3.5.0-saddle-pt"):
         return "saddle-search/pt-island"
-    if stem.startswith("sella-"):
+    if stem == "sella-2.6.0-ts-lj38":
         return "tsopt/LJ38"
     if stem.startswith(("pele-", "eon-client-", "eon-svn-")):
         return "minimization/lj38"
@@ -239,11 +249,12 @@ def _load_present(root: Path) -> dict[str, list[dict]]:
     if campaign.is_dir():
         for path in sorted(campaign.glob("*.dat")):
             fields, _duplicates = parse_lenient(path.read_text(encoding="utf-8"))
+            if fields.get("partial") == "true" or fields.get("ranked") == "false":
+                continue
             problem = fields.get("problem") or campaign_problem(path.stem)
             if problem is None:
                 continue
             text = path.read_text(encoding="utf-8")
-            fields, _duplicates = parse_lenient(text)
             seen.add(path.stem)
             row = {
                 "entry": path.stem,
@@ -253,6 +264,7 @@ def _load_present(root: Path) -> dict[str, list[dict]]:
                 "min": fields.get("force_calls_min", ""),
                 "max": fields.get("force_calls_max", ""),
                 "failed": fields.get("nfailed", ""),
+                "par2": fields.get("par2_mean", ""),
                 "tuning": tuning_from_template(root, fields.get("template", "")),
             }
             repetitions = parse_repetitions(text)
@@ -297,9 +309,10 @@ def _present_block(rows: list[dict], heading: str | None = "Present runs") -> st
     if not rows:
         lines.append("<p>No present run is recorded.</p>")
         return "\n".join(lines)
+    show_par2 = any(str(row.get("par2") or "") not in ("", "None") for row in rows)
     lines.append('<div class="bench-table"><table>')
     lines.append("<caption>Present runs. Fewer force calls first. The legacy 2014 scores follow.</caption>")
-    lines.append(
+    header = (
         "<thead><tr>"
         '<th class="text" scope="col">Entry</th>'
         '<th class="text" scope="col">Code</th>'
@@ -308,14 +321,16 @@ def _present_block(rows: list[dict], heading: str | None = "Present runs") -> st
         '<th class="num" scope="col">Min</th>'
         '<th class="num" scope="col">Max</th>'
         '<th class="num" scope="col">Failed</th>'
-        '<th class="text" scope="col">Tuning</th>'
-        "</tr></thead><tbody>"
     )
+    if show_par2:
+        header += '<th class="num" scope="col">PAR-2</th>'
+    header += '<th class="text" scope="col">Tuning</th></tr></thead><tbody>'
+    lines.append(header)
     for row in rows:
         failed = str(row.get("failed") or "0")
         mark = ' class="bench-row-fail"' if failed not in ("", "0") else ""
         lines.append(f"<tr{mark}>")
-        for key, kind in (
+        columns = [
             ("entry", "text"),
             ("code", "text"),
             ("version", "text"),
@@ -323,8 +338,11 @@ def _present_block(rows: list[dict], heading: str | None = "Present runs") -> st
             ("min", "num"),
             ("max", "num"),
             ("failed", "num"),
-            ("tuning", "text"),
-        ):
+        ]
+        if show_par2:
+            columns.append(("par2", "num"))
+        columns.append(("tuning", "text"))
+        for key, kind in columns:
             lines.append(f'<td class="{kind}">{html.escape(str(row.get(key, "")))}</td>')
         lines.append("</tr>")
     lines.append("</tbody></table></div>")
@@ -428,10 +446,7 @@ def problem_html(
     for rank, (row, fields) in enumerate(canonical_rows, 1):
         value = _float(fields.get(primary, "")) if primary else None
         held = _held(fields)
-        code = fields.get("code", "")
-        version = fields.get("code_version", "")
-        if version:
-            code = f"{code} {version}".strip()
+        code = _code_label(fields)
         row_id = _slug(f"{problem['id']}-{row['entry']}")
         prepared.append(
             {

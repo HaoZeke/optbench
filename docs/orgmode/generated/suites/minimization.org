@@ -178,6 +178,16 @@
    <td class="text"></td>
    </tr>
    <tr>
+   <td class="text">sella-2.6.0-lj38-min-tuned</td>
+   <td class="text">Sella</td>
+   <td class="text">2.6.0</td>
+   <td class="num">254</td>
+   <td class="num">150</td>
+   <td class="num">533</td>
+   <td class="num">0</td>
+   <td class="text"></td>
+   </tr>
+   <tr>
    <td class="text">pele-0.1.2-lbfgs-M1-maxstep0.1</td>
    <td class="text">pele</td>
    <td class="text">0.1.2</td>
@@ -185,6 +195,26 @@
    <td class="num">134</td>
    <td class="num">737</td>
    <td class="num">0</td>
+   <td class="text"></td>
+   </tr>
+   <tr class="bench-row-fail">
+   <td class="text">ase-3.29.0-lj38-lbfgs-tuned</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num">356</td>
+   <td class="num">166</td>
+   <td class="num">6614</td>
+   <td class="num">2</td>
+   <td class="text"></td>
+   </tr>
+   <tr class="bench-row-fail">
+   <td class="text">ase-3.29.0-lj38-lbfgs-default</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num">365</td>
+   <td class="num">175</td>
+   <td class="num">1814</td>
+   <td class="num">42</td>
    <td class="text"></td>
    </tr>
    <tr>
@@ -247,6 +277,26 @@
    <td class="num">0</td>
    <td class="text">unlabelled</td>
    </tr>
+   <tr class="bench-row-fail">
+   <td class="text">ase-3.29.0-lj38-bfgs-tuned</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num">461</td>
+   <td class="num">244</td>
+   <td class="num">7343</td>
+   <td class="num">3</td>
+   <td class="text"></td>
+   </tr>
+   <tr>
+   <td class="text">ase-3.29.0-lj38-bfgslinesearch-tuned</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num">506</td>
+   <td class="num">323</td>
+   <td class="num">889</td>
+   <td class="num">0</td>
+   <td class="text"></td>
+   </tr>
    <tr>
    <td class="text">eon-client-sd-twopoint</td>
    <td class="text">eOn</td>
@@ -308,6 +358,16 @@
    <td class="text">unlabelled</td>
    </tr>
    <tr>
+   <td class="text">ase-3.29.0-lj38-bfgslinesearch-default</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num">561</td>
+   <td class="num">366</td>
+   <td class="num">876</td>
+   <td class="num">0</td>
+   <td class="text"></td>
+   </tr>
+   <tr>
    <td class="text">rgmin-sr1-0.3.0</td>
    <td class="text">rgmin</td>
    <td class="text">0.3.0</td>
@@ -316,6 +376,26 @@
    <td class="num">1032</td>
    <td class="num">0</td>
    <td class="text">unlabelled</td>
+   </tr>
+   <tr class="bench-row-fail">
+   <td class="text">ase-3.29.0-lj38-bfgs-default</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num">656</td>
+   <td class="num">261</td>
+   <td class="num">9138</td>
+   <td class="num">18</td>
+   <td class="text"></td>
+   </tr>
+   <tr>
+   <td class="text">ase-3.29.0-lj38-preconlbfgs-default</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num">690</td>
+   <td class="num">355</td>
+   <td class="num">1801</td>
+   <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    <tr>
    <td class="text">rgmin-fire2-0.3.0</td>
@@ -338,6 +418,16 @@
    <td class="text">unlabelled</td>
    </tr>
    <tr>
+   <td class="text">ase-3.29.0-lj38-fire-default</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num">706</td>
+   <td class="num">199</td>
+   <td class="num">2340</td>
+   <td class="num">0</td>
+   <td class="text"></td>
+   </tr>
+   <tr>
    <td class="text">ase-fire-3.29.0</td>
    <td class="text">ASE</td>
    <td class="text">3.29.0</td>
@@ -346,6 +436,26 @@
    <td class="num">2340</td>
    <td class="num">0</td>
    <td class="text">unlabelled</td>
+   </tr>
+   <tr>
+   <td class="text">sella-2.6.0-lj38-min-default</td>
+   <td class="text">Sella</td>
+   <td class="text">2.6.0</td>
+   <td class="num">710</td>
+   <td class="num">410</td>
+   <td class="num">1161</td>
+   <td class="num">0</td>
+   <td class="text"></td>
+   </tr>
+   <tr>
+   <td class="text">ase-3.29.0-lj38-fire-tuned</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num">720</td>
+   <td class="num">208</td>
+   <td class="num">2598</td>
+   <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    <tr>
    <td class="text">eon-client-fire</td>
@@ -406,6 +516,16 @@
    <td class="num">3758</td>
    <td class="num">0</td>
    <td class="text">unlabelled</td>
+   </tr>
+   <tr>
+   <td class="text">ase-3.29.0-lj38-preconfire-default</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num">1817</td>
+   <td class="num">659</td>
+   <td class="num">8441</td>
+   <td class="num">0</td>
+   <td class="text"></td>
    </tr>
    <tr class="bench-row-fail">
    <td class="text">rgmin-quickmin-0.3.0</td>
@@ -498,7 +618,7 @@
    <td class="text">unlabelled</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:48"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "pele-0.1.2-lbfgs-M100-maxstep0.2", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M100-maxstep0.2", "code": "pele", "value": 178.0, "best": true, "held": false, "failed": false}, {"id": "eon-main-lj38-lbfgs-m100", "entry": "eOn 3.6.0 eon-main-lj38-lbfgs-m100", "code": "eOn", "value": 180.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-lbfgs-m100", "entry": "eOn 3.5.0 eon-client-lbfgs-m100", "code": "eOn", "value": 181.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-lbfgs-m100", "entry": "Eon svn r2549 eon-svn-lbfgs-m100", "code": "Eon svn", "value": 181.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-lbfgs-m100", "entry": "eOn 3.5.0 eon-3.5.0-lbfgs-m100", "code": "eOn", "value": 181.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-lbfgs-m100", "entry": "Eon svn r2549 eon-svn-r2549-lbfgs-m100", "code": "Eon svn", "value": 181.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-lbfgs-m20", "entry": "eOn 3.5.0 eon-client-lbfgs-m20", "code": "eOn", "value": 201.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-lbfgs", "entry": "eOn 3.5.0 eon-3.5.0-lbfgs", "code": "eOn", "value": 201.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-lbfgs-m20", "entry": "Eon svn r2549 eon-svn-lbfgs-m20", "code": "Eon svn", "value": 202.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-lbfgs-m20", "entry": "Eon svn r2549 eon-svn-r2549-lbfgs-m20", "code": "Eon svn", "value": 202.0, "best": false, "held": false, "failed": false}, {"id": "eon-main-lj38-lbfgs", "entry": "eOn 3.6.0 eon-main-lj38-lbfgs", "code": "eOn", "value": 204.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lbfgs-0.3.0", "entry": "rgmin 0.3.0 e089a136910f rgmin-lbfgs-0.3.0", "code": "rgmin", "value": 216.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M20-maxstep0.1", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M20-maxstep0.1", "code": "pele", "value": 223.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M4-maxstep0.2", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M4-maxstep0.2", "code": "pele", "value": 228.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M10-maxstep0.1", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M10-maxstep0.1", "code": "pele", "value": 235.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M4-maxstep0.1", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M4-maxstep0.1", "code": "pele", "value": 248.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M1-maxstep0.1", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M1-maxstep0.1", "code": "pele", "value": 286.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M4-maxstep0.05", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M4-maxstep0.05", "code": "pele", "value": 381.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-cg", "entry": "Eon svn r2549 eon-svn-cg", "code": "Eon svn", "value": 453.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-cg", "entry": "Eon svn r2549 eon-svn-r2549-cg", "code": "Eon svn", "value": 453.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-cg", "entry": "eOn 3.5.0 eon-client-cg", "code": "eOn", "value": 454.0, "best": false, "held": false, "failed": false}, {"id": "eon-cg-3.5.0", "entry": "Eon 3.5.0 eon-cg-3.5.0", "code": "Eon", "value": 454.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-cg", "entry": "eOn 3.5.0 eon-3.5.0-cg", "code": "eOn", "value": 454.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-sd-twopoint", "entry": "eOn 3.5.0 eon-client-sd-twopoint", "code": "eOn", "value": 532.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-sd-twopoint", "entry": "eOn 3.5.0 eon-3.5.0-sd-twopoint", "code": "eOn", "value": 532.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-bfgs-0.3.0", "entry": "rgmin 0.3.0 rgmin-bfgs-0.3.0", "code": "rgmin", "value": 538.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-sd-twopoint", "entry": "Eon svn r2549 eon-svn-sd-twopoint", "code": "Eon svn", "value": 539.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-sd-twopoint", "entry": "Eon svn r2549 eon-svn-r2549-sd-twopoint", "code": "Eon svn", "value": 539.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-bb-0.3.0", "entry": "rgmin 0.3.0 rgmin-bb-0.3.0", "code": "rgmin", "value": 541.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-sr1-0.3.0", "entry": "rgmin 0.3.0 rgmin-sr1-0.3.0", "code": "rgmin", "value": 566.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-fire2-0.3.0", "entry": "rgmin 0.3.0 rgmin-fire2-0.3.0", "code": "rgmin", "value": 694.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-fire-0.3.0", "entry": "rgmin 0.3.0 rgmin-fire-0.3.0", "code": "rgmin", "value": 699.0, "best": false, "held": false, "failed": false}, {"id": "ase-fire-3.29.0", "entry": "ASE 3.29.0 ase-fire-3.29.0", "code": "ASE", "value": 706.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-fire", "entry": "eOn 3.5.0 eon-client-fire", "code": "eOn", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-fire", "entry": "Eon svn r2549 eon-svn-fire", "code": "Eon svn", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-fire", "entry": "eOn 3.5.0 eon-3.5.0-fire", "code": "eOn", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-fire", "entry": "Eon svn r2549 eon-svn-r2549-fire", "code": "Eon svn", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-nlcg-0.3.0", "entry": "rgmin 0.3.0 rgmin-nlcg-0.3.0", "code": "rgmin", "value": 733.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-sd-0.3.0", "entry": "rgmin 0.3.0 rgmin-sd-0.3.0", "code": "rgmin", "value": 1260.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-quickmin-0.3.0", "entry": "rgmin 0.3.0 rgmin-quickmin-0.3.0", "code": "rgmin", "value": 1849.0, "best": false, "held": false, "failed": true}, {"id": "eon-client-qm", "entry": "eOn 3.5.0 eon-client-qm", "code": "eOn", "value": 3514.0, "best": false, "held": false, "failed": true}, {"id": "eon-3.5.0-qm", "entry": "eOn 3.5.0 eon-3.5.0-qm", "code": "eOn", "value": 3514.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-qm", "entry": "Eon svn r2549 eon-svn-qm", "code": "Eon svn", "value": 3547.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-r2549-qm", "entry": "Eon svn r2549 eon-svn-r2549-qm", "code": "Eon svn", "value": 3547.0, "best": false, "held": false, "failed": true}, {"id": "eon-client-sd", "entry": "eOn 3.5.0 eon-client-sd", "code": "eOn", "value": 4901.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-sd", "entry": "Eon svn r2549 eon-svn-sd", "code": "Eon svn", "value": 4901.0, "best": false, "held": false, "failed": true}, {"id": "eon-3.5.0-sd", "entry": "eOn 3.5.0 eon-3.5.0-sd", "code": "eOn", "value": 4901.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-r2549-sd", "entry": "Eon svn r2549 eon-svn-r2549-sd", "code": "Eon svn", "value": 4901.0, "best": false, "held": false, "failed": true}]}</script></figure>
+   <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:60"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "pele-0.1.2-lbfgs-M100-maxstep0.2", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M100-maxstep0.2", "code": "pele", "value": 178.0, "best": true, "held": false, "failed": false}, {"id": "eon-main-lj38-lbfgs-m100", "entry": "eOn 3.6.0 eon-main-lj38-lbfgs-m100", "code": "eOn", "value": 180.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-lbfgs-m100", "entry": "eOn 3.5.0 eon-client-lbfgs-m100", "code": "eOn", "value": 181.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-lbfgs-m100", "entry": "Eon svn r2549 eon-svn-lbfgs-m100", "code": "Eon svn", "value": 181.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-lbfgs-m100", "entry": "eOn 3.5.0 eon-3.5.0-lbfgs-m100", "code": "eOn", "value": 181.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-lbfgs-m100", "entry": "Eon svn r2549 eon-svn-r2549-lbfgs-m100", "code": "Eon svn", "value": 181.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-lbfgs-m20", "entry": "eOn 3.5.0 eon-client-lbfgs-m20", "code": "eOn", "value": 201.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-lbfgs", "entry": "eOn 3.5.0 eon-3.5.0-lbfgs", "code": "eOn", "value": 201.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-lbfgs-m20", "entry": "Eon svn r2549 eon-svn-lbfgs-m20", "code": "Eon svn", "value": 202.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-lbfgs-m20", "entry": "Eon svn r2549 eon-svn-r2549-lbfgs-m20", "code": "Eon svn", "value": 202.0, "best": false, "held": false, "failed": false}, {"id": "eon-main-lj38-lbfgs", "entry": "eOn 3.6.0 eon-main-lj38-lbfgs", "code": "eOn", "value": 204.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-lbfgs-0.3.0", "entry": "rgmin 0.3.0 e089a136910f rgmin-lbfgs-0.3.0", "code": "rgmin", "value": 216.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M20-maxstep0.1", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M20-maxstep0.1", "code": "pele", "value": 223.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M4-maxstep0.2", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M4-maxstep0.2", "code": "pele", "value": 228.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M10-maxstep0.1", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M10-maxstep0.1", "code": "pele", "value": 235.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M4-maxstep0.1", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M4-maxstep0.1", "code": "pele", "value": 248.0, "best": false, "held": false, "failed": false}, {"id": "sella-2.6.0-lj38-min-tuned", "entry": "Sella 2.6.0 sella-2.6.0-lj38-min-tuned", "code": "Sella", "value": 254.0, "best": false, "held": false, "failed": false}, {"id": "pele-0.1.2-lbfgs-M1-maxstep0.1", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M1-maxstep0.1", "code": "pele", "value": 286.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-lj38-lbfgs-tuned", "entry": "ASE 3.29.0 ase-3.29.0-lj38-lbfgs-tuned", "code": "ASE", "value": 356.0, "best": false, "held": false, "failed": true}, {"id": "ase-3.29.0-lj38-lbfgs-default", "entry": "ASE 3.29.0 ase-3.29.0-lj38-lbfgs-default", "code": "ASE", "value": 365.0, "best": false, "held": false, "failed": true}, {"id": "pele-0.1.2-lbfgs-M4-maxstep0.05", "entry": "pele 0.1.2 pele-0.1.2-lbfgs-M4-maxstep0.05", "code": "pele", "value": 381.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-cg", "entry": "Eon svn r2549 eon-svn-cg", "code": "Eon svn", "value": 453.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-cg", "entry": "Eon svn r2549 eon-svn-r2549-cg", "code": "Eon svn", "value": 453.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-cg", "entry": "eOn 3.5.0 eon-client-cg", "code": "eOn", "value": 454.0, "best": false, "held": false, "failed": false}, {"id": "eon-cg-3.5.0", "entry": "Eon 3.5.0 eon-cg-3.5.0", "code": "Eon", "value": 454.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-cg", "entry": "eOn 3.5.0 eon-3.5.0-cg", "code": "eOn", "value": 454.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-lj38-bfgs-tuned", "entry": "ASE 3.29.0 ase-3.29.0-lj38-bfgs-tuned", "code": "ASE", "value": 461.0, "best": false, "held": false, "failed": true}, {"id": "ase-3.29.0-lj38-bfgslinesearch-tuned", "entry": "ASE 3.29.0 ase-3.29.0-lj38-bfgslinesearch-tuned", "code": "ASE", "value": 506.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-sd-twopoint", "entry": "eOn 3.5.0 eon-client-sd-twopoint", "code": "eOn", "value": 532.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-sd-twopoint", "entry": "eOn 3.5.0 eon-3.5.0-sd-twopoint", "code": "eOn", "value": 532.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-bfgs-0.3.0", "entry": "rgmin 0.3.0 rgmin-bfgs-0.3.0", "code": "rgmin", "value": 538.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-sd-twopoint", "entry": "Eon svn r2549 eon-svn-sd-twopoint", "code": "Eon svn", "value": 539.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-sd-twopoint", "entry": "Eon svn r2549 eon-svn-r2549-sd-twopoint", "code": "Eon svn", "value": 539.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-bb-0.3.0", "entry": "rgmin 0.3.0 rgmin-bb-0.3.0", "code": "rgmin", "value": 541.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-lj38-bfgslinesearch-default", "entry": "ASE 3.29.0 ase-3.29.0-lj38-bfgslinesearch-default", "code": "ASE", "value": 561.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-sr1-0.3.0", "entry": "rgmin 0.3.0 rgmin-sr1-0.3.0", "code": "rgmin", "value": 566.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-lj38-bfgs-default", "entry": "ASE 3.29.0 ase-3.29.0-lj38-bfgs-default", "code": "ASE", "value": 656.0, "best": false, "held": false, "failed": true}, {"id": "ase-3.29.0-lj38-preconlbfgs-default", "entry": "ASE 3.29.0 ase-3.29.0-lj38-preconlbfgs-default", "code": "ASE", "value": 690.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-fire2-0.3.0", "entry": "rgmin 0.3.0 rgmin-fire2-0.3.0", "code": "rgmin", "value": 694.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-fire-0.3.0", "entry": "rgmin 0.3.0 rgmin-fire-0.3.0", "code": "rgmin", "value": 699.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-lj38-fire-default", "entry": "ASE 3.29.0 ase-3.29.0-lj38-fire-default", "code": "ASE", "value": 706.0, "best": false, "held": false, "failed": false}, {"id": "ase-fire-3.29.0", "entry": "ASE 3.29.0 ase-fire-3.29.0", "code": "ASE", "value": 706.0, "best": false, "held": false, "failed": false}, {"id": "sella-2.6.0-lj38-min-default", "entry": "Sella 2.6.0 sella-2.6.0-lj38-min-default", "code": "Sella", "value": 710.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-lj38-fire-tuned", "entry": "ASE 3.29.0 ase-3.29.0-lj38-fire-tuned", "code": "ASE", "value": 720.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-fire", "entry": "eOn 3.5.0 eon-client-fire", "code": "eOn", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-fire", "entry": "Eon svn r2549 eon-svn-fire", "code": "Eon svn", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-fire", "entry": "eOn 3.5.0 eon-3.5.0-fire", "code": "eOn", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-r2549-fire", "entry": "Eon svn r2549 eon-svn-r2549-fire", "code": "Eon svn", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-nlcg-0.3.0", "entry": "rgmin 0.3.0 rgmin-nlcg-0.3.0", "code": "rgmin", "value": 733.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-sd-0.3.0", "entry": "rgmin 0.3.0 rgmin-sd-0.3.0", "code": "rgmin", "value": 1260.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-lj38-preconfire-default", "entry": "ASE 3.29.0 ase-3.29.0-lj38-preconfire-default", "code": "ASE", "value": 1817.0, "best": false, "held": false, "failed": false}, {"id": "rgmin-quickmin-0.3.0", "entry": "rgmin 0.3.0 rgmin-quickmin-0.3.0", "code": "rgmin", "value": 1849.0, "best": false, "held": false, "failed": true}, {"id": "eon-client-qm", "entry": "eOn 3.5.0 eon-client-qm", "code": "eOn", "value": 3514.0, "best": false, "held": false, "failed": true}, {"id": "eon-3.5.0-qm", "entry": "eOn 3.5.0 eon-3.5.0-qm", "code": "eOn", "value": 3514.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-qm", "entry": "Eon svn r2549 eon-svn-qm", "code": "Eon svn", "value": 3547.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-r2549-qm", "entry": "Eon svn r2549 eon-svn-r2549-qm", "code": "Eon svn", "value": 3547.0, "best": false, "held": false, "failed": true}, {"id": "eon-client-sd", "entry": "eOn 3.5.0 eon-client-sd", "code": "eOn", "value": 4901.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-sd", "entry": "Eon svn r2549 eon-svn-sd", "code": "Eon svn", "value": 4901.0, "best": false, "held": false, "failed": true}, {"id": "eon-3.5.0-sd", "entry": "eOn 3.5.0 eon-3.5.0-sd", "code": "eOn", "value": 4901.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-r2549-sd", "entry": "Eon svn r2549 eon-svn-r2549-sd", "code": "Eon svn", "value": 4901.0, "best": false, "held": false, "failed": true}]}</script></figure>
    <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
@@ -818,6 +938,66 @@
    <caption>Present runs. Fewer force calls first. The legacy 2014 scores follow.</caption>
    <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th><th class="text" scope="col">Tuning</th></tr></thead><tbody>
    <tr>
+   <td class="text">ase-3.29.0-morse-bfgslinesearch-default</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num">29</td>
+   <td class="num">21</td>
+   <td class="num">37</td>
+   <td class="num">0</td>
+   <td class="text"></td>
+   </tr>
+   <tr>
+   <td class="text">ase-3.29.0-morse-preconlbfgs-tuned</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num">29</td>
+   <td class="num">16</td>
+   <td class="num">42</td>
+   <td class="num">0</td>
+   <td class="text"></td>
+   </tr>
+   <tr>
+   <td class="text">sella-2.6.0-morse-min-default</td>
+   <td class="text">Sella</td>
+   <td class="text">2.6.0</td>
+   <td class="num">29</td>
+   <td class="num">20</td>
+   <td class="num">41</td>
+   <td class="num">0</td>
+   <td class="text"></td>
+   </tr>
+   <tr>
+   <td class="text">ase-3.29.0-morse-lbfgs-tuned</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num">32</td>
+   <td class="num">26</td>
+   <td class="num">36</td>
+   <td class="num">0</td>
+   <td class="text"></td>
+   </tr>
+   <tr>
+   <td class="text">ase-3.29.0-morse-preconode12r-default</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num">42</td>
+   <td class="num">21</td>
+   <td class="num">56</td>
+   <td class="num">0</td>
+   <td class="text"></td>
+   </tr>
+   <tr>
+   <td class="text">ase-3.29.0-morse-preconode12r-tuned</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num">42</td>
+   <td class="num">21</td>
+   <td class="num">56</td>
+   <td class="num">0</td>
+   <td class="text"></td>
+   </tr>
+   <tr>
    <td class="text">eon-client-morse-lbfgs</td>
    <td class="text">eOn</td>
    <td class="text">3.5.0</td>
@@ -834,6 +1014,26 @@
    <td class="num">52</td>
    <td class="num">36</td>
    <td class="num">103</td>
+   <td class="num">0</td>
+   <td class="text"></td>
+   </tr>
+   <tr>
+   <td class="text">ase-3.29.0-morse-bfgs-default</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num">53</td>
+   <td class="num">44</td>
+   <td class="num">56</td>
+   <td class="num">0</td>
+   <td class="text"></td>
+   </tr>
+   <tr>
+   <td class="text">ase-3.29.0-morse-lbfgs-default</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num">53</td>
+   <td class="num">44</td>
+   <td class="num">56</td>
    <td class="num">0</td>
    <td class="text"></td>
    </tr>
@@ -858,6 +1058,46 @@
    <td class="text"></td>
    </tr>
    <tr>
+   <td class="text">ase-3.29.0-morse-bfgs-tuned</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num">55</td>
+   <td class="num">44</td>
+   <td class="num">60</td>
+   <td class="num">0</td>
+   <td class="text"></td>
+   </tr>
+   <tr>
+   <td class="text">ase-3.29.0-morse-preconlbfgs-default</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num">60</td>
+   <td class="num">16</td>
+   <td class="num">242</td>
+   <td class="num">0</td>
+   <td class="text"></td>
+   </tr>
+   <tr>
+   <td class="text">sella-2.6.0-morse-min-tuned</td>
+   <td class="text">Sella</td>
+   <td class="text">2.6.0</td>
+   <td class="num">71</td>
+   <td class="num">49</td>
+   <td class="num">84</td>
+   <td class="num">0</td>
+   <td class="text"></td>
+   </tr>
+   <tr>
+   <td class="text">ase-3.29.0-morse-bfgslinesearch-tuned</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num">93</td>
+   <td class="num">70</td>
+   <td class="num">104</td>
+   <td class="num">0</td>
+   <td class="text"></td>
+   </tr>
+   <tr>
    <td class="text">eon-client-morse-cg</td>
    <td class="text">eOn</td>
    <td class="text">3.5.0</td>
@@ -878,6 +1118,26 @@
    <td class="text"></td>
    </tr>
    <tr>
+   <td class="text">ase-3.29.0-morse-fire-default</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num">113</td>
+   <td class="num">98</td>
+   <td class="num">135</td>
+   <td class="num">0</td>
+   <td class="text"></td>
+   </tr>
+   <tr>
+   <td class="text">ase-3.29.0-morse-fire-tuned</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num">113</td>
+   <td class="num">98</td>
+   <td class="num">135</td>
+   <td class="num">0</td>
+   <td class="text"></td>
+   </tr>
+   <tr>
    <td class="text">eon-client-morse-fire</td>
    <td class="text">eOn</td>
    <td class="text">3.5.0</td>
@@ -894,6 +1154,26 @@
    <td class="num">156</td>
    <td class="num">107</td>
    <td class="num">212</td>
+   <td class="num">0</td>
+   <td class="text"></td>
+   </tr>
+   <tr>
+   <td class="text">ase-3.29.0-morse-preconfire-default</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num">363</td>
+   <td class="num">272</td>
+   <td class="num">407</td>
+   <td class="num">0</td>
+   <td class="text"></td>
+   </tr>
+   <tr>
+   <td class="text">ase-3.29.0-morse-preconfire-tuned</td>
+   <td class="text">ASE</td>
+   <td class="text">3.29.0</td>
+   <td class="num">366</td>
+   <td class="num">291</td>
+   <td class="num">408</td>
    <td class="num">0</td>
    <td class="text"></td>
    </tr>
@@ -918,7 +1198,7 @@
    <td class="text"></td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:10"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "eon-client-morse-lbfgs", "entry": "eOn 3.5.0 eon-client-morse-lbfgs", "code": "eOn", "value": 52.0, "best": true, "held": false, "failed": false}, {"id": "eon-svn-morse-lbfgs", "entry": "Eon svn r2549 eon-svn-morse-lbfgs", "code": "Eon svn", "value": 52.0, "best": true, "held": false, "failed": false}, {"id": "eon-main-morse-lbfgs-m100", "entry": "eOn 3.6.0 eon-main-morse-lbfgs-m100", "code": "eOn", "value": 54.0, "best": false, "held": false, "failed": false}, {"id": "eon-main-morse-lbfgs", "entry": "eOn 3.6.0 eon-main-morse-lbfgs", "code": "eOn", "value": 54.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-morse-cg", "entry": "eOn 3.5.0 eon-client-morse-cg", "code": "eOn", "value": 106.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-morse-cg", "entry": "Eon svn r2549 eon-svn-morse-cg", "code": "Eon svn", "value": 106.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-morse-fire", "entry": "eOn 3.5.0 eon-client-morse-fire", "code": "eOn", "value": 156.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-morse-fire", "entry": "Eon svn r2549 eon-svn-morse-fire", "code": "Eon svn", "value": 156.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-morse-sd", "entry": "eOn 3.5.0 eon-client-morse-sd", "code": "eOn", "value": 7038.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-morse-sd", "entry": "Eon svn r2549 eon-svn-morse-sd", "code": "Eon svn", "value": 7038.0, "best": false, "held": false, "failed": true}]}</script></figure>
+   <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:26"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "ase-3.29.0-morse-bfgslinesearch-default", "entry": "ASE 3.29.0 ase-3.29.0-morse-bfgslinesearch-default", "code": "ASE", "value": 29.0, "best": true, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-preconlbfgs-tuned", "entry": "ASE 3.29.0 ase-3.29.0-morse-preconlbfgs-tuned", "code": "ASE", "value": 29.0, "best": true, "held": false, "failed": false}, {"id": "sella-2.6.0-morse-min-default", "entry": "Sella 2.6.0 sella-2.6.0-morse-min-default", "code": "Sella", "value": 29.0, "best": true, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-lbfgs-tuned", "entry": "ASE 3.29.0 ase-3.29.0-morse-lbfgs-tuned", "code": "ASE", "value": 32.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-preconode12r-default", "entry": "ASE 3.29.0 ase-3.29.0-morse-preconode12r-default", "code": "ASE", "value": 42.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-preconode12r-tuned", "entry": "ASE 3.29.0 ase-3.29.0-morse-preconode12r-tuned", "code": "ASE", "value": 42.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-morse-lbfgs", "entry": "eOn 3.5.0 eon-client-morse-lbfgs", "code": "eOn", "value": 52.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-morse-lbfgs", "entry": "Eon svn r2549 eon-svn-morse-lbfgs", "code": "Eon svn", "value": 52.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-bfgs-default", "entry": "ASE 3.29.0 ase-3.29.0-morse-bfgs-default", "code": "ASE", "value": 53.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-lbfgs-default", "entry": "ASE 3.29.0 ase-3.29.0-morse-lbfgs-default", "code": "ASE", "value": 53.0, "best": false, "held": false, "failed": false}, {"id": "eon-main-morse-lbfgs-m100", "entry": "eOn 3.6.0 eon-main-morse-lbfgs-m100", "code": "eOn", "value": 54.0, "best": false, "held": false, "failed": false}, {"id": "eon-main-morse-lbfgs", "entry": "eOn 3.6.0 eon-main-morse-lbfgs", "code": "eOn", "value": 54.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-bfgs-tuned", "entry": "ASE 3.29.0 ase-3.29.0-morse-bfgs-tuned", "code": "ASE", "value": 55.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-preconlbfgs-default", "entry": "ASE 3.29.0 ase-3.29.0-morse-preconlbfgs-default", "code": "ASE", "value": 60.0, "best": false, "held": false, "failed": false}, {"id": "sella-2.6.0-morse-min-tuned", "entry": "Sella 2.6.0 sella-2.6.0-morse-min-tuned", "code": "Sella", "value": 71.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-bfgslinesearch-tuned", "entry": "ASE 3.29.0 ase-3.29.0-morse-bfgslinesearch-tuned", "code": "ASE", "value": 93.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-morse-cg", "entry": "eOn 3.5.0 eon-client-morse-cg", "code": "eOn", "value": 106.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-morse-cg", "entry": "Eon svn r2549 eon-svn-morse-cg", "code": "Eon svn", "value": 106.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-fire-default", "entry": "ASE 3.29.0 ase-3.29.0-morse-fire-default", "code": "ASE", "value": 113.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-fire-tuned", "entry": "ASE 3.29.0 ase-3.29.0-morse-fire-tuned", "code": "ASE", "value": 113.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-morse-fire", "entry": "eOn 3.5.0 eon-client-morse-fire", "code": "eOn", "value": 156.0, "best": false, "held": false, "failed": false}, {"id": "eon-svn-morse-fire", "entry": "Eon svn r2549 eon-svn-morse-fire", "code": "Eon svn", "value": 156.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-preconfire-default", "entry": "ASE 3.29.0 ase-3.29.0-morse-preconfire-default", "code": "ASE", "value": 363.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-morse-preconfire-tuned", "entry": "ASE 3.29.0 ase-3.29.0-morse-preconfire-tuned", "code": "ASE", "value": 366.0, "best": false, "held": false, "failed": false}, {"id": "eon-client-morse-sd", "entry": "eOn 3.5.0 eon-client-morse-sd", "code": "eOn", "value": 7038.0, "best": false, "held": false, "failed": true}, {"id": "eon-svn-morse-sd", "entry": "Eon svn r2549 eon-svn-morse-sd", "code": "Eon svn", "value": 7038.0, "best": false, "held": false, "failed": true}]}</script></figure>
    <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>

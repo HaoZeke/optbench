@@ -1,0 +1,41 @@
+id = "ase/de-lj38-2ts-default"
+engine = "ase"
+code = "ASE"
+code_version = "3.29.0"
+commit = "f27c0005ae6a67ea419f996e728668865bfc1f86"
+algorithm = "NEB-FIRE"
+problem = "double-ended-saddle-search/lj38_2ts_separation"
+task = "neb"
+profile = "default"
+reducer = "capped"
+ranked = true
+parameter_source = "default"
+note = "ASE NEB defaults on the same pairs: spring 0.1, climb off, FIRE. The cap is 40000, the same harness cap as the tuned row. The problem file does not state one."
+
+[optimizer]
+name = "FIRE"
+
+[optimizer.parameters]
+
+[potential]
+kind = "lennard-jones"
+epsilon = 1.0
+sigma = 1.0
+rc = 40.0
+pbc = [false, false, false]
+
+[stop]
+norm = "fmax"
+force_norm = 0.001
+max_force_calls = 40000
+max_steps = 40000
+
+[input]
+archive_path = "website/double-ended-saddle-search/lj38_2ts_separation/coords.tgz"
+
+[neb]
+layout = "indexed"
+moving_images = 5
+spring = 0.1
+climb = false
+method = "improvedtangent"

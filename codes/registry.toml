@@ -60,9 +60,19 @@ name = "ASE"
 role = "minimization and saddle search"
 repository = "https://gitlab.com/ase/ase"
 ref = "3.29.0"
-commit = ""
-committed = "2026"
-note = "Atomic Simulation Environment 3.29.0. FIRE or LBFGS to the problem force norm. Force calls are calculator evaluations."
+commit = "f27c0005ae6a67ea419f996e728668865bfc1f86"
+committed = "2026-10-15"
+note = "Atomic Simulation Environment 3.29.0. BFGS, LBFGS, FIRE, BFGSLineSearch, GPMin, PreconLBFGS, PreconFIRE, and PreconODE12r, plus NEB and dimer. Force calls are harness calculator evaluations."
+
+[[code]]
+id = "sella"
+name = "Sella"
+role = "minimization and saddle search"
+repository = "https://github.com/zadorlab/sella"
+ref = "2.6.0"
+commit = "6cfb60cdb100a146c3c6f0587d5308b247aa8010"
+committed = "2026-10-15"
+note = "Sella 2.6.0. Order 1 is a saddle and order 0 is a minimum. The Sella 0.1.1 rows on the 2014 tables are legacy and are not this pin. Force calls are harness calculator evaluations."
 
 [[code]]
 id = "artn"
@@ -73,3 +83,469 @@ ref = "DEVEL"
 commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
 committed = "2026-10-05"
 note = "Activation-relaxation technique nouveau, plugin branch DEVEL. The benchmark contributor of a new entry is Rohit Goswami."
+
+# generated ASE and Sella templates
+
+[[template]]
+id = "ase/lj38-bfgs-default"
+code = "ase"
+problem = "minimization/lj38"
+profile = "default"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/lj38-bfgs-tuned"
+code = "ase"
+problem = "minimization/lj38"
+profile = "tuned"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/lj38-lbfgs-default"
+code = "ase"
+problem = "minimization/lj38"
+profile = "default"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/lj38-lbfgs-tuned"
+code = "ase"
+problem = "minimization/lj38"
+profile = "tuned"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/lj38-fire-default"
+code = "ase"
+problem = "minimization/lj38"
+profile = "default"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/lj38-fire-tuned"
+code = "ase"
+problem = "minimization/lj38"
+profile = "tuned"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/lj38-bfgslinesearch-default"
+code = "ase"
+problem = "minimization/lj38"
+profile = "default"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/lj38-bfgslinesearch-tuned"
+code = "ase"
+problem = "minimization/lj38"
+profile = "tuned"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/lj38-gpmin-default"
+code = "ase"
+problem = "minimization/lj38"
+profile = "default"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/lj38-gpmin-tuned"
+code = "ase"
+problem = "minimization/lj38"
+profile = "tuned"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/lj38-preconlbfgs-default"
+code = "ase"
+problem = "minimization/lj38"
+profile = "default"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/lj38-preconlbfgs-tuned"
+code = "ase"
+problem = "minimization/lj38"
+profile = "tuned"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/lj38-preconfire-default"
+code = "ase"
+problem = "minimization/lj38"
+profile = "default"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/lj38-preconfire-tuned"
+code = "ase"
+problem = "minimization/lj38"
+profile = "tuned"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/lj38-preconode12r-default"
+code = "ase"
+problem = "minimization/lj38"
+profile = "default"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/lj38-preconode12r-tuned"
+code = "ase"
+problem = "minimization/lj38"
+profile = "tuned"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "sella/lj38-min-default"
+code = "sella"
+problem = "minimization/lj38"
+profile = "default"
+task = "sella"
+ranked = true
+
+[[template]]
+id = "sella/lj38-min-tuned"
+code = "sella"
+problem = "minimization/lj38"
+profile = "tuned"
+task = "sella"
+ranked = true
+
+[[template]]
+id = "ase/morse-bfgs-default"
+code = "ase"
+problem = "minimization/morse-bulk"
+profile = "default"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/morse-bfgs-tuned"
+code = "ase"
+problem = "minimization/morse-bulk"
+profile = "tuned"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/morse-lbfgs-default"
+code = "ase"
+problem = "minimization/morse-bulk"
+profile = "default"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/morse-lbfgs-tuned"
+code = "ase"
+problem = "minimization/morse-bulk"
+profile = "tuned"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/morse-fire-default"
+code = "ase"
+problem = "minimization/morse-bulk"
+profile = "default"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/morse-fire-tuned"
+code = "ase"
+problem = "minimization/morse-bulk"
+profile = "tuned"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/morse-bfgslinesearch-default"
+code = "ase"
+problem = "minimization/morse-bulk"
+profile = "default"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/morse-bfgslinesearch-tuned"
+code = "ase"
+problem = "minimization/morse-bulk"
+profile = "tuned"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/morse-gpmin-default"
+code = "ase"
+problem = "minimization/morse-bulk"
+profile = "default"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/morse-gpmin-tuned"
+code = "ase"
+problem = "minimization/morse-bulk"
+profile = "tuned"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/morse-preconlbfgs-default"
+code = "ase"
+problem = "minimization/morse-bulk"
+profile = "default"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/morse-preconlbfgs-tuned"
+code = "ase"
+problem = "minimization/morse-bulk"
+profile = "tuned"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/morse-preconfire-default"
+code = "ase"
+problem = "minimization/morse-bulk"
+profile = "default"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/morse-preconfire-tuned"
+code = "ase"
+problem = "minimization/morse-bulk"
+profile = "tuned"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/morse-preconode12r-default"
+code = "ase"
+problem = "minimization/morse-bulk"
+profile = "default"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/morse-preconode12r-tuned"
+code = "ase"
+problem = "minimization/morse-bulk"
+profile = "tuned"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "sella/morse-min-default"
+code = "sella"
+problem = "minimization/morse-bulk"
+profile = "default"
+task = "sella"
+ranked = true
+
+[[template]]
+id = "sella/morse-min-tuned"
+code = "sella"
+problem = "minimization/morse-bulk"
+profile = "tuned"
+task = "sella"
+ranked = true
+
+[[template]]
+id = "sella/lj38-ts-default"
+code = "sella"
+problem = "tsopt/LJ38"
+profile = "default"
+task = "sella"
+ranked = true
+
+[[template]]
+id = "sella/lj38-ts-tuned"
+code = "sella"
+problem = "tsopt/LJ38"
+profile = "tuned"
+task = "sella"
+ranked = true
+
+[[template]]
+id = "sella/pt-island-ts-default"
+code = "sella"
+problem = "tsopt/pt-island"
+profile = "default"
+task = "sella"
+ranked = true
+
+[[template]]
+id = "sella/pt-island-ts-tuned"
+code = "sella"
+problem = "tsopt/pt-island"
+profile = "tuned"
+task = "sella"
+ranked = true
+
+[[template]]
+id = "ase/neb-pt-heptamer-default"
+code = "ase"
+problem = "neb/Pt-heptamer"
+profile = "default"
+task = "neb"
+ranked = true
+
+[[template]]
+id = "ase/neb-pt-heptamer-tuned"
+code = "ase"
+problem = "neb/Pt-heptamer"
+profile = "tuned"
+task = "neb"
+ranked = true
+
+[[template]]
+id = "ase/de-lj38-default"
+code = "ase"
+problem = "double-ended-saddle-search/lj38"
+profile = "default"
+task = "neb"
+ranked = true
+
+[[template]]
+id = "ase/de-lj38-tuned"
+code = "ase"
+problem = "double-ended-saddle-search/lj38"
+profile = "tuned"
+task = "neb"
+ranked = true
+
+[[template]]
+id = "ase/de-pt-island-default"
+code = "ase"
+problem = "double-ended-saddle-search/pt-island"
+profile = "default"
+task = "neb"
+ranked = true
+
+[[template]]
+id = "ase/de-pt-island-tuned"
+code = "ase"
+problem = "double-ended-saddle-search/pt-island"
+profile = "tuned"
+task = "neb"
+ranked = true
+
+[[template]]
+id = "ase/de-lj38-2ts-default"
+code = "ase"
+problem = "double-ended-saddle-search/lj38_2ts_separation"
+profile = "default"
+task = "neb"
+ranked = true
+
+[[template]]
+id = "ase/de-lj38-2ts-tuned"
+code = "ase"
+problem = "double-ended-saddle-search/lj38_2ts_separation"
+profile = "tuned"
+task = "neb"
+ranked = true
+
+[[template]]
+id = "sella/de-lj38-default"
+code = "sella"
+problem = "double-ended-saddle-search/lj38"
+profile = "default"
+task = "sella-neb"
+ranked = true
+
+[[template]]
+id = "sella/de-lj38-tuned"
+code = "sella"
+problem = "double-ended-saddle-search/lj38"
+profile = "tuned"
+task = "sella-neb"
+ranked = true
+
+[[template]]
+id = "sella/de-pt-island-default"
+code = "sella"
+problem = "double-ended-saddle-search/pt-island"
+profile = "default"
+task = "sella-neb"
+ranked = true
+
+[[template]]
+id = "sella/de-pt-island-tuned"
+code = "sella"
+problem = "double-ended-saddle-search/pt-island"
+profile = "tuned"
+task = "sella-neb"
+ranked = true
+
+[[template]]
+id = "sella/de-lj38-2ts-default"
+code = "sella"
+problem = "double-ended-saddle-search/lj38_2ts_separation"
+profile = "default"
+task = "sella-neb"
+ranked = true
+
+[[template]]
+id = "sella/de-lj38-2ts-tuned"
+code = "sella"
+problem = "double-ended-saddle-search/lj38_2ts_separation"
+profile = "tuned"
+task = "sella-neb"
+ranked = true
+
+[[template]]
+id = "ase/dimer-pt-island-default"
+code = "ase"
+problem = "saddle-search/pt-island"
+profile = "default"
+task = "dimer"
+ranked = false
+
+[[template]]
+id = "ase/dimer-pt-island-tuned"
+code = "ase"
+problem = "saddle-search/pt-island"
+profile = "tuned"
+task = "dimer"
+ranked = false
+
+[[template]]
+id = "sella/pt-island-search-default"
+code = "sella"
+problem = "saddle-search/pt-island"
+profile = "default"
+task = "sella-search"
+ranked = false
+
+[[template]]
+id = "sella/pt-island-search-tuned"
+code = "sella"
+problem = "saddle-search/pt-island"
+profile = "tuned"
+task = "sella-search"
+ranked = false

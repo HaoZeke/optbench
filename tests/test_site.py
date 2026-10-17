@@ -46,6 +46,12 @@ def test_collection_shows_present_runs_beyond_the_front_page():
     assert "eon-3.5.0-neb-pt-lbfgs" in neb
     assert "Legacy 2014 scores. Fewer calls is to the left." in neb
     assert "2014 scores. Fewer calls is to the left." in neb
+    tsopt = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "tsopt.org").read_text(encoding="utf-8")
+    assert "Sella 0.1.1 legacy" in tsopt
+    assert "2.6.0 legacy" not in tsopt
+    saddle = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "saddle-search.org").read_text(encoding="utf-8")
+    assert "eon-3.5.0-saddle-pt-dimer" in saddle
+    assert "ase-3.29.0-dimer-pt-island-default" not in saddle
     featured = (ROOT / "docs" / "include" / "featured.org").read_text(encoding="utf-8")
     assert "rgmin-lbfgs-0.3.0" not in featured
 
