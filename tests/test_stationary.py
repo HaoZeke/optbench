@@ -1,8 +1,18 @@
 import math
 
+import numpy as np
 import pytest
 
-from optbench.stationary import jacobi_eigenvalues, judge_stationary, kabsch_rmsd, negative_index, numerical_hessian
+from optbench.stationary import (
+    _rigid_basis,
+    curvature_tolerance,
+    jacobi_eigenvalues,
+    judge_stationary,
+    kabsch_rmsd,
+    negative_index,
+    numerical_hessian,
+    vibrational_eigenvalues,
+)
 
 
 def test_symmetric_eigenvalues_match_the_matrix():
@@ -57,6 +67,30 @@ def test_numerical_hessian_of_a_saddle():
     )
     assert judged["ok"] is True
     assert judged["hessian_index"] == 1
+
+
+def test_curvature_tolerance_follows_the_force_stop_and_the_hessian_norm():
+    assert curvature_tolerance(0.01, 12.0) == pytest.approx(0.01)
+    assert curvature_tolerance(1e-8, 1.0) == pytest.approx(1e-6)
+    assert curvature_tolerance(1e-12, 1.0e6) == pytest.approx(0.01)
+
+
+def test_rigid_leakage_is_not_a_vibrational_mode_and_a_real_mode_remains():
+    coords = np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [0.2, 0.8, 0.1]])
+    basis = _rigid_basis(coords, rotations=True)
+    rotation = basis[:, 3]
+    leakage = -1.0e-3 * np.outer(rotation, rotation)
+    raw = np.linalg.eigvalsh(leakage)
+    assert negative_index(raw, 1e-6) == 1
+    vibrational = vibrational_eigenvalues(leakage, coords, rotations=True)
+    assert negative_index(vibrational, curvature_tolerance(0.01, np.linalg.norm(leakage))) == 0
+
+    left, singular, _right = np.linalg.svd(basis, full_matrices=True)
+    mode = left[:, int(np.sum(singular > 1e-8))]
+    hessian = leakage - 2.0 * np.outer(mode, mode)
+    vibrational = vibrational_eigenvalues(hessian, coords, rotations=True)
+    assert min(vibrational) == pytest.approx(-2.0, abs=1e-8)
+    assert negative_index(vibrational, curvature_tolerance(0.01, np.linalg.norm(hessian))) == 1
 
 
 def test_a_minimum_is_not_an_index_1_saddle():

@@ -40,9 +40,9 @@ name = "rgmin"
 role = "minimization"
 repository = "https://github.com/OmniPotentRPC/rgmin"
 ref = "main"
-commit = "e089a136910f5a3a32dbf447ff23a2eba674bc83"
-committed = "2026-10-11"
-note = "Minimizers. A Lennard-Jones 38 entry uses L-BFGS or FIRE to the problem force norm."
+commit = "24236559f3815847cac89ba0a7be634ce0beb4a9"
+committed = "2026-10-15"
+note = "Minimizers, version 0.4.0. A Lennard-Jones 38 entry uses the harness force counter. L-BFGS memory defaults to 10."
 
 [[code]]
 id = "rgsaddle"

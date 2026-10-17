@@ -229,7 +229,7 @@ def campaign_problem(stem: str) -> str | None:
         return "saddle-search/pt-island"
     if stem == "sella-2.6.0-ts-lj38":
         return "tsopt/LJ38"
-    if stem.startswith(("pele-", "eon-client-", "eon-svn-")):
+    if stem.startswith(("pele-", "eon-client-", "eon-svn-", "rgmin-")):
         return "minimization/lj38"
     return None
 

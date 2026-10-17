@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - "design/**"
+      - "entries/**"
   pull_request:
   workflow_dispatch:
 
