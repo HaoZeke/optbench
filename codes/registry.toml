@@ -94,6 +94,16 @@ commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
 committed = "2026-10-05"
 note = "Activation-relaxation technique nouveau, plugin branch DEVEL. The benchmark contributor of a new entry is Rohit Goswami."
 
+[[code]]
+id = "kliff"
+name = "KLIFF"
+role = "machine learning potential training"
+repository = "https://github.com/openkim/kliff"
+ref = "main"
+commit = "df2d4de2d8c0b3d4ba81cb9aa1834b52de299aa5"
+committed = "2026-02-28"
+note = "KLIFF 1.0.1 built from source at main. Neural-network rows use LossNeuralNetworkModel and its PyTorch optimizers Adam, LBFGS, and Rprop. The scored loss is the problem squared-error sum on Behler-Parrinello fingerprints. One harness call is one loss and parameter-gradient evaluation."
+
 # generated ASE and Sella templates
 
 [[template]]
