@@ -188,8 +188,8 @@
   ],
   "profile": {
     "area_log10": {
-      "ase/neb-pt-heptamer-default 3.29.0 default campaign f27c000": 0.9609803707734784,
-      "ase/neb-pt-heptamer-tuned 3.29.0 tuned campaign f27c000": 1.0536049848239342,
+      "ase/neb-pt-heptamer-default 3.29.0 default campaign, asv f27c000": 0.9609803707734784,
+      "ase/neb-pt-heptamer-tuned 3.29.0 tuned campaign, asv f27c000": 1.0536049848239342,
       "rgsaddle/ci-neb 0.2.2 default asv c0db2b8": 0.7988872961851808,
       "rgsaddle/ci-neb-lbfgs 0.2.2 tuned asv c0db2b8": 1.111495368605469,
       "rgsaddle/ew-ci-neb 0.2.2 default asv c0db2b8": 0.752574989159953,
@@ -204,14 +204,14 @@
       "rgsaddle/sidpp-ci-neb-lbfgs 0.2.2 tuned asv c0db2b8": 1.1346515221180828
     },
     "rho": {
-      "ase/neb-pt-heptamer-default 3.29.0 default campaign f27c000": [
+      "ase/neb-pt-heptamer-default 3.29.0 default campaign, asv f27c000": [
         0.0,
         0.6923076923076923,
         1.0,
         1.0,
         1.0
       ],
-      "ase/neb-pt-heptamer-tuned 3.29.0 tuned campaign f27c000": [
+      "ase/neb-pt-heptamer-tuned 3.29.0 tuned campaign, asv f27c000": [
         0.0,
         1.0,
         1.0,
@@ -304,8 +304,8 @@
       ]
     },
     "solved": {
-      "ase/neb-pt-heptamer-default 3.29.0 default campaign f27c000": 1.0,
-      "ase/neb-pt-heptamer-tuned 3.29.0 tuned campaign f27c000": 1.0,
+      "ase/neb-pt-heptamer-default 3.29.0 default campaign, asv f27c000": 1.0,
+      "ase/neb-pt-heptamer-tuned 3.29.0 tuned campaign, asv f27c000": 1.0,
       "rgsaddle/ci-neb 0.2.2 default asv c0db2b8": 1.0,
       "rgsaddle/ci-neb-lbfgs 0.2.2 tuned asv c0db2b8": 1.0,
       "rgsaddle/ew-ci-neb 0.2.2 default asv c0db2b8": 1.0,
@@ -554,7 +554,7 @@
       "wilson_low": 0.7719046276458016
     },
     {
-      "asv_commit": "",
+      "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "call_unit": "total",
       "cap": 10000,
       "code": "ASE",
@@ -587,11 +587,11 @@
       "par2_mean": 442.61538461538464,
       "partial": false,
       "partial_reason": "",
-      "path": "results/campaign/ase-3.29.0-neb-pt-heptamer-tuned.dat",
+      "path": "results/campaign/ase-3.29.0-neb-pt-heptamer-tuned.dat; results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "neb/Pt-heptamer",
       "registry_match": true,
       "scored": true,
-      "source": "campaign",
+      "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "ase/neb-pt-heptamer-tuned",
       "tuning": "tuned",
@@ -599,7 +599,7 @@
       "wilson_low": 0.7719046276458016
     },
     {
-      "asv_commit": "",
+      "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "call_unit": "total",
       "cap": 10000,
       "code": "ASE",
@@ -632,11 +632,11 @@
       "par2_mean": 606.9230769230769,
       "partial": false,
       "partial_reason": "",
-      "path": "results/campaign/ase-3.29.0-neb-pt-heptamer-default.dat",
+      "path": "results/campaign/ase-3.29.0-neb-pt-heptamer-default.dat; results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "neb/Pt-heptamer",
       "registry_match": true,
       "scored": true,
-      "source": "campaign",
+      "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "ase/neb-pt-heptamer-default",
       "tuning": "default",

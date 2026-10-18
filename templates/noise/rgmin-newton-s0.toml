@@ -1,0 +1,18 @@
+id = "noise/rgmin-newton-s0"
+engine = "noise"
+problem = "minimization/lj38-noise"
+code = "rgmin"
+code_version = "0.4.1"
+commit = "9a2e7ff11fa65826f9e847856bee10d3d70b7156"
+algorithm = "NEWTON"
+tuning = "default"
+note = "Default profile at sigma 0. Newton and dogleg call the analytic Hessian of the clean force. Positive sigma has no template: the noisy force is not that gradient."
+
+[solver]
+family = "rgmin"
+method = "newton"
+maxstep = 0.2
+
+[noise]
+sigma = 0.0
+seed = 20261016

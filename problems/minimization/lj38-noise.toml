@@ -3,7 +3,7 @@ title = "Lennard-Jones 38 clusters with Gaussian force noise"
 suite = "minimization"
 problem = "lj38-noise"
 contract = "stated"
-remark = "No campaign is recorded for this variant. The quadratic sample is results/validation/statistics.json."
+remark = "Gaussian force noise on the clean Lennard-Jones energy. The harness campaigns use that rule. The quadratic sample is results/validation/statistics.json."
 
 [potential]
 kind = "lennard-jones"
@@ -23,6 +23,7 @@ archive_path = "website/minimization/lj38/lj38-clusters.tgz"
 norm = "l2"
 force_norm = 0.01
 force_unit = "energy/distance"
+energy_tol = 0.01
 max_force_calls = 10000
 
 [noise]
@@ -33,7 +34,7 @@ sigma = [0.0, 1e-4, 1e-3, 1e-2]
 kappa = 3.0
 window = 5
 seed = 20261016
-rule = "Stop when the noisy force norm is at most max(clean tolerance, kappa * sigma * sqrt(components)) and, when sigma is positive, the clean energy over the last window evaluations spans at most the energy tolerance. The Hessian is the clean force. One force sample inside the floor does not stop the search."
+rule = "Stop when the noisy force norm is at most max(clean tolerance, kappa * sigma * sqrt(components)) and, when sigma is positive, the clean energy over the last window evaluations spans at most max(energy_tol, kappa * sigma). The Hessian is the clean force. One force sample inside the floor does not stop the search. Newton and dogleg need that exact Hessian, so they run only at sigma 0."
 
 [metrics]
 required = ["force_calls", "force_calls_max", "force_calls_min", "nfailed"]
@@ -48,7 +49,7 @@ par_factor = 2
 bootstrap_resamples = 2000
 bootstrap_seed = 20261015
 counter = "harness"
-success = "harness force calls under the cap, the noisy force norm at the noise-aware stop, a clean Hessian index 0, and clean energy and Kabsch RMSD against the reference within max(clean tolerance, kappa * sigma)"
+success = "harness force calls under the cap, the noisy force at the noise-aware stop, and when sigma is positive a clean-energy window whose span is at most max(energy_tol, kappa * sigma). The Hessian is the clean force. The index is vibrational: the six rigid modes are removed, and a curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6), with that force_norm the noise-aware stop. Energy and Kabsch RMSD are not applied: this file has no per-start reference."
 required = [
   "schema",
   "counter",
