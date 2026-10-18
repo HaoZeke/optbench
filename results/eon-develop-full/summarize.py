@@ -152,6 +152,8 @@ def summarise(payload: dict) -> dict:
     return {
         "eon_commit": EON_COMMIT,
         "asv_commit": payload.get("commit_hash"),
+        "grid_commits": payload.get("grid_commits") or {},
+        "filled_from_cache": payload.get("filled_from_cache") or {},
         "counter": "harness",
         "classes": classes,
     }
