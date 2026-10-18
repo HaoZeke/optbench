@@ -1,0 +1,14 @@
+# TSASE SDLBFGS on Morse bulk.
+id = "tsase/lbfgs-morse"
+engine = "tsase"
+problem = "minimization/morse-bulk"
+code = "tsase"
+code_version = "1.0"
+commit = "98aac60b5d9905e81ee4e6b8c385f169258d0218"
+algorithm = "SDLBFGS"
+tuning = "default"
+note = "The potential is the harness Morse platinum evaluator with the cell from the .con file."
+
+[tsase]
+method = "lbfgs"
+max_step = 0.2

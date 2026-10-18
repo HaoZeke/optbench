@@ -1,0 +1,16 @@
+# counter harness. The start is the sample geometry, not a reactant/product pair.
+# ninit initial pushes use push_init along x of the first free atom.
+# A success is under the cap, at the force stop, and Hessian index 1.
+# nevalf is the pARTn tally and is not this count.
+successes 0
+nfailed 200
+n 200
+transition_states 0
+code artn
+code_version 1.1.0
+commit 9b753517c6c0eccae51425b83eb4e04ef554550b
+algorithm ARTn
+template partn/ts-lj38
+problem tsopt/LJ38
+tuning default
+counter harness

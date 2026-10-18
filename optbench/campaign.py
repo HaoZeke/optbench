@@ -311,6 +311,20 @@ def run(
             limit=limit,
             resume=resume,
         )
+    from .engines import find as find_engine
+
+    plugged = find_engine(str(template["engine"]))
+    if plugged is not None:
+        stated = template.get("problem")
+        if stated and stated != problem_name:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return plugged.run(
+            root,
+            problem_name,
+            template_name,
+            output=output,
+            workers=workers,
+        )
     if template["engine"] not in _EON_ENGINES:
         raise ValueError(f"unknown engine {template['engine']}")
     if client is None:
