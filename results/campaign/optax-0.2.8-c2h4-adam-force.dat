@@ -1,0 +1,34 @@
+# counter harness. One force call is one evaluation of the squared-error loss and its gradient.
+# The network is the PyAMFF 10-7 tanh model. Initial weights are uniform[-1, 1).
+# A start that first meets the stop on the call at the cap is a cap failure.
+# Adam and Rprop take one evaluation per epoch, including the initial weights.
+# Default row. Adam steps with learning rate 0.01. Betas are 0.9 and 0.999 and epsilon is 1e-8. Energy coefficient 1 and force coefficient 0.1. The gradient tolerance is 0.1 and the cap is 30000 calls. The network is the PyAMFF 10-7 tanh model on the Behler-Parrinello fingerprints of the C2H4 trajectory. The loss is the PyAMFF squared error. A start stops when every parameter gradient component is below the tolerance, or when the energy RMSE is below 0.0001 and the force RMSE is below 0.01. One harness call is one evaluation of that loss and its gradient. Initial weights are uniform[-1, 1) from jax.random.key(20261018 + start). A start that first meets the stop on the call at the cap is a cap failure.
+problem mlopt/C2H4
+template optax/c2h4-adam-force
+cap 30000
+counter harness
+code Optax
+code_version 0.2.8
+commit 107e9ad20ca62bcbee1a8c016daab71c690a678c
+tuning default
+algorithm Adam
+n 50
+force_calls 5699
+force_calls_min 3114
+force_calls_max 9107
+nfailed 0
+median 5532.5
+mean_epoch 5699.44
+median_epoch 5532.5
+mean_energy_rmse 0.0449080225923
+median_energy_rmse 0.045946461032
+mean_force_rmse 0.20187020615
+median_force_rmse 0.200714738462
+par2_mean 5699.44
+wilson_low 0.928652400867
+wilson_high 1
+par2_median 5532.5
+par2_median_low 5035
+par2_median_high 6173
+v2_nfailed 0
+v2_successes 50
