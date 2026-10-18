@@ -168,10 +168,10 @@ L -3.5 0
     </g>
    </g>
    <g id="line2d_12">
-    <path d="M 68.854964 151.194667 
-L 173.318068 151.194667 
-L 173.318068 37.32381 
-L 277.781172 37.32381 
+    <path d="M 68.854964 144.496381 
+L 173.318068 144.496381 
+L 173.318068 44.022095 
+L 277.781172 44.022095 
 L 277.781172 37.32381 
 L 382.244276 37.32381 
 L 382.244276 37.32381 
@@ -180,10 +180,10 @@ L 486.707379 37.32381
 " clip-path="url(#p4e380cea4b)" style="fill: none; stroke: #1f77b4; stroke-width: 1.5; stroke-linecap: square"/>
    </g>
    <g id="line2d_13">
-    <path d="M 68.854964 179.10419 
-L 173.318068 179.10419 
-L 173.318068 37.32381 
-L 277.781172 37.32381 
+    <path d="M 68.854964 189.151619 
+L 173.318068 189.151619 
+L 173.318068 42.905714 
+L 277.781172 42.905714 
 L 277.781172 37.32381 
 L 382.244276 37.32381 
 L 382.244276 37.32381 
@@ -192,10 +192,10 @@ L 486.707379 37.32381
 " clip-path="url(#p4e380cea4b)" style="fill: none; stroke: #ff7f0e; stroke-width: 1.5; stroke-linecap: square"/>
    </g>
    <g id="line2d_14">
-    <path d="M 68.854964 239.388762 
-L 173.318068 239.388762 
-L 173.318068 95.375619 
-L 277.781172 95.375619 
+    <path d="M 68.854964 214.828381 
+L 173.318068 214.828381 
+L 173.318068 57.418667 
+L 277.781172 57.418667 
 L 277.781172 37.32381 
 L 382.244276 37.32381 
 L 382.244276 37.32381 
@@ -204,16 +204,52 @@ L 486.707379 37.32381
 " clip-path="url(#p4e380cea4b)" style="fill: none; stroke: #2ca02c; stroke-width: 1.5; stroke-linecap: square"/>
    </g>
    <g id="line2d_15">
-    <path d="M 68.854964 247.203429 
-L 173.318068 247.203429 
-L 173.318068 135.565333 
-L 277.781172 135.565333 
+    <path d="M 68.854964 258.367238 
+L 173.318068 258.367238 
+L 173.318068 99.841143 
+L 277.781172 99.841143 
+L 277.781172 37.32381 
+L 382.244276 37.32381 
+L 382.244276 37.32381 
+L 486.707379 37.32381 
+L 486.707379 37.32381 
+" clip-path="url(#p4e380cea4b)" style="fill: none; stroke: #d62728; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_16">
+    <path d="M 68.854964 260.6 
+L 173.318068 260.6 
+L 173.318068 161.242095 
+L 277.781172 161.242095 
 L 277.781172 50.720381 
 L 382.244276 50.720381 
 L 382.244276 38.44019 
 L 486.707379 38.44019 
 L 486.707379 37.32381 
-" clip-path="url(#p4e380cea4b)" style="fill: none; stroke: #d62728; stroke-width: 1.5; stroke-linecap: square"/>
+" clip-path="url(#p4e380cea4b)" style="fill: none; stroke: #9467bd; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_17">
+    <path d="M 68.854964 260.6 
+L 173.318068 260.6 
+L 173.318068 138.914476 
+L 277.781172 138.914476 
+L 277.781172 44.022095 
+L 382.244276 44.022095 
+L 382.244276 37.32381 
+L 486.707379 37.32381 
+L 486.707379 37.32381 
+" clip-path="url(#p4e380cea4b)" style="fill: none; stroke: #8c564b; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_18">
+    <path d="M 68.854964 260.6 
+L 173.318068 260.6 
+L 173.318068 260.6 
+L 277.781172 260.6 
+L 277.781172 227.108571 
+L 382.244276 227.108571 
+L 382.244276 37.32381 
+L 486.707379 37.32381 
+L 486.707379 37.32381 
+" clip-path="url(#p4e380cea4b)" style="fill: none; stroke: #e377c2; stroke-width: 1.5; stroke-linecap: square"/>
    </g>
    <g id="patch_3">
     <path d="M 47.962344 260.6 
@@ -243,58 +279,91 @@ L 507.6 26.16
      <path d="M 247.609062 257.1 
 L 502.7 257.1 
 Q 504.1 257.1 504.1 255.7 
-L 504.1 214.397813 
-Q 504.1 212.997813 502.7 212.997813 
-L 247.609062 212.997813 
-Q 246.209062 212.997813 246.209062 214.397813 
+L 504.1 182.896172 
+Q 504.1 181.496172 502.7 181.496172 
+L 247.609062 181.496172 
+Q 246.209062 181.496172 246.209062 182.896172 
 L 246.209062 255.7 
 Q 246.209062 257.1 247.609062 257.1 
 z
 " style="fill: #ffffff; opacity: 0.8; stroke: #cccccc; stroke-linejoin: miter"/>
     </g>
-    <g id="line2d_16">
+    <g id="line2d_19">
+     <path d="M 249.009062 187.165078 
+L 256.009062 187.165078 
+L 256.009062 187.165078 
+L 263.009062 187.165078 
+L 263.009062 187.165078 
+" style="fill: none; stroke: #1f77b4; stroke-width: 1.5; stroke-linecap: square"/>
+    </g>
+    <g id="text_15">
+     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="268.609062" y="189.615078" transform="rotate(-0 268.609062 189.615078)">pele/lj38-loweig-forward 0.1.2 tuned campaign b7081b9</text>
+    </g>
+    <g id="line2d_20">
+     <path d="M 249.009062 197.665625 
+L 256.009062 197.665625 
+L 256.009062 197.665625 
+L 263.009062 197.665625 
+L 263.009062 197.665625 
+" style="fill: none; stroke: #ff7f0e; stroke-width: 1.5; stroke-linecap: square"/>
+    </g>
+    <g id="text_16">
+     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="268.609062" y="200.115625" transform="rotate(-0 268.609062 200.115625)">rgsaddle/mode-lanczos 0.2.2 default campaign, asv c0db2b8</text>
+    </g>
+    <g id="line2d_21">
+     <path d="M 249.009062 208.166172 
+L 256.009062 208.166172 
+L 256.009062 208.166172 
+L 263.009062 208.166172 
+L 263.009062 208.166172 
+" style="fill: none; stroke: #2ca02c; stroke-width: 1.5; stroke-linecap: square"/>
+    </g>
+    <g id="text_17">
+     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="268.609062" y="210.616172" transform="rotate(-0 268.609062 210.616172)">rgsaddle/mode-dimer 0.2.2 default campaign, asv c0db2b8</text>
+    </g>
+    <g id="line2d_22">
      <path d="M 249.009062 218.666719 
 L 256.009062 218.666719 
 L 256.009062 218.666719 
 L 263.009062 218.666719 
 L 263.009062 218.666719 
-" style="fill: none; stroke: #1f77b4; stroke-width: 1.5; stroke-linecap: square"/>
+" style="fill: none; stroke: #d62728; stroke-width: 1.5; stroke-linecap: square"/>
     </g>
-    <g id="text_15">
-     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="268.609062" y="221.116719" transform="rotate(-0 268.609062 221.116719)">rgsaddle/mode-lanczos 0.2.2 default campaign, asv c0db2b8</text>
+    <g id="text_18">
+     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="268.609062" y="221.116719" transform="rotate(-0 268.609062 221.116719)">rgsaddle/mode-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8</text>
     </g>
-    <g id="line2d_17">
+    <g id="line2d_23">
      <path d="M 249.009062 229.167266 
 L 256.009062 229.167266 
 L 256.009062 229.167266 
 L 263.009062 229.167266 
 L 263.009062 229.167266 
-" style="fill: none; stroke: #ff7f0e; stroke-width: 1.5; stroke-linecap: square"/>
+" style="fill: none; stroke: #9467bd; stroke-width: 1.5; stroke-linecap: square"/>
     </g>
-    <g id="text_16">
-     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="268.609062" y="231.617266" transform="rotate(-0 268.609062 231.617266)">rgsaddle/mode-dimer 0.2.2 default campaign, asv c0db2b8</text>
+    <g id="text_19">
+     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="268.609062" y="231.617266" transform="rotate(-0 268.609062 231.617266)">rgsaddle/mode-dimer-tuned 0.2.2 tuned campaign, asv c0db2b8</text>
     </g>
-    <g id="line2d_18">
+    <g id="line2d_24">
      <path d="M 249.009062 239.667813 
 L 256.009062 239.667813 
 L 256.009062 239.667813 
 L 263.009062 239.667813 
 L 263.009062 239.667813 
-" style="fill: none; stroke: #2ca02c; stroke-width: 1.5; stroke-linecap: square"/>
+" style="fill: none; stroke: #8c564b; stroke-width: 1.5; stroke-linecap: square"/>
     </g>
-    <g id="text_17">
-     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="268.609062" y="242.117813" transform="rotate(-0 268.609062 242.117813)">rgsaddle/mode-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8</text>
+    <g id="text_20">
+     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="268.609062" y="242.117813" transform="rotate(-0 268.609062 242.117813)">pele/lj38-loweig-central 0.1.2 tuned campaign b7081b9</text>
     </g>
-    <g id="line2d_19">
+    <g id="line2d_25">
      <path d="M 249.009062 250.168359 
 L 256.009062 250.168359 
 L 256.009062 250.168359 
 L 263.009062 250.168359 
 L 263.009062 250.168359 
-" style="fill: none; stroke: #d62728; stroke-width: 1.5; stroke-linecap: square"/>
+" style="fill: none; stroke: #e377c2; stroke-width: 1.5; stroke-linecap: square"/>
     </g>
-    <g id="text_18">
-     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="268.609062" y="252.618359" transform="rotate(-0 268.609062 252.618359)">rgsaddle/mode-dimer-tuned 0.2.2 tuned campaign, asv c0db2b8</text>
+    <g id="text_21">
+     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="268.609062" y="252.618359" transform="rotate(-0 268.609062 252.618359)">pele/lj38-loweig 0.1.2 default campaign b7081b9</text>
     </g>
    </g>
   </g>
