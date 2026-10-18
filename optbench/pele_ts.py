@@ -703,11 +703,15 @@ def _checkpoint_paths(output: Path) -> tuple[Path, Path]:
 def _load_partial(path: Path) -> list[dict]:
     if not path.is_file():
         return []
+    lines = [line.strip() for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
     rows = []
-    for line in path.read_text(encoding="utf-8").splitlines():
-        stripped = line.strip()
-        if stripped:
-            rows.append(json.loads(stripped))
+    for index, line in enumerate(lines):
+        try:
+            rows.append(json.loads(line))
+        except json.JSONDecodeError:
+            if index == len(lines) - 1:
+                break
+            raise
     return rows
 
 
@@ -901,7 +905,42 @@ def _finish_saddle_record(record: dict, *, found: list[np.ndarray], limits: dict
     return record
 
 
-def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Path, cap: int, force_tol: float, limit: int) -> dict:
+def _saddle_job(payload: dict) -> dict:
+    """One displacement. The parent applies the connection rules in search order."""
+    os.environ["OMP_NUM_THREADS"] = "1"
+    os.environ["OPENBLAS_NUM_THREADS"] = "1"
+    os.environ["MKL_NUM_THREADS"] = "1"
+    os.environ["NUMEXPR_NUM_THREADS"] = "1"
+    spec = payload["spec"]
+    positions = np.asarray(spec["positions"], dtype=np.float64)
+    fixed = np.asarray(spec["fixed"], dtype=bool)
+    cell = np.asarray(spec["cell"], dtype=np.float64)
+    free = np.flatnonzero(~fixed)
+    raw = potential_from_problem({"potential": spec["potential"]})
+    evaluate = _bind(raw, positions, free, cell)
+    return _one_displacement(
+        spec,
+        evaluate=evaluate,
+        minimum=np.asarray(payload["minimum"], dtype=np.float64),
+        min_energy=float(payload["min_energy"]),
+        kick=np.asarray(payload["kick"], dtype=np.float64),
+        limits=payload["limits"],
+        climb_cap=int(payload["climb_cap"]),
+        force_tol=float(payload["force_tol"]),
+    )
+
+
+def _run_saddle_search(
+    root: Path,
+    problem: dict,
+    template: dict,
+    *,
+    output: Path,
+    cap: int,
+    force_tol: float,
+    limit: int,
+    workers: int = 1,
+) -> dict:
     paths = (problem.get("input") or {}).get("geometries") or []
     con_path = next(path for path in paths if str(path).endswith(".con"))
     positions, fixed, cell = load_con(_stored(root, con_path))
@@ -916,144 +955,177 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
     comments = []
     all_records: list[dict] = []
     failed_reps = 0
-    for rep in range(1, limits["repetitions"] + 1):
-        header_path, partial_path = _checkpoint_paths(output)
-        header = json.loads(header_path.read_text(encoding="utf-8")) if header_path.is_file() else None
-        same = bool(header and header.get("template") == template["id"] and int(header.get("rep", 0)) == rep)
-        saved = _load_partial(partial_path) if same else []
-        evaluate = _bind(raw, positions, free, cell)
-        if same:
-            minimum = np.asarray(header["minimum"], dtype=np.float64)
-            min_energy = float(header["min_energy"])
-            minimize_calls = int(header["minimize_calls"])
-            min_ok = bool(header["min_ok"])
-            found = [np.asarray(row["saddle_x"], dtype=np.float64) for row in saved if row.get("saddle_x") is not None]
-            connected = sum(1 for row in saved if row.get("success"))
-            searches = len(saved)
-            rng = _rng_restore(saved[-1]["rng_state"]) if saved else np.random.default_rng(20261015 + rep)
-            for row in saved:
-                kept = {key: value for key, value in row.items() if key not in {"rng_state", "saddle_x"}}
-                all_records.append(kept)
-            print(f"{template['id']} rep {rep} resume searches {searches} connected {connected}", flush=True)
-        else:
-            minimum, min_ok, minimize_calls, min_energy = _minimize(
-                evaluate, positions[free].reshape(-1).copy(), force_tol, limits["minimize_budget"]
-            )
-            rng = np.random.default_rng(20261015 + rep)
-            found = []
-            connected = 0
-            searches = 0
-            header_path.parent.mkdir(parents=True, exist_ok=True)
-            header_path.write_text(
-                json.dumps(
-                    {
-                        "template": template["id"],
-                        "rep": rep,
-                        "minimum": minimum.tolist(),
-                        "min_energy": min_energy,
-                        "minimize_calls": minimize_calls,
-                        "min_ok": bool(min_ok),
+    executor = None
+    if int(workers) > 1:
+        import multiprocessing
+
+        context = multiprocessing.get_context("spawn")
+        executor = ProcessPoolExecutor(max_workers=int(workers), mp_context=context)
+    try:
+        for rep in range(1, limits["repetitions"] + 1):
+            header_path, partial_path = _checkpoint_paths(output)
+            header = json.loads(header_path.read_text(encoding="utf-8")) if header_path.is_file() else None
+            same = bool(header and header.get("template") == template["id"] and int(header.get("rep", 0)) == rep)
+            saved = _load_partial(partial_path) if same else []
+            evaluate = _bind(raw, positions, free, cell)
+            if same:
+                minimum = np.asarray(header["minimum"], dtype=np.float64)
+                min_energy = float(header["min_energy"])
+                minimize_calls = int(header["minimize_calls"])
+                min_ok = bool(header["min_ok"])
+                found = [np.asarray(row["saddle_x"], dtype=np.float64) for row in saved if row.get("saddle_x") is not None]
+                connected = sum(1 for row in saved if row.get("success"))
+                searches = len(saved)
+                rng = _rng_restore(saved[-1]["rng_state"]) if saved else np.random.default_rng(20261015 + rep)
+                for row in saved:
+                    kept = {key: value for key, value in row.items() if key not in {"rng_state", "saddle_x"}}
+                    all_records.append(kept)
+                print(f"{template['id']} rep {rep} resume searches {searches} connected {connected}", flush=True)
+            else:
+                minimum, min_ok, minimize_calls, min_energy = _minimize(
+                    evaluate, positions[free].reshape(-1).copy(), force_tol, limits["minimize_budget"]
+                )
+                rng = np.random.default_rng(20261015 + rep)
+                found = []
+                connected = 0
+                searches = 0
+                header_path.parent.mkdir(parents=True, exist_ok=True)
+                header_path.write_text(
+                    json.dumps(
+                        {
+                            "template": template["id"],
+                            "rep": rep,
+                            "minimum": minimum.tolist(),
+                            "min_energy": min_energy,
+                            "minimize_calls": minimize_calls,
+                            "min_ok": bool(min_ok),
+                        }
+                    ),
+                    encoding="utf-8",
+                )
+                partial_path.unlink(missing_ok=True)
+            stop_at = int(limit) if limit else limits["max_searches"]
+            width = max(1, int(workers))
+            while connected < goal and searches < limits["max_searches"] and searches < stop_at:
+                batch: list[dict] = []
+                while (
+                    len(batch) < width
+                    and connected < goal
+                    and searches < limits["max_searches"]
+                    and searches < stop_at
+                ):
+                    searches += 1
+                    atom = int(limits["atoms"][int(rng.integers(0, len(limits["atoms"])))])
+                    slots = np.flatnonzero(free == atom)
+                    if len(slots) != 1:
+                        raise RuntimeError(f"displace atom {atom} is not one free atom")
+                    slot = int(slots[0])
+                    direction = rng.normal(size=3)
+                    direction = direction / np.linalg.norm(direction)
+                    x0 = minimum.copy()
+                    x0[3 * slot : 3 * slot + 3] += limits["magnitude"] * direction
+                    kick = np.zeros_like(x0)
+                    kick[3 * slot : 3 * slot + 3] = direction
+                    moved = positions.copy()
+                    moved[free] = x0.reshape(-1, 3)
+                    spec = {
+                        "name": f"rep{rep}-search{searches}",
+                        "positions": moved,
+                        "fixed": fixed,
+                        "cell": cell,
+                        "potential": problem.get("potential") or {},
+                        "task": "transition-state",
+                        "hef": template.get("hef") or {},
+                        "mode": {},
+                        "cap": climb_cap,
+                        "force_tol": force_tol,
+                        "reactant": None,
+                        "file_mode": kick.copy(),
+                        "reference_mode": None,
+                        "overlap": 0.99,
+                        "eigenvec0": "kick",
+                        "commit": str(template.get("commit") or ""),
                     }
-                ),
-                encoding="utf-8",
+                    batch.append(
+                        {
+                            "spec": spec,
+                            "minimum": minimum,
+                            "min_energy": min_energy,
+                            "kick": kick,
+                            "limits": limits,
+                            "climb_cap": climb_cap,
+                            "force_tol": force_tol,
+                            "rng_state": _rng_state(rng),
+                            "searches": searches,
+                        }
+                    )
+                if executor is None:
+                    outcomes = [_saddle_job(item) for item in batch]
+                else:
+                    outcomes = list(executor.map(_saddle_job, batch))
+                kept = searches - len(batch)
+                for item, record in zip(batch, outcomes):
+                    if connected >= goal:
+                        break
+                    record = _finish_saddle_record(record, found=found, limits=limits)
+                    if record.get("success"):
+                        connected += 1
+                    if record.get("success") and int(record["force_calls"]) >= search_cap:
+                        raise RuntimeError(
+                            f"{template['id']} success {record['start']} spent {search_cap} or more force calls"
+                        )
+                    all_records.append({key: value for key, value in record.items() if key != "saddle_x"})
+                    stored = {key: value for key, value in record.items() if key != "saddle_x"}
+                    stored["rng_state"] = item["rng_state"]
+                    if record.get("saddle_x") is not None:
+                        stored["saddle_x"] = record["saddle_x"]
+                    _append_partial(partial_path, stored)
+                    kept = int(item["searches"])
+                    if kept == 1 or kept % 25 == 0 or connected >= goal:
+                        print(
+                            f"{template['id']} rep {rep} searches {kept} connected {connected} "
+                            f"calls {record['force_calls']} failure {record['failure']}",
+                            flush=True,
+                        )
+                        running = connected < goal and kept < limits["max_searches"]
+                        snapshot, _metrics = _summarize(
+                            all_records, template, search_cap, problem["id"], partial=running
+                        )
+                        _write_campaign(output, snapshot, all_records, template, problem["id"])
+                searches = kept
+            if connected < goal:
+                failed_reps += 1
+            fraction = connected / searches if searches else 0.0
+            comments.append(
+                f"# rep {rep} force_calls {sum(int(row['force_calls']) for row in all_records)} "
+                f"unique_saddles {len(found)} fraction_connected {fraction} "
+                f"total_searches {searches} connected {connected} "
+                f"minimize_calls {minimize_calls} minimum_converged {int(min_ok)} seed {20261015 + rep}"
             )
+            finished = connected >= goal or searches >= limits["max_searches"]
+        text, metrics = _summarize(all_records, template, search_cap, problem["id"], partial=not finished)
+        text = "\n".join(comments) + "\n" + text
+        text += f"goal {goal}\nrepetitions {limits['repetitions']}\n"
+        _write_campaign(output, text, all_records, template, problem["id"])
+        if finished:
+            header_path.unlink(missing_ok=True)
             partial_path.unlink(missing_ok=True)
-        stop_at = int(limit) if limit else limits["max_searches"]
-        while connected < goal and searches < limits["max_searches"] and searches < stop_at:
-            searches += 1
-            atom = int(limits["atoms"][int(rng.integers(0, len(limits["atoms"])))])
-            slots = np.flatnonzero(free == atom)
-            if len(slots) != 1:
-                raise RuntimeError(f"displace atom {atom} is not one free atom")
-            slot = int(slots[0])
-            direction = rng.normal(size=3)
-            direction = direction / np.linalg.norm(direction)
-            x0 = minimum.copy()
-            x0[3 * slot : 3 * slot + 3] += limits["magnitude"] * direction
-            kick = np.zeros_like(x0)
-            kick[3 * slot : 3 * slot + 3] = direction
-            moved = positions.copy()
-            moved[free] = x0.reshape(-1, 3)
-            spec = {
-                "name": f"rep{rep}-search{searches}",
-                "positions": moved,
-                "fixed": fixed,
-                "cell": cell,
-                "potential": problem.get("potential") or {},
-                "task": "transition-state",
-                "hef": template.get("hef") or {},
-                "mode": {},
-                "cap": climb_cap,
-                "force_tol": force_tol,
-                "reactant": None,
-                "file_mode": kick,
-                "reference_mode": None,
-                "overlap": 0.99,
-                "eigenvec0": "kick",
-                "commit": str(template.get("commit") or ""),
-            }
-            record = _one_displacement(
-                spec,
-                evaluate=evaluate,
-                minimum=minimum,
-                min_energy=min_energy,
-                kick=kick,
-                limits=limits,
-                climb_cap=climb_cap,
-                force_tol=force_tol,
-            )
-            record = _finish_saddle_record(record, found=found, limits=limits)
-            if record.get("success"):
-                connected += 1
-            if record.get("success") and int(record["force_calls"]) >= search_cap:
-                raise RuntimeError(f"{template['id']} success {record['start']} spent {search_cap} or more force calls")
-            all_records.append({key: value for key, value in record.items() if key != "saddle_x"})
-            stored = {key: value for key, value in record.items() if key != "saddle_x"}
-            stored["rng_state"] = _rng_state(rng)
-            if record.get("saddle_x") is not None:
-                stored["saddle_x"] = record["saddle_x"]
-            _append_partial(partial_path, stored)
-            if searches == 1 or searches % 25 == 0 or connected >= goal:
-                print(
-                    f"{template['id']} rep {rep} searches {searches} connected {connected} "
-                    f"calls {record['force_calls']} failure {record['failure']}",
-                    flush=True,
-                )
-                running = connected < goal and searches < limits["max_searches"]
-                snapshot, _metrics = _summarize(
-                    all_records, template, search_cap, problem["id"], partial=running
-                )
-                _write_campaign(output, snapshot, all_records, template, problem["id"])
-        if connected < goal:
-            failed_reps += 1
-        fraction = connected / searches if searches else 0.0
-        comments.append(
-            f"# rep {rep} force_calls {sum(int(row['force_calls']) for row in all_records)} "
-            f"unique_saddles {len(found)} fraction_connected {fraction} "
-            f"total_searches {searches} connected {connected} "
-            f"minimize_calls {minimize_calls} minimum_converged {int(min_ok)} seed {20261015 + rep}"
-        )
-        finished = connected >= goal or searches >= limits["max_searches"]
-    text, metrics = _summarize(all_records, template, search_cap, problem["id"], partial=not finished)
-    text = "\n".join(comments) + "\n" + text
-    text += f"goal {goal}\nrepetitions {limits['repetitions']}\n"
-    _write_campaign(output, text, all_records, template, problem["id"])
-    if finished:
-        header_path.unlink(missing_ok=True)
-        partial_path.unlink(missing_ok=True)
-    return {
-        "force_calls": metrics["success_only_mean"],
-        "nfailed": metrics["nfailed"],
-        "starts": len(all_records),
-        "template": template["id"],
-        "problem": problem["id"],
-        "par2_mean": metrics["par2_mean"],
-        "median": metrics["median"],
-        "connected": connected,
-        "partial": not finished,
-        "records": all_records,
-        "failed_reps": failed_reps,
-    }
+        return {
+            "force_calls": metrics["success_only_mean"],
+            "nfailed": metrics["nfailed"],
+            "starts": len(all_records),
+            "template": template["id"],
+            "problem": problem["id"],
+            "par2_mean": metrics["par2_mean"],
+            "median": metrics["median"],
+            "connected": connected,
+            "partial": not finished,
+            "records": all_records,
+            "failed_reps": failed_reps,
+        }
+    finally:
+        if executor is not None:
+            executor.shutdown(wait=True, cancel_futures=True)
 
 
 def run_template(
@@ -1079,7 +1151,14 @@ def run_template(
     scratch.mkdir(parents=True, exist_ok=True)
     if str(template.get("task")) == "saddle-search" or problem["id"] == "saddle-search/pt-island":
         return _run_saddle_search(
-            root, problem, template, output=output, cap=cap, force_tol=force_tol, limit=limit
+            root,
+            problem,
+            template,
+            output=output,
+            cap=cap,
+            force_tol=force_tol,
+            limit=limit,
+            workers=workers,
         )
     rows = _geometries(root, problem, scratch)
     expected = int((problem.get("sample") or {}).get("starts") or len(rows))
