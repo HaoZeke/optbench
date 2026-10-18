@@ -1,0 +1,73 @@
+{
+  "counter": "harness",
+  "legacy": {
+    "force_calls": 604,
+    "force_calls_max": 1239,
+    "force_calls_median": 426.0,
+    "force_calls_min": 279,
+    "n": 59,
+    "nfailed": 21,
+    "successes": 38,
+    "transition_states": 38
+  },
+  "problem": "double-ended-saddle-search/pt-island",
+  "provenance": {
+    "code": "tsase",
+    "code_version": "1.0",
+    "commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218",
+    "machine": {
+      "machine": "x86_64",
+      "node": "cursor",
+      "python": "3.12.3",
+      "system": "Linux"
+    },
+    "parameters": {
+      "cap": 3000,
+      "counter": "harness",
+      "force_norm": 0.001,
+      "geometry": "con-reactant-products",
+      "max_move": 0.2,
+      "method": "ci",
+      "minimizer": "fire_ssneb",
+      "n_interior": 3,
+      "pairs": 59,
+      "potential": "morse_pt",
+      "seed": "0",
+      "spring_k": 5.0,
+      "spring_k_times_images": "ssneb stores k * numImages",
+      "ss": false
+    }
+  },
+  "schema": "optbench.score/v2",
+  "score": {
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 20261015,
+    "cap": 3000,
+    "includes_failures": true,
+    "iqr": 5589.0,
+    "iqr_high": 5598.0,
+    "iqr_low": 832.5,
+    "mean": 2524.5254237288136,
+    "median": 750.0,
+    "median_high": 1239.0,
+    "median_low": 567.0,
+    "n": 59,
+    "n_cap": 1,
+    "n_crash": 0,
+    "n_divergence": 20,
+    "n_wrong_stationary": 0,
+    "nfailed": 21,
+    "par2_mean": 2524.5254237288136,
+    "par_applied": true,
+    "par_factor": 2,
+    "q25": 411.0,
+    "q75": 6000.0,
+    "scoring": "par2-wilson-bootstrap",
+    "success_only_mean": 603.8684210526316,
+    "success_rate": 0.6440677966101694,
+    "successes": 38,
+    "wilson_high": 0.7539670859618668,
+    "wilson_low": 0.5165549598185499
+  },
+  "template": "tsase/ci-neb"
+}

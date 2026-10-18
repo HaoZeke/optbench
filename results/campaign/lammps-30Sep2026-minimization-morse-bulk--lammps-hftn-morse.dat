@@ -1,0 +1,18 @@
+# counter harness. fix external pf/callback writes the harness force. pair_style zero contributes nothing.
+# min_style is hftn. A success is under the cap, at the Euclidean force stop, and Hessian index 0.
+force_calls 501
+force_calls_min 417
+force_calls_max 576
+force_calls_median 511
+successes 3
+nfailed 97
+n 100
+transition_states 7
+code lammps
+code_version 30 Sep 2026
+commit 8de817dd79bfe4525d5d39246a212d833e6dee07
+algorithm Hessian-free truncated Newton
+template lammps/hftn-morse
+problem minimization/morse-bulk
+tuning default
+counter harness

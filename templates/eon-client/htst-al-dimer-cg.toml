@@ -1,0 +1,68 @@
+id = "eon-client/htst-al-dimer-cg"
+engine = "eon"
+problem = "hTST/Al"
+code = "eOn"
+code_version = "3.5.0"
+commit = "4d8b34baf1ba8d2d980df29838bac1f969d1662c"
+algorithm = "Dimer CG"
+reducer = "harness"
+failure_cap = 2000000
+kind = "htst"
+kernel = "eam"
+asv_class = "EonClientHtstAlDimerCg"
+note = '''
+One bounded AKMC pass on the Al hTST reactant. Temperature 300, confidence 1.95, prefactor 1.2e12, dimer rotations_max 50, converged_angle 1, displace radius 3.3, magnitude 0.5, seed 42. num_jobs is 2. The 2014 file used a cluster communicator and num_jobs 10000. displace_atomlist is not a key this server accepts, so the listed-atom weight stays at its default. Success here is one good saddle under 1.5 eV during the pass, which is not the 2014 barrier and rate average. The row is partial. The harness kernel is the r2549 Aluminum EAM Fortran force routine, called in process.
+'''
+seeds = [42]
+starts = ["al"]
+geometry = "website/hTST/Al/eon-dimer-cg/pos.con"
+pass_limit = 1
+workers = 1
+declare_partial = true
+asv_full = false
+asv_timeout = 3600
+budget_seconds = 2400
+
+[ini.Main]
+job = "akmc"
+temperature = 300
+random_seed = 42
+finite_difference = 0.001
+
+[ini.Potential]
+potential = "eam_al"
+
+[ini.Optimizer]
+opt_method = "cg"
+converged_force = 0.001
+max_iterations = 5000
+max_move = 0.2
+
+[ini.AKMC]
+confidence = 1.95
+
+[ini.Prefactor]
+default_value = "1.2e12"
+
+[ini."Process Search"]
+minimize_first = true
+
+[ini.Communicator]
+type = "local"
+num_jobs = 2
+number_of_CPUs = 1
+client_path = "eonclient"
+
+[ini."Saddle Search"]
+displace_radius = 3.3
+displace_magnitude = 0.5
+max_energy = 100
+min_mode_method = "dimer"
+max_iterations = 5000
+converged_force = 0.001
+
+[ini.Dimer]
+rotations_max = 50
+converged_angle = 1
+opt_method = "cg"
+improved = true
