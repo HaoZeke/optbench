@@ -304,3 +304,21 @@ def test_shipped_cp2k_templates_match_the_pin():
     assert len(tsopt) == 8
     assert len(saddle) == 4
     assert SEARCH_CAP == 1000 + 64 + 4000
+
+
+def test_asv_classes_import_and_follow_the_full_flag(monkeypatch):
+    import importlib
+
+    import benchmarks.bench_cp2k as bench
+
+    monkeypatch.delenv("OPTBENCH_ASV_FULL", raising=False)
+    bench = importlib.reload(bench)
+    assert len(bench.Cp2kLj38DimerCg.params[1]) == 1
+    assert bench.Cp2kLj38DimerCg.timeout == 3600
+    assert bench.Cp2kPtDimerCg.timeout == 7200
+    monkeypatch.setenv("OPTBENCH_ASV_FULL", "1")
+    bench = importlib.reload(bench)
+    assert len(bench.Cp2kLj38DimerCg.params[1]) == 200
+    assert len(bench.Cp2kPtDimerCgTuned.params[1]) == 49
+    monkeypatch.delenv("OPTBENCH_ASV_FULL", raising=False)
+    importlib.reload(bench)

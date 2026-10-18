@@ -93,7 +93,6 @@ def _bind(class_name: str, template_id: str, problem_id: str, starts: list[str],
     class _Benchmark(_TrackedSearch):
         param_names = ["seed", "start"]
         params = [["0"], starts]
-        timeout = timeout
 
         def setup(self, seed, start):
             _require_binary()
@@ -136,6 +135,7 @@ def _bind(class_name: str, template_id: str, problem_id: str, starts: list[str],
 
     _Benchmark.__name__ = class_name
     _Benchmark.__qualname__ = class_name
+    _Benchmark.timeout = timeout
     _Benchmark.cap = _cap(template_id)
     _Benchmark.template_id = template_id
     _Benchmark.problem_id = problem_id
