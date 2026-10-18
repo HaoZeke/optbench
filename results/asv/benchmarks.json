@@ -256702,5 +256702,4385 @@
         "unit": "fraction",
         "version": "54289beee97255c41b6c66e2b89008ae5007043ad1c9d7012fb42f0495113694"
     },
+    "bench_nlopt.NloptLj38Lbfgs.time_search": {
+        "code": "class _NloptSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_nlopt.NloptLj38Lbfgs.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "de7a202ae3abf71bd4edc6ec8c43ab7ca22c5f374d8a290b94007c43941a24c7",
+        "warmup_time": 0
+    },
+    "bench_nlopt.NloptLj38Lbfgs.track_failure_cap": {
+        "code": "class _NloptSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptLj38Lbfgs.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5f5f6f6c5d781686284ca08e7438906819d3b64d1ae15a48f8c5f3e33fc5bb6a"
+    },
+    "bench_nlopt.NloptLj38Lbfgs.track_failure_crash": {
+        "code": "class _NloptSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptLj38Lbfgs.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "8e53237e918560c90910f45347bc12fe46a0d8f9499ad225793081625936ac5d"
+    },
+    "bench_nlopt.NloptLj38Lbfgs.track_failure_divergence": {
+        "code": "class _NloptSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptLj38Lbfgs.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "0b204ab2bcca4a207e25f7ab79fa4a9d7c01838fb1dbaba8806d4035c7607f89"
+    },
+    "bench_nlopt.NloptLj38Lbfgs.track_failure_wrong_stationary": {
+        "code": "class _NloptSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptLj38Lbfgs.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "da4076cd77c0c10997abc548ccb778a97d0c49199d51ebf82595278f3b036c3c"
+    },
+    "bench_nlopt.NloptLj38Lbfgs.track_force_calls": {
+        "code": "class _NloptSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptLj38Lbfgs.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "bbca3b8e6b12972079ed21a600db3c2a22ab639d395c08890f24687f0b2ec540"
+    },
+    "bench_nlopt.NloptLj38Lbfgs.track_success": {
+        "code": "class _NloptSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptLj38Lbfgs.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "6d4e01e5c510f467915c55f145ff42e8ebcd4707d548c40118143b5dcb62fd2b"
+    },
+    "bench_nlopt.NloptLj38Mma.time_search": {
+        "code": "class _NloptSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_nlopt.NloptLj38Mma.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "de7a202ae3abf71bd4edc6ec8c43ab7ca22c5f374d8a290b94007c43941a24c7",
+        "warmup_time": 0
+    },
+    "bench_nlopt.NloptLj38Mma.track_failure_cap": {
+        "code": "class _NloptSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptLj38Mma.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5f5f6f6c5d781686284ca08e7438906819d3b64d1ae15a48f8c5f3e33fc5bb6a"
+    },
+    "bench_nlopt.NloptLj38Mma.track_failure_crash": {
+        "code": "class _NloptSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptLj38Mma.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "8e53237e918560c90910f45347bc12fe46a0d8f9499ad225793081625936ac5d"
+    },
+    "bench_nlopt.NloptLj38Mma.track_failure_divergence": {
+        "code": "class _NloptSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptLj38Mma.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "0b204ab2bcca4a207e25f7ab79fa4a9d7c01838fb1dbaba8806d4035c7607f89"
+    },
+    "bench_nlopt.NloptLj38Mma.track_failure_wrong_stationary": {
+        "code": "class _NloptSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptLj38Mma.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "da4076cd77c0c10997abc548ccb778a97d0c49199d51ebf82595278f3b036c3c"
+    },
+    "bench_nlopt.NloptLj38Mma.track_force_calls": {
+        "code": "class _NloptSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptLj38Mma.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "bbca3b8e6b12972079ed21a600db3c2a22ab639d395c08890f24687f0b2ec540"
+    },
+    "bench_nlopt.NloptLj38Mma.track_success": {
+        "code": "class _NloptSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptLj38Mma.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "6d4e01e5c510f467915c55f145ff42e8ebcd4707d548c40118143b5dcb62fd2b"
+    },
+    "bench_nlopt.NloptLj38Slsqp.time_search": {
+        "code": "class _NloptSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_nlopt.NloptLj38Slsqp.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "de7a202ae3abf71bd4edc6ec8c43ab7ca22c5f374d8a290b94007c43941a24c7",
+        "warmup_time": 0
+    },
+    "bench_nlopt.NloptLj38Slsqp.track_failure_cap": {
+        "code": "class _NloptSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptLj38Slsqp.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5f5f6f6c5d781686284ca08e7438906819d3b64d1ae15a48f8c5f3e33fc5bb6a"
+    },
+    "bench_nlopt.NloptLj38Slsqp.track_failure_crash": {
+        "code": "class _NloptSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptLj38Slsqp.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "8e53237e918560c90910f45347bc12fe46a0d8f9499ad225793081625936ac5d"
+    },
+    "bench_nlopt.NloptLj38Slsqp.track_failure_divergence": {
+        "code": "class _NloptSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptLj38Slsqp.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "0b204ab2bcca4a207e25f7ab79fa4a9d7c01838fb1dbaba8806d4035c7607f89"
+    },
+    "bench_nlopt.NloptLj38Slsqp.track_failure_wrong_stationary": {
+        "code": "class _NloptSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptLj38Slsqp.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "da4076cd77c0c10997abc548ccb778a97d0c49199d51ebf82595278f3b036c3c"
+    },
+    "bench_nlopt.NloptLj38Slsqp.track_force_calls": {
+        "code": "class _NloptSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptLj38Slsqp.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "bbca3b8e6b12972079ed21a600db3c2a22ab639d395c08890f24687f0b2ec540"
+    },
+    "bench_nlopt.NloptLj38Slsqp.track_success": {
+        "code": "class _NloptSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptLj38Slsqp.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "6d4e01e5c510f467915c55f145ff42e8ebcd4707d548c40118143b5dcb62fd2b"
+    },
+    "bench_nlopt.NloptLj38TnewtonPrecondRestart.time_search": {
+        "code": "class _NloptSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_nlopt.NloptLj38TnewtonPrecondRestart.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "de7a202ae3abf71bd4edc6ec8c43ab7ca22c5f374d8a290b94007c43941a24c7",
+        "warmup_time": 0
+    },
+    "bench_nlopt.NloptLj38TnewtonPrecondRestart.track_failure_cap": {
+        "code": "class _NloptSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptLj38TnewtonPrecondRestart.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5f5f6f6c5d781686284ca08e7438906819d3b64d1ae15a48f8c5f3e33fc5bb6a"
+    },
+    "bench_nlopt.NloptLj38TnewtonPrecondRestart.track_failure_crash": {
+        "code": "class _NloptSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptLj38TnewtonPrecondRestart.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "8e53237e918560c90910f45347bc12fe46a0d8f9499ad225793081625936ac5d"
+    },
+    "bench_nlopt.NloptLj38TnewtonPrecondRestart.track_failure_divergence": {
+        "code": "class _NloptSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptLj38TnewtonPrecondRestart.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "0b204ab2bcca4a207e25f7ab79fa4a9d7c01838fb1dbaba8806d4035c7607f89"
+    },
+    "bench_nlopt.NloptLj38TnewtonPrecondRestart.track_failure_wrong_stationary": {
+        "code": "class _NloptSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptLj38TnewtonPrecondRestart.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "da4076cd77c0c10997abc548ccb778a97d0c49199d51ebf82595278f3b036c3c"
+    },
+    "bench_nlopt.NloptLj38TnewtonPrecondRestart.track_force_calls": {
+        "code": "class _NloptSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptLj38TnewtonPrecondRestart.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "bbca3b8e6b12972079ed21a600db3c2a22ab639d395c08890f24687f0b2ec540"
+    },
+    "bench_nlopt.NloptLj38TnewtonPrecondRestart.track_success": {
+        "code": "class _NloptSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptLj38TnewtonPrecondRestart.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "6d4e01e5c510f467915c55f145ff42e8ebcd4707d548c40118143b5dcb62fd2b"
+    },
+    "bench_nlopt.NloptLj38Var2.time_search": {
+        "code": "class _NloptSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_nlopt.NloptLj38Var2.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "de7a202ae3abf71bd4edc6ec8c43ab7ca22c5f374d8a290b94007c43941a24c7",
+        "warmup_time": 0
+    },
+    "bench_nlopt.NloptLj38Var2.track_failure_cap": {
+        "code": "class _NloptSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptLj38Var2.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5f5f6f6c5d781686284ca08e7438906819d3b64d1ae15a48f8c5f3e33fc5bb6a"
+    },
+    "bench_nlopt.NloptLj38Var2.track_failure_crash": {
+        "code": "class _NloptSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptLj38Var2.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "8e53237e918560c90910f45347bc12fe46a0d8f9499ad225793081625936ac5d"
+    },
+    "bench_nlopt.NloptLj38Var2.track_failure_divergence": {
+        "code": "class _NloptSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptLj38Var2.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "0b204ab2bcca4a207e25f7ab79fa4a9d7c01838fb1dbaba8806d4035c7607f89"
+    },
+    "bench_nlopt.NloptLj38Var2.track_failure_wrong_stationary": {
+        "code": "class _NloptSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptLj38Var2.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "da4076cd77c0c10997abc548ccb778a97d0c49199d51ebf82595278f3b036c3c"
+    },
+    "bench_nlopt.NloptLj38Var2.track_force_calls": {
+        "code": "class _NloptSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptLj38Var2.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "bbca3b8e6b12972079ed21a600db3c2a22ab639d395c08890f24687f0b2ec540"
+    },
+    "bench_nlopt.NloptLj38Var2.track_success": {
+        "code": "class _NloptSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptLj38Var2.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "6d4e01e5c510f467915c55f145ff42e8ebcd4707d548c40118143b5dcb62fd2b"
+    },
+    "bench_nlopt.NloptMorseLbfgs.time_search": {
+        "code": "class _NloptSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_nlopt.NloptMorseLbfgs.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "de7a202ae3abf71bd4edc6ec8c43ab7ca22c5f374d8a290b94007c43941a24c7",
+        "warmup_time": 0
+    },
+    "bench_nlopt.NloptMorseLbfgs.track_failure_cap": {
+        "code": "class _NloptSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptMorseLbfgs.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5f5f6f6c5d781686284ca08e7438906819d3b64d1ae15a48f8c5f3e33fc5bb6a"
+    },
+    "bench_nlopt.NloptMorseLbfgs.track_failure_crash": {
+        "code": "class _NloptSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptMorseLbfgs.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "8e53237e918560c90910f45347bc12fe46a0d8f9499ad225793081625936ac5d"
+    },
+    "bench_nlopt.NloptMorseLbfgs.track_failure_divergence": {
+        "code": "class _NloptSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptMorseLbfgs.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "0b204ab2bcca4a207e25f7ab79fa4a9d7c01838fb1dbaba8806d4035c7607f89"
+    },
+    "bench_nlopt.NloptMorseLbfgs.track_failure_wrong_stationary": {
+        "code": "class _NloptSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptMorseLbfgs.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "da4076cd77c0c10997abc548ccb778a97d0c49199d51ebf82595278f3b036c3c"
+    },
+    "bench_nlopt.NloptMorseLbfgs.track_force_calls": {
+        "code": "class _NloptSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptMorseLbfgs.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "bbca3b8e6b12972079ed21a600db3c2a22ab639d395c08890f24687f0b2ec540"
+    },
+    "bench_nlopt.NloptMorseLbfgs.track_success": {
+        "code": "class _NloptSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptMorseLbfgs.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "6d4e01e5c510f467915c55f145ff42e8ebcd4707d548c40118143b5dcb62fd2b"
+    },
+    "bench_nlopt.NloptMorseMma.time_search": {
+        "code": "class _NloptSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_nlopt.NloptMorseMma.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "de7a202ae3abf71bd4edc6ec8c43ab7ca22c5f374d8a290b94007c43941a24c7",
+        "warmup_time": 0
+    },
+    "bench_nlopt.NloptMorseMma.track_failure_cap": {
+        "code": "class _NloptSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptMorseMma.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5f5f6f6c5d781686284ca08e7438906819d3b64d1ae15a48f8c5f3e33fc5bb6a"
+    },
+    "bench_nlopt.NloptMorseMma.track_failure_crash": {
+        "code": "class _NloptSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptMorseMma.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "8e53237e918560c90910f45347bc12fe46a0d8f9499ad225793081625936ac5d"
+    },
+    "bench_nlopt.NloptMorseMma.track_failure_divergence": {
+        "code": "class _NloptSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptMorseMma.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "0b204ab2bcca4a207e25f7ab79fa4a9d7c01838fb1dbaba8806d4035c7607f89"
+    },
+    "bench_nlopt.NloptMorseMma.track_failure_wrong_stationary": {
+        "code": "class _NloptSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptMorseMma.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "da4076cd77c0c10997abc548ccb778a97d0c49199d51ebf82595278f3b036c3c"
+    },
+    "bench_nlopt.NloptMorseMma.track_force_calls": {
+        "code": "class _NloptSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptMorseMma.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "bbca3b8e6b12972079ed21a600db3c2a22ab639d395c08890f24687f0b2ec540"
+    },
+    "bench_nlopt.NloptMorseMma.track_success": {
+        "code": "class _NloptSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptMorseMma.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "6d4e01e5c510f467915c55f145ff42e8ebcd4707d548c40118143b5dcb62fd2b"
+    },
+    "bench_nlopt.NloptMorseSlsqp.time_search": {
+        "code": "class _NloptSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_nlopt.NloptMorseSlsqp.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "de7a202ae3abf71bd4edc6ec8c43ab7ca22c5f374d8a290b94007c43941a24c7",
+        "warmup_time": 0
+    },
+    "bench_nlopt.NloptMorseSlsqp.track_failure_cap": {
+        "code": "class _NloptSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptMorseSlsqp.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5f5f6f6c5d781686284ca08e7438906819d3b64d1ae15a48f8c5f3e33fc5bb6a"
+    },
+    "bench_nlopt.NloptMorseSlsqp.track_failure_crash": {
+        "code": "class _NloptSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptMorseSlsqp.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "8e53237e918560c90910f45347bc12fe46a0d8f9499ad225793081625936ac5d"
+    },
+    "bench_nlopt.NloptMorseSlsqp.track_failure_divergence": {
+        "code": "class _NloptSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptMorseSlsqp.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "0b204ab2bcca4a207e25f7ab79fa4a9d7c01838fb1dbaba8806d4035c7607f89"
+    },
+    "bench_nlopt.NloptMorseSlsqp.track_failure_wrong_stationary": {
+        "code": "class _NloptSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptMorseSlsqp.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "da4076cd77c0c10997abc548ccb778a97d0c49199d51ebf82595278f3b036c3c"
+    },
+    "bench_nlopt.NloptMorseSlsqp.track_force_calls": {
+        "code": "class _NloptSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptMorseSlsqp.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "bbca3b8e6b12972079ed21a600db3c2a22ab639d395c08890f24687f0b2ec540"
+    },
+    "bench_nlopt.NloptMorseSlsqp.track_success": {
+        "code": "class _NloptSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptMorseSlsqp.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "6d4e01e5c510f467915c55f145ff42e8ebcd4707d548c40118143b5dcb62fd2b"
+    },
+    "bench_nlopt.NloptMorseTnewtonPrecondRestart.time_search": {
+        "code": "class _NloptSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_nlopt.NloptMorseTnewtonPrecondRestart.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "de7a202ae3abf71bd4edc6ec8c43ab7ca22c5f374d8a290b94007c43941a24c7",
+        "warmup_time": 0
+    },
+    "bench_nlopt.NloptMorseTnewtonPrecondRestart.track_failure_cap": {
+        "code": "class _NloptSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptMorseTnewtonPrecondRestart.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5f5f6f6c5d781686284ca08e7438906819d3b64d1ae15a48f8c5f3e33fc5bb6a"
+    },
+    "bench_nlopt.NloptMorseTnewtonPrecondRestart.track_failure_crash": {
+        "code": "class _NloptSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptMorseTnewtonPrecondRestart.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "8e53237e918560c90910f45347bc12fe46a0d8f9499ad225793081625936ac5d"
+    },
+    "bench_nlopt.NloptMorseTnewtonPrecondRestart.track_failure_divergence": {
+        "code": "class _NloptSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptMorseTnewtonPrecondRestart.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "0b204ab2bcca4a207e25f7ab79fa4a9d7c01838fb1dbaba8806d4035c7607f89"
+    },
+    "bench_nlopt.NloptMorseTnewtonPrecondRestart.track_failure_wrong_stationary": {
+        "code": "class _NloptSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptMorseTnewtonPrecondRestart.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "da4076cd77c0c10997abc548ccb778a97d0c49199d51ebf82595278f3b036c3c"
+    },
+    "bench_nlopt.NloptMorseTnewtonPrecondRestart.track_force_calls": {
+        "code": "class _NloptSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptMorseTnewtonPrecondRestart.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "bbca3b8e6b12972079ed21a600db3c2a22ab639d395c08890f24687f0b2ec540"
+    },
+    "bench_nlopt.NloptMorseTnewtonPrecondRestart.track_success": {
+        "code": "class _NloptSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptMorseTnewtonPrecondRestart.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "6d4e01e5c510f467915c55f145ff42e8ebcd4707d548c40118143b5dcb62fd2b"
+    },
+    "bench_nlopt.NloptMorseVar2.time_search": {
+        "code": "class _NloptSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_nlopt.NloptMorseVar2.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "de7a202ae3abf71bd4edc6ec8c43ab7ca22c5f374d8a290b94007c43941a24c7",
+        "warmup_time": 0
+    },
+    "bench_nlopt.NloptMorseVar2.track_failure_cap": {
+        "code": "class _NloptSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptMorseVar2.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5f5f6f6c5d781686284ca08e7438906819d3b64d1ae15a48f8c5f3e33fc5bb6a"
+    },
+    "bench_nlopt.NloptMorseVar2.track_failure_crash": {
+        "code": "class _NloptSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptMorseVar2.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "8e53237e918560c90910f45347bc12fe46a0d8f9499ad225793081625936ac5d"
+    },
+    "bench_nlopt.NloptMorseVar2.track_failure_divergence": {
+        "code": "class _NloptSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptMorseVar2.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "0b204ab2bcca4a207e25f7ab79fa4a9d7c01838fb1dbaba8806d4035c7607f89"
+    },
+    "bench_nlopt.NloptMorseVar2.track_failure_wrong_stationary": {
+        "code": "class _NloptSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptMorseVar2.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "da4076cd77c0c10997abc548ccb778a97d0c49199d51ebf82595278f3b036c3c"
+    },
+    "bench_nlopt.NloptMorseVar2.track_force_calls": {
+        "code": "class _NloptSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptMorseVar2.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "bbca3b8e6b12972079ed21a600db3c2a22ab639d395c08890f24687f0b2ec540"
+    },
+    "bench_nlopt.NloptMorseVar2.track_success": {
+        "code": "class _NloptSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _nlopt_ready():\n            raise NotImplementedError(\"nlopt is not installed in this environment\")\n        self.record = None",
+        "name": "bench_nlopt.NloptMorseVar2.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "6d4e01e5c510f467915c55f145ff42e8ebcd4707d548c40118143b5dcb62fd2b"
+    },
+    "bench_noise.NoiseNloptLbfgsS0.time_search": {
+        "code": "class _NoiseSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_noise.NoiseNloptLbfgsS0.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "3411abd6116ad75593f13ac2e0b6474b7e02ac5d8298b0412d987d3aa99c2d6a",
+        "warmup_time": 0
+    },
+    "bench_noise.NoiseNloptLbfgsS0.track_failure_cap": {
+        "code": "class _NoiseSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptLbfgsS0.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "6af0c62ccfb0b715e318ca7ebca70d0ce09b55c0e640c45e3ea5a99cff1fb8c8"
+    },
+    "bench_noise.NoiseNloptLbfgsS0.track_failure_crash": {
+        "code": "class _NoiseSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptLbfgsS0.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5fa57c707a613c063ec1b23617cb3d8161f1c486ff629122b7754d0521d924aa"
+    },
+    "bench_noise.NoiseNloptLbfgsS0.track_failure_divergence": {
+        "code": "class _NoiseSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptLbfgsS0.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "0bc8841a93160924c92a2ff0e16ccd08c0fe737810c4f71f5c54ee30b7916105"
+    },
+    "bench_noise.NoiseNloptLbfgsS0.track_failure_wrong_stationary": {
+        "code": "class _NoiseSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptLbfgsS0.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7a592a67583c953f59755e76599736fc4ed92bb9f617502fbd07c54909d974b7"
+    },
+    "bench_noise.NoiseNloptLbfgsS0.track_force_calls": {
+        "code": "class _NoiseSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptLbfgsS0.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "b49e868cd90a48813e68a5d72ee2aec86262c9b2b3b59f79477d8979f5fcc53e"
+    },
+    "bench_noise.NoiseNloptLbfgsS0.track_success": {
+        "code": "class _NoiseSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptLbfgsS0.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "f5f2144f293997ae974a6c0e286a59768bc01a34aab2bc6479b6fbcaf7d6dd37"
+    },
+    "bench_noise.NoiseNloptLbfgsS1em2.time_search": {
+        "code": "class _NoiseSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_noise.NoiseNloptLbfgsS1em2.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "3411abd6116ad75593f13ac2e0b6474b7e02ac5d8298b0412d987d3aa99c2d6a",
+        "warmup_time": 0
+    },
+    "bench_noise.NoiseNloptLbfgsS1em2.track_failure_cap": {
+        "code": "class _NoiseSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptLbfgsS1em2.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "6af0c62ccfb0b715e318ca7ebca70d0ce09b55c0e640c45e3ea5a99cff1fb8c8"
+    },
+    "bench_noise.NoiseNloptLbfgsS1em2.track_failure_crash": {
+        "code": "class _NoiseSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptLbfgsS1em2.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5fa57c707a613c063ec1b23617cb3d8161f1c486ff629122b7754d0521d924aa"
+    },
+    "bench_noise.NoiseNloptLbfgsS1em2.track_failure_divergence": {
+        "code": "class _NoiseSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptLbfgsS1em2.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "0bc8841a93160924c92a2ff0e16ccd08c0fe737810c4f71f5c54ee30b7916105"
+    },
+    "bench_noise.NoiseNloptLbfgsS1em2.track_failure_wrong_stationary": {
+        "code": "class _NoiseSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptLbfgsS1em2.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7a592a67583c953f59755e76599736fc4ed92bb9f617502fbd07c54909d974b7"
+    },
+    "bench_noise.NoiseNloptLbfgsS1em2.track_force_calls": {
+        "code": "class _NoiseSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptLbfgsS1em2.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "b49e868cd90a48813e68a5d72ee2aec86262c9b2b3b59f79477d8979f5fcc53e"
+    },
+    "bench_noise.NoiseNloptLbfgsS1em2.track_success": {
+        "code": "class _NoiseSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptLbfgsS1em2.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "f5f2144f293997ae974a6c0e286a59768bc01a34aab2bc6479b6fbcaf7d6dd37"
+    },
+    "bench_noise.NoiseNloptLbfgsS1em3.time_search": {
+        "code": "class _NoiseSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_noise.NoiseNloptLbfgsS1em3.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "3411abd6116ad75593f13ac2e0b6474b7e02ac5d8298b0412d987d3aa99c2d6a",
+        "warmup_time": 0
+    },
+    "bench_noise.NoiseNloptLbfgsS1em3.track_failure_cap": {
+        "code": "class _NoiseSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptLbfgsS1em3.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "6af0c62ccfb0b715e318ca7ebca70d0ce09b55c0e640c45e3ea5a99cff1fb8c8"
+    },
+    "bench_noise.NoiseNloptLbfgsS1em3.track_failure_crash": {
+        "code": "class _NoiseSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptLbfgsS1em3.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5fa57c707a613c063ec1b23617cb3d8161f1c486ff629122b7754d0521d924aa"
+    },
+    "bench_noise.NoiseNloptLbfgsS1em3.track_failure_divergence": {
+        "code": "class _NoiseSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptLbfgsS1em3.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "0bc8841a93160924c92a2ff0e16ccd08c0fe737810c4f71f5c54ee30b7916105"
+    },
+    "bench_noise.NoiseNloptLbfgsS1em3.track_failure_wrong_stationary": {
+        "code": "class _NoiseSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptLbfgsS1em3.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7a592a67583c953f59755e76599736fc4ed92bb9f617502fbd07c54909d974b7"
+    },
+    "bench_noise.NoiseNloptLbfgsS1em3.track_force_calls": {
+        "code": "class _NoiseSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptLbfgsS1em3.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "b49e868cd90a48813e68a5d72ee2aec86262c9b2b3b59f79477d8979f5fcc53e"
+    },
+    "bench_noise.NoiseNloptLbfgsS1em3.track_success": {
+        "code": "class _NoiseSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptLbfgsS1em3.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "f5f2144f293997ae974a6c0e286a59768bc01a34aab2bc6479b6fbcaf7d6dd37"
+    },
+    "bench_noise.NoiseNloptLbfgsS1em4.time_search": {
+        "code": "class _NoiseSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_noise.NoiseNloptLbfgsS1em4.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "3411abd6116ad75593f13ac2e0b6474b7e02ac5d8298b0412d987d3aa99c2d6a",
+        "warmup_time": 0
+    },
+    "bench_noise.NoiseNloptLbfgsS1em4.track_failure_cap": {
+        "code": "class _NoiseSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptLbfgsS1em4.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "6af0c62ccfb0b715e318ca7ebca70d0ce09b55c0e640c45e3ea5a99cff1fb8c8"
+    },
+    "bench_noise.NoiseNloptLbfgsS1em4.track_failure_crash": {
+        "code": "class _NoiseSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptLbfgsS1em4.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5fa57c707a613c063ec1b23617cb3d8161f1c486ff629122b7754d0521d924aa"
+    },
+    "bench_noise.NoiseNloptLbfgsS1em4.track_failure_divergence": {
+        "code": "class _NoiseSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptLbfgsS1em4.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "0bc8841a93160924c92a2ff0e16ccd08c0fe737810c4f71f5c54ee30b7916105"
+    },
+    "bench_noise.NoiseNloptLbfgsS1em4.track_failure_wrong_stationary": {
+        "code": "class _NoiseSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptLbfgsS1em4.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7a592a67583c953f59755e76599736fc4ed92bb9f617502fbd07c54909d974b7"
+    },
+    "bench_noise.NoiseNloptLbfgsS1em4.track_force_calls": {
+        "code": "class _NoiseSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptLbfgsS1em4.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "b49e868cd90a48813e68a5d72ee2aec86262c9b2b3b59f79477d8979f5fcc53e"
+    },
+    "bench_noise.NoiseNloptLbfgsS1em4.track_success": {
+        "code": "class _NoiseSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptLbfgsS1em4.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "f5f2144f293997ae974a6c0e286a59768bc01a34aab2bc6479b6fbcaf7d6dd37"
+    },
+    "bench_noise.NoiseNloptMmaS0.time_search": {
+        "code": "class _NoiseSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_noise.NoiseNloptMmaS0.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "3411abd6116ad75593f13ac2e0b6474b7e02ac5d8298b0412d987d3aa99c2d6a",
+        "warmup_time": 0
+    },
+    "bench_noise.NoiseNloptMmaS0.track_failure_cap": {
+        "code": "class _NoiseSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptMmaS0.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "6af0c62ccfb0b715e318ca7ebca70d0ce09b55c0e640c45e3ea5a99cff1fb8c8"
+    },
+    "bench_noise.NoiseNloptMmaS0.track_failure_crash": {
+        "code": "class _NoiseSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptMmaS0.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5fa57c707a613c063ec1b23617cb3d8161f1c486ff629122b7754d0521d924aa"
+    },
+    "bench_noise.NoiseNloptMmaS0.track_failure_divergence": {
+        "code": "class _NoiseSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptMmaS0.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "0bc8841a93160924c92a2ff0e16ccd08c0fe737810c4f71f5c54ee30b7916105"
+    },
+    "bench_noise.NoiseNloptMmaS0.track_failure_wrong_stationary": {
+        "code": "class _NoiseSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptMmaS0.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7a592a67583c953f59755e76599736fc4ed92bb9f617502fbd07c54909d974b7"
+    },
+    "bench_noise.NoiseNloptMmaS0.track_force_calls": {
+        "code": "class _NoiseSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptMmaS0.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "b49e868cd90a48813e68a5d72ee2aec86262c9b2b3b59f79477d8979f5fcc53e"
+    },
+    "bench_noise.NoiseNloptMmaS0.track_success": {
+        "code": "class _NoiseSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptMmaS0.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "f5f2144f293997ae974a6c0e286a59768bc01a34aab2bc6479b6fbcaf7d6dd37"
+    },
+    "bench_noise.NoiseNloptMmaS1em2.time_search": {
+        "code": "class _NoiseSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_noise.NoiseNloptMmaS1em2.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "3411abd6116ad75593f13ac2e0b6474b7e02ac5d8298b0412d987d3aa99c2d6a",
+        "warmup_time": 0
+    },
+    "bench_noise.NoiseNloptMmaS1em2.track_failure_cap": {
+        "code": "class _NoiseSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptMmaS1em2.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "6af0c62ccfb0b715e318ca7ebca70d0ce09b55c0e640c45e3ea5a99cff1fb8c8"
+    },
+    "bench_noise.NoiseNloptMmaS1em2.track_failure_crash": {
+        "code": "class _NoiseSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptMmaS1em2.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5fa57c707a613c063ec1b23617cb3d8161f1c486ff629122b7754d0521d924aa"
+    },
+    "bench_noise.NoiseNloptMmaS1em2.track_failure_divergence": {
+        "code": "class _NoiseSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptMmaS1em2.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "0bc8841a93160924c92a2ff0e16ccd08c0fe737810c4f71f5c54ee30b7916105"
+    },
+    "bench_noise.NoiseNloptMmaS1em2.track_failure_wrong_stationary": {
+        "code": "class _NoiseSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptMmaS1em2.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7a592a67583c953f59755e76599736fc4ed92bb9f617502fbd07c54909d974b7"
+    },
+    "bench_noise.NoiseNloptMmaS1em2.track_force_calls": {
+        "code": "class _NoiseSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptMmaS1em2.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "b49e868cd90a48813e68a5d72ee2aec86262c9b2b3b59f79477d8979f5fcc53e"
+    },
+    "bench_noise.NoiseNloptMmaS1em2.track_success": {
+        "code": "class _NoiseSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptMmaS1em2.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "f5f2144f293997ae974a6c0e286a59768bc01a34aab2bc6479b6fbcaf7d6dd37"
+    },
+    "bench_noise.NoiseNloptMmaS1em3.time_search": {
+        "code": "class _NoiseSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_noise.NoiseNloptMmaS1em3.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "3411abd6116ad75593f13ac2e0b6474b7e02ac5d8298b0412d987d3aa99c2d6a",
+        "warmup_time": 0
+    },
+    "bench_noise.NoiseNloptMmaS1em3.track_failure_cap": {
+        "code": "class _NoiseSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptMmaS1em3.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "6af0c62ccfb0b715e318ca7ebca70d0ce09b55c0e640c45e3ea5a99cff1fb8c8"
+    },
+    "bench_noise.NoiseNloptMmaS1em3.track_failure_crash": {
+        "code": "class _NoiseSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptMmaS1em3.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5fa57c707a613c063ec1b23617cb3d8161f1c486ff629122b7754d0521d924aa"
+    },
+    "bench_noise.NoiseNloptMmaS1em3.track_failure_divergence": {
+        "code": "class _NoiseSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptMmaS1em3.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "0bc8841a93160924c92a2ff0e16ccd08c0fe737810c4f71f5c54ee30b7916105"
+    },
+    "bench_noise.NoiseNloptMmaS1em3.track_failure_wrong_stationary": {
+        "code": "class _NoiseSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptMmaS1em3.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7a592a67583c953f59755e76599736fc4ed92bb9f617502fbd07c54909d974b7"
+    },
+    "bench_noise.NoiseNloptMmaS1em3.track_force_calls": {
+        "code": "class _NoiseSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptMmaS1em3.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "b49e868cd90a48813e68a5d72ee2aec86262c9b2b3b59f79477d8979f5fcc53e"
+    },
+    "bench_noise.NoiseNloptMmaS1em3.track_success": {
+        "code": "class _NoiseSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptMmaS1em3.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "f5f2144f293997ae974a6c0e286a59768bc01a34aab2bc6479b6fbcaf7d6dd37"
+    },
+    "bench_noise.NoiseNloptMmaS1em4.time_search": {
+        "code": "class _NoiseSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_noise.NoiseNloptMmaS1em4.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "3411abd6116ad75593f13ac2e0b6474b7e02ac5d8298b0412d987d3aa99c2d6a",
+        "warmup_time": 0
+    },
+    "bench_noise.NoiseNloptMmaS1em4.track_failure_cap": {
+        "code": "class _NoiseSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptMmaS1em4.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "6af0c62ccfb0b715e318ca7ebca70d0ce09b55c0e640c45e3ea5a99cff1fb8c8"
+    },
+    "bench_noise.NoiseNloptMmaS1em4.track_failure_crash": {
+        "code": "class _NoiseSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptMmaS1em4.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5fa57c707a613c063ec1b23617cb3d8161f1c486ff629122b7754d0521d924aa"
+    },
+    "bench_noise.NoiseNloptMmaS1em4.track_failure_divergence": {
+        "code": "class _NoiseSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptMmaS1em4.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "0bc8841a93160924c92a2ff0e16ccd08c0fe737810c4f71f5c54ee30b7916105"
+    },
+    "bench_noise.NoiseNloptMmaS1em4.track_failure_wrong_stationary": {
+        "code": "class _NoiseSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptMmaS1em4.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7a592a67583c953f59755e76599736fc4ed92bb9f617502fbd07c54909d974b7"
+    },
+    "bench_noise.NoiseNloptMmaS1em4.track_force_calls": {
+        "code": "class _NoiseSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptMmaS1em4.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "b49e868cd90a48813e68a5d72ee2aec86262c9b2b3b59f79477d8979f5fcc53e"
+    },
+    "bench_noise.NoiseNloptMmaS1em4.track_success": {
+        "code": "class _NoiseSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptMmaS1em4.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "f5f2144f293997ae974a6c0e286a59768bc01a34aab2bc6479b6fbcaf7d6dd37"
+    },
+    "bench_noise.NoiseNloptSlsqpS0.time_search": {
+        "code": "class _NoiseSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_noise.NoiseNloptSlsqpS0.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "3411abd6116ad75593f13ac2e0b6474b7e02ac5d8298b0412d987d3aa99c2d6a",
+        "warmup_time": 0
+    },
+    "bench_noise.NoiseNloptSlsqpS0.track_failure_cap": {
+        "code": "class _NoiseSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptSlsqpS0.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "6af0c62ccfb0b715e318ca7ebca70d0ce09b55c0e640c45e3ea5a99cff1fb8c8"
+    },
+    "bench_noise.NoiseNloptSlsqpS0.track_failure_crash": {
+        "code": "class _NoiseSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptSlsqpS0.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5fa57c707a613c063ec1b23617cb3d8161f1c486ff629122b7754d0521d924aa"
+    },
+    "bench_noise.NoiseNloptSlsqpS0.track_failure_divergence": {
+        "code": "class _NoiseSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptSlsqpS0.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "0bc8841a93160924c92a2ff0e16ccd08c0fe737810c4f71f5c54ee30b7916105"
+    },
+    "bench_noise.NoiseNloptSlsqpS0.track_failure_wrong_stationary": {
+        "code": "class _NoiseSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptSlsqpS0.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7a592a67583c953f59755e76599736fc4ed92bb9f617502fbd07c54909d974b7"
+    },
+    "bench_noise.NoiseNloptSlsqpS0.track_force_calls": {
+        "code": "class _NoiseSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptSlsqpS0.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "b49e868cd90a48813e68a5d72ee2aec86262c9b2b3b59f79477d8979f5fcc53e"
+    },
+    "bench_noise.NoiseNloptSlsqpS0.track_success": {
+        "code": "class _NoiseSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptSlsqpS0.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "f5f2144f293997ae974a6c0e286a59768bc01a34aab2bc6479b6fbcaf7d6dd37"
+    },
+    "bench_noise.NoiseNloptSlsqpS1em2.time_search": {
+        "code": "class _NoiseSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_noise.NoiseNloptSlsqpS1em2.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "3411abd6116ad75593f13ac2e0b6474b7e02ac5d8298b0412d987d3aa99c2d6a",
+        "warmup_time": 0
+    },
+    "bench_noise.NoiseNloptSlsqpS1em2.track_failure_cap": {
+        "code": "class _NoiseSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptSlsqpS1em2.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "6af0c62ccfb0b715e318ca7ebca70d0ce09b55c0e640c45e3ea5a99cff1fb8c8"
+    },
+    "bench_noise.NoiseNloptSlsqpS1em2.track_failure_crash": {
+        "code": "class _NoiseSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptSlsqpS1em2.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5fa57c707a613c063ec1b23617cb3d8161f1c486ff629122b7754d0521d924aa"
+    },
+    "bench_noise.NoiseNloptSlsqpS1em2.track_failure_divergence": {
+        "code": "class _NoiseSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptSlsqpS1em2.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "0bc8841a93160924c92a2ff0e16ccd08c0fe737810c4f71f5c54ee30b7916105"
+    },
+    "bench_noise.NoiseNloptSlsqpS1em2.track_failure_wrong_stationary": {
+        "code": "class _NoiseSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptSlsqpS1em2.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7a592a67583c953f59755e76599736fc4ed92bb9f617502fbd07c54909d974b7"
+    },
+    "bench_noise.NoiseNloptSlsqpS1em2.track_force_calls": {
+        "code": "class _NoiseSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptSlsqpS1em2.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "b49e868cd90a48813e68a5d72ee2aec86262c9b2b3b59f79477d8979f5fcc53e"
+    },
+    "bench_noise.NoiseNloptSlsqpS1em2.track_success": {
+        "code": "class _NoiseSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptSlsqpS1em2.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "f5f2144f293997ae974a6c0e286a59768bc01a34aab2bc6479b6fbcaf7d6dd37"
+    },
+    "bench_noise.NoiseNloptSlsqpS1em3.time_search": {
+        "code": "class _NoiseSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_noise.NoiseNloptSlsqpS1em3.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "3411abd6116ad75593f13ac2e0b6474b7e02ac5d8298b0412d987d3aa99c2d6a",
+        "warmup_time": 0
+    },
+    "bench_noise.NoiseNloptSlsqpS1em3.track_failure_cap": {
+        "code": "class _NoiseSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptSlsqpS1em3.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "6af0c62ccfb0b715e318ca7ebca70d0ce09b55c0e640c45e3ea5a99cff1fb8c8"
+    },
+    "bench_noise.NoiseNloptSlsqpS1em3.track_failure_crash": {
+        "code": "class _NoiseSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptSlsqpS1em3.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5fa57c707a613c063ec1b23617cb3d8161f1c486ff629122b7754d0521d924aa"
+    },
+    "bench_noise.NoiseNloptSlsqpS1em3.track_failure_divergence": {
+        "code": "class _NoiseSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptSlsqpS1em3.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "0bc8841a93160924c92a2ff0e16ccd08c0fe737810c4f71f5c54ee30b7916105"
+    },
+    "bench_noise.NoiseNloptSlsqpS1em3.track_failure_wrong_stationary": {
+        "code": "class _NoiseSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptSlsqpS1em3.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7a592a67583c953f59755e76599736fc4ed92bb9f617502fbd07c54909d974b7"
+    },
+    "bench_noise.NoiseNloptSlsqpS1em3.track_force_calls": {
+        "code": "class _NoiseSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptSlsqpS1em3.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "b49e868cd90a48813e68a5d72ee2aec86262c9b2b3b59f79477d8979f5fcc53e"
+    },
+    "bench_noise.NoiseNloptSlsqpS1em3.track_success": {
+        "code": "class _NoiseSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptSlsqpS1em3.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "f5f2144f293997ae974a6c0e286a59768bc01a34aab2bc6479b6fbcaf7d6dd37"
+    },
+    "bench_noise.NoiseNloptSlsqpS1em4.time_search": {
+        "code": "class _NoiseSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_noise.NoiseNloptSlsqpS1em4.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "3411abd6116ad75593f13ac2e0b6474b7e02ac5d8298b0412d987d3aa99c2d6a",
+        "warmup_time": 0
+    },
+    "bench_noise.NoiseNloptSlsqpS1em4.track_failure_cap": {
+        "code": "class _NoiseSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptSlsqpS1em4.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "6af0c62ccfb0b715e318ca7ebca70d0ce09b55c0e640c45e3ea5a99cff1fb8c8"
+    },
+    "bench_noise.NoiseNloptSlsqpS1em4.track_failure_crash": {
+        "code": "class _NoiseSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptSlsqpS1em4.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5fa57c707a613c063ec1b23617cb3d8161f1c486ff629122b7754d0521d924aa"
+    },
+    "bench_noise.NoiseNloptSlsqpS1em4.track_failure_divergence": {
+        "code": "class _NoiseSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptSlsqpS1em4.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "0bc8841a93160924c92a2ff0e16ccd08c0fe737810c4f71f5c54ee30b7916105"
+    },
+    "bench_noise.NoiseNloptSlsqpS1em4.track_failure_wrong_stationary": {
+        "code": "class _NoiseSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptSlsqpS1em4.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7a592a67583c953f59755e76599736fc4ed92bb9f617502fbd07c54909d974b7"
+    },
+    "bench_noise.NoiseNloptSlsqpS1em4.track_force_calls": {
+        "code": "class _NoiseSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptSlsqpS1em4.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "b49e868cd90a48813e68a5d72ee2aec86262c9b2b3b59f79477d8979f5fcc53e"
+    },
+    "bench_noise.NoiseNloptSlsqpS1em4.track_success": {
+        "code": "class _NoiseSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptSlsqpS1em4.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "f5f2144f293997ae974a6c0e286a59768bc01a34aab2bc6479b6fbcaf7d6dd37"
+    },
+    "bench_noise.NoiseNloptTnewtonPrecondRestartS0.time_search": {
+        "code": "class _NoiseSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_noise.NoiseNloptTnewtonPrecondRestartS0.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "3411abd6116ad75593f13ac2e0b6474b7e02ac5d8298b0412d987d3aa99c2d6a",
+        "warmup_time": 0
+    },
+    "bench_noise.NoiseNloptTnewtonPrecondRestartS0.track_failure_cap": {
+        "code": "class _NoiseSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptTnewtonPrecondRestartS0.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "6af0c62ccfb0b715e318ca7ebca70d0ce09b55c0e640c45e3ea5a99cff1fb8c8"
+    },
+    "bench_noise.NoiseNloptTnewtonPrecondRestartS0.track_failure_crash": {
+        "code": "class _NoiseSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptTnewtonPrecondRestartS0.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5fa57c707a613c063ec1b23617cb3d8161f1c486ff629122b7754d0521d924aa"
+    },
+    "bench_noise.NoiseNloptTnewtonPrecondRestartS0.track_failure_divergence": {
+        "code": "class _NoiseSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptTnewtonPrecondRestartS0.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "0bc8841a93160924c92a2ff0e16ccd08c0fe737810c4f71f5c54ee30b7916105"
+    },
+    "bench_noise.NoiseNloptTnewtonPrecondRestartS0.track_failure_wrong_stationary": {
+        "code": "class _NoiseSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptTnewtonPrecondRestartS0.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7a592a67583c953f59755e76599736fc4ed92bb9f617502fbd07c54909d974b7"
+    },
+    "bench_noise.NoiseNloptTnewtonPrecondRestartS0.track_force_calls": {
+        "code": "class _NoiseSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptTnewtonPrecondRestartS0.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "b49e868cd90a48813e68a5d72ee2aec86262c9b2b3b59f79477d8979f5fcc53e"
+    },
+    "bench_noise.NoiseNloptTnewtonPrecondRestartS0.track_success": {
+        "code": "class _NoiseSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptTnewtonPrecondRestartS0.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "f5f2144f293997ae974a6c0e286a59768bc01a34aab2bc6479b6fbcaf7d6dd37"
+    },
+    "bench_noise.NoiseNloptTnewtonPrecondRestartS1em2.time_search": {
+        "code": "class _NoiseSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_noise.NoiseNloptTnewtonPrecondRestartS1em2.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "3411abd6116ad75593f13ac2e0b6474b7e02ac5d8298b0412d987d3aa99c2d6a",
+        "warmup_time": 0
+    },
+    "bench_noise.NoiseNloptTnewtonPrecondRestartS1em2.track_failure_cap": {
+        "code": "class _NoiseSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptTnewtonPrecondRestartS1em2.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "6af0c62ccfb0b715e318ca7ebca70d0ce09b55c0e640c45e3ea5a99cff1fb8c8"
+    },
+    "bench_noise.NoiseNloptTnewtonPrecondRestartS1em2.track_failure_crash": {
+        "code": "class _NoiseSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptTnewtonPrecondRestartS1em2.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5fa57c707a613c063ec1b23617cb3d8161f1c486ff629122b7754d0521d924aa"
+    },
+    "bench_noise.NoiseNloptTnewtonPrecondRestartS1em2.track_failure_divergence": {
+        "code": "class _NoiseSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptTnewtonPrecondRestartS1em2.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "0bc8841a93160924c92a2ff0e16ccd08c0fe737810c4f71f5c54ee30b7916105"
+    },
+    "bench_noise.NoiseNloptTnewtonPrecondRestartS1em2.track_failure_wrong_stationary": {
+        "code": "class _NoiseSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptTnewtonPrecondRestartS1em2.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7a592a67583c953f59755e76599736fc4ed92bb9f617502fbd07c54909d974b7"
+    },
+    "bench_noise.NoiseNloptTnewtonPrecondRestartS1em2.track_force_calls": {
+        "code": "class _NoiseSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptTnewtonPrecondRestartS1em2.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "b49e868cd90a48813e68a5d72ee2aec86262c9b2b3b59f79477d8979f5fcc53e"
+    },
+    "bench_noise.NoiseNloptTnewtonPrecondRestartS1em2.track_success": {
+        "code": "class _NoiseSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptTnewtonPrecondRestartS1em2.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "f5f2144f293997ae974a6c0e286a59768bc01a34aab2bc6479b6fbcaf7d6dd37"
+    },
+    "bench_noise.NoiseNloptTnewtonPrecondRestartS1em3.time_search": {
+        "code": "class _NoiseSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_noise.NoiseNloptTnewtonPrecondRestartS1em3.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "3411abd6116ad75593f13ac2e0b6474b7e02ac5d8298b0412d987d3aa99c2d6a",
+        "warmup_time": 0
+    },
+    "bench_noise.NoiseNloptTnewtonPrecondRestartS1em3.track_failure_cap": {
+        "code": "class _NoiseSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptTnewtonPrecondRestartS1em3.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "6af0c62ccfb0b715e318ca7ebca70d0ce09b55c0e640c45e3ea5a99cff1fb8c8"
+    },
+    "bench_noise.NoiseNloptTnewtonPrecondRestartS1em3.track_failure_crash": {
+        "code": "class _NoiseSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptTnewtonPrecondRestartS1em3.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5fa57c707a613c063ec1b23617cb3d8161f1c486ff629122b7754d0521d924aa"
+    },
+    "bench_noise.NoiseNloptTnewtonPrecondRestartS1em3.track_failure_divergence": {
+        "code": "class _NoiseSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptTnewtonPrecondRestartS1em3.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "0bc8841a93160924c92a2ff0e16ccd08c0fe737810c4f71f5c54ee30b7916105"
+    },
+    "bench_noise.NoiseNloptTnewtonPrecondRestartS1em3.track_failure_wrong_stationary": {
+        "code": "class _NoiseSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptTnewtonPrecondRestartS1em3.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7a592a67583c953f59755e76599736fc4ed92bb9f617502fbd07c54909d974b7"
+    },
+    "bench_noise.NoiseNloptTnewtonPrecondRestartS1em3.track_force_calls": {
+        "code": "class _NoiseSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptTnewtonPrecondRestartS1em3.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "b49e868cd90a48813e68a5d72ee2aec86262c9b2b3b59f79477d8979f5fcc53e"
+    },
+    "bench_noise.NoiseNloptTnewtonPrecondRestartS1em3.track_success": {
+        "code": "class _NoiseSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptTnewtonPrecondRestartS1em3.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "f5f2144f293997ae974a6c0e286a59768bc01a34aab2bc6479b6fbcaf7d6dd37"
+    },
+    "bench_noise.NoiseNloptTnewtonPrecondRestartS1em4.time_search": {
+        "code": "class _NoiseSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_noise.NoiseNloptTnewtonPrecondRestartS1em4.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "3411abd6116ad75593f13ac2e0b6474b7e02ac5d8298b0412d987d3aa99c2d6a",
+        "warmup_time": 0
+    },
+    "bench_noise.NoiseNloptTnewtonPrecondRestartS1em4.track_failure_cap": {
+        "code": "class _NoiseSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptTnewtonPrecondRestartS1em4.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "6af0c62ccfb0b715e318ca7ebca70d0ce09b55c0e640c45e3ea5a99cff1fb8c8"
+    },
+    "bench_noise.NoiseNloptTnewtonPrecondRestartS1em4.track_failure_crash": {
+        "code": "class _NoiseSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptTnewtonPrecondRestartS1em4.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5fa57c707a613c063ec1b23617cb3d8161f1c486ff629122b7754d0521d924aa"
+    },
+    "bench_noise.NoiseNloptTnewtonPrecondRestartS1em4.track_failure_divergence": {
+        "code": "class _NoiseSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptTnewtonPrecondRestartS1em4.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "0bc8841a93160924c92a2ff0e16ccd08c0fe737810c4f71f5c54ee30b7916105"
+    },
+    "bench_noise.NoiseNloptTnewtonPrecondRestartS1em4.track_failure_wrong_stationary": {
+        "code": "class _NoiseSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptTnewtonPrecondRestartS1em4.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7a592a67583c953f59755e76599736fc4ed92bb9f617502fbd07c54909d974b7"
+    },
+    "bench_noise.NoiseNloptTnewtonPrecondRestartS1em4.track_force_calls": {
+        "code": "class _NoiseSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptTnewtonPrecondRestartS1em4.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "b49e868cd90a48813e68a5d72ee2aec86262c9b2b3b59f79477d8979f5fcc53e"
+    },
+    "bench_noise.NoiseNloptTnewtonPrecondRestartS1em4.track_success": {
+        "code": "class _NoiseSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptTnewtonPrecondRestartS1em4.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "f5f2144f293997ae974a6c0e286a59768bc01a34aab2bc6479b6fbcaf7d6dd37"
+    },
+    "bench_noise.NoiseNloptVar2S0.time_search": {
+        "code": "class _NoiseSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_noise.NoiseNloptVar2S0.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "3411abd6116ad75593f13ac2e0b6474b7e02ac5d8298b0412d987d3aa99c2d6a",
+        "warmup_time": 0
+    },
+    "bench_noise.NoiseNloptVar2S0.track_failure_cap": {
+        "code": "class _NoiseSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptVar2S0.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "6af0c62ccfb0b715e318ca7ebca70d0ce09b55c0e640c45e3ea5a99cff1fb8c8"
+    },
+    "bench_noise.NoiseNloptVar2S0.track_failure_crash": {
+        "code": "class _NoiseSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptVar2S0.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5fa57c707a613c063ec1b23617cb3d8161f1c486ff629122b7754d0521d924aa"
+    },
+    "bench_noise.NoiseNloptVar2S0.track_failure_divergence": {
+        "code": "class _NoiseSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptVar2S0.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "0bc8841a93160924c92a2ff0e16ccd08c0fe737810c4f71f5c54ee30b7916105"
+    },
+    "bench_noise.NoiseNloptVar2S0.track_failure_wrong_stationary": {
+        "code": "class _NoiseSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptVar2S0.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7a592a67583c953f59755e76599736fc4ed92bb9f617502fbd07c54909d974b7"
+    },
+    "bench_noise.NoiseNloptVar2S0.track_force_calls": {
+        "code": "class _NoiseSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptVar2S0.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "b49e868cd90a48813e68a5d72ee2aec86262c9b2b3b59f79477d8979f5fcc53e"
+    },
+    "bench_noise.NoiseNloptVar2S0.track_success": {
+        "code": "class _NoiseSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptVar2S0.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "f5f2144f293997ae974a6c0e286a59768bc01a34aab2bc6479b6fbcaf7d6dd37"
+    },
+    "bench_noise.NoiseNloptVar2S1em2.time_search": {
+        "code": "class _NoiseSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_noise.NoiseNloptVar2S1em2.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "3411abd6116ad75593f13ac2e0b6474b7e02ac5d8298b0412d987d3aa99c2d6a",
+        "warmup_time": 0
+    },
+    "bench_noise.NoiseNloptVar2S1em2.track_failure_cap": {
+        "code": "class _NoiseSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptVar2S1em2.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "6af0c62ccfb0b715e318ca7ebca70d0ce09b55c0e640c45e3ea5a99cff1fb8c8"
+    },
+    "bench_noise.NoiseNloptVar2S1em2.track_failure_crash": {
+        "code": "class _NoiseSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptVar2S1em2.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5fa57c707a613c063ec1b23617cb3d8161f1c486ff629122b7754d0521d924aa"
+    },
+    "bench_noise.NoiseNloptVar2S1em2.track_failure_divergence": {
+        "code": "class _NoiseSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptVar2S1em2.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "0bc8841a93160924c92a2ff0e16ccd08c0fe737810c4f71f5c54ee30b7916105"
+    },
+    "bench_noise.NoiseNloptVar2S1em2.track_failure_wrong_stationary": {
+        "code": "class _NoiseSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptVar2S1em2.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7a592a67583c953f59755e76599736fc4ed92bb9f617502fbd07c54909d974b7"
+    },
+    "bench_noise.NoiseNloptVar2S1em2.track_force_calls": {
+        "code": "class _NoiseSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptVar2S1em2.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "b49e868cd90a48813e68a5d72ee2aec86262c9b2b3b59f79477d8979f5fcc53e"
+    },
+    "bench_noise.NoiseNloptVar2S1em2.track_success": {
+        "code": "class _NoiseSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptVar2S1em2.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "f5f2144f293997ae974a6c0e286a59768bc01a34aab2bc6479b6fbcaf7d6dd37"
+    },
+    "bench_noise.NoiseNloptVar2S1em3.time_search": {
+        "code": "class _NoiseSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_noise.NoiseNloptVar2S1em3.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "3411abd6116ad75593f13ac2e0b6474b7e02ac5d8298b0412d987d3aa99c2d6a",
+        "warmup_time": 0
+    },
+    "bench_noise.NoiseNloptVar2S1em3.track_failure_cap": {
+        "code": "class _NoiseSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptVar2S1em3.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "6af0c62ccfb0b715e318ca7ebca70d0ce09b55c0e640c45e3ea5a99cff1fb8c8"
+    },
+    "bench_noise.NoiseNloptVar2S1em3.track_failure_crash": {
+        "code": "class _NoiseSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptVar2S1em3.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5fa57c707a613c063ec1b23617cb3d8161f1c486ff629122b7754d0521d924aa"
+    },
+    "bench_noise.NoiseNloptVar2S1em3.track_failure_divergence": {
+        "code": "class _NoiseSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptVar2S1em3.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "0bc8841a93160924c92a2ff0e16ccd08c0fe737810c4f71f5c54ee30b7916105"
+    },
+    "bench_noise.NoiseNloptVar2S1em3.track_failure_wrong_stationary": {
+        "code": "class _NoiseSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptVar2S1em3.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7a592a67583c953f59755e76599736fc4ed92bb9f617502fbd07c54909d974b7"
+    },
+    "bench_noise.NoiseNloptVar2S1em3.track_force_calls": {
+        "code": "class _NoiseSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptVar2S1em3.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "b49e868cd90a48813e68a5d72ee2aec86262c9b2b3b59f79477d8979f5fcc53e"
+    },
+    "bench_noise.NoiseNloptVar2S1em3.track_success": {
+        "code": "class _NoiseSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptVar2S1em3.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "f5f2144f293997ae974a6c0e286a59768bc01a34aab2bc6479b6fbcaf7d6dd37"
+    },
+    "bench_noise.NoiseNloptVar2S1em4.time_search": {
+        "code": "class _NoiseSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_noise.NoiseNloptVar2S1em4.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "3411abd6116ad75593f13ac2e0b6474b7e02ac5d8298b0412d987d3aa99c2d6a",
+        "warmup_time": 0
+    },
+    "bench_noise.NoiseNloptVar2S1em4.track_failure_cap": {
+        "code": "class _NoiseSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptVar2S1em4.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "6af0c62ccfb0b715e318ca7ebca70d0ce09b55c0e640c45e3ea5a99cff1fb8c8"
+    },
+    "bench_noise.NoiseNloptVar2S1em4.track_failure_crash": {
+        "code": "class _NoiseSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptVar2S1em4.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5fa57c707a613c063ec1b23617cb3d8161f1c486ff629122b7754d0521d924aa"
+    },
+    "bench_noise.NoiseNloptVar2S1em4.track_failure_divergence": {
+        "code": "class _NoiseSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptVar2S1em4.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "0bc8841a93160924c92a2ff0e16ccd08c0fe737810c4f71f5c54ee30b7916105"
+    },
+    "bench_noise.NoiseNloptVar2S1em4.track_failure_wrong_stationary": {
+        "code": "class _NoiseSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptVar2S1em4.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "7a592a67583c953f59755e76599736fc4ed92bb9f617502fbd07c54909d974b7"
+    },
+    "bench_noise.NoiseNloptVar2S1em4.track_force_calls": {
+        "code": "class _NoiseSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptVar2S1em4.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "b49e868cd90a48813e68a5d72ee2aec86262c9b2b3b59f79477d8979f5fcc53e"
+    },
+    "bench_noise.NoiseNloptVar2S1em4.track_success": {
+        "code": "class _NoiseSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready(self.spec[\"family\"]):\n            raise NotImplementedError(f\"{self.spec['family']} is not installed in this environment\")\n        self.record = None",
+        "name": "bench_noise.NoiseNloptVar2S1em4.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "f5f2144f293997ae974a6c0e286a59768bc01a34aab2bc6479b6fbcaf7d6dd37"
+    },
     "version": 2
 }
