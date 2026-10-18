@@ -1,0 +1,16 @@
+# counter harness base-calculator evaluations
+# surrogate predictions are not force calls
+# force_calls are the band total and are not divided by the image count
+# the mean is round-half-even over successes; cap, force, or Hessian index other than 1 is a failure
+successes 0
+nfailed 1
+n 1
+transition_states 0
+code GPR calculator
+code_version 0.0.4
+commit c4d63271a6e87a14171ed43fe85a56b38ee1bea1
+algorithm GP-NEB
+template gprcalc/gp-neb
+tuning default
+counter harness
+images 5

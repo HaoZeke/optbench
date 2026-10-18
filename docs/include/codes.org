@@ -652,5 +652,20 @@
    </tr>
    </tbody></table></div>
    <p>No full ranked run.</p>
+   <h3>GPR calculator</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>saddle search</td>
+   <td>0.0.4</td>
+   <td>c4d63271a6e8</td>
+   <td><a href="https://github.com/MaterSim/GPR_calculator">https://github.com/MaterSim/GPR_calculator</a></td>
+   </tr>
+   </tbody></table></div>
+   <p>No full ranked run.</p>
+   <p>No full ranked run</p><ul>
+   <li>LJ38 double-ended saddle: partial.</li>
+   </ul>
    </section>
 #+end_export
