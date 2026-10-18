@@ -1,0 +1,233 @@
+{
+  "bootstrap_resamples": 2000,
+  "bootstrap_seed": 20261015,
+  "note": "Basin hopping follows the AGOX basin-hopping example: a Metropolis sampler at 0.25 eV. The example rattles 3 atoms, the generator default, at amplitude 3 \u00c5. This run rattles one quarter of the atoms at that amplitude, 9 atoms on LJ38. The archived geometry is quenched and seeded as the first sample. The seed is 314159 plus the start index. Local steps are SciPy L-BFGS-B, stopped when the maximum atomic force is 0.05 or after 500 steps. The example uses ASE BFGS and 5 steps, which does not resolve the 0.001 window. The potential is the harness Lennard-Jones potential, cutoff 40, epsilon 1, sigma 1, no shift. A success is an energy at or below the Cambridge LJ38 minimum on this potential plus 0.001. The force-call cap is 500000. The reference energy is the Cambridge cluster coordinates evaluated with this potential.",
+  "par_factor": 2,
+  "problem": "globalopt/lj38",
+  "runs": [
+    {
+      "algorithm": "basin hopping",
+      "cap": 500000,
+      "code": "AGOX",
+      "code_version": "3.11.2.dev2+g22d94a6fa",
+      "commit": "22d94a6fae8cf2d08d51ecc8b9291a47667aa95c",
+      "entry": "agox-22d94a6-lj38-bh",
+      "legacy": {
+        "force_calls": null,
+        "force_calls_max": null,
+        "force_calls_min": null,
+        "median": null,
+        "nfailed": 7
+      },
+      "metrics": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 500000,
+        "includes_failures": true,
+        "iqr": 0.0,
+        "iqr_high": 0.0,
+        "iqr_low": 0.0,
+        "mean": 1000000.0,
+        "median": 1000000.0,
+        "median_high": 1000000.0,
+        "median_low": 1000000.0,
+        "n": 7,
+        "n_cap": 7,
+        "n_crash": 0,
+        "n_divergence": 0,
+        "n_wrong_stationary": 0,
+        "nfailed": 7,
+        "par2_mean": 1000000.0,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 1000000.0,
+        "q75": 1000000.0,
+        "scoring": "par2-wilson-bootstrap",
+        "success_only_mean": null,
+        "success_rate": 0.0,
+        "successes": 0,
+        "wilson_high": 0.35433043506668743,
+        "wilson_low": 0.0
+      },
+      "parameters": {
+        "cap": 500000,
+        "cell": 40.0,
+        "confinement": 24.0,
+        "fmax": 0.05,
+        "max_steps": 500,
+        "method": "basin_hopping",
+        "optimizer": "scipy-lbfgsb",
+        "rattle_amplitude": 3.0,
+        "rattle_fraction": 0.25,
+        "reference_source": "cambridge",
+        "seed_base": 314159,
+        "temperature": 0.25
+      },
+      "present_source": true,
+      "provenance": {
+        "code": "agox",
+        "code_version": "3.11.2.dev2+g22d94a6fa",
+        "commit": "22d94a6fae8cf2d08d51ecc8b9291a47667aa95c",
+        "machine": {
+          "machine": "x86_64",
+          "node": "cursor",
+          "python": "3.12.3",
+          "system": "Linux"
+        },
+        "parameters": {
+          "cap": 500000,
+          "cell": 40.0,
+          "confinement": 24.0,
+          "fmax": 0.05,
+          "max_steps": 500,
+          "method": "basin_hopping",
+          "optimizer": "scipy-lbfgsb",
+          "rattle_amplitude": 3.0,
+          "rattle_fraction": 0.25,
+          "reference_source": "cambridge",
+          "seed_base": 314159,
+          "temperature": 0.25
+        }
+      },
+      "starts": [
+        {
+          "calls_at_lowest": 296550,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 500000,
+          "iterations": 2630,
+          "lowest_energy": -173.13428606969262,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.9284265117895,
+          "schema": "optbench.start/v2",
+          "seed": 314159,
+          "start": "0.con",
+          "success": false,
+          "target_energy": -173.9274265117895
+        },
+        {
+          "calls_at_lowest": 243955,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 500000,
+          "iterations": 2645,
+          "lowest_energy": -173.25235177666204,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.9284265117895,
+          "schema": "optbench.start/v2",
+          "seed": 314160,
+          "start": "1.con",
+          "success": false,
+          "target_energy": -173.9274265117895
+        },
+        {
+          "calls_at_lowest": 127653,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 500000,
+          "iterations": 2646,
+          "lowest_energy": -173.13428194584466,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.9284265117895,
+          "schema": "optbench.start/v2",
+          "seed": 314161,
+          "start": "2.con",
+          "success": false,
+          "target_energy": -173.9274265117895
+        },
+        {
+          "calls_at_lowest": 222585,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 500000,
+          "iterations": 2682,
+          "lowest_energy": -173.1342634211341,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.9284265117895,
+          "schema": "optbench.start/v2",
+          "seed": 314162,
+          "start": "3.con",
+          "success": false,
+          "target_energy": -173.9274265117895
+        },
+        {
+          "calls_at_lowest": 435505,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 500000,
+          "iterations": 2637,
+          "lowest_energy": -172.8777043097437,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.9284265117895,
+          "schema": "optbench.start/v2",
+          "seed": 314163,
+          "start": "4.con",
+          "success": false,
+          "target_energy": -173.9274265117895
+        },
+        {
+          "calls_at_lowest": 417347,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 500000,
+          "iterations": 2619,
+          "lowest_energy": -172.95860216553666,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.9284265117895,
+          "schema": "optbench.start/v2",
+          "seed": 314164,
+          "start": "5.con",
+          "success": false,
+          "target_energy": -173.9274265117895
+        },
+        {
+          "calls_at_lowest": 385872,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 500000,
+          "iterations": 2622,
+          "lowest_energy": -173.13417011233008,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.9284265117895,
+          "schema": "optbench.start/v2",
+          "seed": 314165,
+          "start": "6.con",
+          "success": false,
+          "target_energy": -173.9274265117895
+        }
+      ],
+      "tuning": "default"
+    }
+  ],
+  "schema": "optbench.result/v2",
+  "scoring": "par2-wilson-bootstrap",
+  "status": "partial"
+}
