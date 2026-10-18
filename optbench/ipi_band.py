@@ -14,9 +14,10 @@ tolerances are loose. Its force tolerance is 1e-8, the max absolute
 component of the NEB or string gradient, so that stop does not fire
 before the physical gradient. A return under the cap with the
 physical gradient still above the stop is divergence. A climbing
-template starts in the climb stage. After every interior image has
-been seen once, a later force call on the current highest image can
-end the search. A plain band waits for a full interior round.
+template starts in the climb stage. i-PI then moves one image.
+That image is the one requested more than the others, and the search
+stops on its free-atom gradient. A plain band waits for a full
+interior round and is scored on the highest interior image.
 
 The Hessian test matches the rgsaddle band. Finite differences go
 through verification and are not search cost. A free Lennard-Jones
@@ -306,6 +307,7 @@ class _Client:
         self.reactant_maxabs = float("inf")
         self.fresh = [False] * len(frames)
         self.seen = [False] * len(frames)
+        self.updates = [0] * len(frames)
         self.band_ready = False
         self._pending: np.ndarray | None = None
 
@@ -382,6 +384,7 @@ class _Client:
         self.slots[index] = held
         self.energies[index] = float(energy)
         self.grads[index] = grad
+        self.updates[index] += 1
         self._consider(index)
         return float(energy), -grad
 
@@ -403,10 +406,9 @@ class _Client:
         if not all(self.seen[1:-1]):
             return
         if self.single_image:
-            first = not self.band_ready
             self.band_ready = True
-            chosen = self.candidate_index()
-            if chosen is not None and (first or index == chosen):
+            chosen = self._climber_index()
+            if chosen is not None and index == chosen:
                 self._maybe_stop(chosen)
             return
         if not all(self.fresh[1:-1]):
@@ -423,7 +425,28 @@ class _Client:
             self.met = True
             self.stop = True
 
+    def _climber_index(self) -> int | None:
+        """The interior image i-PI keeps requesting. A tie means it has not been chosen."""
+        best = None
+        best_count = 0
+        leaders = 0
+        for index in range(1, len(self.slots) - 1):
+            count = self.updates[index]
+            if count > best_count:
+                best_count = count
+                best = index
+                leaders = 1
+            elif count == best_count:
+                leaders += 1
+        if best is None or leaders != 1 or best_count < 1:
+            return None
+        return best
+
     def candidate_index(self) -> int | None:
+        if self.single_image:
+            climbed = self._climber_index()
+            if climbed is not None:
+                return climbed
         best = None
         best_energy = float("-inf")
         for index in range(1, len(self.slots) - 1):
@@ -593,6 +616,7 @@ def _judge(client: _Client, *, name: str, project_rigid: bool, log_text: str) ->
         def free_gradient(flat):
             full = np.array(template, copy=True)
             full[mask] = np.asarray(flat, dtype=np.float64).reshape((-1, 3))
+            client.counter.charge((float(client.counter.verify_calls),))
             _energy, full_grad = evaluate(client.kind, full, client.box)
             del _energy
             return np.asarray(full_grad, dtype=np.float64)[mask].reshape(-1)
@@ -608,6 +632,7 @@ def _judge(client: _Client, *, name: str, project_rigid: bool, log_text: str) ->
         if hessian_index != 1:
             reasons.append("hessian_index")
     failure = classify_failure(reasons)
+    climbed = client._climber_index() if client.single_image else None
     record = {
         "schema": "optbench.start/v2",
         "start": name,
@@ -622,8 +647,8 @@ def _judge(client: _Client, *, name: str, project_rigid: bool, log_text: str) ->
         "force_norm": None if not np.isfinite(force) else float(force),
         "hessian_index": hessian_index,
         "converged": bool(client.met),
-        "candidate": "highest",
-        "ci_index": None,
+        "candidate": "climb" if climbed is not None else "highest",
+        "ci_index": climbed,
         "refined": False,
         "reactant_maxabs": None
         if not np.isfinite(client.reactant_maxabs)
