@@ -1,0 +1,16 @@
+force_calls 6313
+force_calls_min 6313
+force_calls_max 6313
+force_calls_median 6313.0
+call_unit total
+nfailed 0
+code eOn
+code_version 3.5.0
+commit 4d8b34baf1ba8d2d980df29838bac1f969d1662c
+algorithm Parallel replica
+template eon-client/amd-prd
+problem accelerated-md/aladatom
+reducer harness
+counter harness
+count_keys HarnessCounter
+partial true

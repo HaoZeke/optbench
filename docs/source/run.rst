@@ -1,0 +1,134 @@
+===========
+Run a score
+===========
+
+
+The harness is this repository. It needs uv and Python 3.11 or newer.
+``uv run`` installs the command-line library from ``pyproject.toml`` and
+runs the command. The geometries are already in the clone.
+
+.. code:: sh
+
+    git clone https://github.com/lode-org/optbench
+    cd optbench
+    uv run pytest
+    uv run optbench check
+    uv run optbench templates
+
+A campaign is one problem id and one template id. It writes one
+``benchmark.dat``. The problem file is the stop and the geometries. The
+template is the client. ``--workers`` is the number of client processes.
+
+The recorded client tally for this command is 181. It is eOn 3.5.0, commit
+``4d8b34baf1ba8d2d980df29838bac1f969d1662c``, template
+``eon-client/lbfgs-m100``, all 1000 starts, force norm 0.01.
+The ranked harness table is on the minimization page.
+Build ``eonclient`` from that commit of `https://github.com/TheochemUI/eon <https://github.com/TheochemUI/eon>`_.
+``pip install pyeonclient`` does not set L-BFGS memory, and this command
+does not call it.
+
+.. code:: sh
+
+    uv run optbench run minimization/lj38 eon-client/lbfgs-m100 \
+      --workers 4 \
+      --output benchmark.dat
+
+``eonclient`` is taken from ``PATH``. One line installs that binary and
+runs the same command:
+
+.. code:: sh
+
+    pixi exec --spec eon --spec uv -- uv run optbench run \
+      minimization/lj38 eon-client/lbfgs-m100 \
+      --workers 4 \
+      --output benchmark.dat
+
+The geometries come from ``inputs/manifest.jsonl``. For this problem that
+is ``inputs/sha256/86bf774955b906c486d37282c48e42628e8fe4af3579222f6e07fcf5913157b1/lj38-clusters.tgz``.
+Compare ``force_calls`` with ``results/campaign/eon-client-lbfgs-m100.dat``.
+A directory passed as ``--geometries`` checks the client. It is not the
+published mean.
+
+Morse bulk, same client, template ``eon-client/morse-lbfgs``, records 52
+force calls on 100 starts at force norm 0.001 eV/Ang.
+That tally is the client count for this command.
+The ranked harness table is on the minimization page.
+
+.. code:: sh
+
+    uv run optbench run minimization/morse-bulk eon-client/morse-lbfgs \
+      --workers 4 \
+      --output morse-lbfgs.dat
+
+pele 0.1.2 (`https://github.com/pele-python/pele <https://github.com/pele-python/pele>`_) on the same Lennard-Jones
+starts:
+
+The pele script declares its own dependencies, so ``uv run`` on that file
+installs pele for the script:
+
+.. code:: sh
+
+    tar -xzf inputs/sha256/86bf774955b906c486d37282c48e42628e8fe4af3579222f6e07fcf5913157b1/lj38-clusters.tgz -C "$WORKDIR"
+    uv run optbench/pele_lj38.py \
+      --geometries "$WORKDIR/lj38-clusters" \
+      --output-dir "$WORKDIR/pele" \
+      --workers 4
+
+Memory 100 at step 0.2 records 178 force calls. The 2014 file records 179.
+Both numbers are that client run and that archive row.
+The ranked harness table is on the minimization page.
+
+Sella 2.6.0 needs ``sella==2.6.0`` and ASE. Two hundred geometries, force
+norm 0.001, cutoff 40:
+
+.. code:: sh
+
+    uv run optbench/sella_lj38.py \
+      --coords inputs/sha256/bda818f7fd3c2ee47ad4d4fd74524881814544c1a805054656f612724d9d5ce6/coords-con.tar.gz \
+      --output sella.dat \
+      --workers 4 \
+      --version 2.6.0
+
+Pt-heptamer L-BFGS, thirteen Morse bands:
+
+.. code:: sh
+
+    uv run optbench neb \
+      --entry archive/entries/neb/Pt-heptamer/eon-lbfgs \
+      --minima inputs/sha256/135c83a17e5a1769182e9a6cdb3ad98657a62a6cd20ef8ae0440e876e24c5e1b/minima.tgz \
+      --work "$WORKDIR/heptamer-lbfgs" \
+      --output heptamer-lbfgs.dat \
+      --workers 4 \
+      --version 3.5.0
+
+The LJ38 climbing-image band needs ``liblammps.so`` on ``LD_LIBRARY_PATH``.
+The client loads it at run time. The Morse heptamer runs do not.
+
+.. code:: sh
+
+    uv run optbench pairs \
+      --entry archive/entries/double-ended-saddle-search/lj38/eon-ci-neb \
+      --coords inputs/sha256/d1c74db6a00956a4e30487fb80e6331b9515e5f93bba1c6f823e38c3b2986dfc/coords-con.tgz \
+      --work "$WORKDIR/ci-neb" \
+      --output ci-neb.dat \
+      --workers 4 \
+      --count 50 \
+      --version 3.5.0
+
+eOn 3.5.0 reads a QuickMin step from ``[QuickMin]``, a FIRE step from
+``[FIRE]``, a steepest-descent step from ``[SD]``, and a band method from
+``[Nudged Elastic Band]``. A missing band method runs L-BFGS. SVN r2549
+reads the steepest-descent step from ``[Optimizer]`` and calls the
+Lennard-Jones potential ``lj_cluster``. The 3.5.0 name is ``ljcluster``.
+The repository README is the longer form of these rules.
+
+The v2 counter, the seed sample, and the noise rule are ``docs/v2.md``.
+``optbench statistics`` reads asv tracks from ``results/asv`` (``docs/asv.md``).
+These two commands write under ``results/validation/``. Neither file is
+a published mean.
+
+.. code:: sh
+
+    uv run optbench statistics --output results/validation/statistics.json
+    uv run optbench validate-counter --limit 3 \
+      --output results/validation/lj38-counter.dat
