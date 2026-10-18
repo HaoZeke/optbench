@@ -18,7 +18,8 @@ import json
 import os
 from pathlib import Path
 
-from optbench.asv_tracks import TrackedSearch
+# Private alias. asv discovers every public class that defines track_*.
+from optbench.asv_tracks import TrackedSearch as _TrackedSearch
 
 ROOT = Path(__file__).resolve().parents[1]
 SEED = "0"
@@ -172,7 +173,7 @@ def _load(spec: dict, seed: str, start: str) -> dict:
     return _compute(spec, seed, start)
 
 
-class _OptimSearch(TrackedSearch):
+class _OptimSearch(_TrackedSearch):
     def setup(self, seed, start):
         from optbench.runners.optim_min import optim_binary
 
