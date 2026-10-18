@@ -18,7 +18,7 @@
         "force_calls_max": 2000000,
         "force_calls_median": 2000000.0,
         "force_calls_min": 123277,
-        "nfailed": 33
+        "nfailed": 40
       },
       "metrics": {
         "bootstrap_resamples": 2000,
@@ -28,27 +28,27 @@
         "iqr": 0.0,
         "iqr_high": 0.0,
         "iqr_low": 0.0,
-        "mean": 3885978.7352941176,
+        "mean": 3905445.7804878047,
         "median": 4000000.0,
         "median_high": 4000000.0,
         "median_low": 4000000.0,
-        "n": 34,
-        "n_cap": 33,
+        "n": 41,
+        "n_cap": 40,
         "n_crash": 0,
         "n_divergence": 0,
         "n_wrong_stationary": 0,
-        "nfailed": 33,
-        "par2_mean": 3885978.7352941176,
+        "nfailed": 40,
+        "par2_mean": 3905445.7804878047,
         "par_applied": true,
         "par_factor": 2,
         "q25": 4000000.0,
         "q75": 4000000.0,
         "scoring": "par2-wilson-bootstrap",
         "success_only_mean": 123277.0,
-        "success_rate": 0.029411764705882353,
+        "success_rate": 0.024390243902439025,
         "successes": 1,
-        "wilson_high": 0.1491557329268593,
-        "wilson_low": 0.0052109062762689395
+        "wilson_high": 0.1259506205577423,
+        "wilson_low": 0.004318531568912411
       },
       "parameters": {
         "distribution": "uniform",
@@ -652,6 +652,23 @@
         },
         {
           "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -169.88007549301977,
+          "failure": "cap",
+          "force_calls": 2000000,
+          "lowest_energy": -169.88007549301977,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "33",
+          "success": false,
+          "threshold": -173.92742624400097,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
           "converged": true,
           "counter": "harness",
           "energy": -173.92768936843643,
@@ -662,6 +679,108 @@
           "schema": "optbench.start/v2",
           "start": "34",
           "success": true,
+          "threshold": -173.92742624400097,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -173.13431661193758,
+          "failure": "cap",
+          "force_calls": 2000000,
+          "lowest_energy": -173.13431661193758,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "35",
+          "success": false,
+          "threshold": -173.92742624400097,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -172.23070982625637,
+          "failure": "cap",
+          "force_calls": 2000000,
+          "lowest_energy": -172.23070982625637,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "36",
+          "success": false,
+          "threshold": -173.92742624400097,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -172.23070972709436,
+          "failure": "cap",
+          "force_calls": 2000000,
+          "lowest_energy": -172.23070972709436,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "37",
+          "success": false,
+          "threshold": -173.92742624400097,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -171.20565887373115,
+          "failure": "cap",
+          "force_calls": 2000000,
+          "lowest_energy": -171.20565887373115,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "38",
+          "success": false,
+          "threshold": -173.92742624400097,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -171.3573393102519,
+          "failure": "cap",
+          "force_calls": 2000000,
+          "lowest_energy": -171.3573393102519,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "39",
+          "success": false,
+          "threshold": -173.92742624400097,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -172.87773583922882,
+          "failure": "cap",
+          "force_calls": 2000000,
+          "lowest_energy": -172.87773583922882,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "40",
+          "success": false,
           "threshold": -173.92742624400097,
           "verify_calls": 0
         }
