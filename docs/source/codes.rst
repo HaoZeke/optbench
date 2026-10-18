@@ -652,6 +652,60 @@ The number is written only after the run finishes under the problem rule.
    <li>pt-island: partial.</li>
    <li>sella-lj38: no per-start record.</li>
    </ul>
+   <h3>OPTIM</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>saddle search</td>
+   <td>df8da599267534fbe43a250e578f7396a7946311</td>
+   <td>df8da5992675</td>
+   <td><a href="https://www-wales.ch.cam.ac.uk/svn.tar.bz2">https://www-wales.ch.cam.ac.uk/svn.tar.bz2</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="lowest-eigenvector/lj38" data-template="optim/rr-loweig">
+   <td>lj38</td>
+   <td data-field="template">optim/rr-loweig</td>
+   <td data-field="version">optim df8da599</td>
+   <td data-field="commit">df8da5992675</td>
+   <td data-field="par2_mean">60.97</td>
+   <td data-field="mean_calls">60.97</td>
+   <td data-field="median_calls">58</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="tsopt/LJ38" data-template="optim/hef-ffd-ts-lj38">
+   <td>LJ38</td>
+   <td data-field="template">optim/hef-ffd-ts-lj38</td>
+   <td data-field="version">optim df8da599</td>
+   <td data-field="commit">df8da5992675</td>
+   <td data-field="par2_mean">488.835</td>
+   <td data-field="mean_calls">488.835</td>
+   <td data-field="median_calls">360</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="tsopt/pt-island" data-template="optim/hef-ffd-ts-pt">
+   <td>pt-island</td>
+   <td data-field="template">optim/hef-ffd-ts-pt</td>
+   <td data-field="version">optim df8da599</td>
+   <td data-field="commit">df8da5992675</td>
+   <td data-field="par2_mean">170.122</td>
+   <td data-field="mean_calls">170.122</td>
+   <td data-field="median_calls">178</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">49</td>
+   </tr>
+   </tbody></table></div>
+   <p>No full ranked run</p><ul>
+   <li>lj38: partial.</li>
+   <li>Pt heptamer island: partial.</li>
+   <li>LJ38: partial.</li>
+   <li>pt-island: partial.</li>
+   </ul>
    <h3>pARTn</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
