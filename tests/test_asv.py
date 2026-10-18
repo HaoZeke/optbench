@@ -114,6 +114,7 @@ def test_pending_grid_is_every_problem_and_code():
         "eon",
         "eon-main",
         "eon-develop",
+        "eon-svn",
         "rgmin",
         "rgsaddle",
         "ase",
