@@ -7,10 +7,12 @@ import numpy as np
 from optbench.campaign import geometry_archive, load_template, resolve_problem
 from optbench.counter import HarnessCounter
 from optbench.gpatom_band import (
+    _KERNEL_BYTES,
     _Spec,
     _cartesian_block,
     _cartesian_energy_variances,
     _cartesian_mean,
+    _kernel_pair_bytes,
     prepare,
     search_named,
 )
@@ -127,6 +129,11 @@ def test_cartesian_mean_matches_the_kernel_vector():
     gp.K_reg = None
     after, _variance = gp.predict(fingerprints[3], get_variance=False)
     assert np.allclose(before, after, rtol=1e-10, atol=1e-10)
+
+
+def test_kernel_budget_fits_lj38_and_stops_a_large_pt_factor():
+    assert _kernel_pair_bytes(25, 38) < _KERNEL_BYTES
+    assert _kernel_pair_bytes(80, 175) > _KERNEL_BYTES
 
 
 def test_short_cap_stops_on_the_first_lj38_pair():

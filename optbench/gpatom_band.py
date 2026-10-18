@@ -31,7 +31,8 @@ prediction is that block contracted with the solved weights. The energy
 variance is the same corner of ``k K^{-1} k``, solved once for the
 whole band. After the prefactor update the dense kernel matrix is
 dropped and its pages are returned. Predictions keep the scaled
-Cholesky factor.
+Cholesky factor. A factor that would exceed 12 GiB raises before
+the allocation, and that start is scored from the path so far.
 """
 
 from __future__ import annotations
@@ -70,6 +71,7 @@ from .v2 import collect_provenance, write_starts
 _COMMIT = "572bd64ef61ccf498e061162609bb5f16e39d8a4"
 _FD_STEP = 1e-5
 _STALL_HITS = 3
+_KERNEL_BYTES = 12 * 1024**3
 _READY = False
 
 _SLUGS = {
@@ -82,6 +84,17 @@ _SLUGS = {
 
 class RepeatedGeometry(RuntimeError):
     """The search asked for a geometry it had already evaluated."""
+
+
+class _MemoryBudget(RuntimeError):
+    """The next Cartesian factor would not fit in the kernel budget."""
+
+
+def _kernel_pair_bytes(n_train: int, n_atoms: int) -> int:
+    """Bytes for the kernel matrix and its Cholesky factor."""
+    width = 1 + 3 * int(n_atoms)
+    length = int(n_train) * width
+    return length * length * 16
 
 
 def _threads_one() -> None:
@@ -267,6 +280,25 @@ def _install_cartesian_predict(gp_cls) -> None:
     gp_cls._optbench_cartesian_predict = True
 
 
+def _install_memory_guard(gp_cls) -> None:
+    if getattr(gp_cls, "_optbench_memory_guard", False):
+        return
+    original = gp_cls.train
+
+    def train(self, features, targets):
+        if len(features):
+            atoms = len(features[0].atoms)
+            if _kernel_pair_bytes(len(features), atoms) > _KERNEL_BYTES:
+                raise _MemoryBudget(
+                    f"Cartesian kernel for {len(features)} structures of {atoms} atoms "
+                    f"exceeds {_KERNEL_BYTES} bytes"
+                )
+        return original(self, features, targets)
+
+    gp_cls.train = train
+    gp_cls._optbench_memory_guard = True
+
+
 def _release_kernel_matrix(model) -> None:
     """Drop ``K_reg`` after the prefactor update has scaled ``L``.
 
@@ -360,6 +392,7 @@ def prepare() -> None:
     from gpatom.gpfp.gp import GaussianProcess
 
     _install_cartesian_predict(GaussianProcess)
+    _install_memory_guard(GaussianProcess)
 
     def predictions(images):
         _return_freed_pages()
@@ -679,6 +712,7 @@ def _run_band_search(
     previous = Path.cwd()
     hit_cap = False
     repeated = False
+    memory_stop = False
     aid_converged = False
     library_calls = 0
     spring = None
@@ -719,6 +753,8 @@ def _run_band_search(
                 hit_cap = True
             except RepeatedGeometry:
                 repeated = True
+            except _MemoryBudget:
+                memory_stop = True
             library_calls = int(band.force_calls)
             positions, energy, forces, candidate = _select_candidate(band, spec, cap)
         finally:
@@ -735,9 +771,16 @@ def _run_band_search(
         hit_cap=hit_cap,
         project_rigid=bool(np.all(mask) and n_free >= 2 and kind == "lj"),
     )
+    success = bool(scored["success"])
+    failure = scored["failure"]
+    reasons = list(scored["reasons"])
+    if memory_stop and not success:
+        if "crash" not in reasons:
+            reasons.insert(0, "crash")
+        failure = "crash"
     print(
-        f"{name} done calls={counter.calls} success={scored['success']} "
-        f"failure={scored['failure']} force={scored['force_norm']}",
+        f"{name} done calls={counter.calls} success={success} "
+        f"failure={failure} force={scored['force_norm']}",
         file=sys.stderr,
         flush=True,
     )
@@ -748,15 +791,16 @@ def _run_band_search(
         "verify_calls": int(counter.verify_calls),
         "counter": "harness",
         "comparable": True,
-        "success": scored["success"],
-        "failure": scored["failure"],
-        "reasons": scored["reasons"],
+        "success": success,
+        "failure": failure,
+        "reasons": reasons,
         "energy": scored["energy"],
         "force_norm": scored["force_norm"],
         "hessian_index": scored["hessian_index"],
         "converged": bool(aid_converged),
         "candidate": candidate,
         "repeated": bool(repeated),
+        "memory_stop": bool(memory_stop),
         "aid_force_calls": library_calls,
         "n_images": n_images,
         "spring": spring,
@@ -783,6 +827,7 @@ def _crash_record(name: str, calls: int, verify: int, crash: str) -> dict:
         "converged": False,
         "candidate": "crash",
         "repeated": False,
+        "memory_stop": False,
         "aid_force_calls": 0,
         "n_images": None,
         "spring": None,
