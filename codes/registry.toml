@@ -84,6 +84,16 @@ commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
 committed = "2026-10-05"
 note = "Activation-relaxation technique nouveau, plugin branch DEVEL. The benchmark contributor of a new entry is Rohit Goswami."
 
+[[code]]
+id = "tsase"
+name = "TSASE"
+role = "global optimization"
+repository = "https://github.com/henkelmangroup/tsase"
+ref = "master"
+commit = "98aac60b5d9905e81ee4e6b8c385f169258d0218"
+committed = "2025-09-26"
+note = "Version 1.0 at 98aac60b. Basin hopping and minima hopping. The Fortran Lennard-Jones extension was built with numpy.f2py from tsase/calculators/lj/code/lj.f. The campaigns do not call it. They call the harness Lennard-Jones potential, cutoff 40, no shift."
+
 # generated ASE and Sella templates
 
 [[template]]
