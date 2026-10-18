@@ -751,7 +751,7 @@ def _judge_saddle(payload: dict, climbed: dict, potential: HarnessSurface, calls
             reasons = ["hessian_index"] if index != 1 else ["force_norm"]
     elif not finite:
         reasons = ["divergence"]
-    elif calls_before_endpoints >= int(payload["climb_budget"]) + _SADDLE_CLIMB_OVERSHOOT or potential.calls >= search_cap:
+    elif calls_before_endpoints >= int(payload["climb_budget"]) or potential.calls >= search_cap:
         reasons = ["cap", "force_norm"]
     if potential.calls >= search_cap and "cap" not in reasons and reasons:
         reasons.append("cap")
