@@ -163,3 +163,5 @@ def test_bpga_build_keeps_the_integer_index_fix():
     assert "eleList[i//3]" in text
     ran = (ga / "MinimiseRan.py").read_text(encoding="utf-8")
     assert ",self.calcNum,Index,self.eleNums" in ran
+    overlap = (ga / "fixOverlap.py").read_text(encoding="utf-8")
+    assert "pushes > 100000" in overlap

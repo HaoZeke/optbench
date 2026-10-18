@@ -318,13 +318,16 @@ def build_bpga(source: Path | None = None) -> Path:
     ``Database.addEle`` indexes with ``i/3``. On Python 3 that is a float,
     so the build uses integer division. Four lines that mix a space into a
     tab indent are rewritten as tabs at the same column, and three ``print``
-    statements gain parentheses. No other source line is changed.
+    statements gain parentheses. ``fixOverlap`` stops after 100000
+    separation steps, because a crossover geometry can cycle in that
+    loop. No other source line is changed.
     """
     upstream = source or bpga_source()
     dest = Path(os.environ.get("OPTBENCH_BPGA_BUILD", f"/tmp/optbench-build/bpga-{BPGA_COMMIT[:12]}"))
     ga = dest / "GA"
     marker = dest / "COMMIT"
-    if marker.is_file() and marker.read_text(encoding="utf-8").strip() == BPGA_COMMIT and (ga / "NewPoolGA.py").is_file():
+    build_id = BPGA_COMMIT + "\noverlap-bound"
+    if marker.is_file() and marker.read_text(encoding="utf-8").strip() == build_id and (ga / "NewPoolGA.py").is_file():
         return ga
     if dest.exists():
         shutil.rmtree(dest)
@@ -370,6 +373,25 @@ def build_bpga(source: Path | None = None) -> Path:
     if text.count(needle) != 1:
         raise RuntimeError("MinimiseRan updatePool call was not the expected shape")
     ran.write_text(text.replace(needle, ",self.calcNum,Index,self.eleNums", 1), encoding="utf-8")
+    overlap = ga / "fixOverlap.py"
+    text = overlap.read_text(encoding="utf-8")
+    old = "\toverlaped = True\n\n\twhile overlaped:\n\n\t\toverlaped = False\n"
+    new = (
+        "\toverlaped = True\n"
+        "\tpushes = 0\n\n"
+        "\twhile overlaped:\n"
+        "\t\tif pushes > 100000:\n"
+        "\t\t\tbreak\n\n"
+        "\t\toverlaped = False\n"
+    )
+    if text.count(old) != 1:
+        raise RuntimeError("fixOverlap loop was not the expected shape")
+    text = text.replace(old, new, 1)
+    old = "\t\t\t\t\toverlaped = True\n"
+    new = "\t\t\t\t\tpushes += 1\n\t\t\t\t\toverlaped = True\n"
+    if text.count(old) != 1:
+        raise RuntimeError("fixOverlap push was not the expected shape")
+    overlap.write_text(text.replace(old, new, 1), encoding="utf-8")
     compiled = subprocess.run(
         [sys.executable, "-m", "compileall", "-q", str(ga)],
         capture_output=True,
@@ -377,7 +399,7 @@ def build_bpga(source: Path | None = None) -> Path:
     )
     if compiled.returncode != 0:
         raise RuntimeError(compiled.stderr or compiled.stdout or "BPGA failed to compile")
-    marker.write_text(BPGA_COMMIT + "\n", encoding="utf-8")
+    marker.write_text(build_id + "\n", encoding="utf-8")
     return ga
 
 

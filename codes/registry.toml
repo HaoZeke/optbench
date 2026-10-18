@@ -92,7 +92,7 @@ repository = "https://github.com/jbadavis/bpga"
 ref = "master"
 commit = "b32cd227e8071429825f990449048eb21c7f8730"
 committed = "2016-05-23"
-note = "Pool genetic algorithm at b32cd227. The repository has no release number, so the recorded version is 0. The build imports on Python 3: three print statements gain parentheses, four mixed tab indents are rewritten at the same column, MinimiseRan passes calcNum into Database.updatePool, and Database.addEle uses integer division. The potential is the harness Lennard-Jones kernel. The code's POSCAR command is answered in process. Homotop mutation expects two elements and is not used."
+note = "Pool genetic algorithm at b32cd227. The repository has no release number, so the recorded version is 0. The build imports on Python 3: three print statements gain parentheses, four mixed tab indents are rewritten at the same column, MinimiseRan passes calcNum into Database.updatePool, and Database.addEle uses integer division. fixOverlap stops after 100000 separation steps; a crossover geometry can otherwise cycle in that loop. The potential is the harness Lennard-Jones kernel. The code's POSCAR command is answered in process. Homotop mutation expects two elements and is not used."
 
 [[code]]
 id = "pybcga"
