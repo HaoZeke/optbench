@@ -1,0 +1,30 @@
+# counter harness. One fresh coordinate is one force call.
+# A repeated coordinate is free. A call at the cap is refused and is not counted.
+# A hit is a converged quench inside the energy window, with the call count strictly under the cap.
+# SciPy differential_evolution library defaults. maxiter is the force-call cap. Polish is the only quench that can hit. A hit is the first successful local minimization inside the energy window.
+nfailed 8
+code scipy
+code_version 1.18.1
+commit e4e854eaa8f18d807cd3496028e257e36caa93cc
+algorithm differential_evolution
+template scipy/de-lj38
+problem globalopt/lj38
+tuning default
+counter harness
+cap 1000000
+par2_mean 2000000
+wilson_low 0
+wilson_high 0.324407564884
+par2_median 2000000
+par2_median_low 2000000
+par2_median_high 2000000
+v2_nfailed 8
+v2_successes 0
+n 8
+n_cap 8
+n_wrong_stationary 0
+n_divergence 0
+n_crash 0
+energy_min -0.401393050516
+energy_max -9.49392645219e-05
+partial true

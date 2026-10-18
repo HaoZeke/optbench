@@ -1,0 +1,224 @@
+{
+  "bootstrap_resamples": 2000,
+  "bootstrap_seed": 20261015,
+  "note": "Harness counter. One fresh coordinate is one force call.",
+  "par_factor": 2,
+  "problem": "globalopt/lj38",
+  "runs": [
+    {
+      "algorithm": "basinhopping",
+      "cap": 1000000,
+      "code": "scipy",
+      "code_version": "1.18.1",
+      "commit": "e4e854eaa8f18d807cd3496028e257e36caa93cc",
+      "entry": "scipy-1.18.1-bh-lj38",
+      "legacy": {
+        "force_calls": null,
+        "force_calls_max": null,
+        "force_calls_min": null,
+        "median": null,
+        "nfailed": 8
+      },
+      "metrics": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 1000000,
+        "includes_failures": true,
+        "iqr": 0.0,
+        "iqr_high": 0.0,
+        "iqr_low": 0.0,
+        "mean": 2000000.0,
+        "median": 2000000.0,
+        "median_high": 2000000.0,
+        "median_low": 2000000.0,
+        "n": 8,
+        "n_cap": 8,
+        "n_crash": 0,
+        "n_divergence": 0,
+        "n_wrong_stationary": 0,
+        "nfailed": 8,
+        "par2_mean": 2000000.0,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 2000000.0,
+        "q75": 2000000.0,
+        "scoring": "par2-wilson-bootstrap",
+        "success_only_mean": null,
+        "success_rate": 0.0,
+        "successes": 0,
+        "wilson_high": 0.32440756488388023,
+        "wilson_low": 0.0
+      },
+      "parameters": {
+        "family": "globalopt",
+        "method": "scipy-bh"
+      },
+      "present_source": true,
+      "provenance": {
+        "code": "scipy",
+        "code_version": "1.18.1",
+        "commit": "e4e854eaa8f18d807cd3496028e257e36caa93cc",
+        "machine": {
+          "machine": "x86_64",
+          "node": "cursor",
+          "python": "3.12.3",
+          "system": "Linux"
+        },
+        "parameters": {
+          "family": "globalopt",
+          "method": "scipy-bh"
+        }
+      },
+      "starts": [
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -159.55063593146969,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 5.810882046205739,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "0",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -151.58862178512732,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 18.70381212255589,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "1",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -140.5980511017216,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 36.24667165488363,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "10",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": 1312.1133024272501,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 28533.67447160551,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "11",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -167.54089660196928,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0701070284588977,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "12",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -138.16243609207334,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 28.17359456495391,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "13",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -165.13466928029698,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 13.010148845295692,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "14",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -156.01508997332672,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 16.814048652619526,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "15",
+          "success": false,
+          "verify_calls": 0
+        }
+      ],
+      "tuning": "default"
+    }
+  ],
+  "schema": "optbench.result/v2",
+  "scoring": "par2-wilson-bootstrap",
+  "status": "archive"
+}
