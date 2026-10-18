@@ -161,15 +161,20 @@ _FlameSearch.track_failure_crash.unit = "count"
 
 def _benchmark(spec: dict):
     bound = spec
+    starts = selected_indices(spec["n"])
+    limit = spec["cap"]
+    seed_value = spec["seed"]
+    template_name = spec["template_id"]
+    problem_name = spec["problem_id"]
 
     class _Benchmark(_FlameSearch):
         param_names = ["seed", "start"]
-        params = [[spec["seed"]], selected_indices(spec["n"])]
+        params = [[seed_value], starts]
         timeout = 86400
-        cap = spec["cap"]
+        cap = limit
         spec = bound
-        template_id = spec["template_id"]
-        problem_id = spec["problem_id"]
+        template_id = template_name
+        problem_id = problem_name
 
     _Benchmark.__name__ = spec["class_name"]
     _Benchmark.__qualname__ = spec["class_name"]
