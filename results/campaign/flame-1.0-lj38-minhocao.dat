@@ -1,0 +1,32 @@
+# counter harness. One force call is one minhocao POSDATA evaluated by lennard_jones.
+# Positions cross the socket in Bohr and return as Hartree and Ha/Bohr with FLAME Bohr_Ang and Ha_eV.
+# The cluster is translated to the centre of a 1e7 Angstrom cell. The potential has no periodic images.
+# ioput is the documented minhocao start 1.d-2 5.d2 1.d5. earr tolerances are 2.d-3 1.d-1.
+# Local optimisation is the code default FIRE tolerance 2.d-4 Ha/Bohr.
+# Success is a relaxed enthalpy at or below -173.927427, the reference plus energy_above_minimum. The count stops before the next hop is charged.
+# Default minhocao. The local optimiser, softening, molecular-dynamics length, and FIRE tolerance are the params_new defaults (FIRE, GEOTOLMXF 2.d-4 Ha/Bohr, SOFTNIT 10, MDNIT 300, dtion_md 20). ioput is the documented start 1.d-2 5.d2 1.d5 and the earr tolerances are 2.d-3 1.d-1. The seed is 314159. Free boundaries select the Gaussian molecular fingerprint. VERBOSE is 0 so a geometry file is not written on every force call; global.mon still records every hop. The reference energy is the Cambridge LJ38 minimum -173.928427; success is that value plus the problem tolerance 0.001, which is the 2014 eOn stop -173.927427. failure_cap is the 2014 eOn basin-hopping step budget and is a safety stop. The potential is the harness Lennard-Jones kernel through msock.
+force_calls 794883
+force_calls_min 37000
+force_calls_max 5133757
+nfailed 1
+median 507530
+code FLAME
+code_version 1.0
+commit 99a615acaef6bc6afe44d895f666c6d60250f7d8
+algorithm minhocao
+template flame/lj38-minhocao
+problem globalopt/lj38
+tuning default
+counter harness
+par2_mean 986934.5
+wilson_low 0.945513803821
+wilson_high 0.998232567936
+par2_median 522629.5
+par2_median_low 337726.5
+par2_median_high 676075
+v2_nfailed 1
+v2_successes 99
+n 100
+energy_min -173.928424291
+energy_max -167.033672025
+calls_to_best_mean 879254.51
