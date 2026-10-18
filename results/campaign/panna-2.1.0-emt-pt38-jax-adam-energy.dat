@@ -1,0 +1,28 @@
+# counter harness. One force call is one full-batch loss and gradient.
+# The potential is the mlopt squared error on the archived Behler-Parrinello fingerprints.
+# PANNA Adam supplies the step. A call that reaches the cap is a cap failure.
+# Force coefficient 0 records force RMSE -1.
+template panna/emt-pt38-jax-adam-energy
+problem mlopt/emt-pt38
+code PANNA
+code_version 2.1.0
+commit 132a2df662598ecbbb2c9b8d37b992bb6ada6348
+algorithm Adam
+tuning default
+counter harness
+cap 10000
+n 50
+nfailed 0
+par2_mean 901.04
+median 266.5
+median_low 167.5
+median_high 797.5
+wilson_low 0.928652400867
+wilson_high 1
+contributor Rohit Goswami
+mean_epoch 901.04
+median_epoch 266.5
+mean_energy_rmse 0.00342955829451
+median_energy_rmse 0.00341822453308
+mean_force_rmse -1
+median_force_rmse -1
