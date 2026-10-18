@@ -84,6 +84,16 @@ commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
 committed = "2026-10-05"
 note = "Activation-relaxation technique nouveau, plugin branch DEVEL. The benchmark contributor of a new entry is Rohit Goswami."
 
+[[code]]
+id = "optax"
+name = "Optax"
+role = "machine-learning optimization"
+repository = "https://github.com/google-deepmind/optax"
+ref = "v0.2.8"
+commit = "107e9ad20ca62bcbee1a8c016daab71c690a678c"
+committed = "2026-03-20"
+note = "Optax 0.2.8 at 107e9ad20ca62bcbee1a8c016daab71c690a678c. Adam, Rprop, and L-BFGS train the PyAMFF 10-7 tanh network on the Behler-Parrinello fingerprints and the squared-error loss from pyamff 8037eb98. One harness call is one evaluation of that loss and its gradient with respect to the network parameters. L-BFGS uses the Optax zoom line search, and each line-search evaluation counts. Initial weights are uniform[-1, 1)."
+
 # generated ASE and Sella templates
 
 [[template]]

@@ -76,7 +76,18 @@ def run(
     from optbench.campaign import run as run_campaign
 
     loaded = load_template(root, template)
-    if loaded["engine"] == "rgsaddle-band":
+    if loaded["engine"] == "optax":
+        from optbench.runners.optax_ml import run as run_optax
+
+        summary = run_optax(
+            root,
+            problem,
+            loaded,
+            output=output,
+            limit=limit,
+            resume=resume,
+        )
+    elif loaded["engine"] == "rgsaddle-band":
         from optbench.rgsaddle_band import run as run_band
 
         summary = run_band(
