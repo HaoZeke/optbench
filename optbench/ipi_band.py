@@ -1025,7 +1025,14 @@ def write_outputs(
             parameters=parameters,
         ),
         "score": score_v2(
-            [{"force_calls": row["force_calls"], "success": row["success"]} for row in records],
+            [
+                {
+                    "force_calls": row["force_calls"],
+                    "success": row["success"],
+                    "failure": row.get("failure"),
+                }
+                for row in records
+            ],
             settings["cap"],
         ),
         "legacy": _legacy(records),
