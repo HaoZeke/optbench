@@ -1154,6 +1154,15 @@ def _job(pair, settings: dict) -> dict:
 
 
 def _execute(job: dict) -> dict:
+    import time
+
+    began = time.perf_counter()
+    record = _execute_search(job)
+    record["wall_seconds"] = time.perf_counter() - began
+    return record
+
+
+def _execute_search(job: dict) -> dict:
     _threads_one()
     settings = job["settings"]
     free = np.asarray(job["free"], dtype=bool)

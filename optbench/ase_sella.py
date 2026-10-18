@@ -1208,9 +1208,11 @@ def _reason_list(row: dict, cap: int, tol: float) -> list[str]:
 
 def _run_start(payload: dict) -> dict:
     import logging
+    import time
     import warnings
 
     warnings.filterwarnings("ignore", message="The system is likely too small")
+    began = time.perf_counter()
     logging.getLogger("sella").setLevel(logging.ERROR)
     bucket = CallCounter(int(payload["raw_cap"]))
     row = {
@@ -1261,6 +1263,7 @@ def _run_start(payload: dict) -> dict:
     row["success"] = not reasons
     row["failed"] = not row["success"]
     row["converged"] = "force_norm" not in reasons and "cap" not in reasons and "error" not in reasons
+    row["wall_seconds"] = time.perf_counter() - began
     return row
 
 
