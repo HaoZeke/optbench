@@ -64,6 +64,9 @@ def _specs() -> list[dict]:
     for template in list_templates(ROOT):
         if template.get("engine") != "tsase":
             continue
+        method = str((template.get("tsase") or {}).get("method") or "")
+        if method not in {"basin_hopping", "minima_hopping"}:
+            continue
         problem_id = str(template["problem"])
         if problem_id not in counts:
             counts[problem_id] = _geometry_count(problem_id)
