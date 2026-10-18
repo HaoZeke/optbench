@@ -1,0 +1,13 @@
+# LAMMPS Hessian-free truncated Newton on Morse bulk.
+id = "lammps/hftn-morse"
+engine = "lammps"
+problem = "minimization/morse-bulk"
+code = "lammps"
+code_version = "30 Sep 2026"
+commit = "8de817dd79bfe4525d5d39246a212d833e6dee07"
+algorithm = "Hessian-free truncated Newton"
+tuning = "default"
+note = "fix external pf/callback and pair_style zero. min_modify dmax 0.2 and norm two. The stop is the problem Euclidean force norm. Hessian index 0 is required."
+
+[lammps]
+min_style = "hftn"
