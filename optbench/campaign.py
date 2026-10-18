@@ -300,7 +300,10 @@ def run(
             workers=workers,
             work=work,
         )
-    if template["engine"] == "tsase":
+    # Saddle and minimization templates use engine tsase as well. Those
+    # go to the engine plugin. This runner is basin hopping and minima hopping.
+    tsase_method = str((template.get("tsase") or {}).get("method") or "")
+    if template["engine"] == "tsase" and tsase_method in {"basin_hopping", "minima_hopping"}:
         from .runners.tsase_global import run_template
 
         problem = resolve_problem(root, problem_name)

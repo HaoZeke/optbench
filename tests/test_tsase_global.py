@@ -82,7 +82,11 @@ def test_templates_use_the_registry_pin_and_the_problem_stop():
     registry = tomllib.loads((ROOT / "codes" / "registry.toml").read_text(encoding="utf-8"))
     pinned = next(row for row in registry["code"] if row["id"] == "tsase")
     assert pinned["commit"] == COMMIT
-    found = [row for row in list_templates(ROOT) if str(row["id"]).startswith("tsase/")]
+    found = [
+        row
+        for row in list_templates(ROOT)
+        if row.get("code") == "tsase" and str(row.get("problem") or "").startswith("globalopt/")
+    ]
     assert {row["id"] for row in found} == {
         "tsase/lj38-basinhopping",
         "tsase/lj38-basinhopping-tuned",
@@ -93,6 +97,7 @@ def test_templates_use_the_registry_pin_and_the_problem_stop():
     }
     for template in found:
         assert template["engine"] == "tsase"
+        assert template["tsase"]["method"] in {"basin_hopping", "minima_hopping"}
         assert template["commit"] == COMMIT
         assert template["code_version"] == "1.0"
         assert template["tuning"] in {"default", "tuned"}
