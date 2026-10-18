@@ -11,9 +11,9 @@ has to set it.
 
 ``time_search`` is the search. Track methods read the record that call
 wrote. The force count is a ``HarnessCounter`` entry. The initial
-Hessian displacements are included. ``setup`` raises
-``NotImplementedError`` when OptKing is not installed, and asv-runner
-stores that parameter as NaN.
+Hessian displacements are included. ``setup`` installs the pinned
+OptKing revision when it is absent. It raises ``NotImplementedError``
+when that install cannot run, and asv-runner stores that parameter as NaN.
 """
 
 from __future__ import annotations
@@ -30,7 +30,7 @@ os.environ.setdefault("OPENBLAS_NUM_THREADS", "1")
 os.environ.setdefault("MKL_NUM_THREADS", "1")
 os.environ.setdefault("NUMEXPR_NUM_THREADS", "1")
 
-from optbench.asv_tracks import TrackedSearch
+from optbench.asv_tracks import TrackedSearch as _TrackedSearch
 
 ROOT = Path(__file__).resolve().parents[1]
 SEED = "0"
@@ -176,12 +176,11 @@ def _load(spec: dict, seed: str, start: str) -> dict:
     return _compute(spec, seed, start)
 
 
-class _OptkingSearch(TrackedSearch):
+class _OptkingSearch(_TrackedSearch):
     """Shared track methods. ``time_search`` is the only timed search."""
 
     def setup(self, seed, start):
-        if not _optking_ready():
-            raise NotImplementedError("optking is not installed in this environment")
+        ensure_optking()
         self.record = None
 
     def time_search(self, seed, start):
