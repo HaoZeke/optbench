@@ -8,7 +8,7 @@
 # RMSE means are arithmetic means of the successes. force_rmse is -1 when the force coefficient is 0.
 # Behler-Parrinello squared-error loss on the problem trajectory. Fingerprints come from the archived fpParas.dat. The network has hidden layers 10 and 7, tanh, and a linear output, with NoScaler. Each start is uniform[-1, 1) from PCG64(20261015 + index). One harness call is one full-dataset loss and gradient. The stop is the L2 norm of each parameter-tensor gradient. pyamff 8037eb98 used the max absolute entry. Adam uses mu 0.01, b1 0.9, b2 0.999, and eps 1e-8. The step divides the full-dataset gradient by the structure count. The energy coefficient is 1 and the force coefficient is 0.1. The stop is 0.1 and the cap is 30000.
 problem mlopt/emt-pt38
-nfailed 16
+nfailed 50
 code aenet
 code_version 2.0.5
 commit 8f35990f5e3dd6cb296b953448cb11694d0cff3d
@@ -18,16 +18,15 @@ tuning default
 counter harness
 par2_mean 60000
 wilson_low 0
-wilson_high 0.193607680534
+wilson_high 0.0713475991334
 par2_median 60000
 par2_median_low 60000
 par2_median_high 60000
-v2_nfailed 16
+v2_nfailed 50
 v2_successes 0
-n 16
-n_cap 16
+n 50
+n_cap 50
 n_divergence 0
 n_crash 0
 n_wrong_stationary 0
 cap 30000
-partial true
