@@ -6,7 +6,14 @@ import numpy as np
 
 from optbench.campaign import geometry_archive, load_template, resolve_problem
 from optbench.counter import HarnessCounter
-from optbench.gpatom_band import _Spec, _cartesian_block, prepare, search_named
+from optbench.gpatom_band import (
+    _Spec,
+    _cartesian_block,
+    _cartesian_energy_variances,
+    _cartesian_mean,
+    prepare,
+    search_named,
+)
 from optbench.pes import load_pairs
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -77,6 +84,45 @@ def test_cartesian_kernel_matches_fpkernel():
             reference = kernel.kernel(fingerprints[left], fingerprints[right])
             built = _cartesian_block(positions[left], positions[right], 1.2, 0.4)
             assert np.allclose(reference, built, rtol=1e-10, atol=1e-10)
+
+
+def test_cartesian_mean_matches_the_kernel_vector():
+    prepare()
+    from ase import Atoms
+    from gpatom.gpfp.database import Database
+    from gpatom.gpfp.fingerprint import CartesianCoordFP
+    from gpatom.gpfp.gp import GaussianProcess
+    from gpatom.gpfp.kernel import FPKernel
+    from gpatom.gpfp.prior import ConstantPrior
+
+    rng = np.random.default_rng(5)
+    positions = rng.normal(size=(4, 6, 3))
+    fingerprints = [
+        CartesianCoordFP(Atoms(numbers=[1] * 6, positions=row))
+        for row in positions
+    ]
+    kernel = FPKernel("sqexp", params={"weight": 1.1, "scale": 0.35})
+    alpha = rng.normal(size=(3, 1 + 18))
+    vector = kernel.kernel_vector(fingerprints[0], fingerprints[1:])
+    reference = vector @ alpha.reshape(-1)
+    energy, forces = _cartesian_mean(positions[0], positions[1:], alpha, 1.1, 0.35)
+    assert np.isclose(energy, reference[0], rtol=1e-10, atol=1e-10)
+    assert np.allclose(forces.reshape(-1), reference[1:], rtol=1e-10, atol=1e-10)
+
+    database = Database()
+    for fingerprint in fingerprints[:3]:
+        database.add(fingerprint, float(rng.normal()), forces=rng.normal(size=(6, 3)))
+    gp = GaussianProcess(hp={}, kernel=kernel, prior=ConstantPrior(0.0), use_forces=True)
+    gp.train(database.fingerprintlist, database.get_all_energyforces(negative_forces=True))
+    fast, variance = gp.predict(fingerprints[3], get_variance=True)
+    built = kernel.kernel_vector(fingerprints[3], gp.X)
+    manual = built @ np.asarray(gp.model_vector)
+    manual += np.asarray(gp.calculate_prior_array([fingerprints[3]], get_forces=True))
+    full = gp.calculate_variance(True, built, fingerprints[3])
+    batched = _cartesian_energy_variances(gp, fingerprints[2:])
+    assert np.allclose(fast, manual, rtol=1e-10, atol=1e-10)
+    assert np.allclose(variance[0, 0], full[0, 0], rtol=1e-10, atol=1e-10)
+    assert np.allclose(batched[1], full[0, 0], rtol=1e-10, atol=1e-10)
 
 
 def test_short_cap_stops_on_the_first_lj38_pair():

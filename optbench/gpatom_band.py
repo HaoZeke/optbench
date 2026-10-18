@@ -26,7 +26,10 @@ index of 1, under the problem cap.
 MDMin reads the surrogate force. The variance is computed when AIDNEB
 reads the path uncertainty, which is the same number the library
 returns. For the Cartesian fingerprint the kernel block is the closed
-form of ``FPKernel``: same energy, gradients, and Hessian.
+form of ``FPKernel``: same energy, gradients, and Hessian. The mean
+prediction is that block contracted with the solved weights. The energy
+variance is the same corner of ``k K^{-1} k``, solved once for the
+whole band.
 """
 
 from __future__ import annotations
@@ -40,7 +43,7 @@ import tempfile
 import tomllib
 import traceback
 import warnings
-from concurrent.futures import ProcessPoolExecutor
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
 
 import numpy as np
@@ -157,6 +160,109 @@ def _install_cartesian_kernel(kernel_cls) -> None:
     kernel_cls._optbench_cartesian = True
 
 
+def _cartesian_mean(
+    query: np.ndarray,
+    training: np.ndarray,
+    alpha: np.ndarray,
+    weight: float,
+    scale: float,
+) -> tuple[float, np.ndarray]:
+    """Contract the Cartesian blocks with one weight vector per structure.
+
+    ``training`` is ``(structures, atoms, 3)`` and ``alpha`` is
+    ``(structures, 1 + 3 * atoms)``, in the same order as
+    ``kernel_vector``.
+    """
+    delta = query[None, :, :] - training
+    scale_sq = scale * scale
+    inverse = 1.0 / scale_sq
+    distance_sq = np.einsum("ijk,ijk->i", delta, delta)
+    value = (weight * weight) * np.exp(-distance_sq / (2.0 * scale_sq))
+    coefficient = value * inverse
+    energy_weight = alpha[:, 0]
+    force_weight = alpha[:, 1:].reshape((alpha.shape[0], query.shape[0], 3))
+    overlap = np.einsum("ijk,ijk->i", delta, force_weight)
+    energy = float(np.sum(value * energy_weight + coefficient * overlap))
+    forces = np.sum(
+        coefficient[:, None, None] * force_weight
+        - (coefficient * inverse * overlap)[:, None, None] * delta
+        - (coefficient * energy_weight)[:, None, None] * delta,
+        axis=0,
+    )
+    return energy, forces
+
+
+def _cartesian_energy_row(query: np.ndarray, training: np.ndarray, weight: float, scale: float) -> np.ndarray:
+    """Energy row of ``kernel_vector`` for Cartesian squared-exponential blocks."""
+    delta = query[None, :, :] - training
+    scale_sq = scale * scale
+    distance_sq = np.einsum("ijk,ijk->i", delta, delta)
+    value = (weight * weight) * np.exp(-distance_sq / (2.0 * scale_sq))
+    width = query.size + 1
+    blocks = np.empty((training.shape[0], width), dtype=np.float64)
+    blocks[:, 0] = value
+    blocks[:, 1:] = ((value / scale_sq)[:, None, None] * delta).reshape((training.shape[0], query.size))
+    return blocks.reshape(-1)
+
+
+def _cartesian_energy_variances(gp, queries) -> np.ndarray:
+    """Energy variances for several Cartesian fingerprints, one triangular solve."""
+    from scipy.linalg import cho_solve
+
+    query_pos = [_cartesian_positions(fingerprint) for fingerprint in queries]
+    train_pos = [_cartesian_positions(item) for item in gp.X]
+    if any(row is None for row in query_pos) or any(row is None for row in train_pos):
+        variances = []
+        for fingerprint in queries:
+            vector = gp.kernel.kernel_vector(fingerprint, gp.X)
+            variances.append(float(gp.calculate_variance(True, vector, fingerprint)[0, 0]))
+        return np.asarray(variances, dtype=np.float64)
+    training = np.stack(train_pos)
+    weight = float(gp.kernel.kerneltype.weight)
+    scale = float(gp.kernel.kerneltype.scale)
+    rows = np.stack([_cartesian_energy_row(pos, training, weight, scale) for pos in query_pos])
+    solved = cho_solve((gp.L, gp.lower), rows.T, overwrite_b=False, check_finite=False)
+    return weight * weight - np.einsum("ij,ji->i", rows, solved)
+
+
+def _install_cartesian_predict(gp_cls) -> None:
+    if getattr(gp_cls, "_optbench_cartesian_predict", False):
+        return
+    original = gp_cls.predict
+
+    def predict(self, fingerprint, get_variance=False, return_dkdx=False):
+        if return_dkdx or not self.use_forces or self.use_stress:
+            return original(self, fingerprint, get_variance=get_variance, return_dkdx=return_dkdx)
+        query = _cartesian_positions(fingerprint)
+        rows = [] if query is None else [_cartesian_positions(item) for item in self.X]
+        if query is None or any(row is None for row in rows):
+            return original(self, fingerprint, get_variance=get_variance, return_dkdx=return_dkdx)
+        training = np.stack(rows)
+        width = query.size + 1
+        alpha = np.asarray(self.model_vector, dtype=np.float64).reshape((len(rows), width))
+        energy, forces = _cartesian_mean(
+            query,
+            training,
+            alpha,
+            float(self.kernel.kerneltype.weight),
+            float(self.kernel.kerneltype.scale),
+        )
+        prediction = np.empty(width, dtype=np.float64)
+        prediction[0] = energy
+        prediction[1:] = forces.reshape(-1)
+        prediction += np.asarray(
+            self.calculate_prior_array([fingerprint], get_forces=True, get_stress=False),
+            dtype=np.float64,
+        )
+        if not get_variance:
+            return prediction, None
+        variance = float(_cartesian_energy_variances(self, [fingerprint])[0])
+        return prediction, np.array([[variance]], dtype=np.float64)
+
+    gp_cls.predict = predict
+    gp_cls._optbench_cartesian_predict = True
+
+
 def prepare() -> None:
     """Import ase-gpatom and install the ASE 3.29 compatibility shims."""
     global _READY
@@ -229,18 +335,27 @@ def prepare() -> None:
 
     aidneb.MDMin = QuietMDMin
     _install_cartesian_kernel(FPKernel)
+    from gpatom.gpfp.gp import GaussianProcess
+
+    _install_cartesian_predict(GaussianProcess)
 
     def predictions(images):
         energy = []
-        uncertainty = []
         for image in images:
             image.calc.calculate(
                 image,
-                properties=["energy", "forces", "uncertainty"],
+                properties=["energy", "forces"],
                 system_changes=["positions"],
             )
             energy.append(float(image.calc.results["energy"]))
-            uncertainty.append(2.0 * float(image.calc.results["uncertainty"]))
+        model = images[0].calc.model
+        queries = [model.new_fingerprint(image) for image in images]
+        raw = _cartesian_energy_variances(model.gp, queries)
+        uncertainty = []
+        for image, value in zip(images, raw, strict=True):
+            standard = float(np.sqrt(max(float(value), 0.0)))
+            image.calc.results["uncertainty"] = standard
+            uncertainty.append(2.0 * standard)
         uncertainty[0] = 0.0
         uncertainty[-1] = 0.0
         return {"energy": energy, "uncertainty": uncertainty}
@@ -958,7 +1073,8 @@ def run(
                 max_workers=workers,
                 mp_context=multiprocessing.get_context("spawn"),
             ) as pool:
-                for record in pool.imap_unordered(_execute, pending):
-                    records.append(record)
+                futures = [pool.submit(_execute, job) for job in pending]
+                for future in as_completed(futures):
+                    records.append(future.result())
                     publish()
     return publish()
