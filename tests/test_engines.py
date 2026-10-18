@@ -34,9 +34,13 @@ def test_named_engines_are_in_the_table():
     assert "sourceforge" in found["pykmc"]
     assert "1.3" in found["pykmc"]
     assert "LBOMD" in found["pykmc"]
-    assert found["optim"]
-    assert SHA256 in found["optim"]
     assert optim_available() == found["optim"]
+    if found["optim"] is None:
+        from optbench.engines.optim_search import binary_path
+
+        assert binary_path().is_file()
+    else:
+        assert SHA256 in found["optim"]
     assert pykmc_available() == found["pykmc"]
     assert found["partn"] is None or "libartn" in found["partn"]
     assert found["tsase"] is None or "ssneb.py" in found["tsase"]
@@ -63,6 +67,8 @@ def test_new_templates_match_a_problem_stop():
         "tsase/neb",
         "pykmc/lattice",
         "optim/unhooked",
+        "optim/lbfgs-lj38",
+        "optim/lbfgs-morse",
         "lammps/cg-lj38",
         "lammps/cg-morse",
         "lammps/cg-lj38-noise-s0",

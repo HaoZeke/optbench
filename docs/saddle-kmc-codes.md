@@ -45,14 +45,24 @@ success-only median. A row with no success has no median.
 | minimization/morse-bulk | lammps/sd-morse | 4/100 | 96 wrong stationary | 255.5 |
 | minimization/morse-bulk | lammps/hftn-morse | 3/100 | 97 wrong stationary | 511 |
 | minimization/morse-bulk | lammps/quickmin-morse | 5/100 | 95 wrong stationary | 2820 |
+| minimization/morse-bulk | lammps/fire-morse | 12/100 | 88 wrong stationary | 447 |
+| minimization/lj38-noise | lammps/cg-lj38-noise-s0 | 848/1000 | 148 cap, 3 wrong stationary, 1 divergence | 1410 |
+| minimization/lj38-noise | lammps/cg-lj38-noise-s1em4 | 896/1000 | 100 cap, 3 divergence, 1 wrong stationary | 2480 |
+| minimization/lj38-noise | lammps/cg-lj38-noise-s1em3 | 997/1000 | 3 divergence | 1776 |
+| minimization/lj38-noise | lammps/cg-lj38-noise-s1em2 | 874/1000 | 88 divergence, 38 wrong stationary | 1310 |
+| minimization/lj38-noise | lammps/sd-lj38-noise-s0 | 383/1000 | 617 cap | 5252 |
 | minimization/lj38 | dlfind/lbfgs-lj38 | 998/1000 | 1 cap, 1 wrong stationary | 184 |
 | minimization/lj38 | dlfind/sd-lj38 | 990/1000 | 10 cap | 2563.5 |
+| minimization/lj38-noise | dlfind/sd-lj38-noise-s0 | 990/1000 | 10 cap | 2563.5 |
+| minimization/lj38-noise | dlfind/sd-lj38-noise-s1em4 | 991/1000 | 8 cap, 1 wrong stationary | 2564 |
+| minimization/lj38-noise | dlfind/sd-lj38-noise-s1em3 | 996/1000 | 3 cap, 1 wrong stationary | 2371 |
 | minimization/lj38-noise | dlfind/lbfgs-lj38-noise-s0 | 998/1000 | 1 cap, 1 wrong stationary | 184 |
 | minimization/lj38-noise | dlfind/lbfgs-lj38-noise-s1em4 | 998/1000 | 2 wrong stationary | 184 |
 | minimization/lj38-noise | dlfind/lbfgs-lj38-noise-s1em3 | 999/1000 | 1 wrong stationary | 209 |
 | minimization/lj38-noise | dlfind/lbfgs-lj38-noise-s1em2 | 974/1000 | 26 wrong stationary | 199 |
 | minimization/morse-bulk | dlfind/lbfgs-morse | 32/100 | 68 wrong stationary | 77 |
 | minimization/morse-bulk | dlfind/sd-morse | 13/100 | 87 wrong stationary | 253 |
+| minimization/morse-bulk | optim/lbfgs-morse | 13/100 | 87 wrong stationary | 72 |
 | double-ended-saddle-search/lj38 | compass/sqnm | 47/50 | 3 cap | 1221 |
 | double-ended-saddle-search/lj38_2ts_separation | compass/sqnm | 41/51 | 9 cap, 1 wrong stationary | 2265 |
 | neb/Pt-heptamer | compass/sqnm | 13/13 | 0 | 548 |
@@ -67,6 +77,7 @@ success-only median. A row with no success has no median.
 | minimization/lj38-noise | rgmin/lj38-noise-lbfgs-s1em2-tuned | 884/1000 | 116 wrong stationary | 161 |
 | lowest-eigenvector/lj38 | pysisyphus/lanczos-lj38 | 160/200 | 40 divergence | 22 |
 | minimization/lj38 | pysisyphus/lbfgs-lj38 | 0/1000 | 1000 cap | — |
+| minimization/lj38 | pysisyphus/cg-lj38 | 254/1000 | 745 cap, 1 wrong stationary | 693 |
 
 The rgsaddle band campaigns on `neb/Pt-heptamer` and the three double-ended
 problems are on disk (12 templates each). The saddle-search catalog on
@@ -79,9 +90,23 @@ force stop. The v2 failures are Hessian index not 0. Zero noise is 996 of
 116 wrong stationary, success median 161.
 
 pARTn on `tsopt/LJ38` stops with `pARTn error -9: BOX EXPLOSION` on every
-start. The Lennard-Jones push leaves the cluster. The same build's mode
-search and the Morse tsopt row are the other two pARTn point scores.
-`nevalf` is not the count.
+start. That string is the library check in `block_perprelax.f90`: the
+perpendicular step aborts when any atom's force norm exceeds `1e4`. It is
+not a harness box, unit, or cluster-cell error. Start `0000` lies in
+`[50.000, 53.394]`, spans `3.24712`, `3.34183`, and `3.39366`. The missing-box cell is the diagonal
+`223.57464`. A cell of diagonal `1e6` aborted on the same step, call 49,
+energy `3.04939e6`. `engine_units` `lammps/lj` leaves force, length, and
+time unscaled, and the initial energy is `-167.657` with force norm
+`2.98891`. With `fire_dt_init` 0.05 the library's own FIRE step grew to
+length 10.2, which is larger than the cluster, and the next atomic force
+crossed `1e4`. The library's `LAMMPS.LJ.SaddleRefine` input for these same
+geometries sets free boundaries, timestep 0.015, and `nperp_limitation`
+`10, 20, 30, 40, 50`. Those settings on this `next_displ` loop still
+aborted, at call 147, energy `4.0435e6`, after a perpendicular step of
+1.656. The LAMMPS example caps that step with `min_style fire`. The
+standalone FIRE cap in `m_artn_fire.f90` is commented out. The mode search
+and the Morse tsopt row are the other two pARTn point scores. `nevalf` is
+not the count.
 
 TSASE MDMin on LJ38 hits the cap of 10000 on every start. The step limit
 keeps the force above the stop. The cap record has no final force norm,
@@ -93,11 +118,28 @@ Pin `optim`. The snapshot is `http://www-wales.ch.cam.ac.uk/svn.tar.bz2`,
 122743078 bytes, sha256
 `02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f`.
 There is no git commit. `OPTIM/source/py.f90` is the Paramonov–Yaliraki
-ellipsoid potential, not a Python hook. The external hook in the Wales tree
-is `INTERFACES/pysocket/ase_interface.f90`. That socket was not built, and
-the extracted tree has no `optim` binary. `optim/unhooked` writes no number.
-OPTIM's own counter is not a score. PATHSAMPLE is in the same snapshot and
-has the same blocker.
+ellipsoid potential, not a Python hook. The external hook is the ASE socket
+in `INTERFACES/pysocket/ase_interface.f90`. The tarball does not contain
+`fmlip_relay.py`. The harness server speaks that protocol: each `COMPUTE`
+is one `pes.evaluate`. `EV` and `ANG` scales are 1. The OPTIM target was
+built with gfortran, `WITH_ALIGN` off and `WITH_OPENMP` off. Minimization
+L-BFGS sends `BFGSMIN` with an RMS stop equal to the Euclidean force norm
+divided by `sqrt(3N)`, `UPDATES` 4, `MAXSTEP` 0.2, and `STEPS` equal to
+the cap. The relay refuses the call that would pass the cap and does not
+count it. A one-start check on LJ38 `cluster_0000` made 228 harness calls.
+OPTIM reported 228 energy-and-gradient calls. The stored point re-evaluates
+to energy `-163.2168156980899` and Euclidean force `0.00817050460275337`.
+That check is not a campaign row. Morse bulk L-BFGS is 13 of 100. The
+other 87 meet the force stop with a Hessian index other than 0, so they
+are wrong stationary. The success median is 72. Start `pos_0000` took 55
+harness calls and stopped at force `0.000842553062284986`, energy
+`-1421.4513232624358`, vibrational index 6. `optim/unhooked` writes nothing.
+Noise is not scored: the relay has no noisy-force window. Saddle search,
+NEB, tsopt, and hTST are not scored: those OPTIM keywords are not connected
+to this socket. PATHSAMPLE is in the same snapshot. The PATHSAMPLE target linked
+(gfortran, `WITH_OPENMP` off). It does not call `pes.evaluate`. It writes
+`odata.*` and submits the `EXEC` program, which is OPTIM. No PATHSAMPLE
+number is written.
 
 ## pARTn
 
@@ -137,8 +179,25 @@ atoms on the first LJ38 step.
 
 On Morse bulk the force stop is met and the Hessian index is not 0 for 95
 of 100 conjugate-gradient starts, 96 of 100 steepest-descent starts, 97 of
-100 Hessian-free Newton starts, and 95 of 100 quickmin starts. FIRE and the
-LJ38 noise rows are not in these rows. `fix neb` needs a multi-partition MPI
+100 Hessian-free Newton starts, 95 of 100 quickmin starts, and 88 of 100
+FIRE starts. FIRE is 12 of 100, success median 447. A fresh Hessian at the
+stored CG point `pos_0000` (67 calls, force `0.0006534685520009086`, energy
+`-1421.4513146864156`) has vibrational eigenvalues `-7.023206723482451` and
+`-6.994643641886293` after the three translations are removed. `pos_0002`
+(75 calls, force `0.0008961440060698902`) has seven eigenvalues from
+`-8.207944407072567` to `-5.991636654081658`. `pos_0013` meets the stop
+with index 0. The curvature tolerance at the `1e-3` force stop is `0.001`
+(the Hessian Frobenius norms are `419.652` and `418.714`). Both that
+tolerance and the fixed `1e-6` cutoff count the same negative modes. These
+are index-2 and index-7 stationary points, not a cutoff artifact. Zero-noise
+LJ38 conjugate gradient is 848 of 1000, the same failure split as the clean
+LJ38 row, success median 1410. At sigma `1e-4` it is 896 of 1000, 100 cap,
+3 divergence, 1 wrong stationary, success median 2480. At sigma `1e-3` it
+is 997 of 1000, 3 divergence, success median 1776. At sigma `1e-2` it is
+874 of 1000, 88 divergence, 38 wrong stationary, success median 1310.
+Zero-noise steepest descent is 383 of 1000, 617 cap, success median 5252,
+the same split as the clean LJ38 row. The other steepest-descent, Hessian-free
+Newton, quickmin, and FIRE noise rows are not in these rows. `fix neb` needs a multi-partition MPI
 run and is not scored. `prd`, `tad`,
 `hyper`, and `dynamical_matrix` are not scored. The Al, Pt, and aladatom
 problems are EAM, and the harness has no EAM evaluator.
@@ -151,9 +210,12 @@ score. Coordinates stay in the harness unit. The component tolerance is the
 Euclidean stop divided by `sqrt` of the free components. On Morse bulk L-BFGS the force stop is met and the Hessian index is not 0
 for 68 of 100 starts. Steepest descent on LJ38 is 990 of 1000, 10 cap,
 success median 2563.5. Steepest descent on Morse bulk is 13 of 100, 87
-wrong stationary, success median 253. Conjugate gradient and the
-steepest-descent noise rows are not in these rows. NEB (`icoord` 190) and
-the dimer (`icoord` near 210) are not in these rows.
+wrong stationary, success median 253. Steepest descent on zero-noise LJ38
+is 990 of 1000, 10 cap, success median 2563.5. At sigma `1e-4` it is 991
+of 1000, 8 cap, 1 wrong stationary, success median 2564. At sigma `1e-3`
+it is 996 of 1000, 3 cap, 1 wrong stationary, success median 2371. Conjugate
+gradient and the `1e-2` steepest-descent noise row are not in these rows. NEB (`icoord` 190)
+and the dimer (`icoord` near 210) are not in these rows.
 
 ## COMPASS
 
@@ -178,8 +240,8 @@ The other 40 are divergence. The success median is 22. `dx` is 5e-3 and
 gradient, and steepest descent keep the library step limits in Bohr and
 call the potential in the harness unit. On start `cluster_0000` each one
 used the cap of 10000 with the force still above 0.01. The 1000-start
-L-BFGS row does the same on every start. Conjugate gradient and steepest
-descent were not run. The dimer drops translation and not rotation. The NEB
+L-BFGS row does the same on every start. Conjugate gradient is 254 of 1000,
+745 cap, 1 wrong stationary, success median 693. Steepest descent is running. The dimer drops translation and not rotation. The NEB
 springs stay at `k_min` 0.1 and `k_max` 0.3. Those two drivers are not
 connected, so there is no pysisyphus row for `tsopt/*`,
 `saddle-search/pt-island`, `double-ended-saddle-search/*`, or
@@ -196,7 +258,12 @@ No commit is pinned.
 
 The lane name is SourceForge lkmc release 1.3, not `hockyg/PyKMC`. The
 archive is Perl from February 2010. `TransSearchSSH.pl` shells out to
-`LBOMD.exe`, which is not in the zip. There is no licence file and no
+`LBOMD.exe`, and the zip also names `LBOMD.Linux` and `LBOMD.Darwin`.
+None of those files is in release 1.3. The SourceForge file
+`LKMC0.1.3.zip` (65791 bytes) is the same Perl `Scripts/` tree and has no
+Fortran or C source. A 2018 materials-science thread asks whether LBOMD
+is public and describes it as Loughborough's in-house molecular dynamics
+code; no source repository is given. There is no licence file and no
 potential callback. `pykmc/lattice` writes nothing.
 
 ## Codes that were not scored

@@ -90,10 +90,15 @@ def test_rendered_pages_use_the_board_rank():
     assert "2.6.0 legacy" not in tsopt
     assert "tsopt-LJ38-profile.svg" in tsopt
     saddle = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "saddle-search.org").read_text(encoding="utf-8")
-    assert "No full harness row." in saddle
+    assert 'data-board-table="ranked" data-problem="saddle-search/pt-island"' in saddle
+    assert "rgsaddle/saddle-dimer-rotskip-tuned" in saddle
+    assert 'data-field="par2_mean">10127.1<' in saddle
+    assert "No full harness row." not in saddle
     assert "eon-3.5.0-saddle-pt-dimer" in saddle
     assert "not yet on the harness counter" in saddle
     assert "Per-search cost" not in saddle
+    assert "noise/rgmin-dogleg-s0" in minimization
+    assert 'data-field="par2_mean">81.881<' in minimization
     codes = (ROOT / "docs" / "include" / "codes.org").read_text(encoding="utf-8")
     assert "Rohit Goswami" in codes
     assert "4d8b34baf1ba" in codes
