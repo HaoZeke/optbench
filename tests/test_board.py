@@ -3,7 +3,9 @@
 import json
 from pathlib import Path
 
-from optbench.board import build_board, write_board
+import pytest
+
+from optbench.board import MissingAsvCommit, build_board, write_board
 from optbench.score import wilson_interval
 
 PIN = "a" * 40
@@ -430,10 +432,14 @@ def test_profile_lines_up_the_same_starts(tmp_path: Path):
     assert rho[dear][0] == 0.0
     assert rho[cheap][1] == 1.0
     assert rho[dear][1] == 1.0
-    assert (tmp_path / "board" / "plots" / "minimization-toy-profile.svg").stat().st_size > 0
+    profile_svg = (tmp_path / "board" / "plots" / "minimization-toy-profile.svg").read_text(encoding="utf-8")
+    assert "DejaVuSans-" not in profile_svg
+    assert profile_svg.count("<use") < 40
     assert (tmp_path / "board" / "plots" / "minimization-toy-profile.png").stat().st_size > 0
+    assert (tmp_path / "board" / "plots" / "minimization-toy-profile.webp").read_bytes().startswith(b"RIFF")
     assert (tmp_path / "board" / "plots" / "minimization-toy-cost.svg").stat().st_size > 0
     assert (tmp_path / "board" / "plots" / "minimization-toy-cost.png").stat().st_size > 0
+    assert (tmp_path / "board" / "plots" / "minimization-toy-cost.webp").read_bytes().startswith(b"RIFF")
     include = (tmp_path / "docs" / "include" / "v2-board.org").read_text(encoding="utf-8")
     assert "toy/cheap" in include
     assert "PAR-2" in include
@@ -455,6 +461,8 @@ def test_plot_bytes_match_across_two_writes(tmp_path: Path):
         "minimization-toy-cost.svg",
         "minimization-toy-profile.png",
         "minimization-toy-cost.png",
+        "minimization-toy-profile.webp",
+        "minimization-toy-cost.webp",
     ):
         assert (first / name).read_bytes() == (second / name).read_bytes()
 
@@ -473,12 +481,15 @@ def test_a_partial_problem_drops_a_plot_left_from_an_earlier_run(tmp_path: Path)
     site.mkdir(parents=True)
     site_stale = site / "minimization-toy-cost.png"
     site_stale.write_text("stale", encoding="utf-8")
+    site_webp = site / "minimization-toy-profile.webp"
+    site_webp.write_bytes(b"stale-webp")
 
     written = write_board(tmp_path, tmp_path / "board")
 
     assert written["problems"]["minimization/toy"]["ranked"] == []
     assert not stale.exists()
     assert not site_stale.exists()
+    assert not site_webp.exists()
     assert list(plots.iterdir()) == []
     assert list(site.iterdir()) == []
 
@@ -628,6 +639,15 @@ def test_a_campaign_and_its_asv_track_are_one_row(tmp_path: Path):
     assert ranked[0]["n"] == 2
     assert ranked[0]["mean_calls"] == 15
     assert ranked[0]["par2_mean"] == 15
+
+
+def test_a_missing_asv_commit_is_not_pinned_from_the_working_tree(tmp_path: Path):
+    import subprocess
+
+    subprocess.run(["git", "init", "-q"], cwd=tmp_path, check=True)
+    _asv_track(tmp_path, "bench_rgmin.RgminLj38Lbfgs", [10.0, 20.0], commit="d" * 40)
+    with pytest.raises(MissingAsvCommit, match="not in this checkout"):
+        build_board(tmp_path)
 
 
 def test_a_one_start_asv_track_stays_out_of_the_ranked_mean(tmp_path: Path):

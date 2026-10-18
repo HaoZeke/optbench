@@ -1,8 +1,9 @@
 #+TITLE: v2 board
 #+OPTIONS: toc:nil num:nil author:nil
 
-The ranked table is the v2 PAR-2 mean on the problem's full start set.
-A row with fewer starts is partial and stays off that table.
+Each column is one code.
+The cell is that code's best full harness run, ranked by the v2 PAR-2 mean.
+The problem page lists every template, including history and partial rows.
 =uv run optbench board= writes this page from the committed results.
 It does not run a campaign.
 

@@ -293,6 +293,18 @@ def statistics(
 
 
 @app.command
+def sitesize(
+    root: Path = Path("."),
+    build: Path = Path("docs/build"),
+) -> None:
+    """Measure built pages and fail when one exceeds the weight budget."""
+    from optbench.site_weight import check_site_weight
+
+    destination = build if build.is_absolute() else root / build
+    raise SystemExit(check_site_weight(destination))
+
+
+@app.command
 def board(
     root: Path = Path("."),
     output: Path = Path("results/board"),

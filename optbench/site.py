@@ -263,6 +263,8 @@ def problem_html(
             lines.append("</dl>")
     if smoke_note:
         lines.append(f'<p class="bench-smoke">{html.escape(smoke_note)}</p>')
+    lines.append('<details class="bench-details">')
+    lines.append("<summary>Legacy 2014 archive</summary>")
 
     prepared = []
     for rank, (row, fields) in enumerate(canonical_rows, 1):
@@ -317,6 +319,7 @@ def problem_html(
         lines.append("</tr>")
     lines.append("</tbody></table></div>")
     lines.append(_plot(prepared, primary, "Legacy 2014 scores"))
+    lines.append("</details>")
     lines.append("</section>")
     return "\n".join(lines)
 
@@ -498,7 +501,7 @@ def _codes_html(root: Path, document: dict) -> str:
         group = grouped[name]
         keys = _code_keys(group)
         lines.append(f"<h3>{html.escape(name)}</h3>")
-        lines.append("<table>")
+        lines.append('<div class="bench-scroll"><table>')
         lines.append("<caption>Registry pins.</caption>")
         lines.append(
             "<thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>"
@@ -512,7 +515,7 @@ def _codes_html(root: Path, document: dict) -> str:
             lines.append(f"<td>{html.escape(commit[:12])}</td>")
             lines.append(f'<td><a href="{html.escape(repo)}">{html.escape(repo)}</a></td>')
             lines.append("</tr>")
-        lines.append("</tbody></table>")
+        lines.append("</tbody></table></div>")
         best: list[tuple[dict, dict]] = []
         for problem in (document.get("problems") or {}).values():
             matched = [row for row in problem.get("ranked") or [] if _matches_code(row, keys)]
@@ -522,7 +525,7 @@ def _codes_html(root: Path, document: dict) -> str:
             best.append((problem, matched[0]))
         best.sort(key=lambda item: item[0]["id"])
         if best:
-            lines.append('<table data-board-table="code-best">')
+            lines.append('<div class="bench-scroll"><table data-board-table="code-best">')
             lines.append("<caption>Best full harness run on each problem.</caption>")
             lines.append(
                 "<thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th>"
@@ -541,7 +544,7 @@ def _codes_html(root: Path, document: dict) -> str:
                 for field in score_fields:
                     lines.append(f'<td data-field="{field}">{html.escape(cells[field])}</td>')
                 lines.append("</tr>")
-            lines.append("</tbody></table>")
+            lines.append("</tbody></table></div>")
         else:
             lines.append("<p>No full ranked run.</p>")
         missing: list[str] = []
@@ -587,9 +590,16 @@ def _smoke_note(root: Path) -> str:
     )
 
 
+def _suite_problem_link(problem: dict, templates: bool = False) -> str:
+    ident = str(problem.get("id") or "")
+    name = ident.split("/", 1)[1] if "/" in ident else ident
+    anchor = f"{name}-templates" if templates else name
+    return f"#{anchor}"
+
+
 def render(root: Path) -> None:
     """Write the site tables from the v2 scorer."""
-    from .board import plot_names_for, render_problem_section, write_board
+    from .board import _registry, plot_names_for, render_problem_section, summary_codes, summary_table, write_board
 
     root = Path(root)
     document = write_board(root, root / "results" / "board")
@@ -620,11 +630,16 @@ def render(root: Path) -> None:
 
     suite_dir = root / "docs" / "orgmode" / "generated" / "suites"
     suite_dir.mkdir(parents=True, exist_ok=True)
+    codes = summary_codes(document, _registry(root))
     for suite in order:
         group = by_suite.get(suite)
         if not group:
             continue
         sections: list[str] = []
+        views = [_board_view(problem, document) for problem in _sorted_problems(group)]
+        sections.append('<section class="bench" id="summary">')
+        sections.append(summary_table(views, codes, _suite_problem_link))
+        sections.append("</section>")
         for problem in sorted(group, key=lambda item: item["problem"].lower()):
             view = _board_view(problem, document)
             note = smoke if problem["id"] == "saddle-search/pt-island" else ""
