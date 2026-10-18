@@ -18,6 +18,14 @@ from optbench.surfaces import lennard_jones, morse_smooth_linear, read_con
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def test_island_saddle_success_is_a_cartesian_connection():
+    problem = resolve_problem(ROOT, "saddle-search/pt-island")
+    success = problem["scoring"]["v2"]["success"]
+    assert "Cartesian RMSD" in success
+    assert "Kabsch" not in success
+    assert "max_force_calls" not in (problem.get("convergence") or {})
+
+
 def test_lennard_jones_minimum_is_minus_one():
     distance = 2.0 ** (1.0 / 6.0)
     energy, gradient = lennard_jones(np.array([[0.0, 0.0, 0.0], [distance, 0.0, 0.0]]))
@@ -35,6 +43,42 @@ def test_morse_smooth_linear_is_flat_at_the_cutoff():
     )
     assert energy == pytest.approx(0.0, abs=1e-12)
     assert np.linalg.norm(gradient) == pytest.approx(0.0, abs=1e-10)
+
+
+def test_morse_pair_loop_matches_the_numpy_sum():
+    from optbench.surfaces import _morse_numpy
+
+    positions = np.array(
+        [
+            [0.2, 0.1, 0.0],
+            [2.4, -0.3, 0.4],
+            [10.1, 1.2, 0.5],
+            [0.4, 9.6, 1.1],
+        ]
+    )
+    kwargs = dict(
+        depth=0.7102,
+        alpha=1.6047,
+        r0=2.897,
+        cutoff=9.5,
+        cell=np.array([12.0, 11.0, 8.0]),
+        pbc=(True, True, False),
+    )
+    energy, gradient = morse_smooth_linear(positions, **kwargs)
+    reference_energy, reference_gradient = _morse_numpy(positions, **kwargs)
+    assert energy == pytest.approx(reference_energy, abs=1e-9, rel=1e-12)
+    assert gradient == pytest.approx(reference_gradient, abs=1e-9)
+    shifted = positions.copy()
+    shifted[1] += np.array([0.05, -0.02, 0.01])
+    energy, gradient = morse_smooth_linear(shifted, **kwargs)
+    reference_energy, reference_gradient = _morse_numpy(shifted, **kwargs)
+    assert energy == pytest.approx(reference_energy, abs=1e-9, rel=1e-12)
+    assert gradient == pytest.approx(reference_gradient, abs=1e-9)
+    shifted[0] += np.array([1.4, -0.8, 0.6])
+    energy, gradient = morse_smooth_linear(shifted, **kwargs)
+    reference_energy, reference_gradient = _morse_numpy(shifted, **kwargs)
+    assert energy == pytest.approx(reference_energy, abs=1e-9, rel=1e-12)
+    assert gradient == pytest.approx(reference_gradient, abs=1e-9)
 
 
 def test_read_con_marks_fixed_atoms_and_the_box():

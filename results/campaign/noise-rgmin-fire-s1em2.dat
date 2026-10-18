@@ -1,0 +1,32 @@
+# counter harness. One force call is one clean energy and gradient.
+# Noise is added after the call. A repeated coordinate keeps that sample.
+# The index uses the clean Hessian. Six rigid modes are removed.
+# A curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6).
+# Energy and Kabsch RMSD are not applied: the problem file has no per-start reference.
+# Default profile. The stop is the noise-aware force norm, and at positive sigma the clean energy over the last window. The index is the clean Hessian with the rigid-mode rule.
+force_calls 376
+force_calls_min 153
+force_calls_max 1046
+nfailed 16
+median 341
+code rgmin
+code_version 0.4.1
+commit 9a2e7ff11fa65826f9e847856bee10d3d70b7156
+algorithm FIRE
+template noise/rgmin-fire-s1em2
+tuning default
+counter harness
+problem minimization/lj38-noise
+sigma 0.01
+par2_mean 4085.193
+wilson_low 0.785561618297
+wilson_high 0.834058137925
+par2_median 385
+par2_median_low 374
+par2_median_high 399
+v2_nfailed 189
+v2_successes 811
+n 1000
+cap 10000
+energy_min -170.57858686
+energy_max -147.781568609

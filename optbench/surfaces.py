@@ -10,7 +10,10 @@ the energy and the radial force are both zero at ``rc``.
 
 from __future__ import annotations
 
+import hashlib
 import math
+import subprocess
+import tempfile
 from pathlib import Path
 
 import numpy as np
@@ -118,7 +121,7 @@ def lennard_jones(
     return energy, gradient
 
 
-def morse_smooth_linear(
+def _morse_numpy(
     positions: Array,
     *,
     depth: float,
@@ -128,13 +131,7 @@ def morse_smooth_linear(
     cell: Array | None = None,
     pbc: tuple[bool, bool, bool] = (False, False, False),
 ) -> tuple[float, Array]:
-    """Energy and ``dE/dx`` for LAMMPS ``morse/smooth/linear``.
-
-    ``der_at_cutoff`` in the LAMMPS pair is the Morse ``dE/dr`` at the
-    cutoff. Subtracting it from the slope, and subtracting
-    ``(r - rc) * der_at_cutoff`` from the energy, puts both at zero
-    on the cutoff sphere.
-    """
+    """NumPy pair sum. The compiled loop is the same formula."""
     pos = np.asarray(positions, dtype=np.float64)
     count = len(pos)
     alpha_dr = -alpha * (cutoff - r0)
@@ -160,6 +157,112 @@ def morse_smooth_linear(
     np.add.at(gradient, left, vector)
     np.add.at(gradient, right, -vector)
     return energy, gradient
+
+
+_MORSE_LIB = None
+_MORSE_TRIED = False
+
+
+def _morse_library():
+    """Compile the pair loop once. A missing compiler keeps the NumPy sum."""
+    global _MORSE_LIB, _MORSE_TRIED
+    if _MORSE_TRIED:
+        return _MORSE_LIB
+    _MORSE_TRIED = True
+    source = Path(__file__).with_name("morse_pair.c")
+    if not source.is_file():
+        return None
+    flags = "-O3 -march=native -fPIC -shared"
+    digest = hashlib.sha256(source.read_bytes() + flags.encode()).hexdigest()[:16]
+    library = Path(tempfile.gettempdir()) / f"optbench-morse-{digest}.so"
+    if not library.is_file():
+        try:
+            subprocess.check_call(
+                [
+                    "gcc",
+                    "-O3",
+                    "-march=native",
+                    "-fPIC",
+                    "-shared",
+                    "-o",
+                    str(library),
+                    str(source),
+                    "-lm",
+                ],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+            )
+        except (OSError, subprocess.CalledProcessError):
+            return None
+    import ctypes
+
+    loaded = ctypes.CDLL(str(library))
+    loaded.morse_pair_energy.restype = ctypes.c_double
+    loaded.morse_pair_energy.argtypes = [
+        ctypes.POINTER(ctypes.c_double),
+        ctypes.POINTER(ctypes.c_double),
+        ctypes.c_int,
+        ctypes.c_double,
+        ctypes.c_double,
+        ctypes.c_double,
+        ctypes.c_double,
+        ctypes.c_double,
+        ctypes.c_double,
+        ctypes.c_double,
+        ctypes.c_int,
+        ctypes.c_int,
+        ctypes.c_int,
+    ]
+    _MORSE_LIB = loaded
+    return loaded
+
+
+def morse_smooth_linear(
+    positions: Array,
+    *,
+    depth: float,
+    alpha: float,
+    r0: float,
+    cutoff: float,
+    cell: Array | None = None,
+    pbc: tuple[bool, bool, bool] = (False, False, False),
+) -> tuple[float, Array]:
+    """Energy and ``dE/dx`` for LAMMPS ``morse/smooth/linear``.
+
+    ``der_at_cutoff`` in the LAMMPS pair is the Morse ``dE/dr`` at the
+    cutoff. Subtracting it from the slope, and subtracting
+    ``(r - rc) * der_at_cutoff`` from the energy, puts both at zero
+    on the cutoff sphere.
+    """
+    pos = np.ascontiguousarray(positions, dtype=np.float64)
+    if pos.ndim != 2 or pos.shape[1] != 3:
+        raise ValueError("positions must have shape (n, 3)")
+    library = _morse_library()
+    if library is None:
+        return _morse_numpy(
+            pos, depth=depth, alpha=alpha, r0=r0, cutoff=cutoff, cell=cell, pbc=pbc
+        )
+    count = int(pos.shape[0])
+    gradient = np.zeros_like(pos)
+    lengths = np.zeros(3, dtype=np.float64) if cell is None else np.asarray(cell, dtype=np.float64)
+    import ctypes
+
+    energy = library.morse_pair_energy(
+        pos.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
+        gradient.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
+        count,
+        float(depth),
+        float(alpha),
+        float(r0),
+        float(cutoff),
+        float(lengths[0]),
+        float(lengths[1]),
+        float(lengths[2]),
+        int(bool(pbc[0])),
+        int(bool(pbc[1])),
+        int(bool(pbc[2])),
+    )
+    return float(energy), gradient
 
 
 def load_con(path: Path) -> tuple[Array, Array, Array]:
