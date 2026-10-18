@@ -11,6 +11,12 @@ starts = 100
 [convergence]
 energy_above_minimum = 0.001
 
+[reference]
+energy = -173.928427
+symmetry = "Oh"
+page = "https://www-wales.ch.cam.ac.uk/~jon/structures/LJ/tables.150.html"
+points = "https://www-wales.ch.cam.ac.uk/~jon/structures/LJ/points/38"
+
 [input]
 archive_path = "website/globalopt/lj38/100_lj38.tar.gz"
 

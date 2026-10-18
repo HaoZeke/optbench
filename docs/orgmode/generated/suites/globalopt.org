@@ -75,9 +75,11 @@
    </tbody></table></div></section><section class="bench" id="lj100-binary" data-problem="globalopt/lj100-binary">
    <h2>Binary Lennard-Jones 100</h2>
    <dl class="bench-rule">
+   <dt>Cap</dt><dd>2000000 force calls</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
    <dt>Starts</dt><dd>100</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
-   <dt>Note</dt><dd>The archived files record energies. They do not record force calls.</dd>
+   <dt>Note</dt><dd>The archived files record energies. They do not record force calls. Success is an energy at or below the improved Cambridge minimum plus 0.001. The cap is the archived evaluation budget of 2000000.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
    <p class="bench-gaps">No committed harness run.</p>
@@ -133,7 +135,11 @@
    </section><section class="bench" id="lj150" data-problem="globalopt/lj150">
    <h2>lj150</h2>
    <dl class="bench-rule">
+   <dt>Cap</dt><dd>10000000 force calls</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
+   <dt>Starts</dt><dd>100</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
+   <dt>Note</dt><dd>Success is an energy at or below the Cambridge Cluster Database N=150 minimum plus 0.001. The start set is the 100 numbered coordinate files. The cap of 10000000 force calls is above the archived nosym energy-call mean 6.9596491e+05 plus ten times its standard deviation 5.8454129e+05.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
@@ -296,7 +302,11 @@
    </section><section class="bench" id="lj75" data-problem="globalopt/lj75">
    <h2>lj75</h2>
    <dl class="bench-rule">
+   <dt>Cap</dt><dd>1000000 force calls</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
+   <dt>Starts</dt><dd>200</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
+   <dt>Note</dt><dd>Success is an energy at or below the Cambridge Cluster Database N=75 minimum plus 0.001. The cap of 1000000 force calls is above the archived GMIN maximum of 310110.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
@@ -347,7 +357,11 @@
    </section><section class="bench" id="lj98" data-problem="globalopt/lj98">
    <h2>lj98</h2>
    <dl class="bench-rule">
+   <dt>Cap</dt><dd>1000000000 force calls</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
+   <dt>Starts</dt><dd>100</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
+   <dt>Note</dt><dd>Success is an energy at or below the Cambridge Cluster Database N=98 minimum plus 0.001. The start set is the 100 numbered coordinate files. The cap of 1000000000 force calls is above the archived nosym energy-call mean 5.98857238e+07 plus ten times its standard deviation 6.21561817e+07.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
@@ -416,7 +430,11 @@
    </section><section class="bench" id="tip4p10" data-problem="globalopt/tip4p10">
    <h2>tip4p10</h2>
    <dl class="bench-rule">
+   <dt>Cap</dt><dd>1000000 force calls</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
+   <dt>Starts</dt><dd>10000</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
+   <dt>Note</dt><dd>Success is an energy at or below the Cambridge Cluster Database TIP4P N=10 minimum plus 0.001. The cap of 1000000 force calls is above the archived GMIN maximum of 148360.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
@@ -479,7 +497,11 @@
    </section><section class="bench" id="tip4p15" data-problem="globalopt/tip4p15">
    <h2>tip4p15</h2>
    <dl class="bench-rule">
+   <dt>Cap</dt><dd>10000000 force calls</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
+   <dt>Starts</dt><dd>500</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
+   <dt>Note</dt><dd>Success is an energy at or below the Cambridge Cluster Database TIP4P N=15 minimum plus 0.001. The cap of 10000000 force calls is above the archived GMIN maximum of 6176900.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
@@ -542,7 +564,11 @@
    </section><section class="bench" id="tip4p20" data-problem="globalopt/tip4p20">
    <h2>tip4p20</h2>
    <dl class="bench-rule">
+   <dt>Cap</dt><dd>200000000 force calls</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
+   <dt>Starts</dt><dd>100</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
+   <dt>Note</dt><dd>Success is an energy at or below the Cambridge Cluster Database TIP4P N=20 minimum plus 0.001. The cap of 200000000 force calls is above the archived GMIN maximum of 143400000.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
