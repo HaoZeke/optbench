@@ -154,6 +154,8 @@ def _minimize_job(job: dict) -> dict:
             point, stopped = _drive_ase(job, x0, observed, potential, cap, clean_tol, energy_tol, components)
         elif family == "sella":
             point, stopped = _drive_sella(job, x0, observed, potential, cap, clean_tol, energy_tol, components)
+        elif family == "gmin":
+            point, stopped = _drive_gmin(job, x0, observed, potential, cap, clean_tol, energy_tol, components)
         else:
             raise ValueError(f"unknown solver family {family}")
     except ForceCallCap as exc:
@@ -329,6 +331,41 @@ def _step_optimizer(opt, observed, potential, cap, clean_tol, energy_tol, compon
     return observed.met(clean_tol, energy_tol, components)
 
 
+def _drive_gmin(job, x0, observed, potential, cap, clean_tol, energy_tol, components):
+    import numpy as np
+
+    from optbench.gmin_lbfgs import DEFAULTS, minimize
+
+    x = np.asarray(x0, dtype=np.float64).copy()
+    sigma = float(job["sigma"])
+    options = job["options"]
+    threshold = stop_threshold(clean_tol, sigma, components, KAPPA)
+
+    def evaluate(coords):
+        energy, gradient = observed(coords)
+        return float(energy), np.asarray(gradient, dtype=np.float64)
+
+    def ready():
+        return observed.met(clean_tol, energy_tol, components)
+
+    result = minimize(
+        x,
+        evaluate,
+        gtol=threshold,
+        cap=cap,
+        m=int(options.get("m", DEFAULTS["m"])),
+        maxbfgs=float(options.get("maxbfgs", DEFAULTS["maxbfgs"])),
+        dguess=float(options.get("dguess", DEFAULTS["dguess"])),
+        maxerise=float(options.get("maxerise", DEFAULTS["maxerise"])),
+        maxefall=float(options.get("maxefall", DEFAULTS["maxefall"])),
+        ready=ready,
+    )
+    if result.capped:
+        raise ForceCallCap("force-call cap")
+    stopped = bool(result.mflag and result.info == 0 and observed.met(clean_tol, energy_tol, components))
+    return [float(value) for value in result.coords], stopped
+
+
 def _drive_ase(job, x0, observed, potential, cap, clean_tol, energy_tol, components):
     from optbench.ase_sella import _build_optimizer
 
@@ -438,6 +475,13 @@ def run_template(
         version = str(rgmin.__version__)
         if template.get("code_version") and version != str(template["code_version"]):
             raise RuntimeError(f"rgmin {version} does not match template {template['code_version']}")
+    if family == "gmin":
+        from optbench.gmin_lbfgs import require_revision
+
+        found = require_revision(str(template.get("commit") or ""))
+        version = str(template.get("code_version") or "")
+        if version and not found.startswith(version):
+            raise RuntimeError(f"GMIN revision {found} does not match template {version}")
     convergence = problem.get("convergence") or {}
     clean_tol = float(convergence["force_norm"])
     if "energy_tol" not in convergence:
