@@ -84,6 +84,16 @@ commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
 committed = "2026-10-05"
 note = "Activation-relaxation technique nouveau, plugin branch DEVEL. The benchmark contributor of a new entry is Rohit Goswami."
 
+[[code]]
+id = "softsaddle"
+name = "SoftSaddle"
+role = "saddle search"
+repository = "https://github.com/henkelmangroup/optbench"
+ref = "website/codes/softsaddle.tar.gz"
+commit = "5a00aeede06fd822ef302624ec4c9bc7889d21fc0b5804b701a5785695c68d16"
+committed = "2019-04-01"
+note = "April 2019 adaptive hypersphere with LBFGS memory 60, from softsaddle.tar.gz sha256 5a00aeed. Lanczos and Davidson are the bundled C++ solvers, built without the Morse library, and the harness potential supplies every gradient. Davidson keeps its 525-coordinate Pt minimum Hessian anchor and uses the current point for any other dimension. Saddle rows are one repetition of the sm50 Davidson walk and the sm0 and sm50 Lanczos walks, stopped at 27 connected saddles. Lowest-eigenvector rows repeat the same eigen-solver from the gradient until overlap 0.99."
+
 # generated ASE and Sella templates
 
 [[template]]
