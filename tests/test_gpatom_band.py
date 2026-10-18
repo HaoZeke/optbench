@@ -123,6 +123,10 @@ def test_cartesian_mean_matches_the_kernel_vector():
     assert np.allclose(fast, manual, rtol=1e-10, atol=1e-10)
     assert np.allclose(variance[0, 0], full[0, 0], rtol=1e-10, atol=1e-10)
     assert np.allclose(batched[1], full[0, 0], rtol=1e-10, atol=1e-10)
+    before = np.array(fast, copy=True)
+    gp.K_reg = None
+    after, _variance = gp.predict(fingerprints[3], get_variance=False)
+    assert np.allclose(before, after, rtol=1e-10, atol=1e-10)
 
 
 def test_short_cap_stops_on_the_first_lj38_pair():

@@ -29,12 +29,16 @@ returns. For the Cartesian fingerprint the kernel block is the closed
 form of ``FPKernel``: same energy, gradients, and Hessian. The mean
 prediction is that block contracted with the solved weights. The energy
 variance is the same corner of ``k K^{-1} k``, solved once for the
-whole band.
+whole band. After the prefactor update the dense kernel matrix is
+dropped and its pages are returned. Predictions keep the scaled
+Cholesky factor.
 """
 
 from __future__ import annotations
 
 import copy
+import ctypes
+import gc
 import json
 import os
 import statistics
@@ -263,6 +267,24 @@ def _install_cartesian_predict(gp_cls) -> None:
     gp_cls._optbench_cartesian_predict = True
 
 
+def _release_kernel_matrix(model) -> None:
+    """Drop ``K_reg`` after the prefactor update has scaled ``L``.
+
+    ``predict`` reads the scaled factor and the scaled weights. The next
+    AIDNEB iteration trains a new model.
+    """
+    gp = getattr(model, "gp", None)
+    if gp is not None and getattr(gp, "K_reg", None) is not None:
+        gp.K_reg = None
+
+
+def _return_freed_pages() -> None:
+    gc.collect()
+    libc = ctypes.CDLL("libc.so.6")
+    if hasattr(libc, "malloc_trim"):
+        libc.malloc_trim(0)
+
+
 def prepare() -> None:
     """Import ase-gpatom and install the ASE 3.29 compatibility shims."""
     global _READY
@@ -340,6 +362,7 @@ def prepare() -> None:
     _install_cartesian_predict(GaussianProcess)
 
     def predictions(images):
+        _return_freed_pages()
         energy = []
         for image in images:
             image.calc.calculate(
@@ -349,6 +372,7 @@ def prepare() -> None:
             )
             energy.append(float(image.calc.results["energy"]))
         model = images[0].calc.model
+        _release_kernel_matrix(model)
         queries = [model.new_fingerprint(image) for image in images]
         raw = _cartesian_energy_variances(model.gp, queries)
         uncertainty = []
@@ -358,6 +382,7 @@ def prepare() -> None:
             uncertainty.append(2.0 * standard)
         uncertainty[0] = 0.0
         uncertainty[-1] = 0.0
+        _return_freed_pages()
         return {"energy": energy, "uncertainty": uncertainty}
 
     aidneb.get_neb_predictions = predictions
