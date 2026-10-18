@@ -27,6 +27,156 @@ def half_even(value: float) -> int:
     return round(value)
 
 
+def _median(values: list[float]) -> float:
+    ordered = sorted(values)
+    n = len(ordered)
+    mid = n // 2
+    if n % 2:
+        return float(ordered[mid])
+    return (float(ordered[mid - 1]) + float(ordered[mid])) / 2
+
+
+def summarize_all(counts: list[int], nfailed: int) -> dict[str, int | float | None]:
+    """Mean, min, max, and median of every count, failures included.
+
+    Transition-state rows use this reducer. A start that hit the step cap
+    stays in the mean, and ``nfailed`` counts those starts.
+    """
+    if nfailed < 0:
+        raise ValueError("nfailed must be zero or positive")
+    if not counts:
+        return {
+            "force_calls": None,
+            "force_calls_min": None,
+            "force_calls_max": None,
+            "force_calls_median": None,
+            "nfailed": nfailed,
+        }
+    return {
+        "force_calls": half_even(sum(counts) / len(counts)),
+        "force_calls_min": min(counts),
+        "force_calls_max": max(counts),
+        "force_calls_median": _median([float(count) for count in counts]),
+        "nfailed": nfailed,
+    }
+
+
+def band_total(force_calls: float, *, images: int | None, call_unit: str) -> tuple[float, float | None]:
+    """Band total and the per-image quotient of that same total.
+
+    ``call_unit`` is ``total`` or ``per_image``. The per-image value is
+    ``None`` when the problem states no image count.
+    """
+    if call_unit == "total":
+        total = float(force_calls)
+    elif call_unit == "per_image":
+        if not images:
+            raise ValueError("per-image count has no image count")
+        total = float(force_calls) * images
+    else:
+        raise ValueError(f"unknown call unit {call_unit}")
+    per = None if not images else total / images
+    return total, per
+
+
+def normalize_start(raw: dict, images: int | None, *, per_image_track: bool = False) -> dict:
+    """One start whose ``force_calls`` is the harness total across the band.
+
+    A ``force_calls_neb`` row stores the per-image quotient in
+    ``force_calls`` and the band counter in ``raw``. An old ASE asv track
+    stored the per-image quotient; ``per_image_track`` puts that track back
+    on the total. Every other row is already a total. ``per_image`` divides
+    the total by ``images``, the same divisor for every code on the problem.
+    """
+    if not isinstance(raw, dict):
+        raise ValueError("start is not a record")
+    scaled = dict(raw)
+    count_key = str(raw.get("count_key") or "")
+    stated = str(raw.get("call_unit") or "")
+    try:
+        if count_key == "force_calls_neb":
+            if raw.get("raw") not in (None, ""):
+                total = float(raw["raw"])
+                per = None if not images else total / images
+            else:
+                total, per = band_total(float(raw["force_calls"]), images=images, call_unit="per_image")
+        elif stated == "per_image" or per_image_track:
+            calls = raw.get("force_calls")
+            if calls is None:
+                raise ValueError("per-image count has no force calls")
+            total, per = band_total(float(calls), images=images, call_unit="per_image")
+        else:
+            calls = raw.get("force_calls", raw.get("raw", raw.get("per_search")))
+            if calls is None:
+                return scaled
+            total, per = band_total(float(calls), images=images, call_unit="total")
+    except (TypeError, ValueError) as exc:
+        raise ValueError(str(exc) or "per-image count has no image count") from exc
+    scaled["force_calls"] = total
+    scaled["call_unit"] = "total"
+    if per is not None:
+        scaled["per_image"] = per
+    return scaled
+
+
+def summarize_divided(
+    counts: list[int],
+    failed: list[bool],
+    *,
+    images: int,
+    cap: int,
+) -> dict[str, int | float | str | None]:
+    """Mean of band totals that converged under ``cap``.
+
+    ``cap`` is a total across the band, compared with ``count`` itself.
+    ``force_calls`` is that total. ``force_calls_per_image`` divides the
+    same kept totals by ``images``.
+    """
+    if images <= 0:
+        raise ValueError("images must be positive")
+    if cap <= 0:
+        raise ValueError("cap must be positive")
+    if len(counts) != len(failed):
+        raise ValueError("counts and failed must have the same length")
+    ok_raw: list[int] = []
+    ok_per: list[float] = []
+    nfailed = 0
+    for count, flag in zip(counts, failed):
+        if flag or count >= cap:
+            nfailed += 1
+            continue
+        ok_raw.append(count)
+        ok_per.append(count / images)
+    if not ok_per:
+        return {
+            "force_calls": None,
+            "force_calls_min": None,
+            "force_calls_max": None,
+            "force_calls_median": None,
+            "force_calls_raw": None,
+            "force_calls_per_image": None,
+            "force_calls_per_image_min": None,
+            "force_calls_per_image_max": None,
+            "force_calls_per_image_median": None,
+            "call_unit": "total",
+            "nfailed": nfailed,
+        }
+    total_mean = half_even(sum(ok_raw) / len(ok_raw))
+    return {
+        "force_calls": total_mean,
+        "force_calls_min": min(ok_raw),
+        "force_calls_max": max(ok_raw),
+        "force_calls_median": _median([float(value) for value in ok_raw]),
+        "force_calls_raw": total_mean,
+        "force_calls_per_image": half_even(sum(ok_per) / len(ok_per)),
+        "force_calls_per_image_min": half_even(min(ok_per)),
+        "force_calls_per_image_max": half_even(max(ok_per)),
+        "force_calls_per_image_median": _median(ok_per),
+        "call_unit": "total",
+        "nfailed": nfailed,
+    }
+
+
 def summarize_capped(counts: list[int], cap: int) -> dict[str, int | None]:
     """Mean, min, and max of counts below ``cap``, and how many meet the cap.
 

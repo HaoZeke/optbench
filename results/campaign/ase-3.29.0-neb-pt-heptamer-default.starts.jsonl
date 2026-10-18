@@ -1,0 +1,13 @@
+{"failed": false, "force_calls": 378, "force_norm": 0.008684901726389433, "parameters": {"Nmin": 5, "a": 0.09043820750088044, "astart": 0.1, "climb": false, "downhill_check": false, "dt": 0.07644886306051828, "dtmax": 1.0, "fa": 0.99, "fdec": 0.5, "finc": 1.1, "maxstep": 0.2, "method": "improvedtangent", "moving_images": 8, "spring": 0.1}, "start": "min01"}
+{"failed": false, "force_calls": 386, "force_norm": 0.00987070640853458, "start": "min02"}
+{"failed": false, "force_calls": 554, "force_norm": 0.006992739619996776, "start": "min03"}
+{"failed": false, "force_calls": 554, "force_norm": 0.007463690392662012, "start": "min04"}
+{"failed": false, "force_calls": 554, "force_norm": 0.0073213854225225245, "start": "min05"}
+{"failed": false, "force_calls": 770, "force_norm": 0.008995038211627615, "start": "min06"}
+{"failed": false, "force_calls": 794, "force_norm": 0.008401654531648175, "start": "min07"}
+{"failed": false, "force_calls": 690, "force_norm": 0.00822718096705709, "start": "min08"}
+{"failed": false, "force_calls": 690, "force_norm": 0.008934759348862994, "start": "min09"}
+{"failed": false, "force_calls": 642, "force_norm": 0.008415435584229542, "start": "min10"}
+{"failed": false, "force_calls": 642, "force_norm": 0.00865950933953117, "start": "min11"}
+{"failed": false, "force_calls": 618, "force_norm": 0.007834020413118776, "start": "min12"}
+{"failed": false, "force_calls": 618, "force_norm": 0.008237950843978688, "start": "min13"}

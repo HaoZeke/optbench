@@ -68,23 +68,42 @@ def run(
     output: Path = Path("benchmark.dat"),
     workers: int = 1,
     work: Path | None = None,
+    limit: int = 0,
+    resume: bool = False,
 ) -> None:
     """Run one problem template and write benchmark.dat."""
+    from optbench.campaign import load_template
     from optbench.campaign import run as run_campaign
 
-    summary = run_campaign(
-        root,
-        problem,
-        template,
-        client=_eon_client(client),
-        geometries=geometries,
-        output=output,
-        workers=workers,
-        work=work,
-    )
+    loaded = load_template(root, template)
+    if loaded["engine"] == "rgsaddle-band":
+        from optbench.rgsaddle_band import run as run_band
+
+        summary = run_band(
+            root,
+            problem,
+            template,
+            output=output,
+            workers=workers,
+        )
+    else:
+        client_path = _eon_client(client) if loaded["engine"] in {"eon-client", "eon"} else client
+        summary = run_campaign(
+            root,
+            problem,
+            template,
+            client=client_path,
+            geometries=geometries,
+            output=output,
+            workers=workers,
+            work=work,
+            limit=limit,
+            resume=resume,
+        )
+    calls = summary.get("force_calls")
     print(
         f"{summary['problem']} {summary['template']} "
-        f"force_calls={summary['force_calls']} nfailed={summary['nfailed']} "
+        f"force_calls={calls} nfailed={summary['nfailed']} "
         f"starts={summary['starts']}"
     )
 
@@ -186,6 +205,37 @@ def _head(root: Path) -> str:
         return ""
 
 
+@app.command(name="campaign-ase")
+def campaign_ase(
+    *,
+    root: Path = Path("."),
+    output_dir: Path = Path("results/campaign"),
+    workers: int = 1,
+    limit: int = 0,
+    match: str = "",
+    ranked_only: bool = True,
+    resume: bool = False,
+) -> None:
+    """Run the ranked ASE and Sella templates."""
+    from optbench.ase_sella import run_many
+
+    summaries = run_many(
+        root,
+        output_dir,
+        workers=workers,
+        limit=limit,
+        match=match,
+        ranked_only=ranked_only,
+        resume=resume,
+    )
+    for summary in summaries:
+        print(
+            f"{summary['problem']} {summary['template']} "
+            f"force_calls={summary['force_calls']} nfailed={summary['nfailed']} "
+            f"starts={summary['starts']}"
+        )
+
+
 @app.command
 def smoke(
     output: Path = Path("results/smoke/quadratic.json"),
@@ -240,6 +290,40 @@ def statistics(
         f"dimer_median={dimer['median']} "
         f"displacement_failed={displacement['nfailed']} dimer_failed={dimer['nfailed']}"
     )
+
+
+@app.command
+def board(
+    root: Path = Path("."),
+    output: Path = Path("results/board"),
+) -> None:
+    """Score committed results and write the v2 leaderboard. This does not run a campaign."""
+    from optbench.board import write_board
+
+    destination = output if output.is_absolute() else root / output
+    document = write_board(root, destination)
+    print(
+        f"wrote {destination} problems={len(document['problems'])} "
+        f"ranked={document['ranked_count']} partial={len(document['partial'])} "
+        f"unparsed={len(document['unparsed'])} unmapped={len(document['unmapped'])}"
+    )
+    for problem in document["problems"].values():
+        ranked = problem["ranked"]
+        if not ranked:
+            continue
+        print(problem["id"])
+        for index, row in enumerate(ranked[:5], start=1):
+            score = row["par2_mean"] if row["par2_mean"] is not None else row["median"]
+            print(
+                f"  {index} {row['template'] or row['entry']} "
+                f"source={row['source']} "
+                f"par2_mean={row['par2_mean']} median={row['median']} "
+                f"mean_calls={row['mean_calls']} median_calls={row['median_calls']} "
+                f"mean_per_image={row.get('mean_per_image')} "
+                f"min_calls={row['min_calls']} max_calls={row['max_calls']} "
+                f"success_rate={row['success_rate']} "
+                f"n={row['n']} nfailed={row['nfailed']} score={score}"
+            )
 
 
 @app.command(name="validate-counter")

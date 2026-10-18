@@ -3,51 +3,383 @@
 
    <section class="bench" id="current-codes">
    <h2>Current codes</h2>
-   <p class="bench-smoke">A score from one of these pins is SOTA only when the result names this commit, the problem geometries, and the problem stop. The benchmark contributor is Rohit Goswami.</p>
-   <div class="bench-table"><table>
-   <caption>No force-call number is listed until a run writes benchmark.dat under the problem rule.</caption>
-   <thead><tr><th>Code</th><th>Role</th><th>Source</th><th>Commit</th></tr></thead><tbody>
+   <p>The benchmark contributor is Rohit Goswami. A ranked row is a full harness run. The commit on that row is the commit that produced the score.</p>
+   <h3>eOn</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
-   <td>eOn</td>
    <td>minimization and saddle search</td>
-   <td><a href="https://github.com/TheochemUI/eon">eon 3.5.0</a></td>
-   <td class="num">4d8b34baf1ba</td>
+   <td>3.5.0</td>
+   <td>4d8b34baf1ba</td>
+   <td><a href="https://github.com/TheochemUI/eon">https://github.com/TheochemUI/eon</a></td>
    </tr>
    <tr>
-   <td>eOn</td>
    <td>minimization and saddle search</td>
-   <td><a href="https://github.com/TheochemUI/eon">eon main</a></td>
-   <td class="num">1d71c9445018</td>
+   <td>main</td>
+   <td>1d71c9445018</td>
+   <td><a href="https://github.com/TheochemUI/eon">https://github.com/TheochemUI/eon</a></td>
    </tr>
    <tr>
-   <td>eOn</td>
    <td>minimization and saddle search</td>
-   <td><a href="https://github.com/TheochemUI/eon">eon develop</a></td>
-   <td class="num">7095b23ac17d</td>
+   <td>develop</td>
+   <td>7095b23ac17d</td>
+   <td><a href="https://github.com/TheochemUI/eon">https://github.com/TheochemUI/eon</a></td>
    </tr>
+   </tbody></table>
+   <table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="minimization/lj38" data-template="eon/lj38-lbfgs-m100">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="template">eon/lj38-lbfgs-m100</td>
+   <td data-field="version">eOn 3.6.0</td>
+   <td data-field="commit">1d71c9445018</td>
+   <td data-field="par2_mean">180.137</td>
+   <td data-field="mean_calls">180.137</td>
+   <td data-field="median_calls">171</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-template="eon/morse-lbfgs-m100">
+   <td>Morse bulk</td>
+   <td data-field="template">eon/morse-lbfgs-m100</td>
+   <td data-field="version">eOn 3.6.0</td>
+   <td data-field="commit">1d71c9445018</td>
+   <td data-field="par2_mean">54.18</td>
+   <td data-field="mean_calls">54.18</td>
+   <td data-field="median_calls">53</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run</p><ul>
+   <li>LJ38 double-ended saddle: not yet on the harness counter, partial.</li>
+   <li>lj38_2ts_separation: partial.</li>
+   <li>pt-island: not yet on the harness counter, partial.</li>
+   <li>lj38: partial.</li>
+   <li>Pt-heptamer: not yet on the harness counter.</li>
+   <li>Pt heptamer island: not yet on the harness counter, partial.</li>
+   <li>LJ38: not yet on the harness counter, partial.</li>
+   <li>pt-island: not yet on the harness counter, partial.</li>
+   <li>eon-ci-neb: no per-start record.</li>
+   <li>eon-ci-swdneb: no per-start record.</li>
+   <li>eon-cg: no per-start record.</li>
+   <li>eon-fire: no per-start record.</li>
+   <li>eon-lbfgs: no per-start record.</li>
+   <li>eon-qm: no per-start record.</li>
+   <li>eon-client/cg: no per-start record.</li>
+   <li>eon-client/fire: no per-start record.</li>
+   <li>eon-client/lbfgs-m100: no per-start record.</li>
+   <li>eon-client/lbfgs-m20: no per-start record.</li>
+   <li>eon-client/morse-cg: no per-start record.</li>
+   <li>eon-client/morse-fire: no per-start record.</li>
+   <li>eon-client/morse-lbfgs: no per-start record.</li>
+   <li>eon-client/morse-sd: no per-start record.</li>
+   <li>eon-client/qm: no per-start record.</li>
+   <li>eon-client/sd-twopoint: no per-start record.</li>
+   <li>eon-client/sd: no per-start record.</li>
+   </ul>
+   <h3>rgmin</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
-   <td>rgmin</td>
    <td>minimization</td>
-   <td><a href="https://github.com/OmniPotentRPC/rgmin">rgmin main</a></td>
-   <td class="num">e089a136910f</td>
+   <td>fix/default-cap-per-method</td>
+   <td>f15726f1c798</td>
+   <td><a href="https://github.com/OmniPotentRPC/rgmin">https://github.com/OmniPotentRPC/rgmin</a></td>
    </tr>
+   </tbody></table>
+   <table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="minimization/lj38" data-template="rgmin/lj38-dogleg">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="template">rgmin/lj38-dogleg</td>
+   <td data-field="version">rgmin 0.4.1</td>
+   <td data-field="commit">9a2e7ff11fa6</td>
+   <td data-field="par2_mean">81.881</td>
+   <td data-field="mean_calls">81.881</td>
+   <td data-field="median_calls">79</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-template="rgmin/morse-newton">
+   <td>Morse bulk</td>
+   <td data-field="template">rgmin/morse-newton</td>
+   <td data-field="version">rgmin 0.4.1</td>
+   <td data-field="commit">9a2e7ff11fa6</td>
+   <td data-field="par2_mean">8.35</td>
+   <td data-field="mean_calls">8.35</td>
+   <td data-field="median_calls">9</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table>
+   <h3>rgsaddle</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
-   <td>rgsaddle</td>
    <td>saddle search</td>
-   <td><a href="https://github.com/OmniPotentRPC/rgsaddle">rgsaddle main</a></td>
-   <td class="num">8bea1002b06a</td>
+   <td>main</td>
+   <td>c0db2b8d333c</td>
+   <td><a href="https://github.com/OmniPotentRPC/rgsaddle">https://github.com/OmniPotentRPC/rgsaddle</a></td>
    </tr>
+   </tbody></table>
+   <table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="double-ended-saddle-search/lj38" data-template="rgsaddle/ew-ci-neb-lbfgs">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="template">rgsaddle/ew-ci-neb-lbfgs</td>
+   <td data-field="version">rgsaddle 0.2.2</td>
+   <td data-field="commit">c0db2b8d333c</td>
+   <td data-field="par2_mean">853.56</td>
+   <td data-field="mean_calls">673.94</td>
+   <td data-field="median_calls">529</td>
+   <td data-field="failures">crash 0, divergence 1, cap 2, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="rgsaddle/ew-ci-neb-lbfgs">
+   <td>lj38_2ts_separation</td>
+   <td data-field="template">rgsaddle/ew-ci-neb-lbfgs</td>
+   <td data-field="version">rgsaddle 0.2.2</td>
+   <td data-field="commit">c0db2b8d333c</td>
+   <td data-field="par2_mean">8024.43</td>
+   <td data-field="mean_calls">4639.8</td>
+   <td data-field="median_calls">2414</td>
+   <td data-field="failures">crash 0, divergence 0, cap 16, wrong_stationary 1</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="rgsaddle/ew-ci-neb-lbfgs">
+   <td>pt-island</td>
+   <td data-field="template">rgsaddle/ew-ci-neb-lbfgs</td>
+   <td data-field="version">rgsaddle 0.2.2</td>
+   <td data-field="commit">c0db2b8d333c</td>
+   <td data-field="par2_mean">422.136</td>
+   <td data-field="mean_calls">224.017</td>
+   <td data-field="median_calls">226</td>
+   <td data-field="failures">crash 0, divergence 2, cap 0, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="lowest-eigenvector/lj38" data-template="rgsaddle/mode-lanczos">
+   <td>lj38</td>
+   <td data-field="template">rgsaddle/mode-lanczos</td>
+   <td data-field="version">rgsaddle 0.2.2</td>
+   <td data-field="commit">c0db2b8d333c</td>
+   <td data-field="par2_mean">26.12</td>
+   <td data-field="mean_calls">26.12</td>
+   <td data-field="median_calls">26</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-template="rgsaddle/idpp-ci-neb-lbfgs">
+   <td>Pt-heptamer</td>
+   <td data-field="template">rgsaddle/idpp-ci-neb-lbfgs</td>
+   <td data-field="version">rgsaddle 0.2.2</td>
+   <td data-field="commit">c0db2b8d333c</td>
+   <td data-field="par2_mean">318.308</td>
+   <td data-field="mean_calls">318.308</td>
+   <td data-field="median_calls">314</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   <tr data-problem="tsopt/LJ38" data-template="rgsaddle/prfo-tuned">
+   <td>LJ38</td>
+   <td data-field="template">rgsaddle/prfo-tuned</td>
+   <td data-field="version">rgsaddle 0.2.2</td>
+   <td data-field="commit">c0db2b8d333c</td>
+   <td data-field="par2_mean">192.6</td>
+   <td data-field="mean_calls">192.6</td>
+   <td data-field="median_calls">173</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="tsopt/pt-island" data-template="rgsaddle/pt-dimer-rotskip">
+   <td>pt-island</td>
+   <td data-field="template">rgsaddle/pt-dimer-rotskip</td>
+   <td data-field="version">rgsaddle 0.2.2</td>
+   <td data-field="commit">c0db2b8d333c</td>
+   <td data-field="par2_mean">223.898</td>
+   <td data-field="mean_calls">223.898</td>
+   <td data-field="median_calls">145</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">49</td>
+   </tr>
+   </tbody></table>
+   <h3>ASE</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
-   <td>ASE</td>
    <td>minimization and saddle search</td>
-   <td><a href="https://gitlab.com/ase/ase">ase 3.29.0</a></td>
-   <td class="num">3.29.0</td>
+   <td>3.29.0</td>
+   <td>f27c0005ae6a</td>
+   <td><a href="https://gitlab.com/ase/ase">https://gitlab.com/ase/ase</a></td>
    </tr>
+   </tbody></table>
+   <table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="double-ended-saddle-search/lj38" data-template="ase/de-lj38-default">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="template">ase/de-lj38-default</td>
+   <td data-field="version">ASE 3.29.0</td>
+   <td data-field="commit">f27c0005ae6a</td>
+   <td data-field="par2_mean">4912.84</td>
+   <td data-field="mean_calls">2462.84</td>
+   <td data-field="median_calls">2500</td>
+   <td data-field="failures">crash 0, divergence 0, cap 49, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="ase/de-lj38-2ts-default">
+   <td>lj38_2ts_separation</td>
+   <td data-field="template">ase/de-lj38-2ts-default</td>
+   <td data-field="version">ASE 3.29.0</td>
+   <td data-field="commit">f27c0005ae6a</td>
+   <td data-field="par2_mean">20000</td>
+   <td data-field="mean_calls">2500</td>
+   <td data-field="median_calls">2500</td>
+   <td data-field="failures">crash 0, divergence 51, cap 0, wrong_stationary 0</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="ase/de-pt-island-tuned">
+   <td>pt-island</td>
+   <td data-field="template">ase/de-pt-island-tuned</td>
+   <td data-field="version">ASE 3.29.0</td>
+   <td data-field="commit">f27c0005ae6a</td>
+   <td data-field="par2_mean">847.678</td>
+   <td data-field="mean_calls">593.864</td>
+   <td data-field="median_calls">374</td>
+   <td data-field="failures">crash 0, divergence 0, cap 5, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="minimization/lj38" data-template="ase/lj38-lbfgs-tuned">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="template">ase/lj38-lbfgs-tuned</td>
+   <td data-field="version">ASE 3.29.0</td>
+   <td data-field="commit">f27c0005ae6a</td>
+   <td data-field="par2_mean">395.645</td>
+   <td data-field="mean_calls">375.645</td>
+   <td data-field="median_calls">319</td>
+   <td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 0</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-template="ase/morse-bfgslinesearch-default">
+   <td>Morse bulk</td>
+   <td data-field="template">ase/morse-bfgslinesearch-default</td>
+   <td data-field="version">ASE 3.29.0</td>
+   <td data-field="commit">f27c0005ae6a</td>
+   <td data-field="par2_mean">28.91</td>
+   <td data-field="mean_calls">28.91</td>
+   <td data-field="median_calls">28</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-template="ase/neb-pt-heptamer-tuned">
+   <td>Pt-heptamer</td>
+   <td data-field="template">ase/neb-pt-heptamer-tuned</td>
+   <td data-field="version">ASE 3.29.0</td>
+   <td data-field="commit">f27c0005ae6a</td>
+   <td data-field="par2_mean">442.615</td>
+   <td data-field="mean_calls">442.615</td>
+   <td data-field="median_calls">450</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run</p><ul>
+   <li>LJ38 double-ended saddle: partial.</li>
+   <li>lj38_2ts_separation: partial.</li>
+   <li>pt-island: partial.</li>
+   <li>Lennard-Jones 38 clusters: partial.</li>
+   <li>Morse bulk: partial.</li>
+   <li>Pt-heptamer: partial.</li>
+   <li>Pt heptamer island: partial.</li>
+   </ul>
+   <h3>Sella</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
-   <td>pARTn</td>
-   <td>saddle search</td>
-   <td><a href="https://gitlab.com/mammasmias/artn-plugin">artn-plugin DEVEL</a></td>
-   <td class="num">9b753517c6c0</td>
+   <td>minimization and saddle search</td>
+   <td>2.6.0</td>
+   <td>6cfb60cdb100</td>
+   <td><a href="https://github.com/zadorlab/sella">https://github.com/zadorlab/sella</a></td>
    </tr>
-   </tbody></table></div></section>
+   </tbody></table>
+   <table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="minimization/lj38" data-template="sella/lj38-min-tuned">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="template">sella/lj38-min-tuned</td>
+   <td data-field="version">Sella 2.6.0</td>
+   <td data-field="commit">6cfb60cdb100</td>
+   <td data-field="par2_mean">253.921</td>
+   <td data-field="mean_calls">253.921</td>
+   <td data-field="median_calls">248</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-template="sella/morse-min-default">
+   <td>Morse bulk</td>
+   <td data-field="template">sella/morse-min-default</td>
+   <td data-field="version">Sella 2.6.0</td>
+   <td data-field="commit">6cfb60cdb100</td>
+   <td data-field="par2_mean">28.89</td>
+   <td data-field="mean_calls">28.89</td>
+   <td data-field="median_calls">28</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="tsopt/LJ38" data-template="sella/lj38-ts-default">
+   <td>LJ38</td>
+   <td data-field="template">sella/lj38-ts-default</td>
+   <td data-field="version">Sella 2.6.0</td>
+   <td data-field="commit">6cfb60cdb100</td>
+   <td data-field="par2_mean">68.74</td>
+   <td data-field="mean_calls">68.74</td>
+   <td data-field="median_calls">59.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="tsopt/pt-island" data-template="sella/pt-island-ts-default">
+   <td>pt-island</td>
+   <td data-field="template">sella/pt-island-ts-default</td>
+   <td data-field="version">Sella 2.6.0</td>
+   <td data-field="commit">6cfb60cdb100</td>
+   <td data-field="par2_mean">74.2857</td>
+   <td data-field="mean_calls">74.2857</td>
+   <td data-field="median_calls">71</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">49</td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run</p><ul>
+   <li>LJ38 double-ended saddle: partial.</li>
+   <li>lj38_2ts_separation: partial.</li>
+   <li>pt-island: partial.</li>
+   <li>Lennard-Jones 38 clusters: partial.</li>
+   <li>Morse bulk: partial.</li>
+   <li>Pt heptamer island: partial.</li>
+   <li>LJ38: partial.</li>
+   <li>pt-island: partial.</li>
+   <li>sella-lj38: no per-start record.</li>
+   </ul>
+   <h3>pARTn</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>saddle search</td>
+   <td>DEVEL</td>
+   <td>9b753517c6c0</td>
+   <td><a href="https://gitlab.com/mammasmias/artn-plugin">https://gitlab.com/mammasmias/artn-plugin</a></td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run.</p>
+   </section>
 #+end_export

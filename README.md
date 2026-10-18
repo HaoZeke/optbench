@@ -18,6 +18,8 @@ uv run optbench templates
 
 `uv run` reads `pyproject.toml`, installs the command-line library, and runs that command. `pytest` is the test runner. `check` exits 0 when every partial contract covers its archived rows and `oracle/archive_gaps.txt` matches the departures. `templates` prints every template id.
 
+`uv run optbench board` reads `results/campaign` and `results/asv` and writes `results/board` plus the v2 table on the Board page. It does not start a search. A band method is ranked on the harness force-call total across every image, and the per-image mean is a second column from that same total. Only the newest version of a code and template is ranked. A run that is both a campaign file and an asv track is one row, with the source kept as a column. A row that used fewer starts than the problem's full set is partial. An asv result that covers one start is a smoke run and stays out of the ranked mean.
+
 The harness does not contain eOn, pele, or Sella. Those are installed separately, and the commands below say which release produced the files in `results/campaign/`.
 
 ## Reproduce the Lennard-Jones 38 L-BFGS mean
@@ -110,7 +112,23 @@ uv run optbench/sella_lj38.py \
   --version 2.6.0
 ```
 
-The recorded file is `results/campaign/sella-2.6.0-ts-lj38.dat`: mean 93, two starts at the step cap. Sella 0.1.1 was mean 69.55 with none failed.
+The recorded file is `results/campaign/sella-2.6.0-ts-lj38.dat`: mean 93, two starts at the step cap. Sella 0.1.1 was mean 69.55 with none failed. Those 0.1.1 rows stay on the 2014 tables and are labelled legacy.
+
+ASE 3.29.0 and Sella 2.6.0 templates live under `templates/ase/` and `templates/sella/`. A default row is the library constructor. A tuned row is the archived script when one exists. Force calls are calculator evaluations counted by the harness, for both codes. The ranked set is:
+
+```bash
+uv run --group campaign optbench campaign-ase --workers 4 --output-dir results/campaign
+```
+
+One template is the same command as the eOn runs, with the template id in place of `eon-client/lbfgs-m100`:
+
+```bash
+uv run --group campaign optbench run minimization/lj38 ase/lj38-lbfgs-default \
+  --workers 4 \
+  --output results/campaign/ase-3.29.0-lj38-lbfgs-default.dat
+```
+
+The per-start file is the `.starts.jsonl` next to that `benchmark.dat`. A count at the cap, an exception, or a final force above the problem stop is a failure and is kept in that file. The dimer templates are not in `campaign-ase`. They are single-ended searches, not the Pt-island saddle catalog.
 
 Pt-heptamer NEB is 13 bands, Morse, eight images. The band method has to be the one named in the template. `eon-lbfgs` averages 40:
 

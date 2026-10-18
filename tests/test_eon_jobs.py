@@ -16,10 +16,12 @@ def test_report_keeps_a_value_under_the_cap_and_counts_a_bad_reason():
     assert summary["force_calls_median"] == 60
 
 
-def test_heptamer_mean_divides_the_band_counter_by_the_image_count():
+def test_heptamer_mean_is_the_band_total():
     rows = [{"raw": 320, "reason": "0"}, {"raw": 400, "reason": "0"}]
     summary = report_summary(rows, cap=10000, images=8)
-    assert summary["force_calls"] == 45
-    assert summary["force_calls_min"] == 40
-    assert summary["force_calls_max"] == 50
+    assert summary["force_calls"] == 360
+    assert summary["force_calls_min"] == 320
+    assert summary["force_calls_max"] == 400
+    assert summary["force_calls_per_image"] == 45
+    assert summary["call_unit"] == "total"
     assert summary["nfailed"] == 0

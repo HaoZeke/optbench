@@ -1,0 +1,27 @@
+# rgsaddle 0.2.2 band. The problem file supplies the image count, the cap, and the force norm.
+id = "rgsaddle/ew-ci-neb"
+engine = "rgsaddle-band"
+code = "rgsaddle"
+code_version = "0.2.2"
+commit = "c0db2b8d333c557251635cb8bb7b3d81f0088a71"
+algorithm = "CI-NEB energy-weighted"
+tuning = "default"
+
+[ini]
+
+[band]
+climbing = true
+spring = "weighted"
+path = "linear"
+refine = ""
+method = "fire"
+memory = 20
+spring_k = 5.0
+k_min = 0.97
+k_max = 9.7
+ci_trigger_factor = 0.5
+ci_trigger_force = 0.0
+idpp_spring_k = 1.0
+idpp_force_tol = 0.01
+idpp_max_steps = 80
+sidpp_stage_steps = 50

@@ -48,8 +48,10 @@ def load_template(root: Path, name: str) -> dict:
     if not path.is_file():
         raise FileNotFoundError(f"no template {name}")
     data = tomllib.loads(path.read_text(encoding="utf-8"))
-    if "id" not in data or "engine" not in data or "ini" not in data:
-        raise ValueError(f"{path} needs id, engine, and ini")
+    if "id" not in data or "engine" not in data:
+        raise ValueError(f"{path} needs id and engine")
+    if data["engine"] == "eon-client" and "ini" not in data:
+        raise ValueError(f"{path} needs ini")
     data["_path"] = path
     return data
 
@@ -104,21 +106,49 @@ _EON_ENGINES = {"eon-client", "eon"}
 def _check_stop(problem: dict, template: dict) -> int | None:
     """Return the force-call cap, or None when the problem does not state one.
 
-    A template ``failure_cap`` fills that gap. It is the cap the archived
-    report used when the problem file left the number out. ``max_iterations``
-    is checked only against a cap the problem itself states.
+    A template ``failure_cap`` fills that gap for an eOn run. It is the cap
+    the archived report used when the problem file left the number out.
+    ASE and Sella templates carry the same number on ``stop``.
+    ``max_iterations`` is checked only against a cap the problem itself states.
     """
     convergence = problem.get("convergence") or {}
     optimizer = (template.get("ini") or {}).get("Optimizer") or {}
+    stop = template.get("stop") or {}
+    if "force_norm" in convergence and "force_norm" in stop:
+        if abs(float(stop["force_norm"]) - float(convergence["force_norm"])) > 1e-12:
+            raise ValueError("template force_norm is not the problem force norm")
+    if "gradient_norm" in convergence and "gradient_norm" in stop:
+        if abs(float(stop["gradient_norm"]) - float(convergence["gradient_norm"])) > 1e-12:
+            raise ValueError("template gradient_norm is not the problem gradient norm")
     stated = convergence.get("max_force_calls")
     cap = int(stated) if stated is not None else None
-    if cap is not None and "max_iterations" in optimizer and int(optimizer["max_iterations"]) < cap:
+    # A minimizer step is one force call, so its iteration limit cannot sit
+    # under the force budget. A band step, a dimer rotation, and a saddle
+    # translation are not one force call, and their iteration limits can.
+    job = str(((template.get("ini") or {}).get("Main") or {}).get("job") or "")
+    step_is_force_call = job == "minimization" or (
+        job == "" and problem.get("suite") == "minimization" and "band" not in problem
+    )
+    if (
+        cap is not None
+        and step_is_force_call
+        and "max_iterations" in optimizer
+        and int(optimizer["max_iterations"]) < cap
+    ):
         raise ValueError("template max_iterations is below the problem force-call cap")
     if "force_norm" in convergence and "converged_force" in optimizer:
         if abs(float(optimizer["converged_force"]) - float(convergence["force_norm"])) > 1e-12:
             raise ValueError("template converged_force is not the problem force norm")
+    if cap is not None and "max_force_calls" in stop and int(stop["max_force_calls"]) < cap:
+        raise ValueError("template max_force_calls is below the problem force-call cap")
     if cap is None and template.get("failure_cap") is not None:
         cap = int(template["failure_cap"])
+    if cap is None:
+        raw = stop.get("max_force_calls", stop.get("max_steps"))
+        if raw is not None:
+            cap = int(raw)
+    if cap is None and "max_iterations" in optimizer:
+        cap = int(optimizer["max_iterations"])
     return cap
 
 
@@ -189,6 +219,11 @@ def benchmark_text(summary: dict, template: dict) -> str:
         "force_calls_min",
         "force_calls_max",
         "force_calls_median",
+        "force_calls_per_image",
+        "force_calls_per_image_min",
+        "force_calls_per_image_max",
+        "force_calls_per_image_median",
+        "call_unit",
         "nfailed",
     ):
         value = summary.get(key)
@@ -223,16 +258,64 @@ def run(
     problem_name: str,
     template_name: str,
     *,
-    client: Path,
+    client: Path | None = None,
     geometries: Path | None = None,
     output: Path,
     workers: int = 1,
     work: Path | None = None,
+    limit: int = 0,
+    resume: bool = False,
 ) -> dict:
-    problem = resolve_problem(root, problem_name)
     template = load_template(root, template_name)
+    if template["engine"] == "rgmin":
+        from .runners.rgmin_min import run_template
+
+        problem = resolve_problem(root, problem_name)
+        stated = template.get("problem")
+        if stated and stated != problem["id"]:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return run_template(
+            root,
+            problem,
+            template,
+            geometries=geometries,
+            output=output,
+            workers=workers,
+            work=work,
+        )
+    if template["engine"] == "rgsaddle":
+        from .rgsaddle_minmode import run_template
+
+        problem = resolve_problem(root, problem_name)
+        stated = template.get("problem")
+        if stated and stated != problem["id"]:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return run_template(
+            root,
+            problem,
+            template,
+            output=output,
+            workers=workers,
+            work=work,
+        )
+    if template["engine"] in {"ase", "sella"}:
+        from .ase_sella import run_template
+
+        if template.get("problem") and template["problem"] != problem_name:
+            raise ValueError(f"{template_name} belongs to {template['problem']}")
+        return run_template(
+            root,
+            template_name,
+            output=output,
+            workers=workers,
+            limit=limit,
+            resume=resume,
+        )
     if template["engine"] not in _EON_ENGINES:
         raise ValueError(f"unknown engine {template['engine']}")
+    if client is None:
+        raise ValueError("eon-client run needs a client")
+    problem = resolve_problem(root, problem_name)
     cap = _check_stop(problem, template)
     if cap is None:
         raise ValueError(f"{problem['id']} has no force-call cap")

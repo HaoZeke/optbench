@@ -17,10 +17,11 @@ A campaign is one problem id and one template id. It writes one
 =benchmark.dat=. The problem file is the stop and the geometries. The
 template is the client. =--workers= is the number of client processes.
 
-The Lennard-Jones 38 L-BFGS mean of 181 is eOn 3.5.0, commit
+The recorded client tally for this command is 181. It is eOn 3.5.0, commit
 =4d8b34baf1ba8d2d980df29838bac1f969d1662c=, template
-=eon-client/lbfgs-m100=, all 1000 starts, force norm 0.01. Build
-=eonclient= from that commit of https://github.com/TheochemUI/eon.
+=eon-client/lbfgs-m100=, all 1000 starts, force norm 0.01.
+The ranked harness table is on the minimization page.
+Build =eonclient= from that commit of https://github.com/TheochemUI/eon.
 =pip install pyeonclient= does not set L-BFGS memory, and this command
 does not call it.
 
@@ -46,8 +47,10 @@ Compare =force_calls= with =results/campaign/eon-client-lbfgs-m100.dat=.
 A directory passed as =--geometries= checks the client. It is not the
 published mean.
 
-Morse bulk, same client, template =eon-client/morse-lbfgs=, is mean 52
-on 100 starts at force norm 0.001 eV/Ang:
+Morse bulk, same client, template =eon-client/morse-lbfgs=, records 52
+force calls on 100 starts at force norm 0.001 eV/Ang.
+That tally is the client count for this command.
+The ranked harness table is on the minimization page.
 
 #+begin_src sh
 uv run optbench run minimization/morse-bulk eon-client/morse-lbfgs \
@@ -69,7 +72,9 @@ uv run optbench/pele_lj38.py \
   --workers 4
 #+end_src
 
-Memory 100 at step 0.2 averages 178. The 2014 file is 179.
+Memory 100 at step 0.2 records 178 force calls. The 2014 file records 179.
+Both numbers are that client run and that archive row.
+The ranked harness table is on the minimization page.
 
 Sella 2.6.0 needs =sella==2.6.0= and ASE. Two hundred geometries, force
 norm 0.001, cutoff 40:

@@ -1,0 +1,29 @@
+# counter harness. One force call is one RgpotCounter.calculate entry.
+# Newton and dogleg Hessians are analytic and are not force calls.
+# v2 success is under the cap, at the force stop, and Hessian index 0.
+# energy and Kabsch RMSD were not applied: the problem file has no energy_tol, rmsd_tol, or per-start reference.
+# energy_min and energy_max are the final potential values on the recorded points.
+# Default row. gtol and the iteration budget are the problem force norm and the force-call cap. No displacement cap. istep is 0.1. The session line search is strong Wolfe. The same values are used for every start.
+force_calls 30
+force_calls_min 24
+force_calls_max 35
+nfailed 78
+median 31
+code rgmin
+code_version 0.4.0
+commit 24236559f3815847cac89ba0a7be634ce0beb4a9
+algorithm BB
+template rgmin/morse-bb
+tuning default
+counter harness
+par2_mean 15606.64
+wilson_low 0.150012823846
+wilson_high 0.31070353515
+par2_median 20000
+par2_median_low 20000
+par2_median_high 20000
+v2_nfailed 78
+v2_successes 22
+n 100
+energy_min -1396.17323767
+energy_max 58779.5332977

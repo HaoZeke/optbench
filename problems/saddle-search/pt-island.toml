@@ -10,12 +10,16 @@ kind = "morse"
 D = 0.7102
 alpha = 1.6047
 r0 = 2.897
+cutoff = 9.5
+pair_style = "morse/smooth/linear"
+pbc = [true, true, false]
 
 [goal]
 connected_saddles = 27
 barrier_below_eV = 1.5
 
 [convergence]
+norm = "l2"
 force_norm = 1.0e-3
 force_unit = "eV/Angstrom"
 

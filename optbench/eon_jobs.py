@@ -4,8 +4,9 @@ Minimization uses :func:`optbench.campaign.run`. The jobs here follow the
 archived ``report.sh`` rule. A ``total_force_calls`` or ``force_calls_neb``
 value under the cap stays in the mean. ``nfailed`` counts a
 ``termination_reason`` other than 0, including a missing ``results.dat``.
-The Pt-heptamer mean divides the band counter by the image count, which is
-what ``archive/entries/neb/Pt-heptamer/eon-lbfgs/report.sh`` does.
+The Pt-heptamer ``force_calls`` value is the band counter across every
+image. ``force_calls_per_image`` divides that total by the image count.
+The archived ``report.sh`` still prints the per-image quotient.
 """
 
 from __future__ import annotations
@@ -34,10 +35,11 @@ def report_summary(rows: list[dict], cap: int, images: int = 1) -> dict:
     """Reduce one archived report.
 
     ``rows`` carry ``raw`` (the counter named by the report) and ``reason``.
-    Values at or above ``cap`` stay out of the mean. The heptamer report
-    divides by ``images`` after the sum. Min and max are the per-start
-    values on that same scale, rounded with half-even when images are
-    divided out.
+    Values at or above ``cap`` stay out of the mean. ``cap`` is that same
+    counter, a band total when the row is a NEB. ``force_calls`` is the
+    mean of the kept totals. When ``images`` is greater than one,
+    ``force_calls_per_image`` is the mean of those totals divided by the
+    image count.
     """
     if cap <= 0:
         raise ValueError("cap must be positive")
@@ -58,22 +60,24 @@ def report_summary(rows: list[dict], cap: int, images: int = 1) -> dict:
             "force_calls_min": None,
             "force_calls_max": None,
             "force_calls_median": None,
+            "call_unit": "total",
             "nfailed": failed,
         }
-    scaled = [value / images for value in kept]
-    if images == 1:
-        low = int(min(kept))
-        high = int(max(kept))
-    else:
-        low = round(min(scaled))
-        high = round(max(scaled))
-    return {
-        "force_calls": round(sum(kept) / len(kept) / images),
-        "force_calls_min": low,
-        "force_calls_max": high,
-        "force_calls_median": statistics.median(scaled),
+    summary = {
+        "force_calls": round(sum(kept) / len(kept)),
+        "force_calls_min": int(min(kept)),
+        "force_calls_max": int(max(kept)),
+        "force_calls_median": statistics.median(kept),
+        "call_unit": "total",
         "nfailed": failed,
     }
+    if images > 1:
+        scaled = [value / images for value in kept]
+        summary["force_calls_per_image"] = round(sum(scaled) / len(scaled))
+        summary["force_calls_per_image_min"] = round(min(scaled))
+        summary["force_calls_per_image_max"] = round(max(scaled))
+        summary["force_calls_per_image_median"] = statistics.median(scaled)
+    return summary
 
 
 def _read_dat(path: Path) -> dict[str, str]:
@@ -233,15 +237,17 @@ def _finish(
         raw = row["raw"]
         reason = row["reason"]
         bad = raw is None or (reason is not None and reason != "0") or (raw is not None and raw >= cap)
-        recorded = None if raw is None else raw / images
         item = {
             "failed": bad,
-            "force_calls": recorded,
+            "force_calls": None if raw is None else raw,
+            "call_unit": "total",
             "geometry": row["geometry"],
             "raw": raw,
             "reason": reason,
             "count_key": row.get("count_key"),
         }
+        if images > 1 and raw is not None:
+            item["force_calls_per_image"] = raw / images
         for key in ("extrema", "overlap", "k", "client_reason", "last_force_calls", "seconds", "seed"):
             if key in row and row[key] is not None:
                 item[key] = row[key]

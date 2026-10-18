@@ -5,6 +5,25 @@ problem = "lj38"
 contract = "partial"
 entry_count = 11
 
+[potential]
+kind = "lennard-jones"
+epsilon = 1.0
+sigma = 1.0
+cutoff = 40.0
+pbc = [false, false, false]
+
+[sample]
+starts = 200
+geometry = "coords-con/%.4d.con"
+mode = "coords-con/%.4d_mode"
+overlap = 0.99
+
+[input]
+archive_path = "website/lowest-eigenvector/lj38/coords-con.tar.gz"
+
+[convergence]
+max_force_calls = 10000
+
 [metrics]
 required = ["force_calls", "force_calls_max", "force_calls_min", "nfailed"]
 
@@ -18,6 +37,7 @@ par_factor = 2
 bootstrap_resamples = 2000
 bootstrap_seed = 20261015
 counter = "harness"
+success = "harness calls under the cap and absolute overlap of at least 0.99 with the reference lowest mode"
 required = [
   "schema",
   "counter",

@@ -4,14 +4,21 @@
 #+begin_export rst
 .. raw:: html
 
-   <section class="bench" id="Al">
+   <section class="bench" id="Al" data-problem="hTST/Al">
    <h2>Al</h2>
    <dl class="bench-rule">
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
-   <h3>Present runs</h3>
-   <p>No present run is recorded.</p>
+   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
+   <table data-board-table="ranked" data-problem="hTST/Al">
+   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td colspan="13">No full harness row.</td></tr>
+   </tbody></table>
+   <p class="bench-gaps">No committed harness run.</p>
+   </section><section class="bench bench-legacy-section" id="Al-legacy">
+   <h3>Legacy 2014 archive</h3>
    <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest barrier force calls first.</caption>
@@ -50,14 +57,21 @@
    </tr>
    </tbody></table></div>
    <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "barrier_force_calls", "scale": "linear", "points": [{"id": "htst-al-eon-dimer-cg2", "entry": "eon-dimer-cg2", "code": "Eon r2006", "value": 21070.0, "best": true, "held": false, "failed": false}, {"id": "htst-al-eon-dimer-cg", "entry": "eon-dimer-cg", "code": "Eon r2006", "value": 28870.0, "best": false, "held": false, "failed": false}]}</script></figure>
-   </section><section class="bench" id="Pt">
+   </section><section class="bench" id="Pt" data-problem="hTST/Pt">
    <h2>Pt</h2>
    <dl class="bench-rule">
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
-   <h3>Present runs</h3>
-   <p>No present run is recorded.</p>
+   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
+   <table data-board-table="ranked" data-problem="hTST/Pt">
+   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td colspan="13">No full harness row.</td></tr>
+   </tbody></table>
+   <p class="bench-gaps">No committed harness run.</p>
+   </section><section class="bench bench-legacy-section" id="Pt-legacy">
+   <h3>Legacy 2014 archive</h3>
    <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest barrier force calls first.</caption>
