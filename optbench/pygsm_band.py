@@ -64,11 +64,22 @@ _NP_SUM = np.sum
 _NP_DOT = np.dot
 
 
+_THREAD_LIMIT = None
+
+
 def _threads_one() -> None:
+    """One BLAS thread. A later change does not shrink a pool that is already up."""
+    global _THREAD_LIMIT
     os.environ["OMP_NUM_THREADS"] = "1"
     os.environ["OPENBLAS_NUM_THREADS"] = "1"
     os.environ["MKL_NUM_THREADS"] = "1"
     os.environ["NUMEXPR_NUM_THREADS"] = "1"
+    if _THREAD_LIMIT is None:
+        try:
+            import threadpoolctl
+        except ImportError:
+            return
+        _THREAD_LIMIT = threadpoolctl.threadpool_limits(limits=1)
 
 
 def _dot_scalar(left, right, *args, **kwargs):

@@ -19,6 +19,7 @@ def test_asv_runtime_requires_the_campaign_scipy():
 
     source = inspect.getsource(bench_pygsm.ensure_pygsm)
     assert "scipy==1.18.1" in source
+    assert "threadpoolctl==3.7.0" in source
     assert bench_pygsm._runtime_ready()
 
 

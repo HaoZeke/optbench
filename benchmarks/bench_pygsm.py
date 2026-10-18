@@ -80,6 +80,7 @@ def ensure_pygsm() -> None:
                 "networkx",
                 "setuptools==80.10.2",
                 "scipy==1.18.1",
+                "threadpoolctl==3.7.0",
             ]
         )
         try:
