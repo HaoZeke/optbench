@@ -315,7 +315,9 @@ def run(
             workers=workers,
             work=work,
         )
-    if template["engine"] in {"ase", "sella"}:
+    if template["engine"] in {"ase", "sella"} or (
+        template["engine"] == "geodesic" and template.get("backend") == "ase"
+    ):
         from .ase_sella import run_template
 
         if template.get("problem") and template["problem"] != problem_name:

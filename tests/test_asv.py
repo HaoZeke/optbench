@@ -116,6 +116,7 @@ def test_pending_grid_is_every_problem_and_code():
         "eon-develop",
         "rgmin",
         "rgsaddle",
+        "geodesic",
         "ase",
         "sella",
         "artn",

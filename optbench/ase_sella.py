@@ -276,6 +276,10 @@ def _verify_index(atoms, expected: int) -> int:
             state["verifying"] = previous
 
 
+def _geodesic_ase(template: dict) -> bool:
+    return template.get("engine") == "geodesic" and template.get("backend") == "ase"
+
+
 def entry_id(template: dict) -> str:
     prefix = "ase" if template["engine"] == "ase" else "sella"
     rest = template["id"].split("/", 1)[1]
@@ -913,10 +917,43 @@ def _make_band(payload: dict, bucket: CallCounter):
         climb=climb,
         method=str(neb_spec.get("method", "improvedtangent")),
     )
-    band.interpolate(method=str(neb_spec.get("interpolate", "linear")))
+    method = str(neb_spec.get("interpolate", "linear"))
+    if method == "geodesic":
+        _geodesic_images(images, payload["potential"], seed=int(payload.get("seed") or 0))
+    else:
+        band.interpolate(method=method)
     for image in images:
         _attach(image, payload["potential"], bucket)
     return band, images
+
+
+def _geodesic_images(images, potential: dict, seed: int) -> None:
+    """Replace a linear or IDPP guess with the geodesic initial path.
+
+    The smoother does not call the calculator. Endpoints stay on the
+    geometries the problem supplied.
+    """
+    import numpy as np
+
+    from .geodesic_path import geodesic_positions, symbols_for
+
+    left = images[0]
+    right = images[-1]
+    free = np.asarray(_free_mask(left), dtype=bool)
+    box = None
+    if any(bool(flag) for flag in left.pbc):
+        box = np.asarray(left.cell.lengths(), dtype=np.float64)
+    frames = geodesic_positions(
+        np.asarray(left.positions, dtype=np.float64),
+        np.asarray(right.positions, dtype=np.float64),
+        symbols_for(str(potential["kind"]), len(left)),
+        len(images) - 2,
+        box,
+        free=free,
+        seed=seed,
+    )
+    for image, frame in zip(images, frames, strict=True):
+        image.set_positions(frame)
 
 
 def _neb_parameters(opt, payload: dict, neb_spec: dict) -> dict:
@@ -1441,7 +1478,7 @@ def run_template(
 ) -> dict:
     """Run one ASE or Sella template and write benchmark.dat plus per-start rows."""
     template = load_template(root, template_name)
-    if template["engine"] not in {"ase", "sella"}:
+    if template["engine"] not in {"ase", "sella"} and not _geodesic_ase(template):
         raise ValueError(f"{template_name} is not an ASE or Sella template")
     problem = resolve_problem(root, template["problem"])
     cache = cache or Path("/tmp/optbench-geometry")

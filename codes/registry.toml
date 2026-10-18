@@ -55,6 +55,16 @@ committed = "2026-10-15"
 note = "0.2.2 at main c0db2b8d. Band and min-mode sessions on this main. Stencil.band presets are not built here; the campaign calls the C band and min-mode API. OCI-NEB is CI-NEB followed by a min-mode refinement. Dimer, Lanczos, and P-RFO scores use this commit. Nonlinear CG is refused by check_force_driven; the min-mode translators are L-BFGS and FIRE."
 
 [[code]]
+id = "geodesic"
+name = "geodesic"
+role = "band initialiser"
+repository = "https://github.com/virtualzx-nad/geodesic-interpolate"
+ref = "main"
+commit = "476aa041f562d37d5fb4121b86817a52d75e4c5d"
+committed = "2026-06-01"
+note = "geodesic-interpolate 1.0.0 at 476aa041. This pin is the initial path for the ASE and rgsaddle NEB templates, an initialiser ablation. The smoother uses the package command-line defaults: scaling 1.7, distance cutoff 3, friction 0.01, tolerance 0.002, 15 iterations, and a sweep above 35 atoms. It does not evaluate the spec potential, so its steps are not force calls. The archive symbols A and Pt are absent from the radius table and use the library fallback radius 1.5."
+
+[[code]]
 id = "ase"
 name = "ASE"
 role = "minimization and saddle search"
