@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>pele</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="globalopt/lj100-binary">
    <th scope="row"><a href="#lj100-binary">Binary Lennard-Jones 100</a></th>
    <td data-code="eOn">—</td>
@@ -17,6 +17,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="pele">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -33,6 +34,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="pele">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -49,6 +51,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="pele" data-template="pele/lj38-basinhopping" data-par2="741833"><span class="bench-score">741833</span><a href="#lj38-templates">pele/lj38-basinhopping</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -65,6 +68,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="pele">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -81,6 +85,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="pele">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -97,6 +102,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="pele">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -113,6 +119,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="pele">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -129,6 +136,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="pele">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -201,7 +209,7 @@
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">No committed harness run.</p>
+   <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <details class="bench-details" id="lj150-templates">
    <summary>All templates (0 ranked)</summary>
    <div class="bench-scroll">
@@ -210,6 +218,9 @@
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
+   <h3>Partial</h3><ul>
+   <li>pele/lj150-basinhopping pele campaign n=2, result file sets partial true.</li>
+   </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="lj150-legacy">
    <h3>Legacy 2014 archive</h3>
@@ -272,13 +283,15 @@
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
    <p class="bench-gaps">Partial rows stay off the ranked table.</p>
+   <figure class="bench-plot"><a href="../../_static/board/globalopt-lj38-cost.svg"><picture><source srcset="../../_static/board/globalopt-lj38-cost.webp" type="image/webp"><img src="../../_static/board/globalopt-lj38-cost.png" alt="Cost versus success for globalopt/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
+   <p class="bench-gaps">No performance profile. One start has no finite cost.</p>
    <details class="bench-details" id="lj38-templates">
-   <summary>All templates (0 ranked)</summary>
+   <summary>All templates (1 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="globalopt/lj38">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="13">No full harness row.</td></tr>
+   <tr><td data-field="template">pele/lj38-basinhopping</td><td data-field="version">pele 0.1.2</td><td data-field="commit">b7081b932a06</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">741833</td><td data-field="success_rate">0.99</td><td data-field="wilson_low">0.945514</td><td data-field="wilson_high">0.998233</td><td data-field="median_calls">477810</td><td data-field="mean_calls">711833</td><td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    <h3>Partial</h3><ul>
    <li>eon-svn/bh-lj38 Eon svn campaign n=73, result file sets partial true; potential unshifted lj/cut, epsilon 1, sigma 1, cutoff 40.</li>
@@ -367,7 +380,7 @@
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">No committed harness run.</p>
+   <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <details class="bench-details" id="lj75-templates">
    <summary>All templates (0 ranked)</summary>
    <div class="bench-scroll">
@@ -376,6 +389,9 @@
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
+   <h3>Partial</h3><ul>
+   <li>pele/lj75-basinhopping pele campaign n=16, result file sets partial true.</li>
+   </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="lj75-legacy">
    <h3>Legacy 2014 archive</h3>
@@ -418,7 +434,7 @@
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">No committed harness run.</p>
+   <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <details class="bench-details" id="lj98-templates">
    <summary>All templates (0 ranked)</summary>
    <div class="bench-scroll">
@@ -427,6 +443,9 @@
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
+   <h3>Partial</h3><ul>
+   <li>pele/lj98-basinhopping pele campaign n=6, result file sets partial true.</li>
+   </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="lj98-legacy">
    <h3>Legacy 2014 archive</h3>

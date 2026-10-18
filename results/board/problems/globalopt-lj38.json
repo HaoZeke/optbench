@@ -50,6 +50,53 @@
       "wilson_low": 0.9500079920442688
     }
   ],
-  "ranked": [],
+  "profile_gap": "No performance profile. One start has no finite cost.",
+  "ranked": [
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 3000000,
+      "code": "pele",
+      "code_version": "0.1.2",
+      "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "pele-b7081b93-lj38-basinhopping",
+      "failures": {
+        "cap": 1,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 100,
+      "history": false,
+      "max_calls": 3000000.0,
+      "mean_calls": 711832.86,
+      "mean_per_image": null,
+      "median": 477810.5,
+      "median_calls": 477810.5,
+      "median_high": 600154.0,
+      "median_low": 407402.5,
+      "median_per_image": null,
+      "min_calls": 20714.0,
+      "n": 100,
+      "nfailed": 1,
+      "note": "starts.jsonl",
+      "par2_mean": 741832.86,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat",
+      "problem": "globalopt/lj38",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 0.99,
+      "template": "pele/lj38-basinhopping",
+      "tuning": "default",
+      "wilson_high": 0.9982325679358593,
+      "wilson_low": 0.9455138038212946
+    }
+  ],
   "title": "Lennard-Jones 38 global minimum"
 }
