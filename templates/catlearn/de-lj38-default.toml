@@ -1,0 +1,22 @@
+# CatLearn 0.7.0 ML-NEB. The problem file supplies the image count, the cap, and the force norm.
+id = "catlearn/de-lj38-default"
+engine = "catlearn-mlneb"
+code = "CatLearn"
+code_version = "0.7.0"
+commit = "6a307f32dbef18da9cd848f632d082b8e4f117b1"
+algorithm = "ML-NEB"
+tuning = "default"
+problem = "double-ended-saddle-search/lj38"
+note = "ML-NEB on the 50 LJ38 pairs with 5 interior images. Linear interpolation, acquisition acq_5, uncertainty convergence 0.05, MDMin dt 0.025, 750 surrogate steps, uncertainty early stop 0.25, improved tangent, automatic spring, and 500 iterations. The force stop is the problem norm 0.001."
+
+[mlneb]
+interpolation = "linear"
+mic = false
+acquisition = "acq_5"
+unc_convergence = 0.05
+dt = 0.025
+ml_steps = 750
+max_step = 0.25
+sequential = false
+neb_method = "improvedtangent"
+steps = 500

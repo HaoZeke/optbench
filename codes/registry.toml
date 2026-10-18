@@ -94,6 +94,16 @@ commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
 committed = "2026-10-05"
 note = "Activation-relaxation technique nouveau, plugin branch DEVEL. The benchmark contributor of a new entry is Rohit Goswami."
 
+[[code]]
+id = "catlearn"
+name = "CatLearn"
+role = "saddle search"
+repository = "https://github.com/SUNCAT-Center/CatLearn"
+ref = "6a307f32"
+commit = "6a307f32dbef18da9cd848f632d082b8e4f117b1"
+committed = "2023-02-07"
+note = "CatLearn 0.7.0 at 6a307f32, the 2023-02-07 merge of compat-update-ase-3-21. ML-NEB templates live under templates/catlearn/. A force call is one evaluation of the spec potential. Gaussian-process predictions stay outside that tally. The library prints 0.7.0. The setup.py string is 0.6.2."
+
 # generated ASE and Sella templates
 
 [[template]]

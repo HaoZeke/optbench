@@ -86,6 +86,18 @@ def run(
             output=output,
             workers=workers,
         )
+    elif loaded["engine"] == "catlearn-mlneb":
+        from optbench.catlearn_band import run as run_catlearn
+
+        summary = run_catlearn(
+            root,
+            problem,
+            template,
+            output=output,
+            workers=workers,
+            limit=limit,
+            resume=resume,
+        )
     else:
         client_path = _eon_client(client) if loaded["engine"] in {"eon-client", "eon"} else client
         summary = run_campaign(

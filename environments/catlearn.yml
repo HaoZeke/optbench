@@ -1,0 +1,12 @@
+# CatLearn is not a conda-forge package. This file does not select a
+# build string. The ML-NEB runs use the source checkout pinned in
+# codes/registry.toml under id catlearn:
+#   commit = 6a307f32dbef18da9cd848f632d082b8e4f117b1
+#   version string 0.7.0
+# asv has one environment_type, so this yml cannot be bound to one
+# class. The benchmark installs that checkout when it searches.
+name: catlearn
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
