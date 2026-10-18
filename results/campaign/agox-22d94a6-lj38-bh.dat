@@ -2,7 +2,7 @@
 # Local steps are SciPy L-BFGS-B stopped on the ASE maximum atomic force.
 # Basin hopping follows the AGOX basin-hopping example: a Metropolis sampler at 0.25 eV. The example rattles 3 atoms, the generator default, at amplitude 3 Å. This run rattles one quarter of the atoms at that amplitude, 9 atoms on LJ38. The archived geometry is quenched and seeded as the first sample. The seed is 314159 plus the start index. Local steps are SciPy L-BFGS-B, stopped when the maximum atomic force is 0.05 or after 500 steps. The example uses ASE BFGS and 5 steps, which does not resolve the 0.001 window. The potential is the harness Lennard-Jones potential, cutoff 40, epsilon 1, sigma 1, no shift. A success is an energy at or below the Cambridge LJ38 minimum on this potential plus 0.001. The force-call cap is 500000. The reference energy is the Cambridge cluster coordinates evaluated with this potential.
 # partial true. The row is not a full ranked score.
-nfailed 28
+nfailed 35
 code AGOX
 code_version 3.11.2.dev2+g22d94a6fa
 commit 22d94a6fae8cf2d08d51ecc8b9291a47667aa95c
@@ -14,14 +14,14 @@ counter harness
 cap 500000
 par2_mean 1000000
 wilson_low 0
-wilson_high 0.120643304766
+wilson_high 0.0989009923244
 par2_median 1000000
 par2_median_low 1000000
 par2_median_high 1000000
-v2_nfailed 28
+v2_nfailed 35
 v2_successes 0
-n 28
-n_cap 28
+n 35
+n_cap 35
 n_wrong_stationary 0
 n_divergence 0
 n_crash 0
