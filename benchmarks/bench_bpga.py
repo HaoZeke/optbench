@@ -99,12 +99,14 @@ class _BpgaSearch(TrackedSearch):
 
 def _benchmark(spec: dict):
     bound = spec
+    starts = selected_indices(spec["n"])
+    limit = spec["cap"]
 
     class _Benchmark(_BpgaSearch):
         param_names = ["seed", "start"]
-        params = [[SEED], selected_indices(spec["n"])]
+        params = [[SEED], starts]
         timeout = 7200
-        cap = bound["cap"]
+        cap = limit
         template_id = bound["template_id"]
         problem_id = bound["problem_id"]
         spec = bound
@@ -163,6 +165,7 @@ def write_results(root: Path, commit: str, *, started_at: int | None = None) -> 
         "num_cpu": machine["num_cpu"],
         "os": machine["os"],
         "ram": machine["ram"],
+        "python": "3.12",
     }
     now = int(time.time() * 1000) if started_at is None else int(started_at)
     columns = ["result", "params", "version", "started_at", "duration"]
