@@ -1,0 +1,41 @@
+id = "eon-svn/low-lj38-dimer-cg"
+engine = "eon"
+problem = "lowest-eigenvector/lj38"
+code = "Eon svn"
+code_version = "r2549"
+commit = "r2549"
+algorithm = "Dimer CG"
+reducer = "harness"
+failure_cap = 10000
+kind = "lowest"
+kernel = "lj40"
+asv_class = "EonSvnLowLj38DimerCg"
+note = '''
+Lowest mode of the 200 LJ38 geometries. Saddle Search max_iterations is 0. Improved dimer, rotation conjugate gradient, converged_angle 0. The harness raises rotations_max from 1 until the absolute overlap with the reference mode is at least 0.99, or 1000 attempts. The recorded calls are that successful attempt. direction.dat is numpy np.random.seed(314159) then a normalized 38 by 3 array, the same vector for every geometry. The harness kernel is unshifted lj/cut with epsilon 1, sigma 1, and cutoff 40.
+'''
+overlap = 0.99
+iteration_limit = 1000
+seeds = [1]
+asv_timeout = 1800
+budget_seconds = 1200
+
+[ini.Main]
+job = "saddle_search"
+finite_difference = 0.001
+random_seed = 1
+
+[ini.Potential]
+potential = "lammps"
+
+[ini."Saddle Search"]
+max_iterations = 0
+min_mode_method = "dimer"
+client_displace_type = "load"
+displace_magnitude = 0.1
+
+[ini.Dimer]
+improved = true
+opt_method = "cg"
+converged_angle = 0
+rotations_max = 1
+rotations_min = 1
