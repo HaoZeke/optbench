@@ -163,6 +163,16 @@ ref = "svn-snapshot"
 commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
 note = "No public git commit. The pin is the sha256 of the Wales svn.tar.bz2 snapshot, 122743078 bytes. Minimization L-BFGS calls the ASE socket and pes.evaluate. OPTIM's own call counter is not a score. Saddle search, NEB, noise, and PATHSAMPLE are not scored."
 
+[[code]]
+id = "lammpsneb"
+name = "LAMMPS"
+role = "saddle search"
+repository = "https://github.com/lammps/lammps"
+ref = "stable_30Sep2026"
+commit = "8de817dd79bfe4525d5d39246a212d833e6dee07"
+committed = "2026-09-30"
+note = "LAMMPS 30 Sep 2026, tag stable_30Sep2026. Band rows use fix neb with a climbing stage and min_style quickmin or fire. The pair style is the spec potential: lj/cut 40 with no shift, and morse 9.5 with pair_modify shift yes. Kspring is 1.0 with the default parallel neigh spring. The timestep is the unit default. Force calls are pair computes summed across replicas. The FIRE row leaves one fifth of the cap unused so a velocity-reset evaluation stays inside the cap."
+
 # generated ASE and Sella templates
 
 [[template]]
