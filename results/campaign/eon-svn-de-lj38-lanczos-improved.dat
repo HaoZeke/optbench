@@ -1,0 +1,15 @@
+force_calls 235
+force_calls_min 83
+force_calls_max 952
+force_calls_median 197.0
+call_unit total
+nfailed 0
+code Eon svn
+code_version r2549
+commit r2549
+algorithm Lanczos improved L-BFGS
+template eon-svn/de-lj38-lanczos-improved
+problem double-ended-saddle-search/lj38
+reducer harness
+counter harness
+count_keys HarnessCounter
