@@ -368,6 +368,8 @@ def _campaign_groups(directory: Path) -> dict[str, dict[str, Path]]:
         if not path.is_file():
             continue
         if name.endswith(".starts.jsonl"):
+            if path.stat().st_size == 0:
+                continue
             stem, kind = name[: -len(".starts.jsonl")], "starts_jsonl"
         elif name.endswith(".v2.json"):
             stem, kind = name[: -len(".v2.json")], "v2"
@@ -722,6 +724,7 @@ def _benchmark_index() -> dict[str, dict]:
     modules = (
         "benchmarks.bench_lj38",
         "benchmarks.bench_eon_develop",
+        "benchmarks.bench_eon_svn",
         "benchmarks.bench_eon_lane",
         "benchmarks.bench_eon_client",
         "benchmarks.bench_rgmin",

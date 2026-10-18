@@ -80,6 +80,122 @@
    <li>eon-client/sd-twopoint: no per-start record.</li>
    <li>eon-client/sd: no per-start record.</li>
    </ul>
+   <h3>Eon svn</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization and saddle search</td>
+   <td>r2549</td>
+   <td>r2549</td>
+   <td><a href="https://theory.cm.utexas.edu/svn/eon">https://theory.cm.utexas.edu/svn/eon</a></td>
+   </tr>
+   </tbody></table>
+   <table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="double-ended-saddle-search/lj38" data-template="eon-svn/de-lj38-ci">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="template">eon-svn/de-lj38-ci</td>
+   <td data-field="version">Eon svn r2549</td>
+   <td data-field="commit">r2549</td>
+   <td data-field="par2_mean">1180.1</td>
+   <td data-field="mean_calls">930.1</td>
+   <td data-field="median_calls">657</td>
+   <td data-field="failures">crash 0, divergence 0, cap 5, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="eon-svn/de-2ts-ci">
+   <td>lj38_2ts_separation</td>
+   <td data-field="template">eon-svn/de-2ts-ci</td>
+   <td data-field="version">Eon svn r2549</td>
+   <td data-field="commit">r2549</td>
+   <td data-field="par2_mean">13384.9</td>
+   <td data-field="mean_calls">7502.59</td>
+   <td data-field="median_calls">10000</td>
+   <td data-field="failures">crash 0, divergence 0, cap 30, wrong_stationary 0</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="eon-svn/de-pt-ci">
+   <td>pt-island</td>
+   <td data-field="template">eon-svn/de-pt-ci</td>
+   <td data-field="version">Eon svn r2549</td>
+   <td data-field="commit">r2549</td>
+   <td data-field="par2_mean">225.881</td>
+   <td data-field="mean_calls">225.881</td>
+   <td data-field="median_calls">188</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="lowest-eigenvector/lj38" data-template="eon-svn/low-lj38-lanczos">
+   <td>lj38</td>
+   <td data-field="template">eon-svn/low-lj38-lanczos</td>
+   <td data-field="version">Eon svn r2549</td>
+   <td data-field="commit">r2549</td>
+   <td data-field="par2_mean">26.385</td>
+   <td data-field="mean_calls">26.385</td>
+   <td data-field="median_calls">25</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-template="eon-svn/lj38-noise-0">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="template">eon-svn/lj38-noise-0</td>
+   <td data-field="version">Eon svn r2549</td>
+   <td data-field="commit">r2549</td>
+   <td data-field="par2_mean">300.052</td>
+   <td data-field="mean_calls">200.9</td>
+   <td data-field="median_calls">189</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 5</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-template="eon-svn/neb-pt-ci">
+   <td>Pt-heptamer</td>
+   <td data-field="template">eon-svn/neb-pt-ci</td>
+   <td data-field="version">Eon svn r2549</td>
+   <td data-field="commit">r2549</td>
+   <td data-field="par2_mean">336.769</td>
+   <td data-field="mean_calls">336.769</td>
+   <td data-field="median_calls">338</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   <tr data-problem="tsopt/LJ38" data-template="eon-svn/ts-lj38-dimer">
+   <td>LJ38</td>
+   <td data-field="template">eon-svn/ts-lj38-dimer</td>
+   <td data-field="version">Eon svn r2549</td>
+   <td data-field="commit">r2549</td>
+   <td data-field="par2_mean">644.135</td>
+   <td data-field="mean_calls">548.34</td>
+   <td data-field="median_calls">360.5</td>
+   <td data-field="failures">crash 0, divergence 1, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="tsopt/pt-island" data-template="eon-svn/ts-pt-dimer">
+   <td>pt-island</td>
+   <td data-field="template">eon-svn/ts-pt-dimer</td>
+   <td data-field="version">Eon svn r2549</td>
+   <td data-field="commit">r2549</td>
+   <td data-field="par2_mean">116.061</td>
+   <td data-field="mean_calls">116.061</td>
+   <td data-field="median_calls">114</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">49</td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run</p><ul>
+   <li>eon-svn/cg: no per-start record.</li>
+   <li>eon-svn/fire: no per-start record.</li>
+   <li>eon-svn/lbfgs-m100: no per-start record.</li>
+   <li>eon-svn/lbfgs-m20: no per-start record.</li>
+   <li>eon-svn/morse-cg: no per-start record.</li>
+   <li>eon-svn/morse-fire: no per-start record.</li>
+   <li>eon-svn/morse-lbfgs: no per-start record.</li>
+   <li>eon-svn/morse-sd: no per-start record.</li>
+   <li>eon-svn/qm: no per-start record.</li>
+   <li>eon-svn/sd-twopoint: no per-start record.</li>
+   <li>eon-svn/sd: no per-start record.</li>
+   </ul>
    <h3>rgmin</h3>
    <table>
    <caption>Registry pins.</caption>

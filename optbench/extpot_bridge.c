@@ -11,6 +11,7 @@
 #include <netdb.h>
 #include <netinet/in.h>
 #include <netinet/tcp.h>
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -188,6 +189,7 @@ int main(void) {
     int fd;
     int reply_line = 0;
     int force_rows = 0;
+    int cap_refusal = 0;
     FILE *out;
     char count_line[64];
 
@@ -262,6 +264,7 @@ int main(void) {
     if (reply_length == 0) {
         die("potential server closed without a reply");
     }
+    cap_refusal = strstr(reply, "cap") != NULL;
 
     out = fopen("from_extpot_to_eon", "w");
     if (out == NULL) {
@@ -274,8 +277,40 @@ int main(void) {
         }
         if (reply_line == 0) {
             if (strcmp(line, "ok") != 0) {
+                pid_t shell;
+                pid_t client;
                 fclose(out);
+                unlink("from_extpot_to_eon");
                 fprintf(stderr, "optbench ext_pot: %s\n", line);
+                /* system() ignores the bridge status. A harness cap must
+                   stop the client instead of leaving the previous forces. */
+                if (cap_refusal) {
+                    shell = getppid();
+                    client = shell;
+                    {
+                        char path[64];
+                        FILE *status;
+                        snprintf(path, sizeof(path), "/proc/%d/status", (int)shell);
+                        status = fopen(path, "r");
+                        if (status != NULL) {
+                            char status_line[256];
+                            while (fgets(status_line, sizeof(status_line), status) != NULL) {
+                                int ppid = 0;
+                                if (sscanf(status_line, "PPid: %d", &ppid) == 1) {
+                                    client = (pid_t)ppid;
+                                    break;
+                                }
+                            }
+                            fclose(status);
+                        }
+                    }
+                    if (client > 1 && client != shell) {
+                        kill(client, SIGKILL);
+                    }
+                    if (shell > 1) {
+                        kill(shell, SIGKILL);
+                    }
+                }
                 free(reply);
                 exit(1);
             }
