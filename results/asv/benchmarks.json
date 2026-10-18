@@ -256702,5 +256702,1757 @@
         "unit": "fraction",
         "version": "54289beee97255c41b6c66e2b89008ae5007043ad1c9d7012fb42f0495113694"
     },
-    "version": 2
+    "version": 2,
+    "bench_optax.OptaxC2h4Adam.time_search": {
+        "code": "class _OptaxSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_optax.OptaxC2h4Adam.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 14400,
+        "type": "time",
+        "unit": "seconds",
+        "version": "4b4b3b80e5d13b928a0cb5c54eb6551f18b34b935f35f787fe648c0190ee7361",
+        "warmup_time": 0
+    },
+    "bench_optax.OptaxC2h4Adam.track_failure_cap": {
+        "code": "class _OptaxSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4Adam.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "48a0888c374fb59d25fadef1964f32bbb2fc50ba1512f1e92de95275fef15efd"
+    },
+    "bench_optax.OptaxC2h4Adam.track_failure_crash": {
+        "code": "class _OptaxSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4Adam.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "5d1b25cc94e3e892b2a94cdf5d4970fbefebf5fddd0e5d637b033c92a27d2ab4"
+    },
+    "bench_optax.OptaxC2h4Adam.track_failure_divergence": {
+        "code": "class _OptaxSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4Adam.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "87b4d5c1ff110ff8788b8d7ef14f7e56cb820583247977640fbc05d9953aa050"
+    },
+    "bench_optax.OptaxC2h4Adam.track_failure_wrong_stationary": {
+        "code": "class _OptaxSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4Adam.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "431c8694361453ad1b58a6d1c603c4c87de51475c804266ff1b28ce671c7824b"
+    },
+    "bench_optax.OptaxC2h4Adam.track_force_calls": {
+        "code": "class _OptaxSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4Adam.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "force calls",
+        "version": "4e56190ca365a2f84f4d5b5b2e26492bc24739a1842bc0cc5d9ba6b6712d57aa"
+    },
+    "bench_optax.OptaxC2h4Adam.track_success": {
+        "code": "class _OptaxSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4Adam.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "fraction",
+        "version": "9d0d7807056dad1ebd43c1349303971cacc821bd9b53177f16639526a3e831f5"
+    },
+    "bench_optax.OptaxC2h4AdamForce.time_search": {
+        "code": "class _OptaxSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_optax.OptaxC2h4AdamForce.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 14400,
+        "type": "time",
+        "unit": "seconds",
+        "version": "4b4b3b80e5d13b928a0cb5c54eb6551f18b34b935f35f787fe648c0190ee7361",
+        "warmup_time": 0
+    },
+    "bench_optax.OptaxC2h4AdamForce.track_failure_cap": {
+        "code": "class _OptaxSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4AdamForce.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "48a0888c374fb59d25fadef1964f32bbb2fc50ba1512f1e92de95275fef15efd"
+    },
+    "bench_optax.OptaxC2h4AdamForce.track_failure_crash": {
+        "code": "class _OptaxSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4AdamForce.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "5d1b25cc94e3e892b2a94cdf5d4970fbefebf5fddd0e5d637b033c92a27d2ab4"
+    },
+    "bench_optax.OptaxC2h4AdamForce.track_failure_divergence": {
+        "code": "class _OptaxSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4AdamForce.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "87b4d5c1ff110ff8788b8d7ef14f7e56cb820583247977640fbc05d9953aa050"
+    },
+    "bench_optax.OptaxC2h4AdamForce.track_failure_wrong_stationary": {
+        "code": "class _OptaxSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4AdamForce.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "431c8694361453ad1b58a6d1c603c4c87de51475c804266ff1b28ce671c7824b"
+    },
+    "bench_optax.OptaxC2h4AdamForce.track_force_calls": {
+        "code": "class _OptaxSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4AdamForce.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "force calls",
+        "version": "4e56190ca365a2f84f4d5b5b2e26492bc24739a1842bc0cc5d9ba6b6712d57aa"
+    },
+    "bench_optax.OptaxC2h4AdamForce.track_success": {
+        "code": "class _OptaxSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4AdamForce.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "fraction",
+        "version": "9d0d7807056dad1ebd43c1349303971cacc821bd9b53177f16639526a3e831f5"
+    },
+    "bench_optax.OptaxC2h4Lbfgs.time_search": {
+        "code": "class _OptaxSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_optax.OptaxC2h4Lbfgs.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 14400,
+        "type": "time",
+        "unit": "seconds",
+        "version": "4b4b3b80e5d13b928a0cb5c54eb6551f18b34b935f35f787fe648c0190ee7361",
+        "warmup_time": 0
+    },
+    "bench_optax.OptaxC2h4Lbfgs.track_failure_cap": {
+        "code": "class _OptaxSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4Lbfgs.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "48a0888c374fb59d25fadef1964f32bbb2fc50ba1512f1e92de95275fef15efd"
+    },
+    "bench_optax.OptaxC2h4Lbfgs.track_failure_crash": {
+        "code": "class _OptaxSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4Lbfgs.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "5d1b25cc94e3e892b2a94cdf5d4970fbefebf5fddd0e5d637b033c92a27d2ab4"
+    },
+    "bench_optax.OptaxC2h4Lbfgs.track_failure_divergence": {
+        "code": "class _OptaxSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4Lbfgs.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "87b4d5c1ff110ff8788b8d7ef14f7e56cb820583247977640fbc05d9953aa050"
+    },
+    "bench_optax.OptaxC2h4Lbfgs.track_failure_wrong_stationary": {
+        "code": "class _OptaxSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4Lbfgs.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "431c8694361453ad1b58a6d1c603c4c87de51475c804266ff1b28ce671c7824b"
+    },
+    "bench_optax.OptaxC2h4Lbfgs.track_force_calls": {
+        "code": "class _OptaxSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4Lbfgs.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "force calls",
+        "version": "4e56190ca365a2f84f4d5b5b2e26492bc24739a1842bc0cc5d9ba6b6712d57aa"
+    },
+    "bench_optax.OptaxC2h4Lbfgs.track_success": {
+        "code": "class _OptaxSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4Lbfgs.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "fraction",
+        "version": "9d0d7807056dad1ebd43c1349303971cacc821bd9b53177f16639526a3e831f5"
+    },
+    "bench_optax.OptaxC2h4LbfgsForce.time_search": {
+        "code": "class _OptaxSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_optax.OptaxC2h4LbfgsForce.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 14400,
+        "type": "time",
+        "unit": "seconds",
+        "version": "4b4b3b80e5d13b928a0cb5c54eb6551f18b34b935f35f787fe648c0190ee7361",
+        "warmup_time": 0
+    },
+    "bench_optax.OptaxC2h4LbfgsForce.track_failure_cap": {
+        "code": "class _OptaxSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4LbfgsForce.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "48a0888c374fb59d25fadef1964f32bbb2fc50ba1512f1e92de95275fef15efd"
+    },
+    "bench_optax.OptaxC2h4LbfgsForce.track_failure_crash": {
+        "code": "class _OptaxSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4LbfgsForce.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "5d1b25cc94e3e892b2a94cdf5d4970fbefebf5fddd0e5d637b033c92a27d2ab4"
+    },
+    "bench_optax.OptaxC2h4LbfgsForce.track_failure_divergence": {
+        "code": "class _OptaxSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4LbfgsForce.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "87b4d5c1ff110ff8788b8d7ef14f7e56cb820583247977640fbc05d9953aa050"
+    },
+    "bench_optax.OptaxC2h4LbfgsForce.track_failure_wrong_stationary": {
+        "code": "class _OptaxSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4LbfgsForce.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "431c8694361453ad1b58a6d1c603c4c87de51475c804266ff1b28ce671c7824b"
+    },
+    "bench_optax.OptaxC2h4LbfgsForce.track_force_calls": {
+        "code": "class _OptaxSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4LbfgsForce.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "force calls",
+        "version": "4e56190ca365a2f84f4d5b5b2e26492bc24739a1842bc0cc5d9ba6b6712d57aa"
+    },
+    "bench_optax.OptaxC2h4LbfgsForce.track_success": {
+        "code": "class _OptaxSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4LbfgsForce.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "fraction",
+        "version": "9d0d7807056dad1ebd43c1349303971cacc821bd9b53177f16639526a3e831f5"
+    },
+    "bench_optax.OptaxC2h4Rprop.time_search": {
+        "code": "class _OptaxSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_optax.OptaxC2h4Rprop.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 14400,
+        "type": "time",
+        "unit": "seconds",
+        "version": "4b4b3b80e5d13b928a0cb5c54eb6551f18b34b935f35f787fe648c0190ee7361",
+        "warmup_time": 0
+    },
+    "bench_optax.OptaxC2h4Rprop.track_failure_cap": {
+        "code": "class _OptaxSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4Rprop.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "48a0888c374fb59d25fadef1964f32bbb2fc50ba1512f1e92de95275fef15efd"
+    },
+    "bench_optax.OptaxC2h4Rprop.track_failure_crash": {
+        "code": "class _OptaxSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4Rprop.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "5d1b25cc94e3e892b2a94cdf5d4970fbefebf5fddd0e5d637b033c92a27d2ab4"
+    },
+    "bench_optax.OptaxC2h4Rprop.track_failure_divergence": {
+        "code": "class _OptaxSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4Rprop.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "87b4d5c1ff110ff8788b8d7ef14f7e56cb820583247977640fbc05d9953aa050"
+    },
+    "bench_optax.OptaxC2h4Rprop.track_failure_wrong_stationary": {
+        "code": "class _OptaxSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4Rprop.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "431c8694361453ad1b58a6d1c603c4c87de51475c804266ff1b28ce671c7824b"
+    },
+    "bench_optax.OptaxC2h4Rprop.track_force_calls": {
+        "code": "class _OptaxSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4Rprop.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "force calls",
+        "version": "4e56190ca365a2f84f4d5b5b2e26492bc24739a1842bc0cc5d9ba6b6712d57aa"
+    },
+    "bench_optax.OptaxC2h4Rprop.track_success": {
+        "code": "class _OptaxSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4Rprop.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "fraction",
+        "version": "9d0d7807056dad1ebd43c1349303971cacc821bd9b53177f16639526a3e831f5"
+    },
+    "bench_optax.OptaxC2h4RpropForce.time_search": {
+        "code": "class _OptaxSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_optax.OptaxC2h4RpropForce.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 14400,
+        "type": "time",
+        "unit": "seconds",
+        "version": "4b4b3b80e5d13b928a0cb5c54eb6551f18b34b935f35f787fe648c0190ee7361",
+        "warmup_time": 0
+    },
+    "bench_optax.OptaxC2h4RpropForce.track_failure_cap": {
+        "code": "class _OptaxSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4RpropForce.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "48a0888c374fb59d25fadef1964f32bbb2fc50ba1512f1e92de95275fef15efd"
+    },
+    "bench_optax.OptaxC2h4RpropForce.track_failure_crash": {
+        "code": "class _OptaxSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4RpropForce.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "5d1b25cc94e3e892b2a94cdf5d4970fbefebf5fddd0e5d637b033c92a27d2ab4"
+    },
+    "bench_optax.OptaxC2h4RpropForce.track_failure_divergence": {
+        "code": "class _OptaxSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4RpropForce.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "87b4d5c1ff110ff8788b8d7ef14f7e56cb820583247977640fbc05d9953aa050"
+    },
+    "bench_optax.OptaxC2h4RpropForce.track_failure_wrong_stationary": {
+        "code": "class _OptaxSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4RpropForce.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "431c8694361453ad1b58a6d1c603c4c87de51475c804266ff1b28ce671c7824b"
+    },
+    "bench_optax.OptaxC2h4RpropForce.track_force_calls": {
+        "code": "class _OptaxSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4RpropForce.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "force calls",
+        "version": "4e56190ca365a2f84f4d5b5b2e26492bc24739a1842bc0cc5d9ba6b6712d57aa"
+    },
+    "bench_optax.OptaxC2h4RpropForce.track_success": {
+        "code": "class _OptaxSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxC2h4RpropForce.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "fraction",
+        "version": "9d0d7807056dad1ebd43c1349303971cacc821bd9b53177f16639526a3e831f5"
+    },
+    "bench_optax.OptaxEmtPt38Adam.time_search": {
+        "code": "class _OptaxSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_optax.OptaxEmtPt38Adam.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 14400,
+        "type": "time",
+        "unit": "seconds",
+        "version": "4b4b3b80e5d13b928a0cb5c54eb6551f18b34b935f35f787fe648c0190ee7361",
+        "warmup_time": 0
+    },
+    "bench_optax.OptaxEmtPt38Adam.track_failure_cap": {
+        "code": "class _OptaxSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38Adam.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "48a0888c374fb59d25fadef1964f32bbb2fc50ba1512f1e92de95275fef15efd"
+    },
+    "bench_optax.OptaxEmtPt38Adam.track_failure_crash": {
+        "code": "class _OptaxSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38Adam.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "5d1b25cc94e3e892b2a94cdf5d4970fbefebf5fddd0e5d637b033c92a27d2ab4"
+    },
+    "bench_optax.OptaxEmtPt38Adam.track_failure_divergence": {
+        "code": "class _OptaxSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38Adam.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "87b4d5c1ff110ff8788b8d7ef14f7e56cb820583247977640fbc05d9953aa050"
+    },
+    "bench_optax.OptaxEmtPt38Adam.track_failure_wrong_stationary": {
+        "code": "class _OptaxSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38Adam.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "431c8694361453ad1b58a6d1c603c4c87de51475c804266ff1b28ce671c7824b"
+    },
+    "bench_optax.OptaxEmtPt38Adam.track_force_calls": {
+        "code": "class _OptaxSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38Adam.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "force calls",
+        "version": "4e56190ca365a2f84f4d5b5b2e26492bc24739a1842bc0cc5d9ba6b6712d57aa"
+    },
+    "bench_optax.OptaxEmtPt38Adam.track_success": {
+        "code": "class _OptaxSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38Adam.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "fraction",
+        "version": "9d0d7807056dad1ebd43c1349303971cacc821bd9b53177f16639526a3e831f5"
+    },
+    "bench_optax.OptaxEmtPt38AdamForce.time_search": {
+        "code": "class _OptaxSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_optax.OptaxEmtPt38AdamForce.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 14400,
+        "type": "time",
+        "unit": "seconds",
+        "version": "4b4b3b80e5d13b928a0cb5c54eb6551f18b34b935f35f787fe648c0190ee7361",
+        "warmup_time": 0
+    },
+    "bench_optax.OptaxEmtPt38AdamForce.track_failure_cap": {
+        "code": "class _OptaxSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38AdamForce.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "48a0888c374fb59d25fadef1964f32bbb2fc50ba1512f1e92de95275fef15efd"
+    },
+    "bench_optax.OptaxEmtPt38AdamForce.track_failure_crash": {
+        "code": "class _OptaxSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38AdamForce.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "5d1b25cc94e3e892b2a94cdf5d4970fbefebf5fddd0e5d637b033c92a27d2ab4"
+    },
+    "bench_optax.OptaxEmtPt38AdamForce.track_failure_divergence": {
+        "code": "class _OptaxSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38AdamForce.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "87b4d5c1ff110ff8788b8d7ef14f7e56cb820583247977640fbc05d9953aa050"
+    },
+    "bench_optax.OptaxEmtPt38AdamForce.track_failure_wrong_stationary": {
+        "code": "class _OptaxSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38AdamForce.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "431c8694361453ad1b58a6d1c603c4c87de51475c804266ff1b28ce671c7824b"
+    },
+    "bench_optax.OptaxEmtPt38AdamForce.track_force_calls": {
+        "code": "class _OptaxSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38AdamForce.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "force calls",
+        "version": "4e56190ca365a2f84f4d5b5b2e26492bc24739a1842bc0cc5d9ba6b6712d57aa"
+    },
+    "bench_optax.OptaxEmtPt38AdamForce.track_success": {
+        "code": "class _OptaxSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38AdamForce.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "fraction",
+        "version": "9d0d7807056dad1ebd43c1349303971cacc821bd9b53177f16639526a3e831f5"
+    },
+    "bench_optax.OptaxEmtPt38Lbfgs.time_search": {
+        "code": "class _OptaxSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_optax.OptaxEmtPt38Lbfgs.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 14400,
+        "type": "time",
+        "unit": "seconds",
+        "version": "4b4b3b80e5d13b928a0cb5c54eb6551f18b34b935f35f787fe648c0190ee7361",
+        "warmup_time": 0
+    },
+    "bench_optax.OptaxEmtPt38Lbfgs.track_failure_cap": {
+        "code": "class _OptaxSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38Lbfgs.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "48a0888c374fb59d25fadef1964f32bbb2fc50ba1512f1e92de95275fef15efd"
+    },
+    "bench_optax.OptaxEmtPt38Lbfgs.track_failure_crash": {
+        "code": "class _OptaxSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38Lbfgs.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "5d1b25cc94e3e892b2a94cdf5d4970fbefebf5fddd0e5d637b033c92a27d2ab4"
+    },
+    "bench_optax.OptaxEmtPt38Lbfgs.track_failure_divergence": {
+        "code": "class _OptaxSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38Lbfgs.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "87b4d5c1ff110ff8788b8d7ef14f7e56cb820583247977640fbc05d9953aa050"
+    },
+    "bench_optax.OptaxEmtPt38Lbfgs.track_failure_wrong_stationary": {
+        "code": "class _OptaxSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38Lbfgs.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "431c8694361453ad1b58a6d1c603c4c87de51475c804266ff1b28ce671c7824b"
+    },
+    "bench_optax.OptaxEmtPt38Lbfgs.track_force_calls": {
+        "code": "class _OptaxSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38Lbfgs.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "force calls",
+        "version": "4e56190ca365a2f84f4d5b5b2e26492bc24739a1842bc0cc5d9ba6b6712d57aa"
+    },
+    "bench_optax.OptaxEmtPt38Lbfgs.track_success": {
+        "code": "class _OptaxSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38Lbfgs.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "fraction",
+        "version": "9d0d7807056dad1ebd43c1349303971cacc821bd9b53177f16639526a3e831f5"
+    },
+    "bench_optax.OptaxEmtPt38LbfgsForce.time_search": {
+        "code": "class _OptaxSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_optax.OptaxEmtPt38LbfgsForce.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 14400,
+        "type": "time",
+        "unit": "seconds",
+        "version": "4b4b3b80e5d13b928a0cb5c54eb6551f18b34b935f35f787fe648c0190ee7361",
+        "warmup_time": 0
+    },
+    "bench_optax.OptaxEmtPt38LbfgsForce.track_failure_cap": {
+        "code": "class _OptaxSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38LbfgsForce.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "48a0888c374fb59d25fadef1964f32bbb2fc50ba1512f1e92de95275fef15efd"
+    },
+    "bench_optax.OptaxEmtPt38LbfgsForce.track_failure_crash": {
+        "code": "class _OptaxSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38LbfgsForce.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "5d1b25cc94e3e892b2a94cdf5d4970fbefebf5fddd0e5d637b033c92a27d2ab4"
+    },
+    "bench_optax.OptaxEmtPt38LbfgsForce.track_failure_divergence": {
+        "code": "class _OptaxSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38LbfgsForce.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "87b4d5c1ff110ff8788b8d7ef14f7e56cb820583247977640fbc05d9953aa050"
+    },
+    "bench_optax.OptaxEmtPt38LbfgsForce.track_failure_wrong_stationary": {
+        "code": "class _OptaxSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38LbfgsForce.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "431c8694361453ad1b58a6d1c603c4c87de51475c804266ff1b28ce671c7824b"
+    },
+    "bench_optax.OptaxEmtPt38LbfgsForce.track_force_calls": {
+        "code": "class _OptaxSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38LbfgsForce.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "force calls",
+        "version": "4e56190ca365a2f84f4d5b5b2e26492bc24739a1842bc0cc5d9ba6b6712d57aa"
+    },
+    "bench_optax.OptaxEmtPt38LbfgsForce.track_success": {
+        "code": "class _OptaxSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38LbfgsForce.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "fraction",
+        "version": "9d0d7807056dad1ebd43c1349303971cacc821bd9b53177f16639526a3e831f5"
+    },
+    "bench_optax.OptaxEmtPt38Rprop.time_search": {
+        "code": "class _OptaxSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_optax.OptaxEmtPt38Rprop.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 14400,
+        "type": "time",
+        "unit": "seconds",
+        "version": "4b4b3b80e5d13b928a0cb5c54eb6551f18b34b935f35f787fe648c0190ee7361",
+        "warmup_time": 0
+    },
+    "bench_optax.OptaxEmtPt38Rprop.track_failure_cap": {
+        "code": "class _OptaxSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38Rprop.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "48a0888c374fb59d25fadef1964f32bbb2fc50ba1512f1e92de95275fef15efd"
+    },
+    "bench_optax.OptaxEmtPt38Rprop.track_failure_crash": {
+        "code": "class _OptaxSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38Rprop.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "5d1b25cc94e3e892b2a94cdf5d4970fbefebf5fddd0e5d637b033c92a27d2ab4"
+    },
+    "bench_optax.OptaxEmtPt38Rprop.track_failure_divergence": {
+        "code": "class _OptaxSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38Rprop.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "87b4d5c1ff110ff8788b8d7ef14f7e56cb820583247977640fbc05d9953aa050"
+    },
+    "bench_optax.OptaxEmtPt38Rprop.track_failure_wrong_stationary": {
+        "code": "class _OptaxSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38Rprop.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "431c8694361453ad1b58a6d1c603c4c87de51475c804266ff1b28ce671c7824b"
+    },
+    "bench_optax.OptaxEmtPt38Rprop.track_force_calls": {
+        "code": "class _OptaxSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38Rprop.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "force calls",
+        "version": "4e56190ca365a2f84f4d5b5b2e26492bc24739a1842bc0cc5d9ba6b6712d57aa"
+    },
+    "bench_optax.OptaxEmtPt38Rprop.track_success": {
+        "code": "class _OptaxSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38Rprop.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "fraction",
+        "version": "9d0d7807056dad1ebd43c1349303971cacc821bd9b53177f16639526a3e831f5"
+    },
+    "bench_optax.OptaxEmtPt38RpropForce.time_search": {
+        "code": "class _OptaxSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_optax.OptaxEmtPt38RpropForce.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 14400,
+        "type": "time",
+        "unit": "seconds",
+        "version": "4b4b3b80e5d13b928a0cb5c54eb6551f18b34b935f35f787fe648c0190ee7361",
+        "warmup_time": 0
+    },
+    "bench_optax.OptaxEmtPt38RpropForce.track_failure_cap": {
+        "code": "class _OptaxSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38RpropForce.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "48a0888c374fb59d25fadef1964f32bbb2fc50ba1512f1e92de95275fef15efd"
+    },
+    "bench_optax.OptaxEmtPt38RpropForce.track_failure_crash": {
+        "code": "class _OptaxSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38RpropForce.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "5d1b25cc94e3e892b2a94cdf5d4970fbefebf5fddd0e5d637b033c92a27d2ab4"
+    },
+    "bench_optax.OptaxEmtPt38RpropForce.track_failure_divergence": {
+        "code": "class _OptaxSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38RpropForce.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "87b4d5c1ff110ff8788b8d7ef14f7e56cb820583247977640fbc05d9953aa050"
+    },
+    "bench_optax.OptaxEmtPt38RpropForce.track_failure_wrong_stationary": {
+        "code": "class _OptaxSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38RpropForce.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "431c8694361453ad1b58a6d1c603c4c87de51475c804266ff1b28ce671c7824b"
+    },
+    "bench_optax.OptaxEmtPt38RpropForce.track_force_calls": {
+        "code": "class _OptaxSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38RpropForce.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "force calls",
+        "version": "4e56190ca365a2f84f4d5b5b2e26492bc24739a1842bc0cc5d9ba6b6712d57aa"
+    },
+    "bench_optax.OptaxEmtPt38RpropForce.track_success": {
+        "code": "class _OptaxSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"optax is not installed in this environment\")\n        self.record = None",
+        "name": "bench_optax.OptaxEmtPt38RpropForce.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'20261018'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "fraction",
+        "version": "9d0d7807056dad1ebd43c1349303971cacc821bd9b53177f16639526a3e831f5"
+    }
 }
