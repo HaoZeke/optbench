@@ -1,0 +1,70 @@
+{
+  "counter": "harness",
+  "legacy": {
+    "force_calls": 248,
+    "force_calls_max": 2014,
+    "force_calls_median": 221.5,
+    "force_calls_min": 25,
+    "n": 200,
+    "nfailed": 22,
+    "successes": 178,
+    "transition_states": 0
+  },
+  "problem": "lowest-eigenvector/lj38",
+  "provenance": {
+    "code": "tsase",
+    "code_version": "1.0",
+    "commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218",
+    "machine": {
+      "machine": "x86_64",
+      "node": "cursor",
+      "python": "3.12.3",
+      "system": "Linux"
+    },
+    "parameters": {
+      "cap": 10000,
+      "counter": "harness",
+      "dr": 0.001,
+      "force_norm": 0.001,
+      "max_step": 0.2,
+      "method": "dimer",
+      "phi_tol": 5.0,
+      "potential": "lj",
+      "rotation_max": 4,
+      "seed": "0",
+      "task": "mode"
+    }
+  },
+  "schema": "optbench.score/v2",
+  "score": {
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 20261015,
+    "cap": 10000,
+    "includes_failures": true,
+    "iqr": 227.25,
+    "iqr_high": 301.53124999999983,
+    "iqr_low": 171.75,
+    "mean": 2420.605,
+    "median": 237.5,
+    "median_high": 253.0,
+    "median_low": 217.0,
+    "n": 200,
+    "n_cap": 0,
+    "n_crash": 0,
+    "n_divergence": 22,
+    "n_wrong_stationary": 0,
+    "nfailed": 22,
+    "par2_mean": 2420.605,
+    "par_applied": true,
+    "par_factor": 2,
+    "q25": 135.25,
+    "q75": 362.5,
+    "scoring": "par2-wilson-bootstrap",
+    "success_only_mean": 247.87078651685394,
+    "success_rate": 0.89,
+    "successes": 178,
+    "wilson_high": 0.926227555398747,
+    "wilson_low": 0.839073090026985
+  },
+  "template": "tsase/mode-lj38"
+}
