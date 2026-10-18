@@ -997,7 +997,120 @@ def _stop_requested() -> bool:
     return Path("/tmp/optbench-cp2k-stop").is_file()
 
 
-def _run_saddle(root: Path, problem: dict, template: dict, *, output: Path, force_tol: float, work: Path) -> dict:
+def _draw_saddle_spec(rng, searches: int, rep: int, listed: list[int], free: np.ndarray, positions: np.ndarray, minimum: np.ndarray, magnitude: float, base: dict, fixed: np.ndarray) -> dict:
+    """One displacement. The draw is the only use of the search RNG."""
+    atom = int(listed[int(rng.integers(0, len(listed)))])
+    slots = np.flatnonzero(free == atom)
+    if len(slots) != 1:
+        raise RuntimeError(f"displace atom {atom} is not one free atom")
+    slot = int(slots[0])
+    direction = rng.normal(size=3)
+    direction = direction / np.linalg.norm(direction)
+    kicked = positions.copy()
+    free_pos = minimum.reshape(-1, 3).copy()
+    free_pos[slot] = free_pos[slot] + magnitude * direction
+    kicked[free] = free_pos
+    kick = np.zeros(positions.shape, dtype=np.float64)
+    kick[atom] = direction
+    spec = dict(base)
+    spec["name"] = f"rep{rep}-search{searches}"
+    spec["positions"] = kicked.tolist()
+    spec["task"] = "dimer"
+    spec["mode_policy"] = "given"
+    spec["mode"] = _full_mode(positions, fixed, kick[~fixed]).tolist()
+    spec["cap"] = CLIMB_CALLS
+    return spec
+
+
+def _commit_saddle_outcome(spec: dict, outcome: dict, rng_state: dict, *, found: list, all_records: list, connected: int, positions, fixed, cell, minimum, min_energy: float, force_tol: float, connect_rmsd: float, barrier_max: float, base: dict, partial_path: Path, output: Path, template: dict, problem_id: str) -> tuple[int, bool, str]:
+    """Score one climb in catalog order. Returns connected, refused, failure."""
+    climb = int(outcome.get("force_calls") or 0)
+    record = {
+        "schema": "optbench.start/v2",
+        "start": spec["name"],
+        "seed": "0",
+        "counter": "harness",
+        "comparable": True,
+        "success": False,
+        "reasons": list(outcome.get("reasons") or ["force_norm"]),
+        "converged": bool(outcome.get("converged")),
+        "hessian_index": outcome.get("hessian_index"),
+        "code": base["code"],
+        "code_version": base["code_version"],
+        "commit": base["commit"],
+        "tuning": base["tuning"],
+        "template": template["id"],
+        "problem": problem_id,
+        "climb_calls": climb,
+    }
+    saved_point = None
+    endpoint_calls = 0
+    usable = (
+        outcome.get("x") is not None
+        and bool(outcome.get("converged"))
+        and outcome.get("hessian_index") == 1
+        and float(outcome.get("force_norm") or 1e9) <= force_tol + 1e-10
+        and climb < CLIMB_CALLS
+    )
+    if usable:
+        saddle_x = np.asarray(outcome["x"], dtype=np.float64)
+        if outcome.get("mode_axis") is not None:
+            axis = _unit(np.asarray(outcome["mode_axis"], dtype=np.float64))
+        else:
+            axis = _axis_from_point(base, saddle_x, positions, fixed, cell)
+        free = np.flatnonzero(~np.asarray(fixed, dtype=bool))
+        plus = _minimize_spec(base, _place(positions, free, saddle_x + 0.1 * axis), name=f"{spec['name']}-plus", cap=_SADDLE_ENDPOINT_BUDGET)
+        minus = _minimize_spec(base, _place(positions, free, saddle_x - 0.1 * axis), name=f"{spec['name']}-minus", cap=_SADDLE_ENDPOINT_BUDGET)
+        plus_out = run_start(plus)
+        minus_out = run_start(minus)
+        endpoint_calls = int(plus_out.get("force_calls") or 0) + int(minus_out.get("force_calls") or 0)
+        plus_x = np.asarray(plus_out["x"], dtype=np.float64) if plus_out.get("x") is not None else saddle_x + 0.1 * axis
+        minus_x = np.asarray(minus_out["x"], dtype=np.float64) if minus_out.get("x") is not None else saddle_x - 0.1 * axis
+        plus_rmsd = _cartesian_rmsd(plus_x.reshape(-1, 3), minimum.reshape(-1, 3))
+        minus_rmsd = _cartesian_rmsd(minus_x.reshape(-1, 3), minimum.reshape(-1, 3))
+        links = (plus_rmsd <= connect_rmsd) ^ (minus_rmsd <= connect_rmsd)
+        novel = all(_cartesian_rmsd(saddle_x.reshape(-1, 3), old.reshape(-1, 3)) > connect_rmsd for old in found)
+        barrier = float(outcome["energy"] - min_energy)
+        record["barrier"] = barrier
+        record["rmsd_plus"] = plus_rmsd
+        record["rmsd_minus"] = minus_rmsd
+        record["reasons"] = []
+        if novel:
+            found.append(saddle_x)
+            saved_point = saddle_x
+        if links and novel and barrier < barrier_max:
+            connected += 1
+            record["success"] = True
+        else:
+            if not links:
+                record["reasons"].append("not_connected")
+            if not novel:
+                record["reasons"].append("duplicate")
+            if barrier >= barrier_max:
+                record["reasons"].append("barrier")
+    elif outcome.get("failure") == "crash" or outcome.get("x") is None:
+        record["reasons"] = ["crash"]
+    elif climb >= CLIMB_CALLS:
+        record["reasons"] = ["cap", "force_norm"]
+    else:
+        record["reasons"] = [str(item) for item in (outcome.get("reasons") or ["force_norm"])]
+    record["force_calls"] = climb + endpoint_calls
+    record["endpoint_calls"] = endpoint_calls
+    record["verify_calls"] = int(outcome.get("verify_calls") or 0)
+    success, failure = _outcome(record["reasons"])
+    record["success"] = success
+    record["failure"] = failure
+    all_records.append(record)
+    stored = dict(record)
+    stored["rng_state"] = rng_state
+    if saved_point is not None:
+        stored["saddle_x"] = saved_point.tolist()
+    _append_jsonl(partial_path, stored)
+    _emit_saddle(output, all_records, template, problem_id)
+    return connected, bool(outcome.get("optimizer_refused")), failure
+
+
+def _run_saddle(root: Path, problem: dict, template: dict, *, output: Path, force_tol: float, work: Path, workers: int = 1) -> dict:
     """One displacement is one search: the climb plus two minimizations.
 
     The initial minimization is outside the per-search count. The board
@@ -1092,130 +1205,70 @@ def _run_saddle(root: Path, problem: dict, template: dict, *, output: Path, forc
             )
             partial_path.unlink(missing_ok=True)
         _sync_saddle_campaign(output, all_records, template, problem["id"])
-        while connected < goal and searches < max_searches:
-            if _stop_requested():
-                finished = False
-                break
-            searches += 1
-            atom = int(listed[int(rng.integers(0, len(listed)))])
-            slots = np.flatnonzero(free == atom)
-            if len(slots) != 1:
-                raise RuntimeError(f"displace atom {atom} is not one free atom")
-            slot = int(slots[0])
-            direction = rng.normal(size=3)
-            direction = direction / np.linalg.norm(direction)
-            kicked = positions.copy()
-            free_pos = minimum.reshape(-1, 3).copy()
-            free_pos[slot] = free_pos[slot] + magnitude * direction
-            kicked[free] = free_pos
-            kick = np.zeros(positions.shape, dtype=np.float64)
-            kick[atom] = direction
-            spec = dict(base)
-            spec["name"] = f"rep{rep}-search{searches}"
-            spec["positions"] = kicked.tolist()
-            spec["task"] = "dimer"
-            spec["mode_policy"] = "given"
-            spec["mode"] = _full_mode(positions, fixed, kick[~fixed]).tolist()
-            spec["cap"] = CLIMB_CALLS
-            outcome = run_start(spec)
-            climb = int(outcome.get("force_calls") or 0)
-            record = {
-                "schema": "optbench.start/v2",
-                "start": spec["name"],
-                "seed": "0",
-                "counter": "harness",
-                "comparable": True,
-                "success": False,
-                "reasons": list(outcome.get("reasons") or ["force_norm"]),
-                "converged": bool(outcome.get("converged")),
-                "hessian_index": outcome.get("hessian_index"),
-                "code": base["code"],
-                "code_version": base["code_version"],
-                "commit": base["commit"],
-                "tuning": base["tuning"],
-                "template": template["id"],
-                "problem": problem["id"],
-                "climb_calls": climb,
-            }
-            saved_point = None
-            endpoint_calls = 0
-            usable = (
-                outcome.get("x") is not None
-                and bool(outcome.get("converged"))
-                and outcome.get("hessian_index") == 1
-                and float(outcome.get("force_norm") or 1e9) <= force_tol + 1e-10
-                and climb < CLIMB_CALLS
-            )
-            if usable:
-                saddle_x = np.asarray(outcome["x"], dtype=np.float64)
-                if outcome.get("mode_axis") is not None:
-                    axis = _unit(np.asarray(outcome["mode_axis"], dtype=np.float64))
-                else:
-                    axis = _axis_from_point(base, saddle_x, positions, fixed, cell)
-                plus = _minimize_spec(base, _place(positions, free, saddle_x + 0.1 * axis), name=f"{spec['name']}-plus", cap=_SADDLE_ENDPOINT_BUDGET)
-                minus = _minimize_spec(base, _place(positions, free, saddle_x - 0.1 * axis), name=f"{spec['name']}-minus", cap=_SADDLE_ENDPOINT_BUDGET)
-                plus_out = run_start(plus)
-                minus_out = run_start(minus)
-                endpoint_calls = int(plus_out.get("force_calls") or 0) + int(minus_out.get("force_calls") or 0)
-                plus_x = np.asarray(plus_out["x"], dtype=np.float64) if plus_out.get("x") is not None else saddle_x + 0.1 * axis
-                minus_x = np.asarray(minus_out["x"], dtype=np.float64) if minus_out.get("x") is not None else saddle_x - 0.1 * axis
-                plus_rmsd = _cartesian_rmsd(plus_x.reshape(-1, 3), minimum.reshape(-1, 3))
-                minus_rmsd = _cartesian_rmsd(minus_x.reshape(-1, 3), minimum.reshape(-1, 3))
-                links = (plus_rmsd <= connect_rmsd) ^ (minus_rmsd <= connect_rmsd)
-                novel = all(_cartesian_rmsd(saddle_x.reshape(-1, 3), old.reshape(-1, 3)) > connect_rmsd for old in found)
-                barrier = float(outcome["energy"] - min_energy)
-                record["barrier"] = barrier
-                record["rmsd_plus"] = plus_rmsd
-                record["rmsd_minus"] = minus_rmsd
-                record["reasons"] = []
-                if novel:
-                    found.append(saddle_x)
-                    saved_point = saddle_x
-                if links and novel and barrier < barrier_max:
-                    connected += 1
-                    record["success"] = True
-                else:
-                    if not links:
-                        record["reasons"].append("not_connected")
-                    if not novel:
-                        record["reasons"].append("duplicate")
-                    if barrier >= barrier_max:
-                        record["reasons"].append("barrier")
-            elif outcome.get("failure") == "crash" or outcome.get("x") is None:
-                record["reasons"] = ["crash"]
-            elif climb >= CLIMB_CALLS:
-                record["reasons"] = ["cap", "force_norm"]
-            else:
-                record["reasons"] = [str(item) for item in (outcome.get("reasons") or ["force_norm"])]
-            record["force_calls"] = climb + endpoint_calls
-            record["endpoint_calls"] = endpoint_calls
-            record["verify_calls"] = int(outcome.get("verify_calls") or 0)
-            success, failure = _outcome(record["reasons"])
-            record["success"] = success
-            record["failure"] = failure
-            all_records.append(record)
-            stored = dict(record)
-            stored["rng_state"] = _rng_state(rng)
-            if saved_point is not None:
-                stored["saddle_x"] = saved_point.tolist()
-            _append_jsonl(partial_path, stored)
-            _emit_saddle(output, all_records, template, problem["id"])
-            refused = bool(outcome.get("optimizer_refused"))
-            if refused:
-                # The optimizer rejects every transition-state start. Further
-                # searches repeat the abort and cannot reach the catalog.
-                finished = False
-                print(
-                    f"{template['id']} rep {rep} stopped after {searches} searches: the optimizer refuses TRANSITION_STATE",
-                    flush=True,
-                )
-                break
-            if searches == 1 or searches % 5 == 0 or connected >= goal:
-                print(
-                    f"{template['id']} rep {rep} searches {searches} connected {connected} "
-                    f"calls {record['force_calls']} failure {failure}",
-                    flush=True,
-                )
+        # Climbs in one batch are independent. They are drawn and scored in
+        # order, so a resumed catalog matches a one-worker run.
+        nworkers = max(1, int(workers))
+        pool = ProcessPoolExecutor(max_workers=nworkers) if nworkers > 1 else None
+        try:
+            while connected < goal and searches < max_searches:
+                if _stop_requested():
+                    finished = False
+                    break
+                width = min(nworkers, max_searches - searches)
+                batch = []
+                for _ in range(width):
+                    searches += 1
+                    spec = _draw_saddle_spec(rng, searches, rep, listed, free, positions, minimum, magnitude, base, fixed)
+                    batch.append((spec, _rng_state(rng)))
+                specs = [spec for spec, _state in batch]
+                outcomes = list(pool.map(run_start, specs)) if pool is not None else [run_start(spec) for spec in specs]
+                halt = False
+                for (spec, rng_state), outcome in zip(batch, outcomes):
+                    connected, refused, failure = _commit_saddle_outcome(
+                        spec,
+                        outcome,
+                        rng_state,
+                        found=found,
+                        all_records=all_records,
+                        connected=connected,
+                        positions=positions,
+                        fixed=fixed,
+                        cell=cell,
+                        minimum=minimum,
+                        min_energy=min_energy,
+                        force_tol=force_tol,
+                        connect_rmsd=connect_rmsd,
+                        barrier_max=barrier_max,
+                        base=base,
+                        partial_path=partial_path,
+                        output=output,
+                        template=template,
+                        problem_id=problem["id"],
+                    )
+                    index = len(all_records)
+                    if index == 1 or index % 5 == 0 or connected >= goal:
+                        print(
+                            f"{template['id']} rep {rep} searches {index} connected {connected} "
+                            f"calls {all_records[-1]['force_calls']} failure {failure}",
+                            flush=True,
+                        )
+                    if refused:
+                        finished = False
+                        print(
+                            f"{template['id']} rep {rep} stopped after {index} searches: the optimizer refuses TRANSITION_STATE",
+                            flush=True,
+                        )
+                        halt = True
+                        break
+                    if connected >= goal:
+                        halt = True
+                        break
+                if halt:
+                    searches = len(all_records)
+                    break
+        finally:
+            if pool is not None:
+                pool.shutdown(wait=True, cancel_futures=True)
         if _stop_requested():
             finished = False
         if connected < goal:
@@ -1390,7 +1443,7 @@ def run_template(
     scratch = work or output.parent / "work" / template["id"].replace("/", "-")
     scratch.mkdir(parents=True, exist_ok=True)
     if problem["id"] == "saddle-search/pt-island":
-        return _run_saddle(root, problem, template, output=output, force_tol=force_tol, work=scratch)
+        return _run_saddle(root, problem, template, output=output, force_tol=force_tol, work=scratch, workers=workers)
     cap = _check_stop(problem, template)
     if cap is None:
         raise ValueError(f"{problem['id']} has no force-call cap")
