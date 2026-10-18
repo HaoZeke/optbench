@@ -3,7 +3,9 @@
 import json
 from pathlib import Path
 
-from optbench.board import build_board, write_board
+import pytest
+
+from optbench.board import MissingAsvCommit, build_board, write_board
 from optbench.score import wilson_interval
 
 PIN = "a" * 40
@@ -631,6 +633,15 @@ def test_a_campaign_and_its_asv_track_are_one_row(tmp_path: Path):
     assert ranked[0]["n"] == 2
     assert ranked[0]["mean_calls"] == 15
     assert ranked[0]["par2_mean"] == 15
+
+
+def test_a_missing_asv_commit_is_not_pinned_from_the_working_tree(tmp_path: Path):
+    import subprocess
+
+    subprocess.run(["git", "init", "-q"], cwd=tmp_path, check=True)
+    _asv_track(tmp_path, "bench_rgmin.RgminLj38Lbfgs", [10.0, 20.0], commit="d" * 40)
+    with pytest.raises(MissingAsvCommit, match="not in this checkout"):
+        build_board(tmp_path)
 
 
 def test_a_one_start_asv_track_stays_out_of_the_ranked_mean(tmp_path: Path):

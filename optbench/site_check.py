@@ -6,6 +6,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 
 from .board import (
+    MissingAsvCommit,
     _registry,
     _show_per_image,
     best_ranked_by_code,
@@ -252,7 +253,10 @@ def check_site(root: Path) -> list[str]:
     ``docs/build`` is included when that directory exists.
     """
     root = Path(root)
-    document = build_board(root)
+    try:
+        document = build_board(root)
+    except MissingAsvCommit as exc:
+        return [str(exc)]
     problems = load_all(root / "problems") if (root / "problems").is_dir() else {}
     codes = summary_codes(document, _registry(root))
     errors: list[str] = []

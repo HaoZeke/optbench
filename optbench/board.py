@@ -128,6 +128,65 @@ def _registry_match(row: dict, registry: list[dict]) -> bool:
     return False
 
 
+class MissingAsvCommit(RuntimeError):
+    """An asv result names a commit this checkout does not contain."""
+
+
+def _git_root(root: Path) -> str:
+    return str(Path(root).resolve())
+
+
+def _is_work_tree(root: Path) -> bool:
+    cache = getattr(_is_work_tree, "_cache", None)
+    if cache is None:
+        cache = {}
+        setattr(_is_work_tree, "_cache", cache)
+    key = _git_root(root)
+    if key not in cache:
+        try:
+            out = subprocess.check_output(
+                ["git", "-C", key, "rev-parse", "--is-inside-work-tree"],
+                stderr=subprocess.DEVNULL,
+                text=True,
+            )
+        except (subprocess.CalledProcessError, FileNotFoundError, OSError):
+            out = ""
+        cache[key] = out.strip() == "true"
+    return cache[key]
+
+
+def _commit_in_checkout(root: Path, commit: str) -> bool:
+    cache = getattr(_commit_in_checkout, "_cache", None)
+    if cache is None:
+        cache = {}
+        setattr(_commit_in_checkout, "_cache", cache)
+    key = (_git_root(root), commit)
+    if key not in cache:
+        try:
+            subprocess.check_output(
+                ["git", "-C", key[0], "cat-file", "-e", f"{commit}^{{commit}}"],
+                stderr=subprocess.DEVNULL,
+            )
+        except (subprocess.CalledProcessError, FileNotFoundError, OSError):
+            cache[key] = False
+        else:
+            cache[key] = True
+    return cache[key]
+
+
+def _require_asv_commit(root: Path, commit: str) -> None:
+    """Stop when a real checkout is missing the commit that recorded a track.
+
+    A fixture with no git repository still falls back to the working tree.
+    A shallow checkout must not: the working-tree pin is a different run.
+    """
+    if not commit or not _is_work_tree(root) or _commit_in_checkout(root, commit):
+        return
+    raise MissingAsvCommit(
+        f"asv result {commit} is not in this checkout, so its template pin cannot be read"
+    )
+
+
 def _template_at_commit(root: Path, commit: str, template_id: str) -> dict | None:
     """Template as it was when an asv result was recorded.
 
@@ -141,6 +200,7 @@ def _template_at_commit(root: Path, commit: str, template_id: str) -> dict | Non
     key = (str(root.resolve()), commit, template_id)
     if key in cache:
         return cache[key]
+    _require_asv_commit(root, commit)
     loaded = None
     if commit and template_id:
         rel = f"templates/{template_id}.toml"
@@ -208,6 +268,7 @@ def _commit_divides_band(root: Path, commit: str) -> bool:
         return cache[key]
     divides = False
     if commit:
+        _require_asv_commit(root, commit)
         try:
             text = subprocess.check_output(
                 ["git", "-C", str(root), "show", f"{commit}:benchmarks/bench_ase_sella.py"],
