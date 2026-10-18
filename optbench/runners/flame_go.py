@@ -39,9 +39,11 @@ from optbench.score import score_v2, summarize_capped
 from optbench.v2 import collect_provenance, write_starts
 
 # Side length of the orthorhombic cell. The cluster is translated to the
-# centre. Lennard-Jones has no periodic images; the cell only keeps
-# minhocao's back-to-cell wrap off the atoms.
-CELL_ANG = 300.0
+# centre. Lennard-Jones has no periodic images. minhocao still wraps atoms
+# into the cell on every evaluation, so the side has to be large enough
+# that a hot hop cannot walk an atom onto the boundary. A wrapped atom
+# reappears on the far side and the free cluster is split.
+CELL_ANG = 10_000_000.0
 # Documented minhocao starting line: ediff (Ha), temperature (K), maximum temperature (K).
 IOPUT = "1.d-2 5.d2 1.d5\n"
 # Documented earr.dat tolerances: delta enthalpy (Ha), delta fingerprint.
@@ -364,6 +366,10 @@ def _run_start(job: dict) -> dict:
 
     def evaluate(flat):
         pos = np.asarray(flat, dtype=np.float64).reshape(-1)
+        margin = CELL_ANG * 0.05
+        if np.any(pos < margin) or np.any(pos > CELL_ANG - margin):
+            state["stop"] = "divergence"
+            raise SearchStopped("divergence")
         key = tuple(float(value) for value in pos)
         _fresh, _cached = counter.charge(key)
         energy, gradient = lennard_jones(pos)
@@ -443,6 +449,9 @@ def _run_start(job: dict) -> dict:
             success = False
             failure = "cap"
             calls = total
+    elif state["stop"] == "divergence":
+        failure = "divergence"
+        calls = total
     elif state["stop"] == "cap" or (cap is not None and total >= cap):
         failure = "cap"
         calls = total
@@ -524,7 +533,7 @@ def _dat(summary: dict, template: dict, metrics: dict, commit: str, version: str
     lines = [
         "# counter harness. One force call is one minhocao POSDATA evaluated by lennard_jones.",
         "# Positions cross the socket in Bohr and return as Hartree and Ha/Bohr with FLAME Bohr_Ang and Ha_eV.",
-        "# The cluster is translated to the centre of a 300 Angstrom cell. The potential has no periodic images.",
+        "# The cluster is translated to the centre of a 1e7 Angstrom cell. The potential has no periodic images.",
         "# ioput is the documented minhocao start 1.d-2 5.d2 1.d5. earr tolerances are 2.d-3 1.d-1.",
         "# Local optimisation is the code default FIRE tolerance 2.d-4 Ha/Bohr.",
     ]
@@ -691,7 +700,7 @@ def run_template(
                 "nlminx": nlminx,
                 "cap": cap,
                 "target": ceiling,
-                "idle_timeout": 300,
+                "idle_timeout": 1800,
             }
         )
     records = list(done.values())
