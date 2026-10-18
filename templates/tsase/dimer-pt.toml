@@ -1,0 +1,17 @@
+# TSASE solid-state dimer on the pt-island transition-state guesses.
+id = "tsase/dimer-pt"
+engine = "tsase"
+problem = "tsopt/pt-island"
+code = "tsase"
+code_version = "1.0"
+commit = "98aac60b5d9905e81ee4e6b8c385f169258d0218"
+algorithm = "SSDimer"
+tuning = "default"
+note = "ss is false. The initial mode is a seeded random direction on the free atoms. Rigid modes are not projected because the substrate is fixed."
+
+[tsase]
+method = "dimer"
+max_step = 0.2
+dr = 0.001
+phi_tol = 5.0
+rotation_max = 4
