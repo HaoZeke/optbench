@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>GMIN</th></tr></thead><tbody>
    <tr data-problem="double-ended-saddle-search/lj38">
    <th scope="row"><a href="#lj38">LJ38 double-ended saddle</a></th>
    <td data-code="eOn">—</td>
@@ -15,6 +15,7 @@
    <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="853.56"><span class="bench-score">853.56</span><a href="#lj38-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
    <td data-code="ASE" data-template="ase/de-lj38-tuned" data-par2="3463.64"><span class="bench-score">3463.64</span><a href="#lj38-templates">ase/de-lj38-tuned</a></td>
    <td data-code="Sella" data-template="sella/de-lj38-tuned" data-par2="1753.96"><span class="bench-score">1753.96</span><a href="#lj38-templates">sella/de-lj38-tuned</a></td>
+   <td data-code="GMIN">—</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation">
    <th scope="row"><a href="#lj38_2ts_separation">lj38_2ts_separation</a></th>
@@ -23,6 +24,7 @@
    <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="8024.43"><span class="bench-score">8024.43</span><a href="#lj38_2ts_separation-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
    <td data-code="ASE" data-template="ase/de-lj38-2ts-default" data-par2="20000"><span class="bench-score">20000</span><a href="#lj38_2ts_separation-templates">ase/de-lj38-2ts-default</a></td>
    <td data-code="Sella" data-template="sella/de-lj38-2ts-tuned" data-par2="30105.9"><span class="bench-score">30105.9</span><a href="#lj38_2ts_separation-templates">sella/de-lj38-2ts-tuned</a></td>
+   <td data-code="GMIN">—</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island">
    <th scope="row"><a href="#pt-island">pt-island</a></th>
@@ -31,6 +33,7 @@
    <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="422.136"><span class="bench-score">422.136</span><a href="#pt-island-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
    <td data-code="ASE" data-template="ase/de-pt-island-tuned" data-par2="847.678"><span class="bench-score">847.678</span><a href="#pt-island-templates">ase/de-pt-island-tuned</a></td>
    <td data-code="Sella" data-template="sella/de-pt-island-tuned" data-par2="615.153"><span class="bench-score">615.153</span><a href="#pt-island-templates">sella/de-pt-island-tuned</a></td>
+   <td data-code="GMIN">—</td>
    </tr>
    </tbody></table></div></section><section class="bench" id="lj38" data-problem="double-ended-saddle-search/lj38">
    <h2>LJ38 double-ended saddle</h2>
