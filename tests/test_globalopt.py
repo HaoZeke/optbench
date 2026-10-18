@@ -241,6 +241,43 @@ def test_basin_hopping_displaces_the_quenched_geometry():
     assert max(float(np.max(np.abs(origin))) for origin in origins) < 1e-3
 
 
+def test_cap_keeps_the_best_finished_minimum():
+    pytest.importorskip("ase")
+    from optbench.campaign import geometry_archive
+    from optbench.problems import load_problem
+    from optbench.runners.ase_basinhopping import load_starts, search_one
+
+    problem = load_problem(ROOT / "problems" / "globalopt" / "lj75.toml")
+    starts = {index: positions for index, positions in load_starts(geometry_archive(ROOT, problem))}
+    result = search_one(starts[1], index=1, root=ROOT, cap=900)
+    assert result["failure"] == "cap"
+    assert result["force_calls"] == 900
+    assert result["success"] is False
+    # The first quench of coords.1 finishes near call 795. The cap then lands
+    # inside the next quench, so the stored energy is that finished minimum.
+    assert result["energy"] == pytest.approx(-379.284523, abs=1e-4)
+
+
+def test_campaign_file_names_keep_the_ase_version(tmp_path: Path):
+    from optbench.runners.ase_basinhopping import write_campaign
+
+    record = {
+        "schema": "optbench.start/v2",
+        "counter": "harness",
+        "comparable": True,
+        "success": False,
+        "failure": "cap",
+        "reasons": ["energy", "cap"],
+        "force_calls": 10,
+        "energy": -1.0,
+        "start": "coords.1",
+    }
+    dat, jsonl = write_campaign(tmp_path, [record], partial=True, cap=10)
+    assert dat.name == "ase-3.29.0-lj75-basinhopping.dat"
+    assert jsonl.name == "ase-3.29.0-lj75-basinhopping.starts.jsonl"
+    assert dat.read_text(encoding="utf-8").splitlines()[0].startswith("# ASE 3.29.0")
+
+
 def test_ase_basin_hopping_accepts_the_lj75_cambridge_minimum():
     pytest.importorskip("ase")
     from optbench.runners.ase_basinhopping import search_one

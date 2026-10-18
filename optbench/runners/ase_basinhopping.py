@@ -157,9 +157,33 @@ def _spec(root: Path) -> dict:
     }
 
 
-def search_one(positions: np.ndarray, *, index: int, root: Path = Path("."), hops: int = 10**9) -> dict:
+def _reported_energy(hopper, calculator) -> float | None:
+    """Best finished minimum, or the last finite sample if none finished."""
+    if hopper is not None:
+        emin = getattr(hopper, "Emin", None)
+        if emin is not None:
+            value = float(emin)
+            if np.isfinite(value) and value < 1.0e30:
+                return value
+    last = getattr(calculator, "last_energy", None)
+    if last is None:
+        return None
+    value = float(last)
+    return value if np.isfinite(value) else None
+
+
+def search_one(
+    positions: np.ndarray,
+    *,
+    index: int,
+    root: Path = Path("."),
+    hops: int = 10**9,
+    cap: int | None = None,
+) -> dict:
     """Run one start. ``index`` selects the seed ``seed + index``."""
     spec = _spec(root)
+    if cap is not None:
+        spec["cap"] = int(cap)
     os.environ["OMP_NUM_THREADS"] = "1"
     os.environ["OPENBLAS_NUM_THREADS"] = "1"
     os.environ["MKL_NUM_THREADS"] = "1"
@@ -204,6 +228,7 @@ def search_one(positions: np.ndarray, *, index: int, root: Path = Path("."), hop
     energy = None
     crashed = False
     error = ""
+    hopper = None
     started = time.perf_counter()
     try:
         def _log(step, _energy, emin):
@@ -228,18 +253,18 @@ def search_one(positions: np.ndarray, *, index: int, root: Path = Path("."), hop
             progress=_log,
         )
         hopper.run(hops)
-        energy = float(hopper.Emin)
+        energy = _reported_energy(hopper, calculator)
     except TargetReached as exc:
         energy = exc.energy
     except RuntimeError as exc:
         if "force-call cap" not in str(exc):
             crashed = True
             error = exc.__class__.__name__
-        energy = calculator.last_energy
+        energy = _reported_energy(hopper, calculator)
     except Exception as exc:
         crashed = True
         error = exc.__class__.__name__
-        energy = getattr(calculator, "last_energy", None)
+        energy = _reported_energy(hopper, calculator)
     calls = int(calculator.optbench_counter["calls"])
     if crashed:
         judged = {
@@ -360,7 +385,7 @@ def write_campaign(
     summary = score_v2(records, cap)
     directory = root / "results" / "campaign"
     directory.mkdir(parents=True, exist_ok=True)
-    stem = directory / "ase-3.29.0-lj75-basinhopping"
+    stem = "ase-3.29.0-lj75-basinhopping"
     energies = [float(record["energy"]) for record in records if record.get("energy") is not None]
     calls = [int(record["force_calls"]) for record in records]
     if spec is None:
@@ -407,8 +432,8 @@ def write_campaign(
         lines.append(f"energy_max {_format(max(energies))}")
     if partial:
         lines.append("partial true")
-    dat = stem.with_suffix(".dat")
-    jsonl = stem.parent / f"{stem.name}.starts.jsonl"
+    dat = directory / f"{stem}.dat"
+    jsonl = directory / f"{stem}.starts.jsonl"
     _atomic_write(dat, "\n".join(lines) + "\n")
     _atomic_write(jsonl, "".join(json.dumps(record) + "\n" for record in records))
     return dat, jsonl
