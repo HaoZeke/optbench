@@ -1,0 +1,13 @@
+# OptKing is not a conda-forge package. This file does not invent a
+# build string. The library the OptKing benchmarks run is the source
+# build pinned in codes/registry.toml under id optking:
+#   ref = master
+#   commit = 767e2c0c13ff2b851ac82101ccd5aab9a558a4f1
+#   version string 0.5.1.dev2+g767e2c0c1
+# asv has one environment_type, so this yml cannot be bound to one
+# class. Those classes call the harness Lennard-Jones potential.
+name: optking
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12

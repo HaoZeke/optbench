@@ -32,18 +32,19 @@ def _class_name(template_id: str) -> str:
 
 
 def _ready(family: str) -> bool:
-    try:
-        if family == "rgmin":
-            import rgmin  # noqa: F401
-        elif family == "ase":
-            import ase  # noqa: F401
-        elif family == "sella":
-            import sella  # noqa: F401
-        else:
-            return False
-    except ImportError:
+    import importlib.util
+
+    names = {
+        "rgmin": "rgmin",
+        "ase": "ase",
+        "sella": "sella",
+        "optking": "optking",
+        "pyberny": "berny",
+    }
+    module = names.get(family)
+    if module is None:
         return False
-    return True
+    return importlib.util.find_spec(module) is not None
 
 
 def _specs() -> list[dict]:

@@ -1,0 +1,13 @@
+# PyBerny is not a conda-forge package. This file does not invent a
+# build string. The library the PyBerny benchmarks run is the source
+# build pinned in codes/registry.toml under id pyberny:
+#   ref = master
+#   commit = 2c732230c543455dc4c318fed8ab8cb7b5f9face
+#   version string 0.7.0.post2.dev0+2c73223
+# asv has one environment_type, so this yml cannot be bound to one
+# class. Those classes call the harness Lennard-Jones potential.
+name: pyberny
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12

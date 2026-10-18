@@ -84,6 +84,26 @@ commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
 committed = "2026-10-05"
 note = "Activation-relaxation technique nouveau, plugin branch DEVEL. The benchmark contributor of a new entry is Rohit Goswami."
 
+[[code]]
+id = "optking"
+name = "OptKing"
+role = "minimization"
+repository = "https://github.com/psi-rking/optking"
+ref = "master"
+commit = "767e2c0c13ff2b851ac82101ccd5aab9a558a4f1"
+committed = "2026-10-13"
+note = "0.5.1.dev2+g767e2c0c1 at master 767e2c0c. Cartesian RFO and redundant internal RFO. Hydrogen labels feed the coordinate builder. The energy and gradient are the harness Lennard-Jones potential. The gradient is multiplied by bohr2angstroms. fix_com and fix_orientation stay on."
+
+[[code]]
+id = "pyberny"
+name = "PyBerny"
+role = "minimization"
+repository = "https://github.com/pyberny/pyberny"
+ref = "master"
+commit = "2c732230c543455dc4c318fed8ab8cb7b5f9face"
+committed = "2026-07-17"
+note = "0.7.0.post2.dev0+2c73223 at master 2c732230. Berny with dihedrals and trust 0.3. symmetry is nowarn. Hydrogen labels feed the internals. The energy and gradient are the harness Lennard-Jones potential. The gradient is multiplied by bohr2angstroms."
+
 # generated ASE and Sella templates
 
 [[template]]

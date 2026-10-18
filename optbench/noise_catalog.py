@@ -21,6 +21,10 @@ ASE_COMMIT = "f27c0005ae6a67ea419f996e728668865bfc1f86"
 ASE_VERSION = "3.29.0"
 SELLA_COMMIT = "6cfb60cdb100a146c3c6f0587d5308b247aa8010"
 SELLA_VERSION = "2.6.0"
+OPTKING_COMMIT = "767e2c0c13ff2b851ac82101ccd5aab9a558a4f1"
+OPTKING_VERSION = "0.5.1.dev2+g767e2c0c1"
+PYBERNY_COMMIT = "2c732230c543455dc4c318fed8ab8cb7b5f9face"
+PYBERNY_VERSION = "0.7.0.post2.dev0+2c73223"
 
 _SLUGS = ((0.0, "s0"), (1e-4, "s1em4"), (1e-3, "s1em3"), (1e-2, "s1em2"))
 
@@ -161,6 +165,63 @@ def specs() -> list[dict]:
                 "Sella",
                 sella_note,
                 {"family": "sella", "order": 0},
+                sigma,
+            )
+        )
+    optking_cart_note = (
+        "Cartesian RFO. Hydrogen labels feed the coordinate builder only. "
+        "The gradient is the harness derivative times bohr2angstroms. "
+        "The stop is the noise-aware force norm, and at positive sigma the clean energy over the last window. "
+        "The index is the clean Hessian with the rigid-mode rule."
+    )
+    optking_redundant_note = (
+        "Redundant internal RFO. Hydrogen labels feed the coordinate builder only. "
+        "The gradient is the harness derivative times bohr2angstroms. "
+        "The stop is the noise-aware force norm, and at positive sigma the clean energy over the last window. "
+        "The index is the clean Hessian with the rigid-mode rule."
+    )
+    pyberny_note = (
+        "Berny with dihedrals and trust 0.3. symmetry is nowarn. "
+        "Hydrogen labels feed the internals. The gradient is the harness derivative times bohr2angstroms. "
+        "The stop is the noise-aware force norm, and at positive sigma the clean energy over the last window. "
+        "The index is the clean Hessian with the rigid-mode rule."
+    )
+    for sigma in SIGMAS:
+        found.append(
+            _base(
+                f"noise/optking-rfo-cart-{sigma_slug(sigma)}",
+                "OptKing",
+                OPTKING_VERSION,
+                OPTKING_COMMIT,
+                "Cartesian RFO",
+                optking_cart_note,
+                {"family": "optking", "coordinates": "CARTESIAN", "step_type": "RFO", "symbol": "H"},
+                sigma,
+            )
+        )
+    for sigma in SIGMAS:
+        found.append(
+            _base(
+                f"noise/optking-rfo-{sigma_slug(sigma)}",
+                "OptKing",
+                OPTKING_VERSION,
+                OPTKING_COMMIT,
+                "RFO",
+                optking_redundant_note,
+                {"family": "optking", "coordinates": "REDUNDANT", "step_type": "RFO", "symbol": "H"},
+                sigma,
+            )
+        )
+    for sigma in SIGMAS:
+        found.append(
+            _base(
+                f"noise/pyberny-{sigma_slug(sigma)}",
+                "PyBerny",
+                PYBERNY_VERSION,
+                PYBERNY_COMMIT,
+                "Berny",
+                pyberny_note,
+                {"family": "pyberny", "symbol": "H", "dihedral": True},
                 sigma,
             )
         )

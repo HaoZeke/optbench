@@ -1,0 +1,18 @@
+id = "optking/lj38-rfo"
+engine = "optking"
+problem = "minimization/lj38"
+code = "OptKing"
+code_version = "0.5.1.dev2+g767e2c0c1"
+commit = "767e2c0c13ff2b851ac82101ccd5aab9a558a4f1"
+algorithm = "RFO"
+tuning = "default"
+note = "Redundant internal RFO, OptKing's default coordinate system, on the harness Lennard-Jones potential. Hydrogen labels feed the coordinate builder only. Coordinates stay in angstrom. The gradient passed to OptKing is that derivative times bohr2angstroms. fix_com and fix_orientation stay on. dynamic_level is 0, linesearch is off, and geom_maxiter and alg_geom_maxiter are the force-call cap. intrafrag_trust is the library default 0.5. The search stops on the problem force norm. The same values are used for every start."
+
+[optking]
+coordinates = "REDUNDANT"
+step_type = "RFO"
+symbol = "H"
+
+[ini.Optimizer]
+converged_force = 0.01
+max_iterations = 10000

@@ -1,0 +1,18 @@
+id = "noise/pyberny-s1em2"
+engine = "noise"
+problem = "minimization/lj38-noise"
+code = "PyBerny"
+code_version = "0.7.0.post2.dev0+2c73223"
+commit = "2c732230c543455dc4c318fed8ab8cb7b5f9face"
+algorithm = "Berny"
+tuning = "default"
+note = "Berny with dihedrals and trust 0.3. symmetry is nowarn. Hydrogen labels feed the internals. The gradient is the harness derivative times bohr2angstroms. The stop is the noise-aware force norm, and at positive sigma the clean energy over the last window. The index is the clean Hessian with the rigid-mode rule."
+
+[solver]
+family = "pyberny"
+symbol = "H"
+dihedral = true
+
+[noise]
+sigma = 0.01
+seed = 20261016

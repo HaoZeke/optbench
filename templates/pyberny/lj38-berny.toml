@@ -1,0 +1,17 @@
+id = "pyberny/lj38-berny"
+engine = "pyberny"
+problem = "minimization/lj38"
+code = "PyBerny"
+code_version = "0.7.0.post2.dev0+2c73223"
+commit = "2c732230c543455dc4c318fed8ab8cb7b5f9face"
+algorithm = "Berny"
+tuning = "default"
+note = "Berny on the harness Lennard-Jones potential. Hydrogen labels feed the internal coordinates. Dihedrals stay on and trust is the library default 0.3. symmetry is nowarn, so the start is not displaced. Coordinates stay in angstrom. The gradient passed to PyBerny is that derivative times bohr2angstroms. maxsteps is the force-call cap. The search stops on the problem force norm. The same values are used for every start."
+
+[pyberny]
+symbol = "H"
+dihedral = true
+
+[ini.Optimizer]
+converged_force = 0.01
+max_iterations = 10000

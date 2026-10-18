@@ -129,6 +129,8 @@ def _minimize_job(job: dict) -> dict:
     point = None
     potential = None
     stopped = False
+    sink = None
+    from optbench.runners.geomopt_min import StartDisplaced
     sigma = float(job["sigma"])
     method = str(job["method"])
     family = str(job["family"])
@@ -154,12 +156,31 @@ def _minimize_job(job: dict) -> dict:
             point, stopped = _drive_ase(job, x0, observed, potential, cap, clean_tol, energy_tol, components)
         elif family == "sella":
             point, stopped = _drive_sella(job, x0, observed, potential, cap, clean_tol, energy_tol, components)
+        elif family in {"optking", "pyberny"}:
+            from optbench.runners.geomopt_min import drive_optking, drive_pyberny
+
+            sink = {"point": list(x0), "stopped": False}
+
+            def _met() -> bool:
+                return observed.met(clean_tol, energy_tol, components)
+
+            if family == "optking":
+                drive_optking(x0, observed, _met, cap, job["options"], sink)
+            else:
+                drive_pyberny(x0, observed, _met, cap, job["options"], sink)
+            point = [float(value) for value in sink["point"]]
+            stopped = bool(sink["stopped"])
         else:
             raise ValueError(f"unknown solver family {family}")
     except ForceCallCap as exc:
         error = f"ForceCallCap: {exc}"
     except Exception as exc:
+        if family in {"optking", "pyberny"} and isinstance(exc, (ImportError, StartDisplaced)):
+            raise
         error = f"{type(exc).__name__}: {exc}"
+    if point is None and sink is not None and sink.get("point") is not None:
+        point = [float(value) for value in sink["point"]]
+        stopped = bool(sink.get("stopped"))
     if potential is not None and point is not None:
         calls = int(potential.counter.calls)
         try:
@@ -403,93 +424,7 @@ def _dat(summary: dict, template: dict, metrics: dict, sigma: float) -> str:
     return "\n".join(lines) + "\n"
 
 
-def run_template(
-    root: Path,
-    problem: dict,
-    template: dict,
-    *,
-    geometries: Path | None,
-    output: Path,
-    workers: int,
-    work: Path | None,
-    limit: int = 0,
-) -> dict:
-    _quiet_threads()
-    if template.get("engine") != "noise":
-        raise ValueError(f"{template['id']} is not a noise template")
-    stated = template.get("problem")
-    if stated and stated != problem["id"]:
-        raise ValueError(f"{template['id']} is for {stated}, not {problem['id']}")
-    if problem["id"] != "minimization/lj38-noise":
-        raise ValueError(f"{template['id']} does not run on {problem['id']}")
-    solver = template.get("solver") or {}
-    family = str(solver.get("family") or "")
-    noise = template.get("noise") or {}
-    sigma = float(noise["sigma"])
-    method = str(solver.get("method") or solver.get("name") or family)
-    if family == "rgmin" and not allows_method(str(solver.get("method")), sigma):
-        raise ValueError(
-            f"{template['id']} asks for {solver.get('method')} at sigma {sigma}. "
-            "That method needs the exact Hessian of the clean force."
-        )
-    if family == "rgmin":
-        import rgmin
-
-        version = str(rgmin.__version__)
-        if template.get("code_version") and version != str(template["code_version"]):
-            raise RuntimeError(f"rgmin {version} does not match template {template['code_version']}")
-    convergence = problem.get("convergence") or {}
-    clean_tol = float(convergence["force_norm"])
-    if "energy_tol" not in convergence:
-        raise ValueError(f"{problem['id']} has no energy_tol for the noise window")
-    energy_tol = window_energy_tolerance(float(convergence["energy_tol"]), sigma, float((problem.get("noise") or {}).get("kappa", KAPPA)))
-    cap = int(convergence["max_force_calls"])
-    seed = int(noise.get("seed", (problem.get("noise") or {})["seed"]))
-    from optbench.runners.rgmin_min import _load_geometries
-
-    loaded = _load_geometries(root, problem, geometries, work, output)
-    if limit:
-        loaded = loaded[: int(limit)]
-    options = {
-        key: value
-        for key, value in solver.items()
-        if key not in {"family", "method", "name"}
-    }
-    jobs = []
-    for index, (name, coords, _box) in enumerate(loaded):
-        jobs.append(
-            {
-                "index": index,
-                "start": name,
-                "coords": [float(value) for value in coords],
-                "family": family,
-                "method": str(solver.get("method") or ""),
-                "optimizer": str(solver.get("name") or ""),
-                "options": options,
-                "sigma": sigma,
-                "seed": seed,
-                "clean_tol": clean_tol,
-                "energy_tol": energy_tol,
-                "cap": cap,
-            }
-        )
-    if workers <= 1:
-        records = [_minimize_job(job) for job in jobs]
-    else:
-        import multiprocessing as mp
-
-        context = mp.get_context("spawn")
-        with ProcessPoolExecutor(max_workers=workers, mp_context=context) as pool:
-            futures = [pool.submit(_minimize_job, job) for job in jobs]
-            records = []
-            total = len(futures)
-            for done, future in enumerate(as_completed(futures), 1):
-                records.append(future.result())
-                if done == total or done % 50 == 0:
-                    print(f"{template['id']} {done}/{total}", flush=True)
-    records.sort(key=lambda row: row["index"])
-    for record in records:
-        record.pop("index", None)
+def _write_noise(output, template, records, cap, sigma, method, family, options, energy_tol) -> dict:
     legacy_counts = [cap if not record["converged"] else int(record["force_calls"]) for record in records]
     summary = summarize_capped(legacy_counts, cap)
     successes = [int(record["force_calls"]) for record in records if record["converged"]]
@@ -516,7 +451,7 @@ def run_template(
     document = {
         "schema": "optbench.result/v2",
         "status": "archive",
-        "problem": problem["id"],
+        "problem": template.get("problem"),
         "scoring": "par2-wilson-bootstrap",
         "par_factor": 2,
         "bootstrap_resamples": 2000,
@@ -555,8 +490,138 @@ def run_template(
     output.with_suffix(".v2.json").write_text(json.dumps(document, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     summary["starts"] = len(records)
     summary["template"] = template["id"]
-    summary["problem"] = problem["id"]
+    summary["problem"] = template.get("problem")
     summary["par2_mean"] = metrics["par2_mean"]
     summary["v2_nfailed"] = metrics["nfailed"]
     summary["seconds"] = sum(float(record.get("seconds") or 0.0) for record in records)
     return summary
+
+
+def run_template(
+    root: Path,
+    problem: dict,
+    template: dict,
+    *,
+    geometries: Path | None,
+    output: Path,
+    workers: int,
+    work: Path | None,
+    limit: int = 0,
+    resume: bool = False,
+) -> dict:
+    _quiet_threads()
+    if template.get("engine") != "noise":
+        raise ValueError(f"{template['id']} is not a noise template")
+    stated = template.get("problem")
+    if stated and stated != problem["id"]:
+        raise ValueError(f"{template['id']} is for {stated}, not {problem['id']}")
+    if problem["id"] != "minimization/lj38-noise":
+        raise ValueError(f"{template['id']} does not run on {problem['id']}")
+    solver = template.get("solver") or {}
+    family = str(solver.get("family") or "")
+    noise = template.get("noise") or {}
+    sigma = float(noise["sigma"])
+    method = str(solver.get("method") or solver.get("name") or family)
+    if family == "rgmin" and not allows_method(str(solver.get("method")), sigma):
+        raise ValueError(
+            f"{template['id']} asks for {solver.get('method')} at sigma {sigma}. "
+            "That method needs the exact Hessian of the clean force."
+        )
+    if family == "rgmin":
+        import rgmin
+
+        version = str(rgmin.__version__)
+        if template.get("code_version") and version != str(template["code_version"]):
+            raise RuntimeError(f"rgmin {version} does not match template {template['code_version']}")
+    if family in {"optking", "pyberny"}:
+        from optbench.runners.geomopt_min import library_version
+
+        version = library_version(family)
+        if template.get("code_version") and version != str(template["code_version"]):
+            raise RuntimeError(f"{family} {version} does not match template {template['code_version']}")
+    convergence = problem.get("convergence") or {}
+    clean_tol = float(convergence["force_norm"])
+    if "energy_tol" not in convergence:
+        raise ValueError(f"{problem['id']} has no energy_tol for the noise window")
+    energy_tol = window_energy_tolerance(float(convergence["energy_tol"]), sigma, float((problem.get("noise") or {}).get("kappa", KAPPA)))
+    cap = int(convergence["max_force_calls"])
+    seed = int(noise.get("seed", (problem.get("noise") or {})["seed"]))
+    from optbench.runners.rgmin_min import _load_geometries
+
+    loaded = _load_geometries(root, problem, geometries, work, output)
+    if limit:
+        loaded = loaded[: int(limit)]
+    options = {
+        key: value
+        for key, value in solver.items()
+        if key not in {"family", "method", "name"}
+    }
+    jobs = []
+    for index, (name, coords, _box) in enumerate(loaded):
+        jobs.append(
+            {
+                "index": index,
+                "start": name,
+                "coords": [float(value) for value in coords],
+                "family": family,
+                "method": str(solver.get("method") or ""),
+                "optimizer": str(solver.get("name") or ""),
+                "options": options,
+                "sigma": sigma,
+                "seed": seed,
+                "clean_tol": clean_tol,
+                "energy_tol": energy_tol,
+                "cap": cap,
+            }
+        )
+    from optbench.runners.geomopt_min import _load_done
+
+    starts_path = output.with_suffix(".starts.jsonl")
+    done_rows = _load_done(starts_path) if resume else {}
+    order = {job["start"]: job["index"] for job in jobs}
+    kept = []
+    for start, record in done_rows.items():
+        if start not in order:
+            continue
+        row = dict(record)
+        row["index"] = order[start]
+        kept.append(row)
+    pending = [job for job in jobs if job["start"] not in {row["start"] for row in kept}]
+    fresh: list[dict] = []
+
+    def _rows() -> list[dict]:
+        combined = [dict(row) for row in kept + fresh]
+        combined.sort(key=lambda row: int(row["index"]))
+        for row in combined:
+            row.pop("index", None)
+        return combined
+
+    def _checkpoint(force: bool) -> None:
+        if not kept and not fresh:
+            return
+        if not force and len(fresh) % 25 != 0:
+            return
+        _write_noise(output, template, _rows(), cap, sigma, method, family, options, energy_tol)
+
+    if pending and workers <= 1:
+        for done_n, job in enumerate(pending, 1):
+            fresh.append(_minimize_job(job))
+            _checkpoint(done_n == len(pending))
+            if done_n == len(pending) or done_n % 25 == 0:
+                print(f"{template['id']} {len(kept) + done_n}/{len(jobs)}", flush=True)
+    elif pending:
+        import multiprocessing as mp
+
+        context = mp.get_context("spawn")
+        with ProcessPoolExecutor(max_workers=workers, mp_context=context, max_tasks_per_child=1) as pool:
+            futures = [pool.submit(_minimize_job, job) for job in pending]
+            total = len(futures)
+            for done_n, future in enumerate(as_completed(futures), 1):
+                fresh.append(future.result())
+                _checkpoint(done_n == total)
+                if done_n == total or done_n % 25 == 0:
+                    print(f"{template['id']} {len(kept) + done_n}/{len(jobs)}", flush=True)
+    records = _rows()
+    if not records:
+        raise ValueError(f"{template['id']} has no starts")
+    return _write_noise(output, template, records, cap, sigma, method, family, options, energy_tol)

@@ -1,0 +1,19 @@
+id = "noise/optking-rfo-s1em2"
+engine = "noise"
+problem = "minimization/lj38-noise"
+code = "OptKing"
+code_version = "0.5.1.dev2+g767e2c0c1"
+commit = "767e2c0c13ff2b851ac82101ccd5aab9a558a4f1"
+algorithm = "RFO"
+tuning = "default"
+note = "Redundant internal RFO. Hydrogen labels feed the coordinate builder only. The gradient is the harness derivative times bohr2angstroms. The stop is the noise-aware force norm, and at positive sigma the clean energy over the last window. The index is the clean Hessian with the rigid-mode rule."
+
+[solver]
+family = "optking"
+coordinates = "REDUNDANT"
+step_type = "RFO"
+symbol = "H"
+
+[noise]
+sigma = 0.01
+seed = 20261016
