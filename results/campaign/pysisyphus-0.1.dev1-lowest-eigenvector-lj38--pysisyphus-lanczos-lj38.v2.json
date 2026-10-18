@@ -1,0 +1,64 @@
+{
+  "counter": "harness",
+  "legacy": {
+    "force_calls": 21,
+    "force_calls_max": 26,
+    "force_calls_median": 22.0,
+    "force_calls_min": 13,
+    "n": 200,
+    "nfailed": 40,
+    "successes": 160,
+    "transition_states": 0
+  },
+  "problem": "lowest-eigenvector/lj38",
+  "provenance": {
+    "code": "pysisyphus",
+    "code_version": "0.1.dev1",
+    "commit": "a4ce10dd6d7fdcb3d813f1c730eb365d29041999",
+    "machine": {
+      "machine": "x86_64",
+      "node": "cursor",
+      "python": "3.12.3",
+      "system": "Linux"
+    },
+    "parameters": {
+      "counter": "harness",
+      "dl": 0.01,
+      "dx": 0.005,
+      "max_cycles": 25,
+      "method": "lanczos"
+    }
+  },
+  "schema": "optbench.score/v2",
+  "score": {
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 20261015,
+    "cap": 10000,
+    "includes_failures": true,
+    "iqr": 6.0,
+    "iqr_high": 19980.0,
+    "iqr_low": 6.0,
+    "mean": 4017.14,
+    "median": 23.0,
+    "median_high": 24.0,
+    "median_low": 22.0,
+    "n": 200,
+    "n_cap": 0,
+    "n_crash": 0,
+    "n_divergence": 40,
+    "n_wrong_stationary": 0,
+    "nfailed": 40,
+    "par2_mean": 4017.14,
+    "par_applied": true,
+    "par_factor": 2,
+    "q25": 20.0,
+    "q75": 26.0,
+    "scoring": "par2-wilson-bootstrap",
+    "success_only_mean": 21.425,
+    "success_rate": 0.8,
+    "successes": 160,
+    "wilson_high": 0.8495479907390189,
+    "wilson_low": 0.7391448134346212
+  },
+  "template": "pysisyphus/lanczos-lj38"
+}

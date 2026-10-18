@@ -1,0 +1,21 @@
+# counter harness RgpotCounter.calculate
+# force_calls count raw potential evaluations and are not divided by the image count
+# the mean is round-half-even over successes; cap, force, or Hessian index other than 1 is a failure
+force_calls 584
+force_calls_min 302
+force_calls_max 1295
+force_calls_median 512
+force_calls_per_image 195
+call_unit total
+successes 53
+nfailed 6
+n 59
+transition_states 53
+code rgsaddle
+code_version 0.2.2
+commit c0db2b8d333c557251635cb8bb7b3d81f0088a71
+algorithm S-IDPP CI-NEB
+template rgsaddle/sidpp-ci-neb
+tuning default
+counter harness
+images 3

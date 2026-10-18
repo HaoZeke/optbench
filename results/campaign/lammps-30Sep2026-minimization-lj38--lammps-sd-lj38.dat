@@ -1,0 +1,18 @@
+# counter harness. fix external pf/callback writes the harness force. pair_style zero contributes nothing.
+# min_style is sd. A success is under the cap, at the Euclidean force stop, and Hessian index 0.
+force_calls 5557
+force_calls_min 1656
+force_calls_max 9985
+force_calls_median 5252
+successes 383
+nfailed 617
+n 1000
+transition_states 0
+code lammps
+code_version 30 Sep 2026
+commit 8de817dd79bfe4525d5d39246a212d833e6dee07
+algorithm steepest descent
+template lammps/sd-lj38
+problem minimization/lj38
+tuning default
+counter harness
