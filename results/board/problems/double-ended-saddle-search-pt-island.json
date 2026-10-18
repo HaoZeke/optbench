@@ -676,11 +676,11 @@
       "mean_per_image": 75.29378531073446,
       "median": 188.0,
       "median_calls": 188.0,
-      "median_high": 227.0,
+      "median_high": 230.0,
       "median_low": 176.0,
       "median_per_image": 62.666666666666664,
       "min_calls": 86.0,
-      "n": 118,
+      "n": 59,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 225.88135593220338,
@@ -695,7 +695,7 @@
       "template": "eon-svn/de-pt-ci",
       "tuning": "default",
       "wilson_high": 1.0,
-      "wilson_low": 0.9684716609775057
+      "wilson_low": 0.9388706294732116
     },
     {
       "asv_commit": "c1ecf607a10f7ab78d1615e4cbf9af030bebcdbf",
@@ -709,7 +709,7 @@
       "current": true,
       "entry": "eon-svn-r2549-de-pt-neb",
       "failures": {
-        "cap": 2,
+        "cap": 1,
         "crash": 0,
         "divergence": 0,
         "wrong_stationary": 0
@@ -721,12 +721,12 @@
       "mean_per_image": 86.99435028248588,
       "median": 203.0,
       "median_calls": 203.0,
-      "median_high": 206.0,
-      "median_low": 192.5,
+      "median_high": 209.0,
+      "median_low": 191.0,
       "median_per_image": 67.66666666666667,
       "min_calls": 98.0,
-      "n": 118,
-      "nfailed": 2,
+      "n": 59,
+      "nfailed": 1,
       "note": "starts.jsonl",
       "par2_mean": 311.8305084745763,
       "partial": false,
@@ -739,8 +739,8 @@
       "success_rate": 0.9830508474576272,
       "template": "eon-svn/de-pt-neb",
       "tuning": "default",
-      "wilson_high": 0.9953395574957996,
-      "wilson_low": 0.9403025556519603
+      "wilson_high": 0.9970017660816444,
+      "wilson_low": 0.9100427403585771
     },
     {
       "asv_commit": "19e5e5f275cc59e67893ae3e761f1fb0097841f2",

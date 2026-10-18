@@ -155,14 +155,70 @@ would be invented, so it is not written.
 ## Pooled rows
 
 Each harness file under `results/campaign/eon-svn-r2549-` for the
-templates rerun on this client concatenates two per-start records.
-The first is the run already on `entries/eon-svn-all` at `1f8246a`.
-The second is the rerun with this binary, `EON_SVN_CLIENT` pointing
-at the Fortran client above. When the files were pooled,
-`origin/entries/eon-svn-all` was `1a86921`. That tip merges main onto
-`1f8246a` and does not change the `eon-svn-r2549` campaign files, so
-it added no further starts. PAR-2 and the other columns are `score_v2` on the
-combined starts. `n` in the dat file is that combined count. One
-lowest-eigenvector Lanczos start (`0083`) hit `TimeoutError: timed out`
-under the eight-worker pool, with zero force calls. That start was
-run again by itself and the timeout row was replaced by that rerun.
+templates rerun on this client averages two replicates of the same
+start. The first replicate is the run already on `entries/eon-svn-all`
+at `1f8246a` (`svn-all`, the `NO_FORTRAN` client). The second is the
+rerun with this binary (`fortran`), `EON_SVN_CLIENT` pointing at the
+client above. When the files were pooled, `origin/entries/eon-svn-all`
+was `1a86921`, then `5a6f734`. Those tips merge main onto `1f8246a`
+and do not change the `eon-svn-r2549` campaign files, so there is no
+third replicate.
+
+A start id is the campaign `(seed, start)` pair. For each id the
+stored `force_calls` is the mean of the replicate counts. `n` is the
+number of distinct starts. `n_replicates` is 2 on every row. Success
+is the shared boolean when the replicates agree. If they disagreed,
+the start would record both outcomes and `success` would be the
+fraction of replicates that succeeded. None disagreed. PAR-2, the
+call columns, `nfailed`, and the Wilson interval are `score_v2` on
+those per-start means. The dat file also has `n_differing`, the
+number of starts whose force-call counts differ.
+
+One lowest-eigenvector Lanczos start (`0083`) hit
+`TimeoutError: timed out` under the eight-worker pool, with zero
+force calls. That start was run again by itself and the timeout row
+was replaced before the average.
+
+### Reproducibility, svn-all versus Fortran
+
+`identical` counts starts whose force-call counts and success bits
+match. `differing` counts the rest. `max |Δ|` is the largest absolute
+force-call difference. Every template has 2 replicates on every start.
+
+| template | n | identical | differing | max \|Δ\| |
+|---|---:|---:|---:|---:|
+| eon-svn/ts-lj38-dimer | 200 | 200 | 0 | 0 |
+| eon-svn/ts-lj38-lanczos | 200 | 199 | 1 | 55 |
+| eon-svn/ts-pt-dimer | 49 | 49 | 0 | 0 |
+| eon-svn/ts-pt-lanczos | 49 | 49 | 0 | 0 |
+| eon-svn/de-lj38-ci | 50 | 50 | 0 | 0 |
+| eon-svn/de-lj38-neb | 50 | 50 | 0 | 0 |
+| eon-svn/de-pt-ci | 59 | 59 | 0 | 0 |
+| eon-svn/de-pt-neb | 59 | 59 | 0 | 0 |
+| eon-svn/de-2ts-ci | 51 | 51 | 0 | 0 |
+| eon-svn/de-2ts-neb | 51 | 51 | 0 | 0 |
+| eon-svn/neb-pt-ci | 13 | 13 | 0 | 0 |
+| eon-svn/neb-pt-neb | 13 | 13 | 0 | 0 |
+| eon-svn/low-lj38-dimer | 200 | 200 | 0 | 0 |
+| eon-svn/low-lj38-lanczos | 200 | 200 | 0 | 0 |
+| eon-svn/lj38-noise-0 | 1000 | 1000 | 0 | 0 |
+| eon-svn/lj38-noise-1e-4 | 1000 | 1000 | 0 | 0 |
+| eon-svn/lj38-noise-1e-3 | 1000 | 1000 | 0 | 0 |
+| eon-svn/lj38-noise-1e-2 | 1000 | 1000 | 0 | 0 |
+
+The one differing start is `eon-svn/ts-lj38-lanczos`, seed `1`, start
+`0167`. Both replicates succeeded. `svn-all` used 265 force calls
+(`client_calls` 266). `fortran` used 210 force calls (`client_calls`
+210). The stored count is the mean, 237.5. The separate `score_v2`
+PAR-2 values are `svn-all` 2974.825 and `fortran` 2974.55. The
+per-start mean scores to 2974.6875.
+
+Fourteen cap failures match on `force_calls` (2500), `success`
+(false), and failure class (`cap`), and differ only in sidecar
+fields. The `svn-all` rows store `client_calls` 40007, `client_reason`
+`2`, and `extrema`. The `fortran` rows store an `error` string
+(`ForceCallCap`) and omit those fields. They are identical starts in
+the table above. The ci starts are `pair_02`, `pair_17`, `pair_18`,
+`pair_28`, and `pair_38`. The neb starts are `pair_05`, `pair_09`,
+`pair_13`, `pair_17`, `pair_18`, `pair_28`, `pair_37`, `pair_38`, and
+`pair_42`.

@@ -799,7 +799,7 @@
       "current": true,
       "entry": "eon-svn-r2549-de-lj38-ci",
       "failures": {
-        "cap": 10,
+        "cap": 5,
         "crash": 0,
         "divergence": 0,
         "wrong_stationary": 0
@@ -811,12 +811,12 @@
       "mean_per_image": 186.02,
       "median": 657.0,
       "median_calls": 657.0,
-      "median_high": 764.5,
-      "median_low": 577.0,
+      "median_high": 817.0,
+      "median_low": 549.5,
       "median_per_image": 131.4,
       "min_calls": 347.0,
-      "n": 100,
-      "nfailed": 10,
+      "n": 50,
+      "nfailed": 5,
       "note": "starts.jsonl",
       "par2_mean": 1180.1,
       "partial": false,
@@ -829,8 +829,8 @@
       "success_rate": 0.9,
       "template": "eon-svn/de-lj38-ci",
       "tuning": "default",
-      "wilson_high": 0.9447708629393249,
-      "wilson_low": 0.8256343384950865
+      "wilson_high": 0.9565242350681096,
+      "wilson_low": 0.7863976856252035
     },
     {
       "asv_commit": "19e5e5f275cc59e67893ae3e761f1fb0097841f2",
@@ -1024,7 +1024,7 @@
       "current": true,
       "entry": "eon-svn-r2549-de-lj38-neb",
       "failures": {
-        "cap": 18,
+        "cap": 9,
         "crash": 0,
         "divergence": 0,
         "wrong_stationary": 0
@@ -1036,12 +1036,12 @@
       "mean_per_image": 224.268,
       "median": 774.5,
       "median_calls": 774.5,
-      "median_high": 872.0,
-      "median_low": 694.5,
+      "median_high": 917.0,
+      "median_low": 667.0,
       "median_per_image": 154.9,
       "min_calls": 357.0,
-      "n": 100,
-      "nfailed": 18,
+      "n": 50,
+      "nfailed": 9,
       "note": "starts.jsonl",
       "par2_mean": 1571.34,
       "partial": false,
@@ -1054,8 +1054,8 @@
       "success_rate": 0.82,
       "template": "eon-svn/de-lj38-neb",
       "tuning": "default",
-      "wilson_high": 0.8829977450105364,
-      "wilson_low": 0.7333264161369926
+      "wilson_high": 0.9022980732976582,
+      "wilson_low": 0.6920394632569922
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",

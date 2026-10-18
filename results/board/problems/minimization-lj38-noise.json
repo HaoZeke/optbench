@@ -647,7 +647,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "wrong_stationary": 10
+        "wrong_stationary": 5
       },
       "full_n": 1000,
       "history": false,
@@ -656,12 +656,12 @@
       "mean_per_image": null,
       "median": 189.0,
       "median_calls": 189.0,
-      "median_high": 192.0,
-      "median_low": 186.0,
+      "median_high": 194.5,
+      "median_low": 185.0,
       "median_per_image": null,
       "min_calls": 100.0,
-      "n": 2000,
-      "nfailed": 10,
+      "n": 1000,
+      "nfailed": 5,
       "note": "starts.jsonl",
       "par2_mean": 300.052,
       "partial": false,
@@ -674,8 +674,8 @@
       "success_rate": 0.995,
       "template": "eon-svn/lj38-noise-0",
       "tuning": "default",
-      "wilson_high": 0.9972818191415014,
-      "wilson_low": 0.990820304050058
+      "wilson_high": 0.9978624644726756,
+      "wilson_low": 0.9883490446266249
     },
     {
       "asv_commit": "c1ecf607a10f7ab78d1615e4cbf9af030bebcdbf",
@@ -692,7 +692,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "wrong_stationary": 10
+        "wrong_stationary": 5
       },
       "full_n": 1000,
       "history": false,
@@ -701,12 +701,12 @@
       "mean_per_image": null,
       "median": 191.0,
       "median_calls": 191.0,
-      "median_high": 193.5,
-      "median_low": 189.0,
+      "median_high": 196.0,
+      "median_low": 187.0,
       "median_per_image": null,
       "min_calls": 101.0,
-      "n": 2000,
-      "nfailed": 10,
+      "n": 1000,
+      "nfailed": 5,
       "note": "starts.jsonl",
       "par2_mean": 300.523,
       "partial": false,
@@ -719,8 +719,8 @@
       "success_rate": 0.995,
       "template": "eon-svn/lj38-noise-1e-4",
       "tuning": "default",
-      "wilson_high": 0.9972818191415014,
-      "wilson_low": 0.990820304050058
+      "wilson_high": 0.9978624644726756,
+      "wilson_low": 0.9883490446266249
     },
     {
       "asv_commit": "c1ecf607a10f7ab78d1615e4cbf9af030bebcdbf",
@@ -737,7 +737,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "wrong_stationary": 18
+        "wrong_stationary": 9
       },
       "full_n": 1000,
       "history": false,
@@ -746,12 +746,12 @@
       "mean_per_image": null,
       "median": 184.0,
       "median_calls": 183.0,
-      "median_high": 186.0,
-      "median_low": 181.0,
+      "median_high": 187.0,
+      "median_low": 180.0,
       "median_per_image": null,
       "min_calls": 94.0,
-      "n": 2000,
-      "nfailed": 18,
+      "n": 1000,
+      "nfailed": 9,
       "note": "starts.jsonl",
       "par2_mean": 372.24,
       "partial": false,
@@ -764,8 +764,8 @@
       "success_rate": 0.991,
       "template": "eon-svn/lj38-noise-1e-3",
       "tuning": "default",
-      "wilson_high": 0.9942995002714226,
-      "wilson_low": 0.9858179592983869
+      "wilson_high": 0.9952579393325229,
+      "wilson_low": 0.982984183834662
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -1637,7 +1637,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "wrong_stationary": 176
+        "wrong_stationary": 88
       },
       "full_n": 1000,
       "history": false,
@@ -1646,12 +1646,12 @@
       "mean_per_image": null,
       "median": 158.0,
       "median_calls": 153.0,
-      "median_high": 161.0,
+      "median_high": 162.0,
       "median_low": 156.0,
       "median_per_image": null,
       "min_calls": 68.0,
-      "n": 2000,
-      "nfailed": 176,
+      "n": 1000,
+      "nfailed": 88,
       "note": "starts.jsonl",
       "par2_mean": 1906.855,
       "partial": false,
@@ -1664,8 +1664,8 @@
       "success_rate": 0.912,
       "template": "eon-svn/lj38-noise-1e-2",
       "tuning": "default",
-      "wilson_high": 0.9236391092069477,
-      "wilson_low": 0.8987812438332999
+      "wilson_high": 0.9280190020576792,
+      "wilson_low": 0.8928277489502235
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
