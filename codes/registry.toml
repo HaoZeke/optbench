@@ -84,6 +84,16 @@ commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
 committed = "2026-10-05"
 note = "Activation-relaxation technique nouveau, plugin branch DEVEL. The benchmark contributor of a new entry is Rohit Goswami."
 
+[[code]]
+id = "pele"
+name = "pele"
+role = "transition state search"
+repository = "https://github.com/pele-python/pele"
+ref = "main"
+commit = "b7081b932a060be11342fbe8287ac35da8ada879"
+committed = "2026-10-12"
+note = "0.1.2 at main b7081b93, built from source. FindTransitionState is hybrid eigenvector following. findLowestEigenVector is Rayleigh-Ritz. The potential is the problem pair through a HarnessCounter."
+
 # generated ASE and Sella templates
 
 [[template]]

@@ -13,3 +13,9 @@ docs/source/index.rst
 docs/source/*.rst
 docs/source/generated/
 results/rgsaddle-asv/
+results/pele-asv/
+results/campaign/work/
+results/campaign/*.header.json
+results/campaign/*.partial.jsonl
+results/campaign/*.tmp
+results/campaign/*.jsonl.tmp

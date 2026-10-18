@@ -1,0 +1,32 @@
+force_calls 1214
+force_calls_min 90
+force_calls_median 720
+force_calls_max 5972
+nfailed 0
+starts 49
+n 49
+par2_mean 1213.6122448980
+successes 49
+wilson_low 0.9273021808
+wilson_high 1.0000000000
+par2_median 720.0000000000
+median 720.0000000000
+median_low 536.0000000000
+median_high 1278.0000000000
+n_cap 0
+n_wrong_stationary 0
+n_divergence 0
+n_crash 0
+counter harness
+cap 10000
+code pele
+code_version 0.1.2
+commit b7081b932a060be11342fbe8287ac35da8ada879
+algorithm hybrid eigenvector following
+tuning tuned
+template pele/pt-island-ts-ffd
+problem tsopt/pt-island
+note The archived pt-island driver is a dangling path, so the quench controls are the LJ38 forward-difference set. The stop is this problem's Euclidean force norm. orthogZeroEigs is unset because the substrate fixes the frame. The initial eigenvector is the free displacement from the reactant. A converged candidate also pays for the transverse mode screen.
+contributor Rohit Goswami
+date 2026-10-18
+host cursor
