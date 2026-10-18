@@ -19,6 +19,8 @@ STEMS = {
     "EonDevelopTsLj38Dimer": "eon-develop-ts-lj38-dimer",
     "EonDevelopTsPtLanczos": "eon-develop-ts-pt-lanczos",
     "EonDevelopTsPtDimer": "eon-develop-ts-pt-dimer",
+    "EonDevelopNebPtLbfgs": "eon-develop-neb-pt-lbfgs",
+    "EonDevelopNebPtLbfgsM100": "eon-develop-neb-pt-lbfgs-m100",
     "EonDevelopDeLj38Ew": "eon-develop-de-lj38-ew",
     "EonDevelopDeLj38Oci": "eon-develop-de-lj38-oci",
     "EonDevelopDeLj38Cap": "eon-develop-de-lj38-cap",
