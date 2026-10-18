@@ -366,10 +366,13 @@ def _judge(
     project_rigid: bool,
     crashed: str,
     potential: str,
+    diverged: bool = False,
 ) -> dict:
     reasons: list[str] = []
     if crashed:
         reasons.append("crash")
+    if diverged:
+        reasons.append("divergence")
     if counter.calls >= cap:
         reasons.append("cap")
     energy = float("nan")
@@ -382,7 +385,7 @@ def _judge(
     if not np.isfinite(force) or force > force_norm:
         reasons.append("force_norm")
     hessian_index = None
-    if "crash" not in reasons and "cap" not in reasons and "force_norm" not in reasons and coords is not None:
+    if "crash" not in reasons and "divergence" not in reasons and "cap" not in reasons and "force_norm" not in reasons and coords is not None:
         shape = coords.shape
 
         def gradient(point):
@@ -448,6 +451,7 @@ def search_pair(
         return evaluate(potential, np.asarray(coords, dtype=np.float64), None)
 
     crashed = ""
+    diverged = False
     gsm = None
     work = Path(tempfile.mkdtemp(prefix="pygsm-"))
     previous = Path.cwd()
@@ -478,8 +482,15 @@ def search_pair(
             except ForceCallCap:
                 pass
             except Exception as exc:
-                crashed = type(exc).__name__
-                traceback.print_exc()
+                # A zero internal step divides by zero and the rotation
+                # matrix becomes non-finite. That is the search leaving
+                # the real line, which is divergence.
+                numeric = isinstance(exc, np.linalg.LinAlgError) or "infs or NaNs" in str(exc)
+                if numeric:
+                    diverged = True
+                else:
+                    crashed = type(exc).__name__
+                    traceback.print_exc()
     finally:
         os.chdir(previous)
         shutil.rmtree(work, ignore_errors=True)
@@ -493,6 +504,7 @@ def search_pair(
         project_rigid=project_rigid,
         crashed=crashed,
         potential=potential,
+        diverged=diverged,
     )
     return record
 
