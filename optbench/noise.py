@@ -23,6 +23,21 @@ KAPPA = 3.0
 WINDOW = 5
 
 
+def window_energy_tolerance(energy_tol: float, sigma: float, kappa: float = KAPPA) -> float:
+    """Energy-window tolerance at this sigma.
+
+    The clean energy tolerance stays in force when it is larger than
+    ``kappa * sigma``. Sigma 0 does not use the window.
+    """
+    if energy_tol < 0.0:
+        raise ValueError("energy_tol must be non-negative")
+    if sigma < 0.0:
+        raise ValueError("sigma must be non-negative")
+    if kappa < 0.0:
+        raise ValueError("kappa must be non-negative")
+    return max(float(energy_tol), float(kappa) * float(sigma))
+
+
 def noise_floor(sigma: float, components: int, kappa: float = KAPPA) -> float:
     """RMS scale of the Euclidean norm of isotropic Gaussian force noise."""
     if sigma < 0.0:
