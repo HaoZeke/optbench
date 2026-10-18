@@ -84,6 +84,16 @@ commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
 committed = "2026-10-05"
 note = "Activation-relaxation technique nouveau, plugin branch DEVEL. The benchmark contributor of a new entry is Rohit Goswami."
 
+[[code]]
+id = "panna"
+name = "PANNA"
+role = "machine-learning training"
+repository = "https://gitlab.com/PANNAdevs/panna"
+ref = "master"
+commit = "132a2df662598ecbbb2c9b8d37b992bb6ada6348"
+committed = "2025-01-15"
+note = "PANNA 2.1.0, commit 132a2df6, built from source. The mlopt rows step with the TensorFlow Adam in src/panna/neuralnet/config_parser_train.py and the JAX Adam in src/panna/train_jax.py. The loss is the mlopt squared error. It is not PANNA's own training loss."
+
 # generated ASE and Sella templates
 
 [[template]]
