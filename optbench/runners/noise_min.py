@@ -526,7 +526,10 @@ def run_template(
         for line in partial_path.read_text(encoding="utf-8").splitlines():
             if not line.strip():
                 continue
-            row = json.loads(line)
+            try:
+                row = json.loads(line)
+            except json.JSONDecodeError:
+                continue
             done_rows[int(row["index"])] = row
     pending = [job for job in jobs if job["index"] not in done_rows]
     if pending:
