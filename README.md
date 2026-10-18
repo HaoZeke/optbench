@@ -130,6 +130,14 @@ uv run --group campaign optbench run minimization/lj38 ase/lj38-lbfgs-default \
 
 The per-start file is the `.starts.jsonl` next to that `benchmark.dat`. A count at the cap, an exception, or a final force above the problem stop is a failure and is kept in that file. The dimer templates are not in `campaign-ase`. They are single-ended searches, not the Pt-island saddle catalog.
 
+NLopt 2.11.0 is the source build named in `codes/registry.toml`. `NLOPT_PREFIX` defaults to `/opt/nlopt`, and the SWIG module lives under that prefix. Templates under `templates/nlopt/` are LD_LBFGS, LD_MMA, LD_SLSQP, LD_TNEWTON_PRECOND_RESTART, and LD_VAR2. The objective calls `RgpotCounter.calculate` on the problem potential. On Lennard-Jones 38, LD_LBFGS, LD_VAR2, and LD_SLSQP scale the objective so the first identity-Hessian step has length 0.2. LD_TNEWTON_PRECOND_RESTART recenters a coordinate box of half-width 0.2. LD_MMA and the Morse rows keep the library defaults.
+
+```bash
+uv run optbench run minimization/lj38 nlopt/lj38-lbfgs \
+  --workers 8 \
+  --output results/campaign/nlopt-673d2504-lj38-lbfgs.dat
+```
+
 Pt-heptamer NEB is 13 bands, Morse, eight images. The band method has to be the one named in the template. `eon-lbfgs` averages 40:
 
 ```bash

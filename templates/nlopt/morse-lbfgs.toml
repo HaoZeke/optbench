@@ -1,0 +1,13 @@
+id = "nlopt/morse-lbfgs"
+engine = "nlopt"
+problem = "minimization/morse-bulk"
+code = "nlopt"
+code_version = "2.11.0"
+commit = "673d2504f819bf554a7968e41de552ee102e7fb1"
+algorithm = "LD_LBFGS"
+tuning = "default"
+note = "Default row. The callback evaluates the harness Morse potential and stops on the problem force norm. Each method uses the NLopt library defaults."
+
+[nlopt]
+algorithm = "LD_LBFGS"
+step = "none"

@@ -1,0 +1,13 @@
+# NLopt is not selected from conda-forge here. This file does not invent
+# a build string. The module the benchmarks import is the source build
+# pinned in codes/registry.toml under id nlopt:
+#   ref = v2.11.0
+#   commit = 673d2504f819bf554a7968e41de552ee102e7fb1
+#   version string 2.11.0
+# NLOPT_PREFIX defaults to /opt/nlopt. asv has one environment_type, so
+# this yml cannot be bound to one class.
+name: nlopt
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12

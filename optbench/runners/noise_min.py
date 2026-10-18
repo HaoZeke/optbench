@@ -154,6 +154,8 @@ def _minimize_job(job: dict) -> dict:
             point, stopped = _drive_ase(job, x0, observed, potential, cap, clean_tol, energy_tol, components)
         elif family == "sella":
             point, stopped = _drive_sella(job, x0, observed, potential, cap, clean_tol, energy_tol, components)
+        elif family == "nlopt":
+            point, stopped = _drive_nlopt(job, x0, observed, potential, cap, clean_tol, energy_tol, components)
         else:
             raise ValueError(f"unknown solver family {family}")
     except ForceCallCap as exc:
@@ -193,6 +195,8 @@ def _minimize_job(job: dict) -> dict:
     at_force = finite and stopped and force_norm is not None and force_norm <= threshold and calls < cap and not error
     reasons: list[str] = []
     cap_hit = "force-call cap" in error or "ForceCallCap" in error
+    if family == "nlopt" and calls >= cap and error:
+        cap_hit = True
     if error and not cap_hit:
         reasons.append("crash")
     elif not finite:
@@ -239,6 +243,10 @@ def _minimize_job(job: dict) -> dict:
         "seconds": time.perf_counter() - started,
         "rgmin_stop": None if report is None else str(getattr(report, "stop", "")),
     }
+    if family == "nlopt":
+        record["nlopt_algorithm"] = method
+        record["nlopt_step"] = str((job.get("options") or {}).get("step") or "")
+        record["nlopt_maxstep"] = (job.get("options") or {}).get("maxstep")
     if error:
         record["error"] = error
     return record
@@ -354,6 +362,39 @@ def _drive_ase(job, x0, observed, potential, cap, clean_tol, energy_tol, compone
     return point, stopped
 
 
+def _drive_nlopt(job, x0, observed, potential, cap, clean_tol, energy_tol, components):
+    """NLopt sees the noisy force. The harness still counts the clean call."""
+    import numpy as np
+
+    from optbench.runners.nlopt_min import drive
+
+    algorithm = str(job["method"])
+    step = str(job["options"].get("step") or "none")
+    raw = job["options"].get("maxstep")
+    maxstep = None if raw is None else float(raw)
+
+    def evaluate(coords):
+        energy, gradient = observed(coords)
+        return float(energy), np.asarray(gradient, dtype=np.float64)
+
+    def stop(_point, _energy, _gradient, _norm: float) -> bool:
+        return observed.met(clean_tol, energy_tol, components)
+
+    result = drive(
+        x0,
+        evaluate,
+        algorithm=algorithm,
+        step=step,
+        maxstep=maxstep,
+        stop=stop,
+        cap=cap,
+    )
+    err = str(result.get("error") or "")
+    if err and "ForceCallCap" not in err and potential.counter.calls < cap:
+        raise RuntimeError(err)
+    return result["point"], bool(result["stopped"]) and not err
+
+
 def _drive_sella(job, x0, observed, potential, cap, clean_tol, energy_tol, components):
     from sella import Sella
 
@@ -415,6 +456,41 @@ def _dat(summary: dict, template: dict, metrics: dict, sigma: float) -> str:
     return "\n".join(lines) + "\n"
 
 
+def _resume_noise(output: Path, template: dict, sigma: float) -> list[dict]:
+    path = output.with_suffix(".starts.jsonl")
+    if not path.is_file():
+        return []
+    document_path = output.with_suffix(".v2.json")
+    if document_path.is_file():
+        document = json.loads(document_path.read_text(encoding="utf-8"))
+        runs = document.get("runs") or []
+        if runs:
+            recorded = str(runs[0].get("algorithm") or "")
+            expected = str(template.get("algorithm") or "")
+            if recorded and expected and recorded != expected:
+                raise RuntimeError(f"{document_path} records {recorded}")
+    rows = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        row = json.loads(line)
+        if abs(float(row.get("sigma", sigma)) - float(sigma)) > 0.0:
+            raise RuntimeError(f"{path} records a different sigma")
+        solver = template.get("solver") or {}
+        if str(solver.get("family") or "") == "nlopt":
+            if row.get("nlopt_algorithm") != solver.get("method") or row.get("nlopt_step") != solver.get("step"):
+                raise RuntimeError(f"{path} was produced with a different nlopt step")
+            recorded = row.get("nlopt_maxstep")
+            expected = solver.get("maxstep")
+            if expected is None:
+                if recorded not in (None, ""):
+                    raise RuntimeError(f"{path} records a maxstep")
+            elif recorded is None or abs(float(recorded) - float(expected)) > 1e-12:
+                raise RuntimeError(f"{path} maxstep does not match the template")
+        rows.append(row)
+    return rows
+
+
 def run_template(
     root: Path,
     problem: dict,
@@ -425,6 +501,7 @@ def run_template(
     workers: int,
     work: Path | None,
     limit: int = 0,
+    resume: bool = False,
 ) -> dict:
     _quiet_threads()
     if template.get("engine") != "noise":
@@ -450,6 +527,23 @@ def run_template(
         version = str(rgmin.__version__)
         if template.get("code_version") and version != str(template["code_version"]):
             raise RuntimeError(f"rgmin {version} does not match template {template['code_version']}")
+    if family == "nlopt":
+        from optbench.runners.nlopt_min import load_nlopt, require_step
+
+        nlopt, built = load_nlopt()
+        version = str(nlopt.__version__)
+        if template.get("code_version") and version != str(template["code_version"]):
+            raise RuntimeError(f"nlopt {version} does not match template {template['code_version']}")
+        commit = str(template.get("commit") or "")
+        if built and not (commit.startswith(built) or built.startswith(commit)):
+            raise RuntimeError(f"nlopt build {built} does not match template {commit}")
+        raw_step = solver.get("maxstep")
+        require_step(
+            problem["id"],
+            str(solver.get("method") or ""),
+            str(solver.get("step") or "none"),
+            None if raw_step is None else float(raw_step),
+        )
     convergence = problem.get("convergence") or {}
     clean_tol = float(convergence["force_norm"])
     if "energy_tol" not in convergence:
@@ -467,8 +561,15 @@ def run_template(
         for key, value in solver.items()
         if key not in {"family", "method", "name"}
     }
+    done_rows: dict[str, dict] = {}
+    if resume:
+        for row in _resume_noise(output, template, sigma):
+            done_rows[str(row["start"])] = row
     jobs = []
     for index, (name, coords, _box) in enumerate(loaded):
+        if name in done_rows:
+            done_rows[name]["index"] = index
+            continue
         jobs.append(
             {
                 "index": index,
@@ -485,36 +586,55 @@ def run_template(
                 "cap": cap,
             }
         )
-    if workers <= 1:
-        records = [_minimize_job(job) for job in jobs]
-    else:
-        import multiprocessing as mp
 
-        context = mp.get_context("spawn")
-        with ProcessPoolExecutor(max_workers=workers, mp_context=context) as pool:
-            futures = [pool.submit(_minimize_job, job) for job in jobs]
-            records = []
-            total = len(futures)
-            for done, future in enumerate(as_completed(futures), 1):
-                records.append(future.result())
+    def publish(records: list[dict]) -> dict:
+        return _publish_noise(output, records, problem, template, sigma, family, method, cap, energy_tol, options)
+
+    fresh: list[dict] = []
+    if jobs:
+        if workers <= 1:
+            total = len(jobs)
+            for done, job in enumerate(jobs, 1):
+                fresh.append(_minimize_job(job))
                 if done == total or done % 50 == 0:
                     print(f"{template['id']} {done}/{total}", flush=True)
-    records.sort(key=lambda row: row["index"])
-    for record in records:
-        record.pop("index", None)
-    legacy_counts = [cap if not record["converged"] else int(record["force_calls"]) for record in records]
+                    publish(list(done_rows.values()) + fresh)
+        else:
+            import multiprocessing as mp
+
+            context = mp.get_context("spawn")
+            with ProcessPoolExecutor(max_workers=workers, mp_context=context) as pool:
+                futures = [pool.submit(_minimize_job, job) for job in jobs]
+                total = len(futures)
+                for done, future in enumerate(as_completed(futures), 1):
+                    fresh.append(future.result())
+                    if done == total or done % 50 == 0:
+                        print(f"{template['id']} {done}/{total}", flush=True)
+                        publish(list(done_rows.values()) + fresh)
+    records = list(done_rows.values()) + fresh
+    return publish(records)
+
+
+def _publish_noise(output, records, problem, template, sigma, family, method, cap, energy_tol, options) -> dict:
+    ordered = sorted(records, key=lambda row: int(row.get("index", 0)))
+    stored = []
+    for record in ordered:
+        row = dict(record)
+        row.pop("index", None)
+        stored.append(row)
+    legacy_counts = [cap if not record["converged"] else int(record["force_calls"]) for record in stored]
     summary = summarize_capped(legacy_counts, cap)
-    successes = [int(record["force_calls"]) for record in records if record["converged"]]
+    successes = [int(record["force_calls"]) for record in stored if record["converged"]]
     summary["median"] = statistics.median(successes) if successes else None
     summary["cap"] = cap
-    energies = [float(record["energy"]) for record in records if record.get("energy") is not None]
+    energies = [float(record["energy"]) for record in stored if record.get("energy") is not None]
     if energies:
         summary["energy_min"] = min(energies)
         summary["energy_max"] = max(energies)
     metrics = score_v2(
         [
             {"force_calls": record["force_calls"], "success": record["success"], "failure": record["failure"]}
-            for record in records
+            for record in stored
         ],
         cap,
     )
@@ -557,18 +677,18 @@ def run_template(
                     "nfailed": summary.get("nfailed"),
                     "median": summary.get("median"),
                 },
-                "starts": records,
+                "starts": stored,
             }
         ],
     }
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(_dat(summary, template, metrics, sigma), encoding="utf-8")
-    write_starts(output.with_suffix(".starts.jsonl"), records)
+    write_starts(output.with_suffix(".starts.jsonl"), stored)
     output.with_suffix(".v2.json").write_text(json.dumps(document, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    summary["starts"] = len(records)
+    summary["starts"] = len(stored)
     summary["template"] = template["id"]
     summary["problem"] = problem["id"]
     summary["par2_mean"] = metrics["par2_mean"]
     summary["v2_nfailed"] = metrics["nfailed"]
-    summary["seconds"] = sum(float(record.get("seconds") or 0.0) for record in records)
+    summary["seconds"] = sum(float(record.get("seconds") or 0.0) for record in stored)
     return summary

@@ -85,6 +85,16 @@ committed = "2026-10-15"
 note = "Sella 2.6.0. Order 1 is a saddle and order 0 is a minimum. The Sella 0.1.1 rows on the 2014 tables are legacy and are not this pin. Force calls are harness calculator evaluations."
 
 [[code]]
+id = "nlopt"
+name = "NLopt"
+role = "minimization"
+repository = "https://github.com/stevengj/nlopt"
+ref = "v2.11.0"
+commit = "673d2504f819bf554a7968e41de552ee102e7fb1"
+committed = "2026-10-17"
+note = "NLopt 2.11.0, commit 673d2504f819bf554a7968e41de552ee102e7fb1, nine commits after tag v2.11.0. The version string is 2.11.0. LD_LBFGS, LD_MMA, LD_SLSQP, LD_TNEWTON_PRECOND_RESTART, and LD_VAR2 run through the SWIG Python module. The objective calls RgpotCounter.calculate. NLOPT_PREFIX defaults to /opt/nlopt."
+
+[[code]]
 id = "artn"
 name = "pARTn"
 role = "saddle search"

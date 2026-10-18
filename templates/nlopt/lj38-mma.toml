@@ -1,0 +1,13 @@
+id = "nlopt/lj38-mma"
+engine = "nlopt"
+problem = "minimization/lj38"
+code = "nlopt"
+code_version = "2.11.0"
+commit = "673d2504f819bf554a7968e41de552ee102e7fb1"
+algorithm = "LD_MMA"
+tuning = "default"
+note = "Default row. The callback evaluates the harness Lennard-Jones potential and stops on the unscaled force norm. LD_LBFGS, LD_VAR2, and LD_SLSQP scale the objective by maxstep divided by the initial force norm, with maxstep 0.2, so the first identity-Hessian step has that length. Luksan tolg is 1e-8 times the scale. LD_TNEWTON_PRECOND_RESTART recenters a coordinate box of half-width 0.2 until the force stop. LD_MMA keeps the library defaults, including the moving-asymptote sigma of 1. The same values are used for every start."
+
+[nlopt]
+algorithm = "LD_MMA"
+step = "none"

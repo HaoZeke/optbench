@@ -38,6 +38,8 @@ asv is the measurement store. A result file is keyed to the commit asv checked o
 
 `benchmarks/bench_eon_develop.py` is the eOn develop entry. Counting is `HarnessCounter` through the `ext_pot` bridge, not the client's own tally. The default parameter list is one seed and the first start. `OPTBENCH_ASV_FULL=1` selects the campaign grid at import. The Pt-island AKMC classes default to one pass. A one-start file is not a published mean.
 
+`benchmarks/bench_nlopt.py` is the NLopt gradient entry. The objective calls `RgpotCounter.calculate`. The default parameter list is one seed and the first start. `environments/nlopt.yml` records the Python pin for that source build.
+
 The quadratic sample is the run that `results/validation/statistics.json` scores. A subset of Lennard-Jones 38 is `results/validation/lj38-counter.dat` and it is not a published mean.
 
 ## Commands

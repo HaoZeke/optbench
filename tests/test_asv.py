@@ -119,6 +119,7 @@ def test_pending_grid_is_every_problem_and_code():
         "rgsaddle",
         "ase",
         "sella",
+        "nlopt",
         "artn",
         "tsase",
         "pykmc",

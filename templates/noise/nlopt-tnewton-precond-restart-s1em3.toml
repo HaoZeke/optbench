@@ -1,0 +1,19 @@
+id = "noise/nlopt-tnewton-precond-restart-s1em3"
+engine = "noise"
+problem = "minimization/lj38-noise"
+code = "nlopt"
+code_version = "2.11.0"
+commit = "673d2504f819bf554a7968e41de552ee102e7fb1"
+algorithm = "LD_TNEWTON_PRECOND_RESTART"
+tuning = "default"
+note = "Default profile. The stop is the noise-aware force norm, and at positive sigma the clean energy over the last window. The index is the clean Hessian with the rigid-mode rule. LD_LBFGS, LD_VAR2, and LD_SLSQP scale the objective by 0.2 divided by the initial force norm. LD_TNEWTON_PRECOND_RESTART recenters a coordinate box of half-width 0.2. LD_MMA keeps the library defaults."
+
+[solver]
+family = "nlopt"
+method = "LD_TNEWTON_PRECOND_RESTART"
+step = "box"
+maxstep = 0.2
+
+[noise]
+sigma = 0.001
+seed = 20261016

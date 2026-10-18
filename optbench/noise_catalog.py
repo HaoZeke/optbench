@@ -21,6 +21,8 @@ ASE_COMMIT = "f27c0005ae6a67ea419f996e728668865bfc1f86"
 ASE_VERSION = "3.29.0"
 SELLA_COMMIT = "6cfb60cdb100a146c3c6f0587d5308b247aa8010"
 SELLA_VERSION = "2.6.0"
+NLOPT_COMMIT = "673d2504f819bf554a7968e41de552ee102e7fb1"
+NLOPT_VERSION = "2.11.0"
 
 _SLUGS = ((0.0, "s0"), (1e-4, "s1em4"), (1e-3, "s1em3"), (1e-2, "s1em2"))
 
@@ -164,6 +166,37 @@ def specs() -> list[dict]:
                 sigma,
             )
         )
+    nlopt_note = (
+        "Default profile. The stop is the noise-aware force norm, and at positive sigma "
+        "the clean energy over the last window. The index is the clean Hessian with the rigid-mode rule. "
+        "LD_LBFGS, LD_VAR2, and LD_SLSQP scale the objective by 0.2 divided by the initial force norm. "
+        "LD_TNEWTON_PRECOND_RESTART recenters a coordinate box of half-width 0.2. "
+        "LD_MMA keeps the library defaults."
+    )
+    nlopt_rows = (
+        ("lbfgs", "LD_LBFGS", "scale", 0.2),
+        ("mma", "LD_MMA", "none", None),
+        ("slsqp", "LD_SLSQP", "scale", 0.2),
+        ("tnewton-precond-restart", "LD_TNEWTON_PRECOND_RESTART", "box", 0.2),
+        ("var2", "LD_VAR2", "scale", 0.2),
+    )
+    for slug, method, step, maxstep in nlopt_rows:
+        for sigma in SIGMAS:
+            solver = {"family": "nlopt", "method": method, "step": step}
+            if maxstep is not None:
+                solver["maxstep"] = maxstep
+            found.append(
+                _base(
+                    f"noise/nlopt-{slug}-{sigma_slug(sigma)}",
+                    "nlopt",
+                    NLOPT_VERSION,
+                    NLOPT_COMMIT,
+                    method,
+                    nlopt_note,
+                    solver,
+                    sigma,
+                )
+            )
     return found
 
 

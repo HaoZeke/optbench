@@ -640,6 +640,18 @@
    <li>pt-island: partial.</li>
    <li>sella-lj38: no per-start record.</li>
    </ul>
+   <h3>NLopt</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization</td>
+   <td>v2.11.0</td>
+   <td>673d2504f819</td>
+   <td><a href="https://github.com/stevengj/nlopt">https://github.com/stevengj/nlopt</a></td>
+   </tr>
+   </tbody></table></div>
+   <p>No full ranked run.</p>
    <h3>pARTn</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>

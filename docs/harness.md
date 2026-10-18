@@ -16,7 +16,7 @@ Verification of the Hessian uses `CountedPotential.verification`. Those calls in
 
 `uv run optbench run` still shells out to `eonclient` and leaves the client's potential in the binary. That command writes the legacy `benchmark.dat` unchanged and a sibling `benchmark.starts.jsonl`. Each line has `counter` `client` and `comparable` false. It is not a v2 score.
 
-eonclient can be scored with the harness counter without rebuilding it. `optbench.potserver` serves one `HarnessCounter`. `python -m optbench.extpot` is the `ext_pot` program eOn already runs: one force evaluation is one socket `calculate`. `RgpotCounter.calculate` is the same counter for an rgpot client. The wire protocol, the seed sample, the failure classes, and the noise rule are `docs/v2.md`.
+eonclient can be scored with the harness counter without rebuilding it. `optbench.potserver` serves one `HarnessCounter`. `python -m optbench.extpot` is the `ext_pot` program eOn already runs: one force evaluation is one socket `calculate`. `RgpotCounter.calculate` is the same counter for an rgpot client. An NLopt objective uses that call on the problem potential. A scaled objective still charges the unscaled entry, and a repeated coordinate is a cache hit. The wire protocol, the seed sample, the failure classes, and the noise rule are `docs/v2.md`.
 
 ```bash
 uv run optbench validate-counter --limit 3 --output results/validation/lj38-counter.dat
