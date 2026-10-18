@@ -1,0 +1,14 @@
+# pele is not a conda-forge package. This file does not invent a build
+# string. The library the basin-hopping benchmarks import is the source
+# build pinned in codes/registry.toml under id pele:
+#   ref = master
+#   commit = b7081b932a060be11342fbe8287ac35da8ada879
+#   version string 0.1.2
+# asv has one environment_type, so this yml cannot be bound to one
+# class. Those classes import pele. A missing install raises
+# NotImplementedError in setup and asv stores that parameter as NaN.
+name: pele
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12

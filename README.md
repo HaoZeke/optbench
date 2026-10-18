@@ -102,6 +102,15 @@ uv run optbench/pele_lj38.py \
 
 Memory 100 at step 0.2 averages 178 calls. The 2014 file is 179. The other six files are `results/campaign/pele-0.1.2-lbfgs-*.dat`.
 
+Basin hopping on the globalopt Lennard-Jones sets uses the same pin. The driver is `pele.basinhopping.BasinHopping` and the quench is `pele.optimize.lbfgs_cpp`. The potential is the harness kernel, cutoff 40, not `pele.potentials.LJ`. Templates are `pele/lj38-basinhopping`, `pele/lj75-basinhopping`, `pele/lj98-basinhopping`, and `pele/lj150-basinhopping`.
+
+```bash
+uv run optbench run globalopt/lj38 pele/lj38-basinhopping \
+  --workers 6 \
+  --resume \
+  --output results/campaign/pele-b7081b93-lj38-basinhopping.dat
+```
+
 Sella 2.6.0 needs `sella==2.6.0` and ASE. The stop is the Euclidean norm of the force at 0.001, or 1000 steps, on 200 geometries, with cutoff 40 and the archived trust-region numbers:
 
 ```bash
