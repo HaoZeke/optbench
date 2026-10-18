@@ -154,6 +154,12 @@ def _minimize_job(job: dict) -> dict:
             point, stopped = _drive_ase(job, x0, observed, potential, cap, clean_tol, energy_tol, components)
         elif family == "sella":
             point, stopped = _drive_sella(job, x0, observed, potential, cap, clean_tol, energy_tol, components)
+        elif family == "vcsqnm":
+            point, stopped, drive_error = _drive_vcsqnm(
+                job, x0, observed, potential, cap, clean_tol, energy_tol, components
+            )
+            if drive_error:
+                error = drive_error
         else:
             raise ValueError(f"unknown solver family {family}")
     except ForceCallCap as exc:
@@ -342,6 +348,41 @@ def _drive_ase(job, x0, observed, potential, cap, clean_tol, energy_tol, compone
     return point, stopped
 
 
+def _drive_vcsqnm(job, x0, observed, potential, cap, clean_tol, energy_tol, components):
+    import numpy as np
+
+    from optbench.runners.vcsqnm_min import drive
+
+    method = str(job["method"])
+    if method not in {"sqnm", "ase"}:
+        raise ValueError(f"{method} is not a fixed-cell SQNM method")
+
+    class _Noisy:
+        def __init__(self):
+            self.energy = None
+            self.grad = None
+            self.last_deriv = None
+
+        def __call__(self, flat, cell=None):
+            energy, grad = observed(flat)
+            self.energy = float(energy)
+            self.grad = np.asarray(grad, dtype=np.float64).reshape(-1)
+            return self.energy, self.grad
+
+    seen = _Noisy()
+    result = drive(
+        x0,
+        method,
+        dict(job["options"]),
+        seen,
+        lambda: observed.met(clean_tol, energy_tol, components),
+        lambda: potential.counter.calls,
+        cap,
+        None,
+    )
+    return result["point"], bool(result["stopped"]), str(result["error"])
+
+
 def _drive_sella(job, x0, observed, potential, cap, clean_tol, energy_tol, components):
     from sella import Sella
 
@@ -438,6 +479,17 @@ def run_template(
         version = str(rgmin.__version__)
         if template.get("code_version") and version != str(template["code_version"]):
             raise RuntimeError(f"rgmin {version} does not match template {template['code_version']}")
+    if family == "vcsqnm":
+        from optbench.runners.vcsqnm_min import assert_pin
+        from optbench.vcsqnm_catalog import CODE_VERSION, COMMIT
+
+        assert_pin()
+        if str(template.get("commit") or "") != COMMIT:
+            raise RuntimeError(f"{template['id']} commit is not {COMMIT}")
+        if str(template.get("code_version") or "") != CODE_VERSION:
+            raise RuntimeError(f"{template['id']} code_version is not tag {CODE_VERSION}")
+        if str(solver.get("method")) not in {"sqnm", "ase"}:
+            raise ValueError(f"{template['id']} moves a cell this potential does not have")
     convergence = problem.get("convergence") or {}
     clean_tol = float(convergence["force_norm"])
     if "energy_tol" not in convergence:

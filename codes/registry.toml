@@ -84,6 +84,16 @@ commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
 committed = "2026-10-05"
 note = "Activation-relaxation technique nouveau, plugin branch DEVEL. The benchmark contributor of a new entry is Rohit Goswami."
 
+[[code]]
+id = "vcsqnm"
+name = "vc-SQNM"
+role = "minimization"
+repository = "https://github.com/moritzgubler/vc-sqnm"
+ref = "v1.3"
+commit = "4241692173cccb42a9ae05974bfd62285ec2cd7b"
+committed = "2025-03-28"
+note = "Tag v1.3. The Python distribution built from that commit reports version 1.2. Rows use that package: SQNM, vc-SQNM, and aseOptimizer. The C++ and Fortran mains call the Bazant potential and are not these scores. initial_step_size is -1e-7 and alpha_min is 1e-3. The wrapper constructor uses -0.01, which carries the stiffest LJ38 start out of the cutoff. Variable-cell rows are Morse bulk. The spec Lennard-Jones potential has no cell."
+
 # generated ASE and Sella templates
 
 [[template]]
