@@ -1,0 +1,29 @@
+# counter harness. One force call is one RgpotCounter.calculate entry.
+# v2 success is under the cap, at the force stop, and Hessian index 0.
+# energy and Kabsch RMSD were not applied: the problem file has no energy_tol, rmsd_tol, or per-start reference.
+# energy_min and energy_max are the final potential values on the recorded points.
+# LJ38 index removes the six rigid modes. A curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6).
+# Default row. The callback evaluates the harness Lennard-Jones potential and stops on the unscaled force norm. LD_LBFGS, LD_VAR2, and LD_SLSQP scale the objective by maxstep divided by the initial force norm, with maxstep 0.2, so the first identity-Hessian step has that length. Luksan tolg is 1e-8 times the scale. LD_TNEWTON_PRECOND_RESTART recenters a coordinate box of half-width 0.2 until the force stop. LD_MMA keeps the library defaults, including the moving-asymptote sigma of 1. The same values are used for every start.
+force_calls 4454
+force_calls_min 1286
+force_calls_max 9702
+nfailed 18
+median 4213.5
+code nlopt
+code_version 2.11.0
+commit 673d2504f819bf554a7968e41de552ee102e7fb1
+algorithm LD_TNEWTON_PRECOND_RESTART
+template nlopt/lj38-tnewton-precond-restart
+tuning default
+counter harness
+par2_mean 4749.313
+wilson_low 0.970515544088
+wilson_high 0.987803114249
+par2_median 4231.5
+par2_median_low 4153
+par2_median_high 4380.5125
+v2_nfailed 19
+v2_successes 981
+n 1000
+energy_min -170.944509331
+energy_max 278.141323352

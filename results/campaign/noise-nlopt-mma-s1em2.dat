@@ -1,0 +1,32 @@
+# counter harness. One force call is one clean energy and gradient.
+# Noise is added after the call. A repeated coordinate keeps that sample.
+# The index uses the clean Hessian. Six rigid modes are removed.
+# A curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6).
+# Energy and Kabsch RMSD are not applied: the problem file has no per-start reference.
+# Default profile. The stop is the noise-aware force norm, and at positive sigma the clean energy over the last window. The index is the clean Hessian with the rigid-mode rule. LD_LBFGS, LD_VAR2, and LD_SLSQP scale the objective by 0.2 divided by the initial force norm. LD_TNEWTON_PRECOND_RESTART recenters a coordinate box of half-width 0.2. LD_MMA keeps the library defaults.
+force_calls 1877
+force_calls_min 465
+force_calls_max 8299
+nfailed 144
+median 1650
+code nlopt
+code_version 2.11.0
+commit 673d2504f819bf554a7968e41de552ee102e7fb1
+algorithm LD_MMA
+template noise/nlopt-mma-s1em2
+tuning default
+counter harness
+problem minimization/lj38-noise
+sigma 0.01
+par2_mean 5742.904
+wilson_low 0.76055039747
+wilson_high 0.811253043159
+par2_median 1957
+par2_median_low 1859
+par2_median_high 2071
+v2_nfailed 213
+v2_successes 787
+n 1000
+cap 10000
+energy_min -172.958265782
+energy_max -136.583959139

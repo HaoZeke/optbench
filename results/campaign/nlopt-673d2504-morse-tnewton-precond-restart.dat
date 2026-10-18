@@ -1,0 +1,28 @@
+# counter harness. One force call is one RgpotCounter.calculate entry.
+# v2 success is under the cap, at the force stop, and Hessian index 0.
+# energy and Kabsch RMSD were not applied: the problem file has no energy_tol, rmsd_tol, or per-start reference.
+# energy_min and energy_max are the final potential values on the recorded points.
+# Default row. The callback evaluates the harness Morse potential and stops on the problem force norm. Each method uses the NLopt library defaults.
+force_calls 42
+force_calls_min 27
+force_calls_max 136
+nfailed 0
+median 38
+code nlopt
+code_version 2.11.0
+commit 673d2504f819bf554a7968e41de552ee102e7fb1
+algorithm LD_TNEWTON_PRECOND_RESTART
+template nlopt/morse-tnewton-precond-restart
+tuning default
+counter harness
+par2_mean 41.69
+wilson_low 0.963006501793
+wilson_high 1
+par2_median 38
+par2_median_low 37
+par2_median_high 38
+v2_nfailed 0
+v2_successes 100
+n 100
+energy_min -1396.17323768
+energy_max -1396.17323761
