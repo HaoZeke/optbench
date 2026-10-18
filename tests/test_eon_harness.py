@@ -43,11 +43,11 @@ def test_c_bridge_matches_the_python_reply(tmp_path, monkeypatch):
 
 def test_svn_default_grid_is_one_start():
     assert os.environ.get("OPTBENCH_ASV_FULL") != "1"
-    from benchmarks.bench_eon_svn import EonSvnTsLj38Dimer
+    from benchmarks.bench_eon_lane import EonSvnTsLj38DimerLjcut
 
-    assert EonSvnTsLj38Dimer.params[0] == [1]
-    assert EonSvnTsLj38Dimer.params[1] == ["0000"]
-    assert EonSvnTsLj38Dimer.template_name == "eon-svn/ts-lj38-dimer"
+    assert EonSvnTsLj38DimerLjcut.params[0] == [1]
+    assert EonSvnTsLj38DimerLjcut.params[1] == ["0000"]
+    assert EonSvnTsLj38DimerLjcut.template_name == "eon-svn/ts-lj38-dimer-ljcut"
 
 
 def test_client_default_grid_is_one_start():

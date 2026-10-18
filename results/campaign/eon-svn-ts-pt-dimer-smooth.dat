@@ -8,7 +8,7 @@ code Eon svn
 code_version r2549
 commit r2549
 algorithm Dimer L-BFGS
-template eon-svn/ts-pt-dimer
+template eon-svn/ts-pt-dimer-smooth
 problem tsopt/pt-island
 reducer harness
 counter harness

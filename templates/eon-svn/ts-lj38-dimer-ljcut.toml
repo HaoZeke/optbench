@@ -1,4 +1,4 @@
-id = "eon-svn/ts-lj38-dimer"
+id = "eon-svn/ts-lj38-dimer-ljcut"
 engine = "eon"
 problem = "tsopt/LJ38"
 code = "Eon svn"
@@ -9,8 +9,9 @@ reducer = "harness"
 failure_cap = 10000
 kind = "ts-lj38"
 kernel = "lj40"
-asv_class = "EonSvnTsLj38Dimer"
+asv_class = "EonSvnTsLj38DimerLjcut"
 note = '''
+This id is separate from eon-svn/ts-lj38-dimer. That row is improved dimer on the develop ljcluster kernel. This row is unshifted lj/cut, epsilon 1, sigma 1, cutoff 40.
 Saddle search on the 200 LJ38 starts. LBFGS max_move 0.1, max_iterations 3000, converged_force 0.001. Dimer rotation is conjugate gradient, converged_angle 0.1, rotations_max 20, improved true. improved is the r2549 default; the 2014 file left the key unset. client_displace_type load. direction.dat is Python random.Random of the start index. Main random_seed is 1. The harness kernel is unshifted lj/cut with epsilon 1, sigma 1, and cutoff 40.
 '''
 seeds = [1]

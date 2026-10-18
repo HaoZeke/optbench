@@ -1,4 +1,4 @@
-id = "eon-svn/ts-lj38-lanczos"
+id = "eon-svn/ts-lj38-lanczos-ljcut"
 engine = "eon"
 problem = "tsopt/LJ38"
 code = "Eon svn"
@@ -9,8 +9,9 @@ reducer = "harness"
 failure_cap = 10000
 kind = "ts-lj38"
 kernel = "lj40"
-asv_class = "EonSvnTsLj38Lanczos"
+asv_class = "EonSvnTsLj38LanczosLjcut"
 note = '''
+This id is separate from eon-svn/ts-lj38-lanczos. That row is Lanczos tolerance 0.02, 15 iterations, quit_early true, conjugate-gradient translation max_move 0.35, on ljcluster. This row is Lanczos tolerance 0.01, 50 iterations, quit_early false, LBFGS max_move 0.1, on unshifted lj/cut cutoff 40.
 Lanczos saddle search on the 200 LJ38 starts. Tolerance 0.01, max_iterations 50, quit_early false. Saddle max_energy 1000. LBFGS max_move 0.1, max_iterations 3000, converged_force 0.001. client_displace_type load. direction.dat is Python random.Random of the start index. Main random_seed is 1. The harness kernel is unshifted lj/cut with epsilon 1, sigma 1, and cutoff 40.
 '''
 seeds = [1]

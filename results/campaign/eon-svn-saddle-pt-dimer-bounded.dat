@@ -1,15 +1,12 @@
-force_calls 523
-force_calls_min 93
-force_calls_max 5506
-force_calls_median 360.0
 call_unit total
 nfailed 1
 code Eon svn
 code_version r2549
 commit r2549
 algorithm Dimer L-BFGS
-template eon-svn/ts-lj38-dimer
-problem tsopt/LJ38
+template eon-svn/saddle-pt-dimer-bounded
+problem saddle-search/pt-island
 reducer harness
 counter harness
 count_keys HarnessCounter
+partial true
