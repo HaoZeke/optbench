@@ -1,0 +1,35 @@
+id = "asebh/lj98-mh-default"
+engine = "asebh"
+code = "asebh"
+code_version = "3.29.0"
+commit = "f27c0005ae6a67ea419f996e728668865bfc1f86"
+algorithm = "MinimaHopping"
+problem = "globalopt/lj98"
+task = "global-minimize"
+profile = "default"
+tuning = "default"
+reducer = "harness"
+ranked = true
+seed = 0
+note = "MinimaHopping constructor defaults. The initial temperature is 1000 K, Ediff0 is 0.5, mdmin is 2, the timestep is 1 fs, and the local minimizer is QuasiNewton with fmax 0.05. The local iteration bound is 1000. Seed 0 seeds the momenta. Plain coordinate files are read as carbon, the element in the Lennard-Jones 38 con files. The problem file states no force-call cap. This cap is 2000000, above the archived eOn maximum of 1795901."
+
+[method]
+name = "MinimaHopping"
+
+[method.parameters]
+local_steps = 1000
+
+[potential]
+kind = "lennard-jones"
+epsilon = 1.0
+sigma = 1.0
+rc = 40.0
+smooth = false
+pbc = [false, false, false]
+
+[stop]
+max_force_calls = 2000000
+max_hops = 10000000
+
+[input]
+archive_path = "website/globalopt/lj98/lj98_clusters.tgz"

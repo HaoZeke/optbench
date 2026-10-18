@@ -1,0 +1,40 @@
+id = "asebh/lj38-basin-tuned"
+engine = "asebh"
+code = "asebh"
+code_version = "3.29.0"
+commit = "f27c0005ae6a67ea419f996e728668865bfc1f86"
+algorithm = "BasinHopping"
+problem = "globalopt/lj38"
+task = "global-minimize"
+profile = "tuned"
+tuning = "tuned"
+reducer = "harness"
+ranked = true
+seed = 314159
+note = "Temperature 8000 K is the archived eOn value, stored by ASE as kT = 8000 * kB. Displacement 0.5 and the LBFGS force stop 0.001 are the archived keys. ASE does not adjust the step size. The local iteration bound is 1000, the archived max_iterations. Seed 314159 is the archived random_seed, reused for every start. The problem file states no force-call cap. This cap is 2000000, above the archived eOn maximum of 1795901."
+
+[method]
+name = "BasinHopping"
+
+[method.parameters]
+local_steps = 1000
+temperature_kelvin = 8000
+dr = 0.5
+fmax = 0.001
+optimizer = "LBFGS"
+adjust_cm = true
+
+[potential]
+kind = "lennard-jones"
+epsilon = 1.0
+sigma = 1.0
+rc = 40.0
+smooth = false
+pbc = [false, false, false]
+
+[stop]
+max_force_calls = 2000000
+max_hops = 10000000
+
+[input]
+archive_path = "website/globalopt/lj38/100_lj38.tar.gz"

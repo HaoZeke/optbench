@@ -1,0 +1,758 @@
+"""ASE basin hopping and minima hopping on the global-optimization problems.
+
+A force call is one calculator evaluation, counted by ``HarnessCounter``.
+The potential is the free-cluster Lennard-Jones potential used by
+``ase.calculators.lj.LennardJones`` with epsilon 1, sigma 1, and cutoff 40.
+That is the archived LAMMPS ``lj/cut`` potential at distances inside the cutoff.
+
+Lennard-Jones 38 stops at the archived eOn energy. The config in
+``archive/entries/globalopt/lj38/eon-basinhopping/config.ini`` sets
+``stop_energy=-173.927427``. The problem file sets
+``energy_above_minimum = 0.001``, so the reference minimum is -173.928427.
+A start at or below that stop is a success when the call count is under the
+template cap. The problem file does not state a force-call cap. The template
+cap is the budget that makes a miss a PAR-2 failure.
+
+``BasinHopping.run`` is the ASE 3.29.0 loop. The harness adds two exits:
+the stop energy, and the force-call cap. The displacement, the Metropolis
+test, and the local minimizer are the library's. ASE displaces from the
+coordinates it stored before the quench. The local iteration bound is the
+template value. Without it the ASE optimizer default is 1e8 steps, and one
+overlapping trial does not return.
+"""
+
+from __future__ import annotations
+
+import json
+import math
+import os
+import shutil
+import tarfile
+import tempfile
+from concurrent.futures import ProcessPoolExecutor, as_completed
+from datetime import date
+from pathlib import Path
+
+os.environ.setdefault("OMP_NUM_THREADS", "1")
+os.environ.setdefault("OPENBLAS_NUM_THREADS", "1")
+os.environ.setdefault("MKL_NUM_THREADS", "1")
+os.environ.setdefault("NUMEXPR_NUM_THREADS", "1")
+
+from .ase_lj import LennardJonesASE
+from .campaign import geometry_archive, load_template, resolve_problem
+from .counter import attach_ase_counter
+from .failures import classify_failure
+from .score import half_even, score_v2
+
+CONTRIBUTOR = "Rohit Goswami"
+CODE_VERSION = "3.29.0"
+COMMIT = "f27c0005ae6a67ea419f996e728668865bfc1f86"
+# Archived stop in archive/entries/globalopt/lj38/eon-basinhopping/config.ini.
+LJ38_STOP = -173.927427
+LJ38_MINIMUM = -173.928427
+
+ARCHIVES = {
+    "globalopt/lj38": "website/globalopt/lj38/100_lj38.tar.gz",
+    "globalopt/lj75": "website/globalopt/lj75/lj75_clusters.tgz",
+    "globalopt/lj98": "website/globalopt/lj98/lj98_clusters.tgz",
+    "globalopt/lj150": "website/globalopt/lj150/lj150_clusters.tgz",
+}
+
+_OPTIMIZERS = ("FIRE", "LBFGS", "BFGS", "QuasiNewton")
+
+
+def target_energy(problem: dict) -> float | None:
+    """Stop energy from the problem file, or None when the file states no rule.
+
+    ``minimum_energy`` in the convergence table is the reference. Lennard-Jones
+    38 has no such key on this revision. Its reference is the minimum implied
+    by the archived eOn stop and ``energy_above_minimum``.
+    """
+    convergence = problem.get("convergence") or {}
+    if "energy_above_minimum" not in convergence:
+        return None
+    gap = float(convergence["energy_above_minimum"])
+    if "minimum_energy" in convergence:
+        return float(convergence["minimum_energy"]) + gap
+    if problem.get("id") == "globalopt/lj38":
+        if abs(gap - 0.001) < 1e-15:
+            return LJ38_STOP
+        return LJ38_MINIMUM + gap
+    return None
+
+
+def _archive_path(problem: dict, template: dict) -> str:
+    stated = (problem.get("input") or {}).get("archive_path")
+    if stated:
+        return str(stated)
+    stated = (template.get("input") or {}).get("archive_path")
+    if stated:
+        return str(stated)
+    found = ARCHIVES.get(problem["id"])
+    if found:
+        return found
+    raise ValueError(f"{problem['id']} has no geometry archive")
+
+
+def _archive_file(root: Path, problem: dict, template: dict) -> Path:
+    path = _archive_path(problem, template)
+    return geometry_archive(root, {"id": problem["id"], "input": {"archive_path": path}})
+
+
+def _start_index(name: str) -> tuple:
+    base = Path(name).name
+    stem = Path(base).stem
+    if stem.isdigit():
+        return (0, int(stem), base)
+    suffix = base.rsplit(".", 1)[-1]
+    if suffix.isdigit() and suffix != base:
+        return (0, int(suffix), base)
+    return (1, 0, base)
+
+
+def list_start_names(archive: Path) -> list[str]:
+    """Numbered geometries in the archive. A bare ``coords`` file is not a start."""
+    with tarfile.open(archive) as packed:
+        names = [member.name for member in packed.getmembers() if member.isfile()]
+    numbered = [name for name in names if _start_index(name)[0] == 0]
+    chosen = numbered or names
+    con = [name for name in chosen if name.endswith(".con")]
+    if con:
+        chosen = con
+    chosen.sort(key=_start_index)
+    if not chosen:
+        raise FileNotFoundError(f"{archive} has no starts")
+    return chosen
+
+
+def materialize(archive: Path, dest: Path) -> Path:
+    """Extract the archive once. A marker skips a second extract."""
+    marker = dest / ".ready"
+    if marker.is_file():
+        return dest
+    if dest.exists():
+        shutil.rmtree(dest)
+    dest.mkdir(parents=True)
+    with tarfile.open(archive) as packed:
+        packed.extractall(dest)
+    marker.write_text("ok\n", encoding="utf-8")
+    return dest
+
+
+def _read_atoms(path: Path, kind: str):
+    from ase import Atoms
+    from ase.io import read
+
+    if kind == "eon":
+        atoms = read(path, format="eon")
+    else:
+        rows = []
+        for line in path.read_text(encoding="utf-8").splitlines():
+            parts = line.split()
+            if len(parts) < 3:
+                continue
+            rows.append([float(parts[0]), float(parts[1]), float(parts[2])])
+        if not rows:
+            raise ValueError(f"{path} has no coordinates")
+        atoms = Atoms(f"C{len(rows)}", positions=rows)
+    atoms.set_pbc(False)
+    return atoms
+
+
+def _kind(name: str) -> str:
+    return "eon" if name.endswith(".con") else "coords"
+
+
+def _cap_error(exc: BaseException) -> bool:
+    return isinstance(exc, RuntimeError) and "force-call cap" in str(exc)
+
+
+def _limited(cls, steps: int):
+    class Limited(cls):
+        def run(self, fmax=0.05, steps=steps):
+            return super().run(fmax=fmax, steps=steps)
+
+    Limited.__name__ = cls.__name__
+    return Limited
+
+
+def _optimizer(name: str):
+    from ase.optimize import BFGS, FIRE, LBFGS, QuasiNewton
+
+    classes = {
+        "BFGS": BFGS,
+        "FIRE": FIRE,
+        "LBFGS": LBFGS,
+        "QuasiNewton": QuasiNewton,
+    }
+    if name not in classes:
+        raise ValueError(f"optimizer {name} is not one of {', '.join(_OPTIMIZERS)}")
+    return classes[name]
+
+
+def _basin_optimizer(parameters: dict):
+    from ase.optimize.basin import BasinHopping
+    import inspect
+
+    signature = inspect.signature(BasinHopping.__init__)
+    name = parameters.get("optimizer")
+    cls = _optimizer(name) if name else signature.parameters["optimizer"].default
+    return _limited(cls, int(parameters["local_steps"]))
+
+
+def _basin_kwargs(parameters: dict) -> dict:
+    from ase import units
+
+    kwargs = {
+        "optimizer": _basin_optimizer(parameters),
+        "logfile": None,
+        "trajectory": None,
+        "optimizer_logfile": None,
+        "local_minima_trajectory": None,
+    }
+    if "temperature_kelvin" in parameters:
+        kwargs["temperature"] = float(parameters["temperature_kelvin"]) * units.kB
+    elif "temperature" in parameters:
+        kwargs["temperature"] = float(parameters["temperature"])
+    if "dr" in parameters:
+        kwargs["dr"] = float(parameters["dr"])
+    if "fmax" in parameters:
+        kwargs["fmax"] = float(parameters["fmax"])
+    if "adjust_cm" in parameters:
+        kwargs["adjust_cm"] = bool(parameters["adjust_cm"])
+    return kwargs
+
+
+class _Basin:
+    """ASE's ``BasinHopping.run`` with an energy stop and a cap exit.
+
+    The accept test and the stored pre-quench displacement match
+    ``ase.optimize.basin.BasinHopping.run`` at ASE 3.29.0.
+    """
+
+    def __init__(self, atoms, target: float | None, **kwargs):
+        import numpy as np
+        from ase.optimize.basin import BasinHopping
+
+        self._np = np
+        self.target = float("-inf") if target is None else float(target)
+        self.hit_cap = False
+        self.hops = 0
+        self._inner_cls = BasinHopping
+        self.opt = BasinHopping(atoms, **kwargs)
+        self.Emin = float(self.opt.Emin)
+
+    def run(self, steps: int) -> None:
+        import numpy as np
+
+        opt = self.opt
+        if opt.Emin <= self.target:
+            self.Emin = float(opt.Emin)
+            return
+        ro = opt.positions
+        Eo = opt.get_energy(ro)
+        for step in range(int(steps)):
+            if opt.Emin <= self.target:
+                break
+            En = None
+            while En is None:
+                rn = opt.move(ro)
+                try:
+                    En = opt.get_energy(rn)
+                except RuntimeError as exc:
+                    if _cap_error(exc):
+                        self.hit_cap = True
+                        self.hops = step
+                        self.Emin = float(opt.Emin)
+                        return
+                    raise
+            self.hops = step + 1
+            if En < opt.Emin:
+                opt.Emin = En
+                opt.rmin = opt.optimizable.get_x().reshape(-1, 3)
+                opt.call_observers()
+            accept = np.exp((Eo - En) / opt.kT) > np.random.uniform()
+            if accept:
+                ro = rn.copy()
+                Eo = En
+        self.Emin = float(opt.Emin)
+
+
+def _record(
+    payload: dict,
+    *,
+    calls: int,
+    energy: float | None,
+    hops: int,
+    reasons: list[str],
+    error: str | None = None,
+) -> dict:
+    cap = int(payload["cap"])
+    failure = classify_failure(reasons)
+    success = failure is None and calls < cap
+    if calls >= cap and failure is None:
+        reasons = ["cap", *reasons]
+        failure = "cap"
+        success = False
+    row = {
+        "schema": "optbench.start/v2",
+        "start": payload["start"],
+        "problem": payload["problem"],
+        "template": payload["template"],
+        "code": "asebh",
+        "code_version": CODE_VERSION,
+        "commit": COMMIT,
+        "tuning": payload["tuning"],
+        "algorithm": payload["algorithm"],
+        "seed": int(payload["seed"]),
+        "force_calls": int(calls),
+        "counter": "harness",
+        "comparable": True,
+        "success": success,
+        "failure": failure,
+        "reasons": reasons,
+        "lowest_energy": energy,
+        "target_energy": payload.get("target"),
+        "hops": int(hops),
+        "cap": cap,
+    }
+    if error:
+        row["error"] = error
+    return row
+
+
+def _outcome(payload: dict, calls: int, energy: float | None, hops: int, hit_cap: bool) -> dict:
+    reasons: list[str] = []
+    target = payload.get("target")
+    finite = energy is not None and math.isfinite(float(energy))
+    if not finite:
+        reasons.append("divergence")
+    if hit_cap or calls >= int(payload["cap"]):
+        reasons.append("cap")
+    reached = finite and target is not None and float(energy) <= float(target)
+    if finite and not reached and "cap" not in reasons and "divergence" not in reasons:
+        reasons.append("energy")
+    if reached and calls < int(payload["cap"]) and "divergence" not in reasons:
+        reasons = []
+    return _record(
+        payload,
+        calls=calls,
+        energy=None if energy is None or not math.isfinite(float(energy)) else float(energy),
+        hops=hops,
+        reasons=reasons,
+    )
+
+
+def _run_basin(atoms, calc, payload: dict) -> dict:
+    import numpy as np
+
+    np.random.seed(int(payload["seed"]))
+    parameters = dict(payload["parameters"])
+    try:
+        search = _Basin(atoms, payload.get("target"), **_basin_kwargs(parameters))
+    except RuntimeError as exc:
+        if _cap_error(exc):
+            return _outcome(payload, int(calc.optbench_harness.calls), None, 0, True)
+        raise
+    try:
+        search.run(int(payload["max_hops"]))
+    except Exception as exc:
+        return _record(
+            payload,
+            calls=int(calc.optbench_harness.calls),
+            energy=None,
+            hops=search.hops,
+            reasons=["crash"],
+            error=exc.__class__.__name__,
+        )
+    return _outcome(
+        payload,
+        int(calc.optbench_harness.calls),
+        search.Emin,
+        search.hops,
+        search.hit_cap,
+    )
+
+
+def _mh_settings(parameters: dict, work: Path, seed: int) -> dict:
+    import numpy as np
+    from ase.optimize.minimahopping import MinimaHopping
+
+    allowed = set(MinimaHopping._default_settings)
+    kwargs = {}
+    for key, value in parameters.items():
+        if key in {"local_steps", "optimizer", "seed"}:
+            continue
+        if key not in allowed:
+            raise ValueError(f"MinimaHopping has no parameter {key}")
+        kwargs[key] = value
+    name = parameters.get("optimizer")
+    cls = _optimizer(name) if name else MinimaHopping._default_settings["optimizer"]
+    kwargs["optimizer"] = _limited(cls, int(parameters["local_steps"]))
+    kwargs["logfile"] = str(work / "hop.log")
+    kwargs["minima_traj"] = str(work / "minima.traj")
+    kwargs["rng"] = np.random.RandomState(int(seed))
+    return kwargs
+
+
+def _run_minima(atoms, calc, payload: dict) -> dict:
+    from ase.optimize.minimahopping import MinimaHopping
+
+    work = Path(tempfile.mkdtemp(prefix="asebh-mh-"))
+    previous = Path.cwd()
+    hops = 0
+    best = None
+    hit_cap = False
+    try:
+        os.chdir(work)
+        kwargs = _mh_settings(payload["parameters"], work, int(payload["seed"]))
+        hopper = MinimaHopping(atoms, **kwargs)
+        try:
+            hopper._startup()
+        except RuntimeError as exc:
+            if _cap_error(exc):
+                hit_cap = True
+                return _outcome(payload, int(calc.optbench_harness.calls), best, hops, True)
+            raise
+        best = _finite_energy(atoms)
+        target = payload.get("target")
+        while not hit_cap:
+            if target is not None and best is not None and best <= float(target):
+                break
+            if hops >= int(payload["max_hops"]):
+                break
+            try:
+                hopper._previous_optimum = hopper._atoms.copy()
+                hopper._previous_energy = hopper._atoms.get_potential_energy()
+                hopper._molecular_dynamics()
+                hopper._optimize()
+                hopper._counter += 1
+                hopper._check_results()
+            except RuntimeError as exc:
+                if _cap_error(exc):
+                    hit_cap = True
+                    break
+                raise
+            hops = int(hopper._counter)
+            current = _finite_energy(atoms)
+            if current is not None and (best is None or current < best):
+                best = current
+        return _outcome(payload, int(calc.optbench_harness.calls), best, hops, hit_cap)
+    except Exception as exc:
+        if _cap_error(exc):
+            return _outcome(payload, int(calc.optbench_harness.calls), best, hops, True)
+        return _record(
+            payload,
+            calls=int(getattr(getattr(calc, "optbench_harness", None), "calls", 0)),
+            energy=best,
+            hops=hops,
+            reasons=["crash"],
+            error=exc.__class__.__name__,
+        )
+    finally:
+        os.chdir(previous)
+        shutil.rmtree(work, ignore_errors=True)
+
+
+def _finite_energy(atoms) -> float | None:
+    try:
+        value = float(atoms.get_potential_energy())
+    except Exception:
+        return None
+    if not math.isfinite(value):
+        return None
+    return value
+
+
+def run_start(payload: dict) -> dict:
+    """One start. The seed is applied before ASE draws displacements or momenta."""
+    os.environ["OMP_NUM_THREADS"] = "1"
+    os.environ["OPENBLAS_NUM_THREADS"] = "1"
+    os.environ["MKL_NUM_THREADS"] = "1"
+    potential = payload["potential"]
+    if potential.get("smooth"):
+        raise ValueError("asebh uses the unsmoothed ASE Lennard-Jones potential")
+    kernel = LennardJonesASE(
+        float(potential.get("epsilon", 1.0)),
+        float(potential.get("sigma", 1.0)),
+        float(potential.get("rc", 40.0)),
+    )
+    calc = kernel.build()
+    from .counter import HarnessCounter
+
+    counter = HarnessCounter(cache=False, cap=int(payload["cap"]))
+    attach_ase_counter(calc, cap=int(payload["cap"]), counter=counter)
+    atoms = _read_atoms(Path(payload["path"]), payload["kind"])
+    atoms.calc = calc
+    method = payload["method"]
+    if method == "BasinHopping":
+        return _run_basin(atoms, calc, payload)
+    if method == "MinimaHopping":
+        return _run_minima(atoms, calc, payload)
+    raise ValueError(method)
+
+
+def _format(value: object) -> str:
+    if isinstance(value, float):
+        if not math.isfinite(value):
+            return str(value)
+        if value.is_integer():
+            return str(int(value))
+        return f"{value:.12g}"
+    return str(value)
+
+
+def _dat(template: dict, records: list[dict], *, partial: bool, cap: int, target: float | None) -> str:
+    calls = [int(row["force_calls"]) for row in records]
+    successes = [int(row["force_calls"]) for row in records if row["success"]]
+    energies = [float(row["lowest_energy"]) for row in records if row.get("lowest_energy") is not None]
+    scored = [
+        {"force_calls": row["force_calls"], "success": row["success"], "failure": row["failure"]}
+        for row in records
+    ]
+    metrics = score_v2(scored, cap) if records else {}
+    legacy_mean = half_even(sum(successes) / len(successes)) if successes else None
+    lines = [
+        "# counter harness. One force call is one calculator evaluation.",
+        "# The potential is free-cluster Lennard-Jones, epsilon 1, sigma 1, cutoff 40.",
+        "# ASE 3.29.0 BasinHopping keeps the library displacement and Metropolis test.",
+        "# A success is a lowest energy at or below the stop, with calls under the cap.",
+    ]
+    if target is None:
+        lines.append("# This problem file states no stop energy. The row is partial.")
+    else:
+        lines.append(f"# stop energy {target}. Lennard-Jones 38 uses the archived eOn stop.")
+    note = str(template.get("note") or "").strip()
+    if note:
+        lines.append("# " + note.replace("\n", " "))
+    fields = {
+        "force_calls": legacy_mean,
+        "force_calls_min": min(successes) if successes else (min(calls) if calls else None),
+        "force_calls_max": max(successes) if successes else (max(calls) if calls else None),
+        "nfailed": len(records) - len(successes),
+        "starts": len(records),
+        "code": template.get("code", "asebh"),
+        "code_version": CODE_VERSION,
+        "commit": COMMIT,
+        "algorithm": template.get("algorithm"),
+        "template": template["id"],
+        "problem": template["problem"],
+        "tuning": template.get("tuning") or template.get("profile") or "",
+        "counter": "harness",
+        "reducer": "harness",
+        "cap": cap,
+        "seed": template.get("seed"),
+        "par2_mean": metrics.get("par2_mean"),
+        "wilson_low": metrics.get("wilson_low"),
+        "wilson_high": metrics.get("wilson_high"),
+        "par2_median": metrics.get("median"),
+        "par2_median_low": metrics.get("median_low"),
+        "par2_median_high": metrics.get("median_high"),
+        "v2_successes": metrics.get("successes"),
+        "n": metrics.get("n"),
+        "n_cap": metrics.get("n_cap"),
+        "n_wrong_stationary": metrics.get("n_wrong_stationary"),
+        "n_divergence": metrics.get("n_divergence"),
+        "n_crash": metrics.get("n_crash"),
+        "energy_min": min(energies) if energies else None,
+        "energy_max": max(energies) if energies else None,
+        "date": date.today().isoformat(),
+        "contributor": CONTRIBUTOR,
+    }
+    if target is not None:
+        fields["target_energy"] = target
+    for key, value in fields.items():
+        if value is None or value == "":
+            continue
+        lines.append(f"{key} {_format(value)}")
+    if partial:
+        lines.append("partial true")
+    return "\n".join(lines) + "\n"
+
+
+def _load_done(path: Path) -> dict[str, dict]:
+    done = {}
+    if not path.is_file():
+        return done
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        row = json.loads(line)
+        done[str(row["start"])] = row
+    return done
+
+
+def _write_outputs(
+    template: dict,
+    names: list[str],
+    done: dict[str, dict],
+    *,
+    output: Path,
+    starts_path: Path,
+    cap: int,
+    target: float | None,
+    full: int,
+) -> None:
+    ordered = [done[name] for name in names if name in done]
+    starts_path.parent.mkdir(parents=True, exist_ok=True)
+    body = "".join(json.dumps(row, sort_keys=True) + "\n" for row in ordered)
+    starts_path.write_text(body, encoding="utf-8")
+    partial = len(ordered) < full or target is None
+    output.write_text(
+        _dat(template, ordered, partial=partial, cap=cap, target=target),
+        encoding="utf-8",
+    )
+
+
+def run_point(root: Path, template_name: str, start: str, seed: int) -> dict:
+    """One start, for a test or an asv parameter."""
+    root = Path(root)
+    loaded = load_template(root, template_name)
+    spec = resolve_problem(root, loaded["problem"])
+    archive = _archive_file(root, spec, loaded)
+    cache = materialize(archive, Path(tempfile.gettempdir()) / "optbench-asebh" / spec["id"].replace("/", "-"))
+    path = cache / start
+    if not path.is_file():
+        raise FileNotFoundError(path)
+    parameters = dict((loaded.get("method") or {}).get("parameters") or {})
+    parameters.setdefault("local_steps", 1000)
+    payload = {
+        "start": start,
+        "path": str(path),
+        "kind": _kind(start),
+        "method": str((loaded.get("method") or {})["name"]),
+        "parameters": parameters,
+        "potential": dict(loaded.get("potential") or {}),
+        "seed": int(seed),
+        "cap": int(loaded["stop"]["max_force_calls"]),
+        "max_hops": int(loaded["stop"].get("max_hops", 10_000_000)),
+        "target": target_energy(spec),
+        "problem": spec["id"],
+        "template": loaded["id"],
+        "tuning": loaded.get("tuning") or loaded.get("profile") or "",
+        "algorithm": loaded.get("algorithm") or "",
+    }
+    return run_start(payload)
+
+
+def run(
+    root: Path,
+    problem: str,
+    template: str,
+    *,
+    output: Path,
+    workers: int = 1,
+    limit: int = 0,
+    resume: bool = False,
+    geometries: Path | None = None,
+    work: Path | None = None,
+    client: Path | None = None,
+) -> dict:
+    """Run one asebh template and write benchmark.dat plus the per-start file."""
+    del geometries, work, client
+    root = Path(root)
+    loaded = load_template(root, template)
+    if loaded.get("engine") != "asebh":
+        raise ValueError(f"{template} is not an asebh template")
+    spec = resolve_problem(root, loaded["problem"])
+    if problem not in {spec["id"], loaded["problem"]}:
+        raise ValueError(f"{problem} does not match {loaded['id']}")
+    archive = _archive_file(root, spec, loaded)
+    names = list_start_names(archive)
+    stated = (spec.get("sample") or {}).get("starts")
+    if stated not in (None, "", 0, "0") and int(stated) != len(names):
+        raise ValueError(f"{spec['id']} states {stated} starts and the archive has {len(names)}")
+    if limit > 0:
+        names = names[: int(limit)]
+    cache = materialize(archive, Path(tempfile.gettempdir()) / "optbench-asebh" / spec["id"].replace("/", "-"))
+    target = target_energy(spec)
+    cap = int((loaded.get("stop") or {})["max_force_calls"])
+    max_hops = int((loaded.get("stop") or {}).get("max_hops", 10_000_000))
+    parameters = dict((loaded.get("method") or {}).get("parameters") or {})
+    parameters.setdefault("local_steps", 1000)
+    method = str((loaded.get("method") or {})["name"])
+    potential = dict(loaded.get("potential") or {})
+    output = Path(output)
+    starts_path = output.with_name(output.stem + ".starts.jsonl")
+    done = _load_done(starts_path) if resume else {}
+    if not resume and starts_path.exists():
+        starts_path.unlink()
+    payloads = []
+    for name in names:
+        if name in done:
+            continue
+        path = cache / name
+        if not path.is_file():
+            raise FileNotFoundError(path)
+        payloads.append(
+            {
+                "start": name,
+                "path": str(path),
+                "kind": _kind(name),
+                "method": method,
+                "parameters": parameters,
+                "potential": potential,
+                "seed": int(loaded.get("seed", 0)),
+                "cap": cap,
+                "max_hops": max_hops,
+                "target": target,
+                "problem": spec["id"],
+                "template": loaded["id"],
+                "tuning": loaded.get("tuning") or loaded.get("profile") or "",
+                "algorithm": loaded.get("algorithm") or method,
+            }
+        )
+    if payloads:
+        if workers <= 1:
+            for index, payload in enumerate(payloads, 1):
+                row = run_start(payload)
+                done[row["start"]] = row
+                _write_outputs(
+                    loaded, names, done, output=output, starts_path=starts_path, cap=cap, target=target, full=len(names)
+                )
+                print(
+                    f"{loaded['id']} {row['start']} calls={row['force_calls']} "
+                    f"energy={row['lowest_energy']} success={row['success']} {index}/{len(payloads)}",
+                    flush=True,
+                )
+        else:
+            import multiprocessing as mp
+
+            context = mp.get_context("spawn")
+            with ProcessPoolExecutor(max_workers=workers, mp_context=context) as pool:
+                futures = [pool.submit(run_start, payload) for payload in payloads]
+                total = len(futures)
+                for index, future in enumerate(as_completed(futures), 1):
+                    row = future.result()
+                    done[row["start"]] = row
+                    _write_outputs(
+                        loaded,
+                        names,
+                        done,
+                        output=output,
+                        starts_path=starts_path,
+                        cap=cap,
+                        target=target,
+                        full=len(names),
+                    )
+                    print(
+                        f"{loaded['id']} {row['start']} calls={row['force_calls']} "
+                        f"energy={row['lowest_energy']} success={row['success']} {index}/{total}",
+                        flush=True,
+                    )
+    ordered = [done[name] for name in names]
+    _write_outputs(
+        loaded, names, done, output=output, starts_path=starts_path, cap=cap, target=target, full=len(names)
+    )
+    summary = {
+        "problem": spec["id"],
+        "template": loaded["id"],
+        "force_calls": None,
+        "nfailed": sum(1 for row in ordered if not row["success"]),
+        "starts": len(ordered),
+        "output": str(output),
+    }
+    successes = [int(row["force_calls"]) for row in ordered if row["success"]]
+    if successes:
+        summary["force_calls"] = half_even(sum(successes) / len(successes))
+    return summary

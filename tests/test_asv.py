@@ -117,6 +117,7 @@ def test_pending_grid_is_every_problem_and_code():
         "rgmin",
         "rgsaddle",
         "ase",
+        "asebh",
         "sella",
         "artn",
     ]
