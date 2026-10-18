@@ -94,6 +94,16 @@ commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
 committed = "2026-10-05"
 note = "Activation-relaxation technique nouveau, plugin branch DEVEL. The benchmark contributor of a new entry is Rohit Goswami."
 
+[[code]]
+id = "airss"
+name = "AIRSS"
+role = "random structure search"
+repository = "https://www.mtg.msm.cam.ac.uk/Codes/AIRSS"
+ref = "0.9.4"
+commit = "5593cc4ee360d998764fceb188284fdf0ef781d206754176dcb360c65103ddaa"
+committed = "2023-06"
+note = "Version 0.9.4, June 2023. The commit is the sha256 of https://www.mtg.msm.cam.ac.uk/files/airss-v0.9.4.tgz. buildcell from that tarball draws the cells. The scored relaxation is the pp3 two-point step on the harness Lennard-Jones potential."
+
 # generated ASE and Sella templates
 
 [[template]]
