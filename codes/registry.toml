@@ -94,6 +94,16 @@ commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
 committed = "2026-10-05"
 note = "Activation-relaxation technique nouveau, plugin branch DEVEL. The benchmark contributor of a new entry is Rohit Goswami."
 
+[[code]]
+id = "gasp"
+name = "GASP"
+role = "global optimization"
+repository = "https://github.com/henniggroup/GASP-python"
+ref = "master"
+commit = "0c8d993c82e0e1c69a05b3c34bbb2fcbbdbb7f07"
+committed = "2019-02-23"
+note = "Genetic algorithm for structure prediction, version 0.1. Fixed-composition searches use the defaults: pool 20, initial population 28, and 800 energy calculations. Lennard-Jones rows relax each organism with LAMMPS 8de817dd pair_style lj/cut, cutoff 40, epsilon 1, sigma 1. The runner supplies the shims that this revision needs on current pymatgen and PyYAML."
+
 # generated ASE and Sella templates
 
 [[template]]
