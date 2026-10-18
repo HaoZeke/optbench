@@ -153,15 +153,17 @@ _N2p2Search.track_failure_crash.unit = "count"
 
 def _benchmark(spec: dict):
     bound = spec
+    starts = selected_indices(spec["n"])
+    limit = spec["cap"]
 
     class _Benchmark(_N2p2Search):
         param_names = ["seed", "start"]
-        params = [[SEED], selected_indices(spec["n"])]
+        params = [[SEED], starts]
         timeout = 7200
-        cap = spec["cap"]
+        cap = limit
         spec = bound
-        template_id = spec["template_id"]
-        problem_id = spec["problem_id"]
+        template_id = bound["template_id"]
+        problem_id = bound["problem_id"]
 
     _Benchmark.__name__ = spec["class_name"]
     _Benchmark.__qualname__ = spec["class_name"]

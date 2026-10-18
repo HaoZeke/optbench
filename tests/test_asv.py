@@ -104,6 +104,19 @@ def test_quadratic_grid_uses_the_sample_seeds():
     assert dimer["hessian_index"] == 1
 
 
+def test_n2p2_benchmarks_select_one_start():
+    from benchmarks.bench_n2p2 import N2p2C2h4Kalman, N2p2EmtPt38Kalman
+
+    assert N2p2EmtPt38Kalman.params == [["20261015"], ["0"]]
+    assert N2p2EmtPt38Kalman.template_id == "n2p2/emt-pt38-kalman"
+    assert N2p2EmtPt38Kalman.problem_id == "mlopt/emt-pt38"
+    assert N2p2EmtPt38Kalman.cap == 10000
+    assert N2p2C2h4Kalman.params == [["20261015"], ["0"]]
+    assert N2p2C2h4Kalman.template_id == "n2p2/c2h4-kalman"
+    assert N2p2C2h4Kalman.problem_id == "mlopt/C2H4"
+    assert N2p2C2h4Kalman.cap == 10000
+
+
 def test_pending_grid_is_every_problem_and_code():
     from benchmarks.pending import Pending
 
