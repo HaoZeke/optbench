@@ -743,6 +743,67 @@ def _as_point(record: dict) -> np.ndarray | None:
     return point
 
 
+def _catalog_comment(rep, minimize_calls, records, found, searches, connected, goal_seed) -> str:
+    spent = minimize_calls + sum(int(row["force_calls"]) for row in records if str(row["start"]).startswith(f"rep{rep}-"))
+    fraction = connected / searches if searches else 0.0
+    return (
+        f"# rep {rep} force_calls {spent} unique_saddles {len(found)} "
+        f"fraction_connected {fraction} total_searches {searches} "
+        f"connected {connected} minimize_calls {minimize_calls} seed {goal_seed}"
+    )
+
+
+def _write_catalog(output, template, problem, comments, records, search_cap, repetitions, failed_reps, goal, complete):
+    text = "\n".join(comments) + "\n"
+    totals = []
+    for line in comments:
+        parts = line.split()
+        totals.append(int(parts[parts.index("force_calls") + 1]))
+    if totals:
+        text += f"force_calls {statistics.fmean(totals)}\n"
+        text += f"force_calls_min {min(totals)}\n"
+        text += f"force_calls_max {max(totals)}\n"
+    metrics = (
+        score_v2(
+            [
+                {"force_calls": row["force_calls"], "success": row["success"], "failure": row["failure"]}
+                for row in records
+            ],
+            search_cap,
+        )
+        if records
+        else None
+    )
+    text += (
+        f"code {template.get('code', 'SaddleSearch.jl')}\n"
+        f"code_version {template.get('code_version', '')}\n"
+        f"commit {template.get('commit', '')}\n"
+        f"algorithm {template.get('algorithm', '')}\n"
+        f"tuning {template.get('tuning', '')}\n"
+        f"template {template['id']}\n"
+        f"problem {problem['id']}\n"
+        f"counter harness\n"
+        f"repetitions {repetitions}\n"
+        f"nfailed {failed_reps}\n"
+        f"goal {goal}\n"
+        f"cap {search_cap}\n"
+        f"n {len(records)}\n"
+    )
+    if not complete:
+        text += "partial true\n"
+    if metrics is not None:
+        text += f"par2_mean {metrics['par2_mean']}\nv2_nfailed {metrics['nfailed']}\n"
+    output.parent.mkdir(parents=True, exist_ok=True)
+    temporary = output.with_suffix(".dat.tmp")
+    temporary.write_text(text, encoding="utf-8")
+    temporary.replace(output)
+    stamped = _stamp(records, template)
+    for record in stamped:
+        record["problem"] = problem["id"]
+    write_starts(output.with_suffix(".starts.jsonl"), stamped)
+    return totals, metrics, stamped
+
+
 def _run_saddle_catalog(root, problem, template, output: Path, cap: int, force_tol: float) -> dict:
     """Displace the Pt island until the connected-saddle goal, or the search budget.
 
@@ -940,14 +1001,28 @@ def _run_saddle_catalog(root, problem, template, output: Path, cap: int, force_t
                         f"calls {record['force_calls']} failure {record['failure']}",
                         flush=True,
                     )
+                if searches % 100 == 0:
+                    provisional = comments + [
+                        _catalog_comment(
+                            rep, minimize_calls, all_records, found, searches, connected, 20261015 + rep
+                        )
+                    ]
+                    _write_catalog(
+                        output,
+                        template,
+                        problem,
+                        provisional,
+                        all_records,
+                        search_cap,
+                        repetitions,
+                        failed_reps + (0 if connected >= goal else 1),
+                        goal,
+                        False,
+                    )
             if connected < goal:
                 failed_reps += 1
-            fraction = connected / searches if searches else 0.0
             comments.append(
-                f"# rep {rep} force_calls {minimize_calls + sum(int(row['force_calls']) for row in all_records if str(row['start']).startswith(f'rep{rep}-'))} "
-                f"unique_saddles {len(found)} fraction_connected {fraction} "
-                f"total_searches {searches} connected {connected} "
-                f"minimize_calls {minimize_calls} seed {20261015 + rep}"
+                _catalog_comment(rep, minimize_calls, all_records, found, searches, connected, 20261015 + rep)
             )
             if connected >= goal or searches >= max_searches:
                 partial_path.unlink(missing_ok=True)
@@ -960,55 +1035,18 @@ def _run_saddle_catalog(root, problem, template, output: Path, cap: int, force_t
         or int(line.split("total_searches")[1].split()[0]) >= max_searches
         for line in comments
     )
-    text = "\n".join(comments) + "\n"
-    totals = []
-    for line in comments:
-        parts = line.split()
-        totals.append(int(parts[parts.index("force_calls") + 1]))
-    if totals:
-        text += f"force_calls {statistics.fmean(totals)}\n"
-        text += f"force_calls_min {min(totals)}\n"
-        text += f"force_calls_max {max(totals)}\n"
-    metrics = (
-        score_v2(
-            [
-                {
-                    "force_calls": row["force_calls"],
-                    "success": row["success"],
-                    "failure": row["failure"],
-                }
-                for row in all_records
-            ],
-            search_cap,
-        )
-        if all_records
-        else None
+    totals, metrics, stamped = _write_catalog(
+        output,
+        template,
+        problem,
+        comments,
+        all_records,
+        search_cap,
+        repetitions,
+        failed_reps,
+        goal,
+        complete,
     )
-    text += (
-        f"code {template.get('code', 'SaddleSearch.jl')}\n"
-        f"code_version {template.get('code_version', '')}\n"
-        f"commit {template.get('commit', '')}\n"
-        f"algorithm {template.get('algorithm', '')}\n"
-        f"tuning {template.get('tuning', '')}\n"
-        f"template {template['id']}\n"
-        f"problem {problem['id']}\n"
-        f"counter harness\n"
-        f"repetitions {repetitions}\n"
-        f"nfailed {failed_reps}\n"
-        f"goal {goal}\n"
-        f"cap {search_cap}\n"
-        f"n {len(all_records)}\n"
-    )
-    if not complete:
-        text += "partial true\n"
-    if metrics is not None:
-        text += f"par2_mean {metrics['par2_mean']}\nv2_nfailed {metrics['nfailed']}\n"
-    output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(text, encoding="utf-8")
-    stamped = _stamp(all_records, template)
-    for record in stamped:
-        record["problem"] = problem["id"]
-    write_starts(output.with_suffix(".starts.jsonl"), stamped)
     return {
         "force_calls": statistics.fmean(totals) if totals else None,
         "nfailed": failed_reps,
