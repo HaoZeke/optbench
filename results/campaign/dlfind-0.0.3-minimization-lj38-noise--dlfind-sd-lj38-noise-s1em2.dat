@@ -1,0 +1,19 @@
+# counter harness. The DL-FIND gradient callback calls pes.evaluate.
+# iopt 0 is sd. A success is under the cap, at the Euclidean force stop, and Hessian index 0.
+# Gaussian force noise from [noise]. The stop is the noisy norm and a clean-energy window. The Hessian is clean.
+force_calls 2000
+force_calls_min 486
+force_calls_max 7631
+force_calls_median 1778
+successes 955
+nfailed 45
+n 1000
+transition_states 45
+code dlfind
+code_version 0.0.3
+commit 4167998d16d8dac4a484ba9305f27d6325a7a28d
+algorithm steepest descent
+template dlfind/sd-lj38-noise-s1em2
+problem minimization/lj38-noise
+tuning default
+counter harness

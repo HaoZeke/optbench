@@ -92,7 +92,76 @@ repository = "https://gitlab.com/mammasmias/artn-plugin"
 ref = "DEVEL"
 commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
 committed = "2026-10-05"
-note = "Activation-relaxation technique nouveau, plugin branch DEVEL. The benchmark contributor of a new entry is Rohit Goswami."
+note = "pARTn 1.1.0 at DEVEL 9b753517. The standalone search and the engine plugin are libartn.so. The harness calls pypARTn.artn(engine=other) and next_displ. Licences in the tree are GPL-3.0 and Apache-2.0. nevalf is not the score."
+
+[[code]]
+id = "tsase"
+name = "TSASE"
+role = "saddle search"
+repository = "https://github.com/henkelmangroup/tsase"
+ref = "master"
+commit = "98aac60b5d9905e81ee4e6b8c385f169258d0218"
+committed = "2025-09-26"
+note = "setup.py version string 1.0. The pin is commit 98aac60, xyz working again. The checkout has no LICENSE file. Fortran calculators use numpy.distutils and are not built. The harness loads neb/ssneb.py and neb/fire_ssneb.py without tsase/__init__.py and counts ASE calculate."
+
+[[code]]
+id = "pykmc"
+name = "pyKMC"
+role = "kinetic Monte Carlo"
+repository = "https://sourceforge.net/projects/lkmc/"
+ref = "1.3"
+commit = "1.3"
+committed = "2010-02-26"
+note = "SourceForge lkmc release 1.3. Perl scripts dated February 2010. The driver calls LBOMD.exe, which is not in the zip. LKMC0.1.3.zip is the same Scripts tree and has no LBOMD source. No accelerated-md score. hockyg/PyKMC is a different program."
+
+[[code]]
+id = "lammps"
+name = "LAMMPS"
+role = "minimization and accelerated dynamics"
+repository = "https://github.com/lammps/lammps"
+ref = "stable_30Sep2026"
+commit = "8de817dd79bfe4525d5d39246a212d833e6dee07"
+committed = "2026-09-30"
+note = "stable_30Sep2026. Minimizers cg, sd, hftn, quickmin, and fire call the harness through fix external pf/callback and pair_style zero. NEB, PRD, TAD, and hyper are not scored. The Al and Pt problems need EAM, and the harness has no EAM evaluator. A native pair_style tally is not the score."
+
+[[code]]
+id = "dlfind"
+name = "DL-FIND"
+role = "minimization"
+repository = "https://github.com/digital-chemistry-laboratory/libdlfind"
+ref = "0.0.3"
+commit = "4167998d16d8dac4a484ba9305f27d6325a7a28d"
+committed = "2024-04-06"
+note = "libdlfind 0.0.3. iopt 3 is L-BFGS, 0 is steepest descent, and 1 is conjugate gradient. The gradient callback is the harness score. NEB and the dimer are separate tasks and are not in these rows."
+
+[[code]]
+id = "compass"
+name = "COMPASS"
+role = "double-ended saddle search"
+repository = "https://gitlab.com/goedeckergroup/compass"
+ref = "1.0.0"
+commit = "22da7bd5f69cbd64d59853c8f8d7f8d44c2d18df"
+committed = "2024-08-08"
+note = "COMPASS 1.0.0, commit 22da7bd. The ASE calculator is the harness score. forcetol and the endpoint minimize_fmax are the problem force stop. The cell is held fixed: the library treats any periodic boundary as a variable cell. The chain is COMPASS's own."
+
+[[code]]
+id = "pysisyphus"
+name = "pysisyphus"
+role = "minimization and mode following"
+repository = "https://github.com/eljost/pysisyphus"
+ref = "master"
+commit = "a4ce10dd6d7fdcb3d813f1c730eb365d29041999"
+committed = "2025-10-29"
+note = "Commit a4ce10dd, 2025-10-29. The clone has no tag, so the installed package reports 0.1.dev1. GPL-3.0. Cartesian L-BFGS, conjugate gradient, and steepest descent use the library defaults. The RMS stop is the Euclidean force stop divided by sqrt of the Cartesian components. Lanczos uses dx 5e-3 and dl 1e-2. The harness calculator is the score. The dimer and NEB are not in these rows."
+
+[[code]]
+id = "optim"
+name = "OPTIM"
+role = "saddle search"
+repository = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
+ref = "svn-snapshot"
+commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+note = "No public git commit. The pin is the sha256 of the Wales svn.tar.bz2 snapshot, 122743078 bytes. Minimization L-BFGS calls the ASE socket and pes.evaluate. OPTIM's own call counter is not a score. Saddle search, NEB, noise, and PATHSAMPLE are not scored."
 
 [[code]]
 id = "n2p2"
