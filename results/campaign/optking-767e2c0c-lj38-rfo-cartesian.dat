@@ -1,0 +1,30 @@
+# counter harness. One force call is one RgpotCounter.calculate entry.
+# The library steps on the harness Lennard-Jones gradient.
+# v2 success is under the cap, at the force stop, and Hessian index 0.
+# energy and Kabsch RMSD were not applied: the problem file has no energy_tol, rmsd_tol, or per-start reference.
+# LJ38 index removes the six rigid modes. A curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6).
+# energy_min and energy_max are the final potential values on the recorded points.
+# Cartesian RFO on the harness Lennard-Jones potential. Hydrogen labels feed the coordinate builder only. Coordinates stay in angstrom. The gradient passed to OptKing is that derivative times bohr2angstroms. fix_com and fix_orientation stay on. dynamic_level is 0, linesearch is off, and geom_maxiter and alg_geom_maxiter are the force-call cap. intrafrag_trust is the library default 0.5. The search stops on the problem force norm. The same values are used for every start.
+force_calls 441
+force_calls_min 260
+force_calls_max 765
+nfailed 0
+median 422
+code OptKing
+code_version 0.5.1.dev2+g767e2c0c1
+commit 767e2c0c13ff2b851ac82101ccd5aab9a558a4f1
+algorithm Cartesian RFO
+template optking/lj38-rfo-cartesian
+tuning default
+counter harness
+par2_mean 441.043824701
+wilson_low 0.984926083697
+wilson_high 1
+par2_median 422
+par2_median_low 413
+par2_median_high 441
+v2_nfailed 0
+v2_successes 251
+n 251
+energy_min -170.020923017
+energy_max -155.944502417
