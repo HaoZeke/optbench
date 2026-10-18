@@ -1,0 +1,49 @@
+id = "eon-client/ts-pt-lanczos"
+engine = "eon"
+problem = "tsopt/pt-island"
+code = "eOn"
+code_version = "3.5.0"
+commit = "4d8b34baf1ba8d2d980df29838bac1f969d1662c"
+algorithm = "Lanczos L-BFGS"
+reducer = "harness"
+failure_cap = 10000
+kind = "ts-pt"
+kernel = "morse"
+asv_class = "EonClientTsPtLanczos"
+note = '''
+Lanczos on the 49 Pt-island starts. max_iterations 20, tolerance 0.05, quit_early false. LBFGS converged_force 0.001, max_iterations 1000. client_displace_type load. direction.dat is the reactant-to-initial difference. The harness kernel is morse/smooth/linear with D 0.7102, alpha 1.6047, r0 2.897, cutoff 9.5, and periodic boundaries in x and y.
+'''
+seeds = [1]
+asv_timeout = 900
+budget_seconds = 600
+
+[ini.Main]
+job = "saddle_search"
+finite_difference = 0.001
+random_seed = 1
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+convergence_metric = "norm"
+converged_force = 0.001
+max_move = 0.2
+max_iterations = 1000
+lbfgs_memory = 20
+
+[ini.LBFGS]
+lbfgs_memory = 20
+
+[ini."Saddle Search"]
+min_mode_method = "lanczos"
+client_displace_type = "load"
+converged_force = 0.001
+max_iterations = 1000
+displace_magnitude = 0.1
+
+[ini.Lanczos]
+tolerance = 0.05
+max_iterations = 20
+quit_early = false
