@@ -1,0 +1,64 @@
+{
+  "counter": "harness",
+  "legacy": {
+    "force_calls": 1954,
+    "force_calls_max": 7581,
+    "force_calls_median": 1718.0,
+    "force_calls_min": 486,
+    "n": 1000,
+    "nfailed": 44,
+    "successes": 956,
+    "transition_states": 44
+  },
+  "problem": "minimization/lj38-noise",
+  "provenance": {
+    "code": "dlfind",
+    "code_version": "0.0.3",
+    "commit": "4167998d16d8dac4a484ba9305f27d6325a7a28d",
+    "machine": {
+      "machine": "x86_64",
+      "node": "cursor",
+      "python": "3.12.3",
+      "system": "Linux"
+    },
+    "parameters": {
+      "counter": "harness",
+      "iopt": 1,
+      "maxstep": 0.2,
+      "method": "cg",
+      "sigma": 0.01
+    }
+  },
+  "schema": "optbench.score/v2",
+  "score": {
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 20261015,
+    "cap": 10000,
+    "includes_failures": true,
+    "iqr": 1367.0,
+    "iqr_high": 1522.2937499999998,
+    "iqr_low": 1202.9625,
+    "mean": 2747.856,
+    "median": 1770.5,
+    "median_high": 1866.5125,
+    "median_low": 1698.5,
+    "n": 1000,
+    "n_cap": 0,
+    "n_crash": 0,
+    "n_divergence": 0,
+    "n_wrong_stationary": 44,
+    "nfailed": 44,
+    "par2_mean": 2747.856,
+    "par_applied": true,
+    "par_factor": 2,
+    "q25": 1203.0,
+    "q75": 2570.0,
+    "scoring": "par2-wilson-bootstrap",
+    "success_only_mean": 1953.824267782427,
+    "success_rate": 0.956,
+    "successes": 956,
+    "wilson_high": 0.9670617854115815,
+    "wilson_low": 0.9414482108495923
+  },
+  "template": "dlfind/cg-lj38-noise-s1em2"
+}

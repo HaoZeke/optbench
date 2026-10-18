@@ -1,0 +1,19 @@
+# counter harness. One force call is one ASE calculate.
+# The stop is the Euclidean force norm and Hessian index 0.
+# TSASE's own step counter is not this count.
+force_calls 53
+force_calls_min 39
+force_calls_max 70
+force_calls_median 53.5
+successes 12
+nfailed 88
+n 100
+transition_states 13
+code tsase
+code_version 1.0
+commit 98aac60b5d9905e81ee4e6b8c385f169258d0218
+algorithm SDLBFGS
+template tsase/lbfgs-morse
+problem minimization/morse-bulk
+tuning default
+counter harness
