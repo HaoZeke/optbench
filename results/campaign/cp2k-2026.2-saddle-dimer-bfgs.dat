@@ -1,0 +1,25 @@
+# rep 1 force_calls 25 unique_saddles 0 fraction_connected 0.0 total_searches 1 connected 0 minimize_calls 25 minimum_converged 1 seed 20261016
+force_calls 25.0
+force_calls_min 25
+force_calls_max 25
+code CP2K
+code_version 2026.2
+commit 702cc3d81422b92864ecdd7f544c21c56c04adca
+algorithm Dimer BFGS
+tuning default
+template cp2k/saddle-dimer-bfgs
+problem saddle-search/pt-island
+counter harness
+repetitions 1
+nfailed 1
+goal 27
+cap 5064
+n 1
+partial true
+par2_mean 10128.0
+v2_nfailed 1
+successes 0
+n_cap 0
+n_wrong_stationary 0
+n_divergence 0
+n_crash 1
