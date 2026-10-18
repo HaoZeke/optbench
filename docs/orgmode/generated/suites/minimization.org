@@ -4,7 +4,56 @@
 #+begin_export rst
 .. raw:: html
 
-   <section class="bench" id="lj38" data-problem="minimization/lj38">
+   <section class="bench" id="summary"><div class="bench-scroll">
+   <table data-board-table="summary">
+   <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
+   <thead><tr><th>Problem</th><th>eOn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
+   <tr data-problem="minimization/lj38">
+   <th scope="row"><a href="#lj38">Lennard-Jones 38 clusters</a></th>
+   <td data-code="eOn" data-template="eon/lj38-lbfgs-m100" data-par2="180.137"><span class="bench-score">180.137</span><a href="#lj38-templates">eon/lj38-lbfgs-m100</a></td>
+   <td data-code="rgmin" data-template="rgmin/lj38-dogleg" data-par2="81.881"><span class="bench-score">81.881</span><a href="#lj38-templates">rgmin/lj38-dogleg</a></td>
+   <td data-code="rgsaddle">—</td>
+   <td data-code="ASE" data-template="ase/lj38-lbfgs-tuned" data-par2="395.645"><span class="bench-score">395.645</span><a href="#lj38-templates">ase/lj38-lbfgs-tuned</a></td>
+   <td data-code="Sella" data-template="sella/lj38-min-tuned" data-par2="253.921"><span class="bench-score">253.921</span><a href="#lj38-templates">sella/lj38-min-tuned</a></td>
+   <td data-code="pysisyphus" data-template="pysisyphus/cg-lj38" data-par2="15124.7"><span class="bench-score">15124.7</span><a href="#lj38-templates">pysisyphus/cg-lj38</a></td>
+   <td data-code="artn">—</td>
+   <td data-code="compass">—</td>
+   <td data-code="dlfind" data-template="dlfind/lbfgs-lj38" data-par2="231.908"><span class="bench-score">231.908</span><a href="#lj38-templates">dlfind/lbfgs-lj38</a></td>
+   <td data-code="lammps" data-template="lammps/hftn-lj38" data-par2="1123.81"><span class="bench-score">1123.81</span><a href="#lj38-templates">lammps/hftn-lj38</a></td>
+   <td data-code="optim">—</td>
+   <td data-code="tsase" data-template="tsase/lbfgs-lj38" data-par2="257.2"><span class="bench-score">257.2</span><a href="#lj38-templates">tsase/lbfgs-lj38</a></td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise">
+   <th scope="row"><a href="#lj38-noise">Lennard-Jones 38 clusters with Gaussian force noise</a></th>
+   <td data-code="eOn">—</td>
+   <td data-code="rgmin" data-template="noise/rgmin-dogleg-s0" data-par2="81.881"><span class="bench-score">81.881</span><a href="#lj38-noise-templates">noise/rgmin-dogleg-s0</a></td>
+   <td data-code="rgsaddle">—</td>
+   <td data-code="ASE" data-template="noise/ase-lbfgs-s0" data-par2="396.55"><span class="bench-score">396.55</span><a href="#lj38-noise-templates">noise/ase-lbfgs-s0</a></td>
+   <td data-code="Sella" data-template="noise/sella-min-s0" data-par2="729.433"><span class="bench-score">729.433</span><a href="#lj38-noise-templates">noise/sella-min-s0</a></td>
+   <td data-code="pysisyphus">—</td>
+   <td data-code="artn">—</td>
+   <td data-code="compass">—</td>
+   <td data-code="dlfind" data-template="dlfind/lbfgs-lj38-noise-s0" data-par2="231.908"><span class="bench-score">231.908</span><a href="#lj38-noise-templates">dlfind/lbfgs-lj38-noise-s0</a></td>
+   <td data-code="lammps" data-template="lammps/cg-lj38-noise-s1em3" data-par2="2046.69"><span class="bench-score">2046.69</span><a href="#lj38-noise-templates">lammps/cg-lj38-noise-s1em3</a></td>
+   <td data-code="optim">—</td>
+   <td data-code="tsase">—</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk">
+   <th scope="row"><a href="#morse-bulk">Morse bulk</a></th>
+   <td data-code="eOn" data-template="eon/morse-lbfgs-m100" data-par2="54.18"><span class="bench-score">54.18</span><a href="#morse-bulk-templates">eon/morse-lbfgs-m100</a></td>
+   <td data-code="rgmin" data-template="rgmin/morse-newton" data-par2="8.35"><span class="bench-score">8.35</span><a href="#morse-bulk-templates">rgmin/morse-newton</a></td>
+   <td data-code="rgsaddle">—</td>
+   <td data-code="ASE" data-template="ase/morse-bfgslinesearch-default" data-par2="28.91"><span class="bench-score">28.91</span><a href="#morse-bulk-templates">ase/morse-bfgslinesearch-default</a></td>
+   <td data-code="Sella" data-template="sella/morse-min-default" data-par2="28.89"><span class="bench-score">28.89</span><a href="#morse-bulk-templates">sella/morse-min-default</a></td>
+   <td data-code="pysisyphus">—</td>
+   <td data-code="artn">—</td>
+   <td data-code="compass">—</td>
+   <td data-code="dlfind" data-template="dlfind/lbfgs-morse" data-par2="13626.5"><span class="bench-score">13626.5</span><a href="#morse-bulk-templates">dlfind/lbfgs-morse</a></td>
+   <td data-code="lammps" data-template="lammps/fire-morse" data-par2="17656.7"><span class="bench-score">17656.7</span><a href="#morse-bulk-templates">lammps/fire-morse</a></td>
+   <td data-code="optim" data-template="optim/lbfgs-morse" data-par2="17408.8"><span class="bench-score">17408.8</span><a href="#morse-bulk-templates">optim/lbfgs-morse</a></td>
+   <td data-code="tsase" data-template="tsase/lbfgs-morse" data-par2="17606.4"><span class="bench-score">17606.4</span><a href="#morse-bulk-templates">tsase/lbfgs-morse</a></td>
+   </tr>
+   </tbody></table></div></section><section class="bench" id="lj38" data-problem="minimization/lj38">
    <h2>Lennard-Jones 38 clusters</h2>
    <dl class="bench-rule">
    <dt>Stop</dt><dd>L2 norm of the force at or below 0.01 energy/distance</dd>
@@ -14,6 +63,12 @@
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
+   <p class="bench-gaps">Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
+   <figure class="bench-plot"><a href="../../_static/board/minimization-lj38-profile.svg"><picture><source srcset="../../_static/board/minimization-lj38-profile.webp" type="image/webp"><img src="../../_static/board/minimization-lj38-profile.png" alt="Dolan-More profile for minimization/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="../../_static/board/minimization-lj38-cost.svg"><picture><source srcset="../../_static/board/minimization-lj38-cost.webp" type="image/webp"><img src="../../_static/board/minimization-lj38-cost.png" alt="Cost versus success for minimization/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
+   <details class="bench-details" id="lj38-templates">
+   <summary>All templates (99 ranked)</summary>
+   <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="minimization/lj38">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
@@ -116,8 +171,7 @@
    <tr><td data-field="template">pysisyphus/cg-lj38</td><td data-field="version">pysisyphus 0.1.dev1</td><td data-field="commit">a4ce10dd6d7f</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">15124.7</td><td data-field="success_rate">0.254</td><td data-field="wilson_low">0.227997</td><td data-field="wilson_high">0.281886</td><td data-field="median_calls">10000</td><td data-field="mean_calls">7655.12</td><td data-field="failures">crash 0, divergence 0, cap 745, wrong_stationary 1</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">pysisyphus/lbfgs-lj38</td><td data-field="version">pysisyphus 0.1.dev1</td><td data-field="commit">a4ce10dd6d7f</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">20000</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.00382676</td><td data-field="median_calls">10000</td><td data-field="mean_calls">10000</td><td data-field="failures">crash 0, divergence 0, cap 1000, wrong_stationary 0</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">tsase/mdmin-lj38</td><td data-field="version">tsase 1.0</td><td data-field="commit">98aac60b5d99</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">20000</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.00382676</td><td data-field="median_calls">10000</td><td data-field="mean_calls">10000</td><td data-field="failures">crash 0, divergence 0, cap 1000, wrong_stationary 0</td><td data-field="n">1000</td></tr>
-   </tbody></table>
-   <p class="bench-gaps">Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
+   </tbody></table></div>
    <h3>History</h3><ul>
    <li>rgmin/lj38-dogleg rgmin 0.4.0 campaign, asv n=1000 PAR-2=81.881 mean=81.881</li>
    <li>rgmin/lj38-dogleg-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=81.881 mean=81.881</li>
@@ -195,10 +249,11 @@
    <li>pele-lbfgs-M4-maxstep0.1: no per-start record</li>
    <li>pele-lbfgs-M4-maxstep0.2: no per-start record</li>
    </ul>
-   <img src="../../_static/board/minimization-lj38-profile.svg" alt="Dolan-More profile for minimization/lj38">
-   <img src="../../_static/board/minimization-lj38-cost.svg" alt="Cost versus success for minimization/lj38">
+   </details>
    </section><section class="bench bench-legacy-section" id="lj38-legacy">
    <h3>Legacy 2014 archive</h3>
+   <details class="bench-details">
+   <summary>Legacy 2014 archive</summary>
    <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
@@ -479,6 +534,7 @@
    </tr>
    </tbody></table></div>
    <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:24"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "minimization-lj38-newton-method", "entry": "newton-method", "code": "", "value": 79.0, "best": true, "held": false, "failed": false}, {"id": "minimization-lj38-tsase-sdlbfgs", "entry": "tsase-sdlbfgs", "code": "", "value": 166.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-optim", "entry": "optim", "code": "OPTIM", "value": 176.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-pele-lbfgs-m100-maxstep0-2", "entry": "pele-lbfgs-M100-maxstep0.2", "code": "", "value": 179.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-eon-lbfgs", "entry": "eon-lbfgs", "code": "Eon r2025", "value": 181.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-pele-lbfgs-m20-maxstep0-1", "entry": "pele-lbfgs-M20-maxstep0.1", "code": "", "value": 222.0, "best": false, "held": true, "failed": false}, {"id": "minimization-lj38-pele-lbfgs-m4-maxstep0-2", "entry": "pele-lbfgs-M4-maxstep0.2", "code": "", "value": 230.0, "best": false, "held": true, "failed": false}, {"id": "minimization-lj38-scipy-lbfgs", "entry": "scipy-lbfgs", "code": "pele", "value": 230.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-pele-lbfgs-m10-maxstep0-1", "entry": "pele-lbfgs-M10-maxstep0.1", "code": "", "value": 235.0, "best": false, "held": true, "failed": false}, {"id": "minimization-lj38-pele-lbfgs-m4-maxstep0-1", "entry": "pele-lbfgs-M4-maxstep0.1", "code": "", "value": 249.0, "best": false, "held": true, "failed": false}, {"id": "minimization-lj38-pele-lbfgs-m1-maxstep0-1", "entry": "pele-lbfgs-M1-maxstep0.1", "code": "", "value": 287.0, "best": false, "held": true, "failed": false}, {"id": "minimization-lj38-ase-lbfgs", "entry": "ase-lbfgs", "code": "ASE 3.6.1", "value": 355.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-pele-lbfgs-m4-maxstep0-05", "entry": "pele-lbfgs-M4-maxstep0.05", "code": "", "value": 379.0, "best": false, "held": true, "failed": false}, {"id": "minimization-lj38-ase-lbfgslinesearch", "entry": "ase-lbfgslinesearch", "code": "ASE 3.6.0", "value": 417.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-eon-cg", "entry": "eon-cg", "code": "Eon r2025", "value": 453.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-ase-bfgs", "entry": "ase-BFGS", "code": "", "value": 463.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-ase-bfgslinesearch", "entry": "ase-bfgslinesearch", "code": "ASE 3.6.0", "value": 500.0, "best": false, "held": true, "failed": false}, {"id": "minimization-lj38-eon-sd-twopoint", "entry": "eon-sd-twopoint", "code": "Eon r2025", "value": 539.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-ase-fire", "entry": "ase-fire", "code": "ASE 3.6.0", "value": 656.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-pele-fire", "entry": "pele-fire", "code": "", "value": 709.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-eon-fire", "entry": "eon-fire", "code": "Eon r2025", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-ase-preconlbfgs", "entry": "ase-preconlbfgs", "code": "", "value": 2686.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-eon-qm", "entry": "eon-qm", "code": "Eon r2025", "value": 3523.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-eon-sd", "entry": "eon-sd", "code": "Eon r2025", "value": 4901.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   </details>
    </section><section class="bench" id="lj38-noise" data-problem="minimization/lj38-noise">
    <h2>Lennard-Jones 38 clusters with Gaussian force noise</h2>
    <dl class="bench-rule">
@@ -489,6 +545,11 @@
    <dt>Note</dt><dd>Gaussian force noise on the clean Lennard-Jones energy. The harness campaigns use that rule. The quadratic sample is results/validation/statistics.json.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
+   <figure class="bench-plot"><a href="../../_static/board/minimization-lj38-noise-profile.svg"><picture><source srcset="../../_static/board/minimization-lj38-noise-profile.webp" type="image/webp"><img src="../../_static/board/minimization-lj38-noise-profile.png" alt="Dolan-More profile for minimization/lj38-noise" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="../../_static/board/minimization-lj38-noise-cost.svg"><picture><source srcset="../../_static/board/minimization-lj38-noise-cost.webp" type="image/webp"><img src="../../_static/board/minimization-lj38-noise-cost.png" alt="Cost versus success for minimization/lj38-noise" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
+   <details class="bench-details" id="lj38-noise-templates">
+   <summary>All templates (54 ranked)</summary>
+   <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="minimization/lj38-noise">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
@@ -546,11 +607,12 @@
    <tr><td data-field="template">noise/ase-fire-s1em2</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">4609.9</td><td data-field="success_rate">0.784</td><td data-field="wilson_low">0.757433</td><td data-field="wilson_high">0.808393</td><td data-field="median_calls">331</td><td data-field="mean_calls">359.78</td><td data-field="failures">crash 0, divergence 14, cap 0, wrong_stationary 202</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">lammps/cg-lj38-noise-s1em4</td><td data-field="version">lammps 30 Sep 2026</td><td data-field="commit">8de817dd79bf</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">4861.91</td><td data-field="success_rate">0.896</td><td data-field="wilson_low">0.87554</td><td data-field="wilson_high">0.913429</td><td data-field="median_calls">2778</td><td data-field="mean_calls">3790.78</td><td data-field="failures">crash 0, divergence 3, cap 100, wrong_stationary 1</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">lammps/sd-lj38-noise-s0</td><td data-field="version">lammps 30 Sep 2026</td><td data-field="commit">8de817dd79bf</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">14468.2</td><td data-field="success_rate">0.383</td><td data-field="wilson_low">0.353373</td><td data-field="wilson_high">0.413523</td><td data-field="median_calls">10000</td><td data-field="mean_calls">8298.19</td><td data-field="failures">crash 0, divergence 0, cap 617, wrong_stationary 0</td><td data-field="n">1000</td></tr>
-   </tbody></table>
-   <img src="../../_static/board/minimization-lj38-noise-profile.svg" alt="Dolan-More profile for minimization/lj38-noise">
-   <img src="../../_static/board/minimization-lj38-noise-cost.svg" alt="Cost versus success for minimization/lj38-noise">
+   </tbody></table></div>
+   </details>
    </section><section class="bench bench-legacy-section" id="lj38-noise-legacy">
    <h3>Legacy 2014 archive</h3>
+   <details class="bench-details">
+   <summary>Legacy 2014 archive</summary>
    <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
@@ -567,6 +629,7 @@
    </tr></thead><tbody>
    </tbody></table></div>
    
+   </details>
    </section><section class="bench" id="morse-bulk" data-problem="minimization/morse-bulk">
    <h2>Morse bulk</h2>
    <dl class="bench-rule">
@@ -575,6 +638,12 @@
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
+   <p class="bench-gaps">Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
+   <figure class="bench-plot"><a href="../../_static/board/minimization-morse-bulk-profile.svg"><picture><source srcset="../../_static/board/minimization-morse-bulk-profile.webp" type="image/webp"><img src="../../_static/board/minimization-morse-bulk-profile.png" alt="Dolan-More profile for minimization/morse-bulk" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="../../_static/board/minimization-morse-bulk-cost.svg"><picture><source srcset="../../_static/board/minimization-morse-bulk-cost.webp" type="image/webp"><img src="../../_static/board/minimization-morse-bulk-cost.png" alt="Cost versus success for minimization/morse-bulk" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
+   <details class="bench-details" id="morse-bulk-templates">
+   <summary>All templates (91 ranked)</summary>
+   <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="minimization/morse-bulk">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
@@ -669,8 +738,7 @@
    <tr><td data-field="template">lammps/quickmin-morse</td><td data-field="version">lammps 30 Sep 2026</td><td data-field="commit">8de817dd79bf</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">19150.8</td><td data-field="success_rate">0.05</td><td data-field="wilson_low">0.0215437</td><td data-field="wilson_high">0.11175</td><td data-field="median_calls">1695.5</td><td data-field="mean_calls">2050.36</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 95</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">lammps/sd-morse</td><td data-field="version">lammps 30 Sep 2026</td><td data-field="commit">8de817dd79bf</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">19211.2</td><td data-field="success_rate">0.04</td><td data-field="wilson_low">0.0156633</td><td data-field="wilson_high">0.0983707</td><td data-field="median_calls">258.5</td><td data-field="mean_calls">262.2</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 96</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">lammps/hftn-morse</td><td data-field="version">lammps 30 Sep 2026</td><td data-field="commit">8de817dd79bf</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">19415</td><td data-field="success_rate">0.03</td><td data-field="wilson_low">0.0102545</td><td data-field="wilson_high">0.0845194</td><td data-field="median_calls">480</td><td data-field="mean_calls">512.54</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 97</td><td data-field="n">100</td></tr>
-   </tbody></table>
-   <p class="bench-gaps">Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
+   </tbody></table></div>
    <h3>History</h3><ul>
    <li>rgmin/morse-newton-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=8.35 mean=8.35</li>
    <li>rgmin/morse-dogleg rgmin 0.4.0 campaign, asv n=100 PAR-2=10.11 mean=10.11</li>
@@ -734,10 +802,11 @@
    <li>eon-svn/morse-sd: no per-start record</li>
    <li>ase/morse-gpmin-tuned: AseMorseGpminTuned (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;pos_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li>
    </ul>
-   <img src="../../_static/board/minimization-morse-bulk-profile.svg" alt="Dolan-More profile for minimization/morse-bulk">
-   <img src="../../_static/board/minimization-morse-bulk-cost.svg" alt="Cost versus success for minimization/morse-bulk">
+   </details>
    </section><section class="bench bench-legacy-section" id="morse-bulk-legacy">
    <h3>Legacy 2014 archive</h3>
+   <details class="bench-details">
+   <summary>Legacy 2014 archive</summary>
    <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
@@ -875,5 +944,6 @@
    </tr>
    </tbody></table></div>
    <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:11"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "minimization-morse-bulk-tsase-sdlbfgs", "entry": "tsase-sdlbfgs", "code": "", "value": 19.0, "best": true, "held": false, "failed": false}, {"id": "minimization-morse-bulk-ase-preconlbfgs", "entry": "ase-preconLBFGS", "code": "", "value": 34.0, "best": false, "held": false, "failed": false}, {"id": "minimization-morse-bulk-optim", "entry": "optim", "code": "OPTIM", "value": 46.0, "best": false, "held": false, "failed": false}, {"id": "minimization-morse-bulk-pele-lbfgs", "entry": "pele-lbfgs", "code": "", "value": 51.0, "best": false, "held": false, "failed": false}, {"id": "minimization-morse-bulk-eon-lbfgs", "entry": "eon-lbfgs", "code": "Eon r2030", "value": 52.0, "best": false, "held": false, "failed": false}, {"id": "minimization-morse-bulk-ase-lbfgs", "entry": "ase-lbfgs", "code": "ASE 3.6.0", "value": 53.8, "best": false, "held": false, "failed": false}, {"id": "minimization-morse-bulk-eon-sd-twopoint", "entry": "eon-sd-twopoint", "code": "Eon r2030", "value": 64.0, "best": false, "held": false, "failed": false}, {"id": "minimization-morse-bulk-eon-cg", "entry": "eon-cg", "code": "Eon r2030", "value": 106.0, "best": false, "held": false, "failed": false}, {"id": "minimization-morse-bulk-ase-fire", "entry": "ase-fire", "code": "ASE 3.6.0", "value": 147.47, "best": false, "held": false, "failed": false}, {"id": "minimization-morse-bulk-eon-fire", "entry": "eon-fire", "code": "Eon r2030", "value": 156.0, "best": false, "held": false, "failed": false}, {"id": "minimization-morse-bulk-eon-sd", "entry": "eon-sd", "code": "Eon r2030", "value": 196.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   </details>
    </section>
 #+end_export
