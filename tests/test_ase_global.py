@@ -1,5 +1,6 @@
 """ASE basin hopping uses the harness counter and the Lennard-Jones stop."""
 
+import json
 from pathlib import Path
 
 import pytest
@@ -132,6 +133,55 @@ def test_a_high_target_stops_on_the_first_quench(tmp_path: Path):
     assert first["seconds"] >= 0.0
     quiet = {key: value for key, value in first.items() if key != "seconds"}
     assert quiet == {key: value for key, value in second.items() if key != "seconds"}
+
+
+def test_asv_tracks_round_trip(tmp_path: Path):
+    pytest.importorskip("asv")
+    from asv.results import iter_results
+
+    from benchmarks.bench_asebh import _class_name
+    from optbench.ase_asv import class_name, document
+    from optbench.asv_score import track_rows
+
+    template = "asebh/lj38-basin-tuned"
+    assert class_name(template) == _class_name({"id": template})
+    rows = [
+        {
+            "start": "100_lj38/0.con",
+            "force_calls": 2000000,
+            "success": False,
+            "failure": "cap",
+            "seconds": 3.5,
+            "seed": 314159,
+        },
+        {
+            "start": "100_lj38/1.con",
+            "force_calls": 40,
+            "success": True,
+            "failure": None,
+            "seconds": 0.25,
+            "seed": 314159,
+        },
+    ]
+    machine = {
+        "arch": "x86_64",
+        "cpu": "test",
+        "machine": "cursor",
+        "num_cpu": "8",
+        "os": "Linux",
+        "ram": "1",
+    }
+    body = document({template: rows}, commit="abc12345abc12345", machine=machine, started_at=1)
+    dest_dir = tmp_path / "asv" / "cursor"
+    dest_dir.mkdir(parents=True)
+    (dest_dir / "machine.json").write_text(json.dumps({**machine, "version": 1}), encoding="utf-8")
+    (dest_dir / "abc12345-uv-pip-py3.12.json").write_text(json.dumps(body), encoding="utf-8")
+    found = list(iter_results(str(tmp_path / "asv")))
+    assert len(found) == 1
+    tracked = track_rows(found[0], class_name(template))
+    assert [item["force_calls"] for item in tracked] == [2000000, 40]
+    assert [item["success"] for item in tracked] == [False, True]
+    assert [item["failure"] for item in tracked] == ["cap", None]
 
 
 def test_the_force_cap_is_a_failure(tmp_path: Path):
