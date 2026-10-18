@@ -1,5 +1,6 @@
 """SaddleSearch.jl templates and the quadratic saddle."""
 
+import json
 import os
 from pathlib import Path
 
@@ -16,6 +17,21 @@ def _available() -> bool:
     julia = os.environ.get("JULIA") or str(Path.home() / "julia" / "bin" / "julia")
     source = os.environ.get("SADDLESEARCHJL_SRC") or str(Path.home() / "src" / "SaddleSearch.jl")
     return Path(julia).is_file() and (Path(source) / "src" / "SaddleSearch.jl").is_file()
+
+
+def test_catalog_partial_drops_only_a_torn_last_line(tmp_path):
+    from optbench.saddlesearchjl import _load_catalog_partial
+
+    path = tmp_path / "rep.partial.jsonl"
+    path.write_text(
+        '{"start": "rep1-search1"}\n{"start": "rep1-search2"}\n{"start":\n',
+        encoding="utf-8",
+    )
+    rows = _load_catalog_partial(path)
+    assert [row["start"] for row in rows] == ["rep1-search1", "rep1-search2"]
+    path.write_text('{"start": "ok"}\n{"start":\n{"start": "later"}\n', encoding="utf-8")
+    with pytest.raises(json.JSONDecodeError):
+        _load_catalog_partial(path)
 
 
 def test_templates_pin_the_source_and_the_problem_cap():

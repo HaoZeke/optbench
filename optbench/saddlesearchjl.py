@@ -9,7 +9,9 @@ force norm. The Hessian that decides the index is a verification cost.
 
 from __future__ import annotations
 
+import json
 import math
+import multiprocessing
 import os
 import shutil
 import statistics
@@ -17,6 +19,7 @@ import subprocess
 import threading
 from collections import deque
 from concurrent.futures import ProcessPoolExecutor
+from concurrent.futures.process import BrokenProcessPool
 from pathlib import Path
 
 import numpy as np
@@ -536,6 +539,8 @@ def _init_worker() -> None:
     global _SESSION
     os.environ["OPENBLAS_NUM_THREADS"] = "1"
     os.environ["OMP_NUM_THREADS"] = "1"
+    os.environ["MKL_NUM_THREADS"] = "1"
+    os.environ["JULIA_NUM_THREADS"] = "1"
     _SESSION = JuliaSession.start()
 
 
@@ -800,19 +805,194 @@ def _write_catalog(output, template, problem, comments, records, search_cap, rep
     stamped = _stamp(records, template)
     for record in stamped:
         record["problem"] = problem["id"]
-    write_starts(output.with_suffix(".starts.jsonl"), stamped)
+    starts = output.with_suffix(".starts.jsonl")
+    temporary_starts = output.with_name(output.stem + ".starts.jsonl.tmp")
+    body = "\n".join(json.dumps(row, sort_keys=True) for row in stamped)
+    temporary_starts.write_text(body + ("\n" if body else ""), encoding="utf-8")
+    temporary_starts.replace(starts)
     return totals, metrics, stamped
 
 
-def _run_saddle_catalog(root, problem, template, output: Path, cap: int, force_tol: float) -> dict:
+def _load_catalog_partial(path: Path) -> list[dict]:
+    """Read a checkpoint. A torn last line is the kill point and is dropped."""
+    if not path.is_file():
+        return []
+    rows = []
+    lines = path.read_text(encoding="utf-8").splitlines()
+    last = len(lines) - 1
+    for index, line in enumerate(lines):
+        stripped = line.strip()
+        if not stripped:
+            continue
+        try:
+            rows.append(json.loads(stripped))
+        except json.JSONDecodeError:
+            if index == last:
+                return rows
+            raise
+    return rows
+
+
+def _catalog_displacement(
+    rng,
+    listed,
+    free,
+    minimum,
+    positions,
+    magnitude,
+    rep,
+    searches,
+    problem,
+    template,
+    cap,
+    force_tol,
+    fixed,
+    cell,
+) -> dict:
+    atom = int(listed[int(rng.integers(0, len(listed)))])
+    slots = np.flatnonzero(free == atom)
+    if len(slots) != 1:
+        raise RuntimeError(f"displace atom {atom} is not one free atom")
+    slot = int(slots[0])
+    direction = rng.normal(size=3)
+    direction = direction / np.linalg.norm(direction)
+    x0 = minimum.copy()
+    x0[3 * slot : 3 * slot + 3] += magnitude * direction
+    kick = np.zeros_like(x0)
+    kick[3 * slot : 3 * slot + 3] = direction
+    moved = positions.copy()
+    moved[free] = x0.reshape(-1, 3)
+    return {
+        "name": f"rep{rep}-search{searches}",
+        "positions": moved,
+        "fixed": fixed,
+        "cell": cell,
+        "potential": problem["potential"],
+        "template": template,
+        "task": "saddle",
+        "mode_seed": "file",
+        "file_mode": kick,
+        "cap": cap,
+        "force_tol": force_tol,
+        "overlap": 0.99,
+        "seed": str(20261015 + rep),
+    }
+
+
+def _open_pool(workers: int) -> ProcessPoolExecutor:
+    # Fork after the parent has loaded NumPy. The child initializer starts
+    # Julia, so the parent never holds a Julia runtime across the fork.
+    ctx = multiprocessing.get_context("fork")
+    return ProcessPoolExecutor(max_workers=workers, initializer=_init_worker, mp_context=ctx)
+
+
+def _climb_batch(pool: ProcessPoolExecutor, specs: list[dict]) -> list[dict]:
+    futures = [pool.submit(_worker_execute, spec) for spec in specs]
+    rows = []
+    for spec, future in zip(specs, futures):
+        try:
+            rows.append(future.result())
+        except BrokenProcessPool:
+            raise
+        except Exception as exc:
+            rows.append(_crash_record(spec, f"{type(exc).__name__}: {exc}", 0))
+    return rows
+
+
+def _judge_climb(
+    climbed: dict,
+    spec: dict,
+    outer,
+    minimum: np.ndarray,
+    min_energy: float,
+    found: list,
+    connect_rmsd: float,
+    barrier_max: float,
+    force_tol: float,
+    cap: int,
+    search_cap: int,
+    template_id: str,
+) -> tuple[dict, np.ndarray | None, int]:
+    climb = int(climbed.get("force_calls") or 0)
+    point = _as_point(climbed)
+    before = int(outer.calls)
+    record = {
+        "schema": "optbench.start/v2",
+        "start": spec["name"],
+        "counter": "harness",
+        "comparable": True,
+        "success": False,
+        "reasons": list(climbed.get("reasons") or ["force_norm"]),
+        "converged": bool(climbed.get("converged")),
+        "library_evaluations": int(climbed.get("library_evaluations") or 0),
+        "steps": int(climbed.get("steps") or 0),
+        "curvature": climbed.get("curvature"),
+        "hessian_index": climbed.get("hessian_index"),
+        "force_norm": climbed.get("force_norm"),
+        "energy": climbed.get("energy"),
+        "seed": spec["seed"],
+        "failure": climbed.get("failure") or "divergence",
+    }
+    saved_point = None
+    delta = 0
+    force_ok = (
+        point is not None
+        and climbed.get("force_norm") is not None
+        and math.isfinite(float(climbed["force_norm"]))
+        and float(climbed["force_norm"]) <= force_tol + 1e-10
+        and climb < cap
+        and climbed.get("hessian_index") == 1
+    )
+    if force_ok and point is not None:
+        axis = _endpoint_axis(point, climbed.get("mode"))
+        plus, _plus_ok = _lbfgs_minimize(outer, point + 0.1 * axis, force_tol, _SADDLE_ENDPOINT_BUDGET)
+        minus, _minus_ok = _lbfgs_minimize(outer, point - 0.1 * axis, force_tol, _SADDLE_ENDPOINT_BUDGET)
+        plus_rmsd = _cartesian_rmsd(plus.reshape(-1, 3), minimum.reshape(-1, 3))
+        minus_rmsd = _cartesian_rmsd(minus.reshape(-1, 3), minimum.reshape(-1, 3))
+        links = (plus_rmsd <= connect_rmsd) ^ (minus_rmsd <= connect_rmsd)
+        novel = all(
+            _cartesian_rmsd(point.reshape(-1, 3), old.reshape(-1, 3)) > connect_rmsd for old in found
+        )
+        barrier = float(climbed["energy"]) - float(min_energy)
+        record["barrier"] = barrier
+        record["rmsd_plus"] = plus_rmsd
+        record["rmsd_minus"] = minus_rmsd
+        record["reasons"] = []
+        if novel:
+            found.append(point)
+            saved_point = point
+        if links and novel and barrier < barrier_max:
+            delta = 1
+            record["success"] = True
+            record["failure"] = None
+        else:
+            if not links:
+                record["reasons"].append("not_connected")
+            if not novel:
+                record["reasons"].append("duplicate")
+            if barrier >= barrier_max:
+                record["reasons"].append("barrier")
+            record["success"], record["failure"] = _outcome(record["reasons"])
+    endpoint_calls = int(outer.calls - before)
+    record["force_calls"] = climb + endpoint_calls
+    record["endpoint_calls"] = endpoint_calls
+    record["climb_calls"] = climb
+    if record["force_calls"] >= search_cap and record["success"]:
+        raise RuntimeError(f"{template_id} {record['start']} spent {search_cap} or more force calls")
+    return record, saved_point, delta
+
+
+def _run_saddle_catalog(
+    root, problem, template, output: Path, cap: int, force_tol: float, workers: int = 1
+) -> dict:
     """Displace the Pt island until the connected-saddle goal, or the search budget.
 
     One search is the climb plus the two endpoint minimizations. The
     initial minimization is outside that count. Connection is Cartesian
     RMSD of the free atoms, because the substrate fixes the frame.
+    Climbs in a batch share no state. Endpoints and novelty stay in
+    search order, and a climb past the goal is dropped.
     """
-    import json
-
     from .rgsaddle_minmode import _stored
 
     paths = (problem.get("input") or {}).get("geometries") or []
@@ -832,12 +1012,14 @@ def _run_saddle_catalog(root, problem, template, output: Path, cap: int, force_t
     comments = []
     all_records: list[dict] = []
     failed_reps = 0
-    session = JuliaSession.start()
+    width = max(1, int(workers))
+    session = JuliaSession.start() if width == 1 else None
+    pool = _open_pool(width) if width > 1 else None
     try:
         for rep in range(1, repetitions + 1):
             partial_path = output.with_name(output.stem + f".rep{rep}.partial.jsonl")
             header_path = output.with_name(output.stem + f".rep{rep}.header.json")
-            saved = _load_partial(partial_path) if header_path.is_file() else []
+            saved = _load_catalog_partial(partial_path) if header_path.is_file() else []
             outer = _surface(_bind(raw, positions, free, cell), cap=10**9)
             if header_path.is_file() and saved:
                 header = json.loads(header_path.read_text(encoding="utf-8"))
@@ -853,7 +1035,11 @@ def _run_saddle_catalog(root, problem, template, output: Path, cap: int, force_t
                 ]
                 rng = _rng_restore(saved[-1]["rng_state"])
                 for row in saved:
-                    kept = {key: value for key, value in row.items() if key not in {"rng_state", "saddle_x"}}
+                    kept = {
+                        key: value
+                        for key, value in row.items()
+                        if key not in {"rng_state", "saddle_x", "climb_calls"}
+                    }
                     all_records.append(kept)
                 print(
                     f"{template['id']} rep {rep} resume searches {searches} connected {connected}",
@@ -885,140 +1071,97 @@ def _run_saddle_catalog(root, problem, template, output: Path, cap: int, force_t
                 partial_path.unlink(missing_ok=True)
                 saved = []
             while connected < goal and searches < max_searches:
-                if session.proc.poll() is not None:
-                    session = JuliaSession.start()
-                searches += 1
-                atom = int(listed[int(rng.integers(0, len(listed)))])
-                slots = np.flatnonzero(free == atom)
-                if len(slots) != 1:
-                    raise RuntimeError(f"displace atom {atom} is not one free atom")
-                slot = int(slots[0])
-                direction = rng.normal(size=3)
-                direction = direction / np.linalg.norm(direction)
-                x0 = minimum.copy()
-                x0[3 * slot : 3 * slot + 3] += magnitude * direction
-                kick = np.zeros_like(x0)
-                kick[3 * slot : 3 * slot + 3] = direction
-                moved = positions.copy()
-                moved[free] = x0.reshape(-1, 3)
-                spec = {
-                    "name": f"rep{rep}-search{searches}",
-                    "positions": moved,
-                    "fixed": fixed,
-                    "cell": cell,
-                    "potential": problem["potential"],
-                    "template": template,
-                    "task": "saddle",
-                    "mode_seed": "file",
-                    "file_mode": kick,
-                    "cap": cap,
-                    "force_tol": force_tol,
-                    "overlap": 0.99,
-                    "seed": str(20261015 + rep),
-                }
-                before = int(outer.calls)
-                climbed = execute(spec, session)
-                climb = int(climbed["force_calls"])
-                point = _as_point(climbed)
-                record = {
-                    "schema": "optbench.start/v2",
-                    "start": spec["name"],
-                    "counter": "harness",
-                    "comparable": True,
-                    "success": False,
-                    "reasons": list(climbed.get("reasons") or ["force_norm"]),
-                    "converged": bool(climbed.get("converged")),
-                    "library_evaluations": int(climbed.get("library_evaluations") or 0),
-                    "steps": int(climbed.get("steps") or 0),
-                    "curvature": climbed.get("curvature"),
-                    "hessian_index": climbed.get("hessian_index"),
-                    "force_norm": climbed.get("force_norm"),
-                    "energy": climbed.get("energy"),
-                    "seed": spec["seed"],
-                    "failure": climbed.get("failure") or "divergence",
-                }
-                saved_point = None
-                force_ok = (
-                    point is not None
-                    and climbed.get("force_norm") is not None
-                    and math.isfinite(float(climbed["force_norm"]))
-                    and float(climbed["force_norm"]) <= force_tol + 1e-10
-                    and climb < cap
-                    and climbed.get("hessian_index") == 1
-                )
-                if force_ok and point is not None:
-                    axis = _endpoint_axis(point, climbed.get("mode"))
-                    plus, _plus_ok = _lbfgs_minimize(
-                        outer, point + 0.1 * axis, force_tol, _SADDLE_ENDPOINT_BUDGET
-                    )
-                    minus, _minus_ok = _lbfgs_minimize(
-                        outer, point - 0.1 * axis, force_tol, _SADDLE_ENDPOINT_BUDGET
-                    )
-                    plus_rmsd = _cartesian_rmsd(plus.reshape(-1, 3), minimum.reshape(-1, 3))
-                    minus_rmsd = _cartesian_rmsd(minus.reshape(-1, 3), minimum.reshape(-1, 3))
-                    links = (plus_rmsd <= connect_rmsd) ^ (minus_rmsd <= connect_rmsd)
-                    novel = all(
-                        _cartesian_rmsd(point.reshape(-1, 3), old.reshape(-1, 3)) > connect_rmsd
-                        for old in found
-                    )
-                    barrier = float(climbed["energy"]) - float(min_energy)
-                    record["barrier"] = barrier
-                    record["rmsd_plus"] = plus_rmsd
-                    record["rmsd_minus"] = minus_rmsd
-                    record["reasons"] = []
-                    if novel:
-                        found.append(point)
-                        saved_point = point
-                    if links and novel and barrier < barrier_max:
-                        connected += 1
-                        record["success"] = True
-                        record["failure"] = None
-                    else:
-                        if not links:
-                            record["reasons"].append("not_connected")
-                        if not novel:
-                            record["reasons"].append("duplicate")
-                        if barrier >= barrier_max:
-                            record["reasons"].append("barrier")
-                        record["success"], record["failure"] = _outcome(record["reasons"])
-                endpoint_calls = int(outer.calls - before)
-                record["force_calls"] = climb + endpoint_calls
-                record["endpoint_calls"] = endpoint_calls
-                record["climb_calls"] = climb
-                if record["force_calls"] >= search_cap and record["success"]:
-                    raise RuntimeError(
-                        f"{template['id']} {record['start']} spent {search_cap} or more force calls"
-                    )
-                all_records.append({key: value for key, value in record.items() if key != "climb_calls"})
-                stored = _jsonable(record)
-                stored["rng_state"] = _rng_state(rng)
-                if saved_point is not None:
-                    stored["saddle_x"] = saved_point.tolist()
-                _append_partial(partial_path, stored)
-                if searches == 1 or searches % 25 == 0 or connected >= goal:
-                    print(
-                        f"{template['id']} rep {rep} searches {searches} connected {connected} "
-                        f"calls {record['force_calls']} failure {record['failure']}",
-                        flush=True,
-                    )
-                if searches % 100 == 0:
-                    provisional = comments + [
-                        _catalog_comment(
-                            rep, minimize_calls, all_records, found, searches, connected, 20261015 + rep
-                        )
-                    ]
-                    _write_catalog(
-                        output,
-                        template,
+                batch = []
+                number = searches
+                for _ in range(min(width, max_searches - searches)):
+                    number += 1
+                    spec = _catalog_displacement(
+                        rng,
+                        listed,
+                        free,
+                        minimum,
+                        positions,
+                        magnitude,
+                        rep,
+                        number,
                         problem,
-                        provisional,
-                        all_records,
-                        search_cap,
-                        repetitions,
-                        failed_reps + (0 if connected >= goal else 1),
-                        goal,
-                        False,
+                        template,
+                        cap,
+                        force_tol,
+                        fixed,
+                        cell,
                     )
+                    batch.append((number, spec, _rng_state(rng)))
+                if width == 1:
+                    assert session is not None
+                    if session.proc.poll() is not None:
+                        session = JuliaSession.start()
+                    climbed_rows = []
+                    for _number, spec, _state in batch:
+                        climbed = execute(spec, session)
+                        if climbed.get("failure") == "crash" and session.proc.poll() is not None:
+                            session = JuliaSession.start()
+                            climbed = execute(spec, session)
+                        climbed_rows.append(climbed)
+                else:
+                    assert pool is not None
+                    specs = [spec for _number, spec, _state in batch]
+                    try:
+                        climbed_rows = _climb_batch(pool, specs)
+                    except BrokenProcessPool:
+                        pool.shutdown(wait=False, cancel_futures=True)
+                        pool = _open_pool(width)
+                        climbed_rows = _climb_batch(pool, specs)
+                for (number, spec, rng_state), climbed in zip(batch, climbed_rows):
+                    if connected >= goal:
+                        searches = number - 1
+                        break
+                    record, saved_point, delta = _judge_climb(
+                        climbed,
+                        spec,
+                        outer,
+                        minimum,
+                        min_energy,
+                        found,
+                        connect_rmsd,
+                        barrier_max,
+                        force_tol,
+                        cap,
+                        search_cap,
+                        template["id"],
+                    )
+                    connected += delta
+                    searches = number
+                    all_records.append({key: value for key, value in record.items() if key != "climb_calls"})
+                    stored = _jsonable(record)
+                    stored["rng_state"] = rng_state
+                    if saved_point is not None:
+                        stored["saddle_x"] = saved_point.tolist()
+                    _append_partial(partial_path, stored)
+                    if searches == 1 or searches % 25 == 0 or connected >= goal:
+                        print(
+                            f"{template['id']} rep {rep} searches {searches} connected {connected} "
+                            f"calls {record['force_calls']} failure {record['failure']}",
+                            flush=True,
+                        )
+                    if searches % 100 == 0:
+                        provisional = comments + [
+                            _catalog_comment(
+                                rep, minimize_calls, all_records, found, searches, connected, 20261015 + rep
+                            )
+                        ]
+                        _write_catalog(
+                            output,
+                            template,
+                            problem,
+                            provisional,
+                            all_records,
+                            search_cap,
+                            repetitions,
+                            failed_reps + (0 if connected >= goal else 1),
+                            goal,
+                            False,
+                        )
             if connected < goal:
                 failed_reps += 1
             comments.append(
@@ -1028,7 +1171,10 @@ def _run_saddle_catalog(root, problem, template, output: Path, cap: int, force_t
                 partial_path.unlink(missing_ok=True)
                 header_path.unlink(missing_ok=True)
     finally:
-        session.close()
+        if session is not None:
+            session.close()
+        if pool is not None:
+            pool.shutdown(wait=True, cancel_futures=True)
     # A repetition that reached the goal or the search budget is complete.
     complete = bool(comments) and all(
         f" connected {goal} " in f" {line} "
@@ -1070,7 +1216,7 @@ def run_template(root: Path, problem: dict, template: dict, *, output: Path, wor
     optimizer = _section(template, "Optimizer")
     force_tol = float(optimizer.get("converged_force", convergence.get("force_norm", 1e-3)))
     if problem["id"] == "saddle-search/pt-island":
-        return _run_saddle_catalog(root, problem, template, output, cap, force_tol)
+        return _run_saddle_catalog(root, problem, template, output, cap, force_tol, workers)
     scratch = work or output.parent / "work" / template["id"].replace("/", "-")
     scratch.mkdir(parents=True, exist_ok=True)
     rows = _geometries(root, problem, scratch)
