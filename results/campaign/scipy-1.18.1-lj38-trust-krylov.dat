@@ -1,0 +1,30 @@
+# counter harness. fun and jac are one potential evaluation when the coordinates match.
+# Hessian-vector products are analytic and are not force calls.
+# v2 success is under the cap, at the force stop, and Hessian index 0.
+# energy and Kabsch RMSD were not applied: the problem file has no energy_tol, rmsd_tol, or per-start reference.
+# A trial past the per-atom cap is refused before the potential runs.
+# LJ38 index removes the six rigid modes. A curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6).
+# Default row. fun and jac are the harness kernel. A repeated coordinate returns the cached energy and forces and does not add a call. Hessian-vector products are the analytic Hessian of this potential and are not force calls. The per-atom cap is 0.2, the same length as the eOn max move. A trial past that cap is refused before the potential runs. The trust-region gtol is the Euclidean problem force norm. The trust radius cannot exceed 0.2 times sqrt(atoms). The iteration ceiling sits above the force-call cap. The harness counter is the budget.
+force_calls 63
+force_calls_min 34
+force_calls_max 136
+nfailed 0
+median 60
+code SciPy
+code_version 1.18.1
+commit e4e854eaa8f18d807cd3496028e257e36caa93cc
+algorithm trust-krylov
+template scipy/lj38-trust-krylov
+tuning default
+counter harness
+par2_mean 102.522
+wilson_low 0.992737192137
+wilson_high 0.999451356412
+par2_median 60
+par2_median_low 59
+par2_median_high 61
+v2_nfailed 2
+v2_successes 998
+n 1000
+energy_min -172.193176585
+energy_max -145.89577196

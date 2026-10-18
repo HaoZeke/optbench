@@ -31,7 +31,7 @@ from optbench.noise import (
     stop_threshold,
     window_energy_tolerance,
 )
-from optbench.noise_catalog import HESSIAN_METHODS, allows_method
+from optbench.noise_catalog import HESSIAN_METHODS, allows_method, allows_scipy
 from optbench.potentials import lennard_jones, lennard_jones_hessian
 from optbench.potserver import RgpotCounter
 from optbench.score import score_v2, summarize_capped
@@ -140,6 +140,11 @@ def _minimize_job(job: dict) -> dict:
             f"{method} needs the exact Hessian of the clean force, "
             "and the noisy force is not that gradient"
         )
+    if family == "scipy" and not allows_scipy(method, sigma):
+        raise ValueError(
+            f"{method} needs the analytic Hessian of the clean force, "
+            "and the noisy force is not that gradient"
+        )
     try:
         x0 = [float(value) for value in job["coords"]]
         components = len(x0)
@@ -154,6 +159,10 @@ def _minimize_job(job: dict) -> dict:
             point, stopped = _drive_ase(job, x0, observed, potential, cap, clean_tol, energy_tol, components)
         elif family == "sella":
             point, stopped = _drive_sella(job, x0, observed, potential, cap, clean_tol, energy_tol, components)
+        elif family == "scipy":
+            point, stopped, hessian_calls = _drive_scipy(
+                job, x0, observed, cap, sigma, clean_tol, energy_tol, components
+            )
         else:
             raise ValueError(f"unknown solver family {family}")
     except ForceCallCap as exc:
@@ -342,6 +351,47 @@ def _drive_ase(job, x0, observed, potential, cap, clean_tol, energy_tol, compone
     return point, stopped
 
 
+def _drive_scipy(job, x0, observed, cap, sigma, clean_tol, energy_tol, components):
+    import numpy as np
+
+    from optbench.runners.scipy_min import HESSIAN_METHODS, search
+
+    method = str(job["method"])
+    raw_step = job["options"].get("maxstep")
+    if raw_step is None:
+        raise ValueError(f"{method} on lj38-noise needs solver.maxstep, the per-atom displacement cap")
+    maxstep = float(raw_step)
+
+    def evaluate(coords):
+        energy, gradient = observed(coords)
+        return float(energy), np.asarray(gradient, dtype=np.float64)
+
+    def hessian(coords):
+        return lennard_jones_hessian(coords)
+
+    def stop(_energy, _gradient):
+        return observed.met(clean_tol, energy_tol, components)
+
+    info = search(
+        x0,
+        method,
+        evaluate,
+        hessian=hessian if method in HESSIAN_METHODS else None,
+        force_tol=float(clean_tol),
+        cap=int(cap),
+        maxstep=maxstep,
+        stop=stop,
+        noise=float(sigma) != 0.0,
+    )
+    if info.get("error") and "force-call cap" not in str(info["error"]):
+        raise RuntimeError(str(info["error"]))
+    if info.get("cap_hit") and not info.get("error"):
+        raise ForceCallCap("force-call cap")
+    if info.get("error") and "force-call cap" in str(info["error"]):
+        raise ForceCallCap(str(info["error"]))
+    return info["point"], bool(info["stopped"]), int(info["hessian_calls"])
+
+
 def _drive_sella(job, x0, observed, potential, cap, clean_tol, energy_tol, components):
     from sella import Sella
 
@@ -357,7 +407,7 @@ def _drive_sella(job, x0, observed, potential, cap, clean_tol, energy_tol, compo
     return point, stopped
 
 
-def _dat(summary: dict, template: dict, metrics: dict, sigma: float) -> str:
+def _dat(summary: dict, template: dict, metrics: dict, sigma: float, partial: bool = False) -> str:
     rows = {
         "force_calls": summary.get("force_calls"),
         "force_calls_min": summary.get("force_calls_min"),
@@ -385,6 +435,7 @@ def _dat(summary: dict, template: dict, metrics: dict, sigma: float) -> str:
         "cap": summary.get("cap"),
         "energy_min": summary.get("energy_min"),
         "energy_max": summary.get("energy_max"),
+        "partial": True if partial else None,
     }
     lines = [
         "# counter harness. One force call is one clean energy and gradient.",
@@ -413,6 +464,7 @@ def run_template(
     workers: int,
     work: Path | None,
     limit: int = 0,
+    resume: bool = False,
 ) -> dict:
     _quiet_threads()
     if template.get("engine") != "noise":
@@ -432,12 +484,23 @@ def run_template(
             f"{template['id']} asks for {solver.get('method')} at sigma {sigma}. "
             "That method needs the exact Hessian of the clean force."
         )
+    if family == "scipy" and not allows_scipy(str(solver.get("method")), sigma):
+        raise ValueError(
+            f"{template['id']} asks for {solver.get('method')} at sigma {sigma}. "
+            "That method needs the analytic Hessian of the clean force."
+        )
     if family == "rgmin":
         import rgmin
 
         version = str(rgmin.__version__)
         if template.get("code_version") and version != str(template["code_version"]):
             raise RuntimeError(f"rgmin {version} does not match template {template['code_version']}")
+    if family == "scipy":
+        import scipy
+
+        version = str(scipy.__version__)
+        if template.get("code_version") and version != str(template["code_version"]):
+            raise RuntimeError(f"scipy {version} does not match template {template['code_version']}")
     convergence = problem.get("convergence") or {}
     clean_tol = float(convergence["force_norm"])
     if "energy_tol" not in convergence:
@@ -473,23 +536,55 @@ def run_template(
                 "cap": cap,
             }
         )
-    if workers <= 1:
-        records = [_minimize_job(job) for job in jobs]
-    else:
-        import multiprocessing as mp
+    from optbench.runners.scipy_min import _load_previous, _write_checkpoint
 
-        context = mp.get_context("spawn")
-        with ProcessPoolExecutor(max_workers=workers, mp_context=context) as pool:
-            futures = [pool.submit(_minimize_job, job) for job in jobs]
-            records = []
-            total = len(futures)
-            for done, future in enumerate(as_completed(futures), 1):
-                records.append(future.result())
-                if done == total or done % 50 == 0:
+    starts_path = output.with_suffix(".starts.jsonl")
+    previous = _load_previous(starts_path) if resume else {}
+    records_by_start = dict(previous)
+    pending = [job for job in jobs if job["start"] not in records_by_start]
+
+    def checkpoint() -> None:
+        ordered = [records_by_start[job["start"]] for job in jobs if job["start"] in records_by_start]
+        _write_checkpoint(starts_path, ordered)
+
+    if pending:
+        total = len(pending)
+        done = 0
+        if workers <= 1:
+            for job in pending:
+                record = _minimize_job(job)
+                records_by_start[str(record["start"])] = record
+                done += 1
+                if done == total or done % 25 == 0:
+                    checkpoint()
                     print(f"{template['id']} {done}/{total}", flush=True)
+        else:
+            import multiprocessing as mp
+
+            context = mp.get_context("spawn")
+            with ProcessPoolExecutor(max_workers=workers, mp_context=context) as pool:
+                futures = [pool.submit(_minimize_job, job) for job in pending]
+                for future in as_completed(futures):
+                    record = future.result()
+                    records_by_start[str(record["start"])] = record
+                    done += 1
+                    if done == total or done % 25 == 0:
+                        checkpoint()
+                        print(f"{template['id']} {done}/{total}", flush=True)
+        checkpoint()
+    records = []
+    for job in jobs:
+        row = records_by_start.get(job["start"])
+        if row is None:
+            continue
+        row = dict(row)
+        row["index"] = job["index"]
+        records.append(row)
     records.sort(key=lambda row: row["index"])
     for record in records:
         record.pop("index", None)
+    expected = (problem.get("sample") or {}).get("starts")
+    partial = expected is not None and len(records) < int(expected)
     legacy_counts = [cap if not record["converged"] else int(record["force_calls"]) for record in records]
     summary = summarize_capped(legacy_counts, cap)
     successes = [int(record["force_calls"]) for record in records if record["converged"]]
@@ -550,7 +645,7 @@ def run_template(
         ],
     }
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(_dat(summary, template, metrics, sigma), encoding="utf-8")
+    output.write_text(_dat(summary, template, metrics, sigma, partial), encoding="utf-8")
     write_starts(output.with_suffix(".starts.jsonl"), records)
     output.with_suffix(".v2.json").write_text(json.dumps(document, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     summary["starts"] = len(records)
@@ -558,5 +653,6 @@ def run_template(
     summary["problem"] = problem["id"]
     summary["par2_mean"] = metrics["par2_mean"]
     summary["v2_nfailed"] = metrics["nfailed"]
+    summary["partial"] = partial
     summary["seconds"] = sum(float(record.get("seconds") or 0.0) for record in records)
     return summary

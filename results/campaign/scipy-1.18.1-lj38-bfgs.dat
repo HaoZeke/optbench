@@ -1,0 +1,30 @@
+# counter harness. fun and jac are one potential evaluation when the coordinates match.
+# Hessian-vector products are analytic and are not force calls.
+# v2 success is under the cap, at the force stop, and Hessian index 0.
+# energy and Kabsch RMSD were not applied: the problem file has no energy_tol, rmsd_tol, or per-start reference.
+# A trial past the per-atom cap is mapped back inside that ball before the potential runs.
+# LJ38 index removes the six rigid modes. A curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6).
+# Default row. fun and jac are the harness kernel. A repeated coordinate returns the cached energy and forces and does not add a call. The per-atom cap is 0.2, the same length as the eOn max move. A larger trial is mapped back inside that ball before the potential runs. The map is the identity through 0.18 and smooth beyond it. The SciPy infinity-norm gtol is the problem force norm divided by sqrt(n), so a library stop is inside the Euclidean stop. The callback stops when the Euclidean norm meets the problem value. The iteration ceiling sits above the force-call cap. The harness counter is the budget.
+force_calls 389
+force_calls_min 191
+force_calls_max 927
+nfailed 1
+median 373
+code SciPy
+code_version 1.18.1
+commit e4e854eaa8f18d807cd3496028e257e36caa93cc
+algorithm BFGS
+template scipy/lj38-bfgs
+tuning default
+counter harness
+par2_mean 487.471
+wilson_low 0.988349044627
+wilson_high 0.997862464473
+par2_median 373.5
+par2_median_low 367
+par2_median_high 380
+v2_nfailed 5
+v2_successes 995
+n 1000
+energy_min -170.922759289
+energy_max -89.5533823002

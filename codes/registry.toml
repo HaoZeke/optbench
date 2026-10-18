@@ -75,6 +75,16 @@ committed = "2026-10-15"
 note = "Sella 2.6.0. Order 1 is a saddle and order 0 is a minimum. The Sella 0.1.1 rows on the 2014 tables are legacy and are not this pin. Force calls are harness calculator evaluations."
 
 [[code]]
+id = "scipy"
+name = "SciPy"
+role = "minimization"
+repository = "https://github.com/scipy/scipy"
+ref = "v1.18.1"
+commit = "e4e854eaa8f18d807cd3496028e257e36caa93cc"
+committed = "2026-08-21"
+note = "SciPy 1.18.1 built from tag v1.18.1. L-BFGS-B, BFGS, and CG take the harness energy and Jacobian. trust-krylov, trust-ncg, and Newton-CG also take analytic Hessian-vector products, which are not force calls. Lennard-Jones 38 maps a trial that would move an atom by more than 0.2 back inside that ball before the potential runs."
+
+[[code]]
 id = "artn"
 name = "pARTn"
 role = "saddle search"
