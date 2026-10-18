@@ -2,9 +2,14 @@
 # A repeated coordinate is cached, so the gradient of that geometry is the same call.
 # The cap refuses the next search call and does not count it.
 # Success is a finite harness energy at or below -173.927426312 with calls under the cap.
-# scored 1 of 100 starts
+# scored 15 of 100 starts
 # SciPy 1.18.1 basinhopping at the constructor defaults, with niter set to the force-call cap. The local minimizer is BFGS with the analytic gradient of optbench.potentials.lennard_jones. Temperature is 1, stepsize is 0.5, interval is 50, target_accept_rate is 0.5, and stepwise_factor is 0.9. The seed is 314159 plus the start index. Starts are centered. The force-call cap is 2000000, the same budget as the eOn LJ38 basin-hopping rows.
-nfailed 1
+force_calls 479525
+force_calls_min 45429
+force_calls_max 1259560
+force_calls_median 245315
+nfailed 7
+median 245315
 code SciPy
 code_version 1.18.1
 commit e4e854eaa8f18d807cd3496028e257e36caa93cc
@@ -14,16 +19,16 @@ problem globalopt/lj38
 tuning default
 counter harness
 cap 2000000
-par2_mean 4000000
-wilson_low 0
-wilson_high 0.793450685623
-par2_median 4000000
-par2_median_low 4000000
+par2_mean 2122413.46667
+wilson_low 0.301169800255
+wilson_high 0.751904646343
+par2_median 1259560
+par2_median_low 261969
 par2_median_high 4000000
-v2_nfailed 1
-v2_successes 0
-n 1
-energy_min -173.252378416
-energy_max -173.252378416
+v2_nfailed 7
+v2_successes 8
+n 15
+energy_min -173.928049953
+energy_max -161.825362662
 partial true
-partial_reason scored 1 of 100 starts
+partial_reason scored 15 of 100 starts
