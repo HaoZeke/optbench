@@ -1109,7 +1109,7 @@ def _run_saddle_catalog(
                         f"calls {record['force_calls']} failure {record['failure']}",
                         flush=True,
                     )
-                if searches % 100 == 0:
+                if searches % 500 == 0:
                     provisional = comments + [
                         _catalog_comment(
                             rep, minimize_calls, all_records, found, searches, connected, 20261015 + rep
