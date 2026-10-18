@@ -426,6 +426,65 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">49</td>
    </tr>
    </tbody></table></div>
+   <h3>geodesic</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>band initialiser</td>
+   <td>main</td>
+   <td>476aa041f562</td>
+   <td><a href="https://github.com/virtualzx-nad/geodesic-interpolate">https://github.com/virtualzx-nad/geodesic-interpolate</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="double-ended-saddle-search/lj38" data-template="geodesic/ci-neb-lbfgs">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="template">geodesic/ci-neb-lbfgs</td>
+   <td data-field="version">geodesic 1.0.0</td>
+   <td data-field="commit">476aa041f562</td>
+   <td data-field="par2_mean">1208.42</td>
+   <td data-field="mean_calls">768.74</td>
+   <td data-field="median_calls">512</td>
+   <td data-field="failures">crash 0, divergence 3, cap 4, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="geodesic/ci-neb-lbfgs">
+   <td>lj38_2ts_separation</td>
+   <td data-field="template">geodesic/ci-neb-lbfgs</td>
+   <td data-field="version">geodesic 1.0.0</td>
+   <td data-field="commit">476aa041f562</td>
+   <td data-field="par2_mean">16807.4</td>
+   <td data-field="mean_calls">8401.49</td>
+   <td data-field="median_calls">10000</td>
+   <td data-field="failures">crash 0, divergence 0, cap 38, wrong_stationary 4</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="geodesic/ase-de-pt-tuned">
+   <td>pt-island</td>
+   <td data-field="template">geodesic/ase-de-pt-tuned</td>
+   <td data-field="version">geodesic 1.0.0</td>
+   <td data-field="commit">476aa041f562</td>
+   <td data-field="par2_mean">595.983</td>
+   <td data-field="mean_calls">494.288</td>
+   <td data-field="median_calls">347</td>
+   <td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-template="geodesic/ci-neb-lbfgs">
+   <td>Pt-heptamer</td>
+   <td data-field="template">geodesic/ci-neb-lbfgs</td>
+   <td data-field="version">geodesic 1.0.0</td>
+   <td data-field="commit">476aa041f562</td>
+   <td data-field="par2_mean">318.923</td>
+   <td data-field="mean_calls">318.923</td>
+   <td data-field="median_calls">314</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   </tbody></table></div>
    <h3>ASE</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>

@@ -15,13 +15,14 @@ It does not run a campaign.
    <div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th></tr></thead><tbody>
    <tr data-problem="minimization/lj38">
    <th scope="row"><a href="generated/suites/minimization.html#lj38">Lennard-Jones 38 clusters</a></th>
    <td data-code="eOn" data-template="eon/lj38-lbfgs-m100" data-par2="180.137"><span class="bench-score">180.137</span><a href="generated/suites/minimization.html#lj38-templates">eon/lj38-lbfgs-m100</a></td>
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin" data-template="rgmin/lj38-dogleg" data-par2="81.881"><span class="bench-score">81.881</span><a href="generated/suites/minimization.html#lj38-templates">rgmin/lj38-dogleg</a></td>
    <td data-code="rgsaddle">—</td>
+   <td data-code="geodesic">—</td>
    <td data-code="ASE" data-template="ase/lj38-lbfgs-tuned" data-par2="395.645"><span class="bench-score">395.645</span><a href="generated/suites/minimization.html#lj38-templates">ase/lj38-lbfgs-tuned</a></td>
    <td data-code="Sella" data-template="sella/lj38-min-tuned" data-par2="253.921"><span class="bench-score">253.921</span><a href="generated/suites/minimization.html#lj38-templates">sella/lj38-min-tuned</a></td>
    </tr>
@@ -31,6 +32,7 @@ It does not run a campaign.
    <td data-code="Eon svn" data-template="eon-svn/lj38-noise-0" data-par2="300.052"><span class="bench-score">300.052</span><a href="generated/suites/minimization.html#lj38-noise-templates">eon-svn/lj38-noise-0</a></td>
    <td data-code="rgmin" data-template="noise/rgmin-dogleg-s0" data-par2="81.881"><span class="bench-score">81.881</span><a href="generated/suites/minimization.html#lj38-noise-templates">noise/rgmin-dogleg-s0</a></td>
    <td data-code="rgsaddle">—</td>
+   <td data-code="geodesic">—</td>
    <td data-code="ASE" data-template="noise/ase-lbfgs-s0" data-par2="396.55"><span class="bench-score">396.55</span><a href="generated/suites/minimization.html#lj38-noise-templates">noise/ase-lbfgs-s0</a></td>
    <td data-code="Sella" data-template="noise/sella-min-s0" data-par2="729.433"><span class="bench-score">729.433</span><a href="generated/suites/minimization.html#lj38-noise-templates">noise/sella-min-s0</a></td>
    </tr>
@@ -40,6 +42,7 @@ It does not run a campaign.
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin" data-template="rgmin/morse-newton" data-par2="8.35"><span class="bench-score">8.35</span><a href="generated/suites/minimization.html#morse-bulk-templates">rgmin/morse-newton</a></td>
    <td data-code="rgsaddle">—</td>
+   <td data-code="geodesic">—</td>
    <td data-code="ASE" data-template="ase/morse-bfgslinesearch-default" data-par2="28.91"><span class="bench-score">28.91</span><a href="generated/suites/minimization.html#morse-bulk-templates">ase/morse-bfgslinesearch-default</a></td>
    <td data-code="Sella" data-template="sella/morse-min-default" data-par2="28.89"><span class="bench-score">28.89</span><a href="generated/suites/minimization.html#morse-bulk-templates">sella/morse-min-default</a></td>
    </tr>
@@ -49,6 +52,7 @@ It does not run a campaign.
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/saddle-dimer-rotskip-tuned" data-par2="10127.1"><span class="bench-score">10127.1</span><a href="generated/suites/saddle-search.html#pt-island-templates">rgsaddle/saddle-dimer-rotskip-tuned</a></td>
+   <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella" data-template="sella/pt-island-search-default" data-par2="5201.62"><span class="bench-score">5201.62</span><a href="generated/suites/saddle-search.html#pt-island-templates">sella/pt-island-search-default</a></td>
    </tr>
@@ -58,6 +62,7 @@ It does not run a campaign.
    <td data-code="Eon svn" data-template="eon-svn/de-lj38-lanczos-improved" data-par2="235.2"><span class="bench-score">235.2</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">eon-svn/de-lj38-lanczos-improved</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="853.56"><span class="bench-score">853.56</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
+   <td data-code="geodesic" data-template="geodesic/ci-neb-lbfgs" data-par2="1208.42"><span class="bench-score">1208.42</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">geodesic/ci-neb-lbfgs</a></td>
    <td data-code="ASE" data-template="ase/de-lj38-tuned" data-par2="3463.64"><span class="bench-score">3463.64</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">ase/de-lj38-tuned</a></td>
    <td data-code="Sella" data-template="sella/de-lj38-tuned" data-par2="1753.96"><span class="bench-score">1753.96</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">sella/de-lj38-tuned</a></td>
    </tr>
@@ -67,6 +72,7 @@ It does not run a campaign.
    <td data-code="Eon svn" data-template="eon-svn/de-2ts-lanczos-improved" data-par2="502.784"><span class="bench-score">502.784</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">eon-svn/de-2ts-lanczos-improved</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="8024.43"><span class="bench-score">8024.43</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
+   <td data-code="geodesic" data-template="geodesic/ci-neb-lbfgs" data-par2="16807.4"><span class="bench-score">16807.4</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">geodesic/ci-neb-lbfgs</a></td>
    <td data-code="ASE" data-template="ase/de-lj38-2ts-default" data-par2="20000"><span class="bench-score">20000</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">ase/de-lj38-2ts-default</a></td>
    <td data-code="Sella" data-template="sella/de-lj38-2ts-tuned" data-par2="30105.9"><span class="bench-score">30105.9</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">sella/de-lj38-2ts-tuned</a></td>
    </tr>
@@ -76,6 +82,7 @@ It does not run a campaign.
    <td data-code="Eon svn" data-template="eon-svn/de-pt-lanczos-improved" data-par2="180.644"><span class="bench-score">180.644</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">eon-svn/de-pt-lanczos-improved</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="422.136"><span class="bench-score">422.136</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
+   <td data-code="geodesic" data-template="geodesic/ase-de-pt-tuned" data-par2="595.983"><span class="bench-score">595.983</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">geodesic/ase-de-pt-tuned</a></td>
    <td data-code="ASE" data-template="ase/de-pt-island-tuned" data-par2="847.678"><span class="bench-score">847.678</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">ase/de-pt-island-tuned</a></td>
    <td data-code="Sella" data-template="sella/de-pt-island-tuned" data-par2="615.153"><span class="bench-score">615.153</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">sella/de-pt-island-tuned</a></td>
    </tr>
@@ -85,6 +92,7 @@ It does not run a campaign.
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
+   <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    </tr>
@@ -94,6 +102,7 @@ It does not run a campaign.
    <td data-code="Eon svn" data-template="eon-svn/low-lj38-lanczos-ljcut" data-par2="26.385"><span class="bench-score">26.385</span><a href="generated/suites/lowest-eigenvector.html#lj38-templates">eon-svn/low-lj38-lanczos-ljcut</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/mode-lanczos" data-par2="26.12"><span class="bench-score">26.12</span><a href="generated/suites/lowest-eigenvector.html#lj38-templates">rgsaddle/mode-lanczos</a></td>
+   <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    </tr>
@@ -103,6 +112,7 @@ It does not run a campaign.
    <td data-code="Eon svn" data-template="eon-svn/ts-lj38-lanczos-improved" data-par2="270.85"><span class="bench-score">270.85</span><a href="generated/suites/tsopt.html#LJ38-templates">eon-svn/ts-lj38-lanczos-improved</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/prfo-tuned" data-par2="192.6"><span class="bench-score">192.6</span><a href="generated/suites/tsopt.html#LJ38-templates">rgsaddle/prfo-tuned</a></td>
+   <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella" data-template="sella/lj38-ts-default" data-par2="68.74"><span class="bench-score">68.74</span><a href="generated/suites/tsopt.html#LJ38-templates">sella/lj38-ts-default</a></td>
    </tr>
@@ -112,6 +122,7 @@ It does not run a campaign.
    <td data-code="Eon svn" data-template="eon-svn/ts-pt-lanczos-improved" data-par2="106.388"><span class="bench-score">106.388</span><a href="generated/suites/tsopt.html#pt-island-templates">eon-svn/ts-pt-lanczos-improved</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/pt-dimer-rotskip" data-par2="223.898"><span class="bench-score">223.898</span><a href="generated/suites/tsopt.html#pt-island-templates">rgsaddle/pt-dimer-rotskip</a></td>
+   <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella" data-template="sella/pt-island-ts-default" data-par2="74.2857"><span class="bench-score">74.2857</span><a href="generated/suites/tsopt.html#pt-island-templates">sella/pt-island-ts-default</a></td>
    </tr>
@@ -121,6 +132,7 @@ It does not run a campaign.
    <td data-code="Eon svn" data-template="eon-svn/neb-pt-ci" data-par2="336.769"><span class="bench-score">336.769</span><a href="generated/suites/neb.html#Pt-heptamer-templates">eon-svn/neb-pt-ci</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/idpp-ci-neb-lbfgs" data-par2="318.308"><span class="bench-score">318.308</span><a href="generated/suites/neb.html#Pt-heptamer-templates">rgsaddle/idpp-ci-neb-lbfgs</a></td>
+   <td data-code="geodesic" data-template="geodesic/ci-neb-lbfgs" data-par2="318.923"><span class="bench-score">318.923</span><a href="generated/suites/neb.html#Pt-heptamer-templates">geodesic/ci-neb-lbfgs</a></td>
    <td data-code="ASE" data-template="ase/neb-pt-heptamer-tuned" data-par2="442.615"><span class="bench-score">442.615</span><a href="generated/suites/neb.html#Pt-heptamer-templates">ase/neb-pt-heptamer-tuned</a></td>
    <td data-code="Sella">—</td>
    </tr>
@@ -130,6 +142,7 @@ It does not run a campaign.
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
+   <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    </tr>
@@ -139,6 +152,7 @@ It does not run a campaign.
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
+   <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    </tr>
@@ -148,6 +162,7 @@ It does not run a campaign.
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
+   <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    </tr>
