@@ -1,0 +1,105 @@
+! OptBench socket potential for OPTIM.
+!
+! OPTBENCH_POTSERVER selects this potential. One call is one calculate.
+! Status 2 is the force-call cap. The Cartesian gradient is dE/dx, the
+! same convention as OPTIM's VNEW.
+
+MODULE HARNESS_POT
+      USE ISO_C_BINDING, ONLY: C_INT, C_DOUBLE
+      USE MODHESS, ONLY: HESS
+      IMPLICIT NONE
+      LOGICAL, SAVE :: CHECKED = .FALSE.
+      LOGICAL, SAVE :: ACTIVE = .FALSE.
+
+      INTERFACE
+         FUNCTION HARNESS_EVAL(NATOMS, COORDS, ENERGY, GRAD) BIND(C, NAME="harness_eval")
+            USE ISO_C_BINDING, ONLY: C_INT, C_DOUBLE
+            INTEGER(C_INT), VALUE :: NATOMS
+            REAL(C_DOUBLE), INTENT(IN) :: COORDS(*)
+            REAL(C_DOUBLE), INTENT(OUT) :: ENERGY
+            REAL(C_DOUBLE), INTENT(OUT) :: GRAD(*)
+            INTEGER(C_INT) :: HARNESS_EVAL
+         END FUNCTION HARNESS_EVAL
+      END INTERFACE
+
+CONTAINS
+
+      LOGICAL FUNCTION HARNESS_ACTIVE()
+         CHARACTER(LEN=256) :: VALUE
+         INTEGER :: LENGTH, STATUS
+         IF (.NOT. CHECKED) THEN
+            CALL GET_ENVIRONMENT_VARIABLE('OPTBENCH_POTSERVER', VALUE, LENGTH, STATUS)
+            ACTIVE = STATUS .EQ. 0 .AND. LENGTH .GT. 0
+            CHECKED = .TRUE.
+         ENDIF
+         HARNESS_ACTIVE = ACTIVE
+      END FUNCTION HARNESS_ACTIVE
+
+      SUBROUTINE HARNESS_STOP(FILENAME)
+         CHARACTER(LEN=*), INTENT(IN) :: FILENAME
+         INTEGER :: UNIT
+         OPEN(NEWUNIT=UNIT, FILE=FILENAME, STATUS='REPLACE')
+         WRITE(UNIT, '(A)') TRIM(FILENAME)
+         CLOSE(UNIT)
+         STOP
+      END SUBROUTINE HARNESS_STOP
+
+      SUBROUTINE HARNESS_POTENTIAL(NATOMS, COORDS, ENERGY, VNEW, GTEST, SSTEST)
+         INTEGER, INTENT(IN) :: NATOMS
+         DOUBLE PRECISION, INTENT(INOUT) :: COORDS(3*NATOMS)
+         DOUBLE PRECISION, INTENT(OUT) :: ENERGY
+         DOUBLE PRECISION, INTENT(OUT) :: VNEW(3*NATOMS)
+         LOGICAL, INTENT(IN) :: GTEST, SSTEST
+         INTEGER :: STATUS, J1, J2
+         DOUBLE PRECISION :: DELTA, SAVED
+         DOUBLE PRECISION, ALLOCATABLE :: PLUS(:), MINUS(:)
+
+         STATUS = HARNESS_EVAL(NATOMS, COORDS, ENERGY, VNEW)
+         IF (STATUS .EQ. 2) CALL HARNESS_STOP('optbench.cap')
+         IF (STATUS .NE. 0) CALL HARNESS_STOP('optbench.crash')
+         IF (.NOT. GTEST) VNEW(1:3*NATOMS) = 0.0D0
+         IF (.NOT. SSTEST) RETURN
+         IF (.NOT. ALLOCATED(HESS)) ALLOCATE(HESS(3*NATOMS, 3*NATOMS))
+         ALLOCATE(PLUS(3*NATOMS), MINUS(3*NATOMS))
+         DELTA = 1.0D-5
+         DO J1 = 1, 3*NATOMS
+            SAVED = COORDS(J1)
+            COORDS(J1) = SAVED + DELTA
+            STATUS = HARNESS_EVAL(NATOMS, COORDS, ENERGY, PLUS)
+            IF (STATUS .EQ. 2) CALL HARNESS_STOP('optbench.cap')
+            IF (STATUS .NE. 0) CALL HARNESS_STOP('optbench.crash')
+            COORDS(J1) = SAVED - DELTA
+            STATUS = HARNESS_EVAL(NATOMS, COORDS, ENERGY, MINUS)
+            IF (STATUS .EQ. 2) CALL HARNESS_STOP('optbench.cap')
+            IF (STATUS .NE. 0) CALL HARNESS_STOP('optbench.crash')
+            COORDS(J1) = SAVED
+            DO J2 = 1, 3*NATOMS
+               HESS(J2, J1) = (PLUS(J2) - MINUS(J2)) / (2.0D0 * DELTA)
+            ENDDO
+         ENDDO
+         DO J1 = 1, 3*NATOMS
+            DO J2 = 1, J1 - 1
+               DELTA = 0.5D0 * (HESS(J1, J2) + HESS(J2, J1))
+               HESS(J1, J2) = DELTA
+               HESS(J2, J1) = DELTA
+            ENDDO
+         ENDDO
+         STATUS = HARNESS_EVAL(NATOMS, COORDS, ENERGY, VNEW)
+         IF (STATUS .EQ. 2) CALL HARNESS_STOP('optbench.cap')
+         IF (STATUS .NE. 0) CALL HARNESS_STOP('optbench.crash')
+         IF (.NOT. GTEST) VNEW(1:3*NATOMS) = 0.0D0
+      END SUBROUTINE HARNESS_POTENTIAL
+
+      SUBROUTINE HARNESS_DUMP_TS(NOPT, COORDS)
+         INTEGER, INTENT(IN) :: NOPT
+         DOUBLE PRECISION, INTENT(IN) :: COORDS(NOPT)
+         INTEGER :: UNIT, J1
+         IF (.NOT. HARNESS_ACTIVE()) RETURN
+         IF (NOPT .LT. 1) RETURN
+         OPEN(NEWUNIT=UNIT, FILE='optbench.ts', STATUS='UNKNOWN', POSITION='APPEND')
+         WRITE(UNIT, '(I8)') NOPT
+         WRITE(UNIT, '(3ES24.16)') (COORDS(J1), J1=1, NOPT)
+         CLOSE(UNIT)
+      END SUBROUTINE HARNESS_DUMP_TS
+
+END MODULE HARNESS_POT

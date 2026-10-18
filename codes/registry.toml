@@ -94,6 +94,48 @@ commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
 committed = "2026-10-05"
 note = "Activation-relaxation technique nouveau, plugin branch DEVEL. The benchmark contributor of a new entry is Rohit Goswami."
 
+[[code]]
+id = "optim"
+name = "OPTIM"
+role = "saddle search"
+repository = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
+ref = "svn.tar.bz2"
+commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+committed = "2026-10-18"
+note = "Wales OPTIM from the public tarball svn.tar.bz2. The export has no svn revision. The banner is OPTIM version 02aaf452. The pin is the tarball sha256. DNEB/HEF connect calls the harness socket in codes/optim. One POTENTIAL entry is one uncached calculate. The potential is pes.evaluate. The connection quench is LBFGS (BFGSMIN) because that potential has no Hessian. ALIGN is off because the tarball has no FFTW configure. The build uses system BLAS and LAPACK, and OpenMP is off."
+
+[[template]]
+id = "optim/dneb-hef"
+code = "optim"
+problem = "double-ended-saddle-search/lj38"
+profile = "default"
+task = "double-ended-saddle-search"
+ranked = true
+
+[[template]]
+id = "optim/dneb-hef"
+code = "optim"
+problem = "double-ended-saddle-search/lj38_2ts_separation"
+profile = "default"
+task = "double-ended-saddle-search"
+ranked = true
+
+[[template]]
+id = "optim/dneb-hef"
+code = "optim"
+problem = "double-ended-saddle-search/pt-island"
+profile = "default"
+task = "double-ended-saddle-search"
+ranked = true
+
+[[template]]
+id = "optim/dneb-hef"
+code = "optim"
+problem = "neb/Pt-heptamer"
+profile = "default"
+task = "neb"
+ranked = true
+
 # generated ASE and Sella templates
 
 [[template]]

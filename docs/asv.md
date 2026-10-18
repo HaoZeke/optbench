@@ -13,6 +13,7 @@ asv is the measurement store. A result file is keyed to the commit asv checked o
 | `environments/eon-3.5.0.yml` | conda-forge pin for the eOn 3.5.0 binary |
 | `environments/eon-develop.yml` | Python pin for the eOn develop source build. Not a conda eOn package |
 | `environments/eon-svn.yml` | Python pin for the eOn SVN r2549 source build. Not a conda eOn package |
+| `environments/optim.yml` | Python pin for the OPTIM tarball build. Not a conda OPTIM package |
 | `benchmarks/` | The suite asv-runner imports |
 | `results/asv/<machine>/machine.json` | The machine record asv wrote |
 | `results/asv/<machine>/<commit[:8]>-<env>.json` | Track values for that commit |
@@ -37,6 +38,8 @@ asv is the measurement store. A result file is keyed to the commit asv checked o
 `benchmarks/pending.py` is one skipped parameter for every problem id and every registry code, with `track_force_calls` and `time_search` only. `setup` raises `NotImplementedError`, which asv-runner stores as NaN. Replace that pair with a real class when the code runs. The Lennard-Jones classes in `benchmarks/bench_lj38.py` are separate: they call eonclient when `OPTBENCH_ASV_EON=1`. The default parameter list is one seed and the first geometry. `OPTBENCH_ASV_FULL=1` selects all 1000 starts, and it is read at import, so it has to be set in the process that launches asv.
 
 `benchmarks/bench_eon_develop.py` is the eOn develop entry. Counting is `HarnessCounter` through the `ext_pot` bridge, not the client's own tally. The default parameter list is one seed and the first start. `OPTBENCH_ASV_FULL=1` selects the campaign grid at import. The Pt-island AKMC classes default to one pass. A one-start file is not a published mean.
+
+`benchmarks/bench_optim.py` is the OPTIM DNEB/HEF connect entry. The classes call `OPTIM`. Counting is one uncached socket calculate per `POTENTIAL` entry. The default grid is one seed and the first pair. `OPTBENCH_ASV_FULL=1` selects every pair on the four band problems. A one-start file is not a published mean.
 
 The quadratic sample is the run that `results/validation/statistics.json` scores. A subset of Lennard-Jones 38 is `results/validation/lj38-counter.dat` and it is not a published mean.
 

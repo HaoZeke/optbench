@@ -1,0 +1,17 @@
+# OPTIM DNEB/HEF connect. The problem file supplies the image count, the cap, the force norm, and the step length.
+# The connection quench is LBFGS. The spec potential has no Hessian.
+id = "optim/dneb-hef"
+engine = "optim-connect"
+code = "OPTIM"
+code_version = "02aaf452"
+commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+algorithm = "DNEB/HEF"
+tuning = "default"
+
+[band]
+spring = 1.0
+neb_rms = 0.01
+hef_rms = 1.0e-5
+iteration_density = 30
+connect_cycles = 1
+connect_tries = 1

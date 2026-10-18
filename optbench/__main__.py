@@ -86,6 +86,16 @@ def run(
             output=output,
             workers=workers,
         )
+    elif loaded["engine"] == "optim-connect":
+        from optbench.optim_connect import run as run_optim
+
+        summary = run_optim(
+            root,
+            problem,
+            template,
+            output=output,
+            workers=workers,
+        )
     else:
         client_path = _eon_client(client) if loaded["engine"] in {"eon-client", "eon"} else client
         summary = run_campaign(
