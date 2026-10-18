@@ -256702,5 +256702,589 @@
         "unit": "fraction",
         "version": "54289beee97255c41b6c66e2b89008ae5007043ad1c9d7012fb42f0495113694"
     },
+    "bench_optking.OptkingLj38PRfo.time_search": {
+        "code": "class _OptkingSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        ensure_optking()\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_optking.OptkingLj38PRfo.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 14400,
+        "type": "time",
+        "unit": "seconds",
+        "version": "92bdde392750903af95a09d5c1efaf67411d4c32c6457566c02774ba6ecc9fbb",
+        "warmup_time": 0
+    },
+    "bench_optking.OptkingLj38PRfo.track_failure_cap": {
+        "code": "class _OptkingSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        ensure_optking()\n        self.record = None",
+        "name": "bench_optking.OptkingLj38PRfo.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "7065fcf75f2d1a96669b3173b6a9137d8d9423f388d71b9de0612897e738a714"
+    },
+    "bench_optking.OptkingLj38PRfo.track_failure_crash": {
+        "code": "class _OptkingSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        ensure_optking()\n        self.record = None",
+        "name": "bench_optking.OptkingLj38PRfo.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "6c4ca075023e17f1bbfcc9ad19d28359315cd2fbdcabaa1a3a1f2c79fcd54a7e"
+    },
+    "bench_optking.OptkingLj38PRfo.track_failure_divergence": {
+        "code": "class _OptkingSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        ensure_optking()\n        self.record = None",
+        "name": "bench_optking.OptkingLj38PRfo.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "075100b2d337681b25591eab6e80fb5ac9d8527bd72035029053441d17c1775e"
+    },
+    "bench_optking.OptkingLj38PRfo.track_failure_wrong_stationary": {
+        "code": "class _OptkingSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        ensure_optking()\n        self.record = None",
+        "name": "bench_optking.OptkingLj38PRfo.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "c70a2bcda1c4b92c248ffebfd09847e335e866040f3e662a6c961ead1b2d4da9"
+    },
+    "bench_optking.OptkingLj38PRfo.track_force_calls": {
+        "code": "class _OptkingSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        ensure_optking()\n        self.record = None",
+        "name": "bench_optking.OptkingLj38PRfo.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "force calls",
+        "version": "49e1cacd7133c96a49c66f59fee4965bae2d45faa903f2af35f7e3454a9ddd02"
+    },
+    "bench_optking.OptkingLj38PRfo.track_success": {
+        "code": "class _OptkingSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        ensure_optking()\n        self.record = None",
+        "name": "bench_optking.OptkingLj38PRfo.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "fraction",
+        "version": "7faa42214e292134782336f402a70635ef4ed78ccbaa3a487f93ce1bba10b782"
+    },
+    "bench_optking.OptkingLj38RsIrfo.time_search": {
+        "code": "class _OptkingSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        ensure_optking()\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_optking.OptkingLj38RsIrfo.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 14400,
+        "type": "time",
+        "unit": "seconds",
+        "version": "92bdde392750903af95a09d5c1efaf67411d4c32c6457566c02774ba6ecc9fbb",
+        "warmup_time": 0
+    },
+    "bench_optking.OptkingLj38RsIrfo.track_failure_cap": {
+        "code": "class _OptkingSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        ensure_optking()\n        self.record = None",
+        "name": "bench_optking.OptkingLj38RsIrfo.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "7065fcf75f2d1a96669b3173b6a9137d8d9423f388d71b9de0612897e738a714"
+    },
+    "bench_optking.OptkingLj38RsIrfo.track_failure_crash": {
+        "code": "class _OptkingSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        ensure_optking()\n        self.record = None",
+        "name": "bench_optking.OptkingLj38RsIrfo.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "6c4ca075023e17f1bbfcc9ad19d28359315cd2fbdcabaa1a3a1f2c79fcd54a7e"
+    },
+    "bench_optking.OptkingLj38RsIrfo.track_failure_divergence": {
+        "code": "class _OptkingSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        ensure_optking()\n        self.record = None",
+        "name": "bench_optking.OptkingLj38RsIrfo.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "075100b2d337681b25591eab6e80fb5ac9d8527bd72035029053441d17c1775e"
+    },
+    "bench_optking.OptkingLj38RsIrfo.track_failure_wrong_stationary": {
+        "code": "class _OptkingSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        ensure_optking()\n        self.record = None",
+        "name": "bench_optking.OptkingLj38RsIrfo.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "c70a2bcda1c4b92c248ffebfd09847e335e866040f3e662a6c961ead1b2d4da9"
+    },
+    "bench_optking.OptkingLj38RsIrfo.track_force_calls": {
+        "code": "class _OptkingSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        ensure_optking()\n        self.record = None",
+        "name": "bench_optking.OptkingLj38RsIrfo.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "force calls",
+        "version": "49e1cacd7133c96a49c66f59fee4965bae2d45faa903f2af35f7e3454a9ddd02"
+    },
+    "bench_optking.OptkingLj38RsIrfo.track_success": {
+        "code": "class _OptkingSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        ensure_optking()\n        self.record = None",
+        "name": "bench_optking.OptkingLj38RsIrfo.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'0000'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "fraction",
+        "version": "7faa42214e292134782336f402a70635ef4ed78ccbaa3a487f93ce1bba10b782"
+    },
+    "bench_optking.OptkingPtPRfo.time_search": {
+        "code": "class _OptkingSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        ensure_optking()\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_optking.OptkingPtPRfo.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'initial_0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 14400,
+        "type": "time",
+        "unit": "seconds",
+        "version": "92bdde392750903af95a09d5c1efaf67411d4c32c6457566c02774ba6ecc9fbb",
+        "warmup_time": 0
+    },
+    "bench_optking.OptkingPtPRfo.track_failure_cap": {
+        "code": "class _OptkingSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        ensure_optking()\n        self.record = None",
+        "name": "bench_optking.OptkingPtPRfo.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'initial_0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "7065fcf75f2d1a96669b3173b6a9137d8d9423f388d71b9de0612897e738a714"
+    },
+    "bench_optking.OptkingPtPRfo.track_failure_crash": {
+        "code": "class _OptkingSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        ensure_optking()\n        self.record = None",
+        "name": "bench_optking.OptkingPtPRfo.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'initial_0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "6c4ca075023e17f1bbfcc9ad19d28359315cd2fbdcabaa1a3a1f2c79fcd54a7e"
+    },
+    "bench_optking.OptkingPtPRfo.track_failure_divergence": {
+        "code": "class _OptkingSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        ensure_optking()\n        self.record = None",
+        "name": "bench_optking.OptkingPtPRfo.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'initial_0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "075100b2d337681b25591eab6e80fb5ac9d8527bd72035029053441d17c1775e"
+    },
+    "bench_optking.OptkingPtPRfo.track_failure_wrong_stationary": {
+        "code": "class _OptkingSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        ensure_optking()\n        self.record = None",
+        "name": "bench_optking.OptkingPtPRfo.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'initial_0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "c70a2bcda1c4b92c248ffebfd09847e335e866040f3e662a6c961ead1b2d4da9"
+    },
+    "bench_optking.OptkingPtPRfo.track_force_calls": {
+        "code": "class _OptkingSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        ensure_optking()\n        self.record = None",
+        "name": "bench_optking.OptkingPtPRfo.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'initial_0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "force calls",
+        "version": "49e1cacd7133c96a49c66f59fee4965bae2d45faa903f2af35f7e3454a9ddd02"
+    },
+    "bench_optking.OptkingPtPRfo.track_success": {
+        "code": "class _OptkingSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        ensure_optking()\n        self.record = None",
+        "name": "bench_optking.OptkingPtPRfo.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'initial_0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "fraction",
+        "version": "7faa42214e292134782336f402a70635ef4ed78ccbaa3a487f93ce1bba10b782"
+    },
+    "bench_optking.OptkingPtRsIrfo.time_search": {
+        "code": "class _OptkingSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        ensure_optking()\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_optking.OptkingPtRsIrfo.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'initial_0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 14400,
+        "type": "time",
+        "unit": "seconds",
+        "version": "92bdde392750903af95a09d5c1efaf67411d4c32c6457566c02774ba6ecc9fbb",
+        "warmup_time": 0
+    },
+    "bench_optking.OptkingPtRsIrfo.track_failure_cap": {
+        "code": "class _OptkingSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        ensure_optking()\n        self.record = None",
+        "name": "bench_optking.OptkingPtRsIrfo.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'initial_0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "7065fcf75f2d1a96669b3173b6a9137d8d9423f388d71b9de0612897e738a714"
+    },
+    "bench_optking.OptkingPtRsIrfo.track_failure_crash": {
+        "code": "class _OptkingSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        ensure_optking()\n        self.record = None",
+        "name": "bench_optking.OptkingPtRsIrfo.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'initial_0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "6c4ca075023e17f1bbfcc9ad19d28359315cd2fbdcabaa1a3a1f2c79fcd54a7e"
+    },
+    "bench_optking.OptkingPtRsIrfo.track_failure_divergence": {
+        "code": "class _OptkingSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        ensure_optking()\n        self.record = None",
+        "name": "bench_optking.OptkingPtRsIrfo.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'initial_0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "075100b2d337681b25591eab6e80fb5ac9d8527bd72035029053441d17c1775e"
+    },
+    "bench_optking.OptkingPtRsIrfo.track_failure_wrong_stationary": {
+        "code": "class _OptkingSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        ensure_optking()\n        self.record = None",
+        "name": "bench_optking.OptkingPtRsIrfo.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'initial_0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "count",
+        "version": "c70a2bcda1c4b92c248ffebfd09847e335e866040f3e662a6c961ead1b2d4da9"
+    },
+    "bench_optking.OptkingPtRsIrfo.track_force_calls": {
+        "code": "class _OptkingSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        ensure_optking()\n        self.record = None",
+        "name": "bench_optking.OptkingPtRsIrfo.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'initial_0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "force calls",
+        "version": "49e1cacd7133c96a49c66f59fee4965bae2d45faa903f2af35f7e3454a9ddd02"
+    },
+    "bench_optking.OptkingPtRsIrfo.track_success": {
+        "code": "class _OptkingSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        ensure_optking()\n        self.record = None",
+        "name": "bench_optking.OptkingPtRsIrfo.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'initial_0'"
+            ]
+        ],
+        "timeout": 14400,
+        "type": "track",
+        "unit": "fraction",
+        "version": "7faa42214e292134782336f402a70635ef4ed78ccbaa3a487f93ce1bba10b782"
+    },
     "version": 2
 }

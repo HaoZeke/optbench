@@ -74,6 +74,8 @@
    <li>eon-svn/ts-lj38-lanczos Eon svn campaign, asv n=200, result file sets ranked false; potential ljcluster (shifted, cutoff 15).</li>
    <li>eon/develop-ts-lj38-dimer eOn asv n=1, smoke run; scored 1 of 200 starts.</li>
    <li>eon/develop-ts-lj38-lanczos eOn asv n=1, smoke run; scored 1 of 200 starts.</li>
+   <li>optking/lj38-p-rfo optking asv n=1, smoke run; scored 1 of 200 starts.</li>
+   <li>optking/lj38-rs-irfo optking asv n=1, smoke run; scored 1 of 200 starts.</li>
    <li>sella/lj38-ts-default Sella asv n=1, smoke run; scored 1 of 200 starts.</li>
    <li>sella/lj38-ts-tuned Sella asv n=1, smoke run; scored 1 of 200 starts.</li>
    </ul>
@@ -246,6 +248,8 @@
    <li>eon-svn/ts-pt-lanczos Eon svn campaign, asv n=49, result file sets ranked false; potential Morse::force (shifted, cutoff 9.5, minimum image on the box diagonal).</li>
    <li>eon/develop-ts-pt-dimer eOn asv n=1, smoke run; scored 1 of 49 starts.</li>
    <li>eon/develop-ts-pt-lanczos eOn asv n=1, smoke run; scored 1 of 49 starts.</li>
+   <li>optking/pt-p-rfo optking asv n=1, smoke run; scored 1 of 49 starts.</li>
+   <li>optking/pt-rs-irfo optking asv n=1, smoke run; scored 1 of 49 starts.</li>
    <li>sella/pt-island-ts-default Sella asv n=1, smoke run; scored 1 of 49 starts.</li>
    <li>sella/pt-island-ts-tuned Sella asv n=1, smoke run; scored 1 of 49 starts.</li>
    </ul>
