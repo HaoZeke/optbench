@@ -40,8 +40,8 @@ def test_rgmin_asv_params_are_seed_and_start_index(monkeypatch):
 
 def test_asv_class_filter_is_anchored_and_literal():
     names = [spec["class_name"] for spec in _specs()]
-    assert len(names) == 64
-    assert len(set(names)) == 64
+    assert len(names) == 72
+    assert len(set(names)) == 72
     for name in names:
         pattern = re.compile(asv_benchmark_pattern(name))
         assert pattern.search(f"bench_rgmin.{name}.time_search('0', '0')")

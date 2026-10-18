@@ -1,0 +1,64 @@
+{
+  "counter": "harness",
+  "legacy": {
+    "force_calls": 279,
+    "force_calls_max": 419,
+    "force_calls_median": 255.5,
+    "force_calls_min": 187,
+    "n": 100,
+    "nfailed": 96,
+    "successes": 4,
+    "transition_states": 4
+  },
+  "problem": "minimization/morse-bulk",
+  "provenance": {
+    "code": "lammps",
+    "code_version": "30 Sep 2026",
+    "commit": "8de817dd79bfe4525d5d39246a212d833e6dee07",
+    "machine": {
+      "machine": "x86_64",
+      "node": "cursor",
+      "python": "3.12.3",
+      "system": "Linux"
+    },
+    "parameters": {
+      "counter": "harness",
+      "fix": "external pf/callback",
+      "min_style": "sd",
+      "pair_style": "zero",
+      "sigma": 0.0
+    }
+  },
+  "schema": "optbench.score/v2",
+  "score": {
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 20261015,
+    "cap": 10000,
+    "includes_failures": true,
+    "iqr": 0.0,
+    "iqr_high": 0.0,
+    "iqr_low": 0.0,
+    "mean": 19211.17,
+    "median": 20000.0,
+    "median_high": 20000.0,
+    "median_low": 20000.0,
+    "n": 100,
+    "n_cap": 0,
+    "n_crash": 0,
+    "n_divergence": 0,
+    "n_wrong_stationary": 96,
+    "nfailed": 96,
+    "par2_mean": 19211.17,
+    "par_applied": true,
+    "par_factor": 2,
+    "q25": 20000.0,
+    "q75": 20000.0,
+    "scoring": "par2-wilson-bootstrap",
+    "success_only_mean": 279.25,
+    "success_rate": 0.04,
+    "successes": 4,
+    "wilson_high": 0.0983707143588792,
+    "wilson_low": 0.01566330399154762
+  },
+  "template": "lammps/sd-morse"
+}
