@@ -1,0 +1,32 @@
+force_calls 47
+force_calls_min 22
+force_calls_median 44.0
+force_calls_max 116
+nfailed 0
+starts 200
+n 200
+par2_mean 47.4200000000
+successes 200
+wilson_low 0.9811546736
+wilson_high 1.0000000000
+par2_median 44.0000000000
+median 44.0000000000
+median_low 42.0000000000
+median_high 46.0000000000
+n_cap 0
+n_wrong_stationary 0
+n_divergence 0
+n_crash 0
+counter harness
+cap 10000
+code pele
+code_version 0.1.2
+commit b7081b932a060be11342fbe8287ac35da8ada879
+algorithm lowest eigenvector
+tuning tuned
+template pele/lj38-loweig-central
+problem lowest-eigenvector/lj38
+note 2014 central-difference lowest-eigenvector search. The overlap stop is 0.99. Memory is 100 and the step cap is 2.
+contributor Rohit Goswami
+date 2026-10-18
+host cursor

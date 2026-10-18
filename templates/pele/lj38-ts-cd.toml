@@ -1,0 +1,39 @@
+id = "pele/lj38-ts-cd"
+engine = "pele"
+code = "pele"
+code_version = "0.1.2"
+commit = "b7081b932a060be11342fbe8287ac35da8ada879"
+algorithm = "hybrid eigenvector following"
+problem = "tsopt/LJ38"
+task = "transition-state"
+tuning = "tuned"
+note = "Central-difference hybrid eigenvector following from the 2014 LJ38 script. Logging flags are off. The Euclidean stop is the problem force norm. A converged candidate also pays for the transverse mode screen."
+
+[stop]
+force_norm = 0.001
+max_force_calls = 10000
+
+[hef]
+nsteps = 1001
+nfail_max = 200
+nsteps_tangent1 = 14
+nsteps_tangent2 = 16
+max_uphill_step = 0.5
+max_uphill_step_initial = 0.2
+demand_initial_negative_vec = false
+check_negative = false
+index_seed = 0
+orthog = "translations-rotations"
+eigenvec0 = "random"
+
+[hef.lowest]
+nsteps = 46
+tol = 0.68
+maxstep = 0.2
+first_order = false
+H0 = 0.1
+
+[hef.tangent]
+maxstep = 0.2
+M = 4
+H0 = 0.1

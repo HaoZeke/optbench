@@ -300,6 +300,22 @@ def run(
             workers=workers,
             work=work,
         )
+    if template["engine"] == "pele":
+        from .pele_ts import run_template
+
+        problem = resolve_problem(root, problem_name)
+        stated = template.get("problem")
+        if stated and stated != problem["id"]:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return run_template(
+            root,
+            problem,
+            template,
+            output=output,
+            workers=workers,
+            work=work,
+            limit=limit,
+        )
     if template["engine"] == "rgsaddle":
         from .rgsaddle_minmode import run_template
 

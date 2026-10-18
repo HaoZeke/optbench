@@ -163,6 +163,16 @@ ref = "svn-snapshot"
 commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
 note = "No public git commit. The pin is the sha256 of the Wales svn.tar.bz2 snapshot, 122743078 bytes. Minimization L-BFGS, the archived double-ended preambles, and PATHSAMPLE call the ASE socket. The score is pes.evaluate summed over every OPTIM child. OPTIM's own call counter is not a score. The 2014 rows used wales-27058 and stay in the archive."
 
+[[code]]
+id = "pele"
+name = "pele"
+role = "transition state search"
+repository = "https://github.com/pele-python/pele"
+ref = "main"
+commit = "b7081b932a060be11342fbe8287ac35da8ada879"
+committed = "2026-10-12"
+note = "0.1.2 at main b7081b93, built from source. FindTransitionState is hybrid eigenvector following. findLowestEigenVector is Rayleigh-Ritz. The potential is the problem pair through a HarnessCounter."
+
 # generated ASE and Sella templates
 
 [[template]]
