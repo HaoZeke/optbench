@@ -214,23 +214,32 @@ def _threads_one() -> None:
         os.environ[name] = "1"
 
 
-def vibrational_index(hessian: np.ndarray, coords: np.ndarray, project_rigid: bool) -> int:
+def vibrational_index(
+    hessian: np.ndarray,
+    coords: np.ndarray,
+    project_rigid: bool,
+    rotations: int | None = None,
+) -> int:
     """Negative eigenvalues of a Cartesian Hessian.
 
     A free pair potential is invariant to translation and rotation, so
     those six directions are removed before the count. A slab with
     fixed atoms, and a potential that is not translation invariant,
     keep every mode: projecting them would hide the real unstable
-    direction.
+    direction. ``rotations`` overrides that choice: 0 keeps the three
+    translations out and leaves rotations in, which is a periodic cell.
     """
     matrix = np.asarray(hessian, dtype=np.float64)
-    if project_rigid:
-        matrix = _project_rigid(matrix, np.asarray(coords, dtype=np.float64))
+    if rotations is None:
+        if project_rigid:
+            matrix = _project_rigid(matrix, np.asarray(coords, dtype=np.float64))
+    else:
+        matrix = _project_rigid(matrix, np.asarray(coords, dtype=np.float64), int(rotations))
     values = np.linalg.eigvalsh(matrix)
     return negative_index(values, _EIGEN_TOL)
 
 
-def _project_rigid(hessian: np.ndarray, coords: np.ndarray) -> np.ndarray:
+def _project_rigid(hessian: np.ndarray, coords: np.ndarray, rotations: int = 3) -> np.ndarray:
     n_atoms = coords.shape[0]
     if n_atoms < 2:
         return hessian
@@ -240,8 +249,9 @@ def _project_rigid(hessian: np.ndarray, coords: np.ndarray) -> np.ndarray:
         translation = np.zeros(n_atoms * 3, dtype=np.float64)
         translation[axis::3] = 1.0
         seeds.append(translation)
-        rotation = np.cross(centered, np.eye(3)[axis])
-        seeds.append(rotation.reshape(-1))
+        if rotations:
+            rotation = np.cross(centered, np.eye(3)[axis])
+            seeds.append(rotation.reshape(-1))
     basis = []
     for seed in seeds:
         mode = seed.copy()

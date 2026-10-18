@@ -1,0 +1,19 @@
+# counter harness. fix external pf/callback writes the harness force. pair_style zero contributes nothing.
+# min_style is sd. A success is under the cap, at the Euclidean force stop, and Hessian index 0.
+# Gaussian force noise from [noise]. The stop is the noisy norm and a clean-energy window. The Hessian is clean.
+force_calls 5780
+force_calls_min 1737
+force_calls_max 9967
+force_calls_median 5627.5
+successes 698
+nfailed 302
+n 1000
+transition_states 74
+code lammps
+code_version 30 Sep 2026
+commit 8de817dd79bfe4525d5d39246a212d833e6dee07
+algorithm steepest descent
+template lammps/sd-lj38-noise-s1em2
+problem minimization/lj38-noise
+tuning default
+counter harness
