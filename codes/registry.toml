@@ -84,6 +84,16 @@ commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
 committed = "2026-10-05"
 note = "Activation-relaxation technique nouveau, plugin branch DEVEL. The benchmark contributor of a new entry is Rohit Goswami."
 
+[[code]]
+id = "cp2k"
+name = "CP2K"
+role = "saddle search"
+repository = "https://github.com/cp2k/cp2k"
+ref = "2026.2"
+commit = "702cc3d81422b92864ecdd7f544c21c56c04adca"
+committed = "2026-10-18"
+note = "CP2K 2026.2, commit 702cc3d8, built from that source with MPI off. GEO_OPT transition-state search is the dimer. In this revision BFGS and L-BFGS abort on TRANSITION_STATE ('not yet working with DIMER'). The CG line search for a transition state implements only 2PNT. GOLD and FIT abort. The binary is unmodified. FIST Lennard-Jones is splined and its Morse bond is not morse/smooth/linear, so the scored potential is the harness kernel through FORCE_EVAL METHOD IPI. One socket request is one harness force call. A repeated free-atom geometry is cached. Positions on the wire are Bohr. The energy and the force are multiplied by 0.05, because the two-point line search steps by the gradient norm in bohr. Library force thresholds are multiplied by the same factor. The harness stop uses the unscaled Euclidean norm. The dimer vector is the problem direction: the start gradient on LJ38, the free-atom displacement from the reactant on the Pt island, and the displacement kick in the saddle search. GLOBAL SEED is 2000. ANGLE_TOLERANCE is 1 degree. The two-point step cap is 0.05 bohr. A tuned row stops when the center's Euclidean force norm meets the problem tolerance. A default row keeps MAX_ITER 200 and the scaled library force thresholds. A BFGS row is the abort."
+
 # generated ASE and Sella templates
 
 [[template]]

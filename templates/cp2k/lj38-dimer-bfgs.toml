@@ -1,0 +1,25 @@
+id = "cp2k/lj38-dimer-bfgs"
+engine = "cp2k"
+problem = "tsopt/LJ38"
+code = "CP2K"
+code_version = "2026.2"
+commit = "702cc3d81422b92864ecdd7f544c21c56c04adca"
+algorithm = "Dimer BFGS"
+tuning = "default"
+ranked = true
+note = "BFGS aborts on TRANSITION_STATE in CP2K 2026.2. The row is that abort."
+
+[cp2k]
+task = "dimer"
+optimizer = "BFGS"
+rot_optimizer = "BFGS"
+force_match = "library"
+model_hessian = true
+cg_line_search = "GOLD"
+rot_max_iter = 200
+max_iter = 200
+
+[stop]
+norm = "l2"
+force_norm = 0.001
+max_force_calls = 10000

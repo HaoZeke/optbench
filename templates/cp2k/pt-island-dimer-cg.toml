@@ -1,0 +1,25 @@
+id = "cp2k/pt-island-dimer-cg"
+engine = "cp2k"
+problem = "tsopt/pt-island"
+code = "CP2K"
+code_version = "2026.2"
+commit = "702cc3d81422b92864ecdd7f544c21c56c04adca"
+algorithm = "Dimer CG"
+tuning = "default"
+ranked = true
+note = "Library GEO_OPT thresholds and MAX_ITER 200. The line search is 2PNT. GOLD is not implemented for a transition state."
+
+[cp2k]
+task = "dimer"
+optimizer = "CG"
+rot_optimizer = "CG"
+force_match = "library"
+model_hessian = true
+cg_line_search = "2PNT"
+rot_max_iter = 200
+max_iter = 200
+
+[stop]
+norm = "l2"
+force_norm = 0.001
+max_force_calls = 10000
