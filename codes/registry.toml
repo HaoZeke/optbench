@@ -94,6 +94,16 @@ commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
 committed = "2026-10-05"
 note = "Activation-relaxation technique nouveau, plugin branch DEVEL. The benchmark contributor of a new entry is Rohit Goswami."
 
+[[code]]
+id = "scipyglobal"
+name = "SciPy"
+role = "global optimization"
+repository = "https://github.com/scipy/scipy"
+ref = "v1.18.1"
+commit = "e4e854eaa8f18d807cd3496028e257e36caa93cc"
+committed = "2026-08-21"
+note = "SciPy 1.18.1 built from commit e4e854eaa8f18d807cd3496028e257e36caa93cc. The globalopt rows call basinhopping, dual_annealing, differential_evolution, and shgo. Force calls are harness evaluations of optbench.potentials.lennard_jones."
+
 # generated ASE and Sella templates
 
 [[template]]

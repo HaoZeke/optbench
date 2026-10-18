@@ -767,7 +767,8 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
                 reason = f"{reason}; potential {named}"
             row["_declared_partial"] = reason
         elif str(fields.get("partial") or "").lower() == "true":
-            reason = "result file sets partial true"
+            stated = str(fields.get("partial_reason") or "").strip()
+            reason = stated or "result file sets partial true"
             if named:
                 reason = f"{reason}; potential {named}"
             row["_declared_partial"] = reason
@@ -800,6 +801,7 @@ def _benchmark_index() -> dict[str, dict]:
         "benchmarks.bench_ase_sella",
         "benchmarks.bench_rgsaddle",
         "benchmarks.bench_noise",
+        "benchmarks.bench_scipyglobal",
         "benchmarks.quadratic",
     )
     for module_name in modules:

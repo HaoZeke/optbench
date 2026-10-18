@@ -1,0 +1,222 @@
+"""SciPy global optimizers, one class per template.
+
+``param_names`` are the base seed and the start index. The base seed is
+314159. The generator seed is that base plus the start index. shgo leaves
+the generator unset.
+
+The default grid is seed 314159 and start 0. ``OPTBENCH_ASV_FULL=1``
+selects every archived start. It is read at import, so the process that
+launches asv has to set it.
+
+``time_search`` is the optimization. Track methods read the record that
+call wrote. The force count is a ``HarnessCounter`` around
+``optbench.potentials.lennard_jones``. ``setup`` raises
+``NotImplementedError`` when scipy is not installed, and asv-runner stores
+that parameter as NaN.
+"""
+
+from __future__ import annotations
+
+import json
+import os
+from pathlib import Path
+
+os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["OPENBLAS_NUM_THREADS"] = "1"
+os.environ["MKL_NUM_THREADS"] = "1"
+os.environ["NUMEXPR_NUM_THREADS"] = "1"
+
+from optbench.asv_tracks import TrackedSearch
+
+ROOT = Path(__file__).resolve().parents[1]
+SEED = "314159"
+
+
+def _cache_dir() -> Path:
+    return Path(os.environ.get("OPTBENCH_ASV_CACHE", "/tmp/optbench-asv-scipyglobal"))
+
+
+def _scipy_ready() -> bool:
+    try:
+        import scipy  # noqa: F401
+    except ImportError:
+        return False
+    return True
+
+
+def selected_indices(count: int) -> list[str]:
+    """Start indices on the grid. Full when ``OPTBENCH_ASV_FULL`` is set."""
+    if os.environ.get("OPTBENCH_ASV_FULL") == "1":
+        return [str(index) for index in range(count)]
+    return ["0"]
+
+
+def _class_name(template_id: str) -> str:
+    slug = template_id.split("/", 1)[1]
+    return "Scipyglobal" + "".join(part.capitalize() for part in slug.split("-"))
+
+
+def _starts(problem_id: str):
+    if problem_id not in _GEOMETRIES:
+        from optbench.campaign import resolve_problem
+        from optbench.runners.scipyglobal import load_starts
+
+        problem = resolve_problem(ROOT, problem_id)
+        _GEOMETRIES[problem_id] = load_starts(ROOT, problem, _cache_dir())
+    return _GEOMETRIES[problem_id]
+
+
+_GEOMETRIES: dict[str, list] = {}
+
+
+def _cache_path(template_id: str, seed: str, start: str) -> Path:
+    slug = template_id.replace("/", "-")
+    return _cache_dir() / "asv" / slug / f"{seed}-{start}.json"
+
+
+def _specs() -> list[dict]:
+    from optbench.campaign import list_templates
+    from optbench.runners.scipyglobal import _cap_of
+
+    full = os.environ.get("OPTBENCH_ASV_FULL") == "1"
+    found = []
+    counts: dict[str, int] = {}
+    for template in list_templates(ROOT):
+        if template.get("engine") != "scipyglobal":
+            continue
+        problem_id = str(template["problem"])
+        if problem_id not in counts:
+            counts[problem_id] = len(_starts(problem_id)) if full else 1
+        found.append(
+            {
+                "class_name": _class_name(str(template["id"])),
+                "template_id": str(template["id"]),
+                "problem_id": problem_id,
+                "cap": _cap_of(template),
+                "n": counts[problem_id],
+                "template": template,
+            }
+        )
+    return found
+
+
+def _job(spec: dict, start: str) -> dict:
+    from optbench.campaign import resolve_problem
+    from optbench.runners.scipyglobal import _section, energy_target, method_parameters
+
+    index = int(start)
+    geometries = _starts(spec["problem_id"])
+    if index < 0 or index >= len(geometries):
+        raise IndexError(f"{spec['template_id']} start {start} is outside the archive")
+    name, coords = geometries[index]
+    template = spec["template"]
+    method, base_seed, bound = _section(template)
+    problem = resolve_problem(ROOT, spec["problem_id"])
+    parameters = method_parameters(method, spec["cap"], int(coords.size), bound)
+    parameters["seed"] = base_seed + index
+    return {
+        "index": index,
+        "start": name,
+        "coords": coords.tolist(),
+        "cap": spec["cap"],
+        "method": method,
+        "seed": base_seed + index,
+        "bound": bound,
+        "target": energy_target(problem),
+        "commit": str(template.get("commit") or ""),
+        "code_version": str(template.get("code_version") or ""),
+        "parameters": parameters,
+        "template_id": spec["template_id"],
+        "checkpoint": str(_cache_dir() / "checkpoints" / spec["template_id"].replace("/", "-") / f"{index:04d}.json"),
+    }
+
+
+def _compute(spec: dict, seed: str, start: str) -> dict:
+    """Optimize this start and store the record. The caller is the timed sample."""
+    if str(seed) != SEED:
+        raise ValueError(f"seed {seed} is not the archived base seed {SEED}")
+    from optbench.runners.scipyglobal import search_start
+
+    record = search_start(_job(spec, start))
+    record.pop("trace", None)
+    record.pop("index", None)
+    record["seed_base"] = SEED
+    path = _cache_path(spec["template_id"], SEED, str(int(start)))
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_suffix(".json.tmp")
+    temporary.write_text(json.dumps(record), encoding="utf-8")
+    temporary.replace(path)
+    return record
+
+
+def _load(spec: dict, seed: str, start: str) -> dict:
+    path = _cache_path(spec["template_id"], SEED, str(int(start)))
+    if path.is_file():
+        return json.loads(path.read_text(encoding="utf-8"))
+    return _compute(spec, seed, start)
+
+
+class _ScipySearch(TrackedSearch):
+    """Shared track methods. ``time_search`` is the only timed optimization."""
+
+    def setup(self, seed, start):
+        if not _scipy_ready():
+            raise NotImplementedError("scipy is not installed in this environment")
+        self.record = None
+
+    def time_search(self, seed, start):
+        self.record = _compute(self.spec, seed, start)
+
+    def _stored(self, seed, start) -> dict:
+        if self.record is None:
+            self.record = _load(self.spec, seed, start)
+        return self.record
+
+    def track_force_calls(self, seed, start) -> float:
+        return float(self._stored(seed, start)["force_calls"])
+
+    def track_success(self, seed, start) -> float:
+        return 1.0 if self._stored(seed, start)["success"] else 0.0
+
+    def track_failure_cap(self, seed, start) -> float:
+        return 1.0 if self._stored(seed, start)["failure"] == "cap" else 0.0
+
+    def track_failure_wrong_stationary(self, seed, start) -> float:
+        return 1.0 if self._stored(seed, start)["failure"] == "wrong_stationary" else 0.0
+
+    def track_failure_divergence(self, seed, start) -> float:
+        return 1.0 if self._stored(seed, start)["failure"] == "divergence" else 0.0
+
+    def track_failure_crash(self, seed, start) -> float:
+        return 1.0 if self._stored(seed, start)["failure"] == "crash" else 0.0
+
+
+_ScipySearch.track_force_calls.unit = "force calls"
+_ScipySearch.track_success.unit = "fraction"
+_ScipySearch.track_failure_cap.unit = "count"
+_ScipySearch.track_failure_wrong_stationary.unit = "count"
+_ScipySearch.track_failure_divergence.unit = "count"
+_ScipySearch.track_failure_crash.unit = "count"
+
+
+def _benchmark(spec: dict):
+    bound = spec
+    starts = selected_indices(spec["n"])
+    limit = spec["cap"]
+
+    class _Benchmark(_ScipySearch):
+        param_names = ["seed", "start"]
+        params = [[SEED], starts]
+        timeout = 10800
+        cap = limit
+        spec = bound
+        template_id = bound["template_id"]
+        problem_id = bound["problem_id"]
+
+    _Benchmark.__name__ = spec["class_name"]
+    _Benchmark.__qualname__ = spec["class_name"]
+    return _Benchmark
+
+
+for _spec in _specs():
+    globals()[_spec["class_name"]] = _benchmark(_spec)

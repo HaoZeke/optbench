@@ -1,0 +1,252 @@
+"""SciPy global-optimizer templates and the harness stop."""
+
+import json
+import tomllib
+from pathlib import Path
+
+import numpy as np
+import pytest
+
+from optbench.campaign import _check_stop, list_templates, load_template, resolve_problem, run
+from optbench.lj_minima import LJ38_MINIMUM, QUOTED_ENERGY
+from optbench.potentials import lennard_jones
+from optbench.runners.scipyglobal import (
+    COORD_BOUND,
+    HarnessObjective,
+    energy_target,
+    load_starts,
+    search_start,
+)
+
+ROOT = Path(__file__).resolve().parents[1]
+COMMIT = "e4e854eaa8f18d807cd3496028e257e36caa93cc"
+METHODS = (
+    "basinhopping",
+    "dual_annealing",
+    "differential_evolution",
+    "shgo",
+)
+BOUNDED = {"dual_annealing", "differential_evolution", "shgo"}
+
+
+def _templates():
+    return [row for row in list_templates(ROOT) if str(row["id"]).startswith("scipyglobal/")]
+
+
+def test_scipyglobal_templates_match_the_registry_pin():
+    registry = tomllib.loads((ROOT / "codes" / "registry.toml").read_text(encoding="utf-8"))
+    pinned = next(row for row in registry["code"] if row["id"] == "scipyglobal")
+    assert pinned["name"] == "SciPy"
+    assert pinned["commit"] == COMMIT
+    assert pinned["ref"] == "v1.18.1"
+    found = _templates()
+    assert len(found) == 8
+    eon_cap = int(load_template(ROOT, "eon-svn/bh-lj38")["failure_cap"])
+    seen = set()
+    for template in found:
+        assert template["engine"] == "scipyglobal"
+        assert template["code"] == "SciPy"
+        assert template["code_version"] == "1.18.1"
+        assert template["commit"] == COMMIT
+        assert template["tuning"] == "default"
+        assert template["scipy"]["method"] in METHODS
+        assert int(template["scipy"]["seed"]) == 314159
+        assert int(template["failure_cap"]) == eon_cap == 2000000
+        assert int(template["stop"]["max_force_calls"]) == 2000000
+        method = template["scipy"]["method"]
+        if method in BOUNDED:
+            assert float(template["scipy"]["bound"]) == COORD_BOUND
+        else:
+            assert "bound" not in template["scipy"]
+        problem = resolve_problem(ROOT, template["problem"])
+        _check_stop(problem, template)
+        seen.add((template["problem"], method))
+    for problem in ("globalopt/lj38", "globalopt/lj75"):
+        for method in METHODS:
+            assert (problem, method) in seen
+
+
+def test_lj38_minimum_matches_the_quoted_wales_energy():
+    energy, gradient = lennard_jones(np.asarray(LJ38_MINIMUM, dtype=np.float64))
+    assert abs(float(energy) - float(QUOTED_ENERGY)) < 1e-5
+    assert float(np.linalg.norm(gradient)) < 0.02
+    problem = resolve_problem(ROOT, "globalopt/lj38")
+    target = energy_target(problem)
+    assert target == pytest.approx(float(energy) + 0.001)
+    assert energy_target(resolve_problem(ROOT, "globalopt/lj75")) is None
+
+
+def test_lj_starts_are_centered_inside_the_bound(tmp_path: Path):
+    lj38 = load_starts(ROOT, resolve_problem(ROOT, "globalopt/lj38"), tmp_path)
+    assert len(lj38) == 100
+    assert [name for name, _coords in lj38] == [str(index) for index in range(100)]
+    for _name, coords in lj38:
+        assert coords.shape == (114,)
+        assert float(np.max(np.abs(coords))) <= COORD_BOUND
+    lj75 = load_starts(ROOT, resolve_problem(ROOT, "globalopt/lj75"), tmp_path)
+    assert len(lj75) == 200
+    assert lj75[0][0] == "1"
+    assert lj75[-1][0] == "200"
+    for _name, coords in lj75:
+        assert coords.shape == (225,)
+        assert float(np.max(np.abs(coords))) <= COORD_BOUND
+
+
+def test_fun_and_jac_at_one_geometry_count_once():
+    def bowl(x):
+        arr = np.asarray(x, dtype=np.float64).reshape(-1)
+        delta = arr - 1.0
+        return float(np.dot(delta, delta)), 2.0 * delta
+
+    objective = HarnessObjective(bowl, 20, None)
+    point = np.zeros(4)
+    assert objective.fun(point) == pytest.approx(4.0)
+    jac = objective.jac(point)
+    assert jac.shape == (4,)
+    assert objective.counter.calls == 1
+
+
+def _bowl(x):
+    arr = np.asarray(x, dtype=np.float64).reshape(-1)
+    delta = arr - 1.0
+    return float(np.dot(delta, delta)), 2.0 * delta
+
+
+def _constant(x):
+    arr = np.asarray(x, dtype=np.float64).reshape(-1)
+    return 1.0, np.zeros_like(arr)
+
+
+def _job(method: str, evaluate, cap: int, target, bound):
+    coords = [0.0, 0.0]
+    from optbench.runners.scipyglobal import method_parameters
+
+    parameters = method_parameters(method, cap, len(coords), bound)
+    parameters["seed"] = 314159
+    return {
+        "index": 0,
+        "start": "0",
+        "coords": coords,
+        "cap": cap,
+        "method": method,
+        "seed": 314159,
+        "bound": bound,
+        "target": target,
+        "commit": COMMIT,
+        "code_version": "1.18.1",
+        "parameters": parameters,
+        "template_id": f"test/{method}",
+        "evaluate": evaluate,
+    }
+
+
+@pytest.mark.parametrize("method", METHODS)
+def test_cap_stops_at_five_calls(method: str):
+    pytest.importorskip("scipy")
+    bound = None if method == "basinhopping" else COORD_BOUND
+    record = search_start(_job(method, _constant, 5, 0.0, bound))
+    assert record["force_calls"] == 5
+    assert record["success"] is False
+    assert record["failure"] == "cap"
+    assert record["energy"] == pytest.approx(1.0)
+
+
+def test_basinhopping_reaches_a_quadratic_bowl():
+    pytest.importorskip("scipy")
+    record = search_start(_job("basinhopping", _bowl, 200, 1e-8, None))
+    assert record["success"] is True
+    assert record["failure"] is None
+    assert record["force_calls"] < 200
+    assert record["energy"] <= 1e-8
+
+
+def test_missing_window_writes_a_partial_row(tmp_path: Path):
+    pytest.importorskip("scipy")
+    template = dict(load_template(ROOT, "scipyglobal/lj75-basinhopping"))
+    template["failure_cap"] = 12
+    template["stop"] = {"max_force_calls": 12}
+    output = tmp_path / "benchmark.dat"
+    summary = __import__("optbench.runners.scipyglobal", fromlist=["run_template"]).run_template(
+        ROOT,
+        resolve_problem(ROOT, "globalopt/lj75"),
+        template,
+        output=output,
+        workers=1,
+        work=tmp_path / "work",
+        limit=1,
+        check_source=False,
+    )
+    text = output.read_text(encoding="utf-8")
+    assert "partial true\n" in text
+    assert "no energy window" in text
+    assert summary["starts"] == 1
+    row = json.loads(output.with_suffix(".starts.jsonl").read_text(encoding="utf-8"))
+    assert row["counter"] == "harness"
+    assert row["force_calls"] == 12
+    assert row["energy"] is not None
+    assert "trace" not in row
+
+
+def test_declared_partial_reason_reaches_the_board(tmp_path: Path):
+    from optbench.board import _campaign_rows
+
+    campaign = tmp_path / "results" / "campaign"
+    campaign.mkdir(parents=True)
+    (campaign / "row.dat").write_text(
+        "partial true\n"
+        "partial_reason no energy window on this problem\n"
+        "counter harness\n"
+        "template scipyglobal/lj75-basinhopping\n"
+        "problem globalopt/lj75\n"
+        "code SciPy\n"
+        "cap 2000000\n",
+        encoding="utf-8",
+    )
+    (campaign / "row.starts.jsonl").write_text(
+        json.dumps(
+            {
+                "force_calls": 10,
+                "success": False,
+                "failure": "divergence",
+                "counter": "harness",
+                "start": "1",
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    rows, unparsed = _campaign_rows(tmp_path, {}, {})
+    assert unparsed == []
+    assert rows[0]["_declared_partial"] == "no energy window on this problem"
+    assert rows[0]["code"] == "SciPy"
+
+
+def test_scipyglobal_engine_does_not_need_eonclient(monkeypatch, tmp_path: Path):
+    captured = {}
+
+    def fake(root, problem, template, **kwargs):
+        captured["template"] = template["id"]
+        captured["problem"] = problem["id"]
+        captured["workers"] = kwargs["workers"]
+        return {
+            "force_calls": 1,
+            "nfailed": 0,
+            "starts": 0,
+            "template": template["id"],
+            "problem": problem["id"],
+        }
+
+    monkeypatch.setattr("optbench.runners.scipyglobal.run_template", fake)
+    summary = run(
+        ROOT,
+        "globalopt/lj38",
+        "scipyglobal/lj38-basinhopping",
+        output=tmp_path / "benchmark.dat",
+        workers=3,
+    )
+    assert captured == {
+        "template": "scipyglobal/lj38-basinhopping",
+        "problem": "globalopt/lj38",
+        "workers": 3,
+    }
+    assert summary["problem"] == "globalopt/lj38"
