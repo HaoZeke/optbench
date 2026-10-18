@@ -1055,4 +1055,42 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>
+   <h3>pele</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>global optimization</td>
+   <td>master</td>
+   <td>b7081b932a06</td>
+   <td><a href="https://github.com/pele-python/pele">https://github.com/pele-python/pele</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="globalopt/lj38" data-template="pele/lj38-basinhopping">
+   <td>Lennard-Jones 38 global minimum</td>
+   <td data-field="template">pele/lj38-basinhopping</td>
+   <td data-field="version">pele 0.1.2</td>
+   <td data-field="commit">b7081b932a06</td>
+   <td data-field="par2_mean">741833</td>
+   <td data-field="mean_calls">711833</td>
+   <td data-field="median_calls">477810</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table></div>
+   <p>No full ranked run</p><ul>
+   <li>lj150: partial.</li>
+   <li>lj75: partial.</li>
+   <li>lj98: partial.</li>
+   <li>pele-lbfgs-M1-maxstep0.1: no per-start record.</li>
+   <li>pele-lbfgs-M10-maxstep0.1: no per-start record.</li>
+   <li>pele-lbfgs-M100-maxstep0.2: no per-start record.</li>
+   <li>pele-lbfgs-M20-maxstep0.1: no per-start record.</li>
+   <li>pele-lbfgs-M4-maxstep0.05: no per-start record.</li>
+   <li>pele-lbfgs-M4-maxstep0.1: no per-start record.</li>
+   <li>pele-lbfgs-M4-maxstep0.2: no per-start record.</li>
+   </ul>
    </section>
