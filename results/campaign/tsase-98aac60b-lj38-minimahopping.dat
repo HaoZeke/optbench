@@ -1,8 +1,8 @@
-force_calls 193522
+force_calls 211064
 force_calls_min 30179
 force_calls_max 2000000
-force_calls_median 325158.0
-nfailed 11
+force_calls_median 327222.0
+nfailed 14
 code tsase
 code_version 1.0
 commit 98aac60b5d9905e81ee4e6b8c385f169258d0218
@@ -14,4 +14,4 @@ reducer harness
 cap 2000000
 tuning default
 partial true
-par2_mean 1589230.8333333333
+par2_mean 1644715.3243243243
