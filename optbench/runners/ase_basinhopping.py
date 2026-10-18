@@ -304,6 +304,17 @@ def search_one(
     }
 
 
+def load_campaign_records(path: Path) -> list[dict]:
+    """Read a starts jsonl. A missing file is an empty run."""
+    if not path.is_file():
+        return []
+    records = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if line.strip():
+            records.append(json.loads(line))
+    return records
+
+
 def _worker(payload: tuple[int, list[float], str, int]) -> dict:
     index, coords, root, hops = payload
     return search_one(np.asarray(coords, dtype=np.float64), index=index, root=Path(root), hops=hops)
@@ -316,17 +327,19 @@ def run(
     workers: int | None = None,
     hops: int = 10**9,
     dest: Path | None = None,
+    prior: list[dict] | None = None,
 ) -> list[dict]:
     problem = load_problem(root / "problems" / "globalopt" / "lj75.toml")
     starts = load_starts(geometry_archive(root, problem))
     expected = int(problem["sample"]["starts"])
     if len(starts) != expected:
         raise RuntimeError(f"archive has {len(starts)} numbered starts, problem states {expected}")
-    selected = starts if limit is None else starts[:limit]
+    records = [dict(record) for record in prior or []]
+    done = {int(str(record["start"]).split(".")[1]) for record in records}
+    selected = [item for item in (starts if limit is None else starts[:limit]) if item[0] not in done]
     payload = [(index, positions.tolist(), str(root), int(hops)) for index, positions in selected]
     if workers is None:
         workers = os.cpu_count() or 1
-    records: list[dict] = []
     campaign_root = root if dest is None else dest
     cap = int(problem["convergence"]["max_force_calls"])
 
@@ -342,6 +355,8 @@ def run(
             spec=_spec(root),
         )
 
+    if not payload:
+        return sorted(records, key=lambda record: int(str(record["start"]).split(".")[1]))
     if workers <= 1 or len(payload) == 1:
         for item in payload:
             _store(_worker(item))
@@ -446,6 +461,7 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--workers", type=int, default=0)
     parser.add_argument("--hops", type=int, default=0)
     parser.add_argument("--dest", type=Path, default=None)
+    parser.add_argument("--resume", action="store_true")
     args = parser.parse_args(argv)
     root = args.root.resolve()
     limit = args.limit or None
@@ -453,7 +469,13 @@ def main(argv: list[str] | None = None) -> None:
     hops = args.hops or 10**9
     if args.dest is not None:
         args.dest.mkdir(parents=True, exist_ok=True)
-    records = run(root, limit=limit, workers=workers, hops=hops, dest=args.dest)
+    campaign_root = root if args.dest is None else args.dest
+    prior = None
+    if args.resume:
+        jsonl = campaign_root / "results" / "campaign" / "ase-3.29.0-lj75-basinhopping.starts.jsonl"
+        prior = load_campaign_records(jsonl)
+        print(f"resume {len(prior)} starts from {jsonl}", flush=True)
+    records = run(root, limit=limit, workers=workers, hops=hops, dest=args.dest, prior=prior)
     problem = load_problem(root / "problems" / "globalopt" / "lj75.toml")
     expected = int(problem["sample"]["starts"])
     partial = len(records) < expected

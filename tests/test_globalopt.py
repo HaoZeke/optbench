@@ -278,6 +278,26 @@ def test_campaign_file_names_keep_the_ase_version(tmp_path: Path):
     assert dat.read_text(encoding="utf-8").splitlines()[0].startswith("# ASE 3.29.0")
 
 
+def test_resume_skips_starts_already_in_the_jsonl(tmp_path: Path):
+    from optbench.runners.ase_basinhopping import load_campaign_records, write_campaign
+
+    kept = {
+        "schema": "optbench.start/v2",
+        "counter": "harness",
+        "comparable": True,
+        "success": False,
+        "failure": "cap",
+        "reasons": ["energy", "cap"],
+        "force_calls": 10,
+        "energy": -2.0,
+        "start": "coords.4",
+    }
+    _dat, jsonl = write_campaign(tmp_path, [kept], partial=True, cap=10)
+    loaded = load_campaign_records(jsonl)
+    assert [record["start"] for record in loaded] == ["coords.4"]
+    assert load_campaign_records(tmp_path / "missing.jsonl") == []
+
+
 def test_ase_basin_hopping_accepts_the_lj75_cambridge_minimum():
     pytest.importorskip("ase")
     from optbench.runners.ase_basinhopping import search_one
