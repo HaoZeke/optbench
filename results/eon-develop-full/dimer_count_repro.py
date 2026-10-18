@@ -177,7 +177,9 @@ def main() -> None:
         _lowest("0000", False),
     ]
     report = {
-        "stored_ts_lj38_dimer_0000": _stored_cache("eon-develop-ts-lj38-dimer", "0000"),
+        "stored_ts_lj38_dimer_0000": _stored_cache(
+            "eon-develop-ts-lj38-dimer-accept-energy", "0000"
+        ),
         "stored_low_lj38_dimer_0000": _stored_cache("eon-develop-low-lj38-dimer", "0000"),
         "runs": rows,
     }
