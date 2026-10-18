@@ -281,6 +281,7 @@ def _run_jobs(root: Path, jobs: list[dict], workers: int, label: str) -> list[di
     if not jobs:
         return []
     pool = [JuliaWorker(root) for _ in range(count)]
+    replacements: list[JuliaWorker] = []
     try:
         version = pool[0].version
         optim_version = pool[0].optim_version
@@ -297,37 +298,56 @@ def _run_jobs(root: Path, jobs: list[dict], workers: int, label: str) -> list[di
         lock = threading.Lock()
         errors: list[BaseException] = []
 
-        def consume(worker: JuliaWorker) -> None:
+        def consume(slot: list[JuliaWorker]) -> None:
             while True:
                 job = pending.get()
                 if job is None:
                     return
-                try:
-                    record = worker.run(job)
-                except Exception as exc:
-                    record = {
-                        "schema": "optbench.start/v2",
-                        "start": job.get("start"),
-                        "index": job.get("index"),
-                        "force_calls": 0,
-                        "verify_calls": 0,
-                        "counter": "harness",
-                        "comparable": True,
-                        "success": False,
-                        "failure": "crash",
-                        "reasons": ["crash"],
-                        "converged": False,
-                        "error": f"{type(exc).__name__}: {exc}"[:500],
-                    }
-                    with lock:
-                        errors.append(exc)
+                record = None
+                for attempt in range(2):
+                    worker = slot[0]
+                    try:
+                        if worker.proc.poll() is not None:
+                            raise RuntimeError(f"julia exited {worker.proc.returncode}")
+                        record = worker.run(job)
+                        break
+                    except Exception as exc:
+                        if attempt == 0:
+                            try:
+                                worker.close()
+                            except Exception:
+                                pass
+                            try:
+                                restarted = JuliaWorker(root)
+                                slot[0] = restarted
+                                with lock:
+                                    replacements.append(restarted)
+                                continue
+                            except Exception as restart_exc:
+                                exc = restart_exc
+                        record = {
+                            "schema": "optbench.start/v2",
+                            "start": job.get("start"),
+                            "index": job.get("index"),
+                            "force_calls": 0,
+                            "verify_calls": 0,
+                            "counter": "harness",
+                            "comparable": True,
+                            "success": False,
+                            "failure": "crash",
+                            "reasons": ["crash"],
+                            "converged": False,
+                            "error": f"{type(exc).__name__}: {exc}"[:500],
+                        }
+                        with lock:
+                            errors.append(exc)
                 with lock:
                     records.append(record)
                     done = len(records)
                     if done == len(jobs) or done % 25 == 0:
                         print(f"{label} {done}/{len(jobs)}", flush=True)
 
-        threads = [threading.Thread(target=consume, args=(worker,)) for worker in pool]
+        threads = [threading.Thread(target=consume, args=([worker],)) for worker in pool]
         for thread in threads:
             thread.start()
         for thread in threads:
@@ -335,7 +355,7 @@ def _run_jobs(root: Path, jobs: list[dict], workers: int, label: str) -> list[di
         if errors and len(records) != len(jobs):
             raise errors[0]
     finally:
-        for worker in pool:
+        for worker in [*pool, *replacements]:
             worker.close()
     records.sort(key=lambda row: int(row.get("index") or 0))
     return records
