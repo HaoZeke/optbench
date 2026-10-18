@@ -19,6 +19,16 @@ def _available() -> bool:
     return Path(julia).is_file() and (Path(source) / "src" / "SaddleSearch.jl").is_file()
 
 
+def test_hex_line_preserves_float_bits():
+    from optbench.saddlesearchjl import _floats_from_hex_line, _hex, _hex_line
+
+    values = np.array([1.0, -0.0, np.inf, np.nan, -1.5, 1e-320], dtype=np.float64)
+    line = _hex_line(values)
+    assert line == " ".join(_hex(float(value)) for value in values)
+    back = _floats_from_hex_line(line, int(values.size))
+    assert np.array_equal(values.view(np.uint64), back.view(np.uint64))
+
+
 def test_catalog_partial_drops_only_a_torn_last_line(tmp_path):
     from optbench.saddlesearchjl import _load_catalog_partial
 

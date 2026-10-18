@@ -24,23 +24,82 @@ function unhex(text::AbstractString)
     return reinterpret(Float64, parse(UInt64, text, base=16))
 end
 
+function nibble(c::UInt8)
+    if UInt8('0') <= c <= UInt8('9')
+        return c - UInt8('0')
+    elseif UInt8('a') <= c <= UInt8('f')
+        return c - UInt8('a') + 0x0a
+    elseif UInt8('A') <= c <= UInt8('F')
+        return c - UInt8('A') + 0x0a
+    else
+        error("bad hex")
+    end
+end
+
+function parse_hex_floats(line::AbstractString, count::Int)
+    if count == 0
+        return Float64[]
+    end
+    out = Vector{Float64}(undef, count)
+    pos = 1
+    for i in 1:count
+        v = UInt64(0)
+        for _ in 1:16
+            v = (v << 4) | UInt64(nibble(codeunit(line, pos)))
+            pos += 1
+        end
+        out[i] = reinterpret(Float64, v)
+        if i != count
+            pos += 1
+        end
+    end
+    return out
+end
+
+const _HEX = UInt8['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f']
+
+function write_hex_floats(values)
+    n = length(values)
+    if n == 0
+        println()
+        return
+    end
+    buf = Vector{UInt8}(undef, n * 16 + n - 1)
+    p = 1
+    for (i, value) in enumerate(values)
+        bits = reinterpret(UInt64, Float64(value))
+        shift = 60
+        for _ in 1:16
+            buf[p] = _HEX[((bits >> shift) & 0x0f) + 1]
+            p += 1
+            shift -= 4
+        end
+        if i != n
+            buf[p] = UInt8(' ')
+            p += 1
+        end
+    end
+    println(String(buf))
+end
+
 function read_vec()
     count = parse(Int, readline())
     if count == 0
         return Float64[]
     end
-    parts = split(strip(readline()))
-    if length(parts) != count
-        error("vector announced $count values and sent $(length(parts))")
+    line = readline()
+    values = parse_hex_floats(line, count)
+    if length(values) != count
+        error("vector announced $count values and sent $(length(values))")
     end
-    return Float64[unhex(String(part)) for part in parts]
+    return values
 end
 
 function ask(state::State, point)
     coords = collect(Float64, point)
     println("eval")
     println(length(coords))
-    println(join(hexfloat.(coords), " "))
+    write_hex_floats(coords)
     flush(stdout)
     status = readline()
     if status == "cap"
@@ -54,11 +113,10 @@ function ask(state::State, point)
     state.calls = parse(Int, readline())
     energy = unhex(readline())
     width = parse(Int, readline())
-    parts = split(strip(readline()))
-    if length(parts) != width
-        error("gradient announced $width values and sent $(length(parts))")
+    gradient = parse_hex_floats(readline(), width)
+    if length(gradient) != width
+        error("gradient announced $width values and sent $(length(gradient))")
     end
-    gradient = Float64[unhex(String(part)) for part in parts]
     state.asks += 1
     return energy, gradient
 end

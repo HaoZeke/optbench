@@ -105,6 +105,24 @@ def _unhex(text: str) -> float:
     return struct.unpack("<d", struct.pack("<Q", int(text, 16)))[0]
 
 
+def _hex_line(values) -> str:
+    """IEEE hex of a vector, high nibble first, matching ``_hex``."""
+    arr = np.ascontiguousarray(np.asarray(values, dtype=np.float64).reshape(-1))
+    if arr.size == 0:
+        return ""
+    bits = np.ascontiguousarray(arr.view(np.uint64).byteswap())
+    blob = bits.tobytes().hex()
+    return " ".join(blob[index : index + 16] for index in range(0, len(blob), 16))
+
+
+def _floats_from_hex_line(text: str, width: int) -> np.ndarray:
+    raw = bytes.fromhex(text)
+    if len(raw) != width * 8:
+        raise ValueError(f"expected {width} hex floats and read {len(raw) // 8}")
+    native = np.frombuffer(raw, dtype=">u8").astype(np.uint64)
+    return native.view(np.float64)
+
+
 class JuliaSession:
     """One long-lived Julia process speaking the driver protocol."""
 
@@ -170,7 +188,7 @@ class JuliaSession:
         self._writeline(name)
         self._writeline(str(int(array.size)))
         if array.size:
-            self._writeline(" ".join(_hex(value) for value in array))
+            self._writeline(_hex_line(array))
 
     def search(self, potential: HarnessSurface, settings: dict, x0, v0, reference) -> dict:
         """Run one solver. ``potential`` receives every harness evaluation."""
@@ -196,12 +214,13 @@ class JuliaSession:
 
     def _serve(self, potential: HarnessSurface) -> None:
         width = int(self._readline())
-        parts = self._readline().split()
-        if len(parts) != width:
+        line = self._readline()
+        try:
+            coords = _floats_from_hex_line(line, width)
+        except ValueError as exc:
             self._writeline("err")
-            self._writeline(f"expected {width} coordinates")
+            self._writeline(str(exc)[:500])
             return
-        coords = [_unhex(part) for part in parts]
         try:
             energy, gradient = potential.energy_forces(coords)
         except ForceCallCap:
@@ -211,12 +230,12 @@ class JuliaSession:
             self._writeline("err")
             self._writeline(str(exc).replace("\n", " ")[:500])
             return
-        flat = [float(value) for value in gradient]
+        flat = np.asarray(gradient, dtype=np.float64).reshape(-1)
         self._writeline("ok")
         self._writeline(str(int(potential.calls)))
-        self._writeline(_hex(energy))
-        self._writeline(str(len(flat)))
-        self._writeline(" ".join(_hex(value) for value in flat))
+        self._writeline(_hex(float(energy)))
+        self._writeline(str(int(flat.size)))
+        self._writeline(_hex_line(flat))
 
     def _read_done(self) -> dict:
         fields: dict[str, str] = {}
@@ -232,8 +251,8 @@ class JuliaSession:
                 if count == 0:
                     vectors[line] = np.zeros(0, dtype=np.float64)
                 else:
-                    parts = self._readline().split()
-                    vectors[line] = np.array([_unhex(part) for part in parts], dtype=np.float64)
+                    parts = self._readline()
+                    vectors[line] = _floats_from_hex_line(parts, count)
                 continue
             key, value = line.split(" ", 1)
             fields[key] = value
