@@ -1,0 +1,41 @@
+id = "eon-svn/neb-pt-cg"
+engine = "eon"
+problem = "neb/Pt-heptamer"
+code = "Eon svn"
+code_version = "r2549"
+commit = "r2549"
+algorithm = "CG"
+reducer = "harness"
+failure_cap = 10000
+kind = "neb-pt"
+kernel = "morse_shift"
+asv_class = "EonSvnNebPtCg"
+note = '''
+Climbing-image NEB on the 13 Pt-heptamer pairs. Optimizer cg, max_move 0.2, converged_force 0.01, images 8, spring 5. LBFGS memory is 20, the r2549 default. FIRE time_step and time_step_max are 1.5 in Optimizer and FIRE. QuickMin time_step is 1.527 in Optimizer and QuickMin. The band opt_method is set in Optimizer and in Nudged Elastic Band. The harness kernel is r2549 Morse::force: cutoff 9.5, pair energy shifted to zero at the cutoff, minimum image on the box diagonal. D 0.7102, alpha 1.6047, r0 2.897.
+'''
+asv_timeout = 900
+budget_seconds = 600
+
+[ini.Main]
+job = "nudged_elastic_band"
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "cg"
+convergence_metric = "norm"
+converged_force = 0.01
+max_move = 0.2
+max_iterations = 1000
+
+[ini."Nudged Elastic Band"]
+images = 8
+climbing_image_method = true
+climbing_image = true
+doubly_nudged = false
+doubly_nudged_switching = false
+opt_method = "cg"
+converged_force = 0.01
+max_iterations = 1000
+spring = 5

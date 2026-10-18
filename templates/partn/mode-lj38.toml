@@ -1,0 +1,21 @@
+# pARTn Lanczos until the reference lowest mode.
+id = "partn/mode-lj38"
+engine = "partn"
+problem = "lowest-eigenvector/lj38"
+code = "artn"
+code_version = "1.1.0"
+commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
+algorithm = "ARTn Lanczos"
+tuning = "default"
+note = "The run stops when get_runparam eigenvec overlaps the reference mode by 0.99, and it does not apply the push that leaves Lanczos. lanczos_disp is 0.001 and lanczos_max_size is 32. The library defaults do not resolve this mode. engine_units is lammps/lj."
+
+[partn]
+push_step_size = 0.1
+eigen_step_size = 0.01
+ninit = 0
+lanczos_max_size = 32
+lanczos_disp = 0.001
+lpush_final = false
+converge_property = "norm"
+fire_dt_init = 0.05
+etot_diff_limit = 1000000.0
