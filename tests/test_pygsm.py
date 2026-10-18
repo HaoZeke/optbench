@@ -36,7 +36,7 @@ def test_contact_pairs_are_the_upper_triangle_inside_the_cutoff():
     assert contact_pairs(coords, 3.1) == [(0, 1), (0, 2), (1, 2)]
 
 
-def test_rotation_eigensolve_symmetrizes_and_retries():
+def test_rotation_eigensolve_symmetrizes_and_falls_back():
     def original(mat, b=None, asc=False):
         assert np.allclose(mat, mat.T)
         values = np.linalg.eigvalsh(mat)
@@ -45,22 +45,17 @@ def test_rotation_eigensolve_symmetrizes_and_retries():
             order = order[::-1]
         return values[order], np.eye(len(values))
 
-    wrapped = _stable_sorted_eigh(original)
-    values, _vectors = wrapped(np.array([[1.0, 2.0], [0.0, 3.0]]))
+    matrix = np.array([[1.0, 2.0], [0.0, 3.0]])
     expected = np.linalg.eigvalsh(np.array([[1.0, 1.0], [1.0, 3.0]]))[::-1]
+    values, _vectors = _stable_sorted_eigh(original)(matrix)
     assert np.allclose(values, expected)
 
-    calls = {"n": 0}
+    def failing(mat, b=None, asc=False):
+        raise np.linalg.LinAlgError("Eigenvalues did not converge")
 
-    def flaky(mat, b=None, asc=False):
-        calls["n"] += 1
-        if calls["n"] == 1:
-            raise np.linalg.LinAlgError("Eigenvalues did not converge")
-        return np.array([1.0]), np.eye(1)
-
-    values, _vectors = _stable_sorted_eigh(flaky)(np.array([[2.0]]))
-    assert calls["n"] == 2
-    assert values[0] == 1.0
+    values, vectors = _stable_sorted_eigh(failing)(matrix)
+    assert np.allclose(values, expected)
+    assert vectors.shape == (2, 2)
 
 
 def test_generator_sum_adds_vectors():

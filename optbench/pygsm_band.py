@@ -106,8 +106,16 @@ def _stable_sorted_eigh(original):
         try:
             return original(matrix, b=b, asc=asc)
         except np.linalg.LinAlgError:
-            matrix = matrix + np.eye(matrix.shape[0]) * 1e-10
-            return original(matrix, b=b, asc=asc)
+            from scipy import linalg
+
+            if b is None:
+                values, vectors = linalg.eigh(matrix, driver="ev")
+            else:
+                values, vectors = linalg.eigh(matrix, np.asarray(b, dtype=np.float64), driver="ev")
+            if not asc:
+                values = values[::-1].copy()
+                vectors = np.array(vectors[:, ::-1], copy=True)
+            return values, vectors
 
     return sorted_eigh
 
