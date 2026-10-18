@@ -84,6 +84,26 @@ commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
 committed = "2026-10-05"
 note = "Activation-relaxation technique nouveau, plugin branch DEVEL. The benchmark contributor of a new entry is Rohit Goswami."
 
+[[code]]
+id = "bpga"
+name = "BPGA"
+role = "global optimization"
+repository = "https://github.com/jbadavis/bpga"
+ref = "master"
+commit = "b32cd227e8071429825f990449048eb21c7f8730"
+committed = "2016-05-23"
+note = "Pool genetic algorithm at b32cd227. The repository has no release number, so the recorded version is 0. The build imports on Python 3: three print statements gain parentheses, four mixed tab indents are rewritten at the same column, MinimiseRan passes calcNum into Database.updatePool, and Database.addEle uses integer division. The potential is the harness Lennard-Jones kernel. The code's POSCAR command is answered in process. Homotop mutation expects two elements and is not used."
+
+[[code]]
+id = "pybcga"
+name = "PyBCGA"
+role = "global optimization"
+repository = "https://github.com/marktoakley/PyBCGA"
+ref = "master"
+commit = "fb646c19b1829656bf16cc72ca318bef2d37bfeb"
+committed = "2016-02-26"
+note = "Birmingham cluster genetic algorithm, setup.py version 0, commit fb646c19. Each local relaxation is L-BFGS-B on the harness Lennard-Jones potential. Pele's Lennard-Jones is not called."
+
 # generated ASE and Sella templates
 
 [[template]]
