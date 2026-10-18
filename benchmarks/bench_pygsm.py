@@ -42,14 +42,20 @@ CLASS_TEMPLATE: dict[str, str] = {}
 CLASS_CAP: dict[str, int] = {}
 
 
-def ensure_pygsm() -> None:
-    """Install the pinned pyGSM commit into this interpreter when it is absent."""
+def _runtime_ready() -> bool:
+    """The runner imports SciPy and the delocalized coordinate system."""
     try:
-        import pyGSM  # noqa: F401
-
-        return
+        import scipy
+        from pyGSM.coordinate_systems import PrimitiveInternalCoordinates  # noqa: F401
     except ImportError:
-        pass
+        return False
+    return scipy.__version__ == "1.18.1"
+
+
+def ensure_pygsm() -> None:
+    """Install the pinned pyGSM commit and SciPy 1.18.1 into this interpreter."""
+    if _runtime_ready():
+        return
     uv = shutil.which("uv")
     if uv is None:
         candidate = Path.home() / ".local" / "bin" / "uv"
@@ -62,22 +68,23 @@ def ensure_pygsm() -> None:
 
     with lock.open("a", encoding="utf-8") as handle:
         fcntl.flock(handle.fileno(), fcntl.LOCK_EX)
+        if _runtime_ready():
+            return
+        subprocess.check_call(
+            [
+                uv,
+                "pip",
+                "install",
+                "--python",
+                sys.executable,
+                "networkx",
+                "setuptools==80.10.2",
+                "scipy==1.18.1",
+            ]
+        )
         try:
             import pyGSM  # noqa: F401
-
-            return
         except ImportError:
-            subprocess.check_call(
-                [
-                    uv,
-                    "pip",
-                    "install",
-                    "--python",
-                    sys.executable,
-                    "networkx",
-                    "setuptools==80.10.2",
-                ]
-            )
             subprocess.check_call(
                 [
                     uv,
@@ -89,6 +96,8 @@ def ensure_pygsm() -> None:
                     f"pygsm @ git+https://github.com/ZimmermanGroup/pyGSM.git@{_PIN}",
                 ]
             )
+        if not _runtime_ready():
+            raise RuntimeError("pyGSM coordinate system or SciPy 1.18.1 is missing")
 
 
 def result_root() -> Path:
@@ -140,16 +149,21 @@ def _bind(class_name: str, problem: str, call_cap: int, limit: int):
         def setup(self, seed, start):
             ensure_pygsm()
             path = sidecar_path(self.problem_name, self.template_id, str(seed), str(start))
+            self.record = None
             if path.is_file():
-                self.record = json.loads(path.read_text(encoding="utf-8"))
-            else:
-                self.record = None
+                loaded = json.loads(path.read_text(encoding="utf-8"))
+                calls = float(loaded.get("force_calls") or 0)
+                # A zero-call crash is a missing import, not a finished search.
+                if not (loaded.get("failure") == "crash" and calls == 0.0):
+                    self.record = loaded
 
         def measure(self, seed, start):
             from optbench.pygsm_band import search_named
 
             try:
                 record = search_named(ROOT, self.problem_name, self.template_id, str(start), str(seed))
+            except ModuleNotFoundError:
+                raise
             except Exception as exc:
                 record = {
                     "force_calls": 0.0,

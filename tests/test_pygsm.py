@@ -12,6 +12,16 @@ ROOT = Path(__file__).resolve().parents[1]
 COMMIT = "1b4d5a5557a61adc6a3df7405d6b7255b1fa4865"
 
 
+def test_asv_runtime_requires_the_campaign_scipy():
+    import inspect
+
+    from benchmarks import bench_pygsm
+
+    source = inspect.getsource(bench_pygsm.ensure_pygsm)
+    assert "scipy==1.18.1" in source
+    assert bench_pygsm._runtime_ready()
+
+
 def test_benchmark_classes_publish_the_problem_cap():
     from benchmarks.bench_pygsm import PygsmLj38De, PygsmLj38TwoTs
 
