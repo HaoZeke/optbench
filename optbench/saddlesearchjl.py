@@ -671,7 +671,12 @@ def _run_geometries(root, problem, template, specs, output: Path, workers: int, 
             session = JuliaSession.start()
             try:
                 for spec in pending:
+                    if session.proc.poll() is not None:
+                        session = JuliaSession.start()
                     record = execute(spec, session)
+                    if record.get("failure") == "crash" and session.proc.poll() is not None:
+                        session = JuliaSession.start()
+                        record = execute(spec, session)
                     fresh.append(record)
                     _append_partial(partial_path, _jsonable(record))
                     print(
@@ -819,6 +824,8 @@ def _run_saddle_catalog(root, problem, template, output: Path, cap: int, force_t
                 partial_path.unlink(missing_ok=True)
                 saved = []
             while connected < goal and searches < max_searches:
+                if session.proc.poll() is not None:
+                    session = JuliaSession.start()
                 searches += 1
                 atom = int(listed[int(rng.integers(0, len(listed)))])
                 slots = np.flatnonzero(free == atom)
