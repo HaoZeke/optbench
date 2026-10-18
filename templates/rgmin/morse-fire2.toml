@@ -3,10 +3,10 @@ engine = "rgmin"
 problem = "minimization/morse-bulk"
 code = "rgmin"
 code_version = "0.4.1"
-commit = "9a2e7ff11fa65826f9e847856bee10d3d70b7156"
+commit = "f15726f1c7983b3656c5dbc2f812e2394e144500"
 algorithm = "FIRE2"
 tuning = "default"
-note = "Default row. gtol and the iteration budget are the problem force norm and the force-call cap. The template sets no maxstep, so the Cartesian default per-atom cap of 0.2 applies. istep is 0.1. The session line search is strong Wolfe. The same values are used for every start."
+note = "Default row. gtol and the iteration budget are the problem force norm and the force-call cap. The template sets no maxstep. FIRE 2.0 leaves the 0.2 per-atom default off, and dt limits the step. istep is 0.1. The same values are used for every start."
 
 [rgmin]
 method = "fire2"
