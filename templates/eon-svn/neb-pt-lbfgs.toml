@@ -8,10 +8,10 @@ algorithm = "LBFGS"
 reducer = "harness"
 failure_cap = 10000
 kind = "neb-pt"
-kernel = "morse"
+kernel = "morse_shift"
 asv_class = "EonSvnNebPtLbfgs"
 note = '''
-Climbing-image NEB on the 13 Pt-heptamer pairs. Optimizer lbfgs, max_move 0.2, converged_force 0.01, images 8, spring 5. LBFGS memory is 20, the r2549 default. FIRE time_step and time_step_max are 1.5 in Optimizer and FIRE. QuickMin time_step is 1.527 in Optimizer and QuickMin. The band opt_method is set in Optimizer and in Nudged Elastic Band. The harness kernel is morse/smooth/linear with D 0.7102, alpha 1.6047, r0 2.897, cutoff 9.5, and periodic boundaries in x and y.
+Climbing-image NEB on the 13 Pt-heptamer pairs. Optimizer lbfgs, max_move 0.2, converged_force 0.01, images 8, spring 5. LBFGS memory is 20, the r2549 default. FIRE time_step and time_step_max are 1.5 in Optimizer and FIRE. QuickMin time_step is 1.527 in Optimizer and QuickMin. The band opt_method is set in Optimizer and in Nudged Elastic Band. The harness kernel is r2549 Morse::force: cutoff 9.5, pair energy shifted to zero at the cutoff, minimum image on the box diagonal. D 0.7102, alpha 1.6047, r0 2.897.
 '''
 asv_timeout = 900
 budget_seconds = 600

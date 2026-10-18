@@ -14,3 +14,4 @@ reducer harness
 counter harness
 count_keys HarnessCounter
 partial true
+potential unshifted lj/cut, epsilon 1, sigma 1, cutoff 40

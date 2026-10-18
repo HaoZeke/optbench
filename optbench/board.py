@@ -698,10 +698,17 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
             cap=cap,
             note=parse_note or record_source,
         )
+        named = str(fields.get("potential") or "").strip()
         if str(fields.get("ranked") or "").lower() == "false":
-            row["_declared_partial"] = "result file sets ranked false"
+            reason = "result file sets ranked false"
+            if named:
+                reason = f"{reason}; potential {named}"
+            row["_declared_partial"] = reason
         elif str(fields.get("partial") or "").lower() == "true":
-            row["_declared_partial"] = "result file sets partial true"
+            reason = "result file sets partial true"
+            if named:
+                reason = f"{reason}; potential {named}"
+            row["_declared_partial"] = reason
         if not records:
             row["note"] = "no per-start record"
             unparsed.append(row)

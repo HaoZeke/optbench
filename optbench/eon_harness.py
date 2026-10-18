@@ -5,12 +5,13 @@ started with ``potential = ext_pot``. A small C program forwards
 ``from_eon_to_extpot`` to ``PotServer``. The template still names the
 2014 potential. The kernel is the problem surface:
 
-* ``lammps`` is unshifted ``lj/cut`` with epsilon 1, sigma 1, cutoff 40.
-* ``morse_pt`` is LAMMPS ``morse/smooth/linear`` (D 0.7102, alpha 1.6047,
-  r0 2.897, cutoff 9.5) with periodic boundaries in x and y. The 2014
-  client potential is a shifted Morse with minimum-image convention on
-  all three axes.
-* ``eam_al`` calls the r2549 Aluminum Fortran ``force_`` in this process.
+* ``lj40`` is unshifted ``lj/cut`` with epsilon 1, sigma 1, cutoff 40.
+* ``morse`` is LAMMPS ``morse/smooth/linear`` (D 0.7102, alpha 1.6047,
+  r0 2.897, cutoff 9.5) with periodic boundaries in x and y.
+* ``morse_shift`` is r2549 ``Morse::force``: the same depth, alpha, and
+  r0, cutoff 9.5, pair energy shifted to zero at the cutoff, minimum
+  image on the box diagonal.
+* ``eam`` calls the r2549 Aluminum Fortran ``force_`` in this process.
 
 A tsopt success is a client stop under the cap, a free-atom Euclidean
 force norm at the problem stop, and Hessian index 1. That Hessian is
@@ -145,7 +146,7 @@ def lj40(positions, atomic_numbers=None, box=None):
 
 
 def morse_pt(positions, atomic_numbers=None, box=None):
-    """Problem Morse: smooth/linear, periodic in x and y."""
+    """Smooth-linear Morse, periodic in x and y."""
     del atomic_numbers
     coords = np.asarray(positions, dtype=np.float64).reshape(-1, 3)
     energy, gradient = morse_smooth_linear(
@@ -158,6 +159,14 @@ def morse_pt(positions, atomic_numbers=None, box=None):
         pbc=(True, True, False),
     )
     return float(energy), tuple(float(value) for value in np.ravel(-gradient))
+
+
+def morse_shift(positions, atomic_numbers=None, box=None):
+    """r2549 Morse::force. Energy is zero at the cutoff."""
+    from benchmarks.bench_eon_svn import _morse_fast
+
+    flat = np.asarray(positions, dtype=np.float64).ravel()
+    return _morse_fast(flat, atomic_numbers, box)
 
 
 def _link_eam(objects: list[Path], dest: Path) -> subprocess.CompletedProcess[str]:
@@ -301,6 +310,8 @@ def kernel_for(name: str):
         return lj40
     if name == "morse":
         return morse_pt
+    if name == "morse_shift":
+        return morse_shift
     if name == "eam":
         return eam_al
     raise ValueError(f"no harness kernel {name}")
@@ -593,11 +604,13 @@ def _guard(record: dict, client_calls) -> dict:
 
 def _cache_path(family: str, template_name: str, seed: int, start: str, passes: int) -> Path:
     safe = template_name.replace("/", "-")
+    kernel = str(load_template(ROOT, template_name).get("kernel") or "unset")
     return (
         CACHE
         / "harness-1"
         / FAMILIES[family]["cache"]
         / KERNEL
+        / kernel
         / safe
         / f"passes-{passes}"
         / str(seed)

@@ -14,3 +14,5 @@ reducer harness
 counter harness
 count_keys HarnessCounter
 partial true
+ranked false
+potential morse/smooth/linear (periodic in x and y, cutoff 9.5)

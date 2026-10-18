@@ -21,3 +21,5 @@ n_crash 0
 n_divergence 1
 n_cap 0
 n_wrong_stationary 0
+ranked false
+potential ljcluster (shifted, cutoff 15)
