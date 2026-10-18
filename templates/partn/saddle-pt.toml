@@ -1,0 +1,26 @@
+# pARTn catalog on the Pt island. The goal is 27 connected saddles under 1.5 eV.
+id = "partn/saddle-pt"
+engine = "partn"
+problem = "saddle-search/pt-island"
+code = "artn"
+code_version = "1.1.0"
+commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
+algorithm = "ARTn"
+tuning = "default"
+note = "One kick of a free island atom off the minimized reactant, then ARTn. Connection is one endpoint back within RMSD 0.5 and the other not. search_budget is the per-search harness ceiling. The problem states no cap, so that ceiling is not a PAR-2 denominator."
+
+[partn]
+push_step_size = 0.1
+eigen_step_size = 0.15
+ninit = 3
+lanczos_max_size = 16
+lpush_final = false
+converge_property = "norm"
+
+[search]
+repetitions = 1
+displace_atoms = "0,1,2,3,4,5,6"
+displace_magnitude = 0.1
+rmsd_connect = 0.5
+max_searches = 20000
+search_budget = 10000

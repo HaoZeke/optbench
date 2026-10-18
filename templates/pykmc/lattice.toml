@@ -1,0 +1,9 @@
+# Refuses before a score. lkmc 1.3 has no harness callback.
+id = "pykmc/lattice"
+engine = "pykmc"
+code = "pykmc"
+code_version = "1.3"
+commit = "1.3"
+algorithm = "on-the-fly kMC"
+tuning = "default"
+note = "Run raises the reason from optbench.engines.pykmc_search.available. LBOMD.exe is not in the SourceForge archive. There is no numeric row."
