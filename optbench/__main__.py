@@ -86,6 +86,18 @@ def run(
             output=output,
             workers=workers,
         )
+    elif loaded["engine"] == "pygsm-band":
+        from optbench.pygsm_band import run as run_pygsm
+
+        summary = run_pygsm(
+            root,
+            problem,
+            template,
+            output=output,
+            workers=workers,
+            resume=resume,
+            limit=limit,
+        )
     else:
         client_path = _eon_client(client) if loaded["engine"] in {"eon-client", "eon"} else client
         summary = run_campaign(

@@ -1,0 +1,18 @@
+# pyGSM double-ended growing string. The problem file supplies the image count, the cap, and the force norm.
+id = "pygsm/de-gsm"
+engine = "pygsm-band"
+code = "pygsm"
+code_version = "1.0.0+692.g1b4d5a5.dirty"
+commit = "1b4d5a5557a61adc6a3df7405d6b7255b1fa4865"
+algorithm = "DE-GSM"
+tuning = "default"
+
+[gsm]
+coordinate = "distance-tric"
+contact_cutoff = 1.35
+add_node_tol = 0.01
+max_opt_steps = 3
+growth_direction = 0
+rtype = 2
+linesearch = "NoLineSearch"
+endpoints = "fixed"

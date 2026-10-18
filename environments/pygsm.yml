@@ -1,0 +1,15 @@
+# pyGSM is not a conda-forge package. This file does not select a
+# pygsm build and it does not invent a build string. The source the
+# campaign runs is the pin in codes/registry.toml under id pygsm:
+#   repository = https://github.com/ZimmermanGroup/pyGSM
+#   ref = master
+#   commit = 1b4d5a5557a61adc6a3df7405d6b7255b1fa4865
+# The import version is 1.0.0+692.g1b4d5a5.dirty. versioningit rewrites
+# _version.py at build time, and the repository has no release tag.
+# asv has one environment_type, so this yml cannot be bound to one
+# class. The benchmark installs that commit with --no-deps.
+name: pygsm
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
