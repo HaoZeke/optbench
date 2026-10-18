@@ -27,7 +27,7 @@
       "max_move": 0.05,
       "method": "string",
       "n_interior": 5,
-      "optimizer": "bfgstrm",
+      "optimizer": "damped_bfgs",
       "pairs": 51,
       "pbc": false,
       "potential": "lj",
