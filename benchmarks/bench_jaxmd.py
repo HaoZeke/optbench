@@ -24,7 +24,7 @@ import os
 import tarfile
 from pathlib import Path
 
-from optbench.asv_tracks import TrackedSearch
+from optbench import asv_tracks
 
 ROOT = Path(__file__).resolve().parents[1]
 SEED = "0"
@@ -184,7 +184,7 @@ def _load(spec: dict, seed: str, start: str) -> dict:
     return _compute(spec, seed, start)
 
 
-class _JaxmdSearch(TrackedSearch):
+class _JaxmdSearch(asv_tracks.TrackedSearch):
     """Shared track methods. ``time_search`` is the only timed minimization."""
 
     def setup(self, seed, start):
