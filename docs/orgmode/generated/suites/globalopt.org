@@ -148,6 +148,7 @@
    <h2>Binary Lennard-Jones 100</h2>
    <dl class="bench-rule">
    <dt>Starts</dt><dd>100</dd>
+   <dt>Potential</dt><dd>binary-lennard-jones</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    <dt>Note</dt><dd>The archived files record energies. They do not record force calls.</dd>
    </dl>
