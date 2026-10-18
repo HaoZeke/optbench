@@ -474,3 +474,26 @@ def test_ase_minima_hopping_stops_at_the_force_cap():
     )
     assert record["failure"] == "cap"
     assert record["force_calls"] == 40
+
+
+def test_ase_compare_matches_the_library_pairing():
+    from ase import Atoms
+    from ase.optimize.minimahopping import ComparePositions
+
+    from optbench.lane_methods import _ase_compare_dmax
+
+    rng = np.random.default_rng(0)
+    translated = getattr(ComparePositions, "_optbench_translated", ComparePositions._translated_compare)
+    plain = getattr(ComparePositions, "_optbench_indistinguishable", ComparePositions._indistinguishable_compare)
+    library = ComparePositions(translate=True)
+    for translate in (False, True):
+        for count in (4, 38):
+            for _trial in range(4):
+                left = Atoms(numbers=[6] * count, positions=rng.normal(size=(count, 3)))
+                right = Atoms(numbers=[6] * count, positions=left.positions + rng.normal(scale=0.3, size=(count, 3)))
+                if translate:
+                    reference = translated(library, left.copy(), right.copy())
+                else:
+                    reference = plain(library, left.copy(), right.copy())
+                got = _ase_compare_dmax(left, right, translate=translate)
+                assert got == pytest.approx(float(reference), abs=1e-12, rel=0)

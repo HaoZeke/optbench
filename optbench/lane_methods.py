@@ -894,17 +894,82 @@ def _ase_bh(budget: Budget, x0: np.ndarray, job: dict) -> None:
             _ase_quench_hit(atoms, budget, fmax)
 
 
+def _ase_compare_dmax(atoms1, atoms2, *, translate: bool) -> float:
+    """Same pairing as ``ComparePositions`` for an unperiodic cluster.
+
+    The library walks atoms in Python and copies the cluster once per
+    anchor. The distances and the tie break (the earliest atom) match
+    that walk. Periodic cells stay on the library routine.
+    """
+    pos1 = np.asarray(atoms1.positions, dtype=np.float64)
+    pos2 = np.asarray(atoms2.positions, dtype=np.float64)
+    sym1 = np.asarray(atoms1.get_chemical_symbols())
+    sym2 = np.asarray(atoms2.get_chemical_symbols())
+
+    def paired(left: np.ndarray, right: np.ndarray, left_symbols: np.ndarray, right_symbols: np.ndarray) -> float:
+        alive = np.ones(right.shape[0], dtype=bool)
+        dmax = 0.0
+        for position, symbol in zip(left, left_symbols, strict=True):
+            dist = np.linalg.norm(right - position, axis=1)
+            dist = np.where(alive & (right_symbols == symbol), dist, np.inf)
+            index = int(np.argmin(dist))
+            if dist[index] > dmax:
+                dmax = float(dist[index])
+            alive[index] = False
+        return dmax
+
+    if not translate:
+        return paired(pos1, pos2, sym1, sym2)
+    counts: dict[str, int] = {}
+    first: dict[str, int] = {}
+    for index, symbol in enumerate(sym1.tolist()):
+        counts[symbol] = counts.get(symbol, 0) + 1
+        first.setdefault(symbol, index)
+    # set() iteration order is the library's choice for the anchor element.
+    least = ""
+    least_count = 10**9
+    for element in set(sym1.tolist()):
+        if counts[element] < least_count:
+            least = element
+            least_count = counts[element]
+    anchor = first[least]
+    standard = pos1 - pos1[anchor]
+    indices2 = [index for index, symbol in enumerate(sym2.tolist()) if symbol == least]
+    dmax = 10**9
+    for index in indices2:
+        shifted = pos2 - pos2[index]
+        dmax = min(dmax, paired(standard, shifted, sym1, sym2))
+    return float(dmax)
+
+
 def _ase_mh(budget: Budget, x0: np.ndarray, job: dict) -> None:
     """ASE MinimaHopping. The hop limit is the force cap.
 
     The library writes a trajectory and a log on every MD and quench step.
     Those files do not change the search, and on LJ38 they dominate the
     runtime, so this run keeps the minima list and drops the per-step files.
+    Comparing two carbon clusters uses the same nearest-atom pairing as
+    ``ComparePositions`` without the per-anchor copies.
     A force call at the cap still raises and ends the start.
     """
     from ase import units
     from ase.md import VelocityVerlet, thermalize_momenta
-    from ase.optimize.minimahopping import MinimaHopping
+    from ase.optimize.minimahopping import ComparePositions, MinimaHopping
+
+    def _fast_call(self, left, right):
+        left = left.copy()
+        right = right.copy()
+        if np.any(left.pbc) or np.any(right.pbc):
+            if not self._translate:
+                return ComparePositions._optbench_indistinguishable(self, left, right)
+            return ComparePositions._optbench_translated(self, left, right)
+        return _ase_compare_dmax(left, right, translate=bool(self._translate))
+
+    if not getattr(ComparePositions, "_optbench_fast", False):
+        ComparePositions._optbench_indistinguishable = ComparePositions._indistinguishable_compare
+        ComparePositions._optbench_translated = ComparePositions._translated_compare
+        ComparePositions.__call__ = _fast_call
+        ComparePositions._optbench_fast = True
 
     np.random.seed(int(job["seed"]))
     atoms = _atoms(x0, job, budget)
