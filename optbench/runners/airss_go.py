@@ -277,7 +277,7 @@ def _config(template: dict) -> dict:
     missing = [key for key in required if section.get(key) in (None, "")]
     if missing:
         raise ValueError(f"{template['id']} needs airss.{', airss.'.join(missing)}")
-    return {
+    config = {
         "natoms": int(section["natoms"]),
         "box": float(section["box"]),
         "posamp": float(section["posamp"]),
@@ -287,23 +287,40 @@ def _config(template: dict) -> dict:
         "etol": float(section.get("etol", 1e-10)),
         "maxsteps": int(section.get("maxsteps", 9999)),
     }
+    if section.get("budget_structures") not in (None, ""):
+        config["budget_structures"] = int(section["budget_structures"])
+    if section.get("starts") not in (None, ""):
+        config["starts"] = int(section["starts"])
+        config["start_label"] = str(section.get("start_label") or "start")
+    return config
 
 
-def _job(template: dict, index: int, start: str, binary: Path, reference: float, tolerance: float) -> dict:
+def _job(template: dict, index: int, start: str, binary: Path, reference: float | None, tolerance: float | None) -> dict:
     config = _config(template)
-    return {
+    threshold = None if reference is None or tolerance is None else float(reference) + float(tolerance)
+    job = {
         "index": index,
         "start": start,
         "buildcell": str(binary),
         "reference_energy": reference,
-        "threshold": reference + tolerance,
+        "threshold": threshold,
         "safety": SAFETY_STRUCTURES,
         "code": template.get("code", "AIRSS"),
         "code_version": template.get("code_version", ""),
         "commit": template.get("commit", ""),
         "tuning": template.get("tuning", ""),
-        **config,
+        "natoms": config["natoms"],
+        "box": config["box"],
+        "posamp": config["posamp"],
+        "minsep": config["minsep"],
+        "symmops": config["symmops"],
+        "nform": config["nform"],
+        "etol": config["etol"],
+        "maxsteps": config["maxsteps"],
     }
+    if config.get("budget_structures"):
+        job["budget"] = int(config["budget_structures"])
+    return job
 
 
 def _crash(job: dict, calls: int, energy: float | None, structures: int, error: str) -> dict:
@@ -330,15 +347,44 @@ def _crash(job: dict, calls: int, energy: float | None, structures: int, error: 
     }
 
 
+def _capped(job: dict, calls: int, energy: float, structures: int) -> dict:
+    """A start that stopped at the structure budget. The problem states no success rule."""
+    return {
+        "schema": "optbench.start/v2",
+        "start": job["start"],
+        "index": job["index"],
+        "force_calls": calls,
+        "verify_calls": 0,
+        "counter": "harness",
+        "comparable": True,
+        "success": False,
+        "failure": "cap",
+        "reasons": ["cap"],
+        "energy": energy,
+        "structures": structures,
+        "reference_energy": job.get("reference_energy"),
+        "converged": False,
+        "code": job["code"],
+        "code_version": job["code_version"],
+        "commit": job["commit"],
+        "tuning": job["tuning"],
+    }
+
+
 def search_start(job: dict) -> dict:
-    """Search one start until the energy window, and return a v2 record."""
+    """Search one start until the energy window, and return a v2 record.
+
+    With no threshold, stop after ``budget`` structures and keep the lowest energy.
+    """
     binary = Path(job["buildcell"])
     calls = 0
     structures = 0
     build_failures = 0
     nonfinite = 0
     best = math.inf
-    for structure_index in range(int(job["safety"])):
+    budget_only = job.get("threshold") is None
+    limit = int(job["budget"]) if budget_only else int(job["safety"])
+    for structure_index in range(limit):
         text = cell_text(
             natoms=job["natoms"],
             box=job["box"],
@@ -376,8 +422,14 @@ def search_start(job: dict) -> dict:
                 f"{job['start']} structures={structures} calls={calls} best={best:.6f}",
                 flush=True,
             )
-        if reached_minimum(energy, job["reference_energy"], job["threshold"] - job["reference_energy"]):
+        if not budget_only and reached_minimum(
+            energy,
+            float(job["reference_energy"]),
+            float(job["threshold"]) - float(job["reference_energy"]),
+        ):
             return _success(job, calls, energy, structures)
+    if budget_only and best is not math.inf:
+        return _capped(job, calls, best, structures)
     return _crash(job, calls, None if best is math.inf else best, structures, "safety")
 
 
@@ -479,13 +531,23 @@ def _dat(summary: dict, template: dict, metrics: dict) -> str:
         "energy_max": summary.get("energy_max"),
         "structures_min": summary.get("structures_min"),
         "structures_max": summary.get("structures_max"),
+        "partial": "true" if summary.get("partial") else None,
+        "cap": summary.get("cap"),
     }
-    lines = [
-        "# counter harness. One force call is one Lennard-Jones evaluation inside the two-point step.",
-        "# buildcell draws the cell. The archived .con files name the starts.",
-        "# A start succeeds when the harness energy is at or below the Wales minimum plus energy_above_minimum.",
-        "# The problem states no force-call cap, so par2_mean is unset and the median is the call median.",
-    ]
+    if summary.get("partial"):
+        lines = [
+            "# counter harness. One force call is one Lennard-Jones evaluation inside the two-point step.",
+            "# The problem states no energy window. Each start stops after the structure budget.",
+            "# failure is cap. cap is the largest harness count in this file, so PAR-2 is twice that count.",
+            "# force_calls is the half-even mean of those counts. energy_min and energy_max are the best energies.",
+        ]
+    else:
+        lines = [
+            "# counter harness. One force call is one Lennard-Jones evaluation inside the two-point step.",
+            "# buildcell draws the cell. The archived .con files name the starts.",
+            "# A start succeeds when the harness energy is at or below the Wales minimum plus energy_above_minimum.",
+            "# The problem states no force-call cap, so par2_mean is unset and the median is the call median.",
+        ]
     note = str(template.get("note") or "").strip()
     if note:
         lines.append("# " + note.replace("\n", " "))
@@ -514,16 +576,27 @@ def run_template(
     if template.get("commit") != TARBALL_SHA256:
         raise RuntimeError(f"{template['id']} commit is not the AIRSS 0.9.4 tarball sha256")
     convergence = problem.get("convergence") or {}
-    if "energy_above_minimum" not in convergence:
-        raise ValueError(f"{problem['id']} has no energy_above_minimum")
-    tolerance = float(convergence["energy_above_minimum"])
     config = _config(template)
+    raw_tolerance = convergence.get("energy_above_minimum")
+    if raw_tolerance is None and not config.get("budget_structures"):
+        raise ValueError(
+            f"{problem['id']} has no energy_above_minimum and {template['id']} has no airss.budget_structures"
+        )
     binary = find_buildcell()
-    names = _load_start_names(root, problem, geometries, work, output)
-    coords = load_wales_coordinates()
-    if coords.shape[0] != config["natoms"]:
-        raise ValueError(f"Wales file has {coords.shape[0]} atoms, template has {config['natoms']}")
-    reference = reference_energy(coords)
+    if config.get("starts"):
+        label = str(config.get("start_label") or "start")
+        names = [f"{label}.{index}" for index in range(1, int(config["starts"]) + 1)]
+    else:
+        names = _load_start_names(root, problem, geometries, work, output)
+    if raw_tolerance is None:
+        reference = None
+        tolerance = None
+    else:
+        tolerance = float(raw_tolerance)
+        coords = load_wales_coordinates()
+        if coords.shape[0] != config["natoms"]:
+            raise ValueError(f"Wales file has {coords.shape[0]} atoms, template has {config['natoms']}")
+        reference = reference_energy(coords)
     jobs = [_job(template, index, name, binary, reference, tolerance) for index, name in enumerate(names)]
     if workers <= 1:
         records = []
@@ -553,41 +626,45 @@ def run_template(
                     flush=True,
                 )
     records.sort(key=lambda row: row["index"])
-    failed = [row for row in records if not row["success"]]
-    if failed:
-        partial = output.with_suffix(".partial.jsonl")
+    budget_only = reference is None
+    crashes = [row for row in records if row.get("failure") == "crash"]
+    missed = [row for row in records if not row["success"]]
+    if crashes or (missed and not budget_only):
+        partial_path = output.with_suffix(".partial.jsonl")
         for row in records:
             row.pop("index", None)
-        write_starts(partial, records)
+        write_starts(partial_path, records)
         raise RuntimeError(
-            f"{len(failed)} of {len(records)} starts missed the minimum; wrote {partial}"
+            f"{len(missed)} of {len(records)} starts missed the minimum; wrote {partial_path}"
         )
     for row in records:
         row.pop("index", None)
     calls = [int(row["force_calls"]) for row in records]
-    energies = [float(row["energy"]) for row in records]
+    energies = [float(row["energy"]) for row in records if row.get("energy") is not None]
     structures = [int(row["structures"]) for row in records]
+    cap = max(calls) if budget_only else None
     summary = {
         "force_calls": half_even(sum(calls) / len(calls)),
         "force_calls_min": min(calls),
         "force_calls_max": max(calls),
-        "nfailed": 0,
-        "energy_min": min(energies),
-        "energy_max": max(energies),
+        "nfailed": len(missed),
+        "energy_min": min(energies) if energies else None,
+        "energy_max": max(energies) if energies else None,
         "structures_min": min(structures),
         "structures_max": max(structures),
+        "partial": budget_only,
+        "cap": cap,
     }
     scored = [
         {"force_calls": row["force_calls"], "success": row["success"], "failure": row["failure"]}
         for row in records
     ]
-    metrics = score_v2(scored, None)
-    passed = {
-        "reference_energy": reference,
-        "energy_above_minimum": tolerance,
-        "wales": WALES_URL,
-        **config,
-    }
+    metrics = score_v2(scored, cap)
+    passed = dict(config)
+    if reference is not None:
+        passed["reference_energy"] = reference
+        passed["energy_above_minimum"] = tolerance
+        passed["wales"] = WALES_URL
     provenance = collect_provenance(
         code=str(template.get("code", "AIRSS")),
         code_version=str(template.get("code_version", "")),
@@ -604,7 +681,12 @@ def run_template(
         "bootstrap_seed": 20261015,
         "note": (
             "Harness counter on optbench.potentials.lennard_jones. "
-            "buildcell generates each cell. The problem states no force-call cap."
+            "buildcell generates each cell. "
+            + (
+                "The problem states no energy window, so each start stops at the structure budget."
+                if budget_only
+                else "The problem states no force-call cap."
+            )
         ),
         "runs": [
             {
@@ -615,7 +697,7 @@ def run_template(
                 "commit": template.get("commit", ""),
                 "tuning": template.get("tuning", ""),
                 "present_source": True,
-                "cap": None,
+                "cap": cap,
                 "parameters": passed,
                 "provenance": provenance,
                 "metrics": metrics,
