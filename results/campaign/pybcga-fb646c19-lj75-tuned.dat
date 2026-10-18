@@ -1,0 +1,26 @@
+# counter harness. One force call is one L-BFGS-B evaluation of optbench.potentials.lennard_jones.
+# The potential is epsilon 1, sigma 1, cutoff 40, no shift.
+# A success is a quenched energy within energy_above_minimum of the reference, under the force cap.
+# Lennard-Jones batch example. remove_duplicates is true and the generation limit is 20. Population, offspring, and mutation probability stay at the library default. The force cap is that quench budget extended to 20 generations. globalopt/lj75 states no energy window on this commit, so a finished search is not a success and the row is partial. The energy and the calls are the search record.
+nfailed 200
+code PyBCGA
+code_version 0
+commit fb646c19b1829656bf16cc72ca318bef2d37bfeb
+algorithm BCGA
+template bpga/lj75-pybcga-tuned
+problem globalopt/lj75
+tuning tuned
+counter harness
+cap 530000
+par2_mean 1060000.0
+wilson_low 0.0
+wilson_high 0.018845326377266575
+par2_median 1060000.0
+par2_median_low 1060000.0
+par2_median_high 1060000.0
+v2_nfailed 200
+v2_successes 0
+n 200
+energy_min -396.23851220983636
+energy_max -386.60587370434223
+partial true
