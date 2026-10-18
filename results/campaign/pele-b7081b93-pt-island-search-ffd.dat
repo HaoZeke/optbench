@@ -1,0 +1,35 @@
+# rep 1 force_calls 17662230 unique_saddles 17 fraction_connected 0.0001 total_searches 20000 connected 2 minimize_calls 11 minimum_converged 1 seed 20261016
+force_calls 686
+force_calls_min 566
+force_calls_median 686.0
+force_calls_max 806
+nfailed 19998
+starts 20000
+n 20000
+par2_mean 10127.0558000000
+successes 2
+wilson_low 0.0000274240
+wilson_high 0.0003645736
+par2_median 10128.0000000000
+median 10128.0000000000
+median_low 10128.0000000000
+median_high 10128.0000000000
+n_cap 10666
+n_wrong_stationary 2
+n_divergence 9330
+n_crash 0
+counter harness
+cap 5064
+code pele
+code_version 0.1.2
+commit b7081b932a060be11342fbe8287ac35da8ada879
+algorithm hybrid eigenvector following
+tuning tuned
+template pele/pt-island-search-ffd
+problem saddle-search/pt-island
+note The Pt-island displacement protocol with the LJ38 forward-difference quench controls. The climb cap is 1000 force calls. Each endpoint minimization has a budget of 2000. The PAR-2 cap is 5064.
+contributor Rohit Goswami
+date 2026-10-18
+host cursor
+goal 27
+repetitions 1
