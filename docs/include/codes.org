@@ -652,5 +652,64 @@
    </tr>
    </tbody></table></div>
    <p>No full ranked run.</p>
+   <h3>LAMMPS</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>saddle search</td>
+   <td>stable_30Sep2026</td>
+   <td>8de817dd79bf</td>
+   <td><a href="https://github.com/lammps/lammps">https://github.com/lammps/lammps</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="double-ended-saddle-search/lj38" data-template="lammpsneb/ci-fire">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="template">lammpsneb/ci-fire</td>
+   <td data-field="version">LAMMPS 30 Sep 2026</td>
+   <td data-field="commit">8de817dd79bf</td>
+   <td data-field="par2_mean">4526.2</td>
+   <td data-field="mean_calls">2055.2</td>
+   <td data-field="median_calls">2065</td>
+   <td data-field="failures">crash 0, divergence 40, cap 0, wrong_stationary 2</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="lammpsneb/ci-quickmin">
+   <td>lj38_2ts_separation</td>
+   <td data-field="template">lammpsneb/ci-quickmin</td>
+   <td data-field="version">LAMMPS 30 Sep 2026</td>
+   <td data-field="commit">8de817dd79bf</td>
+   <td data-field="par2_mean">19017.8</td>
+   <td data-field="mean_calls">9982</td>
+   <td data-field="median_calls">9982</td>
+   <td data-field="failures">crash 0, divergence 45, cap 0, wrong_stationary 1</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="lammpsneb/ci-fire">
+   <td>pt-island</td>
+   <td data-field="template">lammpsneb/ci-fire</td>
+   <td data-field="version">LAMMPS 30 Sep 2026</td>
+   <td data-field="commit">8de817dd79bf</td>
+   <td data-field="par2_mean">2668.64</td>
+   <td data-field="mean_calls">1471.69</td>
+   <td data-field="median_calls">1405</td>
+   <td data-field="failures">crash 0, divergence 6, cap 0, wrong_stationary 9</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-template="lammpsneb/ci-fire">
+   <td>Pt-heptamer</td>
+   <td data-field="template">lammpsneb/ci-fire</td>
+   <td data-field="version">LAMMPS 30 Sep 2026</td>
+   <td data-field="commit">8de817dd79bf</td>
+   <td data-field="par2_mean">1398.46</td>
+   <td data-field="mean_calls">1398.46</td>
+   <td data-field="median_calls">1400</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   </tbody></table></div>
    </section>
 #+end_export
