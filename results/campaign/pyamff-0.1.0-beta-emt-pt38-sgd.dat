@@ -1,0 +1,22 @@
+nfailed 50
+starts 50
+code pyamff
+code_version 0.1.0-beta
+commit 240f51d01ca22969369f9bc21760c61cbb3b6665
+algorithm SGD
+tuning default
+template pyamff/emt-pt38-sgd
+problem mlopt/emt-pt38
+counter harness
+cap 10000
+par2_mean 20000
+median 20000
+median_low 20000
+median_high 20000
+wilson_low 0
+wilson_high 0.071347599
+n_cap 0
+n_divergence 50
+n_wrong_stationary 0
+n_crash 0
+note One harness call is one SSE loss and its parameter gradient. The stop is the L2 norm of every parameter gradient.
