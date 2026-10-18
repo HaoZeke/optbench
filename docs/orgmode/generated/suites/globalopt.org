@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>SCGO</th></tr></thead><tbody>
    <tr data-problem="globalopt/lj100-binary">
    <th scope="row"><a href="#lj100-binary">Binary Lennard-Jones 100</a></th>
    <td data-code="eOn">—</td>
@@ -16,6 +16,7 @@
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
+   <td data-code="SCGO">—</td>
    </tr>
    <tr data-problem="globalopt/lj150">
    <th scope="row"><a href="#lj150">lj150</a></th>
@@ -25,6 +26,7 @@
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
+   <td data-code="SCGO">—</td>
    </tr>
    <tr data-problem="globalopt/lj38">
    <th scope="row"><a href="#lj38">Lennard-Jones 38 global minimum</a></th>
@@ -34,6 +36,7 @@
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
+   <td data-code="SCGO" data-template="scgo/lj38-bh" data-par2="61776"><span class="bench-score">61776</span><a href="#lj38-templates">scgo/lj38-bh</a></td>
    </tr>
    <tr data-problem="globalopt/lj75">
    <th scope="row"><a href="#lj75">lj75</a></th>
@@ -43,6 +46,7 @@
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
+   <td data-code="SCGO">—</td>
    </tr>
    <tr data-problem="globalopt/lj98">
    <th scope="row"><a href="#lj98">lj98</a></th>
@@ -52,6 +56,7 @@
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
+   <td data-code="SCGO">—</td>
    </tr>
    <tr data-problem="globalopt/tip4p10">
    <th scope="row"><a href="#tip4p10">tip4p10</a></th>
@@ -61,6 +66,7 @@
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
+   <td data-code="SCGO">—</td>
    </tr>
    <tr data-problem="globalopt/tip4p15">
    <th scope="row"><a href="#tip4p15">tip4p15</a></th>
@@ -70,6 +76,7 @@
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
+   <td data-code="SCGO">—</td>
    </tr>
    <tr data-problem="globalopt/tip4p20">
    <th scope="row"><a href="#tip4p20">tip4p20</a></th>
@@ -79,6 +86,7 @@
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
+   <td data-code="SCGO">—</td>
    </tr>
    </tbody></table></div></section><section class="bench" id="lj100-binary" data-problem="globalopt/lj100-binary">
    <h2>Binary Lennard-Jones 100</h2>
@@ -216,13 +224,15 @@
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
    <p class="bench-gaps">Partial rows stay off the ranked table.</p>
+   <figure class="bench-plot"><a href="../../_static/board/globalopt-lj38-cost.svg"><picture><source srcset="../../_static/board/globalopt-lj38-cost.webp" type="image/webp"><img src="../../_static/board/globalopt-lj38-cost.png" alt="Cost versus success for globalopt/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
+   <p class="bench-gaps">No performance profile. One start has no finite cost.</p>
    <details class="bench-details" id="lj38-templates">
-   <summary>All templates (0 ranked)</summary>
+   <summary>All templates (1 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="globalopt/lj38">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="13">No full harness row.</td></tr>
+   <tr><td data-field="template">scgo/lj38-bh</td><td data-field="version">SCGO 0.9.1</td><td data-field="commit">2338742a434a</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">61776</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.0369935</td><td data-field="median_calls">11832.5</td><td data-field="mean_calls">11847.9</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 100</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    <h3>Partial</h3><ul>
    <li>eon-svn/bh-lj38 Eon svn campaign n=73, result file sets partial true; potential unshifted lj/cut, epsilon 1, sigma 1, cutoff 40.</li>
@@ -311,7 +321,7 @@
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">No committed harness run.</p>
+   <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <details class="bench-details" id="lj75-templates">
    <summary>All templates (0 ranked)</summary>
    <div class="bench-scroll">
@@ -320,6 +330,9 @@
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
+   <h3>Partial</h3><ul>
+   <li>scgo/lj75-bh SCGO campaign, asv n=200, result file sets partial true.</li>
+   </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="lj75-legacy">
    <h3>Legacy 2014 archive</h3>
