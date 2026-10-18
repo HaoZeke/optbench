@@ -2,8 +2,9 @@
 
 ``uv run optbench board`` does not run a search. It reads
 ``results/campaign`` and ``results/asv``, scores each row with the v2
-PAR-2 reducer, and writes one table per problem plus the Dolan-Moré
-profile and a cost-versus-success scatter.
+PAR-2 reducer, and writes a best-per-code summary plus the Dolan-Moré
+profile and a cost-versus-success scatter. The full template table is
+on the problem page.
 
 The ranked cost of a band method is the harness force-call total across
 every image. The per-image mean divides that same total by the problem's
@@ -38,7 +39,7 @@ from .failures import FAILURES
 from .problems import load_all
 from .profile import performance_profile, profile_cost
 from .score import normalize_start, score_v2
-from .site import campaign_problem
+from .site import SUITE_ORDER, campaign_problem
 from .v2 import parse_repetitions
 
 BOARD_SCHEMA = "optbench.board/v1"
@@ -1129,13 +1130,55 @@ def _profile_reason(exc: ValueError) -> str:
     return text[0].upper() + text[1:]
 
 
+def _plain_tick(value: float, _position: object) -> str:
+    """Tick text without mathtext, so the SVG does not outline every glyph."""
+    if value == 0:
+        return "0"
+    return f"{value:.4g}"
+
+
+def _raster_thumbnails(figure, stem: Path) -> list[str]:
+    """Write a PNG fallback and a compressed WebP at the figure's pixel size."""
+    import io
+
+    from PIL import Image
+
+    buffer = io.BytesIO()
+    figure.savefig(buffer, format="png", dpi=100)
+    buffer.seek(0)
+    image = Image.open(buffer)
+    image.load()
+    if image.mode == "RGBA":
+        flat = Image.new("RGB", image.size, (255, 255, 255))
+        flat.paste(image, mask=image.getchannel("A"))
+        image = flat
+    elif image.mode != "RGB":
+        image = image.convert("RGB")
+    png_path = stem.with_suffix(".png")
+    webp_path = stem.with_suffix(".webp")
+    image.save(png_path, format="PNG", optimize=True)
+    image.save(webp_path, format="WEBP", quality=72, method=6)
+    return [str(png_path), str(webp_path)]
+
+
+def _save_figure(figure, directory: Path, stem: str) -> list[str]:
+    svg_path = directory / f"{stem}.svg"
+    figure.savefig(svg_path, format="svg")
+    written = [str(svg_path)]
+    written.extend(_raster_thumbnails(figure, directory / stem))
+    return written
+
+
 def _write_plots(problem_id: str, ranked: list[dict], profile: dict | None, directory: Path) -> list[str]:
     import os
 
     import matplotlib
+    from matplotlib.ticker import FuncFormatter, ScalarFormatter
 
     matplotlib.use("Agg", force=False)
     matplotlib.rcParams["svg.hashsalt"] = "optbench"
+    # Glyphs stay as <text>. Path-cloned markers were hundreds of <use> nodes per plot.
+    matplotlib.rcParams["svg.fonttype"] = "none"
     # Same bytes on the next render. The date is metadata, not a score.
     os.environ.setdefault("SOURCE_DATE_EPOCH", "0")
     import matplotlib.pyplot as plt
@@ -1143,11 +1186,14 @@ def _write_plots(problem_id: str, ranked: list[dict], profile: dict | None, dire
     directory.mkdir(parents=True, exist_ok=True)
     slug = _slug(problem_id)
     written = []
+    plain = FuncFormatter(_plain_tick)
     if profile is not None:
         figure, axis = plt.subplots(figsize=(7.2, 4.2))
         for label, values in profile["rho"].items():
             axis.step(profile["taus"], values, where="post", label=label)
         axis.set_xscale("log", base=2)
+        axis.xaxis.set_major_formatter(plain)
+        axis.yaxis.set_major_formatter(ScalarFormatter(useOffset=False))
         axis.set_xlabel("tau")
         axis.set_ylabel("fraction of starts")
         axis.set_ylim(0.0, 1.05)
@@ -1155,10 +1201,7 @@ def _write_plots(problem_id: str, ranked: list[dict], profile: dict | None, dire
         if len(profile["rho"]) <= 12:
             axis.legend(fontsize=7, loc="lower right")
         figure.tight_layout()
-        for suffix in ("svg", "png"):
-            path = directory / f"{slug}-profile.{suffix}"
-            figure.savefig(path)
-            written.append(str(path))
+        written.extend(_save_figure(figure, directory, f"{slug}-profile"))
         plt.close(figure)
     if ranked:
         figure, axis = plt.subplots(figsize=(7.2, 4.2))
@@ -1167,17 +1210,16 @@ def _write_plots(problem_id: str, ranked: list[dict], profile: dict | None, dire
             float(row["par2_mean"] if row["par2_mean"] is not None else row["median"])
             for row in ranked
         ]
-        axis.scatter(rates, costs)
+        axis.scatter(rates, costs, s=16, marker="o", linewidths=0)
         for index, (rate, cost) in enumerate(zip(rates, costs), start=1):
             axis.annotate(str(index), (rate, cost), fontsize=7, textcoords="offset points", xytext=(3, 3))
+        axis.xaxis.set_major_formatter(plain)
+        axis.yaxis.set_major_formatter(ScalarFormatter(useOffset=False))
         axis.set_xlabel("success rate")
         axis.set_ylabel("PAR-2 mean" if any(row["par2_mean"] is not None for row in ranked) else "median calls")
         axis.set_title(f"Cost and success: {problem_id}")
         figure.tight_layout()
-        for suffix in ("svg", "png"):
-            path = directory / f"{slug}-cost.{suffix}"
-            figure.savefig(path)
-            written.append(str(path))
+        written.extend(_save_figure(figure, directory, f"{slug}-cost"))
         plt.close(figure)
     return written
 
@@ -1316,6 +1358,26 @@ def _reason_text(row: dict) -> str:
     return f"counter {row.get('counter') or 'unset'}"
 
 
+def _plot_html(prefix: str, name: str, label: str, problem_id: str) -> str:
+    """Lazy WebP thumbnail, PNG fallback, click-through to the full SVG."""
+    stem = name[:-4] if name.endswith(".svg") else name
+    svg_name = name if name.endswith(".svg") else f"{stem}.svg"
+    alt = f"{label} for {problem_id}"
+    caption = f"{label}. Select the plot for the full SVG."
+    return (
+        '<figure class="bench-plot">'
+        f'<a href="{_cell(f"{prefix}/{svg_name}")}">'
+        "<picture>"
+        f'<source srcset="{_cell(f"{prefix}/{stem}.webp")}" type="image/webp">'
+        f'<img src="{_cell(f"{prefix}/{stem}.png")}" alt="{_cell(alt)}" '
+        'loading="lazy" decoding="async">'
+        "</picture>"
+        "</a>"
+        f"<figcaption>{_cell(caption)}</figcaption>"
+        "</figure>"
+    )
+
+
 def plot_names_for(problem: dict) -> set[str]:
     """SVG files ``write_board`` emits for this problem."""
     slug = _slug(str(problem.get("id") or ""))
@@ -1327,11 +1389,104 @@ def plot_names_for(problem: dict) -> set[str]:
     return names
 
 
+def _problem_order(problem: dict) -> tuple:
+    ident = str(problem.get("id") or "")
+    suite = ident.split("/", 1)[0]
+    try:
+        index = SUITE_ORDER.index(suite)
+    except ValueError:
+        index = len(SUITE_ORDER)
+    return (index, ident.lower())
+
+
+def summary_codes(document: dict, registry: list[dict]) -> list[str]:
+    """Codes that have a full ranked run, in registry order, then any extras."""
+    present: set[str] = set()
+    for problem in (document.get("problems") or {}).values():
+        for row in problem.get("ranked") or []:
+            code = str(row.get("code") or "").strip()
+            if code:
+                present.add(code)
+    ordered: list[str] = []
+    for pin in registry:
+        name = str(pin.get("name") or "").strip()
+        if name and name in present and name not in ordered:
+            ordered.append(name)
+    for name in sorted(present - set(ordered)):
+        ordered.append(name)
+    return ordered
+
+
+def best_ranked_by_code(ranked: list[dict]) -> dict[str, dict]:
+    """First ranked row of each code. The list is already best-PAR-2 first."""
+    best: dict[str, dict] = {}
+    for row in ranked:
+        code = str(row.get("code") or "").strip()
+        if code and code not in best:
+            best[code] = row
+    return best
+
+
+def _problem_anchor(problem: dict, templates: bool) -> str:
+    ident = str(problem.get("id") or "")
+    name = ident.split("/", 1)[1] if "/" in ident else ident
+    return f"{name}-templates" if templates else name
+
+
+def _board_problem_link(problem: dict, templates: bool = False) -> str:
+    ident = str(problem.get("id") or "")
+    suite, _, name = ident.partition("/")
+    anchor = _problem_anchor(problem, templates)
+    if not suite or not name:
+        return f"#{anchor}"
+    return f"generated/suites/{suite}.html#{anchor}"
+
+
+def summary_table(problems: list[dict], codes: list[str], link) -> str:
+    """One cell per code: the best full harness run, codes side by side.
+
+    ``link(problem, templates=False)`` returns the href for that problem.
+    The template link opens the full per-template table.
+    """
+    lines = [
+        '<div class="bench-scroll">',
+        '<table data-board-table="summary">',
+        "<caption>Best full harness run of each code. Lower PAR-2 is better. "
+        "The full template table is on the problem page.</caption>",
+        "<thead><tr><th>Problem</th>"
+        + "".join(f"<th>{_cell(code)}</th>" for code in codes)
+        + "</tr></thead><tbody>",
+    ]
+    for problem in sorted(problems, key=_problem_order):
+        best = best_ranked_by_code(list(problem.get("ranked") or []))
+        lines.append(f'<tr data-problem="{_cell(problem["id"])}">')
+        title = str(problem.get("title") or problem["id"])
+        lines.append(f'<th scope="row"><a href="{_cell(link(problem))}">{_cell(title)}</a></th>')
+        detail = link(problem, templates=True)
+        for code in codes:
+            row = best.get(code)
+            if row is None:
+                lines.append(f'<td data-code="{_cell(code)}">—</td>')
+                continue
+            template = str(row.get("template") or row.get("entry") or "")
+            par2 = dict(ranked_cells(row, False))["par2_mean"]
+            lines.append(
+                f'<td data-code="{_cell(code)}" data-template="{_cell(template)}" data-par2="{_cell(par2)}">'
+                f'<span class="bench-score">{_cell(par2)}</span>'
+                f'<a href="{_cell(detail)}">{_cell(template)}</a>'
+                "</td>"
+            )
+        lines.append("</tr>")
+    lines.append("</tbody></table></div>")
+    return "\n".join(lines)
+
+
 def headline_table(problem: dict) -> str:
     """One ranked row: the best full harness run."""
     per_image = _show_per_image(problem)
     headers = _headers(problem)
     lines = [
+        '<div class="bench-scroll">',
         f'<table data-board-table="headline" data-problem="{_cell(problem["id"])}">',
         "<thead><tr>" + "".join(f"<th>{_cell(header)}</th>" for header in headers) + "</tr></thead><tbody>",
     ]
@@ -1340,7 +1495,7 @@ def headline_table(problem: dict) -> str:
         lines.append(f"<tr>{_row_cells(ranked[0], per_image)}</tr>")
     else:
         lines.append(f'<tr><td colspan="{len(headers)}">No full harness row.</td></tr>')
-    lines.append("</tbody></table>")
+    lines.append("</tbody></table></div>")
     return "\n".join(lines)
 
 
@@ -1385,30 +1540,40 @@ def _table(
     if per_image:
         caption += " Per-image mean divides that total by the problem's moving images, the same way for every code."
     ident = section_id or _slug(problem["id"])
+    ranked = list(problem.get("ranked") or [])
     lines = [
         f'<section class="bench" id="{_cell(ident)}" data-problem="{_cell(problem["id"])}">',
         f"<{heading}>{_cell(problem['title'])}</{heading}>",
     ]
     if preamble:
         lines.append(preamble)
-    lines.extend(
-        [
-            "<p>Ranked by the v2 PAR-2 mean of the harness total. "
-            "Only the newest full version of a template is in this table. "
-            "A partial row, including a one-start asv smoke run, is not.</p>",
-            f'<table data-board-table="ranked" data-problem="{_cell(problem["id"])}">',
-            f"<caption>{caption}</caption>",
-            "<thead><tr>" + "".join(f"<th>{_cell(header)}</th>" for header in headers) + "</tr></thead><tbody>",
-        ]
+    lines.append(
+        "<p>Ranked by the v2 PAR-2 mean of the harness total. "
+        "Only the newest full version of a template is in this table. "
+        "A partial row, including a one-start asv smoke run, is not.</p>"
     )
-    for row in problem.get("ranked") or []:
-        lines.append(f"<tr>{_row_cells(row, per_image)}</tr>")
-    if not problem.get("ranked"):
-        lines.append(f'<tr><td colspan="{len(headers)}">No full harness row.</td></tr>')
-    lines.append("</tbody></table>")
     lead = gap_paragraph(problem, unparsed)
     if lead:
         lines.append(lead)
+    slug = _slug(problem["id"])
+    prefix = asset_prefix.rstrip("/")
+    for kind, label in (("profile", "Dolan-More profile"), ("cost", "Cost versus success")):
+        name = f"{slug}-{kind}.svg"
+        if name in plots:
+            lines.append(_plot_html(prefix, name, label, str(problem["id"])))
+    if problem.get("profile_gap") and f"{slug}-profile.svg" not in plots:
+        lines.append(f'<p class="bench-gaps">{_cell(problem["profile_gap"])}</p>')
+    lines.append(f'<details class="bench-details" id="{_cell(ident)}-templates">')
+    lines.append(f"<summary>All templates ({len(ranked)} ranked)</summary>")
+    lines.append('<div class="bench-scroll">')
+    lines.append(f'<table data-board-table="ranked" data-problem="{_cell(problem["id"])}">')
+    lines.append(f"<caption>{caption}</caption>")
+    lines.append("<thead><tr>" + "".join(f"<th>{_cell(header)}</th>" for header in headers) + "</tr></thead><tbody>")
+    for row in ranked:
+        lines.append(f"<tr>{_row_cells(row, per_image)}</tr>")
+    if not ranked:
+        lines.append(f'<tr><td colspan="{len(headers)}">No full harness row.</td></tr>')
+    lines.append("</tbody></table></div>")
     if problem.get("history"):
         lines.append("<h3>History</h3><ul>")
         for row in problem["history"]:
@@ -1448,14 +1613,7 @@ def _table(
             label = row.get("template") or row.get("entry") or row.get("path")
             lines.append(f"<li>{_cell(label)}: {_cell(row.get('note') or '')}</li>")
         lines.append("</ul>")
-    slug = _slug(problem["id"])
-    prefix = asset_prefix.rstrip("/")
-    for kind, label in (("profile", "Dolan-More profile"), ("cost", "Cost versus success")):
-        name = f"{slug}-{kind}.svg"
-        if name in plots:
-            lines.append(f'<img src="{prefix}/{name}" alt="{_cell(label)} for {_cell(problem["id"])}">')
-    if problem.get("profile_gap") and f"{slug}-profile.svg" not in plots:
-        lines.append(f'<p class="bench-gaps">{_cell(problem["profile_gap"])}</p>')
+    lines.append("</details>")
     lines.append("</section>")
     return "\n".join(lines)
 
@@ -1496,12 +1654,7 @@ def write_board(root: Path, output: Path) -> dict:
     plot_dir = output / "plots"
     site_plots = root / "docs" / "source" / "_static" / "board"
     sections = []
-    plot_names: set[str] = set()
     written_names: set[str] = set()
-    unparsed_by: dict[str, list[dict]] = defaultdict(list)
-    for row in document["unparsed"]:
-        if row.get("problem"):
-            unparsed_by[str(row["problem"])].append(row)
     for problem_id, problem in document["problems"].items():
         ranked_rows = problem.get("_ranked_rows") or []
         profile = _profile_for(ranked_rows)
@@ -1518,11 +1671,14 @@ def write_board(root: Path, output: Path) -> dict:
             if gap:
                 problem["profile_gap"] = gap
         for path in written:
-            name = Path(path).name
-            written_names.add(name)
-            if name.endswith(".svg"):
-                plot_names.add(name)
-        sections.append(_table(problem, plot_names, unparsed=unparsed_by.get(problem_id)))
+            written_names.add(Path(path).name)
+    ordered = sorted(document["problems"].values(), key=_problem_order)
+    if ordered:
+        sections.append('<section class="bench" id="summary">')
+        sections.append(
+            summary_table(ordered, summary_codes(document, _registry(root)), _board_problem_link)
+        )
+        sections.append("</section>")
     _drop_unwritten(plot_dir, written_names)
     if document["unparsed"]:
         items = [

@@ -4,7 +4,20 @@
 #+begin_export rst
 .. raw:: html
 
-   <section class="bench" id="pt-island" data-problem="saddle-search/pt-island">
+   <section class="bench" id="summary"><div class="bench-scroll">
+   <table data-board-table="summary">
+   <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th></tr></thead><tbody>
+   <tr data-problem="saddle-search/pt-island">
+   <th scope="row"><a href="#pt-island">Pt heptamer island</a></th>
+   <td data-code="eOn">—</td>
+   <td data-code="Eon svn">—</td>
+   <td data-code="rgmin">—</td>
+   <td data-code="rgsaddle" data-template="rgsaddle/saddle-dimer-rotskip-tuned" data-par2="10127.1"><span class="bench-score">10127.1</span><a href="#pt-island-templates">rgsaddle/saddle-dimer-rotskip-tuned</a></td>
+   <td data-code="ASE">—</td>
+   <td data-code="Sella" data-template="sella/pt-island-search-default" data-par2="5201.62"><span class="bench-score">5201.62</span><a href="#pt-island-templates">sella/pt-island-search-default</a></td>
+   </tr>
+   </tbody></table></div></section><section class="bench" id="pt-island" data-problem="saddle-search/pt-island">
    <h2>Pt heptamer island</h2>
    <dl class="bench-rule">
    <dt>Stop</dt><dd>L2 norm of the force at or below 0.001 eV/Angstrom</dd>
@@ -14,6 +27,12 @@
    </dl>
    <p class="bench-smoke">A 2-search SoftSaddle smoke is outside this rank. The April 2019 adaptive_HSphere-lbfgs-davidson-sm50 entry records 423491.1 force calls.</p>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
+   <p class="bench-gaps">Eon rows are not yet on the harness counter. Partial rows stay off the ranked table.</p>
+   <figure class="bench-plot"><a href="../../_static/board/saddle-search-pt-island-cost.svg"><picture><source srcset="../../_static/board/saddle-search-pt-island-cost.webp" type="image/webp"><img src="../../_static/board/saddle-search-pt-island-cost.png" alt="Cost versus success for saddle-search/pt-island" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
+   <p class="bench-gaps">No performance profile. The ranked rows do not share one start set.</p>
+   <details class="bench-details" id="pt-island-templates">
+   <summary>All templates (10 ranked)</summary>
+   <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="saddle-search/pt-island">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
@@ -27,8 +46,7 @@
    <tr><td data-field="template">rgsaddle/saddle-dimer-rotskip</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">10128</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.000192036</td><td data-field="median_calls">441</td><td data-field="mean_calls">479.98</td><td data-field="failures">crash 0, divergence 19718, cap 262, wrong_stationary 20</td><td data-field="n">20000</td></tr>
    <tr><td data-field="template">rgsaddle/saddle-lanczos</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">10128</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.000192036</td><td data-field="median_calls">1002</td><td data-field="mean_calls">998.34</td><td data-field="failures">crash 0, divergence 4068, cap 15932, wrong_stationary 0</td><td data-field="n">20000</td></tr>
    <tr><td data-field="template">rgsaddle/saddle-lanczos-tuned</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">10128</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.000192036</td><td data-field="median_calls">899</td><td data-field="mean_calls">871.296</td><td data-field="failures">crash 0, divergence 13743, cap 6257, wrong_stationary 0</td><td data-field="n">20000</td></tr>
-   </tbody></table>
-   <p class="bench-gaps">Eon rows are not yet on the harness counter. Partial rows stay off the ranked table.</p>
+   </tbody></table></div>
    <h3>Partial</h3><ul>
    <li>ase/dimer-pt-island-default ASE campaign, asv n=16, result file sets ranked false.</li>
    <li>ase/dimer-pt-island-tuned ASE campaign, asv n=16, result file sets ranked false.</li>
@@ -43,10 +61,11 @@
    <li>eon-3.5.0-saddle-pt-classic Eon n=10, not yet on the harness counter.</li>
    <li>eon-3.5.0-saddle-pt-dimer Eon n=10, not yet on the harness counter.</li>
    </ul>
-   <img src="../../_static/board/saddle-search-pt-island-cost.svg" alt="Cost versus success for saddle-search/pt-island">
-   <p class="bench-gaps">No performance profile. The ranked rows do not share one start set.</p>
+   </details>
    </section><section class="bench bench-legacy-section" id="pt-island-legacy">
    <h3>Legacy 2014 archive</h3>
+   <details class="bench-details">
+   <summary>Legacy 2014 archive</summary>
    <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
@@ -208,5 +227,6 @@
    </tr>
    </tbody></table></div>
    <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:12"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "saddle-search-pt-island-adaptive-hsphere-lbfgs-davidson-sm50", "entry": "adaptive_HSphere-lbfgs-davidson-sm50", "code": "SoftSaddle", "value": 423491.1, "best": true, "held": false, "failed": false}, {"id": "saddle-search-pt-island-adaptive-hsphere-lbfgs-lanczos-sm50", "entry": "adaptive_HSphere-lbfgs-lanczos-sm50", "code": "SoftSaddle", "value": 814519.3, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-adaptive-hsphere-lbfgs-lanczos-sm0", "entry": "adaptive_HSphere-lbfgs-lanczos-sm0", "code": "SoftSaddle", "value": 1003433.0, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-lbfgs-5-rotations-20-bowl-breakout", "entry": "eon-dimer-lbfgs-5-rotations-20-bowl_breakout", "code": "Eon r2213", "value": 1345465.88889, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-md", "entry": "eon-md", "code": "Eon r2205", "value": 1478168.0, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-lbfgs-5-rotations", "entry": "eon-dimer-lbfgs-5-rotations", "code": "Eon r2213", "value": 1684436.77778, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-lbfgs-20-rotations-20-bowl-breakout", "entry": "eon-dimer-lbfgs-20-rotations-20-bowl_breakout", "code": "Eon r2213", "value": 2732309.11111, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-lbfgs-20-rotations", "entry": "eon-dimer-lbfgs-20-rotations", "code": "Eon r2213", "value": 3341488.0, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-cg-5-rotations-20-bowl-breakout", "entry": "eon-dimer-cg-5-rotations-20-bowl_breakout", "code": "Eon r2213", "value": 3463700.66667, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer", "entry": "eon-dimer", "code": "Eon r2205", "value": 3778880.0, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-cg-20-rotations-20-bowl-breakout", "entry": "eon-dimer-cg-20-rotations-20-bowl_breakout", "code": "Eon r2213", "value": 7174213.66667, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-cg-20-rotations", "entry": "eon-dimer-cg-20-rotations", "code": "Eon r2213", "value": 7947070.11111, "best": false, "held": false, "failed": false}]}</script></figure>
+   </details>
    </section>
 #+end_export

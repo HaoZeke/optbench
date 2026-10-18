@@ -4,7 +4,20 @@
 #+begin_export rst
 .. raw:: html
 
-   <section class="bench" id="Pt-heptamer" data-problem="neb/Pt-heptamer">
+   <section class="bench" id="summary"><div class="bench-scroll">
+   <table data-board-table="summary">
+   <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th></tr></thead><tbody>
+   <tr data-problem="neb/Pt-heptamer">
+   <th scope="row"><a href="#Pt-heptamer">Pt-heptamer</a></th>
+   <td data-code="eOn">—</td>
+   <td data-code="Eon svn" data-template="eon-svn/neb-pt-ci" data-par2="336.769"><span class="bench-score">336.769</span><a href="#Pt-heptamer-templates">eon-svn/neb-pt-ci</a></td>
+   <td data-code="rgmin">—</td>
+   <td data-code="rgsaddle" data-template="rgsaddle/idpp-ci-neb-lbfgs" data-par2="318.308"><span class="bench-score">318.308</span><a href="#Pt-heptamer-templates">rgsaddle/idpp-ci-neb-lbfgs</a></td>
+   <td data-code="ASE" data-template="ase/neb-pt-heptamer-tuned" data-par2="442.615"><span class="bench-score">442.615</span><a href="#Pt-heptamer-templates">ase/neb-pt-heptamer-tuned</a></td>
+   <td data-code="Sella">—</td>
+   </tr>
+   </tbody></table></div></section><section class="bench" id="Pt-heptamer" data-problem="neb/Pt-heptamer">
    <h2>Pt-heptamer</h2>
    <dl class="bench-rule">
    <dt>Stop</dt><dd>L2 norm of the force at or below 0.01 eV/Ang</dd>
@@ -13,6 +26,12 @@
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
+   <p class="bench-gaps">eOn band rows are not yet on the harness counter. Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
+   <figure class="bench-plot"><a href="../../_static/board/neb-Pt-heptamer-profile.svg"><picture><source srcset="../../_static/board/neb-Pt-heptamer-profile.webp" type="image/webp"><img src="../../_static/board/neb-Pt-heptamer-profile.png" alt="Dolan-More profile for neb/Pt-heptamer" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="../../_static/board/neb-Pt-heptamer-cost.svg"><picture><source srcset="../../_static/board/neb-Pt-heptamer-cost.webp" type="image/webp"><img src="../../_static/board/neb-Pt-heptamer-cost.png" alt="Cost versus success for neb/Pt-heptamer" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
+   <details class="bench-details" id="Pt-heptamer-templates">
+   <summary>All templates (16 ranked)</summary>
+   <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="neb/Pt-heptamer">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate. Per-image mean divides that total by the problem's moving images, the same way for every code.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Per-image mean</th><th>Failures</th><th>n</th></tr></thead><tbody>
@@ -32,8 +51,7 @@
    <tr><td data-field="template">rgsaddle/oci-neb</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">asv</td><td data-field="current">yes</td><td data-field="par2_mean">760.769</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.771905</td><td data-field="wilson_high">1</td><td data-field="median_calls">722</td><td data-field="mean_calls">760.769</td><td data-field="mean_per_image">95.0962</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">13</td></tr>
    <tr><td data-field="template">rgsaddle/neb</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">asv</td><td data-field="current">yes</td><td data-field="par2_mean">20000</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.228095</td><td data-field="median_calls">962</td><td data-field="mean_calls">970.615</td><td data-field="mean_per_image">121.327</td><td data-field="failures">crash 0, divergence 13, cap 0, wrong_stationary 0</td><td data-field="n">13</td></tr>
    <tr><td data-field="template">rgsaddle/neb-lbfgs</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">asv</td><td data-field="current">yes</td><td data-field="par2_mean">20000</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.228095</td><td data-field="median_calls">410</td><td data-field="mean_calls">422.923</td><td data-field="mean_per_image">52.8654</td><td data-field="failures">crash 0, divergence 13, cap 0, wrong_stationary 0</td><td data-field="n">13</td></tr>
-   </tbody></table>
-   <p class="bench-gaps">eOn band rows are not yet on the harness counter. Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
+   </tbody></table></div>
    <h3>Partial</h3><ul>
    <li>ase/neb-pt-heptamer-default ASE asv n=1, smoke run; scored 1 of 13 starts.</li>
    <li>ase/neb-pt-heptamer-tuned ASE asv n=1, smoke run; scored 1 of 13 starts.</li>
@@ -48,10 +66,11 @@
    <li>eon-lbfgs: no per-start record</li>
    <li>eon-qm: no per-start record</li>
    </ul>
-   <img src="../../_static/board/neb-Pt-heptamer-profile.svg" alt="Dolan-More profile for neb/Pt-heptamer">
-   <img src="../../_static/board/neb-Pt-heptamer-cost.svg" alt="Cost versus success for neb/Pt-heptamer">
+   </details>
    </section><section class="bench bench-legacy-section" id="Pt-heptamer-legacy">
    <h3>Legacy 2014 archive</h3>
+   <details class="bench-details">
+   <summary>Legacy 2014 archive</summary>
    <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
@@ -187,5 +206,6 @@
    </tr>
    </tbody></table></div>
    <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:12"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "neb-pt-heptamer-eon-lbfgs", "entry": "eon-lbfgs", "code": "Eon r2090", "value": 42.0, "best": true, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-glbfgs-hess", "entry": "gman-glbfgs-hess", "code": "Gman r235", "value": 48.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-fire", "entry": "gman-fire", "code": "Gman r235", "value": 82.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-eon-fire", "entry": "eon-fire", "code": "Eon r2090", "value": 86.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-glbfgs-line", "entry": "gman-glbfgs-line", "code": "Gman r235", "value": 100.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-lbfgs-line", "entry": "gman-lbfgs-line", "code": "Gman r235", "value": 108.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-cg", "entry": "gman-cg", "code": "Gman r235", "value": 111.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-eon-cg", "entry": "eon-cg", "code": "Eon r2090", "value": 120.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-eon-qm", "entry": "eon-qm", "code": "Eon r2090", "value": 164.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-qm", "entry": "gman-qm", "code": "Gman r235", "value": 190.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-lbfgs-hess", "entry": "gman-lbfgs-hess", "code": "Gman r235", "value": 217.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-sd", "entry": "gman-sd", "code": "Gman r235", "value": 412.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   </details>
    </section>
 #+end_export

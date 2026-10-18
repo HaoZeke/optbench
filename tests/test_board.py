@@ -426,10 +426,14 @@ def test_profile_lines_up_the_same_starts(tmp_path: Path):
     assert rho[dear][0] == 0.0
     assert rho[cheap][1] == 1.0
     assert rho[dear][1] == 1.0
-    assert (tmp_path / "board" / "plots" / "minimization-toy-profile.svg").stat().st_size > 0
+    profile_svg = (tmp_path / "board" / "plots" / "minimization-toy-profile.svg").read_text(encoding="utf-8")
+    assert "DejaVuSans-" not in profile_svg
+    assert profile_svg.count("<use") < 40
     assert (tmp_path / "board" / "plots" / "minimization-toy-profile.png").stat().st_size > 0
+    assert (tmp_path / "board" / "plots" / "minimization-toy-profile.webp").read_bytes().startswith(b"RIFF")
     assert (tmp_path / "board" / "plots" / "minimization-toy-cost.svg").stat().st_size > 0
     assert (tmp_path / "board" / "plots" / "minimization-toy-cost.png").stat().st_size > 0
+    assert (tmp_path / "board" / "plots" / "minimization-toy-cost.webp").read_bytes().startswith(b"RIFF")
     include = (tmp_path / "docs" / "include" / "v2-board.org").read_text(encoding="utf-8")
     assert "toy/cheap" in include
     assert "PAR-2" in include
@@ -451,6 +455,8 @@ def test_plot_bytes_match_across_two_writes(tmp_path: Path):
         "minimization-toy-cost.svg",
         "minimization-toy-profile.png",
         "minimization-toy-cost.png",
+        "minimization-toy-profile.webp",
+        "minimization-toy-cost.webp",
     ):
         assert (first / name).read_bytes() == (second / name).read_bytes()
 
@@ -469,12 +475,15 @@ def test_a_partial_problem_drops_a_plot_left_from_an_earlier_run(tmp_path: Path)
     site.mkdir(parents=True)
     site_stale = site / "minimization-toy-cost.png"
     site_stale.write_text("stale", encoding="utf-8")
+    site_webp = site / "minimization-toy-profile.webp"
+    site_webp.write_bytes(b"stale-webp")
 
     written = write_board(tmp_path, tmp_path / "board")
 
     assert written["problems"]["minimization/toy"]["ranked"] == []
     assert not stale.exists()
     assert not site_stale.exists()
+    assert not site_webp.exists()
     assert list(plots.iterdir()) == []
     assert list(site.iterdir()) == []
 
