@@ -92,7 +92,7 @@ repository = "https://github.com/pele-python/pele"
 ref = "0.1.2"
 commit = "b7081b932a060be11342fbe8287ac35da8ada879"
 committed = "2026-10-12"
-note = "0.1.2, GPL-3.0-or-later. LBFGS, FIRE, and basin hopping on the harness potential. The older pele-0.1.2-lbfgs campaign files count nfev and are unchanged. hTST has no aluminium or platinum potential and no stationary-point database, so pele.rates is not run."
+note = "0.1.2, GPL-3.0-or-later. LBFGS, FIRE, basin hopping, findLowestEigenVector, and findTransitionState run on the harness Lennard-Jones potential. The older pele-0.1.2-lbfgs campaign files count nfev and are unchanged. hTST has no aluminium or platinum potential and no stationary-point database, so pele.rates is not run. tsopt/pt-island is a periodic Morse with D 0.7102, alpha 1.6047, and r0 2.897, which this harness does not evaluate. Double-ended and NEB archives are endpoint pairs, and the harness loader does not read that layout, so those rows are not emitted."
 
 [[code]]
 id = "scipy"
@@ -122,7 +122,7 @@ repository = "https://github.com/leeping/geomeTRIC"
 ref = "1.1.1"
 commit = "f657e69bae9c81bf7a23e7375db98502ca5c8c30"
 committed = "2026-05-18"
-note = "1.1.1. The licence is BSD-3-Clause with a Non-AI clause that forbids putting the source in a machine-learning training set. Running the optimizer is permitted. The source is not vendored. Carbon labels on the first LJ38 start produce 662 bonds, and TRIC and the stock Cartesian setup do not finish primitive-internal generation. The rows use Cartesian coordinates with that generation skipped. The engine reports problem units. It does not apply the Hartree conversion in EngineASE."
+note = "1.1.1. The licence is BSD-3-Clause with a Non-AI clause that forbids putting the source in a machine-learning training set. Running the optimizer is permitted. The source is not vendored. Carbon labels on the first LJ38 start produce 662 bonds, and TRIC and the stock Cartesian setup do not finish primitive-internal generation. The rows use Cartesian coordinates with that generation skipped. The engine reports problem units. It does not apply the Hartree conversion in EngineASE. On minimization/morse-bulk the same Cartesian run is at energy -1396.173 by step 20, then holds trust radius 1e-4 with gradient rms about 2e-3 through step 360. That 100-start campaign was stopped before a result file was written."
 
 [[code]]
 id = "ase-ga"
@@ -215,6 +215,16 @@ committed = "2026-01-06"
 note = "sha256 of the Linux executable tarball ABCluster-3.4-Linux.tar.gz. isomer 3.4 was compiled on 2026-01-06 and calls Gaussian or xTB through files. The tarball has no licence file. It does not evaluate the harness potential. No rows."
 
 [[code]]
+id = "pybcga"
+name = "PyBCGA"
+role = "global optimization"
+repository = "https://github.com/marktoakley/PyBCGA"
+ref = "master"
+commit = "fb646c19b1829656bf16cc72ca318bef2d37bfeb"
+committed = "2016-02-26"
+note = "GPL-3.0. setup.py imports distutils, which Python 3.12 does not provide, so the install uses a setuptools build of the same tree. PeleMinimiser accepts a pele potential. The row uses population 10, 10 generations, and 8 offspring. The archived start is one member and the other nine are the library random clusters. Quenches are pele mylbfgs. Binary LJ is not in this row."
+
+[[code]]
 id = "ase-gpatom"
 name = "ase-gpatom"
 role = "global optimization"
@@ -263,6 +273,136 @@ ref = "master"
 commit = "99a615acaef6bc6afe44d895f666c6d60250f7d8"
 committed = "2025-02-21"
 note = "GPL-2.0. The Lennard-Jones evaluation is the Fortran potential_LJ_voids addon, and the other relaxations go through LAMMPS. Neither evaluates the harness potential. No rows."
+
+[[code]]
+id = "ase-mh"
+name = "Minima Hopping"
+role = "global optimization"
+repository = "https://gitlab.com/goedeckergroup/ase_mh"
+ref = "1.1.2"
+commit = "6baabf94c48fd4f673bcef5307915e49c2c906b2"
+committed = "2025-06-03"
+note = "1.1.2, GPL-3.0. The search takes an ASE calculator, so the harness potential is the calculator. ASE 3.29 removed MaxwellBoltzmannDistribution's communicator argument, and the library passes the string serial, which is mapped to ase.parallel.world. NumPy 2.5 returns a complex dtype from eig on the real inertia tensor, so those eigenvalues are taken as real before the torque removal. Library defaults are T0 1000 K, Ediff0 0.1, fmax 0.005, and dt0 0.08. The quench is SQNM. pbc is off, so the relaxation is fixed-cell."
+
+[[code]]
+id = "jax-md"
+name = "JAX MD"
+role = "minimization"
+repository = "https://github.com/jax-md/jax-md"
+ref = "jax-md-v0.2.29"
+commit = "a41c7d19f6468f4e5263c32c12c9ed6cba26ebff"
+committed = "2026-08-18"
+note = "0.2.29, Apache-2.0. fire_descent accepts a force function. The row passes the harness gradient through jax.pure_callback with float64 enabled. Defaults are dt_start 0.1, dt_max 0.4, n_min 5, f_inc 1.1, f_dec 0.5, alpha_start 0.1, f_alpha 0.99, and mass 1. One velocity-Verlet step is one force call."
+
+[[code]]
+id = "scgo"
+name = "SCGO"
+role = "global optimization"
+repository = "https://github.com/rlaplaza-lab/scgo"
+ref = "main"
+commit = "2338742a434a920ed82e52a72dc1338cf06647c1"
+committed = "2026-10-01"
+note = "0.9.1, MIT. The package import requires torch. bh_go relaxes an ASE calculator, so the harness potential is that calculator. Defaults are niter 100, LBFGS, fmax 0.05, 250 local steps, dr 0.5, and temperature 1. The covalent-connectivity gate calls a reduced Lennard-Jones cluster fragmented, so allow_cluster_fragmentation is on and a hit is the quench rather than the filtered minima list. Declared numpy is >=2.2 and <2.5. This install is --no-deps on NumPy 2.5.4."
+
+[[code]]
+id = "torch-sim"
+name = "TorchSim"
+role = "minimization"
+repository = "https://github.com/TorchSim/torch-sim"
+ref = "main"
+commit = "2e9c16f5afe354282279630a57885f46521a1cc0"
+committed = "2026-10-14"
+note = "0.6.2, MIT. optimize requires a torch ModelInterface. The row's forward method returns the harness energy and forces in float64. FIRE defaults are dt_start 0.1, alpha_start 0.1, and flavor ase_fire. Convergence is checked every step."
+
+[[code]]
+id = "agox"
+name = "AGOX"
+role = "global optimization"
+repository = "https://gitlab.com/agox/agox"
+ref = "dev"
+commit = "22d94a6fae8cf2d08d51ecc8b9291a47667aa95c"
+committed = "2026-05-05"
+note = "GPL-3.0-only. This commit has no version tag. setuptools_scm reports 0.0.1.dev1+g22d94a6fa. Basin hopping uses BasinHoppingConfig: Metropolis temperature 0.25 eV, a rattle of a quarter of the atoms with amplitude 3, and BFGS at fmax 0.05 for 100 steps. The harness potential is the ASE calculator. The archived start is quenched and seeded into the sampler. Without that seed the rattle falls back to a random cluster. The rattle gate uses carbon covalent radii."
+
+[[code]]
+id = "ezga"
+name = "EZGA"
+role = "global optimization"
+repository = "https://gitlab.mpcdf.mpg.de/fhi-theory/EZGA"
+ref = "main"
+commit = "1395e8de01f003e40a3352987377d5f863a2e388"
+committed = "2026-08-27"
+note = "1.2.31, MIT. ase_calculator accepts an ASE calculator. The bundled LJMixer example uses argon sigma 3.405 and epsilon 0.0103, so the row does not use that potential. The relaxer defaults are FIRE, fmax 0.05, and 100 steps. The population is 16 copies of the archived start and the run is 10 rattle generations."
+
+[[code]]
+id = "optax"
+name = "Optax"
+role = "neural-network potential training"
+repository = "https://github.com/google-deepmind/optax"
+ref = "main"
+commit = "8589d974e565fbf1bfa1cdf8d94f5ecdf8ebe93c"
+committed = "2026-10-09"
+note = "Apache-2.0. The tree has no Behler-Parrinello net and no PyAMFF fingerprint. It does not train the archived 10-7 tanh model. No mlopt rows."
+
+[[code]]
+id = "n2p2"
+name = "n2p2"
+role = "neural-network potential training"
+repository = "https://github.com/CompPhysVienna/n2p2"
+ref = "master"
+commit = "29b9c9f10b1ac9ea45631b3d556a129ca3b701c2"
+committed = "2025-03-17"
+note = "GPL-3.0. The trainer is n2p2's symmetry-function HDNNP with a Kalman filter. Those symmetry functions are not the archived PyAMFF Fortran fingerprints. Not built. No mlopt rows."
+
+[[code]]
+id = "aenet"
+name = "aenet"
+role = "neural-network potential training"
+repository = "https://github.com/atomisticnet/aenet"
+ref = "master"
+commit = "8f35990f5e3dd6cb296b953448cb11694d0cff3d"
+committed = "2026-10-11"
+note = "MPL-2.0. Hidden layers are written as N:tanh, so 10:tanh 7:tanh can be requested, and the descriptors are aenet symmetry-function input. They are not the archived PyAMFF fingerprints. Not built. No mlopt rows."
+
+[[code]]
+id = "amp"
+name = "AMP"
+role = "neural-network potential training"
+repository = "https://bitbucket.org/andrewpeterson/amp"
+ref = "master"
+commit = "d556191aaca8f771e63db83581a764c6d3f8e4e6"
+committed = "2026-04-15"
+note = "GPL-3.0. The atomistic package is amp-atomistics. The PyPI project named amp is unrelated. Descriptors in this tree are Gaussian and bispectrum fingerprints, not the archived PyAMFF set. Not built. No mlopt rows."
+
+[[code]]
+id = "kliff"
+name = "KLIFF"
+role = "neural-network potential training"
+repository = "https://github.com/openkim/kliff"
+ref = "master"
+commit = "df2d4de2d8c0b3d4ba81cb9aa1834b52de299aa5"
+committed = "2026-02-28"
+note = "LGPL-2.1. Training uses KLIFF symmetry functions. They are not the archived PyAMFF fingerprints. Not installed. No mlopt rows."
+
+[[code]]
+id = "panna"
+name = "PANNA"
+role = "neural-network potential training"
+repository = "https://gitlab.com/PANNAdevs/panna"
+ref = "master"
+commit = "132a2df662598ecbbb2c9b8d37b992bb6ada6348"
+committed = "2025-01-15"
+note = "MIT, LICENSE.txt. Fingerprints are PANNA's own. They are not the archived PyAMFF Fortran set. Not installed. No mlopt rows."
+
+[[code]]
+id = "geometryoptimization-jl"
+name = "GeometryOptimization.jl"
+role = "minimization"
+repository = "https://github.com/JuliaMolSim/GeometryOptimization.jl"
+ref = "master"
+commit = "5b145886c19042f2ef13e21627f28d86027f719c"
+committed = "2026-08-12"
+note = "MIT. Project.toml requires julia >= 1.10 and the AtomsCalculators interface. julia is not on PATH. No rows."
 
 # generated ASE and Sella templates
 

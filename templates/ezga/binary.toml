@@ -1,0 +1,20 @@
+id = "ezga/binary"
+engine = "harness"
+code = "ezga"
+code_version = "1.2.31"
+commit = "1395e8de01f003e40a3352987377d5f863a2e388"
+algorithm = "GA"
+problem = "globalopt/lj100-binary"
+task = "globalopt"
+profile = "default"
+tuning = "default"
+reducer = "capped"
+ranked = true
+note = "EZGA 1.2.31. The relaxer is ase_calculator's default FIRE at fmax 0.05 for 100 steps, with no MD. The population is 16 copies of the archived start and the run is 10 rattle generations. A hit is a quench inside fmax and inside the energy window."
+
+[search]
+family = "globalopt"
+method = "ezga"
+
+[stop]
+max_force_calls = 2000000

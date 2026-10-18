@@ -1,0 +1,22 @@
+id = "pele/ts-lj38"
+engine = "harness"
+code = "pele"
+code_version = "0.1.2"
+commit = "b7081b932a060be11342fbe8287ac35da8ada879"
+algorithm = "hybrid eigenvector following"
+problem = "tsopt/LJ38"
+task = "tsopt"
+profile = "default"
+tuning = "default"
+reducer = "capped"
+ranked = true
+note = "pele findTransitionState. The RMS tolerance is the Euclidean force stop divided by sqrt(3N). nsteps is the force-call cap. orthogZeroEigs keeps translation and rotation. A success is an index-1 stop."
+
+[search]
+family = "tsopt"
+method = "pele-ts"
+
+[stop]
+max_force_calls = 10000
+norm = "l2"
+force_norm = 0.001

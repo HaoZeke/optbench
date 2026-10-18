@@ -1,0 +1,23 @@
+id = "jax-md/noise-lj38-fire-s0"
+engine = "harness"
+code = "jax-md"
+code_version = "0.2.29"
+commit = "a41c7d19f6468f4e5263c32c12c9ed6cba26ebff"
+algorithm = "FIRE"
+problem = "minimization/lj38-noise"
+task = "minimize"
+profile = "s0"
+tuning = "s0"
+reducer = "capped"
+ranked = true
+note = "sigma 0.0. Noise is drawn inside the harness evaluation, so one geometry keeps one sample. Positive sigma is compared with an uncounted clean minimization of the same start."
+
+[search]
+family = "minimize"
+method = "jaxmd-fire"
+sigma = 0.0
+
+[stop]
+max_force_calls = 10000
+norm = "l2"
+force_norm = 0.01

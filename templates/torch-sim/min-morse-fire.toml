@@ -1,0 +1,22 @@
+id = "torch-sim/min-morse-fire"
+engine = "harness"
+code = "torch-sim"
+code_version = "0.6.2"
+commit = "2e9c16f5afe354282279630a57885f46521a1cc0"
+algorithm = "FIRE"
+problem = "minimization/morse-bulk"
+task = "minimize"
+profile = "default"
+tuning = "default"
+reducer = "capped"
+ranked = true
+note = "TorchSim 0.6.2 FIRE defaults: dt_start 0.1, alpha_start 0.1, flavor ase_fire. The model returns the harness energy and forces. Float64. Convergence is checked every step, and the harness Euclidean norm ends the run."
+
+[search]
+family = "minimize"
+method = "torchsim-fire"
+
+[stop]
+max_force_calls = 10000
+norm = "l2"
+force_norm = 0.001

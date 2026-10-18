@@ -1,0 +1,20 @@
+id = "agox/bh-lj75"
+engine = "harness"
+code = "agox"
+code_version = "0.0.1.dev1+g22d94a6fa"
+commit = "22d94a6fae8cf2d08d51ecc8b9291a47667aa95c"
+algorithm = "basin hopping"
+problem = "globalopt/lj75"
+task = "globalopt"
+profile = "default"
+tuning = "default"
+reducer = "capped"
+ranked = true
+note = "AGOX basin hopping at the BasinHoppingConfig defaults: Metropolis temperature 0.25 eV, rattle of a quarter of the atoms with amplitude 3, BFGS fmax 0.05 for 100 steps. The harness potential is the ASE calculator. The archived start is quenched and seeded into the sampler. A hit is a quench inside fmax and inside the energy window."
+
+[search]
+family = "globalopt"
+method = "agox-bh"
+
+[stop]
+max_force_calls = 500000

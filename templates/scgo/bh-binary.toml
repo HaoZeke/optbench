@@ -1,0 +1,20 @@
+id = "scgo/bh-binary"
+engine = "harness"
+code = "scgo"
+code_version = "0.9.1"
+commit = "2338742a434a920ed82e52a72dc1338cf06647c1"
+algorithm = "basin hopping"
+problem = "globalopt/lj100-binary"
+task = "globalopt"
+profile = "default"
+tuning = "default"
+reducer = "capped"
+ranked = true
+note = "SCGO 0.9.1 bh_go defaults: niter 100, LBFGS, fmax 0.05, niter_local_relaxation 250, dr 0.5, temperature 1. The harness potential is the ASE calculator. allow_cluster_fragmentation is on because the covalent-connectivity gate rejects a reduced Lennard-Jones cluster. A hit is a quench inside fmax and inside the energy window."
+
+[search]
+family = "globalopt"
+method = "scgo-bh"
+
+[stop]
+max_force_calls = 2000000

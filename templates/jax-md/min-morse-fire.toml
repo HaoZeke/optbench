@@ -1,0 +1,22 @@
+id = "jax-md/min-morse-fire"
+engine = "harness"
+code = "jax-md"
+code_version = "0.2.29"
+commit = "a41c7d19f6468f4e5263c32c12c9ed6cba26ebff"
+algorithm = "FIRE"
+problem = "minimization/morse-bulk"
+task = "minimize"
+profile = "default"
+tuning = "default"
+reducer = "capped"
+ranked = true
+note = "JAX MD 0.2.29 fire_descent defaults: dt_start 0.1, dt_max 0.4, n_min 5, f_inc 1.1, f_dec 0.5, alpha_start 0.1, f_alpha 0.99, mass 1. The harness gradient is the force. Float64 is enabled. One Verlet step is one force call."
+
+[search]
+family = "minimize"
+method = "jaxmd-fire"
+
+[stop]
+max_force_calls = 10000
+norm = "l2"
+force_norm = 0.001

@@ -10,7 +10,7 @@ profile = "default"
 tuning = "default"
 reducer = "capped"
 ranked = true
-note = "SciPy L-BFGS-B. The harness stops at the problem Euclidean force norm. The SciPy gradient tolerance is 1e-14, and maxiter is the force-call cap."
+note = "SciPy L-BFGS-B. The harness stops at the problem Euclidean force norm. The SciPy gradient tolerance is 1e-14, ftol is machine epsilon, and maxfun and maxiter are the force-call cap."
 
 [search]
 family = "minimize"

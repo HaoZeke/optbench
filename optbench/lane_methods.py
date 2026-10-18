@@ -9,6 +9,7 @@ from __future__ import annotations
 import math
 import os
 import random
+import sys
 import tempfile
 
 import numpy as np
@@ -126,6 +127,10 @@ def _dispatch(budget: Budget, x0: np.ndarray, job: dict) -> None:
         _pele_fire(budget, x0, job)
     elif method == "pele-bh":
         _pele_bh(budget, x0, job)
+    elif method == "pele-lowest":
+        _pele_lowest(budget, x0, job)
+    elif method == "pele-ts":
+        _pele_ts(budget, x0, job)
     elif method == "sqnm":
         _sqnm(budget, x0, job)
     elif method == "geometric":
@@ -134,12 +139,26 @@ def _dispatch(budget: Budget, x0: np.ndarray, job: dict) -> None:
         _ase_bh(budget, x0, job)
     elif method == "ase-mh":
         _ase_mh(budget, x0, job)
+    elif method == "goedecker-mh":
+        _goedecker_mh(budget, x0, job)
+    elif method == "jaxmd-fire":
+        _jaxmd_fire(budget, x0, job)
+    elif method == "scgo-bh":
+        _scgo_bh(budget, x0, job)
+    elif method == "torchsim-fire":
+        _torchsim_fire(budget, x0, job)
+    elif method == "ezga":
+        _ezga(budget, x0, job)
+    elif method == "agox-bh":
+        _agox_bh(budget, x0, job)
     elif method == "ase-ga":
         _ase_ga(budget, x0, job)
     elif method == "nlopt-minimize":
         _nlopt_minimize(budget, x0, job)
     elif method == "optking":
         _optking(budget, x0, job)
+    elif method == "pybcga":
+        _pybcga(budget, x0, job)
     elif method == "gmin":
         raise RuntimeError(_gmin_reason())
     else:
@@ -184,7 +203,10 @@ def _scipy_options(method: str, cap: int) -> dict:
         # SciPy 1.18 warns that TNC does not accept maxiter. maxfun is the cap.
         return {"maxfun": cap, "gtol": 1e-14}
     if method == "L-BFGS-B":
-        return {"maxfun": cap, "maxiter": cap, "gtol": 1e-14}
+        # The library ftol stops on a relative energy change near 2e-9.
+        # On Morse bulk that fires while the Euclidean force is still above
+        # the problem stop. Machine epsilon leaves the harness stop in charge.
+        return {"maxfun": cap, "maxiter": cap, "gtol": 1e-14, "ftol": float(np.finfo(float).eps)}
     if method == "Newton-CG":
         return {"maxiter": cap}
     return {"maxiter": cap, "gtol": 1e-14}
@@ -488,6 +510,65 @@ def _pele_bh(budget: Budget, x0: np.ndarray, job: dict) -> None:
     ).run(int(job["cap"]))
 
 
+def _pele_lowest(budget: Budget, x0: np.ndarray, job: dict) -> None:
+    """Pele Rayleigh-Ritz lowest eigenvector. The potential is the harness."""
+    from pele.transition_states import findLowestEigenVector
+
+    class _Potential:
+        def getEnergy(self, coords):
+            energy, _gradient = budget.fg(coords)
+            return float(energy)
+
+        def getEnergyGradient(self, coords):
+            energy, gradient = budget.fg(coords)
+            return float(energy), np.asarray(gradient, dtype=np.float64)
+
+    np.random.seed(int(job["seed"]))
+    result = findLowestEigenVector(np.asarray(x0, dtype=np.float64), _Potential(), nsteps=int(job["cap"]))
+    vector = np.asarray(result.eigenvec, dtype=np.float64).reshape(-1)
+    mode = np.asarray(job["mode"], dtype=np.float64).reshape(-1)
+    denom = float(np.linalg.norm(vector) * np.linalg.norm(mode))
+    overlap = 0.0 if denom == 0.0 else abs(float(np.dot(vector, mode))) / denom
+    job["_overlap"] = float(overlap)
+    budget.point = np.asarray(x0, dtype=np.float64).reshape(-1).copy()
+    budget.energy = float(budget.energy if budget.energy is not None else 0.0)
+    budget.gradient = np.zeros(budget.point.size)
+    if overlap >= float(job.get("overlap") or 0.99) and budget.calls < budget.cap:
+        budget.hit = True
+
+
+def _pele_ts(budget: Budget, x0: np.ndarray, job: dict) -> None:
+    """Pele hybrid eigenvector following. The potential is the harness.
+
+    The library stops on the RMS gradient. That tolerance is the Euclidean
+    stop divided by sqrt(3N), and nsteps is the force-call cap.
+    """
+    from pele.transition_states import findTransitionState
+
+    class _Potential:
+        def getEnergy(self, coords):
+            energy, _gradient = budget.fg(coords)
+            return float(energy)
+
+        def getEnergyGradient(self, coords):
+            energy, gradient = budget.fg(coords)
+            return float(energy), np.asarray(gradient, dtype=np.float64)
+
+    size = max(int(np.asarray(x0).size), 1)
+    result = findTransitionState(
+        np.asarray(x0, dtype=np.float64),
+        _Potential(),
+        tol=float(job["gtol"]) / math.sqrt(size),
+        nsteps=int(job["cap"]),
+        iprint=-1,
+        verbosity=0,
+        index_seed=int(job["seed"]),
+    )
+    budget.point = np.asarray(result.coords, dtype=np.float64).reshape(-1)
+    budget.energy = float(result.energy)
+    budget.gradient = np.asarray(result.grad, dtype=np.float64).reshape(-1)
+
+
 def _sqnm(budget: Budget, x0: np.ndarray, job: dict) -> None:
     from sqnm.free_or_fixed_cell_sqnm import free_sqnm
 
@@ -665,6 +746,80 @@ def _optking(budget: Budget, x0: np.ndarray, job: dict) -> None:
             os.chdir(cwd)
 
 
+def _pybcga(budget: Budget, x0: np.ndarray, job: dict) -> None:
+    from pele.optimize import mylbfgs
+
+    from bcga.cluster import Cluster
+    from bcga.cluster_factory import ClusterFactory
+    from bcga.crossover import DeavenHo
+    from bcga.mutator import MutateReplace
+    from bcga.population import PopulationList
+    from bcga.selector import TournamentSelector
+
+    nat = int(x0.size // 3)
+
+    class _Potential:
+        def getEnergy(self, coords):
+            energy, _gradient = budget.fg(coords)
+            return float(energy)
+
+        def getEnergyGradient(self, coords):
+            energy, gradient = budget.fg(coords)
+            return float(energy), np.asarray(gradient, dtype=np.float64)
+
+    class _Minimiser:
+        def __init__(self, potential):
+            self.potential = potential
+
+        def minimise(self, cluster):
+            result = mylbfgs(
+                cluster._coords.reshape(-1),
+                self.potential,
+                iprint=0,
+                nsteps=int(job["cap"]),
+            )
+            cluster.energy = float(result.energy)
+            cluster._coords = np.reshape(result.coords, (-1, 3))
+            cluster.quenched = True
+            budget.note_quench(
+                result.coords,
+                float(result.energy),
+                result.grad,
+                converged=bool(result.success),
+            )
+            return cluster
+
+    np.random.seed(int(job["seed"]))
+    minimiser = _Minimiser(_Potential())
+    factory = ClusterFactory(nat, minimiser)
+    selector = TournamentSelector(3)
+    crossover = DeavenHo()
+    mutator = MutateReplace()
+    population = PopulationList(nat, factory, 10)
+    population.append(Cluster(nat, np.asarray(x0, dtype=np.float64).reshape(-1, 3).copy(), minimiser))
+    while len(population) < population.max_size and budget.calls < budget.cap:
+        population.append(factory.get_random_cluster())
+    cwd = os.getcwd()
+    with tempfile.TemporaryDirectory(prefix="pybcga-") as tmp:
+        os.chdir(tmp)
+        try:
+            population.sort_energy()
+            for _generation in range(10):
+                if budget.calls >= budget.cap or budget.hit:
+                    break
+                for _offspring in range(8):
+                    indices = selector.select(population)
+                    child = crossover.get_offspring(population[indices[0]], population[indices[1]])
+                    population.append(child)
+                for member in list(population):
+                    if np.random.uniform(0, 1) < 0.1:
+                        population.append(mutator.get_mutant(member))
+                population.truncate()
+                population.sort_energy()
+        finally:
+            os.chdir(cwd)
+
+
 def _atoms(x0: np.ndarray, job: dict, budget: Budget):
     from ase import Atoms
     from ase.calculators.calculator import Calculator
@@ -793,6 +948,420 @@ def _ase_ga(budget: Budget, x0: np.ndarray, job: dict) -> None:
             atoms.set_positions(child.get_positions())
 
 
+def _goedecker_mh(budget: Budget, x0: np.ndarray, job: dict) -> None:
+    """Goedecker minima hopping through its ASE calculator.
+
+    ASE 3.29 removed the communicator argument and rejects the old serial
+    string. NumPy 2 eig returns a complex dtype for the real inertia tensor,
+    which the torque removal cannot subtract.
+    """
+    import logging
+    import warnings
+
+    import minimahopping.md.soften as soften
+    import minimahopping.minhop as mh
+    import minimahopping.opt.optim as optim
+    from ase import Atoms
+    from ase.calculators.calculator import Calculator
+    from ase.parallel import world
+    from minimahopping.minhop import Minimahopping
+
+    real_velocity = mh.MaxwellBoltzmannDistribution
+    real_inertia = soften.moment_of_inertia
+    real_optimization = optim.optimization
+
+    def velocity(atoms, *args, **kwargs):
+        comm = kwargs.pop("communicator", None)
+        if comm == "serial":
+            kwargs.setdefault("comm", world)
+        elif comm is not None:
+            kwargs.setdefault("comm", comm)
+        return real_velocity(atoms, *args, **kwargs)
+
+    def inertia(positions, masses):
+        values, vectors = real_inertia(positions, masses)
+        return np.real(np.asarray(values)), np.real(np.asarray(vectors))
+
+    def optimization(*args, **kwargs):
+        positions, lattice, noise, trajectory, nsteps, epot_max = real_optimization(*args, **kwargs)
+        energy, gradient = budget.fg(np.asarray(positions, dtype=np.float64).reshape(-1))
+        forces = -np.asarray(gradient, dtype=np.float64).reshape(-1, 3)
+        atomic = float(np.max(np.abs(forces))) if forces.size else 0.0
+        threshold = float(kwargs.get("max_force_threshold", 0.005))
+        budget.note_quench(positions, float(energy), gradient, converged=atomic <= threshold)
+        return positions, lattice, noise, trajectory, nsteps, epot_max
+
+    class _Calc(Calculator):
+        implemented_properties = ["energy", "forces"]
+
+        def calculate(self, atoms=None, properties=None, system_changes=None):
+            Calculator.calculate(self, atoms, properties, system_changes)
+            energy, gradient = budget.fg(atoms.positions.reshape(-1))
+            self.results["energy"] = float(energy)
+            self.results["forces"] = -np.asarray(gradient, dtype=np.float64).reshape(-1, 3)
+
+    pos = np.asarray(x0, dtype=np.float64).reshape(-1, 3)
+    atoms = Atoms(numbers=[6] * pos.shape[0], positions=pos, cell=[40.0, 40.0, 40.0], pbc=False)
+    atoms.calc = _Calc()
+    np.random.seed(int(job["seed"]))
+    warnings.filterwarnings("ignore", category=DeprecationWarning)
+    cwd = os.getcwd()
+    mh.MaxwellBoltzmannDistribution = velocity
+    soften.moment_of_inertia = inertia
+    optim.optimization = optimization
+    try:
+        with tempfile.TemporaryDirectory(prefix="ase-mh-") as tmp:
+            os.chdir(tmp)
+            with Minimahopping(
+                atoms,
+                use_MPI=False,
+                logLevel=logging.ERROR,
+                verbose_output=False,
+                collect_md_data=False,
+                write_graph_output=False,
+            ) as hopper:
+                with open(os.devnull, "w", encoding="utf-8") as devnull:
+                    saved = sys.stdout
+                    sys.stdout = devnull
+                    try:
+                        hopper(totalsteps=int(job["cap"]))
+                    finally:
+                        sys.stdout = saved
+    finally:
+        mh.MaxwellBoltzmannDistribution = real_velocity
+        soften.moment_of_inertia = real_inertia
+        optim.optimization = real_optimization
+        os.chdir(cwd)
+
+
+def _agox_bh(budget: Budget, x0: np.ndarray, job: dict) -> None:
+    """AGOX basin hopping. The ASE calculator is the harness potential.
+
+    BasinHoppingConfig defaults are Metropolis temperature 0.25 eV, a rattle
+    of a quarter of the atoms by at most 3 angstrom, and BFGS at fmax 0.05
+    for 100 steps. The archived start is quenched and seeded into the sampler.
+    Without that seed the rattle falls back to a random cluster.
+    """
+    from ase import Atoms
+    from ase.calculators.calculator import Calculator
+
+    fmax = 0.05
+    steps = 100
+
+    class _Halt(BaseException):
+        """Leave AGOX. Its evaluator catches Exception, including Hit."""
+
+    class _Calc(Calculator):
+        implemented_properties = ["energy", "forces"]
+
+        def calculate(self, atoms=None, properties=None, system_changes=None):
+            Calculator.calculate(self, atoms, properties, system_changes)
+            if budget.hit or budget.calls >= budget.cap:
+                raise _Halt()
+            point = np.asarray(atoms.positions, dtype=np.float64).reshape(-1)
+            try:
+                energy, gradient = budget.fg(point)
+            except ForceCallCap:
+                raise _Halt() from None
+            forces = -np.asarray(gradient, dtype=np.float64).reshape(-1, 3)
+            self.results["energy"] = float(energy)
+            self.results["forces"] = forces
+            atomic = float(np.linalg.norm(forces, axis=1).max()) if forces.size else 0.0
+            try:
+                budget.note_quench(point, float(energy), gradient, converged=atomic < fmax)
+            except Hit:
+                raise _Halt() from None
+
+    pos = np.asarray(x0, dtype=np.float64).reshape(-1, 3)
+    nat = int(pos.shape[0])
+    margin = 15.0
+    lo = pos.min(axis=0) - margin
+    span = np.maximum(pos.max(axis=0) + margin - lo, 20.0)
+    template = Atoms(cell=np.diag(span + 6.0), pbc=False)
+    calc = _Calc()
+    cwd = os.getcwd()
+    try:
+        with tempfile.TemporaryDirectory(prefix="agox-") as tmp:
+            os.chdir(tmp)
+            with open(os.devnull, "w", encoding="utf-8") as devnull:
+                saved_out, saved_err = sys.stdout, sys.stderr
+                sys.stdout = devnull
+                sys.stderr = devnull
+                try:
+                    _agox_search(job, pos, nat, lo, span, template, calc, fmax, steps, tmp)
+                except _Halt:
+                    return
+                finally:
+                    sys.stdout = saved_out
+                    sys.stderr = saved_err
+    finally:
+        os.chdir(cwd)
+
+
+def _agox_search(job, pos, nat, lo, span, template, calc, fmax, steps, tmp) -> None:
+    from uuid import uuid4
+
+    from agox import AGOX
+    from agox.candidates import StandardCandidate
+    from agox.databases import Database
+    from agox.environments import Environment
+    from agox.evaluators import LocalOptimizationEvaluator
+    from agox.generators import RattleGenerator
+    from agox.samplers import MetropolisSampler
+
+    environment = Environment(
+        template=template,
+        numbers=[6] * nat,
+        confinement_cell=np.diag(span),
+        confinement_corner=lo,
+        print_report=False,
+    )
+    seed = StandardCandidate(
+        template=template,
+        positions=pos,
+        numbers=[6] * nat,
+        cell=template.cell,
+        pbc=False,
+    )
+    seed.calc = calc
+    identity = str(uuid4())
+    seed.add_meta_information("uuid", identity)
+    seed.add_meta_information("spawn_uuids", [identity])
+    seed.add_meta_information("search_iteration", 0)
+    evaluator = LocalOptimizationEvaluator(
+        calc,
+        gets={"get_key": "candidates"},
+        store_trajectory=False,
+        optimizer_run_kwargs={"fmax": fmax, "steps": steps},
+        order=2,
+        constraints=environment.get_constraints(),
+    )
+    evaluator.evaluate_candidate(seed)
+    sampler = MetropolisSampler(temperature=0.25, order=3)
+    sampler.set_sample([seed])
+    generator = RattleGenerator(
+        **environment.get_confinement(),
+        environment=environment,
+        sampler=sampler,
+        order=1,
+        n_rattle=max(int(nat * 0.25), 1),
+        rattle_amplitude=3,
+    )
+    database = Database(filename=os.path.join(tmp, "db.db"), order=4)
+    search = AGOX(generator, database, sampler, evaluator, seed=int(job["seed"]), report=False)
+    search.run(N_iterations=int(job["cap"]))
+
+
+def _ezga(budget: Budget, x0: np.ndarray, job: dict) -> None:
+    """EZGA from the archived start.
+
+    The relaxer defaults are ase_calculator's: FIRE, fmax 0.05, 100 steps,
+    no MD. The population is 16 copies of the start, and the run is 10
+    generations of rattle. A quench is a point whose maximum atomic force
+    is inside fmax.
+    """
+    from ase import Atoms
+    from ase.calculators.calculator import Calculator
+    from ase.io import write
+    from ezga.evaluator.objective import objective_energy
+    from ezga.factory import build_default_engine, load_config
+    from ezga.simulator.ase_calculator import ase_calculator
+    from ezga.variation.mutation import mutation_rattle
+
+    fmax = 0.05
+    population = int(job.get("ezga_population") or 16)
+    generations = int(job.get("ezga_generations") or 10)
+
+    class _Calc(Calculator):
+        implemented_properties = ["energy", "forces"]
+
+        def calculate(self, atoms=None, properties=None, system_changes=None):
+            Calculator.calculate(self, atoms, properties, system_changes)
+            point = np.asarray(atoms.positions, dtype=np.float64).reshape(-1)
+            energy, gradient = budget.fg(point)
+            forces = -np.asarray(gradient, dtype=np.float64).reshape(-1, 3)
+            self.results["energy"] = float(energy)
+            self.results["forces"] = forces
+            atomic = float(np.linalg.norm(forces, axis=1).max()) if forces.size else 0.0
+            budget.note_quench(point, float(energy), gradient, converged=atomic < fmax)
+
+    pos = np.asarray(x0, dtype=np.float64).reshape(-1, 3)
+    frames = [
+        Atoms(numbers=[6] * pos.shape[0], positions=pos, cell=[40.0, 40.0, 40.0], pbc=False)
+        for _copy in range(population)
+    ]
+    runner = ase_calculator(
+        calculator=_Calc(),
+        nvt_steps=0,
+        fmax=fmax,
+        steps_max=100,
+        device="cpu",
+        log_interval=0,
+        write_interval=0,
+    )
+    cwd = os.getcwd()
+    with tempfile.TemporaryDirectory(prefix="ezga-") as tmp:
+        os.chdir(tmp)
+        try:
+            path = os.path.join(tmp, "population.xyz")
+            write(path, frames)
+            config = {
+                "output_path": os.path.join(tmp, "engine"),
+                "max_generations": generations,
+                "resume": False,
+                "rng": int(job["seed"]),
+                "population": {
+                    "dataset_path": path,
+                    "db_path": os.path.join(tmp, "db"),
+                    "filter_duplicates": False,
+                    "collision_factor": 0.0,
+                },
+                "multiobjective": {"size": population},
+                "variation": {"initial_mutation_rate": 1.0},
+                "evaluator": {"objectives_funcs": [objective_energy()]},
+                "mutation_funcs": [mutation_rattle(std=0.2, seed=int(job["seed"]))],
+                "simulator": {"calculator": runner},
+            }
+            build_default_engine(load_config(config)).run()
+        finally:
+            os.chdir(cwd)
+
+
+def _torchsim_fire(budget: Budget, x0: np.ndarray, job: dict) -> None:
+    """TorchSim FIRE. The model forward call is the harness potential."""
+    import torch
+    import torch_sim as ts
+    from ase import Atoms
+    from torch_sim.models.interface import ModelInterface
+
+    stopped = False
+
+    class _Model(ModelInterface):
+        def __init__(self):
+            super().__init__()
+            self._device = torch.device("cpu")
+            self._dtype = torch.float64
+            self._compute_forces = True
+            self._compute_stress = False
+
+        def forward(self, state, **kwargs):
+            nonlocal stopped
+            point = np.asarray(state.positions.detach().cpu().numpy(), dtype=np.float64).reshape(-1)
+            if stopped or budget.calls >= budget.cap:
+                stopped = True
+                energy = 0.0 if budget.energy is None else float(budget.energy)
+                gradient = np.zeros(point.size) if budget.gradient is None else budget.gradient
+            else:
+                try:
+                    energy, gradient = budget.fg(point)
+                    _maybe_stop(budget, job)
+                except Converged:
+                    stopped = True
+                    energy = float(budget.energy)
+                    gradient = budget.gradient
+                except ForceCallCap:
+                    stopped = True
+                    energy = 0.0 if budget.energy is None else float(budget.energy)
+                    gradient = np.zeros(point.size) if budget.gradient is None else budget.gradient
+            return {
+                "energy": torch.tensor([float(energy)], dtype=self.dtype),
+                "forces": torch.tensor(
+                    -np.asarray(gradient, dtype=np.float64).reshape(-1, 3),
+                    dtype=self.dtype,
+                ),
+            }
+
+    def converged(state, last_energy=None):
+        return torch.tensor([stopped])
+
+    pos = np.asarray(x0, dtype=np.float64).reshape(-1, 3)
+    atoms = Atoms(numbers=[6] * pos.shape[0], positions=pos, pbc=False)
+    ts.optimize(
+        atoms,
+        _Model(),
+        optimizer=ts.Optimizer.fire,
+        max_steps=int(job["cap"]),
+        convergence_fn=converged,
+        steps_between_swaps=1,
+        pbar=False,
+    )
+
+
+def _scgo_bh(budget: Budget, x0: np.ndarray, job: dict) -> None:
+    """SCGO basin hopping. The attached ASE calculator is the harness potential.
+
+    The library's covalent-connectivity gate treats a reduced Lennard-Jones
+    cluster as fragmented, so fragmentation is allowed. Hits are the quenches.
+    """
+    import scgo.algorithms.basinhopping_go as bhmod
+    from scgo.algorithms.basinhopping_go import bh_go
+
+    real = bhmod.perform_local_relaxation
+
+    def relaxation(atoms, calculator, optimizer, fmax, steps, *args, **kwargs):
+        energy = real(atoms, calculator, optimizer, fmax, steps, *args, **kwargs)
+        point = np.asarray(atoms.positions, dtype=np.float64).reshape(-1)
+        energy, gradient = budget.fg(point)
+        forces = -np.asarray(gradient, dtype=np.float64).reshape(-1, 3)
+        atomic = float(np.linalg.norm(forces, axis=1).max()) if forces.size else 0.0
+        budget.note_quench(point, float(energy), gradient, converged=atomic < float(fmax))
+        return energy
+
+    bhmod.perform_local_relaxation = relaxation
+    cwd = os.getcwd()
+    try:
+        atoms = _atoms(x0, job, budget)
+        with tempfile.TemporaryDirectory(prefix="scgo-") as tmp:
+            os.chdir(tmp)
+            bh_go(
+                atoms,
+                output_dir=tmp,
+                verbosity=0,
+                rng=np.random.default_rng(int(job["seed"])),
+                allow_cluster_fragmentation=True,
+            )
+    finally:
+        bhmod.perform_local_relaxation = real
+        os.chdir(cwd)
+
+
+def _jaxmd_fire(budget: Budget, x0: np.ndarray, job: dict) -> None:
+    """JAX MD FIRE. The harness gradient is the force via pure_callback."""
+    import jax
+    import jax.numpy as jnp
+    from jax import pure_callback
+    from jax_md import minimize, space
+
+    jax.config.update("jax_enable_x64", True)
+    stop = False
+
+    def force_fn(positions):
+        def host(x):
+            nonlocal stop
+            if stop or budget.calls >= budget.cap:
+                stop = True
+                return np.zeros(np.shape(x), dtype=np.float64)
+            try:
+                _energy, gradient = budget.fg(np.asarray(x, dtype=np.float64).reshape(-1))
+                _maybe_stop(budget, job)
+            except Converged:
+                stop = True
+            except ForceCallCap:
+                stop = True
+                return np.zeros(np.shape(x), dtype=np.float64)
+            return -np.asarray(gradient, dtype=np.float64).reshape(np.shape(x))
+
+        return pure_callback(host, jax.ShapeDtypeStruct(positions.shape, jnp.float64), positions)
+
+    _displacement, shift = space.free()
+    init_fn, apply_fn = minimize.fire_descent(force_fn, shift)
+    state = init_fn(jnp.asarray(np.asarray(x0, dtype=np.float64).reshape(-1, 3)))
+    for _step in range(int(job["cap"])):
+        if stop or budget.calls >= budget.cap:
+            return
+        state = apply_fn(state)
+
+
 def _record(job: dict, budget: Budget | None, error: str, reference: dict | None, overlap: float | None) -> dict:
     calls = 0 if budget is None else budget.calls
     verify = 0
@@ -821,7 +1390,7 @@ def _record(job: dict, budget: Budget | None, error: str, reference: dict | None
         and math.isfinite(force_norm)
     )
     hessian_index = None
-    if family == "minimize" and point is not None and finite and job["kind"] in {"lj", "morse"}:
+    if family in {"minimize", "tsopt"} and point is not None and finite and job["kind"] in {"lj", "morse"}:
         try:
             hessian_index = _index(job["kind"], point, job.get("box"), gtol)
         except Exception as exc:
@@ -861,6 +1430,11 @@ def _record(job: dict, budget: Budget | None, error: str, reference: dict | None
                 reasons.append("hessian_index")
             if sigma > 0.0:
                 reasons.extend(_noise_reasons(job, point, energy, reference))
+    elif family == "tsopt":
+        if not at_force:
+            reasons.append("force_norm")
+        elif hessian_index not in (None, 1):
+            reasons.append("hessian_index")
     elif family == "globalopt":
         if not hit:
             if budget is not None and budget.quenched:
@@ -885,7 +1459,7 @@ def _record(job: dict, budget: Budget | None, error: str, reference: dict | None
         "energy": None if energy is None else float(energy),
         "force_norm": force_norm,
         "hessian_index": hessian_index,
-        "converged": bool(at_force) if family == "minimize" else bool(hit),
+        "converged": bool(at_force) if family in {"minimize", "tsopt"} else bool(hit),
     }
     if overlap is not None:
         record["overlap"] = float(overlap)

@@ -1,0 +1,1780 @@
+{
+  "bootstrap_resamples": 2000,
+  "bootstrap_seed": 20261015,
+  "note": "Harness counter. One fresh coordinate is one force call.",
+  "par_factor": 2,
+  "problem": "globalopt/lj38",
+  "runs": [
+    {
+      "algorithm": "BCGA",
+      "cap": 1000000,
+      "code": "pybcga",
+      "code_version": "fb646c19",
+      "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+      "entry": "pybcga-fb646c19-lj38",
+      "legacy": {
+        "force_calls": null,
+        "force_calls_max": null,
+        "force_calls_min": null,
+        "median": null,
+        "nfailed": 100
+      },
+      "metrics": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 1000000,
+        "includes_failures": true,
+        "iqr": 0.0,
+        "iqr_high": 0.0,
+        "iqr_low": 0.0,
+        "mean": 2000000.0,
+        "median": 2000000.0,
+        "median_high": 2000000.0,
+        "median_low": 2000000.0,
+        "n": 100,
+        "n_cap": 0,
+        "n_crash": 0,
+        "n_divergence": 0,
+        "n_wrong_stationary": 100,
+        "nfailed": 100,
+        "par2_mean": 2000000.0,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 2000000.0,
+        "q75": 2000000.0,
+        "scoring": "par2-wilson-bootstrap",
+        "success_only_mean": null,
+        "success_rate": 0.0,
+        "successes": 0,
+        "wilson_high": 0.03699349820698568,
+        "wilson_low": 0.0
+      },
+      "parameters": {
+        "family": "globalopt",
+        "method": "pybcga"
+      },
+      "present_source": true,
+      "provenance": {
+        "code": "pybcga",
+        "code_version": "fb646c19",
+        "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+        "machine": {
+          "machine": "x86_64",
+          "node": "cursor",
+          "python": "3.12.3",
+          "system": "Linux"
+        },
+        "parameters": {
+          "family": "globalopt",
+          "method": "pybcga"
+        }
+      },
+      "starts": [
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -167.29324179202112,
+          "failure": "wrong_stationary",
+          "force_calls": 25933,
+          "force_norm": 9.935510371231948e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "0",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -166.83286048453965,
+          "failure": "wrong_stationary",
+          "force_calls": 25147,
+          "force_norm": 0.00010228995233420214,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "1",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -160.40514064084138,
+          "failure": "wrong_stationary",
+          "force_calls": 27727,
+          "force_norm": 0.00010607307633064378,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "10",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -162.79459912107103,
+          "failure": "wrong_stationary",
+          "force_calls": 27789,
+          "force_norm": 0.00010231735224895116,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "11",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -164.66220860425457,
+          "failure": "wrong_stationary",
+          "force_calls": 27653,
+          "force_norm": 7.205999159779373e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "12",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -163.7179692657618,
+          "failure": "wrong_stationary",
+          "force_calls": 26239,
+          "force_norm": 0.00010637650404279218,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "13",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -167.1277946529164,
+          "failure": "wrong_stationary",
+          "force_calls": 24252,
+          "force_norm": 8.750065450193381e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "14",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -167.40436032576957,
+          "failure": "wrong_stationary",
+          "force_calls": 21165,
+          "force_norm": 8.15186690806303e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "15",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -166.33603882582355,
+          "failure": "wrong_stationary",
+          "force_calls": 26679,
+          "force_norm": 0.00010507962048682449,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "16",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -163.4485142169974,
+          "failure": "wrong_stationary",
+          "force_calls": 25470,
+          "force_norm": 8.753555534988512e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "17",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -164.13547157731574,
+          "failure": "wrong_stationary",
+          "force_calls": 24041,
+          "force_norm": 6.106399911781299e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "18",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -160.4577045578328,
+          "failure": "wrong_stationary",
+          "force_calls": 25632,
+          "force_norm": 0.00010629553856993153,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "19",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -162.7971225046909,
+          "failure": "wrong_stationary",
+          "force_calls": 25410,
+          "force_norm": 8.930558020906376e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "2",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -169.80070779390678,
+          "failure": "wrong_stationary",
+          "force_calls": 25816,
+          "force_norm": 0.00010004029476685482,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "20",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -167.5571075902443,
+          "failure": "wrong_stationary",
+          "force_calls": 27588,
+          "force_norm": 8.424202591384722e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "21",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -166.56677754832367,
+          "failure": "wrong_stationary",
+          "force_calls": 27936,
+          "force_norm": 8.492755561699577e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "22",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -163.85126241106795,
+          "failure": "wrong_stationary",
+          "force_calls": 24895,
+          "force_norm": 9.527452974079025e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "23",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -165.16168987800202,
+          "failure": "wrong_stationary",
+          "force_calls": 24341,
+          "force_norm": 8.448213398920243e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "24",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -164.51212198136312,
+          "failure": "wrong_stationary",
+          "force_calls": 25733,
+          "force_norm": 9.698844741881092e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "25",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -164.69564346460004,
+          "failure": "wrong_stationary",
+          "force_calls": 27381,
+          "force_norm": 7.733093129052024e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "26",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -160.75790311505182,
+          "failure": "wrong_stationary",
+          "force_calls": 23109,
+          "force_norm": 9.372199237610208e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "27",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -165.57903969172213,
+          "failure": "wrong_stationary",
+          "force_calls": 26503,
+          "force_norm": 9.955664463544963e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "28",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -163.61646458824796,
+          "failure": "wrong_stationary",
+          "force_calls": 25843,
+          "force_norm": 6.700635352712191e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "29",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -163.26949835096548,
+          "failure": "wrong_stationary",
+          "force_calls": 28223,
+          "force_norm": 5.800170809119464e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "3",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -168.38259544106052,
+          "failure": "wrong_stationary",
+          "force_calls": 27519,
+          "force_norm": 6.692920952069528e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "30",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -165.98606667086398,
+          "failure": "wrong_stationary",
+          "force_calls": 24518,
+          "force_norm": 0.0001047312550514035,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "31",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -168.97058879389397,
+          "failure": "wrong_stationary",
+          "force_calls": 22905,
+          "force_norm": 9.832373017340113e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "32",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -163.22729982196293,
+          "failure": "wrong_stationary",
+          "force_calls": 23681,
+          "force_norm": 0.00010356152822760213,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "33",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -168.67359482300316,
+          "failure": "wrong_stationary",
+          "force_calls": 22563,
+          "force_norm": 9.144624534864692e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "34",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -169.0451123737331,
+          "failure": "wrong_stationary",
+          "force_calls": 25088,
+          "force_norm": 9.7368578619246e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "35",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -161.2148359091915,
+          "failure": "wrong_stationary",
+          "force_calls": 23691,
+          "force_norm": 7.824292588625474e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "36",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -160.79150628748198,
+          "failure": "wrong_stationary",
+          "force_calls": 22607,
+          "force_norm": 0.00010006979175377221,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "37",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -167.12478659531558,
+          "failure": "wrong_stationary",
+          "force_calls": 25282,
+          "force_norm": 5.78745140491246e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "38",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -168.4217708438853,
+          "failure": "wrong_stationary",
+          "force_calls": 26625,
+          "force_norm": 0.00010174656429285636,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "39",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -165.07437123599126,
+          "failure": "wrong_stationary",
+          "force_calls": 21268,
+          "force_norm": 8.520995521318254e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "4",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -164.60679460830062,
+          "failure": "wrong_stationary",
+          "force_calls": 28152,
+          "force_norm": 0.00010583009803175876,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "40",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -168.36970994989284,
+          "failure": "wrong_stationary",
+          "force_calls": 26609,
+          "force_norm": 7.784040613370189e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "41",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -157.36971588553905,
+          "failure": "wrong_stationary",
+          "force_calls": 23780,
+          "force_norm": 0.00010124177653028764,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "42",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -166.21969877561702,
+          "failure": "wrong_stationary",
+          "force_calls": 25586,
+          "force_norm": 9.758117480104218e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "43",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -163.41946540599744,
+          "failure": "wrong_stationary",
+          "force_calls": 23990,
+          "force_norm": 8.334939242970713e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "44",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -164.2844140439973,
+          "failure": "wrong_stationary",
+          "force_calls": 22265,
+          "force_norm": 9.950036552199525e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "45",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -169.1761270627012,
+          "failure": "wrong_stationary",
+          "force_calls": 26065,
+          "force_norm": 9.28649463437687e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "46",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -168.92478515856925,
+          "failure": "wrong_stationary",
+          "force_calls": 24251,
+          "force_norm": 0.00010147479240822549,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "47",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -165.04640462825125,
+          "failure": "wrong_stationary",
+          "force_calls": 25640,
+          "force_norm": 0.00010233261908890153,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "48",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -163.42489553048046,
+          "failure": "wrong_stationary",
+          "force_calls": 25083,
+          "force_norm": 8.572559316949316e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "49",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -161.23188500550845,
+          "failure": "wrong_stationary",
+          "force_calls": 27367,
+          "force_norm": 8.514729709357292e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "5",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -165.9682597122232,
+          "failure": "wrong_stationary",
+          "force_calls": 25502,
+          "force_norm": 9.164166704770884e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "50",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -164.6993925559049,
+          "failure": "wrong_stationary",
+          "force_calls": 21784,
+          "force_norm": 9.970398587122436e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "51",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -162.77796010555326,
+          "failure": "wrong_stationary",
+          "force_calls": 22211,
+          "force_norm": 0.000101164099051073,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "52",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -164.91636286065966,
+          "failure": "wrong_stationary",
+          "force_calls": 22660,
+          "force_norm": 0.00010259292518029179,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "53",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -163.48605847527278,
+          "failure": "wrong_stationary",
+          "force_calls": 23591,
+          "force_norm": 9.793486478932626e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "54",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -169.53357604747146,
+          "failure": "wrong_stationary",
+          "force_calls": 24747,
+          "force_norm": 0.00010508255970981678,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "55",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -164.63337510904256,
+          "failure": "wrong_stationary",
+          "force_calls": 23408,
+          "force_norm": 0.00010538004192704694,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "56",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -162.86260002526956,
+          "failure": "wrong_stationary",
+          "force_calls": 24851,
+          "force_norm": 9.134638177865936e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "57",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -162.16738561665196,
+          "failure": "wrong_stationary",
+          "force_calls": 26511,
+          "force_norm": 0.00010166113400034664,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "58",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -168.07173261618567,
+          "failure": "wrong_stationary",
+          "force_calls": 25714,
+          "force_norm": 7.085843531660625e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "59",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -169.76957462671422,
+          "failure": "wrong_stationary",
+          "force_calls": 25467,
+          "force_norm": 8.87824660846339e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "6",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -167.72454138413082,
+          "failure": "wrong_stationary",
+          "force_calls": 24833,
+          "force_norm": 9.052072341235817e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "60",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -164.35437557808223,
+          "failure": "wrong_stationary",
+          "force_calls": 24258,
+          "force_norm": 9.167172644698525e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "61",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -162.89710229374867,
+          "failure": "wrong_stationary",
+          "force_calls": 23662,
+          "force_norm": 9.355642311564132e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "62",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -166.03966871028226,
+          "failure": "wrong_stationary",
+          "force_calls": 23640,
+          "force_norm": 8.755840618833815e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "63",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -163.3023715204749,
+          "failure": "wrong_stationary",
+          "force_calls": 25221,
+          "force_norm": 8.048718835950542e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "64",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -168.8391385709195,
+          "failure": "wrong_stationary",
+          "force_calls": 22849,
+          "force_norm": 0.00010211909343895265,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "65",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -163.33065586764513,
+          "failure": "wrong_stationary",
+          "force_calls": 27777,
+          "force_norm": 9.820803230458015e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "66",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -162.79774816459332,
+          "failure": "wrong_stationary",
+          "force_calls": 22899,
+          "force_norm": 0.00010604974448644278,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "67",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -164.3503388353676,
+          "failure": "wrong_stationary",
+          "force_calls": 23004,
+          "force_norm": 0.00010481708325759122,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "68",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -163.0720666559025,
+          "failure": "wrong_stationary",
+          "force_calls": 25682,
+          "force_norm": 0.00010181848780356472,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "69",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -167.3121432478771,
+          "failure": "wrong_stationary",
+          "force_calls": 25272,
+          "force_norm": 9.749668869483233e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "7",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -163.1227609766725,
+          "failure": "wrong_stationary",
+          "force_calls": 21261,
+          "force_norm": 0.00010175900442469629,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "70",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -162.2780644344243,
+          "failure": "wrong_stationary",
+          "force_calls": 26034,
+          "force_norm": 7.34382872805139e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "71",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -168.40421884834797,
+          "failure": "wrong_stationary",
+          "force_calls": 24994,
+          "force_norm": 8.386257240208704e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "72",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -169.6915754097217,
+          "failure": "wrong_stationary",
+          "force_calls": 28843,
+          "force_norm": 9.803997375002411e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "73",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -165.49697425523263,
+          "failure": "wrong_stationary",
+          "force_calls": 24702,
+          "force_norm": 9.081664733898696e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "74",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -163.5738890665744,
+          "failure": "wrong_stationary",
+          "force_calls": 23964,
+          "force_norm": 8.211864623372844e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "75",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -162.83396944399362,
+          "failure": "wrong_stationary",
+          "force_calls": 24916,
+          "force_norm": 9.127222482925144e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "76",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -167.1333402546292,
+          "failure": "wrong_stationary",
+          "force_calls": 23120,
+          "force_norm": 6.29156099136788e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "77",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -160.1220534249682,
+          "failure": "wrong_stationary",
+          "force_calls": 28028,
+          "force_norm": 0.00010540040014570291,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "78",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -171.0995229254945,
+          "failure": "wrong_stationary",
+          "force_calls": 24591,
+          "force_norm": 8.80833835491384e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "79",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -165.18793355521973,
+          "failure": "wrong_stationary",
+          "force_calls": 23008,
+          "force_norm": 8.604048486869626e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "8",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -169.81349464781945,
+          "failure": "wrong_stationary",
+          "force_calls": 22152,
+          "force_norm": 7.395461759926458e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "80",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -159.89943928609884,
+          "failure": "wrong_stationary",
+          "force_calls": 26400,
+          "force_norm": 0.00010245510886848792,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "81",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -166.40134656630215,
+          "failure": "wrong_stationary",
+          "force_calls": 28018,
+          "force_norm": 9.597515066091643e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "82",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -165.49648423192104,
+          "failure": "wrong_stationary",
+          "force_calls": 27603,
+          "force_norm": 9.678185083562788e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "83",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -167.4199213565492,
+          "failure": "wrong_stationary",
+          "force_calls": 27775,
+          "force_norm": 0.0001005557055990522,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "84",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -173.25237841560204,
+          "failure": "wrong_stationary",
+          "force_calls": 22873,
+          "force_norm": 7.015215814294708e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "85",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -165.69936990465862,
+          "failure": "wrong_stationary",
+          "force_calls": 23966,
+          "force_norm": 8.672751350030696e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "86",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -170.12618755725939,
+          "failure": "wrong_stationary",
+          "force_calls": 23845,
+          "force_norm": 9.680514945568702e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "87",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -164.22450640875468,
+          "failure": "wrong_stationary",
+          "force_calls": 25646,
+          "force_norm": 0.00010429474293951422,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "88",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -166.43824417753632,
+          "failure": "wrong_stationary",
+          "force_calls": 27527,
+          "force_norm": 8.31512987894235e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "89",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -162.8402299940629,
+          "failure": "wrong_stationary",
+          "force_calls": 24955,
+          "force_norm": 7.352396968838553e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "9",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -164.3102038962964,
+          "failure": "wrong_stationary",
+          "force_calls": 26426,
+          "force_norm": 9.542991851020328e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "90",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -167.70503294506923,
+          "failure": "wrong_stationary",
+          "force_calls": 23467,
+          "force_norm": 0.00010569455393583765,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "91",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -170.47162416450817,
+          "failure": "wrong_stationary",
+          "force_calls": 23479,
+          "force_norm": 9.981609691880555e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "92",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -165.44696017498552,
+          "failure": "wrong_stationary",
+          "force_calls": 25448,
+          "force_norm": 0.00010121028691839165,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "93",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -168.08750266535696,
+          "failure": "wrong_stationary",
+          "force_calls": 25047,
+          "force_norm": 8.850000990912483e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "94",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -161.04732996947695,
+          "failure": "wrong_stationary",
+          "force_calls": 24148,
+          "force_norm": 8.967023051901346e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "95",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -167.6269910596506,
+          "failure": "wrong_stationary",
+          "force_calls": 24385,
+          "force_norm": 9.580747150593694e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "96",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -170.56531469157107,
+          "failure": "wrong_stationary",
+          "force_calls": 23862,
+          "force_norm": 0.00010183549474663606,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "97",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -163.78858657826842,
+          "failure": "wrong_stationary",
+          "force_calls": 24531,
+          "force_norm": 9.139578638211558e-05,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "98",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -168.78917810719153,
+          "failure": "wrong_stationary",
+          "force_calls": 26278,
+          "force_norm": 0.00010431344482340709,
+          "hessian_index": null,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "99",
+          "success": false,
+          "verify_calls": 0
+        }
+      ],
+      "tuning": "default"
+    }
+  ],
+  "schema": "optbench.result/v2",
+  "scoring": "par2-wilson-bootstrap",
+  "status": "archive"
+}

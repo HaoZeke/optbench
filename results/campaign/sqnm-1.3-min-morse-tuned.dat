@@ -1,0 +1,34 @@
+# counter harness. One fresh coordinate is one force call.
+# A repeated coordinate is free. A call at the cap is refused and is not counted.
+# Legacy success is the force stop. v2 success also requires Hessian index 0.
+# The first displacement has Euclidean length 0.01: initial_step_size is -0.01 divided by the force norm at the start. SQNM then estimates the step. nhist_max is 10, alpha_min is 1e-3, and eps_subsp is 1e-3.
+force_calls 39
+force_calls_min 24
+force_calls_max 51
+force_calls_median 40.5
+nfailed 0
+median 40.5
+code sqnm
+code_version 1.3
+commit 4241692173cccb42a9ae05974bfd62285ec2cd7b
+algorithm SQNM
+template sqnm/min-morse-tuned
+problem minimization/morse-bulk
+tuning tuned
+counter harness
+cap 10000
+par2_mean 39.44
+wilson_low 0.963006501793
+wilson_high 1
+par2_median 40.5
+par2_median_low 39
+par2_median_high 42.5
+v2_nfailed 0
+v2_successes 100
+n 100
+n_cap 0
+n_wrong_stationary 0
+n_divergence 0
+n_crash 0
+energy_min -1396.17323767
+energy_max -1396.17323757

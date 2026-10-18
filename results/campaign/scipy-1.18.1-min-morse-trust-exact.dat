@@ -1,0 +1,34 @@
+# counter harness. One fresh coordinate is one force call.
+# A repeated coordinate is free. A call at the cap is refused and is not counted.
+# Legacy success is the force stop. v2 success also requires Hessian index 0.
+# SciPy trust-exact. The harness stops at the problem Euclidean force norm. The SciPy gradient tolerance is 1e-14, and maxiter is the force-call cap.
+force_calls 7
+force_calls_min 4
+force_calls_max 12
+force_calls_median 7
+nfailed 0
+median 7
+code scipy
+code_version 1.18.1
+commit e4e854eaa8f18d807cd3496028e257e36caa93cc
+algorithm trust-exact
+template scipy/min-morse-trust-exact
+problem minimization/morse-bulk
+tuning default
+counter harness
+cap 10000
+par2_mean 7.09
+wilson_low 0.963006501793
+wilson_high 1
+par2_median 7
+par2_median_low 7
+par2_median_high 8
+v2_nfailed 0
+v2_successes 100
+n 100
+n_cap 0
+n_wrong_stationary 0
+n_divergence 0
+n_crash 0
+energy_min -1396.17323768
+energy_max -1396.17323764

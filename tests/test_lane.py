@@ -90,6 +90,38 @@ def test_scipy_lbfgs_relaxes_a_lennard_jones_dimer():
     assert record["hessian_index"] == 0
 
 
+def test_jaxmd_fire_relaxes_a_lennard_jones_dimer():
+    record = run_job(
+        {
+            "index": 0,
+            "start": "dimer",
+            "coords": [0.0, 0.0, 0.0, 1.2, 0.0, 0.0],
+            "box": None,
+            "species": None,
+            "mode": None,
+            "kind": "lj",
+            "layout": "coords",
+            "family": "minimize",
+            "method": "jaxmd-fire",
+            "profile": "default",
+            "cap": 200,
+            "gtol": 0.01,
+            "seed": 1,
+            "target": None,
+            "energy_window": 0.001,
+            "sigma": 0.0,
+            "kappa": 3.0,
+            "noise_window": 5,
+            "energy_tol": 0.01,
+            "noise_seed": 1,
+        }
+    )
+    assert record["success"] is True
+    assert record["force_calls"] < 200
+    assert record["energy"] == pytest.approx(-1.0, abs=1e-3)
+    assert record["hessian_index"] == 0
+
+
 def test_nlopt_tnewton_relaxes_a_lennard_jones_dimer():
     record = run_job(
         {
@@ -153,3 +185,262 @@ def test_optking_cartesian_relaxes_a_lennard_jones_dimer():
     assert record["force_calls"] < 200
     assert record["energy"] == pytest.approx(-1.0, abs=1e-3)
     assert record["hessian_index"] == 0
+
+
+def test_pybcga_finds_the_lennard_jones_trimer():
+    record = run_job(
+        {
+            "index": 0,
+            "start": "tri",
+            "coords": [0.0, 0.0, 0.0, 1.5, 0.0, 0.0, 0.2, 1.4, 0.0],
+            "box": None,
+            "species": None,
+            "mode": None,
+            "kind": "lj",
+            "layout": "coords",
+            "family": "globalopt",
+            "method": "pybcga",
+            "profile": "default",
+            "cap": 2000,
+            "gtol": 0.01,
+            "seed": 3,
+            "target": -3.0,
+            "energy_window": 0.01,
+            "sigma": 0.0,
+            "kappa": 3.0,
+            "noise_window": 5,
+            "energy_tol": 0.01,
+            "noise_seed": 1,
+        }
+    )
+    assert record["success"] is True
+    assert record["force_calls"] < 2000
+    assert record["energy"] == pytest.approx(-3.0, abs=1e-3)
+
+
+def test_ezga_finds_the_lennard_jones_trimer():
+    record = run_job(
+        {
+            "index": 0,
+            "start": "tri",
+            "coords": [0.0, 0.0, 0.0, 1.5, 0.0, 0.0, 0.2, 1.4, 0.0],
+            "box": None,
+            "species": None,
+            "mode": None,
+            "kind": "lj",
+            "layout": "coords",
+            "family": "globalopt",
+            "method": "ezga",
+            "profile": "default",
+            "cap": 20000,
+            "gtol": 0.01,
+            "seed": 3,
+            "target": -3.0,
+            "energy_window": 0.01,
+            "sigma": 0.0,
+            "kappa": 3.0,
+            "noise_window": 5,
+            "energy_tol": 0.01,
+            "noise_seed": 1,
+            "ezga_population": 2,
+            "ezga_generations": 1,
+        }
+    )
+    assert record["success"] is True
+    assert record["force_calls"] < 20000
+    assert record["energy"] == pytest.approx(-3.0, abs=1e-2)
+
+
+def test_pele_lowest_eigenvector_of_a_lennard_jones_dimer():
+    stretch = [1.0, 0.0, 0.0, -1.0, 0.0, 0.0]
+    record = run_job(
+        {
+            "index": 0,
+            "start": "dimer",
+            "coords": [0.0, 0.0, 0.0, 1.122462048309373, 0.0, 0.0],
+            "box": None,
+            "species": None,
+            "mode": stretch,
+            "kind": "lj",
+            "layout": "coords",
+            "family": "eigen",
+            "method": "pele-lowest",
+            "profile": "default",
+            "cap": 2000,
+            "gtol": 0.01,
+            "seed": 3,
+            "target": None,
+            "energy_window": 0.0,
+            "sigma": 0.0,
+            "kappa": 3.0,
+            "noise_window": 5,
+            "energy_tol": 0.01,
+            "noise_seed": 1,
+            "overlap": 0.99,
+        }
+    )
+    assert record["success"] is True
+    assert record["force_calls"] < 2000
+    assert record["overlap"] == pytest.approx(1.0, abs=1e-2)
+
+
+def test_pele_transition_state_on_the_first_lj38_guess(tmp_path):
+    from optbench.problems import load_problem
+
+    root = Path(__file__).resolve().parents[1]
+    problem = load_problem(root / "problems" / "tsopt" / "LJ38.toml")
+    row = load_starts(root, problem, work=tmp_path, output=tmp_path / "out.dat", limit=1)[0]
+    record = run_job(
+        {
+            "index": 0,
+            "start": row["start"],
+            "coords": row["coords"].tolist(),
+            "box": None,
+            "species": None,
+            "mode": None,
+            "kind": "lj",
+            "layout": "con",
+            "family": "tsopt",
+            "method": "pele-ts",
+            "profile": "default",
+            "cap": 10000,
+            "gtol": 0.001,
+            "seed": 314159,
+            "target": None,
+            "energy_window": 0.0,
+            "sigma": 0.0,
+            "kappa": 3.0,
+            "noise_window": 5,
+            "energy_tol": 0.01,
+            "noise_seed": 1,
+        }
+    )
+    assert record["success"] is True
+    assert record["hessian_index"] == 1
+    assert record["force_norm"] <= 0.001
+    assert record["force_calls"] < 10000
+
+
+def test_agox_basin_hopping_finds_the_lennard_jones_trimer():
+    record = run_job(
+        {
+            "index": 0,
+            "start": "tri",
+            "coords": [0.0, 0.0, 0.0, 1.5, 0.0, 0.0, 0.2, 1.4, 0.0],
+            "box": None,
+            "species": None,
+            "mode": None,
+            "kind": "lj",
+            "layout": "coords",
+            "family": "globalopt",
+            "method": "agox-bh",
+            "profile": "default",
+            "cap": 5000,
+            "gtol": 0.01,
+            "seed": 3,
+            "target": -3.0,
+            "energy_window": 0.01,
+            "sigma": 0.0,
+            "kappa": 3.0,
+            "noise_window": 5,
+            "energy_tol": 0.01,
+            "noise_seed": 1,
+        }
+    )
+    assert record["success"] is True
+    assert record["force_calls"] < 5000
+    assert record["energy"] == pytest.approx(-3.0, abs=1e-2)
+
+
+def test_torchsim_fire_relaxes_a_lennard_jones_dimer():
+    record = run_job(
+        {
+            "index": 0,
+            "start": "dimer",
+            "coords": [0.0, 0.0, 0.0, 1.2, 0.0, 0.0],
+            "box": None,
+            "species": None,
+            "mode": None,
+            "kind": "lj",
+            "layout": "coords",
+            "family": "minimize",
+            "method": "torchsim-fire",
+            "profile": "default",
+            "cap": 200,
+            "gtol": 0.01,
+            "seed": 1,
+            "target": None,
+            "energy_window": 0.001,
+            "sigma": 0.0,
+            "kappa": 3.0,
+            "noise_window": 5,
+            "energy_tol": 0.01,
+            "noise_seed": 1,
+        }
+    )
+    assert record["success"] is True
+    assert record["force_calls"] < 200
+    assert record["energy"] == pytest.approx(-1.0, abs=1e-3)
+    assert record["hessian_index"] == 0
+
+
+def test_scgo_basin_hopping_keeps_a_bound_dimer():
+    record = run_job(
+        {
+            "index": 0,
+            "start": "dimer",
+            "coords": [0.0, 0.0, 0.0, 1.122462, 0.0, 0.0],
+            "box": None,
+            "species": None,
+            "mode": None,
+            "kind": "lj",
+            "layout": "coords",
+            "family": "globalopt",
+            "method": "scgo-bh",
+            "profile": "default",
+            "cap": 10000,
+            "gtol": 0.01,
+            "seed": 3,
+            "target": -1.0,
+            "energy_window": 0.01,
+            "sigma": 0.0,
+            "kappa": 3.0,
+            "noise_window": 5,
+            "energy_tol": 0.01,
+            "noise_seed": 1,
+        }
+    )
+    assert record["success"] is True
+    assert record["force_calls"] < 10000
+    assert record["energy"] == pytest.approx(-1.0, abs=1e-3)
+
+
+def test_goedecker_minima_hopping_finds_the_lennard_jones_trimer():
+    record = run_job(
+        {
+            "index": 0,
+            "start": "tri",
+            "coords": [0.0, 0.0, 0.0, 1.5, 0.0, 0.0, 0.2, 1.4, 0.0],
+            "box": None,
+            "species": None,
+            "mode": None,
+            "kind": "lj",
+            "layout": "coords",
+            "family": "globalopt",
+            "method": "goedecker-mh",
+            "profile": "default",
+            "cap": 20000,
+            "gtol": 0.01,
+            "seed": 3,
+            "target": -3.0,
+            "energy_window": 0.01,
+            "sigma": 0.0,
+            "kappa": 3.0,
+            "noise_window": 5,
+            "energy_tol": 0.01,
+            "noise_seed": 1,
+        }
+    )
+    assert record["success"] is True
+    assert record["force_calls"] < 20000
+    assert record["energy"] == pytest.approx(-3.0, abs=1e-3)

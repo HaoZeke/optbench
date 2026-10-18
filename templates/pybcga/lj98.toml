@@ -1,0 +1,20 @@
+id = "pybcga/lj98"
+engine = "harness"
+code = "pybcga"
+code_version = "fb646c19"
+commit = "fb646c19b1829656bf16cc72ca318bef2d37bfeb"
+algorithm = "BCGA"
+problem = "globalopt/lj98"
+task = "globalopt"
+profile = "default"
+tuning = "default"
+reducer = "capped"
+ranked = true
+note = "PyBCGA defaults: population 10, 10 generations, 8 offspring, mutant rate 0.1. The archived start is one member. The other nine are the library random clusters. Each member is quenched with pele mylbfgs. A hit is a successful quench inside the energy window."
+
+[search]
+family = "globalopt"
+method = "pybcga"
+
+[stop]
+max_force_calls = 1000000

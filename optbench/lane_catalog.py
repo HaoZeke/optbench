@@ -16,6 +16,13 @@ ASE = ("ASE", "3.29.0", "f27c0005ae6a67ea419f996e728668865bfc1f86")
 ASE_GA = ("ase-ga", "1.0.3", "f3ecaa80915d5ddbf2298e17702e6df21f5e7b9c")
 NLOPT = ("nlopt", "2.11.0", "88c424d4f458412787df96fcc95218acbca224fd")
 OPTKING = ("optking", "767e2c0c", "767e2c0c13ff2b851ac82101ccd5aab9a558a4f1")
+PYBCGA = ("pybcga", "fb646c19", "fb646c19b1829656bf16cc72ca318bef2d37bfeb")
+ASE_MH = ("ase-mh", "1.1.2", "6baabf94c48fd4f673bcef5307915e49c2c906b2")
+JAXMD = ("jax-md", "0.2.29", "a41c7d19f6468f4e5263c32c12c9ed6cba26ebff")
+SCGO = ("scgo", "0.9.1", "2338742a434a920ed82e52a72dc1338cf06647c1")
+TORCHSIM = ("torch-sim", "0.6.2", "2e9c16f5afe354282279630a57885f46521a1cc0")
+EZGA = ("ezga", "1.2.31", "1395e8de01f003e40a3352987377d5f863a2e388")
+AGOX = ("agox", "0.0.1.dev1+g22d94a6fa", "22d94a6fae8cf2d08d51ecc8b9291a47667aa95c")
 
 _MIN = {
     "minimization/lj38": (0.01, 10000, "lj38"),
@@ -39,7 +46,23 @@ _SCIPY_MIN = (
     ("trust-ncg", "trust-ncg"),
 )
 _SIGMA = (0.0, 1e-4, 1e-3, 1e-2)
-_FOLDERS = ("scipy", "pele", "sqnm", "geometric", "ase-global", "ase-ga", "nlopt", "optking")
+_FOLDERS = (
+    "scipy",
+    "pele",
+    "sqnm",
+    "geometric",
+    "ase-global",
+    "ase-ga",
+    "nlopt",
+    "optking",
+    "pybcga",
+    "ase-mh",
+    "jax-md",
+    "scgo",
+    "torch-sim",
+    "ezga",
+    "agox",
+)
 
 
 def specs() -> list[dict]:
@@ -66,8 +89,14 @@ def specs() -> list[dict]:
                         "maxfun is the force-call cap. maxiter is omitted because SciPy 1.18 rejects it."
                         if method == "TNC"
                         else (
-                            f"SciPy {method}. The harness stops at the problem Euclidean force norm. "
-                            "The SciPy gradient tolerance is 1e-14, and maxiter is the force-call cap."
+                            "SciPy L-BFGS-B. The harness stops at the problem Euclidean force norm. "
+                            "The SciPy gradient tolerance is 1e-14, ftol is machine epsilon, "
+                            "and maxfun and maxiter are the force-call cap."
+                            if method == "L-BFGS-B"
+                            else (
+                                f"SciPy {method}. The harness stops at the problem Euclidean force norm. "
+                                "The SciPy gradient tolerance is 1e-14, and maxiter is the force-call cap."
+                            )
                         )
                     ),
                 )
@@ -177,6 +206,42 @@ def specs() -> list[dict]:
                     ),
                 )
             )
+        found.append(
+            _spec(
+                f"jax-md/min-{slug}-fire",
+                JAXMD,
+                "FIRE",
+                problem,
+                "minimize",
+                "default",
+                {"family": "minimize", "method": "jaxmd-fire"},
+                gtol,
+                cap,
+                (
+                    "JAX MD 0.2.29 fire_descent defaults: dt_start 0.1, dt_max 0.4, n_min 5, "
+                    "f_inc 1.1, f_dec 0.5, alpha_start 0.1, f_alpha 0.99, mass 1. "
+                    "The harness gradient is the force. Float64 is enabled. One Verlet step is one force call."
+                ),
+            )
+        )
+        found.append(
+            _spec(
+                f"torch-sim/min-{slug}-fire",
+                TORCHSIM,
+                "FIRE",
+                problem,
+                "minimize",
+                "default",
+                {"family": "minimize", "method": "torchsim-fire"},
+                gtol,
+                cap,
+                (
+                    "TorchSim 0.6.2 FIRE defaults: dt_start 0.1, alpha_start 0.1, flavor ase_fire. "
+                    "The model returns the harness energy and forces. Float64. "
+                    "Convergence is checked every step, and the harness Euclidean norm ends the run."
+                ),
+            )
+        )
     for sigma in _SIGMA:
         label = _sigma_label(sigma)
         for code, method, algorithm, extra, profile, ident in (
@@ -185,6 +250,8 @@ def specs() -> list[dict]:
             (SQNM, "sqnm", "SQNM", {}, "tuned", f"sqnm/noise-lj38-tuned-{label}"),
             (GEOMETRIC, "geometric", "geomeTRIC", {"coordsys": "cart"}, "default", f"geometric/noise-lj38-{label}"),
             (OPTKING, "optking", "OptKing", {"coordsys": "cart"}, "default", f"optking/noise-lj38-{label}"),
+            (JAXMD, "jaxmd-fire", "FIRE", {}, "default", f"jax-md/noise-lj38-fire-{label}"),
+            (TORCHSIM, "torchsim-fire", "FIRE", {}, "default", f"torch-sim/noise-lj38-fire-{label}"),
         ):
             search = {"family": "minimize", "method": method, "sigma": sigma}
             search.update(extra)
@@ -334,6 +401,103 @@ def specs() -> list[dict]:
                 "ase-ga RandomMutation length 2, then an ASE LBFGS quench at fmax 0.001. A raw mutant energy is not a hit.",
             )
         )
+        if slug != "binary":
+            found.append(
+                _spec(
+                    f"pybcga/{slug}",
+                    PYBCGA,
+                    "BCGA",
+                    problem,
+                    "globalopt",
+                    "default",
+                    {"family": "globalopt", "method": "pybcga"},
+                    None,
+                    cap,
+                    (
+                        "PyBCGA defaults: population 10, 10 generations, 8 offspring, mutant rate 0.1. "
+                        "The archived start is one member. The other nine are the library random clusters. "
+                        "Each member is quenched with pele mylbfgs. A hit is a successful quench inside the energy window."
+                    ),
+                )
+            )
+        found.append(
+            _spec(
+                f"ase-mh/{slug}",
+                ASE_MH,
+                "MinimaHopping",
+                problem,
+                "globalopt",
+                "default",
+                {"family": "globalopt", "method": "goedecker-mh"},
+                None,
+                cap,
+                (
+                    "Goedecker minima hopping 1.1.2 library defaults: T0 1000 K, Ediff0 0.1, "
+                    "fmax 0.005 as the maximum force component, dt0 0.08. The quench is SQNM. "
+                    "pbc is off, so the relaxation is fixed-cell. A hit is a quench inside fmax "
+                    "and inside the energy window."
+                ),
+            )
+        )
+        found.append(
+            _spec(
+                f"scgo/bh-{slug}",
+                SCGO,
+                "basin hopping",
+                problem,
+                "globalopt",
+                "default",
+                {"family": "globalopt", "method": "scgo-bh"},
+                None,
+                cap,
+                (
+                    "SCGO 0.9.1 bh_go defaults: niter 100, LBFGS, fmax 0.05, "
+                    "niter_local_relaxation 250, dr 0.5, temperature 1. "
+                    "The harness potential is the ASE calculator. "
+                    "allow_cluster_fragmentation is on because the covalent-connectivity gate "
+                    "rejects a reduced Lennard-Jones cluster. A hit is a quench inside fmax "
+                    "and inside the energy window."
+                ),
+            )
+        )
+        found.append(
+            _spec(
+                f"ezga/{slug}",
+                EZGA,
+                "GA",
+                problem,
+                "globalopt",
+                "default",
+                {"family": "globalopt", "method": "ezga"},
+                None,
+                cap,
+                (
+                    "EZGA 1.2.31. The relaxer is ase_calculator's default FIRE at fmax 0.05 "
+                    "for 100 steps, with no MD. The population is 16 copies of the archived start "
+                    "and the run is 10 rattle generations. A hit is a quench inside fmax and "
+                    "inside the energy window."
+                ),
+            )
+        )
+        found.append(
+            _spec(
+                f"agox/bh-{slug}",
+                AGOX,
+                "basin hopping",
+                problem,
+                "globalopt",
+                "default",
+                {"family": "globalopt", "method": "agox-bh"},
+                None,
+                cap,
+                (
+                    "AGOX basin hopping at the BasinHoppingConfig defaults: Metropolis temperature 0.25 eV, "
+                    "rattle of a quarter of the atoms with amplitude 3, BFGS fmax 0.05 for 100 steps. "
+                    "The harness potential is the ASE calculator. The archived start is quenched and seeded "
+                    "into the sampler. A hit is a quench inside fmax and inside the energy window."
+                ),
+            )
+        )
     found.append(
         _spec(
             "scipy/eig-lj38-eigsh",
@@ -346,6 +510,42 @@ def specs() -> list[dict]:
             None,
             10000,
             "eigsh which=SA on a central-difference Hessian-vector product. One matvec is two force calls.",
+        )
+    )
+    found.append(
+        _spec(
+            "pele/eig-lj38",
+            PELE,
+            "lowest eigenvector",
+            "lowest-eigenvector/lj38",
+            "lowest-eigenvector",
+            "default",
+            {"family": "eigen", "method": "pele-lowest"},
+            None,
+            10000,
+            (
+                "pele findLowestEigenVector. Rayleigh-Ritz on a forward difference, "
+                "orthogonal to translation and rotation. The initial vector is the library random draw. "
+                "nsteps is the force-call cap."
+            ),
+        )
+    )
+    found.append(
+        _spec(
+            "pele/ts-lj38",
+            PELE,
+            "hybrid eigenvector following",
+            "tsopt/LJ38",
+            "tsopt",
+            "default",
+            {"family": "tsopt", "method": "pele-ts"},
+            0.001,
+            10000,
+            (
+                "pele findTransitionState. The RMS tolerance is the Euclidean force stop "
+                "divided by sqrt(3N). nsteps is the force-call cap. orthogZeroEigs keeps "
+                "translation and rotation. A success is an index-1 stop."
+            ),
         )
     )
     found.append(

@@ -27,6 +27,13 @@ _PINS = {
     "ASE": ("3.29.0", "f27c0005ae6a67ea419f996e728668865bfc1f86"),
     "nlopt": ("2.11.0", "88c424d4f458412787df96fcc95218acbca224fd"),
     "optking": ("767e2c0c", "767e2c0c13ff2b851ac82101ccd5aab9a558a4f1"),
+    "pybcga": ("fb646c19", "fb646c19b1829656bf16cc72ca318bef2d37bfeb"),
+    "ase-mh": ("1.1.2", "6baabf94c48fd4f673bcef5307915e49c2c906b2"),
+    "jax-md": ("0.2.29", "a41c7d19f6468f4e5263c32c12c9ed6cba26ebff"),
+    "scgo": ("0.9.1", "2338742a434a920ed82e52a72dc1338cf06647c1"),
+    "torch-sim": ("0.6.2", "2e9c16f5afe354282279630a57885f46521a1cc0"),
+    "ezga": ("1.2.31", "1395e8de01f003e40a3352987377d5f863a2e388"),
+    "agox": ("0.0.1.dev1+g22d94a6fa", "22d94a6fae8cf2d08d51ecc8b9291a47667aa95c"),
 }
 
 
@@ -98,6 +105,47 @@ def _import_version(code: str, method: str) -> str:
         if "767e2c0c" not in installed:
             raise RuntimeError(f"optking {installed} is not commit 767e2c0c")
         return "767e2c0c"
+    if code == "pybcga" or method == "pybcga":
+        import bcga.genetic_algorithm  # noqa: F401
+        import bcga.pele_interface  # noqa: F401
+
+        return "fb646c19"
+    if code == "ase-mh" or method == "goedecker-mh":
+        import importlib.metadata as metadata
+
+        import minimahopping.minhop  # noqa: F401
+
+        return metadata.version("minimahopping")
+    if code == "jax-md" or method == "jaxmd-fire":
+        import importlib.metadata as metadata
+
+        import jax_md.minimize  # noqa: F401
+
+        return metadata.version("jax-md")
+    if code == "scgo" or method == "scgo-bh":
+        import importlib.metadata as metadata
+
+        import scgo.algorithms.basinhopping_go  # noqa: F401
+
+        return metadata.version("scgo")
+    if code == "torch-sim" or method == "torchsim-fire":
+        import importlib.metadata as metadata
+
+        import torch_sim  # noqa: F401
+
+        return metadata.version("torch-sim-atomistic")
+    if code == "ezga" or method == "ezga":
+        import importlib.metadata as metadata
+
+        import ezga.factory  # noqa: F401
+
+        return metadata.version("ezga-lib")
+    if code == "agox" or method == "agox-bh":
+        import importlib.metadata as metadata
+
+        import agox  # noqa: F401
+
+        return metadata.version("agox")
     raise RuntimeError(f"no preflight for {code} method {method}")
 
 

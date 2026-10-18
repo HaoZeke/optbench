@@ -1,0 +1,20 @@
+id = "pele/eig-lj38"
+engine = "harness"
+code = "pele"
+code_version = "0.1.2"
+commit = "b7081b932a060be11342fbe8287ac35da8ada879"
+algorithm = "lowest eigenvector"
+problem = "lowest-eigenvector/lj38"
+task = "lowest-eigenvector"
+profile = "default"
+tuning = "default"
+reducer = "capped"
+ranked = true
+note = "pele findLowestEigenVector. Rayleigh-Ritz on a forward difference, orthogonal to translation and rotation. The initial vector is the library random draw. nsteps is the force-call cap."
+
+[search]
+family = "eigen"
+method = "pele-lowest"
+
+[stop]
+max_force_calls = 10000

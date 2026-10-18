@@ -1,0 +1,35 @@
+# counter harness. One fresh coordinate is one force call.
+# A repeated coordinate is free. A call at the cap is refused and is not counted.
+# A hit is a converged quench inside the energy window, with the call count strictly under the cap.
+# pele basin hopping. temperature 1, stepsize 0.5, LBFGS memory 100, maxstep 0.2, quench RMS tolerance 0.001/sqrt(N).
+force_calls 489336
+force_calls_min 10475
+force_calls_max 850632
+force_calls_median 610847
+nfailed 3
+median 610847
+code pele
+code_version 0.1.2
+commit b7081b932a060be11342fbe8287ac35da8ada879
+algorithm basin hopping
+template pele/bh-lj38-tuned
+problem globalopt/lj38
+tuning tuned
+counter harness
+cap 1000000
+par2_mean 1055834.875
+wilson_low 0.305742394603
+wilson_high 0.863155714176
+par2_median 797579
+par2_median_low 230199
+par2_median_high 2000000
+v2_nfailed 3
+v2_successes 5
+n 8
+n_cap 3
+n_wrong_stationary 0
+n_divergence 0
+n_crash 0
+energy_min -173.928426588
+energy_max -153.311939597
+partial true

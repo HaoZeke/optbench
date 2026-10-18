@@ -1,0 +1,34 @@
+# counter harness. One fresh coordinate is one force call.
+# A repeated coordinate is free. A call at the cap is refused and is not counted.
+# Legacy success is the force stop. v2 success also requires Hessian index 0.
+# geomeTRIC 1.1.1 in Cartesian coordinates. Carbon labels on the first LJ38 start produce 662 bonds, and both TRIC and the stock Cartesian setup were still building primitive internals after 20 seconds, so primitive generation is skipped. convergence_grms and convergence_gmax are the Euclidean stop divided by sqrt(N). Energy and displacement criteria are loose. maxiter is the force-call cap.
+force_calls 484
+force_calls_min 360
+force_calls_max 1170
+force_calls_median 405
+nfailed 0
+median 405
+code geometric
+code_version 1.1.1
+commit f657e69bae9c81bf7a23e7375db98502ca5c8c30
+algorithm geomeTRIC
+template geometric/min-lj38
+problem minimization/lj38
+tuning default
+counter harness
+cap 10000
+par2_mean 522.963
+wilson_low 0.992737192137
+wilson_high 0.999451356412
+par2_median 405
+par2_median_low 403
+par2_median_high 408
+v2_nfailed 2
+v2_successes 998
+n 1000
+n_cap 0
+n_wrong_stationary 2
+n_divergence 0
+n_crash 0
+energy_min -172.95863328
+energy_max -152.699496946

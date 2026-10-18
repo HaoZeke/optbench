@@ -1,0 +1,20 @@
+id = "ase-mh/lj150"
+engine = "harness"
+code = "ase-mh"
+code_version = "1.1.2"
+commit = "6baabf94c48fd4f673bcef5307915e49c2c906b2"
+algorithm = "MinimaHopping"
+problem = "globalopt/lj150"
+task = "globalopt"
+profile = "default"
+tuning = "default"
+reducer = "capped"
+ranked = true
+note = "Goedecker minima hopping 1.1.2 library defaults: T0 1000 K, Ediff0 0.1, fmax 0.005 as the maximum force component, dt0 0.08. The quench is SQNM. pbc is off, so the relaxation is fixed-cell. A hit is a quench inside fmax and inside the energy window."
+
+[search]
+family = "globalopt"
+method = "goedecker-mh"
+
+[stop]
+max_force_calls = 1000000
