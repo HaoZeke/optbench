@@ -1,0 +1,9 @@
+# COMPASS constrained quasi-Newton between the two endpoints.
+id = "compass/sqnm"
+engine = "compass"
+code = "compass"
+code_version = "1.0.0"
+commit = "22da7bd5f69cbd64d59853c8f8d7f8d44c2d18df"
+algorithm = "COMPASS"
+tuning = "default"
+note = "forcetol, minimize_fmax, and both target distances are the problem Euclidean force stop. The images stop that far apart. The cell is fixed. Fixed atoms are restored after every set_positions. COMPASS builds its own chain."
