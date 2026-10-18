@@ -761,7 +761,8 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
         if str(fields.get("ranked") or "").lower() == "false":
             row["_declared_partial"] = "result file sets ranked false"
         elif str(fields.get("partial") or "").lower() == "true":
-            row["_declared_partial"] = "result file sets partial true"
+            reason = str(fields.get("partial_reason") or "").strip()
+            row["_declared_partial"] = reason or "result file sets partial true"
         if not records:
             row["note"] = "no per-start record"
             unparsed.append(row)
@@ -785,6 +786,7 @@ def _benchmark_index() -> dict[str, dict]:
         "benchmarks.bench_lj38",
         "benchmarks.bench_eon_develop",
         "benchmarks.bench_rgmin",
+        "benchmarks.bench_ogolem",
         "benchmarks.bench_ase_sella",
         "benchmarks.bench_rgsaddle",
         "benchmarks.bench_noise",

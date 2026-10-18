@@ -1,0 +1,19 @@
+id = "ogolem/lj75"
+engine = "ogolem"
+problem = "globalopt/lj75"
+code = "ogolem"
+code_version = "2016.CURRENT"
+commit = "cce35a376d929852ab1e80e98105c0d13d784b8d"
+algorithm = "genetic algorithm"
+tuning = "default"
+failure_cap = 5000000
+note = "Same genetic algorithm as ogolem/lj38. The archive is website/globalopt/lj75/lj75_clusters.tgz, 200 coords files. This problem file has no energy window and no sample.starts, so the row stays partial. The recorded energy is the lowest harness value on that start. A finite finish under the force cap is wrong_stationary because nothing accepts the energy."
+
+[ogolem]
+pool_size = 100
+glob_iterations = 19900
+cell_bohr = 60
+threads = 1
+
+[input]
+archive_path = "website/globalopt/lj75/lj75_clusters.tgz"
