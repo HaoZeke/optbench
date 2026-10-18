@@ -10,5 +10,6 @@ softsaddle/lib/
 docs/build/
 docs/doctrees/
 docs/source/index.rst
+docs/source/*.rst
 docs/source/generated/
 results/rgsaddle-asv/

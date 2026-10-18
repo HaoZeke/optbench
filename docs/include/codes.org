@@ -5,7 +5,7 @@
    <h2>Current codes</h2>
    <p>The benchmark contributor is Rohit Goswami. A ranked row is a full harness run. The commit on that row is the commit that produced the score.</p>
    <h3>eOn</h3>
-   <table>
+   <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
    <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
@@ -26,8 +26,8 @@
    <td>7095b23ac17d</td>
    <td><a href="https://github.com/TheochemUI/eon">https://github.com/TheochemUI/eon</a></td>
    </tr>
-   </tbody></table>
-   <table data-board-table="code-best">
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr data-problem="double-ended-saddle-search/lj38" data-template="eon/develop-de-lj38-oci">
@@ -46,10 +46,10 @@
    <td data-field="template">eon/develop-de-2ts-ew</td>
    <td data-field="version">eOn 3.6.0</td>
    <td data-field="commit">7095b23ac17d</td>
-   <td data-field="par2_mean">143644</td>
+   <td data-field="par2_mean">19725.4</td>
    <td data-field="mean_calls">40738.4</td>
    <td data-field="median_calls">44412</td>
-   <td data-field="failures">crash 0, divergence 34, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 34, cap 16, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-template="eon/develop-de-pt-oci">
@@ -140,7 +140,7 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">49</td>
    </tr>
-   </tbody></table>
+   </tbody></table></div>
    <p>No full ranked run</p><ul>
    <li>LJ38 double-ended saddle: not yet on the harness counter, partial.</li>
    <li>lj38_2ts_separation: partial.</li>
@@ -169,7 +169,7 @@
    <li>eon-client/sd: no per-start record.</li>
    </ul>
    <h3>rgmin</h3>
-   <table>
+   <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
    <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
@@ -178,8 +178,8 @@
    <td>f15726f1c798</td>
    <td><a href="https://github.com/OmniPotentRPC/rgmin">https://github.com/OmniPotentRPC/rgmin</a></td>
    </tr>
-   </tbody></table>
-   <table data-board-table="code-best">
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr data-problem="minimization/lj38" data-template="rgmin/lj38-dogleg">
@@ -215,9 +215,9 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
-   </tbody></table>
+   </tbody></table></div>
    <h3>rgsaddle</h3>
-   <table>
+   <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
    <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
@@ -226,8 +226,8 @@
    <td>c0db2b8d333c</td>
    <td><a href="https://github.com/OmniPotentRPC/rgsaddle">https://github.com/OmniPotentRPC/rgsaddle</a></td>
    </tr>
-   </tbody></table>
-   <table data-board-table="code-best">
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr data-problem="double-ended-saddle-search/lj38" data-template="rgsaddle/ew-ci-neb-lbfgs">
@@ -318,9 +318,9 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">49</td>
    </tr>
-   </tbody></table>
+   </tbody></table></div>
    <h3>ASE</h3>
-   <table>
+   <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
    <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
@@ -329,8 +329,8 @@
    <td>f27c0005ae6a</td>
    <td><a href="https://gitlab.com/ase/ase">https://gitlab.com/ase/ase</a></td>
    </tr>
-   </tbody></table>
-   <table data-board-table="code-best">
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr data-problem="double-ended-saddle-search/lj38" data-template="ase/de-lj38-tuned">
@@ -410,7 +410,7 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
-   </tbody></table>
+   </tbody></table></div>
    <p>No full ranked run</p><ul>
    <li>LJ38 double-ended saddle: partial.</li>
    <li>lj38_2ts_separation: partial.</li>
@@ -421,7 +421,7 @@
    <li>Pt heptamer island: partial.</li>
    </ul>
    <h3>Sella</h3>
-   <table>
+   <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
    <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
@@ -430,8 +430,8 @@
    <td>6cfb60cdb100</td>
    <td><a href="https://github.com/zadorlab/sella">https://github.com/zadorlab/sella</a></td>
    </tr>
-   </tbody></table>
-   <table data-board-table="code-best">
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr data-problem="double-ended-saddle-search/lj38" data-template="sella/de-lj38-tuned">
@@ -533,7 +533,7 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">49</td>
    </tr>
-   </tbody></table>
+   </tbody></table></div>
    <p>No full ranked run</p><ul>
    <li>LJ38 double-ended saddle: partial.</li>
    <li>lj38_2ts_separation: partial.</li>
@@ -546,7 +546,7 @@
    <li>sella-lj38: no per-start record.</li>
    </ul>
    <h3>pARTn</h3>
-   <table>
+   <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
    <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
@@ -555,7 +555,7 @@
    <td>9b753517c6c0</td>
    <td><a href="https://gitlab.com/mammasmias/artn-plugin">https://gitlab.com/mammasmias/artn-plugin</a></td>
    </tr>
-   </tbody></table>
+   </tbody></table></div>
    <p>No full ranked run.</p>
    </section>
 #+end_export
