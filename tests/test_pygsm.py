@@ -12,6 +12,20 @@ ROOT = Path(__file__).resolve().parents[1]
 COMMIT = "1b4d5a5557a61adc6a3df7405d6b7255b1fa4865"
 
 
+def test_benchmark_classes_publish_the_problem_cap():
+    from benchmarks.bench_pygsm import PygsmLj38De, PygsmLj38TwoTs
+
+    assert PygsmLj38De.problem_name == "double-ended-saddle-search/lj38"
+    assert PygsmLj38De.template_id == "pygsm/de-gsm"
+    assert PygsmLj38De.cap == 2500
+    assert PygsmLj38De.timeout == 1800
+    assert PygsmLj38De.params[1] == ["pair_00"]
+    assert PygsmLj38TwoTs.problem_name == "double-ended-saddle-search/lj38_2ts_separation"
+    assert PygsmLj38TwoTs.cap == 10000
+    assert PygsmLj38TwoTs.timeout == 7200
+    assert PygsmLj38TwoTs.params[1] == ["pair_00"]
+
+
 def test_template_matches_the_registry_pin():
     registry = tomllib.loads((ROOT / "codes" / "registry.toml").read_text(encoding="utf-8"))
     pinned = next(row for row in registry["code"] if row["id"] == "pygsm")

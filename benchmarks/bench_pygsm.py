@@ -125,17 +125,17 @@ def _write_sidecar(problem_name: str, template_name: str, seed: str, start: str,
     path.write_text(json.dumps(record, sort_keys=True) + "\n", encoding="utf-8")
 
 
-def _bind(class_name: str, problem: str, cap: int, timeout: int):
+def _bind(class_name: str, problem: str, call_cap: int, limit: int):
     starts = _starts(problem)
     template = "pygsm/de-gsm"
 
     class _Benchmark(_TrackedSearch):
         param_names = ["seed", "start"]
         params = [["0"], list(starts)]
-        timeout = timeout
+        timeout = limit
         problem_name = problem
         template_id = template
-        cap = cap
+        cap = call_cap
 
         def setup(self, seed, start):
             ensure_pygsm()
@@ -214,7 +214,7 @@ def _bind(class_name: str, problem: str, cap: int, timeout: int):
     _Benchmark.track_failure_crash.unit = "count"
     CLASS_PROBLEM[class_name] = problem
     CLASS_TEMPLATE[class_name] = template
-    CLASS_CAP[class_name] = cap
+    CLASS_CAP[class_name] = call_cap
     return _Benchmark
 
 
