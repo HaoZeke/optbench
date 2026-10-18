@@ -15776,7 +15776,7 @@
       },
       "ranked": [
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "rgmin",
@@ -15809,7 +15809,7 @@
           "par2_mean": 81.881,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-rgmin-dogleg-s0.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-rgmin-dogleg-s0.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -15821,7 +15821,7 @@
           "wilson_low": 0.996173241514445
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "rgmin",
@@ -15854,7 +15854,7 @@
           "par2_mean": 166.337,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-rgmin-newton-s0.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-rgmin-newton-s0.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -15866,7 +15866,7 @@
           "wilson_low": 0.9883490446266249
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "rgmin",
@@ -15899,7 +15899,7 @@
           "par2_mean": 197.228,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-rgmin-lbfgs-m100-s0.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-rgmin-lbfgs-m100-s0.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -15911,7 +15911,7 @@
           "wilson_low": 0.9943574414020421
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "rgmin",
@@ -15944,7 +15944,7 @@
           "par2_mean": 277.049,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-rgmin-lbfgs-m100-s1em4.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-rgmin-lbfgs-m100-s1em4.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -15956,7 +15956,7 @@
           "wilson_low": 0.9883490446266249
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "rgmin",
@@ -15989,7 +15989,7 @@
           "par2_mean": 292.128,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-rgmin-lbfgs-m100-s1em3.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-rgmin-lbfgs-m100-s1em3.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -16001,7 +16001,7 @@
           "wilson_low": 0.9869718317581478
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "rgmin",
@@ -16034,7 +16034,7 @@
           "par2_mean": 294.105,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-rgmin-lbfgs-s0.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-rgmin-lbfgs-s0.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -16046,7 +16046,7 @@
           "wilson_low": 0.9897604437227377
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "ASE",
@@ -16079,7 +16079,7 @@
           "par2_mean": 396.55,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-ase-lbfgs-s0.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-ase-lbfgs-s0.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -16091,7 +16091,7 @@
           "wilson_low": 0.9869718317581478
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "rgmin",
@@ -16124,7 +16124,7 @@
           "par2_mean": 451.846,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-rgmin-lbfgs-s1em4.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-rgmin-lbfgs-s1em4.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -16136,7 +16136,7 @@
           "wilson_low": 0.9791427315245017
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "rgmin",
@@ -16169,7 +16169,7 @@
           "par2_mean": 483.98,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-rgmin-lbfgs-s1em3.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-rgmin-lbfgs-s1em3.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -16181,7 +16181,7 @@
           "wilson_low": 0.9766379658824644
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "ASE",
@@ -16214,7 +16214,7 @@
           "par2_mean": 528.525,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-ase-lbfgs-s1em3.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-ase-lbfgs-s1em3.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -16226,7 +16226,7 @@
           "wilson_low": 0.9791427315245017
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "ASE",
@@ -16259,7 +16259,7 @@
           "par2_mean": 555.614,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-ase-bfgs-s0.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-ase-bfgs-s0.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -16271,7 +16271,7 @@
           "wilson_low": 0.9883490446266249
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "ASE",
@@ -16304,7 +16304,7 @@
           "par2_mean": 566.396,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-ase-lbfgs-s1em4.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-ase-lbfgs-s1em4.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -16316,7 +16316,7 @@
           "wilson_low": 0.9766379658824644
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "rgmin",
@@ -16349,7 +16349,7 @@
           "par2_mean": 669.237,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-rgmin-cg-s0.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-rgmin-cg-s0.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -16361,7 +16361,7 @@
           "wilson_low": 0.9897604437227377
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "Sella",
@@ -16394,7 +16394,7 @@
           "par2_mean": 729.433,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-sella-min-s0.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-sella-min-s0.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -16406,7 +16406,7 @@
           "wilson_low": 0.9943574414020421
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "rgmin",
@@ -16439,7 +16439,7 @@
           "par2_mean": 769.36,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-rgmin-fire-s0.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-rgmin-fire-s0.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -16451,7 +16451,7 @@
           "wilson_low": 0.9912169859464969
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "ASE",
@@ -16484,7 +16484,7 @@
           "par2_mean": 802.384,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-ase-fire-s0.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-ase-fire-s0.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -16496,7 +16496,7 @@
           "wilson_low": 0.9883490446266249
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "ASE",
@@ -16529,7 +16529,7 @@
           "par2_mean": 811.801,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-ase-bfgs-s1em4.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-ase-bfgs-s1em4.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -16541,7 +16541,7 @@
           "wilson_low": 0.9717267448294926
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "ASE",
@@ -16574,7 +16574,7 @@
           "par2_mean": 927.435,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-ase-bfgs-s1em3.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-ase-bfgs-s1em3.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -16586,7 +16586,7 @@
           "wilson_low": 0.9693099947702822
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "rgmin",
@@ -16619,7 +16619,7 @@
           "par2_mean": 1112.751,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-rgmin-cg-s1em4.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-rgmin-cg-s1em4.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -16631,7 +16631,7 @@
           "wilson_low": 0.9621761711573101
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "ASE",
@@ -16664,7 +16664,7 @@
           "par2_mean": 1141.236,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-ase-fire-s1em3.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-ase-fire-s1em3.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -16676,7 +16676,7 @@
           "wilson_low": 0.9610012692469598
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "rgmin",
@@ -16709,7 +16709,7 @@
           "par2_mean": 1196.783,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-rgmin-cg-s1em3.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-rgmin-cg-s1em3.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -16721,7 +16721,7 @@
           "wilson_low": 0.9563345039877078
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "rgmin",
@@ -16754,7 +16754,7 @@
           "par2_mean": 1227.113,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-rgmin-fire-s1em3.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-rgmin-fire-s1em3.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -16766,7 +16766,7 @@
           "wilson_low": 0.9563345039877078
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "rgmin",
@@ -16799,7 +16799,7 @@
           "par2_mean": 1405.62,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-rgmin-fire-s1em4.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-rgmin-fire-s1em4.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -16811,7 +16811,7 @@
           "wilson_low": 0.9505643395327921
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "ASE",
@@ -16844,7 +16844,7 @@
           "par2_mean": 1441.641,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-ase-fire-s1em4.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-ase-fire-s1em4.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -16856,7 +16856,7 @@
           "wilson_low": 0.9482730796686497
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "ASE",
@@ -16889,7 +16889,7 @@
           "par2_mean": 1849.498,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-ase-lbfgs-s1em2.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-ase-lbfgs-s1em2.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -16901,7 +16901,7 @@
           "wilson_low": 0.9004427979303052
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "rgmin",
@@ -16934,7 +16934,7 @@
           "par2_mean": 1920.544,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-rgmin-lbfgs-m100-s1em2.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-rgmin-lbfgs-m100-s1em2.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -16946,7 +16946,7 @@
           "wilson_low": 0.8917426484378812
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "ASE",
@@ -16979,7 +16979,7 @@
           "par2_mean": 1976.409,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-ase-bfgs-s1em2.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-ase-bfgs-s1em2.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -16991,7 +16991,7 @@
           "wilson_low": 0.9213119396866343
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "rgmin",
@@ -17024,7 +17024,7 @@
           "par2_mean": 2073.768,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-rgmin-lbfgs-s1em2.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-rgmin-lbfgs-s1em2.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -17036,7 +17036,7 @@
           "wilson_low": 0.8841648792420682
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "Sella",
@@ -17069,7 +17069,7 @@
           "par2_mean": 2123.786,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-sella-min-s1em4.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-sella-min-s1em4.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -17081,7 +17081,7 @@
           "wilson_low": 0.9135852797713628
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "Sella",
@@ -17114,7 +17114,7 @@
           "par2_mean": 2224.755,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-sella-min-s1em3.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-sella-min-s1em3.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -17126,7 +17126,7 @@
           "wilson_low": 0.9213119396866343
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "rgmin",
@@ -17159,7 +17159,7 @@
           "par2_mean": 3676.598,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-rgmin-cg-s1em2.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-rgmin-cg-s1em2.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -17171,7 +17171,7 @@
           "wilson_low": 0.8075669791195391
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "Sella",
@@ -17204,7 +17204,7 @@
           "par2_mean": 3738.961,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-sella-min-s1em2.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-sella-min-s1em2.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -17216,7 +17216,7 @@
           "wilson_low": 0.8371133085163773
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "rgmin",
@@ -17249,7 +17249,7 @@
           "par2_mean": 4085.193,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-rgmin-fire-s1em2.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-rgmin-fire-s1em2.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
@@ -17261,7 +17261,7 @@
           "wilson_low": 0.7855616182967687
         },
         {
-          "asv_commit": "83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "call_unit": "total",
           "cap": 10000,
           "code": "ASE",
@@ -17294,7 +17294,7 @@
           "par2_mean": 4609.897,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/noise-ase-fire-s1em2.dat; results/asv/83e7e0818907f5ae19e40891ba4a2c38b3d05736",
+          "path": "results/campaign/noise-ase-fire-s1em2.dat; results/asv/4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
           "problem": "minimization/lj38-noise",
           "registry_match": true,
           "scored": true,
