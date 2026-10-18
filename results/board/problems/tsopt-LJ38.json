@@ -377,6 +377,7 @@
       "eon/develop-ts-lj38-dimer 3.6.0 r2549-ini asv 7095b23": 0.3228546703496199,
       "eon/develop-ts-lj38-dimer-accept-energy 3.6.0 accept-energy asv 7095b23": 0.17911284742006886,
       "eon/develop-ts-lj38-lanczos 3.6.0 asv 7095b23": 0.3559679698726578,
+      "partn/ts-lj38 1.1.0 default campaign 9b75351": 0.0,
       "rgsaddle/dimer-fire 0.2.2 default campaign, asv c0db2b8": 0.0,
       "rgsaddle/dimer-fire-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.0,
       "rgsaddle/dimer-lbfgs 0.2.2 default campaign, asv c0db2b8": 0.0,
@@ -389,7 +390,8 @@
       "rgsaddle/prfo-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.7315028894634743,
       "sella/lj38-ts-default 2.6.0 default campaign, asv 6cfb60c": 1.1920787828293655,
       "sella/lj38-ts-tuned 2.6.0 tuned asv 6cfb60c": 1.0520998348456143,
-      "sella/lj38-ts-tuned 2.6.0 tuned campaign 6cfb60c": 1.0520998348456143
+      "sella/lj38-ts-tuned 2.6.0 tuned campaign 6cfb60c": 1.0520998348456143,
+      "tsase/dimer-lj38 1.0 default campaign 98aac60": 0.0
     },
     "rho": {
       "eon-client/ts-lj38-dimer 3.5.0 campaign 4d8b34b": [
@@ -454,6 +456,13 @@
         0.155,
         0.63,
         0.795
+      ],
+      "partn/ts-lj38 1.1.0 default campaign 9b75351": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
       ],
       "rgsaddle/dimer-fire 0.2.2 default campaign, asv c0db2b8": [
         0.0,
@@ -545,6 +554,13 @@
         0.99,
         0.99,
         0.99
+      ],
+      "tsase/dimer-lj38 1.0 default campaign 98aac60": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
       ]
     },
     "solved": {
@@ -557,6 +573,7 @@
       "eon/develop-ts-lj38-dimer 3.6.0 r2549-ini asv 7095b23": 0.92,
       "eon/develop-ts-lj38-dimer-accept-energy 3.6.0 accept-energy asv 7095b23": 0.85,
       "eon/develop-ts-lj38-lanczos 3.6.0 asv 7095b23": 0.865,
+      "partn/ts-lj38 1.1.0 default campaign 9b75351": 0.0,
       "rgsaddle/dimer-fire 0.2.2 default campaign, asv c0db2b8": 0.04,
       "rgsaddle/dimer-fire-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.235,
       "rgsaddle/dimer-lbfgs 0.2.2 default campaign, asv c0db2b8": 0.0,
@@ -569,7 +586,8 @@
       "rgsaddle/prfo-tuned 0.2.2 tuned campaign, asv c0db2b8": 1.0,
       "sella/lj38-ts-default 2.6.0 default campaign, asv 6cfb60c": 1.0,
       "sella/lj38-ts-tuned 2.6.0 tuned asv 6cfb60c": 0.99,
-      "sella/lj38-ts-tuned 2.6.0 tuned campaign 6cfb60c": 0.99
+      "sella/lj38-ts-tuned 2.6.0 tuned campaign 6cfb60c": 0.99,
+      "tsase/dimer-lj38 1.0 default campaign 98aac60": 0.0
     },
     "taus": [
       1.0,
@@ -1526,6 +1544,51 @@
       "wilson_low": 0.0008831687156009814
     },
     {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "artn",
+      "code_version": "1.1.0",
+      "commit": "9b753517c6c0eccae51425b83eb4e04ef554550b",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "artn-1.1.0-tsopt-LJ38--partn-ts-lj38",
+      "failures": {
+        "cap": 0,
+        "crash": 200,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 200,
+      "history": false,
+      "max_calls": 123.0,
+      "mean_calls": 49.045,
+      "mean_per_image": null,
+      "median": 20000.0,
+      "median_calls": 45.0,
+      "median_high": 20000.0,
+      "median_low": 20000.0,
+      "median_per_image": null,
+      "min_calls": 31.0,
+      "n": 200,
+      "nfailed": 200,
+      "note": "starts.jsonl",
+      "par2_mean": 20000.0,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/artn-1.1.0-tsopt-LJ38--partn-ts-lj38.dat",
+      "problem": "tsopt/LJ38",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 0.0,
+      "template": "partn/ts-lj38",
+      "tuning": "default",
+      "wilson_high": 0.018845326377266575,
+      "wilson_low": 0.0
+    },
+    {
       "asv_commit": "a914203cbb891442232aea2c92f960df9a48dc1d",
       "call_unit": "total",
       "cap": 10000,
@@ -1566,6 +1629,51 @@
       "source": "campaign, asv",
       "success_rate": 0.0,
       "template": "rgsaddle/dimer-lbfgs",
+      "tuning": "default",
+      "wilson_high": 0.018845326377266575,
+      "wilson_low": 0.0
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "tsase",
+      "code_version": "1.0",
+      "commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "tsase-1.0-tsopt-LJ38--tsase-dimer-lj38",
+      "failures": {
+        "cap": 200,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 200,
+      "history": false,
+      "max_calls": 10000.0,
+      "mean_calls": 10000.0,
+      "mean_per_image": null,
+      "median": 20000.0,
+      "median_calls": 10000.0,
+      "median_high": 20000.0,
+      "median_low": 20000.0,
+      "median_per_image": null,
+      "min_calls": 10000.0,
+      "n": 200,
+      "nfailed": 200,
+      "note": "starts.jsonl",
+      "par2_mean": 20000.0,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/tsase-1.0-tsopt-LJ38--tsase-dimer-lj38.dat",
+      "problem": "tsopt/LJ38",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 0.0,
+      "template": "tsase/dimer-lj38",
       "tuning": "default",
       "wilson_high": 0.018845326377266575,
       "wilson_low": 0.0
