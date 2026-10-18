@@ -45,7 +45,7 @@ It does not run a campaign.
    </tr>
    <tr data-problem="saddle-search/pt-island">
    <th scope="row"><a href="generated/suites/saddle-search.html#pt-island">Pt heptamer island</a></th>
-   <td data-code="eOn">—</td>
+   <td data-code="eOn" data-template="eon/develop-saddle-pt-lanczos" data-par2="2e+08"><span class="bench-score">2e+08</span><a href="generated/suites/saddle-search.html#pt-island-templates">eon/develop-saddle-pt-lanczos</a></td>
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/saddle-dimer-rotskip-tuned" data-par2="10127.1"><span class="bench-score">10127.1</span><a href="generated/suites/saddle-search.html#pt-island-templates">rgsaddle/saddle-dimer-rotskip-tuned</a></td>
@@ -72,7 +72,7 @@ It does not run a campaign.
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island">
    <th scope="row"><a href="generated/suites/double-ended-saddle-search.html#pt-island">pt-island</a></th>
-   <td data-code="eOn">—</td>
+   <td data-code="eOn" data-template="eon/develop-de-pt-oci" data-par2="3080.19"><span class="bench-score">3080.19</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">eon/develop-de-pt-oci</a></td>
    <td data-code="Eon svn" data-template="eon-svn/de-pt-lanczos-improved" data-par2="180.644"><span class="bench-score">180.644</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">eon-svn/de-pt-lanczos-improved</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="422.136"><span class="bench-score">422.136</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
@@ -117,7 +117,7 @@ It does not run a campaign.
    </tr>
    <tr data-problem="neb/Pt-heptamer">
    <th scope="row"><a href="generated/suites/neb.html#Pt-heptamer">Pt-heptamer</a></th>
-   <td data-code="eOn">—</td>
+   <td data-code="eOn" data-template="eon/neb-pt-lbfgs" data-par2="3517.69"><span class="bench-score">3517.69</span><a href="generated/suites/neb.html#Pt-heptamer-templates">eon/neb-pt-lbfgs</a></td>
    <td data-code="Eon svn" data-template="eon-svn/neb-pt-ci" data-par2="336.769"><span class="bench-score">336.769</span><a href="generated/suites/neb.html#Pt-heptamer-templates">eon-svn/neb-pt-ci</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/idpp-ci-neb-lbfgs" data-par2="318.308"><span class="bench-score">318.308</span><a href="generated/suites/neb.html#Pt-heptamer-templates">rgsaddle/idpp-ci-neb-lbfgs</a></td>
