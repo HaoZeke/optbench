@@ -1,5 +1,5 @@
 {
-  "full_n": null,
+  "full_n": 639,
   "history": [],
   "id": "hTST/Al",
   "not_comparable": [],
@@ -21,7 +21,7 @@
         "divergence": 0,
         "wrong_stationary": 0
       },
-      "full_n": null,
+      "full_n": 639,
       "history": false,
       "max_calls": 1216.0,
       "mean_calls": 1216.0,
@@ -66,7 +66,7 @@
         "divergence": 0,
         "wrong_stationary": 0
       },
-      "full_n": null,
+      "full_n": 639,
       "history": false,
       "max_calls": 1405.0,
       "mean_calls": 1405.0,
@@ -95,6 +95,76 @@
       "wilson_low": 0.20654931437723745
     }
   ],
-  "ranked": [],
+  "profile": {
+    "area_log10": {
+      "eon/htst-al-dimer 3.6.0 Dimer-CG rotation: max=50 tol=1 campaign 1d71c94": 1.2041199826559248
+    },
+    "rho": {
+      "eon/htst-al-dimer 3.6.0 Dimer-CG rotation: max=50 tol=1 campaign 1d71c94": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "solved": {
+      "eon/htst-al-dimer 3.6.0 Dimer-CG rotation: max=50 tol=1 campaign 1d71c94": 1.0
+    },
+    "taus": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ]
+  },
+  "ranked": [
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": null,
+      "code": "eOn",
+      "code_version": "3.6.0",
+      "commit": "1d71c944501832bfafb955ffe13b9aae50c8efd4",
+      "comparable": true,
+      "counter": "htst-reducer",
+      "current": true,
+      "entry": "eon-main-htst-al-dimer",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 639,
+      "history": false,
+      "max_calls": 26293.0,
+      "mean_calls": 5563.491392801252,
+      "mean_per_image": null,
+      "median": 4242.0,
+      "median_calls": 4242.0,
+      "median_high": 4458.0,
+      "median_low": 3977.975,
+      "median_per_image": null,
+      "min_calls": 829.0,
+      "n": 639,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": null,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/eon-main-htst-al-dimer.dat",
+      "problem": "hTST/Al",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "eon/htst-al-dimer",
+      "tuning": "Dimer-CG rotation: max=50 tol=1",
+      "wilson_high": 1.0,
+      "wilson_low": 0.9940242515973671
+    }
+  ],
   "title": "Al"
 }
