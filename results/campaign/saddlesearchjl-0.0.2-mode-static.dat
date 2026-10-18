@@ -1,0 +1,24 @@
+force_calls 648
+force_calls_min 137
+force_calls_median 575
+force_calls_max 4677
+nfailed 1
+par2_mean 744.6650000000
+successes 199
+wilson_low 0.9722262956
+wilson_high 0.9991168313
+par2_median 580.0000000000
+n_cap 1
+n_wrong_stationary 0
+n_divergence 0
+n_crash 0
+counter harness
+code saddlesearchjl
+code_version 0.0.2
+commit 47b4f35953bb3fc0f0726c171adca8f5b628af5e
+algorithm Static dimer rotation
+tuning default
+template saddlesearchjl/mode-static
+problem lowest-eigenvector/lj38
+n 200
+cap 10000
