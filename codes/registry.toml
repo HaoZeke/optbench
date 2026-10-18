@@ -85,6 +85,16 @@ committed = "2026-10-15"
 note = "Sella 2.6.0. Order 1 is a saddle and order 0 is a minimum. The Sella 0.1.1 rows on the 2014 tables are legacy and are not this pin. Force calls are harness calculator evaluations."
 
 [[code]]
+id = "pele"
+name = "pele"
+role = "saddle search"
+repository = "https://github.com/pele-python/pele"
+ref = "0.1.2"
+commit = "b7081b932a060be11342fbe8287ac35da8ada879"
+committed = "2026-10-12"
+note = "0.1.2 at b7081b93. NEB, DNEB, and double-ended connect call the harness Lennard-Jones and Morse potentials. The band uses the problem image count, spring constant 100, and the problem max move. One connect cycle is a single local connect. The harness accepts a start when the true force is within the problem norm and the Hessian index is 1."
+
+[[code]]
 id = "artn"
 name = "pARTn"
 role = "saddle search"
