@@ -894,6 +894,27 @@ def _ase_bh(budget: Budget, x0: np.ndarray, job: dict) -> None:
             _ase_quench_hit(atoms, budget, fmax)
 
 
+def _uniform_translated_dmax(pos1: np.ndarray, pos2: np.ndarray) -> float:
+    """MinimaHopping's translated pairing when every atom has one symbol.
+
+    One row is one anchor. The earliest remaining atom wins a tie, which
+    is what ``argmin`` returns.
+    """
+    standard = pos1 - pos1[0]
+    count = pos2.shape[0]
+    shifted = pos2[None, :, :] - pos2[:, None, :]
+    alive = np.ones((count, count), dtype=bool)
+    furthest = np.zeros(count, dtype=np.float64)
+    rows = np.arange(count)
+    for position in standard:
+        dist = np.linalg.norm(shifted - position, axis=2)
+        dist = np.where(alive, dist, np.inf)
+        chosen = np.argmin(dist, axis=1)
+        np.maximum(furthest, dist[rows, chosen], out=furthest)
+        alive[rows, chosen] = False
+    return float(furthest.min())
+
+
 def _ase_compare_dmax(atoms1, atoms2, *, translate: bool) -> float:
     """Same pairing as ``ComparePositions`` for an unperiodic cluster.
 
@@ -905,6 +926,15 @@ def _ase_compare_dmax(atoms1, atoms2, *, translate: bool) -> float:
     pos2 = np.asarray(atoms2.positions, dtype=np.float64)
     sym1 = np.asarray(atoms1.get_chemical_symbols())
     sym2 = np.asarray(atoms2.get_chemical_symbols())
+    uniform = (
+        translate
+        and sym1.size > 0
+        and sym1.shape == sym2.shape
+        and bool(np.all(sym1 == sym1[0]))
+        and bool(np.all(sym2 == sym1[0]))
+    )
+    if uniform:
+        return _uniform_translated_dmax(pos1, pos2)
 
     def paired(left: np.ndarray, right: np.ndarray, left_symbols: np.ndarray, right_symbols: np.ndarray) -> float:
         alive = np.ones(right.shape[0], dtype=bool)
