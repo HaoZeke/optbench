@@ -1,0 +1,20 @@
+id = "aenet/emt-pt38-force-lm"
+engine = "aenet"
+problem = "mlopt/emt-pt38"
+code = "aenet"
+code_version = "2.0.5"
+commit = "8f35990f5e3dd6cb296b953448cb11694d0cff3d"
+algorithm = "LM"
+tuning = "default"
+failure_cap = 30000
+note = "Behler-Parrinello squared-error loss on the problem trajectory. Fingerprints come from the archived fpParas.dat. The network has hidden layers 10 and 7, tanh, and a linear output, with NoScaler. Each start is uniform[-1, 1) from PCG64(20261015 + index). One harness call is one full-dataset loss and gradient. The stop is the L2 norm of each parameter-tensor gradient. pyamff 8037eb98 used the max absolute entry. Levenberg-Marquardt uses learnrate 0.01, adjust 10, and one batch. A rising error retries at most five times, and each retry is a call. The energy coefficient is 1 and the force coefficient is 0.1. The stop is 0.1 and the cap is 30000."
+
+[aenet]
+method = "lm"
+target = "force"
+c_energy = 1.0
+c_force = 0.1
+fp_parameters = "archive/entries/mlopt/emt-pt38/pyamff-lbfgs10-7-fcoeff0_1/fpParas.dat"
+
+[stop]
+gradient_norm = 0.1

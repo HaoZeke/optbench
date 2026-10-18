@@ -84,6 +84,16 @@ commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
 committed = "2026-10-05"
 note = "Activation-relaxation technique nouveau, plugin branch DEVEL. The benchmark contributor of a new entry is Rohit Goswami."
 
+[[code]]
+id = "aenet"
+name = "aenet"
+role = "training"
+repository = "https://github.com/atomisticnet/aenet"
+ref = "master"
+commit = "8f35990f5e3dd6cb296b953448cb11694d0cff3d"
+committed = "2026-10-11"
+note = "aenet 2.0.5, built from source. train.x prints 2.0.5. L-BFGS-B is setulb from the bundled Lbfgsb.3.0, tarball SHA256 f5b9a1c8c30ff6bcc8df9b5d5738145f4cbe4c7eadec629220e808dcf0e54720. Adam, online_sd, Levenberg-Marquardt, and the extended Kalman filter are the trainers in src/optimize.f90. The mlopt rows keep the problem Behler-Parrinello loss. aenet does not train forces, so a force row passes that loss to the same trainers."
+
 # generated ASE and Sella templates
 
 [[template]]

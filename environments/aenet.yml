@@ -1,0 +1,13 @@
+# aenet is not a conda-forge package. This file does not invent a
+# build string. The trainers the mlopt benchmarks run are the source
+# build pinned in codes/registry.toml under id aenet:
+#   ref = master
+#   commit = 8f35990f5e3dd6cb296b953448cb11694d0cff3d
+#   version string 2.0.5
+# L-BFGS-B is setulb from the bundled Lbfgsb.3.0. The campaign calls
+# that library. It does not call train.x.
+name: aenet
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12

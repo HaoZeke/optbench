@@ -315,6 +315,22 @@ def run(
             workers=workers,
             work=work,
         )
+    if template["engine"] == "aenet":
+        from .runners.aenet_ml import run_template
+
+        problem = resolve_problem(root, problem_name)
+        stated = template.get("problem")
+        if stated and stated != problem["id"]:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return run_template(
+            root,
+            problem,
+            template,
+            output=output,
+            workers=workers,
+            limit=limit,
+            resume=resume,
+        )
     if template["engine"] in {"ase", "sella"}:
         from .ase_sella import run_template
 

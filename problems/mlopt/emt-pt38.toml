@@ -6,12 +6,14 @@ contract = "stated"
 entry_count = 6
 
 [sample]
+starts = 50
 initializations = 50
 initialization = "uniform[-1, 1)"
 structure_source = "EMT molecular dynamics at 300 K"
 
 [convergence]
 max_epochs = 10000
+force_training_max_epochs = 30000
 energy_only_grad_norm = 0.02
 force_training_grad_norm = 0.1
 

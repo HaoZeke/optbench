@@ -91,6 +91,22 @@ def _bits(problem: dict) -> list[tuple[str, str]]:
         bits.append(("Stop", f"within {convergence['energy_above_minimum']} of the known minimum"))
     if "max_epochs" in convergence:
         bits.append(("Cap", f"{convergence['max_epochs']} epochs"))
+    if "force_training_max_epochs" in convergence:
+        bits.append(("Force cap", f"{convergence['force_training_max_epochs']} epochs"))
+    if "energy_only_grad_norm" in convergence:
+        bits.append(
+            (
+                "Energy stop",
+                f"each parameter-set gradient L2 at or below {convergence['energy_only_grad_norm']}",
+            )
+        )
+    if "force_training_grad_norm" in convergence:
+        bits.append(
+            (
+                "Force stop",
+                f"each parameter-set gradient L2 at or below {convergence['force_training_grad_norm']}",
+            )
+        )
     goal = problem.get("goal") or {}
     if goal.get("connected_saddles"):
         barrier = goal.get("barrier_below_eV")

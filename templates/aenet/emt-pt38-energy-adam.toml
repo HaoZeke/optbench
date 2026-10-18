@@ -1,0 +1,20 @@
+id = "aenet/emt-pt38-energy-adam"
+engine = "aenet"
+problem = "mlopt/emt-pt38"
+code = "aenet"
+code_version = "2.0.5"
+commit = "8f35990f5e3dd6cb296b953448cb11694d0cff3d"
+algorithm = "Adam"
+tuning = "default"
+failure_cap = 10000
+note = "Behler-Parrinello squared-error loss on the problem trajectory. Fingerprints come from the archived fpParas.dat. The network has hidden layers 10 and 7, tanh, and a linear output, with NoScaler. Each start is uniform[-1, 1) from PCG64(20261015 + index). One harness call is one full-dataset loss and gradient. The stop is the L2 norm of each parameter-tensor gradient. pyamff 8037eb98 used the max absolute entry. Adam uses mu 0.01, b1 0.9, b2 0.999, and eps 1e-8. The step divides the full-dataset gradient by the structure count. The force coefficient is 0, so force RMSE is -1. The stop is 0.02 and the cap is 10000."
+
+[aenet]
+method = "adam"
+target = "energy"
+c_energy = 1.0
+c_force = 0.0
+fp_parameters = "archive/entries/mlopt/emt-pt38/pyamff-lbfgs10-7-fcoeff0/fpParas.dat"
+
+[stop]
+gradient_norm = 0.02
