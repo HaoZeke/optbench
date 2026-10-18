@@ -90,6 +90,10 @@
       [
         "1007",
         "pt-island"
+      ],
+      [
+        "1008",
+        "pt-island"
       ]
     ]
   },
@@ -1077,12 +1081,8 @@
       "kind": "akmc",
       "cap": 100000000,
       "n": 10,
-      "finished": 8,
+      "finished": 9,
       "missing": [
-        [
-          "1008",
-          "pt-island"
-        ],
         [
           "1009",
           "pt-island"
@@ -1090,14 +1090,14 @@
       ],
       "successes": 8,
       "failures": {
-        "cap": 0,
+        "cap": 1,
         "divergence": 0,
         "crash": 0,
         "wrong_stationary": 0
       },
       "harness_successes": 8,
       "harness_failures": {
-        "cap": 0,
+        "cap": 1,
         "divergence": 0,
         "crash": 0,
         "wrong_stationary": 0

@@ -129,6 +129,22 @@
       "total_searches": 10775,
       "unique_saddles": 97,
       "seed": "1007"
+    },
+    {
+      "client_calls": 12065263,
+      "counter": "harness",
+      "error": "",
+      "failure": "cap",
+      "force_calls": 12070245.0,
+      "fraction_connected": 0.6941796875,
+      "passes": 800,
+      "potential": "morse_pt",
+      "qualifying": 26,
+      "seconds": 24719.83543341201,
+      "success": false,
+      "total_searches": 25600,
+      "unique_saddles": 102,
+      "seed": "1008"
     }
   ]
 }
