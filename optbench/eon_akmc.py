@@ -15,6 +15,7 @@ import os
 import shutil
 import sys
 import time
+import traceback
 from pathlib import Path
 
 from .campaign import format_ini, geometry_archive, load_template, write_starts
@@ -116,6 +117,12 @@ def _one_repetition(
             # process loads the new config.ini.
             config.init_done = False
             config.init()
+            # get_communicator caches the first Local object. A second
+            # seed in this process would keep the old scratch path.
+            from eon import communicator
+
+            if hasattr(communicator.get_communicator, "comm"):
+                del communicator.get_communicator.comm
         except SystemExit as exc:
             last_error = f"config exit {exc.code}"
             progress["error"] = last_error
@@ -130,7 +137,7 @@ def _one_repetition(
                 last_error = f"akmc exit {exc.code}"
                 break
             except Exception as exc:
-                last_error = f"{type(exc).__name__}: {exc}"
+                last_error = f"{type(exc).__name__}: {exc}\n{traceback.format_exc()}"
                 break
             results = work / "states" / "0" / "search_results.txt"
             if not results.is_file():

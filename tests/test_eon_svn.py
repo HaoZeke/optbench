@@ -4,22 +4,72 @@ from pathlib import Path
 
 import tomllib
 
-from benchmarks.bench_eon_develop import lj_cut, morse_cluster
-from benchmarks.bench_eon_svn import SPECS, _morse_fast
+from benchmarks.bench_eon_develop import lj_cut
+from benchmarks.bench_eon_svn import MORSE_A, MORSE_CUTOFF, MORSE_D, MORSE_RE, SPECS, _morse_fast
 from optbench.campaign import _check_stop, load_template, resolve_problem
 from optbench.potentials import lennard_jones
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_c_morse_matches_the_develop_kernel():
+def _eon_morse(positions, box=None):
+    """Python copy of r2549 Morse::force, for the C kernel check."""
+    import math
+
+    atoms = len(positions) // 3
+    bx = by = bz = 0.0
+    if box is not None:
+        bx, by, bz = box[0], box[4], box[8]
+    gap_c = 1.0 - math.exp(-MORSE_A * (MORSE_CUTOFF - MORSE_RE))
+    ecut = MORSE_D * (gap_c * gap_c - 1.0)
+    energy = 0.0
+    forces = [0.0] * len(positions)
+    for i in range(atoms):
+        ix = 3 * i
+        for j in range(i + 1, atoms):
+            jx = 3 * j
+            dx = positions[ix] - positions[jx]
+            dy = positions[ix + 1] - positions[jx + 1]
+            dz = positions[ix + 2] - positions[jx + 2]
+            if bx > 0.0:
+                dx -= bx * math.floor(dx / bx + 0.5)
+            if by > 0.0:
+                dy -= by * math.floor(dy / by + 0.5)
+            if bz > 0.0:
+                dz -= bz * math.floor(dz / bz + 0.5)
+            r2 = dx * dx + dy * dy + dz * dz
+            if r2 <= 0.0:
+                continue
+            r = math.sqrt(r2)
+            if r >= MORSE_CUTOFF:
+                continue
+            gap = 1.0 - math.exp(-MORSE_A * (r - MORSE_RE))
+            energy += MORSE_D * (gap * gap - 1.0) - ecut
+            bond = 2.0 * MORSE_D * gap * (gap - 1.0) * MORSE_A
+            scale = bond / r
+            fx, fy, fz = scale * dx, scale * dy, scale * dz
+            forces[ix] += fx
+            forces[ix + 1] += fy
+            forces[ix + 2] += fz
+            forces[jx] -= fx
+            forces[jx + 1] -= fy
+            forces[jx + 2] -= fz
+    return energy, tuple(forces)
+
+
+def test_c_morse_matches_r2549_morse():
     positions = []
     for i in range(12):
         positions.extend((0.4 * i, 0.15 * (i % 3), 0.2 * (i % 5)))
-    energy, forces = morse_cluster(positions)
-    other, fast = _morse_fast(positions)
-    assert abs(energy - other) == 0.0
-    assert fast == forces
+    box = [8.0, 0.0, 0.0, 0.0, 7.5, 0.0, 0.0, 0.0, 12.0]
+    energy, forces = _eon_morse(positions, box)
+    other, fast = _morse_fast(positions, box=box)
+    assert abs(energy - other) < 1e-9
+    assert len(fast) == len(forces)
+    for left, right in zip(fast, forces, strict=True):
+        assert abs(left - right) < 1e-8
+    bare, _bare_forces = _morse_fast(positions)
+    assert abs(bare - _eon_morse(positions)[0]) < 1e-9
 
 
 def test_lj_cut_matches_the_noise_kernel():

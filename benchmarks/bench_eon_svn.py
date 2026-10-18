@@ -2,8 +2,10 @@
 
 The client is ``EON_SVN_CLIENT`` or ``~/opt/eon-svn/bin/eonclient``. It
 must print ``r2549``. Every force evaluation goes through ``ExtPot`` and
-``HarnessCounter``. The kernel is the develop kernel named on the
-template, so this column and the develop column share a potential.
+``HarnessCounter``. Lennard-Jones kernels match the develop harness.
+``morse_pt`` is r2549 ``Morse::force``: cutoff 9.5, the pair energy
+shifted to zero at the cutoff, and the minimum image on the box
+diagonal. The develop harness Morse has no cutoff and ignores the box.
 r2549 reads L-BFGS keys from ``[Optimizer]``. It does not read
 ``energy_weighted``, ``ci_mmf``, or the modern L-BFGS catalog.
 
@@ -31,7 +33,6 @@ from benchmarks.bench_eon_develop import (
     kept_lowest,
     lammps_lj_params,
     lj_cut,
-    morse_cluster,
     selected,
 )
 from benchmarks.bench_eon_develop import MORSE_A, MORSE_D, MORSE_RE
@@ -85,12 +86,14 @@ def _bridge() -> Path:
     return dest
 
 
-def _morse_lib():
-    """C pair Morse with the same pair order as ``morse_cluster``.
+MORSE_CUTOFF = 9.5
 
-    A 343-atom island is about 60k pairs. The Python loop spends tens of
-    milliseconds on each call, and a band or an AKMC repetition makes
-    thousands of them. The C loop is the same arithmetic.
+
+def _morse_lib():
+    """C r2549 ``Morse::force`` for the 343-atom island.
+
+    A Python pair loop spends tens of milliseconds on each call. A band
+    or an AKMC repetition makes thousands of them.
     """
     import ctypes
 
@@ -107,11 +110,13 @@ def _morse_lib():
         )
         temporary.replace(dest)
     lib = ctypes.CDLL(str(dest))
-    lib.morse_cluster_flat.argtypes = [
+    lib.morse_eon_flat.argtypes = [
         ctypes.c_int,
         ctypes.POINTER(ctypes.c_double),
         ctypes.POINTER(ctypes.c_double),
         ctypes.POINTER(ctypes.c_double),
+        ctypes.POINTER(ctypes.c_double),
+        ctypes.c_double,
         ctypes.c_double,
         ctypes.c_double,
         ctypes.c_double,
@@ -123,7 +128,7 @@ def _morse_lib():
 def _morse_fast(positions, atomic_numbers=None, box=None):
     import ctypes
 
-    del atomic_numbers, box
+    del atomic_numbers
     count = len(positions)
     if count % 3 != 0:
         raise ValueError("positions must be x, y, z triples")
@@ -131,14 +136,22 @@ def _morse_fast(positions, atomic_numbers=None, box=None):
     pos = (ctypes.c_double * count)(*positions)
     forces = (ctypes.c_double * count)()
     energy = ctypes.c_double()
-    _morse_lib().morse_cluster_flat(
+    box_buf = None
+    if box is not None:
+        values = [float(value) for value in box]
+        if len(values) != 9:
+            raise ValueError("box must be nine floats")
+        box_buf = (ctypes.c_double * 9)(*values)
+    _morse_lib().morse_eon_flat(
         atoms,
         pos,
+        box_buf,
         ctypes.byref(energy),
         forces,
         MORSE_D,
         MORSE_A,
         MORSE_RE,
+        MORSE_CUTOFF,
     )
     return float(energy.value), tuple(forces)
 

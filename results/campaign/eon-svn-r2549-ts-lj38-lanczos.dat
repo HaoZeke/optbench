@@ -1,0 +1,23 @@
+# eOn SVN r2549. HarnessCounter through ext_pot. Kernel ljcluster.
+# Lanczos minimum mode and conjugate-gradient translation, same stops as eon/develop-ts-lj38-lanczos. Lanczos tolerance 0.02, 15 iterations, quit_early true. Optimizer max_move 0.35, max_iterations 1000, converged_force 0.001. Potential ljcluster. client_displace_type load. direction.dat is Python random.Random(index). Main random_seed is 1. The run swaps the potential for ext_pot. The harness kernel is the develop kernel for this potential name. The 2014 table used r2156. The binary is SVN r2549, the registry pin. Export of the 2014 revision is forbidden, so this row is r2549.
+counter harness
+code Eon svn
+code_version r2549
+commit r2549
+algorithm Lanczos
+tuning default
+template eon-svn/ts-lj38-lanczos
+problem tsopt/LJ38
+reducer harness
+cap 10000
+n 200
+par2_mean 2974.825
+nfailed 25
+mean_calls 867.79
+median_calls 454.5
+min_calls 110.0
+max_calls 3488.0
+n_crash 0
+n_divergence 25
+n_cap 0
+n_wrong_stationary 0

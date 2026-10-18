@@ -1,0 +1,23 @@
+# eOn SVN r2549. HarnessCounter through ext_pot. Kernel morse_pt.
+# Same Lanczos and conjugate-gradient settings as eon/develop-ts-pt-lanczos. Potential morse_pt. max_move 0.35. The mode is the normalized displacement from the reactant. Main random_seed is 1. The run swaps the potential for ext_pot. The harness kernel is the develop kernel for this potential name. morse_pt here is r2549 Morse::force: cutoff 9.5, pair energy shifted to zero at the cutoff, minimum image on the box diagonal. The develop harness Morse has no cutoff and ignores the box, and that form ends every Pt saddle search above max_energy 5. The 2014 table used r2156. The binary is SVN r2549, the registry pin. Export of the 2014 revision is forbidden, so this row is r2549.
+counter harness
+code Eon svn
+code_version r2549
+commit r2549
+algorithm Lanczos
+tuning default
+template eon-svn/ts-pt-lanczos
+problem tsopt/pt-island
+reducer harness
+cap 10000
+n 49
+par2_mean 223.59183673469389
+nfailed 0
+mean_calls 223.59183673469389
+median_calls 173.0
+min_calls 103.0
+max_calls 776.0
+n_crash 0
+n_divergence 0
+n_cap 0
+n_wrong_stationary 0
