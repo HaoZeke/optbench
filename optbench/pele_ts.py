@@ -1005,7 +1005,9 @@ def _run_saddle_search(
                 )
                 partial_path.unlink(missing_ok=True)
             stop_at = int(limit) if limit else limits["max_searches"]
-            width = max(1, int(workers))
+            pool_size = max(1, int(workers))
+            # One batch keeps the cores busy while the parent writes the checkpoint.
+            width = pool_size if executor is None else pool_size * 8
             while connected < goal and searches < limits["max_searches"] and searches < stop_at:
                 batch: list[dict] = []
                 while (
@@ -1081,17 +1083,18 @@ def _run_saddle_search(
                         stored["saddle_x"] = record["saddle_x"]
                     _append_partial(partial_path, stored)
                     kept = int(item["searches"])
-                    if kept == 1 or kept % 25 == 0 or connected >= goal:
-                        print(
-                            f"{template['id']} rep {rep} searches {kept} connected {connected} "
-                            f"calls {record['force_calls']} failure {record['failure']}",
-                            flush=True,
-                        )
-                        running = connected < goal and kept < limits["max_searches"]
-                        snapshot, _metrics = _summarize(
-                            all_records, template, search_cap, problem["id"], partial=running
-                        )
-                        _write_campaign(output, snapshot, all_records, template, problem["id"])
+                if kept == 1 or kept % 25 == 0 or connected >= goal:
+                    print(
+                        f"{template['id']} rep {rep} searches {kept} connected {connected} "
+                        f"calls {record['force_calls']} failure {record['failure']}",
+                        flush=True,
+                    )
+                if kept == 1 or kept % 250 == 0 or connected >= goal:
+                    running = connected < goal and kept < limits["max_searches"]
+                    snapshot, _metrics = _summarize(
+                        all_records, template, search_cap, problem["id"], partial=running
+                    )
+                    _write_campaign(output, snapshot, all_records, template, problem["id"])
                 searches = kept
             if connected < goal:
                 failed_reps += 1
