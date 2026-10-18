@@ -1,0 +1,26 @@
+# counter harness. One force call is one RgpotCounter.calculate entry.
+# The library steps on the harness Lennard-Jones gradient.
+# v2 success is under the cap, at the force stop, and Hessian index 0.
+# energy and Kabsch RMSD were not applied: the problem file has no energy_tol, rmsd_tol, or per-start reference.
+# LJ38 index removes the six rigid modes. A curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6).
+# energy_min and energy_max are the final potential values on the recorded points.
+# Berny on the harness Lennard-Jones potential. Hydrogen labels feed the internal coordinates. Dihedrals stay on and trust is the library default 0.3. symmetry is nowarn, so the start is not displaced. Coordinates stay in angstrom. The gradient passed to PyBerny is that derivative times bohr2angstroms. maxsteps is the force-call cap. The search stops on the problem force norm. The same values are used for every start.
+nfailed 25
+code PyBerny
+code_version 0.7.0.post2.dev0+2c73223
+commit 2c732230c543455dc4c318fed8ab8cb7b5f9face
+algorithm Berny
+template pyberny/lj38-berny
+tuning default
+counter harness
+par2_mean 20000
+wilson_low 0
+wilson_high 0.133192250939
+par2_median 20000
+par2_median_low 20000
+par2_median_high 20000
+v2_nfailed 25
+v2_successes 0
+n 25
+energy_min -98.57943807
+energy_max 148673.086931
