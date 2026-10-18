@@ -451,6 +451,21 @@ def _coordinates(molecule, coordsys: str):
     raise ValueError(f"unknown geomeTRIC coordinate system {coordsys}")
 
 
+def _report_step(job, steps, engine, opt) -> None:
+    if os.environ.get("OPTBENCH_GEOMETRIC_PROGRESS") != "1":
+        return
+    import numpy as np
+
+    gradient = engine.problem_gradient
+    if gradient is None:
+        return
+    norm = float(np.linalg.norm(gradient))
+    print(
+        f"{job.get('start')} step={steps} norm={norm:.6g} trust={float(opt.trust):.4g} ic={type(opt.IC).__name__}",
+        flush=True,
+    )
+
+
 def optimize(job: dict, evaluate, stop) -> dict:
     """Run one geomeTRIC minimization.
 
@@ -532,6 +547,7 @@ def optimize(job: dict, evaluate, stop) -> dict:
         opt.prepareFirstStep()
         if engine.problem_gradient is not None and stop(engine.problem_gradient):
             stopped = True
+        _report_step(job, steps, engine, opt)
         while not stopped and opt.state not in (OPT_STATE.CONVERGED, OPT_STATE.FAILED):
             opt.step()
             if opt.state == OPT_STATE.SKIP_EVALUATION:
@@ -544,6 +560,8 @@ def optimize(job: dict, evaluate, stop) -> dict:
                 break
             opt.calcEnergyForce()
             steps += 1
+            if steps % 25 == 0:
+                _report_step(job, steps, engine, opt)
             if engine.problem_gradient is not None and stop(engine.problem_gradient):
                 stopped = True
                 break
