@@ -1,0 +1,18 @@
+id = "jaxmd/noise-gd-s1em3"
+engine = "jaxmd"
+problem = "minimization/lj38-noise"
+code = "jaxmd"
+code_version = "0.2.29"
+commit = "84ab10407420fd91ad1c25be4ecd16ce1f54a75c"
+algorithm = "gradient descent"
+tuning = "default"
+note = "JAX MD 0.2.29 gradient_descent. step_size is 0.001, the value in the JAX MD minimization notebooks. The library requires a step size. The shift scales a trial so the largest per-atom move is 0.2. The potential is the harness potential for this problem. The stop is the problem force norm and the budget is the force-call cap. Gaussian force noise uses the problem seed, kappa, and clean-energy window. The Hessian is the clean force."
+
+[jaxmd]
+method = "gd"
+maxstep = 0.2
+step_size = 0.001
+
+[noise]
+sigma = 0.001
+seed = 20261016

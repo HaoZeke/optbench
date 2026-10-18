@@ -1,0 +1,14 @@
+# JAX MD is not a conda-forge package. This file does not select a
+# conda build of jax-md, jaxopt, or optax. The benchmarks run the source
+# pins in codes/registry.toml under id jaxmd:
+#   ref = jax-md-v0.2.29
+#   commit = 84ab10407420fd91ad1c25be4ecd16ce1f54a75c
+# L-BFGS rows use two more source pins:
+#   jaxopt 0.8.5 commit b12c2f3ddaa3ef71fac42d7e419adccb9dcc49a1
+#   optax 0.2.8 commit 107e9ad20ca62bcbee1a8c016daab71c690a678c
+# asv has one environment_type, so this yml cannot be bound to one class.
+name: jaxmd
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
