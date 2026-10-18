@@ -597,6 +597,8 @@ JOBS = {
     "low-lj38-lanczos": ("eon/develop-low-lj38-lanczos", run_lowest),
     "saddle-pt-dimer": ("eon/develop-saddle-pt-dimer", None),
     "saddle-pt-lanczos": ("eon/develop-saddle-pt-lanczos", None),
+    "aladatom-akmc": ("eon/aladatom-akmc", "amd"),
+    "standard-aladatom-akmc": ("eon/standard-aladatom-akmc", "amd"),
 }
 
 
@@ -619,6 +621,10 @@ def run_named(
         from .eon_akmc import run_saddle
 
         fn = run_saddle
+    elif fn == "amd":
+        from .eon_amd import run_amd
+
+        fn = run_amd
     if repetitions is None:
         summary = fn(root, template_name, client, output, scratch, workers)
     else:

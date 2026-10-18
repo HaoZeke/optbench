@@ -21,6 +21,7 @@
    <dl class="bench-rule">
    <dt>Cap</dt><dd>10000 force calls</dd>
    <dt>Starts</dt><dd>200</dd>
+   <dt>Potential</dt><dd>lennard-jones</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>

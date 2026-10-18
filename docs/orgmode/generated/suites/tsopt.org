@@ -30,6 +30,7 @@
    <dt>Stop</dt><dd>L2 norm of the force at or below 0.001 energy/distance</dd>
    <dt>Cap</dt><dd>10000 force calls</dd>
    <dt>Starts</dt><dd>200</dd>
+   <dt>Potential</dt><dd>lennard-jones</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
@@ -195,6 +196,7 @@
    <dt>Stop</dt><dd>L2 norm of the force at or below 0.001 eV/Angstrom</dd>
    <dt>Cap</dt><dd>10000 force calls</dd>
    <dt>Starts</dt><dd>49</dd>
+   <dt>Potential</dt><dd>morse</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>

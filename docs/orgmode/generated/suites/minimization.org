@@ -38,6 +38,7 @@
    <dt>Stop</dt><dd>L2 norm of the force at or below 0.01 energy/distance</dd>
    <dt>Cap</dt><dd>10000 force calls</dd>
    <dt>Starts</dt><dd>1000</dd>
+   <dt>Potential</dt><dd>lennard-jones</dd>
    <dt>Archived rule</dt><dd>total_force_calls &gt;= max_force_calls</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    </dl>
@@ -509,6 +510,7 @@
    <dt>Stop</dt><dd>L2 norm of the force at or below 0.01 energy/distance</dd>
    <dt>Cap</dt><dd>10000 force calls</dd>
    <dt>Starts</dt><dd>1000</dd>
+   <dt>Potential</dt><dd>lennard-jones</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    <dt>Note</dt><dd>Gaussian force noise on the clean Lennard-Jones energy. The harness campaigns use that rule. The quadratic sample is results/validation/statistics.json.</dd>
    </dl>
