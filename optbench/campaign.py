@@ -315,6 +315,18 @@ def run(
             workers=workers,
             work=work,
         )
+    if template["engine"] == "gpatom-band":
+        from .gpatom_band import run as run_gpatom
+
+        return run_gpatom(
+            root,
+            problem_name,
+            template_name,
+            output=output,
+            workers=workers,
+            limit=limit,
+            resume=resume,
+        )
     if template["engine"] in {"ase", "sella"}:
         from .ase_sella import run_template
 

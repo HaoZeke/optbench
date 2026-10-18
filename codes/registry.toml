@@ -84,6 +84,16 @@ commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
 committed = "2026-10-05"
 note = "Activation-relaxation technique nouveau, plugin branch DEVEL. The benchmark contributor of a new entry is Rohit Goswami."
 
+[[code]]
+id = "gpatom"
+name = "ase-gpatom"
+role = "band"
+repository = "https://gitlab.com/gpatom/ase-gpatom"
+ref = "master"
+commit = "572bd64ef61ccf498e061162609bb5f16e39d8a4"
+committed = "2025-07-13"
+note = "ase-gpatom 1.0.1 AIDNEB. Force calls are spec-potential evaluations. Gaussian-process predictions are not counted. ASE 3.29 has no ase.neb; the runner aliases it to ase.mep.NEB. This revision's Database stores forces only through add_forces and has no get_all_energyforces, and ConstantPrior has no let_update. The runner fills those three so the published loop can train. GPCalculator does not expose an energy uncertainty, so the runner supplies the surrogate calculator AIDNEB already reads."
+
 # generated ASE and Sella templates
 
 [[template]]

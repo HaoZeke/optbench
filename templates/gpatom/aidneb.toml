@@ -1,0 +1,28 @@
+# ase-gpatom 1.0.1 AIDNEB. The problem file supplies the image count, the cap, and the force norm.
+id = "gpatom/aidneb"
+engine = "gpatom-band"
+code = "gpatom"
+code_version = "1.0.1"
+commit = "572bd64ef61ccf498e061162609bb5f16e39d8a4"
+algorithm = "AIDNEB"
+tuning = "default"
+
+[ini]
+
+[aid]
+interpolation = "idpp"
+neb_method = "improvedtangent"
+max_train_data = 25
+max_train_data_strategy = "nearest_observations"
+unc_convergence = 0.025
+dt = 0.05
+ml_steps = 100
+max_step = 2.0
+fit_weight = "update"
+update_prior_strategy = "fit"
+kerneltype = "sqexp"
+weight = 1.0
+scale = 0.4
+noise = 0.005
+use_forces = true
+remove_rotation_and_translation = false

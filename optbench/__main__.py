@@ -86,6 +86,18 @@ def run(
             output=output,
             workers=workers,
         )
+    elif loaded["engine"] == "gpatom-band":
+        from optbench.gpatom_band import run as run_gpatom
+
+        summary = run_gpatom(
+            root,
+            problem,
+            template,
+            output=output,
+            workers=workers,
+            limit=limit,
+            resume=resume,
+        )
     else:
         client_path = _eon_client(client) if loaded["engine"] in {"eon-client", "eon"} else client
         summary = run_campaign(
