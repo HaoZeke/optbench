@@ -1,0 +1,23 @@
+id = "agox/lj75-bh"
+engine = "agox"
+problem = "globalopt/lj75"
+code = "AGOX"
+code_version = "3.11.2.dev2+g22d94a6fa"
+commit = "22d94a6fae8cf2d08d51ecc8b9291a47667aa95c"
+algorithm = "basin hopping"
+tuning = "default"
+note = "Basin hopping uses the same sampler, rattle, local optimizer, seed rule, and harness Lennard-Jones potential as agox/lj38-bh. The confinement cube is 36 Å inside a 48 Å cell. The problem file states no energy window and does not name an archive. Geometries come from website/globalopt/lj75/lj75_clusters.tgz in the input manifest. The run records the lowest energy and the calls at that energy. The force-call cap is 500000."
+
+[agox]
+method = "basin_hopping"
+temperature = 0.25
+rattle_amplitude = 3.0
+rattle_fraction = 0.25
+fmax = 0.05
+max_steps = 500
+seed_base = 314159
+cell = 48.0
+confinement = 36.0
+
+[stop]
+max_force_calls = 500000
