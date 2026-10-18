@@ -101,10 +101,12 @@ def run(
             resume=resume,
         )
     calls = summary.get("force_calls")
+    par = summary.get("par2_mean")
+    par_text = f" par2_mean={par}" if par is not None else ""
     print(
         f"{summary['problem']} {summary['template']} "
         f"force_calls={calls} nfailed={summary['nfailed']} "
-        f"starts={summary['starts']}"
+        f"starts={summary['starts']}{par_text}"
     )
 
 

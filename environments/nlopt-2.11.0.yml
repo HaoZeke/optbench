@@ -1,0 +1,13 @@
+# NLopt 2.11.0 is not selected from conda-forge here. The library the
+# global-optimization benchmarks import is the source build pinned in
+# codes/registry.toml under id nloptglobal:
+#   ref = v2.11.0
+#   commit = 88c424d4f458412787df96fcc95218acbca224fd
+#   version string 2.11.0
+# asv has one environment_type, so this yml cannot be bound to one
+# class. Those classes import nlopt.
+name: nlopt-2.11.0
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
