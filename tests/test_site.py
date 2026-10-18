@@ -77,6 +77,11 @@ def test_rendered_pages_use_the_board_rank():
     assert f'data-board-table="ranked" data-problem="minimization/lj38"' in minimization
     assert f'data-field="par2_mean">{cells["par2_mean"]}<' in minimization
     assert "minimization-lj38-profile.svg" in minimization
+    assert "minimization-lj38-profile.webp" in minimization
+    assert 'loading="lazy"' in minimization
+    assert 'data-board-table="summary"' in minimization
+    assert f'data-par2="{cells["par2_mean"]}"' in minimization
+    assert "<details" in minimization
     assert "Legacy 2014 archive" in minimization
     assert "eon-cg" in minimization
     assert "par2-wilson-bootstrap" in minimization
@@ -99,6 +104,10 @@ def test_rendered_pages_use_the_board_rank():
     assert "Per-search cost" not in saddle
     assert "noise/rgmin-dogleg-s0" in minimization
     assert 'data-field="par2_mean">81.881<' in minimization
+    board = (ROOT / "docs" / "include" / "v2-board.org").read_text(encoding="utf-8")
+    assert 'data-board-table="summary"' in board
+    assert f'data-par2="{cells["par2_mean"]}"' in board
+    assert "min-width: 40rem" not in (ROOT / "docs" / "source" / "_static" / "optbench.css").read_text(encoding="utf-8")
     codes = (ROOT / "docs" / "include" / "codes.org").read_text(encoding="utf-8")
     assert "Rohit Goswami" in codes
     assert "4d8b34baf1ba" in codes
@@ -115,6 +124,24 @@ def test_rendered_pages_use_the_board_rank():
             assert problem["profile_gap"]
             assert problem["profile_gap"] in page
     assert check_site(ROOT) == []
+
+
+def test_a_stale_summary_number_fails_the_check():
+    render(ROOT)
+    document = json.loads((ROOT / "results" / "board" / "index.json").read_text(encoding="utf-8"))
+    top = document["problems"]["minimization/lj38"]["ranked"][0]
+    par2 = dict(ranked_cells(top, False))["par2_mean"]
+    path = ROOT / "docs" / "include" / "v2-board.org"
+    original = path.read_text(encoding="utf-8")
+    needle = f'data-par2="{par2}"'
+    assert needle in original
+    path.write_text(original.replace(needle, 'data-par2="1"', 1), encoding="utf-8")
+    try:
+        errors = check_site(ROOT)
+        assert errors
+        assert any("par2" in line and "minimization/lj38" in line for line in errors)
+    finally:
+        path.write_text(original, encoding="utf-8")
 
 
 def test_a_stale_ranked_number_fails_the_check():

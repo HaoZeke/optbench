@@ -28,6 +28,9 @@ jobs:
       - name: Build the site
         run: pixi run -e docs html
 
+      - name: Page weight
+        run: pixi run -e docs sitesize
+
       - uses: actions/upload-pages-artifact@v4
         with:
           path: docs/build

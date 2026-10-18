@@ -4,21 +4,47 @@
 #+begin_export rst
 .. raw:: html
 
-   <section class="bench" id="C2H4" data-problem="mlopt/C2H4">
+   <section class="bench" id="summary"><div class="bench-scroll">
+   <table data-board-table="summary">
+   <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
+   <thead><tr><th>Problem</th><th>eOn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th></tr></thead><tbody>
+   <tr data-problem="mlopt/C2H4">
+   <th scope="row"><a href="#C2H4">C2H4</a></th>
+   <td data-code="eOn">—</td>
+   <td data-code="rgmin">—</td>
+   <td data-code="rgsaddle">—</td>
+   <td data-code="ASE">—</td>
+   <td data-code="Sella">—</td>
+   </tr>
+   <tr data-problem="mlopt/emt-pt38">
+   <th scope="row"><a href="#emt-pt38">EMT Pt 38 nanoparticle</a></th>
+   <td data-code="eOn">—</td>
+   <td data-code="rgmin">—</td>
+   <td data-code="rgsaddle">—</td>
+   <td data-code="ASE">—</td>
+   <td data-code="Sella">—</td>
+   </tr>
+   </tbody></table></div></section><section class="bench" id="C2H4" data-problem="mlopt/C2H4">
    <h2>C2H4</h2>
    <dl class="bench-rule">
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
+   <p class="bench-gaps">No committed harness run.</p>
+   <details class="bench-details" id="C2H4-templates">
+   <summary>All templates (0 ranked)</summary>
+   <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="mlopt/C2H4">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td colspan="13">No full harness row.</td></tr>
-   </tbody></table>
-   <p class="bench-gaps">No committed harness run.</p>
+   </tbody></table></div>
+   </details>
    </section><section class="bench bench-legacy-section" id="C2H4-legacy">
    <h3>Legacy 2014 archive</h3>
+   <details class="bench-details">
+   <summary>Legacy 2014 archive</summary>
    <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest epochs first. Failures are left out of this mean.</caption>
@@ -122,6 +148,7 @@
    </tr>
    </tbody></table></div>
    <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:6"></div><script type="application/json" class="bench-plot-data">{"metric": "mean_epoch", "scale": "log", "points": [{"id": "mlopt-c2h4-pyamff-rprop10-7-fcoeff0", "entry": "pyamff-rprop10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 184.56, "best": true, "held": false, "failed": false}, {"id": "mlopt-c2h4-pyamff-lbfgs10-7-fcoeff0", "entry": "pyamff-lbfgs10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 2157.14, "best": false, "held": false, "failed": false}, {"id": "mlopt-c2h4-pyamff-adam10-7-fcoeff0", "entry": "pyamff-adam10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 4395.3, "best": false, "held": false, "failed": false}, {"id": "mlopt-c2h4-pyamff-rprop10-7-fcoeff0-1", "entry": "pyamff-rprop10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 12926.88, "best": false, "held": false, "failed": false}, {"id": "mlopt-c2h4-pyamff-adam10-7-fcoeff0-1", "entry": "pyamff-adam10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 13876.7, "best": false, "held": false, "failed": false}, {"id": "mlopt-c2h4-pyamff-lbfgs10-7-fcoeff0-1", "entry": "pyamff-lbfgs10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 23314.46, "best": false, "held": false, "failed": false}]}</script></figure>
+   </details>
    </section><section class="bench" id="emt-pt38" data-problem="mlopt/emt-pt38">
    <h2>EMT Pt 38 nanoparticle</h2>
    <dl class="bench-rule">
@@ -129,14 +156,20 @@
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
+   <p class="bench-gaps">No committed harness run.</p>
+   <details class="bench-details" id="emt-pt38-templates">
+   <summary>All templates (0 ranked)</summary>
+   <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="mlopt/emt-pt38">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td colspan="13">No full harness row.</td></tr>
-   </tbody></table>
-   <p class="bench-gaps">No committed harness run.</p>
+   </tbody></table></div>
+   </details>
    </section><section class="bench bench-legacy-section" id="emt-pt38-legacy">
    <h3>Legacy 2014 archive</h3>
+   <details class="bench-details">
+   <summary>Legacy 2014 archive</summary>
    <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest epochs first. Failures are left out of this mean.</caption>
@@ -240,5 +273,6 @@
    </tr>
    </tbody></table></div>
    <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:6"></div><script type="application/json" class="bench-plot-data">{"metric": "mean_epoch", "scale": "log", "points": [{"id": "mlopt-emt-pt38-pyamff-rprop10-7-fcoeff0", "entry": "pyamff-rprop10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 97.58, "best": true, "held": false, "failed": false}, {"id": "mlopt-emt-pt38-pyamff-rprop10-7-fcoeff0-1", "entry": "pyamff-rprop10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 1022.86, "best": false, "held": false, "failed": false}, {"id": "mlopt-emt-pt38-pyamff-adam10-7-fcoeff0", "entry": "pyamff-adam10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 1103.24, "best": false, "held": false, "failed": false}, {"id": "mlopt-emt-pt38-pyamff-adam10-7-fcoeff0-1", "entry": "pyamff-adam10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 1708.8, "best": false, "held": false, "failed": false}, {"id": "mlopt-emt-pt38-pyamff-lbfgs10-7-fcoeff0", "entry": "pyamff-lbfgs10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 1791.8, "best": false, "held": false, "failed": false}, {"id": "mlopt-emt-pt38-pyamff-lbfgs10-7-fcoeff0-1", "entry": "pyamff-lbfgs10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 1943.34, "best": false, "held": false, "failed": false}]}</script></figure>
+   </details>
    </section>
 #+end_export
