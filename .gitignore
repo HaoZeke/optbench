@@ -15,6 +15,7 @@ docs/source/generated/
 results/rgsaddle-asv/
 results/pele-asv/
 results/campaign/work/
+results/campaign/geometries/
 results/campaign/*.header.json
 results/campaign/*.partial.jsonl
 results/campaign/*.tmp
