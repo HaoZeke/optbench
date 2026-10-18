@@ -1,0 +1,19 @@
+# DL-FIND steepest descent on LJ38 with sigma 1e-3.
+id = "dlfind/sd-lj38-noise-s1em3"
+engine = "dlfind"
+problem = "minimization/lj38-noise"
+code = "dlfind"
+code_version = "0.0.3"
+commit = "4167998d16d8dac4a484ba9305f27d6325a7a28d"
+algorithm = "steepest descent"
+tuning = "default"
+note = "sigma 1e-3. iopt 0. The stop uses the noisy force and a clean-energy window. The Hessian is clean."
+
+[dlfind]
+method = "sd"
+
+[noise]
+sigma = 1e-3
+kappa = 3.0
+window = 5
+seed = 20261016

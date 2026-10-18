@@ -1,0 +1,16 @@
+# counter harness. The pysisyphus calculator calls pes.evaluate.
+# method lbfgs. Coordinates inside the optimizer are Bohr.
+# The RMS stop matches the harness Euclidean force stop.
+# A success is under the cap, at the force stop, and Hessian index 0.
+successes 0
+nfailed 1000
+n 1000
+transition_states 0
+code pysisyphus
+code_version 0.1.dev1
+commit a4ce10dd6d7fdcb3d813f1c730eb365d29041999
+algorithm L-BFGS
+template pysisyphus/lbfgs-lj38
+problem minimization/lj38
+tuning default
+counter harness
