@@ -1,0 +1,23 @@
+# eOn SVN r2549. HarnessCounter through ext_pot. Kernel lammps.
+# Plain NEB. Same settings as eon-svn/de-lj38-ci with climbing_image_method false. r2549 has no energy-weighted springs and no ci_mmf. The run swaps the potential for ext_pot. The harness kernel is the develop kernel for this potential name. The 2014 table used r2156. The binary is SVN r2549, the registry pin. Export of the 2014 revision is forbidden, so this row is r2549.
+counter harness
+code Eon svn
+code_version r2549
+commit r2549
+algorithm LBFGS
+tuning default
+template eon-svn/de-lj38-neb
+problem double-ended-saddle-search/lj38
+reducer harness
+cap 2500
+n 50
+par2_mean 1571.34
+nfailed 9
+mean_calls 1121.34
+median_calls 774.5
+min_calls 357.0
+max_calls 2500.0
+n_crash 0
+n_divergence 0
+n_cap 9
+n_wrong_stationary 0

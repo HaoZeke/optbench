@@ -1,0 +1,15 @@
+force_calls 790
+force_calls_min 327
+force_calls_max 2297
+force_calls_median 644.5
+call_unit total
+nfailed 6
+code Eon svn
+code_version r2549
+commit r2549
+algorithm Doubly nudged CI-NEB
+template eon-svn/de-lj38-ci-swdneb
+problem double-ended-saddle-search/lj38
+reducer harness
+counter harness
+count_keys HarnessCounter

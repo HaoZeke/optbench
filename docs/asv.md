@@ -12,6 +12,7 @@ asv is the measurement store. A result file is keyed to the commit asv checked o
 | `uv.lock` | The Python environment asv installs, including the asv pin |
 | `environments/eon-3.5.0.yml` | conda-forge pin for the eOn 3.5.0 binary |
 | `environments/eon-develop.yml` | Python pin for the eOn develop source build. Not a conda eOn package |
+| `environments/eon-svn.yml` | Python pin for the eOn SVN r2549 source build. Not a conda eOn package |
 | `environments/vcsqnm.yml` | Python pin for the vc-SQNM v1.3 source build. Not a conda package |
 | `benchmarks/` | The suite asv-runner imports |
 | `results/asv/<machine>/machine.json` | The machine record asv wrote |
