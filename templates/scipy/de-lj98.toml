@@ -1,0 +1,20 @@
+id = "scipy/de-lj98"
+engine = "harness"
+code = "scipy"
+code_version = "1.18.1"
+commit = "e4e854eaa8f18d807cd3496028e257e36caa93cc"
+algorithm = "differential_evolution"
+problem = "globalopt/lj98"
+task = "globalopt"
+profile = "default"
+tuning = "default"
+reducer = "capped"
+ranked = true
+note = "SciPy differential_evolution library defaults. maxiter is the force-call cap. Polish is the only quench that can hit. A hit is the first successful local minimization inside the energy window."
+
+[search]
+family = "globalopt"
+method = "scipy-de"
+
+[stop]
+max_force_calls = 1000000

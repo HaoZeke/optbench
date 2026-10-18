@@ -1,0 +1,22 @@
+id = "sqnm/min-morse-default"
+engine = "harness"
+code = "sqnm"
+code_version = "1.3"
+commit = "4241692173cccb42a9ae05974bfd62285ec2cd7b"
+algorithm = "SQNM"
+problem = "minimization/morse-bulk"
+task = "minimize"
+profile = "default"
+tuning = "default"
+reducer = "capped"
+ranked = false
+note = "vc-SQNM free_sqnm ASE-wrapper defaults: initial_step_size -0.01, nhist_max 10, alpha_min 1e-3, eps_subsp 1e-3. On the archived LJ38 starts the force norm is about 1e5 to 1e6, so the first displacement dissociates the cluster and the force stop is met at a near-zero energy. This row is not ranked."
+
+[search]
+family = "minimize"
+method = "sqnm"
+
+[stop]
+max_force_calls = 10000
+norm = "l2"
+force_norm = 0.001

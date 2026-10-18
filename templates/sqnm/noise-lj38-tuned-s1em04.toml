@@ -1,0 +1,23 @@
+id = "sqnm/noise-lj38-tuned-s1em04"
+engine = "harness"
+code = "sqnm"
+code_version = "1.3"
+commit = "4241692173cccb42a9ae05974bfd62285ec2cd7b"
+algorithm = "SQNM"
+problem = "minimization/lj38-noise"
+task = "minimize"
+profile = "tuned"
+tuning = "tuned"
+reducer = "capped"
+ranked = true
+note = "sigma 0.0001. Noise is drawn inside the harness evaluation, so one geometry keeps one sample. Positive sigma is compared with an uncounted clean minimization of the same start. SQNM uses the tuned first displacement of length 0.01."
+
+[search]
+family = "minimize"
+method = "sqnm"
+sigma = 0.0001
+
+[stop]
+max_force_calls = 10000
+norm = "l2"
+force_norm = 0.01

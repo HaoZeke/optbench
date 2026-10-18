@@ -1,0 +1,20 @@
+id = "scipy/shgo-lj38"
+engine = "harness"
+code = "scipy"
+code_version = "1.18.1"
+commit = "e4e854eaa8f18d807cd3496028e257e36caa93cc"
+algorithm = "shgo"
+problem = "globalopt/lj38"
+task = "globalopt"
+profile = "default"
+tuning = "default"
+reducer = "capped"
+ranked = true
+note = "SciPy shgo uses sobol sampling with n=100. The default simplicial rule replaces n=100 with 2**dimension+1, which does not return on these clusters. iters is the force-call cap. A hit is the first successful local minimization inside the energy window."
+
+[search]
+family = "globalopt"
+method = "scipy-shgo"
+
+[stop]
+max_force_calls = 1000000

@@ -152,6 +152,76 @@ def morse_bulk_hessian(coords: Sequence[float] | np.ndarray, box: Sequence[float
     return _hessian_from_pairs(pos.shape[0], iu, ju, diff, r2, first, second)
 
 
+def binary_lennard_jones(
+    coords: Sequence[float] | np.ndarray,
+    species: Sequence[int] | np.ndarray,
+    *,
+    cutoff: float = 20.0,
+    epsilon: float = 1.0,
+    sigma_a: float = 1.0,
+    sigma_b: float = 1.3,
+) -> tuple[float, np.ndarray]:
+    """Binary 12-6 Lennard-Jones. ``sigma_ij`` is the arithmetic mean.
+
+    Species 1 uses ``sigma_a`` and species 2 uses ``sigma_b``. There is
+    no shift and no periodic image. The cutoff is the archived
+    ``lj/cut 20`` value.
+    """
+    pos = _as_positions(coords)
+    kind = np.asarray(species, dtype=np.int64).reshape(-1)
+    if kind.shape != (pos.shape[0],):
+        raise ValueError("species must have one entry per atom")
+    iu, ju, diff, r2 = _pairs(pos, cutoff, None)
+    if iu.size == 0:
+        return 0.0, np.zeros(pos.size, dtype=np.float64)
+    sigma = np.where(kind == 1, sigma_a, sigma_b)
+    sigma_ij = 0.5 * (sigma[iu] + sigma[ju])
+    inv_r2 = 1.0 / r2
+    sr2 = (sigma_ij * sigma_ij) * inv_r2
+    sr6 = sr2 * sr2 * sr2
+    sr12 = sr6 * sr6
+    energy = 4.0 * epsilon * np.sum(sr12 - sr6)
+    slope = 24.0 * epsilon * (sr6 - 2.0 * sr12) * inv_r2
+    grad = _accumulate(pos.shape[0], iu, ju, diff, slope)
+    return float(energy), grad.reshape(-1)
+
+
+def read_con_components(text: str) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Positions ``(n, 3)``, orthorhombic box, and species starting at 1.
+
+    Each ``Coordinates of Component`` block is one species, in file
+    order. A later block does not have to match a problem's nominal
+    composition.
+    """
+    _positions, box = read_con(text)
+    lines = text.splitlines()
+    rows: list[list[float]] = []
+    species: list[int] = []
+    index = 0
+    component = 0
+    while index < len(lines):
+        if not lines[index].startswith("Coordinates of Component"):
+            index += 1
+            continue
+        component += 1
+        index += 1
+        while index < len(lines):
+            parts = lines[index].split()
+            if len(parts) < 3:
+                break
+            try:
+                rows.append([float(parts[0]), float(parts[1]), float(parts[2])])
+            except ValueError:
+                break
+            if len(parts) >= 4 and parts[3] != "0":
+                raise ValueError("frozen atoms are not a minimization coordinate in this runner")
+            species.append(component)
+            index += 1
+    if not rows:
+        raise ValueError("con file has no coordinates")
+    return np.asarray(rows, dtype=np.float64), box, np.asarray(species, dtype=np.int64)
+
+
 def read_con(text: str) -> tuple[np.ndarray, np.ndarray]:
     """Return positions (n, 3) and orthorhombic box lengths from an eOn ``.con``."""
     lines = text.splitlines()

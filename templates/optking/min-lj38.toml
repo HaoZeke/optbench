@@ -1,0 +1,23 @@
+id = "optking/min-lj38"
+engine = "harness"
+code = "optking"
+code_version = "767e2c0c"
+commit = "767e2c0c13ff2b851ac82101ccd5aab9a558a4f1"
+algorithm = "OptKing"
+problem = "minimization/lj38"
+task = "minimize"
+profile = "default"
+tuning = "default"
+reducer = "capped"
+ranked = true
+note = "OptKing Cartesian coordinates. CustomHelper receives the harness energy and gradient. Redundant internals on the first LJ38 start do not finish coordinate setup in 20 seconds. The harness stops at the problem Euclidean force norm."
+
+[search]
+family = "minimize"
+method = "optking"
+coordsys = "cart"
+
+[stop]
+max_force_calls = 10000
+norm = "l2"
+force_norm = 0.01

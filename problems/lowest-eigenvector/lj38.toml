@@ -14,6 +14,7 @@ pbc = [false, false, false]
 
 [sample]
 starts = 200
+layout = "con-mode"
 geometry = "coords-con/%.4d.con"
 mode = "coords-con/%.4d_mode"
 overlap = 0.99

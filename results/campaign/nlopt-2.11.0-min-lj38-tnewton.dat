@@ -1,0 +1,35 @@
+# counter harness. One fresh coordinate is one force call.
+# A repeated coordinate is free. A call at the cap is refused and is not counted.
+# Legacy success is the force stop. v2 success also requires Hessian index 0.
+# NLopt 2.11.0 LD_TNEWTON. maxeval is the force-call cap. The objective calls force_stop when the Euclidean force norm meets the problem stop. LD_LBFGS, LD_VAR1, and LD_SLSQP leave the first LJ38 start in two evaluations and are not ranked. On the archived LJ38 starts, hundreds of those force stops are dissociated clusters with energy near zero, so this row is not ranked.
+force_calls 775
+force_calls_min 19
+force_calls_max 9080
+force_calls_median 617
+nfailed 11
+median 617
+code nlopt
+code_version 2.11.0
+commit 88c424d4f458412787df96fcc95218acbca224fd
+algorithm LD_TNEWTON
+template nlopt/min-lj38-tnewton
+problem minimization/lj38
+tuning default
+counter harness
+cap 10000
+par2_mean 1720.379
+wilson_low 0.935809298493
+wilson_high 0.962738965353
+par2_median 653.5
+par2_median_low 621.5
+par2_median_high 678
+v2_nfailed 49
+v2_successes 951
+n 1000
+n_cap 0
+n_wrong_stationary 38
+n_divergence 11
+n_crash 0
+energy_min -170.964707236
+energy_max 0
+ranked false

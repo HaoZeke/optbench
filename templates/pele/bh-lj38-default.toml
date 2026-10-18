@@ -1,0 +1,20 @@
+id = "pele/bh-lj38-default"
+engine = "harness"
+code = "pele"
+code_version = "0.1.2"
+commit = "b7081b932a060be11342fbe8287ac35da8ada879"
+algorithm = "basin hopping"
+problem = "globalopt/lj38"
+task = "globalopt"
+profile = "default"
+tuning = "default"
+reducer = "capped"
+ranked = true
+note = "pele basin hopping. temperature 1, stepsize 1, mylbfgs quench at the library defaults."
+
+[search]
+family = "globalopt"
+method = "pele-bh"
+
+[stop]
+max_force_calls = 1000000

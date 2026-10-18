@@ -4,7 +4,7 @@ suite = "globalopt"
 problem = "lj100-binary"
 contract = "stated"
 entry_count = 2
-remark = "The archived files record energies. They do not record force calls."
+remark = "The archived files record energies. They do not record force calls. Each start uses the species counts in that con file. Component 1 is A with sigma 1 and component 2 is B with sigma 1.3. The archived sample header is 68 and 32, while this file states n_A 42 and n_B 58. The cutoff is the archived lj/cut 20. The hit window is 0.001 around the stated energy minimum. The harness budget is the sample max_evaluations, 2000000."
 
 [potential]
 kind = "binary-lennard-jones"
@@ -20,7 +20,12 @@ energy_minimum = -604.796307
 
 [sample]
 starts = 100
+layout = "con"
 max_evaluations = 2000000
+
+[convergence]
+energy_above_minimum = 0.001
+max_force_calls = 2000000
 
 [input]
 archive_path = "website/globalopt/lj100-binary/lj100-binary-con.tgz"

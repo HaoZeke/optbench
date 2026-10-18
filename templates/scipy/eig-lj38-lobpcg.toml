@@ -1,0 +1,20 @@
+id = "scipy/eig-lj38-lobpcg"
+engine = "harness"
+code = "scipy"
+code_version = "1.18.1"
+commit = "e4e854eaa8f18d807cd3496028e257e36caa93cc"
+algorithm = "LOBPCG"
+problem = "lowest-eigenvector/lj38"
+task = "lowest-eigenvector"
+profile = "default"
+tuning = "default"
+reducer = "capped"
+ranked = true
+note = "LOBPCG largest=False on the same central-difference product, from a seeded normal start."
+
+[search]
+family = "eigen"
+method = "scipy-lobpcg"
+
+[stop]
+max_force_calls = 10000

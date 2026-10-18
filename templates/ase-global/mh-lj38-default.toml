@@ -1,0 +1,20 @@
+id = "ase-global/mh-lj38-default"
+engine = "harness"
+code = "ASE"
+code_version = "3.29.0"
+commit = "f27c0005ae6a67ea419f996e728668865bfc1f86"
+algorithm = "MinimaHopping"
+problem = "globalopt/lj38"
+task = "globalopt"
+profile = "default"
+tuning = "default"
+reducer = "capped"
+ranked = true
+note = "ASE MinimaHopping constructor defaults, including T0 1000 K, Ediff0 0.5, fmax 0.05."
+
+[search]
+family = "globalopt"
+method = "ase-mh"
+
+[stop]
+max_force_calls = 1000000

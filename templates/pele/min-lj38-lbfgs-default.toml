@@ -1,0 +1,22 @@
+id = "pele/min-lj38-lbfgs-default"
+engine = "harness"
+code = "pele"
+code_version = "0.1.2"
+commit = "b7081b932a060be11342fbe8287ac35da8ada879"
+algorithm = "LBFGS"
+problem = "minimization/lj38"
+task = "minimize"
+profile = "default"
+tuning = "default"
+reducer = "capped"
+ranked = true
+note = "pele LBFGS memory 4, maxstep 0.1. The RMS tolerance is the Euclidean stop divided by sqrt(N)."
+
+[search]
+family = "minimize"
+method = "pele-lbfgs"
+
+[stop]
+max_force_calls = 10000
+norm = "l2"
+force_norm = 0.01

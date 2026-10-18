@@ -1,0 +1,22 @@
+id = "pele/min-lj38-fire-tuned"
+engine = "harness"
+code = "pele"
+code_version = "0.1.2"
+commit = "b7081b932a060be11342fbe8287ac35da8ada879"
+algorithm = "FIRE"
+problem = "minimization/lj38"
+task = "minimize"
+profile = "tuned"
+tuning = "tuned"
+reducer = "capped"
+ranked = true
+note = "pele FIRE maxstep 0.2. The stop is the Euclidean force norm."
+
+[search]
+family = "minimize"
+method = "pele-fire"
+
+[stop]
+max_force_calls = 10000
+norm = "l2"
+force_norm = 0.01

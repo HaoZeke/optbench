@@ -1,0 +1,23 @@
+id = "nlopt/min-morse-tnewton"
+engine = "harness"
+code = "nlopt"
+code_version = "2.11.0"
+commit = "88c424d4f458412787df96fcc95218acbca224fd"
+algorithm = "LD_TNEWTON"
+problem = "minimization/morse-bulk"
+task = "minimize"
+profile = "default"
+tuning = "default"
+reducer = "capped"
+ranked = true
+note = "NLopt 2.11.0 LD_TNEWTON. maxeval is the force-call cap. The objective calls force_stop when the Euclidean force norm meets the problem stop. LD_LBFGS, LD_VAR1, and LD_SLSQP leave the first LJ38 start in two evaluations and are not ranked."
+
+[search]
+family = "minimize"
+method = "nlopt-minimize"
+nlopt_algorithm = "LD_TNEWTON"
+
+[stop]
+max_force_calls = 10000
+norm = "l2"
+force_norm = 0.001

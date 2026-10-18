@@ -1,0 +1,23 @@
+id = "scipy/min-lj38-newton-cg"
+engine = "harness"
+code = "scipy"
+code_version = "1.18.1"
+commit = "e4e854eaa8f18d807cd3496028e257e36caa93cc"
+algorithm = "Newton-CG"
+problem = "minimization/lj38"
+task = "minimize"
+profile = "default"
+tuning = "default"
+reducer = "capped"
+ranked = true
+note = "SciPy Newton-CG. The harness stops at the problem Euclidean force norm. The SciPy gradient tolerance is 1e-14, and maxiter is the force-call cap."
+
+[search]
+family = "minimize"
+method = "scipy-minimize"
+scipy_method = "Newton-CG"
+
+[stop]
+max_force_calls = 10000
+norm = "l2"
+force_norm = 0.01

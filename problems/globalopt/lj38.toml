@@ -4,12 +4,16 @@ suite = "globalopt"
 problem = "lj38"
 contract = "stated"
 entry_count = 5
+remark = "The known minimum is -173.928427 from the Cambridge LJ table, which is the archived eOn stop_energy -173.927427 plus this window. The harness budget is 1000000 force calls. The archived pele basin-hopping maximum on this set is 2.5339e6 and the GMIN nosym maximum is 1.1705e6."
 
 [sample]
 starts = 100
+layout = "con"
 
 [convergence]
 energy_above_minimum = 0.001
+energy_minimum = -173.928427
+max_force_calls = 1000000
 
 [input]
 archive_path = "website/globalopt/lj38/100_lj38.tar.gz"

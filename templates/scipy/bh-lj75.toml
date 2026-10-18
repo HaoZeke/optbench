@@ -1,0 +1,20 @@
+id = "scipy/bh-lj75"
+engine = "harness"
+code = "scipy"
+code_version = "1.18.1"
+commit = "e4e854eaa8f18d807cd3496028e257e36caa93cc"
+algorithm = "basinhopping"
+problem = "globalopt/lj75"
+task = "globalopt"
+profile = "default"
+tuning = "default"
+reducer = "capped"
+ranked = true
+note = "SciPy basinhopping defaults T=1 and stepsize=0.5. niter is the force-call cap. A hit is the first successful local minimization inside the energy window."
+
+[search]
+family = "globalopt"
+method = "scipy-bh"
+
+[stop]
+max_force_calls = 500000

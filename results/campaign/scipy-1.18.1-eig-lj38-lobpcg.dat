@@ -1,0 +1,34 @@
+# counter harness. One fresh coordinate is one force call.
+# A repeated coordinate is free. A call at the cap is refused and is not counted.
+# One matvec is a central difference, two force calls. Success is absolute overlap of at least 0.99.
+# LOBPCG largest=False on the same central-difference product, from a seeded normal start.
+force_calls 252
+force_calls_min 94
+force_calls_max 406
+force_calls_median 226
+nfailed 0
+median 226
+code scipy
+code_version 1.18.1
+commit e4e854eaa8f18d807cd3496028e257e36caa93cc
+algorithm LOBPCG
+template scipy/eig-lj38-lobpcg
+problem lowest-eigenvector/lj38
+tuning default
+counter harness
+cap 10000
+par2_mean 251.69
+wilson_low 0.981154673623
+wilson_high 1
+par2_median 226
+par2_median_low 206.975
+par2_median_high 243
+v2_nfailed 0
+v2_successes 200
+n 200
+n_cap 0
+n_wrong_stationary 0
+n_divergence 0
+n_crash 0
+energy_min -171.443334678
+energy_max -162.969106542

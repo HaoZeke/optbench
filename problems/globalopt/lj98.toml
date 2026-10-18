@@ -4,6 +4,19 @@ suite = "globalopt"
 problem = "lj98"
 contract = "partial"
 entry_count = 2
+remark = "The known minimum is -543.665361 from the Cambridge LJ table. The same 0.001 window as LJ38 is the hit test. The harness budget is 1000000 force calls. The archived GMIN nosym energy_calls_mean is 5.98857238e7, so a start that follows that distribution hits the cap. Geometry files are coords followed by digits."
+
+[sample]
+starts = 100
+layout = "coords"
+
+[input]
+archive_path = "website/globalopt/lj98/lj98_clusters.tgz"
+
+[convergence]
+energy_above_minimum = 0.001
+energy_minimum = -543.665361
+max_force_calls = 1000000
 
 [metrics]
 required = ["basin_hopping_steps_mean", "basin_hopping_steps_stddev", "cpu_time_mean", "cpu_time_stddev", "energy_calls_mean", "energy_calls_stddev", "nfailed"]

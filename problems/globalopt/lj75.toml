@@ -4,6 +4,19 @@ suite = "globalopt"
 problem = "lj75"
 contract = "partial"
 entry_count = 1
+remark = "The known minimum is -397.492331 from the Cambridge LJ table. The same 0.001 window as LJ38 is the hit test. The harness budget is 500000 force calls, above the archived GMIN symmetrise maximum of 3.1011e5. Starts are the coords.N blocks."
+
+[sample]
+starts = 200
+layout = "coords"
+
+[input]
+archive_path = "website/globalopt/lj75/lj75_clusters.tgz"
+
+[convergence]
+energy_above_minimum = 0.001
+energy_minimum = -397.492331
+max_force_calls = 500000
 
 [metrics]
 required = ["force_calls", "force_calls_max", "force_calls_median", "force_calls_min", "nfailed"]

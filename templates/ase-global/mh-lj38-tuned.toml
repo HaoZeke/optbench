@@ -1,0 +1,20 @@
+id = "ase-global/mh-lj38-tuned"
+engine = "harness"
+code = "ASE"
+code_version = "3.29.0"
+commit = "f27c0005ae6a67ea419f996e728668865bfc1f86"
+algorithm = "MinimaHopping"
+problem = "globalopt/lj38"
+task = "globalopt"
+profile = "tuned"
+tuning = "tuned"
+reducer = "capped"
+ranked = true
+note = "ASE MinimaHopping with fmax 0.001. T0 and Ediff0 stay at the constructor defaults."
+
+[search]
+family = "globalopt"
+method = "ase-mh"
+
+[stop]
+max_force_calls = 1000000

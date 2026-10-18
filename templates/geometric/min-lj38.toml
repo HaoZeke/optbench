@@ -1,0 +1,23 @@
+id = "geometric/min-lj38"
+engine = "harness"
+code = "geometric"
+code_version = "1.1.1"
+commit = "f657e69bae9c81bf7a23e7375db98502ca5c8c30"
+algorithm = "geomeTRIC"
+problem = "minimization/lj38"
+task = "minimize"
+profile = "default"
+tuning = "default"
+reducer = "capped"
+ranked = true
+note = "geomeTRIC 1.1.1 in Cartesian coordinates. Carbon labels on the first LJ38 start produce 662 bonds, and both TRIC and the stock Cartesian setup were still building primitive internals after 20 seconds, so primitive generation is skipped. convergence_grms and convergence_gmax are the Euclidean stop divided by sqrt(N). Energy and displacement criteria are loose. maxiter is the force-call cap."
+
+[search]
+family = "minimize"
+method = "geometric"
+coordsys = "cart"
+
+[stop]
+max_force_calls = 10000
+norm = "l2"
+force_norm = 0.01

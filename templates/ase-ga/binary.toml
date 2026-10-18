@@ -1,0 +1,20 @@
+id = "ase-ga/binary"
+engine = "harness"
+code = "ase-ga"
+code_version = "1.0.3"
+commit = "f3ecaa80915d5ddbf2298e17702e6df21f5e7b9c"
+algorithm = "RandomMutation"
+problem = "globalopt/lj100-binary"
+task = "globalopt"
+profile = "default"
+tuning = "default"
+reducer = "capped"
+ranked = true
+note = "ase-ga RandomMutation length 2, then an ASE LBFGS quench at fmax 0.001. A raw mutant energy is not a hit."
+
+[search]
+family = "globalopt"
+method = "ase-ga"
+
+[stop]
+max_force_calls = 2000000

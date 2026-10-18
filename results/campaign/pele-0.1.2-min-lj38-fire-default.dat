@@ -1,0 +1,34 @@
+# counter harness. One fresh coordinate is one force call.
+# A repeated coordinate is free. A call at the cap is refused and is not counted.
+# Legacy success is the force stop. v2 success also requires Hessian index 0.
+# pele FIRE maxstep 0.5. The stop is the Euclidean force norm.
+force_calls 1264
+force_calls_min 262
+force_calls_max 9168
+force_calls_median 735
+nfailed 7
+median 735
+code pele
+code_version 0.1.2
+commit b7081b932a060be11342fbe8287ac35da8ada879
+algorithm FIRE
+template pele/min-lj38-fire-default
+problem minimization/lj38
+tuning default
+counter harness
+cap 10000
+par2_mean 2141.381
+wilson_low 0.93693391135
+wilson_high 0.963606698979
+par2_median 754.5
+par2_median_low 723
+par2_median_high 801
+v2_nfailed 48
+v2_successes 952
+n 1000
+n_cap 7
+n_wrong_stationary 41
+n_divergence 0
+n_crash 0
+energy_min -173.134316513
+energy_max -144.20340671
