@@ -7,10 +7,11 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>softsaddle</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>softsaddle</th></tr></thead><tbody>
    <tr data-problem="accelerated-md/aladatom">
    <th scope="row"><a href="#aladatom">aladatom</a></th>
    <td data-code="eOn">—</td>
+   <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
@@ -20,6 +21,7 @@
    <tr data-problem="accelerated-md/standard_aladatom">
    <th scope="row"><a href="#standard_aladatom">standard_aladatom</a></th>
    <td data-code="eOn">—</td>
+   <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
@@ -33,7 +35,7 @@
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">No committed harness run.</p>
+   <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <details class="bench-details" id="aladatom-templates">
    <summary>All templates (0 ranked)</summary>
    <div class="bench-scroll">
@@ -42,6 +44,12 @@
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
+   <h3>Partial</h3><ul>
+   <li>eon-client/amd-hyper eOn campaign n=1, result file sets partial true.</li>
+   <li>eon-client/amd-prd eOn campaign n=1, result file sets partial true.</li>
+   <li>eon-svn/amd-hyper Eon svn campaign n=1, result file sets partial true.</li>
+   <li>eon-svn/amd-prd Eon svn campaign n=1, result file sets partial true.</li>
+   </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="aladatom-legacy">
    <h3>Legacy 2014 archive</h3>
