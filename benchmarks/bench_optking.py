@@ -221,15 +221,16 @@ _OptkingSearch.track_failure_crash.unit = "count"
 
 def _benchmark(spec: dict):
     bound = spec
+    starts = list(spec["starts"])
 
     class _Benchmark(_OptkingSearch):
         param_names = ["seed", "start"]
-        params = [[SEED], list(spec["starts"])]
+        params = [[SEED], starts]
         timeout = 14400
-        cap = int(spec["cap"])
+        cap = int(bound["cap"])
         spec = bound
-        template_id = spec["template_id"]
-        problem_id = spec["problem_id"]
+        template_id = bound["template_id"]
+        problem_id = bound["problem_id"]
 
     _Benchmark.__name__ = spec["class_name"]
     _Benchmark.__qualname__ = spec["class_name"]
