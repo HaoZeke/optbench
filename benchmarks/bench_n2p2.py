@@ -14,7 +14,7 @@ import json
 import os
 from pathlib import Path
 
-from optbench.asv_tracks import TrackedSearch
+from optbench.asv_tracks import TrackedSearch as _TrackedSearch
 
 ROOT = Path(__file__).resolve().parents[1]
 SEED = "20261015"
@@ -110,7 +110,7 @@ def _load(spec: dict, seed: str, start: str) -> dict:
     return _compute(spec, seed, start)
 
 
-class _N2p2Search(TrackedSearch):
+class _N2p2Search(_TrackedSearch):
     def setup(self, seed, start):
         if not _ready():
             raise NotImplementedError("n2p2 source or ASE is not available")
