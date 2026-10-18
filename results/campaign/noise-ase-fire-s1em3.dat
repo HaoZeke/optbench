@@ -1,0 +1,32 @@
+# counter harness. One force call is one clean energy and gradient.
+# Noise is added after the call. A repeated coordinate keeps that sample.
+# The index uses the clean Hessian. Six rigid modes are removed.
+# A curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6).
+# Energy and Kabsch RMSD are not applied: the problem file has no per-start reference.
+# Default profile. BFGS and LBFGS use maxstep 0.1, the repaired LJ38 step. FIRE keeps the constructor defaults. The index is the clean Hessian with the rigid-mode rule.
+force_calls 618
+force_calls_min 188
+force_calls_max 1982
+nfailed 15
+median 539
+code ASE
+code_version 3.29.0
+commit f27c0005ae6a67ea419f996e728668865bfc1f86
+algorithm FIRE
+template noise/ase-fire-s1em3
+tuning default
+counter harness
+problem minimization/lj38-noise
+sigma 0.001
+par2_mean 1141.236
+wilson_low 0.961001269247
+wilson_high 0.981378617226
+par2_median 550
+par2_median_low 530
+par2_median_high 575
+v2_nfailed 27
+v2_successes 973
+n 1000
+cap 10000
+energy_min -171.886204652
+energy_max -152.683353999

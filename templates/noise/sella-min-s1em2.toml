@@ -1,0 +1,17 @@
+id = "noise/sella-min-s1em2"
+engine = "noise"
+problem = "minimization/lj38-noise"
+code = "Sella"
+code_version = "2.6.0"
+commit = "6cfb60cdb100a146c3c6f0587d5308b247aa8010"
+algorithm = "Sella"
+tuning = "default"
+note = "Sella 2.6.0 minimum defaults, order 0. The internal model is built from forces. The reported index is still the clean analytic Hessian with the rigid-mode rule."
+
+[solver]
+family = "sella"
+order = 0
+
+[noise]
+sigma = 0.01
+seed = 20261016
