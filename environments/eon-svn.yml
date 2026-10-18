@@ -2,9 +2,9 @@
 # codes/registry.toml id eon-svn pins revision 2549.
 # The client must print "eonclient version r2549".
 # Historical paths in that revision are forbidden, so the tree is
-# fetched file by file. QSC is absent at r2549 and has to be dropped
-# from the build. NO_FORTRAN leaves out the Fortran Aluminum potential.
-# The client in templates/eon-svn/README is built without NO_FORTRAN.
+# fetched file by file. QSC sources are absent at r2549 and have to be
+# dropped from the build. The client in templates/eon-svn/README is
+# built with gfortran and without NO_FORTRAN.
 # asv has one environment_type, so this yml is not bound to a class.
 # The benchmarks call EON_SVN_CLIENT.
 name: eon-svn

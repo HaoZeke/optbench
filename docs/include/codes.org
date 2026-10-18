@@ -30,6 +30,39 @@
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="double-ended-saddle-search/lj38" data-template="eon-client/de-lj38-lanczos-improved">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="template">eon-client/de-lj38-lanczos-improved</td>
+   <td data-field="version">eOn 3.5.0</td>
+   <td data-field="commit">4d8b34baf1ba</td>
+   <td data-field="par2_mean">259.46</td>
+   <td data-field="mean_calls">259.46</td>
+   <td data-field="median_calls">212</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="eon-client/de-2ts-lanczos-improved">
+   <td>lj38_2ts_separation</td>
+   <td data-field="template">eon-client/de-2ts-lanczos-improved</td>
+   <td data-field="version">eOn 3.5.0</td>
+   <td data-field="commit">4d8b34baf1ba</td>
+   <td data-field="par2_mean">520.333</td>
+   <td data-field="mean_calls">520.333</td>
+   <td data-field="median_calls">422</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="lowest-eigenvector/lj38" data-template="eon-client/low-lj38-lanczos">
+   <td>lj38</td>
+   <td data-field="template">eon-client/low-lj38-lanczos</td>
+   <td data-field="version">eOn 3.5.0</td>
+   <td data-field="commit">4d8b34baf1ba</td>
+   <td data-field="par2_mean">26.385</td>
+   <td data-field="mean_calls">26.385</td>
+   <td data-field="median_calls">25</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
    <tr data-problem="minimization/lj38" data-template="eon/lj38-lbfgs-m100">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="template">eon/lj38-lbfgs-m100</td>
@@ -52,13 +85,38 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
+   <tr data-problem="tsopt/LJ38" data-template="eon-client/ts-lj38-lanczos-improved">
+   <td>LJ38</td>
+   <td data-field="template">eon-client/ts-lj38-lanczos-improved</td>
+   <td data-field="version">eOn 3.5.0</td>
+   <td data-field="commit">4d8b34baf1ba</td>
+   <td data-field="par2_mean">280.33</td>
+   <td data-field="mean_calls">280.33</td>
+   <td data-field="median_calls">214</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="tsopt/pt-island" data-template="eon-client/ts-pt-lanczos-improved">
+   <td>pt-island</td>
+   <td data-field="template">eon-client/ts-pt-lanczos-improved</td>
+   <td data-field="version">eOn 3.5.0</td>
+   <td data-field="commit">4d8b34baf1ba</td>
+   <td data-field="par2_mean">108.796</td>
+   <td data-field="mean_calls">108.796</td>
+   <td data-field="median_calls">107</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">49</td>
+   </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
+   <li>aladatom: partial.</li>
    <li>LJ38 double-ended saddle: not yet on the harness counter, partial.</li>
    <li>lj38_2ts_separation: partial.</li>
    <li>pt-island: not yet on the harness counter, partial.</li>
+   <li>Al: partial.</li>
+   <li>Pt: partial.</li>
    <li>lj38: partial.</li>
-   <li>Pt-heptamer: not yet on the harness counter.</li>
+   <li>Pt-heptamer: not yet on the harness counter, partial.</li>
    <li>Pt heptamer island: not yet on the harness counter, partial.</li>
    <li>LJ38: not yet on the harness counter, partial.</li>
    <li>pt-island: not yet on the harness counter, partial.</li>
@@ -94,36 +152,36 @@
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr data-problem="double-ended-saddle-search/lj38" data-template="eon-svn/de-lj38-ci">
+   <tr data-problem="double-ended-saddle-search/lj38" data-template="eon-svn/de-lj38-lanczos-improved">
    <td>LJ38 double-ended saddle</td>
-   <td data-field="template">eon-svn/de-lj38-ci</td>
+   <td data-field="template">eon-svn/de-lj38-lanczos-improved</td>
    <td data-field="version">Eon svn r2549</td>
    <td data-field="commit">r2549</td>
-   <td data-field="par2_mean">1180.1</td>
-   <td data-field="mean_calls">930.1</td>
-   <td data-field="median_calls">657</td>
-   <td data-field="failures">crash 0, divergence 0, cap 5, wrong_stationary 0</td>
+   <td data-field="par2_mean">235.2</td>
+   <td data-field="mean_calls">235.2</td>
+   <td data-field="median_calls">197</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="eon-svn/de-2ts-ci">
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="eon-svn/de-2ts-lanczos-improved">
    <td>lj38_2ts_separation</td>
-   <td data-field="template">eon-svn/de-2ts-ci</td>
+   <td data-field="template">eon-svn/de-2ts-lanczos-improved</td>
    <td data-field="version">Eon svn r2549</td>
    <td data-field="commit">r2549</td>
-   <td data-field="par2_mean">13384.9</td>
-   <td data-field="mean_calls">7502.59</td>
-   <td data-field="median_calls">10000</td>
-   <td data-field="failures">crash 0, divergence 0, cap 30, wrong_stationary 0</td>
+   <td data-field="par2_mean">502.784</td>
+   <td data-field="mean_calls">502.784</td>
+   <td data-field="median_calls">418</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/pt-island" data-template="eon-svn/de-pt-ci">
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="eon-svn/de-pt-lanczos-improved">
    <td>pt-island</td>
-   <td data-field="template">eon-svn/de-pt-ci</td>
+   <td data-field="template">eon-svn/de-pt-lanczos-improved</td>
    <td data-field="version">Eon svn r2549</td>
    <td data-field="commit">r2549</td>
-   <td data-field="par2_mean">225.881</td>
-   <td data-field="mean_calls">225.881</td>
-   <td data-field="median_calls">188</td>
+   <td data-field="par2_mean">180.644</td>
+   <td data-field="mean_calls">180.644</td>
+   <td data-field="median_calls">161</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
@@ -160,30 +218,35 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
-   <tr data-problem="tsopt/LJ38" data-template="eon-svn/ts-lj38-dimer">
+   <tr data-problem="tsopt/LJ38" data-template="eon-svn/ts-lj38-lanczos-improved">
    <td>LJ38</td>
-   <td data-field="template">eon-svn/ts-lj38-dimer</td>
+   <td data-field="template">eon-svn/ts-lj38-lanczos-improved</td>
    <td data-field="version">Eon svn r2549</td>
    <td data-field="commit">r2549</td>
-   <td data-field="par2_mean">644.135</td>
-   <td data-field="mean_calls">548.34</td>
-   <td data-field="median_calls">360.5</td>
-   <td data-field="failures">crash 0, divergence 1, cap 0, wrong_stationary 0</td>
+   <td data-field="par2_mean">270.85</td>
+   <td data-field="mean_calls">270.85</td>
+   <td data-field="median_calls">180</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
-   <tr data-problem="tsopt/pt-island" data-template="eon-svn/ts-pt-dimer">
+   <tr data-problem="tsopt/pt-island" data-template="eon-svn/ts-pt-lanczos-improved">
    <td>pt-island</td>
-   <td data-field="template">eon-svn/ts-pt-dimer</td>
+   <td data-field="template">eon-svn/ts-pt-lanczos-improved</td>
    <td data-field="version">Eon svn r2549</td>
    <td data-field="commit">r2549</td>
-   <td data-field="par2_mean">116.061</td>
-   <td data-field="mean_calls">116.061</td>
-   <td data-field="median_calls">114</td>
+   <td data-field="par2_mean">106.388</td>
+   <td data-field="mean_calls">106.388</td>
+   <td data-field="median_calls">100</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">49</td>
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
+   <li>aladatom: partial.</li>
+   <li>Lennard-Jones 38 global minimum: partial.</li>
+   <li>Al: partial.</li>
+   <li>Pt: partial.</li>
+   <li>Pt heptamer island: partial.</li>
    <li>eon-svn/cg: no per-start record.</li>
    <li>eon-svn/fire: no per-start record.</li>
    <li>eon-svn/lbfgs-m100: no per-start record.</li>

@@ -50,6 +50,12 @@
    <h3>Partial</h3><ul>
    <li>ase/dimer-pt-island-default ASE campaign, asv n=16, result file sets ranked false.</li>
    <li>ase/dimer-pt-island-tuned ASE campaign, asv n=16, result file sets ranked false.</li>
+   <li>eon-client/saddle-pt-dimer eOn campaign n=1, result file sets partial true.</li>
+   <li>eon-client/saddle-pt-lanczos eOn campaign n=1, result file sets partial true.</li>
+   <li>eon-client/saddle-pt-md eOn campaign n=1, result file sets partial true.</li>
+   <li>eon-svn/saddle-pt-dimer-bounded Eon svn campaign n=1, result file sets partial true.</li>
+   <li>eon-svn/saddle-pt-lanczos-bounded Eon svn campaign n=1, result file sets partial true.</li>
+   <li>eon-svn/saddle-pt-md Eon svn campaign n=1, result file sets partial true.</li>
    <li>eon/develop-saddle-pt-dimer eOn asv n=1, smoke run; one start.</li>
    <li>eon/develop-saddle-pt-lanczos eOn asv n=1, smoke run; one start.</li>
    <li>ase/dimer-pt-island-default ASE asv n=1, smoke run; one start.</li>

@@ -52,6 +52,8 @@ def prepare_client_env(client: Path) -> None:
     py_pkg = lib / "python3" / "dist-packages"
     py_deps = root / "py"
     entries = [str(py_pkg), str(py_deps)]
+    if lib.is_dir():
+        entries.extend(str(path) for path in sorted(lib.glob("python*/site-packages")))
     for entry in reversed(entries):
         if entry not in sys.path:
             sys.path.insert(0, entry)
@@ -86,17 +88,21 @@ def _one_repetition(
     workers: int,
     *,
     passes: int,
+    geometry: Path | None = None,
 ) -> dict:
     if work.exists():
         shutil.rmtree(work)
     work.mkdir(parents=True)
-    pos = geometry_archive(
-        root,
-        {
-            "id": "saddle",
-            "input": {"archive_path": "website/saddle-search/pt-island/pt-island.con"},
-        },
-    )
+    if geometry is None:
+        pos = geometry_archive(
+            root,
+            {
+                "id": "saddle",
+                "input": {"archive_path": "website/saddle-search/pt-island/pt-island.con"},
+            },
+        )
+    else:
+        pos = Path(geometry)
     shutil.copy(pos, work / "pos.con")
     _write_config(template, work / "config.ini", client, seed, workers)
     prepare_client_env(client)
@@ -106,16 +112,41 @@ def _one_repetition(
     progress = saddle_progress("")
     last_error = ""
     started = time.monotonic()
+    for relative in (
+        "jobs/scratch",
+        "jobs/in",
+        "jobs/out",
+        "jobs/incomplete",
+        "states",
+        "potfiles",
+    ):
+        (work / relative).mkdir(parents=True, exist_ok=True)
     try:
         os.chdir(work)
-        from eon.akmc import akmc
-        from eon.config import config
+        import inspect
 
         try:
-            # r2549 helper functions read the module singleton, not the
-            # object passed into akmc(). Reset so a second seed in this
-            # process loads the new config.ini.
-            config.init_done = False
+            from eon import akmc as akmc_mod
+            from eon.config import ConfigClass
+            from eon.config import config as shared_config
+        except Exception as exc:
+            last_error = f"{type(exc).__name__}: {exc}"
+            progress["error"] = last_error
+            progress["seed"] = seed
+            progress["passes"] = 0
+            progress["seconds"] = time.monotonic() - started
+            return progress
+
+        try:
+            # r2549 helpers read the module-level config object. 3.5.0
+            # passes the instance into those helpers, so a fresh object
+            # still sees the ini.
+            parameters = inspect.signature(akmc_mod.get_akmc_metadata).parameters
+            if "config" in parameters:
+                config = ConfigClass()
+            else:
+                config = shared_config
+                config.init_done = False
             config.init()
             # get_communicator caches the first Local object. A second
             # seed in this process would keep the old scratch path.
@@ -132,7 +163,7 @@ def _one_repetition(
             return progress
         for index in range(passes):
             try:
-                akmc(config)
+                akmc_mod.akmc(config)
             except SystemExit as exc:
                 last_error = f"akmc exit {exc.code}"
                 break
@@ -160,7 +191,7 @@ def _one_repetition(
         if not progress.get("reached"):
             config.comm_job_buffer_size = 0
             try:
-                akmc(config)
+                akmc_mod.akmc(config)
             except SystemExit as exc:
                 last_error = last_error or f"akmc exit {exc.code}"
             except Exception as exc:
