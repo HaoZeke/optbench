@@ -6,311 +6,375 @@
   "partial": [],
   "profile": {
     "area_log10": {
-      "eon-svn/lj38-noise-0 r2549 default campaign, asv r2549": 0.7153977846954513,
-      "eon-svn/lj38-noise-1e-2 r2549 default campaign, asv r2549": 0.7429420292987056,
-      "eon-svn/lj38-noise-1e-3 r2549 default campaign, asv r2549": 0.7292451644959944,
-      "eon-svn/lj38-noise-1e-4 r2549 default campaign, asv r2549": 0.7144946947084594,
-      "noise/ase-bfgs-s0 3.29.0 default campaign, asv f27c000": 0.3774916145626324,
-      "noise/ase-bfgs-s1em2 3.29.0 default campaign, asv f27c000": 0.1839293273506925,
-      "noise/ase-bfgs-s1em3 3.29.0 default campaign, asv f27c000": 0.3142753154731964,
-      "noise/ase-bfgs-s1em4 3.29.0 default campaign, asv f27c000": 0.3643968097512493,
-      "noise/ase-fire-s0 3.29.0 default campaign, asv f27c000": 0.2281807367132978,
-      "noise/ase-fire-s1em2 3.29.0 default campaign, asv f27c000": 0.3604834198076175,
-      "noise/ase-fire-s1em3 3.29.0 default campaign, asv f27c000": 0.2635517612038155,
-      "noise/ase-fire-s1em4 3.29.0 default campaign, asv f27c000": 0.22246116679568212,
-      "noise/ase-lbfgs-s0 3.29.0 default campaign, asv f27c000": 0.5793322266553318,
-      "noise/ase-lbfgs-s1em2 3.29.0 default campaign, asv f27c000": 0.5861054015577714,
-      "noise/ase-lbfgs-s1em3 3.29.0 default campaign, asv f27c000": 0.5809878916314837,
-      "noise/ase-lbfgs-s1em4 3.29.0 default campaign, asv f27c000": 0.575719866707364,
-      "noise/rgmin-cg-s0 0.4.1 default campaign, asv 9a2e7ff": 0.2757434760282068,
-      "noise/rgmin-cg-s1em2 0.4.1 default campaign, asv 9a2e7ff": 0.38426478946507203,
-      "noise/rgmin-cg-s1em3 0.4.1 default campaign, asv 9a2e7ff": 0.28146304594582244,
-      "noise/rgmin-cg-s1em4 0.4.1 default campaign, asv 9a2e7ff": 0.2643043361929755,
-      "noise/rgmin-dogleg-s0 0.4.1 default campaign, asv 9a2e7ff": 1.0760317195009008,
-      "noise/rgmin-fire-s0 0.4.1 default campaign, asv 9a2e7ff": 0.22652507173714587,
-      "noise/rgmin-fire-s1em2 0.4.1 default campaign, asv 9a2e7ff": 0.3738792546146647,
-      "noise/rgmin-fire-s1em3 0.4.1 default campaign, asv 9a2e7ff": 0.26084249124283976,
-      "noise/rgmin-fire-s1em4 0.4.1 default campaign, asv 9a2e7ff": 0.21914983684337835,
-      "noise/rgmin-lbfgs-m100-s0 0.4.1 default campaign, asv 9a2e7ff": 0.7644656739886801,
-      "noise/rgmin-lbfgs-m100-s1em2 0.4.1 default campaign, asv 9a2e7ff": 0.7524244741621211,
-      "noise/rgmin-lbfgs-m100-s1em3 0.4.1 default campaign, asv 9a2e7ff": 0.7718409088824478,
-      "noise/rgmin-lbfgs-m100-s1em4 0.4.1 default campaign, asv 9a2e7ff": 0.7605522840450485,
-      "noise/rgmin-lbfgs-s0 0.4.1 default campaign, asv 9a2e7ff": 0.6830370601615734,
-      "noise/rgmin-lbfgs-s1em2 0.4.1 default campaign, asv 9a2e7ff": 0.719311174639083,
-      "noise/rgmin-lbfgs-s1em3 0.4.1 default campaign, asv 9a2e7ff": 0.6941751700011406,
-      "noise/rgmin-lbfgs-s1em4 0.4.1 default campaign, asv 9a2e7ff": 0.6767154302526297,
-      "noise/rgmin-newton-s0 0.4.1 default campaign, asv 9a2e7ff": 1.167093293189255,
-      "noise/sella-min-s0 2.6.0 default campaign, asv 6cfb60c": 0.16887782756749348,
-      "noise/sella-min-s1em2 2.6.0 default campaign, asv 6cfb60c": 0.0672802040308998,
-      "noise/sella-min-s1em3 2.6.0 default campaign, asv 6cfb60c": 0.06773174902439578,
-      "noise/sella-min-s1em4 2.6.0 default campaign, asv 6cfb60c": 0.12658311317670412
+      "eon-svn/lj38-noise-0 r2549 default campaign, asv r2549": 0.0031608149544718024,
+      "eon-svn/lj38-noise-1e-2 r2549 default campaign, asv r2549": 0.0034618449501357847,
+      "eon-svn/lj38-noise-1e-3 r2549 default campaign, asv r2549": 0.0034618449501357847,
+      "eon-svn/lj38-noise-1e-4 r2549 default campaign, asv r2549": 0.0031608149544718024,
+      "noise/ase-bfgs-s0 3.29.0 default campaign, asv f27c000": 0.0022577249674798593,
+      "noise/ase-bfgs-s1em2 3.29.0 default campaign, asv f27c000": 0.0007525749891599532,
+      "noise/ase-bfgs-s1em3 3.29.0 default campaign, asv f27c000": 0.0022577249674798593,
+      "noise/ase-bfgs-s1em4 3.29.0 default campaign, asv f27c000": 0.0022577249674798593,
+      "noise/ase-fire-s0 3.29.0 default campaign, asv f27c000": 0.001204119982655925,
+      "noise/ase-fire-s1em2 3.29.0 default campaign, asv f27c000": 0.0013546349804879154,
+      "noise/ase-fire-s1em3 3.29.0 default campaign, asv f27c000": 0.001204119982655925,
+      "noise/ase-fire-s1em4 3.29.0 default campaign, asv f27c000": 0.001204119982655925,
+      "noise/ase-lbfgs-s0 3.29.0 default campaign, asv f27c000": 0.0028597849588078215,
+      "noise/ase-lbfgs-s1em2 3.29.0 default campaign, asv f27c000": 0.0024082399653118495,
+      "noise/ase-lbfgs-s1em3 3.29.0 default campaign, asv f27c000": 0.0028597849588078215,
+      "noise/ase-lbfgs-s1em4 3.29.0 default campaign, asv f27c000": 0.0028597849588078215,
+      "noise/rgmin-cg-s0 0.4.1 default campaign, asv 9a2e7ff": 0.0016556649761518966,
+      "noise/rgmin-cg-s1em2 0.4.1 default campaign, asv 9a2e7ff": 0.0016556649761518966,
+      "noise/rgmin-cg-s1em3 0.4.1 default campaign, asv 9a2e7ff": 0.000752574989159953,
+      "noise/rgmin-cg-s1em4 0.4.1 default campaign, asv 9a2e7ff": 0.001204119982655925,
+      "noise/rgmin-dogleg-s0 0.4.1 default campaign, asv 9a2e7ff": 0.007375234893767539,
+      "noise/rgmin-fire-s0 0.4.1 default campaign, asv 9a2e7ff": 0.0016556649761518966,
+      "noise/rgmin-fire-s1em2 0.4.1 default campaign, asv 9a2e7ff": 0.0016556649761518966,
+      "noise/rgmin-fire-s1em3 0.4.1 default campaign, asv 9a2e7ff": 0.0016556649761518966,
+      "noise/rgmin-fire-s1em4 0.4.1 default campaign, asv 9a2e7ff": 0.0016556649761518966,
+      "noise/rgmin-lbfgs-m100-s0 0.4.1 default campaign, asv 9a2e7ff": 0.003762874945799765,
+      "noise/rgmin-lbfgs-m100-s1em2 0.4.1 default campaign, asv 9a2e7ff": 0.0030102999566398118,
+      "noise/rgmin-lbfgs-m100-s1em3 0.4.1 default campaign, asv 9a2e7ff": 0.003762874945799765,
+      "noise/rgmin-lbfgs-m100-s1em4 0.4.1 default campaign, asv 9a2e7ff": 0.003762874945799765,
+      "noise/rgmin-lbfgs-s0 0.4.1 default campaign, asv 9a2e7ff": 0.003762874945799765,
+      "noise/rgmin-lbfgs-s1em2 0.4.1 default campaign, asv 9a2e7ff": 0.0030102999566398118,
+      "noise/rgmin-lbfgs-s1em3 0.4.1 default campaign, asv 9a2e7ff": 0.003762874945799765,
+      "noise/rgmin-lbfgs-s1em4 0.4.1 default campaign, asv 9a2e7ff": 0.003461844950135784,
+      "noise/rgmin-newton-s0 0.4.1 default campaign, asv 9a2e7ff": 0.009331929865583417,
+      "noise/sella-min-s0 2.6.0 default campaign, asv 6cfb60c": 0.0007525749891599532,
+      "noise/sella-min-s1em2 2.6.0 default campaign, asv 6cfb60c": 0.0,
+      "noise/sella-min-s1em3 2.6.0 default campaign, asv 6cfb60c": 0.00015051499783199062,
+      "noise/sella-min-s1em4 2.6.0 default campaign, asv 6cfb60c": 0.0007525749891599532,
+      "torchsim/lj38-noise-fire-s0 0.6.2 default campaign, asv 5540d89": 0.001204119982655925,
+      "torchsim/lj38-noise-fire-s1em2 0.6.2 default campaign, asv 5540d89": 0.0013546349804879154,
+      "torchsim/lj38-noise-fire-s1em3 0.6.2 default campaign, asv 5540d89": 0.0015051499783199063,
+      "torchsim/lj38-noise-fire-s1em4 0.6.2 default campaign, asv 5540d89": 0.0010536049848239343,
+      "torchsim/lj38-noise-gd-s0 0.6.2 default campaign, asv 5540d89": 1.185155092929094,
+      "torchsim/lj38-noise-gd-s1em2 0.6.2 default campaign, asv 5540d89": 0.7582945590775686,
+      "torchsim/lj38-noise-gd-s1em3 0.6.2 default campaign, asv 5540d89": 0.7503172641924731,
+      "torchsim/lj38-noise-gd-s1em4 0.6.2 default campaign, asv 5540d89": 0.7430925442965376
     },
     "rho": {
       "eon-svn/lj38-noise-0 r2549 default campaign, asv r2549": [
         0.0,
-        0.091,
-        0.794,
-        0.994,
-        0.995
+        0.0,
+        0.003,
+        0.005,
+        0.005
       ],
       "eon-svn/lj38-noise-1e-2 r2549 default campaign, asv r2549": [
+        0.0,
         0.002,
-        0.248,
-        0.851,
-        0.912,
-        0.912
+        0.003,
+        0.004,
+        0.005
       ],
       "eon-svn/lj38-noise-1e-3 r2549 default campaign, asv r2549": [
         0.0,
-        0.12,
-        0.821,
-        0.986,
-        0.991
+        0.002,
+        0.003,
+        0.004,
+        0.005
       ],
       "eon-svn/lj38-noise-1e-4 r2549 default campaign, asv r2549": [
         0.0,
-        0.097,
-        0.787,
-        0.992,
-        0.995
+        0.0,
+        0.003,
+        0.005,
+        0.005
       ],
       "noise/ase-bfgs-s0 3.29.0 default campaign, asv f27c000": [
         0.0,
         0.0,
-        0.032,
-        0.73,
-        0.984
+        0.0,
+        0.005,
+        0.005
       ],
       "noise/ase-bfgs-s1em2 3.29.0 default campaign, asv f27c000": [
         0.0,
         0.0,
         0.0,
-        0.223,
-        0.776
+        0.0,
+        0.005
       ],
       "noise/ase-bfgs-s1em3 3.29.0 default campaign, asv f27c000": [
         0.0,
         0.0,
-        0.014,
-        0.561,
-        0.938
+        0.0,
+        0.005,
+        0.005
       ],
       "noise/ase-bfgs-s1em4 3.29.0 default campaign, asv f27c000": [
         0.0,
         0.0,
-        0.028,
-        0.697,
-        0.971
+        0.0,
+        0.005,
+        0.005
       ],
       "noise/ase-fire-s0 3.29.0 default campaign, asv f27c000": [
         0.0,
         0.0,
-        0.018,
-        0.336,
-        0.808
+        0.0,
+        0.002,
+        0.004
       ],
       "noise/ase-fire-s1em2 3.29.0 default campaign, asv f27c000": [
         0.0,
-        0.002,
-        0.16,
-        0.644,
-        0.783
+        0.0,
+        0.0,
+        0.003,
+        0.003
       ],
       "noise/ase-fire-s1em3 3.29.0 default campaign, asv f27c000": [
         0.0,
         0.0,
-        0.033,
-        0.411,
-        0.863
+        0.0,
+        0.002,
+        0.004
       ],
       "noise/ase-fire-s1em4 3.29.0 default campaign, asv f27c000": [
         0.0,
         0.0,
-        0.016,
-        0.327,
-        0.792
+        0.0,
+        0.002,
+        0.004
       ],
       "noise/ase-lbfgs-s0 3.29.0 default campaign, asv f27c000": [
         0.0,
-        0.007,
-        0.459,
-        0.964,
-        0.989
+        0.0,
+        0.002,
+        0.005,
+        0.005
       ],
       "noise/ase-lbfgs-s1em2 3.29.0 default campaign, asv f27c000": [
         0.0,
-        0.02,
-        0.564,
-        0.906,
-        0.914
+        0.0,
+        0.002,
+        0.004,
+        0.004
       ],
       "noise/ase-lbfgs-s1em3 3.29.0 default campaign, asv f27c000": [
         0.0,
-        0.008,
-        0.48,
-        0.953,
-        0.978
+        0.0,
+        0.002,
+        0.005,
+        0.005
       ],
       "noise/ase-lbfgs-s1em4 3.29.0 default campaign, asv f27c000": [
         0.0,
-        0.007,
-        0.465,
-        0.951,
-        0.979
+        0.0,
+        0.002,
+        0.005,
+        0.005
       ],
       "noise/rgmin-cg-s0 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
         0.0,
-        0.034,
-        0.426,
-        0.912
+        0.0,
+        0.003,
+        0.005
       ],
       "noise/rgmin-cg-s1em2 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
-        0.002,
-        0.205,
-        0.657,
-        0.825
+        0.0,
+        0.0,
+        0.003,
+        0.005
       ],
       "noise/rgmin-cg-s1em3 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
         0.0,
-        0.049,
-        0.45,
-        0.872
+        0.0,
+        0.001,
+        0.003
       ],
       "noise/rgmin-cg-s1em4 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
         0.0,
-        0.029,
-        0.403,
-        0.892
+        0.0,
+        0.002,
+        0.004
       ],
       "noise/rgmin-dogleg-s0 0.4.1 default campaign, asv 9a2e7ff": [
-        0.227,
-        0.961,
-        1.0,
-        1.0,
-        1.0
+        0.0,
+        0.005,
+        0.005,
+        0.007,
+        0.015
       ],
       "noise/rgmin-fire-s0 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
         0.0,
-        0.01,
-        0.333,
-        0.819
+        0.0,
+        0.003,
+        0.005
       ],
       "noise/rgmin-fire-s1em2 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
+        0.0,
         0.001,
-        0.168,
-        0.671,
-        0.804
+        0.003,
+        0.003
       ],
       "noise/rgmin-fire-s1em3 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
         0.0,
-        0.021,
-        0.424,
-        0.843
+        0.0,
+        0.003,
+        0.005
       ],
       "noise/rgmin-fire-s1em4 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
         0.0,
-        0.01,
-        0.326,
-        0.784
+        0.0,
+        0.003,
+        0.005
       ],
       "noise/rgmin-lbfgs-m100-s0 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
-        0.153,
-        0.888,
-        0.999,
-        0.999
+        0.001,
+        0.004,
+        0.005,
+        0.005
       ],
       "noise/rgmin-lbfgs-m100-s1em2 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
-        0.276,
-        0.857,
-        0.911,
-        0.911
+        0.001,
+        0.003,
+        0.004,
+        0.004
       ],
       "noise/rgmin-lbfgs-m100-s1em3 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
-        0.177,
-        0.896,
-        0.994,
-        0.994
+        0.001,
+        0.004,
+        0.005,
+        0.005
       ],
       "noise/rgmin-lbfgs-m100-s1em4 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
-        0.155,
-        0.88,
-        0.994,
-        0.995
+        0.001,
+        0.004,
+        0.005,
+        0.005
       ],
       "noise/rgmin-lbfgs-s0 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
-        0.054,
-        0.725,
-        0.992,
-        0.996
+        0.001,
+        0.004,
+        0.005,
+        0.005
       ],
       "noise/rgmin-lbfgs-s1em2 0.4.1 default campaign, asv 9a2e7ff": [
+        0.0,
         0.001,
-        0.218,
-        0.815,
-        0.904,
-        0.904
+        0.003,
+        0.004,
+        0.004
       ],
       "noise/rgmin-lbfgs-s1em3 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
-        0.074,
-        0.756,
-        0.983,
-        0.986
+        0.001,
+        0.004,
+        0.005,
+        0.005
       ],
       "noise/rgmin-lbfgs-s1em4 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
-        0.05,
-        0.72,
-        0.984,
-        0.988
+        0.001,
+        0.003,
+        0.005,
+        0.005
       ],
       "noise/rgmin-newton-s0 0.4.1 default campaign, asv 9a2e7ff": [
-        0.789,
-        0.995,
-        0.995,
-        0.995,
-        0.995
+        0.004,
+        0.005,
+        0.005,
+        0.009,
+        0.02
       ],
       "noise/sella-min-s0 2.6.0 default campaign, asv 6cfb60c": [
         0.0,
         0.0,
         0.0,
-        0.106,
-        0.91
+        0.0,
+        0.005
       ],
       "noise/sella-min-s1em2 2.6.0 default campaign, asv 6cfb60c": [
         0.0,
         0.0,
         0.0,
-        0.017,
-        0.413
+        0.0,
+        0.0
       ],
       "noise/sella-min-s1em3 2.6.0 default campaign, asv 6cfb60c": [
         0.0,
         0.0,
         0.0,
-        0.006,
-        0.438
+        0.0,
+        0.001
       ],
       "noise/sella-min-s1em4 2.6.0 default campaign, asv 6cfb60c": [
         0.0,
         0.0,
         0.0,
-        0.035,
-        0.771
+        0.0,
+        0.005
+      ],
+      "torchsim/lj38-noise-fire-s0 0.6.2 default campaign, asv 5540d89": [
+        0.0,
+        0.0,
+        0.0,
+        0.002,
+        0.004
+      ],
+      "torchsim/lj38-noise-fire-s1em2 0.6.2 default campaign, asv 5540d89": [
+        0.0,
+        0.0,
+        0.0,
+        0.003,
+        0.003
+      ],
+      "torchsim/lj38-noise-fire-s1em3 0.6.2 default campaign, asv 5540d89": [
+        0.0,
+        0.0,
+        0.0,
+        0.003,
+        0.004
+      ],
+      "torchsim/lj38-noise-fire-s1em4 0.6.2 default campaign, asv 5540d89": [
+        0.0,
+        0.0,
+        0.0,
+        0.002,
+        0.003
+      ],
+      "torchsim/lj38-noise-gd-s0 0.6.2 default campaign, asv 5540d89": [
+        0.981,
+        0.984,
+        0.985,
+        0.985,
+        0.985
+      ],
+      "torchsim/lj38-noise-gd-s1em2 0.6.2 default campaign, asv 5540d89": [
+        0.015,
+        0.019,
+        0.997,
+        0.997,
+        0.997
+      ],
+      "torchsim/lj38-noise-gd-s1em3 0.6.2 default campaign, asv 5540d89": [
+        0.006,
+        0.012,
+        0.991,
+        0.991,
+        0.991
+      ],
+      "torchsim/lj38-noise-gd-s1em4 0.6.2 default campaign, asv 5540d89": [
+        0.0,
+        0.006,
+        0.985,
+        0.985,
+        0.985
       ]
     },
     "solved": {
@@ -351,7 +415,15 @@
       "noise/sella-min-s0 2.6.0 default campaign, asv 6cfb60c": 0.999,
       "noise/sella-min-s1em2 2.6.0 default campaign, asv 6cfb60c": 0.86,
       "noise/sella-min-s1em3 2.6.0 default campaign, asv 6cfb60c": 0.938,
-      "noise/sella-min-s1em4 2.6.0 default campaign, asv 6cfb60c": 0.931
+      "noise/sella-min-s1em4 2.6.0 default campaign, asv 6cfb60c": 0.931,
+      "torchsim/lj38-noise-fire-s0 0.6.2 default campaign, asv 5540d89": 0.994,
+      "torchsim/lj38-noise-fire-s1em2 0.6.2 default campaign, asv 5540d89": 0.803,
+      "torchsim/lj38-noise-fire-s1em3 0.6.2 default campaign, asv 5540d89": 0.967,
+      "torchsim/lj38-noise-fire-s1em4 0.6.2 default campaign, asv 5540d89": 0.964,
+      "torchsim/lj38-noise-gd-s0 0.6.2 default campaign, asv 5540d89": 0.991,
+      "torchsim/lj38-noise-gd-s1em2 0.6.2 default campaign, asv 5540d89": 0.997,
+      "torchsim/lj38-noise-gd-s1em3 0.6.2 default campaign, asv 5540d89": 0.997,
+      "torchsim/lj38-noise-gd-s1em4 0.6.2 default campaign, asv 5540d89": 0.992
     },
     "taus": [
       1.0,
@@ -362,6 +434,96 @@
     ]
   },
   "ranked": [
+    {
+      "asv_commit": "a4221137378acf5c9cb242d3ea9265e500c9abf4",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "TorchSim",
+      "code_version": "0.6.2",
+      "commit": "5540d893a849db9772081229a86d5f68537ad037",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "torchsim-5540d893-lj38-noise-gd-s1em2",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 3
+      },
+      "full_n": 1000,
+      "history": false,
+      "max_calls": 62.0,
+      "mean_calls": 6.116,
+      "mean_per_image": null,
+      "median": 6.0,
+      "median_calls": 6.0,
+      "median_high": 6.0,
+      "median_low": 6.0,
+      "median_per_image": null,
+      "min_calls": 6.0,
+      "n": 1000,
+      "nfailed": 3,
+      "note": "starts.jsonl",
+      "par2_mean": 66.098,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/torchsim-5540d893-lj38-noise-gd-s1em2.dat; results/asv/a4221137378acf5c9cb242d3ea9265e500c9abf4",
+      "problem": "minimization/lj38-noise",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign, asv",
+      "success_rate": 0.997,
+      "template": "torchsim/lj38-noise-gd-s1em2",
+      "tuning": "default",
+      "wilson_high": 0.9989792161188614,
+      "wilson_low": 0.9912169859464969
+    },
+    {
+      "asv_commit": "a4221137378acf5c9cb242d3ea9265e500c9abf4",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "TorchSim",
+      "code_version": "0.6.2",
+      "commit": "5540d893a849db9772081229a86d5f68537ad037",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "torchsim-5540d893-lj38-noise-gd-s1em3",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 3
+      },
+      "full_n": 1000,
+      "history": false,
+      "max_calls": 630.0,
+      "mean_calls": 9.67,
+      "mean_per_image": null,
+      "median": 6.0,
+      "median_calls": 6.0,
+      "median_high": 6.0,
+      "median_low": 6.0,
+      "median_per_image": null,
+      "min_calls": 6.0,
+      "n": 1000,
+      "nfailed": 3,
+      "note": "starts.jsonl",
+      "par2_mean": 69.652,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/torchsim-5540d893-lj38-noise-gd-s1em3.dat; results/asv/a4221137378acf5c9cb242d3ea9265e500c9abf4",
+      "problem": "minimization/lj38-noise",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign, asv",
+      "success_rate": 0.997,
+      "template": "torchsim/lj38-noise-gd-s1em3",
+      "tuning": "default",
+      "wilson_high": 0.9989792161188614,
+      "wilson_low": 0.9912169859464969
+    },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
       "call_unit": "total",
@@ -451,6 +613,96 @@
       "tuning": "default",
       "wilson_high": 0.9978624644726756,
       "wilson_low": 0.9883490446266249
+    },
+    {
+      "asv_commit": "a4221137378acf5c9cb242d3ea9265e500c9abf4",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "TorchSim",
+      "code_version": "0.6.2",
+      "commit": "5540d893a849db9772081229a86d5f68537ad037",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "torchsim-5540d893-lj38-noise-gd-s1em4",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 8
+      },
+      "full_n": 1000,
+      "history": false,
+      "max_calls": 1983.0,
+      "mean_calls": 14.844,
+      "mean_per_image": null,
+      "median": 6.0,
+      "median_calls": 6.0,
+      "median_high": 6.0,
+      "median_low": 6.0,
+      "median_per_image": null,
+      "min_calls": 6.0,
+      "n": 1000,
+      "nfailed": 8,
+      "note": "starts.jsonl",
+      "par2_mean": 172.53,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/torchsim-5540d893-lj38-noise-gd-s1em4.dat; results/asv/a4221137378acf5c9cb242d3ea9265e500c9abf4",
+      "problem": "minimization/lj38-noise",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign, asv",
+      "success_rate": 0.992,
+      "template": "torchsim/lj38-noise-gd-s1em4",
+      "tuning": "default",
+      "wilson_high": 0.995940804181194,
+      "wilson_low": 0.9842936654690199
+    },
+    {
+      "asv_commit": "a4221137378acf5c9cb242d3ea9265e500c9abf4",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "TorchSim",
+      "code_version": "0.6.2",
+      "commit": "5540d893a849db9772081229a86d5f68537ad037",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "torchsim-5540d893-lj38-noise-gd-s0",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 9
+      },
+      "full_n": 1000,
+      "history": false,
+      "max_calls": 1981.0,
+      "mean_calls": 10.874,
+      "mean_per_image": null,
+      "median": 2.0,
+      "median_calls": 2.0,
+      "median_high": 2.0,
+      "median_low": 2.0,
+      "median_per_image": null,
+      "min_calls": 2.0,
+      "n": 1000,
+      "nfailed": 9,
+      "note": "starts.jsonl",
+      "par2_mean": 187.966,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/torchsim-5540d893-lj38-noise-gd-s0.dat; results/asv/a4221137378acf5c9cb242d3ea9265e500c9abf4",
+      "problem": "minimization/lj38-noise",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign, asv",
+      "success_rate": 0.991,
+      "template": "torchsim/lj38-noise-gd-s0",
+      "tuning": "default",
+      "wilson_high": 0.9952579393325229,
+      "wilson_low": 0.982984183834662
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -1263,6 +1515,51 @@
       "wilson_low": 0.9717267448294926
     },
     {
+      "asv_commit": "a4221137378acf5c9cb242d3ea9265e500c9abf4",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "TorchSim",
+      "code_version": "0.6.2",
+      "commit": "5540d893a849db9772081229a86d5f68537ad037",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "torchsim-5540d893-lj38-noise-fire-s0",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 6
+      },
+      "full_n": 1000,
+      "history": false,
+      "max_calls": 3136.0,
+      "mean_calls": 719.902,
+      "mean_per_image": null,
+      "median": 611.5,
+      "median_calls": 610.5,
+      "median_high": 637.5124999999999,
+      "median_low": 590.0,
+      "median_per_image": null,
+      "min_calls": 196.0,
+      "n": 1000,
+      "nfailed": 6,
+      "note": "starts.jsonl",
+      "par2_mean": 835.693,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/torchsim-5540d893-lj38-noise-fire-s0.dat; results/asv/a4221137378acf5c9cb242d3ea9265e500c9abf4",
+      "problem": "minimization/lj38-noise",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign, asv",
+      "success_rate": 0.994,
+      "template": "torchsim/lj38-noise-fire-s0",
+      "tuning": "default",
+      "wilson_high": 0.9972473308581237,
+      "wilson_low": 0.9869718317581478
+    },
+    {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
       "call_unit": "total",
       "cap": 10000,
@@ -1488,6 +1785,51 @@
       "wilson_low": 0.9563345039877078
     },
     {
+      "asv_commit": "a4221137378acf5c9cb242d3ea9265e500c9abf4",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "TorchSim",
+      "code_version": "0.6.2",
+      "commit": "5540d893a849db9772081229a86d5f68537ad037",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "torchsim-5540d893-lj38-noise-fire-s1em3",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 16,
+        "wrong_stationary": 17
+      },
+      "full_n": 1000,
+      "history": false,
+      "max_calls": 2800.0,
+      "mean_calls": 625.942,
+      "mean_per_image": null,
+      "median": 563.5,
+      "median_calls": 548.0,
+      "median_high": 579.0,
+      "median_low": 543.0,
+      "median_per_image": null,
+      "min_calls": 185.0,
+      "n": 1000,
+      "nfailed": 33,
+      "note": "starts.jsonl",
+      "par2_mean": 1264.517,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/torchsim-5540d893-lj38-noise-fire-s1em3.dat; results/asv/a4221137378acf5c9cb242d3ea9265e500c9abf4",
+      "problem": "minimization/lj38-noise",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign, asv",
+      "success_rate": 0.967,
+      "template": "torchsim/lj38-noise-fire-s1em3",
+      "tuning": "default",
+      "wilson_high": 0.9764070720415732,
+      "wilson_low": 0.9540187355329184
+    },
+    {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
       "call_unit": "total",
       "cap": 10000,
@@ -1528,6 +1870,51 @@
       "source": "campaign, asv",
       "success_rate": 0.964,
       "template": "noise/rgmin-fire-s1em4",
+      "tuning": "default",
+      "wilson_high": 0.9738844285926127,
+      "wilson_low": 0.9505643395327921
+    },
+    {
+      "asv_commit": "a4221137378acf5c9cb242d3ea9265e500c9abf4",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "TorchSim",
+      "code_version": "0.6.2",
+      "commit": "5540d893a849db9772081229a86d5f68537ad037",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "torchsim-5540d893-lj38-noise-fire-s1em4",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 30,
+        "wrong_stationary": 6
+      },
+      "full_n": 1000,
+      "history": false,
+      "max_calls": 3146.0,
+      "mean_calls": 721.04,
+      "mean_per_image": null,
+      "median": 622.5,
+      "median_calls": 608.5,
+      "median_high": 651.5124999999999,
+      "median_low": 603.0,
+      "median_per_image": null,
+      "min_calls": 196.0,
+      "n": 1000,
+      "nfailed": 36,
+      "note": "starts.jsonl",
+      "par2_mean": 1414.455,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/torchsim-5540d893-lj38-noise-fire-s1em4.dat; results/asv/a4221137378acf5c9cb242d3ea9265e500c9abf4",
+      "problem": "minimization/lj38-noise",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign, asv",
+      "success_rate": 0.964,
+      "template": "torchsim/lj38-noise-fire-s1em4",
       "tuning": "default",
       "wilson_high": 0.9738844285926127,
       "wilson_low": 0.9505643395327921
@@ -2026,6 +2413,51 @@
       "tuning": "default",
       "wilson_high": 0.8340581379252162,
       "wilson_low": 0.7855616182967687
+    },
+    {
+      "asv_commit": "a4221137378acf5c9cb242d3ea9265e500c9abf4",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "TorchSim",
+      "code_version": "0.6.2",
+      "commit": "5540d893a849db9772081229a86d5f68537ad037",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "torchsim-5540d893-lj38-noise-fire-s1em2",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 9,
+        "wrong_stationary": 188
+      },
+      "full_n": 1000,
+      "history": false,
+      "max_calls": 1006.0,
+      "mean_calls": 360.453,
+      "mean_per_image": null,
+      "median": 384.0,
+      "median_calls": 329.0,
+      "median_high": 406.0,
+      "median_low": 372.0,
+      "median_per_image": null,
+      "min_calls": 144.0,
+      "n": 1000,
+      "nfailed": 197,
+      "note": "starts.jsonl",
+      "par2_mean": 4237.566,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/torchsim-5540d893-lj38-noise-fire-s1em2.dat; results/asv/a4221137378acf5c9cb242d3ea9265e500c9abf4",
+      "problem": "minimization/lj38-noise",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign, asv",
+      "success_rate": 0.803,
+      "template": "torchsim/lj38-noise-fire-s1em2",
+      "tuning": "default",
+      "wilson_high": 0.8264718382642149,
+      "wilson_low": 0.7772091460935389
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",

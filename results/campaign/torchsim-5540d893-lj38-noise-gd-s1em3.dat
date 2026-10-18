@@ -1,0 +1,33 @@
+# counter harness. One force call is one SpecPotentialModel evaluation of the problem potential.
+# FIRE is the ASE flavor. Gradient descent uses pos_lr. The cell stays fixed.
+# v2 success is under the cap, at the force stop, and Hessian index 0.
+# LJ38 removes the six rigid modes. A curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6). The noise-aware stop supplies that force_norm when sigma is positive.
+# Morse bulk uses the full Hessian. A curvature below -1e-6 is negative.
+# Energy and Kabsch RMSD were not applied.
+# Default profile. Gradient descent uses the constructor pos_lr 0.01. The step is that rate times the force, and this optimizer has no displacement cap. SpecPotentialModel evaluates the problem potential. Opening forces on these Lennard-Jones starts are large enough that this step can leave the cutoff. Gaussian force noise uses the problem seed, kappa, and window. The stop is the noise-aware force norm and, at positive sigma, the clean-energy window. The index is the clean Hessian with the rigid-mode rule.
+force_calls 10
+force_calls_min 6
+force_calls_max 630
+nfailed 0
+median 6
+code TorchSim
+code_version 0.6.2
+commit 5540d893a849db9772081229a86d5f68537ad037
+algorithm GD
+template torchsim/lj38-noise-gd-s1em3
+tuning default
+counter harness
+problem minimization/lj38-noise
+par2_mean 69.652
+wilson_low 0.991216985946
+wilson_high 0.998979216119
+par2_median 6
+par2_median_low 6
+par2_median_high 6
+v2_nfailed 3
+v2_successes 997
+n 1000
+cap 10000
+energy_min -1.00323437517
+energy_max 0
+sigma 0.001
