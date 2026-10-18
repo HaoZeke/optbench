@@ -1,0 +1,14 @@
+id = "flame/lj98-minhocao"
+engine = "flame"
+problem = "globalopt/lj98"
+code = "FLAME"
+code_version = "1.0"
+commit = "99a615acaef6bc6afe44d895f666c6d60250f7d8"
+algorithm = "minhocao"
+tuning = "default"
+failure_cap = 10000000
+note = "Default minhocao on the lj98 coordinate archive. The optimiser, ioput, earr tolerances, fingerprint, and seed match flame/lj38-minhocao. This problem file does not state energy_above_minimum, so a finished budget is a partial row: force_calls is the harness count at the first sighting of the lowest relaxed energy."
+
+[flame]
+seed = 314159
+nlminx = 100000

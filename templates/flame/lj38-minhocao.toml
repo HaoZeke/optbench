@@ -1,0 +1,15 @@
+id = "flame/lj38-minhocao"
+engine = "flame"
+problem = "globalopt/lj38"
+code = "FLAME"
+code_version = "1.0"
+commit = "99a615acaef6bc6afe44d895f666c6d60250f7d8"
+algorithm = "minhocao"
+tuning = "default"
+failure_cap = 10000000
+note = "Default minhocao. The local optimiser, softening, molecular-dynamics length, and FIRE tolerance are the params_new defaults (FIRE, GEOTOLMXF 2.d-4 Ha/Bohr, SOFTNIT 10, MDNIT 300, dtion_md 20). ioput is the documented start 1.d-2 5.d2 1.d5 and the earr tolerances are 2.d-3 1.d-1. The seed is 314159. Free boundaries select the Gaussian molecular fingerprint. VERBOSE is 0 so a geometry file is not written on every force call; global.mon still records every hop. The reference energy is the Cambridge LJ38 minimum -173.928427; success is that value plus the problem tolerance 0.001, which is the 2014 eOn stop -173.927427. failure_cap is the 2014 eOn basin-hopping step budget and is a safety stop. The potential is the harness Lennard-Jones kernel through msock."
+
+[flame]
+seed = 314159
+reference_energy = -173.928427
+nlminx = 100000
