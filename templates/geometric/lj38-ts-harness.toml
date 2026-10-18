@@ -1,0 +1,41 @@
+id = "geometric/lj38-ts-harness"
+engine = "geometric"
+code = "geomeTRIC"
+code_version = "1.1.1"
+commit = "f657e69bae9c81bf7a23e7375db98502ca5c8c30"
+algorithm = "geomeTRIC"
+problem = "tsopt/LJ38"
+task = "transition"
+profile = "harness"
+reducer = "all"
+ranked = true
+parameter_source = "harness"
+note = "geomeTRIC 1.1.1 transition-state search. Coordinates are Cartesian. Delocalized internals are the library default; the coordinate conversion on two LJ38 starts was still running after 30 minutes. The initial Hessian is the harness Lennard-Jones Hessian, charged as the 2*3*N finite-difference stencil it replaces. Optimizer gradient thresholds are 1e-8 so the Euclidean force norm 0.001 is the stop. v2 success is the harness cap, that norm, and Hessian index 1."
+
+[optimizer]
+name = "geometric"
+
+[potential]
+kind = "lennard-jones"
+epsilon = 1.0
+sigma = 1.0
+rc = 40.0
+pbc = [false, false, false]
+
+[stop]
+norm = "l2"
+force_norm = 0.001
+max_steps = 10000
+max_force_calls = 10000
+
+[input]
+archive_path = "website/tsopt/LJ38/coords-con.tar.gz"
+select = "con"
+
+[geometric]
+coordsys = "cart"
+hessian = "harness"
+subfrctor = 1
+maxiter = 10000
+convergence_gmax = 1e-8
+convergence_grms = 1e-8

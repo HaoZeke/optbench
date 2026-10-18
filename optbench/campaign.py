@@ -315,6 +315,19 @@ def run(
             workers=workers,
             work=work,
         )
+    if template["engine"] == "geometric":
+        from .geometric_ts import run_template
+
+        if template.get("problem") and template["problem"] != problem_name:
+            raise ValueError(f"{template_name} belongs to {template['problem']}")
+        return run_template(
+            root,
+            template_name,
+            output=output,
+            workers=workers,
+            limit=limit,
+            resume=resume,
+        )
     if template["engine"] in {"ase", "sella"}:
         from .ase_sella import run_template
 

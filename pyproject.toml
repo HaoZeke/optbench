@@ -11,7 +11,13 @@ optbench = "optbench.__main__:main"
 
 [dependency-groups]
 dev = ["pytest>=8.3", "asv==0.6.6", "asv-runner==0.3.1"]
-campaign = ["ase==3.29.0", "sella==2.6.0", "numpy", "scipy"]
+campaign = [
+    "ase==3.29.0",
+    "sella==2.6.0",
+    "numpy",
+    "scipy",
+    "geometric @ git+https://github.com/leeping/geomeTRIC.git@f657e69bae9c81bf7a23e7375db98502ca5c8c30",
+]
 
 [build-system]
 requires = ["hatchling"]
