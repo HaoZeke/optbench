@@ -1,7 +1,7 @@
 # counter harness. One fresh coordinate is one force call.
 # A repeated coordinate is free. A call at the cap is refused and is not counted.
 # Legacy success is the force stop. v2 success also requires Hessian index 0.
-# vc-SQNM free_sqnm ASE-wrapper defaults: initial_step_size -0.01, nhist_max 10, alpha_min 1e-3, eps_subsp 1e-3. On the archived LJ38 starts the force norm is about 1e5 to 1e6, so the first displacement dissociates the cluster and the force stop is met at a near-zero energy. This row is not ranked.
+# vc-SQNM free_sqnm ASE-wrapper defaults: initial_step_size -0.01, nhist_max 10, alpha_min 1e-3, eps_subsp 1e-3. On the archived LJ38 starts the force norm is about 1e5 to 1e6, so the first displacement dissociates the cluster and the force stop is met at a near-zero energy. That row is not ranked. On the Morse bulk starts the same step stays in the well.
 force_calls 35
 force_calls_min 24
 force_calls_max 42
@@ -32,4 +32,3 @@ n_divergence 0
 n_crash 0
 energy_min -1396.17323767
 energy_max -1396.17323755
-ranked false

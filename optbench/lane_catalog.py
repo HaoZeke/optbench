@@ -117,9 +117,16 @@ def specs() -> list[dict]:
                     "vc-SQNM free_sqnm ASE-wrapper defaults: initial_step_size -0.01, nhist_max 10, "
                     "alpha_min 1e-3, eps_subsp 1e-3. On the archived LJ38 starts the force norm is "
                     "about 1e5 to 1e6, so the first displacement dissociates the cluster and the "
+                    "force stop is met at a near-zero energy. That row is not ranked. "
+                    "On the Morse bulk starts the same step stays in the well."
+                    if problem == "minimization/morse-bulk"
+                    else
+                    "vc-SQNM free_sqnm ASE-wrapper defaults: initial_step_size -0.01, nhist_max 10, "
+                    "alpha_min 1e-3, eps_subsp 1e-3. On the archived LJ38 starts the force norm is "
+                    "about 1e5 to 1e6, so the first displacement dissociates the cluster and the "
                     "force stop is met at a near-zero energy. This row is not ranked."
                 ),
-                ranked=False,
+                ranked=problem == "minimization/morse-bulk",
             )
         )
         found.append(
