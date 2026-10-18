@@ -276,7 +276,7 @@ def _jobs(problem, template, loaded, method: str) -> tuple[list[dict], float | N
     return jobs, sigma
 
 
-def _run_jobs(root: Path, jobs: list[dict], workers: int, label: str) -> list[dict]:
+def _run_jobs(root: Path, jobs: list[dict], workers: int, label: str, partial: Path | None = None) -> list[dict]:
     count = max(1, min(int(workers), len(jobs) or 1))
     if not jobs:
         return []
@@ -343,6 +343,9 @@ def _run_jobs(root: Path, jobs: list[dict], workers: int, label: str) -> list[di
                             errors.append(exc)
                 with lock:
                     records.append(record)
+                    if partial is not None:
+                        with partial.open("a", encoding="utf-8") as handle:
+                            handle.write(json.dumps(record, sort_keys=True) + "\n")
                     done = len(records)
                     if done == len(jobs) or done % 25 == 0:
                         print(f"{label} {done}/{len(jobs)}", flush=True)
@@ -487,15 +490,14 @@ def run_template(
             for line in path.read_text(encoding="utf-8").splitlines():
                 if not line.strip():
                     continue
-                row = json.loads(line)
+                try:
+                    row = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
                 if row.get("start"):
                     done[str(row["start"])] = row
     pending = [job for job in jobs if str(job["start"]) not in done]
-    fresh = _run_jobs(root, pending, workers, template["id"]) if pending else []
-    if fresh:
-        with partial.open("a", encoding="utf-8") as handle:
-            for record in fresh:
-                handle.write(json.dumps(record, sort_keys=True) + "\n")
+    fresh = _run_jobs(root, pending, workers, template["id"], partial) if pending else []
     by_start = dict(done)
     for record in fresh:
         by_start[str(record.get("start"))] = record
