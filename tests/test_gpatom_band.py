@@ -180,6 +180,22 @@ def test_memory_crash_is_tallied_as_crash(tmp_path):
     assert "partial true" in output.read_text(encoding="utf-8")
 
 
+def test_path_reset_does_not_copy_the_surrogate():
+    import copy
+
+    from ase import Atoms
+
+    prepare()
+    from optbench.gpatom_band import _Surrogate
+
+    model = object()
+    atoms = Atoms("H", positions=[[0.0, 0.0, 0.0]])
+    atoms.calc = _Surrogate(model)
+    cloned = copy.deepcopy([atoms])
+    assert cloned[0].calc is None
+    assert atoms.calc.model is model
+
+
 def test_kernel_budget_fits_lj38_and_stops_a_large_pt_factor():
     assert _kernel_pair_bytes(25, 38) < _KERNEL_BYTES
     assert _kernel_pair_bytes(80, 175) > _KERNEL_BYTES

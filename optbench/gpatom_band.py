@@ -317,6 +317,43 @@ def _return_freed_pages() -> None:
         libc.malloc_trim(0)
 
 
+def _install_path_reset_copy() -> None:
+    """Reset the band without copying the surrogate.
+
+    Every fiftieth step AIDNEB deep-copies the initial images. Those
+    images carry the current surrogate, so the copy would duplicate the
+    Cholesky factor. The reset only needs the positions. The next
+    iteration trains a new model.
+    """
+    if getattr(copy, "_optbench_image_copy", False):
+        return
+    original = copy.deepcopy
+
+    def deepcopy(obj, memo=None):
+        calculators = []
+        if isinstance(obj, list):
+            for image in obj:
+                calc = getattr(image, "calc", None)
+                if isinstance(calc, _Surrogate):
+                    calculators.append((image, calc))
+        if not calculators:
+            if memo is None:
+                return original(obj)
+            return original(obj, memo)
+        for image, _calc in calculators:
+            image.calc = None
+        try:
+            if memo is None:
+                return original(obj)
+            return original(obj, memo)
+        finally:
+            for image, calc in calculators:
+                image.calc = calc
+
+    copy.deepcopy = deepcopy
+    copy._optbench_image_copy = True
+
+
 def prepare() -> None:
     """Import ase-gpatom and install the ASE 3.29 compatibility shims."""
     global _READY
@@ -393,6 +430,7 @@ def prepare() -> None:
 
     _install_cartesian_predict(GaussianProcess)
     _install_memory_guard(GaussianProcess)
+    _install_path_reset_copy()
 
     def predictions(images):
         _return_freed_pages()
