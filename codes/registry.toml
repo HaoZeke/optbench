@@ -75,6 +75,15 @@ committed = "2026-10-15"
 note = "Sella 2.6.0. Order 1 is a saddle and order 0 is a minimum. The Sella 0.1.1 rows on the 2014 tables are legacy and are not this pin. Force calls are harness calculator evaluations."
 
 [[code]]
+id = "optim"
+name = "OPTIM"
+role = "saddle search"
+repository = "https://www-wales.ch.cam.ac.uk/svn.tar.bz2"
+ref = "df8da599267534fbe43a250e578f7396a7946311"
+commit = "df8da599267534fbe43a250e578f7396a7946311"
+note = "Wales group OPTIM from the git software image at https://www-wales.ch.cam.ac.uk/svn.tar.bz2, sha256 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f. The source revision recorded in OPTIM/source/SVNREV is df8da599267534fbe43a250e578f7396a7946311. Hybrid eigenvector-following is BFGSTS with NOHESS and forward Rayleigh-Ritz differences (USEDIAG 3). BFGS-TS is the same search with central differences (USEDIAG 2). The lowest eigenvector is EIGENONLY with central differences, because that entry point does not pass a base gradient into the forward quotient. Force calls are harness socket evaluations."
+
+[[code]]
 id = "artn"
 name = "pARTn"
 role = "saddle search"
