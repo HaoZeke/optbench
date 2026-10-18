@@ -64,6 +64,8 @@ z
      <use xlink:href="#mb7c84e1192" x="487.445455" y="245.412239" style="fill: #1f77b4; stroke: #1f77b4"/>
      <use xlink:href="#mb7c84e1192" x="487.445455" y="245.164012" style="fill: #1f77b4; stroke: #1f77b4"/>
      <use xlink:href="#mb7c84e1192" x="487.445455" y="245.15235" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#mb7c84e1192" x="487.445455" y="215.298439" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#mb7c84e1192" x="487.445455" y="215.231801" style="fill: #1f77b4; stroke: #1f77b4"/>
      <use xlink:href="#mb7c84e1192" x="84.354545" y="36.816364" style="fill: #1f77b4; stroke: #1f77b4"/>
      <use xlink:href="#mb7c84e1192" x="84.354545" y="36.816364" style="fill: #1f77b4; stroke: #1f77b4"/>
     </g>
@@ -1014,19 +1016,33 @@ z
    </g>
    <g id="text_30">
     <!-- 13 -->
-    <g transform="translate(87.354545 33.816364) scale(0.07 -0.07)">
+    <g transform="translate(490.445455 212.298439) scale(0.07 -0.07)">
      <use xlink:href="#DejaVuSans-14"/>
      <use xlink:href="#DejaVuSans-16" transform="translate(63.625 0)"/>
     </g>
    </g>
    <g id="text_31">
     <!-- 14 -->
-    <g transform="translate(87.354545 33.816364) scale(0.07 -0.07)">
+    <g transform="translate(490.445455 212.231801) scale(0.07 -0.07)">
      <use xlink:href="#DejaVuSans-14"/>
      <use xlink:href="#DejaVuSans-17" transform="translate(63.625 0)"/>
     </g>
    </g>
    <g id="text_32">
+    <!-- 15 -->
+    <g transform="translate(87.354545 33.816364) scale(0.07 -0.07)">
+     <use xlink:href="#DejaVuSans-14"/>
+     <use xlink:href="#DejaVuSans-18" transform="translate(63.625 0)"/>
+    </g>
+   </g>
+   <g id="text_33">
+    <!-- 16 -->
+    <g transform="translate(87.354545 33.816364) scale(0.07 -0.07)">
+     <use xlink:href="#DejaVuSans-14"/>
+     <use xlink:href="#DejaVuSans-19" transform="translate(63.625 0)"/>
+    </g>
+   </g>
+   <g id="text_34">
     <!-- Cost and success: neb/Pt-heptamer -->
     <g transform="translate(179.266875 20.16) scale(0.12 -0.12)">
      <defs>

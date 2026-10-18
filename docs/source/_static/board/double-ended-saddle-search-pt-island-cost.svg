@@ -68,6 +68,8 @@ z
      <use xlink:href="#mb7c84e1192" x="445.559538" y="222.708052" style="fill: #1f77b4; stroke: #1f77b4"/>
      <use xlink:href="#mb7c84e1192" x="480.219014" y="221.606453" style="fill: #1f77b4; stroke: #1f77b4"/>
      <use xlink:href="#mb7c84e1192" x="452.491433" y="188.35061" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#mb7c84e1192" x="341.581109" y="148.380908" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#mb7c84e1192" x="320.785424" y="143.544495" style="fill: #1f77b4; stroke: #1f77b4"/>
      <use xlink:href="#mb7c84e1192" x="78.169091" y="36.816364" style="fill: #1f77b4; stroke: #1f77b4"/>
      <use xlink:href="#mb7c84e1192" x="78.169091" y="36.816364" style="fill: #1f77b4; stroke: #1f77b4"/>
     </g>
@@ -996,19 +998,33 @@ z
    </g>
    <g id="text_31">
     <!-- 17 -->
-    <g transform="translate(81.169091 33.816364) scale(0.07 -0.07)">
+    <g transform="translate(344.581109 145.380908) scale(0.07 -0.07)">
      <use xlink:href="#DejaVuSans-14"/>
      <use xlink:href="#DejaVuSans-1a" transform="translate(63.625 0)"/>
     </g>
    </g>
    <g id="text_32">
     <!-- 18 -->
-    <g transform="translate(81.169091 33.816364) scale(0.07 -0.07)">
+    <g transform="translate(323.785424 140.544495) scale(0.07 -0.07)">
      <use xlink:href="#DejaVuSans-14"/>
      <use xlink:href="#DejaVuSans-1b" transform="translate(63.625 0)"/>
     </g>
    </g>
    <g id="text_33">
+    <!-- 19 -->
+    <g transform="translate(81.169091 33.816364) scale(0.07 -0.07)">
+     <use xlink:href="#DejaVuSans-14"/>
+     <use xlink:href="#DejaVuSans-1c" transform="translate(63.625 0)"/>
+    </g>
+   </g>
+   <g id="text_34">
+    <!-- 20 -->
+    <g transform="translate(81.169091 33.816364) scale(0.07 -0.07)">
+     <use xlink:href="#DejaVuSans-15"/>
+     <use xlink:href="#DejaVuSans-13" transform="translate(63.625 0)"/>
+    </g>
+   </g>
+   <g id="text_35">
     <!-- Cost and success: double-ended-saddle-search/pt-island -->
     <g transform="translate(113.267812 20.16) scale(0.12 -0.12)">
      <defs>
