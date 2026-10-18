@@ -1,0 +1,12 @@
+call_unit total
+nfailed 1
+code Eon svn
+code_version r2549
+commit r2549
+algorithm Lanczos L-BFGS
+template eon-svn/saddle-pt-lanczos
+problem saddle-search/pt-island
+reducer harness
+counter harness
+count_keys HarnessCounter
+partial true

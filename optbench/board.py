@@ -722,6 +722,8 @@ def _benchmark_index() -> dict[str, dict]:
     modules = (
         "benchmarks.bench_lj38",
         "benchmarks.bench_eon_develop",
+        "benchmarks.bench_eon_svn",
+        "benchmarks.bench_eon_client",
         "benchmarks.bench_rgmin",
         "benchmarks.bench_ase_sella",
         "benchmarks.bench_rgsaddle",

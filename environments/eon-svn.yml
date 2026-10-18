@@ -1,0 +1,14 @@
+# eOn SVN r2549 is not a conda-forge package. This file does not select
+# a conda eon build and it does not invent a build string. The binary
+# the r2549 benchmarks run is the source build pinned in
+# codes/registry.toml under id eon-svn:
+#   ref = r2549
+#   commit = r2549
+#   version string r2549
+# asv has one environment_type, so this yml cannot be bound to one
+# class. Those classes call EON_SVN_CLIENT.
+name: eon-svn
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12

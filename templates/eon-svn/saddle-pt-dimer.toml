@@ -1,0 +1,74 @@
+id = "eon-svn/saddle-pt-dimer"
+engine = "eon"
+problem = "saddle-search/pt-island"
+code = "Eon svn"
+code_version = "r2549"
+commit = "r2549"
+algorithm = "Dimer L-BFGS"
+reducer = "harness"
+failure_cap = 20000000
+kind = "akmc"
+kernel = "morse"
+asv_class = "EonSvnSaddlePtDimer"
+note = '''
+AKMC on the Pt island. Confidence 1.1, confidence_scheme old, temperature 700, prefactor 5e12, displace atoms 0-6, radius 3.3, magnitude 0.1, dimer rotations_max 20, converged_angle 5, improved true. The 2014 keys displace_atomlist and number_of_cpus are written as displace_atom_list and number_of_CPUs. num_jobs is 8. pass_limit is 4. Success remains 27 good saddles below 1.5 eV. The problem file states no repetition count, so the row is partial. Seed 0. The 2014 run directories were run-0 through run-8. The harness kernel is morse/smooth/linear with D 0.7102, alpha 1.6047, r0 2.897, cutoff 9.5, and periodic boundaries in x and y.
+'''
+seeds = [0]
+starts = ["pt-island"]
+pass_limit = 4
+workers = 1
+declare_partial = true
+asv_full = false
+asv_timeout = 3600
+budget_seconds = 2400
+
+[ini.Main]
+job = "akmc"
+temperature = 700
+finite_difference = 0.001
+random_seed = 1
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+convergence_metric = "norm"
+converged_force = 0.001
+max_move = 0.2
+max_iterations = 1000
+lbfgs_memory = 20
+
+[ini.AKMC]
+confidence = 1.1
+thermally_accessible_window = 99999
+confidence_scheme = "old"
+
+[ini."Process Search"]
+minimize_first = true
+
+[ini.Communicator]
+type = "local"
+num_jobs = 8
+number_of_CPUs = 1
+client_path = "eonclient"
+
+[ini."Saddle Search"]
+min_mode_method = "dimer"
+displace_listed_atom_weight = 1
+displace_atom_list = "0,1,2,3,4,5,6"
+displace_radius = 3.3
+displace_magnitude = 0.1
+max_energy = 5
+max_iterations = 1000
+converged_force = 0.001
+
+[ini.Prefactor]
+default_value = "5e12"
+
+[ini.Dimer]
+improved = true
+opt_method = "cg"
+converged_angle = 5
+rotations_max = 20
+rotations_min = 1

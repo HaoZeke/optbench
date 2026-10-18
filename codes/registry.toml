@@ -35,6 +35,16 @@ committed = "2026-10-16"
 note = "develop HEAD built from source. The version string is 3.6.0 (7095b23a). GPR-dimer is absent: TheochemUI/gpr_optim is private and eonclient reports GPRD disabled. This pin is not the conda-forge 3.5.0 binary."
 
 [[code]]
+id = "eon-svn"
+name = "Eon svn"
+role = "minimization and saddle search"
+repository = "https://theory.cm.utexas.edu/svn/eon"
+ref = "r2549"
+commit = "r2549"
+committed = "2026-01-23"
+note = "SVN revision 2549, last changed 2026-01-23 by eboniw. The binary prints eonclient version r2549. QSC sources are not in the revision, so that potential is left out of the link. LAMMPS is not linked. Min-mode methods in this revision are dimer and lanczos. github.com/henkelmangroup/eon mirrors the same tree. The conda-forge 3.5.0 binary is a different pin."
+
+[[code]]
 id = "rgmin"
 name = "rgmin"
 role = "minimization"
