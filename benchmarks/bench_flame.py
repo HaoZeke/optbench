@@ -47,7 +47,7 @@ def _count(problem_id: str) -> int:
 
 def _specs() -> list[dict]:
     from optbench.campaign import list_templates, resolve_problem
-    from optbench.runners.flame_go import cap_of, success_ceiling
+    from optbench.runners.flame_go import cap_of, fire_dt_of, search_target, success_ceiling
 
     found = []
     counts: dict[str, int] = {}
@@ -67,7 +67,9 @@ def _specs() -> list[dict]:
                 "problem_id": problem_id,
                 "seed": str(int(flame.get("seed", 314159))),
                 "cap": cap_of(problem, template),
-                "ceiling": success_ceiling(problem, template),
+                "target": search_target(problem, template),
+                "claim": success_ceiling(problem, template) is not None,
+                "fire_dt": fire_dt_of(template),
                 "nlminx": int(flame.get("nlminx", 100000)),
                 "n": counts[problem_id],
             }
@@ -100,8 +102,10 @@ def _job(spec: dict, start: str) -> dict:
         "binary": str(flame_binary()),
         "seed": int(spec["seed"]),
         "nlminx": spec["nlminx"],
+        "fire_dt": spec["fire_dt"],
         "cap": spec["cap"],
-        "target": spec["ceiling"],
+        "target": spec["target"],
+        "claim": spec["claim"],
         "idle_timeout": 300,
     }
 
