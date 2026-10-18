@@ -1,0 +1,20 @@
+# rep 1 force_calls 342930 unique_saddles 3 fraction_connected 0.0 total_searches 400 connected 0 minimize_calls 14 seed 20261016
+force_calls 342930.0
+force_calls_min 342930
+force_calls_max 342930
+code saddlesearchjl
+code_version 0.0.2
+commit 47b4f35953bb3fc0f0726c171adca8f5b628af5e
+algorithm ODE dimer
+tuning default
+template saddlesearchjl/saddle-ode
+problem saddle-search/pt-island
+counter harness
+repetitions 1
+nfailed 1
+goal 27
+cap 5064
+n 400
+partial true
+par2_mean 10128.0
+v2_nfailed 400
