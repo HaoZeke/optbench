@@ -14,6 +14,8 @@ from optbench.campaign import list_templates, load_template
 from optbench.catlearn_band import (
     _PIN,
     _VERSION,
+    _covariance_with_diagonal_noise,
+    _install_likelihood,
     asv_document,
     gaussian_xx_gradients,
     gaussian_xxp_gradients,
@@ -122,6 +124,86 @@ def test_diagonal_noise_matches_the_dense_covariance():
     dense = original(kernel_list, False, matrix, regularization=0.0, eval_gradients=True)
     quick = fast(kernel_list, False, matrix, regularization=0.0, eval_gradients=True)
     assert np.array_equal(dense, quick)
+
+
+def test_accelerated_likelihood_matches_the_library_optimum():
+    pytest.importorskip("catlearn")
+    pytest.importorskip("scipy")
+    import catlearn.regression.gaussian_process as gp_module
+    import catlearn.regression.gpfunctions.covariance as covariance
+    import catlearn.regression.gpfunctions.kernels as kernels
+    import catlearn.regression.gpfunctions.log_marginal_likelihood as likelihood
+    from catlearn.regression.gaussian_process import GaussianProcess
+
+    if kernels.gaussian_xx_gradients is gaussian_xx_gradients:
+        pytest.skip("runtime shim already replaced the library kernels")
+    saved = {
+        "kernel": kernels.gaussian_xx_gradients,
+        "covariance": covariance.get_covariance,
+        "likelihood_covariance": likelihood.get_covariance,
+        "likelihood": likelihood.log_marginal_likelihood,
+        "gp_covariance": gp_module.get_covariance,
+        "gp_likelihood": gp_module.log_marginal_likelihood,
+    }
+    rng = np.random.default_rng(20261018)
+    matrix = rng.normal(size=(4, 36))
+    energy = rng.normal(size=4)
+    gradients = rng.normal(scale=0.1, size=(4, 36))
+    sigma = float(1e-3 + np.std(energy) ** 2)
+
+    def kernel_list() -> list[dict]:
+        return [
+            {
+                "type": "gaussian",
+                "width": [0.8],
+                "dimension": "single",
+                "bounds": ((0.1, 2.0),),
+                "scaling": sigma,
+                "scaling_bounds": ((sigma, sigma),),
+            },
+            {
+                "type": "noise_multi",
+                "hyperparameters": [0.005, 0.0005],
+                "bounds": ((0.001, 0.005), (0.0005, 0.002)),
+            },
+        ]
+
+    def optimize_once(function):
+        likelihood.log_marginal_likelihood = function
+        gp_module.log_marginal_likelihood = function
+        model = GaussianProcess(
+            kernel_list=kernel_list(),
+            regularization=0.0,
+            regularization_bounds=(0.0, 0.0),
+            train_fp=matrix.copy(),
+            train_target=energy.copy(),
+            gradients=gradients.copy(),
+            optimize_hyperparameters=False,
+            scale_data=False,
+        )
+        model.optimize_hyperparameters(global_opt=False)
+        return model.theta_opt
+
+    try:
+        kernels.gaussian_xx_gradients = gaussian_xx_gradients
+        fast = _covariance_with_diagonal_noise(saved["covariance"])
+        covariance.get_covariance = fast
+        likelihood.get_covariance = fast
+        gp_module.get_covariance = fast
+        _install_likelihood(likelihood, gp_module)
+        library = optimize_once(saved["likelihood"])
+        accelerated = optimize_once(likelihood.log_marginal_likelihood)
+    finally:
+        kernels.gaussian_xx_gradients = saved["kernel"]
+        covariance.get_covariance = saved["covariance"]
+        likelihood.get_covariance = saved["likelihood_covariance"]
+        likelihood.log_marginal_likelihood = saved["likelihood"]
+        gp_module.get_covariance = saved["gp_covariance"]
+        gp_module.log_marginal_likelihood = saved["gp_likelihood"]
+    assert library.nfev == accelerated.nfev
+    assert library.nit == accelerated.nit
+    assert np.array_equal(library.x, accelerated.x)
+    assert float(library.fun) == float(accelerated.fun)
 
 
 def test_templates_use_the_registry_pin():

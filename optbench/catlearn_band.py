@@ -166,12 +166,43 @@ def _xx_blocks(
     return out
 
 
-def _covariance_with_diagonal_noise(original):
-    """Same covariance as CatLearn, with diagonal noise written in place.
+def _scaled_gaussian_block(kdict: dict, matrix: np.ndarray) -> np.ndarray:
+    """Gaussian block with gradients, multiplied by the kernel scale."""
+    from catlearn.regression.gpfunctions.kernel_setup import kdict2list
+    from catlearn.regression.gpfunctions.kernels import gaussian_kernel
 
-    ``noise_multi`` on a training set is a diagonal matrix. Building that
-    diagonal as a dense block and adding it touches every entry. Writing
-    the diagonal matches the dense sum and skips that block.
+    scaling, theta = kdict2list(kdict, int(matrix.shape[1]))
+    if len(scaling) == 0:
+        scale = 1.0
+    else:
+        scale = float(np.asarray(scaling, dtype=np.float64).reshape(-1)[0])
+    block = gaussian_kernel(
+        theta=np.asarray(theta, dtype=np.float64),
+        log_scale=False,
+        m1=matrix,
+        m2=None,
+        eval_gradients=True,
+    )
+    scaled = np.array(block, dtype=np.float64, copy=True)
+    scaled *= scale
+    return scaled
+
+
+def _add_regularization(cov: np.ndarray, regularization) -> None:
+    if regularization is None:
+        return
+    shift = float(np.asarray(regularization, dtype=np.float64).reshape(-1)[0])
+    if shift == 0.0:
+        return
+    index = np.arange(cov.shape[0])
+    cov[index, index] += shift * shift
+
+
+def _covariance_with_diagonal_noise(original):
+    """Covariance matching CatLearn on a training set.
+
+    The Gaussian block is scaled in place. Noise and regularization sit on
+    the diagonal. The matrix matches the dense sum.
     """
 
     def get_covariance(
@@ -199,14 +230,25 @@ def _covariance_with_diagonal_noise(original):
                 eval_gradients=eval_gradients,
             )
         others = [item for item in kernel_list if item.get("type") != "noise_multi"]
-        cov = original(
-            others,
-            log_scale,
-            matrix1,
-            matrix2=None,
-            regularization=regularization,
-            eval_gradients=True,
+        direct = (
+            not log_scale
+            and len(others) == 1
+            and others[0].get("type") == "gaussian"
+            and "features" not in others[0]
+            and "operation" not in others[0]
         )
+        if direct:
+            cov = _scaled_gaussian_block(others[0], np.asarray(matrix1, dtype=np.float64))
+            _add_regularization(cov, regularization)
+        else:
+            cov = original(
+                others,
+                log_scale,
+                matrix1,
+                matrix2=None,
+                regularization=regularization,
+                eval_gradients=True,
+            )
         from catlearn.regression.gpfunctions.kernel_setup import kdict2list
 
         scaling, hyperparameters = kdict2list(noises[0], np.shape(matrix1)[1])
@@ -226,7 +268,68 @@ def _covariance_with_diagonal_noise(original):
         cov[gradient, gradient] += scale * float(theta[1]) ** 2
         return cov
 
+    get_covariance.__wrapped_noise__ = True
     return get_covariance
+
+
+def _install_likelihood(likelihood_module, gp_module) -> None:
+    """Same log marginal likelihood, with a direct triangular solve.
+
+    The factor comes from ``cho_factor``. The solve uses the lower triangle
+    through LAPACK ``dpotrs``. Hyperparameter optimization sees the same value.
+    """
+    original = likelihood_module.log_marginal_likelihood
+    if getattr(original, "_optbench_fast", False):
+        return
+
+    def log_marginal_likelihood(
+        theta,
+        train_matrix,
+        targets,
+        kernel_list,
+        scale_optimizer,
+        eval_gradients,
+        cinv=None,
+        eval_jac=False,
+    ):
+        if eval_jac or cinv is not None:
+            return original(
+                theta,
+                train_matrix,
+                targets,
+                kernel_list,
+                scale_optimizer,
+                eval_gradients,
+                cinv,
+                eval_jac,
+            )
+        from catlearn.regression.gpfunctions.kernel_setup import list2kdict
+        from scipy.linalg import LinAlgError, cho_factor
+        from scipy.linalg.lapack import dpotrs
+
+        listed = list2kdict(theta, kernel_list)
+        count = len(targets)
+        rhs = np.asfortranarray(np.asarray(targets, dtype=np.float64).reshape(count, 1))
+        gram = likelihood_module.get_covariance(
+            kernel_list=listed,
+            matrix1=train_matrix,
+            regularization=theta[-1],
+            log_scale=scale_optimizer,
+            eval_gradients=eval_gradients,
+        )
+        factor, _lower = cho_factor(gram, overwrite_a=False, lower=True, check_finite=True)
+        solved, info = dpotrs(np.asfortranarray(factor), rhs, lower=1, overwrite_b=0)
+        if info != 0:
+            raise LinAlgError(f"dpotrs failed with info {info}")
+        datafit = -0.5 * np.dot(rhs.T, solved)
+        complexity = -np.log(np.diag(factor)).sum()
+        normalization = -count * np.log(2 * np.pi) / 2.0
+        value = (datafit + complexity + normalization).sum(-1)
+        return -value
+
+    log_marginal_likelihood._optbench_fast = True
+    likelihood_module.log_marginal_likelihood = log_marginal_likelihood
+    gp_module.log_marginal_likelihood = log_marginal_likelihood
 
 
 def install_runtime() -> None:
@@ -265,6 +368,7 @@ def install_runtime() -> None:
     gp_module.get_covariance = fast_covariance
     likelihood.get_covariance = fast_covariance
     uncertainty.get_covariance = fast_covariance
+    _install_likelihood(likelihood, gp_module)
     mlneb.ASECalc.calculate = _surrogate_calculate
     mlneb.ASECalc._predict_scalar = _predict_scalar
     mlneb.ASECalc._predict_vector = _predict_vector
