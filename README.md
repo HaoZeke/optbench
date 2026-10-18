@@ -100,7 +100,15 @@ uv run optbench/pele_lj38.py \
   --workers 4
 ```
 
-Memory 100 at step 0.2 averages 178 calls. The 2014 file is 179. The other six files are `results/campaign/pele-0.1.2-lbfgs-*.dat`.
+Memory 100 at step 0.2 averages 178 calls. The 2014 file is 179. The other six files are `results/campaign/pele-0.1.2-lbfgs-*.dat`. Those files counted `result.nfev` on pele's Lennard-Jones potential.
+
+`templates/pele/` is pele 0.1.2 at commit `b7081b932a060be11342fbe8287ac35da8ada879`, built from source. LBFGS, MYLBFGS, FIRE, and steepest descent call the harness potential. The stop is the Euclidean norm from the problem file. One row is:
+
+```bash
+uv run optbench run minimization/lj38 pele/lj38-lbfgs \
+  --workers 4 \
+  --output results/campaign/pele-lj38-lbfgs.dat
+```
 
 Sella 2.6.0 needs `sella==2.6.0` and ASE. The stop is the Euclidean norm of the force at 0.001, or 1000 steps, on 200 geometries, with cutoff 40 and the archived trust-region numbers:
 

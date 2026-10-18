@@ -21,6 +21,8 @@ ASE_COMMIT = "f27c0005ae6a67ea419f996e728668865bfc1f86"
 ASE_VERSION = "3.29.0"
 SELLA_COMMIT = "6cfb60cdb100a146c3c6f0587d5308b247aa8010"
 SELLA_VERSION = "2.6.0"
+PELE_COMMIT = "b7081b932a060be11342fbe8287ac35da8ada879"
+PELE_VERSION = "0.1.2"
 
 _SLUGS = ((0.0, "s0"), (1e-4, "s1em4"), (1e-3, "s1em3"), (1e-2, "s1em2"))
 
@@ -164,6 +166,31 @@ def specs() -> list[dict]:
                 sigma,
             )
         )
+    pele_note = (
+        "Default profile. LBFGS and MYLBFGS use memory 4 and maxstep 0.1. "
+        "FIRE uses dt 0.1 and maxstep 0.5. Steepest descent uses dx 1e-4. "
+        "The stop is the noise-aware force norm, and at positive sigma the clean energy over the last window. "
+        "The index is the clean Hessian with the rigid-mode rule."
+    )
+    for slug, method, algorithm in (
+        ("lbfgs", "lbfgs", "LBFGS"),
+        ("mylbfgs", "mylbfgs", "MYLBFGS"),
+        ("fire", "fire", "FIRE"),
+        ("sd", "sd", "steepest descent"),
+    ):
+        for sigma in SIGMAS:
+            found.append(
+                _base(
+                    f"noise/pele-{slug}-{sigma_slug(sigma)}",
+                    "pele",
+                    PELE_VERSION,
+                    PELE_COMMIT,
+                    algorithm,
+                    pele_note,
+                    {"family": "pele", "method": method},
+                    sigma,
+                )
+            )
     return found
 
 
