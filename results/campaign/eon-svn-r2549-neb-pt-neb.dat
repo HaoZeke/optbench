@@ -1,0 +1,23 @@
+# eOn SVN r2549. HarnessCounter through ext_pot. Kernel morse_pt.
+# Plain NEB. Same settings as eon-svn/neb-pt-ci with climbing_image_method false. The run swaps the potential for ext_pot. The harness kernel is r2549 Morse::force: cutoff 9.5, pair energy shifted to zero at the cutoff, minimum image on the box diagonal. The 2014 table used r2090. The binary is SVN r2549, the registry pin. Export of the 2014 revision is forbidden, so this row is r2549.
+counter harness
+code Eon svn
+code_version r2549
+commit r2549
+algorithm LBFGS
+tuning default
+template eon-svn/neb-pt-neb
+problem neb/Pt-heptamer
+reducer harness
+cap 10000
+n 13
+par2_mean 370.61538461538464
+nfailed 0
+mean_calls 370.61538461538464
+median_calls 378.0
+min_calls 194.0
+max_calls 450.0
+n_crash 0
+n_divergence 0
+n_cap 0
+n_wrong_stationary 0
