@@ -1,0 +1,67 @@
+{
+  "counter": "harness",
+  "legacy": {
+    "force_calls": 53,
+    "force_calls_max": 70,
+    "force_calls_median": 53.5,
+    "force_calls_min": 39,
+    "n": 100,
+    "nfailed": 88,
+    "successes": 12,
+    "transition_states": 13
+  },
+  "problem": "minimization/morse-bulk",
+  "provenance": {
+    "code": "tsase",
+    "code_version": "1.0",
+    "commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218",
+    "machine": {
+      "machine": "x86_64",
+      "node": "cursor",
+      "python": "3.12.3",
+      "system": "Linux"
+    },
+    "parameters": {
+      "cap": 10000,
+      "counter": "harness",
+      "force_norm": 0.001,
+      "max_step": 0.2,
+      "method": "lbfgs",
+      "potential": "morse_pt",
+      "seed": "0",
+      "task": "minimize"
+    }
+  },
+  "schema": "optbench.score/v2",
+  "score": {
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 20261015,
+    "cap": 10000,
+    "includes_failures": true,
+    "iqr": 0.0,
+    "iqr_high": 0.0,
+    "iqr_low": 0.0,
+    "mean": 17606.37,
+    "median": 20000.0,
+    "median_high": 20000.0,
+    "median_low": 20000.0,
+    "n": 100,
+    "n_cap": 0,
+    "n_crash": 0,
+    "n_divergence": 0,
+    "n_wrong_stationary": 88,
+    "nfailed": 88,
+    "par2_mean": 17606.37,
+    "par_applied": true,
+    "par_factor": 2,
+    "q25": 20000.0,
+    "q75": 20000.0,
+    "scoring": "par2-wilson-bootstrap",
+    "success_only_mean": 53.083333333333336,
+    "success_rate": 0.12,
+    "successes": 12,
+    "wilson_high": 0.19812099426711421,
+    "wilson_low": 0.06999406437019488
+  },
+  "template": "tsase/lbfgs-morse"
+}

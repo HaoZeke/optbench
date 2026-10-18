@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>GMIN</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="mlopt/C2H4">
    <th scope="row"><a href="#C2H4">C2H4</a></th>
    <td data-code="eOn">—</td>
@@ -17,6 +17,13 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="GMIN">—</td>
+   <td data-code="pysisyphus">—</td>
+   <td data-code="artn">—</td>
+   <td data-code="compass">—</td>
+   <td data-code="dlfind">—</td>
+   <td data-code="lammps">—</td>
+   <td data-code="optim">—</td>
+   <td data-code="tsase">—</td>
    </tr>
    <tr data-problem="mlopt/emt-pt38">
    <th scope="row"><a href="#emt-pt38">EMT Pt 38 nanoparticle</a></th>
@@ -27,6 +34,13 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="GMIN">—</td>
+   <td data-code="pysisyphus">—</td>
+   <td data-code="artn">—</td>
+   <td data-code="compass">—</td>
+   <td data-code="dlfind">—</td>
+   <td data-code="lammps">—</td>
+   <td data-code="optim">—</td>
+   <td data-code="tsase">—</td>
    </tr>
    </tbody></table></div></section><section class="bench" id="C2H4" data-problem="mlopt/C2H4">
    <h2>C2H4</h2>
