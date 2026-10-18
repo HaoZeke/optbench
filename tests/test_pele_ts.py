@@ -58,6 +58,15 @@ def test_pele_templates_use_the_problem_cap_and_the_pinned_commit():
     assert _SADDLE_SEARCH_CAP == 5064
 
 
+def test_partial_checkpoint_drops_a_truncated_tail(tmp_path: Path):
+    from optbench.pele_ts import _load_partial
+
+    path = tmp_path / "run.partial.jsonl"
+    path.write_text('{"start": "rep1-search1", "success": false}\n{"start": "rep1-sea\n', encoding="utf-8")
+    rows = _load_partial(path)
+    assert rows == [{"start": "rep1-search1", "success": False}]
+
+
 def test_registry_pins_the_pele_commit():
     import tomllib
 
