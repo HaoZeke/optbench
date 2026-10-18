@@ -75,6 +75,16 @@ committed = "2026-10-15"
 note = "Sella 2.6.0. Order 1 is a saddle and order 0 is a minimum. The Sella 0.1.1 rows on the 2014 tables are legacy and are not this pin. Force calls are harness calculator evaluations."
 
 [[code]]
+id = "optking"
+name = "OptKing"
+role = "transition-state search"
+repository = "https://github.com/psi-rking/optking"
+ref = "767e2c0c13ff2b851ac82101ccd5aab9a558a4f1"
+commit = "767e2c0c13ff2b851ac82101ccd5aab9a558a4f1"
+committed = "2026-10-13"
+note = "Geometry optimizer at 767e2c0c13ff2b851ac82101ccd5aab9a558a4f1. The version string is 0.5.1.dev2+g767e2c0c1. Transition-state steps on this revision are RS_I_RFO and P_RFO. RS_PRFO is a comment on the RFO base class and is not a step type. The Lennard-Jones 38 and Pt-island rows use Cartesian coordinates and one initial harness Hessian. A Hessian is the central difference of the harness gradient, and those evaluations are force calls."
+
+[[code]]
 id = "artn"
 name = "pARTn"
 role = "saddle search"
