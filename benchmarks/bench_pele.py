@@ -26,7 +26,7 @@ os.environ.setdefault("OPENBLAS_NUM_THREADS", "1")
 os.environ.setdefault("MKL_NUM_THREADS", "1")
 os.environ.setdefault("NUMEXPR_NUM_THREADS", "1")
 
-from optbench.asv_tracks import TrackedSearch
+from optbench.asv_tracks import TrackedSearch as _TrackedSearch
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -83,7 +83,7 @@ def _failure_of(record: dict) -> str | None:
 def _bind(class_name: str, problem: str, template: str, cap: int):
     starts = selected_starts(problem)
 
-    class _Benchmark(TrackedSearch):
+    class _Benchmark(_TrackedSearch):
         param_names = ["seed", "start"]
         params = [["0"], list(starts)]
         timeout = 1800
