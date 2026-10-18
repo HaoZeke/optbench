@@ -201,6 +201,55 @@ def test_kernel_budget_fits_lj38_and_stops_a_large_pt_factor():
     assert _kernel_pair_bytes(80, 175) > _KERNEL_BYTES
 
 
+def test_repeated_path_advances_to_the_next_reset():
+    from types import SimpleNamespace
+
+    from ase import Atoms
+
+    from optbench.gpatom_band import _ACTIVE
+
+    class _Train:
+        def __init__(self):
+            self.copies = 0
+
+        def dump(self, atoms, method):
+            assert "energy" in atoms.calc.results
+            assert "forces" in atoms.calc.results
+            self.copies += 1
+
+    counter = HarnessCounter(cache=True, cap=10)
+    template = np.zeros((2, 3))
+    mask = np.array([True, True])
+    state = {"repeats": 0, "path_same": True}
+    spec = _Spec(counter, "lj", template, mask, None, state, "pair")
+    atoms = Atoms(numbers=[1, 1], positions=[[0.0, 0.0, 0.0], [1.1, 0.0, 0.0]])
+    atoms.calc = spec
+    train = _Train()
+    band = SimpleNamespace(step=1107, atoms=atoms, train=train)
+    token = _ACTIVE.set({"state": state, "band": band})
+    try:
+        atoms.get_potential_energy()
+        assert counter.calls == 1
+        assert train.copies == 0
+        assert band.step == 1107
+        atoms.get_potential_energy()
+        assert counter.calls == 1
+        assert band.step == 1149
+        assert train.copies == 42
+        endpoint = Atoms(numbers=[1, 1], positions=atoms.get_positions())
+        endpoint.calc = spec
+        endpoint.get_potential_energy()
+        assert band.step == 1149
+        assert train.copies == 42
+        state["path_same"] = False
+        band.step = 12
+        atoms.get_potential_energy()
+        assert band.step == 12
+        assert state["repeats"] == 1
+    finally:
+        _ACTIVE.reset(token)
+
+
 def test_short_cap_stops_on_the_first_lj38_pair():
     record = search_named(
         ROOT,

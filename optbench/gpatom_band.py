@@ -6,8 +6,8 @@ Gaussian-process predictions, the IDPP interpolation, and Hessian
 finite differences are not search cost. The band total is the raw
 count across images.
 
-The published loop is unchanged. Four gaps in this revision are filled
-here so that loop can run on ASE 3.29: ``ase.neb`` is ``ase.mep.NEB``;
+The published loop supplies the search. Four gaps in this revision are
+filled here so that loop can run on ASE 3.29: ``ase.neb`` is ``ase.mep.NEB``;
 ``Database.add`` stores forces and ``get_all_energyforces`` returns
 them; ``ConstantPrior.let_update`` is a no-op because the ``fit``
 prior branch calls it and this revision does not define it; the
@@ -33,10 +33,18 @@ whole band. After the prefactor update the dense kernel matrix is
 dropped and its pages are returned. Predictions keep the scaled
 Cholesky factor. A factor that would exceed 12 GiB raises before
 the allocation, and that start is scored from the path so far.
+
+Every fiftieth step the loop returns to the initial interpolation.
+Inside one of those blocks the path and the acquired geometry can
+repeat. The potential is not evaluated again. The remaining
+iterations of that block still append the same observation, once per
+step, and the next reset reads that training set. Those copies are
+written together and the step moves to the reset.
 """
 
 from __future__ import annotations
 
+import contextvars
 import copy
 import ctypes
 import gc
@@ -73,6 +81,7 @@ _FD_STEP = 1e-5
 _STALL_HITS = 3
 _KERNEL_BYTES = 12 * 1024**3
 _READY = False
+_ACTIVE: contextvars.ContextVar = contextvars.ContextVar("gpatom_active", default=None)
 
 _SLUGS = {
     "neb/Pt-heptamer": "neb-pt-heptamer",
@@ -453,6 +462,7 @@ def prepare() -> None:
             uncertainty.append(2.0 * standard)
         uncertainty[0] = 0.0
         uncertainty[-1] = 0.0
+        _remember_path(images)
         _return_freed_pages()
         return {"energy": energy, "uncertainty": uncertainty}
 
@@ -463,16 +473,53 @@ def prepare() -> None:
     def dump(self, atoms, method):
         from ase.calculators.singlepoint import SinglePointCalculator
 
+        results = getattr(getattr(atoms, "calc", None), "results", None) or {}
+        if "energy" in results and "forces" in results:
+            energy = float(results["energy"])
+            forces = np.array(results["forces"], dtype=float, copy=True)
+        else:
+            energy = float(atoms.get_potential_energy())
+            forces = np.asarray(atoms.get_forces(), dtype=float)
         snap = atoms.copy()
-        snap.calc = SinglePointCalculator(
-            snap,
-            energy=float(atoms.get_potential_energy()),
-            forces=np.asarray(atoms.get_forces(), dtype=float),
-        )
+        snap.calc = SinglePointCalculator(snap, energy=energy, forces=forces)
         return original_dump(self, snap, method)
 
     TrainingSet.dump = dump
     _READY = True
+
+
+def _remember_path(images) -> None:
+    active = _ACTIVE.get()
+    if active is None:
+        return
+    signature = np.concatenate(
+        [np.asarray(image.positions, dtype=np.float64).reshape(-1) for image in images]
+    ).tobytes()
+    state = active["state"]
+    state["path_same"] = state.get("path_sig") == signature
+    state["path_sig"] = signature
+
+
+def _advance_reset_block(band, atoms, label: str) -> None:
+    """Append the repeated observation through the next reset.
+
+    The published loop stores one copy per step and resets when the
+    step is a multiple of 50. Writing those copies here leaves the
+    training set at that reset unchanged.
+    """
+    step = int(band.step)
+    reset = (step // 50 + 1) * 50
+    copies = reset - step - 1
+    if copies <= 0:
+        return
+    for _ in range(copies):
+        band.train.dump(atoms, "neb")
+    band.step = reset - 1
+    print(
+        f"{label} spin step={step} reset={reset} copies={copies}",
+        file=sys.stderr,
+        flush=True,
+    )
 
 
 class _Spec(Calculator):
@@ -491,6 +538,14 @@ class _Spec(Calculator):
         self.state = state
         self.label = label
 
+    def get_potential_energy(self, atoms=None, force_consistent=False):
+        active = _ACTIVE.get()
+        band = None if active is None else active.get("band")
+        target = self.atoms if atoms is None else atoms
+        if band is not None and target is band.atoms:
+            self.results = {}
+        return Calculator.get_potential_energy(self, atoms, force_consistent=force_consistent)
+
     def calculate(self, atoms=None, properties=("energy", "forces"), system_changes=all_changes):
         Calculator.calculate(self, atoms, properties, system_changes)
         free = np.asarray(atoms.get_positions(), dtype=np.float64)
@@ -498,11 +553,17 @@ class _Spec(Calculator):
         full[self.mask] = free
         key = tuple(float(value) for value in full.reshape(-1))
         fresh, cached = self.counter.charge(key)
+        advance = None
         if not fresh:
             if not self.counter._verifying:
-                self.state["repeats"] = int(self.state["repeats"]) + 1
-                if self.state["repeats"] >= _STALL_HITS:
-                    raise RepeatedGeometry(self.label)
+                active = _ACTIVE.get()
+                band = None if active is None else active.get("band")
+                if band is not None and atoms is band.atoms and self.state.get("path_same"):
+                    advance = band
+                elif band is None or atoms is band.atoms:
+                    self.state["repeats"] = int(self.state["repeats"]) + 1
+                    if self.state["repeats"] >= _STALL_HITS:
+                        raise RepeatedGeometry(self.label)
             energy, grad = cached
         else:
             self.state["repeats"] = 0
@@ -516,6 +577,8 @@ class _Spec(Calculator):
         self.results["energy"] = float(energy)
         self.results["free_energy"] = float(energy)
         self.results["forces"] = -gradient
+        if advance is not None:
+            _advance_reset_block(advance, atoms, self.label)
 
     def __copy__(self):
         return _Spec(self.counter, self.kind, self.template, self.mask, self.box, self.state, self.label)
@@ -755,48 +818,54 @@ def _run_band_search(
     library_calls = 0
     spring = None
     n_images = int(n_interior) + 2
-    with tempfile.TemporaryDirectory(prefix="gpatom-") as work:
-        os.chdir(work)
-        try:
-            band = AIDNEB(
-                _atoms(reactant[mask]),
-                _atoms(product[mask]),
-                calculator=spec,
-                model_calculator=_Surrogate(_model(aid)),
-                interpolation=str(aid["interpolation"]),
-                n_images=n_images,
-                k=None,
-                mic=False,
-                neb_method=str(aid["neb_method"]),
-                remove_rotation_and_translation=bool(aid["remove_rotation_and_translation"]),
-                max_train_data=int(aid["max_train_data"]),
-                max_train_data_strategy=str(aid["max_train_data_strategy"]),
-                trainingset="observations.traj",
-                trajectory="AIDNEB.traj",
-                trajectory_surrogate="surrogate.traj",
-                use_previous_observations=False,
-            )
-            spring = float(band.spring)
-            n_images = int(band.n_images)
+    active = {"state": tally, "band": None}
+    token = _ACTIVE.set(active)
+    try:
+        with tempfile.TemporaryDirectory(prefix="gpatom-") as work:
+            os.chdir(work)
             try:
-                band.run(
-                    fmax=float(force_norm),
-                    unc_convergence=float(aid["unc_convergence"]),
-                    dt=float(aid["dt"]),
-                    ml_steps=int(aid["ml_steps"]),
-                    max_step=float(aid["max_step"]),
+                band = AIDNEB(
+                    _atoms(reactant[mask]),
+                    _atoms(product[mask]),
+                    calculator=spec,
+                    model_calculator=_Surrogate(_model(aid)),
+                    interpolation=str(aid["interpolation"]),
+                    n_images=n_images,
+                    k=None,
+                    mic=False,
+                    neb_method=str(aid["neb_method"]),
+                    remove_rotation_and_translation=bool(aid["remove_rotation_and_translation"]),
+                    max_train_data=int(aid["max_train_data"]),
+                    max_train_data_strategy=str(aid["max_train_data_strategy"]),
+                    trainingset="observations.traj",
+                    trajectory="AIDNEB.traj",
+                    trajectory_surrogate="surrogate.traj",
+                    use_previous_observations=False,
                 )
-                aid_converged = True
-            except ForceCallCap:
-                hit_cap = True
-            except RepeatedGeometry:
-                repeated = True
-            except _MemoryBudget:
-                memory_stop = True
-            library_calls = int(band.force_calls)
-            positions, energy, forces, candidate = _select_candidate(band, spec, cap)
-        finally:
-            os.chdir(previous)
+                spring = float(band.spring)
+                n_images = int(band.n_images)
+                active["band"] = band
+                try:
+                    band.run(
+                        fmax=float(force_norm),
+                        unc_convergence=float(aid["unc_convergence"]),
+                        dt=float(aid["dt"]),
+                        ml_steps=int(aid["ml_steps"]),
+                        max_step=float(aid["max_step"]),
+                    )
+                    aid_converged = True
+                except ForceCallCap:
+                    hit_cap = True
+                except RepeatedGeometry:
+                    repeated = True
+                except _MemoryBudget:
+                    memory_stop = True
+                library_calls = int(band.force_calls)
+                positions, energy, forces, candidate = _select_candidate(band, spec, cap)
+            finally:
+                os.chdir(previous)
+    finally:
+        _ACTIVE.reset(token)
     if counter.calls >= cap:
         hit_cap = True
     scored = _score_candidate(
