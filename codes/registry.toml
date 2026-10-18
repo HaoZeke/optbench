@@ -102,7 +102,7 @@ repository = "https://github.com/scipy/scipy"
 ref = "1.18.1"
 commit = "e4e854eaa8f18d807cd3496028e257e36caa93cc"
 committed = "2026-08-21"
-note = "1.18.1, BSD-3-Clause. The pin is the commit, not the annotated tag object. Local methods are L-BFGS-B, BFGS, CG, Newton-CG, TNC, trust-exact, trust-krylov, and trust-ncg. Global methods are basinhopping, dual_annealing, differential_evolution, and shgo. Lowest-mode rows use eigsh and LOBPCG on finite-difference Hessian-vector products."
+note = "1.18.1, BSD-3-Clause. The pin is the commit, not the annotated tag object. Local methods are L-BFGS-B, BFGS, CG, Newton-CG, TNC, trust-exact, trust-krylov, and trust-ncg. Global methods are basinhopping, dual_annealing, differential_evolution, and shgo. Lowest-mode rows use eigsh and LOBPCG on finite-difference Hessian-vector products. An 8-start SHGO run with Sobol sampling n=100 was killed by the OOM killer, one worker at about 6.9 GB. No SHGO row."
 
 [[code]]
 id = "sqnm"
@@ -292,7 +292,7 @@ repository = "https://github.com/jax-md/jax-md"
 ref = "jax-md-v0.2.29"
 commit = "a41c7d19f6468f4e5263c32c12c9ed6cba26ebff"
 committed = "2026-08-18"
-note = "0.2.29, Apache-2.0. fire_descent accepts a force function. The row passes the harness gradient through jax.pure_callback with float64 enabled. Defaults are dt_start 0.1, dt_max 0.4, n_min 5, f_inc 1.1, f_dec 0.5, alpha_start 0.1, f_alpha 0.99, and mass 1. One velocity-Verlet step is one force call."
+note = "0.2.29, Apache-2.0. fire_descent accepts a force function. The row passes the harness gradient through jax.pure_callback with float64 enabled. Defaults are dt_start 0.1, dt_max 0.4, n_min 5, f_inc 1.1, f_dec 0.5, alpha_start 0.1, f_alpha 0.99, and mass 1. One velocity-Verlet step is one force call. On minimization/lj38 the default step leaves the cluster and the force stop is met at an energy between -1 and 0, so that row is not ranked. The Morse bulk row stays in the well."
 
 [[code]]
 id = "scgo"

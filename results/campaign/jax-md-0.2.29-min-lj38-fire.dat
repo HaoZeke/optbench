@@ -1,0 +1,35 @@
+# counter harness. One fresh coordinate is one force call.
+# A repeated coordinate is free. A call at the cap is refused and is not counted.
+# Legacy success is the force stop. v2 success also requires Hessian index 0.
+# JAX MD 0.2.29 fire_descent defaults: dt_start 0.1, dt_max 0.4, n_min 5, f_inc 1.1, f_dec 0.5, alpha_start 0.1, f_alpha 0.99, mass 1. The harness gradient is the force. Float64 is enabled. One Verlet step is one force call. On the archived LJ38 starts the default step leaves the cluster, and the force stop is met at an energy between -1 and 0. This row is not ranked.
+force_calls 6
+force_calls_min 2
+force_calls_max 98
+force_calls_median 2
+nfailed 0
+median 2
+code jax-md
+code_version 0.2.29
+commit a41c7d19f6468f4e5263c32c12c9ed6cba26ebff
+algorithm FIRE
+template jax-md/min-lj38-fire
+problem minimization/lj38
+tuning default
+counter harness
+cap 10000
+par2_mean 1145.496
+wilson_low 0.926862932341
+wilson_high 0.955746559641
+par2_median 2
+par2_median_low 2
+par2_median_high 2
+v2_nfailed 57
+v2_successes 943
+n 1000
+n_cap 0
+n_wrong_stationary 57
+n_divergence 0
+n_crash 0
+energy_min -1.00358888703
+energy_max 0
+ranked false

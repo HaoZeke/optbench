@@ -228,7 +228,13 @@ def specs() -> list[dict]:
                     "JAX MD 0.2.29 fire_descent defaults: dt_start 0.1, dt_max 0.4, n_min 5, "
                     "f_inc 1.1, f_dec 0.5, alpha_start 0.1, f_alpha 0.99, mass 1. "
                     "The harness gradient is the force. Float64 is enabled. One Verlet step is one force call."
+                    + (
+                        " On the archived LJ38 starts the default step leaves the cluster, and the force stop is met at an energy between -1 and 0. This row is not ranked."
+                        if slug == "lj38"
+                        else ""
+                    )
                 ),
+                ranked=slug != "lj38",
             )
         )
         found.append(
