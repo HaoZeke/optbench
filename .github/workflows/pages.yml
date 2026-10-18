@@ -19,6 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+        with:
+          # the site rebuild reads the same historical pins as the board
+          fetch-depth: 0
 
       - uses: prefix-dev/setup-pixi@v0.9.4
         with:
