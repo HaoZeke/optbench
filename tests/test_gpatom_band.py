@@ -201,6 +201,26 @@ def test_kernel_budget_fits_lj38_and_stops_a_large_pt_factor():
     assert _kernel_pair_bytes(80, 175) > _KERNEL_BYTES
 
 
+def test_repeated_observation_is_not_a_second_force_call(tmp_path):
+    prepare()
+    from ase import Atoms
+    from gpatom.io import TrainingSet
+
+    counter = HarnessCounter(cache=True, cap=5)
+    template = np.zeros((2, 3))
+    mask = np.array([True, True])
+    spec = _Spec(counter, "lj", template, mask, None, {"repeats": 0}, "pair")
+    atoms = Atoms(numbers=[1, 1], positions=[[0.0, 0.0, 0.0], [1.1, 0.0, 0.0]])
+    atoms.calc = spec
+    atoms.get_potential_energy()
+    spent = counter.calls
+    train = TrainingSet(str(tmp_path / "observations.traj"), False)
+    train.dump(atoms, "neb")
+    train.dump(atoms, "neb")
+    assert counter.calls == spent == 1
+    assert len(train.load_set()) == 1
+
+
 def test_repeated_path_advances_to_the_next_reset():
     from types import SimpleNamespace
 

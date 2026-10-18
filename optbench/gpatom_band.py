@@ -36,10 +36,9 @@ the allocation, and that start is scored from the path so far.
 
 Every fiftieth step the loop returns to the initial interpolation.
 Inside one of those blocks the path and the acquired geometry can
-repeat. The potential is not evaluated again. The remaining
-iterations of that block still append the same observation, once per
-step, and the next reset reads that training set. Those copies are
-written together and the step moves to the reset.
+repeat. The potential is not evaluated again. That geometry is
+already in the training set, so the store leaves the set as it is.
+The step advances to the next reset, and the reset reads that set.
 """
 
 from __future__ import annotations
@@ -501,11 +500,11 @@ def _remember_path(images) -> None:
 
 
 def _advance_reset_block(band, atoms, label: str) -> None:
-    """Append the repeated observation through the next reset.
+    """Move a repeated acquisition to the next reset.
 
-    The published loop stores one copy per step and resets when the
-    step is a multiple of 50. Writing those copies here leaves the
-    training set at that reset unchanged.
+    The published loop offers the observation once per step and resets
+    when the step is a multiple of 50. Offering the same copies here
+    leaves the training set at that reset unchanged.
     """
     step = int(band.step)
     reset = (step // 50 + 1) * 50
