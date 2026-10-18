@@ -610,10 +610,11 @@ def run_template(
 
     def emit() -> dict:
         records = list(by_name.values())
-        if len(records) < full or partial:
-            held = partial or f"scored {len(records)} of {full} starts"
+        counted = f"scored {len(records)} of {full} starts"
+        if len(records) < full:
+            held = f"{partial}; {counted}" if partial else counted
         else:
-            held = ""
+            held = partial
         return _write_outputs(
             output, records, template, problem, cap, minimum, tolerance, held, version, commit, options
         )
