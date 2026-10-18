@@ -202,7 +202,7 @@ It does not run a campaign.
    </tbody></table>
    <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <h3>Partial</h3><ul>
-   <li>eon-svn/bh-lj38 Eon svn campaign n=48, result file sets partial true.</li>
+   <li>eon-svn/bh-lj38 Eon svn campaign n=67, result file sets partial true.</li>
    </ul>
    </section>
    <section class="bench" id="hTST-Al" data-problem="hTST/Al">
