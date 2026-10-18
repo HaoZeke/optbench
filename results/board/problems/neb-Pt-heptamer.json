@@ -108,7 +108,7 @@
       "entry": "gpatom-1.0.1-aidneb-neb-pt-heptamer",
       "failures": {
         "cap": 0,
-        "crash": 1,
+        "crash": 2,
         "divergence": 0,
         "wrong_stationary": 0
       },
@@ -123,8 +123,8 @@
       "median_low": 20000.0,
       "median_per_image": 7.75,
       "min_calls": 62.0,
-      "n": 1,
-      "nfailed": 1,
+      "n": 2,
+      "nfailed": 2,
       "note": "starts.jsonl",
       "par2_mean": 20000.0,
       "partial": true,
@@ -137,7 +137,7 @@
       "success_rate": 0.0,
       "template": "gpatom/aidneb",
       "tuning": "default",
-      "wilson_high": 0.7934506856227626,
+      "wilson_high": 0.6576197724933469,
       "wilson_low": 0.0
     },
     {
