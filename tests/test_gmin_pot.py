@@ -79,3 +79,24 @@ def test_cap_is_not_counted():
     assert second[2] == 1
     assert server.snapshot()["calls"] == 1
     assert server.snapshot()["cap_hit"] is True
+
+
+def test_compiled_lennard_jones_matches_the_harness():
+    from optbench.gmin_pot import lennard_jones_compiled
+
+    root = Path(__file__).resolve().parents[1]
+    for name in ("lj38", "lj75", "lj98", "lj150"):
+        pos = np.loadtxt(root / "codes" / "gmin" / "reference" / f"{name}.points")
+        expected_energy, expected_grad = lennard_jones(pos)
+        energy, grad = lennard_jones_compiled(pos)
+        scale = max(1.0, abs(expected_energy))
+        assert abs(energy - expected_energy) / scale < 1e-12
+        assert np.max(np.abs(grad - expected_grad)) / max(1.0, np.max(np.abs(expected_grad))) < 1e-12
+    rng = np.random.default_rng(20261018)
+    pos = rng.normal(size=(75, 3))
+    pos[0] = pos[1] + rng.normal(scale=0.05, size=3)
+    expected_energy, expected_grad = lennard_jones(pos)
+    energy, grad = lennard_jones_compiled(pos)
+    scale = max(1.0, abs(expected_energy))
+    assert abs(energy - expected_energy) / scale < 1e-12
+    assert np.max(np.abs(grad - expected_grad)) / max(1.0, np.max(np.abs(expected_grad))) < 1e-12

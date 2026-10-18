@@ -15,11 +15,15 @@ the float64 gradient. Status 0 is a result, 1 is the force-call cap
 
 from __future__ import annotations
 
+import ctypes
 import math
 import socket
 import struct
+import subprocess
+import tempfile
 import threading
 from collections.abc import Callable
+from pathlib import Path
 
 import numpy as np
 
@@ -188,3 +192,42 @@ class GminServer:
     def _send(self, conn: socket.socket, status: int, energy: float, grad: np.ndarray) -> None:
         body = np.ascontiguousarray(grad, dtype="<f8")
         conn.sendall(_HEADER.pack(int(status), float(energy), int(self._counter.calls)) + body.tobytes())
+
+
+_LJ40 = None
+
+
+def lennard_jones_compiled(coords: np.ndarray) -> tuple[float, np.ndarray]:
+    """Compiled unshifted LJ with the harness parameters.
+
+    Epsilon 1, sigma 1, cutoff 40, no shift. This is the same function as
+    ``optbench.potentials.lennard_jones``. The campaign server calls it so a
+    multi-million-call basin-hopping run is not bound to the Python pair loop.
+    """
+    global _LJ40
+    if _LJ40 is None:
+        source = Path(__file__).resolve().parents[1] / "codes" / "gmin" / "lj40.c"
+        library = Path(tempfile.gettempdir()) / "optbench-lj40.so"
+        if not library.is_file() or library.stat().st_mtime < source.stat().st_mtime:
+            subprocess.check_call(
+                ["gcc", "-O3", "-shared", "-fPIC", str(source), "-o", str(library)],
+            )
+        loaded = ctypes.CDLL(str(library))
+        loaded.optbench_lj40.argtypes = [
+            ctypes.c_int,
+            ctypes.POINTER(ctypes.c_double),
+            ctypes.POINTER(ctypes.c_double),
+            ctypes.POINTER(ctypes.c_double),
+        ]
+        _LJ40 = loaded
+    pos = np.ascontiguousarray(coords, dtype=np.float64).reshape(-1, 3)
+    natoms = int(pos.shape[0])
+    energy = ctypes.c_double()
+    grad = np.zeros(natoms * 3, dtype=np.float64)
+    _LJ40.optbench_lj40(
+        natoms,
+        pos.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
+        ctypes.byref(energy),
+        grad.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
+    )
+    return float(energy.value), grad

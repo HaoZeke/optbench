@@ -34,6 +34,7 @@ import numpy as np
 
 from optbench.counter import HarnessCounter
 from optbench.failures import classify_failure
+from optbench.gmin_pot import lennard_jones_compiled
 from optbench.potentials import lennard_jones, read_con
 from optbench.score import score_v2, summarize_capped
 from optbench.v2 import collect_provenance, write_starts
@@ -287,7 +288,7 @@ def run_one(job: dict) -> dict:
     coords = job["coords"]
     (work / "coords").write_text(_coords_text(coords, int(job["replicas"])), encoding="utf-8")
     counter = HarnessCounter(cache=False, cap=int(job["cap"]))
-    server = GminServer(lennard_jones, counter, sloppy_rms=float(job["sloppyconv"]))
+    server = GminServer(lennard_jones_compiled, counter, sloppy_rms=float(job["sloppyconv"]))
     server.start()
     env = os.environ.copy()
     env["OPTBENCH_POTHOST"] = "127.0.0.1"
@@ -530,6 +531,7 @@ def run_template(
         "cutoff": 40.0,
     }
     jobs = []
+    lennard_jones_compiled(np.zeros((1, 3)))
     for index, (name, pos) in enumerate(loaded):
         if pos.shape != (natoms, 3):
             raise ValueError(f"{name} has {pos.shape[0]} atoms, not {natoms}")
