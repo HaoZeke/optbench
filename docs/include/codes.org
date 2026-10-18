@@ -105,6 +105,17 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
+   <tr data-problem="minimization/lj38-noise" data-template="noise/rgmin-dogleg-s0">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="template">noise/rgmin-dogleg-s0</td>
+   <td data-field="version">rgmin 0.4.1</td>
+   <td data-field="commit">9a2e7ff11fa6</td>
+   <td data-field="par2_mean">81.881</td>
+   <td data-field="mean_calls">81.881</td>
+   <td data-field="median_calls">79</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">1000</td>
+   </tr>
    <tr data-problem="minimization/morse-bulk" data-template="rgmin/morse-newton">
    <td>Morse bulk</td>
    <td data-field="template">rgmin/morse-newton</td>
@@ -185,6 +196,17 @@
    <td data-field="median_calls">314</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
+   </tr>
+   <tr data-problem="saddle-search/pt-island" data-template="rgsaddle/saddle-dimer-rotskip-tuned">
+   <td>Pt heptamer island</td>
+   <td data-field="template">rgsaddle/saddle-dimer-rotskip-tuned</td>
+   <td data-field="version">rgsaddle 0.2.2</td>
+   <td data-field="commit">c0db2b8d333c</td>
+   <td data-field="par2_mean">10127.1</td>
+   <td data-field="mean_calls">619.017</td>
+   <td data-field="median_calls">550</td>
+   <td data-field="failures">crash 0, divergence 17717, cap 2246, wrong_stationary 35</td>
+   <td data-field="n">20000</td>
    </tr>
    <tr data-problem="tsopt/LJ38" data-template="rgsaddle/prfo-tuned">
    <td>LJ38</td>
@@ -267,6 +289,17 @@
    <td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
+   <tr data-problem="minimization/lj38-noise" data-template="noise/ase-lbfgs-s0">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="template">noise/ase-lbfgs-s0</td>
+   <td data-field="version">ASE 3.29.0</td>
+   <td data-field="commit">f27c0005ae6a</td>
+   <td data-field="par2_mean">396.55</td>
+   <td data-field="mean_calls">326.761</td>
+   <td data-field="median_calls">256.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 5, wrong_stationary 1</td>
+   <td data-field="n">1000</td>
+   </tr>
    <tr data-problem="minimization/morse-bulk" data-template="ase/morse-bfgslinesearch-default">
    <td>Morse bulk</td>
    <td data-field="template">ase/morse-bfgslinesearch-default</td>
@@ -322,6 +355,17 @@
    <td data-field="mean_calls">253.921</td>
    <td data-field="median_calls">248</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-template="noise/sella-min-s0">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="template">noise/sella-min-s0</td>
+   <td data-field="version">Sella 2.6.0</td>
+   <td data-field="commit">6cfb60cdb100</td>
+   <td data-field="par2_mean">729.433</td>
+   <td data-field="mean_calls">710.211</td>
+   <td data-field="median_calls">691.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 1</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-template="sella/morse-min-default">

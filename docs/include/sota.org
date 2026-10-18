@@ -14,9 +14,8 @@
    <h3>Lennard-Jones 38 clusters with Gaussian force noise</h3>
    <table data-board-table="headline" data-problem="minimization/lj38-noise">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="13">No full harness row.</td></tr>
+   <tr><td data-field="template">noise/rgmin-dogleg-s0</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">81.881</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.996173</td><td data-field="wilson_high">1</td><td data-field="median_calls">79</td><td data-field="mean_calls">81.881</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">1000</td></tr>
    </tbody></table>
-   <p class="bench-gaps">No committed harness run.</p>
    <p><a href="generated/suites/minimization.html#lj38-noise">Ranked table, performance profile, and the 2014 archive</a>.</p>
    <h3>Morse bulk</h3>
    <table data-board-table="headline" data-problem="minimization/morse-bulk">
@@ -29,7 +28,7 @@
    <h3>Pt heptamer island</h3>
    <table data-board-table="headline" data-problem="saddle-search/pt-island">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="13">No full harness row.</td></tr>
+   <tr><td data-field="template">rgsaddle/saddle-dimer-rotskip-tuned</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">10127.1</td><td data-field="success_rate">0.0001</td><td data-field="wilson_low">2.7424e-05</td><td data-field="wilson_high">0.000364574</td><td data-field="median_calls">550</td><td data-field="mean_calls">619.017</td><td data-field="failures">crash 0, divergence 17717, cap 2246, wrong_stationary 35</td><td data-field="n">20000</td></tr>
    </tbody></table>
    <p class="bench-gaps">Eon rows are not yet on the harness counter. Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/saddle-search.html#pt-island">Ranked table, performance profile, and the 2014 archive</a>.</p>

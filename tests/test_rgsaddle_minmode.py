@@ -18,6 +18,14 @@ from optbench.surfaces import lennard_jones, morse_smooth_linear, read_con
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def test_island_saddle_success_is_a_cartesian_connection():
+    problem = resolve_problem(ROOT, "saddle-search/pt-island")
+    success = problem["scoring"]["v2"]["success"]
+    assert "Cartesian RMSD" in success
+    assert "Kabsch" not in success
+    assert "max_force_calls" not in (problem.get("convergence") or {})
+
+
 def test_lennard_jones_minimum_is_minus_one():
     distance = 2.0 ** (1.0 / 6.0)
     energy, gradient = lennard_jones(np.array([[0.0, 0.0, 0.0], [distance, 0.0, 0.0]]))
