@@ -203,12 +203,17 @@ def _coords_text(coords: list[list[float]], replicas: int) -> str:
 def _command(binary: str, replicas: int) -> list[str]:
     # mpirun -np 1 as well. A direct launch of the MPI binary leaves the
     # replica index unset unless OpenMPI singleton initialises the same way.
+    # Yield while a replica waits on the harness socket. Otherwise the ranks
+    # spin and the potential server loses the core.
     mpirun = shutil.which("mpirun")
     if not mpirun:
         raise RuntimeError("GMIN MPI binary needs mpirun")
     return [
         mpirun,
         "--oversubscribe",
+        "--mca",
+        "mpi_yield_when_idle",
+        "1",
         "-np",
         str(replicas),
         "--bind-to",

@@ -99,5 +99,10 @@ def test_bhpt_keyword_order_and_repeated_coords():
     serial_text = _data_text(serial)
     assert serial_text.startswith("MPI\n")
     assert "BHPT" not in serial_text
+    from optbench.runners.gmin_go import _command
+
+    command = _command("/tmp/gmin-build/GMIN", 4)
+    assert command[command.index("-np") + 1] == "4"
+    assert "mpi_yield_when_idle" in command
     coords = _coords_text([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0]], 4)
     assert len(coords.splitlines()) == 8
