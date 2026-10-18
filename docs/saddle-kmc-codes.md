@@ -51,11 +51,24 @@ success-only median. A row with no success has no median.
 | minimization/lj38-noise | lammps/cg-lj38-noise-s1em3 | 997/1000 | 3 divergence | 1776 |
 | minimization/lj38-noise | lammps/cg-lj38-noise-s1em2 | 874/1000 | 88 divergence, 38 wrong stationary | 1310 |
 | minimization/lj38-noise | lammps/sd-lj38-noise-s0 | 383/1000 | 617 cap | 5252 |
+| minimization/lj38-noise | lammps/sd-lj38-noise-s1em4 | 12/1000 | 988 cap | 6037 |
+| minimization/lj38-noise | lammps/sd-lj38-noise-s1em3 | 684/1000 | 313 cap, 3 wrong stationary | 5905.5 |
+| minimization/lj38-noise | lammps/sd-lj38-noise-s1em2 | 698/1000 | 227 cap, 75 wrong stationary | 5627.5 |
+| minimization/lj38-noise | lammps/hftn-lj38-noise-s0 | 997/1000 | 3 wrong stationary | 974 |
+| minimization/lj38-noise | lammps/hftn-lj38-noise-s1em4 | 224/1000 | 776 divergence | 6945 |
+| minimization/lj38-noise | lammps/hftn-lj38-noise-s1em3 | 283/1000 | 713 divergence, 4 wrong stationary | 6882 |
 | minimization/lj38 | dlfind/lbfgs-lj38 | 998/1000 | 1 cap, 1 wrong stationary | 184 |
 | minimization/lj38 | dlfind/sd-lj38 | 990/1000 | 10 cap | 2563.5 |
 | minimization/lj38-noise | dlfind/sd-lj38-noise-s0 | 990/1000 | 10 cap | 2563.5 |
 | minimization/lj38-noise | dlfind/sd-lj38-noise-s1em4 | 991/1000 | 8 cap, 1 wrong stationary | 2564 |
 | minimization/lj38-noise | dlfind/sd-lj38-noise-s1em3 | 996/1000 | 3 cap, 1 wrong stationary | 2371 |
+| minimization/lj38-noise | dlfind/sd-lj38-noise-s1em2 | 955/1000 | 45 wrong stationary | 1778 |
+| minimization/lj38 | dlfind/cg-lj38 | 991/1000 | 9 cap | 2541 |
+| minimization/morse-bulk | dlfind/cg-morse | 18/100 | 82 wrong stationary | 250 |
+| minimization/lj38-noise | dlfind/cg-lj38-noise-s0 | 991/1000 | 9 cap | 2541 |
+| minimization/lj38-noise | dlfind/cg-lj38-noise-s1em4 | 993/1000 | 6 cap, 1 wrong stationary | 2511 |
+| minimization/lj38-noise | dlfind/cg-lj38-noise-s1em3 | 995/1000 | 3 cap, 2 wrong stationary | 2329 |
+| minimization/lj38-noise | dlfind/cg-lj38-noise-s1em2 | 956/1000 | 44 wrong stationary | 1718 |
 | minimization/lj38-noise | dlfind/lbfgs-lj38-noise-s0 | 998/1000 | 1 cap, 1 wrong stationary | 184 |
 | minimization/lj38-noise | dlfind/lbfgs-lj38-noise-s1em4 | 998/1000 | 2 wrong stationary | 184 |
 | minimization/lj38-noise | dlfind/lbfgs-lj38-noise-s1em3 | 999/1000 | 1 wrong stationary | 209 |
@@ -63,6 +76,7 @@ success-only median. A row with no success has no median.
 | minimization/morse-bulk | dlfind/lbfgs-morse | 32/100 | 68 wrong stationary | 77 |
 | minimization/morse-bulk | dlfind/sd-morse | 13/100 | 87 wrong stationary | 253 |
 | minimization/morse-bulk | optim/lbfgs-morse | 13/100 | 87 wrong stationary | 72 |
+| minimization/lj38 | optim/lbfgs-lj38 | 998/1000 | 2 wrong stationary | 217 |
 | double-ended-saddle-search/lj38 | compass/sqnm | 47/50 | 3 cap | 1221 |
 | double-ended-saddle-search/lj38_2ts_separation | compass/sqnm | 41/51 | 9 cap, 1 wrong stationary | 2265 |
 | neb/Pt-heptamer | compass/sqnm | 13/13 | 0 | 548 |
@@ -78,6 +92,7 @@ success-only median. A row with no success has no median.
 | lowest-eigenvector/lj38 | pysisyphus/lanczos-lj38 | 160/200 | 40 divergence | 22 |
 | minimization/lj38 | pysisyphus/lbfgs-lj38 | 0/1000 | 1000 cap | — |
 | minimization/lj38 | pysisyphus/cg-lj38 | 254/1000 | 745 cap, 1 wrong stationary | 693 |
+| minimization/lj38 | pysisyphus/sd-lj38 | 205/1000 | 795 cap | 808 |
 
 The rgsaddle band campaigns on `neb/Pt-heptamer` and the three double-ended
 problems are on disk (12 templates each). The saddle-search catalog on
@@ -129,7 +144,8 @@ the cap. The relay refuses the call that would pass the cap and does not
 count it. A one-start check on LJ38 `cluster_0000` made 228 harness calls.
 OPTIM reported 228 energy-and-gradient calls. The stored point re-evaluates
 to energy `-163.2168156980899` and Euclidean force `0.00817050460275337`.
-That check is not a campaign row. Morse bulk L-BFGS is 13 of 100. The
+That check is not itself a campaign row. The 1000-start LJ38 L-BFGS row is
+998 of 1000, 2 wrong stationary, success median 217. Morse bulk L-BFGS is 13 of 100. The
 other 87 meet the force stop with a Hessian index other than 0, so they
 are wrong stationary. The success median is 72. Start `pos_0000` took 55
 harness calls and stopped at force `0.000842553062284986`, energy
@@ -196,8 +212,16 @@ LJ38 row, success median 1410. At sigma `1e-4` it is 896 of 1000, 100 cap,
 is 997 of 1000, 3 divergence, success median 1776. At sigma `1e-2` it is
 874 of 1000, 88 divergence, 38 wrong stationary, success median 1310.
 Zero-noise steepest descent is 383 of 1000, 617 cap, success median 5252,
-the same split as the clean LJ38 row. The other steepest-descent, Hessian-free
-Newton, quickmin, and FIRE noise rows are not in these rows. `fix neb` needs a multi-partition MPI
+the same split as the clean LJ38 row. At sigma `1e-4` steepest descent is
+12 of 1000, 988 cap, success median 6037. At sigma `1e-3` it is 684 of
+1000, 313 cap, 3 wrong stationary, success median 5905.5. At sigma `1e-2`
+it is 698 of 1000, 227 cap, 75 wrong stationary, success median 5627.5.
+Zero-noise Hessian-free Newton is 997 of 1000, 3 wrong stationary, success
+median 974, the same split as the clean LJ38 row. At sigma `1e-4` it is
+224 of 1000, 776 divergence, success median 6945. At sigma `1e-3` it is
+283 of 1000, 713 divergence, 4 wrong stationary, success median 6882.
+Hessian-free Newton at sigma `1e-2`, and the quickmin and FIRE noise rows,
+are not in these rows. `fix neb` needs a multi-partition MPI
 run and is not scored. `prd`, `tad`,
 `hyper`, and `dynamical_matrix` are not scored. The Al, Pt, and aladatom
 problems are EAM, and the harness has no EAM evaluator.
@@ -213,8 +237,15 @@ success median 2563.5. Steepest descent on Morse bulk is 13 of 100, 87
 wrong stationary, success median 253. Steepest descent on zero-noise LJ38
 is 990 of 1000, 10 cap, success median 2563.5. At sigma `1e-4` it is 991
 of 1000, 8 cap, 1 wrong stationary, success median 2564. At sigma `1e-3`
-it is 996 of 1000, 3 cap, 1 wrong stationary, success median 2371. Conjugate
-gradient and the `1e-2` steepest-descent noise row are not in these rows. NEB (`icoord` 190)
+it is 996 of 1000, 3 cap, 1 wrong stationary, success median 2371. At sigma
+`1e-2` it is 955 of 1000, 45 wrong stationary, success median 1778.
+Conjugate gradient on LJ38 is 991 of 1000, 9 cap, success median 2541.
+On Morse bulk it is 18 of 100, 82 wrong stationary, success median 250.
+Zero-noise conjugate gradient matches the clean LJ38 row. At sigma `1e-4`
+it is 993 of 1000, 6 cap, 1 wrong stationary, success median 2511. At
+sigma `1e-3` it is 995 of 1000, 3 cap, 2 wrong stationary, success median
+2329. At sigma `1e-2` it is 956 of 1000, 44 wrong stationary, success
+median 1718. NEB (`icoord` 190)
 and the dimer (`icoord` near 210) are not in these rows.
 
 ## COMPASS
@@ -241,7 +272,8 @@ gradient, and steepest descent keep the library step limits in Bohr and
 call the potential in the harness unit. On start `cluster_0000` each one
 used the cap of 10000 with the force still above 0.01. The 1000-start
 L-BFGS row does the same on every start. Conjugate gradient is 254 of 1000,
-745 cap, 1 wrong stationary, success median 693. Steepest descent is running. The dimer drops translation and not rotation. The NEB
+745 cap, 1 wrong stationary, success median 693. Steepest descent is 205 of
+1000, 795 cap, success median 808. The dimer drops translation and not rotation. The NEB
 springs stay at `k_min` 0.1 and `k_max` 0.3. Those two drivers are not
 connected, so there is no pysisyphus row for `tsopt/*`,
 `saddle-search/pt-island`, `double-ended-saddle-search/*`, or

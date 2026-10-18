@@ -656,15 +656,15 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 3</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/lj38-noise" data-template="lammps/cg-lj38-noise-s1em3">
+   <tr data-problem="minimization/lj38-noise" data-template="lammps/hftn-lj38-noise-s0">
    <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
-   <td data-field="template">lammps/cg-lj38-noise-s1em3</td>
+   <td data-field="template">lammps/hftn-lj38-noise-s0</td>
    <td data-field="version">lammps 30 Sep 2026</td>
    <td data-field="commit">8de817dd79bf</td>
-   <td data-field="par2_mean">2046.69</td>
-   <td data-field="mean_calls">1993.39</td>
-   <td data-field="median_calls">1776.5</td>
-   <td data-field="failures">crash 0, divergence 3, cap 0, wrong_stationary 0</td>
+   <td data-field="par2_mean">1123.81</td>
+   <td data-field="mean_calls">1066.61</td>
+   <td data-field="median_calls">974</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 3</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-template="lammps/fire-morse">
@@ -837,6 +837,17 @@
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="minimization/lj38" data-template="optim/lbfgs-lj38">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="template">optim/lbfgs-lj38</td>
+   <td data-field="version">optim svn-snapshot</td>
+   <td data-field="commit">02aaf45245af</td>
+   <td data-field="par2_mean">270.341</td>
+   <td data-field="mean_calls">230.724</td>
+   <td data-field="median_calls">217</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 2</td>
+   <td data-field="n">1000</td>
+   </tr>
    <tr data-problem="minimization/morse-bulk" data-template="optim/lbfgs-morse">
    <td>Morse bulk</td>
    <td data-field="template">optim/lbfgs-morse</td>
