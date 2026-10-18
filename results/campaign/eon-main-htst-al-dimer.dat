@@ -1,10 +1,10 @@
 barrier_jobs 45
-barrier_force_calls 5.701e+03
-barrier_windows 280
-rate_jobs 6962
-rate_force_calls  8.358e+05
-rate_windows 1
-searches 12764
+barrier_force_calls 5.668e+03
+barrier_windows 400
+rate_jobs 5267
+rate_force_calls  6.596e+05
+rate_windows 3
+searches 18268
 missed_barriers 0
 unexpected_barriers 0
 reference_processes 8
@@ -16,8 +16,8 @@ reducer harness-htst
 contributor Rohit Goswami
 random_seed 42
 communicator_jobs 8
-passes 164
-seconds 2608.71
+passes 336
+seconds 4983.46
 algorithm Dimer-CG rotation: max=50 tol=1
 template eon/htst-al-dimer
 problem hTST/Al
