@@ -108,11 +108,13 @@ def _one_repetition(
     try:
         os.chdir(work)
         from eon.akmc import akmc
-        from eon.config import ConfigClass
+        from eon.config import config
 
         try:
-            config = ConfigClass()
-            # Construction only loads the schema. init() reads config.ini.
+            # r2549 helper functions read the module singleton, not the
+            # object passed into akmc(). Reset so a second seed in this
+            # process loads the new config.ini.
+            config.init_done = False
             config.init()
         except SystemExit as exc:
             last_error = f"config exit {exc.code}"

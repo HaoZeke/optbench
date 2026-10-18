@@ -1,0 +1,42 @@
+id = "eon-svn/de-pt-ci"
+engine = "eon-client"
+problem = "double-ended-saddle-search/pt-island"
+code = "Eon svn"
+code_version = "r2549"
+commit = "r2549"
+algorithm = "LBFGS"
+reducer = "harness"
+failure_cap = 3000
+tuning = "default"
+note = """Climbing-image NEB, same stops as eon/de-pt-lbfgs. Three images, L-BFGS memory 20, max_move 0.2, max_iterations 1000, converged_force 0.001. The harness cap is 3000. Potential morse_pt. r2549 does not read energy_weighted, ci_mmf, climbing_image_band_slack, setup_mmf_peaks, or the develop L-BFGS catalog past memory, inverse curvature, max inverse curvature, auto scale, and the two resets. Those keys are omitted. The keys it does read sit in [Optimizer]. The run swaps the potential for ext_pot. The harness kernel is the develop kernel for this potential name. morse_pt here is the develop pair Morse with no cutoff. The 2014 table used r2156. The binary is SVN r2549, the registry pin. Export of the 2014 revision is forbidden, so this row is r2549."""
+
+
+[ini.Main]
+job = "nudged_elastic_band"
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+convergence_metric = "norm"
+converged_force = 0.001
+max_move = 0.2
+max_iterations = 1000
+lbfgs_memory = 20
+lbfgs_inverse_curvature = 0.01
+lbfgs_max_inverse_curvature = 0.0
+lbfgs_auto_scale = true
+lbfgs_angle_reset = true
+lbfgs_distance_reset = true
+
+[ini."Nudged Elastic Band"]
+images = 3
+spring = 5.0
+climbing_image_method = true
+climbing_image_converged_only = true
+old_tangent = false
+doubly_nudged = false
+doubly_nudged_switching = false
+converged_force = 0.001
+max_iterations = 1000

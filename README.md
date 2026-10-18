@@ -159,7 +159,7 @@ uv run optbench pairs \
 
 `eon-ci-swdneb` is the doubly nudged row. A start at or above 2500 force calls is left out of the mean. The climbing-image mean is 809 with 2 failures. The doubly nudged mean is 708 with 5 failures.
 
-The Henkelman client is revision 2549 of <https://theory.cm.utexas.edu/svn/eon>. A checkout of older revisions fails where historical paths are gone. Export revision 2549. That tree still names a QSC potential whose sources are not in the revision, so the QSC references have to come out of the build or the link fails. The binary should report `r2549`. Templates under `templates/eon-svn/` use the potential name `lj_cluster`. The 3.5.0 templates use `ljcluster`.
+The Henkelman client is revision 2549 of <https://theory.cm.utexas.edu/svn/eon>. A checkout of older revisions fails where historical paths are gone. Export revision 2549. That tree still names a QSC potential whose sources are not in the revision, so the QSC references have to come out of the build or the link fails. The binary should report `r2549`. The minimization templates under `templates/eon-svn/` use `lj_cluster`. The harness rows for the other problems name `ljcluster`, `lj_cut`, `lammps`, or `morse_pt` and run through `ext_pot`. The 3.5.0 templates use `ljcluster`.
 
 ## What a template may set
 

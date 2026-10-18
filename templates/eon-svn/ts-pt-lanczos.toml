@@ -1,0 +1,39 @@
+id = "eon-svn/ts-pt-lanczos"
+engine = "eon-client"
+problem = "tsopt/pt-island"
+code = "Eon svn"
+code_version = "r2549"
+commit = "r2549"
+algorithm = "Lanczos"
+reducer = "harness"
+failure_cap = 10000
+tuning = "default"
+note = """Same Lanczos and conjugate-gradient settings as eon/develop-ts-pt-lanczos. Potential morse_pt. max_move 0.35. The mode is the normalized displacement from the reactant. Main random_seed is 1. The run swaps the potential for ext_pot. The harness kernel is the develop kernel for this potential name. morse_pt here is the develop pair Morse with no cutoff. The 2014 table used r2156. The binary is SVN r2549, the registry pin. Export of the 2014 revision is forbidden, so this row is r2549."""
+
+
+[ini.Main]
+job = "saddle_search"
+finite_difference = 0.001
+random_seed = 1
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "cg"
+convergence_metric = "norm"
+converged_force = 0.001
+max_move = 0.35
+max_iterations = 1000
+
+[ini."Saddle Search"]
+min_mode_method = "lanczos"
+client_displace_type = "load"
+converged_force = 0.001
+max_iterations = 1000
+displace_magnitude = 0.1
+
+[ini.Lanczos]
+tolerance = 0.02
+max_iterations = 15
+quit_early = true

@@ -1,0 +1,70 @@
+id = "eon-svn/saddle-pt-dimer"
+engine = "eon-client"
+problem = "saddle-search/pt-island"
+code = "Eon svn"
+code_version = "r2549"
+commit = "r2549"
+algorithm = "Dimer"
+reducer = "harness"
+failure_cap = 100000000
+tuning = "default"
+note = """AKMC on the Pt island until 27 good saddles below 1.5 eV. Same settings as eon/develop-saddle-pt-dimer where r2549 accepts them. Classic dimer, improved false, rotations_max 20, converged_angle 5, rotation steepest descent. Optimizer L-BFGS memory 20, max_move 0.2, max_iterations 1000, converged_force 0.001. Displacement is restricted to atoms 0-6, radius 3.3, magnitude 0.1. Potential morse_pt. Temperature 700 K. Seeds are 1000 through 1009. pass_limit 800. Main.parallel is unset because the Python schema rejects it. r2549 does not read energy_weighted, ci_mmf, climbing_image_band_slack, setup_mmf_peaks, or the develop L-BFGS catalog past memory, inverse curvature, max inverse curvature, auto scale, and the two resets. Those keys are omitted. The keys it does read sit in [Optimizer]. The run swaps the potential for ext_pot. The harness kernel is the develop kernel for this potential name. morse_pt here is the develop pair Morse with no cutoff. The 2014 dimer row is r2205. The binary is SVN r2549, the registry pin. Export of the 2014 revision is forbidden, so this row is r2549."""
+
+pass_limit = 800
+
+[ini.Main]
+job = "akmc"
+temperature = 700
+finite_difference = 0.001
+random_seed = 1
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+convergence_metric = "norm"
+converged_force = 0.001
+max_move = 0.2
+max_iterations = 1000
+lbfgs_memory = 20
+lbfgs_inverse_curvature = 0.01
+lbfgs_max_inverse_curvature = 0.0
+lbfgs_auto_scale = true
+lbfgs_angle_reset = true
+lbfgs_distance_reset = true
+
+[ini.AKMC]
+confidence = 1.1
+thermally_accessible_window = 99999
+confidence_scheme = "old"
+
+[ini."Process Search"]
+minimize_first = true
+
+[ini.Communicator]
+type = "local"
+num_jobs = 32
+number_of_CPUs = 1
+client_path = "eonclient"
+
+[ini."Saddle Search"]
+min_mode_method = "dimer"
+displace_listed_atom_weight = 1
+displace_atom_list = "0,1,2,3,4,5,6"
+displace_radius = 3.3
+displace_magnitude = 0.1
+max_energy = 5.0
+max_iterations = 1000
+converged_force = 0.001
+
+[ini.Prefactor]
+default_value = 5e12
+
+[ini.Dimer]
+improved = false
+opt_method = "sd"
+converged_angle = 5.0
+rotations_max = 20
+rotations_min = 1
+finite_angle = 0.005
