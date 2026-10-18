@@ -660,6 +660,7 @@ def _judge(client: IpiClient, *, returncode: int | None, log_text: str) -> dict:
         def free_gradient(flat):
             full = np.array(template, copy=True)
             full[mask] = np.asarray(flat, dtype=np.float64).reshape((-1, 3))
+            client.counter.charge(())
             _energy, gradient = evaluate(kind, full, box)
             return np.asarray(gradient, dtype=np.float64)[mask].reshape(-1)
 

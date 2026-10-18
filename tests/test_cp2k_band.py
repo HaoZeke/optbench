@@ -17,6 +17,7 @@ from optbench.cp2k_band import (
     EV_PER_HARTREE,
     IpiClient,
     _HEADER,
+    _judge,
     _read_header,
     _recv_exact,
     binary_path,
@@ -184,6 +185,37 @@ def test_socket_evaluation_uses_hartree_and_bohr():
         (np.array([1.0, 2.0, 3.0]) * ANGSTROM_PER_BOHR).tolist()
     )
     assert client.evals[0]["force"] == pytest.approx(float(np.linalg.norm(gradient)))
+
+
+def test_the_hessian_is_counted_as_verification():
+    positions = np.array([[0.0, 0.0, 0.0], [1.2, 0.0, 0.0]], dtype=np.float64)
+    gradient = np.zeros((2, 3), dtype=np.float64)
+    evals = []
+    for energy in (0.0, 1.0, 0.0):
+        evals.append(
+            {
+                "positions": positions.copy(),
+                "energy": energy,
+                "force": 0.0,
+                "gradient": gradient.copy(),
+            }
+        )
+    client = IpiClient(
+        kind="lj",
+        free=np.array([True, True]),
+        box=None,
+        n_images=3,
+        force_norm=0.001,
+        cap=20,
+        band_type="CI-NEB",
+        counter=HarnessCounter(cache=False, cap=20),
+    )
+    client.evals = evals
+    judged = _judge(client, returncode=0, log_text="")
+    assert client.counter.calls == 0
+    assert client.counter.verify_calls == 2 * 6
+    assert judged["verify_calls"] == 12
+    assert judged["hessian_index"] is not None
 
 
 def test_the_cap_closes_before_the_next_evaluation():
