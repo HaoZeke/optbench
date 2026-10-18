@@ -20,6 +20,9 @@ build-backend = "hatchling.build"
 [tool.hatch.build.targets.wheel]
 packages = ["optbench"]
 
+[tool.hatch.build.targets.wheel.force-include]
+"optbench/extpot_bridge.c" = "optbench/extpot_bridge.c"
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"

@@ -1,0 +1,46 @@
+id = "eon-client/de-2ts-ci-swdneb"
+engine = "eon"
+problem = "double-ended-saddle-search/lj38_2ts_separation"
+code = "eOn"
+code_version = "3.5.0"
+commit = "4d8b34baf1ba8d2d980df29838bac1f969d1662c"
+algorithm = "Doubly nudged CI-NEB"
+reducer = "harness"
+failure_cap = 10000
+kind = "de-2ts"
+kernel = "lj40"
+asv_class = "EonClientDe2tsCiSwdneb"
+note = '''
+No 2014 eon config is in the archive for this problem. The band uses the LJ38 climbing-image settings and the problem cap of 10000 force calls, five interior images, and converged_force 0.001. Doubly nudged, spring 10. The harness kernel is unshifted lj/cut with epsilon 1, sigma 1, and cutoff 40.
+'''
+seeds = [1]
+asv_timeout = 1200
+budget_seconds = 900
+
+[ini.Main]
+job = "nudged_elastic_band"
+
+[ini.Potential]
+potential = "lammps"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+convergence_metric = "norm"
+converged_force = 0.001
+max_move = 0.05
+max_iterations = 1000
+lbfgs_memory = 20
+
+[ini."Nudged Elastic Band"]
+images = 5
+climbing_image_method = true
+climbing_image = true
+doubly_nudged = true
+doubly_nudged_switching = true
+opt_method = "lbfgs"
+converged_force = 0.001
+max_iterations = 1000
+spring = 10
+
+[ini.LBFGS]
+lbfgs_memory = 20
