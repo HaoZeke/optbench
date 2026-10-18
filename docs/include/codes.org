@@ -640,6 +640,63 @@
    <li>pt-island: partial.</li>
    <li>sella-lj38: no per-start record.</li>
    </ul>
+   <h3>pele</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization</td>
+   <td>main</td>
+   <td>b7081b932a06</td>
+   <td><a href="https://github.com/pele-python/pele">https://github.com/pele-python/pele</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="minimization/lj38" data-template="pele/lj38-lbfgs-m100">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="template">pele/lj38-lbfgs-m100</td>
+   <td data-field="version">pele 0.1.2</td>
+   <td data-field="commit">b7081b932a06</td>
+   <td data-field="par2_mean">197.936</td>
+   <td data-field="mean_calls">178.096</td>
+   <td data-field="median_calls">167</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 1</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-template="noise/pele-mylbfgs-s0">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="template">noise/pele-mylbfgs-s0</td>
+   <td data-field="version">pele 0.1.2</td>
+   <td data-field="commit">b7081b932a06</td>
+   <td data-field="par2_mean">268.036</td>
+   <td data-field="mean_calls">248.224</td>
+   <td data-field="median_calls">235</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 1</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-template="pele/morse-lbfgs">
+   <td>Morse bulk</td>
+   <td data-field="template">pele/morse-lbfgs</td>
+   <td data-field="version">pele 0.1.2</td>
+   <td data-field="commit">b7081b932a06</td>
+   <td data-field="par2_mean">92.06</td>
+   <td data-field="mean_calls">92.06</td>
+   <td data-field="median_calls">73</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table></div>
+   <p>No full ranked run</p><ul>
+   <li>pele-lbfgs-M1-maxstep0.1: no per-start record.</li>
+   <li>pele-lbfgs-M10-maxstep0.1: no per-start record.</li>
+   <li>pele-lbfgs-M100-maxstep0.2: no per-start record.</li>
+   <li>pele-lbfgs-M20-maxstep0.1: no per-start record.</li>
+   <li>pele-lbfgs-M4-maxstep0.05: no per-start record.</li>
+   <li>pele-lbfgs-M4-maxstep0.1: no per-start record.</li>
+   <li>pele-lbfgs-M4-maxstep0.2: no per-start record.</li>
+   </ul>
    <h3>pARTn</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
