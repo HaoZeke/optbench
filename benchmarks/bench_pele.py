@@ -200,19 +200,23 @@ _PeleSearch.track_failure_crash.unit = "count"
 def _benchmark(spec: dict):
     bound = spec
     starts = selected_indices(spec["n"])
+    limit = spec["cap"]
+    template_name = spec["template_id"]
+    problem_name = spec["problem_id"]
+    class_name = spec["class_name"]
 
     class _Benchmark(_PeleSearch):
         param_names = ["seed", "start"]
         params = [[SEED], starts]
         # One LJ38 start at the budget is a few minutes. LJ150 is longer.
         timeout = 14400
-        cap = spec["cap"]
+        cap = limit
         spec = bound
-        template_id = spec["template_id"]
-        problem_id = spec["problem_id"]
+        template_id = template_name
+        problem_id = problem_name
 
-    _Benchmark.__name__ = spec["class_name"]
-    _Benchmark.__qualname__ = spec["class_name"]
+    _Benchmark.__name__ = class_name
+    _Benchmark.__qualname__ = class_name
     return _Benchmark
 
 
