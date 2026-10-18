@@ -469,5 +469,17 @@
    </tr>
    </tbody></table></div>
    <p>No full ranked run.</p>
+   <h3>TorchSim</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization</td>
+   <td>v0.6.2</td>
+   <td>5540d893a849</td>
+   <td><a href="https://github.com/TorchSim/torch-sim">https://github.com/TorchSim/torch-sim</a></td>
+   </tr>
+   </tbody></table></div>
+   <p>No full ranked run.</p>
    </section>
 #+end_export
