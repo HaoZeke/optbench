@@ -905,19 +905,6 @@ def _open_pool(workers: int) -> ProcessPoolExecutor:
     return ProcessPoolExecutor(max_workers=workers, initializer=_init_worker, mp_context=ctx)
 
 
-def _climb_batch(pool: ProcessPoolExecutor, specs: list[dict]) -> list[dict]:
-    futures = [pool.submit(_worker_execute, spec) for spec in specs]
-    rows = []
-    for spec, future in zip(specs, futures):
-        try:
-            rows.append(future.result())
-        except BrokenProcessPool:
-            raise
-        except Exception as exc:
-            rows.append(_crash_record(spec, f"{type(exc).__name__}: {exc}", 0))
-    return rows
-
-
 def _judge_climb(
     climbed: dict,
     spec: dict,
@@ -1089,98 +1076,115 @@ def _run_saddle_catalog(
                 )
                 partial_path.unlink(missing_ok=True)
                 saved = []
-            while connected < goal and searches < max_searches:
-                batch = []
-                number = searches
-                for _ in range(min(width, max_searches - searches)):
-                    number += 1
-                    spec = _catalog_displacement(
-                        rng,
-                        listed,
-                        free,
-                        minimum,
-                        positions,
-                        magnitude,
-                        rep,
-                        number,
-                        problem,
-                        template,
-                        cap,
-                        force_tol,
-                        fixed,
-                        cell,
+            drawn = searches
+            pending: deque = deque()
+
+            def _note(number: int, spec: dict, rng_state: dict, climbed: dict) -> None:
+                nonlocal connected, searches
+                record, saved_point, delta = _judge_climb(
+                    climbed,
+                    spec,
+                    outer,
+                    minimum,
+                    min_energy,
+                    found,
+                    connect_rmsd,
+                    barrier_max,
+                    force_tol,
+                    cap,
+                    search_cap,
+                    template["id"],
+                )
+                connected += delta
+                searches = number
+                all_records.append({key: value for key, value in record.items() if key != "climb_calls"})
+                stored = _jsonable(record)
+                stored["rng_state"] = rng_state
+                if saved_point is not None:
+                    stored["saddle_x"] = saved_point.tolist()
+                _append_partial(partial_path, stored)
+                if searches == 1 or searches % 25 == 0 or connected >= goal:
+                    print(
+                        f"{template['id']} rep {rep} searches {searches} connected {connected} "
+                        f"calls {record['force_calls']} failure {record['failure']}",
+                        flush=True,
                     )
-                    batch.append((number, spec, _rng_state(rng)))
+                if searches % 100 == 0:
+                    provisional = comments + [
+                        _catalog_comment(
+                            rep, minimize_calls, all_records, found, searches, connected, 20261015 + rep
+                        )
+                    ]
+                    _write_catalog(
+                        output,
+                        template,
+                        problem,
+                        provisional,
+                        all_records,
+                        search_cap,
+                        repetitions,
+                        failed_reps + (0 if connected >= goal else 1),
+                        goal,
+                        False,
+                    )
+
+            def _draw() -> tuple[int, dict, dict]:
+                nonlocal drawn
+                drawn += 1
+                spec = _catalog_displacement(
+                    rng,
+                    listed,
+                    free,
+                    minimum,
+                    positions,
+                    magnitude,
+                    rep,
+                    drawn,
+                    problem,
+                    template,
+                    cap,
+                    force_tol,
+                    fixed,
+                    cell,
+                )
+                return drawn, spec, _rng_state(rng)
+
+            while connected < goal and searches < max_searches:
                 if width == 1:
                     assert session is not None
+                    number, spec, rng_state = _draw()
                     if session.proc.poll() is not None:
                         session = JuliaSession.start()
-                    climbed_rows = []
-                    for _number, spec, _state in batch:
+                    climbed = execute(spec, session)
+                    if climbed.get("failure") == "crash" and session.proc.poll() is not None:
+                        session = JuliaSession.start()
                         climbed = execute(spec, session)
-                        if climbed.get("failure") == "crash" and session.proc.poll() is not None:
-                            session = JuliaSession.start()
-                            climbed = execute(spec, session)
-                        climbed_rows.append(climbed)
-                else:
-                    assert pool is not None
-                    specs = [spec for _number, spec, _state in batch]
-                    try:
-                        climbed_rows = _climb_batch(pool, specs)
-                    except BrokenProcessPool:
-                        pool.shutdown(wait=False, cancel_futures=True)
-                        pool = _open_pool(width)
-                        climbed_rows = _climb_batch(pool, specs)
-                for (number, spec, rng_state), climbed in zip(batch, climbed_rows):
-                    if connected >= goal:
-                        searches = number - 1
-                        break
-                    record, saved_point, delta = _judge_climb(
-                        climbed,
-                        spec,
-                        outer,
-                        minimum,
-                        min_energy,
-                        found,
-                        connect_rmsd,
-                        barrier_max,
-                        force_tol,
-                        cap,
-                        search_cap,
-                        template["id"],
-                    )
-                    connected += delta
-                    searches = number
-                    all_records.append({key: value for key, value in record.items() if key != "climb_calls"})
-                    stored = _jsonable(record)
-                    stored["rng_state"] = rng_state
-                    if saved_point is not None:
-                        stored["saddle_x"] = saved_point.tolist()
-                    _append_partial(partial_path, stored)
-                    if searches == 1 or searches % 25 == 0 or connected >= goal:
-                        print(
-                            f"{template['id']} rep {rep} searches {searches} connected {connected} "
-                            f"calls {record['force_calls']} failure {record['failure']}",
-                            flush=True,
-                        )
-                    if searches % 100 == 0:
-                        provisional = comments + [
-                            _catalog_comment(
-                                rep, minimize_calls, all_records, found, searches, connected, 20261015 + rep
-                            )
-                        ]
-                        _write_catalog(
-                            output,
-                            template,
-                            problem,
-                            provisional,
-                            all_records,
-                            search_cap,
-                            repetitions,
-                            failed_reps + (0 if connected >= goal else 1),
-                            goal,
-                            False,
-                        )
+                    _note(number, spec, rng_state, climbed)
+                    continue
+                assert pool is not None
+                while len(pending) < width and drawn < max_searches and connected < goal:
+                    number, spec, rng_state = _draw()
+                    pending.append((number, spec, rng_state, pool.submit(_worker_execute, spec)))
+                if not pending:
+                    break
+                number, spec, rng_state, future = pending.popleft()
+                try:
+                    climbed = future.result()
+                except BrokenProcessPool:
+                    pool.shutdown(wait=False, cancel_futures=True)
+                    pool = _open_pool(width)
+                    redo = [(number, spec, rng_state)] + [
+                        (item_number, item_spec, item_state) for item_number, item_spec, item_state, _item in pending
+                    ]
+                    pending.clear()
+                    for item_number, item_spec, item_state in redo:
+                        pending.append((item_number, item_spec, item_state, pool.submit(_worker_execute, item_spec)))
+                    number, spec, rng_state, future = pending.popleft()
+                    climbed = future.result()
+                _note(number, spec, rng_state, climbed)
+                if connected >= goal:
+                    pending.clear()
+                    break
             if connected < goal:
                 failed_reps += 1
             comments.append(
