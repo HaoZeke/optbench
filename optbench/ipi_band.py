@@ -26,10 +26,10 @@ cluster drops the rigid modes. A slab with fixed atoms does not.
 The NEB rows use damped BFGS. That optimizer reads biggest_step, which
 is the problem max_move. FIRE is the library default and does not read
 biggest_step; on this potential its velocity correction steps into the
-repulsive core. The plain string uses BFGSTRM, the library default. It reads
-biggest_step and the trust radius. On one climbing bead that loop
-stops requesting forces once a rejected step does not move, so the
-climbing string uses damped BFGS. i-PI 3.3.1 refuses the string
+repulsive core. BFGSTRM is the library default. It reads biggest_step and the trust
+radius. Its loop stops requesting forces once a rejected step does
+not move, on one bead and on the full band, so both string rows use
+damped BFGS. i-PI 3.3.1 refuses the string
 motion mode at input time and tells the reader to skip that guard.
 The launcher skips that one message. The string climber's bind names
 attributes the mover does not have, so the launcher binds it the way

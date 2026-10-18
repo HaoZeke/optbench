@@ -1,4 +1,6 @@
 # i-PI 3.3.1 string. The problem file supplies the image count, the cap, and the force norm.
+# bfgstrm is the library default. Its trust-region loop stops requesting forces
+# once a rejected step does not move, so this row uses damped_bfgs.
 id = "ipi/string"
 engine = "ipi-band"
 code = "i-PI"
@@ -9,7 +11,7 @@ tuning = "default"
 
 [ipi]
 method = "string"
-optimizer = "bfgstrm"
+optimizer = "damped_bfgs"
 climb = false
 stage = "string"
 tangent = "improved"
