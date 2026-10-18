@@ -6,7 +6,7 @@ from pathlib import Path
 import numpy as np
 
 from optbench.campaign import load_template
-from optbench.pygsm_band import _sum_generators, contact_pairs
+from optbench.pygsm_band import _stable_sorted_eigh, _sum_generators, contact_pairs
 
 ROOT = Path(__file__).resolve().parents[1]
 COMMIT = "1b4d5a5557a61adc6a3df7405d6b7255b1fa4865"
@@ -34,6 +34,33 @@ def test_contact_pairs_are_the_upper_triangle_inside_the_cutoff():
     coords = np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [3.0, 0.0, 0.0]], dtype=np.float64)
     assert contact_pairs(coords, 1.35) == [(0, 1)]
     assert contact_pairs(coords, 3.1) == [(0, 1), (0, 2), (1, 2)]
+
+
+def test_rotation_eigensolve_symmetrizes_and_retries():
+    def original(mat, b=None, asc=False):
+        assert np.allclose(mat, mat.T)
+        values = np.linalg.eigvalsh(mat)
+        order = np.argsort(values)
+        if not asc:
+            order = order[::-1]
+        return values[order], np.eye(len(values))
+
+    wrapped = _stable_sorted_eigh(original)
+    values, _vectors = wrapped(np.array([[1.0, 2.0], [0.0, 3.0]]))
+    expected = np.linalg.eigvalsh(np.array([[1.0, 1.0], [1.0, 3.0]]))[::-1]
+    assert np.allclose(values, expected)
+
+    calls = {"n": 0}
+
+    def flaky(mat, b=None, asc=False):
+        calls["n"] += 1
+        if calls["n"] == 1:
+            raise np.linalg.LinAlgError("Eigenvalues did not converge")
+        return np.array([1.0]), np.eye(1)
+
+    values, _vectors = _stable_sorted_eigh(flaky)(np.array([[2.0]]))
+    assert calls["n"] == 2
+    assert values[0] == 1.0
 
 
 def test_generator_sum_adds_vectors():

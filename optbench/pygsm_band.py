@@ -19,7 +19,8 @@ optimizer steps per cycle are the DE-GSM command-line defaults.
 ``CONV_TOL`` is the force norm divided by ``sqrt(3N)``, so the
 delocalized RMS target matches that Cartesian norm. Numpy 2 removed
 ``ndarray.tostring`` and rejects a generator passed to ``np.sum``.
-The shims below restore the calls pyGSM makes. They run in the worker.
+The rotation eigensolve can also fail to converge on these clusters.
+The shims below restore those calls. They run in the worker.
 """
 
 from __future__ import annotations
@@ -98,16 +99,30 @@ def _patch_wilson(cls) -> None:
     cls.wilsonB = namespace["wilsonB"]
 
 
+def _stable_sorted_eigh(original):
+    def sorted_eigh(mat, b=None, asc=False):
+        matrix = np.array(mat, dtype=np.float64, copy=True)
+        matrix = 0.5 * (matrix + matrix.T)
+        try:
+            return original(matrix, b=b, asc=asc)
+        except np.linalg.LinAlgError:
+            matrix = matrix + np.eye(matrix.shape[0]) * 1e-10
+            return original(matrix, b=b, asc=asc)
+
+    return sorted_eigh
+
+
 def ensure_runtime() -> None:
     """Import pyGSM and apply the Numpy 2 shims once in this process."""
     global _PATCHED
     if _PATCHED:
         return
-    from pyGSM.coordinate_systems import PrimitiveInternalCoordinates
+    from pyGSM.coordinate_systems import PrimitiveInternalCoordinates, rotate
     from pyGSM.coordinate_systems.internal_coordinates import InternalCoordinates
 
     _patch_wilson(PrimitiveInternalCoordinates)
     _patch_wilson(InternalCoordinates)
+    rotate.sorted_eigh = _stable_sorted_eigh(rotate.sorted_eigh)
     np.dot = _dot_scalar
     np.sum = _sum_generators
     _PATCHED = True
