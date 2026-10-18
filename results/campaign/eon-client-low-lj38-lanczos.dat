@@ -1,0 +1,15 @@
+force_calls 26
+force_calls_min 13
+force_calls_max 63
+force_calls_median 25.0
+call_unit total
+nfailed 0
+code eOn
+code_version 3.5.0
+commit 4d8b34baf1ba8d2d980df29838bac1f969d1662c
+algorithm Lanczos CG
+template eon-client/low-lj38-lanczos
+problem lowest-eigenvector/lj38
+reducer harness
+counter harness
+count_keys HarnessCounter

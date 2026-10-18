@@ -1,0 +1,45 @@
+id = "eon-svn/de-pt-ci-neb"
+engine = "eon"
+problem = "double-ended-saddle-search/pt-island"
+code = "Eon svn"
+code_version = "r2549"
+commit = "r2549"
+algorithm = "CI-NEB"
+reducer = "harness"
+failure_cap = 3000
+kind = "de-pt"
+kernel = "morse_shift"
+asv_class = "EonSvnDePtCiNeb"
+note = '''
+Climbing-image NEB on the 59 Pt-island products. Images 3, converged_force 0.001, max_iterations 1000. climbing_image_method is set. The 2014 file left spring and max_move unset. Spring stays the client default. max_move is 0.2. The harness kernel is r2549 Morse::force: cutoff 9.5, pair energy shifted to zero at the cutoff, minimum image on the box diagonal. D 0.7102, alpha 1.6047, r0 2.897.
+'''
+seeds = [1]
+asv_timeout = 900
+budget_seconds = 600
+
+[ini.Main]
+job = "nudged_elastic_band"
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+convergence_metric = "norm"
+converged_force = 0.001
+max_move = 0.2
+max_iterations = 1000
+lbfgs_memory = 20
+
+[ini."Nudged Elastic Band"]
+images = 3
+climbing_image_method = true
+climbing_image = true
+doubly_nudged = false
+doubly_nudged_switching = false
+opt_method = "lbfgs"
+converged_force = 0.001
+max_iterations = 1000
+
+[ini.LBFGS]
+lbfgs_memory = 20

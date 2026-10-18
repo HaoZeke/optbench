@@ -57,6 +57,15 @@ success-only median. A row with no success has no median.
 | minimization/lj38-noise | lammps/hftn-lj38-noise-s0 | 997/1000 | 3 wrong stationary | 974 |
 | minimization/lj38-noise | lammps/hftn-lj38-noise-s1em4 | 224/1000 | 776 divergence | 6945 |
 | minimization/lj38-noise | lammps/hftn-lj38-noise-s1em3 | 283/1000 | 713 divergence, 4 wrong stationary | 6882 |
+| minimization/lj38-noise | lammps/hftn-lj38-noise-s1em2 | 587/1000 | 243 divergence, 170 wrong stationary | 5438 |
+| minimization/lj38-noise | lammps/quickmin-lj38-noise-s0 | 991/1000 | 5 divergence, 4 wrong stationary | 2543 |
+| minimization/lj38-noise | lammps/quickmin-lj38-noise-s1em4 | 983/1000 | 13 divergence, 4 wrong stationary | 2450 |
+| minimization/lj38-noise | lammps/quickmin-lj38-noise-s1em3 | 741/1000 | 9 cap, 231 divergence, 19 wrong stationary | 5454 |
+| minimization/lj38-noise | lammps/quickmin-lj38-noise-s1em2 | 576/1000 | 10 cap, 248 divergence, 166 wrong stationary | 4455 |
+| minimization/lj38-noise | lammps/fire-lj38-noise-s0 | 727/1000 | 224 divergence, 49 wrong stationary | 472 |
+| minimization/lj38-noise | lammps/fire-lj38-noise-s1em4 | 729/1000 | 224 divergence, 47 wrong stationary | 462 |
+| minimization/lj38-noise | lammps/fire-lj38-noise-s1em3 | 706/1000 | 224 divergence, 70 wrong stationary | 435 |
+| minimization/lj38-noise | lammps/fire-lj38-noise-s1em2 | 564/1000 | 224 divergence, 212 wrong stationary | 335 |
 | minimization/lj38 | dlfind/lbfgs-lj38 | 998/1000 | 1 cap, 1 wrong stationary | 184 |
 | minimization/lj38 | dlfind/sd-lj38 | 990/1000 | 10 cap | 2563.5 |
 | minimization/lj38-noise | dlfind/sd-lj38-noise-s0 | 990/1000 | 10 cap | 2563.5 |
@@ -219,9 +228,20 @@ it is 698 of 1000, 227 cap, 75 wrong stationary, success median 5627.5.
 Zero-noise Hessian-free Newton is 997 of 1000, 3 wrong stationary, success
 median 974, the same split as the clean LJ38 row. At sigma `1e-4` it is
 224 of 1000, 776 divergence, success median 6945. At sigma `1e-3` it is
-283 of 1000, 713 divergence, 4 wrong stationary, success median 6882.
-Hessian-free Newton at sigma `1e-2`, and the quickmin and FIRE noise rows,
-are not in these rows. `fix neb` needs a multi-partition MPI
+283 of 1000, 713 divergence, 4 wrong stationary, success median 6882. At
+sigma `1e-2` it is 587 of 1000, 243 divergence, 170 wrong stationary,
+success median 5438. Zero-noise quickmin is 991 of 1000, 5 divergence, 4
+wrong stationary, success median 2543, the same split as the clean LJ38
+row. At sigma `1e-4` it is 983 of 1000, 13 divergence, 4 wrong stationary,
+success median 2450. At sigma `1e-3` it is 741 of 1000, 9 cap, 231
+divergence, 19 wrong stationary, success median 5454. At sigma `1e-2` it
+is 576 of 1000, 10 cap, 248 divergence, 166 wrong stationary, success
+median 4455. Zero-noise FIRE is 727 of 1000, 224 divergence, 49 wrong
+stationary, success median 472, the same split as the clean LJ38 row. At
+sigma `1e-4` it is 729 of 1000, 224 divergence, 47 wrong stationary,
+success median 462. At sigma `1e-3` it is 706 of 1000, 224 divergence, 70
+wrong stationary, success median 435. At sigma `1e-2` it is 564 of 1000,
+224 divergence, 212 wrong stationary, success median 335. `fix neb` needs a multi-partition MPI
 run and is not scored. `prd`, `tad`,
 `hyper`, and `dynamical_matrix` are not scored. The Al, Pt, and aladatom
 problems are EAM, and the harness has no EAM evaluator.
