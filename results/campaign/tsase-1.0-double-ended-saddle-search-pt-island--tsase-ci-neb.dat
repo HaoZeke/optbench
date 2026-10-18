@@ -1,0 +1,23 @@
+# counter harness. One force call is one ASE calculate on the shared calculator.
+# TSASE forceCalls is not this count.
+# ssneb multiplies the spring constant by the image count.
+# A success is under the cap, at the potential force stop, and Hessian index 1.
+force_calls 604
+force_calls_min 279
+force_calls_max 1239
+force_calls_median 426
+force_calls_per_image 201
+call_unit total
+successes 38
+nfailed 21
+n 59
+transition_states 38
+code tsase
+code_version 1.0
+commit 98aac60b5d9905e81ee4e6b8c385f169258d0218
+algorithm CI-NEB
+template tsase/ci-neb
+problem double-ended-saddle-search/pt-island
+tuning default
+counter harness
+images 3

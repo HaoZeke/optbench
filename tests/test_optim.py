@@ -38,8 +38,18 @@ def test_optim_templates_match_the_tarball_pin():
     pinned = next(row for row in registry["code"] if row["id"] == "optim")
     assert pinned["commit"] == COMMIT
     assert pinned["committed"] == "2026-10-18"
-    found = [row for row in list_templates(ROOT) if str(row["id"]).startswith("optim/")]
-    assert len(found) == 8
+    wanted = {
+        "optim/lj38-lbfgs",
+        "optim/lj38-lbfgs-tuned",
+        "optim/morse-lbfgs",
+        "optim/morse-lbfgs-tuned",
+        "optim/noise-lbfgs-s0",
+        "optim/noise-lbfgs-s1em4",
+        "optim/noise-lbfgs-s1em3",
+        "optim/noise-lbfgs-s1em2",
+    }
+    found = [row for row in list_templates(ROOT) if row["id"] in wanted]
+    assert len(found) == len(wanted)
     catalog = {row["id"] for row in specs()}
     seen = set()
     for template in found:

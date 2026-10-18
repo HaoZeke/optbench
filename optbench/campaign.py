@@ -300,7 +300,8 @@ def run(
             workers=workers,
             work=work,
         )
-    if template["engine"] == "optim":
+    # USERPOT rows. ASE-socket templates share this engine name and stay on optim_search.
+    if template["engine"] == "optim" and str(template.get("code_version")) == "02aaf45245af":
         from .runners.optim_min import run_template
 
         problem = resolve_problem(root, problem_name)
@@ -345,6 +346,20 @@ def run(
             workers=workers,
             limit=limit,
             resume=resume,
+        )
+    from .engines import find as find_engine
+
+    plugged = find_engine(str(template["engine"]))
+    if plugged is not None:
+        stated = template.get("problem")
+        if stated and stated != problem_name:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return plugged.run(
+            root,
+            problem_name,
+            template_name,
+            output=output,
+            workers=workers,
         )
     if template["engine"] not in _EON_ENGINES:
         raise ValueError(f"unknown engine {template['engine']}")

@@ -1,0 +1,14 @@
+# TSASE ssneb climbing image, FIRE, ss = false.
+id = "tsase/ci-neb"
+engine = "tsase"
+code = "tsase"
+code_version = "1.0"
+commit = "98aac60b5d9905e81ee4e6b8c385f169258d0218"
+algorithm = "CI-NEB"
+tuning = "default"
+note = "fire_ssneb. The problem supplies the image count, the force norm, the cap, and max_move. spring_k is 5; ssneb multiplies that constant by the image count. Fixed atoms have zero potential force and are put back on the reactant coordinate after each step."
+
+[tsase]
+method = "ci"
+spring_k = 5.0
+ss = false
