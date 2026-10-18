@@ -1,0 +1,16 @@
+id = "scgo/lj75-bh"
+engine = "scgo"
+problem = "globalopt/lj75"
+code = "SCGO"
+code_version = "0.9.1"
+commit = "2338742a434a920ed82e52a72dc1338cf06647c1"
+algorithm = "basin hopping"
+tuning = "default"
+failure_cap = 41385
+note = "Default basin hopping from SCGO 0.9.1 get_default_params, the same block as scgo/lj38-bh. For 75 atoms the automatic sizes are 154 hops and 266 FIRE steps. The force-call cap is (154 + 1) * (266 + 1) = 41385. globalopt/lj75 states no energy_above_minimum, no sample count, and no archive_path. The starts are the 200 coords files in website/globalopt/lj75/lj75_clusters.tgz. success means a finite quench under the FIRE force tolerance. energy is that quenched energy, or the lowest energy seen when the force never met fmax. The row is partial."
+
+[scgo]
+algorithm = "bh"
+symbol = "C"
+seed = 314159
+archive_path = "website/globalopt/lj75/lj75_clusters.tgz"

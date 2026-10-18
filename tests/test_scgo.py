@@ -44,8 +44,27 @@ def test_lj38_template_uses_the_budget_cap():
     assert int(template["scgo"]["seed"]) == 314159
     assert _check_stop(problem, template) == 30888
     assert [row["id"] for row in list_templates(ROOT) if str(row["id"]).startswith("scgo/")] == [
-        "scgo/lj38-bh"
+        "scgo/lj38-bh",
+        "scgo/lj75-bh",
     ]
+
+
+def test_lj75_template_is_partial_until_a_success_rule():
+    template = load_template(ROOT, "scgo/lj75-bh")
+    problem = resolve_problem(ROOT, "globalopt/lj75")
+    assert "energy_above_minimum" not in (problem.get("convergence") or {})
+    assert template["failure_cap"] == 41385
+    assert template["scgo"]["archive_path"] == "website/globalopt/lj75/lj75_clusters.tgz"
+    assert _check_stop(problem, template) == 41385
+
+
+def test_coordinate_files_sort_by_the_trailing_index(tmp_path: Path):
+    for name in ("coords.10", "coords.2", "coords.1"):
+        (tmp_path / name).write_text("0 0 0\n1 0 0\n0 1 0\n", encoding="utf-8")
+    problem = {"id": "globalopt/lj75"}
+    loaded = load_geometries(ROOT, problem, tmp_path, None, tmp_path / "out.dat")
+    assert [name for name, _coords, _box in loaded] == ["coords.1", "coords.2", "coords.10"]
+    assert len(loaded[0][1]) == 9
 
 
 def test_archived_starts_sort_numerically(tmp_path: Path):

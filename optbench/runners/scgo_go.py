@@ -143,18 +143,66 @@ def reference_energy(problem: dict) -> float | None:
 
 
 def _geometry_key(path: Path) -> tuple:
+    name = path.name
     stem = path.stem
     if stem.isdigit():
-        return (0, int(stem), stem)
-    return (1, stem, stem)
+        return (0, int(stem), name)
+    head, dot, tail = name.rpartition(".")
+    if dot and tail.isdigit() and head:
+        return (0, int(tail), name)
+    return (1, name, name)
 
 
-def load_geometries(root: Path, problem: dict, geometries: Path | None, work: Path | None, output: Path):
-    """Archived ``.con`` files in numeric order, flat coordinates, and the box."""
-    from optbench.campaign import geometry_archive, iter_geometries
+def _read_points(text: str) -> list[float]:
+    """Whitespace xyz rows. Blank lines are skipped."""
+    rows: list[float] = []
+    for line in text.splitlines():
+        parts = line.split()
+        if len(parts) < 3:
+            continue
+        try:
+            rows.extend((float(parts[0]), float(parts[1]), float(parts[2])))
+        except ValueError:
+            continue
+    if len(rows) < 3 or len(rows) % 3:
+        raise ValueError("coordinate file has no xyz rows")
+    return rows
+
+
+def _coordinate_files(dest: Path) -> list[Path]:
+    cons = sorted(dest.rglob("*.con"), key=_geometry_key)
+    if cons:
+        return cons
+    found = []
+    for path in dest.rglob("*"):
+        if not path.is_file() or path.name.startswith("."):
+            continue
+        name = path.name
+        if name.startswith("coords.") or name.endswith(".xyz"):
+            found.append(path)
+    return sorted(found, key=_geometry_key)
+
+
+def load_geometries(
+    root: Path,
+    problem: dict,
+    geometries: Path | None,
+    work: Path | None,
+    output: Path,
+    archive_path: str | None = None,
+):
+    """Start files in numeric order, flat coordinates, and the box when present.
+
+    ``.con`` files use the eOn reader. A tarball of ``coords.N`` files is
+    the Lennard-Jones 75 cluster set stored in the geometry manifest.
+    """
+    from optbench.campaign import geometry_archive
 
     if geometries is None:
-        archive = geometry_archive(root, problem)
+        source = problem
+        if archive_path and not (problem.get("input") or {}).get("archive_path"):
+            source = {"id": problem["id"], "input": {"archive_path": archive_path}}
+        archive = geometry_archive(root, source)
         dest = (work or output.parent / "geometries") / problem["id"].replace("/", "-")
         dest.mkdir(parents=True, exist_ok=True)
         marker = dest / ".extracted"
@@ -167,16 +215,26 @@ def load_geometries(root: Path, problem: dict, geometries: Path | None, work: Pa
             with tarfile.open(archive) as packed:
                 packed.extractall(dest, filter="data")
             marker.write_text(recorded, encoding="utf-8")
-        cons = sorted(dest.rglob("*.con"), key=_geometry_key)
+        cons = _coordinate_files(dest)
         if not cons:
-            raise FileNotFoundError(f"{archive} has no .con files")
+            raise FileNotFoundError(f"{archive} has no start files")
     else:
-        cons = iter_geometries(geometries)
-        cons = sorted(cons, key=_geometry_key)
+        cons = _coordinate_files(geometries)
+        if not cons:
+            raise FileNotFoundError(f"{geometries} has no start files")
     loaded = []
     for path in cons:
-        pos, box = read_con(path.read_text(encoding="utf-8", errors="replace"))
-        loaded.append((path.stem, pos.reshape(-1).tolist(), None if box is None else box.tolist()))
+        text = path.read_text(encoding="utf-8", errors="replace")
+        if path.suffix == ".con":
+            pos, box = read_con(text)
+            coords = pos.reshape(-1).tolist()
+            box_list = None if box is None else box.tolist()
+            name = path.stem
+        else:
+            coords = _read_points(text)
+            box_list = None
+            name = path.name
+        loaded.append((name, coords, box_list))
     return loaded
 
 
@@ -188,7 +246,7 @@ def _format_field(value: object) -> str:
     return str(value)
 
 
-def _dat(summary: dict, template: dict, metrics: dict, *, partial: bool) -> str:
+def _dat(summary: dict, template: dict, metrics: dict, *, partial: bool, energy_rule: bool) -> str:
     rows = {
         "force_calls": summary.get("force_calls"),
         "force_calls_min": summary.get("force_calls_min"),
@@ -218,11 +276,20 @@ def _dat(summary: dict, template: dict, metrics: dict, *, partial: bool) -> str:
     }
     lines = [
         "# counter harness. One force call is one ASE calculate on optbench.potentials.lennard_jones.",
-        "# A start succeeds when a quenched energy is within energy_above_minimum of the known minimum.",
+        (
+            "# A start succeeds when a quenched energy is within energy_above_minimum of the known minimum."
+            if energy_rule
+            else "# The problem states no energy_above_minimum. success means a finite quench under the FIRE force tolerance. energy is that quenched energy, or the lowest energy seen when the force never met fmax."
+        ),
         "# The force-call cap is the default basin-hopping budget, counted in FIRE evaluations.",
     ]
     if partial:
-        lines.append("# partial true. This file has fewer starts than the problem sample.")
+        if energy_rule:
+            lines.append("# partial true. This file has fewer starts than the problem sample.")
+        else:
+            lines.append(
+                "# partial true. The problem states no energy_above_minimum, so this row is not a global-minimum score."
+            )
         rows["partial"] = "true"
     note = str(template.get("note") or "").strip()
     if note:
@@ -276,6 +343,8 @@ def _one_start(job: dict) -> dict:
             self.threshold = job["threshold"]
             self.best_energy: float | None = None
             self.best_force_norm: float | None = None
+            self.lowest_energy: float | None = None
+            self.lowest_force_norm: float | None = None
 
         def calculate(self, atoms=None, properties=("energy", "forces"), system_changes=all_changes):
             super().calculate(atoms, properties, system_changes)
@@ -292,6 +361,11 @@ def _one_start(job: dict) -> dict:
                 force_norm = float(np.linalg.norm(gradient))
                 forces = np.asarray(flat, dtype=np.float64).reshape(-1, 3)
                 max_atom = float(np.linalg.norm(forces, axis=1).max()) if forces.size else 0.0
+                if math.isfinite(energy) and (
+                    self.lowest_energy is None or energy < self.lowest_energy
+                ):
+                    self.lowest_energy = float(energy)
+                    self.lowest_force_norm = force_norm
                 if max_atom <= self.fmax and (self.best_energy is None or energy < self.best_energy):
                     self.best_energy = float(energy)
                     self.best_force_norm = force_norm
@@ -351,18 +425,27 @@ def _one_start(job: dict) -> dict:
         shutil.rmtree(work, ignore_errors=True)
 
     calls = int(calc.counter.calls)
-    energy = calc.best_energy if calc.best_energy is not None else returned
-    force_norm = calc.best_force_norm
+    quenched_point = calc.best_energy is not None and kind != "cap"
+    if quenched_point:
+        energy = calc.best_energy
+        force_norm = calc.best_force_norm
+    elif calc.lowest_energy is not None:
+        energy = calc.lowest_energy
+        force_norm = calc.lowest_force_norm
+    else:
+        energy = returned
+        force_norm = None
     finite = (
         energy is not None
         and math.isfinite(energy)
         and force_norm is not None
         and math.isfinite(force_norm)
     )
-    quenched = finite and kind != "cap"
+    quenched = quenched_point and finite
+    has_window = job["threshold"] is not None
     in_window = (
         finite
-        and job["threshold"] is not None
+        and has_window
         and float(energy) <= float(job["threshold"])
         and kind == "target"
     )
@@ -373,7 +456,9 @@ def _one_start(job: dict) -> dict:
         reasons.append("divergence")
     elif kind == "cap" or calls >= cap:
         reasons.append("cap")
-    elif not in_window:
+    elif not quenched:
+        reasons.append("divergence")
+    elif has_window and not in_window:
         reasons.append("energy")
     failure = classify_failure(reasons)
     record = {
@@ -397,6 +482,7 @@ def _one_start(job: dict) -> dict:
         "energy": None if energy is None else float(energy),
         "force_norm": force_norm,
         "converged": bool(in_window),
+        "quenched": bool(quenched),
         "hessian_index": None,
         "expected_index": None,
         "algorithm": "basin hopping",
@@ -420,7 +506,8 @@ def _part_path(output: Path, index: int) -> Path:
 def _write_campaign(output: Path, template: dict, problem: dict, records: list[dict], parameters: dict) -> dict:
     cap = int(parameters["cap"])
     expected = (problem.get("sample") or {}).get("starts")
-    partial = expected is not None and len(records) < int(expected)
+    energy_rule = parameters.get("energy_above_minimum") is not None
+    partial = (not energy_rule) or (expected is not None and len(records) < int(expected))
     legacy_counts = [
         cap if not record["success"] else int(record["force_calls"]) for record in records
     ]
@@ -465,8 +552,12 @@ def _write_campaign(output: Path, template: dict, problem: dict, records: list[d
         "bootstrap_seed": 20261015,
         "note": (
             "Harness counter on optbench.potentials.lennard_jones. "
-            "A start succeeds when a quenched energy is within energy_above_minimum of the known minimum. "
-            "The cap is the default SCGO basin-hopping budget."
+            + (
+                "A start succeeds when a quenched energy is within energy_above_minimum of the known minimum. "
+                if energy_rule
+                else "The problem states no energy_above_minimum. success means a finite quench under the FIRE force tolerance. energy is that quenched energy, or the lowest energy seen when the force never met fmax. "
+            )
+            + "The cap is the default SCGO basin-hopping budget."
         ),
         "runs": [
             {
@@ -494,7 +585,10 @@ def _write_campaign(output: Path, template: dict, problem: dict, records: list[d
         ],
     }
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(_dat(summary, template, metrics, partial=partial), encoding="utf-8")
+    output.write_text(
+        _dat(summary, template, metrics, partial=partial, energy_rule=energy_rule),
+        encoding="utf-8",
+    )
     write_starts(output.with_suffix(".starts.jsonl"), stored)
     output.with_suffix(".v2.json").write_text(
         json.dumps(document, indent=2, sort_keys=True) + "\n",
@@ -523,12 +617,16 @@ def bh_settings(problem: dict, template: dict, n_atoms: int) -> dict:
     if str(section.get("algorithm") or "bh") != "bh":
         raise ValueError(f"{template['id']} algorithm must be bh")
     convergence = problem.get("convergence") or {}
-    if "energy_above_minimum" not in convergence:
-        raise ValueError(f"{problem['id']} has no energy_above_minimum")
-    known = reference_energy(problem)
-    if known is None:
-        raise ValueError(f"{problem['id']} has no known minimum")
-    window = float(convergence["energy_above_minimum"])
+    if "energy_above_minimum" in convergence:
+        known = reference_energy(problem)
+        if known is None:
+            raise ValueError(f"{problem['id']} has no known minimum")
+        window = float(convergence["energy_above_minimum"])
+        threshold = known + window
+    else:
+        known = None
+        window = None
+        threshold = None
     from scgo.param_presets import get_default_params
 
     defaults = get_default_params()
@@ -555,7 +653,7 @@ def bh_settings(problem: dict, template: dict, n_atoms: int) -> dict:
         "seed": seed,
         "reference_energy": known,
         "energy_above_minimum": window,
-        "threshold": known + window,
+        "threshold": threshold,
         "connectivity_factor": defaults["connectivity_factor"],
         "potential": "lennard-jones",
         "epsilon": 1.0,
@@ -619,7 +717,8 @@ def run_template(
     limit: int = 0,
     resume: bool = False,
 ) -> dict:
-    loaded = load_geometries(root, problem, geometries, work, output)
+    archive_path = str((template.get("scgo") or {}).get("archive_path") or "") or None
+    loaded = load_geometries(root, problem, geometries, work, output, archive_path=archive_path)
     if limit and limit > 0:
         loaded = loaded[: int(limit)]
     if not loaded:
@@ -651,19 +750,25 @@ def run_template(
     os.environ.setdefault("MKL_NUM_THREADS", "1")
     fresh: list[dict] = []
     if jobs:
+        def _store(record: dict) -> None:
+            part = _part_path(output, int(record["index"]))
+            part.parent.mkdir(parents=True, exist_ok=True)
+            part.write_text(json.dumps(record, sort_keys=True) + "\n", encoding="utf-8")
+            fresh.append(record)
+
         if workers <= 1:
-            produced = [_one_start(job) for job in jobs]
+            for job in jobs:
+                _store(_one_start(job))
         else:
             import multiprocessing as mp
 
             context = mp.get_context("spawn")
             with ProcessPoolExecutor(max_workers=workers, mp_context=context) as pool:
                 futures = {pool.submit(_one_start, job): job["index"] for job in jobs}
-                produced = []
                 total = len(futures)
                 for done, future in enumerate(as_completed(futures), 1):
                     record = future.result()
-                    produced.append(record)
+                    _store(record)
                     if done == total or done % 10 == 0:
                         print(
                             f"{template['id']} {done}/{total} start {record['start']} "
@@ -671,11 +776,6 @@ def run_template(
                             f"success={record['success']}",
                             flush=True,
                         )
-        for record in produced:
-            part = _part_path(output, int(record["index"]))
-            part.parent.mkdir(parents=True, exist_ok=True)
-            part.write_text(json.dumps(record, sort_keys=True) + "\n", encoding="utf-8")
-            fresh.append(record)
     by_index = dict(cached)
     for record in fresh:
         by_index[int(record["index"])] = record
