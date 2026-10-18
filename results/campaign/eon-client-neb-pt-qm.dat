@@ -1,0 +1,17 @@
+force_calls 1323
+force_calls_min 714
+force_calls_max 1978
+force_calls_median 1242.0
+call_unit total
+nfailed 0
+code eOn
+code_version 3.5.0
+commit 4d8b34baf1ba8d2d980df29838bac1f969d1662c
+algorithm QuickMin
+template eon-client/neb-pt-qm
+problem neb/Pt-heptamer
+reducer harness
+counter harness
+count_keys HarnessCounter
+ranked false
+potential morse/smooth/linear (periodic in x and y, cutoff 9.5)
