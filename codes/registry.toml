@@ -84,6 +84,16 @@ commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
 committed = "2026-10-05"
 note = "Activation-relaxation technique nouveau, plugin branch DEVEL. The benchmark contributor of a new entry is Rohit Goswami."
 
+[[code]]
+id = "cp2k"
+name = "CP2K"
+role = "band"
+repository = "https://github.com/cp2k/cp2k"
+ref = "v2026.2"
+commit = "67b5da876dd6a76b8b021d5a04d1c81ba79a4c50"
+committed = "2026-07-15"
+note = "CP2K 2026.2, serial build of commit 67b5da87. BAND runs CI-NEB, IT-NEB, and the string method with the DIIS optimizer. The i-PI server evaluates the harness pair potential, and each POSDATA increments HarnessCounter. K_SPRING stays at 0.02 hartree/bohr^2. MAX_STEPSIZE is the problem max_move in bohr. MAX_FORCE is the problem force norm in hartree/bohr divided by sqrt(n_free*3)."
+
 # generated ASE and Sella templates
 
 [[template]]
