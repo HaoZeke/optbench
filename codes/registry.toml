@@ -84,6 +84,16 @@ commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
 committed = "2026-10-05"
 note = "Activation-relaxation technique nouveau, plugin branch DEVEL. The benchmark contributor of a new entry is Rohit Goswami."
 
+[[code]]
+id = "saddlesearchjl"
+name = "SaddleSearch.jl"
+role = "saddle search"
+repository = "https://github.com/cortner/SaddleSearch.jl"
+ref = "master"
+commit = "47b4f35953bb3fc0f0726c171adca8f5b628af5e"
+committed = "2024-11-07"
+note = "SaddleSearch.jl 0.0.2, built from source on Julia 1.10.10. The resolved packages are Dierckx 0.5.4, ForwardDiff 0.10.39, and Parameters 0.12.3. Templates call run! for StaticDimer, BBDimer, SuperlinearDimer, and ODEDimer. The potential is the harness kernel. The library stops on an infinity-norm residual, and the driver continues until the Euclidean force is at the problem stop. A lowest-mode row holds the translation at zero and scores the overlap. AccelDimer is not a row: it needs a second-derivative product the spec potential does not supply. blocklanczos is in backup/ and is not part of the module. Force calls are harness entries."
+
 # generated ASE and Sella templates
 
 [[template]]
