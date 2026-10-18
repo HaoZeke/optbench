@@ -1068,12 +1068,19 @@ def run_template(
                 done[str(row["start"])] = row
     pending = [job for job in jobs if job["start"] not in done]
     records = [done[job["start"]] for job in jobs if job["start"] in done]
+
+    def _store(row: dict) -> None:
+        partial_file.parent.mkdir(parents=True, exist_ok=True)
+        with partial_file.open("a", encoding="utf-8") as handle:
+            handle.write(json.dumps(row, sort_keys=True) + "\n")
+            handle.flush()
+        records.append(row)
+
     if pending:
         if workers <= 1:
-            fresh = []
             for index, job in enumerate(pending, 1):
                 row = search_job(job)
-                fresh.append(row)
+                _store(row)
                 print(
                     f"{template['id']} {row['start']} calls={row['force_calls']} "
                     f"energy={row['energy']} success={row['success']} ({index}/{len(pending)})",
@@ -1084,23 +1091,17 @@ def run_template(
             from concurrent.futures import ProcessPoolExecutor, as_completed
 
             context = mp.get_context("spawn")
-            fresh = []
             with ProcessPoolExecutor(max_workers=workers, mp_context=context) as pool:
                 futures = [pool.submit(search_job, job) for job in pending]
                 total = len(futures)
                 for index, future in enumerate(as_completed(futures), 1):
                     row = future.result()
-                    fresh.append(row)
+                    _store(row)
                     print(
                         f"{template['id']} {row['start']} calls={row['force_calls']} "
                         f"energy={row['energy']} success={row['success']} ({index}/{total})",
                         flush=True,
                     )
-        partial_file.parent.mkdir(parents=True, exist_ok=True)
-        with partial_file.open("a", encoding="utf-8") as handle:
-            for row in fresh:
-                handle.write(json.dumps(row, sort_keys=True) + "\n")
-        records.extend(fresh)
     by_start = {str(row["start"]): row for row in records}
     ordered = [by_start[job["start"]] for job in jobs]
     for row in ordered:
