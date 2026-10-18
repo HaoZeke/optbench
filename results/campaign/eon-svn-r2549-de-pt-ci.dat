@@ -10,7 +10,7 @@ template eon-svn/de-pt-ci
 problem double-ended-saddle-search/pt-island
 reducer harness
 cap 3000
-n 59
+n 118
 par2_mean 225.88135593220338
 nfailed 0
 mean_calls 225.88135593220338

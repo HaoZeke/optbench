@@ -10,14 +10,14 @@ template eon-svn/ts-lj38-dimer
 problem tsopt/LJ38
 reducer harness
 cap 10000
-n 200
+n 400
 par2_mean 644.135
-nfailed 1
+nfailed 2
 mean_calls 548.34
 median_calls 360.5
 min_calls 93.0
 max_calls 6078.0
 n_crash 0
-n_divergence 1
+n_divergence 2
 n_cap 0
 n_wrong_stationary 0

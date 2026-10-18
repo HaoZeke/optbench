@@ -4,6 +4,7 @@
 # Historical paths in that revision are forbidden, so the tree is
 # fetched file by file. QSC is absent at r2549 and has to be dropped
 # from the build. NO_FORTRAN leaves out the Fortran Aluminum potential.
+# The client in templates/eon-svn/README is built without NO_FORTRAN.
 # asv has one environment_type, so this yml is not bound to a class.
 # The benchmarks call EON_SVN_CLIENT.
 name: eon-svn

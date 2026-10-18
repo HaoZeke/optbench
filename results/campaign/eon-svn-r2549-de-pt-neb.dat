@@ -10,14 +10,14 @@ template eon-svn/de-pt-neb
 problem double-ended-saddle-search/pt-island
 reducer harness
 cap 3000
-n 59
+n 118
 par2_mean 311.8305084745763
-nfailed 1
+nfailed 2
 mean_calls 260.9830508474576
 median_calls 203.0
 min_calls 98.0
 max_calls 3000.0
 n_crash 0
 n_divergence 0
-n_cap 1
+n_cap 2
 n_wrong_stationary 0

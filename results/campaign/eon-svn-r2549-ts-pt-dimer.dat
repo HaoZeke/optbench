@@ -10,7 +10,7 @@ template eon-svn/ts-pt-dimer
 problem tsopt/pt-island
 reducer harness
 cap 10000
-n 49
+n 98
 par2_mean 116.06122448979592
 nfailed 0
 mean_calls 116.06122448979592

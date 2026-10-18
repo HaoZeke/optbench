@@ -1,0 +1,168 @@
+# eOn SVN r2549, Fortran enabled
+
+The client behind the `eon-svn` rows is SVN revision 2549 of
+<https://theory.cm.utexas.edu/svn/eon>. `eonclient -v` prints
+`eonclient version r2549`. This build does not pass `NO_FORTRAN`.
+The seven Fortran potentials are compiled in.
+
+A directory `svn export -r 2549` of the whole project stops on
+historical paths the server forbids. The client tree was fetched
+file by file: `svn list -r 2549` of each directory, then
+`svn export --force -r 2549` of each file, from
+`https://theory.cm.utexas.edu/svn/eon/client`. That fetch wrote 679
+files and skipped none. QSC is not a directory at r2549. The link
+drops it. The sources are not in this repository. The binary used
+for the rows below was installed at `$HOME/opt/eon-svn/bin/eonclient`
+and selected with `EON_SVN_CLIENT`.
+
+## Compilers
+
+Recorded at the build, 2026-10-18T10:59:55Z:
+
+```
+gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+gfortran -dumpversion: 13
+g++ -dumpmachine: x86_64-linux-gnu
+GNU Make 4.3
+svn, version 1.14.3 (r1914484)
+```
+
+The C++ client is the r2549 `Makefile`, not CMake. `libcurl` is the
+link dependency from that makefile (`-lcurl`). BLAS and LAPACK were
+present on the machine and are not on the link line.
+
+## Edits the r2549 tree needs before `make`
+
+`client/Rules.mk` lists `potentials/QSC`. That directory is not in
+r2549, so these three lines were removed:
+
+```
+POTDIRS += ./potentials/QSC/
+LIBS += ./potentials/QSC/libQSC.a
+POTENTIALS += "+QSC"
+```
+
+`client/Potential.cpp` includes `potentials/QSC/QSC.h` and constructs
+`QSC()` outside the `NO_FORTRAN` guard. Both were removed. The
+`POT_QSC` string stays. A request for `qsc` falls through to
+`Unknown Potential`.
+
+`client/Makefile` links gfortran with a Homebrew path that is not on
+this machine:
+
+```
+LDFLAGS += -L/usr/local/Cellar/gcc/9.2.0_3/lib/gcc/9 -lgfortran
+```
+
+That line was changed to the gfortran 13 library directory printed by
+`gfortran -print-file-name=libgfortran.so`:
+
+```
+LDFLAGS += -L/usr/lib/gcc/x86_64-linux-gnu/13 -lgfortran
+```
+
+`client/version.sh` runs `svnversion`. An export is not a working
+copy, so `svnversion` does not print `2549`. The script now keeps a
+plain integer from `svnversion` and otherwise writes `2549`, which is
+the revision that was exported. The linked client prints
+`eonclient version r2549`.
+
+## Build command
+
+`NO_FORTRAN` was unset. From `client/`:
+
+```
+make -j8
+```
+
+Flags the makefile actually passed:
+
+```
+CC=gcc
+CXX=g++
+FC=gfortran
+OPT=-O2
+CXXFLAGS=-Wall -Wno-unused-local-typedefs -Wno-unused-function -Wfatal-errors -O2 -DLINUX -DNDEBUG
+DEPFLAGS=-MMD
+FFLAGS=-O2 -ffpe-trap=invalid,zero,overflow
+LDFLAGS=-lcurl -ldl -L/usr/lib/gcc/x86_64-linux-gnu/13 -lgfortran
+AR=ar cru
+```
+
+Fortran objects were compiled as
+`gfortran -O2 -ffpe-trap=invalid,zero,overflow -c`. The link line
+includes `libAL.a`, `libLenosky.a`, `libSW.a`, `libTersoff.a`,
+`libEDIP.a`, `libtip4p_h.a`, and `libFeHe.a`. The makefile banner was:
+
+```
+DEBUG: No
+POTENTIALS: +EMT +MORSE +LJ +LJ +EAM +H2O +H2O_Pt +IMD +EXT_POT +Aluminum +Lenosky +SW +Tersoff +EDIP +H2O_H +FeHe -PyAMFF -LAMMPS -ASE -NEW_POT +VASP -MPI_POT
+```
+
+`ldd` on the installed binary resolves `libgfortran.so.5`. The
+version lines were:
+
+```
+eonclient version r2549
+          compiled Sun Oct 18 10:59:57 AM UTC 2026
+```
+
+## Fortran potentials the client accepts
+
+`#ifndef NO_FORTRAN` in `Potential.cpp` registers these names:
+`eam_al`, `lenosky_si`, `sw_si`, `tersoff_si`, `edip`, `tip4p_h`,
+`fehe`. They are the Aluminum, Lenosky, SW, Tersoff, EDIP, H2O_H, and
+FeHe libraries in the banner.
+
+`eonclient -s -p NAME pair.con` was run on this two-atom con. The box
+is a 10 Angstrom cube. Both atoms are Al, 2.8 Angstrom apart. Every
+Fortran name returned exit 0 and an energy. `not_a_potential` printed
+`Unknown Potential: not_a_potential` and exited 1.
+
+```
+eam_al        -1.3914401531
+lenosky_si    -1.7356583379
+sw_si         -1.5309509672
+tersoff_si    -1.4413938263
+edip          -1.3837200533
+tip4p_h        0.0000000000
+fehe          -0.0007742742
+```
+
+The Si and water names were given an aluminum pair, so those energies
+are only a probe that the symbol is linked. `eam_al` is the Aluminum
+EAM potential.
+
+## hTST/Al
+
+No hTST/Al row is scored from this client. `problems/hTST/Al.toml`
+requires `barrier_force_calls`, `barrier_jobs`, `rate_force_calls`,
+and `rate_jobs`. The harness reducers score `force_calls` and
+`success` with PAR-2 (`reducer = harness`) or an AKMC connected-saddle
+count. None of them reads an AKMC `processtable` and
+`search_results.txt` and emits those four fields. The 2014 reduction
+that does is `archive/entries/hTST/Al/eon-dimer-cg/report.py`: the
+mean, over repetitions, of the searches and force calls until every
+reference barrier below 0.4 eV has been found, and until the summed
+rate reaches 0.999 of the reference rate. That reducer is not in the
+harness. The problem's `[scoring.v2]` block lists the PAR-2 columns
+and does not say which of the four hTST costs is the trial cost, what
+the cap is, or what a failed repetition is. A PAR-2 number for hTST/Al
+would be invented, so it is not written.
+
+## Pooled rows
+
+Each harness file under `results/campaign/eon-svn-r2549-` for the
+templates rerun on this client concatenates two per-start records.
+The first is the run already on `entries/eon-svn-all` at `1f8246a`.
+The second is the rerun with this binary, `EON_SVN_CLIENT` pointing
+at the Fortran client above. When the files were pooled,
+`origin/entries/eon-svn-all` was `1a86921`. That tip merges main onto
+`1f8246a` and does not change the `eon-svn-r2549` campaign files, so
+it added no further starts. PAR-2 and the other columns are `score_v2` on the
+combined starts. `n` in the dat file is that combined count. One
+lowest-eigenvector Lanczos start (`0083`) hit `TimeoutError: timed out`
+under the eight-worker pool, with zero force calls. That start was
+run again by itself and the timeout row was replaced by that rerun.

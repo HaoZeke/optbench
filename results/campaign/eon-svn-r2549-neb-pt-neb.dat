@@ -10,7 +10,7 @@ template eon-svn/neb-pt-neb
 problem neb/Pt-heptamer
 reducer harness
 cap 10000
-n 13
+n 26
 par2_mean 370.61538461538464
 nfailed 0
 mean_calls 370.61538461538464

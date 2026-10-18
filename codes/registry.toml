@@ -42,7 +42,7 @@ repository = "https://theory.cm.utexas.edu/svn/eon"
 ref = "r2549"
 commit = "r2549"
 committed = "2026-01-23"
-note = "SVN revision 2549, last changed 2026-01-23 by eboniw. eonclient -v prints r2549. The 2014 tables used earlier revisions. Export of those trees is forbidden, so the runs here are r2549. QSC is not in this revision. A NO_FORTRAN build has no Fortran Aluminum potential, so hTST Al has no eam_al kernel. The harness morse_pt kernel is Morse::force from this revision: cutoff 9.5, pair energy shifted to zero at the cutoff, minimum image on the box diagonal. Templates under templates/eon-svn that set commit r2549 use this pin. The name is Eon svn so it does not collide with the git eOn pins."
+note = "SVN revision 2549, last changed 2026-01-23 by eboniw. eonclient -v prints r2549. The 2014 tables used earlier revisions. Export of those trees is forbidden, so the runs here are r2549. QSC is not in this revision and is omitted from the link. The client recorded in templates/eon-svn/README is built with gfortran and without NO_FORTRAN, so eam_al, lenosky_si, sw_si, tersoff_si, edip, tip4p_h, and fehe are linked. hTST Al still has no harness reducer for barrier_force_calls, barrier_jobs, rate_force_calls, and rate_jobs. The harness morse_pt kernel is Morse::force from this revision: cutoff 9.5, pair energy shifted to zero at the cutoff, minimum image on the box diagonal. Templates under templates/eon-svn that set commit r2549 use this pin. The name is Eon svn so it does not collide with the git eOn pins."
 
 [[code]]
 id = "rgmin"
