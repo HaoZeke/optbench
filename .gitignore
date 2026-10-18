@@ -13,5 +13,9 @@ docs/source/index.rst
 docs/source/*.rst
 docs/source/generated/
 results/rgsaddle-asv/
+<<<<<<< HEAD
 results/campaign/work/
 results/campaign/geometries/
+=======
+results/pele-asv/
+>>>>>>> 1bad219 (feat: add pele NEB, DNEB, and double-ended connect)
