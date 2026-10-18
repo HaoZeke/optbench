@@ -113,18 +113,34 @@ def summarise(payload: dict) -> dict:
             )
             if not ok and failure is None:
                 raise ValueError(f"{spec['cls']} {pair} failed without a class")
+            # The board scores a trace at or above the template cap as a
+            # failure. A class the harness already stored is kept.
+            counted = float(calls[index])
+            harness_ok = ok
+            harness_failure = failure
+            if spec["cap"] is not None and counted >= spec["cap"] and ok:
+                ok = False
+                failure = "cap"
             records.append(
                 {
                     "seed": pair[0],
                     "start": pair[1],
-                    "force_calls": float(calls[index]),
+                    "force_calls": counted,
                     "success": ok,
                     "failure": failure,
+                    "harness_success": harness_ok,
+                    "harness_failure": harness_failure,
                 }
             )
         finished_calls = [row["force_calls"] for row in records if row["success"]]
         counts = {"cap": 0, "divergence": 0, "crash": 0, "wrong_stationary": 0}
+        harness_counts = {"cap": 0, "divergence": 0, "crash": 0, "wrong_stationary": 0}
+        harness_ok = 0
         for row in records:
+            if row["harness_success"]:
+                harness_ok += 1
+            elif row["harness_failure"] is not None:
+                harness_counts[row["harness_failure"]] += 1
             if row["failure"] is not None:
                 counts[row["failure"]] += 1
         entry = {
@@ -137,6 +153,8 @@ def summarise(payload: dict) -> dict:
             "missing": missing,
             "successes": sum(row["success"] for row in records),
             "failures": counts,
+            "harness_successes": harness_ok,
+            "harness_failures": harness_counts,
             "force_calls_success": {
                 "n": len(finished_calls),
                 "mean": _stat(finished_calls, statistics.fmean),
@@ -170,8 +188,12 @@ def main() -> None:
         f"{'mean':>12} {'median':>12} {'min':>10} {'max':>10} {'par2':>12}"
     )
     for row in summary["classes"]:
-        if "force_calls_success" not in row:
-            print(f"{row['class']:<32} {row['n']:>4} missing {row['n'] - row['finished']}")
+        if row.get("missing") or "force_calls_success" not in row:
+            missing = row.get("missing") or []
+            print(
+                f"{row['class']:<32} {row.get('finished', 0):>4}/{row['n']:<4} "
+                f"missing {len(missing)} {missing}"
+            )
             continue
         calls = row["force_calls_success"]
         par2 = None if "score_v2" not in row else row["score_v2"]["par2_mean"]
