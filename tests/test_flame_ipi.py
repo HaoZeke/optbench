@@ -192,7 +192,13 @@ def test_poscur_uses_the_projective_cube(tmp_path):
     side = f"{CELL_ANG:.10f}"
     assert lines[1] == f"{side} 0.0 {side}"
     assert lines[2] == f"0.0 0.0 {side}"
-    assert "VERBOSE 0" in (tmp_path / "params_new.in").read_text(encoding="utf-8")
+    text = (tmp_path / "params_new.in").read_text(encoding="utf-8")
+    assert "VERBOSE 0" in text
+    assert "GEOFIREDTINIT" not in text
+    _write_case(tmp_path, positions, 9, 3, 4, {"init": "1.d-9", "min": "1.d-12"})
+    lowered = (tmp_path / "params_new.in").read_text(encoding="utf-8")
+    assert "GEOFIREDTINIT 1.d-9" in lowered
+    assert "GEOFIREDTMIN 1.d-12" in lowered
 
 
 def test_unruled_reference_bound_keeps_the_raw_call_count():
@@ -225,3 +231,7 @@ def test_lj38_ceiling_matches_the_2014_stop():
     other = load_template(root, "flame/lj75-minhocao")
     assert success_ceiling(bare, other) is None
     assert abs(search_target(bare, other) - (-397.492331 + 0.001)) < 1e-9
+    from optbench.runners.flame_go import fire_dt_of
+
+    assert fire_dt_of(template) == {}
+    assert fire_dt_of(other) == {"init": "1.d-9", "min": "1.d-12"}

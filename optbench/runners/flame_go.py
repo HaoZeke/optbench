@@ -253,7 +253,22 @@ def load_geometries(root: Path, problem: dict, geometries: Path | None, work: Pa
     return loaded
 
 
-def _write_case(work: Path, positions, port: int, seed: int, nlminx: int) -> None:
+def fire_dt_of(template: dict) -> dict:
+    """Optional FIRE timestep lines. Empty means the params_new defaults."""
+    flame = template.get("flame") or {}
+    found = {}
+    for source, dest in (
+        ("geofiredtinit", "init"),
+        ("geofiredtmin", "min"),
+        ("geofiredtmax", "max"),
+    ):
+        value = flame.get(source)
+        if value not in (None, ""):
+            found[dest] = str(value).strip()
+    return found
+
+
+def _write_case(work: Path, positions, port: int, seed: int, nlminx: int, fire_dt: dict | None = None) -> None:
     nat = int(positions.shape[0])
     work.mkdir(parents=True, exist_ok=True)
     (work / "flame_in.yaml").write_text(
@@ -282,6 +297,15 @@ def _write_case(work: Path, positions, port: int, seed: int, nlminx: int) -> Non
         "FINDSYM F\n",
         encoding="utf-8",
     )
+    labels = {"init": "GEOFIREDTINIT", "min": "GEOFIREDTMIN", "max": "GEOFIREDTMAX"}
+    lines = []
+    for key, label in labels.items():
+        value = None if not fire_dt else fire_dt.get(key)
+        if value not in (None, ""):
+            lines.append(f"{label} {value}")
+    if lines:
+        with (work / "params_new.in").open("a", encoding="utf-8") as handle:
+            handle.write("\n".join(lines) + "\n")
     (work / "ioput").write_text(IOPUT, encoding="utf-8")
     (work / "earr.dat").write_text(f"{0:10d}{int(nlminx):10d}\n" + EARR_TOLERANCE, encoding="utf-8")
     # poscur.ascii stores the projective cell (dxx, dyx, dyy) and
@@ -349,7 +373,14 @@ def _run_start(job: dict) -> dict:
         shutil.rmtree(work)
     positions = np.asarray(job["coords"], dtype=np.float64).reshape(-1, 3)
     port = _free_port(int(job["port"]))
-    _write_case(work, positions, port, int(job["seed"]), int(job["nlminx"]))
+    _write_case(
+        work,
+        positions,
+        port,
+        int(job["seed"]),
+        int(job["nlminx"]),
+        job.get("fire_dt") or None,
+    )
     cap = None if job["cap"] is None else int(job["cap"])
     target = None if job["target"] is None else float(job["target"])
     counter = HarnessCounter(cache=False, cap=cap)
@@ -571,6 +602,17 @@ def _dat(summary: dict, template: dict, metrics: dict, commit: str, version: str
         "# ioput is the documented minhocao start 1.d-2 5.d2 1.d5. earr tolerances are 2.d-3 1.d-1.",
         "# Local optimisation is the code default FIRE tolerance 2.d-4 Ha/Bohr.",
     ]
+    fire = fire_dt_of(template)
+    if fire:
+        lines.append(
+            "# GEOFIREDTINIT "
+            + fire.get("init", "10")
+            + " and GEOFIREDTMIN "
+            + fire.get("min", "1")
+            + " replace the code defaults 10 and 1. "
+            "Pairs in this archive sit near 0.02 sigma, and the default first step "
+            "moves those atoms by more than the cell."
+        )
     if ceiling is None:
         lines.append(
             "# No energy_above_minimum is stated. partial is true and the row is not ranked. "
@@ -646,6 +688,8 @@ def _publish(output: Path, records: list[dict], problem: dict, template: dict, *
             "ceiling": ceiling,
             "cell_angstrom": CELL_ANG,
             "ioput": IOPUT.strip(),
+            "geofiredtinit": (template.get("flame") or {}).get("geofiredtinit"),
+            "geofiredtmin": (template.get("flame") or {}).get("geofiredtmin"),
         },
     )
     document = {
@@ -713,6 +757,7 @@ def run_template(
     flame = template.get("flame") or {}
     seed = int(flame.get("seed", 314159))
     nlminx = int(flame.get("nlminx", DEFAULT_NLMINX))
+    fire_dt = fire_dt_of(template)
     loaded = load_geometries(root, problem, geometries, work, output)
     if limit > 0:
         loaded = loaded[: int(limit)]
@@ -741,6 +786,7 @@ def run_template(
                 "binary": str(binary),
                 "seed": seed,
                 "nlminx": nlminx,
+                "fire_dt": fire_dt,
                 "cap": cap,
                 "target": search_target(problem, template),
                 "claim": ceiling is not None,
