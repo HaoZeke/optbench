@@ -1,0 +1,26 @@
+id = "pyamff/emt-pt38-radam-force"
+engine = "pyamff"
+problem = "mlopt/emt-pt38"
+code = "pyamff"
+code_version = "0.1.0-beta"
+commit = "240f51d01ca22969369f9bc21760c61cbb3b6665"
+algorithm = "RAdam"
+tuning = "default"
+note = "torch.optim.RAdam on the PyAMFF 10-7 tanh network for EMT Pt38. Force training uses force coefficient 0.1. The stop is an L2 norm of 0.1 on every parameter gradient and a budget of 30000 loss evaluations. Learning rate 0.01 and weight decay 0. The 50 initial weights are uniform on [-1, 1), seeded from 20261015 plus the start index. Fingerprints are the archived Behler-Parrinello set with NoScaler and one batch."
+
+[pyamff]
+optimizer = "RAdam"
+learning_rate = 0.01
+hidden_layers = [10, 7]
+activation = "tanh"
+loss = "SSE"
+energy_coefficient = 1.0
+force_coefficient = 0.1
+force_training = true
+initial_weights = "random_uniform"
+seed_base = 20261015
+
+[stop]
+max_steps = 30000
+gradient_norm = 0.1
+norm = "l2"
