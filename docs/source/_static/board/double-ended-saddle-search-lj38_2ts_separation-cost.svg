@@ -54,6 +54,8 @@ z
     <g clip-path="url(#p7368dd3a6c)">
      <use xlink:href="#mb7c84e1192" x="479.885455" y="249.943636" style="fill: #1f77b4; stroke: #1f77b4"/>
      <use xlink:href="#mb7c84e1192" x="363.446952" y="177.445942" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#mb7c84e1192" x="328.515401" y="154.543504" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#mb7c84e1192" x="340.159251" y="142.261242" style="fill: #1f77b4; stroke: #1f77b4"/>
      <use xlink:href="#mb7c84e1192" x="223.720749" y="109.385943" style="fill: #1f77b4; stroke: #1f77b4"/>
      <use xlink:href="#mb7c84e1192" x="223.720749" y="106.015012" style="fill: #1f77b4; stroke: #1f77b4"/>
      <use xlink:href="#mb7c84e1192" x="200.433048" y="96.208953" style="fill: #1f77b4; stroke: #1f77b4"/>
@@ -921,43 +923,43 @@ L 499.68 26.16
    </g>
    <g id="text_20">
     <!-- 3 -->
-    <g transform="translate(226.720749 106.385943) scale(0.07 -0.07)">
+    <g transform="translate(331.515401 151.543504) scale(0.07 -0.07)">
      <use xlink:href="#DejaVuSans-16"/>
     </g>
    </g>
    <g id="text_21">
     <!-- 4 -->
-    <g transform="translate(226.720749 103.015012) scale(0.07 -0.07)">
+    <g transform="translate(343.159251 139.261242) scale(0.07 -0.07)">
      <use xlink:href="#DejaVuSans-17"/>
     </g>
    </g>
    <g id="text_22">
     <!-- 5 -->
-    <g transform="translate(203.433048 93.208953) scale(0.07 -0.07)">
+    <g transform="translate(226.720749 106.385943) scale(0.07 -0.07)">
      <use xlink:href="#DejaVuSans-18"/>
     </g>
    </g>
    <g id="text_23">
     <!-- 6 -->
-    <g transform="translate(203.433048 92.863834) scale(0.07 -0.07)">
+    <g transform="translate(226.720749 103.015012) scale(0.07 -0.07)">
      <use xlink:href="#DejaVuSans-19"/>
     </g>
    </g>
    <g id="text_24">
     <!-- 7 -->
-    <g transform="translate(191.789198 88.645286) scale(0.07 -0.07)">
+    <g transform="translate(203.433048 93.208953) scale(0.07 -0.07)">
      <use xlink:href="#DejaVuSans-1a"/>
     </g>
    </g>
    <g id="text_25">
     <!-- 8 -->
-    <g transform="translate(191.789198 88.546879) scale(0.07 -0.07)">
+    <g transform="translate(203.433048 92.863834) scale(0.07 -0.07)">
      <use xlink:href="#DejaVuSans-1b"/>
     </g>
    </g>
    <g id="text_26">
     <!-- 9 -->
-    <g transform="translate(168.501497 75.712567) scale(0.07 -0.07)">
+    <g transform="translate(191.789198 88.645286) scale(0.07 -0.07)">
      <defs>
       <path id="DejaVuSans-1c" d="M 703 97 
 L 703 672 
@@ -995,21 +997,21 @@ z
    </g>
    <g id="text_27">
     <!-- 10 -->
-    <g transform="translate(156.857647 70.735384) scale(0.07 -0.07)">
+    <g transform="translate(191.789198 88.546879) scale(0.07 -0.07)">
      <use xlink:href="#DejaVuSans-14"/>
      <use xlink:href="#DejaVuSans-13" transform="translate(63.625 0)"/>
     </g>
    </g>
    <g id="text_28">
     <!-- 11 -->
-    <g transform="translate(86.994545 33.816364) scale(0.07 -0.07)">
+    <g transform="translate(168.501497 75.712567) scale(0.07 -0.07)">
      <use xlink:href="#DejaVuSans-14"/>
      <use xlink:href="#DejaVuSans-14" transform="translate(63.625 0)"/>
     </g>
    </g>
    <g id="text_29">
     <!-- 12 -->
-    <g transform="translate(86.994545 33.816364) scale(0.07 -0.07)">
+    <g transform="translate(156.857647 70.735384) scale(0.07 -0.07)">
      <use xlink:href="#DejaVuSans-14"/>
      <use xlink:href="#DejaVuSans-15" transform="translate(63.625 0)"/>
     </g>
@@ -1029,6 +1031,20 @@ z
     </g>
    </g>
    <g id="text_32">
+    <!-- 15 -->
+    <g transform="translate(86.994545 33.816364) scale(0.07 -0.07)">
+     <use xlink:href="#DejaVuSans-14"/>
+     <use xlink:href="#DejaVuSans-18" transform="translate(63.625 0)"/>
+    </g>
+   </g>
+   <g id="text_33">
+    <!-- 16 -->
+    <g transform="translate(86.994545 33.816364) scale(0.07 -0.07)">
+     <use xlink:href="#DejaVuSans-14"/>
+     <use xlink:href="#DejaVuSans-19" transform="translate(63.625 0)"/>
+    </g>
+   </g>
+   <g id="text_34">
     <!-- Cost and success: double-ended-saddle-search/lj38_2ts_separation -->
     <g transform="translate(80.417812 20.16) scale(0.12 -0.12)">
      <defs>

@@ -546,7 +546,165 @@
       "wilson_low": 0.0
     }
   ],
-  "profile_gap": "No performance profile. One start has no finite cost.",
+  "profile": {
+    "area_log10": {
+      "ase/de-lj38-default 3.29.0 default campaign f27c000": 0.01505149978319906,
+      "ase/de-lj38-tuned 3.29.0 tuned campaign f27c000": 0.0,
+      "eon-svn/de-lj38-ci r2549 default campaign, asv r2549": 0.930182686601702,
+      "eon-svn/de-lj38-neb r2549 default campaign, asv r2549": 0.8398736879025075,
+      "rgsaddle/ci-neb 0.2.2 default asv c0db2b8": 0.5508848920650855,
+      "rgsaddle/ci-neb-lbfgs 0.2.2 tuned asv c0db2b8": 0.9181414867751425,
+      "rgsaddle/ew-ci-neb 0.2.2 default asv c0db2b8": 0.5809878916314837,
+      "rgsaddle/ew-ci-neb-lbfgs 0.2.2 tuned asv c0db2b8": 1.0505946848672942,
+      "rgsaddle/idpp-ci-neb 0.2.2 default asv c0db2b8": 0.5237921924553273,
+      "rgsaddle/idpp-ci-neb-lbfgs 0.2.2 tuned asv c0db2b8": 0.9091105869052232,
+      "rgsaddle/neb 0.2.2 default asv c0db2b8": 0.0,
+      "rgsaddle/neb-lbfgs 0.2.2 tuned asv c0db2b8": 0.0,
+      "rgsaddle/oci-neb 0.2.2 default asv c0db2b8": 0.544864292151806,
+      "rgsaddle/oci-neb-lbfgs 0.2.2 tuned asv c0db2b8": 0.8880384872087446,
+      "rgsaddle/sidpp-ci-neb 0.2.2 default asv c0db2b8": 0.511750992628768,
+      "rgsaddle/sidpp-ci-neb-lbfgs 0.2.2 tuned asv c0db2b8": 0.9061002869485835
+    },
+    "rho": {
+      "ase/de-lj38-default 3.29.0 default campaign f27c000": [
+        0.0,
+        0.0,
+        0.02,
+        0.02,
+        0.02
+      ],
+      "ase/de-lj38-tuned 3.29.0 tuned campaign f27c000": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "eon-svn/de-lj38-ci r2549 default campaign, asv r2549": [
+        0.08,
+        0.8,
+        0.9,
+        0.9,
+        0.9
+      ],
+      "eon-svn/de-lj38-neb r2549 default campaign, asv r2549": [
+        0.0,
+        0.76,
+        0.8,
+        0.82,
+        0.82
+      ],
+      "rgsaddle/ci-neb 0.2.2 default asv c0db2b8": [
+        0.0,
+        0.04,
+        0.68,
+        0.74,
+        0.74
+      ],
+      "rgsaddle/ci-neb-lbfgs 0.2.2 tuned asv c0db2b8": [
+        0.2,
+        0.82,
+        0.84,
+        0.86,
+        0.86
+      ],
+      "rgsaddle/ew-ci-neb 0.2.2 default asv c0db2b8": [
+        0.0,
+        0.02,
+        0.74,
+        0.78,
+        0.78
+      ],
+      "rgsaddle/ew-ci-neb-lbfgs 0.2.2 tuned asv c0db2b8": [
+        0.4,
+        0.94,
+        0.94,
+        0.94,
+        0.94
+      ],
+      "rgsaddle/idpp-ci-neb 0.2.2 default asv c0db2b8": [
+        0.0,
+        0.02,
+        0.64,
+        0.72,
+        0.72
+      ],
+      "rgsaddle/idpp-ci-neb-lbfgs 0.2.2 tuned asv c0db2b8": [
+        0.22,
+        0.78,
+        0.84,
+        0.86,
+        0.86
+      ],
+      "rgsaddle/neb 0.2.2 default asv c0db2b8": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rgsaddle/neb-lbfgs 0.2.2 tuned asv c0db2b8": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rgsaddle/oci-neb 0.2.2 default asv c0db2b8": [
+        0.0,
+        0.02,
+        0.68,
+        0.74,
+        0.74
+      ],
+      "rgsaddle/oci-neb-lbfgs 0.2.2 tuned asv c0db2b8": [
+        0.0,
+        0.82,
+        0.84,
+        0.86,
+        0.86
+      ],
+      "rgsaddle/sidpp-ci-neb 0.2.2 default asv c0db2b8": [
+        0.0,
+        0.04,
+        0.64,
+        0.68,
+        0.68
+      ],
+      "rgsaddle/sidpp-ci-neb-lbfgs 0.2.2 tuned asv c0db2b8": [
+        0.26,
+        0.8,
+        0.82,
+        0.84,
+        0.84
+      ]
+    },
+    "solved": {
+      "ase/de-lj38-default 3.29.0 default campaign f27c000": 0.02,
+      "ase/de-lj38-tuned 3.29.0 tuned campaign f27c000": 0.0,
+      "eon-svn/de-lj38-ci r2549 default campaign, asv r2549": 0.9,
+      "eon-svn/de-lj38-neb r2549 default campaign, asv r2549": 0.82,
+      "rgsaddle/ci-neb 0.2.2 default asv c0db2b8": 0.74,
+      "rgsaddle/ci-neb-lbfgs 0.2.2 tuned asv c0db2b8": 0.86,
+      "rgsaddle/ew-ci-neb 0.2.2 default asv c0db2b8": 0.78,
+      "rgsaddle/ew-ci-neb-lbfgs 0.2.2 tuned asv c0db2b8": 0.94,
+      "rgsaddle/idpp-ci-neb 0.2.2 default asv c0db2b8": 0.72,
+      "rgsaddle/idpp-ci-neb-lbfgs 0.2.2 tuned asv c0db2b8": 0.86,
+      "rgsaddle/neb 0.2.2 default asv c0db2b8": 0.0,
+      "rgsaddle/neb-lbfgs 0.2.2 tuned asv c0db2b8": 0.0,
+      "rgsaddle/oci-neb 0.2.2 default asv c0db2b8": 0.74,
+      "rgsaddle/oci-neb-lbfgs 0.2.2 tuned asv c0db2b8": 0.86,
+      "rgsaddle/sidpp-ci-neb 0.2.2 default asv c0db2b8": 0.68,
+      "rgsaddle/sidpp-ci-neb-lbfgs 0.2.2 tuned asv c0db2b8": 0.84
+    },
+    "taus": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ]
+  },
   "ranked": [
     {
       "asv_commit": "19e5e5f275cc59e67893ae3e761f1fb0097841f2",
@@ -592,6 +750,51 @@
       "tuning": "tuned",
       "wilson_high": 0.979385029651026,
       "wilson_low": 0.8378290831116182
+    },
+    {
+      "asv_commit": "c1ecf607a10f7ab78d1615e4cbf9af030bebcdbf",
+      "call_unit": "total",
+      "cap": 2500,
+      "code": "Eon svn",
+      "code_version": "r2549",
+      "commit": "r2549",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "eon-svn-r2549-de-lj38-ci",
+      "failures": {
+        "cap": 5,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 50,
+      "history": false,
+      "max_calls": 2500.0,
+      "mean_calls": 930.1,
+      "mean_per_image": 186.02,
+      "median": 657.0,
+      "median_calls": 657.0,
+      "median_high": 817.0,
+      "median_low": 549.5,
+      "median_per_image": 131.4,
+      "min_calls": 347.0,
+      "n": 50,
+      "nfailed": 5,
+      "note": "starts.jsonl",
+      "par2_mean": 1180.1,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/eon-svn-r2549-de-lj38-ci.dat; results/asv/c1ecf607a10f7ab78d1615e4cbf9af030bebcdbf",
+      "problem": "double-ended-saddle-search/lj38",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign, asv",
+      "success_rate": 0.9,
+      "template": "eon-svn/de-lj38-ci",
+      "tuning": "default",
+      "wilson_high": 0.9565242350681096,
+      "wilson_low": 0.7863976856252035
     },
     {
       "asv_commit": "19e5e5f275cc59e67893ae3e761f1fb0097841f2",
@@ -772,6 +975,51 @@
       "tuning": "tuned",
       "wilson_high": 0.916625793219666,
       "wilson_low": 0.7148578393696501
+    },
+    {
+      "asv_commit": "c1ecf607a10f7ab78d1615e4cbf9af030bebcdbf",
+      "call_unit": "total",
+      "cap": 2500,
+      "code": "Eon svn",
+      "code_version": "r2549",
+      "commit": "r2549",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "eon-svn-r2549-de-lj38-neb",
+      "failures": {
+        "cap": 9,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 50,
+      "history": false,
+      "max_calls": 2500.0,
+      "mean_calls": 1121.34,
+      "mean_per_image": 224.268,
+      "median": 774.5,
+      "median_calls": 774.5,
+      "median_high": 917.0,
+      "median_low": 667.0,
+      "median_per_image": 154.9,
+      "min_calls": 357.0,
+      "n": 50,
+      "nfailed": 9,
+      "note": "starts.jsonl",
+      "par2_mean": 1571.34,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/eon-svn-r2549-de-lj38-neb.dat; results/asv/c1ecf607a10f7ab78d1615e4cbf9af030bebcdbf",
+      "problem": "double-ended-saddle-search/lj38",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign, asv",
+      "success_rate": 0.82,
+      "template": "eon-svn/de-lj38-neb",
+      "tuning": "default",
+      "wilson_high": 0.9022980732976582,
+      "wilson_low": 0.6920394632569922
     },
     {
       "asv_commit": "19e5e5f275cc59e67893ae3e761f1fb0097841f2",

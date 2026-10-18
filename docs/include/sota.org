@@ -14,9 +14,8 @@
    <h3>Lennard-Jones 38 clusters with Gaussian force noise</h3>
    <table data-board-table="headline" data-problem="minimization/lj38-noise">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="13">No full harness row.</td></tr>
+   <tr><td data-field="template">eon-svn/lj38-noise-0</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">300.052</td><td data-field="success_rate">0.995</td><td data-field="wilson_low">0.988349</td><td data-field="wilson_high">0.997862</td><td data-field="median_calls">189</td><td data-field="mean_calls">200.9</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 5</td><td data-field="n">1000</td></tr>
    </tbody></table>
-   <p class="bench-gaps">No committed harness run.</p>
    <p><a href="generated/suites/minimization.html#lj38-noise">Ranked table, performance profile, and the 2014 archive</a>.</p>
    <h3>Morse bulk</h3>
    <table data-board-table="headline" data-problem="minimization/morse-bulk">
@@ -51,7 +50,7 @@
    <h3>pt-island</h3>
    <table data-board-table="headline" data-problem="double-ended-saddle-search/pt-island">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Per-image mean</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">rgsaddle/ew-ci-neb-lbfgs</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">asv</td><td data-field="current">yes</td><td data-field="par2_mean">422.136</td><td data-field="success_rate">0.966102</td><td data-field="wilson_low">0.884564</td><td data-field="wilson_high">0.990654</td><td data-field="median_calls">226</td><td data-field="mean_calls">224.017</td><td data-field="mean_per_image">74.6723</td><td data-field="failures">crash 0, divergence 2, cap 0, wrong_stationary 0</td><td data-field="n">59</td></tr>
+   <tr><td data-field="template">eon-svn/de-pt-ci</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">225.881</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.938871</td><td data-field="wilson_high">1</td><td data-field="median_calls">188</td><td data-field="mean_calls">225.881</td><td data-field="mean_per_image">75.2938</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">59</td></tr>
    </tbody></table>
    <p class="bench-gaps">eOn band rows are not yet on the harness counter. Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/double-ended-saddle-search.html#pt-island">Ranked table, performance profile, and the 2014 archive</a>.</p>
