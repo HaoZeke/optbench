@@ -167,7 +167,8 @@ def specs() -> list[dict]:
     from optbench.vcsqnm_catalog import CODE, CODE_VERSION, COMMIT, DEFAULT
 
     sqnm_note = (
-        "Default profile. initial_step_size is -1e-7 and alpha_min is 1e-3. "
+        "Default profile. initial_step_size is -1e-7, alpha_min is 1e-3, and eps_subsp is 1e-5. "
+        "The wrapper constructor uses -0.01 and eps_subsp 1e-3, which let LJ38 leave the cutoff. "
         "The stop is the noise-aware force norm, and at positive sigma the clean energy over the last window. "
         "The index is the clean Hessian with the rigid-mode rule. "
         "Variable-cell SQNM is not on this problem: the spec potential has no cell."

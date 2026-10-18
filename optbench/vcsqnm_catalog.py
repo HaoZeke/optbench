@@ -14,8 +14,10 @@ start. ``alpha_min`` stays 1e-3. At 1e-2 a later step dissociates the
 cluster. Morse bulk uses the same coefficients. The estimator inside
 SQNM replaces the coefficient after the first step.
 
-The default history is 10 and ``eps_subsp`` is 1e-3, the wrapper
-constructor. The tuned row uses history 20 and ``eps_subsp`` 1e-4.
+The wrapper constructor uses ``eps_subsp`` 1e-3. On LJ38 that value
+lets a later step leave the cutoff, and the flat region counts as a
+minimum. Both rows use ``eps_subsp`` 1e-5, which keeps every archived
+LJ38 start bound. The default history is 10. The tuned history is 20.
 
 Lennard-Jones 38 has no cell coordinate in the spec potential, so the
 variable-cell methods are Morse bulk only.
@@ -44,14 +46,14 @@ DEFAULT = {
     "initial_step_size": -1e-7,
     "nhist_max": 10,
     "alpha_min": 1e-3,
-    "eps_subsp": 1e-3,
+    "eps_subsp": 1e-5,
     "lattice_weight": 2.0,
 }
 TUNED = {
     "initial_step_size": -1e-7,
     "nhist_max": 20,
     "alpha_min": 1e-3,
-    "eps_subsp": 1e-4,
+    "eps_subsp": 1e-5,
     "lattice_weight": 2.0,
 }
 
@@ -67,12 +69,13 @@ _METHODS = (
 )
 
 _FIXED = (
-    "Fixed-cell SQNM. initial_step_size is -1e-7, alpha_min is 1e-3, "
-    "and the stop is the problem force norm. The ASE wrapper constructor "
-    "uses initial_step_size -0.01. On the stiffest LJ38 start a force "
-    "component is 6.1e5, and that constructor coefficient carries the atom "
-    "past the cutoff, where the force is zero. -1e-7 holds the first "
-    "displacement under 0.07 sigma. Morse bulk uses the same coefficients."
+    "Fixed-cell SQNM. initial_step_size is -1e-7 and alpha_min is 1e-3. "
+    "The stop is the problem force norm. The ASE wrapper constructor uses "
+    "initial_step_size -0.01 and eps_subsp 1e-3. On the stiffest LJ38 start "
+    "a force component is about 6.1e5, and -0.01 carries that atom past the "
+    "cutoff, where the force is zero. eps_subsp 1e-3 also lets a later step "
+    "leave the cutoff. eps_subsp 1e-5 keeps every archived LJ38 start bound. "
+    "Morse bulk uses the same coefficients."
 )
 _VC = (
     "Variable-cell SQNM on the Morse pair potential. The cell is a coordinate. "
@@ -101,9 +104,9 @@ def _note(method: str, tuned: bool, variable_cell: bool) -> str:
         else:
             body += " The call goes through free_sqnm."
     if tuned:
-        body += " Tuned row: history length 20 and eps_subsp 1e-4."
+        body += " Tuned row: history length 20. eps_subsp stays 1e-5."
     else:
-        body += " Default row: history length 10 and eps_subsp 1e-3, the wrapper constructor."
+        body += " Default row: history length 10 and eps_subsp 1e-5."
     return body
 
 

@@ -86,6 +86,7 @@ def test_templates_match_the_catalog_and_the_registry():
         assert stored["code"] == "vc-SQNM"
         assert stored["sqnm"]["initial_step_size"] == -1e-7
         assert stored["sqnm"]["alpha_min"] == 1e-3
+        assert stored["sqnm"]["eps_subsp"] == 1e-5
         assert stored["ini"]["Optimizer"]["converged_force"] == problem["convergence"]["force_norm"]
         assert stored["ini"]["Optimizer"]["max_iterations"] == 10000
         if spec["problem"] != "minimization/morse-bulk":
@@ -100,7 +101,7 @@ def test_write_templates_matches_the_catalog(tmp_path: Path):
     text = (tmp_path / "templates" / "vcsqnm" / "morse-ase-vc-tuned.toml").read_text(encoding="utf-8")
     assert 'method = "ase-vc"' in text
     assert "nhist_max = 20" in text
-    assert "eps_subsp = 0.0001" in text
+    assert "eps_subsp = 1e-05" in text
 
 
 def test_engine_does_not_need_eonclient(monkeypatch, tmp_path: Path):
@@ -159,16 +160,16 @@ def test_cluster_zero_matches_the_repaired_coefficient():
     wrapped = _minimize_job(_job(name, coords, None, "lj", "ase", 0.01))
     tuned = _minimize_job(_job(name, coords, None, "lj", "sqnm", 0.01, **TUNED))
     assert native["success"] is True
-    assert native["force_calls"] == 397
-    assert native["energy"] == pytest.approx(-168.3541118331728, abs=1e-9)
+    assert native["force_calls"] == 383
+    assert native["energy"] == pytest.approx(-163.773633746714, abs=1e-9)
     assert native["hessian_index"] == 0
     assert native["force_norm"] <= 0.01
     assert wrapped["force_calls"] == native["force_calls"]
     assert wrapped["energy"] == pytest.approx(native["energy"], abs=1e-9)
     assert wrapped["success"] is True
     assert tuned["success"] is True
-    assert tuned["force_calls"] == 366
-    assert tuned["energy"] == pytest.approx(-162.27537096, abs=1e-6)
+    assert tuned["force_calls"] == 348
+    assert tuned["energy"] == pytest.approx(-161.569235822923, abs=1e-9)
     flat = np.asarray(coords, dtype=np.float64).reshape(-1)
     energy, grad = lennard_jones(flat)
     opt = free_sqnm(flat.size // 3, -0.01, 10, 1e-3, 1e-3)
@@ -188,14 +189,14 @@ def test_morse_start_matches_between_the_wrapper_and_the_native_step():
     cell = _minimize_job(_job(name, coords, box, "morse", "vc", 1e-3))
     cell_wrapped = _minimize_job(_job(name, coords, box, "morse", "ase-vc", 1e-3))
     assert native["success"] is True
-    assert native["force_calls"] == 24
-    assert native["energy"] == pytest.approx(-1396.1732376520174, abs=1e-8)
+    assert native["force_calls"] == 23
+    assert native["energy"] == pytest.approx(-1396.173237628638, abs=1e-8)
     assert native["hessian_index"] == 0
-    assert wrapped["force_calls"] == 24
+    assert wrapped["force_calls"] == 23
     assert wrapped["energy"] == pytest.approx(native["energy"], abs=1e-8)
     assert cell["success"] is True
     assert cell["force_calls"] == 31
-    assert cell["energy"] == pytest.approx(-1464.2846409062763, abs=1e-8)
+    assert cell["energy"] == pytest.approx(-1464.284640899119, abs=1e-8)
     assert cell["hessian_index"] == 0
     assert cell["lattice_deriv_max"] <= 1e-3
     assert cell_wrapped["force_calls"] == 31
@@ -227,6 +228,6 @@ def test_sigma_zero_matches_the_clean_count():
         }
     )
     assert record["success"] is True
-    assert record["force_calls"] == 397
-    assert record["energy"] == pytest.approx(-168.3541118331728, abs=1e-9)
-    assert math.isclose(record["force_norm"], 0.009212930756673473, rel_tol=0.0, abs_tol=1e-9)
+    assert record["force_calls"] == 383
+    assert record["energy"] == pytest.approx(-163.773633746714, abs=1e-9)
+    assert math.isclose(record["force_norm"], 0.00965627042457, rel_tol=0.0, abs_tol=1e-9)
