@@ -1,0 +1,18 @@
+# counter harness i-PI POSDATA
+# force_calls count socket potential evaluations and are not divided by the image count
+# the mean is round-half-even over successes; cap, force, or Hessian index other than 1 is a failure
+successes 0
+nfailed 59
+n 59
+transition_states 0
+code CP2K
+code_version 2026.2
+commit 67b5da876dd6a76b8b021d5a04d1c81ba79a4c50
+algorithm IT-NEB
+template cp2k/it-neb
+problem double-ended-saddle-search/pt-island
+tuning default
+counter harness
+call_unit total
+images 3
+cap 3000
