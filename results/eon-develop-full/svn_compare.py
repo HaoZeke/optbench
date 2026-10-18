@@ -55,7 +55,7 @@ LBFGS_DEFAULTS = {
 PAIRS = (
     {
         "name": "ts-lj38-dimer",
-        "develop_template": "eon/develop-ts-lj38-dimer",
+        "develop_template": "eon/develop-ts-lj38-dimer-accept-energy",
         "develop_class": "EonDevelopTsLj38Dimer",
         "svn_template": "templates/eon-svn/ts-lj38-dimer.toml",
         "svn_dat": "results/campaign/eon-svn-r2549-ts-lj38-dimer.dat",
@@ -77,7 +77,7 @@ PAIRS = (
     },
     {
         "name": "ts-pt-dimer",
-        "develop_template": "eon/develop-ts-pt-dimer",
+        "develop_template": "eon/develop-ts-pt-dimer-accept-energy",
         "develop_class": "EonDevelopTsPtDimer",
         "svn_template": "templates/eon-svn/ts-pt-dimer.toml",
         "svn_dat": "results/campaign/eon-svn-r2549-ts-pt-dimer.dat",
@@ -99,7 +99,7 @@ PAIRS = (
     },
     {
         "name": "de-lj38-ci",
-        "develop_template": "eon/develop-de-lj38-cap",
+        "develop_template": "eon/develop-de-lj38-cap-accept-energy",
         "develop_class": "EonDevelopDeLj38Cap",
         "svn_template": "templates/eon-svn/de-lj38-ci.toml",
         "svn_dat": "results/campaign/eon-svn-r2549-de-lj38-ci.dat",
@@ -110,7 +110,7 @@ PAIRS = (
     },
     {
         "name": "de-2ts-ci",
-        "develop_template": "eon/develop-de-2ts",
+        "develop_template": "eon/develop-de-2ts-accept-energy",
         "develop_class": "EonDevelopDe2ts",
         "svn_template": "templates/eon-svn/de-2ts-ci.toml",
         "svn_dat": "results/campaign/eon-svn-r2549-de-2ts-ci.dat",

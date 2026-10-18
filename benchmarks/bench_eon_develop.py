@@ -822,9 +822,11 @@ def _specs() -> list[dict]:
     workers = min(8, os.cpu_count() or 1)
     rows = [
         ("EonDevelopTsLj38Lanczos", "eon/develop-ts-lj38-lanczos", "ts-lj38", ["1"], lj, 900),
-        ("EonDevelopTsLj38Dimer", "eon/develop-ts-lj38-dimer", "ts-lj38", ["1"], lj, 900),
+        ("EonDevelopTsLj38Dimer", "eon/develop-ts-lj38-dimer-accept-energy", "ts-lj38", ["1"], lj, 900),
+        ("EonDevelopTsLj38DimerMatched", "eon/develop-ts-lj38-dimer", "ts-lj38", ["1"], lj, 900),
         ("EonDevelopTsPtLanczos", "eon/develop-ts-pt-lanczos", "ts-pt", ["1"], [f"initial_{i}" for i in range(49)], 1800),
-        ("EonDevelopTsPtDimer", "eon/develop-ts-pt-dimer", "ts-pt", ["1"], [f"initial_{i}" for i in range(49)], 1800),
+        ("EonDevelopTsPtDimer", "eon/develop-ts-pt-dimer-accept-energy", "ts-pt", ["1"], [f"initial_{i}" for i in range(49)], 1800),
+        ("EonDevelopTsPtDimerMatched", "eon/develop-ts-pt-dimer", "ts-pt", ["1"], [f"initial_{i}" for i in range(49)], 1800),
         (
             "EonDevelopNebPtLbfgs",
             "eon/neb-pt-lbfgs",
@@ -843,10 +845,12 @@ def _specs() -> list[dict]:
         ),
         ("EonDevelopDeLj38Ew", "eon/develop-de-lj38-ew", "de-lj38", ["1"], [f"pair_{i:02d}" for i in range(50)], 3600),
         ("EonDevelopDeLj38Oci", "eon/develop-de-lj38-oci", "de-lj38", ["1"], [f"pair_{i:02d}" for i in range(50)], 3600),
-        ("EonDevelopDeLj38Cap", "eon/develop-de-lj38-cap", "de-lj38", ["1"], [f"pair_{i:02d}" for i in range(50)], 7200),
+        ("EonDevelopDeLj38Cap", "eon/develop-de-lj38-cap-accept-energy", "de-lj38", ["1"], [f"pair_{i:02d}" for i in range(50)], 7200),
+        ("EonDevelopDeLj38CapMatched", "eon/develop-de-lj38-cap", "de-lj38", ["1"], [f"pair_{i:02d}" for i in range(50)], 7200),
         ("EonDevelopDePtEw", "eon/develop-de-pt-ew", "de-pt", ["1"], [f"product_{i}" for i in range(59)], 3600),
         ("EonDevelopDePtOci", "eon/develop-de-pt-oci", "de-pt", ["1"], [f"product_{i}" for i in range(59)], 3600),
-        ("EonDevelopDe2ts", "eon/develop-de-2ts", "de-2ts", ["1"], [f"pair_{i:02d}" for i in range(51)], 3600),
+        ("EonDevelopDe2ts", "eon/develop-de-2ts-accept-energy", "de-2ts", ["1"], [f"pair_{i:02d}" for i in range(51)], 3600),
+        ("EonDevelopDe2tsMatched", "eon/develop-de-2ts", "de-2ts", ["1"], [f"pair_{i:02d}" for i in range(51)], 3600),
         ("EonDevelopDe2tsOci", "eon/develop-de-2ts-oci", "de-2ts", ["1"], [f"pair_{i:02d}" for i in range(51)], 3600),
         ("EonDevelopDe2tsEw", "eon/develop-de-2ts-ew", "de-2ts", ["1"], [f"pair_{i:02d}" for i in range(51)], 3600),
         ("EonDevelopLowLj38Dimer", "eon/develop-low-lj38-dimer", "lowest", ["1"], lj, 1800),

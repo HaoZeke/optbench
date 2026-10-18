@@ -27,7 +27,7 @@ PROBE_CAP = 100000
 CASES = (
     {
         "name": "ts-lj38-dimer",
-        "develop": "eon/develop-ts-lj38-dimer",
+        "develop": "eon/develop-ts-lj38-dimer-accept-energy",
         "svn": "templates/eon-svn/ts-lj38-dimer.toml",
         "kind": "ts-lj38",
         "seed": 1,
@@ -35,7 +35,7 @@ CASES = (
     },
     {
         "name": "ts-pt-dimer",
-        "develop": "eon/develop-ts-pt-dimer",
+        "develop": "eon/develop-ts-pt-dimer-accept-energy",
         "svn": "templates/eon-svn/ts-pt-dimer.toml",
         "kind": "ts-pt",
         "seed": 1,
@@ -43,7 +43,7 @@ CASES = (
     },
     {
         "name": "de-lj38-ci",
-        "develop": "eon/develop-de-lj38-cap",
+        "develop": "eon/develop-de-lj38-cap-accept-energy",
         "svn": "templates/eon-svn/de-lj38-ci.toml",
         "kind": "de-lj38",
         "seed": 1,
@@ -51,7 +51,7 @@ CASES = (
     },
     {
         "name": "de-2ts-ci",
-        "develop": "eon/develop-de-2ts",
+        "develop": "eon/develop-de-2ts-accept-energy",
         "svn": "templates/eon-svn/de-2ts-ci.toml",
         "kind": "de-2ts",
         "seed": 1,

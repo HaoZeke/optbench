@@ -12,7 +12,13 @@ from benchmarks.bench_eon_develop import (
     MORSE_RE,
     MORSE_SHIFT,
     EonDevelopDe2ts,
+    EonDevelopDe2tsMatched,
     EonDevelopDeLj38Cap,
+    EonDevelopDeLj38CapMatched,
+    EonDevelopTsLj38Dimer,
+    EonDevelopTsLj38DimerMatched,
+    EonDevelopTsPtDimer,
+    EonDevelopTsPtDimerMatched,
     EonDevelopSaddlePtDimer,
     EonDevelopSaddlePtLanczos,
     EonDevelopTsLj38Lanczos,
@@ -97,6 +103,19 @@ def test_failure_classes_follow_the_harness_order():
     assert spent["force_calls"] == 2500
     assert classify_client(calls=2499, reason=None, cap=2500)["failure"] == "crash"
     assert EonDevelopDeLj38Cap.cap == 2500
+    assert EonDevelopDeLj38Cap.template_name == "eon/develop-de-lj38-cap-accept-energy"
+    assert EonDevelopDeLj38CapMatched.template_name == "eon/develop-de-lj38-cap"
+    assert EonDevelopDeLj38CapMatched.cap == 2500
+    assert EonDevelopTsLj38Dimer.template_name == "eon/develop-ts-lj38-dimer-accept-energy"
+    assert EonDevelopTsLj38DimerMatched.template_name == "eon/develop-ts-lj38-dimer"
+    assert EonDevelopTsPtDimer.template_name == "eon/develop-ts-pt-dimer-accept-energy"
+    assert EonDevelopTsPtDimerMatched.template_name == "eon/develop-ts-pt-dimer"
+    assert EonDevelopDe2ts.template_name == "eon/develop-de-2ts-accept-energy"
+    assert EonDevelopDe2tsMatched.template_name == "eon/develop-de-2ts"
+    assert len(EonDevelopTsLj38DimerMatched.campaign_starts) == 200
+    assert len(EonDevelopTsPtDimerMatched.campaign_starts) == 49
+    assert len(EonDevelopDeLj38CapMatched.campaign_starts) == 50
+    assert len(EonDevelopDe2tsMatched.campaign_starts) == 51
 
 
 def test_ext_pot_ini_uses_one_potential(tmp_path):

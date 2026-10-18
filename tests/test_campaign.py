@@ -35,8 +35,42 @@ def test_develop_de_2ts_cap_is_the_problem_cap():
     problem = resolve_problem(ROOT, "double-ended-saddle-search/lj38_2ts_separation")
     cap = int(problem["convergence"]["max_force_calls"])
     assert cap == 10000
-    for name in ("eon/develop-de-2ts", "eon/develop-de-2ts-oci", "eon/develop-de-2ts-ew"):
+    for name in (
+        "eon/develop-de-2ts",
+        "eon/develop-de-2ts-accept-energy",
+        "eon/develop-de-2ts-oci",
+        "eon/develop-de-2ts-ew",
+    ):
         assert load_template(ROOT, name)["failure_cap"] == cap
+
+
+def test_matched_dimer_and_neb_templates_omit_energy_accept():
+    from optbench.campaign import load_template
+
+    matched = (
+        "eon/develop-ts-lj38-dimer",
+        "eon/develop-ts-pt-dimer",
+        "eon/develop-de-lj38-cap",
+        "eon/develop-de-2ts",
+    )
+    energy = (
+        "eon/develop-ts-lj38-dimer-accept-energy",
+        "eon/develop-ts-pt-dimer-accept-energy",
+        "eon/develop-de-lj38-cap-accept-energy",
+        "eon/develop-de-2ts-accept-energy",
+    )
+    for name in matched:
+        template = load_template(ROOT, name)
+        ini = template["ini"]
+        assert "LBFGS" not in ini
+        assert ini["Optimizer"]["lbfgs_memory"] == 20
+        assert "lbfgs_accept" not in ini["Optimizer"]
+        assert template["tuning"] == "r2549-ini"
+    for name in energy:
+        template = load_template(ROOT, name)
+        assert template["ini"]["LBFGS"]["lbfgs_accept"] == "energy"
+        assert template["tuning"] == "accept-energy"
+        assert "lbfgs_memory" not in template["ini"]["Optimizer"]
 
 
 def test_run_writes_one_benchmark_dat(tmp_path: Path):
