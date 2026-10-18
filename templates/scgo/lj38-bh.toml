@@ -1,0 +1,15 @@
+id = "scgo/lj38-bh"
+engine = "scgo"
+problem = "globalopt/lj38"
+code = "SCGO"
+code_version = "0.9.1"
+commit = "2338742a434a920ed82e52a72dc1338cf06647c1"
+algorithm = "basin hopping"
+tuning = "default"
+failure_cap = 30888
+note = "Default basin hopping from SCGO 0.9.1 get_default_params. Optimizer FIRE, fmax 0.05, dr 0.2, move_fraction 0.3, move_strategy random, temperature 1.0, energy_tolerance 0.1. For 38 atoms the automatic sizes are 131 hops and 233 FIRE steps. The force-call cap is (131 + 1) * (233 + 1) = 30888, one evaluation per FIRE step for the opening quench and each hop, plus the evaluation that meets fmax. Seed 314159 is the seed in the archived eOn basin-hopping config. The known minimum is the harness energy of the quenched Cambridge Cluster Database LJ38 geometry. A start stops when a quenched energy is within energy_above_minimum of that minimum. The atom symbol is C."
+
+[scgo]
+algorithm = "bh"
+symbol = "C"
+seed = 314159

@@ -84,6 +84,16 @@ commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
 committed = "2026-10-05"
 note = "Activation-relaxation technique nouveau, plugin branch DEVEL. The benchmark contributor of a new entry is Rohit Goswami."
 
+[[code]]
+id = "scgo"
+name = "SCGO"
+role = "global optimization"
+repository = "https://github.com/rlaplaza-lab/scgo"
+ref = "main"
+commit = "2338742a434a920ed82e52a72dc1338cf06647c1"
+committed = "2026-10-01"
+note = "SCGO 0.9.1 at main 2338742a. Basin hopping starts from each archived geometry. The potential is optbench.potentials.lennard_jones. The atom symbol is carbon so the library distance floor stays under the Lennard-Jones contact distance. Force calls are harness calculator evaluations."
+
 # generated ASE and Sella templates
 
 [[template]]

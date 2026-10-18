@@ -1,0 +1,13 @@
+# SCGO is a source install. This file does not select a conda package
+# and it does not invent a build string. The campaign runs the revision
+# pinned in codes/registry.toml under id scgo:
+#   ref = main
+#   commit = 2338742a434a920ed82e52a72dc1338cf06647c1
+#   version string 0.9.1
+# asv has one environment_type, so this yml is the pin. The class calls
+# the installed scgo package.
+name: scgo
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
