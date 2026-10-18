@@ -1,0 +1,50 @@
+id = "eon-client/amd-prd"
+engine = "eon"
+problem = "accelerated-md/aladatom"
+code = "eOn"
+code_version = "3.5.0"
+commit = "4d8b34baf1ba8d2d980df29838bac1f969d1662c"
+algorithm = "Parallel replica"
+reducer = "harness"
+failure_cap = 1000000
+kind = "prd"
+kernel = "eam"
+asv_class = "EonClientAmdPrd"
+note = '''
+Parallel replica on the accelerated-md reactant. The 2014 archive has no ini for this entry. The settings are the r2549 canary prd_eam_al_adatom: temperature 500, Andersen thermostat, dephase_time 200, time 5000, state_check_interval 1000. Success is transition_found 1 with harness calls under 1000000. The problem rate columns are not recomputed. The row is partial. The harness kernel is the r2549 Aluminum EAM Fortran force routine, called in process.
+'''
+seeds = [1000]
+starts = ["reactant"]
+declare_partial = true
+asv_full = false
+asv_timeout = 3600
+budget_seconds = 2400
+
+[ini.Main]
+job = "parallel_replica"
+temperature = 500
+random_seed = 1000
+
+[ini.Potential]
+potential = "eam_al"
+
+[ini.Optimizer]
+opt_method = "cg"
+converged_force = 0.01
+max_iterations = 1000
+max_move = 0.2
+
+[ini.Dynamics]
+time_step = 1
+time = 5000
+thermostat = "andersen"
+andersen_alpha = 0.2
+andersen_collision_period = 10
+
+[ini."Parallel Replica"]
+stop_after_transition = false
+dephase_time = 200
+refine_transition = true
+state_save_interval = 10
+state_check_interval = 1000
+post_transition_time = 200
