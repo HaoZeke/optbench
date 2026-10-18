@@ -31,7 +31,7 @@ def test_lj38_noise_does_not_invent_a_reference():
 
 def test_noise_catalog_covers_the_campaign_and_skips_exact_hessians():
     catalog = specs()
-    assert len(catalog) == 34
+    assert len(catalog) == 42
     on_disk = [row for row in list_templates(ROOT) if row.get("engine") == "noise"]
     assert {row["id"] for row in on_disk} == {row["id"] for row in catalog}
     by_id = {row["id"]: row for row in on_disk}
@@ -62,6 +62,9 @@ def test_noise_catalog_covers_the_campaign_and_skips_exact_hessians():
             assert f"noise/ase-{name}-{sigma_slug(sigma)}" in by_id
     for sigma in SIGMA_LEVELS:
         assert f"noise/sella-min-{sigma_slug(sigma)}" in by_id
+    for coordsys in ("cart", "tric"):
+        for sigma in SIGMA_LEVELS:
+            assert f"noise/geometric-{coordsys}-{sigma_slug(sigma)}" in by_id
 
 
 def test_exact_hessian_job_is_refused():

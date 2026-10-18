@@ -154,12 +154,16 @@ def _minimize_job(job: dict) -> dict:
             point, stopped = _drive_ase(job, x0, observed, potential, cap, clean_tol, energy_tol, components)
         elif family == "sella":
             point, stopped = _drive_sella(job, x0, observed, potential, cap, clean_tol, energy_tol, components)
+        elif family == "geometric":
+            point, stopped = _drive_geometric(job, x0, observed, potential, cap, clean_tol, energy_tol, components)
         else:
             raise ValueError(f"unknown solver family {family}")
     except ForceCallCap as exc:
         error = f"ForceCallCap: {exc}"
     except Exception as exc:
         error = f"{type(exc).__name__}: {exc}"
+    if point is None and potential is not None and getattr(potential, "last_point", None) is not None:
+        point = potential.last_point
     if potential is not None and point is not None:
         calls = int(potential.counter.calls)
         try:
@@ -342,6 +346,40 @@ def _drive_ase(job, x0, observed, potential, cap, clean_tol, energy_tol, compone
     return point, stopped
 
 
+def _drive_geometric(job, x0, observed, potential, cap, clean_tol, energy_tol, components):
+    import numpy as np
+
+    from optbench.runners.geometric_min import optimize
+
+    def evaluate(flat):
+        energy, gradient = observed(np.asarray(flat, dtype=np.float64).reshape(-1))
+        return float(energy), np.asarray(gradient, dtype=np.float64)
+
+    def stop(_gradient):
+        return observed.met(clean_tol, energy_tol, components)
+
+    report = optimize(
+        {
+            "coords": x0,
+            "box": None,
+            "kind": "lj",
+            "coordsys": str(job["options"].get("coordsys") or job.get("method") or "cart"),
+            "neighbors": int(job["options"].get("neighbors") or 2),
+            "element": str(job["options"].get("element") or "H"),
+            "cap": cap,
+        },
+        evaluate,
+        stop,
+    )
+    potential.last_point = report["point"]
+    if report.get("error"):
+        text = str(report["error"])
+        if "ForceCallCap" in text or "force-call cap" in text:
+            raise ForceCallCap(text)
+        raise RuntimeError(text)
+    return report["point"], bool(report["stopped"])
+
+
 def _drive_sella(job, x0, observed, potential, cap, clean_tol, energy_tol, components):
     from sella import Sella
 
@@ -438,6 +476,15 @@ def run_template(
         version = str(rgmin.__version__)
         if template.get("code_version") and version != str(template["code_version"]):
             raise RuntimeError(f"rgmin {version} does not match template {template['code_version']}")
+    if family == "geometric":
+        import geometric
+
+        version = str(geometric.__version__)
+        revision = str(getattr(geometric, "__git_revision__", "") or "")
+        if template.get("code_version") and version != str(template["code_version"]):
+            raise RuntimeError(f"geometric {version} does not match template {template['code_version']}")
+        if template.get("commit") and revision and revision != str(template["commit"]):
+            raise RuntimeError(f"geometric revision {revision} does not match template {template['commit']}")
     convergence = problem.get("convergence") or {}
     clean_tol = float(convergence["force_norm"])
     if "energy_tol" not in convergence:
@@ -473,20 +520,41 @@ def run_template(
                 "cap": cap,
             }
         )
-    if workers <= 1:
-        records = [_minimize_job(job) for job in jobs]
-    else:
-        import multiprocessing as mp
+    done_rows: dict[int, dict] = {}
+    partial_path = output.with_suffix(".partial.jsonl")
+    if partial_path.is_file():
+        for line in partial_path.read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            row = json.loads(line)
+            done_rows[int(row["index"])] = row
+    pending = [job for job in jobs if job["index"] not in done_rows]
+    if pending:
+        partial_path.parent.mkdir(parents=True, exist_ok=True)
+        with partial_path.open("a", encoding="utf-8") as handle:
+            if workers <= 1:
+                for job in pending:
+                    record = _minimize_job(job)
+                    done_rows[int(record["index"])] = record
+                    handle.write(json.dumps(record, sort_keys=True) + "\n")
+                    handle.flush()
+            else:
+                import multiprocessing as mp
 
-        context = mp.get_context("spawn")
-        with ProcessPoolExecutor(max_workers=workers, mp_context=context) as pool:
-            futures = [pool.submit(_minimize_job, job) for job in jobs]
-            records = []
-            total = len(futures)
-            for done, future in enumerate(as_completed(futures), 1):
-                records.append(future.result())
-                if done == total or done % 50 == 0:
-                    print(f"{template['id']} {done}/{total}", flush=True)
+                context = mp.get_context("spawn")
+                with ProcessPoolExecutor(max_workers=workers, mp_context=context) as pool:
+                    futures = {pool.submit(_minimize_job, job): job["index"] for job in pending}
+                    total = len(jobs)
+                    finished = len(done_rows)
+                    for future in as_completed(futures):
+                        record = future.result()
+                        done_rows[int(record["index"])] = record
+                        handle.write(json.dumps(record, sort_keys=True) + "\n")
+                        handle.flush()
+                        finished += 1
+                        if finished == total or finished % 50 == 0:
+                            print(f"{template['id']} {finished}/{total}", flush=True)
+    records = [done_rows[job["index"]] for job in jobs]
     records.sort(key=lambda row: row["index"])
     for record in records:
         record.pop("index", None)
@@ -553,6 +621,8 @@ def run_template(
     output.write_text(_dat(summary, template, metrics, sigma), encoding="utf-8")
     write_starts(output.with_suffix(".starts.jsonl"), records)
     output.with_suffix(".v2.json").write_text(json.dumps(document, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    if partial_path.is_file() and len(records) == len(jobs):
+        partial_path.unlink()
     summary["starts"] = len(records)
     summary["template"] = template["id"]
     summary["problem"] = problem["id"]
