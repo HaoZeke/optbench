@@ -895,6 +895,15 @@ def _ase_bh(budget: Budget, x0: np.ndarray, job: dict) -> None:
 
 
 def _ase_mh(budget: Budget, x0: np.ndarray, job: dict) -> None:
+    """ASE MinimaHopping. The hop limit is the force cap.
+
+    The library writes a trajectory and a log on every MD and quench step.
+    Those files do not change the search, and on LJ38 they dominate the
+    runtime, so this run keeps the minima list and drops the per-step files.
+    A force call at the cap still raises and ends the start.
+    """
+    from ase import units
+    from ase.md import VelocityVerlet, thermalize_momenta
     from ase.optimize.minimahopping import MinimaHopping
 
     np.random.seed(int(job["seed"]))
@@ -906,6 +915,35 @@ def _ase_mh(budget: Budget, x0: np.ndarray, job: dict) -> None:
         os.chdir(tmp)
         try:
             class _Stop(MinimaHopping):
+                def _optimize(self):
+                    if budget.calls >= budget.cap:
+                        raise ForceCallCap(f"force-call cap {budget.cap}")
+                    self._atoms.set_momenta(np.zeros(self._atoms.get_momenta().shape))
+                    with self._optimizer(self._atoms, trajectory=None, logfile=None) as opt:
+                        opt.run(fmax=self._fmax)
+
+                def _molecular_dynamics(self, resume=None):
+                    if budget.calls >= budget.cap:
+                        raise ForceCallCap(f"force-call cap {budget.cap}")
+                    mincount = 0
+                    energies: list[float] = []
+                    oldpositions: list[np.ndarray] = []
+                    thermalize_momenta(
+                        self._atoms,
+                        self._temperature,
+                        exact_temperature=True,
+                        rng=self._rng,
+                    )
+                    dyn = VelocityVerlet(self._atoms, timestep=self._timestep * units.fs)
+                    while mincount < self._mdmin:
+                        dyn.run(1)
+                        energies.append(float(self._atoms.get_potential_energy()))
+                        passedmin = self._passedminimum(energies)
+                        if passedmin:
+                            mincount += 1
+                        oldpositions.append(self._atoms.positions.copy())
+                    self._atoms.positions = oldpositions[passedmin[0]]
+
                 def _check_results(self):
                     super()._check_results()
                     _ase_quench_hit(self._atoms, budget, fmax)

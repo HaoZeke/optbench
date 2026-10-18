@@ -444,3 +444,33 @@ def test_goedecker_minima_hopping_finds_the_lennard_jones_trimer():
     assert record["success"] is True
     assert record["force_calls"] < 20000
     assert record["energy"] == pytest.approx(-3.0, abs=1e-3)
+
+
+def test_ase_minima_hopping_stops_at_the_force_cap():
+    record = run_job(
+        {
+            "index": 0,
+            "start": "tri",
+            "coords": [0.0, 0.0, 0.0, 1.5, 0.0, 0.0, 0.2, 1.4, 0.0],
+            "box": None,
+            "species": None,
+            "mode": None,
+            "kind": "lj",
+            "layout": "coords",
+            "family": "globalopt",
+            "method": "ase-mh",
+            "profile": "default",
+            "cap": 40,
+            "gtol": 0.01,
+            "seed": 3,
+            "target": -100.0,
+            "energy_window": 0.01,
+            "sigma": 0.0,
+            "kappa": 3.0,
+            "noise_window": 5,
+            "energy_tol": 0.01,
+            "noise_seed": 1,
+        }
+    )
+    assert record["failure"] == "cap"
+    assert record["force_calls"] == 40
