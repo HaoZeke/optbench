@@ -25,6 +25,7 @@ from pathlib import Path
 
 from optbench.counter import HarnessCounter
 from optbench.failures import classify_failure
+from optbench.noise import converged_under_noise, stop_threshold
 from optbench.potentials import (
     lennard_jones,
     lennard_jones_hessian,
@@ -43,11 +44,29 @@ _PASSED = ("method",)
 
 
 def _kind(problem_id: str) -> str:
-    if problem_id == "minimization/lj38":
+    if problem_id in {"minimization/lj38", "minimization/lj38-noise"}:
         return "lj"
     if problem_id == "minimization/morse-bulk":
         return "morse"
     raise ValueError(f"{problem_id} has no rgmin potential")
+
+
+def _noise(template: dict, problem: dict) -> dict | None:
+    """Gaussian force noise from ``[noise]``. Absent on a clean template."""
+    section = template.get("noise")
+    if not section:
+        return None
+    if "sigma" not in section:
+        raise ValueError(f"{template['id']} noise section needs sigma")
+    stated = problem.get("noise") or {}
+    sigma = float(section["sigma"])
+    allowed = [float(value) for value in stated.get("sigma") or []]
+    if allowed and sigma not in allowed:
+        raise ValueError(f"{template['id']} sigma {sigma} is not in the problem list")
+    kappa = float(section.get("kappa", stated.get("kappa", 3.0)))
+    window = int(section.get("window", stated.get("window", 5)))
+    seed = int(section.get("seed", stated.get("seed", 20261016)))
+    return {"sigma": sigma, "kappa": kappa, "window": window, "seed": seed}
 
 
 def _options(template: dict) -> tuple[str, dict]:
@@ -86,8 +105,12 @@ def _minimize_job(job: dict) -> dict:
     report = None
     energy = None
     force_norm = None
+    clean_force_norm = None
     point = None
     potential = None
+    noise_stopped = False
+    sigma = float(job.get("sigma") or 0.0)
+    noisy_norm = None
     try:
         x = np.asarray(job["coords"], dtype=np.float64).reshape(-1).copy()
         box = None if job["box"] is None else np.asarray(job["box"], dtype=np.float64)
@@ -101,10 +124,25 @@ def _minimize_job(job: dict) -> dict:
 
         counter = HarnessCounter(cache=True, cap=cap)
         potential = RgpotCounter(evaluate, counter)
+        kappa = float(job.get("kappa") or 3.0)
+        window = int(job.get("window") or 5)
+        energies: list[float] = []
+        noisy_norm = None
+        rng = None
+        if sigma > 0.0:
+            import random
+
+            rng = random.Random(int(job["noise_seed"]))
 
         def fg(coords):
+            nonlocal noisy_norm
             value, gradient = potential.calculate(coords)
-            return float(value), np.asarray(gradient, dtype=np.float64)
+            grad = np.asarray(gradient, dtype=np.float64)
+            if sigma > 0.0:
+                energies.append(float(value))
+                grad = grad + np.fromiter((rng.gauss(0.0, sigma) for _ in range(grad.size)), dtype=np.float64)
+                noisy_norm = float(np.linalg.norm(grad))
+            return float(value), grad
 
         def hess(coords):
             nonlocal hessian_calls
@@ -114,13 +152,17 @@ def _minimize_job(job: dict) -> dict:
             return morse_bulk_hessian(coords, box)
 
         method = job["method"]
+        solver_gtol = float(job["gtol"])
+        if sigma > 0.0:
+            solver_gtol = stop_threshold(solver_gtol, sigma, int(x.size), kappa)
         config = rgmin.SolverConfig(
             method,
-            gtol=float(job["gtol"]),
+            gtol=solver_gtol,
             maxiter=int(job["maxiter"]),
             **job["options"],
         )
         solver = rgmin.Solver(x.size, config)
+        energy_tol = max(float(job["gtol"]), kappa * sigma)
         for _ in range(int(job["maxiter"])):
             if counter.calls >= cap:
                 break
@@ -128,7 +170,25 @@ def _minimize_job(job: dict) -> dict:
                 report = solver.step_hess(fg, hess, x)
             else:
                 report = solver.step(fg, x)
-            if report.stop != rgmin.Stop.Budget:
+            if sigma > 0.0:
+                if counter.calls >= cap:
+                    break
+                fg(x)
+                if noisy_norm is not None and converged_under_noise(
+                    force_norm=noisy_norm,
+                    energies=energies,
+                    clean_tol=float(job["gtol"]),
+                    sigma=sigma,
+                    components=int(x.size),
+                    energy_tol=energy_tol,
+                    kappa=kappa,
+                    window=window,
+                ):
+                    noise_stopped = True
+                    break
+                if report.stop not in (rgmin.Stop.Budget, rgmin.Stop.Tolerance):
+                    break
+            elif report.stop != rgmin.Stop.Budget:
                 break
         point = [float(value) for value in x]
     except Exception as exc:
@@ -141,7 +201,8 @@ def _minimize_job(job: dict) -> dict:
             try:
                 with potential.counter.verification():
                     energy, gradient = potential.calculate(point)
-                force_norm = float(np.linalg.norm(gradient))
+                clean_force_norm = float(np.linalg.norm(gradient))
+                force_norm = noisy_norm if sigma > 0.0 and noisy_norm is not None else clean_force_norm
                 verify_calls = int(potential.counter.verify_calls)
             except Exception as exc:
                 if not error:
@@ -165,14 +226,17 @@ def _minimize_job(job: dict) -> dict:
         and force_norm is not None
         and math.isfinite(force_norm)
     )
-    at_force = (
-        finite
-        and stopped
-        and force_norm is not None
-        and force_norm <= gtol
-        and calls < cap
-        and not error
-    )
+    if sigma > 0.0:
+        at_force = finite and noise_stopped and calls < cap and not error
+    else:
+        at_force = (
+            finite
+            and stopped
+            and force_norm is not None
+            and force_norm <= gtol
+            and calls < cap
+            and not error
+        )
     reasons: list[str] = []
     if error and "force-call cap" not in error:
         reasons.append("crash")
@@ -198,6 +262,9 @@ def _minimize_job(job: dict) -> dict:
         "reasons": reasons,
         "energy": None if energy is None else float(energy),
         "force_norm": force_norm,
+        "clean_force_norm": clean_force_norm,
+        "sigma": sigma,
+        "noise_stopped": noise_stopped,
         "hessian_index": hessian_index,
         "expected_index": 0,
         "converged": at_force,
@@ -252,10 +319,17 @@ def _dat(summary: dict, template: dict, metrics: dict, commit: str, version: str
         "# energy and Kabsch RMSD were not applied: the problem file has no energy_tol, rmsd_tol, or per-start reference.",
         "# energy_min and energy_max are the final potential values on the recorded points.",
     ]
-    if str(template.get("problem")) == "minimization/lj38":
+    if str(template.get("problem")) in {"minimization/lj38", "minimization/lj38-noise"}:
         lines.append(
             "# LJ38 index removes the six rigid modes. A curvature is negative only below "
             "-max(force_norm, 1e-8*||H||_F, 1e-6)."
+        )
+    if template.get("noise"):
+        lines.append(
+            "# Gaussian force noise from [noise]. sigma is not an rgmin.SolverConfig field. "
+            "The stop is the noisy force norm at max(clean tolerance, kappa * sigma * sqrt(components)), "
+            "and the clean energy over the last window evaluations spans at most max(clean tolerance, kappa * sigma). "
+            "The Hessian is the clean force."
         )
     note = str(template.get("note") or "").strip()
     if note:
@@ -298,7 +372,7 @@ def run_template(
         raise ValueError("template maxiter is below the problem force-call cap")
     options.pop("gtol", None)
     options.pop("maxiter", None)
-    if problem["id"] == "minimization/lj38":
+    if problem["id"] in {"minimization/lj38", "minimization/lj38-noise"}:
         step = options.get("maxstep")
         if step is None or float(step) <= 0.0:
             raise ValueError(
@@ -320,6 +394,7 @@ def run_template(
         version=version,
         commit=commit,
         root=root,
+        noise=_noise(template, problem),
     )
 
 
@@ -373,6 +448,7 @@ def _run(
     version,
     commit,
     root,
+    noise: dict | None = None,
 ) -> dict:
     loaded = _load_geometries(root, problem, geometries, work, output)
     if problem["id"] == "minimization/morse-bulk" and geometries is None and len(loaded) != 100:
@@ -391,6 +467,10 @@ def _run(
                 "gtol": gtol,
                 "maxiter": cap,
                 "cap": cap,
+                "sigma": 0.0 if noise is None else float(noise["sigma"]),
+                "kappa": 3.0 if noise is None else float(noise["kappa"]),
+                "window": 5 if noise is None else int(noise["window"]),
+                "noise_seed": 0 if noise is None else int(noise["seed"]) + int(index),
             }
         )
     if workers <= 1:
@@ -435,6 +515,12 @@ def _run(
         "method": method,
         **options,
     }
+    if noise is not None:
+        passed["sigma"] = float(noise["sigma"])
+        passed["kappa"] = float(noise["kappa"])
+        passed["window"] = int(noise["window"])
+        passed["noise_seed"] = int(noise["seed"])
+        passed["energy_tol"] = max(gtol, float(noise["kappa"]) * float(noise["sigma"]))
     provenance = collect_provenance(
         code="rgmin",
         code_version=version,
