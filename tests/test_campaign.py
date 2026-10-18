@@ -29,6 +29,16 @@ def test_shipped_templates_use_the_lj38_stop():
     assert "eon/develop-de-2ts" in ids
 
 
+def test_develop_de_2ts_cap_is_the_problem_cap():
+    from optbench.campaign import load_template
+
+    problem = resolve_problem(ROOT, "double-ended-saddle-search/lj38_2ts_separation")
+    cap = int(problem["convergence"]["max_force_calls"])
+    assert cap == 10000
+    for name in ("eon/develop-de-2ts", "eon/develop-de-2ts-oci", "eon/develop-de-2ts-ew"):
+        assert load_template(ROOT, name)["failure_cap"] == cap
+
+
 def test_run_writes_one_benchmark_dat(tmp_path: Path):
     geometries = tmp_path / "geometries"
     geometries.mkdir()
