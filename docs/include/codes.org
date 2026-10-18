@@ -469,5 +469,20 @@
    </tr>
    </tbody></table></div>
    <p>No full ranked run.</p>
+   <h3>ase-gpatom</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>band</td>
+   <td>master</td>
+   <td>572bd64ef61c</td>
+   <td><a href="https://gitlab.com/gpatom/ase-gpatom">https://gitlab.com/gpatom/ase-gpatom</a></td>
+   </tr>
+   </tbody></table></div>
+   <p>No full ranked run.</p>
+   <p>No full ranked run</p><ul>
+   <li>Pt-heptamer: partial.</li>
+   </ul>
    </section>
 #+end_export
