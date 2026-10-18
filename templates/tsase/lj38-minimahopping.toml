@@ -6,11 +6,11 @@ code_version = "1.0"
 commit = "98aac60b5d9905e81ee4e6b8c385f169258d0218"
 algorithm = "minima hopping"
 tuning = "default"
-note = "Library constructor of tsase.optimize.minimahopping.MinimaHopping. T0 is 1000 K, Ediff0 is 0.5, mdmin is 2, the timestep is 0.1 fs, fmax is 0.05, and the local optimizer is QuasiNewton. The dimer and the energy comparison use the harness potential. The search stops on the problem energy window or at the force-call cap. Each start is one process with seed 314159."
+note = "Library constructor of tsase.optimize.minimahopping.MinimaHopping. T0 is 1000 K, Ediff0 is 0.5, mdmin is 2, the timestep is 0.1 fs, fmax is 0.05, and the local optimizer is QuasiNewton. The dimer and the energy comparison use the harness potential. The search stops on the problem energy window or at 2000000 force calls. The problem file states no force cap. 2000000 is above the 2014 basin-hopping maximum of 1795901. Each start is one process with seed 314159."
 
 [tsase]
 method = "minima_hopping"
 seed = 314159
 
 [stop]
-max_force_calls = 5000000
+max_force_calls = 2000000

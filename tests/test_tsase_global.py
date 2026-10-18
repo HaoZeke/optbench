@@ -98,7 +98,7 @@ def test_templates_use_the_registry_pin_and_the_problem_stop():
         assert template["tuning"] in {"default", "tuned"}
         problem = resolve_problem(ROOT, template["problem"])
         _check_stop(problem, template)
-        assert int(template["stop"]["max_force_calls"]) == 5_000_000
+        assert int(template["stop"]["max_force_calls"]) == 2_000_000
     tuned = next(row for row in found if row["id"] == "tsase/lj38-basinhopping-tuned")
     described = describe_parameters(tuned["tsase"], -173.927)
     assert described["fmax"] == 0.01

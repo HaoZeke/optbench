@@ -13,4 +13,4 @@ method = "basin_hopping"
 seed = 314159
 
 [stop]
-max_force_calls = 5000000
+max_force_calls = 2000000

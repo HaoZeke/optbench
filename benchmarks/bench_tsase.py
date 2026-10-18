@@ -187,7 +187,7 @@ def _benchmark(spec: dict):
     class _Benchmark(_TsaseSearch):
         param_names = ["seed", "start"]
         params = [[SEED], starts]
-        timeout = 14400
+        timeout = 7200
         cap = bound["cap"]
         spec = bound
         template_id = spec["template_id"]

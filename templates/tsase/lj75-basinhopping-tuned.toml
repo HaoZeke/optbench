@@ -16,4 +16,4 @@ fmax = 0.01
 dr = 0.3
 
 [stop]
-max_force_calls = 5000000
+max_force_calls = 2000000
