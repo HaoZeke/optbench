@@ -94,6 +94,16 @@ commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
 committed = "2026-10-05"
 note = "Activation-relaxation technique nouveau, plugin branch DEVEL. The benchmark contributor of a new entry is Rohit Goswami."
 
+[[code]]
+id = "n2p2"
+name = "n2p2"
+role = "neural network training"
+repository = "https://github.com/CompPhysVienna/n2p2"
+ref = "master"
+commit = "29b9c9f10b1ac9ea45631b3d556a129ca3b701c2"
+committed = "2025-03-17"
+note = "n2p2 2.3.0, commit 29b9c9f10b1ac9ea45631b3d556a129ca3b701c2. The row uses the standard Kalman filter and the recommended parameters: epsilon 0.01, q0 0.01, qtau 2.302, qmin 1e-6, eta 0.01, etatau 2.302, etamax 1. The published taus are divided by the number of structures in an epoch. One combined filter updates the total-energy residual. The potential is the pyamff 8037eb98 energy-only squared error on the problem trajectory and fpParas.dat. A force call is one loss-gradient evaluation."
+
 # generated ASE and Sella templates
 
 [[template]]
