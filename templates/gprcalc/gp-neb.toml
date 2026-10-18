@@ -1,0 +1,28 @@
+# GPR calculator 0.0.4. Library GP-NEB: BFGS, spring 0.1, climb off, RBF,
+# energy noise 0.002, force noise 0.1, 100 steps. The problem file supplies
+# the image count, the cap, the force norm, and the maximum move.
+id = "gprcalc/gp-neb"
+engine = "gprcalc"
+code = "GPR calculator"
+code_version = "0.0.4"
+commit = "c4d63271a6e87a14171ed43fe85a56b38ee1bea1"
+algorithm = "GP-NEB"
+tuning = "default"
+
+[ini]
+
+[band]
+climbing = false
+algo = "BFGS"
+spring_k = 0.1
+steps = 100
+kernel = "RBF"
+zeta = 2.0
+noise_mode = "absolute"
+noise_e = 0.002
+noise_f = 0.1
+lmax = 4
+nmax = 3
+rcut = 5.0
+freq = 10
+neb_method = "improvedtangent"

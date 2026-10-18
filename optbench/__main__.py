@@ -76,7 +76,20 @@ def run(
     from optbench.campaign import run as run_campaign
 
     loaded = load_template(root, template)
-    if loaded["engine"] == "rgsaddle-band":
+    if loaded["engine"] == "gprcalc":
+        from optbench.gpr_neb import run as run_gpr
+
+        summary = run_gpr(
+            root,
+            problem,
+            template,
+            output=output,
+            workers=workers,
+            work=work,
+            limit=limit,
+            resume=resume,
+        )
+    elif loaded["engine"] == "rgsaddle-band":
         from optbench.rgsaddle_band import run as run_band
 
         summary = run_band(

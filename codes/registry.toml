@@ -94,6 +94,16 @@ commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
 committed = "2026-10-05"
 note = "Activation-relaxation technique nouveau, plugin branch DEVEL. The benchmark contributor of a new entry is Rohit Goswami."
 
+[[code]]
+id = "gprcalc"
+name = "GPR calculator"
+role = "saddle search"
+repository = "https://github.com/MaterSim/GPR_calculator"
+ref = "0.0.4"
+commit = "c4d63271a6e87a14171ed43fe85a56b38ee1bea1"
+committed = "2025-06-16"
+note = "0.0.4 at c4d63271. GP-NEB uses the neb_calc loop on the spec potential: a shared GP, ASE NEB, and BFGS. A force call is one base-calculator evaluation. A surrogate prediction is not a force call. The problem supplies the force stop, the cap, the image count, and the maximum move. Success is a true free-atom gradient at that stop with Hessian index 1. The Python 3.12 import uses scipy.special.sph_harm_y and ase.stress.full_3x3_to_voigt_6_stress. The source build uses setuptools."
+
 # generated ASE and Sella templates
 
 [[template]]
