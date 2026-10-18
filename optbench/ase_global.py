@@ -29,6 +29,7 @@ import os
 import shutil
 import tarfile
 import tempfile
+import time
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from datetime import date
 from pathlib import Path
@@ -271,6 +272,9 @@ class _Basin:
                 opt.Emin = En
                 opt.rmin = opt.optimizable.get_x().reshape(-1, 3)
                 opt.call_observers()
+            if self.hops == 1 or self.hops % 100 == 0:
+                counter = getattr(getattr(opt._atoms().calc, "optbench_harness", None), "calls", None)
+                print(f"basin hop {self.hops} emin {float(opt.Emin):.6f} calls {counter}", flush=True)
             accept = np.exp((Eo - En) / opt.kT) > np.random.uniform()
             if accept:
                 ro = rn.copy()
@@ -435,6 +439,9 @@ def _run_minima(atoms, calc, payload: dict) -> dict:
                 raise
             hops = int(hopper._counter)
             current = _finite_energy(atoms)
+            if hops == 1 or hops % 25 == 0:
+                counter = getattr(getattr(calc, "optbench_harness", None), "calls", None)
+                print(f"minima hop {hops} energy {current} calls {counter}", flush=True)
             if current is not None and (best is None or current < best):
                 best = current
         return _outcome(payload, int(calc.optbench_harness.calls), best, hops, hit_cap)
@@ -466,6 +473,7 @@ def _finite_energy(atoms) -> float | None:
 
 def run_start(payload: dict) -> dict:
     """One start. The seed is applied before ASE draws displacements or momenta."""
+    started = time.perf_counter()
     os.environ["OMP_NUM_THREADS"] = "1"
     os.environ["OPENBLAS_NUM_THREADS"] = "1"
     os.environ["MKL_NUM_THREADS"] = "1"
@@ -486,10 +494,13 @@ def run_start(payload: dict) -> dict:
     atoms.calc = calc
     method = payload["method"]
     if method == "BasinHopping":
-        return _run_basin(atoms, calc, payload)
-    if method == "MinimaHopping":
-        return _run_minima(atoms, calc, payload)
-    raise ValueError(method)
+        row = _run_basin(atoms, calc, payload)
+    elif method == "MinimaHopping":
+        row = _run_minima(atoms, calc, payload)
+    else:
+        raise ValueError(method)
+    row["seconds"] = time.perf_counter() - started
+    return row
 
 
 def _format(value: object) -> str:

@@ -129,7 +129,9 @@ def test_a_high_target_stops_on_the_first_quench(tmp_path: Path):
     assert first["counter"] == "harness"
     assert first["force_calls"] < 50
     assert first["lowest_energy"] <= -100.0
-    assert first == second
+    assert first["seconds"] >= 0.0
+    quiet = {key: value for key, value in first.items() if key != "seconds"}
+    assert quiet == {key: value for key, value in second.items() if key != "seconds"}
 
 
 def test_the_force_cap_is_a_failure(tmp_path: Path):

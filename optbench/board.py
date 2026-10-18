@@ -798,6 +798,7 @@ def _benchmark_index() -> dict[str, dict]:
         "benchmarks.bench_eon_client",
         "benchmarks.bench_rgmin",
         "benchmarks.bench_ase_sella",
+        "benchmarks.bench_asebh",
         "benchmarks.bench_rgsaddle",
         "benchmarks.bench_noise",
         "benchmarks.quadratic",
