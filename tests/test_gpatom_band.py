@@ -131,6 +131,55 @@ def test_cartesian_mean_matches_the_kernel_vector():
     assert np.allclose(before, after, rtol=1e-10, atol=1e-10)
 
 
+def test_memory_crash_is_tallied_as_crash(tmp_path):
+    from optbench.gpatom_band import write_outputs
+
+    output = tmp_path / "band.dat"
+    record = {
+        "start": "min01",
+        "force_calls": 62,
+        "verify_calls": 0,
+        "counter": "harness",
+        "comparable": True,
+        "success": False,
+        "failure": "crash",
+        "reasons": ["crash", "force_norm"],
+        "energy": -1.0,
+        "force_norm": 44.0,
+        "hessian_index": None,
+        "converged": False,
+        "candidate": "highest",
+        "repeated": False,
+        "memory_stop": True,
+        "aid_force_calls": 52,
+        "n_images": 10,
+        "spring": 1.4,
+        "n_free": 175,
+    }
+    template = {
+        "id": "gpatom/aidneb",
+        "code": "gpatom",
+        "code_version": "1.0.1",
+        "commit": COMMIT,
+        "algorithm": "AIDNEB",
+        "tuning": "default",
+    }
+    settings = {
+        "pairs": 13,
+        "potential": "morse_pt",
+        "n_interior": 8,
+        "force_norm": 0.01,
+        "cap": 10000,
+        "aid": {"interpolation": "idpp"},
+    }
+    problem = {"id": "neb/Pt-heptamer"}
+    write_outputs(output, [record], template, settings, problem)
+    score = __import__("json").loads(output.with_suffix(".v2.json").read_text(encoding="utf-8"))["score"]
+    assert score["n_crash"] == 1
+    assert score["n_divergence"] == 0
+    assert "partial true" in output.read_text(encoding="utf-8")
+
+
 def test_kernel_budget_fits_lj38_and_stops_a_large_pt_factor():
     assert _kernel_pair_bytes(25, 38) < _KERNEL_BYTES
     assert _kernel_pair_bytes(80, 175) > _KERNEL_BYTES
