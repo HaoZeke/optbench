@@ -20,9 +20,11 @@ two nearest neighbors. The covalent-radius graph is not used: the builder's
 1 Angstrom minimum distance bonds a compressed Lennard-Jones start into a
 primitive set that does not finish, and a Morse first shell asks for a
 Wilson matrix of about a tebibyte. Lennard-Jones atoms are labeled H so
-Schlegel's guess stays positive near sigma. Morse atoms are Pt. Neighbor
-distances for Morse use the orthorhombic minimum image. The distance
-coordinates themselves stay the library's Cartesian differences.
+Schlegel's guess stays positive near sigma. Morse atoms are Pt. The distance
+coordinates are the library's Cartesian differences, so the neighbor
+list uses those distances too. A minimum-image neighbor can be a long
+Cartesian vector, and that coordinate does not describe the periodic
+contact.
 
 Primitive membership uses a hashed bucket with the same equality test.
 Distance, angle, and dihedral values and first derivatives use the same
@@ -489,7 +491,7 @@ def optimize(job: dict, evaluate, stop) -> dict:
     box = job.get("box")
     bonds = []
     if coordsys == "tric":
-        bonds = knearest(job["coords"], neighbors, None if kind == "lj" else box)
+        bonds = knearest(job["coords"], neighbors, None)
     molecule = _make_molecule(job["coords"], element, bonds)
     internals = _coordinates(molecule, coordsys)
     energy_scale = float(ev2au) if kind == "morse" else 1.0

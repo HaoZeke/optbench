@@ -6,7 +6,7 @@ code_version = "1.1.1"
 commit = "f657e69bae9c81bf7a23e7375db98502ca5c8c30"
 algorithm = "TRIC"
 tuning = "default"
-note = "TRIC coordinates on the Morse bulk cell. Bonds are the two nearest neighbors under the orthorhombic minimum image. Distance coordinates stay the library's Cartesian differences. The covalent first shell is not used: its Wilson G matrix is about a tebibyte. Atoms are Pt. The stop and trust settings match the Cartesian Morse row. A failed coordinate rebuild can continue in Cartesian coordinates."
+note = "TRIC coordinates on the Morse bulk cell. Bonds are the two nearest Cartesian neighbors. Distance coordinates are the library's Cartesian differences, so a minimum-image neighbor is not used: that pair can be a long Cartesian vector and does not describe the periodic contact. The covalent first shell is not used: its Wilson G matrix is about a tebibyte. Atoms are Pt. The stop and trust settings match the Cartesian Morse row. A failed coordinate rebuild can continue in Cartesian coordinates."
 
 [geometric]
 coordsys = "tric"
