@@ -270,7 +270,14 @@ def run_job(job: dict) -> dict:
         point = incumbent["x"]
         calls = int(counter.calls)
         with counter.verification():
-            value, gradient = lennard_jones(point)
+            key = tuple(float(value) for value in np.asarray(point, dtype=np.float64).reshape(-1))
+            _fresh, cached = counter.charge(key)
+            if cached is None:
+                value, gradient = lennard_jones(point)
+                gradient = np.asarray(gradient, dtype=np.float64)
+                counter.remember(key, (float(value), gradient))
+            else:
+                value, gradient = cached
         verify_calls = int(counter.verify_calls)
         energy = float(value)
         force_norm = float(np.linalg.norm(gradient))
