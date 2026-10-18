@@ -2,9 +2,10 @@
 
 The client is develop binary 7095b23. Each start goes through
 ``run_case``, which sets ``Main.parallel`` false and counts force calls
-on the harness. The disk cache makes a second invocation skip finished
-starts. ``--write-asv COMMIT`` turns that cache into one asv result file
-for the matched classes.
+on the harness. ``--write-asv COMMIT`` reads ``matched-full/records.jsonl``
+and writes one asv result file for the matched classes. It does not read
+the harness cache: those paths still hold the energy-accept runs recorded
+under the old template ids.
 """
 
 from __future__ import annotations
@@ -86,13 +87,15 @@ def run_all(workers: int) -> list[dict]:
     return done
 
 
-def _cache_record(template: str, start: str) -> dict:
-    from benchmarks.bench_eon_develop import EON_COMMIT, _read_cache
-
-    record = _read_cache(template, 1, start, 0)
-    if record is None:
-        raise FileNotFoundError(f"missing cache for {template} {start}")
-    return record
+def _jsonl_records() -> dict[tuple[str, str], dict]:
+    path = Path(__file__).resolve().parent / "matched-full" / "records.jsonl"
+    found: dict[tuple[str, str], dict] = {}
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        record = json.loads(line)
+        found[(record["template"], record["start"])] = record
+    return found
 
 
 def _track(record: dict, method: str):
@@ -130,10 +133,16 @@ def write_asv(commit: str, dest: Path) -> None:
         "track_failure_divergence",
         "track_failure_crash",
     ]
+    saved = _jsonl_records()
     results = {}
     now_ms = int(time.time() * 1000)
     for case in CASES:
-        records = [_cache_record(case["template"], start) for start in case["starts"]]
+        records = []
+        for start in case["starts"]:
+            record = saved.get((case["template"], start))
+            if record is None:
+                raise FileNotFoundError(f"missing {case['template']} {start}")
+            records.append(record)
         case_methods = list(methods)
         if case["kind"] == "de-2ts":
             case_methods.append("track_extrema")
