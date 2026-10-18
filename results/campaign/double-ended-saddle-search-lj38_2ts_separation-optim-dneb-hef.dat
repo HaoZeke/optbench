@@ -1,0 +1,22 @@
+# counter harness socket calculate, one POTENTIAL entry, no cache
+# force_calls count raw potential evaluations and are not divided by the image count
+# the mean is round-half-even over successes; cap, force, or Hessian index other than 1 is a failure
+force_calls 6146
+force_calls_min 1887
+force_calls_max 9886
+force_calls_median 5760
+force_calls_per_image 1229
+call_unit total
+successes 23
+nfailed 28
+n 51
+transition_states 23
+code OPTIM
+code_version 02aaf452
+commit 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f
+algorithm DNEB/HEF
+template optim/dneb-hef
+tuning default
+problem double-ended-saddle-search/lj38_2ts_separation
+counter harness
+images 5

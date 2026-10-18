@@ -652,5 +652,64 @@
    </tr>
    </tbody></table></div>
    <p>No full ranked run.</p>
+   <h3>OPTIM</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>saddle search</td>
+   <td>svn.tar.bz2</td>
+   <td>02aaf45245af</td>
+   <td><a href="http://www-wales.ch.cam.ac.uk/svn.tar.bz2">http://www-wales.ch.cam.ac.uk/svn.tar.bz2</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="double-ended-saddle-search/lj38" data-template="optim/dneb-hef">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="template">optim/dneb-hef</td>
+   <td data-field="version">OPTIM 02aaf452</td>
+   <td data-field="commit">02aaf45245af</td>
+   <td data-field="par2_mean">4386.62</td>
+   <td data-field="mean_calls">2386.62</td>
+   <td data-field="median_calls">2500</td>
+   <td data-field="failures">crash 0, divergence 0, cap 40, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="optim/dneb-hef">
+   <td>lj38_2ts_separation</td>
+   <td data-field="template">optim/dneb-hef</td>
+   <td data-field="version">OPTIM 02aaf452</td>
+   <td data-field="commit">02aaf45245af</td>
+   <td data-field="par2_mean">13752.3</td>
+   <td data-field="mean_calls">8115.2</td>
+   <td data-field="median_calls">10000</td>
+   <td data-field="failures">crash 0, divergence 0, cap 27, wrong_stationary 1</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="optim/dneb-hef">
+   <td>pt-island</td>
+   <td data-field="template">optim/dneb-hef</td>
+   <td data-field="version">OPTIM 02aaf452</td>
+   <td data-field="commit">02aaf45245af</td>
+   <td data-field="par2_mean">1465.73</td>
+   <td data-field="mean_calls">1465.73</td>
+   <td data-field="median_calls">1379</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-template="optim/dneb-hef">
+   <td>Pt-heptamer</td>
+   <td data-field="template">optim/dneb-hef</td>
+   <td data-field="version">OPTIM 02aaf452</td>
+   <td data-field="commit">02aaf45245af</td>
+   <td data-field="par2_mean">913.538</td>
+   <td data-field="mean_calls">913.538</td>
+   <td data-field="median_calls">888</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   </tbody></table></div>
    </section>
 #+end_export
