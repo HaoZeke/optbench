@@ -1,0 +1,28 @@
+id = "gmin/lj98-bh"
+engine = "gmin"
+problem = "globalopt/lj98"
+code = "GMIN"
+code_version = "02aaf45245af"
+commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+algorithm = "basin-hopping"
+tuning = "default"
+failure_cap = 2000000
+note = "Serial basin-hopping. One replica at temperature 1. Quenches are L-BFGS with SLOPPYCONV 0.005, TIGHTCONV 0.001, MAXIT 600 and 500. STEP is 0.40 and ASTEP is 0.51. The container radius is 50 and the coordinates are translated to the origin, so the archived start is inside the container. CENTRE keeps the cluster at the origin. The random seed is 20261018 plus the start index. The failure cap is 2000000 harness calls. The problem file leaves max_force_calls unset. TARGET is the harness energy of codes/gmin/reference/lj98.points. EDIFF is 0.001. globalopt/lj98 states no energy window and no start count. The result is partial. EDIFF 0.001 is the lj38 tolerance, used here so a start can stop on the Cambridge point. The data file starts with MPI because the binary is the MPI build, and mpirun launches it, including the one-replica run. Starts are the numbered coords files in the website tarball: 200 for lj75, 100 for lj98 and lj150. The unnumbered coords file is not a start."
+
+[gmin]
+method = "bh"
+replicas = 1
+temperature = 1.0
+pttmin = 0.1
+pttmax = 1.0
+exchprob = 0.1
+step = 0.40
+astep = 0.51
+sloppyconv = 0.005
+tightconv = 0.001
+ediff = 0.001
+maxit = 600
+maxit2 = 500
+radius = 50.0
+steps = 1000000
+seed = 20261018
