@@ -1,0 +1,121 @@
+{
+  "bootstrap_resamples": 2000,
+  "bootstrap_seed": 20261015,
+  "note": "scored 1 of 100 starts",
+  "par_factor": 2,
+  "problem": "globalopt/lj38",
+  "runs": [
+    {
+      "algorithm": "basinhopping",
+      "cap": 2000000,
+      "code": "SciPy",
+      "code_version": "1.18.1",
+      "commit": "e4e854eaa8f18d807cd3496028e257e36caa93cc",
+      "entry": "scipyglobal-1.18.1-lj38-basinhopping",
+      "legacy": {
+        "force_calls": null,
+        "force_calls_max": null,
+        "force_calls_min": null,
+        "median": null,
+        "nfailed": 1
+      },
+      "metrics": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 2000000,
+        "includes_failures": true,
+        "iqr": 0.0,
+        "iqr_high": 0.0,
+        "iqr_low": 0.0,
+        "mean": 4000000.0,
+        "median": 4000000.0,
+        "median_high": 4000000.0,
+        "median_low": 4000000.0,
+        "n": 1,
+        "n_cap": 1,
+        "n_crash": 0,
+        "n_divergence": 0,
+        "n_wrong_stationary": 0,
+        "nfailed": 1,
+        "par2_mean": 4000000.0,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 4000000.0,
+        "q75": 4000000.0,
+        "scoring": "par2-wilson-bootstrap",
+        "success_only_mean": null,
+        "success_rate": 0.0,
+        "successes": 0,
+        "wilson_high": 0.7934506856227626,
+        "wilson_low": 0.0
+      },
+      "parameters": {
+        "bound": null,
+        "cap": 2000000,
+        "method": "basinhopping",
+        "seed": 314159,
+        "target": -173.92742631234793
+      },
+      "present_source": true,
+      "provenance": {
+        "code": "SciPy",
+        "code_version": "1.18.1",
+        "commit": "e4e854eaa8f18d807cd3496028e257e36caa93cc",
+        "machine": {
+          "machine": "x86_64",
+          "node": "cursor",
+          "python": "3.12.3",
+          "system": "Linux"
+        },
+        "parameters": {
+          "bound": null,
+          "cap": 2000000,
+          "method": "basinhopping",
+          "seed": 314159,
+          "target": -173.92742631234793
+        }
+      },
+      "starts": [
+        {
+          "best_calls": 709702,
+          "bound": null,
+          "cap": 2000000,
+          "code_version": "1.18.1",
+          "commit": "e4e854eaa8f18d807cd3496028e257e36caa93cc",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -173.25237841564916,
+          "failure": "cap",
+          "force_calls": 2000000,
+          "method": "basinhopping",
+          "parameters": {
+            "T": 1.0,
+            "interval": 50,
+            "jac": true,
+            "method": "basinhopping",
+            "minimizer": "BFGS",
+            "niter": 2000000,
+            "seed": 314159,
+            "stepsize": 0.5,
+            "stepwise_factor": 0.9,
+            "target_accept_rate": 0.5
+          },
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "seed": 314159,
+          "start": "0",
+          "stop": "cap",
+          "success": false,
+          "target": -173.92742631234793,
+          "verify_calls": 0
+        }
+      ],
+      "tuning": "default"
+    }
+  ],
+  "schema": "optbench.result/v2",
+  "scoring": "par2-wilson-bootstrap",
+  "status": "partial"
+}

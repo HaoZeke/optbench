@@ -1,0 +1,27 @@
+# counter harness. One force call is one lennard_jones evaluation.
+# A repeated coordinate is cached, so the gradient of that geometry is the same call.
+# The cap refuses the next search call and does not count it.
+# Success is a finite harness energy at or below -173.927426312 with calls under the cap.
+# scored 16 of 100 starts
+# SciPy 1.18.1 shgo at the constructor defaults. sampling_method is simplicial, n is 100, and iters is 1. The constructor replaces that n with 2**dim+1. The local minimizer is SLSQP with the analytic gradient and ftol 1e-12. Each centered coordinate lies in [-6, 6]. The shgo call leaves x0 and rng unset. The force-call cap is 2000000. The simplicial complex is allocated before the potential is called. The worker address space is limited to 2 GiB, and MemoryError is recorded as a crash.
+nfailed 16
+code SciPy
+code_version 1.18.1
+commit e4e854eaa8f18d807cd3496028e257e36caa93cc
+algorithm shgo
+template scipyglobal/lj38-shgo
+problem globalopt/lj38
+tuning default
+counter harness
+cap 2000000
+par2_mean 4000000
+wilson_low 0
+wilson_high 0.193607680534
+par2_median 4000000
+par2_median_low 4000000
+par2_median_high 4000000
+v2_nfailed 16
+v2_successes 0
+n 16
+partial true
+partial_reason scored 16 of 100 starts
