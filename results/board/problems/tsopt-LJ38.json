@@ -288,7 +288,8 @@
       "rgsaddle/lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.0015051499783199063,
       "rgsaddle/prfo 0.2.2 default campaign, asv c0db2b8": 0.0752574989159953,
       "rgsaddle/prfo-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.7315028894634743,
-      "sella/lj38-ts-default 2.6.0 default campaign 6cfb60c": 1.1920787828293655,
+      "sella/lj38-ts-default 2.6.0 default campaign, asv 6cfb60c": 1.1920787828293655,
+      "sella/lj38-ts-tuned 2.6.0 tuned asv 6cfb60c": 1.0520998348456143,
       "sella/lj38-ts-tuned 2.6.0 tuned campaign 6cfb60c": 1.0520998348456143
     },
     "rho": {
@@ -362,12 +363,19 @@
         0.98,
         0.995
       ],
-      "sella/lj38-ts-default 2.6.0 default campaign 6cfb60c": [
+      "sella/lj38-ts-default 2.6.0 default campaign, asv 6cfb60c": [
         0.94,
         0.99,
         1.0,
         1.0,
         1.0
+      ],
+      "sella/lj38-ts-tuned 2.6.0 tuned asv 6cfb60c": [
+        0.06,
+        0.99,
+        0.99,
+        0.99,
+        0.99
       ],
       "sella/lj38-ts-tuned 2.6.0 tuned campaign 6cfb60c": [
         0.06,
@@ -388,7 +396,8 @@
       "rgsaddle/lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.05,
       "rgsaddle/prfo 0.2.2 default campaign, asv c0db2b8": 0.25,
       "rgsaddle/prfo-tuned 0.2.2 tuned campaign, asv c0db2b8": 1.0,
-      "sella/lj38-ts-default 2.6.0 default campaign 6cfb60c": 1.0,
+      "sella/lj38-ts-default 2.6.0 default campaign, asv 6cfb60c": 1.0,
+      "sella/lj38-ts-tuned 2.6.0 tuned asv 6cfb60c": 0.99,
       "sella/lj38-ts-tuned 2.6.0 tuned campaign 6cfb60c": 0.99
     },
     "taus": [
@@ -401,7 +410,7 @@
   },
   "ranked": [
     {
-      "asv_commit": "",
+      "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "call_unit": "total",
       "cap": 10000,
       "code": "Sella",
@@ -434,11 +443,11 @@
       "par2_mean": 68.74,
       "partial": false,
       "partial_reason": "",
-      "path": "results/campaign/sella-2.6.0-lj38-ts-default.dat",
+      "path": "results/campaign/sella-2.6.0-lj38-ts-default.dat; results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "tsopt/LJ38",
       "registry_match": true,
       "scored": true,
-      "source": "campaign",
+      "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "sella/lj38-ts-default",
       "tuning": "default",
@@ -529,6 +538,51 @@
       "registry_match": true,
       "scored": true,
       "source": "campaign",
+      "success_rate": 0.99,
+      "template": "sella/lj38-ts-tuned",
+      "tuning": "tuned",
+      "wilson_high": 0.9972533418664555,
+      "wilson_low": 0.9642782382838231
+    },
+    {
+      "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
+      "call_unit": "total",
+      "cap": 100000,
+      "code": "Sella",
+      "code_version": "2.6.0",
+      "commit": "6cfb60cdb100a146c3c6f0587d5308b247aa8010",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "bench_ase_sella.SellaLj38TsTuned",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 2,
+        "wrong_stationary": 0
+      },
+      "full_n": 200,
+      "history": false,
+      "max_calls": 1840.0,
+      "mean_calls": 92.775,
+      "mean_per_image": null,
+      "median": 68.0,
+      "median_calls": 68.0,
+      "median_high": 70.0,
+      "median_low": 66.0,
+      "median_per_image": null,
+      "min_calls": 34.0,
+      "n": 200,
+      "nfailed": 2,
+      "note": "asv track_force_calls",
+      "par2_mean": 2074.46,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
+      "problem": "tsopt/LJ38",
+      "registry_match": true,
+      "scored": true,
+      "source": "asv",
       "success_rate": 0.99,
       "template": "sella/lj38-ts-tuned",
       "tuning": "tuned",
