@@ -43,6 +43,8 @@ def failure_of(record: dict, cap: int | None) -> str | None:
         if label not in (None, "", "none"):
             raise ValueError("a success cannot carry a failure class")
         return None
+    if record.get("reference_bound"):
+        return None
     label = record.get("failure")
     if label in FAILURES:
         return str(label)

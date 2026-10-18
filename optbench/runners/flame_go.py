@@ -52,6 +52,16 @@ DEFAULT_NLMINX = 100000
 # 2014 eOn basin-hopping step cap. Successes that finish under it are not cap failures.
 ARCHIVE_FORCE_CAP = 10_000_000
 LJ38_REFERENCE = -173.928427
+# Cambridge minima (Doye and Wales). The same 0.001 window as globalopt/lj38.
+# Problems that do not state energy_above_minimum use it only to end the
+# search. Those rows stay partial and do not count as ranked successes.
+REFERENCE_WINDOW = 0.001
+CAMBRIDGE = {
+    "globalopt/lj38": LJ38_REFERENCE,
+    "globalopt/lj75": -397.492331,
+    "globalopt/lj98": -543.665361,
+    "globalopt/lj150": -893.310258,
+}
 ARCHIVES = {
     "globalopt/lj38": "website/globalopt/lj38/100_lj38.tar.gz",
     "globalopt/lj75": "website/globalopt/lj75/lj75_clusters.tgz",
@@ -95,9 +105,25 @@ def reference_energy(problem: dict, template: dict) -> float | None:
         for key in keys:
             if key in block and block[key] not in (None, ""):
                 return float(block[key])
-    if problem.get("id") == "globalopt/lj38":
-        return LJ38_REFERENCE
+    if problem.get("id") in CAMBRIDGE:
+        return CAMBRIDGE[str(problem["id"])]
     return None
+
+
+def search_target(problem: dict, template: dict) -> float | None:
+    """Energy that ends the search.
+
+    A stated ``energy_above_minimum`` is a ranked success. A Cambridge
+    reference with no stated rule still ends the search, and the start
+    stays a partial observation.
+    """
+    ceiling = success_ceiling(problem, template)
+    if ceiling is not None:
+        return ceiling
+    reference = reference_energy(problem, template)
+    if reference is None:
+        return None
+    return float(reference) + REFERENCE_WINDOW
 
 
 def success_ceiling(problem: dict, template: dict) -> float | None:
@@ -437,18 +463,24 @@ def _run_start(job: dict) -> dict:
     success = False
     failure = None
     calls = total
-    if state["stop"] == "success" or (
+    claim = bool(job.get("claim"))
+    reached = (
         target is not None
         and best is not None
         and best <= target
         and (cap is None or (best_calls if best_calls is not None else total) < cap)
-    ):
+    )
+    reference_bound = False
+    if claim and (state["stop"] == "success" or reached):
         success = True
         calls = int(best_calls if best_calls is not None else total)
         if cap is not None and calls >= cap:
             success = False
             failure = "cap"
             calls = total
+    elif (not claim) and reached:
+        reference_bound = True
+        calls = int(best_calls if best_calls is not None else total)
     elif state["stop"] == "divergence":
         failure = "divergence"
         calls = total
@@ -461,7 +493,7 @@ def _run_start(job: dict) -> dict:
         failure = "cap" if cap is not None else "divergence"
     else:
         failure = "wrong_stationary"
-    if not success and failure is None:
+    if not success and failure is None and not reference_bound:
         failure = "divergence"
     if target is None and best_calls is not None and failure != "crash":
         # No success rule: the reported count is the first sighting of the lowest relaxed energy.
@@ -483,6 +515,8 @@ def _run_start(job: dict) -> dict:
         "converged": success,
         "seed": int(job["seed"]),
     }
+    if reference_bound:
+        record["reference_bound"] = True
     if state["error"] and not success:
         record["error"] = state["error"]
         record["log_tail"] = _log_tail(log_path)
@@ -539,9 +573,10 @@ def _dat(summary: dict, template: dict, metrics: dict, commit: str, version: str
     ]
     if ceiling is None:
         lines.append(
-            "# No energy_above_minimum is stated. partial is true. "
-            "force_calls is the harness count at the first sighting of the lowest relaxed energy. "
-            "calls_total on each start is the budget that was charged."
+            "# No energy_above_minimum is stated. partial is true and the row is not ranked. "
+            "A Cambridge reference ends the search at that energy plus 0.001. "
+            "reference_bound marks a start that reached it. force_calls is that count. "
+            "The start is not a ranked success."
         )
     else:
         lines.append(
@@ -569,7 +604,15 @@ def _publish(output: Path, records: list[dict], problem: dict, template: dict, *
     cap = cap_of(problem, template)
     partial = ceiling is None or len(public) < expected
     metrics = score_v2(
-        [{"force_calls": row["force_calls"], "success": row["success"], "failure": row["failure"]} for row in public],
+        [
+            {
+                "force_calls": row["force_calls"],
+                "success": row["success"],
+                "failure": row["failure"],
+                "reference_bound": bool(row.get("reference_bound")),
+            }
+            for row in public
+        ],
         cap,
     )
     counted = [int(row["calls_total"]) for row in public]
@@ -699,7 +742,8 @@ def run_template(
                 "seed": seed,
                 "nlminx": nlminx,
                 "cap": cap,
-                "target": ceiling,
+                "target": search_target(problem, template),
+                "claim": ceiling is not None,
                 "idle_timeout": 1800,
             }
         )

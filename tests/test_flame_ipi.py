@@ -21,7 +21,7 @@ from optbench.flame_ipi import (
     serve,
 )
 from optbench.potentials import lennard_jones
-from optbench.runners.flame_go import LJ38_REFERENCE, reference_energy, success_ceiling
+from optbench.runners.flame_go import LJ38_REFERENCE, reference_energy, search_target, success_ceiling
 
 
 def _pack_doubles(values) -> bytes:
@@ -195,6 +195,23 @@ def test_poscur_uses_the_projective_cube(tmp_path):
     assert "VERBOSE 0" in (tmp_path / "params_new.in").read_text(encoding="utf-8")
 
 
+def test_unruled_reference_bound_keeps_the_raw_call_count():
+    from optbench.score import score_v2
+
+    metrics = score_v2(
+        [
+            {"force_calls": 40, "success": False, "failure": None, "reference_bound": True},
+            {"force_calls": 60, "success": False, "failure": "cap", "reference_bound": False},
+        ],
+        100,
+    )
+    assert metrics["successes"] == 0
+    assert metrics["nfailed"] == 1
+    assert metrics["n_cap"] == 1
+    assert metrics["n_divergence"] == 0
+    assert abs(metrics["par2_mean"] - (40 + 200) / 2) < 1e-9
+
+
 def test_lj38_ceiling_matches_the_2014_stop():
     from optbench.campaign import load_template, resolve_problem
 
@@ -207,3 +224,4 @@ def test_lj38_ceiling_matches_the_2014_stop():
     bare = resolve_problem(root, "globalopt/lj75")
     other = load_template(root, "flame/lj75-minhocao")
     assert success_ceiling(bare, other) is None
+    assert abs(search_target(bare, other) - (-397.492331 + 0.001)) < 1e-9

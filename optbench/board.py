@@ -346,6 +346,9 @@ def _record_from_raw(raw: dict, cap: int | None, force_tol: float | None) -> dic
         record["call_unit"] = str(raw["call_unit"])
     if success:
         return record
+    if raw.get("reference_bound") and not (cap is not None and calls >= cap):
+        record["reference_bound"] = True
+        return record
     if failure in FAILURES:
         record["failure"] = failure
         return record

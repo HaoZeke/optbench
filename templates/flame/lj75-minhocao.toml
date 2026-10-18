@@ -7,8 +7,9 @@ commit = "99a615acaef6bc6afe44d895f666c6d60250f7d8"
 algorithm = "minhocao"
 tuning = "default"
 failure_cap = 10000000
-note = "Default minhocao on the lj75 coordinate archive. The optimiser, ioput, earr tolerances, fingerprint, and seed match flame/lj38-minhocao. This problem file does not state energy_above_minimum, so a finished budget is a partial row: force_calls is the harness count at the first sighting of the lowest relaxed energy."
+note = "Default minhocao on the lj75 coordinate archive. The optimiser, ioput, earr tolerances, fingerprint, and seed match flame/lj38-minhocao. The problem file does not state energy_above_minimum, so the row stays partial and is not ranked. The search ends at the Cambridge minimum -397.492331 plus 0.001. reference_bound marks a start that reached that energy, and force_calls is the harness count at that point."
 
 [flame]
 seed = 314159
+reference_energy = -397.492331
 nlminx = 100000
