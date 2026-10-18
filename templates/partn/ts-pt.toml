@@ -1,0 +1,18 @@
+# pARTn from each pt-island transition-state guess.
+id = "partn/ts-pt"
+engine = "partn"
+problem = "tsopt/pt-island"
+code = "artn"
+code_version = "1.1.0"
+commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
+algorithm = "ARTn"
+tuning = "default"
+note = "ninit is 0, so the search starts with Lanczos at the guess instead of a blind push. engine_units is lammps/metal. forc_thr is the problem force norm."
+
+[partn]
+push_step_size = 0.1
+eigen_step_size = 0.15
+ninit = 0
+lanczos_max_size = 16
+lpush_final = false
+converge_property = "norm"
