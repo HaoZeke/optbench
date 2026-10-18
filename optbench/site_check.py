@@ -5,7 +5,7 @@ from __future__ import annotations
 from html.parser import HTMLParser
 from pathlib import Path
 
-from .board import _show_per_image, build_board, ranked_cells
+from .board import MissingAsvCommit, _show_per_image, build_board, ranked_cells
 from .problems import load_all
 
 STALE_CAPTIONS = (
@@ -180,7 +180,10 @@ def check_site(root: Path) -> list[str]:
     ``docs/build`` is included when that directory exists.
     """
     root = Path(root)
-    document = build_board(root)
+    try:
+        document = build_board(root)
+    except MissingAsvCommit as exc:
+        return [str(exc)]
     problems = load_all(root / "problems") if (root / "problems").is_dir() else {}
     errors: list[str] = []
     pages = _page_texts(root)
