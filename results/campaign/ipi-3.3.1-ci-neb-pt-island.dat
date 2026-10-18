@@ -1,0 +1,23 @@
+# counter harness socket POSDATA
+# force_calls count raw potential evaluations and are not divided by the image count
+# the mean is round-half-even over successes; cap, force, or Hessian index other than 1 is a failure
+# problem double-ended-saddle-search/pt-island
+force_calls 830
+force_calls_min 699
+force_calls_max 2038
+force_calls_median 711
+force_calls_per_image 277
+call_unit total
+successes 41
+nfailed 18
+n 59
+transition_states 41
+code i-PI
+code_version 3.3.1
+commit a6b350327ce7cb8fdcc17192b1b9af88513b662f
+algorithm CI-NEB
+template ipi/ci-neb
+tuning default
+counter harness
+problem double-ended-saddle-search/pt-island
+images 3
