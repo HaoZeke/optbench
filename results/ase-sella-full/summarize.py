@@ -239,6 +239,23 @@ print(json.dumps(out, sort_keys=True))
     return json.loads(completed.stdout)
 
 
+def _versions(python: str | None) -> dict:
+    """Package versions from the interpreter that ran the benchmarks.
+
+    asv itself is not installed in that environment. Its version is taken
+    from the interpreter that launched ``asv run`` and stored separately.
+    """
+    versions = interpreter_versions(python)
+    if versions.get("asv") is None:
+        launcher = interpreter_versions(sys.executable)
+        versions["launcher"] = {
+            "python_version": launcher.get("python_version"),
+            "asv": launcher.get("asv"),
+            "asv-runner": launcher.get("asv-runner"),
+        }
+    return versions
+
+
 def interpreter_versions(python: str | None) -> dict:
     code = """
 import json, platform, sys
@@ -246,7 +263,10 @@ from importlib import metadata
 names = ["ase", "sella", "numpy", "scipy", "asv", "asv-runner"]
 versions = {"python": sys.version, "python_version": platform.python_version()}
 for name in names:
-    versions[name] = metadata.version(name)
+    try:
+        versions[name] = metadata.version(name)
+    except metadata.PackageNotFoundError:
+        versions[name] = None
 print(json.dumps(versions))
 """
     executable = python or sys.executable
@@ -319,7 +339,7 @@ def build_document(
         "python_result": result._python,
         "date": result.date,
         "machine": dict(result.params),
-        "versions": interpreter_versions(python),
+        "versions": _versions(python),
         "run_env": run_env or {},
         "classes": classes,
     }
