@@ -652,6 +652,47 @@ The number is written only after the run finishes under the problem rule.
    <li>pt-island: partial.</li>
    <li>sella-lj38: no per-start record.</li>
    </ul>
+   <h3>OptKing</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>transition-state search</td>
+   <td>767e2c0c13ff2b851ac82101ccd5aab9a558a4f1</td>
+   <td>767e2c0c13ff</td>
+   <td><a href="https://github.com/psi-rking/optking">https://github.com/psi-rking/optking</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="tsopt/LJ38" data-template="optking/lj38-p-rfo">
+   <td>LJ38</td>
+   <td data-field="template">optking/lj38-p-rfo</td>
+   <td data-field="version">optking 0.5.1.dev2+g767e2c0c1</td>
+   <td data-field="commit">767e2c0c13ff</td>
+   <td data-field="par2_mean">7030.36</td>
+   <td data-field="mean_calls">1494.34</td>
+   <td data-field="median_calls">555</td>
+   <td data-field="failures">crash 0, divergence 0, cap 3, wrong_stationary 64</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="tsopt/pt-island" data-template="optking/pt-rs-irfo">
+   <td>pt-island</td>
+   <td data-field="template">optking/pt-rs-irfo</td>
+   <td data-field="version">optking 0.5.1.dev2+g767e2c0c1</td>
+   <td data-field="commit">767e2c0c13ff</td>
+   <td data-field="par2_mean">1059.98</td>
+   <td data-field="mean_calls">1059.98</td>
+   <td data-field="median_calls">1060</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">49</td>
+   </tr>
+   </tbody></table></div>
+   <p>No full ranked run</p><ul>
+   <li>LJ38: partial.</li>
+   <li>pt-island: partial.</li>
+   </ul>
    <h3>pARTn</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
