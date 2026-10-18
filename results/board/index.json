@@ -6182,7 +6182,7 @@
       "entry": "gpatom-1.0.1-aidneb-neb-pt-heptamer",
       "failures": {
         "cap": 0,
-        "crash": 2,
+        "crash": 4,
         "divergence": 0,
         "wrong_stationary": 0
       },
@@ -6197,8 +6197,8 @@
       "median_low": 20000.0,
       "median_per_image": 7.75,
       "min_calls": 62.0,
-      "n": 2,
-      "nfailed": 2,
+      "n": 4,
+      "nfailed": 4,
       "note": "starts.jsonl",
       "par2_mean": 20000.0,
       "partial": true,
@@ -6211,7 +6211,7 @@
       "success_rate": 0.0,
       "template": "gpatom/aidneb",
       "tuning": "default",
-      "wilson_high": 0.6576197724933469,
+      "wilson_high": 0.4898908364545973,
       "wilson_low": 0.0
     },
     {
@@ -27274,7 +27274,7 @@
           "entry": "gpatom-1.0.1-aidneb-neb-pt-heptamer",
           "failures": {
             "cap": 0,
-            "crash": 2,
+            "crash": 4,
             "divergence": 0,
             "wrong_stationary": 0
           },
@@ -27289,8 +27289,8 @@
           "median_low": 20000.0,
           "median_per_image": 7.75,
           "min_calls": 62.0,
-          "n": 2,
-          "nfailed": 2,
+          "n": 4,
+          "nfailed": 4,
           "note": "starts.jsonl",
           "par2_mean": 20000.0,
           "partial": true,
@@ -27303,7 +27303,7 @@
           "success_rate": 0.0,
           "template": "gpatom/aidneb",
           "tuning": "default",
-          "wilson_high": 0.6576197724933469,
+          "wilson_high": 0.4898908364545973,
           "wilson_low": 0.0
         },
         {
