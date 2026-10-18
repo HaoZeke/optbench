@@ -1,0 +1,51 @@
+id = "eon-client/ts-pt-dimer"
+engine = "eon"
+problem = "tsopt/pt-island"
+code = "eOn"
+code_version = "3.5.0"
+commit = "4d8b34baf1ba8d2d980df29838bac1f969d1662c"
+algorithm = "Dimer L-BFGS"
+reducer = "harness"
+failure_cap = 10000
+kind = "ts-pt"
+kernel = "morse"
+asv_class = "EonClientTsPtDimer"
+note = '''
+Saddle search on the 49 Pt-island initial geometries. LBFGS converged_force 0.001, max_iterations 1000, max_move 0.2. Dimer converged_angle 5, rotations_max 10, improved true. The 2014 file left improved and max_move unset. client_displace_type load. direction.dat is the normalized reactant-to-initial difference. Main random_seed is 1. The harness kernel is morse/smooth/linear with D 0.7102, alpha 1.6047, r0 2.897, cutoff 9.5, and periodic boundaries in x and y.
+'''
+seeds = [1]
+asv_timeout = 900
+budget_seconds = 600
+
+[ini.Main]
+job = "saddle_search"
+finite_difference = 0.001
+random_seed = 1
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+convergence_metric = "norm"
+converged_force = 0.001
+max_move = 0.2
+max_iterations = 1000
+lbfgs_memory = 20
+
+[ini.LBFGS]
+lbfgs_memory = 20
+
+[ini."Saddle Search"]
+min_mode_method = "dimer"
+client_displace_type = "load"
+converged_force = 0.001
+max_iterations = 1000
+displace_magnitude = 0.1
+
+[ini.Dimer]
+opt_method = "cg"
+improved = true
+converged_angle = 5
+rotations_max = 10
+rotations_min = 1

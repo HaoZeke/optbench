@@ -7,10 +7,11 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th></tr></thead><tbody>
    <tr data-problem="hTST/Al">
    <th scope="row"><a href="#Al">Al</a></th>
    <td data-code="eOn">—</td>
+   <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="geodesic">—</td>
@@ -20,6 +21,7 @@
    <tr data-problem="hTST/Pt">
    <th scope="row"><a href="#Pt">Pt</a></th>
    <td data-code="eOn">—</td>
+   <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="geodesic">—</td>
@@ -33,7 +35,7 @@
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">No committed harness run.</p>
+   <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <details class="bench-details" id="Al-templates">
    <summary>All templates (0 ranked)</summary>
    <div class="bench-scroll">
@@ -42,6 +44,10 @@
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
+   <h3>Partial</h3><ul>
+   <li>eon-client/htst-al-dimer-cg eOn campaign n=1, result file sets partial true.</li>
+   <li>eon-svn/htst-al-dimer-cg Eon svn campaign n=1, result file sets partial true.</li>
+   </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="Al-legacy">
    <h3>Legacy 2014 archive</h3>
@@ -93,7 +99,7 @@
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">No committed harness run.</p>
+   <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <details class="bench-details" id="Pt-templates">
    <summary>All templates (0 ranked)</summary>
    <div class="bench-scroll">
@@ -102,6 +108,12 @@
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
+   <h3>Partial</h3><ul>
+   <li>eon-client/htst-pt-dimer-lbfgs eOn campaign n=1, result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5).</li>
+   <li>eon-client/htst-pt-lanczos-lbfgs eOn campaign n=1, result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5).</li>
+   <li>eon-svn/htst-pt-dimer-lbfgs Eon svn campaign n=1, result file sets partial true.</li>
+   <li>eon-svn/htst-pt-lanczos-lbfgs Eon svn campaign n=1, result file sets partial true.</li>
+   </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="Pt-legacy">
    <h3>Legacy 2014 archive</h3>
