@@ -1,0 +1,25 @@
+id = "optim/noise-lbfgs-s1em4"
+engine = "optim"
+problem = "minimization/lj38-noise"
+code = "optim"
+code_version = "02aaf45245af"
+commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+algorithm = "LBFGS"
+tuning = "default"
+note = "Default LBFGS at sigma 1e-4. updates 4 and maxbfgs 0.2. The RMS stop is the noise-aware force norm divided by sqrt(3N). The clean-energy window is also required. A restart with GMAX 0 continues when the RMS stop is met and the window is not. The recorded force norm is the clean gradient."
+
+[optim]
+updates = 4
+maxbfgs = 0.2
+
+[noise]
+sigma = 0.0001
+seed = 20261016
+
+[stop]
+force_norm = 0.01
+max_force_calls = 10000
+
+[ini.Optimizer]
+converged_force = 0.01
+max_iterations = 10000

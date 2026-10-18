@@ -1,0 +1,21 @@
+id = "optim/morse-lbfgs"
+engine = "optim"
+problem = "minimization/morse-bulk"
+code = "optim"
+code_version = "02aaf45245af"
+commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+algorithm = "LBFGS"
+tuning = "default"
+note = "Default row. BFGSMIN uses OPTIM's LBFGS defaults: updates 4, maxbfgs 0.2, and MAXERISE 1.0D-10. GMAX is the Morse force norm divided by sqrt(3N). USERPOT evaluates the harness Morse potential. The same values are used for every start."
+
+[optim]
+updates = 4
+maxbfgs = 0.2
+
+[stop]
+force_norm = 1.0e-3
+max_force_calls = 10000
+
+[ini.Optimizer]
+converged_force = 1.0e-3
+max_iterations = 10000

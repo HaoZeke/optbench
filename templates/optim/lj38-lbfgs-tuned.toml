@@ -1,0 +1,21 @@
+id = "optim/lj38-lbfgs-tuned"
+engine = "optim"
+problem = "minimization/lj38"
+code = "optim"
+code_version = "02aaf45245af"
+commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+algorithm = "LBFGS"
+tuning = "tuned"
+note = "Tuned row. The 2014 odata preamble sets updates 1000 and maxbfgs 0.2. comments.txt says memory 100; the preamble is the value used. GMAX is the problem force norm divided by sqrt(3N), the stored 9.36585D-04. MAXERISE stays 1.0D-10. The same values are used for every start."
+
+[optim]
+updates = 1000
+maxbfgs = 0.2
+
+[stop]
+force_norm = 0.01
+max_force_calls = 10000
+
+[ini.Optimizer]
+converged_force = 0.01
+max_iterations = 10000

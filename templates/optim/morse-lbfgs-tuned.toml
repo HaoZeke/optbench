@@ -1,0 +1,21 @@
+id = "optim/morse-lbfgs-tuned"
+engine = "optim"
+problem = "minimization/morse-bulk"
+code = "optim"
+code_version = "02aaf45245af"
+commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+algorithm = "LBFGS"
+tuning = "tuned"
+note = "Tuned row. comments.txt is the surviving Morse record: memory 100 and maximum move 2.0. The odata preamble was not archived. GMAX is the Morse force norm divided by sqrt(3N). MAXERISE stays 1.0D-10. The same values are used for every start."
+
+[optim]
+updates = 100
+maxbfgs = 2.0
+
+[stop]
+force_norm = 1.0e-3
+max_force_calls = 10000
+
+[ini.Optimizer]
+converged_force = 1.0e-3
+max_iterations = 10000

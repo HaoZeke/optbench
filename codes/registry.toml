@@ -84,6 +84,16 @@ commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
 committed = "2026-10-05"
 note = "Activation-relaxation technique nouveau, plugin branch DEVEL. The benchmark contributor of a new entry is Rohit Goswami."
 
+[[code]]
+id = "optim"
+name = "OPTIM"
+role = "minimization"
+repository = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
+ref = "svn-export"
+commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+committed = "2026-10-18"
+note = "Wales-group OPTIM from the public svn export. The pin is the sha256 of that tarball. committed is its Last-Modified date. The export has no svn or git revision, so the version string is the first twelve hex digits, written into VERSION before cmake. LBFGS is BFGSMIN through USERPOT on the harness potential. The binary is built on the campaign machine and is not in this tree."
+
 # generated ASE and Sella templates
 
 [[template]]
