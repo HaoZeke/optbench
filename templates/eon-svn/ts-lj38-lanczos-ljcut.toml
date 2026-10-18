@@ -1,0 +1,51 @@
+id = "eon-svn/ts-lj38-lanczos-ljcut"
+engine = "eon"
+problem = "tsopt/LJ38"
+code = "Eon svn"
+code_version = "r2549"
+commit = "r2549"
+algorithm = "Lanczos L-BFGS"
+reducer = "harness"
+failure_cap = 10000
+kind = "ts-lj38"
+kernel = "lj40"
+asv_class = "EonSvnTsLj38LanczosLjcut"
+note = '''
+This id is separate from eon-svn/ts-lj38-lanczos. That row is Lanczos tolerance 0.02, 15 iterations, quit_early true, conjugate-gradient translation max_move 0.35, on ljcluster. This row is Lanczos tolerance 0.01, 50 iterations, quit_early false, LBFGS max_move 0.1, on unshifted lj/cut cutoff 40.
+Lanczos saddle search on the 200 LJ38 starts. Tolerance 0.01, max_iterations 50, quit_early false. Saddle max_energy 1000. LBFGS max_move 0.1, max_iterations 3000, converged_force 0.001. client_displace_type load. direction.dat is Python random.Random of the start index. Main random_seed is 1. The harness kernel is unshifted lj/cut with epsilon 1, sigma 1, and cutoff 40.
+'''
+seeds = [1]
+asv_timeout = 900
+budget_seconds = 600
+
+[ini.Main]
+job = "saddle_search"
+finite_difference = 0.001
+random_seed = 1
+
+[ini.Potential]
+potential = "lammps"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+convergence_metric = "norm"
+converged_force = 0.001
+max_move = 0.1
+max_iterations = 3000
+lbfgs_memory = 20
+
+[ini.LBFGS]
+lbfgs_memory = 20
+
+[ini."Saddle Search"]
+min_mode_method = "lanczos"
+client_displace_type = "load"
+converged_force = 0.001
+max_iterations = 3000
+displace_magnitude = 0.1
+max_energy = 1000
+
+[ini.Lanczos]
+tolerance = 0.01
+max_iterations = 50
+quit_early = false
