@@ -79,6 +79,21 @@ class Uv(environment.Environment):
         env.update(self.build_env_vars)
         util.check_call(["uv", "pip", "install", "--python", python, *specs], env=env)
 
+    def find_executable(self, executable):
+        """Resolve a tool in the env, then on PATH.
+
+        The install command is ``uv pip install``. ``uv`` creates the
+        env and is not installed inside it, so the env ``bin`` does not
+        contain it.
+        """
+        try:
+            return super().find_executable(executable)
+        except OSError:
+            found = shutil.which(executable)
+            if found:
+                return found
+            raise
+
     def run(self, args, **kwargs):
         log.debug(f"Running '{' '.join(args)}' in {self.name}")
         return self.run_executable("python", args, **kwargs)

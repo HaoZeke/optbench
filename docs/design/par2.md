@@ -41,6 +41,8 @@ The Wilson interval uses `z = 1.959963984540054`. For the published 1000/1000 su
 
 The number in `results/campaign/eon-3.5.0-saddle-pt-dimer.dat` is the mean of ten campaign totals, 4982564.3 force calls. That total grows with the number of searches. The v2 cost of a repetition is `force_calls / total_searches` from that repetition's comment line. The dimer file's ten ratios have mean 263.590450 and median 263.284133, both to 6 decimals. The classic file's ten ratios have mean 470.691074 and median 469.759056, both to 6 decimals. The problem file states no per-search cap and both files record `nfailed 0`, so the PAR-2 penalty is not applied to these ten ratios. The median and its bootstrap interval are the summary.
 
+The rgsaddle displacement rows are a different sample. Each start is one search. The result file stores the cap, and PAR-2 uses it. Those rows do not replace the ratios above.
+
 ## Tuning and provenance
 
 `tuning` is `default` or `tuned`. `default` means every optimizer parameter is the value the code ships. `tuned` means a parameter was changed, including a change that copies the 2014 archive. The eOn 3.5.0 client default L-BFGS memory is 20, so `eon-client/lbfgs-m20` is `default` and `eon-client/lbfgs-m100` is `tuned`. Rows without that fact stay unlabelled.

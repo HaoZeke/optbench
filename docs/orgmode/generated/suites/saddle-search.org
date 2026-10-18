@@ -4,67 +4,47 @@
 #+begin_export rst
 .. raw:: html
 
-   <section class="bench" id="pt-island">
+   <section class="bench" id="pt-island" data-problem="saddle-search/pt-island">
    <h2>Pt heptamer island</h2>
    <dl class="bench-rule">
-   <dt>Stop</dt><dd>norm of the force at or below 0.001 eV/Angstrom</dd>
+   <dt>Stop</dt><dd>L2 norm of the force at or below 0.001 eV/Angstrom</dd>
    <dt>Goal</dt><dd>27 connected saddles below 1.5 eV</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
-   <dt>v2 cost</dt><dd>force_calls divided by total_searches in that repetition</dd>
+   <dt>v2 cost</dt><dd>one displacement search: the climb plus the two endpoint minimizations</dd>
    </dl>
-   <p class="bench-smoke">A 2-search SoftSaddle smoke is not in this rank. The April 2019 adaptive_HSphere-lbfgs-davidson-sm50 entry records 423491.1 force calls.</p>
-   <h3>Present runs</h3>
-   <div class="bench-table"><table>
-   <caption>Present runs. Fewer force calls first. The legacy 2014 scores follow.</caption>
-   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th><th class="text" scope="col">Tuning</th></tr></thead><tbody>
-   <tr>
-   <td class="text">eon-3.5.0-saddle-pt-dimer</td>
-   <td class="text">Eon</td>
-   <td class="text">3.5.0</td>
-   <td class="num">4982564.3</td>
-   <td class="num">1996871</td>
-   <td class="num">10514681</td>
-   <td class="num">0</td>
-   <td class="text"></td>
-   </tr>
-   <tr>
-   <td class="text">eon-3.5.0-saddle-pt-classic</td>
-   <td class="text">Eon</td>
-   <td class="text">3.5.0</td>
-   <td class="num">6974880.9</td>
-   <td class="num">2934964</td>
-   <td class="num">17881288</td>
-   <td class="num">0</td>
-   <td class="text"></td>
-   </tr>
-   </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "eon-3.5.0-saddle-pt-dimer", "entry": "Eon 3.5.0 eon-3.5.0-saddle-pt-dimer", "code": "Eon", "value": 4982564.3, "best": true, "held": false, "failed": false}, {"id": "eon-3.5.0-saddle-pt-classic", "entry": "Eon 3.5.0 eon-3.5.0-saddle-pt-classic", "code": "Eon", "value": 6974880.9, "best": false, "held": false, "failed": false}]}</script></figure>
-   <h3>Per-search cost</h3>
-   <p class="bench-legacy">Each repetition contributes its force calls divided by the searches in that repetition. The legacy number above is the mean of the campaign totals. These files record no per-search cap, so PAR-2 is not applied, and they record no Hessian index or RMSD.</p>
-   <div class="bench-table"><table>
-   <caption>v2 per-search cost across the recorded repetitions. Lower is better.</caption>
-   <thead><tr><th class="text" scope="col">Entry</th><th class="num" scope="col">Repetitions</th><th class="num" scope="col">Mean</th><th class="num" scope="col">Median</th><th class="num" scope="col">Median low</th><th class="num" scope="col">Median high</th><th class="num" scope="col">IQR</th><th class="num" scope="col">Legacy total</th></tr></thead><tbody>
-   <tr>
-   <td class="text">eon-3.5.0-saddle-pt-dimer</td>
-   <td class="num">10</td>
-   <td class="num">263.590450</td>
-   <td class="num">263.284133</td>
-   <td class="num">262.261119</td>
-   <td class="num">265.192695</td>
-   <td class="num">2.473591</td>
-   <td class="num">4982564.3</td>
-   </tr>
-   <tr>
-   <td class="text">eon-3.5.0-saddle-pt-classic</td>
-   <td class="num">10</td>
-   <td class="num">470.691074</td>
-   <td class="num">469.759056</td>
-   <td class="num">468.714712</td>
-   <td class="num">471.578393</td>
-   <td class="num">1.991054</td>
-   <td class="num">6974880.9</td>
-   </tr>
-   </tbody></table></div>
+   <p class="bench-smoke">A 2-search SoftSaddle smoke is outside this rank. The April 2019 adaptive_HSphere-lbfgs-davidson-sm50 entry records 423491.1 force calls.</p>
+   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
+   <table data-board-table="ranked" data-problem="saddle-search/pt-island">
+   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td data-field="template">rgsaddle/saddle-dimer-rotskip-tuned</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">10127.1</td><td data-field="success_rate">0.0001</td><td data-field="wilson_low">2.7424e-05</td><td data-field="wilson_high">0.000364574</td><td data-field="median_calls">550</td><td data-field="mean_calls">619.017</td><td data-field="failures">crash 0, divergence 17717, cap 2246, wrong_stationary 35</td><td data-field="n">20000</td></tr>
+   <tr><td data-field="template">rgsaddle/saddle-dimer-fire</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">10128</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.000192036</td><td data-field="median_calls">1013</td><td data-field="mean_calls">1011.03</td><td data-field="failures">crash 0, divergence 1, cap 19999, wrong_stationary 0</td><td data-field="n">20000</td></tr>
+   <tr><td data-field="template">rgsaddle/saddle-dimer-fire-tuned</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">10128</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.000192036</td><td data-field="median_calls">1004</td><td data-field="mean_calls">1004.47</td><td data-field="failures">crash 0, divergence 9, cap 19991, wrong_stationary 0</td><td data-field="n">20000</td></tr>
+   <tr><td data-field="template">rgsaddle/saddle-dimer-lbfgs</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">10128</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.000192036</td><td data-field="median_calls">1013</td><td data-field="mean_calls">1012.16</td><td data-field="failures">crash 0, divergence 0, cap 20000, wrong_stationary 0</td><td data-field="n">20000</td></tr>
+   <tr><td data-field="template">rgsaddle/saddle-dimer-lbfgs-tuned</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">10128</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.000192036</td><td data-field="median_calls">875</td><td data-field="mean_calls">861.699</td><td data-field="failures">crash 0, divergence 19957, cap 43, wrong_stationary 0</td><td data-field="n">20000</td></tr>
+   <tr><td data-field="template">rgsaddle/saddle-dimer-rotskip</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">10128</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.000192036</td><td data-field="median_calls">441</td><td data-field="mean_calls">479.98</td><td data-field="failures">crash 0, divergence 19718, cap 262, wrong_stationary 20</td><td data-field="n">20000</td></tr>
+   <tr><td data-field="template">rgsaddle/saddle-lanczos</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">10128</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.000192036</td><td data-field="median_calls">1002</td><td data-field="mean_calls">998.34</td><td data-field="failures">crash 0, divergence 4068, cap 15932, wrong_stationary 0</td><td data-field="n">20000</td></tr>
+   <tr><td data-field="template">rgsaddle/saddle-lanczos-tuned</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">10128</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.000192036</td><td data-field="median_calls">899</td><td data-field="mean_calls">871.296</td><td data-field="failures">crash 0, divergence 13743, cap 6257, wrong_stationary 0</td><td data-field="n">20000</td></tr>
+   </tbody></table>
+   <p class="bench-gaps">Eon rows are not yet on the harness counter. Partial rows stay off the ranked table.</p>
+   <h3>Partial</h3><ul>
+   <li>ase/dimer-pt-island-default ASE campaign n=16, result file sets ranked false.</li>
+   <li>ase/dimer-pt-island-tuned ASE campaign n=16, result file sets ranked false.</li>
+   <li>eon/develop-saddle-pt-dimer eOn asv n=1, smoke run; one start.</li>
+   <li>eon/develop-saddle-pt-lanczos eOn asv n=1, smoke run; one start.</li>
+   <li>ase/dimer-pt-island-default ASE asv n=1, smoke run; one start.</li>
+   <li>sella/pt-island-search-tuned Sella asv n=1, smoke run; one start.</li>
+   <li>ase/dimer-pt-island-tuned ASE asv n=1, smoke run; one start.</li>
+   <li>sella/pt-island-search-default Sella asv n=1, smoke run; one start.</li>
+   </ul>
+   <h3>Not a harness score</h3><ul>
+   <li>eon-3.5.0-saddle-pt-classic Eon n=10, not yet on the harness counter.</li>
+   <li>eon-3.5.0-saddle-pt-dimer Eon n=10, not yet on the harness counter.</li>
+   </ul>
+   <img src="../../_static/board/saddle-search-pt-island-cost.svg" alt="Cost versus success for saddle-search/pt-island">
+   <p class="bench-gaps">No performance profile. One start has no finite cost.</p>
+   </section><section class="bench bench-legacy-section" id="pt-island-legacy">
+   <h3>Legacy 2014 archive</h3>
    <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>

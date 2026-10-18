@@ -5,6 +5,26 @@ problem = "pt-island"
 contract = "partial"
 entry_count = 11
 
+[convergence]
+norm = "l2"
+force_norm = 0.001
+force_unit = "eV/Ang"
+max_force_calls = 3000
+
+[band]
+interior_images = 3
+max_move = 0.2
+potential = "morse_pt"
+
+[sample]
+pairs = 59
+
+[input]
+archive_path = "website/double-ended-saddle-search/pt-island/pt-island-con.tgz"
+
+[geometry]
+kind = "con-reactant-products"
+
 [metrics]
 required = ["force_calls", "force_calls_max", "force_calls_median", "force_calls_min", "nfailed"]
 

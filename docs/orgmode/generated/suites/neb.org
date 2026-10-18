@@ -4,78 +4,52 @@
 #+begin_export rst
 .. raw:: html
 
-   <section class="bench" id="Pt-heptamer">
+   <section class="bench" id="Pt-heptamer" data-problem="neb/Pt-heptamer">
    <h2>Pt-heptamer</h2>
    <dl class="bench-rule">
+   <dt>Stop</dt><dd>L2 norm of the force at or below 0.01 eV/Ang</dd>
+   <dt>Cap</dt><dd>10000 force calls</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
-   <h3>Present runs</h3>
-   <div class="bench-table"><table>
-   <caption>Present runs. Fewer force calls first. The legacy 2014 scores follow.</caption>
-   <thead><tr><th class="text" scope="col">Entry</th><th class="text" scope="col">Code</th><th class="text" scope="col">Version</th><th class="num" scope="col">Mean (force calls)</th><th class="num" scope="col">Min</th><th class="num" scope="col">Max</th><th class="num" scope="col">Failed</th><th class="text" scope="col">Tuning</th></tr></thead><tbody>
-   <tr>
-   <td class="text">eon-3.5.0-neb-pt-lbfgs</td>
-   <td class="text">Eon</td>
-   <td class="text">3.5.0</td>
-   <td class="num">40</td>
-   <td class="num">27</td>
-   <td class="num">51</td>
-   <td class="num">0</td>
-   <td class="text"></td>
-   </tr>
-   <tr>
-   <td class="text">ase-3.29.0-neb-pt-heptamer-tuned</td>
-   <td class="text">ASE</td>
-   <td class="text">3.29.0</td>
-   <td class="num">55</td>
-   <td class="num">31</td>
-   <td class="num">74</td>
-   <td class="num">0</td>
-   <td class="text"></td>
-   </tr>
-   <tr>
-   <td class="text">ase-3.29.0-neb-pt-heptamer-default</td>
-   <td class="text">ASE</td>
-   <td class="text">3.29.0</td>
-   <td class="num">76</td>
-   <td class="num">47</td>
-   <td class="num">99</td>
-   <td class="num">0</td>
-   <td class="text"></td>
-   </tr>
-   <tr>
-   <td class="text">eon-3.5.0-neb-pt-fire</td>
-   <td class="text">Eon</td>
-   <td class="text">3.5.0</td>
-   <td class="num">85</td>
-   <td class="num">68</td>
-   <td class="num">95</td>
-   <td class="num">0</td>
-   <td class="text"></td>
-   </tr>
-   <tr>
-   <td class="text">eon-3.5.0-neb-pt-cg</td>
-   <td class="text">Eon</td>
-   <td class="text">3.5.0</td>
-   <td class="num">142</td>
-   <td class="num">51</td>
-   <td class="num">317</td>
-   <td class="num">0</td>
-   <td class="text"></td>
-   </tr>
-   <tr>
-   <td class="text">eon-3.5.0-neb-pt-qm</td>
-   <td class="text">Eon</td>
-   <td class="text">3.5.0</td>
-   <td class="num">165</td>
-   <td class="num">89</td>
-   <td class="num">247</td>
-   <td class="num">0</td>
-   <td class="text"></td>
-   </tr>
-   </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Present codes. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:6"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "eon-3.5.0-neb-pt-lbfgs", "entry": "Eon 3.5.0 eon-3.5.0-neb-pt-lbfgs", "code": "Eon", "value": 40.0, "best": true, "held": false, "failed": false}, {"id": "ase-3.29.0-neb-pt-heptamer-tuned", "entry": "ASE 3.29.0 ase-3.29.0-neb-pt-heptamer-tuned", "code": "ASE", "value": 55.0, "best": false, "held": false, "failed": false}, {"id": "ase-3.29.0-neb-pt-heptamer-default", "entry": "ASE 3.29.0 ase-3.29.0-neb-pt-heptamer-default", "code": "ASE", "value": 76.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-neb-pt-fire", "entry": "Eon 3.5.0 eon-3.5.0-neb-pt-fire", "code": "Eon", "value": 85.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-neb-pt-cg", "entry": "Eon 3.5.0 eon-3.5.0-neb-pt-cg", "code": "Eon", "value": 142.0, "best": false, "held": false, "failed": false}, {"id": "eon-3.5.0-neb-pt-qm", "entry": "Eon 3.5.0 eon-3.5.0-neb-pt-qm", "code": "Eon", "value": 165.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
+   <table data-board-table="ranked" data-problem="neb/Pt-heptamer">
+   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate. Per-image mean divides that total by the problem's moving images, the same way for every code.</caption>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Per-image mean</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td data-field="template">rgsaddle/idpp-ci-neb-lbfgs</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">asv</td><td data-field="current">yes</td><td data-field="par2_mean">318.308</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.771905</td><td data-field="wilson_high">1</td><td data-field="median_calls">314</td><td data-field="mean_calls">318.308</td><td data-field="mean_per_image">39.7885</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">13</td></tr>
+   <tr><td data-field="template">rgsaddle/sidpp-ci-neb-lbfgs</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">asv</td><td data-field="current">yes</td><td data-field="par2_mean">318.923</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.771905</td><td data-field="wilson_high">1</td><td data-field="median_calls">314</td><td data-field="mean_calls">318.923</td><td data-field="mean_per_image">39.8654</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">13</td></tr>
+   <tr><td data-field="template">rgsaddle/ci-neb-lbfgs</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">asv</td><td data-field="current">yes</td><td data-field="par2_mean">319.538</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.771905</td><td data-field="wilson_high">1</td><td data-field="median_calls">330</td><td data-field="mean_calls">319.538</td><td data-field="mean_per_image">39.9423</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">13</td></tr>
+   <tr><td data-field="template">rgsaddle/oci-neb-lbfgs</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">asv</td><td data-field="current">yes</td><td data-field="par2_mean">345.538</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.771905</td><td data-field="wilson_high">1</td><td data-field="median_calls">356</td><td data-field="mean_calls">345.538</td><td data-field="mean_per_image">43.1923</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">13</td></tr>
+   <tr><td data-field="template">rgsaddle/ew-ci-neb-lbfgs</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">asv</td><td data-field="current">yes</td><td data-field="par2_mean">357.231</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.771905</td><td data-field="wilson_high">1</td><td data-field="median_calls">332</td><td data-field="mean_calls">357.231</td><td data-field="mean_per_image">44.6538</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">13</td></tr>
+   <tr><td data-field="template">ase/neb-pt-heptamer-tuned</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">442.615</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.771905</td><td data-field="wilson_high">1</td><td data-field="median_calls">450</td><td data-field="mean_calls">442.615</td><td data-field="mean_per_image">55.3269</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">13</td></tr>
+   <tr><td data-field="template">ase/neb-pt-heptamer-default</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">606.923</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.771905</td><td data-field="wilson_high">1</td><td data-field="median_calls">618</td><td data-field="mean_calls">606.923</td><td data-field="mean_per_image">75.8654</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">13</td></tr>
+   <tr><td data-field="template">rgsaddle/sidpp-ci-neb</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">asv</td><td data-field="current">yes</td><td data-field="par2_mean">732.462</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.771905</td><td data-field="wilson_high">1</td><td data-field="median_calls">682</td><td data-field="mean_calls">732.462</td><td data-field="mean_per_image">91.5577</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">13</td></tr>
+   <tr><td data-field="template">rgsaddle/idpp-ci-neb</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">asv</td><td data-field="current">yes</td><td data-field="par2_mean">735.538</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.771905</td><td data-field="wilson_high">1</td><td data-field="median_calls">706</td><td data-field="mean_calls">735.538</td><td data-field="mean_per_image">91.9423</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">13</td></tr>
+   <tr><td data-field="template">rgsaddle/ci-neb</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">asv</td><td data-field="current">yes</td><td data-field="par2_mean">736.769</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.771905</td><td data-field="wilson_high">1</td><td data-field="median_calls">698</td><td data-field="mean_calls">736.769</td><td data-field="mean_per_image">92.0962</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">13</td></tr>
+   <tr><td data-field="template">rgsaddle/ew-ci-neb</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">asv</td><td data-field="current">yes</td><td data-field="par2_mean">759.692</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.771905</td><td data-field="wilson_high">1</td><td data-field="median_calls">740</td><td data-field="mean_calls">759.692</td><td data-field="mean_per_image">94.9615</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">13</td></tr>
+   <tr><td data-field="template">rgsaddle/oci-neb</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">asv</td><td data-field="current">yes</td><td data-field="par2_mean">760.769</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.771905</td><td data-field="wilson_high">1</td><td data-field="median_calls">722</td><td data-field="mean_calls">760.769</td><td data-field="mean_per_image">95.0962</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">13</td></tr>
+   <tr><td data-field="template">rgsaddle/neb</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">asv</td><td data-field="current">yes</td><td data-field="par2_mean">20000</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.228095</td><td data-field="median_calls">962</td><td data-field="mean_calls">970.615</td><td data-field="mean_per_image">121.327</td><td data-field="failures">crash 0, divergence 13, cap 0, wrong_stationary 0</td><td data-field="n">13</td></tr>
+   <tr><td data-field="template">rgsaddle/neb-lbfgs</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">asv</td><td data-field="current">yes</td><td data-field="par2_mean">20000</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.228095</td><td data-field="median_calls">410</td><td data-field="mean_calls">422.923</td><td data-field="mean_per_image">52.8654</td><td data-field="failures">crash 0, divergence 13, cap 0, wrong_stationary 0</td><td data-field="n">13</td></tr>
+   </tbody></table>
+   <p class="bench-gaps">eOn band rows are not yet on the harness counter. Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
+   <h3>Partial</h3><ul>
+   <li>ase/neb-pt-heptamer-default ASE asv n=1, smoke run; scored 1 of 13 starts.</li>
+   <li>ase/neb-pt-heptamer-tuned ASE asv n=1, smoke run; scored 1 of 13 starts.</li>
+   </ul>
+   <h3>Not a harness score</h3><ul>
+   <li>eon/neb-pt-lbfgs-m100 eOn n=13, not yet on the harness counter.</li>
+   <li>eon/neb-pt-lbfgs eOn n=13, not yet on the harness counter.</li>
+   </ul>
+   <h3>Not scored</h3><ul>
+   <li>eon-cg: no per-start record</li>
+   <li>eon-fire: no per-start record</li>
+   <li>eon-lbfgs: no per-start record</li>
+   <li>eon-qm: no per-start record</li>
+   </ul>
+   <img src="../../_static/board/neb-Pt-heptamer-profile.svg" alt="Dolan-More profile for neb/Pt-heptamer">
+   <img src="../../_static/board/neb-Pt-heptamer-cost.svg" alt="Cost versus success for neb/Pt-heptamer">
+   </section><section class="bench bench-legacy-section" id="Pt-heptamer-legacy">
+   <h3>Legacy 2014 archive</h3>
    <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>

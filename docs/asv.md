@@ -11,6 +11,7 @@ asv is the measurement store. A result file is keyed to the commit asv checked o
 | `asv.conf.json` | `environment_type` `uv-pip`, `results_dir` `results/asv` |
 | `uv.lock` | The Python environment asv installs, including the asv pin |
 | `environments/eon-3.5.0.yml` | conda-forge pin for the eOn 3.5.0 binary |
+| `environments/eon-develop.yml` | Python pin for the eOn develop source build. Not a conda eOn package |
 | `benchmarks/` | The suite asv-runner imports |
 | `results/asv/<machine>/machine.json` | The machine record asv wrote |
 | `results/asv/<machine>/<commit[:8]>-<env>.json` | Track values for that commit |
@@ -22,7 +23,7 @@ asv is the measurement store. A result file is keyed to the commit asv checked o
 ## Adding a code
 
 1. Pin the code commit in `codes/registry.toml`. A published eOn score keeps commit `4d8b34baf1ba8d2d980df29838bac1f969d1662c`. A conda binary's printed token is not that commit.
-2. If the code is a conda package, add `environments/<name>.yml` with the version. Do not invent a build string. asv has one `environment_type` for the run, so the yml is the pin and `asv run -E` is how a later unit selects it. There is no per-benchmark environment attribute. See the gaps file.
+2. If the code is a conda package, add `environments/<name>.yml` with the version. Do not invent a build string. A source build that is not a conda package still gets a yml so its pin is not the 3.5.0 file; leave the package out. asv has one `environment_type` for the run, so the yml is the pin and `asv run -E` is how a later unit selects it. There is no per-benchmark environment attribute. See the gaps file. `environments/eon-develop.yml` is that source pin. The develop classes call `EONCLIENT`.
 3. Copy `benchmarks/quadratic.py`. `param_names` is `["seed", "start"]`. `measure` returns the `record_start` dict. Set `cap` on the class. The result row does not store the cap.
 4. Inherit `optbench.asv_tracks.TrackedSearch`, or copy its methods. `track_*` returns a float. Set `.unit` on the function (`force calls`, `fraction`, `count`). A dict with `samples` and `number` is a timing result, and asv replaces the value. `time_search` is the wall clock.
 5. Set `repeat = 1`, `rounds = 1`, `number = 1`, `sample_time = 0`, `warmup_time = 0`. `repeat == 0` means up to ten repeats.
@@ -33,6 +34,8 @@ asv is the measurement store. A result file is keyed to the commit asv checked o
 10. Score with `asv.results.iter_results` and `Results.get_result_value`, then `score_v2`. `optbench.asv_score` does that for the quadratic sample. Parameter strings in the result JSON are wrapped in `repr` quotes; the reader unwraps them with `ast.literal_eval`. `uv run optbench statistics` refuses to write a document when those tracks are absent.
 
 `benchmarks/pending.py` is one skipped parameter for every problem id and every registry code, with `track_force_calls` and `time_search` only. `setup` raises `NotImplementedError`, which asv-runner stores as NaN. Replace that pair with a real class when the code runs. The Lennard-Jones classes in `benchmarks/bench_lj38.py` are separate: they call eonclient when `OPTBENCH_ASV_EON=1`. The default parameter list is one seed and the first geometry. `OPTBENCH_ASV_FULL=1` selects all 1000 starts, and it is read at import, so it has to be set in the process that launches asv.
+
+`benchmarks/bench_eon_develop.py` is the eOn develop entry. Counting is `HarnessCounter` through the `ext_pot` bridge, not the client's own tally. The default parameter list is one seed and the first start. `OPTBENCH_ASV_FULL=1` selects the campaign grid at import. The Pt-island AKMC classes default to one pass. A one-start file is not a published mean.
 
 The quadratic sample is the run that `results/validation/statistics.json` scores. A subset of Lennard-Jones 38 is `results/validation/lj38-counter.dat` and it is not a published mean.
 

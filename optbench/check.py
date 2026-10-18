@@ -89,4 +89,14 @@ def check(problems_dir: Path, oracle_path: Path) -> int:
             if line not in gaps:
                 print(f"- {line}")
         return 1
+    from .site_check import check_site
+
+    root = oracle_path.resolve().parent.parent
+    site_errors = check_site(root)
+    if site_errors:
+        print(f"site {len(site_errors)}")
+        for line in site_errors:
+            print(line)
+        return 1
+    print("site tables match the board")
     return 0

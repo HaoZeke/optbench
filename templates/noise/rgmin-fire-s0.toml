@@ -1,0 +1,18 @@
+id = "noise/rgmin-fire-s0"
+engine = "noise"
+problem = "minimization/lj38-noise"
+code = "rgmin"
+code_version = "0.4.1"
+commit = "9a2e7ff11fa65826f9e847856bee10d3d70b7156"
+algorithm = "FIRE"
+tuning = "default"
+note = "Default profile. The stop is the noise-aware force norm, and at positive sigma the clean energy over the last window. The index is the clean Hessian with the rigid-mode rule."
+
+[solver]
+family = "rgmin"
+method = "fire"
+maxstep = 0.2
+
+[noise]
+sigma = 0.0
+seed = 20261016

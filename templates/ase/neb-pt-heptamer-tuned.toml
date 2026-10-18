@@ -10,7 +10,7 @@ profile = "tuned"
 reducer = "per_image"
 ranked = true
 parameter_source = "archive"
-note = "Archive neb/Pt-heptamer/eon-lbfgs uses 8 intermediate images, spring 5, climbing image, LBFGS, max move 0.2, force 0.01. The reported force_calls value is the harness total divided by 8."
+note = "Archive neb/Pt-heptamer/eon-lbfgs uses 8 intermediate images, spring 5, climbing image, LBFGS, max move 0.2, force 0.01. force_calls is the harness total across the 8 images. force_calls_per_image divides that total by 8."
 
 [optimizer]
 name = "LBFGS"

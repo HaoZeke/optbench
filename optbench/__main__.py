@@ -76,23 +76,60 @@ def run(
     from optbench.campaign import run as run_campaign
 
     loaded = load_template(root, template)
-    client_path = _eon_client(client) if loaded["engine"] == "eon-client" else client
-    summary = run_campaign(
-        root,
-        problem,
-        template,
-        client=client_path,
-        geometries=geometries,
-        output=output,
-        workers=workers,
-        work=work,
-        limit=limit,
-        resume=resume,
-    )
+    if loaded["engine"] == "rgsaddle-band":
+        from optbench.rgsaddle_band import run as run_band
+
+        summary = run_band(
+            root,
+            problem,
+            template,
+            output=output,
+            workers=workers,
+        )
+    else:
+        client_path = _eon_client(client) if loaded["engine"] in {"eon-client", "eon"} else client
+        summary = run_campaign(
+            root,
+            problem,
+            template,
+            client=client_path,
+            geometries=geometries,
+            output=output,
+            workers=workers,
+            work=work,
+            limit=limit,
+            resume=resume,
+        )
+    calls = summary.get("force_calls")
     print(
         f"{summary['problem']} {summary['template']} "
-        f"force_calls={summary['force_calls']} nfailed={summary['nfailed']} "
+        f"force_calls={calls} nfailed={summary['nfailed']} "
         f"starts={summary['starts']}"
+    )
+
+
+@app.command(name="eon-job")
+def eon_job(
+    name: str,
+    *,
+    root: Path = Path("."),
+    client: Path | None = None,
+    output: Path = Path("benchmark.dat"),
+    workers: int = 1,
+    work: Path | None = None,
+    repetitions: int | None = None,
+) -> None:
+    """Run one named eOn band or saddle job and write benchmark.dat."""
+    from optbench.eon_jobs import run_named
+
+    run_named(
+        root,
+        name,
+        _eon_client(client),
+        output,
+        workers=workers,
+        work=work,
+        repetitions=repetitions,
     )
 
 
@@ -253,6 +290,40 @@ def statistics(
         f"dimer_median={dimer['median']} "
         f"displacement_failed={displacement['nfailed']} dimer_failed={dimer['nfailed']}"
     )
+
+
+@app.command
+def board(
+    root: Path = Path("."),
+    output: Path = Path("results/board"),
+) -> None:
+    """Score committed results and write the v2 leaderboard. This does not run a campaign."""
+    from optbench.board import write_board
+
+    destination = output if output.is_absolute() else root / output
+    document = write_board(root, destination)
+    print(
+        f"wrote {destination} problems={len(document['problems'])} "
+        f"ranked={document['ranked_count']} partial={len(document['partial'])} "
+        f"unparsed={len(document['unparsed'])} unmapped={len(document['unmapped'])}"
+    )
+    for problem in document["problems"].values():
+        ranked = problem["ranked"]
+        if not ranked:
+            continue
+        print(problem["id"])
+        for index, row in enumerate(ranked[:5], start=1):
+            score = row["par2_mean"] if row["par2_mean"] is not None else row["median"]
+            print(
+                f"  {index} {row['template'] or row['entry']} "
+                f"source={row['source']} "
+                f"par2_mean={row['par2_mean']} median={row['median']} "
+                f"mean_calls={row['mean_calls']} median_calls={row['median_calls']} "
+                f"mean_per_image={row.get('mean_per_image')} "
+                f"min_calls={row['min_calls']} max_calls={row['max_calls']} "
+                f"success_rate={row['success_rate']} "
+                f"n={row['n']} nfailed={row['nfailed']} score={score}"
+            )
 
 
 @app.command(name="validate-counter")

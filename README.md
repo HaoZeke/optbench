@@ -18,6 +18,8 @@ uv run optbench templates
 
 `uv run` reads `pyproject.toml`, installs the command-line library, and runs that command. `pytest` is the test runner. `check` exits 0 when every partial contract covers its archived rows and `oracle/archive_gaps.txt` matches the departures. `templates` prints every template id.
 
+`uv run optbench board` reads `results/campaign` and `results/asv` and writes `results/board` plus the v2 table on the Board page. It does not start a search. A band method is ranked on the harness force-call total across every image, and the per-image mean is a second column from that same total. Only the newest version of a code and template is ranked. A run that is both a campaign file and an asv track is one row, with the source kept as a column. A row that used fewer starts than the problem's full set is partial. An asv result that covers one start is a smoke run and stays out of the ranked mean.
+
 The harness does not contain eOn, pele, or Sella. Those are installed separately, and the commands below say which release produced the files in `results/campaign/`.
 
 ## Reproduce the Lennard-Jones 38 L-BFGS mean
@@ -64,7 +66,9 @@ pixi exec --spec eon --spec uv -- uv run optbench run \
   --output benchmark.dat
 ```
 
-The recorded 181 is commit `4d8b34baf`. Read the version line the client prints before treating another build as that score. `--workers` is the number of client processes. The default is 1. The problem file names `website/minimization/lj38/lj38-clusters.tgz`, and the manifest stores that archive at `inputs/sha256/86bf774955b906c486d37282c48e42628e8fe4af3579222f6e07fcf5913157b1/lj38-clusters.tgz`. The command unpacks it. `--work` chooses the scratch directory. The default is next to `--output`.
+The recorded 181 is commit `4d8b34baf`. Read the version line the client prints before treating another build as that score.
+
+`templates/eon/` is current main, commit `1d71c944501832bfafb955ffe13b9aae50c8efd4`, the merge of pull request 776. The version string is 3.6.0. `eon/lj38-lbfgs` is L-BFGS at the struct defaults, including memory 20 and `lbfgs_accept = energy`. `eon/lj38-lbfgs-m100` changes only the memory to 100. Both set the problem stop. The same pair for Morse bulk is `eon/morse-lbfgs` and `eon/morse-lbfgs-m100`. L-BFGS keys sit in `[LBFGS]`. A run writes `benchmark.dat` and `benchmark.starts`, one JSON object per geometry, failures included. The same commit has a default and a memory-100 template for the Pt-heptamer NEB, the LJ38 and Pt-island double-ended bands, and the LJ38 and Pt-island dimer saddle searches. `uv run optbench eon-job neb-pt-lbfgs` runs one of those. The NEB and saddle means follow the archived report: a counter under the cap stays in the mean, and `nfailed` counts a termination reason other than 0. The heptamer mean divides `force_calls_neb` by 8. The 3.5.0 and SVN templates are unchanged. `--workers` is the number of client processes. The default is 1. The problem file names `website/minimization/lj38/lj38-clusters.tgz`, and the manifest stores that archive at `inputs/sha256/86bf774955b906c486d37282c48e42628e8fe4af3579222f6e07fcf5913157b1/lj38-clusters.tgz`. The command unpacks it. `--work` chooses the scratch directory. The default is next to `--output`.
 
 `benchmark.dat` is the result. `force_calls` is the mean over starts that finished under the cap. Compare it to the file quoted above.
 

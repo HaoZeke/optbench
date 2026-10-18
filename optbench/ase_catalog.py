@@ -388,12 +388,14 @@ def _neb_specs() -> list[dict]:
             "tuned_note": (
                 "Archive neb/Pt-heptamer/eon-lbfgs uses 8 intermediate images, "
                 "spring 5, climbing image, LBFGS, max move 0.2, force 0.01. "
-                "The reported force_calls value is the harness total divided by 8."
+                "force_calls is the harness total across the 8 images. "
+                "force_calls_per_image divides that total by 8."
             ),
             "default_note": (
                 "ASE NEB defaults on the archived 8 intermediate images: "
                 "spring 0.1, climb off, FIRE. "
-                "The reported force_calls value is the harness total divided by 8."
+                "force_calls is the harness total across the 8 images. "
+                "force_calls_per_image divides that total by 8."
             ),
         },
         {

@@ -4,14 +4,32 @@
 #+begin_export rst
 .. raw:: html
 
-   <section class="bench" id="lj38">
+   <section class="bench" id="lj38" data-problem="lowest-eigenvector/lj38">
    <h2>lj38</h2>
    <dl class="bench-rule">
+   <dt>Cap</dt><dd>10000 force calls</dd>
+   <dt>Starts</dt><dd>200</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
-   <h3>Present runs</h3>
-   <p>No present run is recorded.</p>
+   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
+   <table data-board-table="ranked" data-problem="lowest-eigenvector/lj38">
+   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td data-field="template">rgsaddle/mode-lanczos</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">26.12</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.981155</td><td data-field="wilson_high">1</td><td data-field="median_calls">26</td><td data-field="mean_calls">26.12</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
+   <tr><td data-field="template">rgsaddle/mode-dimer</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">31.4</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.981155</td><td data-field="wilson_high">1</td><td data-field="median_calls">23</td><td data-field="mean_calls">31.4</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
+   <tr><td data-field="template">rgsaddle/mode-lanczos-tuned</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">36.56</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.981155</td><td data-field="wilson_high">1</td><td data-field="median_calls">34</td><td data-field="mean_calls">36.56</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
+   <tr><td data-field="template">rgsaddle/mode-dimer-tuned</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">45.555</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.981155</td><td data-field="wilson_high">1</td><td data-field="median_calls">33</td><td data-field="mean_calls">45.555</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
+   </tbody></table>
+   <p class="bench-gaps">Partial rows stay off the ranked table.</p>
+   <h3>Partial</h3><ul>
+   <li>eon/develop-low-lj38-dimer eOn asv n=1, smoke run; scored 1 of 200 starts.</li>
+   <li>eon/develop-low-lj38-lanczos eOn asv n=1, smoke run; scored 1 of 200 starts.</li>
+   </ul>
+   <img src="../../_static/board/lowest-eigenvector-lj38-profile.svg" alt="Dolan-More profile for lowest-eigenvector/lj38">
+   <img src="../../_static/board/lowest-eigenvector-lj38-cost.svg" alt="Cost versus success for lowest-eigenvector/lj38">
+   </section><section class="bench bench-legacy-section" id="lj38-legacy">
+   <h3>Legacy 2014 archive</h3>
    <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>

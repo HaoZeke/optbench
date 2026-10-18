@@ -1,0 +1,958 @@
+{
+  "schema": "optbench.result/v1",
+  "status": "sota",
+  "problem": "tsopt/pt-island",
+  "submitter": "Rohit Goswami",
+  "date": "2026-10-15",
+  "host": "cursor",
+  "runs": [
+    {
+      "entry": "eon-main-ts-pt-dimer",
+      "code": "eOn",
+      "algorithm": "LBFGS",
+      "code_version": "3.6.0",
+      "commit": "1d71c944501832bfafb955ffe13b9aae50c8efd4",
+      "present_source": true,
+      "starts": 49,
+      "nfailed": 0,
+      "method": {
+        "client": "eonclient 3.6.0 (1d71c94), compiled Thu Oct 15 09:00:20 AM GMT 2026",
+        "reducer": "report-capped",
+        "ini": {
+          "Main": {
+            "job": "saddle_search",
+            "finite_difference": 0.001
+          },
+          "Potential": {
+            "potential": "morse_pt"
+          },
+          "Optimizer": {
+            "opt_method": "lbfgs",
+            "convergence_metric": "norm",
+            "converged_force": 0.001,
+            "max_move": 0.2,
+            "max_iterations": 1000
+          },
+          "Saddle Search": {
+            "min_mode_method": "dimer",
+            "client_displace_type": "load",
+            "converged_force": 0.001,
+            "max_iterations": 1000,
+            "displace_magnitude": 0.1
+          },
+          "Dimer": {
+            "opt_method": "cg",
+            "improved": true,
+            "finite_angle": 0.005,
+            "converged_angle": 5.0,
+            "rotations_max": 10,
+            "rotations_min": 1
+          },
+          "LBFGS": {
+            "lbfgs_memory": 20,
+            "lbfgs_inverse_curvature": 0.01,
+            "lbfgs_max_inverse_curvature": 0.0,
+            "lbfgs_auto_scale": true,
+            "lbfgs_angle_reset": true,
+            "lbfgs_distance_reset": true,
+            "lbfgs_curvature": "reset",
+            "lbfgs_project_rigid": false,
+            "lbfgs_secant": "standard",
+            "lbfgs_precon": "none",
+            "lbfgs_step": "lbfgs",
+            "lbfgs_h0": "sy_yy",
+            "lbfgs_accept": "energy",
+            "lbfgs_extra_updates": 0,
+            "lbfgs_cautious_eps": 1e-06,
+            "lbfgs_cautious_alpha": 0.01,
+            "lbfgs_precon_A": 3.0,
+            "lbfgs_precon_mu": 1.0,
+            "lbfgs_precon_rcut": 0.0
+          }
+        },
+        "note": "Default L-BFGS dimer on the 49 Pt-island starts. Memory 20 is the struct default. Potential morse_pt. pos.con is reactant.con. displacement.con is initial_N.con for N from 0 to 48. direction.dat is that displacement minus the reactant, divided by its norm. client_displace_type is load. The mean keeps total_force_calls under 10000. Dimer improved is the binary default.",
+        "failure_cap": 10000,
+        "images_for_mean": 1
+      },
+      "metrics": {
+        "force_calls": 1659,
+        "force_calls_min": 100,
+        "force_calls_max": 5894,
+        "force_calls_median": 575.0,
+        "nfailed": 0,
+        "mean_unrounded": 1658.591836734694,
+        "n_in_mean": 49,
+        "failure_cap": 10000
+      },
+      "per_start": [
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 3697.0,
+          "geometry": "initial_0",
+          "raw": 3697,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 109.0,
+          "geometry": "initial_1",
+          "raw": 109,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 5140.0,
+          "geometry": "initial_2",
+          "raw": 5140,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 4037.0,
+          "geometry": "initial_3",
+          "raw": 4037,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 391.0,
+          "geometry": "initial_4",
+          "raw": 391,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 360.0,
+          "geometry": "initial_5",
+          "raw": 360,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 2496.0,
+          "geometry": "initial_6",
+          "raw": 2496,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 360.0,
+          "geometry": "initial_7",
+          "raw": 360,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 403.0,
+          "geometry": "initial_8",
+          "raw": 403,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 522.0,
+          "geometry": "initial_9",
+          "raw": 522,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 3710.0,
+          "geometry": "initial_10",
+          "raw": 3710,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 5614.0,
+          "geometry": "initial_11",
+          "raw": 5614,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 5760.0,
+          "geometry": "initial_12",
+          "raw": 5760,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 478.0,
+          "geometry": "initial_13",
+          "raw": 478,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 104.0,
+          "geometry": "initial_14",
+          "raw": 104,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 439.0,
+          "geometry": "initial_15",
+          "raw": 439,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 845.0,
+          "geometry": "initial_16",
+          "raw": 845,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 5894.0,
+          "geometry": "initial_17",
+          "raw": 5894,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 540.0,
+          "geometry": "initial_18",
+          "raw": 540,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 575.0,
+          "geometry": "initial_19",
+          "raw": 575,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 2450.0,
+          "geometry": "initial_20",
+          "raw": 2450,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 3632.0,
+          "geometry": "initial_21",
+          "raw": 3632,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 5879.0,
+          "geometry": "initial_22",
+          "raw": 5879,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 499.0,
+          "geometry": "initial_23",
+          "raw": 499,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 111.0,
+          "geometry": "initial_24",
+          "raw": 111,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 545.0,
+          "geometry": "initial_25",
+          "raw": 545,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 4013.0,
+          "geometry": "initial_26",
+          "raw": 4013,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 379.0,
+          "geometry": "initial_27",
+          "raw": 379,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 589.0,
+          "geometry": "initial_28",
+          "raw": 589,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 672.0,
+          "geometry": "initial_29",
+          "raw": 672,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 597.0,
+          "geometry": "initial_30",
+          "raw": 597,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 100.0,
+          "geometry": "initial_31",
+          "raw": 100,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 431.0,
+          "geometry": "initial_32",
+          "raw": 431,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 426.0,
+          "geometry": "initial_33",
+          "raw": 426,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 588.0,
+          "geometry": "initial_34",
+          "raw": 588,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 2358.0,
+          "geometry": "initial_35",
+          "raw": 2358,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 104.0,
+          "geometry": "initial_36",
+          "raw": 104,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 523.0,
+          "geometry": "initial_37",
+          "raw": 523,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 427.0,
+          "geometry": "initial_38",
+          "raw": 427,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 609.0,
+          "geometry": "initial_39",
+          "raw": 609,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 123.0,
+          "geometry": "initial_40",
+          "raw": 123,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 275.0,
+          "geometry": "initial_41",
+          "raw": 275,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 4099.0,
+          "geometry": "initial_42",
+          "raw": 4099,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 1669.0,
+          "geometry": "initial_43",
+          "raw": 1669,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 5659.0,
+          "geometry": "initial_44",
+          "raw": 5659,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 521.0,
+          "geometry": "initial_45",
+          "raw": 521,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 615.0,
+          "geometry": "initial_46",
+          "raw": 615,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 1677.0,
+          "geometry": "initial_47",
+          "raw": 1677,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 227.0,
+          "geometry": "initial_48",
+          "raw": 227,
+          "reason": "0"
+        }
+      ],
+      "notes": "Default L-BFGS dimer on the 49 Pt-island starts. Memory 20 is the struct default. Potential morse_pt. pos.con is reactant.con. displacement.con is initial_N.con for N from 0 to 48. direction.dat is that displacement minus the reactant, divided by its norm. client_displace_type is load. The mean keeps total_force_calls under 10000. Dimer improved is the binary default. All 49 starts finished with termination_reason 0 under the cap of 10000. Unrounded mean 1658.591836734694. 49 starts enter the mean. Per-start rows are in results/campaign/eon-main-ts-pt-dimer.starts. Run on host cursor."
+    },
+    {
+      "entry": "eon-main-ts-pt-dimer-m100",
+      "code": "eOn",
+      "algorithm": "LBFGS",
+      "code_version": "3.6.0",
+      "commit": "1d71c944501832bfafb955ffe13b9aae50c8efd4",
+      "present_source": true,
+      "starts": 49,
+      "nfailed": 0,
+      "method": {
+        "client": "eonclient 3.6.0 (1d71c94), compiled Thu Oct 15 09:00:20 AM GMT 2026",
+        "reducer": "report-capped",
+        "ini": {
+          "Main": {
+            "job": "saddle_search",
+            "finite_difference": 0.001
+          },
+          "Potential": {
+            "potential": "morse_pt"
+          },
+          "Optimizer": {
+            "opt_method": "lbfgs",
+            "convergence_metric": "norm",
+            "converged_force": 0.001,
+            "max_move": 0.2,
+            "max_iterations": 1000
+          },
+          "Saddle Search": {
+            "min_mode_method": "dimer",
+            "client_displace_type": "load",
+            "converged_force": 0.001,
+            "max_iterations": 1000,
+            "displace_magnitude": 0.1
+          },
+          "Dimer": {
+            "opt_method": "cg",
+            "improved": true,
+            "finite_angle": 0.005,
+            "converged_angle": 5.0,
+            "rotations_max": 10,
+            "rotations_min": 1
+          },
+          "LBFGS": {
+            "lbfgs_memory": 100,
+            "lbfgs_inverse_curvature": 0.01,
+            "lbfgs_max_inverse_curvature": 0.0,
+            "lbfgs_auto_scale": true,
+            "lbfgs_angle_reset": true,
+            "lbfgs_distance_reset": true,
+            "lbfgs_curvature": "reset",
+            "lbfgs_project_rigid": false,
+            "lbfgs_secant": "standard",
+            "lbfgs_precon": "none",
+            "lbfgs_step": "lbfgs",
+            "lbfgs_h0": "sy_yy",
+            "lbfgs_accept": "energy",
+            "lbfgs_extra_updates": 0,
+            "lbfgs_cautious_eps": 1e-06,
+            "lbfgs_cautious_alpha": 0.01,
+            "lbfgs_precon_A": 3.0,
+            "lbfgs_precon_mu": 1.0,
+            "lbfgs_precon_rcut": 0.0
+          }
+        },
+        "note": "Tuned L-BFGS dimer. Memory 100 is the only change from eon/ts-pt-dimer.",
+        "failure_cap": 10000,
+        "images_for_mean": 1
+      },
+      "metrics": {
+        "force_calls": 1680,
+        "force_calls_min": 100,
+        "force_calls_max": 5889,
+        "force_calls_median": 575.0,
+        "nfailed": 0,
+        "mean_unrounded": 1680.3673469387754,
+        "n_in_mean": 49,
+        "failure_cap": 10000
+      },
+      "per_start": [
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 3783.0,
+          "geometry": "initial_0",
+          "raw": 3783,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 111.0,
+          "geometry": "initial_1",
+          "raw": 111,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 5350.0,
+          "geometry": "initial_2",
+          "raw": 5350,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 4288.0,
+          "geometry": "initial_3",
+          "raw": 4288,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 391.0,
+          "geometry": "initial_4",
+          "raw": 391,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 360.0,
+          "geometry": "initial_5",
+          "raw": 360,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 2493.0,
+          "geometry": "initial_6",
+          "raw": 2493,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 360.0,
+          "geometry": "initial_7",
+          "raw": 360,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 403.0,
+          "geometry": "initial_8",
+          "raw": 403,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 522.0,
+          "geometry": "initial_9",
+          "raw": 522,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 3799.0,
+          "geometry": "initial_10",
+          "raw": 3799,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 5863.0,
+          "geometry": "initial_11",
+          "raw": 5863,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 5724.0,
+          "geometry": "initial_12",
+          "raw": 5724,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 472.0,
+          "geometry": "initial_13",
+          "raw": 472,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 104.0,
+          "geometry": "initial_14",
+          "raw": 104,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 441.0,
+          "geometry": "initial_15",
+          "raw": 441,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 845.0,
+          "geometry": "initial_16",
+          "raw": 845,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 5889.0,
+          "geometry": "initial_17",
+          "raw": 5889,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 540.0,
+          "geometry": "initial_18",
+          "raw": 540,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 575.0,
+          "geometry": "initial_19",
+          "raw": 575,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 2437.0,
+          "geometry": "initial_20",
+          "raw": 2437,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 3607.0,
+          "geometry": "initial_21",
+          "raw": 3607,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 5848.0,
+          "geometry": "initial_22",
+          "raw": 5848,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 502.0,
+          "geometry": "initial_23",
+          "raw": 502,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 104.0,
+          "geometry": "initial_24",
+          "raw": 104,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 545.0,
+          "geometry": "initial_25",
+          "raw": 545,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 4245.0,
+          "geometry": "initial_26",
+          "raw": 4245,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 377.0,
+          "geometry": "initial_27",
+          "raw": 377,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 589.0,
+          "geometry": "initial_28",
+          "raw": 589,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 672.0,
+          "geometry": "initial_29",
+          "raw": 672,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 597.0,
+          "geometry": "initial_30",
+          "raw": 597,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 100.0,
+          "geometry": "initial_31",
+          "raw": 100,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 432.0,
+          "geometry": "initial_32",
+          "raw": 432,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 431.0,
+          "geometry": "initial_33",
+          "raw": 431,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 586.0,
+          "geometry": "initial_34",
+          "raw": 586,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 2341.0,
+          "geometry": "initial_35",
+          "raw": 2341,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 104.0,
+          "geometry": "initial_36",
+          "raw": 104,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 531.0,
+          "geometry": "initial_37",
+          "raw": 531,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 435.0,
+          "geometry": "initial_38",
+          "raw": 435,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 613.0,
+          "geometry": "initial_39",
+          "raw": 613,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 123.0,
+          "geometry": "initial_40",
+          "raw": 123,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 274.0,
+          "geometry": "initial_41",
+          "raw": 274,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 4009.0,
+          "geometry": "initial_42",
+          "raw": 4009,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 1669.0,
+          "geometry": "initial_43",
+          "raw": 1669,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 5816.0,
+          "geometry": "initial_44",
+          "raw": 5816,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 521.0,
+          "geometry": "initial_45",
+          "raw": 521,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 613.0,
+          "geometry": "initial_46",
+          "raw": 613,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 1677.0,
+          "geometry": "initial_47",
+          "raw": 1677,
+          "reason": "0"
+        },
+        {
+          "count_key": "total_force_calls",
+          "failed": false,
+          "force_calls": 227.0,
+          "geometry": "initial_48",
+          "raw": 227,
+          "reason": "0"
+        }
+      ],
+      "notes": "Tuned L-BFGS dimer. Memory 100 is the only change from eon/ts-pt-dimer. All 49 starts finished with termination_reason 0 under the cap of 10000. Unrounded mean 1680.3673469387754. 49 starts enter the mean. Per-start rows are in results/campaign/eon-main-ts-pt-dimer-m100.starts. Run on host cursor."
+    }
+  ]
+}

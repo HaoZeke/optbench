@@ -115,7 +115,17 @@ def handle_lines(lines: list[str], rgpot: RgpotCounter) -> list[str]:
 class PotServer:
     """One thread, one counter, one potential."""
 
-    def __init__(self, evaluate: Evaluate, counter: HarnessCounter | None = None, host: str = "127.0.0.1"):
+    def __init__(
+        self,
+        evaluate: Evaluate,
+        counter: HarnessCounter | None = None,
+        host: str = "127.0.0.1",
+        cap: int | None = None,
+    ):
+        if counter is None:
+            counter = HarnessCounter(cache=False, cap=cap)
+        elif cap is not None:
+            counter.cap = int(cap)
         self.rgpot = RgpotCounter(evaluate, counter)
         self._sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self._sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)

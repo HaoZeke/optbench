@@ -15,14 +15,34 @@ committed = "2026-10-02"
 note = "Version string 3.5.0 and Python client 0.4.2. Lennard-Jones scores use this client. The subset counter check uses the conda-forge binary, which prints 3.5.0 (7ec1840). That check is not a published mean."
 
 [[code]]
+id = "eon-main"
+name = "eOn"
+role = "minimization and saddle search"
+repository = "https://github.com/TheochemUI/eon"
+ref = "main"
+commit = "1d71c944501832bfafb955ffe13b9aae50c8efd4"
+committed = "2026-10-15"
+note = "Current main, including merged pull request 776. The version string is 3.6.0. Templates under templates/eon/ use this commit. The 3.5.0 pin above stays for the scores that were run on it."
+
+[[code]]
+id = "eon-develop"
+name = "eOn"
+role = "minimization and saddle search"
+repository = "https://github.com/TheochemUI/eon"
+ref = "develop"
+commit = "7095b23ac17d49f434a5e08ccb072897ceca698e"
+committed = "2026-10-16"
+note = "develop HEAD built from source. The version string is 3.6.0 (7095b23a). GPR-dimer is absent: TheochemUI/gpr_optim is private and eonclient reports GPRD disabled. This pin is not the conda-forge 3.5.0 binary."
+
+[[code]]
 id = "rgmin"
 name = "rgmin"
 role = "minimization"
 repository = "https://github.com/OmniPotentRPC/rgmin"
-ref = "main"
-commit = "e089a136910f5a3a32dbf447ff23a2eba674bc83"
-committed = "2026-10-11"
-note = "Minimizers. A Lennard-Jones 38 entry uses L-BFGS or FIRE to the problem force norm."
+ref = "fix/default-cap-per-method"
+commit = "f15726f1c7983b3656c5dbc2f812e2394e144500"
+committed = "2026-10-17"
+note = "Minimizers, version 0.4.1, branch fix/default-cap-per-method. A Lennard-Jones 38 entry uses the harness force counter. L-BFGS memory defaults to 10. BFGS, dogleg, and FIRE 2.0 start without the 0.2 per-atom cap. The other Cartesian methods start at 0.2. An explicit cap still applies. SR1 and SR2 step in a trust region sized to that cap. DIIS searches the GDIIS image. Adam scales its direction to unit per-atom length."
 
 [[code]]
 id = "rgsaddle"
@@ -30,9 +50,9 @@ name = "rgsaddle"
 role = "saddle search"
 repository = "https://github.com/OmniPotentRPC/rgsaddle"
 ref = "main"
-commit = "8bea1002b06a52f7b2260fed57469b2a45395997"
-committed = "2026-10-11"
-note = "Dimer and band saddle search. It does not replace a minimization score."
+commit = "c0db2b8d333c557251635cb8bb7b3d81f0088a71"
+committed = "2026-10-15"
+note = "0.2.2 at main c0db2b8d. Band and min-mode sessions on this main. Stencil.band presets are not built here; the campaign calls the C band and min-mode API. OCI-NEB is CI-NEB followed by a min-mode refinement. Dimer, Lanczos, and P-RFO scores use this commit. Nonlinear CG is refused by check_force_driven; the min-mode translators are L-BFGS and FIRE."
 
 [[code]]
 id = "ase"
