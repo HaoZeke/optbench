@@ -1,0 +1,16 @@
+# i-PI 3.3.1 climbing-image NEB. The problem file supplies the image count, the cap, and the force norm.
+id = "ipi/ci-neb"
+engine = "ipi-band"
+code = "i-PI"
+code_version = "3.3.1"
+commit = "a6b350327ce7cb8fdcc17192b1b9af88513b662f"
+algorithm = "CI-NEB"
+tuning = "default"
+
+[ipi]
+method = "neb"
+optimizer = "damped_bfgs"
+climb = true
+stage = "climb"
+tangent = "improved"
+spring_k = 1.0

@@ -315,6 +315,18 @@ def run(
             workers=workers,
             work=work,
         )
+    if template["engine"] == "ipi-band":
+        from .ipi_band import run as run_ipi
+
+        return run_ipi(
+            root,
+            problem_name,
+            template_name,
+            output=output,
+            workers=workers,
+            limit=limit,
+            resume=resume,
+        )
     if template["engine"] in {"ase", "sella"}:
         from .ase_sella import run_template
 

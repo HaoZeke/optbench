@@ -1,0 +1,14 @@
+# i-PI is not a conda-forge package. This file does not select
+# ipi=3.3.1 and it does not invent a build string. The interpreter
+# the band benchmarks run is the source build pinned in
+# codes/registry.toml under id ipi:
+#   repository https://github.com/i-pi/i-pi
+#   commit a6b350327ce7cb8fdcc17192b1b9af88513b662f
+#   version string 3.3.1
+# asv has one environment_type, so this yml cannot be bound to one
+# class. Those classes import ipi from the environment that ran them.
+name: ipi
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
