@@ -85,6 +85,16 @@ committed = "2026-10-15"
 note = "Sella 2.6.0. Order 1 is a saddle and order 0 is a minimum. The Sella 0.1.1 rows on the 2014 tables are legacy and are not this pin. Force calls are harness calculator evaluations."
 
 [[code]]
+id = "geomoptjl"
+name = "GeometryOptimization.jl"
+role = "minimization"
+repository = "https://github.com/JuliaMolSim/GeometryOptimization.jl"
+ref = "0.1.6"
+commit = "5b145886c19042f2ef13e21627f28d86027f719c"
+committed = "2026-08-12"
+note = "GeometryOptimization 0.1.6, tag v0.1.6, commit 5b145886. Optim.jl 1.13.3, registry tree 48968edaf014f67e58fe4c8a4ce72d392aed3294. The minimizers are OptimLBFGS, OptimCG, and OptimSD. OptimSD is GradientDescent. The linesearch is BackTracking of order 2 with maxstep 0.8 bohr. LBFGS uses the Hager-Zhang initial step. Force calls are harness evaluations of the spec potential."
+
+[[code]]
 id = "artn"
 name = "pARTn"
 role = "saddle search"

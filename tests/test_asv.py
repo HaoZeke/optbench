@@ -119,6 +119,7 @@ def test_pending_grid_is_every_problem_and_code():
         "rgsaddle",
         "ase",
         "sella",
+        "geomoptjl",
         "artn",
     ]
     assert Pending.params[1] == code_ids()
