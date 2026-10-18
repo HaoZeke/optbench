@@ -1,7 +1,7 @@
-# rep 1 force_calls 16088574 unique_saddles 27 fraction_connected 0.000106951871657754 total_searches 18700 connected 2 minimize_calls 14 seed 20261016
-force_calls 16088574.0
-force_calls_min 16088574
-force_calls_max 16088574
+# rep 1 force_calls 16948686 unique_saddles 30 fraction_connected 0.0001015228426395939 total_searches 19700 connected 2 minimize_calls 14 seed 20261016
+force_calls 16948686.0
+force_calls_min 16948686
+force_calls_max 16948686
 code saddlesearchjl
 code_version 0.0.2
 commit 47b4f35953bb3fc0f0726c171adca8f5b628af5e
@@ -14,7 +14,7 @@ repetitions 1
 nfailed 1
 goal 27
 cap 5064
-n 18700
+n 19700
 partial true
-par2_mean 10126.995187165776
-v2_nfailed 18698
+par2_mean 10127.046192893402
+v2_nfailed 19698
