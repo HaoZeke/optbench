@@ -575,7 +575,11 @@ def _partial_reason(problem: dict, records: list[dict], scored: bool, full: int 
         parts.append(f"mean calls {statistics.fmean(calls):.1f}")
         parts.append(f"median calls {statistics.median(calls):.1f}")
     if not scored:
-        parts.append("a finite finish under the force cap is wrong_stationary")
+        failures = sorted({str(record["failure"]) for record in records if record.get("failure")})
+        if failures:
+            parts.append("failures " + ", ".join(failures))
+        else:
+            parts.append("a finite finish under the force cap is wrong_stationary")
     return "; ".join(parts)
 
 

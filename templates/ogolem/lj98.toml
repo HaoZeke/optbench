@@ -7,7 +7,7 @@ commit = "cce35a376d929852ab1e80e98105c0d13d784b8d"
 algorithm = "genetic algorithm"
 tuning = "default"
 failure_cap = 5000000
-note = "Same genetic algorithm as ogolem/lj38. The archive is website/globalopt/lj98/lj98_clusters.tgz, 100 coords files. The archived run.sh says 200 and ljj8_clusters; the tarball has 100 coords files. This problem file has no energy window and no sample.starts, so the row stays partial. The recorded energy is the lowest harness value on that start."
+note = "Same genetic algorithm as ogolem/lj38. The archive is website/globalopt/lj98/lj98_clusters.tgz, 100 coords files. The archived run.sh says 200 and ljj8_clusters; the tarball has 100 coords files. This problem file has no energy window and no sample.starts, so the row stays partial. The recorded energy is the lowest harness value on that start. With no energy window a finite finish is wrong_stationary, and a start that exhausts the force cap is cap."
 
 [ogolem]
 pool_size = 100
