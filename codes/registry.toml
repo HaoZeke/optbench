@@ -97,12 +97,12 @@ note = "pARTn 1.1.0 at DEVEL 9b753517. The standalone search and the engine plug
 [[code]]
 id = "tsase"
 name = "TSASE"
-role = "saddle search"
+role = "global optimization, minimization, and saddle search"
 repository = "https://github.com/henkelmangroup/tsase"
 ref = "master"
 commit = "98aac60b5d9905e81ee4e6b8c385f169258d0218"
 committed = "2025-09-26"
-note = "setup.py version string 1.0. The pin is commit 98aac60, xyz working again. The checkout has no LICENSE file. Fortran calculators use numpy.distutils and are not built. The harness loads neb/ssneb.py and neb/fire_ssneb.py without tsase/__init__.py and counts ASE calculate."
+note = "setup.py version string 1.0. The pin is commit 98aac60, xyz working again. The checkout has no LICENSE file. Saddle and minimization runs load neb/ssneb.py and neb/fire_ssneb.py without tsase/__init__.py and count ASE calculate. Basin hopping and minima hopping call the harness Lennard-Jones potential, cutoff 40, no shift, and do not call the Fortran Lennard-Jones extension."
 
 [[code]]
 id = "pykmc"
@@ -162,16 +162,6 @@ repository = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
 ref = "svn-snapshot"
 commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
 note = "No public git commit. The pin is the sha256 of the Wales svn.tar.bz2 snapshot, 122743078 bytes. Minimization L-BFGS calls the ASE socket and pes.evaluate. OPTIM's own call counter is not a score. Saddle search, NEB, noise, and PATHSAMPLE are not scored."
-
-[[code]]
-id = "tsase"
-name = "TSASE"
-role = "global optimization"
-repository = "https://github.com/henkelmangroup/tsase"
-ref = "master"
-commit = "98aac60b5d9905e81ee4e6b8c385f169258d0218"
-committed = "2025-09-26"
-note = "Version 1.0 at 98aac60b. Basin hopping and minima hopping. The Fortran Lennard-Jones extension was built with numpy.f2py from tsase/calculators/lj/code/lj.f. The campaigns do not call it. They call the harness Lennard-Jones potential, cutoff 40, no shift."
 
 # generated ASE and Sella templates
 
