@@ -350,6 +350,16 @@ commit = "107e9ad20ca62bcbee1a8c016daab71c690a678c"
 committed = "2026-03-20"
 note = "Optax 0.2.8 at 107e9ad20ca62bcbee1a8c016daab71c690a678c. Adam, Rprop, and L-BFGS train the PyAMFF 10-7 tanh network on the Behler-Parrinello fingerprints and the squared-error loss from pyamff 8037eb98. One harness call is one evaluation of that loss and its gradient with respect to the network parameters. L-BFGS uses the Optax zoom line search, and each line-search evaluation counts. Initial weights are uniform[-1, 1)."
 
+[[code]]
+id = "panna"
+name = "PANNA"
+role = "machine-learning training"
+repository = "https://gitlab.com/PANNAdevs/panna"
+ref = "master"
+commit = "132a2df662598ecbbb2c9b8d37b992bb6ada6348"
+committed = "2025-01-15"
+note = "PANNA 2.1.0, commit 132a2df6, built from source. The mlopt rows step with the TensorFlow Adam in src/panna/neuralnet/config_parser_train.py and the JAX Adam in src/panna/train_jax.py. The loss is the mlopt squared error. It is not PANNA's own training loss."
+
 # generated ASE and Sella templates
 
 [[template]]

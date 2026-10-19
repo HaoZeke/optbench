@@ -1,0 +1,15 @@
+# PANNA is not a conda-forge package. This file does not select a
+# panna build and it does not invent a build string. The trainers the
+# mlopt benchmarks run are the source build pinned in
+# codes/registry.toml under id panna:
+#   repository = https://gitlab.com/PANNAdevs/panna
+#   ref = master
+#   commit = 132a2df662598ecbbb2c9b8d37b992bb6ada6348
+#   version string 2.1.0
+# asv has one environment_type, so this yml cannot be bound to one
+# class. Those classes call the pinned source.
+name: panna-2.1.0
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12

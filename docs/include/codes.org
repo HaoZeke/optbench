@@ -1976,5 +1976,42 @@
    <li>C2H4: partial.</li>
    <li>EMT Pt 38 nanoparticle: partial.</li>
    </ul>
+   <h3>PANNA</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>machine-learning training</td>
+   <td>master</td>
+   <td>132a2df66259</td>
+   <td><a href="https://gitlab.com/PANNAdevs/panna">https://gitlab.com/PANNAdevs/panna</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="mlopt/C2H4" data-template="panna/c2h4-tf-adam-energy">
+   <td>C2H4</td>
+   <td data-field="template">panna/c2h4-tf-adam-energy</td>
+   <td data-field="version">PANNA 2.1.0</td>
+   <td data-field="commit">132a2df66259</td>
+   <td data-field="par2_mean">11485.1</td>
+   <td data-field="mean_calls">7685.14</td>
+   <td data-field="median_calls">9081.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 19, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="mlopt/emt-pt38" data-template="panna/emt-pt38-tf-adam-energy">
+   <td>EMT Pt 38 nanoparticle</td>
+   <td data-field="template">panna/emt-pt38-tf-adam-energy</td>
+   <td data-field="version">PANNA 2.1.0</td>
+   <td data-field="commit">132a2df66259</td>
+   <td data-field="par2_mean">900.64</td>
+   <td data-field="mean_calls">900.64</td>
+   <td data-field="median_calls">266.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   </tbody></table></div>
    </section>
 #+end_export

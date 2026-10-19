@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>GeometryOptimization.jl</th><th>LAMMPS</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>TorchSim</th><th>geomeTRIC</th><th>CP2K</th><th>n2p2</th><th>Optax</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>optking</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>GeometryOptimization.jl</th><th>LAMMPS</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>TorchSim</th><th>geomeTRIC</th><th>CP2K</th><th>n2p2</th><th>Optax</th><th>PANNA</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>optking</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="minimization/lj38">
    <th scope="row"><a href="#lj38">Lennard-Jones 38 clusters</a></th>
    <td data-code="eOn" data-template="eon/lj38-lbfgs-m100" data-par2="180.137"><span class="bench-score">180.137</span><a href="#lj38-templates">eon/lj38-lbfgs-m100</a></td>
@@ -29,6 +29,7 @@
    <td data-code="CP2K">—</td>
    <td data-code="n2p2">—</td>
    <td data-code="Optax">—</td>
+   <td data-code="PANNA">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind" data-template="dlfind/lbfgs-lj38" data-par2="231.908"><span class="bench-score">231.908</span><a href="#lj38-templates">dlfind/lbfgs-lj38</a></td>
@@ -59,6 +60,7 @@
    <td data-code="CP2K">—</td>
    <td data-code="n2p2">—</td>
    <td data-code="Optax">—</td>
+   <td data-code="PANNA">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind" data-template="dlfind/lbfgs-lj38-noise-s0" data-par2="231.908"><span class="bench-score">231.908</span><a href="#lj38-noise-templates">dlfind/lbfgs-lj38-noise-s0</a></td>
@@ -89,6 +91,7 @@
    <td data-code="CP2K">—</td>
    <td data-code="n2p2">—</td>
    <td data-code="Optax">—</td>
+   <td data-code="PANNA">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind" data-template="dlfind/lbfgs-morse" data-par2="13626.5"><span class="bench-score">13626.5</span><a href="#morse-bulk-templates">dlfind/lbfgs-morse</a></td>

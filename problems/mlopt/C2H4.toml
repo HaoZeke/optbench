@@ -9,10 +9,12 @@ remark = "The ranked Optax force rows are the finite-difference fingerprint deri
 [sample]
 initializations = 50
 initialization = "uniform[-1, 1)"
+structure_source = "DFT molecular dynamics"
 
 [convergence]
 max_epochs = 10000
 force_training_max_epochs = 30000
+force_max_epochs = 30000
 energy_only_grad_norm = 0.02
 force_training_grad_norm = 0.1
 

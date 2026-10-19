@@ -95,8 +95,31 @@ def _bits(problem: dict) -> list[tuple[str, str]]:
         bits.append(("Cap", f"{convergence['max_force_calls']} force calls"))
     if "energy_above_minimum" in convergence:
         bits.append(("Stop", f"within {convergence['energy_above_minimum']} of the known minimum"))
-    if "max_epochs" in convergence:
+    if "max_epochs" in convergence and "force_max_epochs" in convergence:
+        bits.append(
+            (
+                "Cap",
+                f"{convergence['max_epochs']} epochs for energies, {convergence['force_max_epochs']} when forces are trained",
+            )
+        )
+    elif "max_epochs" in convergence:
         bits.append(("Cap", f"{convergence['max_epochs']} epochs"))
+    if "energy_only_grad_norm" in convergence:
+        bits.append(
+            (
+                "Stop",
+                "L2 norm of each parameter-set gradient at or below "
+                f"{convergence['energy_only_grad_norm']} when only energies are trained",
+            )
+        )
+    if "force_training_grad_norm" in convergence:
+        bits.append(
+            (
+                "Stop",
+                "L2 norm of each parameter-set gradient at or below "
+                f"{convergence['force_training_grad_norm']} when forces are trained",
+            )
+        )
     goal = problem.get("goal") or {}
     if goal.get("connected_saddles"):
         barrier = goal.get("barrier_below_eV")
@@ -107,6 +130,8 @@ def _bits(problem: dict) -> list[tuple[str, str]]:
     sample = problem.get("sample") or {}
     if sample.get("starts"):
         bits.append(("Starts", str(sample["starts"])))
+    elif sample.get("initializations"):
+        bits.append(("Starts", str(sample["initializations"])))
     potential = problem.get("potential") or {}
     if potential.get("kind"):
         label = str(potential["kind"])
