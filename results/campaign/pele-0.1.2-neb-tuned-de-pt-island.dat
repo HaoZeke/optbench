@@ -1,0 +1,22 @@
+# counter harness PeleCounter.getEnergyGradient
+# force_calls count raw potential evaluations and are not divided by the image count
+# the mean is round-half-even over successes; cap, force, or Hessian index other than 1 is a failure
+force_calls 1306
+force_calls_min 287
+force_calls_max 2411
+force_calls_median 1220
+force_calls_per_image 435
+call_unit total
+successes 3
+nfailed 56
+n 59
+transition_states 3
+code pele
+code_version 0.1.2
+commit b7081b932a060be11342fbe8287ac35da8ada879
+algorithm CI-NEB
+template pele/neb-tuned
+tuning tuned
+counter harness
+problem double-ended-saddle-search/pt-island
+images 3
