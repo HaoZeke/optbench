@@ -1,0 +1,145 @@
+import numpy as np
+
+from optbench.ase_sella import _morse_arrays
+from optbench.counter import ForceCallCap, HarnessCounter
+from optbench.potentials import lennard_jones, lennard_jones_hessian
+from optbench.runners.optking_ts import (
+    counted_call,
+    finite_difference_hessian,
+    morse_smooth_hessian,
+    parse_con,
+)
+
+
+def test_parse_con_keeps_the_frozen_flag():
+    text = "\n".join(
+        [
+            "label",
+            "10.0 11.0 12.0",
+            "90.0 90.0 90.0",
+            "1",
+            "2",
+            "1.0",
+            "Pt",
+            "Coordinates of Component 1",
+            "1.0 2.0 3.0 0 0",
+            "4.0 5.0 6.0 1 1",
+        ]
+    )
+    parsed = parse_con(text)
+    assert parsed["symbol"] == "Pt"
+    assert parsed["box"] == [10.0, 11.0, 12.0]
+    assert parsed["fixed"] == [False, True]
+    assert parsed["positions"][1] == [4.0, 5.0, 6.0]
+
+
+def test_hessian_displacements_are_force_calls():
+    counter = HarnessCounter(cache=True, cap=1000)
+
+    def evaluate(coords):
+        point = np.asarray(coords, dtype=np.float64)
+        return float(np.dot(point, point)), 2.0 * point
+
+    point = np.zeros(6)
+    counted_call(counter, evaluate, point)
+    finite_difference_hessian(lambda trial: counted_call(counter, evaluate, trial), point, 1.0e-5)
+    assert counter.calls == 1 + 2 * 6
+
+
+def test_a_refused_displacement_is_not_counted():
+    counter = HarnessCounter(cache=True, cap=2)
+
+    def evaluate(coords):
+        point = np.asarray(coords, dtype=np.float64)
+        return 0.0, point
+
+    point = np.zeros(3)
+    counted_call(counter, evaluate, point)
+    try:
+        finite_difference_hessian(lambda trial: counted_call(counter, evaluate, trial), point, 1.0e-5)
+    except ForceCallCap:
+        pass
+    else:
+        raise AssertionError("the stencil should have hit the cap")
+    assert counter.calls == 2
+
+
+def test_lennard_jones_column_matches_the_analytic_hessian():
+    coords = np.array(
+        [
+            [0.0, 0.0, 0.0],
+            [1.2, 0.1, 0.0],
+            [0.5, 1.1, 0.2],
+            [0.4, 0.4, 1.15],
+        ],
+        dtype=np.float64,
+    )
+    analytic = lennard_jones_hessian(coords)
+
+    def evaluate(flat):
+        energy, gradient = lennard_jones(flat)
+        return energy, gradient
+
+    column = finite_difference_hessian(evaluate, coords, 1.0e-5)[:, 0]
+    assert np.max(np.abs(column - analytic[:, 0])) < 1.0e-6
+
+
+def _gradient(positions, periodic):
+    energy, forces = _morse_arrays(
+        positions,
+        np.diag([10.0, 10.0, 10.0]),
+        np.asarray(periodic),
+        0.7102,
+        1.6047,
+        2.897,
+        9.5,
+        "smooth",
+    )
+    return energy, -np.asarray(forces, dtype=np.float64).reshape(-1)
+
+
+def test_smooth_morse_hessian_matches_a_finite_difference_column():
+    positions = np.array(
+        [
+            [1.0, 1.0, 1.0],
+            [4.0, 1.2, 1.1],
+            [9.2, 1.0, 1.4],
+            [1.3, 1.1, 7.5],
+        ],
+        dtype=np.float64,
+    )
+    periodic = [True, True, False]
+    analytic = morse_smooth_hessian(positions, [10.0, 10.0, 10.0], periodic, 0.7102, 1.6047, 2.897, 9.5)
+
+    def evaluate(flat):
+        return _gradient(np.asarray(flat, dtype=np.float64).reshape(-1, 3), periodic)
+
+    numeric = finite_difference_hessian(evaluate, positions, 1.0e-5)
+    assert np.max(np.abs(numeric[:, 4] - analytic[:, 4])) < 1.0e-6
+
+
+def test_frozen_atom_block_matches_the_free_difference():
+    positions = np.array(
+        [
+            [1.0, 1.0, 1.0],
+            [4.0, 1.2, 1.1],
+            [9.2, 1.0, 1.4],
+            [1.3, 1.1, 7.5],
+        ],
+        dtype=np.float64,
+    )
+    periodic = [True, True, False]
+    analytic = morse_smooth_hessian(positions, [10.0, 10.0, 10.0], periodic, 0.7102, 1.6047, 2.897, 9.5)
+    free = np.array([True, True, False, True])
+    chosen = np.flatnonzero(free)
+    columns = np.concatenate([np.arange(3 * int(atom), 3 * int(atom) + 3) for atom in chosen])
+    block = analytic[np.ix_(columns, columns)]
+
+    def evaluate(free_flat):
+        trial = positions.copy()
+        trial[free] = np.asarray(free_flat, dtype=np.float64).reshape(-1, 3)
+        _energy, gradient = _gradient(trial, periodic)
+        return _energy, gradient.reshape(-1, 3)[free].reshape(-1)
+
+    numeric = finite_difference_hessian(evaluate, positions[free], 1.0e-5)
+    assert np.max(np.abs(numeric[:, 0] - block[:, 0])) < 1.0e-6

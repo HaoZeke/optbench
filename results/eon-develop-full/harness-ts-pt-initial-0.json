@@ -1,0 +1,24 @@
+{
+  "dimer": {
+    "client_calls": 3210,
+    "client_reason": "0",
+    "counter": "harness",
+    "extrema": null,
+    "failure": null,
+    "force_calls": 3690.0,
+    "potential": "morse_pt",
+    "seconds": 61.88735070899975,
+    "success": true
+  },
+  "lanczos": {
+    "client_calls": 127,
+    "client_reason": "0",
+    "counter": "harness",
+    "extrema": null,
+    "failure": null,
+    "force_calls": 127.0,
+    "potential": "morse_pt",
+    "seconds": 2.0443806049997875,
+    "success": true
+  }
+}
