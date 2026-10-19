@@ -1,0 +1,66 @@
+{
+  "counter": "harness",
+  "legacy": {
+    "force_calls": 993,
+    "force_calls_max": 1187,
+    "force_calls_median": 1000.5,
+    "force_calls_min": 754,
+    "n": 59,
+    "nfailed": 1,
+    "successes": 58,
+    "transition_states": 58
+  },
+  "problem": "double-ended-saddle-search/pt-island",
+  "provenance": {
+    "code": "compass",
+    "code_version": "1.0.0",
+    "commit": "22da7bd5f69cbd64d59853c8f8d7f8d44c2d18df",
+    "machine": {
+      "machine": "x86_64",
+      "node": "cursor",
+      "python": "3.12.3",
+      "system": "Linux"
+    },
+    "parameters": {
+      "counter": "harness",
+      "fixed_cell": true,
+      "forcetol": 0.001,
+      "minimize_fmax": 0.001,
+      "potential": "morse_pt",
+      "targetdistanceother": 0.001,
+      "targetdistancesaddle": 0.001
+    }
+  },
+  "schema": "optbench.score/v2",
+  "score": {
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 20261015,
+    "cap": 3000,
+    "includes_failures": true,
+    "iqr": 136.5,
+    "iqr_high": 201.5,
+    "iqr_low": 77.48750000000001,
+    "mean": 1078.1186440677966,
+    "median": 1002.0,
+    "median_high": 1027.0,
+    "median_low": 972.0,
+    "n": 59,
+    "n_cap": 1,
+    "n_crash": 0,
+    "n_divergence": 0,
+    "n_wrong_stationary": 0,
+    "nfailed": 1,
+    "par2_mean": 1078.1186440677966,
+    "par_applied": true,
+    "par_factor": 2,
+    "q25": 914.5,
+    "q75": 1051.0,
+    "scoring": "par2-wilson-bootstrap",
+    "success_only_mean": 993.2586206896551,
+    "success_rate": 0.9830508474576272,
+    "successes": 58,
+    "wilson_high": 0.9970017660816444,
+    "wilson_low": 0.9100427403585771
+  },
+  "template": "compass/sqnm"
+}
