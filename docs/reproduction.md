@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+47 reproduced, 28 not reproduced, 76 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -141,7 +141,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | morse-bulk/eon-sd | force_calls 196 | 7038 | not reproduced; morse_sd |
 | morse-bulk/eon-sd-twopoint | — | — | not rerun |
 | morse-bulk/optim | force_calls 46 | 27 | not reproduced; optim_morse_memory |
-| morse-bulk/pele-lbfgs | force_calls 51 | 92 | not reproduced; pele_morse |
+| morse-bulk/pele-lbfgs | force_calls 51 | 51 | reproduced |
 | morse-bulk/tsase-sdlbfgs | — | — | not rerun |
 
 ## mlopt
@@ -318,12 +318,6 @@ eOn Morse steepest descent scores 7038 with 19 failures. The archive is 196 with
 comments.txt sets L-BFGS memory 100 and maximum move 2.0. That rerun scores 27. OPTIM defaults (updates 4) score 46, which is the archived integer, but that is not the comment's setup. The odata preamble was not archived.
 
 - minimization/morse-bulk/optim
-
-### pele_morse
-
-pele Morse L-BFGS scores 92. The archive is 51. eOn Morse L-BFGS on the same bulk file reproduces at 52, so the gap is the pele memory and step, not the shared Morse parameters.
-
-- minimization/morse-bulk/pele-lbfgs
 
 ### heptamer_cg
 

@@ -35,8 +35,26 @@ def test_the_ledger_covers_the_oracle_in_order():
             assert row["cause"]
         if (row.get("rerun") or {}).get("paper_baseline"):
             assert status == "reproduced"
-    assert counts == {"reproduced": 46, "not_reproduced": 29, "not_rerun": 76}
+    assert counts == {"reproduced": 47, "not_reproduced": 28, "not_rerun": 76}
     assert reproduction_errors(ROOT) == []
+
+
+def test_morse_bulk_pele_lbfgs_matches_the_archive():
+    ledger = {row_id(row): row for row in load_ledger(ROOT / "oracle" / "reproduction.jsonl")}
+    row = ledger["minimization/morse-bulk/pele-lbfgs"]
+    assert row["status"] == "reproduced"
+    assert row["cause"] == ""
+    assert row["gap"] == ""
+    check = row["checks"][0]
+    assert check["metric"] == "force_calls"
+    assert check["archive"] == 51
+    assert check["rerun"] == 51
+    assert check["ok"] is True
+    assert row["failure_check"]["rerun"] == 0
+    assert row["failure_check"]["ok"] is True
+    assert row["rerun"]["paper_baseline"] is True
+    assert row["rerun"]["template"] == "pele/morse-lbfgs"
+    assert row["rerun"]["sha"] == "5a014304d0119b19d569d006f13b7fb700c5294a"
 
 
 def test_pele_paper_baseline_is_the_2014_stop():
