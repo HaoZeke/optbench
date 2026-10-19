@@ -11,12 +11,16 @@ distance is that Cartesian distance with no permutation and no rotation.
 A start succeeds when the search stops under the force-call cap, the
 true Cartesian force of the candidate is within the problem norm, and
 the vibrational Hessian index is 1. The stock NEB residual is only the
-band stop. The tuned bands keep the climbing image on and stop when the
-true force on the highest image meets the problem norm. The candidate
-for a plain band is the highest-energy interior image. The candidate for
-double-ended connect is a transition state from that cycle, or the
-highest climbing image when the cycle stored none. Hessian finite
-differences go through ``verification`` and are not search cost.
+band stop. A tuned band uses the problem image count and the linear
+interpolant, and it is given the iteration budget of connect's NEB
+stage. Hybrid eigenvector following then refines an interior maximum
+until the true force meets the problem norm. Climbing stays off:
+``NEBForce`` returns the climbing step before the doubly nudged term.
+The candidate for a plain band is the highest-energy interior image.
+The candidate for a refined band or for double-ended connect is a
+transition state from that search, or the highest interior image when
+the refinement stored none. Hessian finite differences go through
+``verification`` and are not search cost.
 
 Each start stores the final energy, the full geometry, and the force.
 Frozen atoms keep the reactant coordinate. Their stored force components
@@ -31,6 +35,8 @@ asks for a refined saddle, so a later cycle is not run.
 
 from __future__ import annotations
 
+import contextlib
+import io
 import json
 import logging
 import math
@@ -43,7 +49,7 @@ import numpy as np
 
 from .campaign import geometry_archive, load_template, resolve_problem
 from .counter import ForceCallCap, PeleCounter
-from .failures import classify_failure
+from .failures import classify_outcome
 from .pes import evaluate, interpolate_free, load_pairs
 from .rgsaddle_band import vibrational_index
 from .score import score_v2
@@ -151,8 +157,16 @@ class _Spec:
         return self.memory.get(_key(coords))
 
 
-def _crash_record(name: str, calls: int, verify: int, crash: str, seed: str) -> dict:
-    return {
+def _crash_record(name: str, calls: int, verify: int, crash: str | None, seed: str, cap: int) -> dict:
+    """An exception before a judged point. The class comes from the call count."""
+    at_cap = int(calls) >= int(cap)
+    failure = classify_outcome(
+        calls=int(calls),
+        cap=int(cap),
+        process_failed=not at_cap,
+    )
+    reasons: list[str] = ["cap"] if at_cap else ["crash"]
+    record = {
         "schema": "optbench.start/v2",
         "start": name,
         "seed": seed,
@@ -160,28 +174,21 @@ def _crash_record(name: str, calls: int, verify: int, crash: str, seed: str) -> 
         "verify_calls": int(verify),
         "counter": "harness",
         "comparable": True,
-        "success": False,
-        "failure": "crash",
-        "reasons": ["crash"],
-        "crash": crash,
+        "success": failure is None,
+        "failure": failure,
+        "reasons": reasons,
         "energy": None,
         "force_norm": None,
         "hessian_index": None,
         "converged": False,
-        "candidate": "crash",
+        "candidate": "cap" if at_cap else "crash",
         "connected": False,
         "geometry": None,
         "force": None,
     }
-
-
-def _finite(value) -> float | None:
-    if value is None:
-        return None
-    number = float(value)
-    if not math.isfinite(number):
-        return None
-    return number
+    if crash and not at_cap:
+        record["crash"] = crash
+    return record
 
 
 def _judge(
@@ -241,7 +248,28 @@ def _judge(
         )
         if hessian_index != 1:
             reasons.append("hessian_index")
-    failure = classify_failure(reasons)
+    geometry = None
+    stored_force = None
+    if coords is not None and crash is None:
+        geometry, stored_force = _placed(spec, coords, grad)
+    # A missing gradient is not a non-finite force. Passing NaN here would
+    # be divergence, and that check runs before the harness cap.
+    measured = None if force is None else float(force)
+    # No stored gradient, still under the cap: the stop was not met.
+    # A NaN force is a measured blow-up and stays NaN so it is divergence.
+    above = crash is None and measured is None and int(counter.calls) < int(cap)
+    failure = classify_outcome(
+        energy=None if energy is None else float(energy),
+        geometry=geometry,
+        force=measured,
+        calls=int(counter.calls),
+        cap=int(cap),
+        force_tol=float(force_norm),
+        process_failed=bool(crash) and int(counter.calls) < int(cap),
+        hessian_index=hessian_index,
+        expected_index=1 if hessian_index is not None else None,
+        force_above=True if above else None,
+    )
     record = {
         "schema": "optbench.start/v2",
         "start": name,
@@ -253,18 +281,18 @@ def _judge(
         "success": failure is None,
         "failure": failure,
         "reasons": reasons,
-        "energy": _finite(energy),
-        "force_norm": _finite(force),
+        "energy": None if energy is None else float(energy),
+        "force_norm": measured,
         "hessian_index": hessian_index,
         "converged": bool(converged),
         "candidate": candidate,
         "connected": bool(connected),
-        "geometry": None,
-        "force": None,
+        "geometry": geometry,
+        "force": stored_force,
     }
-    if coords is not None and crash is None:
-        record["geometry"], record["force"] = _placed(spec, coords, grad)
-    if crash:
+    if hessian_index is not None:
+        record["expected_index"] = 1
+    if crash and int(counter.calls) < int(cap):
         record["crash"] = crash
     return record
 
@@ -292,14 +320,6 @@ def _highest_index(energies) -> int:
             best = index
             best_energy = energy
     return best
-
-
-def _mark_climbing(neb) -> None:
-    """Mark the highest interior image. Endpoints stay fixed."""
-    neb.isclimbing = [False] * int(neb.nimages)
-    index = _highest_index(neb.energies)
-    if 0 < index < int(neb.nimages) - 1:
-        neb.isclimbing[index] = True
 
 
 def _highest_interior(path: np.ndarray, energies: np.ndarray) -> tuple[np.ndarray, int]:
@@ -362,122 +382,93 @@ def _run_band(pot: PeleCounter, path: np.ndarray, settings: dict) -> dict:
     return {"coords": coords, "candidate": "highest", "converged": converged, "connected": False}
 
 
-def _run_true_force(pot: PeleCounter, path: np.ndarray, settings: dict) -> dict:
-    """Climbing band that stops on the true force of the highest image.
+def _candidates(neb) -> list[int]:
+    """Interior maxima, highest energy first. Otherwise the highest interior image."""
+    maxima = []
+    last = int(neb.nimages) - 1
+    for index in range(1, last):
+        energy = float(neb.energies[index])
+        if not math.isfinite(energy):
+            continue
+        left = float(neb.energies[index - 1])
+        right = float(neb.energies[index + 1])
+        if math.isfinite(left) and math.isfinite(right) and energy > left and energy > right:
+            maxima.append(index)
+    if not maxima:
+        maxima = [_highest_index(neb.energies)]
+    maxima.sort(key=lambda index: float(neb.energies[index]), reverse=True)
+    return maxima
 
-    The quench tolerance of the stock band is the NEB residual. This stop
-    replaces it. ``alternate_stop_criterion`` is consulted instead of that
-    residual, and it reads the true gradient already stored for the highest
-    image. The climbing force is the true force with the parallel part
-    reversed, the climbing-image step in pele's ``NEBForce`` from
-    Henkelman, Uberuaga, and Jónsson, J. Chem. Phys. 113, 9901 (2000).
-    The mark is the highest interior image.
 
-    Spring constant 100 is pele's NEB default. Trygubenko and Wales,
-    J. Chem. Phys. 120, 2082 (2004), section III.3, report L-BFGS stable
-    for spring constants from 30 to 10000, with memory 4 and an initial
-    inverse-Hessian diagonal of 0.1. ``maxErise`` is 1, the mylbfgs value
-    named in ``NEB.optimize``.
+def _run_refined(pot: PeleCounter, path: np.ndarray, settings: dict, ndof: int, project_rigid: bool) -> dict:
+    """Band, then hybrid eigenvector following on an interior maximum.
+
+    The band uses the problem image count and the linear interpolant.
+    Its step limit is ``iter_density`` times the image count, and its
+    rms tolerance is ``quench_tol``. That is the first NEB pass in
+    ``LocalConnect``: ``NEBDriver.run`` sets ``nsteps`` from
+    ``iter_density * nimages`` and stops early when the rms is below
+    the quench tolerance. The problem cap is the total number of
+    potential calls, not a per-image budget. One band gradient
+    evaluates every interior image.
+
+    The band gradient is not the gradient of the energy ``NEB`` returns.
+    ``NEB.optimize`` therefore asks for a large ``maxErise`` when the
+    quench is ``mylbfgs``. Spring 100, memory 4, and an initial
+    inverse-Hessian diagonal of 0.1 are the L-BFGS window in Trygubenko
+    and Wales, J. Chem. Phys. 120, 2082 (2004), section III.3. That
+    paper refines a DNEB maximum with eigenvector following. Climbing
+    stays off because ``NEBForce`` returns the climbing step before the
+    doubly nudged spring.
+
+    The refinement is ``findTransitionState``. Its rms tolerance is the
+    problem force norm divided by ``sqrt(ndof)``, so the Cartesian
+    force meets the problem norm. Rigid modes are projected for a free
+    Lennard-Jones cluster, the same switch connect uses.
     """
-    from pele.optimize import Result, mylbfgs
-    from pele.transition_states import NEB
+    from pele.optimize import mylbfgs
+    from pele.optimize.optimization_exceptions import LineSearchError
+    from pele.transition_states import NEB, findTransitionState
 
     images = [np.asarray(row, dtype=np.float64).copy() for row in path]
+    n_images = int(path.shape[0])
+    nsteps = int(float(settings["iter_density"]) * n_images)
+    max_move = float(settings["max_move"])
+    memory = int(settings["memory"])
+    max_erise = float(settings["max_erise"])
+    force_norm = float(settings["force_norm"])
+    cap = int(settings["cap"])
     quench = {
-        "tol": float(settings["neb_tol"]),
-        "maxErise": float(settings["max_erise"]),
-        "maxstep": float(settings["max_move"]),
-        "nsteps": int(settings["cap"]),
-        "M": int(settings["memory"]),
+        "tol": float(settings["quench_tol"]),
+        "maxErise": max_erise,
+        "maxstep": max_move,
+        "nsteps": nsteps,
+        "M": memory,
         "H0": float(settings["h0"]),
         "iprint": -1,
     }
-    force_norm = float(settings["force_norm"])
-    climbing = bool(settings["climbing"])
-    neb = None
-    accepted = {"energies": None}
+    holder: dict = {}
 
-    class _Band(NEB):
-        def NEBForce(self, isclimbing, image, left, right, greal, icenter):
-            result = super().NEBForce(isclimbing, image, left, right, greal, icenter)
-            if isclimbing:
-                return 0.0, result
-            return result
-
-        def optimize(self, quenchRoutine=None, **kwargs):
-            if quenchRoutine is None:
-                quenchRoutine = mylbfgs
-            quench_params = dict(
-                [("nsteps", 300)] + list(self.quenchParams.items()) + list(kwargs.items())
-            )
-            if "logger" not in quench_params:
-                quench_params["logger"] = logging.getLogger("pele.connect.neb.quench")
-            if self.use_minimizer_callback:
-                quench_params["events"] = [self._step]
-            self.step = 0
-            qres = quenchRoutine(self.active.reshape(self.active.size), self, **quench_params)
-            self.active[:, :] = qres.coords.reshape(self.active.shape)
-            for index in range(self.nimages):
-                found = spec_recall(self.potential, self.coords[index])
-                if found is not None:
-                    self.energies[index] = float(found[0])
-            res = Result()
-            res.path = self.coords
-            res.nsteps = qres.nsteps
-            res.energy = self.energies
-            res.rms = qres.rms
-            res.success = bool(qres.success)
-            return res
-
-    def _frame(coords):
-        frame = np.array(neb.coords, copy=True)
-        frame[1:-1] = np.asarray(coords, dtype=np.float64).reshape(neb.active.shape)
-        return frame
-
-    def _met(energy=None, gradient=None, tol=None, coords=None):
-        if neb is None or coords is None:
-            return False
-        frame = _frame(coords)
-        energies = []
-        grads = []
-        for row in frame:
-            found = spec_recall(pot, row)
-            if found is None:
-                energies.append(float("nan"))
-                grads.append(None)
-            else:
-                energies.append(float(found[0]))
-                grads.append(found[1])
-        grad = grads[_highest_index(energies)]
-        if grad is None:
-            return False
-        norm = float(np.linalg.norm(grad))
-        return math.isfinite(norm) and norm <= force_norm
+    def _accept(coords=None, energy=None, rms=None):
+        neb = holder.get("neb")
+        if coords is None or neb is None:
+            return
+        neb.active[:, :] = np.asarray(coords, dtype=np.float64).reshape(neb.active.shape)
+        for index in range(1, neb.nimages - 1):
+            found = spec_recall(pot, neb.coords[index])
+            if found is not None:
+                neb.energies[index] = float(found[0])
 
     def _quench(coords, potential, **kwargs):
         events = list(kwargs.get("events") or [])
-
-        def _keep(coords=None, energy=None, rms=None):
-            if coords is None or neb is None:
-                return
-            frame = _frame(coords)
-            neb.active[:, :] = frame[1:-1]
-            for index in range(1, neb.nimages - 1):
-                found = spec_recall(pot, frame[index])
-                if found is not None:
-                    neb.energies[index] = float(found[0])
-            accepted["energies"] = np.array(neb.energies, copy=True)
-            if climbing:
-                _mark_climbing(neb)
-
-        events.append(_keep)
+        events.append(_accept)
         kwargs["events"] = events
-        kwargs["alternate_stop_criterion"] = _met
         kwargs["H0"] = float(settings["h0"])
         return mylbfgs(coords, potential, **kwargs)
 
+    neb = None
     try:
-        neb = _Band(
+        neb = NEB(
             images,
             pot,
             k=float(settings["spring_k"]),
@@ -486,22 +477,76 @@ def _run_true_force(pot: PeleCounter, path: np.ndarray, settings: dict) -> dict:
             quenchParams=quench,
             use_minimizer_callback=True,
         )
-        accepted["energies"] = np.array(neb.energies, copy=True)
-        if climbing:
-            _mark_climbing(neb)
-        neb.optimize(quenchRoutine=_quench)
-    except ForceCallCap:
-        if neb is not None and accepted["energies"] is not None:
-            neb.energies[:] = accepted["energies"]
+        holder["neb"] = neb
+        if pot.calls < cap:
+            neb.optimize(quenchRoutine=_quench)
+    except (ForceCallCap, LineSearchError):
+        pass
     if neb is None:
         coords, _index = _highest_interior(path, np.full(path.shape[0], np.nan))
         return {"coords": coords, "candidate": "highest", "converged": False, "connected": False}
-    coords, index = _highest_interior(neb.coords, neb.energies)
-    found = spec_recall(pot, coords)
-    norm = None if found is None else float(np.linalg.norm(found[1]))
-    converged = norm is not None and math.isfinite(norm) and norm <= force_norm
-    candidate = "climbing" if climbing and bool(neb.isclimbing[index]) else "highest"
-    return {"coords": coords, "candidate": candidate, "converged": converged, "connected": False}
+    for index in range(neb.nimages):
+        found = spec_recall(pot, neb.coords[index])
+        if found is not None:
+            neb.energies[index] = float(found[0])
+    fallback, _index = _highest_interior(neb.coords, neb.energies)
+    best_force = math.inf
+    recalled = spec_recall(pot, fallback)
+    if recalled is not None:
+        best_force = float(np.linalg.norm(recalled[1]))
+    if pot.calls >= cap or (math.isfinite(best_force) and best_force <= force_norm):
+        converged = math.isfinite(best_force) and best_force <= force_norm
+        return {"coords": fallback, "candidate": "highest", "converged": converged, "connected": False}
+
+    rms_tol = force_norm / math.sqrt(float(ndof))
+    chosen = fallback
+    for index in _candidates(neb):
+        if pot.calls >= cap:
+            break
+        eigenvec = neb.tangent(
+            neb.energies[index],
+            neb.energies[index - 1],
+            neb.energies[index + 1],
+            neb.distance(neb.coords[index, :], neb.coords[index - 1, :])[1],
+            neb.distance(neb.coords[index, :], neb.coords[index + 1, :])[1],
+        )
+        try:
+            with contextlib.redirect_stdout(io.StringIO()):
+                found = findTransitionState(
+                    np.asarray(neb.coords[index, :], dtype=np.float64).copy(),
+                    pot,
+                    eigenvec0=eigenvec,
+                    tol=rms_tol,
+                    nsteps=cap,
+                    orthogZeroEigs=0 if project_rigid else None,
+                    verbosity=0,
+                    iprint=-1,
+                    index_seed=int(settings["seed"]),
+                    max_uphill_step=max_move,
+                    max_uphill_step_initial=max_move,
+                    tangentSpaceQuenchParams={
+                        "maxstep": max_move,
+                        "maxErise": max_erise,
+                        "M": memory,
+                        "iprint": -1,
+                    },
+                )
+        except ForceCallCap:
+            break
+        except LineSearchError:
+            continue
+        coords = np.asarray(found.coords, dtype=np.float64).reshape(-1)
+        recalled = spec_recall(pot, coords)
+        force = math.inf if recalled is None else float(np.linalg.norm(recalled[1]))
+        if math.isfinite(force) and force < best_force:
+            best_force = force
+            chosen = coords
+        eigenval = getattr(found, "eigenval", None)
+        negative = eigenval is not None and math.isfinite(float(eigenval)) and float(eigenval) < 0.0
+        if bool(found.success) and negative and math.isfinite(force) and force <= force_norm:
+            return {"coords": coords, "candidate": "transition-state", "converged": True, "connected": False}
+    converged = math.isfinite(best_force) and best_force <= force_norm
+    return {"coords": chosen, "candidate": "highest", "converged": converged, "connected": False}
 
 
 def _run_connect(pot: PeleCounter, path: np.ndarray, settings: dict, ndof: int) -> dict:
@@ -707,11 +752,18 @@ def _search(job: dict, state: dict) -> dict:
         outcome = _run_connect(counter, path, tuned, ndof)
         crash = outcome.get("crash")
     elif settings.get("stop") == "true_force":
-        outcome = _run_true_force(counter, path, settings)
+        outcome = _run_refined(counter, path, settings, ndof, project_rigid)
     else:
         outcome = _run_band(counter, path, settings)
     if crash:
-        return _crash_record(job["name"], counter.calls, counter.verify_calls, crash, str(settings["seed"]))
+        return _crash_record(
+            job["name"],
+            counter.calls,
+            counter.verify_calls,
+            crash,
+            str(settings["seed"]),
+            int(settings["cap"]),
+        )
     return _judge(
         name=job["name"],
         seed=str(settings["seed"]),
@@ -739,18 +791,15 @@ def _execute(job: dict) -> dict:
         calls = 0 if counter is None else int(counter.calls)
         verify = 0 if counter is None else int(counter.verify_calls)
         seed = str(job.get("settings", {}).get("seed", "0"))
-        record = _crash_record(job["name"], calls, verify, "ForceCallCap", seed)
-        record["failure"] = "cap"
-        record["reasons"] = ["cap"]
-        record["crash"] = None
-        record["candidate"] = "cap"
-        return record
+        cap = int(job.get("settings", {}).get("cap", 0))
+        return _crash_record(job["name"], calls, verify, None, seed, cap)
     except Exception as exc:
         counter = state["counter"]
         calls = 0 if counter is None else int(counter.calls)
         verify = 0 if counter is None else int(counter.verify_calls)
         seed = str(job.get("settings", {}).get("seed", "0"))
-        return _crash_record(job["name"], calls, verify, type(exc).__name__, seed)
+        cap = int(job.get("settings", {}).get("cap", 0))
+        return _crash_record(job["name"], calls, verify, type(exc).__name__, seed, cap)
 
 
 def _job(pair, settings: dict) -> dict:

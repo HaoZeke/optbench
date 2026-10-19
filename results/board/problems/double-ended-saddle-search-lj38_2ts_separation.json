@@ -19,6 +19,7 @@
         "cap": 30,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 51,
@@ -64,6 +65,7 @@
         "cap": 29,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 51,
@@ -109,6 +111,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 51,
@@ -154,6 +157,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 51,
@@ -199,6 +203,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 51,
@@ -244,6 +249,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 51,
@@ -289,6 +295,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 51,
@@ -334,6 +341,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 51,
@@ -379,6 +387,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 51,
@@ -429,9 +438,9 @@
       "eon-svn/de-2ts-lanczos-improved r2549 campaign r2549": 1.0417998869547584,
       "pele/connect 0.1.2 default campaign, asv b7081b9": 0.33054274033692055,
       "pele/dneb 0.1.2 default campaign, asv b7081b9": 0.0,
-      "pele/dneb-tuned 0.1.2 tuned campaign b7081b9": 0.0,
+      "pele/dneb-tuned 0.1.2 tuned campaign b7081b9": 0.39842205308468104,
       "pele/neb 0.1.2 default campaign, asv b7081b9": 0.0,
-      "pele/neb-tuned 0.1.2 tuned campaign b7081b9": 0.0088538234018818,
+      "pele/neb-tuned 0.1.2 tuned campaign b7081b9": 0.41022715095385676,
       "rgsaddle/ci-neb 0.2.2 default campaign, asv c0db2b8": 0.050171665943996864,
       "rgsaddle/ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 0.05902548934587867,
       "rgsaddle/ew-ci-neb 0.2.2 default campaign, asv c0db2b8": 0.1298560765609331,
@@ -572,9 +581,9 @@
       "pele/dneb-tuned 0.1.2 tuned campaign b7081b9": [
         0.0,
         0.0,
-        0.0,
-        0.0,
-        0.0
+        0.0784313725490196,
+        0.7843137254901961,
+        0.9215686274509803
       ],
       "pele/neb 0.1.2 default campaign, asv b7081b9": [
         0.0,
@@ -586,9 +595,9 @@
       "pele/neb-tuned 0.1.2 tuned campaign b7081b9": [
         0.0,
         0.0,
-        0.0,
-        0.0196078431372549,
-        0.0196078431372549
+        0.17647058823529413,
+        0.7450980392156863,
+        0.8823529411764706
       ],
       "rgsaddle/ci-neb 0.2.2 default campaign, asv c0db2b8": [
         0.0,
@@ -721,9 +730,9 @@
       "eon-svn/de-2ts-lanczos-improved r2549 campaign r2549": 1.0,
       "pele/connect 0.1.2 default campaign, asv b7081b9": 0.9019607843137255,
       "pele/dneb 0.1.2 default campaign, asv b7081b9": 0.0,
-      "pele/dneb-tuned 0.1.2 tuned campaign b7081b9": 0.0,
+      "pele/dneb-tuned 0.1.2 tuned campaign b7081b9": 0.9215686274509803,
       "pele/neb 0.1.2 default campaign, asv b7081b9": 0.0,
-      "pele/neb-tuned 0.1.2 tuned campaign b7081b9": 0.0196078431372549,
+      "pele/neb-tuned 0.1.2 tuned campaign b7081b9": 0.9215686274509803,
       "rgsaddle/ci-neb 0.2.2 default campaign, asv c0db2b8": 0.19607843137254902,
       "rgsaddle/ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 0.17647058823529413,
       "rgsaddle/ew-ci-neb 0.2.2 default campaign, asv c0db2b8": 0.47058823529411764,
@@ -765,6 +774,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 51,
@@ -810,6 +820,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 51,
@@ -855,6 +866,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 51,
@@ -900,6 +912,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 51,
@@ -945,6 +958,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 51,
@@ -976,6 +990,98 @@
       "wilson_low": 0.9299533801014687
     },
     {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "pele",
+      "code_version": "0.1.2",
+      "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "pele-0.1.2-dneb-tuned-de-lj38-2ts",
+      "failures": {
+        "cap": 3,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 1,
+        "wrong_stationary": 0
+      },
+      "full_n": 51,
+      "history": false,
+      "max_calls": 10000.0,
+      "mean_calls": 2626.235294117647,
+      "mean_per_image": 525.2470588235294,
+      "median": 1844.0,
+      "median_calls": 1844.0,
+      "median_high": 2087.0,
+      "median_low": 1683.0,
+      "median_per_image": 368.8,
+      "min_calls": 968.0,
+      "n": 51,
+      "nfailed": 4,
+      "note": "starts.jsonl",
+      "par2_mean": 3449.5882352941176,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/pele-0.1.2-dneb-tuned-de-lj38-2ts.dat",
+      "problem": "double-ended-saddle-search/lj38_2ts_separation",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 0.9215686274509803,
+      "template": "pele/dneb-tuned",
+      "tuning": "tuned",
+      "wilson_high": 0.9690778032115107,
+      "wilson_low": 0.8150005368740411
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "pele",
+      "code_version": "0.1.2",
+      "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "pele-0.1.2-neb-tuned-de-lj38-2ts",
+      "failures": {
+        "cap": 2,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 2,
+        "wrong_stationary": 0
+      },
+      "full_n": 51,
+      "history": false,
+      "max_calls": 10000.0,
+      "mean_calls": 2671.921568627451,
+      "mean_per_image": 534.3843137254902,
+      "median": 1956.0,
+      "median_calls": 1956.0,
+      "median_high": 2176.0,
+      "median_low": 1605.0,
+      "median_per_image": 391.2,
+      "min_calls": 941.0,
+      "n": 51,
+      "nfailed": 4,
+      "note": "starts.jsonl",
+      "par2_mean": 3587.6470588235293,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/pele-0.1.2-neb-tuned-de-lj38-2ts.dat",
+      "problem": "double-ended-saddle-search/lj38_2ts_separation",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 0.9215686274509803,
+      "template": "pele/neb-tuned",
+      "tuning": "tuned",
+      "wilson_high": 0.9690778032115107,
+      "wilson_low": 0.8150005368740411
+    },
+    {
       "asv_commit": "dae4c8e72771e9092aa54bb5c7ae03157a8119c8",
       "call_unit": "total",
       "cap": 10000,
@@ -989,7 +1095,8 @@
       "failures": {
         "cap": 4,
         "crash": 0,
-        "divergence": 1,
+        "divergence": 0,
+        "not_converged": 1,
         "wrong_stationary": 0
       },
       "full_n": 51,
@@ -1034,7 +1141,8 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 11,
+        "divergence": 0,
+        "not_converged": 11,
         "wrong_stationary": 0
       },
       "full_n": 51,
@@ -1080,6 +1188,7 @@
         "cap": 9,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 1
       },
       "full_n": 51,
@@ -1125,6 +1234,7 @@
         "cap": 16,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 1
       },
       "full_n": 51,
@@ -1170,6 +1280,7 @@
         "cap": 27,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 51,
@@ -1214,7 +1325,8 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 37,
+        "divergence": 0,
+        "not_converged": 37,
         "wrong_stationary": 0
       },
       "full_n": 51,
@@ -1259,7 +1371,8 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 38,
+        "divergence": 0,
+        "not_converged": 38,
         "wrong_stationary": 0
       },
       "full_n": 51,
@@ -1305,6 +1418,7 @@
         "cap": 35,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 4
       },
       "full_n": 51,
@@ -1350,6 +1464,7 @@
         "cap": 35,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 4
       },
       "full_n": 51,
@@ -1394,7 +1509,8 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 41,
+        "divergence": 0,
+        "not_converged": 41,
         "wrong_stationary": 0
       },
       "full_n": 51,
@@ -1439,7 +1555,8 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 41,
+        "divergence": 0,
+        "not_converged": 41,
         "wrong_stationary": 0
       },
       "full_n": 51,
@@ -1485,6 +1602,7 @@
         "cap": 37,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 4
       },
       "full_n": 51,
@@ -1527,9 +1645,10 @@
       "current": true,
       "entry": "rgsaddle-0.2.2-double-ended-saddle-search-lj38_2ts_separation--rgsaddle-oci-neb",
       "failures": {
-        "cap": 38,
+        "cap": 37,
         "crash": 0,
-        "divergence": 0,
+        "divergence": 1,
+        "not_converged": 0,
         "wrong_stationary": 3
       },
       "full_n": 51,
@@ -1575,6 +1694,7 @@
         "cap": 37,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 5
       },
       "full_n": 51,
@@ -1620,6 +1740,7 @@
         "cap": 37,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 5
       },
       "full_n": 51,
@@ -1665,6 +1786,7 @@
         "cap": 41,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 3
       },
       "full_n": 51,
@@ -1710,6 +1832,7 @@
         "cap": 41,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 4
       },
       "full_n": 51,
@@ -1754,7 +1877,8 @@
       "failures": {
         "cap": 43,
         "crash": 0,
-        "divergence": 1,
+        "divergence": 0,
+        "not_converged": 1,
         "wrong_stationary": 2
       },
       "full_n": 51,
@@ -1789,51 +1913,6 @@
       "asv_commit": "",
       "call_unit": "total",
       "cap": 10000,
-      "code": "pele",
-      "code_version": "0.1.2",
-      "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
-      "comparable": true,
-      "counter": "harness",
-      "current": true,
-      "entry": "pele-0.1.2-neb-tuned-de-lj38-2ts",
-      "failures": {
-        "cap": 50,
-        "crash": 0,
-        "divergence": 0,
-        "wrong_stationary": 0
-      },
-      "full_n": 51,
-      "history": false,
-      "max_calls": 10000.0,
-      "mean_calls": 9833.764705882353,
-      "mean_per_image": 1966.7529411764706,
-      "median": 20000.0,
-      "median_calls": 10000.0,
-      "median_high": 20000.0,
-      "median_low": 20000.0,
-      "median_per_image": 2000.0,
-      "min_calls": 1522.0,
-      "n": 51,
-      "nfailed": 50,
-      "note": "starts.jsonl",
-      "par2_mean": 19637.686274509804,
-      "partial": false,
-      "partial_reason": "",
-      "path": "results/campaign/pele-0.1.2-neb-tuned-de-lj38-2ts.dat",
-      "problem": "double-ended-saddle-search/lj38_2ts_separation",
-      "registry_match": true,
-      "scored": true,
-      "source": "campaign",
-      "success_rate": 0.0196078431372549,
-      "template": "pele/neb-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.10304568726144975,
-      "wilson_low": 0.0034696926410608536
-    },
-    {
-      "asv_commit": "",
-      "call_unit": "total",
-      "cap": 10000,
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
@@ -1844,7 +1923,8 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 51,
+        "divergence": 0,
+        "not_converged": 51,
         "wrong_stationary": 0
       },
       "full_n": 51,
@@ -1889,7 +1969,8 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 51,
+        "divergence": 0,
+        "not_converged": 51,
         "wrong_stationary": 0
       },
       "full_n": 51,
@@ -1935,6 +2016,7 @@
         "cap": 51,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 51,
@@ -1966,51 +2048,6 @@
       "wilson_low": 0.0
     },
     {
-      "asv_commit": "",
-      "call_unit": "total",
-      "cap": 10000,
-      "code": "pele",
-      "code_version": "0.1.2",
-      "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
-      "comparable": true,
-      "counter": "harness",
-      "current": true,
-      "entry": "pele-0.1.2-dneb-tuned-de-lj38-2ts",
-      "failures": {
-        "cap": 51,
-        "crash": 0,
-        "divergence": 0,
-        "wrong_stationary": 0
-      },
-      "full_n": 51,
-      "history": false,
-      "max_calls": 10000.0,
-      "mean_calls": 10000.0,
-      "mean_per_image": 2000.0,
-      "median": 20000.0,
-      "median_calls": 10000.0,
-      "median_high": 20000.0,
-      "median_low": 20000.0,
-      "median_per_image": 2000.0,
-      "min_calls": 10000.0,
-      "n": 51,
-      "nfailed": 51,
-      "note": "starts.jsonl",
-      "par2_mean": 20000.0,
-      "partial": false,
-      "partial_reason": "",
-      "path": "results/campaign/pele-0.1.2-dneb-tuned-de-lj38-2ts.dat",
-      "problem": "double-ended-saddle-search/lj38_2ts_separation",
-      "registry_match": true,
-      "scored": true,
-      "source": "campaign",
-      "success_rate": 0.0,
-      "template": "pele/dneb-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.07004661989853143,
-      "wilson_low": 0.0
-    },
-    {
       "asv_commit": "dae4c8e72771e9092aa54bb5c7ae03157a8119c8",
       "call_unit": "total",
       "cap": 10000,
@@ -2024,7 +2061,8 @@
       "failures": {
         "cap": 50,
         "crash": 0,
-        "divergence": 1,
+        "divergence": 0,
+        "not_converged": 1,
         "wrong_stationary": 0
       },
       "full_n": 51,
@@ -2069,7 +2107,8 @@
       "failures": {
         "cap": 45,
         "crash": 0,
-        "divergence": 3,
+        "divergence": 0,
+        "not_converged": 3,
         "wrong_stationary": 3
       },
       "full_n": 51,
@@ -2114,7 +2153,8 @@
       "failures": {
         "cap": 27,
         "crash": 0,
-        "divergence": 3,
+        "divergence": 0,
+        "not_converged": 3,
         "wrong_stationary": 21
       },
       "full_n": 51,
@@ -2159,7 +2199,8 @@
       "failures": {
         "cap": 44,
         "crash": 0,
-        "divergence": 3,
+        "divergence": 0,
+        "not_converged": 3,
         "wrong_stationary": 4
       },
       "full_n": 51,
@@ -2205,6 +2246,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 51,
@@ -2250,6 +2292,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 51,
@@ -2295,6 +2338,7 @@
         "cap": 45,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 51,
@@ -2340,6 +2384,7 @@
         "cap": 45,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 51,

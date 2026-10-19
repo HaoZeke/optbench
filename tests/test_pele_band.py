@@ -1,12 +1,14 @@
 """pele band templates and a capped search on one LJ38 pair."""
 
 import tomllib
+from contextlib import nullcontext
 from pathlib import Path
 
+import numpy as np
 import pytest
 
 from optbench.campaign import _check_stop, list_templates, load_template, resolve_problem
-from optbench.pele_band import _execute, _job, _registry, _settings, cached_pairs
+from optbench.pele_band import _crash_record, _execute, _job, _judge, _registry, _settings, cached_pairs
 
 ROOT = Path(__file__).resolve().parents[1]
 PROBLEMS = (
@@ -76,12 +78,14 @@ def test_pele_settings_follow_each_problem():
             assert row["cap"] == cap
             assert row["n_interior"] == images
             assert row["force_norm"] == force
-            assert row["climbing"] is True
+            assert row["climbing"] is False
             assert row["stop"] == "true_force"
             assert row["spring_k"] == 100.0
-            assert row["max_erise"] == 1.0
+            assert row["max_erise"] == 100.0
             assert row["memory"] == 4
             assert row["h0"] == 0.1
+            assert row["quench_tol"] == 0.01
+            assert row["iter_density"] == 10.0
 
 
 def test_capped_pele_neb_stops_inside_the_budget():
@@ -118,6 +122,75 @@ def test_tuned_band_stores_the_final_geometry_and_force():
     if record["force"] is not None:
         assert len(record["force"]) == len(record["geometry"])
         assert record["force_norm"] is not None
+
+
+class _Recall:
+    def __init__(self, energy: float, gradient: list[float], template):
+        self.energy = energy
+        self.gradient = gradient
+        self.template = template
+        self.free = [True] * len(template)
+
+    def recall(self, coords):
+        return self.energy, self.gradient
+
+
+class _Calls:
+    def __init__(self, calls: int):
+        self.calls = calls
+        self.verify_calls = 0
+
+    def verification(self):
+        return nullcontext()
+
+
+def _judged(calls: int, cap: int, energy: float, gradient: list[float]):
+    template = [[0.0, 0.0, 0.0]]
+    return _judge(
+        name="pair",
+        seed="0",
+        coords=np.zeros(3),
+        candidate="highest",
+        converged=False,
+        connected=False,
+        counter=_Calls(calls),
+        spec=_Recall(energy, gradient, template),
+        force_norm=0.001,
+        cap=cap,
+        project_rigid=False,
+        crash=None,
+    )
+
+
+def test_a_finished_band_above_the_stop_is_not_converged():
+    record = _judged(12, 2500, -1.0, [0.0, 0.0, 0.01])
+    assert record["force_calls"] == 12
+    assert record["success"] is False
+    assert record["failure"] == "not_converged"
+    assert record["energy"] == -1.0
+    assert record["force_norm"] > 0.001
+
+
+def test_a_cap_requires_the_harness_call_count():
+    above = [0.0, 0.0, 0.01]
+    assert _judged(2499, 2500, -1.0, above)["failure"] == "not_converged"
+    assert _judged(2500, 2500, -1.0, above)["failure"] == "cap"
+    assert _crash_record("pair", 2499, 0, "ForceCallCap", "0", 2500)["failure"] == "crash"
+    capped = _crash_record("pair", 2500, 0, None, "0", 2500)
+    assert capped["failure"] == "cap"
+    assert capped["success"] is False
+    assert "crash" not in capped
+
+
+def test_the_wrong_hessian_index_at_the_stop_is_wrong_stationary(monkeypatch):
+    monkeypatch.setattr("optbench.pele_band.numerical_hessian", lambda *_args, **_kwargs: [[1.0]])
+    monkeypatch.setattr("optbench.pele_band.vibrational_index", lambda *_args, **_kwargs: 0)
+    record = _judged(12, 2500, -1.0, [0.0, 0.0, 0.0001])
+    assert record["force_norm"] <= 0.001
+    assert record["hessian_index"] == 0
+    assert record["expected_index"] == 1
+    assert record["failure"] == "wrong_stationary"
+    assert record["success"] is False
 
 
 def test_pele_benchmarks_name_the_four_problems():

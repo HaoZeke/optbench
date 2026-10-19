@@ -1,19 +1,24 @@
-# pele 0.1.2 climbing-image DNEB. The same setting set as pele/neb-tuned.
-# The band runs until the true force on the highest image meets the problem norm.
-# Spring 100 is the default of pele.transition_states.NEB, and it lies in the
-# L-BFGS window of Trygubenko and Wales, J. Chem. Phys. 120, 2082 (2004), section III.3.
-# That section uses memory 4 and an initial inverse-Hessian diagonal of 0.1.
-# maxErise 1 is the mylbfgs value named in NEB.optimize.
-# Doubly nudged springs are the DNEB gradient of that paper.
-# MakeHighestImageClimbing applies the climbing-image force of Henkelman, Uberuaga,
-# and Jonsson, J. Chem. Phys. 113, 9901 (2000).
+# pele 0.1.2 doubly nudged elastic band, then hybrid eigenvector following.
+# One setting set for every start.
+# The band is the problem image count on the linear interpolant. It stops at
+# rms 0.01 or after iter_density steps per image, the first NEB pass in
+# pele.landscape.LocalConnect. The problem cap counts every potential call.
+# One band gradient evaluates every interior image, and the refinement spends
+# the remaining calls on one image.
+# Spring 100, memory 4, and an initial inverse-Hessian diagonal of 0.1 are the
+# L-BFGS window in Trygubenko and Wales, J. Chem. Phys. 120, 2082 (2004),
+# section III.3. That paper refines a DNEB maximum with eigenvector following.
+# maxErise 100 is the value NEB.optimize names for this non-Hamiltonian band
+# gradient, and the value the stock band already uses.
+# Climbing stays off. NEBForce returns the climbing step before the doubly
+# nudged term, so the two are not applied together.
 # The problem file supplies the image count, the cap, the max move, and the force norm.
 id = "pele/dneb-tuned"
 engine = "pele-band"
 code = "pele"
 code_version = "0.1.2"
 commit = "b7081b932a060be11342fbe8287ac35da8ada879"
-algorithm = "CI-DNEB"
+algorithm = "DNEB+EF"
 tuning = "tuned"
 
 [ini]
@@ -21,10 +26,10 @@ tuning = "tuned"
 [band]
 kind = "dneb"
 dneb = true
-climbing = true
+climbing = false
 stop = "true_force"
 spring_k = 100.0
-max_erise = 1.0
+max_erise = 100.0
 memory = 4
 h0 = 0.1
 neb_tol = 1e-4

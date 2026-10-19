@@ -666,48 +666,48 @@ The number is written only after the run finishes under the problem rule.
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr data-problem="double-ended-saddle-search/lj38" data-template="pele/connect">
+   <tr data-problem="double-ended-saddle-search/lj38" data-template="pele/neb-tuned">
    <td>LJ38 double-ended saddle</td>
-   <td data-field="template">pele/connect</td>
+   <td data-field="template">pele/neb-tuned</td>
    <td data-field="version">pele 0.1.2</td>
    <td data-field="commit">b7081b932a06</td>
-   <td data-field="par2_mean">1661.48</td>
-   <td data-field="mean_calls">1511.48</td>
-   <td data-field="median_calls">1381.5</td>
-   <td data-field="failures">crash 0, divergence 0, cap 3, wrong_stationary 0</td>
+   <td data-field="par2_mean">1211.4</td>
+   <td data-field="mean_calls">1111.4</td>
+   <td data-field="median_calls">949.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 2, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="pele/connect">
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="pele/dneb-tuned">
    <td>lj38_2ts_separation</td>
-   <td data-field="template">pele/connect</td>
+   <td data-field="template">pele/dneb-tuned</td>
    <td data-field="version">pele 0.1.2</td>
    <td data-field="commit">b7081b932a06</td>
-   <td data-field="par2_mean">4267.51</td>
-   <td data-field="mean_calls">3248.25</td>
-   <td data-field="median_calls">2292</td>
-   <td data-field="failures">crash 0, divergence 1, cap 4, wrong_stationary 0</td>
+   <td data-field="par2_mean">3449.59</td>
+   <td data-field="mean_calls">2626.24</td>
+   <td data-field="median_calls">1844</td>
+   <td data-field="failures">crash 0, divergence 0, cap 3, not_converged 1, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/pt-island" data-template="pele/connect">
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="pele/dneb-tuned">
    <td>pt-island</td>
-   <td data-field="template">pele/connect</td>
+   <td data-field="template">pele/dneb-tuned</td>
    <td data-field="version">pele 0.1.2</td>
    <td data-field="commit">b7081b932a06</td>
-   <td data-field="par2_mean">1131.61</td>
-   <td data-field="mean_calls">1038.19</td>
-   <td data-field="median_calls">1022</td>
-   <td data-field="failures">crash 0, divergence 1, cap 0, wrong_stationary 0</td>
+   <td data-field="par2_mean">901.424</td>
+   <td data-field="mean_calls">901.424</td>
+   <td data-field="median_calls">882</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
-   <tr data-problem="neb/Pt-heptamer" data-template="pele/connect">
+   <tr data-problem="neb/Pt-heptamer" data-template="pele/neb-tuned">
    <td>Pt-heptamer</td>
-   <td data-field="template">pele/connect</td>
+   <td data-field="template">pele/neb-tuned</td>
    <td data-field="version">pele 0.1.2</td>
    <td data-field="commit">b7081b932a06</td>
-   <td data-field="par2_mean">1566.69</td>
-   <td data-field="mean_calls">1566.69</td>
-   <td data-field="median_calls">1522</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="par2_mean">957.923</td>
+   <td data-field="mean_calls">957.923</td>
+   <td data-field="median_calls">932</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
    </tbody></table></div>

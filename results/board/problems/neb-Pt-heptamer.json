@@ -18,6 +18,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -63,6 +64,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -110,6 +112,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -155,6 +158,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -200,6 +204,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -245,6 +250,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -290,6 +296,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -335,6 +342,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -379,9 +387,9 @@
       "eon-svn/neb-pt-qm r2549 campaign r2549": 0.5441696075464275,
       "pele/connect 0.1.2 default campaign, asv b7081b9": 0.4515449934959718,
       "pele/dneb 0.1.2 default campaign, asv b7081b9": 0.0,
-      "pele/dneb-tuned 0.1.2 tuned campaign b7081b9": 0.0,
+      "pele/dneb-tuned 0.1.2 tuned campaign b7081b9": 0.4747011470085858,
       "pele/neb 0.1.2 default campaign, asv b7081b9": 0.0,
-      "pele/neb-tuned 0.1.2 tuned campaign b7081b9": 0.20840538161352545,
+      "pele/neb-tuned 0.1.2 tuned campaign b7081b9": 0.7294188356473391,
       "rgsaddle/ci-neb 0.2.2 default campaign, asv c0db2b8": 0.7988872961851808,
       "rgsaddle/ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 1.111495368605469,
       "rgsaddle/ew-ci-neb 0.2.2 default campaign, asv c0db2b8": 0.752574989159953,
@@ -478,9 +486,9 @@
       "pele/dneb-tuned 0.1.2 tuned campaign b7081b9": [
         0.0,
         0.0,
-        0.0,
-        0.0,
-        0.0
+        0.07692307692307693,
+        1.0,
+        1.0
       ],
       "pele/neb 0.1.2 default campaign, asv b7081b9": [
         0.0,
@@ -492,9 +500,9 @@
       "pele/neb-tuned 0.1.2 tuned campaign b7081b9": [
         0.0,
         0.0,
-        0.23076923076923078,
-        0.3076923076923077,
-        0.3076923076923077
+        0.9230769230769231,
+        1.0,
+        1.0
       ],
       "rgsaddle/ci-neb 0.2.2 default campaign, asv c0db2b8": [
         0.0,
@@ -607,9 +615,9 @@
       "eon-svn/neb-pt-qm r2549 campaign r2549": 1.0,
       "pele/connect 0.1.2 default campaign, asv b7081b9": 1.0,
       "pele/dneb 0.1.2 default campaign, asv b7081b9": 0.0,
-      "pele/dneb-tuned 0.1.2 tuned campaign b7081b9": 0.0,
+      "pele/dneb-tuned 0.1.2 tuned campaign b7081b9": 1.0,
       "pele/neb 0.1.2 default campaign, asv b7081b9": 0.0,
-      "pele/neb-tuned 0.1.2 tuned campaign b7081b9": 0.3076923076923077,
+      "pele/neb-tuned 0.1.2 tuned campaign b7081b9": 1.0,
       "rgsaddle/ci-neb 0.2.2 default campaign, asv c0db2b8": 1.0,
       "rgsaddle/ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 1.0,
       "rgsaddle/ew-ci-neb 0.2.2 default campaign, asv c0db2b8": 1.0,
@@ -649,6 +657,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -694,6 +703,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -739,6 +749,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -784,6 +795,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -829,6 +841,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -874,6 +887,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -919,6 +933,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -964,6 +979,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -1009,6 +1025,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -1054,6 +1071,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -1099,6 +1117,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -1144,6 +1163,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -1189,6 +1209,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -1234,6 +1255,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -1279,6 +1301,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -1324,6 +1347,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -1369,6 +1393,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -1414,6 +1439,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -1448,6 +1474,52 @@
       "asv_commit": "",
       "call_unit": "total",
       "cap": 10000,
+      "code": "pele",
+      "code_version": "0.1.2",
+      "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "pele-0.1.2-neb-tuned-pt-heptamer",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 13,
+      "history": false,
+      "max_calls": 1429.0,
+      "mean_calls": 957.9230769230769,
+      "mean_per_image": 119.74038461538461,
+      "median": 932.0,
+      "median_calls": 932.0,
+      "median_high": 1047.0,
+      "median_low": 828.0,
+      "median_per_image": 116.5,
+      "min_calls": 475.0,
+      "n": 13,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 957.9230769230769,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/pele-0.1.2-neb-tuned-pt-heptamer.dat",
+      "problem": "neb/Pt-heptamer",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "pele/neb-tuned",
+      "tuning": "tuned",
+      "wilson_high": 1.0,
+      "wilson_low": 0.7719046276458016
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000,
       "code": "Eon svn",
       "code_version": "r2549",
       "commit": "r2549",
@@ -1459,6 +1531,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -1493,6 +1566,52 @@
       "asv_commit": "",
       "call_unit": "total",
       "cap": 10000,
+      "code": "pele",
+      "code_version": "0.1.2",
+      "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "pele-0.1.2-dneb-tuned-pt-heptamer",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 13,
+      "history": false,
+      "max_calls": 1696.0,
+      "mean_calls": 1423.7692307692307,
+      "mean_per_image": 177.97115384615384,
+      "median": 1394.0,
+      "median_calls": 1394.0,
+      "median_high": 1515.0,
+      "median_low": 1276.0,
+      "median_per_image": 174.25,
+      "min_calls": 1155.0,
+      "n": 13,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 1423.7692307692307,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/pele-0.1.2-dneb-tuned-pt-heptamer.dat",
+      "problem": "neb/Pt-heptamer",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "pele/dneb-tuned",
+      "tuning": "tuned",
+      "wilson_high": 1.0,
+      "wilson_low": 0.7719046276458016
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000,
       "code": "tsase",
       "code_version": "1.0",
       "commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218",
@@ -1504,6 +1623,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -1549,6 +1669,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -1580,51 +1701,6 @@
       "wilson_low": 0.7719046276458016
     },
     {
-      "asv_commit": "",
-      "call_unit": "total",
-      "cap": 10000,
-      "code": "pele",
-      "code_version": "0.1.2",
-      "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
-      "comparable": true,
-      "counter": "harness",
-      "current": true,
-      "entry": "pele-0.1.2-neb-tuned-pt-heptamer",
-      "failures": {
-        "cap": 9,
-        "crash": 0,
-        "divergence": 0,
-        "wrong_stationary": 0
-      },
-      "full_n": 13,
-      "history": false,
-      "max_calls": 10000.0,
-      "mean_calls": 7285.538461538462,
-      "mean_per_image": 910.6923076923077,
-      "median": 20000.0,
-      "median_calls": 10000.0,
-      "median_high": 20000.0,
-      "median_low": 2154.0,
-      "median_per_image": 1250.0,
-      "min_calls": 834.0,
-      "n": 13,
-      "nfailed": 9,
-      "note": "starts.jsonl",
-      "par2_mean": 14208.615384615385,
-      "partial": false,
-      "partial_reason": "",
-      "path": "results/campaign/pele-0.1.2-neb-tuned-pt-heptamer.dat",
-      "problem": "neb/Pt-heptamer",
-      "registry_match": true,
-      "scored": true,
-      "source": "campaign",
-      "success_rate": 0.3076923076923077,
-      "template": "pele/neb-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.5763065681945096,
-      "wilson_low": 0.12680703655710515
-    },
-    {
       "asv_commit": "dae4c8e72771e9092aa54bb5c7ae03157a8119c8",
       "call_unit": "total",
       "cap": 10000,
@@ -1639,6 +1715,7 @@
         "cap": 13,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -1670,51 +1747,6 @@
       "wilson_low": 0.0
     },
     {
-      "asv_commit": "",
-      "call_unit": "total",
-      "cap": 10000,
-      "code": "pele",
-      "code_version": "0.1.2",
-      "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
-      "comparable": true,
-      "counter": "harness",
-      "current": true,
-      "entry": "pele-0.1.2-dneb-tuned-pt-heptamer",
-      "failures": {
-        "cap": 13,
-        "crash": 0,
-        "divergence": 0,
-        "wrong_stationary": 0
-      },
-      "full_n": 13,
-      "history": false,
-      "max_calls": 10000.0,
-      "mean_calls": 10000.0,
-      "mean_per_image": 1250.0,
-      "median": 20000.0,
-      "median_calls": 10000.0,
-      "median_high": 20000.0,
-      "median_low": 20000.0,
-      "median_per_image": 1250.0,
-      "min_calls": 10000.0,
-      "n": 13,
-      "nfailed": 13,
-      "note": "starts.jsonl",
-      "par2_mean": 20000.0,
-      "partial": false,
-      "partial_reason": "",
-      "path": "results/campaign/pele-0.1.2-dneb-tuned-pt-heptamer.dat",
-      "problem": "neb/Pt-heptamer",
-      "registry_match": true,
-      "scored": true,
-      "source": "campaign",
-      "success_rate": 0.0,
-      "template": "pele/dneb-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.22809537235419838,
-      "wilson_low": 0.0
-    },
-    {
       "asv_commit": "dae4c8e72771e9092aa54bb5c7ae03157a8119c8",
       "call_unit": "total",
       "cap": 10000,
@@ -1728,7 +1760,8 @@
       "failures": {
         "cap": 4,
         "crash": 0,
-        "divergence": 9,
+        "divergence": 0,
+        "not_converged": 9,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -1773,7 +1806,8 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 13,
+        "divergence": 0,
+        "not_converged": 13,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -1818,7 +1852,8 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 13,
+        "divergence": 0,
+        "not_converged": 13,
         "wrong_stationary": 0
       },
       "full_n": 13,
@@ -1863,7 +1898,8 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 13,
+        "divergence": 0,
+        "not_converged": 13,
         "wrong_stationary": 0
       },
       "full_n": 13,
