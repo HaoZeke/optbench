@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-47 reproduced, 29 not reproduced, 75 not rerun. 151 archive rows.
+46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -83,7 +83,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | Pt/eon-dimer-lbfgs2 | — | — | not rerun |
 | Pt/eon-lanczos-cg | — | — | not rerun |
 | Pt/eon-lanczos-cg2 | — | — | not rerun |
-| Pt/eon-lanczos-lbfgs | barrier_force_calls 1.284e+06, barrier_jobs 1827, rate_force_calls 45240, rate_jobs 64 | 1.19e+06, 1675, 46900, 66 | reproduced |
+| Pt/eon-lanczos-lbfgs | — | — | not rerun; htst_pt_lanczos |
 | Pt/eon-lanczos-lbfgs2 | — | — | not rerun |
 | Pt/quench_dimer-qm | — | — | not rerun |
 | Pt/tsase-dimer-qm | — | — | not rerun |
@@ -275,6 +275,12 @@ The r2549 Al dimer with the archived rotation string (CG, max 50, tol 1) misses 
 
 - hTST/Al/eon-dimer-cg
 
+### htst_pt_lanczos
+
+The archived row is the paper score for Eon r2006: barrier_jobs 1827, barrier_force_calls 1.284e+06, rate_jobs 64, rate_force_calls 4.524e+04. EON and eOn are different codes. Both ran stock on the archive island, seed 42, and the same Lanczos-LBFGS convergence keys, and neither was tuned toward those counts. EON (SVN r2549) scores barrier_jobs 1462 (20.0% off), barrier_force_calls 5.139e+05 (60.0% off), rate_jobs 53 (17.2% off), rate_force_calls 1.867e+04 (58.7% off). eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) scores barrier_jobs 1084 (40.7% off), barrier_force_calls 3.798e+05 (70.4% off), rate_jobs 52 (18.8% off), rate_force_calls 1.851e+04 (59.1% off). The gaps are the finding. The archive row stays not rerun, and both campaigns stay ranked.
+
+- hTST/Pt/eon-lanczos-lbfgs
+
 ### optim_rr_defaults
 
 The Rayleigh-Ritz template uses updates 4. The archived first-order mean is 25 and the second-order mean is 46. This default scores 61, so it is not either archived order.
@@ -358,4 +364,4 @@ Sella 2.6.0 with the archived trust-region numbers (eta, gamma, delta0, rho, sig
 - tsopt/LJ38/sella
 - tsopt/pt-island/sella
 
-Rows with no exact-setup campaign stay not rerun and are not given a cause. AKMC on aladatom is a different method from Langevin parallel replica; the ratios above are that comparison, and the archive rows stay not rerun.
+Rows with no exact-setup campaign stay not rerun and are not given a cause. AKMC on aladatom is a different method from Langevin parallel replica; the ratios above are that comparison, and the archive rows stay not rerun. hTST/Pt/eon-lanczos-lbfgs stays the archived Eon r2006 paper row. EON (SVN r2549) and eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) are separate stock campaigns on that problem. Both miss the archive, and both stay ranked.

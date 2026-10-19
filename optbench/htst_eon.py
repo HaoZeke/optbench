@@ -124,7 +124,7 @@ def _campaign_text(
     lines.append(f"code {template.get('code', 'eOn')}")
     lines.append(f"code_version {template.get('code_version', '')}")
     lines.append(f"commit {template.get('commit', '')}")
-    lines.append("counter htst-reducer")
+    lines.append("counter harness")
     lines.append("reducer harness-htst")
     lines.append("contributor Rohit Goswami")
     lines.append(f"random_seed {seed}")
@@ -136,8 +136,6 @@ def _campaign_text(
     lines.append(f"template {template['id']}")
     lines.append(f"problem {template.get('problem', '')}")
     lines.append("count_keys sad-fcs")
-    # The four means are the 2014 score. The v2 table wants a harness total.
-    lines.append("ranked false")
     if left_state0:
         lines.append("left_state0 true")
     complete = reduction.barrier_windows >= target and not reduction.missed_barriers

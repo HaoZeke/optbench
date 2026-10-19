@@ -375,7 +375,7 @@ def barrier_start_records(
                 "code": code,
                 "code_version": code_version,
                 "commit": commit,
-                "counter": "htst-reducer",
+                "counter": "harness",
                 "failed": False,
                 "failure": None,
                 "force_calls": calls,

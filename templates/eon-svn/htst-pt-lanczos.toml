@@ -1,15 +1,16 @@
 id = "eon-svn/htst-pt-lanczos"
 engine = "eon"
 problem = "hTST/Pt"
-code = "Eon svn"
-code_version = "r2006"
-commit = "r2006"
+code = "EON"
+code_version = "(SVN r2549)"
+commit = "r2549"
 algorithm = "Lanczos-LBFGS rotation: max=10, tol=0.05"
 reducer = "harness-htst"
+tuning = "default"
 pass_limit = 4000
 target_windows = 8
 geometry = "website/hTST/Pt/eon-lanczos-lbfgs/states/0/reactant.con"
-note = "AKMC on the Pt island with the Eon r2006 client (SVN r2006, 2013-01-16). morse_pt is the C++ Morse potential in that binary. Temperature 700 K, seed 42, confidence 1.9, confidence_scheme old. thermally_accessible_window is 22 so a 1.207 eV barrier stays inside the table at 700 K. The translation optimizer is L-BFGS with the r2006 defaults: fixed inverse curvature 0.01, no auto scale, convergence on the maximum atom force. Lanczos tolerance is 0.05 and max_iterations is 10. Optimizer converged_force is 0.001, max_iterations 5000, max_move 0.2. Saddle max_energy is 1000 and converged_force follows the optimizer. finite_difference is the r2006 default 0.01. Displacement is the least coordinated atom, weight 1, radius 3.3, magnitude 0.3. Prefactor default_value is 1.2e12. A start is one barrier window. The archived average is over 8 barrier windows. Communicator num_jobs 32."
+note = "Stock EON r2549 on the archived Pt island. Unpatched client, Fortran linked, morse_pt. The ini is the archive config: 700 K, seed 42, confidence 1.9, L-BFGS converged_force 0.001, max_iterations 5000, Lanczos tolerance 0.05, max_iterations 10, displacement weight 1, radius 3.3, magnitude 0.3, prefactor 1.2e12. Keys the archive left unset stay at the r2549 defaults. The communicator is local so the run fits this machine. A start is one barrier window. The archive average is over 8 windows. Nothing was tuned toward the archived counts."
 
 [htst]
 temperature = 700
@@ -31,13 +32,10 @@ potential = "morse_pt"
 [ini.Optimizer]
 opt_method = "lbfgs"
 converged_force = 0.001
-max_move = 0.2
 max_iterations = 5000
 
 [ini.AKMC]
 confidence = 1.9
-confidence_scheme = "old"
-thermally_accessible_window = 22
 
 [ini."Process Search"]
 minimize_first = true
@@ -54,8 +52,6 @@ displace_least_coordinated_weight = 1.0
 displace_radius = 3.3
 displace_magnitude = 0.3
 max_energy = 1000.0
-max_iterations = 5000
-converged_force = 0.001
 
 [ini.Prefactor]
 default_value = 1.2e12

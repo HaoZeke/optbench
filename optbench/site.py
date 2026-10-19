@@ -477,17 +477,32 @@ def _collection_html(
     return "\n".join(lines)
 
 
-def _code_keys(pins: list[dict]) -> set[str]:
-    keys: set[str] = set()
+def _matches_code(row: dict, pins: list[dict], all_names: set[str]) -> bool:
+    """True when this row belongs to this code.
+
+    EON and eOn differ only by case, so a row matches a display name exactly.
+    Other rows still match a lowercased id or name, which is how artn meets
+    pARTn and tsase meets TSASE.
+    """
+    code = str(row.get("code") or "")
+    if not code:
+        return False
+    names = {str(pin.get("name") or "") for pin in pins if pin.get("name")}
+    if code in names:
+        return True
+    if code in all_names:
+        return False
+    folded = code.lower()
+    group_folds = {name.lower() for name in names}
+    outside = {name.lower() for name in all_names if name not in names}
+    if folded in group_folds and folded in outside:
+        return False
     for pin in pins:
-        keys.add(str(pin.get("id") or "").lower())
-        keys.add(str(pin.get("name") or "").lower())
-    keys.discard("")
-    return keys
-
-
-def _matches_code(row: dict, keys: set[str]) -> bool:
-    return str(row.get("code") or "").lower() in keys
+        pin_id = str(pin.get("id") or "").lower()
+        name = str(pin.get("name") or "").lower()
+        if folded == pin_id or folded == name:
+            return True
+    return False
 
 
 def _codes_html(root: Path, document: dict) -> str:
@@ -496,6 +511,7 @@ def _codes_html(root: Path, document: dict) -> str:
     record = tomllib.loads((root / "codes" / "registry.toml").read_text(encoding="utf-8"))
     contributor = str(record.get("benchmark_contributor") or "")
     pins = [code for code in record.get("code") or [] if isinstance(code, dict)]
+    all_names = {str(pin.get("name") or "") for pin in pins if pin.get("name")}
     grouped: dict[str, list[dict]] = {}
     order: list[str] = []
     for pin in pins:
@@ -523,7 +539,6 @@ def _codes_html(root: Path, document: dict) -> str:
     )
     for name in order:
         group = grouped[name]
-        keys = _code_keys(group)
         lines.append(f"<h3>{html.escape(name)}</h3>")
         lines.append('<div class="bench-scroll"><table>')
         lines.append("<caption>Registry pins.</caption>")
@@ -542,7 +557,7 @@ def _codes_html(root: Path, document: dict) -> str:
         lines.append("</tbody></table></div>")
         best: list[tuple[dict, dict]] = []
         for problem in (document.get("problems") or {}).values():
-            matched = [row for row in problem.get("ranked") or [] if _matches_code(row, keys)]
+            matched = [row for row in problem.get("ranked") or [] if _matches_code(row, group, all_names)]
             if not matched:
                 continue
             matched.sort(key=lambda row: (row.get("par2_mean") is None, float(row.get("par2_mean") or 0)))
@@ -573,8 +588,8 @@ def _codes_html(root: Path, document: dict) -> str:
             lines.append("<p>No full ranked run.</p>")
         missing: list[str] = []
         for problem in (document.get("problems") or {}).values():
-            partial = [row for row in problem.get("partial") or [] if _matches_code(row, keys)]
-            off = [row for row in problem.get("not_comparable") or [] if _matches_code(row, keys)]
+            partial = [row for row in problem.get("partial") or [] if _matches_code(row, group, all_names)]
+            off = [row for row in problem.get("not_comparable") or [] if _matches_code(row, group, all_names)]
             if not partial and not off:
                 continue
             reasons = []
@@ -585,7 +600,7 @@ def _codes_html(root: Path, document: dict) -> str:
             title = str(problem.get("title") or problem["id"])
             missing.append(f"<li>{html.escape(title)}: {html.escape(', '.join(reasons))}.</li>")
         for row in document.get("unparsed") or []:
-            if not _matches_code(row, keys) or not row.get("problem"):
+            if not _matches_code(row, group, all_names) or not row.get("problem"):
                 continue
             label = str(row.get("template") or row.get("entry") or row.get("path") or "")
             note = str(row.get("note") or "no per-start record")

@@ -1,0 +1,61 @@
+id = "eon-develop/htst-pt-lanczos"
+engine = "eon"
+problem = "hTST/Pt"
+code = "eOn"
+code_version = "(develop a7aa57472fb7d823953fd36b78cd755fa4842d30)"
+commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+algorithm = "Lanczos-LBFGS rotation: max=10, tol=0.05"
+reducer = "harness-htst"
+tuning = "default"
+pass_limit = 4000
+target_windows = 8
+geometry = "website/hTST/Pt/eon-lanczos-lbfgs/states/0/reactant.con"
+note = "Stock eOn develop a7aa57472fb7d823953fd36b78cd755fa4842d30 on the same Pt island, seed, and convergence keys as the archive. morse_pt. Keys the archive left unset stay at the develop defaults. The communicator is local so the run fits this machine. A start is one barrier window. Nothing was tuned toward the archived counts."
+
+[htst]
+temperature = 700
+rate_ref = 155055901.244
+rate_accuracy = 0.999
+prefactor = 1.2e12
+kb = 8.6173324e-5
+barrier_ceiling = 1.3
+barriers = [0.601, 0.601, 0.620, 0.986, 0.987, 0.989, 0.986, 0.987, 0.989, 1.196, 1.196, 1.196, 1.196, 1.207, 1.207]
+
+[ini.Main]
+job = "akmc"
+temperature = 700
+random_seed = 42
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+converged_force = 0.001
+max_iterations = 5000
+
+[ini.AKMC]
+confidence = 1.9
+
+[ini."Process Search"]
+minimize_first = true
+
+[ini.Communicator]
+type = "local"
+num_jobs = 32
+number_of_CPUs = 1
+client_path = "eonclient"
+
+[ini."Saddle Search"]
+min_mode_method = "lanczos"
+displace_least_coordinated_weight = 1.0
+displace_radius = 3.3
+displace_magnitude = 0.3
+max_energy = 1000.0
+
+[ini.Prefactor]
+default_value = 1.2e12
+
+[ini.Lanczos]
+tolerance = 0.05
+max_iterations = 10

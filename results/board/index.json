@@ -5450,51 +5450,6 @@
       "wilson_low": 0.20654931437723745
     },
     {
-      "asv_commit": "",
-      "call_unit": "total",
-      "cap": null,
-      "code": "Eon svn",
-      "code_version": "r2006",
-      "commit": "r2006",
-      "comparable": true,
-      "counter": "htst-reducer",
-      "current": false,
-      "entry": "eon-svn-htst-pt-lanczos",
-      "failures": {
-        "cap": 0,
-        "crash": 0,
-        "divergence": 0,
-        "wrong_stationary": 0
-      },
-      "full_n": null,
-      "history": false,
-      "max_calls": 2418513.0,
-      "mean_calls": 1190447.125,
-      "mean_per_image": null,
-      "median": 1049787.0,
-      "median_calls": 1049787.0,
-      "median_high": 1556297.0,
-      "median_low": 576204.0,
-      "median_per_image": null,
-      "min_calls": 561161.0,
-      "n": 8,
-      "nfailed": 0,
-      "note": "starts.jsonl",
-      "par2_mean": null,
-      "partial": true,
-      "partial_reason": "result file sets ranked false",
-      "path": "results/campaign/eon-svn-htst-pt-lanczos.dat",
-      "problem": "hTST/Pt",
-      "registry_match": false,
-      "scored": true,
-      "source": "campaign",
-      "success_rate": 1.0,
-      "template": "eon-svn/htst-pt-lanczos",
-      "tuning": "Lanczos-LBFGS rotation: max=10, tol=0.05",
-      "wilson_high": 1.0,
-      "wilson_low": 0.6755924351161198
-    },
-    {
       "asv_commit": "c1ecf607a10f7ab78d1615e4cbf9af030bebcdbf",
       "call_unit": "total",
       "cap": 10000,
@@ -16303,17 +16258,97 @@
           "tuning": "",
           "wilson_high": 1.0,
           "wilson_low": 0.20654931437723745
+        }
+      ],
+      "profile": {
+        "area_log10": {
+          "eon-develop/htst-pt-lanczos (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) Lanczos-LBFGS rotation: max=10, tol=0.05 campaign a7aa574": 1.1664912331979271,
+          "eon-svn/htst-pt-lanczos (SVN r2549) Lanczos-LBFGS rotation: max=10, tol=0.05 campaign r2549": 1.0912337342819318
+        },
+        "rho": {
+          "eon-develop/htst-pt-lanczos (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) Lanczos-LBFGS rotation: max=10, tol=0.05 campaign a7aa574": [
+            0.75,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "eon-svn/htst-pt-lanczos (SVN r2549) Lanczos-LBFGS rotation: max=10, tol=0.05 campaign r2549": [
+            0.25,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "solved": {
+          "eon-develop/htst-pt-lanczos (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) Lanczos-LBFGS rotation: max=10, tol=0.05 campaign a7aa574": 1.0,
+          "eon-svn/htst-pt-lanczos (SVN r2549) Lanczos-LBFGS rotation: max=10, tol=0.05 campaign r2549": 1.0
+        },
+        "taus": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ]
+      },
+      "ranked": [
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": null,
+          "code": "eOn",
+          "code_version": "(develop a7aa57472fb7d823953fd36b78cd755fa4842d30)",
+          "commit": "a7aa57472fb7d823953fd36b78cd755fa4842d30",
+          "comparable": true,
+          "counter": "harness",
+          "current": true,
+          "entry": "eon-develop-htst-pt-lanczos",
+          "failures": {
+            "cap": 0,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 0
+          },
+          "full_n": null,
+          "history": false,
+          "max_calls": 507336.0,
+          "mean_calls": 379794.125,
+          "mean_per_image": null,
+          "median": 425305.0,
+          "median_calls": 425305.0,
+          "median_high": 463313.0,
+          "median_low": 260780.0,
+          "median_per_image": null,
+          "min_calls": 187640.0,
+          "n": 8,
+          "nfailed": 0,
+          "note": "starts.jsonl",
+          "par2_mean": null,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/eon-develop-htst-pt-lanczos.dat",
+          "problem": "hTST/Pt",
+          "registry_match": true,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 1.0,
+          "template": "eon-develop/htst-pt-lanczos",
+          "tuning": "Lanczos-LBFGS rotation: max=10, tol=0.05",
+          "wilson_high": 1.0,
+          "wilson_low": 0.6755924351161198
         },
         {
           "asv_commit": "",
           "call_unit": "total",
           "cap": null,
-          "code": "Eon svn",
-          "code_version": "r2006",
-          "commit": "r2006",
+          "code": "EON",
+          "code_version": "(SVN r2549)",
+          "commit": "r2549",
           "comparable": true,
-          "counter": "htst-reducer",
-          "current": false,
+          "counter": "harness",
+          "current": true,
           "entry": "eon-svn-htst-pt-lanczos",
           "failures": {
             "cap": 0,
@@ -16323,24 +16358,24 @@
           },
           "full_n": null,
           "history": false,
-          "max_calls": 2418513.0,
-          "mean_calls": 1190447.125,
+          "max_calls": 845177.0,
+          "mean_calls": 513872.375,
           "mean_per_image": null,
-          "median": 1049787.0,
-          "median_calls": 1049787.0,
-          "median_high": 1556297.0,
-          "median_low": 576204.0,
+          "median": 465822.0,
+          "median_calls": 465822.0,
+          "median_high": 681396.0,
+          "median_low": 342500.0,
           "median_per_image": null,
-          "min_calls": 561161.0,
+          "min_calls": 300467.0,
           "n": 8,
           "nfailed": 0,
           "note": "starts.jsonl",
           "par2_mean": null,
-          "partial": true,
-          "partial_reason": "result file sets ranked false",
+          "partial": false,
+          "partial_reason": "",
           "path": "results/campaign/eon-svn-htst-pt-lanczos.dat",
           "problem": "hTST/Pt",
-          "registry_match": false,
+          "registry_match": true,
           "scored": true,
           "source": "campaign",
           "success_rate": 1.0,
@@ -16350,7 +16385,6 @@
           "wilson_low": 0.6755924351161198
         }
       ],
-      "ranked": [],
       "title": "Pt"
     },
     "lowest-eigenvector/lj38": {
@@ -42212,7 +42246,7 @@
       "title": "pt-island"
     }
   },
-  "ranked_count": 439,
+  "ranked_count": 441,
   "schema": "optbench.board/v1",
   "unmapped": [
     {

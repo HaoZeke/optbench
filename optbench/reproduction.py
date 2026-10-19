@@ -108,7 +108,6 @@ SHA = {
     "cells/pele/ts-repro": "54ac7e7a1aa6581c261c17fc2c52a20e77121911",
     "cells/softsaddle/ts-reps": "bd1a5c9fc2685f5876266d53715accb31a049e73",
     "entries/eon-svn-htst": "715bc521c827f1f18102c1c027d99d0d8624b0fb",
-    "repro/htst-pt-eon-lanczos-lbfgs": "22682452e59c00d631994af2a4c3d04c3b60cb19",
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
@@ -200,7 +199,6 @@ MATCHES: list[dict] = [
     {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "branch": "cells/pele/go", "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat", "cause": "pele_bh_defaults"},
     {"key": "hTST/Al/eon-dimer-cg", "template": "eon-svn/htst-al-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-al-dimer.dat", "kind": "htst", "cause": "htst_al"},
     {"key": "hTST/Pt/eon-dimer-cg", "template": "eon-svn/htst-pt-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-pt-dimer.dat", "kind": "htst"},
-    {"key": "hTST/Pt/eon-lanczos-lbfgs", "template": "eon-svn/htst-pt-lanczos", "branch": "repro/htst-pt-eon-lanczos-lbfgs", "path": "results/campaign/eon-svn-htst-pt-lanczos.dat", "kind": "htst"},
 ]
 
 
@@ -274,6 +272,16 @@ CAUSE_TEXT = {
         "The mean is 688720 against 521595."
     ),
     "htst_al": "The r2549 Al dimer with the archived rotation string (CG, max 50, tol 1) misses barrier_force_calls and rate_force_calls by about 30 percent. Pt dimer CG with max 10 reproduces all four hTST counts.",
+    "htst_pt_lanczos": (
+        "The archived row is the paper score for Eon r2006: barrier_jobs 1827, barrier_force_calls 1.284e+06, "
+        "rate_jobs 64, rate_force_calls 4.524e+04. EON and eOn are different codes. "
+        "Both ran stock on the archive island, seed 42, and the same Lanczos-LBFGS convergence keys, and neither was tuned toward those counts. "
+        "EON (SVN r2549) scores barrier_jobs 1462 (20.0% off), barrier_force_calls 5.139e+05 (60.0% off), "
+        "rate_jobs 53 (17.2% off), rate_force_calls 1.867e+04 (58.7% off). "
+        "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) scores barrier_jobs 1084 (40.7% off), "
+        "barrier_force_calls 3.798e+05 (70.4% off), rate_jobs 52 (18.8% off), rate_force_calls 1.851e+04 (59.1% off). "
+        "The gaps are the finding. The archive row stays not rerun, and both campaigns stay ranked."
+    ),
     "precon_hessian_index": (
         "ASE 3.29 PreconLBFGS with the archived opt.py setup (Exp A 3, maxstep 0.1, ASE fmax 0.01) "
         "scores 2605 against 2686, inside 10 percent. "
@@ -734,6 +742,9 @@ def build_rows(root: Path) -> list[dict]:
             if ident.startswith("accelerated-md/"):
                 record["cause"] = "akmc_vs_langevin"
                 record["cause_detail"] = CAUSE_TEXT["akmc_vs_langevin"]
+            elif ident == "hTST/Pt/eon-lanczos-lbfgs":
+                record["cause"] = "htst_pt_lanczos"
+                record["cause_detail"] = CAUSE_TEXT["htst_pt_lanczos"]
             built.append(record)
             continue
         kind = match.get("kind", "dat")
@@ -865,7 +876,13 @@ def render_markdown(rows: list[dict]) -> str:
         for ident in idents:
             lines.append(f"- {ident}")
         lines.append("")
-    lines.append("Rows with no exact-setup campaign stay not rerun and are not given a cause. AKMC on aladatom is a different method from Langevin parallel replica; the ratios above are that comparison, and the archive rows stay not rerun.")
+    lines.append(
+        "Rows with no exact-setup campaign stay not rerun and are not given a cause. "
+        "AKMC on aladatom is a different method from Langevin parallel replica; the ratios above are that comparison, and the archive rows stay not rerun. "
+        "hTST/Pt/eon-lanczos-lbfgs stays the archived Eon r2006 paper row. "
+        "EON (SVN r2549) and eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) are separate stock campaigns on that problem. "
+        "Both miss the archive, and both stay ranked."
+    )
     lines.append("")
     return "\n".join(lines)
 
