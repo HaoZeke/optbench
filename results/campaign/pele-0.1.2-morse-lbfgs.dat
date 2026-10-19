@@ -1,0 +1,16 @@
+# counter harness. One force call is one getEnergyGradient during mylbfgs.
+# The 2014 script records that count before its post-quench gradient check.
+# nfailed is a final gradient standard deviation above the RMS stop.
+# Archived minimization_morse.py. mylbfgs memory 100 and maxstep 2.0, the run.sh arguments. Periodic Morse rho 1.6047, A 0.7102, r0 2.897, box 16.387907, cutoff 9.5. The RMS stop is 1e-3/sqrt(3*256). H0 0.1 and maxErise 1e-4 are the constructor defaults the script leaves unset.
+force_calls 51
+force_calls_min 24
+force_calls_max 84
+nfailed 0
+code pele
+code_version 0.1.2
+commit b7081b932a060be11342fbe8287ac35da8ada879
+algorithm MYLBFGS
+template pele/morse-lbfgs
+tuning archive
+counter harness
+problem minimization/morse-bulk
