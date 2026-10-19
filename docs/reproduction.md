@@ -358,4 +358,4 @@ Sella 2.6.0 with the archived trust-region numbers (eta, gamma, delta0, rho, sig
 - tsopt/LJ38/sella
 - tsopt/pt-island/sella
 
-Rows with no exact-setup campaign stay not rerun and are not given a cause. AKMC on aladatom is a different method from Langevin parallel replica; the ratios above are that comparison, and the archive rows stay not rerun.
+Rows with no exact-setup campaign stay not rerun and are not given a cause. AKMC on aladatom is a different method from Langevin parallel replica; the ratios above are that comparison, and the archive rows stay not rerun. The archived standard_aladatom Langevin true_rate 8.359e5 is the paper row. Stock untuned harness scores of EON (SVN r2549) and eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) are ranked beside it.

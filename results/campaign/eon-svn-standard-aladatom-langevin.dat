@@ -1,0 +1,11 @@
+call_unit total
+nfailed 1
+code EON (SVN r2549)
+code_version r2549
+commit r2549
+algorithm Parallel replica
+template eon-svn/standard-aladatom-langevin
+problem accelerated-md/standard_aladatom
+reducer harness
+counter harness
+count_keys HarnessCounter

@@ -82,6 +82,14 @@ FAMILIES = {
         "token": "4d8b34ba",
         "cache": "4d8b34ba",
     },
+    "develop": {
+        "prefix": "eon-develop/",
+        "env": "EON_DEVELOP_CLIENT",
+        "default": Path.home() / "opt" / "eon-develop" / "bin" / "eonclient",
+        "flag": "--version",
+        "token": "a7aa574",
+        "cache": "a7aa57472fb7",
+    },
 }
 
 
@@ -829,6 +837,8 @@ def run_case(
                     crashed = found["returncode"] != 0 or "total_force_calls" not in fields and calls == 0
                     record = classify_flag(calls=calls, cap=cap, ok=transition, crashed=crashed)
                     record["transition_found"] = 1 if transition else 0
+                    if fields.get("transition_time_s") not in (None, ""):
+                        record["transition_time_s"] = float(fields["transition_time_s"])
                 else:
                     reason = fields.get("termination_reason")
                     record = classify_client(
@@ -935,6 +945,7 @@ def _start_row(seed: int, start: str, record: dict) -> dict:
         "fraction_connected",
         "passes",
         "transition_found",
+        "transition_time_s",
         "error",
         "force_norm",
         "hessian_index",
