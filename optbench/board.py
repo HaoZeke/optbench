@@ -1516,8 +1516,8 @@ def summary_table(problems: list[dict], codes: list[str], link) -> str:
             template = str(row.get("template") or row.get("entry") or "")
             par2 = dict(ranked_cells(row, False))["par2_mean"]
             lines.append(
-                f'<td data-code="{_cell(code)}" data-template="{_cell(template)}" data-par2="{_cell(par2)}">'
-                f'<span class="bench-score">{_cell(par2)}</span>'
+                f'<td class="bench-score" data-code="{_cell(code)}" data-template="{_cell(template)}" data-par2="{_cell(par2)}">'
+                f"{_cell(par2)}"
                 f'<a href="{_cell(detail)}">{_cell(template)}</a>'
                 "</td>"
             )
@@ -1630,6 +1630,13 @@ def render_problem_section(
     )
 
 
+def _note_block(title: str, items: list[str]) -> list[str]:
+    """History, partial, and gap notes as one paragraph."""
+    if not items:
+        return []
+    return [f"<h3>{_cell(title)}</h3>", "<p>" + " ".join(items) + "</p>"]
+
+
 def _table(
     problem: dict,
     plots: set[str],
@@ -1684,44 +1691,51 @@ def _table(
         lines.append(f'<tr><td colspan="{len(headers)}">No full harness row.</td></tr>')
     lines.append("</tbody></table></div>")
     if problem.get("history"):
-        lines.append("<h3>History</h3><ul>")
-        for row in problem["history"]:
-            lines.append(
-                "<li>"
-                f"{_cell(row['template'] or row['entry'])} {_cell(row['code'])} {_cell(row['code_version'])} "
-                f"{_cell(row['source'])} n={row['n']} PAR-2={_format_number(row['par2_mean'])} "
-                f"mean={_format_number(row['mean_calls'])}"
-                "</li>"
+        lines.extend(
+            _note_block(
+                "History",
+                [
+                    f"{_cell(row['template'] or row['entry'])} {_cell(row['code'])} {_cell(row['code_version'])} "
+                    f"{_cell(row['source'])} n={row['n']} PAR-2={_format_number(row['par2_mean'])} "
+                    f"mean={_format_number(row['mean_calls'])}."
+                    for row in problem["history"]
+                ],
             )
-        lines.append("</ul>")
+        )
     if problem.get("partial"):
-        lines.append("<h3>Partial</h3><ul>")
-        for row in problem["partial"]:
-            lines.append(
-                "<li>"
-                f"{_cell(row['template'] or row['entry'])} {_cell(row.get('code') or '')} "
-                f"{_cell(row['source'])} n={row['n']}, {_cell(row['partial_reason'])}."
-                "</li>"
+        lines.extend(
+            _note_block(
+                "Partial",
+                [
+                    f"{_cell(row['template'] or row['entry'])} {_cell(row.get('code') or '')} "
+                    f"{_cell(row['source'])} n={row['n']}, {_cell(row['partial_reason'])}."
+                    for row in problem["partial"]
+                ],
             )
-        lines.append("</ul>")
+        )
     held = list(problem.get("not_comparable") or [])
     if held:
-        lines.append("<h3>Not a harness score</h3><ul>")
-        for row in held:
-            lines.append(
-                "<li>"
-                f"{_cell(row['template'] or row['entry'])} {_cell(row.get('code') or '')} "
-                f"n={row['n']}, {_cell(_reason_text(row))}."
-                "</li>"
+        lines.extend(
+            _note_block(
+                "Not a harness score",
+                [
+                    f"{_cell(row['template'] or row['entry'])} {_cell(row.get('code') or '')} "
+                    f"n={row['n']}, {_cell(_reason_text(row))}."
+                    for row in held
+                ],
             )
-        lines.append("</ul>")
+        )
     pending = list(unparsed or [])
     if pending:
-        lines.append("<h3>Not scored</h3><ul>")
-        for row in pending:
-            label = row.get("template") or row.get("entry") or row.get("path")
-            lines.append(f"<li>{_cell(label)}: {_cell(row.get('note') or '')}</li>")
-        lines.append("</ul>")
+        lines.extend(
+            _note_block(
+                "Not scored",
+                [
+                    f"{_cell(row.get('template') or row.get('entry') or row.get('path'))}: {_cell(row.get('note') or '')}."
+                    for row in pending
+                ],
+            )
+        )
     lines.append("</details>")
     lines.append("</section>")
     return "\n".join(lines)

@@ -16,6 +16,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 1
       },
       "full_n": 1000,
@@ -61,6 +62,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 1
       },
       "full_n": 1000,
@@ -106,6 +108,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 4
       },
       "full_n": 1000,
@@ -151,6 +154,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 4
       },
       "full_n": 1000,
@@ -196,6 +200,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 4
       },
       "full_n": 1000,
@@ -241,6 +246,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 4
       },
       "full_n": 1000,
@@ -286,6 +292,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 6
       },
       "full_n": 1000,
@@ -331,6 +338,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 6
       },
       "full_n": 1000,
@@ -376,6 +384,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 4
       },
       "full_n": 1000,
@@ -421,6 +430,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 4
       },
       "full_n": 1000,
@@ -466,6 +476,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 3
       },
       "full_n": 1000,
@@ -511,6 +522,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 3
       },
       "full_n": 1000,
@@ -556,6 +568,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 6
       },
       "full_n": 1000,
@@ -601,6 +614,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 6
       },
       "full_n": 1000,
@@ -646,6 +660,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -691,6 +706,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -736,6 +752,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 2
       },
       "full_n": 1000,
@@ -781,6 +798,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 2
       },
       "full_n": 1000,
@@ -826,6 +844,7 @@
         "cap": 200,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 3
       },
       "full_n": 1000,
@@ -871,6 +890,7 @@
         "cap": 200,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 3
       },
       "full_n": 1000,
@@ -916,6 +936,7 @@
         "cap": 103,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 5
       },
       "full_n": 1000,
@@ -961,6 +982,7 @@
         "cap": 103,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 5
       },
       "full_n": 1000,
@@ -1006,6 +1028,7 @@
         "cap": 327,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -1051,6 +1074,7 @@
         "cap": 327,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -1096,6 +1120,7 @@
         "cap": 731,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -1141,6 +1166,7 @@
         "cap": 731,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -1185,7 +1211,8 @@
       "failures": {
         "cap": 799,
         "crash": 0,
-        "divergence": 196,
+        "divergence": 0,
+        "not_converged": 196,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -1230,7 +1257,8 @@
       "failures": {
         "cap": 799,
         "crash": 0,
-        "divergence": 196,
+        "divergence": 0,
+        "not_converged": 196,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -1276,6 +1304,7 @@
         "cap": 964,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 32
       },
       "full_n": 1000,
@@ -1321,6 +1350,7 @@
         "cap": 964,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 32
       },
       "full_n": 1000,
@@ -1365,7 +1395,8 @@
       "failures": {
         "cap": 999,
         "crash": 0,
-        "divergence": 1,
+        "divergence": 0,
+        "not_converged": 1,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -1410,7 +1441,8 @@
       "failures": {
         "cap": 999,
         "crash": 0,
-        "divergence": 1,
+        "divergence": 0,
+        "not_converged": 1,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -1460,6 +1492,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -1505,6 +1538,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -1550,6 +1584,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -1595,6 +1630,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -1640,6 +1676,7 @@
         "cap": 0,
         "crash": 1,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -1685,6 +1722,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -1730,6 +1768,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -1775,6 +1814,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -1820,6 +1860,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -1865,6 +1906,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -1910,6 +1952,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -1955,6 +1998,7 @@
         "cap": 0,
         "crash": 1,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -2000,6 +2044,7 @@
         "cap": 0,
         "crash": 1,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -2045,6 +2090,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -2090,6 +2136,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -2135,6 +2182,7 @@
         "cap": 0,
         "crash": 1,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -2180,6 +2228,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -2225,6 +2274,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -2270,6 +2320,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -2315,6 +2366,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -2360,6 +2412,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -2389,229 +2442,464 @@
       "tuning": "tuned",
       "wilson_high": 1.0,
       "wilson_low": 0.20654931437723745
+    },
+    {
+      "asv_commit": "5a66abcc265d646ad4341c343d3d7b1c74214cdf",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "nlopt",
+      "code_version": "2.11.0",
+      "commit": "673d2504f819bf554a7968e41de552ee102e7fb1",
+      "comparable": true,
+      "counter": "harness",
+      "current": false,
+      "entry": "bench_nlopt.NloptLj38Lbfgs",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 1000,
+      "history": false,
+      "max_calls": 202.0,
+      "mean_calls": 202.0,
+      "mean_per_image": null,
+      "median": 202.0,
+      "median_calls": 202.0,
+      "median_high": 202.0,
+      "median_low": 202.0,
+      "median_per_image": null,
+      "min_calls": 202.0,
+      "n": 1,
+      "nfailed": 0,
+      "note": "asv track_force_calls",
+      "par2_mean": 202.0,
+      "partial": true,
+      "partial_reason": "smoke run; scored 1 of 1000 starts",
+      "path": "results/asv/5a66abcc265d646ad4341c343d3d7b1c74214cdf",
+      "problem": "minimization/lj38",
+      "registry_match": true,
+      "scored": true,
+      "source": "asv",
+      "success_rate": 1.0,
+      "template": "nlopt/lj38-lbfgs",
+      "tuning": "default",
+      "wilson_high": 1.0,
+      "wilson_low": 0.20654931437723745
+    },
+    {
+      "asv_commit": "5a66abcc265d646ad4341c343d3d7b1c74214cdf",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "nlopt",
+      "code_version": "2.11.0",
+      "commit": "673d2504f819bf554a7968e41de552ee102e7fb1",
+      "comparable": true,
+      "counter": "harness",
+      "current": false,
+      "entry": "bench_nlopt.NloptLj38Mma",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 1000,
+      "history": false,
+      "max_calls": 3453.0,
+      "mean_calls": 3453.0,
+      "mean_per_image": null,
+      "median": 3453.0,
+      "median_calls": 3453.0,
+      "median_high": 3453.0,
+      "median_low": 3453.0,
+      "median_per_image": null,
+      "min_calls": 3453.0,
+      "n": 1,
+      "nfailed": 0,
+      "note": "asv track_force_calls",
+      "par2_mean": 3453.0,
+      "partial": true,
+      "partial_reason": "smoke run; scored 1 of 1000 starts",
+      "path": "results/asv/5a66abcc265d646ad4341c343d3d7b1c74214cdf",
+      "problem": "minimization/lj38",
+      "registry_match": true,
+      "scored": true,
+      "source": "asv",
+      "success_rate": 1.0,
+      "template": "nlopt/lj38-mma",
+      "tuning": "default",
+      "wilson_high": 1.0,
+      "wilson_low": 0.20654931437723745
+    },
+    {
+      "asv_commit": "5a66abcc265d646ad4341c343d3d7b1c74214cdf",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "nlopt",
+      "code_version": "2.11.0",
+      "commit": "673d2504f819bf554a7968e41de552ee102e7fb1",
+      "comparable": true,
+      "counter": "harness",
+      "current": false,
+      "entry": "bench_nlopt.NloptLj38Slsqp",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 1000,
+      "history": false,
+      "max_calls": 1323.0,
+      "mean_calls": 1323.0,
+      "mean_per_image": null,
+      "median": 1323.0,
+      "median_calls": 1323.0,
+      "median_high": 1323.0,
+      "median_low": 1323.0,
+      "median_per_image": null,
+      "min_calls": 1323.0,
+      "n": 1,
+      "nfailed": 0,
+      "note": "asv track_force_calls",
+      "par2_mean": 1323.0,
+      "partial": true,
+      "partial_reason": "smoke run; scored 1 of 1000 starts",
+      "path": "results/asv/5a66abcc265d646ad4341c343d3d7b1c74214cdf",
+      "problem": "minimization/lj38",
+      "registry_match": true,
+      "scored": true,
+      "source": "asv",
+      "success_rate": 1.0,
+      "template": "nlopt/lj38-slsqp",
+      "tuning": "default",
+      "wilson_high": 1.0,
+      "wilson_low": 0.20654931437723745
+    },
+    {
+      "asv_commit": "5a66abcc265d646ad4341c343d3d7b1c74214cdf",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "nlopt",
+      "code_version": "2.11.0",
+      "commit": "673d2504f819bf554a7968e41de552ee102e7fb1",
+      "comparable": true,
+      "counter": "harness",
+      "current": false,
+      "entry": "bench_nlopt.NloptLj38TnewtonPrecondRestart",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 1000,
+      "history": false,
+      "max_calls": 3506.0,
+      "mean_calls": 3506.0,
+      "mean_per_image": null,
+      "median": 3506.0,
+      "median_calls": 3506.0,
+      "median_high": 3506.0,
+      "median_low": 3506.0,
+      "median_per_image": null,
+      "min_calls": 3506.0,
+      "n": 1,
+      "nfailed": 0,
+      "note": "asv track_force_calls",
+      "par2_mean": 3506.0,
+      "partial": true,
+      "partial_reason": "smoke run; scored 1 of 1000 starts",
+      "path": "results/asv/5a66abcc265d646ad4341c343d3d7b1c74214cdf",
+      "problem": "minimization/lj38",
+      "registry_match": true,
+      "scored": true,
+      "source": "asv",
+      "success_rate": 1.0,
+      "template": "nlopt/lj38-tnewton-precond-restart",
+      "tuning": "default",
+      "wilson_high": 1.0,
+      "wilson_low": 0.20654931437723745
+    },
+    {
+      "asv_commit": "5a66abcc265d646ad4341c343d3d7b1c74214cdf",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "nlopt",
+      "code_version": "2.11.0",
+      "commit": "673d2504f819bf554a7968e41de552ee102e7fb1",
+      "comparable": true,
+      "counter": "harness",
+      "current": false,
+      "entry": "bench_nlopt.NloptLj38Var2",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 1000,
+      "history": false,
+      "max_calls": 170.0,
+      "mean_calls": 170.0,
+      "mean_per_image": null,
+      "median": 170.0,
+      "median_calls": 170.0,
+      "median_high": 170.0,
+      "median_low": 170.0,
+      "median_per_image": null,
+      "min_calls": 170.0,
+      "n": 1,
+      "nfailed": 0,
+      "note": "asv track_force_calls",
+      "par2_mean": 170.0,
+      "partial": true,
+      "partial_reason": "smoke run; scored 1 of 1000 starts",
+      "path": "results/asv/5a66abcc265d646ad4341c343d3d7b1c74214cdf",
+      "problem": "minimization/lj38",
+      "registry_match": true,
+      "scored": true,
+      "source": "asv",
+      "success_rate": 1.0,
+      "template": "nlopt/lj38-var2",
+      "tuning": "default",
+      "wilson_high": 1.0,
+      "wilson_low": 0.20654931437723745
     }
   ],
   "profile": {
     "area_log10": {
-      "ase/lj38-bfgs-default 3.29.0 default asv f27c000": 0.7123874847388114,
-      "ase/lj38-bfgs-default 3.29.0 default campaign f27c000": 0.6326145358878565,
-      "ase/lj38-bfgs-tuned 3.29.0 tuned asv f27c000": 0.7123874847388114,
-      "ase/lj38-bfgs-tuned 3.29.0 tuned campaign f27c000": 0.7137421197192995,
-      "ase/lj38-bfgslinesearch-default 3.29.0 default asv f27c000": 0.6025115363214584,
-      "ase/lj38-bfgslinesearch-default 3.29.0 default campaign f27c000": 0.6029630813149545,
-      "ase/lj38-bfgslinesearch-tuned 3.29.0 tuned asv f27c000": 0.6603092954889427,
-      "ase/lj38-bfgslinesearch-tuned 3.29.0 tuned campaign f27c000": 0.6610618704781027,
-      "ase/lj38-fire-default 3.29.0 default asv f27c000": 0.5415529621995021,
-      "ase/lj38-fire-default 3.29.0 default campaign f27c000": 0.544111717162646,
-      "ase/lj38-fire-tuned 3.29.0 tuned asv f27c000": 0.5374890572580384,
-      "ase/lj38-fire-tuned 3.29.0 tuned campaign f27c000": 0.5379406022515345,
-      "ase/lj38-lbfgs-default 3.29.0 default asv f27c000": 0.9169373667924867,
-      "ase/lj38-lbfgs-default 3.29.0 default campaign f27c000": 0.7864408636721508,
-      "ase/lj38-lbfgs-tuned 3.29.0 tuned asv f27c000": 0.8218118881626686,
-      "ase/lj38-lbfgs-tuned 3.29.0 tuned campaign f27c000": 0.8240696131301485,
-      "ase/lj38-preconfire-default 3.29.0 default asv f27c000": 0.17113555253497334,
-      "ase/lj38-preconfire-default 3.29.0 default campaign f27c000": 0.17158709752846932,
-      "ase/lj38-preconlbfgs-default 3.29.0 default asv f27c000": 0.5176210775442157,
-      "ase/lj38-preconlbfgs-default 3.29.0 default campaign f27c000": 0.5185241675312077,
-      "dlfind/cg-lj38 0.0.3 default campaign 4167998": 0.06803277902005976,
-      "dlfind/lbfgs-lj38 0.0.3 default campaign 4167998": 1.0493905648846384,
-      "dlfind/sd-lj38 0.0.3 default campaign 4167998": 0.06577505405257991,
-      "eon/lj38-lbfgs 3.6.0 campaign 1d71c94": 1.0290710401773198,
-      "eon/lj38-lbfgs-m100 3.6.0 campaign 1d71c94": 1.0719678145594371,
-      "lammps/cg-lj38 30 Sep 2026 default campaign 8de817d": 0.18844477728565223,
-      "lammps/fire-lj38 30 Sep 2026 default campaign 8de817d": 0.4760789381425863,
-      "lammps/hftn-lj38 30 Sep 2026 default campaign 8de817d": 0.34528140502658644,
-      "lammps/quickmin-lj38 30 Sep 2026 default campaign 8de817d": 0.06667814403957185,
+      "ase/lj38-bfgs-default 3.29.0 default asv f27c000": 0.7021524648862361,
+      "ase/lj38-bfgs-default 3.29.0 default campaign f27c000": 0.6214764260482892,
+      "ase/lj38-bfgs-tuned 3.29.0 tuned asv f27c000": 0.7021524648862361,
+      "ase/lj38-bfgs-tuned 3.29.0 tuned campaign f27c000": 0.7035070998667241,
+      "ase/lj38-bfgslinesearch-default 3.29.0 default asv f27c000": 0.5865569465512674,
+      "ase/lj38-bfgslinesearch-default 3.29.0 default campaign f27c000": 0.5870084915447633,
+      "ase/lj38-bfgslinesearch-tuned 3.29.0 tuned asv f27c000": 0.6452577957057437,
+      "ase/lj38-bfgslinesearch-tuned 3.29.0 tuned campaign f27c000": 0.6457093406992397,
+      "ase/lj38-fire-default 3.29.0 default asv f27c000": 0.528307642390287,
+      "ase/lj38-fire-default 3.29.0 default campaign f27c000": 0.5308663973534309,
+      "ase/lj38-fire-tuned 3.29.0 tuned asv f27c000": 0.5249963124379833,
+      "ase/lj38-fire-tuned 3.29.0 tuned campaign f27c000": 0.5254478574314791,
+      "ase/lj38-lbfgs-default 3.29.0 default asv f27c000": 0.9071538919334072,
+      "ase/lj38-lbfgs-default 3.29.0 default campaign f27c000": 0.7733460588607677,
+      "ase/lj38-lbfgs-tuned 3.29.0 tuned asv f27c000": 0.8091686283447814,
+      "ase/lj38-lbfgs-tuned 3.29.0 tuned campaign f27c000": 0.8114263533122613,
+      "ase/lj38-preconfire-default 3.29.0 default asv f27c000": 0.16150259267372594,
+      "ase/lj38-preconfire-default 3.29.0 default campaign f27c000": 0.16195413766722191,
+      "ase/lj38-preconlbfgs-default 3.29.0 default asv f27c000": 0.5037736977436725,
+      "ase/lj38-preconlbfgs-default 3.29.0 default campaign f27c000": 0.5046767877306645,
+      "dlfind/cg-lj38 0.0.3 default campaign 4167998": 0.06321629908943606,
+      "dlfind/lbfgs-lj38 0.0.3 default campaign 4167998": 1.0394565750277271,
+      "dlfind/sd-lj38 0.0.3 default campaign 4167998": 0.06065754412629223,
+      "eon/lj38-lbfgs 3.6.0 campaign 1d71c94": 1.0224483802727122,
+      "eon/lj38-lbfgs-m100 3.6.0 campaign 1d71c94": 1.0606791897220378,
+      "lammps/cg-lj38 30 Sep 2026 default campaign 8de817d": 0.18076851239622072,
+      "lammps/fire-lj38 30 Sep 2026 default campaign 8de817d": 0.46825215825532274,
+      "lammps/hftn-lj38 30 Sep 2026 default campaign 8de817d": 0.33203608521737127,
+      "lammps/quickmin-lj38 30 Sep 2026 default campaign 8de817d": 0.05975445413930028,
       "lammps/sd-lj38 30 Sep 2026 default campaign 8de817d": 0.0010536049848239345,
-      "optim/lbfgs-lj38 svn-snapshot default campaign 02aaf45": 0.9955061956607858,
-      "pysisyphus/cg-lj38 0.1.dev1 default campaign a4ce10d": 0.12357281322006429,
+      "nlopt/lj38-lbfgs 2.11.0 default campaign 673d250": 1.0688069996049654,
+      "nlopt/lj38-mma 2.11.0 default campaign 673d250": 0.057496729171820415,
+      "nlopt/lj38-slsqp 2.11.0 default campaign 673d250": 0.1943148622010999,
+      "nlopt/lj38-tnewton-precond-restart 2.11.0 default campaign 673d250": 0.0027092699609758313,
+      "nlopt/lj38-var2 2.11.0 default campaign 673d250": 0.9845186008190505,
+      "optim/lbfgs-lj38 svn-snapshot default campaign 02aaf45": 0.9830134508407307,
+      "pysisyphus/cg-lj38 0.1.dev1 default campaign a4ce10d": 0.11965942327643253,
       "pysisyphus/lbfgs-lj38 0.1.dev1 default campaign a4ce10d": 0.0,
-      "pysisyphus/sd-lj38 0.1.dev1 default campaign a4ce10d": 0.08714818374472255,
-      "rgmin/lj38-adam 0.4.1 default campaign, asv 9a2e7ff": 0.0025587549631438406,
-      "rgmin/lj38-adam 0.4.1 default campaign, asv f15726f": 0.0025587549631438406,
-      "rgmin/lj38-adam-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.0025587549631438406,
-      "rgmin/lj38-adam-tuned 0.4.1 tuned campaign, asv f15726f": 0.0025587549631438406,
-      "rgmin/lj38-bb 0.4.1 default campaign, asv 9a2e7ff": 0.656245390547479,
-      "rgmin/lj38-bb 0.4.1 default campaign, asv f15726f": 0.656245390547479,
-      "rgmin/lj38-bb-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.656245390547479,
-      "rgmin/lj38-bb-tuned 0.4.1 tuned campaign, asv f15726f": 0.656245390547479,
-      "rgmin/lj38-bfgs 0.4.1 default campaign, asv 9a2e7ff": 0.3637947497599213,
-      "rgmin/lj38-bfgs 0.4.1 default campaign, asv f15726f": 0.3637947497599213,
-      "rgmin/lj38-bfgs-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.3637947497599213,
-      "rgmin/lj38-bfgs-tuned 0.4.1 tuned campaign, asv f15726f": 0.3637947497599213,
-      "rgmin/lj38-cg 0.4.1 default campaign, asv 9a2e7ff": 0.6106393462043859,
-      "rgmin/lj38-cg 0.4.1 default campaign, asv f15726f": 0.6106393462043859,
-      "rgmin/lj38-cg-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.6106393462043859,
-      "rgmin/lj38-cg-tuned 0.4.1 tuned campaign, asv f15726f": 0.6106393462043859,
-      "rgmin/lj38-diis 0.4.1 default campaign, asv 9a2e7ff": 0.1696304025566534,
-      "rgmin/lj38-diis 0.4.1 default campaign, asv f15726f": 0.1696304025566534,
-      "rgmin/lj38-diis-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.1696304025566534,
-      "rgmin/lj38-diis-tuned 0.4.1 tuned campaign, asv f15726f": 0.1696304025566534,
+      "pysisyphus/sd-lj38 0.1.dev1 default campaign a4ce10d": 0.08413788378808273,
+      "rgmin/lj38-adam 0.4.1 default campaign, asv 9a2e7ff": 0.002107209969647869,
+      "rgmin/lj38-adam 0.4.1 default campaign, asv f15726f": 0.002107209969647869,
+      "rgmin/lj38-adam-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.002107209969647869,
+      "rgmin/lj38-adam-tuned 0.4.1 tuned campaign, asv f15726f": 0.002107209969647869,
+      "rgmin/lj38-bb 0.4.1 default campaign, asv 9a2e7ff": 0.641043375766448,
+      "rgmin/lj38-bb 0.4.1 default campaign, asv f15726f": 0.641043375766448,
+      "rgmin/lj38-bb-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.641043375766448,
+      "rgmin/lj38-bb-tuned 0.4.1 tuned campaign, asv f15726f": 0.641043375766448,
+      "rgmin/lj38-bfgs 0.4.1 default campaign, asv 9a2e7ff": 0.35235560992469,
+      "rgmin/lj38-bfgs 0.4.1 default campaign, asv f15726f": 0.35235560992469,
+      "rgmin/lj38-bfgs-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.35235560992469,
+      "rgmin/lj38-bfgs-tuned 0.4.1 tuned campaign, asv f15726f": 0.35235560992469,
+      "rgmin/lj38-cg 0.4.1 default campaign, asv 9a2e7ff": 0.5960393914146829,
+      "rgmin/lj38-cg 0.4.1 default campaign, asv f15726f": 0.5960393914146829,
+      "rgmin/lj38-cg-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.5960393914146829,
+      "rgmin/lj38-cg-tuned 0.4.1 tuned campaign, asv f15726f": 0.5960393914146829,
+      "rgmin/lj38-diis 0.4.1 default campaign, asv 9a2e7ff": 0.1619541376672219,
+      "rgmin/lj38-diis 0.4.1 default campaign, asv f15726f": 0.1619541376672219,
+      "rgmin/lj38-diis-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.1619541376672219,
+      "rgmin/lj38-diis-tuned 0.4.1 tuned campaign, asv f15726f": 0.1619541376672219,
       "rgmin/lj38-dogleg 0.4.1 default campaign, asv 9a2e7ff": 0.0,
       "rgmin/lj38-dogleg 0.4.1 default campaign, asv f15726f": 0.0,
       "rgmin/lj38-dogleg-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.0,
       "rgmin/lj38-dogleg-tuned 0.4.1 tuned campaign, asv f15726f": 0.0,
-      "rgmin/lj38-fire 0.4.1 default campaign, asv 9a2e7ff": 0.5400478122211823,
-      "rgmin/lj38-fire 0.4.1 default campaign, asv f15726f": 0.5400478122211823,
-      "rgmin/lj38-fire-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.5400478122211823,
-      "rgmin/lj38-fire-tuned 0.4.1 tuned campaign, asv f15726f": 0.5400478122211823,
-      "rgmin/lj38-fire2 0.4.1 default campaign, asv 9a2e7ff": 0.5201798325073596,
-      "rgmin/lj38-fire2 0.4.1 default campaign, asv f15726f": 0.5201798325073596,
-      "rgmin/lj38-fire2-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.5201798325073596,
-      "rgmin/lj38-fire2-tuned 0.4.1 tuned campaign, asv f15726f": 0.5201798325073596,
-      "rgmin/lj38-lbfgs 0.4.1 default campaign, asv 9a2e7ff": 1.0159762353659367,
-      "rgmin/lj38-lbfgs 0.4.1 default campaign, asv f15726f": 1.0159762353659367,
-      "rgmin/lj38-lbfgs-m100 0.4.1 default campaign, asv 9a2e7ff": 1.0794935644510364,
-      "rgmin/lj38-lbfgs-m100 0.4.1 default campaign, asv f15726f": 1.0794935644510364,
-      "rgmin/lj38-lbfgs-m100-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 1.0794935644510364,
-      "rgmin/lj38-lbfgs-m100-tuned 0.4.1 tuned campaign, asv f15726f": 1.0794935644510364,
-      "rgmin/lj38-lbfgs-m20 0.4.1 default campaign, asv 9a2e7ff": 1.0274153752011679,
-      "rgmin/lj38-lbfgs-m20 0.4.1 default campaign, asv f15726f": 1.0274153752011679,
-      "rgmin/lj38-lbfgs-m20-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 1.0274153752011679,
-      "rgmin/lj38-lbfgs-m20-tuned 0.4.1 tuned campaign, asv f15726f": 1.0274153752011679,
-      "rgmin/lj38-lbfgs-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 1.0159762353659367,
-      "rgmin/lj38-lbfgs-tuned 0.4.1 tuned campaign, asv f15726f": 1.0159762353659367,
+      "rgmin/lj38-fire 0.4.1 default campaign, asv 9a2e7ff": 0.527103522407631,
+      "rgmin/lj38-fire 0.4.1 default campaign, asv f15726f": 0.527103522407631,
+      "rgmin/lj38-fire-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.527103522407631,
+      "rgmin/lj38-fire-tuned 0.4.1 tuned campaign, asv f15726f": 0.527103522407631,
+      "rgmin/lj38-fire2 0.4.1 default campaign, asv 9a2e7ff": 0.5096437826591202,
+      "rgmin/lj38-fire2 0.4.1 default campaign, asv f15726f": 0.5096437826591202,
+      "rgmin/lj38-fire2-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.5096437826591202,
+      "rgmin/lj38-fire2-tuned 0.4.1 tuned campaign, asv f15726f": 0.5096437826591202,
+      "rgmin/lj38-lbfgs 0.4.1 default campaign, asv 9a2e7ff": 1.0067948204981851,
+      "rgmin/lj38-lbfgs 0.4.1 default campaign, asv f15726f": 1.0067948204981851,
+      "rgmin/lj38-lbfgs-m100 0.4.1 default campaign, asv 9a2e7ff": 1.0686564846071331,
+      "rgmin/lj38-lbfgs-m100 0.4.1 default campaign, asv f15726f": 1.0686564846071331,
+      "rgmin/lj38-lbfgs-m100-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 1.0686564846071331,
+      "rgmin/lj38-lbfgs-m100-tuned 0.4.1 tuned campaign, asv f15726f": 1.0686564846071331,
+      "rgmin/lj38-lbfgs-m20 0.4.1 default campaign, asv 9a2e7ff": 1.0159762353659365,
+      "rgmin/lj38-lbfgs-m20 0.4.1 default campaign, asv f15726f": 1.0159762353659365,
+      "rgmin/lj38-lbfgs-m20-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 1.0159762353659365,
+      "rgmin/lj38-lbfgs-m20-tuned 0.4.1 tuned campaign, asv f15726f": 1.0159762353659365,
+      "rgmin/lj38-lbfgs-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 1.0067948204981851,
+      "rgmin/lj38-lbfgs-tuned 0.4.1 tuned campaign, asv f15726f": 1.0067948204981851,
       "rgmin/lj38-newton 0.4.1 default campaign, asv 9a2e7ff": 0.0,
       "rgmin/lj38-newton 0.4.1 default campaign, asv f15726f": 0.0,
       "rgmin/lj38-newton-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.0,
       "rgmin/lj38-newton-tuned 0.4.1 tuned campaign, asv f15726f": 0.0,
-      "rgmin/lj38-quickmin 0.4.1 default campaign, asv 9a2e7ff": 0.1794138774157328,
-      "rgmin/lj38-quickmin 0.4.1 default campaign, asv f15726f": 0.1794138774157328,
-      "rgmin/lj38-quickmin-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.1794138774157328,
-      "rgmin/lj38-quickmin-tuned 0.4.1 tuned campaign, asv f15726f": 0.1794138774157328,
-      "rgmin/lj38-sd 0.4.1 default campaign, asv 9a2e7ff": 0.0033113299523037936,
-      "rgmin/lj38-sd 0.4.1 default campaign, asv f15726f": 0.0033113299523037936,
-      "rgmin/lj38-sd-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.0033113299523037936,
-      "rgmin/lj38-sd-tuned 0.4.1 tuned campaign, asv f15726f": 0.0033113299523037936,
-      "rgmin/lj38-sr1 0.4.1 default campaign, asv 9a2e7ff": 0.16315825764987782,
-      "rgmin/lj38-sr1 0.4.1 default campaign, asv f15726f": 0.16315825764987782,
-      "rgmin/lj38-sr1-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.16315825764987782,
-      "rgmin/lj38-sr1-tuned 0.4.1 tuned campaign, asv f15726f": 0.16315825764987782,
-      "rgmin/lj38-sr2 0.4.1 default campaign, asv 9a2e7ff": 0.1526222078016385,
-      "rgmin/lj38-sr2 0.4.1 default campaign, asv f15726f": 0.1526222078016385,
-      "rgmin/lj38-sr2-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.1526222078016385,
-      "rgmin/lj38-sr2-tuned 0.4.1 tuned campaign, asv f15726f": 0.1526222078016385,
-      "scipy/lj38-bfgs 1.18.1 default campaign e4e854e": 0.7641646439930163,
-      "scipy/lj38-cg 1.18.1 default campaign e4e854e": 0.7065173998233638,
-      "scipy/lj38-lbfgsb 1.18.1 default campaign e4e854e": 1.0004731905892417,
-      "scipy/lj38-newton-cg 1.18.1 default campaign e4e854e": 0.6544392105734951,
-      "scipy/lj38-trust-krylov 1.18.1 default campaign e4e854e": 0.6047692612889382,
-      "scipy/lj38-trust-ncg 1.18.1 default campaign e4e854e": 0.6121444961827058,
-      "sella/lj38-min-default 2.6.0 default campaign, asv 6cfb60c": 0.4879696229713135,
-      "sella/lj38-min-tuned 2.6.0 tuned campaign, asv 6cfb60c": 0.9664568010792116,
-      "tsase/lbfgs-lj38 1.0 default campaign 98aac60": 1.073924509531253,
+      "rgmin/lj38-quickmin 0.4.1 default campaign, asv 9a2e7ff": 0.16993143255231738,
+      "rgmin/lj38-quickmin 0.4.1 default campaign, asv f15726f": 0.16993143255231738,
+      "rgmin/lj38-quickmin-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.16993143255231738,
+      "rgmin/lj38-quickmin-tuned 0.4.1 tuned campaign, asv f15726f": 0.16993143255231738,
+      "rgmin/lj38-sd 0.4.1 default campaign, asv 9a2e7ff": 0.002859784958807822,
+      "rgmin/lj38-sd 0.4.1 default campaign, asv f15726f": 0.002859784958807822,
+      "rgmin/lj38-sd-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.002859784958807822,
+      "rgmin/lj38-sd-tuned 0.4.1 tuned campaign, asv f15726f": 0.002859784958807822,
+      "rgmin/lj38-sr1 0.4.1 default campaign, asv 9a2e7ff": 0.15653559774527026,
+      "rgmin/lj38-sr1 0.4.1 default campaign, asv f15726f": 0.15653559774527026,
+      "rgmin/lj38-sr1-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.15653559774527026,
+      "rgmin/lj38-sr1-tuned 0.4.1 tuned campaign, asv f15726f": 0.15653559774527026,
+      "rgmin/lj38-sr2 0.4.1 default campaign, asv 9a2e7ff": 0.14404285292521501,
+      "rgmin/lj38-sr2 0.4.1 default campaign, asv f15726f": 0.14404285292521501,
+      "rgmin/lj38-sr2-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.14404285292521501,
+      "rgmin/lj38-sr2-tuned 0.4.1 tuned campaign, asv f15726f": 0.14404285292521501,
+      "scipy/lj38-bfgs 1.18.1 default campaign e4e854e": 0.749715204201145,
+      "scipy/lj38-cg 1.18.1 default campaign e4e854e": 0.6932720800141486,
+      "scipy/lj38-lbfgsb 1.18.1 default campaign e4e854e": 0.9909907457258261,
+      "scipy/lj38-newton-cg 1.18.1 default campaign e4e854e": 0.64119389076428,
+      "scipy/lj38-trust-krylov 1.18.1 default campaign e4e854e": 0.592427031466715,
+      "scipy/lj38-trust-ncg 1.18.1 default campaign e4e854e": 0.6007053563474745,
+      "sella/lj38-min-default 2.6.0 default campaign, asv 6cfb60c": 0.4762294531404183,
+      "sella/lj38-min-tuned 2.6.0 tuned campaign, asv 6cfb60c": 0.9508032413046845,
+      "tsase/lbfgs-lj38 1.0 default campaign 98aac60": 1.0606791897220378,
       "tsase/mdmin-lj38 1.0 default campaign 98aac60": 0.0
     },
     "rho": {
       "ase/lj38-bfgs-default 3.29.0 default asv f27c000": [
         0.0,
-        0.042,
-        0.848,
+        0.03,
+        0.826,
         0.984,
         0.985
       ],
       "ase/lj38-bfgs-default 3.29.0 default campaign f27c000": [
         0.0,
-        0.031,
-        0.683,
-        0.913,
+        0.018,
+        0.66,
+        0.912,
         0.949
       ],
       "ase/lj38-bfgs-tuned 3.29.0 tuned asv f27c000": [
         0.0,
-        0.042,
-        0.848,
+        0.03,
+        0.826,
         0.984,
         0.985
       ],
       "ase/lj38-bfgs-tuned 3.29.0 tuned campaign f27c000": [
         0.0,
-        0.042,
-        0.848,
+        0.03,
+        0.826,
         0.986,
         0.99
       ],
       "ase/lj38-bfgslinesearch-default 3.29.0 default asv f27c000": [
         0.0,
         0.0,
-        0.504,
-        0.998,
+        0.455,
+        0.994,
         0.999
       ],
       "ase/lj38-bfgslinesearch-default 3.29.0 default campaign f27c000": [
         0.0,
         0.0,
-        0.504,
-        0.999,
+        0.455,
+        0.995,
         1.0
       ],
       "ase/lj38-bfgslinesearch-tuned 3.29.0 tuned asv f27c000": [
         0.0,
         0.003,
-        0.692,
-        0.999,
+        0.646,
+        0.995,
         0.999
       ],
       "ase/lj38-bfgslinesearch-tuned 3.29.0 tuned campaign f27c000": [
         0.0,
         0.003,
-        0.693,
-        1.0,
+        0.646,
+        0.996,
         1.0
       ],
       "ase/lj38-fire-default 3.29.0 default asv f27c000": [
         0.0,
-        0.024,
-        0.416,
-        0.863,
+        0.016,
+        0.393,
+        0.85,
         0.992
       ],
       "ase/lj38-fire-default 3.29.0 default campaign f27c000": [
         0.0,
-        0.024,
-        0.418,
-        0.867,
+        0.016,
+        0.395,
+        0.854,
         0.997
       ],
       "ase/lj38-fire-tuned 3.29.0 tuned asv f27c000": [
         0.0,
-        0.015,
-        0.418,
-        0.857,
-        0.991
+        0.011,
+        0.393,
+        0.845,
+        0.99
       ],
       "ase/lj38-fire-tuned 3.29.0 tuned campaign f27c000": [
         0.0,
-        0.015,
-        0.418,
-        0.858,
-        0.992
+        0.011,
+        0.393,
+        0.846,
+        0.991
       ],
       "ase/lj38-lbfgs-default 3.29.0 default asv f27c000": [
-        0.008,
-        0.591,
-        0.974,
+        0.007,
+        0.561,
+        0.972,
         0.984,
         0.986
       ],
       "ase/lj38-lbfgs-default 3.29.0 default campaign f27c000": [
-        0.001,
-        0.338,
-        0.85,
-        0.945,
+        0.0,
+        0.303,
+        0.843,
+        0.944,
         0.958
       ],
       "ase/lj38-lbfgs-tuned 3.29.0 tuned asv f27c000": [
         0.0,
-        0.29,
-        0.956,
+        0.257,
+        0.947,
         0.988,
         0.992
       ],
       "ase/lj38-lbfgs-tuned 3.29.0 tuned campaign f27c000": [
         0.0,
-        0.292,
-        0.958,
+        0.259,
+        0.949,
         0.99,
         0.995
       ],
@@ -2619,40 +2907,40 @@
         0.0,
         0.0,
         0.0,
-        0.178,
-        0.781
+        0.157,
+        0.759
       ],
       "ase/lj38-preconfire-default 3.29.0 default campaign f27c000": [
         0.0,
         0.0,
         0.0,
-        0.179,
-        0.782
+        0.158,
+        0.76
       ],
       "ase/lj38-preconlbfgs-default 3.29.0 default asv f27c000": [
         0.0,
-        0.001,
-        0.266,
-        0.954,
+        0.0,
+        0.233,
+        0.942,
         0.997
       ],
       "ase/lj38-preconlbfgs-default 3.29.0 default campaign f27c000": [
         0.0,
-        0.001,
-        0.266,
-        0.956,
+        0.0,
+        0.233,
+        0.944,
         0.999
       ],
       "dlfind/cg-lj38 0.0.3 default campaign 4167998": [
         0.0,
         0.0,
         0.0,
-        0.03,
-        0.392
+        0.024,
+        0.372
       ],
       "dlfind/lbfgs-lj38 0.0.3 default campaign 4167998": [
-        0.122,
-        0.93,
+        0.084,
+        0.916,
         0.998,
         0.998,
         0.998
@@ -2661,50 +2949,50 @@
         0.0,
         0.0,
         0.0,
-        0.026,
-        0.385
+        0.021,
+        0.361
       ],
       "eon/lj38-lbfgs 3.6.0 campaign 1d71c94": [
-        0.029,
-        0.904,
-        1.0,
+        0.021,
+        0.888,
+        0.998,
         1.0,
         1.0
       ],
       "eon/lj38-lbfgs-m100 3.6.0 campaign 1d71c94": [
-        0.208,
-        0.957,
-        1.0,
+        0.161,
+        0.944,
+        0.999,
         1.0,
         1.0
       ],
       "lammps/cg-lj38 30 Sep 2026 default campaign 8de817d": [
         0.0,
         0.0,
-        0.006,
-        0.266,
-        0.708
+        0.005,
+        0.251,
+        0.689
       ],
       "lammps/fire-lj38 30 Sep 2026 default campaign 8de817d": [
         0.0,
-        0.026,
-        0.488,
-        0.704,
+        0.022,
+        0.469,
+        0.701,
         0.727
       ],
       "lammps/hftn-lj38 30 Sep 2026 default campaign 8de817d": [
         0.0,
         0.0,
-        0.02,
-        0.636,
-        0.982
+        0.013,
+        0.601,
+        0.978
       ],
       "lammps/quickmin-lj38 30 Sep 2026 default campaign 8de817d": [
         0.0,
         0.0,
         0.0,
-        0.024,
-        0.395
+        0.017,
+        0.363
       ],
       "lammps/sd-lj38 30 Sep 2026 default campaign 8de817d": [
         0.0,
@@ -2713,18 +3001,53 @@
         0.0,
         0.007
       ],
-      "optim/lbfgs-lj38 svn-snapshot default campaign 02aaf45": [
-        0.032,
-        0.798,
+      "nlopt/lj38-lbfgs 2.11.0 default campaign 673d250": [
+        0.223,
+        0.949,
         0.996,
+        0.996,
+        0.996
+      ],
+      "nlopt/lj38-mma 2.11.0 default campaign 673d250": [
+        0.0,
+        0.0,
+        0.0,
+        0.018,
+        0.346
+      ],
+      "nlopt/lj38-slsqp 2.11.0 default campaign 673d250": [
+        0.005,
+        0.006,
+        0.006,
+        0.137,
+        0.988
+      ],
+      "nlopt/lj38-tnewton-precond-restart 2.11.0 default campaign 673d250": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.018
+      ],
+      "nlopt/lj38-var2 2.11.0 default campaign 673d250": [
+        0.025,
+        0.768,
+        0.996,
+        0.996,
+        0.996
+      ],
+      "optim/lbfgs-lj38 svn-snapshot default campaign 02aaf45": [
+        0.017,
+        0.765,
+        0.995,
         0.998,
         0.998
       ],
       "pysisyphus/cg-lj38 0.1.dev1 default campaign a4ce10d": [
         0.0,
-        0.002,
-        0.066,
-        0.217,
+        0.0,
+        0.061,
+        0.211,
         0.251
       ],
       "pysisyphus/lbfgs-lj38 0.1.dev1 default campaign a4ce10d": [
@@ -2737,149 +3060,149 @@
       "pysisyphus/sd-lj38 0.1.dev1 default campaign a4ce10d": [
         0.0,
         0.0,
-        0.035,
-        0.156,
-        0.197
+        0.03,
+        0.152,
+        0.195
       ],
       "rgmin/lj38-adam 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
         0.0,
         0.0,
         0.001,
-        0.015
+        0.012
       ],
       "rgmin/lj38-adam 0.4.1 default campaign, asv f15726f": [
         0.0,
         0.0,
         0.0,
         0.001,
-        0.015
+        0.012
       ],
       "rgmin/lj38-adam-tuned 0.4.1 tuned campaign, asv 9a2e7ff": [
         0.0,
         0.0,
         0.0,
         0.001,
-        0.015
+        0.012
       ],
       "rgmin/lj38-adam-tuned 0.4.1 tuned campaign, asv f15726f": [
         0.0,
         0.0,
         0.0,
         0.001,
-        0.015
+        0.012
       ],
       "rgmin/lj38-bb 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
-        0.054,
-        0.659,
-        0.97,
-        0.994
+        0.042,
+        0.623,
+        0.968,
+        0.993
       ],
       "rgmin/lj38-bb 0.4.1 default campaign, asv f15726f": [
         0.0,
-        0.054,
-        0.659,
-        0.97,
-        0.994
+        0.042,
+        0.623,
+        0.968,
+        0.993
       ],
       "rgmin/lj38-bb-tuned 0.4.1 tuned campaign, asv 9a2e7ff": [
         0.0,
-        0.054,
-        0.659,
-        0.97,
-        0.994
+        0.042,
+        0.623,
+        0.968,
+        0.993
       ],
       "rgmin/lj38-bb-tuned 0.4.1 tuned campaign, asv f15726f": [
         0.0,
-        0.054,
-        0.659,
-        0.97,
-        0.994
+        0.042,
+        0.623,
+        0.968,
+        0.993
       ],
       "rgmin/lj38-bfgs 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
         0.0,
-        0.005,
-        0.705,
-        0.997
+        0.002,
+        0.671,
+        0.995
       ],
       "rgmin/lj38-bfgs 0.4.1 default campaign, asv f15726f": [
         0.0,
         0.0,
-        0.005,
-        0.705,
-        0.997
+        0.002,
+        0.671,
+        0.995
       ],
       "rgmin/lj38-bfgs-tuned 0.4.1 tuned campaign, asv 9a2e7ff": [
         0.0,
         0.0,
-        0.005,
-        0.705,
-        0.997
+        0.002,
+        0.671,
+        0.995
       ],
       "rgmin/lj38-bfgs-tuned 0.4.1 tuned campaign, asv f15726f": [
         0.0,
         0.0,
-        0.005,
-        0.705,
-        0.997
+        0.002,
+        0.671,
+        0.995
       ],
       "rgmin/lj38-cg 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
-        0.045,
-        0.54,
-        0.946,
-        0.995
+        0.036,
+        0.511,
+        0.936,
+        0.994
       ],
       "rgmin/lj38-cg 0.4.1 default campaign, asv f15726f": [
         0.0,
-        0.045,
-        0.54,
-        0.946,
-        0.995
+        0.036,
+        0.511,
+        0.936,
+        0.994
       ],
       "rgmin/lj38-cg-tuned 0.4.1 tuned campaign, asv 9a2e7ff": [
         0.0,
-        0.045,
-        0.54,
-        0.946,
-        0.995
+        0.036,
+        0.511,
+        0.936,
+        0.994
       ],
       "rgmin/lj38-cg-tuned 0.4.1 tuned campaign, asv f15726f": [
         0.0,
-        0.045,
-        0.54,
-        0.946,
-        0.995
+        0.036,
+        0.511,
+        0.936,
+        0.994
       ],
       "rgmin/lj38-diis 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
         0.0,
-        0.002,
-        0.203,
-        0.717
+        0.001,
+        0.187,
+        0.7
       ],
       "rgmin/lj38-diis 0.4.1 default campaign, asv f15726f": [
         0.0,
         0.0,
-        0.002,
-        0.203,
-        0.717
+        0.001,
+        0.187,
+        0.7
       ],
       "rgmin/lj38-diis-tuned 0.4.1 tuned campaign, asv 9a2e7ff": [
         0.0,
         0.0,
-        0.002,
-        0.203,
-        0.717
+        0.001,
+        0.187,
+        0.7
       ],
       "rgmin/lj38-diis-tuned 0.4.1 tuned campaign, asv f15726f": [
         0.0,
         0.0,
-        0.002,
-        0.203,
-        0.717
+        0.001,
+        0.187,
+        0.7
       ],
       "rgmin/lj38-dogleg 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
@@ -2911,141 +3234,141 @@
       ],
       "rgmin/lj38-fire 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
-        0.016,
-        0.42,
-        0.864,
+        0.013,
+        0.393,
+        0.851,
         0.988
       ],
       "rgmin/lj38-fire 0.4.1 default campaign, asv f15726f": [
         0.0,
-        0.016,
-        0.42,
-        0.864,
+        0.013,
+        0.393,
+        0.851,
         0.988
       ],
       "rgmin/lj38-fire-tuned 0.4.1 tuned campaign, asv 9a2e7ff": [
         0.0,
-        0.016,
-        0.42,
-        0.864,
+        0.013,
+        0.393,
+        0.851,
         0.988
       ],
       "rgmin/lj38-fire-tuned 0.4.1 tuned campaign, asv f15726f": [
         0.0,
-        0.016,
-        0.42,
-        0.864,
+        0.013,
+        0.393,
+        0.851,
         0.988
       ],
       "rgmin/lj38-fire2 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
-        0.009,
-        0.362,
-        0.863,
-        0.988
+        0.007,
+        0.337,
+        0.856,
+        0.986
       ],
       "rgmin/lj38-fire2 0.4.1 default campaign, asv f15726f": [
         0.0,
-        0.009,
-        0.362,
-        0.863,
-        0.988
+        0.007,
+        0.337,
+        0.856,
+        0.986
       ],
       "rgmin/lj38-fire2-tuned 0.4.1 tuned campaign, asv 9a2e7ff": [
         0.0,
-        0.009,
-        0.362,
-        0.863,
-        0.988
+        0.007,
+        0.337,
+        0.856,
+        0.986
       ],
       "rgmin/lj38-fire2-tuned 0.4.1 tuned campaign, asv f15726f": [
         0.0,
-        0.009,
-        0.362,
-        0.863,
-        0.988
+        0.007,
+        0.337,
+        0.856,
+        0.986
       ],
       "rgmin/lj38-lbfgs 0.4.1 default campaign, asv 9a2e7ff": [
-        0.046,
-        0.862,
-        0.996,
+        0.037,
+        0.837,
+        0.995,
         0.996,
         0.996
       ],
       "rgmin/lj38-lbfgs 0.4.1 default campaign, asv f15726f": [
-        0.046,
-        0.862,
-        0.996,
+        0.037,
+        0.837,
+        0.995,
         0.996,
         0.996
       ],
       "rgmin/lj38-lbfgs-m100 0.4.1 default campaign, asv 9a2e7ff": [
-        0.237,
-        0.97,
+        0.191,
+        0.957,
         0.999,
         0.999,
         0.999
       ],
       "rgmin/lj38-lbfgs-m100 0.4.1 default campaign, asv f15726f": [
-        0.237,
-        0.97,
+        0.191,
+        0.957,
         0.999,
         0.999,
         0.999
       ],
       "rgmin/lj38-lbfgs-m100-tuned 0.4.1 tuned campaign, asv 9a2e7ff": [
-        0.237,
-        0.97,
+        0.191,
+        0.957,
         0.999,
         0.999,
         0.999
       ],
       "rgmin/lj38-lbfgs-m100-tuned 0.4.1 tuned campaign, asv f15726f": [
-        0.237,
-        0.97,
+        0.191,
+        0.957,
         0.999,
         0.999,
         0.999
       ],
       "rgmin/lj38-lbfgs-m20 0.4.1 default campaign, asv 9a2e7ff": [
-        0.068,
-        0.889,
-        0.996,
+        0.05,
+        0.864,
+        0.992,
         0.996,
         0.996
       ],
       "rgmin/lj38-lbfgs-m20 0.4.1 default campaign, asv f15726f": [
-        0.068,
-        0.889,
-        0.996,
+        0.05,
+        0.864,
+        0.992,
         0.996,
         0.996
       ],
       "rgmin/lj38-lbfgs-m20-tuned 0.4.1 tuned campaign, asv 9a2e7ff": [
-        0.068,
-        0.889,
-        0.996,
+        0.05,
+        0.864,
+        0.992,
         0.996,
         0.996
       ],
       "rgmin/lj38-lbfgs-m20-tuned 0.4.1 tuned campaign, asv f15726f": [
-        0.068,
-        0.889,
-        0.996,
+        0.05,
+        0.864,
+        0.992,
         0.996,
         0.996
       ],
       "rgmin/lj38-lbfgs-tuned 0.4.1 tuned campaign, asv 9a2e7ff": [
-        0.046,
-        0.862,
-        0.996,
+        0.037,
+        0.837,
+        0.995,
         0.996,
         0.996
       ],
       "rgmin/lj38-lbfgs-tuned 0.4.1 tuned campaign, asv f15726f": [
-        0.046,
-        0.862,
-        0.996,
+        0.037,
+        0.837,
+        0.995,
         0.996,
         0.996
       ],
@@ -3081,173 +3404,173 @@
         0.0,
         0.0,
         0.005,
-        0.224,
-        0.734
+        0.204,
+        0.711
       ],
       "rgmin/lj38-quickmin 0.4.1 default campaign, asv f15726f": [
         0.0,
         0.0,
         0.005,
-        0.224,
-        0.734
+        0.204,
+        0.711
       ],
       "rgmin/lj38-quickmin-tuned 0.4.1 tuned campaign, asv 9a2e7ff": [
         0.0,
         0.0,
         0.005,
-        0.224,
-        0.734
+        0.204,
+        0.711
       ],
       "rgmin/lj38-quickmin-tuned 0.4.1 tuned campaign, asv f15726f": [
         0.0,
         0.0,
         0.005,
-        0.224,
-        0.734
+        0.204,
+        0.711
       ],
       "rgmin/lj38-sd 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
         0.0,
         0.0,
         0.0,
-        0.022
+        0.019
       ],
       "rgmin/lj38-sd 0.4.1 default campaign, asv f15726f": [
         0.0,
         0.0,
         0.0,
         0.0,
-        0.022
+        0.019
       ],
       "rgmin/lj38-sd-tuned 0.4.1 tuned campaign, asv 9a2e7ff": [
         0.0,
         0.0,
         0.0,
         0.0,
-        0.022
+        0.019
       ],
       "rgmin/lj38-sd-tuned 0.4.1 tuned campaign, asv f15726f": [
         0.0,
         0.0,
         0.0,
         0.0,
-        0.022
+        0.019
       ],
       "rgmin/lj38-sr1 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
         0.0,
-        0.009,
-        0.201,
-        0.664
+        0.006,
+        0.188,
+        0.652
       ],
       "rgmin/lj38-sr1 0.4.1 default campaign, asv f15726f": [
         0.0,
         0.0,
-        0.009,
-        0.201,
-        0.664
+        0.006,
+        0.188,
+        0.652
       ],
       "rgmin/lj38-sr1-tuned 0.4.1 tuned campaign, asv 9a2e7ff": [
         0.0,
         0.0,
-        0.009,
-        0.201,
-        0.664
+        0.006,
+        0.188,
+        0.652
       ],
       "rgmin/lj38-sr1-tuned 0.4.1 tuned campaign, asv f15726f": [
         0.0,
         0.0,
-        0.009,
-        0.201,
-        0.664
+        0.006,
+        0.188,
+        0.652
       ],
       "rgmin/lj38-sr2 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
         0.0,
-        0.012,
-        0.178,
-        0.634
+        0.009,
+        0.162,
+        0.615
       ],
       "rgmin/lj38-sr2 0.4.1 default campaign, asv f15726f": [
         0.0,
         0.0,
-        0.012,
-        0.178,
-        0.634
+        0.009,
+        0.162,
+        0.615
       ],
       "rgmin/lj38-sr2-tuned 0.4.1 tuned campaign, asv 9a2e7ff": [
         0.0,
         0.0,
-        0.012,
-        0.178,
-        0.634
+        0.009,
+        0.162,
+        0.615
       ],
       "rgmin/lj38-sr2-tuned 0.4.1 tuned campaign, asv f15726f": [
         0.0,
         0.0,
-        0.012,
-        0.178,
-        0.634
+        0.009,
+        0.162,
+        0.615
       ],
       "scipy/lj38-bfgs 1.18.1 default campaign e4e854e": [
         0.0,
-        0.13,
-        0.916,
-        0.995,
+        0.1,
+        0.899,
+        0.994,
         0.995
       ],
       "scipy/lj38-cg 1.18.1 default campaign e4e854e": [
         0.001,
-        0.088,
-        0.769,
-        0.991,
+        0.069,
+        0.747,
+        0.988,
         0.997
       ],
       "scipy/lj38-lbfgsb 1.18.1 default campaign e4e854e": [
-        0.046,
-        0.818,
-        0.993,
+        0.031,
+        0.796,
+        0.991,
         0.993,
         0.993
       ],
       "scipy/lj38-newton-cg 1.18.1 default campaign e4e854e": [
         0.0,
-        0.037,
-        0.655,
-        0.983,
+        0.022,
+        0.629,
+        0.98,
         0.998
       ],
       "scipy/lj38-trust-krylov 1.18.1 default campaign e4e854e": [
         0.0,
-        0.005,
-        0.529,
-        0.976,
+        0.002,
+        0.494,
+        0.973,
         0.998
       ],
       "scipy/lj38-trust-ncg 1.18.1 default campaign e4e854e": [
         0.0,
-        0.003,
-        0.55,
-        0.981,
+        0.002,
+        0.518,
+        0.976,
         0.999
       ],
       "sella/lj38-min-default 2.6.0 default campaign, asv 6cfb60c": [
         0.0,
         0.0,
-        0.142,
-        0.979,
+        0.111,
+        0.971,
         1.0
       ],
       "sella/lj38-min-tuned 2.6.0 tuned campaign, asv 6cfb60c": [
         0.001,
-        0.71,
-        1.0,
+        0.66,
+        0.998,
         1.0,
         1.0
       ],
       "tsase/lbfgs-lj38 1.0 default campaign 98aac60": [
-        0.239,
-        0.958,
+        0.181,
+        0.943,
         0.996,
         0.996,
         0.996
@@ -3291,6 +3614,11 @@
       "lammps/hftn-lj38 30 Sep 2026 default campaign 8de817d": 0.997,
       "lammps/quickmin-lj38 30 Sep 2026 default campaign 8de817d": 0.991,
       "lammps/sd-lj38 30 Sep 2026 default campaign 8de817d": 0.383,
+      "nlopt/lj38-lbfgs 2.11.0 default campaign 673d250": 0.996,
+      "nlopt/lj38-mma 2.11.0 default campaign 673d250": 0.985,
+      "nlopt/lj38-slsqp 2.11.0 default campaign 673d250": 0.994,
+      "nlopt/lj38-tnewton-precond-restart 2.11.0 default campaign 673d250": 0.981,
+      "nlopt/lj38-var2 2.11.0 default campaign 673d250": 0.996,
       "optim/lbfgs-lj38 svn-snapshot default campaign 02aaf45": 0.998,
       "pysisyphus/cg-lj38 0.1.dev1 default campaign a4ce10d": 0.254,
       "pysisyphus/lbfgs-lj38 0.1.dev1 default campaign a4ce10d": 0.0,
@@ -3394,6 +3722,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -3439,6 +3768,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 1
       },
       "full_n": 1000,
@@ -3484,6 +3814,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 1
       },
       "full_n": 1000,
@@ -3529,6 +3860,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 1
       },
       "full_n": 1000,
@@ -3574,6 +3906,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 1
       },
       "full_n": 1000,
@@ -3619,6 +3952,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -3664,6 +3998,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 1
       },
       "full_n": 1000,
@@ -3709,6 +4044,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -3743,6 +4079,52 @@
       "asv_commit": "",
       "call_unit": "total",
       "cap": 10000,
+      "code": "nlopt",
+      "code_version": "2.11.0",
+      "commit": "673d2504f819bf554a7968e41de552ee102e7fb1",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "nlopt-673d2504-lj38-lbfgs",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 4
+      },
+      "full_n": 1000,
+      "history": false,
+      "max_calls": 398.0,
+      "mean_calls": 176.734,
+      "mean_per_image": null,
+      "median": 169.0,
+      "median_calls": 169.0,
+      "median_high": 173.0,
+      "median_low": 165.0,
+      "median_per_image": null,
+      "min_calls": 91.0,
+      "n": 1000,
+      "nfailed": 4,
+      "note": "starts.jsonl",
+      "par2_mean": 256.056,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/nlopt-673d2504-lj38-lbfgs.dat",
+      "problem": "minimization/lj38",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 0.996,
+      "template": "nlopt/lj38-lbfgs",
+      "tuning": "default",
+      "wilson_high": 0.9984434118595916,
+      "wilson_low": 0.9897604437227377
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000,
       "code": "tsase",
       "code_version": "1.0",
       "commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218",
@@ -3754,6 +4136,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 4
       },
       "full_n": 1000,
@@ -3799,6 +4182,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 2
       },
       "full_n": 1000,
@@ -3844,6 +4228,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 4
       },
       "full_n": 1000,
@@ -3889,6 +4274,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 4
       },
       "full_n": 1000,
@@ -3934,6 +4320,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 4
       },
       "full_n": 1000,
@@ -3979,6 +4366,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 4
       },
       "full_n": 1000,
@@ -4024,6 +4412,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 4
       },
       "full_n": 1000,
@@ -4069,6 +4458,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 4
       },
       "full_n": 1000,
@@ -4114,6 +4504,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 4
       },
       "full_n": 1000,
@@ -4159,6 +4550,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 4
       },
       "full_n": 1000,
@@ -4193,6 +4585,52 @@
       "asv_commit": "",
       "call_unit": "total",
       "cap": 10000,
+      "code": "nlopt",
+      "code_version": "2.11.0",
+      "commit": "673d2504f819bf554a7968e41de552ee102e7fb1",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "nlopt-673d2504-lj38-var2",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 4
+      },
+      "full_n": 1000,
+      "history": false,
+      "max_calls": 429.0,
+      "mean_calls": 227.626,
+      "mean_per_image": null,
+      "median": 220.0,
+      "median_calls": 219.0,
+      "median_high": 224.0,
+      "median_low": 215.5,
+      "median_per_image": null,
+      "min_calls": 107.0,
+      "n": 1000,
+      "nfailed": 4,
+      "note": "starts.jsonl",
+      "par2_mean": 306.746,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/nlopt-673d2504-lj38-var2.dat",
+      "problem": "minimization/lj38",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 0.996,
+      "template": "nlopt/lj38-var2",
+      "tuning": "default",
+      "wilson_high": 0.9984434118595916,
+      "wilson_low": 0.9897604437227377
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000,
       "code": "SciPy",
       "code_version": "1.18.1",
       "commit": "e4e854eaa8f18d807cd3496028e257e36caa93cc",
@@ -4204,6 +4642,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 7
       },
       "full_n": 1000,
@@ -4249,6 +4688,7 @@
         "cap": 2,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -4294,6 +4734,7 @@
         "cap": 2,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 3
       },
       "full_n": 1000,
@@ -4338,7 +4779,8 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 1,
+        "divergence": 0,
+        "not_converged": 1,
         "wrong_stationary": 4
       },
       "full_n": 1000,
@@ -4384,6 +4826,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -4428,7 +4871,8 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 1,
+        "divergence": 0,
+        "not_converged": 1,
         "wrong_stationary": 2
       },
       "full_n": 1000,
@@ -4474,6 +4918,7 @@
         "cap": 3,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -4519,6 +4964,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 1
       },
       "full_n": 1000,
@@ -4564,6 +5010,7 @@
         "cap": 7,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 6
       },
       "full_n": 1000,
@@ -4609,6 +5056,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -4654,6 +5102,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 2
       },
       "full_n": 1000,
@@ -4699,6 +5148,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 1
       },
       "full_n": 1000,
@@ -4744,6 +5194,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 1
       },
       "full_n": 1000,
@@ -4789,6 +5240,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 2
       },
       "full_n": 1000,
@@ -4834,6 +5286,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 6
       },
       "full_n": 1000,
@@ -4879,6 +5332,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 6
       },
       "full_n": 1000,
@@ -4924,6 +5378,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 6
       },
       "full_n": 1000,
@@ -4969,6 +5424,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 6
       },
       "full_n": 1000,
@@ -5014,6 +5470,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 4
       },
       "full_n": 1000,
@@ -5059,6 +5516,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 4
       },
       "full_n": 1000,
@@ -5104,6 +5562,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 4
       },
       "full_n": 1000,
@@ -5149,6 +5608,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 4
       },
       "full_n": 1000,
@@ -5194,6 +5654,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -5239,6 +5700,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -5284,6 +5746,7 @@
         "cap": 3,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 11
       },
       "full_n": 1000,
@@ -5329,6 +5792,7 @@
         "cap": 3,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 11
       },
       "full_n": 1000,
@@ -5374,6 +5838,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -5419,6 +5884,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -5464,6 +5930,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 2
       },
       "full_n": 1000,
@@ -5509,6 +5976,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 1
       },
       "full_n": 1000,
@@ -5554,6 +6022,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 3
       },
       "full_n": 1000,
@@ -5599,6 +6068,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 3
       },
       "full_n": 1000,
@@ -5644,6 +6114,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 3
       },
       "full_n": 1000,
@@ -5689,6 +6160,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 3
       },
       "full_n": 1000,
@@ -5734,6 +6206,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 5
       },
       "full_n": 1000,
@@ -5779,6 +6252,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 6
       },
       "full_n": 1000,
@@ -5824,6 +6298,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 6
       },
       "full_n": 1000,
@@ -5869,6 +6344,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 6
       },
       "full_n": 1000,
@@ -5914,6 +6390,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 6
       },
       "full_n": 1000,
@@ -5959,6 +6436,7 @@
         "cap": 18,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -6004,6 +6482,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -6049,6 +6528,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -6094,6 +6574,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -6139,6 +6620,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -6184,6 +6666,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 3
       },
       "full_n": 1000,
@@ -6229,6 +6712,7 @@
         "cap": 42,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -6263,6 +6747,52 @@
       "asv_commit": "",
       "call_unit": "total",
       "cap": 10000,
+      "code": "nlopt",
+      "code_version": "2.11.0",
+      "commit": "673d2504f819bf554a7968e41de552ee102e7fb1",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "nlopt-673d2504-lj38-slsqp",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 6
+      },
+      "full_n": 1000,
+      "history": false,
+      "max_calls": 2137.0,
+      "mean_calls": 1366.101,
+      "mean_per_image": null,
+      "median": 1368.0,
+      "median_calls": 1366.5,
+      "median_high": 1390.0,
+      "median_low": 1348.0,
+      "median_per_image": null,
+      "min_calls": 55.0,
+      "n": 1000,
+      "nfailed": 6,
+      "note": "starts.jsonl",
+      "par2_mean": 1477.851,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/nlopt-673d2504-lj38-slsqp.dat",
+      "problem": "minimization/lj38",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 0.994,
+      "template": "nlopt/lj38-slsqp",
+      "tuning": "default",
+      "wilson_high": 0.9972473308581237,
+      "wilson_low": 0.9869718317581478
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000,
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
@@ -6274,6 +6804,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -6319,6 +6850,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 2
       },
       "full_n": 1000,
@@ -6364,6 +6896,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 2
       },
       "full_n": 1000,
@@ -6409,6 +6942,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 2
       },
       "full_n": 1000,
@@ -6454,6 +6988,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 2
       },
       "full_n": 1000,
@@ -6499,6 +7034,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 2
       },
       "full_n": 1000,
@@ -6544,6 +7080,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 2
       },
       "full_n": 1000,
@@ -6589,6 +7126,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 2
       },
       "full_n": 1000,
@@ -6634,6 +7172,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 2
       },
       "full_n": 1000,
@@ -6679,6 +7218,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 2
       },
       "full_n": 1000,
@@ -6724,6 +7264,7 @@
         "cap": 2,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 4
       },
       "full_n": 1000,
@@ -6769,6 +7310,7 @@
         "cap": 2,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 4
       },
       "full_n": 1000,
@@ -6814,6 +7356,7 @@
         "cap": 2,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 4
       },
       "full_n": 1000,
@@ -6859,6 +7402,7 @@
         "cap": 2,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 4
       },
       "full_n": 1000,
@@ -6904,6 +7448,7 @@
         "cap": 5,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 1
       },
       "full_n": 1000,
@@ -6949,6 +7494,7 @@
         "cap": 5,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 1
       },
       "full_n": 1000,
@@ -6994,6 +7540,7 @@
         "cap": 5,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 1
       },
       "full_n": 1000,
@@ -7039,6 +7586,7 @@
         "cap": 5,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 1
       },
       "full_n": 1000,
@@ -7084,6 +7632,7 @@
         "cap": 9,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -7129,6 +7678,7 @@
         "cap": 10,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -7173,7 +7723,8 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 5,
+        "divergence": 0,
+        "not_converged": 5,
         "wrong_stationary": 4
       },
       "full_n": 1000,
@@ -7208,6 +7759,52 @@
       "asv_commit": "",
       "call_unit": "total",
       "cap": 10000,
+      "code": "nlopt",
+      "code_version": "2.11.0",
+      "commit": "673d2504f819bf554a7968e41de552ee102e7fb1",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "nlopt-673d2504-lj38-mma",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 12,
+        "wrong_stationary": 3
+      },
+      "full_n": 1000,
+      "history": false,
+      "max_calls": 8923.0,
+      "mean_calls": 3043.141,
+      "mean_per_image": null,
+      "median": 2637.0,
+      "median_calls": 2626.0,
+      "median_high": 2750.0,
+      "median_low": 2536.4875,
+      "median_per_image": null,
+      "min_calls": 795.0,
+      "n": 1000,
+      "nfailed": 15,
+      "note": "starts.jsonl",
+      "par2_mean": 3231.751,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/nlopt-673d2504-lj38-mma.dat",
+      "problem": "minimization/lj38",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 0.985,
+      "template": "nlopt/lj38-mma",
+      "tuning": "default",
+      "wilson_high": 0.9908890211959184,
+      "wilson_low": 0.9753990230730932
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000,
       "code": "lammps",
       "code_version": "30 Sep 2026",
       "commit": "8de817dd79bfe4525d5d39246a212d833e6dee07",
@@ -7218,7 +7815,8 @@
       "failures": {
         "cap": 148,
         "crash": 0,
-        "divergence": 1,
+        "divergence": 0,
+        "not_converged": 1,
         "wrong_stationary": 3
       },
       "full_n": 1000,
@@ -7253,6 +7851,52 @@
       "asv_commit": "",
       "call_unit": "total",
       "cap": 10000,
+      "code": "nlopt",
+      "code_version": "2.11.0",
+      "commit": "673d2504f819bf554a7968e41de552ee102e7fb1",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "nlopt-673d2504-lj38-tnewton-precond-restart",
+      "failures": {
+        "cap": 6,
+        "crash": 12,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 1
+      },
+      "full_n": 1000,
+      "history": false,
+      "max_calls": 10000.0,
+      "mean_calls": 4487.067,
+      "mean_per_image": null,
+      "median": 4231.5,
+      "median_calls": 4217.5,
+      "median_high": 4380.5125,
+      "median_low": 4153.0,
+      "median_per_image": null,
+      "min_calls": 569.0,
+      "n": 1000,
+      "nfailed": 19,
+      "note": "starts.jsonl",
+      "par2_mean": 4749.313,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/nlopt-673d2504-lj38-tnewton-precond-restart.dat",
+      "problem": "minimization/lj38",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 0.981,
+      "template": "nlopt/lj38-tnewton-precond-restart",
+      "tuning": "default",
+      "wilson_high": 0.9878031142492091,
+      "wilson_low": 0.9705155440876868
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000,
       "code": "lammps",
       "code_version": "30 Sep 2026",
       "commit": "8de817dd79bfe4525d5d39246a212d833e6dee07",
@@ -7264,6 +7908,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 224,
+        "not_converged": 0,
         "wrong_stationary": 49
       },
       "full_n": 1000,
@@ -7309,6 +7954,7 @@
         "cap": 200,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 3
       },
       "full_n": 1000,
@@ -7354,6 +8000,7 @@
         "cap": 200,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 3
       },
       "full_n": 1000,
@@ -7399,6 +8046,7 @@
         "cap": 200,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 3
       },
       "full_n": 1000,
@@ -7444,6 +8092,7 @@
         "cap": 200,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 3
       },
       "full_n": 1000,
@@ -7489,6 +8138,7 @@
         "cap": 103,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 5
       },
       "full_n": 1000,
@@ -7534,6 +8184,7 @@
         "cap": 103,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 5
       },
       "full_n": 1000,
@@ -7579,6 +8230,7 @@
         "cap": 103,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 5
       },
       "full_n": 1000,
@@ -7624,6 +8276,7 @@
         "cap": 103,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 5
       },
       "full_n": 1000,
@@ -7669,6 +8322,7 @@
         "cap": 327,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -7714,6 +8368,7 @@
         "cap": 327,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -7759,6 +8414,7 @@
         "cap": 327,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -7804,6 +8460,7 @@
         "cap": 327,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -7849,6 +8506,7 @@
         "cap": 547,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -7894,6 +8552,7 @@
         "cap": 547,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -7939,6 +8598,7 @@
         "cap": 547,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -7984,6 +8644,7 @@
         "cap": 547,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -8029,6 +8690,7 @@
         "cap": 617,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -8074,6 +8736,7 @@
         "cap": 745,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 1
       },
       "full_n": 1000,
@@ -8119,6 +8782,7 @@
         "cap": 795,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -8164,6 +8828,7 @@
         "cap": 1000,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
@@ -8209,6 +8874,7 @@
         "cap": 1000,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1000,
