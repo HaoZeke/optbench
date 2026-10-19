@@ -280,12 +280,12 @@ def run_template(
     start_rows = []
     for row in rows:
         record = {
-            "call_unit": "per_image",
+            "call_unit": "total",
             "code": template["code"],
             "code_version": template["code_version"],
             "commit": template["commit"],
             "counter": "client",
-            "force_calls": row["force_calls"],
+            "force_calls": row["raw"],
             "geometry": row["geometry"],
             "images": settings["images"],
             "problem": problem["id"],

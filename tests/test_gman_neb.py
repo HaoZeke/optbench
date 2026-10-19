@@ -88,8 +88,9 @@ def test_recorded_gman_heptamer_matches_the_archive_integers():
         if line.strip()
     ]
     assert [row["geometry"] for row in starts] == [f"min{index:02d}" for index in range(1, 14)]
-    calls = [float(row["force_calls"]) for row in starts]
-    assert int("%d" % (sum(calls) / len(calls))) == 412
-    assert int("%d" % max(calls)) == 697
-    assert int("%d" % min(calls)) == 214
-    assert all(row["counter"] == "client" and row["call_unit"] == "per_image" and row["success"] for row in starts)
+    per_image = [float(row["raw"]) / row["images"] for row in starts]
+    assert int("%d" % (sum(per_image) / len(per_image))) == 412
+    assert int("%d" % max(per_image)) == 697
+    assert int("%d" % min(per_image)) == 214
+    assert all(row["force_calls"] == row["raw"] for row in starts)
+    assert all(row["counter"] == "client" and row["call_unit"] == "total" and row["success"] for row in starts)
