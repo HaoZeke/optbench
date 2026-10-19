@@ -23,7 +23,7 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
 
 from optbench.counter import ForceCallCap, HarnessCounter
-from optbench.failures import classify_failure
+from optbench.failures import classify_outcome
 from optbench.noise import (
     KAPPA,
     WINDOW,
@@ -217,7 +217,19 @@ def _minimize_job(job: dict) -> dict:
         reasons.append("force_norm")
     elif hessian_index != 0:
         reasons.append("hessian_index")
-    failure = classify_failure(reasons)
+    cap_error = bool(error) and ("force-call cap" in error or "ForceCallCap" in error)
+    failure = classify_outcome(
+        energy=energy,
+        geometry=point,
+        force=force_norm,
+        calls=float(cap) if cap_error else calls,
+        cap=cap,
+        force_tol=threshold,
+        process_failed=bool(error) and not cap_error,
+        hessian_index=hessian_index,
+        expected_index=0 if hessian_index is not None else None,
+        force_above=False if at_force or not finite or cap_error or (error and not cap_error) else True,
+    )
     record = {
         "schema": "optbench.start/v2",
         "start": job["start"],

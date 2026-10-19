@@ -16,9 +16,10 @@
       "current": false,
       "entry": "airss-0.9.4-lj75",
       "failures": {
-        "cap": 200,
+        "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 199,
         "wrong_stationary": 0
       },
       "full_n": null,

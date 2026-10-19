@@ -18,6 +18,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": null,
@@ -63,6 +64,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": null,
@@ -110,6 +112,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": null,
@@ -155,6 +158,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": null,
@@ -200,6 +204,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": null,
@@ -245,6 +250,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": null,
@@ -290,6 +296,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": null,
@@ -335,6 +342,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": null,
@@ -380,6 +388,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": null,
@@ -425,6 +434,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": null,
@@ -470,6 +480,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": null,
@@ -515,6 +526,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": null,
@@ -560,6 +572,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": null,
@@ -605,6 +618,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 1
       },
       "full_n": null,
@@ -650,6 +664,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": null,
@@ -695,6 +710,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 1
       },
       "full_n": null,
@@ -743,6 +759,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 4
       },
       "full_n": null,
@@ -788,6 +805,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 5
       },
       "full_n": null,
@@ -830,10 +848,11 @@
       "current": true,
       "entry": "softsaddle-2019.04-saddle-lanczos-sm0",
       "failures": {
-        "cap": 108,
+        "cap": 0,
         "crash": 0,
-        "divergence": 4884,
-        "wrong_stationary": 6
+        "divergence": 0,
+        "not_converged": 790,
+        "wrong_stationary": 4208
       },
       "full_n": null,
       "history": false,
@@ -875,10 +894,11 @@
       "current": true,
       "entry": "rgsaddle-0.2.2-saddle-dimer-rotskip-tuned",
       "failures": {
-        "cap": 2246,
+        "cap": 0,
         "crash": 0,
-        "divergence": 17717,
-        "wrong_stationary": 35
+        "divergence": 0,
+        "not_converged": 2246,
+        "wrong_stationary": 17752
       },
       "full_n": null,
       "history": false,
@@ -920,9 +940,10 @@
       "current": true,
       "entry": "rgsaddle-0.2.2-saddle-dimer-fire",
       "failures": {
-        "cap": 19999,
+        "cap": 0,
         "crash": 0,
-        "divergence": 1,
+        "divergence": 0,
+        "not_converged": 20000,
         "wrong_stationary": 0
       },
       "full_n": null,
@@ -965,10 +986,11 @@
       "current": true,
       "entry": "rgsaddle-0.2.2-saddle-dimer-fire-tuned",
       "failures": {
-        "cap": 19991,
+        "cap": 0,
         "crash": 0,
-        "divergence": 9,
-        "wrong_stationary": 0
+        "divergence": 0,
+        "not_converged": 19991,
+        "wrong_stationary": 9
       },
       "full_n": null,
       "history": false,
@@ -1010,9 +1032,10 @@
       "current": true,
       "entry": "rgsaddle-0.2.2-saddle-dimer-lbfgs",
       "failures": {
-        "cap": 20000,
+        "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 20000,
         "wrong_stationary": 0
       },
       "full_n": null,
@@ -1055,10 +1078,11 @@
       "current": true,
       "entry": "rgsaddle-0.2.2-saddle-dimer-lbfgs-tuned",
       "failures": {
-        "cap": 43,
+        "cap": 0,
         "crash": 0,
-        "divergence": 19957,
-        "wrong_stationary": 0
+        "divergence": 0,
+        "not_converged": 43,
+        "wrong_stationary": 19957
       },
       "full_n": null,
       "history": false,
@@ -1100,10 +1124,11 @@
       "current": true,
       "entry": "rgsaddle-0.2.2-saddle-dimer-rotskip",
       "failures": {
-        "cap": 262,
+        "cap": 0,
         "crash": 0,
-        "divergence": 19718,
-        "wrong_stationary": 20
+        "divergence": 0,
+        "not_converged": 262,
+        "wrong_stationary": 19738
       },
       "full_n": null,
       "history": false,
@@ -1145,10 +1170,11 @@
       "current": true,
       "entry": "rgsaddle-0.2.2-saddle-lanczos",
       "failures": {
-        "cap": 15932,
+        "cap": 0,
         "crash": 0,
-        "divergence": 4068,
-        "wrong_stationary": 0
+        "divergence": 0,
+        "not_converged": 15932,
+        "wrong_stationary": 4068
       },
       "full_n": null,
       "history": false,
@@ -1190,10 +1216,11 @@
       "current": true,
       "entry": "rgsaddle-0.2.2-saddle-lanczos-tuned",
       "failures": {
-        "cap": 6257,
+        "cap": 0,
         "crash": 0,
-        "divergence": 13743,
-        "wrong_stationary": 0
+        "divergence": 0,
+        "not_converged": 6257,
+        "wrong_stationary": 13743
       },
       "full_n": null,
       "history": false,
@@ -1235,9 +1262,10 @@
       "current": true,
       "entry": "softsaddle-2019.04-saddle-davidson-sm50",
       "failures": {
-        "cap": 5000,
+        "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 5000,
         "wrong_stationary": 0
       },
       "full_n": null,
@@ -1282,8 +1310,9 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 4999,
-        "wrong_stationary": 1
+        "divergence": 0,
+        "not_converged": 1,
+        "wrong_stationary": 4999
       },
       "full_n": null,
       "history": false,
@@ -1328,6 +1357,7 @@
         "cap": 2,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": null,

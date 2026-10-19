@@ -85,7 +85,7 @@ def test_full_grid_follows_the_environment(monkeypatch):
 def test_failure_classes_follow_the_harness_order():
     assert classify_client(calls=10000, reason="2", cap=10000)["failure"] == "cap"
     under = classify_client(calls=40, reason="5", cap=10000)
-    assert under["failure"] == "divergence"
+    assert under["failure"] == "not_converged"
     assert under["success"] is False
     mode = classify_client(calls=43, reason="5", cap=10000, overlap_ok=True)
     assert mode["success"] is True

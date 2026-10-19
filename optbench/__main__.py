@@ -306,6 +306,22 @@ def statistics(
     )
 
 
+@app.command(name="taxonomy-diff")
+def taxonomy_diff(
+    root: Path = Path("."),
+    output: Path = Path("docs/failure-taxonomy-diff.md"),
+) -> None:
+    """Rescore stored starts and write the class and PAR-2 diff."""
+    from optbench.taxonomy_diff import write_diff
+
+    destination = output if output.is_absolute() else root / output
+    document = write_diff(root, destination)
+    print(
+        f"wrote {destination} and {destination.with_suffix('.json')} "
+        f"scored={document['scored']} changed={document['changed']} starts={document['starts']}"
+    )
+
+
 @app.command
 def sitesize(
     root: Path = Path("."),

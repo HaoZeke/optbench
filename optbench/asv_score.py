@@ -100,6 +100,25 @@ def _missing(value) -> bool:
     return isinstance(value, float) and math.isnan(value)
 
 
+def _optional_column(result, class_name: str, method: str, params, count: int):
+    """Values for a track that older result files do not carry.
+
+    ``None`` means the track is absent. A present track has one value per parameter.
+    """
+    suffix = f"{class_name}.{method}"
+    matches = [key for key in result.get_all_result_keys() if key.endswith(suffix)]
+    if not matches:
+        return None
+    if len(matches) != 1:
+        raise SystemExit(f"{suffix} matched {matches} in commit {result.commit_hash}")
+    values = result.get_result_value(matches[0], params)
+    if not isinstance(values, list):
+        values = [values]
+    if len(values) != count:
+        raise SystemExit(f"{class_name}.{method} has {len(values)} values for {count} parameters")
+    return values
+
+
 def track_rows(result, class_name: str) -> list[dict]:
     """One dict per parameter combination, in asv's product order."""
     force_key = _key(result, class_name, "track_force_calls")
@@ -114,15 +133,22 @@ def track_rows(result, class_name: str) -> list[dict]:
         if len(values) != len(combos):
             raise SystemExit(f"{class_name}.{method} has {len(values)} values for {len(combos)} parameters")
         columns[method] = values
+    not_converged = _optional_column(result, class_name, "track_failure_not_converged", params, len(combos))
     version = result.benchmark_version.get(force_key)
     rows = []
     for index, combo in enumerate(combos):
         raw = {method: columns[method][index] for method in TRACKS}
+        if not_converged is not None:
+            raw["track_failure_not_converged"] = not_converged[index]
         for method, value in raw.items():
             if _missing(value):
                 raise SystemExit(f"{class_name} {combo} {method} was skipped or failed")
         success = float(raw["track_success"])
-        hits = [name for name in FAILURES if float(raw[f"track_failure_{name}"]) == 1.0]
+        hits = [
+            name
+            for name in FAILURES
+            if raw.get(f"track_failure_{name}") is not None and float(raw[f"track_failure_{name}"]) == 1.0
+        ]
         if success == 1.0:
             if hits:
                 raise SystemExit(f"{class_name} {combo} is a success with failure tracks {hits}")

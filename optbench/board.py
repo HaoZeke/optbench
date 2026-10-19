@@ -35,7 +35,7 @@ from pathlib import Path
 
 from .campaign import geometry_archive, list_templates
 from .dat import DatError, parse_lenient
-from .failures import FAILURES
+from .failures import FAILURES, apply_taxonomy, components_for
 from .problems import load_all
 from .profile import performance_profile, profile_cost
 from .score import normalize_start, score_v2
@@ -312,7 +312,12 @@ def _force_tol(problem: dict | None, template: dict | None) -> float | None:
     return None
 
 
-def _record_from_raw(raw: dict, cap: int | None, force_tol: float | None) -> dict | None:
+def _record_from_raw(
+    raw: dict,
+    cap: int | None,
+    force_tol: float | None,
+    problem_id: str | None = None,
+) -> dict | None:
     if not isinstance(raw, dict):
         return None
     calls = raw.get("force_calls", raw.get("raw", raw.get("per_search")))
@@ -344,25 +349,51 @@ def _record_from_raw(raw: dict, cap: int | None, force_tol: float | None) -> dic
             pass
     if raw.get("call_unit"):
         record["call_unit"] = str(raw["call_unit"])
-    if success:
-        return record
-    if failure in FAILURES:
+    for key in (
+        "energy",
+        "force_norm",
+        "geometry",
+        "coords",
+        "x",
+        "point",
+        "positions",
+        "hessian_index",
+        "expected_index",
+        "reasons",
+        "error",
+        "sigma",
+        "max_displacement",
+        "displacement_bound",
+        "client_reason",
+        "problem",
+        "overlap",
+        "lammps_stop",
+        "step_limit",
+        "replica_stops",
+        "replica_blocks",
+    ):
+        if key not in raw or raw[key] is None:
+            continue
+        if key in {"geometry", "coords", "x", "point", "positions"} and isinstance(raw[key], str):
+            continue
+        record[key] = raw[key]
+    record["success"] = success
+    if failure is not None:
         record["failure"] = failure
-        return record
-    reasons = raw.get("reasons")
-    if isinstance(reasons, list) and reasons:
-        record["reasons"] = [str(item) for item in reasons]
-        return record
-    if raw.get("error"):
-        record["failure"] = "crash"
-    elif cap is not None and calls >= cap:
-        record["failure"] = "cap"
-    elif force_tol is not None and raw.get("force_norm") not in (None, ""):
-        try:
-            above = float(raw["force_norm"]) > force_tol
-        except (TypeError, ValueError):
-            above = True
-        record["failure"] = "divergence" if above else "wrong_stationary"
+    revised = apply_taxonomy(
+        record,
+        cap,
+        force_tol,
+        components_for(record, problem_id or (raw.get("problem") if isinstance(raw, dict) else None)),
+    )
+    record["success"] = revised["success"]
+    if "force_tol" in revised:
+        record["force_tol"] = revised["force_tol"]
+    if revised.get("failure") is None:
+        record.pop("failure", None)
+        record.pop("reasons", None)
+    else:
+        record["failure"] = revised["failure"]
     return record
 
 
@@ -384,11 +415,12 @@ def _load_group_records(
     cap: int | None,
     force_tol: float | None,
     images: int | None = None,
+    problem_id: str | None = None,
 ) -> tuple[list[dict], str]:
     if "starts_jsonl" in group:
         collected = []
         for raw in _json_lines(group["starts_jsonl"]):
-            record = _record_from_raw(normalize_start(raw, images), cap, force_tol)
+            record = _record_from_raw(normalize_start(raw, images), cap, force_tol, problem_id)
             if record is not None:
                 collected.append(record)
         if collected:
@@ -396,7 +428,7 @@ def _load_group_records(
     if "starts" in group:
         collected = []
         for raw in _json_lines(group["starts"]):
-            record = _record_from_raw(normalize_start(raw, images), cap, force_tol)
+            record = _record_from_raw(normalize_start(raw, images), cap, force_tol, problem_id)
             if record is not None:
                 collected.append(record)
         if collected:
@@ -407,7 +439,7 @@ def _load_group_records(
         collected = []
         for run in runs:
             for raw in run.get("starts") or []:
-                record = _record_from_raw(normalize_start(raw, images), cap, force_tol)
+                record = _record_from_raw(normalize_start(raw, images), cap, force_tol, problem_id)
                 if record is not None:
                     collected.append(record)
         if collected:
@@ -721,7 +753,7 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
         force_tol = _force_tol(problem, template)
         images = _image_count(problem, template, fields)
         try:
-            records, record_source = _load_group_records(group, cap, force_tol, images)
+            records, record_source = _load_group_records(group, cap, force_tol, images, problem_id)
         except (json.JSONDecodeError, OSError, ValueError) as exc:
             unparsed.append(
                 _blank_row(
@@ -904,7 +936,7 @@ def _asv_rows(root: Path, problems: dict[str, dict], templates: dict[str, dict])
                         "failure": item["failure"],
                     }
                     raw = normalize_start(raw, images, per_image_track=per_image_track)
-                    record = _record_from_raw(raw, cap, _force_tol(problem, source_template or template))
+                    record = _record_from_raw(raw, cap, _force_tol(problem, source_template or template), problem_id)
                     if record is not None:
                         record["start"] = tuple(item.get("params") or ())
                         records.append(record)
