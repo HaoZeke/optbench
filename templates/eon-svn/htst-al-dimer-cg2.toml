@@ -1,0 +1,61 @@
+id = "eon-svn/htst-al-dimer-cg2"
+engine = "eon"
+problem = "hTST/Al"
+code = "Eon"
+code_version = "r2006"
+commit = "r2006"
+algorithm = "Dimer-CG rotation: max=10 tol=1"
+reducer = "harness-htst"
+kind = "htst"
+paper_baseline = true
+seeds = [42]
+starts = ["al"]
+geometry = "website/hTST/Al/eon-dimer-cg2/pos.con"
+note = """
+AKMC on the Al adatom. The client is the henkelman eon tree with the r2006 ImprovedDimer conjugate-gradient update, theta = F_R + thetaOld * F_R_Old.norm() * gamma, built with gfortran and without NO_FORTRAN so eam_al is the Fortran Aluminum EAM. Temperature 300 K, seed 42, confidence 1.95, confidence_scheme old. rotations_max 10, converged_angle 1, improved true. finite_difference is omitted so the client keeps 0.01. displace_atom_list 384 is the adatom (archive displace_atomlist -1). Radius 3.3, magnitude 0.5, listed weight 1. Optimizer convergence_metric max_atom, converged_force 0.001, max_iterations 5000, saddle max_energy 100. Prefactor 1.2e12. The local communicator runs 8 clients with num_jobs 32. A window is the 2014 report.py reduction on sad-fcs: barrier windows close on the eight reference processes, and rate windows close at 0.999 of rate_ref.
+"""
+
+[ini.Main]
+job = "akmc"
+temperature = 300
+random_seed = 42
+
+[ini.Potential]
+potential = "eam_al"
+
+[ini.Optimizer]
+opt_method = "cg"
+convergence_metric = "max_atom"
+converged_force = 0.001
+max_iterations = 5000
+
+[ini.AKMC]
+confidence = 1.95
+server_side_process_search = false
+confidence_scheme = "old"
+
+[ini."Process Search"]
+minimize_first = true
+
+[ini.Communicator]
+type = "local"
+num_jobs = 32
+number_of_CPUs = 8
+client_path = "eonclient"
+
+[ini."Saddle Search"]
+min_mode_method = "dimer"
+displace_listed_atom_weight = 1.0
+displace_atom_list = "384"
+displace_radius = 3.3
+displace_magnitude = 0.5
+max_energy = 100.0
+
+[ini.Prefactor]
+default_value = 1.2e12
+
+[ini.Dimer]
+improved = true
+opt_method = "cg"
+converged_angle = 1
+rotations_max = 10

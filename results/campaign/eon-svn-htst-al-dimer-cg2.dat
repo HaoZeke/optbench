@@ -1,0 +1,23 @@
+barrier_jobs 45
+barrier_force_calls 2.171e+04
+barrier_windows 437
+rate_jobs 1658
+rate_force_calls  7.850e+05
+rate_windows 11
+searches 20032
+missed_barriers 0
+unexpected_barriers 0
+reference_processes 8
+code Eon
+code_version r2006
+commit r2006
+counter htst-reducer
+reducer harness-htst
+contributor Rohit Goswami
+random_seed 42
+communicator_jobs 8
+algorithm Dimer-CG rotation: max=10 tol=1
+template eon-svn/htst-al-dimer-cg2
+problem hTST/Al
+count_keys sad-fcs
+partial true
