@@ -19,6 +19,7 @@ from pathlib import Path
 
 NATIVE = Path(__file__).resolve().parent / "native"
 _KERNEL_SRC = NATIVE / "kernels.c"
+_QUENCH_SRC = NATIVE / "lj_quench.c"
 _BRIDGE_SRC = NATIVE / "extpot_bridge.c"
 _CFLAGS = [
     "-std=c11",
@@ -271,3 +272,150 @@ def lj_capped_gradient(coords, core_radius: float, cutoff: float = 40.0):
     if code != 0:
         return None
     return float(energy.value), grad, float(minimum.value)
+
+
+class _QuenchOut(ctypes.Structure):
+    _fields_ = [
+        ("energy", ctypes.c_double),
+        ("min_distance", ctypes.c_double),
+        ("calls", ctypes.c_int),
+        ("code", ctypes.c_int),
+        ("capped", ctypes.c_int),
+    ]
+
+
+_QUENCH: ctypes.CDLL | None | bool = None
+
+
+def _nlopt_dirs() -> tuple[Path, Path] | None:
+    """Include and lib directories for the installed NLopt C library."""
+    import importlib.util
+
+    spec = importlib.util.find_spec("_nlopt")
+    if spec is None or not spec.origin:
+        return None
+    library = Path(spec.origin).resolve().parents[2]
+    include = library.parent / "include"
+    if not (include / "nlopt.h").is_file():
+        return None
+    if not any(library.glob("libnlopt.so*")):
+        return None
+    return include, library
+
+
+def quench_library() -> ctypes.CDLL | None:
+    """NLopt LD_LBFGS quench linked against the capped kernel, or ``None``."""
+    global _QUENCH
+    if not enabled():
+        return None
+    if _QUENCH is False:
+        return None
+    if isinstance(_QUENCH, ctypes.CDLL):
+        return _QUENCH
+    dirs = _nlopt_dirs()
+    if dirs is None or not _QUENCH_SRC.is_file() or not _KERNEL_SRC.is_file():
+        _QUENCH = False
+        return None
+    include, library = dirs
+    stamp = hashlib.sha256(_KERNEL_SRC.read_bytes() + b"\0" + _QUENCH_SRC.read_bytes()).hexdigest()[:16]
+    dest = _build_dir() / f"lj-quench-{stamp}.so"
+    if not dest.is_file():
+        temporary = dest.with_suffix(dest.suffix + ".tmp")
+        gcc = shutil.which("gcc")
+        if gcc is None:
+            _QUENCH = False
+            return None
+        result = subprocess.run(
+            [
+                gcc,
+                *_CFLAGS,
+                "-fPIC",
+                "-shared",
+                f"-I{include}",
+                "-o",
+                str(temporary),
+                str(_KERNEL_SRC),
+                str(_QUENCH_SRC),
+                f"-L{library}",
+                "-lnlopt",
+                "-lm",
+                f"-Wl,-rpath,{library}",
+            ],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        if result.returncode != 0:
+            temporary.unlink(missing_ok=True)
+            dest.with_suffix(dest.suffix + ".log").write_text(result.stderr, encoding="utf-8")
+            _QUENCH = False
+            return None
+        temporary.replace(dest)
+        dest.chmod(dest.stat().st_mode | 0o755)
+    lib = ctypes.CDLL(str(dest))
+    lib.optbench_lj_quench.argtypes = [
+        ctypes.POINTER(ctypes.c_double),
+        ctypes.c_int,
+        ctypes.c_int,
+        ctypes.c_int,
+        ctypes.c_int,
+        ctypes.c_double,
+        ctypes.c_double,
+        ctypes.c_double,
+        ctypes.c_double,
+        ctypes.POINTER(_QuenchOut),
+    ]
+    lib.optbench_lj_quench.restype = ctypes.c_int
+    _QUENCH = lib
+    return lib
+
+
+def lj_lbfgs_quench(
+    origin,
+    *,
+    cap: int,
+    local_max: int,
+    window: int,
+    maxstep: float,
+    tolg: float,
+    core_radius: float,
+    cutoff: float = 40.0,
+):
+    """One step-capped LD_LBFGS quench.
+
+    Returns ``(point, energy, min_distance, calls, code, capped)``, or
+    ``None`` when the native quench is unavailable. ``calls`` counts fresh
+    geometries only. ``capped`` means the next geometry was refused.
+    """
+    import numpy as np
+
+    lib = quench_library()
+    if lib is None:
+        return None
+    point = np.array(origin, dtype=np.float64, copy=True).reshape(-1)
+    if point.size % 3 != 0:
+        raise ValueError("positions must be x, y, z triples")
+    out = _QuenchOut()
+    pointer = ctypes.POINTER(ctypes.c_double)
+    code = lib.optbench_lj_quench(
+        point.ctypes.data_as(pointer),
+        int(point.size),
+        int(cap),
+        int(local_max),
+        int(window),
+        float(maxstep),
+        float(tolg),
+        float(core_radius),
+        float(cutoff),
+        ctypes.byref(out),
+    )
+    if code != 0:
+        return None
+    return (
+        point,
+        float(out.energy),
+        float(out.min_distance),
+        int(out.calls),
+        int(out.code),
+        bool(out.capped),
+    )

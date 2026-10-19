@@ -20,13 +20,16 @@ step cap, and one long step dissociates the cluster, so each trial step
 is a cube of half-width ``maxstep`` recentered on the current point.
 Pairs inside ``core_radius`` use a quadratic stand-in matched to the
 12-6 value and slope. Outside that radius the search value is the
-harness potential.
+harness potential. The quench calls the NLopt C API directly. A fresh
+geometry is still one harness force call, and a repeated coordinate is
+not counted again.
 """
 
 from __future__ import annotations
 
 import json
 import math
+import os
 import time
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
@@ -275,6 +278,43 @@ def _harness_value(counter: HarnessCounter, coords: np.ndarray) -> tuple[float, 
     return float(value), np.asarray(gradient, dtype=np.float64)
 
 
+def _native_quench(
+    counter: HarnessCounter,
+    origin: np.ndarray,
+    *,
+    cap: int,
+    local_max: int,
+    maxstep: float,
+    tolg: float,
+    core_radius: float,
+    window: int,
+) -> tuple[np.ndarray, float, int | None] | None:
+    """The C quench, or ``None`` when that library cannot be built."""
+    from optbench.fastpot import lj_lbfgs_quench
+
+    remaining = int(cap) - int(counter.calls)
+    if remaining <= 0:
+        raise ForceCallCap(f"force-call cap {cap}")
+    got = lj_lbfgs_quench(
+        origin,
+        cap=remaining,
+        local_max=int(local_max),
+        window=int(window),
+        maxstep=float(maxstep),
+        tolg=float(tolg),
+        core_radius=float(core_radius),
+    )
+    if got is None:
+        return None
+    point, energy, minimum, calls, code, capped = got
+    counter.calls += int(calls)
+    if capped:
+        raise ForceCallCap(f"force-call cap {cap}")
+    if minimum < float(core_radius):
+        energy, _gradient = _harness_value(counter, point)
+    return np.asarray(point, dtype=np.float64), float(energy), None if int(code) == 0 else int(code)
+
+
 def _quench(
     counter: HarnessCounter,
     origin: np.ndarray,
@@ -284,8 +324,23 @@ def _quench(
     maxstep: float,
     tolg: float,
     core_radius: float,
+    window: int = 100,
 ) -> tuple[np.ndarray, float, int | None]:
     """Step-limited LD_LBFGS. The returned energy is the harness value."""
+    native = None
+    if os.environ.get("OPTBENCH_PYTHON_QUENCH") != "1":
+        native = _native_quench(
+            counter,
+            origin,
+            cap=cap,
+            local_max=local_max,
+            maxstep=maxstep,
+            tolg=tolg,
+            core_radius=core_radius,
+            window=window,
+        )
+    if native is not None:
+        return native
     import nlopt
 
     x = np.asarray(origin, dtype=np.float64).reshape(-1).copy()
@@ -319,7 +374,7 @@ def _quench(
         opt.set_xtol_rel(1e-14)
         opt.set_ftol_abs(1e-14)
         remain = min(local_max - (counter.calls - opened), cap - counter.calls)
-        opt.set_maxeval(max(1, min(100, remain)))
+        opt.set_maxeval(max(1, min(int(window), remain)))
         opt.set_param("tolg", tolg)
         before = counter.calls
         try:
@@ -384,6 +439,7 @@ def _run_basin_hop(job: dict) -> dict:
             "maxstep": float(job["maxstep"]),
             "tolg": float(job["tolg"]),
             "core_radius": float(job["core_radius"]),
+            "window": int(job.get("lbfgs_window") or 100),
         }
         rng = np.random.default_rng(int(job["seed"]))
         started = time.perf_counter()

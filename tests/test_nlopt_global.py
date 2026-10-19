@@ -342,6 +342,39 @@ def test_the_native_core_matches_the_numpy_core():
     assert np.max(np.abs(got[1] - raw_grad)) < 1e-8
 
 
+def test_the_c_quench_matches_the_python_quench(monkeypatch):
+    from optbench.counter import HarnessCounter
+    from optbench.fastpot import quench_library
+    from optbench.runners.nlopt_global import _quench
+
+    if quench_library() is None:
+        pytest.skip("native quench is unavailable")
+    _energy, _force, coords = reference_minimum()
+    rng = np.random.default_rng(2)
+    trial = coords + rng.normal(scale=0.05, size=coords.size)
+    trial = trial.reshape(-1, 3)
+    trial -= trial.mean(axis=0)
+    trial = trial.reshape(-1)
+    kwargs = {
+        "cap": 20000,
+        "local_max": 4000,
+        "maxstep": 0.2,
+        "tolg": 1e-5,
+        "core_radius": 0.9,
+        "window": 100,
+    }
+    monkeypatch.setenv("OPTBENCH_PYTHON_QUENCH", "1")
+    python_counter = HarnessCounter(cache=True, cap=20000)
+    python_point, python_energy, python_code = _quench(python_counter, trial, **kwargs)
+    monkeypatch.setenv("OPTBENCH_PYTHON_QUENCH", "0")
+    native_counter = HarnessCounter(cache=True, cap=20000)
+    native_point, native_energy, native_code = _quench(native_counter, trial, **kwargs)
+    assert native_counter.calls == python_counter.calls
+    assert native_energy == python_energy
+    assert native_code == python_code
+    assert np.array_equal(native_point, python_point)
+
+
 def test_wales_cluster_archives_load_numbered_coords(tmp_path: Path):
     from optbench.campaign import resolve_problem
     from optbench.runners.nlopt_global import _load_geometries
