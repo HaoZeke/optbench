@@ -33,7 +33,7 @@
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">eOn band rows are not yet on the harness counter. Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
+   <p class="bench-gaps">eOn and Gman band rows are not yet on the harness counter. Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
    <figure class="bench-plot"><a href="../../_static/board/neb-Pt-heptamer-profile.svg"><picture><source srcset="../../_static/board/neb-Pt-heptamer-profile.webp" type="image/webp"><img src="../../_static/board/neb-Pt-heptamer-profile.png" alt="Dolan-More profile for neb/Pt-heptamer" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/neb-Pt-heptamer-cost.svg"><picture><source srcset="../../_static/board/neb-Pt-heptamer-cost.webp" type="image/webp"><img src="../../_static/board/neb-Pt-heptamer-cost.png" alt="Cost versus success for neb/Pt-heptamer" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="Pt-heptamer-templates">
@@ -77,6 +77,7 @@
    </ul>
    <h3>Not a harness score</h3><ul>
    <li>eon/neb-pt-lbfgs-m100 eOn n=13, not yet on the harness counter.</li>
+   <li>gman/neb-pt-sd Gman n=13, not yet on the harness counter.</li>
    </ul>
    <h3>Not scored</h3><ul>
    <li>eon-cg: no per-start record; does not reproduce the 2014 archive</li>
