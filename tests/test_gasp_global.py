@@ -89,6 +89,74 @@ def test_lj38_energy_stop_follows_the_problem_reference():
     assert _energy_limit(problem, template) == float(problem["reference"]["energy"]) + 0.001
 
 
+def test_fast_merge_matches_the_gasp_scan():
+    import sys
+
+    try:
+        import numpy as np
+    except ImportError:
+        import pytest
+
+        pytest.skip("numpy is not installed")
+    gasp_root = Path("/tmp/GASP-python")
+    if not (gasp_root / "gasp" / "variations.py").is_file():
+        import pytest
+
+        pytest.skip("GASP source is not on this machine")
+    sys.path.insert(0, str(gasp_root))
+    try:
+        import pymatgen  # noqa: F401
+        from gasp.development import Constraints
+        from gasp.general import Cell, CompositionSpace
+        from gasp.geometry import Cluster
+        from gasp.variations import Mating
+    except ImportError:
+        import pytest
+
+        pytest.skip("pymatgen is not installed")
+    from optbench.runners import gasp_global
+
+    original = Mating.merge_sites
+    held = gasp_global._install_merge_sites
+    gasp_global._install_merge_sites = lambda: None
+    try:
+        gasp_global.install_shims()
+    except Exception:
+        gasp_global._install_merge_sites = held
+        raise
+    mating = Mating({"fraction": 0.5})
+    geometry = Cluster({"shape": "cluster"})
+    constraints = Constraints(None, CompositionSpace(["C", "Al"]))
+
+    def cell_for(seed: int, count: int, species: list[str]) -> Cell:
+        rng = np.random.default_rng(seed)
+        coords = rng.random((count, 3)) * 16.0
+        for _ in range(max(2, count // 6)):
+            coords[int(rng.integers(0, count))] = coords[int(rng.integers(0, count))] + rng.normal(scale=0.2, size=3)
+        coords[-1] = coords[0]
+        return Cell([[60, 0, 0], [0, 55, 0], [0, 0, 50]], species, coords, coords_are_cartesian=True)
+
+    def same(left, right) -> bool:
+        return (
+            left.num_sites == right.num_sites
+            and np.array_equal(left.lattice.matrix, right.lattice.matrix)
+            and np.array_equal(np.asarray(left.frac_coords), np.asarray(right.frac_coords))
+            and [str(site.specie) for site in left] == [str(site.specie) for site in right]
+        )
+
+    cases = [cell_for(seed, 36, ["C"] * 36) for seed in range(4)]
+    mixed = ["C" if index % 3 else "Al" for index in range(30)]
+    cases.append(cell_for(9, 30, mixed))
+    try:
+        lefts = [original(mating, source.copy(), geometry, constraints) for source in cases]
+    finally:
+        gasp_global._install_merge_sites = held
+    gasp_global._install_merge_sites()
+    for source, left in zip(cases, lefts, strict=True):
+        right = Mating.merge_sites(mating, source.copy(), geometry, constraints)
+        assert same(left, right)
+
+
 def test_lj75_uses_the_problem_rule(tmp_path: Path):
     template = next(row for row in list_templates(ROOT) if row["id"] == "gasp/lj75-default")
     problem = resolve_problem(ROOT, "globalopt/lj75")

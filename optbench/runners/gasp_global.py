@@ -12,7 +12,9 @@ removed, ``species_and_occu`` is now ``species``, ``Structure.to`` takes
 the filename before the format, and ``Lattice.from_lengths_and_angles``
 is ``from_parameters``. ``PeriodicSite.__eq__`` is the same tolerance
 test without a NumPy call, because GASP looks sites up with
-``list.index``. The energy parser
+``list.index``. Mating records that first equal index once per merge
+and uses the same periodic pair distances, so the cubic lookup does not
+change which sites merge. The energy parser
 in that revision reads the second thermo line. This runner reads the
 final value of ``Energy initial, next-to-last, final`` instead, and the
 input sets ``thermo_modify norm no`` so that value is the extensive
@@ -249,6 +251,90 @@ def _release_heap() -> None:
     ctypes.CDLL("libc.so.6").malloc_trim(0)
 
 
+def _first_equal_index(sites) -> list[int]:
+    """The index ``sites.index`` would return for each site."""
+    first = list(range(len(sites)))
+    for i, site in enumerate(sites):
+        for j in range(i):
+            if sites[j] == site:
+                first[i] = j
+                break
+    return first
+
+
+def _pair_distances(lattice, sites):
+    """Periodic distances from ``PeriodicSite.distance``, one lattice call."""
+    import numpy as np
+    from pymatgen.util.coord import pbc_shortest_vectors
+
+    frac = np.vstack([np.asarray(site.frac_coords, dtype=np.float64) for site in sites])
+    _vectors, squared = pbc_shortest_vectors(lattice, frac, frac, return_d2=True)
+    return np.sqrt(squared)
+
+
+def _install_merge_sites() -> None:
+    """Same mating merges, without a cubic ``list.index`` scan.
+
+    A separation within ``1e-7`` of the cutoff is decided by
+    ``PeriodicSite.distance``, which is the comparison GASP uses.
+    """
+    import numpy as np
+    from gasp.general import Cell
+    from gasp.variations import Mating
+    from pymatgen.core.periodic_table import Element
+
+    if getattr(Mating.merge_sites, "_optbench_merge", False):
+        return
+
+    def merge_sites(self, cell, geometry, constraints):
+        species = []
+        frac_coords = []
+        merged_indices = []
+        geometry.pad(cell)
+        if cell.num_sites > 1:
+            cell.merge_sites(mode="delete")
+        sites = list(cell.sites)
+        first = _first_equal_index(sites)
+        dist = _pair_distances(cell.lattice, sites) if sites else None
+        for pos, site in enumerate(sites):
+            if first[pos] not in merged_indices:
+                symbol = site.specie.symbol
+                element = Element(site.specie.symbol)
+                a_radius = element.atomic_radius
+                site_index = first[pos]
+                limit = a_radius * self.merge_cutoff
+                for other_pos, other_site in enumerate(sites):
+                    other_symbol = other_site.specie.symbol
+                    other_index = first[other_pos]
+                    if (
+                        other_index not in merged_indices
+                        and other_index != site_index
+                        and other_symbol == symbol
+                    ):
+                        separation = float(dist[pos, other_pos])
+                        close = separation < limit
+                        if abs(separation - limit) <= 1e-7:
+                            close = site.distance(other_site) < limit
+                        if close:
+                            merged_indices.append(other_index)
+                            merged_indices.append(site_index)
+                            new_frac_coords = np.add(site.frac_coords, other_site.frac_coords) / 2
+                            species.append(site.specie)
+                            frac_coords.append(new_frac_coords)
+        for pos, site in enumerate(sites):
+            if first[pos] not in merged_indices:
+                species.append(site.specie)
+                frac_coords.append(site.frac_coords)
+        new_cell = Cell(cell.lattice, species, frac_coords)
+        geometry.unpad(new_cell, constraints)
+        if len(new_cell.sites) < len(cell.sites):
+            return self.merge_sites(new_cell, geometry, constraints)
+        return new_cell
+
+    merge_sites._optbench_merge = True
+    Mating.merge_sites = merge_sites
+
+
 def install_shims() -> None:
     """Make GASP 0.1 importable. Safe to call more than once."""
     import yaml
@@ -267,6 +353,7 @@ def install_shims() -> None:
 
         Lattice.from_lengths_and_angles = classmethod(from_lengths_and_angles)
     _install_site_equality()
+    _install_merge_sites()
 
     if not hasattr(Structure, "modify_lattice"):
 
