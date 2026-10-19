@@ -745,6 +745,11 @@ def run_case(
     from .potserver import PotServer, remote_count
 
     template = load_template(ROOT, template_name)
+    if template_name in {
+        "eon-client/htst-pt-dimer-lbfgs",
+        "eon-client/htst-pt-lanczos-lbfgs",
+    }:
+        raise RuntimeError(f"{template_name} is the 13-window sample in optbench.eon_htst")
     family = _family_of(template)
     kind = str(template["kind"])
     if passes is None:
