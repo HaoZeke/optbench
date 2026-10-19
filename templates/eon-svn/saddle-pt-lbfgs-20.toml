@@ -1,0 +1,54 @@
+id = "eon-svn/saddle-pt-lbfgs-20"
+engine = "eon-client"
+problem = "saddle-search/pt-island"
+code = "EON"
+code_version = "(SVN r2549)"
+commit = "r2549"
+algorithm = "Dimer L-BFGS"
+reducer = "harness"
+failure_cap = 5064
+tuning = "default"
+note = """EON, the SVN code, at r2549. This is not a version of eOn. Stock and untuned: the ini carries the archive keys the r2549 schema accepts, and dimer improved and dimer opt_method are unset so the r2549 client default remains. Optimizer L-BFGS, converged_force 0.001, max_iterations 1000, max_move 0.2. Dimer rotations_max 20, converged_angle 5. Displacement atoms 0-6, radius 3.3, magnitude 0.1, listed weight 1. Temperature 700 K, confidence 1.1, thermally_accessible_window 99999, minimize_first, prefactor default_value 5e12, max_energy 5, num_jobs 10. The potential the client evaluates is ext_pot. The harness kernel is morse/smooth/linear. The run stops at 27 client-good saddles below 1.5 eV, the 2014 done.py line. The ranked score is the harness per-search record, not a retune toward the archived mean."""
+
+[ini.Main]
+job = "akmc"
+temperature = 700
+
+[ini.Potential]
+potential = "ext_pot"
+ext_pot_path = "extpot-bridge"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+converged_force = 0.001
+max_iterations = 1000
+max_move = 0.2
+
+[ini.AKMC]
+confidence = 1.1
+thermally_accessible_window = 99999
+
+[ini."Process Search"]
+minimize_first = true
+
+[ini.Communicator]
+type = "local"
+num_jobs = 10
+number_of_CPUs = 4
+client_path = "eonclient"
+
+[ini."Saddle Search"]
+min_mode_method = "dimer"
+displace_listed_atom_weight = 1
+displace_atom_list = "0,1,2,3,4,5,6"
+displace_radius = 3.3
+displace_magnitude = 0.1
+max_energy = 5.0
+max_iterations = 1000
+
+[ini.Dimer]
+rotations_max = 20
+converged_angle = 5.0
+
+[ini.Prefactor]
+default_value = 5e12
