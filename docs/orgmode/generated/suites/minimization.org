@@ -828,7 +828,7 @@
    <li>eon-client/morse-cg: no per-start record</li>
    <li>eon-client/morse-fire: no per-start record</li>
    <li>eon-client/morse-lbfgs: no per-start record</li>
-   <li>eon-client/morse-sd: no per-start record; does not reproduce the 2014 archive</li>
+   <li>eon-client/morse-sd: no per-start record</li>
    <li>eon-svn/morse-cg: no per-start record</li>
    <li>eon-svn/morse-fire: no per-start record</li>
    <li>eon-svn/morse-lbfgs: no per-start record</li>
@@ -966,7 +966,7 @@
    </tr>
    <tr id="minimization-morse-bulk-eon-sd">
    <td class="num">11</td>
-   <td class="text">eon-sd · not reproduced</td>
+   <td class="text">eon-sd</td>
    <td class="text">Eon r2030</td>
    <td class="num">196</td>
    <td class="num">360</td>
