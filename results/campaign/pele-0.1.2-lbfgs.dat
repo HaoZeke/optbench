@@ -1,0 +1,16 @@
+# counter harness. pele 0.1.2 stock LBFGS_CPP on the harness Morse.
+# Memory, maxstep, H0, and maxErise are the release defaults.
+# The stop is the archive Euclidean force norm 1e-3.
+# pele 0.1.2, the current release. Stock LBFGS_CPP leaves memory 4, maxstep 0.1, H0 0.1, and maxErise 1e-4 unset. The stop is the archive Euclidean force norm 1e-3. The potential is the harness Morse bulk.
+force_calls 92
+force_calls_min 23
+force_calls_max 220
+nfailed 0
+code pele
+code_version 0.1.2
+commit b7081b932a060be11342fbe8287ac35da8ada879
+algorithm LBFGS
+template pele/lbfgs
+tuning default
+counter harness
+problem minimization/morse-bulk

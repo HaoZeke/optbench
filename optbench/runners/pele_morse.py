@@ -35,9 +35,13 @@ def _quiet() -> None:
         os.environ[name] = "1"
 
 
+def _method(template: dict) -> str:
+    return str((template.get("pele") or {}).get("method") or "")
+
+
 def _section(template: dict) -> dict:
     section = template.get("pele") or {}
-    if str(section.get("method") or "") != "mylbfgs":
+    if _method(template) != "mylbfgs":
         raise ValueError(f"{template['id']} needs pele.method mylbfgs")
     required = ("M", "maxstep", "rho", "A", "r0", "box", "rcut", "natoms")
     missing = [key for key in required if key not in section]
@@ -127,7 +131,7 @@ def _quench(job: dict) -> dict:
     }
 
 
-def _dat(summary: dict, template: dict, note: str) -> str:
+def _dat(summary: dict, template: dict, note: str, header: list[str] | None = None) -> str:
     rows = {
         "force_calls": summary.get("force_calls"),
         "force_calls_min": summary.get("force_calls_min"),
@@ -142,7 +146,7 @@ def _dat(summary: dict, template: dict, note: str) -> str:
         "counter": "harness",
         "problem": template.get("problem"),
     }
-    lines = [
+    lines = header or [
         "# counter harness. One force call is one getEnergyGradient during mylbfgs.",
         "# The 2014 script records that count before its post-quench gradient check.",
         "# nfailed is a final gradient standard deviation above the RMS stop.",
@@ -160,6 +164,134 @@ def _installed_version() -> str:
     from importlib.metadata import version
 
     return version("pele")
+
+
+class _HarnessMorse:
+    """Harness Morse bulk. One force call is one ``getEnergyGradient``."""
+
+    def __init__(self, box):
+        import numpy as np
+
+        from optbench.potentials import morse_bulk
+
+        self._np = np
+        self._morse = morse_bulk
+        self.box = np.asarray(box, dtype=np.float64)
+        self.ncalls = 0
+
+    def getEnergy(self, coords):
+        energy, _gradient = self._morse(coords, self.box)
+        return float(energy)
+
+    def getEnergyGradient(self, coords):
+        self.ncalls += 1
+        energy, gradient = self._morse(coords, self.box)
+        return float(energy), self._np.asarray(gradient, dtype=self._np.float64)
+
+
+def _quench_stock(job: dict) -> dict:
+    _quiet()
+    import io
+    from contextlib import redirect_stdout
+
+    import numpy as np
+    from pele.optimize import lbfgs_cpp
+
+    coords = np.asarray(job["coords"], dtype=np.float64).reshape(-1)
+    # Archive stop: Euclidean force norm 1e-3. pele stops on the RMS.
+    tol = 1.0e-3 / np.sqrt(coords.size)
+    with redirect_stdout(io.StringIO()):
+        potential = _HarnessMorse(job["box"])
+        result = lbfgs_cpp(coords, potential, tol=float(tol))
+    gradient = np.asarray(result.grad, dtype=np.float64).reshape(-1)
+    calls = int(potential.ncalls)
+    force_norm = float(np.linalg.norm(gradient))
+    success = bool(force_norm <= 1.0e-3 and calls < int(job["cap"]))
+    return {
+        "schema": "optbench.start/v2",
+        "start": job["start"],
+        "index": job["index"],
+        "force_calls": calls,
+        "success": success,
+        "failure": None if success else "force_norm",
+        "counter": "harness",
+        "comparable": True,
+        "converged": success,
+        "energy": float(result.energy),
+        "force_norm": force_norm,
+        "code": "pele",
+        "code_version": PELE_VERSION,
+        "commit": PELE_COMMIT,
+        "tuning": job["tuning"],
+    }
+
+
+def _run_stock(
+    root: Path,
+    problem: dict,
+    template: dict,
+    *,
+    geometries: Path | None,
+    output: Path,
+    workers: int,
+    work: Path | None,
+    limit: int,
+) -> dict:
+    from optbench.runners.rgmin_min import _load_geometries
+
+    loaded = _load_geometries(root, problem, geometries, work, output)
+    if limit:
+        loaded = loaded[: int(limit)]
+    if problem["id"] == "minimization/morse-bulk" and geometries is None and not limit and len(loaded) != 100:
+        raise ValueError(f"morse-bulk expected 100 starts, found {len(loaded)}")
+    cap = int((problem.get("convergence") or {}).get("max_force_calls") or 10000)
+    jobs = [
+        {
+            "index": index,
+            "start": name,
+            "coords": coords.tolist(),
+            "box": box.tolist(),
+            "cap": cap,
+            "tuning": str(template.get("tuning") or ""),
+        }
+        for index, (name, coords, box) in enumerate(loaded)
+    ]
+    if workers <= 1:
+        records = [_quench_stock(job) for job in jobs]
+    else:
+        import multiprocessing as mp
+
+        context = mp.get_context("fork")
+        with ProcessPoolExecutor(max_workers=workers, mp_context=context) as pool:
+            records = list(pool.map(_quench_stock, jobs))
+    records.sort(key=lambda row: row["index"])
+    for record in records:
+        record.pop("index", None)
+    calls = [int(record["force_calls"]) for record in records]
+    summary = summarize_capped(calls, cap)
+    summary["force_calls"] = round(sum(calls) / len(calls)) if calls else None
+    summary["force_calls_min"] = min(calls) if calls else None
+    summary["force_calls_max"] = max(calls) if calls else None
+    summary["nfailed"] = sum(1 for record in records if not record["success"])
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(
+        _dat(
+            summary,
+            template,
+            str(template.get("note") or "").strip(),
+            [
+                "# counter harness. pele 0.1.2 stock LBFGS_CPP on the harness Morse.",
+                "# Memory, maxstep, H0, and maxErise are the release defaults.",
+                "# The stop is the archive Euclidean force norm 1e-3.",
+            ],
+        ),
+        encoding="utf-8",
+    )
+    write_starts(output.with_suffix(".starts.jsonl"), records)
+    summary["starts"] = len(records)
+    summary["template"] = template["id"]
+    summary["problem"] = problem["id"]
+    return summary
 
 
 def run_template(
@@ -182,6 +314,17 @@ def run_template(
     stated = template.get("problem")
     if stated and stated != problem["id"]:
         raise ValueError(f"{template['id']} is for {stated}, not {problem['id']}")
+    if _method(template) == "lbfgs_cpp":
+        return _run_stock(
+            root,
+            problem,
+            template,
+            geometries=geometries,
+            output=output,
+            workers=workers,
+            work=work,
+            limit=limit,
+        )
     options = _section(template)
     from optbench.runners.rgmin_min import _load_geometries
 
