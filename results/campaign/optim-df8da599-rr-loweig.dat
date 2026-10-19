@@ -1,13 +1,10 @@
-# counter harness. Each ASE COMPUTE is one pes.evaluate. OPTIM's own counter is not the score.
-# Rayleigh-Ritz EIGENONLY, USEDIAG 3 (forward differences). UPDATES 4 100, MAXBFGS 0.2 2.0, overlap stop 0.99.
+# OPTIM SVNREV df8da599 (df8da599267534fbe43a250e578f7396a7946311), unmodified, stock keywords.
+# counter harness. Each ASE COMPUTE is one pes.evaluate. OPTIM energy+gradient calls are recorded and are not the score.
+# Rayleigh-Ritz EIGENONLY 1.0D-10 0.99, USEDIAG 3 (forward differences). Memory, step, and BFGSTSPC stay at the source defaults.
 # vector.dump is 100 plus the shared initial_mode. target.vector is the per-start mode file.
-# A success is under the cap and absolute overlap of at least 0.99.
-force_calls 24
-force_calls_min 12
-force_calls_max 58
-force_calls_median 22.5
-successes 200
-nfailed 0
+# A success is CONVERGED, under the cap, and absolute overlap of at least 0.99.
+successes 0
+nfailed 200
 n 200
 transition_states 0
 code optim
@@ -16,5 +13,5 @@ commit 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f
 algorithm hybrid eigenvector following
 template optim/rr-loweig
 problem lowest-eigenvector/lj38
-tuning tuned
+tuning stock
 counter harness

@@ -141,9 +141,12 @@ def test_optim_rr_loweig_is_first_order():
     assert template["problem"] == "lowest-eigenvector/lj38"
     assert template["optim"]["method"] == "rr-ffd"
     assert template["optim"]["usediag"] == 3
-    assert template["optim"]["xmupdate"] == 100
-    assert template["optim"]["maxxbfgs"] == 2.0
     assert template["optim"]["cover"] == 0.99
+    assert template["code_version"] == "df8da599"
+    assert template["tuning"] == "stock"
+    assert "xmupdate" not in template["optim"]
+    assert "maxxbfgs" not in template["optim"]
+    assert "bfgstspc" not in template["optim"]
     assert template["commit"] == SHA256
 
 

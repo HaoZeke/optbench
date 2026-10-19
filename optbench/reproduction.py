@@ -156,7 +156,7 @@ MATCHES: list[dict] = [
     {"key": "lowest-eigenvector/lj38/sella", "template": "sella-0.1.1/lj38-loweig", "branch": "cells/fill-not-rerun", "path": "results/campaign/sella-0.1.1-lj38-loweig.dat"},
     {"key": "lowest-eigenvector/lj38/pele-first-order", "template": "pele/lj38-loweig-forward", "branch": "cells/pele/ts", "path": "results/campaign/pele-b7081b93-lj38-loweig-forward.dat"},
     {"key": "lowest-eigenvector/lj38/pele-second-order", "template": "pele/lj38-loweig-central", "branch": "cells/pele/ts", "path": "results/campaign/pele-b7081b93-lj38-loweig-central.dat"},
-    {"key": "lowest-eigenvector/lj38/optim-first-order", "template": "optim/rr-loweig", "branch": "repro/lowest-eigenvector-lj38-optim-first-order", "path": "results/campaign/optim-df8da599-rr-loweig.dat"},
+    {"key": "lowest-eigenvector/lj38/optim-first-order", "template": "optim/rr-loweig", "branch": "repro/lowest-eigenvector-lj38-optim-first-order", "path": "results/campaign/optim-df8da599-rr-loweig.dat", "cause": "optim_rr_stock", "extra": {"code_version": "df8da599", "svnrev": "df8da599267534fbe43a250e578f7396a7946311"}},
     # tsopt
     {"key": "tsopt/LJ38/eon-dimer", "template": "eon-svn/ts-lj38-dimer-ljcut", "branch": "main", "path": "results/campaign/eon-svn-ts-lj38-dimer-ljcut.dat"},
     {"key": "tsopt/LJ38/eon-lanczos", "template": "eon-svn/ts-lj38-lanczos-ljcut", "branch": "main", "path": "results/campaign/eon-svn-ts-lj38-lanczos-ljcut.dat"},
@@ -244,9 +244,15 @@ CAUSE_TEXT = {
         "OPTIM defaults (updates 4) score 46, which is the archived integer, but that is not the comment's setup. "
         "The odata preamble was not archived."
     ),
-    "optim_rr_defaults": (
-        "The Rayleigh-Ritz template uses updates 4. The archived first-order mean is 25 and the second-order mean is 46. "
-        "This default scores 61, so it is not either archived order."
+    "optim_rr_stock": (
+        "Unmodified OPTIM SVNREV df8da599267534fbe43a250e578f7396a7946311, stock keywords, "
+        "USEDIAG 3, and the archive overlap stop 0.99, on the same 200 coords-con starts. "
+        "The stock EIGENONLY path leaves the base gradient unset. "
+        "No start prints CONVERGED. The best overlap is 0.8918. "
+        "Harness calls run from 501 to 515. "
+        "OPTIM exits before the energy+gradient summary, so that native line is absent and the score is the harness count. "
+        "Zero successes, so there is no half-even success mean beside the archived 25. "
+        "nfailed is 200 against 0. The gap is the finding."
     ),
     "pele_fire": "pele FIRE on LJ38 scores 1264 with 7 failures. The archive is 709 with 0 failures. The M100 L-BFGS row on the same build reproduces, so this is the FIRE step, not the LJ kernel.",
     "pele_morse": "pele Morse L-BFGS scores 92. The archive is 51. eOn Morse L-BFGS on the same bulk file reproduces at 52, so the gap is the pele memory and step, not the shared Morse parameters.",
@@ -505,14 +511,23 @@ class Hold:
         return bool(self.templates or self.paths)
 
 
+# Ranked beside the archived paper row. A gap stays a finding.
+_RANK_BESIDE_ARCHIVE = {
+    "lowest-eigenvector/lj38/optim-first-order",
+}
+
+
 def holdback(root: Path) -> Hold:
     """Templates and campaign paths whose archive rerun missed the tolerance.
 
     ``hold`` entries are included for every ledger row. A reproduced
     per-image file can still keep a raw-total template off the table.
+    ``_RANK_BESIDE_ARCHIVE`` stays on the ranked table.
     """
     found = Hold()
     for row in load_ledger(root / "oracle" / "reproduction.jsonl"):
+        if row_id(row) in _RANK_BESIDE_ARCHIVE:
+            continue
         rerun = row.get("rerun") or {}
         problem = f"{row['suite']}/{row['problem']}"
         template = str(rerun.get("template") or "")
@@ -682,6 +697,9 @@ def _gap(checks: list[dict], failure: dict | None) -> str:
             continue
         archive = item["archive"]
         rerun = item["rerun"]
+        if rerun is None:
+            parts.append(f"{item['metric']} has no success mean vs {archive:g}")
+            continue
         if archive:
             relative = abs(rerun - archive) / abs(archive)
             parts.append(f"{item['metric']} {rerun:g} vs {archive:g} ({relative:.1%})")
@@ -753,6 +771,21 @@ def build_rows(root: Path) -> list[dict]:
                 "high": high,
                 "ok": failure_inside(archive_failures, rerun_failures, sample),
             }
+        if (
+            ident == "lowest-eigenvector/lj38/optim-first-order"
+            and not any(item["metric"] == "force_calls" for item in checks)
+        ):
+            archive_mean = _float(fields.get("force_calls"))
+            if archive_mean is not None:
+                checks.append(
+                    {
+                        "metric": "force_calls",
+                        "archive": archive_mean,
+                        "rerun": None,
+                        "se": None,
+                        "ok": False,
+                    }
+                )
         status = judge_checks(checks, failure)
         named = match.get("cause", "")
         cause = named if status == "not_reproduced" else ""
@@ -788,7 +821,9 @@ def build_rows(root: Path) -> list[dict]:
     return built
 
 
-def _fmt(value: float) -> str:
+def _fmt(value: float | None) -> str:
+    if value is None:
+        return "none"
     if abs(value) >= 1000:
         return f"{value:.6g}"
     if abs(value - round(value)) < 1e-6:

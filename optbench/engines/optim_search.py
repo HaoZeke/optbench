@@ -2,16 +2,19 @@
 
 The binary is the OPTIM target from the Wales snapshot
 ``http://www-wales.ch.cam.ac.uk/svn.tar.bz2``. The pin is the sha256 of
-that file. The snapshot has no git commit. Each ``COMPUTE`` on the relay
-is one ``pes.evaluate``. OPTIM's own counter is not the score.
+that file. The snapshot has no git commit. SVNREV in the current tree is
+``df8da599``. Each ``COMPUTE`` on the relay is one ``pes.evaluate``.
+The ranked score is that harness count. OPTIM's own counter is recorded
+and is not the score.
 
 Minimization L-BFGS and the LJ38 Rayleigh-Ritz lowest eigenvector are
 scored. ``optim/unhooked`` and every other template raise before a file
 is written. Noise, saddle search, NEB, and PATHSAMPLE are not this runner.
 
-``EIGENONLY`` used to enter ``BEIG`` with ``GRAD`` unset. ``USEDIAG 3``
-is the forward quotient and reads that base gradient, so the binary must
-include ``optim_eigenonly_grad.patch``.
+The Rayleigh-Ritz row is unmodified stock OPTIM. ``USEDIAG 3`` is the
+first-order forward quotient. ``EIGENONLY``'s second value is the archive
+overlap stop. Memory, step, and the percent-change gate stay at the
+source defaults.
 """
 
 from __future__ import annotations
@@ -32,6 +35,8 @@ ENGINE = "optim"
 CODE = "optim"
 SNAPSHOT = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
 SHA256 = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+SVNREV = "df8da599267534fbe43a250e578f7396a7946311"
+CODE_VERSION = "df8da599"
 _RELAY = Path(__file__).with_name("fmlip_relay.py")
 
 
@@ -84,15 +89,11 @@ def _section(template: dict) -> dict:
 
 
 def _rr_section(template: dict) -> dict:
-    """Rayleigh-Ritz knobs. Defaults match the 2014 pele forward row."""
-    section = _section(template)
+    """Stock Rayleigh-Ritz. Only the method and the overlap stop are set."""
+    section = dict(template.get("optim") or {})
+    section["method"] = str(section.get("method", ""))
     section["usediag"] = int(section.get("usediag", 3))
-    section["xmupdate"] = int(section.get("xmupdate", 100))
-    section["maxxbfgs"] = float(section.get("maxxbfgs", 2.0))
-    section["ceig"] = float(section.get("ceig", 1.0e-4))
     section["cover"] = float(section.get("cover", 0.99))
-    section["bfgstspc"] = float(section.get("bfgstspc", 1.0e10))
-    section["seed"] = int(section.get("seed", 2014))
     return section
 
 
@@ -166,24 +167,32 @@ def _odata(folder: Path, python: str, hook: Path, gmax: float, updates: int, ste
 
 
 def _odata_rr(folder: Path, python: str, hook: Path, section: dict) -> None:
+    """Stock odata. ``1.0D-10`` is the source ``CEIG``. The second value sets ``OVERCONV``."""
     lines = [
         "NOTE optbench",
         f"ASE geom.xyz {python} {hook} dummy dummy cpu FIXCELL NOPBC EV ANG",
-        f"EIGENONLY {_fortran_float(section['ceig'])} {_fortran_float(section['cover'])}",
-        "NOHESS",
+        f"EIGENONLY 1.0D-10 {_fortran_float(section['cover'])}",
         f"USEDIAG {int(section['usediag'])}",
         "READVEC",
         "DUMPVECTOR",
-        "STEPS 100000",
-        f"UPDATES {int(section['updates'])} {int(section['xmupdate'])}",
-        (
-            f"MAXBFGS {_fortran_float(section['maxstep'])} "
-            f"{_fortran_float(section['maxxbfgs'])}"
-        ),
-        f"BFGSTSPC {_fortran_float(section['bfgstspc'])}",
-        f"RANSEED {int(section['seed'])}",
     ]
     (folder / "odata").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def paper_calls(log: str) -> tuple[int | None, bool]:
+    """Field 6 of the last energy+gradient line, and the CONVERGED banner."""
+    calls = None
+    for line in log.splitlines():
+        if "energy+gradient calls" not in line:
+            continue
+        parts = line.split()
+        if len(parts) < 6:
+            continue
+        try:
+            calls = int(float(parts[5]))
+        except ValueError:
+            continue
+    return calls, "**** CONVERGED ****" in log
 
 
 def _write_vector_dump(path: Path, raw_mode: str) -> None:
@@ -389,6 +398,8 @@ def _execute_rr(job: dict) -> dict:
     capped = False
     error = ""
     overlap = 0.0
+    native: int | None = None
+    converged = False
     import tempfile
 
     try:
@@ -420,12 +431,14 @@ def _execute_rr(job: dict) -> dict:
                     )
             except subprocess.TimeoutExpired:
                 error = "OPTIM exceeded 3600s"
+            log = stdout_path.read_text(encoding="utf-8", errors="replace") if stdout_path.is_file() else ""
+            native, converged = paper_calls(log)
             count_path = folder / "calls.txt"
             if count_path.is_file():
                 calls = int(count_path.read_text(encoding="utf-8").strip() or "0")
             capped = (folder / "capped.txt").is_file() or calls >= cap
             overlap = _overlap(_dumped_vector(folder / "vector.dump", nopt), reference)
-            if proc is not None and proc.returncode != 0 and not capped and not error:
+            if proc is not None and proc.returncode != 0 and not capped and not error and not converged:
                 detail = _tail(stderr_path) or _tail(stdout_path) or f"exit {proc.returncode}"
                 error = f"OPTIM exit {proc.returncode}: {detail}"
             elif proc is not None and calls == 0 and not capped and not error:
@@ -438,6 +451,13 @@ def _execute_rr(job: dict) -> dict:
     record = judge_mode(job["name"], calls, cap, overlap, float(job["overlap"]), error)
     record["optim_method"] = "rr-ffd"
     record["usediag"] = int(job["section"]["usediag"])
+    record["optim_energy_gradient_calls"] = native
+    record["optim_converged"] = bool(converged)
+    if record["success"] and not converged:
+        record["success"] = False
+        record["failure"] = "divergence"
+        record["converged"] = False
+        record["reasons"] = list(record.get("reasons") or []) + ["divergence"]
     return record
 
 
@@ -552,27 +572,25 @@ def _run_rr(root, problem, template, settings, scratch, output, workers: int) ->
     ]
     records = run_jobs(jobs, _execute_rr, workers)
     comment = (
+        f"# OPTIM SVNREV {CODE_VERSION} ({SVNREV}), unmodified, stock keywords.\n"
         "# counter harness. Each ASE COMPUTE is one pes.evaluate. "
-        "OPTIM's own counter is not the score.\n"
-        "# Rayleigh-Ritz EIGENONLY, USEDIAG 3 (forward differences). "
-        "UPDATES 4 100, MAXBFGS 0.2 2.0, overlap stop 0.99.\n"
+        "OPTIM energy+gradient calls are recorded and are not the score.\n"
+        "# Rayleigh-Ritz EIGENONLY 1.0D-10 0.99, USEDIAG 3 (forward differences). "
+        "Memory, step, and BFGSTSPC stay at the source defaults.\n"
         "# vector.dump is 100 plus the shared initial_mode. "
         "target.vector is the per-start mode file.\n"
-        "# A success is under the cap and absolute overlap of at least 0.99."
+        "# A success is CONVERGED, under the cap, and absolute overlap of at least 0.99."
     )
     parameters = {
         "method": "rr-ffd",
         "keyword": "EIGENONLY",
         "usediag": section["usediag"],
-        "updates": section["updates"],
-        "xmupdate": section["xmupdate"],
-        "maxstep": section["maxstep"],
-        "maxxbfgs": section["maxxbfgs"],
-        "ceig": section["ceig"],
+        "ceig": 1.0e-10,
         "cover": section["cover"],
-        "bfgstspc": section["bfgstspc"],
-        "seed": section["seed"],
+        "version": CODE_VERSION,
+        "svnrev": SVNREV,
         "counter": "harness",
+        "native_counter": "optim energy+gradient calls",
         "socket": "ASE",
     }
     return write_campaign(

@@ -6,17 +6,10 @@ code = "optim"
 code_version = "df8da599"
 commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
 algorithm = "hybrid eigenvector following"
-tuning = "tuned"
-note = "The archived odata preamble is not in the snapshot. This is the 2014 pele forward search on the same geometries: USEDIAG 3, L-BFGS memory 100, Rayleigh-Ritz max step 2, overlap stop 0.99, shared initial_mode. BFGSTSPC 1e10 keeps the extra percent-change gate from iterating after that overlap. The binary must apply optbench/engines/optim_eigenonly_grad.patch so the base gradient is set. SVNREV in the snapshot is df8da599. Each ASE COMPUTE is one harness call."
+tuning = "stock"
+note = "Unmodified OPTIM SVNREV df8da599267534fbe43a250e578f7396a7946311. Stock keywords. USEDIAG 3 is the first-order forward quotient. EIGENONLY 1.0D-10 0.99 is the source eigenvalue tolerance and the archive overlap stop. READVEC and DUMPVECTOR use the shared initial_mode and the per-start reference. The score is the harness ASE COMPUTE count. OPTIM energy+gradient calls are recorded and are not the score."
 
 [optim]
 method = "rr-ffd"
 usediag = 3
-updates = 4
-xmupdate = 100
-maxstep = 0.2
-maxxbfgs = 2.0
-ceig = 1.0e-4
 cover = 0.99
-bfgstspc = 1.0e10
-seed = 2014
