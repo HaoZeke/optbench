@@ -367,7 +367,7 @@
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">eOn band rows are not yet on the harness counter. Partial rows stay off the ranked table.</p>
+   <p class="bench-gaps">eOn band rows are not yet on the harness counter. optim band rows are off the ranked table. Partial rows stay off the ranked table.</p>
    <figure class="bench-plot"><a href="../../_static/board/double-ended-saddle-search-pt-island-profile.svg"><picture><source srcset="../../_static/board/double-ended-saddle-search-pt-island-profile.webp" type="image/webp"><img src="../../_static/board/double-ended-saddle-search-pt-island-profile.png" alt="Dolan-More profile for double-ended-saddle-search/pt-island" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/double-ended-saddle-search-pt-island-cost.svg"><picture><source srcset="../../_static/board/double-ended-saddle-search-pt-island-cost.webp" type="image/webp"><img src="../../_static/board/double-ended-saddle-search-pt-island-cost.png" alt="Cost versus success for double-ended-saddle-search/pt-island" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="pt-island-templates">
@@ -423,6 +423,7 @@
    <h3>Not a harness score</h3><ul>
    <li>eon/de-pt-lbfgs-m100 eOn n=59, not yet on the harness counter.</li>
    <li>eon/de-pt-lbfgs eOn n=59, not yet on the harness counter.</li>
+   <li>optim/de-pt-6 optim n=59, counter optim.</li>
    </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="pt-island-legacy">

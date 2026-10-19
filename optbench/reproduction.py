@@ -111,6 +111,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+    "repro/double-ended-saddle-search-pt-island-optim-6": "17e1ecc869c6cc342ab18ad7e29536b00934e3f3",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -184,6 +185,7 @@ MATCHES: list[dict] = [
     {"key": "double-ended-saddle-search/pt-island/eon-lanczos", "template": "eon-svn/de-pt-lanczos", "branch": "main", "path": "results/campaign/eon-svn-de-pt-lanczos.dat", "cause": "pt_lanczos"},
     {"key": "double-ended-saddle-search/pt-island/eon-lanczos-improved", "template": "eon-svn/de-pt-lanczos-improved", "branch": "main", "path": "results/campaign/eon-svn-de-pt-lanczos-improved.dat", "cause": "pt_lanczos"},
     {"key": "double-ended-saddle-search/pt-island/optim", "template": "optim/de-pt", "branch": "cells/optim/saddle-pt", "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-pt-island--optim-de-pt.dat", "cause": "optim_pt_units"},
+    {"key": "double-ended-saddle-search/pt-island/optim-6", "template": "optim/de-pt-6", "branch": "repro/double-ended-saddle-search-pt-island-optim-6", "path": "results/campaign/optim-27058-double-ended-saddle-search-pt-island--optim-de-pt-6.dat", "metrics": ["force_calls", "force_calls_median", "force_calls_min", "force_calls_max"]},
     # neb per-image means already stored in the 3.5.0 files
     {"key": "neb/Pt-heptamer/eon-lbfgs", "template": "eon-lbfgs", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-lbfgs.dat", "hold": ["eon-client/neb-pt-lbfgs", "eon/neb-pt-lbfgs"]},
     {"key": "neb/Pt-heptamer/eon-cg", "template": "eon-cg", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-cg.dat", "cause": "heptamer_cg", "hold": ["eon-client/neb-pt-cg"]},

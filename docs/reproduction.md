@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+47 reproduced, 29 not reproduced, 75 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -43,7 +43,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | pt-island/eon-lanczos | force_calls 325 | 222 | not reproduced; pt_lanczos |
 | pt-island/eon-lanczos-improved | force_calls 222 | 181 | not reproduced; pt_lanczos |
 | pt-island/optim | force_calls 103 | 138 | not reproduced; optim_pt_units |
-| pt-island/optim-6 | — | — | not rerun |
+| pt-island/optim-6 | force_calls 117, force_calls_median 115, force_calls_min 60, force_calls_max 201 | 117, 115, 60, 195 | reproduced |
 | pt-island/optim-cl-string | — | — | not rerun |
 | pt-island/pele | — | — | not rerun |
 
