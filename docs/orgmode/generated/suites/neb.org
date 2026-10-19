@@ -71,15 +71,15 @@
    <li>eon-client/neb-pt-fire eOn campaign n=13, result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5).</li>
    <li>eon-client/neb-pt-lbfgs eOn campaign n=13, result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5).</li>
    <li>eon-client/neb-pt-qm eOn campaign n=13, result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5).</li>
+   <li>eon/neb-pt-lbfgs eOn campaign n=13, does not reproduce the 2014 archive.</li>
    <li>ase/neb-pt-heptamer-default ASE asv n=1, smoke run; scored 1 of 13 starts.</li>
    <li>ase/neb-pt-heptamer-tuned ASE asv n=1, smoke run; scored 1 of 13 starts.</li>
    </ul>
    <h3>Not a harness score</h3><ul>
    <li>eon/neb-pt-lbfgs-m100 eOn n=13, not yet on the harness counter.</li>
-   <li>eon/neb-pt-lbfgs eOn n=13, not yet on the harness counter.</li>
    </ul>
    <h3>Not scored</h3><ul>
-   <li>eon-cg: no per-start record</li>
+   <li>eon-cg: no per-start record; does not reproduce the 2014 archive</li>
    <li>eon-fire: no per-start record</li>
    <li>eon-lbfgs: no per-start record</li>
    <li>eon-qm: no per-start record</li>
@@ -89,7 +89,7 @@
    <h3>Legacy 2014 archive</h3>
    <details class="bench-details">
    <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
@@ -174,7 +174,7 @@
    </tr>
    <tr id="neb-pt-heptamer-eon-cg">
    <td class="num">8</td>
-   <td class="text">eon-cg</td>
+   <td class="text">eon-cg · not reproduced</td>
    <td class="text">Eon r2090</td>
    <td class="num">120</td>
    <td class="num">211</td>

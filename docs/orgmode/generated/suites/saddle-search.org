@@ -57,6 +57,7 @@
    <h3>Partial</h3><ul>
    <li>ase/dimer-pt-island-default ASE campaign, asv n=16, result file sets ranked false.</li>
    <li>ase/dimer-pt-island-tuned ASE campaign, asv n=16, result file sets ranked false.</li>
+   <li>eon-3.5.0-saddle-pt-classic Eon campaign n=10, does not reproduce the 2014 archive.</li>
    <li>eon-client/saddle-pt-dimer eOn campaign n=1, result file sets partial true.</li>
    <li>eon-client/saddle-pt-lanczos eOn campaign n=1, result file sets partial true.</li>
    <li>eon-client/saddle-pt-md eOn campaign n=1, result file sets partial true.</li>
@@ -71,7 +72,6 @@
    <li>sella/pt-island-search-default Sella asv n=1, smoke run; one start.</li>
    </ul>
    <h3>Not a harness score</h3><ul>
-   <li>eon-3.5.0-saddle-pt-classic Eon n=10, not yet on the harness counter.</li>
    <li>eon-3.5.0-saddle-pt-dimer Eon n=10, not yet on the harness counter.</li>
    </ul>
    </details>
@@ -79,7 +79,7 @@
    <h3>Legacy 2014 archive</h3>
    <details class="bench-details">
    <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
@@ -96,7 +96,7 @@
    </tr></thead><tbody>
    <tr id="saddle-search-pt-island-adaptive-hsphere-lbfgs-davidson-sm50" class="best">
    <td class="num">1</td>
-   <td class="text">adaptive_HSphere-lbfgs-davidson-sm50</td>
+   <td class="text">adaptive_HSphere-lbfgs-davidson-sm50 · not reproduced</td>
    <td class="text">SoftSaddle</td>
    <td class="num">423491.1</td>
    <td class="num">179062.2</td>
@@ -108,7 +108,7 @@
    </tr>
    <tr id="saddle-search-pt-island-adaptive-hsphere-lbfgs-lanczos-sm50">
    <td class="num">2</td>
-   <td class="text">adaptive_HSphere-lbfgs-lanczos-sm50</td>
+   <td class="text">adaptive_HSphere-lbfgs-lanczos-sm50 · not reproduced</td>
    <td class="text">SoftSaddle</td>
    <td class="num">814519.3</td>
    <td class="num">314659.7</td>
@@ -120,7 +120,7 @@
    </tr>
    <tr id="saddle-search-pt-island-adaptive-hsphere-lbfgs-lanczos-sm0">
    <td class="num">3</td>
-   <td class="text">adaptive_HSphere-lbfgs-lanczos-sm0</td>
+   <td class="text">adaptive_HSphere-lbfgs-lanczos-sm0 · not reproduced</td>
    <td class="text">SoftSaddle</td>
    <td class="num">1003433.0</td>
    <td class="num">417022.4</td>
@@ -204,7 +204,7 @@
    </tr>
    <tr id="saddle-search-pt-island-eon-dimer">
    <td class="num">10</td>
-   <td class="text">eon-dimer</td>
+   <td class="text">eon-dimer · not reproduced</td>
    <td class="text">Eon r2205</td>
    <td class="num">3.77888e+06</td>
    <td class="num">527337</td>

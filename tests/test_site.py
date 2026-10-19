@@ -84,6 +84,8 @@ def test_rendered_pages_use_the_board_rank():
     assert "<details" in minimization
     assert "Legacy 2014 archive" in minimization
     assert "eon-cg" in minimization
+    assert ">eon-cg<" in minimization
+    assert "pele-fire · not reproduced" in minimization
     assert "par2-wilson-bootstrap" in minimization
     assert "Present runs. Fewer force calls first." not in minimization
     neb_page = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "neb.org").read_text(encoding="utf-8")
@@ -93,6 +95,10 @@ def test_rendered_pages_use_the_board_rank():
     tsopt = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "tsopt.org").read_text(encoding="utf-8")
     assert "Sella 0.1.1 legacy" in tsopt
     assert "2.6.0 legacy" not in tsopt
+    ts_ranked = [row["template"] for row in document["problems"]["tsopt/LJ38"]["ranked"]]
+    assert "sella/lj38-ts-default" in ts_ranked
+    assert "sella/lj38-ts-tuned" not in ts_ranked
+    assert "rgsaddle/dimer-rotskip-tuned" in ts_ranked
     assert "tsopt-LJ38-profile.svg" in tsopt
     saddle = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "saddle-search.org").read_text(encoding="utf-8")
     assert 'data-board-table="ranked" data-problem="saddle-search/pt-island"' in saddle

@@ -121,8 +121,8 @@
    <li>LJ38: not yet on the harness counter, partial.</li>
    <li>pt-island: not yet on the harness counter, partial.</li>
    <li>eon-ci-neb: no per-start record.</li>
-   <li>eon-ci-swdneb: no per-start record.</li>
-   <li>eon-cg: no per-start record.</li>
+   <li>eon-ci-swdneb: no per-start record; does not reproduce the 2014 archive.</li>
+   <li>eon-cg: no per-start record; does not reproduce the 2014 archive.</li>
    <li>eon-fire: no per-start record.</li>
    <li>eon-lbfgs: no per-start record.</li>
    <li>eon-qm: no per-start record.</li>
@@ -133,7 +133,7 @@
    <li>eon-client/morse-cg: no per-start record.</li>
    <li>eon-client/morse-fire: no per-start record.</li>
    <li>eon-client/morse-lbfgs: no per-start record.</li>
-   <li>eon-client/morse-sd: no per-start record.</li>
+   <li>eon-client/morse-sd: no per-start record; does not reproduce the 2014 archive.</li>
    <li>eon-client/qm: no per-start record.</li>
    <li>eon-client/sd-twopoint: no per-start record.</li>
    <li>eon-client/sd: no per-start record.</li>
@@ -174,14 +174,14 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/pt-island" data-template="eon-svn/de-pt-lanczos-improved">
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="eon-svn/de-pt-dimer">
    <td>pt-island</td>
-   <td data-field="template">eon-svn/de-pt-lanczos-improved</td>
+   <td data-field="template">eon-svn/de-pt-dimer</td>
    <td data-field="version">Eon svn r2549</td>
    <td data-field="commit">r2549</td>
-   <td data-field="par2_mean">180.644</td>
-   <td data-field="mean_calls">180.644</td>
-   <td data-field="median_calls">161</td>
+   <td data-field="par2_mean">192.051</td>
+   <td data-field="mean_calls">192.051</td>
+   <td data-field="median_calls">188</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
@@ -218,14 +218,14 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
-   <tr data-problem="tsopt/LJ38" data-template="eon-svn/ts-lj38-lanczos-improved">
+   <tr data-problem="tsopt/LJ38" data-template="eon-svn/ts-lj38-lanczos-ljcut">
    <td>LJ38</td>
-   <td data-field="template">eon-svn/ts-lj38-lanczos-improved</td>
+   <td data-field="template">eon-svn/ts-lj38-lanczos-ljcut</td>
    <td data-field="version">Eon svn r2549</td>
    <td data-field="commit">r2549</td>
-   <td data-field="par2_mean">270.85</td>
-   <td data-field="mean_calls">270.85</td>
-   <td data-field="median_calls">180</td>
+   <td data-field="par2_mean">292.78</td>
+   <td data-field="mean_calls">292.78</td>
+   <td data-field="median_calls">219</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
@@ -243,7 +243,9 @@
    </tbody></table></div>
    <p>No full ranked run</p><ul>
    <li>aladatom: partial.</li>
+   <li>LJ38 double-ended saddle: partial.</li>
    <li>lj38_2ts_separation: partial.</li>
+   <li>pt-island: partial.</li>
    <li>Lennard-Jones 38 global minimum: partial.</li>
    <li>Al: partial.</li>
    <li>Pt: partial.</li>
