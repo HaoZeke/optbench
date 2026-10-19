@@ -779,8 +779,10 @@ def _dat(template: dict, records: list[dict], *, partial: bool, cap: int, target
     lines.append("# A success is a lowest energy at or below the stop, with calls under the cap.")
     if target is None:
         lines.append("# This problem file states no stop energy. The row is partial.")
-    else:
+    elif template.get("problem") == "globalopt/lj38":
         lines.append(f"# stop energy {target}. Lennard-Jones 38 uses the archived eOn stop.")
+    else:
+        lines.append(f"# stop energy {target}. The stop is the stated reference plus the energy gap.")
     note = str(template.get("note") or "").strip()
     if note:
         lines.append("# " + note.replace("\n", " "))
