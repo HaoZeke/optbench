@@ -5,10 +5,12 @@ The binary is the OPTIM target from the Wales snapshot
 that file. The snapshot has no git commit. Each ``COMPUTE`` on the relay
 is one ``pes.evaluate``. OPTIM's own counter is not the score.
 
-``optim/unhooked`` and every template that is not minimization L-BFGS
-or the archived six-image DNEB row raise before a file is written.
-The six-image row runs wales-27058 and scores OPTIM's own
-energy+gradient count. Noise and PATHSAMPLE are not this runner.
+``optim/unhooked`` and every template that is not minimization L-BFGS,
+the archived six-image DNEB row, or the current-image DNEB row raise
+before a file is written. The six-image row runs wales-27058 and keeps
+OPTIM's own counter. The current-image row runs the latest
+``svn.tar.bz2`` with stock keywords and writes that energy+gradient
+count as a harness score. Noise and PATHSAMPLE are not this runner.
 """
 
 from __future__ import annotations
@@ -85,6 +87,7 @@ def _unhooked(template_name: str) -> RuntimeError:
         f"{template_name} writes nothing. The pin is the sha256 {SHA256}. "
         "Minimization L-BFGS calls the ASE socket. "
         "The six-image Pt-island DNEB row is optim/de-pt-6. "
+        "The current-image Pt-island DNEB row is optim/de-pt-stock. "
         "Noise and PATHSAMPLE are not scored."
     )
 
@@ -540,6 +543,154 @@ def _write_native_campaign(output: Path, records: list[dict], template: dict, pr
     }
 
 
+_CURRENT_TARBALL = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
+_CURRENT_SHA256 = "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
+_CURRENT_VERSION = "26635"
+_CURRENT_CODE = "optim-26635"
+_CURRENT_SOURCE = "df8da599267534fbe43a250e578f7396a7946311"
+_CURRENT_BINARY = Path("/tmp/wales-latest/wales/OPTIM/builds/gfortran/OPTIM")
+_STOCK_KEYWORDS = "NEWNEB\nBFGSTS\nOPTIMIZETS\nBULK\nNOHESS\nNONEBMIND\n"
+
+
+def current_binary_path() -> Path:
+    env = os.environ.get("OPTIM_CURRENT_BIN")
+    if env:
+        return Path(env)
+    return _CURRENT_BINARY
+
+
+def _stock_search(job: dict) -> dict:
+    """One current OPTIM DNEB search.
+
+    The stored count is the last energy+gradient line. A start is a
+    success only when the log contains ``Converged to TS``.
+    """
+    import tempfile
+    import time
+
+    os.environ.setdefault("OMP_NUM_THREADS", "1")
+    calls = None
+    converged = False
+    error = ""
+    started = time.perf_counter()
+    try:
+        with tempfile.TemporaryDirectory(prefix="optim-stock-") as raw:
+            folder = Path(raw)
+            _native_inputs(folder, job)
+            env = os.environ.copy()
+            env["OMP_NUM_THREADS"] = "1"
+            stdout_path = folder / "OPTIM.log"
+            stderr_path = folder / "OPTIM.err"
+            try:
+                with stdout_path.open("w", encoding="utf-8") as stdout, stderr_path.open(
+                    "w", encoding="utf-8"
+                ) as stderr:
+                    proc = subprocess.run(
+                        [str(job["binary"])],
+                        cwd=folder,
+                        env=env,
+                        stdout=stdout,
+                        stderr=stderr,
+                        text=True,
+                        timeout=int(job.get("timeout", 120)),
+                        check=False,
+                    )
+            except subprocess.TimeoutExpired:
+                error = "OPTIM exceeded the wall limit"
+                proc = None
+            log = stdout_path.read_text(encoding="utf-8", errors="replace") if stdout_path.is_file() else ""
+            calls, converged = _optim_tally(log)
+            if proc is not None and proc.returncode not in (0, None) and error == "":
+                detail = _tail(stderr_path) or _tail(stdout_path) or f"exit {proc.returncode}"
+                error = f"OPTIM exit {proc.returncode}: {detail}"
+            elif calls is None and error == "":
+                detail = _tail(stdout_path) or _tail(stderr_path) or "no energy+gradient line"
+                error = f"OPTIM produced no energy+gradient count: {detail}"
+    except Exception as exc:
+        error = f"{type(exc).__name__}: {exc}"
+    cap = int(job["cap"])
+    success = bool(converged) and calls is not None and int(calls) < cap and not error
+    record = {
+        "schema": "optbench.start/v2",
+        "start": job["name"],
+        "force_calls": cap if calls is None else int(calls),
+        "verify_calls": 0,
+        "counter": "harness",
+        "comparable": True,
+        "success": success,
+        "failure": None if success else ("crash" if calls is None or error else "divergence"),
+        "reasons": [],
+        "error": error,
+        "converged": bool(converged),
+        "optim_method": "dneb-stock",
+        "optim_energy_gradient_calls": None if calls is None else int(calls),
+        "wall_s": float(time.perf_counter() - started),
+    }
+    return record
+
+
+def _run_stock_dneb(root: Path, problem: dict, template: dict, *, output: Path, workers: int) -> dict:
+    from .common import band_settings, cached_pairs, write_campaign
+
+    binary = current_binary_path()
+    if not binary.is_file():
+        raise RuntimeError(
+            f"OPTIM {_CURRENT_VERSION} is not available. "
+            f"The pin is the sha256 {_CURRENT_SHA256} of {_CURRENT_TARBALL}. "
+            f"{binary} is not present."
+        )
+    section = template.get("optim") or {}
+    settings = band_settings(problem)
+    if settings["potential"] != "morse_pt":
+        raise ValueError(f"{template['id']} stock DNEB is the Pt Morse row")
+    preamble_path = root / str(section.get("preamble", ""))
+    if not preamble_path.is_file():
+        raise RuntimeError(f"{template['id']} preamble is not at {preamble_path}")
+    preamble = preamble_path.read_text(encoding="utf-8")
+    if preamble != _STOCK_KEYWORDS:
+        raise RuntimeError(f"{template['id']} preamble is not the stock keyword block")
+    pairs = list(cached_pairs(root, problem, settings).values())
+    pairs.sort(key=lambda pair: int(pair.name.rsplit("_", 1)[-1]))
+    if len(pairs) != int(settings["pairs"]):
+        raise RuntimeError(f"{template['id']} saw {len(pairs)} pairs, the problem states {settings['pairs']}")
+    jobs = []
+    for pair in pairs:
+        job = _native_job(pair, template, preamble, int(settings["cap"]))
+        job["binary"] = str(binary)
+        jobs.append(job)
+    records = run_jobs(jobs, _stock_search, workers)
+    published = dict(template)
+    published["code"] = "optim"
+    comment = (
+        f"# OPTIM image revision {_CURRENT_VERSION}, {_CURRENT_TARBALL}. "
+        f"sha256 {_CURRENT_SHA256}. OPTIM source {_CURRENT_SOURCE}.\n"
+        "# Keywords are NEWNEB, BFGSTS, OPTIMIZETS, BULK, NOHESS, and NONEBMIND, with no numeric arguments.\n"
+        "# NEWNEB defaults to 3 images and 1 iteration. BFGSTS defaults to 1 step. "
+        "The RMS stop is the stock 0.001.\n"
+        "# NOHESS is set because morse bulk has no analytic second derivatives. "
+        "NONEBMIND keeps the supplied endpoints.\n"
+        "# The count is OPTIM's energy+gradient calls, written on the harness counter. "
+        "A start is kept when the log contains Converged to TS."
+    )
+    return write_campaign(
+        output,
+        records,
+        published,
+        problem,
+        settings,
+        {
+            "method": "dneb-stock",
+            "keyword": "NEWNEB BFGSTS",
+            "counter": "optim energy+gradient calls",
+            "potential": "morse_bulk",
+            "version": _CURRENT_VERSION,
+            "source": _CURRENT_SOURCE,
+        },
+        images=None,
+        comment=comment,
+    )
+
+
 def _run_native_dneb(root: Path, problem: dict, template: dict, *, output: Path, workers: int) -> dict:
     from .common import band_settings, cached_pairs
 
@@ -561,9 +712,6 @@ def _run_native_dneb(root: Path, problem: dict, template: dict, *, output: Path,
 
 
 def run(root: Path, problem_name: str, template_name: str, *, output: Path, workers: int = 1) -> dict:
-    reason = available()
-    if reason:
-        raise RuntimeError(reason)
     root = Path(root)
     from optbench.campaign import load_template, resolve_problem
 
@@ -577,6 +725,12 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
     if stated and stated != problem_name:
         raise ValueError(f"{template_name} belongs to {stated}")
     section = _section(template)
+    if section["method"] == "dneb-stock":
+        require_pin(template, registry_pin(root, _CURRENT_CODE))
+        return _run_stock_dneb(root, problem, template, output=output, workers=workers)
+    reason = available()
+    if reason:
+        raise RuntimeError(reason)
     if section["method"] == "dneb-native":
         pin = registry_pin(root, _WALES_CODE)
         if template.get("code") != CODE:

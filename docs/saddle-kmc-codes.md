@@ -162,8 +162,20 @@ harness calls and stopped at force `0.000842553062284986`, energy
 Noise is not scored: the relay has no noisy-force window. The Pt-island
 six-image DNEB row is wales-27058 with the archived odata preamble. The
 score is OPTIM's energy+gradient count, the field `run_optim.sh` records,
-and a start fails only when the log has no `Converged to TS` line. Other
-saddle search, NEB, tsopt, and hTST keywords are not connected to the ASE
+and a start fails only when the log has no `Converged to TS` line. That
+six-image rerun stays an unranked diagnostic. The ranked Pt-island row
+is the current `svn.tar.bz2` image, INCLUDE revision 26635, sha256
+`738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31`,
+OPTIM source `df8da599267534fbe43a250e578f7396a7946311`. The source is
+unmodified. The keywords are `NEWNEB`, `BFGSTS`, `OPTIMIZETS`, `BULK`,
+`NOHESS`, and `NONEBMIND`, with no numeric arguments. `NEWNEB` defaults
+to 3 images and 1 iteration. `BFGSTS` defaults to 1 step. The RMS stop
+is the stock 0.001, the problem force norm. `NOHESS` is set because this
+OPTIM has no analytic second derivatives for morse bulk. `NONEBMIND`
+keeps the supplied endpoints. The score is the last energy+gradient
+count, stored as harness force calls. A start fails when the log has no
+`Converged to TS` line. Other saddle search, NEB, tsopt, and hTST
+keywords are not connected to the ASE
 socket. PATHSAMPLE is in the same snapshot. The PATHSAMPLE target linked
 (gfortran, `WITH_OPENMP` off). It does not call `pes.evaluate`. It writes
 `odata.*` and submits the `EXEC` program, which is OPTIM. No PATHSAMPLE
