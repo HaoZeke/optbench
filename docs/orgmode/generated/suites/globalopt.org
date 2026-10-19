@@ -546,11 +546,14 @@
    </section><section class="bench" id="tip4p15" data-problem="globalopt/tip4p15">
    <h2>tip4p15</h2>
    <dl class="bench-rule">
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
+   <dt>Starts</dt><dd>500</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
+   <dt>Note</dt><dd>The archived GMIN target is -628.3734. A start hits when the energy is within 0.001 of that target.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">No committed harness run.</p>
+   <p class="bench-gaps">GMIN rows are off the ranked table.</p>
    <details class="bench-details" id="tip4p15-templates">
    <summary>All templates (0 ranked)</summary>
    <div class="bench-scroll">
@@ -559,6 +562,9 @@
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
+   <h3>Not a harness score</h3><ul>
+   <li>gmin/tip4p15-tbp GMIN n=500, counter gmin.</li>
+   </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="tip4p15-legacy">
    <h3>Legacy 2014 archive</h3>

@@ -4,6 +4,13 @@ suite = "globalopt"
 problem = "tip4p15"
 contract = "partial"
 entry_count = 2
+remark = "The archived GMIN target is -628.3734. A start hits when the energy is within 0.001 of that target."
+
+[sample]
+starts = 500
+
+[convergence]
+energy_above_minimum = 0.001
 
 [metrics]
 required = ["force_calls", "force_calls_max", "force_calls_median", "force_calls_min", "nfailed"]
