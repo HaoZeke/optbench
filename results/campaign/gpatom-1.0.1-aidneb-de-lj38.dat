@@ -1,0 +1,18 @@
+# counter harness HarnessCounter on the spec potential
+# force_calls count raw potential evaluations and are not divided by the image count
+# surrogate evaluations are not force calls
+# the mean is round-half-even over successes; cap, force, or Hessian index other than 1 is a failure
+successes 0
+nfailed 1
+n 1
+transition_states 0
+code gpatom
+code_version 1.0.1
+commit 572bd64ef61ccf498e061162609bb5f16e39d8a4
+algorithm AIDNEB
+template gpatom/aidneb
+problem double-ended-saddle-search/lj38
+tuning default
+counter harness
+images 5
+partial true
