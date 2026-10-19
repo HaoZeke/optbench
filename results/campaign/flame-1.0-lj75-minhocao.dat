@@ -6,11 +6,11 @@
 # GEOFIREDTINIT 1.d-9 and GEOFIREDTMIN 1.d-12 replace the code defaults 10 and 1. Pairs in this archive sit near 0.02 sigma, and the default first step moves those atoms by more than the cell.
 # Success is a relaxed enthalpy at or below -397.491331, the reference plus energy_above_minimum. The count stops before the next hop is charged.
 # minhocao on the lj75 coordinate archive. ioput, earr tolerances, fingerprint, seed, and the FIRE force tolerance match flame/lj38-minhocao. GEOFIREDTINIT is 1.d-9 and GEOFIREDTMIN is 1.d-12. The code defaults are 10 and 1. Pairs in this archive sit near 0.02 sigma, and the default first step moves those atoms by more than the cell. The problem states energy_above_minimum 0.001 above the Cambridge minimum -397.492331 and max_force_calls 1000000.
-force_calls 365058
+force_calls 368621
 force_calls_min 65671
 force_calls_max 993594
-nfailed 50
-median 462933
+nfailed 53
+median 472138
 code FLAME
 code_version 1.0
 commit 99a615acaef6bc6afe44d895f666c6d60250f7d8
@@ -21,14 +21,13 @@ tuning dtinit
 counter harness
 par2_mean 2000000
 wilson_low 0
-wilson_high 0.0192225319179
+wilson_high 0.0188453263773
 par2_median 2000000
 par2_median_low 2000000
 par2_median_high 2000000
-v2_nfailed 196
+v2_nfailed 200
 v2_successes 0
-n 196
+n 200
 energy_min -394.814244373
 energy_max -378.421902413
-calls_to_best_mean 291954.841837
-partial true
+calls_to_best_mean 300313.475
