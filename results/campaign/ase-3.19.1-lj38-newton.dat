@@ -1,0 +1,23 @@
+force_calls 79
+force_calls_min 44
+force_calls_max 141
+force_calls_median 77
+nfailed 0
+starts 998
+code ASE
+code_version 3.19.1
+commit 0ef71ac51a36007ca631143c0016ba58c55d71a7
+algorithm Newtons Method maxstep=0.25
+profile archive
+template ase/lj38-newton
+problem minimization/lj38
+counter archive
+reducer capped
+ranked false
+parameter_source archive
+method {"counter":"archive Hessian.py loop index","parameter_source":"archive","parameters":{"maxstep":0.25},"potential":{"epsilon":1.0,"kind":"lennard-jones","rc":35.0,"sigma":1.0,"smooth":false},"profile":"archive","reducer":"capped","stop":{"force_norm":0.01,"max_force_calls":10000,"norm":"max-atom"}}
+unrounded_mean 78.564128256513
+note Archive Hessian.py writes the Newton loop index as total_force_calls. ASE 3.19.1 LennardJones rc=35, central-difference delta 0.0005 Bohr, eigenvalue step with fabs, maxstep 0.25, stop at max per-atom force norm 0.01, xyz starts after center(100). cluster_0474.xyz and cluster_0752.xyz raised the symmetry assert and wrote no results.dat, so report.sh leaves them out of the mean and out of nfailed. The loop index is not a harness force-call total.
+host cursor
+date 2026-10-19
+contributor Rohit Goswami
