@@ -2,9 +2,9 @@
 # A repeated geometry is one call. The call that would pass the cap is not counted.
 # The potential is epsilon 1, sigma 1, cutoff 40, no shift.
 # One reduced sigma is the Ar sigma 6.434516991 bohr. The socket divides by it.
-# partial. no success rule on globalopt/lj98; 2 archive starts; lowest energy -543.64295724; mean calls 5000000.0; median calls 5000000.0; failures cap
+# partial. no success rule on globalopt/lj98; 4 archive starts; lowest energy -543.64295724; mean calls 5000000.0; median calls 5000000.0; failures cap
 # Same genetic algorithm as ogolem/lj38. The archive is website/globalopt/lj98/lj98_clusters.tgz, 100 coords files. The archived run.sh says 200 and ljj8_clusters; the tarball has 100 coords files. This problem file has no energy window and no sample.starts, so the row stays partial. The recorded energy is the lowest harness value on that start. With no energy window a finite finish is wrong_stationary, and a start that exhausts the force cap is cap.
-nfailed 2
+nfailed 4
 code ogolem
 code_version 2016.CURRENT
 commit cce35a376d929852ab1e80e98105c0d13d784b8d
@@ -16,14 +16,14 @@ counter harness
 cap 5000000
 par2_mean 10000000
 wilson_low 0
-wilson_high 0.657619772493
+wilson_high 0.489890836455
 par2_median 10000000
 par2_median_low 10000000
 par2_median_high 10000000
-v2_nfailed 2
+v2_nfailed 4
 v2_successes 0
-n 2
+n 4
 energy_min -543.642957239
 energy_max -539.720451787
 partial true
-partial_reason no success rule on globalopt/lj98; 2 archive starts; lowest energy -543.64295724; mean calls 5000000.0; median calls 5000000.0; failures cap
+partial_reason no success rule on globalopt/lj98; 4 archive starts; lowest energy -543.64295724; mean calls 5000000.0; median calls 5000000.0; failures cap
