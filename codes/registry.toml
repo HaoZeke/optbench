@@ -163,6 +163,16 @@ ref = "svn-snapshot"
 commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
 note = "No public git commit. The pin is the sha256 of the Wales svn.tar.bz2 snapshot, 122743078 bytes. Minimization L-BFGS, the archived double-ended preambles, and PATHSAMPLE call the ASE socket. The score is pes.evaluate summed over every OPTIM child. OPTIM's own call counter is not a score. The 2014 rows used wales-27058 and stay in the archive."
 
+[[code]]
+id = "softsaddle"
+name = "SoftSaddle"
+role = "saddle search"
+repository = "https://github.com/henkelmangroup/optbench"
+ref = "website/codes/softsaddle.tar.gz"
+commit = "5a00aeede06fd822ef302624ec4c9bc7889d21fc0b5804b701a5785695c68d16"
+committed = "2019-04-01"
+note = "April 2019 adaptive hypersphere with LBFGS memory 60, from softsaddle.tar.gz sha256 5a00aeed. Lanczos and Davidson are the bundled C++ solvers, built without the Morse library, and the harness potential supplies every gradient. Pt-island is eOn Morse::force (pair_style eon-morse). A saddle is connected when the eOn r2205 per-atom test matches exactly one endpoint to the reactant. Novelty is AKMCState.find_repeat: a barrier difference above 0.01 eV is a different process, otherwise the same per-atom test on the saddle. Davidson's dense minimum Hessian is an internal anchor and is not a harness call. Each Davidson iteration charges one finite-difference Hessian-vector product, which is what MATLAB adds as report()'s iteration count plus one. Saddle rows are ten repetitions of the archived 5000-direction hyperspheres for the sm50 Davidson walk and the sm0 and sm50 Lanczos walks. Each repetition starts at radius 0.1 and stops at 27 connected saddles below 1.5 eV or 5000 searches. Lowest-eigenvector rows repeat the same eigen-solver from the gradient until overlap 0.99."
+
 # generated ASE and Sella templates
 
 [[template]]
