@@ -1074,4 +1074,19 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>
+   <h3>GMIN</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>global optimization</td>
+   <td>27058</td>
+   <td>144a703eef67</td>
+   <td><a href="https://optbench.org/codes/wales-27058.tar.bz2">https://optbench.org/codes/wales-27058.tar.bz2</a></td>
+   </tr>
+   </tbody></table></div>
+   <p>No full ranked run.</p>
+   <p>No full ranked run</p><ul>
+   <li>Lennard-Jones 38 global minimum: partial.</li>
+   </ul>
    </section>

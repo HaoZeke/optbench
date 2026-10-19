@@ -10,4 +10,5 @@ profile = "archive"
 tuning = "archive"
 parameter_source = "archive"
 ranked = false
+paper_baseline = true
 note = "Serial GMIN from wales-27058.tar.bz2 (sha256 144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348, SVNREV 27059). ifort classic 2021.1.1 -O3, WITH_MPI off. The archived data file sets EDIFF 0.003, TEMPERATURE 0.35, STEP 0.47 0.44, SLOPPYCONV 0.006, TIGHTCONV 1.0D-5, MAXIT 1000 1000, STEPS 90000000 1.0, TARGET -173.9284264418. No RANSEED: the serial DPRAND seed is 1. The score is NPCALL on the last Target hit line, the same field getdata.py keeps. gfortran 13 on this source scored 303498, outside 10 percent."
