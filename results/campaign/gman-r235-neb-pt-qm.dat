@@ -4,5 +4,8 @@ force_calls_max 316
 nfailed 0
 code Gman
 code_version r235
-template gman-qm
-unrounded_mean 190.92307692307693
+commit r235
+algorithm qm
+template gman/neb-pt-qm
+problem neb/Pt-heptamer
+counter harness

@@ -15,3 +15,5 @@ docs/source/generated/
 results/rgsaddle-asv/
 results/campaign/work/
 results/campaign/geometries/
+codes/gman/**/*.so
+codes/gman/**/*.o

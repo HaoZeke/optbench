@@ -1,0 +1,29 @@
+id = "gman/neb-pt-qm"
+engine = "gman"
+problem = "neb/Pt-heptamer"
+code = "Gman"
+code_version = "r235"
+commit = "r235"
+algorithm = "qm"
+failure_cap = 10000
+paper_baseline = true
+tuning = "archive"
+note = "Archived opt.py builds Gopt.qm with dt 0.15 and maxmove 0.2, then relaxes a climbing-image NEB: 8 images, spring 5, tangent new, fmax 0.01, converge Fmag, fsaddle off, itrmax 10000. The Morse force is the r235 Fortran routine (U0 0.7102, alpha 1.6047, r0 2.897, rc 9.5). force_calls in the dat is pot.count()/8, and the published integer is the truncated mean of the 13 paths. The starts file stores each path's pot.count total and whether neb.converged is set. The archived script writes algorithm lbfgs for every Gman optimizer; the optimizer that runs is QuickMin."
+
+[stop]
+force_norm = 0.01
+
+[gman]
+optimizer = "qm"
+dt = 0.15
+maxmove = 0.2
+images = 8
+spring = 5.0
+tangent = "new"
+itrmax = 10000
+ppd = 1
+fmax = 0.01
+fsaddle = "off"
+method = "ci"
+converge = "Fmag"
+potential = "morse"
