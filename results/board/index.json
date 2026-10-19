@@ -5281,7 +5281,7 @@
       "current": false,
       "entry": "ase-3.29.0-lj75-basin",
       "failures": {
-        "cap": 10,
+        "cap": 12,
         "crash": 0,
         "divergence": 0,
         "wrong_stationary": 0
@@ -5297,8 +5297,8 @@
       "median_low": 2000000.0,
       "median_per_image": null,
       "min_calls": 1000000.0,
-      "n": 10,
-      "nfailed": 10,
+      "n": 12,
+      "nfailed": 12,
       "note": "starts.jsonl",
       "par2_mean": 2000000.0,
       "partial": true,
@@ -5311,7 +5311,7 @@
       "success_rate": 0.0,
       "template": "ase-globalopt/lj75-basin",
       "tuning": "default",
-      "wilson_high": 0.2775327998628892,
+      "wilson_high": 0.24249400665524085,
       "wilson_low": 0.0
     },
     {
@@ -17738,7 +17738,7 @@
           "current": false,
           "entry": "ase-3.29.0-lj75-basin",
           "failures": {
-            "cap": 10,
+            "cap": 12,
             "crash": 0,
             "divergence": 0,
             "wrong_stationary": 0
@@ -17754,8 +17754,8 @@
           "median_low": 2000000.0,
           "median_per_image": null,
           "min_calls": 1000000.0,
-          "n": 10,
-          "nfailed": 10,
+          "n": 12,
+          "nfailed": 12,
           "note": "starts.jsonl",
           "par2_mean": 2000000.0,
           "partial": true,
@@ -17768,7 +17768,7 @@
           "success_rate": 0.0,
           "template": "ase-globalopt/lj75-basin",
           "tuning": "default",
-          "wilson_high": 0.2775327998628892,
+          "wilson_high": 0.24249400665524085,
           "wilson_low": 0.0
         }
       ],
