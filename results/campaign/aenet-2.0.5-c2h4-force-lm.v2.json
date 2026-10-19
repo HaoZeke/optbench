@@ -13,43 +13,43 @@
       "commit": "8f35990f5e3dd6cb296b953448cb11694d0cff3d",
       "entry": "aenet-2.0.5-c2h4-force-lm",
       "legacy": {
-        "mean_energy_rmse": 0.03196237274456899,
-        "mean_epoch": 5371,
-        "mean_force_rmse": 0.49296443599723616,
-        "median_energy_rmse": 0.021771988254379,
-        "median_epoch": 3873,
-        "median_force_rmse": 0.17905266637832778,
-        "nfailed": 7
+        "mean_energy_rmse": 0.03559161513762533,
+        "mean_epoch": 4479,
+        "mean_force_rmse": 0.620789190412406,
+        "median_energy_rmse": 0.03686562891511513,
+        "median_epoch": 2211.5,
+        "median_force_rmse": 0.430768021510225,
+        "nfailed": 14
       },
       "metrics": {
         "bootstrap_resamples": 2000,
         "bootstrap_seed": 20261015,
         "cap": 30000,
         "includes_failures": true,
-        "iqr": 53022.75,
-        "iqr_high": 59579.0,
+        "iqr": 47206.0,
+        "iqr_high": 59450.0,
         "iqr_low": 0.0,
-        "mean": 37238.083333333336,
+        "mean": 43343.75,
         "median": 60000.0,
         "median_high": 60000.0,
-        "median_low": 5942.5,
-        "n": 12,
-        "n_cap": 7,
+        "median_low": 37194.0,
+        "n": 20,
+        "n_cap": 14,
         "n_crash": 0,
         "n_divergence": 0,
         "n_wrong_stationary": 0,
-        "nfailed": 7,
-        "par2_mean": 37238.083333333336,
+        "nfailed": 14,
+        "par2_mean": 43343.75,
         "par_applied": true,
         "par_factor": 2,
-        "q25": 6977.25,
+        "q25": 12794.0,
         "q75": 60000.0,
         "scoring": "par2-wilson-bootstrap",
-        "success_only_mean": 5371.4,
-        "success_rate": 0.4166666666666667,
-        "successes": 5,
-        "wilson_high": 0.6804886874504503,
-        "wilson_low": 0.19326031365875665
+        "success_only_mean": 4479.166666666667,
+        "success_rate": 0.3,
+        "successes": 6,
+        "wilson_high": 0.5189728183535235,
+        "wilson_low": 0.1454772448676043
       },
       "parameters": {
         "activation": "tanh",
@@ -227,6 +227,51 @@
         {
           "comparable": true,
           "counter": "harness",
+          "energy_rmse": 0.00845089939546509,
+          "failure": "cap",
+          "force_calls": 30000,
+          "force_rmse": 0.11419589369675881,
+          "max_group_norm": 35.70832003151761,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "0008",
+          "success": false
+        },
+        {
+          "comparable": true,
+          "counter": "harness",
+          "energy_rmse": 0.010027396490040946,
+          "failure": "cap",
+          "force_calls": 30000,
+          "force_rmse": 0.12649803794443668,
+          "max_group_norm": 16.062197438698487,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "0009",
+          "success": false
+        },
+        {
+          "comparable": true,
+          "counter": "harness",
+          "energy_rmse": 0.00750568076366071,
+          "failure": "cap",
+          "force_calls": 30000,
+          "force_rmse": 0.09705859282334517,
+          "max_group_norm": 3.893554773793366,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "0010",
+          "success": false
+        },
+        {
+          "comparable": true,
+          "counter": "harness",
           "energy_rmse": 0.05195926957585125,
           "failure": null,
           "force_calls": 550,
@@ -236,6 +281,21 @@
           "schema": "optbench.start/v2",
           "start": "0011",
           "success": true
+        },
+        {
+          "comparable": true,
+          "counter": "harness",
+          "energy_rmse": 0.01198108880331328,
+          "failure": "cap",
+          "force_calls": 30000,
+          "force_rmse": 0.14798931323955006,
+          "max_group_norm": 74.85159803008021,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "0012",
+          "success": false
         },
         {
           "comparable": true,
@@ -266,6 +326,51 @@
         {
           "comparable": true,
           "counter": "harness",
+          "energy_rmse": 0.01031218043823907,
+          "failure": "cap",
+          "force_calls": 30000,
+          "force_rmse": 0.1256175046663481,
+          "max_group_norm": 33.479644552817014,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "0015",
+          "success": false
+        },
+        {
+          "comparable": true,
+          "counter": "harness",
+          "energy_rmse": 0.013836256932869403,
+          "failure": "cap",
+          "force_calls": 30000,
+          "force_rmse": 0.15270314073695213,
+          "max_group_norm": 847.9812486576785,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "0016",
+          "success": false
+        },
+        {
+          "comparable": true,
+          "counter": "harness",
+          "energy_rmse": 0.009938019813664791,
+          "failure": "cap",
+          "force_calls": 30000,
+          "force_rmse": 0.1234752152896594,
+          "max_group_norm": 28.228065296124438,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "0017",
+          "success": false
+        },
+        {
+          "comparable": true,
+          "counter": "harness",
           "energy_rmse": 0.016592637560564113,
           "failure": null,
           "force_calls": 8012,
@@ -274,6 +379,19 @@
           "reasons": [],
           "schema": "optbench.start/v2",
           "start": "0018",
+          "success": true
+        },
+        {
+          "comparable": true,
+          "counter": "harness",
+          "energy_rmse": 0.053737827102907004,
+          "failure": null,
+          "force_calls": 18,
+          "force_rmse": 1.2599129624882548,
+          "max_group_norm": 0.015475610990416529,
+          "reasons": [],
+          "schema": "optbench.start/v2",
+          "start": "0021",
           "success": true
         }
       ],
