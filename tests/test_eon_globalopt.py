@@ -57,6 +57,23 @@ def test_binary_kernel_matches_the_archived_type_order():
         blj20(positions, [1, 8])
 
 
+def test_logged_basin_minimum_reads_the_global_min_column(tmp_path):
+    from optbench.eon_harness import _logged_basin_minimum
+
+    (tmp_path / "client.log").write_text(
+        "\n".join(
+            [
+                "[Basin Hopping] step      current        trial   global min   fc    ar    md",
+                "[Basin Hopping]     1     -381.399     -381.399     -381.399  302 1.000 0.500 A",
+                "[Basin Hopping]   975     -394.741     -396.282     -396.282  180 0.350 0.420 A",
+                "[Basin Hopping]  1200     -395.100     -390.000     -396.282  200 0.340 0.420 R",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    assert _logged_basin_minimum(tmp_path) == pytest.approx(-396.282)
+
+
 def test_cambridge_cap_precedes_a_missing_energy():
     row = classify_cambridge(
         calls=10,

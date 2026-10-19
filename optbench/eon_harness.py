@@ -882,6 +882,31 @@ def _write_cache(family: str, template_name: str, seed: int, start: str, passes:
     temporary.replace(path)
 
 
+def _logged_basin_minimum(run: Path) -> float | None:
+    """Best global minimum printed in ``client.log``.
+
+    The client writes ``minimum_energy`` when the step loop returns. A
+    force cap stops the client inside a quench, so that line is absent
+    and the log line is the measured minimum.
+    """
+    path = run / "client.log"
+    if not path.is_file():
+        return None
+    best = None
+    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        parts = line.split()
+        if len(parts) < 6 or parts[0] != "[Basin" or parts[1] != "Hopping]":
+            continue
+        if not parts[2][:1].isdigit():
+            continue
+        try:
+            value = float(parts[5])
+        except ValueError:
+            continue
+        best = value if best is None else min(best, value)
+    return best
+
+
 def _earr_min(path: Path) -> float | None:
     if not path.is_file():
         return None
@@ -1059,7 +1084,10 @@ def run_case(
                 fields = found["fields"]
                 if kind == "basin" and template.get("cambridge"):
                     energy_text = fields.get("minimum_energy")
-                    energy = float(energy_text) if energy_text is not None else None
+                    if energy_text is not None:
+                        energy = float(energy_text)
+                    else:
+                        energy = _logged_basin_minimum(work / "run")
                     problem = resolve_problem(ROOT, template["problem"])
                     record = classify_cambridge(
                         calls=calls,
