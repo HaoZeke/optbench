@@ -559,8 +559,13 @@ def run_template(
         )
     if pending:
         if workers <= 1:
-            fresh = [_run_one(job) for job in pending]
-            _publish(output, template, problem, list(done.values()) + fresh, cap, full_n)
+            fresh = []
+            total = len(pending)
+            for finished, job in enumerate(pending, 1):
+                fresh.append(_run_one(job))
+                done[int(fresh[-1]["start"])] = fresh[-1]
+                _publish(output, template, problem, list(done.values()), cap, full_n)
+                print(f"{template['id']} {finished}/{total} new starts", flush=True)
         else:
             import multiprocessing as mp
 
