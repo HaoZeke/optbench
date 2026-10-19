@@ -309,6 +309,64 @@ def _hessian_index(point: list[float], force_stop: float) -> int:
     return negative_index(values, tolerance)
 
 
+def _clean_energy(point: list[float]) -> float:
+    energy, _forces = _evaluate("lj_cut")(point, None, None)
+    return float(energy)
+
+
+def bind_noise_endpoint(record: dict, point: list[float] | None, energy: float | None, force_stop: float) -> dict:
+    """Record the final energy and apply the connected-cluster rule.
+
+    ``point`` is ``min.con``. A dissociated cluster is ``divergence``.
+    A crash or a cap stays that class. The coordinates stay on the record
+    for the endpoint sidecar; the campaign writer does not put them in the
+    start line.
+    """
+    from optbench.bound import note_unbound
+    from optbench.failures import classify_failure
+
+    if energy is not None:
+        record["energy"] = float(energy)
+    if point is not None:
+        record["positions"] = [float(value) for value in point]
+    reasons: list[str] = []
+    failure = record.get("failure")
+    if failure == "crash":
+        reasons.append("crash")
+    elif failure == "cap":
+        reasons.append("cap")
+    else:
+        if record.get("success") and point is not None:
+            try:
+                index = _hessian_index(point, force_stop)
+                record["hessian_index"] = index
+                if index != 0:
+                    reasons.append("hessian_index")
+            except (OSError, ValueError, RuntimeError) as exc:
+                record["error"] = f"{type(exc).__name__}: {exc}"
+                reasons.append("crash")
+        elif record.get("success"):
+            record["error"] = str(record.get("error") or "min.con missing")
+            reasons.append("crash")
+        elif failure == "wrong_stationary":
+            reasons.append("hessian_index")
+        elif failure not in (None, ""):
+            reasons.append(str(failure) if failure in ("divergence",) else "divergence")
+        if point is not None and "crash" not in reasons:
+            note_unbound(reasons, point, kind="lj")
+    if failure in ("crash", "cap"):
+        record["reasons"] = reasons
+        return record
+    decided = classify_failure(reasons)
+    record["success"] = decided is None
+    record["failure"] = decided
+    if reasons:
+        record["reasons"] = reasons
+    else:
+        record.pop("reasons", None)
+    return record
+
+
 def _read_con(path: Path) -> list[float]:
     from optbench.eon_jobs import _coords
     from optbench.lj import read_component_coordinates
@@ -466,21 +524,27 @@ def run_case(template_name: str, kind: str, seed: int, start: str, *, passes: in
                 record["client_calls"] = found.get("raw")
                 record["client_reason"] = found.get("reason")
                 record["extrema"] = found.get("extrema")
-                if kind == "noise" and record["success"]:
+                if kind == "noise":
                     # MinimizationJob writes the relaxed geometry to min.con.
                     # pos.con is the start and is not a stationary point.
+                    # The energy is the clean lj/cut value of that geometry.
+                    point = None
+                    energy = None
                     final = work / "run" / "min.con"
-                    try:
-                        point = _read_con(final)
-                        index = _hessian_index(point, float(sections["Optimizer"]["converged_force"]))
-                        record["hessian_index"] = index
-                        if index != 0:
+                    if final.is_file():
+                        try:
+                            point = _read_con(final)
+                            energy = _clean_energy(point)
+                        except (OSError, ValueError, RuntimeError) as exc:
                             record["success"] = False
-                            record["failure"] = "wrong_stationary"
-                    except (OSError, ValueError, RuntimeError) as exc:
-                        record["success"] = False
-                        record["failure"] = "crash"
-                        record["error"] = f"{type(exc).__name__}: {exc}"
+                            record["failure"] = "crash"
+                            record["error"] = f"{type(exc).__name__}: {exc}"
+                    bind_noise_endpoint(
+                        record,
+                        point,
+                        energy,
+                        float(sections["Optimizer"]["converged_force"]),
+                    )
                 record = _guard(record)
                 err_path = work / "run" / "stderr.txt"
                 if err_path.is_file() and not record.get("error"):
