@@ -110,6 +110,13 @@ def test_rendered_pages_use_the_board_rank():
     assert "eon-3.5.0-saddle-pt-dimer" in saddle
     assert "not yet on the harness counter" in saddle
     assert "Per-search cost" not in saddle
+    amd = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "accelerated-md.org").read_text(encoding="utf-8")
+    assert 'data-board-table="ranked" data-problem="accelerated-md/aladatom"' in amd
+    assert 'data-board-table="ranked" data-problem="accelerated-md/standard_aladatom"' in amd
+    assert "eon/aladatom-akmc" in amd
+    assert "eon/standard-aladatom-akmc" in amd
+    assert 'data-field="par2_mean">2.74292e+06<' in amd
+    assert 'data-field="n">3<' in amd
     assert "noise/rgmin-dogleg-s0" in minimization
     assert 'data-field="par2_mean">81.881<' in minimization
     board = (ROOT / "docs" / "include" / "v2-board.org").read_text(encoding="utf-8")

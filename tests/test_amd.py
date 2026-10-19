@@ -24,7 +24,7 @@ from optbench.amd import (
 from optbench.campaign import _check_stop, geometry_archive, load_template, resolve_problem
 from optbench.check import archive_gaps, load_oracle
 from optbench.dat import normalize, parse_lenient
-from optbench.eon_amd import search_cost
+from optbench.eon_amd import catalogue_confidence, catalogue_reached, rate_relevant_repeats, search_cost
 from optbench.eon_jobs import JOBS
 from optbench.problems import load_all
 
@@ -103,9 +103,9 @@ def test_problem_files_carry_the_archived_rates_and_the_catalogue():
     assert standard["thermal"]["temperature_K"] == 150
     assert aladatom["thermal"]["temperature_K"] == 250
     assert aladatom["sample"]["products"] == 5000
-    assert aladatom["sample"]["repetitions"] == 1
+    assert aladatom["sample"]["repetitions"] == 3
     assert aladatom["sample"]["reference_products"] == 15000
-    assert standard["sample"]["repetitions"] == 1
+    assert standard["sample"]["repetitions"] == 3
     assert aladatom["potential"]["kind"] == "eam_al"
     assert aladatom["input"]["reactant"] == "website/accelerated-md/reactant.con"
 
@@ -236,7 +236,112 @@ def test_akmc_templates_follow_the_problem_stop():
         ]
         assert template["ini"]["Main"]["temperature"] == problem["thermal"]["temperature_K"]
         assert template["ini"]["Prefactor"]["default_value"] == 1e12
+        assert template["ini"]["Saddle Search"]["displace_atom_list"] == "150"
+        assert template["pass_limit"] == 800
+        assert template["confidence_min_searches"] == 2336
         assert _check_stop(problem, template) == template["failure_cap"]
     assert JOBS["aladatom-akmc"][0] == "eon/aladatom-akmc"
     assert JOBS["standard-aladatom-akmc"][0] == "eon/standard-aladatom-akmc"
     assert JOBS["aladatom-akmc"][1] == "amd"
+
+
+def _search_text(rows: list[str]) -> str:
+    return "\n".join(
+        [
+            "wuid type barrier max-dist sad-fcs mins-fcs pref-fcs result",
+            "rule",
+            *rows,
+        ]
+    )
+
+
+def test_hop_repeats_do_not_raise_confidence_after_a_fast_process():
+    """The 250 K table's hop is negligible once the 0.152 eV process exists.
+
+    Those two rows are the printed processtable from the one-seed 250 K
+    catalogue. Twenty-one hop repeats after the fast process must leave
+    the streak at 0. eOn's own counter would already be past 0.95.
+    """
+    hop = {"id": 1, "barrier": 0.42971, "rate": 2175.02}
+    fast = {"id": 2, "barrier": 0.15218, "rate": 8.55320e8}
+    early = ["1 random 0.42971 1.0 153 122 0 good-1"]
+    early += [f"{index} random 0.42971 1.0 10 4 0 repeat-1" for index in range(2, 12)]
+    assert rate_relevant_repeats(_search_text(early), [hop, fast], 250.0, 20.0, 0.01) == 10
+    rows = early + ["12 random 0.15218 1.3 201 127 0 good-2"]
+    rows += [f"{index} random 0.42971 1.0 10 4 0 repeat-1" for index in range(13, 34)]
+    text = _search_text(rows)
+    progress = catalogue_confidence(text, [hop, fast], 250.0, 20.0, 0.01, 21)
+    assert progress["repeats"] == 0
+    assert progress["confidence"] == 0.0
+    assert progress["eon_repeats"] == 21
+    assert progress["repeat_lines"] == 31
+    assert search_cost(text)["repeats"] == 31
+    finished = rows + [f"{index} random 0.15218 1.3 10 4 0 repeat-2" for index in range(34, 54)]
+    done = catalogue_confidence(_search_text(finished), [hop, fast], 250.0, 20.0, 0.01, None)
+    assert done["repeats"] == 20
+    assert done["confidence"] == pytest.approx(0.95)
+    assert done["eon_repeats"] == 51
+
+
+def test_a_new_fast_process_resets_the_streak_and_the_window_drops_hops():
+    low = {"id": 1, "barrier": 0.13915, "rate": 2.11243e7}
+    mid = {"id": 2, "barrier": 0.17340, "rate": 1.49232e6}
+    hop = {"id": 3, "barrier": 0.42971, "rate": 3.65123e-3}
+    thermal = select_thermal([low, mid, hop], 150.0, 20.0, 0.01)
+    assert [item["id"] for item in thermal] == [1, 2]
+    assert mid["rate"] / (low["rate"] + mid["rate"]) > 0.01
+    rows = ["1 random 0.13915 1.0 10 4 0 good-1"]
+    rows += [f"{index} random 0.13915 1.0 10 4 0 repeat-1" for index in range(2, 22)]
+    assert rate_relevant_repeats(_search_text(rows), [low, mid, hop], 150.0, 20.0, 0.01) == 20
+    rows.append("22 random 0.17340 1.0 10 4 0 good-2")
+    rows.append("23 random 0.42971 1.0 10 4 0 repeat-3")
+    rows.append("24 random 0.17340 1.0 10 4 0 repeat-2")
+    assert rate_relevant_repeats(_search_text(rows), [low, mid, hop], 150.0, 20.0, 0.01) == 1
+
+
+def test_twenty_hop_repeats_do_not_stop_before_the_search_floor():
+    """Seeds 20261019 and 20261020 reached old-scheme 0.95 on hops alone.
+
+    Rep 2 stopped at 112 searches with rate 9109.47. Rep 3 stopped at
+    80 searches with rate 9110.29. Neither table contained a barrier
+    under 0.35 eV. The floor keeps that confidence from ending the run.
+    """
+    early = {
+        "confidence": 0.95,
+        "rate": 9109.47,
+        "total_searches": 112,
+    }
+    assert catalogue_reached(early, 0.95, 2336) is False
+    done = {
+        "confidence": 0.95,
+        "rate": 3595857710.0,
+        "total_searches": 2336,
+    }
+    assert catalogue_reached(done, 0.95, 2336) is True
+    assert catalogue_reached({**done, "total_searches": 2335}, 0.95, 2336) is False
+    assert catalogue_reached({**done, "rate": 0.0}, 0.95, 2336) is False
+    with pytest.raises(ValueError):
+        catalogue_reached(done, 0.95, -1)
+
+
+def test_the_one_percent_share_is_the_boundary():
+    dominant = {"id": 1, "barrier": 0.20, "rate": 99.0}
+    included = {"id": 2, "barrier": 0.25, "rate": 1.0}
+    excluded = {"id": 3, "barrier": 0.26, "rate": 0.9}
+    rows = [
+        "1 random 0.20 1.0 10 4 0 good-1",
+        "2 random 0.25 1.0 10 4 0 good-2",
+        "3 random 0.25 1.0 10 4 0 repeat-2",
+    ]
+    assert rate_relevant_repeats(_search_text(rows), [dominant, included], 250.0, 20.0, 0.01) == 1
+    rows.append("4 random 0.26 1.0 10 4 0 good-3")
+    rows.append("5 random 0.26 1.0 10 4 0 repeat-3")
+    rows.append("6 random 0.20 1.0 10 4 0 repeat-1")
+    assert (
+        rate_relevant_repeats(
+            _search_text(rows), [dominant, included, excluded], 250.0, 20.0, 0.01
+        )
+        == 2
+    )
+    with pytest.raises(ValueError):
+        rate_relevant_repeats("header\nrule\n", [], 250.0, 20.0, 0.01, share=0.0)

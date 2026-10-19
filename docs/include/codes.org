@@ -30,6 +30,28 @@
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="accelerated-md/aladatom" data-template="eon/aladatom-akmc">
+   <td>Al adatom on Al(100) at 250 K</td>
+   <td data-field="template">eon/aladatom-akmc</td>
+   <td data-field="version">eOn 3.6.0</td>
+   <td data-field="commit">1d71c9445018</td>
+   <td data-field="par2_mean">2.74292e+06</td>
+   <td data-field="mean_calls">2.74292e+06</td>
+   <td data-field="median_calls">2.79404e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">3</td>
+   </tr>
+   <tr data-problem="accelerated-md/standard_aladatom" data-template="eon/standard-aladatom-akmc">
+   <td>Al adatom on Al(100) at 150 K</td>
+   <td data-field="template">eon/standard-aladatom-akmc</td>
+   <td data-field="version">eOn 3.6.0</td>
+   <td data-field="commit">1d71c9445018</td>
+   <td data-field="par2_mean">2.74292e+06</td>
+   <td data-field="mean_calls">2.74292e+06</td>
+   <td data-field="median_calls">2.79404e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">3</td>
+   </tr>
    <tr data-problem="double-ended-saddle-search/lj38" data-template="eon-client/de-lj38-lanczos-improved">
    <td>LJ38 double-ended saddle</td>
    <td data-field="template">eon-client/de-lj38-lanczos-improved</td>
@@ -175,8 +197,7 @@
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
-   <li>Al adatom on Al(100) at 250 K: not yet on the harness counter, partial.</li>
-   <li>Al adatom on Al(100) at 150 K: not yet on the harness counter.</li>
+   <li>Al adatom on Al(100) at 250 K: partial.</li>
    <li>LJ38 double-ended saddle: not yet on the harness counter, partial.</li>
    <li>lj38_2ts_separation: partial.</li>
    <li>pt-island: not yet on the harness counter, partial.</li>
