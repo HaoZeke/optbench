@@ -275,7 +275,7 @@ def test_render_input_is_ipi_dimer_not_fist():
 
 def test_shipped_cp2k_templates_match_the_pin():
     found = [template for template in list_templates(ROOT) if template["id"].startswith("cp2k/")]
-    assert len(found) == 12
+    assert len(found) == 6
     saddle = []
     tsopt = []
     for template in found:
@@ -301,8 +301,8 @@ def test_shipped_cp2k_templates_match_the_pin():
         else:
             assert block["force_match"] == "library"
             assert block["max_iter"] == 200
-    assert len(tsopt) == 8
-    assert len(saddle) == 4
+    assert len(tsopt) == 4
+    assert len(saddle) == 2
     assert SEARCH_CAP == 1000 + 64 + 4000
 
 

@@ -1074,6 +1074,10 @@ def _commit_saddle_outcome(spec: dict, outcome: dict, rng_state: dict, *, found:
         record["barrier"] = barrier
         record["rmsd_plus"] = plus_rmsd
         record["rmsd_minus"] = minus_rmsd
+        record["saddle_x"] = saddle_x.reshape(-1).tolist()
+        record["endpoint_plus"] = np.asarray(plus_x, dtype=np.float64).reshape(-1).tolist()
+        record["endpoint_minus"] = np.asarray(minus_x, dtype=np.float64).reshape(-1).tolist()
+        record["minimum_x"] = np.asarray(minimum, dtype=np.float64).reshape(-1).tolist()
         record["reasons"] = []
         if novel:
             found.append(saddle_x)
@@ -1173,7 +1177,7 @@ def _run_saddle(root: Path, problem: dict, template: dict, *, output: Path, forc
             searches = len(saved)
             rng = _rng_restore(saved[-1]["rng_state"]) if saved else np.random.default_rng(20261015 + rep)
             for row in saved:
-                all_records.append({key: value for key, value in row.items() if key not in {"rng_state", "saddle_x"}})
+                all_records.append({key: value for key, value in row.items() if key != "rng_state"})
             print(f"{template['id']} rep {rep} resume searches {searches} connected {connected}", flush=True)
         else:
             minimum_positions = positions.copy()

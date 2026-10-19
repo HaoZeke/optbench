@@ -143,12 +143,8 @@ def _bind(class_name: str, template_id: str, problem_id: str, starts: list[str],
 
 
 _ROWS = [
-    ("Cp2kLj38DimerBfgs", "cp2k/lj38-dimer-bfgs", "tsopt/LJ38", _selected(lj38_start_names()), 3600),
-    ("Cp2kLj38DimerBfgsTuned", "cp2k/lj38-dimer-bfgs-tuned", "tsopt/LJ38", _selected(lj38_start_names()), 3600),
     ("Cp2kLj38DimerCg", "cp2k/lj38-dimer-cg", "tsopt/LJ38", _selected(lj38_start_names()), 3600),
     ("Cp2kLj38DimerCgTuned", "cp2k/lj38-dimer-cg-tuned", "tsopt/LJ38", _selected(lj38_start_names()), 3600),
-    ("Cp2kPtDimerBfgs", "cp2k/pt-island-dimer-bfgs", "tsopt/pt-island", _selected(pt_start_names()), 7200),
-    ("Cp2kPtDimerBfgsTuned", "cp2k/pt-island-dimer-bfgs-tuned", "tsopt/pt-island", _selected(pt_start_names()), 7200),
     ("Cp2kPtDimerCg", "cp2k/pt-island-dimer-cg", "tsopt/pt-island", _selected(pt_start_names()), 7200),
     ("Cp2kPtDimerCgTuned", "cp2k/pt-island-dimer-cg-tuned", "tsopt/pt-island", _selected(pt_start_names()), 7200),
 ]
