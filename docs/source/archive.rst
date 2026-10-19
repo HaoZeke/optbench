@@ -1769,7 +1769,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td data-field="template">sella/pt-island-ts-default</td><td data-field="version">Sella 2.6.0</td><td data-field="commit">6cfb60cdb100</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">74.2857</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.927302</td><td data-field="wilson_high">1</td><td data-field="median_calls">71</td><td data-field="mean_calls">74.2857</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">49</td></tr>
    </tbody></table></div>
-   <p class="bench-gaps">eOn rows are not yet on the harness counter. Partial rows stay off the ranked table.</p>
+   <p class="bench-gaps">eOn rows are not yet on the harness counter. optim-27058 rows are off the ranked table. Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/tsopt.html#pt-island">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="pt-island-legacy">
    <h3>Legacy 2014 archive</h3>
@@ -1804,7 +1804,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="tsopt-pt-island-optim-ffd">
    <td class="num">2</td>
-   <td class="text">optim_ffd · not reproduced</td>
+   <td class="text">optim_ffd</td>
    <td class="text">OPTIM</td>
    <td class="num">7.10000e+01</td>
    <td class="num">1.4300e+02</td>
