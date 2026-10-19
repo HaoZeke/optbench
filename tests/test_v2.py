@@ -34,6 +34,8 @@ def test_rounded_legacy_means_are_not_a_v2_score():
 def test_par2_charges_the_failure_and_bootstrap_is_stable():
     assert penalised_cost(10, True, 10000) == 10
     assert penalised_cost(10000, False, 10000) == 20000
+    assert penalised_cost(15415, True, 10000) == 20000
+    assert penalised_cost(15415, True, 10000, counted_past_cap=True) == 15415
     records = [
         {"force_calls": 10, "success": True},
         {"force_calls": 30, "success": True},

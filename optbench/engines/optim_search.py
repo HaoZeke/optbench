@@ -6,8 +6,9 @@ that file. The snapshot has no git commit. Each ``COMPUTE`` on the relay
 is one ``pes.evaluate``. That harness count is the minimization score.
 
 ``optim/de-2ts`` is the December 2015 native LJDIFF campaign. Its score
-is OPTIM's own energy-plus-gradient counter, already written in the
-campaign file. This socket runner refuses that template.
+is OPTIM's own energy-plus-gradient counter on all 51 pairs, written in
+the campaign file. That file is the ranked row. This socket runner
+refuses the template.
 
 ``optim/unhooked`` and every other template that is not minimization
 L-BFGS raise before a file is written. Noise, saddle search, NEB, and

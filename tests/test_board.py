@@ -292,6 +292,38 @@ def test_a_problem_without_a_sample_count_does_not_invent_one(tmp_path: Path):
     assert {row["n"] for row in problem["ranked"]} == {2, 4}
 
 
+def test_a_recorded_success_above_the_cap_is_a_cap_failure(tmp_path: Path):
+    _problem(tmp_path, starts=2, cap=10)
+    _template(tmp_path)
+    _registry(tmp_path)
+    _dat(tmp_path, "toy-fast", PIN)
+    _starts(tmp_path, "toy-fast", [_row(15, True, "0"), _row(4, True, "1")])
+
+    row = build_board(tmp_path)["problems"]["minimization/toy"]["ranked"][0]
+    assert row["n"] == 2
+    assert row["nfailed"] == 1
+    assert row["failures"]["cap"] == 1
+    assert row["par2_mean"] == 12
+    assert row["mean_calls"] == 9.5
+
+
+def test_counted_past_cap_keeps_the_recorded_success(tmp_path: Path):
+    _problem(tmp_path, starts=2, cap=10)
+    _template(tmp_path)
+    _registry(tmp_path)
+    _dat(tmp_path, "toy-fast", PIN)
+    kept = _row(15, True, "0")
+    kept["counted_past_cap"] = True
+    _starts(tmp_path, "toy-fast", [kept, _row(4, True, "1")])
+
+    row = build_board(tmp_path)["problems"]["minimization/toy"]["ranked"][0]
+    assert row["n"] == 2
+    assert row["nfailed"] == 0
+    assert row["failures"]["cap"] == 0
+    assert row["par2_mean"] == 9.5
+    assert row["mean_calls"] == 9.5
+
+
 def test_ranked_false_stays_off_the_table(tmp_path: Path):
     _problem(tmp_path, starts=2, cap=10)
     _template(tmp_path)

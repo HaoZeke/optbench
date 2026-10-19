@@ -1,73 +1,26 @@
-# December 2015 Wales OPTIM, native LJDIFF (symbol AX), archived odata.
+# 51 pairs, start_0.xyz through start_50.xyz.
+# The 2014 run.sh loop is {0..49} and does not run pair 50. The coordinate archive and the problem sample are 51 pairs, so this file scores all 51.
+# One force call is the last OPTIM energy+gradient calls value. A success is Connected path found.
+# Native LJDIFF, symbol AX, archived odata, PERMDIST compiled in.
 # Tarball sha256 79c722dc6a63514acfe623ba007696778064d0b4e327a4798fd4233cc880b97c.
-# Pairs start_0.xyz through start_49.xyz. Success is Connected path found.
-# force_calls is round(mean) of the last energy+gradient calls line, successes only.
-# pair ncalls nts ncycles success
-# 0 1165 3 2 1
-# 1 1037 2 2 1
-# 2 3970 8 4 1
-# 3 2107 4 3 1
-# 4 3315 5 4 1
-# 5 1018 2 2 1
-# 6 2287 2 3 1
-# 7 2610 6 4 1
-# 8 4129 9 4 1
-# 9 1452 3 3 1
-# 10 3330 6 4 1
-# 11 1142 3 2 1
-# 12 1635 4 2 1
-# 13 2855 5 4 1
-# 14 3633 6 5 1
-# 15 4168 7 4 1
-# 16 4809 4 5 1
-# 17 4029 4 4 1
-# 18 1788 4 2 1
-# 19 4410 5 5 1
-# 20 3913 5 5 1
-# 21 5237 6 4 1
-# 22 1064 2 2 1
-# 23 2121 4 4 1
-# 24 4976 7 6 1
-# 25 6008 7 5 1
-# 26 665 1 1 1
-# 27 2414 5 4 1
-# 28 3316 4 5 1
-# 29 2486 6 4 1
-# 30 4536 3 3 1
-# 31 3847 5 5 1
-# 32 15415 12 19 1
-# 33 4054 5 5 1
-# 34 2534 5 3 1
-# 35 3104 5 5 1
-# 36 4241 9 5 1
-# 37 755 2 2 1
-# 38 2051 4 3 1
-# 39 1162 3 2 1
-# 40 4819 7 6 1
-# 41 1776 3 2 1
-# 42 675 2 1 1
-# 43 1988 4 3 1
-# 44 3499 6 4 1
-# 45 1871 4 2 1
-# 46 834 2 2 1
-# 47 1765 5 3 1
-# 48 7138 7 8 1
-# 49 957 2 1 1
-force_calls 3082
-force_calls_median 2572
+# The socket runner does not build this row. The board ranks this campaign file.
+# Pair 32 connected in 15415 calls. That is past the harness cap of 10000, and the paper still counts it. The start sets counted_past_cap so the ranked cost stays the call count.
+force_calls 3102
 force_calls_min 665
 force_calls_max 15415
-transition_states 5
+force_calls_median 2610
+force_calls_per_image 620
+call_unit total
+successes 51
 nfailed 0
-n 50
-starts 50
-code OPTIM
+n 51
+transition_states 5
+code optim
 code_version 2015-12-10
 commit 79c722dc6a63514acfe623ba007696778064d0b4e327a4798fd4233cc880b97c
 algorithm DNEB + hybrid eigenvector following + Djikstra shortest path
 template optim/de-2ts
 problem double-ended-saddle-search/lj38_2ts_separation
-counter optim
-ranked false
-parameter_source archive
-note Native LJDIFF through symbol AX. odata is the archived preamble plus the start coordinates. PERMDIST is compiled in. The mean is pairs 0-49.
+tuning archive
+counter harness
+images 5

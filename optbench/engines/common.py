@@ -334,6 +334,7 @@ def write_campaign(
                 "force_calls": row["force_calls"],
                 "success": row["success"],
                 "failure": row["failure"],
+                "counted_past_cap": row.get("counted_past_cap") is True,
             }
             for row in stamped
         ],
