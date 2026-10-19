@@ -122,8 +122,6 @@ def test_rendered_pages_use_the_board_rank():
         text = page.read_text(encoding="utf-8")
         assert "ranked false" not in text
     off_board = {
-        "eon-client/htst-pt-dimer-lbfgs",
-        "eon-client/htst-pt-lanczos-lbfgs",
         "eon-svn/ts-pt-dimer",
         "eon-svn/ts-lj38-dimer",
         "eon-svn/low-lj38-dimer",
@@ -158,6 +156,8 @@ def test_rendered_pages_use_the_board_rank():
         "eon-svn/ts-pt-lanczos",
         "eon-svn/de-2ts-ci",
         "eon-svn/de-2ts-neb",
+        "eon-client/htst-pt-dimer-lbfgs",
+        "eon-client/htst-pt-lanczos-lbfgs",
     }
     assert on_board <= ranked
     for problem in document["problems"].values():

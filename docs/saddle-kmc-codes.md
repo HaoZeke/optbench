@@ -111,6 +111,8 @@ success-only median. A row with no success has no median.
 | minimization/lj38 | pysisyphus/sd-lj38 | 205/1000 | 795 cap | 808 |
 | tsopt/pt-island | pykmc/ts-pt | 46/49 | 1 cap, 2 divergence | 746.5 |
 | hTST/Pt | pykmc/htst-pt | 13/13 | 0 | 3367604 |
+| hTST/Pt | eon-client/htst-pt-dimer-lbfgs | 13/13 | 0 | 586508 |
+| hTST/Pt | eon-client/htst-pt-lanczos-lbfgs | 13/13 | 0 | 580349 |
 | hTST/Al | pykmc/htst-al | 639/639 | 0 | 56329 |
 | accelerated-md/aladatom | pykmc/aladatom | 3/3 | 0 | 166853 |
 | accelerated-md/standard_aladatom | pykmc/standard-aladatom | 3/3 | 0 | 119079 |
@@ -504,6 +506,8 @@ island atoms is 1.449. The slab mean is stored as `rmsd_plus_free` and
 | --- | --- | --- | --- | --- | --- |
 | tsopt/pt-island | pykmc/ts-pt | 46/49 | 1 cap, 2 crash | 746.5 | 1956.45 |
 | hTST/Pt | pykmc/htst-pt | 13/13 | 0 | 3367604 | — |
+| hTST/Pt | eon-client/htst-pt-dimer-lbfgs | 13/13 | 0 | 586508 | 671526.46 |
+| hTST/Pt | eon-client/htst-pt-lanczos-lbfgs | 13/13 | 0 | 580349 | 607392.54 |
 | hTST/Al | pykmc/htst-al | 639/639 | 0 | 56329 | — |
 | accelerated-md/aladatom | pykmc/aladatom | 3/3 | 0 | 166853 | 178325.67 |
 | accelerated-md/standard_aladatom | pykmc/standard-aladatom | 3/3 | 0 | 119079 | 126131.67 |
@@ -576,6 +580,8 @@ over 13 and rate force calls 4.705e+04 averaged over 224. Dimer-LBFGS,
 Eon r2006, Penghao Xiao, 28 Jan 2013. This mean barrier cost is 4.922
 times that archive mean. The template ceiling is 250000 searches. The
 run stopped at 13 windows, short of that ceiling.
+
+`eon-client/htst-pt-dimer-lbfgs` and `eon-client/htst-pt-lanczos-lbfgs` use that reducer on eOn develop 4c1b814f. The kernel is r2549 Morse::force, served by the harness. The cap is 20000000. Both closed 13 barrier windows and every window is a success, so PAR-2 is the mean window cost. Dimer used 13683 searches and 50 processes: `barrier_jobs` 1052.461538, `barrier_force_calls` 671526.4615, median 586508, PAR-2 671526.4615384615. Lanczos used 15742 searches and 54 processes: `barrier_jobs` 1210.846154, `barrier_force_calls` 607392.5385, median 580349, PAR-2 607392.5384615385. Rate windows are reported and do not decide the order. Dimer closed 274, Lanczos 310.
 
 `pykmc/htst-al` uses the same reducer at 300 K and prefactor 1.2e12, from
 `archive/entries/hTST/Al/eon-dimer-cg/report.py`. The kernel is the r2549
@@ -692,12 +698,12 @@ force norm of 9.604e-4. The saddle template and the hTST Pt template use
 shifted Morse.
 
 The same smooth-linear kernel, `morse`, is what `eon-client` uses for
-hTST Pt, the saddle-pt dimer, Lanczos, and high-temperature rows, and the
+the saddle-pt dimer, Lanczos, and high-temperature rows, and the
 tsopt Pt rows, and what `eon-svn` uses for `saddle-pt-dimer-bounded`,
 `saddle-pt-lanczos-bounded`, `saddle-pt-md`, `ts-pt-dimer-smooth`,
 `ts-pt-lanczos`, `ts-pt-lanczos-smooth`, and `ts-pt-lanczos-improved`. `eon-svn` hTST Pt,
 `htst-pt-dimer-lbfgs` and `htst-pt-lanczos-lbfgs`, sets `kernel =
-"morse_shift"`. `eon-svn/saddle-pt-dimer`, `saddle-pt-dimer-improved`, and
+"morse_shift"`. `eon-client` hTST Pt sets that kernel too, on develop 4c1b814f, and the ranked sample is 13 barrier windows. `eon-svn/saddle-pt-dimer`, `saddle-pt-dimer-improved`, and
 `saddle-pt-lanczos` name `morse_pt` and describe r2549 `Morse::force`, the
 shifted potential. The develop saddle and tsopt Pt rows set `potential =
 "morse_pt"`, and `benchmarks.bench_eon_develop.morse_cluster` is Morse
