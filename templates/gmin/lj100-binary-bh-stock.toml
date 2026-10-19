@@ -1,0 +1,12 @@
+id = "gmin/lj100-binary-bh-stock"
+engine = "gmin"
+problem = "globalopt/lj100-binary"
+code = "GMIN"
+code_version = "df8da599267534fbe43a250e578f7396a7946311"
+commit = "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
+algorithm = "basin-hopping"
+tuning = "default"
+paper_baseline = true
+note = """
+Latest Wales svn.tar.bz2 fetched 2026-10-19 (sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31). GMIN/source/SVNREV is df8da599267534fbe43a250e578f7396a7946311. Serial CMake build, MPI off, system BLAS/LAPACK, source unmodified. Stock basin-hopping: temperature 0.3, step 0.3, angular step 0.3, acceptance ratio 0.5, seed 0, container radius left at the release formula. The problem, starts, and quench stop match the archive: 42 A and 58 B, epsilon 1, 1, 1, sigma 1, 1.15, 1.3, coords.0 through coords.99, TIGHTCONV 1e-7, SLOPPYCONV 5e-4, MAXIT 1000 1000, STEPS 1000000, MAX_NPCALL 2000000. GLJ in this release reads a local NITEMS that shadows the parser, so the stock MLJ keyword carries those parameters. The score is GMIN's potential-call count. Reaching that budget is the stop. The 2014 data-file rerun is gmin/lj100-binary-bh and is not ranked.
+"""

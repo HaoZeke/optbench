@@ -1,0 +1,27 @@
+# Latest Wales svn.tar.bz2, GMIN SVNREV df8da599267534fbe43a250e578f7396a7946311.
+# Serial build, MPI off, source unmodified. Stock basin-hopping:
+# temperature 0.3, step 0.3, angular step 0.3, acceptance target 0.5, seed 0.
+# Same problem and starts as the archive: MLJ 42/58, epsilon 1, 1, 1, sigma 1, 1.15, 1.3,
+# coords.0 through coords.99. Same quench stop: TIGHTCONV 1e-7, SLOPPYCONV 5e-4, MAXIT 1000 1000.
+# Same budget: STEPS 1000000 and MAX_NPCALL 2000000. GLJ in this release reads a shadowed
+# NITEMS, so the stock MLJ keyword carries those parameters. The count is GMIN NPCALL.
+# The 2014 data-file rerun stays in gmin-27058-lj100-binary-bh.dat and is not this score.
+# unrounded min -585.340748467752 max -553.251886166771 avg -570.4863116394981
+min_energy -5.85341e+02
+max_energy -5.53252e+02
+avg_energy -5.70486e+02
+force_calls 2000479
+force_calls_min 2000305
+force_calls_max 2000817
+force_calls_median 2000476.0
+successes 100
+nfailed 0
+n 100
+code GMIN
+code_version df8da599267534fbe43a250e578f7396a7946311
+algorithm basin-hopping
+template gmin/lj100-binary-bh-stock
+problem globalopt/lj100-binary
+tuning default
+counter harness
+commit 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31
