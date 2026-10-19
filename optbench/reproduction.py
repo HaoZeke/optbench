@@ -111,7 +111,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
-    "repro/neb-pt-heptamer-gman-lbfgs-line": "",
+    "repro/neb-pt-heptamer-gman-lbfgs-line": "f733f8a65ae01d97cbfd0811b9d4d23d1f0c5725",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -460,14 +460,6 @@ def read_campaign(root: Path, branch: str, path: str) -> str:
 
 
 def _sha(branch: str) -> str:
-    if branch == "repro/neb-pt-heptamer-gman-lbfgs-line" and len(SHA.get(branch, "")) < 12:
-        import subprocess
-
-        SHA[branch] = subprocess.check_output(
-            ["git", "rev-parse", "HEAD"],
-            cwd=Path(__file__).resolve().parents[1],
-            text=True,
-        ).strip()
     if branch == "cells/fill-not-rerun" and len(SHA.get(branch, "")) < 12:
         import subprocess
 
