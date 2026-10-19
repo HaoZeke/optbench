@@ -413,49 +413,50 @@
   ],
   "profile": {
     "area_log10": {
-      "eon-client/ts-pt-dimer 3.5.0 campaign 4d8b34b": 0.9491660067364305,
-      "eon-client/ts-pt-lanczos 3.5.0 campaign 4d8b34b": 0.9123051909408411,
-      "eon-client/ts-pt-lanczos-improved 3.5.0 campaign 4d8b34b": 1.0474615155246694,
-      "eon-svn/ts-pt-dimer-smooth r2549 campaign r2549": 1.0474615155246694,
+      "eon-client/ts-pt-dimer 3.5.0 campaign 4d8b34b": 0.9184486602401059,
+      "eon-client/ts-pt-lanczos 3.5.0 campaign 4d8b34b": 0.8017227435540724,
+      "eon-client/ts-pt-lanczos-improved 3.5.0 campaign 4d8b34b": 1.0413180462254044,
+      "eon-svn/ts-pt-dimer-smooth r2549 campaign r2549": 1.0413180462254044,
       "eon-svn/ts-pt-lanczos-improved r2549 campaign r2549": 1.0536049848239342,
-      "eon-svn/ts-pt-lanczos-smooth r2549 campaign r2549": 0.9491660067364305,
-      "partn/ts-pt 1.1.0 default campaign 9b75351": 0.5314100943864157,
+      "eon-svn/ts-pt-lanczos-smooth r2549 campaign r2549": 0.8570139672474567,
+      "optim/hef-ffd-ts-pt svn-snapshot wales-2014 campaign 02aaf45": 1.1488287589625403,
+      "partn/ts-pt 1.1.0 default campaign 9b75351": 0.5252666250871509,
       "rgsaddle/pt-dimer-fire 0.2.2 default campaign, asv c0db2b8": 0.0,
-      "rgsaddle/pt-dimer-fire-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.1382280592334608,
-      "rgsaddle/pt-dimer-lbfgs 0.2.2 default campaign, asv c0db2b8": 0.06757816229191416,
-      "rgsaddle/pt-dimer-lbfgs-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.28874305706545134,
-      "rgsaddle/pt-dimer-rotskip 0.2.2 default campaign, asv c0db2b8": 0.9092334562912086,
-      "rgsaddle/pt-dimer-rotskip-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.7218576426636284,
-      "rgsaddle/pt-lanczos 0.2.2 default campaign, asv c0db2b8": 0.1351563245838283,
-      "rgsaddle/pt-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.24266703732096445,
-      "sella/pt-island-ts-default 2.6.0 default campaign, asv 6cfb60c": 1.2041199826559248,
-      "tsase/dimer-pt 1.0 default campaign 98aac60": 0.15973020178088798
+      "rgsaddle/pt-dimer-fire-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.11058244738676863,
+      "rgsaddle/pt-dimer-lbfgs 0.2.2 default campaign, asv c0db2b8": 0.036860815795589544,
+      "rgsaddle/pt-dimer-lbfgs-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.2703126491676566,
+      "rgsaddle/pt-dimer-rotskip 0.2.2 default campaign, asv c0db2b8": 0.8047944782037049,
+      "rgsaddle/pt-dimer-rotskip-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.6696381536198766,
+      "rgsaddle/pt-lanczos 0.2.2 default campaign, asv c0db2b8": 0.09829550878823877,
+      "rgsaddle/pt-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.2242366294231697,
+      "sella/pt-island-ts-default 2.6.0 default campaign, asv 6cfb60c": 1.1119679431669511,
+      "tsase/dimer-pt 1.0 default campaign 98aac60": 0.12286938598529847
     },
     "rho": {
       "eon-client/ts-pt-dimer 3.5.0 campaign 4d8b34b": [
         0.0,
-        0.6530612244897959,
-        1.0,
+        0.5714285714285714,
+        0.9795918367346939,
         1.0,
         1.0
       ],
       "eon-client/ts-pt-lanczos 3.5.0 campaign 4d8b34b": [
         0.0,
-        0.5510204081632653,
+        0.20408163265306123,
         0.9795918367346939,
-        1.0,
+        0.9795918367346939,
         1.0
       ],
       "eon-client/ts-pt-lanczos-improved 3.5.0 campaign 4d8b34b": [
         0.0,
         0.9795918367346939,
-        1.0,
+        0.9795918367346939,
         1.0,
         1.0
       ],
       "eon-svn/ts-pt-dimer-smooth r2549 campaign r2549": [
         0.0,
-        0.9795918367346939,
+        0.9591836734693877,
         1.0,
         1.0,
         1.0
@@ -469,7 +470,14 @@
       ],
       "eon-svn/ts-pt-lanczos-smooth r2549 campaign r2549": [
         0.0,
-        0.6530612244897959,
+        0.3469387755102041,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "optim/hef-ffd-ts-pt svn-snapshot wales-2014 campaign 02aaf45": [
+        0.6326530612244898,
+        1.0,
         1.0,
         1.0,
         1.0
@@ -477,7 +485,7 @@
       "partn/ts-pt 1.1.0 default campaign 9b75351": [
         0.0,
         0.02040816326530612,
-        0.5102040816326531,
+        0.4897959183673469,
         0.7755102040816326,
         0.9183673469387755
       ],
@@ -492,53 +500,53 @@
         0.0,
         0.0,
         0.0,
-        0.04081632653061224,
-        0.8367346938775511
+        0.0,
+        0.7346938775510204
       ],
       "rgsaddle/pt-dimer-lbfgs 0.2.2 default campaign, asv c0db2b8": [
         0.0,
         0.0,
         0.0,
-        0.08163265306122448,
-        0.2857142857142857
+        0.0,
+        0.24489795918367346
       ],
       "rgsaddle/pt-dimer-lbfgs-tuned 0.2.2 tuned campaign, asv c0db2b8": [
         0.0,
         0.0,
-        0.061224489795918366,
+        0.0,
         0.5918367346938775,
         0.6122448979591837
       ],
       "rgsaddle/pt-dimer-rotskip 0.2.2 default campaign, asv c0db2b8": [
         0.0,
-        0.5714285714285714,
+        0.22448979591836735,
         0.9795918367346939,
         0.9795918367346939,
         0.9795918367346939
       ],
       "rgsaddle/pt-dimer-rotskip-tuned 0.2.2 tuned campaign, asv c0db2b8": [
         0.0,
-        0.20408163265306123,
+        0.08163265306122448,
+        0.8163265306122449,
         0.8367346938775511,
-        0.8571428571428571,
-        1.0
+        0.9795918367346939
       ],
       "rgsaddle/pt-lanczos 0.2.2 default campaign, asv c0db2b8": [
         0.0,
         0.0,
         0.0,
-        0.1836734693877551,
+        0.061224489795918366,
         0.5306122448979592
       ],
       "rgsaddle/pt-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": [
         0.0,
         0.0,
-        0.08163265306122448,
+        0.02040816326530612,
         0.46938775510204084,
         0.5102040816326531
       ],
       "sella/pt-island-ts-default 2.6.0 default campaign, asv 6cfb60c": [
-        1.0,
+        0.3877551020408163,
         1.0,
         1.0,
         1.0,
@@ -548,8 +556,8 @@
         0.0,
         0.0,
         0.0,
-        0.16326530612244897,
-        0.7346938775510204
+        0.061224489795918366,
+        0.6938775510204082
       ]
     },
     "solved": {
@@ -559,6 +567,7 @@
       "eon-svn/ts-pt-dimer-smooth r2549 campaign r2549": 1.0,
       "eon-svn/ts-pt-lanczos-improved r2549 campaign r2549": 1.0,
       "eon-svn/ts-pt-lanczos-smooth r2549 campaign r2549": 1.0,
+      "optim/hef-ffd-ts-pt svn-snapshot wales-2014 campaign 02aaf45": 1.0,
       "partn/ts-pt 1.1.0 default campaign 9b75351": 0.9183673469387755,
       "rgsaddle/pt-dimer-fire 0.2.2 default campaign, asv c0db2b8": 0.9795918367346939,
       "rgsaddle/pt-dimer-fire-tuned 0.2.2 tuned campaign, asv c0db2b8": 1.0,
@@ -580,6 +589,51 @@
     ]
   },
   "ranked": [
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "optim",
+      "code_version": "svn-snapshot",
+      "commit": "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "optim-02aaf45245af-hef-ffd-ts-pt",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 49,
+      "history": false,
+      "max_calls": 143.0,
+      "mean_calls": 71.40816326530613,
+      "mean_per_image": null,
+      "median": 70.0,
+      "median_calls": 70.0,
+      "median_high": 74.0,
+      "median_low": 61.0,
+      "median_per_image": null,
+      "min_calls": 43.0,
+      "n": 49,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 71.40816326530613,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/optim-02aaf45245af-hef-ffd-ts-pt.dat",
+      "problem": "tsopt/pt-island",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "optim/hef-ffd-ts-pt",
+      "tuning": "wales-2014",
+      "wilson_high": 1.0,
+      "wilson_low": 0.9273021807795035
+    },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "call_unit": "total",

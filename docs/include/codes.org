@@ -1022,6 +1022,50 @@
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="double-ended-saddle-search/lj38" data-template="optim/de-lj38">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="template">optim/de-lj38</td>
+   <td data-field="version">optim svn-snapshot</td>
+   <td data-field="commit">02aaf45245af</td>
+   <td data-field="par2_mean">130.38</td>
+   <td data-field="mean_calls">130.38</td>
+   <td data-field="median_calls">120</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="optim/de-2ts">
+   <td>lj38_2ts_separation</td>
+   <td data-field="template">optim/de-2ts</td>
+   <td data-field="version">optim svn-snapshot</td>
+   <td data-field="commit">02aaf45245af</td>
+   <td data-field="par2_mean">2899.67</td>
+   <td data-field="mean_calls">2899.67</td>
+   <td data-field="median_calls">2596</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="optim/de-pt">
+   <td>pt-island</td>
+   <td data-field="template">optim/de-pt</td>
+   <td data-field="version">optim svn-snapshot</td>
+   <td data-field="commit">02aaf45245af</td>
+   <td data-field="par2_mean">104.271</td>
+   <td data-field="mean_calls">104.271</td>
+   <td data-field="median_calls">98</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="lowest-eigenvector/lj38" data-template="optim/rr-loweig">
+   <td>lj38</td>
+   <td data-field="template">optim/rr-loweig</td>
+   <td data-field="version">optim svn-snapshot</td>
+   <td data-field="commit">02aaf45245af</td>
+   <td data-field="par2_mean">24.505</td>
+   <td data-field="mean_calls">24.505</td>
+   <td data-field="median_calls">23</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
    <tr data-problem="minimization/lj38" data-template="optim/lbfgs-lj38">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="template">optim/lbfgs-lj38</td>
@@ -1033,16 +1077,38 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 2</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/morse-bulk" data-template="optim/lbfgs-morse">
+   <tr data-problem="minimization/morse-bulk" data-template="optim/morse-lbfgs-tuned">
    <td>Morse bulk</td>
-   <td data-field="template">optim/lbfgs-morse</td>
+   <td data-field="template">optim/morse-lbfgs-tuned</td>
    <td data-field="version">optim svn-snapshot</td>
    <td data-field="commit">02aaf45245af</td>
-   <td data-field="par2_mean">17408.8</td>
-   <td data-field="mean_calls">65.19</td>
-   <td data-field="median_calls">65</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 87</td>
+   <td data-field="par2_mean">45.97</td>
+   <td data-field="mean_calls">45.97</td>
+   <td data-field="median_calls">44</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="tsopt/LJ38" data-template="optim/hef-ffd-ts-lj38">
+   <td>LJ38</td>
+   <td data-field="template">optim/hef-ffd-ts-lj38</td>
+   <td data-field="version">optim svn-snapshot</td>
+   <td data-field="commit">02aaf45245af</td>
+   <td data-field="par2_mean">151.985</td>
+   <td data-field="mean_calls">151.985</td>
+   <td data-field="median_calls">119</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="tsopt/pt-island" data-template="optim/hef-ffd-ts-pt">
+   <td>pt-island</td>
+   <td data-field="template">optim/hef-ffd-ts-pt</td>
+   <td data-field="version">optim svn-snapshot</td>
+   <td data-field="commit">02aaf45245af</td>
+   <td data-field="par2_mean">71.4082</td>
+   <td data-field="mean_calls">71.4082</td>
+   <td data-field="median_calls">70</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">49</td>
    </tr>
    </tbody></table></div>
    </section>

@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-45 reproduced, 27 not reproduced, 79 not rerun. 151 archive rows.
+52 reproduced, 20 not reproduced, 79 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -30,10 +30,10 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj38/eon-dimer | force_calls 337 | 377 | not reproduced; improved_unset |
 | lj38/eon-lanczos | force_calls 364 | 342 | reproduced |
 | lj38/eon-lanczos-improved | force_calls 287 | 259 | reproduced |
-| lj38/optim | force_calls 131 | 147 | not reproduced; optim_pes_counter |
+| lj38/optim | force_calls 131 | 130 | reproduced |
 | lj38/optim-cl-string | — | — | not rerun |
 | lj38/pele | — | — | not rerun |
-| lj38_2ts_separation/optim | force_calls 2885 | 3454 | not reproduced; optim_pes_counter |
+| lj38_2ts_separation/optim | force_calls 2885 | 2900 | reproduced |
 | lj38_2ts_separation/pele | — | — | not rerun |
 | pt-island/eon-ci-neb | force_calls 248 | 226 | reproduced |
 | pt-island/eon-ci-neb-5 | — | — | not rerun |
@@ -42,7 +42,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | pt-island/eon-dimer | force_calls 182 | 192 | reproduced |
 | pt-island/eon-lanczos | force_calls 325 | 222 | not reproduced; pt_lanczos |
 | pt-island/eon-lanczos-improved | force_calls 222 | 181 | not reproduced; pt_lanczos |
-| pt-island/optim | force_calls 103 | 138 | not reproduced; optim_pt_units |
+| pt-island/optim | force_calls 103 | 104 | reproduced |
 | pt-island/optim-6 | — | — | not rerun |
 | pt-island/optim-cl-string | — | — | not rerun |
 | pt-island/pele | — | — | not rerun |
@@ -95,7 +95,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj38/eon-dimer-cg | force_calls 30 | 30 | reproduced |
 | lj38/eon-dimer-lbfgs | force_calls 28 | 28 | reproduced |
 | lj38/eon-lanczos | force_calls 28 | 26 | reproduced |
-| lj38/optim-first-order | force_calls 25 | 61 | not reproduced; optim_rr_defaults |
+| lj38/optim-first-order | force_calls 25 | 25 | reproduced |
 | lj38/optim-second-order | — | — | not rerun |
 | lj38/pele-first-order | force_calls 25 | 25 | reproduced |
 | lj38/pele-second-order | force_calls 47 | 47 | reproduced |
@@ -140,7 +140,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | morse-bulk/eon-lbfgs | force_calls 52 | 52 | reproduced |
 | morse-bulk/eon-sd | force_calls 196 | 7038 | not reproduced; morse_sd |
 | morse-bulk/eon-sd-twopoint | — | — | not rerun |
-| morse-bulk/optim | force_calls 46 | 27 | not reproduced; optim_morse_memory |
+| morse-bulk/optim | force_calls 46 | 46 | reproduced |
 | morse-bulk/pele-lbfgs | force_calls 51 | 92 | not reproduced; pele_morse |
 | morse-bulk/tsase-sdlbfgs | — | — | not rerun |
 
@@ -203,7 +203,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | LJ38/eon-lanczos | force_calls 321 | 293 | reproduced |
 | LJ38/eon-lanczos-improved | force_calls 237 | 271 | not reproduced; improved_unset |
 | LJ38/optim_cd | — | — | not rerun |
-| LJ38/optim_ffd | force_calls 145 | 489 | not reproduced; optim_lj38_ts |
+| LJ38/optim_ffd | force_calls 145 | 152 | reproduced |
 | LJ38/pele_cd | force_calls 254 | 263.52 | reproduced; residual |
 | LJ38/pele_ffd | force_calls 192 | 207.51 | reproduced; residual |
 | LJ38/sella | force_calls 69.55 | 93 | not reproduced; sella_trust |
@@ -211,7 +211,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | pt-island/eon-lanczos | force_calls 143 | 146 | reproduced |
 | pt-island/eon-lanczos-improved | force_calls 106 | 106 | reproduced |
 | pt-island/optim_cd | — | — | not rerun |
-| pt-island/optim_ffd | force_calls 71 | 170 | not reproduced; optim_pt_units |
+| pt-island/optim_ffd | force_calls 71 | 71 | reproduced |
 | pt-island/pele | force_calls 88 | 88.551 | reproduced |
 | pt-island/sella | force_calls 53 | 88 | not reproduced; sella_trust |
 
@@ -242,26 +242,12 @@ The r2549 template turns improved on. The 2014 ini left that key unset. The mean
 - double-ended-saddle-search/lj38/eon-dimer
 - tsopt/LJ38/eon-lanczos-improved
 
-### optim_pes_counter
-
-The template note records the 2014 mean as OPTIM's own energy-plus-gradient calls. The harness score is pes.evaluate on the harness potential.
-
-- double-ended-saddle-search/lj38/optim
-- double-ended-saddle-search/lj38_2ts_separation/optim
-
 ### pt_lanczos
 
 The svn template uses the archived Lanczos keys (10 iterations, tolerance 0.05) and shifted Morse::force. Dimer and climbing-image on that kernel reproduce. Lanczos does not, and the failure count is 0 against 5 or 8.
 
 - double-ended-saddle-search/pt-island/eon-lanczos
 - double-ended-saddle-search/pt-island/eon-lanczos-improved
-
-### optim_pt_units
-
-archive run.sh divides coordinates by r0 = 2.897 and scales rho and rcut into those units. The harness keeps the problem Morse in eV/Angstrom on the unscaled con file.
-
-- double-ended-saddle-search/pt-island/optim
-- tsopt/pt-island/optim_ffd
 
 ### pele_bh_defaults
 
@@ -274,12 +260,6 @@ The archived driver is the dangling path bin/js850/globalopt.py. The harness use
 The r2549 Al dimer with the archived rotation string (CG, max 50, tol 1) misses barrier_force_calls and rate_force_calls by about 30 percent. Pt dimer CG with max 10 reproduces all four hTST counts.
 
 - hTST/Al/eon-dimer-cg
-
-### optim_rr_defaults
-
-The Rayleigh-Ritz template uses updates 4. The archived first-order mean is 25 and the second-order mean is 46. This default scores 61, so it is not either archived order.
-
-- lowest-eigenvector/lj38/optim-first-order
 
 ### pele_fire
 
@@ -300,12 +280,6 @@ ASE 3.29 with the archived Morse script (L-BFGS memory 20, maxstep 0.2, alpha 25
 eOn Morse steepest descent scores 7038 with 19 failures. The archive is 196 with 0. Morse L-BFGS, CG, and FIRE on the same client reproduce, so the kernel is not the split.
 
 - minimization/morse-bulk/eon-sd
-
-### optim_morse_memory
-
-comments.txt sets L-BFGS memory 100 and maximum move 2.0. That rerun scores 27. OPTIM defaults (updates 4) score 46, which is the archived integer, but that is not the comment's setup. The odata preamble was not archived.
-
-- minimization/morse-bulk/optim
 
 ### pele_morse
 
@@ -332,12 +306,6 @@ The harness link and novelty test uses Cartesian RMSD 0.5 over the full island. 
 The classic dimer campaign (improved false, the 2014 key) has fraction_connected 0.692 against 0.746, inside 10 percent, but force calls 6.97e6 against 3.78e6 and unique saddles 91.7 against 109.2. The archive standard error on the force calls is 5.27e5. This eOn AKMC counter is not the harness RMSD link test.
 
 - saddle-search/pt-island/eon-dimer
-
-### optim_lj38_ts
-
-Archive run.sh unpacks coords-xyz.tar.gz. The harness uses the problem coords-con set (Kabsch RMS about 6.33). The odata preamble is not in the archive snapshot. The template uses updates 4. The mean is 489 against 145.
-
-- tsopt/LJ38/optim_ffd
 
 ### sella_trust
 

@@ -61,7 +61,7 @@ It does not run a campaign.
    <td data-code="compass">—</td>
    <td data-code="dlfind" data-template="dlfind/lbfgs-morse" data-par2="13626.5"><span class="bench-score">13626.5</span><a href="generated/suites/minimization.html#morse-bulk-templates">dlfind/lbfgs-morse</a></td>
    <td data-code="lammps" data-template="lammps/fire-morse" data-par2="17656.7"><span class="bench-score">17656.7</span><a href="generated/suites/minimization.html#morse-bulk-templates">lammps/fire-morse</a></td>
-   <td data-code="optim" data-template="optim/lbfgs-morse" data-par2="17408.8"><span class="bench-score">17408.8</span><a href="generated/suites/minimization.html#morse-bulk-templates">optim/lbfgs-morse</a></td>
+   <td data-code="optim" data-template="optim/morse-lbfgs-tuned" data-par2="45.97"><span class="bench-score">45.97</span><a href="generated/suites/minimization.html#morse-bulk-templates">optim/morse-lbfgs-tuned</a></td>
    <td data-code="tsase" data-template="tsase/lbfgs-morse" data-par2="17606.4"><span class="bench-score">17606.4</span><a href="generated/suites/minimization.html#morse-bulk-templates">tsase/lbfgs-morse</a></td>
    </tr>
    <tr data-problem="saddle-search/pt-island">
@@ -93,7 +93,7 @@ It does not run a campaign.
    <td data-code="compass" data-template="compass/sqnm" data-par2="1517.3"><span class="bench-score">1517.3</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
-   <td data-code="optim">—</td>
+   <td data-code="optim" data-template="optim/de-lj38" data-par2="130.38"><span class="bench-score">130.38</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">optim/de-lj38</a></td>
    <td data-code="tsase" data-template="tsase/ci-neb" data-par2="3119.56"><span class="bench-score">3119.56</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">tsase/ci-neb</a></td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation">
@@ -109,7 +109,7 @@ It does not run a campaign.
    <td data-code="compass" data-template="compass/sqnm" data-par2="6713.37"><span class="bench-score">6713.37</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
-   <td data-code="optim">—</td>
+   <td data-code="optim" data-template="optim/de-2ts" data-par2="2899.67"><span class="bench-score">2899.67</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">optim/de-2ts</a></td>
    <td data-code="tsase" data-template="tsase/ci-neb" data-par2="18812.1"><span class="bench-score">18812.1</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">tsase/ci-neb</a></td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island">
@@ -125,7 +125,7 @@ It does not run a campaign.
    <td data-code="compass" data-template="compass/sqnm" data-par2="1078.12"><span class="bench-score">1078.12</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
-   <td data-code="optim">—</td>
+   <td data-code="optim" data-template="optim/de-pt" data-par2="104.271"><span class="bench-score">104.271</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">optim/de-pt</a></td>
    <td data-code="tsase" data-template="tsase/ci-neb" data-par2="2524.53"><span class="bench-score">2524.53</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">tsase/ci-neb</a></td>
    </tr>
    <tr data-problem="globalopt/lj38">
@@ -157,7 +157,7 @@ It does not run a campaign.
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
-   <td data-code="optim">—</td>
+   <td data-code="optim" data-template="optim/rr-loweig" data-par2="24.505"><span class="bench-score">24.505</span><a href="generated/suites/lowest-eigenvector.html#lj38-templates">optim/rr-loweig</a></td>
    <td data-code="tsase" data-template="tsase/mode-lj38" data-par2="2420.61"><span class="bench-score">2420.61</span><a href="generated/suites/lowest-eigenvector.html#lj38-templates">tsase/mode-lj38</a></td>
    </tr>
    <tr data-problem="tsopt/LJ38">
@@ -173,7 +173,7 @@ It does not run a campaign.
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
-   <td data-code="optim">—</td>
+   <td data-code="optim" data-template="optim/hef-ffd-ts-lj38" data-par2="151.985"><span class="bench-score">151.985</span><a href="generated/suites/tsopt.html#LJ38-templates">optim/hef-ffd-ts-lj38</a></td>
    <td data-code="tsase" data-template="tsase/dimer-lj38" data-par2="20000"><span class="bench-score">20000</span><a href="generated/suites/tsopt.html#LJ38-templates">tsase/dimer-lj38</a></td>
    </tr>
    <tr data-problem="tsopt/pt-island">
@@ -189,7 +189,7 @@ It does not run a campaign.
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
-   <td data-code="optim">—</td>
+   <td data-code="optim" data-template="optim/hef-ffd-ts-pt" data-par2="71.4082"><span class="bench-score">71.4082</span><a href="generated/suites/tsopt.html#pt-island-templates">optim/hef-ffd-ts-pt</a></td>
    <td data-code="tsase" data-template="tsase/dimer-pt" data-par2="1144.31"><span class="bench-score">1144.31</span><a href="generated/suites/tsopt.html#pt-island-templates">tsase/dimer-pt</a></td>
    </tr>
    <tr data-problem="neb/Pt-heptamer">

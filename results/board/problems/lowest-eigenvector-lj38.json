@@ -187,101 +187,109 @@
   ],
   "profile": {
     "area_log10": {
-      "eon-client/low-lj38-dimer-cg 3.5.0 campaign 4d8b34b": 1.0159762353659365,
-      "eon-client/low-lj38-dimer-lbfgs 3.5.0 campaign 4d8b34b": 1.038553485040735,
-      "eon-client/low-lj38-lanczos 3.5.0 campaign 4d8b34b": 1.0588730097480539,
-      "eon-svn/low-lj38-dimer-cg r2549 campaign r2549": 1.0159762353659365,
-      "eon-svn/low-lj38-dimer-lbfgs r2549 campaign r2549": 1.038553485040735,
-      "eon-svn/low-lj38-lanczos-ljcut r2549 campaign r2549": 1.0588730097480539,
-      "partn/mode-lj38 1.1.0 default campaign 9b75351": 0.9512547862981806,
-      "pysisyphus/lanczos-lj38 0.1.dev1 default campaign a4ce10d": 0.8880384872087446,
-      "rgsaddle/mode-dimer 0.2.2 default campaign, asv c0db2b8": 1.0182339603334163,
-      "rgsaddle/mode-dimer-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.865461237533946,
-      "rgsaddle/mode-lanczos 0.2.2 default campaign, asv c0db2b8": 1.086718284346972,
-      "rgsaddle/mode-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.9572753862114602,
-      "tsase/mode-lj38 1.0 default campaign 98aac60": 0.21448387191058665
+      "eon-client/low-lj38-dimer-cg 3.5.0 campaign 4d8b34b": 1.0144710853876167,
+      "eon-client/low-lj38-dimer-lbfgs 3.5.0 campaign 4d8b34b": 1.0332854601166155,
+      "eon-client/low-lj38-lanczos 3.5.0 campaign 4d8b34b": 1.0460792349323347,
+      "eon-svn/low-lj38-dimer-cg r2549 campaign r2549": 1.0144710853876167,
+      "eon-svn/low-lj38-dimer-lbfgs r2549 campaign r2549": 1.0332854601166155,
+      "eon-svn/low-lj38-lanczos-ljcut r2549 campaign r2549": 1.0460792349323347,
+      "optim/rr-loweig svn-snapshot wales-2014 campaign 02aaf45": 1.0791925344553726,
+      "partn/mode-lj38 1.1.0 default campaign 9b75351": 0.944481611395741,
+      "pysisyphus/lanczos-lj38 0.1.dev1 default campaign a4ce10d": 0.8805127373171451,
+      "rgsaddle/mode-dimer 0.2.2 default campaign, asv c0db2b8": 1.009203060463497,
+      "rgsaddle/mode-dimer-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.8534200377073867,
+      "rgsaddle/mode-lanczos 0.2.2 default campaign, asv c0db2b8": 1.0814502594228523,
+      "rgsaddle/mode-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.9505022113090207,
+      "tsase/mode-lj38 1.0 default campaign 98aac60": 0.20921584698646695
     },
     "rho": {
       "eon-client/low-lj38-dimer-cg 3.5.0 campaign 4d8b34b": [
-        0.01,
+        0.0,
         0.87,
         1.0,
         1.0,
         1.0
       ],
       "eon-client/low-lj38-dimer-lbfgs 3.5.0 campaign 4d8b34b": [
-        0.06,
+        0.025,
         0.92,
         1.0,
         1.0,
         1.0
       ],
       "eon-client/low-lj38-lanczos 3.5.0 campaign 4d8b34b": [
-        0.135,
+        0.05,
         0.95,
         1.0,
         1.0,
         1.0
       ],
       "eon-svn/low-lj38-dimer-cg r2549 campaign r2549": [
-        0.01,
+        0.0,
         0.87,
         1.0,
         1.0,
         1.0
       ],
       "eon-svn/low-lj38-dimer-lbfgs r2549 campaign r2549": [
-        0.06,
+        0.025,
         0.92,
         1.0,
         1.0,
         1.0
       ],
       "eon-svn/low-lj38-lanczos-ljcut r2549 campaign r2549": [
-        0.135,
+        0.05,
         0.95,
         1.0,
         1.0,
         1.0
       ],
+      "optim/rr-loweig svn-snapshot wales-2014 campaign 02aaf45": [
+        0.24,
+        0.965,
+        1.0,
+        1.0,
+        1.0
+      ],
       "partn/mode-lj38 1.1.0 default campaign 9b75351": [
-        0.27,
+        0.225,
         0.85,
         0.87,
         0.87,
         0.87
       ],
       "pysisyphus/lanczos-lj38 0.1.dev1 default campaign a4ce10d": [
-        0.3,
+        0.25,
         0.8,
         0.8,
         0.8,
         0.8
       ],
       "rgsaddle/mode-dimer 0.2.2 default campaign, asv c0db2b8": [
-        0.095,
-        0.835,
+        0.075,
+        0.815,
         1.0,
         1.0,
         1.0
       ],
       "rgsaddle/mode-dimer-tuned 0.2.2 tuned campaign, asv c0db2b8": [
         0.0,
-        0.45,
+        0.41,
         0.93,
         0.995,
         1.0
       ],
       "rgsaddle/mode-lanczos 0.2.2 default campaign, asv c0db2b8": [
-        0.29,
-        0.965,
+        0.275,
+        0.955,
         1.0,
         1.0,
         1.0
       ],
       "rgsaddle/mode-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": [
-        0.01,
-        0.68,
+        0.005,
+        0.66,
         0.995,
         1.0,
         1.0
@@ -290,8 +298,8 @@
         0.0,
         0.025,
         0.07,
-        0.28,
-        0.675
+        0.27,
+        0.66
       ]
     },
     "solved": {
@@ -301,6 +309,7 @@
       "eon-svn/low-lj38-dimer-cg r2549 campaign r2549": 1.0,
       "eon-svn/low-lj38-dimer-lbfgs r2549 campaign r2549": 1.0,
       "eon-svn/low-lj38-lanczos-ljcut r2549 campaign r2549": 1.0,
+      "optim/rr-loweig svn-snapshot wales-2014 campaign 02aaf45": 1.0,
       "partn/mode-lj38 1.1.0 default campaign 9b75351": 0.87,
       "pysisyphus/lanczos-lj38 0.1.dev1 default campaign a4ce10d": 0.8,
       "rgsaddle/mode-dimer 0.2.2 default campaign, asv c0db2b8": 1.0,
@@ -318,6 +327,51 @@
     ]
   },
   "ranked": [
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "optim",
+      "code_version": "svn-snapshot",
+      "commit": "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "optim-02aaf45245af-rr-loweig",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 200,
+      "history": false,
+      "max_calls": 58.0,
+      "mean_calls": 24.505,
+      "mean_per_image": null,
+      "median": 23.0,
+      "median_calls": 23.0,
+      "median_high": 24.0,
+      "median_low": 22.0,
+      "median_per_image": null,
+      "min_calls": 13.0,
+      "n": 200,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 24.505,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/optim-02aaf45245af-rr-loweig.dat",
+      "problem": "lowest-eigenvector/lj38",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "optim/rr-loweig",
+      "tuning": "wales-2014",
+      "wilson_high": 1.0,
+      "wilson_low": 0.9811546736227335
+    },
     {
       "asv_commit": "a914203cbb891442232aea2c92f960df9a48dc1d",
       "call_unit": "total",
