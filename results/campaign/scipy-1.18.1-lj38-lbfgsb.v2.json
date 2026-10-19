@@ -1,7 +1,7 @@
 {
   "bootstrap_resamples": 2000,
   "bootstrap_seed": 20261015,
-  "note": "Harness counter. Analytic Hessian-vector products are not force calls. Energy and Kabsch RMSD were not applied.",
+  "note": "Harness counter. This method does not request a Hessian. Energy and Kabsch RMSD were not applied.",
   "par_factor": 2,
   "problem": "minimization/lj38",
   "runs": [

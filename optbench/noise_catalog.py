@@ -90,6 +90,7 @@ def specs() -> list[dict]:
     )
     hessian_note = (
         "Default profile at sigma 0. Newton and dogleg call the analytic Hessian of the clean force. "
+        "Each matrix costs one force call per coordinate. "
         "Positive sigma has no template: the noisy force is not that gradient."
     )
     rgmin_force = (
@@ -184,8 +185,8 @@ def specs() -> list[dict]:
         "the clean-energy window. The index is the clean Hessian with the rigid-mode rule."
     )
     scipy_hess_note = (
-        "Default profile at sigma 0. Hessian-vector products use the analytic Hessian of the clean force "
-        "and are not force calls. trust-krylov and trust-ncg refuse a trial past the 0.2 per-atom cap. "
+        "Default profile at sigma 0. Each analytic Hessian-vector product counts as one force call. "
+        "trust-krylov and trust-ncg refuse a trial past the 0.2 per-atom cap. "
         "Newton-CG maps that trial back inside the ball; the map is the identity through 0.18. "
         "Positive sigma has no template: the noisy force is not that gradient."
     )

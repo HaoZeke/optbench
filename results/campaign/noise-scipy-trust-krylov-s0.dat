@@ -3,12 +3,14 @@
 # The index uses the clean Hessian. Six rigid modes are removed.
 # A curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6).
 # Energy and Kabsch RMSD are not applied: the problem file has no per-start reference.
-# Default profile at sigma 0. Hessian-vector products use the analytic Hessian of the clean force and are not force calls. trust-krylov and trust-ncg refuse a trial past the 0.2 per-atom cap. Newton-CG maps that trial back inside the ball; the map is the identity through 0.18. Positive sigma has no template: the noisy force is not that gradient.
-force_calls 63
-force_calls_min 34
-force_calls_max 136
+# Each analytic Hessian-vector product counts as one force call.
+# gradient_calls is the harness energy and gradient. hessian_calls counts products. force_calls is their sum.
+# Default profile at sigma 0. Each analytic Hessian-vector product counts as one force call. trust-krylov and trust-ncg refuse a trial past the 0.2 per-atom cap. Newton-CG maps that trial back inside the ball; the map is the identity through 0.18. Positive sigma has no template: the noisy force is not that gradient.
+force_calls 580
+force_calls_min 251
+force_calls_max 1441
 nfailed 0
-median 60
+median 546.5
 code SciPy
 code_version 1.18.1
 commit e4e854eaa8f18d807cd3496028e257e36caa93cc
@@ -18,12 +20,12 @@ tuning default
 counter harness
 problem minimization/lj38-noise
 sigma 0
-par2_mean 102.522
+par2_mean 619.227
 wilson_low 0.992737192137
 wilson_high 0.999451356412
-par2_median 60
-par2_median_low 59
-par2_median_high 61
+par2_median 546.5
+par2_median_low 534.5
+par2_median_high 563
 v2_nfailed 2
 v2_successes 998
 n 1000

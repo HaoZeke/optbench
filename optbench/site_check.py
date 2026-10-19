@@ -6,6 +6,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 
 from .board import (
+    SWEEP_PAGES,
     MissingAsvCommit,
     _registry,
     _show_per_image,
@@ -103,6 +104,28 @@ def _check_ranked(label: str, table: dict, document: dict) -> list[str]:
             if got.get(field) != value:
                 errors.append(
                     f"{label} {problem_id} row {index} {field} is {got.get(field)!r}, board has {value!r}"
+                )
+    return errors
+
+
+def _check_sweep(label: str, table: dict, document: dict) -> list[str]:
+    """One row per code, the best full run, in ranked order."""
+    problem_id = table["attrs"].get("data-problem", "")
+    problem = (document.get("problems") or {}).get(problem_id)
+    ranked = list(problem.get("ranked") or []) if problem else []
+    chosen = list(best_ranked_by_code(ranked).values())
+    body = _ranked_body(table)
+    if len(body) != len(chosen):
+        return [f"{label} {problem_id} sweep rows {len(body)} != board {len(chosen)}"]
+    per_image = _show_per_image(problem) if problem else False
+    errors: list[str] = []
+    for index, (got_row, board_row) in enumerate(zip(body, chosen), start=1):
+        got = _cell_map(got_row)
+        expected = dict(ranked_cells(board_row, per_image))
+        for field, value in expected.items():
+            if got.get(field) != value:
+                errors.append(
+                    f"{label} {problem_id} sweep row {index} {field} is {got.get(field)!r}, board has {value!r}"
                 )
     return errors
 
@@ -277,6 +300,8 @@ def check_site(root: Path) -> list[str]:
                 errors.extend(_check_ranked(label, table, document))
             elif kind == "headline":
                 errors.extend(_check_headline(label, table, document))
+            elif kind == "sweep":
+                errors.extend(_check_sweep(label, table, document))
             elif kind == "code-best":
                 errors.extend(_check_code_best(label, table, document))
             elif kind == "summary":
@@ -288,12 +313,34 @@ def check_site(root: Path) -> list[str]:
         if not suite:
             errors.append(f"{suite_label} is missing")
             continue
-        _require(
-            suite,
-            f'data-board-table="ranked" data-problem="{problem["id"]}"',
-            suite_label,
-            errors,
-        )
+        detail_name = SWEEP_PAGES.get(problem["id"])
+        if detail_name:
+            detail_label = f"docs/orgmode/generated/suites/{detail_name}.org"
+            detail = texts.get(detail_label, "")
+            if not detail:
+                errors.append(f"{detail_label} is missing")
+            else:
+                _require(
+                    detail,
+                    f'data-board-table="ranked" data-problem="{problem["id"]}"',
+                    detail_label,
+                    errors,
+                )
+            _require(
+                suite,
+                f'data-board-table="sweep" data-problem="{problem["id"]}"',
+                suite_label,
+                errors,
+            )
+            if f'data-board-table="ranked" data-problem="{problem["id"]}"' in suite:
+                errors.append(f"{suite_label} still carries the full {problem['id']} table")
+        else:
+            _require(
+                suite,
+                f'data-board-table="ranked" data-problem="{problem["id"]}"',
+                suite_label,
+                errors,
+            )
         if problem["id"] not in summary_ids.get(suite_label, set()):
             errors.append(f"{suite_label} summary is missing {problem['id']}")
         board_problem = (document.get("problems") or {}).get(problem["id"]) or {}
@@ -346,12 +393,34 @@ def check_site(root: Path) -> list[str]:
             if not page:
                 errors.append(f"{built} is missing")
                 continue
-            _require(
-                page,
-                f'data-board-table="ranked" data-problem="{problem["id"]}"',
-                built,
-                errors,
-            )
+            detail_name = SWEEP_PAGES.get(problem["id"])
+            if detail_name:
+                detail_built = f"docs/build/generated/suites/{detail_name}.html"
+                detail_page = texts.get(detail_built, "")
+                if not detail_page:
+                    errors.append(f"{detail_built} is missing")
+                else:
+                    _require(
+                        detail_page,
+                        f'data-board-table="ranked" data-problem="{problem["id"]}"',
+                        detail_built,
+                        errors,
+                    )
+                _require(
+                    page,
+                    f'data-board-table="sweep" data-problem="{problem["id"]}"',
+                    built,
+                    errors,
+                )
+                if f'data-board-table="ranked" data-problem="{problem["id"]}"' in page:
+                    errors.append(f"{built} still carries the full {problem['id']} table")
+            else:
+                _require(
+                    page,
+                    f'data-board-table="ranked" data-problem="{problem["id"]}"',
+                    built,
+                    errors,
+                )
             if problem["id"] not in summary_ids.get(built, set()):
                 errors.append(f"{built} summary is missing {problem['id']}")
     return errors

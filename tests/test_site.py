@@ -102,8 +102,17 @@ def test_rendered_pages_use_the_board_rank():
     assert "eon-3.5.0-saddle-pt-dimer" in saddle
     assert "not yet on the harness counter" in saddle
     assert "Per-search cost" not in saddle
-    assert "noise/rgmin-dogleg-s0" in minimization
-    assert 'data-field="par2_mean">81.881<' in minimization
+    assert 'data-board-table="sweep" data-problem="minimization/lj38-noise"' in minimization
+    assert 'data-board-table="ranked" data-problem="minimization/lj38-noise"' not in minimization
+    noise_page = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "minimization-lj38-noise.org").read_text(
+        encoding="utf-8"
+    )
+    assert 'data-board-table="ranked" data-problem="minimization/lj38-noise"' in noise_page
+    noise = document["problems"]["minimization/lj38-noise"]
+    dogleg = next(row for row in noise["ranked"] if row.get("template") == "noise/rgmin-dogleg-s0")
+    dogleg_par2 = dict(ranked_cells(dogleg, False))["par2_mean"]
+    assert f'data-field="par2_mean">{dogleg_par2}<' in noise_page
+    assert "noise/rgmin-dogleg-s0" in noise_page
     board = (ROOT / "docs" / "include" / "v2-board.org").read_text(encoding="utf-8")
     assert 'data-board-table="summary"' in board
     assert f'data-par2="{cells["par2_mean"]}"' in board

@@ -10,11 +10,11 @@
    <th scope="row"><a href="generated/suites/minimization.html#lj38">Lennard-Jones 38 clusters</a></th>
    <td data-code="eOn" data-template="eon/lj38-lbfgs-m100" data-par2="180.137"><span class="bench-score">180.137</span><a href="generated/suites/minimization.html#lj38-templates">eon/lj38-lbfgs-m100</a></td>
    <td data-code="Eon svn">—</td>
-   <td data-code="rgmin" data-template="rgmin/lj38-dogleg" data-par2="81.881"><span class="bench-score">81.881</span><a href="generated/suites/minimization.html#lj38-templates">rgmin/lj38-dogleg</a></td>
+   <td data-code="rgmin" data-template="rgmin/lj38-lbfgs-m100" data-par2="197.228"><span class="bench-score">197.228</span><a href="generated/suites/minimization.html#lj38-templates">rgmin/lj38-lbfgs-m100</a></td>
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE" data-template="ase/lj38-lbfgs-tuned" data-par2="395.645"><span class="bench-score">395.645</span><a href="generated/suites/minimization.html#lj38-templates">ase/lj38-lbfgs-tuned</a></td>
    <td data-code="Sella" data-template="sella/lj38-min-tuned" data-par2="253.921"><span class="bench-score">253.921</span><a href="generated/suites/minimization.html#lj38-templates">sella/lj38-min-tuned</a></td>
-   <td data-code="SciPy" data-template="scipy/lj38-trust-krylov" data-par2="102.522"><span class="bench-score">102.522</span><a href="generated/suites/minimization.html#lj38-templates">scipy/lj38-trust-krylov</a></td>
+   <td data-code="SciPy" data-template="scipy/lj38-lbfgsb" data-par2="357.27"><span class="bench-score">357.27</span><a href="generated/suites/minimization.html#lj38-templates">scipy/lj38-lbfgsb</a></td>
    <td data-code="pysisyphus" data-template="pysisyphus/cg-lj38" data-par2="15124.7"><span class="bench-score">15124.7</span><a href="generated/suites/minimization.html#lj38-templates">pysisyphus/cg-lj38</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
@@ -26,17 +26,17 @@
    <tr data-problem="minimization/lj38-noise">
    <th scope="row"><a href="generated/suites/minimization.html#lj38-noise">Lennard-Jones 38 clusters with Gaussian force noise</a></th>
    <td data-code="eOn">—</td>
-   <td data-code="Eon svn" data-template="eon-svn/lj38-noise-0" data-par2="300.052"><span class="bench-score">300.052</span><a href="generated/suites/minimization.html#lj38-noise-templates">eon-svn/lj38-noise-0</a></td>
-   <td data-code="rgmin" data-template="noise/rgmin-dogleg-s0" data-par2="81.881"><span class="bench-score">81.881</span><a href="generated/suites/minimization.html#lj38-noise-templates">noise/rgmin-dogleg-s0</a></td>
+   <td data-code="Eon svn" data-template="eon-svn/lj38-noise-0" data-par2="300.052"><span class="bench-score">300.052</span><a href="generated/suites/minimization-lj38-noise.html#lj38-noise-templates">eon-svn/lj38-noise-0</a></td>
+   <td data-code="rgmin" data-template="noise/rgmin-lbfgs-m100-s0" data-par2="197.228"><span class="bench-score">197.228</span><a href="generated/suites/minimization-lj38-noise.html#lj38-noise-templates">noise/rgmin-lbfgs-m100-s0</a></td>
    <td data-code="rgsaddle">—</td>
-   <td data-code="ASE" data-template="noise/ase-lbfgs-s0" data-par2="396.55"><span class="bench-score">396.55</span><a href="generated/suites/minimization.html#lj38-noise-templates">noise/ase-lbfgs-s0</a></td>
-   <td data-code="Sella" data-template="noise/sella-min-s0" data-par2="729.433"><span class="bench-score">729.433</span><a href="generated/suites/minimization.html#lj38-noise-templates">noise/sella-min-s0</a></td>
-   <td data-code="SciPy" data-template="noise/scipy-trust-krylov-s0" data-par2="102.522"><span class="bench-score">102.522</span><a href="generated/suites/minimization.html#lj38-noise-templates">noise/scipy-trust-krylov-s0</a></td>
+   <td data-code="ASE" data-template="noise/ase-lbfgs-s0" data-par2="396.55"><span class="bench-score">396.55</span><a href="generated/suites/minimization-lj38-noise.html#lj38-noise-templates">noise/ase-lbfgs-s0</a></td>
+   <td data-code="Sella" data-template="noise/sella-min-s0" data-par2="729.433"><span class="bench-score">729.433</span><a href="generated/suites/minimization-lj38-noise.html#lj38-noise-templates">noise/sella-min-s0</a></td>
+   <td data-code="SciPy" data-template="noise/scipy-lbfgsb-s0" data-par2="357.27"><span class="bench-score">357.27</span><a href="generated/suites/minimization-lj38-noise.html#lj38-noise-templates">noise/scipy-lbfgsb-s0</a></td>
    <td data-code="pysisyphus">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
-   <td data-code="dlfind" data-template="dlfind/lbfgs-lj38-noise-s0" data-par2="231.908"><span class="bench-score">231.908</span><a href="generated/suites/minimization.html#lj38-noise-templates">dlfind/lbfgs-lj38-noise-s0</a></td>
-   <td data-code="lammps" data-template="lammps/hftn-lj38-noise-s0" data-par2="1123.81"><span class="bench-score">1123.81</span><a href="generated/suites/minimization.html#lj38-noise-templates">lammps/hftn-lj38-noise-s0</a></td>
+   <td data-code="dlfind" data-template="dlfind/lbfgs-lj38-noise-s0" data-par2="231.908"><span class="bench-score">231.908</span><a href="generated/suites/minimization-lj38-noise.html#lj38-noise-templates">dlfind/lbfgs-lj38-noise-s0</a></td>
+   <td data-code="lammps" data-template="lammps/hftn-lj38-noise-s0" data-par2="1123.81"><span class="bench-score">1123.81</span><a href="generated/suites/minimization-lj38-noise.html#lj38-noise-templates">lammps/hftn-lj38-noise-s0</a></td>
    <td data-code="optim">—</td>
    <td data-code="tsase">—</td>
    </tr>
@@ -44,11 +44,11 @@
    <th scope="row"><a href="generated/suites/minimization.html#morse-bulk">Morse bulk</a></th>
    <td data-code="eOn" data-template="eon/morse-lbfgs-m100" data-par2="54.18"><span class="bench-score">54.18</span><a href="generated/suites/minimization.html#morse-bulk-templates">eon/morse-lbfgs-m100</a></td>
    <td data-code="Eon svn">—</td>
-   <td data-code="rgmin" data-template="rgmin/morse-newton" data-par2="8.35"><span class="bench-score">8.35</span><a href="generated/suites/minimization.html#morse-bulk-templates">rgmin/morse-newton</a></td>
+   <td data-code="rgmin" data-template="rgmin/morse-lbfgs-m20" data-par2="26.87"><span class="bench-score">26.87</span><a href="generated/suites/minimization.html#morse-bulk-templates">rgmin/morse-lbfgs-m20</a></td>
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE" data-template="ase/morse-bfgslinesearch-default" data-par2="28.91"><span class="bench-score">28.91</span><a href="generated/suites/minimization.html#morse-bulk-templates">ase/morse-bfgslinesearch-default</a></td>
    <td data-code="Sella" data-template="sella/morse-min-default" data-par2="28.89"><span class="bench-score">28.89</span><a href="generated/suites/minimization.html#morse-bulk-templates">sella/morse-min-default</a></td>
-   <td data-code="SciPy" data-template="scipy/morse-trust-krylov" data-par2="10.35"><span class="bench-score">10.35</span><a href="generated/suites/minimization.html#morse-bulk-templates">scipy/morse-trust-krylov</a></td>
+   <td data-code="SciPy" data-template="scipy/morse-lbfgsb" data-par2="26.31"><span class="bench-score">26.31</span><a href="generated/suites/minimization.html#morse-bulk-templates">scipy/morse-lbfgsb</a></td>
    <td data-code="pysisyphus">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>

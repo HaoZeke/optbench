@@ -6,7 +6,7 @@ code_version = "1.18.1"
 commit = "e4e854eaa8f18d807cd3496028e257e36caa93cc"
 algorithm = "Newton-CG"
 tuning = "default"
-note = "Default row. fun and jac are the harness kernel. A repeated coordinate returns the cached energy and forces and does not add a call. Hessian-vector products are the analytic Hessian of this potential and are not force calls. Morse bulk has no per-atom cap. Newton-CG xtol is 0, so the step test does not stop the search. The callback stops when the Euclidean force norm meets the problem value. The iteration ceiling sits above the force-call cap. The harness counter is the budget."
+note = "Default row. fun and jac are the harness kernel. A repeated coordinate returns the cached energy and forces and does not add a call. Each analytic Hessian-vector product counts as one force call. Morse bulk has no per-atom cap. Newton-CG xtol is 0, so the step test does not stop the search. The callback stops when the Euclidean force norm meets the problem value. The iteration ceiling sits above the force-call cap. The harness counter is the budget."
 
 [scipy]
 method = "Newton-CG"

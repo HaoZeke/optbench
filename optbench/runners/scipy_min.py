@@ -4,12 +4,15 @@
 coordinates is a cache hit on ``HarnessCounter`` and does not add a
 force call. ``trust-krylov``, ``trust-ncg``, and ``Newton-CG`` take
 Hessian-vector products from the analytic Hessian of that potential.
-Those products are not force calls.
+Each product counts as one force call. A penalty curvature, which does
+not evaluate the potential, does not.
 
 Lennard-Jones 38 uses a per-atom displacement cap of the same length as
-the eOn max move. A trial past that cap is mapped back inside the ball
-before the potential runs. The map is the identity through nine tenths
-of the cap and smooth after that, so a line search does not see a jump.
+the eOn max move. L-BFGS-B and the trust-region methods refuse a trial
+past that cap. BFGS, CG, and Newton-CG map the trial back inside the
+ball before the potential runs. The map is the identity through nine
+tenths of the cap and smooth after that, so a line search does not see
+a jump.
 The problem Euclidean
 force norm is the stop. Methods whose own test is an infinity norm use
 that norm divided by ``sqrt(n)``, so a library stop is inside the
@@ -28,6 +31,7 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
 
 from optbench.counter import ForceCallCap, HarnessCounter
+from optbench.curvature import product_cost
 from optbench.failures import classify_failure
 from optbench.potentials import (
     lennard_jones,
@@ -336,6 +340,7 @@ def search(
     maxstep: float | None,
     stop=None,
     noise: bool = False,
+    counter=None,
 ) -> dict:
     """Run one ``minimize`` and return the last feasible point.
 
@@ -379,12 +384,25 @@ def search(
         "scipy_nfev": None,
     }
 
-    def _remember_hessian(point):
+    def _sync_cap() -> None:
+        if counter is not None:
+            counter.cap = int(cap) - int(state["hessian_calls"])
+
+    def _charge_product() -> None:
+        gradients = 0 if counter is None else int(counter.calls)
+        if gradients + int(state["hessian_calls"]) >= int(cap):
+            state["cap_hit"] = True
+            raise ForceCallCap(f"force-call cap {cap}")
+        state["hessian_calls"] += product_cost()
+        _sync_cap()
+
+    def _cache_hessian(point):
         key = tuple(float(value) for value in _flat(point))
         if state["hess_key"] != key:
             state["hess"] = np.asarray(hessian(point), dtype=np.float64)
             state["hess_key"] = key
-            state["hessian_calls"] += 1
+
+    _sync_cap()
 
     kind = _cap_kind(method, maxstep)
 
@@ -427,7 +445,8 @@ def search(
         image, _grad_x, _energy, grad_y, meta = _at(raw)
         if meta == "penalty":
             return _penalty_hessp(image, state["anchor"], float(maxstep), vector)
-        _remember_hessian(image)
+        _charge_product()
+        _cache_hessian(image)
 
         def hvp_y(direction):
             return state["hess"] @ _flat(direction)
@@ -590,6 +609,7 @@ def _minimize_job(job: dict) -> dict:
             cap=cap,
             maxstep=job["maxstep"],
             noise=False,
+            counter=counter,
         )
         point = info["point"]
     except Exception as exc:
@@ -607,6 +627,10 @@ def _minimize_job(job: dict) -> dict:
             except Exception as exc:
                 if not error:
                     error = f"{type(exc).__name__}: {exc}"
+    gradient_calls = calls
+    hessian_calls = int(info.get("hessian_calls") or 0)
+    if str(job["method"]) in HESSIAN_METHODS:
+        calls = gradient_calls + hessian_calls
     gtol = float(job["gtol"])
     cap = int(job["cap"])
     hessian_index = None
@@ -647,6 +671,7 @@ def _minimize_job(job: dict) -> dict:
         "start": job["start"],
         "index": job["index"],
         "force_calls": calls,
+        "gradient_calls": gradient_calls,
         "verify_calls": verify_calls,
         "counter": "harness",
         "comparable": True,
@@ -658,7 +683,8 @@ def _minimize_job(job: dict) -> dict:
         "hessian_index": hessian_index,
         "expected_index": 0,
         "converged": at_force,
-        "hessian_calls": int(info.get("hessian_calls") or 0),
+        "hessian_calls": hessian_calls,
+        "hessian_force_calls": hessian_calls if str(job["method"]) in HESSIAN_METHODS else 0,
         "refused_trials": int(info.get("refused_trials") or 0),
         "min_eigenvalues": min_eigenvalues,
         "scipy_success": info.get("scipy_success"),
@@ -712,10 +738,15 @@ def _dat(summary: dict, template: dict, metrics: dict, commit: str, version: str
     }
     lines = [
         "# counter harness. fun and jac are one potential evaluation when the coordinates match.",
-        "# Hessian-vector products are analytic and are not force calls.",
         "# v2 success is under the cap, at the force stop, and Hessian index 0.",
         "# energy and Kabsch RMSD were not applied: the problem file has no energy_tol, rmsd_tol, or per-start reference.",
     ]
+    if str((template.get("scipy") or {}).get("method") or "") in HESSIAN_METHODS:
+        lines.append("# Each analytic Hessian-vector product counts as one force call.")
+        lines.append(
+            "# gradient_calls is the harness energy and gradient. "
+            "hessian_calls counts products. force_calls is their sum."
+        )
     if template.get("scipy", {}).get("maxstep") is not None:
         method_name = str((template.get("scipy") or {}).get("method") or "")
         if method_name in _SQUASH_METHODS:
@@ -925,8 +956,13 @@ def _finish(
         "bootstrap_resamples": 2000,
         "bootstrap_seed": 20261015,
         "note": (
-            "Harness counter. Analytic Hessian-vector products are not force calls. "
-            "Energy and Kabsch RMSD were not applied."
+            "Harness counter. "
+            + (
+                "Each analytic Hessian-vector product counts as one force call. "
+                if method in HESSIAN_METHODS
+                else "This method does not request a Hessian. "
+            )
+            + "Energy and Kabsch RMSD were not applied."
         ),
         "runs": [
             {

@@ -1,13 +1,14 @@
 # counter harness. fun and jac are one potential evaluation when the coordinates match.
-# Hessian-vector products are analytic and are not force calls.
 # v2 success is under the cap, at the force stop, and Hessian index 0.
 # energy and Kabsch RMSD were not applied: the problem file has no energy_tol, rmsd_tol, or per-start reference.
-# Default row. fun and jac are the harness kernel. A repeated coordinate returns the cached energy and forces and does not add a call. Hessian-vector products are the analytic Hessian of this potential and are not force calls. Morse bulk has no per-atom cap. Newton-CG xtol is 0, so the step test does not stop the search. The callback stops when the Euclidean force norm meets the problem value. The iteration ceiling sits above the force-call cap. The harness counter is the budget.
-force_calls 13
-force_calls_min 10
-force_calls_max 16
+# Each analytic Hessian-vector product counts as one force call.
+# gradient_calls is the harness energy and gradient. hessian_calls counts products. force_calls is their sum.
+# Default row. fun and jac are the harness kernel. A repeated coordinate returns the cached energy and forces and does not add a call. Each analytic Hessian-vector product counts as one force call. Morse bulk has no per-atom cap. Newton-CG xtol is 0, so the step test does not stop the search. The callback stops when the Euclidean force norm meets the problem value. The iteration ceiling sits above the force-call cap. The harness counter is the budget.
+force_calls 44
+force_calls_min 32
+force_calls_max 57
 nfailed 0
-median 13
+median 43
 code SciPy
 code_version 1.18.1
 commit e4e854eaa8f18d807cd3496028e257e36caa93cc
@@ -15,12 +16,12 @@ algorithm Newton-CG
 template scipy/morse-newton-cg
 tuning default
 counter harness
-par2_mean 13.08
+par2_mean 43.55
 wilson_low 0.963006501793
 wilson_high 1
-par2_median 13
-par2_median_low 13
-par2_median_high 13
+par2_median 43
+par2_median_low 42
+par2_median_high 45
 v2_nfailed 0
 v2_successes 100
 n 100

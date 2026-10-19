@@ -178,6 +178,50 @@ def test_lj38_bfgs_start_stays_inside_the_cutoff():
     assert record["failure"] != "crash"
 
 
+def test_each_analytic_product_counts_as_one_force_call():
+    pytest.importorskip("scipy")
+    import numpy as np
+    import scipy
+
+    if scipy.__version__ != "1.18.1":
+        pytest.skip(f"scipy {scipy.__version__} is not the pinned 1.18.1")
+    from optbench.counter import HarnessCounter
+    from optbench.runners.scipy_min import search
+
+    counter = HarnessCounter(cache=True, cap=30)
+    start = np.linspace(0.2, 0.8, 9)
+
+    def evaluate(coords):
+        point = np.asarray(coords, dtype=np.float64).reshape(-1)
+        key = tuple(float(value) for value in point)
+        fresh, cached = counter.charge(key)
+        if not fresh and cached is not None:
+            energy, gradient = cached
+            return float(energy), np.asarray(gradient, dtype=np.float64)
+        energy = float(np.dot(point, point))
+        gradient = 2.0 * point
+        counter.remember(key, (energy, tuple(float(value) for value in gradient)))
+        return energy, gradient
+
+    def hessian(coords):
+        size = int(np.asarray(coords).reshape(-1).size)
+        return 2.0 * np.eye(size)
+
+    info = search(
+        start,
+        "Newton-CG",
+        evaluate,
+        hessian=hessian,
+        force_tol=1e-10,
+        cap=30,
+        maxstep=None,
+        counter=counter,
+    )
+    assert info["hessian_calls"] > 0
+    assert counter.calls + info["hessian_calls"] <= 30
+    assert info["cap_hit"] or info["stopped"]
+
+
 def test_force_call_cap_stops_lbfgsb():
     pytest.importorskip("scipy")
     import scipy

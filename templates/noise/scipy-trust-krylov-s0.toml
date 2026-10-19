@@ -6,7 +6,7 @@ code_version = "1.18.1"
 commit = "e4e854eaa8f18d807cd3496028e257e36caa93cc"
 algorithm = "trust-krylov"
 tuning = "default"
-note = "Default profile at sigma 0. Hessian-vector products use the analytic Hessian of the clean force and are not force calls. trust-krylov and trust-ncg refuse a trial past the 0.2 per-atom cap. Newton-CG maps that trial back inside the ball; the map is the identity through 0.18. Positive sigma has no template: the noisy force is not that gradient."
+note = "Default profile at sigma 0. Each analytic Hessian-vector product counts as one force call. trust-krylov and trust-ncg refuse a trial past the 0.2 per-atom cap. Newton-CG maps that trial back inside the ball; the map is the identity through 0.18. Positive sigma has no template: the noisy force is not that gradient."
 
 [solver]
 family = "scipy"

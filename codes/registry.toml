@@ -52,7 +52,7 @@ repository = "https://github.com/OmniPotentRPC/rgmin"
 ref = "fix/default-cap-per-method"
 commit = "f15726f1c7983b3656c5dbc2f812e2394e144500"
 committed = "2026-10-17"
-note = "Minimizers, version 0.4.1, branch fix/default-cap-per-method. A Lennard-Jones 38 entry uses the harness force counter. L-BFGS memory defaults to 10. BFGS, dogleg, and FIRE 2.0 start without the 0.2 per-atom cap. The other Cartesian methods start at 0.2. An explicit cap still applies. SR1 and SR2 step in a trust region sized to that cap. DIIS searches the GDIIS image. Adam scales its direction to unit per-atom length."
+note = "Minimizers, version 0.4.1, branch fix/default-cap-per-method. A Lennard-Jones 38 entry uses the harness force counter. L-BFGS memory defaults to 10. BFGS, dogleg, and FIRE 2.0 start without the 0.2 per-atom cap. The other Cartesian methods start at 0.2. An explicit cap still applies. SR1 and SR2 step in a trust region sized to that cap. DIIS searches the GDIIS image. Adam scales its direction to unit per-atom length. Newton, dogleg, and rfo take an analytic Hessian. Each matrix costs one force call per coordinate."
 
 [[code]]
 id = "rgsaddle"
@@ -92,7 +92,7 @@ repository = "https://github.com/scipy/scipy"
 ref = "v1.18.1"
 commit = "e4e854eaa8f18d807cd3496028e257e36caa93cc"
 committed = "2026-08-21"
-note = "SciPy 1.18.1 built from tag v1.18.1. L-BFGS-B, BFGS, and CG take the harness energy and Jacobian. trust-krylov, trust-ncg, and Newton-CG also take analytic Hessian-vector products, which are not force calls. Lennard-Jones 38 maps a trial that would move an atom by more than 0.2 back inside that ball before the potential runs."
+note = "SciPy 1.18.1 built from tag v1.18.1. L-BFGS-B, BFGS, and CG take the harness energy and Jacobian. trust-krylov, trust-ncg, and Newton-CG also take analytic Hessian-vector products. Each product counts as one force call. L-BFGS-B, trust-krylov, and trust-ncg refuse a trial that would move an atom by more than 0.2. BFGS, CG, and Newton-CG map that trial back inside the ball. The map is the identity through 0.18."
 
 [[code]]
 id = "artn"

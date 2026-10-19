@@ -289,36 +289,36 @@ The number is written only after the run finishes under the problem rule.
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr data-problem="minimization/lj38" data-template="rgmin/lj38-dogleg">
+   <tr data-problem="minimization/lj38" data-template="rgmin/lj38-lbfgs-m100">
    <td>Lennard-Jones 38 clusters</td>
-   <td data-field="template">rgmin/lj38-dogleg</td>
+   <td data-field="template">rgmin/lj38-lbfgs-m100</td>
    <td data-field="version">rgmin 0.4.1</td>
    <td data-field="commit">9a2e7ff11fa6</td>
-   <td data-field="par2_mean">81.881</td>
-   <td data-field="mean_calls">81.881</td>
-   <td data-field="median_calls">79</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="par2_mean">197.228</td>
+   <td data-field="mean_calls">177.367</td>
+   <td data-field="median_calls">170</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 1</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/lj38-noise" data-template="noise/rgmin-dogleg-s0">
+   <tr data-problem="minimization/lj38-noise" data-template="noise/rgmin-lbfgs-m100-s0">
    <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
-   <td data-field="template">noise/rgmin-dogleg-s0</td>
+   <td data-field="template">noise/rgmin-lbfgs-m100-s0</td>
    <td data-field="version">rgmin 0.4.1</td>
    <td data-field="commit">9a2e7ff11fa6</td>
-   <td data-field="par2_mean">81.881</td>
-   <td data-field="mean_calls">81.881</td>
-   <td data-field="median_calls">79</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="par2_mean">197.228</td>
+   <td data-field="mean_calls">177.367</td>
+   <td data-field="median_calls">170</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 1</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/morse-bulk" data-template="rgmin/morse-newton">
+   <tr data-problem="minimization/morse-bulk" data-template="rgmin/morse-lbfgs-m20">
    <td>Morse bulk</td>
-   <td data-field="template">rgmin/morse-newton</td>
+   <td data-field="template">rgmin/morse-lbfgs-m20</td>
    <td data-field="version">rgmin 0.4.1</td>
    <td data-field="commit">9a2e7ff11fa6</td>
-   <td data-field="par2_mean">8.35</td>
-   <td data-field="mean_calls">8.35</td>
-   <td data-field="median_calls">9</td>
+   <td data-field="par2_mean">26.87</td>
+   <td data-field="mean_calls">26.87</td>
+   <td data-field="median_calls">27</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
@@ -666,36 +666,36 @@ The number is written only after the run finishes under the problem rule.
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr data-problem="minimization/lj38" data-template="scipy/lj38-trust-krylov">
+   <tr data-problem="minimization/lj38" data-template="scipy/lj38-lbfgsb">
    <td>Lennard-Jones 38 clusters</td>
-   <td data-field="template">scipy/lj38-trust-krylov</td>
+   <td data-field="template">scipy/lj38-lbfgsb</td>
    <td data-field="version">SciPy 1.18.1</td>
    <td data-field="commit">e4e854eaa8f1</td>
-   <td data-field="par2_mean">102.522</td>
-   <td data-field="mean_calls">62.625</td>
-   <td data-field="median_calls">60</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 2</td>
+   <td data-field="par2_mean">357.27</td>
+   <td data-field="mean_calls">218.724</td>
+   <td data-field="median_calls">204</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 7</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/lj38-noise" data-template="noise/scipy-trust-krylov-s0">
+   <tr data-problem="minimization/lj38-noise" data-template="noise/scipy-lbfgsb-s0">
    <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
-   <td data-field="template">noise/scipy-trust-krylov-s0</td>
+   <td data-field="template">noise/scipy-lbfgsb-s0</td>
    <td data-field="version">SciPy 1.18.1</td>
    <td data-field="commit">e4e854eaa8f1</td>
-   <td data-field="par2_mean">102.522</td>
-   <td data-field="mean_calls">62.625</td>
-   <td data-field="median_calls">60</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 2</td>
+   <td data-field="par2_mean">357.27</td>
+   <td data-field="mean_calls">218.724</td>
+   <td data-field="median_calls">204</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 7</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/morse-bulk" data-template="scipy/morse-trust-krylov">
+   <tr data-problem="minimization/morse-bulk" data-template="scipy/morse-lbfgsb">
    <td>Morse bulk</td>
-   <td data-field="template">scipy/morse-trust-krylov</td>
+   <td data-field="template">scipy/morse-lbfgsb</td>
    <td data-field="version">SciPy 1.18.1</td>
    <td data-field="commit">e4e854eaa8f1</td>
-   <td data-field="par2_mean">10.35</td>
-   <td data-field="mean_calls">10.35</td>
-   <td data-field="median_calls">10</td>
+   <td data-field="par2_mean">26.31</td>
+   <td data-field="mean_calls">26.31</td>
+   <td data-field="median_calls">26</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>

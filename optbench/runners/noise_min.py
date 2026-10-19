@@ -5,7 +5,8 @@ Noise is added after that call is counted, and a repeated coordinate
 returns the same noisy force. Verification reads the clean gradient and
 increments ``verify_calls``. Newton and dogleg are refused when sigma is
 positive: their analytic Hessian is the clean force, and the noisy force
-is not that gradient.
+is not that gradient. Each analytic Hessian-vector product counts as one
+force call. A full analytic Hessian costs one product per coordinate.
 
 The index removes the six rigid modes. A curvature is negative only
 below ``-curvature_tolerance`` of the noise-aware stop.
@@ -23,6 +24,7 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
 
 from optbench.counter import ForceCallCap, HarnessCounter
+from optbench.curvature import full_hessian_cost
 from optbench.failures import classify_failure
 from optbench.noise import (
     KAPPA,
@@ -122,6 +124,8 @@ def _minimize_job(job: dict) -> dict:
     calls = 0
     verify_calls = 0
     hessian_calls = 0
+    hessian_cost = 0
+    cap_hit = False
     error = ""
     report = None
     energy = None
@@ -152,7 +156,7 @@ def _minimize_job(job: dict) -> dict:
         potential = RgpotCounter(lambda positions, _numbers=None, _box=None: lennard_jones(positions), counter)
         observed = _Observed(potential, sigma, random.Random(int(job["seed"]) + int(job["index"])))
         if family == "rgmin":
-            point, report, hessian_calls, stopped = _drive_rgmin(
+            point, report, hessian_calls, hessian_cost, stopped, cap_hit = _drive_rgmin(
                 job, x0, observed, potential, cap, sigma, clean_tol, energy_tol, components
             )
         elif family == "ase":
@@ -160,17 +164,30 @@ def _minimize_job(job: dict) -> dict:
         elif family == "sella":
             point, stopped = _drive_sella(job, x0, observed, potential, cap, clean_tol, energy_tol, components)
         elif family == "scipy":
-            point, stopped, hessian_calls = _drive_scipy(
-                job, x0, observed, cap, sigma, clean_tol, energy_tol, components
+            point, stopped, hessian_calls, cap_hit = _drive_scipy(
+                job, x0, observed, potential, cap, sigma, clean_tol, energy_tol, components
             )
         else:
             raise ValueError(f"unknown solver family {family}")
     except ForceCallCap as exc:
         error = f"ForceCallCap: {exc}"
+        cap_hit = True
     except Exception as exc:
         error = f"{type(exc).__name__}: {exc}"
+    from optbench.runners.scipy_min import HESSIAN_METHODS as scipy_hessian
+
+    gradient_calls = 0
+    if potential is not None:
+        gradient_calls = int(potential.counter.calls)
+    hessian_force_calls = 0
+    if family == "rgmin" and method in HESSIAN_METHODS:
+        hessian_force_calls = hessian_cost
+    elif family == "scipy" and method in scipy_hessian:
+        hessian_force_calls = hessian_calls
+    calls = gradient_calls + hessian_force_calls
+    if calls >= cap:
+        cap_hit = True
     if potential is not None and point is not None:
-        calls = int(potential.counter.calls)
         try:
             with potential.counter.verification():
                 energy, gradient = potential.calculate(point)
@@ -180,7 +197,6 @@ def _minimize_job(job: dict) -> dict:
             if not error:
                 error = f"{type(exc).__name__}: {exc}"
     elif potential is not None:
-        calls = int(potential.counter.calls)
         verify_calls = int(potential.counter.verify_calls)
     threshold = stop_threshold(clean_tol, sigma, len(job["coords"]), KAPPA)
     hessian_index = None
@@ -201,7 +217,7 @@ def _minimize_job(job: dict) -> dict:
     )
     at_force = finite and stopped and force_norm is not None and force_norm <= threshold and calls < cap and not error
     reasons: list[str] = []
-    cap_hit = "force-call cap" in error or "ForceCallCap" in error
+    cap_hit = cap_hit or "force-call cap" in error or "ForceCallCap" in error
     if error and not cap_hit:
         reasons.append("crash")
     elif not finite:
@@ -218,6 +234,7 @@ def _minimize_job(job: dict) -> dict:
         "start": job["start"],
         "index": job["index"],
         "force_calls": calls,
+        "gradient_calls": gradient_calls,
         "verify_calls": verify_calls,
         "counter": "harness",
         "comparable": True,
@@ -230,6 +247,7 @@ def _minimize_job(job: dict) -> dict:
         "expected_index": 0,
         "converged": at_force,
         "hessian_calls": hessian_calls,
+        "hessian_force_calls": hessian_force_calls,
         "min_eigenvalues": min_eigenvalues,
         "sigma": sigma,
         "seed": int(job["seed"]) + int(job["index"]),
@@ -252,47 +270,59 @@ def _drive_rgmin(job, x0, observed, potential, cap, sigma, clean_tol, energy_tol
     config = rgmin.SolverConfig(method, gtol=gtol, maxiter=cap, **options)
     solver = rgmin.Solver(x.size, config)
     hessian_calls = 0
+    hessian_cost = 0
     report = None
     stopped = False
+    cap_hit = False
 
     def fg(coords):
         energy, gradient = observed(coords)
         return float(energy), np.asarray(gradient, dtype=np.float64)
 
     def hess(coords):
-        nonlocal hessian_calls
+        nonlocal hessian_calls, hessian_cost
+        flat = np.asarray(coords, dtype=np.float64).reshape(-1)
+        cost = full_hessian_cost(int(flat.size))
+        if potential.counter.calls + hessian_cost + cost > cap:
+            raise ForceCallCap(f"force-call cap {cap}")
         hessian_calls += 1
+        hessian_cost += cost
+        potential.counter.cap = cap - hessian_cost
         return lennard_jones_hessian(coords)
 
     restarts = 0
-    for _ in range(cap + 1):
-        if potential.counter.calls >= cap:
-            break
-        before = potential.counter.calls
-        if method in HESSIAN_METHODS:
-            report = solver.step_hess(fg, hess, x)
-        else:
-            report = solver.step(fg, x)
-        if sigma == 0.0:
-            if report.stop != rgmin.Stop.Budget:
+    try:
+        for _ in range(cap + 1):
+            if potential.counter.calls + hessian_cost >= cap:
+                cap_hit = True
                 break
-            continue
-        if observed.met(clean_tol, energy_tol, components):
-            stopped = True
-            break
-        # Budget is the running state. Any other stop, or a step that
-        # spends no call, rebuilds the solver at this point. A second
-        # stall ends the search.
-        if report.stop == rgmin.Stop.Budget and potential.counter.calls != before:
-            continue
-        restarts += 1
-        if restarts > 2 and potential.counter.calls == before:
-            break
-        solver = rgmin.Solver(x.size, config)
+            before = potential.counter.calls
+            if method in HESSIAN_METHODS:
+                report = solver.step_hess(fg, hess, x)
+            else:
+                report = solver.step(fg, x)
+            if sigma == 0.0:
+                if report.stop != rgmin.Stop.Budget:
+                    break
+                continue
+            if observed.met(clean_tol, energy_tol, components):
+                stopped = True
+                break
+            # Budget is the running state. Any other stop, or a step that
+            # spends no call, rebuilds the solver at this point. A second
+            # stall ends the search.
+            if report.stop == rgmin.Stop.Budget and potential.counter.calls != before:
+                continue
+            restarts += 1
+            if restarts > 2 and potential.counter.calls == before:
+                break
+            solver = rgmin.Solver(x.size, config)
+    except ForceCallCap:
+        cap_hit = True
     if sigma == 0.0:
         stopped = report is not None and report.stop == rgmin.Stop.Tolerance
     point = [float(value) for value in x]
-    return point, report, hessian_calls, stopped
+    return point, report, hessian_calls, hessian_cost, stopped, cap_hit
 
 
 def _atoms(coords):
@@ -351,7 +381,7 @@ def _drive_ase(job, x0, observed, potential, cap, clean_tol, energy_tol, compone
     return point, stopped
 
 
-def _drive_scipy(job, x0, observed, cap, sigma, clean_tol, energy_tol, components):
+def _drive_scipy(job, x0, observed, potential, cap, sigma, clean_tol, energy_tol, components):
     import numpy as np
 
     from optbench.runners.scipy_min import HESSIAN_METHODS, search
@@ -382,14 +412,12 @@ def _drive_scipy(job, x0, observed, cap, sigma, clean_tol, energy_tol, component
         maxstep=maxstep,
         stop=stop,
         noise=float(sigma) != 0.0,
+        counter=potential.counter,
     )
-    if info.get("error") and "force-call cap" not in str(info["error"]):
+    cap_hit = bool(info.get("cap_hit")) or "force-call cap" in str(info.get("error") or "")
+    if info.get("error") and not cap_hit:
         raise RuntimeError(str(info["error"]))
-    if info.get("cap_hit") and not info.get("error"):
-        raise ForceCallCap("force-call cap")
-    if info.get("error") and "force-call cap" in str(info["error"]):
-        raise ForceCallCap(str(info["error"]))
-    return info["point"], bool(info["stopped"]), int(info["hessian_calls"])
+    return info["point"], bool(info["stopped"]), int(info["hessian_calls"]), cap_hit
 
 
 def _drive_sella(job, x0, observed, potential, cap, clean_tol, energy_tol, components):
@@ -444,6 +472,24 @@ def _dat(summary: dict, template: dict, metrics: dict, sigma: float, partial: bo
         "# A curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6).",
         "# Energy and Kabsch RMSD are not applied: the problem file has no per-start reference.",
     ]
+    solver = template.get("solver") or {}
+    family_name = str(solver.get("family") or "")
+    method_name = str(solver.get("method") or "")
+    from optbench.runners.scipy_min import HESSIAN_METHODS as scipy_hessian
+
+    if family_name == "rgmin" and method_name in HESSIAN_METHODS:
+        lines.append("# Each analytic Hessian costs one force call per coordinate.")
+        lines.append(
+            "# gradient_calls is the harness energy and gradient. "
+            "hessian_calls counts matrices. hessian_force_calls is matrices times the dimension. "
+            "force_calls is their sum."
+        )
+    elif family_name == "scipy" and method_name in scipy_hessian:
+        lines.append("# Each analytic Hessian-vector product counts as one force call.")
+        lines.append(
+            "# gradient_calls is the harness energy and gradient. "
+            "hessian_calls counts products. force_calls is their sum."
+        )
     note = str(template.get("note") or "").strip()
     if note:
         lines.append("# " + note.replace("\n", " "))
@@ -452,6 +498,21 @@ def _dat(summary: dict, template: dict, metrics: dict, sigma: float, partial: bo
             continue
         lines.append(f"{key} {_format_field(value)}")
     return "\n".join(lines) + "\n"
+
+
+def _noise_note(family: str, method: str) -> str:
+    from optbench.runners.scipy_min import HESSIAN_METHODS as scipy_hessian
+
+    charge = ""
+    if family == "rgmin" and method in HESSIAN_METHODS:
+        charge = "Each analytic Hessian costs one force call per coordinate. "
+    elif family == "scipy" and method in scipy_hessian:
+        charge = "Each analytic Hessian-vector product counts as one force call. "
+    return (
+        "Harness counter. Noise is applied to the force after the clean call. "
+        + charge
+        + "Energy and Kabsch RMSD were not applied."
+    )
 
 
 def run_template(
@@ -616,10 +677,7 @@ def run_template(
         "par_factor": 2,
         "bootstrap_resamples": 2000,
         "bootstrap_seed": 20261015,
-        "note": (
-            "Harness counter. Noise is applied to the force after the clean call. "
-            "Energy and Kabsch RMSD were not applied."
-        ),
+        "note": _noise_note(family, method),
         "runs": [
             {
                 "entry": output.stem,

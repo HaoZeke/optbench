@@ -1,13 +1,14 @@
 # counter harness. fun and jac are one potential evaluation when the coordinates match.
-# Hessian-vector products are analytic and are not force calls.
 # v2 success is under the cap, at the force stop, and Hessian index 0.
 # energy and Kabsch RMSD were not applied: the problem file has no energy_tol, rmsd_tol, or per-start reference.
-# Default row. fun and jac are the harness kernel. A repeated coordinate returns the cached energy and forces and does not add a call. Hessian-vector products are the analytic Hessian of this potential and are not force calls. Morse bulk has no per-atom cap. The trust-region gtol is the Euclidean problem force norm. Library trust-radius defaults are unchanged. The iteration ceiling sits above the force-call cap. The harness counter is the budget.
-force_calls 12
-force_calls_min 8
-force_calls_max 14
+# Each analytic Hessian-vector product counts as one force call.
+# gradient_calls is the harness energy and gradient. hessian_calls counts products. force_calls is their sum.
+# Default row. fun and jac are the harness kernel. A repeated coordinate returns the cached energy and forces and does not add a call. Each analytic Hessian-vector product counts as one force call. Morse bulk has no per-atom cap. The trust-region gtol is the Euclidean problem force norm. Library trust-radius defaults are unchanged. The iteration ceiling sits above the force-call cap. The harness counter is the budget.
+force_calls 52
+force_calls_min 40
+force_calls_max 64
 nfailed 0
-median 11
+median 49.5
 code SciPy
 code_version 1.18.1
 commit e4e854eaa8f18d807cd3496028e257e36caa93cc
@@ -15,12 +16,12 @@ algorithm trust-ncg
 template scipy/morse-trust-ncg
 tuning default
 counter harness
-par2_mean 11.55
+par2_mean 52.05
 wilson_low 0.963006501793
 wilson_high 1
-par2_median 11
-par2_median_low 11
-par2_median_high 12
+par2_median 49.5
+par2_median_low 49
+par2_median_high 53
 v2_nfailed 0
 v2_successes 100
 n 100

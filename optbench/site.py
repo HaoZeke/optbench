@@ -406,7 +406,7 @@ def _headlines_html(
         for problem in _sorted_problems(group):
             view = _board_view(problem, document)
             title = str(problem.get("title") or problem["problem"])
-            href = f"generated/suites/{suite}.html#{problem['problem']}"
+            href = _problem_page_href(suite, problem)
             lines.append(f"<h3>{html.escape(title)}</h3>")
             lines.append(headline_table(view))
             lead = gap_paragraph(view, pending.get(problem["id"]))
@@ -441,7 +441,7 @@ def _collection_html(
         for problem in _sorted_problems(group):
             view = _board_view(problem, document)
             title = str(problem.get("title") or problem["problem"])
-            href = f"generated/suites/{suite}.html#{problem['problem']}"
+            href = _problem_page_href(suite, problem)
             lines.append(f"<h3>{html.escape(title)}</h3>")
             lines.append(headline_table(view))
             lead = gap_paragraph(view, pending.get(problem["id"]))
@@ -591,15 +591,37 @@ def _smoke_note(root: Path) -> str:
 
 
 def _suite_problem_link(problem: dict, templates: bool = False) -> str:
+    from .board import SWEEP_PAGES
+
     ident = str(problem.get("id") or "")
     name = ident.split("/", 1)[1] if "/" in ident else ident
+    if templates and ident in SWEEP_PAGES:
+        return f"{SWEEP_PAGES[ident]}.html#{name}-templates"
     anchor = f"{name}-templates" if templates else name
     return f"#{anchor}"
 
 
+def _problem_page_href(suite: str, problem: dict) -> str:
+    from .board import SWEEP_PAGES
+
+    ident = str(problem.get("id") or "")
+    if ident in SWEEP_PAGES:
+        return f"generated/suites/{SWEEP_PAGES[ident]}.html"
+    return f"generated/suites/{suite}.html#{problem['problem']}"
+
+
 def render(root: Path) -> None:
     """Write the site tables from the v2 scorer."""
-    from .board import _registry, plot_names_for, render_problem_section, summary_codes, summary_table, write_board
+    from .board import (
+        SWEEP_PAGES,
+        _registry,
+        plot_names_for,
+        render_problem_section,
+        render_sweep_section,
+        summary_codes,
+        summary_table,
+        write_board,
+    )
 
     root = Path(root)
     document = write_board(root, root / "results" / "board")
@@ -643,16 +665,47 @@ def render(root: Path) -> None:
         for problem in sorted(group, key=lambda item: item["problem"].lower()):
             view = _board_view(problem, document)
             note = smoke if problem["id"] == "saddle-search/pt-island" else ""
-            sections.append(
-                render_problem_section(
-                    view,
-                    plot_names_for(view),
-                    asset_prefix="../../_static/board",
-                    preamble=_rule_html(problem, note),
-                    section_id=str(problem["problem"]),
-                    unparsed=pending.get(problem["id"]),
+            if problem["id"] in SWEEP_PAGES:
+                detail_name = SWEEP_PAGES[problem["id"]]
+                sections.append(
+                    render_sweep_section(
+                        view,
+                        plot_names_for(view),
+                        asset_prefix="../../_static/board",
+                        preamble=_rule_html(problem, note),
+                        section_id=str(problem["problem"]),
+                        detail_href=f"{detail_name}.html",
+                        unparsed=pending.get(problem["id"]),
+                    )
                 )
-            )
+                detail = [
+                    f"#+TITLE: {problem.get('title') or problem['problem']}",
+                    "#+OPTIONS: toc:nil num:nil author:nil",
+                    "",
+                    _raw(
+                        render_problem_section(
+                            view,
+                            plot_names_for(view),
+                            asset_prefix="../../_static/board",
+                            preamble=_rule_html(problem, note),
+                            section_id=str(problem["problem"]),
+                            unparsed=pending.get(problem["id"]),
+                        )
+                    ).rstrip(),
+                    "",
+                ]
+                (suite_dir / f"{detail_name}.org").write_text("\n".join(detail), encoding="utf-8")
+            else:
+                sections.append(
+                    render_problem_section(
+                        view,
+                        plot_names_for(view),
+                        asset_prefix="../../_static/board",
+                        preamble=_rule_html(problem, note),
+                        section_id=str(problem["problem"]),
+                        unparsed=pending.get(problem["id"]),
+                    )
+                )
             sections.append(_legacy_section(problem, oracle))
         body = [
             f"#+TITLE: {suite_title(suite)}",

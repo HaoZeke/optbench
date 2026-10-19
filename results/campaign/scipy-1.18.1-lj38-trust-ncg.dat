@@ -1,15 +1,16 @@
 # counter harness. fun and jac are one potential evaluation when the coordinates match.
-# Hessian-vector products are analytic and are not force calls.
 # v2 success is under the cap, at the force stop, and Hessian index 0.
 # energy and Kabsch RMSD were not applied: the problem file has no energy_tol, rmsd_tol, or per-start reference.
+# Each analytic Hessian-vector product counts as one force call.
+# gradient_calls is the harness energy and gradient. hessian_calls counts products. force_calls is their sum.
 # A trial past the per-atom cap is refused before the potential runs.
 # LJ38 index removes the six rigid modes. A curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6).
-# Default row. fun and jac are the harness kernel. A repeated coordinate returns the cached energy and forces and does not add a call. Hessian-vector products are the analytic Hessian of this potential and are not force calls. The per-atom cap is 0.2, the same length as the eOn max move. A trial past that cap is refused before the potential runs. The trust-region gtol is the Euclidean problem force norm. The trust radius cannot exceed 0.2 times sqrt(atoms). The iteration ceiling sits above the force-call cap. The harness counter is the budget.
-force_calls 83
-force_calls_min 40
-force_calls_max 204
+# Default row. fun and jac are the harness kernel. A repeated coordinate returns the cached energy and forces and does not add a call. Each analytic Hessian-vector product counts as one force call. The per-atom cap is 0.2, the same length as the eOn max move. A trial past that cap is refused before the potential runs. The trust-region gtol is the Euclidean problem force norm. The trust radius cannot exceed 0.2 times sqrt(atoms). The iteration ceiling sits above the force-call cap. The harness counter is the budget.
+force_calls 578
+force_calls_min 257
+force_calls_max 1467
 nfailed 0
-median 79
+median 539.5
 code SciPy
 code_version 1.18.1
 commit e4e854eaa8f18d807cd3496028e257e36caa93cc
@@ -17,12 +18,12 @@ algorithm trust-ncg
 template scipy/lj38-trust-ncg
 tuning default
 counter harness
-par2_mean 102.764
+par2_mean 597.001
 wilson_low 0.994357441402
 wilson_high 0.999823453629
-par2_median 79
-par2_median_low 77
-par2_median_high 81
+par2_median 539.5
+par2_median_low 526
+par2_median_high 557
 v2_nfailed 1
 v2_successes 999
 n 1000

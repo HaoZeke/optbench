@@ -1,5 +1,4 @@
 # counter harness. fun and jac are one potential evaluation when the coordinates match.
-# Hessian-vector products are analytic and are not force calls.
 # v2 success is under the cap, at the force stop, and Hessian index 0.
 # energy and Kabsch RMSD were not applied: the problem file has no energy_tol, rmsd_tol, or per-start reference.
 # A trial past the per-atom cap is mapped back inside that ball before the potential runs.

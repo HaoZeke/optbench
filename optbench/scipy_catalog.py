@@ -79,7 +79,7 @@ def _note(method: str, lj: bool) -> str:
             + budget
         )
     products = (
-        "Hessian-vector products are the analytic Hessian of this potential and are not force calls. "
+        "Each analytic Hessian-vector product counts as one force call. "
     )
     if method == "Newton-CG":
         stop = (
