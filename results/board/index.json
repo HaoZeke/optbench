@@ -16453,20 +16453,20 @@
       "profile": {
         "area_log10": {
           "eon-client/low-lj38-dimer-cg 3.5.0 campaign 4d8b34b": 0.9632959861247398,
-          "eon-client/low-lj38-dimer-lbfgs 3.5.0 campaign 4d8b34b": 0.9813577858645787,
-          "eon-client/low-lj38-lanczos 3.5.0 campaign 4d8b34b": 1.0001721605935776,
+          "eon-client/low-lj38-dimer-lbfgs 3.5.0 campaign 4d8b34b": 0.9828629358428986,
+          "eon-client/low-lj38-lanczos 3.5.0 campaign 4d8b34b": 1.0039350355393772,
           "eon-svn/low-lj38-dimer-cg r2549 campaign r2549": 0.9632959861247398,
-          "eon-svn/low-lj38-dimer-lbfgs r2549 campaign r2549": 0.9813577858645787,
-          "eon-svn/low-lj38-lanczos-ljcut r2549 campaign r2549": 1.0001721605935776,
-          "optim/rr-loweig df8da599 tuned campaign 02aaf45": 1.0280174351924958,
-          "partn/mode-lj38 1.1.0 default campaign 9b75351": 0.893306512132864,
-          "pysisyphus/lanczos-lj38 0.1.dev1 default campaign a4ce10d": 0.8308427880325882,
-          "rgsaddle/mode-dimer 0.2.2 default campaign, asv c0db2b8": 0.9407187364499412,
-          "rgsaddle/mode-dimer-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.7917088885962706,
-          "rgsaddle/mode-lanczos 0.2.2 default campaign, asv c0db2b8": 1.0340380351057754,
-          "rgsaddle/mode-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.8775024373605051,
-          "sella-0.1.1/lj38-loweig 0.1.1 archive campaign, asv 0.1.1": 1.1679963831762472,
-          "tsase/mode-lj38 1.0 default campaign 98aac60": 0.15578302275611028
+          "eon-svn/low-lj38-dimer-lbfgs r2549 campaign r2549": 0.9828629358428986,
+          "eon-svn/low-lj38-lanczos-ljcut r2549 campaign r2549": 1.0039350355393772,
+          "optim/rr-loweig df8da599 stock campaign 02aaf45": 0.0,
+          "partn/mode-lj38 1.1.0 default campaign 9b75351": 0.8940590871220242,
+          "pysisyphus/lanczos-lj38 0.1.dev1 default campaign a4ce10d": 0.833100513000068,
+          "rgsaddle/mode-dimer 0.2.2 default campaign, asv c0db2b8": 0.9422238864282612,
+          "rgsaddle/mode-dimer-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.7962243385312302,
+          "rgsaddle/mode-lanczos 0.2.2 default campaign, asv c0db2b8": 1.038553485040735,
+          "rgsaddle/mode-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.8820178872954649,
+          "sella-0.1.1/lj38-loweig 0.1.1 archive campaign, asv 0.1.1": 1.1740169830895266,
+          "tsase/mode-lj38 1.0 default campaign 98aac60": 0.15804074772359014
         },
         "rho": {
           "eon-client/low-lj38-dimer-cg 3.5.0 campaign 4d8b34b": [
@@ -16477,14 +16477,14 @@
             1.0
           ],
           "eon-client/low-lj38-dimer-lbfgs 3.5.0 campaign 4d8b34b": [
-            0.0,
+            0.01,
             0.78,
             0.98,
             1.0,
             1.0
           ],
           "eon-client/low-lj38-lanczos 3.5.0 campaign 4d8b34b": [
-            0.015,
+            0.04,
             0.825,
             0.99,
             1.0,
@@ -16498,35 +16498,35 @@
             1.0
           ],
           "eon-svn/low-lj38-dimer-lbfgs r2549 campaign r2549": [
-            0.0,
+            0.01,
             0.78,
             0.98,
             1.0,
             1.0
           ],
           "eon-svn/low-lj38-lanczos-ljcut r2549 campaign r2549": [
-            0.015,
+            0.04,
             0.825,
             0.99,
             1.0,
             1.0
           ],
-          "optim/rr-loweig df8da599 tuned campaign 02aaf45": [
-            0.11,
-            0.865,
-            0.995,
-            1.0,
-            1.0
+          "optim/rr-loweig df8da599 stock campaign 02aaf45": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
           ],
           "partn/mode-lj38 1.1.0 default campaign 9b75351": [
-            0.105,
+            0.11,
             0.745,
             0.865,
             0.87,
             0.87
           ],
           "pysisyphus/lanczos-lj38 0.1.dev1 default campaign a4ce10d": [
-            0.1,
+            0.115,
             0.715,
             0.795,
             0.8,
@@ -16534,34 +16534,34 @@
           ],
           "rgsaddle/mode-dimer 0.2.2 default campaign, asv c0db2b8": [
             0.0,
-            0.63,
+            0.635,
             0.995,
             1.0,
             1.0
           ],
           "rgsaddle/mode-dimer-tuned 0.2.2 tuned campaign, asv c0db2b8": [
             0.0,
-            0.255,
+            0.27,
             0.885,
             0.99,
             1.0
           ],
           "rgsaddle/mode-lanczos 0.2.2 default campaign, asv c0db2b8": [
             0.0,
-            0.935,
+            0.95,
             1.0,
             1.0,
             1.0
           ],
           "rgsaddle/mode-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": [
             0.0,
-            0.455,
+            0.47,
             0.96,
             1.0,
             1.0
           ],
           "sella-0.1.1/lj38-loweig 0.1.1 archive campaign, asv 0.1.1": [
-            0.76,
+            0.8,
             1.0,
             1.0,
             1.0,
@@ -16571,8 +16571,8 @@
             0.0,
             0.005,
             0.04,
-            0.185,
-            0.575
+            0.19,
+            0.58
           ]
         },
         "solved": {
@@ -16582,7 +16582,7 @@
           "eon-svn/low-lj38-dimer-cg r2549 campaign r2549": 1.0,
           "eon-svn/low-lj38-dimer-lbfgs r2549 campaign r2549": 1.0,
           "eon-svn/low-lj38-lanczos-ljcut r2549 campaign r2549": 1.0,
-          "optim/rr-loweig df8da599 tuned campaign 02aaf45": 1.0,
+          "optim/rr-loweig df8da599 stock campaign 02aaf45": 0.0,
           "partn/mode-lj38 1.1.0 default campaign 9b75351": 0.87,
           "pysisyphus/lanczos-lj38 0.1.dev1 default campaign a4ce10d": 0.8,
           "rgsaddle/mode-dimer 0.2.2 default campaign, asv c0db2b8": 1.0,
@@ -16643,51 +16643,6 @@
           "success_rate": 1.0,
           "template": "sella-0.1.1/lj38-loweig",
           "tuning": "archive",
-          "wilson_high": 1.0,
-          "wilson_low": 0.9811546736227335
-        },
-        {
-          "asv_commit": "",
-          "call_unit": "total",
-          "cap": 10000,
-          "code": "optim",
-          "code_version": "df8da599",
-          "commit": "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f",
-          "comparable": true,
-          "counter": "harness",
-          "current": true,
-          "entry": "optim-df8da599-rr-loweig",
-          "failures": {
-            "cap": 0,
-            "crash": 0,
-            "divergence": 0,
-            "wrong_stationary": 0
-          },
-          "full_n": 200,
-          "history": false,
-          "max_calls": 58.0,
-          "mean_calls": 24.15,
-          "mean_per_image": null,
-          "median": 22.5,
-          "median_calls": 22.5,
-          "median_high": 24.0,
-          "median_low": 22.0,
-          "median_per_image": null,
-          "min_calls": 12.0,
-          "n": 200,
-          "nfailed": 0,
-          "note": "starts.jsonl",
-          "par2_mean": 24.15,
-          "partial": false,
-          "partial_reason": "",
-          "path": "results/campaign/optim-df8da599-rr-loweig.dat",
-          "problem": "lowest-eigenvector/lj38",
-          "registry_match": true,
-          "scored": true,
-          "source": "campaign",
-          "success_rate": 1.0,
-          "template": "optim/rr-loweig",
-          "tuning": "tuned",
           "wilson_high": 1.0,
           "wilson_low": 0.9811546736227335
         },
@@ -17275,6 +17230,51 @@
           "tuning": "default",
           "wilson_high": 0.8495479907390189,
           "wilson_low": 0.7391448134346212
+        },
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": 10000,
+          "code": "optim",
+          "code_version": "df8da599",
+          "commit": "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f",
+          "comparable": true,
+          "counter": "harness",
+          "current": true,
+          "entry": "optim-df8da599-rr-loweig",
+          "failures": {
+            "cap": 0,
+            "crash": 0,
+            "divergence": 200,
+            "wrong_stationary": 0
+          },
+          "full_n": 200,
+          "history": false,
+          "max_calls": 515.0,
+          "mean_calls": 501.4,
+          "mean_per_image": null,
+          "median": 20000.0,
+          "median_calls": 501.0,
+          "median_high": 20000.0,
+          "median_low": 20000.0,
+          "median_per_image": null,
+          "min_calls": 501.0,
+          "n": 200,
+          "nfailed": 200,
+          "note": "starts.jsonl",
+          "par2_mean": 20000.0,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/optim-df8da599-rr-loweig.dat",
+          "problem": "lowest-eigenvector/lj38",
+          "registry_match": true,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 0.0,
+          "template": "optim/rr-loweig",
+          "tuning": "stock",
+          "wilson_high": 0.018845326377266575,
+          "wilson_low": 0.0
         }
       ],
       "title": "lj38"

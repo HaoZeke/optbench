@@ -21,7 +21,7 @@
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
-   <td data-code="optim" data-template="optim/rr-loweig" data-par2="24.15"><span class="bench-score">24.15</span><a href="#lj38-templates">optim/rr-loweig</a></td>
+   <td data-code="optim" data-template="optim/rr-loweig" data-par2="20000"><span class="bench-score">20000</span><a href="#lj38-templates">optim/rr-loweig</a></td>
    <td data-code="tsase" data-template="tsase/mode-lj38" data-par2="2420.61"><span class="bench-score">2420.61</span><a href="#lj38-templates">tsase/mode-lj38</a></td>
    </tr>
    </tbody></table></div></section><section class="bench" id="lj38" data-problem="lowest-eigenvector/lj38">
@@ -43,7 +43,6 @@
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td data-field="template">sella-0.1.1/lj38-loweig</td><td data-field="version">Sella 0.1.1</td><td data-field="commit">0.1.1</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">17.8</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.981155</td><td data-field="wilson_high">1</td><td data-field="median_calls">17</td><td data-field="mean_calls">17.8</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
-   <tr><td data-field="template">optim/rr-loweig</td><td data-field="version">optim df8da599</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">24.15</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.981155</td><td data-field="wilson_high">1</td><td data-field="median_calls">22.5</td><td data-field="mean_calls">24.15</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
    <tr><td data-field="template">rgsaddle/mode-lanczos</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">26.12</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.981155</td><td data-field="wilson_high">1</td><td data-field="median_calls">26</td><td data-field="mean_calls">26.12</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
    <tr><td data-field="template">eon-client/low-lj38-lanczos</td><td data-field="version">eOn 3.5.0</td><td data-field="commit">4d8b34baf1ba</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">26.385</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.981155</td><td data-field="wilson_high">1</td><td data-field="median_calls">25</td><td data-field="mean_calls">26.385</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
    <tr><td data-field="template">eon-svn/low-lj38-lanczos-ljcut</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">26.385</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.981155</td><td data-field="wilson_high">1</td><td data-field="median_calls">25</td><td data-field="mean_calls">26.385</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
@@ -57,6 +56,7 @@
    <tr><td data-field="template">tsase/mode-lj38</td><td data-field="version">tsase 1.0</td><td data-field="commit">98aac60b5d99</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">2420.61</td><td data-field="success_rate">0.89</td><td data-field="wilson_low">0.839073</td><td data-field="wilson_high">0.926228</td><td data-field="median_calls">233</td><td data-field="mean_calls">267.945</td><td data-field="failures">crash 0, divergence 22, cap 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
    <tr><td data-field="template">partn/mode-lj38</td><td data-field="version">artn 1.1.0</td><td data-field="commit">9b753517c6c0</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">2619.84</td><td data-field="success_rate">0.87</td><td data-field="wilson_low">0.816336</td><td data-field="wilson_high">0.909718</td><td data-field="median_calls">23</td><td data-field="mean_calls">23.99</td><td data-field="failures">crash 0, divergence 26, cap 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
    <tr><td data-field="template">pysisyphus/lanczos-lj38</td><td data-field="version">pysisyphus 0.1.dev1</td><td data-field="commit">a4ce10dd6d7f</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">4017.14</td><td data-field="success_rate">0.8</td><td data-field="wilson_low">0.739145</td><td data-field="wilson_high">0.849548</td><td data-field="median_calls">22</td><td data-field="mean_calls">22.195</td><td data-field="failures">crash 0, divergence 40, cap 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
+   <tr><td data-field="template">optim/rr-loweig</td><td data-field="version">optim df8da599</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">20000</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.0188453</td><td data-field="median_calls">501</td><td data-field="mean_calls">501.4</td><td data-field="failures">crash 0, divergence 200, cap 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
    </tbody></table></div>
    <h3>Partial</h3><ul>
    <li>eon-svn/low-lj38-dimer Eon svn campaign, asv n=200, result file sets ranked false; potential ljcluster (shifted, cutoff 15).</li>
@@ -69,7 +69,7 @@
    <h3>Legacy 2014 archive</h3>
    <details class="bench-details">
    <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
@@ -96,7 +96,7 @@
    </tr>
    <tr id="lowest-eigenvector-lj38-optim-first-order">
    <td class="num">2</td>
-   <td class="text">optim-first-order</td>
+   <td class="text">optim-first-order · not reproduced</td>
    <td class="text">OPTIM</td>
    <td class="num">2.50000e+01</td>
    <td class="num">5.8000e+01</td>
