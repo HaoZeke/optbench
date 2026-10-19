@@ -64,7 +64,7 @@ def test_pele_paper_baseline_is_the_2014_stop():
     assert morse["status"] == "reproduced"
     assert morse["rerun"]["path"] == "results/campaign/ase-3.19.1-morse-preconlbfgs-tuned.dat"
     assert morse["checks"][0]["rerun"] == 34.0
-    assert ("minimization/morse-bulk", "ase/morse-preconlbfgs-tuned", "3.29.0") in held.versions
+    assert ("minimization/morse-bulk", "ase/morse-preconlbfgs-tuned", "3.29.0") not in held.versions
     assert ("minimization/morse-bulk", "ase/morse-preconlbfgs-tuned") not in held.templates
 
 

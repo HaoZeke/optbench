@@ -153,7 +153,6 @@ MATCHES: list[dict] = [
         "template": "ase/morse-preconlbfgs-tuned",
         "branch": "repro/minimization-morse-bulk-ase-preconlbfgs",
         "path": "results/campaign/ase-3.19.1-morse-preconlbfgs-tuned.dat",
-        "extra": {"hold_versions": ["3.29.0"]},
     },
     # lowest eigenvector
     {"key": "lowest-eigenvector/lj38/eon-dimer-cg", "template": "eon-client/low-lj38-dimer-cg", "branch": "main", "path": "results/campaign/eon-client-low-lj38-dimer-cg.dat"},

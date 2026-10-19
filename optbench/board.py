@@ -18,7 +18,10 @@ A result that sets ``ranked false`` stays off the ranked table.
 A template that does not reproduce the 2014 archive stays off it too.
 Partial rows stay in the output. A campaign file and an asv track for
 the same run are one row. Only the newest full version of a template
-is ranked. Older full versions stay in the history list.
+is ranked. Older full versions stay in the history list. A paper
+baseline stays ranked when a newer ASE version of that same template
+is also full. That newer row is labelled current-ASE and sits beside
+the paper row. The gap between them stays on the table.
 """
 
 from __future__ import annotations
@@ -599,6 +602,87 @@ def _version_key(text: str) -> tuple[int, ...]:
     return tuple(parts)
 
 
+def _path_set(row: dict) -> set[str]:
+    return {part.strip() for part in str(row.get("path") or "").split(";") if part.strip()}
+
+
+def _paper_baseline_paths(root: Path) -> set[str]:
+    from .reproduction import load_ledger
+
+    found: set[str] = set()
+    for record in load_ledger(root / "oracle" / "reproduction.jsonl"):
+        rerun = record.get("rerun") or {}
+        path = str(rerun.get("path") or "")
+        if rerun.get("paper_baseline") and path:
+            found.add(path)
+    return found
+
+
+def _keep_paper_with_current(rows: list[dict], paper_paths: set[str]) -> None:
+    """Rank the paper baseline beside the newest newer ASE version of its template.
+
+    The version gap stays visible. The current row is the committed run.
+    Nothing here changes its parameters.
+    """
+    if not paper_paths:
+        return
+    groups: dict[tuple, list[dict]] = defaultdict(list)
+    for row in rows:
+        if _path_set(row) & paper_paths:
+            row["_paper_baseline"] = True
+        template = row.get("template") or ""
+        if template:
+            groups[(row.get("problem"), template)].append(row)
+    for group in groups.values():
+        papers = [
+            row
+            for row in group
+            if row.get("_paper_baseline") and row.get("comparable") and not row.get("partial")
+        ]
+        if not papers:
+            continue
+        paper_version = max(_version_key(str(row.get("code_version") or "")) for row in papers)
+        newer = [
+            row
+            for row in group
+            if row.get("comparable")
+            and not row.get("partial")
+            and not row.get("_paper_baseline")
+            and str(row.get("code") or "") == "ASE"
+            and _version_key(str(row.get("code_version") or "")) > paper_version
+        ]
+        if not newer:
+            continue
+        newest = max(_version_key(str(row.get("code_version") or "")) for row in newer)
+        for row in papers:
+            row["history"] = False
+            row["board_label"] = "paper"
+        for row in newer:
+            if _version_key(str(row.get("code_version") or "")) == newest:
+                row["history"] = False
+                row["current"] = True
+                row["board_label"] = "current-ASE"
+
+
+def _sit_current_with_paper(ranked: list[dict]) -> list[dict]:
+    """Place each current-ASE row immediately after its paper baseline."""
+    companions = [row for row in ranked if row.get("board_label") == "current-ASE"]
+    if not companions:
+        return ranked
+    placed: list[dict] = []
+    for row in ranked:
+        if row.get("board_label") == "current-ASE":
+            continue
+        placed.append(row)
+        if row.get("board_label") != "paper":
+            continue
+        key = (row.get("problem"), row.get("template"))
+        for companion in companions:
+            if (companion.get("problem"), companion.get("template")) == key:
+                placed.append(companion)
+    return placed
+
+
 def _mark_versions(rows: list[dict]) -> None:
     """The newest full version of a template is current. Older full versions are history."""
     groups: dict[tuple, list[dict]] = defaultdict(list)
@@ -1037,6 +1121,7 @@ def build_board(root: Path) -> dict:
     for row in rows:
         row["registry_match"] = _registry_match(row, registry)
     _mark_versions(rows)
+    _keep_paper_with_current(rows, _paper_baseline_paths(root))
 
     problems_out: dict[str, dict] = {}
     partial: list[dict] = []
@@ -1061,6 +1146,7 @@ def build_board(root: Path) -> dict:
             else:
                 ranked.append(row)
         ranked.sort(key=_rank_key)
+        ranked = _sit_current_with_paper(ranked)
         held_history.sort(key=_rank_key)
         problem = problems.get(problem_id) or {}
         problems_out[problem_id] = {
@@ -1321,6 +1407,14 @@ def _headers(problem: dict) -> list[str]:
     return headers
 
 
+def _version_text(row: dict) -> str:
+    text = f"{row.get('code') or ''} {row.get('code_version') or ''}".strip()
+    label = str(row.get("board_label") or "")
+    if label:
+        text = f"{text} {label}".strip()
+    return text
+
+
 def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
     """Visible ranked-table cells, in column order.
 
@@ -1328,7 +1422,7 @@ def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
     """
     cells = [
         ("template", str(row.get("template") or row.get("entry") or "")),
-        ("version", f"{row.get('code') or ''} {row.get('code_version') or ''}"),
+        ("version", _version_text(row)),
         ("commit", str(row.get("commit") or "")[:12]),
         ("source", str(row.get("source") or "")),
         ("current", "yes" if row.get("current") else "no"),
@@ -1598,6 +1692,11 @@ def _table(
         "Only the newest full version of a template is in this table. "
         "A partial row, including a one-start asv smoke run, is not.</p>"
     )
+    if any(row.get("board_label") == "current-ASE" for row in ranked):
+        lines.append(
+            "<p>The paper baseline of a template stays beside the current ASE version. "
+            "The gap between those rows is part of the table.</p>"
+        )
     lead = gap_paragraph(problem, unparsed)
     if lead:
         lines.append(lead)
