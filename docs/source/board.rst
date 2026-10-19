@@ -92,7 +92,7 @@ It does not run a campaign.
    <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="853.56"><span class="bench-score">853.56</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
    <td data-code="ASE" data-template="ase/de-lj38-tuned" data-par2="3463.64"><span class="bench-score">3463.64</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">ase/de-lj38-tuned</a></td>
    <td data-code="Sella" data-template="sella/de-lj38-tuned" data-par2="1753.96"><span class="bench-score">1753.96</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">sella/de-lj38-tuned</a></td>
-   <td data-code="LAMMPS" data-template="lammpsneb/ci-fire" data-par2="4526.2"><span class="bench-score">4526.2</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">lammpsneb/ci-fire</a></td>
+   <td data-code="LAMMPS" data-template="lammpsneb/ci-fire-tuned" data-par2="4102.14"><span class="bench-score">4102.14</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">lammpsneb/ci-fire-tuned</a></td>
    <td data-code="pysisyphus">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass" data-template="compass/sqnm" data-par2="1517.3"><span class="bench-score">1517.3</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">compass/sqnm</a></td>
@@ -109,7 +109,7 @@ It does not run a campaign.
    <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="8024.43"><span class="bench-score">8024.43</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
    <td data-code="ASE" data-template="ase/de-lj38-2ts-default" data-par2="20000"><span class="bench-score">20000</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">ase/de-lj38-2ts-default</a></td>
    <td data-code="Sella" data-template="sella/de-lj38-2ts-tuned" data-par2="30105.9"><span class="bench-score">30105.9</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">sella/de-lj38-2ts-tuned</a></td>
-   <td data-code="LAMMPS" data-template="lammpsneb/ci-quickmin" data-par2="19017.8"><span class="bench-score">19017.8</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">lammpsneb/ci-quickmin</a></td>
+   <td data-code="LAMMPS" data-template="lammpsneb/ci-quickmin-tuned" data-par2="18035.7"><span class="bench-score">18035.7</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">lammpsneb/ci-quickmin-tuned</a></td>
    <td data-code="pysisyphus">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass" data-template="compass/sqnm" data-par2="6713.37"><span class="bench-score">6713.37</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">compass/sqnm</a></td>
