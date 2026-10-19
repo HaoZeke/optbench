@@ -1,0 +1,32 @@
+# pyKMC event search on the accelerated-md reactant.
+id = "pykmc/aladatom"
+engine = "pykmc"
+problem = "accelerated-md/aladatom"
+code = "pykmc"
+code_version = "0.0.1"
+commit = "9fd1f6e9085ef92642142406f3dd74e574209898"
+algorithm = "pARTn event search"
+tuning = "default"
+kernel = "eam"
+failure_cap = 1000000
+geometry = "website/accelerated-md/reactant.con"
+note = "The 2014 row is a parallel-replica rate, not a force-call count. This row is one event search on that reactant with the r2549 Aluminum EAM kernel. Success is one connected index-1 saddle under 1.5 eV. Connection RMSD uses the free atoms within 1.5 A of the highest free atom."
+
+[pykmc]
+ninit = 2
+push_mode = "rad"
+push_step_size = 0.4
+push_dist_thr = 1.0
+eigen_step_size = 0.2
+lanczos_min_size = 10
+lanczos_max_size = 20
+forc_thr = 0.001
+delr_thr = 1.0e9
+converge_property = "norm"
+evalf_max = 20000
+nsearch = 4
+centers = 6
+barrier_max = 1.5
+rmsd_connect = 0.5
+rcut = 6.5
+timeout = 1800

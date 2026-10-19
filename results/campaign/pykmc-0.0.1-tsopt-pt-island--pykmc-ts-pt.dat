@@ -1,0 +1,20 @@
+# counter harness. One pyKMC partn_search from each transition-state guess.
+# ninit is 0. The free atoms are the LAMMPS system. Fixed atoms stay in the callback.
+# pair_style zero. Forces are the smooth-linear Morse gradient through fix external.
+# A success is under the cap, at the force stop, and Hessian index 1.
+force_calls 780
+force_calls_min 636
+force_calls_max 1144
+force_calls_median 746.5
+successes 46
+nfailed 3
+n 49
+transition_states 46
+code pykmc
+code_version 0.0.1
+commit 9fd1f6e9085ef92642142406f3dd74e574209898
+algorithm pARTn event search
+template pykmc/ts-pt
+problem tsopt/pt-island
+tuning default
+counter harness

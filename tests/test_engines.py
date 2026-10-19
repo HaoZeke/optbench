@@ -1,7 +1,8 @@
 """The saddle-code runner table.
 
-Importing the table does not load libartn or TSASE. pyKMC and OPTIM
-refuse with a concrete reason and write no file.
+Importing the table does not load libartn or TSASE. A missing pyKMC
+stack raises before a search. OPTIM refuses with a concrete reason
+and writes no file.
 """
 
 from pathlib import Path
@@ -31,10 +32,10 @@ def test_named_engines_are_in_the_table():
     assert find("eon") is None
     assert find("rgsaddle-band") is None
     found = reasons()
-    assert found["pykmc"]
-    assert "sourceforge" in found["pykmc"]
-    assert "1.3" in found["pykmc"]
-    assert "LBOMD" in found["pykmc"]
+    pykmc_reason = found["pykmc"]
+    if pykmc_reason:
+        assert "LBOMD" not in pykmc_reason
+        assert "sourceforge" not in pykmc_reason.lower()
     assert optim_available() == found["optim"]
     if found["optim"] is None:
         from optbench.engines.optim_search import binary_path
@@ -67,7 +68,12 @@ def test_new_templates_match_a_problem_stop():
         "tsase/mdmin-lj38",
         "tsase/mode-lj38",
         "tsase/neb",
-        "pykmc/lattice",
+        "pykmc/ts-pt",
+        "pykmc/saddle-pt",
+        "pykmc/htst-pt",
+        "pykmc/htst-al",
+        "pykmc/aladatom",
+        "pykmc/standard-aladatom",
         "optim/unhooked",
         "optim/lbfgs-lj38",
         "optim/lbfgs-morse",
@@ -143,14 +149,46 @@ def test_new_templates_match_a_problem_stop():
     assert set(found) == expected
 
 
-def test_pykmc_and_optim_write_nothing(tmp_path: Path):
+def test_pykmc_and_optim_write_nothing(tmp_path: Path, monkeypatch):
     output = tmp_path / "benchmark.dat"
-    with pytest.raises(RuntimeError, match="LBOMD"):
-        run(ROOT, "neb/Pt-heptamer", "pykmc/lattice", output=output, workers=1)
+    monkeypatch.setattr(
+        "optbench.engines.pykmc_search.available",
+        lambda: "pyKMC stack missing",
+    )
+    with pytest.raises(RuntimeError, match="pyKMC stack missing"):
+        run(ROOT, "tsopt/pt-island", "pykmc/ts-pt", output=output, workers=1)
     with pytest.raises(RuntimeError, match="sha256"):
         run(ROOT, "neb/Pt-heptamer", "optim/unhooked", output=output, workers=1)
     assert not output.exists()
     assert not output.with_suffix(".starts.jsonl").exists()
+
+
+def test_unlinked_saddle_is_not_a_success():
+    from optbench.engines.pykmc_search import _link
+
+    record = {
+        "success": True,
+        "reasons": [],
+        "failure": None,
+        "force_calls": 10,
+        "lowest_mode": [1.0, 0.0, 0.0],
+    }
+    out = _link(
+        record,
+        evaluator=None,
+        free=None,
+        box=None,
+        minimum=None,
+        min_energy=0.0,
+        force_norm=0.001,
+        barrier_max=1.5,
+        connect_rmsd=0.5,
+        found=[],
+        pbc=(False, False, False),
+    )
+    assert out["success"] is False
+    assert out["failure"] == "divergence"
+    assert "barrier" not in out
 
 
 def test_partn_coordinate_rows_follow_the_python_wrapper():

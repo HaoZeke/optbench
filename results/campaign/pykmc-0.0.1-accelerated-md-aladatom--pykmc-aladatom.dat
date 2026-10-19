@@ -1,0 +1,22 @@
+# counter harness. pyKMC partn_search from the reactant, highest free atoms first.
+# The call total is the reactant minimization, the searches, and the two endpoint minimizations.
+# A success is one index-1 saddle under the cap, force at the stop, barrier in (0, 1.5) eV,
+# and exactly one endpoint within Cartesian RMSD 0.5 of the minimized reactant
+# on the protruding atoms (within 1.5 A of the highest free atom).
+# The 2014 rate and barrier columns are a different observable.
+force_calls 962
+force_calls_min 962
+force_calls_max 962
+force_calls_median 962
+successes 1
+nfailed 0
+n 1
+transition_states 1
+code pykmc
+code_version 0.0.1
+commit 9fd1f6e9085ef92642142406f3dd74e574209898
+algorithm pARTn event search
+template pykmc/aladatom
+problem accelerated-md/aladatom
+tuning default
+counter harness

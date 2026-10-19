@@ -1,0 +1,32 @@
+# pyKMC event search on the Pt hTST reactant.
+id = "pykmc/htst-pt"
+engine = "pykmc"
+problem = "hTST/Pt"
+code = "pykmc"
+code_version = "0.0.1"
+commit = "9fd1f6e9085ef92642142406f3dd74e574209898"
+algorithm = "pARTn event search"
+tuning = "default"
+kernel = "morse"
+failure_cap = 2000000
+geometry = "website/hTST/Pt/eon-dimer-lbfgs/pos.con"
+note = "One reactant. The potential is morse/smooth/linear. Highest free atoms are tried with the pyKMC push defaults until one connected index-1 saddle under 1.5 eV, or the cap. Connection RMSD uses the protruding island atoms. The 2014 eon-dimer-lbfgs barrier_force_calls is a mean over KMC states, not this single reactant search."
+
+[pykmc]
+ninit = 2
+push_mode = "rad"
+push_step_size = 0.4
+push_dist_thr = 1.0
+eigen_step_size = 0.2
+lanczos_min_size = 10
+lanczos_max_size = 20
+forc_thr = 0.001
+delr_thr = 1.0e9
+converge_property = "norm"
+evalf_max = 20000
+nsearch = 4
+centers = 6
+barrier_max = 1.5
+rmsd_connect = 0.5
+rcut = 9.5
+timeout = 1800

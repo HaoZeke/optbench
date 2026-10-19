@@ -831,12 +831,81 @@ The number is written only after the run finishes under the problem rule.
    <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
    <td>kinetic Monte Carlo</td>
-   <td>1.3</td>
-   <td>1.3</td>
-   <td><a href="https://sourceforge.net/projects/lkmc/">https://sourceforge.net/projects/lkmc/</a></td>
+   <td>main</td>
+   <td>9fd1f6e9085e</td>
+   <td><a href="https://github.com/hugomoison/pyKMC">https://github.com/hugomoison/pyKMC</a></td>
    </tr>
    </tbody></table></div>
-   <p>No full ranked run.</p>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="accelerated-md/aladatom" data-template="pykmc/aladatom">
+   <td>aladatom</td>
+   <td data-field="template">pykmc/aladatom</td>
+   <td data-field="version">pykmc 0.0.1</td>
+   <td data-field="commit">9fd1f6e9085e</td>
+   <td data-field="par2_mean">962</td>
+   <td data-field="mean_calls">962</td>
+   <td data-field="median_calls">962</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">1</td>
+   </tr>
+   <tr data-problem="accelerated-md/standard_aladatom" data-template="pykmc/standard-aladatom">
+   <td>standard_aladatom</td>
+   <td data-field="template">pykmc/standard-aladatom</td>
+   <td data-field="version">pykmc 0.0.1</td>
+   <td data-field="commit">9fd1f6e9085e</td>
+   <td data-field="par2_mean">1215</td>
+   <td data-field="mean_calls">1215</td>
+   <td data-field="median_calls">1215</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">1</td>
+   </tr>
+   <tr data-problem="hTST/Al" data-template="pykmc/htst-al">
+   <td>Al</td>
+   <td data-field="template">pykmc/htst-al</td>
+   <td data-field="version">pykmc 0.0.1</td>
+   <td data-field="commit">9fd1f6e9085e</td>
+   <td data-field="par2_mean">1297</td>
+   <td data-field="mean_calls">1297</td>
+   <td data-field="median_calls">1297</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">1</td>
+   </tr>
+   <tr data-problem="hTST/Pt" data-template="pykmc/htst-pt">
+   <td>Pt</td>
+   <td data-field="template">pykmc/htst-pt</td>
+   <td data-field="version">pykmc 0.0.1</td>
+   <td data-field="commit">9fd1f6e9085e</td>
+   <td data-field="par2_mean">2538</td>
+   <td data-field="mean_calls">2538</td>
+   <td data-field="median_calls">2538</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">1</td>
+   </tr>
+   <tr data-problem="saddle-search/pt-island" data-template="pykmc/saddle-pt">
+   <td>Pt heptamer island</td>
+   <td data-field="template">pykmc/saddle-pt</td>
+   <td data-field="version">pykmc 0.0.1</td>
+   <td data-field="commit">9fd1f6e9085e</td>
+   <td data-field="par2_mean">39204.5</td>
+   <td data-field="mean_calls">1211.88</td>
+   <td data-field="median_calls">889</td>
+   <td data-field="failures">crash 0, divergence 460, cap 17, wrong_stationary 0</td>
+   <td data-field="n">487</td>
+   </tr>
+   <tr data-problem="tsopt/pt-island" data-template="pykmc/ts-pt">
+   <td>pt-island</td>
+   <td data-field="template">pykmc/ts-pt</td>
+   <td data-field="version">pykmc 0.0.1</td>
+   <td data-field="commit">9fd1f6e9085e</td>
+   <td data-field="par2_mean">1956.45</td>
+   <td data-field="mean_calls">955.98</td>
+   <td data-field="median_calls">746</td>
+   <td data-field="failures">crash 0, divergence 2, cap 1, wrong_stationary 0</td>
+   <td data-field="n">49</td>
+   </tr>
+   </tbody></table></div>
    <h3>LAMMPS</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>

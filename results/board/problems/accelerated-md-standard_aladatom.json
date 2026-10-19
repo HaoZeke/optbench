@@ -1,0 +1,79 @@
+{
+  "full_n": null,
+  "history": [],
+  "id": "accelerated-md/standard_aladatom",
+  "not_comparable": [],
+  "partial": [],
+  "profile": {
+    "area_log10": {
+      "pykmc/standard-aladatom 0.0.1 default campaign 9fd1f6e": 1.2041199826559248
+    },
+    "rho": {
+      "pykmc/standard-aladatom 0.0.1 default campaign 9fd1f6e": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "solved": {
+      "pykmc/standard-aladatom 0.0.1 default campaign 9fd1f6e": 1.0
+    },
+    "taus": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ]
+  },
+  "ranked": [
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 1000000,
+      "code": "pykmc",
+      "code_version": "0.0.1",
+      "commit": "9fd1f6e9085ef92642142406f3dd74e574209898",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "pykmc-0.0.1-accelerated-md-standard_aladatom--pykmc-standard-aladatom",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": null,
+      "history": false,
+      "max_calls": 1215.0,
+      "mean_calls": 1215.0,
+      "mean_per_image": null,
+      "median": 1215.0,
+      "median_calls": 1215.0,
+      "median_high": 1215.0,
+      "median_low": 1215.0,
+      "median_per_image": null,
+      "min_calls": 1215.0,
+      "n": 1,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 1215.0,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/pykmc-0.0.1-accelerated-md-standard_aladatom--pykmc-standard-aladatom.dat",
+      "problem": "accelerated-md/standard_aladatom",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "pykmc/standard-aladatom",
+      "tuning": "default",
+      "wilson_high": 1.0,
+      "wilson_low": 0.20654931437723745
+    }
+  ],
+  "title": "standard_aladatom"
+}

@@ -149,8 +149,12 @@ def judge_saddle(
     expected_index: int = 1,
     keep_mode: bool = False,
     rotations: int | None = None,
+    evaluator=None,
 ) -> dict:
     """Free-atom force stop and Hessian index. The Hessian is verification.
+
+    ``evaluator(coords, box)`` returns energy and ``dE/dx``. When it is
+    omitted the call goes through ``pes.evaluate``.
 
     ``expected_index`` is 1 for a transition state and 0 for a minimum.
 
@@ -191,7 +195,10 @@ def judge_saddle(
             def gradient_of(values):
                 full = np.array(coords, copy=True)
                 full[mask] = np.asarray(values, dtype=np.float64).reshape((-1, 3))
-                _energy, grad = evaluate(kind, full, box)
+                if evaluator is not None:
+                    _energy, grad = evaluator(full, box)
+                else:
+                    _energy, grad = evaluate(kind, full, box)
                 return np.asarray(grad, dtype=np.float64)[mask].reshape(-1)
 
             with counter.verification():

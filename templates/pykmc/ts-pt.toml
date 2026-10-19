@@ -1,0 +1,26 @@
+# pyKMC partn_search from each pt-island transition-state guess.
+id = "pykmc/ts-pt"
+engine = "pykmc"
+problem = "tsopt/pt-island"
+code = "pykmc"
+code_version = "0.0.1"
+commit = "9fd1f6e9085ef92642142406f3dd74e574209898"
+algorithm = "pARTn event search"
+tuning = "default"
+kernel = "morse"
+note = "ninit is 0, so the search starts in Lanczos at the guess. The potential is morse/smooth/linear through fix external. converge_property is norm at the problem force stop. delr_thr is 1e9 so a converged saddle is returned to the harness."
+
+[pykmc]
+ninit = 0
+push_mode = "list"
+push_step_size = 0.4
+push_dist_thr = 1.0
+eigen_step_size = 0.2
+lanczos_min_size = 10
+lanczos_max_size = 20
+forc_thr = 0.001
+delr_thr = 1.0e9
+converge_property = "norm"
+evalf_max = 10000
+rcut = 9.5
+timeout = 1800

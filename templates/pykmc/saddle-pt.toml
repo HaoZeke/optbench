@@ -1,0 +1,35 @@
+# pyKMC catalog on the Pt island. The goal is 27 connected saddles under 1.5 eV.
+id = "pykmc/saddle-pt"
+engine = "pykmc"
+problem = "saddle-search/pt-island"
+code = "pykmc"
+code_version = "0.0.1"
+commit = "9fd1f6e9085ef92642142406f3dd74e574209898"
+algorithm = "pARTn event search"
+tuning = "default"
+kernel = "morse"
+failure_cap = 20000
+note = "One kick of a free island atom, then partn_search with the pyKMC push defaults (ninit 2, push_mode rad, push_step_size 0.4). The climb ceiling is 10000. Each endpoint minimization budget is 2000. failure_cap 20000 is the PAR-2 denominator. The problem file states no max_force_calls. Connection is Cartesian RMSD 0.5 on the free atoms within 1.5 A of the highest free atom. A hop of 2.7 A is an all-free RMSD near 0.3, so that slab mean is stored and is not the test. The runner exits after 160 searches add no connected saddle, once 200 searches have run."
+
+[pykmc]
+ninit = 2
+push_mode = "rad"
+push_step_size = 0.4
+push_dist_thr = 1.0
+eigen_step_size = 0.2
+lanczos_min_size = 10
+lanczos_max_size = 20
+forc_thr = 0.001
+delr_thr = 1.0e9
+converge_property = "norm"
+evalf_max = 10000
+rcut = 9.5
+timeout = 1800
+
+[search]
+repetitions = 1
+displace_atoms = "0,1,2,3,4,5,6"
+displace_magnitude = 0.1
+rmsd_connect = 0.5
+max_searches = 20000
+search_budget = 10000
