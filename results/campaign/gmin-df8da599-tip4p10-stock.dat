@@ -1,0 +1,17 @@
+force_calls 2.66000e+02
+force_calls_median 2.36000e+02
+force_calls_min 1.2700e+02
+force_calls_max 4.8800e+02
+nfailed 9989
+starts 10000
+code GMIN
+code_version df8da599267534fbe43a250e578f7396a7946311
+commit 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31
+algorithm basin-hopping
+template gmin/tip4p10-stock
+problem globalopt/tip4p10
+counter harness
+tuning stock
+call_unit total
+cap 1000000
+note Latest unmodified GMIN df8da599267534fbe43a250e578f7396a7946311, tarball sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. Stock temperature 0.3 and steps 0.3, STEPS 0. Archive starts and convergence: NTIP 4, EDIFF 1e-3, TARGET -391.0233. force_calls is the success-only NPCALL mean. The harness score is NPCALL on every start.

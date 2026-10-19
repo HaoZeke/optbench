@@ -112,7 +112,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
-    "repro/globalopt-tip4p10-gmin": "61eeb644f15a09eee3e894f273515b72702b69d9",
+    "repro/globalopt-tip4p10-gmin": "0000000000000000000000000000000000000000",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -199,7 +199,7 @@ MATCHES: list[dict] = [
     # globalopt and htst and aladatom rates
     {"key": "globalopt/lj38/eon-basinhopping", "template": "eon-client/bh-lj38", "branch": "entries/eon-svn-lane-a", "path": "results/campaign/eon-client-bh-lj38.dat"},
     {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "branch": "cells/pele/go", "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat", "cause": "pele_bh_defaults"},
-    {"key": "globalopt/tip4p10/gmin", "template": "gmin/tip4p10-bh", "branch": "repro/globalopt-tip4p10-gmin", "path": "results/campaign/gmin-27059-tip4p10-bh.dat", "metrics": ["force_calls", "force_calls_median", "force_calls_min", "force_calls_max"]},
+    {"key": "globalopt/tip4p10/gmin", "template": "gmin/tip4p10-stock", "branch": "repro/globalopt-tip4p10-gmin", "path": "results/campaign/gmin-df8da599-tip4p10-stock.dat", "metrics": ["force_calls", "force_calls_median", "force_calls_min", "force_calls_max"], "cause": "gmin_stock", "extra": {"rank_with_gap": True}},
     {"key": "hTST/Al/eon-dimer-cg", "template": "eon-svn/htst-al-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-al-dimer.dat", "kind": "htst", "cause": "htst_al"},
     {"key": "hTST/Pt/eon-dimer-cg", "template": "eon-svn/htst-pt-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-pt-dimer.dat", "kind": "htst"},
 ]
@@ -273,6 +273,15 @@ CAUSE_TEXT = {
         "The archived driver is the dangling path bin/js850/globalopt.py. "
         "The harness uses pele LJCluster defaults (temperature 1, step 0.6, LBFGS memory 4) on unshifted cutoff 40. "
         "The mean is 688720 against 521595."
+    ),
+    "gmin_stock": (
+        "Latest unmodified GMIN, source revision df8da599267534fbe43a250e578f7396a7946311, "
+        "tarball sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. "
+        "Stock basin hopping: temperature 0.3, steps 0.3, and STEPS 0 so the program runs the default of zero Monte Carlo steps. "
+        "The problem, the 10000 archived angle-axis starts, and the convergence window are the archive: "
+        "NTIP 4, EDIFF 1e-3, SLOPPYCONV 1e-3, TIGHTCONV 1e-3, MAXIT 10000, TARGET -391.0233. "
+        "Eleven starts hit the target. The success-only mean is 266 against 16236, and nfailed is 9989 against 0. "
+        "The gap is the finding. The ranked score is GMIN NPCALL on the harness counter, cap 1000000."
     ),
     "htst_al": "The r2549 Al dimer with the archived rotation string (CG, max 50, tol 1) misses barrier_force_calls and rate_force_calls by about 30 percent. Pt dimer CG with max 10 reproduces all four hTST counts.",
     "precon_hessian_index": (
@@ -518,7 +527,9 @@ def holdback(root: Path) -> Hold:
         rerun = row.get("rerun") or {}
         problem = f"{row['suite']}/{row['problem']}"
         template = str(rerun.get("template") or "")
-        if row.get("status") == "not_reproduced":
+        # A stock rerun can miss the archive and still be the ranked row.
+        # rank_with_gap keeps that campaign off this hold.
+        if row.get("status") == "not_reproduced" and not rerun.get("rank_with_gap"):
             if template:
                 found.templates.add((problem, template))
             rel = str(rerun.get("path") or "")

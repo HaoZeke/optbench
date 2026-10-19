@@ -1,0 +1,12 @@
+id = "gmin/tip4p10-stock"
+engine = "gmin"
+problem = "globalopt/tip4p10"
+code = "GMIN"
+code_version = "df8da599267534fbe43a250e578f7396a7946311"
+commit = "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
+algorithm = "basin-hopping"
+tuning = "stock"
+failure_cap = 1000000
+note = """
+Latest unmodified Wales GMIN, source revision df8da599267534fbe43a250e578f7396a7946311, from svn.tar.bz2 sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. Serial gfortran, stock cmake flags, no source edits. The data file is templates/gmin/tip4p10-stock.data. Basin-hopping temperature and steps stay at the code defaults (0.3). STEPS 0 runs the default of zero Monte Carlo steps; the current reader leaves NRUNS unset when STEPS is omitted, and it rejects the archive MAXIT 1.D4 form, so the same 10000 limit is written as integers. The problem, the 10000 archived angle-axis starts, and the convergence window match the archive: NTIP 4, EDIFF 1e-3, SLOPPYCONV 1e-3, TIGHTCONV 1e-3, TARGET -391.0233. force_calls is NPCALL. A target hit is a success. A converged quench that misses the target is wrong_stationary. The ranked score uses that native count on the harness counter.
+"""
