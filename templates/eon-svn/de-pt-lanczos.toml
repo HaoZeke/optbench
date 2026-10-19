@@ -1,19 +1,21 @@
 id = "eon-svn/de-pt-lanczos"
 engine = "eon"
 problem = "double-ended-saddle-search/pt-island"
-code = "Eon svn"
-code_version = "r2156"
-commit = "r2156"
+code = "EON (SVN r2549)"
+code_version = "r2549"
+commit = "r2549"
 algorithm = "Lanczos L-BFGS"
-reducer = "archive"
+reducer = "harness"
 failure_cap = 3000
+kind = "de-pt-mode"
 kernel = "morse_shift"
-native_potential = true
+asv_class = "EonSvnDePtLanczos"
 note = '''
-Paper row for the 29 Aug 2013 Pt-island Lanczos entry. The archive names r2156 in code_version and in code_file eon-r2156.tgz, and report.sh writes that revision. That date is the day report.sh ran. r2168, which adds Lanczos quit_early, is the same day and is not the revision the archive names. The client is unmodified r2156, built with Fortran, using that revision's Morse potential. The ini is the archived config. Omitted keys stay at the r2156 defaults, including finite_difference 0.01. r2156 does not read quit_early. report.sh on this rerun is 451 force calls and 0 failures. The archive is 325 and 5. Stock r2549 on morse_pt is the separate current-SVN row eon-svn/de-pt-lanczos-current (233 calls, 0 failures).
+Stock unpatched EON r2549 Lanczos on the 59 Pt-island pairs. The binary is the Fortran build of SVN r2549. The harness kernel is r2549 Morse::force. The stop is the archive convergence: LBFGS force norm 0.001, Lanczos tolerance 0.05, 10 iterations, quit_early false, saddle max_energy 1e9. Other keys stay at the r2549 defaults. This is not tuned toward the archived 325.
 '''
 seeds = [1]
-budget_seconds = 600
+asv_timeout = 900
+budget_seconds = 1800
 
 [ini.Main]
 job = "saddle_search"
@@ -27,8 +29,9 @@ converged_force = 0.001
 max_iterations = 1000
 
 [ini."Saddle Search"]
-max_iterations = 1000
 min_mode_method = "lanczos"
+client_displace_type = "load"
+max_iterations = 1000
 max_energy = 1000000000
 
 [ini.Lanczos]

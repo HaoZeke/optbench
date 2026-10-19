@@ -111,7 +111,6 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
-    "repro/double-ended-saddle-search-pt-island-eon-lanczos": "64c3ec73a7a7a6c7024b44bd4822373d2f198e52",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -182,7 +181,6 @@ MATCHES: list[dict] = [
     {"key": "double-ended-saddle-search/pt-island/eon-ci-neb", "template": "eon-svn/de-pt-ci-neb", "branch": "main", "path": "results/campaign/eon-svn-de-pt-ci-neb.dat"},
     {"key": "double-ended-saddle-search/pt-island/eon-ci-swdneb", "template": "eon-svn/de-pt-ci-swdneb", "branch": "main", "path": "results/campaign/eon-svn-de-pt-ci-swdneb.dat"},
     {"key": "double-ended-saddle-search/pt-island/eon-dimer", "template": "eon-svn/de-pt-dimer", "branch": "main", "path": "results/campaign/eon-svn-de-pt-dimer.dat"},
-    {"key": "double-ended-saddle-search/pt-island/eon-lanczos", "template": "eon-svn/de-pt-lanczos", "branch": "repro/double-ended-saddle-search-pt-island-eon-lanczos", "path": "results/campaign/eon-svn-de-pt-lanczos.dat", "cause": "r2156_unpatched"},
     {"key": "double-ended-saddle-search/pt-island/eon-lanczos-improved", "template": "eon-svn/de-pt-lanczos-improved", "branch": "main", "path": "results/campaign/eon-svn-de-pt-lanczos-improved.dat", "cause": "pt_lanczos"},
     {"key": "double-ended-saddle-search/pt-island/optim", "template": "optim/de-pt", "branch": "cells/optim/saddle-pt", "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-pt-island--optim-de-pt.dat", "cause": "optim_pt_units"},
     # neb per-image means already stored in the 3.5.0 files
@@ -220,13 +218,6 @@ CAUSE_TEXT = {
     "optim_lj38_ts": (
         "Archive run.sh unpacks coords-xyz.tar.gz. The harness uses the problem coords-con set (Kabsch RMS about 6.33). "
         "The odata preamble is not in the archive snapshot. The template uses updates 4. The mean is 489 against 145."
-    ),
-    "r2156_unpatched": (
-        "The archive names r2156 in code_version and in code_file eon-r2156.tgz, and report.sh writes that revision. "
-        "The date 29 Aug 2013 is the day report.sh ran. r2168, which adds Lanczos quit_early, is that same day and is not named. "
-        "Unmodified r2156, built with Fortran and that revision's Morse potential, on the archived config, "
-        "scores 451 force calls and 0 failures. The archive is 325 and 5. "
-        "r2156 does not read quit_early. Stock r2549 on the same potential is the current-SVN row, 233 calls and 0 failures."
     ),
     "pt_lanczos": (
         "The improved svn template sets quit_early true on the archived Lanczos keys "

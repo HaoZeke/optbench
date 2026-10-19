@@ -1,0 +1,15 @@
+force_calls 244
+force_calls_min 100
+force_calls_max 717
+force_calls_median 208.0
+call_unit total
+nfailed 0
+code eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)
+code_version a7aa57472fb7
+commit a7aa57472fb7d823953fd36b78cd755fa4842d30
+algorithm Lanczos L-BFGS
+template eon-develop/de-pt-lanczos
+problem double-ended-saddle-search/pt-island
+reducer harness
+counter harness
+count_keys HarnessCounter

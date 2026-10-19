@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+46 reproduced, 28 not reproduced, 77 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -40,7 +40,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | pt-island/eon-ci-neb-single | — | — | not rerun |
 | pt-island/eon-ci-swdneb | force_calls 256 | 246 | reproduced |
 | pt-island/eon-dimer | force_calls 182 | 192 | reproduced |
-| pt-island/eon-lanczos | force_calls 325 | 451 | not reproduced; r2156_unpatched |
+| pt-island/eon-lanczos | — | — | not rerun |
 | pt-island/eon-lanczos-improved | force_calls 222 | 181 | not reproduced; pt_lanczos |
 | pt-island/optim | force_calls 103 | 138 | not reproduced; optim_pt_units |
 | pt-island/optim-6 | — | — | not rerun |
@@ -248,12 +248,6 @@ The template note records the 2014 mean as OPTIM's own energy-plus-gradient call
 
 - double-ended-saddle-search/lj38/optim
 - double-ended-saddle-search/lj38_2ts_separation/optim
-
-### r2156_unpatched
-
-The archive names r2156 in code_version and in code_file eon-r2156.tgz, and report.sh writes that revision. The date 29 Aug 2013 is the day report.sh ran. r2168, which adds Lanczos quit_early, is that same day and is not named. Unmodified r2156, built with Fortran and that revision's Morse potential, on the archived config, scores 451 force calls and 0 failures. The archive is 325 and 5. r2156 does not read quit_early. Stock r2549 on the same potential is the current-SVN row, 233 calls and 0 failures.
-
-- double-ended-saddle-search/pt-island/eon-lanczos
 
 ### pt_lanczos
 

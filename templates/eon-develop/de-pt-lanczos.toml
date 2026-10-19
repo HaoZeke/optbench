@@ -1,0 +1,40 @@
+id = "eon-develop/de-pt-lanczos"
+engine = "eon"
+problem = "double-ended-saddle-search/pt-island"
+code = "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)"
+code_version = "a7aa57472fb7"
+commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+algorithm = "Lanczos L-BFGS"
+reducer = "harness"
+failure_cap = 3000
+kind = "de-pt-mode"
+kernel = "morse_shift"
+asv_class = "EonDevelopDePtLanczos"
+note = '''
+Stock eOn develop Lanczos on the 59 Pt-island pairs. The binary is develop a7aa57472fb7d823953fd36b78cd755fa4842d30, built with Fortran. The harness kernel is the same r2549 Morse::force surface as EON (SVN r2549). The stop is the archive convergence: LBFGS force norm 0.001, Lanczos tolerance 0.05, 10 iterations, quit_early false, saddle max_energy 1e9. Other keys stay at the develop defaults. This is not tuned toward the archived 325.
+'''
+seeds = [1]
+asv_timeout = 900
+budget_seconds = 1800
+
+[ini.Main]
+job = "saddle_search"
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+converged_force = 0.001
+max_iterations = 1000
+
+[ini."Saddle Search"]
+min_mode_method = "lanczos"
+client_displace_type = "load"
+max_iterations = 1000
+max_energy = 1000000000
+
+[ini.Lanczos]
+max_iterations = 10
+tolerance = 0.05
+quit_early = false
