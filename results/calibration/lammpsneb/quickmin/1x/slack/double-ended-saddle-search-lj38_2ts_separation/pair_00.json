@@ -1,0 +1,1 @@
+{"cap": 10000, "failure": null, "force_calls": 9982, "hessian_index": 1, "lammps_stop": "max iterations", "min_style": "quickmin", "n1": 712, "n2": 712, "n_images": 7, "policy": "slack", "problem": "double-ended-saddle-search/lj38_2ts_separation", "reasons": [], "returncode": 0, "source": "campaign", "start": "pair_00", "success": true, "timestep": 0.005, "timestep_scale": 1.0}

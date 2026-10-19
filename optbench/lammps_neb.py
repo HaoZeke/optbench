@@ -9,11 +9,12 @@ only slightly longer than twice the cutoff.
 ``fix neb`` uses Kspring 1.0 and the parallel style recorded on the
 template. Climbing is the second stage of the ``neb`` command. The
 default timestep is the unit default, 0.005 for ``units lj`` and 0.001
-for ``units metal``. A tuned template multiplies that by the factor in
-the ``neb`` command documentation. ``min_modify dmax`` is the problem
-``max_move``. The default FIRE template leaves one fifth of the cap
-unused. A velocity reset evaluates the pair style again, and that
-compute has to stay inside the cap.
+for ``units metal``. ``timestep_scale`` multiplies that default. The
+published rows leave the scale at 1 and use the problem image count.
+The tuned rows keep both and split that default iteration total 1:2.
+``min_modify dmax`` is the problem ``max_move``. The default FIRE
+template leaves one fifth of the cap unused. A velocity reset evaluates
+the pair style again, and that compute has to stay inside the cap.
 
 A force call is one pair compute. Each stage logs ``neval`` and omits
 the setup compute. A stop other than ``max iterations`` computes the
@@ -23,8 +24,10 @@ endpoints. The harness then judges the climbing replica: free-atom
 gradient at the problem norm, and Hessian index 1. A last stage whose
 stopping criterion is ``max iterations`` or ``max force evaluations``
 used the N1/N2 budget. If the climbing image is still above the force
-stop, the class is cap. Finite-difference probes are ``verify_calls``
-and are not part of the search cost.
+stop, the reason list includes ``cap``. ``classify_failure`` then
+returns that harness class name from ``optbench.failures.FAILURES``.
+Finite-difference probes are ``verify_calls`` and are not part of the
+search cost.
 """
 
 from __future__ import annotations
@@ -115,13 +118,36 @@ def cap_budget(n_images: int, cap: int) -> tuple[int, int]:
     return n1, n2
 
 
+def climb_budget(n_images: int, cap: int, reserve: float = 0.0) -> tuple[int, int]:
+    """1:2 split of the slack iteration total.
+
+    N1 is ``floor((N1 + N2) / 3)`` of :func:`iteration_budget` and N2 is
+    the remainder. The pair-compute bound is the slack bound. The
+    climbing stage receives twice the first stage when the total is
+    divisible by three.
+    """
+    first_budget, second_budget = iteration_budget(n_images, cap, reserve)
+    total = first_budget + second_budget
+    first = total // 3
+    second = total - first
+    if first < 1 or second < 1:
+        raise ValueError(f"cap {cap} cannot fund a climbing split on {n_images} replicas")
+    return first, second
+
+
 def stage_lengths(settings: dict) -> tuple[int, int]:
     """N1 and N2 for this template. ``cap`` spends the problem budget."""
     images = int(settings["n_images"])
     cap = int(settings["cap"])
-    if settings.get("step_budget") == "cap":
+    reserve = float(settings.get("call_reserve", 0.0))
+    budget = settings.get("step_budget", "slack")
+    if budget == "cap":
         return cap_budget(images, cap)
-    return iteration_budget(images, cap, float(settings.get("call_reserve", 0.0)))
+    if budget == "climb":
+        return climb_budget(images, cap, reserve)
+    if budget == "slack":
+        return iteration_budget(images, cap, reserve)
+    raise ValueError(f"step budget {budget}")
 
 
 def ended_on_step_limit(replica_blocks: list[list[tuple[str, int]]]) -> bool:
@@ -261,7 +287,7 @@ def _settings(template: dict, problem: dict, commit: str) -> dict:
     if scale <= 0.0:
         raise ValueError(f"{template['id']} timestep scale {scale}")
     step_budget = str(band.get("step_budget", "slack"))
-    if step_budget not in {"slack", "cap"}:
+    if step_budget not in {"slack", "cap", "climb"}:
         raise ValueError(f"{template['id']} step budget {step_budget}")
     return {
         "potential": kind,

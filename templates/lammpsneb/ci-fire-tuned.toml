@@ -1,7 +1,7 @@
 # LAMMPS 30 Sep 2026 fix neb. The second stage climbs.
-# examples/neb/README: more than four replicas for a precise barrier. This row uses five.
-# The neb command doc asks for a timestep about ten times a dynamics timestep.
-# N1 and N2 are the largest pair whose max-iteration pair computes reach the cap.
+# Five-start calibration, declared and not scored: unit timestep,
+# the problem image count, and a 1:2 split of the default FIRE budget.
+# N1 is one third of that total and N2 is the rest.
 id = "lammpsneb/ci-fire-tuned"
 engine = "lammps-neb"
 code = "LAMMPS"
@@ -15,7 +15,7 @@ climbing = true
 min_style = "fire"
 spring_k = 1.0
 parallel = "neigh"
-call_reserve = 0.0
-replicas = 5
-timestep_scale = 10.0
-step_budget = "cap"
+# FIRE evaluates the pair style again when it resets velocities.
+# The reserve is the same one the default row uses.
+call_reserve = 0.2
+step_budget = "climb"
