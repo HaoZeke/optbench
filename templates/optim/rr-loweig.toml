@@ -1,0 +1,22 @@
+# OPTIM Rayleigh-Ritz lowest eigenvector, first-order finite differences.
+id = "optim/rr-loweig"
+engine = "optim"
+problem = "lowest-eigenvector/lj38"
+code = "optim"
+code_version = "df8da599"
+commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+algorithm = "hybrid eigenvector following"
+tuning = "tuned"
+note = "The archived odata preamble is not in the snapshot. This is the 2014 pele forward search on the same geometries: USEDIAG 3, L-BFGS memory 100, Rayleigh-Ritz max step 2, overlap stop 0.99, shared initial_mode. BFGSTSPC 1e10 keeps the extra percent-change gate from iterating after that overlap. The binary must apply optbench/engines/optim_eigenonly_grad.patch so the base gradient is set. SVNREV in the snapshot is df8da599. Each ASE COMPUTE is one harness call."
+
+[optim]
+method = "rr-ffd"
+usediag = 3
+updates = 4
+xmupdate = 100
+maxstep = 0.2
+maxxbfgs = 2.0
+ceig = 1.0e-4
+cover = 0.99
+bfgstspc = 1.0e10
+seed = 2014

@@ -1,13 +1,17 @@
-"""OPTIM L-BFGS through the ASE socket.
+"""OPTIM through the ASE socket.
 
 The binary is the OPTIM target from the Wales snapshot
 ``http://www-wales.ch.cam.ac.uk/svn.tar.bz2``. The pin is the sha256 of
 that file. The snapshot has no git commit. Each ``COMPUTE`` on the relay
 is one ``pes.evaluate``. OPTIM's own counter is not the score.
 
-``optim/unhooked`` and every template that is not minimization L-BFGS
-raise before a file is written. Noise, saddle search, NEB, and PATHSAMPLE
-are not this runner.
+Minimization L-BFGS and the LJ38 Rayleigh-Ritz lowest eigenvector are
+scored. ``optim/unhooked`` and every other template raise before a file
+is written. Noise, saddle search, NEB, and PATHSAMPLE are not this runner.
+
+``EIGENONLY`` used to enter ``BEIG`` with ``GRAD`` unset. ``USEDIAG 3``
+is the forward quotient and reads that base gradient, so the binary must
+include ``optim_eigenonly_grad.patch``.
 """
 
 from __future__ import annotations
@@ -21,7 +25,7 @@ from pathlib import Path
 
 import numpy as np
 
-from .common import judge_saddle, run_jobs, write_campaign
+from .common import judge_mode, judge_saddle, run_jobs, write_campaign
 from .geometries import load_starts, point_settings
 
 ENGINE = "optim"
@@ -76,6 +80,19 @@ def _section(template: dict) -> dict:
     section["method"] = str(section.get("method", ""))
     section["updates"] = int(section.get("updates", 4))
     section["maxstep"] = float(section.get("maxstep", 0.2))
+    return section
+
+
+def _rr_section(template: dict) -> dict:
+    """Rayleigh-Ritz knobs. Defaults match the 2014 pele forward row."""
+    section = _section(template)
+    section["usediag"] = int(section.get("usediag", 3))
+    section["xmupdate"] = int(section.get("xmupdate", 100))
+    section["maxxbfgs"] = float(section.get("maxxbfgs", 2.0))
+    section["ceig"] = float(section.get("ceig", 1.0e-4))
+    section["cover"] = float(section.get("cover", 0.99))
+    section["bfgstspc"] = float(section.get("bfgstspc", 1.0e10))
+    section["seed"] = int(section.get("seed", 2014))
     return section
 
 
@@ -146,6 +163,62 @@ def _odata(folder: Path, python: str, hook: Path, gmax: float, updates: int, ste
         f"MAXMAX {_fortran_float(maxstep)}",
     ]
     (folder / "odata").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def _odata_rr(folder: Path, python: str, hook: Path, section: dict) -> None:
+    lines = [
+        "NOTE optbench",
+        f"ASE geom.xyz {python} {hook} dummy dummy cpu FIXCELL NOPBC EV ANG",
+        f"EIGENONLY {_fortran_float(section['ceig'])} {_fortran_float(section['cover'])}",
+        "NOHESS",
+        f"USEDIAG {int(section['usediag'])}",
+        "READVEC",
+        "DUMPVECTOR",
+        "STEPS 100000",
+        f"UPDATES {int(section['updates'])} {int(section['xmupdate'])}",
+        (
+            f"MAXBFGS {_fortran_float(section['maxstep'])} "
+            f"{_fortran_float(section['maxxbfgs'])}"
+        ),
+        f"BFGSTSPC {_fortran_float(section['bfgstspc'])}",
+        f"RANSEED {int(section['seed'])}",
+    ]
+    (folder / "odata").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def _write_vector_dump(path: Path, raw_mode: str) -> None:
+    """Archive ``run.sh`` writes ``100`` then the shared ``initial_mode``."""
+    body = raw_mode if raw_mode.endswith("\n") else raw_mode + "\n"
+    path.write_text("100\n" + body, encoding="utf-8")
+
+
+def _dumped_vector(path: Path, nopt: int) -> np.ndarray | None:
+    """``DUMPVECTOR`` writes the eigenvalue, then ``nopt`` components."""
+    if not path.is_file():
+        return None
+    values: list[float] = []
+    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        text = line.strip()
+        if not text or text.startswith("#"):
+            continue
+        for token in text.replace("D", "E").replace("d", "e").split():
+            try:
+                values.append(float(token))
+            except ValueError:
+                return None
+    if len(values) < nopt + 1:
+        return None
+    return np.asarray(values[1 : nopt + 1], dtype=np.float64)
+
+
+def _overlap(vector: np.ndarray | None, reference: np.ndarray) -> float:
+    if vector is None or vector.size != reference.size:
+        return 0.0
+    scale = float(np.linalg.norm(vector))
+    target = float(np.linalg.norm(reference))
+    if scale < 1e-14 or target < 1e-14:
+        return 0.0
+    return abs(float(np.dot(vector / scale, reference / target)))
 
 
 def _execute(job: dict) -> dict:
@@ -280,6 +353,134 @@ def _job(start: dict, settings: dict, template: dict) -> dict:
     }
 
 
+def _relay_env(folder: Path, job: dict) -> dict[str, str]:
+    env = os.environ.copy()
+    env["OMP_NUM_THREADS"] = "1"
+    root = str(job.get("pythonpath") or "")
+    if root:
+        previous = env.get("PYTHONPATH", "")
+        env["PYTHONPATH"] = root if not previous else root + os.pathsep + previous
+    env["OPTBENCH_KIND"] = str(job["kind"])
+    env["OPTBENCH_CAP"] = str(int(job["cap"]))
+    env["OPTBENCH_COUNT_PATH"] = str(folder / "calls.txt")
+    env["OPTBENCH_LAST_PATH"] = str(folder / "last.txt")
+    env["OPTBENCH_CAPPED_PATH"] = str(folder / "capped.txt")
+    env["OPTBENCH_E_SCALE"] = "1"
+    env["OPTBENCH_L_SCALE"] = "1"
+    box = job["box"]
+    if box is None:
+        env.pop("OPTBENCH_BOX", None)
+    else:
+        lengths = np.asarray(box, dtype=np.float64).reshape(-1)[:3]
+        env["OPTBENCH_BOX"] = " ".join(f"{float(value):.16g}" for value in lengths)
+    return env
+
+
+def _execute_rr(job: dict) -> dict:
+    """One Rayleigh-Ritz lowest-eigenvector search."""
+    os.environ.setdefault("OMP_NUM_THREADS", "1")
+    positions = np.asarray(job["positions"], dtype=np.float64)
+    cap = int(job["cap"])
+    natoms = int(positions.shape[0])
+    nopt = 3 * natoms
+    reference = np.asarray(job["reference"], dtype=np.float64).reshape(-1)
+    binary = binary_path()
+    calls = 0
+    capped = False
+    error = ""
+    overlap = 0.0
+    import tempfile
+
+    try:
+        with tempfile.TemporaryDirectory(prefix="optim-rr-") as raw:
+            folder = Path(raw)
+            hook = folder / "hook"
+            relay = hook / "pysocket" / "fmlip_relay.py"
+            relay.parent.mkdir(parents=True)
+            shutil.copyfile(_RELAY, relay)
+            _write_xyz(folder / "geom.xyz", positions, None)
+            _write_vector_dump(folder / "vector.dump", str(job["initial_mode"]))
+            (folder / "target.vector").write_text(str(job["target"]), encoding="utf-8")
+            _odata_rr(folder, sys.executable, hook, job["section"])
+            env = _relay_env(folder, job)
+            stdout_path = folder / "stdout.txt"
+            stderr_path = folder / "stderr.txt"
+            proc = None
+            try:
+                with stdout_path.open("w", encoding="utf-8") as stdout, stderr_path.open("w", encoding="utf-8") as stderr:
+                    proc = subprocess.run(
+                        [str(binary)],
+                        cwd=folder,
+                        env=env,
+                        stdout=stdout,
+                        stderr=stderr,
+                        text=True,
+                        timeout=3600,
+                        check=False,
+                    )
+            except subprocess.TimeoutExpired:
+                error = "OPTIM exceeded 3600s"
+            count_path = folder / "calls.txt"
+            if count_path.is_file():
+                calls = int(count_path.read_text(encoding="utf-8").strip() or "0")
+            capped = (folder / "capped.txt").is_file() or calls >= cap
+            overlap = _overlap(_dumped_vector(folder / "vector.dump", nopt), reference)
+            if proc is not None and proc.returncode != 0 and not capped and not error:
+                detail = _tail(stderr_path) or _tail(stdout_path) or f"exit {proc.returncode}"
+                error = f"OPTIM exit {proc.returncode}: {detail}"
+            elif proc is not None and calls == 0 and not capped and not error:
+                detail = _tail(stdout_path) or _tail(stderr_path) or "no evaluations"
+                error = f"OPTIM produced no evaluations: {detail}"
+    except Exception as exc:
+        error = f"{type(exc).__name__}: {exc}"
+    if capped and "force-call cap" not in error:
+        error = "force-call cap"
+    record = judge_mode(job["name"], calls, cap, overlap, float(job["overlap"]), error)
+    record["optim_method"] = "rr-ffd"
+    record["usediag"] = int(job["section"]["usediag"])
+    return record
+
+
+def _mode_text(folder: Path, name: str) -> str:
+    path = folder / "coords-con" / f"{name}_mode"
+    if not path.is_file():
+        raise FileNotFoundError(path)
+    return path.read_text(encoding="utf-8")
+
+
+def _shared_initial_mode(folder: Path, nopt: int) -> str:
+    path = folder / "coords-con" / "initial_mode"
+    if not path.is_file():
+        raise FileNotFoundError(path)
+    text = path.read_text(encoding="utf-8")
+    count = 0
+    for line in text.splitlines():
+        piece = line.strip()
+        if piece and not piece.startswith("#"):
+            count += len(piece.split())
+    if count != nopt:
+        raise ValueError(f"{path} has {count} components, the geometry has {nopt}")
+    return text
+
+
+def _rr_job(start: dict, settings: dict, section: dict, initial_mode: str, target: str, root: Path) -> dict:
+    if start.get("reference") is None:
+        raise ValueError(f"{start['name']} has no reference mode")
+    return {
+        "name": start["name"],
+        "positions": start["positions"],
+        "reference": start["reference"],
+        "kind": settings["potential"],
+        "box": start["box"],
+        "cap": int(settings["cap"]),
+        "overlap": float(settings["overlap"]),
+        "section": section,
+        "initial_mode": initial_mode,
+        "target": target,
+        "pythonpath": str(root),
+    }
+
+
 def run(root: Path, problem_name: str, template_name: str, *, output: Path, workers: int = 1) -> dict:
     reason = available()
     if reason:
@@ -297,15 +498,17 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
     stated = template.get("problem")
     if stated and stated != problem_name:
         raise ValueError(f"{template_name} belongs to {stated}")
-    section = _section(template)
-    if problem.get("suite") != "minimization" or section["method"] != "lbfgs":
-        raise _unhooked(template_name)
     if template.get("noise"):
         raise _unhooked(template_name)
+    section = _section(template)
     settings = point_settings(problem)
     if settings["cap"] is None:
         raise ValueError(f"{problem['id']} has no force-call cap")
     scratch = output.parent / "work" / template["id"].replace("/", "-")
+    if problem.get("suite") == "lowest-eigenvector" and section["method"] == "rr-ffd":
+        return _run_rr(root, problem, template, settings, scratch, output, workers)
+    if problem.get("suite") != "minimization" or section["method"] != "lbfgs":
+        raise _unhooked(template_name)
     jobs = [_job(start, settings, template) for start in load_starts(root, problem, scratch)]
     records = run_jobs(jobs, _execute, workers)
     comment = (
@@ -320,6 +523,55 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
         "keyword": "BFGSMIN",
         "updates": section["updates"],
         "maxstep": section["maxstep"],
+        "counter": "harness",
+        "socket": "ASE",
+    }
+    return write_campaign(
+        output,
+        records,
+        template,
+        problem,
+        settings,
+        parameters,
+        images=None,
+        comment=comment,
+    )
+
+
+def _run_rr(root, problem, template, settings, scratch, output, workers: int) -> dict:
+    section = _rr_section(template)
+    if int(section["usediag"]) != 3:
+        raise ValueError(f"{template['id']} USEDIAG {section['usediag']} is not the first-order quotient")
+    starts = load_starts(root, problem, scratch)
+    folder = scratch / "geometries"
+    nopt = 3 * len(starts[0]["positions"])
+    initial_mode = _shared_initial_mode(folder, nopt)
+    jobs = [
+        _rr_job(start, settings, section, initial_mode, _mode_text(folder, start["name"]), root)
+        for start in starts
+    ]
+    records = run_jobs(jobs, _execute_rr, workers)
+    comment = (
+        "# counter harness. Each ASE COMPUTE is one pes.evaluate. "
+        "OPTIM's own counter is not the score.\n"
+        "# Rayleigh-Ritz EIGENONLY, USEDIAG 3 (forward differences). "
+        "UPDATES 4 100, MAXBFGS 0.2 2.0, overlap stop 0.99.\n"
+        "# vector.dump is 100 plus the shared initial_mode. "
+        "target.vector is the per-start mode file.\n"
+        "# A success is under the cap and absolute overlap of at least 0.99."
+    )
+    parameters = {
+        "method": "rr-ffd",
+        "keyword": "EIGENONLY",
+        "usediag": section["usediag"],
+        "updates": section["updates"],
+        "xmupdate": section["xmupdate"],
+        "maxstep": section["maxstep"],
+        "maxxbfgs": section["maxxbfgs"],
+        "ceig": section["ceig"],
+        "cover": section["cover"],
+        "bfgstspc": section["bfgstspc"],
+        "seed": section["seed"],
         "counter": "harness",
         "socket": "ASE",
     }

@@ -86,6 +86,7 @@ success-only median. A row with no success has no median.
 | minimization/morse-bulk | dlfind/sd-morse | 13/100 | 87 wrong stationary | 253 |
 | minimization/morse-bulk | optim/lbfgs-morse | 13/100 | 87 wrong stationary | 72 |
 | minimization/lj38 | optim/lbfgs-lj38 | 998/1000 | 2 wrong stationary | 217 |
+| lowest-eigenvector/lj38 | optim/rr-loweig | 200/200 | 0 | 22.5 |
 | double-ended-saddle-search/lj38 | compass/sqnm | 47/50 | 3 cap | 1221 |
 | double-ended-saddle-search/lj38_2ts_separation | compass/sqnm | 41/51 | 9 cap, 1 wrong stationary | 2265 |
 | neb/Pt-heptamer | compass/sqnm | 13/13 | 0 | 548 |

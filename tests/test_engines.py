@@ -69,6 +69,7 @@ def test_new_templates_match_a_problem_stop():
         "optim/unhooked",
         "optim/lbfgs-lj38",
         "optim/lbfgs-morse",
+        "optim/rr-loweig",
         "lammps/cg-lj38",
         "lammps/cg-morse",
         "lammps/cg-lj38-noise-s0",
@@ -133,6 +134,17 @@ def test_new_templates_match_a_problem_stop():
         assert template["commit"]
         assert template["code"]
     assert set(found) == expected
+
+
+def test_optim_rr_loweig_is_first_order():
+    template = next(row for row in list_templates(ROOT) if row["id"] == "optim/rr-loweig")
+    assert template["problem"] == "lowest-eigenvector/lj38"
+    assert template["optim"]["method"] == "rr-ffd"
+    assert template["optim"]["usediag"] == 3
+    assert template["optim"]["xmupdate"] == 100
+    assert template["optim"]["maxxbfgs"] == 2.0
+    assert template["optim"]["cover"] == 0.99
+    assert template["commit"] == SHA256
 
 
 def test_pykmc_and_optim_write_nothing(tmp_path: Path):
