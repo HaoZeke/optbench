@@ -111,6 +111,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+    "repro/minimization-lj38-scipy-lbfgs": "",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -137,6 +138,7 @@ MATCHES: list[dict] = [
     {"key": "minimization/lj38/pele-lbfgs-M4-maxstep0.05", "template": "pele-lbfgs-M4-maxstep0.05", "branch": "main", "path": "results/campaign/pele-0.1.2-lbfgs-M4-maxstep0.05.dat"},
     {"key": "minimization/lj38/pele-lbfgs-M4-maxstep0.1", "template": "pele-lbfgs-M4-maxstep0.1", "branch": "main", "path": "results/campaign/pele-0.1.2-lbfgs-M4-maxstep0.1.dat"},
     {"key": "minimization/lj38/pele-lbfgs-M4-maxstep0.2", "template": "pele-lbfgs-M4-maxstep0.2", "branch": "main", "path": "results/campaign/pele-0.1.2-lbfgs-M4-maxstep0.2.dat"},
+    {"key": "minimization/lj38/scipy-lbfgs", "template": "pele/lj38-scipy-lbfgs", "branch": "repro/minimization-lj38-scipy-lbfgs", "path": "results/campaign/pele-2d5bc8e3-lj38-scipy-lbfgs.dat", "metrics": ["force_calls", "force_calls_min", "force_calls_max"], "extra": {"unrounded_mean": 230.369}},
     {"key": "minimization/lj38/pele-fire", "template": "pele/lj38-fire", "branch": "cells/pele/min", "path": "results/campaign/pele-b7081b93-lj38-fire.dat", "cause": "pele_fire"},
     # minimization / morse
     {"key": "minimization/morse-bulk/eon-lbfgs", "template": "eon-client/morse-lbfgs", "branch": "main", "path": "results/campaign/eon-client-morse-lbfgs.dat"},
@@ -458,6 +460,14 @@ def read_campaign(root: Path, branch: str, path: str) -> str:
 
 
 def _sha(branch: str) -> str:
+    if branch == "repro/minimization-lj38-scipy-lbfgs" and len(SHA.get(branch, "")) < 12:
+        import subprocess
+
+        SHA[branch] = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"],
+            cwd=Path(__file__).resolve().parents[1],
+            text=True,
+        ).strip()
     if branch == "cells/fill-not-rerun" and len(SHA.get(branch, "")) < 12:
         import subprocess
 
