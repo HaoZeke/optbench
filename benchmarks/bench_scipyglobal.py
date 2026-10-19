@@ -128,6 +128,7 @@ def _job(spec: dict, start: str) -> dict:
         "parameters": parameters,
         "template_id": spec["template_id"],
         "checkpoint": str(_cache_dir() / "checkpoints" / spec["template_id"].replace("/", "-") / f"{index:04d}.json"),
+        "limit_address_space": method == "shgo",
     }
 
 

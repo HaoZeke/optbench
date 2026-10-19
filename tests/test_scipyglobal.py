@@ -250,3 +250,13 @@ def test_scipyglobal_engine_does_not_need_eonclient(monkeypatch, tmp_path: Path)
         "workers": 3,
     }
     assert summary["problem"] == "globalopt/lj38"
+
+
+def test_asv_shgo_job_limits_its_address_space():
+    from benchmarks.bench_scipyglobal import _job, _specs
+
+    specs = {row["template_id"]: row for row in _specs()}
+    for template_id, spec in specs.items():
+        job = _job(spec, "0")
+        assert job["limit_address_space"] is (spec["template"]["scipy"]["method"] == "shgo")
+        assert template_id.startswith("scipyglobal/")
