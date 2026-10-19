@@ -1,0 +1,19 @@
+# Native OPTIM bulk Morse. The 2014 odata preamble was not archived.
+id = "optim/morse-lbfgs-tuned"
+engine = "optim"
+problem = "minimization/morse-bulk"
+code = "optim"
+code_version = "svn-snapshot"
+commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+algorithm = "L-BFGS"
+tuning = "tuned"
+note = "Native OPTIM morse_bulk. run.sh scales coordinates by r0=2.897. PARAMS rho=1.6047*r0, box and cutoff 9.5 divided by r0. comments.txt is UPDATES 100 and MAXBFGS 2.0. BFGSMIN is the force norm over sqrt(3N). The score is the energy+gradient call count."
+
+[optim]
+method = "lbfgs"
+potential = "morse-bulk"
+updates = 100
+maxbfgs = 2.0
+rho = 1.6047
+r0 = 2.897
+cutoff = 9.5

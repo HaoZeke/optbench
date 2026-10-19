@@ -69,6 +69,7 @@ def test_new_templates_match_a_problem_stop():
         "optim/unhooked",
         "optim/lbfgs-lj38",
         "optim/lbfgs-morse",
+        "optim/morse-lbfgs-tuned",
         "lammps/cg-lj38",
         "lammps/cg-morse",
         "lammps/cg-lj38-noise-s0",
@@ -133,6 +134,39 @@ def test_new_templates_match_a_problem_stop():
         assert template["commit"]
         assert template["code"]
     assert set(found) == expected
+
+
+def test_morse_bulk_odata_is_the_reduced_morse():
+    import math
+
+    from optbench.engines.optim_search import _fortran_float, morse_bulk_lines
+
+    r0 = 2.897
+    box = 16.387907
+    lines = morse_bulk_lines(
+        [[r0, 0.0, 0.0]],
+        [box, box, box],
+        gmax=1.0e-3 / math.sqrt(3 * 256),
+        updates=100,
+        maxbfgs=2.0,
+        steps=10000,
+        rho=1.6047,
+        r0=r0,
+        cutoff=9.5,
+    )
+    scale = 1.0 / r0
+    params = lines[1].split()
+    assert lines[0] == "BULK"
+    assert params[0] == "PARAMS"
+    assert params[1] == _fortran_float(1.6047 * r0)
+    assert params[2] == params[3] == params[4] == _fortran_float(box * scale)
+    assert params[5] == _fortran_float(9.5 * scale)
+    assert lines[2] == f"BFGSMIN {_fortran_float(1.0e-3 / math.sqrt(768))}"
+    assert lines[3] == "UPDATES 100"
+    assert lines[4] == f"MAXBFGS {_fortran_float(2.0)}"
+    assert lines[5] == "BFGSSTEPS 10000"
+    assert lines[6] == "POINTS"
+    assert lines[7] == "M " + " ".join(_fortran_float(value) for value in (1.0, 0.0, 0.0))
 
 
 def test_pykmc_and_optim_write_nothing(tmp_path: Path):

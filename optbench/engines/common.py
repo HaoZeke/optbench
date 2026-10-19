@@ -295,7 +295,7 @@ def _dat(records: list[dict], template: dict, *, images: int | None, comment: st
     lines.append(f"template {template['id']}")
     lines.append(f"problem {template.get('problem') or records[0].get('problem', '')}")
     lines.append(f"tuning {template['tuning']}")
-    lines.append("counter harness")
+    lines.append(f"counter {template.get('counter') or 'harness'}")
     if images is not None:
         lines.append(f"images {images}")
     return "\n".join(lines) + "\n"
@@ -355,7 +355,7 @@ def write_campaign(
         "schema": "optbench.score/v2",
         "problem": problem["id"],
         "template": template["id"],
-        "counter": "harness",
+        "counter": template.get("counter") or "harness",
         "provenance": collect_provenance(
             code=template["code"],
             code_version=template["code_version"],

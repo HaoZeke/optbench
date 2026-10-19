@@ -1,0 +1,22 @@
+# force_calls is OPTIM's energy+gradient count. Each one is a potential evaluation.
+# run.sh divides coordinates by r0. morse_bulk keeps the well at distance 1 and energy 1.
+# PARAMS rho is alpha times r0. The box and the cutoff are divided by r0.
+# UPDATES and MAXBFGS are the comments.txt memory and maximum move.
+# BFGSMIN is the Euclidean force norm divided by sqrt(3N).
+# A start fails when it does not converge under the force-call cap.
+force_calls 50
+force_calls_min 25
+force_calls_max 79
+force_calls_median 49
+successes 100
+nfailed 0
+n 100
+transition_states 0
+code optim
+code_version svn-snapshot
+commit 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f
+algorithm L-BFGS
+template optim/morse-lbfgs-tuned
+problem minimization/morse-bulk
+tuning tuned
+counter optim

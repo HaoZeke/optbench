@@ -1,9 +1,12 @@
-"""OPTIM L-BFGS through the ASE socket.
+"""OPTIM L-BFGS.
 
 The binary is the OPTIM target from the Wales snapshot
 ``http://www-wales.ch.cam.ac.uk/svn.tar.bz2``. The pin is the sha256 of
-that file. The snapshot has no git commit. Each ``COMPUTE`` on the relay
-is one ``pes.evaluate``. OPTIM's own counter is not the score.
+that file. The snapshot has no git commit.
+
+``optim/morse-lbfgs-tuned`` calls OPTIM's bulk Morse. The score is the
+``energy+gradient calls`` line. Every other minimization L-BFGS template
+uses the ASE socket, and each ``COMPUTE`` is one ``pes.evaluate``.
 
 ``optim/unhooked`` and every template that is not minimization L-BFGS
 raise before a file is written. Noise, saddle search, NEB, and PATHSAMPLE
@@ -14,6 +17,7 @@ from __future__ import annotations
 
 import math
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -71,11 +75,21 @@ def available() -> str | None:
     )
 
 
+_CALL_RE = re.compile(r"# of energy\+gradient calls=\s+(-?\d+)")
+_ENERGY_RE = re.compile(r"Final energy is\s+([+-]?\d+(?:\.\d+)?(?:[EeDd][+-]?\d+)?)")
+
+
 def _section(template: dict) -> dict:
     section = dict(template.get("optim") or {})
     section["method"] = str(section.get("method", ""))
     section["updates"] = int(section.get("updates", 4))
     section["maxstep"] = float(section.get("maxstep", 0.2))
+    section["potential"] = str(section.get("potential", ""))
+    if section["potential"] == "morse-bulk":
+        section["maxbfgs"] = float(section.get("maxbfgs", 2.0))
+        section["rho"] = float(section.get("rho", 1.6047))
+        section["r0"] = float(section.get("r0", 2.897))
+        section["cutoff"] = float(section.get("cutoff", 9.5))
     return section
 
 
@@ -133,6 +147,207 @@ def _tail(path: Path) -> str:
 def _fortran_float(value: float) -> str:
     """List-directed OPTIM input rejects a lowercase ``e`` exponent."""
     return f"{float(value):.16E}".replace("E", "D")
+
+
+def morse_bulk_lines(
+    coords: list[list[float]],
+    box: list[float],
+    *,
+    gmax: float,
+    updates: int,
+    maxbfgs: float,
+    steps: int,
+    rho: float,
+    r0: float,
+    cutoff: float,
+) -> list[str]:
+    """odata for OPTIM's bulk Morse in the units ``run.sh`` builds.
+
+    Coordinates, the orthorhombic box, and the cutoff are divided by
+    ``r0``. ``PARAMS`` rho is ``alpha * r0``. The potential itself fixes
+    the well at distance 1 and energy 1. ``BFGSMIN`` is the Euclidean
+    force norm divided by ``sqrt(3N)``.
+    """
+    if r0 <= 0.0 or cutoff <= 0.0 or rho <= 0.0:
+        raise ValueError("Morse r0, rho, and cutoff must be positive")
+    if len(box) != 3:
+        raise ValueError("Morse bulk needs three box lengths")
+    scale = 1.0 / float(r0)
+    lengths = [float(value) * scale for value in box]
+    lines = [
+        "BULK",
+        "PARAMS "
+        + " ".join(
+            _fortran_float(value)
+            for value in (float(rho) * float(r0), lengths[0], lengths[1], lengths[2], float(cutoff) * scale)
+        ),
+        f"BFGSMIN {_fortran_float(gmax)}",
+        f"UPDATES {int(updates)}",
+        f"MAXBFGS {_fortran_float(maxbfgs)}",
+        f"BFGSSTEPS {int(steps)}",
+        "POINTS",
+    ]
+    for row in coords:
+        if len(row) != 3:
+            raise ValueError("a Morse coordinate row needs three values")
+        lines.append("M " + " ".join(_fortran_float(float(value) * scale) for value in row))
+    return lines
+
+
+def _parse_optim_log(text: str) -> tuple[int | None, float | None, bool]:
+    calls = None
+    for line in text.splitlines():
+        if "Hessian" in line:
+            continue
+        match = _CALL_RE.search(line)
+        if match:
+            calls = int(match.group(1))
+    energy = None
+    found = _ENERGY_RE.search(text.replace("D", "E").replace("d", "e"))
+    if found:
+        energy = float(found.group(1))
+    return calls, energy, "**** CONVERGED ****" in text
+
+
+def _execute_morse(job: dict) -> dict:
+    os.environ.setdefault("OMP_NUM_THREADS", "1")
+    import tempfile
+
+    from .common import classify_failure
+
+    name = str(job["name"])
+    cap = int(job["cap"])
+    calls = 0
+    energy = None
+    reasons: list[str] = []
+    error = ""
+    try:
+        with tempfile.TemporaryDirectory(prefix="optim-morse-") as raw:
+            folder = Path(raw)
+            lines = morse_bulk_lines(
+                job["positions"],
+                job["box"],
+                gmax=float(job["gmax"]),
+                updates=int(job["updates"]),
+                maxbfgs=float(job["maxbfgs"]),
+                steps=cap,
+                rho=float(job["rho"]),
+                r0=float(job["r0"]),
+                cutoff=float(job["cutoff"]),
+            )
+            (folder / "odata").write_text("\n".join(lines) + "\n", encoding="utf-8")
+            env = os.environ.copy()
+            env["OMP_NUM_THREADS"] = "1"
+            try:
+                proc = subprocess.run(
+                    [str(job["binary"])],
+                    cwd=folder,
+                    env=env,
+                    stdin=subprocess.DEVNULL,
+                    capture_output=True,
+                    text=True,
+                    timeout=3600,
+                    check=False,
+                )
+            except subprocess.TimeoutExpired:
+                proc = None
+                error = "OPTIM exceeded 3600s"
+                reasons.append("crash")
+            if proc is not None:
+                text = (proc.stdout or "") + "\n" + (proc.stderr or "")
+                parsed, energy, converged = _parse_optim_log(text)
+                if parsed is not None:
+                    calls = parsed
+                if proc.returncode != 0:
+                    reasons.append("crash")
+                    error = error or f"OPTIM exit {proc.returncode}"
+                elif not converged:
+                    reasons.append("cap" if calls >= cap else "divergence")
+                elif calls >= cap:
+                    reasons.append("cap")
+    except Exception as exc:
+        reasons.append("crash")
+        error = f"{type(exc).__name__}: {exc}"
+    failure = classify_failure(reasons)
+    record = {
+        "schema": "optbench.start/v2",
+        "start": name,
+        "force_calls": int(calls),
+        "verify_calls": 0,
+        "counter": "optim",
+        "comparable": True,
+        "success": failure is None,
+        "failure": failure,
+        "reasons": reasons,
+        "converged": failure is None,
+        "energy": energy,
+        "hessian_index": None,
+    }
+    if error:
+        record["error"] = error
+    return record
+
+
+def _run_morse_bulk(root: Path, problem: dict, template: dict, section: dict, settings: dict, output: Path, workers: int) -> dict:
+    scratch = output.parent / "work" / template["id"].replace("/", "-")
+    starts = load_starts(root, problem, scratch)
+    if not starts:
+        raise RuntimeError(f"{problem['id']} has no starts")
+    binary = binary_path()
+    cap = int(settings["cap"])
+    jobs = []
+    for start in starts:
+        positions = start["positions"]
+        atoms = len(positions)
+        if start["box"] is None:
+            raise ValueError(f"{start['name']} has no periodic box")
+        jobs.append(
+            {
+                "name": start["name"],
+                "positions": positions,
+                "box": start["box"],
+                "cap": cap,
+                "gmax": float(settings["force_norm"]) / math.sqrt(3 * atoms),
+                "updates": int(section["updates"]),
+                "maxbfgs": float(section["maxbfgs"]),
+                "rho": float(section["rho"]),
+                "r0": float(section["r0"]),
+                "cutoff": float(section["cutoff"]),
+                "binary": str(binary),
+            }
+        )
+    records = run_jobs(jobs, _execute_morse, workers)
+    comment = (
+        "# force_calls is OPTIM's energy+gradient count. Each one is a potential evaluation.\n"
+        "# run.sh divides coordinates by r0. morse_bulk keeps the well at distance 1 and energy 1.\n"
+        "# PARAMS rho is alpha times r0. The box and the cutoff are divided by r0.\n"
+        "# UPDATES and MAXBFGS are the comments.txt memory and maximum move.\n"
+        "# BFGSMIN is the Euclidean force norm divided by sqrt(3N).\n"
+        "# A start fails when it does not converge under the force-call cap."
+    )
+    parameters = {
+        "method": "lbfgs",
+        "keyword": "BFGSMIN",
+        "potential": "morse-bulk",
+        "updates": int(section["updates"]),
+        "maxbfgs": float(section["maxbfgs"]),
+        "rho": float(section["rho"]),
+        "r0": float(section["r0"]),
+        "cutoff": float(section["cutoff"]),
+        "counter": "optim",
+    }
+    stamped = dict(template)
+    stamped["counter"] = "optim"
+    return write_campaign(
+        output,
+        records,
+        stamped,
+        problem,
+        settings,
+        parameters,
+        images=None,
+        comment=comment,
+    )
 
 
 def _odata(folder: Path, python: str, hook: Path, gmax: float, updates: int, steps: int, maxstep: float, periodic: bool) -> None:
@@ -305,6 +520,8 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
     settings = point_settings(problem)
     if settings["cap"] is None:
         raise ValueError(f"{problem['id']} has no force-call cap")
+    if section["potential"] == "morse-bulk":
+        return _run_morse_bulk(root, problem, template, section, settings, output, workers)
     scratch = output.parent / "work" / template["id"].replace("/", "-")
     jobs = [_job(start, settings, template) for start in load_starts(root, problem, scratch)]
     records = run_jobs(jobs, _execute, workers)
