@@ -17,7 +17,7 @@
         "force_calls_max": 254008,
         "force_calls_min": 254008,
         "median": 254008,
-        "nfailed": 81
+        "nfailed": 82
       },
       "metrics": {
         "bootstrap_resamples": 2000,
@@ -27,27 +27,27 @@
         "iqr": 0.0,
         "iqr_high": 0.0,
         "iqr_low": 0.0,
-        "mean": 990902.5365853659,
+        "mean": 991012.1445783132,
         "median": 1000000.0,
         "median_high": 1000000.0,
         "median_low": 1000000.0,
-        "n": 82,
-        "n_cap": 81,
+        "n": 83,
+        "n_cap": 82,
         "n_crash": 0,
         "n_divergence": 0,
         "n_wrong_stationary": 0,
-        "nfailed": 81,
-        "par2_mean": 990902.5365853659,
+        "nfailed": 82,
+        "par2_mean": 991012.1445783132,
         "par_applied": true,
         "par_factor": 2,
         "q25": 1000000.0,
         "q75": 1000000.0,
         "scoring": "par2-wilson-bootstrap",
         "success_only_mean": 254008.0,
-        "success_rate": 0.012195121951219513,
+        "success_rate": 0.012048192771084338,
         "successes": 1,
-        "wilson_high": 0.0658933968841392,
-        "wilson_low": 0.002155992081812344
+        "wilson_high": 0.06513580668032404,
+        "wilson_low": 0.0021299774281082692
       },
       "parameters": {
         "cap": 500000,
@@ -1626,6 +1626,25 @@
           "schema": "optbench.start/v2",
           "seed": 314239,
           "start": "80.con",
+          "success": false,
+          "target_energy": -173.9274265117895
+        },
+        {
+          "calls_at_lowest": 466111,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 500000,
+          "iterations": 261,
+          "lowest_energy": -173.1342409885737,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.9284265117895,
+          "schema": "optbench.start/v2",
+          "seed": 314240,
+          "start": "81.con",
           "success": false,
           "target_energy": -173.9274265117895
         },
