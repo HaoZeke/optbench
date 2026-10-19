@@ -17,7 +17,7 @@
         "force_calls_max": 254008,
         "force_calls_min": 254008,
         "median": 254008,
-        "nfailed": 98
+        "nfailed": 99
       },
       "metrics": {
         "bootstrap_resamples": 2000,
@@ -27,27 +27,27 @@
         "iqr": 0.0,
         "iqr_high": 0.0,
         "iqr_low": 0.0,
-        "mean": 992464.7272727273,
+        "mean": 992540.08,
         "median": 1000000.0,
         "median_high": 1000000.0,
         "median_low": 1000000.0,
-        "n": 99,
-        "n_cap": 98,
+        "n": 100,
+        "n_cap": 99,
         "n_crash": 0,
         "n_divergence": 0,
         "n_wrong_stationary": 0,
-        "nfailed": 98,
-        "par2_mean": 992464.7272727273,
+        "nfailed": 99,
+        "par2_mean": 992540.08,
         "par_applied": true,
         "par_factor": 2,
         "q25": 1000000.0,
         "q75": 1000000.0,
         "scoring": "par2-wilson-bootstrap",
         "success_only_mean": 254008.0,
-        "success_rate": 0.010101010101010102,
+        "success_rate": 0.01,
         "successes": 1,
-        "wilson_high": 0.055015314645872934,
-        "wilson_low": 0.0017853072791700793
+        "wilson_high": 0.054486196178705315,
+        "wilson_low": 0.0017674320641406505
       },
       "parameters": {
         "cap": 500000,
@@ -1968,6 +1968,25 @@
           "start": "98.con",
           "success": false,
           "target_energy": -173.9274265117895
+        },
+        {
+          "calls_at_lowest": 405696,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 500000,
+          "iterations": 237,
+          "lowest_energy": -173.134163860986,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.9284265117895,
+          "schema": "optbench.start/v2",
+          "seed": 314258,
+          "start": "99.con",
+          "success": false,
+          "target_energy": -173.9274265117895
         }
       ],
       "tuning": "default"
@@ -1975,5 +1994,5 @@
   ],
   "schema": "optbench.result/v2",
   "scoring": "par2-wilson-bootstrap",
-  "status": "partial"
+  "status": "archive"
 }
