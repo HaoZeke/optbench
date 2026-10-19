@@ -1,0 +1,23 @@
+id = "gmin/lj38-csm"
+engine = "gmin"
+problem = "globalopt/lj38"
+code = "GMIN"
+code_version = "27058"
+commit = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
+algorithm = "basin-hopping with symmetrise csm moves"
+reducer = "client"
+counter = "client"
+ranked = false
+paper_baseline = true
+tuning = "archive"
+note = """
+Wales GMIN revision 27058, the 2014 tarball wales-27058.tar.bz2. The data file is codes/gmin/lj38-csm.data. SYMMETRISECSM 1 CI 1.0D-6 30 1 50, TARGET -173.9284264418, EDIFF 0.003, TEMPERATURE 3.0, STEP 0.43 0.52, SLOPPYCONV 0.002, TIGHTCONV 1.0D-5, MAXIT 1000 1000, STEPS 90000000, CENTRE, PERMDIST 0.005, AVOID 1.25 18, NEWRESTART 30. The potential is the default unshifted Lennard-Jones. The seed is the GMIN default 2002. force_calls is NPCALL on the Target hit after line, the same field getdata.py averages. Ranked false because that count is the GMIN client counter.
+"""
+
+[gmin]
+data = "codes/gmin/lj38-csm.data"
+potential = "lj"
+seed = 2002
+target = -173.9284264418
+ediff = 0.003
+symmetrisecsm = "1 CI 1.0D-6 30 1 50"
