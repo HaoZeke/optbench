@@ -1,0 +1,15 @@
+force_calls 353
+force_calls_min 353
+force_calls_max 353
+force_calls_median 353.0
+call_unit total
+nfailed 0
+code eOn (develop a7aa57472fb7)
+code_version a7aa57472fb7
+commit a7aa57472fb7d823953fd36b78cd755fa4842d30
+algorithm Dimer-CG rotation: max=10 tol=1
+template eon/develop-htst-al-dimer-cg2
+problem hTST/Al
+reducer harness
+counter harness
+count_keys HarnessCounter

@@ -1,0 +1,57 @@
+id = "eon/develop-htst-al-dimer-cg2"
+engine = "eon"
+problem = "hTST/Al"
+code = "eOn (develop a7aa57472fb7)"
+code_version = "a7aa57472fb7"
+commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+algorithm = "Dimer-CG rotation: max=10 tol=1"
+reducer = "harness"
+failure_cap = 2000000
+seeds = [42]
+starts = ["al"]
+geometry = "website/hTST/Al/eon-dimer-cg2/pos.con"
+pass_limit = 1
+workers = 1
+note = """
+eOn, the git code at https://github.com/TheochemUI/eon develop a7aa57472fb7d823953fd36b78cd755fa4842d30. This is not EON and not an SVN revision. The harness replaces the potential with ext_pot and counts every force() through the same Aluminum Fortran kernel as the r2549 row. The ini is the archive convergence and the archive displacement: temperature 300, seed 42, confidence 1.95, prefactor 1.2e12, converged_force 0.001, max_iterations 5000, dimer CG, rotations_max 10, converged_angle 1, radius 3.3, magnitude 0.5, listed adatom 384 (archive displace_atomlist -1). finite_difference, improved, and the optimizer method stay at this tree's defaults. One local harness pass, num_jobs 1. The 2014 row is the rate window, not this pass. The gap is the score.
+"""
+
+[ini.Main]
+job = "akmc"
+temperature = 300
+random_seed = 42
+
+[ini.Potential]
+potential = "eam_al"
+
+[ini.Optimizer]
+converged_force = 0.001
+max_iterations = 5000
+
+[ini.AKMC]
+confidence = 1.95
+
+[ini.Prefactor]
+default_value = 1.2e12
+
+[ini."Process Search"]
+minimize_first = true
+
+[ini.Communicator]
+type = "local"
+num_jobs = 1
+number_of_CPUs = 1
+client_path = "eonclient"
+
+[ini."Saddle Search"]
+min_mode_method = "dimer"
+displace_listed_atom_weight = 1.0
+displace_atom_list = "384"
+displace_radius = 3.3
+displace_magnitude = 0.5
+max_energy = 100.0
+
+[ini.Dimer]
+opt_method = "cg"
+converged_angle = 1
+rotations_max = 10
