@@ -1055,4 +1055,35 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>
+   <h3>ogolem</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>global optimization</td>
+   <td>master</td>
+   <td>cce35a376d92</td>
+   <td><a href="https://github.com/ogolem/ogolem">https://github.com/ogolem/ogolem</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="globalopt/lj38" data-template="ogolem/lj38">
+   <td>Lennard-Jones 38 global minimum</td>
+   <td data-field="template">ogolem/lj38</td>
+   <td data-field="version">ogolem 2016.CURRENT</td>
+   <td data-field="commit">cce35a376d92</td>
+   <td data-field="par2_mean">1.26146e+06</td>
+   <td data-field="mean_calls">1.26146e+06</td>
+   <td data-field="median_calls">1.09816e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table></div>
+   <p>No full ranked run</p><ul>
+   <li>lj150: partial.</li>
+   <li>lj75: partial.</li>
+   <li>lj98: partial.</li>
+   </ul>
    </section>
