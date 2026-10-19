@@ -1479,4 +1479,63 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">5000</td>
    </tr>
    </tbody></table></div>
+   <h3>i-PI</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>saddle search</td>
+   <td>master</td>
+   <td>a6b350327ce7</td>
+   <td><a href="https://github.com/i-pi/i-pi">https://github.com/i-pi/i-pi</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="double-ended-saddle-search/lj38" data-template="ipi/ci-neb">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="template">ipi/ci-neb</td>
+   <td data-field="version">i-PI 3.3.1</td>
+   <td data-field="commit">a6b350327ce7</td>
+   <td data-field="par2_mean">2042.94</td>
+   <td data-field="mean_calls">918.24</td>
+   <td data-field="median_calls">184.5</td>
+   <td data-field="failures">crash 0, divergence 1, cap 15, wrong_stationary 3</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="ipi/ci-neb">
+   <td>lj38_2ts_separation</td>
+   <td data-field="template">ipi/ci-neb</td>
+   <td data-field="version">i-PI 3.3.1</td>
+   <td data-field="commit">a6b350327ce7</td>
+   <td data-field="par2_mean">18833.6</td>
+   <td data-field="mean_calls">9337.14</td>
+   <td data-field="median_calls">10000</td>
+   <td data-field="failures">crash 0, divergence 0, cap 47, wrong_stationary 1</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="ipi/ci-neb">
+   <td>pt-island</td>
+   <td data-field="template">ipi/ci-neb</td>
+   <td data-field="version">i-PI 3.3.1</td>
+   <td data-field="commit">a6b350327ce7</td>
+   <td data-field="par2_mean">2407.27</td>
+   <td data-field="mean_calls">1167.44</td>
+   <td data-field="median_calls">716</td>
+   <td data-field="failures">crash 0, divergence 9, cap 9, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-template="ipi/ci-neb">
+   <td>Pt-heptamer</td>
+   <td data-field="template">ipi/ci-neb</td>
+   <td data-field="version">i-PI 3.3.1</td>
+   <td data-field="commit">a6b350327ce7</td>
+   <td data-field="par2_mean">8132.08</td>
+   <td data-field="mean_calls">2152.62</td>
+   <td data-field="median_calls">717</td>
+   <td data-field="failures">crash 0, divergence 3, cap 2, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   </tbody></table></div>
    </section>
