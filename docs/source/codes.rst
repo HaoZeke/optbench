@@ -677,6 +677,17 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 99, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
+   <tr data-problem="globalopt/lj75" data-template="asebh/lj75-basin-default">
+   <td>lj75</td>
+   <td data-field="template">asebh/lj75-basin-default</td>
+   <td data-field="version">asebh 3.29.0</td>
+   <td data-field="commit">f27c0005ae6a</td>
+   <td data-field="par2_mean">2e+06</td>
+   <td data-field="mean_calls">1e+06</td>
+   <td data-field="median_calls">1e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
    <li>Lennard-Jones 38 global minimum: partial.</li>

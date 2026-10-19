@@ -24,18 +24,18 @@
       "full_n": 100,
       "history": false,
       "max_calls": 1322321.0,
-      "mean_calls": 366451.625,
+      "mean_calls": 382414.4705882353,
       "mean_per_image": null,
-      "median": 243493.0,
-      "median_calls": 243493.0,
-      "median_high": 456773.0,
+      "median": 302584.0,
+      "median_calls": 302584.0,
+      "median_high": 610962.0,
       "median_low": 118984.0,
       "median_per_image": null,
       "min_calls": 23154.0,
-      "n": 16,
+      "n": 17,
       "nfailed": 0,
       "note": "starts.jsonl",
-      "par2_mean": 366451.625,
+      "par2_mean": 382414.4705882353,
       "partial": true,
       "partial_reason": "result file sets partial true",
       "path": "results/campaign/asebh-3.29.0-lj38-mh-default.dat",
@@ -47,7 +47,7 @@
       "template": "asebh/lj38-mh-default",
       "tuning": "default",
       "wilson_high": 1.0,
-      "wilson_low": 0.8063923194655637
+      "wilson_low": 0.8156818649911483
     }
   ],
   "profile": {
