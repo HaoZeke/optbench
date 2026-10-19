@@ -1,0 +1,22 @@
+# Current SVN client, not the paper revision. The paper row is r2030.
+id = "eon-svn/morse-sd-twopoint-current-svn"
+engine = "eon-client"
+problem = "minimization/morse-bulk"
+code = "Eon svn"
+code_version = "r2549"
+algorithm = "SD-twopoint"
+
+[ini.Main]
+job = "minimization"
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "sd"
+convergence_metric = "norm"
+converged_force = 0.001
+max_move = 0.2
+max_iterations = 10000
+sd_alpha = 0.04
+sd_twopoint = true
