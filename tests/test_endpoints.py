@@ -21,11 +21,13 @@ from optbench.campaign import resolve_problem
 from optbench.check import check, saddle_endpoint_gaps
 from optbench.connection import connected_endpoints, same_minimum
 from optbench.endpoints import (
+    FORMAT_DELTA,
     STATUS_NOT_MINIMIZED,
     STATUS_STORED,
     EndpointArchive,
     align_resume,
     archive_error,
+    load_endpoints,
     stamp_endpoint,
 )
 from optbench.engines.geometries import load_starts
@@ -122,7 +124,7 @@ def test_a_stored_archive_passes_check(tmp_path, monkeypatch):
     assert check(tmp_path / "problems", tmp_path / "oracle" / "entries.jsonl") == 0
 
 
-def test_float32_archive_keeps_the_hop_and_the_relaxation(tmp_path):
+def test_float16_deltas_keep_the_hop_and_the_relaxation(tmp_path):
     positions, free, cell = _island(tmp_path / "work")
     reactant = positions[free]
     hopped = reactant.copy()
@@ -135,19 +137,43 @@ def test_float32_archive_keeps_the_hop_and_the_relaxation(tmp_path):
     assert archive.add(reactant, None, None) == STATUS_NOT_MINIMIZED
     archive.save()
     with np.load(archive.path) as packed:
-        stored_reactant = np.asarray(packed["reactant"][0], dtype=np.float64)
-        plus = np.asarray(packed["plus"][0], dtype=np.float64)
-        minus = np.asarray(packed["minus"][0], dtype=np.float64)
-        stored_cell = np.asarray(packed["cell"], dtype=np.float64)
-        idle = np.asarray(packed["plus"][1])
+        assert int(packed["format"]) == FORMAT_DELTA
+        assert "plus" not in packed.files
+        assert "minus" not in packed.files
+        assert packed["plus_delta"].dtype == np.float16
+        assert not np.isfinite(packed["plus_delta"][1]).all()
+    stored_reactant, plus, minus, stored_cell, _free_index = load_endpoints(archive.path)
     assert stored_cell == pytest.approx(cell)
-    assert not same_minimum(plus, stored_reactant, stored_cell)
-    assert same_minimum(minus, stored_reactant, stored_cell)
-    assert connected_endpoints(stored_reactant, plus, minus, stored_cell)
-    assert not np.isfinite(idle).all()
+    assert not same_minimum(plus[0], stored_reactant[0], stored_cell)
+    assert same_minimum(minus[0], stored_reactant[0], stored_cell)
+    assert connected_endpoints(stored_reactant[0], plus[0], minus[0], stored_cell)
+    assert not np.isfinite(plus[1]).all()
     assert archive.bin_path.is_file()
     archive.drop_log()
     assert not archive.bin_path.exists()
+
+
+def test_an_old_absolute_archive_still_loads(tmp_path):
+    path = tmp_path / "legacy.endpoints.npz"
+    reactant = np.zeros((1, 1, 3), dtype=np.float32)
+    plus = reactant.copy()
+    plus[0, 0, 0] = np.float32(2.71)
+    minus = reactant.copy()
+    np.savez_compressed(
+        path,
+        reactant=reactant,
+        plus=plus,
+        minus=minus,
+        cell=np.array([19.2088, 19.0118, 30.0]),
+        free_index=np.array([0], dtype=np.int32),
+    )
+    loaded_reactant, loaded_plus, loaded_minus, cell, free_index = load_endpoints(path)
+    assert free_index.tolist() == [0]
+    assert not same_minimum(loaded_plus[0], loaded_reactant[0], cell)
+    assert same_minimum(loaded_minus[0], loaded_reactant[0], cell)
+    record = {"start": "rep1-search1"}
+    stamp_endpoint(record, path.name, 0, STATUS_STORED)
+    assert archive_error(path, [record], "legacy.starts.jsonl") is None
 
 
 def test_resume_drops_the_row_that_missed_the_partial_file(tmp_path):

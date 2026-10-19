@@ -23,6 +23,7 @@ def test_island_saddle_success_uses_the_eon_per_atom_maximum():
     success = problem["scoring"]["v2"]["success"]
     assert "perAtomNorm" in success
     assert "0.1" in success
+    assert "find_repeat" in success
     assert "Kabsch" not in success
     assert problem["connection"]["distance_difference"] == 0.1
     assert "max_force_calls" not in (problem.get("convergence") or {})

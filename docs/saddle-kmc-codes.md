@@ -22,7 +22,7 @@ success-only median. A row with no success has no median.
 | lowest-eigenvector/lj38 | partn/mode-lj38 | 174/200 | 26 divergence | 22 |
 | tsopt/pt-island | partn/ts-pt | 49/49 | 0 | 325 |
 | tsopt/LJ38 | partn/ts-lj38 | 178/200 | 21 cap, 1 crash | 3302 |
-| saddle-search/pt-island | partn/saddle-pt | 0/200 | 187 divergence, 13 crash | — |
+| saddle-search/pt-island | partn/saddle-pt | 18/200 | 169 divergence, 13 crash | 652 |
 | lowest-eigenvector/lj38 | tsase/mode-lj38 | 178/200 | 22 divergence | 221.5 |
 | tsopt/pt-island | tsase/dimer-pt | 49/49 | 0 | 892 |
 | tsopt/LJ38 | tsase/dimer-lj38 | 0/200 | 200 cap | — |
@@ -214,27 +214,31 @@ is 154419, with 3 unique saddles. The ranked row is one record per
 search, cap 6000 (the pARTn budget plus the two endpoint budgets of
 2000).
 
-The first stored row judged the link by Cartesian RMSD 0.5 over the 175
-free atoms. `rep1-search5` met that test: barrier 0.9963657039054397 eV,
-925 calls, endpoint RMSD 0.31796842501566397 and 0.5187456319245781.
-Fraction connected was 0.005 and the PAR-2 mean was 11944.625. The same
-200 searches were rerun under the eOn r2205 link, with the same template.
-The repetition total is 154419 again. Connected is 0 of 200,
-`fraction_connected` is 0.0, and the PAR-2 mean is 12000.0. Failures are
-187 divergence and 13 crash. There is no success, so there is no success
-median.
+The first stored scoring judged the link by Cartesian RMSD 0.5 over the
+175 free atoms. `rep1-search5` met that test: barrier 0.9963657039054397
+eV, 925 calls, endpoint RMSD 0.31796842501566397 and 0.5187456319245781.
+Fraction connected was 0.005 and the PAR-2 mean was 11944.625. Commit
+`58c7eea3` reran the same 200 searches under the eOn r2205 link and still
+counted a search as connected only when that link also passed the RMSD
+0.5 novelty test and the barrier was below 1.5 eV.
+`fraction_connected` was that counter divided by the searches. The result
+file from that rerun is `unique_saddles` 3, `fraction_connected` 0.0,
+connected 0, PAR-2 mean 12000.0, 187 divergence and 13 crash.
 
-`rep1-search5` now stores per-atom maxima 1.5927587365713207 and
-4.171209680571467. Both endpoints differ from the reactant, so the r2205
+`rep1-search5` stores per-atom maxima 1.5927581052080533 and
+4.171209571562611. Both endpoints differ from the reactant, so the r2205
 test counts it not connected. Of the 187 searches with stored endpoints,
-49 are not connected and 138 have exactly one matching endpoint. The
-only novel linked saddle is `rep1-search1`, barrier 1.8580995421641546 eV,
-above the 1.5 eV goal. The other 137 linked searches fall inside the 0.5
-novelty RMSD of a saddle already stored. `rep1-search11` is the third
-unique saddle: per-atom maxima 4.600110085030538 and 3.21627565547626,
-barrier 1.623944584138144 eV. The OptBench catalogue calls a saddle
-connected when the nearer minimum's `delr` is under 0.5. That is a
-different test from either harness link.
+49 are not connected and 138 have exactly one matching endpoint. 65 of
+the linked searches have a barrier strictly inside (0, 1.5) eV. RMSD 0.5
+on those product minima leaves 2 clusters. `AKMCState.find_repeat` on the
+product minimum leaves 48 good saddles, 18 of them with a barrier
+strictly inside (0, 1.5) eV. Saddle coordinates were not stored, so the
+product is the geometry that test would have applied to `saddle.con`.
+`fraction_connected` is (200 - 49) / 200 = 0.755. The PAR-2 mean is
+10980.175. The success-only median is 652. Failures are 169 divergence
+and 13 crash. `rep1-search1` is linked and good, barrier
+1.8580995421641546 eV, and it is not a success because the barrier is
+above 1.5 eV.
 
 ## Pt-island endpoint link
 
@@ -258,23 +262,64 @@ parameters->distanceDifference > perAtomNorm(*matter)
 `perAtomNorm` is the maximum per-atom distance after `Matter::pbc`, which
 folds every positive cell axis with `fmod(fmod(fraction, 1) + 1.5, 1) - 0.5`.
 Two minima are the same when that maximum is strictly below 0.1 Å. A
-search is connected when exactly one endpoint matches. `rmsd_connect` 0.5
-stays the saddle-novelty test and is not this link.
+search is connected when exactly one endpoint matches.
 
-The pARTn row is that rerun. Both endpoint minima are in
+Uniqueness is the server test, not Cartesian RMSD. `AKMCState.find_repeat`
+in `eon/akmcstate.py` skips a stored good saddle when the absolute
+barrier difference is greater than `energy_difference`. The default in
+`eon/config.yaml` is 0.01 eV, so a difference of exactly 0.01 eV still
+compares the geometries. The geometry test is `atoms.match` with
+`indistinguishable` false and `check_rotation` false:
+
+```
+max(sum(pbc(diff) ** 2, axis=1)) < distance_difference ** 2
+```
+
+That is the same strict per-atom maximum as `Matter::compare`. The
+comparison is `saddle.con`. A stored campaign that kept only the endpoint
+minima uses the product minimum. `done.py` counts `unique_saddles` as
+result tokens containing `good`, including a barrier at or above 1.5 eV.
+It increments `not_connected` only when the token contains `Connected`.
+`fraction_connected` is `(total_searches - not_connected) / total_searches`.
+A repeat stays in that fraction. The goal counter is the number of good
+saddles whose barrier is strictly below 1.5 eV. Cartesian RMSD 0.5 is
+neither the link nor this novelty test. One atom moving 2.71 Å on the
+175-atom island has RMSD below 0.5, so that test merges distinct
+processes.
+
+The 2014 saddle-pt tarballs store `benchmark.dat`, `done.py`,
+`config.ini`, `pos.con`, and `run.sh`. They do not store
+`search_results.txt` or endpoint minima, so `Matter::compare` cannot be
+reapplied to those searches. The published rows are the `done.py` output.
+`done.py` sets `ntofind = 27` and `cutoff = 1.5`. It stops when 27 good
+saddles have a barrier strictly below 1.5 eV, and the `unique_saddles`
+line it prints is `total_found`, every token containing `good`, including
+a barrier at or above 1.5 eV. That printed value is not 27. The seven
+`calc_benchmarks.py` lists are nine runs each, and their means are the
+published `benchmark.dat` values. `eon-dimer` r2205 is `unique_saddles`
+109.222, `fraction_connected` 0.746017, `total_searches` 11366.8.
+`eon-md` r2205 is `unique_saddles` 51.6667, `fraction_connected`
+0.886966, `total_searches` 800.222. The April 2019 SoftSaddle archive
+rows are `unique_saddles` 114.9, 130.4, and 142.6.
+The MATLAB reducer that wrote those rows is
+`1 - (unique_sp_sofar - n_connected_sp) / N_searches`, which is not the
+`done.py` ratio. The harness follows `done.py`.
+
+The pARTn campaign on this branch stores both endpoint minima in
 `artn-1.1.0-saddle-search-pt-island--partn-saddle-pt.endpoints.npz`
-(187 finite endpoint pairs, 13 `not_minimized` crash rows). The other
-saddle-search/pt-island rows still have no endpoint coordinates, so
-their connected counts and PAR-2 are unchanged. `pykmc/lattice` writes
-nothing, so there is no pyKMC row to rescore. The MATLAB smoke in
-`softsaddle/entry.toml` records two searches and does not store endpoint
-coordinates.
+(187 finite endpoint pairs, 13 `not_minimized` crash rows). Rejudging
+those rows with `find_repeat` is the recount above: 18 connected, 48
+unique, fraction 0.755, PAR-2 10980.175. The result file at `58c7eea3`
+was 0 connected, 3 unique, fraction 0.0, PAR-2 12000.0.
 
 A new saddle-search campaign stores both endpoint minima beside the
-starts file. `<stem>.endpoints.npz` holds float32 free-atom coordinates
-for the minimized reactant and the two endpoints, in `free_index` order,
-with the orthorhombic cell lengths. A search that stops before those
-minimizations has status `not_minimized` and NaN endpoint rows.
+starts file. `<stem>.endpoints.npz` is format 2: float32 free-atom
+reactant coordinates and float16 deltas of the two endpoints from that
+reactant, compressed, in `free_index` order, with the orthorhombic cell
+lengths. Format 1, absolute float32 `plus` and `minus`, still loads.
+Absolute float16 is not used, because a coordinate near 20 Å is coarser
+than the 0.1 Å link. A search that stops before those minimizations has
+status `not_minimized` and NaN deltas. git-LFS is not used.
 `optbench check` rejects a `saddle-search/` starts file whose sha256 is
 absent from `oracle/saddle_endpoint_legacy.txt` when that archive is
 missing or does not match the records. The names in that file are the
@@ -294,7 +339,7 @@ directory, outside the HTML tables.
 | rgsaddle/saddle-dimer-rotskip | absent; RMSD scalars on 19718 of 20000 | 0/20000 | 0/20000 | 10128 | 10128 |
 | rgsaddle/saddle-lanczos | absent; RMSD scalars on 4068 of 20000 | 0/20000 | 0/20000 | 10128 | 10128 |
 | rgsaddle/saddle-lanczos-tuned | absent; RMSD scalars on 13743 of 20000 | 0/20000 | 0/20000 | 10128 | 10128 |
-| partn/saddle-pt | float32 free-atom endpoints; 187 stored, 13 not minimized | 1/200 | 0/200 | 11944.625 | 12000.0 |
+| partn/saddle-pt | free-atom endpoints; 187 stored, 13 not minimized | 0/200 at 58c7eea3 | 18/200 | 12000.0 | 10980.175 |
 | ase/dimer-pt-island-default, campaign n=16 | absent | 16/16 | 16/16 | 1118.0625 | 1118.0625 |
 | ase/dimer-pt-island-tuned, campaign n=16 | absent | 16/16 | 16/16 | 915.4375 | 915.4375 |
 | ase/dimer-pt-island-default, asv n=1 | absent | 1/1 | 1/1 | 699 | 699 |
@@ -327,7 +372,152 @@ directory, outside the HTML tables.
 Sella and ASE successes are order-1 convergence, not this endpoint link.
 The eOn client, eOn SVN, eOn 3.5.0, and archive fractions are those codes'
 own `Not Connected` labels. PAR-2 is not applied to a legacy campaign
-ratio or to the 2014 archive.
+ratio or to the 2014 archive. The rgsaddle comment lines still record
+the RMSD-novel `unique_saddles`. Those starts have no endpoint
+coordinates, so that count was not recomputed. A later run of those
+templates uses `find_repeat` on the saddle and the listed-atom kick
+below.
+
+## Listed-atom displacement
+
+The archived eOn `config.ini` sets `displace_listed_weight` 1,
+`displace_all_listed` false, `displace_radius` 3.3,
+`displace_atomlist` `0,1,2,3,4,5,6`, and `displace_magnitude` 0.1. It
+does not set `client_displace_type`, so the server builds the
+displacement (`load`). It does not set `random_mode` or
+`displace_min_norm`. `eon/config.yaml` defaults those to true and 0.
+`ListedAtoms` picks one free atom from that list. `get_displacement`
+also moves every free atom whose minimum-image distance is at most
+3.3 Å. Each moved atom gets an independent normal draw of standard
+deviation 0.1 on x, y, and z. The geometry is the reactant plus that
+vector. `random_mode` then draws a second gaussian on the same atoms
+and normalizes it; that unit vector is the mode, not the kick.
+
+The harness kick before this audit lived in the rgsaddle min-mode loop
+and in pARTn's atom-list branch. Both kept one `Generator` seeded by
+`20261015 + rep`. Each search picked one of atoms 0-6 and moved that
+atom by exactly 0.1 Å along a unit Gaussian. The next search continued
+the same stream, so two runners that consumed a different number of
+draws did not share a start.
+
+The shared generator is `draw_search_start` in `optbench/eon_displace.py`.
+The parent seed is `search_seed(rep, attempt) = (20261015 + rep) * 1000003 + attempt`,
+with `attempt` the 1-based search index. Each search builds a new
+`Generator` from that seed and drops it. The displacement is the one
+OPTIM's saddle-pt cell uses (`displace_listed` at `02405b0d`): one
+epicentre chosen uniformly from the free atoms in the list, then every
+free atom whose minimum-image distance is at most 3.3 Å, including the
+epicentre, receives an independent normal component of standard
+deviation 0.1 on x, y, and z. The minimum image uses the problem `pbc`
+flags. That one Gaussian is the geometry change and the min-mode
+direction. eOn's server, with `random_mode` left at its default, draws
+a separate Gaussian for the mode. The rgsaddle saddle templates set
+`displace_radius` 3.3 and call this generator. pARTn's atom-list path
+calls the same function with the same seed, so the coordinates match.
+`partn/saddle-pt` itself still pushes 1 to 7 island atoms in plane,
+which is the authors' script. Sella's pt-island searches displace every
+free atom from seeds 0 through 15. ASE dimer leaves the reactant and
+seeds the mode. eOn still builds its displacement inside the client.
+
+The OPTIM cell reports that 50 saddles from this displacement have
+pairwise Cartesian RMSD at most 0.282 Å, so a novelty test at 0.5 Å
+still marks them duplicates. Those geometries are not in the fetched
+commit `02405b0d`, and this branch does not rescore them.
+
+`entries/rgsaddle-saddle-pt-relink` at `93e20aa7` still has the
+single-atom kick. Its dimer L-BFGS tuned archive has 20000 searches.
+19957 endpoint pairs are finite and every one of those is linked.
+`not_connected` is 0. Barriers on those rows run from
+0.6010042968944163 eV to 0.619437881382737 eV, all inside (0, 1.5).
+The stored result counts `unique_saddles` 1 and connected 1, because
+novelty was Cartesian RMSD 0.5 on the saddle. `find_repeat` on the
+product minimum, which is what a campaign without `saddle.con` can
+compare, leaves 3 good saddles, all three inside the barrier window,
+and `fraction_connected` 1.0. Product RMSD against the first product
+has minimum 0, median 0.5495844718903611, maximum 0.5496693826884271.
+The per-atom maximum against that product has minimum 0, median
+2.7439861787734805, maximum 2.7444546333646747. 13202 of the 19957
+products exceed both 0.1 Å per atom and RMSD 0.5. The other linked
+rows repeat those processes. The Lanczos tuned result file on that
+branch records `unique_saddles` 2 and connected 1. 13743 of 20000
+searches stored endpoint distances, and none of those reason lists is
+`not_connected`: 13739 are `duplicate`, 2 are `duplicate` and `barrier`,
+1 is `barrier`, and 1 is a success. 6257 hit the cap. That npz was not
+rejudged here. Fixing
+the novelty test does not turn this kick into the archived 109.222
+unique saddles. The searches were started from one atom. A new
+campaign uses the radius and the epicentre. The 2014 tarballs still
+have no endpoint geometries, so that fraction 0.746017 is the
+published `done.py` row, not a number a new displacement run is
+expected to copy.
+
+Three endpoint archives on that branch are above 50 MB in git:
+`rgsaddle-0.2.2-saddle-dimer-lbfgs-tuned.endpoints.npz` 52666081
+bytes, `rgsaddle-0.2.2-saddle-dimer-rotskip-tuned.endpoints.npz`
+60690447 bytes, and `rgsaddle-0.2.2-saddle-dimer-rotskip.endpoints.npz`
+64031239 bytes. Repacking the L-BFGS tuned archive as format 2, the
+same arrays a new campaign writes, is 28586862 bytes. The reactant
+row is identical across those 20000 searches and compresses away.
+The coordinates that remain are the float16 endpoint deltas. Those
+files stay on that branch. New campaigns write format 2.
+
+## Recount of stored saddle-pt campaigns
+
+`connected` is the goal counter: good, and the barrier strictly inside
+(0, 1.5) eV. `unique` is the good count, including a barrier at or above
+1.5 eV. `fraction` is the `done.py` ratio. Before is the stored result
+file. After is a rejudge of stored endpoint minima. A campaign with no
+endpoint coordinates has the same numbers in both columns. The 549-search
+OPTIM run described with per-atom distances of about 0.001 Å and 1.59 Å
+is not in the fetched history. The stored OPTIM campaign is the 124-search
+file on `cells/optim/ts`. pyKMC geometries are on `cells/pykmc/kmc` and
+are not copied onto this branch. CP2K files are on `cells/cp2k/ts`.
+SoftSaddle files are on `cells/softsaddle/ts`. The repetition means are
+on `cells/softsaddle/ts-reps`.
+
+| template | geometries | before unique | after unique | before connected | after connected | before fraction | after fraction | before PAR-2 | after PAR-2 | archive unique | archive fraction |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| partn/saddle-pt | 187 finite free-atom pairs, 13 not minimized | 3 | 48 | 0/200 | 18/200 | 0.0 | 0.755 | 12000.0 | 10980.175 |  |  |
+| pykmc/saddle-pt | 499 finite 343-atom pairs, 62 not finite | 163 | 99 | 12/561 | 13/561 | 0.0213903743315508 | 0.7522281639928698 | 39172.08021390374 | 39103.130124777184 |  |  |
+| optim/saddle-hef-ffd-pt | absent; `saddle_free` on 1 of 124 | 1 | 1 | 0/124 | 0/124 | 0.0 | 0.0 | 10128.0 | 10128.0 |  |  |
+| cp2k/saddle-dimer-cg-tuned | absent; RMSD on 750 of 20000 | 1 | 1 | 0/20000 | 0/20000 | 0.0 | 0.0 | 10128.0 | 10128.0 |  |  |
+| cp2k/saddle-dimer-cg | absent | 0 | 0 | 0/20000 | 0/20000 | 0.0 | 0.0 | 10128.0 | 10128.0 |  |  |
+| cp2k/saddle-dimer-bfgs-tuned | absent | 0 | 0 | 0/1 | 0/1 | 0.0 | 0.0 | 10128.0 | 10128.0 |  |  |
+| cp2k/saddle-dimer-bfgs | absent | 0 | 0 | 0/1 | 0/1 | 0.0 | 0.0 | 10128.0 | 10128.0 |  |  |
+| softsaddle/saddle-davidson-sm50 | absent | 0 | 0 | 0/5000 | 0/5000 | 0.0 | 0.0 | 10128.0 | 10128.0 | 114.9 | 0.8 |
+| softsaddle/saddle-lanczos-sm0 | absent; RMSD on 4204 of 5000 | 103 | 103 | 2/5000 | 2/5000 | 0.0004 | 0.0004 | 10124.2218 | 10124.2218 | 130.4 | 0.9 |
+| softsaddle/saddle-lanczos-sm50 | absent | 21 | 21 | 0/5000 | 0/5000 | 0.0 | 0.0 | 10128.0 | 10128.0 | 142.6 | 0.9 |
+| rgsaddle/saddle-dimer-fire | absent | 0 | 0 | 0/20000 | 0/20000 | 0.0 | 0.0 | 10128 | 10128 |  |  |
+| rgsaddle/saddle-dimer-fire-tuned | absent | 1 | 1 | 0/20000 | 0/20000 | 0.0 | 0.0 | 10128 | 10128 |  |  |
+| rgsaddle/saddle-dimer-lbfgs | absent | 0 | 0 | 0/20000 | 0/20000 | 0.0 | 0.0 | 10128 | 10128 |  |  |
+| rgsaddle/saddle-dimer-lbfgs-tuned | absent | 1 | 1 | 0/20000 | 0/20000 | 0.0 | 0.0 | 10128 | 10128 |  |  |
+| rgsaddle/saddle-dimer-rotskip | absent | 323 | 323 | 0/20000 | 0/20000 | 0.0 | 0.0 | 10128 | 10128 |  |  |
+| rgsaddle/saddle-dimer-rotskip-tuned | absent | 762 | 762 | 2/20000 | 2/20000 | 0.0001 | 0.0001 | 10127.05255 | 10127.05255 |  |  |
+| rgsaddle/saddle-lanczos | absent | 1 | 1 | 0/20000 | 0/20000 | 0.0 | 0.0 | 10128 | 10128 |  |  |
+| rgsaddle/saddle-lanczos-tuned | absent | 2 | 2 | 0/20000 | 0/20000 | 0.0 | 0.0 | 10128 | 10128 |  |  |
+| eon-client/saddle-pt-dimer | absent | 2 | 2 | 2/32 | 2/32 | 0.8125 | 0.8125 | 40000000 | 40000000 |  |  |
+| eon-client/saddle-pt-lanczos | absent | 6 | 6 | 6/32 | 6/32 | 1.0 | 1.0 | 40000000 | 40000000 |  |  |
+| eon-client/saddle-pt-md | absent | 0 | 0 | 0/1 | 0/1 | 0.0 | 0.0 | 40000000 | 40000000 |  |  |
+| eon-svn/saddle-pt-dimer-bounded | absent | 10 | 10 | 5/32 | 5/32 | 0.75 | 0.75 | 40000000 | 40000000 |  |  |
+| eon-svn/saddle-pt-lanczos-bounded | absent | 5 | 5 | 4/32 | 4/32 | 1.0 | 1.0 | 40000000 | 40000000 |  |  |
+| eon-svn/saddle-pt-md | absent | 0 | 0 | 0/1 | 0/1 | 0.0 | 0.0 | 40000000 | 40000000 |  |  |
+| eon-3.5.0-saddle-pt-classic | absent; 10-repetition means | 91.7 | 91.7 |  |  | 0.6919518057 | 0.6919518057 | not applied | not applied |  |  |
+| eon-3.5.0-saddle-pt-dimer | absent; 10-repetition means | 77.1 | 77.1 |  |  | 0.7517199457 | 0.7517199457 | not applied | not applied |  |  |
+| archive eon-dimer r2205 | absent | 109.222 | 109.222 |  |  | 0.746017 | 0.746017 | not applied | not applied | 109.222 | 0.746017 |
+| archive eon-md r2205 | absent | 51.6667 | 51.6667 |  |  | 0.886966 | 0.886966 | not applied | not applied | 51.6667 | 0.886966 |
+
+pyKMC `eon_connected` is 360. Rejudging the 499 finite pairs agrees with
+that flag on every row. `not_connected` is 139, so the `done.py` fraction
+is (561 - 139) / 561 = 0.7522281639928698. The one success that changes
+is `rep1-search239`, barrier 1.47981617472351 eV, 1319 calls. Comparing
+the 175 free atoms and the full 343-atom geometry gives the same link on
+every finite row. The SoftSaddle repetition file records harness
+`unique_saddles` means of 0, 0.5, and 0.7 for davidson-sm50, lanczos-sm0,
+and lanczos-sm50. That column is the mean of harness successes, not a
+geometric rejudge. The single-run files in the table are repetition 1. The rgsaddle
+rows are the campaigns on this branch. The relink branch's endpoint
+archives are not copied here, and the product recount of the L-BFGS
+tuned archive is in the displacement section above.
 
 ## TSASE
 

@@ -16,12 +16,15 @@ import pytest
 from optbench.campaign import resolve_problem
 from optbench.connection import (
     DISTANCE_DIFFERENCE,
+    ENERGY_DIFFERENCE,
+    ProcessCatalog,
     connected_endpoints,
     geometry_status,
     link_tolerance,
     per_atom_max,
     relink,
     same_minimum,
+    same_process,
 )
 from optbench.engines.geometries import load_starts
 
@@ -150,3 +153,35 @@ def test_relink_needs_endpoint_coordinates():
     assert relink(capped, cell) == "unchanged"
     assert capped["success"] is False
     assert geometry_status({}) == "absent"
+
+
+def test_find_repeat_keeps_a_single_atom_hop_that_rmsd_merges():
+    positions, fixed, cell = _island()
+    free = ~fixed
+    hopped = positions.copy()
+    hopped[0, 0] += 2.71
+    other = positions.copy()
+    other[1, 1] += 2.71
+    assert _cartesian_rmsd(hopped[free], positions[free]) < 0.5
+    assert _cartesian_rmsd(other[free], hopped[free]) < 0.5
+    assert not same_process(hopped, positions, cell, 0.60, 0.60)
+    assert not same_process(other, hopped, cell, 0.60, 0.605)
+    nudged = hopped.copy()
+    nudged[0, 0] += 0.04
+    assert same_process(nudged, hopped, cell, 0.60, 0.609)
+    assert not same_process(nudged, hopped, cell, 0.60, 0.60 + ENERGY_DIFFERENCE + 1e-9)
+    catalog = ProcessCatalog(cell)
+    first = catalog.observe(judged=True, linked=True, structure=hopped, barrier=0.60)
+    second = catalog.observe(judged=True, linked=True, structure=other, barrier=0.70)
+    repeat = catalog.observe(judged=True, linked=True, structure=nudged, barrier=0.602)
+    missed = catalog.observe(judged=True, linked=False, structure=other, barrier=0.4)
+    catalog.observe(judged=False)
+    assert first["success"] is True
+    assert second["success"] is True
+    assert repeat["reasons"] == ["duplicate"]
+    assert missed["reasons"] == ["not_connected"]
+    assert catalog.unique == 2
+    assert catalog.qualifying == 2
+    assert catalog.not_connected == 1
+    assert catalog.searches == 5
+    assert catalog.fraction_connected == 4 / 5

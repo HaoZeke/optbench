@@ -1,13 +1,20 @@
-"""Float32 endpoint minima for a saddle-search campaign.
+"""Endpoint minima for a saddle-search campaign.
 
-One ``<stem>.endpoints.npz`` sits next to the starts file. ``reactant``,
-``plus``, and ``minus`` are free-atom coordinates, shape ``(n, n_free, 3)``,
-in the order of ``free_index``. A search that stopped before the two
-minimizations has NaN endpoint rows and status ``not_minimized``. The
-reactant row is the minimized reactant for that search. ``Matter::pbc``
-lengths are ``cell``.
+One ``<stem>.endpoints.npz`` sits next to the starts file. Coordinates
+are free atoms, in ``free_index`` order, shape ``(n, n_free, 3)``.
+``Matter::pbc`` lengths are ``cell``.
+
+New archives are format 2. ``reactant`` is float32. ``plus_delta`` and
+``minus_delta`` are float16 displacements from that reactant, compressed.
+A search that stopped before the two minimizations has NaN deltas and
+status ``not_minimized``. Format 1, still read, stores absolute float32
+``plus`` and ``minus`` beside the reactant. Absolute float16 is not used:
+a coordinate near 20 Å has a unit in the last place of about 0.02 Å,
+which is too coarse for the 0.1 Å link. The delta of a few ångströms is
+about 0.001 to 0.004 Å.
 
 The npz is the rescoring geometry. It is not copied into the site.
+The crash log beside it stays float32 absolute coordinates.
 """
 
 from __future__ import annotations
@@ -18,6 +25,8 @@ import numpy as np
 
 MAGIC = b"OBEP"
 VERSION = 1
+FORMAT_ABSOLUTE = 1
+FORMAT_DELTA = 2
 STATUS_STORED = "stored"
 STATUS_NOT_MINIMIZED = "not_minimized"
 
@@ -92,23 +101,24 @@ class EndpointArchive:
             self._append_row(reactant, plus, minus)
 
     def save(self) -> None:
-        """Pack the log into the npz. The crash log stays until ``drop_log``."""
+        """Pack the log into a format-2 npz. The crash log stays until ``drop_log``."""
         count = len(self.rows)
         reactant = np.full((count, self.n_free, 3), np.nan, dtype=np.float32)
-        plus = np.full((count, self.n_free, 3), np.nan, dtype=np.float32)
-        minus = np.full((count, self.n_free, 3), np.nan, dtype=np.float32)
+        plus_delta = np.full((count, self.n_free, 3), np.nan, dtype=np.float16)
+        minus_delta = np.full((count, self.n_free, 3), np.nan, dtype=np.float16)
         for index, (reactant_row, plus_row, minus_row) in enumerate(self.rows):
             reactant[index] = reactant_row
             if plus_row is not None and minus_row is not None:
-                plus[index] = plus_row
-                minus[index] = minus_row
+                plus_delta[index] = np.asarray(plus_row, dtype=np.float32) - reactant[index]
+                minus_delta[index] = np.asarray(minus_row, dtype=np.float32) - reactant[index]
         self.path.parent.mkdir(parents=True, exist_ok=True)
         temporary = self.path.with_name(self.path.stem + ".writing.npz")
         np.savez_compressed(
             temporary,
+            format=np.int32(FORMAT_DELTA),
             reactant=reactant,
-            plus=plus,
-            minus=minus,
+            plus_delta=plus_delta,
+            minus_delta=minus_delta,
             cell=self.cell.astype(np.float64, copy=False),
             free_index=self.free_index.astype(np.int32, copy=False),
         )
@@ -218,6 +228,37 @@ def align_resume(archive: EndpointArchive, expected: int) -> None:
         )
 
 
+def load_endpoints(path: Path):
+    """Reactant, plus, minus, cell, and free-atom index, as float64 coordinates.
+
+    Format 2 expands ``plus_delta`` and ``minus_delta``. A non-finite
+    delta stays non-finite. Format 1 returns the stored absolute
+    coordinates.
+    """
+    with np.load(path) as packed:
+        reactant = np.asarray(packed["reactant"], dtype=np.float64)
+        cell = np.asarray(packed["cell"], dtype=np.float64)
+        free_index = np.asarray(packed["free_index"])
+        names = set(packed.files)
+        if "plus_delta" in names:
+            plus = _from_delta(reactant, packed["plus_delta"])
+            minus = _from_delta(reactant, packed["minus_delta"])
+        else:
+            plus = np.asarray(packed["plus"], dtype=np.float64)
+            minus = np.asarray(packed["minus"], dtype=np.float64)
+    return reactant, plus, minus, cell, free_index
+
+
+def _from_delta(reactant: np.ndarray, delta) -> np.ndarray:
+    shift = np.asarray(delta, dtype=np.float64)
+    expanded = reactant + shift
+    missing = ~np.isfinite(shift)
+    if missing.any():
+        expanded = np.array(expanded, copy=True)
+        expanded[missing] = np.nan
+    return expanded
+
+
 def archive_error(path: Path, records: list[dict], label: str) -> str | None:
     """Why these start records do not carry both endpoint minima.
 
@@ -235,12 +276,7 @@ def archive_error(path: Path, records: list[dict], label: str) -> str | None:
     if names != {path.name} or not path.is_file():
         return missing(records[0], 0)
     try:
-        with np.load(path) as packed:
-            reactant = np.asarray(packed["reactant"], dtype=np.float32)
-            plus = np.asarray(packed["plus"], dtype=np.float32)
-            minus = np.asarray(packed["minus"], dtype=np.float32)
-            free_index = np.asarray(packed["free_index"])
-            cell = np.asarray(packed["cell"])
+        reactant, plus, minus, cell, free_index = load_endpoints(path)
     except (OSError, ValueError, KeyError):
         return missing(records[0], 0)
     if reactant.shape != plus.shape or reactant.shape != minus.shape or reactant.ndim != 3:

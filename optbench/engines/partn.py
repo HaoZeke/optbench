@@ -25,8 +25,9 @@ from pathlib import Path
 
 import numpy as np
 
-from optbench.connection import connected_endpoints, link_tolerance, per_atom_max
+from optbench.connection import ProcessCatalog, connected_endpoints, link_tolerance, per_atom_max
 from optbench.endpoints import STATUS_STORED, EndpointArchive, stamp_endpoint, stored_cell
+from optbench.eon_displace import draw_search_start, problem_pbc
 
 from .common import (
     cached_pairs,
@@ -619,9 +620,12 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
     The harness count for that search is the pARTn count plus the two
     endpoint minimizations. The repetition total also includes the
     initial minimization. A batch of ``workers`` kicks is started
-    together. Duplicate and connection checks still run in kick order,
-    and kicks past the goal are not charged. Both endpoint minima are
-    stored as float32 free-atom coordinates in ``<stem>.endpoints.npz``.
+    together. Connection and ``find_repeat`` checks still run in kick order,
+    and kicks past the goal are not charged. The shipped template pushes
+    the island in plane. The atom-list path calls ``draw_search_start``
+    with ``search_seed(rep, attempt)``, the same displacement the other
+    harness saddle runners use. ``<stem>.endpoints.npz`` stores float16
+    free-atom deltas from the minimized reactant.
     """
     import statistics
 
@@ -634,11 +638,12 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
     search = dict(template.get("search") or {})
     repetitions = int(search.get("repetitions", 1))
     magnitude = float(search.get("displace_magnitude", 0.1))
-    connect_rmsd = float(search.get("rmsd_connect", 0.5))
     tolerance = link_tolerance(problem)
     max_searches = int(search.get("max_searches", 20000))
     budget = int(search.get("search_budget", 10000))
     listed = [int(part) for part in str(search.get("displace_atoms", "0,1,2,3,4,5,6")).split(",") if part.strip()]
+    pbc = problem_pbc(problem)
+    displace_radius = float(search.get("displace_radius", 3.3))
     surface = str(search.get("push", "atom")) == "surface"
     dmin = float(search.get("dmin", 0.05))
     dmax = float(search.get("dmax", 0.5))
@@ -653,7 +658,9 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
         "# counter harness. Each search is one pARTn run. The geometry is tau_sad.",
         "# The displacement returned when the saddle is stored is the push off the saddle and is not applied.",
         "# Endpoint minima use the eOn r2205 link: perAtomNorm strictly below 0.1 angstrom.",
-        "# Both minima are float32 free-atom coordinates in the sibling endpoints npz.",
+        "# A repeat is AKMCState.find_repeat on the saddle: barrier within 0.01 eV and the same per-atom test.",
+        "# fraction_connected counts every search that is not Not Connected. unique_saddles counts good saddles.",
+        "# Both minima are float16 free-atom deltas from the reactant in the sibling endpoints npz.",
     ]
     archive = EndpointArchive(output.with_name(output.stem + ".endpoints.npz"), int(np.count_nonzero(free)))
     archive.reset(stored_cell(box), np.flatnonzero(free))
@@ -664,15 +671,13 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
             settings["potential"], positions, free, box, settings["force_norm"], 5000
         )
         rng = np.random.default_rng(20261015 + rep)
-        found: list[np.ndarray] = []
-        connected = 0
-        searches = 0
+        catalog = ProcessCatalog(box, tolerance=tolerance, barrier_max=barrier_max)
         search_calls = 0
         width = max(1, int(workers))
-        while connected < goal and searches < max_searches:
+        while catalog.qualifying < goal and catalog.searches < max_searches:
             batch = []
-            while len(batch) < width and searches + len(batch) < max_searches:
-                index = searches + len(batch) + 1
+            while len(batch) < width and catalog.searches + len(batch) < max_searches:
+                index = catalog.searches + len(batch) + 1
                 if surface:
                     count = int(rng.integers(min_atoms, max_atoms + 1))
                     chosen = [
@@ -682,13 +687,18 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
                     push = _surface_push(positions.shape[0], chosen, dmin, dmax, rng)
                     origin = minimum
                 else:
-                    atom = int(listed[int(rng.integers(0, len(listed)))])
-                    if not bool(free[atom]):
-                        raise RuntimeError(f"displace atom {atom} is not free")
-                    direction = rng.normal(size=3)
-                    direction = direction / np.linalg.norm(direction)
-                    origin = np.array(minimum, copy=True)
-                    origin[atom] = origin[atom] + magnitude * direction
+                    drawn = draw_search_start(
+                        minimum,
+                        ~free,
+                        box,
+                        pbc,
+                        listed,
+                        rep=rep,
+                        attempt=index,
+                        radius=displace_radius,
+                        magnitude=magnitude,
+                    )
+                    origin = drawn["start"]
                     push = None
                 job = _point_job(
                     {
@@ -707,18 +717,21 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
                 job["ninit"] = int(_section(template)["ninit"])
                 batch.append(job)
             print(
-                f"{template['id']} rep {rep} searches {searches + 1} connected {connected}",
+                f"{template['id']} rep {rep} searches {catalog.searches + 1} connected {catalog.qualifying}",
                 flush=True,
             )
             for record in run_jobs(batch, _execute, width):
-                if connected >= goal:
+                if catalog.qualifying >= goal:
                     break
-                searches += 1
                 climb = int(record["force_calls"])
                 saddle = None if record.get("positions") is None else np.asarray(record["positions"], dtype=np.float64).reshape(-1, 3)
                 record["reasons"] = list(record.get("reasons") or [])
                 plus_ep = None
                 minus_ep = None
+                judged = False
+                links = False
+                structure = None
+                barrier_value = None
                 if record["success"] and saddle is not None and record.get("lowest_mode"):
                     axis = np.asarray(record["lowest_mode"], dtype=np.float64)
                     axis = axis / np.linalg.norm(axis)
@@ -742,9 +755,8 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
                     plus_rmsd = _rmsd(plus[free], minimum[free])
                     minus_rmsd = _rmsd(minus[free], minimum[free])
                     links = connected_endpoints(minimum, plus, minus, box, tolerance)
-                    novel = all(_rmsd(saddle[free], old) > connect_rmsd for old in found)
-                    barrier = float(record["energy"] - min_energy)
-                    record["barrier"] = barrier
+                    barrier_value = float(record["energy"] - min_energy)
+                    record["barrier"] = barrier_value
                     record["rmsd_plus"] = plus_rmsd
                     record["rmsd_minus"] = minus_rmsd
                     record["per_atom_max_plus"] = per_atom_max(plus, minimum, box)
@@ -753,22 +765,18 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
                     minus_ep = minus[free]
                     record["endpoint_calls"] = int(plus_calls + minus_calls)
                     record["force_calls"] = climb + int(plus_calls + minus_calls)
-                    record["reasons"] = []
-                    if novel:
-                        found.append(saddle[free].copy())
-                    if links and novel and 0.0 < barrier < barrier_max:
-                        record["success"] = True
-                        record["failure"] = None
-                        connected += 1
-                    else:
-                        if not links:
-                            record["reasons"].append("not_connected")
-                        if not novel:
-                            record["reasons"].append("duplicate")
-                        if barrier <= 0.0 or barrier >= barrier_max:
-                            record["reasons"].append("barrier")
-                        record["success"] = False
-                        record["failure"] = classify_failure(record["reasons"])
+                    structure = saddle[free]
+                    judged = True
+                decision = catalog.observe(
+                    judged=judged,
+                    linked=links,
+                    structure=structure,
+                    barrier=barrier_value,
+                )
+                if judged:
+                    record["reasons"] = list(decision["reasons"])
+                    record["success"] = bool(decision["success"])
+                    record["failure"] = None if record["success"] else classify_failure(record["reasons"])
                 search_calls += int(record["force_calls"])
                 record.pop("positions", None)
                 record.pop("lowest_mode", None)
@@ -776,14 +784,18 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
                 stamp_endpoint(record, archive.name, archive.count - 1, status)
                 records.append(record)
         total_calls = int(minimize_calls + search_calls)
-        if connected < goal:
+        if catalog.qualifying < goal:
             failed_reps += 1
-        fraction = connected / searches if searches else 0.0
         comments.append(
-            f"# rep {rep} force_calls {total_calls} unique_saddles {len(found)} "
-            f"fraction_connected {fraction} total_searches {searches} "
-            f"connected {connected} minimize_calls {minimize_calls} "
-            f"minimum_converged {int(min_ok)} seed {20261015 + rep}"
+            f"# rep {rep} force_calls {total_calls} unique_saddles {catalog.unique} "
+            f"fraction_connected {catalog.fraction_connected} total_searches {catalog.searches} "
+            f"connected {catalog.qualifying} minimize_calls {minimize_calls} "
+            f"minimum_converged {int(min_ok)} "
+            + (
+                f"seed {20261015 + rep}"
+                if surface
+                else f"search_seed (20261015+{rep})*1000003+attempt"
+            )
         )
     totals = [
         int(line.split()[line.split().index("force_calls") + 1])

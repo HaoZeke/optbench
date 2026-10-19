@@ -2,7 +2,8 @@
 # The displacement returned when the saddle is stored is the push off the saddle and is not applied.
 # Endpoint minima use the eOn r2205 link: perAtomNorm strictly below 0.1 angstrom.
 # Both minima are float32 free-atom coordinates in the sibling endpoints npz.
-# rep 1 force_calls 154419 unique_saddles 3 fraction_connected 0.0 total_searches 200 connected 0 minimize_calls 1 minimum_converged 1 seed 20261016
+# unique_saddles is find_repeat on the product minimum. Saddle coordinates were not stored. fraction_connected is (searches - not_connected) / searches.
+# rep 1 force_calls 154419 unique_saddles 48 fraction_connected 0.755 total_searches 200 connected 18 minimize_calls 1 minimum_converged 1 seed 20261016
 force_calls 154419.0
 force_calls_min 154419
 force_calls_max 154419
@@ -19,5 +20,5 @@ nfailed 1
 goal 27
 cap 6000
 n 200
-par2_mean 12000.0
-v2_nfailed 200
+par2_mean 10980.175
+v2_nfailed 182
