@@ -111,7 +111,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
-    "repro/tsopt-lj38-eon-lanczos-improved": "",
+    "repro/tsopt-lj38-eon-lanczos-improved": "f57204ef36397774bed5991f71616738766d34bc",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -472,14 +472,6 @@ def _sha(branch: str) -> str:
 
         SHA[branch] = subprocess.check_output(
             ["git", "rev-parse", "origin/cells/optim/saddle-pt"],
-            text=True,
-        ).strip()
-    if branch == "repro/tsopt-lj38-eon-lanczos-improved" and len(SHA.get(branch, "")) < 12:
-        import subprocess
-
-        SHA[branch] = subprocess.check_output(
-            ["git", "rev-parse", "HEAD"],
-            cwd=Path(__file__).resolve().parents[1],
             text=True,
         ).strip()
     if branch == "cells/pele/ts" and "cells/pele/ts" not in SHA:
