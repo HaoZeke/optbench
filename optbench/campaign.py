@@ -103,6 +103,19 @@ def iter_geometries(path: Path) -> list[Path]:
 _EON_ENGINES = {"eon-client", "eon"}
 
 
+_OPTIM_TRANSITION = frozenset({"hef-ffd", "bfgsts", "rr-ffd"})
+
+
+def _optim_transition(template: dict) -> bool:
+    """Transition-state, saddle, and lowest-eigenvector OPTIM templates.
+
+    Minimization L-BFGS stays on the engine plugin. That plugin refuses
+    every other OPTIM method.
+    """
+    main = ((template.get("ini") or {}).get("Main") or {})
+    return str(main.get("method") or "") in _OPTIM_TRANSITION
+
+
 def _check_stop(problem: dict, template: dict) -> int | None:
     """Return the force-call cap, or None when the problem does not state one.
 
@@ -300,7 +313,7 @@ def run(
             workers=workers,
             work=work,
         )
-    if template["engine"] == "optim":
+    if template["engine"] == "optim" and _optim_transition(template):
         from .optim_campaign import run_template
 
         problem = resolve_problem(root, problem_name)
@@ -344,6 +357,20 @@ def run(
             workers=workers,
             limit=limit,
             resume=resume,
+        )
+    from .engines import find as find_engine
+
+    plugged = find_engine(str(template["engine"]))
+    if plugged is not None:
+        stated = template.get("problem")
+        if stated and stated != problem_name:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return plugged.run(
+            root,
+            problem_name,
+            template_name,
+            output=output,
+            workers=workers,
         )
     if template["engine"] not in _EON_ENGINES:
         raise ValueError(f"unknown engine {template['engine']}")
