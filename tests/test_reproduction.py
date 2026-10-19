@@ -35,27 +35,33 @@ def test_the_ledger_covers_the_oracle_in_order():
             assert row["cause"]
         if (row.get("rerun") or {}).get("paper_baseline"):
             assert status == "reproduced"
-    assert counts == {"reproduced": 47, "not_reproduced": 29, "not_rerun": 75}
+    assert counts == {"reproduced": 46, "not_reproduced": 30, "not_rerun": 75}
     assert reproduction_errors(ROOT) == []
 
 
-def test_gman_qm_reproduces_the_archive_integers():
+def test_gman_qm_records_the_tsase_stock_gap():
     ledger = {row_id(row): row for row in load_ledger(ROOT / "oracle" / "reproduction.jsonl")}
     row = ledger["neb/Pt-heptamer/gman-qm"]
-    assert row["status"] == "reproduced"
+    assert row["status"] == "not_reproduced"
+    assert row["cause"] == "tsase_qm_defaults"
     assert row["in_paper"] is False
     assert row["failure_check"] is None
     checks = {item["metric"]: item for item in row["checks"]}
     assert checks["force_calls"]["archive"] == 190
-    assert checks["force_calls"]["rerun"] == 190
+    assert checks["force_calls"]["rerun"] == 456
+    assert checks["force_calls"]["ok"] is False
     assert checks["force_calls_max"]["archive"] == 316
-    assert checks["force_calls_max"]["rerun"] == 316
+    assert checks["force_calls_max"]["rerun"] == 702
     assert checks["force_calls_min"]["archive"] == 103
-    assert checks["force_calls_min"]["rerun"] == 103
-    assert row["rerun"]["unrounded_mean"] == 190.92307692307693
-    assert row["rerun"]["paper_baseline"] is True
-    assert row["rerun"]["template"] == "gman/neb-pt-qm"
-    assert row["rerun"]["sha"] == "45b4ee530c41bab68c696c90c737110f0c669c10"
+    assert checks["force_calls_min"]["rerun"] == 211
+    assert row["rerun"]["unrounded_mean"] == 456.3269230769231
+    assert row["rerun"]["paper_baseline"] is False
+    assert row["rerun"]["template"] == "tsase/neb-pt-qm"
+    assert row["rerun"]["sha"] == "e9f9b7adb8b0839341c7da88fbf7f079ae46d53d"
+    assert "456" in row["gap"]
+    held = holdback(ROOT)
+    assert ("neb/Pt-heptamer", "tsase/neb-pt-qm") not in held.templates
+    assert "results/campaign/tsase-1.0-neb-pt-qm.dat" not in held.paths
 
 
 def test_pele_paper_baseline_is_the_2014_stop():

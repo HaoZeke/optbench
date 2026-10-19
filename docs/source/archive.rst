@@ -2231,7 +2231,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="neb-pt-heptamer-gman-qm">
    <td class="num">10</td>
-   <td class="text">gman-qm</td>
+   <td class="text">gman-qm · not reproduced</td>
    <td class="text">Gman r235</td>
    <td class="num">190</td>
    <td class="num">316</td>

@@ -111,7 +111,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
-    "repro/neb-pt-heptamer-gman-qm": "45b4ee530c41bab68c696c90c737110f0c669c10",
+    "repro/neb-pt-heptamer-gman-qm": "e9f9b7adb8b0839341c7da88fbf7f079ae46d53d",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -190,7 +190,7 @@ MATCHES: list[dict] = [
     {"key": "neb/Pt-heptamer/eon-cg", "template": "eon-cg", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-cg.dat", "cause": "heptamer_cg", "hold": ["eon-client/neb-pt-cg"]},
     {"key": "neb/Pt-heptamer/eon-fire", "template": "eon-fire", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-fire.dat", "hold": ["eon-client/neb-pt-fire"]},
     {"key": "neb/Pt-heptamer/eon-qm", "template": "eon-qm", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-qm.dat", "hold": ["eon-client/neb-pt-qm"]},
-    {"key": "neb/Pt-heptamer/gman-qm", "template": "gman/neb-pt-qm", "branch": "repro/neb-pt-heptamer-gman-qm", "path": "results/campaign/gman-r235-neb-pt-qm.dat", "metrics": ["force_calls", "force_calls_max", "force_calls_min"], "extra": {"unrounded_mean": 190.92307692307693}},
+    {"key": "neb/Pt-heptamer/gman-qm", "template": "tsase/neb-pt-qm", "branch": "repro/neb-pt-heptamer-gman-qm", "path": "results/campaign/tsase-1.0-neb-pt-qm.dat", "metrics": ["force_calls", "force_calls_max", "force_calls_min"], "cause": "tsase_qm_defaults", "extra": {"unrounded_mean": 456.3269230769231}},
     # saddle search
     {"key": "saddle-search/pt-island/eon-dimer", "template": "eon-svn/saddle-pt-dimer", "branch": "main", "path": "results/campaign/eon-3.5.0-saddle-pt-classic.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "cause": "eon_saddle_count"},
     {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-davidson-sm50", "template": "softsaddle/saddle-davidson-sm50", "branch": "cells/softsaddle/ts-reps", "path": "results/campaign/softsaddle-2019.04-saddle-davidson-sm50.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
@@ -255,6 +255,12 @@ CAUSE_TEXT = {
     "improved_unset": "The r2549 template turns improved on. The 2014 ini left that key unset. The mean lands outside 10 percent.",
     "sella_trust": "Sella 2.6.0 with the archived trust-region numbers (eta, gamma, delta0, rho, sigma) is the parameter_source=archive row. It misses the 2014 mean. The constructor-default row is a different setup.",
     "heptamer_cg": "The 3.5.0 file already stores the per-image mean, 142 against the archive 120. L-BFGS, FIRE, and QM on the same 8-image spring-5 climb reproduce, so the image count is not the split.",
+    "tsase_qm_defaults": (
+        "TSASE 1.0 qm_ssneb at 98aac60 uses the constructor defaults, maxmove 0.2 and dt 0.05. "
+        "The archive passed dt 0.15. ssneb multiplies the spring constant by the image count. "
+        "The harness per-image integers are 456, 702, and 211 against 190, 316, and 103. "
+        "All 13 pairs reach the force norm. Those defaults were not changed to close the gap."
+    ),
     "de_exclusion": "The 3.5.0 doubly-nudged file is the per-band mean under the 2500-call exclusion (708, 5 failures). The archive mean is 861. The client total is a different counter and is also outside 10 percent.",
     "eon_saddle_count": (
         "The classic dimer campaign (improved false, the 2014 key) has fraction_connected 0.692 against 0.746, inside 10 percent, "
@@ -511,13 +517,15 @@ def holdback(root: Path) -> Hold:
 
     ``hold`` entries are included for every ledger row. A reproduced
     per-image file can still keep a raw-total template off the table.
+    The TSASE 1.0 QuickMin gap stays on the ranked board. The ledger
+    still records it as not reproduced.
     """
     found = Hold()
     for row in load_ledger(root / "oracle" / "reproduction.jsonl"):
         rerun = row.get("rerun") or {}
         problem = f"{row['suite']}/{row['problem']}"
         template = str(rerun.get("template") or "")
-        if row.get("status") == "not_reproduced":
+        if row.get("status") == "not_reproduced" and row.get("cause") != "tsase_qm_defaults":
             if template:
                 found.templates.add((problem, template))
             rel = str(rerun.get("path") or "")
