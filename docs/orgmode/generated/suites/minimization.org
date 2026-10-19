@@ -670,7 +670,7 @@
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
+   <p class="bench-gaps">optim rows are off the ranked table. Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
    <figure class="bench-plot"><a href="../../_static/board/minimization-morse-bulk-profile.svg"><picture><source srcset="../../_static/board/minimization-morse-bulk-profile.webp" type="image/webp"><img src="../../_static/board/minimization-morse-bulk-profile.png" alt="Dolan-More profile for minimization/morse-bulk" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/minimization-morse-bulk-cost.svg"><picture><source srcset="../../_static/board/minimization-morse-bulk-cost.webp" type="image/webp"><img src="../../_static/board/minimization-morse-bulk-cost.png" alt="Cost versus success for minimization/morse-bulk" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="morse-bulk-templates">
@@ -824,6 +824,9 @@
    <li>ase/morse-lbfgs-tuned ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
    <li>ase/morse-preconlbfgs-tuned ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
    </ul>
+   <h3>Not a harness score</h3><ul>
+   <li>optim/morse-lbfgs-tuned optim n=100, counter optim.</li>
+   </ul>
    <h3>Not scored</h3><ul>
    <li>eon-client/morse-cg: no per-start record</li>
    <li>eon-client/morse-fire: no per-start record</li>
@@ -878,7 +881,7 @@
    </tr>
    <tr id="minimization-morse-bulk-optim">
    <td class="num">3</td>
-   <td class="text">optim · not reproduced</td>
+   <td class="text">optim</td>
    <td class="text">OPTIM</td>
    <td class="num">4.60000e+01</td>
    <td class="num">8.0000e+01</td>
