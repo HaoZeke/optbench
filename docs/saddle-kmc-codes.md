@@ -502,7 +502,7 @@ island atoms is 1.449. The slab mean is stored as `rmsd_plus_free` and
 
 | problem | template | successes | failures | median calls | PAR-2 |
 | --- | --- | --- | --- | --- | --- |
-| tsopt/pt-island | pykmc/ts-pt | 46/49 | 1 cap, 2 divergence | 746.5 | 1956.45 |
+| tsopt/pt-island | pykmc/ts-pt | 46/49 | 1 cap, 2 crash | 746.5 | 1956.45 |
 | hTST/Pt | pykmc/htst-pt | 13/13 | 0 | 3367604 | — |
 | hTST/Al | pykmc/htst-al | 639/639 | 0 | 56329 | — |
 | accelerated-md/aladatom | pykmc/aladatom | 3/3 | 0 | 166853 | 178325.67 |
@@ -529,8 +529,12 @@ Search 88 is linked and at the force stop with Hessian index 2, so
 `apply_taxonomy` names it `wrong_stationary` and it is the extra link.
 The other classes are 209 more `wrong_stationary`, 69 `crash`, and 1
 `not_converged`. The 69 crashes store `ErrorType.EVENT_NOT_FOUND: No
-event found`. The `not_converged` search stopped on the method budget
-at 10000 calls, under the harness cap of 20000. None of the 792 is
+event found`. The 69 `pykmc/saddle-pt` crashes and the two `pykmc/ts-pt`
+crashes (`initial_13` at 325 calls, `initial_44` at 652) are pyKMC
+`partn_search` returning `ErrorType.EVENT_NOT_FOUND: No event found`
+when pARTn `get_error()` is ierr -10, `EIGENVALUE LOST, try to increase
+nnewchance or nsmooth`. The `not_converged` search stopped on the method
+budget at 10000 calls, under the harness cap of 20000. None of the 792 is
 divergence and none spent the harness cap. The success median is 1260.5
 calls. The median of the 792 call counts is 1315.5. Mean calls on the
 successes are 1303.009765625. The v2 median of the penalised costs is
@@ -598,6 +602,23 @@ barrier force calls 2.887e+04 averaged over 639 and rate force calls
 2013. This mean barrier cost is 2.239 times that archive mean. The
 template ceiling is 400000 searches. The run stopped at 639 windows,
 short of that ceiling.
+
+`failure_cap` 2000000 was added to the six eOn hTST templates in commit
+`1eb16a77` (2026-10-18). The hTST template notes cite no paper cap. The
+same commit's basin-hopping templates, `templates/eon-svn/bh-lj38.toml`
+and `templates/eon-client/bh-lj38.toml`, say the 2014 file stated no
+force cap and that 2000000 is above the 2014 maximum of 1795901. The
+hTST archive `config.ini` files set optimizer `max_iterations` 5000 and
+state no force-call cap. `archive/entries/hTST/Pt/eon-dimer-lbfgs/report.py`
+and the Aluminum twin sum saddle force calls until the barrier list and
+the rate threshold are met, and they state no cap. Published archive
+barrier means include Pt `alpha_dimer-qm` 1.908e7 and Pt `tsase-dimer-qm`
+3.239e6, both above 2000000. `problems/globalopt/lj100-binary.toml` sets
+`max_evaluations` 2000000 on that LJ problem. `problems/hTST/Pt.toml` and
+`problems/hTST/Al.toml` stay without `convergence.max_force_calls`.
+`optbench.campaign._check_stop` describes a template `failure_cap` as the
+cap the archived report used. The hTST archive reports have no such
+number. These rows stay scored with `par2_mean` unset.
 
 `pykmc/aladatom` and `pykmc/standard-aladatom` stay on the minimized
 reactant and stop when the old-scheme confidence `max(0, 1 - 1/repeats)`
