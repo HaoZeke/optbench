@@ -1,6 +1,12 @@
-# GPR calculator 0.0.4. Climbing-image GP-NEB. Force noise is the problem
-# force stop. Energy noise is that stop per atom, with the 0.0002 floor
-# from examples/Pd4/gp_neb.py. The optimizer is BFGS and the step limit is 100.
+# GPR calculator 0.0.4, climbing-image GP-NEB.
+# The noise, kernel, cutoff, FIRE optimizer, IDPP path, and 0.075 eV/Å
+# residual are the section 6 settings of Onyango, Kang, and Zhu,
+# Comput. Phys. Commun. 316 (2025) 109781. examples/H2S/gp_neb.py at
+# c4d63271 climbs, uses FIRE for 100 steps, and repeats the pass up to
+# three times. Energy noise uses the Pd4 floor: max(0.0002, 0.05/n_atoms).
+# The mean is zero. RBF bounds are the library bounds. sparsify() is not
+# called. FIRE maxstep is the problem max_move. wall_seconds is 617.575,
+# the same ceiling as gprcalc/gp-neb, and a breach is a cap failure.
 id = "gprcalc/gp-ci-neb"
 engine = "gprcalc"
 code = "GPR calculator"
@@ -13,15 +19,20 @@ tuning = "tuned"
 
 [band]
 climbing = true
-algo = "BFGS"
+algo = "FIRE"
 spring_k = 0.1
 steps = 100
+passes = 3
 kernel = "RBF"
 zeta = 2.0
-noise_mode = "force-stop"
+noise_e_structure = 0.05
+noise_f = 0.075
 noise_e_floor = 0.0002
+optimizer_fmax = 0.075
+initial_path = "idpp"
 lmax = 4
 nmax = 3
 rcut = 5.0
 freq = 10
 neb_method = "improvedtangent"
+wall_seconds = 617.575

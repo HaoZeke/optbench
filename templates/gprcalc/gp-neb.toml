@@ -1,6 +1,20 @@
-# GPR calculator 0.0.4. Library GP-NEB: BFGS, spring 0.1, climb off, RBF,
-# energy noise 0.002, force noise 0.1, 100 steps. The problem file supplies
-# the image count, the cap, the force norm, and the maximum move.
+# GPR calculator 0.0.4, non-climbing GP-NEB for clusters.
+# Onyango, Kang, and Zhu, Comput. Phys. Commun. 316 (2025) 109781
+# (arXiv:2504.07319), section 6: zero-mean RBF, rcut 5.0 Å, nmax 3, lmax 4,
+# energy noise 0.05 eV/structure, force noise 0.075 eV/Å, FIRE, and an NEB
+# force below 0.075 eV/Å. IDPP is the initial path in that section.
+# examples/Pd4/gp_neb.py at c4d63271: noise_e = max(0.0002, 0.05/n_atoms),
+# update_gpr on image len-2, FIRE, 50 steps, climb false, and a second pass
+# if the first does not converge. Spring k is the neb_calc default 0.1.
+# set_GPR leaves base_potential unset (zero mean). RBF_mb bounds stay
+# sigma [1e-2, 50] and length [1e-1, 10], initial (1.0, 0.1). sparsify()
+# is not called. FIRE maxstep is the problem max_move; the library call
+# sets none. The harness still judges the problem force norm.
+# wall_seconds is the per-start ceiling. Crossing it is a cap failure.
+# 617.575 s is the logged search time of LJ38 pair_00 FIRE step 5 with these
+# settings, when fmax rose from 2.133422 to 42.266805 after the surrogate
+# was accepted. examples/emt-serial.py's first GPR NEB converged on this
+# machine in 26.818827 s, inside this ceiling.
 id = "gprcalc/gp-neb"
 engine = "gprcalc"
 code = "GPR calculator"
@@ -13,16 +27,20 @@ tuning = "default"
 
 [band]
 climbing = false
-algo = "BFGS"
+algo = "FIRE"
 spring_k = 0.1
-steps = 100
+steps = 50
+passes = 2
 kernel = "RBF"
 zeta = 2.0
-noise_mode = "absolute"
-noise_e = 0.002
-noise_f = 0.1
+noise_e_structure = 0.05
+noise_f = 0.075
+noise_e_floor = 0.0002
+optimizer_fmax = 0.075
+initial_path = "idpp"
 lmax = 4
 nmax = 3
 rcut = 5.0
 freq = 10
 neb_method = "improvedtangent"
+wall_seconds = 617.575

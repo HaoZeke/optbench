@@ -1,17 +1,23 @@
 """GP-accelerated NEB through GPR calculator 0.0.4.
 
-The search is the loop in ``gpr_calc.NEB.neb_calc``: one shared GP, ASE
-NEB, BFGS or FIRE, and a base call only when the GP's uncertainty gate
+The search follows ``gpr_calc.NEB.neb_calc`` and the cluster scripts in
+``examples/Pd4/gp_neb.py`` and ``examples/H2S/gp_neb.py`` at commit
+c4d63271: one shared zero-mean GP, an IDPP initial path, ASE NEB, and
+FIRE. The base calculator is called only when the GP uncertainty gate
 asks for one. ``HarnessCounter`` sits on that base calculator. A
 surrogate prediction does not enter the potential, so it is not a force
 call. Hessian finite differences use ``verification`` and the spec
 potential, and they are not search cost.
 
-The problem file supplies the image count, the cap, the force norm, and
-the maximum move. The optimizer stops on the ASE NEB residual at that
-force norm, or on the library step limit, or on the cap. Success is a
-true free-atom gradient at the problem force norm whose Hessian index
-is 1, with the call count strictly under the cap.
+The problem file supplies the image count, the cap, the success force
+norm, and the maximum move. The optimizer stops on the template force
+residual (the paper's 0.075 eV/Å), or on the library step limit, or on
+the cap, or on the template wall clock. A wall-clock breach is a cap
+failure. Success is a true free-atom gradient at the problem force norm
+whose Hessian index is 1, with the call count strictly under the cap.
+
+Onyango, Kang, and Zhu, Comput. Phys. Commun. 316 (2025) 109781,
+arXiv:2504.07319, section 6.
 """
 
 from __future__ import annotations
@@ -51,6 +57,10 @@ _FD_STEP = 1e-5
 _SYMBOL = {"lj": "Ar", "morse_pt": "Pt"}
 
 
+class WallClockCap(Exception):
+    """The template ``wall_seconds`` elapsed before the search returned."""
+
+
 def _threads_one() -> None:
     for name in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "NUMEXPR_NUM_THREADS"):
         os.environ[name] = "1"
@@ -81,38 +91,37 @@ def _settings(template: dict, problem: dict, commit: str) -> dict:
         "pairs": int(problem["sample"]["pairs"]),
         "geometry": str(problem["geometry"]["kind"]),
         "climbing": bool(band["climbing"]),
-        "algo": str(band.get("algo", "BFGS")),
-        "spring_k": float(band.get("spring_k", 0.1)),
-        "steps": int(band.get("steps", 100)),
-        "kernel": str(band.get("kernel", "RBF")),
-        "zeta": float(band.get("zeta", 2.0)),
-        "noise_mode": str(band.get("noise_mode", "absolute")),
-        "noise_e": float(band.get("noise_e", 0.002)),
-        "noise_f": float(band.get("noise_f", 0.1)),
-        "noise_e_floor": float(band.get("noise_e_floor", 0.0002)),
-        "lmax": int(band.get("lmax", 4)),
-        "nmax": int(band.get("nmax", 3)),
-        "rcut": float(band.get("rcut", 5.0)),
-        "freq": int(band.get("freq", 10)),
-        "neb_method": str(band.get("neb_method", "improvedtangent")),
+        "algo": str(band["algo"]),
+        "spring_k": float(band["spring_k"]),
+        "steps": int(band["steps"]),
+        "passes": int(band["passes"]),
+        "kernel": str(band["kernel"]),
+        "zeta": float(band["zeta"]),
+        "noise_e_structure": float(band["noise_e_structure"]),
+        "noise_f": float(band["noise_f"]),
+        "noise_e_floor": float(band["noise_e_floor"]),
+        "optimizer_fmax": float(band["optimizer_fmax"]),
+        "initial_path": str(band["initial_path"]),
+        "lmax": int(band["lmax"]),
+        "nmax": int(band["nmax"]),
+        "rcut": float(band["rcut"]),
+        "freq": int(band["freq"]),
+        "neb_method": str(band["neb_method"]),
+        "wall_seconds": float(band["wall_seconds"]),
     }
 
 
 def _noise(settings: dict, n_atoms: int) -> tuple[float, float]:
-    """Energy and force noise for one system size.
+    """Per-atom energy noise and force noise.
 
-    ``absolute`` is the ``GP.set_GPR`` default. ``force-stop`` follows
-    the packaged examples: force noise is the requested force stop, and
-    energy noise is that stop per atom with the Pd4 floor.
+    Section 6 of Onyango, Kang, and Zhu uses 0.05 eV/structure and
+    0.075 eV/Å. ``examples/Pd4/gp_neb.py`` divides the structure energy
+    noise by the atom count and applies ``noise_e_min``.
     """
-    mode = settings["noise_mode"]
-    if mode == "absolute":
-        return float(settings["noise_e"]), float(settings["noise_f"])
-    if mode == "force-stop":
-        stop = float(settings["force_norm"])
-        floor = float(settings["noise_e_floor"])
-        return max(floor, stop / int(n_atoms)), stop
-    raise ValueError(f"unknown noise mode {mode}")
+    structure = float(settings["noise_e_structure"])
+    floor = float(settings["noise_e_floor"])
+    per_atom = structure / int(n_atoms)
+    return max(floor, per_atom), float(settings["noise_f"])
 
 
 def _gpr():
@@ -201,6 +210,10 @@ def _blank(name: str, calls: int, verify: int) -> dict:
         "optimizer_steps": 0,
         "noise_e": None,
         "noise_f": None,
+        "kernel_sigma": None,
+        "kernel_length": None,
+        "optimizer_fmax": None,
+        "wall_seconds": None,
         "search_seconds": 0.0,
     }
 
@@ -240,14 +253,27 @@ def _mic_product(reactant: np.ndarray, product: np.ndarray, free: np.ndarray, bo
     return out
 
 
-def _images(reactant, product, free, box, symbol: str, n_interior: int, spring_k: float, neb_method: str):
+def _images(
+    reactant,
+    product,
+    free,
+    box,
+    symbol: str,
+    n_interior: int,
+    spring_k: float,
+    neb_method: str,
+    initial_path: str,
+):
     from ase.mep import NEB
 
+    path = str(initial_path)
+    if path not in {"idpp", "linear"}:
+        raise ValueError(f"unknown initial path {path}")
     left = _frame(reactant, free, box, symbol)
     right = _frame(_mic_product(reactant, product, free, box), free, box, symbol)
     images = [left] + [left.copy() for _ in range(n_interior)] + [right]
     band = NEB(images, k=spring_k, parallel=False, method=neb_method)
-    band.interpolate(apply_constraint=True, mic=box is not None)
+    band.interpolate(method=path, apply_constraint=True, mic=box is not None)
     return images
 
 
@@ -360,7 +386,10 @@ def _judge(
     return record
 
 
-def _stats(gp, noise_e: float, noise_f: float, nsteps: int) -> dict:
+def _stats(gp, noise_e: float, noise_f: float, nsteps: int, optimizer_fmax: float, wall_seconds: float) -> dict:
+    kernel = getattr(gp, "kernel", None)
+    sigma = getattr(kernel, "sigma", None) if kernel is not None else None
+    length = getattr(kernel, "l", None) if kernel is not None else None
     return {
         "base_calls": int(getattr(gp, "use_base", 0) or 0),
         "surrogate_calls": int(getattr(gp, "use_surrogate", 0) or 0),
@@ -370,6 +399,10 @@ def _stats(gp, noise_e: float, noise_f: float, nsteps: int) -> dict:
         "optimizer_steps": int(nsteps),
         "noise_e": float(noise_e),
         "noise_f": float(noise_f),
+        "kernel_sigma": None if sigma is None else float(sigma),
+        "kernel_length": None if length is None else float(length),
+        "optimizer_fmax": float(optimizer_fmax),
+        "wall_seconds": float(wall_seconds),
     }
 
 
@@ -396,6 +429,35 @@ def run_gp_neb(
             scratch=scratch,
             state=state,
         )
+    except WallClockCap:
+        counter = state["counter"]
+        calls = 0 if counter is None else int(counter.calls)
+        verify = 0 if counter is None else int(counter.verify_calls)
+        record = _blank(name, calls, verify)
+        record["reasons"] = ["cap"]
+        record["failure"] = "cap"
+        record["success"] = False
+        record["wall_seconds"] = state.get("wall_seconds")
+        if state.get("started") is not None:
+            import time
+
+            record["search_seconds"] = time.perf_counter() - float(state["started"])
+        gp = state["gp"]
+        if gp is not None and state["noise_e"] is not None:
+            record.update(
+                _stats(
+                    gp,
+                    state["noise_e"],
+                    state["noise_f"],
+                    state["nsteps"],
+                    float(state["optimizer_fmax"]),
+                    float(state["wall_seconds"]),
+                )
+            )
+            record["failure"] = "cap"
+            record["reasons"] = ["cap"]
+            record["success"] = False
+        return record
     except (Exception, SystemExit) as exc:
         counter = state["counter"]
         calls = 0 if counter is None else int(counter.calls)
@@ -406,12 +468,30 @@ def run_gp_neb(
             record["failure"] = classify_failure(record["reasons"])
             gp = state["gp"]
             if gp is not None and state["noise_e"] is not None:
-                record.update(_stats(gp, state["noise_e"], state["noise_f"], state["nsteps"]))
+                record.update(
+                    _stats(
+                        gp,
+                        state["noise_e"],
+                        state["noise_f"],
+                        state["nsteps"],
+                        float(state["optimizer_fmax"]),
+                        float(state["wall_seconds"]),
+                    )
+                )
             return record
         record = _crash_record(name, calls, verify, type(exc).__name__)
         gp = state["gp"]
         if gp is not None and state["noise_e"] is not None:
-            record.update(_stats(gp, state["noise_e"], state["noise_f"], state["nsteps"]))
+            record.update(
+                _stats(
+                    gp,
+                    state["noise_e"],
+                    state["noise_f"],
+                    state["nsteps"],
+                    float(state["optimizer_fmax"]),
+                    float(state["wall_seconds"]),
+                )
+            )
             record["failure"] = "crash"
             record["reasons"] = ["crash"]
             record["success"] = False
@@ -465,9 +545,16 @@ def _search_gp_neb(
     scratch: Path | None,
     state: dict,
 ) -> dict:
+    import time
+
     from ase.mep import NEB
     from ase.optimize import BFGS, FIRE
 
+    state["started"] = time.perf_counter()
+    state["wall_seconds"] = float(settings["wall_seconds"])
+    state["optimizer_fmax"] = float(settings["optimizer_fmax"])
+    if time.perf_counter() - float(state["started"]) >= float(state["wall_seconds"]):
+        raise WallClockCap()
     GP, GPR = _gpr()
     kind = settings["potential"]
     symbol = _SYMBOL.get(kind)
@@ -492,6 +579,7 @@ def _search_gp_neb(
         int(settings["n_interior"]),
         float(settings["spring_k"]),
         str(settings["neb_method"]),
+        str(settings["initial_path"]),
     )
     counter = HarnessCounter(cache=False, cap=cap)
     state["counter"] = counter
@@ -510,45 +598,66 @@ def _search_gp_neb(
     )
     state["gp"] = gp
     calc = GPR(base=base, ff=gp, save=False, freq=int(settings["freq"]))
+    train_index = len(images) - 2
     for index, image in enumerate(images):
         image.calc = copy(calc)
-        image.calc.update_gpr = index == 1
-    neb = NEB(
-        images,
-        k=float(settings["spring_k"]),
-        parallel=False,
-        method=str(settings["neb_method"]),
-    )
-    neb.climb = bool(settings["climbing"])
+        image.calc.update_gpr = index == train_index
     algo = str(settings["algo"])
     logfile = None if scratch is None else str(Path(scratch) / "optimizer.log")
-    if algo == "BFGS":
-        opt = BFGS(neb, logfile=logfile, maxstep=float(settings["max_move"]))
-    elif algo == "FIRE":
-        opt = FIRE(neb, logfile=logfile, maxstep=float(settings["max_move"]))
-    else:
-        raise ValueError(f"unknown NEB algorithm {algo}")
+    optimizer_fmax = float(settings["optimizer_fmax"])
+    total_steps = 0
+    optimizer_converged = False
 
-    def _observe():
-        state["nsteps"] = int(opt.nsteps)
-        if scratch is None:
-            return
-        line = (
-            f"step {opt.nsteps} calls {counter.calls} base {gp.use_base} "
-            f"surrogate {gp.use_surrogate} energy {gp.N_energy} forces {gp.N_forces} fits {gp.fits}\n"
+    def _over_wall() -> bool:
+        return time.perf_counter() - float(state["started"]) >= float(state["wall_seconds"])
+
+    if _over_wall():
+        raise WallClockCap()
+    for _pass in range(int(settings["passes"])):
+        if _over_wall():
+            raise WallClockCap()
+        neb = NEB(
+            images,
+            k=float(settings["spring_k"]),
+            parallel=False,
+            method=str(settings["neb_method"]),
         )
-        with (Path(scratch) / "steps.log").open("a", encoding="utf-8") as handle:
-            handle.write(line)
+        neb.climb = bool(settings["climbing"])
+        if algo == "BFGS":
+            opt = BFGS(neb, logfile=logfile, maxstep=float(settings["max_move"]))
+        elif algo == "FIRE":
+            opt = FIRE(neb, logfile=logfile, maxstep=float(settings["max_move"]))
+        else:
+            raise ValueError(f"unknown NEB algorithm {algo}")
 
-    opt.attach(_observe)
-    opt.run(fmax=force_norm, steps=int(settings["steps"]))
-    state["nsteps"] = int(opt.nsteps)
+        def _observe(opt=opt, offset=total_steps):
+            state["nsteps"] = offset + int(opt.nsteps)
+            if scratch is not None:
+                line = (
+                    f"step {state['nsteps']} calls {counter.calls} base {gp.use_base} "
+                    f"surrogate {gp.use_surrogate} energy {gp.N_energy} forces {gp.N_forces} "
+                    f"fits {gp.fits} sigma {gp.kernel.sigma:.6f} length {gp.kernel.l:.6f} "
+                    f"elapsed {time.perf_counter() - float(state['started']):.3f}\n"
+                )
+                with (Path(scratch) / "steps.log").open("a", encoding="utf-8") as handle:
+                    handle.write(line)
+            if time.perf_counter() - float(state["started"]) >= float(state["wall_seconds"]):
+                raise WallClockCap()
+
+        opt.attach(_observe)
+        opt.run(fmax=optimizer_fmax, steps=int(settings["steps"]))
+        total_steps += int(opt.nsteps)
+        state["nsteps"] = total_steps
+        try:
+            optimizer_converged = bool(opt.converged())
+        except Exception:
+            optimizer_converged = False
+        if optimizer_converged or _over_wall():
+            break
+    if _over_wall():
+        raise WallClockCap()
     energies = _band_energies(images, gp)
     index, candidate = _candidate_index(energies, bool(settings["climbing"]))
-    try:
-        optimizer_converged = bool(opt.converged())
-    except Exception:
-        optimizer_converged = False
     return _judge(
         name,
         counter=counter,
@@ -564,7 +673,14 @@ def _search_gp_neb(
         index=index,
         climbing=bool(settings["climbing"]),
         optimizer_converged=optimizer_converged,
-        stats=_stats(gp, noise_e, noise_f, int(opt.nsteps)),
+        stats=_stats(
+            gp,
+            noise_e,
+            noise_f,
+            total_steps,
+            optimizer_fmax,
+            float(settings["wall_seconds"]),
+        ),
     )
 
 
@@ -787,23 +903,45 @@ def run(
     if limit:
         pairs = pairs[: int(limit)]
     output = Path(output)
-    done = {row["start"]: row for row in _read_starts(output.with_suffix(".starts.jsonl"))} if resume else {}
     if work is None:
         work = Path("/tmp/optbench-gprcalc") / problem["id"].replace("/", "-") / template["id"].replace("/", "-")
     work.mkdir(parents=True, exist_ok=True)
+    scratch_starts = work / "starts.jsonl"
+    if resume and scratch_starts.is_file():
+        done = {row["start"]: row for row in _read_starts(scratch_starts)}
+    elif resume:
+        done = {row["start"]: row for row in _read_starts(output.with_suffix(".starts.jsonl"))}
+    else:
+        done = {}
     pending = [pair for pair in pairs if pair.name not in done]
     jobs = [_job(pair, settings, str(work / pair.name)) for pair in pending]
     _threads_one()
     records_by_name = dict(done)
 
-    def _store(record: dict) -> None:
+    def _store(record: dict) -> dict:
         _annotate(record, problem, template)
         records_by_name[record["start"]] = record
         ordered = [records_by_name[pair.name] for pair in pairs if pair.name in records_by_name]
-        summary = write_outputs(output, ordered, template, settings, problem)
+        write_starts(scratch_starts, ordered)
+        full = len(ordered) == int(settings["pairs"]) and len(pairs) == int(settings["pairs"])
+        if full:
+            summary = write_outputs(output, ordered, template, settings, problem)
+            summary["published"] = True
+        else:
+            summary = {
+                "problem": problem["id"],
+                "template": template["id"],
+                "force_calls": None,
+                "nfailed": sum(1 for row in ordered if not row["success"]),
+                "starts": len(ordered),
+                "successes": sum(1 for row in ordered if row["success"]),
+                "output": "",
+                "published": False,
+            }
         print(
             f"{record['start']} calls={record['force_calls']} success={record['success']} "
-            f"failure={record['failure']} seconds={record.get('search_seconds')}",
+            f"failure={record['failure']} seconds={record.get('search_seconds')} "
+            f"published={summary['published']}",
             file=sys.stderr,
             flush=True,
         )
@@ -824,5 +962,19 @@ def run(
         ordered = [records_by_name[pair.name] for pair in pairs if pair.name in records_by_name]
         if not ordered:
             raise ValueError(f"{template['id']} on {problem['id']} has no starts")
-        summary = write_outputs(output, ordered, template, settings, problem)
+        full = len(ordered) == int(settings["pairs"])
+        if full:
+            summary = write_outputs(output, ordered, template, settings, problem)
+            summary["published"] = True
+        else:
+            summary = {
+                "problem": problem["id"],
+                "template": template["id"],
+                "force_calls": None,
+                "nfailed": sum(1 for row in ordered if not row["success"]),
+                "starts": len(ordered),
+                "successes": sum(1 for row in ordered if row["success"]),
+                "output": "",
+                "published": False,
+            }
     return summary

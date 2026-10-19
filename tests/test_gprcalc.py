@@ -49,15 +49,33 @@ def test_default_problem_stop_accepts_the_templates():
         _check_stop(resolve_problem(ROOT, "minimization/lj38"), template)
 
 
-def test_force_stop_noise_uses_the_problem_threshold():
-    template = load_template(ROOT, "gprcalc/gp-ci-neb")
+def test_paper_noise_and_the_wall_clock_are_declared():
     problem = resolve_problem(ROOT, "double-ended-saddle-search/lj38")
-    settings = _settings(template, problem, GPR_COMMIT)
-    noise_e, noise_f = _noise(settings, 38)
-    assert noise_f == pytest.approx(0.001)
-    assert noise_e == pytest.approx(0.0002)
-    default = _settings(load_template(ROOT, "gprcalc/gp-neb"), problem, GPR_COMMIT)
-    assert _noise(default, 38) == (0.002, 0.1)
+    loaded = [load_template(ROOT, name) for name in ("gprcalc/gp-neb", "gprcalc/gp-ci-neb")]
+    walls = []
+    for template in loaded:
+        settings = _settings(template, problem, GPR_COMMIT)
+        noise_e, noise_f = _noise(settings, 38)
+        assert noise_f == 0.075
+        assert noise_e == 0.05 / 38
+        assert settings["algo"] == "FIRE"
+        assert settings["initial_path"] == "idpp"
+        assert settings["optimizer_fmax"] == 0.075
+        assert settings["kernel"] == "RBF"
+        assert settings["rcut"] == 5.0
+        assert settings["lmax"] == 4
+        assert settings["nmax"] == 3
+        assert settings["wall_seconds"] == 617.575
+        walls.append(settings["wall_seconds"])
+    assert walls[0] == walls[1]
+    plain = _settings(loaded[0], problem, GPR_COMMIT)
+    climbed = _settings(loaded[1], problem, GPR_COMMIT)
+    assert plain["climbing"] is False
+    assert plain["steps"] == 50
+    assert plain["passes"] == 2
+    assert climbed["climbing"] is True
+    assert climbed["steps"] == 100
+    assert climbed["passes"] == 3
 
 
 def test_energy_and_forces_are_one_base_call():
@@ -125,15 +143,18 @@ def test_one_band_step_counts_only_the_base_calculator(tmp_path: Path):
         "steps": 1,
         "kernel": "RBF",
         "zeta": 2.0,
-        "noise_mode": "absolute",
-        "noise_e": 0.002,
+        "noise_e_structure": 0.006,
         "noise_f": 0.1,
         "noise_e_floor": 0.0002,
+        "optimizer_fmax": 0.05,
+        "initial_path": "idpp",
+        "passes": 1,
         "lmax": 2,
         "nmax": 2,
         "rcut": 3.0,
         "freq": 10,
         "neb_method": "improvedtangent",
+        "wall_seconds": 3600.0,
     }
     record = run_gp_neb(
         name="tiny",
@@ -163,6 +184,59 @@ def test_one_band_step_counts_only_the_base_calculator(tmp_path: Path):
     assert record["force_calls"] <= trained + record["base_calls"] + 1
     assert record["surrogate_calls"] >= 1
     assert record["force_calls"] < trained + record["base_calls"] + record["surrogate_calls"]
+
+
+def test_wall_clock_ceiling_is_a_cap(tmp_path: Path):
+    import numpy as np
+
+    from optbench.gpr_neb import run_gp_neb
+    from optbench.score import score_v2
+
+    reactant = np.array([[0.0, 0.0, 0.0], [1.2, 0.0, 0.0], [0.6, 1.0, 0.0]], dtype=np.float64)
+    product = reactant + np.array([[0.15, 0.02, 0.0], [-0.08, 0.12, 0.0], [0.0, -0.1, 0.0]])
+    settings = {
+        "potential": "lj",
+        "n_interior": 1,
+        "max_move": 0.05,
+        "force_norm": 0.05,
+        "cap": 40,
+        "climbing": False,
+        "algo": "FIRE",
+        "spring_k": 0.1,
+        "steps": 50,
+        "passes": 2,
+        "kernel": "RBF",
+        "zeta": 2.0,
+        "noise_e_structure": 0.05,
+        "noise_f": 0.075,
+        "noise_e_floor": 0.0002,
+        "optimizer_fmax": 0.075,
+        "initial_path": "idpp",
+        "lmax": 4,
+        "nmax": 3,
+        "rcut": 5.0,
+        "freq": 10,
+        "neb_method": "improvedtangent",
+        "wall_seconds": 0.0,
+    }
+    record = run_gp_neb(
+        name="ceiling",
+        reactant=reactant,
+        product=product,
+        free=np.ones(3, dtype=bool),
+        box=None,
+        settings=settings,
+        scratch=tmp_path,
+    )
+    assert record["failure"] == "cap"
+    assert record["success"] is False
+    assert record["reasons"] == ["cap"]
+    assert record["force_calls"] == 0
+    assert record["counter"] == "harness"
+    scored = score_v2([record], settings["cap"])
+    assert scored["n_cap"] == 1
+    assert scored["nfailed"] == 1
+    assert scored["par2_mean"] == 2 * settings["cap"]
 
 
 def test_benchmark_classes_name_the_four_problems():
