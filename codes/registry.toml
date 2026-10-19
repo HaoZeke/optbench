@@ -107,12 +107,12 @@ note = "Wales group GMIN. Tarball sha256 02aaf45245af7b521b5792fa77ffa364f67d756
 [[code]]
 id = "pele"
 name = "pele"
-role = "minimization"
+role = "minimization and saddle search"
 repository = "https://github.com/pele-python/pele"
 ref = "main"
 commit = "b7081b932a060be11342fbe8287ac35da8ada879"
 committed = "2026-10-12"
-note = "0.1.2 at main b7081b93, built from source. LBFGS and FIRE are the Python classes. MYLBFGS is the Fortran step update on that LBFGS. Steepest descent is the update in pele.optimize.steepest_descent. Campaigns call the harness Lennard-Jones or Morse potential. Force calls are harness entries to getEnergyGradient. The 2014 rows counted nfev on pele's own potential and stay on the archive table."
+note = "0.1.2 at main b7081b93, built from source. LBFGS and FIRE are the Python classes. MYLBFGS is the Fortran step update on that LBFGS. Steepest descent is the update in pele.optimize.steepest_descent. Campaigns call the harness Lennard-Jones or Morse potential. Force calls are harness entries to getEnergyGradient. The 2014 rows counted nfev on pele's own potential and stay on the archive table. NEB, DNEB, and double-ended connect use the problem image count, spring constant 100, and the problem max move. One connect cycle is a single local connect. The tuned NEB and DNEB rows use that spring, L-BFGS memory 4, inverse-Hessian scale 0.1, and maxErise 1, with the climbing image on, and they stop when the true force on the highest image meets the problem norm. The harness accepts a band start when the true force is within the problem norm and the Hessian index is 1."
 
 [[code]]
 id = "optking"

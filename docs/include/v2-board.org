@@ -124,7 +124,7 @@
    <td data-code="ASE" data-template="ase/de-lj38-tuned" data-par2="3463.64"><span class="bench-score">3463.64</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">ase/de-lj38-tuned</a></td>
    <td data-code="Sella" data-template="sella/de-lj38-tuned" data-par2="1753.96"><span class="bench-score">1753.96</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">sella/de-lj38-tuned</a></td>
    <td data-code="GMIN">—</td>
-   <td data-code="pele">—</td>
+   <td data-code="pele" data-template="pele/neb-tuned" data-par2="1211.4"><span class="bench-score">1211.4</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">pele/neb-tuned</a></td>
    <td data-code="LAMMPS" data-template="lammpsneb/ci-fire-tuned" data-par2="4102.14"><span class="bench-score">4102.14</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">lammpsneb/ci-fire-tuned</a></td>
    <td data-code="pysisyphus">—</td>
    <td data-code="AIRSS">—</td>
@@ -151,7 +151,7 @@
    <td data-code="ASE" data-template="ase/de-lj38-2ts-default" data-par2="20000"><span class="bench-score">20000</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">ase/de-lj38-2ts-default</a></td>
    <td data-code="Sella" data-template="sella/de-lj38-2ts-tuned" data-par2="30105.9"><span class="bench-score">30105.9</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">sella/de-lj38-2ts-tuned</a></td>
    <td data-code="GMIN">—</td>
-   <td data-code="pele">—</td>
+   <td data-code="pele" data-template="pele/dneb-tuned" data-par2="3449.59"><span class="bench-score">3449.59</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">pele/dneb-tuned</a></td>
    <td data-code="LAMMPS" data-template="lammpsneb/ci-quickmin-tuned" data-par2="18035.7"><span class="bench-score">18035.7</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">lammpsneb/ci-quickmin-tuned</a></td>
    <td data-code="pysisyphus">—</td>
    <td data-code="AIRSS">—</td>
@@ -178,7 +178,7 @@
    <td data-code="ASE" data-template="ase/de-pt-island-tuned" data-par2="847.678"><span class="bench-score">847.678</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">ase/de-pt-island-tuned</a></td>
    <td data-code="Sella" data-template="sella/de-pt-island-tuned" data-par2="615.153"><span class="bench-score">615.153</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">sella/de-pt-island-tuned</a></td>
    <td data-code="GMIN">—</td>
-   <td data-code="pele">—</td>
+   <td data-code="pele" data-template="pele/dneb-tuned" data-par2="901.424"><span class="bench-score">901.424</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">pele/dneb-tuned</a></td>
    <td data-code="LAMMPS" data-template="lammpsneb/ci-fire" data-par2="2668.64"><span class="bench-score">2668.64</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">lammpsneb/ci-fire</a></td>
    <td data-code="pysisyphus">—</td>
    <td data-code="AIRSS">—</td>
@@ -340,7 +340,7 @@
    <td data-code="ASE" data-template="ase/neb-pt-heptamer-tuned" data-par2="442.615"><span class="bench-score">442.615</span><a href="generated/suites/neb.html#Pt-heptamer-templates">ase/neb-pt-heptamer-tuned</a></td>
    <td data-code="Sella">—</td>
    <td data-code="GMIN">—</td>
-   <td data-code="pele">—</td>
+   <td data-code="pele" data-template="pele/neb-tuned" data-par2="957.923"><span class="bench-score">957.923</span><a href="generated/suites/neb.html#Pt-heptamer-templates">pele/neb-tuned</a></td>
    <td data-code="LAMMPS" data-template="lammpsneb/ci-fire" data-par2="1398.46"><span class="bench-score">1398.46</span><a href="generated/suites/neb.html#Pt-heptamer-templates">lammpsneb/ci-fire</a></td>
    <td data-code="pysisyphus">—</td>
    <td data-code="AIRSS">—</td>

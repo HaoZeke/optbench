@@ -172,12 +172,15 @@ class PeleCounter:
     """Count pele potential entries.
 
     ``getEnergy`` goes through ``getEnergyGradient``, so a caller that
-    asks for the energy alone is charged one call, not two.
+    asks for the energy alone is charged one call, not two. ``cap``
+    refuses a search call once the budget is spent. The refused call is
+    not counted. ``verification`` charges Hessian probes to
+    ``verify_calls`` and leaves the search budget alone.
     """
 
-    def __init__(self, inner: object):
+    def __init__(self, inner: object, cap: int | None = None):
         self._inner = inner
-        self._counter = HarnessCounter(cache=False)
+        self._counter = HarnessCounter(cache=False, cap=cap)
 
     @property
     def calls(self) -> int:
@@ -186,6 +189,9 @@ class PeleCounter:
     @property
     def verify_calls(self) -> int:
         return self._counter.verify_calls
+
+    def verification(self) -> _Verification:
+        return self._counter.verification()
 
     def getEnergyGradient(self, coords):
         key = tuple(float(value) for value in coords)

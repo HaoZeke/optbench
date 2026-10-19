@@ -871,7 +871,7 @@
    <caption>Registry pins.</caption>
    <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
-   <td>minimization</td>
+   <td>minimization and saddle search</td>
    <td>main</td>
    <td>b7081b932a06</td>
    <td><a href="https://github.com/pele-python/pele">https://github.com/pele-python/pele</a></td>
@@ -880,6 +880,39 @@
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="double-ended-saddle-search/lj38" data-template="pele/neb-tuned">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="template">pele/neb-tuned</td>
+   <td data-field="version">pele 0.1.2</td>
+   <td data-field="commit">b7081b932a06</td>
+   <td data-field="par2_mean">1211.4</td>
+   <td data-field="mean_calls">1111.4</td>
+   <td data-field="median_calls">949.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 2, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="pele/dneb-tuned">
+   <td>lj38_2ts_separation</td>
+   <td data-field="template">pele/dneb-tuned</td>
+   <td data-field="version">pele 0.1.2</td>
+   <td data-field="commit">b7081b932a06</td>
+   <td data-field="par2_mean">3449.59</td>
+   <td data-field="mean_calls">2626.24</td>
+   <td data-field="median_calls">1844</td>
+   <td data-field="failures">crash 0, divergence 0, cap 3, not_converged 1, wrong_stationary 0</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="pele/dneb-tuned">
+   <td>pt-island</td>
+   <td data-field="template">pele/dneb-tuned</td>
+   <td data-field="version">pele 0.1.2</td>
+   <td data-field="commit">b7081b932a06</td>
+   <td data-field="par2_mean">901.424</td>
+   <td data-field="mean_calls">901.424</td>
+   <td data-field="median_calls">882</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
    <tr data-problem="minimization/lj38" data-template="pele/lj38-lbfgs-m100">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="template">pele/lj38-lbfgs-m100</td>
@@ -912,6 +945,17 @@
    <td data-field="median_calls">73</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-template="pele/neb-tuned">
+   <td>Pt-heptamer</td>
+   <td data-field="template">pele/neb-tuned</td>
+   <td data-field="version">pele 0.1.2</td>
+   <td data-field="commit">b7081b932a06</td>
+   <td data-field="par2_mean">957.923</td>
+   <td data-field="mean_calls">957.923</td>
+   <td data-field="median_calls">932</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>

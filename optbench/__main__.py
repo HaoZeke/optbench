@@ -100,6 +100,18 @@ def run(
             limit=limit,
             resume=resume,
         )
+    elif loaded["engine"] == "pele-band":
+        from optbench.pele_band import run as run_pele
+
+        summary = run_pele(
+            root,
+            problem,
+            template,
+            output=output,
+            workers=workers,
+            resume=resume,
+            limit=limit,
+        )
     elif loaded["engine"] == "cp2k-band":
         from optbench.cp2k_band import run as run_cp2k_band
 
