@@ -854,7 +854,7 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="par2_mean">4526.2</td>
    <td data-field="mean_calls">2055.2</td>
    <td data-field="median_calls">2065</td>
-   <td data-field="failures">crash 0, divergence 40, cap 0, wrong_stationary 2</td>
+   <td data-field="failures">crash 0, divergence 0, cap 40, wrong_stationary 2</td>
    <td data-field="n">50</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="lammpsneb/ci-quickmin">
@@ -865,7 +865,7 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="par2_mean">19017.8</td>
    <td data-field="mean_calls">9982</td>
    <td data-field="median_calls">9982</td>
-   <td data-field="failures">crash 0, divergence 45, cap 0, wrong_stationary 1</td>
+   <td data-field="failures">crash 0, divergence 0, cap 45, wrong_stationary 1</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-template="lammpsneb/ci-fire">
@@ -876,7 +876,7 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="par2_mean">2668.64</td>
    <td data-field="mean_calls">1471.69</td>
    <td data-field="median_calls">1405</td>
-   <td data-field="failures">crash 0, divergence 6, cap 0, wrong_stationary 9</td>
+   <td data-field="failures">crash 0, divergence 0, cap 6, wrong_stationary 9</td>
    <td data-field="n">59</td>
    </tr>
    <tr data-problem="minimization/lj38" data-template="lammps/hftn-lj38">
