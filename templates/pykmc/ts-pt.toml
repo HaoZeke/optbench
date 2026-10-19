@@ -8,7 +8,7 @@ commit = "9fd1f6e9085ef92642142406f3dd74e574209898"
 algorithm = "pARTn event search"
 tuning = "default"
 kernel = "morse"
-note = "ninit is 0, so the search starts in Lanczos at the guess. push_mode is list. The remaining pARTn values are the PartnConfig defaults this scored row used: eigval_thr -0.01, nsmooth 3, nnewchance 0, neigen 1, nperp 3, lanczos_disp 0.0005, lanczos_eval_conv_thr 0.001, eigen_step_size 0.2, lanczos size 10 to 20, push_over 1, dmax 6. They are pinned so the minimum-search profile does not change a rerun. The potential is morse/smooth/linear through fix external. converge_property is norm at the problem force stop. delr_thr is 1e9 so a converged saddle is returned to the harness."
+note = "ninit is 0, so the search starts in Lanczos at the guess. push_mode is list. The remaining pARTn values are the PartnConfig defaults this scored row used: eigval_thr -0.01, nsmooth 3, nnewchance 0, neigen 1, nperp 3, lanczos_disp 0.0005, lanczos_eval_conv_thr 0.001, eigen_step_size 0.2, lanczos size 10 to 20, push_over 1, dmax 6. They are pinned so the minimum-search profile stays the one in this template. The archive has no 2014 pyKMC row. The potential is morse/smooth/linear through fix external. converge_property is norm at the problem force stop. delr_thr is 1e9 so a converged saddle is returned to the harness."
 
 [pykmc]
 ninit = 0

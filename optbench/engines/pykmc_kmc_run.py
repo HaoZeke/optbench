@@ -374,7 +374,7 @@ def run_htst(root: Path, problem: dict, template: dict, *, output: Path, workers
             f"# Temperature {spec['temperature']:g} K, prefactor {spec['prefactor']:.6g}, from {spec['source']}.",
             "# A barrier window closes when every reference barrier, rounded to 3 decimals, has been seen once.",
             cap_line,
-            "# A rate window closes at 0.999 of rate_ref. A missing rate window does not unrank a finished barrier window.",
+            "# A rate window closes at 0.999 of rate_ref. A missing rate window leaves a finished barrier window in the sample.",
             "# Process identity is the top-window RMSD test plus a 0.05 eV barrier gate.",
             potential_line,
             f"# matched {summary['matched_barriers']} of {summary['reference_barriers']} reference barriers "

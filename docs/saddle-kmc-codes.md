@@ -164,8 +164,8 @@ other 87 meet the force stop with a Hessian index other than 0, so they
 are wrong stationary. The success median is 72. Start `pos_0000` took 55
 harness calls and stopped at force `0.000842553062284986`, energy
 `-1421.4513232624358`, vibrational index 6. `optim/unhooked` writes nothing.
-Noise is not scored: the relay has no noisy-force window. NEB, tsopt, and
-hTST are not scored. The double-ended rows use the 2014 `odata` preambles.
+Noise has no harness row: the relay has no noisy-force window. NEB, tsopt, and
+hTST have no harness row. The double-ended rows use the 2014 `odata` preambles.
 The scored geometry is the socket frame whose energy matches the line
 printed before `Converged to TS`. `lbfgs.xyz` is written at the start of
 that `mylbfgs` call. PATHSAMPLE launches those OPTIM jobs. The score sums
@@ -193,7 +193,7 @@ is 43 of 51, 8 cap, success mean 3507, median 2972, min 698, max 9658.
 The cap is the problem limit of 10000. The seven OPTIM pairs that hit it
 still have a stored force under `1e-5`, because a transition state was
 printed and the connection search kept calling the potential. Pt-heptamer
-has no OPTIM archive row and was not run.
+has no OPTIM archive row.
 
 ## pARTn
 
@@ -225,7 +225,7 @@ a stored saddle or have a barrier of at least 1.5 eV. The common products
 sit near RMSD 0.22 and 0.32, so both endpoints fall inside 0.5. A pure
 2.71 Å hop of one atom is RMSD 2.71/sqrt(175), about 0.205, and the same
 test calls it the reactant. The starts file stores those RMSD scalars and
-not the endpoint coordinates, so the row was not rescored. The ranked row
+not the endpoint coordinates. The ranked row
 is one record per search, with cap 6000 (the pARTn budget plus the two
 endpoint budgets of 2000). The PAR-2 mean is 11944.625. The OptBench
 catalogue calls a saddle connected when the nearer minimum's `delr` is
@@ -257,9 +257,8 @@ search is connected when exactly one endpoint matches. `rmsd_connect` 0.5
 stays the saddle-novelty test and is not this link.
 
 The rows below do not store `minimum`, `endpoint_plus`, and
-`endpoint_minus`. RMSD scalars do not determine the per-atom maximum, so
-those rows were not rewritten and no campaign was rerun. Their connected
-counts and PAR-2 stay the stored values. The MATLAB smoke in
+`endpoint_minus`. RMSD scalars do not determine the per-atom maximum.
+Their connected counts and PAR-2 stay the stored values. The MATLAB smoke in
 `softsaddle/entry.toml` records two searches and does not store endpoint
 coordinates.
 
@@ -307,14 +306,14 @@ coordinates.
 
 Sella and ASE successes are order-1 convergence, not this endpoint link.
 The eOn client, eOn SVN, eOn 3.5.0, and archive fractions are those codes'
-own `Not Connected` labels. PAR-2 is not applied to a legacy campaign
-ratio or to the 2014 archive.
+own `Not Connected` labels. PAR-2 stays off a campaign ratio and off
+the 2014 archive.
 
 ## TSASE
 
 Pin `tsase`, commit `98aac60` (2025-09-26). `setup.py` says 1.0. The
 checkout has no LICENSE file. Fortran calculators use `numpy.distutils` and
-are not built. SSNEB and the solid-state dimer are loaded without
+stay unloaded. SSNEB and the solid-state dimer are loaded without
 `tsase/__init__.py`. `ss` is false. A periodic all-free Hessian drops the
 three translations before the index is counted.
 
@@ -326,9 +325,9 @@ median is 53.5.
 
 Still open, and not given an invented budget: basin hopping and minima
 hopping on `globalopt/*`. Those problems state `energy_above_minimum` and
-do not state `max_force_calls`. AMD-SVM on `accelerated-md/aladatom` is not
-scored. The problem has no force-call protocol and the harness has no EAM
-potential. hTST prefactors are not scored for the same reason.
+do not state `max_force_calls`. AMD-SVM on `accelerated-md/aladatom` has
+no harness row. The problem has no force-call protocol and the harness has no EAM
+potential. hTST prefactors have no harness row for the same reason.
 
 ## LAMMPS
 
@@ -379,8 +378,8 @@ sigma `1e-4` it is 729 of 1000, 224 divergence, 47 wrong stationary,
 success median 462. At sigma `1e-3` it is 706 of 1000, 224 divergence, 70
 wrong stationary, success median 435. At sigma `1e-2` it is 564 of 1000,
 224 divergence, 212 wrong stationary, success median 335. `fix neb` needs a multi-partition MPI
-run and is not scored. `prd`, `tad`,
-`hyper`, and `dynamical_matrix` are not scored. The Al, Pt, and aladatom
+run and has no harness row. `prd`, `tad`,
+`hyper`, and `dynamical_matrix` have no harness row. The Al, Pt, and aladatom
 problems are EAM, and the harness has no EAM evaluator.
 
 ## DL-FIND
@@ -474,12 +473,13 @@ is 0.01. The harness stop stays 0.001. The profile name in the result is
 catalogues keep the eOn AKMC `default_value` 1e12. The paper's own runs
 often use 1e13, and that value is not used here.
 
-`pykmc/ts-pt` is unchanged. `ninit` is 0 and `push_mode` is `list`. The
+`pykmc/ts-pt` has `ninit` 0 and `push_mode` `list`. The
 other pARTn values are the PartnConfig defaults that scored row used:
 `eigval_thr` -0.01, `nsmooth` 3, `nnewchance` 0, `lanczos_disp` 0.0005,
 `lanczos_eval_conv_thr` 0.001, `eigen_step_size` 0.2, Lanczos size 10 to
-20, `push_over` 1, `dmax` 6. They are written in the template so a rerun
-does not pick up the minimum-search profile.
+20, `push_over` 1, `dmax` 6. They are written in the template so the
+minimum-search profile stays the one in the template. The archive has no
+2014 pyKMC row.
 
 `partn_search` does not forward a force norm. The worker sets
 `converge_property` to `norm` and `forc_thr` to 0.001, because the problem
@@ -512,7 +512,7 @@ island atoms is 1.449. The slab mean is stored as `rmsd_plus_free` and
 `pykmc/ts-pt` is one search from each of the 49 guesses. `initial_13`
 stopped at 325 calls and `initial_44` at 652, both `EVENT_NOT_FOUND`.
 `initial_30` hit the cap of 10000. The success median is 746.5. PAR-2 is
-1956.45. Each of the three failures costs 20000. This row was not rerun.
+1956.45. Each of the three failures costs 20000. The archive has no 2014 pyKMC row.
 
 `pykmc/saddle-pt` is the shifted-Morse baseline. The reactant is already a
 minimum of that potential, so minimization took 1 call.
@@ -607,7 +607,7 @@ product count are the problem values. The columns match the eOn AKMC
 reducer. Each seed is one start. Three seeds finished at both
 temperatures, so n is 3 and `nfailed` is 0. `infra/aladatom-repro` is
 not on origin. The problem `sample.repetitions` stays 1, so the eOn n=1
-rows stay ranked. These pyKMC rows are not partial.
+rows stay ranked.
 
 `rate_accuracy` is `max(0, 1 - abs(rate - reference) / reference)`. It is
 0 when the catalogue rate is at least twice the reference. The catalogue
@@ -675,9 +675,9 @@ hTST Al is the r2549 aluminum EAM in pyKMC, `eon-svn`, and `eon-client`.
 The eOn aladatom AKMC rows call the client's built-in `eam_al` and count
 client force calls. pyKMC calls the harness r2549 EAM and counts
 `HarnessCounter`. That is one EAM family. Bit identity of the two EAM
-calls was not checked.
+calls is open.
 
-## Codes that were not scored
+## Codes outside the harness rows
 
 **softsaddle.** The tree under `softsaddle/` is MATLAB. `softsaddle/entry.toml`
 is the April 2019 archive (mean force calls 423491.1 over 10 repetitions).
@@ -691,7 +691,7 @@ not a harness campaign.
 a length-1 GP prediction stored in one gradient slot. After those two
 edits, MLMin on LJ38 start 0 took 7 harness calls and 82 seconds and was
 still at force 144678. Each new training point retrains the GP. A
-1000-start minimization was not launched.
+1000-start minimization is absent.
 
 **SEAKMC_py.** Commit `3d94a64`. `LammpsRunner` writes `pair_style` and
 shells out to a LAMMPS binary. The requirements include pymatgen. There is
@@ -705,7 +705,7 @@ the harness does not evaluate.
 1.10. Julia is not installed. The dimer entry point is `run!(method, E, dE,
 x0, v0)`.
 
-**CP2K.** v2026.2 was not built. A FIST classical potential would still need
+**CP2K.** v2026.2 has no build here. A FIST classical potential would still need
 a harness callback, and the build is a separate stack from the running
 campaigns.
 
@@ -718,15 +718,15 @@ server. NEB and the string are in that same motion stack. The socket was
 not wired to `pes.evaluate`.
 
 **GPR_calculator.** Commit `c4d6327`. `setup.py` compiles C++ kernels and
-requires cffi, mpi4py, and pyxtal. That extension was not built.
+requires cffi, mpi4py, and pyxtal. That extension has no build here.
 
 **geodesic-interpolate.** Commit `476aa04` (v1.0.0). It builds an initial
 path from a molecular bond list (`min_neighbors` default 4). It is not a
-saddle search. It was not paired with a NEB.
+saddle search. It has no NEB row.
 
 **pyGSM.** Commit `1b4d5a5`. `examples/ase_api_de_gsm.py` grows a string in
 TRIC delocalized internals from a molecular topology. The dependency list
-includes xtb. That path was not run on LJ38.
+includes xtb. That path has no LJ38 row.
 
 **phonopy.** hTST asks for barrier and rate force calls. phonopy is the
 finite-displacement half of a prefactor. There is no EAM evaluator and no
