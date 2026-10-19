@@ -121,6 +121,7 @@ def test_pending_grid_is_every_problem_and_code():
         "ase",
         "sella",
         "gmin",
+        "pele",
         "artn",
         "tsase",
         "pykmc",

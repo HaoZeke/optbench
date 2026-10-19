@@ -31,7 +31,7 @@ def test_lj38_noise_does_not_invent_a_reference():
 
 def test_noise_catalog_covers_the_campaign_and_skips_exact_hessians():
     catalog = specs()
-    assert len(catalog) == 46
+    assert len(catalog) == 62
     on_disk = [row for row in list_templates(ROOT) if row.get("engine") == "noise"]
     assert {row["id"] for row in on_disk} == {row["id"] for row in catalog}
     by_id = {row["id"]: row for row in on_disk}
@@ -72,6 +72,9 @@ def test_noise_catalog_covers_the_campaign_and_skips_exact_hessians():
             assert by_id[ident]["solver"]["family"] == "vcsqnm"
             assert by_id[ident]["solver"]["initial_step_size"] == -1e-7
             assert by_id[ident]["code"] == "vc-SQNM"
+    for name in ("lbfgs", "mylbfgs", "fire", "sd"):
+        for sigma in SIGMA_LEVELS:
+            assert f"noise/pele-{name}-{sigma_slug(sigma)}" in by_id
 
 
 def test_exact_hessian_job_is_refused():

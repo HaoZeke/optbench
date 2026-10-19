@@ -162,6 +162,12 @@ def _minimize_job(job: dict) -> dict:
             )
             if drive_error:
                 error = drive_error
+        elif family == "pele":
+            point, stopped, drive_error = _drive_pele(
+                job, x0, observed, cap, clean_tol, energy_tol, components
+            )
+            if drive_error:
+                error = drive_error
         else:
             raise ValueError(f"unknown solver family {family}")
     except ForceCallCap as exc:
@@ -420,6 +426,49 @@ def _drive_vcsqnm(job, x0, observed, potential, cap, clean_tol, energy_tol, comp
     return result["point"], bool(result["stopped"]), str(result["error"])
 
 
+class _PeleObserved:
+    """pele potential over the noisy harness force.
+
+    Counting stays in ``observed``. ``last`` is the last evaluated point.
+    """
+
+    def __init__(self, observed):
+        self.observed = observed
+        self.counter = observed.potential.counter
+        self.last: list[float] | None = None
+
+    def getEnergyGradient(self, coords):
+        import numpy as np
+
+        flat = np.asarray(coords, dtype=np.float64).reshape(-1)
+        energy, gradient = self.observed(flat)
+        self.last = [float(value) for value in flat]
+        return float(energy), np.asarray(gradient, dtype=np.float64)
+
+    def getEnergy(self, coords):
+        energy, _gradient = self.getEnergyGradient(coords)
+        return energy
+
+
+def _drive_pele(job, x0, observed, cap, clean_tol, energy_tol, components):
+    from optbench.runners.pele_min import drive_minimizer, merged_options
+
+    method = str(job["method"])
+    options = merged_options(method, dict(job["options"]))
+
+    def stop(*, energy, gradient, tol, coords=None) -> bool:
+        return observed.met(clean_tol, energy_tol, components)
+
+    return drive_minimizer(
+        method,
+        x0,
+        _PeleObserved(observed),
+        stop=stop,
+        cap=int(cap),
+        options=options,
+    )
+
+
 def _drive_sella(job, x0, observed, potential, cap, clean_tol, energy_tol, components):
     from sella import Sella
 
@@ -534,6 +583,12 @@ def run_template(
             raise RuntimeError(f"{template['id']} code_version is not tag {CODE_VERSION}")
         if str(solver.get("method")) not in {"sqnm", "ase"}:
             raise ValueError(f"{template['id']} moves a cell this potential does not have")
+    if family == "pele":
+        from importlib.metadata import version
+
+        found = version("pele")
+        if template.get("code_version") and found != str(template["code_version"]):
+            raise RuntimeError(f"pele {found} does not match template {template['code_version']}")
     convergence = problem.get("convergence") or {}
     clean_tol = float(convergence["force_norm"])
     if "energy_tol" not in convergence:

@@ -805,6 +805,7 @@ def _benchmark_index() -> dict[str, dict]:
         "benchmarks.bench_noise",
         "benchmarks.bench_gmin",
         "benchmarks.bench_vcsqnm",
+        "benchmarks.bench_pele",
         "benchmarks.quadratic",
     )
     for module_name in modules:
@@ -1296,6 +1297,9 @@ def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
     """Visible ranked-table cells, in column order.
 
     The site check compares these strings with the rendered table.
+    The current flag stays on the board document. Every ranked row is
+    the newest full version of its template, and the paragraph above
+    the table already says so.
     """
     cells = [
         ("template", str(row.get("template") or row.get("entry") or "")),
