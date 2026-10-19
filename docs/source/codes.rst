@@ -438,6 +438,12 @@ The number is written only after the run finishes under the problem rule.
    <td>f27c0005ae6a</td>
    <td><a href="https://gitlab.com/ase/ase">https://gitlab.com/ase/ase</a></td>
    </tr>
+   <tr>
+   <td>minimization</td>
+   <td>3.6.0</td>
+   <td>r2515</td>
+   <td><a href="https://gitlab.com/ase/ase">https://gitlab.com/ase/ase</a></td>
+   </tr>
    </tbody></table></div>
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>

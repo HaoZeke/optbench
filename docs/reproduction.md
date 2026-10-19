@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+47 reproduced, 28 not reproduced, 76 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -133,7 +133,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj38/scipy-lbfgs | — | — | not rerun |
 | lj38/tsase-sdlbfgs | — | — | not rerun |
 | morse-bulk/ase-fire | force_calls 147.47 | 113 | not reproduced; ase_morse_script |
-| morse-bulk/ase-lbfgs | force_calls 53.8 | 32 | not reproduced; ase_morse_script |
+| morse-bulk/ase-lbfgs | force_calls 53.8 | 53.65 | reproduced; residual |
 | morse-bulk/ase-preconLBFGS | force_calls 34 | 29 | not reproduced; ase_morse_script |
 | morse-bulk/eon-cg | force_calls 106 | 106 | reproduced |
 | morse-bulk/eon-fire | force_calls 156 | 156 | reproduced |
@@ -217,6 +217,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 ## Residuals inside the band
 
+- minimization/morse-bulk/ase-lbfgs: ASE 3.6.0 svn r2515 LBFGS (memory 20, maxstep 0.2, alpha 1/0.04, fixed inverse Hessian 0.04) on the archived POSCAR starts and TSASE Morse (D 0.7102, alpha 1.6047, r0 2.897, cutoff 9.5, pair energy shifted to zero at the cutoff, orthorhombic DNINT minimum image) scores 53.65. The count is LBFGS.force_calls, one per accepted step. The archive mean is 53.8. Min is 35 and max is 91.
 - tsopt/LJ38/pele_cd: Inside the 10% band (263.52 vs 254). The same xyz-versus-con starting set as ts-ffd. findTS_local.py for the CD row does not pass orthogZeroEigs; the harness template sets orthog translations-rotations. The paper baseline is this 2014-stop mean, not the harness-stop mean 335.06.
 - tsopt/LJ38/pele_ffd: Inside the 10% band (207.51 vs 192). Archive run.sh unpacks coords-xyz.tar.gz (200 xyz, max pair about 4.4). The harness problem points at coords-con.tar.gz (max pair about 37). Kabsch RMS is about 6.33, so the sets are not the same geometry. Neither set has a pair past cutoff 40, and both drivers use RMS tolerance 1e-3/sqrt(114). The 8% residual is the starting set. The paper baseline is this 2014-stop mean, not the harness-stop mean 254.48.
 
@@ -301,10 +302,9 @@ pele FIRE on LJ38 scores 1264 with 7 failures. The archive is 709 with 0 failure
 
 ### ase_morse_script
 
-ASE 3.29 with the archived Morse script (L-BFGS memory 20, maxstep 0.2, alpha 25; FIRE maxstep 0.2; PreconLBFGS Exp A 3) scores 32, 113, and 29 against 53.8, 147.47, and 34. Constructor-default L-BFGS scores 53, next to 53.8, but that is not the archived alpha and memory. eOn Morse L-BFGS and FIRE on the same bulk file reproduce, so the geometry set is not the split.
+ASE 3.29 FIRE with the archived maxstep 0.2 scores 113 against 147.47. ASE 3.29 PreconLBFGS with Exp A 3 scores 29 against 34. Both scripts call the TSASE Morse calculator at cutoff 9.5. eOn Morse L-BFGS and FIRE on the con bulk file reproduce, so the geometry set is not the split.
 
 - minimization/morse-bulk/ase-fire
-- minimization/morse-bulk/ase-lbfgs
 - minimization/morse-bulk/ase-preconLBFGS
 
 ### morse_sd

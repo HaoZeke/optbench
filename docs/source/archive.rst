@@ -425,7 +425,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="minimization-morse-bulk-ase-lbfgs">
    <td class="num">6</td>
-   <td class="text">ase-lbfgs · not reproduced</td>
+   <td class="text">ase-lbfgs</td>
    <td class="text">ASE 3.6.0</td>
    <td class="num">53.8</td>
    <td class="num">91</td>
