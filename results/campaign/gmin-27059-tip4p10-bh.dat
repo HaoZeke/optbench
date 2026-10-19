@@ -1,0 +1,16 @@
+force_calls 1.64930e+04
+force_calls_median 1.17540e+04
+force_calls_min 1.2100e+02
+force_calls_max 1.3722e+05
+nfailed 0
+starts 10000
+code GMIN
+code_version 27059
+commit 144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348
+algorithm basin-hopping
+template gmin/tip4p10-bh
+problem globalopt/tip4p10
+counter client
+tuning archive
+call_unit total
+note Wales GMIN SVNREV 27059, tarball sha256 144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348. Serial gfortran, BLAS/LAPACK, no MPI. Farrell data: NTIP 4, RANSEED 100, TARGET -391.0233, STEP 0 0 1.64, TEMPERATURE 6.65, EDIFF 1e-3. force_calls is NPCALL, awk field 7 of Target hit after, over 10000 archived angle-axis starts. A missing target line would be a failure and is left out of the mean.
