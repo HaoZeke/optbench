@@ -1,4 +1,8 @@
-"""Harness runs for eOn SVN r2549, the develop source build, and 3.5.0.
+"""Harness runs for EON (SVN r2549), eOn develop, and the 3.5.0 eOn pin.
+
+EON and eOn are different codes. EON is the r2549 client. eOn is
+https://github.com/TheochemUI/eon at develop
+7095b23ac17d49f434a5e08ccb072897ceca698e. The r2549 client is not rebuilt.
 
 Each force evaluation is one ``HarnessCounter`` charge. eonclient is
 started with ``potential = ext_pot``. A small C program forwards
@@ -16,15 +20,16 @@ started with ``potential = ext_pot``. A small C program forwards
 * ``eam`` calls the r2549 Aluminum Fortran ``force_`` in this process.
 
 ``tip4p`` is the uncut rigid Cambridge TIP4P. A GMIN ``.aa`` start is
-centre then angle-axis. Both clients receive the same Cartesian ``.con``:
-``optbench.tip4p.sites_from_aa`` rotated with the GMIN map, written in the
-CCL order ``Tip4p::computeHH_O_`` reads (H, H pairs, then oxygens). The
-kernel reports that energy to the client in eV using the constants in
-``tip4p_unit_system.hpp`` so the basin-hopping acceptance, which divides by
-``temperature * 8.6173324e-5``, sees electron volts. The Cambridge test
-multiplies back to kJ/mol. develop built with ``-Dwith_water=true`` routes
-``potential = tip4p`` to ``rgpot::TIP4PPot`` (flexible CCL, cutoff 8.5 Å).
-That client potential is not the scored kernel. r2549
+centre then angle-axis. EON (SVN r2549) and eOn
+(develop 7095b23ac17d49f434a5e08ccb072897ceca698e) each receive the same
+Cartesian ``.con``: ``optbench.tip4p.sites_from_aa`` rotated with the GMIN
+map, written in the CCL order ``Tip4p::computeHH_O_`` reads (H, H pairs,
+then oxygens). The kernel reports that energy to the client in eV using
+the constants in ``tip4p_unit_system.hpp`` so the basin-hopping acceptance,
+which divides by ``temperature * 8.6173324e-5``, sees electron volts. The
+Cambridge test multiplies back to kJ/mol. eOn built with ``-Dwith_water=true``
+routes ``potential = tip4p`` to ``rgpot::TIP4PPot`` (flexible CCL, cutoff
+8.5 Å). That client potential is not the scored kernel. EON
 ``client/potentials/Water/tip4p_ccl.cpp`` is the same flexible restraint
 potential. The ledger line on the campaign file records the conversion.
 
@@ -1386,7 +1391,14 @@ def write_campaign(template: dict, rows: list[tuple[int, str, dict]], output: Pa
         extra.append(f"energy_max {_fmt(max(energies))}")
     if template.get("tuning"):
         extra.append(f"tuning {template['tuning']}")
-        extra.append(f"label {template['tuning']}")
+    from .board import visible_label
+
+    label = visible_label(
+        {"label": template.get("label", ""), "tuning": template.get("tuning", "")},
+        template,
+    )
+    if label:
+        extra.append(f"label {label}")
     if template.get("ledger"):
         extra.append(f"ledger {template['ledger']}")
     if partial:

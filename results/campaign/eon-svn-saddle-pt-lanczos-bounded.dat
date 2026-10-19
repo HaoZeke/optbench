@@ -1,6 +1,6 @@
 call_unit total
 nfailed 1
-code Eon svn
+code EON (SVN r2549)
 code_version r2549
 commit r2549
 algorithm Lanczos L-BFGS

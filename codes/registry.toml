@@ -26,23 +26,23 @@ note = "Current main, including merged pull request 776. The version string is 3
 
 [[code]]
 id = "eon-develop"
-name = "eOn"
+name = "eOn (develop 7095b23ac17d49f434a5e08ccb072897ceca698e)"
 role = "minimization and saddle search"
 repository = "https://github.com/TheochemUI/eon"
 ref = "develop"
 commit = "7095b23ac17d49f434a5e08ccb072897ceca698e"
 committed = "2026-10-16"
-note = "develop HEAD built from source. The version string is 3.6.0 (7095b23a). GPR-dimer is absent: TheochemUI/gpr_optim is private and eonclient reports GPRD disabled. This pin is not the conda-forge 3.5.0 binary."
+note = "eOn from https://github.com/TheochemUI/eon and https://eondocs.org, develop commit 7095b23ac17d49f434a5e08ccb072897ceca698e. The version string is 3.6.0 (7095b23a). This is a different code from EON (SVN r2549). GPR-dimer is absent: TheochemUI/gpr_optim is private and eonclient reports GPRD disabled. This pin is not the conda-forge 3.5.0 binary."
 
 [[code]]
 id = "eon-svn"
-name = "Eon svn"
+name = "EON (SVN r2549)"
 role = "minimization and saddle search"
 repository = "https://theory.cm.utexas.edu/svn/eon"
 ref = "r2549"
 commit = "r2549"
 committed = "2026-01-23"
-note = "SVN revision 2549, last changed 2026-01-23 by eboniw. eonclient -v prints r2549. The 2014 tables used earlier revisions. Export of those trees is forbidden, so the runs here are r2549. QSC sources are not in the revision. LAMMPS is not linked. Min-mode methods in this revision are dimer and lanczos. One harness uses r2549 Morse::force: cutoff 9.5, pair energy shifted to zero at the cutoff, minimum image on the box diagonal. The lane harness uses unshifted lj/cut and morse/smooth/linear. github.com/henkelmangroup/eon mirrors the same tree. The conda-forge 3.5.0 binary is a different pin. The name is Eon svn so it does not collide with the git eOn pins."
+note = "EON revision 2549, last changed 2026-01-23 by eboniw. eonclient -v prints r2549. This is a different code from eOn (https://github.com/TheochemUI/eon, https://eondocs.org). The installed r2549 client is the one these rows run; that revision is not rebuilt. The 2014 tables used earlier revisions. Export of those trees is forbidden, so the runs here are r2549. QSC sources are not in the revision. LAMMPS is not linked. Min-mode methods in this revision are dimer and lanczos. One harness uses r2549 Morse::force: cutoff 9.5, pair energy shifted to zero at the cutoff, minimum image on the box diagonal. The lane harness uses unshifted lj/cut and morse/smooth/linear. github.com/henkelmangroup/eon mirrors the same tree. The conda-forge 3.5.0 binary is a different pin."
 
 [[code]]
 id = "rgmin"

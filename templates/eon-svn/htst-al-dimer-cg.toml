@@ -1,7 +1,7 @@
 id = "eon-svn/htst-al-dimer-cg"
 engine = "eon"
 problem = "hTST/Al"
-code = "Eon svn"
+code = "EON (SVN r2549)"
 code_version = "r2549"
 commit = "r2549"
 algorithm = "Dimer CG"

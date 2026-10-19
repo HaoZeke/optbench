@@ -4,7 +4,7 @@ force_calls_max 4352
 force_calls_median 1812.0
 call_unit total
 nfailed 38
-code Eon svn
+code EON (SVN r2549)
 code_version r2549
 commit r2549
 algorithm Doubly nudged CI-NEB

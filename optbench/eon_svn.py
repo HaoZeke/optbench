@@ -78,7 +78,7 @@ def _public_row(row: dict) -> dict:
         "success": bool(row["success"]),
         "template": row.get("template", ""),
         "problem": row.get("problem", ""),
-        "code": row.get("code", "Eon svn"),
+        "code": row.get("code", "EON (SVN r2549)"),
         "code_version": row.get("code_version", "r2549"),
         "commit": row.get("commit", "r2549"),
         "tuning": row.get("tuning", "default"),

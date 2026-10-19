@@ -1,7 +1,7 @@
 id = "eon-svn/saddle-pt-lanczos-bounded"
 engine = "eon"
 problem = "saddle-search/pt-island"
-code = "Eon svn"
+code = "EON (SVN r2549)"
 code_version = "r2549"
 commit = "r2549"
 algorithm = "Lanczos L-BFGS"

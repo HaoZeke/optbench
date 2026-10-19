@@ -113,7 +113,7 @@ def test_svn_templates_match_the_problem_grids():
         spec = by_template[template_id]
         template = load_template(ROOT, template_id)
         assert template["commit"] == "r2549"
-        assert template["code"] == "Eon svn"
+        assert template["code"] == "EON (SVN r2549)"
         assert template["engine"] == "eon-client"
         assert template["problem"]
         _check_stop(resolve_problem(ROOT, template["problem"]), template)
@@ -136,4 +136,4 @@ def test_registry_pins_r2549():
     data = tomllib.loads((ROOT / "codes" / "registry.toml").read_text(encoding="utf-8"))
     row = next(item for item in data["code"] if item["id"] == "eon-svn")
     assert row["commit"] == "r2549"
-    assert row["name"] == "Eon svn"
+    assert row["name"] == "EON (SVN r2549)"

@@ -1,7 +1,7 @@
 id = "eon-svn/de-2ts-ci"
 engine = "eon-client"
 problem = "double-ended-saddle-search/lj38_2ts_separation"
-code = "Eon svn"
+code = "EON (SVN r2549)"
 code_version = "r2549"
 commit = "r2549"
 algorithm = "LBFGS"

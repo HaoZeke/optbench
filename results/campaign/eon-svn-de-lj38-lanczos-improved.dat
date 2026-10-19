@@ -4,7 +4,7 @@ force_calls_max 952
 force_calls_median 197.0
 call_unit total
 nfailed 0
-code Eon svn
+code EON (SVN r2549)
 code_version r2549
 commit r2549
 algorithm Lanczos improved L-BFGS

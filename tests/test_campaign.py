@@ -61,7 +61,7 @@ def test_run_writes_one_benchmark_dat(tmp_path: Path):
         "force_calls_min 181\n"
         "force_calls_max 181\n"
         "nfailed 0\n"
-        "code Eon svn\n"
+        "code EON (SVN r2549)\n"
         "code_version r2549\n"
         "algorithm LBFGS\n"
         "template eon-svn/lbfgs-m100\n"

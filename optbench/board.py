@@ -45,6 +45,45 @@ from .v2 import parse_repetitions
 BOARD_SCHEMA = "optbench.board/v1"
 
 
+def _problem_names() -> set[str]:
+    """Short problem names. A label must not be one of these."""
+    cache = getattr(_problem_names, "_cache", None)
+    if cache is None:
+        root = Path(__file__).resolve().parents[1] / "problems"
+        cache = {path.stem for path in root.rglob("*.toml")} if root.is_dir() else set()
+        setattr(_problem_names, "_cache", cache)
+    return cache
+
+
+def visible_label(row: dict, template: dict | None = None) -> str:
+    """The setting shown in the Label column.
+
+    A problem name such as ``lj38`` is not a setting, so it is never the label.
+    Basin hopping rows use ``target_ratio`` from the template.
+    """
+    names = _problem_names()
+
+    def usable(value: object) -> str:
+        text = str(value or "").strip()
+        if not text or text in names:
+            return ""
+        return text
+
+    found = usable(row.get("label"))
+    if found:
+        return found
+    if template is not None:
+        found = usable(template.get("label"))
+        if found:
+            return found
+        basin = (template.get("ini") or {}).get("Basin Hopping") or {}
+        if "target_ratio" in basin:
+            ratio = basin["target_ratio"]
+            rendered = f"{float(ratio):.10g}" if isinstance(ratio, (int, float)) else str(ratio)
+            return f"target_ratio {rendered}"
+    return usable(row.get("tuning"))
+
+
 def _slug(problem_id: str) -> str:
     return problem_id.replace("/", "-")
 
@@ -752,6 +791,7 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
             code_version=fields.get("code_version") or str(probe.get("code_version") or (template or {}).get("code_version") or ""),
             commit=fields.get("commit") or str(probe.get("commit") or (template or {}).get("commit") or ""),
             tuning=tuning,
+            label=visible_label({"label": fields.get("label", ""), "tuning": tuning}, template),
             entry=stem,
             source="campaign",
             path=str(path.relative_to(root)) if path else "",
@@ -922,6 +962,14 @@ def _asv_rows(root: Path, problems: dict[str, dict], templates: dict[str, dict])
                 code_version=str((source_template or {}).get("code_version") or ""),
                 commit=str((source_template or {}).get("commit") or ""),
                 tuning=str((source_template or {}).get("tuning") or (source_template or {}).get("profile") or ""),
+                label=visible_label(
+                    {
+                        "tuning": str(
+                            (source_template or {}).get("tuning") or (source_template or {}).get("profile") or ""
+                        )
+                    },
+                    source_template,
+                ),
                 entry=f"{module_name}.{class_name}",
                 source="asv",
                 path=f"results/asv/{result.commit_hash}",
@@ -1053,8 +1101,9 @@ def _series_label(row: dict, used: set[str]) -> str:
     parts = [str(row.get("template") or row.get("entry") or "row")]
     if row.get("code_version"):
         parts.append(str(row["code_version"]))
-    if row.get("tuning"):
-        parts.append(str(row["tuning"]))
+    shown = visible_label(row)
+    if shown:
+        parts.append(shown)
     if row.get("source"):
         parts.append(str(row["source"]))
     commit = str(row.get("commit") or "")
@@ -1293,7 +1342,7 @@ def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
     """
     cells = [
         ("template", str(row.get("template") or row.get("entry") or "")),
-        ("label", str(row.get("tuning") or "")),
+        ("label", visible_label(row)),
         ("version", f"{row.get('code') or ''} {row.get('code_version') or ''}"),
         ("commit", str(row.get("commit") or "")[:12]),
         ("source", str(row.get("source") or "")),

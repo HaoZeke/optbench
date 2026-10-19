@@ -1,7 +1,7 @@
 id = "eon-svn/bh-tip4p10"
 engine = "eon"
 problem = "globalopt/tip4p10"
-code = "Eon svn"
+code = "EON (SVN r2549)"
 code_version = "r2549"
 commit = "r2549"
 algorithm = "Basin hopping"
@@ -12,11 +12,12 @@ kernel = "tip4p"
 cambridge = true
 cache_token = "cambridge-1"
 tuning = "lj38"
+label = "target_ratio 0.3"
 energy_kj_per_ev = 96.48533771638996
-ledger = "GMIN .aa is centre then angle-axis, six floats per molecule, rotated by optbench.tip4p.reference_sites with the GMIN angle-axis map. Both clients get one .con: H, H pairs then oxygens, the stride in tip4p_ccl.cpp computeHH_O_. The harness kernel is uncut rigid TIP4P in kJ/mol divided by e_charge*N_A/1000 from tip4p_unit_system.hpp. The Cambridge test multiplies that client energy back to kJ/mol. develop -Dwith_water=true routes potential tip4p to rgpot::TIP4PPot and is not this kernel."
+ledger = "GMIN .aa is centre then angle-axis, six floats per molecule, rotated by optbench.tip4p.reference_sites with the GMIN angle-axis map. EON (SVN r2549) and eOn (develop 7095b23ac17d49f434a5e08ccb072897ceca698e) each get the same .con: H, H pairs then oxygens, the stride in tip4p_ccl.cpp computeHH_O_. The harness kernel is uncut rigid TIP4P in kJ/mol divided by e_charge*N_A/1000 from tip4p_unit_system.hpp. The Cambridge test multiplies that client energy back to kJ/mol. eOn built with -Dwith_water=true routes potential tip4p to rgpot::TIP4PPot and is not this kernel. EON (SVN r2549) is a different code and is not rebuilt."
 asv_class = "EonSvnBhTip4p10"
 note = """
-Basin hopping with the eOn LJ38 settings. Temperature 8000, random_seed 314159, displacement 0.5, adjust_displacement true, target_ratio 0.3, steps 10000000, LBFGS converged_force 0.001, max_move 0.2, max_iterations 1000, lbfgs_memory 20. r2549 BasinHoppingJob.cpp accepts an uphill step with exp(-deltaE/(temperature*8.6173324e-5)); 8000 K is kT 0.689386592. develop ParametersOptions.h uses the same kB. The eOn basin-hopping page (https://henkelmanlab.org/eon/basin_hopping.html) cites Wales and Doye, J. Phys. Chem. A 101, 5111 (1997), and does not scale temperature or displacement with the number of atoms: displacement stays 0.5 and adjust_displacement tracks target_ratio. That page's target_ratio default is 0.5. This row keeps the LJ38 value 0.3. The pinned clients default the displacement distribution to uniform (r2549 Parameters.cpp, develop basin_hopping_options_t); the ini leaves it unset. significant_structure stays at its default true, the minimized geometry of White and Mayne, Chem. Phys. Lett. 289, 463 (1998), which that page cites. jump_steps stays 0, so jump_max does not move atoms. stop_energy is the Cambridge minimum plus 0.001, divided by e_charge*N_A/1000 from tip4p_unit_system.hpp, because the client energy is in eV. The scored kernel is the harness rigid uncut TIP4P. develop client/Potential.cpp routes potential tip4p to rgpot::TIP4PPot inside WITH_WATER, the -Dwith_water=true build; that flexible potential is not the scored kernel. The ledger line records the rigid angle-axis to Cartesian conversion shared by both clients. There is no wall-clock budget.
+Basin hopping with target_ratio 0.3. Temperature 8000, random_seed 314159, displacement 0.5, adjust_displacement true, target_ratio 0.3, steps 10000000, LBFGS converged_force 0.001, max_move 0.2, max_iterations 1000, lbfgs_memory 20. r2549 BasinHoppingJob.cpp accepts an uphill step with exp(-deltaE/(temperature*8.6173324e-5)); 8000 K is kT 0.689386592. develop ParametersOptions.h uses the same kB. The eOn basin-hopping page (https://henkelmanlab.org/eon/basin_hopping.html) cites Wales and Doye, J. Phys. Chem. A 101, 5111 (1997), and does not scale temperature or displacement with the number of atoms: displacement stays 0.5 and adjust_displacement tracks target_ratio. That page's target_ratio default is 0.5. This row keeps the LJ38 value 0.3. The pinned clients default the displacement distribution to uniform (r2549 Parameters.cpp, develop basin_hopping_options_t); the ini leaves it unset. significant_structure stays at its default true, the minimized geometry of White and Mayne, Chem. Phys. Lett. 289, 463 (1998), which that page cites. jump_steps stays 0, so jump_max does not move atoms. stop_energy is the Cambridge minimum plus 0.001, divided by e_charge*N_A/1000 from tip4p_unit_system.hpp, because the client energy is in eV. The scored kernel is the harness rigid uncut TIP4P. develop client/Potential.cpp routes potential tip4p to rgpot::TIP4PPot inside WITH_WATER, the -Dwith_water=true build; that flexible potential is not the scored kernel. The ledger line records the rigid angle-axis to Cartesian conversion shared by both clients. There is no wall-clock budget.
 """
 seeds = [314159]
 asv_full = false

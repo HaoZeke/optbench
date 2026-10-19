@@ -2,7 +2,7 @@ force_calls 539
 force_calls_min 173
 force_calls_max 3189
 nfailed 0
-code Eon svn
+code EON (SVN r2549)
 code_version r2549
 algorithm SD-twopoint
 template eon-svn/sd-twopoint

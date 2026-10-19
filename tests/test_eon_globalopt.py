@@ -138,6 +138,8 @@ def test_stock_templates_copy_the_lj38_basin_settings():
         )
         assert template["cambridge"] is True
         assert template["tuning"] == "lj38"
+        assert template["label"] == "target_ratio 0.3"
+        assert template["label"] != "lj38"
         assert template["cache_token"] == "cambridge-1"
         assert template.get("budget_seconds") in (None, 0)
         assert int(template["failure_cap"]) == force_cap(problem)
@@ -176,6 +178,7 @@ def test_lj75_ratio_row_restores_the_documented_acceptance_target():
         template = load_template(ROOT, name)
         stock = load_template(ROOT, f"{name.split('/')[0]}/bh-lj75")
         assert template["tuning"] == "target-ratio-0.5"
+        assert template["label"] == "target_ratio 0.5"
         assert template["cache_token"] == "cambridge-1-ratio-0.5"
         assert template["ini"]["Basin Hopping"]["target_ratio"] == 0.5
         assert template["ini"]["Main"]["temperature"] == stock["ini"]["Main"]["temperature"]
@@ -274,7 +277,11 @@ def test_tip4p_templates_share_the_ledger_and_the_ev_stop():
         ledgers.add(template["ledger"])
         assert template["kernel"] == "tip4p"
         assert template["input"]["select"] == "aa"
-        assert template["tuning"] == "lj38"
+        assert template["label"] == "target_ratio 0.3"
+        if name.startswith("eon-svn/"):
+            assert template["code"] == "EON (SVN r2549)"
+        else:
+            assert template["code"] == "eOn (develop 7095b23ac17d49f434a5e08ccb072897ceca698e)"
         assert template["ini"]["Potential"]["potential"] == "tip4p"
         assert float(template["energy_kj_per_ev"]) == KJ_PER_EV
         stop = float(template["ini"]["Basin Hopping"]["stop_energy"])
@@ -312,7 +319,8 @@ def test_complete_cap_row_is_ranked_with_par2(tmp_path):
     assert float(fields["par2_mean"]) == 2000000.0
     assert fields["n_cap"] == "200"
     assert fields["n"] == "200"
-    assert fields["label"] == "lj38"
+    assert fields["label"] == "target_ratio 0.3"
+    assert "lj38" not in fields["label"]
     short = rows[:16]
     summary = write_campaign(template, short, tmp_path / "short.dat")
     assert summary["partial"] is True

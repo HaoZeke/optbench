@@ -1,7 +1,7 @@
 id = "eon-svn/ts-pt-dimer"
 engine = "eon-client"
 problem = "tsopt/pt-island"
-code = "Eon svn"
+code = "EON (SVN r2549)"
 code_version = "r2549"
 commit = "r2549"
 algorithm = "LBFGS"
