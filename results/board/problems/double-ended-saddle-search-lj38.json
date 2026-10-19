@@ -18,6 +18,7 @@
         "cap": 43,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -63,6 +64,7 @@
         "cap": 44,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -110,6 +112,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -155,6 +158,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -200,6 +204,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -245,6 +250,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -290,6 +296,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -335,6 +342,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -380,6 +388,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -425,6 +434,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -470,6 +480,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -515,6 +526,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -874,6 +886,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -919,6 +932,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -964,6 +978,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -1009,6 +1024,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -1054,6 +1070,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -1098,7 +1115,8 @@
       "failures": {
         "cap": 2,
         "crash": 0,
-        "divergence": 1,
+        "divergence": 0,
+        "not_converged": 1,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -1144,6 +1162,7 @@
         "cap": 3,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -1189,6 +1208,7 @@
         "cap": 4,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -1234,6 +1254,7 @@
         "cap": 5,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -1279,6 +1300,7 @@
         "cap": 5,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -1323,7 +1345,8 @@
       "failures": {
         "cap": 4,
         "crash": 0,
-        "divergence": 3,
+        "divergence": 0,
+        "not_converged": 3,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -1366,9 +1389,10 @@
       "current": true,
       "entry": "rgsaddle-0.2.2-double-ended-saddle-search-lj38--rgsaddle-oci-neb-lbfgs",
       "failures": {
-        "cap": 7,
+        "cap": 4,
         "crash": 0,
-        "divergence": 0,
+        "divergence": 3,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -1413,7 +1437,8 @@
       "failures": {
         "cap": 4,
         "crash": 0,
-        "divergence": 3,
+        "divergence": 0,
+        "not_converged": 3,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -1458,7 +1483,8 @@
       "failures": {
         "cap": 5,
         "crash": 0,
-        "divergence": 3,
+        "divergence": 0,
+        "not_converged": 3,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -1504,6 +1530,7 @@
         "cap": 6,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -1549,6 +1576,7 @@
         "cap": 3,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -1594,6 +1622,7 @@
         "cap": 9,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -1639,6 +1668,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -1683,7 +1713,8 @@
       "failures": {
         "cap": 16,
         "crash": 0,
-        "divergence": 1,
+        "divergence": 0,
+        "not_converged": 1,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -1729,6 +1760,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -1774,6 +1806,7 @@
         "cap": 11,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -1818,7 +1851,8 @@
       "failures": {
         "cap": 12,
         "crash": 0,
-        "divergence": 1,
+        "divergence": 0,
+        "not_converged": 1,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -1861,9 +1895,10 @@
       "current": true,
       "entry": "rgsaddle-0.2.2-double-ended-saddle-search-lj38--rgsaddle-oci-neb",
       "failures": {
-        "cap": 13,
+        "cap": 12,
         "crash": 0,
-        "divergence": 0,
+        "divergence": 1,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -1908,7 +1943,8 @@
       "failures": {
         "cap": 13,
         "crash": 0,
-        "divergence": 1,
+        "divergence": 0,
+        "not_converged": 1,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -1953,7 +1989,8 @@
       "failures": {
         "cap": 15,
         "crash": 0,
-        "divergence": 1,
+        "divergence": 0,
+        "not_converged": 1,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -1998,7 +2035,8 @@
       "failures": {
         "cap": 17,
         "crash": 0,
-        "divergence": 7,
+        "divergence": 0,
+        "not_converged": 7,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -2044,6 +2082,7 @@
         "cap": 29,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -2089,6 +2128,7 @@
         "cap": 49,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -2134,6 +2174,7 @@
         "cap": 49,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -2179,6 +2220,7 @@
         "cap": 50,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -2223,7 +2265,8 @@
       "failures": {
         "cap": 25,
         "crash": 0,
-        "divergence": 25,
+        "divergence": 0,
+        "not_converged": 25,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -2268,7 +2311,8 @@
       "failures": {
         "cap": 7,
         "crash": 0,
-        "divergence": 43,
+        "divergence": 0,
+        "not_converged": 43,
         "wrong_stationary": 0
       },
       "full_n": 50,
@@ -2313,7 +2357,8 @@
       "failures": {
         "cap": 14,
         "crash": 0,
-        "divergence": 36,
+        "divergence": 0,
+        "not_converged": 36,
         "wrong_stationary": 0
       },
       "full_n": 50,
