@@ -7,10 +7,10 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>GeometryOptimization.jl</th><th>LAMMPS</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>TorchSim</th><th>geomeTRIC</th><th>CP2K</th><th>n2p2</th><th>Optax</th><th>PANNA</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>optking</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>GeometryOptimization.jl</th><th>LAMMPS</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>TorchSim</th><th>geomeTRIC</th><th>CP2K</th><th>n2p2</th><th>Optax</th><th>PANNA</th><th>jaxmd</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>optking</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="accelerated-md/aladatom">
    <th scope="row"><a href="#aladatom">Al adatom on Al(100) at 250 K</a></th>
-   <td data-code="eOn" data-template="eon/aladatom-akmc" data-par2="2.74292e+06"><span class="bench-score">2.74292e+06</span><a href="#aladatom-templates">eon/aladatom-akmc</a></td>
+   <td class="bench-score" data-code="eOn" data-template="eon/aladatom-akmc" data-par2="2.74292e+06">2.74292e+06<a href="#aladatom-templates">eon/aladatom-akmc</a></td>
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
@@ -30,6 +30,7 @@
    <td data-code="n2p2">—</td>
    <td data-code="Optax">—</td>
    <td data-code="PANNA">—</td>
+   <td data-code="jaxmd">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -41,7 +42,7 @@
    </tr>
    <tr data-problem="accelerated-md/standard_aladatom">
    <th scope="row"><a href="#standard_aladatom">Al adatom on Al(100) at 150 K</a></th>
-   <td data-code="eOn" data-template="eon/standard-aladatom-akmc" data-par2="2.74292e+06"><span class="bench-score">2.74292e+06</span><a href="#standard_aladatom-templates">eon/standard-aladatom-akmc</a></td>
+   <td class="bench-score" data-code="eOn" data-template="eon/standard-aladatom-akmc" data-par2="2.74292e+06">2.74292e+06<a href="#standard_aladatom-templates">eon/standard-aladatom-akmc</a></td>
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
@@ -61,6 +62,7 @@
    <td data-code="n2p2">—</td>
    <td data-code="Optax">—</td>
    <td data-code="PANNA">—</td>
+   <td data-code="jaxmd">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -93,12 +95,8 @@
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td data-field="template">eon/aladatom-akmc</td><td data-field="version">eOn 3.6.0</td><td data-field="commit">1d71c9445018</td><td data-field="source">campaign</td><td data-field="par2_mean">2.74292e+06</td><td data-field="success_rate">1</td><td data-field="wilson">0.438503–1</td><td data-field="median_calls">2.79404e+06</td><td data-field="mean_calls">2.74292e+06</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">3</td></tr>
    </tbody></table></div>
-   <h3>Partial</h3><ul>
-   <li>eon-client/amd-hyper eOn campaign n=1, result file sets partial true.</li>
-   <li>eon-client/amd-prd eOn campaign n=1, result file sets partial true.</li>
-   <li>eon-svn/amd-hyper Eon svn campaign n=1, result file sets partial true.</li>
-   <li>eon-svn/amd-prd Eon svn campaign n=1, result file sets partial true.</li>
-   </ul>
+   <h3>Partial</h3>
+   <p>eon-client/amd-hyper eOn campaign n=1, result file sets partial true. eon-client/amd-prd eOn campaign n=1, result file sets partial true. eon-svn/amd-hyper Eon svn campaign n=1, result file sets partial true. eon-svn/amd-prd Eon svn campaign n=1, result file sets partial true.</p>
    </details>
    </section><section class="bench bench-legacy-section" id="aladatom-legacy">
    <h3>Legacy 2014 archive</h3>

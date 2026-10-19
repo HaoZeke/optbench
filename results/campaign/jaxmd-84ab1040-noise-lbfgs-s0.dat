@@ -1,0 +1,40 @@
+# counter harness. One force call is one RgpotCounter.calculate entry.
+# FIRE and gradient descent are jax_md.minimize. L-BFGS is jaxopt.LBFGS or optax.lbfgs.
+# The potential is the harness potential. A rejected over-long L-BFGS trial is not a call.
+# v2 success is under the cap, at the problem stop, and Hessian index 0.
+# Energy and Kabsch RMSD are omitted: the problem file has no per-start reference.
+# LJ38 index removes the six rigid modes. A curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6).
+# jaxopt 0.8.5 LBFGS, history 10, zoom line search, max_stepsize 1, with the line search compiled. A trial whose largest per-atom move exceeds 0.2 is turned away before the harness potential runs, and the line search shortens it. The gradient tolerance checked after each accepted step is the problem force norm. The potential is the harness potential for this problem. jaxopt commit b12c2f3ddaa3ef71fac42d7e419adccb9dcc49a1. optax 0.2.8 commit 107e9ad20ca62bcbee1a8c016daab71c690a678c is the pinned neighbor. Gaussian force noise uses the problem seed, kappa, and clean-energy window. The Hessian is the clean force.
+force_calls 255
+force_calls_min 111
+force_calls_max 3021
+nfailed 1
+median 202
+code jaxmd
+code_version 0.2.29
+commit 84ab10407420fd91ad1c25be4ecd16ce1f54a75c
+jaxopt_version 0.8.5
+jaxopt_commit b12c2f3ddaa3ef71fac42d7e419adccb9dcc49a1
+optax_version 0.2.8
+optax_commit 107e9ad20ca62bcbee1a8c016daab71c690a678c
+algorithm LBFGS
+template jaxmd/noise-lbfgs-s0
+tuning default
+counter harness
+problem minimization/lj38-noise
+par2_mean 314.755
+wilson_low 0.991216985946
+wilson_high 0.998979216119
+par2_median 203
+par2_median_low 199
+par2_median_high 207
+v2_nfailed 3
+v2_successes 997
+n 1000
+n_cap 1
+n_wrong_stationary 2
+n_divergence 0
+n_crash 0
+energy_min -172.877735934
+energy_max -152.300286843
+sigma 0

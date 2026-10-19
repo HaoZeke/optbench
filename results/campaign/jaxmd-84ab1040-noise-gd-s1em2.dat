@@ -1,0 +1,40 @@
+# counter harness. One force call is one RgpotCounter.calculate entry.
+# FIRE and gradient descent are jax_md.minimize. L-BFGS is jaxopt.LBFGS or optax.lbfgs.
+# The potential is the harness potential. A rejected over-long L-BFGS trial is not a call.
+# v2 success is under the cap, at the problem stop, and Hessian index 0.
+# Energy and Kabsch RMSD are omitted: the problem file has no per-start reference.
+# LJ38 index removes the six rigid modes. A curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6).
+# JAX MD 0.2.29 gradient_descent. step_size is 0.001, the value in the JAX MD minimization notebooks. The library requires a step size. The shift scales a trial so the largest per-atom move is 0.2. The potential is the harness potential for this problem. The stop is the problem force norm and the budget is the force-call cap. Gaussian force noise uses the problem seed, kappa, and clean-energy window. The Hessian is the clean force.
+force_calls 2542
+force_calls_min 687
+force_calls_max 8182
+nfailed 182
+median 2286.5
+code jaxmd
+code_version 0.2.29
+commit 84ab10407420fd91ad1c25be4ecd16ce1f54a75c
+jaxopt_version 0.8.5
+jaxopt_commit b12c2f3ddaa3ef71fac42d7e419adccb9dcc49a1
+optax_version 0.2.8
+optax_commit 107e9ad20ca62bcbee1a8c016daab71c690a678c
+algorithm gradient descent
+template jaxmd/noise-gd-s1em2
+tuning default
+counter harness
+problem minimization/lj38-noise
+par2_mean 7806.525
+wilson_low 0.670876139083
+wilson_high 0.727593157523
+par2_median 3128
+par2_median_low 2944.5
+par2_median_high 3243.5
+v2_nfailed 300
+v2_successes 700
+n 1000
+n_cap 0
+n_wrong_stationary 118
+n_divergence 182
+n_crash 0
+energy_min -170.778084425
+energy_max -148.715552216
+sigma 0.01

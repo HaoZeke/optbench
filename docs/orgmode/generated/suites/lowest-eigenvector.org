@@ -7,21 +7,21 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>GeometryOptimization.jl</th><th>LAMMPS</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>TorchSim</th><th>geomeTRIC</th><th>CP2K</th><th>n2p2</th><th>Optax</th><th>PANNA</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>optking</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>GeometryOptimization.jl</th><th>LAMMPS</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>TorchSim</th><th>geomeTRIC</th><th>CP2K</th><th>n2p2</th><th>Optax</th><th>PANNA</th><th>jaxmd</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>optking</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="lowest-eigenvector/lj38">
    <th scope="row"><a href="#lj38">lj38</a></th>
-   <td data-code="eOn" data-template="eon-client/low-lj38-lanczos" data-par2="26.385"><span class="bench-score">26.385</span><a href="#lj38-templates">eon-client/low-lj38-lanczos</a></td>
-   <td data-code="Eon svn" data-template="eon-svn/low-lj38-lanczos" data-par2="26.385"><span class="bench-score">26.385</span><a href="#lj38-templates">eon-svn/low-lj38-lanczos</a></td>
+   <td class="bench-score" data-code="eOn" data-template="eon-client/low-lj38-lanczos" data-par2="26.385">26.385<a href="#lj38-templates">eon-client/low-lj38-lanczos</a></td>
+   <td class="bench-score" data-code="Eon svn" data-template="eon-svn/low-lj38-lanczos" data-par2="26.385">26.385<a href="#lj38-templates">eon-svn/low-lj38-lanczos</a></td>
    <td data-code="rgmin">—</td>
-   <td data-code="rgsaddle" data-template="rgsaddle/mode-lanczos" data-par2="26.12"><span class="bench-score">26.12</span><a href="#lj38-templates">rgsaddle/mode-lanczos</a></td>
+   <td class="bench-score" data-code="rgsaddle" data-template="rgsaddle/mode-lanczos" data-par2="26.12">26.12<a href="#lj38-templates">rgsaddle/mode-lanczos</a></td>
    <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="GMIN">—</td>
-   <td data-code="pele" data-template="pele/lj38-loweig-forward" data-par2="24.745"><span class="bench-score">24.745</span><a href="#lj38-templates">pele/lj38-loweig-forward</a></td>
+   <td class="bench-score" data-code="pele" data-template="pele/lj38-loweig-forward" data-par2="24.745">24.745<a href="#lj38-templates">pele/lj38-loweig-forward</a></td>
    <td data-code="GeometryOptimization.jl">—</td>
    <td data-code="LAMMPS">—</td>
-   <td data-code="pysisyphus" data-template="pysisyphus/lanczos-lj38" data-par2="4017.14"><span class="bench-score">4017.14</span><a href="#lj38-templates">pysisyphus/lanczos-lj38</a></td>
+   <td class="bench-score" data-code="pysisyphus" data-template="pysisyphus/lanczos-lj38" data-par2="4017.14">4017.14<a href="#lj38-templates">pysisyphus/lanczos-lj38</a></td>
    <td data-code="AIRSS">—</td>
    <td data-code="vc-SQNM">—</td>
    <td data-code="TorchSim">—</td>
@@ -30,14 +30,15 @@
    <td data-code="n2p2">—</td>
    <td data-code="Optax">—</td>
    <td data-code="PANNA">—</td>
-   <td data-code="artn" data-template="partn/mode-lj38" data-par2="2619.84"><span class="bench-score">2619.84</span><a href="#lj38-templates">partn/mode-lj38</a></td>
+   <td data-code="jaxmd">—</td>
+   <td class="bench-score" data-code="artn" data-template="partn/mode-lj38" data-par2="2619.84">2619.84<a href="#lj38-templates">partn/mode-lj38</a></td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
    <td data-code="optim">—</td>
    <td data-code="optking">—</td>
-   <td data-code="softsaddle" data-template="softsaddle/mode-lanczos-tuned" data-par2="34.73"><span class="bench-score">34.73</span><a href="#lj38-templates">softsaddle/mode-lanczos-tuned</a></td>
-   <td data-code="tsase" data-template="tsase/mode-lj38" data-par2="2420.61"><span class="bench-score">2420.61</span><a href="#lj38-templates">tsase/mode-lj38</a></td>
+   <td class="bench-score" data-code="softsaddle" data-template="softsaddle/mode-lanczos-tuned" data-par2="34.73">34.73<a href="#lj38-templates">softsaddle/mode-lanczos-tuned</a></td>
+   <td class="bench-score" data-code="tsase" data-template="tsase/mode-lj38" data-par2="2420.61">2420.61<a href="#lj38-templates">tsase/mode-lj38</a></td>
    </tr>
    </tbody></table></div></section><section class="bench" id="lj38" data-problem="lowest-eigenvector/lj38">
    <h2>lj38</h2>
@@ -83,15 +84,8 @@
    <tr><td data-field="template">softsaddle/mode-lanczos</td><td data-field="version">softsaddle 2019.04</td><td data-field="commit">5a00aeede06f</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">18700.6</td><td data-field="success_rate">0.065</td><td data-field="wilson">0.0383764–0.108019</td><td data-field="median_calls">19</td><td data-field="mean_calls">18.91</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 187, wrong_stationary 0</td><td data-field="n">200</td></tr>
    <tr><td data-field="template">softsaddle/mode-davidson</td><td data-field="version">softsaddle 2019.04</td><td data-field="commit">5a00aeede06f</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">18925.6</td><td data-field="success_rate">0.055</td><td data-field="wilson">0.0309853–0.095787</td><td data-field="median_calls">695</td><td data-field="mean_calls">696.475</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 189, wrong_stationary 0</td><td data-field="n">200</td></tr>
    </tbody></table></div>
-   <h3>Partial</h3><ul>
-   <li>optim/rr-loweig optim campaign n=200, does not reproduce the 2014 archive.</li>
-   <li>eon/develop-low-lj38-dimer eOn asv n=1, smoke run; scored 1 of 200 starts.</li>
-   <li>eon/develop-low-lj38-lanczos eOn asv n=1, smoke run; scored 1 of 200 starts.</li>
-   <li>optim/rr-loweig optim asv n=1, smoke run; scored 1 of 200 starts.</li>
-   <li>pele/lj38-loweig pele asv n=1, smoke run; scored 1 of 200 starts.</li>
-   <li>pele/lj38-loweig-central pele asv n=1, smoke run; scored 1 of 200 starts.</li>
-   <li>pele/lj38-loweig-forward pele asv n=1, smoke run; scored 1 of 200 starts.</li>
-   </ul>
+   <h3>Partial</h3>
+   <p>optim/rr-loweig optim campaign n=200, does not reproduce the 2014 archive. eon/develop-low-lj38-dimer eOn asv n=1, smoke run; scored 1 of 200 starts. eon/develop-low-lj38-lanczos eOn asv n=1, smoke run; scored 1 of 200 starts. optim/rr-loweig optim asv n=1, smoke run; scored 1 of 200 starts. pele/lj38-loweig pele asv n=1, smoke run; scored 1 of 200 starts. pele/lj38-loweig-central pele asv n=1, smoke run; scored 1 of 200 starts. pele/lj38-loweig-forward pele asv n=1, smoke run; scored 1 of 200 starts.</p>
    </details>
    </section><section class="bench bench-legacy-section" id="lj38-legacy">
    <h3>Legacy 2014 archive</h3>

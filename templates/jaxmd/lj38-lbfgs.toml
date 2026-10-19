@@ -1,0 +1,14 @@
+id = "jaxmd/lj38-lbfgs"
+engine = "jaxmd"
+problem = "minimization/lj38"
+code = "jaxmd"
+code_version = "0.2.29"
+commit = "84ab10407420fd91ad1c25be4ecd16ce1f54a75c"
+algorithm = "LBFGS"
+tuning = "default"
+note = "jaxopt 0.8.5 LBFGS, history 10, zoom line search, max_stepsize 1, with the line search compiled. A trial whose largest per-atom move exceeds 0.2 is turned away before the harness potential runs, and the line search shortens it. The gradient tolerance checked after each accepted step is the problem force norm. The potential is the harness potential for this problem. jaxopt commit b12c2f3ddaa3ef71fac42d7e419adccb9dcc49a1. optax 0.2.8 commit 107e9ad20ca62bcbee1a8c016daab71c690a678c is the pinned neighbor."
+
+[jaxmd]
+method = "lbfgs"
+maxstep = 0.2
+history_size = 10

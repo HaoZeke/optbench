@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>GeometryOptimization.jl</th><th>LAMMPS</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>TorchSim</th><th>geomeTRIC</th><th>CP2K</th><th>n2p2</th><th>Optax</th><th>PANNA</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>optking</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>GeometryOptimization.jl</th><th>LAMMPS</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>TorchSim</th><th>geomeTRIC</th><th>CP2K</th><th>n2p2</th><th>Optax</th><th>PANNA</th><th>jaxmd</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>optking</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="mlopt/C2H4">
    <th scope="row"><a href="#C2H4">C2H4</a></th>
    <td data-code="eOn">—</td>
@@ -27,9 +27,10 @@
    <td data-code="TorchSim">—</td>
    <td data-code="geomeTRIC">—</td>
    <td data-code="CP2K">—</td>
-   <td data-code="n2p2" data-template="n2p2/c2h4-kalman" data-par2="16021.6"><span class="bench-score">16021.6</span><a href="#C2H4-templates">n2p2/c2h4-kalman</a></td>
-   <td data-code="Optax" data-template="optax/c2h4-lbfgs" data-par2="336.84"><span class="bench-score">336.84</span><a href="#C2H4-templates">optax/c2h4-lbfgs</a></td>
-   <td data-code="PANNA" data-template="panna/c2h4-tf-adam-energy" data-par2="11485.1"><span class="bench-score">11485.1</span><a href="#C2H4-templates">panna/c2h4-tf-adam-energy</a></td>
+   <td class="bench-score" data-code="n2p2" data-template="n2p2/c2h4-kalman" data-par2="16021.6">16021.6<a href="#C2H4-templates">n2p2/c2h4-kalman</a></td>
+   <td class="bench-score" data-code="Optax" data-template="optax/c2h4-lbfgs" data-par2="336.84">336.84<a href="#C2H4-templates">optax/c2h4-lbfgs</a></td>
+   <td class="bench-score" data-code="PANNA" data-template="panna/c2h4-tf-adam-energy" data-par2="11485.1">11485.1<a href="#C2H4-templates">panna/c2h4-tf-adam-energy</a></td>
+   <td data-code="jaxmd">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -58,9 +59,10 @@
    <td data-code="TorchSim">—</td>
    <td data-code="geomeTRIC">—</td>
    <td data-code="CP2K">—</td>
-   <td data-code="n2p2" data-template="n2p2/emt-pt38-kalman" data-par2="31.5"><span class="bench-score">31.5</span><a href="#emt-pt38-templates">n2p2/emt-pt38-kalman</a></td>
-   <td data-code="Optax" data-template="optax/emt-pt38-lbfgs" data-par2="54.98"><span class="bench-score">54.98</span><a href="#emt-pt38-templates">optax/emt-pt38-lbfgs</a></td>
-   <td data-code="PANNA" data-template="panna/emt-pt38-tf-adam-energy" data-par2="900.64"><span class="bench-score">900.64</span><a href="#emt-pt38-templates">panna/emt-pt38-tf-adam-energy</a></td>
+   <td class="bench-score" data-code="n2p2" data-template="n2p2/emt-pt38-kalman" data-par2="31.5">31.5<a href="#emt-pt38-templates">n2p2/emt-pt38-kalman</a></td>
+   <td class="bench-score" data-code="Optax" data-template="optax/emt-pt38-lbfgs" data-par2="54.98">54.98<a href="#emt-pt38-templates">optax/emt-pt38-lbfgs</a></td>
+   <td class="bench-score" data-code="PANNA" data-template="panna/emt-pt38-tf-adam-energy" data-par2="900.64">900.64<a href="#emt-pt38-templates">panna/emt-pt38-tf-adam-energy</a></td>
+   <td data-code="jaxmd">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -103,15 +105,8 @@
    <tr><td data-field="template">panna/c2h4-jax-adam-force</td><td data-field="version">PANNA 2.1.0</td><td data-field="commit">132a2df66259</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">58803.4</td><td data-field="success_rate">0.02</td><td data-field="wilson">0.00353926–0.104954</td><td data-field="median_calls">30000</td><td data-field="mean_calls">29403.4</td><td data-field="failures">crash 0, divergence 0, cap 49, not_converged 0, wrong_stationary 0</td><td data-field="n">50</td></tr>
    <tr><td data-field="template">panna/c2h4-tf-adam-force</td><td data-field="version">PANNA 2.1.0</td><td data-field="commit">132a2df66259</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">58803.4</td><td data-field="success_rate">0.02</td><td data-field="wilson">0.00353926–0.104954</td><td data-field="median_calls">30000</td><td data-field="mean_calls">29403.4</td><td data-field="failures">crash 0, divergence 0, cap 49, not_converged 0, wrong_stationary 0</td><td data-field="n">50</td></tr>
    </tbody></table></div>
-   <h3>Partial</h3><ul>
-   <li>optax/c2h4-adam Optax asv n=1, smoke run; scored 1 of 50 starts.</li>
-   <li>optax/c2h4-adam-force Optax asv n=1, smoke run; scored 1 of 50 starts.</li>
-   <li>optax/c2h4-lbfgs Optax asv n=1, smoke run; scored 1 of 50 starts.</li>
-   <li>optax/c2h4-lbfgs-force Optax asv n=1, smoke run; scored 1 of 50 starts.</li>
-   <li>optax/c2h4-rprop Optax asv n=1, smoke run; scored 1 of 50 starts.</li>
-   <li>optax/c2h4-rprop-force Optax asv n=1, smoke run; scored 1 of 50 starts.</li>
-   <li>n2p2/c2h4-kalman n2p2 asv n=1, smoke run; scored 1 of 50 starts.</li>
-   </ul>
+   <h3>Partial</h3>
+   <p>optax/c2h4-adam Optax asv n=1, smoke run; scored 1 of 50 starts. optax/c2h4-adam-force Optax asv n=1, smoke run; scored 1 of 50 starts. optax/c2h4-lbfgs Optax asv n=1, smoke run; scored 1 of 50 starts. optax/c2h4-lbfgs-force Optax asv n=1, smoke run; scored 1 of 50 starts. optax/c2h4-rprop Optax asv n=1, smoke run; scored 1 of 50 starts. optax/c2h4-rprop-force Optax asv n=1, smoke run; scored 1 of 50 starts. n2p2/c2h4-kalman n2p2 asv n=1, smoke run; scored 1 of 50 starts.</p>
    </details>
    </section><section class="bench bench-legacy-section" id="C2H4-legacy">
    <h3>Legacy 2014 archive</h3>
@@ -253,15 +248,8 @@
    <tr><td data-field="template">panna/emt-pt38-tf-adam-force</td><td data-field="version">PANNA 2.1.0</td><td data-field="commit">132a2df66259</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">50527.3</td><td data-field="success_rate">0.2</td><td data-field="wilson">0.112438–0.330371</td><td data-field="median_calls">30000</td><td data-field="mean_calls">26527.3</td><td data-field="failures">crash 0, divergence 0, cap 40, not_converged 0, wrong_stationary 0</td><td data-field="n">50</td></tr>
    <tr><td data-field="template">panna/emt-pt38-jax-adam-force</td><td data-field="version">PANNA 2.1.0</td><td data-field="commit">132a2df66259</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">50668.3</td><td data-field="success_rate">0.2</td><td data-field="wilson">0.112438–0.330371</td><td data-field="median_calls">30000</td><td data-field="mean_calls">26668.3</td><td data-field="failures">crash 0, divergence 0, cap 40, not_converged 0, wrong_stationary 0</td><td data-field="n">50</td></tr>
    </tbody></table></div>
-   <h3>Partial</h3><ul>
-   <li>optax/emt-pt38-adam Optax asv n=1, smoke run; scored 1 of 50 starts.</li>
-   <li>optax/emt-pt38-adam-force Optax asv n=1, smoke run; scored 1 of 50 starts.</li>
-   <li>optax/emt-pt38-lbfgs Optax asv n=1, smoke run; scored 1 of 50 starts.</li>
-   <li>optax/emt-pt38-lbfgs-force Optax asv n=1, smoke run; scored 1 of 50 starts.</li>
-   <li>optax/emt-pt38-rprop Optax asv n=1, smoke run; scored 1 of 50 starts.</li>
-   <li>optax/emt-pt38-rprop-force Optax asv n=1, smoke run; scored 1 of 50 starts.</li>
-   <li>n2p2/emt-pt38-kalman n2p2 asv n=1, smoke run; scored 1 of 50 starts.</li>
-   </ul>
+   <h3>Partial</h3>
+   <p>optax/emt-pt38-adam Optax asv n=1, smoke run; scored 1 of 50 starts. optax/emt-pt38-adam-force Optax asv n=1, smoke run; scored 1 of 50 starts. optax/emt-pt38-lbfgs Optax asv n=1, smoke run; scored 1 of 50 starts. optax/emt-pt38-lbfgs-force Optax asv n=1, smoke run; scored 1 of 50 starts. optax/emt-pt38-rprop Optax asv n=1, smoke run; scored 1 of 50 starts. optax/emt-pt38-rprop-force Optax asv n=1, smoke run; scored 1 of 50 starts. n2p2/emt-pt38-kalman n2p2 asv n=1, smoke run; scored 1 of 50 starts.</p>
    </details>
    </section><section class="bench bench-legacy-section" id="emt-pt38-legacy">
    <h3>Legacy 2014 archive</h3>

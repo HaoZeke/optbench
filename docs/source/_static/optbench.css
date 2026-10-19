@@ -170,9 +170,13 @@
 }
 
 .bench-score {
-  display: block;
   font-variant-numeric: tabular-nums;
   font-weight: 650;
+}
+
+.bench-score a {
+  display: block;
+  font-weight: 450;
 }
 
 .bench-details {

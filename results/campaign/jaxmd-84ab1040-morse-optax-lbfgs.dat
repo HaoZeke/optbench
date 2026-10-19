@@ -1,0 +1,38 @@
+# counter harness. One force call is one RgpotCounter.calculate entry.
+# FIRE and gradient descent are jax_md.minimize. L-BFGS is jaxopt.LBFGS or optax.lbfgs.
+# The potential is the harness potential. A rejected over-long L-BFGS trial is not a call.
+# v2 success is under the cap, at the problem stop, and Hessian index 0.
+# Energy and Kabsch RMSD are omitted: the problem file has no per-start reference.
+# optax 0.2.8 lbfgs, memory 10, zoom line search. A trial whose largest per-atom move exceeds 0.2 is turned away before the harness potential runs, and the line search shortens it. The gradient tolerance checked after each accepted step is the problem force norm. The potential is the harness potential for this problem. optax commit 107e9ad20ca62bcbee1a8c016daab71c690a678c. jaxopt 0.8.5 commit b12c2f3ddaa3ef71fac42d7e419adccb9dcc49a1 is the pinned neighbor.
+force_calls 27
+force_calls_min 21
+force_calls_max 32
+nfailed 0
+median 28
+code jaxmd
+code_version 0.2.29
+commit 84ab10407420fd91ad1c25be4ecd16ce1f54a75c
+jaxopt_version 0.8.5
+jaxopt_commit b12c2f3ddaa3ef71fac42d7e419adccb9dcc49a1
+optax_version 0.2.8
+optax_commit 107e9ad20ca62bcbee1a8c016daab71c690a678c
+algorithm Optax LBFGS
+template jaxmd/morse-optax-lbfgs
+tuning default
+counter harness
+problem minimization/morse-bulk
+par2_mean 27.35
+wilson_low 0.963006501793
+wilson_high 1
+par2_median 28
+par2_median_low 27
+par2_median_high 29
+v2_nfailed 0
+v2_successes 100
+n 100
+n_cap 0
+n_wrong_stationary 0
+n_divergence 0
+n_crash 0
+energy_min -1396.17323766
+energy_max -1396.17323751

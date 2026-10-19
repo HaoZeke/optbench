@@ -1,0 +1,18 @@
+id = "jaxmd/noise-optax-lbfgs-s1em2"
+engine = "jaxmd"
+problem = "minimization/lj38-noise"
+code = "jaxmd"
+code_version = "0.2.29"
+commit = "84ab10407420fd91ad1c25be4ecd16ce1f54a75c"
+algorithm = "Optax LBFGS"
+tuning = "default"
+note = "optax 0.2.8 lbfgs, memory 10, zoom line search. A trial whose largest per-atom move exceeds 0.2 is turned away before the harness potential runs, and the line search shortens it. The gradient tolerance checked after each accepted step is the problem force norm. The potential is the harness potential for this problem. optax commit 107e9ad20ca62bcbee1a8c016daab71c690a678c. jaxopt 0.8.5 commit b12c2f3ddaa3ef71fac42d7e419adccb9dcc49a1 is the pinned neighbor. Gaussian force noise uses the problem seed, kappa, and clean-energy window. The Hessian is the clean force."
+
+[jaxmd]
+method = "optax-lbfgs"
+maxstep = 0.2
+memory_size = 10
+
+[noise]
+sigma = 0.01
+seed = 20261016
