@@ -1,0 +1,16 @@
+# counter harness pair computes summed across replicas
+# force_calls are the band total and are not divided by the image count
+# the mean is round-half-even over successes
+problem neb/Pt-heptamer
+successes 0
+nfailed 13
+n 13
+transition_states 0
+code LAMMPS
+code_version 30 Sep 2026
+commit 8de817dd79bfe4525d5d39246a212d833e6dee07
+algorithm CI-NEB-quickmin
+template lammpsneb/ci-quickmin-tuned
+tuning tuned
+counter harness
+images 3
