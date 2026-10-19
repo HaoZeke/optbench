@@ -173,6 +173,14 @@ commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
 committed = "2026-10-18"
 note = "Wales group GMIN from svn.tar.bz2. The pin is the tarball sha256. The tree has no git revision. codes/gmin/build.sh compiles it with MPI and links codes/gmin/optbench_pot.F90. Basin-hopping calls optbench.potentials.lennard_jones through that hook. The scored binary is this tarball plus that hook."
 
+[[template]]
+id = "ase-globalopt/lj75-basinhopping"
+code = "ase"
+problem = "globalopt/lj75"
+profile = "default"
+task = "basin-hopping"
+ranked = true
+
 # generated ASE and Sella templates
 
 [[template]]
