@@ -190,7 +190,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="minimization-lj38-ase-lbfgslinesearch">
    <td class="num">14</td>
-   <td class="text">ase-lbfgslinesearch</td>
+   <td class="text">ase-lbfgslinesearch · not reproduced</td>
    <td class="text">ASE 3.6.0</td>
    <td class="num">417</td>
    <td class="num">862</td>

@@ -475,15 +475,15 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 5, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
-   <tr data-problem="minimization/lj38" data-template="ase/lj38-lbfgs-tuned">
+   <tr data-problem="minimization/lj38" data-template="ase/lj38-lbfgslinesearch-default">
    <td>Lennard-Jones 38 clusters</td>
-   <td data-field="template">ase/lj38-lbfgs-tuned</td>
+   <td data-field="template">ase/lj38-lbfgslinesearch-default</td>
    <td data-field="version">ASE 3.29.0</td>
    <td data-field="commit">f27c0005ae6a</td>
-   <td data-field="par2_mean">395.645</td>
-   <td data-field="mean_calls">375.645</td>
-   <td data-field="median_calls">319</td>
-   <td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 0</td>
+   <td data-field="par2_mean">392.773</td>
+   <td data-field="mean_calls">333.794</td>
+   <td data-field="median_calls">322</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 3</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38-noise" data-template="noise/ase-lbfgs-s0">
