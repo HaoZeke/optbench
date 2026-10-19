@@ -18,50 +18,6 @@ from optbench.surfaces import lennard_jones, morse_smooth_linear, read_con
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_endpoint_archive_stores_both_minima(tmp_path):
-    from optbench.connection import geometry_status, relink
-    from optbench.rgsaddle_minmode import (
-        _append_endpoint_slot,
-        _inline_endpoint_lists,
-        load_stored_endpoints,
-        write_endpoint_archive,
-    )
-
-    raw = tmp_path / "row.endpoints.raw"
-    minimum = np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0]])
-    plus = minimum.copy()
-    plus[0, 0] = 0.05
-    minus = minimum.copy()
-    minus[0, 0] = 2.71
-    _append_endpoint_slot(raw, None, None, None, 2)
-    _append_endpoint_slot(raw, minimum, plus, minus, 2)
-    archive = tmp_path / "row.endpoints.npz"
-    cell = np.array([19.2088, 19.0118, 30.0])
-    write_endpoint_archive(raw, archive, cell, 2, 2)
-    assert not raw.exists()
-    assert load_stored_endpoints(archive, 0) is None
-    loaded = load_stored_endpoints(archive, 1)
-    assert loaded is not None
-    record = {
-        "success": False,
-        "failure": "divergence",
-        "reasons": ["not_connected"],
-        "endpoint_index": 1,
-        "minimum": loaded["minimum"].tolist(),
-        "endpoint_plus": loaded["endpoint_plus"].tolist(),
-        "endpoint_minus": loaded["endpoint_minus"].tolist(),
-    }
-    assert geometry_status(record) == "stored"
-    assert relink(record, loaded["cell"]) == "updated"
-    assert record["success"] is True
-    assert record["reasons"] == []
-    copied = [{"endpoint_index": 1, "force_calls": 3}]
-    assert _inline_endpoint_lists(copied, archive, limit=10) is False
-    assert "minimum" not in copied[0]
-    assert _inline_endpoint_lists(copied, archive) is True
-    assert geometry_status(copied[0]) == "stored"
-
-
 def test_island_saddle_success_uses_the_eon_per_atom_maximum():
     problem = resolve_problem(ROOT, "saddle-search/pt-island")
     success = problem["scoring"]["v2"]["success"]

@@ -250,11 +250,25 @@ Two minima are the same when that maximum is strictly below 0.1 Å. A
 search is connected when exactly one endpoint matches. `rmsd_connect` 0.5
 stays the saddle-novelty test and is not this link.
 
-No saddle-search/pt-island row stores `minimum`, `endpoint_plus`, and
-`endpoint_minus`. RMSD scalars do not determine the per-atom maximum, so
-nothing was rewritten and no campaign was rerun. The new connected count
-and the new PAR-2 are the stored values. `pykmc/lattice` writes nothing,
-so there is no pyKMC row to rescore. The MATLAB smoke in
+A saddle-search campaign stores both endpoint minima beside the starts
+file. `<stem>.endpoints.npz` holds float32 free-atom coordinates for the
+minimized reactant and the two endpoints, keys `reactant`, `plus`, and
+`minus`, in `free_index` order, with the orthorhombic cell lengths. A
+search that stops before those minimizations has status `not_minimized`
+and NaN endpoint rows. `optbench check` rejects a `saddle-search/` starts
+file whose sha256 is absent from `oracle/saddle_endpoint_legacy.txt` when
+that archive is missing or does not match the records. The names in that
+file are the campaigns scored before the coordinates were stored.
+Replacing one of those files drops the exemption. The archive stays in
+the campaign directory, outside the HTML tables.
+
+The eight rgsaddle saddle-search/pt-island templates were rerun at
+`max_searches` 20000 with the stock ini. The old connected count is the
+Cartesian RMSD link. The new count is this per-atom maximum, and it also
+requires a novel saddle (`rmsd_connect` 0.5) and a barrier below 1.5 eV.
+Rows other than those eight still have no endpoint coordinates, so their
+new columns repeat the stored scores. `pykmc/lattice` writes nothing, so
+there is no pyKMC row to rescore. The MATLAB smoke in
 `softsaddle/entry.toml` records two searches and does not store endpoint
 coordinates.
 
@@ -262,14 +276,14 @@ coordinates.
 | --- | --- | --- | --- | --- | --- |
 | sella/pt-island-search-default, asv n=16 | absent (success track only) | 12/16 | 12/16 | 5201.625 | 5201.625 |
 | sella/pt-island-search-tuned, asv n=16 | absent (success track only) | 11/16 | 11/16 | 6420.125 | 6420.125 |
-| rgsaddle/saddle-dimer-rotskip-tuned | absent; RMSD scalars on 17719 of 20000 | 2/20000 | 2/20000 | 10127.05255 | 10127.05255 |
-| rgsaddle/saddle-dimer-fire | absent; no RMSD scalars | 0/20000 | 0/20000 | 10128 | 10128 |
-| rgsaddle/saddle-dimer-fire-tuned | absent; RMSD scalars on 9 of 20000 | 0/20000 | 0/20000 | 10128 | 10128 |
-| rgsaddle/saddle-dimer-lbfgs | absent; no RMSD scalars | 0/20000 | 0/20000 | 10128 | 10128 |
-| rgsaddle/saddle-dimer-lbfgs-tuned | absent; RMSD scalars on 19957 of 20000 | 0/20000 | 0/20000 | 10128 | 10128 |
-| rgsaddle/saddle-dimer-rotskip | absent; RMSD scalars on 19718 of 20000 | 0/20000 | 0/20000 | 10128 | 10128 |
-| rgsaddle/saddle-lanczos | absent; RMSD scalars on 4068 of 20000 | 0/20000 | 0/20000 | 10128 | 10128 |
-| rgsaddle/saddle-lanczos-tuned | absent; RMSD scalars on 13743 of 20000 | 0/20000 | 0/20000 | 10128 | 10128 |
+| rgsaddle/saddle-dimer-rotskip-tuned | npz, 17719 of 20000 minimized | 2/20000 | 0/20000 | 10127.05255 | 10128.0 |
+| rgsaddle/saddle-dimer-fire | npz, 0 of 20000 minimized | 0/20000 | 0/20000 | 10128.0 | 10128.0 |
+| rgsaddle/saddle-dimer-fire-tuned | npz, 9 of 20000 minimized | 0/20000 | 1/20000 | 10128.0 | 10127.5482 |
+| rgsaddle/saddle-dimer-lbfgs | npz, 0 of 20000 minimized | 0/20000 | 0/20000 | 10128.0 | 10128.0 |
+| rgsaddle/saddle-dimer-lbfgs-tuned | npz, 19957 of 20000 minimized | 0/20000 | 1/20000 | 10128.0 | 10127.53905 |
+| rgsaddle/saddle-dimer-rotskip | npz, 19718 of 20000 minimized | 0/20000 | 1/20000 | 10128.0 | 10127.5341 |
+| rgsaddle/saddle-lanczos | npz, 4068 of 20000 minimized | 0/20000 | 1/20000 | 10128.0 | 10127.54805 |
+| rgsaddle/saddle-lanczos-tuned | npz, 13743 of 20000 minimized | 0/20000 | 1/20000 | 10128.0 | 10127.5433 |
 | partn/saddle-pt | absent; `geometry` is `tau_sad`; RMSD on 187 of 200 | 1/200 | 1/200 | 11944.625 | 11944.625 |
 | ase/dimer-pt-island-default, campaign n=16 | absent | 16/16 | 16/16 | 1118.0625 | 1118.0625 |
 | ase/dimer-pt-island-tuned, campaign n=16 | absent | 16/16 | 16/16 | 915.4375 | 915.4375 |
@@ -299,6 +313,45 @@ coordinates.
 | archive adaptive_HSphere-lbfgs-davidson-sm50 | absent | fraction 0.8 | fraction 0.8 | not applied | not applied |
 | archive adaptive_HSphere-lbfgs-lanczos-sm0 | absent | fraction 0.9 | fraction 0.9 | not applied | not applied |
 | archive adaptive_HSphere-lbfgs-lanczos-sm50 | absent | fraction 0.9 | fraction 0.9 | not applied | not applied |
+
+The archived eOn dimer fraction is 0.746017 over a mean of 11366.8
+searches (`archive/entries/saddle-search/pt-island/eon-dimer`, Eon
+r2205, 15 Jul 2014). That fraction counts searches whose result is not
+`Not Connected`, and the run stops at 27 unique saddles under 1.5 eV.
+The rgsaddle `fraction_connected` is the novel linked count divided by
+20000: 0.0 for rotation-skip tuned, FIRE, and dimer L-BFGS, and 5e-05
+for the other five. PAR-2 stays on the cap of 5064 because the goal of
+27 novel linked saddles is missed, so one success moves the mean by a
+fraction of a call.
+
+The stock templates displace one atom from `0,1,2,3,4,5,6` by 0.1 Å.
+The archived `config.ini` uses that magnitude and that atom list and
+also sets `displace_radius` 3.3. The templates were left as they are.
+Plain FIRE stops on `cap, force_norm` for 19999 of 20000 searches and
+on `force_norm` for the other one. Plain dimer L-BFGS stops on
+`cap, force_norm` for all 20000. Those searches are `not_minimized`.
+Every search that did minimize both endpoints has
+`endpoint_plus_converged` and `endpoint_minus_converged` set.
+
+Where an index-1 saddle is reached, the r2205 test often passes.
+Dimer L-BFGS tuned has exactly one endpoint under 0.1 Å on 19957 of
+20000 searches, Lanczos tuned on 13743, rotation-skip on 6680,
+rotation-skip tuned on 5770, Lanczos on 4068, and FIRE tuned on 9.
+Rotation-skip also has 13038 searches with both endpoints beyond 0.1 Å,
+and rotation-skip tuned has 11949. The campaign still records one
+connected saddle, or zero, because `rmsd_connect` 0.5 marks later
+saddles `duplicate`. Dimer L-BFGS tuned finds that saddle on search 1
+(barrier 0.6010046083151792, per-atom maxima 1.5925995616268107 Å and
+0.00016677904772923694 Å) and marks 19956 later linked searches
+duplicate. The previous RMSD link called search 1 `not_connected`:
+both endpoint RMSDs, 0.3179387990639215 and 4.1966888266974993e-05, sit
+under 0.5. Rotation-skip tuned loses the two old successes. Search 20
+(barrier 1.2234864465096962, maxima 4.851937742987177 Å and
+3.242442187908222 Å) and search 51 (barrier 0.9987072640535644, maxima
+4.175094751233704 Å and 1.5927219206825742 Å) both minimized and are
+`not_connected` under the 0.1 Å maximum. Its 3586 one-match searches
+under 1.5 eV are duplicates, and its 762 novel saddles miss the link
+or the barrier.
 
 Sella and ASE successes are order-1 convergence, not this endpoint link.
 The eOn client, eOn SVN, eOn 3.5.0, and archive fractions are those codes'

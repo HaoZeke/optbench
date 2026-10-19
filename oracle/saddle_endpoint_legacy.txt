@@ -1,0 +1,20 @@
+# sha256 of a saddle-search starts file scored before endpoint minima were stored.
+# A replaced file has a new hash and must carry <stem>.endpoints.npz.
+# This list is closed.
+artn-1.1.0-saddle-search-pt-island--partn-saddle-pt.starts.jsonl c8103aae6acfd0b6e87ee5852c8f1726e10b55bdd59df21aa169dcebf73acd37
+ase-3.29.0-dimer-pt-island-default.starts.jsonl 371c9fabcf18c8e01b5ffcf2582900a161486e16032f5a6569d02d30626b61e6
+ase-3.29.0-dimer-pt-island-tuned.starts.jsonl 74619e9ffeb68c2f507c52f3a712f186398a13df8d0280fced025746ee43e229
+eon-client-saddle-pt-dimer.starts 3270239b10ba913b8a2c47a11304d8b78a627bd7896fda54e2f5815dabcd8880
+eon-client-saddle-pt-lanczos.starts be059edd363692a0b93c9bd1717a53f95cab7204cb4322ba7922a1cfa272a83d
+eon-client-saddle-pt-md.starts 264173306a30bdadb5b83e725af251ace66bd6d9f9bb3d3f0b0f1c816db34e73
+eon-svn-saddle-pt-dimer-bounded.starts 9e073bc2bcb69b95292c43f93b731f1d1af98d050717f06e813479dbcbee633b
+eon-svn-saddle-pt-lanczos-bounded.starts 6f32643d113390f7c85a6fecad2b4aab6367ecf635daf303145509f89b857b2d
+eon-svn-saddle-pt-md.starts a8f2faf85c8d744149e21eca10141f6481de3921fdabc88ee248521137bb2ed2
+rgsaddle-0.2.2-saddle-dimer-fire-tuned.starts.jsonl 70daed12e125c97c7e2d9fcc880e4dd235df28175610af999557323af5b15549
+rgsaddle-0.2.2-saddle-dimer-fire.starts.jsonl 171e611b75cf675c34cea983fdc7b5b68f62868726fc1e89b9645d6ee54b7c7d
+rgsaddle-0.2.2-saddle-dimer-lbfgs-tuned.starts.jsonl bae2720d36e83713957d1b0b0cb63b0b7e6e9658740a1ef12e3275e54a6e1ccf
+rgsaddle-0.2.2-saddle-dimer-lbfgs.starts.jsonl 5249aa4a13f0f46eb3e33c436e42327cd9a4cc8df6affdaa4d497985592784d8
+rgsaddle-0.2.2-saddle-dimer-rotskip-tuned.starts.jsonl d289748ce6b1125ed4465793c7db00a4ec2b6c680c4b89bc3c108e0f724f3cfb
+rgsaddle-0.2.2-saddle-dimer-rotskip.starts.jsonl 3bc18d9ac296f4a176623c2ed416e6a234a326a0a22b2ed6fe01a446f4ce1d85
+rgsaddle-0.2.2-saddle-lanczos-tuned.starts.jsonl 43989f34b2e4d1d1dbd1f1134d78835bfd4ff6f23431c77df6724b8ab3ed4222
+rgsaddle-0.2.2-saddle-lanczos.starts.jsonl 7dd9bafff619456dcc35f04d803c4f1421dbd5509aad752427cee6d7094fdb1d

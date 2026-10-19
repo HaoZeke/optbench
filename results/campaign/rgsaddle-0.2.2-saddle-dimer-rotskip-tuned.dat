@@ -1,4 +1,4 @@
-# rep 1 force_calls 12380361 unique_saddles 762 fraction_connected 0.0001 total_searches 20000 connected 2 minimize_calls 14 minimum_converged 1 seed 20261016
+# rep 1 force_calls 12380361 unique_saddles 762 fraction_connected 0.0 total_searches 20000 connected 0 minimize_calls 14 minimum_converged 1 seed 20261016
 force_calls 12380361.0
 force_calls_min 12380361
 force_calls_max 12380361
@@ -15,5 +15,5 @@ nfailed 1
 goal 27
 cap 5064
 n 20000
-par2_mean 10127.05255
-v2_nfailed 19998
+par2_mean 10128.0
+v2_nfailed 20000

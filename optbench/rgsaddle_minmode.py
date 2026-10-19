@@ -30,6 +30,7 @@ import numpy as np
 
 from .connection import connected_endpoints, link_tolerance, per_atom_max
 from .counter import HarnessCounter
+from .endpoints import EndpointArchive, align_resume, stamp_endpoint, stored_cell
 from .failures import classify_failure
 from .potserver import RgpotCounter
 from .score import half_even, score_v2
@@ -1142,130 +1143,6 @@ def _append_partial(path: Path, record: dict) -> None:
         handle.flush()
 
 
-def _endpoint_raw_path(output: Path) -> Path:
-    return output.with_name(output.stem + ".endpoints.raw")
-
-
-def _endpoint_archive_path(output: Path) -> Path:
-    return output.with_name(output.stem + ".endpoints.npz")
-
-
-def _endpoint_slot_bytes(n_atoms: int) -> int:
-    return 3 * int(n_atoms) * 3 * 8
-
-
-def _align_endpoint_raw(path: Path, n_saved: int, n_atoms: int) -> int:
-    """Keep one raw slot per checkpointed search. Return how many slots remain."""
-    stride = _endpoint_slot_bytes(n_atoms)
-    if stride <= 0:
-        raise RuntimeError("endpoint storage needs at least one free atom")
-    if not path.is_file():
-        if n_saved:
-            return 0
-        return 0
-    size = path.stat().st_size
-    if size % stride != 0:
-        raise RuntimeError(f"{path} has {size} bytes, not a multiple of an endpoint slot ({stride})")
-    slots = size // stride
-    if slots > n_saved:
-        with path.open("r+b") as handle:
-            handle.truncate(n_saved * stride)
-        return n_saved
-    return slots
-
-
-def _append_endpoint_slot(path: Path, minimum, plus, minus, n_atoms: int) -> None:
-    """Append reactant, plus, and minus. A missing minimization is NaN."""
-    width = int(n_atoms)
-    if plus is None or minus is None or minimum is None:
-        buf = np.full((3, width, 3), np.nan, dtype=np.float64)
-    else:
-        buf = np.stack(
-            [
-                np.asarray(minimum, dtype=np.float64).reshape(width, 3),
-                np.asarray(plus, dtype=np.float64).reshape(width, 3),
-                np.asarray(minus, dtype=np.float64).reshape(width, 3),
-            ]
-        )
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("ab") as handle:
-        handle.write(np.ascontiguousarray(buf, dtype=np.float64).tobytes())
-        handle.flush()
-
-
-def write_endpoint_archive(raw: Path, archive: Path, cell, n_searches: int, n_atoms: int) -> None:
-    """Pack the raw slots into ``minimum``, ``endpoint_plus``, and ``endpoint_minus``."""
-    stride = _endpoint_slot_bytes(n_atoms)
-    if n_searches == 0:
-        minimum = np.zeros((0, n_atoms, 3), dtype=np.float64)
-        plus = minimum.copy()
-        minus = minimum.copy()
-    else:
-        mapped = np.memmap(raw, dtype=np.float64, mode="r", shape=(n_searches, 3, n_atoms, 3))
-        try:
-            minimum = np.array(mapped[:, 0], dtype=np.float64)
-            plus = np.array(mapped[:, 1], dtype=np.float64)
-            minus = np.array(mapped[:, 2], dtype=np.float64)
-        finally:
-            mapped._mmap.close()
-            del mapped
-    archive.parent.mkdir(parents=True, exist_ok=True)
-    np.savez_compressed(
-        archive,
-        minimum=minimum,
-        endpoint_plus=plus,
-        endpoint_minus=minus,
-        cell=np.asarray(cell, dtype=np.float64),
-    )
-    if raw.is_file() and (n_searches == 0 or raw.stat().st_size == n_searches * stride):
-        raw.unlink()
-
-
-def load_stored_endpoints(path: Path, index: int) -> dict | None:
-    """Return one search in the ``relink`` shape, or None when it has no minima."""
-    with np.load(path) as data:
-        plus = np.asarray(data["endpoint_plus"][index], dtype=np.float64)
-        minus = np.asarray(data["endpoint_minus"][index], dtype=np.float64)
-        if not np.isfinite(plus).all() or not np.isfinite(minus).all():
-            return None
-        minimum = np.asarray(data["minimum"][index], dtype=np.float64)
-        cell = np.asarray(data["cell"], dtype=np.float64) if "cell" in data.files else None
-    return {
-        "minimum": minimum.reshape(-1, 3),
-        "endpoint_plus": plus.reshape(-1, 3),
-        "endpoint_minus": minus.reshape(-1, 3),
-        "cell": cell,
-    }
-
-
-def _inline_endpoint_lists(records: list[dict], archive: Path, limit: int = 40_000_000) -> bool:
-    """Copy the three minima onto each start when the JSON stays under ``limit`` bytes."""
-    present = [record for record in records if record.get("endpoint_index") is not None]
-    if not present:
-        return False
-    with np.load(archive) as data:
-        sample_index = int(present[0]["endpoint_index"])
-        sample = {
-            "minimum": np.asarray(data["minimum"][sample_index], dtype=np.float64).reshape(-1, 3).tolist(),
-            "endpoint_plus": np.asarray(data["endpoint_plus"][sample_index], dtype=np.float64).reshape(-1, 3).tolist(),
-            "endpoint_minus": np.asarray(data["endpoint_minus"][sample_index], dtype=np.float64).reshape(-1, 3).tolist(),
-        }
-        each = len(json.dumps(sample))
-        if len(present) * each > limit:
-            return False
-        cached = {
-            "minimum": np.array(data["minimum"], dtype=np.float64),
-            "endpoint_plus": np.array(data["endpoint_plus"], dtype=np.float64),
-            "endpoint_minus": np.array(data["endpoint_minus"], dtype=np.float64),
-        }
-    for record in present:
-        index = int(record["endpoint_index"])
-        record["minimum"] = cached["minimum"][index].reshape(-1, 3).tolist()
-        record["endpoint_plus"] = cached["endpoint_plus"][index].reshape(-1, 3).tolist()
-        record["endpoint_minus"] = cached["endpoint_minus"][index].reshape(-1, 3).tolist()
-    return True
-
-
 def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Path, cap: int, force_tol: float, work: Path) -> dict:
     """Displace the Pt island until the goal count of connected index-1 saddles.
 
@@ -1275,10 +1152,10 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
     The link is the eOn r2205 test: exactly one endpoint has per-atom
     maximum minimum-image distance strictly below 0.1 angstrom.
     ``rmsd_connect`` is only the saddle-novelty test.
-    Each search stores ``minimum``, ``endpoint_plus``, and
-    ``endpoint_minus`` in ``<stem>.endpoints.npz``. Those three lists
-    are also copied onto the start record when the JSON stays under
-    40 MB. ``work`` is unused; the searches do not extract an archive.
+    Both endpoint minima are stored as float32 free-atom coordinates in
+    ``<stem>.endpoints.npz``. A search that stops first is
+    ``not_minimized``.
+    ``work`` is unused; the searches do not extract an archive.
     """
     del work
     if str(_section(template, "Main").get("session", "minmode")) == "prfo":
@@ -1296,32 +1173,17 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
     tolerance = link_tolerance(problem)
     max_searches = int(search.get("max_searches", 20000))
     free = np.flatnonzero(~fixed)
-    n_atoms = int(len(free))
+    archive = EndpointArchive(output.with_name(output.stem + ".endpoints.npz"), int(free.size))
     raw = potential_from_problem(problem)
     comments = []
     all_records = []
     failed_reps = 0
-    raw_path = _endpoint_raw_path(output)
     for rep in range(1, repetitions + 1):
         header_path, partial_path = _checkpoint_paths(output)
         header = json.loads(header_path.read_text(encoding="utf-8")) if header_path.is_file() else None
-        resume = bool(header and header.get("template") == template["id"] and int(header.get("rep", 0)) == rep)
-        saved = _load_partial(partial_path) if resume else []
-        if resume:
-            kept_slots = _align_endpoint_raw(raw_path, len(saved), n_atoms)
-            if kept_slots < len(saved):
-                saved = saved[:kept_slots]
-                if saved:
-                    partial_path.write_text(
-                        "".join(json.dumps(row, default=_json_default, sort_keys=True) + "\n" for row in saved),
-                        encoding="utf-8",
-                    )
-                else:
-                    partial_path.unlink(missing_ok=True)
-        else:
-            if rep == 1:
-                raw_path.unlink(missing_ok=True)
-        if resume:
+        saved = _load_partial(partial_path) if header and header.get("template") == template["id"] and int(header.get("rep", 0)) == rep else []
+        if header and header.get("template") == template["id"] and int(header.get("rep", 0)) == rep:
+            align_resume(archive, len(all_records) + len(saved))
             potential = HarnessSurface(_bind(raw, positions, free, cell))
             minimum = np.asarray(header["minimum"], dtype=np.float64)
             min_energy = float(header["min_energy"])
@@ -1341,6 +1203,8 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
                 flush=True,
             )
         else:
+            if rep == 1:
+                archive.reset(stored_cell(cell), free)
             potential = HarnessSurface(_bind(raw, positions, free, cell))
             minimum, min_ok = _lbfgs_minimize(potential, positions[free].reshape(-1).copy(), force_tol, 5000)
             min_energy, _min_grad = potential.energy_forces(minimum)
@@ -1368,6 +1232,8 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
             partial_path.unlink(missing_ok=True)
         while connected < goal and searches < max_searches:
             searches += 1
+            plus_ep = None
+            minus_ep = None
             atom = int(listed[int(rng.integers(0, len(listed)))])
             slots = np.flatnonzero(free == atom)
             if len(slots) != 1:
@@ -1422,7 +1288,6 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
             curvature = outcome.get("curvature")
             negative = curvature is not None and math.isfinite(float(curvature)) and float(curvature) < 0.0
             saved_point = None
-            endpoint_pair = None
             if outcome.get("converged") and negative and _finite_point(np.asarray(outcome["x"])):
                 raw_eigenvalues, vectors = _hessian_spectrum(potential, outcome["x"])
                 # Free atoms of the island are pinned by the substrate.
@@ -1438,10 +1303,10 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
                     saddle_x = np.asarray(outcome["x"], dtype=np.float64)
                     climb_mode = outcome.get("mode")
                     axis = _unit(np.asarray(climb_mode if climb_mode is not None else kick, dtype=np.float64))
-                    plus, plus_ok = _lbfgs_minimize(
+                    plus, _plus_ok = _lbfgs_minimize(
                         potential, saddle_x + 0.1 * axis, force_tol, _SADDLE_ENDPOINT_BUDGET
                     )
-                    minus, minus_ok = _lbfgs_minimize(
+                    minus, _minus_ok = _lbfgs_minimize(
                         potential, saddle_x - 0.1 * axis, force_tol, _SADDLE_ENDPOINT_BUDGET
                     )
                     plus_rows = plus.reshape(-1, 3)
@@ -1459,7 +1324,8 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
                     record["rmsd_minus"] = minus_rmsd
                     record["per_atom_max_plus"] = per_atom_max(plus_rows, reactant_rows, cell)
                     record["per_atom_max_minus"] = per_atom_max(minus_rows, reactant_rows, cell)
-                    endpoint_pair = (reactant_rows, plus_rows, minus_rows, bool(plus_ok), bool(minus_ok))
+                    plus_ep = plus_rows
+                    minus_ep = minus_rows
                     record["reasons"] = []
                     if novel:
                         found.append(saddle_x)
@@ -1488,19 +1354,12 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
             endpoint_calls = int(potential.calls - before_outer)
             record["force_calls"] = climb + endpoint_calls
             record["endpoint_calls"] = endpoint_calls
-            slot_index = len(all_records)
-            if endpoint_pair is None:
-                _append_endpoint_slot(raw_path, None, None, None, n_atoms)
-            else:
-                reactant_rows, plus_rows, minus_rows, plus_ok, minus_ok = endpoint_pair
-                _append_endpoint_slot(raw_path, reactant_rows, plus_rows, minus_rows, n_atoms)
-                record["endpoint_index"] = slot_index
-                record["endpoint_plus_converged"] = plus_ok
-                record["endpoint_minus_converged"] = minus_ok
             success, failure = _outcome(record["reasons"])
             record["success"] = success
             record["failure"] = failure
             search_calls += climb
+            status = archive.add(minimum.reshape(-1, 3), plus_ep, minus_ep)
+            stamp_endpoint(record, archive.name, archive.count - 1, status)
             all_records.append(record)
             stored = dict(record)
             stored["rng_state"] = _rng_state(rng)
@@ -1572,12 +1431,8 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
             f"par2_mean {metrics['par2_mean']}\n"
             f"v2_nfailed {metrics['nfailed']}\n"
         )
-    archive = _endpoint_archive_path(output)
-    write_endpoint_archive(raw_path, archive, cell, len(all_records), n_atoms)
-    inlined = _inline_endpoint_lists(all_records, archive)
-    text += f"endpoints_file {archive.name}\n"
-    text += f"endpoints_inlined {int(inlined)}\n"
     output.parent.mkdir(parents=True, exist_ok=True)
+    archive.save()
     output.write_text(text, encoding="utf-8")
     write_starts(output.with_suffix(".starts.jsonl"), all_records)
     if metrics is not None:
@@ -1598,10 +1453,8 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
             "note": (
                 "One row is one displacement search. The cap is the climb budget, "
                 "one step of overshoot, and the two endpoint minimizations. "
-                "The initial minimization is not in that count. "
-                f"Endpoint minima are in {archive.name}."
+                "The initial minimization is not in that count."
             ),
-            "endpoints_file": archive.name,
             "runs": [
                 {
                     "entry": output.stem,
@@ -1614,14 +1467,7 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
                     "cap": search_cap,
                     "provenance": provenance,
                     "metrics": metrics,
-                    "starts": [
-                        {
-                            key: value
-                            for key, value in record.items()
-                            if key not in {"minimum", "endpoint_plus", "endpoint_minus"}
-                        }
-                        for record in all_records
-                    ],
+                    "starts": all_records,
                 }
             ],
         }
@@ -1631,6 +1477,7 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
     header_path, partial_path = _checkpoint_paths(output)
     partial_path.unlink(missing_ok=True)
     header_path.unlink(missing_ok=True)
+    archive.drop_log()
     return {
         "force_calls": statistics.fmean(totals) if totals else None,
         "nfailed": failed_reps,
