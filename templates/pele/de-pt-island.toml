@@ -11,7 +11,6 @@ algorithm = "hybrid eigenvector following"
 problem = "double-ended-saddle-search/pt-island"
 tuning = "archive"
 ranked = false
-paper_baseline = true
 note = "Commit a68ec5 (2014-08-06). MorseBulkFrozen rho 1.6047, r0 2.8970, A 0.7102, rcut 9.5, periodic box from the con file, frozen atoms removed from the coordinate vector. NEB image_density 1, iter_density 30, k 0.05, reinterpolate 50, adjustk_freq 50, quench tol 0.01, maxstep 2. findTransitionState tol is 1e-3/sqrt(3*nfree), which is an L2 force of 0.001. max_uphill_step 0.4, tangent maxstep 0.4, lowest-eigenvector quench nsteps 1000 tol 0.4 maxstep 1, nsteps_tangent1 3, nsteps_tangent2 20, demand_initial_negative_vec false. The driver loop is range(1, 59)."
 
 [stop]

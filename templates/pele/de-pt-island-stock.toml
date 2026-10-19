@@ -1,0 +1,17 @@
+# pele 0.1.2, the latest release, unmodified.
+# DoubleEndedConnect keeps the library defaults. The problem supplies the
+# three interior images, the L2 force stop 0.001, and the 3000-call cap.
+id = "pele/de-pt-island-stock"
+engine = "pele-0.1.2"
+code = "pele"
+code_version = "0.1.2"
+commit = "b7081b932a060be11342fbe8287ac35da8ada879"
+algorithm = "hybrid eigenvector following"
+problem = "double-ended-saddle-search/pt-island"
+tuning = "default"
+ranked = true
+
+[stop]
+norm = "l2"
+force_norm = 0.001
+max_force_calls = 3000

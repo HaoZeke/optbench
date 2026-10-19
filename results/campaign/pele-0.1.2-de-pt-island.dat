@@ -1,0 +1,18 @@
+# pele 0.1.2 stock DoubleEndedConnect. Harness Pele potential on morse_pt.
+# Library defaults except the problem image count, the L2 force stop, and the call cap.
+# force_calls are harness evaluations. Failures stay out of the mean.
+force_calls 1001
+force_calls_min 619
+force_calls_max 1842
+force_calls_median 955.0
+nfailed 3
+n 59
+code pele
+code_version 0.1.2
+commit b7081b932a060be11342fbe8287ac35da8ada879
+algorithm hybrid eigenvector following
+template pele/de-pt-island-stock
+problem double-ended-saddle-search/pt-island
+tuning default
+ranked true
+counter harness
