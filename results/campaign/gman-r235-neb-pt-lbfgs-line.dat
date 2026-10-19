@@ -1,9 +1,11 @@
 force_calls 108
-force_calls_max 155
 force_calls_min 63
-algorithm lbfgs
+force_calls_max 155
+nfailed 0
 code Gman
 code_version r235
-date Mon Oct 19 19:51:30 2026
-contributor Rye Terrell
+commit r235
+algorithm lbfgs
 template gman/neb-pt-lbfgs-line
+problem neb/Pt-heptamer
+counter harness
