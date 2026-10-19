@@ -33,12 +33,10 @@ gradient L2 is within the problem force norm and the vibrational
 index is 1. Hessian finite differences go through ``verification``.
 
 The harness classes are crash, divergence, cap, and wrong_stationary.
-There is no stalled class. Divergence is a non-finite energy or
-geometry. A ``BAND TASK COMPLETED`` line with a finite geometry and a
-free-atom force still above the stop is wrong_stationary: the nudged
-band force can meet ``MAX_FORCE`` while the true gradient does not.
-An exit at ``MAX_STEPS`` without that banner, under the force cap, is
-the cap.
+``classify_failure`` is the label. This runner does not replace it.
+Each start keeps the final energy, the Cartesian geometry, and the
+Cartesian gradient. ``force_norm`` is the free-atom L2 of that
+gradient. ``cp2k_converged`` is the ``BAND TASK COMPLETED`` line.
 
 Replica files are named in the run directory. ``COORD_FILE_NAME`` is a
 long string, and CP2K reads a quoted value in 80-character pieces. A
@@ -206,39 +204,14 @@ def failure_reasons(
     return reasons
 
 
-def label_band_failure(
-    reasons: list[str],
-    *,
-    band_completed: bool,
-    step_limit: bool,
-    finite: bool,
-) -> tuple[str | None, list[str]]:
-    """One class for a CP2K band.
-
-    ``step_limit`` is a clean exit at ``MAX_STEPS`` with no
-    ``BAND TASK COMPLETED`` line and with harness calls still under
-    the cap. A finished finite band above the force stop is
-    ``wrong_stationary``. A non-finite result stays ``divergence``.
-    """
-    labeled = list(reasons)
-    # A step-limit exit that already meets the force stop can still be a
-    # saddle. The cap applies when that exit is still above the stop.
-    if (
-        step_limit
-        and "crash" not in labeled
-        and "cap" not in labeled
-        and "force_norm" in labeled
-    ):
-        labeled.append("cap")
-    failure = classify_failure(labeled)
-    if (
-        failure == "divergence"
-        and band_completed
-        and finite
-        and "divergence" not in labeled
-    ):
-        failure = "wrong_stationary"
-    return failure, labeled
+def _json_array(value) -> list | None:
+    """Finite Cartesian values as nested lists. A non-finite point is omitted."""
+    if value is None:
+        return None
+    array = np.asarray(value, dtype=np.float64)
+    if array.size == 0 or not np.all(np.isfinite(array)):
+        return None
+    return array.tolist()
 
 
 def _real(value: float) -> str:
@@ -749,13 +722,6 @@ def _judge(client: IpiClient, *, returncode: int | None, log_text: str) -> dict:
         crashed=crashed,
         force_norm=client.force_norm,
     )
-    step_limit = (
-        returncode == 0
-        and not band_completed
-        and client.stop_reason == ""
-        and not crashed
-        and calls < client.cap
-    )
     hessian_index = None
     project_rigid = bool(np.all(client.free) and int(np.count_nonzero(client.free)) >= 2 and client.kind == "lj")
     if "crash" not in reasons and "cap" not in reasons and "force_norm" not in reasons and positions is not None:
@@ -781,15 +747,10 @@ def _judge(client: IpiClient, *, returncode: int | None, log_text: str) -> dict:
         )
         if hessian_index != 1:
             reasons.append("hessian_index")
-    finite = math.isfinite(energy) and math.isfinite(force)
-    failure, reasons = label_band_failure(
-        reasons,
-        band_completed=band_completed,
-        step_limit=step_limit,
-        finite=finite,
-    )
+    failure = classify_failure(reasons)
     finite_energy = energy if math.isfinite(energy) else None
     finite_force = force if math.isfinite(force) else None
+    gradient = None if chosen is None else chosen.get("gradient")
     return {
         "force_calls": int(client.counter.calls),
         "verify_calls": int(client.counter.verify_calls),
@@ -798,6 +759,8 @@ def _judge(client: IpiClient, *, returncode: int | None, log_text: str) -> dict:
         "reasons": reasons,
         "energy": finite_energy,
         "force_norm": finite_force,
+        "positions": _json_array(positions),
+        "gradient": _json_array(gradient),
         "hessian_index": hessian_index,
         "converged": bool(band_completed and failure is None),
         "cp2k_converged": bool(band_completed),
@@ -959,6 +922,8 @@ def _crash_record(name: str, calls: int, verify: int, error: str) -> dict:
         "error": error,
         "energy": None,
         "force_norm": None,
+        "positions": None,
+        "gradient": None,
         "hessian_index": None,
         "converged": False,
     }

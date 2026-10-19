@@ -161,28 +161,37 @@ def _client_with_force(force: float, energy: float = -10.0) -> IpiClient:
     return client
 
 
-def test_a_completed_finite_band_above_the_stop_is_wrong_stationary():
+def test_a_finished_band_keeps_the_harness_class_and_the_final_point():
+    client = _client_with_force(0.2)
+    gradient = np.array([[0.2, 0.0, 0.0], [0.0, 0.0, 0.0]], dtype=np.float64)
+    for row in client.evals:
+        row["gradient"] = gradient
     judged = _judge(
-        _client_with_force(0.2),
+        client,
         returncode=0,
         log_text="*** BAND TASK COMPLETED ***\n",
     )
-    assert judged["failure"] == "wrong_stationary"
+    assert judged["failure"] == "divergence"
     assert judged["success"] is False
     assert judged["cp2k_converged"] is True
     assert judged["reasons"] == ["force_norm"]
     assert judged["hessian_index"] is None
+    assert judged["energy"] == pytest.approx(-10.0)
+    assert judged["force_norm"] == pytest.approx(0.2)
+    assert np.allclose(judged["positions"], np.zeros((2, 3)))
+    assert np.allclose(judged["gradient"], gradient)
 
 
-def test_a_max_steps_exit_above_the_stop_is_the_cap():
+def test_a_max_steps_exit_above_the_stop_stays_on_the_harness_class():
     judged = _judge(
         _client_with_force(0.2),
         returncode=0,
         log_text="dump_neb_final: Band task not yet converged\n",
     )
-    assert judged["failure"] == "cap"
-    assert "cap" in judged["reasons"]
+    assert judged["failure"] == "divergence"
+    assert judged["reasons"] == ["force_norm"]
     assert judged["cp2k_converged"] is False
+    assert np.allclose(judged["positions"], np.zeros((2, 3)))
 
 
 def test_a_completion_line_past_the_citation_dump_is_kept(tmp_path):
@@ -196,8 +205,9 @@ def test_a_completion_line_past_the_citation_dump_is_kept(tmp_path):
         returncode=0,
         log_text=text,
     )
-    assert judged["failure"] == "wrong_stationary"
+    assert judged["failure"] == "divergence"
     assert judged["cp2k_converged"] is True
+    assert judged["positions"] is not None
 
 
 def test_a_non_finite_band_stays_a_divergence():
