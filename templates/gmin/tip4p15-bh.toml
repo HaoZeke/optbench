@@ -1,0 +1,11 @@
+id = "gmin/tip4p15-bh"
+engine = "gmin"
+problem = "globalopt/tip4p15"
+code = "GMIN"
+code_version = "27059"
+commit = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
+algorithm = "basin-hopping"
+tuning = "archive"
+note = """
+Basin hopping on rigid TIP4P, 15 molecules. The data file is archive/entries/globalopt/tip4p15/gmin/data: NTIP 4, CENTRE, EDIFF 1e-3, SLOPPYCONV 1e-3, TIGHTCONV 1e-3, MAXIT 10000 10000, FIXBOTH, RANSEED 100, RADIUS 10, MAXBFGS 0.5, MAXERISE 1e-4, TARGET -628.3734, SAVE 1, STEPS 1e7, STEP 0 0 1.40, TEMPERATURE 2.90. Starts are the 500 archived angle-axis files. The score is GMIN NPCALL on the "Target hit after" line, which is what run_gmin.sh records. Serial build of wales-27058 (SVNREV 27059).
+"""

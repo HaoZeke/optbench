@@ -1,0 +1,18 @@
+force_calls 6.31170e+05
+force_calls_median 4.38530e+05
+force_calls_min 4.8910e+03
+force_calls_max 4.4193e+06
+nfailed 0
+starts 500
+code GMIN
+code_version 27059
+commit 144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348
+algorithm basin-hopping
+tuning archive
+template gmin/tip4p15-bh
+problem globalopt/tip4p15
+counter gmin
+call_unit total
+date 2026-10-19
+contributor Rohit Goswami
+note GMIN NPCALL from the archived data file on the 500 .aa starts. NTIP 4, RANSEED 100, STEP 0 0 1.40, TEMPERATURE 2.90, TARGET -628.3734, EDIFF 1e-3, SLOPPYCONV 1e-3, TIGHTCONV 1e-3, MAXIT 10000 10000, FIXBOTH, CENTRE, RADIUS 10, MAXBFGS 0.5, MAXERISE 1e-4, SAVE 1, STEPS 1e7. Serial gfortran build of wales-27058 (SVNREV 27059). The counter is GMIN's Target-hit NPCALL, the 2014 run_gmin.sh field.
