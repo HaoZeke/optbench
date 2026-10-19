@@ -173,6 +173,15 @@ commit = "0.1.1"
 committed = "2019-12-10"
 note = "Sella 0.1.1 PESWrapper.diag for the lowest-eigenvector row. eta 1e-6, gamma 1e-16, vreftol 0.99, gradient v0, rigid-mode projection. This pin is not Sella 2.6.0."
 
+[[code]]
+id = "gman"
+name = "Gman"
+role = "nudged elastic band"
+repository = "https://gitlab.com/optbench/optbench"
+ref = "r235"
+commit = "299795f6dc4410b49d3db3006ffea0bbb8613c2ab44126be2937ae7b34842849"
+note = "Gman r235. No public git commit. The pin is the sha256 of website/codes/Gman-r235.tgz in the public archive at 0f26b796, 1826749 bytes. The Pt-heptamer GL-BFGS line row runs the archived opt.py. The Morse extension is f2py of pot/morse/code/morse.f. The score is pot.count divided by 8, then the integer mean the 2013 script writes. That counter is not a harness pes.evaluate score."
+
 [[template]]
 id = "sella-0.1.1/lj38-loweig"
 code = "sella-0.1.1"

@@ -1074,4 +1074,19 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>
+   <h3>Gman</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>nudged elastic band</td>
+   <td>r235</td>
+   <td>299795f6dc44</td>
+   <td><a href="https://gitlab.com/optbench/optbench">https://gitlab.com/optbench/optbench</a></td>
+   </tr>
+   </tbody></table></div>
+   <p>No full ranked run.</p>
+   <p>No full ranked run</p><ul>
+   <li>gman/neb-pt-glbfgs-line: no per-start record.</li>
+   </ul>
    </section>

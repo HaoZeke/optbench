@@ -1,0 +1,9 @@
+force_calls 100
+force_calls_max 135
+force_calls_min 57
+nfailed 0
+algorithm lbfgs
+code Gman
+code_version r235
+template gman/neb-pt-glbfgs-line
+problem neb/Pt-heptamer

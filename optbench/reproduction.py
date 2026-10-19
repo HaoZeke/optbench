@@ -111,6 +111,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+    "repro/neb-pt-heptamer-gman-glbfgs-line": "b6ba7f5bdac21c1c2ab9e37df109e00e9f5722aa",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -189,6 +190,7 @@ MATCHES: list[dict] = [
     {"key": "neb/Pt-heptamer/eon-cg", "template": "eon-cg", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-cg.dat", "cause": "heptamer_cg", "hold": ["eon-client/neb-pt-cg"]},
     {"key": "neb/Pt-heptamer/eon-fire", "template": "eon-fire", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-fire.dat", "hold": ["eon-client/neb-pt-fire"]},
     {"key": "neb/Pt-heptamer/eon-qm", "template": "eon-qm", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-qm.dat", "hold": ["eon-client/neb-pt-qm"]},
+    {"key": "neb/Pt-heptamer/gman-glbfgs-line", "template": "gman/neb-pt-glbfgs-line", "branch": "repro/neb-pt-heptamer-gman-glbfgs-line", "path": "results/campaign/gman-r235-neb-pt-glbfgs-line.dat"},
     # saddle search
     {"key": "saddle-search/pt-island/eon-dimer", "template": "eon-svn/saddle-pt-dimer", "branch": "main", "path": "results/campaign/eon-3.5.0-saddle-pt-classic.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "cause": "eon_saddle_count"},
     {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-davidson-sm50", "template": "softsaddle/saddle-davidson-sm50", "branch": "cells/softsaddle/ts-reps", "path": "results/campaign/softsaddle-2019.04-saddle-davidson-sm50.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},

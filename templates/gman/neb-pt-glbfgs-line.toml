@@ -1,0 +1,14 @@
+id = "gman/neb-pt-glbfgs-line"
+engine = "gman"
+problem = "neb/Pt-heptamer"
+code = "Gman"
+code_version = "r235"
+commit = "299795f6dc4410b49d3db3006ffea0bbb8613c2ab44126be2937ae7b34842849"
+algorithm = "GL-BFGS"
+reducer = "gman"
+failure_cap = 10000
+paper_baseline = true
+parameter_source = "archive"
+note = '''
+Gman r235 climbing-image NEB, the archived opt.py for neb/Pt-heptamer/gman-glbfgs-line. glbfgs init is maxmove 0.2, min line, alpha 0.05, memory 25. The band is 8 images, spring 5, tangent new, fmax 0.01, fsaddle off, method ci, converge Fmag. The potential is pot.set('morse'): Fortran Morse, De 0.7102, beta 1.6047, r0 2.897, cutoff 9.5, minimum image on the con box. The minima tarball is the same file as website/neb/Pt-heptamer/eon-lbfgs/minima.tgz. pot.count on the eight moving images, divided by 8, for min01 through min13 is 65, 57, 95, 93, 95, 121, 135, 87, 87, 131, 121, 109, 109. The 2013 script writes that mean with %d, which is 100, and the max and min, 135 and 57.
+'''
