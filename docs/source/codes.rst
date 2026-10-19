@@ -640,7 +640,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="tsopt/LJ38" data-template="sella/lj38-ts-default">
    <td>LJ38</td>
    <td data-field="template">sella/lj38-ts-default</td>
-   <td data-field="version">Sella 2.6.0</td>
+   <td data-field="version">Sella 2.6.0 current</td>
    <td data-field="commit">6cfb60cdb100</td>
    <td data-field="par2_mean">68.74</td>
    <td data-field="mean_calls">68.74</td>

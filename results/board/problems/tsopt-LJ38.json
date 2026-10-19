@@ -519,8 +519,8 @@
       "rgsaddle/lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.0015051499783199063,
       "rgsaddle/prfo 0.2.2 default campaign, asv c0db2b8": 0.0737523489376754,
       "rgsaddle/prfo-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.7254822895501947,
-      "sella-0.1.1/lj38-ts 0.1.1 archive campaign 0.1.1": 1.1025223591193312,
-      "sella/lj38-ts-default 2.6.0 default campaign, asv 6cfb60c": 1.1627283582521275,
+      "sella-0.1.1/lj38-ts 0.1.1 paper archive campaign 0.1.1": 1.1025223591193312,
+      "sella/lj38-ts-default 2.6.0 current default campaign, asv 6cfb60c": 1.1627283582521275,
       "tsase/dimer-lj38 1.0 default campaign 98aac60": 0.0
     },
     "rho": {
@@ -636,14 +636,14 @@
         0.98,
         0.99
       ],
-      "sella-0.1.1/lj38-ts 0.1.1 archive campaign 0.1.1": [
+      "sella-0.1.1/lj38-ts 0.1.1 paper archive campaign 0.1.1": [
         0.325,
         1.0,
         1.0,
         1.0,
         1.0
       ],
-      "sella/lj38-ts-default 2.6.0 default campaign, asv 6cfb60c": [
+      "sella/lj38-ts-default 2.6.0 current default campaign, asv 6cfb60c": [
         0.755,
         0.985,
         1.0,
@@ -675,8 +675,8 @@
       "rgsaddle/lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.05,
       "rgsaddle/prfo 0.2.2 default campaign, asv c0db2b8": 0.25,
       "rgsaddle/prfo-tuned 0.2.2 tuned campaign, asv c0db2b8": 1.0,
-      "sella-0.1.1/lj38-ts 0.1.1 archive campaign 0.1.1": 1.0,
-      "sella/lj38-ts-default 2.6.0 default campaign, asv 6cfb60c": 1.0,
+      "sella-0.1.1/lj38-ts 0.1.1 paper archive campaign 0.1.1": 1.0,
+      "sella/lj38-ts-default 2.6.0 current default campaign, asv 6cfb60c": 1.0,
       "tsase/dimer-lj38 1.0 default campaign 98aac60": 0.0
     },
     "taus": [

@@ -360,6 +360,11 @@ def _ts_specs() -> list[dict]:
                     f"Sella {SELLA_VERSION} saddle defaults, order 1."
                     + row["pbc_note"]
                 )
+                if row["slug"] == "lj38-ts":
+                    note = (
+                        f"Current Sella {SELLA_VERSION}. Constructor defaults, order 1. "
+                        "This row is not the paper Sella 0.1.1 trust region."
+                    )
             else:
                 params = {"order": 1, **SELLA_TUNED}
                 source = "archive"

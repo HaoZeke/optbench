@@ -95,9 +95,15 @@ def test_rendered_pages_use_the_board_rank():
     tsopt = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "tsopt.org").read_text(encoding="utf-8")
     assert "Sella 0.1.1 legacy" in tsopt
     assert "2.6.0 legacy" not in tsopt
-    ts_ranked = [row["template"] for row in document["problems"]["tsopt/LJ38"]["ranked"]]
+    ts_rows = document["problems"]["tsopt/LJ38"]["ranked"]
+    ts_ranked = [row["template"] for row in ts_rows]
     assert "sella/lj38-ts-default" in ts_ranked
     assert "sella/lj38-ts-tuned" not in ts_ranked
+    versions = {row["template"]: dict(ranked_cells(row, False))["version"] for row in ts_rows}
+    assert versions["sella/lj38-ts-default"] == "Sella 2.6.0 current"
+    assert versions["sella-0.1.1/lj38-ts"] == "Sella 0.1.1 paper"
+    assert 'data-field="version">Sella 2.6.0 current<' in tsopt
+    assert 'data-field="version">Sella 0.1.1 paper<' in tsopt
     assert "rgsaddle/dimer-rotskip-tuned" in ts_ranked
     assert "tsopt-LJ38-profile.svg" in tsopt
     saddle = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "saddle-search.org").read_text(encoding="utf-8")

@@ -1083,10 +1083,23 @@ def build_board(root: Path) -> dict:
     }
 
 
+def _sella_lj38_role(row: dict) -> str:
+    """Paper Sella 0.1.1 and current Sella 2.6.0 defaults on LJ38."""
+    template = str(row.get("template") or "")
+    if template == "sella/lj38-ts-default":
+        return "current"
+    if template == "sella-0.1.1/lj38-ts":
+        return "paper"
+    return ""
+
+
 def _series_label(row: dict, used: set[str]) -> str:
     parts = [str(row.get("template") or row.get("entry") or "row")]
     if row.get("code_version"):
         parts.append(str(row["code_version"]))
+    role = _sella_lj38_role(row)
+    if role:
+        parts.append(role)
     if row.get("tuning"):
         parts.append(str(row["tuning"]))
     if row.get("source"):
@@ -1319,6 +1332,14 @@ def _headers(problem: dict) -> list[str]:
     return headers
 
 
+def _version_label(row: dict) -> str:
+    label = f"{row.get('code') or ''} {row.get('code_version') or ''}".strip()
+    role = _sella_lj38_role(row)
+    if role:
+        return f"{label} {role}"
+    return label
+
+
 def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
     """Visible ranked-table cells, in column order.
 
@@ -1326,7 +1347,7 @@ def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
     """
     cells = [
         ("template", str(row.get("template") or row.get("entry") or "")),
-        ("version", f"{row.get('code') or ''} {row.get('code_version') or ''}"),
+        ("version", _version_label(row)),
         ("commit", str(row.get("commit") or "")[:12]),
         ("source", str(row.get("source") or "")),
         ("current", "yes" if row.get("current") else "no"),
