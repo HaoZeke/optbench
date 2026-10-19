@@ -1,0 +1,214 @@
+{
+  "bootstrap_resamples": 2000,
+  "bootstrap_seed": 20261015,
+  "note": "The genetic algorithm follows the AGOX tests_ea script: population 10, SimpleFingerprint, and DistanceComparator with threshold 0.5. The archived geometry starts in the population. The first iteration draws 9 random structures, so the population stays at 10. From iteration 5 the schedule is 2 random and 8 rattles, and from iteration 10 it is 10 rattles. The rattle matches agox/lj38-bh, one quarter of the atoms at amplitude 3 \u00c5. The script default rattles 3 atoms. Local optimization, seed, potential, success window, and cap are the same as agox/lj38-bh. The reference energy is the Cambridge cluster coordinates evaluated with this potential.",
+  "par_factor": 2,
+  "problem": "globalopt/lj38",
+  "runs": [
+    {
+      "algorithm": "genetic algorithm",
+      "cap": 500000,
+      "code": "AGOX",
+      "code_version": "3.11.2.dev2+g22d94a6fa",
+      "commit": "22d94a6fae8cf2d08d51ecc8b9291a47667aa95c",
+      "entry": "agox-22d94a6-lj38-ga",
+      "legacy": {
+        "force_calls": null,
+        "force_calls_max": null,
+        "force_calls_min": null,
+        "median": null,
+        "nfailed": 6
+      },
+      "metrics": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 500000,
+        "includes_failures": true,
+        "iqr": 0.0,
+        "iqr_high": 0.0,
+        "iqr_low": 0.0,
+        "mean": 1000000.0,
+        "median": 1000000.0,
+        "median_high": 1000000.0,
+        "median_low": 1000000.0,
+        "n": 6,
+        "n_cap": 6,
+        "n_crash": 0,
+        "n_divergence": 0,
+        "n_wrong_stationary": 0,
+        "nfailed": 6,
+        "par2_mean": 1000000.0,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 1000000.0,
+        "q75": 1000000.0,
+        "scoring": "par2-wilson-bootstrap",
+        "success_only_mean": null,
+        "success_rate": 0.0,
+        "successes": 0,
+        "wilson_high": 0.3903342879021653,
+        "wilson_low": 0.0
+      },
+      "parameters": {
+        "cap": 500000,
+        "cell": 40.0,
+        "confinement": 24.0,
+        "fmax": 0.05,
+        "max_steps": 500,
+        "method": "ga",
+        "optimizer": "scipy-lbfgsb",
+        "population": 10,
+        "rattle_amplitude": 3.0,
+        "rattle_fraction": 0.25,
+        "reference_source": "cambridge",
+        "seed_base": 314159
+      },
+      "present_source": true,
+      "provenance": {
+        "code": "agox",
+        "code_version": "3.11.2.dev2+g22d94a6fa",
+        "commit": "22d94a6fae8cf2d08d51ecc8b9291a47667aa95c",
+        "machine": {
+          "machine": "x86_64",
+          "node": "cursor",
+          "python": "3.12.3",
+          "system": "Linux"
+        },
+        "parameters": {
+          "cap": 500000,
+          "cell": 40.0,
+          "confinement": 24.0,
+          "fmax": 0.05,
+          "max_steps": 500,
+          "method": "ga",
+          "optimizer": "scipy-lbfgsb",
+          "population": 10,
+          "rattle_amplitude": 3.0,
+          "rattle_fraction": 0.25,
+          "reference_source": "cambridge",
+          "seed_base": 314159
+        }
+      },
+      "starts": [
+        {
+          "calls_at_lowest": 426543,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 500000,
+          "iterations": 261,
+          "lowest_energy": -173.1342589931366,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.9284265117895,
+          "schema": "optbench.start/v2",
+          "seed": 314159,
+          "start": "0.con",
+          "success": false,
+          "target_energy": -173.9274265117895
+        },
+        {
+          "calls_at_lowest": 275594,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 500000,
+          "iterations": 253,
+          "lowest_energy": -172.87770673556605,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.9284265117895,
+          "schema": "optbench.start/v2",
+          "seed": 314160,
+          "start": "1.con",
+          "success": false,
+          "target_energy": -173.9274265117895
+        },
+        {
+          "calls_at_lowest": 324350,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 500000,
+          "iterations": 246,
+          "lowest_energy": -173.2523368665185,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.9284265117895,
+          "schema": "optbench.start/v2",
+          "seed": 314161,
+          "start": "2.con",
+          "success": false,
+          "target_energy": -173.9274265117895
+        },
+        {
+          "calls_at_lowest": 42467,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 500000,
+          "iterations": 237,
+          "lowest_energy": -171.35719072332742,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.9284265117895,
+          "schema": "optbench.start/v2",
+          "seed": 314162,
+          "start": "3.con",
+          "success": false,
+          "target_energy": -173.9274265117895
+        },
+        {
+          "calls_at_lowest": 464154,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 500000,
+          "iterations": 237,
+          "lowest_energy": -172.23060834010317,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.9284265117895,
+          "schema": "optbench.start/v2",
+          "seed": 314163,
+          "start": "4.con",
+          "success": false,
+          "target_energy": -173.9274265117895
+        },
+        {
+          "calls_at_lowest": 495725,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 500000,
+          "iterations": 257,
+          "lowest_energy": -173.2521177667615,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.9284265117895,
+          "schema": "optbench.start/v2",
+          "seed": 314164,
+          "start": "5.con",
+          "success": false,
+          "target_energy": -173.9274265117895
+        }
+      ],
+      "tuning": "default"
+    }
+  ],
+  "schema": "optbench.result/v2",
+  "scoring": "par2-wilson-bootstrap",
+  "status": "partial"
+}
