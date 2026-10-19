@@ -173,6 +173,14 @@ commit = "2338742a434a920ed82e52a72dc1338cf06647c1"
 committed = "2026-10-01"
 note = "SCGO 0.9.1 at main 2338742a. Basin hopping starts from each archived geometry. The potential is optbench.potentials.lennard_jones. The atom symbol is carbon so the library distance floor stays under the Lennard-Jones contact distance. Force calls are harness calculator evaluations."
 
+[[template]]
+id = "ase-globalopt/lj75-basinhopping"
+code = "ase"
+problem = "globalopt/lj75"
+profile = "default"
+task = "basin-hopping"
+ranked = true
+
 # generated ASE and Sella templates
 
 [[template]]
