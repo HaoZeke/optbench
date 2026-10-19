@@ -42,6 +42,7 @@ from pathlib import Path
 
 import numpy as np
 
+from .connection import connected_endpoints, link_tolerance, per_atom_max
 from .counter import ForceCallCap, HarnessCounter
 from .failures import FAILURES, classify_failure, failure_tally
 from .rgsaddle_minmode import (
@@ -1024,7 +1025,7 @@ def _draw_saddle_spec(rng, searches: int, rep: int, listed: list[int], free: np.
     return spec
 
 
-def _commit_saddle_outcome(spec: dict, outcome: dict, rng_state: dict, *, found: list, all_records: list, connected: int, positions, fixed, cell, minimum, min_energy: float, force_tol: float, connect_rmsd: float, barrier_max: float, base: dict, partial_path: Path, output: Path, template: dict, problem_id: str) -> tuple[int, bool, str]:
+def _commit_saddle_outcome(spec: dict, outcome: dict, rng_state: dict, *, found: list, all_records: list, connected: int, positions, fixed, cell, minimum, min_energy: float, force_tol: float, connect_rmsd: float, tolerance: float, barrier_max: float, base: dict, partial_path: Path, output: Path, template: dict, problem_id: str) -> tuple[int, bool, str]:
     """Score one climb in catalog order. Returns connected, refused, failure."""
     climb = int(outcome.get("force_calls") or 0)
     record = {
@@ -1076,18 +1077,26 @@ def _commit_saddle_outcome(spec: dict, outcome: dict, rng_state: dict, *, found:
         endpoint_calls = int(plus_out.get("force_calls") or 0) + int(minus_out.get("force_calls") or 0)
         plus_x = np.asarray(plus_out["x"], dtype=np.float64) if plus_out.get("x") is not None else saddle_x + 0.1 * axis
         minus_x = np.asarray(minus_out["x"], dtype=np.float64) if minus_out.get("x") is not None else saddle_x - 0.1 * axis
-        plus_rmsd = _cartesian_rmsd(plus_x.reshape(-1, 3), minimum.reshape(-1, 3))
-        minus_rmsd = _cartesian_rmsd(minus_x.reshape(-1, 3), minimum.reshape(-1, 3))
-        links = (plus_rmsd <= connect_rmsd) ^ (minus_rmsd <= connect_rmsd)
+        plus_rows = plus_x.reshape(-1, 3)
+        minus_rows = minus_x.reshape(-1, 3)
+        reactant_rows = minimum.reshape(-1, 3)
+        # rmsd_connect is the saddle-novelty test. The link is Matter::perAtomNorm.
+        plus_rmsd = _cartesian_rmsd(plus_rows, reactant_rows)
+        minus_rmsd = _cartesian_rmsd(minus_rows, reactant_rows)
+        links = connected_endpoints(reactant_rows, plus_rows, minus_rows, cell, tolerance)
         novel = all(_cartesian_rmsd(saddle_x.reshape(-1, 3), old.reshape(-1, 3)) > connect_rmsd for old in found)
         barrier = float(outcome["energy"] - min_energy)
         record["barrier"] = barrier
         record["rmsd_plus"] = plus_rmsd
         record["rmsd_minus"] = minus_rmsd
+        record["per_atom_max_plus"] = per_atom_max(plus_rows, reactant_rows, cell)
+        record["per_atom_max_minus"] = per_atom_max(minus_rows, reactant_rows, cell)
         record["saddle_x"] = saddle_x.reshape(-1).tolist()
         record["endpoint_plus"] = np.asarray(plus_x, dtype=np.float64).reshape(-1).tolist()
         record["endpoint_minus"] = np.asarray(minus_x, dtype=np.float64).reshape(-1).tolist()
-        record["minimum_x"] = np.asarray(minimum, dtype=np.float64).reshape(-1).tolist()
+        minimum_flat = np.asarray(minimum, dtype=np.float64).reshape(-1).tolist()
+        record["minimum_x"] = minimum_flat
+        record["minimum"] = minimum_flat
         record["reasons"] = []
         if novel:
             found.append(saddle_x)
@@ -1145,6 +1154,7 @@ def _run_saddle(root: Path, problem: dict, template: dict, *, output: Path, forc
     listed = [int(part) for part in str(search.get("displace_atoms", "0,1,2,3,4,5,6")).split(",") if part.strip()]
     magnitude = float(search.get("displace_magnitude", 0.1))
     connect_rmsd = float(search.get("rmsd_connect", 0.5))
+    tolerance = link_tolerance(problem)
     max_searches = int(search.get("max_searches", 20000))
     free = np.flatnonzero(~fixed)
     base = _spec_common(
@@ -1252,6 +1262,7 @@ def _run_saddle(root: Path, problem: dict, template: dict, *, output: Path, forc
                         min_energy=min_energy,
                         force_tol=force_tol,
                         connect_rmsd=connect_rmsd,
+                        tolerance=tolerance,
                         barrier_max=barrier_max,
                         base=base,
                         partial_path=partial_path,
