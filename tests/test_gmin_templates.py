@@ -106,3 +106,17 @@ def test_bhpt_keyword_order_and_repeated_coords():
     assert "mpi_yield_when_idle" in command
     coords = _coords_text([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0]], 4)
     assert len(coords.splitlines()) == 8
+
+
+def test_asv_classes_import_with_one_start():
+    import benchmarks.bench_gmin as bench
+
+    classes = [
+        value
+        for value in vars(bench).values()
+        if isinstance(value, type) and getattr(value, "param_names", None) == ["seed", "start"]
+    ]
+    assert len(classes) == 8
+    for benchmark in classes:
+        assert benchmark.params == [["0"], ["0"]]
+        assert benchmark.cap == 2_000_000

@@ -101,13 +101,17 @@ _GminSearch.track_success.unit = "fraction"
 
 
 def _benchmark(spec: dict):
+    # The class body treats any assigned name as local, so the outer spec
+    # is copied into names that the class only reads.
     bound = spec
+    starts = selected_indices(spec["n"])
+    limit = spec["cap"]
 
     class _Benchmark(_GminSearch):
         param_names = ["seed", "start"]
-        params = [[SEED], selected_indices(spec["n"])]
+        params = [[SEED], starts]
         timeout = 7200
-        cap = spec["cap"]
+        cap = limit
         spec = bound
 
     _Benchmark.__name__ = spec["class_name"]
