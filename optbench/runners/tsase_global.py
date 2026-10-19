@@ -89,6 +89,10 @@ MAX_HOPS = 1_000_000
 FAILED_QUENCHES = 50
 
 
+class Exploded(Exception):
+    """The potential energy left the range a local step can recover from."""
+
+
 class SearchStop(BaseException):
     """Leave a TSASE loop. Basin hopping uses a bare ``except`` around the quench."""
 
@@ -205,6 +209,11 @@ class HarnessLennardJones:
                 f"{Path.cwd().name} calls={calls} lowest={lowest}",
                 flush=True,
             )
+        # A line search on a near-overlap otherwise takes steps smaller than
+        # a coordinate change and never returns. Basin hopping counts this as
+        # a failed quench. Minima hopping records divergence.
+        if not math.isfinite(energy) or energy > 1.0e6:
+            raise Exploded(f"energy {energy}")
         forces = -np.asarray(gradient, dtype=np.float64).reshape(-1, 3)
         self.results = {"energy": float(energy), "forces": forces}
         if self.threshold is not None and energy <= self.threshold:
@@ -518,6 +527,8 @@ def run_start(job: dict) -> dict:
         exploded = reason == "divergence"
     except SearchStop as exc:
         exploded = exc.reason == "divergence"
+    except Exploded:
+        exploded = True
     except Exception as exc:
         crashed = True
         error = f"{type(exc).__name__}: {exc}"

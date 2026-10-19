@@ -65,6 +65,19 @@ def test_success_is_the_energy_window_under_the_cap():
     assert failure == "wrong_stationary"
 
 
+def test_an_exploded_energy_is_divergence():
+    success, failure, _reasons = judge_global(
+        calls=4,
+        cap=100,
+        energy=1.0e8,
+        threshold=None,
+        crashed=False,
+        exploded=True,
+    )
+    assert success is False
+    assert failure == "divergence"
+
+
 def test_an_unruled_start_is_not_a_success():
     success, failure, _reasons = judge_global(
         calls=12,
