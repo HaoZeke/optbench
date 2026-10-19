@@ -1,0 +1,19 @@
+{
+  "name": "ts-pt-dimer",
+  "develop_template": "eon/develop-ts-pt-dimer",
+  "svn_template": "eon-svn/ts-pt-dimer",
+  "kind": "ts-pt",
+  "seed": 1,
+  "start": "initial_0",
+  "eon_commit": "7095b23ac17d49f434a5e08ccb072897ceca698e",
+  "probe_cap": 100000,
+  "potential": "morse_pt",
+  "counter": "harness",
+  "force_calls": 94.0,
+  "verify_calls": 0,
+  "client_calls": 94,
+  "client_reason": "0",
+  "extrema": null,
+  "seconds": 0.6981801179936156,
+  "ini": "[Main]\njob = saddle_search\nfinite_difference = 0.001\nrandom_seed = 1\nparallel = false\n\n[Potential]\npotential = ext_pot\next_pot_path = /tmp/optbench-extpot-q8tn7lje/extpot-bridge\n\n[Optimizer]\nopt_method = lbfgs\nconvergence_metric = norm\nconverged_force = 0.001\nmax_move = 0.2\nmax_iterations = 1000\nlbfgs_memory = 20\nlbfgs_inverse_curvature = 0.01\nlbfgs_max_inverse_curvature = 0.0\nlbfgs_auto_scale = true\nlbfgs_angle_reset = true\nlbfgs_distance_reset = true\n\n[Dimer]\nopt_method = cg\nimproved = true\nfinite_angle = 0.005\nconverged_angle = 5.0\nrotations_max = 10\nrotations_min = 1\n\n[Saddle Search]\nmin_mode_method = dimer\nclient_displace_type = load\nconverged_force = 0.001\nmax_iterations = 1000\ndisplace_magnitude = 0.1\n"
+}

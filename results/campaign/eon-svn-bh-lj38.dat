@@ -1,9 +1,9 @@
-force_calls 304315
+force_calls 529113
 force_calls_min 9176
-force_calls_max 738422
-force_calls_median 238263.0
+force_calls_max 1939525
+force_calls_median 405013.5
 call_unit total
-nfailed 0
+nfailed 2
 code Eon svn
 code_version r2549
 commit r2549
@@ -13,5 +13,3 @@ problem globalopt/lj38
 reducer harness
 counter harness
 count_keys HarnessCounter
-partial true
-potential unshifted lj/cut, epsilon 1, sigma 1, cutoff 40

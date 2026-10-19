@@ -1,0 +1,32 @@
+# counter harness. One force call is one clean energy and gradient.
+# Noise is added after the call. A repeated coordinate keeps that sample.
+# The index uses the clean Hessian. Six rigid modes are removed.
+# A curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6).
+# Energy and Kabsch RMSD are not applied: the problem file has no per-start reference.
+# Default profile. initial_step_size is -1e-7, alpha_min is 1e-3, and eps_subsp is 1e-5. The wrapper constructor uses -0.01 and eps_subsp 1e-3, which let LJ38 leave the cutoff. The stop is the noise-aware force norm, and at positive sigma the clean energy over the last window. The index is the clean Hessian with the rigid-mode rule. Variable-cell SQNM is not on this problem: the spec potential has no cell.
+force_calls 373
+force_calls_min 242
+force_calls_max 710
+nfailed 1
+median 356
+code vc-SQNM
+code_version 1.3
+commit 4241692173cccb42a9ae05974bfd62285ec2cd7b
+algorithm SQNM
+template noise/vcsqnm-sqnm-s1em3
+tuning default
+counter harness
+problem minimization/lj38-noise
+sigma 0.001
+par2_mean 627.975
+wilson_low 0.977885557624
+wilson_high 0.992387179611
+par2_median 358
+par2_median_low 352
+par2_median_high 363
+v2_nfailed 13
+v2_successes 987
+n 1000
+cap 10000
+energy_min -171.147514706
+energy_max 0
