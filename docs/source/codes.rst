@@ -907,9 +907,6 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">49</td>
    </tr>
    </tbody></table></div>
-   <p>No full ranked run</p><ul>
-   <li>Pt heptamer island: partial.</li>
-   </ul>
    <h3>LAMMPS</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>

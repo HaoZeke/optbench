@@ -164,9 +164,7 @@ def test_templates_pin_the_push_profiles():
     assert tomllib.loads((root / "htst-pt.toml").read_text(encoding="utf-8"))["kernel"] == "morse_shift"
     assert tomllib.loads((root / "aladatom.toml").read_text(encoding="utf-8"))["kmc"]["seeds"] >= 3
     assert tomllib.loads((root / "standard-aladatom.toml").read_text(encoding="utf-8"))["kmc"]["seeds"] >= 3
-    smooth = tomllib.loads((root / "saddle-pt-smooth.toml").read_text(encoding="utf-8"))
-    assert smooth["kernel"] == "morse"
-    assert smooth["id"] == "pykmc/saddle-pt-smooth"
+    assert not (root / "saddle-pt-smooth.toml").is_file()
     guess = tomllib.loads((root / "ts-pt.toml").read_text(encoding="utf-8"))
     assert guess["pykmc"]["ninit"] == 0
     assert guess["pykmc"]["push_mode"] == "list"

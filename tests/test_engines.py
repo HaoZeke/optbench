@@ -70,7 +70,6 @@ def test_new_templates_match_a_problem_stop():
         "tsase/neb",
         "pykmc/ts-pt",
         "pykmc/saddle-pt",
-        "pykmc/saddle-pt-smooth",
         "pykmc/htst-pt",
         "pykmc/htst-al",
         "pykmc/aladatom",

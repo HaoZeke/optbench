@@ -67,7 +67,6 @@
    <li>eon-svn/saddle-pt-dimer-bounded Eon svn campaign n=1, result file sets partial true.</li>
    <li>eon-svn/saddle-pt-lanczos-bounded Eon svn campaign n=1, result file sets partial true.</li>
    <li>eon-svn/saddle-pt-md Eon svn campaign n=1, result file sets partial true.</li>
-   <li>pykmc/saddle-pt-smooth pykmc campaign n=561, result file sets ranked false; potential morse/smooth/linear.</li>
    <li>eon/develop-saddle-pt-dimer eOn asv n=1, smoke run; one start.</li>
    <li>eon/develop-saddle-pt-lanczos eOn asv n=1, smoke run; one start.</li>
    <li>ase/dimer-pt-island-default ASE asv n=1, smoke run; one start.</li>

@@ -860,8 +860,7 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
                 f"A connected index-1 saddle is a harness success. Both endpoint minima are in {endpoints_path.name}."
             )
             lines.append(
-                f"# Potential is {potential}. The 2014 Pt archive used shifted Morse. "
-                "Smooth-linear is a separate labelled row."
+                f"# Potential is {potential}. The 2014 Pt archive used shifted Morse."
             )
             endpoint_rows = 0
             if endpoints_path.is_file():

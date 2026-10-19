@@ -115,7 +115,6 @@ success-only median. A row with no success has no median.
 | accelerated-md/aladatom | pykmc/aladatom | 3/3 | 0 | 166853 |
 | accelerated-md/standard_aladatom | pykmc/standard-aladatom | 3/3 | 0 | 119079 |
 | saddle-search/pt-island | pykmc/saddle-pt | 512/792 | 210 wrong stationary, 69 crash, 1 not converged | 1260.5 |
-| saddle-search/pt-island | pykmc/saddle-pt-smooth | 360/561 | 139 wrong stationary, 61 crash, 1 not converged | 1262 |
 
 The rgsaddle band campaigns on `neb/Pt-heptamer` and the three double-ended
 problems are on disk (12 templates each). The eight rgmin `lj38-noise` L-BFGS rows are on disk.
@@ -257,20 +256,15 @@ Two minima are the same when that maximum is strictly below 0.1 Å. A
 search is connected when exactly one endpoint matches. `rmsd_connect` 0.5
 stays the saddle-novelty test and is not this link.
 
-The rows below, other than `pykmc/saddle-pt-smooth`, do not store `minimum`,
-`endpoint_plus`, and `endpoint_minus`. RMSD scalars do not determine the
-per-atom maximum, so those rows were not rewritten and no campaign was
-rerun. Their connected counts and PAR-2 stay the stored values.
-`pykmc/saddle-pt-smooth` stores both endpoint minima for every search.
-The link count is 360 of 561. A connected index-1 saddle at the force
-stop is a harness success, so those 360 are the successes.
-`apply_taxonomy` names the other 201. PAR-2 is 15168.08. The MATLAB smoke
-in `softsaddle/entry.toml` records two searches and does not store
-endpoint coordinates.
+The rows below do not store `minimum`, `endpoint_plus`, and
+`endpoint_minus`. RMSD scalars do not determine the per-atom maximum, so
+those rows were not rewritten and no campaign was rerun. Their connected
+counts and PAR-2 stay the stored values. The MATLAB smoke in
+`softsaddle/entry.toml` records two searches and does not store endpoint
+coordinates.
 
 | row | geometries | old connected | new connected | old PAR-2 | new PAR-2 |
 | --- | --- | --- | --- | --- | --- |
-| pykmc/saddle-pt-smooth | both endpoints on 499 of 561 | 12/561 | 360/561 | 39172.08 | 15168.08 |
 | sella/pt-island-search-default, asv n=16 | absent (success track only) | 12/16 | 12/16 | 5201.625 | 5201.625 |
 | sella/pt-island-search-tuned, asv n=16 | absent (success track only) | 11/16 | 11/16 | 6420.125 | 6420.125 |
 | rgsaddle/saddle-dimer-rotskip-tuned | absent; RMSD scalars on 17719 of 20000 | 2/20000 | 2/20000 | 10127.05255 | 10127.05255 |
@@ -493,9 +487,8 @@ stop is the Euclidean norm and pARTn's own default is the maximum
 component. `delr_thr` is 1e9, so pyKMC's 0.5 displacement filter does not
 drop a saddle before the harness judges it. Fixed atoms are left out of
 the LAMMPS system. `pair_style zero` contributes nothing. Forces come from
-`fix external pf/callback` and `HarnessCounter` counts them. The stored
-Pt saddle sample is `morse/smooth/linear`. The baseline saddle and hTST
-Pt templates use the archive shifted Morse, `kernel morse_shift`.
+`fix external pf/callback` and `HarnessCounter` counts them. The baseline
+saddle and hTST Pt templates use the archive shifted Morse, `kernel morse_shift`.
 Aluminum uses the r2549 EAM routine. The 2014 Pt entries used that
 shifted Morse.
 
@@ -515,7 +508,6 @@ island atoms is 1.449. The slab mean is stored as `rmsd_plus_free` and
 | accelerated-md/aladatom | pykmc/aladatom | 3/3 | 0 | 166853 | 178325.67 |
 | accelerated-md/standard_aladatom | pykmc/standard-aladatom | 3/3 | 0 | 119079 | 126131.67 |
 | saddle-search/pt-island | pykmc/saddle-pt | 512/792 | 210 wrong stationary, 69 crash, 1 not converged | 1260.5 | 14983.76 |
-| saddle-search/pt-island | pykmc/saddle-pt-smooth | 360/561 | 139 wrong stationary, 61 crash, 1 not converged | 1262 | 15168.08 |
 
 `pykmc/ts-pt` is one search from each of the 49 guesses. `initial_13`
 stopped at 325 calls and `initial_44` at 652, both `EVENT_NOT_FOUND`.
@@ -556,57 +548,6 @@ Every search has a line in
 schema `optbench.endpoint-minima/v1`. The file has 792 rows. 722 rows
 store both endpoint minima. 70 store neither. No row stores one side
 only.
-
-`pykmc/saddle-pt-smooth` is the stored smooth-linear catalogue on the
-minimized reactant. It is `ranked false`. The baseline template
-`pykmc/saddle-pt` is shifted Morse and is not this sample.
-`displace_magnitude` is 0. The central atom is one of atoms 0–6. The
-catalogue stopped 160 searches after the last new unique saddle under
-1.5 eV. That saddle is search 401, barrier 1.493 eV, so the run stops at
-561 searches. The goal of 27 unique saddles under 1.5 eV was not met:
-that count is 12. `unique_saddles` is 163. The campaign spent 765865
-harness calls, including 14 to minimize the reactant.
-
-A harness success is an index-1 saddle at the 0.001 force stop whose
-endpoints pass the eOn r2205 link. The barrier window and the novelty
-test do not reject that saddle. Successes are 360 of 561.
-`fraction_connected` is 360/561 = 0.6417112299. Of those 360, 348 had
-been stored as divergence. Every one of those 348 is Hessian index 1.
-Their force norms run from 0.00039215 to 0.00099997. Their call counts
-run from 823 to 2466. None missed the force stop, the Hessian index, the
-endpoint relaxation, or the harness cap of 20000. The success bit is the
-link. `optbench.failures.apply_taxonomy` keeps the 360 and names the
-other 201: 139 `wrong_stationary`, 61 `crash`, and 1 `not_converged`.
-The 61 crashes store `ErrorType.EVENT_NOT_FOUND: No event found`. The
-`not_converged` search stopped on the method budget at 10000 calls,
-under the harness cap. None of the 561 is divergence and none is cap.
-The success median is 1262 calls. The median of the 561 call counts is
-1304. Mean calls on the successes are 1303.5944444444. The v2 median of
-the penalised costs is 1499, bootstrap 1436 to 1630. PAR-2 is
-15168.0819964349 at a denominator of 20000. Wilson 95% is 0.6011925691
-to 0.6803023487. The twelve novel saddles under 1.5 eV, rounded to three
-decimals, are 0.601, 0.601, 0.619, 0.985, 0.985, 0.987, 0.987, 0.989,
-0.989, 1.195, 1.207, and 1.493.
-
-`fraction_eon_connected` is the same 360/561. That count is the eOn
-r2205 link on the stored endpoints: exactly one side has per-atom
-maximum minimum-image distance strictly below 0.1 Å. The 139
-`wrong_stationary` searches match neither side. The archived
-`eon-dimer` fraction 0.746017 counts a result token that is not `Not
-Connected`, over 11366.8 searches, with force calls 3.77888e+06 and
-109.222 unique saddles. Eon r2205, Sam Chill, 15 Jul 2014. That archive
-row used the 2014 shifted Morse potential. This smooth-linear sample is
-not that row.
-
-Every search has a line in
-`pykmc-0.0.1-saddle-search-pt-island--pykmc-saddle-pt-smooth.endpoints.jsonl`,
-schema `optbench.endpoint-minima/v1`. The file has 561 rows. 499 rows
-store both endpoint minima. 62 store neither, because the climb had no
-mode. No row stores one side only. Each geometry has 343 atoms. The
-scored starts keep `per_atom_max_plus` and `per_atom_max_minus` and do
-not repeat the coordinates. The hTST and aladatom campaigns were not
-rescored under this saddle rule. Process identity in those rows is the
-top-window RMSD from the run that wrote them.
 
 `pykmc/htst-pt` is a KMC campaign at 700 K with prefactor 1.2e12 on the
 shifted Morse potential. The cycle rules are
@@ -705,9 +646,8 @@ of the shifted potential. `pes.morse_pt` is the smooth-linear kernel, not
 the shifted one. The smooth-linear energy is 4.432842 eV higher. The
 largest free-atom force difference is 0.003255 eV/Å. The smooth-linear
 campaign then minimizes, 14 calls, to −1771.358522 eV and a free-atom
-force norm of 9.604e-4. The stored 561-search row stays on that
-smooth-linear potential and is labelled `ranked false`. The baseline
-saddle template and the hTST Pt template use shifted Morse.
+force norm of 9.604e-4. The saddle template and the hTST Pt template use
+shifted Morse.
 
 The same smooth-linear kernel, `morse`, is what `eon-client` uses for
 hTST Pt, the saddle-pt dimer, Lanczos, and high-temperature rows, and the
@@ -722,8 +662,7 @@ shifted potential. The develop saddle and tsopt Pt rows set `potential =
 with no cutoff and the box ignored. On this reactant that energy is
 40168.955936 eV and the force norm is 13.432784. The 2014 archive
 `eon-dimer` saddle row is r2205 on shifted Morse. The pyKMC baseline
-uses that shifted Morse. The stored smooth-linear row is the extra
-sample. The no-cutoff develop potential is a third surface.
+uses that shifted Morse. The no-cutoff develop potential is a third surface.
 
 hTST Al is the r2549 aluminum EAM in pyKMC, `eon-svn`, and `eon-client`.
 The eOn aladatom AKMC rows call the client's built-in `eam_al` and count

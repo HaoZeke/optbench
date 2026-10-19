@@ -112,7 +112,7 @@ repository = "https://github.com/hugomoison/pyKMC"
 ref = "main"
 commit = "9fd1f6e9085ef92642142406f3dd74e574209898"
 committed = "2026-10-05"
-note = "Hugo Moison and Laurent Karim Béland, Queen's University. main 9fd1f6e9085ef92642142406f3dd74e574209898, the 2026-10-05 merge of pull request 130. Version string 0.0.1. The event search is partn_search. LAMMPS stable_22Jul2025_update3 is 9f06a79b033159c606ca880ee63f0ec82b37dc3a with the PLUGIN package. pARTn is 9b753517c6c0eccae51425b83eb4e04ef554550b. IRA is 4bb1319042d22181a7d86e342f809c055122865f. Forces go through fix external pf/callback and pair_style zero into HarnessCounter. A search that starts at a minimum uses the Béland 2015 k-ART push and the pinned artn-plugin Pt(111) heptamer steps, profile beland-2015-pt111. The saddle-search and hTST Pt baseline uses the 2014 shifted Morse. Smooth-linear is the extra row pykmc/saddle-pt-smooth. The 2014 archive has no pyKMC row."
+note = "Hugo Moison and Laurent Karim Béland, Queen's University. main 9fd1f6e9085ef92642142406f3dd74e574209898, the 2026-10-05 merge of pull request 130. Version string 0.0.1. The event search is partn_search. LAMMPS stable_22Jul2025_update3 is 9f06a79b033159c606ca880ee63f0ec82b37dc3a with the PLUGIN package. pARTn is 9b753517c6c0eccae51425b83eb4e04ef554550b. IRA is 4bb1319042d22181a7d86e342f809c055122865f. Forces go through fix external pf/callback and pair_style zero into HarnessCounter. A search that starts at a minimum uses the Béland 2015 k-ART push and the pinned artn-plugin Pt(111) heptamer steps, profile beland-2015-pt111. The saddle-search and hTST Pt baseline uses the 2014 shifted Morse. The 2014 archive has no pyKMC row."
 
 [[code]]
 id = "lammps"
