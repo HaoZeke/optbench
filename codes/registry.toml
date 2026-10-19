@@ -171,7 +171,17 @@ repository = "https://github.com/ZimmermanGroup/pyGSM"
 ref = "master"
 commit = "1b4d5a5557a61adc6a3df7405d6b7255b1fa4865"
 committed = "2026-08-13"
-note = "Double-ended growing string, master 1b4d5a55. No release tag. The import version is 1.0.0+692.g1b4d5a5.dirty because versioningit rewrites _version.py at build time. The level of theory is the harness kernel. Endpoints stay the archived pair. The coordinate system is a delocalized basis of the 3N Cartesian primitives: CartesianCoordinates rejects the string tangent, and eigenvector following is not implemented for that class. nnodes is 11 and DMAX is 0.1, the defaults in bin/gsm and examples/ase_api_de_gsm.py. DQMAG_MAX is the single-ended step cap and is not applied on this double-ended path. The climb displacement is the tangent projection of the gradient; the 0.05 limit in base_optimizer is applied for a negative projection as well as a positive one. A geometry whose largest nearest-neighbour distance reaches 2 sigma is divergence. Numpy 2 shims for wilsonB, np.sum, and np.dot live in the runner. When the rotation eigensolve does not converge, the runner symmetrizes the matrix and uses the QR solver."
+note = "Double-ended growing string, master 1b4d5a55. No release tag. The import version is 1.0.0+692.g1b4d5a5.dirty because versioningit rewrites _version.py at build time. The level of theory is the harness kernel. Endpoints stay the archived pair. The coordinate system is a delocalized basis of the 3N Cartesian primitives: CartesianCoordinates rejects the string tangent, and eigenvector following is not implemented for that class. nnodes is 11 and DMAX is 0.1, the defaults in bin/gsm and examples/ase_api_de_gsm.py. DQMAG_MAX is the single-ended step cap and is not applied on this double-ended path. Numpy 2 shims for wilsonB, np.sum, and np.dot live in the runner. When the rotation eigensolve does not converge, the runner symmetrizes the matrix and uses the QR solver."
+
+[[code]]
+id = "torchsim"
+name = "TorchSim"
+role = "minimization"
+repository = "https://github.com/TorchSim/torch-sim"
+ref = "v0.6.2"
+commit = "5540d893a849db9772081229a86d5f68537ad037"
+committed = "2026-09-23"
+note = "TorchSim 0.6.2, tag v0.6.2. FIRE uses the ASE flavor at the constructor defaults. Gradient descent uses pos_lr 0.01. SpecPotentialModel evaluates the harness Lennard-Jones or Morse potential and passes that force to the optimizer. A force call is one harness evaluation."
 
 # generated ASE and Sella templates
 
