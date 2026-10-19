@@ -1,0 +1,32 @@
+force_calls 100
+force_calls_min 52
+force_calls_median 97.0
+force_calls_max 213
+nfailed 0
+starts 200
+n 200
+par2_mean 100.0200000000
+successes 200
+wilson_low 0.9811546736
+wilson_high 1.0000000000
+par2_median 97.0000000000
+median 97.0000000000
+median_low 94.0000000000
+median_high 99.0000000000
+n_cap 0
+n_wrong_stationary 0
+n_divergence 0
+n_crash 0
+counter harness
+cap 10000
+code pele
+code_version 0.1.2
+commit b7081b932a060be11342fbe8287ac35da8ada879
+algorithm lowest eigenvector
+tuning default
+template pele/lj38-loweig
+problem lowest-eigenvector/lj38
+note Library findLowestEigenVector. The initial vector is the archived initial_mode. The score is absolute overlap with the reference mode.
+contributor Rohit Goswami
+date 2026-10-18
+host cursor

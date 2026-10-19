@@ -1,0 +1,32 @@
+force_calls 254
+force_calls_min 63
+force_calls_median 220.5
+force_calls_max 1264
+nfailed 0
+starts 200
+n 200
+par2_mean 254.4800000000
+successes 200
+wilson_low 0.9811546736
+wilson_high 1.0000000000
+par2_median 220.5000000000
+median 220.5000000000
+median_low 203.5000000000
+median_high 239.0000000000
+n_cap 0
+n_wrong_stationary 0
+n_divergence 0
+n_crash 0
+counter harness
+cap 10000
+code pele
+code_version 0.1.2
+commit b7081b932a060be11342fbe8287ac35da8ada879
+algorithm hybrid eigenvector following
+tuning tuned
+template pele/lj38-ts-ffd
+problem tsopt/LJ38
+note Forward-difference hybrid eigenvector following from the 2014 LJ38 script. Logging flags are off. The Euclidean stop is the problem force norm. A converged candidate also pays for the transverse mode screen.
+contributor Rohit Goswami
+date 2026-10-18
+host cursor

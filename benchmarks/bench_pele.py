@@ -87,7 +87,7 @@ def _specs() -> list[dict]:
     found = []
     counts: dict[str, int] = {}
     for template in list_templates(ROOT):
-        if template.get("engine") != "pele":
+        if template.get("engine") != "pele" or "method" not in (template.get("pele") or {}):
             continue
         problem_id = str(template["problem"])
         if problem_id not in counts:
@@ -468,3 +468,162 @@ for _problem_prefix, _problem_name in PROBLEMS:
     for _template_prefix, _template_name in TEMPLATES:
         _class_name = f"{_problem_prefix}Pele{_template_prefix}"
         globals()[_class_name] = _bind(_class_name, _problem_name, _template_name, _selected, _cap)
+
+
+def _ts_starts(problem: str) -> list[str]:
+    if problem == "tsopt/pt-island":
+        return [f"initial_{index}" for index in range(49)]
+    if problem == "saddle-search/pt-island":
+        return ["rep1-search1"]
+    return [f"{index:04d}" for index in range(200)]
+
+
+def _ts_selected(problem: str) -> list[str]:
+    names = _ts_starts(problem)
+    if problem == "saddle-search/pt-island":
+        return names
+    if os.environ.get("OPTBENCH_ASV_FULL") == "1":
+        return names
+    return names[:1]
+
+
+def _ts_sidecar(template_name: str, seed: str, start: str) -> Path:
+    slug = template_name.replace("/", "-")
+    return result_root() / "results" / "pele-asv" / slug / str(seed) / f"{start}.json"
+
+
+def _ts_write(template_name: str, seed: str, start: str, record: dict) -> None:
+    path = _ts_sidecar(template_name, seed, start)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(record, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def _ts_failure(record: dict) -> str | None:
+    if record.get("success"):
+        return None
+    label = record.get("failure")
+    if label in _FAILURES:
+        return str(label)
+    return "crash"
+
+
+def _bind_ts(class_name: str, problem: str, template: str, cap: int):
+    starts = _ts_selected(problem)
+
+    class _Benchmark(_TrackedSearch):
+        param_names = ["seed", "start"]
+        params = [["0"], list(starts)]
+        timeout = 1800
+        problem_name = problem
+        template_name = template
+
+        def setup(self, seed, start):
+            try:
+                import pele  # noqa: F401
+            except ImportError as exc:
+                raise NotImplementedError("pele is not installed") from exc
+            path = _ts_sidecar(self.template_name, str(seed), str(start))
+            if path.is_file():
+                self.record = json.loads(path.read_text(encoding="utf-8"))
+            else:
+                self.record = None
+
+        def measure(self, seed, start):
+            from optbench.pele_ts import measure_start
+
+            try:
+                record = measure_start(ROOT, self.template_name, str(start))
+            except Exception as exc:
+                record = {
+                    "schema": "optbench.start/v2",
+                    "start": str(start),
+                    "seed": str(seed),
+                    "force_calls": 0,
+                    "verify_calls": 0,
+                    "counter": "harness",
+                    "comparable": True,
+                    "success": False,
+                    "failure": "crash",
+                    "reasons": ["crash"],
+                    "error": type(exc).__name__,
+                    "problem": self.problem_name,
+                    "template": self.template_name,
+                }
+            record["seed"] = str(seed)
+            record["force_calls"] = float(record["force_calls"])
+            record["success"] = bool(record["success"])
+            record["failure"] = _ts_failure(record)
+            if record["success"]:
+                record["failure"] = None
+            return record
+
+        def time_search(self, seed, start):
+            print(f"start {self.template_name} {start}", file=sys.stderr, flush=True)
+            began = time.perf_counter()
+            record = self.measure(seed, start)
+            record["search_seconds"] = time.perf_counter() - began
+            _ts_write(self.template_name, str(seed), str(start), record)
+            self.record = record
+            print(
+                f"done {self.template_name} {start} calls={record['force_calls']} "
+                f"success={record['success']} failure={record['failure']}",
+                file=sys.stderr,
+                flush=True,
+            )
+
+        def _ready(self, seed, start) -> dict:
+            record = getattr(self, "record", None)
+            if record is None:
+                record = self.measure(seed, start)
+                _ts_write(self.template_name, str(seed), str(start), record)
+                self.record = record
+            return record
+
+        def track_force_calls(self, seed, start) -> float:
+            return float(self._ready(seed, start)["force_calls"])
+
+        def track_success(self, seed, start) -> float:
+            return 1.0 if self._ready(seed, start)["success"] else 0.0
+
+        def track_failure_cap(self, seed, start) -> float:
+            return 1.0 if self._ready(seed, start)["failure"] == "cap" else 0.0
+
+        def track_failure_wrong_stationary(self, seed, start) -> float:
+            return 1.0 if self._ready(seed, start)["failure"] == "wrong_stationary" else 0.0
+
+        def track_failure_divergence(self, seed, start) -> float:
+            return 1.0 if self._ready(seed, start)["failure"] == "divergence" else 0.0
+
+        def track_failure_crash(self, seed, start) -> float:
+            return 1.0 if self._ready(seed, start)["failure"] == "crash" else 0.0
+
+    _Benchmark.cap = cap
+    _Benchmark.problem_id = problem
+    _Benchmark.template_id = template
+    _Benchmark.track_force_calls.unit = "force calls"
+    _Benchmark.track_success.unit = "fraction"
+    _Benchmark.track_failure_cap.unit = "count"
+    _Benchmark.track_failure_wrong_stationary.unit = "count"
+    _Benchmark.track_failure_divergence.unit = "count"
+    _Benchmark.track_failure_crash.unit = "count"
+    _Benchmark.__name__ = class_name
+    _Benchmark.__qualname__ = class_name
+    _Benchmark.__module__ = __name__
+    return _Benchmark
+
+
+_TS_ROWS = (
+    ("PeleLj38Ts", "tsopt/LJ38", "pele/lj38-ts", 10000),
+    ("PeleLj38TsFfd", "tsopt/LJ38", "pele/lj38-ts-ffd", 10000),
+    ("PeleLj38TsCd", "tsopt/LJ38", "pele/lj38-ts-cd", 10000),
+    ("PelePtIslandTs", "tsopt/pt-island", "pele/pt-island-ts", 10000),
+    ("PelePtIslandTsFfd", "tsopt/pt-island", "pele/pt-island-ts-ffd", 10000),
+    ("PeleLj38Loweig", "lowest-eigenvector/lj38", "pele/lj38-loweig", 10000),
+    ("PeleLj38LoweigForward", "lowest-eigenvector/lj38", "pele/lj38-loweig-forward", 10000),
+    ("PeleLj38LoweigCentral", "lowest-eigenvector/lj38", "pele/lj38-loweig-central", 10000),
+    ("PelePtIslandSearch", "saddle-search/pt-island", "pele/pt-island-search", 5064),
+    ("PelePtIslandSearchFfd", "saddle-search/pt-island", "pele/pt-island-search-ffd", 5064),
+)
+
+for _name, _problem, _template, _cap in _TS_ROWS:
+    globals()[_name] = _bind_ts(_name, _problem, _template, _cap)

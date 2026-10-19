@@ -1,0 +1,56 @@
+id = "pele/pt-island-search-ffd"
+engine = "pele"
+code = "pele"
+code_version = "0.1.2"
+commit = "b7081b932a060be11342fbe8287ac35da8ada879"
+algorithm = "hybrid eigenvector following"
+problem = "saddle-search/pt-island"
+task = "saddle-search"
+tuning = "tuned"
+note = "The Pt-island displacement protocol with the LJ38 forward-difference quench controls. The climb cap is 1000 force calls. Each endpoint minimization has a budget of 2000. The PAR-2 cap is 5064."
+
+[stop]
+force_norm = 0.001
+
+[ini.Optimizer]
+max_iterations = 1000
+converged_force = 0.001
+max_move = 0.2
+
+[hef]
+nsteps = 1001
+nfail_max = 200
+nsteps_tangent1 = 14
+nsteps_tangent2 = 16
+max_uphill_step = 0.2
+max_uphill_step_initial = 0.2
+demand_initial_negative_vec = false
+check_negative = false
+index_seed = 0
+orthog = "none"
+eigenvec0 = "kick"
+
+[hef.lowest]
+nsteps = 40
+tol = 0.33
+maxstep = 0.2
+first_order = true
+H0 = 0.1
+M = 82
+
+[hef.tangent]
+maxstep = 0.2
+M = 4
+H0 = 0.1
+
+[search]
+repetitions = 1
+displace_atoms = "0,1,2,3,4,5,6"
+displace_magnitude = 0.1
+rmsd_connect = 0.5
+max_searches = 20000
+connected = 27
+barrier_eV = 1.5
+endpoint_budget = 2000
+climb_overshoot = 64
+minimize_budget = 5000

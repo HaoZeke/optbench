@@ -87,6 +87,8 @@
    <li>sella/pt-island-search-tuned Sella asv n=1, smoke run; one start.</li>
    <li>ase/dimer-pt-island-tuned ASE asv n=1, smoke run; one start.</li>
    <li>sella/pt-island-search-default Sella asv n=1, smoke run; one start.</li>
+   <li>pele/pt-island-search pele asv n=1, smoke run; one start.</li>
+   <li>pele/pt-island-search-ffd pele asv n=1, smoke run; one start.</li>
    </ul>
    <h3>Not a harness score</h3><ul>
    <li>eon-3.5.0-saddle-pt-dimer Eon n=10, not yet on the harness counter.</li>

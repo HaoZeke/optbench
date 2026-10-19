@@ -1,0 +1,22 @@
+id = "pele/lj38-loweig"
+engine = "pele"
+code = "pele"
+code_version = "0.1.2"
+commit = "b7081b932a060be11342fbe8287ac35da8ada879"
+algorithm = "lowest eigenvector"
+problem = "lowest-eigenvector/lj38"
+task = "lowest-eigenvector"
+tuning = "default"
+note = "Library findLowestEigenVector. The initial vector is the archived initial_mode. The score is absolute overlap with the reference mode."
+
+[stop]
+max_force_calls = 10000
+
+[mode]
+first_order = true
+dx = 0.001
+nsteps = 500
+tol = 1.0e-6
+overlap_stop = false
+orthog = "translations-rotations"
+eigenvec0 = "initial-mode"

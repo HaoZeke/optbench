@@ -913,6 +913,17 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
+   <tr data-problem="lowest-eigenvector/lj38" data-template="pele/lj38-loweig-forward">
+   <td>lj38</td>
+   <td data-field="template">pele/lj38-loweig-forward</td>
+   <td data-field="version">pele 0.1.2</td>
+   <td data-field="commit">b7081b932a06</td>
+   <td data-field="par2_mean">24.745</td>
+   <td data-field="mean_calls">24.745</td>
+   <td data-field="median_calls">23.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
    <tr data-problem="minimization/lj38" data-template="pele/lj38-lbfgs-m100">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="template">pele/lj38-lbfgs-m100</td>
@@ -957,10 +968,36 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
+   <tr data-problem="tsopt/LJ38" data-template="pele/lj38-ts-ffd">
+   <td>LJ38</td>
+   <td data-field="template">pele/lj38-ts-ffd</td>
+   <td data-field="version">pele 0.1.2</td>
+   <td data-field="commit">b7081b932a06</td>
+   <td data-field="par2_mean">254.48</td>
+   <td data-field="mean_calls">254.48</td>
+   <td data-field="median_calls">220.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="tsopt/pt-island" data-template="pele/pt-island-ts">
+   <td>pt-island</td>
+   <td data-field="template">pele/pt-island-ts</td>
+   <td data-field="version">pele 0.1.2</td>
+   <td data-field="commit">b7081b932a06</td>
+   <td data-field="par2_mean">614.633</td>
+   <td data-field="mean_calls">614.633</td>
+   <td data-field="median_calls">614</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">49</td>
+   </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
+   <li>lj38: partial.</li>
    <li>Lennard-Jones 38 clusters: partial.</li>
    <li>Morse bulk: partial.</li>
+   <li>Pt heptamer island: partial.</li>
+   <li>LJ38: partial.</li>
+   <li>pt-island: partial.</li>
    <li>pele-lbfgs-M1-maxstep0.1: no per-start record.</li>
    <li>pele-lbfgs-M10-maxstep0.1: no per-start record.</li>
    <li>pele-lbfgs-M100-maxstep0.2: no per-start record.</li>

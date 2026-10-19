@@ -21,5 +21,9 @@ results/lammpsneb-asv/
 results/campaign/*.parts/
 results/campaign/work/
 results/campaign/geometries/
+results/campaign/*.header.json
+results/campaign/*.partial.jsonl
+results/campaign/*.tmp
+results/campaign/*.jsonl.tmp
 *.endpoints.bin
 results/pele-asv/

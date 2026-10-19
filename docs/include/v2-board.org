@@ -259,7 +259,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="GMIN">—</td>
-   <td data-code="pele">—</td>
+   <td data-code="pele" data-template="pele/lj38-loweig-forward" data-par2="24.745"><span class="bench-score">24.745</span><a href="generated/suites/lowest-eigenvector.html#lj38-templates">pele/lj38-loweig-forward</a></td>
    <td data-code="LAMMPS">—</td>
    <td data-code="pysisyphus" data-template="pysisyphus/lanczos-lj38" data-par2="4017.14"><span class="bench-score">4017.14</span><a href="generated/suites/lowest-eigenvector.html#lj38-templates">pysisyphus/lanczos-lj38</a></td>
    <td data-code="AIRSS">—</td>
@@ -286,7 +286,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella" data-template="sella/lj38-ts-default" data-par2="68.74"><span class="bench-score">68.74</span><a href="generated/suites/tsopt.html#LJ38-templates">sella/lj38-ts-default</a></td>
    <td data-code="GMIN">—</td>
-   <td data-code="pele">—</td>
+   <td data-code="pele" data-template="pele/lj38-ts-ffd" data-par2="254.48"><span class="bench-score">254.48</span><a href="generated/suites/tsopt.html#LJ38-templates">pele/lj38-ts-ffd</a></td>
    <td data-code="LAMMPS">—</td>
    <td data-code="pysisyphus">—</td>
    <td data-code="AIRSS">—</td>
@@ -313,7 +313,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella" data-template="sella/pt-island-ts-default" data-par2="74.2857"><span class="bench-score">74.2857</span><a href="generated/suites/tsopt.html#pt-island-templates">sella/pt-island-ts-default</a></td>
    <td data-code="GMIN">—</td>
-   <td data-code="pele">—</td>
+   <td data-code="pele" data-template="pele/pt-island-ts" data-par2="614.633"><span class="bench-score">614.633</span><a href="generated/suites/tsopt.html#pt-island-templates">pele/pt-island-ts</a></td>
    <td data-code="LAMMPS">—</td>
    <td data-code="pysisyphus">—</td>
    <td data-code="AIRSS">—</td>
