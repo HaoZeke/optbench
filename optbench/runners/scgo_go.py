@@ -734,12 +734,13 @@ def bh_settings(problem: dict, template: dict, n_atoms: int) -> dict:
             raise ValueError(
                 f"{template['id']} dr {dr} and temperature {temperature} differ from the documented preset"
             )
-        judge = "globalopt"
-        stop_on_energy = True
     elif stated_cap is not None and int(stated_cap) != library_cap:
         raise ValueError(f"{template['id']} failure_cap {stated_cap} is not the budget {library_cap}")
     else:
         cap = library_cap
+    if known is not None:
+        judge = "globalopt"
+        stop_on_energy = True
     symbol = str(section.get("symbol") or "C")
     seed = int(section.get("seed") if section.get("seed") is not None else 314159)
     return {

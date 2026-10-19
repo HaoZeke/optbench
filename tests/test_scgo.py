@@ -194,14 +194,20 @@ def test_installed_library_budget_matches_the_template():
     assert settings["fmax"] == pytest.approx(0.05)
     assert settings["dr"] == pytest.approx(0.2)
     assert settings["symbol"] == "C"
-    assert settings["threshold"] == pytest.approx(settings["reference_energy"] + 0.001)
+    assert settings["reference_energy"] == pytest.approx(-173.928427)
+    assert settings["threshold"] == pytest.approx(-173.927427)
+    assert settings["judge"] == "globalopt"
+    assert settings["stop_on_energy"] is True
     tuned = load_template(ROOT, "scgo/lj38-bh-tuned")
     tuned_settings = bh_settings(problem, tuned, 38)
     assert tuned_settings["dr"] == pytest.approx(0.2)
     assert tuned_settings["temperature"] == pytest.approx(1.0)
     assert tuned_settings["niter_local_relaxation"] == 233
     assert tuned_settings["niter"] == AIRSS_LJ38_CALL_CEILING
-    assert tuned_settings["judge"] == ""
+    assert tuned_settings["cap"] == AIRSS_LJ38_CALL_CEILING
+    assert tuned_settings["reference_energy"] == pytest.approx(-173.928427)
+    assert tuned_settings["judge"] == "globalopt"
+    assert tuned_settings["stop_on_energy"] is True
     lj75 = load_template(ROOT, "scgo/lj75-bh")
     lj75_problem = resolve_problem(ROOT, "globalopt/lj75")
     lj75_settings = bh_settings(lj75_problem, lj75, 75)
@@ -214,4 +220,3 @@ def test_installed_library_budget_matches_the_template():
     assert lj75_settings["threshold"] == pytest.approx(-397.491331)
     assert lj75_settings["judge"] == "globalopt"
     assert lj75_settings["stop_on_energy"] is True
-    assert tuned_settings["cap"] == AIRSS_LJ38_CALL_CEILING
