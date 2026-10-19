@@ -1,0 +1,28 @@
+comment natoms = 343
+comment !R0 =  2.8970
+comment !A =   0.7102
+comment !rho = 1.6047
+comment !cubic box with boxl = 90.
+comment rcut = 9.5
+comment ! rho scaled = rho * r0 = 4.6488159
+comment convergence tolerance is norm(gradient)=1e-3, or that RMS(gradient)=1e-3 / sqrt(3*natoms) = 3.6084391824351612d-05
+comment scaled tolerance is tol / A = 5.08087747456e-05
+comment scaled maxstep = maxstep / R0 = 0.690369347601
+comment scaled boxl = boxl / R0 = 31.066620642043496
+comment scaled rcut = rcut / R0 = 3.2792544011
+debug
+updates 40 10
+maxbfgs 0.1
+bfgsts 11 7 30 0.08 100
+maxmax 0.15
+NEWNEB 6 10 0.06
+NEBK 3.0
+ADJUSTK 1 10.0D0 1.05
+bfgssteps 10000
+steps 200
+bulk
+nohess
+bfgsconv 4.3895D-5
+usediag 3
+optimizets
+

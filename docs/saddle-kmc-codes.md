@@ -159,9 +159,12 @@ other 87 meet the force stop with a Hessian index other than 0, so they
 are wrong stationary. The success median is 72. Start `pos_0000` took 55
 harness calls and stopped at force `0.000842553062284986`, energy
 `-1421.4513232624358`, vibrational index 6. `optim/unhooked` writes nothing.
-Noise is not scored: the relay has no noisy-force window. Saddle search,
-NEB, tsopt, and hTST are not scored: those OPTIM keywords are not connected
-to this socket. PATHSAMPLE is in the same snapshot. The PATHSAMPLE target linked
+Noise is not scored: the relay has no noisy-force window. The Pt-island
+six-image DNEB row is wales-27058 with the archived odata preamble. The
+score is OPTIM's energy+gradient count, the field `run_optim.sh` records,
+and a start fails only when the log has no `Converged to TS` line. Other
+saddle search, NEB, tsopt, and hTST keywords are not connected to the ASE
+socket. PATHSAMPLE is in the same snapshot. The PATHSAMPLE target linked
 (gfortran, `WITH_OPENMP` off). It does not call `pes.evaluate`. It writes
 `odata.*` and submits the `EXEC` program, which is OPTIM. No PATHSAMPLE
 number is written.
