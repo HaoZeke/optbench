@@ -51,7 +51,6 @@ from .rgsaddle_minmode import (
     _cartesian_rmsd,
     _geometries,
     _hessian_spectrum,
-    _outcome,
     _rng_restore,
     _rng_state,
     _unit,
@@ -77,6 +76,12 @@ _COMMIT = "702cc3d81422b92864ecdd7f544c21c56c04adca"
 
 class StopAtForce(Exception):
     """The center is at the harness force stop. The process can end."""
+
+
+def _outcome(reasons: list[str]) -> tuple[bool, str | None]:
+    """Pass the reason list to the central classifier. This runner does not relabel."""
+    failure = classify_failure(reasons)
+    return failure is None, failure
 
 
 class Stalled(Exception):
@@ -851,6 +856,7 @@ def _summarize_starts(records: list[dict], template: dict, cap: int, problem_id:
     lines.append(f"n_cap {metrics['n_cap']}")
     lines.append(f"n_wrong_stationary {metrics['n_wrong_stationary']}")
     lines.append(f"n_divergence {metrics['n_divergence']}")
+    lines.append(f"n_not_converged {metrics['n_not_converged']}")
     lines.append(f"n_crash {metrics['n_crash']}")
     lines.append("counter harness")
     lines.append(f"code {template.get('code', 'CP2K')}")
@@ -1443,6 +1449,7 @@ def _saddle_text(comments: list[str], records: list[dict], template: dict, probl
         lines.append(f"n_cap {metrics['n_cap']}")
         lines.append(f"n_wrong_stationary {metrics['n_wrong_stationary']}")
         lines.append(f"n_divergence {metrics['n_divergence']}")
+        lines.append(f"n_not_converged {metrics['n_not_converged']}")
         lines.append(f"n_crash {metrics['n_crash']}")
     return "\n".join(lines) + "\n"
 

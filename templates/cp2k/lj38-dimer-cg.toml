@@ -7,7 +7,7 @@ commit = "702cc3d81422b92864ecdd7f544c21c56c04adca"
 algorithm = "Dimer CG"
 tuning = "default"
 ranked = true
-note = "Stock GEO_OPT stop. MAX_ITER is 200. MAX_FORCE is 4.5e-4 Ha/bohr and RMS_FORCE is 3.0e-4 Ha/bohr, both multiplied by the socket scale 0.05. CP2K applies those limits to the dimer-modified gradient. The harness measures the raw Euclidean norm, which stays above 0.001, so the class is divergence. DR is the stock 0.01 angstrom. ANGLE_TOLERANCE is 1 degree. The two-point step cap is 0.05 bohr."
+note = "Stock GEO_OPT stop. MAX_ITER is 200. MAX_FORCE is 4.5e-4 Ha/bohr and RMS_FORCE is 3.0e-4 Ha/bohr, both multiplied by the socket scale 0.05. CP2K applies those limits to the dimer-modified gradient. The harness measures the raw Euclidean norm, which stays above 0.001. The runner records force_norm and does not relabel the row. DR is the stock 0.01 angstrom. ANGLE_TOLERANCE is 1 degree. The two-point step cap is 0.05 bohr."
 
 [cp2k]
 task = "dimer"
