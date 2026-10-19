@@ -1,0 +1,19 @@
+# LAMMPS FIRE on LJ38 with sigma 0.
+id = "lammps/fire-lj38-noise-s0"
+engine = "lammps"
+problem = "minimization/lj38-noise"
+code = "lammps"
+code_version = "30 Sep 2026"
+commit = "8de817dd79bfe4525d5d39246a212d833e6dee07"
+algorithm = "FIRE"
+tuning = "default"
+note = "sigma 0. The stop uses the noisy force and a clean-energy window. The Hessian is clean. sigma is not a LAMMPS keyword. dmax is 0.2. FIRE uses timestep 0.002 because its velocity kick is not limited by dmax."
+
+[lammps]
+min_style = "fire"
+
+[noise]
+sigma = 0.0
+kappa = 3.0
+window = 5
+seed = 20261016
