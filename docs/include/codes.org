@@ -651,14 +651,368 @@
    <td><a href="https://gitlab.com/mammasmias/artn-plugin">https://gitlab.com/mammasmias/artn-plugin</a></td>
    </tr>
    </tbody></table></div>
-   <p>No full ranked run.</p>
-   <h3>OPTIM</h3>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="lowest-eigenvector/lj38" data-template="partn/mode-lj38">
+   <td>lj38</td>
+   <td data-field="template">partn/mode-lj38</td>
+   <td data-field="version">artn 1.1.0</td>
+   <td data-field="commit">9b753517c6c0</td>
+   <td data-field="par2_mean">2619.84</td>
+   <td data-field="mean_calls">23.99</td>
+   <td data-field="median_calls">23</td>
+   <td data-field="failures">crash 0, divergence 26, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="tsopt/LJ38" data-template="partn/ts-lj38">
+   <td>LJ38</td>
+   <td data-field="template">partn/ts-lj38</td>
+   <td data-field="version">artn 1.1.0</td>
+   <td data-field="commit">9b753517c6c0</td>
+   <td data-field="par2_mean">20000</td>
+   <td data-field="mean_calls">49.045</td>
+   <td data-field="median_calls">45</td>
+   <td data-field="failures">crash 200, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="tsopt/pt-island" data-template="partn/ts-pt">
+   <td>pt-island</td>
+   <td data-field="template">partn/ts-pt</td>
+   <td data-field="version">artn 1.1.0</td>
+   <td data-field="commit">9b753517c6c0</td>
+   <td data-field="par2_mean">1970.22</td>
+   <td data-field="mean_calls">380.224</td>
+   <td data-field="median_calls">265</td>
+   <td data-field="failures">crash 4, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">49</td>
+   </tr>
+   </tbody></table></div>
+   <h3>TSASE</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
    <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
    <td>saddle search</td>
-   <td>svn.tar.bz2</td>
+   <td>master</td>
+   <td>98aac60b5d99</td>
+   <td><a href="https://github.com/henkelmangroup/tsase">https://github.com/henkelmangroup/tsase</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="double-ended-saddle-search/lj38" data-template="tsase/ci-neb">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="template">tsase/ci-neb</td>
+   <td data-field="version">tsase 1.0</td>
+   <td data-field="commit">98aac60b5d99</td>
+   <td data-field="par2_mean">3119.56</td>
+   <td data-field="mean_calls">1726.98</td>
+   <td data-field="median_calls">1833</td>
+   <td data-field="failures">crash 0, divergence 7, cap 17, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="tsase/ci-neb">
+   <td>lj38_2ts_separation</td>
+   <td data-field="template">tsase/ci-neb</td>
+   <td data-field="version">tsase 1.0</td>
+   <td data-field="commit">98aac60b5d99</td>
+   <td data-field="par2_mean">18812.1</td>
+   <td data-field="mean_calls">9690.35</td>
+   <td data-field="median_calls">10000</td>
+   <td data-field="failures">crash 0, divergence 1, cap 43, wrong_stationary 2</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="tsase/ci-neb">
+   <td>pt-island</td>
+   <td data-field="template">tsase/ci-neb</td>
+   <td data-field="version">tsase 1.0</td>
+   <td data-field="commit">98aac60b5d99</td>
+   <td data-field="par2_mean">2524.53</td>
+   <td data-field="mean_calls">639.61</td>
+   <td data-field="median_calls">564</td>
+   <td data-field="failures">crash 0, divergence 20, cap 1, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="lowest-eigenvector/lj38" data-template="tsase/mode-lj38">
+   <td>lj38</td>
+   <td data-field="template">tsase/mode-lj38</td>
+   <td data-field="version">tsase 1.0</td>
+   <td data-field="commit">98aac60b5d99</td>
+   <td data-field="par2_mean">2420.61</td>
+   <td data-field="mean_calls">267.945</td>
+   <td data-field="median_calls">233</td>
+   <td data-field="failures">crash 0, divergence 22, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="minimization/lj38" data-template="tsase/lbfgs-lj38">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="template">tsase/lbfgs-lj38</td>
+   <td data-field="version">tsase 1.0</td>
+   <td data-field="commit">98aac60b5d99</td>
+   <td data-field="par2_mean">257.2</td>
+   <td data-field="mean_calls">177.96</td>
+   <td data-field="median_calls">169</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 4</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-template="tsase/lbfgs-morse">
+   <td>Morse bulk</td>
+   <td data-field="template">tsase/lbfgs-morse</td>
+   <td data-field="version">tsase 1.0</td>
+   <td data-field="commit">98aac60b5d99</td>
+   <td data-field="par2_mean">17606.4</td>
+   <td data-field="mean_calls">50.37</td>
+   <td data-field="median_calls">50</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 88</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-template="tsase/ci-neb">
+   <td>Pt-heptamer</td>
+   <td data-field="template">tsase/ci-neb</td>
+   <td data-field="version">tsase 1.0</td>
+   <td data-field="commit">98aac60b5d99</td>
+   <td data-field="par2_mean">1521.15</td>
+   <td data-field="mean_calls">1521.15</td>
+   <td data-field="median_calls">1427</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   <tr data-problem="tsopt/LJ38" data-template="tsase/dimer-lj38">
+   <td>LJ38</td>
+   <td data-field="template">tsase/dimer-lj38</td>
+   <td data-field="version">tsase 1.0</td>
+   <td data-field="commit">98aac60b5d99</td>
+   <td data-field="par2_mean">20000</td>
+   <td data-field="mean_calls">10000</td>
+   <td data-field="median_calls">10000</td>
+   <td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="tsopt/pt-island" data-template="tsase/dimer-pt">
+   <td>pt-island</td>
+   <td data-field="template">tsase/dimer-pt</td>
+   <td data-field="version">tsase 1.0</td>
+   <td data-field="commit">98aac60b5d99</td>
+   <td data-field="par2_mean">1144.31</td>
+   <td data-field="mean_calls">1144.31</td>
+   <td data-field="median_calls">892</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">49</td>
+   </tr>
+   </tbody></table></div>
+   <h3>pyKMC</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>kinetic Monte Carlo</td>
+   <td>1.3</td>
+   <td>1.3</td>
+   <td><a href="https://sourceforge.net/projects/lkmc/">https://sourceforge.net/projects/lkmc/</a></td>
+   </tr>
+   </tbody></table></div>
+   <p>No full ranked run.</p>
+   <h3>LAMMPS</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization and accelerated dynamics</td>
+   <td>stable_30Sep2026</td>
+   <td>8de817dd79bf</td>
+   <td><a href="https://github.com/lammps/lammps">https://github.com/lammps/lammps</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="minimization/lj38" data-template="lammps/hftn-lj38">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="template">lammps/hftn-lj38</td>
+   <td data-field="version">lammps 30 Sep 2026</td>
+   <td data-field="commit">8de817dd79bf</td>
+   <td data-field="par2_mean">1123.81</td>
+   <td data-field="mean_calls">1066.61</td>
+   <td data-field="median_calls">974</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-template="lammps/hftn-lj38-noise-s0">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="template">lammps/hftn-lj38-noise-s0</td>
+   <td data-field="version">lammps 30 Sep 2026</td>
+   <td data-field="commit">8de817dd79bf</td>
+   <td data-field="par2_mean">1123.81</td>
+   <td data-field="mean_calls">1066.61</td>
+   <td data-field="median_calls">974</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-template="lammps/fire-morse">
+   <td>Morse bulk</td>
+   <td data-field="template">lammps/fire-morse</td>
+   <td data-field="version">lammps 30 Sep 2026</td>
+   <td data-field="commit">8de817dd79bf</td>
+   <td data-field="par2_mean">17656.7</td>
+   <td data-field="mean_calls">473.48</td>
+   <td data-field="median_calls">478</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 88</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table></div>
+   <h3>DL-FIND</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization</td>
+   <td>0.0.3</td>
+   <td>4167998d16d8</td>
+   <td><a href="https://github.com/digital-chemistry-laboratory/libdlfind">https://github.com/digital-chemistry-laboratory/libdlfind</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="minimization/lj38" data-template="dlfind/lbfgs-lj38">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="template">dlfind/lbfgs-lj38</td>
+   <td data-field="version">dlfind 0.0.3</td>
+   <td data-field="commit">4167998d16d8</td>
+   <td data-field="par2_mean">231.908</td>
+   <td data-field="mean_calls">202.105</td>
+   <td data-field="median_calls">184</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 1</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-template="dlfind/lbfgs-lj38-noise-s0">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="template">dlfind/lbfgs-lj38-noise-s0</td>
+   <td data-field="version">dlfind 0.0.3</td>
+   <td data-field="commit">4167998d16d8</td>
+   <td data-field="par2_mean">231.908</td>
+   <td data-field="mean_calls">202.105</td>
+   <td data-field="median_calls">184</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 1</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-template="dlfind/lbfgs-morse">
+   <td>Morse bulk</td>
+   <td data-field="template">dlfind/lbfgs-morse</td>
+   <td data-field="version">dlfind 0.0.3</td>
+   <td data-field="commit">4167998d16d8</td>
+   <td data-field="par2_mean">13626.5</td>
+   <td data-field="mean_calls">80.42</td>
+   <td data-field="median_calls">74.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 68</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table></div>
+   <h3>COMPASS</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>double-ended saddle search</td>
+   <td>1.0.0</td>
+   <td>22da7bd5f69c</td>
+   <td><a href="https://gitlab.com/goedeckergroup/compass">https://gitlab.com/goedeckergroup/compass</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="double-ended-saddle-search/lj38" data-template="compass/sqnm">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="template">compass/sqnm</td>
+   <td data-field="version">compass 1.0.0</td>
+   <td data-field="commit">22da7bd5f69c</td>
+   <td data-field="par2_mean">1517.3</td>
+   <td data-field="mean_calls">1367.3</td>
+   <td data-field="median_calls">1234</td>
+   <td data-field="failures">crash 0, divergence 0, cap 3, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="compass/sqnm">
+   <td>lj38_2ts_separation</td>
+   <td data-field="template">compass/sqnm</td>
+   <td data-field="version">compass 1.0.0</td>
+   <td data-field="commit">22da7bd5f69c</td>
+   <td data-field="par2_mean">6713.37</td>
+   <td data-field="mean_calls">4586.12</td>
+   <td data-field="median_calls">4031</td>
+   <td data-field="failures">crash 0, divergence 0, cap 9, wrong_stationary 1</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="compass/sqnm">
+   <td>pt-island</td>
+   <td data-field="template">compass/sqnm</td>
+   <td data-field="version">compass 1.0.0</td>
+   <td data-field="commit">22da7bd5f69c</td>
+   <td data-field="par2_mean">1078.12</td>
+   <td data-field="mean_calls">1027.27</td>
+   <td data-field="median_calls">1002</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-template="compass/sqnm">
+   <td>Pt-heptamer</td>
+   <td data-field="template">compass/sqnm</td>
+   <td data-field="version">compass 1.0.0</td>
+   <td data-field="commit">22da7bd5f69c</td>
+   <td data-field="par2_mean">561.462</td>
+   <td data-field="mean_calls">561.462</td>
+   <td data-field="median_calls">548</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   </tbody></table></div>
+   <h3>pysisyphus</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization and mode following</td>
+   <td>master</td>
+   <td>a4ce10dd6d7f</td>
+   <td><a href="https://github.com/eljost/pysisyphus">https://github.com/eljost/pysisyphus</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="lowest-eigenvector/lj38" data-template="pysisyphus/lanczos-lj38">
+   <td>lj38</td>
+   <td data-field="template">pysisyphus/lanczos-lj38</td>
+   <td data-field="version">pysisyphus 0.1.dev1</td>
+   <td data-field="commit">a4ce10dd6d7f</td>
+   <td data-field="par2_mean">4017.14</td>
+   <td data-field="mean_calls">22.195</td>
+   <td data-field="median_calls">22</td>
+   <td data-field="failures">crash 0, divergence 40, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="minimization/lj38" data-template="pysisyphus/cg-lj38">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="template">pysisyphus/cg-lj38</td>
+   <td data-field="version">pysisyphus 0.1.dev1</td>
+   <td data-field="commit">a4ce10dd6d7f</td>
+   <td data-field="par2_mean">15124.7</td>
+   <td data-field="mean_calls">7655.12</td>
+   <td data-field="median_calls">10000</td>
+   <td data-field="failures">crash 0, divergence 0, cap 745, wrong_stationary 1</td>
+   <td data-field="n">1000</td>
+   </tr>
+   </tbody></table></div>
+   <h3>OPTIM</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization and saddle search</td>
+   <td>svn-snapshot</td>
    <td>02aaf45245af</td>
    <td><a href="http://www-wales.ch.cam.ac.uk/svn.tar.bz2">http://www-wales.ch.cam.ac.uk/svn.tar.bz2</a></td>
    </tr>
@@ -698,6 +1052,28 @@
    <td data-field="median_calls">1379</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="minimization/lj38" data-template="optim/lbfgs-lj38">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="template">optim/lbfgs-lj38</td>
+   <td data-field="version">optim svn-snapshot</td>
+   <td data-field="commit">02aaf45245af</td>
+   <td data-field="par2_mean">270.341</td>
+   <td data-field="mean_calls">230.724</td>
+   <td data-field="median_calls">217</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 2</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-template="optim/lbfgs-morse">
+   <td>Morse bulk</td>
+   <td data-field="template">optim/lbfgs-morse</td>
+   <td data-field="version">optim svn-snapshot</td>
+   <td data-field="commit">02aaf45245af</td>
+   <td data-field="par2_mean">17408.8</td>
+   <td data-field="mean_calls">65.19</td>
+   <td data-field="median_calls">65</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 87</td>
+   <td data-field="n">100</td>
    </tr>
    <tr data-problem="neb/Pt-heptamer" data-template="optim/dneb-hef">
    <td>Pt-heptamer</td>

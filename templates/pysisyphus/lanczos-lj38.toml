@@ -1,0 +1,13 @@
+# pysisyphus Lanczos on the LJ38 lowest-eigenvector sample.
+id = "pysisyphus/lanczos-lj38"
+engine = "pysisyphus"
+problem = "lowest-eigenvector/lj38"
+code = "pysisyphus"
+code_version = "0.1.dev1"
+commit = "a4ce10dd6d7fdcb3d813f1c730eb365d29041999"
+algorithm = "Lanczos"
+tuning = "default"
+note = "dx 5e-3, dl 1e-2, max_cycles 25, reorthogonalization on. Six rigid modes are projected out of a free cluster. The initial guess is a normal draw seeded by the start name. Success is absolute overlap of at least 0.99."
+
+[pysisyphus]
+method = "lanczos"
