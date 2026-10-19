@@ -1,44 +1,16 @@
 {
   "full_n": null,
-  "history": [],
-  "id": "mlopt/C2H4",
-  "not_comparable": [],
-  "partial": [],
-  "profile": {
-    "area_log10": {
-      "pyamff/c2h4-rprop 8037eb98 archive campaign 8037eb9": 1.2041199826559248
-    },
-    "rho": {
-      "pyamff/c2h4-rprop 8037eb98 archive campaign 8037eb9": [
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0
-      ]
-    },
-    "solved": {
-      "pyamff/c2h4-rprop 8037eb98 archive campaign 8037eb9": 1.0
-    },
-    "taus": [
-      1.0,
-      2.0,
-      4.0,
-      8.0,
-      16.0
-    ]
-  },
-  "ranked": [
+  "history": [
     {
       "asv_commit": "",
       "call_unit": "total",
       "cap": 10000,
       "code": "Pyamff",
-      "code_version": "8037eb98",
+      "code_version": "0.0.0-8037eb98",
       "commit": "8037eb98e2288c132c112aa6c2032f00cd5c5277",
       "comparable": true,
       "counter": "harness",
-      "current": true,
+      "current": false,
       "entry": "pyamff-8037eb98-c2h4-rprop",
       "failures": {
         "cap": 0,
@@ -47,7 +19,7 @@
         "wrong_stationary": 0
       },
       "full_n": null,
-      "history": false,
+      "history": true,
       "max_calls": 512.0,
       "mean_calls": 192.85,
       "mean_per_image": null,
@@ -65,7 +37,7 @@
       "partial_reason": "",
       "path": "results/campaign/pyamff-8037eb98-c2h4-rprop.dat",
       "problem": "mlopt/C2H4",
-      "registry_match": true,
+      "registry_match": false,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
@@ -73,6 +45,80 @@
       "tuning": "archive",
       "wilson_high": 1.0,
       "wilson_low": 0.9630065017930143
+    }
+  ],
+  "id": "mlopt/C2H4",
+  "not_comparable": [],
+  "partial": [],
+  "profile": {
+    "area_log10": {
+      "pyamff/c2h4-rprop 0.1.0-beta archive campaign 240f51d": 1.2041199826559248
+    },
+    "rho": {
+      "pyamff/c2h4-rprop 0.1.0-beta archive campaign 240f51d": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "solved": {
+      "pyamff/c2h4-rprop 0.1.0-beta archive campaign 240f51d": 1.0
+    },
+    "taus": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ]
+  },
+  "ranked": [
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "Pyamff",
+      "code_version": "0.1.0-beta",
+      "commit": "240f51d01ca22969369f9bc21760c61cbb3b6665",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "pyamff-0.1.0-beta-c2h4-rprop",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": null,
+      "history": false,
+      "max_calls": 589.0,
+      "mean_calls": 199.38,
+      "mean_per_image": null,
+      "median": 190.5,
+      "median_calls": 190.5,
+      "median_high": 223.0,
+      "median_low": 148.5,
+      "median_per_image": null,
+      "min_calls": 80.0,
+      "n": 50,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 199.38,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/pyamff-0.1.0-beta-c2h4-rprop.dat",
+      "problem": "mlopt/C2H4",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "pyamff/c2h4-rprop",
+      "tuning": "archive",
+      "wilson_high": 1.0,
+      "wilson_low": 0.9286524008666414
     }
   ],
   "title": "C2H4"

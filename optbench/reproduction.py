@@ -214,6 +214,17 @@ MATCHES: list[dict] = [
             "mean_force_rmse",
             "median_force_rmse",
         ],
+        "extra": {
+            "ranked_code_version": "0.1.0-beta",
+            "ranked_commit": "240f51d01ca22969369f9bc21760c61cbb3b6665",
+            "ranked_path": "results/campaign/pyamff-0.1.0-beta-c2h4-rprop.dat",
+            "ranked_mean_epoch": 199.38,
+            "ranked_median_epoch": 190.5,
+            "ranked_mean_energy_rmse": 0.008450017399999999,
+            "ranked_median_energy_rmse": 0.0077528399999999996,
+            "ranked_nfailed": 0,
+            "ranked_n": 50,
+        },
     },
 ]
 

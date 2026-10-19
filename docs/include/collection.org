@@ -1868,7 +1868,7 @@
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="mlopt/C2H4">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">pyamff/c2h4-rprop</td><td data-field="version">Pyamff 8037eb98</td><td data-field="commit">8037eb98e228</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">192.85</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">176.5</td><td data-field="mean_calls">192.85</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">pyamff/c2h4-rprop</td><td data-field="version">Pyamff 0.1.0-beta</td><td data-field="commit">240f51d01ca2</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">199.38</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.928652</td><td data-field="wilson_high">1</td><td data-field="median_calls">190.5</td><td data-field="mean_calls">199.38</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">50</td></tr>
    </tbody></table></div>
    <p><a href="generated/suites/mlopt.html#C2H4">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="C2H4-legacy">

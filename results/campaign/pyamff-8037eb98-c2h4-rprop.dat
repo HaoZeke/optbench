@@ -1,4 +1,5 @@
-# PyAMFF 8037eb98 Rprop on the archived C2H4 trajectory, force coefficient 0.
+# Paper-era diagnostic. PyAMFF commit 8037eb98e2288c132c112aa6c2032f00cd5c5277 on the archived C2H4 trajectory, force coefficient 0.
+# code_version 0.0.0-8037eb98 keeps this full run in history behind PyAMFF 0.1.0-beta. The metrics are unchanged.
 # Hidden layers 10 7, tanh, initial weights uniform[-1, 1). Fortran Behler-Parrinello fingerprints.
 # Stop when every parameter gradient is below 0.02, or energy RMSE is below 0.0001 and force RMSE is below 0.01. Cap 10000 epochs.
 # One harness call is one logged epoch: one evaluation of the squared-error loss and its gradient, including the initial weights.
@@ -15,7 +16,7 @@ template pyamff/c2h4-rprop
 cap 10000
 counter harness
 code Pyamff
-code_version 8037eb98
+code_version 0.0.0-8037eb98
 commit 8037eb98e2288c132c112aa6c2032f00cd5c5277
 tuning archive
 algorithm Rprop

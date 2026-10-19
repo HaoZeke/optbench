@@ -17,7 +17,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
-   <td data-code="Pyamff" data-template="pyamff/c2h4-rprop" data-par2="192.85"><span class="bench-score">192.85</span><a href="#C2H4-templates">pyamff/c2h4-rprop</a></td>
+   <td data-code="Pyamff" data-template="pyamff/c2h4-rprop" data-par2="199.38"><span class="bench-score">199.38</span><a href="#C2H4-templates">pyamff/c2h4-rprop</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -57,8 +57,11 @@
    <table data-board-table="ranked" data-problem="mlopt/C2H4">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">pyamff/c2h4-rprop</td><td data-field="version">Pyamff 8037eb98</td><td data-field="commit">8037eb98e228</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">192.85</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">176.5</td><td data-field="mean_calls">192.85</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">pyamff/c2h4-rprop</td><td data-field="version">Pyamff 0.1.0-beta</td><td data-field="commit">240f51d01ca2</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">199.38</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.928652</td><td data-field="wilson_high">1</td><td data-field="median_calls">190.5</td><td data-field="mean_calls">199.38</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">50</td></tr>
    </tbody></table></div>
+   <h3>History</h3><ul>
+   <li>pyamff/c2h4-rprop Pyamff 0.0.0-8037eb98 campaign n=100 PAR-2=192.85 mean=192.85</li>
+   </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="C2H4-legacy">
    <h3>Legacy 2014 archive</h3>

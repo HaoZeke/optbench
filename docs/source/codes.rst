@@ -1080,8 +1080,8 @@ The number is written only after the run finishes under the problem rule.
    <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
    <td>machine learning optimization</td>
-   <td>8037eb98</td>
-   <td>8037eb98e228</td>
+   <td>0.1.0-beta</td>
+   <td>240f51d01ca2</td>
    <td><a href="https://gitlab.com/pyamff/pyamff">https://gitlab.com/pyamff/pyamff</a></td>
    </tr>
    </tbody></table></div>
@@ -1091,13 +1091,13 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="mlopt/C2H4" data-template="pyamff/c2h4-rprop">
    <td>C2H4</td>
    <td data-field="template">pyamff/c2h4-rprop</td>
-   <td data-field="version">Pyamff 8037eb98</td>
-   <td data-field="commit">8037eb98e228</td>
-   <td data-field="par2_mean">192.85</td>
-   <td data-field="mean_calls">192.85</td>
-   <td data-field="median_calls">176.5</td>
+   <td data-field="version">Pyamff 0.1.0-beta</td>
+   <td data-field="commit">240f51d01ca2</td>
+   <td data-field="par2_mean">199.38</td>
+   <td data-field="mean_calls">199.38</td>
+   <td data-field="median_calls">190.5</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
-   <td data-field="n">100</td>
+   <td data-field="n">50</td>
    </tr>
    </tbody></table></div>
    </section>

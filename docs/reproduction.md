@@ -4,6 +4,8 @@ Archive commit `0f26b796`. A rerun matches when each archived metric is within o
 
 47 reproduced, 29 not reproduced, 75 not rerun. 151 archive rows.
 
+Pyamff 0.1.0-beta (240f51d01ca22969369f9bc21760c61cbb3b6665) is the ranked harness row on the archived C2H4 problem: mean epoch 199.38, median epoch 190.5. The median is 11.73% from the archived 170.5. That gap is left as a finding. The 8037eb98 rerun stays an unranked diagnostic.
+
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
 OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.

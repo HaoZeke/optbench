@@ -1,0 +1,23 @@
+# PyAMFF 0.1.0-beta (240f51d01ca22969369f9bc21760c61cbb3b6665, 2026-07-04), unmodified.
+# Same C2H4 problem, starts, and stop as the archive: Rprop learning rate 0.01, network 10 7 tanh, weights uniform[-1, 1), energy coefficient 1, force coefficient 0, loss gradient tolerance 0.02, energy RMSE tolerance 0.0001, force RMSE tolerance 0.01, cap 10000. Fortran Behler-Parrinello fingerprints from the archived fpParas.dat.
+# SSE is the squared-error loss name in this release. init_model_parameters is true because a fresh start otherwise opens saved_model_params.pyamff.
+# One harness call is one logged epoch, including the initial weights. Fifty initializations, the archived sample. Force RMSE is -1 because the force coefficient is 0, matching the archived report.
+# Median epoch 190.5 is 11.73% from the archived 170.5. That gap is left as a finding.
+mean_epoch 199.38
+median_epoch 190.5
+mean_energy_rmse 0.008450017399999999
+median_energy_rmse 0.0077528399999999996
+mean_force_rmse -1.0
+median_force_rmse -1.0
+nfailed 0
+problem mlopt/C2H4
+template pyamff/c2h4-rprop
+cap 10000
+counter harness
+code Pyamff
+code_version 0.1.0-beta
+commit 240f51d01ca22969369f9bc21760c61cbb3b6665
+tuning archive
+algorithm Rprop
+n 50
+force_calls 199.38
