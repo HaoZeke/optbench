@@ -1,19 +1,24 @@
-"""OPTIM L-BFGS through the ASE socket.
+"""OPTIM minimization through the ASE socket, and one 2014 double-ended row.
 
-The binary is the OPTIM target from the Wales snapshot
+Minimization uses the OPTIM target from the Wales snapshot
 ``http://www-wales.ch.cam.ac.uk/svn.tar.bz2``. The pin is the sha256 of
 that file. The snapshot has no git commit. Each ``COMPUTE`` on the relay
-is one ``pes.evaluate``. OPTIM's own counter is not the score.
+is one ``pes.evaluate``. OPTIM's own counter is not the minimization score.
 
-``optim/unhooked`` and every template that is not minimization L-BFGS
-raise before a file is written. Noise, saddle search, NEB, and PATHSAMPLE
-are not this runner.
+``optim/de-lj38`` builds OPTIM from ``wales-27058.tar.bz2``. That tree
+writes the NEWNEB RMS tolerance into ``RMSTOL``. The score is the last
+``energy+gradient calls`` field, and a start succeeds when the log
+contains ``Converged to TS``.
+
+``optim/unhooked`` and every other non-L-BFGS template raise before a
+file is written.
 """
 
 from __future__ import annotations
 
 import math
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -28,7 +33,10 @@ ENGINE = "optim"
 CODE = "optim"
 SNAPSHOT = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
 SHA256 = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+WALES_27058_URL = "https://optbench.org/codes/wales-27058.tar.bz2"
+WALES_27058_SHA256 = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
 _RELAY = Path(__file__).with_name("fmlip_relay.py")
+_FCALL = re.compile(r"# of energy\+gradient calls=\s+(-?\d+)")
 
 
 class _Calls:
@@ -55,6 +63,14 @@ def binary_path() -> Path:
     if env:
         return Path(env)
     return Path("/tmp/src/wales-full/build-optim/OPTIM")
+
+
+def wales_27058_binary() -> Path:
+    """OPTIM built from the 2014 ``wales-27058.tar.bz2`` tarball."""
+    env = os.environ.get("OPTIM_27058_BIN")
+    if env:
+        return Path(env)
+    return Path("/tmp/wales27058/build/OPTIM")
 
 
 def available() -> str | None:
@@ -280,10 +296,177 @@ def _job(start: dict, settings: dict, template: dict) -> dict:
     }
 
 
+def _symbol_lines(positions: np.ndarray, symbol: str) -> list[str]:
+    lines = []
+    for row in np.asarray(positions, dtype=np.float64):
+        coords = " ".join(_fortran_float(float(value)) for value in row)
+        lines.append(f"{symbol}  {coords}")
+    return lines
+
+
+def _bare_lines(positions: np.ndarray) -> str:
+    lines = []
+    for row in np.asarray(positions, dtype=np.float64):
+        lines.append(" ".join(_fortran_float(float(value)) for value in row))
+    return "\n".join(lines) + "\n"
+
+
+def _paper_calls(text: str) -> int | None:
+    """Last energy+gradient field. ``run_optim.sh`` takes awk field 6."""
+    found = _FCALL.findall(text)
+    if not found:
+        return None
+    return int(found[-1])
+
+
+def _dneb_record(name: str, calls: int | None, converged: bool, cap: int, error: str) -> dict:
+    """One start under the 2014 ``run_optim.sh`` rule."""
+    from optbench.failures import classify_failure
+
+    reasons: list[str] = []
+    if error:
+        reasons.append("crash")
+    counted = 0 if calls is None else int(calls)
+    if calls is None and not reasons:
+        reasons.append("crash")
+    if counted >= cap:
+        reasons.append("cap")
+    success = bool(converged) and not reasons and counted < cap
+    if success:
+        reasons = []
+    elif not reasons:
+        reasons.append("divergence")
+    return {
+        "schema": "optbench.start/v2",
+        "start": name,
+        "force_calls": counted,
+        "verify_calls": 0,
+        "counter": "harness",
+        "comparable": True,
+        "success": success,
+        "failure": classify_failure(reasons),
+        "reasons": reasons,
+        "energy": None,
+        "force_norm": None,
+        "hessian_index": None,
+        "expected_index": 1,
+        "converged": success,
+        "error": error,
+    }
+
+
+def _dneb_one(job: dict) -> dict:
+    """One wales-27058 DNEB plus hybrid eigenvector-following search."""
+    os.environ.setdefault("OMP_NUM_THREADS", "1")
+    reactant = np.asarray(job["reactant"], dtype=np.float64)
+    product = np.asarray(job["product"], dtype=np.float64)
+    cap = int(job["cap"])
+    error = ""
+    calls = None
+    converged = False
+    import tempfile
+
+    try:
+        with tempfile.TemporaryDirectory(prefix="optim-27058-") as raw:
+            folder = Path(raw)
+            lines = [str(job["preamble"]).rstrip(), "points", *_symbol_lines(reactant, str(job["symbol"]))]
+            (folder / "odata").write_text("\n".join(lines) + "\n", encoding="utf-8")
+            (folder / "finish").write_text(_bare_lines(product), encoding="utf-8")
+            env = os.environ.copy()
+            env["OMP_NUM_THREADS"] = "1"
+            try:
+                proc = subprocess.run(
+                    [str(job["binary"])],
+                    cwd=folder,
+                    env=env,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    text=True,
+                    timeout=int(job["timeout"]),
+                    check=False,
+                )
+            except subprocess.TimeoutExpired:
+                proc = None
+                error = "OPTIM exceeded the wall limit"
+            if proc is not None:
+                log = proc.stdout
+                calls = _paper_calls(log)
+                converged = "Converged to TS" in log
+                if proc.returncode != 0 and calls is None and error == "":
+                    detail = proc.stderr.strip().splitlines()
+                    tail = detail[-1] if detail else f"exit {proc.returncode}"
+                    error = f"OPTIM exit {proc.returncode}: {tail}"
+    except Exception as exc:
+        error = f"{type(exc).__name__}: {exc}"
+    return _dneb_record(str(job["name"]), calls, converged, cap, error)
+
+
+def _dneb_job(pair, settings: dict, template: dict, preamble: str, binary: Path) -> dict:
+    section = template.get("optim") or {}
+    return {
+        "name": pair.name,
+        "reactant": pair.reactant,
+        "product": pair.product,
+        "preamble": preamble,
+        "symbol": str(section.get("symbol", "AX")),
+        "cap": int(settings["cap"]),
+        "timeout": int(section.get("timeout", 600)),
+        "binary": str(binary),
+    }
+
+
+def _run_dneb(root: Path, problem: dict, template: dict, *, output: Path, workers: int) -> dict:
+    from .common import band_settings, cached_pairs
+
+    section = template.get("optim") or {}
+    binary = wales_27058_binary()
+    if not binary.is_file():
+        raise RuntimeError(
+            f"{template['id']} needs the OPTIM binary from {WALES_27058_URL}. "
+            f"The pin is sha256 {WALES_27058_SHA256}. "
+            f"{binary} is not present. Build it with optbench/wales27058_build.sh "
+            "or set OPTIM_27058_BIN."
+        )
+    if template.get("commit") != WALES_27058_SHA256:
+        raise ValueError(f"{template['id']} commit does not match wales-27058")
+    preamble_path = root / str(section.get("preamble", ""))
+    if not preamble_path.is_file():
+        raise RuntimeError(f"{template['id']} preamble is not at {preamble_path}")
+    settings = band_settings(problem)
+    if settings["potential"] != "lj":
+        raise ValueError(f"{template['id']} uses builtin LJDIFF and {settings['potential']} is not lj")
+    preamble = preamble_path.read_text(encoding="utf-8")
+    pairs = list(cached_pairs(root, problem, settings).values())
+    jobs = [_dneb_job(pair, settings, template, preamble, binary) for pair in pairs]
+    records = run_jobs(jobs, _dneb_one, workers)
+    comment = (
+        "# counter harness. The score is OPTIM's last energy+gradient call count "
+        "from wales-27058. A success is a log that contains Converged to TS.\n"
+        f"# odata preamble {preamble_path.name} is the 2014 archive file. "
+        f"Symbol {section.get('symbol', 'AX')} is LJDIFF. "
+        f"Archive force_calls {section.get('archive_force_calls', '')}."
+    )
+    parameters = {
+        "method": "dneb",
+        "preamble": str(section.get("preamble", "")),
+        "symbol": str(section.get("symbol", "AX")),
+        "counter": "energy+gradient",
+        "binary": WALES_27058_SHA256,
+        "archive_force_calls": section.get("archive_force_calls"),
+    }
+    return write_campaign(
+        output,
+        records,
+        template,
+        problem,
+        settings,
+        parameters,
+        images=None,
+        comment=comment,
+    )
+
+
 def run(root: Path, problem_name: str, template_name: str, *, output: Path, workers: int = 1) -> dict:
-    reason = available()
-    if reason:
-        raise RuntimeError(reason)
     root = Path(root)
     from optbench.campaign import load_template, resolve_problem
 
@@ -291,13 +474,20 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
 
     problem = resolve_problem(root, problem_name)
     template = load_template(root, template_name)
-    require_pin(template, registry_pin(root, CODE))
     if template["engine"] != ENGINE:
         raise ValueError(f"{template_name} engine is {template['engine']}")
     stated = template.get("problem")
     if stated and stated != problem_name:
         raise ValueError(f"{template_name} belongs to {stated}")
     section = _section(template)
+    if problem.get("suite") == "double-ended-saddle-search" and section["method"] == "dneb":
+        if template.get("code") != CODE:
+            raise ValueError(f"{template_name} code is not {CODE}")
+        return _run_dneb(root, problem, template, output=output, workers=workers)
+    reason = available()
+    if reason:
+        raise RuntimeError(reason)
+    require_pin(template, registry_pin(root, CODE))
     if problem.get("suite") != "minimization" or section["method"] != "lbfgs":
         raise _unhooked(template_name)
     if template.get("noise"):

@@ -93,7 +93,7 @@ It does not run a campaign.
    <td data-code="compass" data-template="compass/sqnm" data-par2="1517.3"><span class="bench-score">1517.3</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
-   <td data-code="optim">—</td>
+   <td data-code="optim" data-template="optim/de-lj38" data-par2="130.52"><span class="bench-score">130.52</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">optim/de-lj38</a></td>
    <td data-code="tsase" data-template="tsase/ci-neb" data-par2="3119.56"><span class="bench-score">3119.56</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">tsase/ci-neb</a></td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation">

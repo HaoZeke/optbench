@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+47 reproduced, 28 not reproduced, 76 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -30,7 +30,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj38/eon-dimer | force_calls 337 | 377 | not reproduced; improved_unset |
 | lj38/eon-lanczos | force_calls 364 | 342 | reproduced |
 | lj38/eon-lanczos-improved | force_calls 287 | 259 | reproduced |
-| lj38/optim | force_calls 131 | 147 | not reproduced; optim_pes_counter |
+| lj38/optim | force_calls 131 | 131 | reproduced |
 | lj38/optim-cl-string | — | — | not rerun |
 | lj38/pele | — | — | not rerun |
 | lj38_2ts_separation/optim | force_calls 2885 | 3454 | not reproduced; optim_pes_counter |
@@ -246,7 +246,6 @@ The r2549 template turns improved on. The 2014 ini left that key unset. The mean
 
 The template note records the 2014 mean as OPTIM's own energy-plus-gradient calls. The harness score is pes.evaluate on the harness potential.
 
-- double-ended-saddle-search/lj38/optim
 - double-ended-saddle-search/lj38_2ts_separation/optim
 
 ### pt_lanczos

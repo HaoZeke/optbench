@@ -638,36 +638,37 @@
   ],
   "profile": {
     "area_log10": {
-      "ase/de-lj38-default 3.29.0 default asv f27c000": 0.009030899869919437,
-      "ase/de-lj38-default 3.29.0 default campaign f27c000": 0.009030899869919437,
-      "ase/de-lj38-tuned 3.29.0 tuned asv f27c000": 0.16255619765854987,
+      "ase/de-lj38-default 3.29.0 default asv f27c000": 0.0030102999566398126,
+      "ase/de-lj38-default 3.29.0 default campaign f27c000": 0.0030102999566398126,
+      "ase/de-lj38-tuned 3.29.0 tuned asv f27c000": 0.07826779887263513,
       "ase/de-lj38-tuned 3.29.0 tuned campaign f27c000": 0.0,
-      "compass/sqnm 1.0.0 default campaign 22da7bd": 0.400369894233095,
-      "eon-client/de-lj38-ci-neb 3.5.0 campaign 4d8b34b": 0.6652762904173984,
-      "eon-client/de-lj38-dimer 3.5.0 campaign 4d8b34b": 0.6201217910678014,
-      "eon-client/de-lj38-lanczos 3.5.0 campaign 4d8b34b": 1.0295225851708156,
-      "eon-client/de-lj38-lanczos-improved 3.5.0 campaign 4d8b34b": 1.086718284346972,
-      "eon-svn/de-lj38-ci r2549 default campaign, asv r2549": 0.6291526909377207,
-      "eon-svn/de-lj38-ci-neb r2549 campaign r2549": 0.6442041907209197,
-      "eon-svn/de-lj38-ci-swdneb r2549 campaign r2549": 0.574967291718204,
-      "eon-svn/de-lj38-lanczos r2549 campaign r2549": 1.0536049848239342,
-      "eon-svn/de-lj38-lanczos-improved r2549 campaign r2549": 1.155955183349688,
-      "eon-svn/de-lj38-neb r2549 default campaign, asv r2549": 0.5268024924119672,
-      "rgsaddle/ci-neb 0.2.2 default campaign, asv c0db2b8": 0.2739372960542229,
-      "rgsaddle/ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 0.6291526909377207,
-      "rgsaddle/ew-ci-neb 0.2.2 default campaign, asv c0db2b8": 0.27995789596750253,
-      "rgsaddle/ew-ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 0.6893586900705169,
-      "rgsaddle/idpp-ci-neb 0.2.2 default campaign, asv c0db2b8": 0.2468445964444646,
-      "rgsaddle/idpp-ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 0.6050702912846022,
+      "compass/sqnm 1.0.0 default campaign 22da7bd": 0.15954589770191005,
+      "eon-client/de-lj38-ci-neb 3.5.0 campaign 4d8b34b": 0.4063904941463746,
+      "eon-client/de-lj38-dimer 3.5.0 campaign 4d8b34b": 0.496699492845569,
+      "eon-client/de-lj38-lanczos 3.5.0 campaign 4d8b34b": 0.7826779887263511,
+      "eon-client/de-lj38-lanczos-improved 3.5.0 campaign 4d8b34b": 0.9331929865583417,
+      "eon-svn/de-lj38-ci r2549 default campaign, asv r2549": 0.38531839444989596,
+      "eon-svn/de-lj38-ci-neb r2549 campaign r2549": 0.400369894233095,
+      "eon-svn/de-lj38-ci-swdneb r2549 campaign r2549": 0.37327719462333675,
+      "eon-svn/de-lj38-lanczos r2549 campaign r2549": 0.8489045877724269,
+      "eon-svn/de-lj38-lanczos-improved r2549 campaign r2549": 1.008450485474337,
+      "eon-svn/de-lj38-neb r2549 default campaign, asv r2549": 0.35822569484013767,
+      "optim/de-lj38 wales-27058 wales-2014 campaign 144a703": 1.2011096826992849,
+      "rgsaddle/ci-neb 0.2.2 default campaign, asv c0db2b8": 0.11138109839567308,
+      "rgsaddle/ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 0.43950379366941256,
+      "rgsaddle/ew-ci-neb 0.2.2 default campaign, asv c0db2b8": 0.11138109839567306,
+      "rgsaddle/ew-ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 0.4726170931924505,
+      "rgsaddle/idpp-ci-neb 0.2.2 default campaign, asv c0db2b8": 0.10837079843903326,
+      "rgsaddle/idpp-ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 0.4214419939295737,
       "rgsaddle/neb 0.2.2 default campaign, asv c0db2b8": 0.0,
       "rgsaddle/neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 0.0,
-      "rgsaddle/oci-neb 0.2.2 default campaign, asv c0db2b8": 0.26189609622766363,
-      "rgsaddle/oci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 0.6171114911111615,
-      "rgsaddle/sidpp-ci-neb 0.2.2 default campaign, asv c0db2b8": 0.24082399653118503,
-      "rgsaddle/sidpp-ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 0.6171114911111615,
-      "sella/de-lj38-default 2.6.0 default asv 6cfb60c": 0.2167415968780665,
-      "sella/de-lj38-tuned 2.6.0 tuned asv 6cfb60c": 0.304040295620621,
-      "tsase/ci-neb 1.0 default campaign 98aac60": 0.18663859731166835,
+      "rgsaddle/oci-neb 0.2.2 default campaign, asv c0db2b8": 0.11138109839567308,
+      "rgsaddle/oci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 0.4033801941897348,
+      "rgsaddle/sidpp-ci-neb 0.2.2 default campaign, asv c0db2b8": 0.10837079843903324,
+      "rgsaddle/sidpp-ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 0.4244522938862135,
+      "sella/de-lj38-default 2.6.0 default asv 6cfb60c": 0.05117509926287682,
+      "sella/de-lj38-tuned 2.6.0 tuned asv 6cfb60c": 0.13245319809215175,
+      "tsase/ci-neb 1.0 default campaign 98aac60": 0.0752574989159953,
       "tsase/neb 1.0 default campaign 98aac60": 0.0
     },
     "rho": {
@@ -675,22 +676,22 @@
         0.0,
         0.0,
         0.0,
-        0.02,
+        0.0,
         0.02
       ],
       "ase/de-lj38-default 3.29.0 default campaign f27c000": [
         0.0,
         0.0,
         0.0,
-        0.02,
+        0.0,
         0.02
       ],
       "ase/de-lj38-tuned 3.29.0 tuned asv f27c000": [
         0.0,
         0.0,
-        0.08,
-        0.26,
-        0.4
+        0.0,
+        0.12,
+        0.28
       ],
       "ase/de-lj38-tuned 3.29.0 tuned campaign f27c000": [
         0.0,
@@ -702,105 +703,112 @@
       "compass/sqnm 1.0.0 default campaign 22da7bd": [
         0.0,
         0.0,
-        0.02,
-        0.84,
+        0.0,
+        0.06,
         0.94
       ],
       "eon-client/de-lj38-ci-neb 3.5.0 campaign 4d8b34b": [
         0.0,
-        0.04,
-        0.76,
-        0.94,
+        0.0,
+        0.02,
+        0.86,
         0.94
       ],
       "eon-client/de-lj38-dimer 3.5.0 campaign 4d8b34b": [
-        0.06,
+        0.0,
+        0.26,
         0.54,
         0.54,
-        0.62,
-        0.66
+        0.62
       ],
       "eon-client/de-lj38-lanczos 3.5.0 campaign 4d8b34b": [
         0.0,
+        0.18,
         0.94,
         0.98,
-        1.0,
         1.0
       ],
       "eon-client/de-lj38-lanczos-improved 3.5.0 campaign 4d8b34b": [
-        0.26,
+        0.0,
+        0.62,
         0.98,
-        1.0,
         1.0,
         1.0
       ],
       "eon-svn/de-lj38-ci r2549 default campaign, asv r2549": [
         0.0,
-        0.04,
-        0.74,
-        0.86,
-        0.9
+        0.0,
+        0.06,
+        0.78,
+        0.88
       ],
       "eon-svn/de-lj38-ci-neb r2549 campaign r2549": [
         0.0,
-        0.04,
-        0.76,
-        0.88,
-        0.92
+        0.0,
+        0.06,
+        0.82,
+        0.9
       ],
       "eon-svn/de-lj38-ci-swdneb r2549 campaign r2549": [
         0.0,
-        0.02,
-        0.64,
-        0.82,
-        0.86
+        0.0,
+        0.06,
+        0.76,
+        0.84
       ],
       "eon-svn/de-lj38-lanczos r2549 campaign r2549": [
         0.0,
-        1.0,
-        1.0,
+        0.34,
+        0.98,
         1.0,
         1.0
       ],
       "eon-svn/de-lj38-lanczos-improved r2549 campaign r2549": [
-        0.68,
-        1.0,
+        0.02,
+        0.84,
         1.0,
         1.0,
         1.0
       ],
       "eon-svn/de-lj38-neb r2549 default campaign, asv r2549": [
         0.0,
+        0.0,
         0.02,
-        0.54,
         0.78,
-        0.82
+        0.78
+      ],
+      "optim/de-lj38 wales-27058 wales-2014 campaign 144a703": [
+        0.98,
+        1.0,
+        1.0,
+        1.0,
+        1.0
       ],
       "rgsaddle/ci-neb 0.2.2 default campaign, asv c0db2b8": [
         0.0,
         0.0,
         0.0,
-        0.54,
-        0.74
+        0.04,
+        0.66
       ],
       "rgsaddle/ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": [
         0.0,
-        0.02,
-        0.8,
-        0.84,
-        0.86
+        0.0,
+        0.22,
+        0.82,
+        0.84
       ],
       "rgsaddle/ew-ci-neb 0.2.2 default campaign, asv c0db2b8": [
         0.0,
         0.0,
         0.0,
-        0.54,
-        0.78
+        0.02,
+        0.7
       ],
       "rgsaddle/ew-ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": [
         0.0,
         0.0,
-        0.88,
+        0.16,
         0.94,
         0.94
       ],
@@ -808,15 +816,15 @@
         0.0,
         0.0,
         0.0,
-        0.46,
-        0.72
+        0.04,
+        0.64
       ],
       "rgsaddle/idpp-ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": [
         0.0,
-        0.04,
-        0.72,
-        0.82,
-        0.86
+        0.0,
+        0.22,
+        0.76,
+        0.84
       ],
       "rgsaddle/neb 0.2.2 default campaign, asv c0db2b8": [
         0.0,
@@ -836,50 +844,50 @@
         0.0,
         0.0,
         0.0,
-        0.5,
-        0.74
+        0.04,
+        0.66
       ],
       "rgsaddle/oci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": [
         0.0,
         0.0,
-        0.78,
-        0.84,
-        0.86
+        0.1,
+        0.82,
+        0.84
       ],
       "rgsaddle/sidpp-ci-neb 0.2.2 default campaign, asv c0db2b8": [
         0.0,
         0.0,
         0.0,
-        0.46,
-        0.68
+        0.06,
+        0.6
       ],
       "rgsaddle/sidpp-ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": [
         0.0,
-        0.04,
-        0.78,
-        0.82,
+        0.0,
+        0.2,
+        0.8,
         0.82
       ],
       "sella/de-lj38-default 2.6.0 default asv 6cfb60c": [
         0.0,
         0.0,
-        0.02,
-        0.24,
-        0.92
+        0.0,
+        0.0,
+        0.34
       ],
       "sella/de-lj38-tuned 2.6.0 tuned asv 6cfb60c": [
         0.0,
         0.0,
-        0.1,
-        0.44,
-        0.94
+        0.0,
+        0.12,
+        0.64
       ],
       "tsase/ci-neb 1.0 default campaign 98aac60": [
         0.0,
         0.0,
         0.0,
-        0.36,
-        0.52
+        0.04,
+        0.42
       ],
       "tsase/neb 1.0 default campaign 98aac60": [
         0.0,
@@ -905,6 +913,7 @@
       "eon-svn/de-lj38-lanczos r2549 campaign r2549": 1.0,
       "eon-svn/de-lj38-lanczos-improved r2549 campaign r2549": 1.0,
       "eon-svn/de-lj38-neb r2549 default campaign, asv r2549": 0.82,
+      "optim/de-lj38 wales-27058 wales-2014 campaign 144a703": 1.0,
       "rgsaddle/ci-neb 0.2.2 default campaign, asv c0db2b8": 0.74,
       "rgsaddle/ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 0.86,
       "rgsaddle/ew-ci-neb 0.2.2 default campaign, asv c0db2b8": 0.78,
@@ -931,6 +940,51 @@
     ]
   },
   "ranked": [
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 2500,
+      "code": "optim",
+      "code_version": "wales-27058",
+      "commit": "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "optim-wales-27058-double-ended-saddle-search-lj38--optim-de-lj38",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 50,
+      "history": false,
+      "max_calls": 257.0,
+      "mean_calls": 130.52,
+      "mean_per_image": 26.104,
+      "median": 120.0,
+      "median_calls": 120.0,
+      "median_high": 131.0,
+      "median_low": 108.0,
+      "median_per_image": 24.0,
+      "min_calls": 66.0,
+      "n": 50,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 130.52,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/optim-wales-27058-double-ended-saddle-search-lj38--optim-de-lj38.dat",
+      "problem": "double-ended-saddle-search/lj38",
+      "registry_match": false,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "optim/de-lj38",
+      "tuning": "wales-2014",
+      "wilson_high": 1.0,
+      "wilson_low": 0.9286524008666414
+    },
     {
       "asv_commit": "",
       "call_unit": "total",

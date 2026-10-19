@@ -1,0 +1,17 @@
+# DNEB plus hybrid eigenvector following on the 2014 OPTIM binary.
+id = "optim/de-lj38"
+engine = "optim"
+problem = "double-ended-saddle-search/lj38"
+code = "optim"
+code_version = "wales-27058"
+commit = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
+algorithm = "DNEB + hybrid eigenvector following"
+tuning = "wales-2014"
+note = "Binary is optbench.org/codes/wales-27058.tar.bz2 (sha256 144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348, 20942854 bytes). The odata preamble is the 2014 archive file. Symbol AX is LJDIFF. The score is the last OPTIM energy+gradient call count. A start succeeds when the log contains Converged to TS. That is the 2014 run_optim.sh rule. The current Wales snapshot stores the NEWNEB RMS tolerance in RMSTOLNN and the direct path still stops on RMSTOL 0.01, so it is not this row."
+
+[optim]
+method = "dneb"
+preamble = "templates/optim/preambles/de-lj38.txt"
+symbol = "AX"
+archive_force_calls = 131
+timeout = 600

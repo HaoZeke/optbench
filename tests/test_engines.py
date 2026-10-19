@@ -69,6 +69,7 @@ def test_new_templates_match_a_problem_stop():
         "optim/unhooked",
         "optim/lbfgs-lj38",
         "optim/lbfgs-morse",
+        "optim/de-lj38",
         "lammps/cg-lj38",
         "lammps/cg-morse",
         "lammps/cg-lj38-noise-s0",
