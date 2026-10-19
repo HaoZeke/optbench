@@ -204,28 +204,28 @@ L 507.6 26.16
    </g>
    <g id="legend_1">
     <g id="patch_7">
-     <path d="M 254.571875 257.1 
+     <path d="M 289.465781 257.1 
 L 502.7 257.1 
 Q 504.1 257.1 504.1 255.7 
 L 504.1 245.899453 
 Q 504.1 244.499453 502.7 244.499453 
-L 254.571875 244.499453 
-Q 253.171875 244.499453 253.171875 245.899453 
-L 253.171875 255.7 
-Q 253.171875 257.1 254.571875 257.1 
+L 289.465781 244.499453 
+Q 288.065781 244.499453 288.065781 245.899453 
+L 288.065781 255.7 
+Q 288.065781 257.1 289.465781 257.1 
 z
 " style="fill: #ffffff; opacity: 0.8; stroke: #cccccc; stroke-linejoin: miter"/>
     </g>
     <g id="line2d_13">
-     <path d="M 255.971875 250.168359 
-L 262.971875 250.168359 
-L 262.971875 250.168359 
-L 269.971875 250.168359 
-L 269.971875 250.168359 
+     <path d="M 290.865781 250.168359 
+L 297.865781 250.168359 
+L 297.865781 250.168359 
+L 304.865781 250.168359 
+L 304.865781 250.168359 
 " style="fill: none; stroke: #1f77b4; stroke-width: 1.5; stroke-linecap: square"/>
     </g>
     <g id="text_15">
-     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="275.571875" y="252.618359" transform="rotate(-0 275.571875 252.618359)">current-pele/lj38-basinhopping 0.1.2 archive campaign b7081b9</text>
+     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="310.465781" y="252.618359" transform="rotate(-0 310.465781 252.618359)">pele/lj38-basinhopping 0.1.2 stock campaign b7081b9</text>
     </g>
    </g>
   </g>

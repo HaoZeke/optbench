@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-47 reproduced, 28 not reproduced, 76 not rerun. 151 archive rows.
+46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -59,7 +59,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj38/gmin-csm | — | — | not rerun |
 | lj38/gmin-nosym | — | — | not rerun |
 | lj38/gmin-symmetrise | — | — | not rerun |
-| lj38/pele-basinhopping | force_calls 521595 | 526282 | reproduced |
+| lj38/pele-basinhopping | force_calls 521595 | 737270 | not reproduced; pele_stock |
 | lj75/gmin | — | — | not rerun |
 | lj98/gmin-nosym | — | — | not rerun |
 | lj98/gmin-symmetrise | — | — | not rerun |
@@ -262,6 +262,12 @@ archive run.sh divides coordinates by r0 = 2.897 and scales rho and rcut into th
 
 - double-ended-saddle-search/pt-island/optim
 - tsopt/pt-island/optim_ffd
+
+### pele_stock
+
+pele 0.1.2 at b7081b93 is the v0.1.2 release, unmodified. LJCluster.get_basinhopping uses that release's get_takestep and get_minimizer. The Markov stop is the archived window, -173.9284 + 0.001. One hundred archived starts score 737270 force calls with 0 failures. The archive is 521595. The gap is the stock step and quench, and it is left as measured.
+
+- globalopt/lj38/pele-basinhopping
 
 ### htst_al
 

@@ -8,6 +8,51 @@
       "call_unit": "total",
       "cap": 4000000,
       "code": "pele",
+      "code_version": "0.1.2",
+      "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
+      "comparable": false,
+      "counter": "archive-driver",
+      "current": false,
+      "entry": "current-pele-b7081b93-lj38-basinhopping",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 100,
+      "history": false,
+      "max_calls": 3367372.0,
+      "mean_calls": 490040.21,
+      "mean_per_image": null,
+      "median": 265916.0,
+      "median_calls": 265916.0,
+      "median_high": 339468.0,
+      "median_low": 195794.5,
+      "median_per_image": null,
+      "min_calls": 3040.0,
+      "n": 100,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 490040.21,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/current-pele-b7081b93-lj38-basinhopping.dat",
+      "problem": "globalopt/lj38",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "current-pele/lj38-basinhopping",
+      "tuning": "archive",
+      "wilson_high": 1.0,
+      "wilson_low": 0.9630065017930143
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 4000000,
+      "code": "pele",
       "code_version": "0.1",
       "commit": "2d5bc8e3ed5fd980ae7d8e916f2964ae522f62f9",
       "comparable": false,
@@ -98,10 +143,10 @@
   ],
   "profile": {
     "area_log10": {
-      "current-pele/lj38-basinhopping 0.1.2 archive campaign b7081b9": 1.2041199826559248
+      "pele/lj38-basinhopping 0.1.2 stock campaign b7081b9": 1.2041199826559248
     },
     "rho": {
-      "current-pele/lj38-basinhopping 0.1.2 archive campaign b7081b9": [
+      "pele/lj38-basinhopping 0.1.2 stock campaign b7081b9": [
         1.0,
         1.0,
         1.0,
@@ -110,7 +155,7 @@
       ]
     },
     "solved": {
-      "current-pele/lj38-basinhopping 0.1.2 archive campaign b7081b9": 1.0
+      "pele/lj38-basinhopping 0.1.2 stock campaign b7081b9": 1.0
     },
     "taus": [
       1.0,
@@ -131,7 +176,7 @@
       "comparable": true,
       "counter": "harness",
       "current": true,
-      "entry": "current-pele-b7081b93-lj38-basinhopping",
+      "entry": "pele-b7081b93-lj38-basinhopping",
       "failures": {
         "cap": 0,
         "crash": 0,
@@ -140,29 +185,29 @@
       },
       "full_n": 100,
       "history": false,
-      "max_calls": 3367372.0,
-      "mean_calls": 490040.21,
+      "max_calls": 3581202.0,
+      "mean_calls": 737269.65,
       "mean_per_image": null,
-      "median": 265916.0,
-      "median_calls": 265916.0,
-      "median_high": 339468.0,
-      "median_low": 195794.5,
+      "median": 443062.5,
+      "median_calls": 443062.5,
+      "median_high": 542259.0,
+      "median_low": 347102.3375,
       "median_per_image": null,
-      "min_calls": 3040.0,
+      "min_calls": 20230.0,
       "n": 100,
       "nfailed": 0,
       "note": "starts.jsonl",
-      "par2_mean": 490040.21,
+      "par2_mean": 737269.65,
       "partial": false,
       "partial_reason": "",
-      "path": "results/campaign/current-pele-b7081b93-lj38-basinhopping.dat",
+      "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat",
       "problem": "globalopt/lj38",
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
-      "template": "current-pele/lj38-basinhopping",
-      "tuning": "archive",
+      "template": "pele/lj38-basinhopping",
+      "tuning": "stock",
       "wilson_high": 1.0,
       "wilson_low": 0.9630065017930143
     }
