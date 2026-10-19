@@ -43,6 +43,7 @@ from pathlib import Path
 import numpy as np
 
 from .asv_tracks import TrackedSearch
+from .failures import classify_outcome
 from .campaign import (
     benchmark_text,
     format_ini,
@@ -330,7 +331,8 @@ def classify_client(*, calls, reason, cap, overlap_ok=None, crashed=False) -> di
     if crashed or reason in (None, ""):
         return {"force_calls": float(count), "success": False, "failure": "crash"}
     if str(reason) != "0":
-        return {"force_calls": float(count), "success": False, "failure": "divergence"}
+        failure = classify_outcome(calls=float(count), cap=cap, unmet=True)
+        return {"force_calls": float(count), "success": False, "failure": failure}
     return {"force_calls": float(count), "success": True, "failure": None}
 
 
@@ -851,12 +853,16 @@ def run_case(
                             record["force_norm"] = checked["force_norm"]
                             record["hessian_index"] = checked["hessian_index"]
                             stop = float(template["ini"]["Optimizer"]["converged_force"])
-                            if checked["force_norm"] > stop:
-                                record["success"] = False
-                                record["failure"] = "divergence"
-                            elif checked["hessian_index"] != 1:
-                                record["success"] = False
-                                record["failure"] = "wrong_stationary"
+                            failure = classify_outcome(
+                                force=checked["force_norm"],
+                                calls=record["force_calls"],
+                                cap=cap,
+                                force_tol=stop,
+                                hessian_index=checked["hessian_index"],
+                                expected_index=1,
+                            )
+                            record["success"] = failure is None
+                            record["failure"] = failure
                 raw_text = fields.get("total_force_calls") or fields.get("force_calls_neb")
                 record["client_calls"] = int(float(raw_text)) if raw_text is not None else None
                 record["client_reason"] = fields.get("termination_reason")
