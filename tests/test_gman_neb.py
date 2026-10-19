@@ -71,26 +71,48 @@ def test_gman_dispatch_stays_out_of_the_engine_table(monkeypatch, tmp_path: Path
 
 
 def test_recorded_gman_heptamer_matches_the_archive_integers():
-    dat = ROOT / "results" / "campaign" / "gman-r235-neb-pt-sd.dat"
-    fields = parse(dat.read_text(encoding="utf-8"))
+    import statistics
+
+    from optbench.score import normalize_start
+
+    dat_path = ROOT / "results" / "campaign" / "gman-r235-neb-pt-sd.dat"
+    text = dat_path.read_text(encoding="utf-8")
+    fields = parse(text)
+    assert "Gman's pot.count()/8" in text
     assert fields["force_calls"] == "412"
     assert fields["force_calls_max"] == "697"
     assert fields["force_calls_min"] == "214"
     assert fields["nfailed"] == "0"
-    assert fields["counter"] == "client"
+    assert fields["counter"] == "harness"
     assert fields["algorithm"] == "sd"
     assert fields["template"] == "gman/neb-pt-sd"
+    assert fields["tuning"] == "archive"
     starts = [
         json.loads(line)
-        for line in (ROOT / "results" / "campaign" / "gman-r235-neb-pt-sd.starts.jsonl")
-        .read_text(encoding="utf-8")
-        .splitlines()
+        for line in dat_path.with_suffix(".starts.jsonl").read_text(encoding="utf-8").splitlines()
         if line.strip()
     ]
-    assert [row["geometry"] for row in starts] == [f"min{index:02d}" for index in range(1, 14)]
-    per_image = [float(row["raw"]) / row["images"] for row in starts]
+    assert [row["start"] for row in starts] == [f"min{index:02d}" for index in range(1, 14)]
+    per_image = [row["force_calls"] for row in starts]
     assert int("%d" % (sum(per_image) / len(per_image))) == 412
-    assert int("%d" % max(per_image)) == 697
-    assert int("%d" % min(per_image)) == 214
-    assert all(row["force_calls"] == row["raw"] for row in starts)
-    assert all(row["counter"] == "client" and row["call_unit"] == "total" and row["success"] for row in starts)
+    assert max(per_image) == 697
+    assert min(per_image) == 214
+    assert all(
+        row["counter"] == "harness"
+        and row["count_key"] == "force_calls_neb"
+        and row["gman_pot_count"] == row["raw"]
+        and row["force_calls"] == row["raw"] // 8
+        and row["success"]
+        and row["failure"] is None
+        for row in starts
+    )
+    ranked = [normalize_start(row, 8) for row in starts]
+    assert [row["force_calls"] for row in ranked] == [row["raw"] for row in starts]
+    assert statistics.fmean(row["per_image"] for row in ranked) == statistics.fmean(per_image)
+    document = json.loads(dat_path.with_suffix(".v2.json").read_text(encoding="utf-8"))
+    assert document["counter"] == "harness"
+    assert document["provenance"]["parameters"]["counter"] == "gman pot.count()/8"
+    assert document["legacy"]["force_calls"] == 412
+    assert document["score"]["par2_mean"] == statistics.fmean(per_image)
+    assert document["score"]["n"] == 13
+    assert document["score"]["nfailed"] == 0

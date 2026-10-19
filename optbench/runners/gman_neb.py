@@ -17,7 +17,12 @@ with ``f2py --lower`` so the gfortran ``force_`` symbol matches.
 
 The archived script writes ``algorithm lbfgs`` for every Gman optimizer.
 This runner records ``sd``, the optimizer the script actually calls.
-``counter`` stays ``client``: ``pot.count`` is Gman's counter, not the harness.
+
+The campaign file is the same writer as a native-counter row.
+``force_calls`` is ``pot.count()/8``, the archived per-image counter.
+``raw`` is ``pot.count()``. ``count_key`` ``force_calls_neb`` ranks that
+band total, and the provenance names Gman's counter. The file's
+``counter`` field is ``harness``.
 """
 
 from __future__ import annotations
@@ -31,7 +36,7 @@ import tempfile
 from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
 
-from optbench.campaign import geometry_archive, write_starts
+from optbench.campaign import geometry_archive
 
 
 def _source_root(root: Path) -> Path:
@@ -224,23 +229,80 @@ def _one_path(minima: Path, name: str, settings: dict) -> dict:
     }
 
 
-def _benchmark_text(rows: list[dict], template: dict, problem: dict) -> str:
-    calls = [float(row["force_calls"]) for row in rows]
-    nfailed = sum(1 for row in rows if not row["success"])
-    lines = [
-        "force_calls %d" % (sum(calls) / len(calls)),
-        "force_calls_min %d" % min(calls),
-        "force_calls_max %d" % max(calls),
-        "nfailed %d" % nfailed,
-        f"code {template['code']}",
-        f"code_version {template['code_version']}",
-        f"commit {template['commit']}",
-        f"algorithm {template['algorithm']}",
-        f"template {template['id']}",
-        f"problem {problem['id']}",
-        "counter client",
-    ]
-    return "\n".join(lines) + "\n"
+def _campaign_records(rows: list[dict], images: int, cap: int) -> list[dict]:
+    """Per-path records for ``write_campaign``.
+
+    ``force_calls`` is the archived ``pot.count()/8``. ``raw`` is
+    ``pot.count()``, and ``count_key`` tells the board to rank that total.
+    """
+    records = []
+    for row in rows:
+        raw = int(row["raw"])
+        if images <= 0 or raw % images != 0:
+            raise RuntimeError(f"{row['geometry']} pot.count {raw} is not a multiple of {images}")
+        per_image = raw // images
+        converged = bool(row["success"])
+        success = converged and per_image < cap
+        failure = None
+        if not success:
+            failure = "cap" if per_image >= cap else "divergence"
+        records.append(
+            {
+                "start": row["geometry"],
+                "force_calls": per_image,
+                "raw": raw,
+                "count_key": "force_calls_neb",
+                "gman_pot_count": raw,
+                "success": success,
+                "failure": failure,
+                "counter": "harness",
+                "converged": converged,
+            }
+        )
+    return records
+
+
+def _publish(output: Path, rows: list[dict], template: dict, problem: dict, settings: dict) -> dict:
+    from optbench.engines.common import write_campaign
+
+    cap = int((problem.get("convergence") or {})["max_force_calls"])
+    records = _campaign_records(rows, settings["images"], cap)
+    comment = (
+        "# Gman r235 steepest descent, climbing-image NEB, Morse Pt heptamer.\n"
+        "# The count is Gman's pot.count()/8, the archived per-image counter. "
+        "The published integer truncates the mean of the 13 paths.\n"
+        "# raw is pot.count(). count_key force_calls_neb ranks that band total "
+        "on the same call unit as the other heptamer rows."
+    )
+    published = write_campaign(
+        output,
+        records,
+        template,
+        problem,
+        {"cap": cap},
+        {
+            "method": "ci",
+            "optimizer": "sd",
+            "counter": "gman pot.count()/8",
+            "potential": "morse",
+            "version": template["code_version"],
+            "images": settings["images"],
+            "spring": settings["spring"],
+            "tangent": settings["tangent"],
+            "step_r": settings["step_r"],
+            "maxmove": settings["maxmove"],
+            "fmax": settings["fmax"],
+            "converge": settings["converge"],
+            "fsaddle": settings["fsaddle"],
+        },
+        images=None,
+        comment=comment,
+    )
+    calls = [int(row["force_calls"]) for row in records]
+    published["force_calls_min"] = min(calls)
+    published["force_calls_max"] = max(calls)
+    published["counts"] = calls
+    return published
 
 
 def run_template(
@@ -273,41 +335,7 @@ def run_template(
             for name in names:
                 rows.append(_one_path(minima, name, settings))
                 print(f"{name} {rows[-1]['force_calls']}", flush=True)
-    calls = [float(row["force_calls"]) for row in rows]
-    nfailed = sum(1 for row in rows if not row["success"])
-    output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(_benchmark_text(rows, template, problem), encoding="utf-8")
-    start_rows = []
-    for row in rows:
-        record = {
-            "call_unit": "total",
-            "code": template["code"],
-            "code_version": template["code_version"],
-            "commit": template["commit"],
-            "counter": "client",
-            "force_calls": row["raw"],
-            "geometry": row["geometry"],
-            "images": settings["images"],
-            "problem": problem["id"],
-            "raw": row["raw"],
-            "success": row["success"],
-            "template": template["id"],
-        }
-        if not row["success"]:
-            record["failure"] = "cap" if row["force_calls"] >= settings["itrmax"] else "divergence"
-        start_rows.append(record)
-    write_starts(output.with_suffix(".starts.jsonl"), start_rows)
-    summary = {
-        "force_calls": int("%d" % (sum(calls) / len(calls))),
-        "force_calls_min": int("%d" % min(calls)),
-        "force_calls_max": int("%d" % max(calls)),
-        "nfailed": nfailed,
-        "starts": len(rows),
-        "template": template["id"],
-        "problem": problem["id"],
-        "counts": calls,
-    }
-    return summary
+    return _publish(output, rows, template, problem, settings)
 
 
 def main() -> None:
