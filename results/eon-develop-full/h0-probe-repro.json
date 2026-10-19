@@ -1,0 +1,843 @@
+{
+  "eon_commit": "7095b23ac17d49f434a5e08ccb072897ceca698e",
+  "svn": "r2549",
+  "dimer_commit": {
+    "sha": "3af36c235625357817c2110e810c715608635866",
+    "parent": "825fb17d9808d6c8198692b64da2a26c8b277891",
+    "date": "2026-09-30",
+    "summary": "LBFGS::getStep uses ObjectiveFunction::knownCurvature. MinModeObjectiveFunction returns -eigenvalue once its iteration is no longer 0. LBFGS::step calls getGradient, which increments that iteration, before getStep. The first translation therefore uses H0 = 1/|eigenvalue| and skips the finite-difference probe."
+  },
+  "neb_probe_commit": {
+    "sha": "8c4198ef3444",
+    "parent": "fd25c4b54230139d235bd8276701f401e7fa127b",
+    "date": "2026-09-28",
+    "summary": "NEBObjectiveFunction::supportsFiniteDifferenceCurvature returns false, so the first band step keeps inverse_curvature 0.01."
+  },
+  "neb_repick_commit": {
+    "sha": "ed3ad27a9b0094a16a6db22a640226570114945d",
+    "parent": "c5d2e5abdea698793ce6132814f5998f4e0e67a3",
+    "date": "2026-10-04",
+    "summary": "The climbing image stays on the previous interior local maximum. r2549 selects the current highest image on every iteration."
+  },
+  "dimer_develop_only_failures": [
+    {
+      "start": "0013",
+      "develop_calls": 7845.0,
+      "develop_success": false,
+      "develop_failure": "divergence",
+      "develop_reason": "3",
+      "svn_calls": 179,
+      "svn_success": true,
+      "svn_failure": null,
+      "svn_reason": "0",
+      "stock_rerun": {
+        "calls": 7845.0,
+        "success": false,
+        "failure": "divergence",
+        "reason": "3"
+      },
+      "probe_rerun": {
+        "calls": 168.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      }
+    },
+    {
+      "start": "0048",
+      "develop_calls": 166.0,
+      "develop_success": false,
+      "develop_failure": "divergence",
+      "develop_reason": "3",
+      "svn_calls": 488,
+      "svn_success": true,
+      "svn_failure": null,
+      "svn_reason": "0",
+      "stock_rerun": {
+        "calls": 166.0,
+        "success": false,
+        "failure": "divergence",
+        "reason": "3"
+      },
+      "probe_rerun": {
+        "calls": 166.0,
+        "success": false,
+        "failure": "divergence",
+        "reason": "3"
+      }
+    },
+    {
+      "start": "0071",
+      "develop_calls": 7779.0,
+      "develop_success": false,
+      "develop_failure": "divergence",
+      "develop_reason": "3",
+      "svn_calls": 246,
+      "svn_success": true,
+      "svn_failure": null,
+      "svn_reason": "0",
+      "stock_rerun": {
+        "calls": 7779.0,
+        "success": false,
+        "failure": "divergence",
+        "reason": "3"
+      },
+      "probe_rerun": {
+        "calls": 249.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      }
+    },
+    {
+      "start": "0108",
+      "develop_calls": 9857.0,
+      "develop_success": false,
+      "develop_failure": "divergence",
+      "develop_reason": "5",
+      "svn_calls": 244,
+      "svn_success": true,
+      "svn_failure": null,
+      "svn_reason": "0",
+      "stock_rerun": {
+        "calls": 9857.0,
+        "success": false,
+        "failure": "divergence",
+        "reason": "5"
+      },
+      "probe_rerun": {
+        "calls": 244.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      }
+    },
+    {
+      "start": "0109",
+      "develop_calls": 438.0,
+      "develop_success": false,
+      "develop_failure": "divergence",
+      "develop_reason": "3",
+      "svn_calls": 1154,
+      "svn_success": true,
+      "svn_failure": null,
+      "svn_reason": "0",
+      "stock_rerun": {
+        "calls": 438.0,
+        "success": false,
+        "failure": "divergence",
+        "reason": "3"
+      },
+      "probe_rerun": {
+        "calls": 1260.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      }
+    },
+    {
+      "start": "0124",
+      "develop_calls": 1330.0,
+      "develop_success": false,
+      "develop_failure": "divergence",
+      "develop_reason": "3",
+      "svn_calls": 322,
+      "svn_success": true,
+      "svn_failure": null,
+      "svn_reason": "0",
+      "stock_rerun": {
+        "calls": 1330.0,
+        "success": false,
+        "failure": "divergence",
+        "reason": "3"
+      },
+      "probe_rerun": {
+        "calls": 324.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      }
+    },
+    {
+      "start": "0132",
+      "develop_calls": 24.0,
+      "develop_success": false,
+      "develop_failure": "divergence",
+      "develop_reason": "3",
+      "svn_calls": 396,
+      "svn_success": true,
+      "svn_failure": null,
+      "svn_reason": "0",
+      "stock_rerun": {
+        "calls": 24.0,
+        "success": false,
+        "failure": "divergence",
+        "reason": "3"
+      },
+      "probe_rerun": {
+        "calls": 412.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      }
+    },
+    {
+      "start": "0137",
+      "develop_calls": 24.0,
+      "develop_success": false,
+      "develop_failure": "divergence",
+      "develop_reason": "3",
+      "svn_calls": 729,
+      "svn_success": true,
+      "svn_failure": null,
+      "svn_reason": "0",
+      "stock_rerun": {
+        "calls": 24.0,
+        "success": false,
+        "failure": "divergence",
+        "reason": "3"
+      },
+      "probe_rerun": {
+        "calls": 764.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      }
+    },
+    {
+      "start": "0144",
+      "develop_calls": 520.0,
+      "develop_success": false,
+      "develop_failure": "divergence",
+      "develop_reason": "3",
+      "svn_calls": 271,
+      "svn_success": true,
+      "svn_failure": null,
+      "svn_reason": "0",
+      "stock_rerun": {
+        "calls": 520.0,
+        "success": false,
+        "failure": "divergence",
+        "reason": "3"
+      },
+      "probe_rerun": {
+        "calls": 272.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      }
+    },
+    {
+      "start": "0145",
+      "develop_calls": 24.0,
+      "develop_success": false,
+      "develop_failure": "divergence",
+      "develop_reason": "3",
+      "svn_calls": 606,
+      "svn_success": true,
+      "svn_failure": null,
+      "svn_reason": "0",
+      "stock_rerun": {
+        "calls": 24.0,
+        "success": false,
+        "failure": "divergence",
+        "reason": "3"
+      },
+      "probe_rerun": {
+        "calls": 671.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      }
+    },
+    {
+      "start": "0151",
+      "develop_calls": 46.0,
+      "develop_success": false,
+      "develop_failure": "divergence",
+      "develop_reason": "3",
+      "svn_calls": 220,
+      "svn_success": true,
+      "svn_failure": null,
+      "svn_reason": "0",
+      "stock_rerun": {
+        "calls": 46.0,
+        "success": false,
+        "failure": "divergence",
+        "reason": "3"
+      },
+      "probe_rerun": {
+        "calls": 238.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      }
+    },
+    {
+      "start": "0164",
+      "develop_calls": 24.0,
+      "develop_success": false,
+      "develop_failure": "divergence",
+      "develop_reason": "3",
+      "svn_calls": 334,
+      "svn_success": true,
+      "svn_failure": null,
+      "svn_reason": "0",
+      "stock_rerun": {
+        "calls": 24.0,
+        "success": false,
+        "failure": "divergence",
+        "reason": "3"
+      },
+      "probe_rerun": {
+        "calls": 335.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      }
+    },
+    {
+      "start": "0168",
+      "develop_calls": 24.0,
+      "develop_success": false,
+      "develop_failure": "divergence",
+      "develop_reason": "3",
+      "svn_calls": 321,
+      "svn_success": true,
+      "svn_failure": null,
+      "svn_reason": "0",
+      "stock_rerun": {
+        "calls": 24.0,
+        "success": false,
+        "failure": "divergence",
+        "reason": "3"
+      },
+      "probe_rerun": {
+        "calls": 325.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      }
+    },
+    {
+      "start": "0169",
+      "develop_calls": 24.0,
+      "develop_success": false,
+      "develop_failure": "divergence",
+      "develop_reason": "3",
+      "svn_calls": 352,
+      "svn_success": true,
+      "svn_failure": null,
+      "svn_reason": "0",
+      "stock_rerun": {
+        "calls": 24.0,
+        "success": false,
+        "failure": "divergence",
+        "reason": "3"
+      },
+      "probe_rerun": {
+        "calls": 351.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      }
+    },
+    {
+      "start": "0186",
+      "develop_calls": 9259.0,
+      "develop_success": false,
+      "develop_failure": "divergence",
+      "develop_reason": "5",
+      "svn_calls": 150,
+      "svn_success": true,
+      "svn_failure": null,
+      "svn_reason": "0",
+      "stock_rerun": {
+        "calls": 9259.0,
+        "success": false,
+        "failure": "divergence",
+        "reason": "5"
+      },
+      "probe_rerun": {
+        "calls": 160.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      }
+    }
+  ],
+  "dimer_controls": {
+    "0000": {
+      "stock": {
+        "calls": 300.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      },
+      "probe": {
+        "calls": 272.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      },
+      "svn_calls": 286,
+      "svn_success": true
+    },
+    "0089": {
+      "stock": {
+        "calls": 3358.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      },
+      "probe": {
+        "calls": 346.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      },
+      "svn_calls": 369,
+      "svn_success": true
+    },
+    "0128": {
+      "stock": {
+        "calls": 1891.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      },
+      "probe": {
+        "calls": 3348.0,
+        "success": false,
+        "failure": "divergence",
+        "reason": "3"
+      },
+      "svn_calls": 164,
+      "svn_success": true
+    }
+  },
+  "neb_focus": [
+    {
+      "start": "pair_04",
+      "develop_calls": 10000.0,
+      "develop_success": false,
+      "develop_failure": "cap",
+      "develop_reason": null,
+      "svn_calls": 1272,
+      "svn_success": true,
+      "svn_failure": null,
+      "svn_reason": "0",
+      "stock_rerun": {
+        "calls": 10000.0,
+        "success": false,
+        "failure": "cap",
+        "reason": null
+      },
+      "probe_rerun": {
+        "calls": 1267.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      },
+      "probe_and_repick": null
+    },
+    {
+      "start": "pair_10",
+      "develop_calls": 10000.0,
+      "develop_success": false,
+      "develop_failure": "cap",
+      "develop_reason": null,
+      "svn_calls": 4122,
+      "svn_success": true,
+      "svn_failure": null,
+      "svn_reason": "0",
+      "stock_rerun": {
+        "calls": 10000.0,
+        "success": false,
+        "failure": "cap",
+        "reason": null
+      },
+      "probe_rerun": {
+        "calls": 4407.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      },
+      "probe_and_repick": null
+    },
+    {
+      "start": "pair_11",
+      "develop_calls": 10000.0,
+      "develop_success": false,
+      "develop_failure": "cap",
+      "develop_reason": null,
+      "svn_calls": 6212,
+      "svn_success": true,
+      "svn_failure": null,
+      "svn_reason": "0",
+      "stock_rerun": {
+        "calls": 10000.0,
+        "success": false,
+        "failure": "cap",
+        "reason": null
+      },
+      "probe_rerun": {
+        "calls": 10000.0,
+        "success": false,
+        "failure": "cap",
+        "reason": null
+      },
+      "probe_and_repick": {
+        "calls": 10000.0,
+        "success": false,
+        "failure": "cap"
+      }
+    },
+    {
+      "start": "pair_12",
+      "develop_calls": 10000.0,
+      "develop_success": false,
+      "develop_failure": "cap",
+      "develop_reason": null,
+      "svn_calls": 2557,
+      "svn_success": true,
+      "svn_failure": null,
+      "svn_reason": "0",
+      "stock_rerun": {
+        "calls": 10000.0,
+        "success": false,
+        "failure": "cap",
+        "reason": null
+      },
+      "probe_rerun": {
+        "calls": 10000.0,
+        "success": false,
+        "failure": "cap",
+        "reason": null
+      },
+      "probe_and_repick": {
+        "calls": 10000.0,
+        "success": false,
+        "failure": "cap"
+      }
+    },
+    {
+      "start": "pair_16",
+      "develop_calls": 10000.0,
+      "develop_success": false,
+      "develop_failure": "cap",
+      "develop_reason": null,
+      "svn_calls": 5412,
+      "svn_success": true,
+      "svn_failure": null,
+      "svn_reason": "0",
+      "stock_rerun": {
+        "calls": 10000.0,
+        "success": false,
+        "failure": "cap",
+        "reason": null
+      },
+      "probe_rerun": {
+        "calls": 10000.0,
+        "success": false,
+        "failure": "cap",
+        "reason": null
+      },
+      "probe_and_repick": {
+        "calls": 10000.0,
+        "success": false,
+        "failure": "cap"
+      }
+    },
+    {
+      "start": "pair_30",
+      "develop_calls": 10000.0,
+      "develop_success": false,
+      "develop_failure": "cap",
+      "develop_reason": null,
+      "svn_calls": 5437,
+      "svn_success": true,
+      "svn_failure": null,
+      "svn_reason": "0",
+      "stock_rerun": {
+        "calls": 10000.0,
+        "success": false,
+        "failure": "cap",
+        "reason": null
+      },
+      "probe_rerun": {
+        "calls": 10000.0,
+        "success": false,
+        "failure": "cap",
+        "reason": null
+      },
+      "probe_and_repick": {
+        "calls": 10000.0,
+        "success": false,
+        "failure": "cap"
+      }
+    },
+    {
+      "start": "pair_35",
+      "develop_calls": 10000.0,
+      "develop_success": false,
+      "develop_failure": "cap",
+      "develop_reason": null,
+      "svn_calls": 7632,
+      "svn_success": true,
+      "svn_failure": null,
+      "svn_reason": "0",
+      "stock_rerun": {
+        "calls": 10000.0,
+        "success": false,
+        "failure": "cap",
+        "reason": null
+      },
+      "probe_rerun": {
+        "calls": 6122.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      },
+      "probe_and_repick": null
+    },
+    {
+      "start": "pair_41",
+      "develop_calls": 10000.0,
+      "develop_success": false,
+      "develop_failure": "cap",
+      "develop_reason": null,
+      "svn_calls": 5932,
+      "svn_success": true,
+      "svn_failure": null,
+      "svn_reason": "0",
+      "stock_rerun": {
+        "calls": 10000.0,
+        "success": false,
+        "failure": "cap",
+        "reason": null
+      },
+      "probe_rerun": {
+        "calls": 10000.0,
+        "success": false,
+        "failure": "cap",
+        "reason": null
+      },
+      "probe_and_repick": {
+        "calls": 5977.0,
+        "success": true,
+        "failure": null
+      }
+    },
+    {
+      "start": "pair_46",
+      "develop_calls": 10000.0,
+      "develop_success": false,
+      "develop_failure": "cap",
+      "develop_reason": null,
+      "svn_calls": 3637,
+      "svn_success": true,
+      "svn_failure": null,
+      "svn_reason": "0",
+      "stock_rerun": {
+        "calls": 10000.0,
+        "success": false,
+        "failure": "cap",
+        "reason": null
+      },
+      "probe_rerun": {
+        "calls": 10000.0,
+        "success": false,
+        "failure": "cap",
+        "reason": null
+      },
+      "probe_and_repick": {
+        "calls": 10000.0,
+        "success": false,
+        "failure": "cap"
+      }
+    },
+    {
+      "start": "pair_02",
+      "develop_calls": 5632.0,
+      "develop_success": true,
+      "develop_failure": null,
+      "develop_reason": "0",
+      "svn_calls": 10000,
+      "svn_success": false,
+      "svn_failure": "cap",
+      "svn_reason": null,
+      "stock_rerun": {
+        "calls": 5632.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      },
+      "probe_rerun": {
+        "calls": 5637.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      },
+      "probe_and_repick": null
+    },
+    {
+      "start": "pair_03",
+      "develop_calls": 8782.0,
+      "develop_success": true,
+      "develop_failure": null,
+      "develop_reason": "0",
+      "svn_calls": 10000,
+      "svn_success": false,
+      "svn_failure": "cap",
+      "svn_reason": null,
+      "stock_rerun": {
+        "calls": 8782.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      },
+      "probe_rerun": {
+        "calls": 8787.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      },
+      "probe_and_repick": null
+    },
+    {
+      "start": "pair_07",
+      "develop_calls": 5312.0,
+      "develop_success": true,
+      "develop_failure": null,
+      "develop_reason": "0",
+      "svn_calls": 10000,
+      "svn_success": false,
+      "svn_failure": "cap",
+      "svn_reason": null,
+      "stock_rerun": {
+        "calls": 5312.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      },
+      "probe_rerun": {
+        "calls": 10000.0,
+        "success": false,
+        "failure": "cap",
+        "reason": null
+      },
+      "probe_and_repick": {
+        "calls": 10000.0,
+        "success": false,
+        "failure": "cap"
+      }
+    },
+    {
+      "start": "pair_26",
+      "develop_calls": 7302.0,
+      "develop_success": true,
+      "develop_failure": null,
+      "develop_reason": "0",
+      "svn_calls": 10000,
+      "svn_success": false,
+      "svn_failure": "cap",
+      "svn_reason": null,
+      "stock_rerun": {
+        "calls": 7302.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      },
+      "probe_rerun": {
+        "calls": 10000.0,
+        "success": false,
+        "failure": "cap",
+        "reason": null
+      },
+      "probe_and_repick": {
+        "calls": 10000.0,
+        "success": false,
+        "failure": "cap"
+      }
+    },
+    {
+      "start": "pair_00",
+      "develop_calls": 1657.0,
+      "develop_success": true,
+      "develop_failure": null,
+      "develop_reason": "0",
+      "svn_calls": 4507,
+      "svn_success": true,
+      "svn_failure": null,
+      "svn_reason": "0",
+      "stock_rerun": {
+        "calls": 1657.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      },
+      "probe_rerun": {
+        "calls": 3147.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      },
+      "probe_and_repick": null
+    },
+    {
+      "start": "pair_47",
+      "develop_calls": 6932.0,
+      "develop_success": true,
+      "develop_failure": null,
+      "develop_reason": "0",
+      "svn_calls": 3317,
+      "svn_success": true,
+      "svn_failure": null,
+      "svn_reason": "0",
+      "stock_rerun": {
+        "calls": 6932.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      },
+      "probe_rerun": {
+        "calls": 5177.0,
+        "success": true,
+        "failure": null,
+        "reason": "0"
+      },
+      "probe_and_repick": null
+    }
+  ],
+  "climb": {
+    "0132-stock": [
+      "iteration\tstep_size\tdelta_e\tconvergence\teigenvalue\ttorque\tangle\trotations",
+      "0\t0.0000000e+00\t0.000000\t2.06535e+00\t0.000000\t0.000000\t0.0000\t0",
+      "1\t2.6288820e-01\t20.815480\t3.49004e+02\t-7.145644\t5.624814\t2.0872\t20"
+    ],
+    "0132-probe": [
+      "iteration\tstep_size\tdelta_e\tconvergence\teigenvalue\ttorque\tangle\trotations",
+      "0\t0.0000000e+00\t0.000000\t2.06535e+00\t0.000000\t0.000000\t0.0000\t0",
+      "1\t5.8572961e-03\t-0.003751\t2.10981e+00\t-7.145644\t5.624814\t2.0872\t20",
+      "...",
+      "73\t1.7007972e-05\t-0.143401\t7.88916e-04\t-10.563059\t0.125988\t0.0174\t1"
+    ],
+    "0048-stock": [
+      "iteration\tstep_size\tdelta_e\tconvergence\teigenvalue\ttorque\tangle\trotations",
+      "0\t0.0000000e+00\t0.000000\t1.00065e+00\t0.000000\t0.000000\t0.0000\t0",
+      "1\t5.5912480e-01\t0.004835\t1.01382e+00\t0.000456\t0.384538\t0.2453\t20",
+      "...",
+      "48\t2.4130165e-01\t30.172481\t5.16201e+02\t-0.000002\t0.140713\t0.0166\t1"
+    ],
+    "0048-probe": [
+      "iteration\tstep_size\tdelta_e\tconvergence\teigenvalue\ttorque\tangle\trotations",
+      "0\t0.0000000e+00\t0.000000\t1.00065e+00\t0.000000\t0.000000\t0.0000\t0",
+      "1\t5.5912480e-01\t0.004835\t1.01382e+00\t0.000456\t0.384538\t0.2453\t20",
+      "...",
+      "48\t2.4130165e-01\t30.172481\t5.16201e+02\t-0.000002\t0.140713\t0.0166\t1"
+    ]
+  },
+  "climb_0048_identical": true,
+  "note_0108_movies": "write_movies changes stock 0108 from 9857 reason 5 to 1596 reason 3. The 0132 and 0048 outcomes do not change, and those climb logs are the ones compared. Probe 0108 stays 244 with movies on."
+}

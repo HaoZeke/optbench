@@ -303,6 +303,12 @@ def test_ranked_false_stays_off_the_table(tmp_path: Path):
     problem = build_board(tmp_path)["problems"]["minimization/toy"]
     assert problem["ranked"] == []
     assert problem["partial"][0]["partial_reason"] == "result file sets ranked false"
+    path.write_text(path.read_text(encoding="utf-8") + "potential ljcluster (shifted, cutoff 15)\n", encoding="utf-8")
+    problem = build_board(tmp_path)["problems"]["minimization/toy"]
+    assert problem["ranked"] == []
+    assert problem["partial"][0]["partial_reason"] == (
+        "result file sets ranked false; potential ljcluster (shifted, cutoff 15)"
+    )
 
 
 def test_per_image_band_uses_the_image_cost(tmp_path: Path):

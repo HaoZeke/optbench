@@ -214,23 +214,32 @@ def _threads_one() -> None:
         os.environ[name] = "1"
 
 
-def vibrational_index(hessian: np.ndarray, coords: np.ndarray, project_rigid: bool) -> int:
+def vibrational_index(
+    hessian: np.ndarray,
+    coords: np.ndarray,
+    project_rigid: bool,
+    rotations: int | None = None,
+) -> int:
     """Negative eigenvalues of a Cartesian Hessian.
 
     A free pair potential is invariant to translation and rotation, so
     those six directions are removed before the count. A slab with
     fixed atoms, and a potential that is not translation invariant,
     keep every mode: projecting them would hide the real unstable
-    direction.
+    direction. ``rotations`` overrides that choice: 0 keeps the three
+    translations out and leaves rotations in, which is a periodic cell.
     """
     matrix = np.asarray(hessian, dtype=np.float64)
-    if project_rigid:
-        matrix = _project_rigid(matrix, np.asarray(coords, dtype=np.float64))
+    if rotations is None:
+        if project_rigid:
+            matrix = _project_rigid(matrix, np.asarray(coords, dtype=np.float64))
+    else:
+        matrix = _project_rigid(matrix, np.asarray(coords, dtype=np.float64), int(rotations))
     values = np.linalg.eigvalsh(matrix)
     return negative_index(values, _EIGEN_TOL)
 
 
-def _project_rigid(hessian: np.ndarray, coords: np.ndarray) -> np.ndarray:
+def _project_rigid(hessian: np.ndarray, coords: np.ndarray, rotations: int = 3) -> np.ndarray:
     n_atoms = coords.shape[0]
     if n_atoms < 2:
         return hessian
@@ -240,8 +249,9 @@ def _project_rigid(hessian: np.ndarray, coords: np.ndarray) -> np.ndarray:
         translation = np.zeros(n_atoms * 3, dtype=np.float64)
         translation[axis::3] = 1.0
         seeds.append(translation)
-        rotation = np.cross(centered, np.eye(3)[axis])
-        seeds.append(rotation.reshape(-1))
+        if rotations:
+            rotation = np.cross(centered, np.eye(3)[axis])
+            seeds.append(rotation.reshape(-1))
     basis = []
     for seed in seeds:
         mode = seed.copy()
@@ -820,6 +830,7 @@ def _crash_record(name: str, calls: int, verify: int, crash: str) -> dict:
         "ci_index": None,
         "refined": False,
         "surrogate_steps": 0,
+        "geodesic_seconds": 0.0,
     }
 
 
@@ -852,6 +863,7 @@ def run_band_search(
     sidpp_stage_steps: int,
     project_rigid: bool,
     keep_translation: bool,
+    potential: str = "",
 ) -> dict:
     """One reactant/product pair. The record uses the harness counter."""
     state: dict = {"counter": None}
@@ -884,6 +896,7 @@ def run_band_search(
             sidpp_stage_steps=sidpp_stage_steps,
             project_rigid=project_rigid,
             keep_translation=keep_translation,
+            potential=potential,
             state=state,
         )
     except Exception as exc:
@@ -922,13 +935,29 @@ def _run_band_search(
     sidpp_stage_steps: int,
     project_rigid: bool,
     keep_translation: bool,
+    potential: str,
     state: dict,
 ) -> dict:
     lib = _load_library()
     linear = interpolate_free(reactant, product, free, n_interior, box)
     surrogate_steps = 0
+    geodesic_seconds = 0.0
     if path == "linear":
         band_path = linear
+    elif path == "geodesic":
+        from .geodesic_path import geodesic_free, symbols_for
+
+        info: dict = {}
+        band_path = geodesic_free(
+            reactant,
+            product,
+            free,
+            n_interior,
+            box,
+            symbols_for(potential, reactant.shape[0]),
+            info=info,
+        )
+        geodesic_seconds = float(info.get("seconds") or 0.0)
     else:
         band_path, surrogate_steps = _surrogate_path(
             lib,
@@ -1078,20 +1107,22 @@ def _run_band_search(
         "ci_index": None if report is None else int(report.ci_index),
         "refined": refined,
         "surrogate_steps": int(surrogate_steps),
+        "geodesic_seconds": float(geodesic_seconds),
     }
 
 
-def _registry(root: Path) -> dict:
+def _registry(root: Path, code_id: str = "rgsaddle") -> dict:
     data = tomllib.loads((root / "codes" / "registry.toml").read_text(encoding="utf-8"))
     for row in data["code"]:
-        if row["id"] == "rgsaddle":
+        if row["id"] == code_id:
             return row
-    raise ValueError("codes/registry.toml has no rgsaddle entry")
+    raise ValueError(f"codes/registry.toml has no {code_id} entry")
 
 
 def _settings(template: dict, problem: dict, commit: str) -> dict:
     if template.get("commit") != commit:
-        raise ValueError(f"{template['id']} commit does not match the rgsaddle registry")
+        code = template.get("code") or "rgsaddle"
+        raise ValueError(f"{template['id']} commit does not match the {code} registry")
     band = template["band"]
     problem_band = problem["band"]
     convergence = problem["convergence"]
@@ -1133,6 +1164,15 @@ def _job(pair, settings: dict) -> dict:
 
 
 def _execute(job: dict) -> dict:
+    import time
+
+    began = time.perf_counter()
+    record = _execute_search(job)
+    record["wall_seconds"] = time.perf_counter() - began
+    return record
+
+
+def _execute_search(job: dict) -> dict:
     _threads_one()
     settings = job["settings"]
     free = np.asarray(job["free"], dtype=bool)
@@ -1171,6 +1211,7 @@ def _execute(job: dict) -> dict:
         sidpp_stage_steps=settings["sidpp_stage_steps"],
         project_rigid=bool(np.all(free) and n_free >= 2 and kind == "lj"),
         keep_translation=bool(n_free < 2 or not np.all(free)),
+        potential=kind,
     )
 
 
@@ -1210,6 +1251,9 @@ def _dat(records: list[dict], template: dict, settings: dict) -> str:
     lines.append(f"tuning {template['tuning']}")
     lines.append("counter harness")
     lines.append(f"images {settings['n_interior']}")
+    note = str(template.get("note") or "").strip()
+    if note:
+        lines.append(f"note {note}")
     return "\n".join(lines) + "\n"
 
 
@@ -1261,7 +1305,7 @@ def search_named(
     """
     problem = resolve_problem(root, problem_name)
     template = load_template(root, template_name)
-    commit = _registry(root)["commit"]
+    commit = _registry(root, str(template.get("code") or "rgsaddle"))["commit"]
     settings = _settings(template, problem, commit)
     pairs = cached_pairs(root, problem, settings)
     if start not in pairs:
@@ -1340,11 +1384,11 @@ def publish_sidecars(root: Path, directory: Path, output_dir: Path) -> list[dict
         row = json.loads(path.read_text(encoding="utf-8"))
         grouped.setdefault((row["problem"], row["template"]), []).append(row)
     summaries = []
-    commit = _registry(root)["commit"]
     for problem_name, template_name in sorted(grouped):
         records = grouped[(problem_name, template_name)]
         problem = resolve_problem(root, problem_name)
         template = load_template(root, template_name)
+        commit = _registry(root, str(template.get("code") or "rgsaddle"))["commit"]
         settings = _settings(template, problem, commit)
         order = list(cached_pairs(root, problem, settings))
         found = {row["start"] for row in records}
@@ -1370,9 +1414,13 @@ def run(
     """Run every pair in one problem and write the dat, starts, and v2 score."""
     problem = resolve_problem(root, problem_name)
     template = load_template(root, template_name)
-    if template["engine"] != "rgsaddle-band":
+    if template["engine"] == "rgsaddle-band":
+        pass
+    elif template["engine"] == "geodesic" and template.get("backend") == "rgsaddle":
+        pass
+    else:
         raise ValueError(f"unknown engine {template['engine']}")
-    commit = _registry(root)["commit"]
+    commit = _registry(root, str(template.get("code") or "rgsaddle"))["commit"]
     settings = _settings(template, problem, commit)
     pairs = list(cached_pairs(root, problem, settings).values())
     jobs = [_job(pair, settings) for pair in pairs]

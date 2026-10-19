@@ -1,0 +1,14 @@
+# LAMMPS 30 Sep 2026 is not a conda package. This file does not select
+# a build string. The binary the band benchmarks run is the source
+# build pinned in codes/registry.toml under id lammpsneb:
+#   ref = stable_30Sep2026
+#   commit = 8de817dd79bfe4525d5d39246a212d833e6dee07
+#   version string 30 Sep 2026
+# asv has one environment_type, so this yml cannot be bound to one
+# class. Those classes call LAMMPS_BIN, or /tmp/lammps/install/bin/lmp
+# when LAMMPS_BIN is unset.
+name: lammps-30Sep2026
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
