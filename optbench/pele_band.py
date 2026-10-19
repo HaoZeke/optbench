@@ -10,12 +10,18 @@ distance is that Cartesian distance with no permutation and no rotation.
 
 A start succeeds when the search stops under the force-call cap, the
 true Cartesian force of the candidate is within the problem norm, and
-the vibrational Hessian index is 1. The NEB residual is only the band
-stop. The candidate for a plain band is the highest-energy interior
-image. The candidate for double-ended connect is a transition state from
-that cycle, or the highest climbing image when the cycle stored none.
-Hessian finite differences go through ``verification`` and are not
-search cost.
+the vibrational Hessian index is 1. The stock NEB residual is only the
+band stop. The tuned bands keep the climbing image on and stop when the
+true force on the highest image meets the problem norm. The candidate
+for a plain band is the highest-energy interior image. The candidate for
+double-ended connect is a transition state from that cycle, or the
+highest climbing image when the cycle stored none. Hessian finite
+differences go through ``verification`` and are not search cost.
+
+Each start stores the final energy, the full geometry, and the force.
+Frozen atoms keep the reactant coordinate. Their stored force components
+are zero. The free block is the gradient the search evaluated, and
+``force_norm`` is its Cartesian norm.
 
 Double-ended connect runs one cycle. That cycle is one local connect:
 a doubly nudged band at the problem image count, refinement of the
@@ -110,6 +116,9 @@ def _settings(template: dict, problem: dict, commit: str) -> dict:
         "niter": int(band["niter"]),
         "iter_density": float(band["iter_density"]),
         "quench_tol": float(band["quench_tol"]),
+        "climbing": bool(band.get("climbing", False)),
+        "stop": str(band.get("stop", "residual")),
+        "h0": float(band.get("h0", 0.1)),
         "seed": "0",
     }
 
@@ -161,6 +170,8 @@ def _crash_record(name: str, calls: int, verify: int, crash: str, seed: str) -> 
         "converged": False,
         "candidate": "crash",
         "connected": False,
+        "geometry": None,
+        "force": None,
     }
 
 
@@ -248,21 +259,51 @@ def _judge(
         "converged": bool(converged),
         "candidate": candidate,
         "connected": bool(connected),
+        "geometry": None,
+        "force": None,
     }
+    if coords is not None and crash is None:
+        record["geometry"], record["force"] = _placed(spec, coords, grad)
     if crash:
         record["crash"] = crash
     return record
 
 
-def _highest_interior(path: np.ndarray, energies: np.ndarray) -> tuple[np.ndarray, int]:
+def _placed(spec: _Spec, coords, grad) -> tuple[list, list | None]:
+    """Full geometry and the free gradient on that geometry."""
+    full = np.array(spec.template, copy=True)
+    full[spec.free] = np.asarray(coords, dtype=np.float64).reshape((-1, 3))
+    geometry = [[float(value) for value in row] for row in full]
+    if grad is None:
+        return geometry, None
+    placed = np.zeros_like(full)
+    placed[spec.free] = np.asarray(grad, dtype=np.float64).reshape((-1, 3))
+    force = [[float(value) for value in row] for row in placed]
+    return geometry, force
+
+
+def _highest_index(energies) -> int:
     best = 1
     best_energy = -math.inf
-    last = int(path.shape[0]) - 1
-    for index in range(1, last):
+    last = len(energies) - 1
+    for index in range(1, max(last, 1)):
         energy = float(energies[index])
         if math.isfinite(energy) and energy > best_energy:
             best = index
             best_energy = energy
+    return best
+
+
+def _mark_climbing(neb) -> None:
+    """Mark the highest interior image. Endpoints stay fixed."""
+    neb.isclimbing = [False] * int(neb.nimages)
+    index = _highest_index(neb.energies)
+    if 0 < index < int(neb.nimages) - 1:
+        neb.isclimbing[index] = True
+
+
+def _highest_interior(path: np.ndarray, energies: np.ndarray) -> tuple[np.ndarray, int]:
+    best = _highest_index(energies)
     return np.asarray(path[best], dtype=np.float64).reshape(-1).copy(), best
 
 
@@ -319,6 +360,148 @@ def _run_band(pot: PeleCounter, path: np.ndarray, settings: dict) -> dict:
         return {"coords": coords, "candidate": "highest", "converged": False, "connected": False}
     coords, _index = _highest_interior(neb.coords, neb.energies)
     return {"coords": coords, "candidate": "highest", "converged": converged, "connected": False}
+
+
+def _run_true_force(pot: PeleCounter, path: np.ndarray, settings: dict) -> dict:
+    """Climbing band that stops on the true force of the highest image.
+
+    The quench tolerance of the stock band is the NEB residual. This stop
+    replaces it. ``alternate_stop_criterion`` is consulted instead of that
+    residual, and it reads the true gradient already stored for the highest
+    image. The climbing force is the true force with the parallel part
+    reversed, the climbing-image step in pele's ``NEBForce`` from
+    Henkelman, Uberuaga, and Jónsson, J. Chem. Phys. 113, 9901 (2000).
+    The mark is the highest interior image.
+
+    Spring constant 100 is pele's NEB default. Trygubenko and Wales,
+    J. Chem. Phys. 120, 2082 (2004), section III.3, report L-BFGS stable
+    for spring constants from 30 to 10000, with memory 4 and an initial
+    inverse-Hessian diagonal of 0.1. ``maxErise`` is 1, the mylbfgs value
+    named in ``NEB.optimize``.
+    """
+    from pele.optimize import Result, mylbfgs
+    from pele.transition_states import NEB
+
+    images = [np.asarray(row, dtype=np.float64).copy() for row in path]
+    quench = {
+        "tol": float(settings["neb_tol"]),
+        "maxErise": float(settings["max_erise"]),
+        "maxstep": float(settings["max_move"]),
+        "nsteps": int(settings["cap"]),
+        "M": int(settings["memory"]),
+        "H0": float(settings["h0"]),
+        "iprint": -1,
+    }
+    force_norm = float(settings["force_norm"])
+    climbing = bool(settings["climbing"])
+    neb = None
+    accepted = {"energies": None}
+
+    class _Band(NEB):
+        def NEBForce(self, isclimbing, image, left, right, greal, icenter):
+            result = super().NEBForce(isclimbing, image, left, right, greal, icenter)
+            if isclimbing:
+                return 0.0, result
+            return result
+
+        def optimize(self, quenchRoutine=None, **kwargs):
+            if quenchRoutine is None:
+                quenchRoutine = mylbfgs
+            quench_params = dict(
+                [("nsteps", 300)] + list(self.quenchParams.items()) + list(kwargs.items())
+            )
+            if "logger" not in quench_params:
+                quench_params["logger"] = logging.getLogger("pele.connect.neb.quench")
+            if self.use_minimizer_callback:
+                quench_params["events"] = [self._step]
+            self.step = 0
+            qres = quenchRoutine(self.active.reshape(self.active.size), self, **quench_params)
+            self.active[:, :] = qres.coords.reshape(self.active.shape)
+            for index in range(self.nimages):
+                found = spec_recall(self.potential, self.coords[index])
+                if found is not None:
+                    self.energies[index] = float(found[0])
+            res = Result()
+            res.path = self.coords
+            res.nsteps = qres.nsteps
+            res.energy = self.energies
+            res.rms = qres.rms
+            res.success = bool(qres.success)
+            return res
+
+    def _frame(coords):
+        frame = np.array(neb.coords, copy=True)
+        frame[1:-1] = np.asarray(coords, dtype=np.float64).reshape(neb.active.shape)
+        return frame
+
+    def _met(energy=None, gradient=None, tol=None, coords=None):
+        if neb is None or coords is None:
+            return False
+        frame = _frame(coords)
+        energies = []
+        grads = []
+        for row in frame:
+            found = spec_recall(pot, row)
+            if found is None:
+                energies.append(float("nan"))
+                grads.append(None)
+            else:
+                energies.append(float(found[0]))
+                grads.append(found[1])
+        grad = grads[_highest_index(energies)]
+        if grad is None:
+            return False
+        norm = float(np.linalg.norm(grad))
+        return math.isfinite(norm) and norm <= force_norm
+
+    def _quench(coords, potential, **kwargs):
+        events = list(kwargs.get("events") or [])
+
+        def _keep(coords=None, energy=None, rms=None):
+            if coords is None or neb is None:
+                return
+            frame = _frame(coords)
+            neb.active[:, :] = frame[1:-1]
+            for index in range(1, neb.nimages - 1):
+                found = spec_recall(pot, frame[index])
+                if found is not None:
+                    neb.energies[index] = float(found[0])
+            accepted["energies"] = np.array(neb.energies, copy=True)
+            if climbing:
+                _mark_climbing(neb)
+
+        events.append(_keep)
+        kwargs["events"] = events
+        kwargs["alternate_stop_criterion"] = _met
+        kwargs["H0"] = float(settings["h0"])
+        return mylbfgs(coords, potential, **kwargs)
+
+    try:
+        neb = _Band(
+            images,
+            pot,
+            k=float(settings["spring_k"]),
+            dneb=bool(settings["dneb"]),
+            verbose=-1,
+            quenchParams=quench,
+            use_minimizer_callback=True,
+        )
+        accepted["energies"] = np.array(neb.energies, copy=True)
+        if climbing:
+            _mark_climbing(neb)
+        neb.optimize(quenchRoutine=_quench)
+    except ForceCallCap:
+        if neb is not None and accepted["energies"] is not None:
+            neb.energies[:] = accepted["energies"]
+    if neb is None:
+        coords, _index = _highest_interior(path, np.full(path.shape[0], np.nan))
+        return {"coords": coords, "candidate": "highest", "converged": False, "connected": False}
+    coords, index = _highest_interior(neb.coords, neb.energies)
+    found = spec_recall(pot, coords)
+    norm = None if found is None else float(np.linalg.norm(found[1]))
+    converged = norm is not None and math.isfinite(norm) and norm <= force_norm
+    candidate = "climbing" if climbing and bool(neb.isclimbing[index]) else "highest"
+    return {"coords": coords, "candidate": candidate, "converged": converged, "connected": False}
 
 
 def _run_connect(pot: PeleCounter, path: np.ndarray, settings: dict, ndof: int) -> dict:
@@ -523,6 +706,8 @@ def _search(job: dict, state: dict) -> dict:
         tuned["project_rigid"] = project_rigid
         outcome = _run_connect(counter, path, tuned, ndof)
         crash = outcome.get("crash")
+    elif settings.get("stop") == "true_force":
+        outcome = _run_true_force(counter, path, settings)
     else:
         outcome = _run_band(counter, path, settings)
     if crash:
