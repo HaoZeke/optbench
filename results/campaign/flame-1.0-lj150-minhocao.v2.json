@@ -2,7 +2,7 @@
   "bootstrap_resamples": 2000,
   "bootstrap_seed": 20261015,
   "par_factor": 2,
-  "partial": true,
+  "partial": false,
   "problem": "globalopt/lj150",
   "runs": [
     {
@@ -24,12 +24,12 @@
         "median": 20000000.0,
         "median_high": 20000000.0,
         "median_low": 20000000.0,
-        "n": 97,
+        "n": 100,
         "n_cap": 0,
         "n_crash": 0,
-        "n_divergence": 97,
+        "n_divergence": 100,
         "n_wrong_stationary": 0,
-        "nfailed": 97,
+        "nfailed": 100,
         "par2_mean": 20000000.0,
         "par_applied": true,
         "par_factor": 2,
@@ -39,7 +39,7 @@
         "success_only_mean": null,
         "success_rate": 0.0,
         "successes": 0,
-        "wilson_high": 0.03809404252594769,
+        "wilson_high": 0.03699349820698568,
         "wilson_low": 0.0
       },
       "present_source": true,
@@ -1505,6 +1505,21 @@
           "success": false
         },
         {
+          "calls_to_best": 150320,
+          "calls_total": 162395,
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -864.7344188237358,
+          "failure": "divergence",
+          "first_energy": 3924907220030272.0,
+          "force_calls": 162395,
+          "schema": "optbench.start/v2",
+          "seed": 314159,
+          "start": "coords.97",
+          "success": false
+        },
+        {
           "calls_to_best": 71188,
           "calls_total": 86185,
           "comparable": true,
@@ -1518,6 +1533,36 @@
           "seed": 314159,
           "start": "coords.98",
           "success": false
+        },
+        {
+          "calls_to_best": 87199,
+          "calls_total": 131029,
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -855.6265731760751,
+          "failure": "divergence",
+          "first_energy": 8141484748851.324,
+          "force_calls": 131029,
+          "schema": "optbench.start/v2",
+          "seed": 314159,
+          "start": "coords.99",
+          "success": false
+        },
+        {
+          "calls_to_best": 165101,
+          "calls_total": 172115,
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -863.5694899473523,
+          "failure": "divergence",
+          "first_energy": 76858777614952.3,
+          "force_calls": 172115,
+          "schema": "optbench.start/v2",
+          "seed": 314159,
+          "start": "coords.100",
+          "success": false
         }
       ],
       "tuning": "dtinit"
@@ -1525,5 +1570,5 @@
   ],
   "schema": "optbench.result/v2",
   "scoring": "par2-wilson-bootstrap",
-  "status": "partial"
+  "status": "archive"
 }
