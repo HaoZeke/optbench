@@ -8,18 +8,23 @@ only slightly longer than twice the cutoff.
 
 ``fix neb`` uses Kspring 1.0 and the parallel style recorded on the
 template. Climbing is the second stage of the ``neb`` command. The
-timestep is the unit default, 0.005 for ``units lj`` and 0.001 for
-``units metal``. ``min_modify dmax`` is the problem ``max_move``. FIRE's template
-leaves one fifth of the cap unused. A velocity reset evaluates the
-pair style again, and that compute has to stay inside the cap.
+default timestep is the unit default, 0.005 for ``units lj`` and 0.001
+for ``units metal``. A tuned template multiplies that by the factor in
+the ``neb`` command documentation. ``min_modify dmax`` is the problem
+``max_move``. The default FIRE template leaves one fifth of the cap
+unused. A velocity reset evaluates the pair style again, and that
+compute has to stay inside the cap.
 
 A force call is one pair compute. Each stage logs ``neval`` and omits
 the setup compute. A stop other than ``max iterations`` computes the
 forces once more, and that compute is also absent from ``neval``. The
 start total sums both stages on every replica, including the
 endpoints. The harness then judges the climbing replica: free-atom
-gradient at the problem norm, and Hessian index 1. Finite-difference
-probes are ``verify_calls`` and are not part of the search cost.
+gradient at the problem norm, and Hessian index 1. A last stage whose
+stopping criterion is ``max iterations`` or ``max force evaluations``
+used the N1/N2 budget. If the climbing image is still above the force
+stop, the class is cap. Finite-difference probes are ``verify_calls``
+and are not part of the search cost.
 """
 
 from __future__ import annotations
@@ -32,6 +37,7 @@ import signal
 import statistics
 import subprocess
 import tempfile
+import time
 import tomllib
 from pathlib import Path
 
@@ -52,6 +58,7 @@ _FD_STEP = 1e-5
 _LJ_PAD = 100.0
 _MORSE_CUTOFF = 9.5
 _TIMESTEP = {"lj": 0.005, "morse_pt": 0.001}
+_STEP_LIMITS = frozenset({"max iterations", "max force evaluations"})
 _CLIMBING = re.compile(r"Climbing replica = (\d+)")
 _DEFAULT_BIN = Path("/tmp/lammps/install/bin/lmp")
 
@@ -89,6 +96,93 @@ def iteration_budget(n_images: int, cap: int, reserve: float = 0.0) -> tuple[int
     if n_images * (n1 + n2 + 4) > usable:
         raise ValueError("iteration budget meets the force-call cap")
     return n1, n2
+
+
+def cap_budget(n_images: int, cap: int) -> tuple[int, int]:
+    """Largest N1, N2 whose max-iteration pair computes reach ``cap``.
+
+    A max-iteration stage records one setup compute and ``neval`` equal
+    to the stage length, so the band total is ``n_images * (N1 + N2 + 2)``.
+    One more iteration on every replica would pass the cap.
+    """
+    if n_images < 2:
+        raise ValueError("NEB needs at least two replicas")
+    room = int(cap) // int(n_images) - 2
+    if room < 2:
+        raise ValueError(f"cap {cap} cannot fund two stages on {n_images} replicas")
+    n1 = room // 2
+    n2 = room - n1
+    return n1, n2
+
+
+def stage_lengths(settings: dict) -> tuple[int, int]:
+    """N1 and N2 for this template. ``cap`` spends the problem budget."""
+    images = int(settings["n_images"])
+    cap = int(settings["cap"])
+    if settings.get("step_budget") == "cap":
+        return cap_budget(images, cap)
+    return iteration_budget(images, cap, float(settings.get("call_reserve", 0.0)))
+
+
+def ended_on_step_limit(replica_blocks: list[list[tuple[str, int]]]) -> bool:
+    """True when every replica's last stage hit an N1/N2 limit."""
+    if not replica_blocks:
+        return False
+    for blocks in replica_blocks:
+        if not blocks or blocks[-1][0] not in _STEP_LIMITS:
+            return False
+    return True
+
+
+def unanimous_stop(replica_blocks: list[list[tuple[str, int]]]) -> str:
+    """The shared last-stage criterion, or ``mixed`` when replicas differ."""
+    if not replica_blocks:
+        return ""
+    lasts: list[str] = []
+    for blocks in replica_blocks:
+        if not blocks:
+            return ""
+        lasts.append(blocks[-1][0])
+    if all(item == lasts[0] for item in lasts):
+        return lasts[0]
+    return "mixed"
+
+
+def band_reasons(
+    *,
+    complete: bool,
+    calls: int,
+    cap: int,
+    force: float | None,
+    force_norm: float,
+    step_limit: bool,
+    hessian_index: int | None,
+) -> list[str]:
+    """Reasons for one search. An empty list is a saddle under the cap.
+
+    A step-limit stop that is still above the force norm is cap. A
+    force-tolerance stop that is still above the harness norm is
+    divergence. A step-limit stop whose force is already under the norm
+    is judged by the Hessian.
+    """
+    reasons: list[str] = []
+    if not complete:
+        reasons.append("crash")
+    if calls >= cap:
+        reasons.append("cap")
+    if not complete:
+        reasons.append("force_norm")
+        return reasons
+    finite = force is not None and bool(np.isfinite(force))
+    above = not finite or float(force) > force_norm
+    if above:
+        if step_limit and finite and "cap" not in reasons:
+            reasons.append("cap")
+        reasons.append("force_norm")
+        return reasons
+    if "cap" not in reasons and hessian_index is not None and int(hessian_index) != 1:
+        reasons.append("hessian_index")
+    return reasons
 
 
 def minimization_blocks(text: str) -> list[tuple[str, int]]:
@@ -154,11 +248,25 @@ def _settings(template: dict, problem: dict, commit: str) -> dict:
     kind = str(problem_band["potential"])
     if kind not in _TIMESTEP:
         raise ValueError(f"{problem['id']} potential {kind}")
-    n_interior = int(problem_band["interior_images"])
+    replicas = band.get("replicas")
+    if replicas is None:
+        n_interior = int(problem_band["interior_images"])
+        n_images = n_interior + 2
+    else:
+        n_images = int(replicas)
+        if n_images < 3:
+            raise ValueError(f"{template['id']} needs at least three replicas")
+        n_interior = n_images - 2
+    scale = float(band.get("timestep_scale", 1.0))
+    if scale <= 0.0:
+        raise ValueError(f"{template['id']} timestep scale {scale}")
+    step_budget = str(band.get("step_budget", "slack"))
+    if step_budget not in {"slack", "cap"}:
+        raise ValueError(f"{template['id']} step budget {step_budget}")
     return {
         "potential": kind,
         "n_interior": n_interior,
-        "n_images": n_interior + 2,
+        "n_images": n_images,
         "max_move": float(problem_band["max_move"]),
         "force_norm": float(convergence["force_norm"]),
         "cap": int(convergence["max_force_calls"]),
@@ -169,7 +277,9 @@ def _settings(template: dict, problem: dict, commit: str) -> dict:
         "spring_k": float(band["spring_k"]),
         "parallel": parallel,
         "call_reserve": float(band.get("call_reserve", 0.0)),
-        "timestep": _TIMESTEP[kind],
+        "timestep": _TIMESTEP[kind] * scale,
+        "timestep_scale": scale,
+        "step_budget": step_budget,
         "units": "lj" if kind == "lj" else "metal",
     }
 
@@ -273,6 +383,12 @@ def render_neb_input(settings: dict, *, n1: int, n2: int, frozen: bool) -> str:
             "thermo_style custom step pe",
             "thermo_modify norm no",
             "thermo 100000",
+        ]
+    )
+    if float(settings.get("timestep_scale", 1.0)) != 1.0:
+        lines.append(f"timestep {_fmt(settings['timestep'])}")
+    lines.extend(
+        [
             f"min_style {settings['min_style']}",
             f"min_modify dmax {_fmt(settings['max_move'])} norm two",
             f"fix neb1 neb neb {_fmt(settings['spring_k'])} parallel {settings['parallel']}",
@@ -563,7 +679,9 @@ def search_geometry(
             encoding="utf-8",
         )
         returncode = _launch_neb(executable, work, n_images, timeout)
-        calls, blocks, missing = _logged_calls(work, n_images)
+        calls, blocks, missing, per_replica = _logged_calls(work, n_images)
+        step_limit = (not missing) and blocks == 2 * n_images and ended_on_step_limit(per_replica)
+        lammps_stop = unanimous_stop(per_replica) if not missing else ""
         log_text = ""
         universe = work / "log.lammps"
         if universe.is_file():
@@ -604,25 +722,30 @@ def search_geometry(
             n1=n1,
             n2=n2,
             returncode=returncode,
+            step_limit=step_limit,
+            lammps_stop=lammps_stop,
         )
     finally:
         if owned is not None and cleanup and os.environ.get("OPTBENCH_LAMMPS_KEEP") != "1":
             owned.cleanup()
 
 
-def _logged_calls(work: Path, n_images: int) -> tuple[int, int, bool]:
+def _logged_calls(work: Path, n_images: int) -> tuple[int, int, bool, list[list[tuple[str, int]]]]:
     total = 0
     blocks = 0
     missing = False
+    per_replica: list[list[tuple[str, int]]] = []
     for index in range(n_images):
         path = work / f"log.lammps.{index}"
         if not path.is_file():
             missing = True
+            per_replica.append([])
             continue
         found = minimization_blocks(path.read_text(encoding="utf-8", errors="replace"))
+        per_replica.append(found)
         total += calls_from_blocks(found)
         blocks += len(found)
-    return total, blocks, missing
+    return total, blocks, missing, per_replica
 
 
 def _finish(
@@ -639,28 +762,30 @@ def _finish(
     n1: int,
     n2: int,
     returncode: int | None,
+    step_limit: bool = False,
+    lammps_stop: str = "",
 ) -> dict:
     cap = int(settings["cap"])
     force_norm = float(settings["force_norm"])
-    reasons: list[str] = []
     energy = None
     force = None
     hessian_index = None
     verify_calls = 0
-    if not complete or coords is None:
-        reasons.append("crash")
-    if calls >= cap:
-        reasons.append("cap")
-    if complete and coords is not None:
+    measured = complete and coords is not None
+    if measured:
         energy, force = _measured(settings["potential"], coords, free, box)
-        if not np.isfinite(force) or force > force_norm:
-            reasons.append("force_norm")
-        elif "cap" not in reasons and "crash" not in reasons:
+        under = np.isfinite(force) and force <= force_norm and calls < cap
+        if under:
             hessian_index, verify_calls = _hessian_index(settings["potential"], coords, free, box)
-            if hessian_index != 1:
-                reasons.append("hessian_index")
-    elif "crash" in reasons:
-        reasons.append("force_norm")
+    reasons = band_reasons(
+        complete=measured,
+        calls=calls,
+        cap=cap,
+        force=force,
+        force_norm=force_norm,
+        step_limit=step_limit,
+        hessian_index=hessian_index,
+    )
     failure = classify_failure(reasons)
     record = _blank(
         name,
@@ -682,6 +807,7 @@ def _finish(
     record["failure"] = failure
     record["reasons"] = reasons
     record["converged"] = failure is None
+    record["lammps_stop"] = lammps_stop
     return record
 
 
@@ -699,7 +825,7 @@ def cached_pairs(root: Path, problem: dict, settings: dict) -> dict:
 
 
 def _execute(pair, settings: dict, *, n1: int | None = None, n2: int | None = None, work: Path | None = None) -> dict:
-    stages = iteration_budget(settings["n_images"], settings["cap"], settings.get("call_reserve", 0.0))
+    stages = stage_lengths(settings)
     first = stages[0] if n1 is None else int(n1)
     second = stages[1] if n2 is None else int(n2)
     try:
@@ -810,7 +936,7 @@ def write_outputs(output: Path, records: list[dict], template: dict, settings: d
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(_dat(records, template, settings, problem), encoding="utf-8")
     write_starts(output.with_suffix(".starts.jsonl"), records)
-    n1, n2 = iteration_budget(settings["n_images"], settings["cap"], settings.get("call_reserve", 0.0))
+    n1, n2 = stage_lengths(settings)
     parameters = dict(settings)
     parameters.update({"n1": n1, "n2": n2, "nevery": 1, "counter": "harness", "seed": "0"})
     document = {
@@ -918,7 +1044,9 @@ def run(
         if pair.name in done:
             records.append(done[pair.name])
             continue
+        began = time.perf_counter()
         record = _execute(pair, settings)
+        record["search_seconds"] = time.perf_counter() - began
         record["seed"] = "0"
         record["problem"] = problem["id"]
         record["template"] = template["id"]
