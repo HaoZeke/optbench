@@ -1,0 +1,2705 @@
+{
+  "bootstrap_resamples": 2000,
+  "bootstrap_seed": 20261015,
+  "note": "Tuned pool. The loop, the pool size, and the force cap match the default. The mutation is move, which displaces 20 percent of the atoms by up to 1, and r_ij is 2**(1/6), the Lennard-Jones nearest-neighbour distance. random and r_ij 3.0 are the metal-example settings. Success is the Cambridge N=75 minimum plus 0.001. The search stops at the problem force cap of 1000000.",
+  "par_factor": 2,
+  "problem": "globalopt/lj75",
+  "reference_energy": -397.492331,
+  "runs": [
+    {
+      "algorithm": "pool GA",
+      "cap": 1000000,
+      "code": "BPGA",
+      "code_version": "0",
+      "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+      "entry": "bpga-b32cd227-lj75-pool-tuned",
+      "legacy": {
+        "force_calls": null,
+        "force_calls_max": null,
+        "force_calls_min": null,
+        "median": null,
+        "nfailed": 29
+      },
+      "metrics": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 1000000,
+        "includes_failures": true,
+        "iqr": 0.0,
+        "iqr_high": 0.0,
+        "iqr_low": 0.0,
+        "mean": 2000000.0,
+        "median": 2000000.0,
+        "median_high": 2000000.0,
+        "median_low": 2000000.0,
+        "n": 29,
+        "n_cap": 0,
+        "n_crash": 0,
+        "n_divergence": 0,
+        "n_wrong_stationary": 29,
+        "nfailed": 29,
+        "par2_mean": 2000000.0,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 2000000.0,
+        "q75": 2000000.0,
+        "scoring": "par2-wilson-bootstrap",
+        "success_only_mean": null,
+        "success_rate": 0.0,
+        "successes": 0,
+        "wilson_high": 0.11696979849974075,
+        "wilson_low": 0.0
+      },
+      "parameters": {
+        "box_add": 10.0,
+        "cross": "weighted",
+        "iterations": 1000,
+        "method": "pool",
+        "mut_type": "move",
+        "mutate": 0.1,
+        "n_pool": 10,
+        "quench_force": 0.001,
+        "quench_maxfun": 1000,
+        "r_ij": 1.122462048309373,
+        "seed": 20261015
+      },
+      "present_source": true,
+      "provenance": {
+        "code": "BPGA",
+        "code_version": "0",
+        "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+        "machine": {
+          "machine": "x86_64",
+          "node": "cursor",
+          "python": "3.12.3",
+          "system": "Linux"
+        },
+        "parameters": {
+          "box_add": 10.0,
+          "cross": "weighted",
+          "iterations": 1000,
+          "method": "pool",
+          "mut_type": "move",
+          "mutate": 0.1,
+          "n_pool": 10,
+          "quench_force": 0.001,
+          "quench_maxfun": 1000,
+          "r_ij": 1.122462048309373,
+          "seed": 20261015
+        }
+      },
+      "starts": [
+        {
+          "calls_to_best": 262280,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -392.8531903477887,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 314406,
+          "force_norm": 0.0008871321744066777,
+          "index": 0,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 2293.1714415339957,
+          "start": "coords.1",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              458,
+              -379.62151346765705
+            ],
+            [
+              6406,
+              -382.9792420663016
+            ],
+            [
+              9224,
+              -389.4537037168918
+            ],
+            [
+              9224,
+              -389.4537037169
+            ],
+            [
+              201136,
+              -389.68346591958135
+            ],
+            [
+              201136,
+              -389.6834659196
+            ],
+            [
+              205431,
+              -389.7138983829228
+            ],
+            [
+              253914,
+              -390.5584747819028
+            ],
+            [
+              257951,
+              -391.724604954701
+            ],
+            [
+              262280,
+              -392.85319034778865
+            ],
+            [
+              262280,
+              -392.8531903478
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 295713,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -392.9442546636068,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 323207,
+          "force_norm": 0.000619256611016537,
+          "index": 1,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 1445.1585138509981,
+          "start": "coords.2",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              340,
+              -374.42791237186555
+            ],
+            [
+              2656,
+              -376.1665944635024
+            ],
+            [
+              3341,
+              -378.77502260262474
+            ],
+            [
+              8166,
+              -381.24595185075367
+            ],
+            [
+              8166,
+              -381.2459518508
+            ],
+            [
+              9760,
+              -381.68134498885746
+            ],
+            [
+              9760,
+              -381.6813449889
+            ],
+            [
+              10958,
+              -382.76783146057153
+            ],
+            [
+              10958,
+              -382.7678314606
+            ],
+            [
+              12263,
+              -384.85602659382675
+            ],
+            [
+              19567,
+              -386.09953131370224
+            ],
+            [
+              20801,
+              -387.18763133653164
+            ],
+            [
+              28659,
+              -390.1922719017215
+            ],
+            [
+              30683,
+              -391.14729367096504
+            ],
+            [
+              30683,
+              -391.147293671
+            ],
+            [
+              88962,
+              -391.5536252958469
+            ],
+            [
+              155398,
+              -392.2300151315907
+            ],
+            [
+              155398,
+              -392.2300151316
+            ],
+            [
+              272459,
+              -392.4312890847981
+            ],
+            [
+              272459,
+              -392.4312890848
+            ],
+            [
+              295713,
+              -392.9442546636068
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 232616,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -394.25073997509963,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 313082,
+          "force_norm": 0.0008866973585781999,
+          "index": 2,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 1939.858430630993,
+          "start": "coords.3",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              367,
+              -379.99470366832116
+            ],
+            [
+              5872,
+              -380.5895759045983
+            ],
+            [
+              5872,
+              -380.5895759046
+            ],
+            [
+              7304,
+              -380.81145423395685
+            ],
+            [
+              7304,
+              -380.811454234
+            ],
+            [
+              10750,
+              -382.12053771966623
+            ],
+            [
+              10750,
+              -382.1205377197
+            ],
+            [
+              20804,
+              -382.95158290584186
+            ],
+            [
+              24751,
+              -388.7095514823186
+            ],
+            [
+              99097,
+              -389.534866599309
+            ],
+            [
+              133047,
+              -393.1513262737532
+            ],
+            [
+              133047,
+              -393.1513262738
+            ],
+            [
+              141724,
+              -393.30349487105684
+            ],
+            [
+              141724,
+              -393.3034948711
+            ],
+            [
+              190484,
+              -394.0476324528022
+            ],
+            [
+              232616,
+              -394.25073997509963
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 249656,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -394.0414185465148,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 309833,
+          "force_norm": 0.0008769251365265716,
+          "index": 3,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 691.0505454200029,
+          "start": "coords.4",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              433,
+              -388.26671900946803
+            ],
+            [
+              43686,
+              -388.8617409871383
+            ],
+            [
+              89834,
+              -391.1558784218057
+            ],
+            [
+              96176,
+              -391.4439149148469
+            ],
+            [
+              205608,
+              -393.4586338281865
+            ],
+            [
+              205608,
+              -393.4586338282
+            ],
+            [
+              240324,
+              -393.66767191668174
+            ],
+            [
+              240324,
+              -393.6676719167
+            ],
+            [
+              249656,
+              -394.0414185465148
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 132846,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -394.9962933680328,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 317004,
+          "force_norm": 0.0005451543181755623,
+          "index": 4,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 1039.6876816589938,
+          "start": "coords.5",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              379,
+              -378.516303519407
+            ],
+            [
+              6626,
+              -378.76706519938693
+            ],
+            [
+              6626,
+              -378.7670651994
+            ],
+            [
+              7815,
+              -380.6297654156218
+            ],
+            [
+              12220,
+              -380.85754875183846
+            ],
+            [
+              13672,
+              -382.1511639776342
+            ],
+            [
+              14984,
+              -385.24150127913424
+            ],
+            [
+              17029,
+              -386.00280190290516
+            ],
+            [
+              19921,
+              -386.47058045910865
+            ],
+            [
+              40860,
+              -387.1134458575842
+            ],
+            [
+              40860,
+              -387.1134458576
+            ],
+            [
+              41850,
+              -387.3080937512809
+            ],
+            [
+              41850,
+              -387.3080937513
+            ],
+            [
+              45047,
+              -389.92291356999
+            ],
+            [
+              45047,
+              -389.92291357
+            ],
+            [
+              107344,
+              -391.6711383157053
+            ],
+            [
+              116793,
+              -391.8805628366937
+            ],
+            [
+              116793,
+              -391.8805628367
+            ],
+            [
+              132846,
+              -394.99629336803287
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 257624,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -395.07128799858725,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 314261,
+          "force_norm": 0.0009901295216640444,
+          "index": 5,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 1154.397004346989,
+          "start": "coords.6",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              203,
+              -378.47148387343253
+            ],
+            [
+              9166,
+              -380.2967296426623
+            ],
+            [
+              9166,
+              -380.2967296427
+            ],
+            [
+              11347,
+              -380.41053961903344
+            ],
+            [
+              12092,
+              -381.12048883333057
+            ],
+            [
+              13316,
+              -387.61486512223746
+            ],
+            [
+              63620,
+              -387.81686343351276
+            ],
+            [
+              77308,
+              -388.8724923787751
+            ],
+            [
+              77308,
+              -388.8724923788
+            ],
+            [
+              92301,
+              -390.33780413468975
+            ],
+            [
+              92301,
+              -390.3378041347
+            ],
+            [
+              128967,
+              -390.9304793541979
+            ],
+            [
+              128967,
+              -390.9304793542
+            ],
+            [
+              135139,
+              -391.98386912794035
+            ],
+            [
+              257624,
+              -395.0712879985872
+            ],
+            [
+              257624,
+              -395.0712879986
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 29147,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -393.5169457164196,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 312714,
+          "force_norm": 0.0009552196581595015,
+          "index": 6,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 1363.9682550299913,
+          "start": "coords.7",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              391,
+              -380.5216757012954
+            ],
+            [
+              21663,
+              -383.51429295034507
+            ],
+            [
+              23406,
+              -390.67779701141376
+            ],
+            [
+              29147,
+              -393.5169457164197
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 277271,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -395.1711273833028,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 319627,
+          "force_norm": 0.0009175575556410346,
+          "index": 7,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 547.7163497220026,
+          "start": "coords.8",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              371,
+              -379.9412913076724
+            ],
+            [
+              9618,
+              -380.9302746519694
+            ],
+            [
+              9618,
+              -380.930274652
+            ],
+            [
+              10622,
+              -384.06981216247095
+            ],
+            [
+              10622,
+              -384.0698121625
+            ],
+            [
+              32447,
+              -391.2596391449051
+            ],
+            [
+              71480,
+              -393.33223473035014
+            ],
+            [
+              71480,
+              -393.3322347304
+            ],
+            [
+              160947,
+              -393.41652602999557
+            ],
+            [
+              160947,
+              -393.41652603
+            ],
+            [
+              262339,
+              -393.75839683544973
+            ],
+            [
+              277271,
+              -395.17112738330286
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 107105,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -393.9675730718627,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 306478,
+          "force_norm": 0.0007521656637584451,
+          "index": 8,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 450.28588962499634,
+          "start": "coords.9",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              560,
+              -381.5811520497427
+            ],
+            [
+              15527,
+              -386.1632440610997
+            ],
+            [
+              22402,
+              -386.38644420655555
+            ],
+            [
+              22402,
+              -386.3864442066
+            ],
+            [
+              34235,
+              -386.7620589018104
+            ],
+            [
+              38891,
+              -389.9860753232663
+            ],
+            [
+              38891,
+              -389.9860753233
+            ],
+            [
+              40438,
+              -391.58121336615056
+            ],
+            [
+              40438,
+              -391.5812133662
+            ],
+            [
+              46537,
+              -392.21320372933747
+            ],
+            [
+              97754,
+              -392.3008424080573
+            ],
+            [
+              97754,
+              -392.3008424081
+            ],
+            [
+              107105,
+              -393.9675730718628
+            ],
+            [
+              107105,
+              -393.9675730719
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 182080,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -393.8439268827266,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 322509,
+          "force_norm": 0.0007489077447935782,
+          "index": 9,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 744.3539279309916,
+          "start": "coords.10",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              306,
+              -378.5029910923462
+            ],
+            [
+              1087,
+              -378.920206186991
+            ],
+            [
+              1087,
+              -378.920206187
+            ],
+            [
+              6549,
+              -380.41521528279844
+            ],
+            [
+              6549,
+              -380.4152152828
+            ],
+            [
+              10376,
+              -380.887297083504
+            ],
+            [
+              10684,
+              -383.49580498490286
+            ],
+            [
+              12745,
+              -383.9307637129584
+            ],
+            [
+              12745,
+              -383.930763713
+            ],
+            [
+              13240,
+              -388.30938383355425
+            ],
+            [
+              13240,
+              -388.3093838336
+            ],
+            [
+              62359,
+              -389.80808920198297
+            ],
+            [
+              62359,
+              -389.808089202
+            ],
+            [
+              88560,
+              -390.69619665964456
+            ],
+            [
+              109925,
+              -391.29125906619754
+            ],
+            [
+              109925,
+              -391.2912590662
+            ],
+            [
+              117365,
+              -392.46620975414976
+            ],
+            [
+              129483,
+              -393.65773925089525
+            ],
+            [
+              129483,
+              -393.6577392509
+            ],
+            [
+              182080,
+              -393.8439268827265
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 279180,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -394.23994900051633,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 315425,
+          "force_norm": 0.0007395527682527301,
+          "index": 10,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 592.4561257969908,
+          "start": "coords.11",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              297,
+              -375.42349311536293
+            ],
+            [
+              1574,
+              -378.80156354712074
+            ],
+            [
+              11377,
+              -383.650357667621
+            ],
+            [
+              24171,
+              -384.4240990643575
+            ],
+            [
+              24171,
+              -384.4240990644
+            ],
+            [
+              34837,
+              -386.3056986110179
+            ],
+            [
+              36525,
+              -386.6861502621556
+            ],
+            [
+              36525,
+              -386.6861502622
+            ],
+            [
+              45832,
+              -391.52128740761174
+            ],
+            [
+              116733,
+              -393.46413120095497
+            ],
+            [
+              116733,
+              -393.464131201
+            ],
+            [
+              178691,
+              -393.5084453807109
+            ],
+            [
+              202267,
+              -394.1373561251621
+            ],
+            [
+              202267,
+              -394.1373561252
+            ],
+            [
+              279180,
+              -394.2399490005164
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 292048,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -395.5551964239212,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 302317,
+          "force_norm": 0.0006112856293708939,
+          "index": 11,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 818.9748838509986,
+          "start": "coords.12",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              246,
+              -374.5138960695412
+            ],
+            [
+              7328,
+              -379.5613343932199
+            ],
+            [
+              7906,
+              -387.0353681252876
+            ],
+            [
+              7906,
+              -387.0353681253
+            ],
+            [
+              36954,
+              -387.0432197424566
+            ],
+            [
+              36954,
+              -387.0432197425
+            ],
+            [
+              41900,
+              -389.6488260686043
+            ],
+            [
+              43788,
+              -394.02476150736493
+            ],
+            [
+              43788,
+              -394.0247615074
+            ],
+            [
+              233514,
+              -394.0497873108982
+            ],
+            [
+              233514,
+              -394.0497873109
+            ],
+            [
+              258083,
+              -394.55498275632783
+            ],
+            [
+              292048,
+              -395.5551964239212
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 175948,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -392.13442995498565,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 309009,
+          "force_norm": 0.0006408470449648203,
+          "index": 12,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 1047.6074238940055,
+          "start": "coords.13",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              335,
+              -379.31997825203894
+            ],
+            [
+              5732,
+              -379.55528803611276
+            ],
+            [
+              7149,
+              -380.5225324789812
+            ],
+            [
+              7149,
+              -380.522532479
+            ],
+            [
+              9153,
+              -380.7524050202584
+            ],
+            [
+              9153,
+              -380.7524050203
+            ],
+            [
+              11932,
+              -381.7296173555204
+            ],
+            [
+              14080,
+              -382.58173438255125
+            ],
+            [
+              14080,
+              -382.5817343826
+            ],
+            [
+              14351,
+              -387.46640045214144
+            ],
+            [
+              42768,
+              -388.3646702625588
+            ],
+            [
+              42768,
+              -388.3646702626
+            ],
+            [
+              76397,
+              -388.7802055894361
+            ],
+            [
+              78681,
+              -391.37461149170207
+            ],
+            [
+              175948,
+              -392.13442995498565
+            ],
+            [
+              175948,
+              -392.134429955
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 218361,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -393.2480268430535,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 324414,
+          "force_norm": 0.0008590009553090724,
+          "index": 13,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 830.9996779040084,
+          "start": "coords.14",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              296,
+              -379.46970350898914
+            ],
+            [
+              1231,
+              -380.0997240590499
+            ],
+            [
+              10394,
+              -382.29588929863627
+            ],
+            [
+              18270,
+              -383.1316300955583
+            ],
+            [
+              18270,
+              -383.1316300956
+            ],
+            [
+              20572,
+              -385.936254460506
+            ],
+            [
+              30378,
+              -385.9498468312046
+            ],
+            [
+              50876,
+              -387.05327550255004
+            ],
+            [
+              50876,
+              -387.0532755026
+            ],
+            [
+              57404,
+              -390.03760078875894
+            ],
+            [
+              57404,
+              -390.0376007888
+            ],
+            [
+              61529,
+              -392.6038184243132
+            ],
+            [
+              218361,
+              -393.2480268430534
+            ],
+            [
+              218361,
+              -393.2480268431
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 290010,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -395.53873082735413,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 315677,
+          "force_norm": 0.0009464433809682044,
+          "index": 14,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 730.0812427019991,
+          "start": "coords.15",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              205,
+              -381.5929080198687
+            ],
+            [
+              10383,
+              -384.1847559596614
+            ],
+            [
+              10383,
+              -384.1847559597
+            ],
+            [
+              15729,
+              -387.28074668801327
+            ],
+            [
+              51322,
+              -389.79867882827534
+            ],
+            [
+              51322,
+              -389.7986788283
+            ],
+            [
+              123409,
+              -389.95027041219623
+            ],
+            [
+              123409,
+              -389.9502704122
+            ],
+            [
+              184372,
+              -392.4893740249515
+            ],
+            [
+              184372,
+              -392.489374025
+            ],
+            [
+              280610,
+              -394.36434412962285
+            ],
+            [
+              290010,
+              -395.5387308273542
+            ],
+            [
+              290010,
+              -395.5387308274
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 300762,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -394.20833672167794,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 318625,
+          "force_norm": 0.000787387115835449,
+          "index": 15,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 1006.3884324060054,
+          "start": "coords.16",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              478,
+              -376.9021607876852
+            ],
+            [
+              6165,
+              -381.33048514924815
+            ],
+            [
+              16106,
+              -384.941806746342
+            ],
+            [
+              17901,
+              -387.78683614977143
+            ],
+            [
+              17901,
+              -387.7868361498
+            ],
+            [
+              22506,
+              -388.3818461465651
+            ],
+            [
+              22506,
+              -388.3818461466
+            ],
+            [
+              36297,
+              -391.2858268085914
+            ],
+            [
+              36297,
+              -391.2858268086
+            ],
+            [
+              44337,
+              -392.4586459600772
+            ],
+            [
+              44337,
+              -392.4586459601
+            ],
+            [
+              168446,
+              -393.5868875562628
+            ],
+            [
+              168446,
+              -393.5868875563
+            ],
+            [
+              281329,
+              -393.8598172284495
+            ],
+            [
+              300762,
+              -394.20833672167794
+            ],
+            [
+              300762,
+              -394.2083367217
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 96264,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -394.21877071531287,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 300531,
+          "force_norm": 0.0007833009960665881,
+          "index": 16,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 823.012763110004,
+          "start": "coords.17",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              359,
+              -372.8066678354583
+            ],
+            [
+              1840,
+              -379.360068535112
+            ],
+            [
+              8102,
+              -381.841939116524
+            ],
+            [
+              8890,
+              -382.76616917380613
+            ],
+            [
+              13560,
+              -385.2873457545424
+            ],
+            [
+              26183,
+              -386.6513180334978
+            ],
+            [
+              26183,
+              -386.6513180335
+            ],
+            [
+              28539,
+              -387.5693766357741
+            ],
+            [
+              28539,
+              -387.5693766358
+            ],
+            [
+              43034,
+              -389.0674757792829
+            ],
+            [
+              43034,
+              -389.0674757793
+            ],
+            [
+              52858,
+              -389.3643184529202
+            ],
+            [
+              55864,
+              -390.0430029224631
+            ],
+            [
+              55864,
+              -390.0430029225
+            ],
+            [
+              72545,
+              -391.229696763433
+            ],
+            [
+              96264,
+              -394.2187707153129
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 303331,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -394.62549052530306,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 313335,
+          "force_norm": 0.0009751090814973321,
+          "index": 17,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 811.2072023849905,
+          "start": "coords.18",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              310,
+              -377.1159964771728
+            ],
+            [
+              6093,
+              -377.456164810935
+            ],
+            [
+              7841,
+              -383.3108314527767
+            ],
+            [
+              7841,
+              -383.3108314528
+            ],
+            [
+              15956,
+              -384.57363462175783
+            ],
+            [
+              15956,
+              -384.5736346218
+            ],
+            [
+              26587,
+              -386.8803619683505
+            ],
+            [
+              26587,
+              -386.8803619684
+            ],
+            [
+              53439,
+              -387.81119689671766
+            ],
+            [
+              64425,
+              -389.09868624474655
+            ],
+            [
+              130358,
+              -389.89176764644765
+            ],
+            [
+              131695,
+              -392.1311481875132
+            ],
+            [
+              150153,
+              -394.322291443519
+            ],
+            [
+              303331,
+              -394.6254905253031
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 237578,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -393.9169060581013,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 309431,
+          "force_norm": 0.0007882721297008524,
+          "index": 18,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 675.7831259499944,
+          "start": "coords.19",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              244,
+              -376.5277084403515
+            ],
+            [
+              9840,
+              -378.5994450688537
+            ],
+            [
+              9840,
+              -378.5994450689
+            ],
+            [
+              13806,
+              -378.7670168555145
+            ],
+            [
+              15092,
+              -379.9489705884396
+            ],
+            [
+              16837,
+              -383.6431503369511
+            ],
+            [
+              16837,
+              -383.643150337
+            ],
+            [
+              18193,
+              -384.54984328257194
+            ],
+            [
+              18193,
+              -384.5498432826
+            ],
+            [
+              21228,
+              -388.88781538857813
+            ],
+            [
+              21228,
+              -388.8878153886
+            ],
+            [
+              27222,
+              -389.06560858821035
+            ],
+            [
+              38426,
+              -389.61001898593753
+            ],
+            [
+              44748,
+              -390.2844165257484
+            ],
+            [
+              57817,
+              -390.4486124696101
+            ],
+            [
+              82227,
+              -391.799237478357
+            ],
+            [
+              82227,
+              -391.7992374784
+            ],
+            [
+              88408,
+              -393.453841074033
+            ],
+            [
+              237578,
+              -393.91690605810123
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 257171,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -394.0425340215222,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 316067,
+          "force_norm": 0.0005879348615313556,
+          "index": 19,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 908.4998261889996,
+          "start": "coords.20",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              423,
+              -384.37681743969034
+            ],
+            [
+              6551,
+              -386.4147441849823
+            ],
+            [
+              6551,
+              -386.414744185
+            ],
+            [
+              27240,
+              -386.5716876154106
+            ],
+            [
+              35889,
+              -386.91745777738794
+            ],
+            [
+              35889,
+              -386.9174577774
+            ],
+            [
+              38200,
+              -389.73950746150706
+            ],
+            [
+              53268,
+              -393.7737201769691
+            ],
+            [
+              53268,
+              -393.773720177
+            ],
+            [
+              131324,
+              -393.8204237052531
+            ],
+            [
+              131324,
+              -393.8204237053
+            ],
+            [
+              257171,
+              -394.0425340215222
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 193940,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -391.7311348604068,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 320209,
+          "force_norm": 0.000970588542189008,
+          "index": 20,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 1611.2094899029908,
+          "start": "coords.21",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              234,
+              -379.6823234222007
+            ],
+            [
+              9227,
+              -383.0730142310939
+            ],
+            [
+              9227,
+              -383.0730142311
+            ],
+            [
+              19419,
+              -384.3378609065496
+            ],
+            [
+              24746,
+              -384.4140140358249
+            ],
+            [
+              26953,
+              -384.66823744111895
+            ],
+            [
+              69388,
+              -385.5145859149774
+            ],
+            [
+              69388,
+              -385.514585915
+            ],
+            [
+              83195,
+              -385.63448505396184
+            ],
+            [
+              83195,
+              -385.634485054
+            ],
+            [
+              85174,
+              -387.1624856897702
+            ],
+            [
+              85174,
+              -387.1624856898
+            ],
+            [
+              99619,
+              -388.4923139346457
+            ],
+            [
+              121285,
+              -389.33924582277825
+            ],
+            [
+              121285,
+              -389.3392458228
+            ],
+            [
+              193940,
+              -391.7311348604068
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 312966,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -393.0046211575089,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 313974,
+          "force_norm": 0.0007186306619015869,
+          "index": 21,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 796.9847687919973,
+          "start": "coords.22",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              357,
+              -379.07449738187745
+            ],
+            [
+              10069,
+              -381.2514961508846
+            ],
+            [
+              10069,
+              -381.2514961509
+            ],
+            [
+              19795,
+              -382.6317041937816
+            ],
+            [
+              19795,
+              -382.6317041938
+            ],
+            [
+              30097,
+              -385.6384130160268
+            ],
+            [
+              30329,
+              -386.8803011189994
+            ],
+            [
+              55462,
+              -389.82054550277905
+            ],
+            [
+              55462,
+              -389.8205455028
+            ],
+            [
+              91481,
+              -391.4485861901694
+            ],
+            [
+              91481,
+              -391.4485861902
+            ],
+            [
+              231984,
+              -392.8024979727792
+            ],
+            [
+              231984,
+              -392.8024979728
+            ],
+            [
+              280271,
+              -392.83326774314565
+            ],
+            [
+              312966,
+              -393.00462115750884
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 187082,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -394.7614225562337,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 314402,
+          "force_norm": 0.0006172235887730176,
+          "index": 22,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 629.0647512150026,
+          "start": "coords.23",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              606,
+              -376.9295691808282
+            ],
+            [
+              7388,
+              -379.39309463980067
+            ],
+            [
+              10555,
+              -380.17003773581007
+            ],
+            [
+              10926,
+              -381.6700336289057
+            ],
+            [
+              17736,
+              -382.90025592077234
+            ],
+            [
+              17736,
+              -382.9002559208
+            ],
+            [
+              19785,
+              -385.01303676921
+            ],
+            [
+              20879,
+              -385.33585588064864
+            ],
+            [
+              22163,
+              -389.99077629353565
+            ],
+            [
+              44774,
+              -391.0268971661608
+            ],
+            [
+              44774,
+              -391.0268971662
+            ],
+            [
+              110143,
+              -391.94708737466095
+            ],
+            [
+              110143,
+              -391.9470873747
+            ],
+            [
+              176180,
+              -393.31218789417255
+            ],
+            [
+              176180,
+              -393.3121878942
+            ],
+            [
+              187082,
+              -394.7614225562337
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 212102,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -393.2354008885137,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 324895,
+          "force_norm": 0.0006646009486603963,
+          "index": 23,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 978.4983319419989,
+          "start": "coords.24",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              422,
+              -378.72598640102945
+            ],
+            [
+              6909,
+              -379.3857293633489
+            ],
+            [
+              8183,
+              -379.94526794290215
+            ],
+            [
+              8414,
+              -381.65752359994684
+            ],
+            [
+              9867,
+              -388.10157135976254
+            ],
+            [
+              9867,
+              -388.1015713598
+            ],
+            [
+              16450,
+              -388.3468382658162
+            ],
+            [
+              59066,
+              -390.82206152393076
+            ],
+            [
+              65427,
+              -391.57495738593525
+            ],
+            [
+              206176,
+              -392.3117404988641
+            ],
+            [
+              206176,
+              -392.3117404989
+            ],
+            [
+              212102,
+              -393.23540088851377
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 160619,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -393.2148604343806,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 305504,
+          "force_norm": 0.0004975614658575488,
+          "index": 24,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 1117.88673737699,
+          "start": "coords.25",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              295,
+              -375.82108695920317
+            ],
+            [
+              888,
+              -380.96694782798454
+            ],
+            [
+              888,
+              -380.966947828
+            ],
+            [
+              8599,
+              -381.7255047332411
+            ],
+            [
+              9734,
+              -382.26473245047214
+            ],
+            [
+              9734,
+              -382.2647324505
+            ],
+            [
+              18099,
+              -383.7037425396966
+            ],
+            [
+              18099,
+              -383.7037425397
+            ],
+            [
+              27011,
+              -383.9183969843183
+            ],
+            [
+              31326,
+              -384.92417627702343
+            ],
+            [
+              36850,
+              -387.73806159288205
+            ],
+            [
+              36850,
+              -387.7380615929
+            ],
+            [
+              38287,
+              -388.86233186765696
+            ],
+            [
+              38287,
+              -388.8623318677
+            ],
+            [
+              80183,
+              -390.0352756912124
+            ],
+            [
+              119419,
+              -391.00490651283815
+            ],
+            [
+              160619,
+              -393.2148604343806
+            ],
+            [
+              160619,
+              -393.2148604344
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 250321,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -395.20637672610724,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 303345,
+          "force_norm": 0.0009924020208896148,
+          "index": 25,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 1076.6588561969984,
+          "start": "coords.26",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              203,
+              -377.9781099830436
+            ],
+            [
+              6385,
+              -378.8656299991579
+            ],
+            [
+              6385,
+              -378.8656299992
+            ],
+            [
+              8670,
+              -382.4283350003517
+            ],
+            [
+              8670,
+              -382.4283350004
+            ],
+            [
+              10335,
+              -387.0539759905011
+            ],
+            [
+              40478,
+              -388.2582487247154
+            ],
+            [
+              54291,
+              -388.5770451216762
+            ],
+            [
+              54291,
+              -388.5770451217
+            ],
+            [
+              60944,
+              -389.573119208227
+            ],
+            [
+              68974,
+              -389.62039825522623
+            ],
+            [
+              74211,
+              -390.6534389680748
+            ],
+            [
+              74211,
+              -390.6534389681
+            ],
+            [
+              136118,
+              -392.13003729721333
+            ],
+            [
+              159078,
+              -393.5243480340008
+            ],
+            [
+              238554,
+              -395.0388137638429
+            ],
+            [
+              250321,
+              -395.20637672610724
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 289848,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -392.3842384831917,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 317533,
+          "force_norm": 0.0007230429879270026,
+          "index": 26,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 953.1597687100002,
+          "start": "coords.27",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              345,
+              -376.0336604637451
+            ],
+            [
+              3680,
+              -377.1804813389375
+            ],
+            [
+              4289,
+              -380.2660901989478
+            ],
+            [
+              9158,
+              -381.88966281161834
+            ],
+            [
+              9529,
+              -382.27091633508996
+            ],
+            [
+              9529,
+              -382.2709163351
+            ],
+            [
+              9946,
+              -387.5704754131941
+            ],
+            [
+              9946,
+              -387.5704754132
+            ],
+            [
+              15092,
+              -387.94519024525664
+            ],
+            [
+              15092,
+              -387.9451902453
+            ],
+            [
+              23790,
+              -388.6959550845089
+            ],
+            [
+              24492,
+              -389.8268115933155
+            ],
+            [
+              64340,
+              -390.77374362227664
+            ],
+            [
+              64340,
+              -390.7737436223
+            ],
+            [
+              181811,
+              -391.30336408638806
+            ],
+            [
+              181811,
+              -391.3033640864
+            ],
+            [
+              289848,
+              -392.38423848319167
+            ],
+            [
+              289848,
+              -392.3842384832
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 220400,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -393.65381580462633,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 314265,
+          "force_norm": 0.0006713452163062106,
+          "index": 27,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 1081.510427221001,
+          "start": "coords.28",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              207,
+              -374.1482679707034
+            ],
+            [
+              4570,
+              -374.707110603075
+            ],
+            [
+              4570,
+              -374.7071106031
+            ],
+            [
+              5392,
+              -378.69814174331697
+            ],
+            [
+              5753,
+              -379.78189833191755
+            ],
+            [
+              7920,
+              -381.27429484167146
+            ],
+            [
+              7920,
+              -381.2742948417
+            ],
+            [
+              14571,
+              -385.1275196990515
+            ],
+            [
+              14571,
+              -385.1275196991
+            ],
+            [
+              15452,
+              -386.74593424509726
+            ],
+            [
+              15452,
+              -386.7459342451
+            ],
+            [
+              27346,
+              -389.26567316336195
+            ],
+            [
+              27346,
+              -389.2656731634
+            ],
+            [
+              32498,
+              -390.4338159491558
+            ],
+            [
+              32498,
+              -390.4338159492
+            ],
+            [
+              97282,
+              -391.94951211742307
+            ],
+            [
+              101076,
+              -393.0405886319983
+            ],
+            [
+              101076,
+              -393.040588632
+            ],
+            [
+              220400,
+              -393.65381580462633
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 255070,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -392.65762266265824,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 311326,
+          "force_norm": 0.0006649743323486425,
+          "index": 29,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 683.6735041939974,
+          "start": "coords.30",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              560,
+              -377.8248719418039
+            ],
+            [
+              7473,
+              -382.0682967272014
+            ],
+            [
+              10671,
+              -382.6804860934826
+            ],
+            [
+              10671,
+              -382.6804860935
+            ],
+            [
+              18480,
+              -382.9715794640508
+            ],
+            [
+              18480,
+              -382.9715794641
+            ],
+            [
+              23138,
+              -387.72020030884016
+            ],
+            [
+              43319,
+              -389.89926758487235
+            ],
+            [
+              43319,
+              -389.8992675849
+            ],
+            [
+              162583,
+              -391.70102296024686
+            ],
+            [
+              232470,
+              -391.8955081792268
+            ],
+            [
+              255070,
+              -392.6576226626583
+            ],
+            [
+              255070,
+              -392.6576226627
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        }
+      ],
+      "tuning": "tuned"
+    }
+  ],
+  "schema": "optbench.result/v2",
+  "scoring": "par2-wilson-bootstrap",
+  "status": "partial"
+}
