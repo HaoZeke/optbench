@@ -1055,4 +1055,55 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>
+   <h3>CP2K</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>saddle search</td>
+   <td>2026.2</td>
+   <td>702cc3d81422</td>
+   <td><a href="https://github.com/cp2k/cp2k">https://github.com/cp2k/cp2k</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="saddle-search/pt-island" data-template="cp2k/saddle-dimer-cg">
+   <td>Pt heptamer island</td>
+   <td data-field="template">cp2k/saddle-dimer-cg</td>
+   <td data-field="version">CP2K 2026.2</td>
+   <td data-field="commit">702cc3d81422</td>
+   <td data-field="par2_mean">10128</td>
+   <td data-field="mean_calls">775.248</td>
+   <td data-field="median_calls">784</td>
+   <td data-field="failures">crash 0, divergence 20000, cap 0, wrong_stationary 0</td>
+   <td data-field="n">20000</td>
+   </tr>
+   <tr data-problem="tsopt/LJ38" data-template="cp2k/lj38-dimer-cg-tuned">
+   <td>LJ38</td>
+   <td data-field="template">cp2k/lj38-dimer-cg-tuned</td>
+   <td data-field="version">CP2K 2026.2</td>
+   <td data-field="commit">702cc3d81422</td>
+   <td data-field="par2_mean">1139.41</td>
+   <td data-field="mean_calls">1086.53</td>
+   <td data-field="median_calls">778.5</td>
+   <td data-field="failures">crash 0, divergence 1, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="tsopt/pt-island" data-template="cp2k/pt-island-dimer-cg-tuned">
+   <td>pt-island</td>
+   <td data-field="template">cp2k/pt-island-dimer-cg-tuned</td>
+   <td data-field="version">CP2K 2026.2</td>
+   <td data-field="commit">702cc3d81422</td>
+   <td data-field="par2_mean">852.98</td>
+   <td data-field="mean_calls">852.98</td>
+   <td data-field="median_calls">681</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">49</td>
+   </tr>
+   </tbody></table></div>
+   <p>No full ranked run</p><ul>
+   <li>Pt heptamer island: partial.</li>
+   </ul>
    </section>
