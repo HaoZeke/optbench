@@ -219,7 +219,7 @@
    <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
    <h3>Partial</h3><ul>
-   <li>pele/lj150-basinhopping pele campaign n=6, result file sets partial true.</li>
+   <li>pele/lj150-basinhopping pele campaign n=8, result file sets partial true.</li>
    </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="lj150-legacy">
@@ -390,7 +390,7 @@
    <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
    <h3>Partial</h3><ul>
-   <li>pele/lj75-basinhopping pele campaign n=40, result file sets partial true.</li>
+   <li>pele/lj75-basinhopping pele campaign n=55, result file sets partial true.</li>
    </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="lj75-legacy">
@@ -444,7 +444,7 @@
    <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
    <h3>Partial</h3><ul>
-   <li>pele/lj98-basinhopping pele campaign n=20, result file sets partial true.</li>
+   <li>pele/lj98-basinhopping pele campaign n=30, result file sets partial true.</li>
    </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="lj98-legacy">

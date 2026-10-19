@@ -2,14 +2,14 @@
 # The quench is pele.optimize.lbfgs_cpp. The driver is pele.basinhopping.BasinHopping.
 # A start succeeds when a converged quench is within energy_tolerance of energy_minimum and the call count is under the cap.
 # lowest_energy is the lowest converged quench on that start.
-# partial: problem file has no energy_above_minimum; problem file has no start count; problem contract is partial; scored 6 of 100 starts
+# partial: problem file has no energy_above_minimum; problem file has no start count; problem contract is partial; scored 8 of 100 starts
 # Basin hopping with pele.optimize.lbfgs_cpp and pele.basinhopping.BasinHopping. Temperature is 1.0 and the initial step size is 0.6, the LJCluster defaults, inside AdaptiveStepsizeTemperature. The potential is the harness Lennard-Jones kernel, epsilon 1, sigma 1, cutoff 40, no shift. The problem file does not state a start count or an energy rule, so this row stays partial. The run stops at the Cambridge pair-well depth -893.310258 within 0.001. The bare coords file duplicates coords.100 and is dropped. The problem states no force-call cap, so the budget is 3000000. The seed is the integer in the start name.
-force_calls 937442
+force_calls 1017443
 force_calls_min 917602
-force_calls_max 957281
-force_calls_median 937441.5
-nfailed 4
-median 937441.5
+force_calls_max 1177447
+force_calls_median 957281
+nfailed 5
+median 957281
 code pele
 code_version 0.1.2
 commit b7081b932a060be11342fbe8287ac35da8ada879
@@ -22,15 +22,15 @@ cap 3000000
 partial true
 energy_minimum -893.310258
 energy_tolerance 0.001
-par2_mean 4312480.5
-wilson_low 0.0967714111058
-wilson_high 0.700006684862
+par2_mean 4131541.25
+wilson_low 0.136844285824
+wilson_high 0.694257605397
 par2_median 6000000
-par2_median_low 937441.5
+par2_median_low 1045268.4125
 par2_median_high 6000000
-v2_nfailed 4
-v2_successes 2
-n 6
+v2_nfailed 5
+v2_successes 3
+n 8
 lowest_energy -893.310257879
 energy_min -893.310257879
 energy_max -884.412297643
