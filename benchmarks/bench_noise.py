@@ -43,6 +43,8 @@ def _ready(family: str) -> bool:
             from optbench.gmin_lbfgs import available
 
             return available()
+        elif family == "vcsqnm":
+            import sqnm.sqnm  # noqa: F401
         else:
             return False
     except ImportError:

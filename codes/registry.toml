@@ -193,6 +193,16 @@ commit = "5593cc4ee360d998764fceb188284fdf0ef781d206754176dcb360c65103ddaa"
 committed = "2023-06"
 note = "Version 0.9.4, June 2023. The commit is the sha256 of https://www.mtg.msm.cam.ac.uk/files/airss-v0.9.4.tgz. buildcell from that tarball draws the cells. The scored relaxation is the pp3 two-point step on the harness Lennard-Jones potential."
 
+[[code]]
+id = "vcsqnm"
+name = "vc-SQNM"
+role = "minimization"
+repository = "https://github.com/moritzgubler/vc-sqnm"
+ref = "v1.3"
+commit = "4241692173cccb42a9ae05974bfd62285ec2cd7b"
+committed = "2025-03-28"
+note = "Tag v1.3. The Python distribution built from that commit reports version 1.2. Rows use that package: SQNM, vc-SQNM, and aseOptimizer. The C++ and Fortran mains call the Bazant potential and are not these scores. initial_step_size is -1e-7, alpha_min is 1e-3, and eps_subsp is 1e-5. The wrapper constructor uses -0.01 and eps_subsp 1e-3. Both of those leave some LJ38 starts outside the cutoff. Variable-cell rows are Morse bulk. The spec Lennard-Jones potential has no cell."
+
 # generated ASE and Sella templates
 
 [[template]]

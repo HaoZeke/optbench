@@ -194,6 +194,38 @@ def specs() -> list[dict]:
                 sigma,
             )
         )
+    from optbench.vcsqnm_catalog import CODE, CODE_VERSION, COMMIT, DEFAULT
+
+    sqnm_note = (
+        "Default profile. initial_step_size is -1e-7, alpha_min is 1e-3, and eps_subsp is 1e-5. "
+        "The wrapper constructor uses -0.01 and eps_subsp 1e-3, which let LJ38 leave the cutoff. "
+        "The stop is the noise-aware force norm, and at positive sigma the clean energy over the last window. "
+        "The index is the clean Hessian with the rigid-mode rule. "
+        "Variable-cell SQNM is not on this problem: the spec potential has no cell."
+    )
+    for method, algorithm in (("sqnm", "SQNM"), ("ase", "ASE-SQNM")):
+        for sigma in SIGMAS:
+            solver = {
+                "family": "vcsqnm",
+                "method": method,
+                "initial_step_size": DEFAULT["initial_step_size"],
+                "nhist_max": DEFAULT["nhist_max"],
+                "alpha_min": DEFAULT["alpha_min"],
+                "eps_subsp": DEFAULT["eps_subsp"],
+                "lattice_weight": DEFAULT["lattice_weight"],
+            }
+            found.append(
+                _base(
+                    f"noise/vcsqnm-{method}-{sigma_slug(sigma)}",
+                    CODE,
+                    CODE_VERSION,
+                    COMMIT,
+                    algorithm,
+                    sqnm_note,
+                    solver,
+                    sigma,
+                )
+            )
     return found
 
 
