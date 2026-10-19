@@ -1,7 +1,7 @@
 {
   "bootstrap_resamples": 2000,
   "bootstrap_seed": 20261015,
-  "note": "Harness counter on the Lennard-Jones cluster. A success is within the energy window of the reference and under the evaluation budget.",
+  "note": "Harness counter on the Lennard-Jones cluster. A success is at or below the Cambridge Cluster Database minimum plus 0.001 and under the evaluation budget.",
   "par_factor": 2,
   "problem": "globalopt/lj38",
   "runs": [
@@ -51,13 +51,11 @@
       },
       "parameters": {
         "algorithm": "GN_CRS2_LM",
-        "energy_floor": -173.92942659062865,
-        "energy_limit": -173.92742659062864,
+        "energy_limit": -173.927427,
         "half_width": 6.0,
         "max_force_calls": 1000000,
-        "reference_energy": -173.92842659062865,
-        "seed": "start index",
-        "stationary_force": 0.01
+        "reference_energy": -173.928427,
+        "seed": "start index"
       },
       "present_source": true,
       "provenance": {
@@ -72,13 +70,11 @@
         },
         "parameters": {
           "algorithm": "GN_CRS2_LM",
-          "energy_floor": -173.92942659062865,
-          "energy_limit": -173.92742659062864,
+          "energy_limit": -173.927427,
           "half_width": 6.0,
           "max_force_calls": 1000000,
-          "reference_energy": -173.92842659062865,
-          "seed": "start index",
-          "stationary_force": 0.01
+          "reference_energy": -173.928427,
+          "seed": "start index"
         }
       },
       "starts": [
@@ -92,15 +88,17 @@
           "force_norm": 0.001735281282653188,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -164.33973575561214,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 348.5820534639997,
+          "seconds": 164.84843078300037,
           "seed": 0,
           "start": "0",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -112,15 +110,17 @@
           "force_norm": 0.0033204520877302404,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -148.45201913117504,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 356.9078834029997,
+          "seconds": 167.35824126599618,
           "seed": 1,
           "start": "1",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -132,15 +132,17 @@
           "force_norm": 0.0026847495369807907,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -146.69935003349863,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 398.3958461729999,
+          "seconds": 168.50185215599777,
           "seed": 2,
           "start": "2",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -152,15 +154,17 @@
           "force_norm": 0.0029537396975986936,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -155.7813431686901,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 352.7226066439998,
+          "seconds": 164.8118943419977,
           "seed": 3,
           "start": "3",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -172,15 +176,17 @@
           "force_norm": 0.0018899848812951345,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -152.4365306147102,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 347.43700750000016,
+          "seconds": 167.3103923680028,
           "seed": 4,
           "start": "4",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -192,15 +198,17 @@
           "force_norm": 0.0020315669864333172,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -159.19166002006057,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 348.0755674860002,
+          "seconds": 167.8722902169975,
           "seed": 5,
           "start": "5",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -212,15 +220,17 @@
           "force_norm": 0.0023924588655280634,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -158.1755997251027,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 351.4494820349996,
+          "seconds": 166.68681530600588,
           "seed": 6,
           "start": "6",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -232,15 +242,17 @@
           "force_norm": 0.0026654881222232126,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -153.13099944560233,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 354.2159349860003,
+          "seconds": 168.70469467699877,
           "seed": 7,
           "start": "7",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -252,15 +264,17 @@
           "force_norm": 0.002895496910421003,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -155.1078009608063,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 311.2792904920002,
+          "seconds": 167.56564863600215,
           "seed": 8,
           "start": "8",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -272,15 +286,17 @@
           "force_norm": 0.0022766733908770515,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -157.24950940019494,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 311.71466095000005,
+          "seconds": 166.45904542000062,
           "seed": 9,
           "start": "9",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -292,15 +308,17 @@
           "force_norm": 0.002574556905466425,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -164.31500273672438,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 322.19892150999976,
+          "seconds": 160.39524237400474,
           "seed": 10,
           "start": "10",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -312,15 +330,17 @@
           "force_norm": 0.0022863120292434536,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -160.9086978728789,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 319.43751588700025,
+          "seconds": 162.7013976110029,
           "seed": 11,
           "start": "11",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -332,15 +352,17 @@
           "force_norm": 0.0029528194548973544,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -159.3558466223279,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 330.04813412199974,
+          "seconds": 158.85107548499946,
           "seed": 12,
           "start": "12",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -352,15 +374,17 @@
           "force_norm": 0.0020022471841509917,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -163.4305248698176,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 315.3249982989996,
+          "seconds": 161.8098677119997,
           "seed": 13,
           "start": "13",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -372,15 +396,17 @@
           "force_norm": 0.001782228497654818,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -149.33388314608104,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 329.26861861999987,
+          "seconds": 164.3544395870049,
           "seed": 14,
           "start": "14",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -392,15 +418,17 @@
           "force_norm": 0.002228774618470781,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -156.913458328252,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 335.0110621729996,
+          "seconds": 162.53376777699305,
           "seed": 15,
           "start": "15",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -412,15 +440,17 @@
           "force_norm": 0.002857578307631444,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -154.3065399412487,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 289.489069106,
+          "seconds": 162.61413358100253,
           "seed": 16,
           "start": "16",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -432,15 +462,17 @@
           "force_norm": 0.0020770825046515875,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -139.3594567531725,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 254.68914044099984,
+          "seconds": 161.99667306800256,
           "seed": 17,
           "start": "17",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -452,15 +484,17 @@
           "force_norm": 0.0030093126669439073,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -157.45292323500888,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 276.8343081850003,
+          "seconds": 172.61961929000245,
           "seed": 18,
           "start": "18",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -472,15 +506,17 @@
           "force_norm": 0.0017888920567572144,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -145.75803483473572,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 293.27009496200026,
+          "seconds": 169.0529332599981,
           "seed": 19,
           "start": "19",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -492,15 +528,17 @@
           "force_norm": 0.002923787574881951,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -147.95569421998295,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 258.8403260499995,
+          "seconds": 163.0464694809998,
           "seed": 20,
           "start": "20",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -512,15 +550,17 @@
           "force_norm": 0.0022977032366660786,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -160.8352500782621,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 292.42099981699994,
+          "seconds": 172.8166764159978,
           "seed": 21,
           "start": "21",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -532,15 +572,17 @@
           "force_norm": 0.0029102084634242873,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -165.06617609775486,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 292.2904517129996,
+          "seconds": 165.5715439639971,
           "seed": 22,
           "start": "22",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -552,15 +594,17 @@
           "force_norm": 0.0026845735998378816,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -166.4863891304521,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 322.28664527499996,
+          "seconds": 161.6756617430001,
           "seed": 23,
           "start": "23",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -572,15 +616,17 @@
           "force_norm": 0.0024841558849304445,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -154.88073762593737,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 268.6739978360001,
+          "seconds": 164.1193480830043,
           "seed": 24,
           "start": "24",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -592,15 +638,17 @@
           "force_norm": 0.002222123184211465,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -164.73862924624297,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 272.9157721170004,
+          "seconds": 163.96182209900144,
           "seed": 25,
           "start": "25",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -612,15 +660,17 @@
           "force_norm": 0.002235655364029732,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -156.66212696938615,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 281.5381041670007,
+          "seconds": 157.98590618299932,
           "seed": 26,
           "start": "26",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -632,15 +682,17 @@
           "force_norm": 0.0026995677600415748,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -160.5211970100547,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 285.36810005500047,
+          "seconds": 163.97712527000112,
           "seed": 27,
           "start": "27",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -652,15 +704,17 @@
           "force_norm": 0.002486538231614616,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -165.43482462490832,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 273.8798424860006,
+          "seconds": 166.27351073000318,
           "seed": 28,
           "start": "28",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -672,15 +726,17 @@
           "force_norm": 0.0024079463058003943,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -161.90628512603203,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 276.54914335600006,
+          "seconds": 164.84043699600443,
           "seed": 29,
           "start": "29",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -692,15 +748,17 @@
           "force_norm": 0.0021032788053397446,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -152.51844947611377,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 248.7679889840001,
+          "seconds": 164.90456196499872,
           "seed": 30,
           "start": "30",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -712,15 +770,17 @@
           "force_norm": 0.0022380896119089688,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -164.84880368289072,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 347.2473325760002,
+          "seconds": 163.4116947129951,
           "seed": 31,
           "start": "31",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -732,15 +792,17 @@
           "force_norm": 0.0029989427041791994,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -160.85284040353068,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 298.19926083300015,
+          "seconds": 156.7203430410009,
           "seed": 32,
           "start": "32",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -752,15 +814,17 @@
           "force_norm": 0.0020313498701460754,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -147.18263437796523,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 314.73995956199997,
+          "seconds": 155.11114961899875,
           "seed": 33,
           "start": "33",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -772,15 +836,17 @@
           "force_norm": 0.0026644147175579804,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -161.1086922905619,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 347.2289889799995,
+          "seconds": 156.35211913799867,
           "seed": 34,
           "start": "34",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -792,15 +858,17 @@
           "force_norm": 0.002345829764635773,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -165.46352565095378,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 337.19256253599997,
+          "seconds": 155.18503284700273,
           "seed": 35,
           "start": "35",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -812,15 +880,17 @@
           "force_norm": 0.0018801349393616463,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -159.52792222900212,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 342.07918865400006,
+          "seconds": 160.60840410699893,
           "seed": 36,
           "start": "36",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -832,15 +902,17 @@
           "force_norm": 0.002266994534193183,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -161.1903684032568,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 334.8811141940005,
+          "seconds": 159.0030337030039,
           "seed": 37,
           "start": "37",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -852,15 +924,17 @@
           "force_norm": 0.0028353935119355554,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -151.79490411018838,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 329.077743932,
+          "seconds": 157.3736461840017,
           "seed": 38,
           "start": "38",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -872,15 +946,17 @@
           "force_norm": 0.002128705523861558,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -161.1741804907423,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 382.45329117500023,
+          "seconds": 159.00251173799916,
           "seed": 39,
           "start": "39",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -892,15 +968,17 @@
           "force_norm": 0.002353699386303008,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -153.3979905147098,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 330.9911017730001,
+          "seconds": 152.84685538299527,
           "seed": 40,
           "start": "40",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -912,15 +990,17 @@
           "force_norm": 0.0024448854359216095,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -152.89598359289602,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 329.39010079499985,
+          "seconds": 153.68853831700108,
           "seed": 41,
           "start": "41",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -932,15 +1012,17 @@
           "force_norm": 0.002361019614548543,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -163.09243385115474,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 330.0888777350001,
+          "seconds": 152.99678090100497,
           "seed": 42,
           "start": "42",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -952,15 +1034,17 @@
           "force_norm": 0.002158932542294368,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -147.20866937398705,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 336.5389946059995,
+          "seconds": 152.8642208050005,
           "seed": 43,
           "start": "43",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -972,15 +1056,17 @@
           "force_norm": 0.0023681731276265876,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -161.7715783871716,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 326.8699107299999,
+          "seconds": 153.41017725599522,
           "seed": 44,
           "start": "44",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -992,15 +1078,17 @@
           "force_norm": 0.0032408581223566804,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -152.39838467618742,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 325.4027874200001,
+          "seconds": 154.39135361900117,
           "seed": 45,
           "start": "45",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1012,15 +1100,17 @@
           "force_norm": 0.0024868504393795285,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -142.70783461171823,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 326.10980334299984,
+          "seconds": 152.292841880997,
           "seed": 46,
           "start": "46",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1032,15 +1122,17 @@
           "force_norm": 0.0024925840712318134,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -148.50155220133706,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 393.8521885319997,
+          "seconds": 153.2538302019966,
           "seed": 47,
           "start": "47",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1052,15 +1144,17 @@
           "force_norm": 0.0030325437982721484,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -151.87509667733767,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 344.3650743870003,
+          "seconds": 151.1270443350004,
           "seed": 48,
           "start": "48",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1072,15 +1166,17 @@
           "force_norm": 0.0022991627952658688,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -165.23011961649678,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 354.8967724180002,
+          "seconds": 152.406524015998,
           "seed": 49,
           "start": "49",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1092,15 +1188,17 @@
           "force_norm": 0.0024249715522830177,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -161.3570440411749,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 356.6675088459997,
+          "seconds": 152.2832006499957,
           "seed": 50,
           "start": "50",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1112,15 +1210,17 @@
           "force_norm": 0.0022041646290773273,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -164.21790218600108,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 358.340452163,
+          "seconds": 151.1589554539969,
           "seed": 51,
           "start": "51",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1132,15 +1232,17 @@
           "force_norm": 0.0025513974768188123,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -161.30188442631112,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 352.6908705750002,
+          "seconds": 150.6895078899979,
           "seed": 52,
           "start": "52",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1152,15 +1254,17 @@
           "force_norm": 0.0019067462233655257,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -153.57368690655736,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 350.3066998149998,
+          "seconds": 151.99388866699883,
           "seed": 53,
           "start": "53",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1172,15 +1276,17 @@
           "force_norm": 0.0023770577364031096,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -152.02396532225538,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 357.4334560289999,
+          "seconds": 152.95070482199662,
           "seed": 54,
           "start": "54",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1192,15 +1298,17 @@
           "force_norm": 0.0018899145067612934,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -155.59822097727462,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 340.0536364849995,
+          "seconds": 152.0400020340021,
           "seed": 55,
           "start": "55",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1212,15 +1320,17 @@
           "force_norm": 0.002446253268110394,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -167.3286700216727,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 373.8117318980003,
+          "seconds": 157.28475718700065,
           "seed": 56,
           "start": "56",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1232,15 +1342,17 @@
           "force_norm": 0.002056628686784443,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -156.86047281363943,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 334.2224465700001,
+          "seconds": 155.94775933799974,
           "seed": 57,
           "start": "57",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1252,15 +1364,17 @@
           "force_norm": 0.0019712673333355233,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -164.38021826522532,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 335.69651005499964,
+          "seconds": 157.19488158299646,
           "seed": 58,
           "start": "58",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1272,15 +1386,17 @@
           "force_norm": 0.002311794667551441,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -157.84430200218932,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 339.20787780200044,
+          "seconds": 156.08441721300187,
           "seed": 59,
           "start": "59",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1292,15 +1408,17 @@
           "force_norm": 0.0022751262276045838,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -160.74830617334237,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 334.6545326839996,
+          "seconds": 158.70771830800368,
           "seed": 60,
           "start": "60",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1312,15 +1430,17 @@
           "force_norm": 0.0023330667158844797,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -150.7063971558693,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 349.3509429249998,
+          "seconds": 158.10626778699952,
           "seed": 61,
           "start": "61",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1332,15 +1452,17 @@
           "force_norm": 0.0027842762151433225,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -156.93807975693792,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 339.0179076859995,
+          "seconds": 161.33321641400107,
           "seed": 62,
           "start": "62",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1352,15 +1474,17 @@
           "force_norm": 0.002037589989278604,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -163.5716556304633,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 342.82913501300027,
+          "seconds": 158.72707738299505,
           "seed": 63,
           "start": "63",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1372,15 +1496,17 @@
           "force_norm": 0.0019913205738148593,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -158.44647438995548,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 328.1062685380002,
+          "seconds": 155.9680534709987,
           "seed": 64,
           "start": "64",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1392,15 +1518,17 @@
           "force_norm": 0.0027407785663090037,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -163.72998528912007,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 380.62707588299963,
+          "seconds": 156.0191501369991,
           "seed": 65,
           "start": "65",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1412,15 +1540,17 @@
           "force_norm": 0.0017550199979660727,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -167.1750557583416,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 335.3257575460002,
+          "seconds": 160.72595629799616,
           "seed": 66,
           "start": "66",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1432,15 +1562,17 @@
           "force_norm": 0.0024559389158295727,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -159.8167024424004,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 343.7602835009993,
+          "seconds": 156.90685353900335,
           "seed": 67,
           "start": "67",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1452,15 +1584,17 @@
           "force_norm": 0.002131016504899249,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -147.1991270622232,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 339.2891047390003,
+          "seconds": 157.5706771740006,
           "seed": 68,
           "start": "68",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1472,15 +1606,17 @@
           "force_norm": 0.002311359723634961,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -143.959596273111,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 342.04180244599956,
+          "seconds": 157.66896932700183,
           "seed": 69,
           "start": "69",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1492,15 +1628,17 @@
           "force_norm": 0.002309699082692486,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -151.72646294721403,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 335.93863783899997,
+          "seconds": 156.74153865500557,
           "seed": 70,
           "start": "70",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1512,15 +1650,17 @@
           "force_norm": 0.002340850626800022,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -163.60134492374502,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 348.6679103440001,
+          "seconds": 159.3496555640013,
           "seed": 71,
           "start": "71",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1532,15 +1672,17 @@
           "force_norm": 0.002175303828435016,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -167.64645064671333,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 356.95602504700037,
+          "seconds": 157.95820527000615,
           "seed": 72,
           "start": "72",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1552,15 +1694,17 @@
           "force_norm": 0.0027127253974821206,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -156.17127982436165,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 346.403070071,
+          "seconds": 160.7503840970021,
           "seed": 73,
           "start": "73",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1572,15 +1716,17 @@
           "force_norm": 0.0019084361506189536,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -162.6847970381707,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 353.1671943830006,
+          "seconds": 156.3518142709945,
           "seed": 74,
           "start": "74",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1592,15 +1738,17 @@
           "force_norm": 0.002260237916691529,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -162.19969134938498,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 390.95055156799936,
+          "seconds": 158.2103882740048,
           "seed": 75,
           "start": "75",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1612,15 +1760,17 @@
           "force_norm": 0.0029428040655192765,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -153.01492356774799,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 352.33822530499947,
+          "seconds": 157.9638078390053,
           "seed": 76,
           "start": "76",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1632,15 +1782,17 @@
           "force_norm": 0.002547042716545605,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -152.91165309011487,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 350.6770978019995,
+          "seconds": 157.59251197399863,
           "seed": 77,
           "start": "77",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1652,15 +1804,17 @@
           "force_norm": 0.0018258122542237647,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -161.03137483421506,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 352.08111630999974,
+          "seconds": 158.66127514099935,
           "seed": 78,
           "start": "78",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1672,15 +1826,17 @@
           "force_norm": 0.002720615930329095,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -157.83265502754278,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 357.99017370799993,
+          "seconds": 159.1221927239967,
           "seed": 79,
           "start": "79",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1692,15 +1848,17 @@
           "force_norm": 0.002404797463897486,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -157.8984424217443,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 354.9440872740006,
+          "seconds": 159.199729071006,
           "seed": 80,
           "start": "80",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1712,15 +1870,17 @@
           "force_norm": 0.001912764519337067,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -153.9671527461332,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 358.95715705099974,
+          "seconds": 161.58295827000256,
           "seed": 81,
           "start": "81",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1732,15 +1892,17 @@
           "force_norm": 0.0028460881376722352,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -167.80682327392446,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 346.08219130900034,
+          "seconds": 163.0011432859974,
           "seed": 82,
           "start": "82",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1752,15 +1914,17 @@
           "force_norm": 0.002518687866348841,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -162.51135330033375,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 358.94923829900017,
+          "seconds": 162.3477104640042,
           "seed": 83,
           "start": "83",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1772,15 +1936,17 @@
           "force_norm": 0.0020933483683633443,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -151.57974225611497,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 346.1842837969998,
+          "seconds": 159.16049222600122,
           "seed": 84,
           "start": "84",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1792,15 +1958,17 @@
           "force_norm": 0.00249468752497614,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -159.51878126464158,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 347.38580958199964,
+          "seconds": 158.23324971699913,
           "seed": 85,
           "start": "85",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1812,15 +1980,17 @@
           "force_norm": 0.0019816667337187147,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -158.9289070958917,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 393.731946547,
+          "seconds": 161.64090223999665,
           "seed": 86,
           "start": "86",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1832,15 +2002,17 @@
           "force_norm": 0.0029915232249635077,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -140.24226775957334,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 343.70408885899997,
+          "seconds": 160.7648623990026,
           "seed": 87,
           "start": "87",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1852,15 +2024,17 @@
           "force_norm": 0.0031755581506624697,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -156.81608106803066,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 330.00274020600045,
+          "seconds": 165.9474261649957,
           "seed": 88,
           "start": "88",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1872,15 +2046,17 @@
           "force_norm": 0.0020661706861767304,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -158.49009314728698,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 351.3384551470008,
+          "seconds": 167.18362670399802,
           "seed": 89,
           "start": "89",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1892,15 +2068,17 @@
           "force_norm": 0.0023910277328500727,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -153.6605976087128,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 323.63041515199984,
+          "seconds": 168.14348629699816,
           "seed": 90,
           "start": "90",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1912,15 +2090,17 @@
           "force_norm": 0.0024261809193460715,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -166.64704701831687,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 333.19142048899994,
+          "seconds": 179.74392398499913,
           "seed": 91,
           "start": "91",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1932,15 +2112,17 @@
           "force_norm": 0.0023064726001773067,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -164.38427015536638,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 322.2359823900006,
+          "seconds": 168.7981118989992,
           "seed": 92,
           "start": "92",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1952,15 +2134,17 @@
           "force_norm": 0.002959319091323478,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -159.90593015711107,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 327.36755181900025,
+          "seconds": 169.90042932799406,
           "seed": 93,
           "start": "93",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1972,15 +2156,17 @@
           "force_norm": 0.0032023804198302044,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -160.87788687454432,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 378.015430939,
+          "seconds": 170.31925795999996,
           "seed": 94,
           "start": "94",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -1992,15 +2178,17 @@
           "force_norm": 0.0021217539812096054,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -166.35860131901924,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 295.70687076299964,
+          "seconds": 171.7785643429961,
           "seed": 95,
           "start": "95",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -2012,15 +2200,17 @@
           "force_norm": 0.00194384652493791,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -153.48284409194434,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 306.85797996600013,
+          "seconds": 161.07121248699696,
           "seed": 96,
           "start": "96",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -2032,15 +2222,17 @@
           "force_norm": 0.002314190674358011,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -163.41070872621955,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 331.6586203859997,
+          "seconds": 161.88622010900144,
           "seed": 97,
           "start": "97",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -2052,15 +2244,17 @@
           "force_norm": 0.003201266644049491,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -140.88844389123818,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 316.00074859100005,
+          "seconds": 159.70473113800108,
           "seed": 98,
           "start": "98",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         },
         {
           "comparable": true,
@@ -2072,15 +2266,17 @@
           "force_norm": 0.0019304705838154158,
           "nlopt_algorithm": "GN_CRS2_LM",
           "nlopt_code": 5,
+          "nlopt_value": -148.03891866417598,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
-          "seconds": 316.34224778099997,
+          "seconds": 161.6925323139949,
           "seed": 99,
           "start": "99",
           "success": false,
-          "verify_calls": 0
+          "verify_calls": 1
         }
       ],
       "tuning": "default"

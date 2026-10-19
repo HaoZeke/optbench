@@ -1,7 +1,7 @@
 # counter harness. One force call is one HarnessCounter entry.
 # The potential is Lennard-Jones, epsilon 1, sigma 1, cutoff 40, no shift.
-# A success is under the cap and within the problem energy window of the reference.
-# GD_STOGO, the deterministic branch-and-bound search. The random StoGO variant is a different algorithm. The NLopt seed is the start index. The harness drops a pair of atoms on the same site. NLopt receives that value. A repeated site is not a candidate minimum.
+# A success is under the cap and at or below the Cambridge minimum plus 0.001.
+# GD_STOGO, the deterministic branch-and-bound search. The random StoGO variant is a different algorithm. The NLopt seed is the start index. A coincident pair is a large finite energy in the harness potential. The recorded point is the point NLopt returned.
 nfailed 100
 code NLopt
 code_version 2.11.0
@@ -26,4 +26,4 @@ n_wrong_stationary 100
 n_divergence 0
 n_crash 0
 energy_min -167.806823274
-energy_max -139.359456753
+energy_max 527999932.281

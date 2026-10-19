@@ -53,7 +53,7 @@
   "profile_gap": "No performance profile. One start has no finite cost.",
   "ranked": [
     {
-      "asv_commit": "7120339904d4cfe1e4ecc16719b35dae77c8ff28",
+      "asv_commit": "72a91ed103e3ad6fb9d2660d647a78da37e9cc3d",
       "call_unit": "total",
       "cap": 1000000,
       "code": "NLopt",
@@ -86,7 +86,7 @@
       "par2_mean": 2000000.0,
       "partial": false,
       "partial_reason": "",
-      "path": "results/campaign/nlopt-2.11.0-lj38-crs2.dat; results/asv/7120339904d4cfe1e4ecc16719b35dae77c8ff28",
+      "path": "results/campaign/nlopt-2.11.0-lj38-crs2.dat; results/asv/72a91ed103e3ad6fb9d2660d647a78da37e9cc3d",
       "problem": "globalopt/lj38",
       "registry_match": true,
       "scored": true,
@@ -98,7 +98,7 @@
       "wilson_low": 0.0
     },
     {
-      "asv_commit": "7120339904d4cfe1e4ecc16719b35dae77c8ff28",
+      "asv_commit": "72a91ed103e3ad6fb9d2660d647a78da37e9cc3d",
       "call_unit": "total",
       "cap": 1000000,
       "code": "NLopt",
@@ -131,7 +131,7 @@
       "par2_mean": 2000000.0,
       "partial": false,
       "partial_reason": "",
-      "path": "results/campaign/nlopt-2.11.0-lj38-isres.dat; results/asv/7120339904d4cfe1e4ecc16719b35dae77c8ff28",
+      "path": "results/campaign/nlopt-2.11.0-lj38-isres.dat; results/asv/72a91ed103e3ad6fb9d2660d647a78da37e9cc3d",
       "problem": "globalopt/lj38",
       "registry_match": true,
       "scored": true,
@@ -143,7 +143,7 @@
       "wilson_low": 0.0
     },
     {
-      "asv_commit": "7120339904d4cfe1e4ecc16719b35dae77c8ff28",
+      "asv_commit": "72a91ed103e3ad6fb9d2660d647a78da37e9cc3d",
       "call_unit": "total",
       "cap": 1000000,
       "code": "NLopt",
@@ -154,10 +154,10 @@
       "current": true,
       "entry": "nlopt-2.11.0-lj38-mlsl-lbfgs",
       "failures": {
-        "cap": 100,
+        "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "wrong_stationary": 0
+        "wrong_stationary": 100
       },
       "full_n": 100,
       "history": false,
@@ -176,7 +176,7 @@
       "par2_mean": 2000000.0,
       "partial": false,
       "partial_reason": "",
-      "path": "results/campaign/nlopt-2.11.0-lj38-mlsl-lbfgs.dat; results/asv/7120339904d4cfe1e4ecc16719b35dae77c8ff28",
+      "path": "results/campaign/nlopt-2.11.0-lj38-mlsl-lbfgs.dat; results/asv/72a91ed103e3ad6fb9d2660d647a78da37e9cc3d",
       "problem": "globalopt/lj38",
       "registry_match": true,
       "scored": true,
@@ -188,7 +188,7 @@
       "wilson_low": 0.0
     },
     {
-      "asv_commit": "7120339904d4cfe1e4ecc16719b35dae77c8ff28",
+      "asv_commit": "72a91ed103e3ad6fb9d2660d647a78da37e9cc3d",
       "call_unit": "total",
       "cap": 1000000,
       "code": "NLopt",
@@ -206,22 +206,22 @@
       },
       "full_n": 100,
       "history": false,
-      "max_calls": 999064.0,
-      "mean_calls": 517413.31,
+      "max_calls": 997817.0,
+      "mean_calls": 809922.27,
       "mean_per_image": null,
       "median": 2000000.0,
-      "median_calls": 608171.0,
+      "median_calls": 997296.5,
       "median_high": 2000000.0,
       "median_low": 2000000.0,
       "median_per_image": null,
-      "min_calls": 51980.0,
+      "min_calls": 42974.0,
       "n": 100,
       "nfailed": 100,
       "note": "starts.jsonl",
       "par2_mean": 2000000.0,
       "partial": false,
       "partial_reason": "",
-      "path": "results/campaign/nlopt-2.11.0-lj38-stogo.dat; results/asv/7120339904d4cfe1e4ecc16719b35dae77c8ff28",
+      "path": "results/campaign/nlopt-2.11.0-lj38-stogo.dat; results/asv/72a91ed103e3ad6fb9d2660d647a78da37e9cc3d",
       "problem": "globalopt/lj38",
       "registry_match": true,
       "scored": true,
