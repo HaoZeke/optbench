@@ -115,6 +115,16 @@ committed = "2026-10-12"
 note = "0.1.2 at main b7081b93, built from source. LBFGS and FIRE are the Python classes. MYLBFGS is the Fortran step update on that LBFGS. Steepest descent is the update in pele.optimize.steepest_descent. Campaigns call the harness Lennard-Jones or Morse potential. Force calls are harness entries to getEnergyGradient. The 2014 rows counted nfev on pele's own potential and stay on the archive table."
 
 [[code]]
+id = "optking"
+name = "OptKing"
+role = "transition-state search"
+repository = "https://github.com/psi-rking/optking"
+ref = "767e2c0c13ff2b851ac82101ccd5aab9a558a4f1"
+commit = "767e2c0c13ff2b851ac82101ccd5aab9a558a4f1"
+committed = "2026-10-13"
+note = "Geometry optimizer at 767e2c0c13ff2b851ac82101ccd5aab9a558a4f1. The version string is 0.5.1.dev2+g767e2c0c1. Transition-state steps on this revision are RS_I_RFO and P_RFO. RS_PRFO is a comment on the RFO base class and is not a step type. The Lennard-Jones 38 and Pt-island rows use Cartesian coordinates and one initial harness Hessian. A Hessian is the central difference of the harness gradient, and those evaluations are force calls."
+
+[[code]]
 id = "artn"
 name = "pARTn"
 role = "saddle search"

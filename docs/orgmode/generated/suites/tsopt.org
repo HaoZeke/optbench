@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>optking</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="tsopt/LJ38">
    <th scope="row"><a href="#LJ38">LJ38</a></th>
    <td data-code="eOn" data-template="eon-client/ts-lj38-lanczos-improved" data-par2="280.33"><span class="bench-score">280.33</span><a href="#LJ38-templates">eon-client/ts-lj38-lanczos-improved</a></td>
@@ -27,6 +27,7 @@
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
    <td data-code="optim">—</td>
+   <td data-code="optking" data-template="optking/lj38-p-rfo" data-par2="7030.36"><span class="bench-score">7030.36</span><a href="#LJ38-templates">optking/lj38-p-rfo</a></td>
    <td data-code="softsaddle">—</td>
    <td data-code="tsase" data-template="tsase/dimer-lj38" data-par2="20000"><span class="bench-score">20000</span><a href="#LJ38-templates">tsase/dimer-lj38</a></td>
    </tr>
@@ -49,6 +50,7 @@
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
    <td data-code="optim">—</td>
+   <td data-code="optking" data-template="optking/pt-rs-irfo" data-par2="1059.98"><span class="bench-score">1059.98</span><a href="#pt-island-templates">optking/pt-rs-irfo</a></td>
    <td data-code="softsaddle">—</td>
    <td data-code="tsase" data-template="tsase/dimer-pt" data-par2="1144.31"><span class="bench-score">1144.31</span><a href="#pt-island-templates">tsase/dimer-pt</a></td>
    </tr>
@@ -67,7 +69,7 @@
    <figure class="bench-plot"><a href="../../_static/board/tsopt-LJ38-profile.svg"><picture><source srcset="../../_static/board/tsopt-LJ38-profile.webp" type="image/webp"><img src="../../_static/board/tsopt-LJ38-profile.png" alt="Dolan-More profile for tsopt/LJ38" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/tsopt-LJ38-cost.svg"><picture><source srcset="../../_static/board/tsopt-LJ38-cost.webp" type="image/webp"><img src="../../_static/board/tsopt-LJ38-cost.png" alt="Cost versus success for tsopt/LJ38" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="LJ38-templates">
-   <summary>All templates (24 ranked)</summary>
+   <summary>All templates (26 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="tsopt/LJ38">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
@@ -85,6 +87,8 @@
    <tr><td data-field="template">eon/develop-ts-lj38-dimer</td><td data-field="version">eOn 3.6.0</td><td data-field="commit">7095b23ac17d</td><td data-field="source">asv</td><td data-field="par2_mean">2159.53</td><td data-field="success_rate">0.92</td><td data-field="wilson_low">0.874011</td><td data-field="wilson_high">0.950159</td><td data-field="median_calls">411</td><td data-field="mean_calls">790.055</td><td data-field="failures">crash 0, divergence 16, cap 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
    <tr><td data-field="template">eon/develop-ts-lj38-lanczos</td><td data-field="version">eOn 3.6.0</td><td data-field="commit">7095b23ac17d</td><td data-field="source">asv</td><td data-field="par2_mean">3144.55</td><td data-field="success_rate">0.865</td><td data-field="wilson_low">0.810709</td><td data-field="wilson_high">0.905534</td><td data-field="median_calls">454.5</td><td data-field="mean_calls">874.33</td><td data-field="failures">crash 0, divergence 27, cap 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
    <tr><td data-field="template">eon/develop-ts-lj38-dimer-accept-energy</td><td data-field="version">eOn 3.6.0</td><td data-field="commit">7095b23ac17d</td><td data-field="source">asv</td><td data-field="par2_mean">4805.81</td><td data-field="success_rate">0.85</td><td data-field="wilson_low">0.793944</td><td data-field="wilson_high">0.892864</td><td data-field="median_calls">1136.5</td><td data-field="mean_calls">5082.1</td><td data-field="failures">crash 0, divergence 2, cap 28, wrong_stationary 0</td><td data-field="n">200</td></tr>
+   <tr><td data-field="template">optking/lj38-p-rfo</td><td data-field="version">optking 0.5.1.dev2+g767e2c0c1</td><td data-field="commit">767e2c0c13ff</td><td data-field="source">campaign</td><td data-field="par2_mean">7030.36</td><td data-field="success_rate">0.665</td><td data-field="wilson_low">0.597022</td><td data-field="wilson_high">0.726759</td><td data-field="median_calls">555</td><td data-field="mean_calls">1494.34</td><td data-field="failures">crash 0, divergence 0, cap 3, wrong_stationary 64</td><td data-field="n">200</td></tr>
+   <tr><td data-field="template">optking/lj38-rs-irfo</td><td data-field="version">optking 0.5.1.dev2+g767e2c0c1</td><td data-field="commit">767e2c0c13ff</td><td data-field="source">campaign</td><td data-field="par2_mean">7697.42</td><td data-field="success_rate">0.625</td><td data-field="wilson_low">0.556143</td><td data-field="wilson_high">0.689146</td><td data-field="median_calls">332.5</td><td data-field="mean_calls">353.535</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 75</td><td data-field="n">200</td></tr>
    <tr><td data-field="template">rgsaddle/dimer-rotskip</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">7803.19</td><td data-field="success_rate">0.63</td><td data-field="wilson_low">0.561226</td><td data-field="wilson_high">0.693874</td><td data-field="median_calls">856.5</td><td data-field="mean_calls">2926.82</td><td data-field="failures">crash 0, divergence 0, cap 27, wrong_stationary 47</td><td data-field="n">200</td></tr>
    <tr><td data-field="template">rgsaddle/prfo</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">15147</td><td data-field="success_rate">0.25</td><td data-field="wilson_low">0.195082</td><td data-field="wilson_high">0.314341</td><td data-field="median_calls">460.5</td><td data-field="mean_calls">723.265</td><td data-field="failures">crash 0, divergence 0, cap 3, wrong_stationary 147</td><td data-field="n">200</td></tr>
    <tr><td data-field="template">rgsaddle/dimer-fire-tuned</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">16339</td><td data-field="success_rate">0.235</td><td data-field="wilson_low">0.181574</td><td data-field="wilson_high">0.298414</td><td data-field="median_calls">2795.5</td><td data-field="mean_calls">3321.32</td><td data-field="failures">crash 0, divergence 146, cap 7, wrong_stationary 0</td><td data-field="n">200</td></tr>
@@ -102,6 +106,8 @@
    <li>eon-svn/ts-lj38-lanczos Eon svn campaign, asv n=200, result file sets ranked false; potential ljcluster (shifted, cutoff 15).</li>
    <li>eon/develop-ts-lj38-dimer-accept-energy eOn asv n=1, smoke run; scored 1 of 200 starts.</li>
    <li>eon/develop-ts-lj38-lanczos eOn asv n=1, smoke run; scored 1 of 200 starts.</li>
+   <li>optking/lj38-p-rfo optking asv n=1, smoke run; scored 1 of 200 starts.</li>
+   <li>optking/lj38-rs-irfo optking asv n=1, smoke run; scored 1 of 200 starts.</li>
    <li>sella/lj38-ts-default Sella asv n=1, smoke run; scored 1 of 200 starts.</li>
    <li>sella/lj38-ts-tuned Sella asv n=1, smoke run; scored 1 of 200 starts.</li>
    </ul>
@@ -246,7 +252,7 @@
    <figure class="bench-plot"><a href="../../_static/board/tsopt-pt-island-profile.svg"><picture><source srcset="../../_static/board/tsopt-pt-island-profile.webp" type="image/webp"><img src="../../_static/board/tsopt-pt-island-profile.png" alt="Dolan-More profile for tsopt/pt-island" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/tsopt-pt-island-cost.svg"><picture><source srcset="../../_static/board/tsopt-pt-island-cost.webp" type="image/webp"><img src="../../_static/board/tsopt-pt-island-cost.png" alt="Cost versus success for tsopt/pt-island" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="pt-island-templates">
-   <summary>All templates (21 ranked)</summary>
+   <summary>All templates (23 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="tsopt/pt-island">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
@@ -263,6 +269,8 @@
    <tr><td data-field="template">rgsaddle/pt-dimer-rotskip</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">223.898</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.927302</td><td data-field="wilson_high">1</td><td data-field="median_calls">145</td><td data-field="mean_calls">223.898</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">49</td></tr>
    <tr><td data-field="template">eon/develop-ts-pt-lanczos</td><td data-field="version">eOn 3.6.0</td><td data-field="commit">7095b23ac17d</td><td data-field="source">asv</td><td data-field="par2_mean">238.837</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.927302</td><td data-field="wilson_high">1</td><td data-field="median_calls">173</td><td data-field="mean_calls">238.837</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">49</td></tr>
    <tr><td data-field="template">rgsaddle/pt-dimer-rotskip-tuned</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">299.633</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.927302</td><td data-field="wilson_high">1</td><td data-field="median_calls">167</td><td data-field="mean_calls">299.633</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">49</td></tr>
+   <tr><td data-field="template">optking/pt-rs-irfo</td><td data-field="version">optking 0.5.1.dev2+g767e2c0c1</td><td data-field="commit">767e2c0c13ff</td><td data-field="source">campaign</td><td data-field="par2_mean">1059.98</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.927302</td><td data-field="wilson_high">1</td><td data-field="median_calls">1060</td><td data-field="mean_calls">1059.98</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">49</td></tr>
+   <tr><td data-field="template">optking/pt-p-rfo</td><td data-field="version">optking 0.5.1.dev2+g767e2c0c1</td><td data-field="commit">767e2c0c13ff</td><td data-field="source">campaign</td><td data-field="par2_mean">1060.63</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.927302</td><td data-field="wilson_high">1</td><td data-field="median_calls">1059</td><td data-field="mean_calls">1060.63</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">49</td></tr>
    <tr><td data-field="template">rgsaddle/pt-dimer-fire-tuned</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">1096.9</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.927302</td><td data-field="wilson_high">1</td><td data-field="median_calls">918</td><td data-field="mean_calls">1096.9</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">49</td></tr>
    <tr><td data-field="template">tsase/dimer-pt</td><td data-field="version">tsase 1.0</td><td data-field="commit">98aac60b5d99</td><td data-field="source">campaign</td><td data-field="par2_mean">1144.31</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.927302</td><td data-field="wilson_high">1</td><td data-field="median_calls">892</td><td data-field="mean_calls">1144.31</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">49</td></tr>
    <tr><td data-field="template">eon/develop-ts-pt-dimer-accept-energy</td><td data-field="version">eOn 3.6.0</td><td data-field="commit">7095b23ac17d</td><td data-field="source">asv</td><td data-field="par2_mean">1657.88</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.927302</td><td data-field="wilson_high">1</td><td data-field="median_calls">575</td><td data-field="mean_calls">1657.88</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">49</td></tr>
@@ -278,6 +286,8 @@
    <li>eon-svn/ts-pt-lanczos Eon svn campaign, asv n=49, result file sets ranked false; potential Morse::force (shifted, cutoff 9.5, minimum image on the box diagonal).</li>
    <li>eon/develop-ts-pt-dimer-accept-energy eOn asv n=1, smoke run; scored 1 of 49 starts.</li>
    <li>eon/develop-ts-pt-lanczos eOn asv n=1, smoke run; scored 1 of 49 starts.</li>
+   <li>optking/pt-p-rfo optking asv n=1, smoke run; scored 1 of 49 starts.</li>
+   <li>optking/pt-rs-irfo optking asv n=1, smoke run; scored 1 of 49 starts.</li>
    <li>sella/pt-island-ts-default Sella asv n=1, smoke run; scored 1 of 49 starts.</li>
    <li>sella/pt-island-ts-tuned Sella asv n=1, smoke run; scored 1 of 49 starts.</li>
    </ul>
