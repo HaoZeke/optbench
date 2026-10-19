@@ -251,7 +251,7 @@ It does not run a campaign.
    <tr data-problem="lowest-eigenvector/lj38">
    <th scope="row"><a href="generated/suites/lowest-eigenvector.html#lj38">lj38</a></th>
    <td data-code="eOn" data-template="eon-client/low-lj38-lanczos" data-par2="26.385"><span class="bench-score">26.385</span><a href="generated/suites/lowest-eigenvector.html#lj38-templates">eon-client/low-lj38-lanczos</a></td>
-   <td data-code="Eon svn" data-template="eon-svn/low-lj38-lanczos-ljcut" data-par2="26.385"><span class="bench-score">26.385</span><a href="generated/suites/lowest-eigenvector.html#lj38-templates">eon-svn/low-lj38-lanczos-ljcut</a></td>
+   <td data-code="Eon svn" data-template="eon-svn/low-lj38-lanczos" data-par2="26.385"><span class="bench-score">26.385</span><a href="generated/suites/lowest-eigenvector.html#lj38-templates">eon-svn/low-lj38-lanczos</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/mode-lanczos" data-par2="26.12"><span class="bench-score">26.12</span><a href="generated/suites/lowest-eigenvector.html#lj38-templates">rgsaddle/mode-lanczos</a></td>
    <td data-code="geodesic">—</td>
@@ -347,7 +347,7 @@ It does not run a campaign.
    <tr data-problem="hTST/Al">
    <th scope="row"><a href="generated/suites/hTST.html#Al">Al</a></th>
    <td data-code="eOn" data-template="eon/htst-al-dimer" data-par2=""><span class="bench-score"></span><a href="generated/suites/hTST.html#Al-templates">eon/htst-al-dimer</a></td>
-   <td data-code="Eon svn">—</td>
+   <td data-code="Eon svn" data-template="eon-svn/htst-al-dimer" data-par2=""><span class="bench-score"></span><a href="generated/suites/hTST.html#Al-templates">eon-svn/htst-al-dimer</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="geodesic">—</td>
@@ -371,7 +371,7 @@ It does not run a campaign.
    <tr data-problem="hTST/Pt">
    <th scope="row"><a href="generated/suites/hTST.html#Pt">Pt</a></th>
    <td data-code="eOn" data-template="eon/htst-pt-dimer" data-par2=""><span class="bench-score"></span><a href="generated/suites/hTST.html#Pt-templates">eon/htst-pt-dimer</a></td>
-   <td data-code="Eon svn">—</td>
+   <td data-code="Eon svn" data-template="eon-svn/htst-pt-dimer" data-par2=""><span class="bench-score"></span><a href="generated/suites/hTST.html#Pt-templates">eon-svn/htst-pt-dimer</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="geodesic">—</td>

@@ -284,9 +284,31 @@
    <td data-field="failures">crash 0, divergence 0, cap 2, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
-   <tr data-problem="lowest-eigenvector/lj38" data-template="eon-svn/low-lj38-lanczos-ljcut">
+   <tr data-problem="hTST/Al" data-template="eon-svn/htst-al-dimer">
+   <td>Al</td>
+   <td data-field="template">eon-svn/htst-al-dimer</td>
+   <td data-field="version">Eon svn r2549</td>
+   <td data-field="commit">r2549</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="mean_calls">19656.7</td>
+   <td data-field="median_calls">16858</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">639</td>
+   </tr>
+   <tr data-problem="hTST/Pt" data-template="eon-svn/htst-pt-dimer">
+   <td>Pt</td>
+   <td data-field="template">eon-svn/htst-pt-dimer</td>
+   <td data-field="version">Eon svn r2549</td>
+   <td data-field="commit">r2549</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="mean_calls">506026</td>
+   <td data-field="median_calls">540811</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   <tr data-problem="lowest-eigenvector/lj38" data-template="eon-svn/low-lj38-lanczos">
    <td>lj38</td>
-   <td data-field="template">eon-svn/low-lj38-lanczos-ljcut</td>
+   <td data-field="template">eon-svn/low-lj38-lanczos</td>
    <td data-field="version">Eon svn r2549</td>
    <td data-field="commit">r2549</td>
    <td data-field="par2_mean">26.385</td>
@@ -342,13 +364,9 @@
    </tbody></table></div>
    <p>No full ranked run</p><ul>
    <li>Al adatom on Al(100) at 250 K: partial.</li>
-   <li>lj38_2ts_separation: partial.</li>
    <li>Al: partial.</li>
    <li>Pt: partial.</li>
-   <li>lj38: partial.</li>
    <li>Pt heptamer island: partial.</li>
-   <li>LJ38: partial.</li>
-   <li>pt-island: partial.</li>
    <li>eon-svn/cg: no per-start record.</li>
    <li>eon-svn/fire: no per-start record.</li>
    <li>eon-svn/lbfgs-m100: no per-start record.</li>

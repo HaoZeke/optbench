@@ -1,0 +1,62 @@
+id = "eon-svn/htst-al-dimer"
+engine = "eon"
+problem = "hTST/Al"
+code = "Eon svn"
+code_version = "r2549"
+commit = "r2549"
+algorithm = "Dimer-CG rotation: max=50 tol=1"
+reducer = "harness-htst"
+pass_limit = 4000
+note = "AKMC on the Al adatom with the r2549 client built with gfortran and without NO_FORTRAN, so eam_al is the Fortran Aluminum EAM. Temperature 300 K, seed 42, confidence 1.95, confidence_scheme old. Dimer rotation is conjugate gradient. improved is true. rotations_max 50, converged_angle 1. r2549 reads displace_atom_list as integer indexes and does not treat -1 as the last atom, so the list is file index 384, the adatom. Radius 3.3, magnitude 0.5, listed weight 1. Optimizer and saddle converged_force are 0.001 with convergence_metric max_atom, max_iterations 5000, saddle max_energy 100. Prefactor default_value is 1.2e12. A start is one barrier window from optbench.htst. Communicator num_jobs 32."
+
+[ini.Main]
+job = "akmc"
+temperature = 300
+finite_difference = 0.001
+random_seed = 42
+
+[ini.Potential]
+potential = "eam_al"
+
+[ini.Optimizer]
+opt_method = "cg"
+convergence_metric = "max_atom"
+converged_force = 0.001
+max_move = 0.2
+max_iterations = 5000
+
+[ini.AKMC]
+confidence = 1.95
+server_side_process_search = false
+confidence_scheme = "old"
+thermally_accessible_window = 20
+
+[ini."Process Search"]
+minimize_first = true
+
+[ini.Communicator]
+type = "local"
+num_jobs = 32
+number_of_CPUs = 1
+client_path = "eonclient"
+
+[ini."Saddle Search"]
+min_mode_method = "dimer"
+displace_listed_atom_weight = 1.0
+displace_atom_list = "384"
+displace_radius = 3.3
+displace_magnitude = 0.5
+max_energy = 100.0
+max_iterations = 5000
+converged_force = 0.001
+
+[ini.Prefactor]
+default_value = 1.2e12
+
+[ini.Dimer]
+improved = true
+opt_method = "cg"
+converged_angle = 1
+rotations_max = 50
+rotations_min = 1
+finite_angle = 0.005

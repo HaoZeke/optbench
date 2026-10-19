@@ -1,5 +1,6 @@
 # eOn SVN r2549. HarnessCounter through ext_pot. Kernel ljcluster.
 # Climbing-image NEB on all 51 pairs, same optimizer and band settings as eon/develop-de-2ts. Five images, L-BFGS memory 20, max_move 0.05, max_iterations 2000. The develop template failure_cap is 100000. This file uses the problem cap, 10000. Potential ljcluster. Main random_seed is 1. r2549 does not read energy_weighted, ci_mmf, climbing_image_band_slack, setup_mmf_peaks, or the develop L-BFGS catalog past memory, inverse curvature, max inverse curvature, auto scale, and the two resets. Those keys are omitted. The keys it does read sit in [Optimizer]. The run swaps the potential for ext_pot. The harness kernel is the develop kernel for this potential name. The 2014 table used r2156. The binary is SVN r2549, the registry pin. Export of the 2014 revision is forbidden, so this row is r2549.
+# Each start is the mean of 2 replicates (svn-all and fortran). n is the number of distinct starts. 0 starts differ in force_calls. Success agrees on every start.
 counter harness
 code Eon svn
 code_version r2549
@@ -21,5 +22,8 @@ n_crash 0
 n_divergence 0
 n_cap 30
 n_wrong_stationary 0
-ranked false
-potential ljcluster (shifted, cutoff 15)
+n_replicates 2
+n_differing 0
+success_rate 0.4117647058823529
+wilson_low 0.2875439520458094
+wilson_high 0.5483466279362843

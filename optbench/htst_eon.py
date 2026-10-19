@@ -8,6 +8,7 @@ energy, so the counter is ``htst-reducer``.
 
 from __future__ import annotations
 
+import inspect
 import json
 import logging
 import os
@@ -227,12 +228,24 @@ def run_htst(
     finished = 0
     try:
         os.chdir(work)
-        from eon.akmc import akmc
+        from eon import akmc as akmc_mod
         from eon.config import ConfigClass
+        from eon.config import config as shared_config
 
         try:
-            config = ConfigClass()
+            # r2549 helpers read the module-level config object. Later
+            # eOn passes the instance into those helpers.
+            parameters = inspect.signature(akmc_mod.get_akmc_metadata).parameters
+            if "config" in parameters:
+                config = ConfigClass()
+            else:
+                config = shared_config
+                config.init_done = False
             config.init()
+            from eon import communicator
+
+            if hasattr(communicator.get_communicator, "comm"):
+                del communicator.get_communicator.comm
         except SystemExit as exc:
             last_error = f"config exit {exc.code}"
             empty = reduce_tables("", "header\nheader\n", spec)
@@ -250,7 +263,7 @@ def run_htst(
             )
         for index in range(passes_limit):
             try:
-                akmc(config)
+                akmc_mod.akmc(config)
             except SystemExit as exc:
                 last_error = f"akmc exit {exc.code}"
                 break
@@ -309,7 +322,7 @@ def run_htst(
         # Register the batch the last submitting pass left in jobs/scratch.
         config.comm_job_buffer_size = 0
         try:
-            akmc(config)
+            akmc_mod.akmc(config)
         except SystemExit as exc:
             last_error = last_error or f"akmc exit {exc.code}"
         except Exception as exc:
