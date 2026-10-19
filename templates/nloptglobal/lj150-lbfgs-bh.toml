@@ -1,0 +1,38 @@
+id = "nloptglobal/lj150-lbfgs-bh"
+engine = "nlopt"
+code = "NLopt"
+code_version = "2.11.0"
+commit = "88c424d4f458412787df96fcc95218acbca224fd"
+algorithm = "BasinHopping"
+problem = "globalopt/lj150"
+task = "global-minimize"
+profile = "default"
+tuning = "default"
+reducer = "capped"
+ranked = true
+note = "Basin hopping. Each quench is NLopt LD_LBFGS. A trial coordinate step is limited to 0.2 because Luksan L-BFGS has no step cap, and a long step dissociates the cluster. Displacement is 0.5 and kT is 0.8, the archived basin-hopping schedule. Pairs closer than 0.9 use a quadratic core matched to the 12-6 value and slope. The recorded energy is the harness potential. The seed is the start index."
+
+[nlopt]
+name = "LD_LBFGS"
+displacement = 0.5
+temperature = 0.8
+maxstep = 0.2
+tolg = 1e-5
+local_maxeval = 4000
+core_radius = 0.9
+
+[potential]
+kind = "lennard-jones"
+epsilon = 1.0
+sigma = 1.0
+rc = 40.0
+
+[classify]
+force_norm = 0.01
+
+[stop]
+energy_above_minimum = 0.001
+max_force_calls = 10000000
+
+[input]
+archive_path = "website/globalopt/lj150/lj150_clusters.tgz"
