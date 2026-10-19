@@ -13,4 +13,5 @@ problem tsopt/LJ38
 counter harness
 reducer all
 parameter_source archive
+ranked false
 note Archive tsopt_lj38.py: Sella 0.1.1 method rsprfo, order 1, eta 1e-6, gamma 0.4, delta0 1.3e-3, rho_inc 1.035, rho_dec 5, sigma_inc 1.15, sigma_dec 0.65. ASE 3.18 irun with fmax 0 and 1000 steps. Stop is the Euclidean force norm at 1e-3. A start fails when nsteps reaches 1000. ASE Lennard-Jones cutoff 40. One harness force call is one PESWrapper.calls evaluation.

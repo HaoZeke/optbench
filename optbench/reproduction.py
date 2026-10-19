@@ -111,7 +111,6 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
-    "repro/tsopt-lj38-sella": "af9838dc4021291d25fcaa8c979f0479eee67cff",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -161,7 +160,7 @@ MATCHES: list[dict] = [
     {"key": "tsopt/LJ38/eon-dimer", "template": "eon-svn/ts-lj38-dimer-ljcut", "branch": "main", "path": "results/campaign/eon-svn-ts-lj38-dimer-ljcut.dat"},
     {"key": "tsopt/LJ38/eon-lanczos", "template": "eon-svn/ts-lj38-lanczos-ljcut", "branch": "main", "path": "results/campaign/eon-svn-ts-lj38-lanczos-ljcut.dat"},
     {"key": "tsopt/LJ38/eon-lanczos-improved", "template": "eon-svn/ts-lj38-lanczos-improved", "branch": "main", "path": "results/campaign/eon-svn-ts-lj38-lanczos-improved.dat", "cause": "improved_unset"},
-    {"key": "tsopt/LJ38/sella", "template": "sella-0.1.1/lj38-ts", "branch": "repro/tsopt-lj38-sella", "path": "results/campaign/sella-0.1.1-lj38-ts.dat", "hold": ["sella/lj38-ts-tuned"]},
+    {"key": "tsopt/LJ38/sella", "template": "sella/lj38-ts-default", "branch": "main", "path": "results/campaign/sella-2.6.0-lj38-ts-default.dat", "extra": {"code_version": "2.6.0"}, "hold": ["sella/lj38-ts-tuned"]},
     {"key": "tsopt/LJ38/pele_ffd", "template": "pele/lj38-ts-ffd", "branch": "cells/pele/ts-repro", "path": "results/campaign/pele-b7081b93-lj38-ts-ffd.screen.jsonl", "kind": "screen", "cause": "lj38_ts_starts"},
     {"key": "tsopt/LJ38/pele_cd", "template": "pele/lj38-ts-cd", "branch": "cells/pele/ts-repro", "path": "results/campaign/pele-b7081b93-lj38-ts-cd.screen.jsonl", "kind": "screen", "cause": "lj38_ts_starts_cd"},
     {"key": "tsopt/LJ38/optim_ffd", "template": "optim/hef-ffd-ts-lj38", "branch": "cells/optim/saddle-pt", "path": "results/campaign/optim-df8da599-hef-ffd-ts-lj38.dat", "cause": "optim_lj38_ts"},

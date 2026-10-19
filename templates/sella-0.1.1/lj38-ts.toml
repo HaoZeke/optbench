@@ -8,7 +8,7 @@ problem = "tsopt/LJ38"
 task = "sella"
 profile = "archive"
 reducer = "all"
-ranked = true
+ranked = false
 parameter_source = "archive"
 note = "Paper Sella 0.1.1. Archive tsopt_lj38.py: method rsprfo, order 1, eta 1e-6, gamma 0.4, delta0 1.3e-3, rho_inc 1.035, rho_dec 5, sigma_inc 1.15, sigma_dec 0.65. ASE 3.18 irun, fmax 0, 1000 steps. Stop is the Euclidean force norm at 1e-3. A start fails when nsteps reaches 1000. The score is PESWrapper.calls. ASE Lennard-Jones cutoff 40."
 

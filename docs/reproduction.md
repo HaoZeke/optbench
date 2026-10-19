@@ -206,7 +206,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | LJ38/optim_ffd | force_calls 145 | 489 | not reproduced; optim_lj38_ts |
 | LJ38/pele_cd | force_calls 254 | 263.52 | reproduced; residual |
 | LJ38/pele_ffd | force_calls 192 | 207.51 | reproduced; residual |
-| LJ38/sella | force_calls 69.55 | 69.515 | reproduced |
+| LJ38/sella | force_calls 69.55 | 69 | reproduced |
 | pt-island/eon-dimer | force_calls 116 | 115 | reproduced |
 | pt-island/eon-lanczos | force_calls 143 | 146 | reproduced |
 | pt-island/eon-lanczos-improved | force_calls 106 | 106 | reproduced |

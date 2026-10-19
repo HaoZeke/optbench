@@ -56,10 +56,11 @@ def test_pele_paper_baseline_is_the_2014_stop():
     assert island["rerun"]["paper_baseline"] is True
     sella = ledger["tsopt/LJ38/sella"]
     assert sella["status"] == "reproduced"
-    assert sella["rerun"]["template"] == "sella-0.1.1/lj38-ts"
+    assert sella["rerun"]["template"] == "sella/lj38-ts-default"
+    assert sella["rerun"]["code_version"] == "2.6.0"
     assert sella["rerun"]["paper_baseline"] is True
     assert sella["checks"][0]["ok"] is True
-    assert sella["checks"][0]["rerun"] == 69.515
+    assert sella["checks"][0]["rerun"] == 69
     assert sella["failure_check"]["rerun"] == 0.0
     assert "starting set" in forward["note"]
     held = holdback(ROOT)

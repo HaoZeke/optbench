@@ -101,9 +101,8 @@ def test_rendered_pages_use_the_board_rank():
     assert "sella/lj38-ts-tuned" not in ts_ranked
     versions = {row["template"]: dict(ranked_cells(row, False))["version"] for row in ts_rows}
     assert versions["sella/lj38-ts-default"] == "Sella 2.6.0 current"
-    assert versions["sella-0.1.1/lj38-ts"] == "Sella 0.1.1 paper"
+    assert "sella-0.1.1/lj38-ts" not in ts_ranked
     assert 'data-field="version">Sella 2.6.0 current<' in tsopt
-    assert 'data-field="version">Sella 0.1.1 paper<' in tsopt
     assert "rgsaddle/dimer-rotskip-tuned" in ts_ranked
     assert "tsopt-LJ38-profile.svg" in tsopt
     saddle = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "saddle-search.org").read_text(encoding="utf-8")

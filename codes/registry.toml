@@ -187,7 +187,7 @@ code = "sella-0.1.1"
 problem = "tsopt/LJ38"
 profile = "archive"
 task = "sella"
-ranked = true
+ranked = false
 
 # generated ASE and Sella templates
 
