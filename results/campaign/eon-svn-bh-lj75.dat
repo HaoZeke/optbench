@@ -1,0 +1,13 @@
+call_unit total
+nfailed 16
+code Eon svn
+code_version r2549
+commit r2549
+algorithm Basin hopping
+template eon-svn/bh-lj75
+problem globalopt/lj75
+reducer harness
+counter harness
+count_keys HarnessCounter
+tuning lj38
+partial true
