@@ -111,6 +111,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+    "repro/minimization-lj38-ase-lbfgslinesearch": "",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -126,7 +127,7 @@ MATCHES: list[dict] = [
     {"key": "minimization/lj38/ase-lbfgs", "template": "ase/lj38-lbfgs-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-lj38-lbfgs-tuned.dat"},
     {"key": "minimization/lj38/ase-BFGS", "template": "ase/lj38-bfgs-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-lj38-bfgs-tuned.dat"},
     {"key": "minimization/lj38/ase-bfgslinesearch", "template": "ase/lj38-bfgslinesearch-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-lj38-bfgslinesearch-tuned.dat"},
-    {"key": "minimization/lj38/ase-lbfgslinesearch", "template": "ase/lj38-lbfgslinesearch-tuned", "branch": "cells/fill-not-rerun", "path": "results/campaign/ase-3.29.0-lj38-lbfgslinesearch-tuned.dat", "cause": "linesearch_exceptions"},
+    {"key": "minimization/lj38/ase-lbfgslinesearch", "template": "ase/lj38-lbfgslinesearch-tuned", "branch": "repro/minimization-lj38-ase-lbfgslinesearch", "path": "results/campaign/ase-3.29.0-lj38-lbfgslinesearch-tuned.dat"},
     {"key": "minimization/lj38/ase-preconlbfgs", "template": "ase/lj38-preconlbfgs-tuned", "branch": "cells/fill-not-rerun", "path": "results/campaign/ase-3.29.0-lj38-preconlbfgs-tuned.dat", "cause": "precon_hessian_index"},
     {"key": "minimization/lj38/ase-fire", "template": "ase/lj38-fire-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-lj38-fire-tuned.dat"},
     {"key": "minimization/lj38/optim", "template": "optim/lj38-lbfgs-tuned", "branch": "cells/optim/min", "path": "results/campaign/optim-02aaf45245af-lj38-lbfgs-tuned.dat", "extra": {"unrounded_mean": 175.537}},
@@ -278,14 +279,6 @@ CAUSE_TEXT = {
         "The script uses a tsase LJ cutoff of 35. This row uses the harness cutoff 40. "
         "report.sh counts a failure only when a written total_force_calls is at least 10000. "
         "The harness records 10 failures, each a Hessian index of 1 after the maximum force is under 0.01. "
-        "The Wilson interval on 0 failures out of 1000 is about 0 to 3.83."
-    ),
-    "linesearch_exceptions": (
-        "ASE 3.29 LBFGSLineSearch with the archived opt.py arguments (maxstep 0.2, alpha 1/0.001, memory 100) "
-        "scores 410 against 417, inside 10 percent. "
-        "report.sh counts a start as failed only when a written total_force_calls is at least 10000, and the benchmark.dat label says M=5 while opt.py sets memory 100. "
-        "The harness records 7 failures: 5 RuntimeError LineSearch failed (ASE 3.8.2 already raises that; ASE 3.6.0 is not on PyPI) "
-        "and 2 Hessian index 1 after the Euclidean force norm is under 0.01. "
         "The Wilson interval on 0 failures out of 1000 is about 0 to 3.83."
     ),
     "akmc_vs_langevin": (
@@ -458,6 +451,14 @@ def read_campaign(root: Path, branch: str, path: str) -> str:
 
 
 def _sha(branch: str) -> str:
+    if branch == "repro/minimization-lj38-ase-lbfgslinesearch" and len(SHA.get(branch, "")) < 12:
+        import subprocess
+
+        SHA[branch] = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"],
+            cwd=Path(__file__).resolve().parents[1],
+            text=True,
+        ).strip()
     if branch == "cells/fill-not-rerun" and len(SHA.get(branch, "")) < 12:
         import subprocess
 

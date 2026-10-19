@@ -3,6 +3,8 @@
 import json
 from pathlib import Path
 
+from optbench.ase_sella import _summarize
+from optbench.campaign import load_template
 from optbench.check import load_oracle
 from optbench.problems import load_problem
 from optbench.reproduction import (
@@ -10,6 +12,7 @@ from optbench.reproduction import (
     holdback,
     judge_checks,
     load_ledger,
+    parse_dat,
     reproduction_errors,
     row_id,
 )
@@ -35,7 +38,7 @@ def test_the_ledger_covers_the_oracle_in_order():
             assert row["cause"]
         if (row.get("rerun") or {}).get("paper_baseline"):
             assert status == "reproduced"
-    assert counts == {"reproduced": 46, "not_reproduced": 29, "not_rerun": 76}
+    assert counts == {"reproduced": 47, "not_reproduced": 28, "not_rerun": 76}
     assert reproduction_errors(ROOT) == []
 
 
@@ -79,6 +82,37 @@ def test_a_paper_baseline_outside_the_archive_fails(tmp_path: Path):
     errors = baseline_errors(tmp_path)
     assert errors
     assert any("force_calls" in line and "1000" in line for line in errors)
+
+
+def test_lj38_linesearch_uses_the_archive_failure_rule():
+    row = next(
+        item
+        for item in load_ledger(ROOT / "oracle" / "reproduction.jsonl")
+        if row_id(item) == "minimization/lj38/ase-lbfgslinesearch"
+    )
+    assert row["status"] == "reproduced"
+    assert row["failure_check"]["rerun"] == 0.0
+    assert row["failure_check"]["ok"] is True
+    assert row["checks"][0]["rerun"] == 410.0
+    template = load_template(ROOT, "ase/lj38-lbfgslinesearch-tuned")
+    assert template["count"] == "report"
+    starts = ROOT / "results" / "campaign" / "ase-3.29.0-lj38-lbfgslinesearch-tuned.starts.jsonl"
+    recorded = [json.loads(line) for line in starts.read_text(encoding="utf-8").splitlines() if line.strip()]
+    summary = _summarize(recorded, template)
+    assert summary["nfailed"] == 0
+    assert summary["force_calls"] == 410
+    dat = parse_dat((ROOT / "results" / "campaign" / "ase-3.29.0-lj38-lbfgslinesearch-tuned.dat").read_text(encoding="utf-8"))
+    assert dat["nfailed"] == "0"
+    assert dat["force_calls"] == "410"
+    capped = _summarize(
+        [
+            {"force_calls": 400, "failed": False},
+            {"force_calls": 310, "failed": True, "hessian_index": 1},
+        ],
+        {"reducer": "capped", "stop": {"max_force_calls": 10000}},
+    )
+    assert capped["nfailed"] == 1
+    assert capped["force_calls"] == 400
 
 
 def test_legacy_rows_that_miss_are_marked_in_place():

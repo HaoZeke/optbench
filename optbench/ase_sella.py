@@ -1281,14 +1281,48 @@ def _v2_records(rows: list[dict], template: dict) -> tuple[list[dict], int]:
     return records, cap
 
 
+def _wrote_results(row: dict) -> bool:
+    """True when the archived script would have written results.dat.
+
+    report.sh only sees that file. A line-search exception kills opt.py
+    before the write. Reaching the force-call cap still writes the total.
+    """
+    error = str(row.get("error") or "")
+    if error == "force-call cap":
+        return True
+    if error:
+        return False
+    return "error" not in (row.get("reasons") or [])
+
+
+def _report_counts(rows: list[dict], cap: int) -> list[int]:
+    """Counts that enter archive report.sh.
+
+    A written total at or above ``cap`` is a failure. A crash with no
+    results file is omitted from the mean and from ``nfailed``. The
+    Hessian index is not a failure.
+    """
+    if cap <= 0:
+        raise ValueError("cap must be positive")
+    counts = []
+    for row in rows:
+        if not _wrote_results(row):
+            continue
+        counts.append(int(row["force_calls"]))
+    return counts
+
+
 def _summarize(rows: list[dict], template: dict) -> dict:
     cap = int(template["stop"]["max_force_calls"])
     reducer = template["reducer"]
     if reducer == "capped":
-        counts = [
-            cap if row["failed"] or int(row["force_calls"]) >= cap else int(row["force_calls"])
-            for row in rows
-        ]
+        if template.get("count") == "report":
+            counts = _report_counts(rows, cap)
+        else:
+            counts = [
+                cap if row["failed"] or int(row["force_calls"]) >= cap else int(row["force_calls"])
+                for row in rows
+            ]
         summary = summarize_capped(counts, cap)
         ok = [count for count in counts if count < cap]
         summary["force_calls_median"] = float(statistics.median(ok)) if ok else None
@@ -1377,6 +1411,8 @@ def _write_dat(
         "potential": template.get("potential") or {},
         "stop": template.get("stop") or {},
     }
+    if template.get("count"):
+        method["count"] = template["count"]
     note = template.get("note", "")
     if template["task"] in {"minimize", "sella", "sella-search", "dimer"}:
         note = (

@@ -147,7 +147,10 @@ def _tuned_minimizer(problem: str, name: str) -> tuple[dict, str, str]:
                 "benchmark.dat labels the row M=5. The script sets memory 100. "
                 "The stop is the Euclidean force norm 0.01. "
                 "The script uses a tsase LJ cutoff of 25. This row uses the harness cutoff 40, "
-                "the same potential as the LBFGS row that reproduces.",
+                "the same potential as the LBFGS row that reproduces. "
+                "Published force_calls and nfailed follow archive report.sh: a start fails only when a written total_force_calls is at least 10000. "
+                "A line-search exception writes no results.dat and is left out of the mean and the failure count. "
+                "A Hessian index of 1 after that force norm is not a failure.",
             ),
             "GPMin": (
                 {"update_hyperparams": True},
@@ -269,27 +272,28 @@ def _minimization_specs() -> list[dict]:
                     and profile == "tuned"
                 ):
                     row_stop = {**stop, "norm": "fmax"}
-                specs.append(
-                    {
-                        "id": f"ase/{slug}-{_opt_slug(name)}-{profile}",
-                        "engine": "ase",
-                        "code": "ASE",
-                        "code_version": ASE_VERSION,
-                        "commit": ASE_COMMIT,
-                        "algorithm": name,
-                        "problem": problem,
-                        "task": "minimize",
-                        "profile": profile,
-                        "reducer": "capped",
-                        "ranked": True,
-                        "parameter_source": source,
-                        "note": note,
-                        "optimizer": {"name": name, "parameters": params},
-                        "potential": potential,
-                        "stop": row_stop,
-                        "input": {"archive_path": archive, "select": select},
-                    }
-                )
+                spec = {
+                    "id": f"ase/{slug}-{_opt_slug(name)}-{profile}",
+                    "engine": "ase",
+                    "code": "ASE",
+                    "code_version": ASE_VERSION,
+                    "commit": ASE_COMMIT,
+                    "algorithm": name,
+                    "problem": problem,
+                    "task": "minimize",
+                    "profile": profile,
+                    "reducer": "capped",
+                    "ranked": True,
+                    "parameter_source": source,
+                    "note": note,
+                    "optimizer": {"name": name, "parameters": params},
+                    "potential": potential,
+                    "stop": row_stop,
+                    "input": {"archive_path": archive, "select": select},
+                }
+                if spec["id"] == "ase/lj38-lbfgslinesearch-tuned":
+                    spec["count"] = "report"
+                specs.append(spec)
         # Sella can minimize with order 0.
         for profile in ("default", "tuned"):
             if profile == "default":
@@ -798,6 +802,8 @@ def render_toml(spec: dict) -> str:
     )
     for key in scalars:
         lines.append(f"{key} = {_toml_scalar(spec[key])}")
+    if spec.get("count"):
+        lines.append(f"count = {_toml_scalar(spec['count'])}")
     lines.append("")
     _write_table(lines, "optimizer", spec["optimizer"])
     _write_table(lines, "potential", spec["potential"])

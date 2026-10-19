@@ -2,7 +2,7 @@ force_calls 410
 force_calls_min 230
 force_calls_median 394
 force_calls_max 779
-nfailed 7
+nfailed 0
 starts 1000
 code ASE
 code_version 3.29.0
@@ -14,8 +14,8 @@ problem minimization/lj38
 counter harness
 reducer capped
 parameter_source archive
-method {"counter":"harness attach_ase_counter","parameter_source":"archive","parameters":{"alpha":1000.0,"c1":0.23,"c2":0.46,"damping":1.0,"maxstep":0.2,"memory":100,"use_line_search":true},"potential":{"epsilon":1.0,"kind":"lennard-jones","pbc":[false,false,false],"rc":40.0,"sigma":1.0},"profile":"tuned","reducer":"capped","stop":{"force_norm":0.01,"max_force_calls":10000,"max_steps":10000,"norm":"l2"}}
-note Archive run.sh calls opt.py: LBFGSLineSearch maxstep 0.2, alpha 1/0.001, memory 100. benchmark.dat labels the row M=5. The script sets memory 100. The stop is the Euclidean force norm 0.01. The script uses a tsase LJ cutoff of 25. This row uses the harness cutoff 40, the same potential as the LBFGS row that reproduces. v2 success is the harness cap, the stop norm, and the Hessian index (0 minimum, 1 saddle) after rigid modes are projected out when no atom is fixed. Energy and Kabsch RMSD are not applied: these starts have no reference geometry.
+method {"count":"report","counter":"harness attach_ase_counter","parameter_source":"archive","parameters":{"alpha":1000.0,"c1":0.23,"c2":0.46,"damping":1.0,"maxstep":0.2,"memory":100,"use_line_search":true},"potential":{"epsilon":1.0,"kind":"lennard-jones","pbc":[false,false,false],"rc":40.0,"sigma":1.0},"profile":"tuned","reducer":"capped","stop":{"force_norm":0.01,"max_force_calls":10000,"max_steps":10000,"norm":"l2"}}
+note Archive run.sh calls opt.py: LBFGSLineSearch maxstep 0.2, alpha 1/0.001, memory 100. benchmark.dat labels the row M=5. The script sets memory 100. The stop is the Euclidean force norm 0.01. The script uses a tsase LJ cutoff of 25. This row uses the harness cutoff 40, the same potential as the LBFGS row that reproduces. Published force_calls and nfailed follow archive report.sh: a start fails only when a written total_force_calls is at least 10000. A line-search exception writes no results.dat and is left out of the mean and the failure count. A Hessian index of 1 after that force norm is not a failure. v2 success is the harness cap, the stop norm, and the Hessian index (0 minimum, 1 saddle) after rigid modes are projected out when no atom is fixed. Energy and Kabsch RMSD are not applied: these starts have no reference geometry.
 host cursor
 date 2026-10-19
 contributor Rohit Goswami
