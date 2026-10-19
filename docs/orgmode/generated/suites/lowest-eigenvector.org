@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>gpatom</th></tr></thead><tbody>
    <tr data-problem="lowest-eigenvector/lj38">
    <th scope="row"><a href="#lj38">lj38</a></th>
    <td data-code="eOn">—</td>
@@ -15,6 +15,7 @@
    <td data-code="rgsaddle" data-template="rgsaddle/mode-lanczos" data-par2="26.12"><span class="bench-score">26.12</span><a href="#lj38-templates">rgsaddle/mode-lanczos</a></td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
+   <td data-code="gpatom">—</td>
    </tr>
    </tbody></table></div></section><section class="bench" id="lj38" data-problem="lowest-eigenvector/lj38">
    <h2>lj38</h2>

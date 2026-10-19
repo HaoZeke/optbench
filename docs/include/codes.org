@@ -480,10 +480,23 @@
    <td><a href="https://gitlab.com/gpatom/ase-gpatom">https://gitlab.com/gpatom/ase-gpatom</a></td>
    </tr>
    </tbody></table></div>
-   <p>No full ranked run.</p>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="neb/Pt-heptamer" data-template="gpatom/aidneb">
+   <td>Pt-heptamer</td>
+   <td data-field="template">gpatom/aidneb</td>
+   <td data-field="version">gpatom 1.0.1</td>
+   <td data-field="commit">572bd64ef61c</td>
+   <td data-field="par2_mean">20000</td>
+   <td data-field="mean_calls">62</td>
+   <td data-field="median_calls">62</td>
+   <td data-field="failures">crash 13, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   </tbody></table></div>
    <p>No full ranked run</p><ul>
    <li>LJ38 double-ended saddle: partial.</li>
-   <li>Pt-heptamer: partial.</li>
    </ul>
    </section>
 #+end_export
