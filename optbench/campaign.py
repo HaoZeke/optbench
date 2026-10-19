@@ -520,6 +520,24 @@ def run(
             limit=limit,
             resume=resume,
         )
+    if template["engine"] == "kliff":
+        from .kliff_ml import run_template
+
+        problem = resolve_problem(root, problem_name)
+        stated = template.get("problem")
+        if stated and stated != problem["id"]:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return run_template(
+            root,
+            problem,
+            template,
+            geometries=geometries,
+            output=output,
+            workers=workers,
+            work=work,
+            limit=limit,
+            resume=resume,
+        )
     if template["engine"] == "cp2k":
         from .cp2k_ts import run_template
 

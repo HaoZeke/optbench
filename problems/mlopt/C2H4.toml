@@ -13,6 +13,7 @@ structure_source = "DFT molecular dynamics"
 
 [convergence]
 max_epochs = 10000
+energy_only_max_epochs = 10000
 force_training_max_epochs = 30000
 force_max_epochs = 30000
 energy_only_grad_norm = 0.02
@@ -20,6 +21,10 @@ force_training_grad_norm = 0.1
 
 [input]
 archive_path = "website/mlopt/C2H4/C2H4_md.traj"
+
+[missing_force_rmse]
+value = -1.0
+meaning = "energies were trained and forces were not"
 
 [metrics]
 required = ["mean_energy_rmse", "mean_epoch", "mean_force_rmse", "median_energy_rmse", "median_epoch", "median_force_rmse", "nfailed"]

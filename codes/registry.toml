@@ -381,6 +381,16 @@ commit = "84ab10407420fd91ad1c25be4ecd16ce1f54a75c"
 committed = "2026-06-09"
 note = "JAX MD 0.2.29. FIRE and gradient descent are jax_md.minimize. L-BFGS rows are jaxopt 0.8.5 commit b12c2f3ddaa3ef71fac42d7e419adccb9dcc49a1 and optax 0.2.8 commit 107e9ad20ca62bcbee1a8c016daab71c690a678c. The potential is the harness potential. Force calls are harness evaluations."
 
+[[code]]
+id = "kliff"
+name = "KLIFF"
+role = "machine learning potential training"
+repository = "https://github.com/openkim/kliff"
+ref = "main"
+commit = "df2d4de2d8c0b3d4ba81cb9aa1834b52de299aa5"
+committed = "2026-02-28"
+note = "KLIFF 1.0.1 built from source at main. Neural-network rows use LossNeuralNetworkModel and its PyTorch optimizers Adam, LBFGS, and Rprop. The scored loss is the problem squared-error sum on Behler-Parrinello fingerprints. One harness call is one loss and parameter-gradient evaluation."
+
 # generated ASE and Sella templates
 
 [[template]]

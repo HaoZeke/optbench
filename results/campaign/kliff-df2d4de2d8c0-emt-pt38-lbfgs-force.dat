@@ -1,0 +1,36 @@
+# counter harness. One force call is one loss and parameter-gradient evaluation.
+# The loss is the pyamff squared-error sum on Behler-Parrinello fingerprints.
+# The network is 10-7 tanh, one net per element, uniform[-1, 1) at the start seed.
+# Success is a finite loss and a parameter-gradient infinity norm at or below the stop, with the call count under the cap.
+# force_norm on a start is that infinity norm. wrong_stationary is unused.
+# A force coefficient of 0 reports force_rmse -1 and leaves forces out of the graph.
+# KLIFF LBFGS trains the 10-7 tanh network on the EMT Pt 38 trajectory. The loss trains energies and forces. The force coefficient is 0.1. The PyTorch LBFGS constructor uses learning rate 1, max_iter 20, history_size 100, and no line search. The stop is a parameter-gradient infinity norm at or below 0.1. The harness budget is 10000 loss and gradient evaluations. A start seed is 20261015 plus the start index. Weights and biases are drawn from uniform[-1, 1).
+force_calls 347.16
+force_calls_min 9
+force_calls_max 10000
+nfailed 1
+median 98.5
+code KLIFF
+code_version 1.0.1
+commit df2d4de2d8c0b3d4ba81cb9aa1834b52de299aa5
+algorithm LBFGS
+template kliff/emt-pt38-lbfgs-force
+problem mlopt/emt-pt38
+tuning default
+counter harness
+cap 10000
+par2_mean 547.16
+wilson_low 0.8950455641036219
+wilson_high 0.9964607407283539
+par2_median 98.5
+par2_median_low 72
+par2_median_high 141
+v2_nfailed 1
+v2_successes 49
+n 50
+n_cap 1
+n_divergence 0
+n_crash 0
+n_wrong_stationary 0
+grad_norm 0.1
+force_coefficient 0.1

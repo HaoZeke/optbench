@@ -1,0 +1,24 @@
+id = "kliff/emt-pt38-rprop"
+engine = "kliff"
+problem = "mlopt/emt-pt38"
+code = "KLIFF"
+code_version = "1.0.1"
+commit = "df2d4de2d8c0b3d4ba81cb9aa1834b52de299aa5"
+algorithm = "Rprop"
+tuning = "default"
+fp_parameters = "archive/entries/mlopt/emt-pt38/pyamff-lbfgs10-7-fcoeff0/fpParas.dat"
+note = "KLIFF Rprop trains the 10-7 tanh network on the EMT Pt 38 trajectory. The loss trains energies. The force coefficient is 0, and the reported force RMSE is -1. The PyTorch Rprop constructor learning rate is 0.01, which is also the archived pyamff learning rate. The stop is a parameter-gradient infinity norm at or below 0.02. The harness budget is 10000 loss and gradient evaluations. A start seed is 20261015 plus the start index. Weights and biases are drawn from uniform[-1, 1)."
+
+[model]
+hidden = [10, 7]
+activation = "tanh"
+energy_coefficient = 1.0
+
+[kliff]
+method = "Rprop"
+force_coefficient = 0.0
+seed_base = 20261015
+
+[stop]
+max_force_calls = 10000
+gradient_norm = 0.02
