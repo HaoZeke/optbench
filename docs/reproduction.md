@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+47 reproduced, 29 not reproduced, 75 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -202,7 +202,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | LJ38/eon-dimer | force_calls 528 | 523 | reproduced |
 | LJ38/eon-lanczos | force_calls 321 | 293 | reproduced |
 | LJ38/eon-lanczos-improved | force_calls 237 | 271 | not reproduced; improved_unset |
-| LJ38/optim_cd | — | — | not rerun |
+| LJ38/optim_cd | force_calls 223 | 223 | reproduced; residual |
 | LJ38/optim_ffd | force_calls 145 | 489 | not reproduced; optim_lj38_ts |
 | LJ38/pele_cd | force_calls 254 | 263.52 | reproduced; residual |
 | LJ38/pele_ffd | force_calls 192 | 207.51 | reproduced; residual |
@@ -217,6 +217,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 ## Residuals inside the band
 
+- tsopt/LJ38/optim_cd: wales-27058 with the archived odata (BFGSTS 45 14 16 0.68 100, BFGSSTEPS 100, BFGSCONV 9.36585D-05, NOHESS). USEDIAG is unset, so NSECDIAG stays 1: central differences on energies. Starts are coords-xyz. The score is OPTIM's energy+gradient calls. round(mean) is 223 and the unrounded mean is 223.15. The median is 182.5, and round gives 182 against the archived 183.
 - tsopt/LJ38/pele_cd: Inside the 10% band (263.52 vs 254). The same xyz-versus-con starting set as ts-ffd. findTS_local.py for the CD row does not pass orthogZeroEigs; the harness template sets orthog translations-rotations. The paper baseline is this 2014-stop mean, not the harness-stop mean 335.06.
 - tsopt/LJ38/pele_ffd: Inside the 10% band (207.51 vs 192). Archive run.sh unpacks coords-xyz.tar.gz (200 xyz, max pair about 4.4). The harness problem points at coords-con.tar.gz (max pair about 37). Kabsch RMS is about 6.33, so the sets are not the same geometry. Neither set has a pair past cutoff 40, and both drivers use RMS tolerance 1e-3/sqrt(114). The 8% residual is the starting set. The paper baseline is this 2014-stop mean, not the harness-stop mean 254.48.
 

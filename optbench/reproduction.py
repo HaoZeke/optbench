@@ -111,6 +111,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+    "repro/tsopt-lj38-optim-cd": "7d8fe4afe545fa976533c7294704bb52b0726cbc",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -164,6 +165,7 @@ MATCHES: list[dict] = [
     {"key": "tsopt/LJ38/pele_ffd", "template": "pele/lj38-ts-ffd", "branch": "cells/pele/ts-repro", "path": "results/campaign/pele-b7081b93-lj38-ts-ffd.screen.jsonl", "kind": "screen", "cause": "lj38_ts_starts"},
     {"key": "tsopt/LJ38/pele_cd", "template": "pele/lj38-ts-cd", "branch": "cells/pele/ts-repro", "path": "results/campaign/pele-b7081b93-lj38-ts-cd.screen.jsonl", "kind": "screen", "cause": "lj38_ts_starts_cd"},
     {"key": "tsopt/LJ38/optim_ffd", "template": "optim/hef-ffd-ts-lj38", "branch": "cells/optim/saddle-pt", "path": "results/campaign/optim-df8da599-hef-ffd-ts-lj38.dat", "cause": "optim_lj38_ts"},
+    {"key": "tsopt/LJ38/optim_cd", "template": "optim/lj38-hef-cd", "branch": "repro/tsopt-lj38-optim-cd", "path": "results/campaign/optim-27058-lj38-hef-cd.dat", "extra": {"unrounded_mean": 223.15, "unrounded_median": 182.5}, "cause": "optim_lj38_cd"},
     {"key": "tsopt/pt-island/eon-dimer", "template": "eon-svn/ts-pt-dimer-smooth", "branch": "main", "path": "results/campaign/eon-svn-ts-pt-dimer-smooth.dat"},
     {"key": "tsopt/pt-island/eon-lanczos", "template": "eon-svn/ts-pt-lanczos-smooth", "branch": "main", "path": "results/campaign/eon-svn-ts-pt-lanczos-smooth.dat"},
     {"key": "tsopt/pt-island/eon-lanczos-improved", "template": "eon-svn/ts-pt-lanczos-improved", "branch": "main", "path": "results/campaign/eon-svn-ts-pt-lanczos-improved.dat"},
@@ -219,6 +221,12 @@ CAUSE_TEXT = {
     "optim_lj38_ts": (
         "Archive run.sh unpacks coords-xyz.tar.gz. The harness uses the problem coords-con set (Kabsch RMS about 6.33). "
         "The odata preamble is not in the archive snapshot. The template uses updates 4. The mean is 489 against 145."
+    ),
+    "optim_lj38_cd": (
+        "wales-27058 with the archived odata (BFGSTS 45 14 16 0.68 100, BFGSSTEPS 100, BFGSCONV 9.36585D-05, NOHESS). "
+        "USEDIAG is unset, so NSECDIAG stays 1: central differences on energies. Starts are coords-xyz. "
+        "The score is OPTIM's energy+gradient calls. round(mean) is 223 and the unrounded mean is 223.15. "
+        "The median is 182.5, and round gives 182 against the archived 183."
     ),
     "pt_lanczos": (
         "The svn template uses the archived Lanczos keys (10 iterations, tolerance 0.05) and shifted Morse::force. "
