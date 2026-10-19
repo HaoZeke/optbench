@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+47 reproduced, 29 not reproduced, 75 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -96,7 +96,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj38/eon-dimer-lbfgs | force_calls 28 | 28 | reproduced |
 | lj38/eon-lanczos | force_calls 28 | 26 | reproduced |
 | lj38/optim-first-order | force_calls 25 | 61 | not reproduced; optim_rr_defaults |
-| lj38/optim-second-order | — | — | not rerun |
+| lj38/optim-second-order | force_calls 46 | 46 | reproduced; residual |
 | lj38/pele-first-order | force_calls 25 | 25 | reproduced |
 | lj38/pele-second-order | force_calls 47 | 47 | reproduced |
 | lj38/sella | force_calls 17.8 | 17.8 | reproduced |
@@ -217,6 +217,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 ## Residuals inside the band
 
+- lowest-eigenvector/lj38/optim-second-order: The 2014 website preamble is usediag 2, updates 4 100, maxbfgs 0.2 1.0, eigenonly 1e-13 0.99, and READVEC, on the archived xyz set. df8da599 still applies the default 1 percent eigenvalue-change veto after the overlap crosses the cover. Keyword documentation says a cover value takes ceig out of function. BFGSTSPC 1.0D10 restores that cover stop. The printed energy+gradient mean is 46.1 and the half-even integer is 46.
 - tsopt/LJ38/pele_cd: Inside the 10% band (263.52 vs 254). The same xyz-versus-con starting set as ts-ffd. findTS_local.py for the CD row does not pass orthogZeroEigs; the harness template sets orthog translations-rotations. The paper baseline is this 2014-stop mean, not the harness-stop mean 335.06.
 - tsopt/LJ38/pele_ffd: Inside the 10% band (207.51 vs 192). Archive run.sh unpacks coords-xyz.tar.gz (200 xyz, max pair about 4.4). The harness problem points at coords-con.tar.gz (max pair about 37). Kabsch RMS is about 6.33, so the sets are not the same geometry. Neither set has a pair past cutoff 40, and both drivers use RMS tolerance 1e-3/sqrt(114). The 8% residual is the starting set. The paper baseline is this 2014-stop mean, not the harness-stop mean 254.48.
 

@@ -33,7 +33,7 @@
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">Partial rows stay off the ranked table.</p>
+   <p class="bench-gaps">OPTIM rows are off the ranked table. Partial rows stay off the ranked table.</p>
    <figure class="bench-plot"><a href="../../_static/board/lowest-eigenvector-lj38-profile.svg"><picture><source srcset="../../_static/board/lowest-eigenvector-lj38-profile.webp" type="image/webp"><img src="../../_static/board/lowest-eigenvector-lj38-profile.png" alt="Dolan-More profile for lowest-eigenvector/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/lowest-eigenvector-lj38-cost.svg"><picture><source srcset="../../_static/board/lowest-eigenvector-lj38-cost.webp" type="image/webp"><img src="../../_static/board/lowest-eigenvector-lj38-cost.png" alt="Cost versus success for lowest-eigenvector/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="lj38-templates">
@@ -62,6 +62,9 @@
    <li>eon-svn/low-lj38-lanczos Eon svn campaign, asv n=200, result file sets ranked false; potential ljcluster (shifted, cutoff 15).</li>
    <li>eon/develop-low-lj38-dimer eOn asv n=1, smoke run; scored 1 of 200 starts.</li>
    <li>eon/develop-low-lj38-lanczos eOn asv n=1, smoke run; scored 1 of 200 starts.</li>
+   </ul>
+   <h3>Not a harness score</h3><ul>
+   <li>optim/rr-second-order OPTIM n=200, counter optim.</li>
    </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="lj38-legacy">
