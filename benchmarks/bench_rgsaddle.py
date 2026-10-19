@@ -6,7 +6,7 @@ the archived start. The default grid is one seed and the first geometry.
 
 ``time_search`` is the timed search. It writes a sidecar. The ``track_*``
 methods read that sidecar, so a full ``asv run`` records force calls,
-success, the four failure classes, and wall time from the same search.
+success, the failure classes, and wall time from the same search.
 ``setup`` does not search: the parent ``TrackedSearch.setup`` would run
 the band again before the timer. A track whose sidecar is missing
 searches, so a track-only run is a real number.
@@ -73,7 +73,6 @@ TRACKS = (
     "track_failure_crash",
 )
 
-_FAILURES = ("cap", "wrong_stationary", "divergence", "crash")
 CLASS_PROBLEM: dict[str, str] = {}
 CLASS_TEMPLATE: dict[str, str] = {}
 CLASS_CAP: dict[str, int] = {}
@@ -130,23 +129,19 @@ def _write_sidecar(problem_name: str, template_name: str, seed: str, start: str,
     path.write_text(json.dumps(record, sort_keys=True) + "\n", encoding="utf-8")
 
 
-def _failure_of(record: dict) -> str | None:
-    if record.get("success"):
-        return None
-    label = record.get("failure")
-    if label in _FAILURES:
-        return str(label)
-    from optbench.failures import classify_failure
+def _failure_of(record: dict, cap: int | None) -> str | None:
+    """Class from the stored energy, geometry, force, and call count."""
+    from optbench.failures import failure_of
 
-    return classify_failure([str(reason) for reason in record.get("reasons") or []]) or "crash"
+    return failure_of(record, cap)
 
 
-def _expected_track(record: dict, method: str) -> float:
+def _expected_track(record: dict, method: str, cap: int | None) -> float:
     if method == "track_force_calls":
         return float(record["force_calls"])
     if method == "track_success":
         return 1.0 if record["success"] else 0.0
-    failure = _failure_of(record)
+    failure = _failure_of(record, cap)
     name = method.removeprefix("track_failure_")
     return 1.0 if failure == name else 0.0
 
@@ -193,7 +188,7 @@ def _bind(class_name: str, problem: str, template: str, starts: list[str], cap: 
                 }
             record["force_calls"] = float(record["force_calls"])
             record["success"] = bool(record["success"])
-            record["failure"] = _failure_of(record)
+            record["failure"] = _failure_of(record, int(self.cap))
             if record["success"]:
                 record["failure"] = None
             return record
@@ -238,6 +233,9 @@ def _bind(class_name: str, problem: str, template: str, starts: list[str], cap: 
         def track_failure_crash(self, seed, start) -> float:
             return 1.0 if self._ready(seed, start)["failure"] == "crash" else 0.0
 
+        def track_failure_not_converged(self, seed, start) -> float:
+            return 1.0 if self._ready(seed, start)["failure"] == "not_converged" else 0.0
+
     _Benchmark.cap = cap
     _Benchmark.track_force_calls.unit = "force calls"
     _Benchmark.track_success.unit = "fraction"
@@ -245,6 +243,7 @@ def _bind(class_name: str, problem: str, template: str, starts: list[str], cap: 
     _Benchmark.track_failure_wrong_stationary.unit = "count"
     _Benchmark.track_failure_divergence.unit = "count"
     _Benchmark.track_failure_crash.unit = "count"
+    _Benchmark.track_failure_not_converged.unit = "count"
     _Benchmark.__name__ = class_name
     _Benchmark.__qualname__ = class_name
     _Benchmark.__module__ = __name__
@@ -284,7 +283,7 @@ def verify_asv_tracks(document: dict) -> None:
             record = json.loads(
                 sidecar_path(CLASS_PROBLEM[class_name], template_name, seed, start).read_text(encoding="utf-8")
             )
-            expected = _expected_track(record, method)
+            expected = _expected_track(record, method, CLASS_CAP.get(class_name))
             if float(value) != expected:
                 raise ValueError(f"{name}({seed}, {start}) is {value}, the sidecar has {expected}")
 
@@ -449,12 +448,16 @@ def _bind_minmode(class_name: str, template_id: str, problem_id: str, starts: li
         def track_failure_crash(self, seed, start) -> float:
             return 1.0 if _load(template_id, problem_id, start, seed)["failure"] == "crash" else 0.0
 
+        def track_failure_not_converged(self, seed, start) -> float:
+            return 1.0 if _load(template_id, problem_id, start, seed)["failure"] == "not_converged" else 0.0
+
         track_force_calls.unit = "force calls"
         track_success.unit = "fraction"
         track_failure_cap.unit = "count"
         track_failure_wrong_stationary.unit = "count"
         track_failure_divergence.unit = "count"
         track_failure_crash.unit = "count"
+        track_failure_not_converged.unit = "count"
 
     _Benchmark.__name__ = class_name
     _Benchmark.__qualname__ = class_name

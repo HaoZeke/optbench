@@ -507,7 +507,7 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
     del workers
     import statistics
 
-    from optbench.failures import classify_failure
+    from optbench.failures import classify_outcome
     from optbench.v2 import write_starts
 
     settings = point_settings(problem)
@@ -613,8 +613,18 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
                         record["reasons"].append("duplicate")
                     if barrier <= 0.0 or barrier >= barrier_max:
                         record["reasons"].append("barrier")
-                    record["success"] = False
-                    record["failure"] = classify_failure(record["reasons"])
+                    record["failure"] = classify_outcome(
+                        energy=record.get("energy"),
+                        geometry=saddle,
+                        force=record.get("force_norm"),
+                        calls=float(record["force_calls"]),
+                        cap=budget,
+                        force_tol=float(settings["force_norm"]),
+                        hessian_index=None if record.get("hessian_index") is None else int(record["hessian_index"]),
+                        expected_index=1 if record.get("hessian_index") is not None else None,
+                        stationary_rejected=True,
+                    )
+                    record["success"] = record["failure"] is None
             search_calls += int(record["force_calls"])
             record.pop("positions", None)
             record.pop("lowest_mode", None)
