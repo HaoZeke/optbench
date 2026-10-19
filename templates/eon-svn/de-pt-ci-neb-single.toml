@@ -2,20 +2,14 @@ id = "eon-svn/de-pt-ci-neb-single"
 engine = "eon"
 problem = "double-ended-saddle-search/pt-island"
 code = "Eon svn"
-code_version = "r2549"
-commit = "r2549"
+code_version = "r2156"
+commit = "r2156"
 algorithm = "CI-NEB"
-reducer = "harness"
+reducer = "report-capped"
 failure_cap = 3000
-kind = "de-pt"
-kernel = "morse_eon"
-asv_class = "EonSvnDePtCiNebSingle"
 note = '''
-Single-image climbing-image NEB on the 59 Pt-island products. The 2013 ini sets images 1, climbing_image true, L-BFGS, converged_force 0.001, max_iterations 1000, and leaves spring and max_move unset. r2549 reads climbing_image_method, not climbing_image; the client default is already true, spring stays 5, max_move stays 0.2, and L-BFGS memory stays 20. The kernel is r2549 Morse::force compiled with g++: cutoff 9.5, pair energy shifted to zero at the cutoff, minimum image on the box diagonal. D 0.7102, alpha 1.6047, r0 2.897. The gcc transcription of that force drifts after a few dozen iterations on this one-image band. The r2549 improved tangent compares each image with both neighbors. r2156 compares the two neighbor energies and points at the higher one, and its extremum weights are both the minimum. This row uses that r2156 tangent in the r2549 client. report.sh averages every total_force_calls under 3000 and counts a non-zero termination_reason as a failure.
+Single-image climbing-image NEB on the 59 Pt-island products. Unpatched SVN r2156, Fortran linked, built-in morse_pt (Morse::force in that revision). g++ 13 compiles the 2013 sources as gnu++98. No source edits. The archived ini is copied as written: images 1, climbing_image true, L-BFGS, converged_force 0.001, max_iterations 1000. r2156 reads climbing_image_method, which stays at its default true, so the band climbs. Spring stays 5, max_move stays 0.2, and L-BFGS memory stays 20. The score is the client's total_force_calls. report.sh averages every total_force_calls under 3000 and counts a non-zero termination_reason as a failure.
 '''
-seeds = [1]
-asv_timeout = 900
-budget_seconds = 600
 
 [ini.Main]
 job = "nudged_elastic_band"
@@ -25,21 +19,9 @@ potential = "morse_pt"
 
 [ini.Optimizer]
 opt_method = "lbfgs"
-convergence_metric = "norm"
 converged_force = 0.001
-max_move = 0.2
 max_iterations = 1000
-lbfgs_memory = 20
 
 [ini."Nudged Elastic Band"]
 images = 1
-climbing_image_method = true
 climbing_image = true
-doubly_nudged = false
-doubly_nudged_switching = false
-opt_method = "lbfgs"
-converged_force = 0.001
-max_iterations = 1000
-
-[ini.LBFGS]
-lbfgs_memory = 20

@@ -11,8 +11,6 @@ started with ``potential = ext_pot``. A small C program forwards
 * ``morse_shift`` is r2549 ``Morse::force``: the same depth, alpha, and
   r0, cutoff 9.5, pair energy shifted to zero at the cutoff, minimum
   image on the box diagonal.
-* ``morse_eon`` is that same force compiled with g++. The C build of
-  ``morse_shift`` drifts on the one-image Pt-island band.
 * ``eam`` calls the r2549 Aluminum Fortran ``force_`` in this process.
 
 A tsopt success is a client stop under the cap, a free-atom Euclidean
@@ -171,64 +169,6 @@ def morse_shift(positions, atomic_numbers=None, box=None):
     return _morse_fast(flat, atomic_numbers, box)
 
 
-_MORSE_EON = None
-
-
-def _morse_eon_lib():
-    """g++ build of r2549 Morse::force. The gcc transcription drifts."""
-    import ctypes
-
-    global _MORSE_EON
-    if _MORSE_EON is not None:
-        return _MORSE_EON
-    source = Path(__file__).with_name("morse_eon.cpp")
-    dest = Path(tempfile.gettempdir()) / "optbench-morse-eon.so"
-    if not dest.is_file() or dest.stat().st_mtime < source.stat().st_mtime:
-        temporary = dest.with_suffix(".so.tmp")
-        subprocess.run(
-            ["g++", "-O2", "-shared", "-fPIC", "-o", str(temporary), str(source)],
-            check=True,
-        )
-        temporary.replace(dest)
-    lib = ctypes.CDLL(str(dest))
-    lib.morse_eon_force.argtypes = [
-        ctypes.c_int,
-        ctypes.POINTER(ctypes.c_double),
-        ctypes.POINTER(ctypes.c_double),
-        ctypes.POINTER(ctypes.c_double),
-        ctypes.POINTER(ctypes.c_double),
-    ]
-    _MORSE_EON = lib
-    return lib
-
-
-def morse_eon(positions, atomic_numbers=None, box=None):
-    """r2549 Morse::force through the g++ object, cutoff 9.5."""
-    import ctypes
-
-    del atomic_numbers
-    flat = np.ascontiguousarray(np.asarray(positions, dtype=np.float64).ravel())
-    if flat.size % 3 != 0:
-        raise ValueError("positions must be x, y, z triples")
-    atoms = flat.size // 3
-    forces = np.zeros(flat.size, dtype=np.float64)
-    energy = ctypes.c_double()
-    box_buf = None
-    if box is not None:
-        values = [float(value) for value in box]
-        if len(values) != 9:
-            raise ValueError("box must be nine floats")
-        box_buf = (ctypes.c_double * 9)(*values)
-    _morse_eon_lib().morse_eon_force(
-        atoms,
-        flat.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
-        box_buf,
-        ctypes.byref(energy),
-        forces.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
-    )
-    return float(energy.value), tuple(float(value) for value in forces)
-
-
 def _link_eam(objects: list[Path], dest: Path) -> subprocess.CompletedProcess[str]:
     dest.parent.mkdir(parents=True, exist_ok=True)
     return subprocess.run(
@@ -372,8 +312,6 @@ def kernel_for(name: str):
         return morse_pt
     if name == "morse_shift":
         return morse_shift
-    if name == "morse_eon":
-        return morse_eon
     if name == "eam":
         return eam_al
     raise ValueError(f"no harness kernel {name}")
