@@ -35998,28 +35998,46 @@
       "partial": [],
       "profile": {
         "area_log10": {
-          "panna/emt-pt38-jax-adam-energy 2.1.0 default campaign, asv 132a2df": 1.1920787828293655,
-          "panna/emt-pt38-tf-adam-energy 2.1.0 default campaign, asv 132a2df": 1.1980993827426452
+          "panna/emt-pt38-jax-adam-energy 2.1.0 default campaign, asv 132a2df": 1.1890684828727256,
+          "panna/emt-pt38-jax-adam-force 2.1.0 default campaign, asv 132a2df": 0.04214419939295737,
+          "panna/emt-pt38-tf-adam-energy 2.1.0 default campaign, asv 132a2df": 1.1950890827860055,
+          "panna/emt-pt38-tf-adam-force 2.1.0 default campaign, asv 132a2df": 0.04214419939295737
         },
         "rho": {
           "panna/emt-pt38-jax-adam-energy 2.1.0 default campaign, asv 132a2df": [
-            0.92,
+            0.9,
             1.0,
             1.0,
             1.0,
             1.0
           ],
+          "panna/emt-pt38-jax-adam-force 2.1.0 default campaign, asv 132a2df": [
+            0.02,
+            0.02,
+            0.04,
+            0.04,
+            0.06
+          ],
           "panna/emt-pt38-tf-adam-energy 2.1.0 default campaign, asv 132a2df": [
-            0.96,
+            0.94,
             1.0,
             1.0,
             1.0,
             1.0
+          ],
+          "panna/emt-pt38-tf-adam-force 2.1.0 default campaign, asv 132a2df": [
+            0.02,
+            0.02,
+            0.04,
+            0.04,
+            0.06
           ]
         },
         "solved": {
           "panna/emt-pt38-jax-adam-energy 2.1.0 default campaign, asv 132a2df": 1.0,
-          "panna/emt-pt38-tf-adam-energy 2.1.0 default campaign, asv 132a2df": 1.0
+          "panna/emt-pt38-jax-adam-force 2.1.0 default campaign, asv 132a2df": 0.2,
+          "panna/emt-pt38-tf-adam-energy 2.1.0 default campaign, asv 132a2df": 1.0,
+          "panna/emt-pt38-tf-adam-force 2.1.0 default campaign, asv 132a2df": 0.2
         },
         "taus": [
           1.0,
@@ -36119,6 +36137,96 @@
           "tuning": "default",
           "wilson_high": 1.0,
           "wilson_low": 0.9286524008666414
+        },
+        {
+          "asv_commit": "d50f914ec9c356061e6458aaf006a6585080361d",
+          "call_unit": "total",
+          "cap": 30000,
+          "code": "PANNA",
+          "code_version": "2.1.0",
+          "commit": "132a2df662598ecbbb2c9b8d37b992bb6ada6348",
+          "comparable": true,
+          "counter": "harness",
+          "current": true,
+          "entry": "panna-2.1.0-emt-pt38-tf-adam-force",
+          "failures": {
+            "cap": 40,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 0
+          },
+          "full_n": 50,
+          "history": false,
+          "max_calls": 30000.0,
+          "mean_calls": 26527.26,
+          "mean_per_image": null,
+          "median": 60000.0,
+          "median_calls": 30000.0,
+          "median_high": 60000.0,
+          "median_low": 60000.0,
+          "median_per_image": null,
+          "min_calls": 128.0,
+          "n": 50,
+          "nfailed": 40,
+          "note": "starts.jsonl",
+          "par2_mean": 50527.26,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/panna-2.1.0-emt-pt38-tf-adam-force.dat; results/asv/d50f914ec9c356061e6458aaf006a6585080361d",
+          "problem": "mlopt/emt-pt38",
+          "registry_match": true,
+          "scored": true,
+          "source": "campaign, asv",
+          "success_rate": 0.2,
+          "template": "panna/emt-pt38-tf-adam-force",
+          "tuning": "default",
+          "wilson_high": 0.3303710593222542,
+          "wilson_low": 0.1124375001577611
+        },
+        {
+          "asv_commit": "d50f914ec9c356061e6458aaf006a6585080361d",
+          "call_unit": "total",
+          "cap": 30000,
+          "code": "PANNA",
+          "code_version": "2.1.0",
+          "commit": "132a2df662598ecbbb2c9b8d37b992bb6ada6348",
+          "comparable": true,
+          "counter": "harness",
+          "current": true,
+          "entry": "panna-2.1.0-emt-pt38-jax-adam-force",
+          "failures": {
+            "cap": 40,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 0
+          },
+          "full_n": 50,
+          "history": false,
+          "max_calls": 30000.0,
+          "mean_calls": 26668.3,
+          "mean_per_image": null,
+          "median": 60000.0,
+          "median_calls": 30000.0,
+          "median_high": 60000.0,
+          "median_low": 60000.0,
+          "median_per_image": null,
+          "min_calls": 128.0,
+          "n": 50,
+          "nfailed": 40,
+          "note": "starts.jsonl",
+          "par2_mean": 50668.3,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/panna-2.1.0-emt-pt38-jax-adam-force.dat; results/asv/d50f914ec9c356061e6458aaf006a6585080361d",
+          "problem": "mlopt/emt-pt38",
+          "registry_match": true,
+          "scored": true,
+          "source": "campaign, asv",
+          "success_rate": 0.2,
+          "template": "panna/emt-pt38-jax-adam-force",
+          "tuning": "default",
+          "wilson_high": 0.3303710593222542,
+          "wilson_low": 0.1124375001577611
         }
       ],
       "title": "EMT Pt 38 nanoparticle"
@@ -41816,7 +41924,7 @@
       "title": "pt-island"
     }
   },
-  "ranked_count": 455,
+  "ranked_count": 457,
   "schema": "optbench.board/v1",
   "unmapped": [
     {
