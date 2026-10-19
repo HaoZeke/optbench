@@ -309,16 +309,83 @@ def _grad_stats(grads) -> tuple[float, float, bool]:
     return l2_max, abs_max, finite
 
 
+def _index_planes(batch) -> dict:
+    """Cartesian copies of the fingerprint-derivative index, checked once."""
+    cached = getattr(batch, "_pyamff_index_plane", None)
+    if cached is not None:
+        return cached
+    import torch
+
+    planes = {}
+    for element, index in batch.dEdg_AtomIndices.items():
+        plane = index[:, :, 0]
+        same = (
+            index.ndim == 3
+            and index.shape[-1] == 3
+            and torch.equal(index[:, :, 1], plane)
+            and torch.equal(index[:, :, 2], plane)
+        )
+        planes[element] = plane if same else None
+    batch._pyamff_index_plane = planes
+    return planes
+
+
+def _predict(model, batch, train_forces: bool):
+    """Energies and forces for one full batch.
+
+    Force training uses PyAMFF's Behler-Parrinello contraction. The stored
+    fingerprint-derivative index repeats the same atom for each Cartesian
+    component, so that component is contracted once.
+    """
+    import torch
+
+    device = torch.device("cpu")
+    if not train_forces:
+        return model(batch.allElement_fps, batch.dgdx, batch, device)
+    nimages = int(batch.nimages)
+    energies = torch.zeros((nimages, 1), dtype=torch.float64, device=device)
+    pieces = []
+    planes = _index_planes(batch)
+    for element in model.elements:
+        fingerprints = batch.allElement_fps[element].requires_grad_()
+        hidden = model.actF(model.nn_models[element]["inputLayer"](fingerprints))
+        for name in model.hd_names[element]:
+            hidden = model.actF(model.nn_models[element][name](hidden))
+        atomic = model.nn_models[element]["outputLayer"](hidden)
+        bump = torch.zeros((nimages, 1), dtype=torch.float64, device=device)
+        bump.scatter_add_(0, batch.fp_imageIndices[element], atomic)
+        energies = torch.add(energies, bump)
+        (dedg,) = torch.autograd.grad(
+            energies,
+            fingerprints,
+            grad_outputs=torch.ones_like(energies),
+            retain_graph=True,
+            create_graph=True,
+        )
+        flat = dedg.reshape(-1)
+        plane = planes[element]
+        dgdx = batch.dgdx[element]
+        if plane is None:
+            pieces.append(torch.sum(torch.mul(dgdx, flat[batch.dEdg_AtomIndices[element]]), 1))
+        else:
+            pieces.append(torch.einsum("pfc,pf->pc", dgdx, flat[plane]))
+    energies = torch.flatten(torch.mul(energies, model.slope))
+    total = torch.zeros((int(batch.ntotalAtoms), 3), dtype=torch.float64, device=device)
+    total.scatter_add_(0, batch.force_AtomIndices, torch.cat(pieces, 0))
+    forces = torch.mul(total, -model.slope)
+    return energies, forces
+
+
 def _evaluate(model, criterion, batch, counter: HarnessCounter, tol: float) -> dict:
     import torch
 
     counter.charge(())
     params = [param for param in model.parameters()]
     model.zero_grad(set_to_none=True)
-    pred_energy, pred_forces = model(batch.allElement_fps, batch.dgdx, batch, torch.device("cpu"))
     # A zero force coefficient makes the force term identically zero, so the
     # energy loss and its parameter gradient do not use the force graph.
     train_forces = float(criterion.force_coefficient) > 0.0
+    pred_energy, pred_forces = _predict(model, batch, train_forces)
     loss = criterion(
         pred_energy,
         pred_forces,
