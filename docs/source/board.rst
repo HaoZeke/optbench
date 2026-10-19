@@ -151,7 +151,7 @@ It does not run a campaign.
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/mode-lanczos" data-par2="26.12"><span class="bench-score">26.12</span><a href="generated/suites/lowest-eigenvector.html#lj38-templates">rgsaddle/mode-lanczos</a></td>
    <td data-code="ASE">—</td>
-   <td data-code="Sella">—</td>
+   <td data-code="Sella" data-template="sella-0.1.1/lj38-loweig" data-par2="17.8"><span class="bench-score">17.8</span><a href="generated/suites/lowest-eigenvector.html#lj38-templates">sella-0.1.1/lj38-loweig</a></td>
    <td data-code="pysisyphus" data-template="pysisyphus/lanczos-lj38" data-par2="4017.14"><span class="bench-score">4017.14</span><a href="generated/suites/lowest-eigenvector.html#lj38-templates">pysisyphus/lanczos-lj38</a></td>
    <td data-code="artn" data-template="partn/mode-lj38" data-par2="2619.84"><span class="bench-score">2619.84</span><a href="generated/suites/lowest-eigenvector.html#lj38-templates">partn/mode-lj38</a></td>
    <td data-code="compass">—</td>
