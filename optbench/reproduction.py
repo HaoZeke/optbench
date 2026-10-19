@@ -110,7 +110,7 @@ SHA = {
     "entries/eon-svn-htst": "715bc521c827f1f18102c1c027d99d0d8624b0fb",
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
-    "cells/fill-not-rerun": "",
+    "cells/fill-not-rerun": "5f842cd9b09d2bbc88994cc48578fa4566ea1eb9",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -127,6 +127,7 @@ MATCHES: list[dict] = [
     {"key": "minimization/lj38/ase-BFGS", "template": "ase/lj38-bfgs-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-lj38-bfgs-tuned.dat"},
     {"key": "minimization/lj38/ase-bfgslinesearch", "template": "ase/lj38-bfgslinesearch-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-lj38-bfgslinesearch-tuned.dat"},
     {"key": "minimization/lj38/ase-lbfgslinesearch", "template": "ase/lj38-lbfgslinesearch-tuned", "branch": "cells/fill-not-rerun", "path": "results/campaign/ase-3.29.0-lj38-lbfgslinesearch-tuned.dat", "cause": "linesearch_exceptions"},
+    {"key": "minimization/lj38/ase-preconlbfgs", "template": "ase/lj38-preconlbfgs-tuned", "branch": "cells/fill-not-rerun", "path": "results/campaign/ase-3.29.0-lj38-preconlbfgs-tuned.dat", "cause": "precon_hessian_index"},
     {"key": "minimization/lj38/ase-fire", "template": "ase/lj38-fire-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-lj38-fire-tuned.dat"},
     {"key": "minimization/lj38/optim", "template": "optim/lj38-lbfgs-tuned", "branch": "cells/optim/min", "path": "results/campaign/optim-02aaf45245af-lj38-lbfgs-tuned.dat", "extra": {"unrounded_mean": 175.537}},
     {"key": "minimization/lj38/pele-lbfgs-M1-maxstep0.1", "template": "pele-lbfgs-M1-maxstep0.1", "branch": "main", "path": "results/campaign/pele-0.1.2-lbfgs-M1-maxstep0.1.dat"},
@@ -271,6 +272,14 @@ CAUSE_TEXT = {
         "The mean is 688720 against 521595."
     ),
     "htst_al": "The r2549 Al dimer with the archived rotation string (CG, max 50, tol 1) misses barrier_force_calls and rate_force_calls by about 30 percent. Pt dimer CG with max 10 reproduces all four hTST counts.",
+    "precon_hessian_index": (
+        "ASE 3.29 PreconLBFGS with the archived opt.py setup (Exp A 3, maxstep 0.1, ASE fmax 0.01) "
+        "scores 2605 against 2686, inside 10 percent. "
+        "The script uses a tsase LJ cutoff of 35. This row uses the harness cutoff 40. "
+        "report.sh counts a failure only when a written total_force_calls is at least 10000. "
+        "The harness records 10 failures, each a Hessian index of 1 after the maximum force is under 0.01. "
+        "The Wilson interval on 0 failures out of 1000 is about 0 to 3.83."
+    ),
     "linesearch_exceptions": (
         "ASE 3.29 LBFGSLineSearch with the archived opt.py arguments (maxstep 0.2, alpha 1/0.001, memory 100) "
         "scores 410 against 417, inside 10 percent. "
