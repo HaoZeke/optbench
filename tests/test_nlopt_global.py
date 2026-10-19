@@ -317,3 +317,49 @@ def test_a_polished_basin_is_a_cambridge_success():
     assert 0 < record["force_calls"] < 300
     assert record["verify_calls"] == 1
     assert record["counter"] == "harness"
+
+
+def test_the_native_core_matches_the_numpy_core():
+    from optbench.fastpot import lj_capped_gradient
+
+    native = lj_capped_gradient
+    energy, _force, coords = reference_minimum()
+    got = native(coords, 0.9)
+    if got is None:
+        pytest.skip("native capped kernel is unavailable")
+    capped, grad, minimum = got
+    raw, raw_grad, raw_min = capped_lennard_jones(coords, 0.9)
+    assert minimum == pytest.approx(raw_min, abs=1e-12)
+    assert capped == pytest.approx(raw, abs=1e-9)
+    assert capped == pytest.approx(energy, abs=1e-9)
+    assert np.max(np.abs(grad - raw_grad)) < 1e-8
+    pair = np.zeros(6)
+    pair[3] = 0.4
+    got = native(pair, 0.9)
+    raw, raw_grad, raw_min = capped_lennard_jones(pair, 0.9)
+    assert got[2] == pytest.approx(raw_min, abs=1e-12)
+    assert got[0] == pytest.approx(raw, abs=1e-9)
+    assert np.max(np.abs(got[1] - raw_grad)) < 1e-8
+
+
+def test_wales_cluster_archives_load_numbered_coords(tmp_path: Path):
+    from optbench.campaign import resolve_problem
+    from optbench.runners.nlopt_global import _load_geometries
+
+    expected = {
+        "globalopt/lj75": (200, 75),
+        "globalopt/lj98": (100, 98),
+        "globalopt/lj150": (100, 150),
+    }
+    for problem_id, (count, atoms) in expected.items():
+        loaded = _load_geometries(
+            ROOT,
+            resolve_problem(ROOT, problem_id),
+            None,
+            tmp_path / problem_id.replace("/", "-"),
+            tmp_path / f"{problem_id.replace('/', '-')}.dat",
+        )
+        assert len(loaded) == count
+        assert loaded[0][0] == "coords.1"
+        assert loaded[-1][0] == f"coords.{count}"
+        assert loaded[0][1].size == atoms * 3

@@ -241,12 +241,19 @@ def _search_value(
     coords: np.ndarray,
     core_radius: float,
 ) -> tuple[float, np.ndarray, float]:
-    flat = np.asarray(coords, dtype=np.float64).reshape(-1)
-    key = tuple(float(value) for value in flat)
+    flat = np.ascontiguousarray(coords, dtype=np.float64).reshape(-1)
+    key = flat.tobytes()
     _fresh, cached = counter.charge(key)
     if cached is None:
-        value, gradient, minimum = capped_lennard_jones(flat, core_radius)
-        gradient = np.asarray(gradient, dtype=np.float64).copy()
+        from optbench.fastpot import lj_capped_gradient
+
+        native = lj_capped_gradient(flat, core_radius)
+        if native is None:
+            value, gradient, minimum = capped_lennard_jones(flat, core_radius)
+            gradient = np.asarray(gradient, dtype=np.float64).copy()
+        else:
+            value, gradient, minimum = native
+            gradient = np.asarray(gradient, dtype=np.float64)
         counter.remember(key, (float(value), gradient, float(minimum)))
     else:
         value, gradient, minimum = cached
@@ -698,6 +705,50 @@ def _dat(summary: dict, template: dict, metrics: dict, commit: str, version: str
     return "\n".join(lines) + "\n"
 
 
+def _geometry_sort_key(path: Path) -> tuple:
+    name = path.name
+    if name.startswith("coords."):
+        suffix = name.split(".", 1)[1]
+        if suffix.isdigit():
+            return (0, int(suffix))
+    if path.stem.isdigit():
+        return (0, int(path.stem))
+    return (1, name)
+
+
+def _read_geometry(path: Path) -> np.ndarray:
+    text = path.read_text(encoding="utf-8", errors="replace")
+    if path.suffix == ".con":
+        pos, _box = read_con(text)
+        return np.asarray(pos, dtype=np.float64).reshape(-1)
+    rows = []
+    for line in text.splitlines():
+        parts = line.split()
+        if len(parts) < 3:
+            continue
+        try:
+            rows.append((float(parts[0]), float(parts[1]), float(parts[2])))
+        except ValueError:
+            continue
+    if not rows:
+        raise ValueError(f"{path} has no coordinates")
+    return np.asarray(rows, dtype=np.float64).reshape(-1)
+
+
+def _collected_geometries(dest: Path) -> list[Path]:
+    cons = [path for path in dest.rglob("*.con") if path.is_file()]
+    if cons:
+        return sorted(cons, key=_geometry_sort_key)
+    coords = []
+    for path in dest.rglob("*"):
+        if not path.is_file():
+            continue
+        name = path.name
+        if name.startswith("coords.") and name.split(".", 1)[1].isdigit():
+            coords.append(path)
+    return sorted(coords, key=_geometry_sort_key)
+
+
 def _load_geometries(root: Path, problem: dict, geometries: Path | None, work: Path | None, output: Path):
     import tarfile
 
@@ -717,12 +768,9 @@ def _load_geometries(root: Path, problem: dict, geometries: Path | None, work: P
             with tarfile.open(archive) as packed:
                 packed.extractall(dest, filter="data")
             marker.write_text(recorded, encoding="utf-8")
-        cons = sorted(
-            dest.rglob("*.con"),
-            key=lambda path: int(path.stem) if path.stem.isdigit() else path.stem,
-        )
+        cons = _collected_geometries(dest)
         if not cons:
-            raise FileNotFoundError(f"{archive} has no .con files")
+            raise FileNotFoundError(f"{archive} has no geometries")
     else:
         cons = iter_geometries(geometries)
     expected = (problem.get("sample") or {}).get("starts")
@@ -730,8 +778,8 @@ def _load_geometries(root: Path, problem: dict, geometries: Path | None, work: P
         raise ValueError(f"{problem['id']} expected {expected} starts, found {len(cons)}")
     loaded = []
     for path in cons:
-        pos, _box = read_con(path.read_text(encoding="utf-8", errors="replace"))
-        loaded.append((path.stem, np.asarray(pos, dtype=np.float64).reshape(-1)))
+        name = path.name if path.name.startswith("coords.") else path.stem
+        loaded.append((name, _read_geometry(path)))
     return loaded
 
 
@@ -825,6 +873,10 @@ def run_template(
         done = {}
     pending = [job for job in jobs if job["index"] not in done]
     records = [done[job["index"]] for job in jobs if job["index"] in done]
+    if pending and settings["nlopt"].get("displacement") is not None:
+        from optbench.fastpot import lj_capped_gradient
+
+        lj_capped_gradient(np.zeros(6, dtype=np.float64), float(settings["nlopt"]["core_radius"]))
     if pending:
         if workers <= 1:
             fresh = []

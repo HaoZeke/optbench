@@ -51,7 +51,15 @@ def _archive_count(problem_id: str) -> int:
 
     archive = geometry_archive(ROOT, resolve_problem(ROOT, problem_id))
     with tarfile.open(archive) as packed:
-        return sum(1 for name in packed.getnames() if name.endswith(".con"))
+        con = 0
+        coords = 0
+        for name in packed.getnames():
+            base = name.rstrip("/").rsplit("/", 1)[-1]
+            if base.endswith(".con"):
+                con += 1
+            elif base.startswith("coords.") and base.split(".", 1)[1].isdigit():
+                coords += 1
+        return con or coords
 
 
 def _geometries(problem_id: str):

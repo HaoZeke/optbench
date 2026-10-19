@@ -121,6 +121,16 @@ def kernels() -> ctypes.CDLL | None:
         pointer,
     ]
     lib.optbench_lj_cut.restype = ctypes.c_int
+    lib.optbench_lj_capped.argtypes = [
+        pointer,
+        ctypes.c_int,
+        ctypes.c_double,
+        ctypes.c_double,
+        pointer,
+        pointer,
+        pointer,
+    ]
+    lib.optbench_lj_capped.restype = ctypes.c_int
     _KERNELS = lib
     return lib
 
@@ -228,3 +238,36 @@ def lj_cut_forces(positions, epsilon: float, sigma: float, cutoff: float):
     if code != 0:
         return None
     return float(energy.value), tuple(out)
+
+
+def lj_capped_gradient(coords, core_radius: float, cutoff: float = 40.0):
+    """Energy, gradient, and minimum pair distance for the capped 12-6.
+
+    Returns ``None`` when the native kernel is unavailable. The gradient
+    is ``dE/dx``. Pairs inside ``core_radius`` use the quadratic core.
+    """
+    import numpy as np
+
+    lib = kernels()
+    if lib is None:
+        return None
+    pos = np.ascontiguousarray(coords, dtype=np.float64).reshape(-1)
+    if pos.size % 3 != 0:
+        raise ValueError("positions must be x, y, z triples")
+    atoms = pos.size // 3
+    grad = np.zeros(pos.size, dtype=np.float64)
+    energy = ctypes.c_double()
+    minimum = ctypes.c_double()
+    pointer = ctypes.POINTER(ctypes.c_double)
+    code = lib.optbench_lj_capped(
+        pos.ctypes.data_as(pointer) if atoms else None,
+        atoms,
+        float(core_radius),
+        float(cutoff),
+        ctypes.byref(energy),
+        grad.ctypes.data_as(pointer) if atoms else None,
+        ctypes.byref(minimum),
+    )
+    if code != 0:
+        return None
+    return float(energy.value), grad, float(minimum.value)
