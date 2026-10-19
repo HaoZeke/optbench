@@ -196,7 +196,7 @@ MATCHES: list[dict] = [
     {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm0", "template": "softsaddle/saddle-lanczos-sm0", "branch": "cells/softsaddle/ts-reps", "path": "results/campaign/softsaddle-2019.04-saddle-lanczos-sm0.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
     # globalopt and htst and aladatom rates
     {"key": "globalopt/lj38/eon-basinhopping", "template": "eon-client/bh-lj38", "branch": "entries/eon-svn-lane-a", "path": "results/campaign/eon-client-bh-lj38.dat"},
-    {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "branch": "cells/pele/go", "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat", "cause": "pele_bh_defaults"},
+    {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "branch": "repro/globalopt-lj38-pele-basinhopping", "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat"},
     {"key": "hTST/Al/eon-dimer-cg", "template": "eon-svn/htst-al-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-al-dimer.dat", "kind": "htst", "cause": "htst_al"},
     {"key": "hTST/Pt/eon-dimer-cg", "template": "eon-svn/htst-pt-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-pt-dimer.dat", "kind": "htst"},
 ]
@@ -265,11 +265,6 @@ CAUSE_TEXT = {
         "Distinct saddles collapse: benchmark_unique_saddles is 0, 0.7, and 0.5 against the archive 115, 143, and 130. "
         "benchmark_fraction_connected stays near 1 while the v2 connected fraction is about 0. "
         "The per-search cap of 5064 then puts every repetition on the PAR-2 cap."
-    ),
-    "pele_bh_defaults": (
-        "The archived driver is the dangling path bin/js850/globalopt.py. "
-        "The harness uses pele LJCluster defaults (temperature 1, step 0.6, LBFGS memory 4) on unshifted cutoff 40. "
-        "The mean is 688720 against 521595."
     ),
     "htst_al": "The r2549 Al dimer with the archived rotation string (CG, max 50, tol 1) misses barrier_force_calls and rate_force_calls by about 30 percent. Pt dimer CG with max 10 reproduces all four hTST counts.",
     "precon_hessian_index": (

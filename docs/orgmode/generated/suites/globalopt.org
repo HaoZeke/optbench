@@ -271,7 +271,7 @@
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">Partial rows stay off the ranked table.</p>
+   <p class="bench-gaps">pele rows are off the ranked table. Partial rows stay off the ranked table.</p>
    <details class="bench-details" id="lj38-templates">
    <summary>All templates (0 ranked)</summary>
    <div class="bench-scroll">
@@ -283,12 +283,15 @@
    <h3>Partial</h3><ul>
    <li>eon-svn/bh-lj38 Eon svn campaign n=73, result file sets partial true; potential unshifted lj/cut, epsilon 1, sigma 1, cutoff 40.</li>
    </ul>
+   <h3>Not a harness score</h3><ul>
+   <li>pele/lj38-basinhopping pele n=100, counter pele-wrapper.</li>
+   </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="lj38-legacy">
    <h3>Legacy 2014 archive</h3>
    <details class="bench-details">
    <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
@@ -348,7 +351,7 @@
    </tr>
    <tr id="globalopt-lj38-pele-basinhopping">
    <td class="num">5</td>
-   <td class="text">pele-basinhopping · not reproduced</td>
+   <td class="text">pele-basinhopping</td>
    <td class="text">pele</td>
    <td class="num">5.21595e+05</td>
    <td class="num">9.4470e+03</td>

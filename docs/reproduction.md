@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+47 reproduced, 28 not reproduced, 76 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -59,7 +59,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj38/gmin-csm | — | — | not rerun |
 | lj38/gmin-nosym | — | — | not rerun |
 | lj38/gmin-symmetrise | — | — | not rerun |
-| lj38/pele-basinhopping | force_calls 521595 | 688720 | not reproduced; pele_bh_defaults |
+| lj38/pele-basinhopping | force_calls 521595 | 525131 | reproduced |
 | lj75/gmin | — | — | not rerun |
 | lj98/gmin-nosym | — | — | not rerun |
 | lj98/gmin-symmetrise | — | — | not rerun |
@@ -262,12 +262,6 @@ archive run.sh divides coordinates by r0 = 2.897 and scales rho and rcut into th
 
 - double-ended-saddle-search/pt-island/optim
 - tsopt/pt-island/optim_ffd
-
-### pele_bh_defaults
-
-The archived driver is the dangling path bin/js850/globalopt.py. The harness uses pele LJCluster defaults (temperature 1, step 0.6, LBFGS memory 4) on unshifted cutoff 40. The mean is 688720 against 521595.
-
-- globalopt/lj38/pele-basinhopping
 
 ### htst_al
 

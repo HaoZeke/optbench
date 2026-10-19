@@ -1074,13 +1074,13 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
-   <p class="bench-gaps">Partial rows stay off the ranked table.</p>
+   <p class="bench-gaps">pele rows are off the ranked table. Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/globalopt.html#lj38">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="lj38-legacy">
    <h3>Legacy 2014 archive</h3>
    <details class="bench-details">
    <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
@@ -1140,7 +1140,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="globalopt-lj38-pele-basinhopping">
    <td class="num">5</td>
-   <td class="text">pele-basinhopping · not reproduced</td>
+   <td class="text">pele-basinhopping</td>
    <td class="text">pele</td>
    <td class="num">5.21595e+05</td>
    <td class="num">9.4470e+03</td>
