@@ -6,11 +6,13 @@ calls `optbench.engines.find`. `available` returns the reason a code cannot
 start. `run` writes harness campaign files or raises that reason. The score
 is the harness force count. A client's own tally is not a score.
 
-Pt-island geometries use the Morse potential in `optbench.pes` (`morse_pt`).
-A code runs those problems when it can take that potential or an ASE or
-LAMMPS calculator that calls it. The harness has no EAM evaluator. hTST and
-accelerated-md problems state rates and barriers, not a force-call cap, so
-they are not given a force-call row.
+`saddle-search/pt-island` uses eOn `Morse::force`: the pair energy is
+shifted to zero at cutoff 9.5 Å and the force is the raw Morse force.
+`optbench.pes.morse_pt` matches that surface. `morse/smooth/linear` does
+not. A code runs those problems when it can take that potential or an
+ASE or LAMMPS calculator that calls it. The harness has no EAM
+evaluator. hTST and accelerated-md problems state rates and barriers,
+not a force-call cap, so they are not given a force-call row.
 
 ## Rows on disk
 
@@ -460,6 +462,54 @@ same arrays a new campaign writes, is 28586862 bytes. The reactant
 row is identical across those 20000 searches and compresses away.
 The coordinates that remain are the float16 endpoint deltas. Those
 files stay on that branch. New campaigns write format 2.
+
+## Morse surface
+
+On the Pt-island reactant, against `Morse::force` (energy
+-1775.791149559322 eV):
+
+| surface | energy difference (eV) | max \|force\| difference (eV/Å) |
+| --- | --- | --- |
+| folding z off | 0 | 0 |
+| `pes.morse_pt` (gradient sign flipped) | -2.70574674e-11 | 3.26128013e-15 |
+| ASE energy-shifted Morse, cutoff 9.5, pbc in x and y | -2.68300937e-11 | 2.93801713e-14 |
+| `morse/smooth/linear` cutoff 9.5 | 4.43284153 | 3.28533419e-3 |
+| ASE energy-shifted Morse, cutoff 7 | 32.5911541 | 3.17271076e-2 |
+| develop `morse_cluster`, no cutoff | 41944.7471 | 1.27346261 |
+
+The slab spans 13.46421825167 Å in z inside a 30 Å cell, so a z image
+sits outside the 9.5 Å cutoff. The same gaps on the first
+`search_seed(1, 1)` displacement are 4.43347272 eV and 3.30733167e-3
+eV/Å for smooth-linear, and 41944.7538 eV and 1.27346261 eV/Å for the
+no-cutoff form. The force stop is 1e-3 eV/Å, and the smooth-linear
+force differs from `Morse::force` by more than that.
+
+`pair_style = "eon-morse"` on `saddle-search/pt-island` selects
+`morse_eon` in `potential_from_problem`. pARTn already calls
+`pes.morse_pt`. The eOn client and bounded SVN saddle-pt kernels are
+`morse_shift`. The develop saddle-pt templates name `morse_eon`. Sella
+and ASE dimer on this problem use energy-shifted Morse at cutoff 9.5.
+`tsopt/pt-island` stays `morse/smooth/linear`.
+
+Rows that need a new physics run because the stored search used another
+surface. The numbers above are the reactant gap. No new score is
+invented for them:
+
+- rgsaddle saddle-pt campaigns. The climb used `morse/smooth/linear`, and the kick was one atom from a shared stream.
+- `eon-client/saddle-pt-dimer`, `eon-client/saddle-pt-lanczos`, `eon-client/saddle-pt-md`, `eon-svn/saddle-pt-dimer-bounded`, `eon-svn/saddle-pt-lanczos-bounded`, `eon-svn/saddle-pt-md`. The kernel was `morse`, which is smooth-linear.
+- `eon/develop-saddle-pt-dimer` and `eon/develop-saddle-pt-lanczos`. The ext_pot kernel was `morse_cluster`, which has no cutoff.
+- `sella/pt-island-search-default`, `sella/pt-island-search-tuned`, `ase/dimer-pt-island-default`, `ase/dimer-pt-island-tuned`. The cutoff was 7 Å.
+- OPTIM saddle-pt. The socket calls `potential_from_problem` on the job potential. A job that copies this problem file now gets `Morse::force`. The runner lives on `cells/optim/saddle-pt`, not on this branch. The stored `optim/saddle-hef-ffd-pt` campaign has no endpoint coordinates.
+
+Rows that stay. pARTn's stored geometries were evaluated with
+`pes.morse_pt`, which matches `Morse::force` to the roundoff above, so
+the product rescore is not a potential rerun. `eon-svn/saddle-pt-dimer`,
+`eon-svn/saddle-pt-dimer-improved`, and `eon-svn/saddle-pt-lanczos`
+already call r2549 `Morse::force`. The binary is r2549, not r2205.
+`eon-3.5.0` saddle-pt rows are that binary's own potential. This harness
+does not replace it. CP2K, SoftSaddle, pyKMC, and SaddleSearch.jl are
+not runners in this tree. Their stored campaigns are not given a new
+potential score here.
 
 ## Recount of stored saddle-pt campaigns
 

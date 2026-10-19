@@ -10,7 +10,7 @@ profile = "default"
 reducer = "capped"
 ranked = false
 parameter_source = "default"
-note = "ASE 3.29.0 DimerControl defaults. One search is not the saddle catalog."
+note = "ASE 3.29.0 DimerControl defaults. One search is not the saddle catalog. The potential is energy-shifted Morse at cutoff 9.5, the eOn Morse::force surface."
 
 [optimizer]
 name = "Dimer"
@@ -22,7 +22,7 @@ kind = "morse"
 D = 0.7102
 alpha = 1.6047
 r0 = 2.897
-rc = 7.0
+rc = 9.5
 form = "shift"
 pbc = [true, true, false]
 
