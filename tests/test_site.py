@@ -117,6 +117,49 @@ def test_rendered_pages_use_the_board_rank():
     assert 'data-board-table="code-best"' in codes
     assert not (ROOT / "docs" / "include" / "featured.org").exists()
     assert not (ROOT / "docs" / "include" / "terra-pass.org").exists()
+    generated = ROOT / "docs" / "orgmode" / "generated" / "suites"
+    for page in generated.glob("*.org"):
+        text = page.read_text(encoding="utf-8")
+        assert "ranked false" not in text
+    off_board = {
+        "eon-client/htst-pt-dimer-lbfgs",
+        "eon-client/htst-pt-lanczos-lbfgs",
+        "eon-svn/ts-pt-dimer",
+        "eon-svn/ts-lj38-dimer",
+        "eon-svn/low-lj38-dimer",
+        "eon-svn/low-lj38-lanczos",
+        "ase/dimer-pt-island-default",
+        "ase/dimer-pt-island-tuned",
+    }
+    present = {
+        row.get("template")
+        for problem in document["problems"].values()
+        for bucket in ("ranked", "partial", "history")
+        for row in problem.get(bucket) or []
+    }
+    present.update(row.get("template") for row in document.get("partial") or [])
+    ranked = {
+        row.get("template")
+        for problem in document["problems"].values()
+        for row in problem.get("ranked") or []
+    }
+    assert off_board.isdisjoint(present)
+    on_board = {
+        "eon-client/neb-pt-cg",
+        "eon-client/neb-pt-fire",
+        "eon-client/neb-pt-lbfgs",
+        "eon-client/neb-pt-qm",
+        "eon-client/de-pt-ci-neb",
+        "eon-client/de-pt-ci-swdneb",
+        "eon-client/de-pt-dimer",
+        "eon-client/de-pt-lanczos",
+        "eon-client/de-pt-lanczos-improved",
+        "eon-svn/ts-lj38-lanczos",
+        "eon-svn/ts-pt-lanczos",
+        "eon-svn/de-2ts-ci",
+        "eon-svn/de-2ts-neb",
+    }
+    assert on_board <= ranked
     for problem in document["problems"].values():
         if problem.get("ranked") and not problem.get("profile"):
             suite = problem["id"].split("/")[0]

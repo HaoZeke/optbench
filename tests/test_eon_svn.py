@@ -72,6 +72,19 @@ def test_c_morse_matches_r2549_morse():
     assert abs(bare - _eon_morse(positions)[0]) < 1e-9
 
 
+def test_morse_smooth_is_the_pt_island_kernel():
+    from benchmarks.bench_eon_svn import _evaluate
+    from optbench.eon_harness import morse_pt
+
+    positions = [0.0, 0.0, 0.0, 2.8, 0.1, 0.0, 1.2, 2.4, 0.2]
+    box = [20.0, 0.0, 0.0, 0.0, 20.0, 0.0, 0.0, 0.0, 30.0]
+    evaluate = _evaluate("morse_smooth")
+    energy, forces = evaluate(positions, None, box)
+    other, other_forces = morse_pt(positions, None, box)
+    assert energy == other
+    assert forces == other_forces
+
+
 def test_lj_cut_matches_the_noise_kernel():
     positions = [0.0, 0.0, 0.0, 1.1, 0.0, 0.0, 0.2, 1.3, 0.4]
     energy, forces = lj_cut(positions, cutoff=40.0)

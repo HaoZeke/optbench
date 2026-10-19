@@ -8,10 +8,10 @@ algorithm = "Doubly nudged CI-NEB"
 reducer = "harness"
 failure_cap = 3000
 kind = "de-pt"
-kernel = "morse"
+kernel = "morse_shift"
 asv_class = "EonClientDePtCiSwdneb"
 note = '''
-Doubly nudged climbing image on the 59 Pt-island products. Images 3, doubly_nudged true, doubly_nudged_switching true, converged_force 0.001, max_iterations 1000. The harness kernel is morse/smooth/linear with D 0.7102, alpha 1.6047, r0 2.897, cutoff 9.5, and periodic boundaries in x and y.
+Doubly nudged climbing image on the 59 Pt-island products. Images 3, doubly_nudged true, doubly_nudged_switching true, converged_force 0.001, max_iterations 1000. The harness kernel is r2549 Morse::force: cutoff 9.5, pair energy shifted to zero at the cutoff, minimum image on the box diagonal. D 0.7102, alpha 1.6047, r0 2.897.
 '''
 seeds = [1]
 asv_timeout = 900

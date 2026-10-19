@@ -292,7 +292,7 @@ def test_a_problem_without_a_sample_count_does_not_invent_one(tmp_path: Path):
     assert {row["n"] for row in problem["ranked"]} == {2, 4}
 
 
-def test_ranked_false_stays_off_the_table(tmp_path: Path):
+def test_ranked_false_is_not_a_board_row(tmp_path: Path):
     _problem(tmp_path, starts=2, cap=10)
     _template(tmp_path)
     _registry(tmp_path)
@@ -300,15 +300,20 @@ def test_ranked_false_stays_off_the_table(tmp_path: Path):
     path.write_text(path.read_text(encoding="utf-8") + "ranked false\n", encoding="utf-8")
     _starts(tmp_path, "toy-fast", [_row(3, True, "0"), _row(4, True, "1")])
 
-    problem = build_board(tmp_path)["problems"]["minimization/toy"]
-    assert problem["ranked"] == []
-    assert problem["partial"][0]["partial_reason"] == "result file sets ranked false"
-    path.write_text(path.read_text(encoding="utf-8") + "potential ljcluster (shifted, cutoff 15)\n", encoding="utf-8")
-    problem = build_board(tmp_path)["problems"]["minimization/toy"]
-    assert problem["ranked"] == []
-    assert problem["partial"][0]["partial_reason"] == (
-        "result file sets ranked false; potential ljcluster (shifted, cutoff 15)"
+    board = build_board(tmp_path)
+    assert "minimization/toy" not in board["problems"]
+    assert board["partial"] == []
+    path.write_text(
+        path.read_text(encoding="utf-8") + "potential ljcluster (shifted, cutoff 15)\n",
+        encoding="utf-8",
     )
+    board = build_board(tmp_path)
+    assert "minimization/toy" not in board["problems"]
+    assert board["partial"] == []
+    assert path.is_file()
+    from optbench.board import _ranked_false_templates
+
+    assert _ranked_false_templates(tmp_path) == {"toy/fast"}
 
 
 def test_per_image_band_uses_the_image_cost(tmp_path: Path):

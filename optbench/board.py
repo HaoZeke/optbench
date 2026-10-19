@@ -14,11 +14,12 @@ A row whose start count is below the problem's full set stays off the
 ranked table. An asv result that covers one start is a one-start check
 and stays off that table. The full set is the problem file's sample, or
 the Morse archive when that file gives no sample count. It is not the
-largest campaign file. A result that sets ``ranked false`` stays off the
-ranked table. Rows short of the full start set stay in the output. A
-campaign file and an asv track for the same run are one row. Only the
-newest full version of a template is ranked. Older full versions stay
-in the history list.
+largest campaign file. A campaign file that sets ``ranked false`` stays
+in ``results/campaign`` and is not a board row. An asv track for that
+same template is not a board row either. Rows short of the full
+start set stay in the output. A campaign file and an asv track for the
+same run are one row. Only the newest full version of a template is
+ranked. Older full versions stay in the history list.
 """
 
 from __future__ import annotations
@@ -739,6 +740,8 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
                     )
                 )
                 continue
+            if str(fields.get("ranked") or "").lower() == "false":
+                continue
         probe = _first_raw(group)
         template_id = fields.get("template") or str(probe.get("template") or "")
         template = templates.get(template_id)
@@ -794,12 +797,7 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
             note=parse_note or record_source,
         )
         named = str(fields.get("potential") or "").strip()
-        if str(fields.get("ranked") or "").lower() == "false":
-            reason = "result file sets ranked false"
-            if named:
-                reason = f"{reason}; potential {named}"
-            row["_declared_partial"] = reason
-        elif str(fields.get("partial") or "").lower() == "true":
+        if str(fields.get("partial") or "").lower() == "true":
             reason = "result file marks an unfinished row"
             if named:
                 reason = f"{reason}; potential {named}"
@@ -861,6 +859,25 @@ def _benchmark_index() -> dict[str, dict]:
     return index
 
 
+def _ranked_false_templates(root: Path) -> set[str]:
+    """Template ids whose campaign file says it is not a board row."""
+    found: set[str] = set()
+    folder = root / "results" / "campaign"
+    if not folder.is_dir():
+        return found
+    for path in folder.glob("*.dat"):
+        try:
+            fields, _duplicates = parse_lenient(path.read_text(encoding="utf-8"))
+        except (DatError, OSError):
+            continue
+        if str(fields.get("ranked") or "").lower() != "false":
+            continue
+        template = str(fields.get("template") or "").strip()
+        if template:
+            found.add(template)
+    return found
+
+
 def _asv_rows(root: Path, problems: dict[str, dict], templates: dict[str, dict]) -> tuple[list[dict], list[dict], list[dict]]:
     results_dir = root / "results" / "asv"
     if not results_dir.is_dir():
@@ -869,6 +886,7 @@ def _asv_rows(root: Path, problems: dict[str, dict], templates: dict[str, dict])
 
     from .asv_score import track_rows
 
+    withheld = _ranked_false_templates(root)
     index = _benchmark_index()
     rows: list[dict] = []
     unparsed: list[dict] = []
@@ -886,6 +904,8 @@ def _asv_rows(root: Path, problems: dict[str, dict], templates: dict[str, dict])
             module_name = parts[-2] if len(parts) >= 2 else ""
             described = index.get(f"{module_name}.{class_name}") or index.get(class_name) or {}
             template_id = described.get("template") or ""
+            if template_id in withheld:
+                continue
             template = templates.get(template_id)
             pinned = _template_at_commit(root, str(result.commit_hash), template_id) if template_id else None
             source_template = pinned or template

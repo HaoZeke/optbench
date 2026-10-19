@@ -8,10 +8,10 @@ algorithm = "CI-NEB"
 reducer = "harness"
 failure_cap = 3000
 kind = "de-pt"
-kernel = "morse"
+kernel = "morse_shift"
 asv_class = "EonClientDePtCiNeb"
 note = '''
-Climbing-image NEB on the 59 Pt-island products. Images 3, converged_force 0.001, max_iterations 1000. climbing_image_method is set. The 2014 file left spring and max_move unset. Spring stays the client default. max_move is 0.2. The harness kernel is morse/smooth/linear with D 0.7102, alpha 1.6047, r0 2.897, cutoff 9.5, and periodic boundaries in x and y.
+Climbing-image NEB on the 59 Pt-island products. Images 3, converged_force 0.001, max_iterations 1000. climbing_image_method is set. The 2014 file left spring and max_move unset. Spring stays the client default. max_move is 0.2. The harness kernel is r2549 Morse::force: cutoff 9.5, pair energy shifted to zero at the cutoff, minimum image on the box diagonal. D 0.7102, alpha 1.6047, r0 2.897.
 '''
 seeds = [1]
 asv_timeout = 900

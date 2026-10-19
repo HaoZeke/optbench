@@ -1,6 +1,6 @@
-force_calls 195
+force_calls 185
 force_calls_min 74
-force_calls_max 561
+force_calls_max 457
 force_calls_median 158.0
 call_unit total
 nfailed 0
@@ -13,5 +13,3 @@ problem double-ended-saddle-search/pt-island
 reducer harness
 counter harness
 count_keys HarnessCounter
-ranked false
-potential morse/smooth/linear (periodic in x and y, cutoff 9.5)

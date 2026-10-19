@@ -23,7 +23,7 @@ Per-image mean divides that same total by the problem's `band.interior_images`. 
 Only the newest full version of a template is ranked. Older full versions are history.
 A campaign file and an asv track with the same score are one row. Source stays on the row.
 An asv result with one start is a one-start check and stays out of a ranked mean.
-The Pt-island saddle problem states no full set, so the 16-start ASE dimer files stay off the ranked table because those result files set `ranked false`.
+The 16-start ASE dimer files set `ranked false` because one search is not the saddle catalog. Those files stay in `results/campaign` and are not board rows.
 `entries/ase-sella-full` and `entries/eon-develop-full` were not on origin when this board was scored.
 Pages were not deployed.
 

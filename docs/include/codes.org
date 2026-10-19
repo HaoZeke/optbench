@@ -52,6 +52,17 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="eon-client/de-pt-lanczos-improved">
+   <td>pt-island</td>
+   <td data-field="template">eon-client/de-pt-lanczos-improved</td>
+   <td data-field="version">eOn 3.5.0</td>
+   <td data-field="commit">4d8b34baf1ba</td>
+   <td data-field="par2_mean">184.797</td>
+   <td data-field="mean_calls">184.797</td>
+   <td data-field="median_calls">158</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
    <tr data-problem="lowest-eigenvector/lj38" data-template="eon-client/low-lj38-lanczos">
    <td>lj38</td>
    <td data-field="template">eon-client/low-lj38-lanczos</td>
@@ -85,6 +96,17 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
+   <tr data-problem="neb/Pt-heptamer" data-template="eon-client/neb-pt-lbfgs">
+   <td>Pt-heptamer</td>
+   <td data-field="template">eon-client/neb-pt-lbfgs</td>
+   <td data-field="version">eOn 3.5.0</td>
+   <td data-field="commit">4d8b34baf1ba</td>
+   <td data-field="par2_mean">319.538</td>
+   <td data-field="mean_calls">319.538</td>
+   <td data-field="median_calls">330</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
    <tr data-problem="tsopt/LJ38" data-template="eon-client/ts-lj38-lanczos-improved">
    <td>LJ38</td>
    <td data-field="template">eon-client/ts-lj38-lanczos-improved</td>
@@ -115,9 +137,8 @@
    <li>lj38_2ts_separation: short of the full start set.</li>
    <li>pt-island: not yet on the harness counter, short of the full start set.</li>
    <li>Al: short of the full start set.</li>
-   <li>Pt: short of the full start set.</li>
    <li>lj38: short of the full start set.</li>
-   <li>Pt-heptamer: not yet on the harness counter, short of the full start set.</li>
+   <li>Pt-heptamer: not yet on the harness counter.</li>
    <li>Pt heptamer island: not yet on the harness counter, short of the full start set.</li>
    <li>LJ38: not yet on the harness counter, short of the full start set.</li>
    <li>pt-island: not yet on the harness counter, short of the full start set.</li>
@@ -244,14 +265,10 @@
    </tbody></table></div>
    <p>No full ranked run</p><ul>
    <li>Al adatom on Al(100) at 250 K: short of the full start set.</li>
-   <li>lj38_2ts_separation: short of the full start set.</li>
    <li>Lennard-Jones 38 global minimum: short of the full start set.</li>
    <li>Al: short of the full start set.</li>
    <li>Pt: short of the full start set.</li>
-   <li>lj38: short of the full start set.</li>
    <li>Pt heptamer island: short of the full start set.</li>
-   <li>LJ38: short of the full start set.</li>
-   <li>pt-island: short of the full start set.</li>
    <li>eon-svn/cg: no per-start record.</li>
    <li>eon-svn/fire: no per-start record.</li>
    <li>eon-svn/lbfgs-m100: no per-start record.</li>
@@ -514,7 +531,6 @@
    <li>Lennard-Jones 38 clusters: short of the full start set.</li>
    <li>Morse bulk: short of the full start set.</li>
    <li>Pt-heptamer: short of the full start set.</li>
-   <li>Pt heptamer island: short of the full start set.</li>
    </ul>
    <h3>Sella</h3>
    <div class="bench-scroll"><table>

@@ -8,10 +8,10 @@ algorithm = "Lanczos L-BFGS"
 reducer = "harness"
 failure_cap = 3000
 kind = "de-pt-mode"
-kernel = "morse"
+kernel = "morse_shift"
 asv_class = "EonClientDePtLanczos"
 note = '''
-Lanczos from the interpolated Pt-island end points. max_iterations 10, tolerance 0.05, quit_early false. max_energy 1e9. LBFGS max_iterations 1000, converged_force 0.001. The harness kernel is morse/smooth/linear with D 0.7102, alpha 1.6047, r0 2.897, cutoff 9.5, and periodic boundaries in x and y.
+Lanczos from the interpolated Pt-island end points. max_iterations 10, tolerance 0.05, quit_early false. max_energy 1e9. LBFGS max_iterations 1000, converged_force 0.001. The harness kernel is r2549 Morse::force: cutoff 9.5, pair energy shifted to zero at the cutoff, minimum image on the box diagonal. D 0.7102, alpha 1.6047, r0 2.897.
 '''
 seeds = [1]
 asv_timeout = 900

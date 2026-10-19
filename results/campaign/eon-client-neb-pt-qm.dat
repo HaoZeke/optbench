@@ -1,4 +1,4 @@
-force_calls 1323
+force_calls 1322
 force_calls_min 714
 force_calls_max 1978
 force_calls_median 1242.0
@@ -13,5 +13,3 @@ problem neb/Pt-heptamer
 reducer harness
 counter harness
 count_keys HarnessCounter
-ranked false
-potential morse/smooth/linear (periodic in x and y, cutoff 9.5)

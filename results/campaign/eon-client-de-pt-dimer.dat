@@ -1,7 +1,7 @@
-force_calls 194
+force_calls 197
 force_calls_min 83
-force_calls_max 422
-force_calls_median 182.0
+force_calls_max 407
+force_calls_median 187.0
 call_unit total
 nfailed 0
 code eOn
@@ -13,5 +13,3 @@ problem double-ended-saddle-search/pt-island
 reducer harness
 counter harness
 count_keys HarnessCounter
-ranked false
-potential morse/smooth/linear (periodic in x and y, cutoff 9.5)

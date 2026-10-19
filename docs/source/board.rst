@@ -120,7 +120,7 @@ A campaign is a separate command.
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island">
    <th scope="row"><a href="generated/suites/double-ended-saddle-search.html#pt-island">pt-island</a></th>
-   <td data-code="eOn">—</td>
+   <td data-code="eOn" data-template="eon-client/de-pt-lanczos-improved" data-par2="184.797"><span class="bench-score">184.797</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">eon-client/de-pt-lanczos-improved</a></td>
    <td data-code="Eon svn" data-template="eon-svn/de-pt-lanczos-improved" data-par2="180.644"><span class="bench-score">180.644</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">eon-svn/de-pt-lanczos-improved</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="422.136"><span class="bench-score">422.136</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
@@ -205,7 +205,7 @@ A campaign is a separate command.
    </tr>
    <tr data-problem="neb/Pt-heptamer">
    <th scope="row"><a href="generated/suites/neb.html#Pt-heptamer">Pt-heptamer</a></th>
-   <td data-code="eOn">—</td>
+   <td data-code="eOn" data-template="eon-client/neb-pt-lbfgs" data-par2="319.538"><span class="bench-score">319.538</span><a href="generated/suites/neb.html#Pt-heptamer-templates">eon-client/neb-pt-lbfgs</a></td>
    <td data-code="Eon svn" data-template="eon-svn/neb-pt-ci" data-par2="336.769"><span class="bench-score">336.769</span><a href="generated/suites/neb.html#Pt-heptamer-templates">eon-svn/neb-pt-ci</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/idpp-ci-neb-lbfgs" data-par2="318.308"><span class="bench-score">318.308</span><a href="generated/suites/neb.html#Pt-heptamer-templates">rgsaddle/idpp-ci-neb-lbfgs</a></td>

@@ -695,7 +695,7 @@ The same smooth-linear kernel, `morse`, is what `eon-client` uses for
 hTST Pt, the saddle-pt dimer, Lanczos, and high-temperature rows, and the
 tsopt Pt rows, and what `eon-svn` uses for `saddle-pt-dimer-bounded`,
 `saddle-pt-lanczos-bounded`, `saddle-pt-md`, `ts-pt-dimer-smooth`,
-`ts-pt-lanczos-smooth`, and `ts-pt-lanczos-improved`. `eon-svn` hTST Pt,
+`ts-pt-lanczos`, `ts-pt-lanczos-smooth`, and `ts-pt-lanczos-improved`. `eon-svn` hTST Pt,
 `htst-pt-dimer-lbfgs` and `htst-pt-lanczos-lbfgs`, sets `kernel =
 "morse_shift"`. `eon-svn/saddle-pt-dimer`, `saddle-pt-dimer-improved`, and
 `saddle-pt-lanczos` name `morse_pt` and describe r2549 `Morse::force`, the
@@ -705,6 +705,7 @@ with no cutoff and the box ignored. On this reactant that energy is
 40168.955936 eV and the force norm is 13.432784. The 2014 archive
 `eon-dimer` saddle row is r2205 on shifted Morse. The pyKMC baseline
 uses that shifted Morse. The no-cutoff develop potential is a third surface.
+Campaign files that set `ranked false` stay in `results/campaign` and are not board rows.
 
 hTST Al is the r2549 aluminum EAM in pyKMC, `eon-svn`, and `eon-client`.
 The eOn aladatom AKMC rows call the client's built-in `eam_al` and count

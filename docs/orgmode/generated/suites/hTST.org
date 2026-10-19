@@ -133,8 +133,6 @@
    <tr><td data-field="template">pykmc/htst-pt</td><td data-field="version">pykmc 0.0.1</td><td data-field="commit">9fd1f6e9085e</td><td data-field="source">campaign</td><td data-field="newest">yes</td><td data-field="par2_mean">3.83353e+06</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.771905</td><td data-field="wilson_high">1</td><td data-field="median_calls">3.3676e+06</td><td data-field="mean_calls">3.83353e+06</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">13</td></tr>
    </tbody></table></div>
    <h3>Short of the full set</h3><ul>
-   <li>eon-client/htst-pt-dimer-lbfgs eOn campaign n=1, result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5).</li>
-   <li>eon-client/htst-pt-lanczos-lbfgs eOn campaign n=1, result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5).</li>
    <li>eon-svn/htst-pt-dimer-lbfgs Eon svn campaign n=1, result file marks an unfinished row.</li>
    <li>eon-svn/htst-pt-lanczos-lbfgs Eon svn campaign n=1, result file marks an unfinished row.</li>
    </ul>

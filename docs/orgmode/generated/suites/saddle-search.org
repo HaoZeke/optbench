@@ -59,8 +59,6 @@
    <tr><td data-field="template">pykmc/saddle-pt</td><td data-field="version">pykmc 0.0.1</td><td data-field="commit">9fd1f6e9085e</td><td data-field="source">campaign</td><td data-field="newest">yes</td><td data-field="par2_mean">14983.8</td><td data-field="success_rate">0.646465</td><td data-field="wilson_low">0.612536</td><td data-field="wilson_high">0.678979</td><td data-field="median_calls">1315.5</td><td data-field="mean_calls">1383.18</td><td data-field="failures">crash 69, divergence 0, cap 0, not_converged 1, wrong_stationary 210</td><td data-field="n">792</td></tr>
    </tbody></table></div>
    <h3>Short of the full set</h3><ul>
-   <li>ase/dimer-pt-island-default ASE campaign, asv n=16, result file sets ranked false.</li>
-   <li>ase/dimer-pt-island-tuned ASE campaign, asv n=16, result file sets ranked false.</li>
    <li>eon-client/saddle-pt-dimer eOn campaign n=1, result file marks an unfinished row.</li>
    <li>eon-client/saddle-pt-lanczos eOn campaign n=1, result file marks an unfinished row.</li>
    <li>eon-client/saddle-pt-md eOn campaign n=1, result file marks an unfinished row.</li>
@@ -69,9 +67,7 @@
    <li>eon-svn/saddle-pt-md Eon svn campaign n=1, result file marks an unfinished row.</li>
    <li>eon/develop-saddle-pt-dimer eOn asv n=1, one-start check; one start.</li>
    <li>eon/develop-saddle-pt-lanczos eOn asv n=1, one-start check; one start.</li>
-   <li>ase/dimer-pt-island-default ASE asv n=1, one-start check; one start.</li>
    <li>sella/pt-island-search-tuned Sella asv n=1, one-start check; one start.</li>
-   <li>ase/dimer-pt-island-tuned ASE asv n=1, one-start check; one start.</li>
    <li>sella/pt-island-search-default Sella asv n=1, one-start check; one start.</li>
    </ul>
    <h3>Not a harness score</h3><ul>

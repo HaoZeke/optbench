@@ -79,7 +79,7 @@ def _bridge() -> Path:
     if not stale:
         return _BRIDGE
     if not dest.is_file() or (source.is_file() and dest.stat().st_mtime < source.stat().st_mtime):
-        temporary = dest.with_suffix(".tmp")
+        temporary = dest.with_suffix(f".tmp.{os.getpid()}")
         subprocess.run(["gcc", "-O2", "-o", str(temporary), str(source)], check=True)
         temporary.replace(dest)
     _BRIDGE = dest
@@ -175,6 +175,11 @@ def _evaluate(potential: str):
         return lambda positions, numbers, box: lj_cut(
             positions, numbers, box, epsilon=1.0, sigma=1.0, cutoff=40.0
         )
+    if potential == "morse_smooth":
+        # Problem stock for tsopt/pt-island: LAMMPS morse/smooth/linear.
+        from optbench.eon_harness import morse_pt as smooth_linear
+
+        return smooth_linear
     raise ValueError(f"no harness kernel for potential {potential}")
 
 
