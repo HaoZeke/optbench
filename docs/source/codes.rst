@@ -64,6 +64,28 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
+   <tr data-problem="hTST/Al" data-template="eon/htst-al-dimer">
+   <td>Al</td>
+   <td data-field="template">eon/htst-al-dimer</td>
+   <td data-field="version">eOn 3.6.0</td>
+   <td data-field="commit">1d71c9445018</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="mean_calls">5563.49</td>
+   <td data-field="median_calls">4242</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">639</td>
+   </tr>
+   <tr data-problem="hTST/Pt" data-template="eon/htst-pt-dimer">
+   <td>Pt</td>
+   <td data-field="template">eon/htst-pt-dimer</td>
+   <td data-field="version">eOn 3.6.0</td>
+   <td data-field="commit">1d71c9445018</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="mean_calls">423080</td>
+   <td data-field="median_calls">343695</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
    <tr data-problem="lowest-eigenvector/lj38" data-template="eon-client/low-lj38-lanczos">
    <td>lj38</td>
    <td data-field="template">eon-client/low-lj38-lanczos</td>
