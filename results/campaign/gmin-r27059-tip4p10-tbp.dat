@@ -1,0 +1,13 @@
+force_calls 16352
+force_calls_median 11582
+force_calls_min 121
+force_calls_max 141420
+nfailed 0
+code GMIN
+code_version r27059
+commit 144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348
+algorithm linear temperature basin-paving
+template gmin/tip4p10-tbp
+problem globalopt/tip4p10
+counter gmin
+n 10000

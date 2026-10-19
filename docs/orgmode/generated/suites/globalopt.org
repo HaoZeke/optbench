@@ -487,7 +487,7 @@
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">No committed harness run.</p>
+   <p class="bench-gaps">GMIN rows are off the ranked table.</p>
    <details class="bench-details" id="tip4p10-templates">
    <summary>All templates (0 ranked)</summary>
    <div class="bench-scroll">
@@ -496,6 +496,9 @@
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
+   <h3>Not a harness score</h3><ul>
+   <li>gmin/tip4p10-tbp GMIN n=10000, counter gmin.</li>
+   </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="tip4p10-legacy">
    <h3>Legacy 2014 archive</h3>
