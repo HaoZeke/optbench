@@ -28,6 +28,7 @@ from pathlib import Path
 
 import numpy as np
 
+from .connection import connected_endpoints, link_tolerance, per_atom_max
 from .counter import HarnessCounter
 from .failures import classify_failure
 from .potserver import RgpotCounter
@@ -1147,8 +1148,9 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
     Each search has its own harness count: the min-mode calls plus the
     two endpoint minimizations. The repetition total also includes the
     initial minimization. Hessian calls stay in ``verify_calls``.
-    Connection uses Cartesian RMSD of the free atoms. The substrate
-    fixes the frame, so the endpoints are not Kabsch-aligned.
+    The link is the eOn r2205 test: exactly one endpoint has per-atom
+    maximum minimum-image distance strictly below 0.1 angstrom.
+    ``rmsd_connect`` is only the saddle-novelty test.
     ``work`` is unused; the searches do not extract an archive.
     """
     del work
@@ -1164,6 +1166,7 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
     listed = [int(part) for part in str(search.get("displace_atoms", "0,1,2,3,4,5,6")).split(",") if part.strip()]
     magnitude = float(search.get("displace_magnitude", 0.1))
     connect_rmsd = float(search.get("rmsd_connect", 0.5))
+    tolerance = link_tolerance(problem)
     max_searches = int(search.get("max_searches", 20000))
     free = np.flatnonzero(~fixed)
     raw = potential_from_problem(problem)
@@ -1296,9 +1299,12 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
                     minus, _minus_ok = _lbfgs_minimize(
                         potential, saddle_x - 0.1 * axis, force_tol, _SADDLE_ENDPOINT_BUDGET
                     )
-                    plus_rmsd = _cartesian_rmsd(plus.reshape(-1, 3), minimum.reshape(-1, 3))
-                    minus_rmsd = _cartesian_rmsd(minus.reshape(-1, 3), minimum.reshape(-1, 3))
-                    links = (plus_rmsd <= connect_rmsd) ^ (minus_rmsd <= connect_rmsd)
+                    plus_rows = plus.reshape(-1, 3)
+                    minus_rows = minus.reshape(-1, 3)
+                    reactant_rows = minimum.reshape(-1, 3)
+                    plus_rmsd = _cartesian_rmsd(plus_rows, reactant_rows)
+                    minus_rmsd = _cartesian_rmsd(minus_rows, reactant_rows)
+                    links = connected_endpoints(reactant_rows, plus_rows, minus_rows, cell, tolerance)
                     novel = all(
                         _cartesian_rmsd(saddle_x.reshape(-1, 3), old.reshape(-1, 3)) > connect_rmsd for old in found
                     )
@@ -1306,6 +1312,8 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
                     record["barrier"] = barrier
                     record["rmsd_plus"] = plus_rmsd
                     record["rmsd_minus"] = minus_rmsd
+                    record["per_atom_max_plus"] = per_atom_max(plus_rows, reactant_rows, cell)
+                    record["per_atom_max_minus"] = per_atom_max(minus_rows, reactant_rows, cell)
                     record["reasons"] = []
                     if novel:
                         found.append(saddle_x)

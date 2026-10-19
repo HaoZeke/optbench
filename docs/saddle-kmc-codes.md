@@ -209,19 +209,101 @@ FIRE timestep. `search_budget` is 2000, the authors' `minimize` maxeval.
 `fire_dt_max_f` is 2. The authors also set LAMMPS `dmax` 8, which this
 loop cannot set. Two hundred searches from the script's in-plane push
 (1 to 7 of atoms 0-6, length 0.05 to 0.5) stored 187 index-1 saddles.
-Thirteen searches crashed with `EIGENVALUE LOST`. One search meets the
-harness link: exactly one endpoint inside Cartesian RMSD 0.5, barrier
-0.996 eV, 925 calls. The repetition total is 154419, with 3 unique
-saddles and fraction connected 0.005. The success median is 925. The
-other 186 are divergence. Ten searches have an endpoint RMSD above 0.5.
-The other nine of those repeat a stored saddle or have a barrier of at
-least 1.5 eV. The common products sit near RMSD 0.22 and 0.32, so both
-endpoints fall inside 0.5 and the harness link fails. The OptBench
+Thirteen searches crashed with `EIGENVALUE LOST`. The stored row used
+Cartesian RMSD 0.5 over the 175 free atoms. One search meets that test:
+barrier 0.996 eV, 925 calls, endpoint RMSD 0.318 and 0.519. The
+repetition total is 154419, with 3 unique saddles and fraction connected
+0.005. The success median is 925. The other 186 are divergence. Ten
+searches have an endpoint RMSD above 0.5. The other nine of those repeat
+a stored saddle or have a barrier of at least 1.5 eV. The common products
+sit near RMSD 0.22 and 0.32, so both endpoints fall inside 0.5. A pure
+2.71 Å hop of one atom is RMSD 2.71/sqrt(175), about 0.205, and the same
+test calls it the reactant. The starts file stores those RMSD scalars and
+not the endpoint coordinates, so the row was not rescored. The ranked row
+is one record per search, with cap 6000 (the pARTn budget plus the two
+endpoint budgets of 2000). The PAR-2 mean is 11944.625. The OptBench
 catalogue calls a saddle connected when the nearer minimum's `delr` is
-under 0.5. That is a different test from the harness XOR. The goal of 27
-connected saddles is not met. The ranked row is one record per search,
-with cap 6000 (the pARTn budget plus the two endpoint budgets of 2000).
-The PAR-2 mean is 11944.625.
+under 0.5. That is a different test from either harness link.
+
+## Pt-island endpoint link
+
+The harness link is now the 2014 eOn test that produced the archived
+fraction connected. `archive/entries/saddle-search/pt-island/eon-dimer`
+is Eon r2205, dated 15 Jul 2014, `fraction_connected` 0.746017.
+`done.py` increments `not_connected` when the result token contains
+`Connected`, which matches the label `Not Connected`. That label is
+termination reason 6. The public tree on that date is `8dc9bf61`.
+`ProcessSearchJob::doProcessSearch` calls `initial->compare(min1)` and
+`initial->compare(min2)` with one argument. `Matter::compare` defaults
+`indistinguishable` to false (`Matter.h`), and `checkRotation` defaults
+to false, so the branch is
+
+```
+parameters->distanceDifference > perAtomNorm(*matter)
+```
+
+`Parameters.cpp` sets `distanceDifference` to 0.1. The archived
+`config.ini` has no `[Structure Comparison]` section, so 0.1 Å applies.
+`perAtomNorm` is the maximum per-atom distance after `Matter::pbc`, which
+folds every positive cell axis with `fmod(fmod(fraction, 1) + 1.5, 1) - 0.5`.
+Two minima are the same when that maximum is strictly below 0.1 Å. A
+search is connected when exactly one endpoint matches. `rmsd_connect` 0.5
+stays the saddle-novelty test and is not this link.
+
+No saddle-search/pt-island row stores `minimum`, `endpoint_plus`, and
+`endpoint_minus`. RMSD scalars do not determine the per-atom maximum, so
+nothing was rewritten and no campaign was rerun. The new connected count
+and the new PAR-2 are the stored values. `pykmc/lattice` writes nothing,
+so there is no pyKMC row to rescore. The MATLAB smoke in
+`softsaddle/entry.toml` records two searches and does not store endpoint
+coordinates.
+
+| row | geometries | old connected | new connected | old PAR-2 | new PAR-2 |
+| --- | --- | --- | --- | --- | --- |
+| sella/pt-island-search-default, asv n=16 | absent (success track only) | 12/16 | 12/16 | 5201.625 | 5201.625 |
+| sella/pt-island-search-tuned, asv n=16 | absent (success track only) | 11/16 | 11/16 | 6420.125 | 6420.125 |
+| rgsaddle/saddle-dimer-rotskip-tuned | absent; RMSD scalars on 17719 of 20000 | 2/20000 | 2/20000 | 10127.05255 | 10127.05255 |
+| rgsaddle/saddle-dimer-fire | absent; no RMSD scalars | 0/20000 | 0/20000 | 10128 | 10128 |
+| rgsaddle/saddle-dimer-fire-tuned | absent; RMSD scalars on 9 of 20000 | 0/20000 | 0/20000 | 10128 | 10128 |
+| rgsaddle/saddle-dimer-lbfgs | absent; no RMSD scalars | 0/20000 | 0/20000 | 10128 | 10128 |
+| rgsaddle/saddle-dimer-lbfgs-tuned | absent; RMSD scalars on 19957 of 20000 | 0/20000 | 0/20000 | 10128 | 10128 |
+| rgsaddle/saddle-dimer-rotskip | absent; RMSD scalars on 19718 of 20000 | 0/20000 | 0/20000 | 10128 | 10128 |
+| rgsaddle/saddle-lanczos | absent; RMSD scalars on 4068 of 20000 | 0/20000 | 0/20000 | 10128 | 10128 |
+| rgsaddle/saddle-lanczos-tuned | absent; RMSD scalars on 13743 of 20000 | 0/20000 | 0/20000 | 10128 | 10128 |
+| partn/saddle-pt | absent; `geometry` is `tau_sad`; RMSD on 187 of 200 | 1/200 | 1/200 | 11944.625 | 11944.625 |
+| ase/dimer-pt-island-default, campaign n=16 | absent | 16/16 | 16/16 | 1118.0625 | 1118.0625 |
+| ase/dimer-pt-island-tuned, campaign n=16 | absent | 16/16 | 16/16 | 915.4375 | 915.4375 |
+| ase/dimer-pt-island-default, asv n=1 | absent | 1/1 | 1/1 | 699 | 699 |
+| ase/dimer-pt-island-tuned, asv n=1 | absent | 1/1 | 1/1 | 564 | 564 |
+| sella/pt-island-search-default, asv n=1 | absent | 0/1 | 0/1 | 20000 | 20000 |
+| sella/pt-island-search-tuned, asv n=1 | absent | 0/1 | 0/1 | 20000 | 20000 |
+| eon-client/saddle-pt-dimer | absent; `geometry` is the string `pt-island` | fraction 0.8125 | fraction 0.8125 | 40000000 | 40000000 |
+| eon-client/saddle-pt-lanczos | absent; same string | fraction 1 | fraction 1 | 40000000 | 40000000 |
+| eon-client/saddle-pt-md | absent; same string | fraction 0 | fraction 0 | 40000000 | 40000000 |
+| eon-svn/saddle-pt-dimer-bounded | absent; same string | fraction 0.75 | fraction 0.75 | 40000000 | 40000000 |
+| eon-svn/saddle-pt-lanczos-bounded | absent; same string | fraction 1 | fraction 1 | 40000000 | 40000000 |
+| eon-svn/saddle-pt-md | absent; same string | fraction 0 | fraction 0 | 40000000 | 40000000 |
+| eon/develop-saddle-pt-dimer, asv n=1 | absent | 0/1 | 0/1 | 200000000 | 200000000 |
+| eon/develop-saddle-pt-lanczos, asv n=1 | absent | 0/1 | 0/1 | 200000000 | 200000000 |
+| eon-3.5.0-saddle-pt-classic | absent; repetition means | fraction 0.6919518057 | fraction 0.6919518057 | not applied | not applied |
+| eon-3.5.0-saddle-pt-dimer | absent; repetition means | fraction 0.7517199457 | fraction 0.7517199457 | not applied | not applied |
+| archive eon-dimer r2205 | absent | fraction 0.746017 | fraction 0.746017 | not applied | not applied |
+| archive eon-md r2205 | absent | fraction 0.886966 | fraction 0.886966 | not applied | not applied |
+| archive eon-dimer-cg-20-rotations r2213 | absent | fraction 0.634205777778 | fraction 0.634205777778 | not applied | not applied |
+| archive eon-dimer-cg-20-rotations-20-bowl_breakout r2213 | absent | fraction 0.746989444444 | fraction 0.746989444444 | not applied | not applied |
+| archive eon-dimer-cg-5-rotations-20-bowl_breakout r2213 | absent | fraction 0.703835111111 | fraction 0.703835111111 | not applied | not applied |
+| archive eon-dimer-lbfgs-20-rotations r2213 | absent | fraction 0.745814111111 | fraction 0.745814111111 | not applied | not applied |
+| archive eon-dimer-lbfgs-20-rotations-20-bowl_breakout r2213 | absent | fraction 0.796864222222 | fraction 0.796864222222 | not applied | not applied |
+| archive eon-dimer-lbfgs-5-rotations r2213 | absent | fraction 0.747722 | fraction 0.747722 | not applied | not applied |
+| archive eon-dimer-lbfgs-5-rotations-20-bowl_breakout r2213 | absent | fraction 0.853230777778 | fraction 0.853230777778 | not applied | not applied |
+| archive adaptive_HSphere-lbfgs-davidson-sm50 | absent | fraction 0.8 | fraction 0.8 | not applied | not applied |
+| archive adaptive_HSphere-lbfgs-lanczos-sm0 | absent | fraction 0.9 | fraction 0.9 | not applied | not applied |
+| archive adaptive_HSphere-lbfgs-lanczos-sm50 | absent | fraction 0.9 | fraction 0.9 | not applied | not applied |
+
+Sella and ASE successes are order-1 convergence, not this endpoint link.
+The eOn client, eOn SVN, eOn 3.5.0, and archive fractions are those codes'
+own `Not Connected` labels. PAR-2 is not applied to a legacy campaign
+ratio or to the 2014 archive.
 
 ## TSASE
 

@@ -25,6 +25,8 @@ from pathlib import Path
 
 import numpy as np
 
+from optbench.connection import connected_endpoints, link_tolerance, per_atom_max
+
 from .common import (
     cached_pairs,
     initial_push,
@@ -631,6 +633,7 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
     repetitions = int(search.get("repetitions", 1))
     magnitude = float(search.get("displace_magnitude", 0.1))
     connect_rmsd = float(search.get("rmsd_connect", 0.5))
+    tolerance = link_tolerance(problem)
     max_searches = int(search.get("max_searches", 20000))
     budget = int(search.get("search_budget", 10000))
     listed = [int(part) for part in str(search.get("displace_atoms", "0,1,2,3,4,5,6")).split(",") if part.strip()]
@@ -647,7 +650,7 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
     comments = [
         "# counter harness. Each search is one pARTn run. The geometry is tau_sad.",
         "# The displacement returned when the saddle is stored is the push off the saddle and is not applied.",
-        "# Endpoint minima are the harness connection test. The 2014 archive has no ARTn row.",
+        "# Endpoint minima use the eOn r2205 link: perAtomNorm strictly below 0.1 angstrom.",
     ]
     records = []
     failed_reps = 0
@@ -731,12 +734,14 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
                     )
                     plus_rmsd = _rmsd(plus[free], minimum[free])
                     minus_rmsd = _rmsd(minus[free], minimum[free])
-                    links = (plus_rmsd <= connect_rmsd) ^ (minus_rmsd <= connect_rmsd)
+                    links = connected_endpoints(minimum, plus, minus, box, tolerance)
                     novel = all(_rmsd(saddle[free], old) > connect_rmsd for old in found)
                     barrier = float(record["energy"] - min_energy)
                     record["barrier"] = barrier
                     record["rmsd_plus"] = plus_rmsd
                     record["rmsd_minus"] = minus_rmsd
+                    record["per_atom_max_plus"] = per_atom_max(plus, minimum, box)
+                    record["per_atom_max_minus"] = per_atom_max(minus, minimum, box)
                     record["endpoint_calls"] = int(plus_calls + minus_calls)
                     record["force_calls"] = climb + int(plus_calls + minus_calls)
                     record["reasons"] = []
