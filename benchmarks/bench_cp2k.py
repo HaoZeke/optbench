@@ -61,7 +61,6 @@ def _execute(template_id: str, start: str, seed: str) -> dict:
     spec = spec_for_start(ROOT, template_id, start, work=CACHE / "runs" / template_id.replace("/", "-"))
     spec["seed"] = str(seed)
     record = run_start(spec)
-    record.pop("x", None)
     record.pop("mode_axis", None)
     record["seed"] = str(seed)
     path = _sidecar(template_id, start, seed)

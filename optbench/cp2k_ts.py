@@ -699,6 +699,7 @@ def _judge(spec: dict, geometry: CountedGeometry, *, library_converged: bool, st
             "reasons": reasons,
             "energy": float(energy),
             "force_norm": force_norm,
+            "force": [float(value) for value in np.asarray(gradient, dtype=np.float64).reshape(-1)],
             "hessian_index": None if index is None else int(index),
             "cartesian_index": None if cartesian is None else int(cartesian),
             "rigid_modes_removed": int(removed),
@@ -821,7 +822,8 @@ def _spec_common(problem: dict, template: dict, *, cap: int, force_tol: float, b
 
 
 def _public(record: dict) -> dict:
-    return {key: value for key, value in record.items() if key not in {"x", "mode_axis"}}
+    """Drop the endpoint mode. The judged geometry and raw force stay."""
+    return {key: value for key, value in record.items() if key != "mode_axis"}
 
 
 def _write_dat(path: Path, text: str) -> None:
@@ -1043,6 +1045,14 @@ def _commit_saddle_outcome(spec: dict, outcome: dict, rng_state: dict, *, found:
         "problem": problem_id,
         "climb_calls": climb,
     }
+    if outcome.get("energy") is not None:
+        record["energy"] = float(outcome["energy"])
+    if outcome.get("force_norm") is not None:
+        record["force_norm"] = float(outcome["force_norm"])
+    if outcome.get("x") is not None:
+        record["x"] = [float(value) for value in outcome["x"]]
+    if outcome.get("force") is not None:
+        record["force"] = [float(value) for value in outcome["force"]]
     saved_point = None
     endpoint_calls = 0
     usable = (
