@@ -1,12 +1,12 @@
 # counter harness. One force call is one GMIN potential request to lennard_jones.
 # The binary was built from the Wales tarball named by commit. The pin is that sha256.
 # energy is the lowest quench at or below SLOPPYCONV. lowest_energy on each start is the lowest finite evaluation.
-# Serial basin-hopping. One replica at temperature 1. Quenches are L-BFGS with SLOPPYCONV 0.005, TIGHTCONV 0.001, MAXIT 600 and 500. STEP is 0.40 and ASTEP is 0.51. The container radius is 50 and the coordinates are translated to the origin, so the archived start is inside the container. CENTRE keeps the cluster at the origin. The random seed is 20261018 plus the start index. The failure cap is 2000000 harness calls. The problem file leaves max_force_calls unset. TARGET is the harness energy of codes/gmin/reference/lj150.points. EDIFF is 0.001. globalopt/lj150 states no energy window and no start count. The result is partial. EDIFF 0.001 is the lj38 tolerance, used here so a start can stop on the Cambridge point. The data file starts with MPI because the binary is the MPI build, and mpirun launches it, including the one-replica run. Starts are the numbered coords files in the website tarball: 200 for lj75, 100 for lj98 and lj150. The unnumbered coords file is not a start.
-force_calls 958458
+# Serial basin-hopping. One replica at temperature 1. Quenches are L-BFGS with SLOPPYCONV 0.005, TIGHTCONV 0.001, MAXIT 600 and 500. STEP is 0.40 and ASTEP is 0.51. The container radius is 50 and the coordinates are translated to the origin, so the archived start is inside the container. CENTRE keeps the cluster at the origin. The random seed is 20261018 plus the start index. The failure cap is 10000000 harness calls, which is globalopt/lj150 max_force_calls. TARGET is the harness energy of codes/gmin/reference/lj150.points. EDIFF is 0.001, the problem energy_above_minimum. The data file starts with MPI because the binary is the MPI build, and mpirun launches it, including the one-replica run. Starts are the numbered coords files in the website tarball: 200 for lj75, 100 for lj98 and lj150. The unnumbered coords file is not a start.
+force_calls 1573778
 force_calls_min 83295
-force_calls_max 1988433
-nfailed 23
-median 928918
+force_calls_max 6111359
+nfailed 1
+median 1129978
 code GMIN
 code_version 02aaf45245af
 commit 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f
@@ -15,16 +15,15 @@ template gmin/lj150-bh
 tuning default
 problem globalopt/lj150
 counter harness
-par2_mean 1658012.94
-wilson_low 0.678456169771
-wilson_high 0.841567341197
+par2_mean 1758040.62
+wilson_low 0.945513803821
+wilson_high 0.998232567936
 par2_median 1144120
 par2_median_low 958282
 par2_median_high 1368741.5
-v2_nfailed 23
-v2_successes 77
+v2_nfailed 1
+v2_successes 99
 n 100
 energy_min -893.310256992
-energy_max -881.530757271
-cap 2000000
-partial true
+energy_max -883.848254729
+cap 10000000
