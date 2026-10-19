@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+46 reproduced, 30 not reproduced, 75 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -120,7 +120,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj38/eon-qm | force_calls 3523 | 3514 | reproduced |
 | lj38/eon-sd | force_calls 4901 | 4901 | reproduced |
 | lj38/eon-sd-twopoint | force_calls 539 | 532 | reproduced |
-| lj38/newton-method | — | — | not rerun |
+| lj38/newton-method | force_calls 79 | 10000 | not reproduced; ase_newton_harness |
 | lj38/optim | force_calls 176 | 176 | reproduced |
 | lj38/pele-fire | force_calls 709 | 1264 | not reproduced; pele_fire |
 | lj38/pele-lbfgs-M1-maxstep0.1 | force_calls 287 | 286 | reproduced |
@@ -292,6 +292,12 @@ ASE 3.29 LBFGSLineSearch with the archived opt.py arguments (maxstep 0.2, alpha 
 ASE 3.29 PreconLBFGS with the archived opt.py setup (Exp A 3, maxstep 0.1, ASE fmax 0.01) scores 2605 against 2686, inside 10 percent. The script uses a tsase LJ cutoff of 35. This row uses the harness cutoff 40. report.sh counts a failure only when a written total_force_calls is at least 10000. The harness records 10 failures, each a Hessian index of 1 after the maximum force is under 0.01. The Wilson interval on 0 failures out of 1000 is about 0 to 3.83.
 
 - minimization/lj38/ase-preconlbfgs
+
+### ase_newton_harness
+
+ASE 3.29.0 is the latest release. The archived Newton loop is unmodified: LennardJones rc=35, central difference 0.0005 Bohr, maxstep 0.25, stop when the maximum per-atom force norm is below 0.01, xyz starts after center(100). The harness counts every calculator evaluation and stops at 10000. A non-converged iteration spends the force check, 228 finite-difference forces, and the step force, so the cap arrives before that stop. All 1000 starts fail at the cap. The archive's 79 is the Newton loop index, not that harness total.
+
+- minimization/lj38/newton-method
 
 ### pele_fire
 

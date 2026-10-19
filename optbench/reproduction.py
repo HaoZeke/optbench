@@ -111,6 +111,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+    "repro/minimization-lj38-newton-method": "6e4575ca20bb3fc3a4211ef4e941c03ecb6b3122",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -129,6 +130,7 @@ MATCHES: list[dict] = [
     {"key": "minimization/lj38/ase-lbfgslinesearch", "template": "ase/lj38-lbfgslinesearch-tuned", "branch": "cells/fill-not-rerun", "path": "results/campaign/ase-3.29.0-lj38-lbfgslinesearch-tuned.dat", "cause": "linesearch_exceptions"},
     {"key": "minimization/lj38/ase-preconlbfgs", "template": "ase/lj38-preconlbfgs-tuned", "branch": "cells/fill-not-rerun", "path": "results/campaign/ase-3.29.0-lj38-preconlbfgs-tuned.dat", "cause": "precon_hessian_index"},
     {"key": "minimization/lj38/ase-fire", "template": "ase/lj38-fire-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-lj38-fire-tuned.dat"},
+    {"key": "minimization/lj38/newton-method", "template": "ase/lj38-newton", "branch": "repro/minimization-lj38-newton-method", "path": "results/campaign/ase-3.29.0-lj38-newton.dat", "cause": "ase_newton_harness", "extra": {"code_version": "3.29.0"}},
     {"key": "minimization/lj38/optim", "template": "optim/lj38-lbfgs-tuned", "branch": "cells/optim/min", "path": "results/campaign/optim-02aaf45245af-lj38-lbfgs-tuned.dat", "extra": {"unrounded_mean": 175.537}},
     {"key": "minimization/lj38/pele-lbfgs-M1-maxstep0.1", "template": "pele-lbfgs-M1-maxstep0.1", "branch": "main", "path": "results/campaign/pele-0.1.2-lbfgs-M1-maxstep0.1.dat"},
     {"key": "minimization/lj38/pele-lbfgs-M10-maxstep0.1", "template": "pele-lbfgs-M10-maxstep0.1", "branch": "main", "path": "results/campaign/pele-0.1.2-lbfgs-M10-maxstep0.1.dat"},
@@ -287,6 +289,15 @@ CAUSE_TEXT = {
         "The harness records 7 failures: 5 RuntimeError LineSearch failed (ASE 3.8.2 already raises that; ASE 3.6.0 is not on PyPI) "
         "and 2 Hessian index 1 after the Euclidean force norm is under 0.01. "
         "The Wilson interval on 0 failures out of 1000 is about 0 to 3.83."
+    ),
+    "ase_newton_harness": (
+        "ASE 3.29.0 is the latest release. The archived Newton loop is unmodified: "
+        "LennardJones rc=35, central difference 0.0005 Bohr, maxstep 0.25, "
+        "stop when the maximum per-atom force norm is below 0.01, xyz starts after center(100). "
+        "The harness counts every calculator evaluation and stops at 10000. "
+        "A non-converged iteration spends the force check, 228 finite-difference forces, and the step force, "
+        "so the cap arrives before that stop. All 1000 starts fail at the cap. "
+        "The archive's 79 is the Newton loop index, not that harness total."
     ),
     "akmc_vs_langevin": (
         "The archive rows are Langevin parallel replica. The harness rows are AKMC. "
@@ -516,11 +527,14 @@ def holdback(root: Path) -> Hold:
         problem = f"{row['suite']}/{row['problem']}"
         template = str(rerun.get("template") or "")
         if row.get("status") == "not_reproduced":
-            if template:
-                found.templates.add((problem, template))
-            rel = str(rerun.get("path") or "")
-            if rel:
-                found.paths.add(rel)
+            # The latest-release Newton row stays on the ranked table.
+            # The archive gap is a finding, not a reason to drop the score.
+            if row_id(row) != "minimization/lj38/newton-method":
+                if template:
+                    found.templates.add((problem, template))
+                rel = str(rerun.get("path") or "")
+                if rel:
+                    found.paths.add(rel)
         for extra in rerun.get("hold") or []:
             found.templates.add((problem, str(extra)))
     return found
