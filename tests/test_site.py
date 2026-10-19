@@ -10,6 +10,40 @@ from optbench.site_check import check_site
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def test_ranked_table_omits_the_constant_current_column():
+    from optbench.board import render_problem_section
+
+    row = {
+        "template": "geomoptjl/lj38-lbfgs",
+        "code": "GeometryOptimization.jl",
+        "code_version": "0.1.6",
+        "commit": "5b145886c190",
+        "source": "campaign",
+        "current": True,
+        "par2_mean": 450.659,
+        "success_rate": 0.997,
+        "wilson_low": 0.99,
+        "wilson_high": 1,
+        "median_calls": 372.5,
+        "mean_calls": 391.521,
+        "failures": {},
+        "n": 1000,
+    }
+    fields = [name for name, _ in ranked_cells(row, False)]
+    assert "current" not in fields
+    assert "par2_mean" in fields
+    problem = {
+        "id": "minimization/lj38",
+        "title": "LJ38",
+        "ranked": [row],
+    }
+    html = render_problem_section(problem, set())
+    assert 'data-field="current"' not in html
+    assert "<th>Current</th>" not in html
+    assert 'data-field="par2_mean">450.659<' in html
+    assert "Only the newest full version of a template is in this table." in html
+
+
 def test_nav_pages_have_titles_and_the_suites_fold_under_archive():
     org = ROOT / "docs" / "orgmode"
     for name in ("index.org", "run.org", "archive.org", "codes.org", "board.org"):

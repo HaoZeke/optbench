@@ -652,6 +652,59 @@ The number is written only after the run finishes under the problem rule.
    <li>pt-island: partial.</li>
    <li>sella-lj38: no per-start record.</li>
    </ul>
+   <h3>GeometryOptimization.jl</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization</td>
+   <td>0.1.6</td>
+   <td>5b145886c190</td>
+   <td><a href="https://github.com/JuliaMolSim/GeometryOptimization.jl">https://github.com/JuliaMolSim/GeometryOptimization.jl</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="minimization/lj38" data-template="geomoptjl/lj38-lbfgs">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="template">geomoptjl/lj38-lbfgs</td>
+   <td data-field="version">GeometryOptimization.jl 0.1.6</td>
+   <td data-field="commit">5b145886c190</td>
+   <td data-field="par2_mean">450.659</td>
+   <td data-field="mean_calls">391.521</td>
+   <td data-field="median_calls">372</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-template="geomoptjl/noise-lbfgs-s0">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="template">geomoptjl/noise-lbfgs-s0</td>
+   <td data-field="version">GeometryOptimization.jl 0.1.6</td>
+   <td data-field="commit">5b145886c190</td>
+   <td data-field="par2_mean">450.659</td>
+   <td data-field="mean_calls">391.521</td>
+   <td data-field="median_calls">372</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-template="geomoptjl/morse-lbfgs">
+   <td>Morse bulk</td>
+   <td data-field="template">geomoptjl/morse-lbfgs</td>
+   <td data-field="version">GeometryOptimization.jl 0.1.6</td>
+   <td data-field="commit">5b145886c190</td>
+   <td data-field="par2_mean">46.28</td>
+   <td data-field="mean_calls">46.28</td>
+   <td data-field="median_calls">47</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table></div>
+   <p>No full ranked run</p><ul>
+   <li>Lennard-Jones 38 clusters: partial.</li>
+   <li>Lennard-Jones 38 clusters with Gaussian force noise: partial.</li>
+   <li>Morse bulk: partial.</li>
+   </ul>
    <h3>pARTn</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
