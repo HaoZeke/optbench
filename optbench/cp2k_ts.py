@@ -44,7 +44,7 @@ import numpy as np
 
 from .connection import connected_endpoints, link_tolerance, per_atom_max
 from .counter import ForceCallCap, HarnessCounter
-from .failures import FAILURES, classify_failure, failure_tally
+from .failures import FAILURES, classify_outcome, failure_tally
 from .rgsaddle_minmode import (
     _SADDLE_CLIMB_OVERSHOOT,
     _SADDLE_ENDPOINT_BUDGET,
@@ -76,12 +76,6 @@ _COMMIT = "702cc3d81422b92864ecdd7f544c21c56c04adca"
 
 class StopAtForce(Exception):
     """The center is at the harness force stop. The process can end."""
-
-
-def _outcome(reasons: list[str]) -> tuple[bool, str | None]:
-    """Pass the reason list to the central classifier. This runner does not relabel."""
-    failure = classify_failure(reasons)
-    return failure is None, failure
 
 
 class Stalled(Exception):
@@ -635,12 +629,17 @@ def _judge(spec: dict, geometry: CountedGeometry, *, library_converged: bool, st
     point = None if geometry.center is None else geometry.free_of(geometry.center)
     if point is None or status == "error" and geometry.calls == 0:
         picked = [line.strip() for line in detail.splitlines() if "not yet" in line or "[ABORT]" in line]
+        failure = classify_outcome(
+            calls=float(geometry.calls),
+            cap=cap,
+            process_failed=True,
+        )
         base.update(
             {
                 "force_calls": int(geometry.calls),
-                "success": False,
-                "failure": "crash",
-                "reasons": ["crash"],
+                "success": failure is None,
+                "failure": failure,
+                "reasons": ["cap"] if failure == "cap" else ["crash"],
                 "error": (picked[-1] if picked else detail[-500:])[:500],
                 "energy": None,
                 "force_norm": None,
@@ -661,12 +660,14 @@ def _judge(spec: dict, geometry: CountedGeometry, *, library_converged: bool, st
     lowest = None
     removed = 0
     cartesian = None
-    if geometry.calls >= cap or status == "cap":
-        reasons.append("cap")
+    force_tol = float(spec["force_tol"])
     finite = math.isfinite(force_norm) and math.isfinite(float(energy))
-    if not finite or force_norm > float(spec["force_tol"]) + 1e-10:
-        reasons.append("force_norm" if finite else "divergence")
-    elif geometry.calls < cap and bool(spec.get("hessian", True)):
+    at_stop = finite and force_norm <= force_tol
+    if geometry.calls >= cap:
+        reasons.append("cap")
+    if finite and not at_stop:
+        reasons.append("force_norm")
+    if at_stop and geometry.calls < cap and bool(spec.get("hessian", True)):
         raw_eigenvalues, vectors = _hessian_spectrum(geometry, point)
         cartesian = negative_index(raw_eigenvalues, 1e-6)
         if spec["project_rigid"]:
@@ -690,12 +691,22 @@ def _judge(spec: dict, geometry: CountedGeometry, *, library_converged: bool, st
         reasons.extend(reason for reason in judged["reasons"] if reason not in {"rmsd", "energy"})
         base["expected_index"] = judged["expected_index"]
         base["rmsd"] = float(judged["rmsd"])
-    if status == "stall" and "cap" not in reasons:
-        reasons.append("divergence")
-    if status == "error" and "cap" not in reasons and geometry.calls < cap and not geometry.stopped_on_l2:
+    process_failed = status == "error" and not geometry.stopped_on_l2
+    if process_failed:
         reasons.append("crash")
     reasons = list(dict.fromkeys(reasons))
-    success, failure = _outcome(reasons)
+    failure = classify_outcome(
+        energy=float(energy),
+        geometry=point,
+        force=force_norm,
+        calls=float(geometry.calls),
+        cap=cap,
+        force_tol=force_tol,
+        process_failed=process_failed,
+        hessian_index=None if index is None else int(index),
+        expected_index=base.get("expected_index"),
+    )
+    success = failure is None
     base.update(
         {
             "force_calls": int(geometry.calls),
@@ -1066,7 +1077,7 @@ def _commit_saddle_outcome(spec: dict, outcome: dict, rng_state: dict, *, found:
         outcome.get("x") is not None
         and bool(outcome.get("converged"))
         and outcome.get("hessian_index") == 1
-        and float(outcome.get("force_norm") or 1e9) <= force_tol + 1e-10
+        and float(outcome.get("force_norm") or 1e9) <= force_tol
         and climb < CLIMB_CALLS
     )
     if usable:
@@ -1120,14 +1131,45 @@ def _commit_saddle_outcome(spec: dict, outcome: dict, rng_state: dict, *, found:
     elif outcome.get("failure") == "crash" or outcome.get("x") is None:
         record["reasons"] = ["crash"]
     elif climb >= CLIMB_CALLS:
-        record["reasons"] = ["cap", "force_norm"]
+        # 1000 calls is the climb budget. The harness cap is the whole search.
+        record["reasons"] = [reason for reason in (outcome.get("reasons") or []) if reason != "cap"]
     else:
-        record["reasons"] = [str(item) for item in (outcome.get("reasons") or ["force_norm"])]
+        record["reasons"] = [str(item) for item in (outcome.get("reasons") or ["force_norm"]) if item != "cap"]
     record["force_calls"] = climb + endpoint_calls
     record["endpoint_calls"] = endpoint_calls
     record["verify_calls"] = int(outcome.get("verify_calls") or 0)
-    success, failure = _outcome(record["reasons"])
-    record["success"] = success
+    if record["force_calls"] >= SEARCH_CAP and "cap" not in record["reasons"]:
+        record["reasons"].append("cap")
+    names = set(record["reasons"])
+    hessian = record.get("hessian_index")
+    if hessian is None:
+        hessian = outcome.get("hessian_index")
+    observed = record.get("force_norm")
+    if observed is None:
+        observed = outcome.get("force_norm")
+    energy = record.get("energy")
+    if energy is None:
+        energy = outcome.get("energy")
+    geometry = record.get("x")
+    if geometry is None:
+        geometry = record.get("saddle_x")
+    if geometry is None:
+        geometry = outcome.get("x")
+    failure = classify_outcome(
+        energy=None if energy is None else float(energy),
+        geometry=geometry,
+        force=None if observed is None else float(observed),
+        calls=float(record["force_calls"]),
+        cap=SEARCH_CAP,
+        force_tol=force_tol,
+        hessian_index=None if hessian is None else int(hessian),
+        expected_index=1 if hessian is not None else None,
+        stationary_rejected=bool(names & {"not_connected", "duplicate", "barrier", "hessian_index"}),
+        process_failed="crash" in names,
+        force_above=True if "force_norm" in names and observed is None else None,
+        unmet=climb >= CLIMB_CALLS and record["force_calls"] < SEARCH_CAP and "crash" not in names,
+    )
+    record["success"] = failure is None
     record["failure"] = failure
     all_records.append(record)
     stored = dict(record)

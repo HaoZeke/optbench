@@ -13,9 +13,12 @@ import pytest
 from optbench.campaign import _check_stop, list_templates, resolve_problem
 from optbench.cp2k_ts import (
     BOHR_TO_ANG,
+    CLIMB_CALLS,
     FORCE_SCALE,
     SEARCH_CAP,
     CountedGeometry,
+    _commit_saddle_outcome,
+    _judge,
     is_dimer_image,
     pad_header,
     render_input,
@@ -322,3 +325,237 @@ def test_asv_classes_import_and_follow_the_full_flag(monkeypatch):
     assert len(bench.Cp2kPtDimerCgTuned.params[1]) == 49
     monkeypatch.delenv("OPTBENCH_ASV_FULL", raising=False)
     importlib.reload(bench)
+
+
+def _counted(force: float, *, calls: int, cap: int = 10000, energy: float = -1.5) -> CountedGeometry:
+    positions = np.zeros((1, 3))
+
+    def evaluate(pos, cell):
+        grad = np.zeros_like(pos)
+        grad[0, 0] = force
+        return energy, grad
+
+    geometry = CountedGeometry(
+        evaluate,
+        positions,
+        np.array([False]),
+        np.zeros(3),
+        cap=cap,
+        force_tol=0.001,
+        force_match="library",
+        dr_ang=0.0,
+    )
+    geometry.center = positions.copy()
+    geometry.counter.calls = calls
+    return geometry
+
+
+def _judge_spec(**overrides) -> dict:
+    spec = {
+        "cap": 10000,
+        "name": "0001",
+        "seed": "0",
+        "code": "CP2K",
+        "code_version": "2026.2",
+        "commit": COMMIT,
+        "tuning": "default",
+        "template": "cp2k/lj38-dimer-cg",
+        "problem": "tsopt/LJ38",
+        "force_tol": 0.001,
+        "hessian": False,
+        "project_rigid": False,
+        "task": "dimer",
+    }
+    spec.update(overrides)
+    return spec
+
+
+def test_clean_stop_above_the_force_threshold_is_not_converged():
+    record = _judge(
+        _judge_spec(),
+        _counted(1.12, calls=1010),
+        library_converged=False,
+        status="exit",
+        detail="",
+    )
+    assert record["success"] is False
+    assert record["failure"] == "not_converged"
+    assert record["force_norm"] == pytest.approx(1.12)
+    assert record["energy"] == pytest.approx(-1.5)
+    assert "force_norm" in record["reasons"]
+    assert "divergence" not in record["reasons"]
+    assert "cap" not in record["reasons"]
+
+
+def test_force_equal_to_the_tolerance_is_not_above_it():
+    record = _judge(
+        _judge_spec(),
+        _counted(0.001, calls=200),
+        library_converged=True,
+        status="exit",
+        detail="",
+    )
+    assert record["failure"] is None
+    assert record["success"] is True
+    assert "force_norm" not in record["reasons"]
+
+
+def test_harness_cap_wins_over_a_high_force():
+    record = _judge(
+        _judge_spec(),
+        _counted(1.0, calls=10000),
+        library_converged=False,
+        status="cap",
+        detail="",
+    )
+    assert record["failure"] == "cap"
+    assert record["success"] is False
+
+
+def test_finite_stall_above_the_stop_is_not_divergence():
+    record = _judge(
+        _judge_spec(),
+        _counted(0.4, calls=305),
+        library_converged=False,
+        status="stall",
+        detail="",
+    )
+    assert record["failure"] == "not_converged"
+    assert "divergence" not in record["reasons"]
+
+
+def test_nonfinite_energy_is_divergence():
+    record = _judge(
+        _judge_spec(),
+        _counted(0.1, calls=10, energy=float("nan")),
+        library_converged=False,
+        status="exit",
+        detail="",
+    )
+    assert record["failure"] == "divergence"
+
+
+def test_process_error_under_the_cap_is_a_crash():
+    record = _judge(
+        _judge_spec(),
+        _counted(0.0002, calls=4),
+        library_converged=False,
+        status="error",
+        detail="CPABORT something broke",
+    )
+    assert record["failure"] == "crash"
+    assert record["reasons"] == ["crash"]
+
+
+def test_refused_call_at_the_cap_with_no_center_is_cap():
+    geometry = _counted(1.0, calls=10000)
+    geometry.center = None
+    record = _judge(_judge_spec(), geometry, library_converged=False, status="error", detail="force-call cap")
+    assert record["failure"] == "cap"
+    assert record["reasons"] == ["cap"]
+
+
+def _saddle_commit(tmp_path, outcome: dict):
+    positions = np.zeros((2, 3))
+    fixed = np.array([True, False])
+    cell = np.ones(3)
+    template = {"id": "cp2k/saddle-dimer-cg", "code": "CP2K", "code_version": "2026.2", "commit": COMMIT}
+    base = {
+        "code": "CP2K",
+        "code_version": "2026.2",
+        "commit": COMMIT,
+        "tuning": "default",
+        "potential": {},
+        "force_tol": 0.001,
+    }
+    spec = {"name": "rep1-search1"}
+    found = []
+    records = []
+    connected, _refused, failure = _commit_saddle_outcome(
+        spec,
+        outcome,
+        {},
+        found=found,
+        all_records=records,
+        connected=0,
+        positions=positions,
+        fixed=fixed,
+        cell=cell,
+        minimum=np.zeros(3),
+        min_energy=-2.0,
+        force_tol=0.001,
+        connect_rmsd=0.5,
+        tolerance=0.1,
+        barrier_max=1.5,
+        base=base,
+        partial_path=tmp_path / "partial.jsonl",
+        output=tmp_path / "campaign.dat",
+        template=template,
+        problem_id="saddle-search/pt-island",
+    )
+    return connected, failure, records[0]
+
+
+def test_climb_budget_is_not_the_harness_cap(tmp_path):
+    _connected, failure, record = _saddle_commit(
+        tmp_path,
+        {
+            "force_calls": CLIMB_CALLS,
+            "reasons": ["cap", "force_norm"],
+            "converged": False,
+            "hessian_index": None,
+            "energy": -1.0,
+            "force_norm": 1.2,
+            "x": [0.1, 0.0, 0.0],
+            "force": [1.2, 0.0, 0.0],
+            "failure": "cap",
+            "verify_calls": 0,
+        },
+    )
+    assert failure == "not_converged"
+    assert record["success"] is False
+    assert record["failure"] == "not_converged"
+    assert "cap" not in record["reasons"]
+    assert record["force_calls"] == CLIMB_CALLS
+
+
+def test_wrong_index_at_the_stop_is_wrong_stationary(tmp_path):
+    _connected, failure, record = _saddle_commit(
+        tmp_path,
+        {
+            "force_calls": 400,
+            "reasons": ["hessian_index"],
+            "converged": True,
+            "hessian_index": 0,
+            "energy": -1.0,
+            "force_norm": 0.0004,
+            "x": [0.2, 0.0, 0.0],
+            "force": [0.0004, 0.0, 0.0],
+            "failure": "wrong_stationary",
+            "verify_calls": 12,
+        },
+    )
+    assert failure == "wrong_stationary"
+    assert record["success"] is False
+    assert record["force_calls"] < SEARCH_CAP
+
+
+def test_saddle_search_is_cap_only_at_the_harness_cap(tmp_path):
+    _connected, failure, record = _saddle_commit(
+        tmp_path,
+        {
+            "force_calls": SEARCH_CAP,
+            "reasons": ["force_norm"],
+            "converged": False,
+            "hessian_index": None,
+            "energy": -1.0,
+            "force_norm": 0.5,
+            "x": [0.3, 0.0, 0.0],
+            "force": [0.5, 0.0, 0.0],
+            "failure": "not_converged",
+            "verify_calls": 0,
+        },
+    )
+    assert failure == "cap"
+    assert record["failure"] == "cap"
+    assert record["force_calls"] == SEARCH_CAP
