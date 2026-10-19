@@ -11,7 +11,7 @@ kind = "de-pt-mode"
 kernel = "morse_shift"
 asv_class = "EonSvnDePtLanczosImproved"
 note = '''
-Lanczos from the interpolated Pt-island end points. max_iterations 10, tolerance 0.05, quit_early true. max_energy 1e9. LBFGS max_iterations 1000, converged_force 0.001. The harness kernel is r2549 Morse::force: cutoff 9.5, pair energy shifted to zero at the cutoff, minimum image on the box diagonal. D 0.7102, alpha 1.6047, r0 2.897.
+Lanczos from the interpolated Pt-island end points. max_iterations 10, tolerance 0.05, quit_early true. max_energy 1e9. LBFGS max_iterations 1000, converged_force 0.001. finite_difference is 0.01, the client default. The 2014 ini leaves that key unset. The Krylov matrix has max_iterations columns and the loop stops when the iteration index is at least max_iterations, the 29 Aug 2013 test. r2186 stops one iteration earlier. The harness kernel is r2549 Morse::force: cutoff 9.5, pair energy shifted to zero at the cutoff, minimum image on the box diagonal. D 0.7102, alpha 1.6047, r0 2.897.
 '''
 seeds = [1]
 asv_timeout = 900
@@ -19,7 +19,7 @@ budget_seconds = 600
 
 [ini.Main]
 job = "saddle_search"
-finite_difference = 0.001
+finite_difference = 0.01
 random_seed = 1
 
 [ini.Potential]

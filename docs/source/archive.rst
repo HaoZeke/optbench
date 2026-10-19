@@ -932,7 +932,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="double-ended-saddle-search-pt-island-eon-lanczos-improved">
    <td class="num">5</td>
-   <td class="text">eon-lanczos-improved · not reproduced</td>
+   <td class="text">eon-lanczos-improved</td>
    <td class="text">Eon r2156</td>
    <td class="num">222</td>
    <td class="num">2039</td>
