@@ -9,6 +9,9 @@ is one ``pes.evaluate``. OPTIM's own counter is not that score.
 archived odata and coords-xyz, and the score is OPTIM's energy+gradient
 counter. That tarball is not the snapshot pin.
 
+``optim/lj38-hef-stock`` is the current tarball with stock ``BFGSTS``.
+The score is the same native counter, recorded as ``harness``.
+
 ``optim/unhooked`` and every other template that is not minimization
 L-BFGS raise before a file is written. Noise, NEB, and PATHSAMPLE are
 not this runner.
@@ -540,8 +543,22 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
     from optbench.campaign import load_template
 
     preview = load_template(Path(root), template_name)
-    if str((preview.get("optim") or {}).get("method", "")) == "hef-cd":
+    method = str((preview.get("optim") or {}).get("method", ""))
+    if method == "hef-cd":
         return _run_hef_cd(root, problem_name, template_name, output=output, workers=workers)
+    if method == "hef-stock":
+        from optbench.campaign import resolve_problem
+
+        from .optim_stock import run_stock
+
+        root = Path(root)
+        problem = resolve_problem(root, problem_name)
+        stated = preview.get("problem")
+        if stated and stated != problem_name:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        if preview.get("engine") != ENGINE:
+            raise ValueError(f"{template_name} engine is {preview['engine']}")
+        return run_stock(root, problem, preview, output, workers)
     reason = available()
     if reason:
         raise RuntimeError(reason)
