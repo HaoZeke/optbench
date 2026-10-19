@@ -1157,9 +1157,8 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/lj150">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="13">No full harness row.</td></tr>
+   <tr><td data-field="template">gmin/lj150-bh</td><td data-field="version">GMIN 02aaf45245af</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">1.75804e+06</td><td data-field="success_rate">0.99</td><td data-field="wilson_low">0.945514</td><td data-field="wilson_high">0.998233</td><td data-field="median_calls">1.14412e+06</td><td data-field="mean_calls">1.65804e+06</td><td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
-   <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/globalopt.html#lj150">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="lj150-legacy">
    <h3>Legacy 2014 archive</h3>
@@ -1218,9 +1217,8 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/lj75">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="13">No full harness row.</td></tr>
+   <tr><td data-field="template">gmin/lj75-bhpt</td><td data-field="version">GMIN 02aaf45245af</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">1.96655e+06</td><td data-field="success_rate">0.02</td><td data-field="wilson_low">0.00780443</td><td data-field="wilson_high">0.0502871</td><td data-field="median_calls">1e+06</td><td data-field="mean_calls">986545</td><td data-field="failures">crash 0, divergence 0, cap 196, wrong_stationary 0</td><td data-field="n">200</td></tr>
    </tbody></table></div>
-   <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/globalopt.html#lj75">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="lj75-legacy">
    <h3>Legacy 2014 archive</h3>
@@ -1263,7 +1261,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
-   <p class="bench-gaps">Partial rows stay off the ranked table.</p>
+   <p class="bench-gaps">No committed harness run.</p>
    <p><a href="generated/suites/globalopt.html#lj98">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="lj98-legacy">
    <h3>Legacy 2014 archive</h3>
