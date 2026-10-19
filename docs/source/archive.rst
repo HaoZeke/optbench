@@ -1701,7 +1701,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="tsopt-lj38-optim-cd">
    <td class="num">4</td>
-   <td class="text">optim_cd</td>
+   <td class="text">optim_cd · not reproduced</td>
    <td class="text">OPTIM</td>
    <td class="num">2.23000e+02</td>
    <td class="num">7.7200e+02</td>

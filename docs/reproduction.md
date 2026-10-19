@@ -2,11 +2,13 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-47 reproduced, 29 not reproduced, 75 not rerun. 151 archive rows.
+46 reproduced, 30 not reproduced, 75 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
 OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.
+
+OPTIM LJ38 stock hybrid eigenvector following: SVNREV df8da599267534fbe43a250e578f7396a7946311. The unrounded mean of OPTIM energy+gradient calls is 94.575, and round gives 95 against the archived 223.
 
 EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.
 
@@ -202,7 +204,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | LJ38/eon-dimer | force_calls 528 | 523 | reproduced |
 | LJ38/eon-lanczos | force_calls 321 | 293 | reproduced |
 | LJ38/eon-lanczos-improved | force_calls 237 | 271 | not reproduced; improved_unset |
-| LJ38/optim_cd | force_calls 223 | 223 | reproduced; residual |
+| LJ38/optim_cd | force_calls 223 | 95 | not reproduced; optim_lj38_stock |
 | LJ38/optim_ffd | force_calls 145 | 489 | not reproduced; optim_lj38_ts |
 | LJ38/pele_cd | force_calls 254 | 263.52 | reproduced; residual |
 | LJ38/pele_ffd | force_calls 192 | 207.51 | reproduced; residual |
@@ -217,7 +219,6 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 ## Residuals inside the band
 
-- tsopt/LJ38/optim_cd: wales-27058 with the archived odata (BFGSTS 45 14 16 0.68 100, BFGSSTEPS 100, BFGSCONV 9.36585D-05, NOHESS). USEDIAG is unset, so NSECDIAG stays 1: central differences on energies. Starts are coords-xyz. The score is OPTIM's energy+gradient calls. round(mean) is 223 and the unrounded mean is 223.15. The median is 182.5, and round gives 182 against the archived 183.
 - tsopt/LJ38/pele_cd: Inside the 10% band (263.52 vs 254). The same xyz-versus-con starting set as ts-ffd. findTS_local.py for the CD row does not pass orthogZeroEigs; the harness template sets orthog translations-rotations. The paper baseline is this 2014-stop mean, not the harness-stop mean 335.06.
 - tsopt/LJ38/pele_ffd: Inside the 10% band (207.51 vs 192). Archive run.sh unpacks coords-xyz.tar.gz (200 xyz, max pair about 4.4). The harness problem points at coords-con.tar.gz (max pair about 37). Kabsch RMS is about 6.33, so the sets are not the same geometry. Neither set has a pair past cutoff 40, and both drivers use RMS tolerance 1e-3/sqrt(114). The 8% residual is the starting set. The paper baseline is this 2014-stop mean, not the harness-stop mean 254.48.
 
@@ -345,6 +346,12 @@ The harness link and novelty test uses Cartesian RMSD 0.5 over the full island. 
 The classic dimer campaign (improved false, the 2014 key) has fraction_connected 0.692 against 0.746, inside 10 percent, but force calls 6.97e6 against 3.78e6 and unique saddles 91.7 against 109.2. The archive standard error on the force calls is 5.27e5. This eOn AKMC counter is not the harness RMSD link test.
 
 - saddle-search/pt-island/eon-dimer
+
+### optim_lj38_stock
+
+Current Wales svn.tar.bz2 (2026-10-19), sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31, SVNREV df8da599267534fbe43a250e578f7396a7946311. Stock BFGSTS, so NSECDIAG stays 2. BFGSCONV is the archive RMS stop and BFGSSTEPS is the problem cap. Starts are coords-xyz. The score is OPTIM's energy+gradient calls. The rounded mean is 95 and the unrounded mean is 94.575, against the archived 223.
+
+- tsopt/LJ38/optim_cd
 
 ### optim_lj38_ts
 

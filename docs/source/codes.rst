@@ -1073,6 +1073,17 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 87</td>
    <td data-field="n">100</td>
    </tr>
+   <tr data-problem="tsopt/LJ38" data-template="optim/lj38-hef-stock">
+   <td>LJ38</td>
+   <td data-field="template">optim/lj38-hef-stock</td>
+   <td data-field="version">optim df8da599267534fbe43a250e578f7396a7946311</td>
+   <td data-field="commit">738fafe3df5a</td>
+   <td data-field="par2_mean">94.575</td>
+   <td data-field="mean_calls">94.575</td>
+   <td data-field="median_calls">82.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
    <li>LJ38: not yet on the harness counter.</li>
