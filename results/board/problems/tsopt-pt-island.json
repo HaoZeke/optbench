@@ -376,6 +376,7 @@
       "eon-svn/ts-pt-lanczos-smooth r2549 campaign r2549": 0.9491660067364305,
       "geometric/pt-island-ts-fd 1.1.1 default campaign f657e69": 0.12286938598529848,
       "geometric/pt-island-ts-harness 1.1.1 harness campaign f657e69": 0.12286938598529848,
+      "partn/ts-pt 1.1.0 default campaign 9b75351": 0.5314100943864157,
       "rgsaddle/pt-dimer-fire 0.2.2 default campaign, asv c0db2b8": 0.0,
       "rgsaddle/pt-dimer-fire-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.1382280592334608,
       "rgsaddle/pt-dimer-lbfgs 0.2.2 default campaign, asv c0db2b8": 0.06757816229191416,
@@ -385,7 +386,8 @@
       "rgsaddle/pt-lanczos 0.2.2 default campaign, asv c0db2b8": 0.1351563245838283,
       "rgsaddle/pt-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.24266703732096445,
       "sella/pt-island-ts-default 2.6.0 default campaign, asv 6cfb60c": 1.2010482480062925,
-      "sella/pt-island-ts-tuned 2.6.0 tuned campaign, asv 6cfb60c": 1.0536049848239342
+      "sella/pt-island-ts-tuned 2.6.0 tuned campaign, asv 6cfb60c": 1.0536049848239342,
+      "tsase/dimer-pt 1.0 default campaign 98aac60": 0.15973020178088798
     },
     "rho": {
       "eon-client/ts-pt-dimer 3.5.0 campaign 4d8b34b": [
@@ -443,6 +445,13 @@
         0.0,
         0.0,
         0.8163265306122449
+      ],
+      "partn/ts-pt 1.1.0 default campaign 9b75351": [
+        0.0,
+        0.02040816326530612,
+        0.5102040816326531,
+        0.7755102040816326,
+        0.9183673469387755
       ],
       "rgsaddle/pt-dimer-fire 0.2.2 default campaign, asv c0db2b8": [
         0.0,
@@ -513,6 +522,13 @@
         1.0,
         1.0,
         1.0
+      ],
+      "tsase/dimer-pt 1.0 default campaign 98aac60": [
+        0.0,
+        0.0,
+        0.0,
+        0.16326530612244897,
+        0.7346938775510204
       ]
     },
     "solved": {
@@ -524,6 +540,7 @@
       "eon-svn/ts-pt-lanczos-smooth r2549 campaign r2549": 1.0,
       "geometric/pt-island-ts-fd 1.1.1 default campaign f657e69": 1.0,
       "geometric/pt-island-ts-harness 1.1.1 harness campaign f657e69": 1.0,
+      "partn/ts-pt 1.1.0 default campaign 9b75351": 0.9183673469387755,
       "rgsaddle/pt-dimer-fire 0.2.2 default campaign, asv c0db2b8": 0.9795918367346939,
       "rgsaddle/pt-dimer-fire-tuned 0.2.2 tuned campaign, asv c0db2b8": 1.0,
       "rgsaddle/pt-dimer-lbfgs 0.2.2 default campaign, asv c0db2b8": 0.42857142857142855,
@@ -533,7 +550,8 @@
       "rgsaddle/pt-lanczos 0.2.2 default campaign, asv c0db2b8": 0.5306122448979592,
       "rgsaddle/pt-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.5102040816326531,
       "sella/pt-island-ts-default 2.6.0 default campaign, asv 6cfb60c": 1.0,
-      "sella/pt-island-ts-tuned 2.6.0 tuned campaign, asv 6cfb60c": 1.0
+      "sella/pt-island-ts-tuned 2.6.0 tuned campaign, asv 6cfb60c": 1.0,
+      "tsase/dimer-pt 1.0 default campaign 98aac60": 1.0
     },
     "taus": [
       1.0,
@@ -1128,6 +1146,96 @@
       "tuning": "tuned",
       "wilson_high": 1.0,
       "wilson_low": 0.9273021807795035
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "tsase",
+      "code_version": "1.0",
+      "commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "tsase-1.0-tsopt-pt-island--tsase-dimer-pt",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 49,
+      "history": false,
+      "max_calls": 3455.0,
+      "mean_calls": 1144.3061224489795,
+      "mean_per_image": null,
+      "median": 892.0,
+      "median_calls": 892.0,
+      "median_high": 1032.0,
+      "median_low": 856.0,
+      "median_per_image": null,
+      "min_calls": 450.0,
+      "n": 49,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 1144.3061224489795,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/tsase-1.0-tsopt-pt-island--tsase-dimer-pt.dat",
+      "problem": "tsopt/pt-island",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "tsase/dimer-pt",
+      "tuning": "default",
+      "wilson_high": 1.0,
+      "wilson_low": 0.9273021807795035
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "artn",
+      "code_version": "1.1.0",
+      "commit": "9b753517c6c0eccae51425b83eb4e04ef554550b",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "artn-1.1.0-tsopt-pt-island--partn-ts-pt",
+      "failures": {
+        "cap": 0,
+        "crash": 4,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 49,
+      "history": false,
+      "max_calls": 1072.0,
+      "mean_calls": 380.2244897959184,
+      "mean_per_image": null,
+      "median": 265.0,
+      "median_calls": 265.0,
+      "median_high": 489.0,
+      "median_low": 224.0,
+      "median_per_image": null,
+      "min_calls": 102.0,
+      "n": 49,
+      "nfailed": 4,
+      "note": "starts.jsonl",
+      "par2_mean": 1970.2244897959183,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/artn-1.1.0-tsopt-pt-island--partn-ts-pt.dat",
+      "problem": "tsopt/pt-island",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 0.9183673469387755,
+      "template": "partn/ts-pt",
+      "tuning": "default",
+      "wilson_high": 0.9677971823322362,
+      "wilson_low": 0.808108724034287
     },
     {
       "asv_commit": "a914203cbb891442232aea2c92f960df9a48dc1d",

@@ -1,0 +1,20 @@
+# counter harness. COMPASS calls the ASE calculator, and that calculator calls pes.evaluate.
+# forcetol, minimize_fmax, and both target distances are the problem force stop.
+# The cell is fixed. COMPASS would otherwise treat any periodic boundary as a variable cell.
+# A success is under the cap, at the force stop, and Hessian index 1.
+force_calls 3473
+force_calls_min 1295
+force_calls_max 9498
+force_calls_median 2265
+successes 41
+nfailed 10
+n 51
+transition_states 41
+code compass
+code_version 1.0.0
+commit 22da7bd5f69cbd64d59853c8f8d7f8d44c2d18df
+algorithm COMPASS
+template compass/sqnm
+problem double-ended-saddle-search/lj38_2ts_separation
+tuning default
+counter harness
