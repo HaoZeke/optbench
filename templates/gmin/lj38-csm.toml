@@ -2,14 +2,13 @@ id = "gmin/lj38-csm"
 engine = "gmin"
 problem = "globalopt/lj38"
 code = "GMIN"
-code_version = "paper_baseline (wales-27058)"
+code_version = "wales-27058"
 commit = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
 algorithm = "basin-hopping with symmetrise csm moves"
 tuning = "archive"
 failure_cap = 2000000
-paper_baseline = true
 note = """
-Wales GMIN from wales-27058.tar.bz2, sha256 144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348. SVNREV in the tree is 27059. The data file is codes/gmin/lj38-csm.data. SYMMETRISECSM 1 CI 1.0D-6 30 1 50, TARGET -173.9284264418, EDIFF 0.003, TEMPERATURE 3.0, STEP 0.43 0.52, SLOPPYCONV 0.002, TIGHTCONV 1.0D-5, MAXIT 1000 1000, STEPS 90000000, CENTRE, PERMDIST 0.005, AVOID 1.25 18, NEWRESTART 30. The potential is the default unshifted Lennard-Jones. The seed is the GMIN default 2002. force_calls is NPCALL on the Target hit after line, the same field getdata.py averages. The board ranks that native count: counter harness, PAR-2 from the per-start records. failure_cap 2000000 sits above the archived maximum 26977 and above this rerun maximum 42570. The data file does not set it. Built with gfortran 13.3.0, cmake Release, WITH_MPI off, system BLAS and LAPACK. The compile line is -ffixed-line-length-200 -ffree-line-length-200 -fPIC -O3 -DNDEBUG.
+Unranked diagnostic of the gfortran rebuild. Wales GMIN from wales-27058.tar.bz2, sha256 144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348. SVNREV in the tree is 27059. The data file is codes/gmin/lj38-csm.data. SYMMETRISECSM 1 CI 1.0D-6 30 1 50, TARGET -173.9284264418, EDIFF 0.003, TEMPERATURE 3.0, STEP 0.43 0.52, SLOPPYCONV 0.002, TIGHTCONV 1.0D-5, MAXIT 1000 1000, STEPS 90000000, CENTRE, PERMDIST 0.005, AVOID 1.25 18, NEWRESTART 30. The potential is the default unshifted Lennard-Jones. The seed is the GMIN default 2002. force_calls is NPCALL on the Target hit after line. The 2014 archive number is the paper row. This rebuild is not ranked. Built with gfortran 13.3.0, cmake Release, WITH_MPI off, system BLAS and LAPACK. The compile line is -ffixed-line-length-200 -ffree-line-length-200 -fPIC -O3 -DNDEBUG.
 """
 
 [gmin]

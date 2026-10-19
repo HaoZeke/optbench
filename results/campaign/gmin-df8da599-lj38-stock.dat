@@ -5,6 +5,7 @@
 # Stock basin-hopping. NPCALL is the native count. The unrounded success mean is 332964.4646464646.
 # The success-only median is 251908. The median of all 100 call counts is 254859.5.
 # Start 87 reached MAX_NPCALL 2000000 without a target hit (2000097 calls). The ranked PAR-2 is 369634.82.
+# The 2014 archive is 6421 force calls and 0 failures. This gap is left as found.
 # Keywords: SLOPPYCONV 0.005, TIGHTCONV 0.001, EDIFF 0.001, MAXIT 600 500, SAVE 2, CENTRE, RADIUS 50, TEMPERATURE 1, STEP 0.40 0.51, STEPS 1000000, TARGET -173.9284264418.
 # RANSEED is 20261018 plus the start index. 99 starts hit the global minimum.
 force_calls 332964

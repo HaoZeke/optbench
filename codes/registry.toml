@@ -162,7 +162,7 @@ repository = "https://optbench.org/codes/wales-27058.tar.bz2"
 ref = "27058"
 commit = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
 committed = "2014-08-07"
-note = "Hosted tarball wales-27058.tar.bz2. SVNREV in the tree is 27059. LJ38 symmetrise CSM uses the archived data file. The score is GMIN NPCALL at the target hit, ranked as the native counter. Built with gfortran 13.3.0, cmake Release, WITH_MPI off, system BLAS and LAPACK. The compile line is -ffixed-line-length-200 -ffree-line-length-200 -fPIC -O3 -DNDEBUG."
+note = "Hosted tarball wales-27058.tar.bz2. SVNREV in the tree is 27059. The gfortran rebuild of the LJ38 symmetrise CSM data file is an unranked diagnostic. The ranked LJ38 row is current GMIN df8da599. Built with gfortran 13.3.0, cmake Release, WITH_MPI off, system BLAS and LAPACK. The compile line is -ffixed-line-length-200 -ffree-line-length-200 -fPIC -O3 -DNDEBUG."
 
 [[code]]
 id = "gmin-df8da599"
