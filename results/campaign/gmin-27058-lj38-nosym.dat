@@ -1,0 +1,15 @@
+force_calls 254367
+force_calls_median 191342
+force_calls_min 4138
+force_calls_max 1514540
+nfailed 0
+code GMIN
+code_version 27058
+commit 144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348
+algorithm basin-hopping
+template gmin/lj38-nosym
+problem globalopt/lj38
+counter gmin
+ranked false
+tuning archive
+note Serial GMIN wales-27058.tar.bz2, ifort 2021.1.1 -O3, no MPI. NPCALL at the last Target hit. Rounded mean of 100 successes.

@@ -173,6 +173,16 @@ commit = "0.1.1"
 committed = "2019-12-10"
 note = "Sella 0.1.1 PESWrapper.diag for the lowest-eigenvector row. eta 1e-6, gamma 1e-16, vreftol 0.99, gradient v0, rigid-mode projection. This pin is not Sella 2.6.0."
 
+[[code]]
+id = "gmin"
+name = "GMIN"
+role = "global optimization"
+repository = "https://optbench.org/codes/wales-27058.tar.bz2"
+ref = "27058"
+commit = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
+committed = "2014-08-06"
+note = "Wales group tarball wales-27058.tar.bz2, 20942854 bytes, SVNREV 27059. The LJ38 basin-hopping row is this source built with ifort classic 2021.1.1 -O3 and WITH_MPI off. The score is GMIN NPCALL at the target hit, not a harness socket. The makefile default compiler is ifort. gfortran 13 on the same source is outside the archived band."
+
 [[template]]
 id = "sella-0.1.1/lj38-loweig"
 code = "sella-0.1.1"
