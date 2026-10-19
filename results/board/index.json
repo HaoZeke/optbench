@@ -15970,7 +15970,77 @@
           "wilson_low": 0.9500079920442688
         }
       ],
-      "ranked": [],
+      "profile": {
+        "area_log10": {
+          "gmin/lj38-symmetrise 27058 archive campaign 144a703": 1.2041199826559248
+        },
+        "rho": {
+          "gmin/lj38-symmetrise 27058 archive campaign 144a703": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "solved": {
+          "gmin/lj38-symmetrise 27058 archive campaign 144a703": 1.0
+        },
+        "taus": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ]
+      },
+      "ranked": [
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": 2000000,
+          "code": "GMIN",
+          "code_version": "27058",
+          "commit": "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348",
+          "comparable": true,
+          "counter": "harness",
+          "current": true,
+          "entry": "gmin-27058-lj38-symmetrise",
+          "failures": {
+            "cap": 0,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 0
+          },
+          "full_n": 100,
+          "history": false,
+          "max_calls": 121412.0,
+          "mean_calls": 22122.67,
+          "mean_per_image": null,
+          "median": 15998.0,
+          "median_calls": 15998.0,
+          "median_high": 20326.0,
+          "median_low": 11654.0,
+          "median_per_image": null,
+          "min_calls": 720.0,
+          "n": 100,
+          "nfailed": 0,
+          "note": "starts.jsonl",
+          "par2_mean": 22122.67,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/gmin-27058-lj38-symmetrise.dat",
+          "problem": "globalopt/lj38",
+          "registry_match": true,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 1.0,
+          "template": "gmin/lj38-symmetrise",
+          "tuning": "archive",
+          "wilson_high": 1.0,
+          "wilson_low": 0.9630065017930143
+        }
+      ],
       "title": "Lennard-Jones 38 global minimum"
     },
     "hTST/Al": {
@@ -42122,7 +42192,7 @@
       "title": "pt-island"
     }
   },
-  "ranked_count": 439,
+  "ranked_count": 440,
   "schema": "optbench.board/v1",
   "unmapped": [
     {

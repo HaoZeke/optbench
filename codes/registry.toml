@@ -155,6 +155,16 @@ committed = "2025-10-29"
 note = "Commit a4ce10dd, 2025-10-29. The clone has no tag, so the installed package reports 0.1.dev1. GPL-3.0. Cartesian L-BFGS, conjugate gradient, and steepest descent use the library defaults. The RMS stop is the Euclidean force stop divided by sqrt of the Cartesian components. Lanczos uses dx 5e-3 and dl 1e-2. The harness calculator is the score. The dimer and NEB are not in these rows."
 
 [[code]]
+id = "gmin"
+name = "GMIN"
+role = "global optimization"
+repository = "https://optbench.org/codes/wales-27058.tar.bz2"
+ref = "27058"
+commit = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
+committed = "2014-08-07"
+note = "The optbench.org tarball wales-27058.tar.bz2. SVNREV in the tree is 27059. LJ38 symmetrise uses the archived data file. The score is the Target-hit function-call count. gfortran 13 needs the biased-torsion slice patch, which is not on the LJ path."
+
+[[code]]
 id = "optim"
 name = "OPTIM"
 role = "saddle search"

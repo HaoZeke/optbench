@@ -1,0 +1,16 @@
+id = "gmin/lj38-symmetrise"
+engine = "gmin"
+problem = "globalopt/lj38"
+code = "GMIN"
+code_version = "27058"
+commit = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
+algorithm = "basin-hopping with symmetrise moves"
+tuning = "archive"
+failure_cap = 2000000
+note = """
+The data file is the optbench.org gmin-symmetrise input. TIGHTCONV is 1.0D-5, SLOPPYCONV is 0.002, TEMPERATURE is 3.2, STEP is 0.43 0.52, NEWRESTART is 13, AVOID is 1.25 20, PERMDIST is 0.005, TARGET is -173.9284264418, and SYMMETRISE is 1 0.04 0.03 0.09 0.09 0.4 18 0.4 1.7. STEPS is 90000000. The binary is wales-27058.tar.bz2. The score is the function-call field on the last "Target hit after" line. getdata.py rounds the mean of those successes. A start with no target line is a failure and is left out of that mean. failure_cap 2000000 sits above the archived maximum 121180. The data file does not set it.
+"""
+
+[gmin]
+data = "codes/gmin/lj38-symmetrise.data"
+method = "symmetrise"

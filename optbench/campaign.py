@@ -284,6 +284,22 @@ def run(
             work=work,
             limit=limit,
         )
+    if template["engine"] == "gmin":
+        from .runners.gmin_symmetrise import run_template
+
+        problem = resolve_problem(root, problem_name)
+        stated = template.get("problem")
+        if stated and stated != problem["id"]:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return run_template(
+            root,
+            problem,
+            template,
+            output=output,
+            workers=workers,
+            work=work,
+            limit=limit,
+        )
     if template["engine"] == "rgmin":
         from .runners.rgmin_min import run_template
 

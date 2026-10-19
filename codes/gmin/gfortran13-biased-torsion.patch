@@ -1,0 +1,14 @@
+--- a/wales/GMIN/source/biased_torsional_sampling.f90
++++ b/wales/GMIN/source/biased_torsional_sampling.f90
+@@ -101,9 +101,9 @@
+ 
+    ! rhoD calculation
+    ! unit vector along bond axis of atoms 2-3 
+-   n23(:) = C(3*(a3-1)+1:3*(a3-1)+1) - C(3*(a2-1)+1:3*(a2-1)+1)
++   n23(:) = C(3*(a3-1)+1:3*(a3-1)+3) - C(3*(a2-1)+1:3*(a2-1)+3)
+    n23(:) = n23(:) / sqrt(DOT_PRODUCT(n23,n23))
+-   R(:) = C(3*(a4-1)+1:3*(a4-1)+1) - C(3*(a3-1)+1:3*(a3-1)+1)
++   R(:) = C(3*(a4-1)+1:3*(a4-1)+3) - C(3*(a3-1)+1:3*(a3-1)+3)
+    lenR = sqrt(DOT_PRODUCT(R(:),R(:)))
+    n34(:) = R(:) / lenR
+    theta = acos(dot_product(n23,n34))
