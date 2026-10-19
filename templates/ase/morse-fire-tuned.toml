@@ -10,7 +10,7 @@ profile = "tuned"
 reducer = "capped"
 ranked = true
 parameter_source = "archive"
-note = "Archive minimization/morse-bulk/ase-fire sets maxstep 0.2."
+note = "Archive minimization/morse-bulk/ase-fire/run.py reads POSCAR_i and builds tsase.calculators.morse(rc=9.5) with FIRE maxmove 0.2. TSASE Morse defaults are D 0.7102, alpha 1.6047, r0 2.897, and the pair energy is shifted to zero at the cutoff. The stop is the Euclidean force norm 0.001. The rounded morse-bulk .con set is a different geometry."
 
 [optimizer]
 name = "FIRE"
@@ -23,7 +23,7 @@ kind = "morse"
 D = 0.7102
 alpha = 1.6047
 r0 = 2.897
-rc = 7.0
+rc = 9.5
 form = "shift"
 pbc = [true, true, true]
 
@@ -32,7 +32,8 @@ norm = "l2"
 force_norm = 0.001
 max_force_calls = 10000
 max_steps = 10000
+stationary = false
 
 [input]
-archive_path = "website/minimization/morse-bulk/morse-bulk.tgz"
-select = "con"
+archive_path = "website/minimization/morse-bulk/ase-fire/morse-bulk.tgz"
+select = "poscar"

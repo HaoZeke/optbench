@@ -187,7 +187,11 @@ def _tuned_minimizer(problem: str, name: str) -> tuple[dict, str, str]:
             "FIRE": (
                 {"maxstep": 0.2},
                 "archive",
-                "Archive minimization/morse-bulk/ase-fire sets maxstep 0.2.",
+                "Archive minimization/morse-bulk/ase-fire/run.py reads POSCAR_i and "
+                "builds tsase.calculators.morse(rc=9.5) with FIRE maxmove 0.2. "
+                "TSASE Morse defaults are D 0.7102, alpha 1.6047, r0 2.897, and the "
+                "pair energy is shifted to zero at the cutoff. The stop is the Euclidean "
+                "force norm 0.001. The rounded morse-bulk .con set is a different geometry.",
             ),
             "BFGSLineSearch": (
                 {"maxstep": 0.2, "alpha": 1.0 / 0.003},
@@ -269,6 +273,21 @@ def _minimization_specs() -> list[dict]:
                     and profile == "tuned"
                 ):
                     row_stop = {**stop, "norm": "fmax"}
+                row_potential = potential
+                row_archive = archive
+                row_select = select
+                if (
+                    problem == "minimization/morse-bulk"
+                    and name == "FIRE"
+                    and profile == "tuned"
+                ):
+                    row_potential = {**potential, "rc": 9.5}
+                    row_archive = "website/minimization/morse-bulk/ase-fire/morse-bulk.tgz"
+                    row_select = "poscar"
+                    # The archived mean is every start under the call cap.
+                    # A finite-difference index is not that count: the TSASE
+                    # Morse force jumps at the cutoff.
+                    row_stop = {**row_stop, "stationary": False}
                 specs.append(
                     {
                         "id": f"ase/{slug}-{_opt_slug(name)}-{profile}",
@@ -285,9 +304,9 @@ def _minimization_specs() -> list[dict]:
                         "parameter_source": source,
                         "note": note,
                         "optimizer": {"name": name, "parameters": params},
-                        "potential": potential,
+                        "potential": row_potential,
                         "stop": row_stop,
-                        "input": {"archive_path": archive, "select": select},
+                        "input": {"archive_path": row_archive, "select": row_select},
                     }
                 )
         # Sella can minimize with order 0.

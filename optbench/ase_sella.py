@@ -381,6 +381,13 @@ def discover(material: Path, template: dict) -> list[tuple[str, list[Path], int 
     select = (template.get("input") or {}).get("select", "con")
     if material.is_file():
         return [(material.name, [material], None)]
+    if select == "poscar":
+        files = [
+            path
+            for path in material.rglob("*")
+            if path.is_file() and path.name.startswith("POSCAR")
+        ]
+        return [(path.name, [path], None) for path in sorted(files, key=_nat_key)]
     files = [path for path in material.rglob("*") if path.is_file() and path.suffix == ".con"]
     if select == "cluster":
         files = [path for path in files if path.name.startswith("cluster_")]
@@ -819,7 +826,11 @@ def _cap_row(row: dict, atoms, message: str = "force-call cap") -> dict:
 def _run_minimize(payload: dict, bucket: CallCounter) -> dict:
     atoms = _attach(_read_atoms(Path(payload["paths"][0])), payload["potential"], bucket)
     opt = _build_optimizer(payload["optimizer"], atoms)
-    row = {"failed": True, "force_norm": None, "expected_index": 0}
+    # stationary false is the 2014 force-norm count. The index is not part of it.
+    check_index = payload.get("stationary", True) is not False
+    row = {"failed": True, "force_norm": None}
+    if check_index:
+        row["expected_index"] = 0
     if payload.get("snapshot"):
         row["parameters"] = _snapshot_optimizer(opt, payload["optimizer"])
     try:
@@ -841,7 +852,7 @@ def _run_minimize(payload: dict, bucket: CallCounter) -> dict:
     row["failed"] = failed
     row["force_norm"] = norm
     row["energy"] = _safe_energy(atoms)
-    if not failed and bucket[0] < bucket[1]:
+    if check_index and not failed and bucket[0] < bucket[1]:
         _attach_index(row, atoms, 0)
     return row
 
@@ -1378,7 +1389,13 @@ def _write_dat(
         "stop": template.get("stop") or {},
     }
     note = template.get("note", "")
-    if template["task"] in {"minimize", "sella", "sella-search", "dimer"}:
+    if template["task"] == "minimize" and (template.get("stop") or {}).get("stationary") is False:
+        note = (
+            note
+            + " The archived mean counts every start under the force-call cap."
+            + " A finite-difference Hessian is not that count."
+        ).strip()
+    elif template["task"] in {"minimize", "sella", "sella-search", "dimer"}:
         note = (
             note
             + " v2 success is the harness cap, the stop norm, and the Hessian index"
@@ -1507,6 +1524,7 @@ def run_template(
                 "tol": tol,
                 "norm": str(template["stop"].get("norm") or "l2"),
                 "max_steps": int(template["stop"]["max_steps"]),
+                "stationary": template["stop"].get("stationary", True),
                 "raw_cap": cap,
                 "snapshot": False,
             }
@@ -1624,6 +1642,7 @@ def run_point(root: Path, template_name: str, start: str, seed: int, *, cache: P
         "tol": tol,
         "norm": str(template["stop"].get("norm") or "l2"),
         "max_steps": int(template["stop"]["max_steps"]),
+        "stationary": template["stop"].get("stationary", True),
         "raw_cap": raw_cap(template),
         "snapshot": True,
     }
