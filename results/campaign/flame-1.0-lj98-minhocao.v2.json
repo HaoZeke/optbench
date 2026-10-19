@@ -2,7 +2,7 @@
   "bootstrap_resamples": 2000,
   "bootstrap_seed": 20261015,
   "par_factor": 2,
-  "partial": true,
+  "partial": false,
   "problem": "globalopt/lj98",
   "runs": [
     {
@@ -24,12 +24,12 @@
         "median": 2000000000.0,
         "median_high": 2000000000.0,
         "median_low": 2000000000.0,
-        "n": 99,
+        "n": 100,
         "n_cap": 0,
         "n_crash": 0,
-        "n_divergence": 99,
+        "n_divergence": 100,
         "n_wrong_stationary": 0,
-        "nfailed": 99,
+        "nfailed": 100,
         "par2_mean": 2000000000.0,
         "par_applied": true,
         "par_factor": 2,
@@ -39,7 +39,7 @@
         "success_only_mean": null,
         "success_rate": 0.0,
         "successes": 0,
-        "wilson_high": 0.03735321206782739,
+        "wilson_high": 0.03699349820698568,
         "wilson_low": 0.0
       },
       "present_source": true,
@@ -1520,6 +1520,21 @@
           "success": false
         },
         {
+          "calls_to_best": 174405,
+          "calls_total": 26659125,
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -532.3968705713726,
+          "failure": "divergence",
+          "first_energy": 1320326704.0146441,
+          "force_calls": 26659125,
+          "schema": "optbench.start/v2",
+          "seed": 314159,
+          "start": "coords.98",
+          "success": false
+        },
+        {
           "calls_to_best": 166318,
           "calls_total": 278345,
           "comparable": true,
@@ -1555,5 +1570,5 @@
   ],
   "schema": "optbench.result/v2",
   "scoring": "par2-wilson-bootstrap",
-  "status": "partial"
+  "status": "archive"
 }
