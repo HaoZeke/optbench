@@ -876,7 +876,7 @@ The number is written only after the run finishes under the problem rule.
    <caption>Registry pins.</caption>
    <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
-   <td>transition-state search</td>
+   <td>minimization and transition-state search</td>
    <td>767e2c0c13ff2b851ac82101ccd5aab9a558a4f1</td>
    <td>767e2c0c13ff</td>
    <td><a href="https://github.com/psi-rking/optking">https://github.com/psi-rking/optking</a></td>
@@ -885,6 +885,28 @@ The number is written only after the run finishes under the problem rule.
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="minimization/lj38" data-template="optking/lj38-rfo-cartesian">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="template">optking/lj38-rfo-cartesian</td>
+   <td data-field="version">OptKing 0.5.1.dev2+g767e2c0c1</td>
+   <td data-field="commit">767e2c0c13ff</td>
+   <td data-field="par2_mean">464.954</td>
+   <td data-field="mean_calls">445.34</td>
+   <td data-field="median_calls">428</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 1</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-template="noise/optking-rfo-cart-s0">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="template">noise/optking-rfo-cart-s0</td>
+   <td data-field="version">OptKing 0.5.1.dev2+g767e2c0c1</td>
+   <td data-field="commit">767e2c0c13ff</td>
+   <td data-field="par2_mean">464.954</td>
+   <td data-field="mean_calls">445.34</td>
+   <td data-field="median_calls">428</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 1</td>
+   <td data-field="n">1000</td>
+   </tr>
    <tr data-problem="tsopt/LJ38" data-template="optking/lj38-p-rfo">
    <td>LJ38</td>
    <td data-field="template">optking/lj38-p-rfo</td>
@@ -909,6 +931,8 @@ The number is written only after the run finishes under the problem rule.
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
+   <li>Lennard-Jones 38 clusters: partial.</li>
+   <li>Lennard-Jones 38 clusters with Gaussian force noise: partial.</li>
    <li>LJ38: partial.</li>
    <li>pt-island: partial.</li>
    </ul>
@@ -1365,6 +1389,21 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>
+   <h3>PyBerny</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization</td>
+   <td>master</td>
+   <td>2c732230c543</td>
+   <td><a href="https://github.com/pyberny/pyberny">https://github.com/pyberny/pyberny</a></td>
+   </tr>
+   </tbody></table></div>
+   <p>No full ranked run.</p>
+   <p>No full ranked run</p><ul>
+   <li>Lennard-Jones 38 clusters: partial.</li>
+   </ul>
    <h3>AIRSS</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
