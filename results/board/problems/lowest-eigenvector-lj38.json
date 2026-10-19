@@ -100,7 +100,9 @@
       "rgsaddle/mode-dimer 0.2.2 default campaign, asv c0db2b8": 1.1085429590326108,
       "rgsaddle/mode-dimer-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.9106157368835431,
       "rgsaddle/mode-lanczos 0.2.2 default campaign, asv c0db2b8": 1.1273573337616096,
-      "rgsaddle/mode-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.9896361107453382
+      "rgsaddle/mode-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.9896361107453382,
+      "scipy/eig-lj38-eigsh 1.18.1 default campaign e4e854e": 0.4620810433442112,
+      "scipy/eig-lj38-lobpcg 1.18.1 default campaign e4e854e": 0.22050447182386623
     },
     "rho": {
       "rgsaddle/mode-dimer 0.2.2 default campaign, asv c0db2b8": [
@@ -130,13 +132,29 @@
         1.0,
         1.0,
         1.0
+      ],
+      "scipy/eig-lj38-eigsh 1.18.1 default campaign e4e854e": [
+        0.0,
+        0.0,
+        0.13,
+        0.905,
+        1.0
+      ],
+      "scipy/eig-lj38-lobpcg 1.18.1 default campaign e4e854e": [
+        0.0,
+        0.0,
+        0.0,
+        0.315,
+        0.835
       ]
     },
     "solved": {
       "rgsaddle/mode-dimer 0.2.2 default campaign, asv c0db2b8": 1.0,
       "rgsaddle/mode-dimer-tuned 0.2.2 tuned campaign, asv c0db2b8": 1.0,
       "rgsaddle/mode-lanczos 0.2.2 default campaign, asv c0db2b8": 1.0,
-      "rgsaddle/mode-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 1.0
+      "rgsaddle/mode-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 1.0,
+      "scipy/eig-lj38-eigsh 1.18.1 default campaign e4e854e": 1.0,
+      "scipy/eig-lj38-lobpcg 1.18.1 default campaign e4e854e": 1.0
     },
     "taus": [
       1.0,
@@ -324,6 +342,96 @@
       "success_rate": 1.0,
       "template": "rgsaddle/mode-dimer-tuned",
       "tuning": "tuned",
+      "wilson_high": 1.0,
+      "wilson_low": 0.9811546736227335
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "scipy",
+      "code_version": "1.18.1",
+      "commit": "e4e854eaa8f18d807cd3496028e257e36caa93cc",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "scipy-1.18.1-eig-lj38-eigsh",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 200,
+      "history": false,
+      "max_calls": 222.0,
+      "mean_calls": 126.7,
+      "mean_per_image": null,
+      "median": 122.0,
+      "median_calls": 122.0,
+      "median_high": 122.0,
+      "median_low": 122.0,
+      "median_per_image": null,
+      "min_calls": 82.0,
+      "n": 200,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 126.7,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/scipy-1.18.1-eig-lj38-eigsh.dat",
+      "problem": "lowest-eigenvector/lj38",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "scipy/eig-lj38-eigsh",
+      "tuning": "default",
+      "wilson_high": 1.0,
+      "wilson_low": 0.9811546736227335
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "scipy",
+      "code_version": "1.18.1",
+      "commit": "e4e854eaa8f18d807cd3496028e257e36caa93cc",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "scipy-1.18.1-eig-lj38-lobpcg",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 200,
+      "history": false,
+      "max_calls": 406.0,
+      "mean_calls": 251.69,
+      "mean_per_image": null,
+      "median": 226.0,
+      "median_calls": 226.0,
+      "median_high": 243.0,
+      "median_low": 206.97500000000002,
+      "median_per_image": null,
+      "min_calls": 94.0,
+      "n": 200,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 251.69,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/scipy-1.18.1-eig-lj38-lobpcg.dat",
+      "problem": "lowest-eigenvector/lj38",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "scipy/eig-lj38-lobpcg",
+      "tuning": "default",
       "wilson_high": 1.0,
       "wilson_low": 0.9811546736227335
     }

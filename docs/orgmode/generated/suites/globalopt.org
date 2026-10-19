@@ -7,9 +7,11 @@
    <section class="bench" id="lj100-binary" data-problem="globalopt/lj100-binary">
    <h2>Binary Lennard-Jones 100</h2>
    <dl class="bench-rule">
+   <dt>Cap</dt><dd>2000000 force calls</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
    <dt>Starts</dt><dd>100</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
-   <dt>Note</dt><dd>The archived files record energies. They do not record force calls.</dd>
+   <dt>Note</dt><dd>The archived files record energies. They do not record force calls. Each start uses the species counts in that con file. Component 1 is A with sigma 1 and component 2 is B with sigma 1.3. The archived sample header is 68 and 32, while this file states n_A 42 and n_B 58. The cutoff is the archived lj/cut 20. The hit window is 0.001 around the stated energy minimum. The harness budget is the sample max_evaluations, 2000000.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
    <table data-board-table="ranked" data-problem="globalopt/lj100-binary">
@@ -58,7 +60,11 @@
    </section><section class="bench" id="lj150" data-problem="globalopt/lj150">
    <h2>lj150</h2>
    <dl class="bench-rule">
+   <dt>Cap</dt><dd>1000000 force calls</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
+   <dt>Starts</dt><dd>100</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
+   <dt>Note</dt><dd>The known minimum is -893.310258 from the Cambridge LJ table. The same 0.001 window as LJ38 is the hit test. The harness budget is 1000000 force calls. The archived GMIN nosym energy_calls_mean is 6.9596491e5. Geometry files are coords followed by digits.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
@@ -120,17 +126,34 @@
    </section><section class="bench" id="lj38" data-problem="globalopt/lj38">
    <h2>Lennard-Jones 38 global minimum</h2>
    <dl class="bench-rule">
+   <dt>Cap</dt><dd>1000000 force calls</dd>
    <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
    <dt>Starts</dt><dd>100</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
+   <dt>Note</dt><dd>The known minimum is -173.928427 from the Cambridge LJ table, which is the archived eOn stop_energy -173.927427 plus this window. The harness budget is 1000000 force calls. The archived pele basin-hopping maximum on this set is 2.5339e6 and the GMIN nosym maximum is 1.1705e6.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
    <table data-board-table="ranked" data-problem="globalopt/lj38">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="13">No full harness row.</td></tr>
+   <tr><td data-field="template">pybcga/lj38</td><td data-field="version">pybcga fb646c19</td><td data-field="commit">fb646c19b182</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">2e+06</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.0369935</td><td data-field="median_calls">25020.5</td><td data-field="mean_calls">25018.8</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 100</td><td data-field="n">100</td></tr>
    </tbody></table>
-   <p class="bench-gaps">No committed harness run.</p>
+   <p class="bench-gaps">Partial rows stay off the ranked table.</p>
+   <h3>Partial</h3><ul>
+   <li>ase-global/bh-lj38-default ASE campaign n=8, result file sets partial true.</li>
+   <li>ase-global/bh-lj38-tuned ASE campaign n=8, result file sets partial true.</li>
+   <li>ase-global/mh-lj38-tuned ASE campaign n=8, result file sets partial true.</li>
+   <li>ase-ga/lj38 ase-ga campaign n=8, result file sets partial true.</li>
+   <li>ase-mh/lj38 ase-mh campaign n=8, result file sets partial true.</li>
+   <li>pele/bh-lj38-default pele campaign n=8, result file sets partial true.</li>
+   <li>pele/bh-lj38-tuned pele campaign n=8, result file sets partial true.</li>
+   <li>scgo/bh-lj38 scgo campaign n=8, result file sets partial true.</li>
+   <li>scipy/bh-lj38 scipy campaign n=8, result file sets partial true.</li>
+   <li>scipy/da-lj38 scipy campaign n=8, result file sets partial true.</li>
+   <li>scipy/de-lj38 scipy campaign n=8, result file sets partial true.</li>
+   </ul>
+   <img src="../../_static/board/globalopt-lj38-cost.svg" alt="Cost versus success for globalopt/lj38">
+   <p class="bench-gaps">No performance profile. One start has no finite cost.</p>
    </section><section class="bench bench-legacy-section" id="lj38-legacy">
    <h3>Legacy 2014 archive</h3>
    <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
@@ -207,7 +230,11 @@
    </section><section class="bench" id="lj75" data-problem="globalopt/lj75">
    <h2>lj75</h2>
    <dl class="bench-rule">
+   <dt>Cap</dt><dd>500000 force calls</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
+   <dt>Starts</dt><dd>200</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
+   <dt>Note</dt><dd>The known minimum is -397.492331 from the Cambridge LJ table. The same 0.001 window as LJ38 is the hit test. The harness budget is 500000 force calls, above the archived GMIN symmetrise maximum of 3.1011e5. Starts are the coords.N blocks.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
@@ -251,7 +278,11 @@
    </section><section class="bench" id="lj98" data-problem="globalopt/lj98">
    <h2>lj98</h2>
    <dl class="bench-rule">
+   <dt>Cap</dt><dd>1000000 force calls</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
+   <dt>Starts</dt><dd>100</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
+   <dt>Note</dt><dd>The known minimum is -543.665361 from the Cambridge LJ table. The same 0.001 window as LJ38 is the hit test. The harness budget is 1000000 force calls. The archived GMIN nosym energy_calls_mean is 5.98857238e7, so a start that follows that distribution hits the cap. Geometry files are coords followed by digits.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
@@ -313,7 +344,9 @@
    </section><section class="bench" id="tip4p10" data-problem="globalopt/tip4p10">
    <h2>tip4p10</h2>
    <dl class="bench-rule">
+   <dt>Starts</dt><dd>10000</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
+   <dt>Note</dt><dd>Angle-axis coordinates. This problem states no target energy. The harness runner refuses the archive because it has no TIP4P potential.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
@@ -369,7 +402,9 @@
    </section><section class="bench" id="tip4p15" data-problem="globalopt/tip4p15">
    <h2>tip4p15</h2>
    <dl class="bench-rule">
+   <dt>Starts</dt><dd>500</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
+   <dt>Note</dt><dd>Angle-axis coordinates. This problem states no target energy. The harness runner refuses the archive because it has no TIP4P potential.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
@@ -425,7 +460,9 @@
    </section><section class="bench" id="tip4p20" data-problem="globalopt/tip4p20">
    <h2>tip4p20</h2>
    <dl class="bench-rule">
+   <dt>Starts</dt><dd>100</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
+   <dt>Note</dt><dd>Angle-axis coordinates. This problem states no target energy. The harness runner refuses the archive because it has no TIP4P potential.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>

@@ -294,6 +294,7 @@
    <li>LJ38 double-ended saddle: partial.</li>
    <li>lj38_2ts_separation: partial.</li>
    <li>pt-island: partial.</li>
+   <li>Lennard-Jones 38 global minimum: partial.</li>
    <li>Lennard-Jones 38 clusters: partial.</li>
    <li>Morse bulk: partial.</li>
    <li>Pt-heptamer: partial.</li>
@@ -378,6 +379,577 @@
    <td>DEVEL</td>
    <td>9b753517c6c0</td>
    <td><a href="https://gitlab.com/mammasmias/artn-plugin">https://gitlab.com/mammasmias/artn-plugin</a></td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run.</p>
+   <h3>pele</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization and global optimization</td>
+   <td>0.1.2</td>
+   <td>b7081b932a06</td>
+   <td><a href="https://github.com/pele-python/pele">https://github.com/pele-python/pele</a></td>
+   </tr>
+   </tbody></table>
+   <table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="minimization/lj38" data-template="pele/min-lj38-lbfgs-tuned">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="template">pele/min-lj38-lbfgs-tuned</td>
+   <td data-field="version">pele 0.1.2</td>
+   <td data-field="commit">b7081b932a06</td>
+   <td data-field="par2_mean">197.936</td>
+   <td data-field="mean_calls">178.096</td>
+   <td data-field="median_calls">167</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 1</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-template="pele/min-morse-lbfgs-tuned">
+   <td>Morse bulk</td>
+   <td data-field="template">pele/min-morse-lbfgs-tuned</td>
+   <td data-field="version">pele 0.1.2</td>
+   <td data-field="commit">b7081b932a06</td>
+   <td data-field="par2_mean">45.11</td>
+   <td data-field="mean_calls">45.11</td>
+   <td data-field="median_calls">46</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run</p><ul>
+   <li>Lennard-Jones 38 global minimum: partial.</li>
+   <li>pele-lbfgs-M1-maxstep0.1: no per-start record.</li>
+   <li>pele-lbfgs-M10-maxstep0.1: no per-start record.</li>
+   <li>pele-lbfgs-M100-maxstep0.2: no per-start record.</li>
+   <li>pele-lbfgs-M20-maxstep0.1: no per-start record.</li>
+   <li>pele-lbfgs-M4-maxstep0.05: no per-start record.</li>
+   <li>pele-lbfgs-M4-maxstep0.1: no per-start record.</li>
+   <li>pele-lbfgs-M4-maxstep0.2: no per-start record.</li>
+   </ul>
+   <h3>scipy</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization and global optimization</td>
+   <td>1.18.1</td>
+   <td>e4e854eaa8f1</td>
+   <td><a href="https://github.com/scipy/scipy">https://github.com/scipy/scipy</a></td>
+   </tr>
+   </tbody></table>
+   <table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="lowest-eigenvector/lj38" data-template="scipy/eig-lj38-eigsh">
+   <td>lj38</td>
+   <td data-field="template">scipy/eig-lj38-eigsh</td>
+   <td data-field="version">scipy 1.18.1</td>
+   <td data-field="commit">e4e854eaa8f1</td>
+   <td data-field="par2_mean">126.7</td>
+   <td data-field="mean_calls">126.7</td>
+   <td data-field="median_calls">122</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="minimization/lj38" data-template="scipy/min-lj38-trust-exact">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="template">scipy/min-lj38-trust-exact</td>
+   <td data-field="version">scipy 1.18.1</td>
+   <td data-field="commit">e4e854eaa8f1</td>
+   <td data-field="par2_mean">53.515</td>
+   <td data-field="mean_calls">53.515</td>
+   <td data-field="median_calls">51</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-template="scipy/min-morse-trust-exact">
+   <td>Morse bulk</td>
+   <td data-field="template">scipy/min-morse-trust-exact</td>
+   <td data-field="version">scipy 1.18.1</td>
+   <td data-field="commit">e4e854eaa8f1</td>
+   <td data-field="par2_mean">7.09</td>
+   <td data-field="mean_calls">7.09</td>
+   <td data-field="median_calls">7</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run</p><ul>
+   <li>Lennard-Jones 38 global minimum: partial.</li>
+   </ul>
+   <h3>sqnm</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization</td>
+   <td>v1.3</td>
+   <td>4241692173cc</td>
+   <td><a href="https://github.com/moritzgubler/vc-sqnm">https://github.com/moritzgubler/vc-sqnm</a></td>
+   </tr>
+   </tbody></table>
+   <table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="minimization/lj38" data-template="sqnm/min-lj38-tuned">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="template">sqnm/min-lj38-tuned</td>
+   <td data-field="version">sqnm 1.3</td>
+   <td data-field="commit">4241692173cc</td>
+   <td data-field="par2_mean">457.892</td>
+   <td data-field="mean_calls">399.152</td>
+   <td data-field="median_calls">383</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-template="sqnm/min-morse-default">
+   <td>Morse bulk</td>
+   <td data-field="template">sqnm/min-morse-default</td>
+   <td data-field="version">sqnm 1.3</td>
+   <td data-field="commit">4241692173cc</td>
+   <td data-field="par2_mean">34.95</td>
+   <td data-field="mean_calls">34.95</td>
+   <td data-field="median_calls">36</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run</p><ul>
+   <li>Lennard-Jones 38 clusters: partial.</li>
+   </ul>
+   <h3>geomeTRIC</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization</td>
+   <td>1.1.1</td>
+   <td>f657e69bae9c</td>
+   <td><a href="https://github.com/leeping/geomeTRIC">https://github.com/leeping/geomeTRIC</a></td>
+   </tr>
+   </tbody></table>
+   <table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="minimization/lj38" data-template="geometric/min-lj38">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="template">geometric/min-lj38</td>
+   <td data-field="version">geometric 1.1.1</td>
+   <td data-field="commit">f657e69bae9c</td>
+   <td data-field="par2_mean">522.963</td>
+   <td data-field="mean_calls">483.716</td>
+   <td data-field="median_calls">405</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 2</td>
+   <td data-field="n">1000</td>
+   </tr>
+   </tbody></table>
+   <h3>ase-ga</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>global optimization</td>
+   <td>v1.0.3</td>
+   <td>f3ecaa80915d</td>
+   <td><a href="https://github.com/dtu-energy/ase-ga">https://github.com/dtu-energy/ase-ga</a></td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run.</p>
+   <p>No full ranked run</p><ul>
+   <li>Lennard-Jones 38 global minimum: partial.</li>
+   </ul>
+   <h3>GMIN</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>global optimization</td>
+   <td>svn.tar.bz2</td>
+   <td>02aaf45245af</td>
+   <td><a href="https://www-wales.ch.cam.ac.uk/GMIN/">https://www-wales.ch.cam.ac.uk/GMIN/</a></td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run.</p>
+   <h3>NLopt</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization</td>
+   <td>v2.11.0</td>
+   <td>88c424d4f458</td>
+   <td><a href="https://github.com/stevengj/nlopt">https://github.com/stevengj/nlopt</a></td>
+   </tr>
+   </tbody></table>
+   <table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="minimization/morse-bulk" data-template="nlopt/min-morse-tnewton">
+   <td>Morse bulk</td>
+   <td data-field="template">nlopt/min-morse-tnewton</td>
+   <td data-field="version">nlopt 2.11.0</td>
+   <td data-field="commit">88c424d4f458</td>
+   <td data-field="par2_mean">1440.3</td>
+   <td data-field="mean_calls">43.36</td>
+   <td data-field="median_calls">41</td>
+   <td data-field="failures">crash 0, divergence 7, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run</p><ul>
+   <li>Lennard-Jones 38 clusters: partial.</li>
+   </ul>
+   <h3>PyAMFF</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>neural-network potential training</td>
+   <td>master</td>
+   <td>240f51d01ca2</td>
+   <td><a href="https://gitlab.com/pyamff/pyamff">https://gitlab.com/pyamff/pyamff</a></td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run.</p>
+   <h3>OptKing</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization</td>
+   <td>master</td>
+   <td>767e2c0c13ff</td>
+   <td><a href="https://github.com/psi-rking/optking">https://github.com/psi-rking/optking</a></td>
+   </tr>
+   </tbody></table>
+   <table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="minimization/lj38" data-template="optking/min-lj38">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="template">optking/min-lj38</td>
+   <td data-field="version">optking 767e2c0c</td>
+   <td data-field="commit">767e2c0c13ff</td>
+   <td data-field="par2_mean">810.782</td>
+   <td data-field="mean_calls">752.098</td>
+   <td data-field="median_calls">576</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
+   </tbody></table>
+   <h3>PyBerny</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization</td>
+   <td>0.7.0</td>
+   <td>8f200b868b5b</td>
+   <td><a href="https://github.com/pyberny/pyberny">https://github.com/pyberny/pyberny</a></td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run.</p>
+   <h3>AEGON</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>global optimization</td>
+   <td>1.3.15</td>
+   <td>898a072d3567</td>
+   <td><a href="https://pypi.org/project/aegon/">https://pypi.org/project/aegon/</a></td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run.</p>
+   <h3>AIRSS</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>global optimization</td>
+   <td>v0.9.4</td>
+   <td>5593cc4ee360</td>
+   <td><a href="https://www.mtg.msm.cam.ac.uk/Codes/AIRSS">https://www.mtg.msm.cam.ac.uk/Codes/AIRSS</a></td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run.</p>
+   <h3>ABCluster</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>global optimization</td>
+   <td>3.4</td>
+   <td>00079b734099</td>
+   <td><a href="https://zhjun-sci.com/abcluster.html">https://zhjun-sci.com/abcluster.html</a></td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run.</p>
+   <h3>PyBCGA</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>global optimization</td>
+   <td>master</td>
+   <td>fb646c19b182</td>
+   <td><a href="https://github.com/marktoakley/PyBCGA">https://github.com/marktoakley/PyBCGA</a></td>
+   </tr>
+   </tbody></table>
+   <table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="globalopt/lj38" data-template="pybcga/lj38">
+   <td>Lennard-Jones 38 global minimum</td>
+   <td data-field="template">pybcga/lj38</td>
+   <td data-field="version">pybcga fb646c19</td>
+   <td data-field="commit">fb646c19b182</td>
+   <td data-field="par2_mean">2e+06</td>
+   <td data-field="mean_calls">25018.8</td>
+   <td data-field="median_calls">25020.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 100</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table>
+   <h3>ase-gpatom</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>global optimization</td>
+   <td>1.0.1</td>
+   <td>572bd64ef61c</td>
+   <td><a href="https://gitlab.com/gpatom/ase-gpatom">https://gitlab.com/gpatom/ase-gpatom</a></td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run.</p>
+   <h3>GASP</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>global optimization</td>
+   <td>master</td>
+   <td>0c8d993c82e0</td>
+   <td><a href="https://github.com/henniggroup/GASP-python">https://github.com/henniggroup/GASP-python</a></td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run.</p>
+   <h3>BPGA</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>global optimization</td>
+   <td>master</td>
+   <td>b32cd227e807</td>
+   <td><a href="https://github.com/jbadavis/bpga">https://github.com/jbadavis/bpga</a></td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run.</p>
+   <h3>OGOLEM</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>global optimization</td>
+   <td>master</td>
+   <td>cce35a376d92</td>
+   <td><a href="https://github.com/ogolem/ogolem">https://github.com/ogolem/ogolem</a></td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run.</p>
+   <h3>FLAME</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>global optimization</td>
+   <td>master</td>
+   <td>99a615acaef6</td>
+   <td><a href="https://github.com/flame-code/FLAME">https://github.com/flame-code/FLAME</a></td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run.</p>
+   <h3>Minima Hopping</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>global optimization</td>
+   <td>1.1.2</td>
+   <td>6baabf94c48f</td>
+   <td><a href="https://gitlab.com/goedeckergroup/ase_mh">https://gitlab.com/goedeckergroup/ase_mh</a></td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run.</p>
+   <p>No full ranked run</p><ul>
+   <li>Lennard-Jones 38 global minimum: partial.</li>
+   </ul>
+   <h3>JAX MD</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization</td>
+   <td>jax-md-v0.2.29</td>
+   <td>a41c7d19f646</td>
+   <td><a href="https://github.com/jax-md/jax-md">https://github.com/jax-md/jax-md</a></td>
+   </tr>
+   </tbody></table>
+   <table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="minimization/morse-bulk" data-template="jax-md/min-morse-fire">
+   <td>Morse bulk</td>
+   <td data-field="template">jax-md/min-morse-fire</td>
+   <td data-field="version">jax-md 0.2.29</td>
+   <td data-field="commit">a41c7d19f646</td>
+   <td data-field="par2_mean">117.42</td>
+   <td data-field="mean_calls">117.42</td>
+   <td data-field="median_calls">119</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run</p><ul>
+   <li>Lennard-Jones 38 clusters: partial.</li>
+   </ul>
+   <h3>SCGO</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>global optimization</td>
+   <td>main</td>
+   <td>2338742a434a</td>
+   <td><a href="https://github.com/rlaplaza-lab/scgo">https://github.com/rlaplaza-lab/scgo</a></td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run.</p>
+   <p>No full ranked run</p><ul>
+   <li>Lennard-Jones 38 global minimum: partial.</li>
+   </ul>
+   <h3>TorchSim</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization</td>
+   <td>main</td>
+   <td>2e9c16f5afe3</td>
+   <td><a href="https://github.com/TorchSim/torch-sim">https://github.com/TorchSim/torch-sim</a></td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run.</p>
+   <h3>AGOX</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>global optimization</td>
+   <td>dev</td>
+   <td>22d94a6fae8c</td>
+   <td><a href="https://gitlab.com/agox/agox">https://gitlab.com/agox/agox</a></td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run.</p>
+   <h3>EZGA</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>global optimization</td>
+   <td>main</td>
+   <td>1395e8de01f0</td>
+   <td><a href="https://gitlab.mpcdf.mpg.de/fhi-theory/EZGA">https://gitlab.mpcdf.mpg.de/fhi-theory/EZGA</a></td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run.</p>
+   <h3>Optax</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>neural-network potential training</td>
+   <td>main</td>
+   <td>8589d974e565</td>
+   <td><a href="https://github.com/google-deepmind/optax">https://github.com/google-deepmind/optax</a></td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run.</p>
+   <h3>n2p2</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>neural-network potential training</td>
+   <td>master</td>
+   <td>29b9c9f10b1a</td>
+   <td><a href="https://github.com/CompPhysVienna/n2p2">https://github.com/CompPhysVienna/n2p2</a></td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run.</p>
+   <h3>aenet</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>neural-network potential training</td>
+   <td>master</td>
+   <td>8f35990f5e3d</td>
+   <td><a href="https://github.com/atomisticnet/aenet">https://github.com/atomisticnet/aenet</a></td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run.</p>
+   <h3>AMP</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>neural-network potential training</td>
+   <td>master</td>
+   <td>d556191aaca8</td>
+   <td><a href="https://bitbucket.org/andrewpeterson/amp">https://bitbucket.org/andrewpeterson/amp</a></td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run.</p>
+   <h3>KLIFF</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>neural-network potential training</td>
+   <td>master</td>
+   <td>df2d4de2d8c0</td>
+   <td><a href="https://github.com/openkim/kliff">https://github.com/openkim/kliff</a></td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run.</p>
+   <h3>PANNA</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>neural-network potential training</td>
+   <td>master</td>
+   <td>132a2df66259</td>
+   <td><a href="https://gitlab.com/PANNAdevs/panna">https://gitlab.com/PANNAdevs/panna</a></td>
+   </tr>
+   </tbody></table>
+   <p>No full ranked run.</p>
+   <h3>GeometryOptimization.jl</h3>
+   <table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization</td>
+   <td>master</td>
+   <td>5b145886c190</td>
+   <td><a href="https://github.com/JuliaMolSim/GeometryOptimization.jl">https://github.com/JuliaMolSim/GeometryOptimization.jl</a></td>
    </tr>
    </tbody></table>
    <p>No full ranked run.</p>
