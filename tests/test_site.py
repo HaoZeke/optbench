@@ -42,6 +42,41 @@ def test_campaign_names_map_to_problems():
     assert campaign_problem("rgsaddle-0.2.2-dimer-lbfgs-saddle-pt") == "saddle-search/pt-island"
 
 
+def test_a_current_row_sits_beside_the_paper_entry():
+    problem = load_problem(ROOT / "problems" / "tsopt" / "pt-island.toml")
+    oracle = load_oracle(ROOT / "oracle" / "entries.jsonl")
+    companions = {
+        "optim_ffd": [
+            {
+                "entry": "current-OPTIM",
+                "label": "current-OPTIM",
+                "code": "OPTIM svn-snapshot",
+                "fields": {
+                    "force_calls": "82",
+                    "force_calls_max": "158",
+                    "force_calls_median": "77",
+                    "force_calls_min": "54",
+                    "nfailed": "0",
+                    "contributor": "",
+                    "date": "",
+                },
+                "value": 82.0,
+            }
+        ]
+    }
+    html = problem_html(problem, oracle, companions=companions)
+    paper = html.index('id="tsopt-pt-island-optim-ffd"')
+    current = html.index('id="tsopt-pt-island-current-optim"')
+    pele = html.index('id="tsopt-pt-island-pele"')
+    assert paper < current < pele
+    assert 'class="current"' in html
+    assert ">current-OPTIM<" in html
+    assert ">OPTIM svn-snapshot<" in html
+    assert "It is not a 2014 score." in html
+    assert html.index(">2<") < html.index(">3<")
+    assert "optim_ffd · not reproduced" not in html
+
+
 def test_lj38_table_ranks_the_archived_scores():
     problem = load_problem(ROOT / "problems" / "minimization" / "lj38.toml")
     oracle = load_oracle(ROOT / "oracle" / "entries.jsonl")
@@ -95,6 +130,13 @@ def test_rendered_pages_use_the_board_rank():
     tsopt = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "tsopt.org").read_text(encoding="utf-8")
     assert "Sella 0.1.1 legacy" in tsopt
     assert "2.6.0 legacy" not in tsopt
+    assert 'id="tsopt-pt-island-current-optim"' in tsopt
+    assert ">current-OPTIM<" in tsopt
+    paper = tsopt.index('id="tsopt-pt-island-optim-ffd"')
+    current = tsopt.index('id="tsopt-pt-island-current-optim"')
+    pele = tsopt.index('id="tsopt-pt-island-pele"')
+    assert paper < current < pele
+    assert "optim_ffd · not reproduced" not in tsopt
     ts_ranked = [row["template"] for row in document["problems"]["tsopt/LJ38"]["ranked"]]
     assert "sella/lj38-ts-default" in ts_ranked
     assert "sella/lj38-ts-tuned" not in ts_ranked

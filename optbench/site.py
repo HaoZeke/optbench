@@ -245,6 +245,7 @@ def problem_html(
     heading: str = "h2",
     heading_text: str | None = None,
     include_rule: bool = True,
+    companions: dict[str, list[dict]] | None = None,
 ) -> str:
     """Legacy 2014 table for one problem. The v2 rank is a separate section."""
     canonical_rows = []
@@ -307,10 +308,34 @@ def problem_html(
                 "current": bool(row.get("current")),
             }
         )
+    extras = companions or {}
+    expanded = []
+    inserted = False
+    for point in prepared:
+        expanded.append(point)
+        for extra in extras.get(point["entry"], []):
+            inserted = True
+            expanded.append(
+                {
+                    "id": _slug(f"{problem['id']}-{extra['label']}"),
+                    "rank": "",
+                    "entry": extra["entry"],
+                    "label": extra["label"],
+                    "code": extra["code"],
+                    "fields": extra["fields"],
+                    "value": extra["value"],
+                    "best": False,
+                    "held": False,
+                    "current": True,
+                }
+            )
+    prepared = expanded
     legacy = (
         "Legacy 2014 archive. These rows stay in the published order. "
         "They are not a v2 score."
     )
+    if inserted:
+        legacy += " A current row is that code on the same archived input. It is not a 2014 score."
     if any_miss:
         legacy += " A row marked not reproduced has a harness rerun outside the archive tolerance."
     lines.append(f'<p class="bench-legacy">{legacy}</p>')
@@ -393,7 +418,11 @@ def _rule_html(problem: dict, smoke_note: str = "") -> str:
     return "\n".join(lines)
 
 
-def _legacy_section(problem: dict, oracle: list[dict]) -> str:
+def _legacy_section(
+    problem: dict,
+    oracle: list[dict],
+    companions: dict[str, list[dict]] | None = None,
+) -> str:
     return problem_html(
         problem,
         oracle,
@@ -401,7 +430,73 @@ def _legacy_section(problem: dict, oracle: list[dict]) -> str:
         heading="h3",
         heading_text="Legacy 2014 archive",
         include_rule=False,
+        companions=companions,
     )
+
+
+def current_companions(root: Path, document: dict) -> dict[str, dict[str, list[dict]]]:
+    """Archive entry to current-code rows that are not already ranked.
+
+    The key is the problem id. Each value maps an archive entry name to
+    the campaign rows that declare ``beside`` that entry.
+    """
+    from .campaign import list_templates
+    from .dat import parse
+
+    root = Path(root)
+    templates = {str(item.get("id") or ""): item for item in list_templates(root)}
+    record = tomllib.loads((root / "codes" / "registry.toml").read_text(encoding="utf-8"))
+    names = {
+        str(pin.get("id") or ""): str(pin.get("name") or pin.get("id") or "")
+        for pin in record.get("code") or []
+        if isinstance(pin, dict)
+    }
+    problems = load_all(root / "problems")
+    found: dict[str, dict[str, list[dict]]] = {}
+    for problem_id, view in (document.get("problems") or {}).items():
+        ranked = {str(row.get("template") or "") for row in view.get("ranked") or []}
+        problem = problems.get(problem_id)
+        if problem is None:
+            continue
+        required = list((problem.get("metrics") or {}).get("required") or [])
+        primary = _primary(problem)
+        for row in view.get("not_comparable") or []:
+            template_id = str(row.get("template") or "")
+            if not template_id or template_id in ranked:
+                continue
+            if row.get("partial"):
+                continue
+            template = templates.get(template_id)
+            if not template:
+                continue
+            beside = str(template.get("beside") or "")
+            label = str(template.get("label") or "")
+            if not beside or not label:
+                continue
+            path = root / str(row.get("path") or "")
+            if path.suffix != ".dat":
+                path = path.with_name(path.name.split(".")[0] + ".dat") if path.name else path
+            if not path.is_file():
+                continue
+            fields = parse(path.read_text(encoding="utf-8"))
+            if any(key not in fields for key in required):
+                continue
+            code_name = names.get(str(template.get("code") or ""), str(template.get("code") or ""))
+            version = str(template.get("code_version") or "")
+            found.setdefault(problem_id, {}).setdefault(beside, []).append(
+                {
+                    "entry": label,
+                    "label": label,
+                    "code": f"{code_name} {version}".strip(),
+                    "fields": {
+                        **{key: fields[key] for key in required},
+                        "contributor": fields.get("contributor", ""),
+                        "date": fields.get("date", ""),
+                    },
+                    "value": _float(fields.get(primary, "")) if primary else None,
+                }
+            )
+    return found
 
 
 def _sorted_problems(group: list[dict]) -> list[dict]:
@@ -449,6 +544,7 @@ def _collection_html(
     document: dict,
     pending: dict[str, list[dict]],
     oracle: list[dict],
+    companions: dict[str, dict[str, list[dict]]] | None = None,
 ) -> str:
     from .board import gap_paragraph, headline_table
 
@@ -472,7 +568,7 @@ def _collection_html(
             if lead:
                 lines.append(lead)
             lines.append(f'<p><a href="{html.escape(href)}">Full ranked table and performance profile</a>.</p>')
-            lines.append(_legacy_section(problem, oracle))
+            lines.append(_legacy_section(problem, oracle, companions.get(problem["id"])))
     lines.append("</section>")
     return "\n".join(lines)
 
@@ -629,6 +725,7 @@ def render(root: Path) -> None:
     document = write_board(root, root / "results" / "board")
     problems = load_all(root / "problems")
     oracle = load_oracle(root / "oracle" / "entries.jsonl")
+    companions = current_companions(root, document)
     smoke = _smoke_note(root)
     pending = _unparsed_by_problem(document)
     by_suite: dict[str, list[dict]] = {}
@@ -644,7 +741,7 @@ def render(root: Path) -> None:
         encoding="utf-8",
     )
     (include / "collection.org").write_text(
-        _raw(_collection_html(order, by_suite, document, pending, oracle)),
+        _raw(_collection_html(order, by_suite, document, pending, oracle, companions)),
         encoding="utf-8",
     )
     for stale in ("featured.org", "terra-pass.org"):
@@ -677,7 +774,7 @@ def render(root: Path) -> None:
                     unparsed=pending.get(problem["id"]),
                 )
             )
-            sections.append(_legacy_section(problem, oracle))
+            sections.append(_legacy_section(problem, oracle, companions.get(problem["id"])))
         body = [
             f"#+TITLE: {suite_title(suite)}",
             "#+OPTIONS: toc:nil num:nil author:nil",

@@ -761,6 +761,9 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
             cap=cap,
             note=parse_note or record_source,
         )
+        label = str((template or {}).get("label") or "")
+        if label:
+            row["label"] = label
         named = str(fields.get("potential") or "").strip()
         if str(fields.get("ranked") or "").lower() == "false":
             reason = "result file sets ranked false"
@@ -1644,7 +1647,7 @@ def _table(
         for row in held:
             lines.append(
                 "<li>"
-                f"{_cell(row['template'] or row['entry'])} {_cell(row.get('code') or '')} "
+                f"{_cell(row.get('label') or row['template'] or row['entry'])} {_cell(row.get('code') or '')} "
                 f"n={row['n']}, {_cell(_reason_text(row))}."
                 "</li>"
             )

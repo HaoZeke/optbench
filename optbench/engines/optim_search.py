@@ -9,6 +9,10 @@ is one ``pes.evaluate``. OPTIM's own counter is not that score.
 following row. It runs the ``wales-27058`` binary on the native Morse
 bulk potential. The score is that binary's energy-plus-gradient count.
 
+``optim/hef-ffd-ts-pt-current`` runs the current Wales snapshot on that
+same archived input. The keywords are not retuned. The score is the
+snapshot's energy-plus-gradient count.
+
 ``optim/unhooked`` and every other template that is not minimization
 L-BFGS raise before a file is written. Noise, NEB, and PATHSAMPLE are
 not this runner.
@@ -77,6 +81,17 @@ def hef_binary() -> Path:
     if env:
         return Path(env)
     return Path("/tmp/optim27058/build/OPTIM")
+
+
+def snapshot_binary() -> Path:
+    """Current Wales OPTIM. ``OPTIM_BIN`` wins, then the local build."""
+    env = os.environ.get("OPTIM_BIN")
+    if env:
+        return Path(env)
+    for candidate in (Path("/tmp/optimbld/OPTIM"), Path("/tmp/src/wales-full/build-optim/OPTIM")):
+        if candidate.is_file():
+            return candidate
+    return Path("/tmp/optimbld/OPTIM")
 
 
 def available() -> str | None:
@@ -439,8 +454,22 @@ def _execute_hef(job: dict) -> dict:
 
 
 def _run_hef(root: Path, problem: dict, template: dict, output: Path, workers: int) -> dict:
-    binary = hef_binary()
+    code = str(template.get("code") or "")
+    if code == CODE:
+        binary = snapshot_binary()
+        binary_label = "svn-snapshot"
+    elif code == "optim-27058":
+        binary = hef_binary()
+        binary_label = "wales-27058"
+    else:
+        raise ValueError(f"{template['id']} is not an OPTIM forward-difference search")
     if not binary.is_file():
+        if binary_label == "svn-snapshot":
+            raise RuntimeError(
+                "The current OPTIM snapshot is not built. "
+                f"The pin is the sha256 {SHA256} of {SNAPSHOT} "
+                "(122743078 bytes). Set OPTIM_BIN to that OPTIM binary."
+            )
         raise RuntimeError(
             "OPTIM 27058 is not built. "
             f"The pin is the sha256 {_WALES_27058_SHA} of {_WALES_27058} "
@@ -475,13 +504,22 @@ def _run_hef(root: Path, problem: dict, template: dict, output: Path, workers: i
     records = run_jobs(jobs, _execute_hef, workers)
     settings = point_settings(problem)
     settings["cap"] = cap
-    comment = (
-        "# counter optim. Wales OPTIM 27058 energy+gradient calls. "
-        "The mean is the 2014 round of converged starts.\n"
-        "# odata is the archived preamble. Coordinates, rho, and rcut use the run.sh bc -l scaling. "
-        "The mode is the genmode displacement from reactant.con.\n"
-        "# A success is the line **** CONVERGED **** under the cap. Failures stay out of the mean."
-    )
+    if binary_label == "svn-snapshot":
+        comment = (
+            "# counter optim. Current Wales OPTIM snapshot energy+gradient calls. "
+            "The mean is the 2014 round of converged starts.\n"
+            "# odata is the archived preamble. Coordinates, rho, and rcut use the run.sh bc -l scaling. "
+            "The mode is the genmode displacement from reactant.con.\n"
+            "# A success is the line **** CONVERGED **** under the cap. Failures stay out of the mean."
+        )
+    else:
+        comment = (
+            "# counter optim. Wales OPTIM 27058 energy+gradient calls. "
+            "The mean is the 2014 round of converged starts.\n"
+            "# odata is the archived preamble. Coordinates, rho, and rcut use the run.sh bc -l scaling. "
+            "The mode is the genmode displacement from reactant.con.\n"
+            "# A success is the line **** CONVERGED **** under the cap. Failures stay out of the mean."
+        )
     parameters = {
         "method": "hef-ffd",
         "keyword": "BFGSTS",
@@ -490,7 +528,7 @@ def _run_hef(root: Path, problem: dict, template: dict, output: Path, workers: i
         "rho": _BC_RHO,
         "rcut": _BC_RCUT,
         "counter": "optim",
-        "binary": "wales-27058",
+        "binary": binary_label,
     }
     return write_campaign(
         output,

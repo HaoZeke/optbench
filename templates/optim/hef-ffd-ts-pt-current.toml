@@ -1,0 +1,15 @@
+# Current Wales OPTIM on the archived Pt(111) heptamer forward-difference search.
+id = "optim/hef-ffd-ts-pt-current"
+engine = "optim"
+problem = "tsopt/pt-island"
+code = "optim"
+code_version = "svn-snapshot"
+commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+algorithm = "hybrid eigenvector following"
+tuning = "archive"
+label = "current-OPTIM"
+beside = "optim_ffd"
+note = "Current Wales svn snapshot, OPTIM/source/SVNREV df8da599, on the archived Pt-island input. The preamble, bc scaling, and genmode displacement match wales-27058. Keywords are not retuned. The score is this binary's energy-plus-gradient count."
+
+[optim]
+method = "hef-ffd"

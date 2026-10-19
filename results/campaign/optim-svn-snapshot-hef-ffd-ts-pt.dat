@@ -1,0 +1,19 @@
+# counter optim. Current Wales OPTIM snapshot energy+gradient calls. The mean is the 2014 round of converged starts.
+# odata is the archived preamble. Coordinates, rho, and rcut use the run.sh bc -l scaling. The mode is the genmode displacement from reactant.con.
+# A success is the line **** CONVERGED **** under the cap. Failures stay out of the mean.
+force_calls 82
+force_calls_min 54
+force_calls_max 158
+force_calls_median 77
+successes 49
+nfailed 0
+n 49
+transition_states 0
+code optim
+code_version svn-snapshot
+commit 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f
+algorithm hybrid eigenvector following
+template optim/hef-ffd-ts-pt-current
+problem tsopt/pt-island
+tuning archive
+counter optim

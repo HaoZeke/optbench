@@ -273,6 +273,10 @@ table[data-board-table="summary"] td {
   color: color-mix(in srgb, CanvasText 78%, Canvas);
 }
 
+.bench tr.current td {
+  background: color-mix(in srgb, CanvasText 7%, Canvas);
+}
+
 .bench ::selection {
   background: color-mix(in srgb, CanvasText 20%, Canvas);
   color: CanvasText;
