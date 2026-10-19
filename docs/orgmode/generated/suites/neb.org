@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>Gman</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="neb/Pt-heptamer">
    <th scope="row"><a href="#Pt-heptamer">Pt-heptamer</a></th>
    <td data-code="eOn">—</td>
@@ -17,6 +17,7 @@
    <td data-code="ASE" data-template="ase/neb-pt-heptamer-tuned" data-par2="442.615"><span class="bench-score">442.615</span><a href="#Pt-heptamer-templates">ase/neb-pt-heptamer-tuned</a></td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="Gman" data-template="gman/neb-pt-glbfgs-line" data-par2="803.077"><span class="bench-score">803.077</span><a href="#Pt-heptamer-templates">gman/neb-pt-glbfgs-line</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass" data-template="compass/sqnm" data-par2="561.462"><span class="bench-score">561.462</span><a href="#Pt-heptamer-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
@@ -37,7 +38,7 @@
    <figure class="bench-plot"><a href="../../_static/board/neb-Pt-heptamer-profile.svg"><picture><source srcset="../../_static/board/neb-Pt-heptamer-profile.webp" type="image/webp"><img src="../../_static/board/neb-Pt-heptamer-profile.png" alt="Dolan-More profile for neb/Pt-heptamer" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/neb-Pt-heptamer-cost.svg"><picture><source srcset="../../_static/board/neb-Pt-heptamer-cost.webp" type="image/webp"><img src="../../_static/board/neb-Pt-heptamer-cost.png" alt="Cost versus success for neb/Pt-heptamer" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="Pt-heptamer-templates">
-   <summary>All templates (23 ranked)</summary>
+   <summary>All templates (24 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="neb/Pt-heptamer">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate. Per-image mean divides that total by the problem's moving images, the same way for every code.</caption>
@@ -59,6 +60,7 @@
    <tr><td data-field="template">rgsaddle/ci-neb</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">736.769</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.771905</td><td data-field="wilson_high">1</td><td data-field="median_calls">698</td><td data-field="mean_calls">736.769</td><td data-field="mean_per_image">92.0962</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">13</td></tr>
    <tr><td data-field="template">rgsaddle/ew-ci-neb</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">759.692</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.771905</td><td data-field="wilson_high">1</td><td data-field="median_calls">740</td><td data-field="mean_calls">759.692</td><td data-field="mean_per_image">94.9615</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">13</td></tr>
    <tr><td data-field="template">rgsaddle/oci-neb</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">760.769</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.771905</td><td data-field="wilson_high">1</td><td data-field="median_calls">722</td><td data-field="mean_calls">760.769</td><td data-field="mean_per_image">95.0962</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">13</td></tr>
+   <tr><td data-field="template">gman/neb-pt-glbfgs-line</td><td data-field="version">Gman r235</td><td data-field="commit">299795f6dc44</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">803.077</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.771905</td><td data-field="wilson_high">1</td><td data-field="median_calls">760</td><td data-field="mean_calls">803.077</td><td data-field="mean_per_image">100.385</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">13</td></tr>
    <tr><td data-field="template">eon-svn/neb-pt-cg</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">929.385</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.771905</td><td data-field="wilson_high">1</td><td data-field="median_calls">778</td><td data-field="mean_calls">929.385</td><td data-field="mean_per_image">116.173</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">13</td></tr>
    <tr><td data-field="template">eon-svn/neb-pt-qm</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">1322</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.771905</td><td data-field="wilson_high">1</td><td data-field="median_calls">1242</td><td data-field="mean_calls">1322</td><td data-field="mean_per_image">165.25</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">13</td></tr>
    <tr><td data-field="template">tsase/ci-neb</td><td data-field="version">tsase 1.0</td><td data-field="commit">98aac60b5d99</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">1521.15</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.771905</td><td data-field="wilson_high">1</td><td data-field="median_calls">1427</td><td data-field="mean_calls">1521.15</td><td data-field="mean_per_image">190.144</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">13</td></tr>
@@ -83,7 +85,6 @@
    <li>eon-fire: no per-start record</li>
    <li>eon-lbfgs: no per-start record</li>
    <li>eon-qm: no per-start record</li>
-   <li>gman/neb-pt-glbfgs-line: no per-start record</li>
    </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="Pt-heptamer-legacy">

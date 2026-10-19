@@ -1,9 +1,12 @@
 force_calls 100
-force_calls_max 135
 force_calls_min 57
+force_calls_max 135
 nfailed 0
-algorithm lbfgs
 code Gman
 code_version r235
+commit 299795f6dc4410b49d3db3006ffea0bbb8613c2ab44126be2937ae7b34842849
+algorithm lbfgs
 template gman/neb-pt-glbfgs-line
 problem neb/Pt-heptamer
+counter harness
+reducer harness

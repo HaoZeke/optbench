@@ -1073,9 +1073,20 @@
    <td><a href="https://gitlab.com/optbench/optbench">https://gitlab.com/optbench/optbench</a></td>
    </tr>
    </tbody></table></div>
-   <p>No full ranked run.</p>
-   <p>No full ranked run</p><ul>
-   <li>gman/neb-pt-glbfgs-line: no per-start record.</li>
-   </ul>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="neb/Pt-heptamer" data-template="gman/neb-pt-glbfgs-line">
+   <td>Pt-heptamer</td>
+   <td data-field="template">gman/neb-pt-glbfgs-line</td>
+   <td data-field="version">Gman r235</td>
+   <td data-field="commit">299795f6dc44</td>
+   <td data-field="par2_mean">803.077</td>
+   <td data-field="mean_calls">803.077</td>
+   <td data-field="median_calls">760</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   </tbody></table></div>
    </section>
 #+end_export
