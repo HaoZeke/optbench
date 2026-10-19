@@ -110,6 +110,95 @@ def test_cap_outranks_the_force_norm():
     assert classify_failure(reasons) == "cap"
 
 
+def _client_with_force(force: float, energy: float = -10.0) -> IpiClient:
+    client = IpiClient(
+        kind="lj",
+        free=np.array([True, True]),
+        box=None,
+        n_images=3,
+        force_norm=0.001,
+        cap=100,
+        band_type="IT-NEB",
+        counter=HarnessCounter(cache=False, cap=100),
+    )
+    point = np.zeros((2, 3))
+    client.evals = [
+        {"energy": energy - 1.0, "force": force, "positions": point},
+        {"energy": energy, "force": force, "positions": point},
+        {"energy": energy - 1.0, "force": force, "positions": point},
+    ]
+    client.counter.calls = 12
+    return client
+
+
+def test_a_completed_finite_band_above_the_stop_is_wrong_stationary():
+    judged = _judge(
+        _client_with_force(0.2),
+        returncode=0,
+        log_text="*** BAND TASK COMPLETED ***\n",
+    )
+    assert judged["failure"] == "wrong_stationary"
+    assert judged["success"] is False
+    assert judged["cp2k_converged"] is True
+    assert judged["reasons"] == ["force_norm"]
+    assert judged["hessian_index"] is None
+
+
+def test_a_max_steps_exit_above_the_stop_is_the_cap():
+    judged = _judge(
+        _client_with_force(0.2),
+        returncode=0,
+        log_text="dump_neb_final: Band task not yet converged\n",
+    )
+    assert judged["failure"] == "cap"
+    assert "cap" in judged["reasons"]
+    assert judged["cp2k_converged"] is False
+
+
+def test_a_non_finite_band_stays_a_divergence():
+    client = _client_with_force(float("nan"), energy=float("nan"))
+    client.stop_reason = "diverge"
+    judged = _judge(client, returncode=0, log_text="*** BAND TASK COMPLETED ***\n")
+    assert judged["failure"] == "divergence"
+
+
+def test_documented_optimizer_blocks():
+    common = dict(
+        band_type="CI-NEB",
+        n_replica=2,
+        socket_path="/tmp/ob.sock",
+        replica_paths=[Path("/tmp/r000.xyz"), Path("/tmp/r001.xyz")],
+        positions=np.zeros((2, 3)),
+        cell=(10.0, 10.0, 10.0),
+        periodic=False,
+        fixed=[1],
+        max_force=1e-6,
+        max_step=2.0,
+        max_steps=100,
+        align=False,
+        k_spring=0.05,
+    )
+    diis = render_input(
+        **common,
+        profile={"opt_type": "DIIS", "no_ls": True, "stepsize": 1.0, "n_diis": 7},
+    )
+    assert "OPT_TYPE DIIS" in diis
+    assert "NO_LS" in diis
+    assert "STEPSIZE 1" in diis
+    assert "MAX_STEPSIZE 2.0000000000000000e+00" in diis
+    assert "K_SPRING 0.05" in diis
+    assert "ALIGN_FRAMES F" in diis
+    md = render_input(
+        **common,
+        profile={"opt_type": "MD", "timestep": 0.5, "temperature": 100.0, "annealing": 0.95},
+    )
+    assert "OPT_TYPE MD" in md
+    assert "TIMESTEP 0.5" in md
+    assert "TEMPERATURE 100" in md
+    assert "PROJ_VELOCITY_VERLET T" in md
+    assert "ANNEALING 0.95" in md
+
+
 def test_socket_evaluation_uses_hartree_and_bohr():
     left, right = socket.socketpair()
     left.settimeout(5)

@@ -31,6 +31,14 @@ The recorded cost is the harness total across every image.
 A clean stop under the cap is a success when the free-atom Cartesian
 gradient L2 is within the problem force norm and the vibrational
 index is 1. Hessian finite differences go through ``verification``.
+
+The harness classes are crash, divergence, cap, and wrong_stationary.
+There is no stalled class. Divergence is a non-finite energy or
+geometry. A ``BAND TASK COMPLETED`` line with a finite geometry and a
+free-atom force still above the stop is wrong_stationary: the nudged
+band force can meet ``MAX_FORCE`` while the true gradient does not.
+An exit at ``MAX_STEPS`` without that banner, under the force cap, is
+the cap.
 """
 
 from __future__ import annotations
@@ -194,6 +202,84 @@ def failure_reasons(
     return reasons
 
 
+def label_band_failure(
+    reasons: list[str],
+    *,
+    band_completed: bool,
+    step_limit: bool,
+    finite: bool,
+) -> tuple[str | None, list[str]]:
+    """One class for a CP2K band.
+
+    ``step_limit`` is a clean exit at ``MAX_STEPS`` with no
+    ``BAND TASK COMPLETED`` line and with harness calls still under
+    the cap. A finished finite band above the force stop is
+    ``wrong_stationary``. A non-finite result stays ``divergence``.
+    """
+    labeled = list(reasons)
+    # A step-limit exit that already meets the force stop can still be a
+    # saddle. The cap applies when that exit is still above the stop.
+    if (
+        step_limit
+        and "crash" not in labeled
+        and "cap" not in labeled
+        and "force_norm" in labeled
+    ):
+        labeled.append("cap")
+    failure = classify_failure(labeled)
+    if (
+        failure == "divergence"
+        and band_completed
+        and finite
+        and "divergence" not in labeled
+    ):
+        failure = "wrong_stationary"
+    return failure, labeled
+
+
+def _real(value: float) -> str:
+    return format(float(value), ".12g")
+
+
+def _optimize_lines(profile: dict, *, max_step: float, max_steps: int) -> list[str]:
+    """``OPTIMIZE_BAND`` block. Missing keys keep the CP2K DIIS default."""
+    opt_type = str(profile.get("opt_type") or "DIIS").upper()
+    if opt_type not in {"DIIS", "MD"}:
+        raise ValueError(f"unknown band optimizer {opt_type}")
+    lines = ["    &OPTIMIZE_BAND", f"      OPT_TYPE {opt_type}"]
+    if opt_type == "MD":
+        lines.extend(
+            [
+                "      &MD",
+                f"        MAX_STEPS {max_steps}",
+                f"        TIMESTEP {_real(profile['timestep'])}",
+                f"        TEMPERATURE {_real(profile['temperature'])}",
+                "        &VEL_CONTROL",
+                f"          ANNEALING {_real(profile['annealing'])}",
+                "          PROJ_VELOCITY_VERLET T",
+                "        &END VEL_CONTROL",
+                "      &END MD",
+            ]
+        )
+    else:
+        lines.extend(
+            [
+                "      &DIIS",
+                f"        MAX_STEPS {max_steps}",
+                f"        MAX_STEPSIZE {max_step:.16e}",
+            ]
+        )
+        if profile.get("stepsize") is not None:
+            lines.append(f"        STEPSIZE {_real(profile['stepsize'])}")
+        if profile.get("n_diis") is not None:
+            lines.append(f"        N_DIIS {int(profile['n_diis'])}")
+        if profile.get("no_ls"):
+            lines.append("        NO_LS")
+        lines.append("      &END DIIS")
+    lines.append("    &END OPTIMIZE_BAND")
+    return lines
+
+
 def render_input(
     *,
     band_type: str,
@@ -208,6 +294,8 @@ def render_input(
     max_step: float,
     max_steps: int,
     align: bool,
+    k_spring: float = _K_SPRING,
+    profile: dict | None = None,
 ) -> str:
     """One BAND input. Coordinates in the replica files are angstrom."""
     if band_type not in {"CI-NEB", "IT-NEB", "SM"}:
@@ -230,7 +318,7 @@ def render_input(
         f"    BAND_TYPE {band_type}",
         f"    NUMBER_OF_REPLICA {n_replica}",
         "    NPROC_REP 1",
-        f"    K_SPRING {_K_SPRING}",
+        f"    K_SPRING {float(k_spring)}",
         f"    ROTATE_FRAMES {'T' if align else 'F'}",
         f"    ALIGN_FRAMES {'T' if align else 'F'}",
         "    &CONVERGENCE_CONTROL",
@@ -239,13 +327,7 @@ def render_input(
         f"      RMS_DR {_LOOSE}",
         f"      RMS_FORCE {_LOOSE}",
         "    &END CONVERGENCE_CONTROL",
-        "    &OPTIMIZE_BAND",
-        "      OPT_TYPE DIIS",
-        "      &DIIS",
-        f"        MAX_STEPS {max_steps}",
-        f"        MAX_STEPSIZE {max_step:.16e}",
-        "      &END DIIS",
-        "    &END OPTIMIZE_BAND",
+        *_optimize_lines(profile or {}, max_step=max_step, max_steps=max_steps),
     ]
     if band_type == "CI-NEB":
         lines.extend(
@@ -632,21 +714,29 @@ def _judge(client: IpiClient, *, returncode: int | None, log_text: str) -> dict:
         energy = float(chosen["energy"])
         force = float(chosen["force"])
         positions = np.asarray(chosen["positions"], dtype=np.float64)
+    band_completed = "BAND TASK COMPLETED" in log_text
     intentional = client.stop_reason in {"cap", "candidate", "diverge"}
-    completed = "BAND TASK COMPLETED" in log_text or returncode == 0
     crashed = (not intentional) and (
-        client.stop_reason == "crash" or (returncode not in (0, None) and not completed)
+        client.stop_reason == "crash" or (returncode not in (0, None) and not band_completed)
     )
     if client.peer_error and client.stop_reason == "" and returncode not in (0, None):
         crashed = True
+    calls = int(client.counter.calls)
     reasons = failure_reasons(
         force=force,
-        calls=int(client.counter.calls),
+        calls=calls,
         cap=client.cap,
         hit_cap=client.stop_reason == "cap",
         diverged=client.stop_reason == "diverge",
         crashed=crashed,
         force_norm=client.force_norm,
+    )
+    step_limit = (
+        returncode == 0
+        and not band_completed
+        and client.stop_reason == ""
+        and not crashed
+        and calls < client.cap
     )
     hessian_index = None
     project_rigid = bool(np.all(client.free) and int(np.count_nonzero(client.free)) >= 2 and client.kind == "lj")
@@ -673,7 +763,13 @@ def _judge(client: IpiClient, *, returncode: int | None, log_text: str) -> dict:
         )
         if hessian_index != 1:
             reasons.append("hessian_index")
-    failure = classify_failure(reasons)
+    finite = math.isfinite(energy) and math.isfinite(force)
+    failure, reasons = label_band_failure(
+        reasons,
+        band_completed=band_completed,
+        step_limit=step_limit,
+        finite=finite,
+    )
     finite_energy = energy if math.isfinite(energy) else None
     finite_force = force if math.isfinite(force) else None
     return {
@@ -685,8 +781,8 @@ def _judge(client: IpiClient, *, returncode: int | None, log_text: str) -> dict:
         "energy": finite_energy,
         "force_norm": finite_force,
         "hessian_index": hessian_index,
-        "converged": bool(completed and failure is None),
-        "cp2k_converged": bool(completed),
+        "converged": bool(band_completed and failure is None),
+        "cp2k_converged": bool(band_completed),
         "stop_reason": client.stop_reason,
         "returncode": returncode,
     }
@@ -729,6 +825,9 @@ def _run_search(job: dict) -> dict:
     socket_path = Path("/tmp") / f"ob{os.getpid()}{uuid.uuid4().hex[:8]}.sock"
     if socket_path.exists():
         socket_path.unlink()
+    max_step = settings.get("max_stepsize")
+    if max_step is None:
+        max_step = max_step_internal(float(settings["max_move"]))
     text = render_input(
         band_type=str(settings["band_type"]),
         n_replica=n_images,
@@ -739,9 +838,11 @@ def _run_search(job: dict) -> dict:
         periodic=periodic,
         fixed=[index + 1 for index, flag in enumerate(free) if not flag],
         max_force=max_force_internal(force_norm, n_free),
-        max_step=max_step_internal(float(settings["max_move"])),
+        max_step=float(max_step),
         max_steps=cap,
         align=align,
+        k_spring=float(settings["k_spring"]),
+        profile=settings,
     )
     inp = work / "band.inp"
     log_path = work / "band.out"
@@ -864,6 +965,16 @@ def _settings(template: dict, problem: dict, commit: str) -> dict:
     band = template["band"]
     problem_band = problem["band"]
     convergence = problem["convergence"]
+    def optional_float(key: str):
+        if key not in band:
+            return None
+        return float(band[key])
+
+    def optional_int(key: str):
+        if key not in band:
+            return None
+        return int(band[key])
+
     return {
         "potential": problem_band["potential"],
         "n_interior": int(problem_band["interior_images"]),
@@ -873,6 +984,15 @@ def _settings(template: dict, problem: dict, commit: str) -> dict:
         "pairs": int(problem["sample"]["pairs"]),
         "geometry": problem["geometry"]["kind"],
         "band_type": str(band["band_type"]),
+        "k_spring": float(band.get("k_spring", _K_SPRING)),
+        "opt_type": str(band.get("opt_type", "DIIS")),
+        "no_ls": bool(band.get("no_ls", False)),
+        "stepsize": optional_float("stepsize"),
+        "max_stepsize": optional_float("max_stepsize"),
+        "n_diis": optional_int("n_diis"),
+        "timestep": optional_float("timestep"),
+        "temperature": optional_float("temperature"),
+        "annealing": optional_float("annealing"),
         "problem": problem["id"],
         "template": template["id"],
         "code": template["code"],
@@ -972,8 +1092,9 @@ def write_outputs(
     write_starts(output.with_suffix(".starts.jsonl"), ordered)
     parameters = {
         "band_type": settings["band_type"],
-        "k_spring": _K_SPRING,
-        "opt_type": "DIIS",
+        "k_spring": settings["k_spring"],
+        "opt_type": settings["opt_type"],
+        "no_ls": bool(settings["no_ls"]),
         "max_steps": settings["cap"],
         "max_step_angstrom": settings["max_move"],
         "max_force": "problem L2 changed to hartree/bohr and divided by sqrt(n_free*3)",
@@ -984,6 +1105,18 @@ def write_outputs(
         "counter": "harness",
         "seed": "0",
     }
+    if settings.get("stepsize") is not None:
+        parameters["stepsize"] = settings["stepsize"]
+    if settings.get("max_stepsize") is not None:
+        parameters["max_stepsize_bohr"] = settings["max_stepsize"]
+    if settings.get("n_diis") is not None:
+        parameters["n_diis"] = settings["n_diis"]
+    if settings.get("timestep") is not None:
+        parameters["timestep_fs"] = settings["timestep"]
+    if settings.get("temperature") is not None:
+        parameters["temperature_k"] = settings["temperature"]
+    if settings.get("annealing") is not None:
+        parameters["annealing"] = settings["annealing"]
     document = {
         "schema": "optbench.score/v2",
         "problem": problem["id"],
