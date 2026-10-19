@@ -701,11 +701,23 @@ def _kill(proc) -> None:
         pass
 
 
-def _log_tail(path: Path, limit: int = 2000) -> str:
+_LOG_MARKERS = ("BAND TASK COMPLETED", "Band task not yet converged")
+
+
+def _log_tail(path: Path, limit: int = 4000) -> str:
+    """Ending of a CP2K log, plus the band-completion lines.
+
+    The citation dump after a finished band is longer than a short
+    tail, so the completion line is copied from the whole file.
+    """
     if not path.is_file():
         return ""
     text = path.read_text(encoding="utf-8", errors="replace")
-    return text[-limit:]
+    markers = [needle for needle in _LOG_MARKERS if needle in text]
+    tail = text[-limit:]
+    if not markers:
+        return tail
+    return "\n".join(markers) + "\n" + tail
 
 
 def _judge(client: IpiClient, *, returncode: int | None, log_text: str) -> dict:

@@ -18,6 +18,7 @@ from optbench.cp2k_band import (
     IpiClient,
     _HEADER,
     _judge,
+    _log_tail,
     _read_header,
     _recv_exact,
     binary_path,
@@ -182,6 +183,21 @@ def test_a_max_steps_exit_above_the_stop_is_the_cap():
     assert judged["failure"] == "cap"
     assert "cap" in judged["reasons"]
     assert judged["cp2k_converged"] is False
+
+
+def test_a_completion_line_past_the_citation_dump_is_kept(tmp_path):
+    path = tmp_path / "band.out"
+    path.write_text("*** BAND TASK COMPLETED ***\n" + ("citation\n" * 800))
+    text = _log_tail(path)
+    assert "BAND TASK COMPLETED" not in path.read_text()[-4000:]
+    assert "BAND TASK COMPLETED" in text
+    judged = _judge(
+        _client_with_force(0.2),
+        returncode=0,
+        log_text=text,
+    )
+    assert judged["failure"] == "wrong_stationary"
+    assert judged["cp2k_converged"] is True
 
 
 def test_a_non_finite_band_stays_a_divergence():
@@ -482,11 +498,30 @@ def test_templates_name_the_registry_commit():
     pinned = next(row for row in registry["code"] if row["id"] == "cp2k")
     assert pinned["commit"] == COMMIT
     found = [row for row in list_templates(ROOT) if row.get("engine") == "cp2k-band"]
-    assert [row["id"] for row in found] == ["cp2k/ci-neb", "cp2k/it-neb", "cp2k/string"]
+    assert [row["id"] for row in found] == [
+        "cp2k/ci-neb-tuned",
+        "cp2k/ci-neb",
+        "cp2k/it-neb-tuned",
+        "cp2k/it-neb",
+        "cp2k/string-tuned",
+        "cp2k/string",
+    ]
     for row in found:
         assert row["commit"] == pinned["commit"]
         assert row["code"] == "CP2K"
         assert row["band"]["band_type"] in {"CI-NEB", "IT-NEB", "SM"}
+    tuned = [row for row in found if row["tuning"] == "tuned"]
+    assert [row["id"] for row in tuned] == [
+        "cp2k/ci-neb-tuned",
+        "cp2k/it-neb-tuned",
+        "cp2k/string-tuned",
+    ]
+    for row in tuned:
+        assert row["band"]["opt_type"] == "MD"
+        assert row["band"]["k_spring"] == pytest.approx(0.05)
+        assert row["band"]["timestep"] == pytest.approx(0.5)
+        assert row["band"]["temperature"] == pytest.approx(100.0)
+        assert row["band"]["annealing"] == pytest.approx(0.95)
 
 
 @pytest.mark.skipif(binary_path() is None, reason="CP2K binary is not built on this machine")
