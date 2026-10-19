@@ -45,6 +45,8 @@ TEMPLATES = (
     ("Neb", "pele/neb"),
     ("Dneb", "pele/dneb"),
     ("Connect", "pele/connect"),
+    ("NebTuned", "pele/neb-tuned"),
+    ("DnebTuned", "pele/dneb-tuned"),
 )
 
 TRACKS = (

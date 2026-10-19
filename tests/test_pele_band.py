@@ -29,7 +29,13 @@ def test_pele_templates_match_the_registry_and_the_problem_stop():
         assert template["code_version"] == "0.1.2"
         assert template["commit"] == pin["commit"]
         _check_stop(resolve_problem(ROOT, "minimization/lj38"), template)
-    assert found == ["pele/connect", "pele/dneb", "pele/neb"]
+    assert found == [
+        "pele/connect",
+        "pele/dneb-tuned",
+        "pele/dneb",
+        "pele/neb-tuned",
+        "pele/neb",
+    ]
     record = tomllib.loads((ROOT / "codes" / "registry.toml").read_text(encoding="utf-8"))
     pele = [row for row in record["code"] if row["id"] == "pele"]
     assert len(pele) == 1
@@ -58,6 +64,24 @@ def test_pele_settings_follow_each_problem():
         assert neb["dneb"] is False
         dneb = _settings(load_template(ROOT, "pele/dneb"), resolve_problem(ROOT, name), pin)
         assert dneb["dneb"] is True
+        assert neb["climbing"] is False
+        assert neb["stop"] == "residual"
+        tuned = _settings(load_template(ROOT, "pele/neb-tuned"), resolve_problem(ROOT, name), pin)
+        dneb_tuned = _settings(load_template(ROOT, "pele/dneb-tuned"), resolve_problem(ROOT, name), pin)
+        assert tuned["kind"] == "neb"
+        assert tuned["dneb"] is False
+        assert dneb_tuned["kind"] == "dneb"
+        assert dneb_tuned["dneb"] is True
+        for row in (tuned, dneb_tuned):
+            assert row["cap"] == cap
+            assert row["n_interior"] == images
+            assert row["force_norm"] == force
+            assert row["climbing"] is True
+            assert row["stop"] == "true_force"
+            assert row["spring_k"] == 100.0
+            assert row["max_erise"] == 1.0
+            assert row["memory"] == 4
+            assert row["h0"] == 0.1
 
 
 def test_capped_pele_neb_stops_inside_the_budget():
@@ -74,6 +98,26 @@ def test_capped_pele_neb_stops_inside_the_budget():
     assert record["force_calls"] > 0
     assert record["success"] is False
     assert record["failure"] == "cap"
+    assert record["geometry"] is None or len(record["geometry"]) == 38
+    assert "force" in record
+
+
+def test_tuned_band_stores_the_final_geometry_and_force():
+    pytest.importorskip("pele")
+    problem = resolve_problem(ROOT, "double-ended-saddle-search/lj38")
+    template = load_template(ROOT, "pele/neb-tuned")
+    settings = _settings(template, problem, _registry(ROOT)["commit"])
+    settings["cap"] = 40
+    pair = next(iter(cached_pairs(ROOT, problem, settings).values()))
+    record = _execute(_job(pair, settings))
+    assert record["force_calls"] <= 40
+    assert record["force_calls"] > 0
+    assert len(record["geometry"]) == pair.reactant.shape[0]
+    assert len(record["geometry"][0]) == 3
+    assert record["energy"] is None or isinstance(record["energy"], float)
+    if record["force"] is not None:
+        assert len(record["force"]) == len(record["geometry"])
+        assert record["force_norm"] is not None
 
 
 def test_pele_benchmarks_name_the_four_problems():
@@ -89,5 +133,7 @@ def test_pele_benchmarks_name_the_four_problems():
     assert bench.HeptamerPeleDneb.problem_name == "neb/Pt-heptamer"
     assert bench.HeptamerPeleDneb.cap == 10000
     assert bench.Lj38DePeleNeb.param_names == ["seed", "start"]
-    assert len(bench.CLASS_TEMPLATE) == 12
+    assert len(bench.CLASS_TEMPLATE) == 20
+    assert bench.Lj38DePeleNebTuned.template_name == "pele/neb-tuned"
+    assert bench.HeptamerPeleDnebTuned.template_name == "pele/dneb-tuned"
     assert set(bench.CLASS_PROBLEM.values()) == set(PROBLEMS)
