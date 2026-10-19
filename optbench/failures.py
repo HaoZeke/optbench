@@ -354,6 +354,9 @@ def classify_stored(record: dict, cap: int | None, force_tol: float | None) -> s
             dissociated = False
         elif geometry_nonfinite(geometry):
             dissociated = True
+    # The runner measured a separated cluster or a non-finite coordinate step.
+    if record.get("dissociated") is True:
+        dissociated = True
     process_failed = bool(error.strip()) and not _cap_error(error) and not _dissociated_error(error)
     if record.get("failure") == "crash" and not process_failed and energy is None and force is None and geometry is None:
         process_failed = True

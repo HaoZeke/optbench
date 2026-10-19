@@ -513,6 +513,7 @@ def _judge(
         "force_norm": None if force is None or not np.isfinite(force) else force,
         "hessian_index": hessian_index,
         "max_nn": None if gap is None or not np.isfinite(gap) else float(gap),
+        "dissociated": failure == "divergence",
         "converged": failure is None,
         "error": crashed or None,
         "grown": candidate is not None,

@@ -374,6 +374,22 @@ def test_stored_residual_stop_is_not_divergence():
     assert classify_stored(stored, 100, 0.01) == "not_converged"
 
 
+def test_a_measured_dissociation_stays_divergence():
+    stored = {
+        "success": False,
+        "failure": "divergence",
+        "reasons": ["divergence"],
+        "dissociated": True,
+        "energy": -1.0e-7,
+        "force_norm": 1.0e-8,
+        "force_calls": 1692,
+    }
+    assert classify_stored(stored, 2500, 0.001) == "divergence"
+    plain = dict(stored)
+    plain.pop("dissociated")
+    assert classify_stored(plain, 2500, 0.001) == "not_converged"
+
+
 def test_stored_lost_atoms_stay_divergence():
     stored = {
         "success": False,
