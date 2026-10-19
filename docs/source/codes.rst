@@ -686,7 +686,7 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="par2_mean">11944.6</td>
    <td data-field="mean_calls">772.09</td>
    <td data-field="median_calls">667</td>
-   <td data-field="failures">crash 13, divergence 186, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 13, divergence 0, cap 0, not_converged 0, wrong_stationary 186</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="tsopt/LJ38" data-template="partn/ts-lj38">
@@ -845,33 +845,55 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">pykmc/aladatom</td>
    <td data-field="version">pykmc 0.0.1</td>
    <td data-field="commit">9fd1f6e9085e</td>
-   <td data-field="par2_mean">209928</td>
-   <td data-field="mean_calls">209928</td>
-   <td data-field="median_calls">209928</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
-   <td data-field="n">1</td>
+   <td data-field="par2_mean">178326</td>
+   <td data-field="mean_calls">178326</td>
+   <td data-field="median_calls">166853</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">3</td>
    </tr>
    <tr data-problem="accelerated-md/standard_aladatom" data-template="pykmc/standard-aladatom">
    <td>Al adatom on Al(100) at 150 K</td>
    <td data-field="template">pykmc/standard-aladatom</td>
    <td data-field="version">pykmc 0.0.1</td>
    <td data-field="commit">9fd1f6e9085e</td>
-   <td data-field="par2_mean">93065</td>
-   <td data-field="mean_calls">93065</td>
-   <td data-field="median_calls">93065</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
-   <td data-field="n">1</td>
+   <td data-field="par2_mean">126132</td>
+   <td data-field="mean_calls">126132</td>
+   <td data-field="median_calls">119079</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">3</td>
+   </tr>
+   <tr data-problem="hTST/Al" data-template="pykmc/htst-al">
+   <td>Al</td>
+   <td data-field="template">pykmc/htst-al</td>
+   <td data-field="version">pykmc 0.0.1</td>
+   <td data-field="commit">9fd1f6e9085e</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="mean_calls">64636</td>
+   <td data-field="median_calls">56329</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">639</td>
+   </tr>
+   <tr data-problem="hTST/Pt" data-template="pykmc/htst-pt">
+   <td>Pt</td>
+   <td data-field="template">pykmc/htst-pt</td>
+   <td data-field="version">pykmc 0.0.1</td>
+   <td data-field="commit">9fd1f6e9085e</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="mean_calls">3.83353e+06</td>
+   <td data-field="median_calls">3.3676e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
    </tr>
    <tr data-problem="saddle-search/pt-island" data-template="pykmc/saddle-pt">
    <td>Pt heptamer island</td>
    <td data-field="template">pykmc/saddle-pt</td>
    <td data-field="version">pykmc 0.0.1</td>
    <td data-field="commit">9fd1f6e9085e</td>
-   <td data-field="par2_mean">39172.1</td>
-   <td data-field="mean_calls">1365.15</td>
-   <td data-field="median_calls">1304</td>
-   <td data-field="failures">crash 0, divergence 548, cap 1, wrong_stationary 0</td>
-   <td data-field="n">561</td>
+   <td data-field="par2_mean">14983.8</td>
+   <td data-field="mean_calls">1383.18</td>
+   <td data-field="median_calls">1315.5</td>
+   <td data-field="failures">crash 69, divergence 0, cap 0, not_converged 1, wrong_stationary 210</td>
+   <td data-field="n">792</td>
    </tr>
    <tr data-problem="tsopt/pt-island" data-template="pykmc/ts-pt">
    <td>pt-island</td>
@@ -881,13 +903,12 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="par2_mean">1956.45</td>
    <td data-field="mean_calls">955.98</td>
    <td data-field="median_calls">746</td>
-   <td data-field="failures">crash 0, divergence 2, cap 1, wrong_stationary 0</td>
+   <td data-field="failures">crash 2, divergence 0, cap 1, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">49</td>
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
-   <li>Al: partial.</li>
-   <li>Pt: partial.</li>
+   <li>Pt heptamer island: partial.</li>
    </ul>
    <h3>LAMMPS</h3>
    <div class="bench-scroll"><table>
@@ -1103,7 +1124,7 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="par2_mean">146.82</td>
    <td data-field="mean_calls">146.82</td>
    <td data-field="median_calls">129</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="optim/de-2ts">
@@ -1114,7 +1135,7 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="par2_mean">5725.16</td>
    <td data-field="mean_calls">4352.61</td>
    <td data-field="median_calls">3268</td>
-   <td data-field="failures">crash 0, divergence 0, cap 7, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 7, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-template="optim/de-pt">
@@ -1125,7 +1146,7 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="par2_mean">138</td>
    <td data-field="mean_calls">138</td>
    <td data-field="median_calls">133</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
    <tr data-problem="minimization/lj38" data-template="optim/lbfgs-lj38">

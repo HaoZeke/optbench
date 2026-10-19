@@ -81,7 +81,7 @@ It does not run a campaign.
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
    <td data-code="optim">—</td>
-   <td data-code="pykmc" data-template="pykmc/saddle-pt" data-par2="39172.1"><span class="bench-score">39172.1</span><a href="generated/suites/saddle-search.html#pt-island-templates">pykmc/saddle-pt</a></td>
+   <td data-code="pykmc" data-template="pykmc/saddle-pt" data-par2="14983.8"><span class="bench-score">14983.8</span><a href="generated/suites/saddle-search.html#pt-island-templates">pykmc/saddle-pt</a></td>
    <td data-code="tsase">—</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38">
@@ -234,7 +234,7 @@ It does not run a campaign.
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
    <td data-code="optim">—</td>
-   <td data-code="pykmc">—</td>
+   <td data-code="pykmc" data-template="pykmc/htst-al" data-par2=""><span class="bench-score"></span><a href="generated/suites/hTST.html#Al-templates">pykmc/htst-al</a></td>
    <td data-code="tsase">—</td>
    </tr>
    <tr data-problem="hTST/Pt">
@@ -251,7 +251,7 @@ It does not run a campaign.
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
    <td data-code="optim">—</td>
-   <td data-code="pykmc">—</td>
+   <td data-code="pykmc" data-template="pykmc/htst-pt" data-par2=""><span class="bench-score"></span><a href="generated/suites/hTST.html#Pt-templates">pykmc/htst-pt</a></td>
    <td data-code="tsase">—</td>
    </tr>
    <tr data-problem="accelerated-md/aladatom">
@@ -268,7 +268,7 @@ It does not run a campaign.
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
    <td data-code="optim">—</td>
-   <td data-code="pykmc" data-template="pykmc/aladatom" data-par2="209928"><span class="bench-score">209928</span><a href="generated/suites/accelerated-md.html#aladatom-templates">pykmc/aladatom</a></td>
+   <td data-code="pykmc" data-template="pykmc/aladatom" data-par2="178326"><span class="bench-score">178326</span><a href="generated/suites/accelerated-md.html#aladatom-templates">pykmc/aladatom</a></td>
    <td data-code="tsase">—</td>
    </tr>
    <tr data-problem="accelerated-md/standard_aladatom">
@@ -285,7 +285,7 @@ It does not run a campaign.
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
    <td data-code="optim">—</td>
-   <td data-code="pykmc" data-template="pykmc/standard-aladatom" data-par2="93065"><span class="bench-score">93065</span><a href="generated/suites/accelerated-md.html#standard_aladatom-templates">pykmc/standard-aladatom</a></td>
+   <td data-code="pykmc" data-template="pykmc/standard-aladatom" data-par2="126132"><span class="bench-score">126132</span><a href="generated/suites/accelerated-md.html#standard_aladatom-templates">pykmc/standard-aladatom</a></td>
    <td data-code="tsase">—</td>
    </tr>
    </tbody></table></div>
