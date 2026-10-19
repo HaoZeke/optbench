@@ -32,7 +32,7 @@ from .connection import ProcessCatalog, connected_endpoints, link_tolerance, per
 from .counter import HarnessCounter
 from .endpoints import EndpointArchive, align_resume, stamp_endpoint, stored_cell
 from .eon_displace import draw_search_start, problem_pbc
-from .failures import classify_outcome
+from .failures import classify_failure, classify_outcome
 from .potserver import RgpotCounter
 from .score import half_even, score_v2
 from .stationary import judge_stationary, negative_index, numerical_hessian
@@ -234,6 +234,12 @@ def _rng_restore(payload: dict):
     rng = np.random.default_rng()
     rng.bit_generator.state = payload
     return rng
+
+
+def _outcome(reasons: list[str]) -> tuple[bool, str | None]:
+    """Map a reason list through the failure taxonomy."""
+    failure = classify_failure(reasons)
+    return failure is None, failure
 
 
 def _norm(values) -> float:

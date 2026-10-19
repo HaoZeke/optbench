@@ -25,7 +25,6 @@ from pathlib import Path
 import numpy as np
 
 from .counter import ForceCallCap
-from .failures import classify_failure
 from .rgsaddle_minmode import (
     _SADDLE_CLIMB_OVERSHOOT,
     _SADDLE_ENDPOINT_BUDGET,
@@ -39,6 +38,7 @@ from .rgsaddle_minmode import (
     _lbfgs_minimize,
     _load_partial,
     _norm,
+    _outcome,
     _rng_restore,
     _rng_state,
     _saddle_record,
@@ -47,11 +47,6 @@ from .rgsaddle_minmode import (
 )
 from .score import half_even, score_v2
 from .stationary import negative_index
-
-
-def _outcome(reasons: list[str]) -> tuple[bool, str | None]:
-    failure = classify_failure(reasons)
-    return failure is None, failure
 from .surfaces import load_con, potential_from_problem, read_mode
 from .v2 import collect_provenance, write_starts
 
