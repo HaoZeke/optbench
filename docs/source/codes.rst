@@ -1055,4 +1055,16 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>
+   <h3>CatLearn</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>saddle search</td>
+   <td>6a307f32</td>
+   <td>6a307f32dbef</td>
+   <td><a href="https://github.com/SUNCAT-Center/CatLearn">https://github.com/SUNCAT-Center/CatLearn</a></td>
+   </tr>
+   </tbody></table></div>
+   <p>No full ranked run.</p>
    </section>
