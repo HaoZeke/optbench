@@ -1077,7 +1077,7 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="par2_mean">4655.5</td>
    <td data-field="mean_calls">2455.5</td>
    <td data-field="median_calls">2500</td>
-   <td data-field="failures">crash 0, divergence 0, cap 44, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 44, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-template="cp2k/ci-neb-tuned">
@@ -1088,7 +1088,7 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="par2_mean">2555.76</td>
    <td data-field="mean_calls">2148.98</td>
    <td data-field="median_calls">2070</td>
-   <td data-field="failures">crash 0, divergence 0, cap 8, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 8, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
    <tr data-problem="neb/Pt-heptamer" data-template="cp2k/ci-neb-tuned">
@@ -1099,7 +1099,7 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="par2_mean">1893.85</td>
    <td data-field="mean_calls">1893.85</td>
    <td data-field="median_calls">1800</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
    </tbody></table></div>

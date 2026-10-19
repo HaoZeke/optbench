@@ -57,6 +57,7 @@
     "n_cap": 39,
     "n_crash": 0,
     "n_divergence": 0,
+    "n_not_converged": 0,
     "n_wrong_stationary": 9,
     "nfailed": 48,
     "par2_mean": 4878.96,

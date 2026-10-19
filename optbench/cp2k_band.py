@@ -32,11 +32,13 @@ A clean stop under the cap is a success when the free-atom Cartesian
 gradient L2 is within the problem force norm and the vibrational
 index is 1. Hessian finite differences go through ``verification``.
 
-The harness classes are crash, divergence, cap, and wrong_stationary.
-``classify_failure`` is the label. This runner does not replace it.
-Each start keeps the final energy, the Cartesian geometry, and the
-Cartesian gradient. ``force_norm`` is the free-atom L2 of that
-gradient. ``cp2k_converged`` is the ``BAND TASK COMPLETED`` line.
+``classify_outcome`` labels the start from the final energy, the
+Cartesian geometry, the free-atom force, and the call count. A
+finished finite band above the force stop is ``not_converged``. A
+non-finite energy or geometry is ``divergence``. Each start keeps
+that energy, geometry, and gradient. ``force_norm`` is the free-atom
+L2 of the gradient. ``cp2k_converged`` is the ``BAND TASK COMPLETED``
+line.
 
 Replica files are named in the run directory. ``COORD_FILE_NAME`` is a
 long string, and CP2K reads a quoted value in 80-character pieces. A
@@ -64,7 +66,7 @@ import numpy as np
 
 from .campaign import geometry_archive, load_template, resolve_problem
 from .counter import ForceCallCap, HarnessCounter
-from .failures import classify_failure
+from .failures import classify_outcome
 from .pes import evaluate, interpolate_free, load_pairs
 from .score import score_v2
 from .stationary import numerical_hessian
@@ -747,7 +749,18 @@ def _judge(client: IpiClient, *, returncode: int | None, log_text: str) -> dict:
         )
         if hessian_index != 1:
             reasons.append("hessian_index")
-    failure = classify_failure(reasons)
+    failure = classify_outcome(
+        energy=energy,
+        geometry=positions,
+        force=force,
+        calls=float(calls),
+        cap=client.cap,
+        force_tol=client.force_norm,
+        process_failed="crash" in reasons,
+        hessian_index=hessian_index,
+        expected_index=None if hessian_index is None else 1,
+        stationary_rejected="hessian_index" in reasons,
+    )
     finite_energy = energy if math.isfinite(energy) else None
     finite_force = force if math.isfinite(force) else None
     gradient = None if chosen is None else chosen.get("gradient")

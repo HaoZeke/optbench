@@ -161,7 +161,7 @@ def _client_with_force(force: float, energy: float = -10.0) -> IpiClient:
     return client
 
 
-def test_a_finished_band_keeps_the_harness_class_and_the_final_point():
+def test_a_finished_band_above_the_stop_is_not_converged():
     client = _client_with_force(0.2)
     gradient = np.array([[0.2, 0.0, 0.0], [0.0, 0.0, 0.0]], dtype=np.float64)
     for row in client.evals:
@@ -171,7 +171,7 @@ def test_a_finished_band_keeps_the_harness_class_and_the_final_point():
         returncode=0,
         log_text="*** BAND TASK COMPLETED ***\n",
     )
-    assert judged["failure"] == "divergence"
+    assert judged["failure"] == "not_converged"
     assert judged["success"] is False
     assert judged["cp2k_converged"] is True
     assert judged["reasons"] == ["force_norm"]
@@ -182,13 +182,13 @@ def test_a_finished_band_keeps_the_harness_class_and_the_final_point():
     assert np.allclose(judged["gradient"], gradient)
 
 
-def test_a_max_steps_exit_above_the_stop_stays_on_the_harness_class():
+def test_a_max_steps_exit_above_the_stop_is_not_converged():
     judged = _judge(
         _client_with_force(0.2),
         returncode=0,
         log_text="dump_neb_final: Band task not yet converged\n",
     )
-    assert judged["failure"] == "divergence"
+    assert judged["failure"] == "not_converged"
     assert judged["reasons"] == ["force_norm"]
     assert judged["cp2k_converged"] is False
     assert np.allclose(judged["positions"], np.zeros((2, 3)))
@@ -205,7 +205,7 @@ def test_a_completion_line_past_the_citation_dump_is_kept(tmp_path):
         returncode=0,
         log_text=text,
     )
-    assert judged["failure"] == "divergence"
+    assert judged["failure"] == "not_converged"
     assert judged["cp2k_converged"] is True
     assert judged["positions"] is not None
 
