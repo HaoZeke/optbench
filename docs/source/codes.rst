@@ -533,6 +533,9 @@ The number is written only after the run finishes under the problem rule.
    <li>LJ38 double-ended saddle: partial.</li>
    <li>lj38_2ts_separation: partial.</li>
    <li>pt-island: partial.</li>
+   <li>Binary Lennard-Jones 100: partial.</li>
+   <li>Lennard-Jones 38 global minimum: partial.</li>
+   <li>lj75: partial.</li>
    <li>Lennard-Jones 38 clusters: partial.</li>
    <li>Morse bulk: partial.</li>
    <li>Pt-heptamer: partial.</li>
