@@ -894,10 +894,11 @@
       "current": true,
       "entry": "cp2k-2026.2-saddle-dimer-cg-tuned",
       "failures": {
-        "cap": 18872,
+        "cap": 0,
         "crash": 0,
-        "divergence": 985,
-        "wrong_stationary": 142
+        "divergence": 0,
+        "not_converged": 19108,
+        "wrong_stationary": 891
       },
       "full_n": null,
       "history": false,
@@ -941,7 +942,8 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 20000,
+        "divergence": 0,
+        "not_converged": 20000,
         "wrong_stationary": 0
       },
       "full_n": null,
@@ -1308,8 +1310,9 @@
       "failures": {
         "cap": 0,
         "crash": 13,
-        "divergence": 186,
-        "wrong_stationary": 0
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 186
       },
       "full_n": null,
       "history": false,
