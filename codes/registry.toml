@@ -245,6 +245,20 @@ note = "LAMMPS 30 Sep 2026, tag stable_30Sep2026. Band rows use fix neb with a c
 
 # generated ASE and Sella templates
 
+[[code]]
+id = "torchsim"
+name = "TorchSim"
+role = "minimization"
+repository = "https://github.com/TorchSim/torch-sim"
+ref = "v0.6.2"
+commit = "5540d893a849db9772081229a86d5f68537ad037"
+committed = "2026-09-23"
+note = "TorchSim 0.6.2, tag v0.6.2. FIRE uses the ASE flavor at the constructor defaults. Gradient descent uses pos_lr 0.01. SpecPotentialModel evaluates the harness Lennard-Jones or Morse potential and passes that force to the optimizer. A force call is one harness evaluation."
+
+# generated ASE and Sella templates
+
+# generated ASE and Sella templates
+
 [[template]]
 id = "ase/lj38-bfgs-default"
 code = "ase"

@@ -26,6 +26,12 @@ force_unit = "energy/distance"
 energy_tol = 0.01
 max_force_calls = 10000
 
+[bound]
+kind = "cluster"
+scale = 1.5
+length = "sigma"
+atoms = 38
+
 [noise]
 distribution = "gaussian"
 component = "force"
@@ -49,7 +55,7 @@ par_factor = 2
 bootstrap_resamples = 2000
 bootstrap_seed = 20261015
 counter = "harness"
-success = "harness force calls under the cap, the noisy force at the noise-aware stop, and when sigma is positive a clean-energy window whose span is at most max(energy_tol, kappa * sigma). The Hessian is the clean force. The index is vibrational: the six rigid modes are removed, and a curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6), with that force_norm the noise-aware stop. Energy and Kabsch RMSD are not applied: this file has no per-start reference."
+success = "harness force calls under the cap, the noisy force at the noise-aware stop, and when sigma is positive a clean-energy window whose span is at most max(energy_tol, kappa * sigma). The Hessian is the clean force. The index is vibrational: the six rigid modes are removed, and a curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6), with that force_norm the noise-aware stop. The atoms form one connected cluster with neighbours within 1.5 sigma. A dissociated cluster is divergence. Energy and Kabsch RMSD are not applied: this file has no per-start reference."
 required = [
   "schema",
   "counter",

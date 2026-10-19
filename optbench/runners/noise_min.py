@@ -22,6 +22,7 @@ import time
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
 
+from optbench.bound import note_unbound
 from optbench.counter import ForceCallCap, HarnessCounter
 from optbench.failures import classify_outcome
 from optbench.noise import (
@@ -217,6 +218,9 @@ def _minimize_job(job: dict) -> dict:
         reasons.append("force_norm")
     elif hessian_index != 0:
         reasons.append("hessian_index")
+    before = "divergence" in reasons
+    if finite and point is not None:
+        note_unbound(reasons, point, kind="lj")
     cap_error = bool(error) and ("force-call cap" in error or "ForceCallCap" in error)
     failure = classify_outcome(
         energy=energy,
@@ -226,6 +230,7 @@ def _minimize_job(job: dict) -> dict:
         cap=cap,
         force_tol=threshold,
         process_failed=bool(error) and not cap_error,
+        dissociated="divergence" in reasons and not before,
         hessian_index=hessian_index,
         expected_index=0 if hessian_index is not None else None,
         force_above=False if at_force or not finite or cap_error or (error and not cap_error) else True,

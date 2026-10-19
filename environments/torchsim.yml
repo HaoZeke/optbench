@@ -1,0 +1,12 @@
+# TorchSim is not a conda-forge package. This file does not select a
+# conda build. The campaign runs the source build pinned in
+# codes/registry.toml under id torchsim:
+#   ref = v0.6.2
+#   commit = 5540d893a849db9772081229a86d5f68537ad037
+#   version string 0.6.2
+# asv has one environment_type, so this yml cannot be bound to one class.
+name: torchsim
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12

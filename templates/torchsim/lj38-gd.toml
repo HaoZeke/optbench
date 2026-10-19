@@ -1,0 +1,18 @@
+id = "torchsim/lj38-gd"
+engine = "torchsim"
+problem = "minimization/lj38"
+code = "TorchSim"
+code_version = "0.6.2"
+commit = "5540d893a849db9772081229a86d5f68537ad037"
+algorithm = "GD"
+tuning = "default"
+note = "Default profile. Gradient descent uses the constructor pos_lr 0.01. The step is that rate times the force, and this optimizer has no displacement cap. SpecPotentialModel evaluates the problem potential. Opening forces on these Lennard-Jones starts are large enough that this step can leave the cutoff."
+
+[torchsim]
+method = "gradient_descent"
+pos_lr = 0.01
+
+[stop]
+norm = "l2"
+force_norm = 0.01
+max_force_calls = 10000

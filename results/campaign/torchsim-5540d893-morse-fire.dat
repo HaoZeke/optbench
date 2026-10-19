@@ -1,0 +1,32 @@
+# counter harness. One force call is one SpecPotentialModel evaluation of the problem potential.
+# FIRE is the ASE flavor. Gradient descent uses pos_lr. The cell stays fixed.
+# v2 success is under the cap, at the force stop, and Hessian index 0.
+# LJ38 removes the six rigid modes. A curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6). The noise-aware stop supplies that force_norm when sigma is positive.
+# Morse bulk uses the full Hessian. A curvature below -1e-6 is negative.
+# Energy and Kabsch RMSD were not applied.
+# Default profile. FIRE uses the ASE flavor at the constructor defaults: dt_start 0.1, alpha_start 0.1, dt_max 1, n_min 5, f_inc 1.1, f_dec 0.5, f_alpha 0.99, max_step 0.2. SpecPotentialModel evaluates the problem potential. The orthorhombic cell stays fixed.
+force_calls 114
+force_calls_min 98
+force_calls_max 133
+nfailed 0
+median 112
+code TorchSim
+code_version 0.6.2
+commit 5540d893a849db9772081229a86d5f68537ad037
+algorithm FIRE
+template torchsim/morse-fire
+tuning default
+counter harness
+problem minimization/morse-bulk
+par2_mean 113.81
+wilson_low 0.963006501793
+wilson_high 1
+par2_median 112
+par2_median_low 111
+par2_median_high 114
+v2_nfailed 0
+v2_successes 100
+n 100
+cap 10000
+energy_min -1396.17323764
+energy_max -1396.17323731
