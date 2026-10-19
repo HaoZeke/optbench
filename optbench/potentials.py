@@ -21,6 +21,9 @@ import numpy as np
 LJ_EPSILON = 1.0
 LJ_SIGMA = 1.0
 LJ_CUTOFF = 40.0
+# A pair at distance zero has no 12-6 value. This finite stand-in keeps the
+# pair in the energy instead of dropping it.
+COINCIDENT_PAIR_ENERGY = 1.0e6
 
 MORSE_D0 = 0.7102
 MORSE_ALPHA = 1.6047
@@ -63,16 +66,27 @@ def _accumulate(n: int, iu: np.ndarray, ju: np.ndarray, diff: np.ndarray, slope:
 
 
 def lennard_jones(coords: Sequence[float] | np.ndarray) -> tuple[float, np.ndarray]:
-    """Truncated 12-6 Lennard-Jones. No shift and no periodic images."""
+    """Truncated 12-6 Lennard-Jones. No shift and no periodic images.
+
+    A pair at distance zero contributes ``COINCIDENT_PAIR_ENERGY`` and no
+    force. Dropping that pair would omit the repulsion.
+    """
     pos = _as_positions(coords)
-    iu, ju, diff, r2 = _pairs(pos, LJ_CUTOFF, None)
+    n = pos.shape[0]
+    iu, ju = np.triu_indices(n, k=1)
+    diff = pos[iu] - pos[ju]
+    r2 = np.einsum("ij,ij->i", diff, diff)
+    coincident = int(np.count_nonzero(r2 == 0.0))
+    keep = (r2 > 0.0) & (r2 < LJ_CUTOFF * LJ_CUTOFF)
+    iu, ju, diff, r2 = iu[keep], ju[keep], diff[keep], r2[keep]
+    penalty = COINCIDENT_PAIR_ENERGY * coincident
     if iu.size == 0:
-        return 0.0, np.zeros(pos.size, dtype=np.float64)
+        return float(penalty), np.zeros(pos.size, dtype=np.float64)
     inv_r2 = 1.0 / r2
     sr2 = (LJ_SIGMA * LJ_SIGMA) * inv_r2
     sr6 = sr2 * sr2 * sr2
     sr12 = sr6 * sr6
-    energy = 4.0 * LJ_EPSILON * np.sum(sr12 - sr6)
+    energy = 4.0 * LJ_EPSILON * np.sum(sr12 - sr6) + penalty
     # (1/r) dV/dr = 24 eps (sr6 - 2 sr12) / r^2
     slope = 24.0 * LJ_EPSILON * (sr6 - 2.0 * sr12) * inv_r2
     grad = _accumulate(pos.shape[0], iu, ju, diff, slope)

@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import math
 import tomllib
 from pathlib import Path
 
@@ -91,36 +90,48 @@ def test_every_archived_start_and_the_minimum_fit_in_the_cube():
             assert np.all(placed <= upper + 1e-8)
 
 
-def test_energy_inside_the_window_and_under_the_cap_is_a_success():
+def test_the_cambridge_rule_is_at_or_below_the_minimum():
+    reference = -173.928427
+    tolerance = 0.001
     success, failure, reasons = judge_global(
         calls=12,
         cap=100,
-        energy=-173.928,
-        force_norm=0.2,
+        energy=reference + tolerance,
         finite=True,
         nlopt_code=2,
         error="",
-        limit=-173.92742659062864,
-        floor=-173.92942659062865,
-        stationary_force=0.01,
+        reference=reference,
+        tolerance=tolerance,
     )
     assert success is True
     assert failure is None
     assert reasons == []
+    below, below_failure, _reasons = judge_global(
+        calls=12,
+        cap=100,
+        energy=reference - 1.0,
+        finite=True,
+        nlopt_code=2,
+        error="",
+        reference=reference,
+        tolerance=tolerance,
+    )
+    assert below is True
+    assert below_failure is None
 
 
-def test_the_budget_is_a_cap_and_a_tight_local_minimum_is_the_wrong_point():
+def test_the_budget_is_a_cap_and_a_high_energy_is_the_wrong_point():
+    reference = -173.928427
+    tolerance = 0.001
     success, failure, _reasons = judge_global(
         calls=100,
         cap=100,
         energy=-160.0,
-        force_norm=1e-4,
         finite=True,
         nlopt_code=5,
         error="",
-        limit=-173.92742659062864,
-        floor=-173.92942659062865,
-        stationary_force=0.01,
+        reference=reference,
+        tolerance=tolerance,
     )
     assert success is False
     assert failure == "cap"
@@ -128,70 +139,52 @@ def test_the_budget_is_a_cap_and_a_tight_local_minimum_is_the_wrong_point():
         calls=40,
         cap=100,
         energy=-164.0,
-        force_norm=1e-3,
         finite=True,
         nlopt_code=4,
         error="",
-        limit=-173.92742659062864,
-        floor=-173.92942659062865,
-        stationary_force=0.01,
+        reference=reference,
+        tolerance=tolerance,
     )
     assert failure == "wrong_stationary"
     success, failure, _reasons = judge_global(
         calls=40,
         cap=100,
         energy=-80.0,
-        force_norm=20.0,
         finite=True,
         nlopt_code=1,
         error="",
-        limit=-173.92742659062864,
-        floor=-173.92942659062865,
-        stationary_force=0.01,
+        reference=reference,
+        tolerance=tolerance,
     )
-    assert failure == "divergence"
-    success, failure, _reasons = judge_global(
-        calls=40,
-        cap=100,
-        energy=-182.9,
-        force_norm=1e-4,
-        finite=True,
-        nlopt_code=1,
-        error="",
-        limit=-173.92742659062864,
-        floor=-173.92942659062865,
-        stationary_force=0.01,
-    )
-    assert success is False
     assert failure == "wrong_stationary"
     success, failure, _reasons = judge_global(
         calls=3,
         cap=100,
         energy=None,
-        force_norm=None,
         finite=False,
         nlopt_code=-1,
         error="RuntimeError: boom",
-        limit=-173.92742659062864,
-        floor=-173.92942659062865,
-        stationary_force=0.01,
+        reference=reference,
+        tolerance=tolerance,
     )
     assert failure == "crash"
 
 
-def test_coincident_sites_are_outside_the_potential():
+def test_a_coincident_pair_stays_a_candidate_with_a_large_finite_energy():
+    from optbench.potentials import COINCIDENT_PAIR_ENERGY
+
+    stacked = np.zeros(6)
+    raw, grad = lennard_jones(stacked)
+    assert raw == pytest.approx(COINCIDENT_PAIR_ENERGY)
+    assert np.all(np.isfinite(grad))
+    reported, reported_grad, usable = objective_report(float(raw), grad, stacked)
+    assert usable is True
+    assert reported == pytest.approx(COINCIDENT_PAIR_ENERGY)
+    assert reported_grad.shape == stacked.shape
     energy, _force, coords = reference_minimum()
-    pos = coords.reshape(-1, 3).copy()
-    pos[1] = pos[0]
-    raw, grad = lennard_jones(pos)
-    reported, reported_grad, usable = objective_report(float(raw), grad, pos.reshape(-1))
-    assert math.isfinite(raw)
-    assert usable is False
-    assert reported == pytest.approx(raw)
-    assert reported_grad.shape == (coords.size,)
-    kept, kept_grad, keep = objective_report(-180.0, np.zeros(coords.size), coords)
+    kept, kept_grad, keep = objective_report(energy, np.zeros(coords.size), coords)
     assert keep is True
-    assert kept == -180.0
+    assert kept == pytest.approx(energy)
     assert kept_grad.shape == (coords.size,)
 
 
@@ -210,7 +203,9 @@ def test_a_short_mlsl_start_is_counted_by_the_harness():
     with tarfile.open(archive) as packed:
         text = packed.extractfile("100_lj38/0.con").read().decode("utf-8", errors="replace")
     pos, _box = read_con(text)
-    reference, _force, _coords = reference_minimum()
+    from optbench.globalopt import reference_energy
+
+    reference = reference_energy(problem)
     job = {
         "index": 0,
         "start": "0",
@@ -223,9 +218,8 @@ def test_a_short_mlsl_start_is_counted_by_the_harness():
         "population": None,
         "half_width": settings["half_width"],
         "cap": 30,
-        "limit": reference + settings["window"],
-        "floor": reference - settings["window"],
-        "stationary_force": settings["stationary_force"],
+        "reference": reference,
+        "tolerance": settings["window"],
     }
     record = run_job(job)
     assert record["counter"] == "harness"

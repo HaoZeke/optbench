@@ -179,7 +179,7 @@ repository = "https://github.com/stevengj/nlopt"
 ref = "v2.11.0"
 commit = "88c424d4f458412787df96fcc95218acbca224fd"
 committed = "2026-06-05"
-note = "NLopt 2.11.0 at 88c424d4. Global optimization templates use GN_MLSL with LD_LBFGS, GN_CRS2_LM, GN_ISRES, and GD_STOGO. The potential is the harness Lennard-Jones cluster, epsilon 1, sigma 1, cutoff 40, no shift. Force calls are harness evaluations. Each start is one archived geometry. The search box is a cube of half-width 6 centered on that geometry. The stop is the problem energy window. The evaluation budget on the templates is 1000000 force calls."
+note = "NLopt 2.11.0 at 88c424d4. Global optimization templates use GN_MLSL with LD_LBFGS, GN_CRS2_LM, GN_ISRES, and GD_STOGO. The potential is the harness Lennard-Jones cluster, epsilon 1, sigma 1, cutoff 40, no shift. Force calls are harness evaluations. Each start is one archived geometry. The search box is a cube of half-width 6 centered on that geometry. A success is at or below the Cambridge Cluster Database minimum plus 0.001. The evaluation budget on the templates is 1000000 force calls."
 
 [[template]]
 id = "nloptglobal/lj38-mlsl-lbfgs"

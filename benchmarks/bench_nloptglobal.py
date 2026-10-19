@@ -70,11 +70,11 @@ _GEOMETRIES: dict[str, list] = {}
 
 def _specs() -> list[dict]:
     from optbench.campaign import list_templates, resolve_problem
-    from optbench.runners.nlopt_global import _settings, reference_minimum
+    from optbench.globalopt import energy_tolerance, reference_energy
+    from optbench.runners.nlopt_global import _settings
 
     found = []
     full = os.environ.get("OPTBENCH_ASV_FULL") == "1"
-    reference, _force, _coords = reference_minimum()
     for template in list_templates(ROOT):
         if template.get("engine") != "nlopt":
             continue
@@ -88,7 +88,8 @@ def _specs() -> list[dict]:
                 "template_id": str(template["id"]),
                 "problem_id": problem_id,
                 "settings": settings,
-                "limit": reference + settings["window"],
+                "reference": reference_energy(problem),
+                "tolerance": energy_tolerance(problem),
                 "cap": settings["cap"],
                 "n": count,
             }
@@ -104,8 +105,7 @@ def _job(spec: dict, start: str) -> dict:
     if index < 0 or index >= len(geometries):
         raise IndexError(f"{spec['template_id']} start {start} is outside the archive")
     name, coords = geometries[index]
-    window = float(spec["settings"]["window"])
-    return make_job(index, name, coords, spec["settings"], spec["limit"], spec["limit"] - 2.0 * window)
+    return make_job(index, name, coords, spec["settings"], spec["reference"], spec["tolerance"])
 
 
 def _compute(spec: dict, seed: str, start: str) -> dict:

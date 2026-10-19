@@ -3,6 +3,7 @@ import pytest
 np = pytest.importorskip("numpy")
 
 from optbench.potentials import (
+    COINCIDENT_PAIR_ENERGY,
     lennard_jones,
     lennard_jones_hessian,
     morse_bulk,
@@ -43,6 +44,13 @@ def test_lj_dimer_sits_at_the_well():
     assert np.linalg.norm(grad) == pytest.approx(0.0, abs=1e-10)
     index = negative_index(np.linalg.eigvalsh(lennard_jones_hessian(x)).tolist())
     assert index == 0
+
+
+def test_a_coincident_lennard_jones_pair_is_a_large_finite_energy():
+    energy, grad = lennard_jones(np.zeros(6))
+    assert energy == pytest.approx(COINCIDENT_PAIR_ENERGY)
+    assert np.all(np.isfinite(grad))
+    assert float(np.linalg.norm(grad)) == pytest.approx(0.0)
 
 
 def test_lj_gradient_and_hessian_match_finite_differences():

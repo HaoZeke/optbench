@@ -10,7 +10,7 @@ profile = "default"
 tuning = "default"
 reducer = "capped"
 ranked = true
-note = "GD_STOGO, the deterministic branch-and-bound search. The random StoGO variant is a different algorithm. The NLopt seed is the start index. The harness drops a pair of atoms on the same site. NLopt receives that value. A repeated site is not a candidate minimum."
+note = "GD_STOGO, the deterministic branch-and-bound search. The random StoGO variant is a different algorithm. The NLopt seed is the start index. A coincident pair is a large finite energy in the harness potential. The recorded point is the point NLopt returned."
 
 [nlopt]
 name = "GD_STOGO"

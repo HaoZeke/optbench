@@ -5,15 +5,15 @@ shift. One force call is one entry into ``HarnessCounter``. A repeated
 coordinate is cached, so an energy read and a gradient read of the same
 point are one evaluation.
 
-The problem stop is the energy window. The template evaluation budget is
-the force-call cap. NLopt is also given that budget as ``maxeval``. A
-success is under the cap and within that window of the reference, on
-either side. The reference energy is the harness potential on
-``optbench/data/lj38_global_minimum.con``.
+The problem stop is the Cambridge Cluster Database rule: a finite energy
+at or below the published minimum plus ``energy_above_minimum``. A lower
+energy still succeeds. The template evaluation budget is the force-call
+cap. NLopt is also given that budget as ``maxeval`` and that threshold
+as ``stopval``.
 
-The harness pair loop drops a pair at distance zero. NLopt receives
-that harness value. A repeated site is not a candidate minimum, so it
-cannot be a success.
+A coincident pair in the harness potential is a large finite energy.
+The recorded geometry is the point NLopt returned, and the recorded
+energy is the harness value of that point.
 """
 
 from __future__ import annotations
@@ -27,14 +27,13 @@ from pathlib import Path
 import numpy as np
 
 from optbench.counter import ForceCallCap, HarnessCounter
-from optbench.failures import classify_failure
+from optbench.globalopt import energy_tolerance, judge_globalopt, reference_energy
 from optbench.potentials import lennard_jones, read_con
 from optbench.score import score_v2, summarize_capped
 from optbench.v2 import collect_provenance, write_starts
 
 MAXEVAL = 5
 MAXTIME = 6
-ROUNDOFF = -4
 PENALTY = 1.0e6
 _REFERENCE_NAME = "lj38_global_minimum.con"
 
@@ -42,8 +41,8 @@ _REFERENCE_NAME = "lj38_global_minimum.con"
 def duplicate_sites(coords: np.ndarray) -> bool:
     """True when two atoms share one coordinate triple.
 
-    Equality is bitwise. A pair at that distance is the hole the harness
-    potential drops.
+    Equality is bitwise. The harness potential gives that pair a large
+    finite energy.
     """
     pos = np.asarray(coords, dtype=np.float64).reshape(-1, 3)
     count = pos.shape[0]
@@ -58,15 +57,16 @@ def objective_report(
     gradient: np.ndarray,
     coords: np.ndarray,
 ) -> tuple[float, np.ndarray, bool]:
-    """Value and gradient for NLopt, and whether the point can be kept.
+    """Value and gradient NLopt sees, and that the point stays a candidate.
 
-    A non-finite value is a penalty. A repeated site keeps the harness
-    value, which drops that pair, and is not a candidate.
+    A non-finite value becomes a large finite penalty. A coincident pair
+    already has a large finite harness energy, and that value is kept.
     """
+    del coords
     grad = np.asarray(gradient, dtype=np.float64).reshape(-1)
-    if not math.isfinite(energy):
-        return PENALTY, np.zeros(grad.size, dtype=np.float64), False
-    return float(energy), grad, not duplicate_sites(coords)
+    if not math.isfinite(energy) or not bool(np.all(np.isfinite(grad))):
+        return PENALTY, np.zeros(grad.size, dtype=np.float64), True
+    return float(energy), grad, True
 
 
 def reference_minimum() -> tuple[float, float, np.ndarray]:
@@ -97,45 +97,26 @@ def judge_global(
     calls: int,
     cap: int,
     energy: float | None,
-    force_norm: float | None,
     finite: bool,
     nlopt_code: int | None,
     error: str,
-    limit: float,
-    floor: float,
-    stationary_force: float,
+    reference: float,
+    tolerance: float,
 ) -> tuple[bool, str | None, list[str]]:
-    """Success bit, primary failure class, and the reasons that produced it."""
+    """Cambridge energy rule, with a crash when the search raised under the cap."""
     cap_error = "ForceCallCap" in error or "force-call cap" in error
     stopped_by_budget = calls >= cap or nlopt_code in (MAXEVAL, MAXTIME) or cap_error
-    at_energy = (
-        finite
-        and energy is not None
-        and float(floor) <= float(energy) <= float(limit)
-        and calls < cap
-        and not cap_error
-    )
-    if at_energy and not stopped_by_budget:
-        return True, None, []
-    reasons: list[str] = []
     raised = bool(error) and not cap_error and (nlopt_code is None or nlopt_code < 0)
     if raised and not stopped_by_budget:
-        reasons.append("crash")
-    elif not finite:
-        reasons.append("divergence")
-    elif stopped_by_budget:
-        reasons.append("cap")
-    elif nlopt_code == ROUNDOFF:
-        reasons.append("divergence")
-    elif (
-        force_norm is not None
-        and math.isfinite(force_norm)
-        and force_norm <= stationary_force
-    ):
-        reasons.append("energy")
-    else:
-        reasons.append("divergence")
-    return False, classify_failure(reasons), reasons
+        return False, "crash", ["crash"]
+    judged = judge_globalopt(
+        energy if finite else None,
+        calls,
+        reference=reference,
+        tolerance=tolerance,
+        cap=cap,
+    )
+    return bool(judged["success"]), judged["failure"], list(judged["reasons"])
 
 
 def _nlopt_section(template: dict) -> dict:
@@ -194,6 +175,7 @@ def run_job(job: dict) -> dict:
     energy = None
     force_norm = None
     point = None
+    nlopt_value = None
     seconds = 0.0
     cap = int(job["cap"])
     try:
@@ -248,11 +230,12 @@ def run_job(job: dict) -> dict:
         opt.set_min_objective(objective)
         opt.set_lower_bounds(lower.tolist())
         opt.set_upper_bounds(upper.tolist())
-        opt.set_stopval(float(job["limit"]))
+        opt.set_stopval(float(job["reference"]) + float(job["tolerance"]))
         opt.set_maxeval(cap)
         started = time.perf_counter()
+        returned = None
         try:
-            opt.optimize(x0.copy())
+            returned = np.asarray(opt.optimize(x0.copy()), dtype=np.float64).reshape(-1).copy()
             code = int(opt.last_optimize_result())
         except ForceCallCap as exc:
             error = f"ForceCallCap: {exc}"
@@ -267,7 +250,14 @@ def run_job(job: dict) -> dict:
             except Exception:
                 code = None
         seconds = time.perf_counter() - started
-        point = incumbent["x"]
+        try:
+            nlopt_value = float(opt.last_optimum_value())
+        except Exception:
+            nlopt_value = None
+        if returned is not None and returned.size == x0.size and bool(np.all(np.isfinite(returned))):
+            point = returned
+        else:
+            point = np.asarray(incumbent["x"], dtype=np.float64).reshape(-1)
         calls = int(counter.calls)
         with counter.verification():
             key = tuple(float(value) for value in np.asarray(point, dtype=np.float64).reshape(-1))
@@ -281,9 +271,6 @@ def run_job(job: dict) -> dict:
         verify_calls = int(counter.verify_calls)
         energy = float(value)
         force_norm = float(np.linalg.norm(gradient))
-        if duplicate_sites(point):
-            energy = None
-            force_norm = None
     except Exception as exc:
         if not error:
             error = f"{type(exc).__name__}: {exc}"
@@ -301,13 +288,11 @@ def run_job(job: dict) -> dict:
         calls=calls,
         cap=cap,
         energy=energy,
-        force_norm=force_norm,
         finite=finite,
         nlopt_code=code,
         error=error,
-        limit=float(job["limit"]),
-        floor=float(job["floor"]),
-        stationary_force=float(job["stationary_force"]),
+        reference=float(job["reference"]),
+        tolerance=float(job["tolerance"]),
     )
     record = {
         "schema": "optbench.start/v2",
@@ -327,6 +312,7 @@ def run_job(job: dict) -> dict:
         "converged": success,
         "nlopt_code": code,
         "nlopt_algorithm": job["algorithm"],
+        "nlopt_value": None if nlopt_value is None or not math.isfinite(nlopt_value) else float(nlopt_value),
     }
     if error:
         record["error"] = error
@@ -376,7 +362,7 @@ def _dat(summary: dict, template: dict, metrics: dict, commit: str, version: str
     lines = [
         "# counter harness. One force call is one HarnessCounter entry.",
         "# The potential is Lennard-Jones, epsilon 1, sigma 1, cutoff 40, no shift.",
-        "# A success is under the cap and within the problem energy window of the reference.",
+        "# A success is under the cap and at or below the Cambridge minimum plus 0.001.",
     ]
     note = str(template.get("note") or "").strip()
     if note:
@@ -447,7 +433,7 @@ def _append_partial(path: Path, record: dict) -> None:
         handle.write(json.dumps(record, sort_keys=True) + "\n")
 
 
-def _job(index: int, name: str, coords: np.ndarray, settings: dict, limit: float, floor: float) -> dict:
+def _job(index: int, name: str, coords: np.ndarray, settings: dict, reference: float, tolerance: float) -> dict:
     section = settings["nlopt"]
     return {
         "index": index,
@@ -461,9 +447,8 @@ def _job(index: int, name: str, coords: np.ndarray, settings: dict, limit: float
         "population": section.get("population"),
         "half_width": settings["half_width"],
         "cap": settings["cap"],
-        "limit": limit,
-        "floor": floor,
-        "stationary_force": settings["stationary_force"],
+        "reference": reference,
+        "tolerance": tolerance,
     }
 
 
@@ -491,14 +476,16 @@ def run_template(
     if stated and stated != problem["id"]:
         raise ValueError(f"{template['id']} is for {stated}, not {problem['id']}")
     settings = _settings(problem, template)
-    reference, _force, _coords = reference_minimum()
-    energy_limit = reference + settings["window"]
-    energy_floor = reference - settings["window"]
+    reference = reference_energy(problem)
+    tolerance = energy_tolerance(problem)
+    if abs(tolerance - settings["window"]) > 1e-15:
+        raise ValueError(f"{template['id']} energy window is not the problem tolerance")
+    energy_limit = reference + tolerance
     loaded = _load_geometries(root, problem, geometries, work, output)
     if limit > 0:
         loaded = loaded[:limit]
     jobs = [
-        _job(index, name, coords, settings, energy_limit, energy_floor)
+        _job(index, name, coords, settings, reference, tolerance)
         for index, (name, coords) in enumerate(loaded)
     ]
     partial = _partial_path(output)
@@ -552,6 +539,7 @@ def run_template(
                             "converged": False,
                             "nlopt_code": None,
                             "nlopt_algorithm": job["algorithm"],
+                            "nlopt_value": None,
                             "error": f"{type(exc).__name__}: {exc}",
                         }
                     fresh.append(record)
@@ -597,9 +585,7 @@ def run_template(
         "half_width": settings["half_width"],
         "max_force_calls": cap,
         "energy_limit": energy_limit,
-        "energy_floor": energy_floor,
         "reference_energy": reference,
-        "stationary_force": settings["stationary_force"],
         "seed": "start index",
     }
     passed = {key: value for key, value in passed.items() if value is not None}
@@ -619,7 +605,7 @@ def run_template(
         "bootstrap_seed": 20261015,
         "note": (
             "Harness counter on the Lennard-Jones cluster. "
-            "A success is within the energy window of the reference and under the evaluation budget."
+            "A success is at or below the Cambridge Cluster Database minimum plus 0.001 and under the evaluation budget."
         ),
         "runs": [
             {
