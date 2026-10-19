@@ -1,0 +1,15 @@
+# counter harness. One force call is one ASE calculate inside the solid-state dimer.
+# TSASE forceCalls is not this count.
+# A mode success is the problem overlap. A saddle success is Hessian index 1.
+successes 0
+nfailed 200
+n 200
+transition_states 0
+code tsase
+code_version 1.0
+commit 98aac60b5d9905e81ee4e6b8c385f169258d0218
+algorithm SSDimer
+template tsase/dimer-lj38
+problem tsopt/LJ38
+tuning default
+counter harness

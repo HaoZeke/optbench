@@ -1,0 +1,81 @@
+id = "eon-svn/saddle-pt-md"
+engine = "eon"
+problem = "saddle-search/pt-island"
+code = "Eon svn"
+code_version = "r2549"
+commit = "r2549"
+algorithm = "Dynamics"
+reducer = "harness"
+failure_cap = 20000000
+kind = "akmc"
+kernel = "morse"
+asv_class = "EonSvnSaddlePtMd"
+note = '''
+High-temperature dynamics process search from the 2014 eon-md ini. confidence_scheme dynamics, dynamics temperature 2800, Langevin friction 0.004, time_step 2, time 10000. num_jobs is 1 and pass_limit is 1 so one search is the partial. The 2014 file asked for 8 jobs. Success remains 27 good saddles. The harness kernel is morse/smooth/linear with D 0.7102, alpha 1.6047, r0 2.897, cutoff 9.5, and periodic boundaries in x and y.
+'''
+seeds = [0]
+starts = ["pt-island"]
+pass_limit = 1
+workers = 1
+declare_partial = true
+asv_full = false
+asv_timeout = 3600
+budget_seconds = 2400
+
+[ini.Main]
+job = "akmc"
+temperature = 700
+finite_difference = 0.001
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+converged_force = 0.001
+max_move = 0.2
+max_iterations = 1000
+lbfgs_memory = 20
+
+[ini.AKMC]
+confidence = 1.1
+confidence_scheme = "dynamics"
+thermally_accessible_window = 99999
+
+[ini."Process Search"]
+minimize_first = true
+
+[ini.Communicator]
+type = "local"
+num_jobs = 1
+number_of_CPUs = 1
+client_path = "eonclient"
+
+[ini."Nudged Elastic Band"]
+images = 3
+max_iterations = 100
+spring = 5
+climbing_image_method = true
+converged_force = 0.1
+
+[ini."Saddle Search"]
+method = "dynamics"
+dynamics_temperature = 2800
+dynamics_state_check_interval = 600
+dynamics_record_interval = 40
+dynamics_linear_interpolation = true
+max_energy = 1000
+max_iterations = 300
+
+[ini.Dynamics]
+time_step = 2
+time = 10000
+thermostat = "langevin"
+langevin_friction = 0.004
+
+[ini.Dimer]
+rotations_max = 20
+converged_angle = 5
+
+[ini.Prefactor]
+default_value = "5e12"

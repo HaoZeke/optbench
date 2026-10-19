@@ -1,0 +1,19 @@
+# counter harness. pysisyphus Lanczos calls pes.evaluate.
+# dx is 5e-3 and dl is 1e-2. A free cluster drops six rigid modes.
+# The guess is seeded from the start name. Success is absolute overlap.
+force_calls 21
+force_calls_min 13
+force_calls_max 26
+force_calls_median 22
+successes 160
+nfailed 40
+n 200
+transition_states 0
+code pysisyphus
+code_version 0.1.dev1
+commit a4ce10dd6d7fdcb3d813f1c730eb365d29041999
+algorithm Lanczos
+template pysisyphus/lanczos-lj38
+problem lowest-eigenvector/lj38
+tuning default
+counter harness
