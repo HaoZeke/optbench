@@ -1,8 +1,8 @@
 # counter harness. One force call is one Lennard-Jones evaluation inside the two-point step.
-# The problem states no energy window. Each start stops after the structure budget.
+# The template stops each start after the structure budget and does not apply the problem energy window.
 # failure is cap. cap is the largest harness count in this file, so PAR-2 is twice that count.
 # force_calls is the half-even mean of those counts. energy_min and energy_max are the best energies.
-# Partial row. globalopt/lj75 states no energy window and no start count. The 200 indices coords.1 through coords.200 follow the archived GMIN loop. Each index is an independent AIRSS search of 20 cells. POSAMP 2.351945 is the LJ38 value 1.875 times (75/38)^(1/3). MINSEP, SYMMOPS, and NFORM match the LJ38 cell. The recorded energy is the lowest harness energy in the budget. Every start stops at that budget.
+# Partial row. The template stops each start after 20 cells and does not apply the problem energy window. The 200 indices coords.1 through coords.200 follow the archived GMIN loop. Each index is an independent AIRSS search of 20 cells. POSAMP 2.351945 is the LJ38 value 1.875 times (75/38)^(1/3). MINSEP, SYMMOPS, and NFORM match the LJ38 cell. The recorded energy is the lowest harness energy in the budget. Every start stops at that budget.
 force_calls 17134
 force_calls_min 11787
 force_calls_max 25281
