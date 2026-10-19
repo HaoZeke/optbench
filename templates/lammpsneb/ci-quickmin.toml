@@ -1,0 +1,18 @@
+# LAMMPS 30 Sep 2026 fix neb. The second stage climbs.
+# The problem file supplies the image count, the cap, the force norm, and max_move.
+# Kspring is 1.0 with the parallel neigh spring. min_style is quickmin.
+# The timestep is the unit default.
+id = "lammpsneb/ci-quickmin"
+engine = "lammps-neb"
+code = "LAMMPS"
+code_version = "30 Sep 2026"
+commit = "8de817dd79bfe4525d5d39246a212d833e6dee07"
+algorithm = "CI-NEB-quickmin"
+tuning = "default"
+
+[band]
+climbing = true
+min_style = "quickmin"
+spring_k = 1.0
+parallel = "neigh"
+call_reserve = 0.0
