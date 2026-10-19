@@ -110,6 +110,7 @@ SHA = {
     "entries/eon-svn-htst": "715bc521c827f1f18102c1c027d99d0d8624b0fb",
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
+    "cells/fill-not-rerun": "",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -125,6 +126,7 @@ MATCHES: list[dict] = [
     {"key": "minimization/lj38/ase-lbfgs", "template": "ase/lj38-lbfgs-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-lj38-lbfgs-tuned.dat"},
     {"key": "minimization/lj38/ase-BFGS", "template": "ase/lj38-bfgs-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-lj38-bfgs-tuned.dat"},
     {"key": "minimization/lj38/ase-bfgslinesearch", "template": "ase/lj38-bfgslinesearch-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-lj38-bfgslinesearch-tuned.dat"},
+    {"key": "minimization/lj38/ase-lbfgslinesearch", "template": "ase/lj38-lbfgslinesearch-tuned", "branch": "cells/fill-not-rerun", "path": "results/campaign/ase-3.29.0-lj38-lbfgslinesearch-tuned.dat", "cause": "linesearch_exceptions"},
     {"key": "minimization/lj38/ase-fire", "template": "ase/lj38-fire-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-lj38-fire-tuned.dat"},
     {"key": "minimization/lj38/optim", "template": "optim/lj38-lbfgs-tuned", "branch": "cells/optim/min", "path": "results/campaign/optim-02aaf45245af-lj38-lbfgs-tuned.dat", "extra": {"unrounded_mean": 175.537}},
     {"key": "minimization/lj38/pele-lbfgs-M1-maxstep0.1", "template": "pele-lbfgs-M1-maxstep0.1", "branch": "main", "path": "results/campaign/pele-0.1.2-lbfgs-M1-maxstep0.1.dat"},
@@ -149,6 +151,7 @@ MATCHES: list[dict] = [
     {"key": "lowest-eigenvector/lj38/eon-dimer-cg", "template": "eon-client/low-lj38-dimer-cg", "branch": "main", "path": "results/campaign/eon-client-low-lj38-dimer-cg.dat"},
     {"key": "lowest-eigenvector/lj38/eon-dimer-lbfgs", "template": "eon-client/low-lj38-dimer-lbfgs", "branch": "main", "path": "results/campaign/eon-client-low-lj38-dimer-lbfgs.dat"},
     {"key": "lowest-eigenvector/lj38/eon-lanczos", "template": "eon-svn/low-lj38-lanczos-ljcut", "branch": "main", "path": "results/campaign/eon-svn-low-lj38-lanczos-ljcut.dat"},
+    {"key": "lowest-eigenvector/lj38/sella", "template": "sella-0.1.1/lj38-loweig", "branch": "cells/fill-not-rerun", "path": "results/campaign/sella-0.1.1-lj38-loweig.dat"},
     {"key": "lowest-eigenvector/lj38/pele-first-order", "template": "pele/lj38-loweig-forward", "branch": "cells/pele/ts", "path": "results/campaign/pele-b7081b93-lj38-loweig-forward.dat"},
     {"key": "lowest-eigenvector/lj38/pele-second-order", "template": "pele/lj38-loweig-central", "branch": "cells/pele/ts", "path": "results/campaign/pele-b7081b93-lj38-loweig-central.dat"},
     {"key": "lowest-eigenvector/lj38/optim-first-order", "template": "optim/rr-loweig", "branch": "cells/optim/saddle-pt", "path": "results/campaign/optim-df8da599-rr-loweig.dat", "cause": "optim_rr_defaults"},
@@ -268,6 +271,14 @@ CAUSE_TEXT = {
         "The mean is 688720 against 521595."
     ),
     "htst_al": "The r2549 Al dimer with the archived rotation string (CG, max 50, tol 1) misses barrier_force_calls and rate_force_calls by about 30 percent. Pt dimer CG with max 10 reproduces all four hTST counts.",
+    "linesearch_exceptions": (
+        "ASE 3.29 LBFGSLineSearch with the archived opt.py arguments (maxstep 0.2, alpha 1/0.001, memory 100) "
+        "scores 410 against 417, inside 10 percent. "
+        "report.sh counts a start as failed only when a written total_force_calls is at least 10000, and the benchmark.dat label says M=5 while opt.py sets memory 100. "
+        "The harness records 7 failures: 5 RuntimeError LineSearch failed (ASE 3.8.2 already raises that; ASE 3.6.0 is not on PyPI) "
+        "and 2 Hessian index 1 after the Euclidean force norm is under 0.01. "
+        "The Wilson interval on 0 failures out of 1000 is about 0 to 3.83."
+    ),
     "akmc_vs_langevin": (
         "The archive rows are Langevin parallel replica. The harness rows are AKMC. "
         "On infra/aladatom-repro, eon/aladatom-akmc true_rate 3.597591452e9 is 14.1 times 2.542941e8, "
@@ -423,8 +434,11 @@ def screen_fields(text: str) -> dict[str, str]:
 
 
 def read_campaign(root: Path, branch: str, path: str) -> str:
+    local = root / path
+    if local.is_file():
+        return local.read_text(encoding="utf-8")
     if branch == "main":
-        return (root / path).read_text(encoding="utf-8")
+        return local.read_text(encoding="utf-8")
     import subprocess
 
     return subprocess.check_output(
@@ -435,6 +449,14 @@ def read_campaign(root: Path, branch: str, path: str) -> str:
 
 
 def _sha(branch: str) -> str:
+    if branch == "cells/fill-not-rerun" and len(SHA.get(branch, "")) < 12:
+        import subprocess
+
+        SHA[branch] = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"],
+            cwd=Path(__file__).resolve().parents[1],
+            text=True,
+        ).strip()
     if branch == "cells/optim/saddle-pt" and len(SHA.get(branch, "")) < 12:
         import subprocess
 
@@ -497,7 +519,7 @@ def holdback(root: Path) -> Hold:
 
 def _local_fields(root: Path, rerun: dict) -> dict[str, str] | None:
     path = root / str(rerun.get("path") or "")
-    if path.is_file() and rerun.get("branch") == "main" and rerun.get("kind", "dat") == "dat":
+    if path.is_file() and rerun.get("kind", "dat") == "dat":
         return parse_dat(path.read_text(encoding="utf-8"))
     return None
 

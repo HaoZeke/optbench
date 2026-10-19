@@ -72,7 +72,7 @@ repository = "https://gitlab.com/ase/ase"
 ref = "3.29.0"
 commit = "f27c0005ae6a67ea419f996e728668865bfc1f86"
 committed = "2026-10-15"
-note = "Atomic Simulation Environment 3.29.0. BFGS, LBFGS, FIRE, BFGSLineSearch, GPMin, PreconLBFGS, PreconFIRE, and PreconODE12r, plus NEB and dimer. Force calls are harness calculator evaluations."
+note = "Atomic Simulation Environment 3.29.0. BFGS, LBFGS, FIRE, BFGSLineSearch, LBFGSLineSearch, GPMin, PreconLBFGS, PreconFIRE, and PreconODE12r, plus NEB and dimer. Force calls are harness calculator evaluations."
 
 [[code]]
 id = "sella"
@@ -163,6 +163,24 @@ ref = "svn-snapshot"
 commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
 note = "No public git commit. The pin is the sha256 of the Wales svn.tar.bz2 snapshot, 122743078 bytes. Minimization L-BFGS calls the ASE socket and pes.evaluate. OPTIM's own call counter is not a score. Saddle search, NEB, noise, and PATHSAMPLE are not scored."
 
+[[code]]
+id = "sella-0.1.1"
+name = "Sella"
+role = "lowest eigenvector"
+repository = "https://github.com/zadorlab/sella"
+ref = "0.1.1"
+commit = "0.1.1"
+committed = "2019-12-10"
+note = "Sella 0.1.1 PESWrapper.diag for the lowest-eigenvector row. eta 1e-6, gamma 1e-16, vreftol 0.99, gradient v0, rigid-mode projection. This pin is not Sella 2.6.0."
+
+[[template]]
+id = "sella-0.1.1/lj38-loweig"
+code = "sella-0.1.1"
+problem = "lowest-eigenvector/lj38"
+profile = "archive"
+task = "lowest-eigenvector"
+ranked = true
+
 # generated ASE and Sella templates
 
 [[template]]
@@ -223,6 +241,22 @@ ranked = true
 
 [[template]]
 id = "ase/lj38-bfgslinesearch-tuned"
+code = "ase"
+problem = "minimization/lj38"
+profile = "tuned"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/lj38-lbfgslinesearch-default"
+code = "ase"
+problem = "minimization/lj38"
+profile = "default"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/lj38-lbfgslinesearch-tuned"
 code = "ase"
 problem = "minimization/lj38"
 profile = "tuned"
@@ -367,6 +401,22 @@ ranked = true
 
 [[template]]
 id = "ase/morse-bfgslinesearch-tuned"
+code = "ase"
+problem = "minimization/morse-bulk"
+profile = "tuned"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/morse-lbfgslinesearch-default"
+code = "ase"
+problem = "minimization/morse-bulk"
+profile = "default"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/morse-lbfgslinesearch-tuned"
 code = "ase"
 problem = "minimization/morse-bulk"
 profile = "tuned"
