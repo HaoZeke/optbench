@@ -1051,6 +1051,17 @@ The number is written only after the run finishes under the problem rule.
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="lowest-eigenvector/lj38" data-template="optim/rr-loweig">
+   <td>lj38</td>
+   <td data-field="template">optim/rr-loweig</td>
+   <td data-field="version">optim df8da599</td>
+   <td data-field="commit">02aaf45245af</td>
+   <td data-field="par2_mean">24.15</td>
+   <td data-field="mean_calls">24.15</td>
+   <td data-field="median_calls">22.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
    <tr data-problem="minimization/lj38" data-template="optim/lbfgs-lj38">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="template">optim/lbfgs-lj38</td>
