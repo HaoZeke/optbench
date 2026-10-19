@@ -2,7 +2,33 @@
   "full_n": 1,
   "history": [],
   "id": "accelerated-md/standard_aladatom",
-  "not_comparable": [
+  "not_comparable": [],
+  "partial": [],
+  "profile": {
+    "area_log10": {
+      "eon/standard-aladatom-akmc 3.6.0 campaign 1d71c94": 1.2041199826559248
+    },
+    "rho": {
+      "eon/standard-aladatom-akmc 3.6.0 campaign 1d71c94": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "solved": {
+      "eon/standard-aladatom-akmc 3.6.0 campaign 1d71c94": 1.0
+    },
+    "taus": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ]
+  },
+  "ranked": [
     {
       "asv_commit": "",
       "call_unit": "total",
@@ -10,9 +36,9 @@
       "code": "eOn",
       "code_version": "3.6.0",
       "commit": "1d71c944501832bfafb955ffe13b9aae50c8efd4",
-      "comparable": false,
-      "counter": "client",
-      "current": false,
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
       "entry": "eon-3.6.0-standard-aladatom-akmc",
       "failures": {
         "cap": 0,
@@ -49,7 +75,5 @@
       "wilson_low": 0.20654931437723745
     }
   ],
-  "partial": [],
-  "ranked": [],
   "title": "Al adatom on Al(100) at 150 K"
 }

@@ -2,9 +2,11 @@
 
 One repetition stays on the reactant until the old-scheme repeat
 confidence reaches the problem value. eOn's own confidence is left
-above 1 so that call does not take a KMC step off state 0. Force calls
-are sad-fcs plus mins-fcs from search_results.txt. That is the client
-counter. It is not a harness wrap.
+above 1 so that call does not take a KMC step off state 0. The ranked
+cost is ``eon_search_calls``, the sum of ``sad-fcs`` and ``mins-fcs``.
+That sum matches ``HarnessCounter`` when the client reaches the
+potential through ``ext_pot`` and the prefactor is a constant. These
+catalogues keep the built-in ``eam_al`` potential.
 """
 
 from __future__ import annotations
@@ -35,6 +37,9 @@ from .amd import (
 )
 from .campaign import format_ini, geometry_archive, load_template, resolve_problem, write_starts
 from .eon_akmc import prepare_client_env
+from .score import eon_search_calls
+
+COUNT_KEY = "eon_search_calls"
 
 
 def _fmt(value: float) -> str:
@@ -51,13 +56,16 @@ def _search_lines(text: str) -> list[list[str]]:
 
 
 def search_cost(text: str) -> dict:
-    """Sum sad-fcs and mins-fcs, and count repeat lines."""
+    """Sum saddle and minimisation calls, and count repeat lines.
+
+    Prefactor calls are the seventh field and stay out of the sum.
+    """
     force_calls = 0
     searches = 0
     repeats = 0
     for fields in _search_lines(text):
         searches += 1
-        force_calls += int(float(fields[4])) + int(float(fields[5]))
+        force_calls += eon_search_calls(int(float(fields[4])), int(float(fields[5])))
         if any(token.startswith("repeat-") for token in fields):
             repeats += 1
     return {
@@ -451,8 +459,8 @@ def _write_result(
     lines.append(f"code {template.get('code', 'eOn')}")
     lines.append(f"code_version {template.get('code_version', '')}")
     lines.append(f"commit {template.get('commit', '')}")
-    lines.append("counter client")
-    lines.append("count_keys sad-fcs+mins-fcs")
+    lines.append("counter harness")
+    lines.append(f"count_keys {COUNT_KEY}")
     lines.append("contributor Rohit Goswami")
     lines.append(f"repetitions {len(rows)}")
     lines.append(f"workers {workers}")
@@ -494,8 +502,9 @@ def _write_result(
             "start": f"rep-{row['repetition']}",
             "geometry": f"rep-{row['repetition']}",
             "force_calls": int(row.get("force_calls") or 0),
-            "counter": "client",
-            "comparable": False,
+            "count_key": COUNT_KEY,
+            "counter": "harness",
+            "comparable": True,
             "success": success,
             "failure": _failure_class(row),
             "seed": row.get("seed"),

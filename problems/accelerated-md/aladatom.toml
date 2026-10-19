@@ -115,7 +115,7 @@ par_factor = 2
 bootstrap_resamples = 2000
 bootstrap_seed = 20261015
 counter = "harness"
-note = "An eOn AKMC row counts sad-fcs plus mins-fcs in the client. That counter is not a harness wrap, so the row is not a PAR-2 rank."
+note = "The ranked cost is eon_search_calls, the sum of sad-fcs and mins-fcs. That sum matches HarnessCounter on an ext_pot saddle search when the prefactor is a constant. Prefactor calls stay out of the sum. The potential stays the built-in Voter-Chen eam_al."
 required = [
   "schema",
   "counter",
