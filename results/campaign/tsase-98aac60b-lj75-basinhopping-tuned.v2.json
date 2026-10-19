@@ -18,7 +18,7 @@
         "force_calls_max": 1000000,
         "force_calls_median": 1000000.0,
         "force_calls_min": 1000000,
-        "nfailed": 115
+        "nfailed": 119
       },
       "metrics": {
         "bootstrap_resamples": 2000,
@@ -32,12 +32,12 @@
         "median": 2000000.0,
         "median_high": 2000000.0,
         "median_low": 2000000.0,
-        "n": 115,
-        "n_cap": 115,
+        "n": 119,
+        "n_cap": 119,
         "n_crash": 0,
         "n_divergence": 0,
         "n_wrong_stationary": 0,
-        "nfailed": 115,
+        "nfailed": 119,
         "par2_mean": 2000000.0,
         "par_applied": true,
         "par_factor": 2,
@@ -47,7 +47,7 @@
         "success_only_mean": null,
         "success_rate": 0.0,
         "successes": 0,
-        "wilson_high": 0.03232423144931307,
+        "wilson_high": 0.031271680241939506,
         "wilson_low": 0.0
       },
       "parameters": {
@@ -2040,6 +2040,74 @@
           ],
           "schema": "optbench.start/v2",
           "start": "coords.115",
+          "success": false,
+          "threshold": -397.491331,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -393.618130252876,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -393.618130252876,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "coords.116",
+          "success": false,
+          "threshold": -397.491331,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -394.57403784451367,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -394.57403784451367,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "coords.117",
+          "success": false,
+          "threshold": -397.491331,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -394.3975955674927,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -394.3975955674927,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "coords.118",
+          "success": false,
+          "threshold": -397.491331,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -393.4116171959515,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -393.4116171959515,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "coords.119",
           "success": false,
           "threshold": -397.491331,
           "verify_calls": 0
