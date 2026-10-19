@@ -979,14 +979,14 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
-   <tr data-problem="tsopt/pt-island" data-template="pele/pt-island-ts">
+   <tr data-problem="tsopt/pt-island" data-template="pele/pt-island-ts-ffd">
    <td>pt-island</td>
-   <td data-field="template">pele/pt-island-ts</td>
+   <td data-field="template">pele/pt-island-ts-ffd</td>
    <td data-field="version">pele 0.1.2</td>
    <td data-field="commit">b7081b932a06</td>
-   <td data-field="par2_mean">614.633</td>
-   <td data-field="mean_calls">614.633</td>
-   <td data-field="median_calls">614</td>
+   <td data-field="par2_mean">111.265</td>
+   <td data-field="mean_calls">111.265</td>
+   <td data-field="median_calls">109</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">49</td>
    </tr>

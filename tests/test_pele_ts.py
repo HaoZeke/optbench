@@ -31,6 +31,8 @@ def _pele_importable() -> bool:
 def test_pele_templates_use_the_problem_cap_and_the_pinned_commit():
     found = []
     for template in list_templates(ROOT):
+        if template.get("engine") != "pele":
+            continue
         if template.get("task") not in {"transition-state", "lowest-eigenvector", "saddle-search"}:
             continue
         found.append(template["id"])
@@ -56,6 +58,33 @@ def test_pele_templates_use_the_problem_cap_and_the_pinned_commit():
     assert "pele/pt-island-search" in found
     assert "pele/pt-island-search-ffd" in found
     assert _SADDLE_SEARCH_CAP == 5064
+
+
+def test_endpoint_arrays_leave_the_starts_file(tmp_path: Path):
+    from optbench.pele_ts import _store_endpoints
+
+    records = [
+        {
+            "start": "a",
+            "endpoint_plus": [1.0, 2.0, 3.0],
+            "endpoint_minus": [4.0, 5.0, 6.0],
+            "minimum": [4.0, 5.0, 6.0],
+            "force_calls": 1,
+        },
+        {"start": "b", "force_calls": 2},
+    ]
+    output = tmp_path / "run.dat"
+    _store_endpoints(output, records)
+    assert "endpoint_plus" not in records[0]
+    assert "minimum" not in records[0]
+    plus = np.load(tmp_path / "run.endpoints-plus.npz")
+    minus = np.load(tmp_path / "run.endpoints-minus.npz")
+    assert plus["endpoint_plus"].shape == (2, 3)
+    assert plus["endpoint_plus"][0, 0] == 1.0
+    assert np.isnan(plus["endpoint_plus"][1]).all()
+    assert minus["endpoint_minus"][0, 2] == 6.0
+    assert np.allclose(plus["minimum"][0], [4.0, 5.0, 6.0])
+    assert np.isnan(plus["minimum"][1]).all()
 
 
 def test_partial_checkpoint_drops_a_truncated_tail(tmp_path: Path):
@@ -163,6 +192,8 @@ def test_ffd_and_forward_match_one_archived_start(tmp_path: Path, monkeypatch):
     assert row["force_calls"] < 500
     assert row["force_norm"] <= 0.001
     assert row["counter"] == "harness"
+    assert row["screen_calls"] >= 0
+    assert row["unscreened_calls"] + row["screen_calls"] == row["force_calls"]
     assert (tmp_path / "ffd.starts.jsonl").is_file()
 
     mode = run_template(

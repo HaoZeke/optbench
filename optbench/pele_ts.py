@@ -17,12 +17,18 @@ A lowest-eigenvector success is calls under the cap and absolute
 overlap of at least 0.99 with the reference mode. The Hessian index is
 recorded and does not decide that score.
 
-A saddle-search row is one single-atom displacement. The climb cap is
-1000 force calls. Each endpoint minimization has a budget of 2000. The
-PAR-2 cap is 5064, which leaves 64 calls for a climb step that finishes
-as the counter reaches the cap. The initial minimization of the
-minimum is outside that count. Connection is Cartesian RMSD of the free
-atoms. The substrate pins the frame.
+The failure class is ``classify_outcome`` on the final energy, the
+geometry, the true force, and the call count.
+
+A saddle-search row is one single-atom displacement. The climb uses the
+published per-search cap of 5064 force calls. Each endpoint minimization
+has a budget of 2000, and those calls are part of the same per-search
+cost. The PAR-2 cap is 5064. The initial minimization of the minimum is
+outside that count. The link is the eOn r2205 test: exactly one endpoint has
+per-atom maximum minimum-image distance strictly below 0.1 angstrom.
+The mean over every free atom is recorded beside it. Saddle novelty
+stays that mean at 0.5. The two endpoint minima and the reactant
+minimum are float64 arrays next to the starts file.
 """
 
 from __future__ import annotations
@@ -45,8 +51,9 @@ os.environ.setdefault("NUMEXPR_NUM_THREADS", "1")
 
 import numpy as np
 
+from .connection import connected_endpoints, link_tolerance, per_atom_max
 from .counter import ForceCallCap, HarnessCounter
-from .failures import classify_failure
+from .failures import classify_outcome
 from .rgsaddle_minmode import _cartesian_rmsd, _geometries, _stored, _vibrational_eigenvalues
 from .score import half_even, score_v2
 from .stationary import judge_stationary, negative_index, numerical_hessian
@@ -57,7 +64,7 @@ PELE_VERSION = "0.1.2"
 _SADDLE_ENDPOINT_BUDGET = 2000
 _SADDLE_CLIMB_OVERSHOOT = 64
 _SADDLE_MINIMIZE_BUDGET = 5000
-_SADDLE_SEARCH_CAP = 1000 + _SADDLE_CLIMB_OVERSHOOT + 2 * _SADDLE_ENDPOINT_BUDGET
+_SADDLE_SEARCH_CAP = 5064
 
 
 class HarnessPotential:
@@ -159,9 +166,14 @@ def _import_pele():
     return pele
 
 
-def _outcome(reasons: list[str]) -> tuple[bool, str | None]:
-    failure = classify_failure(reasons)
-    return failure is None, failure
+def _mean_free_rmsd(moved: np.ndarray, reference: np.ndarray) -> float:
+    """RMSD averaged over every free atom.
+
+    A one-atom hop is diluted by the rest of the island, so both
+    endpoints of a real hop can fall inside 0.5.
+    """
+    delta = np.asarray(moved, dtype=np.float64) - np.asarray(reference, dtype=np.float64)
+    return float(np.sqrt(np.mean(np.sum(delta * delta, axis=-1))))
 
 
 def _unit(values: np.ndarray) -> np.ndarray:
@@ -300,7 +312,8 @@ def _eigenvec0(kind: str, x: np.ndarray, reactant, file_mode) -> np.ndarray | No
     raise ValueError(f"unknown eigenvec0 {kind}")
 
 
-def _crash(name: str, calls: int, verify_calls: int, error: str) -> dict:
+def _crash(name: str, calls: int, verify_calls: int, error: str, cap: int | None = None) -> dict:
+    failure = classify_outcome(calls=int(calls), cap=cap, process_failed=True)
     return {
         "schema": "optbench.start/v2",
         "start": name,
@@ -308,8 +321,8 @@ def _crash(name: str, calls: int, verify_calls: int, error: str) -> dict:
         "verify_calls": int(verify_calls),
         "counter": "harness",
         "comparable": True,
-        "success": False,
-        "failure": "crash",
+        "success": failure is None,
+        "failure": failure,
         "reasons": ["crash"],
         "error": error,
         "energy": None,
@@ -367,7 +380,17 @@ def _judge_ts(
     if calls >= cap:
         reasons.append("cap")
     reasons = list(dict.fromkeys(reasons))
-    success, failure = _outcome(reasons)
+    failure = classify_outcome(
+        energy=float(energy),
+        geometry=point,
+        force=force_norm,
+        calls=int(calls),
+        cap=cap,
+        force_tol=force_tol,
+        hessian_index=None if index is None else int(index),
+        expected_index=1 if index is not None else None,
+    )
+    success = failure is None
     return {
         "schema": "optbench.start/v2",
         "start": name,
@@ -378,8 +401,8 @@ def _judge_ts(
         "success": success,
         "failure": failure,
         "reasons": reasons,
-        "energy": float(energy) if math.isfinite(energy) else None,
-        "force_norm": force_norm if math.isfinite(force_norm) else None,
+        "energy": float(energy),
+        "force_norm": float(force_norm),
         "hessian_index": None if index is None else int(index),
         "cartesian_index": None if cartesian is None else int(cartesian),
         "rigid_modes_removed": int(removed),
@@ -419,21 +442,40 @@ def _climb(spec: dict) -> dict:
     eigenval = None
     eigenvec = None
     nfev = None
+    screen_calls = 0
+    screen_passes = 0
+    from pele.transition_states._transition_state_refinement import FindTransitionState
+
+    original_screen = FindTransitionState._get_lowest_transverse_eigenvector
+
+    def _counting_screen(self, coords, gradient):
+        nonlocal screen_calls, screen_passes
+        before = int(pot.calls)
+        try:
+            return original_screen(self, coords, gradient)
+        finally:
+            screen_passes += 1
+            screen_calls += int(pot.calls) - before
+
+    FindTransitionState._get_lowest_transverse_eigenvector = _counting_screen
     try:
-        with _silent_stdout():
-            result = findTransitionState(x, pot, **kwargs)
-        point = np.asarray(result.coords, dtype=np.float64).reshape(-1)
-        library_converged = bool(result.success)
-        steps = int(result.nsteps)
-        eigenval = float(result.eigenval)
-        eigenvec = np.asarray(result.eigenvec, dtype=np.float64).reshape(-1).copy()
-        nfev = int(getattr(result, "nfev", pot.calls))
-    except ForceCallCap:
-        point = pot.last.copy() if pot.last is not None else x
-    except LineSearchError:
-        point = pot.last.copy() if pot.last is not None else x
-    except Exception as exc:
-        return _crash(spec["name"], pot.calls, pot.verify_calls, exc.__class__.__name__)
+        try:
+            with _silent_stdout():
+                result = findTransitionState(x, pot, **kwargs)
+            point = np.asarray(result.coords, dtype=np.float64).reshape(-1)
+            library_converged = bool(result.success)
+            steps = int(result.nsteps)
+            eigenval = float(result.eigenval)
+            eigenvec = np.asarray(result.eigenvec, dtype=np.float64).reshape(-1).copy()
+            nfev = int(getattr(result, "nfev", pot.calls))
+        except ForceCallCap:
+            point = pot.last.copy() if pot.last is not None else x
+        except LineSearchError:
+            point = pot.last.copy() if pot.last is not None else x
+        except Exception as exc:
+            return _crash(spec["name"], pot.calls, pot.verify_calls, exc.__class__.__name__, cap)
+    finally:
+        FindTransitionState._get_lowest_transverse_eigenvector = original_screen
     with pot.verification():
         energy, gradient = pot.energy_forces(point)
     if spec.get("defer_hessian"):
@@ -451,6 +493,9 @@ def _climb(spec: dict) -> dict:
             "eigenval": None if eigenval is None or not math.isfinite(float(eigenval)) else float(eigenval),
             "library_evaluations": nfev,
             "failure": None,
+            "screen_calls": int(screen_calls),
+            "screen_passes": int(screen_passes),
+            "unscreened_calls": int(pot.calls) - int(screen_calls),
         }
     record = _judge_ts(
         spec["name"],
@@ -468,6 +513,9 @@ def _climb(spec: dict) -> dict:
         library_evaluations=nfev,
     )
     record["mode"] = None if eigenvec is None else [float(value) for value in eigenvec]
+    record["screen_calls"] = int(screen_calls)
+    record["screen_passes"] = int(screen_passes)
+    record["unscreened_calls"] = int(pot.calls) - int(screen_calls)
     return record
 
 
@@ -527,14 +575,19 @@ def _run_mode(spec: dict) -> dict:
     except LineSearchError:
         point = x
     except Exception as exc:
-        return _crash(spec["name"], pot.calls, pot.verify_calls, exc.__class__.__name__)
+        return _crash(spec["name"], pot.calls, pot.verify_calls, exc.__class__.__name__, cap)
     threshold = float(spec["overlap"])
     reasons: list[str] = []
     if not (math.isfinite(overlap) and overlap >= threshold and pot.calls < cap):
         reasons.append("mode_overlap")
     if pot.calls >= cap:
         reasons.append("cap")
-    success, failure = _outcome(reasons)
+    failure = classify_outcome(
+        calls=int(pot.calls),
+        cap=cap,
+        unmet="mode_overlap" in reasons,
+    )
+    success = failure is None
     with pot.verification():
         energy, gradient = pot.energy_forces(point)
     record = {
@@ -665,6 +718,7 @@ def _summarize(records: list[dict], template: dict, cap: int, problem_id: str, *
     lines.append(f"n_cap {metrics['n_cap']}")
     lines.append(f"n_wrong_stationary {metrics['n_wrong_stationary']}")
     lines.append(f"n_divergence {metrics['n_divergence']}")
+    lines.append(f"n_not_converged {metrics['n_not_converged']}")
     lines.append(f"n_crash {metrics['n_crash']}")
     lines.append("counter harness")
     lines.append(f"cap {cap}")
@@ -685,14 +739,53 @@ def _summarize(records: list[dict], template: dict, cap: int, problem_id: str, *
     return "\n".join(lines) + "\n", metrics
 
 
+def _store_endpoints(output: Path, records: list[dict]) -> None:
+    """Write endpoint minima beside ``output`` and drop them from ``records``.
+
+    One row of each array is one search, in starts-file order. A search
+    that never reached the endpoints is a row of NaN.
+    """
+    if not any(row.get("endpoint_plus") is not None or row.get("endpoint_minus") is not None for row in records):
+        return
+    width = 0
+    for row in records:
+        for key in ("endpoint_plus", "endpoint_minus", "minimum"):
+            value = row.get(key)
+            if value is not None:
+                width = len(value)
+                break
+        if width:
+            break
+    count = len(records)
+    plus = np.full((count, width), np.nan, dtype=np.float64)
+    minus = np.full((count, width), np.nan, dtype=np.float64)
+    minimum = np.full((count, width), np.nan, dtype=np.float64)
+    for index, row in enumerate(records):
+        if row.get("endpoint_plus") is not None:
+            plus[index] = row["endpoint_plus"]
+        if row.get("endpoint_minus") is not None:
+            minus[index] = row["endpoint_minus"]
+        if row.get("minimum") is not None:
+            minimum[index] = row["minimum"]
+        row.pop("endpoint_plus", None)
+        row.pop("endpoint_minus", None)
+        row.pop("minimum", None)
+    plus_path = output.with_name(output.stem + ".endpoints-plus.npz")
+    minus_path = output.with_name(output.stem + ".endpoints-minus.npz")
+    np.savez_compressed(plus_path, endpoint_plus=plus, minimum=minimum)
+    np.savez_compressed(minus_path, endpoint_minus=minus)
+
+
 def _write_campaign(output: Path, text: str, records: list[dict], template: dict, problem_id: str) -> None:
     output.parent.mkdir(parents=True, exist_ok=True)
     temporary = output.with_suffix(output.suffix + ".tmp")
     temporary.write_text(text, encoding="utf-8")
     os.replace(temporary, output)
+    public = [_public(row, template, problem_id) for row in records]
+    _store_endpoints(output, public)
     starts = output.with_suffix(".starts.jsonl")
     temporary_starts = starts.with_suffix(".jsonl.tmp")
-    write_starts(temporary_starts, [_public(row, template, problem_id) for row in records])
+    write_starts(temporary_starts, public)
     os.replace(temporary_starts, starts)
 
 
@@ -806,15 +899,46 @@ def _one_displacement(spec: dict, *, evaluate, minimum: np.ndarray, min_energy: 
             )
             record["endpoint_calls"] = int(plus_calls + minus_calls)
             record["force_calls"] = climb_calls + record["endpoint_calls"]
-            record["rmsd_plus"] = _cartesian_rmsd(plus.reshape(-1, 3), minimum.reshape(-1, 3))
-            record["rmsd_minus"] = _cartesian_rmsd(minus.reshape(-1, 3), minimum.reshape(-1, 3))
+            record["endpoint_plus"] = [float(value) for value in plus]
+            record["endpoint_minus"] = [float(value) for value in minus]
+            record["minimum"] = [float(value) for value in minimum]
+            plus_atoms = plus.reshape(-1, 3)
+            minus_atoms = minus.reshape(-1, 3)
+            minimum_atoms = minimum.reshape(-1, 3)
+            cell = spec["cell"]
+            tolerance = float(limits.get("link_tolerance", link_tolerance(None)))
+            record["rmsd_plus"] = _cartesian_rmsd(plus_atoms, minimum_atoms)
+            record["rmsd_minus"] = _cartesian_rmsd(minus_atoms, minimum_atoms)
+            record["legacy_rmsd_plus"] = _mean_free_rmsd(plus_atoms, minimum_atoms)
+            record["legacy_rmsd_minus"] = _mean_free_rmsd(minus_atoms, minimum_atoms)
+            record["per_atom_max_plus"] = per_atom_max(plus_atoms, minimum_atoms, cell)
+            record["per_atom_max_minus"] = per_atom_max(minus_atoms, minimum_atoms, cell)
             record["barrier"] = float(outcome["energy"] - min_energy)
             record["_point"] = point
-            record["_axis_links"] = (record["rmsd_plus"] <= limits["connect_rmsd"]) ^ (
-                record["rmsd_minus"] <= limits["connect_rmsd"]
+            record["_axis_links"] = connected_endpoints(
+                minimum_atoms, plus_atoms, minus_atoms, cell, tolerance
             )
-    success, failure = _outcome(record["reasons"])
-    record["success"] = success
+            record["_legacy_links"] = (record["legacy_rmsd_plus"] <= limits["connect_rmsd"]) ^ (
+                record["legacy_rmsd_minus"] <= limits["connect_rmsd"]
+            )
+    names = set(record["reasons"])
+    energy = record.get("energy")
+    if "divergence" in names and (energy is None or not math.isfinite(float(energy))):
+        energy = float("nan")
+        record["energy"] = energy
+    failure = classify_outcome(
+        energy=None if energy is None else float(energy),
+        geometry=record.get("_point"),
+        force=None if record.get("force_norm") is None else float(record["force_norm"]),
+        calls=float(record["force_calls"]),
+        cap=climb_cap,
+        force_tol=force_tol,
+        hessian_index=None if record.get("hessian_index") is None else int(record["hessian_index"]),
+        expected_index=1 if record.get("hessian_index") is not None else None,
+        process_failed="crash" in names,
+        force_above=True if "force_norm" in names and record.get("force_norm") is None else None,
+    )
+    record["success"] = failure is None
     record["failure"] = failure
     return record
 
@@ -827,6 +951,7 @@ def _saddle_once(root: Path, problem: dict, template: dict) -> dict:
     con_path = next(path for path in paths if str(path).endswith(".con"))
     positions, fixed, cell = load_con(_stored(root, con_path))
     limits = _saddle_limits(template)
+    limits["link_tolerance"] = link_tolerance(problem)
     climb_cap = int(_check_stop(problem, template) or 1000)
     force_tol = float((problem.get("convergence") or {}).get("force_norm", 1e-3))
     free = np.flatnonzero(~fixed)
@@ -861,6 +986,7 @@ def _saddle_once(root: Path, problem: dict, template: dict) -> dict:
     spec["eigenvec0"] = "kick"
     spec["name"] = "rep1-search1"
     found: list[np.ndarray] = []
+    found_legacy: list[np.ndarray] = []
     record = _finish_saddle_record(
         _one_displacement(
             spec,
@@ -873,22 +999,60 @@ def _saddle_once(root: Path, problem: dict, template: dict) -> dict:
             force_tol=force_tol,
         ),
         found=found,
+        found_legacy=found_legacy,
         limits=limits,
+        cap=climb_cap,
+        force_tol=force_tol,
     )
     return record
 
 
-def _finish_saddle_record(record: dict, *, found: list[np.ndarray], limits: dict) -> dict:
+def _restore_saddles(saved: list[dict], limits: dict) -> tuple[list[np.ndarray], list[np.ndarray]]:
+    found: list[np.ndarray] = []
+    found_legacy: list[np.ndarray] = []
+    tol = float(limits["connect_rmsd"])
+    for row in saved:
+        raw = row.get("saddle_x")
+        if raw is None:
+            continue
+        saddle = np.asarray(raw, dtype=np.float64)
+        atoms = saddle.reshape(-1, 3)
+        if all(_cartesian_rmsd(atoms, old.reshape(-1, 3)) > tol for old in found):
+            found.append(saddle)
+        if all(_mean_free_rmsd(atoms, old.reshape(-1, 3)) > tol for old in found_legacy):
+            found_legacy.append(saddle.copy())
+    return found, found_legacy
+
+
+def _finish_saddle_record(
+    record: dict,
+    *,
+    found: list[np.ndarray],
+    found_legacy: list[np.ndarray],
+    limits: dict,
+    cap: int,
+    force_tol: float,
+) -> dict:
     point = record.pop("_point", None)
     links = record.pop("_axis_links", False)
+    legacy_links = record.pop("_legacy_links", False)
     if point is None:
+        record["legacy_success"] = False
         return record
-    novel = all(_cartesian_rmsd(point.reshape(-1, 3), old.reshape(-1, 3)) > limits["connect_rmsd"] for old in found)
+    saddle = np.asarray(point, dtype=np.float64)
+    record["saddle_x"] = [float(value) for value in saddle]
+    novel = all(
+        _cartesian_rmsd(saddle.reshape(-1, 3), old.reshape(-1, 3)) > limits["connect_rmsd"] for old in found
+    )
+    legacy_novel = all(
+        _mean_free_rmsd(saddle.reshape(-1, 3), old.reshape(-1, 3)) > limits["connect_rmsd"] for old in found_legacy
+    )
     barrier = float(record.get("barrier") or 0.0)
     reasons: list[str] = []
     if novel:
-        found.append(np.asarray(point, dtype=np.float64))
-        record["saddle_x"] = [float(value) for value in point]
+        found.append(saddle.copy())
+    if legacy_novel:
+        found_legacy.append(saddle.copy())
     if links and novel and barrier < limits["barrier_max"]:
         record["reasons"] = []
     else:
@@ -899,9 +1063,28 @@ def _finish_saddle_record(record: dict, *, found: list[np.ndarray], limits: dict
         if barrier >= limits["barrier_max"]:
             reasons.append("barrier")
         record["reasons"] = reasons
-    success, failure = _outcome(record["reasons"])
-    record["success"] = success
+    failure = classify_outcome(
+        energy=None if record.get("energy") is None else float(record["energy"]),
+        geometry=point,
+        force=None if record.get("force_norm") is None else float(record["force_norm"]),
+        calls=float(record["force_calls"]),
+        cap=cap,
+        force_tol=force_tol,
+        hessian_index=None if record.get("hessian_index") is None else int(record["hessian_index"]),
+        expected_index=1 if record.get("hessian_index") is not None else None,
+        stationary_rejected=bool(set(reasons) & {"not_connected", "duplicate", "barrier"}),
+    )
+    record["success"] = failure is None
     record["failure"] = failure
+    legacy_reasons: list[str] = []
+    if not legacy_links:
+        legacy_reasons.append("not_connected")
+    if not legacy_novel:
+        legacy_reasons.append("duplicate")
+    if barrier >= limits["barrier_max"]:
+        legacy_reasons.append("barrier")
+    record["legacy_success"] = not legacy_reasons
+    record["legacy_reasons"] = legacy_reasons
     return record
 
 
@@ -948,8 +1131,10 @@ def _run_saddle_search(
     goal = int((problem.get("goal") or {}).get("connected_saddles", limits["goal"]))
     limits["goal"] = goal
     limits["barrier_max"] = float((problem.get("goal") or {}).get("barrier_below_eV", limits["barrier_max"]))
+    limits["link_tolerance"] = link_tolerance(problem)
     climb_cap = int(cap)
-    search_cap = climb_cap + _SADDLE_CLIMB_OVERSHOOT + 2 * int(limits["endpoint_budget"])
+    search_cap = _SADDLE_SEARCH_CAP
+    account_cap = climb_cap + _SADDLE_CLIMB_OVERSHOOT + 2 * int(limits["endpoint_budget"])
     free = np.flatnonzero(~fixed)
     raw = potential_from_problem(problem)
     comments = []
@@ -973,7 +1158,7 @@ def _run_saddle_search(
                 min_energy = float(header["min_energy"])
                 minimize_calls = int(header["minimize_calls"])
                 min_ok = bool(header["min_ok"])
-                found = [np.asarray(row["saddle_x"], dtype=np.float64) for row in saved if row.get("saddle_x") is not None]
+                found, found_legacy = _restore_saddles(saved, limits)
                 connected = sum(1 for row in saved if row.get("success"))
                 searches = len(saved)
                 rng = _rng_restore(saved[-1]["rng_state"]) if saved else np.random.default_rng(20261015 + rep)
@@ -987,6 +1172,7 @@ def _run_saddle_search(
                 )
                 rng = np.random.default_rng(20261015 + rep)
                 found = []
+                found_legacy = []
                 connected = 0
                 searches = 0
                 header_path.parent.mkdir(parents=True, exist_ok=True)
@@ -1069,12 +1255,19 @@ def _run_saddle_search(
                 for item, record in zip(batch, outcomes):
                     if connected >= goal:
                         break
-                    record = _finish_saddle_record(record, found=found, limits=limits)
+                    record = _finish_saddle_record(
+                        record,
+                        found=found,
+                        found_legacy=found_legacy,
+                        limits=limits,
+                        cap=search_cap,
+                        force_tol=force_tol,
+                    )
                     if record.get("success"):
                         connected += 1
-                    if record.get("success") and int(record["force_calls"]) >= search_cap:
+                    if record.get("success") and int(record["force_calls"]) >= account_cap:
                         raise RuntimeError(
-                            f"{template['id']} success {record['start']} spent {search_cap} or more force calls"
+                            f"{template['id']} success {record['start']} spent {account_cap} or more force calls"
                         )
                     all_records.append({key: value for key, value in record.items() if key != "saddle_x"})
                     stored = {key: value for key, value in record.items() if key != "saddle_x"}
@@ -1103,7 +1296,9 @@ def _run_saddle_search(
                 f"# rep {rep} force_calls {sum(int(row['force_calls']) for row in all_records)} "
                 f"unique_saddles {len(found)} fraction_connected {fraction} "
                 f"total_searches {searches} connected {connected} "
-                f"minimize_calls {minimize_calls} minimum_converged {int(min_ok)} seed {20261015 + rep}"
+                f"minimize_calls {minimize_calls} minimum_converged {int(min_ok)} "
+                f"legacy_connected {sum(1 for row in all_records if row.get('legacy_success'))} "
+                f"seed {20261015 + rep}"
             )
             finished = connected >= goal or searches >= limits["max_searches"]
         text, metrics = _summarize(all_records, template, search_cap, problem["id"], partial=not finished)
