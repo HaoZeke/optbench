@@ -87,6 +87,35 @@ def test_input_records_the_band_and_the_mapped_force():
     assert 'HOST "/tmp/ob.sock"' in text
     assert "LIST 1" in text
     assert "PERIODIC NONE" in text
+    assert 'COORD_FILE_NAME "r000.xyz"' in text
+
+
+def test_a_long_replica_path_is_written_as_its_file_name():
+    long = Path(
+        "/tmp/optbench-cp2k/double-ended-saddle-search-lj38/"
+        "cp2k-ci-diis/pair_00/r000.xyz"
+    )
+    text = render_input(
+        band_type="CI-NEB",
+        n_replica=1,
+        socket_path="/tmp/ob.sock",
+        replica_paths=[long],
+        positions=np.zeros((1, 3)),
+        cell=(10.0, 10.0, 10.0),
+        periodic=False,
+        fixed=[],
+        max_force=1e-6,
+        max_step=2.0,
+        max_steps=10,
+        align=True,
+        k_spring=0.05,
+        profile={"opt_type": "DIIS", "no_ls": True, "stepsize": 1.0},
+    )
+    assert 'COORD_FILE_NAME "r000.xyz"' in text
+    assert "cp2k-ci-diis" not in text
+    for line in text.splitlines():
+        if "COORD_FILE_NAME" in line:
+            assert len(line) < 80
 
 
 def test_candidate_is_the_highest_interior_image_of_the_last_sweep():

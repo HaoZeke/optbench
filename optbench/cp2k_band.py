@@ -39,6 +39,10 @@ free-atom force still above the stop is wrong_stationary: the nudged
 band force can meet ``MAX_FORCE`` while the true gradient does not.
 An exit at ``MAX_STEPS`` without that banner, under the force cap, is
 the cap.
+
+Replica files are named in the run directory. ``COORD_FILE_NAME`` is a
+long string, and CP2K reads a quoted value in 80-character pieces. A
+closing quote that lands on that boundary aborts the input.
 """
 
 from __future__ import annotations
@@ -338,10 +342,12 @@ def render_input(
             ]
         )
     for path in replica_paths:
+        # The process starts in the replica directory, so the file name
+        # is the path CP2K opens. A long quoted path can abort the parser.
         lines.extend(
             [
                 "    &REPLICA",
-                f'      COORD_FILE_NAME "{path}"',
+                f'      COORD_FILE_NAME "{Path(path).name}"',
                 "    &END REPLICA",
             ]
         )
