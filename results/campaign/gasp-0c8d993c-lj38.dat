@@ -2,12 +2,12 @@
 # A minimize line contributes its force-evaluation count. The dump's run 0 contributes one.
 # GASP 0.1 runs with the yaml, lattice, and species shims, and the energy is the final minimization stat.
 # Default fixed-composition search. The composition is C and both atom limits are 38, because the archive holds 38-atom clusters and GASP reduces a formula to one atom. The archived geometry is the file organism, and 27 random organisms make the default initial population of 28. Pool size, variation fractions, the redundancy guard, and the 800-calculation stop are the fixed-composition defaults. The search also stops at an extensive energy of -173.927426590629, which is 0.001 above the Wales LJ38 geometry quenched with LAMMPS 8de817dd, pair_style lj/cut 40, pair_coeff * * 1 1, units lj, and thermo_modify norm no. Each calculation is minimize cg to a force tolerance of 1e-8 and at most 20000 force evaluations, then run 0 for the dump. The force cap is one above 800 times 20001, so a finished calculation budget stays under the cap. The seed is 20261015 plus the start index. This revision runs with shims for PyYAML, Structure.modify_lattice, species_and_occu, Structure.to, Lattice.from_lengths_and_angles, and PeriodicSite equality. MoleculeMatcher.fit keeps the InChI of a geometry and returns false when the two InChI strings differ; a matching InChI still uses the original RMSD test.
-# scored 63 of 100 starts
-force_calls 302572
-force_calls_min 221294
+# scored 74 of 100 starts
+force_calls 283893
+force_calls_min 190499
 force_calls_max 378609
-nfailed 58
-median 313263
+nfailed 68
+median 298175.5
 code gasp
 code_version 0.1
 commit 0c8d993c82e0e1c69a05b3c34bbb2fcbbdbb7f07
@@ -16,15 +16,15 @@ template gasp/lj38-default
 problem globalopt/lj38
 tuning default
 counter harness
-par2_mean 29485805.9683
-wilson_low 0.0343758471768
-wilson_high 0.172703098509
+par2_mean 29429895.8784
+wilson_low 0.0376898501938
+wilson_high 0.165819424436
 par2_median 32001602
 par2_median_low 32001602
 par2_median_high 32001602
-v2_nfailed 58
-v2_successes 5
-n 63
+v2_nfailed 68
+v2_successes 6
+n 74
 cap 16000801
 energy_min -173.928426591
 energy_max -170.989860473
