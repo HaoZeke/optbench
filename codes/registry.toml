@@ -173,6 +173,16 @@ commit = "0.1.1"
 committed = "2019-12-10"
 note = "Sella 0.1.1 PESWrapper.diag for the lowest-eigenvector row. eta 1e-6, gamma 1e-16, vreftol 0.99, gradient v0, rigid-mode projection. This pin is not Sella 2.6.0."
 
+[[code]]
+id = "scipy"
+name = "SciPy"
+role = "minimization"
+repository = "https://github.com/scipy/scipy"
+ref = "v1.18.1"
+commit = "1.18.1"
+committed = "2026-08-21"
+note = "PyPI scipy 1.18.1. LJ38 uses minimize method L-BFGS-B with the library defaults (maxcor 10, ftol 2.2204460492503131e-09, gtol 1e-5, maxls 20, maxiter 15000). maxfun is the problem cap. The harness stops at Euclidean force norm 0.01."
+
 [[template]]
 id = "sella-0.1.1/lj38-loweig"
 code = "sella-0.1.1"

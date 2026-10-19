@@ -1,0 +1,15 @@
+# SciPy L-BFGS-B on LJ38, library defaults.
+id = "scipy/lj38-lbfgs"
+engine = "scipy"
+problem = "minimization/lj38"
+code = "SciPy"
+code_version = "1.18.1"
+commit = "1.18.1"
+algorithm = "L-BFGS-B"
+tuning = "stock"
+note = "scipy.optimize.minimize method L-BFGS-B, SciPy 1.18.1 defaults. maxfun is the problem cap of 10000. The harness stops at Euclidean force norm 0.01 on the unshifted cutoff-40 Lennard-Jones potential."
+
+[stop]
+norm = "l2"
+force_norm = 0.01
+max_force_calls = 10000
