@@ -76,10 +76,10 @@
       "noise/sella-min-s1em2 2.6.0 default campaign, asv 6cfb60c": 0.0672802040308998,
       "noise/sella-min-s1em3 2.6.0 default campaign, asv 6cfb60c": 0.06773174902439578,
       "noise/sella-min-s1em4 2.6.0 default campaign, asv 6cfb60c": 0.12658311317670412,
-      "optim/noise-lbfgs-s0 02aaf45245af default campaign 02aaf45": 0.6551917855626551,
-      "optim/noise-lbfgs-s1em2 02aaf45245af default campaign 02aaf45": 0.7093771847821717,
-      "optim/noise-lbfgs-s1em3 02aaf45245af default campaign 02aaf45": 0.6673835003870463,
-      "optim/noise-lbfgs-s1em4 02aaf45245af default campaign 02aaf45": 0.6508268506255274,
+      "optim/noise-lbfgs-s0 02aaf45245af default campaign, asv 02aaf45": 0.6551917855626551,
+      "optim/noise-lbfgs-s1em2 02aaf45245af default campaign, asv 02aaf45": 0.7093771847821717,
+      "optim/noise-lbfgs-s1em3 02aaf45245af default campaign, asv 02aaf45": 0.6673835003870463,
+      "optim/noise-lbfgs-s1em4 02aaf45245af default campaign, asv 02aaf45": 0.6508268506255274,
       "rgmin/lj38-noise-lbfgs-s0 0.4.1 default campaign f15726f": 0.6830370601615734,
       "rgmin/lj38-noise-lbfgs-s0-tuned 0.4.1 tuned campaign f15726f": 0.6830370601615734,
       "rgmin/lj38-noise-lbfgs-s1em2 0.4.1 default campaign f15726f": 0.7020019498884043,
@@ -580,28 +580,28 @@
         0.035,
         0.771
       ],
-      "optim/noise-lbfgs-s0 02aaf45245af default campaign 02aaf45": [
+      "optim/noise-lbfgs-s0 02aaf45245af default campaign, asv 02aaf45": [
         0.0,
         0.037,
         0.655,
         0.986,
         0.997
       ],
-      "optim/noise-lbfgs-s1em2 02aaf45245af default campaign 02aaf45": [
+      "optim/noise-lbfgs-s1em2 02aaf45245af default campaign, asv 02aaf45": [
         0.0,
         0.175,
         0.808,
         0.915,
         0.917
       ],
-      "optim/noise-lbfgs-s1em3 02aaf45245af default campaign 02aaf45": [
+      "optim/noise-lbfgs-s1em3 02aaf45245af default campaign, asv 02aaf45": [
         0.0,
         0.056,
         0.694,
         0.976,
         0.982
       ],
-      "optim/noise-lbfgs-s1em4 02aaf45245af default campaign 02aaf45": [
+      "optim/noise-lbfgs-s1em4 02aaf45245af default campaign, asv 02aaf45": [
         0.0,
         0.035,
         0.65,
@@ -736,10 +736,10 @@
       "noise/sella-min-s1em2 2.6.0 default campaign, asv 6cfb60c": 0.86,
       "noise/sella-min-s1em3 2.6.0 default campaign, asv 6cfb60c": 0.938,
       "noise/sella-min-s1em4 2.6.0 default campaign, asv 6cfb60c": 0.931,
-      "optim/noise-lbfgs-s0 02aaf45245af default campaign 02aaf45": 0.997,
-      "optim/noise-lbfgs-s1em2 02aaf45245af default campaign 02aaf45": 0.917,
-      "optim/noise-lbfgs-s1em3 02aaf45245af default campaign 02aaf45": 0.982,
-      "optim/noise-lbfgs-s1em4 02aaf45245af default campaign 02aaf45": 0.992,
+      "optim/noise-lbfgs-s0 02aaf45245af default campaign, asv 02aaf45": 0.997,
+      "optim/noise-lbfgs-s1em2 02aaf45245af default campaign, asv 02aaf45": 0.917,
+      "optim/noise-lbfgs-s1em3 02aaf45245af default campaign, asv 02aaf45": 0.982,
+      "optim/noise-lbfgs-s1em4 02aaf45245af default campaign, asv 02aaf45": 0.992,
       "rgmin/lj38-noise-lbfgs-s0 0.4.1 default campaign f15726f": 0.996,
       "rgmin/lj38-noise-lbfgs-s0-tuned 0.4.1 tuned campaign f15726f": 0.996,
       "rgmin/lj38-noise-lbfgs-s1em2 0.4.1 default campaign f15726f": 0.884,
@@ -1074,7 +1074,7 @@
       "wilson_low": 0.9883490446266249
     },
     {
-      "asv_commit": "",
+      "asv_commit": "baa2981ddabd239dcc93d643120666bfc72e9b8c",
       "call_unit": "total",
       "cap": 10000,
       "code": "optim",
@@ -1107,11 +1107,11 @@
       "par2_mean": 290.805,
       "partial": false,
       "partial_reason": "",
-      "path": "results/campaign/optim-02aaf45245af-noise-lbfgs-s0.dat",
+      "path": "results/campaign/optim-02aaf45245af-noise-lbfgs-s0.dat; results/asv/baa2981ddabd239dcc93d643120666bfc72e9b8c",
       "problem": "minimization/lj38-noise",
       "registry_match": true,
       "scored": true,
-      "source": "campaign",
+      "source": "campaign, asv",
       "success_rate": 0.997,
       "template": "optim/noise-lbfgs-s0",
       "tuning": "default",
@@ -1524,7 +1524,7 @@
       "wilson_low": 0.982984183834662
     },
     {
-      "asv_commit": "",
+      "asv_commit": "baa2981ddabd239dcc93d643120666bfc72e9b8c",
       "call_unit": "total",
       "cap": 10000,
       "code": "optim",
@@ -1557,11 +1557,11 @@
       "par2_mean": 389.496,
       "partial": false,
       "partial_reason": "",
-      "path": "results/campaign/optim-02aaf45245af-noise-lbfgs-s1em4.dat",
+      "path": "results/campaign/optim-02aaf45245af-noise-lbfgs-s1em4.dat; results/asv/baa2981ddabd239dcc93d643120666bfc72e9b8c",
       "problem": "minimization/lj38-noise",
       "registry_match": true,
       "scored": true,
-      "source": "campaign",
+      "source": "campaign, asv",
       "success_rate": 0.992,
       "template": "optim/noise-lbfgs-s1em4",
       "tuning": "default",
@@ -1929,7 +1929,7 @@
       "wilson_low": 0.9766379658824644
     },
     {
-      "asv_commit": "",
+      "asv_commit": "baa2981ddabd239dcc93d643120666bfc72e9b8c",
       "call_unit": "total",
       "cap": 10000,
       "code": "optim",
@@ -1962,11 +1962,11 @@
       "par2_mean": 575.481,
       "partial": false,
       "partial_reason": "",
-      "path": "results/campaign/optim-02aaf45245af-noise-lbfgs-s1em3.dat",
+      "path": "results/campaign/optim-02aaf45245af-noise-lbfgs-s1em3.dat; results/asv/baa2981ddabd239dcc93d643120666bfc72e9b8c",
       "problem": "minimization/lj38-noise",
       "registry_match": true,
       "scored": true,
-      "source": "campaign",
+      "source": "campaign, asv",
       "success_rate": 0.982,
       "template": "optim/noise-lbfgs-s1em3",
       "tuning": "default",
@@ -2604,7 +2604,7 @@
       "wilson_low": 0.9482730796686497
     },
     {
-      "asv_commit": "",
+      "asv_commit": "baa2981ddabd239dcc93d643120666bfc72e9b8c",
       "call_unit": "total",
       "cap": 10000,
       "code": "optim",
@@ -2637,11 +2637,11 @@
       "par2_mean": 1823.055,
       "partial": false,
       "partial_reason": "",
-      "path": "results/campaign/optim-02aaf45245af-noise-lbfgs-s1em2.dat",
+      "path": "results/campaign/optim-02aaf45245af-noise-lbfgs-s1em2.dat; results/asv/baa2981ddabd239dcc93d643120666bfc72e9b8c",
       "problem": "minimization/lj38-noise",
       "registry_match": true,
       "scored": true,
-      "source": "campaign",
+      "source": "campaign, asv",
       "success_rate": 0.917,
       "template": "optim/noise-lbfgs-s1em2",
       "tuning": "default",

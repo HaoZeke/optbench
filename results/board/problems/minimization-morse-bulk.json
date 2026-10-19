@@ -2193,8 +2193,8 @@
       "lammps/quickmin-morse 30 Sep 2026 default campaign 8de817d": 0.0,
       "lammps/sd-morse 30 Sep 2026 default campaign 8de817d": 0.0,
       "optim/lbfgs-morse svn-snapshot default campaign 02aaf45": 0.03160814954471803,
-      "optim/morse-lbfgs 02aaf45245af default campaign 02aaf45": 0.4515449934959718,
-      "optim/morse-lbfgs-tuned 02aaf45245af tuned campaign 02aaf45": 0.7134410897236354,
+      "optim/morse-lbfgs 02aaf45245af default campaign, asv 02aaf45": 0.4515449934959718,
+      "optim/morse-lbfgs-tuned 02aaf45245af tuned campaign, asv 02aaf45": 0.7134410897236354,
       "rgmin/morse-adam 0.4.1 default campaign, asv 9a2e7ff": 0.0,
       "rgmin/morse-adam 0.4.1 default campaign, asv f15726f": 0.0,
       "rgmin/morse-adam-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.0,
@@ -2439,14 +2439,14 @@
         0.04,
         0.13
       ],
-      "optim/morse-lbfgs 02aaf45245af default campaign 02aaf45": [
+      "optim/morse-lbfgs 02aaf45245af default campaign, asv 02aaf45": [
         0.0,
         0.0,
         0.0,
         1.0,
         1.0
       ],
-      "optim/morse-lbfgs-tuned 02aaf45245af tuned campaign 02aaf45": [
+      "optim/morse-lbfgs-tuned 02aaf45245af tuned campaign, asv 02aaf45": [
         0.0,
         0.0,
         0.87,
@@ -2949,8 +2949,8 @@
       "lammps/quickmin-morse 30 Sep 2026 default campaign 8de817d": 0.05,
       "lammps/sd-morse 30 Sep 2026 default campaign 8de817d": 0.04,
       "optim/lbfgs-morse svn-snapshot default campaign 02aaf45": 0.13,
-      "optim/morse-lbfgs 02aaf45245af default campaign 02aaf45": 1.0,
-      "optim/morse-lbfgs-tuned 02aaf45245af tuned campaign 02aaf45": 1.0,
+      "optim/morse-lbfgs 02aaf45245af default campaign, asv 02aaf45": 1.0,
+      "optim/morse-lbfgs-tuned 02aaf45245af tuned campaign, asv 02aaf45": 1.0,
       "rgmin/morse-adam 0.4.1 default campaign, asv 9a2e7ff": 1.0,
       "rgmin/morse-adam 0.4.1 default campaign, asv f15726f": 1.0,
       "rgmin/morse-adam-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 1.0,
@@ -3254,7 +3254,7 @@
       "wilson_low": 0.9630065017930143
     },
     {
-      "asv_commit": "",
+      "asv_commit": "baa2981ddabd239dcc93d643120666bfc72e9b8c",
       "call_unit": "total",
       "cap": 10000,
       "code": "optim",
@@ -3287,11 +3287,11 @@
       "par2_mean": 26.66,
       "partial": false,
       "partial_reason": "",
-      "path": "results/campaign/optim-02aaf45245af-morse-lbfgs-tuned.dat",
+      "path": "results/campaign/optim-02aaf45245af-morse-lbfgs-tuned.dat; results/asv/baa2981ddabd239dcc93d643120666bfc72e9b8c",
       "problem": "minimization/morse-bulk",
       "registry_match": true,
       "scored": true,
-      "source": "campaign",
+      "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "optim/morse-lbfgs-tuned",
       "tuning": "tuned",
@@ -4604,7 +4604,7 @@
       "wilson_low": 0.9630065017930143
     },
     {
-      "asv_commit": "",
+      "asv_commit": "baa2981ddabd239dcc93d643120666bfc72e9b8c",
       "call_unit": "total",
       "cap": 10000,
       "code": "optim",
@@ -4637,11 +4637,11 @@
       "par2_mean": 45.7,
       "partial": false,
       "partial_reason": "",
-      "path": "results/campaign/optim-02aaf45245af-morse-lbfgs.dat",
+      "path": "results/campaign/optim-02aaf45245af-morse-lbfgs.dat; results/asv/baa2981ddabd239dcc93d643120666bfc72e9b8c",
       "problem": "minimization/morse-bulk",
       "registry_match": true,
       "scored": true,
-      "source": "campaign",
+      "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "optim/morse-lbfgs",
       "tuning": "default",
