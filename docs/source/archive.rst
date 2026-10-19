@@ -1713,7 +1713,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="tsopt-lj38-eon-lanczos-improved">
    <td class="num">5</td>
-   <td class="text">eon-lanczos-improved · not reproduced</td>
+   <td class="text">eon-lanczos-improved</td>
    <td class="text">Eon r2156</td>
    <td class="num">237</td>
    <td class="num">1898</td>

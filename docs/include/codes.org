@@ -218,14 +218,14 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
-   <tr data-problem="tsopt/LJ38" data-template="eon-svn/ts-lj38-lanczos-ljcut">
+   <tr data-problem="tsopt/LJ38" data-template="eon-svn/ts-lj38-lanczos-improved">
    <td>LJ38</td>
-   <td data-field="template">eon-svn/ts-lj38-lanczos-ljcut</td>
+   <td data-field="template">eon-svn/ts-lj38-lanczos-improved</td>
    <td data-field="version">Eon svn r2549</td>
    <td data-field="commit">r2549</td>
-   <td data-field="par2_mean">292.78</td>
-   <td data-field="mean_calls">292.78</td>
-   <td data-field="median_calls">219</td>
+   <td data-field="par2_mean">226.345</td>
+   <td data-field="mean_calls">226.345</td>
+   <td data-field="median_calls">182</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>

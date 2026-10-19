@@ -41,6 +41,20 @@ def test_c_bridge_matches_the_python_reply(tmp_path, monkeypatch):
     assert got == want
 
 
+def test_numpy_archive_mode_matches_random_mode_py():
+    import io
+
+    import numpy as np
+
+    from optbench.eon_jobs import _numpy_archive_mode
+
+    np.random.seed(156)
+    expected = np.random.random((38, 3))
+    got = np.loadtxt(io.StringIO(_numpy_archive_mode(38, 156)))
+    assert got.shape == (38, 3)
+    assert np.allclose(got, expected)
+
+
 def test_svn_default_grid_is_one_start():
     assert os.environ.get("OPTBENCH_ASV_FULL") != "1"
     from benchmarks.bench_eon_lane import EonSvnTsLj38DimerLjcut

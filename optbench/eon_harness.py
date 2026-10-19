@@ -52,7 +52,7 @@ from .campaign import (
     resolve_problem,
     write_starts,
 )
-from .eon_jobs import _client_env, _numpy_direction, _read_dat, _seeded_mode
+from .eon_jobs import _client_env, _numpy_archive_mode, _numpy_direction, _read_dat, _seeded_mode
 from .eon_parse import abs_overlap, flat_floats, xyz_to_con
 from .stationary import negative_index, vibrational_eigenvalues
 from .surfaces import lennard_jones, morse_smooth_linear, read_con
@@ -463,12 +463,23 @@ def _interpolated(reactant: Path, product: Path, dest: Path) -> tuple[str, str]:
     return str(dest / "displacement.con"), _mode_text(delta / norm)
 
 
-def _files(kind: str, start: str, work: Path) -> tuple[list[tuple[str, str]], list[tuple[str, str]]]:
+def _files(
+    kind: str,
+    start: str,
+    work: Path,
+    *,
+    direction: str = "python",
+) -> tuple[list[tuple[str, str]], list[tuple[str, str]]]:
     work.mkdir(parents=True, exist_ok=True)
     if kind == "ts-lj38":
         archive = _archive("website/tsopt/LJ38/coords-con.tar.gz")
         con = _extract_suffix(archive, f"/{start}.con", work / "src.con")
-        mode = _seeded_mode(38, int(start))
+        if direction == "numpy":
+            mode = _numpy_archive_mode(38, int(start))
+        elif direction == "python":
+            mode = _seeded_mode(38, int(start))
+        else:
+            raise ValueError(f"unknown direction {direction}")
         return [(str(con), "pos.con"), (str(con), "displacement.con")], [("direction.dat", mode)]
     if kind == "ts-pt":
         archive = _archive("website/tsopt/pt-island/pt-island-con.tgz")
@@ -604,18 +615,21 @@ def _guard(record: dict, client_calls) -> dict:
 
 def _cache_path(family: str, template_name: str, seed: int, start: str, passes: int) -> Path:
     safe = template_name.replace("/", "-")
-    kernel = str(load_template(ROOT, template_name).get("kernel") or "unset")
-    return (
-        CACHE
-        / "harness-1"
-        / FAMILIES[family]["cache"]
-        / KERNEL
-        / kernel
-        / safe
-        / f"passes-{passes}"
-        / str(seed)
-        / f"{start}.json"
-    )
+    loaded = load_template(ROOT, template_name)
+    kernel = str(loaded.get("kernel") or "unset")
+    direction = str(loaded.get("direction") or "python")
+    parts = [
+        CACHE,
+        "harness-1",
+        FAMILIES[family]["cache"],
+        KERNEL,
+        kernel,
+        safe,
+    ]
+    if direction != "python":
+        parts.append(f"direction-{direction}")
+    parts.extend([f"passes-{passes}", str(seed), f"{start}.json"])
+    return Path(*parts)
 
 
 def _read_cache(family: str, template_name: str, seed: int, start: str, passes: int) -> dict | None:
@@ -794,7 +808,12 @@ def run_case(
                     record["uncached"] = True
                 record = _guard(record, record.get("client_calls"))
             else:
-                copies, texts = _files(kind, str(start), work / "src")
+                copies, texts = _files(
+                    kind,
+                    str(start),
+                    work / "src",
+                    direction=str(template.get("direction") or "python"),
+                )
                 found = _run_client(
                     client,
                     _ini_text(template, int(seed), wrapper, python_job=python_job),

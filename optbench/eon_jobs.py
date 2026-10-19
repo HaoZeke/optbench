@@ -200,6 +200,19 @@ def _seeded_mode(natoms: int, seed: int) -> str:
     return _fmt_mode(rows)
 
 
+def _numpy_archive_mode(natoms: int, seed: int) -> str:
+    """2013 ``random_mode.py``: ``np.random.seed(index)`` then ``np.random.random``."""
+    import io
+
+    import numpy as np
+
+    rng = np.random.RandomState(int(seed))
+    mode = rng.random_sample((natoms, 3))
+    buffer = io.StringIO()
+    np.savetxt(buffer, mode)
+    return buffer.getvalue()
+
+
 def _difference_mode(reactant: Path, displacement: Path) -> str:
     left = _coords(reactant.read_text(encoding="utf-8", errors="replace"))
     right = _coords(displacement.read_text(encoding="utf-8", errors="replace"))

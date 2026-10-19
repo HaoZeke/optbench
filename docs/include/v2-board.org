@@ -153,7 +153,7 @@
    <tr data-problem="tsopt/LJ38">
    <th scope="row"><a href="generated/suites/tsopt.html#LJ38">LJ38</a></th>
    <td data-code="eOn" data-template="eon-client/ts-lj38-lanczos-improved" data-par2="280.33"><span class="bench-score">280.33</span><a href="generated/suites/tsopt.html#LJ38-templates">eon-client/ts-lj38-lanczos-improved</a></td>
-   <td data-code="Eon svn" data-template="eon-svn/ts-lj38-lanczos-ljcut" data-par2="292.78"><span class="bench-score">292.78</span><a href="generated/suites/tsopt.html#LJ38-templates">eon-svn/ts-lj38-lanczos-ljcut</a></td>
+   <td data-code="Eon svn" data-template="eon-svn/ts-lj38-lanczos-improved" data-par2="226.345"><span class="bench-score">226.345</span><a href="generated/suites/tsopt.html#LJ38-templates">eon-svn/ts-lj38-lanczos-improved</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/prfo-tuned" data-par2="192.6"><span class="bench-score">192.6</span><a href="generated/suites/tsopt.html#LJ38-templates">rgsaddle/prfo-tuned</a></td>
    <td data-code="ASE">—</td>
