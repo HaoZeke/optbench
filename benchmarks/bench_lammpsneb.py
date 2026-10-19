@@ -19,6 +19,7 @@ store. The published numbers are the asv result file.
 
 from __future__ import annotations
 
+import ast
 import itertools
 import json
 import os
@@ -270,10 +271,16 @@ def verify_asv_tracks(document: dict) -> None:
             raise ValueError(f"{name} has {len(values)} results for {len(pairs)} parameters")
         template_name = CLASS_TEMPLATE[class_name]
         for (seed, start), value in zip(pairs, values, strict=True):
+            if isinstance(seed, str):
+                seed = ast.literal_eval(seed)
+            if isinstance(start, str):
+                start = ast.literal_eval(start)
             if value is None or value != value:
                 raise ValueError(f"{name}({seed}, {start}) has no result")
             record = json.loads(
-                sidecar_path(CLASS_PROBLEM[class_name], template_name, seed, start).read_text(encoding="utf-8")
+                sidecar_path(CLASS_PROBLEM[class_name], template_name, str(seed), str(start)).read_text(
+                    encoding="utf-8"
+                )
             )
             expected = _expected_track(record, method, CLASS_CAP[class_name])
             if float(value) != expected:
