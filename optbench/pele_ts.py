@@ -17,6 +17,9 @@ A lowest-eigenvector success is calls under the cap and absolute
 overlap of at least 0.99 with the reference mode. The Hessian index is
 recorded and does not decide that score.
 
+The failure class is ``classify_outcome`` on the final energy, the
+geometry, the true force, and the call count.
+
 A saddle-search row is one single-atom displacement. The climb uses the
 published per-search cap of 5064 force calls. Each endpoint minimization
 has a budget of 2000, and those calls are part of the same per-search
@@ -50,7 +53,7 @@ import numpy as np
 
 from .connection import connected_endpoints, link_tolerance, per_atom_max
 from .counter import ForceCallCap, HarnessCounter
-from .failures import classify_failure
+from .failures import classify_outcome
 from .rgsaddle_minmode import _cartesian_rmsd, _geometries, _stored, _vibrational_eigenvalues
 from .score import half_even, score_v2
 from .stationary import judge_stationary, negative_index, numerical_hessian
@@ -161,11 +164,6 @@ def _import_pele():
     import pele.transition_states  # noqa: F401
 
     return pele
-
-
-def _outcome(reasons: list[str]) -> tuple[bool, str | None]:
-    failure = classify_failure(reasons)
-    return failure is None, failure
 
 
 def _mean_free_rmsd(moved: np.ndarray, reference: np.ndarray) -> float:
@@ -314,7 +312,8 @@ def _eigenvec0(kind: str, x: np.ndarray, reactant, file_mode) -> np.ndarray | No
     raise ValueError(f"unknown eigenvec0 {kind}")
 
 
-def _crash(name: str, calls: int, verify_calls: int, error: str) -> dict:
+def _crash(name: str, calls: int, verify_calls: int, error: str, cap: int | None = None) -> dict:
+    failure = classify_outcome(calls=int(calls), cap=cap, process_failed=True)
     return {
         "schema": "optbench.start/v2",
         "start": name,
@@ -322,8 +321,8 @@ def _crash(name: str, calls: int, verify_calls: int, error: str) -> dict:
         "verify_calls": int(verify_calls),
         "counter": "harness",
         "comparable": True,
-        "success": False,
-        "failure": "crash",
+        "success": failure is None,
+        "failure": failure,
         "reasons": ["crash"],
         "error": error,
         "energy": None,
@@ -381,7 +380,17 @@ def _judge_ts(
     if calls >= cap:
         reasons.append("cap")
     reasons = list(dict.fromkeys(reasons))
-    success, failure = _outcome(reasons)
+    failure = classify_outcome(
+        energy=float(energy),
+        geometry=point,
+        force=force_norm,
+        calls=int(calls),
+        cap=cap,
+        force_tol=force_tol,
+        hessian_index=None if index is None else int(index),
+        expected_index=1 if index is not None else None,
+    )
+    success = failure is None
     return {
         "schema": "optbench.start/v2",
         "start": name,
@@ -392,8 +401,8 @@ def _judge_ts(
         "success": success,
         "failure": failure,
         "reasons": reasons,
-        "energy": float(energy) if math.isfinite(energy) else None,
-        "force_norm": force_norm if math.isfinite(force_norm) else None,
+        "energy": float(energy),
+        "force_norm": float(force_norm),
         "hessian_index": None if index is None else int(index),
         "cartesian_index": None if cartesian is None else int(cartesian),
         "rigid_modes_removed": int(removed),
@@ -464,7 +473,7 @@ def _climb(spec: dict) -> dict:
         except LineSearchError:
             point = pot.last.copy() if pot.last is not None else x
         except Exception as exc:
-            return _crash(spec["name"], pot.calls, pot.verify_calls, exc.__class__.__name__)
+            return _crash(spec["name"], pot.calls, pot.verify_calls, exc.__class__.__name__, cap)
     finally:
         FindTransitionState._get_lowest_transverse_eigenvector = original_screen
     with pot.verification():
@@ -566,14 +575,19 @@ def _run_mode(spec: dict) -> dict:
     except LineSearchError:
         point = x
     except Exception as exc:
-        return _crash(spec["name"], pot.calls, pot.verify_calls, exc.__class__.__name__)
+        return _crash(spec["name"], pot.calls, pot.verify_calls, exc.__class__.__name__, cap)
     threshold = float(spec["overlap"])
     reasons: list[str] = []
     if not (math.isfinite(overlap) and overlap >= threshold and pot.calls < cap):
         reasons.append("mode_overlap")
     if pot.calls >= cap:
         reasons.append("cap")
-    success, failure = _outcome(reasons)
+    failure = classify_outcome(
+        calls=int(pot.calls),
+        cap=cap,
+        unmet="mode_overlap" in reasons,
+    )
+    success = failure is None
     with pot.verification():
         energy, gradient = pot.energy_forces(point)
     record = {
@@ -704,6 +718,7 @@ def _summarize(records: list[dict], template: dict, cap: int, problem_id: str, *
     lines.append(f"n_cap {metrics['n_cap']}")
     lines.append(f"n_wrong_stationary {metrics['n_wrong_stationary']}")
     lines.append(f"n_divergence {metrics['n_divergence']}")
+    lines.append(f"n_not_converged {metrics['n_not_converged']}")
     lines.append(f"n_crash {metrics['n_crash']}")
     lines.append("counter harness")
     lines.append(f"cap {cap}")
@@ -867,8 +882,24 @@ def _one_displacement(spec: dict, *, evaluate, minimum: np.ndarray, min_energy: 
             record["_legacy_links"] = (record["legacy_rmsd_plus"] <= limits["connect_rmsd"]) ^ (
                 record["legacy_rmsd_minus"] <= limits["connect_rmsd"]
             )
-    success, failure = _outcome(record["reasons"])
-    record["success"] = success
+    names = set(record["reasons"])
+    energy = record.get("energy")
+    if "divergence" in names and (energy is None or not math.isfinite(float(energy))):
+        energy = float("nan")
+        record["energy"] = energy
+    failure = classify_outcome(
+        energy=None if energy is None else float(energy),
+        geometry=record.get("_point"),
+        force=None if record.get("force_norm") is None else float(record["force_norm"]),
+        calls=float(record["force_calls"]),
+        cap=climb_cap,
+        force_tol=force_tol,
+        hessian_index=None if record.get("hessian_index") is None else int(record["hessian_index"]),
+        expected_index=1 if record.get("hessian_index") is not None else None,
+        process_failed="crash" in names,
+        force_above=True if "force_norm" in names and record.get("force_norm") is None else None,
+    )
+    record["success"] = failure is None
     record["failure"] = failure
     return record
 
@@ -931,6 +962,8 @@ def _saddle_once(root: Path, problem: dict, template: dict) -> dict:
         found=found,
         found_legacy=found_legacy,
         limits=limits,
+        cap=climb_cap,
+        force_tol=force_tol,
     )
     return record
 
@@ -958,6 +991,8 @@ def _finish_saddle_record(
     found: list[np.ndarray],
     found_legacy: list[np.ndarray],
     limits: dict,
+    cap: int,
+    force_tol: float,
 ) -> dict:
     point = record.pop("_point", None)
     links = record.pop("_axis_links", False)
@@ -989,8 +1024,18 @@ def _finish_saddle_record(
         if barrier >= limits["barrier_max"]:
             reasons.append("barrier")
         record["reasons"] = reasons
-    success, failure = _outcome(record["reasons"])
-    record["success"] = success
+    failure = classify_outcome(
+        energy=None if record.get("energy") is None else float(record["energy"]),
+        geometry=point,
+        force=None if record.get("force_norm") is None else float(record["force_norm"]),
+        calls=float(record["force_calls"]),
+        cap=cap,
+        force_tol=force_tol,
+        hessian_index=None if record.get("hessian_index") is None else int(record["hessian_index"]),
+        expected_index=1 if record.get("hessian_index") is not None else None,
+        stationary_rejected=bool(set(reasons) & {"not_connected", "duplicate", "barrier"}),
+    )
+    record["success"] = failure is None
     record["failure"] = failure
     legacy_reasons: list[str] = []
     if not legacy_links:
@@ -1172,7 +1217,12 @@ def _run_saddle_search(
                     if connected >= goal:
                         break
                     record = _finish_saddle_record(
-                        record, found=found, found_legacy=found_legacy, limits=limits
+                        record,
+                        found=found,
+                        found_legacy=found_legacy,
+                        limits=limits,
+                        cap=search_cap,
+                        force_tol=force_tol,
                     )
                     if record.get("success"):
                         connected += 1
