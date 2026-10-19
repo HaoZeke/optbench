@@ -2,16 +2,16 @@
 # force_calls count raw potential evaluations and are not divided by the image count
 # the mean is round-half-even over successes; cap, force, or Hessian index other than 1 is a failure
 # problem neb/Pt-heptamer
-force_calls 713
+force_calls 715
 force_calls_min 709
-force_calls_max 717
-force_calls_median 714
+force_calls_max 724
+force_calls_median 714.5
 force_calls_per_image 89
 call_unit total
-successes 7
-nfailed 3
-n 10
-transition_states 7
+successes 8
+nfailed 5
+n 13
+transition_states 8
 code i-PI
 code_version 3.3.1
 commit a6b350327ce7cb8fdcc17192b1b9af88513b662f
