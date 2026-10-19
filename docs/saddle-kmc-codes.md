@@ -416,6 +416,12 @@ direction. eOn's server, with `random_mode` left at its default, draws
 a separate Gaussian for the mode. The rgsaddle saddle templates set
 `displace_radius` 3.3 and call this generator. pARTn's atom-list path
 calls the same function with the same seed, so the coordinates match.
+On the Pt-island reactant, that function and OPTIM's `displace_listed`
+at `02405b0d` return the same coordinates for `search_seed(1, 1)`,
+`(1, 2)`, `(1, 50)`, `(2, 1)`, and `(3, 17)`. The maximum absolute
+difference is 0. Each draw moves 7 atoms, from epicentres 5, 2, 2,
+1, and 0. A generator that continues after
+`search_seed(1, 1)` does not reproduce `search_seed(1, 2)`.
 `partn/saddle-pt` itself still pushes 1 to 7 island atoms in plane,
 which is the authors' script. Sella's pt-island searches displace every
 free atom from seeds 0 through 15. ASE dimer leaves the reactant and
@@ -568,6 +574,25 @@ geometric rejudge. The single-run files in the table are repetition 1. The rgsad
 rows are the campaigns on this branch. The relink branch's endpoint
 archives are not copied here, and the product recount of the L-BFGS
 tuned archive is in the displacement section above.
+
+`cells/partn/saddle-pt-repro` at `d1ef3d52` is a different pARTn run
+(`tuning` `beland-radial`, `force_calls` 157247, PAR-2 12000.0,
+`unique_saddles` 3, `connected` 0, `fraction_connected` 0.0). Its
+endpoint archive is 585274 bytes and is not copied here. 177 of 200
+pairs are finite. 156 are linked. Grouping those products by the
+0.1 Å per-atom test gives 58 groups, as a greedy walk and as connected
+components. `find_repeat` on the products leaves unique 58 and
+qualifying 15. `not_connected` is 21, so the fraction is 179/200 =
+0.895. The rejudge reasons are `duplicate` 70, `barrier` 43,
+`duplicate` and `barrier` 28, `crash` 22, `not_connected` 21, success
+15, and `cap` 1. The stored `unique_saddles` 3 is the number of
+searches whose reason list has no `duplicate`. That flag was Cartesian
+RMSD 0.5 on the saddle, and the saddle coordinates are not in the npz.
+Pairwise Cartesian RMSD of the 156 products runs from
+3.4621078965399718e-06 to 0.7564492979556561, median
+0.4261666593500097. A greedy walk at RMSD 0.5 keeps 4 product
+representatives. The smallest RMSD among those four is
+0.5184810883019555. The graph of products within RMSD 0.5 is one component.
 
 ## TSASE
 
