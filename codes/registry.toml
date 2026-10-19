@@ -173,6 +173,16 @@ commit = "0.1.1"
 committed = "2019-12-10"
 note = "Sella 0.1.1 PESWrapper.diag for the lowest-eigenvector row. eta 1e-6, gamma 1e-16, vreftol 0.99, gradient v0, rigid-mode projection. This pin is not Sella 2.6.0."
 
+[[code]]
+id = "gman"
+name = "Gman"
+role = "nudged elastic band"
+repository = "https://theory.cm.utexas.edu/svn/vtstcode"
+ref = "r147"
+commit = "vtst-lbfgs-r128"
+committed = "2011-10-10"
+note = "Gman r235 is the 2013-04-10 archive identity and is not served by anonymous SVN. The GL-BFGS Hessian step is VTST lbfgs.F file revision 128, exported at peg r147 on 2011-10-10. LLINEOPT is false, LGLOBAL is true, memory is 25, inverse curvature is 0.05, and maxmove is 0.2. The global cap is maxmove times the square root of the image count. The Pt-heptamer band is 8 images, spring 5, climbing image, improved tangent, and Fmag 0.01 on morse_pt. The dat integer follows archived opt.py: evaluations divided by 8, then %d."
+
 [[template]]
 id = "sella-0.1.1/lj38-loweig"
 code = "sella-0.1.1"

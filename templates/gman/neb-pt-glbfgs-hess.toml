@@ -1,0 +1,27 @@
+# GL-BFGS Hessian CI-NEB. The problem file supplies the image count, the cap, and the force norm.
+id = "gman/neb-pt-glbfgs-hess"
+engine = "gman"
+problem = "neb/Pt-heptamer"
+code = "Gman"
+code_version = "vtst-r128"
+commit = "vtst-lbfgs-r128"
+algorithm = "lbfgs"
+counter = "harness"
+reducer = "opt-py"
+failure_cap = 10000
+note = "Archived opt.py calls Gopt.glbfgs().init(maxmove=0.2, min='hess', alpha=0.05, memory=25) and neb.relax with 8 images, spring 5, tangent new, method ci, Fmag 0.01. Anonymous SVN does not export Gman r235. The step is VTST lbfgs.F file revision 128 at peg r147, Hessian branch, global cap maxmove*sqrt(images). The dat integer is the archived %d mean of evaluations/8."
+
+[stop]
+force_norm = 0.01
+max_force_calls = 10000
+
+[glbfgs]
+memory = 25
+alpha = 0.05
+maxmove = 0.2
+min = "hess"
+images = 8
+spring = 5.0
+tangent = "new"
+method = "ci"
+converge = "Fmag"
