@@ -1085,7 +1085,21 @@ The number is written only after the run finishes under the problem rule.
    <td><a href="https://github.com/pele-python/pele">https://github.com/pele-python/pele</a></td>
    </tr>
    </tbody></table></div>
-   <p>No full ranked run.</p>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="globalopt/lj38" data-template="current-pele/lj38-basinhopping">
+   <td>Lennard-Jones 38 global minimum</td>
+   <td data-field="template">current-pele/lj38-basinhopping</td>
+   <td data-field="version">pele 0.1.2</td>
+   <td data-field="commit">b7081b932a06</td>
+   <td data-field="par2_mean">490040</td>
+   <td data-field="mean_calls">490040</td>
+   <td data-field="median_calls">265916</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table></div>
    <p>No full ranked run</p><ul>
    <li>Lennard-Jones 38 global minimum: not yet on the harness counter.</li>
    <li>pele-lbfgs-M1-maxstep0.1: no per-start record.</li>

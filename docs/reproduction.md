@@ -59,7 +59,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj38/gmin-csm | — | — | not rerun |
 | lj38/gmin-nosym | — | — | not rerun |
 | lj38/gmin-symmetrise | — | — | not rerun |
-| lj38/pele-basinhopping | force_calls 521595 | 525131 | reproduced |
+| lj38/pele-basinhopping | force_calls 521595 | 526282 | reproduced |
 | lj75/gmin | — | — | not rerun |
 | lj98/gmin-nosym | — | — | not rerun |
 | lj98/gmin-symmetrise | — | — | not rerun |
