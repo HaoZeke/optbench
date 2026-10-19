@@ -47,6 +47,7 @@
    <dl class="bench-rule">
    <dt>Cap</dt><dd>10000 epochs</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
+   <dt>Note</dt><dd>The ranked Optax force rows are the finite-difference fingerprint derivative. The neighbor list is held fixed and the cutoff is the value in fpParas.dat. PyAMFF python loop_FPs at 8037eb98 sorts neighbor indices and leaves the periodic offsets unsorted. On this trajectory that pairing does not change the stored neighbor blocks. calculate_dG2 raises UnboundLocalError on every image, so the python path has no force loss. The archived configs set fp_engine to Fortran. That Fortran derivative was not executed. There is no separate paper-comparable row. templates/optax/README.md has the comparison.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
@@ -188,6 +189,7 @@
    <dl class="bench-rule">
    <dt>Cap</dt><dd>10000 epochs</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
+   <dt>Note</dt><dd>The ranked Optax force rows are the finite-difference fingerprint derivative. The neighbor list is held fixed and the cutoff is the value in fpParas.dat. PyAMFF python loop_FPs at 8037eb98 sorts neighbor indices and leaves the periodic offsets unsorted, then drops a cross derivative whose offset fails noffset.all() == 0. On this trajectory every offset passes that test, so the python force loss and the ranked force loss agree. The archived configs leave fp_engine unset and use the Fortran default. That Fortran derivative was not executed. There is no separate paper-comparable row. templates/optax/README.md has the comparison.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
    <p class="bench-gaps">Partial rows stay off the ranked table.</p>
