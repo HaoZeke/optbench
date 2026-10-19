@@ -1,18 +1,9 @@
 """Archived pele basin hopping for Lennard-Jones 38."""
 
-import tarfile
 from pathlib import Path
 
-import pytest
-
 from optbench.campaign import load_template, resolve_problem, run
-from optbench.runners.pele_bh import (
-    _LINESEARCH_CALLS,
-    _LINESEARCH_ENERGY,
-    _options,
-    _require_a68ec5_linesearch,
-    _rule,
-)
+from optbench.runners.pele_bh import _options, _rule
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -23,10 +14,12 @@ def test_template_uses_the_archived_driver():
     options = _options(template)
     minimum, tolerance, partial = _rule(problem, template)
     assert template["tuning"] == "archive"
-    assert template["commit"] == "b7081b932a060be11342fbe8287ac35da8ada879"
+    assert template["code_version"] == "0.1"
+    assert template["commit"] == "2d5bc8e3ed5fd980ae7d8e916f2964ae522f62f9"
     assert options == {
         "temperature": 1.0,
         "stepsize": 0.41,
+        "quench": "mylbfgs",
         "quench_tol": 1e-3,
         "quench_maxstep": 0.1,
         "quench_m": 4,
@@ -40,9 +33,24 @@ def test_template_uses_the_archived_driver():
     assert tolerance == 0.001
     assert partial == ""
     assert template["stop"]["max_force_calls"] == 4000000
-    patch = (ROOT / "codes" / "pele-a68ec5-lbfgs-linesearch.patch").read_text(encoding="utf-8")
-    assert "factor /= 10." in patch
-    assert "factor *= 0.5" in patch
+    assert not (ROOT / "codes" / "pele-a68ec5-lbfgs-linesearch.patch").exists()
+
+
+def test_current_pele_uses_the_same_driver_unpatched():
+    template = load_template(ROOT, "current-pele/lj38-basinhopping")
+    options = _options(template)
+    assert template["code"] == "pele"
+    assert template["code_version"] == "0.1.2"
+    assert template["commit"] == "b7081b932a060be11342fbe8287ac35da8ada879"
+    assert template["tuning"] == "archive"
+    assert "current-pele" in template["note"]
+    assert options["quench"] == "lbfgs_cpp"
+    assert options["temperature"] == 1.0
+    assert options["stepsize"] == 0.41
+    assert options["acc_ratio"] == 0.5
+    assert options["factor"] == 0.9
+    assert options["interval"] == 100
+    assert options["quench_tol"] == 1e-3
 
 
 def test_campaign_dispatches_pele(monkeypatch, tmp_path: Path):
@@ -72,40 +80,3 @@ def test_campaign_dispatches_pele(monkeypatch, tmp_path: Path):
     assert captured["workers"] == 3
     assert captured["resume"] is True
     assert captured["output"] == output
-
-
-def _start_one():
-    archive = (
-        ROOT
-        / "inputs"
-        / "sha256"
-        / "9e5bb818adfad67a5afd53d083a6c8afd3addc0fe81a0f57413a73c80eb74e8f"
-        / "100_lj38.tar.gz"
-    )
-    if not archive.is_file():
-        return None
-    import numpy as np
-
-    with tarfile.open(archive) as packed:
-        member = packed.extractfile("100_lj38/1.xyz")
-        if member is None:
-            return None
-        text = member.read().decode("utf-8")
-    rows = []
-    for line in text.splitlines()[2:]:
-        parts = line.split()
-        if len(parts) >= 4:
-            rows.append([float(parts[1]), float(parts[2]), float(parts[3])])
-    if len(rows) != 38:
-        return None
-    return np.asarray(rows, dtype=np.float64).reshape(-1)
-
-
-def test_a68ec5_linesearch_quench_is_327_calls():
-    pytest.importorskip("pele")
-    coords = _start_one()
-    if coords is None:
-        pytest.skip("LJ38 geometry archive is not in the checkout")
-    _require_a68ec5_linesearch(coords)
-    assert _LINESEARCH_CALLS == 327
-    assert _LINESEARCH_ENERGY == -163.20543198540588

@@ -1,23 +1,25 @@
-"""Basin hopping with the 2013 pele driver for Lennard-Jones 38.
+"""Basin hopping with the archived ``bin/js850/globalopt.py`` settings.
 
-``bin/js850/globalopt.py`` builds ``LJClusterWrap``, sets
-``structural_quench_params.tol`` to 1e-3, temperature 1, and steps
-with ``RandomDisplacement(0.41)`` inside ``AdaptiveStepsize``
-(acceptance 0.5, factor 0.9, interval 100). The quench is
-``lbfgs_cpp`` from ``get_minimizer``. A run stops when the Markov
-energy is at most ``-173.9284 + 1e-3``, and the check happens after
-each hop, including the first hop after the initial quench.
+SVN r269 builds ``LJClusterWrap``, sets ``structural_quench_params.tol``
+to 1e-3, temperature 1, and steps with ``RandomDisplacement(0.41)``
+inside ``AdaptiveStepsize`` (acceptance 0.5, factor 0.9, interval 100).
+The quench is whatever ``get_minimizer`` returns in the pele commit
+named by the template. A run stops when the Markov energy is at most
+``-173.9284 + 1e-3``. The check happens after each hop, including the
+first hop after the initial quench. The in-memory database is the one
+the script passes into ``get_basinhopping``.
 
-The potential is the harness Lennard-Jones kernel, epsilon 1, sigma 1,
-cutoff 40, no shift. Pairs in these clusters stay inside that cutoff,
-so the energy matches pele's infinite Lennard-Jones. A force call is
-one ``getEnergy`` or ``getEnergyGradient`` on the wrapper in
-``tools.LJClusterWrap``. The same coordinates are counted again.
+The paper row is unmodified pele ``2d5bc8e3`` (27 Aug 2013). Its
+minimizer is ``mylbfgs``, and that linesearch already divides a rising
+step by 10. Those numbers were counted by ``LJClusterWrap`` and are
+stored with the campaign file. This module does not rebuild that
+Python 2 extension.
 
-pele 0.1.2 multiplies a rising LBFGS step by 1/2. Commit a68ec5, the
-archived code, divides that step by 10. This runner needs the a68ec5
-factor. The numpy generator is seeded with the integer in the start
-name before the first displacement.
+``current-pele/lj38-basinhopping`` is unpatched pele 0.1.2. Its
+minimizer is stock ``lbfgs_cpp``, which multiplies a rising step by
+1/2. The ranked count is one ``PeleCounter`` entry per ``getEnergy``
+or ``getEnergyGradient``. The numpy generator is seeded with the
+integer in the start name before the first displacement.
 """
 
 from __future__ import annotations
@@ -29,9 +31,8 @@ import statistics
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
 
-from optbench.counter import ForceCallCap
 from optbench.failures import classify_failure
-from optbench.potentials import lennard_jones, read_con
+from optbench.potentials import read_con
 from optbench.score import score_v2, summarize_capped
 from optbench.v2 import collect_provenance
 
@@ -200,14 +201,15 @@ def _budget(problem: dict, template: dict) -> int:
 def _options(template: dict) -> dict:
     section = template.get("pele") or {}
     quench = str(section.get("quench") or "lbfgs_cpp")
-    if quench != "lbfgs_cpp":
-        raise ValueError(f"{template['id']} quench {quench} is not lbfgs_cpp")
+    if quench not in {"lbfgs_cpp", "mylbfgs"}:
+        raise ValueError(f"{template['id']} quench {quench} is not the archived get_minimizer")
     takestep = str(section.get("takestep") or "adaptive")
     if takestep != "adaptive":
         raise ValueError(f"{template['id']} takestep {takestep} is not the archived AdaptiveStepsize")
     return {
         "temperature": float(section.get("temperature", 1.0)),
         "stepsize": float(section.get("stepsize", 0.41)),
+        "quench": quench,
         "quench_tol": float(section.get("quench_tol", 1e-3)),
         "quench_maxstep": float(section.get("quench_maxstep", 0.1)),
         "quench_m": int(section.get("quench_m", 4)),
@@ -219,104 +221,85 @@ def _options(template: dict) -> dict:
     }
 
 
-# Displacement of start 1 with seed 0. The a68ec5 linesearch (a rising
-# step divided by 10) takes 327 gradient evaluations. pele 0.1.2
-# multiplies that step by 1/2 and does not land on this count.
-_LINESEARCH_CALLS = 327
-_LINESEARCH_ENERGY = -163.20543198540588
-
-
-class _WrapperLJ:
-    """Count every ``getEnergy`` and ``getEnergyGradient``, as ``LJClusterWrap`` does."""
-
-    def __init__(self, cap: int):
-        self.calls = 0
-        self.cap = cap
-
-    def _charge(self) -> None:
-        self.calls += 1
-        if self.calls > self.cap:
-            raise ForceCallCap(f"force-call cap {self.cap}")
-
-    def getEnergy(self, coords):
-        self._charge()
-        energy, _gradient = lennard_jones(coords)
-        return float(energy)
-
-    def getEnergyGradient(self, coords):
-        import numpy as np
-
-        self._charge()
-        energy, gradient = lennard_jones(coords)
-        return float(energy), np.ascontiguousarray(gradient, dtype=np.float64)
+def _counter_name(template: dict) -> str:
+    quench = str((template.get("pele") or {}).get("quench") or "")
+    if quench == "mylbfgs":
+        return "pele-wrapper"
+    return "harness"
 
 
 def _hop_job(job: dict) -> dict:
     import numpy as np
-    from pele.basinhopping import BasinHopping
-    from pele.optimize import lbfgs_cpp
+    from pele.potentials import LJ
+    from pele.systems import LJCluster
     from pele.takestep import AdaptiveStepsize, RandomDisplacement
 
+    from optbench.counter import PeleCounter
+
+    if str(job["quench"]) != "lbfgs_cpp":
+        raise RuntimeError(
+            f"{job['template']} uses {job['quench']} from that pele commit. "
+            "The 2013 mylbfgs extension is not this interpreter's lbfgs_cpp."
+        )
     cap = int(job["cap"])
     minimum = float(job["energy_minimum"])
     tolerance = float(job["energy_tolerance"])
     seed = int(job["seed"])
     np.random.seed(seed)
-    potential = _WrapperLJ(cap)
+
+    class LJClusterWrap(LJCluster):
+        def get_potential(self):
+            self.counted = PeleCounter(LJ())
+            return self.counted
+
+    system = LJClusterWrap(38)
+    system.params.structural_quench_params.tol = float(job["quench_tol"])
+    system.params.basinhopping.temperature = float(job["temperature"])
+    take = RandomDisplacement(stepsize=float(job["stepsize"]))
+    adaptive = AdaptiveStepsize(
+        take,
+        acc_ratio=float(job["acc_ratio"]),
+        factor=float(job["factor"]),
+        interval=int(job["interval"]),
+        verbose=False,
+    )
     error = ""
     steps = 0
     caught_cap = False
     energy = None
     rms = None
     converged = False
-
-    def quench(coords):
-        return lbfgs_cpp(
-            coords,
-            potential,
-            tol=float(job["quench_tol"]),
-            maxstep=float(job["quench_maxstep"]),
-            M=int(job["quench_m"]),
-            nsteps=int(job["quench_nsteps"]),
-            iprint=-1,
-        )
-
+    opt = None
     try:
-        step = AdaptiveStepsize(
-            RandomDisplacement(stepsize=float(job["stepsize"])),
-            acc_ratio=float(job["acc_ratio"]),
-            factor=float(job["factor"]),
-            interval=int(job["interval"]),
-            verbose=False,
-        )
-        bh = BasinHopping(
-            np.asarray(job["coords"], dtype=np.float64),
-            potential,
-            step,
-            temperature=float(job["temperature"]),
-            quench=quench,
+        database = system.create_database()
+        opt = system.get_basinhopping(
+            database=database,
+            takestep=adaptive,
+            coords=np.asarray(job["coords"], dtype=np.float64),
             outstream=None,
         )
-        while potential.calls < cap:
-            bh.takeOneStep()
-            steps += 1
-            energy = float(bh.markovE)
-            rms = float(bh.rms) if bh.rms is not None else None
+        opt.printfrq = 100
+        for steps in range(1, 100001):
+            opt.run(1)
+            energy = float(opt.markovE)
+            rms = None if opt.rms is None else float(opt.rms)
             converged = math.isfinite(energy)
             if energy <= minimum + tolerance:
                 break
+            if int(system.counted.calls) > cap:
+                caught_cap = True
+                break
     except Exception as exc:
-        caught_cap = isinstance(exc, ForceCallCap) or potential.calls > cap
-        if not caught_cap:
-            error = f"{type(exc).__name__}: {exc}"
-        if energy is None:
+        error = f"{type(exc).__name__}: {exc}"
+        if energy is None and opt is not None:
             try:
-                energy = float(bh.markovE)
+                energy = float(opt.markovE)
             except Exception:
                 energy = None
-    calls = int(potential.calls)
+    calls = int(system.counted.calls) if getattr(system, "counted", None) is not None else 0
     if calls > cap:
         calls = cap
+        caught_cap = True
     success = (
         error == ""
         and energy is not None
@@ -346,7 +329,7 @@ def _hop_job(job: dict) -> dict:
         "seed": seed,
         "force_calls": calls,
         "verify_calls": 0,
-        "counter": "pele-wrapper",
+        "counter": "harness",
         "comparable": True,
         "success": failure is None,
         "failure": failure,
@@ -366,36 +349,6 @@ def _hop_job(job: dict) -> dict:
         "tuning": job["tuning"],
         "error": error,
     }
-
-
-def _require_a68ec5_linesearch(coords) -> None:
-    """Refuse a stock pele 0.1.2 linesearch before any basin hop."""
-    import numpy as np
-    from pele.optimize import lbfgs_cpp
-    from pele.takestep import RandomDisplacement
-
-    np.random.seed(0)
-    kicked = np.asarray(coords, dtype=np.float64).reshape(-1).copy()
-    RandomDisplacement(stepsize=0.41).takeStep(kicked)
-    potential = _WrapperLJ(10**9)
-    result = lbfgs_cpp(
-        kicked,
-        potential,
-        tol=1e-3,
-        maxstep=0.1,
-        M=4,
-        nsteps=10000,
-        iprint=-1,
-    )
-    calls = int(result.nfev)
-    energy = float(result.energy)
-    if calls != _LINESEARCH_CALLS or abs(energy - _LINESEARCH_ENERGY) > 1e-8:
-        raise RuntimeError(
-            "lbfgs_cpp is not the a68ec5 backtracking quench "
-            f"(start 1, seed 0 returned {calls} calls and energy {energy:.12g}; "
-            f"expected {_LINESEARCH_CALLS} and {_LINESEARCH_ENERGY:.12g}). "
-            "Apply codes/pele-a68ec5-lbfgs-linesearch.patch and rebuild pele."
-        )
 
 
 def _read_done(path: Path) -> list[dict]:
@@ -429,7 +382,7 @@ def _dat(summary: dict, template: dict, metrics: dict, commit: str, version: str
         "template": template["id"],
         "problem": template.get("problem"),
         "tuning": template.get("tuning", ""),
-        "counter": "pele-wrapper",
+        "counter": _counter_name(template),
         "cap": cap,
         "partial": "true" if partial else "false",
         "energy_minimum": minimum,
@@ -447,9 +400,16 @@ def _dat(summary: dict, template: dict, metrics: dict, commit: str, version: str
         "energy_min": summary.get("energy_min"),
         "energy_max": summary.get("energy_max"),
     }
+    counter = _counter_name(template)
+    if counter == "pele-wrapper":
+        counted = "# counter pele-wrapper. One force call is one getEnergy or one getEnergyGradient on LJClusterWrap."
+        quench = "# The quench is mylbfgs from pele 2d5bc8e3. A rising step is divided by 10."
+    else:
+        counted = "# counter harness. One force call is one PeleCounter entry, a getEnergy or a getEnergyGradient."
+        quench = "# The quench is stock lbfgs_cpp from unpatched pele 0.1.2. A rising step is multiplied by 1/2."
     lines = [
-        "# counter pele-wrapper. One force call is one getEnergy or one getEnergyGradient. The same coordinates are counted again.",
-        "# The quench is pele.optimize.lbfgs_cpp with the a68ec5 factor (a rising step is divided by 10). The driver is pele.basinhopping.BasinHopping.",
+        counted,
+        quench,
         "# A start succeeds when the Markov energy is within energy_tolerance of energy_minimum and the call count is under the cap.",
         "# The numpy generator is seeded with the integer in the start name.",
     ]
@@ -594,9 +554,6 @@ def run_template(
     cap = _budget(problem, template)
     options = _options(template)
     loaded = _load_geometries(root, problem, template, geometries, work, output)
-    by_start = {name: coords for name, coords, _seed in loaded}
-    if "1" in by_start:
-        _require_a68ec5_linesearch(by_start["1"])
     starts_path = output.with_suffix(".starts.jsonl")
     done = _read_done(starts_path) if resume else []
     if done:

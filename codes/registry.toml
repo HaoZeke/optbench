@@ -181,7 +181,7 @@ repository = "https://github.com/pele-python/pele"
 ref = "master"
 commit = "b7081b932a060be11342fbe8287ac35da8ada879"
 committed = "2026-10-12"
-note = "pele 0.1.2 at b7081b93. Lennard-Jones 38 basin hopping follows bin/js850/globalopt.py: temperature 1, RandomDisplacement 0.41, AdaptiveStepsize acceptance 0.5 factor 0.9 interval 100, LBFGS RMS tolerance 1e-3, memory 4, maxstep 0.1. pele 0.1.2 multiplies a rising LBFGS step by 1/2. The archived a68ec5 quench divides that step by 10. codes/pele-a68ec5-lbfgs-linesearch.patch restores the division and makes the CVODE import optional when Sundials is not linked. Force calls count getEnergy and getEnergyGradient separately."
+note = "pele 0.1.2 at b7081b93, unpatched. The current-pele Lennard-Jones 38 basin hopping row uses the archived globalopt.py settings on this commit: temperature 1, RandomDisplacement 0.41, AdaptiveStepsize acceptance 0.5 factor 0.9 interval 100, and stock lbfgs_cpp, which multiplies a rising step by 1/2. The paper row is unmodified pele 2d5bc8e3 from 27 Aug 2013. Its mylbfgs linesearch already divides a rising step by 10."
 
 [[template]]
 id = "sella-0.1.1/lj38-loweig"

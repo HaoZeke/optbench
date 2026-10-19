@@ -1,0 +1,35 @@
+# counter harness. One force call is one PeleCounter entry, a getEnergy or a getEnergyGradient.
+# The quench is stock lbfgs_cpp from unpatched pele 0.1.2. A rising step is multiplied by 1/2.
+# A start succeeds when the Markov energy is within energy_tolerance of energy_minimum and the call count is under the cap.
+# The numpy generator is seeded with the integer in the start name.
+# current-pele. Unpatched pele 0.1.2 with the archived globalopt.py settings: temperature 1, RandomDisplacement 0.41, AdaptiveStepsize acceptance 0.5, factor 0.9, interval 100, quench tolerance 1e-3. get_minimizer is stock lbfgs_cpp, so a rising step is multiplied by 1/2. H0 0.1, memory 4, maxstep 0.1, and the gradient stop are that version's defaults. The potential is pele's Lennard-Jones. The ranked count is one PeleCounter entry per getEnergy or getEnergyGradient. The seed is the integer in the start name. The budget is 4000000.
+force_calls 490040
+force_calls_min 3040
+force_calls_max 3367372
+force_calls_median 265916
+nfailed 0
+median 265916
+code pele
+code_version 0.1.2
+commit b7081b932a060be11342fbe8287ac35da8ada879
+algorithm basin hopping
+template current-pele/lj38-basinhopping
+problem globalopt/lj38
+tuning archive
+counter harness
+cap 4000000
+partial false
+energy_minimum -173.9284
+energy_tolerance 0.001
+par2_mean 490040.21
+wilson_low 0.963006501793
+wilson_high 1
+par2_median 265916
+par2_median_low 195794.5
+par2_median_high 339468
+v2_nfailed 0
+v2_successes 100
+n 100
+lowest_energy -173.928426239
+energy_min -173.928426239
+energy_max -173.928424502

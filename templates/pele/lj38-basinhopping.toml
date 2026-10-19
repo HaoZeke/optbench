@@ -2,16 +2,16 @@ id = "pele/lj38-basinhopping"
 engine = "pele"
 problem = "globalopt/lj38"
 code = "pele"
-code_version = "0.1.2"
-commit = "b7081b932a060be11342fbe8287ac35da8ada879"
+code_version = "0.1"
+commit = "2d5bc8e3ed5fd980ae7d8e916f2964ae522f62f9"
 algorithm = "basin hopping"
 tuning = "archive"
-note = "Basin hopping from bin/js850/globalopt.py. Temperature 1, RandomDisplacement 0.41, AdaptiveStepsize acceptance 0.5, factor 0.9, interval 100. The quench is lbfgs_cpp with RMS tolerance 1e-3, memory 4, and maxstep 0.1. pele 0.1.2 multiplies a rising LBFGS step by 1/2. codes/pele-a68ec5-lbfgs-linesearch.patch restores the a68ec5 division by 10. The potential is the harness Lennard-Jones kernel, epsilon 1, sigma 1, cutoff 40, no shift. The stop is the Markov energy at most -173.9284 + 1e-3. A force call is one getEnergy or getEnergyGradient. The seed is the integer in the start name. The budget is 4000000, above the archived maximum."
+note = "Basin hopping from bin/js850/globalopt.py at SVN r269, the script that wrote the 29 Aug 2013 benchmark. pele 2d5bc8e3 is master on 27 Aug 2013. get_minimizer is mylbfgs: the Fortran GMIN step and the Python linesearch that divides a rising step by 10. Temperature 1, RandomDisplacement 0.41, AdaptiveStepsize acceptance 0.5, factor 0.9, interval 100, quench tolerance 1e-3. The other quench values are that commit's defaults: maxstep 0.1, memory 4, H0 1, maxErise 1e-4, 10000 steps. The potential is that commit's Lennard-Jones. A force call is one getEnergy or getEnergyGradient on LJClusterWrap. The stop is the Markov energy at most -173.9284 + 1e-3, checked after each hop. The numpy generator is seeded with the integer in the start name. The budget is 4000000."
 
 [pele]
 temperature = 1.0
 stepsize = 0.41
-quench = "lbfgs_cpp"
+quench = "mylbfgs"
 quench_tol = 1.0e-3
 quench_maxstep = 0.1
 quench_m = 4
