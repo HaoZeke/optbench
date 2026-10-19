@@ -162,8 +162,8 @@
    </tr>
    <tr data-problem="globalopt/lj38">
    <th scope="row"><a href="generated/suites/globalopt.html#lj38">Lennard-Jones 38 global minimum</a></th>
-   <td data-code="eOn">—</td>
-   <td data-code="Eon svn">—</td>
+   <td data-code="eOn" data-template="eon-client/bh-lj38" data-par2="503146"><span class="bench-score">503146</span><a href="generated/suites/globalopt.html#lj38-templates">eon-client/bh-lj38</a></td>
+   <td data-code="Eon svn" data-template="eon-svn/bh-lj38" data-par2="598530"><span class="bench-score">598530</span><a href="generated/suites/globalopt.html#lj38-templates">eon-svn/bh-lj38</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="geodesic">—</td>
