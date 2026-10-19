@@ -1,22 +1,30 @@
-# counter harness. pyKMC partn_search from the reactant, highest free atoms first.
-# The call total is the reactant minimization, the searches, and the two endpoint minimizations.
-# A success is one index-1 saddle under the cap, force at the stop, barrier in (0, 1.5) eV,
-# and exactly one endpoint within Cartesian RMSD 0.5 of the minimized reactant
-# on the protruding atoms (within 1.5 A of the highest free atom).
-# The 2014 rate and barrier columns are a different observable.
-force_calls 2538
-force_calls_min 2538
-force_calls_max 2538
-force_calls_median 2538
-successes 1
-nfailed 0
-n 1
-transition_states 1
+# counter harness. pyKMC partn_search on the minimized reactant.
+# Temperature 700.0 K, prefactor 1200000000000.0, from archive/entries/hTST/Pt/eon-dimer-lbfgs/report.py.
+# A barrier cycle ends when every reference barrier, rounded to 3 decimals, has been seen.
+# A rate cycle ends at 0.999 of rate_ref. The link test is unchanged.
+# The 2014 Pt barriers were measured with shifted Morse. This row uses the harness potential.
+# matched 6 of 15 reference barriers after 662 searches.
+# unmatched reference barriers: 0.620 0.986 0.986 1.196 1.196 1.196 1.196 1.207 1.207
+# observed barriers: 0.601 0.619 0.985 0.987 0.989 1.195 1.479 1.480 1.482 1.491 1.493 1.511 1.512 1.613 1.615 1.623 1.624 1.786 1.788 1.848 1.857 1.860 1.875 1.917 1.977 1.979 2.083 2.084 2.100 2.105 2.157 2.158 2.162 2.178 2.181 2.442 2.444 2.803 2.947 3.404 3.406 3.437 3.452 3.453 3.693 4.191 4.197 4.198 4.209 4.480 4.518 4.557 5.123 5.218 5.224 5.237 5.935 6.451 6.895 7.033 7.050 7.059 7.426
+rate_jobs 82
+rate_force_calls 113199.5
+rate_average_over 8
+temperature_K 700
+prefactor 1.2e+12
+rate_ref 155055901.2
+matched_barriers 6
+reference_barriers 15
+processes 95
+total_searches 662
+minimize_calls 14
 code pykmc
 code_version 0.0.1
 commit 9fd1f6e9085ef92642142406f3dd74e574209898
-algorithm pARTn event search
+algorithm pARTn KMC
+tuning beland-2015-pt111
 template pykmc/htst-pt
 problem hTST/Pt
-tuning default
 counter harness
+reducer htst-cycles
+cap 50000000
+partial true

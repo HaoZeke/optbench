@@ -204,28 +204,28 @@ L 507.6 26.16
    </g>
    <g id="legend_1">
     <g id="patch_7">
-     <path d="M 308.634844 257.1 
+     <path d="M 265.984062 257.1 
 L 502.7 257.1 
 Q 504.1 257.1 504.1 255.7 
 L 504.1 245.899453 
 Q 504.1 244.499453 502.7 244.499453 
-L 308.634844 244.499453 
-Q 307.234844 244.499453 307.234844 245.899453 
-L 307.234844 255.7 
-Q 307.234844 257.1 308.634844 257.1 
+L 265.984062 244.499453 
+Q 264.584062 244.499453 264.584062 245.899453 
+L 264.584062 255.7 
+Q 264.584062 257.1 265.984062 257.1 
 z
 " style="fill: #ffffff; opacity: 0.8; stroke: #cccccc; stroke-linejoin: miter"/>
     </g>
     <g id="line2d_13">
-     <path d="M 310.034844 250.168359 
-L 317.034844 250.168359 
-L 317.034844 250.168359 
-L 324.034844 250.168359 
-L 324.034844 250.168359 
+     <path d="M 267.384062 250.168359 
+L 274.384062 250.168359 
+L 274.384062 250.168359 
+L 281.384062 250.168359 
+L 281.384062 250.168359 
 " style="fill: none; stroke: #1f77b4; stroke-width: 1.5; stroke-linecap: square"/>
     </g>
     <g id="text_15">
-     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="329.634844" y="252.618359" transform="rotate(-0 329.634844 252.618359)">pykmc/aladatom 0.0.1 default campaign 9fd1f6e</text>
+     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="286.984062" y="252.618359" transform="rotate(-0 286.984062 252.618359)">pykmc/aladatom 0.0.1 beland-2015-pt111 campaign 9fd1f6e</text>
     </g>
    </g>
   </g>

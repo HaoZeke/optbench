@@ -9,8 +9,8 @@ is the harness force count. A client's own tally is not a score.
 Pt-island geometries use the smooth-linear Morse potential. Aluminum
 hTST and the accelerated-md reactant use the r2549 EAM force routine.
 hTST and accelerated-md problem files state rates and barriers. pyKMC
-scores one event search on those reactants. The other codes in this lane
-do not.
+runs a KMC campaign on those reactants and writes the archive columns.
+The saddle catalogue stores both endpoint minima and scores the eOn r2205 link.
 
 ## Rows on disk
 
@@ -110,11 +110,11 @@ success-only median. A row with no success has no median.
 | minimization/lj38 | pysisyphus/cg-lj38 | 254/1000 | 745 cap, 1 wrong stationary | 693 |
 | minimization/lj38 | pysisyphus/sd-lj38 | 205/1000 | 795 cap | 808 |
 | tsopt/pt-island | pykmc/ts-pt | 46/49 | 1 cap, 2 divergence | 746.5 |
-| hTST/Pt | pykmc/htst-pt | 1/1 | 0 | 2538 |
-| hTST/Al | pykmc/htst-al | 1/1 | 0 | 1297 |
-| accelerated-md/aladatom | pykmc/aladatom | 1/1 | 0 | 962 |
-| accelerated-md/standard_aladatom | pykmc/standard-aladatom | 1/1 | 0 | 1215 |
-| saddle-search/pt-island | pykmc/saddle-pt | 10/487 | 17 cap, 460 divergence | 1332 |
+| hTST/Pt | pykmc/htst-pt | 0/1 | partial, 1 divergence | — |
+| hTST/Al | pykmc/htst-al | 16/16 | partial | 58189.5 |
+| accelerated-md/aladatom | pykmc/aladatom | 1/1 | 0 | 209928 |
+| accelerated-md/standard_aladatom | pykmc/standard-aladatom | 1/1 | 0 | 93065 |
+| saddle-search/pt-island | pykmc/saddle-pt | 12/561 | 1 cap, 548 divergence | 1225 |
 
 The rgsaddle band campaigns on `neb/Pt-heptamer` and the three double-ended
 problems are on disk (12 templates each). The eight rgmin `lj38-noise` L-BFGS rows are on disk.
@@ -256,16 +256,19 @@ Two minima are the same when that maximum is strictly below 0.1 Å. A
 search is connected when exactly one endpoint matches. `rmsd_connect` 0.5
 stays the saddle-novelty test and is not this link.
 
-No saddle-search/pt-island row stores `minimum`, `endpoint_plus`, and
-`endpoint_minus`. RMSD scalars do not determine the per-atom maximum, so
-nothing was rewritten and no campaign was rerun. The new connected count
-and the new PAR-2 are the stored values. `pykmc/lattice` writes nothing,
-so there is no pyKMC row to rescore. The MATLAB smoke in
-`softsaddle/entry.toml` records two searches and does not store endpoint
-coordinates.
+The rows below, other than `pykmc/saddle-pt`, do not store `minimum`,
+`endpoint_plus`, and `endpoint_minus`. RMSD scalars do not determine the
+per-atom maximum, so those rows were not rewritten and no campaign was
+rerun. Their connected counts and PAR-2 stay the stored values.
+`pykmc/saddle-pt` stores both endpoint minima for every search. Rescoring
+those geometries with this rule leaves the harness successes at 12 of 561
+and the link count at 360 of 561. PAR-2 stays 39172.08. The MATLAB smoke
+in `softsaddle/entry.toml` records two searches and does not store
+endpoint coordinates.
 
 | row | geometries | old connected | new connected | old PAR-2 | new PAR-2 |
 | --- | --- | --- | --- | --- | --- |
+| pykmc/saddle-pt | both endpoints on 499 of 561 | 12/561 | 12/561 | 39172.08 | 39172.08 |
 | sella/pt-island-search-default, asv n=16 | absent (success track only) | 12/16 | 12/16 | 5201.625 | 5201.625 |
 | sella/pt-island-search-tuned, asv n=16 | absent (success track only) | 11/16 | 11/16 | 6420.125 | 6420.125 |
 | rgsaddle/saddle-dimer-rotskip-tuned | absent; RMSD scalars on 17719 of 20000 | 2/20000 | 2/20000 | 10127.05255 | 10127.05255 |
@@ -456,9 +459,31 @@ LAMMPS is `stable_22Jul2025_update3`, commit `9f06a79b`. pARTn is
 
 Chill et al., J. Chem. Theory Comput. 2014, doi:10.1021/ct5008718, and the
 archived `benchmark.dat` files have no pyKMC row. `oracle/entries.jsonl`
-has none either. There is no 2014 pyKMC configuration to copy. The rows
-below use `partn_search` with the pyKMC push defaults except where the
-geometry is already a transition-state guess.
+has none either. There is no 2014 pyKMC configuration to copy.
+
+A search that starts at a minimum uses the published k-ART push.
+Béland, Mousseau, and coauthors, Comput. Mater. Sci. (2015),
+doi:10.1016/j.commatsci.2014.11.047, deform one atom and its surroundings
+by 0.2–0.5 Å and then take one to three perpendicular steps. Lanczos there
+costs about 12–15 force evaluations. The pinned artn-plugin Pt(111)
+heptamer, `examples/LAMMPS.Pt111.d/artn.in`, uses `ninit` 1, `nsmooth` 2,
+`nnewchance` 2, `eigen_step_size` 0.25, `eigval_thr` -0.05,
+`lanczos_disp` 1e-4, `lanczos_eval_conv_thr` 1e-2, and `push_over` 1.0.
+`lammps.in` sets `dmax` 5.0 and `pair_style morse/smooth/linear`. That
+example pushes along a file, one known hop, so a catalogue stays on
+`push_mode rad` with `push_dist_thr` 3.0, which reaches the Pt neighbor
+at r0 2.897. pyKMC's own default of 1.0 does not. The example `forc_thr`
+is 0.01. The harness stop stays 0.001. The profile name in the result is
+`beland-2015-pt111`. hTST keeps the archive prefactor 1.2e12. The aluminum
+catalogues keep the eOn AKMC `default_value` 1e12. The paper's own runs
+often use 1e13, and that value is not used here.
+
+`pykmc/ts-pt` is unchanged. `ninit` is 0 and `push_mode` is `list`. The
+other pARTn values are the PartnConfig defaults that scored row used:
+`eigval_thr` -0.01, `nsmooth` 3, `nnewchance` 0, `lanczos_disp` 0.0005,
+`lanczos_eval_conv_thr` 0.001, `eigen_step_size` 0.2, Lanczos size 10 to
+20, `push_over` 1, `dmax` 6. They are written in the template so a rerun
+does not pick up the minimum-search profile.
 
 `partn_search` does not forward a force norm. The worker sets
 `converge_property` to `norm` and `forc_thr` to 0.001, because the problem
@@ -470,69 +495,167 @@ the LAMMPS system. `pair_style zero` contributes nothing. Forces come from
 `morse/smooth/linear`. Aluminum uses the r2549 EAM routine. The 2014 Pt
 entries used a shifted Morse.
 
-Connection is Cartesian RMSD 0.5, minimum image, on the free atoms within
-1.5 Å of the highest free atom. On the stored Pt saddle a hop moves one
-atom 2.71 Å. The mean over all 175 free atoms is 0.290, and the same hop
-on the seven island atoms is 1.449. The slab mean is stored as
-`rmsd_plus_free` and `rmsd_minus_free`. It is not the accept test.
+The saddle link is the eOn r2205 test in `optbench.connection`: exactly
+one endpoint has `perAtomNorm` strictly below 0.1 Å. `rmsd_connect` 0.5
+on the free atoms within 1.5 Å of the highest free atom is the
+saddle-novelty test. On the stored Pt saddle a hop moves one atom 2.71 Å.
+The mean over all 175 free atoms is 0.290, and the same hop on the seven
+island atoms is 1.449. The slab mean is stored as `rmsd_plus_free` and
+`rmsd_minus_free`. It is not the accept test.
 
 | problem | template | successes | failures | median calls | PAR-2 |
 | --- | --- | --- | --- | --- | --- |
 | tsopt/pt-island | pykmc/ts-pt | 46/49 | 1 cap, 2 divergence | 746.5 | 1956.45 |
-| hTST/Pt | pykmc/htst-pt | 1/1 | 0 | 2538 | 2538 |
-| hTST/Al | pykmc/htst-al | 1/1 | 0 | 1297 | 1297 |
-| accelerated-md/aladatom | pykmc/aladatom | 1/1 | 0 | 962 | 962 |
-| accelerated-md/standard_aladatom | pykmc/standard-aladatom | 1/1 | 0 | 1215 | 1215 |
-| saddle-search/pt-island | pykmc/saddle-pt | 10/487 | 17 cap, 460 divergence | 1332 | 39204.5 |
+| hTST/Pt | pykmc/htst-pt | 0/1 | partial, 1 divergence | — | 1e8 |
+| hTST/Al | pykmc/htst-al | 16/16 | partial | 58189.5 | 57877.875 |
+| accelerated-md/aladatom | pykmc/aladatom | 1/1 | 0 | 209928 | 209928 |
+| accelerated-md/standard_aladatom | pykmc/standard-aladatom | 1/1 | 0 | 93065 | 93065 |
+| saddle-search/pt-island | pykmc/saddle-pt | 12/561 | 1 cap, 548 divergence | 1225 | 39172.08 |
 
-`pykmc/ts-pt` is one search from each of the 49 guesses. `ninit` is 0.
-`initial_13` stopped at 325 calls and `initial_44` at 652, both
-`EVENT_NOT_FOUND`. `initial_30` hit the cap of 10000. The success median
-is 746.5. PAR-2 is 1956.45. Each of the three failures costs 20000.
+`pykmc/ts-pt` is one search from each of the 49 guesses. `initial_13`
+stopped at 325 calls and `initial_44` at 652, both `EVENT_NOT_FOUND`.
+`initial_30` hit the cap of 10000. The success median is 746.5. PAR-2 is
+1956.45. Each of the three failures costs 20000. This row was not rerun.
 
-`pykmc/htst-pt` found a connected saddle on the second attempt. The total
-is 2538 calls, barrier 0.601 eV, island RMSD 1.582 against 7.1e-5. The
-archived `eon-dimer-lbfgs` row is a different observable: barrier force
-calls 7.788e+05 averaged over 13 KMC states, and rate force calls
-4.705e+04 averaged over 224. Dimer-LBFGS, Eon r2006, Penghao Xiao,
-28 Jan 2013.
+`pykmc/saddle-pt` is a catalogue on the minimized reactant.
+`displace_magnitude` is 0. The central atom is one of atoms 0–6. The 160-search
+exit is in force from the first search. The last harness success is
+search 401, barrier 1.493 eV, and the next 160 searches added none, so
+the run stops at 561 searches. The goal of 27 was not met. Harness
+successes are 12. Their barriers, rounded to three decimals, are 0.601,
+0.601, 0.619, 0.985, 0.985, 0.987, 0.987, 0.989, 0.989, 1.195, 1.207, and
+1.493. `fraction_connected` is 12/561 = 0.02139037433. The success median
+is 1225 calls. The median over all 561 searches is 1304. Mean calls on
+the successes are 1294.75. PAR-2 is 39172.08 at a denominator of 20000.
+One search hit the climb cap. The other 548 are divergence. A search can
+carry more than one reason: duplicate 336, barrier 301, not_connected
+139, divergence 61, cap 1. The campaign spent 765865 harness calls,
+including 14 to minimize the reactant. `unique_saddles` is 163.
 
-`pykmc/htst-al` found one on the fourth attempt. The total is 1297 calls,
-barrier 0.372 eV, adatom RMSD 2.856 against 1.7e-4. The archived
-`eon-dimer-cg` row is barrier force calls 2.887e+04 averaged over 639,
-and rate force calls 8.979e+05 averaged over 20. Dimer-CG, Eon r2006,
-Penghao Xiao, 28 Jan 2013.
+`fraction_eon_connected` is 360/561 = 0.6417112299. That count is the
+eOn r2205 link on the stored endpoints: exactly one side has per-atom
+maximum minimum-image distance strictly below 0.1 Å. The same 360
+searches were the top-window XOR when the catalogue ran. The two tests
+agree on every search in this file, including the 139 that match neither
+side and the 12 harness successes. A harness success also has to be
+index 1, novel, and inside the barrier window. The archived `eon-dimer`
+fraction 0.746017 counts a result token that is not `Not Connected`,
+over 11366.8 searches, with force calls 3.77888e+06 and 109.222 unique
+saddles. Eon r2205, Sam Chill, 15 Jul 2014. That archive row used the
+2014 shifted Morse potential.
 
-`pykmc/aladatom` is 962 calls, barrier 0.428 eV. The minimized reactant
-puts 26 atoms in the top window, and the product RMSD on those atoms is
-0.589. `pykmc/standard-aladatom` uses the same reactant and a different
-zseed. It is 1215 calls, barrier 0.173 eV, product RMSD 0.620. The
-archived rates are not force counts. `eon-pr-langevin` reports
-`true_rate` 2.542941e+08 with the file's spelling `uncertanity`
-1.785425e+06. `eon-md-langevin` reports `true_rate` 8.359e+05 and
-uncertainty 7.211e+04. Both are Langevin parallel replica, Juliana Duncan,
-18 Oct 2012 and 26 Oct 2012.
+Every search has a line in
+`pykmc-0.0.1-saddle-search-pt-island--pykmc-saddle-pt.endpoints.jsonl`,
+schema `optbench.endpoint-minima/v1`. The file has 561 rows. 499 rows
+store both endpoint minima. 62 store neither, because the climb had no
+mode. No row stores one side only. Each geometry has 343 atoms. The
+scored starts keep `per_atom_max_plus` and `per_atom_max_minus` and do
+not repeat the coordinates. The 561 searches are the catalogue that
+stopped 160 searches after the last harness success. The r2205 rescore
+does not move that success, so the sample is unchanged. The hTST and
+aladatom campaigns were not rescored. Process identity in those rows is
+the top-window RMSD from the run that wrote them.
 
-`pykmc/saddle-pt` kicks one of atoms 0-6 by 0.1 Å and runs the pyKMC push
-defaults. The goal in the problem file is 27 connected saddles under
-1.5 eV. Ten were found, in searches 2, 6, 7, 26, 31, 44, 71, 113, 137,
-and 296. The barriers are 0.601, 0.619, 0.985, 0.987, 0.989, and 1.207 eV.
-Searches 297 through 487 added none. The process was stopped during
-search 488, so the scored sample is those 487 completed searches. The
-success median is 1332 calls. PAR-2 is 39204.5 at a denominator of 20000.
-Seventeen searches hit the climb cap and 460 are divergence, which is
-where a missed link, a duplicate, or a barrier above 1.5 eV lands.
-A repeat exits after 160 searches add no connected saddle, once 200
-searches have run. That exit was added after this process had already
-been stopped, so the sample keeps the 191 searches after search 296.
-`fraction_connected` in the result is 10/487. The archived `eon-dimer`
-row is force calls 3.77888e+06, unique saddles 109.222, fraction
-connected 0.746017, over 11366.8 searches. Eon r2205, Sam Chill,
-15 Jul 2014. That fraction counts searches whose result token is not
-`Not Connected`. The problem file's stored cap, climb 1000 plus 64
-overshoot plus two endpoint budgets of 2000, is 5064. The climbs here
-are about 900 to 1400 before the endpoints, so the PAR-2 denominator is
-20000 and the climb ceiling is 10000.
+`pykmc/htst-pt` is a KMC campaign at 700 K with prefactor 1.2e12. The
+cycle rules are `archive/entries/hTST/Pt/eon-dimer-lbfgs/report.py`. A
+barrier matches only when `round(barrier, 3)` is still in the reference
+list. The reference list has 15 barriers and the barrier-cycle target is
+13. The rate target is 0.999 of 155055901.244, and the rate-cycle target
+is 224. The run was stopped after 662 searches and 95 processes. It is
+`partial true`. Six of the 15 reference barriers were matched. The
+unmatched list is 0.620, 0.986, 0.986, 1.196 four times, and 1.207 twice.
+The smooth-linear searches found 0.619, 0.985, and 1.195, each 0.001 eV
+under the reference value, so the three-decimal test does not take them.
+No barrier cycle closed, so the result has no `barrier_jobs` or
+`barrier_force_calls`. Eight rate cycles closed: `rate_jobs` 82,
+`rate_force_calls` 113199.5, `rate_average_over` 8. The scored start is
+the unfinished campaign, 914633 calls, divergence. PAR-2 is 1e8 because
+the failure cap is 5e7. The row stays off the ranked table. The archived
+`eon-dimer-lbfgs` row is barrier force calls 7.788e+05 averaged over 13
+and rate force calls 4.705e+04 averaged over 224. Dimer-LBFGS, Eon r2006,
+Penghao Xiao, 28 Jan 2013. The template ceiling is 20000 searches. That
+ceiling was not the stop.
+
+`pykmc/htst-al` uses the same reducer at 300 K and prefactor 1.2e12, from
+`archive/entries/hTST/Al/eon-dimer-cg/report.py`. The reference list is
+four 0.233 eV barriers and four 0.372 eV barriers. The targets are 639
+barrier cycles and 20 rate cycles. The run was stopped after 1074
+searches and 18 processes. It is `partial true`. All 8 reference barriers
+were matched. Sixteen barrier cycles closed: `barrier_jobs` 65.0625,
+`barrier_force_calls` 57877.875, `barrier_average_over` 16. The 16 cycle
+costs have median 58189.5 and PAR-2 57877.875. No rate cycle closed, so
+the result has no `rate_jobs` or `rate_force_calls`. The 18 process rates
+sum to 590951652.693. The cycle threshold is 0.999 × 592041917 =
+591449875.083. The gap is 498222.390. Four processes sit at 0.23285 eV,
+which rounds to 0.233, and four sit at 0.372. Repeats of an id already in
+the cycle do not add rate, so these 18 processes cannot close a rate
+cycle. The archived `eon-dimer-cg` row is barrier force calls 2.887e+04
+averaged over 639 and rate force calls 8.979e+05 averaged over 20.
+Dimer-CG, Eon r2006, Penghao Xiao, 28 Jan 2013. The template ceiling is
+20000 searches. That ceiling was not the stop.
+
+`pykmc/aladatom` and `pykmc/standard-aladatom` stay on the minimized
+reactant and stop when the old-scheme confidence `max(0, 1 - 1/repeats)`
+reaches 0.95 and the thermal-window rate is positive. The prefactor is
+the eOn AKMC `default_value` 1e12. The window, catalogue RMSD, and
+product count are the problem values. The columns match the eOn AKMC
+reducer. One start is the finished catalogue, so the PAR-2 rank is that
+total.
+
+At 250 K, `pykmc/aladatom` ran 165 searches and 20 repeats.
+`true_rate` is 1890960743. `rate_accuracy` is 0.
+`catalogue_accuracy` is 0.5059949401. Force calls are 209928.
+`force_calls_per_simulated_time` is 7.939312135e+10. The lowest process
+is barrier 0.1391 eV. The eOn AKMC row on the same problem, counter
+`client`, is `true_rate` 855329109.9, `rate_accuracy` 0,
+`catalogue_accuracy` 0.2427275727, 108435 force calls, 128 searches, 21
+repeats. The archive `eon-pr-langevin` reference is `true_rate`
+2.542941e+08, file spelling `uncertanity` 1.785425e+06. Langevin parallel
+replica, Juliana Duncan, 18 Oct 2012. Both AKMC rates score 0 against
+that reference.
+
+At 150 K, `pykmc/standard-aladatom` ran 84 searches and 20 repeats.
+`true_rate` is 22704080.98. `rate_accuracy` is 0.
+`catalogue_accuracy` is 0.4471177715. Force calls are 93065.
+`force_calls_per_simulated_time` is 422591059.3. The eOn AKMC row is
+`true_rate` 38023490, `rate_accuracy` 0, `catalogue_accuracy`
+0.8257069791, 1890241 force calls, 2336 searches, 20 repeats. The archive
+`eon-md-langevin` reference is `true_rate` 8.359e+05 and uncertainty
+7.211e+04. Juliana Duncan, 26 Oct 2012. Both AKMC rates score 0 against
+that reference.
+
+On the unminimized `pt-island.con` reactant, 343 atoms, 175 free, box
+19.2088 × 19.0118 × 30.0, the campaign smooth-linear evaluator gives
+energy −1771.358308 eV and a free-atom force norm of 0.030113. r2549
+shifted Morse, `kernel_for("morse_shift")` and `pes.morse_pt`, gives
+−1775.791150 eV. The two shifted energies differ by 2.7e-11. The
+free-atom force norm of the shifted potential is about 1e-6, so this
+geometry is a minimum of the shifted potential. The smooth-linear energy
+is 4.432842 eV higher. The largest free-atom force difference is 0.003255
+eV/Å. The campaign then minimizes with smooth-linear, 14 calls, to
+−1771.358522 eV and a free-atom force norm of 9.604e-4. pyKMC stays on
+smooth-linear.
+
+The same smooth-linear kernel, `morse`, is what `eon-client` uses for
+hTST Pt, the saddle-pt dimer, Lanczos, and high-temperature rows, and the
+tsopt Pt rows, and what `eon-svn` uses for `saddle-pt-dimer-bounded`,
+`saddle-pt-lanczos-bounded`, `saddle-pt-md`, `ts-pt-dimer-smooth`,
+`ts-pt-lanczos-smooth`, and `ts-pt-lanczos-improved`. `eon-svn` hTST Pt,
+`htst-pt-dimer-lbfgs` and `htst-pt-lanczos-lbfgs`, sets `kernel =
+"morse_shift"`. `eon-svn/saddle-pt-dimer`, `saddle-pt-dimer-improved`, and
+`saddle-pt-lanczos` name `morse_pt` and describe r2549 `Morse::force`, the
+shifted potential. The develop saddle and tsopt Pt rows set `potential =
+"morse_pt"`, and `benchmarks.bench_eon_develop.morse_cluster` is Morse
+with no cutoff and the box ignored. On this reactant that energy is
+40168.955936 eV and the force norm is 13.432784. The 2014 archive
+`eon-dimer` saddle row is r2205. These shifted and no-cutoff rows are a
+different potential from the pyKMC smooth-linear row.
+
+hTST Al is the r2549 aluminum EAM in pyKMC, `eon-svn`, and `eon-client`.
+The eOn aladatom AKMC rows call the client's built-in `eam_al` and count
+client force calls. pyKMC calls the harness r2549 EAM and counts
+`HarnessCounter`. That is one EAM family. Bit identity of the two EAM
+calls was not checked.
 
 ## Codes that were not scored
 

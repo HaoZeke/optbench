@@ -93,43 +93,17 @@
       "tuning": "",
       "wilson_high": 1.0,
       "wilson_low": 0.20654931437723745
-    }
-  ],
-  "profile": {
-    "area_log10": {
-      "pykmc/htst-al 0.0.1 default campaign 9fd1f6e": 1.2041199826559248
     },
-    "rho": {
-      "pykmc/htst-al 0.0.1 default campaign 9fd1f6e": [
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0
-      ]
-    },
-    "solved": {
-      "pykmc/htst-al 0.0.1 default campaign 9fd1f6e": 1.0
-    },
-    "taus": [
-      1.0,
-      2.0,
-      4.0,
-      8.0,
-      16.0
-    ]
-  },
-  "ranked": [
     {
       "asv_commit": "",
       "call_unit": "total",
-      "cap": 2000000,
+      "cap": 50000000,
       "code": "pykmc",
       "code_version": "0.0.1",
       "commit": "9fd1f6e9085ef92642142406f3dd74e574209898",
       "comparable": true,
       "counter": "harness",
-      "current": true,
+      "current": false,
       "entry": "pykmc-0.0.1-hTST-Al--pykmc-htst-al",
       "failures": {
         "cap": 0,
@@ -139,21 +113,21 @@
       },
       "full_n": null,
       "history": false,
-      "max_calls": 1297.0,
-      "mean_calls": 1297.0,
+      "max_calls": 109534.0,
+      "mean_calls": 57877.875,
       "mean_per_image": null,
-      "median": 1297.0,
-      "median_calls": 1297.0,
-      "median_high": 1297.0,
-      "median_low": 1297.0,
+      "median": 58189.5,
+      "median_calls": 58189.5,
+      "median_high": 78205.0,
+      "median_low": 36067.0,
       "median_per_image": null,
-      "min_calls": 1297.0,
-      "n": 1,
+      "min_calls": 13533.0,
+      "n": 16,
       "nfailed": 0,
       "note": "starts.jsonl",
-      "par2_mean": 1297.0,
-      "partial": false,
-      "partial_reason": "",
+      "par2_mean": 57877.875,
+      "partial": true,
+      "partial_reason": "result file sets partial true",
       "path": "results/campaign/pykmc-0.0.1-hTST-Al--pykmc-htst-al.dat",
       "problem": "hTST/Al",
       "registry_match": true,
@@ -161,10 +135,11 @@
       "source": "campaign",
       "success_rate": 1.0,
       "template": "pykmc/htst-al",
-      "tuning": "default",
+      "tuning": "beland-2015-pt111",
       "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "wilson_low": 0.8063923194655637
     }
   ],
+  "ranked": [],
   "title": "Al"
 }

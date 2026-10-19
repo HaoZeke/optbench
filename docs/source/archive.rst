@@ -2268,7 +2268,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="hTST/Al">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">pykmc/htst-al</td><td data-field="version">pykmc 0.0.1</td><td data-field="commit">9fd1f6e9085e</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">1297</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.206549</td><td data-field="wilson_high">1</td><td data-field="median_calls">1297</td><td data-field="mean_calls">1297</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">1</td></tr>
+   <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
    <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/hTST.html#Al">Full ranked table and performance profile</a>.</p>
@@ -2320,7 +2320,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="hTST/Pt">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">pykmc/htst-pt</td><td data-field="version">pykmc 0.0.1</td><td data-field="commit">9fd1f6e9085e</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">2538</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.206549</td><td data-field="wilson_high">1</td><td data-field="median_calls">2538</td><td data-field="mean_calls">2538</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">1</td></tr>
+   <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
    <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/hTST.html#Pt">Full ranked table and performance profile</a>.</p>
@@ -2468,53 +2468,13 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </details>
    </section>
    <h2 id="suite-accelerated-md">Accelerated molecular dynamics</h2>
-   <h3>aladatom</h3>
-   <div class="bench-scroll">
-   <table data-board-table="headline" data-problem="accelerated-md/aladatom">
-   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">pykmc/aladatom</td><td data-field="version">pykmc 0.0.1</td><td data-field="commit">9fd1f6e9085e</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">962</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.206549</td><td data-field="wilson_high">1</td><td data-field="median_calls">962</td><td data-field="mean_calls">962</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">1</td></tr>
-   </tbody></table></div>
-   <p class="bench-gaps">Partial rows stay off the ranked table.</p>
-   <p><a href="generated/suites/accelerated-md.html#aladatom">Full ranked table and performance profile</a>.</p>
-   <section class="bench bench-legacy-section" id="aladatom-legacy">
-   <h3>Legacy 2014 archive</h3>
-   <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Lowest rate first.</caption>
-   <thead><tr>
-   <th class="num" scope="col"></th>
-   <th class="text" scope="col">Entry</th>
-   <th class="text" scope="col">Code</th>
-   <th class="num" scope="col">percent uncertainty</th>
-   <th class="num" scope="col">thermostat</th>
-   <th class="num" scope="col">true rate</th>
-   <th class="num" scope="col">uncertainty</th>
-   <th class="text" scope="col">Contributor</th>
-   <th class="text" scope="col">Date</th>
-   </tr></thead><tbody>
-   <tr id="accelerated-md-aladatom-true-standard-eon-pr-langevin" class="best">
-   <td class="num">1</td>
-   <td class="text">true_standard/eon-pr-langevin</td>
-   <td class="text">Eon</td>
-   <td class="num">7.021105e-01</td>
-   <td class="num">langevin_0.001</td>
-   <td class="num">2.542941e+08</td>
-   <td class="num">1.785425e+06</td>
-   <td class="text">Juliana Duncan</td>
-   <td class="text">18 Oct 2012</td>
-   </tr>
-   </tbody></table></div>
-   
-   </details>
-   </section>
-   <h3>standard_aladatom</h3>
+   <h3>Al adatom on Al(100) at 150 K</h3>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="accelerated-md/standard_aladatom">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">pykmc/standard-aladatom</td><td data-field="version">pykmc 0.0.1</td><td data-field="commit">9fd1f6e9085e</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">1215</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.206549</td><td data-field="wilson_high">1</td><td data-field="median_calls">1215</td><td data-field="mean_calls">1215</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">1</td></tr>
+   <tr><td data-field="template">pykmc/standard-aladatom</td><td data-field="version">pykmc 0.0.1</td><td data-field="commit">9fd1f6e9085e</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">93065</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.206549</td><td data-field="wilson_high">1</td><td data-field="median_calls">93065</td><td data-field="mean_calls">93065</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">1</td></tr>
    </tbody></table></div>
+   <p class="bench-gaps">eOn rows are not yet on the harness counter.</p>
    <p><a href="generated/suites/accelerated-md.html#standard_aladatom">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="standard_aladatom-legacy">
    <h3>Legacy 2014 archive</h3>
@@ -2544,6 +2504,47 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <td class="num">7.211e+04</td>
    <td class="text">Juliana Duncan</td>
    <td class="text">26 Oct 2012</td>
+   </tr>
+   </tbody></table></div>
+   
+   </details>
+   </section>
+   <h3>Al adatom on Al(100) at 250 K</h3>
+   <div class="bench-scroll">
+   <table data-board-table="headline" data-problem="accelerated-md/aladatom">
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td data-field="template">pykmc/aladatom</td><td data-field="version">pykmc 0.0.1</td><td data-field="commit">9fd1f6e9085e</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">209928</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.206549</td><td data-field="wilson_high">1</td><td data-field="median_calls">209928</td><td data-field="mean_calls">209928</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">1</td></tr>
+   </tbody></table></div>
+   <p class="bench-gaps">eOn rows are not yet on the harness counter. Partial rows stay off the ranked table.</p>
+   <p><a href="generated/suites/accelerated-md.html#aladatom">Full ranked table and performance profile</a>.</p>
+   <section class="bench bench-legacy-section" id="aladatom-legacy">
+   <h3>Legacy 2014 archive</h3>
+   <details class="bench-details">
+   <summary>Legacy 2014 archive</summary>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-legacy">
+   <caption>Legacy 2014 archive. Lowest rate first.</caption>
+   <thead><tr>
+   <th class="num" scope="col"></th>
+   <th class="text" scope="col">Entry</th>
+   <th class="text" scope="col">Code</th>
+   <th class="num" scope="col">percent uncertainty</th>
+   <th class="num" scope="col">thermostat</th>
+   <th class="num" scope="col">true rate</th>
+   <th class="num" scope="col">uncertainty</th>
+   <th class="text" scope="col">Contributor</th>
+   <th class="text" scope="col">Date</th>
+   </tr></thead><tbody>
+   <tr id="accelerated-md-aladatom-true-standard-eon-pr-langevin" class="best">
+   <td class="num">1</td>
+   <td class="text">true_standard/eon-pr-langevin</td>
+   <td class="text">Eon</td>
+   <td class="num">7.021105e-01</td>
+   <td class="num">langevin_0.001</td>
+   <td class="num">2.542941e+08</td>
+   <td class="num">1.785425e+06</td>
+   <td class="text">Juliana Duncan</td>
+   <td class="text">18 Oct 2012</td>
    </tr>
    </tbody></table></div>
    

@@ -10,7 +10,8 @@ potential and ``HarnessCounter`` counts those calls.
 test the maximum force component. The worker sets ``norm`` and
 ``forc_thr`` to the problem force stop when that parameter is written.
 ``ninit`` is 0 on a transition-state guess. A search that starts at a
-minimum keeps the pyKMC push defaults.
+minimum uses the published k-ART push: 0.4 Å on the atom and its
+neighbors inside 3 Å, with the Pt(111) example's step sizes.
 """
 
 from __future__ import annotations
@@ -26,6 +27,7 @@ from pathlib import Path
 
 import numpy as np
 
+from optbench.connection import link_tolerance
 from optbench.pykmc_worker import (
     ARTN_COMMIT,
     IRA_COMMIT,
@@ -50,6 +52,7 @@ _SEED_BASE = 20261015
 _TOP_WINDOW = 1.5
 _STATUS: str | None = None
 _STATUS_READY = False
+_EAM_LOCK = threading.Lock()
 
 
 def available() -> str | None:
@@ -61,21 +64,49 @@ def available() -> str | None:
 
 
 def _section(template: dict) -> dict:
+    """pARTn knobs. A template value wins.
+
+    The defaults are the published minimum-search profile. Béland,
+    Mousseau, and coauthors, Comput. Mater. Sci. (2015),
+    doi:10.1016/j.commatsci.2014.11.047, deform one atom and its
+    surroundings by 0.2–0.5 Å and then take one to three perpendicular
+    steps. Lanczos there costs about 12–15 force evaluations. The
+    pinned artn-plugin Pt(111) heptamer, ``examples/LAMMPS.Pt111.d/artn.in``,
+    uses ninit 1, nsmooth 2, nnewchance 2, eigen_step_size 0.25,
+    eigval_thr -0.05, lanczos_disp 1e-4, and push_over 1.0, with
+    ``dmax`` 5 in ``lammps.in``. Its forc_thr is 0.01. The harness stop
+    stays 0.001. That example pushes along a file, so a catalogue stays
+    on ``push_mode rad`` with ``push_dist_thr`` 3, which reaches the Pt
+    neighbor at r0 2.897. pyKMC's own default of 1.0 does not.
+    """
     section = dict(template.get("pykmc") or {})
-    section.setdefault("ninit", 2)
-    section.setdefault("push_mode", "rad")
-    section.setdefault("push_step_size", 0.4)
-    section.setdefault("push_dist_thr", 1.0)
-    section.setdefault("eigen_step_size", 0.2)
-    section.setdefault("lanczos_max_size", 20)
-    section.setdefault("lanczos_min_size", 10)
-    section.setdefault("forc_thr", 0.001)
-    section.setdefault("delr_thr", 1.0e9)
-    section.setdefault("converge_property", "norm")
-    section.setdefault("evalf_max", 10000)
-    section.setdefault("rcut", 6.5)
-    section.setdefault("rnei", 3.0)
-    section.setdefault("timeout", 1800)
+    defaults = {
+        "ninit": 1,
+        "push_mode": "rad",
+        "push_step_size": 0.4,
+        "push_dist_thr": 3.0,
+        "eigen_step_size": 0.25,
+        "eigval_thr": -0.05,
+        "nsmooth": 2,
+        "nnewchance": 2,
+        "neigen": 1,
+        "nperp": 3,
+        "lanczos_min_size": 12,
+        "lanczos_max_size": 15,
+        "lanczos_disp": 1.0e-4,
+        "lanczos_eval_conv_thr": 1.0e-2,
+        "push_over": 1.0,
+        "dmax": 5.0,
+        "forc_thr": 0.001,
+        "delr_thr": 1.0e9,
+        "converge_property": "norm",
+        "evalf_max": 10000,
+        "rcut": 6.5,
+        "rnei": 3.0,
+        "timeout": 1800,
+    }
+    for key, value in defaults.items():
+        section.setdefault(key, value)
     return section
 
 
@@ -189,9 +220,11 @@ def _evaluator(surface: dict, box: np.ndarray):
     cell[0], cell[4], cell[8] = (float(value) for value in lengths)
 
     def evaluate(coords, _box):
-        energy, forces = eam_al(np.asarray(coords, dtype=np.float64).reshape(-1, 3), None, cell)
-        gradient = -np.asarray(forces, dtype=np.float64).reshape(-1, 3)
-        return float(energy), gradient
+        # The Fortran library is one global object. Parallel searches share it.
+        with _EAM_LOCK:
+            energy, forces = eam_al(np.asarray(coords, dtype=np.float64).reshape(-1, 3), None, cell)
+            gradient = -np.asarray(forces, dtype=np.float64).reshape(-1, 3)
+            return float(energy), gradient
 
     return evaluate
 
@@ -265,8 +298,17 @@ def _base_job(name: str, positions, free, box, surface: dict, section: dict, *, 
         "push_step_size": float(section["push_step_size"]),
         "push_dist_thr": float(section["push_dist_thr"]),
         "eigen_step_size": float(section["eigen_step_size"]),
+        "eigval_thr": float(section["eigval_thr"]),
         "lanczos_max_size": int(section["lanczos_max_size"]),
         "lanczos_min_size": int(section["lanczos_min_size"]),
+        "lanczos_disp": float(section["lanczos_disp"]),
+        "lanczos_eval_conv_thr": float(section["lanczos_eval_conv_thr"]),
+        "nsmooth": int(section["nsmooth"]),
+        "nnewchance": int(section["nnewchance"]),
+        "neigen": int(section["neigen"]),
+        "nperp": int(section["nperp"]),
+        "push_over": float(section["push_over"]),
+        "dmax": float(section["dmax"]),
         "forc_thr": float(section["forc_thr"]),
         "delr_thr": float(section["delr_thr"]),
         "converge_property": str(section["converge_property"]),
@@ -368,26 +410,44 @@ def _placed(saddle: np.ndarray, free: np.ndarray, free_flat: np.ndarray) -> np.n
     return out
 
 
-def _link(record: dict, *, evaluator, free, box, minimum, min_energy, force_norm: float, barrier_max: float, connect_rmsd: float, found: list[np.ndarray], pbc) -> dict:
+def _xyz(points: np.ndarray) -> list:
+    return np.asarray(points, dtype=np.float64).reshape(-1, 3).tolist()
+
+
+def _link(record: dict, *, evaluator, free, box, minimum, min_energy, force_norm: float, barrier_max: float, connect_rmsd: float, found: list[np.ndarray], pbc, tolerance: float | None = None) -> dict:
+    """Judge the saddle.
+
+    ``connect_rmsd`` is the saddle-novelty test, on the top-window atoms.
+    When ``tolerance`` is set, the link is the eOn r2205 rule: exactly one
+    endpoint has ``perAtomNorm`` strictly below that distance. Otherwise
+    the link is the top-window RMSD test, which is what the stored hTST
+    and aladatom campaigns used for process identity.
+    """
+    from optbench.connection import connected_endpoints, per_atom_max
     from optbench.failures import classify_failure
 
+    record["endpoint_plus"] = None
+    record["endpoint_minus"] = None
+    record["eon_connected"] = False
     saddle = None if record.get("positions") is None else np.asarray(record["positions"], dtype=np.float64).reshape(-1, 3)
     record["reasons"] = list(record.get("reasons") or [])
     mode = record.get("lowest_mode")
-    if not (record["success"] and saddle is not None and mode):
-        if record.get("success"):
+    entered = bool(record.get("success"))
+    if saddle is None or not mode:
+        if entered:
             record["success"] = False
             record["reasons"].append("divergence")
             record["failure"] = classify_failure(record["reasons"])
         record.pop("positions", None)
         record.pop("lowest_mode", None)
         return record
-    axis = np.asarray(record["lowest_mode"], dtype=np.float64)
+    axis = np.asarray(mode, dtype=np.float64)
     scale = float(np.linalg.norm(axis))
     if scale < 1e-14:
-        record["success"] = False
-        record["reasons"].append("divergence")
-        record["failure"] = classify_failure(record["reasons"])
+        if entered:
+            record["success"] = False
+            record["reasons"].append("divergence")
+            record["failure"] = classify_failure(record["reasons"])
         record.pop("positions", None)
         record.pop("lowest_mode", None)
         return record
@@ -399,14 +459,21 @@ def _link(record: dict, *, evaluator, free, box, minimum, min_energy, force_norm
     minus, _minus_ok, minus_calls, _minus_energy = _minimize_free(
         evaluator, _placed(saddle, free, saddle_free - 0.1 * axis), free, box, force_norm, 2000
     )
+    record["endpoint_plus"] = _xyz(plus)
+    record["endpoint_minus"] = _xyz(minus)
     mask = _event_mask(minimum, free)
     image = {"lengths": box, "pbc": pbc}
     plus_rmsd = _rmsd(plus[mask], minimum[mask], **image)
     minus_rmsd = _rmsd(minus[mask], minimum[mask], **image)
-    links = (plus_rmsd <= connect_rmsd) ^ (minus_rmsd <= connect_rmsd)
-    novel = all(_rmsd(saddle[mask], old, **image) > connect_rmsd for old in found)
-    barrier = float(record["energy"] - min_energy)
-    record["barrier"] = barrier
+    record["per_atom_max_plus"] = per_atom_max(plus, minimum, box)
+    record["per_atom_max_minus"] = per_atom_max(minus, minimum, box)
+    if tolerance is None:
+        links = (plus_rmsd <= connect_rmsd) ^ (minus_rmsd <= connect_rmsd)
+    else:
+        links = connected_endpoints(minimum, plus, minus, box, tolerance)
+    record["eon_connected"] = bool(links)
+    record["saddle_mask"] = _xyz(saddle[mask])
+    record["barrier"] = float(record["energy"] - min_energy) if record.get("energy") is not None else None
     record["rmsd_plus"] = plus_rmsd
     record["rmsd_minus"] = minus_rmsd
     record["rmsd_plus_free"] = _rmsd(plus[free], minimum[free], **image)
@@ -414,6 +481,15 @@ def _link(record: dict, *, evaluator, free, box, minimum, min_energy, force_norm
     record["rmsd_atoms"] = int(np.count_nonzero(mask))
     record["endpoint_calls"] = int(plus_calls + minus_calls)
     record["force_calls"] = int(record["force_calls"]) + int(plus_calls + minus_calls)
+    record["product"] = _xyz(minus if plus_rmsd <= minus_rmsd else plus)
+    if not entered:
+        record.pop("positions", None)
+        record.pop("lowest_mode", None)
+        if not record["eon_connected"]:
+            record.pop("product", None)
+        return record
+    novel = all(_rmsd(saddle[mask], old, **image) > connect_rmsd for old in found)
+    barrier = float(record["barrier"])
     record["positions"] = saddle.reshape(-1).tolist()
     if novel:
         found.append(saddle[mask].copy())
@@ -564,8 +640,62 @@ def run_points(root: Path, problem: dict, template: dict, *, output: Path, worke
     )
 
 
+def _truncate_endpoints(path: Path, count: int) -> None:
+    """Drop endpoint lines that belong to a search the snapshot did not keep."""
+    if not path.is_file():
+        return
+    lines = [line for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    if len(lines) <= count:
+        return
+    body = "\n".join(lines[:count])
+    path.write_text((body + "\n") if body else "", encoding="utf-8")
+
+
+def _spill_endpoints(path: Path, record: dict, *, minimum, box, free, pbc, search: int, repetition: int) -> None:
+    from optbench.pykmc_kmc import endpoint_record
+
+    payload = endpoint_record(
+        start=str(record["start"]),
+        search=search,
+        repetition=repetition,
+        minimum=_xyz(minimum),
+        box=np.asarray(box, dtype=np.float64).reshape(-1)[:3].tolist(),
+        free=np.asarray(free, dtype=bool).reshape(-1).tolist(),
+        pbc=[bool(flag) for flag in pbc],
+        endpoint_plus=record.get("endpoint_plus"),
+        endpoint_minus=record.get("endpoint_minus"),
+    )
+    with path.open("a", encoding="utf-8") as handle:
+        handle.write(json.dumps(payload) + "\n")
+        handle.flush()
+    record.pop("endpoint_plus", None)
+    record.pop("endpoint_minus", None)
+    record.pop("product", None)
+    record.pop("saddle_mask", None)
+    record.pop("positions", None)
+
+
+def _judge_batch(root: Path, jobs: list[dict], *, workers: int, cap: int, force_norm: float, kind: str, free, box, evaluator) -> list[dict]:
+    def one(job: dict) -> dict:
+        return _one_point(
+            root,
+            job,
+            cap=cap,
+            force_norm=force_norm,
+            kind=kind,
+            free=free,
+            box=box,
+            evaluator=evaluator,
+        )
+
+    if len(jobs) <= 1 or workers <= 1:
+        return [one(job) for job in jobs]
+    with ThreadPoolExecutor(max_workers=min(workers, len(jobs))) as pool:
+        return list(pool.map(one, jobs))
+
+
 def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, workers: int) -> dict:
-    del workers
+    from optbench.pykmc_kmc import PROFILE, searches_to_launch
     from optbench.v2 import write_starts
 
     surface = _surface(problem, template)
@@ -577,7 +707,7 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
     barrier_max = float((problem.get("goal") or {}).get("barrier_below_eV", 1.5))
     search = dict(template.get("search") or {})
     repetitions = int(search.get("repetitions", 1))
-    magnitude = float(search.get("displace_magnitude", 0.1))
+    magnitude = float(search.get("displace_magnitude", 0.0))
     connect_rmsd = float(search.get("rmsd_connect", 0.5))
     max_searches = int(search.get("max_searches", 20000))
     listed = [int(part) for part in str(search.get("displace_atoms", "0,1,2,3,4,5,6")).split(",") if part.strip()]
@@ -589,16 +719,25 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
     box = np.asarray(base["box"], dtype=np.float64)
     evaluator = _evaluator(surface, box)
     kind = "morse_pt"
-    snap_path = output.parent / "work" / template["id"].replace("/", "-") / "catalog.json"
+    work = output.parent / "work" / template["id"].replace("/", "-")
+    snap_path = work / "catalog.json"
     snap_path.parent.mkdir(parents=True, exist_ok=True)
-    comments = []
+    endpoints_path = output.with_suffix(".endpoints.jsonl")
     records = []
     failed_reps = 0
+    connected = 0
+    searches = 0
     for rep in range(1, repetitions + 1):
         state = None
         if snap_path.is_file():
             state = json.loads(snap_path.read_text(encoding="utf-8"))
-        if state and int(state.get("rep") or 0) == rep and state.get("minimum") is not None:
+        resume = (
+            state
+            and state.get("profile") == PROFILE
+            and int(state.get("rep") or 0) == rep
+            and state.get("minimum") is not None
+        )
+        if resume:
             minimum = np.asarray(state["minimum"], dtype=np.float64).reshape(-1, 3)
             min_energy = float(state["min_energy"])
             minimize_calls = int(state["minimize_calls"])
@@ -615,7 +754,10 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
                 if saved.get("success"):
                     last_success = index
             stall = searches - last_success
+            _truncate_endpoints(endpoints_path, searches)
         else:
+            if rep == 1:
+                endpoints_path.unlink(missing_ok=True)
             minimum, min_ok, minimize_calls, min_energy = _minimize_free(
                 evaluator, positions, free, box, force_norm, 5000
             )
@@ -626,37 +768,155 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
             search_calls = 0
             records = []
             stall = 0
-        # A flat stretch of 160 searches adds no saddle under 1.5 eV.
-        # The per-search score of that finished sample is the row.
-        while connected < goal and searches < max_searches and not (searches >= 200 and stall >= 160):
-            searches += 1
-            atom = int(listed[int(rng.integers(0, len(listed)))])
-            if not bool(free[atom]):
-                raise RuntimeError(f"displace atom {atom} is not free")
-            direction = rng.normal(size=3)
-            direction = direction / np.linalg.norm(direction)
-            kicked = np.array(minimum, copy=True)
-            kicked[atom] = kicked[atom] + magnitude * direction
-            zseed = pair_seed(f"{template['id']}:rep{rep}:search{searches}", _SEED_BASE)
-            climb_cap = min(search_cap, failure_cap)
-            job = _base_job(
-                f"rep{rep}-search{searches}",
-                kicked,
-                free,
-                box,
-                surface,
-                section,
-                cap=climb_cap,
-                central=atom,
-                zseed=zseed,
+        climb_cap = min(search_cap, failure_cap)
+
+        def publish(partial: bool) -> None:
+            total_calls = int(minimize_calls + search_calls)
+            fraction = connected / searches if searches else 0.0
+            eon_count = sum(1 for row in records if row.get("eon_connected"))
+            eon_fraction = eon_count / searches if searches else 0.0
+            lines = [
+                f"# rep {rep} force_calls {total_calls} unique_saddles {len(found)} "
+                f"fraction_connected {fraction} fraction_eon_connected {eon_fraction} "
+                f"total_searches {searches} connected {connected} eon_connected {eon_count} "
+                f"minimize_calls {minimize_calls} minimum_converged {int(min_ok)} seed {_SEED_BASE + rep}"
+            ]
+            last_at = 0
+            last_barrier = None
+            for index, saved in enumerate(records, start=1):
+                if saved.get("success"):
+                    last_at = index
+                    last_barrier = saved.get("barrier")
+            if last_at and searches > last_at:
+                barrier_text = f"{float(last_barrier):.3f}" if last_barrier is not None else "unknown"
+                lines.append(
+                    "# fraction_connected counts harness successes under the eOn r2205 link, connected/total_searches. "
+                    f"The last harness success is search {last_at}, barrier {barrier_text} eV. "
+                    f"The next {searches - last_at} searches added none. "
+                    "The runner exits after 160 searches with no new harness success "
+                    f"once 200 searches have run. The goal is {goal}."
+                )
+            lines.append(
+                "# fraction_eon_connected is the eOn r2205 link: exactly one endpoint has "
+                "perAtomNorm strictly below distance_difference 0.1 angstrom. "
+                f"Both endpoint minima are in {endpoints_path.name}."
             )
+            lines.append(
+                "# Potential is morse/smooth/linear. The 2014 Pt archive used shifted Morse. "
+                "eon-svn hTST Pt uses kernel morse_shift. Develop morse_pt has no cutoff. "
+                "eon-client kernel morse is this same smooth-linear potential."
+            )
+            endpoint_rows = 0
+            if endpoints_path.is_file():
+                endpoint_rows = sum(1 for line in endpoints_path.read_text(encoding="utf-8").splitlines() if line.strip())
+            text = "\n".join(lines) + "\n"
+            if searches:
+                text += f"force_calls {total_calls}\n"
+                text += f"force_calls_min {total_calls}\n"
+                text += f"force_calls_max {total_calls}\n"
+            text += (
+                f"code {template.get('code', CODE)}\n"
+                f"code_version {template.get('code_version', '')}\n"
+                f"commit {template.get('commit', '')}\n"
+                f"algorithm {template.get('algorithm', '')}\n"
+                f"tuning {template.get('tuning', '')}\n"
+                f"template {template['id']}\n"
+                f"problem {problem['id']}\n"
+                f"counter harness\n"
+                f"cap {failure_cap}\n"
+                f"repetitions {repetitions}\n"
+                f"nfailed {failed_reps}\n"
+                f"n {len(records)}\n"
+                f"goal {goal}\n"
+                f"connected {connected}\n"
+                f"eon_connected {eon_count}\n"
+                f"fraction_connected {fraction}\n"
+                f"fraction_eon_connected {eon_fraction}\n"
+                f"total_searches {searches}\n"
+                f"endpoints {endpoints_path.name}\n"
+                f"endpoint_rows {endpoint_rows}\n"
+                f"profile {PROFILE}\n"
+            )
+            if partial:
+                text += "partial true\n"
+            output.parent.mkdir(parents=True, exist_ok=True)
+            output.write_text(text, encoding="utf-8")
+            write_starts(output.with_suffix(".starts.jsonl"), records)
+            from optbench.score import score_v2
+            from optbench.v2 import collect_provenance
+
+            scored = score_v2(
+                [
+                    {"force_calls": row["force_calls"], "success": row["success"], "failure": row.get("failure")}
+                    for row in records
+                ],
+                failure_cap,
+            ) if records else None
+            if scored is not None:
+                document = {
+                    "schema": "optbench.score/v2",
+                    "problem": problem["id"],
+                    "template": template["id"],
+                    "counter": "harness",
+                    "provenance": collect_provenance(
+                        code=template.get("code", CODE),
+                        code_version=template.get("code_version", ""),
+                        commit=template.get("commit", ""),
+                        parameters=_parameters(surface, section, failure_cap, force_norm),
+                    ),
+                    "score": scored,
+                    "note": (
+                        "The link is the eOn r2205 per-atom maximum, distance_difference 0.1. "
+                        "fraction_connected counts harness successes. "
+                        "fraction_eon_connected counts searches whose endpoints pass that link. "
+                        f"Endpoint minima are in {endpoints_path.name}."
+                    ),
+                }
+                output.with_suffix(".v2.json").write_text(
+                    json.dumps(document, indent=2, sort_keys=True) + "\n",
+                    encoding="utf-8",
+                )
+
+        while True:
+            room = searches_to_launch(
+                searches, stall, connected, goal, max_searches, max(1, int(workers))
+            )
+            if room == 0:
+                break
+            jobs = []
+            for offset in range(room):
+                number = searches + offset + 1
+                atom = int(listed[int(rng.integers(0, len(listed)))])
+                if not bool(free[atom]):
+                    raise RuntimeError(f"displace atom {atom} is not free")
+                point = np.array(minimum, copy=True)
+                if magnitude > 0.0:
+                    direction = rng.normal(size=3)
+                    direction = direction / float(np.linalg.norm(direction))
+                    point[atom] = point[atom] + magnitude * direction
+                zseed = pair_seed(f"{template['id']}:rep{rep}:search{number}", _SEED_BASE)
+                jobs.append(
+                    _base_job(
+                        f"rep{rep}-search{number}",
+                        point,
+                        free,
+                        box,
+                        surface,
+                        section,
+                        cap=climb_cap,
+                        central=atom,
+                        zseed=zseed,
+                    )
+                )
             print(
-                f"{template['id']} rep {rep} search {searches} connected {connected}",
+                f"{template['id']} rep {rep} search {searches + 1}-{searches + room} "
+                f"connected {connected}",
                 flush=True,
             )
-            record = _one_point(
+            judged = _judge_batch(
                 root,
-                job,
+                jobs,
+                workers=workers,
                 cap=climb_cap,
                 force_norm=force_norm,
                 kind=kind,
@@ -664,148 +924,82 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
                 box=box,
                 evaluator=evaluator,
             )
-            before = int(record["force_calls"])
-            record = _link(
-                record,
-                evaluator=evaluator,
-                free=free,
-                box=box,
-                minimum=minimum,
-                min_energy=min_energy,
-                force_norm=force_norm,
-                barrier_max=barrier_max,
-                connect_rmsd=connect_rmsd,
-                found=found,
-                pbc=surface["pbc"],
-            )
-            if record["success"]:
-                connected += 1
-                stall = 0
-            else:
-                stall += 1
-            if int(record["force_calls"]) >= failure_cap and record["success"]:
-                record["success"] = False
-                record["failure"] = "cap"
-                record["reasons"] = ["cap"]
-                connected -= 1
-            search_calls += int(record["force_calls"])
-            record.pop("positions", None)
-            records.append(record)
-            print(
-                f"{template['id']} search {searches} climb {before} total {record['force_calls']} "
-                f"success {int(record['success'])} connected {connected} barrier {record.get('barrier')} "
-                f"rmsd {record.get('rmsd_plus')} {record.get('rmsd_minus')}",
-                flush=True,
-            )
-            snap_path.write_text(
-                json.dumps(
-                    {
-                        "rep": rep,
-                        "minimum": minimum.reshape(-1).tolist(),
-                        "min_energy": min_energy,
-                        "minimize_calls": minimize_calls,
-                        "min_ok": min_ok,
-                        "connected": connected,
-                        "searches": searches,
-                        "search_calls": search_calls,
-                        "found": [item.reshape(-1).tolist() for item in found],
-                        "records": records,
-                        "rng": rng.bit_generator.state,
-                    },
-                    default=_json_default,
-                ),
-                encoding="utf-8",
-            )
-        total_calls = int(minimize_calls + search_calls)
+            for record in judged:
+                searches += 1
+                before = int(record["force_calls"])
+                record = _link(
+                    record,
+                    evaluator=evaluator,
+                    free=free,
+                    box=box,
+                    minimum=minimum,
+                    min_energy=min_energy,
+                    force_norm=force_norm,
+                    barrier_max=barrier_max,
+                    connect_rmsd=connect_rmsd,
+                    found=found,
+                    pbc=surface["pbc"],
+                    tolerance=link_tolerance(problem),
+                )
+                if record["success"]:
+                    connected += 1
+                    stall = 0
+                else:
+                    stall += 1
+                if int(record["force_calls"]) >= failure_cap and record["success"]:
+                    record["success"] = False
+                    record["failure"] = "cap"
+                    record["reasons"] = ["cap"]
+                    connected -= 1
+                search_calls += int(record["force_calls"])
+                _spill_endpoints(
+                    endpoints_path,
+                    record,
+                    minimum=minimum,
+                    box=box,
+                    free=free,
+                    pbc=surface["pbc"],
+                    search=searches,
+                    repetition=rep,
+                )
+                records.append(record)
+                print(
+                    f"{template['id']} search {searches} climb {before} total {record['force_calls']} "
+                    f"success {int(record['success'])} eon {int(bool(record.get('eon_connected')))} "
+                    f"connected {connected} barrier {record.get('barrier')} "
+                    f"rmsd {record.get('rmsd_plus')} {record.get('rmsd_minus')}",
+                    flush=True,
+                )
+                snap_path.write_text(
+                    json.dumps(
+                        {
+                            "profile": PROFILE,
+                            "rep": rep,
+                            "minimum": minimum.reshape(-1).tolist(),
+                            "min_energy": min_energy,
+                            "minimize_calls": minimize_calls,
+                            "min_ok": min_ok,
+                            "connected": connected,
+                            "searches": searches,
+                            "search_calls": search_calls,
+                            "found": [item.reshape(-1).tolist() for item in found],
+                            "records": records,
+                            "rng": rng.bit_generator.state,
+                        },
+                        default=_json_default,
+                    ),
+                    encoding="utf-8",
+                )
+            publish(partial=True)
         if connected < goal:
             failed_reps += 1
-        fraction = connected / searches if searches else 0.0
-        comments.append(
-            f"# rep {rep} force_calls {total_calls} unique_saddles {len(found)} "
-            f"fraction_connected {fraction} total_searches {searches} "
-            f"connected {connected} minimize_calls {minimize_calls} "
-            f"minimum_converged {int(min_ok)} seed {_SEED_BASE + rep}"
-        )
-        last_at = 0
-        last_barrier = None
-        for index, saved in enumerate(records, start=1):
-            if saved.get("success"):
-                last_at = index
-                last_barrier = saved.get("barrier")
-        if last_at and searches > last_at:
-            barrier_text = f"{float(last_barrier):.3f}" if last_barrier is not None else "unknown"
-            comments.append(
-                "# fraction_connected is connected/total_searches. "
-                f"The last connected saddle is search {last_at}, barrier {barrier_text} eV. "
-                f"The next {searches - last_at} searches added none. "
-                "The runner exits after 160 searches with no new connected saddle "
-                f"once 200 searches have run. The goal is {goal}."
-            )
-        if connected < goal:
-            output.parent.mkdir(parents=True, exist_ok=True)
-            text = "\n".join(comments) + "\npartial true\n"
-            text += (
-                f"code {template['code']}\ncommit {template['commit']}\n"
-                f"template {template['id']}\nproblem {problem['id']}\n"
-                f"counter harness\nn {len(records)}\n"
-            )
-            output.write_text(text, encoding="utf-8")
-            write_starts(output.with_suffix(".starts.jsonl"), records)
-    totals = [int(line.split()[line.split().index("force_calls") + 1]) for line in comments]
-    text = "\n".join(comments) + "\n"
-    if totals:
-        text += f"force_calls {statistics.fmean(totals)}\n"
-        text += f"force_calls_min {min(totals)}\n"
-        text += f"force_calls_max {max(totals)}\n"
-    text += (
-        f"code {template.get('code', CODE)}\n"
-        f"code_version {template.get('code_version', '')}\n"
-        f"commit {template.get('commit', '')}\n"
-        f"algorithm {template.get('algorithm', '')}\n"
-        f"tuning {template.get('tuning', '')}\n"
-        f"template {template['id']}\n"
-        f"problem {problem['id']}\n"
-        f"counter harness\n"
-        f"cap {failure_cap}\n"
-        f"repetitions {repetitions}\n"
-        f"nfailed {failed_reps}\n"
-        f"n {len(records)}\n"
-        f"goal {goal}\n"
-        f"connected {connected}\n"
-    )
-    # The search sample is finished. A mid-run file still says partial.
-    # Reaching the goal is recorded by connected and goal, and the
-    # per-search rows are the score either way.
-    output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(text, encoding="utf-8")
-    write_starts(output.with_suffix(".starts.jsonl"), records)
-    from optbench.score import score_v2
-    from optbench.v2 import collect_provenance
-
-    score = score_v2(
-        [
-            {"force_calls": row["force_calls"], "success": row["success"], "failure": row.get("failure")}
-            for row in records
-        ],
-        failure_cap,
-    )
-    document = {
-        "schema": "optbench.score/v2",
-        "problem": problem["id"],
-        "template": template["id"],
-        "counter": "harness",
-        "provenance": collect_provenance(
-            code=template.get("code", CODE),
-            code_version=template.get("code_version", ""),
-            commit=template.get("commit", ""),
-            parameters=_parameters(surface, section, failure_cap, force_norm),
-        ),
-        "score": score,
-    }
-    output.with_suffix(".v2.json").write_text(
-        json.dumps(document, indent=2, sort_keys=True) + "\n",
-        encoding="utf-8",
-    )
+        publish(partial=False)
+    totals = []
+    for line in output.read_text(encoding="utf-8").splitlines():
+        if not line.startswith("# rep "):
+            continue
+        parts = line.split()
+        totals.append(int(parts[parts.index("force_calls") + 1]))
     return {
         "force_calls": statistics.fmean(totals) if totals else None,
         "nfailed": failed_reps,
@@ -822,146 +1016,6 @@ def _json_default(value):
     if isinstance(value, np.generic):
         return value.item()
     raise TypeError(f"{type(value).__name__} is not JSON")
-
-
-def _centers(positions: np.ndarray, free: np.ndarray, count: int) -> list[int]:
-    order = sorted(np.flatnonzero(free), key=lambda index: (-float(positions[index, 2]), int(index)))
-    return [int(index) for index in order[:count]]
-
-
-def run_event(root: Path, problem: dict, template: dict, *, output: Path, workers: int) -> dict:
-    del workers
-    surface = _surface(problem, template)
-    section = _section(template)
-    cap = _cap(problem, template)
-    force_norm = _force(problem, template)
-    section["forc_thr"] = force_norm
-    geometry = str(template.get("geometry") or "")
-    positions, free, box = _read_geometry(root, geometry)
-    evaluator = _evaluator(surface, box)
-    kind = "morse_pt" if surface["kind"] == "morse" else surface["kind"]
-    minimum, min_ok, minimize_calls, min_energy = _minimize_free(
-        evaluator, positions, free, box, force_norm, min(5000, cap)
-    )
-    total = int(minimize_calls)
-    barrier_max = float(section.get("barrier_max", 1.5))
-    connect_rmsd = float(section.get("rmsd_connect", 0.5))
-    nsearch = int(section.get("nsearch", 4))
-    center_count = int(section.get("centers", 6))
-    per_search = int(section["evalf_max"])
-    found: list[np.ndarray] = []
-    chosen = None
-    attempts = 0
-    for center in _centers(minimum, free, center_count):
-        for attempt in range(nsearch):
-            if total >= cap or chosen is not None:
-                break
-            attempts += 1
-            remaining = cap - total
-            climb_cap = min(per_search, remaining)
-            zseed = pair_seed(f"{template['id']}:{center}:{attempt}", _SEED_BASE)
-            job = _base_job(
-                f"center{center}-try{attempt}",
-                minimum,
-                free,
-                box,
-                surface,
-                section,
-                cap=climb_cap,
-                central=center,
-                zseed=zseed,
-            )
-            print(
-                f"{template['id']} attempt {attempts} center {center} spent {total}",
-                flush=True,
-            )
-            record = _one_point(
-                root,
-                job,
-                cap=climb_cap,
-                force_norm=force_norm,
-                kind=kind,
-                free=free,
-                box=box,
-                evaluator=evaluator,
-            )
-            record = _link(
-                record,
-                evaluator=evaluator,
-                free=free,
-                box=box,
-                minimum=minimum,
-                min_energy=min_energy,
-                force_norm=force_norm,
-                barrier_max=barrier_max,
-                connect_rmsd=connect_rmsd,
-                found=found,
-                pbc=surface["pbc"],
-            )
-            spent = int(record["force_calls"])
-            total += spent
-            print(
-                f"{template['id']} attempt {attempts} calls {spent} total {total} "
-                f"success {int(record['success'])} barrier {record.get('barrier')} "
-                f"rmsd {record.get('rmsd_plus')} {record.get('rmsd_minus')}",
-                flush=True,
-            )
-            if record["success"] and total < cap:
-                chosen = record
-                break
-        if chosen is not None or total >= cap:
-            break
-    if chosen is None:
-        payload = {
-            "positions": None,
-            "capped": total >= cap,
-            "crashed": False,
-            "diverged": total < cap,
-            "ok": False,
-            "message": f"{attempts} searches, no connected saddle under {barrier_max} eV",
-        }
-        record = _judge(
-            "reactant",
-            payload,
-            cap=cap,
-            force_norm=force_norm,
-            kind=kind,
-            free=free,
-            box=box,
-            evaluator=evaluator,
-            calls=max(total, cap if total >= cap else total),
-        )
-    else:
-        record = dict(chosen)
-        record["start"] = "reactant"
-        record["force_calls"] = int(total)
-        if total >= cap:
-            record["success"] = False
-            record["failure"] = "cap"
-            record["reasons"] = ["cap"]
-    record.pop("positions", None)
-    record.pop("lowest_mode", None)
-    record["attempts"] = attempts
-    record["minimize_calls"] = minimize_calls
-    record["minimum_converged"] = bool(min_ok)
-    comment = (
-        "# counter harness. pyKMC partn_search from the reactant, highest free atoms first.\n"
-        "# The call total is the reactant minimization, the searches, and the two endpoint minimizations.\n"
-        "# A success is one index-1 saddle under the cap, force at the stop, barrier in (0, 1.5) eV,\n"
-        "# and exactly one endpoint within Cartesian RMSD 0.5 of the minimized reactant\n"
-        "# on the protruding atoms (within 1.5 A of the highest free atom).\n"
-        "# The 2014 rate and barrier columns are a different observable."
-    )
-    return write_campaign(
-        output,
-        [record],
-        template,
-        problem,
-        {"cap": cap, "force_norm": force_norm, "potential": surface["kind"]},
-        _parameters(surface, section, cap, force_norm),
-        images=None,
-        comment=comment,
-    )
 
 
 def run(root: Path, problem_name: str, template_name: str, *, output: Path, workers: int = 1) -> dict:
@@ -983,6 +1037,12 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
         return run_points(root, problem, template, output=output, workers=workers)
     if problem["id"] == "saddle-search/pt-island":
         return run_catalog(root, problem, template, output=output, workers=workers)
-    if problem["id"] in {"hTST/Pt", "hTST/Al", "accelerated-md/aladatom", "accelerated-md/standard_aladatom"}:
-        return run_event(root, problem, template, output=output, workers=workers)
+    if problem["id"] in {"hTST/Pt", "hTST/Al"}:
+        from optbench.engines.pykmc_kmc_run import run_htst
+
+        return run_htst(root, problem, template, output=output, workers=workers)
+    if problem["id"] in {"accelerated-md/aladatom", "accelerated-md/standard_aladatom"}:
+        from optbench.engines.pykmc_kmc_run import run_amd
+
+        return run_amd(root, problem, template, output=output, workers=workers)
     raise ValueError(f"{template_name} does not score {problem['id']}")

@@ -1,32 +1,45 @@
-# pyKMC event search on the accelerated-md reactant.
+# pyKMC AKMC catalogue on the accelerated-md reactant at 250 K.
 id = "pykmc/aladatom"
 engine = "pykmc"
 problem = "accelerated-md/aladatom"
 code = "pykmc"
 code_version = "0.0.1"
 commit = "9fd1f6e9085ef92642142406f3dd74e574209898"
-algorithm = "pARTn event search"
-tuning = "default"
+algorithm = "pARTn AKMC"
+tuning = "beland-2015-pt111"
 kernel = "eam"
-failure_cap = 1000000
+reducer = "amd-catalogue"
+failure_cap = 50000000
 geometry = "website/accelerated-md/reactant.con"
-note = "The 2014 row is a parallel-replica rate, not a force-call count. This row is one event search on that reactant with the r2549 Aluminum EAM kernel. Success is one connected index-1 saddle under 1.5 eV. Connection RMSD uses the free atoms within 1.5 A of the highest free atom."
+note = "One AKMC catalogue on the minimized reactant, with the same columns as the eOn AKMC reducer. Prefactor 1e12 is the eOn template default_value. Temperature 250 K, confidence 0.95, and the 20 kT window are the problem values. The push is the published Pt profile in pykmc/saddle-pt. The link test is unchanged. The kernel is the r2549 Aluminum EAM through the harness. The eOn AKMC row uses the client's built-in eam_al and a client counter."
 
 [pykmc]
-ninit = 2
+ninit = 1
 push_mode = "rad"
 push_step_size = 0.4
-push_dist_thr = 1.0
-eigen_step_size = 0.2
-lanczos_min_size = 10
-lanczos_max_size = 20
+push_dist_thr = 3.0
+eigen_step_size = 0.25
+eigval_thr = -0.05
+nsmooth = 2
+nnewchance = 2
+neigen = 1
+nperp = 3
+lanczos_min_size = 12
+lanczos_max_size = 15
+lanczos_disp = 1.0e-4
+lanczos_eval_conv_thr = 1.0e-2
+push_over = 1.0
+dmax = 5.0
 forc_thr = 0.001
 delr_thr = 1.0e9
 converge_property = "norm"
-evalf_max = 20000
-nsearch = 4
-centers = 6
+evalf_max = 10000
 barrier_max = 1.5
 rmsd_connect = 0.5
 rcut = 6.5
+rnei = 3.0
 timeout = 1800
+
+[kmc]
+prefactor = 1.0e12
+max_searches = 8000
