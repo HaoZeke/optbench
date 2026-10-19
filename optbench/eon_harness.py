@@ -13,6 +13,11 @@ started with ``potential = ext_pot``. A small C program forwards
   image on the box diagonal.
 * ``eam`` calls the r2549 Aluminum Fortran ``force_`` in this process.
 
+A template with ``native_potential`` keeps the ini potential and scores the
+client's ``total_force_calls``. The archive reducer then applies the 2014
+``report.sh`` rule: totals under ``failure_cap`` stay in the mean, and
+``nfailed`` counts a termination reason other than 0.
+
 A tsopt success is a client stop under the cap, a free-atom Euclidean
 force norm at the problem stop, and Hessian index 1. That Hessian is
 computed from the kernel after the client returns and is not charged
@@ -398,7 +403,8 @@ def _ini_text(template: dict, seed: int, wrapper: Path, *, python_job: bool) -> 
     main["random_seed"] = int(seed)
     if not python_job:
         main["parallel"] = False
-    sections["Potential"] = {"potential": "ext_pot", "ext_pot_path": str(wrapper)}
+    if not template.get("native_potential"):
+        sections["Potential"] = {"potential": "ext_pot", "ext_pot_path": str(wrapper)}
     return format_ini(sections)
 
 
@@ -603,8 +609,11 @@ def _guard(record: dict, client_calls) -> dict:
 
 
 def _cache_path(family: str, template_name: str, seed: int, start: str, passes: int) -> Path:
+    loaded = load_template(ROOT, template_name)
     safe = template_name.replace("/", "-")
-    kernel = str(load_template(ROOT, template_name).get("kernel") or "unset")
+    if loaded.get("native_potential"):
+        safe += "-native"
+    kernel = str(loaded.get("kernel") or "unset")
     return (
         CACHE
         / "harness-1"
@@ -831,6 +840,9 @@ def run_case(
                     record["transition_found"] = 1 if transition else 0
                 else:
                     reason = fields.get("termination_reason")
+                    raw_text = fields.get("total_force_calls") or fields.get("force_calls_neb")
+                    if template.get("native_potential") and raw_text is not None:
+                        calls = int(float(raw_text))
                     record = classify_client(
                         calls=calls,
                         reason=reason,
@@ -909,11 +921,11 @@ def grid_points(template: dict, *, full: bool, limit: int = 0) -> list[tuple[int
     return points
 
 
-def _start_row(seed: int, start: str, record: dict) -> dict:
+def _start_row(seed: int, start: str, record: dict, counter: str = "harness") -> dict:
     row = {
         "call_unit": "total",
-        "count_key": "harness",
-        "counter": "harness",
+        "count_key": "total_force_calls" if counter == "client" else "harness",
+        "counter": counter,
         "force_calls": int(round(float(record["force_calls"]))),
         "geometry": start,
         "raw": int(round(float(record["force_calls"]))),
@@ -958,24 +970,46 @@ def write_campaign(template: dict, rows: list[tuple[int, str, dict]], output: Pa
     problem = resolve_problem(ROOT, template["problem"])
     full_n = stated_full_n(ROOT, problem)
     partial = bool(template.get("declare_partial")) or full_n is None or len(kept) < int(full_n or 0)
-    successes = [row for _seed, _start, row in kept if row.get("success")]
-    summary = {
-        "nfailed": len(kept) - len(successes),
-        "call_unit": "total",
-    }
-    if successes:
-        calls = [float(row["force_calls"]) for row in successes]
-        summary["force_calls"] = int(round(sum(calls) / len(calls)))
-        summary["force_calls_min"] = int(min(calls))
-        summary["force_calls_max"] = int(max(calls))
-        summary["force_calls_median"] = float(np.median(calls))
+    archive = str(template.get("reducer")) == "archive"
+    if archive:
+        from .eon_jobs import report_summary
+
+        report_rows = []
+        for _seed, _start, row in kept:
+            reason = row.get("client_reason")
+            report_rows.append(
+                {
+                    "raw": row.get("client_calls", row.get("force_calls")),
+                    "reason": None if reason is None else str(reason),
+                }
+            )
+        summary = report_summary(report_rows, int(template["failure_cap"]))
+    else:
+        successes = [row for _seed, _start, row in kept if row.get("success")]
+        summary = {
+            "nfailed": len(kept) - len(successes),
+            "call_unit": "total",
+        }
+        if successes:
+            calls = [float(row["force_calls"]) for row in successes]
+            summary["force_calls"] = int(round(sum(calls) / len(calls)))
+            summary["force_calls_min"] = int(min(calls))
+            summary["force_calls_max"] = int(max(calls))
+            summary["force_calls_median"] = float(np.median(calls))
     text = benchmark_text(summary, template)
-    extra = ["counter harness", "count_keys HarnessCounter"]
+    if archive:
+        extra = ["counter client", "count_keys total_force_calls"]
+    else:
+        extra = ["counter harness", "count_keys HarnessCounter"]
     if partial:
         extra.append("partial true")
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(text.rstrip("\n") + "\n" + "\n".join(extra) + "\n", encoding="utf-8")
-    write_starts(output.with_suffix(".starts"), [_start_row(seed, start, row) for seed, start, row in kept])
+    start_counter = "client" if archive else "harness"
+    write_starts(
+        output.with_suffix(".starts"),
+        [_start_row(seed, start, row, start_counter) for seed, start, row in kept],
+    )
     summary["starts"] = len(kept)
     summary["partial"] = partial
     summary["template"] = template["id"]

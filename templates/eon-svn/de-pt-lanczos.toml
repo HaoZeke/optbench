@@ -5,13 +5,14 @@ code = "Eon svn"
 code_version = "r2549"
 commit = "r2549"
 algorithm = "Lanczos L-BFGS"
-reducer = "harness"
+reducer = "archive"
 failure_cap = 3000
 kind = "de-pt-mode"
 kernel = "morse_shift"
+native_potential = true
 asv_class = "EonSvnDePtLanczos"
 note = '''
-Lanczos from the interpolated Pt-island end points. max_iterations 10, tolerance 0.05, quit_early false. max_energy 1e9. LBFGS max_iterations 1000, converged_force 0.001. The harness kernel is r2549 Morse::force: cutoff 9.5, pair energy shifted to zero at the cutoff, minimum image on the box diagonal. D 0.7102, alpha 1.6047, r0 2.897.
+Lanczos from the interpolated Pt-island end points. The 29 Aug 2013 ini sets max_iterations 10, tolerance 0.05, quit_early false, and leaves finite_difference unset. The r2549 default is 0.01, so that key is 0.01 here. The score is the client's total_force_calls on morse_pt. report.sh keeps totals under 3000 in the mean and counts termination_reason other than 0 as nfailed. The client is r2549 with the Lanczos loop bound from r2169, before r2186 changed the test to max_iterations minus one. That bound takes one step past the allocated tridiagonal. Stock r2549 Lanczos does not match this archive. codes/eon-r2549-lanczos-r2169-bound.patch is that one-line bound.
 '''
 seeds = [1]
 asv_timeout = 900
@@ -19,7 +20,7 @@ budget_seconds = 600
 
 [ini.Main]
 job = "saddle_search"
-finite_difference = 0.001
+finite_difference = 0.01
 random_seed = 1
 
 [ini.Potential]
