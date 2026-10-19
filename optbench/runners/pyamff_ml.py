@@ -260,7 +260,8 @@ def _build_model(job: dict, batch):
     from pyamff.ml_model_code.pytorch_nn import NeuralNetwork
     from pyamff.utilities.preprocessor import Scaler
 
-    scaler = Scaler(scalerType="NoScaler", forceTraining=True, loss_type="SE").set_scaler()
+    train_forces = float(job["force_coefficient"]) > 0.0
+    scaler = Scaler(scalerType="NoScaler", forceTraining=train_forces, loss_type="SE").set_scaler()
     energies = batch.energies.detach().cpu().numpy()
     forces = batch.forces.detach().cpu().numpy()
     natoms = batch.natomsPerImageEnergy.detach().cpu().numpy()
@@ -270,7 +271,7 @@ def _build_model(job: dict, batch):
         hiddenlayers=hidden,
         nFPs=dict(job["nfps"]),
         activation=str(job["activation"]),
-        forceTraining=True,
+        forceTraining=train_forces,
         cohE=False,
         params=None,
         scaler=scaler,
@@ -315,6 +316,9 @@ def _evaluate(model, criterion, batch, counter: HarnessCounter, tol: float) -> d
     params = [param for param in model.parameters()]
     model.zero_grad(set_to_none=True)
     pred_energy, pred_forces = model(batch.allElement_fps, batch.dgdx, batch, torch.device("cpu"))
+    # A zero force coefficient makes the force term identically zero, so the
+    # energy loss and its parameter gradient do not use the force graph.
+    train_forces = float(criterion.force_coefficient) > 0.0
     loss = criterion(
         pred_energy,
         pred_forces,
@@ -322,7 +326,7 @@ def _evaluate(model, criterion, batch, counter: HarnessCounter, tol: float) -> d
         batch.forces,
         n_atoms_energy=batch.natomsPerImageEnergy,
         n_atoms_force=batch.natomsPerImageForce,
-        checkF=True,
+        checkF=train_forces,
     )
     grads = torch.autograd.grad(loss, params, retain_graph=False, create_graph=False)
     for param, grad in zip(params, grads):
