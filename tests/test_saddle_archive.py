@@ -8,8 +8,9 @@ minima, so ``Matter::compare`` cannot be reapplied to those searches.
 published row.
 
 The pARTn campaign stored both endpoint minima. Cartesian RMSD 0.5
-over the 175 free atoms merges distinct products. ``find_repeat`` on
-the product minimum does not.
+over the 175 free atoms merges distinct products. The rerun applies
+``find_repeat`` to the saddle. A product rejudge of the same archive
+agrees: 48 good saddles, 18 inside the barrier window, fraction 0.755.
 """
 
 from __future__ import annotations
@@ -114,6 +115,8 @@ def test_partn_endpoints_match_find_repeat_not_rmsd():
     assert "unique_saddles 48" in dat
     assert "fraction_connected 0.755" in dat
     assert "connected 18" in dat
+    assert "force_calls 154413" in dat
+    assert "par2_mean 10980.2" in dat
     metrics = score_v2(
         [
             {"force_calls": record["force_calls"], "success": record["success"], "failure": record["failure"]}

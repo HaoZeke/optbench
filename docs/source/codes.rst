@@ -683,7 +683,7 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="version">artn 1.1.0</td>
    <td data-field="commit">9b753517c6c0</td>
    <td data-field="par2_mean">10980.2</td>
-   <td data-field="mean_calls">772.09</td>
+   <td data-field="mean_calls">772.06</td>
    <td data-field="median_calls">667</td>
    <td data-field="failures">crash 13, divergence 169, cap 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
