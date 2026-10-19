@@ -4,6 +4,9 @@ from pathlib import Path
 
 from optbench.campaign import _check_stop, list_templates, resolve_problem
 from optbench.runners.gasp_global import (
+    _energy_limit,
+    _load_starts,
+    _start_name,
     lammps_final_energy,
     lammps_force_evaluations,
     search_force_cap,
@@ -62,4 +65,20 @@ def test_gasp_templates_match_the_cap_formula():
         assert cap == search_force_cap(int(section["num_energy_calcs"]), int(section["min_eval"]))
         assert template["commit"] == "0c8d993c82e0e1c69a05b3c34bbb2fcbbdbb7f07"
         assert template["code"] == "gasp"
-    assert found == ["gasp/lj38-default"]
+    assert found == ["gasp/lj38-default", "gasp/lj75-default"]
+
+
+def test_start_name_uses_the_integer_suffix():
+    assert _start_name(Path("12.con")) == "12"
+    assert _start_name(Path("coords.12")) == "12"
+    assert _start_name(Path("POSCAR")) == "POSCAR"
+
+
+def test_lj75_archive_has_no_energy_rule(tmp_path: Path):
+    template = next(row for row in list_templates(ROOT) if row["id"] == "gasp/lj75-default")
+    problem = resolve_problem(ROOT, "globalopt/lj75")
+    assert _energy_limit(problem, template) is None
+    assert "energy_minimum" not in template["gasp"]
+    loaded = _load_starts(ROOT, problem, template, tmp_path)
+    assert [name for name, _coords in loaded] == [str(index) for index in range(1, 201)]
+    assert {len(coords) for _name, coords in loaded} == {75}

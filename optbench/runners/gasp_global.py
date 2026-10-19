@@ -779,6 +779,17 @@ def _member_key(name: str) -> tuple:
     return (1, 0, base)
 
 
+def _start_name(path: Path) -> str:
+    """Geometry label. ``12.con`` stays ``12``. ``coords.12`` stays ``12``."""
+    stem = path.stem
+    if stem.isdigit():
+        return stem
+    tail = path.name.rsplit(".", 1)[-1]
+    if tail.isdigit():
+        return tail
+    return stem
+
+
 def _coords_from_text(name: str, text: str) -> list[list[float]]:
     if name.endswith(".con"):
         from optbench.potentials import read_con
@@ -835,7 +846,7 @@ def _load_starts(root: Path, problem: dict, template: dict, work: Path) -> list[
         raise ValueError(f"{problem['id']} expected {expected} starts, found {len(members)}")
     loaded = []
     for path in members:
-        loaded.append((path.stem, _coords_from_text(path.name, path.read_text(encoding="utf-8", errors="replace"))))
+        loaded.append((_start_name(path), _coords_from_text(path.name, path.read_text(encoding="utf-8", errors="replace"))))
     return loaded
 
 
@@ -932,6 +943,9 @@ def _write_outputs(output: Path, template: dict, records: list[dict], *, partial
     for record in records:
         row = dict(record)
         row.pop("index", None)
+        if row.get("success") is None:
+            row.pop("success", None)
+            row.pop("failure", None)
         public.append(row)
     _atomic_text(
         output.with_suffix(".starts.jsonl"),

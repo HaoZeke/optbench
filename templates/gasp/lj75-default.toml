@@ -1,0 +1,20 @@
+id = "gasp/lj75-default"
+engine = "gasp"
+problem = "globalopt/lj75"
+code = "gasp"
+code_version = "0.1"
+commit = "0c8d993c82e0e1c69a05b3c34bbb2fcbbdbb7f07"
+algorithm = "GASP"
+tuning = "default"
+failure_cap = 16000801
+note = "Default fixed-composition search. The composition is C and both atom limits are 75, because the archive holds 75-atom clusters and GASP reduces a formula to one atom. Each coords.N file is the file organism, and 27 random organisms make the default initial population of 28. Pool size, variation fractions, the redundancy guard, and the 800-calculation stop are the fixed-composition defaults. The problem file states no energy minimum, so each search runs the calculation budget and the row keeps the lowest extensive energy and the harness calls. Each calculation is minimize cg to a force tolerance of 1e-8 and at most 20000 force evaluations, then run 0 for the dump. The force cap is one above 800 times 20001. The seed is 20261015 plus the sorted start index. Lennard-Jones relaxation uses LAMMPS pair_style lj/cut, cutoff 40, epsilon 1, sigma 1, units lj, and thermo_modify norm no."
+
+[gasp]
+natoms = 75
+symbol = "C"
+num_energy_calcs = 800
+random_organisms = 27
+min_eval = 20000
+cutoff = 40.0
+seed = 20261015
+geometries = "website/globalopt/lj75/lj75_clusters.tgz"
