@@ -1,0 +1,13 @@
+id = "gmin/lj75-symmetrise"
+engine = "gmin"
+problem = "globalopt/lj75"
+code = "GMIN"
+code_version = "27059"
+commit = "27059"
+algorithm = "basin-hopping with symmetrise csm moves"
+reducer = "gmin"
+counter = "gmin"
+tuning = "archive"
+note = '''
+Serial GMIN from the wales-27058 tarball (SVNREV 27059), native Lennard-Jones, archived data file. SYMMETRISE 1 0.01 0.05 0.3 0.012 0.6 4 0.27 2.4, temperature 3.5, 200 coords from lj75_clusters.tgz, default seed 2002. The score is NPCALL on the last "Target hit after" line.
+'''
