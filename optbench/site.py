@@ -245,6 +245,18 @@ def campaign_problem(stem: str) -> str | None:
     return None
 
 
+def _not_reproduced() -> set[str]:
+    """Archive rows whose exact-setup rerun missed the tolerance."""
+    from .reproduction import load_ledger
+
+    path = Path(__file__).resolve().parents[1] / "oracle" / "reproduction.jsonl"
+    found: set[str] = set()
+    for row in load_ledger(path):
+        if row.get("status") == "not_reproduced":
+            found.add(f"{row['suite']}/{row['problem']}/{row['entry']}")
+    return found
+
+
 def problem_html(
     problem: dict,
     oracle: list[dict],
@@ -288,18 +300,27 @@ def problem_html(
     lines.append('<details class="bench-details">')
     lines.append("<summary>Legacy 2014 archive</summary>")
 
+    misses = _not_reproduced()
     prepared = []
+    any_miss = False
     for rank, (row, fields) in enumerate(canonical_rows, 1):
         value = _float(fields.get(primary, "")) if primary else None
         held = _held(fields)
         code = _code_label(fields)
         row_id = _slug(f"{problem['id']}-{row['entry']}")
+        missed = f"{problem['id']}/{row['entry']}" in misses
+        any_miss = any_miss or missed
+        label = row["entry"]
+        if held:
+            label = f"{label} (held out of the original table)"
+        if missed:
+            label = f"{label} · not reproduced"
         prepared.append(
             {
                 "id": row_id,
                 "rank": rank,
                 "entry": row["entry"],
-                "label": f"{row['entry']} (held out of the original table)" if held else row["entry"],
+                "label": label,
                 "code": code,
                 "fields": fields,
                 "value": value,
@@ -308,10 +329,13 @@ def problem_html(
                 "current": bool(row.get("current")),
             }
         )
-    lines.append(
-        '<p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. '
-        "They are not a v2 score.</p>"
+    legacy = (
+        "Legacy 2014 archive. These rows stay in the published order. "
+        "They are not a v2 score."
     )
+    if any_miss:
+        legacy += " A row marked not reproduced has a harness rerun outside the archive tolerance."
+    lines.append(f'<p class="bench-legacy">{legacy}</p>')
     lines.append('<div class="bench-table"><table class="bench-legacy">')
     lines.append(f"<caption>{html.escape(_caption(primary))}</caption>")
     headers = ["", "Entry", "Code", *metrics, "Contributor", "Date"]

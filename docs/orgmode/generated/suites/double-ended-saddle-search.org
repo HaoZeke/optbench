@@ -30,7 +30,7 @@
    <td data-code="compass" data-template="compass/sqnm" data-par2="1517.3"><span class="bench-score">1517.3</span><a href="#lj38-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
-   <td data-code="optim" data-template="optim/de-lj38" data-par2="146.82"><span class="bench-score">146.82</span><a href="#lj38-templates">optim/de-lj38</a></td>
+   <td data-code="optim" data-template="pathsample/de-lj38" data-par2="148.84"><span class="bench-score">148.84</span><a href="#lj38-templates">pathsample/de-lj38</a></td>
    <td data-code="optking">—</td>
    <td data-code="softsaddle">—</td>
    <td data-code="tsase" data-template="tsase/ci-neb" data-par2="3119.56"><span class="bench-score">3119.56</span><a href="#lj38-templates">tsase/ci-neb</a></td>
@@ -57,7 +57,7 @@
    <td data-code="compass" data-template="compass/sqnm" data-par2="6713.37"><span class="bench-score">6713.37</span><a href="#lj38_2ts_separation-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
-   <td data-code="optim" data-template="optim/de-2ts" data-par2="5725.16"><span class="bench-score">5725.16</span><a href="#lj38_2ts_separation-templates">optim/de-2ts</a></td>
+   <td data-code="optim" data-template="pathsample/de-2ts" data-par2="6094.49"><span class="bench-score">6094.49</span><a href="#lj38_2ts_separation-templates">pathsample/de-2ts</a></td>
    <td data-code="optking">—</td>
    <td data-code="softsaddle">—</td>
    <td data-code="tsase" data-template="tsase/ci-neb" data-par2="18812.1"><span class="bench-score">18812.1</span><a href="#lj38_2ts_separation-templates">tsase/ci-neb</a></td>
@@ -65,7 +65,7 @@
    <tr data-problem="double-ended-saddle-search/pt-island">
    <th scope="row"><a href="#pt-island">pt-island</a></th>
    <td data-code="eOn" data-template="eon/develop-de-pt-oci" data-par2="3080.19"><span class="bench-score">3080.19</span><a href="#pt-island-templates">eon/develop-de-pt-oci</a></td>
-   <td data-code="Eon svn" data-template="eon-svn/de-pt-lanczos-improved" data-par2="180.644"><span class="bench-score">180.644</span><a href="#pt-island-templates">eon-svn/de-pt-lanczos-improved</a></td>
+   <td data-code="Eon svn" data-template="eon-svn/de-pt-dimer" data-par2="192.051"><span class="bench-score">192.051</span><a href="#pt-island-templates">eon-svn/de-pt-dimer</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="422.136"><span class="bench-score">422.136</span><a href="#pt-island-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
    <td data-code="geodesic" data-template="geodesic/ase-de-pt-tuned" data-par2="595.983"><span class="bench-score">595.983</span><a href="#pt-island-templates">geodesic/ase-de-pt-tuned</a></td>
@@ -84,7 +84,7 @@
    <td data-code="compass" data-template="compass/sqnm" data-par2="1078.12"><span class="bench-score">1078.12</span><a href="#pt-island-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
-   <td data-code="optim" data-template="optim/de-pt" data-par2="138"><span class="bench-score">138</span><a href="#pt-island-templates">optim/de-pt</a></td>
+   <td data-code="optim" data-template="pathsample/de-pt" data-par2="145.559"><span class="bench-score">145.559</span><a href="#pt-island-templates">pathsample/de-pt</a></td>
    <td data-code="optking">—</td>
    <td data-code="softsaddle">—</td>
    <td data-code="tsase" data-template="tsase/ci-neb" data-par2="2524.53"><span class="bench-score">2524.53</span><a href="#pt-island-templates">tsase/ci-neb</a></td>
@@ -102,23 +102,20 @@
    <figure class="bench-plot"><a href="../../_static/board/double-ended-saddle-search-lj38-profile.svg"><picture><source srcset="../../_static/board/double-ended-saddle-search-lj38-profile.webp" type="image/webp"><img src="../../_static/board/double-ended-saddle-search-lj38-profile.png" alt="Dolan-More profile for double-ended-saddle-search/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/double-ended-saddle-search-lj38-cost.svg"><picture><source srcset="../../_static/board/double-ended-saddle-search-lj38-cost.webp" type="image/webp"><img src="../../_static/board/double-ended-saddle-search-lj38-cost.png" alt="Cost versus success for double-ended-saddle-search/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="lj38-templates">
-   <summary>All templates (51 ranked)</summary>
+   <summary>All templates (48 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="double-ended-saddle-search/lj38">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate. Per-image mean divides that total by the problem's moving images, the same way for every code.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Per-image mean</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">optim/de-lj38</td><td data-field="version">optim svn-snapshot</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign</td><td data-field="par2_mean">146.82</td><td data-field="success_rate">1</td><td data-field="wilson">0.928652–1</td><td data-field="median_calls">129</td><td data-field="mean_calls">146.82</td><td data-field="mean_per_image">29.364</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">50</td></tr>
    <tr><td data-field="template">pathsample/de-lj38</td><td data-field="version">optim svn-snapshot</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign</td><td data-field="par2_mean">148.84</td><td data-field="success_rate">1</td><td data-field="wilson">0.928652–1</td><td data-field="median_calls">131</td><td data-field="mean_calls">148.84</td><td data-field="mean_per_image">29.768</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">50</td></tr>
    <tr><td data-field="template">eon-svn/de-lj38-lanczos-improved</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="par2_mean">235.2</td><td data-field="success_rate">1</td><td data-field="wilson">0.928652–1</td><td data-field="median_calls">197</td><td data-field="mean_calls">235.2</td><td data-field="mean_per_image">47.04</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">50</td></tr>
    <tr><td data-field="template">eon-client/de-lj38-lanczos-improved</td><td data-field="version">eOn 3.5.0</td><td data-field="commit">4d8b34baf1ba</td><td data-field="source">campaign</td><td data-field="par2_mean">259.46</td><td data-field="success_rate">1</td><td data-field="wilson">0.928652–1</td><td data-field="median_calls">212</td><td data-field="mean_calls">259.46</td><td data-field="mean_per_image">51.892</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">50</td></tr>
    <tr><td data-field="template">eon-svn/de-lj38-lanczos</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="par2_mean">299.82</td><td data-field="success_rate">1</td><td data-field="wilson">0.928652–1</td><td data-field="median_calls">243.5</td><td data-field="mean_calls">299.82</td><td data-field="mean_per_image">59.964</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">50</td></tr>
    <tr><td data-field="template">eon-client/de-lj38-lanczos</td><td data-field="version">eOn 3.5.0</td><td data-field="commit">4d8b34baf1ba</td><td data-field="source">campaign</td><td data-field="par2_mean">342.28</td><td data-field="success_rate">1</td><td data-field="wilson">0.928652–1</td><td data-field="median_calls">258.5</td><td data-field="mean_calls">342.28</td><td data-field="mean_per_image">68.456</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">50</td></tr>
-   <tr><td data-field="template">eon-svn/de-lj38-dimer</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="par2_mean">469.64</td><td data-field="success_rate">0.98</td><td data-field="wilson">0.895046–0.996461</td><td data-field="median_calls">206.5</td><td data-field="mean_calls">419.64</td><td data-field="mean_per_image">83.928</td><td data-field="failures">crash 0, divergence 0, cap 1, not_converged 0, wrong_stationary 0</td><td data-field="n">50</td></tr>
    <tr><td data-field="template">rgsaddle/ew-ci-neb-lbfgs</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">853.56</td><td data-field="success_rate">0.94</td><td data-field="wilson">0.837829–0.979385</td><td data-field="median_calls">529</td><td data-field="mean_calls">673.94</td><td data-field="mean_per_image">134.788</td><td data-field="failures">crash 0, divergence 0, cap 2, not_converged 1, wrong_stationary 0</td><td data-field="n">50</td></tr>
    <tr><td data-field="template">eon-client/de-lj38-ci-neb</td><td data-field="version">eOn 3.5.0</td><td data-field="commit">4d8b34baf1ba</td><td data-field="source">campaign</td><td data-field="par2_mean">1003.88</td><td data-field="success_rate">0.94</td><td data-field="wilson">0.837829–0.979385</td><td data-field="median_calls">692</td><td data-field="mean_calls">853.88</td><td data-field="mean_per_image">170.776</td><td data-field="failures">crash 0, divergence 0, cap 3, not_converged 0, wrong_stationary 0</td><td data-field="n">50</td></tr>
    <tr><td data-field="template">eon/develop-de-lj38-cap</td><td data-field="version">eOn 3.6.0</td><td data-field="commit">7095b23ac17d</td><td data-field="source">asv</td><td data-field="par2_mean">1010.08</td><td data-field="success_rate">0.94</td><td data-field="wilson">0.837829–0.979385</td><td data-field="median_calls">692</td><td data-field="mean_calls">860.08</td><td data-field="mean_per_image">172.016</td><td data-field="failures">crash 0, divergence 0, cap 3, not_converged 0, wrong_stationary 0</td><td data-field="n">50</td></tr>
    <tr><td data-field="template">eon-svn/de-lj38-ci-neb</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="par2_mean">1100.84</td><td data-field="success_rate">0.92</td><td data-field="wilson">0.811618–0.96845</td><td data-field="median_calls">662</td><td data-field="mean_calls">900.84</td><td data-field="mean_per_image">180.168</td><td data-field="failures">crash 0, divergence 0, cap 4, not_converged 0, wrong_stationary 0</td><td data-field="n">50</td></tr>
-   <tr><td data-field="template">eon-client/de-lj38-ci-swdneb</td><td data-field="version">eOn 3.5.0</td><td data-field="commit">4d8b34baf1ba</td><td data-field="source">campaign</td><td data-field="par2_mean">1160.5</td><td data-field="success_rate">0.9</td><td data-field="wilson">0.786398–0.956524</td><td data-field="median_calls">687</td><td data-field="mean_calls">910.5</td><td data-field="mean_per_image">182.1</td><td data-field="failures">crash 0, divergence 0, cap 5, not_converged 0, wrong_stationary 0</td><td data-field="n">50</td></tr>
    <tr><td data-field="template">eon-svn/de-lj38-ci</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">1180.1</td><td data-field="success_rate">0.9</td><td data-field="wilson">0.786398–0.956524</td><td data-field="median_calls">657</td><td data-field="mean_calls">930.1</td><td data-field="mean_per_image">186.02</td><td data-field="failures">crash 0, divergence 0, cap 5, not_converged 0, wrong_stationary 0</td><td data-field="n">50</td></tr>
    <tr><td data-field="template">geodesic/ci-neb-lbfgs</td><td data-field="version">geodesic 1.0.0</td><td data-field="commit">476aa041f562</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">1208.42</td><td data-field="success_rate">0.86</td><td data-field="wilson">0.738138–0.930492</td><td data-field="median_calls">512</td><td data-field="mean_calls">768.74</td><td data-field="mean_per_image">153.748</td><td data-field="failures">crash 0, divergence 0, cap 4, not_converged 3, wrong_stationary 0</td><td data-field="n">50</td></tr>
    <tr><td data-field="template">rgsaddle/ci-neb-lbfgs</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">1208.52</td><td data-field="success_rate">0.86</td><td data-field="wilson">0.738138–0.930492</td><td data-field="median_calls">522</td><td data-field="mean_calls">767.34</td><td data-field="mean_per_image">153.468</td><td data-field="failures">crash 0, divergence 0, cap 4, not_converged 3, wrong_stationary 0</td><td data-field="n">50</td></tr>
@@ -160,6 +157,9 @@
    <tr><td data-field="template">tsase/neb</td><td data-field="version">tsase 1.0</td><td data-field="commit">98aac60b5d99</td><td data-field="source">campaign</td><td data-field="par2_mean">5000</td><td data-field="success_rate">0</td><td data-field="wilson">0–0.0713476</td><td data-field="median_calls">1633</td><td data-field="mean_calls">1652.86</td><td data-field="mean_per_image">330.572</td><td data-field="failures">crash 0, divergence 0, cap 14, not_converged 36, wrong_stationary 0</td><td data-field="n">50</td></tr>
    </tbody></table></div>
    <h3>Partial</h3><ul>
+   <li>eon-client/de-lj38-ci-swdneb eOn campaign n=50, does not reproduce the 2014 archive.</li>
+   <li>eon-svn/de-lj38-dimer Eon svn campaign n=50, does not reproduce the 2014 archive.</li>
+   <li>optim/de-lj38 optim campaign n=50, does not reproduce the 2014 archive.</li>
    <li>eon/develop-de-lj38-cap-accept-energy eOn asv n=1, smoke run; scored 1 of 50 starts.</li>
    <li>eon/develop-de-lj38-ew eOn asv n=1, smoke run; scored 1 of 50 starts.</li>
    <li>eon/develop-de-lj38-oci eOn asv n=1, smoke run; scored 1 of 50 starts.</li>
@@ -177,14 +177,14 @@
    </ul>
    <h3>Not scored</h3><ul>
    <li>eon-ci-neb: no per-start record</li>
-   <li>eon-ci-swdneb: no per-start record</li>
+   <li>eon-ci-swdneb: no per-start record; does not reproduce the 2014 archive</li>
    </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="lj38-legacy">
    <h3>Legacy 2014 archive</h3>
    <details class="bench-details">
    <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
@@ -201,7 +201,7 @@
    </tr></thead><tbody>
    <tr id="double-ended-saddle-search-lj38-optim" class="best">
    <td class="num">1</td>
-   <td class="text">optim</td>
+   <td class="text">optim · not reproduced</td>
    <td class="text">OPTIM</td>
    <td class="num">1.31000e+02</td>
    <td class="num">6.6000e+01</td>
@@ -237,7 +237,7 @@
    </tr>
    <tr id="double-ended-saddle-search-lj38-eon-dimer">
    <td class="num">4</td>
-   <td class="text">eon-dimer</td>
+   <td class="text">eon-dimer · not reproduced</td>
    <td class="text">Eon r2156</td>
    <td class="num">337</td>
    <td class="num">89</td>
@@ -285,7 +285,7 @@
    </tr>
    <tr id="double-ended-saddle-search-lj38-eon-ci-swdneb">
    <td class="num">8</td>
-   <td class="text">eon-ci-swdneb</td>
+   <td class="text">eon-ci-swdneb · not reproduced</td>
    <td class="text">Eon r2156</td>
    <td class="num">861</td>
    <td class="num">407</td>
@@ -311,7 +311,7 @@
    <figure class="bench-plot"><a href="../../_static/board/double-ended-saddle-search-lj38_2ts_separation-profile.svg"><picture><source srcset="../../_static/board/double-ended-saddle-search-lj38_2ts_separation-profile.webp" type="image/webp"><img src="../../_static/board/double-ended-saddle-search-lj38_2ts_separation-profile.png" alt="Dolan-More profile for double-ended-saddle-search/lj38_2ts_separation" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/double-ended-saddle-search-lj38_2ts_separation-cost.svg"><picture><source srcset="../../_static/board/double-ended-saddle-search-lj38_2ts_separation-cost.webp" type="image/webp"><img src="../../_static/board/double-ended-saddle-search-lj38_2ts_separation-cost.png" alt="Cost versus success for double-ended-saddle-search/lj38_2ts_separation" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="lj38_2ts_separation-templates">
-   <summary>All templates (45 ranked)</summary>
+   <summary>All templates (44 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="double-ended-saddle-search/lj38_2ts_separation">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate. Per-image mean divides that total by the problem's moving images, the same way for every code.</caption>
@@ -322,7 +322,6 @@
    <tr><td data-field="template">eon-client/de-2ts-lanczos</td><td data-field="version">eOn 3.5.0</td><td data-field="commit">4d8b34baf1ba</td><td data-field="source">campaign</td><td data-field="par2_mean">564.647</td><td data-field="success_rate">1</td><td data-field="wilson">0.929953–1</td><td data-field="median_calls">482</td><td data-field="mean_calls">564.647</td><td data-field="mean_per_image">112.929</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">51</td></tr>
    <tr><td data-field="template">eon-svn/de-2ts-dimer</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="par2_mean">681.784</td><td data-field="success_rate">1</td><td data-field="wilson">0.929953–1</td><td data-field="median_calls">451</td><td data-field="mean_calls">681.784</td><td data-field="mean_per_image">136.357</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">51</td></tr>
    <tr><td data-field="template">eon-client/de-2ts-dimer</td><td data-field="version">eOn 3.5.0</td><td data-field="commit">4d8b34baf1ba</td><td data-field="source">campaign</td><td data-field="par2_mean">4826.1</td><td data-field="success_rate">0.784314</td><td data-field="wilson">0.653736–0.875061</td><td data-field="median_calls">568</td><td data-field="mean_calls">1200.33</td><td data-field="mean_per_image">240.067</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 11, wrong_stationary 0</td><td data-field="n">51</td></tr>
-   <tr><td data-field="template">optim/de-2ts</td><td data-field="version">optim svn-snapshot</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign</td><td data-field="par2_mean">5725.16</td><td data-field="success_rate">0.862745</td><td data-field="wilson">0.742783–0.931889</td><td data-field="median_calls">3268</td><td data-field="mean_calls">4352.61</td><td data-field="mean_per_image">870.522</td><td data-field="failures">crash 0, divergence 0, cap 7, not_converged 0, wrong_stationary 0</td><td data-field="n">51</td></tr>
    <tr><td data-field="template">pathsample/de-2ts</td><td data-field="version">optim svn-snapshot</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign</td><td data-field="par2_mean">6094.49</td><td data-field="success_rate">0.843137</td><td data-field="wilson">0.719896–0.918308</td><td data-field="median_calls">3377</td><td data-field="mean_calls">4525.86</td><td data-field="mean_per_image">905.173</td><td data-field="failures">crash 0, divergence 0, cap 8, not_converged 0, wrong_stationary 0</td><td data-field="n">51</td></tr>
    <tr><td data-field="template">compass/sqnm</td><td data-field="version">compass 1.0.0</td><td data-field="commit">22da7bd5f69c</td><td data-field="source">campaign</td><td data-field="par2_mean">6713.37</td><td data-field="success_rate">0.803922</td><td data-field="wilson">0.675419–0.889847</td><td data-field="median_calls">4031</td><td data-field="mean_calls">4586.12</td><td data-field="mean_per_image">917.224</td><td data-field="failures">crash 0, divergence 0, cap 9, not_converged 0, wrong_stationary 1</td><td data-field="n">51</td></tr>
    <tr><td data-field="template">rgsaddle/ew-ci-neb-lbfgs</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">8024.43</td><td data-field="success_rate">0.666667</td><td data-field="wilson">0.529684–0.780301</td><td data-field="median_calls">2414</td><td data-field="mean_calls">4639.8</td><td data-field="mean_per_image">927.961</td><td data-field="failures">crash 0, divergence 0, cap 16, not_converged 0, wrong_stationary 1</td><td data-field="n">51</td></tr>
@@ -363,6 +362,7 @@
    <tr><td data-field="template">ase/de-lj38-2ts-default</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">asv</td><td data-field="par2_mean">73656</td><td data-field="success_rate">0.117647</td><td data-field="wilson">0.0550507–0.233808</td><td data-field="median_calls">40001</td><td data-field="mean_calls">38362.8</td><td data-field="mean_per_image">7672.56</td><td data-field="failures">crash 0, divergence 0, cap 45, not_converged 0, wrong_stationary 0</td><td data-field="n">51</td></tr>
    </tbody></table></div>
    <h3>Partial</h3><ul>
+   <li>optim/de-2ts optim campaign n=51, does not reproduce the 2014 archive.</li>
    <li>eon/develop-de-2ts-accept-energy eOn asv n=1, smoke run; scored 1 of 51 starts.</li>
    <li>eon/develop-de-2ts-ew eOn asv n=1, smoke run; scored 1 of 51 starts.</li>
    <li>eon/develop-de-2ts-oci eOn asv n=1, smoke run; scored 1 of 51 starts.</li>
@@ -376,7 +376,7 @@
    <h3>Legacy 2014 archive</h3>
    <details class="bench-details">
    <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
@@ -394,7 +394,7 @@
    </tr></thead><tbody>
    <tr id="double-ended-saddle-search-lj38-2ts-separation-optim" class="best">
    <td class="num">1</td>
-   <td class="text">optim</td>
+   <td class="text">optim · not reproduced</td>
    <td class="text">OPTIM</td>
    <td class="num">2.88500e+03</td>
    <td class="num">7.1380e+03</td>
@@ -434,16 +434,13 @@
    <figure class="bench-plot"><a href="../../_static/board/double-ended-saddle-search-pt-island-profile.svg"><picture><source srcset="../../_static/board/double-ended-saddle-search-pt-island-profile.webp" type="image/webp"><img src="../../_static/board/double-ended-saddle-search-pt-island-profile.png" alt="Dolan-More profile for double-ended-saddle-search/pt-island" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/double-ended-saddle-search-pt-island-cost.svg"><picture><source srcset="../../_static/board/double-ended-saddle-search-pt-island-cost.webp" type="image/webp"><img src="../../_static/board/double-ended-saddle-search-pt-island-cost.png" alt="Cost versus success for double-ended-saddle-search/pt-island" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="pt-island-templates">
-   <summary>All templates (44 ranked)</summary>
+   <summary>All templates (41 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="double-ended-saddle-search/pt-island">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate. Per-image mean divides that total by the problem's moving images, the same way for every code.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Per-image mean</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">optim/de-pt</td><td data-field="version">optim svn-snapshot</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign</td><td data-field="par2_mean">138</td><td data-field="success_rate">1</td><td data-field="wilson">0.938871–1</td><td data-field="median_calls">133</td><td data-field="mean_calls">138</td><td data-field="mean_per_image">46</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">59</td></tr>
    <tr><td data-field="template">pathsample/de-pt</td><td data-field="version">optim svn-snapshot</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign</td><td data-field="par2_mean">145.559</td><td data-field="success_rate">1</td><td data-field="wilson">0.938871–1</td><td data-field="median_calls">137</td><td data-field="mean_calls">145.559</td><td data-field="mean_per_image">48.5198</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">59</td></tr>
-   <tr><td data-field="template">eon-svn/de-pt-lanczos-improved</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="par2_mean">180.644</td><td data-field="success_rate">1</td><td data-field="wilson">0.938871–1</td><td data-field="median_calls">161</td><td data-field="mean_calls">180.644</td><td data-field="mean_per_image">60.2147</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">59</td></tr>
    <tr><td data-field="template">eon-svn/de-pt-dimer</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="par2_mean">192.051</td><td data-field="success_rate">1</td><td data-field="wilson">0.938871–1</td><td data-field="median_calls">188</td><td data-field="mean_calls">192.051</td><td data-field="mean_per_image">64.0169</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">59</td></tr>
-   <tr><td data-field="template">eon-svn/de-pt-lanczos</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="par2_mean">221.525</td><td data-field="success_rate">1</td><td data-field="wilson">0.938871–1</td><td data-field="median_calls">208</td><td data-field="mean_calls">221.525</td><td data-field="mean_per_image">73.8418</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">59</td></tr>
    <tr><td data-field="template">eon-svn/de-pt-ci</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">225.881</td><td data-field="success_rate">1</td><td data-field="wilson">0.938871–1</td><td data-field="median_calls">188</td><td data-field="mean_calls">225.881</td><td data-field="mean_per_image">75.2938</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">59</td></tr>
    <tr><td data-field="template">eon-svn/de-pt-ci-neb</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="par2_mean">225.881</td><td data-field="success_rate">1</td><td data-field="wilson">0.938871–1</td><td data-field="median_calls">188</td><td data-field="mean_calls">225.881</td><td data-field="mean_per_image">75.2938</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">59</td></tr>
    <tr><td data-field="template">eon-svn/de-pt-ci-swdneb</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="par2_mean">246.271</td><td data-field="success_rate">1</td><td data-field="wilson">0.938871–1</td><td data-field="median_calls">218</td><td data-field="mean_calls">246.271</td><td data-field="mean_per_image">82.0904</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">59</td></tr>
@@ -490,6 +487,9 @@
    <li>eon-client/de-pt-dimer eOn campaign n=59, result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5).</li>
    <li>eon-client/de-pt-lanczos-improved eOn campaign n=59, result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5).</li>
    <li>eon-client/de-pt-lanczos eOn campaign n=59, result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5).</li>
+   <li>eon-svn/de-pt-lanczos-improved Eon svn campaign n=59, does not reproduce the 2014 archive.</li>
+   <li>eon-svn/de-pt-lanczos Eon svn campaign n=59, does not reproduce the 2014 archive.</li>
+   <li>optim/de-pt optim campaign n=59, does not reproduce the 2014 archive.</li>
    <li>eon/develop-de-pt-ew eOn asv n=1, smoke run; scored 1 of 59 starts.</li>
    <li>eon/develop-de-pt-oci eOn asv n=1, smoke run; scored 1 of 59 starts.</li>
    <li>ase/de-pt-island-tuned ASE asv n=1, smoke run; scored 1 of 59 starts.</li>
@@ -508,7 +508,7 @@
    <h3>Legacy 2014 archive</h3>
    <details class="bench-details">
    <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
@@ -525,7 +525,7 @@
    </tr></thead><tbody>
    <tr id="double-ended-saddle-search-pt-island-optim" class="best">
    <td class="num">1</td>
-   <td class="text">optim</td>
+   <td class="text">optim · not reproduced</td>
    <td class="text">OPTIM</td>
    <td class="num">1.03000e+02</td>
    <td class="num">1.9400e+02</td>
@@ -573,7 +573,7 @@
    </tr>
    <tr id="double-ended-saddle-search-pt-island-eon-lanczos-improved">
    <td class="num">5</td>
-   <td class="text">eon-lanczos-improved</td>
+   <td class="text">eon-lanczos-improved · not reproduced</td>
    <td class="text">Eon r2156</td>
    <td class="num">222</td>
    <td class="num">2039</td>
@@ -633,7 +633,7 @@
    </tr>
    <tr id="double-ended-saddle-search-pt-island-eon-lanczos">
    <td class="num">10</td>
-   <td class="text">eon-lanczos</td>
+   <td class="text">eon-lanczos · not reproduced</td>
    <td class="text">Eon r2156</td>
    <td class="num">325</td>
    <td class="num">2660</td>
