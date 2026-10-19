@@ -127,7 +127,7 @@ It does not run a campaign.
    <td data-code="ASE" data-template="ase/de-pt-island-tuned" data-par2="847.678"><span class="bench-score">847.678</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">ase/de-pt-island-tuned</a></td>
    <td data-code="Sella" data-template="sella/de-pt-island-tuned" data-par2="615.153"><span class="bench-score">615.153</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">sella/de-pt-island-tuned</a></td>
    <td data-code="pysisyphus">—</td>
-   <td data-code="CP2K" data-template="cp2k/ci-neb" data-par2="5296.1"><span class="bench-score">5296.1</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">cp2k/ci-neb</a></td>
+   <td data-code="CP2K" data-template="cp2k/ci-neb-tuned" data-par2="2555.76"><span class="bench-score">2555.76</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">cp2k/ci-neb-tuned</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass" data-template="compass/sqnm" data-par2="1078.12"><span class="bench-score">1078.12</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
@@ -212,7 +212,7 @@ It does not run a campaign.
    <td data-code="ASE" data-template="ase/neb-pt-heptamer-tuned" data-par2="442.615"><span class="bench-score">442.615</span><a href="generated/suites/neb.html#Pt-heptamer-templates">ase/neb-pt-heptamer-tuned</a></td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
-   <td data-code="CP2K" data-template="cp2k/ci-neb" data-par2="4518.46"><span class="bench-score">4518.46</span><a href="generated/suites/neb.html#Pt-heptamer-templates">cp2k/ci-neb</a></td>
+   <td data-code="CP2K" data-template="cp2k/ci-neb-tuned" data-par2="1893.85"><span class="bench-score">1893.85</span><a href="generated/suites/neb.html#Pt-heptamer-templates">cp2k/ci-neb-tuned</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass" data-template="compass/sqnm" data-par2="561.462"><span class="bench-score">561.462</span><a href="generated/suites/neb.html#Pt-heptamer-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
