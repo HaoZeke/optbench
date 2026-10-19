@@ -5,9 +5,12 @@ import pytest
 
 from optbench.campaign import _check_stop, list_templates, load_template, resolve_problem, run
 from optbench.runners.scgo_go import (
+    AIRSS_LJ38_CALL_CEILING,
     PINNED_COMMIT,
+    LJ38_MINIMUM_COORDS,
     SearchStop,
     default_bh_budget,
+    harness_lj,
     lj38_reference_energy,
     load_geometries,
 )
@@ -44,18 +47,48 @@ def test_lj38_template_uses_the_budget_cap():
     assert int(template["scgo"]["seed"]) == 314159
     assert _check_stop(problem, template) == 30888
     assert [row["id"] for row in list_templates(ROOT) if str(row["id"]).startswith("scgo/")] == [
+        "scgo/lj38-bh-tuned",
         "scgo/lj38-bh",
-        "scgo/lj75-bh",
     ]
 
 
-def test_lj75_template_is_partial_until_a_success_rule():
-    template = load_template(ROOT, "scgo/lj75-bh")
-    problem = resolve_problem(ROOT, "globalopt/lj75")
-    assert "energy_above_minimum" not in (problem.get("convergence") or {})
-    assert template["failure_cap"] == 41385
-    assert template["scgo"]["archive_path"] == "website/globalopt/lj75/lj75_clusters.tgz"
-    assert _check_stop(problem, template) == 41385
+def test_tuned_template_uses_the_airss_call_ceiling():
+    template = load_template(ROOT, "scgo/lj38-bh-tuned")
+    problem = resolve_problem(ROOT, "globalopt/lj38")
+    assert template["tuning"] == "tuned"
+    assert template["failure_cap"] == AIRSS_LJ38_CALL_CEILING == 955658
+    assert template["scgo"]["dr"] == pytest.approx(0.2)
+    assert template["scgo"]["temperature"] == pytest.approx(1.0)
+    assert int(template["scgo"]["niter"]) == AIRSS_LJ38_CALL_CEILING
+    assert _check_stop(problem, template) == AIRSS_LJ38_CALL_CEILING
+
+
+def test_harness_potential_has_no_atom_symbol():
+    import numpy as np
+
+    from optbench.potentials import lennard_jones
+
+    coords = np.asarray(LJ38_MINIMUM_COORDS, dtype=np.float64)
+    energy, forces = harness_lj(coords)
+    direct, gradient = lennard_jones(coords.reshape(-1))
+    assert energy == direct
+    assert np.asarray(forces) == pytest.approx((-gradient).reshape(-1, 3))
+
+
+def test_carbon_and_platinum_share_the_harness_potential():
+    pytest.importorskip("ase")
+    import numpy as np
+    from ase import Atoms
+
+    coords = np.asarray(LJ38_MINIMUM_COORDS, dtype=np.float64)
+    found = {}
+    for symbol in ("C", "Pt"):
+        atoms = Atoms(symbols=[symbol] * len(coords), positions=coords, pbc=False)
+        energy, forces = harness_lj(atoms.get_positions())
+        found[symbol] = (energy, np.asarray(forces))
+        assert atoms.get_chemical_symbols()[0] == symbol
+    assert found["C"][0] == found["Pt"][0]
+    assert found["C"][1] == pytest.approx(found["Pt"][1])
 
 
 def test_coordinate_files_sort_by_the_trailing_index(tmp_path: Path):
@@ -86,6 +119,9 @@ def test_asv_grid_is_one_start_until_full(monkeypatch):
     assert bench.ScgoLj38Bh.problem_id == "globalopt/lj38"
     assert bench.ScgoLj38Bh.repeat == 1
     assert bench.ScgoLj38Bh.track_force_calls.unit == "force calls"
+    assert bench.ScgoLj38BhTuned.cap == AIRSS_LJ38_CALL_CEILING
+    assert bench.ScgoLj38BhTuned.template_id == "scgo/lj38-bh-tuned"
+    assert bench.ScgoLj38BhTuned.params[1] == ["0"]
     monkeypatch.setenv("OPTBENCH_ASV_FULL", "1")
     reloaded = importlib.reload(bench)
     assert reloaded.ScgoLj38Bh.params[1] == [str(index) for index in range(100)]
@@ -142,3 +178,10 @@ def test_installed_library_budget_matches_the_template():
     assert settings["dr"] == pytest.approx(0.2)
     assert settings["symbol"] == "C"
     assert settings["threshold"] == pytest.approx(settings["reference_energy"] + 0.001)
+    tuned = load_template(ROOT, "scgo/lj38-bh-tuned")
+    tuned_settings = bh_settings(problem, tuned, 38)
+    assert tuned_settings["dr"] == pytest.approx(0.2)
+    assert tuned_settings["temperature"] == pytest.approx(1.0)
+    assert tuned_settings["niter_local_relaxation"] == 233
+    assert tuned_settings["niter"] == AIRSS_LJ38_CALL_CEILING
+    assert tuned_settings["cap"] == AIRSS_LJ38_CALL_CEILING

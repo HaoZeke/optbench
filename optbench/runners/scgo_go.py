@@ -16,6 +16,12 @@ start ends early when a quenched energy lies within
 the most evaluations that budget can spend. A search that uses the cap
 is a cap failure. A quenched energy outside the window is
 ``wrong_stationary``.
+
+The tuned template keeps that FIRE length, step size, and Metropolis
+scale. Its hop count is the AIRSS Lennard-Jones 38 call ceiling, so a
+start ends on the Cambridge window or on that harness count. The atom
+symbol is a distance-floor label. ``harness_lj`` is the only energy
+and force evaluation.
 """
 
 from __future__ import annotations
@@ -84,6 +90,9 @@ LJ38_MINIMUM_COORDS: tuple[tuple[float, float, float], ...] = (
 
 CODE_VERSION = "0.9.1"
 PINNED_COMMIT = "2338742a434a920ed82e52a72dc1338cf06647c1"
+# Largest harness count on the AIRSS Lennard-Jones 38 row
+# (cells/airss/go, results/campaign/airss-0.9.4-lj38.dat).
+AIRSS_LJ38_CALL_CEILING = 955658
 
 
 class SearchStop(Exception):
@@ -122,6 +131,17 @@ def default_bh_budget(n_atoms: int) -> tuple[int, int, int]:
     nlocal = int(min(2000, max(50, 50 + 50 * scaled)))
     cap = (niter + 1) * (nlocal + 1)
     return niter, nlocal, cap
+
+
+def harness_lj(coords: np.ndarray) -> tuple[float, np.ndarray]:
+    """Energy and ASE forces from the harness potential.
+
+    The atom symbol is not an argument. ASE stores forces as the
+    negative gradient.
+    """
+    energy, gradient = lennard_jones(np.asarray(coords, dtype=np.float64).reshape(-1))
+    forces = -np.asarray(gradient, dtype=np.float64).reshape(-1, 3)
+    return float(energy), forces
 
 
 def reference_energy(problem: dict) -> float | None:
@@ -281,7 +301,11 @@ def _dat(summary: dict, template: dict, metrics: dict, *, partial: bool, energy_
             if energy_rule
             else "# The problem states no energy_above_minimum. success means a finite quench under the FIRE force tolerance. energy is that quenched energy, or the lowest energy seen when the force never met fmax."
         ),
-        "# The force-call cap is the default basin-hopping budget, counted in FIRE evaluations.",
+        (
+            "# The force-call cap is the AIRSS Lennard-Jones 38 call ceiling, counted in FIRE evaluations."
+            if str(template.get("tuning") or "") == "tuned"
+            else "# The force-call cap is the default basin-hopping budget, counted in FIRE evaluations."
+        ),
     ]
     if partial:
         if energy_rule:
@@ -322,16 +346,23 @@ def _one_start(job: dict) -> dict:
     from scgo.utils.rng_helpers import ensure_rng
 
     composition = [str(job["symbol"])] * int(job["n_atoms"])
-    niter = auto_niter(composition)
-    nlocal = auto_niter_local_relaxation(composition)
+    auto_hops = auto_niter(composition)
+    auto_local = auto_niter_local_relaxation(composition)
     expected_niter, expected_local, expected_cap = default_bh_budget(int(job["n_atoms"]))
-    if (niter, nlocal) != (expected_niter, expected_local):
+    if (auto_hops, auto_local) != (expected_niter, expected_local):
         raise RuntimeError(
-            f"SCGO auto budget {(niter, nlocal)} does not match the 0.9.1 formula {(expected_niter, expected_local)}"
+            f"SCGO auto budget {(auto_hops, auto_local)} does not match the 0.9.1 formula {(expected_niter, expected_local)}"
         )
+    niter = int(job["niter"])
+    nlocal = int(job["niter_local_relaxation"])
     cap = int(job["cap"])
-    if cap != expected_cap:
-        raise RuntimeError(f"template cap {cap} is not the 0.9.1 budget {expected_cap}")
+    if nlocal != expected_local:
+        raise RuntimeError(f"local FIRE steps {nlocal} are not the library size {expected_local}")
+    if niter == expected_niter:
+        if cap != expected_cap:
+            raise RuntimeError(f"template cap {cap} is not the 0.9.1 budget {expected_cap}")
+    elif niter < cap:
+        raise RuntimeError(f"hop count {niter} can end before the call ceiling {cap}")
 
     class _LennardJones(Calculator):
         implemented_properties = ["energy", "forces"]
@@ -354,11 +385,11 @@ def _one_start(job: dict) -> dict:
                 raise SearchStop("cap", self.best_energy, self.best_force_norm)
             fresh, cached = self.counter.charge(key)
             if fresh or cached is None:
-                energy, gradient = lennard_jones(coords)
-                flat = tuple(-float(value) for value in gradient)
+                energy, forces = harness_lj(coords)
+                flat = tuple(float(value) for value in forces.reshape(-1))
                 cached = (float(energy), flat)
                 self.counter.remember(key, cached)
-                force_norm = float(np.linalg.norm(gradient))
+                force_norm = float(np.linalg.norm(forces))
                 forces = np.asarray(flat, dtype=np.float64).reshape(-1, 3)
                 max_atom = float(np.linalg.norm(forces, axis=1).max()) if forces.size else 0.0
                 if math.isfinite(energy) and (
@@ -557,7 +588,11 @@ def _write_campaign(output: Path, template: dict, problem: dict, records: list[d
                 if energy_rule
                 else "The problem states no energy_above_minimum. success means a finite quench under the FIRE force tolerance. energy is that quenched energy, or the lowest energy seen when the force never met fmax. "
             )
-            + "The cap is the default SCGO basin-hopping budget."
+            + (
+                "The cap is the AIRSS Lennard-Jones 38 call ceiling."
+                if str(template.get("tuning") or "") == "tuned"
+                else "The cap is the default SCGO basin-hopping budget."
+            )
         ),
         "runs": [
             {
@@ -631,20 +666,43 @@ def bh_settings(problem: dict, template: dict, n_atoms: int) -> dict:
 
     defaults = get_default_params()
     block = defaults["optimizer_params"]["bh"]
-    niter, nlocal, cap = default_bh_budget(n_atoms)
+    niter, nlocal, library_cap = default_bh_budget(n_atoms)
     stated_cap = template.get("failure_cap")
-    if stated_cap is not None and int(stated_cap) != cap:
-        raise ValueError(f"{template['id']} failure_cap {stated_cap} is not the budget {cap}")
+    tuning = str(template.get("tuning") or "default")
+    dr = float(block["dr"])
+    temperature = float(block["temperature"])
+    if tuning == "tuned":
+        if int(stated_cap) != AIRSS_LJ38_CALL_CEILING:
+            raise ValueError(
+                f"{template['id']} failure_cap {stated_cap} is not the AIRSS ceiling {AIRSS_LJ38_CALL_CEILING}"
+            )
+        cap = AIRSS_LJ38_CALL_CEILING
+        stated_hops = section.get("niter")
+        niter = cap if stated_hops in (None, "") else int(stated_hops)
+        if niter < cap:
+            raise ValueError(f"{template['id']} hop count {niter} can end before the call ceiling {cap}")
+        if "dr" in section:
+            dr = float(section["dr"])
+        if "temperature" in section:
+            temperature = float(section["temperature"])
+        if dr != float(block["dr"]) or temperature != float(block["temperature"]):
+            raise ValueError(
+                f"{template['id']} dr {dr} and temperature {temperature} differ from the documented preset"
+            )
+    elif stated_cap is not None and int(stated_cap) != library_cap:
+        raise ValueError(f"{template['id']} failure_cap {stated_cap} is not the budget {library_cap}")
+    else:
+        cap = library_cap
     symbol = str(section.get("symbol") or "C")
     seed = int(section.get("seed") if section.get("seed") is not None else 314159)
     return {
         "algorithm": "bh",
         "optimizer": str(block["optimizer"]),
         "fmax": float(block["fmax"]),
-        "dr": float(block["dr"]),
+        "dr": dr,
         "move_fraction": float(block["move_fraction"]),
         "move_strategy": str(block["move_strategy"]),
-        "temperature": float(block["temperature"]),
+        "temperature": temperature,
         "energy_tolerance": float(block["energy_tolerance"]),
         "niter": niter,
         "niter_local_relaxation": nlocal,
@@ -684,6 +742,8 @@ def make_job(
         "symbol": settings["symbol"],
         "seed": int(settings["seed"] if seed is None else seed),
         "cap": int(settings["cap"]),
+        "niter": int(settings["niter"]),
+        "niter_local_relaxation": int(settings["niter_local_relaxation"]),
         "fmax": settings["fmax"],
         "threshold": settings["threshold"],
         "reference_energy": settings["reference_energy"],
