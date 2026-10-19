@@ -1,0 +1,22 @@
+# counter harness. Each search is one pARTn run. The geometry is tau_sad.
+# The displacement returned when the saddle is stored is the push off the saddle and is not applied.
+# Endpoint minima are the harness connection test. The 2014 archive has no ARTn row.
+# rep 1 force_calls 154419 unique_saddles 3 fraction_connected 0.005 total_searches 200 connected 1 minimize_calls 1 minimum_converged 1 seed 20261016
+force_calls 154419.0
+force_calls_min 154419
+force_calls_max 154419
+code artn
+code_version 1.1.0
+commit 9b753517c6c0eccae51425b83eb4e04ef554550b
+algorithm ARTn
+tuning optbench-pt111
+template partn/saddle-pt
+problem saddle-search/pt-island
+counter harness
+repetitions 1
+nfailed 1
+goal 27
+cap 6000
+n 200
+par2_mean 11944.625
+v2_nfailed 199

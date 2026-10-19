@@ -17,8 +17,7 @@
       "failures": {
         "cap": 27,
         "crash": 0,
-        "divergence": 0,
-        "not_converged": 2,
+        "divergence": 2,
         "wrong_stationary": 0
       },
       "full_n": 200,
@@ -63,8 +62,7 @@
       "failures": {
         "cap": 29,
         "crash": 0,
-        "divergence": 0,
-        "not_converged": 2,
+        "divergence": 2,
         "wrong_stationary": 0
       },
       "full_n": 200,
@@ -111,8 +109,7 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 0,
-        "not_converged": 1,
+        "divergence": 1,
         "wrong_stationary": 0
       },
       "full_n": 200,
@@ -157,8 +154,7 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 0,
-        "not_converged": 25,
+        "divergence": 25,
         "wrong_stationary": 0
       },
       "full_n": 200,
@@ -204,7 +200,6 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 200,
@@ -250,7 +245,6 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 200,
@@ -296,7 +290,6 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 200,
@@ -342,7 +335,6 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 200,
@@ -382,7 +374,7 @@
       "eon-svn/ts-lj38-dimer-ljcut r2549 campaign r2549": 0.398864744254775,
       "eon-svn/ts-lj38-lanczos-improved r2549 campaign r2549": 0.7074204898103558,
       "eon-svn/ts-lj38-lanczos-ljcut r2549 campaign r2549": 0.6494722156450394,
-      "partn/ts-lj38 1.1.0 default campaign 9b75351": 0.0,
+      "partn/ts-lj38 1.1.0 lj-refine campaign 9b75351": 0.0022577249674798593,
       "rgsaddle/dimer-fire 0.2.2 default campaign, asv c0db2b8": 0.0,
       "rgsaddle/dimer-fire-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.0,
       "rgsaddle/dimer-lbfgs 0.2.2 default campaign, asv c0db2b8": 0.0,
@@ -441,12 +433,12 @@
         0.965,
         0.995
       ],
-      "partn/ts-lj38 1.1.0 default campaign 9b75351": [
+      "partn/ts-lj38 1.1.0 lj-refine campaign 9b75351": [
         0.0,
         0.0,
         0.0,
         0.0,
-        0.0
+        0.015
       ],
       "rgsaddle/dimer-fire 0.2.2 default campaign, asv c0db2b8": [
         0.0,
@@ -554,7 +546,7 @@
       "eon-svn/ts-lj38-dimer-ljcut r2549 campaign r2549": 0.995,
       "eon-svn/ts-lj38-lanczos-improved r2549 campaign r2549": 1.0,
       "eon-svn/ts-lj38-lanczos-ljcut r2549 campaign r2549": 1.0,
-      "partn/ts-lj38 1.1.0 default campaign 9b75351": 0.0,
+      "partn/ts-lj38 1.1.0 lj-refine campaign 9b75351": 0.89,
       "rgsaddle/dimer-fire 0.2.2 default campaign, asv c0db2b8": 0.04,
       "rgsaddle/dimer-fire-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.235,
       "rgsaddle/dimer-lbfgs 0.2.2 default campaign, asv c0db2b8": 0.0,
@@ -594,7 +586,6 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 200,
@@ -640,7 +631,6 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 200,
@@ -686,7 +676,6 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 200,
@@ -731,8 +720,7 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 0,
-        "not_converged": 2,
+        "divergence": 2,
         "wrong_stationary": 0
       },
       "full_n": 200,
@@ -778,7 +766,6 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 200,
@@ -824,7 +811,6 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 200,
@@ -870,7 +856,6 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 200,
@@ -915,8 +900,7 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 0,
-        "not_converged": 1,
+        "divergence": 1,
         "wrong_stationary": 0
       },
       "full_n": 200,
@@ -962,7 +946,6 @@
         "cap": 0,
         "crash": 0,
         "divergence": 2,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 200,
@@ -1007,8 +990,7 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 0,
-        "not_converged": 15,
+        "divergence": 15,
         "wrong_stationary": 0
       },
       "full_n": 200,
@@ -1040,6 +1022,51 @@
       "wilson_low": 0.8799563897637055
     },
     {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "artn",
+      "code_version": "1.1.0",
+      "commit": "9b753517c6c0eccae51425b83eb4e04ef554550b",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "artn-1.1.0-tsopt-LJ38--partn-ts-lj38",
+      "failures": {
+        "cap": 21,
+        "crash": 1,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 200,
+      "history": false,
+      "max_calls": 10000.0,
+      "mean_calls": 4367.195,
+      "mean_per_image": null,
+      "median": 3716.5,
+      "median_calls": 3679.0,
+      "median_high": 4050.0,
+      "median_low": 3246.0,
+      "median_per_image": null,
+      "min_calls": 352.0,
+      "n": 200,
+      "nfailed": 22,
+      "note": "starts.jsonl",
+      "par2_mean": 5514.765,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/artn-1.1.0-tsopt-LJ38--partn-ts-lj38.dat",
+      "problem": "tsopt/LJ38",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 0.89,
+      "template": "partn/ts-lj38",
+      "tuning": "lj-refine",
+      "wilson_high": 0.926227555398747,
+      "wilson_low": 0.839073090026985
+    },
+    {
       "asv_commit": "a914203cbb891442232aea2c92f960df9a48dc1d",
       "call_unit": "total",
       "cap": 10000,
@@ -1054,7 +1081,6 @@
         "cap": 27,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 47
       },
       "full_n": 200,
@@ -1100,7 +1126,6 @@
         "cap": 3,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 147
       },
       "full_n": 200,
@@ -1145,8 +1170,7 @@
       "failures": {
         "cap": 7,
         "crash": 0,
-        "divergence": 0,
-        "not_converged": 146,
+        "divergence": 146,
         "wrong_stationary": 0
       },
       "full_n": 200,
@@ -1192,7 +1216,6 @@
         "cap": 96,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 70
       },
       "full_n": 200,
@@ -1238,7 +1261,6 @@
         "cap": 190,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 200,
@@ -1284,7 +1306,6 @@
         "cap": 193,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 200,
@@ -1329,8 +1350,7 @@
       "failures": {
         "cap": 28,
         "crash": 0,
-        "divergence": 0,
-        "not_converged": 164,
+        "divergence": 164,
         "wrong_stationary": 0
       },
       "full_n": 200,
@@ -1376,7 +1396,6 @@
         "cap": 199,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 200,
@@ -1408,52 +1427,6 @@
       "wilson_low": 0.0008831687156009814
     },
     {
-      "asv_commit": "",
-      "call_unit": "total",
-      "cap": 10000,
-      "code": "artn",
-      "code_version": "1.1.0",
-      "commit": "9b753517c6c0eccae51425b83eb4e04ef554550b",
-      "comparable": true,
-      "counter": "harness",
-      "current": true,
-      "entry": "artn-1.1.0-tsopt-LJ38--partn-ts-lj38",
-      "failures": {
-        "cap": 0,
-        "crash": 200,
-        "divergence": 0,
-        "not_converged": 0,
-        "wrong_stationary": 0
-      },
-      "full_n": 200,
-      "history": false,
-      "max_calls": 123.0,
-      "mean_calls": 49.045,
-      "mean_per_image": null,
-      "median": 20000.0,
-      "median_calls": 45.0,
-      "median_high": 20000.0,
-      "median_low": 20000.0,
-      "median_per_image": null,
-      "min_calls": 31.0,
-      "n": 200,
-      "nfailed": 200,
-      "note": "starts.jsonl",
-      "par2_mean": 20000.0,
-      "partial": false,
-      "partial_reason": "",
-      "path": "results/campaign/artn-1.1.0-tsopt-LJ38--partn-ts-lj38.dat",
-      "problem": "tsopt/LJ38",
-      "registry_match": true,
-      "scored": true,
-      "source": "campaign",
-      "success_rate": 0.0,
-      "template": "partn/ts-lj38",
-      "tuning": "default",
-      "wilson_high": 0.018845326377266575,
-      "wilson_low": 0.0
-    },
-    {
       "asv_commit": "a914203cbb891442232aea2c92f960df9a48dc1d",
       "call_unit": "total",
       "cap": 10000,
@@ -1468,7 +1441,6 @@
         "cap": 199,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 1
       },
       "full_n": 200,
@@ -1514,7 +1486,6 @@
         "cap": 200,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 200,

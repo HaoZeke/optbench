@@ -18,7 +18,6 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -64,7 +63,6 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -112,7 +110,6 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -158,7 +155,6 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -204,7 +200,6 @@
         "cap": 0,
         "crash": 0,
         "divergence": 1,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -250,7 +245,6 @@
         "cap": 0,
         "crash": 0,
         "divergence": 1,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -296,7 +290,6 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -342,7 +335,6 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -382,7 +374,7 @@
       "eon-svn/ts-pt-dimer-smooth r2549 campaign r2549": 1.0474615155246694,
       "eon-svn/ts-pt-lanczos-improved r2549 campaign r2549": 1.0536049848239342,
       "eon-svn/ts-pt-lanczos-smooth r2549 campaign r2549": 0.9491660067364305,
-      "partn/ts-pt 1.1.0 default campaign 9b75351": 0.5314100943864157,
+      "partn/ts-pt 1.1.0 pt111 campaign 9b75351": 0.4761188706930315,
       "rgsaddle/pt-dimer-fire 0.2.2 default campaign, asv c0db2b8": 0.0,
       "rgsaddle/pt-dimer-fire-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.1382280592334608,
       "rgsaddle/pt-dimer-lbfgs 0.2.2 default campaign, asv c0db2b8": 0.06757816229191416,
@@ -438,12 +430,12 @@
         1.0,
         1.0
       ],
-      "partn/ts-pt 1.1.0 default campaign 9b75351": [
+      "partn/ts-pt 1.1.0 pt111 campaign 9b75351": [
         0.0,
-        0.02040816326530612,
-        0.5102040816326531,
-        0.7755102040816326,
-        0.9183673469387755
+        0.0,
+        0.22448979591836735,
+        0.8571428571428571,
+        1.0
       ],
       "rgsaddle/pt-dimer-fire 0.2.2 default campaign, asv c0db2b8": [
         0.0,
@@ -530,7 +522,7 @@
       "eon-svn/ts-pt-dimer-smooth r2549 campaign r2549": 1.0,
       "eon-svn/ts-pt-lanczos-improved r2549 campaign r2549": 1.0,
       "eon-svn/ts-pt-lanczos-smooth r2549 campaign r2549": 1.0,
-      "partn/ts-pt 1.1.0 default campaign 9b75351": 0.9183673469387755,
+      "partn/ts-pt 1.1.0 pt111 campaign 9b75351": 1.0,
       "rgsaddle/pt-dimer-fire 0.2.2 default campaign, asv c0db2b8": 0.9795918367346939,
       "rgsaddle/pt-dimer-fire-tuned 0.2.2 tuned campaign, asv c0db2b8": 1.0,
       "rgsaddle/pt-dimer-lbfgs 0.2.2 default campaign, asv c0db2b8": 0.42857142857142855,
@@ -567,7 +559,6 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -613,7 +604,6 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -659,7 +649,6 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -705,7 +694,6 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -751,7 +739,6 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -797,7 +784,6 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -843,7 +829,6 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -889,7 +874,6 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -935,7 +919,6 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -981,7 +964,6 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -1013,6 +995,51 @@
       "wilson_low": 0.9273021807795035
     },
     {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "artn",
+      "code_version": "1.1.0",
+      "commit": "9b753517c6c0eccae51425b83eb4e04ef554550b",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "artn-1.1.0-tsopt-pt-island--partn-ts-pt",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 49,
+      "history": false,
+      "max_calls": 1738.0,
+      "mean_calls": 452.734693877551,
+      "mean_per_image": null,
+      "median": 325.0,
+      "median_calls": 325.0,
+      "median_high": 370.0,
+      "median_low": 297.0,
+      "median_per_image": null,
+      "min_calls": 165.0,
+      "n": 49,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 452.734693877551,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/artn-1.1.0-tsopt-pt-island--partn-ts-pt.dat",
+      "problem": "tsopt/pt-island",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "partn/ts-pt",
+      "tuning": "pt111",
+      "wilson_high": 1.0,
+      "wilson_low": 0.9273021807795035
+    },
+    {
       "asv_commit": "a914203cbb891442232aea2c92f960df9a48dc1d",
       "call_unit": "total",
       "cap": 10000,
@@ -1027,7 +1054,6 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -1073,7 +1099,6 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -1105,52 +1130,6 @@
       "wilson_low": 0.9273021807795035
     },
     {
-      "asv_commit": "",
-      "call_unit": "total",
-      "cap": 10000,
-      "code": "artn",
-      "code_version": "1.1.0",
-      "commit": "9b753517c6c0eccae51425b83eb4e04ef554550b",
-      "comparable": true,
-      "counter": "harness",
-      "current": true,
-      "entry": "artn-1.1.0-tsopt-pt-island--partn-ts-pt",
-      "failures": {
-        "cap": 0,
-        "crash": 4,
-        "divergence": 0,
-        "not_converged": 0,
-        "wrong_stationary": 0
-      },
-      "full_n": 49,
-      "history": false,
-      "max_calls": 1072.0,
-      "mean_calls": 380.2244897959184,
-      "mean_per_image": null,
-      "median": 265.0,
-      "median_calls": 265.0,
-      "median_high": 489.0,
-      "median_low": 224.0,
-      "median_per_image": null,
-      "min_calls": 102.0,
-      "n": 49,
-      "nfailed": 4,
-      "note": "starts.jsonl",
-      "par2_mean": 1970.2244897959183,
-      "partial": false,
-      "partial_reason": "",
-      "path": "results/campaign/artn-1.1.0-tsopt-pt-island--partn-ts-pt.dat",
-      "problem": "tsopt/pt-island",
-      "registry_match": true,
-      "scored": true,
-      "source": "campaign",
-      "success_rate": 0.9183673469387755,
-      "template": "partn/ts-pt",
-      "tuning": "default",
-      "wilson_high": 0.9677971823322362,
-      "wilson_low": 0.808108724034287
-    },
-    {
       "asv_commit": "a914203cbb891442232aea2c92f960df9a48dc1d",
       "call_unit": "total",
       "cap": 10000,
@@ -1165,7 +1144,6 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -1211,7 +1189,6 @@
         "cap": 18,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -1257,7 +1234,6 @@
         "cap": 23,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -1303,7 +1279,6 @@
         "cap": 24,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -1349,7 +1324,6 @@
         "cap": 28,
         "crash": 0,
         "divergence": 0,
-        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,

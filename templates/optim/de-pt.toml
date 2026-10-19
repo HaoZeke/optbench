@@ -1,0 +1,17 @@
+# OPTIM double-ended Pt island. Scaled Morse, as in the 2014 run.sh.
+id = "optim/de-pt"
+engine = "optim"
+problem = "double-ended-saddle-search/pt-island"
+code = "optim"
+code_version = "svn-snapshot"
+commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+algorithm = "DNEB + hybrid eigenvector following"
+tuning = "wales-2014"
+note = "archive/entries/double-ended-saddle-search/pt-island/optim. Coordinates are divided by r0 2.897. Energy seen by OPTIM is divided by D 0.7102. PARAMS is rho*r0, the box over r0, and rcut 9.5 over r0. FREEZE lists the atoms the con file marks fixed. The harness potential stays morse_pt in eV/Angstrom. Archive mean 103."
+
+[optim]
+method = "dneb"
+preamble = "templates/optim/preambles/de-pt.txt"
+symbol = "M"
+archive_force_calls = 103
+timeout = 7200
