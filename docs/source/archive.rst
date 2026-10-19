@@ -1072,7 +1072,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/lj38">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="13">No full harness row.</td></tr>
+   <tr><td data-field="template">nloptglobal/lj38-crs2</td><td data-field="version">NLopt 2.11.0</td><td data-field="commit">88c424d4f458</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">2e+06</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.0369935</td><td data-field="median_calls">1e+06</td><td data-field="mean_calls">1e+06</td><td data-field="failures">crash 0, divergence 0, cap 100, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/globalopt.html#lj38">Full ranked table and performance profile</a>.</p>
