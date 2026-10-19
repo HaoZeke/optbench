@@ -173,6 +173,14 @@ commit = "99a615acaef6bc6afe44d895f666c6d60250f7d8"
 committed = "2025-02-21"
 note = "minhocao minima hopping, commit 99a615acaef6bc6afe44d895f666c6d60250f7d8. The globalopt rows use the msock driver and the harness Lennard-Jones kernel (epsilon 1, sigma 1, cutoff 40, no shift, no periodic images). Native LJ and BLJ are different potentials and are not used. The build links futile 1.9.1. gfortran 13 needs a local integer i in the contained validate routine of futile flib/f_input_file.f90; that change is outside the hopping loop. The accepted msock socket sets TCP_NODELAY so the 12-byte i-PI headers are not paced by delayed ACKs."
 
+[[template]]
+id = "ase-globalopt/lj75-basinhopping"
+code = "ase"
+problem = "globalopt/lj75"
+profile = "default"
+task = "basin-hopping"
+ranked = true
+
 # generated ASE and Sella templates
 
 [[template]]
