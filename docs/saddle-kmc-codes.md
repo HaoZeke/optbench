@@ -258,6 +258,18 @@ so there is no pyKMC row to rescore. The MATLAB smoke in
 `softsaddle/entry.toml` records two searches and does not store endpoint
 coordinates.
 
+A new saddle-search campaign stores both endpoint minima beside the
+starts file. `<stem>.endpoints.npz` holds float32 free-atom coordinates
+for the minimized reactant and the two endpoints, in `free_index` order,
+with the orthorhombic cell lengths. A search that stops before those
+minimizations has status `not_minimized` and NaN endpoint rows.
+`optbench check` rejects a `saddle-search/` starts file whose sha256 is
+absent from `oracle/saddle_endpoint_legacy.txt` when that archive is
+missing or does not match the records. The names in that file are the
+campaigns scored before the coordinates were stored. Replacing one of
+those files drops the exemption. The archive stays in the campaign
+directory, outside the HTML tables.
+
 | row | geometries | old connected | new connected | old PAR-2 | new PAR-2 |
 | --- | --- | --- | --- | --- | --- |
 | sella/pt-island-search-default, asv n=16 | absent (success track only) | 12/16 | 12/16 | 5201.625 | 5201.625 |

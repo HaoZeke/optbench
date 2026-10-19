@@ -30,6 +30,7 @@ import numpy as np
 
 from .connection import connected_endpoints, link_tolerance, per_atom_max
 from .counter import HarnessCounter
+from .endpoints import EndpointArchive, align_resume, stamp_endpoint, stored_cell
 from .failures import classify_failure
 from .potserver import RgpotCounter
 from .score import half_even, score_v2
@@ -1151,6 +1152,9 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
     The link is the eOn r2205 test: exactly one endpoint has per-atom
     maximum minimum-image distance strictly below 0.1 angstrom.
     ``rmsd_connect`` is only the saddle-novelty test.
+    Both endpoint minima are stored as float32 free-atom coordinates in
+    ``<stem>.endpoints.npz``. A search that stops first is
+    ``not_minimized``.
     ``work`` is unused; the searches do not extract an archive.
     """
     del work
@@ -1169,6 +1173,7 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
     tolerance = link_tolerance(problem)
     max_searches = int(search.get("max_searches", 20000))
     free = np.flatnonzero(~fixed)
+    archive = EndpointArchive(output.with_name(output.stem + ".endpoints.npz"), int(free.size))
     raw = potential_from_problem(problem)
     comments = []
     all_records = []
@@ -1178,6 +1183,7 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
         header = json.loads(header_path.read_text(encoding="utf-8")) if header_path.is_file() else None
         saved = _load_partial(partial_path) if header and header.get("template") == template["id"] and int(header.get("rep", 0)) == rep else []
         if header and header.get("template") == template["id"] and int(header.get("rep", 0)) == rep:
+            align_resume(archive, len(all_records) + len(saved))
             potential = HarnessSurface(_bind(raw, positions, free, cell))
             minimum = np.asarray(header["minimum"], dtype=np.float64)
             min_energy = float(header["min_energy"])
@@ -1197,6 +1203,8 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
                 flush=True,
             )
         else:
+            if rep == 1:
+                archive.reset(stored_cell(cell), free)
             potential = HarnessSurface(_bind(raw, positions, free, cell))
             minimum, min_ok = _lbfgs_minimize(potential, positions[free].reshape(-1).copy(), force_tol, 5000)
             min_energy, _min_grad = potential.energy_forces(minimum)
@@ -1224,6 +1232,8 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
             partial_path.unlink(missing_ok=True)
         while connected < goal and searches < max_searches:
             searches += 1
+            plus_ep = None
+            minus_ep = None
             atom = int(listed[int(rng.integers(0, len(listed)))])
             slots = np.flatnonzero(free == atom)
             if len(slots) != 1:
@@ -1314,6 +1324,8 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
                     record["rmsd_minus"] = minus_rmsd
                     record["per_atom_max_plus"] = per_atom_max(plus_rows, reactant_rows, cell)
                     record["per_atom_max_minus"] = per_atom_max(minus_rows, reactant_rows, cell)
+                    plus_ep = plus_rows
+                    minus_ep = minus_rows
                     record["reasons"] = []
                     if novel:
                         found.append(saddle_x)
@@ -1346,6 +1358,8 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
             record["success"] = success
             record["failure"] = failure
             search_calls += climb
+            status = archive.add(minimum.reshape(-1, 3), plus_ep, minus_ep)
+            stamp_endpoint(record, archive.name, archive.count - 1, status)
             all_records.append(record)
             stored = dict(record)
             stored["rng_state"] = _rng_state(rng)
@@ -1418,6 +1432,7 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
             f"v2_nfailed {metrics['nfailed']}\n"
         )
     output.parent.mkdir(parents=True, exist_ok=True)
+    archive.save()
     output.write_text(text, encoding="utf-8")
     write_starts(output.with_suffix(".starts.jsonl"), all_records)
     if metrics is not None:
@@ -1462,6 +1477,7 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
     header_path, partial_path = _checkpoint_paths(output)
     partial_path.unlink(missing_ok=True)
     header_path.unlink(missing_ok=True)
+    archive.drop_log()
     return {
         "force_calls": statistics.fmean(totals) if totals else None,
         "nfailed": failed_reps,

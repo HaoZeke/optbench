@@ -26,6 +26,7 @@ from pathlib import Path
 import numpy as np
 
 from optbench.connection import connected_endpoints, link_tolerance, per_atom_max
+from optbench.endpoints import STATUS_STORED, EndpointArchive, stamp_endpoint, stored_cell
 
 from .common import (
     cached_pairs,
@@ -619,7 +620,8 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
     endpoint minimizations. The repetition total also includes the
     initial minimization. A batch of ``workers`` kicks is started
     together. Duplicate and connection checks still run in kick order,
-    and kicks past the goal are not charged.
+    and kicks past the goal are not charged. Both endpoint minima are
+    stored as float32 free-atom coordinates in ``<stem>.endpoints.npz``.
     """
     import statistics
 
@@ -651,7 +653,10 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
         "# counter harness. Each search is one pARTn run. The geometry is tau_sad.",
         "# The displacement returned when the saddle is stored is the push off the saddle and is not applied.",
         "# Endpoint minima use the eOn r2205 link: perAtomNorm strictly below 0.1 angstrom.",
+        "# Both minima are float32 free-atom coordinates in the sibling endpoints npz.",
     ]
+    archive = EndpointArchive(output.with_name(output.stem + ".endpoints.npz"), int(np.count_nonzero(free)))
+    archive.reset(stored_cell(box), np.flatnonzero(free))
     records = []
     failed_reps = 0
     for rep in range(1, repetitions + 1):
@@ -712,6 +717,8 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
                 climb = int(record["force_calls"])
                 saddle = None if record.get("positions") is None else np.asarray(record["positions"], dtype=np.float64).reshape(-1, 3)
                 record["reasons"] = list(record.get("reasons") or [])
+                plus_ep = None
+                minus_ep = None
                 if record["success"] and saddle is not None and record.get("lowest_mode"):
                     axis = np.asarray(record["lowest_mode"], dtype=np.float64)
                     axis = axis / np.linalg.norm(axis)
@@ -742,6 +749,8 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
                     record["rmsd_minus"] = minus_rmsd
                     record["per_atom_max_plus"] = per_atom_max(plus, minimum, box)
                     record["per_atom_max_minus"] = per_atom_max(minus, minimum, box)
+                    plus_ep = plus[free]
+                    minus_ep = minus[free]
                     record["endpoint_calls"] = int(plus_calls + minus_calls)
                     record["force_calls"] = climb + int(plus_calls + minus_calls)
                     record["reasons"] = []
@@ -763,6 +772,8 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
                 search_calls += int(record["force_calls"])
                 record.pop("positions", None)
                 record.pop("lowest_mode", None)
+                status = archive.add(minimum[free], plus_ep, minus_ep)
+                stamp_endpoint(record, archive.name, archive.count - 1, status)
                 records.append(record)
         total_calls = int(minimize_calls + search_calls)
         if connected < goal:
@@ -785,6 +796,7 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
     endpoint_budget = 2000
     search_cap = int(budget) + 2 * endpoint_budget
     from optbench.score import score_v2
+    from optbench.v2 import collect_provenance
 
     metrics = (
         score_v2(
@@ -824,6 +836,7 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
     if metrics is not None:
         text += f"par2_mean {metrics['par2_mean']}\nv2_nfailed {metrics['nfailed']}\n"
     output.parent.mkdir(parents=True, exist_ok=True)
+    archive.save()
     output.write_text(text, encoding="utf-8")
     # The board scores one row per search. The repetition total above is
     # the cost of the searches that were run, including misses.
@@ -832,6 +845,46 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
         encoding="utf-8",
     )
     write_starts(output.with_suffix(".starts.jsonl"), records)
+    if metrics is not None:
+        successes = [int(row["force_calls"]) for row in records if row["success"]]
+        legacy = {
+            "successes": len(successes),
+            "nfailed": len(records) - len(successes),
+            "n": len(records),
+            "transition_states": sum(1 for row in records if row.get("endpoint_status") == STATUS_STORED),
+        }
+        if successes:
+            legacy["force_calls"] = int(round(statistics.fmean(successes)))
+            legacy["force_calls_min"] = min(successes)
+            legacy["force_calls_max"] = max(successes)
+            legacy["force_calls_median"] = statistics.median(successes)
+        document = {
+            "schema": "optbench.score/v2",
+            "problem": problem["id"],
+            "template": template["id"],
+            "counter": "harness",
+            "provenance": collect_provenance(
+                code=str(template.get("code", CODE)),
+                code_version=str(template.get("code_version", "")),
+                commit=str(template.get("commit", "")),
+                parameters={
+                    "cap": search_cap,
+                    "counter": "harness",
+                    "geometry": "tau_sad",
+                    "goal": goal,
+                    "max_searches": max_searches,
+                    "search_budget": budget,
+                    "distance_difference": tolerance,
+                },
+            ),
+            "score": metrics,
+            "legacy": legacy,
+        }
+        output.with_suffix(".v2.json").write_text(
+            json.dumps(document, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+    archive.drop_log()
     return {
         "force_calls": statistics.fmean(totals) if totals else None,
         "nfailed": failed_reps,
