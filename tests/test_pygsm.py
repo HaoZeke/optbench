@@ -75,6 +75,15 @@ def test_template_matches_the_registry_pin():
     assert "+            if np.abs(gts) > np.abs(max_step):" in diff
 
 
+def test_a_broken_delocalized_basis_is_divergence():
+    from optbench.pygsm_band import _numeric_failure
+
+    assert _numeric_failure(RuntimeError("error in orthonormality"))
+    assert _numeric_failure(np.linalg.LinAlgError("Eigenvalues did not converge"))
+    assert _numeric_failure(ValueError("array must not contain infs or NaNs"))
+    assert _numeric_failure(RuntimeError("missing import")) is False
+
+
 def test_largest_nearest_neighbour_is_the_worst_contact():
     coords = np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [4.0, 0.0, 0.0]], dtype=np.float64)
     assert largest_nearest_neighbour(coords) == 3.0

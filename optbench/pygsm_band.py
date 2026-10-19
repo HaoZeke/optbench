@@ -178,6 +178,12 @@ def ensure_runtime() -> None:
     _PATCHED = True
 
 
+def _numeric_failure(exc: BaseException) -> bool:
+    """True when pyGSM lost a finite coordinate step."""
+    text = str(exc)
+    return isinstance(exc, np.linalg.LinAlgError) or "infs or NaNs" in text or "error in orthonormality" in text
+
+
 def largest_nearest_neighbour(coords: np.ndarray) -> float:
     """Largest nearest-neighbour distance. Sigma is 1 for this Lennard-Jones cluster."""
     points = np.asarray(coords, dtype=np.float64).reshape(-1, 3)
@@ -574,10 +580,10 @@ def search_pair(
                 pass
             except Exception as exc:
                 # A zero internal step divides by zero and the rotation
-                # matrix becomes non-finite. That is the search leaving
+                # matrix becomes non-finite. orthogonalize then raises
+                # "error in orthonormality". That is the search leaving
                 # the real line, which is divergence.
-                numeric = isinstance(exc, np.linalg.LinAlgError) or "infs or NaNs" in str(exc)
-                if numeric:
+                if _numeric_failure(exc):
                     diverged = True
                 else:
                     crashed = type(exc).__name__
