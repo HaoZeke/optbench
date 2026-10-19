@@ -971,6 +971,9 @@ def _matches_hold(row: dict, held) -> bool:
     template = str(row.get("template") or "")
     if template and (problem, template) in held.templates:
         return True
+    version = str(row.get("code_version") or "")
+    if template and version and (problem, template, version) in held.versions:
+        return True
     paths = [part.strip() for part in str(row.get("path") or "").split(";") if part.strip()]
     return any(path in held.paths for path in paths)
 

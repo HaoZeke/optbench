@@ -1,0 +1,34 @@
+force_calls 34
+force_calls_min 17
+force_calls_median 33
+force_calls_max 47
+nfailed 0
+starts 100
+code ASE
+code_version 3.19.1
+commit 0ef71ac51a36007ca631143c0016ba58c55d71a7
+algorithm PreconLBFGS
+profile tuned
+template ase/morse-preconlbfgs-tuned
+problem minimization/morse-bulk
+counter harness
+reducer capped
+parameter_source archive
+method {"counter":"harness attach_ase_counter","parameter_source":"archive","parameters":{"alpha":70.0,"c1":0.23,"c2":0.46,"damping":1.0,"maxstep":0.1,"memory":100,"precon":"Exp A=3.0","use_armijo":true},"potential":{"D":0.7102,"alpha":1.6047,"calculator":"tsase","form":"shift","kind":"morse","pbc":[true,true,true],"r0":2.897,"rc":9.5},"profile":"tuned","reducer":"capped","stop":{"force_norm":0.01,"max_force_calls":10000,"max_steps":10000,"norm":"fmax"}}
+note Archive minimization/morse-bulk/ase-preconLBFGS/opt.py builds Exp with A 3 and PreconLBFGS maxstep 0.1, then stops on ASE fmax 0.01. The calculator is tsase Morse with rc 9.5. The row was archived on 17 Jun 2020, when ASE 3.19.1 was the release. report.sh averages calc.force_calls and counts a failure only when that total is at least 10000. The force_calls column is tsase calc.force_calls from ASE 3.19.1. report.sh counts a failure only when that total is at least 10000. A Hessian index is not part of that count.
+host cursor
+date 2026-10-19
+contributor Rohit Goswami
+scoring par2-wilson-bootstrap
+par2_mean 33.53
+par2_median 33
+par2_median_low 31.5
+par2_median_high 35.5
+par2_iqr 8
+success_rate 1
+wilson_low 0.9630065018
+wilson_high 1
+par_applied true
+par_factor 2
+bootstrap_resamples 2000
+bootstrap_seed 20261015

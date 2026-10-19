@@ -13,6 +13,9 @@ from pathlib import Path
 ASE_VERSION = "3.29.0"
 ASE_COMMIT = "f27c0005ae6a67ea419f996e728668865bfc1f86"
 ASE_REPOSITORY = "https://gitlab.com/ase/ase"
+# 17 Jun 2020 is between ASE 3.19.1 (4 Apr 2020) and 3.19.2 (22 Jul 2020).
+ASE_319_VERSION = "3.19.1"
+ASE_319_COMMIT = "0ef71ac51a36007ca631143c0016ba58c55d71a7"
 SELLA_VERSION = "2.6.0"
 SELLA_COMMIT = "6cfb60cdb100a146c3c6f0587d5308b247aa8010"
 SELLA_REPOSITORY = "https://github.com/zadorlab/sella"
@@ -263,19 +266,38 @@ def _minimization_specs() -> list[dict]:
                 else:
                     params, source, note = _tuned_minimizer(problem, name)
                 row_stop = stop
+                row_potential = potential
+                row_version = ASE_VERSION
+                row_commit = ASE_COMMIT
                 if (
                     problem == "minimization/lj38"
                     and name == "PreconLBFGS"
                     and profile == "tuned"
                 ):
                     row_stop = {**stop, "norm": "fmax"}
+                if (
+                    problem == "minimization/morse-bulk"
+                    and name == "PreconLBFGS"
+                    and profile == "tuned"
+                ):
+                    row_version = ASE_319_VERSION
+                    row_commit = ASE_319_COMMIT
+                    row_potential = {**potential, "rc": 9.5, "calculator": "tsase"}
+                    row_stop = {**stop, "norm": "fmax", "force_norm": 0.01}
+                    note = (
+                        "Archive minimization/morse-bulk/ase-preconLBFGS/opt.py builds Exp with A 3 "
+                        "and PreconLBFGS maxstep 0.1, then stops on ASE fmax 0.01. "
+                        "The calculator is tsase Morse with rc 9.5. "
+                        "The row was archived on 17 Jun 2020, when ASE 3.19.1 was the release. "
+                        "report.sh averages calc.force_calls and counts a failure only when that total is at least 10000."
+                    )
                 specs.append(
                     {
                         "id": f"ase/{slug}-{_opt_slug(name)}-{profile}",
                         "engine": "ase",
                         "code": "ASE",
-                        "code_version": ASE_VERSION,
-                        "commit": ASE_COMMIT,
+                        "code_version": row_version,
+                        "commit": row_commit,
                         "algorithm": name,
                         "problem": problem,
                         "task": "minimize",
@@ -285,7 +307,7 @@ def _minimization_specs() -> list[dict]:
                         "parameter_source": source,
                         "note": note,
                         "optimizer": {"name": name, "parameters": params},
-                        "potential": potential,
+                        "potential": row_potential,
                         "stop": row_stop,
                         "input": {"archive_path": archive, "select": select},
                     }

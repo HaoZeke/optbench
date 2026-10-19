@@ -47,6 +47,12 @@ def test_templates_match_the_catalog_and_registry():
         assert loaded["problem"] == spec["problem"]
         assert loaded["optimizer"]["name"]
         assert loaded["stop"]["max_force_calls"] > 0
+    morse_precon = load_template(ROOT, "ase/morse-preconlbfgs-tuned")
+    assert morse_precon["code_version"] == "3.19.1"
+    assert morse_precon["potential"]["calculator"] == "tsase"
+    assert morse_precon["potential"]["rc"] == 9.5
+    assert morse_precon["stop"]["norm"] == "fmax"
+    assert morse_precon["stop"]["force_norm"] == 0.01
     tuned = load_template(ROOT, "ase/lj38-lbfgs-tuned")
     assert tuned["optimizer"]["parameters"]["memory"] == 100
     assert abs(float(tuned["optimizer"]["parameters"]["alpha"]) - 1000.0) < 1e-9

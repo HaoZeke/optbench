@@ -816,7 +816,40 @@ def _cap_row(row: dict, atoms, message: str = "force-call cap") -> dict:
     return row
 
 
+def _run_tsase_morse_precon(payload: dict, bucket: CallCounter) -> dict:
+    """ASE 3.19.1 PreconLBFGS counted by the archived tsase calculator."""
+    from .ase319_morse import run_start
+
+    potential = payload["potential"]
+    parameters = dict((payload.get("optimizer") or {}).get("parameters") or {})
+    precon = parameters.get("precon") or {}
+    row = {"failed": True, "force_norm": None}
+    try:
+        result = run_start(
+            payload["paths"][0],
+            rc=float(potential["rc"]),
+            fmax=float(payload["tol"]),
+            maxstep=float(parameters.get("maxstep", 0.1)),
+            amplitude=float(precon.get("A", 3.0)),
+            max_steps=int(payload["max_steps"]),
+        )
+    except Exception as exc:
+        row["error"] = f"{type(exc).__name__}: {exc}"[:500]
+        return row
+    calls = int(result["force_calls"])
+    bucket.harness.calls = calls
+    bucket.state["calls"] = calls
+    row["force_norm"] = float(result["fmax"])
+    row["energy"] = float(result["energy"])
+    row["failed"] = calls >= bucket[1] or row["force_norm"] > float(payload["tol"])
+    if payload.get("snapshot"):
+        row["parameters"] = result["parameters"]
+    return row
+
+
 def _run_minimize(payload: dict, bucket: CallCounter) -> dict:
+    if payload.get("potential", {}).get("calculator") == "tsase":
+        return _run_tsase_morse_precon(payload, bucket)
     atoms = _attach(_read_atoms(Path(payload["paths"][0])), payload["potential"], bucket)
     opt = _build_optimizer(payload["optimizer"], atoms)
     row = {"failed": True, "force_norm": None, "expected_index": 0}
@@ -1378,7 +1411,14 @@ def _write_dat(
         "stop": template.get("stop") or {},
     }
     note = template.get("note", "")
-    if template["task"] in {"minimize", "sella", "sella-search", "dimer"}:
+    if (template.get("potential") or {}).get("calculator") == "tsase":
+        note = (
+            note
+            + " The force_calls column is tsase calc.force_calls from ASE 3.19.1."
+            + " report.sh counts a failure only when that total is at least 10000."
+            + " A Hessian index is not part of that count."
+        ).strip()
+    elif template["task"] in {"minimize", "sella", "sella-search", "dimer"}:
         note = (
             note
             + " v2 success is the harness cap, the stop norm, and the Hessian index"

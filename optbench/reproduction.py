@@ -147,7 +147,13 @@ MATCHES: list[dict] = [
     {"key": "minimization/morse-bulk/pele-lbfgs", "template": "pele/morse-lbfgs", "branch": "cells/pele/min", "path": "results/campaign/pele-b7081b93-morse-lbfgs.dat", "cause": "pele_morse"},
     {"key": "minimization/morse-bulk/ase-lbfgs", "template": "ase/morse-lbfgs-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-morse-lbfgs-tuned.dat", "cause": "ase_morse_script"},
     {"key": "minimization/morse-bulk/ase-fire", "template": "ase/morse-fire-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-morse-fire-tuned.dat", "cause": "ase_morse_script"},
-    {"key": "minimization/morse-bulk/ase-preconLBFGS", "template": "ase/morse-preconlbfgs-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-morse-preconlbfgs-tuned.dat", "cause": "ase_morse_script"},
+    {
+        "key": "minimization/morse-bulk/ase-preconLBFGS",
+        "template": "ase/morse-preconlbfgs-tuned",
+        "branch": "repro/minimization-morse-bulk-ase-preconlbfgs",
+        "path": "results/campaign/ase-3.19.1-morse-preconlbfgs-tuned.dat",
+        "extra": {"hold_versions": ["3.29.0"]},
+    },
     # lowest eigenvector
     {"key": "lowest-eigenvector/lj38/eon-dimer-cg", "template": "eon-client/low-lj38-dimer-cg", "branch": "main", "path": "results/campaign/eon-client-low-lj38-dimer-cg.dat"},
     {"key": "lowest-eigenvector/lj38/eon-dimer-lbfgs", "template": "eon-client/low-lj38-dimer-lbfgs", "branch": "main", "path": "results/campaign/eon-client-low-lj38-dimer-lbfgs.dat"},
@@ -225,8 +231,8 @@ CAUSE_TEXT = {
         "Dimer and climbing-image on that kernel reproduce. Lanczos does not, and the failure count is 0 against 5 or 8."
     ),
     "ase_morse_script": (
-        "ASE 3.29 with the archived Morse script (L-BFGS memory 20, maxstep 0.2, alpha 25; FIRE maxstep 0.2; PreconLBFGS Exp A 3) "
-        "scores 32, 113, and 29 against 53.8, 147.47, and 34. "
+        "ASE 3.29 with the archived Morse script (L-BFGS memory 20, maxstep 0.2, alpha 25; FIRE maxstep 0.2) "
+        "scores 32 and 113 against 53.8 and 147.47. "
         "Constructor-default L-BFGS scores 53, next to 53.8, but that is not the archived alpha and memory. "
         "eOn Morse L-BFGS and FIRE on the same bulk file reproduce, so the geometry set is not the split."
     ),
@@ -499,9 +505,10 @@ class Hold:
     def __init__(self) -> None:
         self.templates: set[tuple[str, str]] = set()
         self.paths: set[str] = set()
+        self.versions: set[tuple[str, str, str]] = set()
 
     def __bool__(self) -> bool:
-        return bool(self.templates or self.paths)
+        return bool(self.templates or self.paths or self.versions)
 
 
 def holdback(root: Path) -> Hold:
@@ -523,6 +530,10 @@ def holdback(root: Path) -> Hold:
                 found.paths.add(rel)
         for extra in rerun.get("hold") or []:
             found.templates.add((problem, str(extra)))
+        template = str(rerun.get("template") or "")
+        for version in rerun.get("hold_versions") or []:
+            if template:
+                found.versions.add((problem, template, str(version)))
     return found
 
 
