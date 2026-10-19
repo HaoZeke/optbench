@@ -16,7 +16,7 @@
       "current": false,
       "entry": "pele-b7081b93-lj75-basinhopping",
       "failures": {
-        "cap": 25,
+        "cap": 39,
         "crash": 0,
         "divergence": 0,
         "wrong_stationary": 0
@@ -24,7 +24,7 @@
       "full_n": null,
       "history": false,
       "max_calls": 3000000.0,
-      "mean_calls": 2950242.5,
+      "mean_calls": 2967657.625,
       "mean_per_image": null,
       "median": 6000000.0,
       "median_calls": 3000000.0,
@@ -32,10 +32,10 @@
       "median_low": 6000000.0,
       "median_per_image": null,
       "min_calls": 1706305.0,
-      "n": 26,
-      "nfailed": 25,
+      "n": 40,
+      "nfailed": 39,
       "note": "starts.jsonl",
-      "par2_mean": 5834857.884615385,
+      "par2_mean": 5892657.625,
       "partial": true,
       "partial_reason": "result file sets partial true",
       "path": "results/campaign/pele-b7081b93-lj75-basinhopping.dat",
@@ -43,11 +43,11 @@
       "registry_match": true,
       "scored": true,
       "source": "campaign",
-      "success_rate": 0.038461538461538464,
+      "success_rate": 0.025,
       "template": "pele/lj75-basinhopping",
       "tuning": "default",
-      "wilson_high": 0.18892778903034757,
-      "wilson_low": 0.006821984993543487
+      "wilson_high": 0.1288136896347409,
+      "wilson_low": 0.0044268315026814095
     }
   ],
   "ranked": [],
