@@ -1,0 +1,24 @@
+# eOn (develop a7aa57472fb7). HarnessCounter through ext_pot. Kernel morse_pt cutoff 9.5.
+# Stock SD two-point. Archived alpha 0.04, twopoint true, max_move 0.2, converged_force 0.001.
+# No convergence_metric and no max_iterations.
+counter harness
+code eOn (develop a7aa57472fb7)
+code_version a7aa57472fb7
+commit a7aa57472fb7d823953fd36b78cd755fa4842d30
+algorithm SD-twopoint
+tuning default
+template eon-develop-a7aa574/morse-sd-twopoint
+problem minimization/morse-bulk
+reducer harness
+cap 10000
+n 100
+par2_mean 64.46
+nfailed 0
+mean_calls 64.46
+median_calls 62.5
+min_calls 28.0
+max_calls 138.0
+n_crash 0
+n_divergence 0
+n_cap 0
+n_wrong_stationary 0

@@ -7,11 +7,13 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>EON (SVN r2549)</th><th>eOn (develop a7aa57472fb7)</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="minimization/lj38">
    <th scope="row"><a href="#lj38">Lennard-Jones 38 clusters</a></th>
    <td data-code="eOn" data-template="eon/lj38-lbfgs-m100" data-par2="180.137"><span class="bench-score">180.137</span><a href="#lj38-templates">eon/lj38-lbfgs-m100</a></td>
    <td data-code="Eon svn">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
+   <td data-code="eOn (develop a7aa57472fb7)">—</td>
    <td data-code="rgmin" data-template="rgmin/lj38-dogleg" data-par2="81.881"><span class="bench-score">81.881</span><a href="#lj38-templates">rgmin/lj38-dogleg</a></td>
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE" data-template="ase/lj38-lbfgs-tuned" data-par2="395.645"><span class="bench-score">395.645</span><a href="#lj38-templates">ase/lj38-lbfgs-tuned</a></td>
@@ -28,6 +30,8 @@
    <th scope="row"><a href="#lj38-noise">Lennard-Jones 38 clusters with Gaussian force noise</a></th>
    <td data-code="eOn">—</td>
    <td data-code="Eon svn" data-template="eon-svn/lj38-noise-0" data-par2="300.052"><span class="bench-score">300.052</span><a href="#lj38-noise-templates">eon-svn/lj38-noise-0</a></td>
+   <td data-code="EON (SVN r2549)">—</td>
+   <td data-code="eOn (develop a7aa57472fb7)">—</td>
    <td data-code="rgmin" data-template="noise/rgmin-dogleg-s0" data-par2="81.881"><span class="bench-score">81.881</span><a href="#lj38-noise-templates">noise/rgmin-dogleg-s0</a></td>
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE" data-template="noise/ase-lbfgs-s0" data-par2="396.55"><span class="bench-score">396.55</span><a href="#lj38-noise-templates">noise/ase-lbfgs-s0</a></td>
@@ -44,6 +48,8 @@
    <th scope="row"><a href="#morse-bulk">Morse bulk</a></th>
    <td data-code="eOn" data-template="eon/morse-lbfgs-m100" data-par2="54.18"><span class="bench-score">54.18</span><a href="#morse-bulk-templates">eon/morse-lbfgs-m100</a></td>
    <td data-code="Eon svn">—</td>
+   <td data-code="EON (SVN r2549)" data-template="eon-svn-r2549/morse-sd-twopoint" data-par2="64.46"><span class="bench-score">64.46</span><a href="#morse-bulk-templates">eon-svn-r2549/morse-sd-twopoint</a></td>
+   <td data-code="eOn (develop a7aa57472fb7)" data-template="eon-develop-a7aa574/morse-sd-twopoint" data-par2="64.46"><span class="bench-score">64.46</span><a href="#morse-bulk-templates">eon-develop-a7aa574/morse-sd-twopoint</a></td>
    <td data-code="rgmin" data-template="rgmin/morse-newton" data-par2="8.35"><span class="bench-score">8.35</span><a href="#morse-bulk-templates">rgmin/morse-newton</a></td>
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE" data-template="ase/morse-bfgslinesearch-default" data-par2="28.91"><span class="bench-score">28.91</span><a href="#morse-bulk-templates">ase/morse-bfgslinesearch-default</a></td>
@@ -670,11 +676,11 @@
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">Eon svn rows are not yet on the harness counter. Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
+   <p class="bench-gaps">Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
    <figure class="bench-plot"><a href="../../_static/board/minimization-morse-bulk-profile.svg"><picture><source srcset="../../_static/board/minimization-morse-bulk-profile.webp" type="image/webp"><img src="../../_static/board/minimization-morse-bulk-profile.png" alt="Dolan-More profile for minimization/morse-bulk" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/minimization-morse-bulk-cost.svg"><picture><source srcset="../../_static/board/minimization-morse-bulk-cost.webp" type="image/webp"><img src="../../_static/board/minimization-morse-bulk-cost.png" alt="Cost versus success for minimization/morse-bulk" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="morse-bulk-templates">
-   <summary>All templates (89 ranked)</summary>
+   <summary>All templates (91 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="minimization/morse-bulk">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
@@ -734,6 +740,8 @@
    <tr><td data-field="template">rgmin/morse-quickmin</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">f15726f1c798</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">61.75</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">61</td><td data-field="mean_calls">61.75</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-quickmin-tuned</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">61.75</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">61</td><td data-field="mean_calls">61.75</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-quickmin-tuned</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">f15726f1c798</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">61.75</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">61</td><td data-field="mean_calls">61.75</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">eon-develop-a7aa574/morse-sd-twopoint</td><td data-field="version">eOn (develop a7aa57472fb7) a7aa57472fb7</td><td data-field="commit">a7aa57472fb7</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">64.46</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">62.5</td><td data-field="mean_calls">64.46</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">eon-svn-r2549/morse-sd-twopoint</td><td data-field="version">EON (SVN r2549) r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">64.46</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">62.5</td><td data-field="mean_calls">64.46</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-bfgs</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">70.53</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">71</td><td data-field="mean_calls">70.53</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-bfgs-tuned</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">70.53</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">71</td><td data-field="mean_calls">70.53</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-bfgs-tuned</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">f15726f1c798</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">70.53</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">71</td><td data-field="mean_calls">70.53</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
@@ -807,7 +815,6 @@
    <li>ase/morse-fire-tuned ASE campaign, asv n=100, does not reproduce the 2014 archive.</li>
    <li>ase/morse-lbfgs-tuned ASE campaign, asv n=100, does not reproduce the 2014 archive.</li>
    <li>ase/morse-preconlbfgs-tuned ASE campaign, asv n=100, does not reproduce the 2014 archive.</li>
-   <li>eon-svn/morse-sd-twopoint Eon svn campaign n=100, does not reproduce the 2014 archive.</li>
    <li>ase/morse-preconode12r-tuned ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
    <li>ase/morse-bfgs-default ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
    <li>ase/morse-bfgslinesearch-default ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
@@ -824,9 +831,6 @@
    <li>sella/morse-min-default Sella asv n=1, smoke run; scored 1 of 100 starts.</li>
    <li>ase/morse-lbfgs-tuned ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
    <li>ase/morse-preconlbfgs-tuned ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
-   </ul>
-   <h3>Not a harness score</h3><ul>
-   <li>eon-svn/morse-sd-twopoint-current-svn Eon svn n=100, not yet on the harness counter.</li>
    </ul>
    <h3>Not scored</h3><ul>
    <li>eon-client/morse-cg: no per-start record</li>
@@ -926,7 +930,7 @@
    </tr>
    <tr id="minimization-morse-bulk-eon-sd-twopoint">
    <td class="num">7</td>
-   <td class="text">eon-sd-twopoint · not reproduced</td>
+   <td class="text">eon-sd-twopoint</td>
    <td class="text">Eon r2030</td>
    <td class="num">64</td>
    <td class="num">138</td>

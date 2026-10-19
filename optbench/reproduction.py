@@ -111,7 +111,6 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
-    "repro/minimization-morse-bulk-eon-sd-twopoint": "6243440f71318cf24470330a4c6d16eefe2505fd",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -144,7 +143,6 @@ MATCHES: list[dict] = [
     {"key": "minimization/morse-bulk/eon-cg", "template": "eon-client/morse-cg", "branch": "main", "path": "results/campaign/eon-client-morse-cg.dat"},
     {"key": "minimization/morse-bulk/eon-fire", "template": "eon-client/morse-fire", "branch": "main", "path": "results/campaign/eon-client-morse-fire.dat"},
     {"key": "minimization/morse-bulk/eon-sd", "template": "eon-client/morse-sd", "branch": "main", "path": "results/campaign/eon-client-morse-sd.dat", "cause": "morse_sd"},
-    {"key": "minimization/morse-bulk/eon-sd-twopoint", "template": "eon-svn/morse-sd-twopoint", "branch": "repro/minimization-morse-bulk-eon-sd-twopoint", "path": "results/campaign/eon-svn-morse-sd-twopoint.dat", "cause": "morse_sd_twopoint_r2030"},
     {"key": "minimization/morse-bulk/optim", "template": "optim/morse-lbfgs-tuned", "branch": "cells/optim/min", "path": "results/campaign/optim-02aaf45245af-morse-lbfgs-tuned.dat", "cause": "optim_morse_memory"},
     {"key": "minimization/morse-bulk/pele-lbfgs", "template": "pele/morse-lbfgs", "branch": "cells/pele/min", "path": "results/campaign/pele-b7081b93-morse-lbfgs.dat", "cause": "pele_morse"},
     {"key": "minimization/morse-bulk/ase-lbfgs", "template": "ase/morse-lbfgs-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-morse-lbfgs-tuned.dat", "cause": "ase_morse_script"},
@@ -252,17 +250,6 @@ CAUSE_TEXT = {
     "pele_fire": "pele FIRE on LJ38 scores 1264 with 7 failures. The archive is 709 with 0 failures. The M100 L-BFGS row on the same build reproduces, so this is the FIRE step, not the LJ kernel.",
     "pele_morse": "pele Morse L-BFGS scores 92. The archive is 51. eOn Morse L-BFGS on the same bulk file reproduces at 52, so the gap is the pele memory and step, not the shared Morse parameters.",
     "morse_sd": "eOn Morse steepest descent scores 7038 with 19 failures. The archive is 196 with 0. Morse L-BFGS, CG, and FIRE on the same client reproduce, so the kernel is not the split.",
-    "morse_sd_twopoint_r2030": (
-        "SVN r2030 (TheochemUI/eon c0bf0fe5) built with Fortran. "
-        "The archived config.ini was copied unchanged. That revision reads sd_alpha and sd_twopoint from [Optimizer], the same section as the file. "
-        "It has no convergence_metric key. The stop is the maximum per-atom force below 1e-3, and max_iterations stays at the default 1000. "
-        "The longest start used 36 calls, so that cap did not bind. "
-        "100 starts, 0 failures. The half-even mean is 28 (unrounded 27.96), min 20, max 36. The archive is 64, min 28, max 138, 0 failures. "
-        "The r2030 tree still names QSC after that directory was removed; those sources were restored from the parent of 548b108ed so the client links. "
-        "A set comparator in HelperFunctions was marked const so g++ 13 accepts it. Morse and the steepest-descent step were not edited. "
-        "A separate current-SVN r2549 row, template eon-svn/morse-sd-twopoint-current-svn, uses the later Euclidean-norm stop and max_iterations 10000 and scores 64. "
-        "That row is not this revision and was not used to change the r2030 run."
-    ),
     "improved_unset": "The r2549 template turns improved on. The 2014 ini left that key unset. The mean lands outside 10 percent.",
     "sella_trust": "Sella 2.6.0 with the archived trust-region numbers (eta, gamma, delta0, rho, sigma) is the parameter_source=archive row. It misses the 2014 mean. The constructor-default row is a different setup.",
     "heptamer_cg": "The 3.5.0 file already stores the per-image mean, 142 against the archive 120. L-BFGS, FIRE, and QM on the same 8-image spring-5 climb reproduce, so the image count is not the split.",

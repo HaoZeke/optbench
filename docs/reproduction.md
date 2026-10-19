@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 30 not reproduced, 75 not rerun. 151 archive rows.
+46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -139,7 +139,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | morse-bulk/eon-fire | force_calls 156 | 156 | reproduced |
 | morse-bulk/eon-lbfgs | force_calls 52 | 52 | reproduced |
 | morse-bulk/eon-sd | force_calls 196 | 7038 | not reproduced; morse_sd |
-| morse-bulk/eon-sd-twopoint | force_calls 64 | 28 | not reproduced; morse_sd_twopoint_r2030 |
+| morse-bulk/eon-sd-twopoint | — | — | not rerun |
 | morse-bulk/optim | force_calls 46 | 27 | not reproduced; optim_morse_memory |
 | morse-bulk/pele-lbfgs | force_calls 51 | 92 | not reproduced; pele_morse |
 | morse-bulk/tsase-sdlbfgs | — | — | not rerun |
@@ -312,12 +312,6 @@ ASE 3.29 with the archived Morse script (L-BFGS memory 20, maxstep 0.2, alpha 25
 eOn Morse steepest descent scores 7038 with 19 failures. The archive is 196 with 0. Morse L-BFGS, CG, and FIRE on the same client reproduce, so the kernel is not the split.
 
 - minimization/morse-bulk/eon-sd
-
-### morse_sd_twopoint_r2030
-
-SVN r2030 (TheochemUI/eon c0bf0fe5) built with Fortran. The archived config.ini was copied unchanged. That revision reads sd_alpha and sd_twopoint from [Optimizer], the same section as the file. It has no convergence_metric key. The stop is the maximum per-atom force below 1e-3, and max_iterations stays at the default 1000. The longest start used 36 calls, so that cap did not bind. 100 starts, 0 failures. The half-even mean is 28 (unrounded 27.96), min 20, max 36. The archive is 64, min 28, max 138, 0 failures. The r2030 tree still names QSC after that directory was removed; those sources were restored from the parent of 548b108ed so the client links. A set comparator in HelperFunctions was marked const so g++ 13 accepts it. Morse and the steepest-descent step were not edited. A separate current-SVN r2549 row, template eon-svn/morse-sd-twopoint-current-svn, uses the later Euclidean-norm stop and max_iterations 10000 and scores 64. That row is not this revision and was not used to change the r2030 run.
-
-- minimization/morse-bulk/eon-sd-twopoint
 
 ### optim_morse_memory
 

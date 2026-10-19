@@ -1,0 +1,22 @@
+id = "eon-svn-r2549/morse-sd-twopoint"
+engine = "eon-client"
+problem = "minimization/morse-bulk"
+code = "EON (SVN r2549)"
+code_version = "r2549"
+commit = "r2549"
+algorithm = "SD-twopoint"
+tuning = "default"
+note = "Stock steepest descent, two-point step, on the archived Morse bulk stop. sd_alpha 0.04 and sd_twopoint true are the [Optimizer] keys this code reads. converged_force is 0.001 and max_move is 0.2. convergence_metric and max_iterations stay at the code defaults, norm and 1000. Fortran build, sources unpatched."
+
+[ini.Main]
+job = "minimization"
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "sd"
+sd_alpha = 0.04
+sd_twopoint = true
+max_move = 0.2
+converged_force = 0.001

@@ -1,9 +1,0 @@
-force_calls 28
-force_calls_min 20
-force_calls_max 36
-nfailed 0
-code Eon svn
-code_version r2030
-algorithm SD-twopoint
-template eon-svn/morse-sd-twopoint
-problem minimization/morse-bulk
