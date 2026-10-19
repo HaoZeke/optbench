@@ -1192,7 +1192,7 @@
       "failures": {
         "cap": 0,
         "crash": 13,
-        "divergence": 186,
+        "divergence": 187,
         "wrong_stationary": 0
       },
       "full_n": null,
@@ -1207,9 +1207,9 @@
       "median_per_image": null,
       "min_calls": 306.0,
       "n": 200,
-      "nfailed": 199,
+      "nfailed": 200,
       "note": "starts.jsonl",
-      "par2_mean": 11944.625,
+      "par2_mean": 12000.0,
       "partial": false,
       "partial_reason": "",
       "path": "results/campaign/artn-1.1.0-saddle-search-pt-island--partn-saddle-pt.dat",
@@ -1217,11 +1217,11 @@
       "registry_match": true,
       "scored": true,
       "source": "campaign",
-      "success_rate": 0.005,
+      "success_rate": 0.0,
       "template": "partn/saddle-pt",
       "tuning": "optbench-pt111",
-      "wilson_high": 0.02777370439789293,
-      "wilson_low": 0.0008831687156009814
+      "wilson_high": 0.018845326377266575,
+      "wilson_low": 0.0
     }
   ],
   "title": "Pt heptamer island"

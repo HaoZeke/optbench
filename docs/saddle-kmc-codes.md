@@ -22,7 +22,7 @@ success-only median. A row with no success has no median.
 | lowest-eigenvector/lj38 | partn/mode-lj38 | 174/200 | 26 divergence | 22 |
 | tsopt/pt-island | partn/ts-pt | 49/49 | 0 | 325 |
 | tsopt/LJ38 | partn/ts-lj38 | 178/200 | 21 cap, 1 crash | 3302 |
-| saddle-search/pt-island | partn/saddle-pt | 1/200 | 186 divergence, 13 crash | 925 |
+| saddle-search/pt-island | partn/saddle-pt | 0/200 | 187 divergence, 13 crash | — |
 | lowest-eigenvector/lj38 | tsase/mode-lj38 | 178/200 | 22 divergence | 221.5 |
 | tsopt/pt-island | tsase/dimer-pt | 49/49 | 0 | 892 |
 | tsopt/LJ38 | tsase/dimer-lj38 | 0/200 | 200 cap | — |
@@ -209,21 +209,32 @@ FIRE timestep. `search_budget` is 2000, the authors' `minimize` maxeval.
 `fire_dt_max_f` is 2. The authors also set LAMMPS `dmax` 8, which this
 loop cannot set. Two hundred searches from the script's in-plane push
 (1 to 7 of atoms 0-6, length 0.05 to 0.5) stored 187 index-1 saddles.
-Thirteen searches crashed with `EIGENVALUE LOST`. The stored row used
-Cartesian RMSD 0.5 over the 175 free atoms. One search meets that test:
-barrier 0.996 eV, 925 calls, endpoint RMSD 0.318 and 0.519. The
-repetition total is 154419, with 3 unique saddles and fraction connected
-0.005. The success median is 925. The other 186 are divergence. Ten
-searches have an endpoint RMSD above 0.5. The other nine of those repeat
-a stored saddle or have a barrier of at least 1.5 eV. The common products
-sit near RMSD 0.22 and 0.32, so both endpoints fall inside 0.5. A pure
-2.71 Å hop of one atom is RMSD 2.71/sqrt(175), about 0.205, and the same
-test calls it the reactant. The starts file stores those RMSD scalars and
-not the endpoint coordinates, so the row was not rescored. The ranked row
-is one record per search, with cap 6000 (the pARTn budget plus the two
-endpoint budgets of 2000). The PAR-2 mean is 11944.625. The OptBench
-catalogue calls a saddle connected when the nearer minimum's `delr` is
-under 0.5. That is a different test from either harness link.
+Thirteen searches crashed with `EIGENVALUE LOST`. The repetition total
+is 154419, with 3 unique saddles. The ranked row is one record per
+search, cap 6000 (the pARTn budget plus the two endpoint budgets of
+2000).
+
+The first stored row judged the link by Cartesian RMSD 0.5 over the 175
+free atoms. `rep1-search5` met that test: barrier 0.9963657039054397 eV,
+925 calls, endpoint RMSD 0.31796842501566397 and 0.5187456319245781.
+Fraction connected was 0.005 and the PAR-2 mean was 11944.625. The same
+200 searches were rerun under the eOn r2205 link, with the same template.
+The repetition total is 154419 again. Connected is 0 of 200,
+`fraction_connected` is 0.0, and the PAR-2 mean is 12000.0. Failures are
+187 divergence and 13 crash. There is no success, so there is no success
+median.
+
+`rep1-search5` now stores per-atom maxima 1.5927587365713207 and
+4.171209680571467. Both endpoints differ from the reactant, so the r2205
+test counts it not connected. Of the 187 searches with stored endpoints,
+49 are not connected and 138 have exactly one matching endpoint. The
+only novel linked saddle is `rep1-search1`, barrier 1.8580995421641546 eV,
+above the 1.5 eV goal. The other 137 linked searches fall inside the 0.5
+novelty RMSD of a saddle already stored. `rep1-search11` is the third
+unique saddle: per-atom maxima 4.600110085030538 and 3.21627565547626,
+barrier 1.623944584138144 eV. The OptBench catalogue calls a saddle
+connected when the nearer minimum's `delr` is under 0.5. That is a
+different test from either harness link.
 
 ## Pt-island endpoint link
 
@@ -250,11 +261,12 @@ Two minima are the same when that maximum is strictly below 0.1 Å. A
 search is connected when exactly one endpoint matches. `rmsd_connect` 0.5
 stays the saddle-novelty test and is not this link.
 
-No saddle-search/pt-island row stores `minimum`, `endpoint_plus`, and
-`endpoint_minus`. RMSD scalars do not determine the per-atom maximum, so
-nothing was rewritten and no campaign was rerun. The new connected count
-and the new PAR-2 are the stored values. `pykmc/lattice` writes nothing,
-so there is no pyKMC row to rescore. The MATLAB smoke in
+The pARTn row is that rerun. Both endpoint minima are in
+`artn-1.1.0-saddle-search-pt-island--partn-saddle-pt.endpoints.npz`
+(187 finite endpoint pairs, 13 `not_minimized` crash rows). The other
+saddle-search/pt-island rows still have no endpoint coordinates, so
+their connected counts and PAR-2 are unchanged. `pykmc/lattice` writes
+nothing, so there is no pyKMC row to rescore. The MATLAB smoke in
 `softsaddle/entry.toml` records two searches and does not store endpoint
 coordinates.
 
@@ -282,7 +294,7 @@ directory, outside the HTML tables.
 | rgsaddle/saddle-dimer-rotskip | absent; RMSD scalars on 19718 of 20000 | 0/20000 | 0/20000 | 10128 | 10128 |
 | rgsaddle/saddle-lanczos | absent; RMSD scalars on 4068 of 20000 | 0/20000 | 0/20000 | 10128 | 10128 |
 | rgsaddle/saddle-lanczos-tuned | absent; RMSD scalars on 13743 of 20000 | 0/20000 | 0/20000 | 10128 | 10128 |
-| partn/saddle-pt | absent; `geometry` is `tau_sad`; RMSD on 187 of 200 | 1/200 | 1/200 | 11944.625 | 11944.625 |
+| partn/saddle-pt | float32 free-atom endpoints; 187 stored, 13 not minimized | 1/200 | 0/200 | 11944.625 | 12000.0 |
 | ase/dimer-pt-island-default, campaign n=16 | absent | 16/16 | 16/16 | 1118.0625 | 1118.0625 |
 | ase/dimer-pt-island-tuned, campaign n=16 | absent | 16/16 | 16/16 | 915.4375 | 915.4375 |
 | ase/dimer-pt-island-default, asv n=1 | absent | 1/1 | 1/1 | 699 | 699 |
