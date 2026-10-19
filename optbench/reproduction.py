@@ -111,6 +111,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+    "repro/double-ended-saddle-search-lj38-optim-cl-string": "",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -177,6 +178,7 @@ MATCHES: list[dict] = [
     {"key": "double-ended-saddle-search/lj38/eon-lanczos", "template": "eon-client/de-lj38-lanczos", "branch": "main", "path": "results/campaign/eon-client-de-lj38-lanczos.dat"},
     {"key": "double-ended-saddle-search/lj38/eon-lanczos-improved", "template": "eon-client/de-lj38-lanczos-improved", "branch": "main", "path": "results/campaign/eon-client-de-lj38-lanczos-improved.dat"},
     {"key": "double-ended-saddle-search/lj38/optim", "template": "optim/de-lj38", "branch": "cells/optim/saddle-pt", "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-lj38--optim-de-lj38.dat", "cause": "optim_pes_counter"},
+    {"key": "double-ended-saddle-search/lj38/optim-cl-string", "template": "optim/cl-string-lj38", "branch": "repro/double-ended-saddle-search-lj38-optim-cl-string", "path": "results/campaign/optim-27058-cl-string-lj38.dat"},
     {"key": "double-ended-saddle-search/lj38_2ts_separation/optim", "template": "optim/de-2ts", "branch": "cells/optim/saddle-pt", "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-lj38_2ts_separation--optim-de-2ts.dat", "cause": "optim_pes_counter"},
     {"key": "double-ended-saddle-search/pt-island/eon-ci-neb", "template": "eon-svn/de-pt-ci-neb", "branch": "main", "path": "results/campaign/eon-svn-de-pt-ci-neb.dat"},
     {"key": "double-ended-saddle-search/pt-island/eon-ci-swdneb", "template": "eon-svn/de-pt-ci-swdneb", "branch": "main", "path": "results/campaign/eon-svn-de-pt-ci-swdneb.dat"},
@@ -471,6 +473,14 @@ def _sha(branch: str) -> str:
 
         SHA[branch] = subprocess.check_output(
             ["git", "rev-parse", "origin/cells/optim/saddle-pt"],
+            text=True,
+        ).strip()
+    if branch == "repro/double-ended-saddle-search-lj38-optim-cl-string" and len(SHA.get(branch, "")) < 12:
+        import subprocess
+
+        SHA[branch] = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"],
+            cwd=Path(__file__).resolve().parents[1],
             text=True,
         ).strip()
     if branch == "cells/pele/ts" and "cells/pele/ts" not in SHA:

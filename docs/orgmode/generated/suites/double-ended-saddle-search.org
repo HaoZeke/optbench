@@ -109,6 +109,7 @@
    <h3>Partial</h3><ul>
    <li>eon-client/de-lj38-ci-swdneb eOn campaign n=50, does not reproduce the 2014 archive.</li>
    <li>eon-svn/de-lj38-dimer Eon svn campaign n=50, does not reproduce the 2014 archive.</li>
+   <li>optim/cl-string-lj38 optim campaign n=50, result file sets ranked false.</li>
    <li>eon/develop-de-lj38-cap eOn asv n=1, smoke run; scored 1 of 50 starts.</li>
    <li>eon/develop-de-lj38-ew eOn asv n=1, smoke run; scored 1 of 50 starts.</li>
    <li>eon/develop-de-lj38-oci eOn asv n=1, smoke run; scored 1 of 50 starts.</li>

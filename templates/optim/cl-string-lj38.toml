@@ -1,0 +1,17 @@
+# OPTIM r27058 climbing string on LJ38. The score is that binary's counter.
+id = "optim/cl-string-lj38"
+engine = "optim"
+problem = "double-ended-saddle-search/lj38"
+code = "optim"
+code_version = "27058"
+commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+algorithm = "climbing string"
+tuning = "wales-2014"
+paper_baseline = true
+note = "wales-27058 odata: debug, CLSTRING, GROWSTRING 5 1000 0.3 1.0 3D-04 1.1, INE_NEW 9.36585D-05 100 1D-9 100 2D-3 4D2. AX with ZSTAR 0 is LJDIFF. Success is the line Converged to TS. The mean is the half-even mean of those successes. The harness cap of 2500 is not the paper failure rule."
+
+[optim]
+method = "cl-string"
+preamble = "templates/optim/preambles/cl-string-lj38.txt"
+symbol = "AX"
+counter = "optim"

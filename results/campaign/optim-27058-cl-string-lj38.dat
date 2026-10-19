@@ -1,0 +1,18 @@
+# counter optim. wales-27058 energy+gradient calls.
+# Success is the line Converged to TS. Failures stay out of the mean.
+# The harness cap is not this failure rule.
+force_calls 785
+force_calls_min 270
+force_calls_max 2794
+force_calls_median 621
+nfailed 3
+starts 50
+code optim
+code_version 27058
+commit 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f
+algorithm climbing string
+template optim/cl-string-lj38
+problem double-ended-saddle-search/lj38
+tuning wales-2014
+counter optim
+ranked false

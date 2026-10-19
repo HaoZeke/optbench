@@ -1,13 +1,16 @@
-"""OPTIM L-BFGS through the ASE socket.
+"""OPTIM L-BFGS through the ASE socket, and the r27058 climbing string.
 
-The binary is the OPTIM target from the Wales snapshot
+The minimization binary is the OPTIM target from the Wales snapshot
 ``http://www-wales.ch.cam.ac.uk/svn.tar.bz2``. The pin is the sha256 of
 that file. The snapshot has no git commit. Each ``COMPUTE`` on the relay
-is one ``pes.evaluate``. OPTIM's own counter is not the score.
+is one ``pes.evaluate``. That path does not score OPTIM's own counter.
 
-``optim/unhooked`` and every template that is not minimization L-BFGS
-raise before a file is written. Noise, saddle search, NEB, and PATHSAMPLE
-are not this runner.
+The LJ38 climbing-string row is the other path. It runs OPTIM 27058 with
+the 2014 preamble and scores the last ``energy+gradient calls`` field.
+Success is the line ``Converged to TS``. Failures stay out of the mean.
+
+``optim/unhooked`` and every other template raise before a file is written.
+Noise, NEB, and PATHSAMPLE are not this runner.
 """
 
 from __future__ import annotations
@@ -17,6 +20,7 @@ import os
 import shutil
 import subprocess
 import sys
+import tarfile
 from pathlib import Path
 
 import numpy as np
@@ -265,6 +269,241 @@ def _execute(job: dict) -> dict:
     return record
 
 
+def _xyz_coordinate_lines(text: str) -> list[str]:
+    """Columns 2-4 of an XYZ body, with Fortran exponents.
+
+    This is ``awk '(NR>2){print $2,$3,$4}' | sed 's/[eE]/D/g'`` on a file
+    whose first line is the atom count.
+    """
+    lines = text.splitlines()
+    count = int(lines[0].split()[0])
+    body = lines[2 : 2 + count]
+    coords = []
+    for line in body:
+        tokens = line.split()
+        if len(tokens) < 4:
+            raise ValueError("xyz coordinate is missing x y z")
+        coords.append(" ".join(token.replace("e", "D").replace("E", "D") for token in tokens[1:4]))
+    if len(coords) != count:
+        raise ValueError(f"xyz announced {count} atoms and held {len(coords)}")
+    return coords
+
+
+def _pair_texts(archive: Path, count: int) -> list[tuple[str, str, str]]:
+    texts: dict[str, str] = {}
+    with tarfile.open(archive) as packed:
+        for member in packed.getmembers():
+            if not member.isfile():
+                continue
+            extracted = packed.extractfile(member)
+            if extracted is None:
+                continue
+            texts[Path(member.name).name] = extracted.read().decode("utf-8", errors="replace")
+    pairs = []
+    for index in range(count):
+        start_name = f"start_{index:02d}.xyz"
+        end_name = f"end_{index:02d}.xyz"
+        if start_name not in texts or end_name not in texts:
+            raise FileNotFoundError(f"{archive} has no {start_name}/{end_name}")
+        pairs.append((start_name, texts[start_name], texts[end_name]))
+    return pairs
+
+
+def _last_call_count(log: str) -> int | None:
+    """Last ``energy+gradient calls`` integer. awk field 6 of that line."""
+    found = None
+    for line in log.splitlines():
+        if "energy+gradient calls" not in line:
+            continue
+        parts = line.split()
+        if len(parts) >= 6:
+            found = parts[5]
+    if found is None or found == "":
+        return None
+    return int(float(found))
+
+
+def _paper_integers(rows: list[tuple[int, bool]]) -> dict[str, int]:
+    """getdata.py: half-even mean, median, min, and max of the successes."""
+    successes = [calls for calls, ok in rows if ok]
+    if not successes:
+        raise RuntimeError("climbing string produced no converged transition states")
+    values = np.asarray(successes, dtype=np.float64)
+    return {
+        "force_calls": int(round(float(np.mean(values)))),
+        "force_calls_min": int(round(float(np.min(values)))),
+        "force_calls_max": int(round(float(np.max(values)))),
+        "force_calls_median": int(round(float(np.median(values)))),
+        "nfailed": sum(1 for _calls, ok in rows if not ok),
+        "n": len(rows),
+    }
+
+
+def _require_27058(binary: Path) -> None:
+    try:
+        proc = subprocess.run(
+            [str(binary)],
+            input="",
+            capture_output=True,
+            text=True,
+            timeout=60,
+            check=False,
+        )
+    except subprocess.TimeoutExpired as exc:
+        raise RuntimeError(f"{binary} did not print a version within 60s") from exc
+    banner = f"{proc.stdout}\n{proc.stderr}"
+    if "version 27058" not in banner:
+        raise RuntimeError(f"{binary} is not OPTIM version 27058")
+
+
+def _execute_cl_string(job: dict) -> dict:
+    os.environ.setdefault("OMP_NUM_THREADS", "1")
+    import tempfile
+
+    name = str(job["name"])
+    calls = -1
+    success = False
+    error = ""
+    try:
+        with tempfile.TemporaryDirectory(prefix="optim-cl-") as raw:
+            folder = Path(raw)
+            (folder / "odata").write_text(str(job["odata"]), encoding="utf-8")
+            (folder / "finish").write_text(str(job["finish"]), encoding="utf-8")
+            env = os.environ.copy()
+            env["OMP_NUM_THREADS"] = "1"
+            log_path = folder / "OPTIM.log"
+            stderr_path = folder / "stderr.txt"
+            try:
+                with log_path.open("w", encoding="utf-8") as stdout, stderr_path.open("w", encoding="utf-8") as stderr:
+                    proc = subprocess.run(
+                        [str(job["binary"])],
+                        cwd=folder,
+                        env=env,
+                        stdout=stdout,
+                        stderr=stderr,
+                        text=True,
+                        timeout=3600,
+                        check=False,
+                    )
+            except subprocess.TimeoutExpired:
+                proc = None
+                error = "OPTIM exceeded 3600s"
+            log = log_path.read_text(encoding="utf-8", errors="replace") if log_path.is_file() else ""
+            parsed = _last_call_count(log)
+            if parsed is not None:
+                calls = parsed
+            success = "Converged to TS" in log
+            if proc is not None and proc.returncode != 0 and not success and parsed is None:
+                detail = _tail(stderr_path) or _tail(log_path) or f"exit {proc.returncode}"
+                error = f"OPTIM exit {proc.returncode}: {detail}"
+    except Exception as exc:
+        error = f"{type(exc).__name__}: {exc}"
+    if success:
+        failure = None
+        reasons: list[str] = []
+    elif error and calls < 0:
+        failure = "crash"
+        reasons = ["crash"]
+    else:
+        failure = "divergence"
+        reasons = ["divergence"]
+    return {
+        "schema": "optbench.start/v2",
+        "start": name,
+        "force_calls": int(calls),
+        "verify_calls": 0,
+        "counter": "optim",
+        "comparable": False,
+        "success": success,
+        "failure": failure,
+        "reasons": reasons,
+        "error": error,
+        "converged": success,
+    }
+
+
+def _cl_string_text(summary: dict[str, int], template: dict) -> str:
+    lines = [
+        "# counter optim. wales-27058 energy+gradient calls.",
+        "# Success is the line Converged to TS. Failures stay out of the mean.",
+        "# The harness cap is not this failure rule.",
+        f"force_calls {summary['force_calls']}",
+        f"force_calls_min {summary['force_calls_min']}",
+        f"force_calls_max {summary['force_calls_max']}",
+        f"force_calls_median {summary['force_calls_median']}",
+        f"nfailed {summary['nfailed']}",
+        f"starts {summary['n']}",
+        f"code {template['code']}",
+        f"code_version {template['code_version']}",
+        f"commit {template['commit']}",
+        f"algorithm {template['algorithm']}",
+        f"template {template['id']}",
+        f"problem {template['problem']}",
+        f"tuning {template['tuning']}",
+        "counter optim",
+        "ranked false",
+    ]
+    return "\n".join(lines) + "\n"
+
+
+def _run_cl_string(root: Path, problem: dict, template: dict, section: dict, *, output: Path, workers: int) -> dict:
+    from optbench.campaign import geometry_archive, write_starts
+    from optbench.engines.common import band_settings
+
+    binary = binary_path()
+    if not binary.is_file():
+        raise RuntimeError(f"{binary} is not present")
+    _require_27058(binary)
+    settings = band_settings(problem)
+    if settings["geometry"] != "xyz-pairs":
+        raise ValueError(f"{problem['id']} geometry is {settings['geometry']}")
+    preamble_name = str(section.get("preamble") or "")
+    if not preamble_name:
+        raise ValueError(f"{template['id']} has no optim.preamble")
+    preamble_path = Path(preamble_name)
+    if not preamble_path.is_file():
+        preamble_path = root / preamble_name
+    preamble = preamble_path.read_text(encoding="utf-8")
+    if not preamble.endswith("\n"):
+        preamble += "\n"
+    symbol = str(section.get("symbol") or "AX")
+    jobs = []
+    for name, start_text, end_text in _pair_texts(geometry_archive(root, problem), settings["pairs"]):
+        start_lines = _xyz_coordinate_lines(start_text)
+        end_lines = _xyz_coordinate_lines(end_text)
+        odata = preamble + "points\n" + "\n".join(f"{symbol} {row}" for row in start_lines) + "\n"
+        finish = "\n".join(end_lines) + "\n"
+        jobs.append({"name": name, "odata": odata, "finish": finish, "binary": str(binary)})
+    records = run_jobs(jobs, _execute_cl_string, workers)
+    stamped = []
+    for record in records:
+        row = dict(record)
+        row["problem"] = problem["id"]
+        row["template"] = template["id"]
+        row["code"] = template["code"]
+        row["code_version"] = template["code_version"]
+        row["commit"] = template["commit"]
+        row["algorithm"] = template["algorithm"]
+        row["tuning"] = template["tuning"]
+        stamped.append(row)
+    summary = _paper_integers([(int(row["force_calls"]), bool(row["success"])) for row in stamped])
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(_cl_string_text(summary, template), encoding="utf-8")
+    write_starts(output.with_suffix(".starts.jsonl"), stamped)
+    return {
+        "problem": problem["id"],
+        "template": template["id"],
+        "force_calls": summary["force_calls"],
+        "force_calls_median": summary["force_calls_median"],
+        "force_calls_min": summary["force_calls_min"],
+        "force_calls_max": summary["force_calls_max"],
+        "nfailed": summary["nfailed"],
+        "starts": summary["n"],
+        "successes": summary["n"] - summary["nfailed"],
+        "output": str(output),
+    }
+
+
 def _job(start: dict, settings: dict, template: dict) -> dict:
     section = _section(template)
     return {
@@ -298,6 +537,8 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
     if stated and stated != problem_name:
         raise ValueError(f"{template_name} belongs to {stated}")
     section = _section(template)
+    if section["method"] == "cl-string":
+        return _run_cl_string(root, problem, template, section, output=output, workers=workers)
     if problem.get("suite") != "minimization" or section["method"] != "lbfgs":
         raise _unhooked(template_name)
     if template.get("noise"):
