@@ -41,8 +41,11 @@ PROBLEMS = (
 
 TEMPLATES = (
     ("CiNeb", "cp2k/ci-neb"),
+    ("CiNebTuned", "cp2k/ci-neb-tuned"),
     ("ItNeb", "cp2k/it-neb"),
+    ("ItNebTuned", "cp2k/it-neb-tuned"),
     ("String", "cp2k/string"),
+    ("StringTuned", "cp2k/string-tuned"),
 )
 
 TRACKS = (

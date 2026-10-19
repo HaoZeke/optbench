@@ -2,7 +2,7 @@
 
 Each row is one stored result. The old class is the label the board on main tallied. The new class is `classify_outcome` on the stored energy, geometry, force, and call count. PAR-2 is the `score_v2` mean of the penalised costs.
 
-Scored templates: 988. Changed: 103. Starts: 553682.
+Scored templates: 1006. Changed: 107. Starts: 554414.
 
 The 2014 paper reports `nfailed`. A run fails when it exceeds the maximum number of force calls or fails to converge for any other reason. `cap` is the first clause. `not_converged` is the second clause when the energy and the geometry stayed finite and the cap was not hit. `divergence` stays the blow-up. `wrong_stationary` is a point that met the force stop and was rejected. `crash` is a dead process.
 
@@ -34,6 +34,8 @@ The 2014 paper reports `nfailed`. A run fails when it exceeds the maximum number
 | double-ended-saddle-search/lj38_2ts_separation | rgsaddle/oci-neb | campaign | 51 | crash=0 divergence=0 cap=38 not_converged=0 wrong_stationary=3 | crash=0 divergence=1 cap=37 not_converged=0 wrong_stationary=3 | 16682.13725490196 | 16682.13725490196 | cap->divergence 1 |
 | double-ended-saddle-search/lj38_2ts_separation | tsase/ci-neb | campaign | 51 | crash=0 divergence=1 cap=43 not_converged=0 wrong_stationary=2 | crash=0 divergence=0 cap=43 not_converged=1 wrong_stationary=2 | 18812.13725490196 | 18812.13725490196 | divergence->not_converged 1 |
 | double-ended-saddle-search/lj38_2ts_separation | tsase/neb | campaign | 51 | crash=0 divergence=3 cap=44 not_converged=0 wrong_stationary=4 | crash=0 divergence=0 cap=44 not_converged=3 wrong_stationary=4 | 20000.0 | 20000.0 | divergence->not_converged 3 |
+| double-ended-saddle-search/pt-island | cp2k/it-neb | campaign | 59 | crash=0 divergence=8 cap=51 not_converged=0 wrong_stationary=0 | crash=0 divergence=0 cap=51 not_converged=8 wrong_stationary=0 | 6000.0 | 6000.0 | divergence->not_converged 8 |
+| double-ended-saddle-search/pt-island | cp2k/it-neb-tuned | campaign | 59 | crash=0 divergence=2 cap=57 not_converged=0 wrong_stationary=0 | crash=0 divergence=0 cap=57 not_converged=2 wrong_stationary=0 | 6000.0 | 6000.0 | divergence->not_converged 2 |
 | double-ended-saddle-search/pt-island | rgsaddle/ci-neb | campaign | 59 | crash=0 divergence=5 cap=0 not_converged=0 wrong_stationary=0 | crash=0 divergence=0 cap=0 not_converged=5 wrong_stationary=0 | 1078.4237288135594 | 1078.4237288135594 | divergence->not_converged 5 |
 | double-ended-saddle-search/pt-island | rgsaddle/ci-neb-lbfgs | campaign | 59 | crash=0 divergence=5 cap=0 not_converged=0 wrong_stationary=0 | crash=0 divergence=0 cap=0 not_converged=5 wrong_stationary=0 | 733.5762711864406 | 733.5762711864406 | divergence->not_converged 5 |
 | double-ended-saddle-search/pt-island | rgsaddle/ew-ci-neb | campaign | 59 | crash=0 divergence=2 cap=0 not_converged=0 wrong_stationary=2 | crash=0 divergence=0 cap=0 not_converged=2 wrong_stationary=2 | 938.1016949152543 | 938.1016949152543 | divergence->not_converged 2 |
@@ -91,6 +93,8 @@ The 2014 paper reports `nfailed`. A run fails when it exceeds the maximum number
 | minimization/lj38-noise | noise/sella-min-s1em2 | campaign | 1000 | crash=0 divergence=32 cap=0 not_converged=0 wrong_stationary=108 | crash=0 divergence=0 cap=0 not_converged=32 wrong_stationary=108 | 3738.961 | 3738.961 | divergence->not_converged 32 |
 | minimization/lj38-noise | noise/sella-min-s1em3 | campaign | 1000 | crash=0 divergence=53 cap=0 not_converged=0 wrong_stationary=9 | crash=0 divergence=0 cap=0 not_converged=53 wrong_stationary=9 | 2224.755 | 2224.755 | divergence->not_converged 53 |
 | minimization/lj38-noise | noise/sella-min-s1em4 | campaign | 1000 | crash=0 divergence=67 cap=0 not_converged=0 wrong_stationary=2 | crash=0 divergence=0 cap=0 not_converged=67 wrong_stationary=2 | 2123.786 | 2123.786 | divergence->not_converged 67 |
+| neb/Pt-heptamer | cp2k/it-neb | campaign | 13 | crash=0 divergence=5 cap=8 not_converged=0 wrong_stationary=0 | crash=0 divergence=0 cap=8 not_converged=5 wrong_stationary=0 | 20000.0 | 20000.0 | divergence->not_converged 5 |
+| neb/Pt-heptamer | cp2k/it-neb-tuned | campaign | 13 | crash=0 divergence=13 cap=0 not_converged=0 wrong_stationary=0 | crash=0 divergence=0 cap=0 not_converged=13 wrong_stationary=0 | 20000.0 | 20000.0 | divergence->not_converged 13 |
 | neb/Pt-heptamer | rgsaddle/neb | campaign | 13 | crash=0 divergence=13 cap=0 not_converged=0 wrong_stationary=0 | crash=0 divergence=0 cap=0 not_converged=13 wrong_stationary=0 | 20000.0 | 20000.0 | divergence->not_converged 13 |
 | neb/Pt-heptamer | rgsaddle/neb-lbfgs | campaign | 13 | crash=0 divergence=13 cap=0 not_converged=0 wrong_stationary=0 | crash=0 divergence=0 cap=0 not_converged=13 wrong_stationary=0 | 20000.0 | 20000.0 | divergence->not_converged 13 |
 | neb/Pt-heptamer | tsase/neb | campaign | 13 | crash=0 divergence=13 cap=0 not_converged=0 wrong_stationary=0 | crash=0 divergence=0 cap=0 not_converged=13 wrong_stationary=0 | 20000.0 | 20000.0 | divergence->not_converged 13 |

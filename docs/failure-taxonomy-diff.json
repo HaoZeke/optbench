@@ -1,5 +1,5 @@
 {
-  "changed": 103,
+  "changed": 107,
   "rows": [
     {
       "cap": 1000000,
@@ -308,6 +308,174 @@
       "problem": "double-ended-saddle-search/lj38",
       "source": "campaign",
       "template": "compass/sqnm"
+    },
+    {
+      "cap": 2500,
+      "changed": false,
+      "moves": {},
+      "n": 50,
+      "new_counts": {
+        "cap": 44,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "new_error": "",
+      "new_par2": 4655.5,
+      "old_counts": {
+        "cap": 44,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "old_error": "",
+      "old_par2": 4655.5,
+      "path": "results/campaign/double-ended-saddle-search-lj38-cp2k-ci-neb.dat",
+      "problem": "double-ended-saddle-search/lj38",
+      "source": "campaign",
+      "template": "cp2k/ci-neb"
+    },
+    {
+      "cap": 2500,
+      "changed": false,
+      "moves": {},
+      "n": 50,
+      "new_counts": {
+        "cap": 39,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 9
+      },
+      "new_error": "",
+      "new_par2": 4878.96,
+      "old_counts": {
+        "cap": 39,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 9
+      },
+      "old_error": "",
+      "old_par2": 4878.96,
+      "path": "results/campaign/double-ended-saddle-search-lj38-cp2k-ci-neb-tuned.dat",
+      "problem": "double-ended-saddle-search/lj38",
+      "source": "campaign",
+      "template": "cp2k/ci-neb-tuned"
+    },
+    {
+      "cap": 2500,
+      "changed": false,
+      "moves": {},
+      "n": 50,
+      "new_counts": {
+        "cap": 50,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "new_error": "",
+      "new_par2": 5000.0,
+      "old_counts": {
+        "cap": 50,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "old_error": "",
+      "old_par2": 5000.0,
+      "path": "results/campaign/double-ended-saddle-search-lj38-cp2k-it-neb.dat",
+      "problem": "double-ended-saddle-search/lj38",
+      "source": "campaign",
+      "template": "cp2k/it-neb"
+    },
+    {
+      "cap": 2500,
+      "changed": false,
+      "moves": {},
+      "n": 50,
+      "new_counts": {
+        "cap": 47,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 3
+      },
+      "new_error": "",
+      "new_par2": 5000.0,
+      "old_counts": {
+        "cap": 47,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 3
+      },
+      "old_error": "",
+      "old_par2": 5000.0,
+      "path": "results/campaign/double-ended-saddle-search-lj38-cp2k-it-neb-tuned.dat",
+      "problem": "double-ended-saddle-search/lj38",
+      "source": "campaign",
+      "template": "cp2k/it-neb-tuned"
+    },
+    {
+      "cap": 2500,
+      "changed": false,
+      "moves": {},
+      "n": 50,
+      "new_counts": {
+        "cap": 50,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "new_error": "",
+      "new_par2": 5000.0,
+      "old_counts": {
+        "cap": 50,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "old_error": "",
+      "old_par2": 5000.0,
+      "path": "results/campaign/double-ended-saddle-search-lj38-cp2k-string.dat",
+      "problem": "double-ended-saddle-search/lj38",
+      "source": "campaign",
+      "template": "cp2k/string"
+    },
+    {
+      "cap": 2500,
+      "changed": false,
+      "moves": {},
+      "n": 50,
+      "new_counts": {
+        "cap": 50,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "new_error": "",
+      "new_par2": 5000.0,
+      "old_counts": {
+        "cap": 50,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "old_error": "",
+      "old_par2": 5000.0,
+      "path": "results/campaign/double-ended-saddle-search-lj38-cp2k-string-tuned.dat",
+      "problem": "double-ended-saddle-search/lj38",
+      "source": "campaign",
+      "template": "cp2k/string-tuned"
     },
     {
       "cap": 2500,
@@ -3608,6 +3776,178 @@
       "problem": "double-ended-saddle-search/pt-island",
       "source": "campaign",
       "template": "compass/sqnm"
+    },
+    {
+      "cap": 3000,
+      "changed": false,
+      "moves": {},
+      "n": 59,
+      "new_counts": {
+        "cap": 47,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "new_error": "",
+      "new_par2": 5296.1016949152545,
+      "old_counts": {
+        "cap": 47,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "old_error": "",
+      "old_par2": 5296.1016949152545,
+      "path": "results/campaign/double-ended-saddle-search-pt-island-cp2k-ci-neb.dat",
+      "problem": "double-ended-saddle-search/pt-island",
+      "source": "campaign",
+      "template": "cp2k/ci-neb"
+    },
+    {
+      "cap": 3000,
+      "changed": false,
+      "moves": {},
+      "n": 59,
+      "new_counts": {
+        "cap": 8,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "new_error": "",
+      "new_par2": 2555.762711864407,
+      "old_counts": {
+        "cap": 8,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "old_error": "",
+      "old_par2": 2555.762711864407,
+      "path": "results/campaign/double-ended-saddle-search-pt-island-cp2k-ci-neb-tuned.dat",
+      "problem": "double-ended-saddle-search/pt-island",
+      "source": "campaign",
+      "template": "cp2k/ci-neb-tuned"
+    },
+    {
+      "cap": 3000,
+      "changed": true,
+      "moves": {
+        "divergence->not_converged": 8
+      },
+      "n": 59,
+      "new_counts": {
+        "cap": 51,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 8,
+        "wrong_stationary": 0
+      },
+      "new_error": "",
+      "new_par2": 6000.0,
+      "old_counts": {
+        "cap": 51,
+        "crash": 0,
+        "divergence": 8,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "old_error": "",
+      "old_par2": 6000.0,
+      "path": "results/campaign/double-ended-saddle-search-pt-island-cp2k-it-neb.dat",
+      "problem": "double-ended-saddle-search/pt-island",
+      "source": "campaign",
+      "template": "cp2k/it-neb"
+    },
+    {
+      "cap": 3000,
+      "changed": true,
+      "moves": {
+        "divergence->not_converged": 2
+      },
+      "n": 59,
+      "new_counts": {
+        "cap": 57,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 2,
+        "wrong_stationary": 0
+      },
+      "new_error": "",
+      "new_par2": 6000.0,
+      "old_counts": {
+        "cap": 57,
+        "crash": 0,
+        "divergence": 2,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "old_error": "",
+      "old_par2": 6000.0,
+      "path": "results/campaign/double-ended-saddle-search-pt-island-cp2k-it-neb-tuned.dat",
+      "problem": "double-ended-saddle-search/pt-island",
+      "source": "campaign",
+      "template": "cp2k/it-neb-tuned"
+    },
+    {
+      "cap": 3000,
+      "changed": false,
+      "moves": {},
+      "n": 59,
+      "new_counts": {
+        "cap": 59,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "new_error": "",
+      "new_par2": 6000.0,
+      "old_counts": {
+        "cap": 59,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "old_error": "",
+      "old_par2": 6000.0,
+      "path": "results/campaign/double-ended-saddle-search-pt-island-cp2k-string.dat",
+      "problem": "double-ended-saddle-search/pt-island",
+      "source": "campaign",
+      "template": "cp2k/string"
+    },
+    {
+      "cap": 3000,
+      "changed": false,
+      "moves": {},
+      "n": 59,
+      "new_counts": {
+        "cap": 30,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 29
+      },
+      "new_error": "",
+      "new_par2": 6000.0,
+      "old_counts": {
+        "cap": 30,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 29
+      },
+      "old_error": "",
+      "old_par2": 6000.0,
+      "path": "results/campaign/double-ended-saddle-search-pt-island-cp2k-string-tuned.dat",
+      "problem": "double-ended-saddle-search/pt-island",
+      "source": "campaign",
+      "template": "cp2k/string-tuned"
     },
     {
       "cap": 3000,
@@ -23532,6 +23872,178 @@
         "wrong_stationary": 0
       },
       "new_error": "",
+      "new_par2": 4518.461538461538,
+      "old_counts": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "old_error": "",
+      "old_par2": 4518.461538461538,
+      "path": "results/campaign/neb-Pt-heptamer-cp2k-ci-neb.dat",
+      "problem": "neb/Pt-heptamer",
+      "source": "campaign",
+      "template": "cp2k/ci-neb"
+    },
+    {
+      "cap": 10000,
+      "changed": false,
+      "moves": {},
+      "n": 13,
+      "new_counts": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "new_error": "",
+      "new_par2": 1893.8461538461538,
+      "old_counts": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "old_error": "",
+      "old_par2": 1893.8461538461538,
+      "path": "results/campaign/neb-Pt-heptamer-cp2k-ci-neb-tuned.dat",
+      "problem": "neb/Pt-heptamer",
+      "source": "campaign",
+      "template": "cp2k/ci-neb-tuned"
+    },
+    {
+      "cap": 10000,
+      "changed": true,
+      "moves": {
+        "divergence->not_converged": 5
+      },
+      "n": 13,
+      "new_counts": {
+        "cap": 8,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 5,
+        "wrong_stationary": 0
+      },
+      "new_error": "",
+      "new_par2": 20000.0,
+      "old_counts": {
+        "cap": 8,
+        "crash": 0,
+        "divergence": 5,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "old_error": "",
+      "old_par2": 20000.0,
+      "path": "results/campaign/neb-Pt-heptamer-cp2k-it-neb.dat",
+      "problem": "neb/Pt-heptamer",
+      "source": "campaign",
+      "template": "cp2k/it-neb"
+    },
+    {
+      "cap": 10000,
+      "changed": true,
+      "moves": {
+        "divergence->not_converged": 13
+      },
+      "n": 13,
+      "new_counts": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 13,
+        "wrong_stationary": 0
+      },
+      "new_error": "",
+      "new_par2": 20000.0,
+      "old_counts": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 13,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "old_error": "",
+      "old_par2": 20000.0,
+      "path": "results/campaign/neb-Pt-heptamer-cp2k-it-neb-tuned.dat",
+      "problem": "neb/Pt-heptamer",
+      "source": "campaign",
+      "template": "cp2k/it-neb-tuned"
+    },
+    {
+      "cap": 10000,
+      "changed": false,
+      "moves": {},
+      "n": 13,
+      "new_counts": {
+        "cap": 13,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "new_error": "",
+      "new_par2": 20000.0,
+      "old_counts": {
+        "cap": 13,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "old_error": "",
+      "old_par2": 20000.0,
+      "path": "results/campaign/neb-Pt-heptamer-cp2k-string.dat",
+      "problem": "neb/Pt-heptamer",
+      "source": "campaign",
+      "template": "cp2k/string"
+    },
+    {
+      "cap": 10000,
+      "changed": false,
+      "moves": {},
+      "n": 13,
+      "new_counts": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 13
+      },
+      "new_error": "",
+      "new_par2": 20000.0,
+      "old_counts": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 13
+      },
+      "old_error": "",
+      "old_par2": 20000.0,
+      "path": "results/campaign/neb-Pt-heptamer-cp2k-string-tuned.dat",
+      "problem": "neb/Pt-heptamer",
+      "source": "campaign",
+      "template": "cp2k/string-tuned"
+    },
+    {
+      "cap": 10000,
+      "changed": false,
+      "moves": {},
+      "n": 13,
+      "new_counts": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "new_error": "",
       "new_par2": 1138.6153846153845,
       "old_counts": {
         "cap": 0,
@@ -27879,6 +28391,6 @@
       "template": "tsase/dimer-pt"
     }
   ],
-  "scored": 988,
-  "starts": 553682
+  "scored": 1006,
+  "starts": 554414
 }

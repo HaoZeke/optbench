@@ -1682,25 +1682,25 @@
    <td data-field="failures">crash 0, divergence 0, cap 44, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/pt-island" data-template="cp2k/ci-neb">
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="cp2k/ci-neb-tuned">
    <td>pt-island</td>
-   <td data-field="template">cp2k/ci-neb</td>
+   <td data-field="template">cp2k/ci-neb-tuned</td>
    <td data-field="version">CP2K 2026.2</td>
    <td data-field="commit">67b5da876dd6</td>
-   <td data-field="par2_mean">5296.1</td>
-   <td data-field="mean_calls">2906.27</td>
-   <td data-field="median_calls">3000</td>
-   <td data-field="failures">crash 0, divergence 0, cap 47, not_converged 0, wrong_stationary 0</td>
+   <td data-field="par2_mean">2555.76</td>
+   <td data-field="mean_calls">2148.98</td>
+   <td data-field="median_calls">2070</td>
+   <td data-field="failures">crash 0, divergence 0, cap 8, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
-   <tr data-problem="neb/Pt-heptamer" data-template="cp2k/ci-neb">
+   <tr data-problem="neb/Pt-heptamer" data-template="cp2k/ci-neb-tuned">
    <td>Pt-heptamer</td>
-   <td data-field="template">cp2k/ci-neb</td>
+   <td data-field="template">cp2k/ci-neb-tuned</td>
    <td data-field="version">CP2K 2026.2</td>
    <td data-field="commit">67b5da876dd6</td>
-   <td data-field="par2_mean">4518.46</td>
-   <td data-field="mean_calls">4518.46</td>
-   <td data-field="median_calls">4260</td>
+   <td data-field="par2_mean">1893.85</td>
+   <td data-field="mean_calls">1893.85</td>
+   <td data-field="median_calls">1800</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>

@@ -185,7 +185,7 @@
    <td data-code="vc-SQNM">—</td>
    <td data-code="TorchSim">—</td>
    <td data-code="geomeTRIC">—</td>
-   <td data-code="CP2K" data-template="cp2k/ci-neb" data-par2="5296.1"><span class="bench-score">5296.1</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">cp2k/ci-neb</a></td>
+   <td data-code="CP2K" data-template="cp2k/ci-neb-tuned" data-par2="2555.76"><span class="bench-score">2555.76</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">cp2k/ci-neb-tuned</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass" data-template="compass/sqnm" data-par2="1078.12"><span class="bench-score">1078.12</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
@@ -347,7 +347,7 @@
    <td data-code="vc-SQNM">—</td>
    <td data-code="TorchSim">—</td>
    <td data-code="geomeTRIC">—</td>
-   <td data-code="CP2K" data-template="cp2k/ci-neb" data-par2="4518.46"><span class="bench-score">4518.46</span><a href="generated/suites/neb.html#Pt-heptamer-templates">cp2k/ci-neb</a></td>
+   <td data-code="CP2K" data-template="cp2k/ci-neb-tuned" data-par2="1893.85"><span class="bench-score">1893.85</span><a href="generated/suites/neb.html#Pt-heptamer-templates">cp2k/ci-neb-tuned</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass" data-template="compass/sqnm" data-par2="561.462"><span class="bench-score">561.462</span><a href="generated/suites/neb.html#Pt-heptamer-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
