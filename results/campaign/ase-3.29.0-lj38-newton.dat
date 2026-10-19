@@ -1,0 +1,27 @@
+# counter harness. One force call is one ASE calculate entry.
+# ASE 3.29.0 LennardJones rc=35, archived Hessian.py Newton loop, unmodified.
+# maxstep 0.25, central difference 0.0005 Bohr, stop at max per-atom force norm 0.01.
+# xyz starts after center(100). The harness cap is 10000. Every start reached it.
+force_calls 10000
+force_calls_min 10000
+force_calls_max 10000
+force_calls_median 10000
+nfailed 1000
+starts 1000
+n 1000
+code ASE
+code_version 3.29.0
+commit f27c0005ae6a67ea419f996e728668865bfc1f86
+algorithm Newtons Method maxstep=0.25
+profile default
+tuning default
+template ase/lj38-newton
+problem minimization/lj38
+counter harness
+reducer capped
+parameter_source stock
+par2_mean 20000
+note ASE 3.29.0 LennardJones rc=35 with the archived Hessian.py Newton loop, unmodified. Central difference 0.0005 Bohr, maxstep 0.25, stop at max per-atom force norm 0.01, xyz starts after center(100). The harness counts every calculator evaluation and stops at 10000. Every start reached the cap before that stop, so there is no success mean. force_calls 10000 is the harness total on every start. The archive 79 is the Newton loop index.
+host cursor
+date 2026-10-19
+contributor Rohit Goswami
