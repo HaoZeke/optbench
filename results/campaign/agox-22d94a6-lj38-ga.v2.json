@@ -17,7 +17,7 @@
         "force_calls_max": null,
         "force_calls_min": null,
         "median": null,
-        "nfailed": 35
+        "nfailed": 36
       },
       "metrics": {
         "bootstrap_resamples": 2000,
@@ -31,12 +31,12 @@
         "median": 1000000.0,
         "median_high": 1000000.0,
         "median_low": 1000000.0,
-        "n": 35,
-        "n_cap": 35,
+        "n": 36,
+        "n_cap": 36,
         "n_crash": 0,
         "n_divergence": 0,
         "n_wrong_stationary": 0,
-        "nfailed": 35,
+        "nfailed": 36,
         "par2_mean": 1000000.0,
         "par_applied": true,
         "par_factor": 2,
@@ -46,7 +46,7 @@
         "success_only_mean": null,
         "success_rate": 0.0,
         "successes": 0,
-        "wilson_high": 0.09890099232440402,
+        "wilson_high": 0.09641862859446367,
         "wilson_low": 0.0
       },
       "parameters": {
@@ -752,6 +752,25 @@
           "schema": "optbench.start/v2",
           "seed": 314193,
           "start": "34.con",
+          "success": false,
+          "target_energy": -173.9274265117895
+        },
+        {
+          "calls_at_lowest": 192232,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 500000,
+          "iterations": 234,
+          "lowest_energy": -172.19250872462953,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.9284265117895,
+          "schema": "optbench.start/v2",
+          "seed": 314194,
+          "start": "35.con",
           "success": false,
           "target_energy": -173.9274265117895
         }
