@@ -65,6 +65,7 @@
    </ul>
    <h3>Not a harness score</h3><ul>
    <li>optim/rr-second-order OPTIM n=200, counter optim.</li>
+   <li>optim/rr-second-order-current OPTIM n=200, counter optim.</li>
    </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="lj38-legacy">
