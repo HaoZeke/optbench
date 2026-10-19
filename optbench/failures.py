@@ -3,8 +3,9 @@
 The order is fixed, so a start lands in one bin:
 
 1. ``crash`` — the optimizer raised, or the record says so.
-2. ``divergence`` — a non-finite result, an explicit blow-up, or a
-   return that is still above the force stop and under the cap.
+2. ``divergence`` — a non-finite result, an explicit blow-up, a
+   dissociated cluster, or a return that is still above the force
+   stop and under the cap.
 3. ``cap`` — the search used the whole force-call budget and did not
    blow up.
 4. ``wrong_stationary`` — the force is at the stop, and the Hessian

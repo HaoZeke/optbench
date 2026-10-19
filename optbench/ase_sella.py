@@ -21,6 +21,7 @@ os.environ["OPENBLAS_NUM_THREADS"] = "1"
 os.environ["MKL_NUM_THREADS"] = "1"
 os.environ["NUMEXPR_NUM_THREADS"] = "1"
 
+from .bound import note_unbound
 from .campaign import load_template, resolve_problem
 from .counter import HarnessCounter, attach_ase_counter
 from .score import score_v2, summarize_all, summarize_capped, summarize_divided
@@ -817,6 +818,13 @@ def _run_minimize(payload: dict, bucket: CallCounter) -> dict:
     row["energy"] = _safe_energy(atoms)
     if not failed and bucket[0] < bucket[1]:
         _attach_index(row, atoms, 0)
+    if bucket[0] < bucket[1] and not row.get("error"):
+        kind = "morse" if payload["potential"]["kind"] == "morse" else "lj"
+        cell = atoms.cell.lengths() if kind == "morse" else None
+        probe: list[str] = []
+        note_unbound(probe, atoms.positions, kind=kind, box=cell)
+        if probe:
+            row["unbound"] = True
     return row
 
 
@@ -1160,6 +1168,8 @@ def _reason_list(row: dict, cap: int, tol: float) -> list[str]:
     norm = row.get("force_norm")
     if norm is None or float(norm) > float(tol):
         reasons.append("force_norm")
+    if row.get("unbound") and "cap" not in reasons and "error" not in reasons:
+        reasons.append("divergence")
     if row.get("expected_index") is not None and "hessian_index" in row:
         if int(row["hessian_index"]) != int(row["expected_index"]):
             reasons.append("hessian_index")

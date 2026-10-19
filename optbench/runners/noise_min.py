@@ -22,6 +22,7 @@ import time
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
 
+from optbench.bound import note_unbound
 from optbench.counter import ForceCallCap, HarnessCounter
 from optbench.failures import classify_failure
 from optbench.noise import (
@@ -203,6 +204,8 @@ def _minimize_job(job: dict) -> dict:
         reasons.append("force_norm")
     elif hessian_index != 0:
         reasons.append("hessian_index")
+    if finite and point is not None:
+        note_unbound(reasons, point, kind="lj")
     failure = classify_failure(reasons)
     record = {
         "schema": "optbench.start/v2",

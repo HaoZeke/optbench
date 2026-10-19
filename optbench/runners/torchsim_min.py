@@ -22,6 +22,7 @@ import time
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
 
+from optbench.bound import note_unbound
 from optbench.counter import ForceCallCap, HarnessCounter
 from optbench.failures import classify_failure
 from optbench.noise import KAPPA, stop_threshold, window_energy_tolerance
@@ -323,6 +324,8 @@ def _record(trail: _Trail, started: float) -> dict:
         reasons.append("force_norm")
     elif hessian_index != 0:
         reasons.append("hessian_index")
+    if finite and point is not None:
+        note_unbound(reasons, point, kind=trail.kind, box=trail.box)
     failure = classify_failure(reasons)
     record = {
         "schema": "optbench.start/v2",

@@ -17,6 +17,7 @@ from pathlib import Path
 
 import numpy as np
 
+from optbench.bound import note_unbound
 from optbench.campaign import geometry_archive, load_template, resolve_problem
 from optbench.failures import classify_failure
 from optbench.pes import evaluate, load_pairs
@@ -209,6 +210,8 @@ def judge_saddle(
             if hessian_index != int(expected_index):
                 reasons.append("hessian_index")
             verify_calls = int(counter.verify_calls)
+    if int(expected_index) == 0 and finite_point and point is not None:
+        note_unbound(reasons, point, kind=kind, box=box)
     failure = classify_failure(reasons)
     return {
         "schema": "optbench.start/v2",

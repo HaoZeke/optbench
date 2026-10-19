@@ -4,6 +4,7 @@
 # LJ38 removes the six rigid modes. A curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6). The noise-aware stop supplies that force_norm when sigma is positive.
 # Morse bulk uses the full Hessian. A curvature below -1e-6 is negative.
 # Energy and Kabsch RMSD were not applied.
+# A returned geometry is one cluster inside the problem bound distance. A dissociated geometry is divergence.
 # Default profile. Gradient descent uses the constructor pos_lr 0.01. The step is that rate times the force, and this optimizer has no displacement cap. SpecPotentialModel evaluates the problem potential. Opening forces on these Lennard-Jones starts are large enough that this step can leave the cutoff. Gaussian force noise uses the problem seed, kappa, and window. The stop is the noise-aware force norm and, at positive sigma, the clean-energy window. The index is the clean Hessian with the rigid-mode rule.
 force_calls 6
 force_calls_min 6
@@ -18,14 +19,14 @@ template torchsim/lj38-noise-gd-s1em2
 tuning default
 counter harness
 problem minimization/lj38-noise
-par2_mean 66.098
-wilson_low 0.991216985946
-wilson_high 0.998979216119
-par2_median 6
-par2_median_low 6
-par2_median_high 6
-v2_nfailed 3
-v2_successes 997
+par2_mean 20000
+wilson_low 0
+wilson_high 0.00382675848556
+par2_median 20000
+par2_median_low 20000
+par2_median_high 20000
+v2_nfailed 1000
+v2_successes 0
 n 1000
 cap 10000
 energy_min -1.00015399384
