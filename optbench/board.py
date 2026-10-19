@@ -847,6 +847,7 @@ def _benchmark_index() -> dict[str, dict]:
         "benchmarks.bench_optking",
         "benchmarks.bench_torchsim",
         "benchmarks.bench_globalopt",
+        "benchmarks.bench_n2p2",
         "benchmarks.quadratic",
     )
     for module_name in modules:

@@ -806229,5 +806229,297 @@
     "type": "track",
     "unit": "fraction",
     "version": "ae650a7ffffd5740fc4038c8550fe2a243adb39d8a2f98e5efd4c3e525247412"
+  },
+  "bench_n2p2.N2p2C2h4Kalman.time_search": {
+    "code": "class _N2p2Search:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"n2p2 source or ASE is not available\")\n        self.record = None",
+    "min_run_count": 1,
+    "name": "bench_n2p2.N2p2C2h4Kalman.time_search",
+    "number": 1,
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'20261015'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "repeat": 1,
+    "rounds": 1,
+    "sample_time": 0,
+    "timeout": 7200,
+    "type": "time",
+    "unit": "seconds",
+    "version": "54132432ba06e0c7e3001ea6e150c5afaee0527e7e60548e6736e243ffea0f7c",
+    "warmup_time": 0
+  },
+  "bench_n2p2.N2p2C2h4Kalman.track_failure_cap": {
+    "code": "class _N2p2Search:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"n2p2 source or ASE is not available\")\n        self.record = None",
+    "name": "bench_n2p2.N2p2C2h4Kalman.track_failure_cap",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'20261015'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "4b9a2a119a805b0841128fba71fa3821d85cf960f82d2d9ffc54dee4a96132ea"
+  },
+  "bench_n2p2.N2p2C2h4Kalman.track_failure_crash": {
+    "code": "class _N2p2Search:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"n2p2 source or ASE is not available\")\n        self.record = None",
+    "name": "bench_n2p2.N2p2C2h4Kalman.track_failure_crash",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'20261015'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "ab4235dc29672f1c15a408c4c5eb4fdc9425d9288500635524a748782d0f2105"
+  },
+  "bench_n2p2.N2p2C2h4Kalman.track_failure_divergence": {
+    "code": "class _N2p2Search:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"n2p2 source or ASE is not available\")\n        self.record = None",
+    "name": "bench_n2p2.N2p2C2h4Kalman.track_failure_divergence",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'20261015'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "ac1ab073483d65bb6c847b2719d57d3c55f6a485157d187c14b352138cf4b546"
+  },
+  "bench_n2p2.N2p2C2h4Kalman.track_failure_wrong_stationary": {
+    "code": "class _N2p2Search:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"n2p2 source or ASE is not available\")\n        self.record = None",
+    "name": "bench_n2p2.N2p2C2h4Kalman.track_failure_wrong_stationary",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'20261015'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "b366ff02a5ad9de3847fb9151cdb73f763fd5e895cbc2c28e984c94b64e44f39"
+  },
+  "bench_n2p2.N2p2C2h4Kalman.track_force_calls": {
+    "code": "class _N2p2Search:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"n2p2 source or ASE is not available\")\n        self.record = None",
+    "name": "bench_n2p2.N2p2C2h4Kalman.track_force_calls",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'20261015'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "force calls",
+    "version": "d284328052ec64e5bf3dd69eb7de3715e726f9ebae4782f6b4fcfb0d1ac3b4f5"
+  },
+  "bench_n2p2.N2p2C2h4Kalman.track_success": {
+    "code": "class _N2p2Search:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"n2p2 source or ASE is not available\")\n        self.record = None",
+    "name": "bench_n2p2.N2p2C2h4Kalman.track_success",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'20261015'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "fraction",
+    "version": "3ab911b6f5ea5b812893b4cdd78ad13ec2a43391494741066f69202f3de5a950"
+  },
+  "bench_n2p2.N2p2EmtPt38Kalman.time_search": {
+    "code": "class _N2p2Search:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"n2p2 source or ASE is not available\")\n        self.record = None",
+    "min_run_count": 1,
+    "name": "bench_n2p2.N2p2EmtPt38Kalman.time_search",
+    "number": 1,
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'20261015'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "repeat": 1,
+    "rounds": 1,
+    "sample_time": 0,
+    "timeout": 7200,
+    "type": "time",
+    "unit": "seconds",
+    "version": "54132432ba06e0c7e3001ea6e150c5afaee0527e7e60548e6736e243ffea0f7c",
+    "warmup_time": 0
+  },
+  "bench_n2p2.N2p2EmtPt38Kalman.track_failure_cap": {
+    "code": "class _N2p2Search:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"n2p2 source or ASE is not available\")\n        self.record = None",
+    "name": "bench_n2p2.N2p2EmtPt38Kalman.track_failure_cap",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'20261015'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "4b9a2a119a805b0841128fba71fa3821d85cf960f82d2d9ffc54dee4a96132ea"
+  },
+  "bench_n2p2.N2p2EmtPt38Kalman.track_failure_crash": {
+    "code": "class _N2p2Search:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"n2p2 source or ASE is not available\")\n        self.record = None",
+    "name": "bench_n2p2.N2p2EmtPt38Kalman.track_failure_crash",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'20261015'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "ab4235dc29672f1c15a408c4c5eb4fdc9425d9288500635524a748782d0f2105"
+  },
+  "bench_n2p2.N2p2EmtPt38Kalman.track_failure_divergence": {
+    "code": "class _N2p2Search:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"n2p2 source or ASE is not available\")\n        self.record = None",
+    "name": "bench_n2p2.N2p2EmtPt38Kalman.track_failure_divergence",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'20261015'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "ac1ab073483d65bb6c847b2719d57d3c55f6a485157d187c14b352138cf4b546"
+  },
+  "bench_n2p2.N2p2EmtPt38Kalman.track_failure_wrong_stationary": {
+    "code": "class _N2p2Search:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"n2p2 source or ASE is not available\")\n        self.record = None",
+    "name": "bench_n2p2.N2p2EmtPt38Kalman.track_failure_wrong_stationary",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'20261015'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "b366ff02a5ad9de3847fb9151cdb73f763fd5e895cbc2c28e984c94b64e44f39"
+  },
+  "bench_n2p2.N2p2EmtPt38Kalman.track_force_calls": {
+    "code": "class _N2p2Search:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"n2p2 source or ASE is not available\")\n        self.record = None",
+    "name": "bench_n2p2.N2p2EmtPt38Kalman.track_force_calls",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'20261015'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "force calls",
+    "version": "d284328052ec64e5bf3dd69eb7de3715e726f9ebae4782f6b4fcfb0d1ac3b4f5"
+  },
+  "bench_n2p2.N2p2EmtPt38Kalman.track_success": {
+    "code": "class _N2p2Search:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _ready():\n            raise NotImplementedError(\"n2p2 source or ASE is not available\")\n        self.record = None",
+    "name": "bench_n2p2.N2p2EmtPt38Kalman.track_success",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'20261015'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "fraction",
+    "version": "3ab911b6f5ea5b812893b4cdd78ad13ec2a43391494741066f69202f3de5a950"
   }
 }

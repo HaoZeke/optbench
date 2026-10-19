@@ -1,0 +1,127 @@
+{
+  "full_n": null,
+  "history": [],
+  "id": "mlopt/emt-pt38",
+  "not_comparable": [],
+  "partial": [
+    {
+      "asv_commit": "1e2fce37e03146a8fb5782f8839b45222f91a888",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "n2p2",
+      "code_version": "2.3.0",
+      "commit": "29b9c9f10b1ac9ea45631b3d556a129ca3b701c2",
+      "comparable": true,
+      "counter": "harness",
+      "current": false,
+      "entry": "bench_n2p2.N2p2EmtPt38Kalman",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": null,
+      "history": false,
+      "max_calls": 17.0,
+      "mean_calls": 17.0,
+      "mean_per_image": null,
+      "median": 17.0,
+      "median_calls": 17.0,
+      "median_high": 17.0,
+      "median_low": 17.0,
+      "median_per_image": null,
+      "min_calls": 17.0,
+      "n": 1,
+      "nfailed": 0,
+      "note": "asv track_force_calls",
+      "par2_mean": 17.0,
+      "partial": true,
+      "partial_reason": "smoke run; one start",
+      "path": "results/asv/1e2fce37e03146a8fb5782f8839b45222f91a888",
+      "problem": "mlopt/emt-pt38",
+      "registry_match": true,
+      "scored": true,
+      "source": "asv",
+      "success_rate": 1.0,
+      "template": "n2p2/emt-pt38-kalman",
+      "tuning": "default",
+      "wilson_high": 1.0,
+      "wilson_low": 0.20654931437723745
+    }
+  ],
+  "profile": {
+    "area_log10": {
+      "n2p2/emt-pt38-kalman 2.3.0 default campaign 29b9c9f": 1.2041199826559248
+    },
+    "rho": {
+      "n2p2/emt-pt38-kalman 2.3.0 default campaign 29b9c9f": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "solved": {
+      "n2p2/emt-pt38-kalman 2.3.0 default campaign 29b9c9f": 1.0
+    },
+    "taus": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ]
+  },
+  "ranked": [
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "n2p2",
+      "code_version": "2.3.0",
+      "commit": "29b9c9f10b1ac9ea45631b3d556a129ca3b701c2",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "n2p2-2.3.0-emt-pt38-kalman",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": null,
+      "history": false,
+      "max_calls": 99.0,
+      "mean_calls": 31.5,
+      "mean_per_image": null,
+      "median": 22.5,
+      "median_calls": 22.5,
+      "median_high": 38.5,
+      "median_low": 17.5,
+      "median_per_image": null,
+      "min_calls": 2.0,
+      "n": 50,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 31.5,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/n2p2-2.3.0-emt-pt38-kalman.dat",
+      "problem": "mlopt/emt-pt38",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "n2p2/emt-pt38-kalman",
+      "tuning": "default",
+      "wilson_high": 1.0,
+      "wilson_low": 0.9286524008666414
+    }
+  ],
+  "title": "EMT Pt 38 nanoparticle"
+}
