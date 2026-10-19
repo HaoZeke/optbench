@@ -1074,4 +1074,7 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>
+   <p>No full ranked run</p><ul>
+   <li>optim/de-2ts: no per-start record.</li>
+   </ul>
    </section>

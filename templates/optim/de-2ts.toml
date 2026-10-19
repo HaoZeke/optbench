@@ -1,0 +1,17 @@
+# Native OPTIM double-ended search on the LJ38 two-transition pairs.
+id = "optim/de-2ts"
+engine = "optim"
+problem = "double-ended-saddle-search/lj38_2ts_separation"
+code = "optim"
+code_version = "2015-12-10"
+commit = "79c722dc6a63514acfe623ba007696778064d0b4e327a4798fd4233cc880b97c"
+algorithm = "DNEB + hybrid eigenvector following + Djikstra shortest path"
+tuning = "archive"
+note = "December 2015 Wales svn.tar.bz2 (sha256 79c722dc6a63514acfe623ba007696778064d0b4e327a4798fd4233cc880b97c, 21974243 bytes). Native LJDIFF via symbol AX, not the ASE socket. odata is templates/optim/preambles/de-2ts.txt plus the start coordinates, and finish is the bare end coordinates. PERMDIST is compiled in. The published run.sh scores pairs 0 through 49. A success is the line Connected path found. force_calls is round of the mean of the last energy+gradient calls value over successes. The socket runner refuses this template."
+
+[optim]
+method = "dneb"
+preamble = "templates/optim/preambles/de-2ts.txt"
+symbol = "AX"
+potential = "LJDIFF"
+pairs = "0-49"

@@ -3,11 +3,15 @@
 The binary is the OPTIM target from the Wales snapshot
 ``http://www-wales.ch.cam.ac.uk/svn.tar.bz2``. The pin is the sha256 of
 that file. The snapshot has no git commit. Each ``COMPUTE`` on the relay
-is one ``pes.evaluate``. OPTIM's own counter is not the score.
+is one ``pes.evaluate``. That harness count is the minimization score.
 
-``optim/unhooked`` and every template that is not minimization L-BFGS
-raise before a file is written. Noise, saddle search, NEB, and PATHSAMPLE
-are not this runner.
+``optim/de-2ts`` is the December 2015 native LJDIFF campaign. Its score
+is OPTIM's own energy-plus-gradient counter, already written in the
+campaign file. This socket runner refuses that template.
+
+``optim/unhooked`` and every other template that is not minimization
+L-BFGS raise before a file is written. Noise, saddle search, NEB, and
+PATHSAMPLE are not this runner.
 """
 
 from __future__ import annotations
@@ -281,6 +285,11 @@ def _job(start: dict, settings: dict, template: dict) -> dict:
 
 
 def run(root: Path, problem_name: str, template_name: str, *, output: Path, workers: int = 1) -> dict:
+    if template_name == "optim/de-2ts":
+        raise RuntimeError(
+            "optim/de-2ts is scored from the December 2015 native OPTIM "
+            "energy+gradient counter. The ASE socket does not run it."
+        )
     reason = available()
     if reason:
         raise RuntimeError(reason)

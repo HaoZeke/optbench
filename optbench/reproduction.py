@@ -177,7 +177,7 @@ MATCHES: list[dict] = [
     {"key": "double-ended-saddle-search/lj38/eon-lanczos", "template": "eon-client/de-lj38-lanczos", "branch": "main", "path": "results/campaign/eon-client-de-lj38-lanczos.dat"},
     {"key": "double-ended-saddle-search/lj38/eon-lanczos-improved", "template": "eon-client/de-lj38-lanczos-improved", "branch": "main", "path": "results/campaign/eon-client-de-lj38-lanczos-improved.dat"},
     {"key": "double-ended-saddle-search/lj38/optim", "template": "optim/de-lj38", "branch": "cells/optim/saddle-pt", "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-lj38--optim-de-lj38.dat", "cause": "optim_pes_counter"},
-    {"key": "double-ended-saddle-search/lj38_2ts_separation/optim", "template": "optim/de-2ts", "branch": "cells/optim/saddle-pt", "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-lj38_2ts_separation--optim-de-2ts.dat", "cause": "optim_pes_counter"},
+    {"key": "double-ended-saddle-search/lj38_2ts_separation/optim", "template": "optim/de-2ts", "branch": "repro/double-ended-saddle-search-lj38-2ts-separation-optim", "path": "results/campaign/optim-20151210-double-ended-saddle-search-lj38_2ts_separation--optim-de-2ts.dat"},
     {"key": "double-ended-saddle-search/pt-island/eon-ci-neb", "template": "eon-svn/de-pt-ci-neb", "branch": "main", "path": "results/campaign/eon-svn-de-pt-ci-neb.dat"},
     {"key": "double-ended-saddle-search/pt-island/eon-ci-swdneb", "template": "eon-svn/de-pt-ci-swdneb", "branch": "main", "path": "results/campaign/eon-svn-de-pt-ci-swdneb.dat"},
     {"key": "double-ended-saddle-search/pt-island/eon-dimer", "template": "eon-svn/de-pt-dimer", "branch": "main", "path": "results/campaign/eon-svn-de-pt-dimer.dat"},
@@ -478,6 +478,21 @@ def _sha(branch: str) -> str:
 
         SHA[branch] = subprocess.check_output(
             ["git", "rev-parse", "origin/cells/pele/ts"],
+            text=True,
+        ).strip()
+    if branch not in SHA or len(SHA[branch]) < 12:
+        import subprocess
+
+        root = Path(__file__).resolve().parents[1]
+        current = subprocess.check_output(
+            ["git", "rev-parse", "--abbrev-ref", "HEAD"],
+            cwd=root,
+            text=True,
+        ).strip()
+        ref = "HEAD" if current == branch else f"origin/{branch}"
+        SHA[branch] = subprocess.check_output(
+            ["git", "rev-parse", ref],
+            cwd=root,
             text=True,
         ).strip()
     return SHA[branch]
