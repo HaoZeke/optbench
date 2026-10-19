@@ -244,3 +244,97 @@ def test_lj38_ceiling_matches_the_2014_stop():
     assert cap_of(lj150, template150) == 10_000_000
     assert fire_dt_of(template) == {}
     assert fire_dt_of(other) == {"init": "1.d-9", "min": "1.d-12"}
+
+
+def test_one_cap_is_shared_and_written(tmp_path: Path):
+    import pytest
+
+    from optbench.campaign import load_template, resolve_problem
+    from optbench.runners.flame_go import (
+        HA_EV,
+        IOPUT,
+        _dat,
+        _write_case,
+        cap_of,
+        earr_text,
+        ioput_text,
+        md_lines_of,
+        port_base,
+    )
+
+    root = Path(__file__).resolve().parents[1]
+    lj38 = resolve_problem(root, "globalopt/lj38")
+    flame38 = load_template(root, "flame/lj38-minhocao")
+    lj75 = resolve_problem(root, "globalopt/lj75")
+    flame75 = load_template(root, "flame/lj75-minhocao")
+    lj98 = resolve_problem(root, "globalopt/lj98")
+    flame98 = load_template(root, "flame/lj98-minhocao")
+    lj150 = resolve_problem(root, "globalopt/lj150")
+    flame150 = load_template(root, "flame/lj150-minhocao")
+
+    assert cap_of(lj38, flame38) == 10_000_000
+    assert cap_of(lj75, flame75) == 1_000_000
+    assert cap_of(lj98, flame98) == 1_000_000_000
+    assert cap_of(lj150, flame150) == 10_000_000
+    with pytest.raises(ValueError, match="disagrees"):
+        cap_of(
+            {"id": "globalopt/lj75", "convergence": {"max_force_calls": 1_000_000}},
+            {"id": "flame/lj75-minhocao", "failure_cap": 2_000_000},
+        )
+
+    assert md_lines_of(flame38) == []
+    assert ioput_text(flame38) == IOPUT
+    assert md_lines_of(flame98) == ["MDDTINIT 2"]
+    assert md_lines_of(flame150) == ["MDDTINIT 2"]
+    assert ioput_text(flame98) == IOPUT
+    assert earr_text(flame98).strip() == "2.000000E-03   1.000000E-01"
+    published = md_lines_of(flame75)
+    assert published == [
+        "MDDTINIT 2",
+        "SOFTNIT 20",
+        "MDMININIT 3",
+        "GEOTOLMXF 1.d-3",
+    ]
+    ediff, temperature, tmax = (float(part.replace("d", "e").replace("D", "E")) for part in ioput_text(flame75).split())
+    assert abs(ediff - (1.1 / HA_EV)) < 5e-13
+    # minhopp ekin 0.09 is kinetic energy per remaining degree of freedom.
+    # 1.5 N kT matches that total when T = 0.18 (N-1) / N / kB.
+    kelvin = 0.18 * (74 / 75) / (3.1668154197285284e-6 * HA_EV)
+    assert abs(temperature - kelvin) < 5e-4
+    assert tmax == 1.0e5
+    enthalpy, fingerprint = (float(part) for part in earr_text(flame75).split())
+    assert abs(enthalpy - (1.0e-3 / HA_EV)) < 5e-16
+    assert fingerprint == 0.1
+
+    positions = np.zeros((4, 3))
+    _write_case(tmp_path, positions, 9, 3, 4, {"init": "1.d-9", "min": "1.d-12"}, published, ioput_text(flame75), earr_text(flame75))
+    params = (tmp_path / "params_new.in").read_text(encoding="utf-8")
+    for line in published:
+        assert line in params
+    assert "GEOFIREDTINIT 1.d-9" in params
+    assert (tmp_path / "ioput").read_text(encoding="utf-8") == ioput_text(flame75)
+
+    text = _dat(
+        {"force_calls": 10, "nfailed": 1, "median": 10},
+        flame75,
+        {
+            "par2_mean": 2_000_000,
+            "nfailed": 1,
+            "successes": 0,
+            "n": 1,
+            "n_cap": 1,
+            "n_divergence": 0,
+            "n_crash": 0,
+            "n_wrong_stationary": 0,
+        },
+        "abc",
+        "1.0",
+        partial=False,
+        ceiling=-397.491331,
+        cap=1_000_000,
+    )
+    assert "cap 1000000\n" in text
+    assert "n_divergence 0\n" in text
+    assert "PAR-2 charges 2*cap" in text
+    assert port_base("globalopt/lj75") + 199 + 63 < port_base("globalopt/lj98")
+    assert port_base("globalopt/lj98") + 99 + 63 < port_base("globalopt/lj150")

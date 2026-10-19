@@ -77,13 +77,42 @@ def flame_binary() -> Path:
     return Path("/tmp/flame-build/src/flame")
 
 
+def port_base(problem_id: str) -> int:
+    """Preferred TCP port for the first start of a problem.
+
+    Each start scans 64 ports upward. The blocks are 300 apart so lj75
+    (200 starts), lj98, and lj150 can run at the same time.
+    """
+    block = {
+        "globalopt/lj38": 0,
+        "globalopt/lj75": 0,
+        "globalopt/lj98": 1,
+        "globalopt/lj150": 2,
+    }.get(str(problem_id), 3)
+    return 25000 + 300 * block
+
+
 def cap_of(problem: dict, template: dict) -> int | None:
+    """The one force-call cap for this problem.
+
+    A problem ``max_force_calls`` is that cap. The template ``failure_cap``
+    has to repeat it. When the problem states no cap, the template value is
+    the cap. The harness stop, the PAR-2 penalty, and the dat ``cap`` field
+    all use this number.
+    """
     convergence = problem.get("convergence") or {}
     stated = convergence.get("max_force_calls")
+    failure = template.get("failure_cap")
+    if stated not in (None, "") and failure not in (None, ""):
+        if int(stated) != int(failure):
+            raise ValueError(
+                f"{template.get('id', 'template')} failure_cap {failure} "
+                f"disagrees with {problem.get('id', 'problem')} max_force_calls {stated}"
+            )
     if stated not in (None, ""):
         return int(stated)
-    if template.get("failure_cap") not in (None, ""):
-        return int(template["failure_cap"])
+    if failure not in (None, ""):
+        return int(failure)
     stop = template.get("stop") or {}
     for key in ("max_force_calls", "max_steps"):
         if stop.get(key) not in (None, ""):
@@ -268,7 +297,53 @@ def fire_dt_of(template: dict) -> dict:
     return found
 
 
-def _write_case(work: Path, positions, port: int, seed: int, nlminx: int, fire_dt: dict | None = None) -> None:
+def md_lines_of(template: dict) -> list[str]:
+    """Optional params_new lines. Empty keeps the minhocao defaults."""
+    flame = template.get("flame") or {}
+    lines = []
+    for source, label in (
+        ("mddtinit", "MDDTINIT"),
+        ("softnit", "SOFTNIT"),
+        ("mdmininit", "MDMININIT"),
+        ("geotolmxf", "GEOTOLMXF"),
+    ):
+        value = flame.get(source)
+        if value not in (None, ""):
+            lines.append(f"{label} {str(value).strip()}")
+    return lines
+
+
+def ioput_text(template: dict) -> str:
+    """The three-number ioput line. The default is the documented 16-atom start."""
+    raw = (template.get("flame") or {}).get("ioput")
+    if raw in (None, ""):
+        return IOPUT
+    text = str(raw).strip()
+    return text if text.endswith("\n") else text + "\n"
+
+
+def earr_text(template: dict) -> str:
+    """The earr tolerance line. The default is the documented fingerprint pair."""
+    raw = (template.get("flame") or {}).get("earr_tolerance")
+    if raw in (None, ""):
+        return EARR_TOLERANCE
+    text = str(raw).strip("\n")
+    if not text.endswith("\n"):
+        text += "\n"
+    return text
+
+
+def _write_case(
+    work: Path,
+    positions,
+    port: int,
+    seed: int,
+    nlminx: int,
+    fire_dt: dict | None = None,
+    md_lines: list[str] | None = None,
+    ioput: str | None = None,
+    earr: str | None = None,
+) -> None:
     nat = int(positions.shape[0])
     work.mkdir(parents=True, exist_ok=True)
     (work / "flame_in.yaml").write_text(
@@ -303,11 +378,15 @@ def _write_case(work: Path, positions, port: int, seed: int, nlminx: int, fire_d
         value = None if not fire_dt else fire_dt.get(key)
         if value not in (None, ""):
             lines.append(f"{label} {value}")
+    lines.extend(line.strip() for line in (md_lines or []) if str(line).strip())
     if lines:
         with (work / "params_new.in").open("a", encoding="utf-8") as handle:
             handle.write("\n".join(lines) + "\n")
-    (work / "ioput").write_text(IOPUT, encoding="utf-8")
-    (work / "earr.dat").write_text(f"{0:10d}{int(nlminx):10d}\n" + EARR_TOLERANCE, encoding="utf-8")
+    (work / "ioput").write_text(ioput if ioput not in (None, "") else IOPUT, encoding="utf-8")
+    (work / "earr.dat").write_text(
+        f"{0:10d}{int(nlminx):10d}\n" + (earr if earr not in (None, "") else EARR_TOLERANCE),
+        encoding="utf-8",
+    )
     # poscur.ascii stores the projective cell (dxx, dyx, dyy) and
     # (dzx, dzy, dzz), not lengths and angles. A cube of side L is
     # ``L 0 L`` / ``0 0 L``. Lengths and 90 degree angles are read as
@@ -380,6 +459,9 @@ def _run_start(job: dict) -> dict:
         int(job["seed"]),
         int(job["nlminx"]),
         job.get("fire_dt") or None,
+        job.get("md_lines") or None,
+        job.get("ioput"),
+        job.get("earr"),
     )
     cap = None if job["cap"] is None else int(job["cap"])
     target = None if job["target"] is None else float(job["target"])
@@ -565,7 +647,17 @@ def _format_field(value: object) -> str:
     return str(value)
 
 
-def _dat(summary: dict, template: dict, metrics: dict, commit: str, version: str, *, partial: bool, ceiling) -> str:
+def _dat(
+    summary: dict,
+    template: dict,
+    metrics: dict,
+    commit: str,
+    version: str,
+    *,
+    partial: bool,
+    ceiling,
+    cap,
+) -> str:
     rows = {
         "force_calls": summary.get("force_calls"),
         "force_calls_min": summary.get("force_calls_min"),
@@ -592,6 +684,11 @@ def _dat(summary: dict, template: dict, metrics: dict, commit: str, version: str
         "energy_min": summary.get("energy_min"),
         "energy_max": summary.get("energy_max"),
         "calls_to_best_mean": summary.get("calls_to_best_mean"),
+        "cap": cap,
+        "n_cap": metrics.get("n_cap"),
+        "n_divergence": metrics.get("n_divergence"),
+        "n_crash": metrics.get("n_crash"),
+        "n_wrong_stationary": metrics.get("n_wrong_stationary"),
     }
     if partial:
         rows["partial"] = "true"
@@ -599,9 +696,14 @@ def _dat(summary: dict, template: dict, metrics: dict, commit: str, version: str
         "# counter harness. One force call is one minhocao POSDATA evaluated by lennard_jones.",
         "# Positions cross the socket in Bohr and return as Hartree and Ha/Bohr with FLAME Bohr_Ang and Ha_eV.",
         "# The cluster is translated to the centre of a 1e7 Angstrom cell. The potential has no periodic images.",
-        "# ioput is the documented minhocao start 1.d-2 5.d2 1.d5. earr tolerances are 2.d-3 1.d-1.",
-        "# Local optimisation is the code default FIRE tolerance 2.d-4 Ha/Bohr.",
+        "# ioput is " + ioput_text(template).strip() + ". earr tolerances are " + earr_text(template).strip() + ".",
+        "# Local optimisation is the code default FIRE tolerance 2.d-4 Ha/Bohr unless GEOTOLMXF is set.",
     ]
+    if cap is not None:
+        lines.append(
+            f"# cap is {int(cap)}. The harness stops at this value and PAR-2 charges 2*cap for every failure class. "
+            "nfailed counts only starts whose call count reached cap. v2_nfailed counts every failure class."
+        )
     fire = fire_dt_of(template)
     if fire:
         lines.append(
@@ -674,7 +776,7 @@ def _publish(output: Path, records: list[dict], problem: dict, template: dict, *
     commit = str(template.get("commit") or "")
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(
-        _dat(legacy, template, metrics, commit, version, partial=partial, ceiling=ceiling),
+        _dat(legacy, template, metrics, commit, version, partial=partial, ceiling=ceiling, cap=cap),
         encoding="utf-8",
     )
     write_starts(output.with_suffix(".starts.jsonl"), public)
@@ -687,7 +789,12 @@ def _publish(output: Path, records: list[dict], problem: dict, template: dict, *
             "cap": cap,
             "ceiling": ceiling,
             "cell_angstrom": CELL_ANG,
-            "ioput": IOPUT.strip(),
+            "ioput": ioput_text(template).strip(),
+            "earr_tolerance": earr_text(template).strip(),
+            "mddtinit": (template.get("flame") or {}).get("mddtinit"),
+            "softnit": (template.get("flame") or {}).get("softnit"),
+            "mdmininit": (template.get("flame") or {}).get("mdmininit"),
+            "geotolmxf": (template.get("flame") or {}).get("geotolmxf"),
             "geofiredtinit": (template.get("flame") or {}).get("geofiredtinit"),
             "geofiredtmin": (template.get("flame") or {}).get("geofiredtmin"),
         },
@@ -758,6 +865,9 @@ def run_template(
     seed = int(flame.get("seed", 314159))
     nlminx = int(flame.get("nlminx", DEFAULT_NLMINX))
     fire_dt = fire_dt_of(template)
+    md_lines = md_lines_of(template)
+    ioput = ioput_text(template)
+    earr = earr_text(template)
     loaded = load_geometries(root, problem, geometries, work, output)
     if limit > 0:
         loaded = loaded[: int(limit)]
@@ -781,12 +891,15 @@ def run_template(
                 "index": index,
                 "start": name,
                 "coords": coords.reshape(-1).tolist(),
-                "port": 25000 + index,
+                "port": port_base(str(problem["id"])) + index,
                 "work": str(scratch / f"{index:04d}"),
                 "binary": str(binary),
                 "seed": seed,
                 "nlminx": nlminx,
                 "fire_dt": fire_dt,
+                "md_lines": md_lines,
+                "ioput": ioput,
+                "earr": earr,
                 "cap": cap,
                 "target": search_target(problem, template),
                 "claim": ceiling is not None,

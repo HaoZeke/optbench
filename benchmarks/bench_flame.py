@@ -47,7 +47,15 @@ def _count(problem_id: str) -> int:
 
 def _specs() -> list[dict]:
     from optbench.campaign import list_templates, resolve_problem
-    from optbench.runners.flame_go import cap_of, fire_dt_of, search_target, success_ceiling
+    from optbench.runners.flame_go import (
+        cap_of,
+        earr_text,
+        fire_dt_of,
+        ioput_text,
+        md_lines_of,
+        search_target,
+        success_ceiling,
+    )
 
     found = []
     counts: dict[str, int] = {}
@@ -70,6 +78,9 @@ def _specs() -> list[dict]:
                 "target": search_target(problem, template),
                 "claim": success_ceiling(problem, template) is not None,
                 "fire_dt": fire_dt_of(template),
+                "md_lines": md_lines_of(template),
+                "ioput": ioput_text(template),
+                "earr": earr_text(template),
                 "nlminx": int(flame.get("nlminx", 100000)),
                 "n": counts[problem_id],
             }
@@ -103,6 +114,9 @@ def _job(spec: dict, start: str) -> dict:
         "seed": int(spec["seed"]),
         "nlminx": spec["nlminx"],
         "fire_dt": spec["fire_dt"],
+        "md_lines": spec["md_lines"],
+        "ioput": spec["ioput"],
+        "earr": spec["earr"],
         "cap": spec["cap"],
         "target": spec["target"],
         "claim": spec["claim"],
