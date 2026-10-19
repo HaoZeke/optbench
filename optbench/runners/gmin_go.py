@@ -8,15 +8,13 @@ is not the score.
 
 The quench RMS is ``sqrt(sum(g^2)/(3N))``, the same reduction as GMIN.
 A quench at or below the template ``sloppyconv`` can update the lowest
-energy. ``failure_cap`` is the template budget. The globalopt problem
-files do not set ``max_force_calls``.
+energy. ``failure_cap`` matches ``max_force_calls`` when the problem
+states one. lj38 does not, and its template cap is 2000000.
 
-lj38 states ``energy_above_minimum``. A start succeeds when the lowest
-quench energy is within that tolerance of the harness energy of
-``codes/gmin/reference/lj38.points`` and the call count is under the cap.
-The other three problems do not state a success rule. Those rows carry
-the same comparison, with the tolerance taken from the template, and the
-result file sets ``partial true``.
+A start succeeds when the lowest quench energy is within
+``energy_above_minimum`` of the harness energy of the Cambridge points
+and the call count is under the cap. The harness energy is
+``lennard_jones`` on ``codes/gmin/reference/lj<N>.points``.
 """
 
 from __future__ import annotations
@@ -111,8 +109,8 @@ def _extract(archive: Path, dest: Path) -> None:
     marker.write_text(recorded, encoding="utf-8")
 
 
-# These problem files do not set input.archive_path. The tarballs are the
-# 2014 website starts: numbered coords.N, 200 for LJ75 and 100 for the others.
+# Numbered coords.N from the 2014 website tarballs: 200 for LJ75 and 100
+# for LJ98 and LJ150. Used when a problem file leaves archive_path unset.
 _ARCHIVE_FALLBACK = {
     "globalopt/lj75": "website/globalopt/lj75/lj75_clusters.tgz",
     "globalopt/lj98": "website/globalopt/lj98/lj98_clusters.tgz",

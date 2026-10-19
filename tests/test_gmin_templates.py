@@ -39,7 +39,6 @@ def test_eight_templates_cover_bh_and_bhpt():
         assert template["code_version"] == CODE_VERSION
         assert template["commit"] == TARBALL_SHA256
         assert template["problem"] in PROBLEMS
-        assert int(template["failure_cap"]) == 2_000_000
         section = template["gmin"]
         assert section["method"] in {"bh", "bhpt"}
         if section["method"] == "bhpt":
@@ -48,22 +47,28 @@ def test_eight_templates_cover_bh_and_bhpt():
             assert int(section["replicas"]) == 1
         problem = resolve_problem(ROOT, template["problem"])
         _check_stop(problem, template)
-        stated = (problem.get("convergence") or {}).get("energy_above_minimum")
+        convergence = problem.get("convergence") or {}
+        stated = convergence.get("energy_above_minimum")
         if stated is not None:
             assert abs(float(stated) - float(section["ediff"])) < 1e-12
+        stated_cap = convergence.get("max_force_calls")
+        if stated_cap is not None:
+            assert int(template["failure_cap"]) == int(stated_cap)
+        else:
+            assert int(template["failure_cap"]) == 2_000_000
 
 
-def test_unstated_clusters_use_the_website_archives(tmp_path):
+def test_cluster_starts_are_the_numbered_website_coords(tmp_path):
     from optbench.runners.gmin_go import load_geometries
 
     expected = {
-        "globalopt/lj75": 200,
-        "globalopt/lj98": 100,
-        "globalopt/lj150": 100,
+        "globalopt/lj75": ("website/globalopt/lj75/lj75_clusters.tgz", 200),
+        "globalopt/lj98": ("website/globalopt/lj98/lj98_clusters.tgz", 100),
+        "globalopt/lj150": ("website/globalopt/lj150/lj150_clusters.tgz", 100),
     }
-    for problem_id, count in expected.items():
+    for problem_id, (archive, count) in expected.items():
         problem = resolve_problem(ROOT, problem_id)
-        assert (problem.get("input") or {}).get("archive_path") is None
+        assert (problem.get("input") or {}).get("archive_path") == archive
         loaded = load_geometries(ROOT, problem, tmp_path / problem_id.replace("/", "-"))
         assert len(loaded) == count
         assert loaded[0][0] == "coords.1"
@@ -117,6 +122,11 @@ def test_asv_classes_import_with_one_start():
         if isinstance(value, type) and getattr(value, "param_names", None) == ["seed", "start"]
     ]
     assert len(classes) == 8
+    caps = {
+        item["id"]: int(item["failure_cap"])
+        for item in list_templates(ROOT)
+        if item.get("engine") == "gmin"
+    }
     for benchmark in classes:
         assert benchmark.params == [["0"], ["0"]]
-        assert benchmark.cap == 2_000_000
+        assert benchmark.cap == caps[benchmark.spec["template_id"]]
