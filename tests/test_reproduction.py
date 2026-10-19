@@ -7,6 +7,7 @@ from optbench.check import load_oracle
 from optbench.problems import load_problem
 from optbench.reproduction import (
     baseline_errors,
+    diagnostics,
     holdback,
     judge_checks,
     load_ledger,
@@ -35,7 +36,7 @@ def test_the_ledger_covers_the_oracle_in_order():
             assert row["cause"]
         if (row.get("rerun") or {}).get("paper_baseline"):
             assert status == "reproduced"
-    assert counts == {"reproduced": 47, "not_reproduced": 28, "not_rerun": 76}
+    assert counts == {"reproduced": 46, "not_reproduced": 29, "not_rerun": 76}
     assert reproduction_errors(ROOT) == []
 
 
@@ -61,11 +62,18 @@ def test_pele_paper_baseline_is_the_2014_stop():
     assert ("double-ended-saddle-search/lj38", "eon-client/de-lj38-ci-swdneb") in held.templates
     assert "results/campaign/eon-3.5.0-saddle-pt-classic.dat" in held.paths
     morse = ledger["minimization/morse-bulk/ase-preconLBFGS"]
-    assert morse["status"] == "reproduced"
-    assert morse["rerun"]["path"] == "results/campaign/ase-3.19.1-morse-preconlbfgs-tuned.dat"
-    assert morse["checks"][0]["rerun"] == 34.0
-    assert ("minimization/morse-bulk", "ase/morse-preconlbfgs-tuned", "3.29.0") not in held.versions
+    assert morse["status"] == "not_reproduced"
+    assert morse["cause"] == "ase_stock"
+    assert morse["rerun"]["path"] == "results/campaign/ase-3.29.0-morse-preconlbfgs-default.dat"
+    assert morse["rerun"]["code_version"] == "3.29.0"
+    assert morse["rerun"]["rank"] is True
+    assert morse["rerun"]["paper_baseline"] is False
+    assert morse["checks"][0]["archive"] == 34.0
+    assert morse["checks"][0]["rerun"] == 60.0
+    assert ("minimization/morse-bulk", "ase/morse-preconlbfgs-default") not in held.templates
+    assert "results/campaign/ase-3.29.0-morse-preconlbfgs-default.dat" not in held.paths
     assert ("minimization/morse-bulk", "ase/morse-preconlbfgs-tuned") not in held.templates
+    assert ("minimization/morse-bulk", "ase/morse-preconlbfgs-tuned") in diagnostics(ROOT)
 
 
 def test_a_paper_baseline_outside_the_archive_fails(tmp_path: Path):

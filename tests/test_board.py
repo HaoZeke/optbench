@@ -87,6 +87,7 @@ def _dat(
     version: str = "1.0",
     code: str = "toy",
     problem: str = "minimization/toy",
+    label: str = "",
 ) -> Path:
     path = root / "results" / "campaign" / f"{stem}.dat"
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -102,6 +103,7 @@ def _dat(
                 f"problem {problem}",
                 f"counter {counter}",
                 "tuning default",
+                *([f"label {label}"] if label else []),
                 "",
             ]
         ),
@@ -516,16 +518,17 @@ def test_only_the_newest_full_version_is_ranked(tmp_path: Path):
     assert current.is_file()
 
 
-def test_a_paper_baseline_sits_beside_the_current_ase_version(tmp_path: Path):
+def test_a_stock_row_stays_ranked_and_a_diagnostic_template_is_history(tmp_path: Path):
     from optbench.board import ranked_cells
 
     _problem(tmp_path, starts=2, cap=10)
-    _template(tmp_path, "toy/ase")
+    _template(tmp_path, "toy/stock")
+    _template(tmp_path, "toy/tuned")
     _registry(tmp_path)
-    paper = _dat(tmp_path, "paper", PIN, template="toy/ase", version="3.19.1", code="ASE")
-    _dat(tmp_path, "current", OTHER, template="toy/ase", version="3.29.0", code="ASE")
-    _starts(tmp_path, "paper", [_row(8, True, "0"), _row(8, True, "1")])
-    _starts(tmp_path, "current", [_row(3, True, "0"), _row(3, True, "1")])
+    _dat(tmp_path, "stock", PIN, template="toy/stock", version="3.29.0", code="ASE", label="stock")
+    _dat(tmp_path, "tuned", OTHER, template="toy/tuned", version="3.19.1", code="ASE")
+    _starts(tmp_path, "stock", [_row(6, True, "0"), _row(6, True, "1")])
+    _starts(tmp_path, "tuned", [_row(3, True, "0"), _row(3, True, "1")])
     ledger = tmp_path / "oracle" / "reproduction.jsonl"
     ledger.parent.mkdir(parents=True)
     ledger.write_text(
@@ -533,11 +536,13 @@ def test_a_paper_baseline_sits_beside_the_current_ase_version(tmp_path: Path):
             {
                 "suite": "minimization",
                 "problem": "toy",
-                "status": "reproduced",
+                "status": "not_reproduced",
                 "rerun": {
-                    "template": "toy/ase",
-                    "path": str(paper.relative_to(tmp_path)),
-                    "paper_baseline": True,
+                    "template": "toy/stock",
+                    "path": "results/campaign/stock.dat",
+                    "rank": True,
+                    "code_version": "3.29.0",
+                    "diagnostic": ["toy/tuned"],
                 },
             }
         )
@@ -545,14 +550,14 @@ def test_a_paper_baseline_sits_beside_the_current_ase_version(tmp_path: Path):
         encoding="utf-8",
     )
 
-    ranked = build_board(tmp_path)["problems"]["minimization/toy"]["ranked"]
+    problem = build_board(tmp_path)["problems"]["minimization/toy"]
 
-    assert [row["code_version"] for row in ranked] == ["3.19.1", "3.29.0"]
-    assert [row["board_label"] for row in ranked] == ["paper", "current-ASE"]
-    assert ranked[0]["current"] is False
-    assert ranked[1]["current"] is True
-    assert dict(ranked_cells(ranked[0], False))["version"] == "ASE 3.19.1 paper"
-    assert dict(ranked_cells(ranked[1], False))["version"] == "ASE 3.29.0 current-ASE"
+    assert [row["template"] for row in problem["ranked"]] == ["toy/stock"]
+    assert problem["ranked"][0]["partial"] is False
+    assert dict(ranked_cells(problem["ranked"][0], False))["version"] == "ASE 3.29.0 stock"
+    assert [row["template"] for row in problem["history"]] == ["toy/tuned"]
+    assert problem["history"][0]["partial"] is False
+    assert problem["partial"] == []
 
 
 def test_two_codes_on_one_band_rank_the_same_total(tmp_path: Path):

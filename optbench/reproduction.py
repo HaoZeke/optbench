@@ -150,9 +150,12 @@ MATCHES: list[dict] = [
     {"key": "minimization/morse-bulk/ase-fire", "template": "ase/morse-fire-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-morse-fire-tuned.dat", "cause": "ase_morse_script"},
     {
         "key": "minimization/morse-bulk/ase-preconLBFGS",
-        "template": "ase/morse-preconlbfgs-tuned",
-        "branch": "repro/minimization-morse-bulk-ase-preconlbfgs",
-        "path": "results/campaign/ase-3.19.1-morse-preconlbfgs-tuned.dat",
+        "template": "ase/morse-preconlbfgs-default",
+        "branch": "main",
+        "path": "results/campaign/ase-3.29.0-morse-preconlbfgs-default.dat",
+        "cause": "ase_stock",
+        "diagnostic": ["ase/morse-preconlbfgs-tuned"],
+        "extra": {"code_version": "3.29.0", "rank": True},
     },
     # lowest eigenvector
     {"key": "lowest-eigenvector/lj38/eon-dimer-cg", "template": "eon-client/low-lj38-dimer-cg", "branch": "main", "path": "results/campaign/eon-client-low-lj38-dimer-cg.dat"},
@@ -235,6 +238,11 @@ CAUSE_TEXT = {
         "scores 32 and 113 against 53.8 and 147.47. "
         "Constructor-default L-BFGS scores 53, next to 53.8, but that is not the archived alpha and memory. "
         "eOn Morse L-BFGS and FIRE on the same bulk file reproduce, so the geometry set is not the split."
+    ),
+    "ase_stock": (
+        "ASE 3.29.0 PreconLBFGS constructor defaults on the Morse bulk starts, "
+        "stopped at the problem force norm, score 60 against the archived 34. "
+        "The release is unmodified. The gap is the finding."
     ),
     "optim_pt_units": (
         "archive run.sh divides coordinates by r0 = 2.897 and scales rho and rcut into those units. "
@@ -516,13 +524,14 @@ def holdback(root: Path) -> Hold:
 
     ``hold`` entries are included for every ledger row. A reproduced
     per-image file can still keep a raw-total template off the table.
+    A miss with ``rank`` stays on the ranked table.
     """
     found = Hold()
     for row in load_ledger(root / "oracle" / "reproduction.jsonl"):
         rerun = row.get("rerun") or {}
         problem = f"{row['suite']}/{row['problem']}"
         template = str(rerun.get("template") or "")
-        if row.get("status") == "not_reproduced":
+        if row.get("status") == "not_reproduced" and not rerun.get("rank"):
             if template:
                 found.templates.add((problem, template))
             rel = str(rerun.get("path") or "")
@@ -534,6 +543,17 @@ def holdback(root: Path) -> Hold:
         for version in rerun.get("hold_versions") or []:
             if template:
                 found.versions.add((problem, template, str(version)))
+    return found
+
+
+def diagnostics(root: Path) -> set[tuple[str, str]]:
+    """Paper-era templates that stay in history."""
+    found: set[tuple[str, str]] = set()
+    for row in load_ledger(root / "oracle" / "reproduction.jsonl"):
+        rerun = row.get("rerun") or {}
+        problem = f"{row['suite']}/{row['problem']}"
+        for extra in rerun.get("diagnostic") or []:
+            found.add((problem, str(extra)))
     return found
 
 
@@ -787,6 +807,8 @@ def build_rows(root: Path) -> list[dict]:
             "baseline_metric": rerun_fields.get("baseline_metric", names[0] if names else "force_calls"),
             "hold": match.get("hold") or [],
         }
+        if match.get("diagnostic"):
+            rerun["diagnostic"] = list(match["diagnostic"])
         if kind == "screen":
             rerun["stop2014_calls"] = _float(rerun_fields.get("force_calls"))
             rerun["harness_stop_mean"] = _float(rerun_fields.get("harness_stop_mean"))
@@ -822,6 +844,8 @@ def render_markdown(rows: list[dict]) -> str:
         "OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.",
         "",
         "EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.",
+        "",
+        "ASE 3.29.0 Morse bulk PreconLBFGS uses constructor defaults. The archived force_calls integer is 34 and the stock harness score is 60.",
         "",
         "Table 10 prints EON Lanczos 165. The archive file is 325. CI-NEB(3) prints 3 failures; the archive file has 0.",
         "",

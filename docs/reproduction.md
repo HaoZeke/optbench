@@ -2,13 +2,15 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-47 reproduced, 28 not reproduced, 76 not rerun. 151 archive rows.
+46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
 OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.
 
 EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.
+
+ASE 3.29.0 Morse bulk PreconLBFGS uses constructor defaults. The archived force_calls integer is 34 and the stock harness score is 60.
 
 Table 10 prints EON Lanczos 165. The archive file is 325. CI-NEB(3) prints 3 failures; the archive file has 0.
 
@@ -134,7 +136,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj38/tsase-sdlbfgs | — | — | not rerun |
 | morse-bulk/ase-fire | force_calls 147.47 | 113 | not reproduced; ase_morse_script |
 | morse-bulk/ase-lbfgs | force_calls 53.8 | 32 | not reproduced; ase_morse_script |
-| morse-bulk/ase-preconLBFGS | force_calls 34 | 34 | reproduced |
+| morse-bulk/ase-preconLBFGS | force_calls 34 | 60 | not reproduced; ase_stock |
 | morse-bulk/eon-cg | force_calls 106 | 106 | reproduced |
 | morse-bulk/eon-fire | force_calls 156 | 156 | reproduced |
 | morse-bulk/eon-lbfgs | force_calls 52 | 52 | reproduced |
@@ -305,6 +307,12 @@ ASE 3.29 with the archived Morse script (L-BFGS memory 20, maxstep 0.2, alpha 25
 
 - minimization/morse-bulk/ase-fire
 - minimization/morse-bulk/ase-lbfgs
+
+### ase_stock
+
+ASE 3.29.0 PreconLBFGS constructor defaults on the Morse bulk starts, stopped at the problem force norm, score 60 against the archived 34. The release is unmodified. The gap is the finding.
+
+- minimization/morse-bulk/ase-preconLBFGS
 
 ### morse_sd
 
