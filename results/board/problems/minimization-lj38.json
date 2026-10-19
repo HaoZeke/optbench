@@ -2258,314 +2258,314 @@
   ],
   "profile": {
     "area_log10": {
-      "ase/lj38-bfgs-default 3.29.0 default asv f27c000": 0.008278324880759483,
-      "ase/lj38-bfgs-default 3.29.0 default campaign f27c000": 0.005569054919783652,
-      "ase/lj38-bfgs-tuned 3.29.0 tuned asv f27c000": 0.008278324880759483,
-      "ase/lj38-bfgs-tuned 3.29.0 tuned campaign f27c000": 0.008278324880759483,
-      "ase/lj38-bfgslinesearch-default 3.29.0 default asv f27c000": 0.00511750992628768,
-      "ase/lj38-bfgslinesearch-default 3.29.0 default campaign f27c000": 0.00511750992628768,
-      "ase/lj38-bfgslinesearch-tuned 3.29.0 tuned asv f27c000": 0.007224719895935551,
-      "ase/lj38-bfgslinesearch-tuned 3.29.0 tuned campaign f27c000": 0.007224719895935551,
-      "ase/lj38-fire-default 3.29.0 default asv f27c000": 0.0049669949284556906,
-      "ase/lj38-fire-default 3.29.0 default campaign f27c000": 0.0049669949284556906,
-      "ase/lj38-fire-tuned 3.29.0 tuned asv f27c000": 0.005719569917615642,
-      "ase/lj38-fire-tuned 3.29.0 tuned campaign f27c000": 0.005719569917615642,
-      "ase/lj38-lbfgs-default 3.29.0 default asv f27c000": 0.011288624837399295,
-      "ase/lj38-lbfgs-default 3.29.0 default campaign f27c000": 0.007826779887263512,
-      "ase/lj38-lbfgs-tuned 3.29.0 tuned asv f27c000": 0.011138109839567305,
-      "ase/lj38-lbfgs-tuned 3.29.0 tuned campaign f27c000": 0.011138109839567305,
-      "ase/lj38-preconfire-default 3.29.0 default asv f27c000": 0.00045154499349597186,
-      "ase/lj38-preconfire-default 3.29.0 default campaign f27c000": 0.00045154499349597186,
-      "ase/lj38-preconlbfgs-default 3.29.0 default asv f27c000": 0.004364934937127728,
-      "ase/lj38-preconlbfgs-default 3.29.0 default campaign f27c000": 0.004364934937127728,
-      "dlfind/cg-lj38 0.0.3 default campaign 4167998": 0.0,
-      "dlfind/lbfgs-lj38 0.0.3 default campaign 4167998": 0.01505149978319906,
-      "dlfind/sd-lj38 0.0.3 default campaign 4167998": 0.0,
-      "eon/lj38-lbfgs 3.6.0 campaign 1d71c94": 0.013847379800543135,
-      "eon/lj38-lbfgs-m100 3.6.0 campaign 1d71c94": 0.01505149978319906,
-      "lammps/cg-lj38 30 Sep 2026 default campaign 8de817d": 0.0007525749891599532,
-      "lammps/fire-lj38 30 Sep 2026 default campaign 8de817d": 0.00737523489376754,
-      "lammps/hftn-lj38 30 Sep 2026 default campaign 8de817d": 0.0010536049848239345,
-      "lammps/quickmin-lj38 30 Sep 2026 default campaign 8de817d": 0.0,
+      "ase/lj38-bfgs-default 3.29.0 default asv f27c000": 0.3740297696124967,
+      "ase/lj38-bfgs-default 3.29.0 default campaign f27c000": 0.3157804654515163,
+      "ase/lj38-bfgs-tuned 3.29.0 tuned asv f27c000": 0.3740297696124967,
+      "ase/lj38-bfgs-tuned 3.29.0 tuned campaign f27c000": 0.37463182960382463,
+      "ase/lj38-bfgslinesearch-default 3.29.0 default asv f27c000": 0.2557249813165521,
+      "ase/lj38-bfgslinesearch-default 3.29.0 default campaign f27c000": 0.25587549631438405,
+      "ase/lj38-bfgslinesearch-tuned 3.29.0 tuned asv f27c000": 0.3017825706531412,
+      "ase/lj38-bfgslinesearch-tuned 3.29.0 tuned campaign f27c000": 0.3019330856509732,
+      "ase/lj38-fire-default 3.29.0 default asv f27c000": 0.2281807367132978,
+      "ase/lj38-fire-default 3.29.0 default campaign f27c000": 0.22863228170679373,
+      "ase/lj38-fire-tuned 3.29.0 tuned asv f27c000": 0.22968588669161769,
+      "ase/lj38-fire-tuned 3.29.0 tuned campaign f27c000": 0.2298364016894497,
+      "ase/lj38-lbfgs-default 3.29.0 default asv f27c000": 0.5751178067160361,
+      "ase/lj38-lbfgs-default 3.29.0 default campaign f27c000": 0.4584686833962434,
+      "ase/lj38-lbfgs-tuned 3.29.0 tuned asv f27c000": 0.48465829301900976,
+      "ase/lj38-lbfgs-tuned 3.29.0 tuned campaign f27c000": 0.4855613830060017,
+      "ase/lj38-preconfire-default 3.29.0 default asv f27c000": 0.023179309666126555,
+      "ase/lj38-preconfire-default 3.29.0 default campaign f27c000": 0.023329824663958547,
+      "ase/lj38-preconlbfgs-default 3.29.0 default asv f27c000": 0.19175610723795605,
+      "ase/lj38-preconlbfgs-default 3.29.0 default campaign f27c000": 0.19205713723362003,
+      "dlfind/cg-lj38 0.0.3 default campaign 4167998": 0.004364934937127729,
+      "dlfind/lbfgs-lj38 0.0.3 default campaign 4167998": 0.7296967094894904,
+      "dlfind/sd-lj38 0.0.3 default campaign 4167998": 0.003762874945799766,
+      "eon/lj38-lbfgs 3.6.0 campaign 1d71c94": 0.7131400597279715,
+      "eon/lj38-lbfgs-m100 3.6.0 campaign 1d71c94": 0.7607027990428805,
+      "lammps/cg-lj38 30 Sep 2026 default campaign 8de817d": 0.037327719462333674,
+      "lammps/fire-lj38 30 Sep 2026 default campaign 8de817d": 0.2325456716504255,
+      "lammps/hftn-lj38 30 Sep 2026 default campaign 8de817d": 0.0836863387945868,
+      "lammps/quickmin-lj38 30 Sep 2026 default campaign 8de817d": 0.004364934937127729,
       "lammps/sd-lj38 30 Sep 2026 default campaign 8de817d": 0.0,
-      "optim/lbfgs-lj38 svn-snapshot default campaign 02aaf45": 0.0144494397918711,
-      "pysisyphus/cg-lj38 0.1.dev1 default campaign a4ce10d": 0.00045154499349597186,
+      "optim/lbfgs-lj38 svn-snapshot default campaign 02aaf45": 0.6592556905041189,
+      "pysisyphus/cg-lj38 0.1.dev1 default campaign a4ce10d": 0.046659649327917094,
       "pysisyphus/lbfgs-lj38 0.1.dev1 default campaign a4ce10d": 0.0,
-      "pysisyphus/sd-lj38 0.1.dev1 default campaign a4ce10d": 0.00030102999566398124,
-      "rgmin/lj38-adam 0.4.1 default campaign, asv 9a2e7ff": 0.0,
-      "rgmin/lj38-adam 0.4.1 default campaign, asv f15726f": 0.0,
-      "rgmin/lj38-adam-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.0,
-      "rgmin/lj38-adam-tuned 0.4.1 tuned campaign, asv f15726f": 0.0,
-      "rgmin/lj38-bb 0.4.1 default campaign, asv 9a2e7ff": 0.007074204898103559,
-      "rgmin/lj38-bb 0.4.1 default campaign, asv f15726f": 0.007074204898103559,
-      "rgmin/lj38-bb-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.007074204898103559,
-      "rgmin/lj38-bb-tuned 0.4.1 tuned campaign, asv f15726f": 0.007074204898103559,
-      "rgmin/lj38-bfgs 0.4.1 default campaign, asv 9a2e7ff": 0.0016556649761518968,
-      "rgmin/lj38-bfgs 0.4.1 default campaign, asv f15726f": 0.0016556649761518968,
-      "rgmin/lj38-bfgs-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.0016556649761518968,
-      "rgmin/lj38-bfgs-tuned 0.4.1 tuned campaign, asv f15726f": 0.0016556649761518968,
-      "rgmin/lj38-cg 0.4.1 default campaign, asv 9a2e7ff": 0.005268024924119672,
-      "rgmin/lj38-cg 0.4.1 default campaign, asv f15726f": 0.005268024924119672,
-      "rgmin/lj38-cg-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.005268024924119672,
-      "rgmin/lj38-cg-tuned 0.4.1 tuned campaign, asv f15726f": 0.005268024924119672,
-      "rgmin/lj38-diis 0.4.1 default campaign, asv 9a2e7ff": 0.00045154499349597186,
-      "rgmin/lj38-diis 0.4.1 default campaign, asv f15726f": 0.00045154499349597186,
-      "rgmin/lj38-diis-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.00045154499349597186,
-      "rgmin/lj38-diis-tuned 0.4.1 tuned campaign, asv f15726f": 0.00045154499349597186,
-      "rgmin/lj38-dogleg 0.4.1 default campaign, asv 9a2e7ff": 0.021824674685638635,
-      "rgmin/lj38-dogleg 0.4.1 default campaign, asv f15726f": 0.021824674685638635,
-      "rgmin/lj38-dogleg-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.021824674685638635,
-      "rgmin/lj38-dogleg-tuned 0.4.1 tuned campaign, asv f15726f": 0.021824674685638635,
-      "rgmin/lj38-fire 0.4.1 default campaign, asv 9a2e7ff": 0.0049669949284556906,
-      "rgmin/lj38-fire 0.4.1 default campaign, asv f15726f": 0.0049669949284556906,
-      "rgmin/lj38-fire-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.0049669949284556906,
-      "rgmin/lj38-fire-tuned 0.4.1 tuned campaign, asv f15726f": 0.0049669949284556906,
-      "rgmin/lj38-fire2 0.4.1 default campaign, asv 9a2e7ff": 0.005569054919783652,
-      "rgmin/lj38-fire2 0.4.1 default campaign, asv f15726f": 0.005569054919783652,
-      "rgmin/lj38-fire2-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.005569054919783652,
-      "rgmin/lj38-fire2-tuned 0.4.1 tuned campaign, asv f15726f": 0.005569054919783652,
-      "rgmin/lj38-lbfgs 0.4.1 default campaign, asv 9a2e7ff": 0.013546349804879154,
-      "rgmin/lj38-lbfgs 0.4.1 default campaign, asv f15726f": 0.013546349804879154,
-      "rgmin/lj38-lbfgs-m100 0.4.1 default campaign, asv 9a2e7ff": 0.01505149978319906,
-      "rgmin/lj38-lbfgs-m100 0.4.1 default campaign, asv f15726f": 0.01505149978319906,
-      "rgmin/lj38-lbfgs-m100-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.01505149978319906,
-      "rgmin/lj38-lbfgs-m100-tuned 0.4.1 tuned campaign, asv f15726f": 0.01505149978319906,
-      "rgmin/lj38-lbfgs-m20 0.4.1 default campaign, asv 9a2e7ff": 0.013245319809215172,
-      "rgmin/lj38-lbfgs-m20 0.4.1 default campaign, asv f15726f": 0.013245319809215172,
-      "rgmin/lj38-lbfgs-m20-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.013245319809215172,
-      "rgmin/lj38-lbfgs-m20-tuned 0.4.1 tuned campaign, asv f15726f": 0.013245319809215172,
-      "rgmin/lj38-lbfgs-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.013546349804879154,
-      "rgmin/lj38-lbfgs-tuned 0.4.1 tuned campaign, asv f15726f": 0.013546349804879154,
-      "rgmin/lj38-newton 0.4.1 default campaign, asv 9a2e7ff": 0.0240823996531185,
-      "rgmin/lj38-newton 0.4.1 default campaign, asv f15726f": 0.0240823996531185,
-      "rgmin/lj38-newton-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.0240823996531185,
-      "rgmin/lj38-newton-tuned 0.4.1 tuned campaign, asv f15726f": 0.0240823996531185,
-      "rgmin/lj38-quickmin 0.4.1 default campaign, asv 9a2e7ff": 0.0007525749891599532,
-      "rgmin/lj38-quickmin 0.4.1 default campaign, asv f15726f": 0.0007525749891599532,
-      "rgmin/lj38-quickmin-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.0007525749891599532,
-      "rgmin/lj38-quickmin-tuned 0.4.1 tuned campaign, asv f15726f": 0.0007525749891599532,
+      "pysisyphus/sd-lj38 0.1.dev1 default campaign a4ce10d": 0.029801969570734145,
+      "rgmin/lj38-adam 0.4.1 default campaign, asv 9a2e7ff": 0.00030102999566398124,
+      "rgmin/lj38-adam 0.4.1 default campaign, asv f15726f": 0.00030102999566398124,
+      "rgmin/lj38-adam-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.00030102999566398124,
+      "rgmin/lj38-adam-tuned 0.4.1 tuned campaign, asv f15726f": 0.00030102999566398124,
+      "rgmin/lj38-bb 0.4.1 default campaign, asv 9a2e7ff": 0.3267680602932516,
+      "rgmin/lj38-bb 0.4.1 default campaign, asv f15726f": 0.3267680602932516,
+      "rgmin/lj38-bb-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.3267680602932516,
+      "rgmin/lj38-bb-tuned 0.4.1 tuned campaign, asv f15726f": 0.3267680602932516,
+      "rgmin/lj38-bfgs 0.4.1 default campaign, asv 9a2e7ff": 0.08157912882493892,
+      "rgmin/lj38-bfgs 0.4.1 default campaign, asv f15726f": 0.08157912882493892,
+      "rgmin/lj38-bfgs-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.08157912882493892,
+      "rgmin/lj38-bfgs-tuned 0.4.1 tuned campaign, asv f15726f": 0.08157912882493892,
+      "rgmin/lj38-cg 0.4.1 default campaign, asv 9a2e7ff": 0.2757434760282068,
+      "rgmin/lj38-cg 0.4.1 default campaign, asv f15726f": 0.2757434760282068,
+      "rgmin/lj38-cg-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.2757434760282068,
+      "rgmin/lj38-cg-tuned 0.4.1 tuned campaign, asv f15726f": 0.2757434760282068,
+      "rgmin/lj38-diis 0.4.1 default campaign, asv 9a2e7ff": 0.026490639618430352,
+      "rgmin/lj38-diis 0.4.1 default campaign, asv f15726f": 0.026490639618430352,
+      "rgmin/lj38-diis-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.026490639618430352,
+      "rgmin/lj38-diis-tuned 0.4.1 tuned campaign, asv f15726f": 0.026490639618430352,
+      "rgmin/lj38-dogleg 0.4.1 default campaign, asv 9a2e7ff": 1.0763327494965647,
+      "rgmin/lj38-dogleg 0.4.1 default campaign, asv f15726f": 1.0763327494965647,
+      "rgmin/lj38-dogleg-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 1.0763327494965647,
+      "rgmin/lj38-dogleg-tuned 0.4.1 tuned campaign, asv f15726f": 1.0763327494965647,
+      "rgmin/lj38-fire 0.4.1 default campaign, asv 9a2e7ff": 0.22712713172847385,
+      "rgmin/lj38-fire 0.4.1 default campaign, asv f15726f": 0.22712713172847385,
+      "rgmin/lj38-fire-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.22712713172847385,
+      "rgmin/lj38-fire-tuned 0.4.1 tuned campaign, asv f15726f": 0.22712713172847385,
+      "rgmin/lj38-fire2 0.4.1 default campaign, asv 9a2e7ff": 0.2149354169040826,
+      "rgmin/lj38-fire2 0.4.1 default campaign, asv f15726f": 0.2149354169040826,
+      "rgmin/lj38-fire2-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.2149354169040826,
+      "rgmin/lj38-fire2-tuned 0.4.1 tuned campaign, asv f15726f": 0.2149354169040826,
+      "rgmin/lj38-lbfgs 0.4.1 default campaign, asv 9a2e7ff": 0.6830370601615734,
+      "rgmin/lj38-lbfgs 0.4.1 default campaign, asv f15726f": 0.6830370601615734,
+      "rgmin/lj38-lbfgs-m100 0.4.1 default campaign, asv 9a2e7ff": 0.7644656739886801,
+      "rgmin/lj38-lbfgs-m100 0.4.1 default campaign, asv f15726f": 0.7644656739886801,
+      "rgmin/lj38-lbfgs-m100-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.7644656739886801,
+      "rgmin/lj38-lbfgs-m100-tuned 0.4.1 tuned campaign, asv f15726f": 0.7644656739886801,
+      "rgmin/lj38-lbfgs-m20 0.4.1 default campaign, asv 9a2e7ff": 0.70320606987106,
+      "rgmin/lj38-lbfgs-m20 0.4.1 default campaign, asv f15726f": 0.70320606987106,
+      "rgmin/lj38-lbfgs-m20-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.70320606987106,
+      "rgmin/lj38-lbfgs-m20-tuned 0.4.1 tuned campaign, asv f15726f": 0.70320606987106,
+      "rgmin/lj38-lbfgs-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.6830370601615734,
+      "rgmin/lj38-lbfgs-tuned 0.4.1 tuned campaign, asv f15726f": 0.6830370601615734,
+      "rgmin/lj38-newton 0.4.1 default campaign, asv 9a2e7ff": 1.167093293189255,
+      "rgmin/lj38-newton 0.4.1 default campaign, asv f15726f": 1.167093293189255,
+      "rgmin/lj38-newton-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 1.167093293189255,
+      "rgmin/lj38-newton-tuned 0.4.1 tuned campaign, asv f15726f": 1.167093293189255,
+      "rgmin/lj38-quickmin 0.4.1 default campaign, asv 9a2e7ff": 0.032360724533877984,
+      "rgmin/lj38-quickmin 0.4.1 default campaign, asv f15726f": 0.032360724533877984,
+      "rgmin/lj38-quickmin-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.032360724533877984,
+      "rgmin/lj38-quickmin-tuned 0.4.1 tuned campaign, asv f15726f": 0.032360724533877984,
       "rgmin/lj38-sd 0.4.1 default campaign, asv 9a2e7ff": 0.0,
       "rgmin/lj38-sd 0.4.1 default campaign, asv f15726f": 0.0,
       "rgmin/lj38-sd-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.0,
       "rgmin/lj38-sd-tuned 0.4.1 tuned campaign, asv f15726f": 0.0,
-      "rgmin/lj38-sr1 0.4.1 default campaign, asv 9a2e7ff": 0.00015051499783199062,
-      "rgmin/lj38-sr1 0.4.1 default campaign, asv f15726f": 0.00015051499783199062,
-      "rgmin/lj38-sr1-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.00015051499783199062,
-      "rgmin/lj38-sr1-tuned 0.4.1 tuned campaign, asv f15726f": 0.00015051499783199062,
-      "rgmin/lj38-sr2 0.4.1 default campaign, asv 9a2e7ff": 0.0006020599913279625,
-      "rgmin/lj38-sr2 0.4.1 default campaign, asv f15726f": 0.0006020599913279625,
-      "rgmin/lj38-sr2-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.0006020599913279625,
-      "rgmin/lj38-sr2-tuned 0.4.1 tuned campaign, asv f15726f": 0.0006020599913279625,
-      "sella/lj38-min-default 2.6.0 default campaign, asv 6cfb60c": 0.0036123599479677745,
-      "sella/lj38-min-tuned 2.6.0 tuned campaign, asv 6cfb60c": 0.012041199826559247,
-      "torchsim/lj38-fire 0.6.2 default campaign, asv 5540d89": 0.00511750992628768,
-      "torchsim/lj38-gd 0.6.2 default campaign, asv 5540d89": 1.186208697913918,
-      "tsase/lbfgs-lj38 1.0 default campaign 98aac60": 0.015954589770191006,
+      "rgmin/lj38-sr1 0.4.1 default campaign, asv 9a2e7ff": 0.029801969570734145,
+      "rgmin/lj38-sr1 0.4.1 default campaign, asv f15726f": 0.029801969570734145,
+      "rgmin/lj38-sr1-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.029801969570734145,
+      "rgmin/lj38-sr1-tuned 0.4.1 tuned campaign, asv f15726f": 0.029801969570734145,
+      "rgmin/lj38-sr2 0.4.1 default campaign, asv 9a2e7ff": 0.027995789596750253,
+      "rgmin/lj38-sr2 0.4.1 default campaign, asv f15726f": 0.027995789596750253,
+      "rgmin/lj38-sr2-tuned 0.4.1 tuned campaign, asv 9a2e7ff": 0.027995789596750253,
+      "rgmin/lj38-sr2-tuned 0.4.1 tuned campaign, asv f15726f": 0.027995789596750253,
+      "sella/lj38-min-default 2.6.0 default campaign, asv 6cfb60c": 0.16902834256532548,
+      "sella/lj38-min-tuned 2.6.0 tuned campaign, asv 6cfb60c": 0.6065754412629222,
+      "torchsim/lj38-fire 0.6.2 default campaign, asv 5540d89": 0.22486940676099398,
+      "torchsim/lj38-gd 0.6.2 default campaign, asv 5540d89": 0.0,
+      "tsase/lbfgs-lj38 1.0 default campaign 98aac60": 0.7613048590342085,
       "tsase/mdmin-lj38 1.0 default campaign 98aac60": 0.0
     },
     "rho": {
       "ase/lj38-bfgs-default 3.29.0 default asv f27c000": [
         0.0,
         0.0,
-        0.003,
-        0.015,
-        0.019
+        0.032,
+        0.719,
+        0.983
       ],
       "ase/lj38-bfgs-default 3.29.0 default campaign f27c000": [
         0.0,
         0.0,
-        0.001,
-        0.009,
-        0.017
+        0.025,
+        0.574,
+        0.9
       ],
       "ase/lj38-bfgs-tuned 3.29.0 tuned asv f27c000": [
         0.0,
         0.0,
-        0.003,
-        0.015,
-        0.019
+        0.032,
+        0.719,
+        0.983
       ],
       "ase/lj38-bfgs-tuned 3.29.0 tuned campaign f27c000": [
         0.0,
         0.0,
-        0.003,
-        0.015,
-        0.019
+        0.032,
+        0.72,
+        0.985
       ],
       "ase/lj38-bfgslinesearch-default 3.29.0 default asv f27c000": [
         0.0,
         0.0,
-        0.0,
-        0.007,
-        0.02
+        0.002,
+        0.353,
+        0.989
       ],
       "ase/lj38-bfgslinesearch-default 3.29.0 default campaign f27c000": [
         0.0,
         0.0,
-        0.0,
-        0.007,
-        0.02
+        0.002,
+        0.353,
+        0.99
       ],
       "ase/lj38-bfgslinesearch-tuned 3.29.0 tuned asv f27c000": [
         0.0,
         0.0,
-        0.0,
-        0.014,
-        0.02
+        0.004,
+        0.499,
+        0.999
       ],
       "ase/lj38-bfgslinesearch-tuned 3.29.0 tuned campaign f27c000": [
         0.0,
         0.0,
-        0.0,
-        0.014,
-        0.02
+        0.004,
+        0.499,
+        1.0
       ],
       "ase/lj38-fire-default 3.29.0 default asv f27c000": [
         0.0,
         0.0,
-        0.001,
-        0.006,
-        0.019
+        0.018,
+        0.336,
+        0.808
       ],
       "ase/lj38-fire-default 3.29.0 default campaign f27c000": [
         0.0,
         0.0,
-        0.001,
-        0.006,
-        0.019
+        0.018,
+        0.336,
+        0.811
       ],
       "ase/lj38-fire-tuned 3.29.0 tuned asv f27c000": [
         0.0,
         0.0,
-        0.002,
-        0.008,
-        0.018
+        0.019,
+        0.341,
+        0.806
       ],
       "ase/lj38-fire-tuned 3.29.0 tuned campaign f27c000": [
         0.0,
         0.0,
-        0.002,
-        0.008,
-        0.018
+        0.019,
+        0.341,
+        0.807
       ],
       "ase/lj38-lbfgs-default 3.29.0 default asv f27c000": [
         0.0,
-        0.0,
-        0.01,
-        0.018,
-        0.019
+        0.007,
+        0.456,
+        0.956,
+        0.983
       ],
       "ase/lj38-lbfgs-default 3.29.0 default campaign f27c000": [
         0.0,
-        0.0,
-        0.003,
-        0.014,
-        0.018
+        0.001,
+        0.246,
+        0.807,
+        0.938
       ],
       "ase/lj38-lbfgs-tuned 3.29.0 tuned asv f27c000": [
         0.0,
         0.001,
-        0.007,
-        0.019,
-        0.02
+        0.21,
+        0.905,
+        0.988
       ],
       "ase/lj38-lbfgs-tuned 3.29.0 tuned campaign f27c000": [
         0.0,
         0.001,
-        0.007,
-        0.019,
-        0.02
+        0.21,
+        0.907,
+        0.99
       ],
       "ase/lj38-preconfire-default 3.29.0 default asv f27c000": [
         0.0,
         0.0,
         0.0,
         0.0,
-        0.003
+        0.154
       ],
       "ase/lj38-preconfire-default 3.29.0 default campaign f27c000": [
         0.0,
         0.0,
         0.0,
         0.0,
-        0.003
+        0.155
       ],
       "ase/lj38-preconlbfgs-default 3.29.0 default asv f27c000": [
         0.0,
         0.0,
         0.0,
-        0.005,
-        0.019
+        0.19,
+        0.894
       ],
       "ase/lj38-preconlbfgs-default 3.29.0 default campaign f27c000": [
         0.0,
         0.0,
         0.0,
-        0.005,
-        0.019
+        0.19,
+        0.896
       ],
       "dlfind/cg-lj38 0.0.3 default campaign 4167998": [
         0.0,
         0.0,
         0.0,
         0.0,
-        0.0
+        0.029
       ],
       "dlfind/lbfgs-lj38 0.0.3 default campaign 4167998": [
         0.0,
-        0.003,
-        0.017,
-        0.02,
-        0.02
+        0.096,
+        0.833,
+        0.996,
+        0.998
       ],
       "dlfind/sd-lj38 0.0.3 default campaign 4167998": [
         0.0,
         0.0,
         0.0,
         0.0,
-        0.0
+        0.025
       ],
       "eon/lj38-lbfgs 3.6.0 campaign 1d71c94": [
         0.0,
-        0.0,
-        0.016,
-        0.02,
-        0.02
+        0.09,
+        0.782,
+        0.997,
+        1.0
       ],
       "eon/lj38-lbfgs-m100 3.6.0 campaign 1d71c94": [
         0.0,
-        0.004,
-        0.016,
-        0.02,
-        0.02
+        0.167,
+        0.861,
+        0.999,
+        1.0
       ],
       "lammps/cg-lj38 30 Sep 2026 default campaign 8de817d": [
         0.0,
         0.0,
         0.0,
-        0.0,
-        0.005
+        0.012,
+        0.224
       ],
       "lammps/fire-lj38 30 Sep 2026 default campaign 8de817d": [
         0.0,
         0.0,
-        0.002,
-        0.014,
-        0.017
+        0.022,
+        0.404,
+        0.693
       ],
       "lammps/hftn-lj38 30 Sep 2026 default campaign 8de817d": [
         0.0,
         0.0,
         0.0,
-        0.0,
-        0.007
+        0.014,
+        0.528
       ],
       "lammps/quickmin-lj38 30 Sep 2026 default campaign 8de817d": [
         0.0,
         0.0,
         0.0,
         0.0,
-        0.0
+        0.029
       ],
       "lammps/sd-lj38 30 Sep 2026 default campaign 8de817d": [
         0.0,
@@ -2576,17 +2576,17 @@
       ],
       "optim/lbfgs-lj38 svn-snapshot default campaign 02aaf45": [
         0.0,
-        0.001,
-        0.017,
-        0.02,
-        0.02
+        0.04,
+        0.662,
+        0.989,
+        0.998
       ],
       "pysisyphus/cg-lj38 0.1.dev1 default campaign a4ce10d": [
         0.0,
         0.0,
-        0.0,
-        0.0,
-        0.003
+        0.001,
+        0.058,
+        0.192
       ],
       "pysisyphus/lbfgs-lj38 0.1.dev1 default campaign a4ce10d": [
         0.0,
@@ -2599,372 +2599,372 @@
         0.0,
         0.0,
         0.0,
-        0.0,
-        0.002
+        0.03,
+        0.138
       ],
       "rgmin/lj38-adam 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
         0.0,
         0.0,
         0.0,
-        0.0
+        0.002
       ],
       "rgmin/lj38-adam 0.4.1 default campaign, asv f15726f": [
         0.0,
         0.0,
         0.0,
         0.0,
-        0.0
+        0.002
       ],
       "rgmin/lj38-adam-tuned 0.4.1 tuned campaign, asv 9a2e7ff": [
         0.0,
         0.0,
         0.0,
         0.0,
-        0.0
+        0.002
       ],
       "rgmin/lj38-adam-tuned 0.4.1 tuned campaign, asv f15726f": [
         0.0,
         0.0,
         0.0,
         0.0,
-        0.0
+        0.002
       ],
       "rgmin/lj38-bb 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
         0.0,
-        0.002,
-        0.012,
-        0.019
+        0.051,
+        0.566,
+        0.937
       ],
       "rgmin/lj38-bb 0.4.1 default campaign, asv f15726f": [
         0.0,
         0.0,
-        0.002,
-        0.012,
-        0.019
+        0.051,
+        0.566,
+        0.937
       ],
       "rgmin/lj38-bb-tuned 0.4.1 tuned campaign, asv 9a2e7ff": [
         0.0,
         0.0,
-        0.002,
-        0.012,
-        0.019
+        0.051,
+        0.566,
+        0.937
       ],
       "rgmin/lj38-bb-tuned 0.4.1 tuned campaign, asv f15726f": [
         0.0,
         0.0,
-        0.002,
-        0.012,
-        0.019
+        0.051,
+        0.566,
+        0.937
       ],
       "rgmin/lj38-bfgs 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
         0.0,
         0.0,
-        0.0,
-        0.011
+        0.008,
+        0.526
       ],
       "rgmin/lj38-bfgs 0.4.1 default campaign, asv f15726f": [
         0.0,
         0.0,
         0.0,
-        0.0,
-        0.011
+        0.008,
+        0.526
       ],
       "rgmin/lj38-bfgs-tuned 0.4.1 tuned campaign, asv 9a2e7ff": [
         0.0,
         0.0,
         0.0,
-        0.0,
-        0.011
+        0.008,
+        0.526
       ],
       "rgmin/lj38-bfgs-tuned 0.4.1 tuned campaign, asv f15726f": [
         0.0,
         0.0,
         0.0,
-        0.0,
-        0.011
+        0.008,
+        0.526
       ],
       "rgmin/lj38-cg 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
         0.0,
-        0.0,
-        0.009,
-        0.017
+        0.034,
+        0.426,
+        0.912
       ],
       "rgmin/lj38-cg 0.4.1 default campaign, asv f15726f": [
         0.0,
         0.0,
-        0.0,
-        0.009,
-        0.017
+        0.034,
+        0.426,
+        0.912
       ],
       "rgmin/lj38-cg-tuned 0.4.1 tuned campaign, asv 9a2e7ff": [
         0.0,
         0.0,
-        0.0,
-        0.009,
-        0.017
+        0.034,
+        0.426,
+        0.912
       ],
       "rgmin/lj38-cg-tuned 0.4.1 tuned campaign, asv f15726f": [
         0.0,
         0.0,
-        0.0,
-        0.009,
-        0.017
+        0.034,
+        0.426,
+        0.912
       ],
       "rgmin/lj38-diis 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
         0.0,
         0.0,
-        0.0,
-        0.003
+        0.004,
+        0.168
       ],
       "rgmin/lj38-diis 0.4.1 default campaign, asv f15726f": [
         0.0,
         0.0,
         0.0,
-        0.0,
-        0.003
+        0.004,
+        0.168
       ],
       "rgmin/lj38-diis-tuned 0.4.1 tuned campaign, asv 9a2e7ff": [
         0.0,
         0.0,
         0.0,
-        0.0,
-        0.003
+        0.004,
+        0.168
       ],
       "rgmin/lj38-diis-tuned 0.4.1 tuned campaign, asv f15726f": [
         0.0,
         0.0,
         0.0,
-        0.0,
-        0.003
+        0.004,
+        0.168
       ],
       "rgmin/lj38-dogleg 0.4.1 default campaign, asv 9a2e7ff": [
-        0.003,
-        0.018,
-        0.02,
-        0.022,
-        0.022
+        0.229,
+        0.961,
+        1.0,
+        1.0,
+        1.0
       ],
       "rgmin/lj38-dogleg 0.4.1 default campaign, asv f15726f": [
-        0.003,
-        0.018,
-        0.02,
-        0.022,
-        0.022
+        0.229,
+        0.961,
+        1.0,
+        1.0,
+        1.0
       ],
       "rgmin/lj38-dogleg-tuned 0.4.1 tuned campaign, asv 9a2e7ff": [
-        0.003,
-        0.018,
-        0.02,
-        0.022,
-        0.022
+        0.229,
+        0.961,
+        1.0,
+        1.0,
+        1.0
       ],
       "rgmin/lj38-dogleg-tuned 0.4.1 tuned campaign, asv f15726f": [
-        0.003,
-        0.018,
-        0.02,
-        0.022,
-        0.022
+        0.229,
+        0.961,
+        1.0,
+        1.0,
+        1.0
       ],
       "rgmin/lj38-fire 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
         0.0,
-        0.0,
-        0.008,
-        0.017
+        0.012,
+        0.333,
+        0.819
       ],
       "rgmin/lj38-fire 0.4.1 default campaign, asv f15726f": [
         0.0,
         0.0,
-        0.0,
-        0.008,
-        0.017
+        0.012,
+        0.333,
+        0.819
       ],
       "rgmin/lj38-fire-tuned 0.4.1 tuned campaign, asv 9a2e7ff": [
         0.0,
         0.0,
-        0.0,
-        0.008,
-        0.017
+        0.012,
+        0.333,
+        0.819
       ],
       "rgmin/lj38-fire-tuned 0.4.1 tuned campaign, asv f15726f": [
         0.0,
         0.0,
-        0.0,
-        0.008,
-        0.017
+        0.012,
+        0.333,
+        0.819
       ],
       "rgmin/lj38-fire2 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
         0.0,
-        0.001,
-        0.01,
-        0.015
+        0.007,
+        0.31,
+        0.794
       ],
       "rgmin/lj38-fire2 0.4.1 default campaign, asv f15726f": [
         0.0,
         0.0,
-        0.001,
-        0.01,
-        0.015
+        0.007,
+        0.31,
+        0.794
       ],
       "rgmin/lj38-fire2-tuned 0.4.1 tuned campaign, asv 9a2e7ff": [
         0.0,
         0.0,
-        0.001,
-        0.01,
-        0.015
+        0.007,
+        0.31,
+        0.794
       ],
       "rgmin/lj38-fire2-tuned 0.4.1 tuned campaign, asv f15726f": [
         0.0,
         0.0,
-        0.001,
-        0.01,
-        0.015
+        0.007,
+        0.31,
+        0.794
       ],
       "rgmin/lj38-lbfgs 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
-        0.002,
-        0.013,
-        0.02,
-        0.02
+        0.054,
+        0.725,
+        0.992,
+        0.996
       ],
       "rgmin/lj38-lbfgs 0.4.1 default campaign, asv f15726f": [
         0.0,
-        0.002,
-        0.013,
-        0.02,
-        0.02
+        0.054,
+        0.725,
+        0.992,
+        0.996
       ],
       "rgmin/lj38-lbfgs-m100 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
-        0.005,
-        0.015,
-        0.02,
-        0.02
+        0.153,
+        0.888,
+        0.999,
+        0.999
       ],
       "rgmin/lj38-lbfgs-m100 0.4.1 default campaign, asv f15726f": [
         0.0,
-        0.005,
-        0.015,
-        0.02,
-        0.02
+        0.153,
+        0.888,
+        0.999,
+        0.999
       ],
       "rgmin/lj38-lbfgs-m100-tuned 0.4.1 tuned campaign, asv 9a2e7ff": [
         0.0,
-        0.005,
-        0.015,
-        0.02,
-        0.02
+        0.153,
+        0.888,
+        0.999,
+        0.999
       ],
       "rgmin/lj38-lbfgs-m100-tuned 0.4.1 tuned campaign, asv f15726f": [
         0.0,
-        0.005,
-        0.015,
-        0.02,
-        0.02
+        0.153,
+        0.888,
+        0.999,
+        0.999
       ],
       "rgmin/lj38-lbfgs-m20 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
-        0.002,
-        0.012,
-        0.02,
-        0.02
+        0.076,
+        0.77,
+        0.992,
+        0.996
       ],
       "rgmin/lj38-lbfgs-m20 0.4.1 default campaign, asv f15726f": [
         0.0,
-        0.002,
-        0.012,
-        0.02,
-        0.02
+        0.076,
+        0.77,
+        0.992,
+        0.996
       ],
       "rgmin/lj38-lbfgs-m20-tuned 0.4.1 tuned campaign, asv 9a2e7ff": [
         0.0,
-        0.002,
-        0.012,
-        0.02,
-        0.02
+        0.076,
+        0.77,
+        0.992,
+        0.996
       ],
       "rgmin/lj38-lbfgs-m20-tuned 0.4.1 tuned campaign, asv f15726f": [
         0.0,
-        0.002,
-        0.012,
-        0.02,
-        0.02
+        0.076,
+        0.77,
+        0.992,
+        0.996
       ],
       "rgmin/lj38-lbfgs-tuned 0.4.1 tuned campaign, asv 9a2e7ff": [
         0.0,
-        0.002,
-        0.013,
-        0.02,
-        0.02
+        0.054,
+        0.725,
+        0.992,
+        0.996
       ],
       "rgmin/lj38-lbfgs-tuned 0.4.1 tuned campaign, asv f15726f": [
         0.0,
-        0.002,
-        0.013,
-        0.02,
-        0.02
+        0.054,
+        0.725,
+        0.992,
+        0.996
       ],
       "rgmin/lj38-newton 0.4.1 default campaign, asv 9a2e7ff": [
-        0.016,
-        0.02,
-        0.02,
-        0.021,
-        0.022
+        0.789,
+        0.995,
+        0.995,
+        0.995,
+        0.995
       ],
       "rgmin/lj38-newton 0.4.1 default campaign, asv f15726f": [
-        0.016,
-        0.02,
-        0.02,
-        0.021,
-        0.022
+        0.789,
+        0.995,
+        0.995,
+        0.995,
+        0.995
       ],
       "rgmin/lj38-newton-tuned 0.4.1 tuned campaign, asv 9a2e7ff": [
-        0.016,
-        0.02,
-        0.02,
-        0.021,
-        0.022
+        0.789,
+        0.995,
+        0.995,
+        0.995,
+        0.995
       ],
       "rgmin/lj38-newton-tuned 0.4.1 tuned campaign, asv f15726f": [
-        0.016,
-        0.02,
-        0.02,
-        0.021,
-        0.022
+        0.789,
+        0.995,
+        0.995,
+        0.995,
+        0.995
       ],
       "rgmin/lj38-quickmin 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
         0.0,
         0.0,
-        0.0,
-        0.005
+        0.009,
+        0.197
       ],
       "rgmin/lj38-quickmin 0.4.1 default campaign, asv f15726f": [
         0.0,
         0.0,
         0.0,
-        0.0,
-        0.005
+        0.009,
+        0.197
       ],
       "rgmin/lj38-quickmin-tuned 0.4.1 tuned campaign, asv 9a2e7ff": [
         0.0,
         0.0,
         0.0,
-        0.0,
-        0.005
+        0.009,
+        0.197
       ],
       "rgmin/lj38-quickmin-tuned 0.4.1 tuned campaign, asv f15726f": [
         0.0,
         0.0,
         0.0,
-        0.0,
-        0.005
+        0.009,
+        0.197
       ],
       "rgmin/lj38-sd 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
@@ -2998,92 +2998,92 @@
         0.0,
         0.0,
         0.0,
-        0.0,
-        0.001
+        0.012,
+        0.174
       ],
       "rgmin/lj38-sr1 0.4.1 default campaign, asv f15726f": [
         0.0,
         0.0,
         0.0,
-        0.0,
-        0.001
+        0.012,
+        0.174
       ],
       "rgmin/lj38-sr1-tuned 0.4.1 tuned campaign, asv 9a2e7ff": [
         0.0,
         0.0,
         0.0,
-        0.0,
-        0.001
+        0.012,
+        0.174
       ],
       "rgmin/lj38-sr1-tuned 0.4.1 tuned campaign, asv f15726f": [
         0.0,
         0.0,
         0.0,
-        0.0,
-        0.001
+        0.012,
+        0.174
       ],
       "rgmin/lj38-sr2 0.4.1 default campaign, asv 9a2e7ff": [
         0.0,
         0.0,
         0.0,
-        0.0,
-        0.004
+        0.015,
+        0.156
       ],
       "rgmin/lj38-sr2 0.4.1 default campaign, asv f15726f": [
         0.0,
         0.0,
         0.0,
-        0.0,
-        0.004
+        0.015,
+        0.156
       ],
       "rgmin/lj38-sr2-tuned 0.4.1 tuned campaign, asv 9a2e7ff": [
         0.0,
         0.0,
         0.0,
-        0.0,
-        0.004
+        0.015,
+        0.156
       ],
       "rgmin/lj38-sr2-tuned 0.4.1 tuned campaign, asv f15726f": [
         0.0,
         0.0,
         0.0,
-        0.0,
-        0.004
+        0.015,
+        0.156
       ],
       "sella/lj38-min-default 2.6.0 default campaign, asv 6cfb60c": [
         0.0,
         0.0,
         0.0,
-        0.003,
-        0.018
+        0.107,
+        0.909
       ],
       "sella/lj38-min-tuned 2.6.0 tuned campaign, asv 6cfb60c": [
         0.0,
-        0.0,
-        0.01,
-        0.02,
-        0.02
+        0.001,
+        0.519,
+        0.995,
+        1.0
       ],
       "torchsim/lj38-fire 0.6.2 default campaign, asv 5540d89": [
         0.0,
         0.0,
-        0.001,
-        0.007,
-        0.018
+        0.016,
+        0.327,
+        0.808
       ],
       "torchsim/lj38-gd 0.6.2 default campaign, asv 5540d89": [
-        0.981,
-        0.984,
-        0.985,
-        0.986,
-        0.99
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
       ],
       "tsase/lbfgs-lj38 1.0 default campaign 98aac60": [
         0.0,
-        0.007,
-        0.016,
-        0.02,
-        0.02
+        0.169,
+        0.866,
+        0.996,
+        0.996
       ],
       "tsase/mdmin-lj38 1.0 default campaign 98aac60": [
         0.0,
@@ -3195,7 +3195,7 @@
       "sella/lj38-min-default 2.6.0 default campaign, asv 6cfb60c": 1.0,
       "sella/lj38-min-tuned 2.6.0 tuned campaign, asv 6cfb60c": 1.0,
       "torchsim/lj38-fire 0.6.2 default campaign, asv 5540d89": 0.994,
-      "torchsim/lj38-gd 0.6.2 default campaign, asv 5540d89": 0.991,
+      "torchsim/lj38-gd 0.6.2 default campaign, asv 5540d89": 0.0,
       "tsase/lbfgs-lj38 1.0 default campaign 98aac60": 0.996,
       "tsase/mdmin-lj38 1.0 default campaign 98aac60": 0.0
     },
@@ -3612,51 +3612,6 @@
       "tuning": "",
       "wilson_high": 1.0,
       "wilson_low": 0.996173241514445
-    },
-    {
-      "asv_commit": "a4221137378acf5c9cb242d3ea9265e500c9abf4",
-      "call_unit": "total",
-      "cap": 10000,
-      "code": "TorchSim",
-      "code_version": "0.6.2",
-      "commit": "5540d893a849db9772081229a86d5f68537ad037",
-      "comparable": true,
-      "counter": "harness",
-      "current": true,
-      "entry": "torchsim-5540d893-lj38-gd",
-      "failures": {
-        "cap": 0,
-        "crash": 0,
-        "divergence": 0,
-        "wrong_stationary": 9
-      },
-      "full_n": 1000,
-      "history": false,
-      "max_calls": 1981.0,
-      "mean_calls": 10.874,
-      "mean_per_image": null,
-      "median": 2.0,
-      "median_calls": 2.0,
-      "median_high": 2.0,
-      "median_low": 2.0,
-      "median_per_image": null,
-      "min_calls": 2.0,
-      "n": 1000,
-      "nfailed": 9,
-      "note": "starts.jsonl",
-      "par2_mean": 187.966,
-      "partial": false,
-      "partial_reason": "",
-      "path": "results/campaign/torchsim-5540d893-lj38-gd.dat; results/asv/a4221137378acf5c9cb242d3ea9265e500c9abf4",
-      "problem": "minimization/lj38",
-      "registry_match": true,
-      "scored": true,
-      "source": "campaign, asv",
-      "success_rate": 0.991,
-      "template": "torchsim/lj38-gd",
-      "tuning": "default",
-      "wilson_high": 0.9952579393325229,
-      "wilson_low": 0.982984183834662
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -7839,6 +7794,51 @@
       "source": "campaign",
       "success_rate": 0.0,
       "template": "pysisyphus/lbfgs-lj38",
+      "tuning": "default",
+      "wilson_high": 0.0038267584855551234,
+      "wilson_low": 0.0
+    },
+    {
+      "asv_commit": "a4221137378acf5c9cb242d3ea9265e500c9abf4",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "TorchSim",
+      "code_version": "0.6.2",
+      "commit": "5540d893a849db9772081229a86d5f68537ad037",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "torchsim-5540d893-lj38-gd",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 1000,
+        "wrong_stationary": 0
+      },
+      "full_n": 1000,
+      "history": false,
+      "max_calls": 1981.0,
+      "mean_calls": 10.874,
+      "mean_per_image": null,
+      "median": 20000.0,
+      "median_calls": 2.0,
+      "median_high": 20000.0,
+      "median_low": 20000.0,
+      "median_per_image": null,
+      "min_calls": 2.0,
+      "n": 1000,
+      "nfailed": 1000,
+      "note": "starts.jsonl",
+      "par2_mean": 20000.0,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/torchsim-5540d893-lj38-gd.dat; results/asv/a4221137378acf5c9cb242d3ea9265e500c9abf4",
+      "problem": "minimization/lj38",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign, asv",
+      "success_rate": 0.0,
+      "template": "torchsim/lj38-gd",
       "tuning": "default",
       "wilson_high": 0.0038267584855551234,
       "wilson_low": 0.0
