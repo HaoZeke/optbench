@@ -1883,9 +1883,8 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="mlopt/C2H4">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="13">No full harness row.</td></tr>
+   <tr><td data-field="template">panna/c2h4-tf-adam-energy</td><td data-field="version">PANNA 2.1.0</td><td data-field="commit">132a2df66259</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">11485.1</td><td data-field="success_rate">0.62</td><td data-field="wilson_low">0.481504</td><td data-field="wilson_high">0.741372</td><td data-field="median_calls">9081.5</td><td data-field="mean_calls">7685.14</td><td data-field="failures">crash 0, divergence 0, cap 19, wrong_stationary 0</td><td data-field="n">50</td></tr>
    </tbody></table></div>
-   <p class="bench-gaps">No committed harness run.</p>
    <p><a href="generated/suites/mlopt.html#C2H4">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="C2H4-legacy">
    <h3>Legacy 2014 archive</h3>
@@ -2000,9 +1999,8 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="mlopt/emt-pt38">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="13">No full harness row.</td></tr>
+   <tr><td data-field="template">panna/emt-pt38-tf-adam-energy</td><td data-field="version">PANNA 2.1.0</td><td data-field="commit">132a2df66259</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">900.64</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.928652</td><td data-field="wilson_high">1</td><td data-field="median_calls">266.5</td><td data-field="mean_calls">900.64</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">50</td></tr>
    </tbody></table></div>
-   <p class="bench-gaps">No committed harness run.</p>
    <p><a href="generated/suites/mlopt.html#emt-pt38">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="emt-pt38-legacy">
    <h3>Legacy 2014 archive</h3>
