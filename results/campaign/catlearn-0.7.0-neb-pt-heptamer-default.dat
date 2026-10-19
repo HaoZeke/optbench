@@ -5,8 +5,8 @@
 # a start at the wall-clock ceiling is a cap failure and keeps its harness call count
 # cycling is a later geometry within 1e-6 of an earlier acquisition
 successes 0
-nfailed 1
-n 1
+nfailed 2
+n 2
 transition_states 0
 code CatLearn
 code_version 0.7.0
