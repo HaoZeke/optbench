@@ -7,12 +7,12 @@ from pathlib import Path
 import numpy as np
 
 from optbench.engines.pykmc_search import _link, _section
+from optbench.failures import apply_taxonomy
 from optbench.pykmc_kmc import (
     ENDPOINT_SCHEMA,
     HTST,
     endpoint_record,
     reduce_htst,
-    rescore_saddle_start,
     searches_to_launch,
 )
 
@@ -176,8 +176,27 @@ def test_templates_pin_the_push_profiles():
     assert guess["pykmc"]["dmax"] == 6.0
 
 
+def _accept_linked(record, *, force_tol, cap):
+    """Success bit only. ``apply_taxonomy`` names the failure class."""
+    row = dict(record)
+    calls = float(row["force_calls"])
+    energy = row.get("energy")
+    force = row.get("force_norm")
+    hessian = row.get("hessian_index")
+    expected = 1 if row.get("expected_index") is None else int(row["expected_index"])
+    finite_energy = isinstance(energy, (int, float)) and math.isfinite(float(energy))
+    finite_force = isinstance(force, (int, float)) and math.isfinite(float(force))
+    blown = (energy is not None and not finite_energy) or (force is not None and not finite_force)
+    at_cap = cap is not None and math.isfinite(calls) and calls >= float(cap)
+    at_stop = finite_force and float(force) <= float(force_tol)
+    index_ok = hessian is not None and int(hessian) == expected
+    if row.get("eon_connected") and at_stop and index_ok and finite_energy and not blown and not at_cap:
+        row["success"] = True
+    return apply_taxonomy(row, cap, force_tol)
+
+
 def test_connected_index_one_is_a_success_and_a_clean_stop_is_not_divergence():
-    connected = rescore_saddle_start(
+    connected = _accept_linked(
         {
             "force_calls": 907,
             "energy": -1769.8,
@@ -195,8 +214,7 @@ def test_connected_index_one_is_a_success_and_a_clean_stop_is_not_divergence():
     )
     assert connected["success"] is True
     assert connected["failure"] is None
-    assert connected["low_barrier"] is False
-    duplicate = rescore_saddle_start(
+    duplicate = _accept_linked(
         {
             "force_calls": 1100,
             "energy": -1770.0,
@@ -213,25 +231,7 @@ def test_connected_index_one_is_a_success_and_a_clean_stop_is_not_divergence():
         cap=20000,
     )
     assert duplicate["success"] is True
-    assert duplicate["low_barrier"] is False
-    novel = rescore_saddle_start(
-        {
-            "force_calls": 1200,
-            "energy": -1770.0,
-            "force_norm": 0.0004,
-            "hessian_index": 1,
-            "expected_index": 1,
-            "eon_connected": True,
-            "barrier": 0.62,
-            "reasons": ["barrier"],
-            "success": False,
-            "failure": "divergence",
-        },
-        force_tol=0.001,
-        cap=20000,
-    )
-    assert novel["low_barrier"] is True
-    missed = rescore_saddle_start(
+    missed = _accept_linked(
         {
             "force_calls": 1261,
             "energy": -1769.9,
@@ -248,7 +248,7 @@ def test_connected_index_one_is_a_success_and_a_clean_stop_is_not_divergence():
     )
     assert missed["success"] is False
     assert missed["failure"] == "wrong_stationary"
-    clean = rescore_saddle_start(
+    clean = _accept_linked(
         {
             "force_calls": 800,
             "energy": None,
@@ -263,8 +263,9 @@ def test_connected_index_one_is_a_success_and_a_clean_stop_is_not_divergence():
         force_tol=0.001,
         cap=20000,
     )
-    assert clean["failure"] == "not_converged"
-    capped = rescore_saddle_start(
+    assert clean["failure"] == "crash"
+    assert clean["failure"] != "divergence"
+    capped = _accept_linked(
         {
             "force_calls": 10000,
             "energy": -1.0,

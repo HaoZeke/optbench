@@ -467,16 +467,20 @@ def _link(record: dict, *, evaluator, free, box, minimum, min_energy, force_norm
     from optbench.failures import classify_outcome
 
     def unfinished(row: dict) -> dict:
-        """No saddle was stored. A clean stop is not a blow-up."""
+        """No saddle was stored. The class comes from the shared classifier."""
         row.pop("positions", None)
         row.pop("lowest_mode", None)
         if row.get("success"):
-            row["success"] = False
-            row["failure"] = "not_converged"
-            reasons = [item for item in (row.get("reasons") or []) if item != "divergence"]
-            if "solver" not in reasons:
-                reasons.append("solver")
-            row["reasons"] = reasons
+            row["failure"] = classify_outcome(
+                energy=row.get("energy"),
+                force=row.get("force_norm"),
+                calls=row.get("force_calls"),
+                cap=None,
+                force_tol=float(force_norm),
+                unmet=True,
+                dissociated=False,
+            )
+            row["success"] = row["failure"] is None
         return row
 
     record["endpoint_plus"] = None
@@ -897,17 +901,19 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
                 text += "partial true\n"
             output.parent.mkdir(parents=True, exist_ok=True)
             output.write_text(text, encoding="utf-8")
-            write_starts(output.with_suffix(".starts.jsonl"), records)
+            from optbench.failures import apply_taxonomy
             from optbench.score import score_v2
             from optbench.v2 import collect_provenance
 
+            stored = [apply_taxonomy(dict(row), failure_cap, force_norm) for row in records]
+            write_starts(output.with_suffix(".starts.jsonl"), stored)
             scored = score_v2(
                 [
                     {"force_calls": row["force_calls"], "success": row["success"], "failure": row.get("failure")}
-                    for row in records
+                    for row in stored
                 ],
                 failure_cap,
-            ) if records else None
+            ) if stored else None
             if scored is not None:
                 document = {
                     "schema": "optbench.score/v2",
@@ -1002,12 +1008,20 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
                 else:
                     stall += 1
                 if int(record["force_calls"]) >= failure_cap and record["success"]:
+                    from optbench.failures import classify_outcome
+
                     was_low = bool(record.get("low_barrier"))
-                    record["success"] = False
-                    record["failure"] = "cap"
                     record["reasons"] = ["cap"]
+                    record["failure"] = classify_outcome(
+                        energy=record.get("energy"),
+                        force=record.get("force_norm"),
+                        calls=float(record["force_calls"]),
+                        cap=failure_cap,
+                        force_tol=float(force_norm),
+                    )
+                    record["success"] = record["failure"] is None
                     record["low_barrier"] = False
-                    if was_low:
+                    if was_low and not record["success"]:
                         connected -= 1
                 search_calls += int(record["force_calls"])
                 _spill_endpoints(
