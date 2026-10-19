@@ -1,0 +1,33 @@
+# counter harness. One force call is one USERPOT geometry.
+# An energy request and a gradient request at that geometry are one call.
+# The recorded force norm is a direct clean evaluation and is not a search call.
+# v2 success is under the cap, at the force stop, and Hessian index 0.
+# energy and Kabsch RMSD were not applied: the problem file has no per-start reference.
+# energy_min and energy_max are the final potential values on the recorded points.
+# LJ38 index removes the six rigid modes. A curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6).
+# Default LBFGS at sigma 1e-2. updates 4 and maxbfgs 0.2. The RMS stop is the noise-aware force norm divided by sqrt(3N). The clean-energy window is also required. A restart with GMAX 0 continues when the RMS stop is met and the window is not. The recorded force norm is the clean gradient.
+force_calls 177
+force_calls_min 75
+force_calls_max 424
+nfailed 4
+median 168
+code optim
+code_version 02aaf45245af
+commit 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f
+algorithm LBFGS
+template optim/noise-lbfgs-s1em2
+problem minimization/lj38-noise
+tuning default
+counter harness
+sigma 0.01
+par2_mean 1823.055
+wilson_low 0.898263504866
+wilson_high 0.932544978557
+par2_median 174
+par2_median_low 169.5
+par2_median_high 179
+v2_nfailed 83
+v2_successes 917
+n 1000
+energy_min -172.110522496
+energy_max -151.913590705

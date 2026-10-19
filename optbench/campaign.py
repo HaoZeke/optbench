@@ -451,6 +451,25 @@ def run(
             limit=limit,
             resume=resume,
         )
+    # USERPOT rows. ASE-socket templates share this engine name and stay on optim_search.
+    if template["engine"] == "optim" and str(template.get("code_version")) == "02aaf45245af":
+        from .runners.optim_min import run_template
+
+        problem = resolve_problem(root, problem_name)
+        stated = template.get("problem")
+        if stated and stated != problem["id"]:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return run_template(
+            root,
+            problem,
+            template,
+            geometries=geometries,
+            output=output,
+            workers=workers,
+            work=work,
+            limit=limit,
+            resume=resume,
+        )
     if template["engine"] == "geomoptjl":
         from .runners.geomoptjl_min import run_template
 

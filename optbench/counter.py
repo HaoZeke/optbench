@@ -39,6 +39,7 @@ class HarnessCounter:
     def __init__(self, *, cache: bool = True, cap: int | None = None):
         self.calls = 0
         self.verify_calls = 0
+        self.hits = 0
         self.cap = None if cap is None else int(cap)
         self._verifying = False
         self._cache_enabled = cache
@@ -50,6 +51,7 @@ class HarnessCounter:
         with self._lock:
             self.calls = 0
             self.verify_calls = 0
+            self.hits = 0
             self._verifying = False
             self._cache_key = None
             self._cached = None
@@ -61,6 +63,7 @@ class HarnessCounter:
         """
         with self._lock:
             if self._cache_enabled and key == self._cache_key and self._cached is not None:
+                self.hits += 1
                 return False, self._cached
             if self._verifying:
                 self.verify_calls += 1

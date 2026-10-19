@@ -35,7 +35,7 @@
    <td data-code="compass">—</td>
    <td class="bench-score" data-code="dlfind" data-template="dlfind/lbfgs-lj38" data-par2="231.908">231.908<a href="generated/suites/minimization.html#lj38-templates">dlfind/lbfgs-lj38</a></td>
    <td class="bench-score" data-code="lammps" data-template="lammps/hftn-lj38" data-par2="1123.81">1123.81<a href="generated/suites/minimization.html#lj38-templates">lammps/hftn-lj38</a></td>
-   <td class="bench-score" data-code="optim" data-template="optim/lbfgs-lj38" data-par2="270.341">270.341<a href="generated/suites/minimization.html#lj38-templates">optim/lbfgs-lj38</a></td>
+   <td class="bench-score" data-code="optim" data-template="optim/lj38-lbfgs-tuned" data-par2="175.537">175.537<a href="generated/suites/minimization.html#lj38-templates">optim/lj38-lbfgs-tuned</a></td>
    <td data-code="optking">—</td>
    <td data-code="softsaddle">—</td>
    <td class="bench-score" data-code="tsase" data-template="tsase/lbfgs-lj38" data-par2="257.2">257.2<a href="generated/suites/minimization.html#lj38-templates">tsase/lbfgs-lj38</a></td>
@@ -69,7 +69,7 @@
    <td data-code="compass">—</td>
    <td class="bench-score" data-code="dlfind" data-template="dlfind/lbfgs-lj38-noise-s0" data-par2="231.908">231.908<a href="generated/suites/minimization-lj38-noise.html#lj38-noise-templates">dlfind/lbfgs-lj38-noise-s0</a></td>
    <td class="bench-score" data-code="lammps" data-template="lammps/hftn-lj38-noise-s0" data-par2="1123.81">1123.81<a href="generated/suites/minimization-lj38-noise.html#lj38-noise-templates">lammps/hftn-lj38-noise-s0</a></td>
-   <td data-code="optim">—</td>
+   <td class="bench-score" data-code="optim" data-template="optim/noise-lbfgs-s0" data-par2="290.805">290.805<a href="generated/suites/minimization-lj38-noise.html#lj38-noise-templates">optim/noise-lbfgs-s0</a></td>
    <td data-code="optking">—</td>
    <td data-code="softsaddle">—</td>
    <td data-code="tsase">—</td>
@@ -103,7 +103,7 @@
    <td data-code="compass">—</td>
    <td class="bench-score" data-code="dlfind" data-template="dlfind/lbfgs-morse" data-par2="13626.5">13626.5<a href="generated/suites/minimization.html#morse-bulk-templates">dlfind/lbfgs-morse</a></td>
    <td class="bench-score" data-code="lammps" data-template="lammps/fire-morse" data-par2="17656.7">17656.7<a href="generated/suites/minimization.html#morse-bulk-templates">lammps/fire-morse</a></td>
-   <td class="bench-score" data-code="optim" data-template="optim/lbfgs-morse" data-par2="17408.8">17408.8<a href="generated/suites/minimization.html#morse-bulk-templates">optim/lbfgs-morse</a></td>
+   <td class="bench-score" data-code="optim" data-template="optim/morse-lbfgs" data-par2="45.7">45.7<a href="generated/suites/minimization.html#morse-bulk-templates">optim/morse-lbfgs</a></td>
    <td data-code="optking">—</td>
    <td data-code="softsaddle">—</td>
    <td class="bench-score" data-code="tsase" data-template="tsase/lbfgs-morse" data-par2="17606.4">17606.4<a href="generated/suites/minimization.html#morse-bulk-templates">tsase/lbfgs-morse</a></td>

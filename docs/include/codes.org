@@ -1059,7 +1059,7 @@
    </tr>
    <tr>
    <td>minimization and saddle search</td>
-   <td>svn-snapshot</td>
+   <td>svn-export</td>
    <td>02aaf45245af</td>
    <td><a href="http://www-wales.ch.cam.ac.uk/svn.tar.bz2">http://www-wales.ch.cam.ac.uk/svn.tar.bz2</a></td>
    </tr>
@@ -1100,26 +1100,37 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
-   <tr data-problem="minimization/lj38" data-template="optim/lbfgs-lj38">
+   <tr data-problem="minimization/lj38" data-template="optim/lj38-lbfgs-tuned">
    <td>Lennard-Jones 38 clusters</td>
-   <td data-field="template">optim/lbfgs-lj38</td>
-   <td data-field="version">optim svn-snapshot</td>
+   <td data-field="template">optim/lj38-lbfgs-tuned</td>
+   <td data-field="version">optim 02aaf45245af</td>
    <td data-field="commit">02aaf45245af</td>
-   <td data-field="par2_mean">270.341</td>
-   <td data-field="mean_calls">230.724</td>
-   <td data-field="median_calls">217</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 2</td>
+   <td data-field="par2_mean">175.537</td>
+   <td data-field="mean_calls">175.537</td>
+   <td data-field="median_calls">164</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/morse-bulk" data-template="optim/lbfgs-morse">
-   <td>Morse bulk</td>
-   <td data-field="template">optim/lbfgs-morse</td>
-   <td data-field="version">optim svn-snapshot</td>
+   <tr data-problem="minimization/lj38-noise" data-template="optim/noise-lbfgs-s0">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="template">optim/noise-lbfgs-s0</td>
+   <td data-field="version">optim 02aaf45245af</td>
    <td data-field="commit">02aaf45245af</td>
-   <td data-field="par2_mean">17408.8</td>
-   <td data-field="mean_calls">65.19</td>
-   <td data-field="median_calls">65</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 87</td>
+   <td data-field="par2_mean">290.805</td>
+   <td data-field="mean_calls">231.531</td>
+   <td data-field="median_calls">218.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-template="optim/morse-lbfgs">
+   <td>Morse bulk</td>
+   <td data-field="template">optim/morse-lbfgs</td>
+   <td data-field="version">optim 02aaf45245af</td>
+   <td data-field="commit">02aaf45245af</td>
+   <td data-field="par2_mean">45.7</td>
+   <td data-field="mean_calls">45.7</td>
+   <td data-field="median_calls">46</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="neb/Pt-heptamer" data-template="optim/dneb-hef">
@@ -1161,6 +1172,7 @@
    <li>lj38_2ts_separation: partial.</li>
    <li>pt-island: partial.</li>
    <li>lj38: partial.</li>
+   <li>Morse bulk: partial.</li>
    <li>LJ38: partial.</li>
    <li>pt-island: partial.</li>
    </ul>

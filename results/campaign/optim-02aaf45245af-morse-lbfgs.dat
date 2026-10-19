@@ -1,0 +1,32 @@
+# counter harness. One force call is one USERPOT geometry.
+# An energy request and a gradient request at that geometry are one call.
+# The recorded force norm is a direct clean evaluation and is not a search call.
+# v2 success is under the cap, at the force stop, and Hessian index 0.
+# energy and Kabsch RMSD were not applied: the problem file has no per-start reference.
+# energy_min and energy_max are the final potential values on the recorded points.
+# Default row. BFGSMIN uses OPTIM's LBFGS defaults: updates 4, maxbfgs 0.2, and MAXERISE 1.0D-10. GMAX is the Morse force norm divided by sqrt(3N). USERPOT evaluates the harness Morse potential. The same values are used for every start.
+force_calls 46
+force_calls_min 22
+force_calls_max 61
+nfailed 0
+median 46
+code optim
+code_version 02aaf45245af
+commit 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f
+algorithm LBFGS
+template optim/morse-lbfgs
+problem minimization/morse-bulk
+tuning default
+counter harness
+sigma 0
+par2_mean 45.7
+wilson_low 0.963006501793
+wilson_high 1
+par2_median 46
+par2_median_low 43
+par2_median_high 50
+v2_nfailed 0
+v2_successes 100
+n 100
+energy_min -1396.17323766
+energy_max -1396.17323752
