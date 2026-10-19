@@ -10,7 +10,7 @@ profile = "default"
 reducer = "capped"
 ranked = true
 parameter_source = "default"
-note = "ASE NEB defaults on the same pairs: spring 0.1, climb off, FIRE. The cap is 40000, the same harness cap as the tuned row. The problem file does not state one."
+note = "ASE NEB defaults on the same pairs: spring 0.1, climb off, FIRE. The harness stop is 40000, the same as the tuned row. The problem run limit is 10000. Campaign rows use that cap. This asv class uses the harness stop."
 
 [optimizer]
 name = "FIRE"

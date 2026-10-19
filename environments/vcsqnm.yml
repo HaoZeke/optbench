@@ -1,0 +1,14 @@
+# vc-SQNM is not a conda package. This file does not select a
+# conda build. The rows use the Python package built from the
+# source pin in codes/registry.toml under id vcsqnm:
+#   ref = v1.3
+#   commit = 4241692173cccb42a9ae05974bfd62285ec2cd7b
+# The distribution built from that commit reports version 1.2.
+# It is not in uv.lock. Install it from that commit before a
+# campaign. asv has one environment_type, so this yml is the pin
+# and not a second environment.
+name: vcsqnm
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12

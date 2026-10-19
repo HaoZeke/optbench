@@ -76,7 +76,9 @@ def run(
     from optbench.campaign import run as run_campaign
 
     loaded = load_template(root, template)
-    if loaded["engine"] == "rgsaddle-band":
+    if loaded["engine"] == "rgsaddle-band" or (
+        loaded["engine"] == "geodesic" and loaded.get("backend") == "rgsaddle"
+    ):
         from optbench.rgsaddle_band import run as run_band
 
         summary = run_band(
@@ -85,6 +87,18 @@ def run(
             template,
             output=output,
             workers=workers,
+        )
+    elif loaded["engine"] == "lammps-neb":
+        from optbench.lammps_neb import run as run_lammps
+
+        summary = run_lammps(
+            root,
+            problem,
+            template,
+            output=output,
+            workers=workers,
+            limit=limit,
+            resume=resume,
         )
     else:
         client_path = _eon_client(client) if loaded["engine"] in {"eon-client", "eon"} else client

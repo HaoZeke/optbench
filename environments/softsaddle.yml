@@ -1,0 +1,8 @@
+# SoftSaddle is not a Python package. The shared libraries are built
+# from softsaddle/upstream by softsaddle/driver/build.sh. The pin is
+# codes/registry.toml id softsaddle, commit 5a00aeede06fd822ef302624ec4c9bc7889d21fc0b5804b701a5785695c68d16.
+name: softsaddle
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12

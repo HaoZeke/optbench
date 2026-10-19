@@ -1,16 +1,113 @@
 id = "accelerated-md/aladatom"
-title = "aladatom"
+title = "Al adatom on Al(100) at 250 K"
 suite = "accelerated-md"
 problem = "aladatom"
-contract = "partial"
+contract = "stated"
 entry_count = 1
+remark = "Aluminum adatom on Al(100). The reactant is the 151-atom legacy con, and the potential is the Voter-Chen EAM built into eOn as eam_al. The reference escape rate is the 250 K parallel-replica row. One repetition is one AKMC catalogue. The published method sample is 5000 products, and that count turns the rate into simulated time."
+
+[potential]
+kind = "eam_al"
+name = "Voter-Chen aluminum"
+
+[thermal]
+temperature_K = 250
+thermostat = "langevin"
+friction_per_fs = 0.001
+friction_note = "The branching page allows Langevin friction from 0.005 to 0.03 per fs, or an Andersen thermostat with collision strength 0.2 to 0.8 and period 200 to 1000 fs. The archived true rate used Langevin friction 0.001 per fs."
+
+[reference]
+true_rate = 2.542941e8
+uncertainty = 1.785425e6
+percent_uncertainty = 7.021105e-1
+thermostat = "langevin_0.001"
+algorithm = "parallel replica"
+source = "archive/entries/accelerated-md/aladatom/true_standard/eon-pr-langevin/benchmark.dat"
+contributor = "Juliana Duncan"
+date = "18 Oct 2012"
+
+[[reference.comparison]]
+name = "eon-md-langevin"
+true_rate = 2.543e8
+uncertainty = 1.807e6
+percent_uncertainty = 7.104e-1
+force_calls = 1.436e9
+force_calls_per_second = 315.110
+source = "legacy website eon-md-langevin dat files"
+
+[[reference.comparison]]
+name = "eon-md-anderson"
+true_rate = 2.069e8
+uncertainty = 1.409e7
+percent_uncertainty = 6.810
+force_calls = 1.548e9
+force_calls_per_second = 338.350
+source = "legacy website eon-md-anderson dat files"
+
+[catalogue]
+channels = 24
+temperature_K = 250
+samples = 15000
+source = "website/branchingratios.tmpl MD_standard"
+probabilities = [
+  0.00020,
+  0.38127,
+  0.23493,
+  0.12473,
+  0.24273,
+  0.00200,
+  0.00140,
+  0.00280,
+  0.00240,
+  0.00087,
+  0.00193,
+  0.00147,
+  0.00040,
+  0.00113,
+  0.00093,
+  0.00020,
+  0.00007,
+  0.00013,
+  0.00007,
+  0.00007,
+  0.00007,
+  0.00007,
+  0.00007,
+  0.00007,
+]
+
+[sample]
+products = 5000
+reference_products = 15000
+repetitions = 1
+
+[input]
+reactant = "website/accelerated-md/reactant.con"
+products = "website/accelerated-md/products/product{index}.con"
+atoms = 151
+fixed_atoms = 50
+mobile_atoms = 101
+
+[convergence]
+catalogue_rmsd = 0.15
+min_barrier_eV = 0.01
+confidence = 0.95
+confidence_scheme = "old"
+thermally_accessible_window = 20
 
 [metrics]
 required = ["percent_uncertainty", "thermostat", "true_rate", "uncertainty"]
+scored = ["rate_accuracy", "catalogue_accuracy", "force_calls_per_simulated_time"]
 
 [scoring.legacy]
 label = "legacy"
 rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean. The row stays labelled legacy."
+
+[scoring.escape]
+rate_accuracy = "max(0, 1 - abs(rate - reference) / reference)"
+catalogue_accuracy = "1 minus the total variation distance between the rate-weighted product channels and the published probabilities. Channel -1 is an unmatched product."
+force_calls_per_simulated_time = "Catalogue force calls divided by the seconds 5000 escapes would last at the calculated rate. The legacy force-calls-per-second column is wall-clock throughput, about 315 for the Langevin molecular dynamics row, and is not this score."
+simulated_time = "sample.products divided by the calculated rate"
 
 [scoring.v2]
 version = "par2-wilson-bootstrap"
@@ -18,6 +115,7 @@ par_factor = 2
 bootstrap_resamples = 2000
 bootstrap_seed = 20261015
 counter = "harness"
+note = "An eOn AKMC row counts sad-fcs plus mins-fcs in the client. That counter is not a harness wrap, so the row is not a PAR-2 rank."
 required = [
   "schema",
   "counter",

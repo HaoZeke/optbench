@@ -64,6 +64,28 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="eon/develop-de-pt-oci">
+   <td>pt-island</td>
+   <td data-field="template">eon/develop-de-pt-oci</td>
+   <td data-field="version">eOn 3.6.0</td>
+   <td data-field="commit">7095b23ac17d</td>
+   <td data-field="par2_mean">3080.19</td>
+   <td data-field="mean_calls">3220.9</td>
+   <td data-field="median_calls">2260</td>
+   <td data-field="failures">crash 0, divergence 0, cap 21, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="globalopt/lj38" data-template="eon-client/bh-lj38">
+   <td>Lennard-Jones 38 global minimum</td>
+   <td data-field="template">eon-client/bh-lj38</td>
+   <td data-field="version">eOn 3.5.0</td>
+   <td data-field="commit">4d8b34baf1ba</td>
+   <td data-field="par2_mean">503146</td>
+   <td data-field="mean_calls">503146</td>
+   <td data-field="median_calls">369028</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
    <tr data-problem="lowest-eigenvector/lj38" data-template="eon-client/low-lj38-lanczos">
    <td>lj38</td>
    <td data-field="template">eon-client/low-lj38-lanczos</td>
@@ -97,6 +119,28 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
+   <tr data-problem="neb/Pt-heptamer" data-template="eon/neb-pt-lbfgs">
+   <td>Pt-heptamer</td>
+   <td data-field="template">eon/neb-pt-lbfgs</td>
+   <td data-field="version">eOn 3.6.0</td>
+   <td data-field="commit">1d71c9445018</td>
+   <td data-field="par2_mean">3517.69</td>
+   <td data-field="mean_calls">3517.69</td>
+   <td data-field="median_calls">3738</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   <tr data-problem="saddle-search/pt-island" data-template="eon/develop-saddle-pt-lanczos">
+   <td>Pt heptamer island</td>
+   <td data-field="template">eon/develop-saddle-pt-lanczos</td>
+   <td data-field="version">eOn 3.6.0</td>
+   <td data-field="commit">7095b23ac17d</td>
+   <td data-field="par2_mean">2e+08</td>
+   <td data-field="mean_calls">3.98507e+06</td>
+   <td data-field="median_calls">3.98507e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 2, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">2</td>
+   </tr>
    <tr data-problem="tsopt/LJ38" data-template="eon-client/ts-lj38-lanczos-improved">
    <td>LJ38</td>
    <td data-field="template">eon-client/ts-lj38-lanczos-improved</td>
@@ -121,7 +165,8 @@ The number is written only after the run finishes under the problem rule.
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
-   <li>aladatom: partial.</li>
+   <li>Al adatom on Al(100) at 250 K: not yet on the harness counter, partial.</li>
+   <li>Al adatom on Al(100) at 150 K: not yet on the harness counter.</li>
    <li>LJ38 double-ended saddle: not yet on the harness counter, partial.</li>
    <li>lj38_2ts_separation: partial.</li>
    <li>pt-island: not yet on the harness counter, partial.</li>
@@ -197,6 +242,17 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
+   <tr data-problem="globalopt/lj38" data-template="eon-svn/bh-lj38">
+   <td>Lennard-Jones 38 global minimum</td>
+   <td data-field="template">eon-svn/bh-lj38</td>
+   <td data-field="version">Eon svn r2549</td>
+   <td data-field="commit">r2549</td>
+   <td data-field="par2_mean">598530</td>
+   <td data-field="mean_calls">558530</td>
+   <td data-field="median_calls">423226</td>
+   <td data-field="failures">crash 0, divergence 0, cap 2, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
    <tr data-problem="lowest-eigenvector/lj38" data-template="eon-svn/low-lj38-lanczos-ljcut">
    <td>lj38</td>
    <td data-field="template">eon-svn/low-lj38-lanczos-ljcut</td>
@@ -254,9 +310,8 @@ The number is written only after the run finishes under the problem rule.
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
-   <li>aladatom: partial.</li>
+   <li>Al adatom on Al(100) at 250 K: partial.</li>
    <li>lj38_2ts_separation: partial.</li>
-   <li>Lennard-Jones 38 global minimum: partial.</li>
    <li>Al: partial.</li>
    <li>Pt: partial.</li>
    <li>lj38: partial.</li>
@@ -300,15 +355,15 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 1</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/lj38-noise" data-template="noise/rgmin-lbfgs-m100-s0">
+   <tr data-problem="minimization/lj38-noise" data-template="noise/rgmin-dogleg-s0">
    <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
-   <td data-field="template">noise/rgmin-lbfgs-m100-s0</td>
+   <td data-field="template">noise/rgmin-dogleg-s0</td>
    <td data-field="version">rgmin 0.4.1</td>
    <td data-field="commit">9a2e7ff11fa6</td>
-   <td data-field="par2_mean">197.228</td>
-   <td data-field="mean_calls">177.367</td>
-   <td data-field="median_calls">170</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 1</td>
+   <td data-field="par2_mean">81.881</td>
+   <td data-field="mean_calls">81.881</td>
+   <td data-field="median_calls">79</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-template="rgmin/morse-lbfgs-m20">
@@ -424,6 +479,65 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="median_calls">145</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">49</td>
+   </tr>
+   </tbody></table></div>
+   <h3>geodesic</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>band initialiser</td>
+   <td>main</td>
+   <td>476aa041f562</td>
+   <td><a href="https://github.com/virtualzx-nad/geodesic-interpolate">https://github.com/virtualzx-nad/geodesic-interpolate</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="double-ended-saddle-search/lj38" data-template="geodesic/ci-neb-lbfgs">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="template">geodesic/ci-neb-lbfgs</td>
+   <td data-field="version">geodesic 1.0.0</td>
+   <td data-field="commit">476aa041f562</td>
+   <td data-field="par2_mean">1208.42</td>
+   <td data-field="mean_calls">768.74</td>
+   <td data-field="median_calls">512</td>
+   <td data-field="failures">crash 0, divergence 0, cap 4, not_converged 3, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="geodesic/ci-neb-lbfgs">
+   <td>lj38_2ts_separation</td>
+   <td data-field="template">geodesic/ci-neb-lbfgs</td>
+   <td data-field="version">geodesic 1.0.0</td>
+   <td data-field="commit">476aa041f562</td>
+   <td data-field="par2_mean">16807.4</td>
+   <td data-field="mean_calls">8401.49</td>
+   <td data-field="median_calls">10000</td>
+   <td data-field="failures">crash 0, divergence 0, cap 38, not_converged 0, wrong_stationary 4</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="geodesic/ase-de-pt-tuned">
+   <td>pt-island</td>
+   <td data-field="template">geodesic/ase-de-pt-tuned</td>
+   <td data-field="version">geodesic 1.0.0</td>
+   <td data-field="commit">476aa041f562</td>
+   <td data-field="par2_mean">595.983</td>
+   <td data-field="mean_calls">494.288</td>
+   <td data-field="median_calls">347</td>
+   <td data-field="failures">crash 0, divergence 0, cap 2, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-template="geodesic/ci-neb-lbfgs">
+   <td>Pt-heptamer</td>
+   <td data-field="template">geodesic/ci-neb-lbfgs</td>
+   <td data-field="version">geodesic 1.0.0</td>
+   <td data-field="commit">476aa041f562</td>
+   <td data-field="par2_mean">318.923</td>
+   <td data-field="mean_calls">318.923</td>
+   <td data-field="median_calls">314</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
    </tr>
    </tbody></table></div>
    <h3>ASE</h3>
@@ -758,6 +872,152 @@ The number is written only after the run finishes under the problem rule.
    <li>Lennard-Jones 38 clusters with Gaussian force noise: partial.</li>
    <li>Morse bulk: partial.</li>
    </ul>
+   <h3>GMIN</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization</td>
+   <td>svn.tar.bz2</td>
+   <td>df8da5992675</td>
+   <td><a href="https://www-wales.ch.cam.ac.uk/svn.tar.bz2">https://www-wales.ch.cam.ac.uk/svn.tar.bz2</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="minimization/lj38" data-template="gmin/lj38-lbfgs">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="template">gmin/lj38-lbfgs</td>
+   <td data-field="version">GMIN df8da5992675</td>
+   <td data-field="commit">df8da5992675</td>
+   <td data-field="par2_mean">301.399</td>
+   <td data-field="mean_calls">242.093</td>
+   <td data-field="median_calls">223</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-template="noise/gmin-lbfgs-s0">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="template">noise/gmin-lbfgs-s0</td>
+   <td data-field="version">GMIN df8da5992675</td>
+   <td data-field="commit">df8da5992675</td>
+   <td data-field="par2_mean">301.399</td>
+   <td data-field="mean_calls">242.093</td>
+   <td data-field="median_calls">223</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-template="gmin/morse-lbfgs">
+   <td>Morse bulk</td>
+   <td data-field="template">gmin/morse-lbfgs</td>
+   <td data-field="version">GMIN df8da5992675</td>
+   <td data-field="commit">df8da5992675</td>
+   <td data-field="par2_mean">34.4</td>
+   <td data-field="mean_calls">34.4</td>
+   <td data-field="median_calls">35</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table></div>
+   <h3>pele</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization</td>
+   <td>main</td>
+   <td>b7081b932a06</td>
+   <td><a href="https://github.com/pele-python/pele">https://github.com/pele-python/pele</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="minimization/lj38" data-template="pele/lj38-lbfgs-m100">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="template">pele/lj38-lbfgs-m100</td>
+   <td data-field="version">pele 0.1.2</td>
+   <td data-field="commit">b7081b932a06</td>
+   <td data-field="par2_mean">197.936</td>
+   <td data-field="mean_calls">178.096</td>
+   <td data-field="median_calls">167</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 1</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-template="noise/pele-mylbfgs-s0">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="template">noise/pele-mylbfgs-s0</td>
+   <td data-field="version">pele 0.1.2</td>
+   <td data-field="commit">b7081b932a06</td>
+   <td data-field="par2_mean">268.036</td>
+   <td data-field="mean_calls">248.224</td>
+   <td data-field="median_calls">235</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 1</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-template="pele/morse-lbfgs">
+   <td>Morse bulk</td>
+   <td data-field="template">pele/morse-lbfgs</td>
+   <td data-field="version">pele 0.1.2</td>
+   <td data-field="commit">b7081b932a06</td>
+   <td data-field="par2_mean">92.06</td>
+   <td data-field="mean_calls">92.06</td>
+   <td data-field="median_calls">73</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table></div>
+   <p>No full ranked run</p><ul>
+   <li>pele-lbfgs-M1-maxstep0.1: no per-start record.</li>
+   <li>pele-lbfgs-M10-maxstep0.1: no per-start record.</li>
+   <li>pele-lbfgs-M100-maxstep0.2: no per-start record.</li>
+   <li>pele-lbfgs-M20-maxstep0.1: no per-start record.</li>
+   <li>pele-lbfgs-M4-maxstep0.05: no per-start record.</li>
+   <li>pele-lbfgs-M4-maxstep0.1: no per-start record.</li>
+   <li>pele-lbfgs-M4-maxstep0.2: no per-start record.</li>
+   </ul>
+   <h3>OptKing</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>transition-state search</td>
+   <td>767e2c0c13ff2b851ac82101ccd5aab9a558a4f1</td>
+   <td>767e2c0c13ff</td>
+   <td><a href="https://github.com/psi-rking/optking">https://github.com/psi-rking/optking</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="tsopt/LJ38" data-template="optking/lj38-p-rfo">
+   <td>LJ38</td>
+   <td data-field="template">optking/lj38-p-rfo</td>
+   <td data-field="version">optking 0.5.1.dev2+g767e2c0c1</td>
+   <td data-field="commit">767e2c0c13ff</td>
+   <td data-field="par2_mean">7030.36</td>
+   <td data-field="mean_calls">1494.34</td>
+   <td data-field="median_calls">555</td>
+   <td data-field="failures">crash 0, divergence 0, cap 3, not_converged 0, wrong_stationary 64</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="tsopt/pt-island" data-template="optking/pt-rs-irfo">
+   <td>pt-island</td>
+   <td data-field="template">optking/pt-rs-irfo</td>
+   <td data-field="version">optking 0.5.1.dev2+g767e2c0c1</td>
+   <td data-field="commit">767e2c0c13ff</td>
+   <td data-field="par2_mean">1059.98</td>
+   <td data-field="mean_calls">1059.98</td>
+   <td data-field="median_calls">1060</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">49</td>
+   </tr>
+   </tbody></table></div>
+   <p>No full ranked run</p><ul>
+   <li>LJ38: partial.</li>
+   <li>pt-island: partial.</li>
+   </ul>
    <h3>pARTn</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
@@ -942,10 +1202,49 @@ The number is written only after the run finishes under the problem rule.
    <td>8de817dd79bf</td>
    <td><a href="https://github.com/lammps/lammps">https://github.com/lammps/lammps</a></td>
    </tr>
+   <tr>
+   <td>saddle search</td>
+   <td>stable_30Sep2026</td>
+   <td>8de817dd79bf</td>
+   <td><a href="https://github.com/lammps/lammps">https://github.com/lammps/lammps</a></td>
+   </tr>
    </tbody></table></div>
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="double-ended-saddle-search/lj38" data-template="lammpsneb/ci-fire">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="template">lammpsneb/ci-fire</td>
+   <td data-field="version">LAMMPS 30 Sep 2026</td>
+   <td data-field="commit">8de817dd79bf</td>
+   <td data-field="par2_mean">4526.2</td>
+   <td data-field="mean_calls">2055.2</td>
+   <td data-field="median_calls">2065</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 40, wrong_stationary 2</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="lammpsneb/ci-quickmin">
+   <td>lj38_2ts_separation</td>
+   <td data-field="template">lammpsneb/ci-quickmin</td>
+   <td data-field="version">LAMMPS 30 Sep 2026</td>
+   <td data-field="commit">8de817dd79bf</td>
+   <td data-field="par2_mean">19017.8</td>
+   <td data-field="mean_calls">9982</td>
+   <td data-field="median_calls">9982</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 45, wrong_stationary 1</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="lammpsneb/ci-fire">
+   <td>pt-island</td>
+   <td data-field="template">lammpsneb/ci-fire</td>
+   <td data-field="version">LAMMPS 30 Sep 2026</td>
+   <td data-field="commit">8de817dd79bf</td>
+   <td data-field="par2_mean">2668.64</td>
+   <td data-field="mean_calls">1471.69</td>
+   <td data-field="median_calls">1405</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 6, wrong_stationary 9</td>
+   <td data-field="n">59</td>
+   </tr>
    <tr data-problem="minimization/lj38" data-template="lammps/hftn-lj38">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="template">lammps/hftn-lj38</td>
@@ -978,6 +1277,17 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="median_calls">478</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 88</td>
    <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-template="lammpsneb/ci-fire">
+   <td>Pt-heptamer</td>
+   <td data-field="template">lammpsneb/ci-fire</td>
+   <td data-field="version">LAMMPS 30 Sep 2026</td>
+   <td data-field="commit">8de817dd79bf</td>
+   <td data-field="par2_mean">1398.46</td>
+   <td data-field="mean_calls">1398.46</td>
+   <td data-field="median_calls">1400</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
    </tr>
    </tbody></table></div>
    <h3>DL-FIND</h3>
@@ -1159,6 +1469,120 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="median_calls">65</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 87</td>
    <td data-field="n">100</td>
+   </tr>
+   </tbody></table></div>
+   <h3>AIRSS</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>random structure search</td>
+   <td>0.9.4</td>
+   <td>5593cc4ee360</td>
+   <td><a href="https://www.mtg.msm.cam.ac.uk/Codes/AIRSS">https://www.mtg.msm.cam.ac.uk/Codes/AIRSS</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="globalopt/lj38" data-template="airss/lj38">
+   <td>Lennard-Jones 38 global minimum</td>
+   <td data-field="template">airss/lj38</td>
+   <td data-field="version">AIRSS 0.9.4</td>
+   <td data-field="commit">5593cc4ee360</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="mean_calls">112134</td>
+   <td data-field="median_calls">70635.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table></div>
+   <p>No full ranked run</p><ul>
+   <li>lj75: partial.</li>
+   </ul>
+   <h3>vc-SQNM</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization</td>
+   <td>v1.3</td>
+   <td>4241692173cc</td>
+   <td><a href="https://github.com/moritzgubler/vc-sqnm">https://github.com/moritzgubler/vc-sqnm</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="minimization/lj38" data-template="vcsqnm/lj38-ase-tuned">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="template">vcsqnm/lj38-ase-tuned</td>
+   <td data-field="version">vc-SQNM 1.3</td>
+   <td data-field="commit">4241692173cc</td>
+   <td data-field="par2_mean">482.515</td>
+   <td data-field="mean_calls">384.513</td>
+   <td data-field="median_calls">369</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 5</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-template="noise/vcsqnm-ase-s0">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="template">noise/vcsqnm-ase-s0</td>
+   <td data-field="version">vc-SQNM 1.3</td>
+   <td data-field="commit">4241692173cc</td>
+   <td data-field="par2_mean">598.05</td>
+   <td data-field="mean_calls">382.068</td>
+   <td data-field="median_calls">365.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 11</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-template="vcsqnm/morse-ase">
+   <td>Morse bulk</td>
+   <td data-field="template">vcsqnm/morse-ase</td>
+   <td data-field="version">vc-SQNM 1.3</td>
+   <td data-field="commit">4241692173cc</td>
+   <td data-field="par2_mean">40.51</td>
+   <td data-field="mean_calls">40.51</td>
+   <td data-field="median_calls">41</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table></div>
+   <h3>SoftSaddle</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>saddle search</td>
+   <td>website/codes/softsaddle.tar.gz</td>
+   <td>5a00aeede06f</td>
+   <td><a href="https://github.com/henkelmangroup/optbench">https://github.com/henkelmangroup/optbench</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="lowest-eigenvector/lj38" data-template="softsaddle/mode-lanczos-tuned">
+   <td>lj38</td>
+   <td data-field="template">softsaddle/mode-lanczos-tuned</td>
+   <td data-field="version">softsaddle 2019.04</td>
+   <td data-field="commit">5a00aeede06f</td>
+   <td data-field="par2_mean">34.73</td>
+   <td data-field="mean_calls">34.73</td>
+   <td data-field="median_calls">34</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="saddle-search/pt-island" data-template="softsaddle/saddle-lanczos-sm0">
+   <td>Pt heptamer island</td>
+   <td data-field="template">softsaddle/saddle-lanczos-sm0</td>
+   <td data-field="version">softsaddle 2019.04</td>
+   <td data-field="commit">5a00aeede06f</td>
+   <td data-field="par2_mean">10124.2</td>
+   <td data-field="mean_calls">431.839</td>
+   <td data-field="median_calls">389</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 790, wrong_stationary 4208</td>
+   <td data-field="n">5000</td>
    </tr>
    </tbody></table></div>
    </section>

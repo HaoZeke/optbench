@@ -12,7 +12,7 @@ Problem statements are TOML under `problems/`. JSON schemas are under `contract/
 
 Verification of the Hessian uses `CountedPotential.verification`. Those calls increment `verify_calls` and are not the search cost.
 
-`optbench/runners/ase_lj38.py`, `optbench/pele_lj38.py`, and `optbench/sella_lj38.py` take the number from that wrapper. The pele files already in `results/campaign/` were charged with `result.nfev`. A new pele run is charged with wrapper entries. The stored files are not rewritten.
+`optbench/runners/ase_lj38.py`, `optbench/pele_lj38.py`, and `optbench/sella_lj38.py` take the number from that wrapper. The pele files already in `results/campaign/` that predate the harness runner were charged with `result.nfev`. `optbench/runners/pele_min.py` charges `getEnergyGradient` on the problem potential for LBFGS, MYLBFGS, FIRE, and steepest descent. Those stored nfev files are not rewritten.
 
 `uv run optbench run` still shells out to `eonclient` and leaves the client's potential in the binary. That command writes the legacy `benchmark.dat` unchanged and a sibling `benchmark.starts.jsonl`. Each line has `counter` `client` and `comparable` false. It is not a v2 score.
 
