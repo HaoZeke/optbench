@@ -18,7 +18,7 @@
         "force_calls_max": 2000000,
         "force_calls_median": 2000000.0,
         "force_calls_min": 23719,
-        "nfailed": 71
+        "nfailed": 72
       },
       "metrics": {
         "bootstrap_resamples": 2000,
@@ -28,27 +28,27 @@
         "iqr": 0.0,
         "iqr_high": 0.0,
         "iqr_low": 0.0,
-        "mean": 3653825.4875,
+        "mean": 3658099.24691358,
         "median": 4000000.0,
         "median_high": 4000000.0,
         "median_low": 4000000.0,
-        "n": 80,
-        "n_cap": 71,
+        "n": 81,
+        "n_cap": 72,
         "n_crash": 0,
         "n_divergence": 0,
         "n_wrong_stationary": 0,
-        "nfailed": 71,
-        "par2_mean": 3653825.4875,
+        "nfailed": 72,
+        "par2_mean": 3658099.24691358,
         "par_applied": true,
         "par_factor": 2,
         "q25": 4000000.0,
         "q75": 4000000.0,
         "scoring": "par2-wilson-bootstrap",
         "success_only_mean": 922893.2222222222,
-        "success_rate": 0.1125,
+        "success_rate": 0.1111111111111111,
         "successes": 9,
-        "wilson_high": 0.20018218092372875,
-        "wilson_low": 0.060326869466304764
+        "wilson_high": 0.19787094681537315,
+        "wilson_low": 0.059567564076505305
       },
       "parameters": {
         "distribution": "uniform",
@@ -1427,6 +1427,23 @@
           ],
           "schema": "optbench.start/v2",
           "start": "79",
+          "success": false,
+          "threshold": -173.92742624400097,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -172.31539153370372,
+          "failure": "cap",
+          "force_calls": 2000000,
+          "lowest_energy": -172.31539153370372,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "80",
           "success": false,
           "threshold": -173.92742624400097,
           "verify_calls": 0
