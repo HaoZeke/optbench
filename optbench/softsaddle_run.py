@@ -33,11 +33,15 @@ from .rgsaddle_minmode import (
     _hessian_spectrum,
     _lbfgs_minimize,
     _norm,
-    _outcome,
     _unit,
     _vibrational_eigenvalues,
 )
 from .score import half_even, score_v2
+
+
+def _outcome(reasons: list[str]) -> tuple[bool, str | None]:
+    failure = classify_failure(reasons)
+    return failure is None, failure
 from .stationary import negative_index
 from .surfaces import load_con, potential_from_problem, read_mode
 from .v2 import collect_provenance, write_starts
