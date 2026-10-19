@@ -2303,6 +2303,7 @@
   ],
   "profile": {
     "area_log10": {
+      "ase-3.29.0/morse-lbfgs-current 3.29.0 current campaign f27c000": 0.1685767975718295,
       "ase-3.6.0/morse-lbfgs 3.6.0 tuned campaign r2515": 0.3973595942764552,
       "ase/morse-bfgs-default 3.29.0 default campaign, asv f27c000": 0.3913389943631756,
       "ase/morse-bfgs-tuned 3.29.0 tuned campaign, asv f27c000": 0.3913389943631756,
@@ -2395,6 +2396,13 @@
       "tsase/lbfgs-morse 1.0 default campaign 98aac60": 0.042144199392957375
     },
     "rho": {
+      "ase-3.29.0/morse-lbfgs-current 3.29.0 current campaign f27c000": [
+        0.0,
+        0.0,
+        0.0,
+        0.1,
+        0.92
+      ],
       "ase-3.6.0/morse-lbfgs 3.6.0 tuned campaign r2515": [
         0.0,
         0.0,
@@ -3027,6 +3035,7 @@
       ]
     },
     "solved": {
+      "ase-3.29.0/morse-lbfgs-current 3.29.0 current campaign f27c000": 1.0,
       "ase-3.6.0/morse-lbfgs 3.6.0 tuned campaign r2515": 1.0,
       "ase/morse-bfgs-default 3.29.0 default campaign, asv f27c000": 1.0,
       "ase/morse-bfgs-tuned 3.29.0 tuned campaign, asv f27c000": 1.0,
@@ -5824,6 +5833,51 @@
       "success_rate": 1.0,
       "template": "sella/morse-min-tuned",
       "tuning": "tuned",
+      "wilson_high": 1.0,
+      "wilson_low": 0.9630065017930143
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "ASE",
+      "code_version": "3.29.0",
+      "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "ase-3.29.0-morse-lbfgs-current",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 100,
+      "history": false,
+      "max_calls": 143.0,
+      "mean_calls": 89.45,
+      "mean_per_image": null,
+      "median": 84.5,
+      "median_calls": 84.5,
+      "median_high": 91.0,
+      "median_low": 81.5,
+      "median_per_image": null,
+      "min_calls": 63.0,
+      "n": 100,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 89.45,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/ase-3.29.0-morse-lbfgs-current.dat",
+      "problem": "minimization/morse-bulk",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "ase-3.29.0/morse-lbfgs-current",
+      "tuning": "current",
       "wilson_high": 1.0,
       "wilson_low": 0.9630065017930143
     },

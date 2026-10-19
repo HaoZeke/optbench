@@ -1,0 +1,34 @@
+force_calls 89
+force_calls_min 63
+force_calls_median 84.5
+force_calls_max 143
+nfailed 0
+starts 100
+code ASE
+code_version 3.29.0
+commit f27c0005ae6a67ea419f996e728668865bfc1f86
+algorithm LBFGS
+profile current
+template ase-3.29.0/morse-lbfgs-current
+problem minimization/morse-bulk
+counter harness
+reducer capped
+parameter_source default
+method {"counter":"harness attach_ase_counter","parameter_source":"default","parameters":{"alpha":70.0,"damping":1.0,"maxstep":0.2,"memory":100,"use_line_search":false},"potential":{"D":0.7102,"alpha":1.6047,"form":"tsase","kind":"morse","pbc":[true,true,true],"r0":2.897,"rc":9.5},"profile":"current","reducer":"capped","stop":{"force_norm":0.001,"max_force_calls":10000,"max_steps":10000,"norm":"l2","verify_hessian":false}}
+note Current ASE 3.29.0 LBFGS. Constructor defaults only. The stop is the paper force norm 0.001. The starts are the archived POSCAR Morse set. Success is that force norm under the harness cap.
+host cursor
+date 2026-10-19
+contributor Rohit Goswami
+scoring par2-wilson-bootstrap
+par2_mean 89.45
+par2_median 84.5
+par2_median_low 81.5
+par2_median_high 91
+par2_iqr 21.5
+success_rate 1
+wilson_low 0.9630065018
+wilson_high 1
+par_applied true
+par_factor 2
+bootstrap_resamples 2000
+bootstrap_seed 20261015

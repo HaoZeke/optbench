@@ -538,16 +538,28 @@ class _Morse:
 
                 changes = all_changes if system_changes is None else system_changes
                 super().calculate(atoms, properties, changes)
-                energy, forces = _morse_arrays(
-                    atoms.positions,
-                    atoms.cell.array,
-                    atoms.pbc,
-                    self.D,
-                    self.alpha,
-                    self.r0,
-                    self.rc,
-                    self.form,
-                )
+                if self.form == "tsase":
+                    from .ase_lbfgs36 import morse_force
+
+                    energy, forces = morse_force(
+                        atoms.positions,
+                        atoms.cell.array,
+                        self.D,
+                        self.alpha,
+                        self.r0,
+                        self.rc,
+                    )
+                else:
+                    energy, forces = _morse_arrays(
+                        atoms.positions,
+                        atoms.cell.array,
+                        atoms.pbc,
+                        self.D,
+                        self.alpha,
+                        self.r0,
+                        self.rc,
+                        self.form,
+                    )
                 self.results = {"energy": energy, "forces": forces}
 
         self.calc = _Calc()
@@ -850,12 +862,20 @@ def _run_lbfgs36(payload: dict) -> dict:
     return row
 
 
+def _stop_verify_hessian(stop: dict | None) -> bool:
+    """Hessian index is part of v2 success unless the template turns it off."""
+    return (stop or {}).get("verify_hessian", True) is not False
+
+
 def _run_minimize(payload: dict, bucket: CallCounter) -> dict:
     if _paper_lbfgs36(payload["optimizer"]):
         return _run_lbfgs36(payload)
     atoms = _attach(_read_atoms(Path(payload["paths"][0])), payload["potential"], bucket)
     opt = _build_optimizer(payload["optimizer"], atoms)
-    row = {"failed": True, "force_norm": None, "expected_index": 0}
+    verify = payload.get("verify_hessian", True) is not False
+    row = {"failed": True, "force_norm": None}
+    if verify:
+        row["expected_index"] = 0
     if payload.get("snapshot"):
         row["parameters"] = _snapshot_optimizer(opt, payload["optimizer"])
     try:
@@ -877,7 +897,7 @@ def _run_minimize(payload: dict, bucket: CallCounter) -> dict:
     row["failed"] = failed
     row["force_norm"] = norm
     row["energy"] = _safe_energy(atoms)
-    if not failed and bucket[0] < bucket[1]:
+    if verify and not failed and bucket[0] < bucket[1]:
         _attach_index(row, atoms, 0)
     return row
 
@@ -1410,6 +1430,7 @@ def _write_dat(
     scored: dict | None = None,
 ) -> None:
     paper_steps = _paper_lbfgs36(template)
+    force_only = not _stop_verify_hessian(template.get("stop"))
     method = {
         "profile": template["profile"],
         "parameter_source": template.get("parameter_source", ""),
@@ -1420,7 +1441,7 @@ def _write_dat(
         "stop": template.get("stop") or {},
     }
     note = template.get("note", "")
-    if paper_steps:
+    if paper_steps or force_only:
         note = note.strip()
     elif template["task"] in {"minimize", "sella", "sella-search", "dimer"}:
         note = (
@@ -1552,6 +1573,7 @@ def run_template(
                 "norm": str(template["stop"].get("norm") or "l2"),
                 "max_steps": int(template["stop"]["max_steps"]),
                 "raw_cap": cap,
+                "verify_hessian": _stop_verify_hessian(template.get("stop")),
                 "snapshot": False,
             }
         )
@@ -1669,6 +1691,7 @@ def run_point(root: Path, template_name: str, start: str, seed: int, *, cache: P
         "norm": str(template["stop"].get("norm") or "l2"),
         "max_steps": int(template["stop"]["max_steps"]),
         "raw_cap": raw_cap(template),
+        "verify_hessian": _stop_verify_hessian(template.get("stop")),
         "snapshot": True,
     }
     started = time.perf_counter()
