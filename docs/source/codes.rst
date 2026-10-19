@@ -149,6 +149,7 @@ The number is written only after the run finishes under the problem rule.
    <li>eon-client/qm: no per-start record.</li>
    <li>eon-client/sd-twopoint: no per-start record.</li>
    <li>eon-client/sd: no per-start record.</li>
+   <li>eon-svn/htst-al-dimer-cg2: no per-start record.</li>
    </ul>
    <h3>Eon svn</h3>
    <div class="bench-scroll"><table>

@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+47 reproduced, 29 not reproduced, 75 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -75,7 +75,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
 | Al/eon-dimer-cg | barrier_force_calls 28870, barrier_jobs 48, rate_force_calls 897900, rate_jobs 1511 | 19660, 50, 620600, 1600 | not reproduced; htst_al |
-| Al/eon-dimer-cg2 | — | — | not rerun |
+| Al/eon-dimer-cg2 | barrier_force_calls 21070, barrier_jobs 46, rate_force_calls 766300, rate_jobs 1671 | 21710, 45, 785000, 1658 | reproduced |
 | Pt/alpha_dimer-qm | — | — | not rerun |
 | Pt/eon-dimer-cg | barrier_force_calls 496000, barrier_jobs 1050, rate_force_calls 25630, rate_jobs 54 | 506000, 1062, 27160, 57 | reproduced |
 | Pt/eon-dimer-cg2 | — | — | not rerun |

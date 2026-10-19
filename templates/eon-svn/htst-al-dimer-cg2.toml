@@ -6,7 +6,6 @@ code_version = "r2006"
 commit = "r2006"
 algorithm = "Dimer-CG rotation: max=10 tol=1"
 reducer = "harness-htst"
-kind = "htst"
 paper_baseline = true
 seeds = [42]
 starts = ["al"]
