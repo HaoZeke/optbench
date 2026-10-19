@@ -170,6 +170,38 @@ def morse_shift(positions, atomic_numbers=None, box=None):
     return _morse_fast(flat, atomic_numbers, box)
 
 
+def morse_shift_array(positions, box):
+    """Same surface as ``morse_shift``, from contiguous float64 buffers.
+
+    The returned forces are a flat array. A binary client uses this so a
+    343-atom call does not build a Python tuple of every coordinate.
+    """
+    import ctypes
+
+    from benchmarks.bench_eon_svn import MORSE_A, MORSE_CUTOFF, MORSE_D, MORSE_RE, _morse_lib
+
+    pos = np.ascontiguousarray(positions, dtype=np.float64).ravel()
+    if pos.size % 3 != 0 or pos.size == 0:
+        raise ValueError("positions must be x, y, z triples")
+    box_arr = np.ascontiguousarray(box, dtype=np.float64).ravel()
+    if box_arr.size != 9:
+        raise ValueError("box must be nine floats")
+    forces = np.empty(pos.size, dtype=np.float64)
+    energy = ctypes.c_double()
+    _morse_lib().morse_eon_flat(
+        pos.size // 3,
+        pos.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
+        box_arr.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
+        ctypes.byref(energy),
+        forces.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
+        MORSE_D,
+        MORSE_A,
+        MORSE_RE,
+        MORSE_CUTOFF,
+    )
+    return float(energy.value), forces
+
+
 def _link_eam(objects: list[Path], dest: Path) -> subprocess.CompletedProcess[str]:
     dest.parent.mkdir(parents=True, exist_ok=True)
     return subprocess.run(
@@ -747,6 +779,11 @@ def run_case(
     from .potserver import PotServer, remote_count
 
     template = load_template(ROOT, template_name)
+    if template_name in {
+        "eon-client/htst-pt-dimer-lbfgs",
+        "eon-client/htst-pt-lanczos-lbfgs",
+    }:
+        raise RuntimeError(f"{template_name} is the 13-window sample in optbench.eon_htst")
     family = _family_of(template)
     kind = str(template["kind"])
     if passes is None:
