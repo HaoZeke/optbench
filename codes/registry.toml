@@ -99,10 +99,10 @@ id = "tsase"
 name = "TSASE"
 role = "saddle search"
 repository = "https://github.com/henkelmangroup/tsase"
-ref = "master"
+ref = "main"
 commit = "98aac60b5d9905e81ee4e6b8c385f169258d0218"
 committed = "2025-09-26"
-note = "setup.py version string 1.0. The pin is commit 98aac60, xyz working again. The checkout has no LICENSE file. Fortran calculators use numpy.distutils and are not built. The harness loads neb/ssneb.py and neb/fire_ssneb.py without tsase/__init__.py and counts ASE calculate."
+note = "setup.py version string 1.0. Current main is commit 98aac60. The checkout has no LICENSE file. Fortran calculators use numpy.distutils and are not built. The harness loads neb/ssneb.py and neb/fire_ssneb.py without tsase/__init__.py and counts ASE calculate."
 
 [[code]]
 id = "pykmc"

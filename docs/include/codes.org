@@ -713,7 +713,7 @@
    <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
    <td>saddle search</td>
-   <td>master</td>
+   <td>main</td>
    <td>98aac60b5d99</td>
    <td><a href="https://github.com/henkelmangroup/tsase">https://github.com/henkelmangroup/tsase</a></td>
    </tr>
@@ -765,15 +765,15 @@
    <td data-field="failures">crash 0, divergence 22, cap 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
-   <tr data-problem="minimization/lj38" data-template="tsase/lj38-sdlbfgs-tuned">
+   <tr data-problem="minimization/lj38" data-template="tsase/lbfgs-lj38">
    <td>Lennard-Jones 38 clusters</td>
-   <td data-field="template">tsase/lj38-sdlbfgs-tuned</td>
+   <td data-field="template">tsase/lbfgs-lj38</td>
    <td data-field="version">tsase 1.0</td>
    <td data-field="commit">98aac60b5d99</td>
-   <td data-field="par2_mean">165.538</td>
-   <td data-field="mean_calls">165.538</td>
-   <td data-field="median_calls">157</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="par2_mean">257.2</td>
+   <td data-field="mean_calls">177.96</td>
+   <td data-field="median_calls">169</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 4</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-template="tsase/lbfgs-morse">

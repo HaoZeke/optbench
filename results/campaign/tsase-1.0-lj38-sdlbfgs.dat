@@ -1,0 +1,20 @@
+# counter harness. One force call is one harness Lennard-Jones calculate.
+# TSASE SDLBFGS is unmodified. maxstep, memory, and damping stay at the
+# constructor defaults. The stop is the archive max-atom criterion.
+# A failure is the harness rule: force norm, Hessian index, or the cap.
+force_calls 221
+force_calls_min 188
+force_calls_max 254
+force_calls_median 221
+successes 2
+nfailed 998
+n 1000
+transition_states 0
+code tsase
+code_version 1.0
+commit 98aac60b5d9905e81ee4e6b8c385f169258d0218
+algorithm SDLBFGS
+template tsase/lj38-sdlbfgs
+problem minimization/lj38
+tuning default
+counter harness

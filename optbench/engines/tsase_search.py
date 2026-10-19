@@ -654,6 +654,138 @@ def _execute_sdlbfgs(job: dict) -> dict:
     }
 
 
+def _execute_sdlbfgs_stock(job: dict) -> dict:
+    """Stock SDLBFGS, archive max-atom stop, harness potential and score.
+
+    The constructor keeps TSASE's own maxstep, memory, and damping.
+    ``Optimizer.run`` stops on the archive criterion. The harness then
+    counts the search and checks the problem force norm and Hessian index 0.
+    """
+    os.environ.setdefault("OMP_NUM_THREADS", "1")
+    from ase import Atoms
+
+    from optbench.counter import HarnessCounter, attach_ase_counter
+
+    opt_cls = _load_minimizer("lbfgs")
+    positions = np.asarray(job["positions"], dtype=np.float64)
+    free = np.asarray(job["free"], dtype=bool)
+    kind = job["kind"]
+    cap = int(job["cap"])
+    box = None if job["box"] is None else np.asarray(job["box"], dtype=np.float64)
+    counter = HarnessCounter(cache=True, cap=cap)
+    error = ""
+    energy = None
+    gradient = None
+    point = positions.copy()
+    try:
+        atoms = Atoms(positions=positions, cell=_cell(positions, box), pbc=box is not None)
+        atoms.calc = attach_ase_counter(_surface(kind, free, box)(), cap=cap, counter=counter)
+        opt = opt_cls(atoms, logfile=None, trajectory=None)
+        opt.run(
+            fmax=float(job["fmax"]),
+            emax=float(job["emax"]),
+            steps=int(job["steps"]),
+            optimizer=str(job["optimizer"]),
+        )
+        point = np.asarray(atoms.get_positions(), dtype=np.float64)
+        forces = np.asarray(atoms.get_forces(), dtype=np.float64)
+        energy = float(atoms.get_potential_energy())
+        gradient = -forces
+    except Exception as exc:
+        message = str(exc)
+        if "force-call cap" in message or type(exc).__name__ == "ForceCallCap":
+            error = f"force-call cap: {message}"
+        else:
+            error = f"{type(exc).__name__}: {exc}"
+    prefix: list[str] = []
+    if error:
+        prefix.append("cap" if "force-call cap" in error else "crash")
+    rotations = 0 if box is not None and bool(np.all(free)) else None
+    record = judge_saddle(
+        job["name"],
+        point,
+        None if energy is None else float(energy),
+        None if gradient is None else np.asarray(gradient, dtype=np.float64),
+        counter=counter,
+        cap=cap,
+        force_norm=float(job["force_norm"]),
+        kind=kind,
+        free=free,
+        box=box,
+        prefix=prefix,
+        expected_index=0,
+        rotations=rotations,
+    )
+    if error:
+        record["error"] = error
+    record["seed"] = "0"
+    record["minimizer"] = "sdlbfgs"
+    return record
+
+
+def _run_sdlbfgs_stock(root: Path, problem: dict, template: dict, output: Path, workers: int) -> dict:
+    """Current-main SDLBFGS on the LJ38 sample, scored by the harness."""
+    settings = point_settings(problem)
+    if settings["cap"] is None:
+        raise ValueError(f"{problem['id']} has no force-call cap")
+    section = dict(template.get("tsase") or {})
+    scratch = output.parent / "work" / template["id"].replace("/", "-")
+    starts = load_starts(root, problem, scratch)
+    fmax = float(section.get("fmax", settings["force_norm"]))
+    steps = int(section.get("steps", settings["cap"]))
+    jobs = []
+    for start in starts:
+        jobs.append(
+            {
+                "name": start["name"],
+                "positions": start["positions"],
+                "free": [not bool(flag) for flag in start["fixed"]],
+                "box": start["box"],
+                "kind": settings["potential"],
+                "cap": int(settings["cap"]),
+                "force_norm": float(settings["force_norm"]),
+                "fmax": fmax,
+                "emax": float(section.get("emax", 0.0001)),
+                "steps": steps,
+                "optimizer": str(section.get("optimizer", "maxatom")),
+            }
+        )
+    records = run_jobs(jobs, _execute_sdlbfgs_stock, workers)
+    parameters = {
+        "potential": settings["potential"],
+        "cutoff": 40.0,
+        "cap": int(settings["cap"]),
+        "force_norm": float(settings["force_norm"]),
+        "fmax": fmax,
+        "emax": float(section.get("emax", 0.0001)),
+        "steps": steps,
+        "optimizer": str(section.get("optimizer", "maxatom")),
+        "max_step": "SDLBFGS default 0.2",
+        "memory": "SDLBFGS default 100",
+        "damping": "SDLBFGS default 1",
+        "counter": "harness",
+        "failure": "harness force norm, Hessian index, or cap",
+        "seed": "0",
+        "upstream_ref": "main",
+    }
+    comment = (
+        "# counter harness. One force call is one harness Lennard-Jones calculate.\n"
+        "# TSASE SDLBFGS is unmodified. maxstep, memory, and damping stay at the\n"
+        "# constructor defaults. The stop is the archive max-atom criterion.\n"
+        "# A failure is the harness rule: force norm, Hessian index, or the cap."
+    )
+    return write_campaign(
+        output,
+        records,
+        template,
+        problem,
+        settings,
+        parameters,
+        images=None,
+        comment=comment,
+    )
+
+
 def _run_sdlbfgs(root: Path, problem: dict, template: dict, output: Path, workers: int) -> dict:
     """Archive minimization/lj38/tsase-sdlbfgs/opt.py on the xyz sample."""
     from optbench.campaign import geometry_archive
@@ -818,6 +950,8 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
     if stated and stated != problem["id"]:
         raise ValueError(f"{template_name} belongs to {stated}")
     method = str((template.get("tsase") or {}).get("method", "ci"))
+    if method == "sdlbfgs-stock":
+        return _run_sdlbfgs_stock(root, problem, template, output, workers)
     if method == "sdlbfgs":
         return _run_sdlbfgs(root, problem, template, output, workers)
     if method == "dimer":

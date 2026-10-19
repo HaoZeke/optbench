@@ -139,7 +139,7 @@ MATCHES: list[dict] = [
     {"key": "minimization/lj38/pele-lbfgs-M4-maxstep0.1", "template": "pele-lbfgs-M4-maxstep0.1", "branch": "main", "path": "results/campaign/pele-0.1.2-lbfgs-M4-maxstep0.1.dat"},
     {"key": "minimization/lj38/pele-lbfgs-M4-maxstep0.2", "template": "pele-lbfgs-M4-maxstep0.2", "branch": "main", "path": "results/campaign/pele-0.1.2-lbfgs-M4-maxstep0.2.dat"},
     {"key": "minimization/lj38/pele-fire", "template": "pele/lj38-fire", "branch": "cells/pele/min", "path": "results/campaign/pele-b7081b93-lj38-fire.dat", "cause": "pele_fire"},
-    {"key": "minimization/lj38/tsase-sdlbfgs", "template": "tsase/lj38-sdlbfgs-tuned", "branch": "repro/minimization-lj38-tsase-sdlbfgs", "path": "results/campaign/tsase-1.0-lj38-sdlbfgs-tuned.dat"},
+    {"key": "minimization/lj38/tsase-sdlbfgs", "template": "tsase/lj38-sdlbfgs-tuned", "branch": "repro/minimization-lj38-tsase-sdlbfgs", "path": "results/diagnostic/tsase-1.0-lj38-sdlbfgs-tuned.dat", "extra": {"code_version": "1.0", "upstream_ref": "main", "upstream_commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218", "ranked_template": "tsase/lj38-sdlbfgs", "ranked_force_calls": 221, "ranked_nfailed": 998, "ranked_par2_mean": 19960.442}},
     # minimization / morse
     {"key": "minimization/morse-bulk/eon-lbfgs", "template": "eon-client/morse-lbfgs", "branch": "main", "path": "results/campaign/eon-client-morse-lbfgs.dat"},
     {"key": "minimization/morse-bulk/eon-cg", "template": "eon-client/morse-cg", "branch": "main", "path": "results/campaign/eon-client-morse-cg.dat"},
@@ -811,6 +811,8 @@ def render_markdown(rows: list[dict]) -> str:
         "The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.",
         "",
         "OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.",
+        "",
+        "TSASE SDLBFGS on current main is version 1.0 at 98aac60. Stock constructor defaults and the archive max-atom stop, scored by the harness, give PAR-2 19960.442 with 998 Euclidean-norm misses. That gap is the measured difference. The archive integer 166 remains the paper row.",
         "",
         "EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.",
         "",

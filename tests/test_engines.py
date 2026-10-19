@@ -61,6 +61,7 @@ def test_new_templates_match_a_problem_stop():
         "tsase/dimer-lj38",
         "tsase/dimer-pt",
         "tsase/lbfgs-lj38",
+        "tsase/lj38-sdlbfgs",
         "tsase/lj38-sdlbfgs-tuned",
         "tsase/lbfgs-morse",
         "tsase/mdmin-lj38",

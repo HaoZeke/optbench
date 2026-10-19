@@ -8,6 +8,8 @@ The pele transition-state paper score is the 2014 stop: break at the first RMS b
 
 OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.
 
+TSASE SDLBFGS on current main is version 1.0 at 98aac60. Stock constructor defaults and the archive max-atom stop, scored by the harness, give PAR-2 19960.442 with 998 Euclidean-norm misses. That gap is the measured difference. The archive integer 166 remains the paper row.
+
 EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.
 
 Table 10 prints EON Lanczos 165. The archive file is 325. CI-NEB(3) prints 3 failures; the archive file has 0.
