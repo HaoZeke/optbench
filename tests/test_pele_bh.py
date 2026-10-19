@@ -32,19 +32,20 @@ def test_pele_templates_match_the_registry_pin():
         assert template["pele"]["quench"] == "lbfgs_cpp"
         assert template["pele"]["temperature"] == 1.0
         assert template["pele"]["stepsize"] == 0.6
-        assert int(template["stop"]["max_force_calls"]) == 3_000_000
         problem = resolve_problem(ROOT, template["problem"])
-        assert _check_stop(problem, template) == 3_000_000
+        expected_cap = {
+            "globalopt/lj38": 3_000_000,
+            "globalopt/lj75": 1_000_000,
+            "globalopt/lj98": 1_000_000_000,
+            "globalopt/lj150": 10_000_000,
+        }[template["problem"]]
+        assert int(template["stop"]["max_force_calls"]) == expected_cap
+        assert _check_stop(problem, template) == expected_cap
         minimum, tolerance, partial = _rule(problem, template)
         assert tolerance == 0.001
+        assert partial == ""
         assert minimum == template["reference"]["energy_minimum"]
-        if template["problem"] == "globalopt/lj38":
-            assert partial == ""
-            assert minimum == -173.928427
-        else:
-            assert "no energy_above_minimum" in partial
-            assert "no start count" in partial
-            assert "contract is partial" in partial
+        assert minimum == float(problem["reference"]["energy"])
         seen.add(template["problem"])
     assert seen == set(PROBLEMS)
 
@@ -90,7 +91,7 @@ def test_energy_window():
     assert _meets(minimum + tolerance, minimum, tolerance, True, 10, 100)
     assert not _meets(minimum + tolerance + 1e-9, minimum, tolerance, True, 10, 100)
     assert not _meets(minimum, minimum, tolerance, True, 100, 100)
-    assert not _meets(minimum - 0.02, minimum, tolerance, True, 10, 100)
+    assert _meets(minimum - 0.02, minimum, tolerance, True, 10, 100)
     assert not _meets(minimum, minimum, tolerance, False, 10, 100)
     assert not _meets(None, minimum, tolerance, True, 10, 100)
 

@@ -14,12 +14,13 @@ archived eOn basin-hopping entry uses LAMMPS ``lj/cut`` 40, the same
 kernel. A call is one ``HarnessCounter`` entry. A second request at
 the same coordinates is not a second call.
 
-A start succeeds when a converged quench lies within
-``energy_above_minimum`` of the known minimum and the harness count
-is strictly under the budget. The known minimum is the problem value
-when the problem states one, and the template reference otherwise.
-The numpy generator is seeded with the integer in the start name
-before the first displacement.
+A start succeeds under ``optbench.globalopt.judge_globalopt``. The
+energy has to be finite and at or below the Cambridge minimum plus
+``energy_above_minimum``, and the harness count has to be strictly
+under the budget. A lower energy still succeeds. The known minimum is
+the problem reference when the problem states one, and the template
+reference otherwise. The numpy generator is seeded with the integer
+in the start name before the first displacement.
 """
 
 from __future__ import annotations
@@ -33,14 +34,10 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
 
 from optbench.counter import ForceCallCap, HarnessCounter
-from optbench.failures import classify_failure
+from optbench.globalopt import energy_tolerance, judge_globalopt, reference_energy
 from optbench.potentials import lennard_jones, read_con
 from optbench.score import score_v2, summarize_capped
 from optbench.v2 import collect_provenance
-
-# A converged energy this far below the published minimum is not that
-# surface. The cutoff-40 kernel matches the Cambridge values to 1e-6.
-_BELOW_MINIMUM = 0.01
 
 
 def _format_field(value: object) -> str:
@@ -169,25 +166,28 @@ def _atom_count(problem_id: str) -> int | None:
 def _rule(problem: dict, template: dict) -> tuple[float, float, str]:
     """Return ``(minimum, tolerance, partial_reason)``.
 
-    The problem value wins. A missing start count or a missing energy
-    rule keeps the row partial. LJ38 states the tolerance and the start
-    count. The numerical minimum lives on the template until a problem
-    file states it.
+    The problem reference wins. A missing start count or a missing
+    energy rule keeps the row partial. A partial problem contract does
+    not, once the file states the energy window and the start count.
     """
-    convergence = problem.get("convergence") or {}
-    potential = problem.get("potential") or {}
     reference = template.get("reference") or {}
-    minimum = convergence.get("energy_minimum", potential.get("energy_minimum", reference.get("energy_minimum")))
-    tolerance = convergence.get("energy_above_minimum", reference.get("energy_above_minimum"))
+    try:
+        minimum = reference_energy(problem)
+    except ValueError:
+        minimum = reference.get("energy_minimum")
+    try:
+        tolerance = energy_tolerance(problem)
+    except ValueError:
+        tolerance = reference.get("energy_above_minimum")
     if minimum is None or tolerance is None:
         raise ValueError(f"{template['id']} needs an energy minimum and energy_above_minimum")
     reasons = []
-    if "energy_above_minimum" not in convergence:
+    convergence = problem.get("convergence") or {}
+    stated = (problem.get("reference") or {}).get("energy")
+    if "energy_above_minimum" not in convergence or stated in (None, ""):
         reasons.append("problem file has no energy_above_minimum")
     if not (problem.get("sample") or {}).get("starts"):
         reasons.append("problem file has no start count")
-    if problem.get("contract") == "partial":
-        reasons.append("problem contract is partial")
     return float(minimum), float(tolerance), "; ".join(reasons)
 
 
@@ -247,13 +247,17 @@ class _HarnessLJ:
 
 
 def _meets(energy: float | None, minimum: float, tolerance: float, converged: bool, calls: int, cap: int) -> bool:
-    if energy is None or not converged or calls >= cap:
+    if not converged:
         return False
-    if not math.isfinite(energy):
-        return False
-    if energy < minimum - _BELOW_MINIMUM:
-        return False
-    return energy <= minimum + tolerance
+    return bool(
+        judge_globalopt(
+            energy,
+            calls,
+            reference=minimum,
+            tolerance=tolerance,
+            cap=cap,
+        )["success"]
+    )
 
 
 def _hop_job(job: dict) -> dict:
@@ -272,7 +276,6 @@ def _hop_job(job: dict) -> dict:
     best = {"energy": None, "calls": 0, "rms": None, "converged": False}
     error = ""
     steps = 0
-    caught_cap = False
 
     def quench(coords):
         result = lbfgs_cpp(
@@ -294,9 +297,8 @@ def _hop_job(job: dict) -> dict:
         return result
 
     def _note_cap(exc: BaseException) -> None:
-        nonlocal caught_cap, error
+        nonlocal error
         if isinstance(exc, ForceCallCap) or potential.counter.calls >= cap:
-            caught_cap = True
             return
         error = f"{type(exc).__name__}: {exc}"
 
@@ -322,8 +324,6 @@ def _hop_job(job: dict) -> dict:
         while potential.counter.calls < cap and not _meets(
             best["energy"], minimum, tolerance, best["converged"], best["calls"], cap
         ):
-            if best["energy"] is not None and best["energy"] < minimum - _BELOW_MINIMUM:
-                break
             bh.takeOneStep()
             steps += 1
     except Exception as exc:
@@ -333,21 +333,23 @@ def _hop_job(job: dict) -> dict:
         calls = cap
     energy = best["energy"]
     converged = bool(best["converged"])
-    success = _meets(energy, minimum, tolerance, converged, calls, cap)
-    reasons: list[str] = []
     if error:
-        reasons.append("crash")
-    elif energy is None or not math.isfinite(energy if energy is not None else math.nan):
-        reasons.append("divergence" if not caught_cap and calls < cap else "cap")
-    elif energy < minimum - _BELOW_MINIMUM:
-        reasons.append("divergence")
-    elif calls >= cap or caught_cap:
-        reasons.append("cap")
-    elif not success:
-        reasons.append("cap")
-    if success:
-        reasons = []
-    failure = classify_failure(reasons)
+        finite = energy is not None and math.isfinite(energy)
+        judged = {
+            "success": False,
+            "failure": "crash",
+            "reasons": ["crash"],
+            "energy": float(energy) if finite else None,
+            "force_calls": float(calls),
+        }
+    else:
+        judged = judge_globalopt(
+            energy if converged else None,
+            calls,
+            reference=minimum,
+            tolerance=tolerance,
+            cap=cap,
+        )
     return {
         "schema": "optbench.start/v2",
         "start": job["start"],
@@ -357,11 +359,12 @@ def _hop_job(job: dict) -> dict:
         "verify_calls": int(potential.counter.verify_calls),
         "counter": "harness",
         "comparable": True,
-        "success": failure is None,
-        "failure": failure,
-        "reasons": reasons,
-        "energy": None if energy is None else float(energy),
-        "lowest_energy": None if energy is None else float(energy),
+        "success": judged["success"],
+        "failure": judged["failure"],
+        "reasons": judged["reasons"],
+        "energy": judged["energy"],
+        "lowest_energy": judged["energy"],
+        "cap": cap,
         "force_norm": best["rms"],
         "quench_converged": converged,
         "bh_steps": steps,
@@ -579,8 +582,11 @@ def run_template(
         sample = done[0]
         if float(sample.get("energy_minimum")) != minimum or float(sample.get("energy_tolerance")) != tolerance:
             raise RuntimeError(f"{starts_path} used a different energy rule")
-        if int(sample.get("force_calls", 0)) >= 0 and str(sample.get("commit")) != commit:
+        if str(sample.get("commit") or "") != commit:
             raise RuntimeError(f"{starts_path} is commit {sample.get('commit')}")
+        stored_cap = sample.get("cap")
+        if stored_cap not in (None, "") and int(stored_cap) != cap:
+            raise RuntimeError(f"{starts_path} used cap {stored_cap}, not {cap}")
     done_names = {str(row["start"]) for row in done}
     jobs = []
     for index, (name, coords, seed) in enumerate(loaded):

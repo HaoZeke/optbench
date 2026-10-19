@@ -173,6 +173,14 @@ commit = "b7081b932a060be11342fbe8287ac35da8ada879"
 committed = "2026-10-12"
 note = "pele 0.1.2. Basin hopping uses pele.basinhopping.BasinHopping and pele.optimize.lbfgs_cpp, the minimizer BaseSystem.get_minimizer returns. Temperature is 1.0 and the initial step size is 0.6, the LJCluster defaults, with AdaptiveStepsizeTemperature. The potential is the harness Lennard-Jones kernel, epsilon 1, sigma 1, cutoff 40, no shift. Force calls are HarnessCounter entries."
 
+[[template]]
+id = "ase-globalopt/lj75-basinhopping"
+code = "ase"
+problem = "globalopt/lj75"
+profile = "default"
+task = "basin-hopping"
+ranked = true
+
 # generated ASE and Sella templates
 
 [[template]]

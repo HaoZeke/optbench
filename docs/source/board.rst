@@ -175,24 +175,7 @@ It does not run a campaign.
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
-   <td data-code="ASE">—</td>
-   <td data-code="Sella">—</td>
-   <td data-code="pysisyphus">—</td>
-   <td data-code="pele">—</td>
-   <td data-code="artn">—</td>
-   <td data-code="compass">—</td>
-   <td data-code="dlfind">—</td>
-   <td data-code="lammps">—</td>
-   <td data-code="optim">—</td>
-   <td data-code="tsase">—</td>
-   </tr>
-   <tr data-problem="globalopt/lj98">
-   <th scope="row"><a href="generated/suites/globalopt.html#lj98">lj98</a></th>
-   <td data-code="eOn">—</td>
-   <td data-code="Eon svn">—</td>
-   <td data-code="rgmin">—</td>
-   <td data-code="rgsaddle">—</td>
-   <td data-code="ASE">—</td>
+   <td data-code="ASE" data-template="ase-globalopt/lj75-basinhopping" data-par2="2e+06"><span class="bench-score">2e+06</span><a href="generated/suites/globalopt.html#lj75-templates">ase-globalopt/lj75-basinhopping</a></td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
    <td data-code="pele">—</td>
