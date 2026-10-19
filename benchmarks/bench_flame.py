@@ -15,7 +15,7 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
-from optbench.asv_tracks import TrackedSearch
+from optbench.asv_tracks import TrackedSearch as _TrackedSearch
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -137,7 +137,7 @@ def _compute(spec: dict, seed: str, start: str) -> dict:
     return record
 
 
-class _FlameSearch(TrackedSearch):
+class _FlameSearch(_TrackedSearch):
     def setup(self, seed, start):
         if not _binary_ready():
             raise NotImplementedError("FLAME binary is not available")
