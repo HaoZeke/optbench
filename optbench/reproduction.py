@@ -111,6 +111,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+    "repro/lowest-eigenvector-lj38-tsase-dimer-bfgs": "ccbee8a59832d6d7adf83ebe6435fa9815520b8b",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -467,23 +468,6 @@ def _sha(branch: str) -> str:
             cwd=Path(__file__).resolve().parents[1],
             text=True,
         ).strip()
-    if branch == "repro/lowest-eigenvector-lj38-tsase-dimer-bfgs" and len(SHA.get(branch, "")) < 12:
-        import subprocess
-
-        root = Path(__file__).resolve().parents[1]
-        try:
-            SHA[branch] = subprocess.check_output(
-                ["git", "rev-parse", f"origin/{branch}"],
-                cwd=root,
-                text=True,
-                stderr=subprocess.DEVNULL,
-            ).strip()
-        except subprocess.CalledProcessError:
-            SHA[branch] = subprocess.check_output(
-                ["git", "rev-parse", "HEAD"],
-                cwd=root,
-                text=True,
-            ).strip()
     if branch == "cells/optim/saddle-pt" and len(SHA.get(branch, "")) < 12:
         import subprocess
 
