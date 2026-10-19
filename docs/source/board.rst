@@ -241,7 +241,23 @@ It does not run a campaign.
    <td data-code="tsase">—</td>
    </tr>
    <tr data-problem="accelerated-md/aladatom">
-   <th scope="row"><a href="generated/suites/accelerated-md.html#aladatom">aladatom</a></th>
+   <th scope="row"><a href="generated/suites/accelerated-md.html#aladatom">Al adatom on Al(100) at 250 K</a></th>
+   <td data-code="eOn">—</td>
+   <td data-code="Eon svn">—</td>
+   <td data-code="rgmin">—</td>
+   <td data-code="rgsaddle">—</td>
+   <td data-code="ASE">—</td>
+   <td data-code="Sella">—</td>
+   <td data-code="pysisyphus">—</td>
+   <td data-code="artn">—</td>
+   <td data-code="compass">—</td>
+   <td data-code="dlfind">—</td>
+   <td data-code="lammps">—</td>
+   <td data-code="optim">—</td>
+   <td data-code="tsase">—</td>
+   </tr>
+   <tr data-problem="accelerated-md/standard_aladatom">
+   <th scope="row"><a href="generated/suites/accelerated-md.html#standard_aladatom">Al adatom on Al(100) at 150 K</a></th>
    <td data-code="eOn">—</td>
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>

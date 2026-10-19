@@ -121,7 +121,8 @@ The number is written only after the run finishes under the problem rule.
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
-   <li>aladatom: partial.</li>
+   <li>Al adatom on Al(100) at 250 K: not yet on the harness counter, partial.</li>
+   <li>Al adatom on Al(100) at 150 K: not yet on the harness counter.</li>
    <li>LJ38 double-ended saddle: not yet on the harness counter, partial.</li>
    <li>lj38_2ts_separation: partial.</li>
    <li>pt-island: not yet on the harness counter, partial.</li>
@@ -254,7 +255,7 @@ The number is written only after the run finishes under the problem rule.
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
-   <li>aladatom: partial.</li>
+   <li>Al adatom on Al(100) at 250 K: partial.</li>
    <li>lj38_2ts_separation: partial.</li>
    <li>Lennard-Jones 38 global minimum: partial.</li>
    <li>Al: partial.</li>
