@@ -1,0 +1,1 @@
+{"calls_to_best": 28520, "calls_total": 59744, "comparable": true, "converged": false, "counter": "harness", "energy": -520.3218555554206, "failure": "divergence", "first_energy": 23352605437.15396, "force_calls": 59744, "schema": "optbench.start/v2", "seed": 314159, "start": "coords.1", "success": false}
