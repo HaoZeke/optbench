@@ -215,6 +215,18 @@ def _fmt(value: float) -> str:
     return f"{float(value):.10g}"
 
 
+def problem_force_cap(problem: Mapping) -> int | None:
+    """Force-call cap from the problem file.
+
+    ``score_v2`` leaves PAR-2 unset when this is ``None``. A template
+    ``failure_cap`` is not a substitute for a number the problem omits.
+    """
+    stated = (problem.get("convergence") or {}).get("max_force_calls")
+    if stated in (None, ""):
+        return None
+    return int(stated)
+
+
 def htst_dat(
     summary: Mapping,
     *,
@@ -253,8 +265,8 @@ def htst_dat(
     lines.append(f"problem {problem['id']}")
     lines.append("counter harness")
     lines.append(f"reducer {template.get('reducer', 'htst-cycles')}")
-    cap = template.get("failure_cap")
-    if cap not in (None, ""):
+    cap = problem_force_cap(problem)
+    if cap is not None:
         lines.append(f"cap {int(cap)}")
     if partial:
         lines.append("partial true")

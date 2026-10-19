@@ -28,7 +28,7 @@ from optbench.amd import (
     select_thermal,
     simulated_time_seconds,
 )
-from optbench.pykmc_kmc import HTST, PROFILE, amd_dat, htst_dat, reduce_htst
+from optbench.pykmc_kmc import HTST, PROFILE, amd_dat, htst_dat, problem_force_cap, reduce_htst
 
 
 def _engine():
@@ -358,11 +358,22 @@ def run_htst(root: Path, problem: dict, template: dict, *, output: Path, workers
             potential_line = (
                 "# The kernel is the r2549 Aluminum EAM, the same family as the eon-svn and eon-client hTST Al rows."
             )
+        cap = problem_force_cap(problem)
+        if cap is None:
+            cap_line = (
+                f"# The ranked sample is {target} barrier windows. "
+                f"{problem['id']} states no force-call cap, so PAR-2 stays unset."
+            )
+        else:
+            cap_line = (
+                f"# The ranked sample is {target} barrier windows. "
+                f"PAR-2 uses the {problem['id']} force-call cap {cap}."
+            )
         comments = [
             "# counter harness. pyKMC partn_search on the minimized reactant.",
             f"# Temperature {spec['temperature']:g} K, prefactor {spec['prefactor']:.6g}, from {spec['source']}.",
             "# A barrier window closes when every reference barrier, rounded to 3 decimals, has been seen once.",
-            f"# The ranked sample is {target} barrier windows. The rank is their median sad-fcs. There is no force-call cap.",
+            cap_line,
             "# A rate window closes at 0.999 of rate_ref. A missing rate window does not unrank a finished barrier window.",
             "# Process identity is the top-window RMSD test plus a 0.05 eV barrier gate.",
             potential_line,
@@ -404,7 +415,7 @@ def run_htst(root: Path, problem: dict, template: dict, *, output: Path, workers
                 )
                 for index, calls in enumerate(summary["barrier_call_list"], start=1)
             ]
-            _write_v2(output, template, problem, records, None, prepared)
+            _write_v2(output, template, problem, records, cap, prepared)
         else:
             # No completed window is not a divergence, and it is not a PAR-2 row.
             output.with_suffix(".starts.jsonl").unlink(missing_ok=True)

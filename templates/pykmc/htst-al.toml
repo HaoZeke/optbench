@@ -10,7 +10,7 @@ tuning = "beland-2015-pt111"
 kernel = "eam"
 reducer = "htst-cycles"
 geometry = "website/hTST/Al/eon-dimer-cg/pos.con"
-note = "KMC on the minimized reactant. Temperature 300 K and prefactor 1.2e12 are archive/entries/hTST/Al/eon-dimer-cg/report.py. The ranked sample is 639 barrier windows. A window closes when every reference barrier, rounded to three decimals, has been seen once. The rank is the median sad-fcs of those windows. There is no force-call cap, so PAR-2 stays unset. Rate windows are reported and do not decide the rank. The push is the published Pt profile in pykmc/saddle-pt. Process identity is the top-window RMSD test plus a 0.05 eV barrier gate. The kernel is the r2549 Aluminum EAM. eon-svn and eon-client hTST Al use that same EAM family."
+note = "KMC on the minimized reactant. Temperature 300 K and prefactor 1.2e12 are archive/entries/hTST/Al/eon-dimer-cg/report.py. The ranked sample is 639 barrier windows. A window closes when every reference barrier, rounded to three decimals, has been seen once. PAR-2 uses convergence.max_force_calls from problems/hTST/Al.toml. That file states no force-call cap, so PAR-2 stays unset. Rate windows are reported and do not decide the rank. The push is the published Pt profile in pykmc/saddle-pt. Process identity is the top-window RMSD test plus a 0.05 eV barrier gate. The kernel is the r2549 Aluminum EAM. eon-svn and eon-client hTST Al use that same EAM family."
 
 [pykmc]
 ninit = 1

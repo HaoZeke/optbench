@@ -557,13 +557,17 @@ reference list has 15 barriers and the barrier-cycle target is 13. The
 rate target is 0.999 of 155055901.244. The run stopped when the 13th
 barrier window closed, on the search that found the last missing
 reference process. It used 36096 searches and 374 processes, and matched
-15 of 15 reference barriers. The result file has no `cap` key and no
-`partial` flag. The 13 window costs are the scored starts, all successes.
+15 of 15 reference barriers. `problems/hTST/Pt.toml` has no
+`convergence.max_force_calls`. `score_v2` therefore leaves `par_applied`
+false and `par2_mean` unset. The eOn hTST Pt templates set `failure_cap`
+2000000, and the board reads that template number because the problem
+file states none. That number is not in the problem file, so this row
+does not copy it. The 13 window costs are the scored starts, all successes.
 `barrier_jobs` is 2776.076923, `barrier_force_calls` is 3833527,
 `barrier_average_over` is 13. The median is 3367604. The bootstrap
 interval is 2033873 to 5315178. The window costs run from 1424997 to
-7695865. `par_applied` is false and `par2_mean` is null, so the rank is
-the median. Rate windows are reported and do not decide the rank: 386
+7695865. With `par2_mean` unset, the board orders the row by that median.
+Rate windows are reported and do not decide the order: 386
 closed, `rate_jobs` 93.31088083, `rate_force_calls` 128857.3912. The
 archived `eon-dimer-lbfgs` row is barrier force calls 7.788e+05 averaged
 over 13 and rate force calls 4.705e+04 averaged over 224. Dimer-LBFGS,
@@ -577,12 +581,15 @@ aluminum EAM. The reference list is four 0.233 eV barriers and four
 0.372 eV barriers. The barrier-cycle target is 639. The run resumed the
 stored EAM checkpoint and stopped when the 639th barrier window closed,
 after 46274 searches and 35 processes. It matched 8 of 8 reference
-barriers. The result file has no `cap` key and no `partial` flag.
+barriers. `problems/hTST/Al.toml` has no `convergence.max_force_calls`.
+`score_v2` therefore leaves `par_applied` false and `par2_mean` unset.
+The eOn hTST Al templates set `failure_cap` 2000000. That number is not
+in the problem file, so this row does not copy it.
 `barrier_jobs` is 72.41158059, `barrier_force_calls` is 64635.96401,
 `barrier_average_over` is 639. The median is 56329. The bootstrap
 interval is 53919 to 60108. The window costs run from 7710 to 268072.
-`par_applied` is false and `par2_mean` is null, so the rank is the
-median. No rate window closed. The HTST sum of the 35 catalogue
+With `par2_mean` unset, the board orders the row by that median.
+No rate window closed. The HTST sum of the 35 catalogue
 processes is 591004711.377. The cycle threshold is 0.999 × 592041917 =
 591449875.083. The gap is 445163.706. A repeat of a process already in
 the open window does not add rate. The archived `eon-dimer-cg` row is
