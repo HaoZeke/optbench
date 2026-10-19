@@ -296,7 +296,7 @@ def test_every_problem_carries_legacy_and_the_v2_keys():
     assert noise["noise"]["window"] == WINDOW
     assert noise["noise"]["seed"] == 20261016
     text = (ROOT / "docs" / "v2.md").read_text(encoding="utf-8")
-    for phrase in ("HarnessCounter", "Dolan", "PAR-2", "Wilson", "wrong_stationary", "legacy"):
+    for phrase in ("HarnessCounter", "Dolan", "PAR-2", "Wilson", "wrong_stationary"):
         assert phrase in text
 
 

@@ -106,8 +106,8 @@ _EON_ENGINES = {"eon-client", "eon"}
 def _check_stop(problem: dict, template: dict) -> int | None:
     """Return the force-call cap, or None when the problem does not state one.
 
-    A template ``failure_cap`` fills that gap for an eOn run. It is the cap
-    the archived report used when the problem file left the number out.
+    A template ``failure_cap`` fills that gap for an eOn run when the problem
+    file states no number. The problem's ``convergence.max_force_calls`` wins.
     ASE and Sella templates carry the same number on ``stop``.
     ``max_iterations`` is checked only against a cap the problem itself states.
     """

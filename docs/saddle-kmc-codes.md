@@ -258,7 +258,7 @@ stays the saddle-novelty test and is not this link.
 
 The rows below do not store `minimum`, `endpoint_plus`, and
 `endpoint_minus`. RMSD scalars do not determine the per-atom maximum.
-Their connected counts and PAR-2 stay the stored values. The MATLAB smoke in
+Their connected counts and PAR-2 stay the stored values. The MATLAB check in
 `softsaddle/entry.toml` records two searches and does not store endpoint
 coordinates.
 
@@ -561,16 +561,14 @@ reference list has 15 barriers and the barrier-cycle target is 13. The
 rate target is 0.999 of 155055901.244. The run stopped when the 13th
 barrier window closed, on the search that found the last missing
 reference process. It used 36096 searches and 374 processes, and matched
-15 of 15 reference barriers. `problems/hTST/Pt.toml` has no
-`convergence.max_force_calls`. `score_v2` therefore leaves `par_applied`
-false and `par2_mean` unset. The eOn hTST Pt templates set `failure_cap`
-2000000, and the board reads that template number because the problem
-file states none. That number is not in the problem file, so this row
-does not copy it. The 13 window costs are the scored starts, all successes.
+15 of 15 reference barriers. `problems/hTST/Pt.toml` sets
+`convergence.max_force_calls` to 20000000. Every stored window is a
+success under that cap, so `par2_mean` is the mean of the window costs.
+The 13 window costs are the scored starts, all successes.
 `barrier_jobs` is 2776.076923, `barrier_force_calls` is 3833527,
 `barrier_average_over` is 13. The median is 3367604. The bootstrap
 interval is 2033873 to 5315178. The window costs run from 1424997 to
-7695865. With `par2_mean` unset, the board orders the row by that median.
+7695865, all under 20000000.
 Rate windows are reported and do not decide the order: 386
 closed, `rate_jobs` 93.31088083, `rate_force_calls` 128857.3912. The
 archived `eon-dimer-lbfgs` row is barrier force calls 7.788e+05 averaged
@@ -585,14 +583,13 @@ aluminum EAM. The reference list is four 0.233 eV barriers and four
 0.372 eV barriers. The barrier-cycle target is 639. The run resumed the
 stored EAM checkpoint and stopped when the 639th barrier window closed,
 after 46274 searches and 35 processes. It matched 8 of 8 reference
-barriers. `problems/hTST/Al.toml` has no `convergence.max_force_calls`.
-`score_v2` therefore leaves `par_applied` false and `par2_mean` unset.
-The eOn hTST Al templates set `failure_cap` 2000000. That number is not
-in the problem file, so this row does not copy it.
+barriers. `problems/hTST/Al.toml` sets `convergence.max_force_calls` to
+1000000. Every stored window is a success under that cap, so `par2_mean`
+is the mean of the window costs.
 `barrier_jobs` is 72.41158059, `barrier_force_calls` is 64635.96401,
 `barrier_average_over` is 639. The median is 56329. The bootstrap
-interval is 53919 to 60108. The window costs run from 7710 to 268072.
-With `par2_mean` unset, the board orders the row by that median.
+interval is 53919 to 60108. The window costs run from 7710 to 268072,
+all under 1000000.
 No rate window closed. The HTST sum of the 35 catalogue
 processes is 591004711.377. The cycle threshold is 0.999 × 592041917 =
 591449875.083. The gap is 445163.706. A repeat of a process already in
@@ -603,22 +600,37 @@ barrier force calls 2.887e+04 averaged over 639 and rate force calls
 template ceiling is 400000 searches. The run stopped at 639 windows,
 short of that ceiling.
 
-`failure_cap` 2000000 was added to the six eOn hTST templates in commit
-`1eb16a77` (2026-10-18). The hTST template notes cite no paper cap. The
-same commit's basin-hopping templates, `templates/eon-svn/bh-lj38.toml`
-and `templates/eon-client/bh-lj38.toml`, say the 2014 file stated no
-force cap and that 2000000 is above the 2014 maximum of 1795901. The
-hTST archive `config.ini` files set optimizer `max_iterations` 5000 and
-state no force-call cap. `archive/entries/hTST/Pt/eon-dimer-lbfgs/report.py`
-and the Aluminum twin sum saddle force calls until the barrier list and
-the rate threshold are met, and they state no cap. Published archive
-barrier means include Pt `alpha_dimer-qm` 1.908e7 and Pt `tsase-dimer-qm`
-3.239e6, both above 2000000. `problems/globalopt/lj100-binary.toml` sets
-`max_evaluations` 2000000 on that LJ problem. `problems/hTST/Pt.toml` and
-`problems/hTST/Al.toml` stay without `convergence.max_force_calls`.
-`optbench.campaign._check_stop` describes a template `failure_cap` as the
-cap the archived report used. The hTST archive reports have no such
-number. These rows stay scored with `par2_mean` unset.
+The hTST cap uses the same rule as basin hopping. Commit `1eb16a77`
+(2026-10-18) put `failure_cap` 2000000 on the six eOn hTST templates.
+Those notes cite no published cap. The same commit's basin-hopping
+templates, `templates/eon-svn/bh-lj38.toml` and
+`templates/eon-client/bh-lj38.toml`, say the 2014 file stated no force
+cap and that 2000000 is the least multiple of 1000000 strictly above
+the published per-run maximum. That maximum is `force_calls_max`
+1795901 in `archive/entries/globalopt/lj38/eon-basinhopping/benchmark.dat`.
+The hTST `benchmark.dat` files publish `barrier_force_calls` and
+`average over N`. None of them publishes `force_calls_max`. The archive
+`config.ini` files set optimizer `max_iterations` 5000 and state no
+force-call cap. The report scripts sum saddle force calls until the
+barrier list and the rate threshold are met, and they state no cap.
+
+On Pt the largest published `barrier_force_calls` is
+`archive/entries/hTST/Pt/alpha_dimer-qm/benchmark.dat`, `1.908e+07`,
+`average over 1`. That figure is the per-run total, 19080000. The same
+next-million rule gives 20000000, written as
+`problems/hTST/Pt.toml` `convergence.max_force_calls`. The next
+published means are `tsase-dimer-qm` `3.239e+06` averaged over 4 and
+`eon-lanczos-lbfgs2` `1.497e+06` averaged over 6. Those files state no
+per-run maximum. The other Pt means are lower, and only the alpha row
+publishes a per-run total.
+
+On Al the archive states no per-run maximum. The largest published mean
+is `archive/entries/hTST/Al/eon-dimer-cg/benchmark.dat`, `barrier_force_calls`
+`2.887e+04`, `average over 639`. `eon-dimer-cg2` is `2.107e+04` averaged
+over 432. The same next-million rule, applied to that largest published
+mean, gives 1000000, written as `problems/hTST/Al.toml`
+`convergence.max_force_calls`. The six eOn hTST templates no longer set
+`failure_cap`. The board reads the problem number for every code.
 
 `pykmc/aladatom` and `pykmc/standard-aladatom` stay on the minimized
 reactant and stop when the old-scheme confidence `max(0, 1 - 1/repeats)`
@@ -626,7 +638,7 @@ reaches 0.95 and the thermal-window rate is positive. The prefactor is
 the eOn AKMC `default_value` 1e12. The window, catalogue RMSD, and
 product count are the problem values. The columns match the eOn AKMC
 reducer. Each seed is one start. Three seeds finished at both
-temperatures, so n is 3 and `nfailed` is 0. `infra/aladatom-repro` is
+temperatures, so n is 3 and `nfailed` is 0. The aladatom campaign branch is
 not on origin. The problem `sample.repetitions` stays 1, so the eOn n=1
 rows stay ranked.
 
@@ -703,7 +715,7 @@ calls is open.
 **softsaddle.** The tree under `softsaddle/` is MATLAB. `softsaddle/entry.toml`
 is the April 2019 archive (mean force calls 423491.1 over 10 repetitions).
 The GitHub workflow builds the Morse, Davidson, and Lanczos libraries and
-runs a two-search MATLAB smoke. MATLAB is not installed here. That smoke is
+runs two searches. MATLAB is not installed here. Those two searches are
 not a harness campaign.
 
 **CatLearn.** Commit `6a307f32` (2023-02-07). `setup.py` says 0.6.2 and

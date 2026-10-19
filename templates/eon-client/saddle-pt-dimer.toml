@@ -11,7 +11,7 @@ kind = "akmc"
 kernel = "morse"
 asv_class = "EonClientSaddlePtDimer"
 note = '''
-AKMC on the Pt island. Confidence 1.1, confidence_scheme old, temperature 700, prefactor 5e12, displace atoms 0-6, radius 3.3, magnitude 0.1, dimer rotations_max 20, converged_angle 5, improved true. The 2014 keys displace_atomlist and number_of_cpus are written as displace_atom_list and number_of_CPUs. num_jobs is 8. pass_limit is 4. Success remains 27 good saddles below 1.5 eV. The problem file states no repetition count, so the row is partial. Seed 0. The 2014 run directories were run-0 through run-8. The harness kernel is morse/smooth/linear with D 0.7102, alpha 1.6047, r0 2.897, cutoff 9.5, and periodic boundaries in x and y.
+AKMC on the Pt island. Confidence 1.1, confidence_scheme old, temperature 700, prefactor 5e12, displace atoms 0-6, radius 3.3, magnitude 0.1, dimer rotations_max 20, converged_angle 5, improved true. The 2014 keys displace_atomlist and number_of_cpus are written as displace_atom_list and number_of_CPUs. num_jobs is 8. pass_limit is 4. Success remains 27 good saddles below 1.5 eV. The problem file states no repetition count, so the row is short of the full start set. Seed 0. The 2014 run directories were run-0 through run-8. The harness kernel is morse/smooth/linear with D 0.7102, alpha 1.6047, r0 2.897, cutoff 9.5, and periodic boundaries in x and y.
 '''
 seeds = [0]
 starts = ["pt-island"]

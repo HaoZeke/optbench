@@ -155,7 +155,7 @@ def _pair_lines(
     images: int | None,
     problem_id: str | None = None,
 ):
-    """Legacy and rescored starts from one campaign group, in file order."""
+    """Stored and rescored starts from one campaign group, in file order."""
     kinds = ("starts_jsonl", "starts", "v2")
     for kind in kinds:
         path = group.get(kind)

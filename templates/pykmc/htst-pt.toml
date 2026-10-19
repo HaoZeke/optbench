@@ -10,7 +10,7 @@ tuning = "beland-2015-pt111"
 kernel = "morse_shift"
 reducer = "htst-cycles"
 geometry = "website/hTST/Pt/eon-dimer-lbfgs/pos.con"
-note = "KMC on the minimized reactant. Temperature 700 K and prefactor 1.2e12 are archive/entries/hTST/Pt/eon-dimer-lbfgs/report.py. The ranked sample is 13 barrier windows. A window closes when every reference barrier, rounded to three decimals, has been seen once. PAR-2 uses convergence.max_force_calls from problems/hTST/Pt.toml. That file states no force-call cap, so PAR-2 stays unset. Rate windows are reported and do not decide the rank. The push is the published Pt profile in pykmc/saddle-pt. Process identity is the top-window RMSD test plus a 0.05 eV barrier gate. The potential is r2549 shifted Morse, the potential of the 2014 Pt barriers."
+note = "KMC on the minimized reactant. Temperature 700 K and prefactor 1.2e12 are archive/entries/hTST/Pt/eon-dimer-lbfgs/report.py. The ranked sample is 13 barrier windows. A window closes when every reference barrier, rounded to three decimals, has been seen once. PAR-2 uses convergence.max_force_calls from problems/hTST/Pt.toml, 20000000. Rate windows are reported and do not decide the rank. The push is the published Pt profile in pykmc/saddle-pt. Process identity is the top-window RMSD test plus a 0.05 eV barrier gate. The potential is r2549 shifted Morse, the potential of the 2014 Pt barriers."
 
 [pykmc]
 ninit = 1

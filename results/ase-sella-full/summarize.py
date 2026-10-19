@@ -320,7 +320,7 @@ def build_document(
                     "force_calls_max": None,
                     "par2": None,
                     "missing_starts": [],
-                    "note": "not run",
+                    "note": "unexecuted",
                 }
             )
             continue
@@ -378,14 +378,14 @@ def render_markdown(document: dict) -> str:
             + " | ".join(
                 [
                     row["class"],
-                    str(row["n_tracked"] + row["n_missing"] if row["note"] != "not run" else 0),
+                    str(row["n_tracked"] + row["n_missing"] if row["note"] != "unexecuted" else 0),
                     str(row["n_tracked"]),
                     str(row["successes"]),
                     str(row["n_cap"]),
                     str(row["n_divergence"]),
                     str(row["n_wrong_stationary"]),
                     str(row["n_crash"]),
-                    str(row["n_missing"] if row["note"] != "not run" else row["expected_starts"]),
+                    str(row["n_missing"] if row["note"] != "unexecuted" else row["expected_starts"]),
                     _fmt(row["force_calls_mean"]),
                     _fmt(row["force_calls_median"]),
                     _fmt(row["force_calls_min"]),
@@ -396,7 +396,7 @@ def render_markdown(document: dict) -> str:
             + " |"
         )
     partial = [row for row in document["classes"] if row["partial"]]
-    lines.extend(["", "## Partial or absent grids", ""])
+    lines.extend(["", "## Grids short of the full set", ""])
     if not partial:
         lines.append("Every class has a track for every start.")
     for row in partial:

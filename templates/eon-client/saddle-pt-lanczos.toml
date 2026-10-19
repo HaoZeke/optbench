@@ -11,7 +11,7 @@ kind = "akmc"
 kernel = "morse"
 asv_class = "EonClientSaddlePtLanczos"
 note = '''
-AKMC with Lanczos. Tolerance 0.001, max_iterations 20, quit_early true. The other process-search settings match the dimer template. pass_limit 4, seed 0, partial. The harness kernel is morse/smooth/linear with D 0.7102, alpha 1.6047, r0 2.897, cutoff 9.5, and periodic boundaries in x and y.
+AKMC with Lanczos. Tolerance 0.001, max_iterations 20, quit_early true. The other process-search settings match the dimer template. pass_limit 4, seed 0, short of the full start set. The harness kernel is morse/smooth/linear with D 0.7102, alpha 1.6047, r0 2.897, cutoff 9.5, and periodic boundaries in x and y.
 '''
 seeds = [0]
 starts = ["pt-island"]

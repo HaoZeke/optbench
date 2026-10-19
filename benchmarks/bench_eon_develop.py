@@ -3,7 +3,7 @@
 One class is one template. Parameters are the seed and the start.
 ``measure`` returns the record ``track_*`` reads: harness ``force_calls``,
 ``success``, and one ``failure`` class. ``time_search`` is the wall
-clock. ``setup`` does not run the client, because asv does not time
+clock. ``setup`` leaves the client unstarted, because asv does not time
 ``setup``. The first call writes a disk cache and later tracks read it,
 so a suite that runs ``time_search`` first times the search once.
 

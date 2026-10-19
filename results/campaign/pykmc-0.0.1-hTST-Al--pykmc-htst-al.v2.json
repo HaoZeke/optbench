@@ -14,7 +14,7 @@
     "parameters": {
       "artn": "9b753517c6c0eccae51425b83eb4e04ef554550b",
       "barrier_max": 1.5,
-      "cap": null,
+      "cap": 1000000,
       "converge_property": "norm",
       "counter": "harness",
       "delr_thr": 1000000000.0,
@@ -58,7 +58,7 @@
   "score": {
     "bootstrap_resamples": 2000,
     "bootstrap_seed": 20261015,
-    "cap": null,
+    "cap": 1000000,
     "includes_failures": true,
     "iqr": 44352.0,
     "iqr_high": 48261.475,
@@ -74,8 +74,8 @@
     "n_not_converged": 0,
     "n_wrong_stationary": 0,
     "nfailed": 0,
-    "par2_mean": null,
-    "par_applied": false,
+    "par2_mean": 64635.96400625978,
+    "par_applied": true,
     "par_factor": 2,
     "q25": 38698.5,
     "q75": 83050.5,

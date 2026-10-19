@@ -1,4 +1,4 @@
-"""A deterministic quadratic smoke of the v2 score.
+"""A deterministic quadratic check of the v2 score.
 
 This is not a campaign. The bowl and the saddle are analytic, the
 optimizers are a few lines, and the force calls are harness counts.
@@ -193,7 +193,7 @@ def build_smoke(commit: str = "", machine: dict | str | None = None) -> dict:
         "bootstrap_resamples": 2000,
         "bootstrap_seed": 20261015,
         "note": (
-            "Quadratic smoke of the harness counter and the v2 score. "
+            "Quadratic check of the harness counter and the v2 score. "
             "Not a Lennard-Jones campaign."
         ),
         "runs": [default, tuned, failed, good_saddle, false_saddle],

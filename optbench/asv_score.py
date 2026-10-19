@@ -1,7 +1,7 @@
 """Read asv result files and score the quadratic sample.
 
 The force-call counts, the success bit, and the failure-class bits are
-the track values asv saved. This module does not run the optimizers.
+the track values asv saved. It reads those saved tracks.
 Caps, sigmas, and the profile points stay on the benchmark classes and
 in ``optbench.statistics`` because a result row does not store them.
 That gap is ``docs/asv-gaps.md``.

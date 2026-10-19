@@ -4,7 +4,10 @@ suite = "hTST"
 problem = "Al"
 contract = "partial"
 entry_count = 2
-remark = "A start is one barrier window. The window closes when each reference barrier has been matched once. Force calls are the sad-fcs sum of that window. The rank is the median. PAR-2 stays unset when the problem states no force-call cap. A missing rate window does not unrank a finished barrier window. The potential is the Aluminum EAM."
+remark = "A start is one barrier window. The window closes when each reference barrier has been matched once. Force calls are the sad-fcs sum of that window. The rank uses PAR-2 on that cap. A missing rate window does not unrank a finished barrier window. The potential is the Aluminum EAM."
+
+[convergence]
+max_force_calls = 1000000
 
 [htst]
 temperature = 300
@@ -23,7 +26,7 @@ required = ["barrier_force_calls", "barrier_jobs", "rate_force_calls", "rate_job
 
 [scoring.legacy]
 label = "legacy"
-rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean. The row stays labelled legacy."
+rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean. The row stays on the 2014 tables."
 
 [scoring.v2]
 version = "par2-wilson-bootstrap"

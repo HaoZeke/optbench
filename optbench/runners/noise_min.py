@@ -433,7 +433,7 @@ def run_template(
     if stated and stated != problem["id"]:
         raise ValueError(f"{template['id']} is for {stated}, not {problem['id']}")
     if problem["id"] != "minimization/lj38-noise":
-        raise ValueError(f"{template['id']} does not run on {problem['id']}")
+        raise ValueError(f"{template['id']} is outside {problem['id']}")
     solver = template.get("solver") or {}
     family = str(solver.get("family") or "")
     noise = template.get("noise") or {}

@@ -579,7 +579,7 @@ def run_amd(root: Path, problem: dict, template: dict, *, output: Path, workers:
                 + ratio,
                 "# The reference is the parallel-replica Langevin escape rate. "
                 "The catalogue rate is the HTST sum over the AKMC processes. "
-                "infra/aladatom-repro is not on origin.",
+                "The aladatom campaign branch is not on origin.",
                 "# pyKMC uses the r2549 Aluminum EAM through the harness. "
                 "The eOn AKMC row uses the client's built-in eam_al and a client counter.",
             ]

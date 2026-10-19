@@ -6,12 +6,11 @@ code_version = "r2549"
 commit = "r2549"
 algorithm = "Dimer L-BFGS"
 reducer = "harness"
-failure_cap = 2000000
 kind = "htst"
 kernel = "morse_shift"
 asv_class = "EonSvnHtstPtDimerLbfgs"
 note = '''
-Bounded AKMC on the Pt hTST reactant. Temperature 700, confidence 1.9, prefactor 1.2e12, LBFGS, dimer rotations_max 50, converged_angle 1, displace_least_coordinated_weight 1, radius 3.3, magnitude 0.3, seed 42. num_jobs is 2. Success is one good saddle during the pass, not the 2014 rate sum. The row is partial. The harness kernel is r2549 Morse::force: cutoff 9.5, pair energy shifted to zero at the cutoff, minimum image on the box diagonal. D 0.7102, alpha 1.6047, r0 2.897.
+Bounded AKMC on the Pt hTST reactant. Temperature 700, confidence 1.9, prefactor 1.2e12, LBFGS, dimer rotations_max 50, converged_angle 1, displace_least_coordinated_weight 1, radius 3.3, magnitude 0.3, seed 42. num_jobs is 2. Success is one good saddle during the pass, not the 2014 rate sum. The row is short of the full start set. The harness kernel is r2549 Morse::force: cutoff 9.5, pair energy shifted to zero at the cutoff, minimum image on the box diagonal. D 0.7102, alpha 1.6047, r0 2.897.
 '''
 seeds = [42]
 starts = ["pt"]

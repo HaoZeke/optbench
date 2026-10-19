@@ -150,14 +150,15 @@ def test_minimum_profile_is_the_published_push():
     assert pinned["eigen_step_size"] == 0.25
 
 
-def test_htst_problems_state_no_force_call_cap():
+def test_htst_problems_state_the_archive_force_call_cap():
     from optbench.pykmc_kmc import problem_force_cap
 
     root = Path(__file__).resolve().parents[1] / "problems" / "hTST"
-    for name in ("Pt.toml", "Al.toml"):
+    expected = {"Pt.toml": 20000000, "Al.toml": 1000000}
+    for name, cap in expected.items():
         problem = tomllib.loads((root / name).read_text(encoding="utf-8"))
-        assert "max_force_calls" not in (problem.get("convergence") or {})
-        assert problem_force_cap(problem) is None
+        assert (problem.get("convergence") or {}).get("max_force_calls") == cap
+        assert problem_force_cap(problem) == cap
 
 
 def test_templates_pin_the_push_profiles():

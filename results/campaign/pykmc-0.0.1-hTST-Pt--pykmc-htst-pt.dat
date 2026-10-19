@@ -1,7 +1,7 @@
 # counter harness. pyKMC partn_search on the minimized reactant.
 # Temperature 700 K, prefactor 1.2e+12, from archive/entries/hTST/Pt/eon-dimer-lbfgs/report.py.
 # A barrier window closes when every reference barrier, rounded to 3 decimals, has been seen once.
-# The ranked sample is 13 barrier windows. The rank is their median sad-fcs. There is no force-call cap.
+# The ranked sample is 13 barrier windows. PAR-2 uses the hTST/Pt force-call cap 20000000.
 # A rate window closes at 0.999 of rate_ref. A missing rate window does not unrank a finished barrier window.
 # Process identity is the top-window RMSD test plus a 0.05 eV barrier gate.
 # Potential is shifted Morse, r2549 Morse::force. The 2014 Pt barriers were measured on that potential.

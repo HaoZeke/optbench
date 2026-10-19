@@ -1,8 +1,8 @@
 #+begin_export rst
 .. raw:: html
 
-   <section class="bench" id="current-codes">
-   <h2>Current codes</h2>
+   <section class="bench" id="pinned-codes">
+   <h2>Pinned codes</h2>
    <p>The benchmark contributor is Rohit Goswami. A ranked row is a full harness run. The commit on that row is the commit that produced the score.</p>
    <h3>eOn</h3>
    <div class="bench-scroll"><table>
@@ -109,18 +109,18 @@
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
-   <li>Al adatom on Al(100) at 250 K: not yet on the harness counter, partial.</li>
+   <li>Al adatom on Al(100) at 250 K: not yet on the harness counter, short of the full start set.</li>
    <li>Al adatom on Al(100) at 150 K: not yet on the harness counter.</li>
-   <li>LJ38 double-ended saddle: not yet on the harness counter, partial.</li>
-   <li>lj38_2ts_separation: partial.</li>
-   <li>pt-island: not yet on the harness counter, partial.</li>
-   <li>Al: partial.</li>
-   <li>Pt: partial.</li>
-   <li>lj38: partial.</li>
-   <li>Pt-heptamer: not yet on the harness counter, partial.</li>
-   <li>Pt heptamer island: not yet on the harness counter, partial.</li>
-   <li>LJ38: not yet on the harness counter, partial.</li>
-   <li>pt-island: not yet on the harness counter, partial.</li>
+   <li>LJ38 double-ended saddle: not yet on the harness counter, short of the full start set.</li>
+   <li>lj38_2ts_separation: short of the full start set.</li>
+   <li>pt-island: not yet on the harness counter, short of the full start set.</li>
+   <li>Al: short of the full start set.</li>
+   <li>Pt: short of the full start set.</li>
+   <li>lj38: short of the full start set.</li>
+   <li>Pt-heptamer: not yet on the harness counter, short of the full start set.</li>
+   <li>Pt heptamer island: not yet on the harness counter, short of the full start set.</li>
+   <li>LJ38: not yet on the harness counter, short of the full start set.</li>
+   <li>pt-island: not yet on the harness counter, short of the full start set.</li>
    <li>eon-ci-neb: no per-start record.</li>
    <li>eon-ci-swdneb: no per-start record.</li>
    <li>eon-cg: no per-start record.</li>
@@ -243,15 +243,15 @@
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
-   <li>Al adatom on Al(100) at 250 K: partial.</li>
-   <li>lj38_2ts_separation: partial.</li>
-   <li>Lennard-Jones 38 global minimum: partial.</li>
-   <li>Al: partial.</li>
-   <li>Pt: partial.</li>
-   <li>lj38: partial.</li>
-   <li>Pt heptamer island: partial.</li>
-   <li>LJ38: partial.</li>
-   <li>pt-island: partial.</li>
+   <li>Al adatom on Al(100) at 250 K: short of the full start set.</li>
+   <li>lj38_2ts_separation: short of the full start set.</li>
+   <li>Lennard-Jones 38 global minimum: short of the full start set.</li>
+   <li>Al: short of the full start set.</li>
+   <li>Pt: short of the full start set.</li>
+   <li>lj38: short of the full start set.</li>
+   <li>Pt heptamer island: short of the full start set.</li>
+   <li>LJ38: short of the full start set.</li>
+   <li>pt-island: short of the full start set.</li>
    <li>eon-svn/cg: no per-start record.</li>
    <li>eon-svn/fire: no per-start record.</li>
    <li>eon-svn/lbfgs-m100: no per-start record.</li>
@@ -508,13 +508,13 @@
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
-   <li>LJ38 double-ended saddle: partial.</li>
-   <li>lj38_2ts_separation: partial.</li>
-   <li>pt-island: partial.</li>
-   <li>Lennard-Jones 38 clusters: partial.</li>
-   <li>Morse bulk: partial.</li>
-   <li>Pt-heptamer: partial.</li>
-   <li>Pt heptamer island: partial.</li>
+   <li>LJ38 double-ended saddle: short of the full start set.</li>
+   <li>lj38_2ts_separation: short of the full start set.</li>
+   <li>pt-island: short of the full start set.</li>
+   <li>Lennard-Jones 38 clusters: short of the full start set.</li>
+   <li>Morse bulk: short of the full start set.</li>
+   <li>Pt-heptamer: short of the full start set.</li>
+   <li>Pt heptamer island: short of the full start set.</li>
    </ul>
    <h3>Sella</h3>
    <div class="bench-scroll"><table>
@@ -631,14 +631,14 @@
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
-   <li>LJ38 double-ended saddle: partial.</li>
-   <li>lj38_2ts_separation: partial.</li>
-   <li>pt-island: partial.</li>
-   <li>Lennard-Jones 38 clusters: partial.</li>
-   <li>Morse bulk: partial.</li>
-   <li>Pt heptamer island: partial.</li>
-   <li>LJ38: partial.</li>
-   <li>pt-island: partial.</li>
+   <li>LJ38 double-ended saddle: short of the full start set.</li>
+   <li>lj38_2ts_separation: short of the full start set.</li>
+   <li>pt-island: short of the full start set.</li>
+   <li>Lennard-Jones 38 clusters: short of the full start set.</li>
+   <li>Morse bulk: short of the full start set.</li>
+   <li>Pt heptamer island: short of the full start set.</li>
+   <li>LJ38: short of the full start set.</li>
+   <li>pt-island: short of the full start set.</li>
    <li>sella-lj38: no per-start record.</li>
    </ul>
    <h3>pARTn</h3>
@@ -855,7 +855,7 @@
    <td data-field="template">pykmc/htst-al</td>
    <td data-field="version">pykmc 0.0.1</td>
    <td data-field="commit">9fd1f6e9085e</td>
-   <td data-field="par2_mean"></td>
+   <td data-field="par2_mean">64636</td>
    <td data-field="mean_calls">64636</td>
    <td data-field="median_calls">56329</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
@@ -866,7 +866,7 @@
    <td data-field="template">pykmc/htst-pt</td>
    <td data-field="version">pykmc 0.0.1</td>
    <td data-field="commit">9fd1f6e9085e</td>
-   <td data-field="par2_mean"></td>
+   <td data-field="par2_mean">3.83353e+06</td>
    <td data-field="mean_calls">3.83353e+06</td>
    <td data-field="median_calls">3.3676e+06</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>

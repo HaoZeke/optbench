@@ -1,4 +1,4 @@
-"""Run one archived eOn entry with a current client.
+"""Run one archived eOn entry with the pinned client.
 
 The archived config.ini is the template. QuickMin and FIRE timesteps are
 copied into the sections version 3.5.0 reads, and the numbers stay the

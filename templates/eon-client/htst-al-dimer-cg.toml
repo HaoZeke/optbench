@@ -6,12 +6,11 @@ code_version = "3.5.0"
 commit = "4d8b34baf1ba8d2d980df29838bac1f969d1662c"
 algorithm = "Dimer CG"
 reducer = "harness"
-failure_cap = 2000000
 kind = "htst"
 kernel = "eam"
 asv_class = "EonClientHtstAlDimerCg"
 note = '''
-One bounded AKMC pass on the Al hTST reactant. Temperature 300, confidence 1.95, prefactor 1.2e12, dimer rotations_max 50, converged_angle 1, displace radius 3.3, magnitude 0.5, seed 42. num_jobs is 2. The 2014 file used a cluster communicator and num_jobs 10000. displace_atomlist is not a key this server accepts, so the listed-atom weight stays at its default. Success here is one good saddle under 1.5 eV during the pass, which is not the 2014 barrier and rate average. The row is partial. The harness kernel is the r2549 Aluminum EAM Fortran force routine, called in process.
+One bounded AKMC pass on the Al hTST reactant. Temperature 300, confidence 1.95, prefactor 1.2e12, dimer rotations_max 50, converged_angle 1, displace radius 3.3, magnitude 0.5, seed 42. num_jobs is 2. The 2014 file used a cluster communicator and num_jobs 10000. displace_atomlist is not a key this server accepts, so the listed-atom weight stays at its default. Success here is one good saddle under 1.5 eV during the pass, which is not the 2014 barrier and rate average. The row is short of the full start set. The harness kernel is the r2549 Aluminum EAM Fortran force routine, called in process.
 '''
 seeds = [42]
 starts = ["al"]

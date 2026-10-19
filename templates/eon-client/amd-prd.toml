@@ -11,7 +11,7 @@ kind = "prd"
 kernel = "eam"
 asv_class = "EonClientAmdPrd"
 note = '''
-Parallel replica on the accelerated-md reactant. The 2014 archive has no ini for this entry. The settings are the r2549 canary prd_eam_al_adatom: temperature 500, Andersen thermostat, dephase_time 200, time 5000, state_check_interval 1000. Success is transition_found 1 with harness calls under 1000000. The problem rate columns are not recomputed. The row is partial. The harness kernel is the r2549 Aluminum EAM Fortran force routine, called in process.
+Parallel replica on the accelerated-md reactant. The 2014 archive has no ini for this entry. The settings are the r2549 canary prd_eam_al_adatom: temperature 500, Andersen thermostat, dephase_time 200, time 5000, state_check_interval 1000. Success is transition_found 1 with harness calls under 1000000. The problem rate columns are not recomputed. The row is short of the full start set. The harness kernel is the r2549 Aluminum EAM Fortran force routine, called in process.
 '''
 seeds = [1000]
 starts = ["reactant"]

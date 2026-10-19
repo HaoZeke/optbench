@@ -1,7 +1,7 @@
 """Deterministic v2 sample: seeds, a performance profile, noise, and failures.
 
 This is not a Lennard-Jones campaign. The bowl and the saddle are the
-quadratic smoke. Every number in the document is produced by running
+quadratic check. Every number in the document is produced by running
 these optimizers.
 """
 

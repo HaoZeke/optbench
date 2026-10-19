@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://lode-org.github.io/optbench/contract/result.schema.json",
   "title": "OptBench result",
-  "description": "Legacy result. Comparable scores use contract/result.v2.schema.json. Problem TOML lives under problems/. These schemas live under contract/.",
+  "description": "2014 result file. Harness scores use contract/result.v2.schema.json. Problem TOML lives under problems/. These schemas live under contract/.",
   "type": "object",
   "required": ["schema", "status", "problem", "submitter", "date", "runs"],
   "properties": {

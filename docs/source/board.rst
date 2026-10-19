@@ -5,9 +5,9 @@ v2 board
 
 Each column is one code.
 The cell is that code's best full harness run, ranked by the v2 PAR-2 mean.
-The problem page lists every template, including history and partial rows.
+The problem page lists every template, including history and rows short of the full start set.
 ``uv run optbench board`` writes this page from the committed results.
-It does not run a campaign.
+A campaign is a separate command.
 
 .. raw:: html
 
@@ -234,7 +234,7 @@ It does not run a campaign.
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
    <td data-code="optim">—</td>
-   <td data-code="pykmc" data-template="pykmc/htst-al" data-par2=""><span class="bench-score"></span><a href="generated/suites/hTST.html#Al-templates">pykmc/htst-al</a></td>
+   <td data-code="pykmc" data-template="pykmc/htst-al" data-par2="64636"><span class="bench-score">64636</span><a href="generated/suites/hTST.html#Al-templates">pykmc/htst-al</a></td>
    <td data-code="tsase">—</td>
    </tr>
    <tr data-problem="hTST/Pt">
@@ -251,7 +251,7 @@ It does not run a campaign.
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
    <td data-code="optim">—</td>
-   <td data-code="pykmc" data-template="pykmc/htst-pt" data-par2=""><span class="bench-score"></span><a href="generated/suites/hTST.html#Pt-templates">pykmc/htst-pt</a></td>
+   <td data-code="pykmc" data-template="pykmc/htst-pt" data-par2="3.83353e+06"><span class="bench-score">3.83353e+06</span><a href="generated/suites/hTST.html#Pt-templates">pykmc/htst-pt</a></td>
    <td data-code="tsase">—</td>
    </tr>
    <tr data-problem="accelerated-md/aladatom">

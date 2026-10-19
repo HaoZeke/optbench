@@ -11,7 +11,7 @@ from asv.runner import BenchmarkResult
 
 commit = "a" * 40
 with tempfile.TemporaryDirectory() as directory:
-    saved = Results({"machine": "repro"}, {}, commit, 0, "3.12", "env", {})
+    saved = Results({"machine": "box"}, {}, commit, 0, "3.12", "env", {})
     saved.add_result(
         {"name": "bench.track_force_calls", "version": "v", "params": []},
         BenchmarkResult(
@@ -24,7 +24,7 @@ with tempfile.TemporaryDirectory() as directory:
         ),
     )
     saved.save(directory)
-    path = Path(directory) / "repro" / f"{commit[:8]}-env.json"
+    path = Path(directory) / "box" / f"{commit[:8]}-env.json"
     text = path.read_text(encoding="utf-8")
     loaded = Results.load(str(path))
     print(f"saved errcode: {saved.errcode}")
@@ -33,4 +33,4 @@ with tempfile.TemporaryDirectory() as directory:
     print(f"file mentions errcode: {'errcode' in text}")
     print(f"file mentions boom: {'boom' in text}")
     if loaded.errcode or "errcode" in text or "boom" in text:
-        raise SystemExit("errcode survived; this reproducer is stale")
+        raise SystemExit("errcode survived; this check is stale")
