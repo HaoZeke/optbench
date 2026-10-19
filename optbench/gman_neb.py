@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
-"""Run Gman r235 CI-NEB FIRE on the archived Pt-heptamer pairs.
+"""Run Gman 1.0.0.01 CI-NEB FIRE on the archived Pt-heptamer pairs.
 
 The step is the r235 fire.step and neb.relax, including the Euler update
-that uses the initial dt rather than the per-image dt. The Morse kernel is
-codes/gman/morse.f, the r235 pot/morse/code/morse.f.
+that uses the initial dt rather than the per-image dt. FIRE uses the
+library defaults (maxmove 0.2, dt 0.1). The Morse kernel is the harness
+morse_pt, the same shifted cutoff-9.5 potential.
 """
 from __future__ import annotations
 
-import ctypes
-import subprocess
 import tarfile
 import tempfile
 from math import sqrt
@@ -16,12 +15,7 @@ from pathlib import Path
 
 import numpy as np
 
-U0 = 0.7102
-R0 = 2.8970
-ALPHA = 1.6047
-RC = 9.5
 FORCE_COUNT = 0
-LIB: ctypes.CDLL | None = None
 
 
 def vmag(v: np.ndarray) -> float:
@@ -95,57 +89,15 @@ def loadcon(path: Path) -> Point:
     return p
 
 
-def bind_library(path: Path) -> None:
-    global LIB
-    lib = ctypes.CDLL(str(path))
-    lib.force_.argtypes = [
-        ctypes.POINTER(ctypes.c_int),
-        ctypes.POINTER(ctypes.c_double),
-        ctypes.POINTER(ctypes.c_double),
-        ctypes.POINTER(ctypes.c_double),
-        ctypes.POINTER(ctypes.c_double),
-        ctypes.POINTER(ctypes.c_double),
-        ctypes.POINTER(ctypes.c_double),
-        ctypes.POINTER(ctypes.c_double),
-        ctypes.POINTER(ctypes.c_double),
-        ctypes.POINTER(ctypes.c_double),
-        ctypes.POINTER(ctypes.c_double),
-    ]
-    lib.force_.restype = None
-    LIB = lib
-
-
-def compile_morse(source: Path, dest: Path) -> Path:
-    dest.parent.mkdir(parents=True, exist_ok=True)
-    subprocess.check_call(
-        ["gfortran", "-O2", "-shared", "-fPIC", "-o", str(dest), str(source)],
-    )
-    return dest
-
-
 def morse_force(p: Point, count: bool = True) -> None:
+    """Harness Morse. The gradient is dE/dx, so the force is its negative."""
     global FORCE_COUNT
-    if LIB is None:
-        raise RuntimeError("Morse library is not loaded")
-    n = p.n
-    ncoo = n * 3
-    ra = np.ascontiguousarray(p.r.reshape(ncoo), dtype=np.float64)
-    fa = np.zeros(ncoo, dtype=np.float64)
-    uret = np.zeros(1, dtype=np.float64)
-    ax = float(p.box[0, 0])
-    ay = float(p.box[1, 1])
-    az = float(p.box[2, 2])
-    n_c = ctypes.c_int(n)
-    scalars = [ctypes.c_double(v) for v in (ax, ay, az, U0, ALPHA, R0, RC)]
-    LIB.force_(
-        ctypes.byref(n_c),
-        ra.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
-        fa.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
-        uret.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
-        *(ctypes.byref(s) for s in scalars),
-    )
-    p.f = fa.reshape(n, 3) * p.free
-    p.u = float(uret[0])
+    from .pes import morse_pt
+
+    box = np.array([p.box[0, 0], p.box[1, 1], p.box[2, 2]], dtype=np.float64)
+    energy, grad = morse_pt(p.r, box)
+    p.u = float(energy)
+    p.f = (-grad) * p.free
     if count:
         FORCE_COUNT += 1
 
@@ -294,19 +246,6 @@ class Band:
         return itr + 1
 
 
-def check_kernel(minima: Path) -> None:
-    from .pes import morse_pt
-
-    point = loadcon(minima / "min01" / "a.con")
-    morse_force(point, False)
-    energy, grad = morse_pt(point.r, np.diag(point.box))
-    if abs(point.u - float(energy)) > 1e-8:
-        raise RuntimeError(f"Morse energy {point.u} disagrees with the harness {energy}")
-    free = point.free[:, 0] > 0
-    if float(np.max(np.abs(point.f[free] + grad[free]))) > 1e-8:
-        raise RuntimeError("Morse forces disagree with the harness on the free atoms")
-
-
 def paper_integers(per_image: list[float]) -> tuple[int, int, int]:
     """Python 2 ``%d`` truncation used by the archived opt.py."""
     return int(sum(per_image) / len(per_image)), int(max(per_image)), int(min(per_image))
@@ -322,11 +261,6 @@ def _minima_root(extracted: Path) -> Path:
 def prepare(root: Path, problem: dict, work: Path) -> Path:
     from .campaign import geometry_archive
 
-    source = root / "codes" / "gman" / "morse.f"
-    if not source.is_file():
-        raise FileNotFoundError(source)
-    compile_morse(source, work / "libmorse.so")
-    bind_library(work / "libmorse.so")
     extracted = work / "minima"
     extracted.mkdir(parents=True, exist_ok=True)
     with tarfile.open(geometry_archive(root, problem)) as packed:
@@ -336,7 +270,7 @@ def prepare(root: Path, problem: dict, work: Path) -> Path:
 
 def run_pairs(minima: Path) -> list[dict]:
     opt = Fire()
-    opt.init(maxmove=0.2, dt=0.15)
+    opt.init()
     rows = []
     for index in range(1, 14):
         name = f"min{index:02d}"
@@ -388,11 +322,10 @@ def run_template(
     output: Path,
     work: Path | None = None,
 ) -> dict:
-    """Compile r235 Morse, run the 13 bands, and write the paper integers."""
+    """Run the 13 bands at stock FIRE settings and write the paper integers."""
     scratch = work or Path(tempfile.mkdtemp(prefix="gman-neb-"))
     scratch.mkdir(parents=True, exist_ok=True)
     minima = prepare(root, problem, scratch)
-    check_kernel(minima)
     rows = run_pairs(minima)
     per_image = [float(row["force_calls"]) for row in rows]
     mean, high, low = paper_integers(per_image)
@@ -423,7 +356,7 @@ def main() -> None:
         root,
         problem,
         template,
-        output=root / "results" / "campaign" / "gman-r235-neb-pt-fire.dat",
+        output=root / "results" / "campaign" / "gman-1.0.0.01-neb-pt-fire.dat",
     )
 
 

@@ -2,7 +2,7 @@ id = "gman/neb-pt-fire"
 engine = "gman"
 problem = "neb/Pt-heptamer"
 code = "Gman"
-code_version = "r235"
+code_version = "1.0.0.01"
 commit = "r235"
 algorithm = "FIRE"
 reducer = "harness"
@@ -10,5 +10,5 @@ failure_cap = 10000
 kind = "neb-pt"
 kernel = "morse"
 note = '''
-Climbing-image NEB from Gman r235 (benchmarks SVN website/codes/Gman-r235.tgz). Eight interior images, spring 5, improved tangent, fmax 0.01 on the force magnitude of every image. FIRE init is maxmove 0.2 and dt 0.15. The r235 Euler step uses that initial dt, not the per-image dt. The Morse kernel is pot/morse/code/morse.f, shifted, cutoff 9.5. pot.count skips the two endpoints. The archived integer is int(sum(count/8)/13) from the Python 2 %d format. The starts file stores that per-image quotient in force_calls and the band total in raw, with count_key force_calls_neb.
+Climbing-image NEB from Gman 1.0.0.01, the version file in the r235 release. Eight interior images, spring 5, improved tangent, fmax 0.01 on the force magnitude of every image, iteration cap 10000. FIRE is fire.init() with the library defaults, maxmove 0.2 and dt 0.1. The Euler step uses that initial dt, not the per-image dt. Forces are the harness morse_pt potential. pot.count skips the two endpoints. The archived integer is int(sum(count/8)/13) from the Python 2 %d format. The starts file stores that per-image quotient in force_calls and the band total in raw, with count_key force_calls_neb.
 '''

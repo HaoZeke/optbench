@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-47 reproduced, 29 not reproduced, 75 not rerun. 151 archive rows.
+46 reproduced, 30 not reproduced, 75 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -170,7 +170,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | Pt-heptamer/eon-lbfgs | force_calls 42 | 40 | reproduced |
 | Pt-heptamer/eon-qm | force_calls 164 | 165 | reproduced |
 | Pt-heptamer/gman-cg | — | — | not rerun |
-| Pt-heptamer/gman-fire | force_calls 82, force_calls_max 119, force_calls_min 54 | 82, 119, 54 | reproduced |
+| Pt-heptamer/gman-fire | force_calls 82, force_calls_max 119, force_calls_min 54 | 94, 131, 65 | not reproduced; gman_stock_fire |
 | Pt-heptamer/gman-glbfgs-hess | — | — | not rerun |
 | Pt-heptamer/gman-glbfgs-line | — | — | not rerun |
 | Pt-heptamer/gman-lbfgs-hess | — | — | not rerun |
@@ -330,6 +330,12 @@ pele Morse L-BFGS scores 92. The archive is 51. eOn Morse L-BFGS on the same bul
 The 3.5.0 file already stores the per-image mean, 142 against the archive 120. L-BFGS, FIRE, and QM on the same 8-image spring-5 climb reproduce, so the image count is not the split.
 
 - neb/Pt-heptamer/eon-cg
+
+### gman_stock_fire
+
+Gman 1.0.0.01 is the version file in the latest public release. fire.init() is maxmove 0.2 and dt 0.1. The archive script sets dt 0.15 on the same climbing-image band: eight images, spring 5, improved tangent, fmax 0.01, cap 10000. The stock native count is 94, 131, and 65 against 82, 119, and 54.
+
+- neb/Pt-heptamer/gman-fire
 
 ### saddle_novelty
 

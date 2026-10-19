@@ -190,7 +190,7 @@ MATCHES: list[dict] = [
     {"key": "neb/Pt-heptamer/eon-cg", "template": "eon-cg", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-cg.dat", "cause": "heptamer_cg", "hold": ["eon-client/neb-pt-cg"]},
     {"key": "neb/Pt-heptamer/eon-fire", "template": "eon-fire", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-fire.dat", "hold": ["eon-client/neb-pt-fire"]},
     {"key": "neb/Pt-heptamer/eon-qm", "template": "eon-qm", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-qm.dat", "hold": ["eon-client/neb-pt-qm"]},
-    {"key": "neb/Pt-heptamer/gman-fire", "template": "gman/neb-pt-fire", "branch": "repro/neb-pt-heptamer-gman-fire", "path": "results/campaign/gman-r235-neb-pt-fire.dat", "metrics": ["force_calls", "force_calls_max", "force_calls_min"]},
+    {"key": "neb/Pt-heptamer/gman-fire", "template": "gman/neb-pt-fire", "branch": "repro/neb-pt-heptamer-gman-fire", "path": "results/campaign/gman-1.0.0.01-neb-pt-fire.dat", "metrics": ["force_calls", "force_calls_max", "force_calls_min"], "cause": "gman_stock_fire", "extra": {"code_version": "1.0.0.01"}},
     # saddle search
     {"key": "saddle-search/pt-island/eon-dimer", "template": "eon-svn/saddle-pt-dimer", "branch": "main", "path": "results/campaign/eon-3.5.0-saddle-pt-classic.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "cause": "eon_saddle_count"},
     {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-davidson-sm50", "template": "softsaddle/saddle-davidson-sm50", "branch": "cells/softsaddle/ts-reps", "path": "results/campaign/softsaddle-2019.04-saddle-davidson-sm50.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
@@ -289,6 +289,12 @@ CAUSE_TEXT = {
         "The harness records 7 failures: 5 RuntimeError LineSearch failed (ASE 3.8.2 already raises that; ASE 3.6.0 is not on PyPI) "
         "and 2 Hessian index 1 after the Euclidean force norm is under 0.01. "
         "The Wilson interval on 0 failures out of 1000 is about 0 to 3.83."
+    ),
+    "gman_stock_fire": (
+        "Gman 1.0.0.01 is the version file in the latest public release. "
+        "fire.init() is maxmove 0.2 and dt 0.1. "
+        "The archive script sets dt 0.15 on the same climbing-image band: eight images, spring 5, improved tangent, fmax 0.01, cap 10000. "
+        "The stock native count is 94, 131, and 65 against 82, 119, and 54."
     ),
     "akmc_vs_langevin": (
         "The archive rows are Langevin parallel replica. The harness rows are AKMC. "
@@ -517,7 +523,8 @@ def holdback(root: Path) -> Hold:
         rerun = row.get("rerun") or {}
         problem = f"{row['suite']}/{row['problem']}"
         template = str(rerun.get("template") or "")
-        if row.get("status") == "not_reproduced":
+        # The stock Gman miss stays ranked. The archive gap is the finding.
+        if row.get("status") == "not_reproduced" and row_id(row) != "neb/Pt-heptamer/gman-fire":
             if template:
                 found.templates.add((problem, template))
             rel = str(rerun.get("path") or "")
