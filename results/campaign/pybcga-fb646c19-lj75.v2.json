@@ -1,14 +1,14 @@
 {
   "bootstrap_resamples": 2000,
   "bootstrap_seed": 20261015,
-  "note": "Library default. Population 10, 10 generations, 8 offspring, mutation probability 0.1, tournament size 3, duplicates kept. The first member of the initial population is the archived geometry. The other members use numpy seed 20261015 plus the start index. The local quench stops at Euclidean force 0.001 or 1000 evaluations. The force cap is one quench budget for the initial population and, in each generation, the offspring plus one mutant of every member of that expanded population. globalopt/lj75 states no energy window on this commit, so a finished search is not a success and the row is partial. The energy and the calls are the search record.",
+  "note": "Library default. Population 10, 10 generations, 8 offspring, mutation probability 0.1, tournament size 3, duplicates kept. The first member of the initial population is the archived geometry. The other members use numpy seed 20261015 plus the start index. The local quench stops at Euclidean force 0.001 or 1000 evaluations. The force cap is one quench budget for the initial population and, in each generation, the offspring plus one mutant of every member of that expanded population. Success is the Cambridge N=75 minimum plus 0.001. The problem force cap is 1000000.",
   "par_factor": 2,
   "problem": "globalopt/lj75",
-  "reference_energy": null,
+  "reference_energy": -397.492331,
   "runs": [
     {
       "algorithm": "BCGA",
-      "cap": 270000,
+      "cap": 1000000,
       "code": "PyBCGA",
       "code_version": "0",
       "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
@@ -23,26 +23,26 @@
       "metrics": {
         "bootstrap_resamples": 2000,
         "bootstrap_seed": 20261015,
-        "cap": 270000,
+        "cap": 1000000,
         "includes_failures": true,
         "iqr": 0.0,
         "iqr_high": 0.0,
         "iqr_low": 0.0,
-        "mean": 540000.0,
-        "median": 540000.0,
-        "median_high": 540000.0,
-        "median_low": 540000.0,
+        "mean": 2000000.0,
+        "median": 2000000.0,
+        "median_high": 2000000.0,
+        "median_low": 2000000.0,
         "n": 200,
         "n_cap": 0,
         "n_crash": 0,
         "n_divergence": 0,
         "n_wrong_stationary": 200,
         "nfailed": 200,
-        "par2_mean": 540000.0,
+        "par2_mean": 2000000.0,
         "par_applied": true,
         "par_factor": 2,
-        "q25": 540000.0,
-        "q75": 540000.0,
+        "q25": 2000000.0,
+        "q75": 2000000.0,
         "scoring": "par2-wilson-bootstrap",
         "success_only_mean": null,
         "success_rate": 0.0,
@@ -106,12 +106,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 29.755973818999337,
+          "seconds": 28.26165406400105,
           "start": "coords.1",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -155,12 +155,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 19.60438316699947,
+          "seconds": 26.629481105002924,
           "start": "coords.2",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -216,12 +216,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 19.541974431998824,
+          "seconds": 21.05128140700981,
           "start": "coords.3",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -265,12 +265,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 22.35776884200095,
+          "seconds": 19.048456324992003,
           "start": "coords.4",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -306,12 +306,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.95290735600065,
+          "seconds": 23.9571876879927,
           "start": "coords.5",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -367,12 +367,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 15.567829973999324,
+          "seconds": 17.47738515101082,
           "start": "coords.6",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -420,12 +420,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 17.742006149999725,
+          "seconds": 19.819842322991462,
           "start": "coords.7",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -477,12 +477,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 16.417557556000247,
+          "seconds": 21.28789047700411,
           "start": "coords.8",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -542,12 +542,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 16.227391697999337,
+          "seconds": 20.683327065999038,
           "start": "coords.9",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -599,12 +599,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 19.24089420999917,
+          "seconds": 30.444481211001403,
           "start": "coords.10",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -688,12 +688,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.248312260999228,
+          "seconds": 20.79734935698798,
           "start": "coords.11",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -737,12 +737,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 17.314613932998327,
+          "seconds": 19.253636683002696,
           "start": "coords.12",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -794,12 +794,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 17.9586346720007,
+          "seconds": 19.271292962002917,
           "start": "coords.13",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -851,12 +851,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 16.276967187999617,
+          "seconds": 16.531586120006978,
           "start": "coords.14",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -900,12 +900,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 17.538041277999582,
+          "seconds": 21.89927659300156,
           "start": "coords.15",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -965,12 +965,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 19.581913191999774,
+          "seconds": 27.57647250199807,
           "start": "coords.16",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -1006,12 +1006,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.430600253999728,
+          "seconds": 23.1655269949988,
           "start": "coords.17",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -1071,12 +1071,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 20.62753000000157,
+          "seconds": 20.651562665996607,
           "start": "coords.18",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -1124,12 +1124,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.274915116999182,
+          "seconds": 18.998258482999518,
           "start": "coords.19",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -1185,12 +1185,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.989613577001364,
+          "seconds": 21.832163874001708,
           "start": "coords.20",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -1242,12 +1242,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 19.1820418770003,
+          "seconds": 31.171098890001304,
           "start": "coords.21",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -1311,12 +1311,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 30.938699592001285,
+          "seconds": 29.559866386000067,
           "start": "coords.22",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -1388,12 +1388,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 23.964668243999768,
+          "seconds": 23.873361784993904,
           "start": "coords.23",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -1437,12 +1437,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 19.09425275600006,
+          "seconds": 25.211591023005894,
           "start": "coords.24",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -1490,12 +1490,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 22.346520622000753,
+          "seconds": 30.068206202995498,
           "start": "coords.25",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -1563,12 +1563,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 16.28410850200089,
+          "seconds": 20.16940378100844,
           "start": "coords.26",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -1624,12 +1624,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 20.308187072998408,
+          "seconds": 28.86194691300625,
           "start": "coords.27",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -1673,12 +1673,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.647940169999856,
+          "seconds": 21.474989099995582,
           "start": "coords.28",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -1742,12 +1742,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 28.86617429999933,
+          "seconds": 25.694889766004053,
           "start": "coords.29",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -1803,12 +1803,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.258492543000102,
+          "seconds": 21.278913128000568,
           "start": "coords.30",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -1864,12 +1864,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.433008142999824,
+          "seconds": 29.89402855699882,
           "start": "coords.31",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -1937,12 +1937,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 26.10136815399892,
+          "seconds": 23.810792297997978,
           "start": "coords.32",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -2002,12 +2002,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.580874567000137,
+          "seconds": 24.65808761199878,
           "start": "coords.33",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -2059,12 +2059,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.619796498998767,
+          "seconds": 25.037447317008628,
           "start": "coords.34",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -2112,12 +2112,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 24.333481747000405,
+          "seconds": 26.935240134000196,
           "start": "coords.35",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -2165,12 +2165,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 26.18427405300099,
+          "seconds": 27.269962746009696,
           "start": "coords.36",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -2230,12 +2230,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 20.672066387000086,
+          "seconds": 24.719582596007967,
           "start": "coords.37",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -2295,12 +2295,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 16.41202940599942,
+          "seconds": 25.388437200992485,
           "start": "coords.38",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -2356,12 +2356,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 22.947734915998808,
+          "seconds": 26.642920811995282,
           "start": "coords.39",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -2421,12 +2421,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 16.869894178998948,
+          "seconds": 22.589364860992646,
           "start": "coords.40",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -2474,12 +2474,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 16.9981909979997,
+          "seconds": 29.769263537004008,
           "start": "coords.41",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -2531,12 +2531,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 21.18143772700023,
+          "seconds": 22.607694158999948,
           "start": "coords.42",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -2580,12 +2580,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 16.59412164599962,
+          "seconds": 25.566589428999578,
           "start": "coords.43",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -2633,12 +2633,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 21.729433579001125,
+          "seconds": 29.932855620005284,
           "start": "coords.44",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -2702,12 +2702,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 21.28636227500101,
+          "seconds": 20.992601200996432,
           "start": "coords.45",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -2763,12 +2763,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 22.099983349999093,
+          "seconds": 18.527630199998384,
           "start": "coords.46",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -2824,12 +2824,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 22.188324483999168,
+          "seconds": 25.383411364993663,
           "start": "coords.47",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -2893,12 +2893,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.389929163999113,
+          "seconds": 26.745949711999856,
           "start": "coords.48",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -2954,12 +2954,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.52233268999953,
+          "seconds": 24.386928089996218,
           "start": "coords.49",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -3019,12 +3019,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 16.95052833199952,
+          "seconds": 25.278974341010326,
           "start": "coords.50",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -3076,12 +3076,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.147833491999336,
+          "seconds": 29.73449700200581,
           "start": "coords.51",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -3125,12 +3125,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.1755472549994,
+          "seconds": 35.997023550007725,
           "start": "coords.52",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -3170,12 +3170,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.230522264000683,
+          "seconds": 40.078830672006006,
           "start": "coords.53",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -3247,12 +3247,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 14.185756323999158,
+          "seconds": 24.161740994997672,
           "start": "coords.54",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -3300,12 +3300,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 14.926699921999898,
+          "seconds": 23.13526114699198,
           "start": "coords.55",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -3333,12 +3333,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 15.493519133000518,
+          "seconds": 24.746169748003013,
           "start": "coords.56",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -3390,12 +3390,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 15.808676808999735,
+          "seconds": 21.379331221003667,
           "start": "coords.57",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -3435,12 +3435,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 15.757871132000218,
+          "seconds": 23.528216133010574,
           "start": "coords.58",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -3496,12 +3496,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 19.885707350000303,
+          "seconds": 22.101017103006598,
           "start": "coords.59",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -3557,12 +3557,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 38.36519739800133,
+          "seconds": 33.48932481301017,
           "start": "coords.60",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -3646,12 +3646,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.432282653000584,
+          "seconds": 20.959915359999286,
           "start": "coords.61",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -3711,12 +3711,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.3212754340002,
+          "seconds": 21.904117668993422,
           "start": "coords.62",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -3780,12 +3780,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 19.80248336099976,
+          "seconds": 30.15025990200229,
           "start": "coords.63",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -3841,12 +3841,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 17.976141031000225,
+          "seconds": 24.765653062000638,
           "start": "coords.64",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -3910,12 +3910,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 17.123347291000755,
+          "seconds": 20.810300559009193,
           "start": "coords.65",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -3983,12 +3983,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 15.2483517640012,
+          "seconds": 21.578395434000413,
           "start": "coords.66",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -4044,12 +4044,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.154565889999503,
+          "seconds": 24.03198710900324,
           "start": "coords.67",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -4101,12 +4101,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.783916623999175,
+          "seconds": 29.100906275009038,
           "start": "coords.68",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -4166,12 +4166,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 20.023026704000586,
+          "seconds": 26.57917679999082,
           "start": "coords.69",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -4235,12 +4235,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.95606618900092,
+          "seconds": 26.910857236012816,
           "start": "coords.70",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -4300,12 +4300,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 21.107329604999904,
+          "seconds": 25.588297142996453,
           "start": "coords.71",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -4349,12 +4349,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 21.129058328999236,
+          "seconds": 28.978624343988486,
           "start": "coords.72",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -4406,12 +4406,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 21.579365269000846,
+          "seconds": 22.48652831900108,
           "start": "coords.73",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -4463,12 +4463,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 15.379626447000192,
+          "seconds": 21.583241006999742,
           "start": "coords.74",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -4536,12 +4536,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 17.703373072999966,
+          "seconds": 20.65441251899756,
           "start": "coords.75",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -4609,12 +4609,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 25.333117741000024,
+          "seconds": 23.13397516599798,
           "start": "coords.76",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -4674,12 +4674,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 23.693141402000037,
+          "seconds": 24.778723352996167,
           "start": "coords.77",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -4715,12 +4715,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 17.581673533000867,
+          "seconds": 22.59514677700645,
           "start": "coords.78",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -4772,12 +4772,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 21.955413924000823,
+          "seconds": 25.019037890000618,
           "start": "coords.79",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -4837,12 +4837,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 15.546462632999464,
+          "seconds": 19.801077858995995,
           "start": "coords.80",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -4894,12 +4894,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.43503875999886,
+          "seconds": 23.202584124999703,
           "start": "coords.81",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -4943,12 +4943,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 15.7627048810009,
+          "seconds": 20.944893224994303,
           "start": "coords.82",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -5000,12 +5000,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 16.504704597000455,
+          "seconds": 19.941522046006867,
           "start": "coords.83",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -5057,12 +5057,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 19.53262519600139,
+          "seconds": 20.106406279999646,
           "start": "coords.84",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -5122,12 +5122,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 22.377983072999996,
+          "seconds": 27.681880547999754,
           "start": "coords.85",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -5175,12 +5175,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 24.622926824000388,
+          "seconds": 19.71683026199753,
           "start": "coords.86",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -5228,12 +5228,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 19.48606203700001,
+          "seconds": 27.413383168997825,
           "start": "coords.87",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -5293,12 +5293,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 19.105129508001482,
+          "seconds": 26.676221788991825,
           "start": "coords.88",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -5366,12 +5366,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 23.15750030900017,
+          "seconds": 25.281662888999563,
           "start": "coords.89",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -5427,12 +5427,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 20.69961200800026,
+          "seconds": 24.999522231009905,
           "start": "coords.90",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -5472,12 +5472,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 17.703161280998756,
+          "seconds": 20.609009641993907,
           "start": "coords.91",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -5533,12 +5533,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.083474298999135,
+          "seconds": 25.1926026489964,
           "start": "coords.92",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -5602,12 +5602,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 15.821717165999871,
+          "seconds": 20.551441639006953,
           "start": "coords.93",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -5675,12 +5675,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 15.793461006998768,
+          "seconds": 19.624970138000208,
           "start": "coords.94",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -5740,12 +5740,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 15.878019103000042,
+          "seconds": 20.532761481008492,
           "start": "coords.95",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -5801,12 +5801,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 15.537485027000002,
+          "seconds": 17.51655167499848,
           "start": "coords.96",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -5858,12 +5858,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 15.55490992399973,
+          "seconds": 23.295982036011992,
           "start": "coords.97",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -5903,12 +5903,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.04882813199947,
+          "seconds": 21.845436989999143,
           "start": "coords.98",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -5960,12 +5960,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 22.881788704000428,
+          "seconds": 28.027810708008474,
           "start": "coords.99",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -6009,12 +6009,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 16.199842226998953,
+          "seconds": 21.03426757399575,
           "start": "coords.100",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -6058,12 +6058,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 17.29459668400159,
+          "seconds": 28.52986313099973,
           "start": "coords.101",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -6147,12 +6147,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 28.278150487001767,
+          "seconds": 24.286395900009666,
           "start": "coords.102",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -6216,12 +6216,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.2681461760003,
+          "seconds": 21.46516771700408,
           "start": "coords.103",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -6277,12 +6277,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.016260697999314,
+          "seconds": 23.958202117995825,
           "start": "coords.104",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -6346,12 +6346,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 20.256223560998478,
+          "seconds": 25.476622515998315,
           "start": "coords.105",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -6411,12 +6411,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 24.556959697998536,
+          "seconds": 25.18569674200262,
           "start": "coords.106",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -6452,12 +6452,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 16.55975994899927,
+          "seconds": 41.968035199999576,
           "start": "coords.107",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -6529,12 +6529,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.325733237999884,
+          "seconds": 25.677669896002044,
           "start": "coords.108",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -6586,12 +6586,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 16.204470163000224,
+          "seconds": 23.67829258700658,
           "start": "coords.109",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -6647,12 +6647,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.94384770400029,
+          "seconds": 21.548253789005685,
           "start": "coords.110",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -6704,12 +6704,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 19.10111002300073,
+          "seconds": 24.746487267009798,
           "start": "coords.111",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -6761,12 +6761,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 17.299369895999916,
+          "seconds": 21.214879373990698,
           "start": "coords.112",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -6830,12 +6830,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.370421277999412,
+          "seconds": 26.310092030995293,
           "start": "coords.113",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -6907,12 +6907,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 20.167766088999997,
+          "seconds": 32.49614645300608,
           "start": "coords.114",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -6976,12 +6976,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 23.916427461999774,
+          "seconds": 30.205406309003592,
           "start": "coords.115",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -7037,12 +7037,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 19.445948962998955,
+          "seconds": 22.873344243009342,
           "start": "coords.116",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -7094,12 +7094,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 19.96380902800047,
+          "seconds": 31.254732902001706,
           "start": "coords.117",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -7147,12 +7147,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 17.82555075899836,
+          "seconds": 26.600898645992856,
           "start": "coords.118",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -7208,12 +7208,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 25.852413512999192,
+          "seconds": 48.82521596598963,
           "start": "coords.119",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -7265,12 +7265,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 19.83298443000058,
+          "seconds": 24.38576303998707,
           "start": "coords.120",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -7330,12 +7330,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 20.31337268199968,
+          "seconds": 25.789555470997584,
           "start": "coords.121",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -7383,12 +7383,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 17.372116323998853,
+          "seconds": 28.315484674996696,
           "start": "coords.122",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -7448,12 +7448,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 15.71488418899935,
+          "seconds": 28.896412553003756,
           "start": "coords.123",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -7513,12 +7513,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 17.404199795999375,
+          "seconds": 32.137498167008744,
           "start": "coords.124",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -7586,12 +7586,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 15.990720501000396,
+          "seconds": 32.62524810600735,
           "start": "coords.125",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -7631,12 +7631,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.56872884999939,
+          "seconds": 42.23509086499689,
           "start": "coords.126",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -7700,12 +7700,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 14.682003359999726,
+          "seconds": 28.475902493999456,
           "start": "coords.127",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -7765,12 +7765,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 14.81540090100134,
+          "seconds": 26.21324941700732,
           "start": "coords.128",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -7838,12 +7838,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 16.5098555830009,
+          "seconds": 33.78974844800541,
           "start": "coords.129",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -7911,12 +7911,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 16.137528100000054,
+          "seconds": 20.211394858008134,
           "start": "coords.130",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -7976,12 +7976,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 16.467191971998545,
+          "seconds": 25.43691022299754,
           "start": "coords.131",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -8053,12 +8053,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 14.699428383999475,
+          "seconds": 20.69241237199458,
           "start": "coords.132",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -8114,12 +8114,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 13.828001138001127,
+          "seconds": 23.045446927993908,
           "start": "coords.133",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -8167,12 +8167,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 28.570059490999483,
+          "seconds": 28.612256698994315,
           "start": "coords.134",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -8216,12 +8216,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 14.167553957000564,
+          "seconds": 24.625299498991808,
           "start": "coords.135",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -8261,12 +8261,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.935661468000035,
+          "seconds": 34.63254253400373,
           "start": "coords.136",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -8314,12 +8314,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 15.539105804999053,
+          "seconds": 24.478477821990964,
           "start": "coords.137",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -8383,12 +8383,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 15.342362627001421,
+          "seconds": 23.25152081300621,
           "start": "coords.138",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -8440,12 +8440,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 15.499832306999451,
+          "seconds": 24.544981072001974,
           "start": "coords.139",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -8505,12 +8505,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 15.840869100999043,
+          "seconds": 23.517449306993512,
           "start": "coords.140",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -8562,12 +8562,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 15.704239632999816,
+          "seconds": 29.31016815500334,
           "start": "coords.141",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -8627,12 +8627,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 13.600808629000312,
+          "seconds": 27.04934853799932,
           "start": "coords.142",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -8676,12 +8676,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 16.875636455999484,
+          "seconds": 36.91960132299573,
           "start": "coords.143",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -8745,12 +8745,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 20.302413233999687,
+          "seconds": 30.79969667599653,
           "start": "coords.144",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -8810,12 +8810,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 17.11084793899863,
+          "seconds": 28.033006341996952,
           "start": "coords.145",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -8867,12 +8867,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 17.39458483300041,
+          "seconds": 32.80731525999727,
           "start": "coords.146",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -8912,12 +8912,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 19.95350389899977,
+          "seconds": 36.17955028099823,
           "start": "coords.147",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -8977,12 +8977,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 17.04069409099975,
+          "seconds": 22.52621525200084,
           "start": "coords.148",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -9050,12 +9050,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 13.034785502000886,
+          "seconds": 22.193693527005962,
           "start": "coords.149",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -9107,12 +9107,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 15.784743627998978,
+          "seconds": 26.274105794989737,
           "start": "coords.150",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -9164,12 +9164,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.5136999919996,
+          "seconds": 31.958226816990646,
           "start": "coords.151",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -9221,12 +9221,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.93306672700055,
+          "seconds": 31.658526297993376,
           "start": "coords.152",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -9286,12 +9286,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 15.84401439999965,
+          "seconds": 33.4809805630066,
           "start": "coords.153",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -9339,12 +9339,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 17.825347281001086,
+          "seconds": 29.275191990003805,
           "start": "coords.154",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -9396,12 +9396,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 16.473847131001094,
+          "seconds": 27.93804894099594,
           "start": "coords.155",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -9441,12 +9441,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 14.589339386000574,
+          "seconds": 21.590159286002745,
           "start": "coords.156",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -9502,12 +9502,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 32.013297907999004,
+          "seconds": 32.590518320008414,
           "start": "coords.157",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -9563,12 +9563,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 14.933718874000988,
+          "seconds": 21.827096517998143,
           "start": "coords.158",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -9612,12 +9612,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 17.601164433999656,
+          "seconds": 30.611705639996217,
           "start": "coords.159",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -9685,12 +9685,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 23.31003382200106,
+          "seconds": 20.787034142005723,
           "start": "coords.160",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -9774,12 +9774,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 17.769385225001315,
+          "seconds": 22.270047351994435,
           "start": "coords.161",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -9835,12 +9835,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 26.216474336999454,
+          "seconds": 21.808872990004602,
           "start": "coords.162",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -9896,12 +9896,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 19.348833999998533,
+          "seconds": 25.521472535998328,
           "start": "coords.163",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -9973,12 +9973,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 13.189663812001527,
+          "seconds": 21.37505256800796,
           "start": "coords.164",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -10026,12 +10026,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 17.294262507000894,
+          "seconds": 24.137028868994094,
           "start": "coords.165",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -10083,12 +10083,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 23.481075486999544,
+          "seconds": 19.936360275998595,
           "start": "coords.166",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -10136,12 +10136,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 15.857575312000336,
+          "seconds": 29.266156076002517,
           "start": "coords.167",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -10181,12 +10181,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 20.325261461999617,
+          "seconds": 22.480191148002632,
           "start": "coords.168",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -10242,12 +10242,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 14.785276659000374,
+          "seconds": 19.59977209600038,
           "start": "coords.169",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -10311,12 +10311,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 15.443656635001389,
+          "seconds": 23.53759585400985,
           "start": "coords.170",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -10368,12 +10368,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 15.310617429999184,
+          "seconds": 18.076177989001735,
           "start": "coords.171",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -10425,12 +10425,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 25.80876179400002,
+          "seconds": 30.81306482599757,
           "start": "coords.172",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -10498,12 +10498,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 14.590199632999429,
+          "seconds": 25.95772185799433,
           "start": "coords.173",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -10551,12 +10551,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.274049388001004,
+          "seconds": 22.5104813210055,
           "start": "coords.174",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -10608,12 +10608,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 17.573097698999845,
+          "seconds": 19.685341980002704,
           "start": "coords.175",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -10665,12 +10665,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 14.296470845998556,
+          "seconds": 17.892061414997443,
           "start": "coords.176",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -10722,12 +10722,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 16.918936078000115,
+          "seconds": 23.595828147997963,
           "start": "coords.177",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -10795,12 +10795,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 16.39995746200111,
+          "seconds": 21.616534172993852,
           "start": "coords.178",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -10852,12 +10852,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 19.533436952000557,
+          "seconds": 21.610790311999153,
           "start": "coords.179",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -10897,12 +10897,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 22.777633650999633,
+          "seconds": 20.101797613999224,
           "start": "coords.180",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -10946,12 +10946,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 19.339834178001183,
+          "seconds": 21.289961242990103,
           "start": "coords.181",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -10995,12 +10995,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 24.05155919200115,
+          "seconds": 26.29359004100843,
           "start": "coords.182",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -11056,12 +11056,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 16.300083748999896,
+          "seconds": 19.498455551991356,
           "start": "coords.183",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -11133,12 +11133,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 17.660618993000753,
+          "seconds": 23.708475773993996,
           "start": "coords.184",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -11202,12 +11202,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.49644513399835,
+          "seconds": 27.122273009998025,
           "start": "coords.185",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -11263,12 +11263,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 14.038299912999719,
+          "seconds": 20.080756234005094,
           "start": "coords.186",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -11312,12 +11312,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.9949999770015,
+          "seconds": 20.831543249994866,
           "start": "coords.187",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -11369,12 +11369,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 16.97634911000023,
+          "seconds": 23.397548791996087,
           "start": "coords.188",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -11410,12 +11410,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 16.915183038998293,
+          "seconds": 25.327918588998728,
           "start": "coords.189",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -11463,12 +11463,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 14.055517529999634,
+          "seconds": 29.475049704007688,
           "start": "coords.190",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -11516,12 +11516,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 13.367103747999863,
+          "seconds": 25.426251878001494,
           "start": "coords.191",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -11581,12 +11581,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 15.358550846000071,
+          "seconds": 31.63236823299667,
           "start": "coords.192",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -11646,12 +11646,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 13.717977283999062,
+          "seconds": 27.249149939991185,
           "start": "coords.193",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -11707,12 +11707,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 14.729390877999322,
+          "seconds": 29.658819537988165,
           "start": "coords.194",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -11764,12 +11764,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 17.10924229199918,
+          "seconds": 30.744032807997428,
           "start": "coords.195",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -11813,12 +11813,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.744211158000326,
+          "seconds": 29.911688760999823,
           "start": "coords.196",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -11866,12 +11866,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 14.58878658499998,
+          "seconds": 21.6701150709996,
           "start": "coords.197",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -11923,12 +11923,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 18.325998979998985,
+          "seconds": 28.631309283999144,
           "start": "coords.198",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -11976,12 +11976,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 16.747018564001337,
+          "seconds": 26.63651739199122,
           "start": "coords.199",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -12013,12 +12013,12 @@
           "reasons": [
             "energy"
           ],
-          "reference_energy": null,
+          "reference_energy": -397.492331,
           "schema": "optbench.start/v2",
-          "seconds": 20.73966743999881,
+          "seconds": 32.517080436009564,
           "start": "coords.200",
           "success": false,
-          "target": null,
+          "target": -397.491331,
           "template": "bpga/lj75-pybcga",
           "trace": [
             [
@@ -12071,5 +12071,5 @@
   ],
   "schema": "optbench.result/v2",
   "scoring": "par2-wilson-bootstrap",
-  "status": "partial"
+  "status": "sota"
 }
