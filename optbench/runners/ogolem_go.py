@@ -597,7 +597,12 @@ def _partial_reason(problem: dict, records: list[dict], scored: bool, full: int 
     elif full is None:
         parts.append(f"{len(records)} archive starts")
     if energies:
-        parts.append(f"lowest energy {min(energies):.8f}")
+        lowest = min(energies)
+        printed = f"{lowest:.8f}"
+        parts.append(f"lowest energy {printed}")
+        same = sum(1 for energy in energies if f"{energy:.8f}" == printed)
+        if same >= 2:
+            parts.append(f"{same} of {len(records)} starts at {printed}")
     if calls:
         parts.append(f"mean calls {statistics.fmean(calls):.1f}")
         parts.append(f"median calls {statistics.median(calls):.1f}")

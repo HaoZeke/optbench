@@ -18,6 +18,7 @@ from optbench.runners.ogolem_go import (
     XYZ_SCALE,
     HarnessLJServer,
     _force_cap,
+    _partial_reason,
     _threshold,
     center_cluster,
     classify_start,
@@ -158,6 +159,20 @@ def test_classify_start_uses_the_energy_window_and_the_cap():
         exit_code=0, calls=4, energy=math.nan, cap=100, threshold=LJ38_STOP_ENERGY, hit_cap=False
     )
     assert failure == "divergence"
+
+
+def test_partial_reason_counts_starts_on_the_lowest_energy():
+    problem = {"id": "globalopt/lj75"}
+    records = [
+        {"energy": -396.2822488255712, "force_calls": 1000000},
+        {"energy": -396.2822488255711, "force_calls": 1000000},
+        {"energy": -392.6594685996733, "force_calls": 1000000},
+    ]
+    reason = _partial_reason(problem, records, True, 200)
+    assert reason == (
+        "scored 3 of 200 starts; lowest energy -396.28224883; "
+        "2 of 3 starts at -396.28224883; mean calls 1000000.0; median calls 1000000.0"
+    )
 
 
 def test_partial_reason_is_kept_when_the_problem_states_no_full_set(tmp_path: Path):
