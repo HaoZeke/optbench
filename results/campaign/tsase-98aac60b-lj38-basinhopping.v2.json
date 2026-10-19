@@ -14,11 +14,11 @@
       "commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218",
       "entry": "tsase-98aac60b-lj38-basinhopping",
       "legacy": {
-        "force_calls": 942479,
+        "force_calls": 827634,
         "force_calls_max": 2000000,
         "force_calls_median": 2000000.0,
-        "force_calls_min": 395581,
-        "nfailed": 60
+        "force_calls_min": 23719,
+        "nfailed": 63
       },
       "metrics": {
         "bootstrap_resamples": 2000,
@@ -28,27 +28,27 @@
         "iqr": 0.0,
         "iqr_high": 0.0,
         "iqr_low": 0.0,
-        "mean": 3680557.4925373136,
+        "mean": 3642550.295774648,
         "median": 4000000.0,
         "median_high": 4000000.0,
         "median_low": 4000000.0,
-        "n": 67,
-        "n_cap": 60,
+        "n": 71,
+        "n_cap": 63,
         "n_crash": 0,
         "n_divergence": 0,
         "n_wrong_stationary": 0,
-        "nfailed": 60,
-        "par2_mean": 3680557.4925373136,
+        "nfailed": 63,
+        "par2_mean": 3642550.295774648,
         "par_applied": true,
         "par_factor": 2,
         "q25": 4000000.0,
         "q75": 4000000.0,
         "scoring": "par2-wilson-bootstrap",
-        "success_only_mean": 942478.8571428572,
-        "success_rate": 0.1044776119402985,
-        "successes": 7,
-        "wilson_high": 0.20031283048738022,
-        "wilson_low": 0.05153769768782859
+        "success_only_mean": 827633.875,
+        "success_rate": 0.11267605633802817,
+        "successes": 8,
+        "wilson_high": 0.2069004851081131,
+        "wilson_low": 0.05821271729792871
       },
       "parameters": {
         "distribution": "uniform",
@@ -1211,6 +1211,72 @@
           "schema": "optbench.start/v2",
           "start": "66",
           "success": false,
+          "threshold": -173.92742624400097,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -173.252351220191,
+          "failure": "cap",
+          "force_calls": 2000000,
+          "lowest_energy": -173.252351220191,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "67",
+          "success": false,
+          "threshold": -173.92742624400097,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -173.25235747853657,
+          "failure": "cap",
+          "force_calls": 2000000,
+          "lowest_energy": -173.25235747853657,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "68",
+          "success": false,
+          "threshold": -173.92742624400097,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -171.9925765065949,
+          "failure": "cap",
+          "force_calls": 2000000,
+          "lowest_energy": -171.9925765065949,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "69",
+          "success": false,
+          "threshold": -173.92742624400097,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": true,
+          "counter": "harness",
+          "energy": -173.92784872230501,
+          "failure": null,
+          "force_calls": 23719,
+          "lowest_energy": -173.92784872230501,
+          "reasons": [],
+          "schema": "optbench.start/v2",
+          "start": "71",
+          "success": true,
           "threshold": -173.92742624400097,
           "verify_calls": 0
         }
