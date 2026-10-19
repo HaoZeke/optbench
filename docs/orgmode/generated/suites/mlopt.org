@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>Pyamff</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="mlopt/C2H4">
    <th scope="row"><a href="#C2H4">C2H4</a></th>
    <td data-code="eOn">—</td>
@@ -17,6 +17,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="Pyamff" data-template="pyamff/c2h4-stock" data-par2="1"><span class="bench-score">1</span><a href="#C2H4-templates">pyamff/c2h4-stock</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -33,6 +34,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="Pyamff">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -47,15 +49,20 @@
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">No committed harness run.</p>
+   <p class="bench-gaps">Files with no per-start harness record stay off the ranked table.</p>
+   <figure class="bench-plot"><a href="../../_static/board/mlopt-C2H4-profile.svg"><picture><source srcset="../../_static/board/mlopt-C2H4-profile.webp" type="image/webp"><img src="../../_static/board/mlopt-C2H4-profile.png" alt="Dolan-More profile for mlopt/C2H4" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="../../_static/board/mlopt-C2H4-cost.svg"><picture><source srcset="../../_static/board/mlopt-C2H4-cost.webp" type="image/webp"><img src="../../_static/board/mlopt-C2H4-cost.png" alt="Cost versus success for mlopt/C2H4" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="C2H4-templates">
-   <summary>All templates (0 ranked)</summary>
+   <summary>All templates (1 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="mlopt/C2H4">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="13">No full harness row.</td></tr>
+   <tr><td data-field="template">pyamff/c2h4-stock</td><td data-field="version">Pyamff 0.1.0-beta</td><td data-field="commit">240f51d01ca2</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">1</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.928652</td><td data-field="wilson_high">1</td><td data-field="median_calls">1</td><td data-field="mean_calls">1</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">50</td></tr>
    </tbody></table></div>
+   <h3>Not scored</h3><ul>
+   <li>pyamff/c2h4-lbfgs10-7-fcoeff0-1: no per-start record</li>
+   </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="C2H4-legacy">
    <h3>Legacy 2014 archive</h3>

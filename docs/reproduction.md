@@ -151,7 +151,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | C2H4/pyamff-adam10-7-fcoeff0 | — | — | not rerun |
 | C2H4/pyamff-adam10-7-fcoeff0_1 | — | — | not rerun |
 | C2H4/pyamff-lbfgs10-7-fcoeff0 | — | — | not rerun |
-| C2H4/pyamff-lbfgs10-7-fcoeff0_1 | — | — | not rerun |
+| C2H4/pyamff-lbfgs10-7-fcoeff0_1 | — | — | not rerun; residual |
 | C2H4/pyamff-rprop10-7-fcoeff0 | — | — | not rerun |
 | C2H4/pyamff-rprop10-7-fcoeff0_1 | — | — | not rerun |
 | emt-pt38/pyamff-adam10-7-fcoeff0 | — | — | not rerun |
@@ -217,6 +217,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 ## Residuals inside the band
 
+- mlopt/C2H4/pyamff-lbfgs10-7-fcoeff0_1: Pyamff 0.1.0-beta master 240f51d0 is the ranked harness row pyamff/c2h4-stock. Stock settings on the archived C2H4 trajectory, fifty fresh starts, and loss-gradient tolerance 0.10 stop at the first evaluation (1 harness call, 0 failures). The archived mean epoch is 23314.46. The 8037eb98 campaign stays an unranked diagnostic.
 - tsopt/LJ38/pele_cd: Inside the 10% band (263.52 vs 254). The same xyz-versus-con starting set as ts-ffd. findTS_local.py for the CD row does not pass orthogZeroEigs; the harness template sets orthog translations-rotations. The paper baseline is this 2014-stop mean, not the harness-stop mean 335.06.
 - tsopt/LJ38/pele_ffd: Inside the 10% band (207.51 vs 192). Archive run.sh unpacks coords-xyz.tar.gz (200 xyz, max pair about 4.4). The harness problem points at coords-con.tar.gz (max pair about 37). Kabsch RMS is about 6.33, so the sets are not the same geometry. Neither set has a pair past cutoff 40, and both drivers use RMS tolerance 1e-3/sqrt(114). The 8% residual is the starting set. The paper baseline is this 2014-stop mean, not the harness-stop mean 254.48.
 
