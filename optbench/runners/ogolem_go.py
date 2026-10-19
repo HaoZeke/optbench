@@ -14,8 +14,11 @@ written as one xyz seed. The RNG seed is the start index plus one.
 
 A start succeeds when the problem states ``energy_above_minimum`` and a
 reference energy, the lowest harness energy is at or below that sum, and
-the call count is under the cap. Without that rule the start is not a
-success. A finite finish under the cap is ``wrong_stationary``.
+the call count is under the cap. The reference is the problem's Cambridge
+energy when that block is present. The cap is ``max_force_calls`` when the
+problem states one, and the template ``failure_cap`` otherwise. Without
+that rule the start is not a success. A finite finish under the cap is
+``wrong_stationary``.
 """
 
 from __future__ import annotations
@@ -398,12 +401,36 @@ def _threshold(problem: dict, template: dict) -> float | None:
     tolerance = convergence.get("energy_above_minimum")
     if tolerance in (None, ""):
         return None
-    reference = template.get("reference_energy")
-    if reference in (None, ""):
+    problem_ref = (problem.get("reference") or {}).get("energy")
+    template_ref = template.get("reference_energy")
+    if problem_ref not in (None, ""):
+        reference = float(problem_ref)
+        if template_ref not in (None, "") and abs(float(template_ref) - reference) > 1e-9:
+            raise ValueError(
+                f"{template.get('id', 'template')} reference_energy {template_ref} "
+                f"is not the problem reference {reference}"
+            )
+    elif template_ref not in (None, ""):
+        reference = float(template_ref)
+    else:
         reference = convergence.get("minimum", convergence.get("reference_energy"))
-    if reference in (None, ""):
-        return None
+        if reference in (None, ""):
+            return None
     return float(reference) + float(tolerance)
+
+
+def _force_cap(problem: dict, template: dict) -> int:
+    """Problem ``max_force_calls`` when stated, otherwise the template cap."""
+    stated = (problem.get("convergence") or {}).get("max_force_calls")
+    raw = template.get("failure_cap")
+    if stated not in (None, ""):
+        cap = int(stated)
+        if raw not in (None, "") and int(raw) != cap:
+            raise ValueError(f"{template.get('id', 'template')} failure_cap {raw} is not the problem cap {cap}")
+        return cap
+    if raw in (None, ""):
+        raise ValueError(f"{template.get('id', 'template')} needs failure_cap")
+    return int(raw)
 
 
 def _ogolem_settings(template: dict) -> dict:
@@ -775,10 +802,7 @@ def run_template(
     stated = template.get("problem")
     if stated and stated != problem["id"]:
         raise ValueError(f"{template['id']} is for {stated}, not {problem['id']}")
-    cap = template.get("failure_cap")
-    if cap in (None, ""):
-        raise ValueError(f"{template['id']} needs failure_cap")
-    cap = int(cap)
+    cap = _force_cap(problem, template)
     settings = _ogolem_settings(template)
     if settings["pool"] < 2:
         raise ValueError(f"{template['id']} pool_size must be at least 2")

@@ -17,6 +17,8 @@ from optbench.runners.ogolem_go import (
     LJ38_STOP_ENERGY,
     XYZ_SCALE,
     HarnessLJServer,
+    _force_cap,
+    _threshold,
     center_cluster,
     classify_start,
     jars_ready,
@@ -70,6 +72,24 @@ def test_lj38_stop_is_the_archived_eon_threshold():
     assert float(template["reference_energy"]) + float(problem["convergence"]["energy_above_minimum"]) == pytest.approx(
         LJ38_STOP_ENERGY
     )
+
+
+def test_larger_clusters_use_the_cambridge_window_and_the_problem_cap():
+    expected = {
+        "lj75": (-397.492331, 1_000_000, 200),
+        "lj98": (-543.665361, 1_000_000_000, 100),
+        "lj150": (-893.310258, 10_000_000, 100),
+    }
+    for slug, (energy, cap, starts) in expected.items():
+        problem = resolve_problem(ROOT, f"globalopt/{slug}")
+        template = load_template(ROOT, f"ogolem/{slug}")
+        assert float(problem["reference"]["energy"]) == energy
+        assert int(problem["sample"]["starts"]) == starts
+        assert _force_cap(problem, template) == cap
+        assert _threshold(problem, template) == pytest.approx(energy + 0.001)
+    lj38 = resolve_problem(ROOT, "globalopt/lj38")
+    assert _threshold(lj38, load_template(ROOT, "ogolem/lj38")) == pytest.approx(LJ38_STOP_ENERGY)
+    assert _force_cap(lj38, load_template(ROOT, "ogolem/lj38")) == 5_000_000
 
 
 def test_archive_counts_do_not_double_count_xyz(tmp_path: Path):

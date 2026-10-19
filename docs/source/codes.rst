@@ -473,6 +473,17 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 5, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
+   <tr data-problem="globalopt/lj75" data-template="ase-globalopt/lj75-basinhopping">
+   <td>lj75</td>
+   <td data-field="template">ase-globalopt/lj75-basinhopping</td>
+   <td data-field="version">ASE 3.29.0</td>
+   <td data-field="commit">f27c0005ae6a</td>
+   <td data-field="par2_mean">2e+06</td>
+   <td data-field="mean_calls">1e+06</td>
+   <td data-field="median_calls">1e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
    <tr data-problem="minimization/lj38" data-template="ase/lj38-lbfgs-tuned">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="template">ase/lj38-lbfgs-tuned</td>
@@ -1081,9 +1092,4 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>
-   <p>No full ranked run</p><ul>
-   <li>lj150: partial.</li>
-   <li>lj75: partial.</li>
-   <li>lj98: partial.</li>
-   </ul>
    </section>

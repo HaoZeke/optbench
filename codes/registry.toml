@@ -173,6 +173,14 @@ commit = "cce35a376d929852ab1e80e98105c0d13d784b8d"
 committed = "2026-03-02"
 note = "Snapshot built from source. The printed version is 2016.CURRENT. The Lennard-Jones rows use the Ar38 Sweden example (pool 100, 19900 iterations, LBFGS, cell 60 bohr) and the harness potential, not LennardJonesFF. One reduced sigma is the Ar sigma 6.434516991 bohr so the built-in collision radius still fits a packed cluster. The harness backend is codes/ogolem/OptbenchBackend.java on the exploded classpath."
 
+[[template]]
+id = "ase-globalopt/lj75-basinhopping"
+code = "ase"
+problem = "globalopt/lj75"
+profile = "default"
+task = "basin-hopping"
+ranked = true
+
 # generated ASE and Sella templates
 
 [[template]]
