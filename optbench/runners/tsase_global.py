@@ -124,16 +124,19 @@ def energy_threshold(problem: dict) -> float | None:
     """Energy at or below which a start has found the minimum.
 
     ``None`` when the problem does not state ``energy_above_minimum``.
-    Only Lennard-Jones 38 has a reference structure here. Another problem
-    that states the window is refused, so it is not scored against the
-    38-atom energy.
+    A stated reference energy is the Cambridge value on the problem.
+    Lennard-Jones 38 falls back to the harness energy of the published
+    structure when that reference is absent.
     """
     window = (problem.get("convergence") or {}).get("energy_above_minimum")
     if window in (None, ""):
         return None
-    if problem.get("id") != "globalopt/lj38":
-        raise ValueError(f"{problem['id']} states an energy window and this runner has no reference for it")
-    return lj38_minimum_energy() + float(window)
+    reference = (problem.get("reference") or {}).get("energy")
+    if reference not in (None, ""):
+        return float(reference) + float(window)
+    if problem.get("id") == "globalopt/lj38":
+        return lj38_minimum_energy() + float(window)
+    raise ValueError(f"{problem['id']} states an energy window and has no reference energy")
 
 
 def judge_global(

@@ -24,12 +24,15 @@ def test_published_lj38_minimum_matches_the_harness_potential():
     assert abs(energy - PUBLISHED_LJ38_ENERGY) < 1e-6
     problem = resolve_problem(ROOT, "globalopt/lj38")
     threshold = energy_threshold(problem)
-    assert threshold == pytest.approx(energy + 0.001)
+    assert threshold == pytest.approx(-173.928427 + 0.001)
+    assert abs(energy - (-173.928427)) < 1e-5
 
 
-def test_lj75_has_no_energy_window_on_this_main():
+def test_lj75_window_is_the_cambridge_minimum():
     problem = resolve_problem(ROOT, "globalopt/lj75")
-    assert energy_threshold(problem) is None
+    assert energy_threshold(problem) == pytest.approx(-397.492331 + 0.001)
+    assert int(problem["convergence"]["max_force_calls"]) == 1_000_000
+    assert int(problem["sample"]["starts"]) == 200
 
 
 def test_success_is_the_energy_window_under_the_cap():
@@ -116,7 +119,8 @@ def test_templates_use_the_registry_pin_and_the_problem_stop():
         assert template["tuning"] in {"default", "tuned"}
         problem = resolve_problem(ROOT, template["problem"])
         _check_stop(problem, template)
-        assert int(template["stop"]["max_force_calls"]) == 2_000_000
+        expected_cap = 1_000_000 if template["problem"] == "globalopt/lj75" else 2_000_000
+        assert int(template["stop"]["max_force_calls"]) == expected_cap
     tuned = next(row for row in found if row["id"] == "tsase/lj38-basinhopping-tuned")
     described = describe_parameters(tuned["tsase"], -173.927)
     assert described["fmax"] == 0.01

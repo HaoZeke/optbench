@@ -6,11 +6,11 @@ code_version = "1.0"
 commit = "98aac60b5d9905e81ee4e6b8c385f169258d0218"
 algorithm = "minima hopping"
 tuning = "default"
-note = "Library constructor of tsase.optimize.minimahopping.MinimaHopping. T0 is 1000 K, Ediff0 is 0.5, mdmin is 2, the timestep is 0.1 fs, fmax is 0.05, and the local optimizer is QuasiNewton. The dimer and the energy comparison use the harness potential. globalopt/lj75 does not state energy_above_minimum, so a start records the lowest harness energy and the call count and the row stays partial. Each start is one process with seed 314159."
+note = "Library constructor of tsase.optimize.minimahopping.MinimaHopping. T0 is 1000 K, Ediff0 is 0.5, mdmin is 2, the timestep is 0.1 fs, fmax is 0.05, and the local optimizer is QuasiNewton. The dimer and the energy comparison use the harness potential. The search stops at the Cambridge N=75 minimum plus 0.001, or at 1000000 force calls. That cap is the problem value, above the archived GMIN maximum of 310110. Each start is one process with seed 314159."
 
 [tsase]
 method = "minima_hopping"
 seed = 314159
 
 [stop]
-max_force_calls = 2000000
+max_force_calls = 1000000
