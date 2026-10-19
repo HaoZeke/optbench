@@ -1074,4 +1074,30 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>
+   <h3>Gman</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>nudged elastic band</td>
+   <td>r147</td>
+   <td>vtst-lbfgs-r</td>
+   <td><a href="https://theory.cm.utexas.edu/svn/vtstcode">https://theory.cm.utexas.edu/svn/vtstcode</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="neb/Pt-heptamer" data-template="gman/neb-pt-glbfgs-hess">
+   <td>Pt-heptamer</td>
+   <td data-field="template">gman/neb-pt-glbfgs-hess</td>
+   <td data-field="version">Gman vtst-r128</td>
+   <td data-field="commit">vtst-lbfgs-r</td>
+   <td data-field="par2_mean">358.308</td>
+   <td data-field="mean_calls">358.308</td>
+   <td data-field="median_calls">362</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   </tbody></table></div>
    </section>

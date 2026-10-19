@@ -111,6 +111,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+    "repro/neb-pt-heptamer-gman-glbfgs-hess": "8975ea499f6c2a059a6db9cf4f34e70eeeca76c9",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -189,6 +190,7 @@ MATCHES: list[dict] = [
     {"key": "neb/Pt-heptamer/eon-cg", "template": "eon-cg", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-cg.dat", "cause": "heptamer_cg", "hold": ["eon-client/neb-pt-cg"]},
     {"key": "neb/Pt-heptamer/eon-fire", "template": "eon-fire", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-fire.dat", "hold": ["eon-client/neb-pt-fire"]},
     {"key": "neb/Pt-heptamer/eon-qm", "template": "eon-qm", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-qm.dat", "hold": ["eon-client/neb-pt-qm"]},
+    {"key": "neb/Pt-heptamer/gman-glbfgs-hess", "template": "gman/neb-pt-glbfgs-hess", "branch": "repro/neb-pt-heptamer-gman-glbfgs-hess", "path": "results/campaign/gman-vtst-r128-neb-pt-glbfgs-hess.dat", "cause": "gman_glbfgs_hess"},
     # saddle search
     {"key": "saddle-search/pt-island/eon-dimer", "template": "eon-svn/saddle-pt-dimer", "branch": "main", "path": "results/campaign/eon-3.5.0-saddle-pt-classic.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "cause": "eon_saddle_count"},
     {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-davidson-sm50", "template": "softsaddle/saddle-davidson-sm50", "branch": "cells/softsaddle/ts-reps", "path": "results/campaign/softsaddle-2019.04-saddle-davidson-sm50.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
@@ -287,6 +289,14 @@ CAUSE_TEXT = {
         "The harness records 7 failures: 5 RuntimeError LineSearch failed (ASE 3.8.2 already raises that; ASE 3.6.0 is not on PyPI) "
         "and 2 Hessian index 1 after the Euclidean force norm is under 0.01. "
         "The Wilson interval on 0 failures out of 1000 is about 0 to 3.83."
+    ),
+    "gman_glbfgs_hess": (
+        "Inside the 10% band (44 vs 48). "
+        "Anonymous SVN does not export Gman r235. "
+        "The step is VTST lbfgs.F file revision 128, exported at peg r147 (2011-10-10), Hessian branch: LLINEOPT false, LGLOBAL true, memory 25, inverse curvature 0.05, maxmove 0.2. "
+        "The step length cap is maxmove times the square root of the image count. "
+        "The band is 8 interior images, spring 5, climbing image, improved tangent, and Fmag 0.01 on the shifted Morse slab. "
+        "The score is the archived opt.py rule: pot.count() divided by 8, then the %d truncation of the mean."
     ),
     "akmc_vs_langevin": (
         "The archive rows are Langevin parallel replica. The harness rows are AKMC. "

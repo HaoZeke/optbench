@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+47 reproduced, 29 not reproduced, 75 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -171,7 +171,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | Pt-heptamer/eon-qm | force_calls 164 | 165 | reproduced |
 | Pt-heptamer/gman-cg | — | — | not rerun |
 | Pt-heptamer/gman-fire | — | — | not rerun |
-| Pt-heptamer/gman-glbfgs-hess | — | — | not rerun |
+| Pt-heptamer/gman-glbfgs-hess | force_calls 48 | 44 | reproduced; residual |
 | Pt-heptamer/gman-glbfgs-line | — | — | not rerun |
 | Pt-heptamer/gman-lbfgs-hess | — | — | not rerun |
 | Pt-heptamer/gman-lbfgs-line | — | — | not rerun |
@@ -217,6 +217,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 ## Residuals inside the band
 
+- neb/Pt-heptamer/gman-glbfgs-hess: Inside the 10% band (44 vs 48). Anonymous SVN does not export Gman r235. The step is VTST lbfgs.F file revision 128, exported at peg r147 (2011-10-10), Hessian branch: LLINEOPT false, LGLOBAL true, memory 25, inverse curvature 0.05, maxmove 0.2. The step length cap is maxmove times the square root of the image count. The band is 8 interior images, spring 5, climbing image, improved tangent, and Fmag 0.01 on the shifted Morse slab. The score is the archived opt.py rule: pot.count() divided by 8, then the %d truncation of the mean.
 - tsopt/LJ38/pele_cd: Inside the 10% band (263.52 vs 254). The same xyz-versus-con starting set as ts-ffd. findTS_local.py for the CD row does not pass orthogZeroEigs; the harness template sets orthog translations-rotations. The paper baseline is this 2014-stop mean, not the harness-stop mean 335.06.
 - tsopt/LJ38/pele_ffd: Inside the 10% band (207.51 vs 192). Archive run.sh unpacks coords-xyz.tar.gz (200 xyz, max pair about 4.4). The harness problem points at coords-con.tar.gz (max pair about 37). Kabsch RMS is about 6.33, so the sets are not the same geometry. Neither set has a pair past cutoff 40, and both drivers use RMS tolerance 1e-3/sqrt(114). The 8% residual is the starting set. The paper baseline is this 2014-stop mean, not the harness-stop mean 254.48.
 
