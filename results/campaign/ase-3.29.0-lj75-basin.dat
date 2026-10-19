@@ -9,16 +9,16 @@ commit f27c0005ae6a67ea419f996e728668865bfc1f86
 algorithm BasinHopping
 tuning default
 counter harness
-n 10
-nfailed 10
+n 11
+nfailed 11
 par2_mean 2000000
 median 2000000
 median_low 2000000
 median_high 2000000
 wilson_low 0
-wilson_high 0.2775327999
+wilson_high 0.258832967
 success_rate 0
-n_cap 10
+n_cap 11
 n_wrong_stationary 0
 n_divergence 0
 n_crash 0
@@ -27,5 +27,5 @@ force_calls_min 1000000
 force_calls_max 1000000
 force_calls_median 1000000
 energy_min -357.6825201
-energy_max 205180291.5
+energy_max 2897015797
 partial true
