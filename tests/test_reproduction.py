@@ -60,6 +60,12 @@ def test_pele_paper_baseline_is_the_2014_stop():
     assert ("tsopt/LJ38", "sella/lj38-ts-default") not in held.templates
     assert ("double-ended-saddle-search/lj38", "eon-client/de-lj38-ci-swdneb") in held.templates
     assert "results/campaign/eon-3.5.0-saddle-pt-classic.dat" in held.paths
+    morse = ledger["minimization/morse-bulk/ase-preconLBFGS"]
+    assert morse["status"] == "reproduced"
+    assert morse["rerun"]["path"] == "results/campaign/ase-3.19.1-morse-preconlbfgs-tuned.dat"
+    assert morse["checks"][0]["rerun"] == 34.0
+    assert ("minimization/morse-bulk", "ase/morse-preconlbfgs-tuned", "3.29.0") in held.versions
+    assert ("minimization/morse-bulk", "ase/morse-preconlbfgs-tuned") not in held.templates
 
 
 def test_a_paper_baseline_outside_the_archive_fails(tmp_path: Path):

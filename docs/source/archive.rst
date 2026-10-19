@@ -381,7 +381,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="minimization-morse-bulk-ase-preconlbfgs">
    <td class="num">2</td>
-   <td class="text">ase-preconLBFGS · not reproduced</td>
+   <td class="text">ase-preconLBFGS</td>
    <td class="text"></td>
    <td class="num">34</td>
    <td class="num">47</td>
