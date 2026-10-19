@@ -4,7 +4,7 @@ suite = "hTST"
 problem = "Pt"
 contract = "partial"
 entry_count = 11
-remark = "A start is one barrier window. The window closes when each reference barrier has been matched once. Force calls are the sad-fcs sum of that window. The rank uses PAR-2 on that cap. A missing rate window does not drop a finished barrier window. The 2014 Pt archive used shifted Morse."
+remark = "A start is one barrier window. The window closes when each reference barrier has been matched once. Force calls are the harness tally for that window. The rank uses PAR-2 on that cap. A missing rate window does not drop a finished barrier window. The 2014 Pt archive used shifted Morse."
 
 [convergence]
 max_force_calls = 20000000
