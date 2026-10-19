@@ -1,0 +1,17 @@
+# counter harness socket POSDATA
+# force_calls count raw potential evaluations and are not divided by the image count
+# the mean is round-half-even over successes; cap, force, or Hessian index other than 1 is a failure
+# problem neb/Pt-heptamer
+successes 0
+nfailed 5
+n 5
+transition_states 0
+code i-PI
+code_version 3.3.1
+commit a6b350327ce7cb8fdcc17192b1b9af88513b662f
+algorithm String
+template ipi/string
+tuning default
+counter harness
+problem neb/Pt-heptamer
+images 8
