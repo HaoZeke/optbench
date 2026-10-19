@@ -450,6 +450,22 @@ class _StepTrajectory:
         return None
 
 
+def _radius_gap(pos1, pos2) -> float:
+    """Lower bound on the translated match distance.
+
+    Distances from each centre of mass are translation invariant. Any pairing
+    leaves some atom at least this far from its partner, so the greedy match
+    is at least this large.
+    """
+    import numpy as np
+
+    def radii(pos):
+        centred = pos - pos.mean(axis=0)
+        return np.sort(np.sqrt(np.einsum("ij,ij->i", centred, centred)))
+
+    return float(np.max(np.abs(radii(pos1) - radii(pos2))))
+
+
 def _one_element(atoms) -> bool:
     symbols = atoms.get_chemical_symbols()
     return bool(symbols) and all(symbol == symbols[0] for symbol in symbols)
@@ -572,11 +588,17 @@ class _MinimaRuntime:
             return exists
 
         def unique(self):
+            import numpy as np
+
             closest = 99999.0
             compare = ComparePositions(translate=True)
             self._read_minima()
             threshold = float(self._minima_threshold)
+            current = np.asarray(self._atoms.positions, dtype=float)
             for minimum in reversed(self._minima):
+                other = np.asarray(minimum.positions, dtype=float)
+                if _radius_gap(current, other) >= threshold:
+                    continue
                 distance = float(compare(minimum, self._atoms))
                 if distance < closest:
                     closest = distance

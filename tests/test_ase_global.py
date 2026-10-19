@@ -254,6 +254,11 @@ def test_minima_identity_matches_ase_compare():
         atoms2 = Atoms("C38", positions=pos2, pbc=False)
         assert abs(float(translated(atoms1, atoms2)) - _translated_dmax(pos1, pos2)) < 1e-12
         assert abs(float(plain(atoms1, atoms2)) - _greedy_dmax(pos1, pos2)) < 1e-12
+        from optbench.ase_global import _radius_gap
+
+        gap = _radius_gap(pos1, pos2)
+        distance = _translated_dmax(pos1, pos2)
+        assert gap <= distance + 1e-9
 
 
 def test_minima_hopping_repeats_for_one_seed(tmp_path: Path):
