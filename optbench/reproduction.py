@@ -111,6 +111,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+    "repro/minimization-morse-bulk-ase-fire": "1aab7eb9dc3c401e5e844268025d7fa39a27e063",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -146,7 +147,7 @@ MATCHES: list[dict] = [
     {"key": "minimization/morse-bulk/optim", "template": "optim/morse-lbfgs-tuned", "branch": "cells/optim/min", "path": "results/campaign/optim-02aaf45245af-morse-lbfgs-tuned.dat", "cause": "optim_morse_memory"},
     {"key": "minimization/morse-bulk/pele-lbfgs", "template": "pele/morse-lbfgs", "branch": "cells/pele/min", "path": "results/campaign/pele-b7081b93-morse-lbfgs.dat", "cause": "pele_morse"},
     {"key": "minimization/morse-bulk/ase-lbfgs", "template": "ase/morse-lbfgs-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-morse-lbfgs-tuned.dat", "cause": "ase_morse_script"},
-    {"key": "minimization/morse-bulk/ase-fire", "template": "ase/morse-fire-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-morse-fire-tuned.dat", "cause": "ase_morse_script"},
+    {"key": "minimization/morse-bulk/ase-fire", "template": "ase/morse-fire-tuned", "branch": "repro/minimization-morse-bulk-ase-fire", "path": "results/campaign/ase-3.29.0-morse-fire-tuned.dat"},
     {"key": "minimization/morse-bulk/ase-preconLBFGS", "template": "ase/morse-preconlbfgs-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-morse-preconlbfgs-tuned.dat", "cause": "ase_morse_script"},
     # lowest eigenvector
     {"key": "lowest-eigenvector/lj38/eon-dimer-cg", "template": "eon-client/low-lj38-dimer-cg", "branch": "main", "path": "results/campaign/eon-client-low-lj38-dimer-cg.dat"},
@@ -225,8 +226,8 @@ CAUSE_TEXT = {
         "Dimer and climbing-image on that kernel reproduce. Lanczos does not, and the failure count is 0 against 5 or 8."
     ),
     "ase_morse_script": (
-        "ASE 3.29 with the archived Morse script (L-BFGS memory 20, maxstep 0.2, alpha 25; FIRE maxstep 0.2; PreconLBFGS Exp A 3) "
-        "scores 32, 113, and 29 against 53.8, 147.47, and 34. "
+        "ASE 3.29 with the archived Morse L-BFGS script (memory 20, maxstep 0.2, alpha 25) scores 32 against 53.8. "
+        "PreconLBFGS Exp A 3 scores 29 against 34. "
         "Constructor-default L-BFGS scores 53, next to 53.8, but that is not the archived alpha and memory. "
         "eOn Morse L-BFGS and FIRE on the same bulk file reproduce, so the geometry set is not the split."
     ),
