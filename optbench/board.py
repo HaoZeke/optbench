@@ -15,7 +15,8 @@ An asv result that covers one start is a smoke run and is partial.
 The full set is the problem file's sample, or the Morse archive when
 that file gives no sample count. It is not the largest campaign file.
 A result that sets ``ranked false`` stays off the ranked table.
-A template that does not reproduce the 2014 archive stays off it too.
+A template that does not reproduce the 2014 archive stays off it too,
+except a ranked finding whose gap stays in the ledger.
 Partial rows stay in the output. A campaign file and an asv track for
 the same run are one row. Only the newest full version of a template
 is ranked. Older full versions stay in the history list.

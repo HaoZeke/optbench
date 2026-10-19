@@ -14,7 +14,7 @@
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin" data-template="rgmin/lj38-dogleg" data-par2="81.881"><span class="bench-score">81.881</span><a href="#lj38-templates">rgmin/lj38-dogleg</a></td>
    <td data-code="rgsaddle">—</td>
-   <td data-code="ASE" data-template="ase/lj38-lbfgs-tuned" data-par2="395.645"><span class="bench-score">395.645</span><a href="#lj38-templates">ase/lj38-lbfgs-tuned</a></td>
+   <td data-code="ASE" data-template="ase/lj38-lbfgslinesearch-default" data-par2="392.773"><span class="bench-score">392.773</span><a href="#lj38-templates">ase/lj38-lbfgslinesearch-default</a></td>
    <td data-code="Sella" data-template="sella/lj38-min-tuned" data-par2="253.921"><span class="bench-score">253.921</span><a href="#lj38-templates">sella/lj38-min-tuned</a></td>
    <td data-code="pysisyphus" data-template="pysisyphus/cg-lj38" data-par2="15124.7"><span class="bench-score">15124.7</span><a href="#lj38-templates">pysisyphus/cg-lj38</a></td>
    <td data-code="artn">—</td>
@@ -70,7 +70,7 @@
    <figure class="bench-plot"><a href="../../_static/board/minimization-lj38-profile.svg"><picture><source srcset="../../_static/board/minimization-lj38-profile.webp" type="image/webp"><img src="../../_static/board/minimization-lj38-profile.png" alt="Dolan-More profile for minimization/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/minimization-lj38-cost.svg"><picture><source srcset="../../_static/board/minimization-lj38-cost.webp" type="image/webp"><img src="../../_static/board/minimization-lj38-cost.png" alt="Cost versus success for minimization/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="lj38-templates">
-   <summary>All templates (103 ranked)</summary>
+   <summary>All templates (104 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="minimization/lj38">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
@@ -101,6 +101,7 @@
    <tr><td data-field="template">rgmin/lj38-lbfgs</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">f15726f1c798</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">294.105</td><td data-field="success_rate">0.996</td><td data-field="wilson_low">0.98976</td><td data-field="wilson_high">0.998443</td><td data-field="median_calls">206</td><td data-field="mean_calls">214.951</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 4</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">rgmin/lj38-lbfgs-tuned</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">294.105</td><td data-field="success_rate">0.996</td><td data-field="wilson_low">0.98976</td><td data-field="wilson_high">0.998443</td><td data-field="median_calls">206</td><td data-field="mean_calls">214.951</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 4</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">rgmin/lj38-lbfgs-tuned</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">f15726f1c798</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">294.105</td><td data-field="success_rate">0.996</td><td data-field="wilson_low">0.98976</td><td data-field="wilson_high">0.998443</td><td data-field="median_calls">206</td><td data-field="mean_calls">214.951</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 4</td><td data-field="n">1000</td></tr>
+   <tr><td data-field="template">ase/lj38-lbfgslinesearch-default</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">392.773</td><td data-field="success_rate">0.997</td><td data-field="wilson_low">0.991217</td><td data-field="wilson_high">0.998979</td><td data-field="median_calls">322</td><td data-field="mean_calls">333.794</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 3</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">ase/lj38-lbfgs-tuned</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">395.645</td><td data-field="success_rate">0.998</td><td data-field="wilson_low">0.992737</td><td data-field="wilson_high">0.999451</td><td data-field="median_calls">319</td><td data-field="mean_calls">375.645</td><td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 0</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">ase/lj38-lbfgs-tuned</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">asv</td><td data-field="current">yes</td><td data-field="par2_mean">453.075</td><td data-field="success_rate">0.995</td><td data-field="wilson_low">0.988349</td><td data-field="wilson_high">0.997862</td><td data-field="median_calls">319</td><td data-field="mean_calls">375.645</td><td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 3</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">ase/lj38-bfgslinesearch-tuned</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">506.049</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.996173</td><td data-field="wilson_high">1</td><td data-field="median_calls">490.5</td><td data-field="mean_calls">506.049</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">1000</td></tr>
@@ -421,7 +422,7 @@
    </tr>
    <tr id="minimization-lj38-ase-lbfgslinesearch">
    <td class="num">14</td>
-   <td class="text">ase-lbfgslinesearch</td>
+   <td class="text">ase-lbfgslinesearch · not reproduced</td>
    <td class="text">ASE 3.6.0</td>
    <td class="num">417</td>
    <td class="num">862</td>

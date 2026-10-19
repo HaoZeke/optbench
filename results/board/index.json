@@ -19501,6 +19501,7 @@
           "ase/lj38-lbfgs-default 3.29.0 default campaign f27c000": 0.4584686833962434,
           "ase/lj38-lbfgs-tuned 3.29.0 tuned asv f27c000": 0.48465829301900976,
           "ase/lj38-lbfgs-tuned 3.29.0 tuned campaign f27c000": 0.4855613830060017,
+          "ase/lj38-lbfgslinesearch-default 3.29.0 default campaign f27c000": 0.4824005680515299,
           "ase/lj38-lbfgslinesearch-tuned 3.29.0 tuned campaign, asv f27c000": 0.4033801941897348,
           "ase/lj38-preconfire-default 3.29.0 default asv f27c000": 0.023179309666126555,
           "ase/lj38-preconfire-default 3.29.0 default campaign f27c000": 0.023329824663958547,
@@ -19701,6 +19702,13 @@
             0.21,
             0.907,
             0.99
+          ],
+          "ase/lj38-lbfgslinesearch-default 3.29.0 default campaign f27c000": [
+            0.0,
+            0.0,
+            0.173,
+            0.931,
+            0.997
           ],
           "ase/lj38-lbfgslinesearch-tuned 3.29.0 tuned campaign, asv f27c000": [
             0.0,
@@ -20329,6 +20337,7 @@
           "ase/lj38-lbfgs-default 3.29.0 default campaign f27c000": 0.958,
           "ase/lj38-lbfgs-tuned 3.29.0 tuned asv f27c000": 0.995,
           "ase/lj38-lbfgs-tuned 3.29.0 tuned campaign f27c000": 0.998,
+          "ase/lj38-lbfgslinesearch-default 3.29.0 default campaign f27c000": 0.997,
           "ase/lj38-lbfgslinesearch-tuned 3.29.0 tuned campaign, asv f27c000": 0.993,
           "ase/lj38-preconfire-default 3.29.0 default asv f27c000": 0.998,
           "ase/lj38-preconfire-default 3.29.0 default campaign f27c000": 1.0,
@@ -21595,6 +21604,51 @@
           "tuning": "tuned",
           "wilson_high": 0.9984434118595916,
           "wilson_low": 0.9897604437227377
+        },
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": 10000,
+          "code": "ASE",
+          "code_version": "3.29.0",
+          "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
+          "comparable": true,
+          "counter": "harness",
+          "current": true,
+          "entry": "ase-3.29.0-lj38-lbfgslinesearch-default",
+          "failures": {
+            "cap": 0,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 3
+          },
+          "full_n": 1000,
+          "history": false,
+          "max_calls": 642.0,
+          "mean_calls": 333.794,
+          "mean_per_image": null,
+          "median": 322.0,
+          "median_calls": 322.0,
+          "median_high": 328.0,
+          "median_low": 318.0,
+          "median_per_image": null,
+          "min_calls": 203.0,
+          "n": 1000,
+          "nfailed": 3,
+          "note": "starts.jsonl",
+          "par2_mean": 392.773,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/ase-3.29.0-lj38-lbfgslinesearch-default.dat",
+          "problem": "minimization/lj38",
+          "registry_match": true,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 0.997,
+          "template": "ase/lj38-lbfgslinesearch-default",
+          "tuning": "default",
+          "wilson_high": 0.9989792161188614,
+          "wilson_low": 0.9912169859464969
         },
         {
           "asv_commit": "",
@@ -42086,7 +42140,7 @@
       "title": "pt-island"
     }
   },
-  "ranked_count": 440,
+  "ranked_count": 441,
   "schema": "optbench.board/v1",
   "unmapped": [
     {

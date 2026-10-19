@@ -38,7 +38,7 @@ def test_the_ledger_covers_the_oracle_in_order():
             assert row["cause"]
         if (row.get("rerun") or {}).get("paper_baseline"):
             assert status == "reproduced"
-    assert counts == {"reproduced": 47, "not_reproduced": 28, "not_rerun": 76}
+    assert counts == {"reproduced": 46, "not_reproduced": 29, "not_rerun": 76}
     assert reproduction_errors(ROOT) == []
 
 
@@ -84,26 +84,37 @@ def test_a_paper_baseline_outside_the_archive_fails(tmp_path: Path):
     assert any("force_calls" in line and "1000" in line for line in errors)
 
 
-def test_lj38_linesearch_uses_the_archive_failure_rule():
+def test_lj38_linesearch_stock_is_a_ranked_finding():
     row = next(
         item
         for item in load_ledger(ROOT / "oracle" / "reproduction.jsonl")
         if row_id(item) == "minimization/lj38/ase-lbfgslinesearch"
     )
-    assert row["status"] == "reproduced"
-    assert row["failure_check"]["rerun"] == 0.0
+    assert row["status"] == "not_reproduced"
+    assert row["cause"] == "ase_lbfgs_stock"
+    assert row["rerun"]["paper_baseline"] is False
+    assert row["rerun"]["code_version"] == "3.29.0"
+    assert row["rerun"]["template"] == "ase/lj38-lbfgslinesearch-default"
+    assert row["checks"][0]["archive"] == 417.0
+    assert row["checks"][0]["rerun"] == 334.0
+    assert row["checks"][0]["ok"] is False
+    assert row["failure_check"]["rerun"] == 3.0
     assert row["failure_check"]["ok"] is True
-    assert row["checks"][0]["rerun"] == 410.0
-    template = load_template(ROOT, "ase/lj38-lbfgslinesearch-tuned")
-    assert template["count"] == "report"
-    starts = ROOT / "results" / "campaign" / "ase-3.29.0-lj38-lbfgslinesearch-tuned.starts.jsonl"
-    recorded = [json.loads(line) for line in starts.read_text(encoding="utf-8").splitlines() if line.strip()]
-    summary = _summarize(recorded, template)
-    assert summary["nfailed"] == 0
-    assert summary["force_calls"] == 410
-    dat = parse_dat((ROOT / "results" / "campaign" / "ase-3.29.0-lj38-lbfgslinesearch-tuned.dat").read_text(encoding="utf-8"))
-    assert dat["nfailed"] == "0"
-    assert dat["force_calls"] == "410"
+    template = load_template(ROOT, "ase/lj38-lbfgslinesearch-default")
+    assert template.get("count") is None
+    assert template["ranked"] is True
+    assert template["parameter_source"] == "default"
+    assert template["optimizer"]["parameters"] == {}
+    dat_path = ROOT / "results" / "campaign" / "ase-3.29.0-lj38-lbfgslinesearch-default.dat"
+    dat = parse_dat(dat_path.read_text(encoding="utf-8"))
+    assert dat["code_version"] == "3.29.0"
+    assert dat["nfailed"] == "3"
+    assert dat["force_calls"] == "334"
+    assert "partial" not in dat
+    assert "ranked" not in dat
+    held = holdback(ROOT)
+    assert ("minimization/lj38", "ase/lj38-lbfgslinesearch-default") not in held.templates
+    assert "results/campaign/ase-3.29.0-lj38-lbfgslinesearch-default.dat" not in held.paths
     capped = _summarize(
         [
             {"force_calls": 400, "failed": False},

@@ -1,0 +1,34 @@
+force_calls 334
+force_calls_min 203
+force_calls_median 322
+force_calls_max 642
+nfailed 3
+starts 1000
+code ASE
+code_version 3.29.0
+commit f27c0005ae6a67ea419f996e728668865bfc1f86
+algorithm LBFGSLineSearch
+profile default
+template ase/lj38-lbfgslinesearch-default
+problem minimization/lj38
+counter harness
+reducer capped
+parameter_source default
+method {"counter":"harness attach_ase_counter","parameter_source":"default","parameters":{"alpha":70.0,"c1":0.23,"c2":0.46,"damping":1.0,"maxstep":0.2,"memory":100,"use_line_search":true},"potential":{"epsilon":1.0,"kind":"lennard-jones","pbc":[false,false,false],"rc":40.0,"sigma":1.0},"profile":"default","reducer":"capped","stop":{"force_norm":0.01,"max_force_calls":10000,"max_steps":10000,"norm":"l2"}}
+note ASE 3.29.0 LBFGSLineSearch constructor defaults, unmodified. Stock settings are the constructor maxstep, memory, damping, and alpha. The starts are the LJ38 archive clusters and the stop is the Euclidean force norm 0.01. The harness scores this row. The archived number is the paper row. A gap from that number is a finding. v2 success is the harness cap, the stop norm, and the Hessian index (0 minimum, 1 saddle) after rigid modes are projected out when no atom is fixed. Energy and Kabsch RMSD are not applied: these starts have no reference geometry.
+host cursor
+date 2026-10-19
+contributor Rohit Goswami
+scoring par2-wilson-bootstrap
+par2_mean 392.773
+par2_median 322
+par2_median_low 318
+par2_median_high 328
+par2_iqr 90
+success_rate 0.997
+wilson_low 0.9912169859
+wilson_high 0.9989792161
+par_applied true
+par_factor 2
+bootstrap_resamples 2000
+bootstrap_seed 20261015

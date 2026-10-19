@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-47 reproduced, 28 not reproduced, 76 not rerun. 151 archive rows.
+46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -112,7 +112,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj38/ase-bfgslinesearch | force_calls 500 | 506 | reproduced |
 | lj38/ase-fire | force_calls 656 | 720 | reproduced |
 | lj38/ase-lbfgs | force_calls 355 | 356 | reproduced |
-| lj38/ase-lbfgslinesearch | force_calls 417 | 410 | reproduced |
+| lj38/ase-lbfgslinesearch | force_calls 417 | 334 | not reproduced; ase_lbfgs_stock |
 | lj38/ase-preconlbfgs | force_calls 2686 | 2605 | not reproduced; precon_hessian_index |
 | lj38/eon-cg | force_calls 453 | 454 | reproduced |
 | lj38/eon-fire | force_calls 731 | 731 | reproduced |
@@ -280,6 +280,12 @@ The r2549 Al dimer with the archived rotation string (CG, max 50, tol 1) misses 
 The Rayleigh-Ritz template uses updates 4. The archived first-order mean is 25 and the second-order mean is 46. This default scores 61, so it is not either archived order.
 
 - lowest-eigenvector/lj38/optim-first-order
+
+### ase_lbfgs_stock
+
+ASE 3.29.0 is the current release. LBFGSLineSearch is unmodified and uses its constructor defaults (maxstep 0.2, memory 100, damping 1, alpha 70). The LJ38 starts and the Euclidean force norm 0.01 match the archive. The harness mean is 334 against the archived 417, outside 10 percent. nfailed is 3, each a Hessian index of 1 after that force norm, inside the Wilson interval of 0 failures out of 1000. The archived number is the paper row. The gap is a finding. The settings were not tuned to close it.
+
+- minimization/lj38/ase-lbfgslinesearch
 
 ### precon_hessian_index
 

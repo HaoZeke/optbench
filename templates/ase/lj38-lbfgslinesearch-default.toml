@@ -10,7 +10,7 @@ profile = "default"
 reducer = "capped"
 ranked = true
 parameter_source = "default"
-note = "ASE 3.29.0 LBFGSLineSearch constructor defaults."
+note = "ASE 3.29.0 LBFGSLineSearch constructor defaults, unmodified. Stock settings are the constructor maxstep, memory, damping, and alpha. The starts are the LJ38 archive clusters and the stop is the Euclidean force norm 0.01. The harness scores this row. The archived number is the paper row. A gap from that number is a finding."
 
 [optimizer]
 name = "LBFGSLineSearch"

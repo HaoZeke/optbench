@@ -255,6 +255,14 @@ def _minimization_specs() -> list[dict]:
                     params = {}
                     source = "default"
                     note = f"ASE {ASE_VERSION} {name} constructor defaults."
+                    if problem == "minimization/lj38" and name == "LBFGSLineSearch":
+                        note = (
+                            f"ASE {ASE_VERSION} LBFGSLineSearch constructor defaults, unmodified. "
+                            "Stock settings are the constructor maxstep, memory, damping, and alpha. "
+                            "The starts are the LJ38 archive clusters and the stop is the Euclidean force norm 0.01. "
+                            "The harness scores this row. The archived number is the paper row. "
+                            "A gap from that number is a finding."
+                        )
                     if problem == "minimization/lj38" and name in {"BFGS", "LBFGS"}:
                         params = {"maxstep": 0.1}
                         source = "repaired"
