@@ -114,6 +114,7 @@ success-only median. A row with no success has no median.
 | hTST/Al | pykmc/htst-al | 16/16 | partial | 58189.5 |
 | accelerated-md/aladatom | pykmc/aladatom | 3/3 | 0 | 166853 |
 | accelerated-md/standard_aladatom | pykmc/standard-aladatom | 3/3 | 0 | 119079 |
+| saddle-search/pt-island | pykmc/saddle-pt | 512/792 | 210 wrong stationary, 69 crash, 1 not converged | 1260.5 |
 | saddle-search/pt-island | pykmc/saddle-pt-smooth | 360/561 | 139 wrong stationary, 61 crash, 1 not converged | 1262 |
 
 The rgsaddle band campaigns on `neb/Pt-heptamer` and the three double-ended
@@ -513,12 +514,48 @@ island atoms is 1.449. The slab mean is stored as `rmsd_plus_free` and
 | hTST/Al | pykmc/htst-al | 16/16 | partial | 58189.5 | 57877.875 |
 | accelerated-md/aladatom | pykmc/aladatom | 3/3 | 0 | 166853 | 178325.67 |
 | accelerated-md/standard_aladatom | pykmc/standard-aladatom | 3/3 | 0 | 119079 | 126131.67 |
+| saddle-search/pt-island | pykmc/saddle-pt | 512/792 | 210 wrong stationary, 69 crash, 1 not converged | 1260.5 | 14983.76 |
 | saddle-search/pt-island | pykmc/saddle-pt-smooth | 360/561 | 139 wrong stationary, 61 crash, 1 not converged | 1262 | 15168.08 |
 
 `pykmc/ts-pt` is one search from each of the 49 guesses. `initial_13`
 stopped at 325 calls and `initial_44` at 652, both `EVENT_NOT_FOUND`.
 `initial_30` hit the cap of 10000. The success median is 746.5. PAR-2 is
 1956.45. Each of the three failures costs 20000. This row was not rerun.
+
+`pykmc/saddle-pt` is the shifted-Morse baseline. The reactant is already a
+minimum of that potential, so minimization took 1 call.
+`displace_magnitude` is 0. The central atom is one of atoms 0–6. The
+catalogue stopped 160 searches after the last new unique saddle under
+1.5 eV. That saddle is search 632, barrier 1.483 eV, so the run stops at
+792 searches. The goal of 27 unique saddles under 1.5 eV was not met:
+that count is 16. `unique_saddles` is 212. The campaign spent 1095478
+harness calls. `nfailed` on the repetition is 1.
+
+Successes are 512 of 792. `fraction_connected` is 512/792 =
+0.6464646465. `fraction_eon_connected` is 513/792 = 0.6477272727.
+Search 88 is linked and at the force stop with Hessian index 2, so
+`apply_taxonomy` names it `wrong_stationary` and it is the extra link.
+The other classes are 209 more `wrong_stationary`, 69 `crash`, and 1
+`not_converged`. The 69 crashes store `ErrorType.EVENT_NOT_FOUND: No
+event found`. The `not_converged` search stopped on the method budget
+at 10000 calls, under the harness cap of 20000. None of the 792 is
+divergence and none spent the harness cap. The success median is 1260.5
+calls. The median of the 792 call counts is 1315.5. Mean calls on the
+successes are 1303.009765625. The v2 median of the penalised costs is
+1513, bootstrap 1443 to 1600. PAR-2 is 14983.7638888889. Wilson 95% is
+0.6125359640 to 0.6789793842.
+
+The archived `eon-dimer` row is `fraction_connected` 0.746017,
+`unique_saddles` 109.222, `force_calls` 3.77888e+06, `total_searches`
+11366.8. Eon r2205, Sam Chill, 15 Jul 2014, shifted Morse. This pyKMC
+row uses that potential and the r2205 link, and it stops on the harness
+160-search stall.
+
+Every search has a line in
+`pykmc-0.0.1-saddle-search-pt-island--pykmc-saddle-pt.endpoints.jsonl`,
+schema `optbench.endpoint-minima/v1`. The file has 792 rows. 722 rows
+store both endpoint minima. 70 store neither. No row stores one side
+only.
 
 `pykmc/saddle-pt-smooth` is the stored smooth-linear catalogue on the
 minimized reactant. It is `ranked false`. The baseline template

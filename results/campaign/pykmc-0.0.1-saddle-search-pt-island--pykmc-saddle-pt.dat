@@ -1,0 +1,30 @@
+# rep 1 force_calls 1095478 unique_saddles 212 fraction_connected 0.6464646464646465 fraction_eon_connected 0.6477272727272727 total_searches 792 connected 512 eon_connected 513 minimize_calls 1 minimum_converged 1 seed 20261016
+# fraction_connected counts index-1 saddles whose endpoints pass the eOn r2205 link. The catalogue goal is 27 unique saddles under 1.5 eV. The last one is search 632, barrier 1.483 eV. The next 160 searches added none. The runner exits after 160 searches with no new unique saddle under that window once 200 searches have run.
+# fraction_eon_connected is the eOn r2205 link: exactly one endpoint has perAtomNorm strictly below distance_difference 0.1 angstrom. A connected index-1 saddle is a harness success. Both endpoint minima are in pykmc-0.0.1-saddle-search-pt-island--pykmc-saddle-pt.endpoints.jsonl.
+# Potential is morse_shift. The 2014 Pt archive used shifted Morse. Smooth-linear is a separate labelled row.
+# Failure classes are optbench.failures.apply_taxonomy. 512 successes, 210 wrong_stationary, 69 crash, 1 not_converged. No divergence and no harness cap. The 69 crashes store ErrorType.EVENT_NOT_FOUND. The not_converged search stopped on the method budget at 10000 calls, under the harness cap of 20000. Search 88 is linked and at the force stop with Hessian index 2, so it is wrong_stationary and is the extra eon_connected count.
+force_calls 1095478
+force_calls_min 1095478
+force_calls_max 1095478
+code pykmc
+code_version 0.0.1
+commit 9fd1f6e9085ef92642142406f3dd74e574209898
+algorithm pARTn event search
+tuning beland-2015-pt111
+template pykmc/saddle-pt
+problem saddle-search/pt-island
+counter harness
+cap 20000
+repetitions 1
+nfailed 1
+n 792
+goal 27
+connected 512
+eon_connected 513
+fraction_connected 0.6464646464646465
+fraction_eon_connected 0.6477272727272727
+total_searches 792
+endpoints pykmc-0.0.1-saddle-search-pt-island--pykmc-saddle-pt.endpoints.jsonl
+endpoint_rows 792
+profile beland-2015-pt111
+potential morse_shift
