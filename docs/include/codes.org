@@ -717,6 +717,12 @@
    <td>98aac60b5d99</td>
    <td><a href="https://github.com/henkelmangroup/tsase">https://github.com/henkelmangroup/tsase</a></td>
    </tr>
+   <tr>
+   <td>lowest eigenvector</td>
+   <td>5584461</td>
+   <td>55844612b607</td>
+   <td><a href="https://github.com/henkelmangroup/tsase">https://github.com/henkelmangroup/tsase</a></td>
+   </tr>
    </tbody></table></div>
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
@@ -754,15 +760,15 @@
    <td data-field="failures">crash 0, divergence 20, cap 1, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
-   <tr data-problem="lowest-eigenvector/lj38" data-template="tsase/mode-lj38">
+   <tr data-problem="lowest-eigenvector/lj38" data-template="tsase-408/lj38-dimer-cg">
    <td>lj38</td>
-   <td data-field="template">tsase/mode-lj38</td>
-   <td data-field="version">tsase 1.0</td>
-   <td data-field="commit">98aac60b5d99</td>
-   <td data-field="par2_mean">2420.61</td>
-   <td data-field="mean_calls">267.945</td>
-   <td data-field="median_calls">233</td>
-   <td data-field="failures">crash 0, divergence 22, cap 0, wrong_stationary 0</td>
+   <td data-field="template">tsase-408/lj38-dimer-cg</td>
+   <td data-field="version">tsase 408</td>
+   <td data-field="commit">55844612b607</td>
+   <td data-field="par2_mean">29.44</td>
+   <td data-field="mean_calls">29.44</td>
+   <td data-field="median_calls">27</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="minimization/lj38" data-template="tsase/lbfgs-lj38">

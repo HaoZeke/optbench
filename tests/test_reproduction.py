@@ -35,7 +35,13 @@ def test_the_ledger_covers_the_oracle_in_order():
             assert row["cause"]
         if (row.get("rerun") or {}).get("paper_baseline"):
             assert status == "reproduced"
-    assert counts == {"reproduced": 46, "not_reproduced": 29, "not_rerun": 76}
+    assert counts == {"reproduced": 47, "not_reproduced": 29, "not_rerun": 75}
+    dimer = next(row for row in ledger if row_id(row) == "lowest-eigenvector/lj38/tsase-dimer-cg")
+    assert dimer["status"] == "reproduced"
+    assert dimer["checks"][0]["archive"] == 29
+    assert dimer["checks"][0]["rerun"] == 29
+    assert dimer["failure_check"]["rerun"] == 0
+    assert dimer["rerun"]["paper_baseline"] is True
     assert reproduction_errors(ROOT) == []
 
 

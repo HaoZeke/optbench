@@ -1,0 +1,23 @@
+# TSASE 408 dimer CG rotation against the LJ38 reference mode.
+id = "tsase-408/lj38-dimer-cg"
+engine = "tsase-408"
+code = "tsase"
+code_version = "408"
+commit = "55844612b607a0d4b9c0205917021b0c34975cc6"
+algorithm = "dimer CG"
+problem = "lowest-eigenvector/lj38"
+task = "lowest-eigenvector"
+profile = "archive"
+reducer = "all"
+ranked = true
+parameter_source = "archive"
+note = "Archive dimer_rotate.py on TSASE commit 5584461, git rev-list count 408, 18 Jun 2014. rotationOpt cg, phi_tol 0, dR 0.001, ss false. rotationMax rises from 1 until absolute overlap exceeds 0.99. The score is that attempt's forceCalls. direction.dat is numpy seed 314159, one vector for every geometry. The potential is unshifted lj/cut, epsilon 1, sigma 1, cutoff 40. report.sh prints the mean with %.0f and drops a start at 10000 calls."
+
+[stop]
+norm = "overlap"
+overlap = 0.99
+max_force_calls = 10000
+max_steps = 1000
+
+[input]
+archive_path = "website/lowest-eigenvector/lj38/coords-con.tar.gz"

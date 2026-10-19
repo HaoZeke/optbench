@@ -111,6 +111,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+    "repro/lowest-eigenvector-lj38-tsase-dimer-cg": "b6ba7f5bdac21c1c2ab9e37df109e00e9f5722aa",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -153,6 +154,7 @@ MATCHES: list[dict] = [
     {"key": "lowest-eigenvector/lj38/eon-dimer-lbfgs", "template": "eon-client/low-lj38-dimer-lbfgs", "branch": "main", "path": "results/campaign/eon-client-low-lj38-dimer-lbfgs.dat"},
     {"key": "lowest-eigenvector/lj38/eon-lanczos", "template": "eon-svn/low-lj38-lanczos-ljcut", "branch": "main", "path": "results/campaign/eon-svn-low-lj38-lanczos-ljcut.dat"},
     {"key": "lowest-eigenvector/lj38/sella", "template": "sella-0.1.1/lj38-loweig", "branch": "cells/fill-not-rerun", "path": "results/campaign/sella-0.1.1-lj38-loweig.dat"},
+    {"key": "lowest-eigenvector/lj38/tsase-dimer-cg", "template": "tsase-408/lj38-dimer-cg", "branch": "repro/lowest-eigenvector-lj38-tsase-dimer-cg", "path": "results/campaign/tsase-408-lj38-dimer-cg.dat", "extra": {"unrounded_mean": 29.44}},
     {"key": "lowest-eigenvector/lj38/pele-first-order", "template": "pele/lj38-loweig-forward", "branch": "cells/pele/ts", "path": "results/campaign/pele-b7081b93-lj38-loweig-forward.dat"},
     {"key": "lowest-eigenvector/lj38/pele-second-order", "template": "pele/lj38-loweig-central", "branch": "cells/pele/ts", "path": "results/campaign/pele-b7081b93-lj38-loweig-central.dat"},
     {"key": "lowest-eigenvector/lj38/optim-first-order", "template": "optim/rr-loweig", "branch": "cells/optim/saddle-pt", "path": "results/campaign/optim-df8da599-rr-loweig.dat", "cause": "optim_rr_defaults"},
