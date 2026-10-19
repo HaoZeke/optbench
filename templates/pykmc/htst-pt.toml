@@ -40,4 +40,4 @@ rnei = 3.0
 timeout = 1800
 
 [kmc]
-max_searches = 40000
+max_searches = 250000
