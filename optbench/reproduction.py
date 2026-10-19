@@ -111,6 +111,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+    "repro/double-ended-saddle-search-pt-island-optim-cl-string": "2d4f98ab8f41514d5552af255ff030c48304c800",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -184,6 +185,7 @@ MATCHES: list[dict] = [
     {"key": "double-ended-saddle-search/pt-island/eon-lanczos", "template": "eon-svn/de-pt-lanczos", "branch": "main", "path": "results/campaign/eon-svn-de-pt-lanczos.dat", "cause": "pt_lanczos"},
     {"key": "double-ended-saddle-search/pt-island/eon-lanczos-improved", "template": "eon-svn/de-pt-lanczos-improved", "branch": "main", "path": "results/campaign/eon-svn-de-pt-lanczos-improved.dat", "cause": "pt_lanczos"},
     {"key": "double-ended-saddle-search/pt-island/optim", "template": "optim/de-pt", "branch": "cells/optim/saddle-pt", "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-pt-island--optim-de-pt.dat", "cause": "optim_pt_units"},
+    {"key": "double-ended-saddle-search/pt-island/optim-cl-string", "template": "optim/de-pt-cl-string-latest", "branch": "repro/double-ended-saddle-search-pt-island-optim-cl-string", "path": "results/campaign/optim-df8da599-double-ended-saddle-search-pt-island--optim-cl-string-latest.dat", "extra": {"code_version": "df8da599", "svnrev": "df8da599267534fbe43a250e578f7396a7946311"}},
     # neb per-image means already stored in the 3.5.0 files
     {"key": "neb/Pt-heptamer/eon-lbfgs", "template": "eon-lbfgs", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-lbfgs.dat", "hold": ["eon-client/neb-pt-lbfgs", "eon/neb-pt-lbfgs"]},
     {"key": "neb/Pt-heptamer/eon-cg", "template": "eon-cg", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-cg.dat", "cause": "heptamer_cg", "hold": ["eon-client/neb-pt-cg"]},
@@ -478,6 +480,14 @@ def _sha(branch: str) -> str:
 
         SHA[branch] = subprocess.check_output(
             ["git", "rev-parse", "origin/cells/pele/ts"],
+            text=True,
+        ).strip()
+    if branch == "repro/double-ended-saddle-search-pt-island-optim-cl-string" and len(SHA.get(branch, "")) < 12:
+        import subprocess
+
+        SHA[branch] = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"],
+            cwd=Path(__file__).resolve().parents[1],
             text=True,
         ).strip()
     return SHA[branch]
@@ -810,6 +820,8 @@ def render_markdown(rows: list[dict]) -> str:
         "",
         "OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.",
         "",
+        "OPTIM Pt-island climbing string, release df8da599 (SVNREV df8da599267534fbe43a250e578f7396a7946311, svn.tar.bz2 sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31): stock BULK, CLSTRING, and GROWSTRING. The archived mean is 319 with nfailed 0. OPTIM prints no convergence line on any of the 59 starts, so there is no success mean. The native tallies are 6 or 8 and nfailed is 59.",
+        "",
         "EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.",
         "",
         "Table 10 prints EON Lanczos 165. The archive file is 325. CI-NEB(3) prints 3 failures; the archive file has 0.",
@@ -829,9 +841,14 @@ def render_markdown(rows: list[dict]) -> str:
             lines.append("| Row | Archive | Rerun | Status |")
             lines.append("| --- | --- | --- | --- |")
         ident = f"{row['problem']}/{row['entry']}"
+        version = str((row.get("rerun") or {}).get("code_version") or "")
+        failure = row.get("failure_check") or {}
         if row["checks"]:
             archive = ", ".join(f"{item['metric']} {_fmt(item['archive'])}" for item in row["checks"])
             rerun = ", ".join(f"{_fmt(item['rerun'])}" for item in row["checks"])
+        elif version and failure:
+            archive = f"nfailed {_fmt(failure['archive'])}"
+            rerun = f"{version} nfailed {_fmt(failure['rerun'])}"
         else:
             archive = "—"
             rerun = "—"

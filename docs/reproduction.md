@@ -8,6 +8,8 @@ The pele transition-state paper score is the 2014 stop: break at the first RMS b
 
 OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.
 
+OPTIM Pt-island climbing string, release df8da599 (SVNREV df8da599267534fbe43a250e578f7396a7946311, svn.tar.bz2 sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31): stock BULK, CLSTRING, and GROWSTRING. The archived mean is 319 with nfailed 0. OPTIM prints no convergence line on any of the 59 starts, so there is no success mean. The native tallies are 6 or 8 and nfailed is 59.
+
 EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.
 
 Table 10 prints EON Lanczos 165. The archive file is 325. CI-NEB(3) prints 3 failures; the archive file has 0.
@@ -44,7 +46,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | pt-island/eon-lanczos-improved | force_calls 222 | 181 | not reproduced; pt_lanczos |
 | pt-island/optim | force_calls 103 | 138 | not reproduced; optim_pt_units |
 | pt-island/optim-6 | — | — | not rerun |
-| pt-island/optim-cl-string | — | — | not rerun |
+| pt-island/optim-cl-string | nfailed 0 | df8da599 nfailed 59 | not rerun |
 | pt-island/pele | — | — | not rerun |
 
 ## globalopt
