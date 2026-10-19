@@ -543,6 +543,188 @@ def _execute_minimize(job: dict) -> dict:
     return record
 
 
+def _ensure_lj_extension() -> None:
+    """Build ``lj_`` with f2py when the checkout has only the Fortran source."""
+    import shutil
+    import subprocess
+
+    folder = source_root() / "tsase" / "calculators" / "lj"
+    if list(folder.glob("lj_*.so")):
+        return
+    code = folder / "code" / "lj.f"
+    if not code.is_file():
+        raise RuntimeError(
+            f"TSASE lj.f is not under {folder}. Set TSASE_SRC to the checkout and build lj_."
+        )
+    subprocess.check_call(
+        [sys.executable, "-m", "numpy.f2py", "-c", "--opt=-O2", "lj.f", "-m", "lj_"],
+        cwd=code,
+    )
+    built = list((folder / "code").glob("lj_*.so"))
+    if not built:
+        raise RuntimeError("f2py did not write the TSASE lj_ extension")
+    shutil.copy(built[0], folder / built[0].name)
+
+
+def _import_sdlbfgs():
+    import ase.io.trajectory as trajectory
+
+    if not hasattr(trajectory, "PickleTrajectory"):
+
+        class PickleTrajectory:
+            def __init__(self, *args, **kwargs):
+                del args, kwargs
+
+        trajectory.PickleTrajectory = PickleTrajectory
+    root = source_root()
+    if str(root) not in sys.path:
+        sys.path.insert(0, str(root))
+    import tsase
+    from tsase.calculators.lj.lj import lj
+
+    return tsase, lj
+
+
+def _execute_sdlbfgs(job: dict) -> dict:
+    """One archived opt.py minimization. The count is ``lj.force_calls``."""
+    os.environ.setdefault("OMP_NUM_THREADS", "1")
+    import ase.io
+
+    tsase, lj = _import_sdlbfgs()
+    atoms = ase.io.read(job["path"])
+    atoms.center(float(job["vacuum"]))
+    calc = lj(cutoff=float(job["cutoff"]))
+    atoms.set_calculator(calc)
+    error = ""
+    calls = 0
+    fmax = None
+    energy = None
+    try:
+        opt = tsase.optimize.SDLBFGS(
+            atoms,
+            maxstep=float(job["max_step"]),
+            memory=int(job["memory"]),
+            logfile=None,
+        )
+        opt.run(
+            fmax=float(job["fmax"]),
+            emax=float(job["emax"]),
+            steps=int(job["steps"]),
+            optimizer=str(job["optimizer"]),
+        )
+        calls = int(calc.force_calls)
+    except Exception as exc:
+        calls = int(getattr(calc, "force_calls", 0) or 0)
+        error = f"{type(exc).__name__}: {exc}"
+    if not error:
+        try:
+            forces = atoms.get_forces()
+            fmax = float(((forces**2).sum(axis=1).max()) ** 0.5)
+            energy = float(atoms.get_potential_energy())
+        except Exception:
+            fmax = None
+            energy = None
+    cap = int(job["cap"])
+    if error:
+        success = False
+        failure = "crash"
+    elif calls >= cap:
+        success = False
+        failure = "cap"
+    else:
+        success = True
+        failure = None
+    return {
+        "schema": "optbench.start/v2",
+        "start": job["name"],
+        "force_calls": calls,
+        "verify_calls": 0,
+        "counter": "harness",
+        "comparable": True,
+        "success": success,
+        "failure": failure,
+        "reasons": [error] if error else [],
+        "energy": energy,
+        "force_norm": fmax,
+        "hessian_index": None,
+        "expected_index": None,
+        "converged": success,
+        "seed": "0",
+        "minimizer": "sdlbfgs",
+    }
+
+
+def _run_sdlbfgs(root: Path, problem: dict, template: dict, output: Path, workers: int) -> dict:
+    """Archive minimization/lj38/tsase-sdlbfgs/opt.py on the xyz sample."""
+    from optbench.campaign import geometry_archive
+
+    from .geometries import _extract
+
+    _ensure_lj_extension()
+    settings = point_settings(problem)
+    if settings["cap"] is None:
+        raise ValueError(f"{problem['id']} has no force-call cap")
+    section = dict(template.get("tsase") or {})
+    sample = int((problem.get("sample") or {}).get("starts") or 0)
+    if sample <= 0:
+        raise ValueError(f"{problem['id']} has no sample.starts")
+    scratch = output.parent / "work" / template["id"].replace("/", "-")
+    extracted = _extract(geometry_archive(root, problem), scratch / "geometries")
+    jobs = []
+    for index in range(sample):
+        stem = f"cluster_{index:04d}"
+        matches = [path for path in extracted.rglob(f"{stem}.xyz") if path.is_file()]
+        if len(matches) != 1:
+            raise FileNotFoundError(f"{stem}.xyz")
+        jobs.append(
+            {
+                "name": stem,
+                "path": str(matches[0]),
+                "cap": int(settings["cap"]),
+                "max_step": float(section.get("max_step", 0.1)),
+                "memory": int(section.get("memory", 100)),
+                "cutoff": float(section.get("cutoff", 35.0)),
+                "fmax": float(section.get("fmax", 0.01)),
+                "emax": float(section.get("emax", 0.0001)),
+                "steps": int(section.get("steps", 10000)),
+                "optimizer": str(section.get("optimizer", "maxatom")),
+                "vacuum": float(section.get("vacuum", 100.0)),
+            }
+        )
+    records = run_jobs(jobs, _execute_sdlbfgs, workers)
+    parameters = {
+        "potential": "tsase.calculators.lj",
+        "cutoff": float(section.get("cutoff", 35.0)),
+        "vacuum": float(section.get("vacuum", 100.0)),
+        "cap": int(settings["cap"]),
+        "fmax": float(section.get("fmax", 0.01)),
+        "emax": float(section.get("emax", 0.0001)),
+        "steps": int(section.get("steps", 10000)),
+        "optimizer": str(section.get("optimizer", "maxatom")),
+        "max_step": float(section.get("max_step", 0.1)),
+        "memory": int(section.get("memory", 100)),
+        "counter": "lj.force_calls",
+        "failure": "total_force_calls >= 10000",
+        "seed": "0",
+    }
+    comment = (
+        "# counter harness. One force call is one tsase.calculators.lj calculate.\n"
+        "# Archive opt.py writes calc.force_calls. report.sh counts a failure only\n"
+        "# when that total is at least 10000.\n"
+        "# SDLBFGS maxstep 0.1, memory 100, optimizer maxatom, fmax 0.01, cutoff 35."
+    )
+    return write_campaign(
+        output,
+        records,
+        template,
+        problem,
+        settings,
+        parameters,
+        images=None,
+        comment=comment,
+    )
+
+
 def search_named(root: Path, problem_name: str, template_name: str, start: str, seed: str = "0") -> dict:
     reason = available()
     if reason:
@@ -636,6 +818,8 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
     if stated and stated != problem["id"]:
         raise ValueError(f"{template_name} belongs to {stated}")
     method = str((template.get("tsase") or {}).get("method", "ci"))
+    if method == "sdlbfgs":
+        return _run_sdlbfgs(root, problem, template, output, workers)
     if method == "dimer":
         settings = point_settings(problem)
         if settings["cap"] is None:

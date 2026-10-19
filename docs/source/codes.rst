@@ -777,15 +777,15 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 22, cap 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
-   <tr data-problem="minimization/lj38" data-template="tsase/lbfgs-lj38">
+   <tr data-problem="minimization/lj38" data-template="tsase/lj38-sdlbfgs-tuned">
    <td>Lennard-Jones 38 clusters</td>
-   <td data-field="template">tsase/lbfgs-lj38</td>
+   <td data-field="template">tsase/lj38-sdlbfgs-tuned</td>
    <td data-field="version">tsase 1.0</td>
    <td data-field="commit">98aac60b5d99</td>
-   <td data-field="par2_mean">257.2</td>
-   <td data-field="mean_calls">177.96</td>
-   <td data-field="median_calls">169</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 4</td>
+   <td data-field="par2_mean">165.538</td>
+   <td data-field="mean_calls">165.538</td>
+   <td data-field="median_calls">157</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-template="tsase/lbfgs-morse">

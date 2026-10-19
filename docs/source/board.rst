@@ -30,7 +30,7 @@ It does not run a campaign.
    <td data-code="dlfind" data-template="dlfind/lbfgs-lj38" data-par2="231.908"><span class="bench-score">231.908</span><a href="generated/suites/minimization.html#lj38-templates">dlfind/lbfgs-lj38</a></td>
    <td data-code="lammps" data-template="lammps/hftn-lj38" data-par2="1123.81"><span class="bench-score">1123.81</span><a href="generated/suites/minimization.html#lj38-templates">lammps/hftn-lj38</a></td>
    <td data-code="optim" data-template="optim/lbfgs-lj38" data-par2="270.341"><span class="bench-score">270.341</span><a href="generated/suites/minimization.html#lj38-templates">optim/lbfgs-lj38</a></td>
-   <td data-code="tsase" data-template="tsase/lbfgs-lj38" data-par2="257.2"><span class="bench-score">257.2</span><a href="generated/suites/minimization.html#lj38-templates">tsase/lbfgs-lj38</a></td>
+   <td data-code="tsase" data-template="tsase/lj38-sdlbfgs-tuned" data-par2="165.538"><span class="bench-score">165.538</span><a href="generated/suites/minimization.html#lj38-templates">tsase/lj38-sdlbfgs-tuned</a></td>
    </tr>
    <tr data-problem="minimization/lj38-noise">
    <th scope="row"><a href="generated/suites/minimization.html#lj38-noise">Lennard-Jones 38 clusters with Gaussian force noise</a></th>

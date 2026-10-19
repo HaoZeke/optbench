@@ -138,6 +138,7 @@ MATCHES: list[dict] = [
     {"key": "minimization/lj38/pele-lbfgs-M4-maxstep0.1", "template": "pele-lbfgs-M4-maxstep0.1", "branch": "main", "path": "results/campaign/pele-0.1.2-lbfgs-M4-maxstep0.1.dat"},
     {"key": "minimization/lj38/pele-lbfgs-M4-maxstep0.2", "template": "pele-lbfgs-M4-maxstep0.2", "branch": "main", "path": "results/campaign/pele-0.1.2-lbfgs-M4-maxstep0.2.dat"},
     {"key": "minimization/lj38/pele-fire", "template": "pele/lj38-fire", "branch": "cells/pele/min", "path": "results/campaign/pele-b7081b93-lj38-fire.dat", "cause": "pele_fire"},
+    {"key": "minimization/lj38/tsase-sdlbfgs", "template": "tsase/lj38-sdlbfgs-tuned", "branch": "repro/minimization-lj38-tsase-sdlbfgs", "path": "results/campaign/tsase-1.0-lj38-sdlbfgs-tuned.dat"},
     # minimization / morse
     {"key": "minimization/morse-bulk/eon-lbfgs", "template": "eon-client/morse-lbfgs", "branch": "main", "path": "results/campaign/eon-client-morse-lbfgs.dat"},
     {"key": "minimization/morse-bulk/eon-cg", "template": "eon-client/morse-cg", "branch": "main", "path": "results/campaign/eon-client-morse-cg.dat"},
@@ -458,6 +459,14 @@ def read_campaign(root: Path, branch: str, path: str) -> str:
 
 
 def _sha(branch: str) -> str:
+    if branch == "repro/minimization-lj38-tsase-sdlbfgs":
+        import subprocess
+
+        return subprocess.check_output(
+            ["git", "rev-parse", "HEAD"],
+            cwd=Path(__file__).resolve().parents[1],
+            text=True,
+        ).strip()
     if branch == "cells/fill-not-rerun" and len(SHA.get(branch, "")) < 12:
         import subprocess
 
