@@ -107,6 +107,7 @@ SHA = {
     "cells/pele/go": "0528a37b8ff6e54805b9fa75345ee3c40b756a5d",
     "cells/pele/ts-repro": "54ac7e7a1aa6581c261c17fc2c52a20e77121911",
     "cells/softsaddle/ts-reps": "bd1a5c9fc2685f5876266d53715accb31a049e73",
+    "repro/saddle-search-pt-island-adaptive-hsphere-lbfgs-davidson-sm50": "1659e46598d3ee9c5fef1afe9b6c0b2793cf8915",
     "entries/eon-svn-htst": "715bc521c827f1f18102c1c027d99d0d8624b0fb",
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
@@ -191,7 +192,7 @@ MATCHES: list[dict] = [
     {"key": "neb/Pt-heptamer/eon-qm", "template": "eon-qm", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-qm.dat", "hold": ["eon-client/neb-pt-qm"]},
     # saddle search
     {"key": "saddle-search/pt-island/eon-dimer", "template": "eon-svn/saddle-pt-dimer", "branch": "main", "path": "results/campaign/eon-3.5.0-saddle-pt-classic.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "cause": "eon_saddle_count"},
-    {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-davidson-sm50", "template": "softsaddle/saddle-davidson-sm50", "branch": "cells/softsaddle/ts-reps", "path": "results/campaign/softsaddle-2019.04-saddle-davidson-sm50.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
+    {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-davidson-sm50", "template": "softsaddle/saddle-davidson-sm50", "branch": "repro/saddle-search-pt-island-adaptive-hsphere-lbfgs-davidson-sm50", "path": "results/campaign/softsaddle-2019.04-saddle-davidson-sm50.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}},
     {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm50", "template": "softsaddle/saddle-lanczos-sm50", "branch": "cells/softsaddle/ts-reps", "path": "results/campaign/softsaddle-2019.04-saddle-lanczos-sm50.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
     {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm0", "template": "softsaddle/saddle-lanczos-sm0", "branch": "cells/softsaddle/ts-reps", "path": "results/campaign/softsaddle-2019.04-saddle-lanczos-sm0.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
     # globalopt and htst and aladatom rates
@@ -533,6 +534,18 @@ def _local_fields(root: Path, rerun: dict) -> dict[str, str] | None:
     return None
 
 
+def _match_for_rerun(rerun: dict) -> dict | None:
+    """MATCHES entry for a ledger rerun, so renamed campaign fields stay aligned."""
+    template = str(rerun.get("template") or "")
+    path = str(rerun.get("path") or "")
+    for item in MATCHES:
+        if template and item.get("template") == template:
+            return item
+        if path and item.get("path") == path:
+            return item
+    return None
+
+
 def baseline_errors(root: Path) -> list[str]:
     """Paper-baseline rows whose live campaign misses the archive tolerance."""
     errors = []
@@ -551,11 +564,12 @@ def baseline_errors(root: Path) -> list[str]:
         if fields is None:
             continue
         names = [item["metric"] for item in row.get("checks") or []]
+        match = _match_for_rerun(rerun)
         fresh = build_checks(
             {item["metric"]: str(item["archive"]) for item in row["checks"]},
             fields,
             names,
-            None,
+            (match or {}).get("value_from"),
         )
         # The archived side of a stored check has no mean-error key. Carry se.
         by_metric = {item["metric"]: item for item in row["checks"]}
