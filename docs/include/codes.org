@@ -1054,5 +1054,46 @@
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>
+   <h3>SciPy</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>global optimization</td>
+   <td>v1.18.1</td>
+   <td>e4e854eaa8f1</td>
+   <td><a href="https://github.com/scipy/scipy">https://github.com/scipy/scipy</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="globalopt/lj38" data-template="scipyglobal/lj38-basinhopping">
+   <td>Lennard-Jones 38 global minimum</td>
+   <td data-field="template">scipyglobal/lj38-basinhopping</td>
+   <td data-field="version">SciPy 1.18.1</td>
+   <td data-field="commit">e4e854eaa8f1</td>
+   <td data-field="par2_mean">2.22985e+06</td>
+   <td data-field="mean_calls">1.32985e+06</td>
+   <td data-field="median_calls">1.70976e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 45, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="globalopt/lj75" data-template="scipyglobal/lj75-shgo">
+   <td>lj75</td>
+   <td data-field="template">scipyglobal/lj75-shgo</td>
+   <td data-field="version">SciPy 1.18.1</td>
+   <td data-field="commit">e4e854eaa8f1</td>
+   <td data-field="par2_mean">2e+06</td>
+   <td data-field="mean_calls">0</td>
+   <td data-field="median_calls">0</td>
+   <td data-field="failures">crash 200, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   </tbody></table></div>
+   <p>No full ranked run</p><ul>
+   <li>Lennard-Jones 38 global minimum: partial.</li>
+   <li>lj75: partial.</li>
+   </ul>
    </section>
 #+end_export
