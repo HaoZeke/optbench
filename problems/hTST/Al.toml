@@ -5,6 +5,20 @@ problem = "Al"
 contract = "partial"
 entry_count = 2
 
+[potential]
+evaluator = "eam_al"
+kind = "eam"
+name = "eam_al"
+
+[htst]
+temperature = 300
+rate_ref = 592041917.0
+rate_accuracy = 0.999
+prefactor = 1.2e12
+kb = 8.6173324e-5
+barrier_ceiling = 0.4
+barriers = [0.233, 0.233, 0.233, 0.233, 0.372, 0.372, 0.372, 0.372]
+
 [metrics]
 required = ["barrier_force_calls", "barrier_jobs", "rate_force_calls", "rate_jobs"]
 
