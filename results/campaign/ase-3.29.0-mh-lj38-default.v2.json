@@ -1,0 +1,209 @@
+{
+  "bootstrap_resamples": 2000,
+  "bootstrap_seed": 20261015,
+  "note": "Harness counter. One fresh coordinate is one force call.",
+  "par_factor": 2,
+  "problem": "globalopt/lj38",
+  "runs": [
+    {
+      "algorithm": "MinimaHopping",
+      "cap": 1000000,
+      "code": "ASE",
+      "code_version": "3.29.0",
+      "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
+      "entry": "ase-3.29.0-mh-lj38-default",
+      "legacy": {
+        "force_calls": 673360,
+        "force_calls_max": 985962,
+        "force_calls_min": 308935,
+        "median": 750651,
+        "nfailed": 3
+      },
+      "metrics": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 1000000,
+        "includes_failures": true,
+        "iqr": 1338491.75,
+        "iqr_high": 1627206.25,
+        "iqr_low": 192063.75,
+        "mean": 1170849.875,
+        "median": 956566.5,
+        "median_high": 2000000.0,
+        "median_low": 572365.5,
+        "n": 8,
+        "n_cap": 3,
+        "n_crash": 0,
+        "n_divergence": 0,
+        "n_wrong_stationary": 0,
+        "nfailed": 3,
+        "par2_mean": 1170849.875,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 661508.25,
+        "q75": 2000000.0,
+        "scoring": "par2-wilson-bootstrap",
+        "success_only_mean": 673359.8,
+        "success_rate": 0.625,
+        "successes": 5,
+        "wilson_high": 0.8631557141764026,
+        "wilson_low": 0.30574239460262737
+      },
+      "parameters": {
+        "family": "globalopt",
+        "method": "ase-mh"
+      },
+      "present_source": true,
+      "provenance": {
+        "code": "ASE",
+        "code_version": "3.29.0",
+        "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
+        "machine": {
+          "machine": "x86_64",
+          "node": "cursor",
+          "python": "3.12.3",
+          "system": "Linux"
+        },
+        "parameters": {
+          "family": "globalopt",
+          "method": "ase-mh"
+        }
+      },
+      "starts": [
+        {
+          "comparable": true,
+          "converged": true,
+          "counter": "harness",
+          "energy": -173.92836690474064,
+          "failure": null,
+          "force_calls": 985962,
+          "force_norm": 0.14360512705770975,
+          "hessian_index": null,
+          "reasons": [],
+          "schema": "optbench.start/v2",
+          "start": "0",
+          "success": true,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -169.74531400923513,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 19.121270055116867,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "1",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -158.39421262815995,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 29.59597863228607,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "10",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -163.44103777043762,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 50.98409466604028,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "11",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": true,
+          "counter": "harness",
+          "energy": -173.92838602784065,
+          "failure": null,
+          "force_calls": 308935,
+          "force_norm": 0.11105766048740041,
+          "hessian_index": null,
+          "reasons": [],
+          "schema": "optbench.start/v2",
+          "start": "12",
+          "success": true,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": true,
+          "counter": "harness",
+          "energy": -173.9283966302362,
+          "failure": null,
+          "force_calls": 750651,
+          "force_norm": 0.12816547721587834,
+          "hessian_index": null,
+          "reasons": [],
+          "schema": "optbench.start/v2",
+          "start": "13",
+          "success": true,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": true,
+          "counter": "harness",
+          "energy": -173.92838534346868,
+          "failure": null,
+          "force_calls": 927171,
+          "force_norm": 0.1291445500254304,
+          "hessian_index": null,
+          "reasons": [],
+          "schema": "optbench.start/v2",
+          "start": "14",
+          "success": true,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": true,
+          "counter": "harness",
+          "energy": -173.92837904157352,
+          "failure": null,
+          "force_calls": 394080,
+          "force_norm": 0.13415345843003126,
+          "hessian_index": null,
+          "reasons": [],
+          "schema": "optbench.start/v2",
+          "start": "15",
+          "success": true,
+          "verify_calls": 0
+        }
+      ],
+      "tuning": "default"
+    }
+  ],
+  "schema": "optbench.result/v2",
+  "scoring": "par2-wilson-bootstrap",
+  "status": "archive"
+}
