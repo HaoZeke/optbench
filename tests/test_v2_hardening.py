@@ -175,6 +175,7 @@ def test_descent_from_the_origin_matches_the_smoke_count():
 
 def test_failure_classes_stay_in_the_par2_mean():
     assert classify_failure(["cap", "force_norm"]) == "cap"
+    assert classify_failure(["cap", "wall_clock", "force_norm"]) == "cap"
     assert classify_failure(["hessian_index", "rmsd"]) == "wrong_stationary"
     assert classify_failure(["divergence", "force_norm"]) == "divergence"
     assert classify_failure(["crash"]) == "crash"

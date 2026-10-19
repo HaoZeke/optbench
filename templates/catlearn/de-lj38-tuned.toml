@@ -7,7 +7,7 @@ commit = "6a307f32dbef18da9cd848f632d082b8e4f117b1"
 algorithm = "ML-NEB"
 tuning = "tuned"
 problem = "double-ended-saddle-search/lj38"
-note = "ML-NEB on the 50 LJ38 pairs with 5 interior images. IDPP interpolation follows the CatLearn heptamer tutorial. Acquisition acq_5, uncertainty convergence 0.05, MDMin dt 0.025, 750 surrogate steps, uncertainty early stop 0.25, improved tangent, automatic spring, and 500 iterations stay on the library defaults. The force stop is the problem norm 0.001."
+note = "ML-NEB on the 50 LJ38 pairs with 5 interior images. IDPP interpolation follows the CatLearn heptamer tutorial. Acquisition acq_5, uncertainty convergence 0.05, MDMin dt 0.025, 750 surrogate steps, maximum surrogate step 0.25, improved tangent, automatic spring, and 500 iterations stay on the library defaults. The surrogate is the library Gaussian kernel with one length scale. The fingerprint is the masked Cartesian coordinates, and the training targets include the gradients. The training set has no size limit. The band width is the problem interior count plus the two endpoints. The library's unset image value is a spacing of 0.25, and each tutorial sets its own integer. The force stop is the problem norm 0.001. The force-call cap is the problem cap. The library step budget is 500. A start that reaches the wall-clock ceiling of 7200 seconds is a cap failure. The recorded cost is the harness call count at that stop. Cycling is recorded when a later acquisition lies within 1e-6 of an earlier geometry."
 
 [mlneb]
 interpolation = "idpp"
@@ -20,3 +20,4 @@ max_step = 0.25
 sequential = false
 neb_method = "improvedtangent"
 steps = 500
+wall_seconds = 7200

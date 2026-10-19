@@ -222,11 +222,24 @@ def test_templates_use_the_registry_pin():
         assert loaded["commit"] == _PIN
         assert loaded["code_version"] == _VERSION
         assert loaded["mlneb"]["steps"] == 500
+        assert loaded["mlneb"]["wall_seconds"] == 7200
         assert loaded["mlneb"]["acquisition"] == "acq_5"
+        assert loaded["mlneb"]["unc_convergence"] == 0.05
+        note = loaded["note"]
+        assert "7200" in note
+        assert "cap failure" in note
+        assert "Cycling" in note
+        assert "Gaussian kernel" in note
+        periodic = loaded["problem"] in {
+            "double-ended-saddle-search/pt-island",
+            "neb/Pt-heptamer",
+        }
         if loaded["tuning"] == "tuned":
             assert loaded["mlneb"]["interpolation"] == "idpp"
+            assert loaded["mlneb"]["mic"] is periodic
         else:
             assert loaded["mlneb"]["interpolation"] == "linear"
+            assert loaded["mlneb"]["mic"] is False
 
 
 def test_spec_calculator_counts_one_call_and_zeros_fixed_forces():
@@ -300,3 +313,72 @@ def test_asv_document_round_trips():
     assert loaded["results"][key][0] == [12.0]
     assert ast.literal_eval(loaded["results"][key][1][1][0]) == "pair_00"
     assert "Results" in dir(asv_results)
+
+
+def test_wall_clock_ceiling_is_a_cap_failure(tmp_path):
+    from optbench.campaign import resolve_problem
+    from optbench.catlearn_band import _STATE, _WallClock, _cycle_report, _judge, _raise_if_due, _registry, _settings, write_outputs
+    from optbench.failures import classify_failure
+
+    assert classify_failure(["cap", "wall_clock", "force_norm"]) == "cap"
+    origin = np.zeros(6)
+    repeated = origin.copy()
+    repeated[0] = 1e-6
+    cycling, repeats = _cycle_report(np.stack([origin, repeated]))
+    assert cycling is True
+    assert repeats == 1
+    apart = origin.copy()
+    apart[0] = 2e-6
+    quiet, quiet_repeats = _cycle_report(np.stack([origin, apart]))
+    assert quiet is False
+    assert quiet_repeats == 0
+    _STATE["deadline"] = 0.0
+    try:
+        with pytest.raises(_WallClock):
+            _raise_if_due()
+    finally:
+        _STATE["deadline"] = None
+
+    class _Path:
+        list_train = [origin, apart, repeated]
+        list_targets = [0.0, 1.0, 0.2]
+        list_gradients = [np.ones(6), np.ones(6), np.ones(6)]
+
+    template = load_template(ROOT, "catlearn/de-lj38-default")
+    problem = resolve_problem(ROOT, template["problem"])
+    settings = _settings(template, problem, _registry(ROOT)["commit"])
+    bare = dict(template)
+    bare["mlneb"] = dict(template["mlneb"])
+    del bare["mlneb"]["wall_seconds"]
+    with pytest.raises(ValueError, match="wall-clock"):
+        _settings(bare, problem, bare["commit"])
+    job = {
+        "name": "pair_00",
+        "free": np.ones(2, dtype=bool),
+        "box": None,
+        "settings": settings,
+    }
+    counter = HarnessCounter(cache=False, cap=int(settings["cap"]))
+    counter.calls = 17
+    record = _judge(job, counter, _Path(), False, True)
+    assert record["force_calls"] == 17
+    assert record["verify_calls"] == 0
+    assert record["success"] is False
+    assert record["failure"] == "cap"
+    assert record["reasons"][:2] == ["cap", "wall_clock"]
+    assert record["cap_hit"] is True
+    assert record["wall_hit"] is True
+    assert record["wall_limit"] == 7200
+    assert record["cycling"] is True
+    assert record["cycle_repeats"] == 1
+    output = tmp_path / "catlearn.dat"
+    summary = write_outputs(output, [record], template, settings, problem)
+    text = output.read_text(encoding="utf-8")
+    assert "wall_limit 7200" in text
+    assert "cap failure" in text
+    scored = json.loads(output.with_suffix(".v2.json").read_text(encoding="utf-8"))
+    assert scored["score"]["n_cap"] == 1
+    assert scored["score"]["n_divergence"] == 0
+    assert scored["score"]["par2_mean"] == 2 * settings["cap"]
+    assert summary["nfailed"] == 1
+    assert summary["successes"] == 0

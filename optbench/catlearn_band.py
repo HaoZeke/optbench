@@ -10,6 +10,11 @@ surrogate step are the library defaults unless a template sets them.
 The force stop is the problem L2 norm on the free atoms. Fixed atoms
 contribute a zero residual so the library's per-atom maximum sees the
 same constrained gradient.
+
+Each template declares a wall-clock ceiling. A start that reaches it
+stops as a cap failure and keeps the harness call count at that stop.
+A later geometry within 1e-6 of an earlier acquisition is recorded as
+cycling. The library step budget stays 500.
 """
 
 from __future__ import annotations
@@ -42,8 +47,13 @@ _CODE_ID = "catlearn"
 _PIN = "6a307f32dbef18da9cd848f632d082b8e4f117b1"
 _VERSION = "0.7.0"
 _FD_STEP = 1e-5
+_CYCLE_ABS = 1e-6
 _INSTALLED = False
-_STATE: dict = {"path": None, "counter": None, "name": ""}
+_STATE: dict = {"path": None, "counter": None, "name": "", "deadline": None}
+
+
+class _WallClock(RuntimeError):
+    """A start reached the wall-clock ceiling declared on its template."""
 _PAIRS: dict[tuple[str, str], dict] = {}
 
 
@@ -443,12 +453,15 @@ def _wrap_progress(mlneb) -> None:
     evaluate_point = mlneb.eval_and_append
 
     def train_gp_model(*args, **kwargs):
+        _raise_if_due()
         began = time.perf_counter()
         trained = train(*args, **kwargs)
         _heartbeat(f"train {time.perf_counter() - began:.3f}s")
+        _raise_if_due()
         return trained
 
     def eval_and_append(self, interesting_point):
+        _raise_if_due()
         began = time.perf_counter()
         evaluate_point(self, interesting_point)
         gradient = np.asarray(self.list_gradients[-1], dtype=np.float64)
@@ -502,6 +515,11 @@ def _settings(template: dict, problem: dict, commit: str) -> dict:
     controls = template.get("mlneb") or {}
     interior = int(band["interior_images"])
     spring = controls.get("spring", None)
+    if "wall_seconds" not in controls:
+        raise ValueError(f"{template['id']} declares no wall-clock ceiling")
+    wall_seconds = float(controls["wall_seconds"])
+    if not np.isfinite(wall_seconds) or wall_seconds <= 0:
+        raise ValueError(f"{template['id']} wall-clock ceiling must be positive")
     return {
         "potential": str(band["potential"]),
         "n_interior": interior,
@@ -519,6 +537,7 @@ def _settings(template: dict, problem: dict, commit: str) -> dict:
         "sequential": bool(controls.get("sequential", False)),
         "neb_method": str(controls.get("neb_method", "improvedtangent")),
         "steps": int(controls.get("steps", 500)),
+        "wall_seconds": wall_seconds,
         "spring": None if spring in (None, "") else float(spring),
         "problem": problem["id"],
         "template": template["id"],
@@ -606,6 +625,16 @@ def _is_cap(exc: BaseException) -> bool:
     return isinstance(exc, RuntimeError) and "force-call cap" in str(exc)
 
 
+def _due() -> bool:
+    deadline = _STATE.get("deadline")
+    return deadline is not None and time.perf_counter() >= float(deadline)
+
+
+def _raise_if_due() -> None:
+    if _due():
+        raise _WallClock("wall-clock ceiling")
+
+
 def _project_rigid(free: np.ndarray, box: np.ndarray | None) -> bool:
     return box is None and bool(np.all(free))
 
@@ -627,7 +656,22 @@ def _complete_rows(ml) -> tuple[np.ndarray, np.ndarray, np.ndarray] | None:
     return trains[:count], targets[:count], gradients[:count]
 
 
-def _judge(job: dict, counter: HarnessCounter, ml, cap_hit: bool) -> dict:
+def _cycle_report(trains) -> tuple[bool, int]:
+    """Count later geometries within ``_CYCLE_ABS`` of an earlier acquisition."""
+    if trains is None:
+        return False, 0
+    points = np.asarray(trains, dtype=np.float64)
+    if points.ndim != 2 or len(points) < 2:
+        return False, 0
+    repeats = 0
+    for index in range(1, len(points)):
+        distances = np.linalg.norm(points[:index] - points[index], axis=1)
+        if np.any(distances <= _CYCLE_ABS):
+            repeats += 1
+    return repeats > 0, repeats
+
+
+def _judge(job: dict, counter: HarnessCounter, ml, cap_hit: bool, wall_hit: bool = False) -> dict:
     settings = job["settings"]
     name = job["name"]
     free = np.asarray(job["free"], dtype=bool)
@@ -635,16 +679,31 @@ def _judge(job: dict, counter: HarnessCounter, ml, cap_hit: bool) -> dict:
     kind = settings["potential"]
     force_norm = float(settings["force_norm"])
     cap = int(settings["cap"])
+    wall_limit = float(settings["wall_seconds"])
     rows = _complete_rows(ml)
     reasons: list[str] = []
     energy = float("nan")
     force = float("nan")
     index = None
-    if cap_hit or counter.calls >= cap:
+    if wall_hit or cap_hit or counter.calls >= cap:
         reasons.append("cap")
+    if wall_hit:
+        reasons.append("wall_clock")
     if rows is None:
         reasons.append("crash")
-        return _record(name, counter, False, reasons, energy, force, index, "missing")
+        return _record(
+            name,
+            counter,
+            cap_hit,
+            wall_hit,
+            reasons,
+            energy,
+            force,
+            index,
+            "missing",
+            (False, 0),
+            wall_limit,
+        )
     trains, targets, gradients = rows
     coords = trains[-1].reshape((-1, 3))
     gradient = gradients[-1].reshape((-1, 3))
@@ -675,13 +734,38 @@ def _judge(job: dict, counter: HarnessCounter, ml, cap_hit: bool) -> dict:
         )
         if index != 1:
             reasons.append("hessian_index")
-    return _record(name, counter, cap_hit, reasons, energy, force, index, "last-acquired")
+    return _record(
+        name,
+        counter,
+        cap_hit,
+        wall_hit,
+        reasons,
+        energy,
+        force,
+        index,
+        "last-acquired",
+        _cycle_report(trains),
+        wall_limit,
+    )
 
 
-def _record(name, counter, cap_hit, reasons, energy, force, index, candidate) -> dict:
+def _record(
+    name,
+    counter,
+    cap_hit,
+    wall_hit,
+    reasons,
+    energy,
+    force,
+    index,
+    candidate,
+    cycle,
+    wall_limit,
+) -> dict:
     failure = classify_failure(reasons)
     finite_energy = float(energy) if np.isfinite(energy) else None
     finite_force = float(force) if np.isfinite(force) else None
+    cycling, repeats = cycle
     return {
         "schema": "optbench.start/v2",
         "start": name,
@@ -698,7 +782,11 @@ def _record(name, counter, cap_hit, reasons, energy, force, index, candidate) ->
         "hessian_index": None if index is None else int(index),
         "converged": failure is None,
         "candidate": candidate,
-        "cap_hit": bool(cap_hit),
+        "cap_hit": bool(cap_hit or wall_hit),
+        "wall_hit": bool(wall_hit),
+        "wall_limit": float(wall_limit),
+        "cycling": bool(cycling),
+        "cycle_repeats": int(repeats),
     }
 
 
@@ -721,6 +809,11 @@ def _crash_record(name: str, calls: int, verify: int, exc: BaseException) -> dic
         "hessian_index": None,
         "converged": False,
         "candidate": "crash",
+        "cap_hit": False,
+        "wall_hit": False,
+        "wall_limit": None,
+        "cycling": False,
+        "cycle_repeats": 0,
     }
 
 
@@ -787,13 +880,17 @@ def _search(job: dict, counter: HarnessCounter) -> dict:
                         sequential=bool(settings["sequential"]),
                         full_output=False,
                     )
+                except _WallClock:
+                    return _judge(job, counter, ml, False, True)
                 except Exception as exc:
                     if _is_cap(exc):
-                        return _judge(job, counter, ml, True)
+                        return _judge(job, counter, ml, True, False)
                     raise
         finally:
             os.chdir(previous)
-    return _judge(job, counter, ml, counter.calls >= int(settings["cap"]))
+    if _due():
+        return _judge(job, counter, ml, False, True)
+    return _judge(job, counter, ml, counter.calls >= int(settings["cap"]), False)
 
 
 def search_one(job: dict) -> dict:
@@ -805,11 +902,18 @@ def search_one(job: dict) -> dict:
     _STATE["name"] = name
     _STATE["path"] = job.get("heartbeat")
     began = time.perf_counter()
+    _STATE["deadline"] = began + float(settings["wall_seconds"])
     try:
         record = _search(job, counter)
     except Exception as exc:
         record = _crash_record(name, counter.calls, counter.verify_calls, exc)
+    finally:
+        _STATE["deadline"] = None
     record["wall_seconds"] = time.perf_counter() - began
+    record["wall_limit"] = float(settings["wall_seconds"])
+    record.setdefault("wall_hit", False)
+    record.setdefault("cycling", False)
+    record.setdefault("cycle_repeats", 0)
     record["seed"] = "0"
     record["problem"] = settings["problem"]
     record["template"] = settings["template"]
@@ -860,6 +964,8 @@ def _dat(records: list[dict], template: dict, settings: dict, partial: bool) -> 
         "# force_calls count spec-potential evaluations and are not divided by the image count",
         "# Gaussian-process predictions stay outside the tally",
         "# the mean is round-half-even over successes; a Hessian index other than 1 is a failure",
+        "# a start at the wall-clock ceiling is a cap failure and keeps its harness call count",
+        "# cycling is a later geometry within 1e-6 of an earlier acquisition",
     ]
     if calls:
         lines.append(f"force_calls {_number(round(statistics.fmean(calls)))}")
@@ -884,6 +990,7 @@ def _dat(records: list[dict], template: dict, settings: dict, partial: bool) -> 
     lines.append(f"problem {settings['problem']}")
     lines.append("counter harness")
     lines.append(f"images {settings['n_interior']}")
+    lines.append(f"wall_limit {_number(settings['wall_seconds'])}")
     if partial:
         lines.append("partial true")
     note = str(template.get("note") or "").strip()
@@ -913,7 +1020,15 @@ def write_outputs(output: Path, records: list[dict], template: dict, settings: d
             parameters=parameters,
         ),
         "score": score_v2(
-            [{"force_calls": row["force_calls"], "success": row["success"]} for row in records],
+            [
+                {
+                    "force_calls": row["force_calls"],
+                    "success": row["success"],
+                    "failure": row.get("failure"),
+                    "reasons": list(row.get("reasons") or []),
+                }
+                for row in records
+            ],
             settings["cap"],
         ),
     }
@@ -961,6 +1076,10 @@ def _dead_worker(job: dict, exc: BaseException) -> dict:
     record["algorithm"] = settings["algorithm"]
     record["tuning"] = settings["tuning"]
     record["wall_seconds"] = None
+    record["wall_limit"] = float(settings["wall_seconds"])
+    record["wall_hit"] = False
+    record["cycling"] = False
+    record["cycle_repeats"] = 0
     return record
 
 
