@@ -466,7 +466,7 @@
    <td data-code="compass" data-template="compass/sqnm" data-par2="561.462"><span class="bench-score">561.462</span><a href="generated/suites/neb.html#Pt-heptamer-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
-   <td data-code="optim">—</td>
+   <td data-code="optim" data-template="optim/dneb-hef" data-par2="913.538"><span class="bench-score">913.538</span><a href="generated/suites/neb.html#Pt-heptamer-templates">optim/dneb-hef</a></td>
    <td data-code="optking">—</td>
    <td data-code="softsaddle">—</td>
    <td data-code="tsase" data-template="tsase/ci-neb" data-par2="1521.15"><span class="bench-score">1521.15</span><a href="generated/suites/neb.html#Pt-heptamer-templates">tsase/ci-neb</a></td>

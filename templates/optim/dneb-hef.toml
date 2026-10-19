@@ -1,0 +1,18 @@
+# Problem-image DNEB/HEF connect. The image count, cap, force norm, and step length come from the problem file.
+# The 2014 odata preambles are optim/de-lj38, optim/de-pt, and optim/de-2ts. This template does not use them.
+# NEWCONNECT is 1 1, NEWNEB uses the problem interior count, and the path quench is BFGSMIN.
+id = "optim/dneb-hef"
+engine = "optim-connect"
+code = "optim"
+code_version = "02aaf452"
+commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+algorithm = "DNEB/HEF problem images"
+tuning = "problem-images"
+
+[band]
+spring = 1.0
+neb_rms = 0.01
+hef_rms = 1.0e-5
+iteration_density = 30
+connect_cycles = 1
+connect_tries = 1

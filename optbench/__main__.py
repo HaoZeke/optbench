@@ -111,6 +111,16 @@ def run(
             limit=limit,
             resume=resume,
         )
+    elif loaded["engine"] == "optim-connect":
+        from optbench.optim_connect import run as run_optim
+
+        summary = run_optim(
+            root,
+            problem,
+            template,
+            output=output,
+            workers=workers,
+        )
     elif loaded["engine"] == "pele-band":
         from optbench.pele_band import run as run_pele
 

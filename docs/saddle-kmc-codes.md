@@ -95,6 +95,10 @@ success-only median. A row with no success has no median.
 | double-ended-saddle-search/lj38_2ts_separation | pathsample/de-2ts | 43/51 | 8 cap | 2972 |
 | double-ended-saddle-search/pt-island | optim/de-pt | 59/59 | 0 | 133 |
 | double-ended-saddle-search/pt-island | pathsample/de-pt | 59/59 | 0 | 137 |
+| double-ended-saddle-search/lj38 | optim/dneb-hef | 10/50 | 40 cap | 1981.5 |
+| double-ended-saddle-search/lj38_2ts_separation | optim/dneb-hef | 23/51 | 27 cap, 1 wrong stationary | 5760 |
+| double-ended-saddle-search/pt-island | optim/dneb-hef | 59/59 | 0 | 1379 |
+| neb/Pt-heptamer | optim/dneb-hef | 13/13 | 0 | 888 |
 | double-ended-saddle-search/lj38 | compass/sqnm | 47/50 | 3 cap | 1221 |
 | double-ended-saddle-search/lj38_2ts_separation | compass/sqnm | 41/51 | 9 cap, 1 wrong stationary | 2265 |
 | neb/Pt-heptamer | compass/sqnm | 13/13 | 0 | 548 |
@@ -160,8 +164,10 @@ other 87 meet the force stop with a Hessian index other than 0, so they
 are wrong stationary. The success median is 72. Start `pos_0000` took 55
 harness calls and stopped at force `0.000842553062284986`, energy
 `-1421.4513232624358`, vibrational index 6. `optim/unhooked` writes nothing.
-Noise is not scored: the relay has no noisy-force window. NEB, tsopt, and
-hTST are not scored. The double-ended rows use the 2014 `odata` preambles.
+Noise is not scored: the relay has no noisy-force window. tsopt and hTST
+are not scored on this socket. The double-ended `optim/de-*` and
+`pathsample/de-*` rows use the 2014 `odata` preambles. `optim/dneb-hef`
+is the problem-image band and uses the harness socket in `codes/optim`.
 The scored geometry is the socket frame whose energy matches the line
 printed before `Converged to TS`. `lbfgs.xyz` is written at the start of
 that `mylbfgs` call. PATHSAMPLE launches those OPTIM jobs. The score sums
@@ -188,8 +194,39 @@ success mean 3454, median 2832.5, min 695, max 9680. `pathsample/de-2ts`
 is 43 of 51, 8 cap, success mean 3507, median 2972, min 698, max 9658.
 The cap is the problem limit of 10000. The seven OPTIM pairs that hit it
 still have a stored force under `1e-5`, because a transition state was
-printed and the connection search kept calling the potential. Pt-heptamer
-has no OPTIM archive row and was not run.
+printed and the connection search kept calling the potential.
+
+`optim/dneb-hef` is the same binary and a different `odata`. `NEWCONNECT`
+is `1 1`. `NEWNEB` takes the problem interior image count, 30 iterations
+per image, and RMS `0.01`, so LJ38 is `NEWNEB 5 150 0.01`. The path quench
+is `BFGSMIN`. `USEDIAG` stays at the compiled default of 2. `STEPS` is the
+problem cap. The count is one `POTENTIAL` entry. LJ38 is 10 of 50, 40 cap,
+success median 1981.5, mean 2386.62, PAR-2 4386.62. A 150-iteration DNEB
+on 5 images, then hybrid eigenvector following out to that cap, is the
+extra cost against `NEWNEB 2 6 0.4`, `BFGSTS 16 13 32 0.52 100`,
+`USEDIAG 3`, and `STEPS 200`. On `pair_39` of the two-saddle set OPTIM
+reported 2505 energy-and-gradient calls and the harness recorded 2506.
+
+Pt island splits the same way. `optim/de-pt` writes coordinates over `r0`
+and energy over `D`, with `NEWNEB 2 6 0.03`, `NEBK 5`, and `STEPS 200`.
+`optim/dneb-hef` keeps eV and angstrom, `NEWNEB 3 90 0.01`, max step 0.2,
+and `STEPS 3000`. It is 59 of 59, median 1379, mean 1465.73.
+
+`lj38_2ts_separation` on `optim/dneb-hef` is 23 of 51, 27 cap, 1 wrong
+stationary, success median 5760, mean 8115.20, PAR-2 13752.33. `pair_39`
+is the wrong stationary, 2506 calls, force norm `8.011279149672727e-05`,
+energy `-167.541922837206`. OPTIM printed `Converged to TS` after 5
+iterations. The `bfgsts` displacements along the lowest mode both lowered
+the energy, by `3.825341196e-6` and `3.817249535e-6`. The free-atom
+Hessian, after the six rigid modes are removed, has curvatures `-7.646639`,
+`-0.025972`, and `-0.025916`. The index is 3. The path.info line `3 C3`
+is the order of the point group C3. The 2014 `run.sh` for this problem
+scores the string `Connected path found`. This run printed `Number of
+allowed connection steps reached`.
+
+Pt-heptamer has no OPTIM line in the 2014 archive. `optim/dneb-hef` is
+the problem-image row there: 8 interior images, cap 10000, force norm
+0.01. It is 13 of 13, median 888, mean 913.54.
 
 ## pARTn
 

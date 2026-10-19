@@ -1365,7 +1365,7 @@ The number is written only after the run finishes under the problem rule.
    <caption>Registry pins.</caption>
    <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
-   <td>saddle search</td>
+   <td>minimization and saddle search</td>
    <td>svn-snapshot</td>
    <td>02aaf45245af</td>
    <td><a href="http://www-wales.ch.cam.ac.uk/svn.tar.bz2">http://www-wales.ch.cam.ac.uk/svn.tar.bz2</a></td>
@@ -1395,6 +1395,17 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="median_calls">65</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 87</td>
    <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-template="optim/dneb-hef">
+   <td>Pt-heptamer</td>
+   <td data-field="template">optim/dneb-hef</td>
+   <td data-field="version">optim 02aaf452</td>
+   <td data-field="commit">02aaf45245af</td>
+   <td data-field="par2_mean">913.538</td>
+   <td data-field="mean_calls">913.538</td>
+   <td data-field="median_calls">888</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
    </tr>
    </tbody></table></div>
    <h3>AIRSS</h3>
