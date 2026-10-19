@@ -137,7 +137,7 @@
    <tr data-problem="lowest-eigenvector/lj38">
    <th scope="row"><a href="generated/suites/lowest-eigenvector.html#lj38">lj38</a></th>
    <td data-code="eOn" data-template="eon-client/low-lj38-lanczos" data-par2="26.385"><span class="bench-score">26.385</span><a href="generated/suites/lowest-eigenvector.html#lj38-templates">eon-client/low-lj38-lanczos</a></td>
-   <td data-code="Eon svn" data-template="eon-svn/low-lj38-lanczos-ljcut" data-par2="26.385"><span class="bench-score">26.385</span><a href="generated/suites/lowest-eigenvector.html#lj38-templates">eon-svn/low-lj38-lanczos-ljcut</a></td>
+   <td data-code="Eon svn" data-template="eon-svn/low-lj38-lanczos" data-par2="26.385"><span class="bench-score">26.385</span><a href="generated/suites/lowest-eigenvector.html#lj38-templates">eon-svn/low-lj38-lanczos</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/mode-lanczos" data-par2="26.12"><span class="bench-score">26.12</span><a href="generated/suites/lowest-eigenvector.html#lj38-templates">rgsaddle/mode-lanczos</a></td>
    <td data-code="ASE">—</td>
