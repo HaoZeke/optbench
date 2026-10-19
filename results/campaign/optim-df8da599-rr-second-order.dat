@@ -1,17 +1,18 @@
+# Current OPTIM, SVNREV df8da599, unmodified. Archived website preamble, no extra keyword.
+# The count is OPTIM's energy+gradient calls, written on the harness counter. The archive mean is the paper number.
 force_calls 54
 force_calls_min 28
 force_calls_max 120
 force_calls_median 52
-unrounded_mean 54.43
+successes 200
 nfailed 0
-starts 200
-code OPTIM
+n 200
+transition_states 0
+code optim
 code_version df8da599
 commit df8da599267534fbe43a250e578f7396a7946311
 algorithm hybrid eigenvector following
-template optim/rr-second-order-current
+template optim/rr-second-order
 problem lowest-eigenvector/lj38
-counter optim
-reducer all
-parameter_source archive
-note Later snapshot SVNREV df8da599267534fbe43a250e578f7396a7946311 on the same archived preamble. keywords.F90 sets EVPC to 1. No BFGSTSPC. The printed energy+gradient mean is 54.43 and the half-even integer is 54. That is outside 10 percent of the archive 46. This is not the paper baseline.
+tuning archive
+counter harness

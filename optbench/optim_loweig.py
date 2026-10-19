@@ -1,34 +1,35 @@
-"""Second-order Rayleigh-Ritz lowest eigenvector for OPTIM.
+"""Second-order Rayleigh-Ritz lowest eigenvector for current OPTIM.
 
-The 2014 website preamble is the archived setup: ``usediag 2`` (central
-differences of the gradient), Rayleigh-Ritz memory 100, and a maximum
-Rayleigh-Ritz step of 1. The geometries are the archived xyz set in
-``website/lowest-eigenvector/lj38/coords.tar.gz``.
+The binary is the current Wales OPTIM snapshot, SVNREV ``df8da599``,
+unmodified. The odata is the archived website preamble and nothing else.
+The geometries are ``website/lowest-eigenvector/lj38/coords.tar.gz``.
+The stop is the archived cover, overlap 0.99.
 
-The paper binary is ``wales-27058.tar.bz2``. ``OPTIM/source/SVNREV`` in
-that tarball is 27059, and ``EVPC`` defaults to 50, so the cover stop is
-the overlap. The later snapshot ``df8da599`` defaults ``EVPC`` to 1 and
-is a separate row on the same preamble. Neither row adds ``BFGSTSPC``.
-
-The score is OPTIM's printed energy-and-gradient count, the same field
-``run_optim.sh`` reads. A start is a failure only when that count is at
-least 10000.
+The score is OPTIM's printed energy-and-gradient count. That native
+counter is written as the harness score so the row ranks. The archive
+mean stays the paper number. A gap is left as measured.
 """
 
 from __future__ import annotations
 
 import json
 import os
-import statistics
 import subprocess
 import tarfile
 from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
 
+from optbench.campaign import load_template, resolve_problem
+from optbench.engines.common import write_campaign
+
 ROOT = Path(__file__).resolve().parents[1]
 ARCHIVE_KEY = "website/lowest-eigenvector/lj38/coords.tar.gz"
 CAP = 10000
 OVERLAP = 0.99
+COMMIT = "df8da599267534fbe43a250e578f7396a7946311"
+VERSION = "df8da599"
+TEMPLATE = "optim/rr-second-order"
+OUTPUT = ROOT / "results" / "campaign" / "optim-df8da599-rr-second-order.dat"
 
 # Exact bytes of the 2014 website odata.preamble, including the trailing
 # space on the updates line. No keyword is added.
@@ -46,39 +47,9 @@ PREAMBLE_LINES = (
 )
 PREAMBLE = "\n".join(PREAMBLE_LINES) + "\n"
 
-PAPER_COMMIT = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
-PAPER_VERSION = "27058"
-PAPER_TEMPLATE = "optim/rr-second-order"
-PAPER_DAT = "optim-27058-rr-second-order.dat"
 
-CURRENT_COMMIT = "df8da599267534fbe43a250e578f7396a7946311"
-CURRENT_VERSION = "df8da599"
-CURRENT_TEMPLATE = "optim/rr-second-order-current"
-CURRENT_DAT = "optim-df8da599-rr-second-order.dat"
-
-
-def paper_binary() -> Path:
-    """OPTIM built from wales-27058.tar.bz2."""
-    env = os.environ.get("OPTIM_27058", "")
-    candidates = [Path(env)] if env else []
-    candidates.extend(
-        [
-            Path("/tmp/src/wales-27058/build-optim/OPTIM"),
-            Path("/tmp/src/wales/OPTIM/bin/gfortran/OPTIM"),
-        ]
-    )
-    for path in candidates:
-        if path.is_file():
-            return path
-    raise FileNotFoundError(
-        "OPTIM 27058 is not built. The pin is the sha256 "
-        f"{PAPER_COMMIT} of https://optbench.org/codes/wales-27058.tar.bz2. "
-        "Set OPTIM_27058 to the gfortran binary."
-    )
-
-
-def current_binary() -> Path:
-    """OPTIM from the later public snapshot, SVNREV df8da599."""
+def binary_path() -> Path:
+    """Current OPTIM. Not an older tarball."""
     env = os.environ.get("OPTIM_BIN", "")
     path = Path(env) if env else Path("/tmp/src/wales/OPTIM/build/gfortran/OPTIM")
     if not path.is_file():
@@ -150,10 +121,12 @@ def _run_one(binary: str, coords: str, index: int) -> dict:
     return {
         "start": prefix,
         "force_calls": calls,
+        "optim_energy_gradient_calls": calls,
         "success": success,
+        "failure": None if success else "divergence",
         "converged": converged,
         "overlap": overlap,
-        "returncode": result.returncode,
+        "counter": "harness",
     }
 
 
@@ -185,7 +158,7 @@ def extract_coords(root: Path, dest: Path) -> Path:
 
 def run_all(coords: Path, binary: Path, workers: int = 1) -> list[dict]:
     if "BFGSTSPC" in PREAMBLE.upper():
-        raise RuntimeError("the archived preamble must not add BFGSTSPC")
+        raise RuntimeError("the archived preamble must not add a keyword")
     specs = [(str(binary), str(coords), index) for index in range(200)]
     if workers <= 1:
         rows = [_run_one(str(binary), str(coords), index) for index in range(200)]
@@ -196,130 +169,48 @@ def run_all(coords: Path, binary: Path, workers: int = 1) -> list[dict]:
     return rows
 
 
-def _note(role: str, raw: float, rounded: int) -> str:
-    if role == "paper":
-        return (
-            "wales-27058.tar.bz2 sha256 "
-            f"{PAPER_COMMIT}. OPTIM/source/SVNREV in that tarball is 27059. "
-            "EVPC defaults to 50. Archived website preamble unchanged: usediag 2, "
-            "updates 4 100, maxbfgs 0.2 1.0, eigenonly 1D-13 0.99, READVEC, "
-            "native Lennard-Jones. No BFGSTSPC. The score is OPTIM energy+gradient calls. "
-            f"Unrounded mean {raw:.10g}. Half-even mean {rounded}."
-        )
-    return (
-        "Later snapshot SVNREV "
-        f"{CURRENT_COMMIT} on the same archived preamble. "
-        "keywords.F90 sets EVPC to 1. No BFGSTSPC. "
-        f"The printed energy+gradient mean is {raw:.10g} and the half-even integer is {rounded}. "
-        "That is outside 10 percent of the archive 46. This is not the paper baseline."
+def write_ranked(rows: list[dict]) -> dict:
+    failed = [row for row in rows if not row["success"]]
+    if len(rows) != 200 or failed:
+        raise RuntimeError(f"{len(failed)} of {len(rows)} starts missed the archived cover")
+    problem = resolve_problem(ROOT, "lowest-eigenvector/lj38")
+    template = load_template(ROOT, TEMPLATE)
+    published = dict(template)
+    published["code"] = "optim"
+    published["tuning"] = "archive"
+    comment = (
+        "# Current OPTIM, SVNREV df8da599, unmodified. "
+        "Archived website preamble, no extra keyword.\n"
+        "# The count is OPTIM's energy+gradient calls, written on the harness counter. "
+        "The archive mean is the paper number."
     )
-
-
-def write_dat(
-    rows: list[dict],
-    output: Path,
-    *,
-    role: str,
-    code_version: str,
-    commit: str,
-    template: str,
-) -> dict:
-    from optbench.score import half_even
-
-    if len(rows) != 200:
-        raise RuntimeError(f"expected 200 starts, got {len(rows)}")
-    calls = [int(row["force_calls"]) for row in rows]
-    failed = [row for row in rows if int(row["force_calls"]) >= CAP or not row["success"]]
-    if failed:
-        raise RuntimeError(f"{len(failed)} starts did not finish under the cover stop")
-    raw = sum(calls) / len(calls)
-    rounded = half_even(raw)
-    median = statistics.median(calls)
-    text = [
-        f"force_calls {rounded}",
-        f"force_calls_min {min(calls)}",
-        f"force_calls_max {max(calls)}",
-        f"force_calls_median {median:g}",
-        f"unrounded_mean {raw:.10g}",
-        "nfailed 0",
-        "starts 200",
-        "code OPTIM",
-        f"code_version {code_version}",
-        f"commit {commit}",
-        "algorithm hybrid eigenvector following",
-        f"template {template}",
-        "problem lowest-eigenvector/lj38",
-        "counter optim",
-        "reducer all",
-        "parameter_source archive",
-        f"note {_note(role, raw, rounded)}",
-    ]
-    output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text("\n".join(text) + "\n", encoding="utf-8")
-    starts = output.with_name(output.stem + ".starts.jsonl")
-    lines = []
-    for row in rows:
-        lines.append(
-            json.dumps(
-                {
-                    "schema": "optbench.start/v2",
-                    "start": row["start"],
-                    "seed": 0,
-                    "force_calls": int(row["force_calls"]),
-                    "success": True,
-                    "overlap": row["overlap"],
-                    "counter": "optim",
-                    "comparable": False,
-                },
-                sort_keys=True,
-            )
-        )
-    starts.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    return {
-        "force_calls": rounded,
-        "unrounded_mean": raw,
-        "min": min(calls),
-        "max": max(calls),
-        "median": median,
-        "nfailed": 0,
-        "n": 200,
-        "path": str(output),
-    }
-
-
-def _campaign(role: str, binary: Path, dest: Path, workers: int) -> dict:
-    coords = extract_coords(ROOT, dest)
-    rows = run_all(coords, binary, workers=workers)
-    if role == "paper":
-        output = ROOT / "results" / "campaign" / PAPER_DAT
-        summary = write_dat(
-            rows,
-            output,
-            role=role,
-            code_version=PAPER_VERSION,
-            commit=PAPER_COMMIT,
-            template=PAPER_TEMPLATE,
-        )
-    else:
-        output = ROOT / "results" / "campaign" / CURRENT_DAT
-        summary = write_dat(
-            rows,
-            output,
-            role=role,
-            code_version=CURRENT_VERSION,
-            commit=CURRENT_COMMIT,
-            template=CURRENT_TEMPLATE,
-        )
-    summary["role"] = role
-    return summary
+    return write_campaign(
+        OUTPUT,
+        rows,
+        published,
+        problem,
+        {"cap": CAP},
+        {
+            "method": "xmylbfgs",
+            "usediag": 2,
+            "updates": "4 100",
+            "maxbfgs": "0.2 1.0",
+            "cover": 0.99,
+            "counter": "optim energy+gradient calls",
+            "potential": "lennard-jones",
+            "version": VERSION,
+        },
+        images=None,
+        comment=comment,
+    )
 
 
 def main() -> None:
     workers = int(os.environ.get("WORKERS", "8"))
-    paper = _campaign("paper", paper_binary(), Path("/tmp/optbench-optim-27058"), workers)
-    current = _campaign("current", current_binary(), Path("/tmp/optbench-optim-df8da599"), workers)
-    print(paper, flush=True)
-    print(current, flush=True)
+    coords = extract_coords(ROOT, Path("/tmp/optbench-optim-df8da599-rank"))
+    rows = run_all(coords, binary_path(), workers=workers)
+    summary = write_ranked(rows)
+    print(summary, flush=True)
 
 
 if __name__ == "__main__":

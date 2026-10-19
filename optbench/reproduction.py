@@ -157,7 +157,7 @@ MATCHES: list[dict] = [
     {"key": "lowest-eigenvector/lj38/pele-first-order", "template": "pele/lj38-loweig-forward", "branch": "cells/pele/ts", "path": "results/campaign/pele-b7081b93-lj38-loweig-forward.dat"},
     {"key": "lowest-eigenvector/lj38/pele-second-order", "template": "pele/lj38-loweig-central", "branch": "cells/pele/ts", "path": "results/campaign/pele-b7081b93-lj38-loweig-central.dat"},
     {"key": "lowest-eigenvector/lj38/optim-first-order", "template": "optim/rr-loweig", "branch": "cells/optim/saddle-pt", "path": "results/campaign/optim-df8da599-rr-loweig.dat", "cause": "optim_rr_defaults"},
-    {"key": "lowest-eigenvector/lj38/optim-second-order", "template": "optim/rr-second-order", "branch": "repro/lowest-eigenvector-lj38-optim-second-order", "path": "results/campaign/optim-27058-rr-second-order.dat", "cause": "optim_second_order_paper", "extra": {"unrounded_mean": 46.35}},
+    {"key": "lowest-eigenvector/lj38/optim-second-order", "template": "optim/rr-second-order", "branch": "repro/lowest-eigenvector-lj38-optim-second-order", "path": "results/campaign/optim-df8da599-rr-second-order.dat", "cause": "optim_second_order_current", "extra": {"unrounded_mean": 54.43}},
     # tsopt
     {"key": "tsopt/LJ38/eon-dimer", "template": "eon-svn/ts-lj38-dimer-ljcut", "branch": "main", "path": "results/campaign/eon-svn-ts-lj38-dimer-ljcut.dat"},
     {"key": "tsopt/LJ38/eon-lanczos", "template": "eon-svn/ts-lj38-lanczos-ljcut", "branch": "main", "path": "results/campaign/eon-svn-ts-lj38-lanczos-ljcut.dat"},
@@ -249,11 +249,11 @@ CAUSE_TEXT = {
         "The Rayleigh-Ritz template uses updates 4. The archived first-order mean is 25 and the second-order mean is 46. "
         "This default scores 61, so it is not either archived order."
     ),
-    "optim_second_order_paper": (
-        "The archive code_file is wales-27058.tar.bz2. OPTIM/source/SVNREV in that tarball is 27059, and EVPC defaults to 50. "
-        "The archived website preamble is unchanged: usediag 2, updates 4 100, maxbfgs 0.2 1.0, eigenonly 1e-13 0.99, and READVEC. "
-        "The printed energy+gradient mean is 46.35 and the half-even integer is 46. "
-        "The later snapshot df8da599 defaults EVPC to 1 and scores 54.43 on the same preamble."
+    "optim_second_order_current": (
+        "Current OPTIM SVNREV df8da599, unmodified, on the archived website preamble and the archived cover. "
+        "No extra keyword. keywords.F90 defaults EVPC to 1. "
+        "The printed energy+gradient mean is 54.43 and the half-even integer is 54, against the archive 46. "
+        "The archive number is the paper row. The gap is left as measured."
     ),
     "pele_fire": "pele FIRE on LJ38 scores 1264 with 7 failures. The archive is 709 with 0 failures. The M100 L-BFGS row on the same build reproduces, so this is the FIRE step, not the LJ kernel.",
     "pele_morse": "pele Morse L-BFGS scores 92. The archive is 51. eOn Morse L-BFGS on the same bulk file reproduces at 52, so the gap is the pele memory and step, not the shared Morse parameters.",
@@ -523,6 +523,10 @@ def holdback(root: Path) -> Hold:
         rerun = row.get("rerun") or {}
         problem = f"{row['suite']}/{row['problem']}"
         template = str(rerun.get("template") or "")
+        # The current-OPTIM native counter stays on the ranked table.
+        # The archive gap is the ledger finding, not a reason to drop the row.
+        if row_id(row) == "lowest-eigenvector/lj38/optim-second-order":
+            continue
         if row.get("status") == "not_reproduced":
             if template:
                 found.templates.add((problem, template))

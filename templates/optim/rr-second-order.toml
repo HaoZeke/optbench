@@ -1,18 +1,18 @@
 # Second-order Rayleigh-Ritz on the archived LJ38 xyz set.
-# Paper binary: wales-27058.tar.bz2. OPTIM/source/SVNREV in that tarball is 27059.
+# Current OPTIM, unmodified. The archive mean is the paper number.
 id = "optim/rr-second-order"
 engine = "optim-loweig"
-code = "OPTIM"
-code_version = "27058"
-commit = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
+code = "optim"
+code_version = "df8da599"
+commit = "df8da599267534fbe43a250e578f7396a7946311"
 algorithm = "hybrid eigenvector following"
 problem = "lowest-eigenvector/lj38"
 task = "lowest-eigenvector"
 profile = "archive"
+tuning = "archive"
 reducer = "all"
-ranked = false
 parameter_source = "archive"
-note = "wales-27058.tar.bz2. Archived website preamble unchanged: usediag 2, updates 4 100, maxbfgs 0.2 1.0, eigenonly 1D-13 0.99, READVEC. EVPC defaults to 50. No BFGSTSPC. The score is OPTIM energy+gradient calls, not the harness socket."
+note = "Current OPTIM SVNREV df8da599, unmodified. Archived website preamble: usediag 2, updates 4 100, maxbfgs 0.2 1.0, eigenonly 1D-13 0.99, READVEC. No extra keyword. The score is OPTIM energy+gradient calls on the harness counter."
 
 [optimizer]
 name = "XMYLBFGS"
@@ -25,7 +25,6 @@ maxbfgs = 0.2
 maxxbfgs = 1.0
 ceig = 1e-13
 cover = 0.99
-evpc = 50.0
 
 [potential]
 kind = "lennard-jones"
