@@ -1,7 +1,7 @@
 # counter harness. One force call is one lennard_jones evaluation.
 # A repeated coordinate is cached, so the gradient of that geometry is the same call.
 # The cap refuses the next search call and does not count it.
-# Success is a finite harness energy at or below -173.927426312 with calls under the cap.
+# Success is a finite harness energy at or below -173.927427 with calls under the cap.
 # SciPy 1.18.1 differential_evolution at the constructor defaults, with maxiter set to the force-call cap. strategy is best1bin, popsize is 15, tol is 0.01, mutation is (0.5, 1), recombination is 0.7, polish is true, init is latinhypercube, atol is 0, updating is immediate, and workers is 1. Each centered coordinate lies in [-6, 6]. The seed is 314159 plus the start index. The force-call cap is 2000000.
 nfailed 100
 code SciPy

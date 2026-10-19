@@ -1,7 +1,7 @@
 # counter harness. One force call is one lennard_jones evaluation.
 # A repeated coordinate is cached, so the gradient of that geometry is the same call.
 # The cap refuses the next search call and does not count it.
-# Success is a finite harness energy at or below -173.927426312 with calls under the cap.
+# Success is a finite harness energy at or below -173.927427 with calls under the cap.
 # SciPy 1.18.1 basinhopping at the constructor defaults, with niter set to the force-call cap. The local minimizer is BFGS with the analytic gradient of optbench.potentials.lennard_jones. Temperature is 1, stepsize is 0.5, interval is 50, target_accept_rate is 0.5, and stepwise_factor is 0.9. The seed is 314159 plus the start index. Starts are centered. The force-call cap is 2000000, the same budget as the eOn LJ38 basin-hopping rows.
 force_calls 781538
 force_calls_min 45429

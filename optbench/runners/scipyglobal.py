@@ -6,10 +6,10 @@ gradient read of one geometry are one evaluation. ``ForceCallCap`` is a
 ``RuntimeError``. The optimizers swallow ``Exception``, so a stop raises
 ``SearchStop``, a ``BaseException``, and the refused call is not counted.
 
-The LJ38 window is the measured energy of the Wales coordinates plus the
-problem ``energy_above_minimum``. LJ75 uses the Cambridge reference energy
-on the problem plus that window. The force-call cap is the cap stated on
-the problem. A hit on the call that fills the cap is a cap failure.
+The success window is the Cambridge Cluster Database energy on the problem
+plus ``energy_above_minimum``. The force-call cap is the cap stated on the
+problem when the problem states one. A hit on the call that fills the cap
+is a cap failure.
 """
 
 from __future__ import annotations
@@ -31,7 +31,6 @@ import numpy as np
 
 from optbench.counter import ForceCallCap, HarnessCounter
 from optbench.failures import classify_failure
-from optbench.lj_minima import LJ38_MINIMUM
 from optbench.potentials import lennard_jones, read_con
 from optbench.score import score_v2, summarize_all, summarize_capped
 from optbench.v2 import collect_provenance, write_starts
@@ -578,11 +577,6 @@ def energy_target(problem: dict) -> float | None:
         return float(potential["energy_minimum"]) + window
     if "energy_minimum" in convergence:
         return float(convergence["energy_minimum"]) + window
-    # LJ38 rows were scored against the measured Wales geometry. Later problem
-    # files also carry a quoted reference. Keep the measured window.
-    if problem.get("id") == "globalopt/lj38":
-        energy, _gradient = lennard_jones(np.asarray(LJ38_MINIMUM, dtype=np.float64))
-        return float(energy) + window
     reference = problem.get("reference") or {}
     if reference.get("energy") not in (None, ""):
         return float(reference["energy"]) + window

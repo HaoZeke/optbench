@@ -54,7 +54,7 @@
         "cap": 2000000,
         "method": "basinhopping",
         "seed": 314159,
-        "target": -173.92742631234793
+        "target": -173.927427
       },
       "present_source": true,
       "provenance": {
@@ -72,7 +72,7 @@
           "cap": 2000000,
           "method": "basinhopping",
           "seed": 314159,
-          "target": -173.92742631234793
+          "target": -173.927427
         }
       },
       "starts": [
@@ -108,7 +108,7 @@
           "start": "0",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -141,7 +141,7 @@
           "start": "1",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -176,7 +176,7 @@
           "start": "2",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -209,7 +209,7 @@
           "start": "3",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -242,7 +242,7 @@
           "start": "4",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -277,7 +277,7 @@
           "start": "5",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -310,7 +310,7 @@
           "start": "6",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -343,7 +343,7 @@
           "start": "7",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -378,7 +378,7 @@
           "start": "8",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -413,7 +413,7 @@
           "start": "9",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -446,7 +446,7 @@
           "start": "10",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -479,7 +479,7 @@
           "start": "11",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -514,7 +514,7 @@
           "start": "12",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -549,7 +549,7 @@
           "start": "13",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -582,7 +582,7 @@
           "start": "14",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -617,7 +617,7 @@
           "start": "15",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -650,7 +650,7 @@
           "start": "16",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -683,7 +683,7 @@
           "start": "17",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -718,7 +718,7 @@
           "start": "18",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -753,7 +753,7 @@
           "start": "19",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -788,7 +788,7 @@
           "start": "20",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -823,7 +823,7 @@
           "start": "21",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -858,7 +858,7 @@
           "start": "22",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -893,7 +893,7 @@
           "start": "23",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -928,7 +928,7 @@
           "start": "24",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -961,7 +961,7 @@
           "start": "25",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -996,7 +996,7 @@
           "start": "26",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -1031,7 +1031,7 @@
           "start": "27",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -1064,7 +1064,7 @@
           "start": "28",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -1099,7 +1099,7 @@
           "start": "29",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -1134,7 +1134,7 @@
           "start": "30",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -1167,7 +1167,7 @@
           "start": "31",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -1202,7 +1202,7 @@
           "start": "32",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -1235,7 +1235,7 @@
           "start": "33",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -1268,7 +1268,7 @@
           "start": "34",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -1301,7 +1301,7 @@
           "start": "35",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -1334,7 +1334,7 @@
           "start": "36",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -1367,7 +1367,7 @@
           "start": "37",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -1400,7 +1400,7 @@
           "start": "38",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -1433,7 +1433,7 @@
           "start": "39",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -1466,7 +1466,7 @@
           "start": "40",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -1501,7 +1501,7 @@
           "start": "41",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -1534,7 +1534,7 @@
           "start": "42",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -1569,7 +1569,7 @@
           "start": "43",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -1604,7 +1604,7 @@
           "start": "44",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -1637,7 +1637,7 @@
           "start": "45",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -1670,7 +1670,7 @@
           "start": "46",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -1703,7 +1703,7 @@
           "start": "47",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -1738,7 +1738,7 @@
           "start": "48",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -1773,7 +1773,7 @@
           "start": "49",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -1806,7 +1806,7 @@
           "start": "50",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -1839,7 +1839,7 @@
           "start": "51",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -1874,7 +1874,7 @@
           "start": "52",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -1907,7 +1907,7 @@
           "start": "53",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -1942,7 +1942,7 @@
           "start": "54",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -1977,7 +1977,7 @@
           "start": "55",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -2012,7 +2012,7 @@
           "start": "56",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -2045,7 +2045,7 @@
           "start": "57",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -2078,7 +2078,7 @@
           "start": "58",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -2113,7 +2113,7 @@
           "start": "59",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -2146,7 +2146,7 @@
           "start": "60",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -2179,7 +2179,7 @@
           "start": "61",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -2214,7 +2214,7 @@
           "start": "62",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -2247,7 +2247,7 @@
           "start": "63",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -2280,7 +2280,7 @@
           "start": "64",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -2313,7 +2313,7 @@
           "start": "65",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -2346,7 +2346,7 @@
           "start": "66",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -2379,7 +2379,7 @@
           "start": "67",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -2414,7 +2414,7 @@
           "start": "68",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -2449,7 +2449,7 @@
           "start": "69",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -2482,7 +2482,7 @@
           "start": "70",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -2517,7 +2517,7 @@
           "start": "71",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -2550,7 +2550,7 @@
           "start": "72",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -2583,7 +2583,7 @@
           "start": "73",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -2618,7 +2618,7 @@
           "start": "74",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -2653,7 +2653,7 @@
           "start": "75",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -2686,7 +2686,7 @@
           "start": "76",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -2719,7 +2719,7 @@
           "start": "77",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -2754,7 +2754,7 @@
           "start": "78",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -2789,7 +2789,7 @@
           "start": "79",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -2822,7 +2822,7 @@
           "start": "80",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -2855,7 +2855,7 @@
           "start": "81",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -2890,7 +2890,7 @@
           "start": "82",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -2923,7 +2923,7 @@
           "start": "83",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -2956,7 +2956,7 @@
           "start": "84",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -2989,7 +2989,7 @@
           "start": "85",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -3022,7 +3022,7 @@
           "start": "86",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -3055,7 +3055,7 @@
           "start": "87",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -3088,7 +3088,7 @@
           "start": "88",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -3121,7 +3121,7 @@
           "start": "89",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -3154,7 +3154,7 @@
           "start": "90",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -3189,7 +3189,7 @@
           "start": "91",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -3224,7 +3224,7 @@
           "start": "92",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -3257,7 +3257,7 @@
           "start": "93",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -3292,7 +3292,7 @@
           "start": "94",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -3325,7 +3325,7 @@
           "start": "95",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -3360,7 +3360,7 @@
           "start": "96",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -3395,7 +3395,7 @@
           "start": "97",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -3430,7 +3430,7 @@
           "start": "98",
           "stop": "cap",
           "success": false,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         },
         {
@@ -3463,7 +3463,7 @@
           "start": "99",
           "stop": "hit",
           "success": true,
-          "target": -173.92742631234793,
+          "target": -173.927427,
           "verify_calls": 0
         }
       ],

@@ -76,8 +76,11 @@ def test_lj38_minimum_matches_the_quoted_wales_energy():
     assert abs(float(energy) - float(QUOTED_ENERGY)) < 1e-5
     assert float(np.linalg.norm(gradient)) < 0.02
     problem = resolve_problem(ROOT, "globalopt/lj38")
+    window = float(problem["convergence"]["energy_above_minimum"])
+    assert float(problem["reference"]["energy"]) == pytest.approx(-173.928427)
     target = energy_target(problem)
-    assert target == pytest.approx(float(energy) + 0.001)
+    assert target == pytest.approx(float(problem["reference"]["energy"]) + window)
+    assert target == pytest.approx(-173.927427)
     lj75 = resolve_problem(ROOT, "globalopt/lj75")
     window = float(lj75["convergence"]["energy_above_minimum"])
     assert energy_target(lj75) == pytest.approx(float(lj75["reference"]["energy"]) + window)
