@@ -35,8 +35,30 @@ def test_the_ledger_covers_the_oracle_in_order():
             assert row["cause"]
         if (row.get("rerun") or {}).get("paper_baseline"):
             assert status == "reproduced"
-    assert counts == {"reproduced": 47, "not_reproduced": 29, "not_rerun": 75}
+    assert counts == {"reproduced": 46, "not_reproduced": 29, "not_rerun": 76}
     assert reproduction_errors(ROOT) == []
+
+
+def test_pt_island_optim_6_records_the_current_image():
+    ledger = {row_id(row): row for row in load_ledger(ROOT / "oracle" / "reproduction.jsonl")}
+    row = ledger["double-ended-saddle-search/pt-island/optim-6"]
+    assert row["status"] == "not_rerun"
+    assert row["in_paper"] is False
+    assert row["checks"] == []
+    assert row["rerun"]["paper_baseline"] is False
+    assert row["rerun"]["template"] == "optim/de-pt-stock"
+    assert row["rerun"]["code_version"] == "26635"
+    assert row["rerun"]["sha"] == "a053dc03d7a75cfbc428dcde26455e2d904d7840"
+    assert row["failure_check"]["archive"] == 0.0
+    assert row["failure_check"]["rerun"] == 59.0
+    assert row["failure_check"]["ok"] is False
+    text = (ROOT / "results" / "campaign" / "optim-26635-de-pt-stock.dat").read_text(encoding="utf-8")
+    assert "counter harness" in text
+    assert "code_version 26635" in text
+    assert "n 59" in text
+    assert "nfailed 59" in text
+    assert "ranked" not in text
+    assert "partial" not in text
 
 
 def test_pele_paper_baseline_is_the_2014_stop():

@@ -78,6 +78,7 @@ z
      <use xlink:href="#m2d8934182f" x="78.169091" y="36.816364" style="fill: #1f77b4"/>
      <use xlink:href="#m2d8934182f" x="78.169091" y="36.816364" style="fill: #1f77b4"/>
      <use xlink:href="#m2d8934182f" x="78.169091" y="36.816364" style="fill: #1f77b4"/>
+     <use xlink:href="#m2d8934182f" x="78.169091" y="36.816364" style="fill: #1f77b4"/>
     </g>
    </g>
    <g id="matplotlib.axis_1">
@@ -329,6 +330,9 @@ L 507.6 26.16
     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="81.169091" y="33.816364" transform="rotate(-0 81.169091 33.816364)">26</text>
    </g>
    <g id="text_42">
+    <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="81.169091" y="33.816364" transform="rotate(-0 81.169091 33.816364)">27</text>
+   </g>
+   <g id="text_43">
     <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="282.66" y="20.16" transform="rotate(-0 282.66 20.16)">Cost and success: double-ended-saddle-search/pt-island</text>
    </g>
   </g>
