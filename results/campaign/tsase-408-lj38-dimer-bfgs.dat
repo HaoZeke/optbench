@@ -1,0 +1,20 @@
+# counter harness. One force call is one SSDimer.forceCalls increment at TSASE r408.
+# dimer_rotate.py: rotationOpt bfgs, phi_tol 0, dR 0.001, ss false, overlap above 0.99.
+# The initial mode is the shared seed 314159. The potential is unshifted lj/cut, cutoff 40.
+# report.sh prints the mean with printf %.0f and writes nfailed 0.
+force_calls 27
+force_calls_min 13
+force_calls_max 70
+force_calls_median 25.5
+successes 200
+nfailed 0
+n 200
+transition_states 0
+code TSASE
+code_version 408
+commit 55844612b607a0d4b9c0205917021b0c34975cc6
+algorithm Dimer BFGS
+template tsase-408/lj38-dimer-bfgs
+problem lowest-eigenvector/lj38
+tuning archive
+counter harness

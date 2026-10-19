@@ -20,6 +20,7 @@ def test_named_engines_are_in_the_table():
     assert list(ENGINES) == [
         "partn",
         "tsase",
+        "tsase-408",
         "optim",
         "pykmc",
         "lammps",
@@ -44,6 +45,7 @@ def test_named_engines_are_in_the_table():
     assert pykmc_available() == found["pykmc"]
     assert found["partn"] is None or "libartn" in found["partn"]
     assert found["tsase"] is None or "ssneb.py" in found["tsase"]
+    assert found["tsase-408"] is None or "55844612" in found["tsase-408"]
     assert found["lammps"] is None or "liblammps" in found["lammps"]
     assert found["dlfind"] is None or "libdlfind" in found["dlfind"]
     assert found["compass"] is None or "compass.py" in found["compass"]
@@ -65,6 +67,7 @@ def test_new_templates_match_a_problem_stop():
         "tsase/mdmin-lj38",
         "tsase/mode-lj38",
         "tsase/neb",
+        "tsase-408/lj38-dimer-bfgs",
         "pykmc/lattice",
         "optim/unhooked",
         "optim/lbfgs-lj38",

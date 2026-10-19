@@ -16453,18 +16453,19 @@
       "profile": {
         "area_log10": {
           "eon-client/low-lj38-dimer-cg 3.5.0 campaign 4d8b34b": 0.9632959861247398,
-          "eon-client/low-lj38-dimer-lbfgs 3.5.0 campaign 4d8b34b": 0.9828629358428986,
-          "eon-client/low-lj38-lanczos 3.5.0 campaign 4d8b34b": 1.0039350355393772,
+          "eon-client/low-lj38-dimer-lbfgs 3.5.0 campaign 4d8b34b": 0.9813577858645787,
+          "eon-client/low-lj38-lanczos 3.5.0 campaign 4d8b34b": 1.0024298855610574,
           "eon-svn/low-lj38-dimer-cg r2549 campaign r2549": 0.9632959861247398,
-          "eon-svn/low-lj38-dimer-lbfgs r2549 campaign r2549": 0.9828629358428986,
-          "eon-svn/low-lj38-lanczos-ljcut r2549 campaign r2549": 1.0039350355393772,
+          "eon-svn/low-lj38-dimer-lbfgs r2549 campaign r2549": 0.9813577858645787,
+          "eon-svn/low-lj38-lanczos-ljcut r2549 campaign r2549": 1.0024298855610574,
           "partn/mode-lj38 1.1.0 default campaign 9b75351": 0.8940590871220242,
           "pysisyphus/lanczos-lj38 0.1.dev1 default campaign a4ce10d": 0.833100513000068,
           "rgsaddle/mode-dimer 0.2.2 default campaign, asv c0db2b8": 0.9422238864282612,
           "rgsaddle/mode-dimer-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.7962243385312302,
           "rgsaddle/mode-lanczos 0.2.2 default campaign, asv c0db2b8": 1.038553485040735,
           "rgsaddle/mode-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.8820178872954649,
-          "sella-0.1.1/lj38-loweig 0.1.1 archive campaign, asv 0.1.1": 1.1740169830895266,
+          "sella-0.1.1/lj38-loweig 0.1.1 archive campaign, asv 0.1.1": 1.1732644081003667,
+          "tsase-408/lj38-dimer-bfgs 408 archive campaign 5584461": 0.9896361107453382,
           "tsase/mode-lj38 1.0 default campaign 98aac60": 0.15804074772359014
         },
         "rho": {
@@ -16476,14 +16477,14 @@
             1.0
           ],
           "eon-client/low-lj38-dimer-lbfgs 3.5.0 campaign 4d8b34b": [
-            0.01,
+            0.0,
             0.78,
             0.98,
             1.0,
             1.0
           ],
           "eon-client/low-lj38-lanczos 3.5.0 campaign 4d8b34b": [
-            0.04,
+            0.03,
             0.825,
             0.99,
             1.0,
@@ -16497,14 +16498,14 @@
             1.0
           ],
           "eon-svn/low-lj38-dimer-lbfgs r2549 campaign r2549": [
-            0.01,
+            0.0,
             0.78,
             0.98,
             1.0,
             1.0
           ],
           "eon-svn/low-lj38-lanczos-ljcut r2549 campaign r2549": [
-            0.04,
+            0.03,
             0.825,
             0.99,
             1.0,
@@ -16553,9 +16554,16 @@
             1.0
           ],
           "sella-0.1.1/lj38-loweig 0.1.1 archive campaign, asv 0.1.1": [
-            0.8,
+            0.795,
             1.0,
             1.0,
+            1.0,
+            1.0
+          ],
+          "tsase-408/lj38-dimer-bfgs 408 archive campaign 5584461": [
+            0.045,
+            0.785,
+            0.98,
             1.0,
             1.0
           ],
@@ -16581,6 +16589,7 @@
           "rgsaddle/mode-lanczos 0.2.2 default campaign, asv c0db2b8": 1.0,
           "rgsaddle/mode-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 1.0,
           "sella-0.1.1/lj38-loweig 0.1.1 archive campaign, asv 0.1.1": 1.0,
+          "tsase-408/lj38-dimer-bfgs 408 archive campaign 5584461": 1.0,
           "tsase/mode-lj38 1.0 default campaign 98aac60": 0.89
         },
         "taus": [
@@ -16769,6 +16778,51 @@
           "success_rate": 1.0,
           "template": "eon-svn/low-lj38-lanczos-ljcut",
           "tuning": "",
+          "wilson_high": 1.0,
+          "wilson_low": 0.9811546736227335
+        },
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": 10000,
+          "code": "TSASE",
+          "code_version": "408",
+          "commit": "55844612b607a0d4b9c0205917021b0c34975cc6",
+          "comparable": true,
+          "counter": "harness",
+          "current": true,
+          "entry": "tsase-408-lj38-dimer-bfgs",
+          "failures": {
+            "cap": 0,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 0
+          },
+          "full_n": 200,
+          "history": false,
+          "max_calls": 70.0,
+          "mean_calls": 27.125,
+          "mean_per_image": null,
+          "median": 25.5,
+          "median_calls": 25.5,
+          "median_high": 26.0,
+          "median_low": 24.0,
+          "median_per_image": null,
+          "min_calls": 13.0,
+          "n": 200,
+          "nfailed": 0,
+          "note": "starts.jsonl",
+          "par2_mean": 27.125,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/tsase-408-lj38-dimer-bfgs.dat",
+          "problem": "lowest-eigenvector/lj38",
+          "registry_match": true,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 1.0,
+          "template": "tsase-408/lj38-dimer-bfgs",
+          "tuning": "archive",
           "wilson_high": 1.0,
           "wilson_low": 0.9811546736227335
         },
@@ -42122,7 +42176,7 @@
       "title": "pt-island"
     }
   },
-  "ranked_count": 439,
+  "ranked_count": 440,
   "schema": "optbench.board/v1",
   "unmapped": [
     {

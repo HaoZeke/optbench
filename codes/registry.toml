@@ -181,6 +181,24 @@ profile = "archive"
 task = "lowest-eigenvector"
 ranked = true
 
+[[code]]
+id = "tsase-408"
+name = "TSASE"
+role = "lowest eigenvector"
+repository = "https://github.com/henkelmangroup/tsase"
+ref = "55844612b607a0d4b9c0205917021b0c34975cc6"
+commit = "55844612b607a0d4b9c0205917021b0c34975cc6"
+committed = "2014-06-18"
+note = "Commit 55844612 is the 408th commit, the code_version written by the 18 Jun 2014 dimer report. The dimer is the Python SSDimer BFGS rotation. Fortran calculators are not built. This pin is not the 98aac60 TSASE used by the other rows."
+
+[[template]]
+id = "tsase-408/lj38-dimer-bfgs"
+code = "tsase-408"
+problem = "lowest-eigenvector/lj38"
+profile = "archive"
+task = "lowest-eigenvector"
+ranked = true
+
 # generated ASE and Sella templates
 
 [[template]]

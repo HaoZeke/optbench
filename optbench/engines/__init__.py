@@ -20,12 +20,14 @@ from . import (
     partn,
     pykmc_search,
     pysis_search,
+    tsase_408,
     tsase_search,
 )
 
 _MODULES = (
     partn,
     tsase_search,
+    tsase_408,
     optim_search,
     pykmc_search,
     lammps_min,

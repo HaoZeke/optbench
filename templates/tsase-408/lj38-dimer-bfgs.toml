@@ -1,0 +1,29 @@
+id = "tsase-408/lj38-dimer-bfgs"
+engine = "tsase-408"
+code = "TSASE"
+code_version = "408"
+commit = "55844612b607a0d4b9c0205917021b0c34975cc6"
+algorithm = "Dimer BFGS"
+problem = "lowest-eigenvector/lj38"
+task = "lowest-eigenvector"
+profile = "archive"
+tuning = "archive"
+reducer = "all"
+ranked = true
+parameter_source = "archive"
+note = "Archive dimer_rotate.py at TSASE r408: SSDimer BFGS, phi_tol 0, dR 0.001, ss false. rotationMax grows until the absolute overlap with the reference mode exceeds 0.99. The score is that object's forceCalls. The shared initial mode is seed 314159. The potential is unshifted lj/cut, epsilon 1, sigma 1, cutoff 40. report.sh rounds the mean with printf %.0f and writes nfailed 0."
+
+[stop]
+overlap = 0.99
+max_force_calls = 10000
+max_rotations = 1000
+
+[potential]
+kind = "lennard-jones"
+epsilon = 1.0
+sigma = 1.0
+rc = 40.0
+pbc = [false, false, false]
+
+[input]
+archive_path = "website/lowest-eigenvector/lj38/coords-con.tar.gz"

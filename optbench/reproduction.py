@@ -153,6 +153,7 @@ MATCHES: list[dict] = [
     {"key": "lowest-eigenvector/lj38/eon-dimer-lbfgs", "template": "eon-client/low-lj38-dimer-lbfgs", "branch": "main", "path": "results/campaign/eon-client-low-lj38-dimer-lbfgs.dat"},
     {"key": "lowest-eigenvector/lj38/eon-lanczos", "template": "eon-svn/low-lj38-lanczos-ljcut", "branch": "main", "path": "results/campaign/eon-svn-low-lj38-lanczos-ljcut.dat"},
     {"key": "lowest-eigenvector/lj38/sella", "template": "sella-0.1.1/lj38-loweig", "branch": "cells/fill-not-rerun", "path": "results/campaign/sella-0.1.1-lj38-loweig.dat"},
+    {"key": "lowest-eigenvector/lj38/tsase-dimer-bfgs", "template": "tsase-408/lj38-dimer-bfgs", "branch": "repro/lowest-eigenvector-lj38-tsase-dimer-bfgs", "path": "results/campaign/tsase-408-lj38-dimer-bfgs.dat"},
     {"key": "lowest-eigenvector/lj38/pele-first-order", "template": "pele/lj38-loweig-forward", "branch": "cells/pele/ts", "path": "results/campaign/pele-b7081b93-lj38-loweig-forward.dat"},
     {"key": "lowest-eigenvector/lj38/pele-second-order", "template": "pele/lj38-loweig-central", "branch": "cells/pele/ts", "path": "results/campaign/pele-b7081b93-lj38-loweig-central.dat"},
     {"key": "lowest-eigenvector/lj38/optim-first-order", "template": "optim/rr-loweig", "branch": "cells/optim/saddle-pt", "path": "results/campaign/optim-df8da599-rr-loweig.dat", "cause": "optim_rr_defaults"},
@@ -466,6 +467,23 @@ def _sha(branch: str) -> str:
             cwd=Path(__file__).resolve().parents[1],
             text=True,
         ).strip()
+    if branch == "repro/lowest-eigenvector-lj38-tsase-dimer-bfgs" and len(SHA.get(branch, "")) < 12:
+        import subprocess
+
+        root = Path(__file__).resolve().parents[1]
+        try:
+            SHA[branch] = subprocess.check_output(
+                ["git", "rev-parse", f"origin/{branch}"],
+                cwd=root,
+                text=True,
+                stderr=subprocess.DEVNULL,
+            ).strip()
+        except subprocess.CalledProcessError:
+            SHA[branch] = subprocess.check_output(
+                ["git", "rev-parse", "HEAD"],
+                cwd=root,
+                text=True,
+            ).strip()
     if branch == "cells/optim/saddle-pt" and len(SHA.get(branch, "")) < 12:
         import subprocess
 
