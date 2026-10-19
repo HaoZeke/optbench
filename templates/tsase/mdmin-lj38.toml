@@ -1,0 +1,14 @@
+# TSASE MDMin on LJ38 minimisation.
+id = "tsase/mdmin-lj38"
+engine = "tsase"
+problem = "minimization/lj38"
+code = "tsase"
+code_version = "1.0"
+commit = "98aac60b5d9905e81ee4e6b8c385f169258d0218"
+algorithm = "MDMin"
+tuning = "default"
+note = "The copied ASE MDMin stepper. The stop is the problem Euclidean force norm, not the per-atom force."
+
+[tsase]
+method = "mdmin"
+max_step = 0.1

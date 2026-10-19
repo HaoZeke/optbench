@@ -1,0 +1,64 @@
+{
+  "counter": "harness",
+  "legacy": {
+    "force_calls": 1067,
+    "force_calls_max": 4139,
+    "force_calls_median": 974,
+    "force_calls_min": 463,
+    "n": 1000,
+    "nfailed": 3,
+    "successes": 997,
+    "transition_states": 3
+  },
+  "problem": "minimization/lj38",
+  "provenance": {
+    "code": "lammps",
+    "code_version": "30 Sep 2026",
+    "commit": "8de817dd79bfe4525d5d39246a212d833e6dee07",
+    "machine": {
+      "machine": "x86_64",
+      "node": "cursor",
+      "python": "3.12.3",
+      "system": "Linux"
+    },
+    "parameters": {
+      "counter": "harness",
+      "fix": "external pf/callback",
+      "min_style": "hftn",
+      "pair_style": "zero",
+      "sigma": 0.0
+    }
+  },
+  "schema": "optbench.score/v2",
+  "score": {
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 20261015,
+    "cap": 10000,
+    "includes_failures": true,
+    "iqr": 426.25,
+    "iqr_high": 465.5,
+    "iqr_low": 395.0,
+    "mean": 1123.814,
+    "median": 974.0,
+    "median_high": 996.0,
+    "median_low": 951.5,
+    "n": 1000,
+    "n_cap": 0,
+    "n_crash": 0,
+    "n_divergence": 0,
+    "n_wrong_stationary": 3,
+    "nfailed": 3,
+    "par2_mean": 1123.814,
+    "par_applied": true,
+    "par_factor": 2,
+    "q25": 808.75,
+    "q75": 1235.0,
+    "scoring": "par2-wilson-bootstrap",
+    "success_only_mean": 1067.0150451354061,
+    "success_rate": 0.997,
+    "successes": 997,
+    "wilson_high": 0.9989792161188614,
+    "wilson_low": 0.9912169859464969
+  },
+  "template": "lammps/hftn-lj38"
+}
