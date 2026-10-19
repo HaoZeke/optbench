@@ -40,6 +40,54 @@ def test_one_search_gets_the_whole_delta():
     assert rows[0]["force_calls"] == 19
 
 
+def test_blank_tuning_is_left_out_of_the_dat():
+    from optbench.dat import parse
+    from optbench.pykmc_kmc import htst_dat
+
+    summary = {
+        "barrier_jobs": 1.5,
+        "barrier_force_calls": 12,
+        "barrier_cycles": 1,
+        "rate_jobs": None,
+        "matched_barriers": 15,
+        "reference_barriers": 15,
+        "processes": 1,
+    }
+    bare = {
+        "id": "eon-client/htst-pt-dimer-lbfgs",
+        "code": "eOn",
+        "code_version": "3.6.0",
+        "commit": "4c1b814f62f1dcf5fcd0cf18ba0b6df3bcff7a28",
+        "algorithm": "Dimer L-BFGS",
+        "reducer": "htst-cycles",
+    }
+    text = htst_dat(
+        summary,
+        template=bare,
+        problem={"id": "hTST/Pt", "convergence": {"max_force_calls": 20000000}},
+        spec=HTST["hTST/Pt"],
+        searches=3,
+        minimize_calls=0,
+        partial=False,
+        comments=["# counter harness"],
+    )
+    fields = parse(text)
+    assert "tuning" not in fields
+    assert fields["counter"] == "harness"
+    assert fields["cap"] == "20000000"
+    tuned = htst_dat(
+        summary,
+        template={**bare, "tuning": "beland-2015-pt111"},
+        problem={"id": "hTST/Pt", "convergence": {"max_force_calls": 20000000}},
+        spec=HTST["hTST/Pt"],
+        searches=3,
+        minimize_calls=0,
+        partial=False,
+        comments=["# counter harness"],
+    )
+    assert parse(tuned)["tuning"] == "beland-2015-pt111"
+
+
 def test_window_cost_is_the_harness_sum():
     spec = HTST["hTST/Pt"]
     barriers = list(spec["barriers"])

@@ -257,10 +257,10 @@ def htst_dat(
     lines.append(f"total_searches {int(searches)}")
     lines.append(f"minimize_calls {int(minimize_calls)}")
     lines.append(f"code {template.get('code', 'pyKMC')}")
-    lines.append(f"code_version {template.get('code_version', '')}")
-    lines.append(f"commit {template.get('commit', '')}")
-    lines.append(f"algorithm {template.get('algorithm', '')}")
-    lines.append(f"tuning {template.get('tuning', '')}")
+    for key in ("code_version", "commit", "algorithm", "tuning"):
+        value = str(template.get(key) or "").strip()
+        if value:
+            lines.append(f"{key} {value}")
     lines.append(f"template {template['id']}")
     lines.append(f"problem {problem['id']}")
     lines.append("counter harness")
