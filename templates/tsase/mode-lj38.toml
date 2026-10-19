@@ -1,0 +1,17 @@
+# TSASE dimer rotation against the LJ38 reference mode.
+id = "tsase/mode-lj38"
+engine = "tsase"
+problem = "lowest-eigenvector/lj38"
+code = "tsase"
+code_version = "1.0"
+commit = "98aac60b5d9905e81ee4e6b8c385f169258d0218"
+algorithm = "SSDimer"
+tuning = "default"
+note = "Rotation only. The dimer is not translated. Success is absolute overlap 0.99 with the reference mode."
+
+[tsase]
+method = "dimer"
+max_step = 0.2
+dr = 0.001
+phi_tol = 5.0
+rotation_max = 4
