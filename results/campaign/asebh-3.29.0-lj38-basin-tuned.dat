@@ -6,8 +6,8 @@
 # Temperature 8000 K is the archived eOn value, stored by ASE as kT = 8000 * kB. Displacement 0.5 and the LBFGS force stop 0.001 are the archived keys. ASE does not adjust the step size. The local iteration bound is 1000, the archived max_iterations. Seed 314159 is the archived random_seed, reused for every start. The problem file states no force-call cap. This cap is 2000000, above the archived eOn maximum of 1795901.
 force_calls_min 2000000
 force_calls_max 2000000
-nfailed 68
-starts 68
+nfailed 76
+starts 76
 code asebh
 code_version 3.29.0
 commit f27c0005ae6a67ea419f996e728668865bfc1f86
@@ -21,13 +21,13 @@ cap 2000000
 seed 314159
 par2_mean 4000000
 wilson_low 0
-wilson_high 0.0534713365201
+wilson_high 0.0481135850651
 par2_median 4000000
 par2_median_low 4000000
 par2_median_high 4000000
 v2_successes 0
-n 68
-n_cap 68
+n 76
+n_cap 76
 n_wrong_stationary 0
 n_divergence 0
 n_crash 0
