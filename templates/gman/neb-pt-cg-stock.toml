@@ -6,7 +6,7 @@ code_version = "r235"
 commit = "r235"
 algorithm = "cg"
 failure_cap = 10000
-paper_baseline = false
+paper_baseline = true
 tuning = "stock"
 note = "Latest public release is Gman r235 (package version 1.0.0.01, Gman-r235.tgz). No newer release is published. cg.init() keeps its defaults, maxmove 0.2 and dR 0.0001. neb.relax keeps its defaults except the archive convergence: fmax 0.01 and converge Fmag, on the 13 Pt-heptamer pairs and 8 images. Stock method is off, stock itrmax is 100, stock spring is 5, stock tangent is new. pot.count is the native counter. PAR-2 ranks that band total. The 2014 benchmark.dat integer stays the unranked paper row."
 

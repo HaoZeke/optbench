@@ -169,7 +169,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | Pt-heptamer/eon-fire | force_calls 86 | 85 | reproduced |
 | Pt-heptamer/eon-lbfgs | force_calls 42 | 40 | reproduced |
 | Pt-heptamer/eon-qm | force_calls 164 | 165 | reproduced |
-| Pt-heptamer/gman-cg | force_calls 111 | 120 | reproduced |
+| Pt-heptamer/gman-cg | force_calls 111 | 116 | reproduced |
 | Pt-heptamer/gman-fire | — | — | not rerun |
 | Pt-heptamer/gman-glbfgs-hess | — | — | not rerun |
 | Pt-heptamer/gman-glbfgs-line | — | — | not rerun |
