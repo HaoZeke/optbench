@@ -92,6 +92,15 @@ def test_residual_jacobian_is_the_loss_gradient():
     assert np.allclose(rebuilt, grad, rtol=1e-8, atol=1e-8)
 
 
+def test_force_jacobian_row_matches_one_component():
+    model, weights = _model(forces=True)
+    _loss, _grad, aux = model.loss_grad(weights, jacobian=True)
+    image, atom, coord = 2, 1, 2
+    _value, column = model.image_force_jacobian(weights, image, atom, coord)
+    index = model.n_images + (image * model.n_atoms + atom) * 3 + coord
+    assert np.allclose(aux["jacobian"][:, index], column, rtol=1e-12, atol=1e-12)
+
+
 def test_g1_matches_the_closed_form():
     elements, specs = parse_fpparas(FP)
     pos = np.zeros((1, 2, 3))

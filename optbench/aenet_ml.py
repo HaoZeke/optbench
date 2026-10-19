@@ -578,24 +578,13 @@ class LossModel:
 
     def _force_jacobian(self, packed, scale_f: float) -> np.ndarray:
         """Rows are ``d e_{i,a,x} / dW`` with atom-major ``x, y, z`` order."""
-        rows = []
-        for image in range(self.n_images):
-            jac = np.zeros((self.n_atoms * 3, self.layout.n), dtype=np.float64)
-            for element in self.layout.elements:
-                dG = self.dG[element][image]
-                # dG: (n_e, n_fp, atoms, 3). up_u for each (atom, coord):
-                # de/du = scale_f * dF/du = scale_f * (-dG[:, :, atom, coord])
-                n_e, n_fp, n_atoms, _ = dG.shape
-                up_u = -scale_f * np.transpose(dG, (2, 3, 0, 1)).reshape(n_atoms * 3, n_e, n_fp)
-                up_e = np.zeros((n_atoms * 3, n_e), dtype=np.float64)
-                G = self.fp[element][image]
-                cache = _forward(G, packed[element])
-                parts = _backward(G, packed[element], up_e, up_u, cache)
-                block = _concat_batch(parts)
-                start, stop = self.layout.element_span(element)
-                jac[:, start:stop] = block
-            rows.append(jac)
-        return np.concatenate(rows, axis=0)
+        n_rows = self.n_images * self.n_atoms * 3
+        jac = np.zeros((n_rows, self.layout.n), dtype=np.float64)
+        for element in self.layout.elements:
+            block = _element_force_jacobian(self.fp[element], self.dG[element], packed[element], scale_f)
+            start, stop = self.layout.element_span(element)
+            jac[:, start:stop] = block
+        return jac
 
     def image_energy_jacobian(self, weights: np.ndarray, image: int) -> tuple[float, np.ndarray]:
         """One structure, at the current weights. Used by the serial EKF."""
@@ -649,6 +638,53 @@ def _concat_batch(parts: list[np.ndarray]) -> np.ndarray:
         else:
             columns.append(part.reshape(part.shape[0], -1))
     return np.concatenate(columns, axis=1)
+
+
+def _element_force_jacobian(G, dG, packed, scale_f: float, chunk: int = 16) -> np.ndarray:
+    """``(images * atoms * 3, n_parameters)`` for one element.
+
+    Same vector-Jacobian product as ``_backward`` with a zero energy
+    upstream and ``up_u = -scale_f * dG``. Images are chunked so the
+    force-row batch stays in memory when several workers run at once.
+    """
+    n_images = int(G.shape[0])
+    n_atoms = int(dG.shape[3])
+    n_force = n_atoms * 3
+    n_param = sum(int(np.size(packed[key])) for key in ("W1", "b1", "W2", "b2", "W3", "b3"))
+    out = np.zeros((n_images, n_force, n_param), dtype=np.float64)
+    for begin in range(0, n_images, chunk):
+        end = min(begin + chunk, n_images)
+        out[begin:end] = _element_force_chunk(G[begin:end], dG[begin:end], packed, scale_f)
+    return out.reshape(n_images * n_force, n_param)
+
+
+def _element_force_chunk(G, dG, packed, scale_f: float) -> np.ndarray:
+    """One chunk. ``dG`` is ``(images, atoms_of_element, n_fp, atoms, 3)``."""
+    W1, W2 = packed["W1"], packed["W2"]
+    h1, h2, _energy, _u, s1, s2, v, sech1, sech2, w3 = _forward(G, packed)
+    n_images, _n_e, n_fp, n_atoms, _ = dG.shape
+    up_u = -scale_f * np.transpose(dG, (0, 3, 4, 1, 2)).reshape(n_images, n_atoms * 3, _n_e, n_fp)
+    # Force path of ``_backward``. The energy upstream is zero.
+    ds1 = np.einsum("iraf,pf->irap", up_u, W1, optimize=True)
+    dW1 = np.einsum("iap,iraf->irpf", s1, up_u, optimize=True)
+    dv = ds1 * sech1[:, None, :, :]
+    dh1_u = ds1 * (-2.0 * h1[:, None, :, :]) * v[:, None, :, :]
+    ds2 = dv @ W2.T
+    dW2 = np.einsum("iaq,irap->irqp", s2, dv, optimize=True)
+    dw3 = np.einsum("iraq,iaq->irq", ds2, sech2, optimize=True)
+    dh2 = ds2 * (-2.0 * h2[:, None, :, :]) * w3
+    dz2 = dh2 * sech2[:, None, :, :]
+    dW2 = dW2 + np.einsum("iraq,iap->irqp", dz2, h1, optimize=True)
+    db2 = dz2.sum(axis=-2)
+    dh1 = dz2 @ W2 + dh1_u
+    dz1 = dh1 * sech1[:, None, :, :]
+    dW1 = dW1 + np.einsum("irap,iaf->irpf", dz1, G, optimize=True)
+    db1 = dz1.sum(axis=-2)
+    dW3 = dw3.reshape(n_images, n_atoms * 3, 1, w3.shape[0])
+    db3 = np.zeros((n_images, n_atoms * 3, 1), dtype=np.float64)
+    parts = (dW1, db1, dW2, db2, dW3, db3)
+    columns = [part.reshape(n_images, n_atoms * 3, -1) for part in parts]
+    return np.concatenate(columns, axis=2)
 
 
 def group_norms(gradient: np.ndarray, layout: Layout) -> list[float]:
