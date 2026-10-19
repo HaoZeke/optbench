@@ -193,7 +193,12 @@ class HarnessLennardJones:
             raise SearchStop("cap") from exc
         if not fresh and cached is not None:
             energy, gradient = cached
+            # A stuck line search repeats one geometry. A real step moves.
+            self._repeat = getattr(self, "_repeat", 0) + 1
+            if self._repeat > 100:
+                raise Exploded("repeated geometry")
         else:
+            self._repeat = 0
             energy, gradient = lennard_jones(coords)
             gradient = tuple(float(value) for value in np.asarray(gradient, dtype=np.float64).reshape(-1))
             energy = float(energy)
@@ -209,10 +214,9 @@ class HarnessLennardJones:
                 f"{Path.cwd().name} calls={calls} lowest={lowest}",
                 flush=True,
             )
-        # A line search on a near-overlap otherwise takes steps smaller than
-        # a coordinate change and never returns. Basin hopping counts this as
-        # a failed quench. Minima hopping records divergence.
-        if not math.isfinite(energy) or energy > 1.0e6:
+        # The Lennard-Jones 75 archive starts overlapped, and a quench can
+        # still climb out. Only a non-finite energy is an immediate stop.
+        if not math.isfinite(energy):
             raise Exploded(f"energy {energy}")
         forces = -np.asarray(gradient, dtype=np.float64).reshape(-1, 3)
         self.results = {"energy": float(energy), "forces": forces}
