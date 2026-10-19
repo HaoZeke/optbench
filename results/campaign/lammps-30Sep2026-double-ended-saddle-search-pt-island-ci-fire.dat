@@ -1,0 +1,22 @@
+# counter harness pair computes summed across replicas
+# force_calls are the band total and are not divided by the image count
+# the mean is round-half-even over successes
+problem double-ended-saddle-search/pt-island
+force_calls 1533
+force_calls_min 405
+force_calls_max 2405
+force_calls_median 1655
+force_calls_per_image 511
+call_unit total
+successes 44
+nfailed 15
+n 59
+transition_states 44
+code LAMMPS
+code_version 30 Sep 2026
+commit 8de817dd79bfe4525d5d39246a212d833e6dee07
+algorithm CI-NEB-fire
+template lammpsneb/ci-fire
+tuning default
+counter harness
+images 3

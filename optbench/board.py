@@ -430,6 +430,8 @@ def _campaign_groups(directory: Path) -> dict[str, dict[str, Path]]:
         if not path.is_file():
             continue
         if name.endswith(".starts.jsonl"):
+            if path.stat().st_size == 0:
+                continue
             stem, kind = name[: -len(".starts.jsonl")], "starts_jsonl"
         elif name.endswith(".v2.json"):
             stem, kind = name[: -len(".v2.json")], "v2"
@@ -758,10 +760,17 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
             cap=cap,
             note=parse_note or record_source,
         )
+        named = str(fields.get("potential") or "").strip()
         if str(fields.get("ranked") or "").lower() == "false":
-            row["_declared_partial"] = "result file sets ranked false"
+            reason = "result file sets ranked false"
+            if named:
+                reason = f"{reason}; potential {named}"
+            row["_declared_partial"] = reason
         elif str(fields.get("partial") or "").lower() == "true":
-            row["_declared_partial"] = "result file sets partial true"
+            reason = "result file sets partial true"
+            if named:
+                reason = f"{reason}; potential {named}"
+            row["_declared_partial"] = reason
         if not records:
             row["note"] = "no per-start record"
             unparsed.append(row)
@@ -784,10 +793,21 @@ def _benchmark_index() -> dict[str, dict]:
     modules = (
         "benchmarks.bench_lj38",
         "benchmarks.bench_eon_develop",
+        "benchmarks.bench_eon_svn",
+        "benchmarks.bench_eon_lane",
+        "benchmarks.bench_eon_client",
         "benchmarks.bench_rgmin",
         "benchmarks.bench_ase_sella",
         "benchmarks.bench_rgsaddle",
+        "benchmarks.bench_geodesic",
+        "benchmarks.bench_airss",
+        "benchmarks.bench_softsaddle",
+        "benchmarks.bench_lammpsneb",
         "benchmarks.bench_noise",
+        "benchmarks.bench_gmin",
+        "benchmarks.bench_vcsqnm",
+        "benchmarks.bench_pele",
+        "benchmarks.bench_optking",
         "benchmarks.quadratic",
     )
     for module_name in modules:
@@ -1253,16 +1273,18 @@ def _show_per_image(problem: dict) -> bool:
 
 
 def _headers(problem: dict) -> list[str]:
+    # The ranked table and the headline table list the current version only.
+    # Older versions stay in the history list, so a Current column is yes on
+    # every ranked row. The Wilson interval is one cell, low then high.
+    # Two separate columns push the minimization page over the DOM budget.
     headers = [
         "Template",
         "Version",
         "Commit",
         "Source",
-        "Current",
         "PAR-2",
         "Success",
-        "Wilson low",
-        "Wilson high",
+        "Wilson",
         "Median calls",
         "Mean calls",
     ]
@@ -1276,17 +1298,21 @@ def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
     """Visible ranked-table cells, in column order.
 
     The site check compares these strings with the rendered table.
+    The current flag stays on the board document. Every ranked row is
+    the newest full version of its template, and the paragraph above
+    the table already says so.
     """
     cells = [
         ("template", str(row.get("template") or row.get("entry") or "")),
         ("version", f"{row.get('code') or ''} {row.get('code_version') or ''}"),
         ("commit", str(row.get("commit") or "")[:12]),
         ("source", str(row.get("source") or "")),
-        ("current", "yes" if row.get("current") else "no"),
         ("par2_mean", _format_number(row.get("par2_mean"))),
         ("success_rate", _format_number(row.get("success_rate"))),
-        ("wilson_low", _format_number(row.get("wilson_low"))),
-        ("wilson_high", _format_number(row.get("wilson_high"))),
+        (
+            "wilson",
+            f"{_format_number(row.get('wilson_low'))}–{_format_number(row.get('wilson_high'))}",
+        ),
         ("median_calls", _format_number(row.get("median_calls"))),
         ("mean_calls", _format_number(row.get("mean_calls"))),
     ]

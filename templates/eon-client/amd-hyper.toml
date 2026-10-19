@@ -1,0 +1,57 @@
+id = "eon-client/amd-hyper"
+engine = "eon"
+problem = "accelerated-md/aladatom"
+code = "eOn"
+code_version = "3.5.0"
+commit = "4d8b34baf1ba8d2d980df29838bac1f969d1662c"
+algorithm = "Hyperdynamics"
+reducer = "harness"
+failure_cap = 1000000
+kind = "hyper"
+kernel = "eam"
+asv_class = "EonClientAmdHyper"
+note = '''
+Safe hyperdynamics on the accelerated-md reactant. No 2014 ini is in the archive. bias_potential is bond_boost. The bond-boost amplitudes are the r2549 defaults, including bb_dvmax 0. The dynamics block matches the parallel-replica canary. SVN job name is safe_hyper. The 3.5.0 job name is safe_hyperdynamics. Success is transition_found 1. The row is partial. The harness kernel is the r2549 Aluminum EAM Fortran force routine, called in process.
+'''
+seeds = [1000]
+starts = ["reactant"]
+declare_partial = true
+asv_full = false
+asv_timeout = 3600
+budget_seconds = 2400
+
+[ini.Main]
+job = "safe_hyperdynamics"
+temperature = 500
+random_seed = 1000
+
+[ini.Potential]
+potential = "eam_al"
+
+[ini.Optimizer]
+opt_method = "cg"
+converged_force = 0.01
+max_iterations = 1000
+max_move = 0.2
+
+[ini.Dynamics]
+time_step = 1
+time = 5000
+thermostat = "andersen"
+andersen_alpha = 0.2
+andersen_collision_period = 10
+
+[ini."Parallel Replica"]
+dephase_time = 200
+state_check_interval = 1000
+state_save_interval = 10
+post_transition_time = 200
+
+[ini.Hyperdynamics]
+bias_potential = "bond_boost"
+bb_rmd_time = 100
+bb_boost_atomlist = "ALL"
+bb_dvmax = 0
+bb_stretch_threshold = 0.2
+bb_ds_curvature = 0.95
+bb_rcut = 3
