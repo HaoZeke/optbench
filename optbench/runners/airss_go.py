@@ -588,7 +588,10 @@ def run_template(
         names = [f"{label}.{index}" for index in range(1, int(config["starts"]) + 1)]
     else:
         names = _load_start_names(root, problem, geometries, work, output)
-    if raw_tolerance is None:
+    # budget_structures is the published stop for a partial row. The vendored
+    # Wales file is the LJ38 minimum, so a later energy window on a larger
+    # cluster must not replace that budget.
+    if raw_tolerance is None or config.get("budget_structures"):
         reference = None
         tolerance = None
     else:
