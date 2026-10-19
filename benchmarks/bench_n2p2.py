@@ -60,6 +60,8 @@ def _specs() -> list[dict]:
                 "tol": float(template["stop"]["grad_abs"]),
                 "n": int(template.get("starts") or 50),
                 "tuning": str(template.get("tuning") or "default"),
+                "order": str(template.get("order") or "pcg64"),
+                "loss": str(template.get("loss") or "energy"),
             }
         )
     return found
@@ -73,12 +75,34 @@ def _cache_path(template_id: str, seed: str, start: str) -> Path:
 def _compute(spec: dict, seed: str, start: str) -> dict:
     if str(seed) != SEED:
         raise ValueError(f"seed {seed} is not {SEED}")
-    from optbench.n2p2_ml import CODE, CODE_VERSION, N2P2_COMMIT, PYAMFF_COMMIT, cache_dataset, dataset_from_cache, run_start
+    from optbench.n2p2_ml import (
+        CODE,
+        CODE_VERSION,
+        N2P2_COMMIT,
+        PYAMFF_COMMIT,
+        cache_dataset,
+        cache_force_dataset,
+        dataset_from_cache,
+        run_start,
+    )
     from optbench.runners.n2p2_ml import _cache_path as _dataset_cache
 
-    dataset_path = cache_dataset(ROOT, spec["problem_id"], _dataset_cache(Path("/tmp/optbench-n2p2"), spec["problem_id"]))
+    loss = spec.get("loss") or "energy"
+    dataset_path = _dataset_cache(Path("/tmp/optbench-n2p2"), spec["problem_id"], loss)
+    if loss == "force":
+        dataset_path = cache_force_dataset(ROOT, spec["problem_id"], dataset_path)
+    else:
+        dataset_path = cache_dataset(ROOT, spec["problem_id"], dataset_path)
     dataset = dataset_from_cache(dataset_path)
-    record = run_start(dataset, int(start), cap=spec["cap"], tol=spec["tol"], shuffle=True)
+    record = run_start(
+        dataset,
+        int(start),
+        cap=spec["cap"],
+        tol=spec["tol"],
+        shuffle=True,
+        order=spec.get("order") or "pcg64",
+        loss=spec.get("loss") or "energy",
+    )
     record.update(
         {
             "schema": "optbench.start/v2",

@@ -1,10 +1,13 @@
-"""Pyamff energy loss trained by the n2p2 standard Kalman filter.
+"""Pyamff loss trained by the n2p2 standard Kalman filter.
 
 The potential is the archived Behler-Parrinello network: fingerprints from
-``fpParas.dat``, a 10-7 tanh network, and the squared per-atom energy
-error. n2p2 supplies ``KalmanFilter::update``. A force call is one
-evaluation of that loss gradient. Per-structure Kalman derivatives stay
-inside the updater.
+``fpParas.dat`` and a 10-7 tanh network. n2p2 supplies
+``KalmanFilter::update``. A force call is one evaluation of the loss
+gradient. Per-structure Kalman derivatives stay inside the updater.
+
+Energy rows use the squared per-atom energy error. Force rows add the
+pyamff squared force error with the archived force coefficient. The
+Kalman parameters are the documented standard-filter defaults.
 """
 
 from __future__ import annotations
@@ -32,7 +35,8 @@ N2P2_COMMIT = "29b9c9f10b1ac9ea45631b3d556a129ca3b701c2"
 PYAMFF_COMMIT = "8037eb98e2288c132c112aa6c2032f00cd5c5277"
 FORCE_RMSE = -1.0
 
-# Recommended standard-filter block in examples/input.nn.recommended.
+# examples/input.nn.recommended, standard Kalman block (updater_type 1).
+# The fading-memory block in that file is commented and marked not recommended.
 KALMAN_EPSILON = 1.0e-2
 KALMAN_Q0 = 0.01
 KALMAN_QTAU = 2.302
@@ -40,6 +44,17 @@ KALMAN_QMIN = 1.0e-6
 KALMAN_ETA0 = 0.01
 KALMAN_ETATAU = 2.302
 KALMAN_ETAMAX = 1.0
+
+# Same recommended file, with use_short_forces set.
+FORCE_WEIGHT = 1.0
+FORCE_ENERGY_RATIO = 3.0
+N2P2_RANDOM_SEED = 1234567
+
+# pyamff fcoeff0_1 configs: SE, these coefficients, this cap and gradient tolerance.
+ENERGY_COEFFICIENT = 1.0
+FORCE_COEFFICIENT = 0.1
+FORCE_GRAD_TOL = 0.1
+FORCE_EPOCH_CAP = 30000
 
 _ANGLE_CLIP = 0.999999999999
 
@@ -50,6 +65,10 @@ TRAJECTORY_PATHS = {
 FPPARAS_PATHS = {
     "mlopt/emt-pt38": "archive/entries/mlopt/emt-pt38/pyamff-adam10-7-fcoeff0/fpParas.dat",
     "mlopt/C2H4": "archive/entries/mlopt/C2H4/pyamff-adam10-7-fcoeff0/fpParas.dat",
+}
+FPPARAS_FORCE_PATHS = {
+    "mlopt/emt-pt38": "archive/entries/mlopt/emt-pt38/pyamff-adam10-7-fcoeff0_1/fpParas.dat",
+    "mlopt/C2H4": "archive/entries/mlopt/C2H4/pyamff-adam10-7-fcoeff0_1/fpParas.dat",
 }
 
 _LIB: ctypes.CDLL | None = None
@@ -69,14 +88,14 @@ def n2p2_source() -> Path:
 def build_library() -> Path:
     """Compile the Kalman wrapper against a local n2p2 checkout."""
     dest = library_path()
-    if dest.is_file():
-        return dest
     source = n2p2_source()
     kalman = source / "src" / "libnnptrain" / "KalmanFilter.cpp"
+    wrapper = Path(__file__).resolve().parent / "native" / "n2p2_kalman.cpp"
+    if dest.is_file() and dest.stat().st_mtime >= wrapper.stat().st_mtime:
+        return dest
     if not kalman.is_file():
         raise FileNotFoundError(f"n2p2 KalmanFilter.cpp is not at {kalman}")
     dest.parent.mkdir(parents=True, exist_ok=True)
-    wrapper = Path(__file__).resolve().parent / "native" / "n2p2_kalman.cpp"
     cmd = [
         os.environ.get("MPICXX", "mpic++"),
         "-std=c++11",
@@ -95,6 +114,8 @@ def build_library() -> Path:
         str(source / "src" / "libnnptrain" / "Updater.cpp"),
         str(source / "src" / "libnnp" / "Stopwatch.cpp"),
         str(source / "src" / "libnnp" / "utility.cpp"),
+        "-lgsl",
+        "-lgslcblas",
         "-o",
         str(dest),
     ]
@@ -159,6 +180,41 @@ def _bind(lib: ctypes.CDLL) -> None:
     lib.n2p2_epoch.argtypes = [ctypes.c_void_p, ptr_int, c_int]
     lib.n2p2_updates.restype = ctypes.c_size_t
     lib.n2p2_updates.argtypes = [ctypes.c_void_p]
+    lib.n2p2_force_rmse.restype = c_double
+    lib.n2p2_force_rmse.argtypes = [ctypes.c_void_p]
+    lib.n2p2_enable_forces.restype = c_int
+    lib.n2p2_enable_forces.argtypes = [
+        ctypes.c_void_p,
+        ptr_double,
+        ptr_double,
+        c_double,
+        c_double,
+        c_double,
+        c_int,
+        c_double,
+        c_double,
+        c_double,
+        c_double,
+        c_double,
+        c_double,
+        c_double,
+    ]
+    lib.n2p2_epoch_mixed.restype = c_int
+    lib.n2p2_epoch_mixed.argtypes = [
+        ctypes.c_void_p,
+        ptr_int,
+        c_int,
+        ptr_int,
+        c_int,
+        ptr_int,
+        c_int,
+    ]
+    lib.n2p2_rng_create.restype = ctypes.c_void_p
+    lib.n2p2_rng_create.argtypes = [ctypes.c_ulong]
+    lib.n2p2_rng_destroy.restype = None
+    lib.n2p2_rng_destroy.argtypes = [ctypes.c_void_p]
+    lib.n2p2_rng_shuffle.restype = c_int
+    lib.n2p2_rng_shuffle.argtypes = [ctypes.c_void_p, ptr_int, c_int]
 
 
 def _as_int(array: np.ndarray) -> np.ndarray:
@@ -374,22 +430,89 @@ def _fexp(distance: float, rc: float) -> float:
 
 def g2_value(rij: float, rik: float, rjk: float, vj: np.ndarray, vk: np.ndarray, feature: G2) -> float:
     """One angular fingerprint at the center, using the pyamff ``fg2`` product."""
+    value, *_grads = g2_cartesian_grad(rij, rik, rjk, vj, vk, vk - vj, feature)
+    return value
+
+
+def g2_cartesian_grad(
+    rij: float,
+    rik: float,
+    rjk: float,
+    vj: np.ndarray,
+    vk: np.ndarray,
+    vjk: np.ndarray,
+    feature: G2,
+) -> tuple[float, np.ndarray, np.ndarray, np.ndarray]:
+    """``fg2`` value and its Cartesian derivatives at the center, ``j``, and ``k``.
+
+    ``vj`` and ``vk`` point from the center to the two neighbors. ``vjk``
+    points from ``j`` to ``k``. Outside the cutoff the masked fingerprint is
+    identically zero, so the derivative is zero there too.
+    """
+    zero = np.zeros(3, dtype=np.float64)
     rc = feature.rc
-    if rij >= rc or rik >= rc or rjk >= rc or rij <= 0.0 or rik <= 0.0:
-        return 0.0
-    cosine = float(np.dot(vj, vk) / (rij * rik))
+    if rij >= rc or rik >= rc or rjk >= rc or rij <= 0.0 or rik <= 0.0 or rjk <= 0.0:
+        return 0.0, zero, zero, zero
+    dot = float(vj[0] * vk[0] + vj[1] * vk[1] + vj[2] * vk[2])
+    cosine = dot / (rij * rik)
     if abs(cosine) > _ANGLE_CLIP:
         theta = 0.0
+        dtheta_dc = 0.0
     else:
         theta = math.acos(cosine)
-    base = 1.0 + feature.lam * math.cos(theta - feature.theta_s)
+        dtheta_dc = -1.0 / math.sqrt(1.0 - cosine * cosine)
+    delta_theta = theta - feature.theta_s
+    base = 1.0 + feature.lam * math.cos(delta_theta)
     angular = base ** (feature.zeta - 1.0)
-    radial = (_fexp(rij, rc) * _fexp(rik, rc) * _fexp(rjk, rc)) ** feature.eta
-    cutoff = _fc(rij, rc) * _fc(rik, rc) * _fc(rjk, rc)
-    return angular * base * radial * cutoff * 2.0 ** (1.0 - feature.zeta)
+    inv_rc2 = 1.0 / (rc * rc)
+    fexpi = math.exp(-(rij * rij) * inv_rc2)
+    fexpk = math.exp(-(rik * rik) * inv_rc2)
+    fexpjk = math.exp(-(rjk * rjk) * inv_rc2)
+    radial = (fexpi * fexpk * fexpjk) ** feature.eta
+    fci = _fc(rij, rc)
+    fck = _fc(rik, rc)
+    fcjk = _fc(rjk, rc)
+    cutoff = fci * fck * fcjk
+    scale = 2.0 ** (1.0 - feature.zeta)
+    value = angular * base * radial * cutoff * scale
+    power = angular * base
+    dradial_drij = feature.eta * radial * (-2.0 * rij * inv_rc2)
+    dradial_drik = feature.eta * radial * (-2.0 * rik * inv_rc2)
+    dradial_drjk = feature.eta * radial * (-2.0 * rjk * inv_rc2)
+
+    def _dfc(distance: float) -> float:
+        return -0.5 * (math.pi / rc) * math.sin(math.pi * distance / rc)
+
+    dcutoff_drij = _dfc(rij) * fck * fcjk
+    dcutoff_drik = _dfc(rik) * fci * fcjk
+    dcutoff_drjk = _dfc(rjk) * fci * fck
+    dv_drij = scale * power * (dradial_drij * cutoff + radial * dcutoff_drij)
+    dv_drik = scale * power * (dradial_drik * cutoff + radial * dcutoff_drik)
+    dv_drjk = scale * power * (dradial_drjk * cutoff + radial * dcutoff_drjk)
+    dv_dtheta = feature.zeta * angular * (scale * radial * cutoff) * feature.lam * (-math.sin(delta_theta))
+    uij = vj / rij
+    uik = vk / rik
+    ujk = vjk / rjk
+    dc_dRj = vk / (rij * rik) - cosine * uij / rij
+    dc_dRk = vj / (rij * rik) - cosine * uik / rik
+    dc_dRi = (-vj - vk) / (rij * rik) + cosine * (uij / rij + uik / rik)
+    dtheta_dRi = dtheta_dc * dc_dRi
+    dtheta_dRj = dtheta_dc * dc_dRj
+    dtheta_dRk = dtheta_dc * dc_dRk
+    grad_i = dv_drij * (-uij) + dv_drik * (-uik) + dv_dtheta * dtheta_dRi
+    grad_j = dv_drij * uij + dv_drjk * (-ujk) + dv_dtheta * dtheta_dRj
+    grad_k = dv_drik * uik + dv_drjk * ujk + dv_dtheta * dtheta_dRk
+    return value, grad_i, grad_j, grad_k
 
 
-def fingerprints_frame(positions: np.ndarray, symbols: list[str], lengths: np.ndarray, spec: FingerprintSpec) -> np.ndarray:
+def fingerprints_frame(
+    positions: np.ndarray,
+    symbols: list[str],
+    lengths: np.ndarray,
+    spec: FingerprintSpec,
+    *,
+    derivatives: bool = False,
+) -> np.ndarray | tuple[np.ndarray, np.ndarray]:
     """Modified Behler-Parrinello fingerprints for one orthogonal cell."""
     coords = np.asarray(positions, dtype=np.float64)
     n_atoms = coords.shape[0]
@@ -404,16 +527,31 @@ def fingerprints_frame(positions: np.ndarray, symbols: list[str], lengths: np.nd
     delta -= box * np.round(delta / box)
     dist = np.linalg.norm(delta, axis=-1)
     values = np.zeros((n_atoms, spec.stride), dtype=np.float64)
+    dg = np.zeros((n_atoms, n_atoms, 3, spec.stride), dtype=np.float64) if derivatives else None
+    swapped = np.swapaxes(delta, 0, 1)
+    unit = np.zeros_like(delta)
+    positive = dist > 0.0
+    unit[positive] = swapped[positive] / dist[positive, None]
     for feature in spec.g1:
         rc = feature.rc
         radial = dist - feature.rs
-        raw = np.exp(-feature.eta * (radial * radial) / (rc * rc)) * 0.5 * (np.cos(np.pi * dist / rc) + 1.0)
-        raw = np.where(dist < rc, raw, 0.0)
-        np.fill_diagonal(raw, 0.0)
+        exp_term = np.exp(-feature.eta * (radial * radial) / (rc * rc))
+        fc = 0.5 * (np.cos(np.pi * dist / rc) + 1.0)
+        raw = exp_term * fc
+        mask = (dist < rc) & positive
+        np.fill_diagonal(mask, False)
         neighbor = element_index == feature.neighbor
-        raw[:, ~neighbor] = 0.0
+        mask &= neighbor[None, :]
+        raw = np.where(mask, raw, 0.0)
         center = element_index == feature.center
         values[center, feature.index] = raw.sum(axis=1)[center]
+        if dg is not None:
+            slope = exp_term * (-2.0 * feature.eta * radial / (rc * rc)) * fc
+            slope = slope + exp_term * (-0.5 * (math.pi / rc) * np.sin(np.pi * dist / rc))
+            slope = np.where(mask, slope, 0.0)
+            for atom in np.flatnonzero(center):
+                dg[atom, atom, :, feature.index] += np.sum(-slope[atom, :, None] * unit[atom], axis=0)
+                dg[atom, :, :, feature.index] += slope[atom, :, None] * unit[atom]
     groups: dict[tuple[int, int, int], list[G2]] = {}
     for feature in spec.g2:
         groups.setdefault((feature.center, feature.neighbor_a, feature.neighbor_b), []).append(feature)
@@ -443,8 +581,18 @@ def fingerprints_frame(positions: np.ndarray, symbols: list[str], lengths: np.nd
                     vk = delta[k, center]
                     rij = float(dist[center, j])
                     rik = float(dist[center, k])
+                    vjk = delta[k, j]
                     for feature in bucket:
-                        values[center, feature.index] += g2_value(rij, rik, rjk, vj, vk, feature)
+                        if dg is None:
+                            values[center, feature.index] += g2_value(rij, rik, rjk, vj, vk, feature)
+                            continue
+                        value, grad_i, grad_j, grad_k = g2_cartesian_grad(rij, rik, rjk, vj, vk, vjk, feature)
+                        values[center, feature.index] += value
+                        dg[center, center, :, feature.index] += grad_i
+                        dg[center, j, :, feature.index] += grad_j
+                        dg[center, k, :, feature.index] += grad_k
+    if dg is not None:
+        return values, dg
     return values
 
 
@@ -454,24 +602,7 @@ def init_weights(n_fp: tuple[int, ...] | list[int], rng: np.random.Generator) ->
 
 
 def _atom_energy_grad(x: np.ndarray, block: np.ndarray, n_fp: int) -> tuple[float, np.ndarray]:
-    o_b1 = H1 * n_fp
-    o_w2 = o_b1 + H1
-    o_b2 = o_w2 + H2 * H1
-    o_w3 = o_b2 + H2
-    o_b3 = o_w3 + H2
-    hidden = np.tanh(block[:o_b1].reshape(H1, n_fp) @ x + block[o_b1:o_w2])
-    second = np.tanh(block[o_w2:o_b2].reshape(H2, H1) @ hidden + block[o_b2:o_w3])
-    w3 = block[o_w3:o_b3]
-    energy = float(w3 @ second + block[o_b3])
-    grad = np.zeros_like(block)
-    grad[o_w3:o_b3] = second
-    grad[o_b3] = 1.0
-    dz2 = w3 * (1.0 - second * second)
-    grad[o_b2:o_w3] = dz2
-    grad[o_w2:o_b2] = np.outer(dz2, hidden).ravel()
-    dz1 = (block[o_w2:o_b2].reshape(H2, H1).T @ dz2) * (1.0 - hidden * hidden)
-    grad[o_b1:o_w2] = dz1
-    grad[:o_b1] = np.outer(dz1, x).ravel()
+    energy, grad, _dedg = _atom_forward(x, block, n_fp)
     return energy, grad
 
 
@@ -512,6 +643,188 @@ def loss_and_gradient(
         grad += (2.0 * per_atom / natoms) * jacobian
     rmse = math.sqrt(loss / n_images)
     return loss, rmse, grad
+
+
+def atom_input_grad(x: np.ndarray, block: np.ndarray, n_fp: int) -> np.ndarray:
+    """``dE/dG`` for one atom. This is the network input adjoint."""
+    _energy, _grad, dedg = _atom_forward(x, block, n_fp)
+    return dedg
+
+
+def _atom_forward(x: np.ndarray, block: np.ndarray, n_fp: int) -> tuple[float, np.ndarray, np.ndarray]:
+    o_b1 = H1 * n_fp
+    o_w2 = o_b1 + H1
+    o_b2 = o_w2 + H2 * H1
+    o_w3 = o_b2 + H2
+    o_b3 = o_w3 + H2
+    hidden = np.tanh(block[:o_b1].reshape(H1, n_fp) @ x + block[o_b1:o_w2])
+    second = np.tanh(block[o_w2:o_b2].reshape(H2, H1) @ hidden + block[o_b2:o_w3])
+    w3 = block[o_w3:o_b3]
+    energy = float(w3 @ second + block[o_b3])
+    grad = np.zeros_like(block)
+    grad[o_w3:o_b3] = second
+    grad[o_b3] = 1.0
+    dz2 = w3 * (1.0 - second * second)
+    grad[o_b2:o_w3] = dz2
+    grad[o_w2:o_b2] = np.outer(dz2, hidden).ravel()
+    dz1 = (block[o_w2:o_b2].reshape(H2, H1).T @ dz2) * (1.0 - hidden * hidden)
+    grad[o_b1:o_w2] = dz1
+    grad[:o_b1] = np.outer(dz1, x).ravel()
+    dedg = block[:o_b1].reshape(H1, n_fp).T @ dz1
+    return energy, grad, dedg
+
+
+def atom_directional_grad(x: np.ndarray, direction: np.ndarray, block: np.ndarray, n_fp: int) -> np.ndarray:
+    """Weight gradient of ``dE/dα`` at ``G = x + α direction``."""
+    o_b1 = H1 * n_fp
+    o_w2 = o_b1 + H1
+    o_b2 = o_w2 + H2 * H1
+    o_w3 = o_b2 + H2
+    o_b3 = o_w3 + H2
+    w1 = block[:o_b1].reshape(H1, n_fp)
+    w2 = block[o_w2:o_b2].reshape(H2, H1)
+    w3 = block[o_w3:o_b3]
+    hidden = np.tanh(w1 @ x + block[o_b1:o_w2])
+    second = np.tanh(w2 @ hidden + block[o_b2:o_w3])
+    sech1 = 1.0 - hidden * hidden
+    sech2 = 1.0 - second * second
+    dz1 = w1 @ direction
+    dh1 = sech1 * dz1
+    dz2 = w2 @ dh1
+    dh2 = sech2 * dz2
+    g_sech2 = w3 * dz2
+    g_dz2 = w3 * sech2
+    g_h2 = g_sech2 * (-2.0 * second)
+    g_z2 = g_h2 * sech2
+    g_dh1 = w2.T @ g_dz2
+    g_sech1 = g_dh1 * dz1
+    g_dz1 = g_dh1 * sech1
+    g_h1 = g_sech1 * (-2.0 * hidden) + w2.T @ g_z2
+    g_z1 = g_h1 * sech1
+    grad = np.zeros_like(block)
+    grad[:o_b1] = (np.outer(g_dz1, direction) + np.outer(g_z1, x)).ravel()
+    grad[o_b1:o_w2] = g_z1
+    grad[o_w2:o_b2] = (np.outer(g_dz2, dh1) + np.outer(g_z2, hidden)).ravel()
+    grad[o_b2:o_w3] = g_z2
+    grad[o_w3:o_b3] = dh2
+    return grad
+
+
+def _image_force_state(
+    weights: np.ndarray,
+    element_index: np.ndarray,
+    n_fp: tuple[int, ...],
+    frame: np.ndarray,
+    dg_image: np.ndarray,
+) -> tuple[float, np.ndarray, np.ndarray, list[np.ndarray]]:
+    """Energy, ``dE/dw``, Cartesian forces, and each atom's ``dE/dG``."""
+    jacobian = np.zeros_like(weights)
+    energy = 0.0
+    dedg: list[np.ndarray] = []
+    offsets = weight_offsets(n_fp)
+    for atom, element in enumerate(element_index):
+        offset, width, count = offsets[int(element)]
+        y, grad, finger = _atom_forward(frame[atom, :count], weights[offset : offset + width], count)
+        energy += y
+        jacobian[offset : offset + width] += grad
+        dedg.append(finger)
+    forces = np.zeros((element_index.shape[0], 3), dtype=np.float64)
+    for atom, finger in enumerate(dedg):
+        count = finger.shape[0]
+        forces += -np.einsum("acp,p->ac", dg_image[atom, :, :, :count], finger)
+    return energy, jacobian, forces, dedg
+
+
+def force_component_jacobian(
+    weights: np.ndarray,
+    element_index: np.ndarray,
+    n_fp: tuple[int, ...],
+    frame: np.ndarray,
+    dg_image: np.ndarray,
+    atom: int,
+    component: int,
+) -> tuple[float, np.ndarray]:
+    """One force component and ``dF/dw`` for that component."""
+    _energy, _jacobian, forces, _dedg = _image_force_state(weights, element_index, n_fp, frame, dg_image)
+    jacobian = np.zeros_like(weights)
+    offsets = weight_offsets(n_fp)
+    for center, element in enumerate(element_index):
+        offset, width, count = offsets[int(element)]
+        direction = dg_image[center, atom, component, :count]
+        jacobian[offset : offset + width] += atom_directional_grad(
+            frame[center, :count],
+            direction,
+            weights[offset : offset + width],
+            count,
+        )
+    return float(forces[atom, component]), -jacobian
+
+
+def combined_loss_and_gradient(
+    weights: np.ndarray,
+    element_index: np.ndarray,
+    n_fp: tuple[int, ...],
+    fingerprints: np.ndarray,
+    energy_ref: np.ndarray,
+    forces_ref: np.ndarray,
+    dg: np.ndarray,
+    natoms: int,
+    *,
+    energy_coeff: float = ENERGY_COEFFICIENT,
+    force_coeff: float = FORCE_COEFFICIENT,
+) -> tuple[float, float, float, np.ndarray]:
+    """Pyamff SE loss, energy RMSE, force RMSE, and the parameter gradient.
+
+    ``forceloss`` is ``sum_images(sum_atoms ||F||^2 / natoms) / 3``. The RMSE
+    values divide those unweighted sums by the image count. The coefficients
+    enter the scalar loss and its gradient.
+    """
+    grad = np.zeros_like(weights)
+    energyloss = 0.0
+    forceloss = 0.0
+    n_images = fingerprints.shape[0]
+    offsets = weight_offsets(n_fp)
+    for image in range(n_images):
+        energy, jacobian, forces, dedg = _image_force_state(
+            weights,
+            element_index,
+            n_fp,
+            fingerprints[image],
+            dg[image],
+        )
+        per_atom = (energy - float(energy_ref[image])) / natoms
+        energyloss += per_atom * per_atom
+        diff = forces - forces_ref[image]
+        forceloss += float(np.sum(diff * diff) / natoms / 3.0)
+        grad += (energy_coeff * 2.0 * per_atom / natoms) * jacobian
+        lam = force_coeff * 2.0 * diff / natoms / 3.0
+        for center, element in enumerate(element_index):
+            offset, _width, count = offsets[int(element)]
+            direction = -np.einsum("ac,acp->p", lam, dg[image, center, :, :, :count])
+            grad[offset : offset + element_width(count)] += atom_directional_grad(
+                fingerprints[image, center, :count],
+                direction,
+                weights[offset : offset + element_width(count)],
+                count,
+            )
+    loss = energy_coeff * energyloss + force_coeff * forceloss
+    energy_rmse = math.sqrt(energyloss / n_images)
+    force_rmse = math.sqrt(forceloss / n_images)
+    return loss, energy_rmse, force_rmse, grad
+
+
+def projected_force_updates(n_images: int, n_atoms: int, ratio: float = FORCE_ENERGY_RATIO) -> int:
+    """Force Kalman updates in one epoch at the documented force/energy ratio.
+
+    This is ``Training::setupUpdatePlan`` with ``task_batch_size_force`` 1
+    and one process: the force fraction is ``n_energy * ratio / n_force``,
+    and the update count truncates toward zero.
+    """
+    patterns = float(n_images * n_atoms * 3)
+    if patterns == 0.0:
+        return 0
+    epoch_fraction = (float(n_images) * float(ratio)) / patterns
+    return int(patterns * epoch_fraction)
 
 
 def reference_kalman_update(
@@ -557,6 +870,8 @@ class MlDataset:
     element_index: np.ndarray
     fingerprints: np.ndarray
     energy: np.ndarray
+    forces: np.ndarray | None = None
+    dg: np.ndarray | None = None
 
     @property
     def n_images(self) -> int:
@@ -570,13 +885,17 @@ class MlDataset:
 class KalmanSession:
     """One combined standard filter over a fixed fingerprint dataset."""
 
-    def __init__(self, dataset: MlDataset, tol: float):
+    def __init__(self, dataset: MlDataset, tol: float, *, loss: str = "energy"):
         self.dataset = dataset
+        self.loss = loss
         self.lib = load_library()
         self.element_index = _as_int(dataset.element_index)
         self.n_fp = _as_int(np.array(dataset.n_fp, dtype=np.int32))
         self.fingerprints = _as_float(dataset.fingerprints)
         self.energy = _as_float(dataset.energy)
+        self.forces = None
+        self.dg = None
+        self.n_force_updates = 0
         handle = self.lib.n2p2_create(
             dataset.n_images,
             dataset.n_atoms,
@@ -602,6 +921,30 @@ class KalmanSession:
         self.n_weights = int(self.lib.n2p2_n_weights(handle))
         self._grad = np.zeros(self.n_weights, dtype=np.float64)
         self._peaks = np.zeros(len(dataset.n_fp) * 6, dtype=np.float64)
+        if loss == "force":
+            if dataset.forces is None or dataset.dg is None:
+                raise ValueError("force training needs reference forces and fingerprint derivatives")
+            self.forces = _as_float(dataset.forces)
+            self.dg = _as_float(dataset.dg)
+            self.n_force_updates = projected_force_updates(dataset.n_images, dataset.n_atoms)
+            code = self.lib.n2p2_enable_forces(
+                handle,
+                _ptr_float(self.forces),
+                _ptr_float(self.dg),
+                ENERGY_COEFFICIENT,
+                FORCE_COEFFICIENT,
+                FORCE_WEIGHT,
+                int(self.n_force_updates),
+                KALMAN_EPSILON,
+                KALMAN_Q0,
+                KALMAN_QTAU,
+                KALMAN_QMIN,
+                KALMAN_ETA0,
+                KALMAN_ETATAU,
+                KALMAN_ETAMAX,
+            )
+            if code != 0:
+                raise RuntimeError("n2p2 force observations were not enabled")
 
     def close(self) -> None:
         handle = getattr(self, "handle", None)
@@ -644,6 +987,7 @@ class KalmanSession:
         return {
             "loss": float(loss.value),
             "energy_rmse": float(rmse.value),
+            "force_rmse": float(self.lib.n2p2_force_rmse(self.handle)),
             "finite": bool(finite.value),
             "converged": bool(converged.value),
             "grad": self._grad.copy(),
@@ -654,8 +998,94 @@ class KalmanSession:
         array = _as_int(order)
         return int(self.lib.n2p2_epoch(self.handle, _ptr_int(array), array.size))
 
+    def epoch_mixed(self, energy_order: np.ndarray, force_ids: np.ndarray, schedule: np.ndarray) -> int:
+        energy = _as_int(energy_order)
+        forces = _as_int(force_ids)
+        steps = _as_int(schedule)
+        return int(
+            self.lib.n2p2_epoch_mixed(
+                self.handle,
+                _ptr_int(energy),
+                energy.size,
+                _ptr_int(forces),
+                forces.size,
+                _ptr_int(steps),
+                steps.size,
+            )
+        )
+
     def updates(self) -> int:
         return int(self.lib.n2p2_updates(self.handle))
+
+
+class N2p2Order:
+    """Structure order from n2p2's ``shuffleUpdateCandidates``.
+
+    ``Dataset::setupRandomNumberGenerator`` seeds a GSL mt19937 with
+    ``random_seed``. With one process, ``Training`` then seeds
+    ``std::mt19937_64 rngNew`` from the next ``gsl_rng_get`` on that
+    generator, after drawing the global taus seed. Each epoch shuffles
+    with that engine. The documented seed is 1234567.
+    """
+
+    def __init__(self, seed: int = N2P2_RANDOM_SEED):
+        self.lib = load_library()
+        self.handle = self.lib.n2p2_rng_create(ctypes.c_ulong(int(seed)))
+        if not self.handle:
+            raise RuntimeError("n2p2 shuffle generator was not created")
+
+    def close(self) -> None:
+        handle = getattr(self, "handle", None)
+        if handle:
+            self.lib.n2p2_rng_destroy(handle)
+            self.handle = None
+
+    def __del__(self) -> None:
+        self.close()
+
+    def permutation(self, count: int) -> np.ndarray:
+        array = np.arange(count, dtype=np.int32)
+        if self.lib.n2p2_rng_shuffle(self.handle, _ptr_int(array), array.size) != 0:
+            raise RuntimeError("n2p2 shuffle failed")
+        return array
+
+
+def _epoch_order(dataset: MlDataset, rng: np.random.Generator | None, native: N2p2Order | None, shuffle: bool) -> np.ndarray:
+    identity = np.arange(dataset.n_images, dtype=np.int32)
+    if not shuffle:
+        return identity
+    if native is not None:
+        return native.permutation(dataset.n_images)
+    if rng is None:
+        return identity
+    return rng.permutation(dataset.n_images).astype(np.int32)
+
+
+def _force_schedule(
+    dataset: MlDataset,
+    rng: np.random.Generator | None,
+    shuffle: bool,
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Energy permutation, force-component sample, and the interleaved schedule.
+
+    Energy visits every structure. The force sample has the documented
+    update count. The schedule is the property list n2p2 builds by
+    appending force updates, then energy updates, then shuffling. One
+    PCG64 stream does all three draws, continuing after the weight draw.
+    """
+    n_images = dataset.n_images
+    n_force = projected_force_updates(n_images, dataset.n_atoms)
+    n_components = n_images * dataset.n_atoms * 3
+    if shuffle and rng is not None:
+        energy_order = rng.permutation(n_images).astype(np.int32)
+        force_ids = rng.permutation(n_components).astype(np.int32)[:n_force]
+        schedule = np.concatenate([np.ones(n_force, dtype=np.int32), np.zeros(n_images, dtype=np.int32)])
+        schedule = schedule[rng.permutation(schedule.size)]
+    else:
+        energy_order = np.arange(n_images, dtype=np.int32)
+        force_ids = np.arange(n_force, dtype=np.int32)
+        schedule = np.concatenate([np.ones(n_force, dtype=np.int32), np.zeros(n_images, dtype=np.int32)])
+    return energy_order, force_ids, schedule
 
 
 def train_one(
@@ -666,13 +1096,18 @@ def train_one(
     tol: float,
     rng: np.random.Generator | None,
     shuffle: bool,
+    order: str = "pcg64",
+    loss: str = "energy",
 ) -> dict:
     """Check the loss gradient, then take one Kalman epoch, up to ``cap``.
 
-    ``rng`` supplies one permutation per epoch after the weights were drawn.
-    Dataset order is used when ``shuffle`` is false.
+    ``rng`` supplies permutations after the weights were drawn. Dataset
+    order is used when ``shuffle`` is false. ``order="n2p2"`` shuffles
+    with n2p2's engine instead of PCG64. Force loss interleaves the
+    documented force-component updates with the energy updates.
     """
-    session = KalmanSession(dataset, tol)
+    session = KalmanSession(dataset, tol, loss=loss)
+    native = N2p2Order() if order == "n2p2" and shuffle and loss == "energy" else None
     counter = HarnessCounter(cache=False, cap=int(cap))
     failure = None
     error = None
@@ -681,7 +1116,6 @@ def train_one(
     epochs = 0
     try:
         session.set_weights(weights)
-        identity = np.arange(dataset.n_images, dtype=np.int32)
         while True:
             counter.charge((float(counter.calls),))
             evaluation = session.evaluate()
@@ -694,8 +1128,11 @@ def train_one(
             if counter.calls >= cap:
                 failure = "cap"
                 break
-            order = rng.permutation(dataset.n_images).astype(np.int32) if shuffle and rng is not None else identity
-            status = session.epoch(order)
+            if loss == "force":
+                energy_order, force_ids, schedule = _force_schedule(dataset, rng, shuffle)
+                status = session.epoch_mixed(energy_order, force_ids, schedule)
+            else:
+                status = session.epoch(_epoch_order(dataset, rng, native, shuffle))
             epochs += 1
             if status != 0:
                 failure = "divergence"
@@ -708,8 +1145,16 @@ def train_one(
     finally:
         updates = session.updates() if session.handle else 0
         session.close()
+        if native is not None:
+            native.close()
     if evaluation is None:
-        evaluation = {"loss": None, "energy_rmse": None, "tensor_maxabs": None, "converged": False}
+        evaluation = {
+            "loss": None,
+            "energy_rmse": None,
+            "force_rmse": None,
+            "tensor_maxabs": None,
+            "converged": False,
+        }
     return {
         "force_calls": int(counter.calls),
         "success": success,
@@ -718,10 +1163,13 @@ def train_one(
         "converged": bool(success),
         "loss": evaluation["loss"],
         "energy_rmse": evaluation["energy_rmse"],
+        "force_rmse": evaluation.get("force_rmse", FORCE_RMSE),
         "grad_maxabs": None if evaluation["tensor_maxabs"] is None else float(np.max(evaluation["tensor_maxabs"])),
         "kalman_epochs": epochs,
         "kalman_updates": updates,
         "verify_calls": int(counter.verify_calls),
+        "order": order,
+        "loss_kind": loss,
     }
 
 
@@ -729,11 +1177,29 @@ def start_rng(index: int, base: int = SEED_BASE) -> np.random.Generator:
     return np.random.Generator(np.random.PCG64(base + int(index)))
 
 
-def run_start(dataset: MlDataset, index: int, *, cap: int = EPOCH_CAP, tol: float = GRAD_TOL, shuffle: bool = True) -> dict:
+def run_start(
+    dataset: MlDataset,
+    index: int,
+    *,
+    cap: int = EPOCH_CAP,
+    tol: float = GRAD_TOL,
+    shuffle: bool = True,
+    order: str = "pcg64",
+    loss: str = "energy",
+) -> dict:
     """One initialization. Weights are drawn before the epoch permutations."""
     rng = start_rng(index)
     weights = init_weights(dataset.n_fp, rng)
-    record = train_one(dataset, weights, cap=cap, tol=tol, rng=rng, shuffle=shuffle)
+    record = train_one(
+        dataset,
+        weights,
+        cap=cap,
+        tol=tol,
+        rng=rng,
+        shuffle=shuffle,
+        order=order,
+        loss=loss,
+    )
     record["seed"] = SEED_BASE + int(index)
     record["start"] = f"{int(index):04d}"
     return record
@@ -785,6 +1251,52 @@ def load_dataset(root: Path, problem_id: str) -> MlDataset:
     )
 
 
+def load_force_dataset(root: Path, problem_id: str) -> MlDataset:
+    """Fingerprints, fingerprint derivatives, energies, and reference forces."""
+    if problem_id not in TRAJECTORY_PATHS:
+        raise KeyError(problem_id)
+    spec = parse_fpparas((root / FPPARAS_FORCE_PATHS[problem_id]).read_text(encoding="utf-8"))
+    trajectory = manifest_file(root, TRAJECTORY_PATHS[problem_id])
+    from ase.io import iread
+
+    frames = list(iread(str(trajectory)))
+    if not frames:
+        raise ValueError(f"{trajectory} has no frames")
+    symbols = list(frames[0].get_chemical_symbols())
+    element_index = np.array([spec.elements.index(symbol) for symbol in symbols], dtype=np.int32)
+    n_images = len(frames)
+    n_atoms = len(symbols)
+    fingerprints = np.zeros((n_images, n_atoms, spec.stride), dtype=np.float64)
+    dg = np.zeros((n_images, n_atoms, n_atoms, 3, spec.stride), dtype=np.float64)
+    energy = np.zeros(n_images, dtype=np.float64)
+    forces = np.zeros((n_images, n_atoms, 3), dtype=np.float64)
+    for index, atoms in enumerate(frames):
+        if list(atoms.get_chemical_symbols()) != symbols:
+            raise ValueError(f"frame {index} changes the atom order")
+        cell = np.asarray(atoms.cell.array, dtype=np.float64)
+        if np.max(np.abs(cell - np.diag(np.diag(cell)))) > 1e-8:
+            raise ValueError(f"frame {index} is not orthogonal")
+        lengths = np.diag(cell)
+        fingerprints[index], dg[index] = fingerprints_frame(
+            atoms.get_positions(),
+            symbols,
+            lengths,
+            spec,
+            derivatives=True,
+        )
+        energy[index] = float(atoms.get_potential_energy())
+        forces[index] = np.asarray(atoms.get_forces(), dtype=np.float64)
+    return MlDataset(
+        elements=spec.elements,
+        n_fp=spec.n_fp,
+        element_index=element_index,
+        fingerprints=fingerprints,
+        energy=energy,
+        forces=forces,
+        dg=dg,
+    )
+
+
 def cache_dataset(root: Path, problem_id: str, dest: Path) -> Path:
     dest.parent.mkdir(parents=True, exist_ok=True)
     if dest.is_file():
@@ -801,13 +1313,35 @@ def cache_dataset(root: Path, problem_id: str, dest: Path) -> Path:
     return dest
 
 
+def cache_force_dataset(root: Path, problem_id: str, dest: Path) -> Path:
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    if dest.is_file():
+        return dest
+    dataset = load_force_dataset(root, problem_id)
+    np.savez(
+        dest,
+        elements=np.array(dataset.elements),
+        n_fp=np.array(dataset.n_fp, dtype=np.int32),
+        element_index=dataset.element_index,
+        fingerprints=dataset.fingerprints,
+        energy=dataset.energy,
+        forces=dataset.forces,
+        dg=dataset.dg,
+    )
+    return dest
+
+
 def dataset_from_cache(path: Path) -> MlDataset:
     packed = np.load(path, allow_pickle=False)
     elements = tuple(str(item) for item in packed["elements"])
+    forces = packed["forces"] if "forces" in packed.files else None
+    dg = packed["dg"] if "dg" in packed.files else None
     return MlDataset(
         elements=elements,
         n_fp=tuple(int(item) for item in packed["n_fp"]),
         element_index=packed["element_index"],
         fingerprints=packed["fingerprints"],
         energy=packed["energy"],
+        forces=forces,
+        dg=dg,
     )

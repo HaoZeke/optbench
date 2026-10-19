@@ -1,0 +1,28 @@
+id = "n2p2/emt-pt38-kalman-rng"
+engine = "n2p2"
+problem = "mlopt/emt-pt38"
+code = "n2p2"
+code_version = "2.3.0"
+commit = "29b9c9f10b1ac9ea45631b3d556a129ca3b701c2"
+algorithm = "Kalman"
+tuning = "n2p2-rng"
+loss = "energy"
+order = "n2p2"
+starts = 50
+note = "Energy-only squared error, same weights and Kalman settings as n2p2/emt-pt38-kalman. The structure order is n2p2's std::shuffle. examples/input.nn.recommended sets random_seed 1234567. With one process, Dataset seeds a GSL mt19937 with that seed, draws the global taus seed, and Training seeds std::mt19937_64 rngNew from the next mt19937 draw after the global draw. The same seed is used for every start, so the order stream is shared and the PCG64 weights differ. qtau and etatau are still divided by the 500 structures. Force RMSE is -1 because this row does not train forces."
+
+[stop]
+max_force_calls = 10000
+grad_abs = 0.02
+
+[kalman]
+type = "standard"
+epsilon = 1.0e-2
+q0 = 0.01
+qtau = 2.302
+qmin = 1.0e-6
+eta0 = 0.01
+etatau = 2.302
+etamax = 1.0
+update_strategy = "combined"
+selection = "n2p2"

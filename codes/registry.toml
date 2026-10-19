@@ -171,7 +171,7 @@ repository = "https://github.com/CompPhysVienna/n2p2"
 ref = "master"
 commit = "29b9c9f10b1ac9ea45631b3d556a129ca3b701c2"
 committed = "2025-03-17"
-note = "n2p2 2.3.0, commit 29b9c9f10b1ac9ea45631b3d556a129ca3b701c2. The row uses the standard Kalman filter and the recommended parameters: epsilon 0.01, q0 0.01, qtau 2.302, qmin 1e-6, eta 0.01, etatau 2.302, etamax 1. The published taus are divided by the number of structures in an epoch. One combined filter updates the total-energy residual. The potential is the pyamff 8037eb98 energy-only squared error on the problem trajectory and fpParas.dat. A force call is one loss-gradient evaluation."
+note = "n2p2 2.3.0, commit 29b9c9f10b1ac9ea45631b3d556a129ca3b701c2. The standard Kalman filter uses the defaults in examples/input.nn.recommended: epsilon 0.01, q0 0.01, qtau 2.302, qmin 1e-6, eta 0.01, etatau 2.302, etamax 1. The fading-memory block there is commented and is not used. Training.cpp divides qtau and etatau by the projected updates in one epoch: the structure count for an energy row, and that count times one plus force_energy_ratio 3 for a force row. Force rows also use the recommended force_weight 1 and one force component per update. The comparable loss is the pyamff 8037eb98 squared error on the problem trajectory and fpParas.dat. Dataset normalization stays off; units.rst marks it optional, and the pyamff rows use NoScaler. A force call is one loss-gradient evaluation. The n2p2-rng rows keep the PCG64 weights and shuffle structures with the one-process std::mt19937_64 stream from random_seed 1234567."
 
 # generated ASE and Sella templates
 

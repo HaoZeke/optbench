@@ -21,23 +21,30 @@ from optbench.campaign import write_starts
 from optbench.n2p2_ml import (
     CODE,
     CODE_VERSION,
+    ENERGY_COEFFICIENT,
     EPOCH_CAP,
+    FORCE_COEFFICIENT,
+    FORCE_ENERGY_RATIO,
     FORCE_RMSE,
+    FORCE_WEIGHT,
     GRAD_TOL,
     N2P2_COMMIT,
+    N2P2_RANDOM_SEED,
     N_STARTS,
     PYAMFF_COMMIT,
     SEED_BASE,
     cache_dataset,
+    cache_force_dataset,
     dataset_from_cache,
     run_start,
 )
 from optbench.score import half_even, score_v2
 
 
-def _cache_path(work: Path, problem_id: str) -> Path:
+def _cache_path(work: Path, problem_id: str, loss: str = "energy") -> Path:
     slug = problem_id.replace("/", "-")
-    return work / f"{slug}-fingerprints.npz"
+    suffix = "force.npz" if loss == "force" else "fingerprints.npz"
+    return work / f"{slug}-{suffix}"
 
 
 def _job(payload: dict) -> dict:
@@ -52,6 +59,8 @@ def _job(payload: dict) -> dict:
         cap=int(payload["cap"]),
         tol=float(payload["tol"]),
         shuffle=True,
+        order=str(payload.get("order") or "pcg64"),
+        loss=str(payload.get("loss") or "energy"),
     )
     record["seconds"] = time.perf_counter() - started
     record["counter"] = "harness"
@@ -78,13 +87,41 @@ def _benchmark_text(summary: dict, records: list[dict], template: dict) -> str:
     successes = [record for record in records if record["success"]]
     calls = [float(record["force_calls"]) for record in successes]
     rmse = [float(record["energy_rmse"]) for record in successes if record.get("energy_rmse") is not None]
+    force = [float(record["force_rmse"]) for record in successes if record.get("force_rmse") is not None]
     mean_calls, median_calls = _success_stats(calls)
     mean_rmse, median_rmse = _success_stats(rmse)
+    loss = str(template.get("loss") or "energy")
+    if loss == "force":
+        mean_force, median_force = _success_stats(force)
+    else:
+        mean_force, median_force = FORCE_RMSE, FORCE_RMSE
+    if loss == "force":
+        header = [
+            "# n2p2 standard Kalman filter on the pyamff force-trained squared error.",
+            f"# energy coefficient {ENERGY_COEFFICIENT}, force coefficient {FORCE_COEFFICIENT}.",
+            "# One force call is one combined loss-gradient evaluation.",
+            f"# Each epoch updates every structure and {FORCE_ENERGY_RATIO} force components per structure.",
+            f"# Force observations use force_weight {FORCE_WEIGHT}.",
+            "# Structure and component order is a PCG64 permutation after the uniform[-1, 1) weights.",
+            f"# loss commit {PYAMFF_COMMIT}. gradient tolerance {template['stop']['grad_abs']}.",
+        ]
+    elif str(template.get("order") or "pcg64") == "n2p2":
+        header = [
+            "# n2p2 standard Kalman filter on the pyamff energy-only squared error.",
+            "# One force call is one loss-gradient evaluation. The filter updates once per structure.",
+            f"# Structure order is n2p2 std::shuffle with random_seed {N2P2_RANDOM_SEED}.",
+            "# Weights stay the PCG64 uniform[-1, 1) draw used by the permutation row.",
+            f"# loss commit {PYAMFF_COMMIT}. gradient tolerance {GRAD_TOL}. force RMSE is {FORCE_RMSE} because forces are not trained.",
+        ]
+    else:
+        header = [
+            "# n2p2 standard Kalman filter on the pyamff energy-only squared error.",
+            "# One force call is one loss-gradient evaluation. The filter updates once per structure.",
+            "# Structures are permuted each epoch with PCG64, after the uniform[-1, 1) weights are drawn.",
+            f"# loss commit {PYAMFF_COMMIT}. gradient tolerance {GRAD_TOL}. force RMSE is {FORCE_RMSE} because forces are not trained.",
+        ]
     lines = [
-        "# n2p2 standard Kalman filter on the pyamff energy-only squared error.",
-        "# One force call is one loss-gradient evaluation. The filter updates once per structure.",
-        "# Structures are permuted each epoch with PCG64, after the uniform[-1, 1) weights are drawn.",
-        f"# loss commit {PYAMFF_COMMIT}. gradient tolerance {GRAD_TOL}. force RMSE is {FORCE_RMSE} because forces are not trained.",
+        *header,
         f"n {len(records)}",
         f"nfailed {summary['nfailed']}",
         f"cap {int(template['stop']['max_force_calls'])}",
@@ -96,9 +133,10 @@ def _benchmark_text(summary: dict, records: list[dict], template: dict) -> str:
         f"template {template['id']}",
         f"problem {template['problem']}",
         f"tuning {template['tuning']}",
-        f"mean_force_rmse {FORCE_RMSE}",
-        f"median_force_rmse {FORCE_RMSE}",
     ]
+    if mean_force is not None:
+        lines.append(f"mean_force_rmse {mean_force}")
+        lines.append(f"median_force_rmse {median_force}")
     if mean_calls is not None:
         lines.append(f"force_calls {half_even(mean_calls)}")
         lines.append(f"mean_epoch {mean_calls:.8f}")
@@ -154,11 +192,17 @@ def run_template(
         raise ValueError(f"{template['id']} belongs to {template['problem']}")
     cap = int(template["stop"]["max_force_calls"])
     tol = float(template["stop"]["grad_abs"])
+    loss = str(template.get("loss") or "energy")
+    order = str(template.get("order") or "pcg64")
     count = int(template.get("starts") or N_STARTS)
     if limit:
         count = min(count, int(limit))
     scratch = work or Path("/tmp/optbench-n2p2")
-    cache = cache_dataset(root, problem["id"], _cache_path(scratch, problem["id"]))
+    cache_path = _cache_path(scratch, problem["id"], loss)
+    if loss == "force":
+        cache = cache_force_dataset(root, problem["id"], cache_path)
+    else:
+        cache = cache_dataset(root, problem["id"], cache_path)
     from optbench.n2p2_ml import build_library
 
     build_library()
@@ -175,6 +219,8 @@ def run_template(
             "template": template["id"],
             "problem": problem["id"],
             "tuning": template.get("tuning") or "default",
+            "order": order,
+            "loss": loss,
         }
         for index in pending
     ]
@@ -224,6 +270,7 @@ def _report(record: dict) -> None:
     print(
         f"start {record['start']} force_calls={record['force_calls']} "
         f"success={record['success']} failure={record['failure']} "
-        f"energy_rmse={record['energy_rmse']} seconds={record['seconds']:.1f}",
+        f"energy_rmse={record['energy_rmse']} force_rmse={record.get('force_rmse')} "
+        f"seconds={record['seconds']:.1f}",
         flush=True,
     )
