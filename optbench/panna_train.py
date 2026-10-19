@@ -834,11 +834,15 @@ def write_asv(root: Path, commit: str) -> Path:
     for template in templates:
         stem = campaign_stem(template)
         path = campaign / f"{stem}.starts.jsonl"
+        if not path.is_file():
+            continue
         rows = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
         if len(rows) != 50:
             raise ValueError(f"{path} has {len(rows)} starts")
         rows.sort(key=lambda row: int(row["start"]))
         grouped[template["id"]] = rows
+    if not grouped:
+        raise ValueError("no finished PANNA campaign has 50 starts")
     machine = json.loads((root / "results" / "asv" / "cursor" / "machine.json").read_text(encoding="utf-8"))
     params = {
         "arch": machine["arch"],
