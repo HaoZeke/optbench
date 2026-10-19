@@ -304,12 +304,12 @@ ranked = true
 [[code]]
 id = "cp2k"
 name = "CP2K"
-role = "band"
+role = "band and transition-state search"
 repository = "https://github.com/cp2k/cp2k"
 ref = "v2026.2"
 commit = "67b5da876dd6a76b8b021d5a04d1c81ba79a4c50"
 committed = "2026-07-15"
-note = "CP2K 2026.2, serial build of commit 67b5da87. BAND runs CI-NEB, IT-NEB, and the string method. The i-PI server evaluates the harness pair potential, and each POSDATA increments HarnessCounter. Default rows use OPT_TYPE DIIS, K_SPRING 0.02 hartree/bohr^2, and MAX_STEPSIZE equal to the problem max_move in bohr. Tuned rows use the NEB regtest MD settings: OPT_TYPE MD, K_SPRING 0.05, TIMESTEP 0.5 fs, TEMPERATURE 100 K, and ANNEALING 0.95. NUMBER_OF_REPLICA is the problem image count. ALIGN_FRAMES and ROTATE_FRAMES are off when an atom is fixed or the cell is periodic. MAX_FORCE is the problem force norm in hartree/bohr divided by sqrt(n_free*3). The string method warns that MD optimization is incompatible and continues. The band input is documented at https://manual.cp2k.org/trunk/CP2K_INPUT/MOTION/BAND.html."
+note = "CP2K 2026.2, serial build of commit 67b5da87. BAND runs CI-NEB, IT-NEB, and the string method. The i-PI server evaluates the harness pair potential, and each POSDATA increments HarnessCounter. Default rows use OPT_TYPE DIIS, K_SPRING 0.02 hartree/bohr^2, and MAX_STEPSIZE equal to the problem max_move in bohr. Tuned rows use the NEB regtest MD settings: OPT_TYPE MD, K_SPRING 0.05, TIMESTEP 0.5 fs, TEMPERATURE 100 K, and ANNEALING 0.95. NUMBER_OF_REPLICA is the problem image count. ALIGN_FRAMES and ROTATE_FRAMES are off when an atom is fixed or the cell is periodic. MAX_FORCE is the problem force norm in hartree/bohr divided by sqrt(n_free*3). The string method warns that MD optimization is incompatible and continues.  The band input is documented at https://manual.cp2k.org/trunk/CP2K_INPUT/MOTION/BAND.html. Transition-state templates pin a later 2026.2 revision, commit 702cc3d81422b92864ecdd7f544c21c56c04adca, and use GEO_OPT DIMER through the same i-PI harness. In that revision BFGS and L-BFGS abort on TRANSITION_STATE. The CG line search implements only 2PNT. Band templates record 67b5da87; the dimer templates record 702cc3d8."
 
 # generated ASE and Sella templates
 

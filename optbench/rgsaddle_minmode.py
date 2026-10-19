@@ -224,6 +224,18 @@ def _extract(archive: Path, dest: Path) -> Path:
     return dest
 
 
+def _rng_state(rng) -> dict:
+    """JSON-safe copy of a Generator state, for a resumable saddle catalog."""
+    return json.loads(json.dumps(rng.bit_generator.state))
+
+
+def _rng_restore(payload: dict):
+    """Rebuild the Generator stored by ``_rng_state``."""
+    rng = np.random.default_rng()
+    rng.bit_generator.state = payload
+    return rng
+
+
 def _norm(values) -> float:
     return float(np.linalg.norm(np.asarray(values, dtype=np.float64)))
 

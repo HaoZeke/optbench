@@ -293,7 +293,7 @@
    <td data-code="vc-SQNM">—</td>
    <td data-code="TorchSim">—</td>
    <td data-code="geomeTRIC" data-template="geometric/lj38-ts-harness" data-par2="661.295"><span class="bench-score">661.295</span><a href="generated/suites/tsopt.html#LJ38-templates">geometric/lj38-ts-harness</a></td>
-   <td data-code="CP2K">—</td>
+   <td data-code="CP2K" data-template="cp2k/lj38-dimer-cg-tuned" data-par2="1139.41"><span class="bench-score">1139.41</span><a href="generated/suites/tsopt.html#LJ38-templates">cp2k/lj38-dimer-cg-tuned</a></td>
    <td data-code="artn" data-template="partn/ts-lj38" data-par2="5514.77"><span class="bench-score">5514.77</span><a href="generated/suites/tsopt.html#LJ38-templates">partn/ts-lj38</a></td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -320,7 +320,7 @@
    <td data-code="vc-SQNM">—</td>
    <td data-code="TorchSim">—</td>
    <td data-code="geomeTRIC" data-template="geometric/pt-island-ts-fd" data-par2="1061.12"><span class="bench-score">1061.12</span><a href="generated/suites/tsopt.html#pt-island-templates">geometric/pt-island-ts-fd</a></td>
-   <td data-code="CP2K">—</td>
+   <td data-code="CP2K" data-template="cp2k/pt-island-dimer-cg-tuned" data-par2="852.98"><span class="bench-score">852.98</span><a href="generated/suites/tsopt.html#pt-island-templates">cp2k/pt-island-dimer-cg-tuned</a></td>
    <td data-code="artn" data-template="partn/ts-pt" data-par2="452.735"><span class="bench-score">452.735</span><a href="generated/suites/tsopt.html#pt-island-templates">partn/ts-pt</a></td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
