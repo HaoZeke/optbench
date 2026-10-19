@@ -1,18 +1,17 @@
-# OPTIM version 27058, wales-27058.tar.bz2. CLSTRING, GROWSTRING 5 1000 0.3 1.0 3D-04 1.1, INE_NEW 9.36585D-05 100 1D-9 100 2D-3 4D2.
-# The count is OPTIM's energy+gradient calls, the 2014 paper counter. A start is kept when the log contains Converged to TS. getdata.py writes 10000 over a failed start and leaves it out of the mean.
+# counter optim. wales-27058 energy+gradient calls.
+# Success is the line Converged to TS. Failures stay out of the mean.
+# The harness cap is not this failure rule.
 force_calls 785
 force_calls_min 270
 force_calls_max 2794
 force_calls_median 621
-successes 47
 nfailed 3
-n 50
-transition_states 0
+starts 50
 code optim
 code_version 27058
-commit 144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348
+commit 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f
 algorithm climbing string
 template optim/cl-string-lj38
 problem double-ended-saddle-search/lj38
 tuning wales-2014
-counter harness
+counter optim

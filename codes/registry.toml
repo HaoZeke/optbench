@@ -174,6 +174,16 @@ committed = "2014-08-07"
 note = "Hosted tarball wales-27058.tar.bz2. OPTIM/source/SVNREV is 27059. The LJ38 climbing-string binary prints version 27058. The score is OPTIM's energy+gradient calls. A start is kept when the log contains Converged to TS."
 
 [[code]]
+id = "optim-df8da599"
+name = "OPTIM"
+role = "saddle search"
+repository = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
+ref = "df8da599267534fbe43a250e578f7396a7946311"
+commit = "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
+committed = "2026-10-19"
+note = "Current public svn.tar.bz2. The pin is the sha256 of that file. OPTIM/source/SVNREV is df8da599267534fbe43a250e578f7396a7946311. The binary banner prints an empty version. The LJ38 climbing string uses this pin unmodified. The score is OPTIM's energy+gradient calls."
+
+[[code]]
 id = "sella-0.1.1"
 name = "Sella"
 role = "lowest eigenvector"

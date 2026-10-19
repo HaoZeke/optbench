@@ -35,36 +35,41 @@ def test_the_ledger_covers_the_oracle_in_order():
             assert row["cause"]
         if (row.get("rerun") or {}).get("paper_baseline"):
             assert status == "reproduced"
-    assert counts == {"reproduced": 47, "not_reproduced": 29, "not_rerun": 75}
+    assert counts == {"reproduced": 46, "not_reproduced": 29, "not_rerun": 76}
     assert reproduction_errors(ROOT) == []
 
 
-def test_lj38_climbing_string_is_ranked_on_the_paper_cap():
+def test_lj38_climbing_string_ranks_the_current_release():
     ledger = {row_id(row): row for row in load_ledger(ROOT / "oracle" / "reproduction.jsonl")}
     row = ledger["double-ended-saddle-search/lj38/optim-cl-string"]
-    assert row["status"] == "reproduced"
+    assert row["status"] == "not_rerun"
     assert row["in_paper"] is False
-    check = row["checks"][0]
-    assert check["metric"] == "force_calls"
-    assert check["archive"] == 786
-    assert check["rerun"] == 785
-    assert check["ok"] is True
-    assert row["failure_check"]["rerun"] == 3
-    assert row["failure_check"]["ok"] is True
-    assert row["rerun"]["paper_baseline"] is True
+    assert row["checks"] == []
+    assert row["failure_check"]["archive"] == 3
+    assert row["failure_check"]["rerun"] == 50
+    assert row["failure_check"]["ok"] is False
+    assert row["rerun"]["paper_baseline"] is False
     assert row["rerun"]["template"] == "optim/cl-string-lj38"
+    assert row["rerun"]["code_version"] == "df8da599"
+    assert row["rerun"]["path"] == "results/campaign/optim-df8da599-cl-string-lj38.dat"
     text = (ROOT / row["rerun"]["path"]).read_text(encoding="utf-8")
-    assert "force_calls 785\n" in text
-    assert "force_calls_median 621\n" in text
-    assert "force_calls_min 270\n" in text
-    assert "force_calls_max 2794\n" in text
-    assert "nfailed 3\n" in text
+    assert "code_version df8da599\n" in text
+    assert "nfailed 50\n" in text
+    assert "n 50\n" in text
     assert "counter harness\n" in text
     assert "ranked false" not in text
-    v2 = json.loads((ROOT / "results/campaign/optim-27058-cl-string-lj38.v2.json").read_text(encoding="utf-8"))
+    assert "force_calls " not in text
+    diagnostic = (ROOT / "results/campaign/optim-27058-cl-string-lj38.dat").read_text(encoding="utf-8")
+    assert "force_calls 785\n" in diagnostic
+    assert "nfailed 3\n" in diagnostic
+    assert "counter optim\n" in diagnostic
+    assert "ranked false" not in diagnostic
+    assert not (ROOT / "results/campaign/optim-27058-cl-string-lj38.v2.json").exists()
+    v2 = json.loads((ROOT / "results/campaign/optim-df8da599-cl-string-lj38.v2.json").read_text(encoding="utf-8"))
     assert v2["provenance"]["parameters"]["counter"] == "optim energy+gradient calls"
-    assert v2["score"]["cap"] == 10000
-    assert v2["score"]["nfailed"] == 3
+    assert v2["score"]["cap"] == 2500
+    assert v2["score"]["nfailed"] == 50
+    assert v2["score"]["par2_mean"] == 5000
     assert v2["counter"] == "harness"
     board = json.loads(
         (ROOT / "results/board/problems/double-ended-saddle-search-lj38.json").read_text(encoding="utf-8")
@@ -75,21 +80,20 @@ def test_lj38_climbing_string_is_ranked_on_the_paper_cap():
     assert item["partial"] is False
     assert item["comparable"] is True
     assert item["counter"] == "harness"
-    assert item["cap"] == 10000
-    assert item["nfailed"] == 3
-    assert item["failures"]["cap"] == 0
-    assert item["failures"]["divergence"] == 3
-    assert item["par2_mean"] == v2["score"]["par2_mean"]
+    assert item["cap"] == 2500
+    assert item["nfailed"] == 50
+    assert item["n"] == 50
+    assert item["code_version"] == "df8da599"
+    assert item["commit"].startswith("738fafe3")
+    assert item["par2_mean"] == 5000
+    assert item["failures"]["divergence"] == 50
     assert [item for item in board["partial"] if item["template"] == "optim/cl-string-lj38"] == []
-    kept = [
-        json.loads(line)
-        for line in (ROOT / "results/campaign/optim-27058-cl-string-lj38.starts.jsonl").read_text(encoding="utf-8").splitlines()
-        if line.strip()
+    diagnostic_rows = [
+        item for item in board["not_comparable"] if item["template"] == "optim/cl-string-lj38"
     ]
-    pair = next(start for start in kept if start["start"] == "start_20.xyz")
-    assert pair["force_calls"] == 2794
-    assert pair["success"] is True
-    assert pair["counter"] == "harness"
+    assert len(diagnostic_rows) == 1
+    assert diagnostic_rows[0]["code_version"] == "27058"
+    assert diagnostic_rows[0]["partial"] is False
 
 
 def test_pele_paper_baseline_is_the_2014_stop():

@@ -1,15 +1,17 @@
-"""OPTIM L-BFGS through the ASE socket, and the r27058 climbing string.
+"""OPTIM L-BFGS through the ASE socket, and the current climbing string.
 
 The minimization binary is the OPTIM target from the Wales snapshot
 ``http://www-wales.ch.cam.ac.uk/svn.tar.bz2``. The pin is the sha256 of
 that file. The snapshot has no git commit. Each ``COMPUTE`` on the relay
 is one ``pes.evaluate``. That path does not score OPTIM's own counter.
 
-The LJ38 climbing-string row is the other path. It runs OPTIM 27058 from
-``wales-27058.tar.bz2`` and scores the last ``energy+gradient calls``
-field, the same campaign writer as the native OPTIM counter. Success is
-the line ``Converged to TS``. ``getdata.py`` writes 10000 over a failed
-start and leaves it out of the mean. That 10000 is the PAR-2 cap.
+The LJ38 climbing-string row is the other path. It runs the current
+public ``svn.tar.bz2`` unmodified. The odata is ``CLSTRING`` and
+``GROWSTRING`` at the source defaults, with the problem's image count
+and Euclidean force norm. The count is the last ``energy+gradient calls``
+field, written by the same campaign writer as the native OPTIM counter.
+Success is the line ``Converged to TS``. The PAR-2 cap is the problem
+harness cap.
 
 ``optim/unhooked`` and every other template raise before a file is written.
 Noise, NEB, and PATHSAMPLE are not this runner.
@@ -35,12 +37,10 @@ CODE = "optim"
 SNAPSHOT = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
 SHA256 = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
 _RELAY = Path(__file__).with_name("fmlip_relay.py")
-_CL_TARBALL = "https://optbench.org/codes/wales-27058.tar.bz2"
-_CL_SHA256 = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
-_CL_VERSION = "27058"
-_CL_BAKED = Path("/tmp/src/wales-27058/wales/OPTIM/bin/gfortran/OPTIM")
-# getdata.py writes this over a start whose success flag is 0.
-_PAPER_CAP = 10000
+_CL_TARBALL = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
+_CL_SHA256 = "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
+_CL_VERSION = "df8da599"
+_CL_BAKED = Path("/tmp/optim-release/wales/OPTIM/builds/gfortran/OPTIM")
 
 
 class _Calls:
@@ -345,14 +345,15 @@ def _cl_binary() -> Path:
 
 def _cl_missing(binary: Path) -> str:
     return (
-        "OPTIM 27058 is not available. "
+        f"OPTIM {_CL_VERSION} is not available. "
         f"The pin is the sha256 {_CL_SHA256} of {_CL_TARBALL}. "
         f"{binary} is not present. "
         "The climbing-string score is OPTIM's energy+gradient calls."
     )
 
 
-def _require_27058(binary: Path) -> None:
+def _require_release(binary: Path) -> None:
+    """The current tarball prints an empty version. Reject a numbered paper binary."""
     try:
         proc = subprocess.run(
             [str(binary)],
@@ -363,13 +364,26 @@ def _require_27058(binary: Path) -> None:
             check=False,
         )
     except subprocess.TimeoutExpired as exc:
-        raise RuntimeError(f"{binary} did not print a version within 60s") from exc
+        raise RuntimeError(f"{binary} did not print a banner within 60s") from exc
     banner = f"{proc.stdout}\n{proc.stderr}"
-    if f"version {_CL_VERSION}" not in banner:
+    if "OPTIM version" not in banner or "version 27058" in banner or "version 27059" in banner:
         raise RuntimeError(
-            f"{binary} is not OPTIM version {_CL_VERSION}. "
+            f"{binary} is not the current OPTIM release {_CL_VERSION}. "
             f"The pin is the sha256 {_CL_SHA256} of {_CL_TARBALL}."
         )
+
+
+def _stock_preamble(n_interior: int, force_norm: float, dof: int) -> str:
+    """CLSTRING plus GROWSTRING at the assigned source defaults.
+
+    ``keywords.F90`` sets reparametrization 0.75, growth tolerance 0.25,
+    and max step 0.1. Iteration density is not assigned. ``GSCONV`` is the
+    problem Euclidean force norm divided by ``sqrt(dof)``, the climbing
+    test ``SQRT(LAST%FNORM2) < GSCONV*SQRT(NC)``.
+    """
+    gsconv = float(force_norm) / math.sqrt(float(dof))
+    conv = f"{gsconv:.12E}".replace("E", "D")
+    return f"CLSTRING\nGROWSTRING {int(n_interior)} 0 0.75 0.25 {conv} 0.1\n"
 
 
 def _execute_cl_string(job: dict) -> dict:
@@ -436,24 +450,18 @@ def _run_cl_string(root: Path, problem: dict, template: dict, *, output: Path, w
     binary = _cl_binary()
     if not binary.is_file():
         raise RuntimeError(_cl_missing(binary))
-    _require_27058(binary)
+    _require_release(binary)
     section = _section(template)
     settings = band_settings(problem)
     if settings["geometry"] != "xyz-pairs":
         raise ValueError(f"{problem['id']} geometry is {settings['geometry']}")
-    preamble_name = str(section.get("preamble") or "")
-    if not preamble_name:
-        raise ValueError(f"{template['id']} has no optim.preamble")
-    preamble_path = Path(preamble_name)
-    if not preamble_path.is_file():
-        preamble_path = root / preamble_name
-    preamble = preamble_path.read_text(encoding="utf-8")
-    if not preamble.endswith("\n"):
-        preamble += "\n"
     symbol = str(section.get("symbol") or "AX")
-    cap = _PAPER_CAP
+    cap = int(settings["cap"])
+    pairs = _pair_texts(geometry_archive(root, problem), settings["pairs"])
+    dof = 3 * len(_xyz_coordinate_lines(pairs[0][1]))
+    preamble = _stock_preamble(settings["n_interior"], settings["force_norm"], dof)
     jobs = []
-    for name, start_text, end_text in _pair_texts(geometry_archive(root, problem), settings["pairs"]):
+    for name, start_text, end_text in pairs:
         start_lines = _xyz_coordinate_lines(start_text)
         end_lines = _xyz_coordinate_lines(end_text)
         odata = preamble + "points\n" + "\n".join(f"{symbol} {row}" for row in start_lines) + "\n"
@@ -469,12 +477,14 @@ def _run_cl_string(root: Path, problem: dict, template: dict, *, output: Path, w
         )
     records = run_jobs(jobs, _execute_cl_string, workers)
     comment = (
-        "# OPTIM version 27058, wales-27058.tar.bz2. "
-        "CLSTRING, GROWSTRING 5 1000 0.3 1.0 3D-04 1.1, "
-        "INE_NEW 9.36585D-05 100 1D-9 100 2D-3 4D2.\n"
-        "# The count is OPTIM's energy+gradient calls, the 2014 paper counter. "
+        f"# OPTIM SVNREV {_CL_VERSION}, {_CL_TARBALL}. "
+        "Unmodified. CLSTRING and GROWSTRING at the source defaults, "
+        f"iteration density 0, and the problem force norm {settings['force_norm']}.\n"
+        "# The count is OPTIM's energy+gradient calls. "
         "A start is kept when the log contains Converged to TS. "
-        "getdata.py writes 10000 over a failed start and leaves it out of the mean."
+        f"The harness cap is {cap}. "
+        "Iteration density is unassigned in this release, so the evolving string "
+        "exits on the first step and does not meet that force norm."
     )
     published = dict(template)
     published["code"] = "optim"
