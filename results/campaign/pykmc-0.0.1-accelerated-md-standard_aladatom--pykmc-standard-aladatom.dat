@@ -1,7 +1,11 @@
-# rep 1 force_calls 93065 total_searches 84 repeats 20 rate 22704080.98 confidence 0.95 reached 1
-# counter harness. The catalogue stays on the minimized reactant.
+# seed 1 force_calls 93065 total_searches 84 repeats 20 rate 22704080.98 rate_accuracy 0 catalogue_accuracy 0.4471177715 confidence 0.95 reached 1
+# seed 2 force_calls 166251 total_searches 136 repeats 22 rate 15456337.08 rate_accuracy 0 catalogue_accuracy 0.4776552234 confidence 0.9545454545 reached 1
+# seed 3 force_calls 119079 total_searches 104 repeats 21 rate 22704775.4 rate_accuracy 0 catalogue_accuracy 0.4471074965 confidence 0.9523809524 reached 1
+# counter harness. Each seed is an independent catalogue on the minimized reactant.
 # Prefactor 1e+12 is the eOn AKMC default_value. Temperature is the problem value.
-# Old-scheme confidence is 1 - 1/repeats. The link test is unchanged.
+# Old-scheme confidence is 1 - 1/repeats. Process identity is the top-window RMSD test plus a 0.05 eV barrier gate.
+# rate_accuracy is max(0, 1 - abs(rate - reference) / reference). It is 0 when the catalogue rate is at least twice the reference. The mean catalogue rate is 24.2713 times that reference.
+# The reference is the parallel-replica Langevin escape rate. The catalogue rate is the HTST sum over the AKMC processes. infra/aladatom-repro is not on origin.
 # pyKMC uses the r2549 Aluminum EAM through the harness. The eOn AKMC row uses the client's built-in eam_al and a client counter.
 code pykmc
 code_version 0.0.1
@@ -9,17 +13,19 @@ commit 9fd1f6e9085ef92642142406f3dd74e574209898
 counter harness
 count_keys harness
 contributor Rohit Goswami
-repetitions 1
-workers 1
+repetitions 3
+workers 8
 temperature_K 150
 thermostat akmc
 reference_rate 835900
 reference_products 5000
-true_rate 22704080.98
+true_rate 20288397.82
+uncertainty 2416030.378
+percent_uncertainty 11.90843357
 rate_accuracy 0
-catalogue_accuracy 0.4471177715
-force_calls_per_simulated_time 422591059.3
-force_calls 93065
+catalogue_accuracy 0.4572934971
+force_calls_per_simulated_time 511801886.3
+force_calls 126131.6667
 nfailed 0
 algorithm pARTn AKMC
 template pykmc/standard-aladatom

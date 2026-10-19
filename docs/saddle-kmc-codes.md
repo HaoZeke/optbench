@@ -112,8 +112,8 @@ success-only median. A row with no success has no median.
 | tsopt/pt-island | pykmc/ts-pt | 46/49 | 1 cap, 2 divergence | 746.5 |
 | hTST/Pt | pykmc/htst-pt | 0/1 | partial, 1 divergence | — |
 | hTST/Al | pykmc/htst-al | 16/16 | partial | 58189.5 |
-| accelerated-md/aladatom | pykmc/aladatom | 1/1 | 0 | 209928 |
-| accelerated-md/standard_aladatom | pykmc/standard-aladatom | 1/1 | 0 | 93065 |
+| accelerated-md/aladatom | pykmc/aladatom | 3/3 | 0 | 166853 |
+| accelerated-md/standard_aladatom | pykmc/standard-aladatom | 3/3 | 0 | 119079 |
 | saddle-search/pt-island | pykmc/saddle-pt-smooth | 360/561 | 139 wrong stationary, 61 crash, 1 not converged | 1262 |
 
 The rgsaddle band campaigns on `neb/Pt-heptamer` and the three double-ended
@@ -511,8 +511,8 @@ island atoms is 1.449. The slab mean is stored as `rmsd_plus_free` and
 | tsopt/pt-island | pykmc/ts-pt | 46/49 | 1 cap, 2 divergence | 746.5 | 1956.45 |
 | hTST/Pt | pykmc/htst-pt | 0/1 | partial, 1 divergence | — | 1e8 |
 | hTST/Al | pykmc/htst-al | 16/16 | partial | 58189.5 | 57877.875 |
-| accelerated-md/aladatom | pykmc/aladatom | 1/1 | 0 | 209928 | 209928 |
-| accelerated-md/standard_aladatom | pykmc/standard-aladatom | 1/1 | 0 | 93065 | 93065 |
+| accelerated-md/aladatom | pykmc/aladatom | 3/3 | 0 | 166853 | 178325.67 |
+| accelerated-md/standard_aladatom | pykmc/standard-aladatom | 3/3 | 0 | 119079 | 126131.67 |
 | saddle-search/pt-island | pykmc/saddle-pt-smooth | 360/561 | 139 wrong stationary, 61 crash, 1 not converged | 1262 | 15168.08 |
 
 `pykmc/ts-pt` is one search from each of the 49 guesses. `initial_13`
@@ -614,30 +614,45 @@ reactant and stop when the old-scheme confidence `max(0, 1 - 1/repeats)`
 reaches 0.95 and the thermal-window rate is positive. The prefactor is
 the eOn AKMC `default_value` 1e12. The window, catalogue RMSD, and
 product count are the problem values. The columns match the eOn AKMC
-reducer. One start is the finished catalogue, so the PAR-2 rank is that
-total.
+reducer. Each seed is one start. Three seeds finished at both
+temperatures, so n is 3 and `nfailed` is 0. `infra/aladatom-repro` is
+not on origin. The problem `sample.repetitions` stays 1, so the eOn n=1
+rows stay ranked. These pyKMC rows are not partial.
 
-At 250 K, `pykmc/aladatom` ran 165 searches and 20 repeats.
-`true_rate` is 1890960743. `rate_accuracy` is 0.
-`catalogue_accuracy` is 0.5059949401. Force calls are 209928.
-`force_calls_per_simulated_time` is 7.939312135e+10. The lowest process
-is barrier 0.1391 eV. The eOn AKMC row on the same problem, counter
-`client`, is `true_rate` 855329109.9, `rate_accuracy` 0,
-`catalogue_accuracy` 0.2427275727, 108435 force calls, 128 searches, 21
-repeats. The archive `eon-pr-langevin` reference is `true_rate`
-2.542941e+08, file spelling `uncertanity` 1.785425e+06. Langevin parallel
-replica, Juliana Duncan, 18 Oct 2012. Both AKMC rates score 0 against
-that reference.
+`rate_accuracy` is `max(0, 1 - abs(rate - reference) / reference)`. It is
+0 when the catalogue rate is at least twice the reference. The catalogue
+rate is the HTST sum over the AKMC processes. The reference is a
+parallel-replica Langevin escape rate. Those are different estimators.
+The eOn AKMC rows also score 0 against the same references.
 
-At 150 K, `pykmc/standard-aladatom` ran 84 searches and 20 repeats.
-`true_rate` is 22704080.98. `rate_accuracy` is 0.
-`catalogue_accuracy` is 0.4471177715. Force calls are 93065.
-`force_calls_per_simulated_time` is 422591059.3. The eOn AKMC row is
-`true_rate` 38023490, `rate_accuracy` 0, `catalogue_accuracy`
-0.8257069791, 1890241 force calls, 2336 searches, 20 repeats. The archive
-`eon-md-langevin` reference is `true_rate` 8.359e+05 and uncertainty
-7.211e+04. Juliana Duncan, 26 Oct 2012. Both AKMC rates score 0 against
-that reference.
+At 250 K, `pykmc/aladatom` mean `true_rate` is 1831767358, standard error
+59545363.9, `rate_accuracy` 0, mean `catalogue_accuracy` 0.4965483678,
+mean force calls 178325.6667, PAR-2 178325.6667, median 166853.
+`force_calls_per_simulated_time` is 6.533022707e+10. The mean rate is
+7.20334 times the reference. Seed 1: 165 searches, 20 repeats, rate
+1890960743, catalogue accuracy 0.5059949401, 209928 calls. Seed 2: 128
+searches, 22 repeats, rate 1712677323, catalogue accuracy 0.4776552234,
+166853 calls. Seed 3: 128 searches, 21 repeats, rate 1891664010,
+catalogue accuracy 0.5059949401, 158196 calls. The eOn AKMC row on the
+same problem, counter `client`, is `true_rate` 855329109.9,
+`rate_accuracy` 0, `catalogue_accuracy` 0.2427275727, 108435 force
+calls, 128 searches, 21 repeats. The archive `eon-pr-langevin` reference
+is `true_rate` 2.542941e+08, file spelling `uncertanity` 1.785425e+06.
+Langevin parallel replica, Juliana Duncan, 18 Oct 2012.
+
+At 150 K, `pykmc/standard-aladatom` mean `true_rate` is 20288397.82,
+standard error 2416030.378, `rate_accuracy` 0, mean `catalogue_accuracy`
+0.4572934971, mean force calls 126131.6667, PAR-2 126131.6667, median
+119079. `force_calls_per_simulated_time` is 511801886.3. The mean rate
+is 24.2713 times the reference. Seed 1: 84 searches, 20 repeats, rate
+22704080.98, catalogue accuracy 0.4471177715, 93065 calls. Seed 2: 136
+searches, 22 repeats, rate 15456337.08, catalogue accuracy
+0.4776552234, 166251 calls. Seed 3: 104 searches, 21 repeats, rate
+22704775.4, catalogue accuracy 0.4471074965, 119079 calls. The eOn AKMC
+row is `true_rate` 38023490, `rate_accuracy` 0, `catalogue_accuracy`
+0.8257069791, 1890241 force calls, 2336 searches, 20 repeats. The
+archive `eon-md-langevin` reference is `true_rate` 8.359e+05 and
+uncertainty 7.211e+04. Juliana Duncan, 26 Oct 2012.
 
 On the unminimized `pt-island.con` reactant, 343 atoms, 175 free, box
 19.2088 × 19.0118 × 30.0, the campaign smooth-linear evaluator gives
