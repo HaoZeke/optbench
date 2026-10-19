@@ -242,7 +242,7 @@ It does not run a campaign.
    </tr>
    <tr data-problem="accelerated-md/aladatom">
    <th scope="row"><a href="generated/suites/accelerated-md.html#aladatom">Al adatom on Al(100) at 250 K</a></th>
-   <td data-code="eOn" data-template="eon/aladatom-akmc" data-par2="108435"><span class="bench-score">108435</span><a href="generated/suites/accelerated-md.html#aladatom-templates">eon/aladatom-akmc</a></td>
+   <td data-code="eOn" data-template="eon/aladatom-akmc" data-par2="2.74292e+06"><span class="bench-score">2.74292e+06</span><a href="generated/suites/accelerated-md.html#aladatom-templates">eon/aladatom-akmc</a></td>
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
@@ -258,7 +258,7 @@ It does not run a campaign.
    </tr>
    <tr data-problem="accelerated-md/standard_aladatom">
    <th scope="row"><a href="generated/suites/accelerated-md.html#standard_aladatom">Al adatom on Al(100) at 150 K</a></th>
-   <td data-code="eOn" data-template="eon/standard-aladatom-akmc" data-par2="1.89024e+06"><span class="bench-score">1.89024e+06</span><a href="generated/suites/accelerated-md.html#standard_aladatom-templates">eon/standard-aladatom-akmc</a></td>
+   <td data-code="eOn" data-template="eon/standard-aladatom-akmc" data-par2="2.74292e+06"><span class="bench-score">2.74292e+06</span><a href="generated/suites/accelerated-md.html#standard_aladatom-templates">eon/standard-aladatom-akmc</a></td>
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>

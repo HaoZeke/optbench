@@ -1,17 +1,22 @@
 """AKMC catalogues for the aluminum adatom problems.
 
-One repetition stays on the reactant until the old-scheme repeat
-confidence reaches the problem value. eOn's own confidence is left
-above 1 so that call does not take a KMC step off state 0. The ranked
-cost is ``eon_search_calls``, the sum of ``sad-fcs`` and ``mins-fcs``.
-That sum matches ``HarnessCounter`` when the client reaches the
-potential through ``ext_pot`` and the prefactor is a constant. These
-catalogues keep the built-in ``eam_al`` potential.
+One repetition stays on the reactant until the old-scheme confidence
+of the rate-relevant streak reaches the problem value and the search
+count reaches the template floor. A process is rate-relevant when its
+rate is at least 1 percent of the current thermal-window rate. A new
+process at that share resets the streak. A repeat below it does not
+increment the streak. eOn's own confidence
+is left above 1 so that call does not take a KMC step off state 0.
+The ranked cost is ``eon_search_calls``, the sum of ``sad-fcs`` and
+``mins-fcs``. That sum matches ``HarnessCounter`` when the client
+reaches the potential through ``ext_pot`` and the prefactor is a
+constant. These catalogues keep the built-in ``eam_al`` potential.
 """
 
 from __future__ import annotations
 
 import json
+import math
 import os
 import shutil
 import time
@@ -40,6 +45,11 @@ from .eon_akmc import prepare_client_env
 from .score import eon_search_calls
 
 COUNT_KEY = "eon_search_calls"
+
+# A process below this share of the thermal-window rate does not
+# advance the old-scheme streak. One percent keeps the 0.17 eV
+# exchange and leaves out the 0.43 eV hops once a faster process exists.
+RATE_RELEVANT_SHARE = 0.01
 
 
 def _fmt(value: float) -> str:
@@ -75,6 +85,117 @@ def search_cost(text: str) -> dict:
         "repeats": repeats,
         "confidence": old_scheme_confidence(repeats),
     }
+
+
+def _registered_event(fields: list[str]) -> tuple[str, int] | None:
+    """A ``good-`` or ``repeat-`` id from one search-result row."""
+    for token in fields[7:]:
+        if token.startswith("good-") or token.startswith("repeat-"):
+            kind, _, raw = token.partition("-")
+            try:
+                return kind, int(raw)
+            except ValueError:
+                return None
+    return None
+
+
+def _rate_relevant(
+    process_id: int,
+    known: dict[int, dict],
+    temperature: float,
+    window: float,
+    min_barrier: float,
+    share: float,
+) -> bool:
+    """True when this process carries at least ``share`` of the in-window rate."""
+    thermal = select_thermal(list(known.values()), temperature, window, min_barrier)
+    total = sum(float(item["rate"]) for item in thermal)
+    if total <= 0:
+        return False
+    proc = known[process_id]
+    if not any(item is proc for item in thermal):
+        return False
+    return float(proc["rate"]) >= share * total
+
+
+def rate_relevant_repeats(
+    text: str,
+    processes: list[dict],
+    temperature: float,
+    window: float,
+    min_barrier: float,
+    share: float = RATE_RELEVANT_SHARE,
+) -> int:
+    """Old-scheme streak over processes that affect the escape rate.
+
+    The walk follows the search results. A process enters only when its
+    ``good-`` or ``repeat-`` line is reached, so a saddle found later
+    does not change the earlier window. Finding a process at or above
+    ``share`` resets the streak. Repeating one increments it. A slower
+    process does neither.
+    """
+    if not math.isfinite(share) or share <= 0.0 or share > 1.0:
+        raise ValueError("rate share must be in (0, 1]")
+    by_id = {int(proc["id"]): proc for proc in processes}
+    known: dict[int, dict] = {}
+    streak = 0
+    for fields in _search_lines(text):
+        event = _registered_event(fields)
+        if event is None:
+            continue
+        kind, process_id = event
+        proc = by_id.get(process_id)
+        if proc is None:
+            continue
+        if kind == "good" or process_id not in known:
+            known[process_id] = proc
+            if _rate_relevant(process_id, known, temperature, window, min_barrier, share):
+                streak = 0
+            continue
+        if _rate_relevant(process_id, known, temperature, window, min_barrier, share):
+            streak += 1
+    return streak
+
+
+def catalogue_reached(progress: dict, target: float, min_searches: int) -> bool:
+    """True when the reactant search is allowed to stop.
+
+    The old-scheme confidence of the rate-relevant streak has to clear
+    ``target`` and the thermal-window rate has to be positive. A short
+    run can repeat the 0.43 eV hops twenty times before any exchange
+    has been found, so the stop also waits for ``min_searches``.
+    """
+    if min_searches < 0:
+        raise ValueError("minimum searches must be non-negative")
+    return (
+        float(progress.get("confidence") or 0.0) >= target
+        and float(progress.get("rate") or 0.0) > 0.0
+        and int(progress.get("total_searches") or 0) >= min_searches
+    )
+
+
+def catalogue_confidence(
+    text: str,
+    processes: list[dict],
+    temperature: float,
+    window: float,
+    min_barrier: float,
+    metadata_repeats: int | None,
+) -> dict:
+    """Confidence that stops the reactant search.
+
+    ``metadata_repeats`` is eOn's counter. It includes every process
+    inside the thermal window. The streak does not, and it is the
+    count the old-scheme confidence uses.
+    """
+    progress = search_cost(text)
+    progress["eon_repeats"] = (
+        metadata_repeats if metadata_repeats is not None else progress["repeat_lines"]
+    )
+    streak = rate_relevant_repeats(text, processes, temperature, window, min_barrier)
+    progress["repeats"] = streak
+    progress["confidence"] = old_scheme_confidence(streak)
+    return progress
 
 
 def _metadata_repeats(path: Path) -> int | None:
@@ -209,16 +330,19 @@ def _read_progress(
     """Confidence, rate, and force calls from the reactant state on disk."""
     results = work / "states" / "0" / "search_results.txt"
     text = results.read_text(encoding="utf-8", errors="replace") if results.is_file() else ""
-    progress = search_cost(text)
-    meta = _metadata_repeats(work / "states" / "0" / "info")
-    if meta is not None:
-        progress["repeats"] = meta
-        progress["confidence"] = old_scheme_confidence(meta)
     table = work / "states" / "0" / "processtable"
     processes = (
         _parse_processes(table.read_text(encoding="utf-8", errors="replace"))
         if table.is_file()
         else []
+    )
+    progress = catalogue_confidence(
+        text,
+        processes,
+        temperature,
+        window,
+        min_barrier,
+        _metadata_repeats(work / "states" / "0" / "info"),
     )
     progress.update(
         _score_products(
@@ -282,6 +406,7 @@ def _one_repetition(
     _write_config(template, work / "config.ini", client, seed, workers, temperature)
     prepare_client_env(client)
     target = float((problem.get("convergence") or {}).get("confidence", 0.95))
+    min_searches = int(template.get("confidence_min_searches", 0))
     min_barrier = float((problem.get("convergence") or {}).get("min_barrier_eV", 0.01))
     tolerance = float((problem.get("convergence") or {}).get("catalogue_rmsd", 0.15))
     window = float(
@@ -330,13 +455,14 @@ def _one_repetition(
             progress["passes"] = index + 1
             print(
                 f"seed {seed} pass {index + 1} confidence={progress['confidence']:.3f} "
-                f"repeats={progress['repeats']} rate={progress['rate']:.6g} "
+                f"repeats={progress['repeats']} eon_repeats={progress.get('eon_repeats')} "
+                f"rate={progress['rate']:.6g} "
                 f"searches={progress['total_searches']} force_calls={progress['force_calls']}",
                 flush=True,
             )
             if on_pass is not None:
                 on_pass(progress)
-            if progress["confidence"] >= target and progress["rate"] > 0:
+            if catalogue_reached(progress, target, min_searches):
                 progress["reached"] = True
                 break
         else:
@@ -358,10 +484,11 @@ def _one_repetition(
                 work, temperature, window, min_barrier, tolerance, reactant, products, mobile
             )
             progress["passes"] = done
-            progress["reached"] = progress["confidence"] >= target and progress["rate"] > 0
+            progress["reached"] = catalogue_reached(progress, target, min_searches)
             print(
                 f"seed {seed} flush confidence={progress['confidence']:.3f} "
-                f"repeats={progress['repeats']} rate={progress['rate']:.6g} "
+                f"repeats={progress['repeats']} eon_repeats={progress.get('eon_repeats')} "
+                f"rate={progress['rate']:.6g} "
                 f"searches={progress['total_searches']} force_calls={progress['force_calls']}",
                 flush=True,
             )
@@ -427,6 +554,7 @@ def _write_result(
             f"# rep {row['repetition']} force_calls {row.get('force_calls', 0)} "
             f"total_searches {row.get('total_searches', 0)} "
             f"repeats {int(row.get('repeats') or 0)} "
+            f"eon_repeats {int(row.get('eon_repeats') or 0)} "
             f"rate {_fmt(float(row.get('rate') or 0.0))} "
             f"confidence {_fmt(float(row.get('confidence') or 0.0))} "
             f"reached {int(bool(row.get('reached')))}"
@@ -511,7 +639,12 @@ def _write_result(
             "rate": row.get("rate"),
             "confidence": row.get("confidence"),
             "repeats": row.get("repeats"),
+            "eon_repeats": row.get("eon_repeats"),
             "total_searches": row.get("total_searches"),
+            "channels": [
+                [None if channel is None else int(channel), float(rate)]
+                for channel, rate in (row.get("channels") or [])
+            ],
             "seconds": row.get("seconds"),
             "problem": problem["id"],
             "template": template["id"],

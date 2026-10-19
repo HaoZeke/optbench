@@ -22,23 +22,30 @@ from optbench.score import eon_search_calls
 
 ROOT = Path(__file__).resolve().parents[1]
 
+# Mean catalogue, then the first seed. The benchmark grid reads that seed.
 CATALOGUES = (
     (
         "eon-3.6.0-aladatom-akmc",
         "eon/aladatom-akmc",
         "accelerated-md/aladatom",
-        108435,
-        855329109.9,
-        0.2427275727,
-        128,
+        2742915.667,
+        3597591452.0,
+        0.9426753674,
+        891481.5886,
+        1890241,
+        3595857710.0,
+        2336,
     ),
     (
         "eon-3.6.0-standard-aladatom-akmc",
         "eon/standard-aladatom-akmc",
         "accelerated-md/standard_aladatom",
+        2742915.667,
+        38061300.0,
+        0.8253237218,
+        19085.45083,
         1890241,
         38023490.0,
-        0.8257069791,
         2336,
     ),
 )
@@ -76,7 +83,18 @@ def test_campaign_rows_keep_the_measured_catalogues_on_the_adapter():
         "eon/aladatom-akmc": EonAladatomAkmc,
         "eon/standard-aladatom-akmc": EonStandardAladatomAkmc,
     }
-    for stem, template, problem, calls, rate, catalogue, searches in CATALOGUES:
+    for (
+        stem,
+        template,
+        problem,
+        calls,
+        rate,
+        catalogue,
+        uncertainty,
+        rep_calls,
+        rep_rate,
+        searches,
+    ) in CATALOGUES:
         dat = ROOT / "results" / "campaign" / f"{stem}.dat"
         fields, _duplicates = parse_lenient(dat.read_text(encoding="utf-8"))
         assert fields["counter"] == "harness"
@@ -84,16 +102,27 @@ def test_campaign_rows_keep_the_measured_catalogues_on_the_adapter():
         assert fields["template"] == template
         assert fields["problem"] == problem
         assert fields["reducer"] == "amd-catalogue"
-        assert float(fields["force_calls"]) == calls
+        assert fields["repetitions"] == "3"
+        assert "partial" not in fields
+        assert float(fields["force_calls"]) == pytest.approx(calls)
         assert float(fields["true_rate"]) == pytest.approx(rate)
+        assert float(fields["uncertainty"]) == pytest.approx(uncertainty)
         assert float(fields["rate_accuracy"]) == 0.0
         assert float(fields["catalogue_accuracy"]) == pytest.approx(catalogue)
         assert _comparable(fields, []) is True
-        record = json.loads((dat.with_suffix(".starts.jsonl")).read_text(encoding="utf-8"))
-        assert record["counter"] == "harness"
-        assert record["comparable"] is True
-        assert record["count_key"] == COUNT_KEY
-        assert record["force_calls"] == calls
+        records = [
+            json.loads(line)
+            for line in dat.with_suffix(".starts.jsonl").read_text(encoding="utf-8").splitlines()
+            if line.strip()
+        ]
+        assert len(records) == 3
+        assert all(record["counter"] == "harness" for record in records)
+        assert all(record["comparable"] is True for record in records)
+        assert all(record["success"] is True for record in records)
+        assert all(record["count_key"] == COUNT_KEY for record in records)
+        record = records[0]
+        assert record["force_calls"] == rep_calls
+        assert record["seed"] == 20261018
         bench = benches[template]
         assert bench.template_name == template
         assert bench.problem_name == problem
@@ -110,15 +139,15 @@ def test_campaign_rows_keep_the_measured_catalogues_on_the_adapter():
         assert bench.track_total_searches.unit == "searches"
         assert bench.track_rate.unit == "per second"
         measured = bench().measure("20261018", "rep-1")
-        assert measured["force_calls"] == calls
+        assert measured["force_calls"] == rep_calls
         assert measured["success"] is True
         assert measured["failure"] is None
         assert measured["total_searches"] == searches
         assert measured["counter"] == "harness"
-        assert bench().track_force_calls("20261018", "rep-1") == calls
+        assert bench().track_force_calls("20261018", "rep-1") == rep_calls
         assert bench().track_success("20261018", "rep-1") == 1.0
         assert bench().track_failure_divergence("20261018", "rep-1") == 0.0
-        assert bench().track_rate("20261018", "rep-1") == pytest.approx(rate)
+        assert bench().track_rate("20261018", "rep-1") == pytest.approx(rep_rate)
 
 
 def test_benchmark_module_imports_without_eonclient():

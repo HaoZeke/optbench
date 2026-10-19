@@ -47,22 +47,22 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">eon/aladatom-akmc</td>
    <td data-field="version">eOn 3.6.0</td>
    <td data-field="commit">1d71c9445018</td>
-   <td data-field="par2_mean">108435</td>
-   <td data-field="mean_calls">108435</td>
-   <td data-field="median_calls">108435</td>
+   <td data-field="par2_mean">2.74292e+06</td>
+   <td data-field="mean_calls">2.74292e+06</td>
+   <td data-field="median_calls">2.79404e+06</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
-   <td data-field="n">1</td>
+   <td data-field="n">3</td>
    </tr>
    <tr data-problem="accelerated-md/standard_aladatom" data-template="eon/standard-aladatom-akmc">
    <td>Al adatom on Al(100) at 150 K</td>
    <td data-field="template">eon/standard-aladatom-akmc</td>
    <td data-field="version">eOn 3.6.0</td>
    <td data-field="commit">1d71c9445018</td>
-   <td data-field="par2_mean">1.89024e+06</td>
-   <td data-field="mean_calls">1.89024e+06</td>
-   <td data-field="median_calls">1.89024e+06</td>
+   <td data-field="par2_mean">2.74292e+06</td>
+   <td data-field="mean_calls">2.74292e+06</td>
+   <td data-field="median_calls">2.79404e+06</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
-   <td data-field="n">1</td>
+   <td data-field="n">3</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38" data-template="eon-client/de-lj38-lanczos-improved">
    <td>LJ38 double-ended saddle</td>

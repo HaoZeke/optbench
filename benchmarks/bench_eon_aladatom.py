@@ -1,10 +1,10 @@
 """asv tracks for the two aluminum adatom AKMC templates.
 
-The grid is one repetition. The problem states ``sample.repetitions = 1``,
-seed 20261018, start ``rep-1``. ``measure`` reads that committed campaign
-start. It does not launch eonclient and it does not import eOn. The
-recorded cost is ``eon_search_calls`` from the 151-atom Voter-Chen
-``eam_al`` catalogue with prefactor ``1e12``.
+The campaign states three repetitions. The default grid is the first
+start, seed 20261018 and ``rep-1``. ``measure`` reads that committed
+campaign start. It does not launch eonclient and it does not import
+eOn. The recorded cost is ``eon_search_calls`` from the 151-atom
+Voter-Chen ``eam_al`` catalogue with prefactor ``1e12``.
 """
 
 from __future__ import annotations

@@ -1,5 +1,5 @@
 {
-  "full_n": 1,
+  "full_n": 3,
   "history": [],
   "id": "accelerated-md/aladatom",
   "not_comparable": [],
@@ -21,7 +21,7 @@
         "divergence": 0,
         "wrong_stationary": 0
       },
-      "full_n": 1,
+      "full_n": 3,
       "history": false,
       "max_calls": 2409.0,
       "mean_calls": 2409.0,
@@ -66,7 +66,7 @@
         "divergence": 0,
         "wrong_stationary": 0
       },
-      "full_n": 1,
+      "full_n": 3,
       "history": false,
       "max_calls": 6313.0,
       "mean_calls": 6313.0,
@@ -111,7 +111,7 @@
         "divergence": 0,
         "wrong_stationary": 0
       },
-      "full_n": 1,
+      "full_n": 3,
       "history": false,
       "max_calls": 3411.0,
       "mean_calls": 3411.0,
@@ -156,7 +156,7 @@
         "divergence": 0,
         "wrong_stationary": 0
       },
-      "full_n": 1,
+      "full_n": 3,
       "history": false,
       "max_calls": 6377.0,
       "mean_calls": 6377.0,
@@ -227,21 +227,21 @@
         "divergence": 0,
         "wrong_stationary": 0
       },
-      "full_n": 1,
+      "full_n": 3,
       "history": false,
-      "max_calls": 108435.0,
-      "mean_calls": 108435.0,
+      "max_calls": 3544465.0,
+      "mean_calls": 2742915.6666666665,
       "mean_per_image": null,
-      "median": 108435.0,
-      "median_calls": 108435.0,
-      "median_high": 108435.0,
-      "median_low": 108435.0,
+      "median": 2794041.0,
+      "median_calls": 2794041.0,
+      "median_high": 3544465.0,
+      "median_low": 1890241.0,
       "median_per_image": null,
-      "min_calls": 108435.0,
-      "n": 1,
+      "min_calls": 1890241.0,
+      "n": 3,
       "nfailed": 0,
       "note": "starts.jsonl",
-      "par2_mean": 108435.0,
+      "par2_mean": 2742915.6666666665,
       "partial": false,
       "partial_reason": "",
       "path": "results/campaign/eon-3.6.0-aladatom-akmc.dat",
@@ -253,7 +253,7 @@
       "template": "eon/aladatom-akmc",
       "tuning": "",
       "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "wilson_low": 0.4385029682449546
     }
   ],
   "title": "Al adatom on Al(100) at 250 K"
