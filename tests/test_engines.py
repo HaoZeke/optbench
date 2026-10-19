@@ -153,6 +153,31 @@ def test_pykmc_and_optim_write_nothing(tmp_path: Path):
     assert not output.with_suffix(".starts.jsonl").exists()
 
 
+def test_radial_push_reaches_neighbors_at_the_step_length():
+    import numpy as np
+
+    from optbench.engines.partn import _radial_push
+
+    positions = np.zeros((4, 3))
+    positions[1] = [1.0, 0.0, 0.0]
+    positions[2] = [2.5, 0.0, 0.0]
+    positions[3] = [6.0, 0.0, 0.0]
+    free = np.array([True, True, False, True])
+    box = np.array([20.0, 20.0, 30.0])
+    vec = _radial_push(positions, free, 0, 3.0, 0.4, box, np.random.default_rng(0))
+    assert abs(float(np.linalg.norm(vec)) - 0.4) < 1e-12
+    assert float(np.linalg.norm(vec[0])) > 0.0
+    assert float(np.linalg.norm(vec[2])) == 0.0
+    assert float(np.linalg.norm(vec[3])) == 0.0
+    saw_z = False
+    for seed in range(30):
+        trial = _radial_push(positions, free, 0, 3.0, 0.4, box, np.random.default_rng(seed))
+        if float(np.max(np.abs(trial[:, 2]))) > 1e-8:
+            saw_z = True
+            break
+    assert saw_z
+
+
 def test_partn_coordinate_rows_follow_the_python_wrapper():
     import numpy as np
 

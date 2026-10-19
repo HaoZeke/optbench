@@ -6,15 +6,15 @@ code = "artn"
 code_version = "1.1.0"
 commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
 algorithm = "ARTn"
-tuning = "optbench-pt111"
-note = "Settings from examples/OptBench_SaddleSearch.d/launch_script.py and examples/LAMMPS.Pt111.d. The cell is the geometry box 19.2088 x 19.0118 x 30. fire_dt_init 4.134 is the Pt111 timestep 0.0002 ps divided by AU_PS 4.83776865317143e-5. fire_dt_max_f is 2, so the FIRE step can grow once from that timestep. The LAMMPS examples cap the step with dmax, and that cap is not a next_displ input. The push is in-plane on 1 to 7 island atoms, lengths 0.05 to 0.5 angstrom. nnewchance 2 and nsmooth 2 are the Pt111 artn.in values. search_budget 2000 is the authors' minimize maxeval. The scored geometry is tau_sad. The displacement returned on the call that stores the saddle is the push off the saddle, and the loop stops before applying it. The harness connection test minimizes the two endpoints. Letting that push run with no dmax walks the FIRE step to about 60 angstrom and spends the budget after the saddle is already stored. max_searches is 200. The link is the eOn r2205 per-atom maximum, distance_difference 0.1 angstrom. rmsd_connect remains the saddle-novelty test."
+tuning = "beland-radial"
+note = "The previous optbench-pt111 row copied examples/OptBench_SaddleSearch.d: ninit 3, lanczos_max_size 20, eigen_step_size 0.3, and an in-plane push on 1 to 7 of atoms 0-6 with length 0.05 to 0.5 angstrom. That push is what collapsed 138 linked searches onto 3 saddles. This row is the Béland 2015 / pARTn radial profile: ninit 1, push_step_size 0.4 angstrom, every free atom within radius 3.0 angstrom of one island atom, lanczos_min_size 12, lanczos_max_size 15. The center is drawn from atoms 0-6. The vector is the pARTn rad draw, scaled to 0.4 angstrom, and it is not in-plane. One numpy stream, seed 20261015 plus the repetition, draws a new center and a new vector for each search. zseed still comes from the search name. fire_dt_init 4.134, fire_dt_max_f 2, nsmooth 2, and nnewchance 2 stay the Pt111 values. The potential stays morse/smooth/linear, the pair the pARTn OptBench example names. The archive eOn rows use morse_pt, which shifts the pair energy to zero at cutoff 9.5 and leaves the force unsmoothed. search_budget 2000. max_searches 200. The link is the eOn r2205 per-atom maximum, distance_difference 0.1 angstrom. rmsd_connect remains the saddle-novelty test."
 
 [partn]
-push_step_size = 0.5
+push_step_size = 0.4
 eigen_step_size = 0.3
-ninit = 3
-lanczos_max_size = 20
-lanczos_min_size = 2
+ninit = 1
+lanczos_max_size = 15
+lanczos_min_size = 12
 lanczos_disp = 1.0e-4
 lanczos_eval_conv_thr = 1.0e-2
 lpush_final = true
@@ -30,12 +30,9 @@ fire_dt_max_f = 2.0
 
 [search]
 repetitions = 1
-push = "surface"
+push = "radial"
 displace_atoms = "0,1,2,3,4,5,6"
-min_atoms = 1
-max_atoms = 7
-dmin = 0.05
-dmax = 0.5
+radius = 3.0
 displace_magnitude = 0.1
 rmsd_connect = 0.5
 max_searches = 200

@@ -18,6 +18,7 @@
         "cap": 29,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -63,6 +64,7 @@
         "cap": 27,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -110,6 +112,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -155,6 +158,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -200,6 +204,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -245,6 +250,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -290,6 +296,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -335,6 +342,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -380,6 +388,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -425,6 +434,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -470,6 +480,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -515,6 +526,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -560,6 +572,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -605,6 +618,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -650,6 +664,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -1072,6 +1087,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -1117,6 +1133,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -1162,6 +1179,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -1207,6 +1225,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -1252,6 +1271,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -1297,6 +1317,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -1342,6 +1363,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -1386,7 +1408,8 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 2,
+        "divergence": 0,
+        "not_converged": 2,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -1432,6 +1455,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -1474,9 +1498,10 @@
       "current": true,
       "entry": "rgsaddle-0.2.2-double-ended-saddle-search-pt-island--rgsaddle-oci-neb-lbfgs",
       "failures": {
-        "cap": 4,
+        "cap": 1,
         "crash": 0,
-        "divergence": 0,
+        "divergence": 3,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -1521,7 +1546,8 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 5,
+        "divergence": 0,
+        "not_converged": 5,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -1566,7 +1592,8 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 5,
+        "divergence": 0,
+        "not_converged": 5,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -1611,7 +1638,8 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 5,
+        "divergence": 0,
+        "not_converged": 5,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -1657,6 +1685,7 @@
         "cap": 5,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -1702,6 +1731,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -1747,6 +1777,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -1791,7 +1822,8 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 2,
+        "divergence": 0,
+        "not_converged": 2,
         "wrong_stationary": 2
       },
       "full_n": 59,
@@ -1834,9 +1866,10 @@
       "current": true,
       "entry": "rgsaddle-0.2.2-double-ended-saddle-search-pt-island--rgsaddle-oci-neb",
       "failures": {
-        "cap": 3,
+        "cap": 0,
         "crash": 0,
-        "divergence": 0,
+        "divergence": 3,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -1881,7 +1914,8 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 5,
+        "divergence": 0,
+        "not_converged": 5,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -1927,6 +1961,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -1971,7 +2006,8 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 5,
+        "divergence": 0,
+        "not_converged": 5,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -2016,7 +2052,8 @@
       "failures": {
         "cap": 1,
         "crash": 0,
-        "divergence": 5,
+        "divergence": 0,
+        "not_converged": 5,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -2062,6 +2099,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 1,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -2107,6 +2145,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 5,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -2151,7 +2190,8 @@
       "failures": {
         "cap": 1,
         "crash": 0,
-        "divergence": 20,
+        "divergence": 0,
+        "not_converged": 20,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -2196,7 +2236,8 @@
       "failures": {
         "cap": 3,
         "crash": 0,
-        "divergence": 56,
+        "divergence": 0,
+        "not_converged": 56,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -2241,7 +2282,8 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 59,
+        "divergence": 0,
+        "not_converged": 59,
         "wrong_stationary": 0
       },
       "full_n": 59,
@@ -2286,7 +2328,8 @@
       "failures": {
         "cap": 3,
         "crash": 0,
-        "divergence": 56,
+        "divergence": 0,
+        "not_converged": 56,
         "wrong_stationary": 0
       },
       "full_n": 59,

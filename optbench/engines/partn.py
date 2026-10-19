@@ -625,7 +625,7 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
     """
     import statistics
 
-    from optbench.failures import classify_failure
+    from optbench.failures import classify_outcome
     from optbench.v2 import write_starts
 
     settings = point_settings(problem)
@@ -639,9 +639,13 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
     max_searches = int(search.get("max_searches", 20000))
     budget = int(search.get("search_budget", 10000))
     listed = [int(part) for part in str(search.get("displace_atoms", "0,1,2,3,4,5,6")).split(",") if part.strip()]
-    surface = str(search.get("push", "atom")) == "surface"
+    push_kind = str(search.get("push", "atom"))
+    surface = push_kind == "surface"
+    radial = push_kind == "radial"
     dmin = float(search.get("dmin", 0.05))
     dmax = float(search.get("dmax", 0.5))
+    radius = float(search.get("radius", 3.0))
+    radial_step = float(_section(template).get("push_step_size", 0.4))
     min_atoms = int(search.get("min_atoms", 1))
     max_atoms = int(search.get("max_atoms", 7))
     starts = load_starts(root, problem, output.parent / "work" / template["id"].replace("/", "-"))
@@ -680,6 +684,12 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
                         for value in rng.choice(np.asarray(listed, dtype=int), size=count, replace=False)
                     ]
                     push = _surface_push(positions.shape[0], chosen, dmin, dmax, rng)
+                    origin = minimum
+                elif radial:
+                    center = int(rng.choice(np.asarray(listed, dtype=int)))
+                    if not bool(free[center]):
+                        raise RuntimeError(f"displace atom {center} is not free")
+                    push = _radial_push(minimum, free, center, radius, radial_step, box, rng)
                     origin = minimum
                 else:
                     atom = int(listed[int(rng.integers(0, len(listed)))])
@@ -768,7 +778,19 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
                         if barrier <= 0.0 or barrier >= barrier_max:
                             record["reasons"].append("barrier")
                         record["success"] = False
-                        record["failure"] = classify_failure(record["reasons"])
+                        record["failure"] = classify_outcome(
+                            energy=record.get("energy"),
+                            geometry=saddle,
+                            force=record.get("force_norm"),
+                            calls=float(record["force_calls"]),
+                            cap=int(budget) + 2 * 2000,
+                            force_tol=float(settings["force_norm"]),
+                            hessian_index=None
+                            if record.get("hessian_index") is None
+                            else int(record["hessian_index"]),
+                            expected_index=1 if record.get("hessian_index") is not None else None,
+                            stationary_rejected=True,
+                        )
                 search_calls += int(record["force_calls"])
                 record.pop("positions", None)
                 record.pop("lowest_mode", None)
@@ -892,6 +914,50 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
         "template": template["id"],
         "problem": problem["id"],
     }
+
+
+def _cell_lengths(box) -> np.ndarray:
+    if box is None:
+        return np.zeros(3, dtype=np.float64)
+    values = np.asarray(box, dtype=np.float64).reshape(-1)
+    if values.size == 3:
+        return values.astype(np.float64, copy=False)
+    if values.size == 9:
+        matrix = values.reshape(3, 3)
+        return np.array([matrix[0, 0], matrix[1, 1], matrix[2, 2]], dtype=np.float64)
+    return np.zeros(3, dtype=np.float64)
+
+
+def _radial_push(positions, free, center: int, radius: float, step: float, box, rng) -> np.ndarray:
+    """pARTn ``push_mode = rad`` on the free atoms inside ``radius``.
+
+    ``generate_push_init`` draws each selected atom in ``[-0.5, 0.5]^3``
+    and scales the whole vector to ``push_step_size``. The draw is not
+    in-plane. Fixed atoms stay at zero. A positive cell length is folded
+    with the nearest image, which does not change a 3 angstrom neighborhood
+    on the Pt-island cell.
+    """
+    pos = np.asarray(positions, dtype=np.float64)
+    mask_free = np.asarray(free, dtype=bool)
+    delta = pos - pos[int(center)]
+    lengths = _cell_lengths(box)
+    for axis in range(3):
+        length = float(lengths[axis])
+        if length > 0.0:
+            delta[:, axis] -= length * np.round(delta[:, axis] / length)
+    inside = np.linalg.norm(delta, axis=1) <= float(radius)
+    selected = mask_free & inside
+    vec = np.zeros_like(pos)
+    count = int(np.count_nonzero(selected))
+    if count == 0:
+        vec[int(center)] = np.array([float(step), 0.0, 0.0])
+        return vec
+    vec[selected] = rng.random((count, 3)) - 0.5
+    norm = float(np.linalg.norm(vec))
+    if norm < 1e-12:
+        vec[int(center)] = np.array([float(step), 0.0, 0.0])
+        return vec
+    return vec * (float(step) / norm)
 
 
 def _surface_push(natoms: int, indices: list[int], dmin: float, dmax: float, rng) -> np.ndarray:
