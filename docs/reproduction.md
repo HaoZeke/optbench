@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+47 reproduced, 29 not reproduced, 75 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -158,7 +158,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | emt-pt38/pyamff-adam10-7-fcoeff0_1 | — | — | not rerun |
 | emt-pt38/pyamff-lbfgs10-7-fcoeff0 | — | — | not rerun |
 | emt-pt38/pyamff-lbfgs10-7-fcoeff0_1 | — | — | not rerun |
-| emt-pt38/pyamff-rprop10-7-fcoeff0 | — | — | not rerun |
+| emt-pt38/pyamff-rprop10-7-fcoeff0 | mean_epoch 97.58 | 91.04 | reproduced; residual |
 | emt-pt38/pyamff-rprop10-7-fcoeff0_1 | — | — | not rerun |
 
 ## neb
@@ -217,6 +217,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 ## Residuals inside the band
 
+- mlopt/emt-pt38/pyamff-rprop10-7-fcoeff0: PyAMFF 240f51d0 with stock torch Rprop (learning rate 0.01, etas 0.5 and 1.2, steps 1e-6 to 50) on the EMT Pt 38 trajectory. The network is 10-7 tanh, force coefficient 0, energy coefficient 1, no scaler, one batch, 50 uniform[-1, 1) starts, and the archive stop (max absolute gradient component 0.02, cap 10000). The stock loss name is SSE; the class still tags the sum of squared per-atom errors as SE. init_model_parameters is true because this revision loads saved_model_params.pyamff when the flag is false. Mean epoch 91.04 is inside 10 percent of 97.58. Median epoch 75 is 24 percent under 99. Energy RMSE stays inside 10 percent. The median gap was not tuned.
 - tsopt/LJ38/pele_cd: Inside the 10% band (263.52 vs 254). The same xyz-versus-con starting set as ts-ffd. findTS_local.py for the CD row does not pass orthogZeroEigs; the harness template sets orthog translations-rotations. The paper baseline is this 2014-stop mean, not the harness-stop mean 335.06.
 - tsopt/LJ38/pele_ffd: Inside the 10% band (207.51 vs 192). Archive run.sh unpacks coords-xyz.tar.gz (200 xyz, max pair about 4.4). The harness problem points at coords-con.tar.gz (max pair about 37). Kabsch RMS is about 6.33, so the sets are not the same geometry. Neither set has a pair past cutoff 40, and both drivers use RMS tolerance 1e-3/sqrt(114). The 8% residual is the starting set. The paper baseline is this 2014-stop mean, not the harness-stop mean 254.48.
 

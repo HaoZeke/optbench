@@ -111,6 +111,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+    "repro/mlopt-emt-pt38-pyamff-rprop10-7-fcoeff0": "b8b32b21730d8c044a042de77b660b6759deed09",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -199,6 +200,7 @@ MATCHES: list[dict] = [
     {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "branch": "cells/pele/go", "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat", "cause": "pele_bh_defaults"},
     {"key": "hTST/Al/eon-dimer-cg", "template": "eon-svn/htst-al-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-al-dimer.dat", "kind": "htst", "cause": "htst_al"},
     {"key": "hTST/Pt/eon-dimer-cg", "template": "eon-svn/htst-pt-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-pt-dimer.dat", "kind": "htst"},
+    {"key": "mlopt/emt-pt38/pyamff-rprop10-7-fcoeff0", "template": "pyamff/emt-pt38-rprop", "branch": "repro/mlopt-emt-pt38-pyamff-rprop10-7-fcoeff0", "path": "results/campaign/pyamff-240f51d0-emt-pt38-rprop.dat", "cause": "pyamff_epoch_median"},
 ]
 
 
@@ -287,6 +289,15 @@ CAUSE_TEXT = {
         "The harness records 7 failures: 5 RuntimeError LineSearch failed (ASE 3.8.2 already raises that; ASE 3.6.0 is not on PyPI) "
         "and 2 Hessian index 1 after the Euclidean force norm is under 0.01. "
         "The Wilson interval on 0 failures out of 1000 is about 0 to 3.83."
+    ),
+    "pyamff_epoch_median": (
+        "PyAMFF 240f51d0 with stock torch Rprop (learning rate 0.01, etas 0.5 and 1.2, steps 1e-6 to 50) "
+        "on the EMT Pt 38 trajectory. The network is 10-7 tanh, force coefficient 0, energy coefficient 1, "
+        "no scaler, one batch, 50 uniform[-1, 1) starts, and the archive stop (max absolute gradient component 0.02, cap 10000). "
+        "The stock loss name is SSE; the class still tags the sum of squared per-atom errors as SE. "
+        "init_model_parameters is true because this revision loads saved_model_params.pyamff when the flag is false. "
+        "Mean epoch 91.04 is inside 10 percent of 97.58. Median epoch 75 is 24 percent under 99. "
+        "Energy RMSE stays inside 10 percent. The median gap was not tuned."
     ),
     "akmc_vs_langevin": (
         "The archive rows are Langevin parallel replica. The harness rows are AKMC. "
