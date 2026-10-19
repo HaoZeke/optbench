@@ -160,8 +160,8 @@ are wrong stationary. The success median is 72. Start `pos_0000` took 55
 harness calls and stopped at force `0.000842553062284986`, energy
 `-1421.4513232624358`, vibrational index 6. `optim/unhooked` writes nothing.
 Noise is not scored: the relay has no noisy-force window. Noise, NEB, and hTST are not this socket. The LJ38 hybrid
-eigenvector-following row is OPTIM 27058, the archived odata preamble, and
-coords-xyz. Its score is the native energy+gradient call count. PATHSAMPLE is in the same snapshot. The PATHSAMPLE target linked
+eigenvector-following row is the current svn tarball, source df8da599, stock BFGSTS, coords-xyz, and the archive RMS stop.
+Its score is the native energy+gradient call count. The 2014 preamble run is an unranked diagnostic. PATHSAMPLE is in the same snapshot. The PATHSAMPLE target linked
 (gfortran, `WITH_OPENMP` off). It does not call `pes.evaluate`. It writes
 `odata.*` and submits the `EXEC` program, which is OPTIM. No PATHSAMPLE
 number is written.

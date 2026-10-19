@@ -1,15 +1,14 @@
-# OPTIM 27058 hybrid eigenvector-following, forward finite differences, LJ38.
+# Current OPTIM, stock hybrid eigenvector-following, LJ38.
 id = "optim/hef-ffd-ts-lj38"
 engine = "optim"
 problem = "tsopt/LJ38"
-code = "optim-27058"
-code_version = "27058"
-commit = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
+code = "optim"
+code_version = "20261019-df8da599"
+commit = "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
 algorithm = "hybrid eigenvector following"
-tuning = "archive"
-note = "Archived odata preamble on coords-xyz. BFGSTS 40 14 16 0.33, UPDATES 82 10, USEDIAG 3. The score is energy+gradient calls."
+tuning = "stock"
+note = "Current svn.tar.bz2, source df8da599267534fbe43a250e578f7396a7946311. Stock BFGSTS. BFGSCONV 9.36585D-05 is the archive Euclidean 0.001 stop. STEPS is the problem cap. Starts are coords-xyz. The score is energy+gradient calls."
 
 [optim]
-method = "hef-ffd"
-preamble = "archive/entries/tsopt/LJ38/optim_ffd/odata.preamble"
+method = "hef-stock"
 coords = "website/tsopt/LJ38/coords-xyz.tar.gz"

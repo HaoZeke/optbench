@@ -1677,7 +1677,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="tsopt-lj38-optim-ffd">
    <td class="num">2</td>
-   <td class="text">optim_ffd</td>
+   <td class="text">optim_ffd · not reproduced</td>
    <td class="text">OPTIM</td>
    <td class="num">1.45000e+02</td>
    <td class="num">5.6500e+02</td>

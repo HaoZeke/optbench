@@ -164,7 +164,7 @@ MATCHES: list[dict] = [
     {"key": "tsopt/LJ38/sella", "template": "sella/lj38-ts-tuned", "branch": "main", "path": "results/campaign/sella-2.6.0-lj38-ts-tuned.dat", "cause": "sella_trust"},
     {"key": "tsopt/LJ38/pele_ffd", "template": "pele/lj38-ts-ffd", "branch": "cells/pele/ts-repro", "path": "results/campaign/pele-b7081b93-lj38-ts-ffd.screen.jsonl", "kind": "screen", "cause": "lj38_ts_starts"},
     {"key": "tsopt/LJ38/pele_cd", "template": "pele/lj38-ts-cd", "branch": "cells/pele/ts-repro", "path": "results/campaign/pele-b7081b93-lj38-ts-cd.screen.jsonl", "kind": "screen", "cause": "lj38_ts_starts_cd"},
-    {"key": "tsopt/LJ38/optim_ffd", "template": "optim/hef-ffd-ts-lj38", "branch": "repro/tsopt-lj38-optim-ffd", "path": "results/campaign/optim-27058-hef-ffd-ts-lj38.dat"},
+    {"key": "tsopt/LJ38/optim_ffd", "template": "optim/hef-ffd-ts-lj38", "branch": "repro/tsopt-lj38-optim-ffd", "path": "results/campaign/optim-20261019-df8da599-hef-ffd-ts-lj38.dat", "cause": "optim_lj38_stock", "extra": {"code_version": "20261019-df8da599", "source_revision": "df8da599267534fbe43a250e578f7396a7946311"}},
     {"key": "tsopt/pt-island/eon-dimer", "template": "eon-svn/ts-pt-dimer-smooth", "branch": "main", "path": "results/campaign/eon-svn-ts-pt-dimer-smooth.dat"},
     {"key": "tsopt/pt-island/eon-lanczos", "template": "eon-svn/ts-pt-lanczos-smooth", "branch": "main", "path": "results/campaign/eon-svn-ts-pt-lanczos-smooth.dat"},
     {"key": "tsopt/pt-island/eon-lanczos-improved", "template": "eon-svn/ts-pt-lanczos-improved", "branch": "main", "path": "results/campaign/eon-svn-ts-pt-lanczos-improved.dat"},
@@ -226,6 +226,16 @@ CAUSE_TEXT = {
         "scores 32, 113, and 29 against 53.8, 147.47, and 34. "
         "Constructor-default L-BFGS scores 53, next to 53.8, but that is not the archived alpha and memory. "
         "eOn Morse L-BFGS and FIRE on the same bulk file reproduce, so the geometry set is not the split."
+    ),
+    "optim_lj38_stock": (
+        "The current Wales svn tarball http://www-wales.ch.cam.ac.uk/svn.tar.bz2, "
+        "sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31, "
+        "source df8da599267534fbe43a250e578f7396a7946311, version 20261019-df8da599, is unmodified. "
+        "Stock BFGSTS keeps NEVS 500, NBFGSMAX1 10, NBFGSMAX2 100, and CEIG 1e-10. "
+        "BFGSCONV 9.36585D-05 is the archive Euclidean 0.001 stop. STEPS 10000 is the problem cap. "
+        "Starts are coords-xyz. The score is the last energy+gradient calls line: "
+        "mean 94.575, rounded 95, median 82.5, min 24, max 297, nfailed 0. The archive mean is 145. "
+        "The 2014 preamble rerun is an unranked diagnostic."
     ),
     "optim_pt_units": (
         "archive run.sh divides coordinates by r0 = 2.897 and scales rho and rcut into those units. "

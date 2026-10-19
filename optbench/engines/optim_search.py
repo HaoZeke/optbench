@@ -7,9 +7,11 @@ is one ``pes.evaluate``. OPTIM's own counter is not the score for that socket.
 
 ``optim/unhooked`` and every template that is not minimization L-BFGS
 raise before a file is written. Noise, NEB, and PATHSAMPLE are not this runner.
-The LJ38 hybrid eigenvector-following row is pin ``optim-27058``. It runs the
-native binary on the archived odata preamble and ``coords-xyz``. The score is
-the last ``energy+gradient calls`` line.
+The LJ38 hybrid eigenvector-following row is the current Wales svn tarball,
+unmodified, with stock ``BFGSTS`` defaults. ``BFGSCONV`` is the archive
+Euclidean stop and ``STEPS`` is the problem cap. Starts are ``coords-xyz``.
+The score is the last ``energy+gradient calls`` line. The 2014 ``wales-27058``
+preamble path remains callable and is not the ranked row.
 """
 
 from __future__ import annotations
@@ -287,8 +289,17 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
     from optbench.campaign import load_template, resolve_problem
 
     template = load_template(root, template_name)
-    if str((template.get("optim") or {}).get("method") or "") == "hef-ffd":
+    method = str((template.get("optim") or {}).get("method") or "")
+    if method == "hef-ffd":
         return _run_hef_ffd(
+            root,
+            resolve_problem(root, problem_name),
+            template,
+            output=output,
+            workers=workers,
+        )
+    if method == "hef-stock":
+        return _run_hef_stock(
             root,
             resolve_problem(root, problem_name),
             template,
@@ -563,6 +574,157 @@ def _run_hef_ffd(root: Path, problem: dict, template: dict, *, output: Path, wor
         output,
         records,
         template,
+        problem,
+        settings,
+        parameters,
+        images=None,
+        comment=comment,
+    )
+
+
+# Today's Wales export. The registry pin is an older file of the same URL.
+_LATEST_URL = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
+_LATEST_SHA256 = "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
+_LATEST_SVNREV = "df8da599267534fbe43a250e578f7396a7946311"
+_LATEST_VERSION = "20261019-df8da599"
+# Archive comment: Euclidean norm 1e-3 is this RMS stop. Not a stock default.
+_ARCHIVE_BFGSCONV = "9.36585D-05"
+
+
+def latest_binary() -> Path | None:
+    """Unmodified gfortran build of the current svn tarball."""
+    env = os.environ.get("OPTIM_LATEST_BIN")
+    candidates = []
+    if env:
+        candidates.append(Path(env))
+    candidates.append(Path("/tmp/wales-svn/wales/OPTIM/builds/gfortran/OPTIM"))
+    for path in candidates:
+        if path.is_file():
+            return path
+    return None
+
+
+def _sha256_file(path: Path) -> str:
+    import hashlib
+
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1 << 20), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _verify_latest(binary: Path) -> None:
+    svnrev = binary.parent.parent.parent / "source" / "SVNREV"
+    if not svnrev.is_file():
+        raise RuntimeError(f"{binary} has no source SVNREV beside the build")
+    found = svnrev.read_text(encoding="utf-8").strip()
+    if found != _LATEST_SVNREV:
+        raise RuntimeError(f"{binary} source revision is {found}, not {_LATEST_SVNREV}")
+    tarball = Path(os.environ.get("OPTIM_LATEST_TARBALL", "/tmp/svn.tar.bz2"))
+    if not tarball.is_file():
+        raise RuntimeError(
+            f"latest OPTIM tarball is missing at {tarball}. "
+            f"The release is {_LATEST_URL} sha256 {_LATEST_SHA256}."
+        )
+    digest = _sha256_file(tarball)
+    if digest != _LATEST_SHA256:
+        raise RuntimeError(f"{tarball} sha256 is {digest}, not {_LATEST_SHA256}")
+
+
+def stock_odata(xyz_text: str, *, steps: int) -> str:
+    """Stock ``BFGSTS`` plus the archive RMS stop and the problem step cap.
+
+    ``bfgsts`` with no numbers keeps NEVS 500, NBFGSMAX1 10, NBFGSMAX2 100,
+    and CEIG 1e-10. Default NSTEPS is 1, so ``steps`` is the problem cap.
+    """
+    preamble = f"bfgsts\nbfgsconv {_ARCHIVE_BFGSCONV}\nsteps {int(steps)}\n"
+    return odata_for_xyz(preamble, xyz_text)
+
+
+def _run_hef_stock(root: Path, problem: dict, template: dict, *, output: Path, workers: int) -> dict:
+    """Current OPTIM, stock hybrid eigenvector-following, native call count."""
+    import tarfile
+
+    from .common import run_jobs, write_campaign
+
+    if template["engine"] != ENGINE:
+        raise ValueError(f"{template['id']} engine is {template['engine']}")
+    stated = template.get("problem")
+    if stated and stated != problem["id"]:
+        raise ValueError(f"{template['id']} belongs to {stated}")
+    if str(template.get("code_version") or "") != _LATEST_VERSION:
+        raise RuntimeError(f"{template['id']} version is not {_LATEST_VERSION}")
+    if str(template.get("commit") or "") != _LATEST_SHA256:
+        raise RuntimeError(f"{template['id']} commit is not the current tarball")
+    binary = latest_binary()
+    if binary is None:
+        raise RuntimeError(
+            f"{template['id']} needs the current OPTIM binary. "
+            f"The release is {_LATEST_URL} sha256 {_LATEST_SHA256}, "
+            f"source {_LATEST_SVNREV}. Set OPTIM_LATEST_BIN."
+        )
+    _verify_latest(binary)
+    section = dict(template.get("optim") or {})
+    archive = _stored_archive(root, str(section["coords"]))
+    settings = point_settings(problem)
+    if settings["cap"] is None:
+        raise ValueError(f"{problem['id']} has no force-call cap")
+    jobs = []
+    with tarfile.open(archive) as packed:
+        for member in packed.getmembers():
+            name = Path(member.name).name
+            if not name.endswith(".xyz"):
+                continue
+            extracted = packed.extractfile(member)
+            if extracted is None:
+                continue
+            xyz = extracted.read().decode("utf-8")
+            jobs.append(
+                {
+                    "name": Path(name).stem,
+                    "binary": str(binary),
+                    "cap": int(settings["cap"]),
+                    "odata": stock_odata(xyz, steps=int(settings["cap"])),
+                }
+            )
+    jobs.sort(key=lambda job: job["name"])
+    expected = int((problem.get("sample") or {}).get("starts") or len(jobs))
+    if len(jobs) != expected:
+        raise RuntimeError(f"{template['id']} read {len(jobs)} xyz starts")
+    records = run_jobs(jobs, _execute_hef, workers)
+    comment = (
+        f"# OPTIM source {_LATEST_SVNREV}, tarball {_LATEST_URL} "
+        f"sha256 {_LATEST_SHA256}. Unmodified stock BFGSTS "
+        "(NEVS 500, NBFGSMAX1 10, NBFGSMAX2 100, CEIG 1e-10). "
+        f"BFGSCONV {_ARCHIVE_BFGSCONV} is the archive Euclidean 0.001 stop. "
+        f"STEPS {int(settings['cap'])} is the problem cap. Symbol AX selects LJDIFF.\n"
+        "# Starts are coords-xyz, 0000.xyz through 0199.xyz. "
+        "force_calls is the last energy+gradient calls line. "
+        "A start is a success only when the log contains CONVERGED and the count is under the cap."
+    )
+    parameters = {
+        "method": "hef-stock",
+        "keyword": "BFGSTS",
+        "bfgsts": "defaults",
+        "nevs": 500,
+        "nbfgsmax1": 10,
+        "nbfgsmax2": 100,
+        "ceig": 1e-10,
+        "bfgsconv": _ARCHIVE_BFGSCONV,
+        "steps": int(settings["cap"]),
+        "counter": "optim energy+gradient calls",
+        "potential": "LJDIFF",
+        "starts": "coords-xyz",
+        "source_revision": _LATEST_SVNREV,
+        "tarball_sha256": _LATEST_SHA256,
+    }
+    published = dict(template)
+    published["code"] = "optim"
+    return write_campaign(
+        output,
+        records,
+        published,
         problem,
         settings,
         parameters,
