@@ -173,6 +173,16 @@ commit = "0.1.1"
 committed = "2019-12-10"
 note = "Sella 0.1.1 PESWrapper.diag for the lowest-eigenvector row. eta 1e-6, gamma 1e-16, vreftol 0.99, gradient v0, rigid-mode projection. This pin is not Sella 2.6.0."
 
+[[code]]
+id = "pele"
+name = "pele"
+role = "double-ended saddle search"
+repository = "https://github.com/pele-python/pele"
+ref = "a68ec5"
+commit = "a68ec5e7706a64b93a85ac34ffe22cd08eb1c1c9"
+committed = "2014-08-06"
+note = "pele a68ec5, 2014-08-06, the optbench.org code_file pele-a68ec5.tgz. LJ38 double-ended search is dec_lj38.py: DNEB at image_density 4, spring 1.5, quench tolerance 0.1, then hybrid eigenvector following from the highest image. The eigenvector quench is forward difference, 20 steps, tolerance 0.1. The RMS stop is 1e-3/sqrt(3*natoms). Tangent minimization uses maxstep 0.05. The score is PotWrapperIncr on getEnergy and getEnergyGradient."
+
 [[template]]
 id = "sella-0.1.1/lj38-loweig"
 code = "sella-0.1.1"
