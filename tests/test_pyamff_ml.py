@@ -1,7 +1,11 @@
 """PyAMFF templates stay on the two machine-learning problems."""
 
+import shutil
 import tomllib
 from pathlib import Path
+
+import numpy as np
+import pytest
 
 from optbench.board import stated_full_n
 from optbench.campaign import list_templates, resolve_problem
@@ -58,3 +62,53 @@ def test_pyamff_templates_cover_both_problems_and_seven_optimizers():
         for name in OPTIMIZERS:
             assert (problem, name, 0.0) in seen
             assert (problem, name, 0.1) in seen
+
+
+# The Optax derivative note uses this periodic four-atom cell.
+_PT4 = [
+    [8.6964, 7.8873, 1.5741],
+    [8.8873, 4.1428, 8.8971],
+    [1.0862, 9.5476, 1.2094],
+    [7.3070, 7.0155, 7.4174],
+]
+
+
+def test_fortran_derivative_matches_central_difference(tmp_path, monkeypatch):
+    pytest.importorskip("pyamff.fmodules")
+    from ase import Atoms
+    from pyamff.fingerprints.fingerprints import Fingerprints
+
+    paras = ROOT / "archive/entries/mlopt/emt-pt38/pyamff-adam10-7-fcoeff0/fpParas.dat"
+    shutil.copy(paras, tmp_path / "fpParas.dat")
+    monkeypatch.chdir(tmp_path)
+    atoms = Atoms("Pt4", positions=_PT4, cell=[10.0, 10.0, 10.0], pbc=True)
+    calc = Fingerprints(uniq_elements=["Pt"], filename="fpParas.dat", nfps={"Pt": 8})
+
+    def grab(geom):
+        values, primes = calc.calcFPs(geom, ["Pt"] * 4)
+        copied = {
+            (int(key[0]), key[1], int(key[2]), key[3], int(key[4])): np.array(val, dtype=float, copy=True)[:8]
+            for key, val in primes.items()
+        }
+        return np.array(values, dtype=float, copy=True)[:, :8], copied
+
+    _g0, primes = grab(atoms)
+    step = 1e-5
+    worst = 0.0
+    for atom in range(4):
+        for coord in range(3):
+            plus = atoms.copy()
+            minus = atoms.copy()
+            moved = plus.get_positions()
+            moved[atom, coord] += step
+            plus.set_positions(moved)
+            moved = minus.get_positions()
+            moved[atom, coord] -= step
+            minus.set_positions(moved)
+            high, _ = grab(plus)
+            low, _ = grab(minus)
+            finite = (high - low) / (2.0 * step)
+            for center in range(4):
+                stored = primes.get((atom, "Pt", center, "Pt", coord), np.zeros(8))
+                worst = max(worst, float(np.max(np.abs(finite[center] - stored))))
+    assert worst < 5e-9

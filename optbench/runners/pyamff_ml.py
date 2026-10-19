@@ -1,7 +1,8 @@
 """Train PyAMFF networks and count each loss-gradient evaluation.
 
 One harness call is one full-batch loss and the parameter gradient of that
-loss. The network, fingerprints, and SSE loss are PyAMFF's. torch.optim
+loss. The network, fingerprints, and SSE loss are PyAMFF's. Fingerprints
+come from the Fortran engine, ``fmodules.fpcalc.calcfps``. torch.optim
 steps the parameters. A start succeeds when every parameter gradient has
 L2 norm at or below the template stop and the call count is under the cap.
 """
@@ -203,6 +204,15 @@ def prepare(root: Path, problem: dict) -> dict:
     previous = Path.cwd()
     try:
         os.chdir(cache)
+        try:
+            from pyamff import fmodules
+        except ModuleNotFoundError as exc:
+            raise RuntimeError(
+                "PyAMFF ranked rows use the Fortran fingerprint engine. "
+                "Build pyamff.fmodules with f2py and gfortran."
+            ) from exc
+        if not hasattr(fmodules, "fpcalc"):
+            raise RuntimeError("pyamff.fmodules has no fpcalc")
         from pyamff.pyamff_runner import PyAMFFRunner
 
         runner = PyAMFFRunner(config_file=str(cache / "config.ini"))
