@@ -114,23 +114,24 @@ def test_overlapped_lj75_start_stays_inside_the_confinement(tmp_path: Path):
     from optbench.runners.agox_go import FastLBFGS, LennardJones, _load_geometries, _place
 
     loaded = _load_geometries(ROOT, resolve_problem(ROOT, "globalopt/lj75"), None, tmp_path)
-    coords = next(pos for name, pos in loaded if name == "coords.5")
-    pos, cell, side, corner = _place(coords, 48.0, 36.0)
-    template = Atoms(cell=np.eye(3) * cell, pbc=False)
-    environment = Environment(
-        template=template,
-        symbols=f"N{len(pos)}",
-        confinement_cell=np.eye(3) * side,
-        confinement_corner=np.array([corner, corner, corner]),
-        print_report=False,
-    )
-    atoms = Atoms(f"N{len(pos)}", positions=pos, cell=template.cell, pbc=False)
-    atoms.set_constraint(environment.get_box_constraint())
-    atoms.calc = attach_ase_counter(LennardJones(), cap=2000)
-    FastLBFGS(atoms, logfile=None).run(fmax=0.05, steps=500)
-    span = float((atoms.positions.max(axis=0) - atoms.positions.min(axis=0)).max())
-    assert span < 12.0
-    assert float(atoms.calc.last_energy) < -300.0
+    for start in ("coords.5", "coords.34", "coords.49", "coords.90", "coords.163"):
+        coords = next(pos for name, pos in loaded if name == start)
+        pos, cell, side, corner = _place(coords, 48.0, 36.0)
+        template = Atoms(cell=np.eye(3) * cell, pbc=False)
+        environment = Environment(
+            template=template,
+            symbols=f"N{len(pos)}",
+            confinement_cell=np.eye(3) * side,
+            confinement_corner=np.array([corner, corner, corner]),
+            print_report=False,
+        )
+        atoms = Atoms(f"N{len(pos)}", positions=pos, cell=template.cell, pbc=False)
+        atoms.set_constraint(environment.get_box_constraint())
+        atoms.calc = attach_ase_counter(LennardJones(), cap=2000)
+        FastLBFGS(atoms, logfile=None).run(fmax=0.05, steps=500)
+        span = float((atoms.positions.max(axis=0) - atoms.positions.min(axis=0)).max())
+        assert span < 12.0, start
+        assert float(atoms.calc.last_energy) < -300.0, start
 
 
 def test_basin_hopping_stops_at_the_cap(tmp_path: Path):

@@ -240,11 +240,16 @@ class FastLBFGS:
     """SciPy L-BFGS-B with the ASE optimizer observer protocol.
 
     ``run`` calls observers at step 0 so AGOX can record ``E_initial``.
-    The step stops when the ASE maximum atomic force is at ``fmax`` or
+    The step stops when the harness maximum atomic force is at ``fmax`` or
     ``steps`` evaluations have run. Bounds come from an AGOX box constraint
     on the atoms. While the peak atomic force is above 1000, and for at
-    most 40 steps, the atom moves at most 0.2 along that force. Without
+    most 40 steps, each atom moves at most 0.2 along that force. Without
     that cap, L-BFGS-B puts an overlapped cluster on the confinement wall.
+    The stop uses the harness force. The box constraint removes the outward
+    component, and a dissociated cluster on the wall then looks converged.
+    If L-BFGS-B returns before that stop, at most 25 steps of size
+    min(0.05, 5/peak) follow while the peak is above 30, and L-BFGS-B
+    starts again. That repeat happens at most four times.
     """
 
     def __new__(cls, atoms, logfile=None, trajectory=None, **kwargs):
@@ -271,13 +276,24 @@ class FastLBFGS:
                     x0 = np.minimum(np.maximum(x0, lo), hi)
                     opt.set_x(x0)
 
+                def harness_forces():
+                    forces = np.asarray(self.atoms.calc.results["forces"], dtype=np.float64).reshape(-1, 3)
+                    return forces
+
+                self._peak = 0.0
+
                 def evaluate(x):
                     opt.set_x(x)
                     energy = float(opt.get_value())
+                    forces = harness_forces()
+                    # The projected gradient is what L-BFGS-B line search
+                    # expects. The stop below uses the harness force: on the
+                    # wall the projected force is almost zero.
                     gradient = np.asarray(opt.get_gradient(), dtype=np.float64)
                     self.nsteps += 1
                     self.call_observers()
-                    if self.nsteps >= int(steps) or bool(opt.converged(gradient, self.fmax)):
+                    self._peak = float(np.linalg.norm(forces, axis=1).max()) if len(forces) else 0.0
+                    if self.nsteps >= int(steps) or self._peak < self.fmax:
                         raise _OptStop()
                     return energy, gradient
 
@@ -292,9 +308,8 @@ class FastLBFGS:
                     while self.nsteps < int(steps):
                         _energy, gradient = evaluate(x)
                         atomic = np.linalg.norm(gradient.reshape(-1, 3), axis=1)
-                        peak = float(atomic.max()) if atomic.size else 0.0
                         walked += 1
-                        if peak <= 1000.0 or walked >= 40:
+                        if self._peak <= 1000.0 or walked >= 40:
                             break
                         direction = gradient.reshape(-1, 3) / np.maximum(atomic, 1e-30)[:, None]
                         x = x - (0.2 * direction).reshape(-1)
@@ -302,28 +317,46 @@ class FastLBFGS:
                             x = np.minimum(np.maximum(x, lo), hi)
                     else:
                         raise _OptStop()
-                    x0 = np.array(x, dtype=np.float64, copy=True)
 
                     def fun(x):
                         return evaluate(x)
 
-                    minimize(
-                        fun,
-                        x0,
-                        method="L-BFGS-B",
-                        jac=True,
-                        bounds=bounds,
-                        options={
-                            "maxiter": int(steps),
-                            "maxfun": int(steps),
-                            "ftol": 1e-18,
-                            "gtol": 1e-14,
-                        },
-                    )
+                    options = {
+                        "maxiter": int(steps),
+                        "maxfun": int(steps),
+                        "ftol": 1e-18,
+                        "gtol": 1e-14,
+                    }
+                    for _attempt in range(4):
+                        if self.nsteps >= int(steps):
+                            break
+                        minimize(
+                            fun,
+                            np.array(opt.get_x(), dtype=np.float64, copy=True),
+                            method="L-BFGS-B",
+                            jac=True,
+                            bounds=bounds,
+                            options=options,
+                        )
+                        if self._peak < self.fmax:
+                            break
+                        # A failed line search reports ftol convergence and
+                        # leaves the overlapped geometry where it was. A
+                        # short steepest step keeps the next guess off the wall.
+                        x = np.array(opt.get_x(), dtype=np.float64, copy=True)
+                        for _fine in range(25):
+                            if self.nsteps >= int(steps) or self._peak <= 30.0:
+                                break
+                            _energy, gradient = evaluate(x)
+                            atomic = np.linalg.norm(gradient.reshape(-1, 3), axis=1)
+                            step = min(0.05, 5.0 / max(self._peak, 1e-30))
+                            direction = gradient.reshape(-1, 3) / np.maximum(atomic, 1e-30)[:, None]
+                            x = x - (step * direction).reshape(-1)
+                            if lo is not None:
+                                x = np.minimum(np.maximum(x, lo), hi)
                 except _OptStop:
                     pass
-                gradient = np.asarray(opt.get_gradient(), dtype=np.float64)
-                return bool(opt.converged(gradient, self.fmax))
+                return self._peak < self.fmax
 
         return _FastLBFGS(atoms, logfile=logfile, trajectory=trajectory, **kwargs)
 
