@@ -1,0 +1,20 @@
+# counter harness. One force call is one ASE calculate.
+# SDLBFGS stock defaults, maxstep 0.2 and memory 100.
+# The stop is the archive max-atom force 0.01, emax 0.0001, optimizer maxatom.
+# A failure is a harness total of at least 10000.
+force_calls 17
+force_calls_min 11
+force_calls_max 21
+force_calls_median 16.5
+successes 100
+nfailed 0
+n 100
+transition_states 0
+code tsase
+code_version 1.0
+commit 98aac60b5d9905e81ee4e6b8c385f169258d0218
+algorithm SDLBFGS
+template tsase/sdlbfgs-morse-stock
+problem minimization/morse-bulk
+tuning stock
+counter harness

@@ -592,6 +592,125 @@ class _ArchiveMorse:
         del atoms
 
 
+def _execute_stock_minimize(job: dict) -> dict:
+    """Stock SDLBFGS, archive max-atom stop, harness call count.
+
+    The constructor keeps TSASE's own maxstep and memory. ``run`` uses the
+    archived ``fmax``, ``emax``, and ``optimizer``. One force call is one
+    ASE ``calculate``. A start fails only at the cap.
+    """
+    os.environ.setdefault("OMP_NUM_THREADS", "1")
+    from ase import Atoms
+
+    from optbench.counter import HarnessCounter, attach_ase_counter
+
+    opt_cls = _load_minimizer("lbfgs")
+    positions = np.asarray(job["positions"], dtype=np.float64)
+    free = np.asarray(job["free"], dtype=bool)
+    cap = int(job["cap"])
+    box = np.asarray(job["box"], dtype=np.float64)
+    counter = HarnessCounter(cache=True, cap=cap)
+    error = ""
+    calls = cap
+    energy = None
+    max_atom = None
+    try:
+        atoms = Atoms(positions=positions, cell=_cell(positions, box), pbc=True)
+        atoms.calc = attach_ase_counter(
+            _surface(str(job["kind"]), free, box)(),
+            cap=cap,
+            counter=counter,
+        )
+        opt = opt_cls(atoms, logfile=None, trajectory=None)
+        opt.run(
+            fmax=float(job["fmax"]),
+            emax=float(job["emax"]),
+            steps=cap,
+            optimizer=str(job["optimizer"]),
+        )
+        calls = int(counter.calls)
+        energy = float(atoms.calc.results["energy"])
+        forces = np.asarray(atoms.calc.results["forces"], dtype=np.float64)
+        max_atom = float(np.sqrt((forces**2).sum(axis=1).max()))
+    except Exception as exc:
+        message = str(exc)
+        calls = int(counter.calls)
+        if "force-call cap" in message or type(exc).__name__ == "ForceCallCap":
+            error = f"force-call cap: {message}"
+            calls = cap
+        else:
+            error = f"{type(exc).__name__}: {exc}"
+    failed = bool(error) or calls >= cap
+    return {
+        "schema": "optbench.start/v2",
+        "start": job["name"],
+        "force_calls": int(calls),
+        "verify_calls": int(counter.verify_calls),
+        "counter": "harness",
+        "comparable": True,
+        "success": not failed,
+        "failure": None if not failed else ("crash" if error and calls < cap else "cap"),
+        "reasons": [] if not failed else (["crash"] if error and calls < cap else ["cap"]),
+        "energy": energy,
+        "force_norm": max_atom,
+        "hessian_index": None,
+        "expected_index": None,
+        "converged": not failed,
+        "error": error,
+        "seed": "0",
+        "minimizer": "sdlbfgs",
+    }
+
+
+def _run_stock_minimize(root, problem, template, settings, output: Path, workers: int) -> dict:
+    scratch = output.parent / "work" / template["id"].replace("/", "-")
+    starts = load_starts(root, problem, scratch)
+    section = dict(template.get("tsase") or {})
+    jobs = []
+    for start in starts:
+        jobs.append(
+            {
+                "name": start["name"],
+                "positions": start["positions"],
+                "free": [not bool(flag) for flag in start["fixed"]],
+                "box": start["box"],
+                "kind": settings["potential"],
+                "cap": settings["cap"],
+                "fmax": float(section.get("fmax", 0.01)),
+                "emax": float(section.get("emax", 0.0001)),
+                "optimizer": str(section.get("optimizer", "maxatom")),
+            }
+        )
+    records = run_jobs(jobs, _execute_stock_minimize, workers)
+    parameters = {
+        "potential": settings["potential"],
+        "cap": settings["cap"],
+        "counter": "harness",
+        "maxstep": "SDLBFGS default 0.2",
+        "memory": "SDLBFGS default 100",
+        "failure": "total_force_calls >= cap",
+        "seed": "0",
+        **section,
+    }
+    comment = (
+        "# counter harness. One force call is one ASE calculate.\n"
+        "# SDLBFGS stock defaults, maxstep 0.2 and memory 100.\n"
+        "# The stop is the archive max-atom force 0.01, emax 0.0001, optimizer maxatom.\n"
+        "# A failure is a harness total of at least 10000."
+    )
+    return write_campaign(
+        output,
+        records,
+        template,
+        problem,
+        settings,
+        parameters,
+        images=None,
+        comment=comment,
+        counter="harness",
+    )
+
+
 def _execute_archive_minimize(job: dict) -> dict:
     """SDLBFGS.run with the archived max-atom stop.
 
@@ -824,6 +943,13 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
         if settings["potential"] != "morse_pt":
             raise ValueError(f"{template_name} is the shifted Morse calculator")
         return _run_archive_minimize(root, problem, template, settings, output, workers)
+    if method == "sdlbfgs-stock":
+        settings = point_settings(problem)
+        if settings["cap"] is None:
+            raise ValueError(f"{problem['id']} has no force-call cap")
+        if settings["potential"] != "morse_pt":
+            raise ValueError(f"{template_name} is the shifted Morse calculator")
+        return _run_stock_minimize(root, problem, template, settings, output, workers)
     problem, template, settings = prepared(root, problem_name, template_name, CODE)
     if template["engine"] != ENGINE:
         raise ValueError(f"{template_name} engine is {template['engine']}")

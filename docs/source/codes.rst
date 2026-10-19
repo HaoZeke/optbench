@@ -788,15 +788,15 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 4</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/morse-bulk" data-template="tsase/lbfgs-morse">
+   <tr data-problem="minimization/morse-bulk" data-template="tsase/sdlbfgs-morse-stock">
    <td>Morse bulk</td>
-   <td data-field="template">tsase/lbfgs-morse</td>
+   <td data-field="template">tsase/sdlbfgs-morse-stock</td>
    <td data-field="version">tsase 1.0</td>
    <td data-field="commit">98aac60b5d99</td>
-   <td data-field="par2_mean">17606.4</td>
-   <td data-field="mean_calls">50.37</td>
-   <td data-field="median_calls">50</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 88</td>
+   <td data-field="par2_mean">16.65</td>
+   <td data-field="mean_calls">16.65</td>
+   <td data-field="median_calls">16.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="neb/Pt-heptamer" data-template="tsase/ci-neb">
@@ -833,6 +833,9 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">49</td>
    </tr>
    </tbody></table></div>
+   <p>No full ranked run</p><ul>
+   <li>Morse bulk: partial.</li>
+   </ul>
    <h3>pyKMC</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>

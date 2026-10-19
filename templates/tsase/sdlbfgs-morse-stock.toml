@@ -1,0 +1,16 @@
+# Latest TSASE SDLBFGS, stock defaults, archive max-atom stop.
+id = "tsase/sdlbfgs-morse-stock"
+engine = "tsase"
+problem = "minimization/morse-bulk"
+code = "tsase"
+code_version = "1.0"
+commit = "98aac60b5d9905e81ee4e6b8c385f169258d0218"
+algorithm = "SDLBFGS"
+tuning = "stock"
+note = "TSASE 1.0 at 98aac60, the latest master. SDLBFGS keeps its constructor defaults (maxstep 0.2, memory 100). The stop is the archive max-atom force 0.01, emax 0.0001, optimizer maxatom, on the morse-bulk starts. The score is the harness ASE calculate count."
+
+[tsase]
+method = "sdlbfgs-stock"
+fmax = 0.01
+emax = 0.0001
+optimizer = "maxatom"
