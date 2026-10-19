@@ -8,6 +8,8 @@ The pele transition-state paper score is the 2014 stop: break at the first RMS b
 
 OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.
 
+Sella 2.6.0, the latest release, stock settings on Pt-island: the archived integer is 53 and the harness file is 74.
+
 EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.
 
 Table 10 prints EON Lanczos 165. The archive file is 325. CI-NEB(3) prints 3 failures; the archive file has 0.
@@ -213,7 +215,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | pt-island/optim_cd | — | — | not rerun |
 | pt-island/optim_ffd | force_calls 71 | 170 | not reproduced; optim_pt_units |
 | pt-island/pele | force_calls 88 | 88.551 | reproduced |
-| pt-island/sella | force_calls 53 | 88 | not reproduced; sella_trust |
+| pt-island/sella | force_calls 53 | 74 | not reproduced; sella_latest |
 
 ## Residuals inside the band
 
@@ -356,6 +358,11 @@ Archive run.sh unpacks coords-xyz.tar.gz. The harness uses the problem coords-co
 Sella 2.6.0 with the archived trust-region numbers (eta, gamma, delta0, rho, sigma) is the parameter_source=archive row. It misses the 2014 mean. The constructor-default row is a different setup.
 
 - tsopt/LJ38/sella
+
+### sella_latest
+
+Sella 2.6.0 is the latest release. Stock saddle settings, the archive starts, and the archive Euclidean force stop score 74 harness calls against the archived 53. The gap is a finding.
+
 - tsopt/pt-island/sella
 
 Rows with no exact-setup campaign stay not rerun and are not given a cause. AKMC on aladatom is a different method from Langevin parallel replica; the ratios above are that comparison, and the archive rows stay not rerun.
