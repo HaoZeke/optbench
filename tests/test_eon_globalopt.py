@@ -167,6 +167,27 @@ def test_cambridge_cache_token_does_not_move_the_lj38_path():
     assert develop.parts[2] == "7095b23" or "7095b23" in develop.parts
 
 
+def test_lj75_ratio_row_restores_the_documented_acceptance_target():
+    for name, family in (
+        ("eon-svn/bh-lj75-ratio", "svn"),
+        ("eon-develop/bh-lj75-ratio", "develop"),
+    ):
+        template = load_template(ROOT, name)
+        stock = load_template(ROOT, f"{name.split('/')[0]}/bh-lj75")
+        assert template["tuning"] == "target-ratio-0.5"
+        assert template["cache_token"] == "cambridge-1-ratio-0.5"
+        assert template["ini"]["Basin Hopping"]["target_ratio"] == 0.5
+        assert template["ini"]["Main"]["temperature"] == stock["ini"]["Main"]["temperature"]
+        assert template["ini"]["Basin Hopping"]["displacement"] == stock["ini"]["Basin Hopping"]["displacement"]
+        assert template["failure_cap"] == stock["failure_cap"]
+        assert template["ini"]["Basin Hopping"]["stop_energy"] == stock["ini"]["Basin Hopping"]["stop_energy"]
+        assert len(template_starts(template)) == 200
+        path = _cache_path(family, name, 314159, "1", 0)
+        stock_path = _cache_path(family, stock["id"], 314159, "1", 0)
+        assert "cambridge-1-ratio-0.5" in path.parts
+        assert path != stock_path
+
+
 def test_asv_default_is_the_first_real_start():
     from benchmarks.bench_eon_go import EonDevelopBhLj75, EonDevelopBhLj100Binary
     from benchmarks.bench_eon_lane import EonSvnBhLj75, EonSvnBhLj98, EonSvnBhLj150, EonSvnBhLj100Binary
