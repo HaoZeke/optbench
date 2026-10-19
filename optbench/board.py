@@ -1268,6 +1268,7 @@ def _show_per_image(problem: dict) -> bool:
 def _headers(problem: dict) -> list[str]:
     headers = [
         "Template",
+        "Label",
         "Version",
         "Commit",
         "Source",
@@ -1292,6 +1293,7 @@ def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
     """
     cells = [
         ("template", str(row.get("template") or row.get("entry") or "")),
+        ("label", str(row.get("tuning") or "")),
         ("version", f"{row.get('code') or ''} {row.get('code_version') or ''}"),
         ("commit", str(row.get("commit") or "")[:12]),
         ("source", str(row.get("source") or "")),

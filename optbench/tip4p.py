@@ -225,3 +225,132 @@ def rigid_from_ohh(coords: Sequence[float] | np.ndarray) -> np.ndarray:
 def tip4p_ohh(coords: Sequence[float] | np.ndarray) -> tuple[float, np.ndarray]:
     """Energy of Cartesian O, H, H water and the rigid gradient at that geometry."""
     return tip4p(rigid_from_ohh(coords))
+
+
+# eOn ``tip4p_unit_system.hpp`` electron-volt system. One eV is this many kJ/mol.
+E_CHARGE_C = 1.60217653e-19
+AVOGADRO = 6.0221415e23
+KJ_PER_EV = E_CHARGE_C * AVOGADRO / 1000.0
+
+# One campaign-file line. Both clients use this conversion.
+CONVERSION_LEDGER = (
+    "GMIN .aa is centre then angle-axis, six floats per molecule, rotated by "
+    "optbench.tip4p.reference_sites with the GMIN angle-axis map. Both clients "
+    "get one .con: H, H pairs then oxygens, the stride in tip4p_ccl.cpp "
+    "computeHH_O_. The harness kernel is uncut rigid TIP4P in kJ/mol divided by "
+    "e_charge*N_A/1000 from tip4p_unit_system.hpp. The Cambridge test multiplies "
+    "that client energy back to kJ/mol. develop -Dwith_water=true routes "
+    "potential tip4p to rgpot::TIP4PPot and is not this kernel."
+)
+
+
+def parse_aa(text: str) -> np.ndarray:
+    """GMIN ``.aa`` text: centre then angle-axis, six floats per molecule.
+
+    Lines hold three floats. Molecules are consecutive blocks of six.
+    """
+    values: list[float] = []
+    for line in text.splitlines():
+        parts = line.split()
+        if not parts:
+            continue
+        try:
+            values.extend(float(part) for part in parts)
+        except ValueError as exc:
+            raise ValueError("an angle-axis file has a non-numeric field") from exc
+    if not values or len(values) % 6 != 0:
+        raise ValueError("angle-axis coordinates are six floats per molecule")
+    return np.asarray(values, dtype=np.float64)
+
+
+def sites_from_aa(coords: Sequence[float] | np.ndarray) -> np.ndarray:
+    """Rigid O, H, H, M sites from GMIN centre and angle-axis coordinates."""
+    centres, axes = _split_rigid(coords)
+    references = reference_sites()
+    placed = np.zeros((centres.shape[0], 4, 3), dtype=np.float64)
+    for index in range(centres.shape[0]):
+        rotated, _derivative = _rotate(axes[index], references)
+        placed[index] = centres[index] + rotated
+    return placed
+
+
+def ccl_from_sites(sites: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    """CCL atom order used by ``Tip4p::computeHH_O_``.
+
+    Pairs of hydrogens, one pair per molecule, then every oxygen. The M site
+    stays virtual. ``tip4p_ccl.cpp`` strides the first hydrogen by six doubles
+    and the second by the three doubles that follow it, and puts oxygen at
+    ``n_molecules * 6``.
+    """
+    placed = np.asarray(sites, dtype=np.float64)
+    count = placed.shape[0]
+    positions = np.zeros((3 * count, 3), dtype=np.float64)
+    for index in range(count):
+        positions[2 * index] = placed[index, 1]
+        positions[2 * index + 1] = placed[index, 2]
+    positions[2 * count :] = placed[:, 0]
+    numbers = np.empty(3 * count, dtype=np.int64)
+    numbers[: 2 * count] = 1
+    numbers[2 * count :] = 8
+    return positions, numbers
+
+
+def ohh_from_ccl(positions: Sequence[float], numbers: Sequence[int]) -> np.ndarray:
+    """Inverse of ``ccl_from_sites`` for the real atoms. Shape ``(n, 3, 3)`` is O, H, H."""
+    coords = np.asarray(positions, dtype=np.float64).reshape(-1, 3)
+    atomic = np.asarray(numbers, dtype=np.int64).reshape(-1)
+    if coords.shape[0] != atomic.shape[0] or coords.shape[0] % 3 != 0:
+        raise ValueError("TIP4P Cartesian input is three atoms per molecule")
+    count = coords.shape[0] // 3
+    if not np.all(atomic[: 2 * count] == 1) or not np.all(atomic[2 * count :] == 8):
+        raise ValueError("TIP4P Cartesian order is H, H pairs then oxygens")
+    molecules = np.zeros((count, 3, 3), dtype=np.float64)
+    for index in range(count):
+        molecules[index, 1] = coords[2 * index]
+        molecules[index, 2] = coords[2 * index + 1]
+        molecules[index, 0] = coords[2 * count + index]
+    return molecules
+
+
+def rigid_cartesian(positions: Sequence[float], numbers: Sequence[int]) -> tuple[float, np.ndarray]:
+    """Uncut rigid TIP4P energy and Cartesian forces, in kJ/mol and kJ/mol/Å.
+
+    The energy is ``tip4p`` of the rigid fit. Forces are the rigid-body
+    forces of that gradient: the total force and the spatial torque, spread
+    onto O, H, H by mass. A rigid displacement does not strain the molecule,
+    which is the motion basin hopping follows from a rigid start.
+    """
+    molecules = ohh_from_ccl(positions, numbers)
+    rigid = rigid_from_ohh(molecules.reshape(-1))
+    centres, axes = _split_rigid(rigid)
+    references = reference_sites()
+    placed = np.zeros((centres.shape[0], 4, 3), dtype=np.float64)
+    for index in range(centres.shape[0]):
+        rotated, _derivative = _rotate(axes[index], references)
+        placed[index] = centres[index] + rotated
+    energy, site_gradient = site_energy_forces(placed)
+    masses = TIP4P_MASSES[:3]
+    mass = float(np.sum(masses))
+    forces = np.zeros_like(molecules)
+    eye = np.eye(3, dtype=np.float64)
+    for index in range(molecules.shape[0]):
+        centre = centres[index]
+        relative = placed[index] - centre
+        gradient = site_gradient[index]
+        total = np.sum(gradient, axis=0)
+        torque = np.sum(np.cross(relative, gradient), axis=0)
+        inertia = np.zeros((3, 3), dtype=np.float64)
+        arms = molecules[index] - centre
+        for atom in range(3):
+            arm = arms[atom]
+            inertia += masses[atom] * (float(np.dot(arm, arm)) * eye - np.outer(arm, arm))
+        alpha = np.linalg.solve(inertia, torque)
+        for atom in range(3):
+            forces[index, atom] = -(masses[atom] / mass) * total - masses[atom] * np.cross(alpha, arms[atom])
+    ordered = np.zeros((molecules.shape[0] * 3, 3), dtype=np.float64)
+    count = molecules.shape[0]
+    for index in range(count):
+        ordered[2 * index] = forces[index, 1]
+        ordered[2 * index + 1] = forces[index, 2]
+    ordered[2 * count :] = forces[:, 0]
+    return float(energy), ordered.reshape(-1)

@@ -1,6 +1,7 @@
 """Cambridge basin-hopping rows for the eOn harness."""
 
 import math
+from pathlib import Path
 
 import numpy as np
 import pytest
@@ -186,6 +187,136 @@ def test_lj75_ratio_row_restores_the_documented_acceptance_target():
         stock_path = _cache_path(family, stock["id"], 314159, "1", 0)
         assert "cambridge-1-ratio-0.5" in path.parts
         assert path != stock_path
+
+
+def _read_con_atoms(text: str):
+    """The nine-line header ``Matter::con2matter`` and readcon both accept."""
+    lines = text.splitlines()
+    assert len(lines) >= 9
+    count = int(lines[6])
+    sizes = [int(part) for part in lines[7].split()]
+    masses = [float(part) for part in lines[8].split()]
+    assert len(sizes) == count
+    assert len(masses) == count
+    cursor = 9
+    atoms = []
+    for component, size in enumerate(sizes, start=1):
+        symbol = lines[cursor]
+        assert lines[cursor + 1] == f"Coordinates of Component {component}"
+        cursor += 2
+        for _ in range(size):
+            parts = lines[cursor].split()
+            atoms.append((symbol, tuple(float(part) for part in parts[:3]), int(parts[3])))
+            cursor += 1
+    assert cursor == len(lines)
+    return atoms
+
+
+def test_aa_to_con_uses_the_shared_ccl_order():
+    import tarfile
+
+    from optbench.campaign import geometry_archive
+    from optbench.eon_harness import aa_to_con
+    from optbench.tip4p import ccl_from_sites, parse_aa, sites_from_aa
+
+    archive = geometry_archive(
+        ROOT, {"input": {"archive_path": "website/globalopt/tip4p10/10000_tip4p10.tar.gz"}}
+    )
+    with tarfile.open(archive) as packed:
+        member = next(item for item in packed.getmembers() if Path(item.name).name == "1.aa")
+        text = packed.extractfile(member).read().decode()
+    positions, numbers = ccl_from_sites(sites_from_aa(parse_aa(text)))
+    con = aa_to_con(text)
+    atoms = _read_con_atoms(con)
+    assert [symbol for symbol, _point, _fixed in atoms[:20]] == ["H"] * 20
+    assert [symbol for symbol, _point, _fixed in atoms[20:]] == ["O"] * 10
+    assert [int(number) for number in numbers.tolist()] == [1] * 20 + [8] * 10
+    coords = positions.reshape(-1, 3)
+    written = np.array([point for _symbol, point, _fixed in atoms])
+    shifts = written - coords
+    assert np.allclose(shifts, shifts[0], atol=1e-8)
+
+
+def test_rigid_cartesian_force_matches_a_translation():
+    from optbench.eon_harness import aa_to_con
+    from optbench.tip4p import ccl_from_sites, parse_aa, rigid_cartesian, sites_from_aa
+
+    aa = "0 0 0\n0 0 0\n3.2 0.4 -0.2\n0.1 -0.2 0.05\n"
+    positions, numbers = ccl_from_sites(sites_from_aa(parse_aa(aa)))
+    energy, forces = rigid_cartesian(positions.reshape(-1), numbers)
+    step = 1e-6
+    moved = positions.copy()
+    # Molecule 0 is the first H, H pair and the first oxygen.
+    moved[0] += np.array([step, 0.0, 0.0])
+    moved[1] += np.array([step, 0.0, 0.0])
+    moved[4] += np.array([step, 0.0, 0.0])
+    moved_energy, _moved_forces = rigid_cartesian(moved.reshape(-1), numbers)
+    molecule = forces.reshape(-1, 3)[[0, 1, 4]].sum(axis=0)
+    assert (moved_energy - energy) / step == pytest.approx(-molecule[0], abs=1e-4)
+    con = aa_to_con(aa)
+    assert "\n2\n" in con
+    assert "\n4 2\n" in con
+
+
+def test_tip4p_templates_share_the_ledger_and_the_ev_stop():
+    from optbench.campaign import resolve_problem
+    from optbench.tip4p import CONVERSION_LEDGER, KJ_PER_EV
+
+    names = [
+        f"{family}/bh-{problem}"
+        for family in ("eon-svn", "eon-develop")
+        for problem in ("tip4p10", "tip4p15", "tip4p20")
+    ]
+    ledgers = set()
+    for name in names:
+        template = load_template(ROOT, name)
+        problem = resolve_problem(ROOT, template["problem"])
+        ledgers.add(template["ledger"])
+        assert template["kernel"] == "tip4p"
+        assert template["input"]["select"] == "aa"
+        assert template["tuning"] == "lj38"
+        assert template["ini"]["Potential"]["potential"] == "tip4p"
+        assert float(template["energy_kj_per_ev"]) == KJ_PER_EV
+        stop = float(template["ini"]["Basin Hopping"]["stop_energy"])
+        threshold = reference_energy(problem) + energy_tolerance(problem)
+        assert stop * KJ_PER_EV == pytest.approx(threshold, abs=1e-9)
+        assert int(template["failure_cap"]) == force_cap(problem)
+        assert len(template_starts(template)) == int(problem["sample"]["starts"])
+        assert template["ini"]["Basin Hopping"]["target_ratio"] == 0.3
+        assert template["ini"]["Main"]["temperature"] == 8000
+    assert ledgers == {CONVERSION_LEDGER}
+
+
+def test_complete_cap_row_is_ranked_with_par2(tmp_path):
+    from optbench.dat import parse
+    from optbench.eon_harness import write_campaign
+
+    template = load_template(ROOT, "eon-svn/bh-lj75")
+    rows = [
+        (
+            314159,
+            str(start),
+            {
+                "force_calls": 1000000.0,
+                "success": False,
+                "failure": "cap",
+                "minimum_energy": -396.282,
+            },
+        )
+        for start in range(1, 201)
+    ]
+    summary = write_campaign(template, rows, tmp_path / "row.dat")
+    fields = parse((tmp_path / "row.dat").read_text(encoding="utf-8"))
+    assert summary["partial"] is False
+    assert "partial" not in fields
+    assert float(fields["par2_mean"]) == 2000000.0
+    assert fields["n_cap"] == "200"
+    assert fields["n"] == "200"
+    assert fields["label"] == "lj38"
+    short = rows[:16]
+    summary = write_campaign(template, short, tmp_path / "short.dat")
+    assert summary["partial"] is True
+    assert "partial true" in (tmp_path / "short.dat").read_text(encoding="utf-8")
 
 
 def test_asv_default_is_the_first_real_start():
