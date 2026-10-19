@@ -469,5 +469,58 @@
    </tr>
    </tbody></table></div>
    <p>No full ranked run.</p>
+   <h3>jaxmd</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization</td>
+   <td>jax-md-v0.2.29</td>
+   <td>84ab10407420</td>
+   <td><a href="https://github.com/jax-md/jax-md">https://github.com/jax-md/jax-md</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="minimization/lj38" data-template="jaxmd/lj38-optax-lbfgs">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="template">jaxmd/lj38-optax-lbfgs</td>
+   <td data-field="version">jaxmd 0.2.29</td>
+   <td data-field="commit">84ab10407420</td>
+   <td data-field="par2_mean">278.365</td>
+   <td data-field="mean_calls">218.798</td>
+   <td data-field="median_calls">206.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-template="jaxmd/noise-optax-lbfgs-s0">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="template">jaxmd/noise-optax-lbfgs-s0</td>
+   <td data-field="version">jaxmd 0.2.29</td>
+   <td data-field="commit">84ab10407420</td>
+   <td data-field="par2_mean">278.365</td>
+   <td data-field="mean_calls">218.798</td>
+   <td data-field="median_calls">206.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-template="jaxmd/morse-optax-lbfgs">
+   <td>Morse bulk</td>
+   <td data-field="template">jaxmd/morse-optax-lbfgs</td>
+   <td data-field="version">jaxmd 0.2.29</td>
+   <td data-field="commit">84ab10407420</td>
+   <td data-field="par2_mean">27.35</td>
+   <td data-field="mean_calls">27.35</td>
+   <td data-field="median_calls">28</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table></div>
+   <p>No full ranked run</p><ul>
+   <li>Lennard-Jones 38 clusters: partial.</li>
+   <li>Lennard-Jones 38 clusters with Gaussian force noise: partial.</li>
+   <li>Morse bulk: partial.</li>
+   </ul>
    </section>
 #+end_export
