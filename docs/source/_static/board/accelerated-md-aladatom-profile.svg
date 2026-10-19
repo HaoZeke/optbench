@@ -179,6 +179,30 @@ L 486.707379 37.32381
 L 486.707379 37.32381 
 " clip-path="url(#p4e380cea4b)" style="fill: none; stroke: #1f77b4; stroke-width: 1.5; stroke-linecap: square"/>
    </g>
+   <g id="line2d_13">
+    <path d="M 68.854964 260.6 
+L 173.318068 260.6 
+L 173.318068 37.32381 
+L 277.781172 37.32381 
+L 277.781172 37.32381 
+L 382.244276 37.32381 
+L 382.244276 37.32381 
+L 486.707379 37.32381 
+L 486.707379 37.32381 
+" clip-path="url(#p4e380cea4b)" style="fill: none; stroke: #ff7f0e; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_14">
+    <path d="M 68.854964 260.6 
+L 173.318068 260.6 
+L 173.318068 186.174603 
+L 277.781172 186.174603 
+L 277.781172 37.32381 
+L 382.244276 37.32381 
+L 382.244276 37.32381 
+L 486.707379 37.32381 
+L 486.707379 37.32381 
+" clip-path="url(#p4e380cea4b)" style="fill: none; stroke: #2ca02c; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
    <g id="patch_3">
     <path d="M 47.962344 260.6 
 L 47.962344 26.16 
@@ -204,28 +228,50 @@ L 507.6 26.16
    </g>
    <g id="legend_1">
     <g id="patch_7">
-     <path d="M 320.714219 257.1 
+     <path d="M 287.91375 257.1 
 L 502.7 257.1 
 Q 504.1 257.1 504.1 255.7 
-L 504.1 245.899453 
-Q 504.1 244.499453 502.7 244.499453 
-L 320.714219 244.499453 
-Q 319.314219 244.499453 319.314219 245.899453 
-L 319.314219 255.7 
-Q 319.314219 257.1 320.714219 257.1 
+L 504.1 224.898359 
+Q 504.1 223.498359 502.7 223.498359 
+L 287.91375 223.498359 
+Q 286.51375 223.498359 286.51375 224.898359 
+L 286.51375 255.7 
+Q 286.51375 257.1 287.91375 257.1 
 z
 " style="fill: #ffffff; opacity: 0.8; stroke: #cccccc; stroke-linejoin: miter"/>
     </g>
-    <g id="line2d_13">
-     <path d="M 322.114219 250.168359 
-L 329.114219 250.168359 
-L 329.114219 250.168359 
-L 336.114219 250.168359 
-L 336.114219 250.168359 
+    <g id="line2d_15">
+     <path d="M 289.31375 229.167266 
+L 296.31375 229.167266 
+L 296.31375 229.167266 
+L 303.31375 229.167266 
+L 303.31375 229.167266 
 " style="fill: none; stroke: #1f77b4; stroke-width: 1.5; stroke-linecap: square"/>
     </g>
     <g id="text_15">
-     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="341.714219" y="252.618359" transform="rotate(-0 341.714219 252.618359)">eon/aladatom-akmc 3.6.0 campaign 1d71c94</text>
+     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="308.91375" y="231.617266" transform="rotate(-0 308.91375 231.617266)">eon/aladatom-akmc 3.6.0 campaign 1d71c94</text>
+    </g>
+    <g id="line2d_16">
+     <path d="M 289.31375 239.667813 
+L 296.31375 239.667813 
+L 296.31375 239.667813 
+L 303.31375 239.667813 
+L 303.31375 239.667813 
+" style="fill: none; stroke: #ff7f0e; stroke-width: 1.5; stroke-linecap: square"/>
+    </g>
+    <g id="text_16">
+     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="308.91375" y="242.117813" transform="rotate(-0 308.91375 242.117813)">eon/aladatom-akmc-vineyard 3.6.0 campaign 1d71c94</text>
+    </g>
+    <g id="line2d_17">
+     <path d="M 289.31375 250.168359 
+L 296.31375 250.168359 
+L 296.31375 250.168359 
+L 303.31375 250.168359 
+L 303.31375 250.168359 
+" style="fill: none; stroke: #2ca02c; stroke-width: 1.5; stroke-linecap: square"/>
+    </g>
+    <g id="text_17">
+     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="308.91375" y="252.618359" transform="rotate(-0 308.91375 252.618359)">eon/aladatom-pr 3.6.0 campaign 1d71c94</text>
     </g>
    </g>
   </g>
