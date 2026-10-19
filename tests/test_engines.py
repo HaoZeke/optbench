@@ -65,6 +65,7 @@ def test_new_templates_match_a_problem_stop():
         "tsase/mdmin-lj38",
         "tsase/mode-lj38",
         "tsase/neb",
+        "tsase/neb-pt-qm",
         "pykmc/lattice",
         "optim/unhooked",
         "optim/lbfgs-lj38",

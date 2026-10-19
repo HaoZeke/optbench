@@ -91,7 +91,8 @@ def _load_classes():
     load("minimizer_ssneb", "minimizer_ssneb.py")
     ssneb = load("ssneb", "ssneb.py")
     fire = load("fire_ssneb", "fire_ssneb.py")
-    return ssneb.ssneb, fire.fire_ssneb
+    qm = load("qm_ssneb", "qm_ssneb.py")
+    return ssneb.ssneb, fire.fire_ssneb, qm.qm_ssneb
 
 
 def _frame(reactant: np.ndarray, product: np.ndarray, box, kind: str):
@@ -145,7 +146,7 @@ def _execute(job: dict) -> dict:
     from optbench.counter import HarnessCounter, attach_ase_counter
     from optbench.pes import evaluate
 
-    ssneb_cls, fire_cls = _load_classes()
+    ssneb_cls, fire_cls, _qm_cls = _load_classes()
     reactant = np.asarray(job["reactant"], dtype=np.float64)
     product = np.asarray(job["product"], dtype=np.float64)
     free = np.asarray(job["free"], dtype=bool)
@@ -618,6 +619,189 @@ def _run_points(root, problem, template, settings, output: Path, workers: int, e
     )
 
 
+def _qm_job(pair, settings: dict, template: dict) -> dict:
+    """Stock ``qm_ssneb`` on the problem's images and force stop.
+
+    The constructor defaults are maxmove 0.2 and dt 0.05. The archive
+    passed dt 0.15. This row does not.
+    """
+    section = _section(template)
+    job = _job(pair, settings, template, "0")
+    job["method"] = str(section.get("band", "ci"))
+    job["cap"] = int(settings["cap"])
+    return job
+
+
+def _execute_qm(job: dict) -> dict:
+    """One climbing or plain band. The score is the harness calculator count.
+
+    Success is the minimizer's own force stop, the same role as OPTIM's
+    CONVERGED line. The Hessian is not consulted. ``raw`` is the band
+    total and ``force_calls`` is that total divided by the image count,
+    which is the unit the 2014 Gman file published.
+    """
+    os.environ.setdefault("OMP_NUM_THREADS", "1")
+    from ase import Atoms
+    from ase.calculators.calculator import Calculator
+
+    from optbench.counter import HarnessCounter, attach_ase_counter
+    from optbench.pes import evaluate
+
+    ssneb_cls, _fire_cls, qm_cls = _load_classes()
+    reactant = np.asarray(job["reactant"], dtype=np.float64)
+    product = np.asarray(job["product"], dtype=np.float64)
+    free = np.asarray(job["free"], dtype=bool)
+    kind = job["kind"]
+    cap = int(job["cap"])
+    images = int(job["n_interior"])
+    raw_box = None if job["box"] is None else np.asarray(job["box"], dtype=np.float64)
+    left, right, cell, eval_box = _frame(reactant, product, raw_box, kind)
+    # The archive iteration budget is the problem cap. Each step evaluates
+    # every interior image, so the calculator cap is that budget times the
+    # image count. The ranked total is still compared with the problem cap.
+    counter = HarnessCounter(cache=False, cap=cap * images)
+    error = ""
+    iterations = 0
+    band = None
+    previous = Path.cwd()
+
+    class _Surface(Calculator):
+        implemented_properties = ("energy", "forces")
+        nolabel = True
+
+        def calculate(self, atoms=None, properties=("energy", "forces"), system_changes=None):
+            if system_changes is None:
+                system_changes = ["positions"]
+            Calculator.calculate(self, atoms, properties, system_changes)
+            positions = np.asarray(atoms.get_positions(), dtype=np.float64)
+            value, grad = evaluate(kind, positions, eval_box)
+            forces = -np.asarray(grad, dtype=np.float64)
+            forces[~free] = 0.0
+            self.results["energy"] = float(value)
+            self.results["forces"] = forces
+
+    try:
+        with tempfile.TemporaryDirectory(prefix="tsase-qm-") as folder:
+            os.chdir(folder)
+            log = Path(folder) / "stdout.txt"
+            calculator = attach_ase_counter(_Surface(), cap=cap * images, counter=counter)
+            ends = []
+            for coords in (left, right):
+                atoms = Atoms(positions=np.asarray(coords, dtype=np.float64), cell=cell, pbc=True)
+                atoms.calc = calculator
+                ends.append(atoms)
+            with log.open("w", encoding="utf-8") as handle, redirect_stdout(handle):
+                band = ssneb_cls(
+                    ends[0],
+                    ends[1],
+                    numImages=images + 2,
+                    k=float(job["spring_k"]),
+                    method=job["method"],
+                    ss=False,
+                    parallel=False,
+                )
+                opt = qm_cls(band)
+                original = opt.step
+
+                def step():
+                    nonlocal iterations
+                    original()
+                    iterations += 1
+                    for image in band.path[1:-1]:
+                        coords = image.get_positions()
+                        coords[~free] = left[~free]
+                        image.set_positions(coords)
+
+                opt.step = step
+                opt.minimize(forceConverged=float(job["force_norm"]), maxIterations=cap)
+    except SystemExit as exc:
+        error = f"SystemExit: {exc}"
+    except Exception as exc:
+        message = str(exc)
+        if "force-call cap" in message or type(exc).__name__ == "ForceCallCap":
+            error = f"force-call cap: {message}"
+        else:
+            error = f"{type(exc).__name__}: {exc}"
+    finally:
+        os.chdir(previous)
+    calls = int(counter.calls)
+    observed = None
+    if band is not None and not error:
+        try:
+            util = sys.modules["tsase.neb.util"]
+            magnitudes = []
+            for image in band.path[1:-1]:
+                total = getattr(image, "totalf", None)
+                if total is None:
+                    continue
+                magnitudes.append(float(util.vmag(total)))
+            if magnitudes:
+                observed = max(magnitudes)
+        except Exception:
+            observed = None
+    capped = ("force-call cap" in error) or calls >= cap * images
+    converged = observed is not None and observed <= float(job["force_norm"]) and not capped and not error
+    # The board compares the band total with the problem cap.
+    if converged and calls < cap:
+        success = True
+        failure = None
+    elif capped or calls >= cap:
+        success = False
+        failure = "cap"
+    elif error:
+        success = False
+        failure = "crash"
+    else:
+        success = False
+        failure = "divergence"
+    per_image = calls / images if images else float(calls)
+    return {
+        "start": job["name"],
+        "force_calls": per_image,
+        "raw": calls,
+        "count_key": "force_calls_neb",
+        "success": success,
+        "failure": failure,
+        "counter": "harness",
+        "converged": converged,
+        "iterations": iterations,
+        "force_norm": observed,
+        "error": error,
+    }
+
+
+def _run_qm(root: Path, problem: dict, template: dict, settings: dict, output: Path, workers: int) -> dict:
+    pairs = list(cached_pairs(root, problem, settings).values())
+    jobs = [_qm_job(pair, settings, template) for pair in pairs]
+    records = run_jobs(jobs, _execute_qm, workers)
+    section = _section(template)
+    comment = (
+        "# TSASE 1.0 qm_ssneb, commit 98aac60. Constructor defaults maxmove 0.2 and dt 0.05.\n"
+        "# The count is one harness ASE calculate. force_calls is that total divided by the image count.\n"
+        "# A start is kept when qm_ssneb stops at the problem force norm, under the problem cap.\n"
+        "# ssneb multiplies the spring constant by the image count. The Hessian is not the stop."
+    )
+    return write_campaign(
+        output,
+        records,
+        template,
+        problem,
+        settings,
+        {
+            "minimizer": "qm_ssneb",
+            "band": str(section.get("band", "ci")),
+            "spring_k": float(section.get("spring_k", 5.0)),
+            "dt": "qm_ssneb default 0.05",
+            "maxmove": "qm_ssneb default 0.2",
+            "ss": False,
+            "counter": "harness",
+            "version": template["code_version"],
+        },
+        images=None,
+        comment=comment,
+    )
+
+
 def run(root: Path, problem_name: str, template_name: str, *, output: Path, workers: int = 1) -> dict:
     reason = available()
     if reason:
@@ -636,6 +820,9 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
     if stated and stated != problem["id"]:
         raise ValueError(f"{template_name} belongs to {stated}")
     method = str((template.get("tsase") or {}).get("method", "ci"))
+    if method == "qm":
+        problem, template, settings = prepared(root, problem_name, template_name, CODE)
+        return _run_qm(root, problem, template, settings, output, workers)
     if method == "dimer":
         settings = point_settings(problem)
         if settings["cap"] is None:
