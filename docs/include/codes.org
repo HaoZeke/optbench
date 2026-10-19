@@ -1101,15 +1101,15 @@
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr data-problem="saddle-search/pt-island" data-template="cp2k/saddle-dimer-cg">
+   <tr data-problem="saddle-search/pt-island" data-template="cp2k/saddle-dimer-cg-tuned">
    <td>Pt heptamer island</td>
-   <td data-field="template">cp2k/saddle-dimer-cg</td>
+   <td data-field="template">cp2k/saddle-dimer-cg-tuned</td>
    <td data-field="version">CP2K 2026.2</td>
    <td data-field="commit">702cc3d81422</td>
-   <td data-field="par2_mean">10128</td>
-   <td data-field="mean_calls">775.248</td>
-   <td data-field="median_calls">784</td>
-   <td data-field="failures">crash 0, divergence 20000, cap 0, wrong_stationary 0</td>
+   <td data-field="par2_mean">10127.6</td>
+   <td data-field="mean_calls">1017.96</td>
+   <td data-field="median_calls">1000</td>
+   <td data-field="failures">crash 0, divergence 985, cap 18872, wrong_stationary 142</td>
    <td data-field="n">20000</td>
    </tr>
    <tr data-problem="tsopt/LJ38" data-template="cp2k/lj38-dimer-cg-tuned">
@@ -1135,8 +1135,5 @@
    <td data-field="n">49</td>
    </tr>
    </tbody></table></div>
-   <p>No full ranked run</p><ul>
-   <li>Pt heptamer island: partial.</li>
-   </ul>
    </section>
 #+end_export

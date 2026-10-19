@@ -76,7 +76,7 @@ It does not run a campaign.
    <td data-code="ASE">—</td>
    <td data-code="Sella" data-template="sella/pt-island-search-default" data-par2="5201.62"><span class="bench-score">5201.62</span><a href="generated/suites/saddle-search.html#pt-island-templates">sella/pt-island-search-default</a></td>
    <td data-code="pysisyphus">—</td>
-   <td data-code="CP2K" data-template="cp2k/saddle-dimer-cg" data-par2="10128"><span class="bench-score">10128</span><a href="generated/suites/saddle-search.html#pt-island-templates">cp2k/saddle-dimer-cg</a></td>
+   <td data-code="CP2K" data-template="cp2k/saddle-dimer-cg-tuned" data-par2="10127.6"><span class="bench-score">10127.6</span><a href="generated/suites/saddle-search.html#pt-island-templates">cp2k/saddle-dimer-cg-tuned</a></td>
    <td data-code="artn" data-template="partn/saddle-pt" data-par2="11944.6"><span class="bench-score">11944.6</span><a href="generated/suites/saddle-search.html#pt-island-templates">partn/saddle-pt</a></td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
