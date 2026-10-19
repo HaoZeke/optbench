@@ -1,0 +1,15 @@
+# OPTIM Rayleigh-Ritz on the 2014 first-order LJ38 preamble.
+id = "optim/rr-loweig"
+engine = "optim"
+problem = "lowest-eigenvector/lj38"
+code = "optim"
+code_version = "svn-snapshot"
+commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+algorithm = "Rayleigh-Ritz"
+tuning = "wales-2014"
+note = "archive/entries/lowest-eigenvector/lj38/optim-first-order. Geometries are coords.tar.gz. eigenonly 1D-13 0.99, USEDIAG 3, BFGSCONV 1D10, CONVERGE 1D10, maxbfgs 0.2 0.3, updates 4 30, READVEC. vector.dump is 100 plus initial_mode. Success is **** CONVERGED ****."
+
+[optim]
+method = "paper-rr"
+preamble = "templates/optim/preambles/rr-first.txt"
+symbol = "AX"

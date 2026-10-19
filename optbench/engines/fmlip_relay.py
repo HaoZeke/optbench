@@ -64,12 +64,27 @@ def _mark_capped() -> None:
             handle.write("cap\n")
 
 
+def scaled_force(gradient, scale_l: float, scale_e: float, force_div: float = 1.0):
+    """Force returned to OPTIM.
+
+    ``scale_l`` and ``scale_e`` convert a harness gradient into the
+    units OPTIM is integrating. ``force_div`` is the extra factor in
+    the 2014 Morse bulk gradient, which omits ``rho``.
+    """
+    grad = np.asarray(gradient, dtype=np.float64)
+    divisor = float(force_div)
+    if divisor == 0.0:
+        divisor = 1.0
+    return (-grad / float(scale_l)) * float(scale_e) / divisor
+
+
 def serve(port: int) -> None:
     from optbench.pes import evaluate
 
     kind, box = _kind_and_box()
     scale_e = float(os.environ.get("OPTBENCH_E_SCALE", "1"))
     scale_l = float(os.environ.get("OPTBENCH_L_SCALE", "1"))
+    force_div = float(os.environ.get("OPTBENCH_FORCE_DIV", "1") or "1")
     raw_cap = os.environ.get("OPTBENCH_CAP", "").strip()
     cap = int(raw_cap) if raw_cap else None
     listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -114,7 +129,7 @@ def serve(port: int) -> None:
             except Exception:
                 conn.sendall(struct.pack("<i", STATUS_ERR))
                 break
-            force = (-np.asarray(gradient, dtype=np.float64) / scale_l) * scale_e
+            force = scaled_force(gradient, scale_l, scale_e, force_div)
             calls += 1
             _write_last(coords)
             _write_count(calls)
@@ -138,9 +153,11 @@ def main() -> None:
         if flag == "--port":
             port = int(value)
         elif flag == "--e-to-ev":
-            os.environ["OPTBENCH_E_SCALE"] = value
+            # ASE always passes the EV/ANG factors, which are 1. A paper
+            # Morse run sets the 2014 scales before it launches OPTIM.
+            os.environ.setdefault("OPTBENCH_E_SCALE", value)
         elif flag == "--l-to-ang":
-            os.environ["OPTBENCH_L_SCALE"] = value
+            os.environ.setdefault("OPTBENCH_L_SCALE", value)
         index += 2 if flag.startswith("--") else 1
     serve(port)
 

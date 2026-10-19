@@ -1,0 +1,15 @@
+# OPTIM double-ended Pt island in the 2014 reduced Morse units.
+id = "optim/de-pt"
+engine = "optim"
+problem = "double-ended-saddle-search/pt-island"
+code = "optim"
+code_version = "svn-snapshot"
+commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+algorithm = "DNEB + hybrid eigenvector following"
+tuning = "wales-2014"
+note = "archive/entries/double-ended-saddle-search/pt-island/optim. Coordinates are divided by r0 2.897. Energy is divided by D 0.7102. The gradient is divided again by rho 4.6488159, matching morse_bulk.f90. PARAMS and FREEZE follow run.sh. Success is Converged to TS."
+
+[optim]
+method = "dneb"
+preamble = "templates/optim/preambles/de-pt.txt"
+symbol = "M"

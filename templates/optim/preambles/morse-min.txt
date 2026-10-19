@@ -1,0 +1,18 @@
+comment !R0 =  2.8970
+comment !A =   0.7102
+comment !rho = 1.6047
+comment !cubic box with boxl = 16.387907
+comment rcut = 9.5
+comment ! rho scaled = rho * r0 = 4.6488159
+comment convergence tolerance is norm(gradient)=1e-3, or that RMS(gradient)=1e-3 / sqrt(3*natoms) = 3.6084391824351612d-05
+comment scaled tolerance is tol / A = 5.08087747456e-05
+comment scaled maxstep = maxstep / R0 = 0.690369347601
+comment scaled boxl = boxl / R0 = 5.65685433207
+comment scaled rcut = rcut / R0 = 3.2792544011
+debug
+bfgssteps 10000
+bfgsmin 5.08087747456D-05
+updates 100
+maxbfgs 0.690369347601
+params 4.6488159 5.65685433207 5.65685433207 5.65685433207  3.2792544011
+bulk

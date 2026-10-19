@@ -1,0 +1,15 @@
+# OPTIM lj38_2ts_separation. The odata body is the 2014 archive preamble.
+id = "optim/de-2ts"
+engine = "optim"
+problem = "double-ended-saddle-search/lj38_2ts_separation"
+code = "optim"
+code_version = "svn-snapshot"
+commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+algorithm = "DNEB + hybrid eigenvector following + Dijkstra"
+tuning = "wales-2014"
+note = "archive/entries/double-ended-saddle-search/lj38_2ts_separation/optim. Success is Connected path found. The score is OPTIM's energy+gradient calls. This row is wales-27058 built-in LJDIFF: the snapshot newconnect leaves the archived path."
+
+[optim]
+method = "newconnect"
+preamble = "templates/optim/preambles/de-2ts.txt"
+symbol = "AX"

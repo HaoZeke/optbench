@@ -1,0 +1,18 @@
+# counter OPTIM energy+gradient calls. run_optim.sh greps that line and takes awk field 6.
+# success is the 2014 string '**** CONVERGED ****'. odata preamble ts-pt.txt. units morse-2014.
+force_calls 71
+force_calls_min 43
+force_calls_max 143
+force_calls_median 70
+successes 49
+nfailed 0
+n 49
+transition_states 0
+code optim
+code_version svn-snapshot
+commit 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f
+algorithm hybrid eigenvector-following
+template optim/hef-ffd-ts-pt
+problem tsopt/pt-island
+tuning wales-2014
+counter harness

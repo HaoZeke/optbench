@@ -1,0 +1,15 @@
+# OPTIM hybrid eigenvector-following on the 2014 Pt island.
+id = "optim/hef-ffd-ts-pt"
+engine = "optim"
+problem = "tsopt/pt-island"
+code = "optim"
+code_version = "svn-snapshot"
+commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+algorithm = "hybrid eigenvector-following"
+tuning = "wales-2014"
+note = "archive/entries/tsopt/pt-island/optim_ffd. Coordinates are divided by r0. The gradient matches morse_bulk.f90. The initial mode is the normalized free displacement from the reactant, the genmode.x direction. Success is **** CONVERGED ****."
+
+[optim]
+method = "paper-ts"
+preamble = "templates/optim/preambles/ts-pt.txt"
+symbol = "M"

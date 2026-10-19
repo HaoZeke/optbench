@@ -422,9 +422,23 @@ def screen_fields(text: str) -> dict[str, str]:
     }
 
 
+def _head_branch(root: Path) -> str:
+    import subprocess
+
+    try:
+        return subprocess.check_output(
+            ["git", "rev-parse", "--abbrev-ref", "HEAD"],
+            cwd=root,
+            text=True,
+        ).strip()
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return ""
+
+
 def read_campaign(root: Path, branch: str, path: str) -> str:
-    if branch == "main":
-        return (root / path).read_text(encoding="utf-8")
+    local = root / path
+    if local.is_file() and (branch == "main" or _head_branch(root) == branch):
+        return local.read_text(encoding="utf-8")
     import subprocess
 
     return subprocess.check_output(

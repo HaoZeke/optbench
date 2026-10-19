@@ -1,0 +1,273 @@
+--- a/OPTIM/source/beig.F90
++++ b/OPTIM/source/beig.F90
+@@ -281,7 +281,17 @@
+       IF (PSI4) CALL SYSTEM(' cp ' // SYS(1:LSYS) // '.in ' // SYS(1:LSYS) // '.in.save ')
+       IF (ONETEP) CALL SYSTEM(' cp ' // SYS(1:LSYS) // '.dat ' // SYS(1:LSYS) // '.dat.save ')
+       IF (CP2K) CALL SYSTEM(' cp ' // SYS(1:LSYS) // '.inp ' // SYS(1:LSYS) // '.inp.save ') 
+-      CALL XMYLBFGS(NOPT,XMUPDATE,VEC,BOXVEC,.FALSE.,DIAG,CEIG,WORK,ENERGY,EPLUS,EMINUS,COORDS,NITS,NEVS,FRET,PTEST,CONVERGED,GRAD)
++!
++! USEDIAG 3 (forward differences) needs the gradient at the unperturbed
++! geometry. EIGENONLY does not evaluate it before this point, so the
++! curvature is the displaced gradient over the finite-difference step.
++!
++      IF (NSECDIAG.GT.2) THEN
++         CALL POTENTIAL(COORDS,ENERGY,GGRAD,.TRUE.,.FALSE.,RRMS,.FALSE.,.FALSE.)
++         CALL XMYLBFGS(NOPT,XMUPDATE,VEC,BOXVEC,.FALSE.,DIAG,CEIG,WORK,ENERGY,EPLUS,EMINUS,COORDS,NITS,NEVS,FRET,PTEST,CONVERGED,GGRAD)
++      ELSE
++         CALL XMYLBFGS(NOPT,XMUPDATE,VEC,BOXVEC,.FALSE.,DIAG,CEIG,WORK,ENERGY,EPLUS,EMINUS,COORDS,NITS,NEVS,FRET,PTEST,CONVERGED,GRAD)
++      ENDIF
+       IF (BOXDERIVT.AND.NBOX.LT.6) BOXVEC(NBOX+1:6)=0.0D0
+       IF (BOXDERIVT) THEN ! bespoke normalisation over the two spaces
+          DUMMY=SQRT(SUM(VEC(:)**2)+SUM(BOXVEC(:)**2))
+--- a/OPTIM/source/bfgsts.F90
++++ b/OPTIM/source/bfgsts.F90
+@@ -1293,63 +1293,8 @@
+ !           NFREEZE=0
+ !        ENDIF
+          IF (((RMS.GT.CONVR).OR.(INEG.EQ.0)).OR.(STPMAG.GT.CONVU)) MFLAG=.FALSE.
+-!
+-! Convergence test for +/- displacements for gradient only hybrid eigenvector-following. Require the energy to decrease.
+-! EMINUS is not known for NSECDIAG 3 so we need to calculate it. One unnecessary energy/gradient call here. Could change the displacement sign instead.
+-! Use a call to SECDIAG for temporary NSECDIAG=2 setting. GL and BOXGL are not required.
+-!
+-         IF (NOHESS) THEN
+-            IF (MFLAG.AND.(NSECDIAG.EQ.3)) THEN
+-               NSECDIAG=2
+-               IF (NDEG.LT.NOPT) THEN
+-                  VECS(NDEG+1:NOPT)=0.0D0
+-                  COORDS(NDEG+1:NOPT)=0.0D0
+-                  IF (BOXDERIVT) THEN
+-                     DUMMY=DOTOPT(VECS(1),VECS(1),NDEG)
+-                     DO J1=1,NBADD
+-                        DUMMY=DUMMY+(BOXVECS(BOX_INDEX(J1))/BOXSCALE(J1))**2
+-                     ENDDO
+-                     DUMMY=SQRT(DUMMY)
+-                     VECS(1:NDEG)=VECS(1:NDEG)/DUMMY
+-                     BOXDUMP(:)=0.0D0
+-                     BOXZWORK(:)=0.0D0
+-                     DO J1=1,NBADD
+-                        BOXDUMP(BOX_INDEX(J1))=BOXVECS(BOX_INDEX(J1))/DUMMY
+-                        BOXZWORK(J1)=BOXDUMP(BOX_INDEX(J1))/BOXSCALE(J1)
+-                     ENDDO
+-                     BOXVECS(:)=BOXDUMP(:)
+-                  ELSE
+-                     CALL VECNORM(VECS,NDEG)
+-                  ENDIF
+-               ENDIF
+-               IF (BOXDERIVT) THEN
+-                  CALL SECDIAG(VECS,BOXZWORK,COORDS,ENERGY,GRAD,GL,BOXGL,EVALMIN2,.FALSE.,XRMS,EPLUS,EMINUS)
+-               ELSE
+-                  CALL SECDIAG(VECS,BOXVECS,COORDS,ENERGY,GRAD,GL,BOXGL,EVALMIN2,.FALSE.,XRMS,EPLUS,EMINUS)
+-               ENDIF
+-               PRINT '(A,2G20.10)',' bfgsts> checking energy for +/- displacements. eigenvalue for one and two-sided derivatives=', &
+-  &                               EVALMIN,EVALMIN2
+-               NSECDIAG=3
+-            ENDIF
+-         ENDIF
+-         PRINT '(A,2G20.10)',' bfgsts> +/- energy changes for displacement along the eigenvector are: ',EPLUS-ENERGY,EMINUS-ENERGY
+-         IF (MFLAG.AND.(EPLUS.GT.ENERGY)) THEN
+-!           MFLAG=.FALSE.
+-            PRINT '(A,2G20.10)',' bfgsts> WARNING *** energy rises for + displacement along the eigenvector'
+-            IF (NSECDIAG.EQ.3) THEN
+-               NSECDIAG=2
+-               PRINT '(A,2G20.10)',' bfgsts> changing to double-sided calculation in Rayleigh-Ritz eigenvalue minimisation'
+-               MFLAG=.FALSE.
+-            ENDIF
+-         ELSEIF (MFLAG.AND.(EMINUS.GT.ENERGY)) THEN
+-!           MFLAG=.FALSE.
+-            PRINT '(A,2G20.10)',' bfgsts> WARNING *** energy rises for - displacement along the eigenvector'
+-            IF (NSECDIAG.EQ.3) THEN
+-               NSECDIAG=2
+-               PRINT '(A,2G20.10)',' bfgsts> changing to double-sided calculation in Rayleigh-Ritz eigenvalue minimisation'
+-               MFLAG=.FALSE.
+-            ENDIF
+-         ENDIF
++! wales-27058 returns on this test. The later +/- displacement check
++! evaluates two extra energies and can reject a converged transition state.
+          IF (MFLAG) THEN
+             FIXD=FIXDSAVE
+             RETURN
+--- a/OPTIM/source/fetchz.F90
++++ b/OPTIM/source/fetchz.F90
+@@ -2438,9 +2438,9 @@
+                            ' fetchz> Extra (d)neb steps allowed if the (d)neb energy is > lowest value times ', &
+                            DNEBEFRAC
+       IF (BFGSMINT.OR.BFGSTST) THEN
+-         IF (GMAX.NE.CONVR) THEN
+-            CONVR=MIN(CONVR,GMAX)
+-            WRITE(*,'(A,G20.10,A)') ' fetchz> RMS convergence reset to ',GMAX,' for LBFGS and EF phases for consistency'
++         IF (GMAX.GT.CONVR) THEN
++            CONVR=GMAX
++            WRITE(*,'(A)') ' fetchz> RMS convergence reset to the LBFGS convergence limit'
+          ENDIF
+          WRITE(*,'(A,G15.8,A,I8)') &
+                  ' fetchz> Convergence criterion for LBFGS optimization: RMS force<',GMAX,' maximum steps=',BFGSSTEPS
+--- a/OPTIM/source/keywords.F90
++++ b/OPTIM/source/keywords.F90
+@@ -1136,7 +1136,7 @@
+          EYTRAPT=.FALSE.
+          MKTRAPT=.FALSE.
+          BFGSTSTOL=0.0001D0
+-         EVPC=1.0D0
++         EVPC=50.0D0
+          OHCELLT=.FALSE.
+          CONDATT=.FALSE.
+          PAIRCOLOURT=.FALSE.
+@@ -2119,7 +2119,6 @@
+ !
+             IF (NITEMS.GT.1) THEN
+                CALL READF(GMAX)
+-               CONVR=GMAX
+             ENDIF
+ #ifndef BIOVIA
+          ELSE IF (WORD.EQ.'BFGSCONVINT') THEN
+@@ -2142,7 +2141,6 @@
+             BFGSMINT=.TRUE.
+             IF (NITEMS.GT.1) THEN
+                CALL READF(GMAX)
+-               CONVR=GMAX
+             ENDIF
+ 
+          ELSE IF (WORD.EQ.'BFGSSTEP') THEN
+@@ -6135,7 +6133,13 @@
+             FCD=.TRUE.
+             IF (NITEMS.GT.1) CALL READI(NNNIMAGE)
+             IF (NITEMS.GT.2) CALL READI(NITERMAX)
+-            IF (NITEMS.GT.3) CALL READF(RMSTOLNN)
++            IF (NITEMS.GT.3) THEN
++               CALL READF(RMSTOLNN)
++! wales-27058 stored this NEWNEB tolerance in RMSTOL. The later split
++! keeps it in RMSTOLNN and only applies it on the first connect cycle,
++! so a plain NEWNEB run converges to the tighter default 0.01.
++               RMSTOL=RMSTOLNN
++            ENDIF
+             IF (READGUESS) NNNIMAGE=NIMAGE ! so NEBREADGUESS overwrites NEWNEB number of images
+ !
+ ! NGUESS specifies the number of transition state guesses tried in GUESSTS for CHARMM
+--- a/OPTIM/source/mylbfgs.F90
++++ b/OPTIM/source/mylbfgs.F90
+@@ -683,8 +683,9 @@
+ !     GINT with bonds projected out is never transferred back to carthesians -> check in internals
+       MFLAG=.FALSE.
+ #ifndef BIOVIA
+-      IF (REALRMS.LE.GMAX.OR.(INTMINT.AND.RMSINT.LE.GMAXINT)) THEN ! GMAX is in key module, so can be changed by changep call
+-!     IF (RMS.LE.GMAX.OR.(INTMINT.AND.RMSINT.LE.GMAXINT)) THEN ! GMAX is in key module, so can be changed by changep call
++! wales-27058 stops on the projected tangent-space RMS. Testing REALRMS
++! keeps stepping after that residual is already under GMAX.
++      IF (RMS.LE.GMAX.OR.(INTMINT.AND.RMSINT.LE.GMAXINT)) THEN
+          IF (CHRMMT.AND.ACESOLV) THEN
+             NCHENCALLS=ACEUPSTEP-1
+             CALL POTENTIAL(X,ENERGY,GSAVE,.TRUE.,.FALSE.,RMS,.FALSE.,.FALSE.)
+--- a/OPTIM/source/potential.F90
++++ b/OPTIM/source/potential.F90
+@@ -5237,14 +5237,9 @@
+                DUMMY2=SUM(VNEW(1:DEGFREEDOMS)**2)+SUM(BOX_PARAMSGRAD(BOX_INDEX(1:NBOX))**2)
+                RMS=MAX(SQRT(DUMMY2/(DEGFREEDOMS+NBOX)), 1.0D-100)
+             ELSE
++! wales-27058 divides by NOPT even when atoms are frozen. Dropping the
++! frozen coordinates inflates the RMS by sqrt(NOPT/Nfree).
+                RMSDOF=NOPT
+-               IF (FREEZE) THEN
+-                  IF (VARIABLES) THEN
+-                     RMSDOF=NOPT-NFREEZE
+-                  ELSE
+-                     RMSDOF=NOPT-3*NFREEZE
+-                  ENDIF
+-               ENDIF
+                DUMMY2=SUM(VNEW(1:3*NATOMS)**2)+SUM(BOX_PARAMSGRAD(BOX_INDEX(1:NBOX))**2)
+                RMS=MAX(SQRT(DUMMY2/(RMSDOF+NBOX)), 1.0D-100)
+             ENDIF
+@@ -5267,20 +5262,10 @@
+          IF (.FALSE.) THEN
+ #endif /* BIOVIA */
+          ELSE
++! wales-27058 keeps VSTAT's RMS over NOPT. Replacing it with the
++! free-coordinate count makes a frozen transition-state search miss GMAX.
+             RMSDOF=NOPT
+             CALL VSTAT(VNEW,TEMP,NOPT,NOPT)
+-            IF (FREEZE) THEN
+-               IF (VARIABLES) THEN
+-                  RMSDOF=NOPT-NFREEZE
+-               ELSE
+-                  RMSDOF=NOPT-3*NFREEZE
+-               ENDIF
+-               DUMMY2=0.0D0
+-               DO J1=1,NOPT
+-                  DUMMY2=DUMMY2+VNEW(J1)*VNEW(J1)
+-               ENDDO
+-               TEMP(5)=SQRT(DUMMY2/RMSDOF)
+-            ENDIF
+ !           IF (PTEST) WRITE(*,'(A,43X,G17.10,2X,A,G17.10)') ' potential> RMS force: ',TEMP(5),' |gradient|=', &
+             IF (PTEST) WRITE(*,'(A,G20.10,A,G20.10,A,G20.10)') ' potential> energy: ',ENERGY,' RMS force: ',TEMP(5),' |gradient|=', &
+             TEMP(5)*SQRT(1.0D0*(RMSDOF))
+--- a/OPTIM/source/secdiag.F90
++++ b/OPTIM/source/secdiag.F90
+@@ -385,14 +385,10 @@
+             ENDDO
+          END IF
+ !!!!! commenting projection of eigenvector component for debug DJW
++! wales-27058 divides the Rayleigh-Ritz residual by NOPT even when atoms
++! are frozen. Dropping the frozen coordinates from the divisor inflates
++! XRMS by sqrt(NOPT/Nfree) and makes CEIG miss by one extra step.
+          RMSDOF=NOPT
+-         IF (FREEZE) THEN
+-            IF (VARIABLES) THEN
+-               RMSDOF=NOPT-NFREEZE
+-            ELSE
+-               RMSDOF=NOPT-3*NFREEZE
+-            ENDIF
+-         ENDIF
+          XRMS=0.0D0
+          DO J1=1,NOPT
+             XRMS=XRMS+GL(J1)**2
+--- a/OPTIM/source/xmylbfgs.F90
++++ b/OPTIM/source/xmylbfgs.F90
+@@ -220,17 +220,9 @@
+          MFLAG=.TRUE.
+          IF (EVPERCENT1.GT.EVPC) MFLAG=.FALSE.
+ !
+-! Turn off convergence if eigenvalue is +ve and % condition is not met for two steps running.
+-! This check should guard against premature accidental convergence for small eigenvalues going through zero.
++! wales-27058 stops on the latest percent change, including a step-0
++! convergence. The later ITDONE==0 veto forces an extra Rayleigh-Ritz step.
+ !
+-         IF ((ITER.GT.0).AND.(EVPERCENT2.GT.EVPC)) MFLAG=.FALSE.
+-         IF (MFLAG.AND.(ITDONE.EQ.0)) THEN
+-!
+-! This setting was put in to try and get bfgsts working with BOXDERIV. It may help. DJW
+-!
+-            IF (DEBUG) WRITE(*,'(A)') ' xmylbfgs> Turning off convergence after 0 steps'
+-            MFLAG=.FALSE.
+-         ENDIF
+          IF (MFLAG) THEN
+             FIXIMAGE=.FALSE.
+             IF (PTEST) WRITE(*,'(A,I4,A,F15.7,A,F15.7,A,2G15.5)') ' xmylbfgs> Smallest eigenvalue converged in ',ITDONE, &
+@@ -592,7 +584,7 @@
+ !
+ !  Eigenvalue increased - try again with a smaller step size?
+ !
+-         IF ((NDECREASE.GT.2).AND.(.NOT.(NEWREAXFFT.AND.(NDECREASE.LT.10)))) THEN   ! decreasing the step size for castep doesn;t seem to help.
++         IF ((NDECREASE.GT.3).AND.(.NOT.(NEWREAXFFT.AND.(NDECREASE.LT.10)))) THEN   ! wales-27058 allows four decreases before a reset
+ !        IF ((NDECREASE.GT.5).OR.(CASTEP.OR.ONETEP.OR.CP2K)) THEN   ! decreasing the step size for castep doesn;t seem to help.
+                                                                                  ! could try this again one day!
+             NFAIL=NFAIL+1
+@@ -608,7 +600,7 @@
+                BOXG(1:NBOX) = BOXGBEFORE(1:NBOX)
+             ENDIF
+ ! mylbfgs has G(J1)=GLAST(J1) DJW
+-            IF (NFAIL.GT.0) THEN
++            IF (NFAIL.GT.2) THEN
+                FAILED=.TRUE.
+ !              PRINT *,'X at failure:'
+ !              PRINT '(3G20.10)',X(1:15)
+@@ -667,7 +659,9 @@
+       NPT=POINT*N
+       IF (BOXDERIVT) NPTBOX=POINT*NBOX
+       DO I=1,NDEG
+-         W(ISPT+NPT+I)= X(I)-XBEFORE(I)
++! wales-27058 records the proposed step before VECNORM/ORTHOGOPT. The later
++! X-XBEFORE form includes that normalisation and changes the next LBFGS step.
++         W(ISPT+NPT+I)= STP*W(ISPT+NPT+I)
+          W(IYPT+NPT+I)= G(I)-W(I)
+       ENDDO
+       IF (NDEG.LT.N) THEN

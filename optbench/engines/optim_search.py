@@ -54,6 +54,12 @@ def binary_path() -> Path:
     env = os.environ.get("OPTIM_BIN")
     if env:
         return Path(env)
+    for candidate in (
+        Path("/tmp/optimbld/OPTIM"),
+        Path("/tmp/src/wales-full/build-optim/OPTIM"),
+    ):
+        if candidate.is_file():
+            return candidate
     return Path("/tmp/src/wales-full/build-optim/OPTIM")
 
 
@@ -298,6 +304,10 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
     if stated and stated != problem_name:
         raise ValueError(f"{template_name} belongs to {stated}")
     section = _section(template)
+    if section["method"] in {"dneb", "newconnect", "paper-min", "paper-ts", "paper-rr"}:
+        from .optim_paper import run_paper
+
+        return run_paper(root, problem, template, output=output, workers=workers)
     if problem.get("suite") != "minimization" or section["method"] != "lbfgs":
         raise _unhooked(template_name)
     if template.get("noise"):

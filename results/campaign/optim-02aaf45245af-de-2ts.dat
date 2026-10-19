@@ -1,0 +1,19 @@
+# counter OPTIM energy+gradient calls. run_optim.sh greps that line and takes awk field 6.
+# success is the 2014 string 'Connected path found'. odata preamble de-2ts.txt. units lj.
+# potential is OPTIM LJDIFF in wales-27058. The snapshot newconnect leaves this pair set.
+force_calls 2900
+force_calls_min 665
+force_calls_max 7138
+force_calls_median 2596
+successes 51
+nfailed 0
+n 51
+transition_states 0
+code optim
+code_version svn-snapshot
+commit 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f
+algorithm DNEB + hybrid eigenvector following + Dijkstra
+template optim/de-2ts
+problem double-ended-saddle-search/lj38_2ts_separation
+tuning wales-2014
+counter harness

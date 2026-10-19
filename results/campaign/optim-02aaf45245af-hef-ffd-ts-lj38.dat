@@ -1,0 +1,18 @@
+# counter OPTIM energy+gradient calls. run_optim.sh greps that line and takes awk field 6.
+# success is the 2014 string '**** CONVERGED ****'. odata preamble ts-lj38.txt. units lj.
+force_calls 152
+force_calls_min 57
+force_calls_max 1585
+force_calls_median 119
+successes 200
+nfailed 0
+n 200
+transition_states 0
+code optim
+code_version svn-snapshot
+commit 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f
+algorithm hybrid eigenvector-following
+template optim/hef-ffd-ts-lj38
+problem tsopt/LJ38
+tuning wales-2014
+counter harness

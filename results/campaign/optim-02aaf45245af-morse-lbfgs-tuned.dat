@@ -1,0 +1,18 @@
+# counter OPTIM energy+gradient calls. run_optim.sh greps that line and takes awk field 6.
+# success is the 2014 string '**** CONVERGED ****'. odata preamble morse-min.txt. units morse-2014.
+force_calls 46
+force_calls_min 21
+force_calls_max 81
+force_calls_median 44
+successes 100
+nfailed 0
+n 100
+transition_states 0
+code optim
+code_version svn-snapshot
+commit 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f
+algorithm L-BFGS
+template optim/morse-lbfgs-tuned
+problem minimization/morse-bulk
+tuning wales-2014
+counter harness

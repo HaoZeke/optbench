@@ -1,0 +1,15 @@
+# OPTIM double-ended LJ38. The odata body is the 2014 archive preamble.
+id = "optim/de-lj38"
+engine = "optim"
+problem = "double-ended-saddle-search/lj38"
+code = "optim"
+code_version = "svn-snapshot"
+commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+algorithm = "DNEB + hybrid eigenvector following"
+tuning = "wales-2014"
+note = "archive/entries/double-ended-saddle-search/lj38/optim. The preamble is that odata file. Success is Converged to TS. The score is OPTIM's energy+gradient calls."
+
+[optim]
+method = "dneb"
+preamble = "templates/optim/preambles/de-lj38.txt"
+symbol = "AX"

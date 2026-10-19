@@ -1,0 +1,15 @@
+# OPTIM hybrid eigenvector-following on the 2014 LJ38 xyz set.
+id = "optim/hef-ffd-ts-lj38"
+engine = "optim"
+problem = "tsopt/LJ38"
+code = "optim"
+code_version = "svn-snapshot"
+commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+algorithm = "hybrid eigenvector-following"
+tuning = "wales-2014"
+note = "archive/entries/tsopt/LJ38/optim_ffd. Geometries are coords-xyz.tar.gz. The preamble is bfgsts 40 14 16 0.33, updates 82 10, bfgsconv 9.36585D-05, usediag 3. Success is **** CONVERGED ****. The score is OPTIM's energy+gradient calls."
+
+[optim]
+method = "paper-ts"
+preamble = "templates/optim/preambles/ts-lj38.txt"
+symbol = "AX"

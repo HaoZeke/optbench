@@ -1,0 +1,15 @@
+# OPTIM Morse bulk L-BFGS with the 2014 preamble.
+id = "optim/morse-lbfgs-tuned"
+engine = "optim"
+problem = "minimization/morse-bulk"
+code = "optim"
+code_version = "svn-snapshot"
+commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+algorithm = "L-BFGS"
+tuning = "wales-2014"
+note = "archive/entries/minimization/morse-bulk/optim. updates 100, maxbfgs 2.0/r0, bfgsmin is the RMS stop over D. Coordinates are divided by r0. The gradient matches morse_bulk.f90, which omits rho. Success is **** CONVERGED ****."
+
+[optim]
+method = "paper-min"
+preamble = "templates/optim/preambles/morse-min.txt"
+symbol = "M"
