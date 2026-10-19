@@ -2,9 +2,9 @@
 # A repeated coordinate is cached, so the gradient of that geometry is the same call.
 # The cap refuses the next search call and does not count it.
 # Success is a finite harness energy at or below -397.491331 with calls under the cap.
-# scored 6 of 200 starts
+# scored 10 of 200 starts
 # SciPy 1.18.1 basinhopping at the constructor defaults, with niter set to the force-call cap. The local minimizer is BFGS with the analytic gradient of optbench.potentials.lennard_jones. Temperature is 1, stepsize is 0.5, interval is 50, target_accept_rate is 0.5, and stepwise_factor is 0.9. The seed is 314159 plus the start index. Starts are centered. The force-call cap is 1000000, the cap stated on globalopt/lj75.
-nfailed 6
+nfailed 10
 code SciPy
 code_version 1.18.1
 commit e4e854eaa8f18d807cd3496028e257e36caa93cc
@@ -16,14 +16,14 @@ counter harness
 cap 1000000
 par2_mean 2000000
 wilson_low 0
-wilson_high 0.390334287902
+wilson_high 0.277532799863
 par2_median 2000000
 par2_median_low 2000000
 par2_median_high 2000000
-v2_nfailed 6
+v2_nfailed 10
 v2_successes 0
-n 6
+n 10
 energy_min -396.238512215
 energy_max -377.451191724
 partial true
-partial_reason scored 6 of 200 starts
+partial_reason scored 10 of 200 starts
