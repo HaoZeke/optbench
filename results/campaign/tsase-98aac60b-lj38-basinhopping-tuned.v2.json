@@ -18,7 +18,7 @@
         "force_calls_max": 2000000,
         "force_calls_median": 2000000.0,
         "force_calls_min": 75939,
-        "nfailed": 77
+        "nfailed": 78
       },
       "metrics": {
         "bootstrap_resamples": 2000,
@@ -28,27 +28,27 @@
         "iqr": 0.0,
         "iqr_high": 0.0,
         "iqr_low": 0.0,
-        "mean": 3901255.898734177,
+        "mean": 3902490.2,
         "median": 4000000.0,
         "median_high": 4000000.0,
         "median_low": 4000000.0,
-        "n": 79,
-        "n_cap": 77,
+        "n": 80,
+        "n_cap": 78,
         "n_crash": 0,
         "n_divergence": 0,
         "n_wrong_stationary": 0,
-        "nfailed": 77,
-        "par2_mean": 3901255.898734177,
+        "nfailed": 78,
+        "par2_mean": 3902490.2,
         "par_applied": true,
         "par_factor": 2,
         "q25": 4000000.0,
         "q75": 4000000.0,
         "scoring": "par2-wilson-bootstrap",
         "success_only_mean": 99608.0,
-        "success_rate": 0.02531645569620253,
+        "success_rate": 0.025,
         "successes": 2,
-        "wilson_high": 0.08768584628891136,
-        "wilson_low": 0.006970367306584818
+        "wilson_high": 0.0866443298557801,
+        "wilson_low": 0.006882893202970648
       },
       "parameters": {
         "distribution": "uniform",
@@ -1424,6 +1424,23 @@
           ],
           "schema": "optbench.start/v2",
           "start": "78",
+          "success": false,
+          "threshold": -173.92742624400097,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -170.57569356791055,
+          "failure": "cap",
+          "force_calls": 2000000,
+          "lowest_energy": -170.57569356791055,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "79",
           "success": false,
           "threshold": -173.92742624400097,
           "verify_calls": 0
