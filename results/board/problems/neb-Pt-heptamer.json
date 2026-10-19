@@ -377,7 +377,7 @@
       "eon-svn/neb-pt-lbfgs r2549 campaign r2549": 1.0536049848239342,
       "eon-svn/neb-pt-neb r2549 default campaign, asv r2549": 1.0651830615802411,
       "eon-svn/neb-pt-qm r2549 campaign r2549": 0.5441696075464275,
-      "optim/dneb-hef 02aaf452 default campaign, asv 02aaf45": 0.752574989159953,
+      "optim/dneb-hef 02aaf452 problem-images campaign, asv 02aaf45": 0.752574989159953,
       "rgsaddle/ci-neb 0.2.2 default campaign, asv c0db2b8": 0.7988872961851808,
       "rgsaddle/ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 1.111495368605469,
       "rgsaddle/ew-ci-neb 0.2.2 default campaign, asv c0db2b8": 0.752574989159953,
@@ -457,7 +457,7 @@
         1.0,
         1.0
       ],
-      "optim/dneb-hef 02aaf452 default campaign, asv 02aaf45": [
+      "optim/dneb-hef 02aaf452 problem-images campaign, asv 02aaf45": [
         0.0,
         0.0,
         1.0,
@@ -573,7 +573,7 @@
       "eon-svn/neb-pt-lbfgs r2549 campaign r2549": 1.0,
       "eon-svn/neb-pt-neb r2549 default campaign, asv r2549": 1.0,
       "eon-svn/neb-pt-qm r2549 campaign r2549": 1.0,
-      "optim/dneb-hef 02aaf452 default campaign, asv 02aaf45": 1.0,
+      "optim/dneb-hef 02aaf452 problem-images campaign, asv 02aaf45": 1.0,
       "rgsaddle/ci-neb 0.2.2 default campaign, asv c0db2b8": 1.0,
       "rgsaddle/ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 1.0,
       "rgsaddle/ew-ci-neb 0.2.2 default campaign, asv c0db2b8": 1.0,
@@ -1367,7 +1367,7 @@
       "asv_commit": "a27df9f2a91387a9b1b477205ae12bde4cefe028",
       "call_unit": "total",
       "cap": 10000,
-      "code": "OPTIM",
+      "code": "optim",
       "code_version": "02aaf452",
       "commit": "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f",
       "comparable": true,
@@ -1404,7 +1404,7 @@
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "optim/dneb-hef",
-      "tuning": "default",
+      "tuning": "problem-images",
       "wilson_high": 1.0,
       "wilson_low": 0.7719046276458016
     },

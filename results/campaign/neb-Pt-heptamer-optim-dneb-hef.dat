@@ -1,5 +1,7 @@
 # counter harness socket calculate, one POTENTIAL entry, no cache
 # force_calls count raw potential evaluations and are not divided by the image count
+# problem-images setup: NEWCONNECT 1 1, NEWNEB at the problem image count, BFGSMIN, STEPS at the cap
+# the 2014 preamble rows are optim/de-lj38, optim/de-pt, and optim/de-2ts
 # the mean is round-half-even over successes; cap, force, or Hessian index other than 1 is a failure
 force_calls 914
 force_calls_min 621
@@ -11,12 +13,12 @@ successes 13
 nfailed 0
 n 13
 transition_states 13
-code OPTIM
+code optim
 code_version 02aaf452
 commit 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f
-algorithm DNEB/HEF
+algorithm DNEB/HEF problem images
 template optim/dneb-hef
-tuning default
+tuning problem-images
 problem neb/Pt-heptamer
 counter harness
 images 8

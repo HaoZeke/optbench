@@ -162,13 +162,13 @@ repository = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
 ref = "svn-snapshot"
 commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
 committed = "2026-10-18"
-note = "No public git commit. The pin is the sha256 of the Wales svn.tar.bz2 snapshot, 122743078 bytes. The banner is OPTIM version 02aaf452. Minimization L-BFGS calls the ASE socket and pes.evaluate. OPTIM's own call counter is not a score. DNEB/HEF connect calls the harness socket in codes/optim. One POTENTIAL entry is one uncached calculate. The potential is pes.evaluate. The connection quench is LBFGS (BFGSMIN) because that potential has no Hessian. ALIGN is off. The build uses system BLAS and LAPACK, and OpenMP is off."
+note = "No public git commit. The pin is the sha256 of the Wales svn.tar.bz2 snapshot, 122743078 bytes. The banner is OPTIM version 02aaf452. The 2014 rows used wales-27058 and stay in the archive. Minimization L-BFGS, the archived double-ended preambles, and PATHSAMPLE call the ASE socket. The score there is pes.evaluate summed over every OPTIM child. OPTIM's own call counter is not a score. optim/de-lj38, optim/de-pt, and optim/de-2ts are those 2014 preambles. optim/dneb-hef is the problem-image band: NEWCONNECT 1 1, NEWNEB at the problem image count, BFGSMIN, and the harness socket in codes/optim. One POTENTIAL entry is one uncached calculate. ALIGN is off. The build uses system BLAS and LAPACK, and OpenMP is off."
 
 [[template]]
 id = "optim/dneb-hef"
 code = "optim"
 problem = "double-ended-saddle-search/lj38"
-profile = "default"
+profile = "problem-images"
 task = "double-ended-saddle-search"
 ranked = true
 
@@ -176,7 +176,7 @@ ranked = true
 id = "optim/dneb-hef"
 code = "optim"
 problem = "double-ended-saddle-search/lj38_2ts_separation"
-profile = "default"
+profile = "problem-images"
 task = "double-ended-saddle-search"
 ranked = true
 
@@ -184,7 +184,7 @@ ranked = true
 id = "optim/dneb-hef"
 code = "optim"
 problem = "double-ended-saddle-search/pt-island"
-profile = "default"
+profile = "problem-images"
 task = "double-ended-saddle-search"
 ranked = true
 
@@ -192,7 +192,7 @@ ranked = true
 id = "optim/dneb-hef"
 code = "optim"
 problem = "neb/Pt-heptamer"
-profile = "default"
+profile = "problem-images"
 task = "neb"
 ranked = true
 

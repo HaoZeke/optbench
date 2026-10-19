@@ -20,8 +20,9 @@ success-only median. A row with no success has no median.
 | problem | template | successes | failures | median calls |
 | --- | --- | --- | --- | --- |
 | lowest-eigenvector/lj38 | partn/mode-lj38 | 174/200 | 26 divergence | 22 |
-| tsopt/pt-island | partn/ts-pt | 45/49 | 4 crash | 247 |
-| tsopt/LJ38 | partn/ts-lj38 | 0/200 | 200 crash | — |
+| tsopt/pt-island | partn/ts-pt | 49/49 | 0 | 325 |
+| tsopt/LJ38 | partn/ts-lj38 | 178/200 | 21 cap, 1 crash | 3302 |
+| saddle-search/pt-island | partn/saddle-pt | 1/200 | 186 divergence, 13 crash | 925 |
 | lowest-eigenvector/lj38 | tsase/mode-lj38 | 178/200 | 22 divergence | 221.5 |
 | tsopt/pt-island | tsase/dimer-pt | 49/49 | 0 | 892 |
 | tsopt/LJ38 | tsase/dimer-lj38 | 0/200 | 200 cap | — |
@@ -86,6 +87,16 @@ success-only median. A row with no success has no median.
 | minimization/morse-bulk | dlfind/sd-morse | 13/100 | 87 wrong stationary | 253 |
 | minimization/morse-bulk | optim/lbfgs-morse | 13/100 | 87 wrong stationary | 72 |
 | minimization/lj38 | optim/lbfgs-lj38 | 998/1000 | 2 wrong stationary | 217 |
+| double-ended-saddle-search/lj38 | optim/de-lj38 | 50/50 | 0 | 129 |
+| double-ended-saddle-search/lj38 | pathsample/de-lj38 | 50/50 | 0 | 131 |
+| double-ended-saddle-search/lj38_2ts_separation | optim/de-2ts | 44/51 | 7 cap | 2832.5 |
+| double-ended-saddle-search/lj38_2ts_separation | pathsample/de-2ts | 43/51 | 8 cap | 2972 |
+| double-ended-saddle-search/pt-island | optim/de-pt | 59/59 | 0 | 133 |
+| double-ended-saddle-search/pt-island | pathsample/de-pt | 59/59 | 0 | 137 |
+| double-ended-saddle-search/lj38 | optim/dneb-hef | 10/50 | 40 cap | 1981.5 |
+| double-ended-saddle-search/lj38_2ts_separation | optim/dneb-hef | 23/51 | 27 cap, 1 wrong stationary | 5760 |
+| double-ended-saddle-search/pt-island | optim/dneb-hef | 59/59 | 0 | 1379 |
+| neb/Pt-heptamer | optim/dneb-hef | 13/13 | 0 | 888 |
 | double-ended-saddle-search/lj38 | compass/sqnm | 47/50 | 3 cap | 1221 |
 | double-ended-saddle-search/lj38_2ts_separation | compass/sqnm | 41/51 | 9 cap, 1 wrong stationary | 2265 |
 | neb/Pt-heptamer | compass/sqnm | 13/13 | 0 | 548 |
@@ -104,33 +115,25 @@ success-only median. A row with no success has no median.
 | minimization/lj38 | pysisyphus/sd-lj38 | 205/1000 | 795 cap | 808 |
 
 The rgsaddle band campaigns on `neb/Pt-heptamer` and the three double-ended
-problems are on disk (12 templates each). The saddle-search catalog on
-`saddle-search/pt-island` is still running and has not written a file. A
-sample of that process was on search 387 of the first repetition, with 1
-connected saddle. The eight rgmin `lj38-noise` L-BFGS rows are on disk.
+problems are on disk (12 templates each). The eight rgmin `lj38-noise` L-BFGS rows are on disk.
 Both tunings set `maxstep` 0.2, and each pair matches. Every start met the
 force stop. The v2 failures are Hessian index not 0. Zero noise is 996 of
 1000. `1e-4` is 994 of 1000. `1e-3` is 989 of 1000. `1e-2` is 884 of 1000,
 116 wrong stationary, success median 161.
 
-pARTn on `tsopt/LJ38` stops with `pARTn error -9: BOX EXPLOSION` on every
-start. That string is the library check in `block_perprelax.f90`: the
-perpendicular step aborts when any atom's force norm exceeds `1e4`. It is
-not a harness box, unit, or cluster-cell error. Start `0000` lies in
-`[50.000, 53.394]`, spans `3.24712`, `3.34183`, and `3.39366`. The missing-box cell is the diagonal
-`223.57464`. A cell of diagonal `1e6` aborted on the same step, call 49,
-energy `3.04939e6`. `engine_units` `lammps/lj` leaves force, length, and
-time unscaled, and the initial energy is `-167.657` with force norm
-`2.98891`. With `fire_dt_init` 0.05 the library's own FIRE step grew to
-length 10.2, which is larger than the cluster, and the next atomic force
-crossed `1e4`. The library's `LAMMPS.LJ.SaddleRefine` input for these same
-geometries sets free boundaries, timestep 0.015, and `nperp_limitation`
-`10, 20, 30, 40, 50`. Those settings on this `next_displ` loop still
-aborted, at call 147, energy `4.0435e6`, after a perpendicular step of
-1.656. The LAMMPS example caps that step with `min_style fire`. The
-standalone FIRE cap in `m_artn_fire.f90` is commented out. The mode search
-and the Morse tsopt row are the other two pARTn point scores. `nevalf` is
-not the count.
+pARTn on `tsopt/LJ38` with `fire_dt_init` 0.05 grew a FIRE step to length
+10.2. `block_perprelax.f90` then aborted every start with `BOX EXPLOSION`
+once an atomic force norm passed `1e4`. The cluster and the cell were
+already the harness geometry. `LAMMPS.LJ.SaddleRefine` uses timestep 0.015
+and `dmax` 0.1. `dmax` is a LAMMPS `fix artn` input, and `engine="other"`
+has no such cap. The commented `step_max` in `m_artn_fire.f90` is not a
+user input. A run at `fire_dt_init` 0.015 and `fire_dt_max_f` 10 finished
+165 of 200, with 26 `BOX EXPLOSION` crashes and 9 `EIGENVALUE LOST`
+crashes, success median 407. The row on disk uses `fire_dt_init` 0.005
+and `fire_dt_max_f` 1, so the timestep cannot grow. That row is 178 of
+200, 21 cap, 1 `EIGENVALUE LOST` on start `0023` at 486 calls, success
+median 3302. The largest step in that row is 0.05. `nevalf` is not the
+count.
 
 TSASE MDMin on LJ38 hits the cap of 10000 on every start. The step limit
 keeps the force above the stop. The cap record has no final force norm,
@@ -159,19 +162,103 @@ other 87 meet the force stop with a Hessian index other than 0, so they
 are wrong stationary. The success median is 72. Start `pos_0000` took 55
 harness calls and stopped at force `0.000842553062284986`, energy
 `-1421.4513232624358`, vibrational index 6. `optim/unhooked` writes nothing.
-Noise is not scored: the relay has no noisy-force window. Saddle search,
-NEB, tsopt, and hTST are not scored: those OPTIM keywords are not connected
-to this socket. PATHSAMPLE is in the same snapshot. The PATHSAMPLE target linked
-(gfortran, `WITH_OPENMP` off). It does not call `pes.evaluate`. It writes
-`odata.*` and submits the `EXEC` program, which is OPTIM. No PATHSAMPLE
-number is written.
+Noise is not scored: the relay has no noisy-force window. tsopt and hTST
+are not scored on this socket. The double-ended `optim/de-*` and
+`pathsample/de-*` rows use the 2014 `odata` preambles. `optim/dneb-hef`
+is the problem-image band and uses the harness socket in `codes/optim`.
+The scored geometry is the socket frame whose energy matches the line
+printed before `Converged to TS`. `lbfgs.xyz` is written at the start of
+that `mylbfgs` call. PATHSAMPLE launches those OPTIM jobs. The score sums
+`pes.evaluate` over every child, including the two endpoint quenches
+(`DUMPDATA`, `NOFRQS`). Wall time is the parent process.
+
+The 2014 archive rows stay on the board. Their binary is `wales-27058.tar.bz2`.
+This pin is the svn snapshot above. LJ38 DNEB in the archive is mean 131,
+median 120, min 66, max 260, 0 failed, 50 pairs. `optim/de-lj38` is 50 of
+50, mean 147, median 129, min 74, max 308. `pathsample/de-lj38` is 50 of
+50, mean 149, median 131, min 76, max 310. On checked pairs the harness
+count matched OPTIM's energy-and-gradient count. PATHSAMPLE adds the two
+endpoint quenches, which is 2 calls on LJ38. Pt-island archive OPTIM is
+mean 103, median 98, min 59, max 194, and `optim-6` is mean 117, median
+115, min 60, max 201. `optim/de-pt` is 59 of 59, mean 138, median 133, min
+95, max 327. `pathsample/de-pt` is 59 of 59, mean 146, median 137, min 99,
+max 459. Morse coordinates are written to OPTIM in units of `r0` and the
+energy in units of `D`. The harness potential stays eV and angstrom. The
+scaled endpoint quench takes more LBFGS steps than the LJ quench, so
+PATHSAMPLE sits about 8 calls above direct OPTIM. `lj38_2ts_separation`
+in the archive is mean 2885, median 2565, min 665, max 7138, 0 failed, and
+the path carries 5 transition states. `optim/de-2ts` is 44 of 51, 7 cap,
+success mean 3454, median 2832.5, min 695, max 9680. `pathsample/de-2ts`
+is 43 of 51, 8 cap, success mean 3507, median 2972, min 698, max 9658.
+The cap is the problem limit of 10000. The seven OPTIM pairs that hit it
+still have a stored force under `1e-5`, because a transition state was
+printed and the connection search kept calling the potential.
+
+`optim/dneb-hef` is the same binary and a different `odata`. `NEWCONNECT`
+is `1 1`. `NEWNEB` takes the problem interior image count, 30 iterations
+per image, and RMS `0.01`, so LJ38 is `NEWNEB 5 150 0.01`. The path quench
+is `BFGSMIN`. `USEDIAG` stays at the compiled default of 2. `STEPS` is the
+problem cap. The count is one `POTENTIAL` entry. LJ38 is 10 of 50, 40 cap,
+success median 1981.5, mean 2386.62, PAR-2 4386.62. A 150-iteration DNEB
+on 5 images, then hybrid eigenvector following out to that cap, is the
+extra cost against `NEWNEB 2 6 0.4`, `BFGSTS 16 13 32 0.52 100`,
+`USEDIAG 3`, and `STEPS 200`. On `pair_39` of the two-saddle set OPTIM
+reported 2505 energy-and-gradient calls and the harness recorded 2506.
+
+Pt island splits the same way. `optim/de-pt` writes coordinates over `r0`
+and energy over `D`, with `NEWNEB 2 6 0.03`, `NEBK 5`, and `STEPS 200`.
+`optim/dneb-hef` keeps eV and angstrom, `NEWNEB 3 90 0.01`, max step 0.2,
+and `STEPS 3000`. It is 59 of 59, median 1379, mean 1465.73.
+
+`lj38_2ts_separation` on `optim/dneb-hef` is 23 of 51, 27 cap, 1 wrong
+stationary, success median 5760, mean 8115.20, PAR-2 13752.33. `pair_39`
+is the wrong stationary, 2506 calls, force norm `8.011279149672727e-05`,
+energy `-167.541922837206`. OPTIM printed `Converged to TS` after 5
+iterations. The `bfgsts` displacements along the lowest mode both lowered
+the energy, by `3.825341196e-6` and `3.817249535e-6`. The free-atom
+Hessian, after the six rigid modes are removed, has curvatures `-7.646639`,
+`-0.025972`, and `-0.025916`. The index is 3. The path.info line `3 C3`
+is the order of the point group C3. The 2014 `run.sh` for this problem
+scores the string `Connected path found`. This run printed `Number of
+allowed connection steps reached`.
+
+Pt-heptamer has no OPTIM line in the 2014 archive. `optim/dneb-hef` is
+the problem-image row there: 8 interior images, cap 10000, force norm
+0.01. It is 13 of 13, median 888, mean 913.54.
 
 ## pARTn
 
 Pin `artn`, 1.1.0, DEVEL `9b753517`. `libartn.so` is the engine plugin and
 the standalone `next_displ` loop. Morse uses `lammps/metal`. Lennard-Jones
-uses `lammps/lj`. The saddle-search catalog on `saddle-search/pt-island`
-is running. It has not written a file.
+uses `lammps/lj`. Each returned displacement is applied until `has_sad`.
+The displacement on that call is the push off the saddle, and the loop
+stops there. The scored point is `tau_sad`, re-evaluated in verification
+because the search already paid for that geometry. The 2014 archive has
+no ARTn row. The eOn and pele saddle rows stay.
+
+`tsopt/pt-island` with the Pt111 knobs (`tuning` `pt111`, `lpush_final`
+false, `fire_dt_init` 4.134, `fire_dt_max_f` 1) is 49 of 49, success
+median 325. The earlier `tuning` `default` row was 45 of 49, 4
+eigenvalue-lost crashes, median 247.
+
+`saddle-search/pt-island` uses the OptBench saddle script and the Pt111
+FIRE timestep. `search_budget` is 2000, the authors' `minimize` maxeval.
+`fire_dt_max_f` is 2. The authors also set LAMMPS `dmax` 8, which this
+loop cannot set. Two hundred searches from the script's in-plane push
+(1 to 7 of atoms 0-6, length 0.05 to 0.5) stored 187 index-1 saddles.
+Thirteen searches crashed with `EIGENVALUE LOST`. One search meets the
+harness link: exactly one endpoint inside Cartesian RMSD 0.5, barrier
+0.996 eV, 925 calls. The repetition total is 154419, with 3 unique
+saddles and fraction connected 0.005. The success median is 925. The
+other 186 are divergence. Ten searches have an endpoint RMSD above 0.5.
+The other nine of those repeat a stored saddle or have a barrier of at
+least 1.5 eV. The common products sit near RMSD 0.22 and 0.32, so both
+endpoints fall inside 0.5 and the harness link fails. The OptBench
+catalogue calls a saddle connected when the nearer minimum's `delr` is
+under 0.5. That is a different test from the harness XOR. The goal of 27
+connected saddles is not met. The ranked row is one record per search,
+with cap 6000 (the pARTn budget plus the two endpoint budgets of 2000).
+The PAR-2 mean is 11944.625.
 
 ## TSASE
 

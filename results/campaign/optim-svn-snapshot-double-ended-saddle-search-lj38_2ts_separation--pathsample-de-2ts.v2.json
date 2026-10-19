@@ -1,0 +1,68 @@
+{
+  "counter": "harness",
+  "legacy": {
+    "force_calls": 3507,
+    "force_calls_max": 9658,
+    "force_calls_median": 2972,
+    "force_calls_min": 698,
+    "n": 51,
+    "nfailed": 8,
+    "successes": 43,
+    "transition_states": 43
+  },
+  "problem": "double-ended-saddle-search/lj38_2ts_separation",
+  "provenance": {
+    "code": "optim",
+    "code_version": "svn-snapshot",
+    "commit": "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f",
+    "machine": {
+      "machine": "x86_64",
+      "node": "cursor",
+      "python": "3.12.3",
+      "system": "Linux"
+    },
+    "parameters": {
+      "archive_force_calls": 2885,
+      "attempts": 1,
+      "connections": 1,
+      "counter": "harness",
+      "cycles": 1,
+      "driver": "PATHSAMPLE",
+      "endpoint": "templates/optim/preambles/min-lj.txt",
+      "preamble": "templates/optim/preambles/de-2ts.txt",
+      "socket": "ASE"
+    }
+  },
+  "schema": "optbench.score/v2",
+  "score": {
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 20261015,
+    "cap": 10000,
+    "includes_failures": true,
+    "iqr": 5148.5,
+    "iqr_high": 13166.0,
+    "iqr_low": 3135.0,
+    "mean": 6094.490196078431,
+    "median": 3377.0,
+    "median_high": 5328.0,
+    "median_low": 2547.0,
+    "n": 51,
+    "n_cap": 8,
+    "n_crash": 0,
+    "n_divergence": 0,
+    "n_wrong_stationary": 0,
+    "nfailed": 8,
+    "par2_mean": 6094.490196078431,
+    "par_applied": true,
+    "par_factor": 2,
+    "q25": 1801.5,
+    "q75": 6950.0,
+    "scoring": "par2-wilson-bootstrap",
+    "success_only_mean": 3507.4186046511627,
+    "success_rate": 0.8431372549019608,
+    "successes": 43,
+    "wilson_high": 0.9183077677995128,
+    "wilson_low": 0.7198955322701224
+  },
+  "template": "pathsample/de-2ts"
+}

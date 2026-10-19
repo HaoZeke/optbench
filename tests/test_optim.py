@@ -32,10 +32,10 @@ def test_registry_pin_matches_the_template():
     template = load_template(ROOT, "optim/dneb-hef")
     assert template["engine"] == "optim-connect"
     assert template["commit"] == COMMIT
-    assert template["code"] == "OPTIM"
+    assert template["code"] == "optim"
     assert template["code_version"] == "02aaf452"
-    assert template["algorithm"] == "DNEB/HEF"
-    assert template["tuning"] == "default"
+    assert template["algorithm"] == "DNEB/HEF problem images"
+    assert template["tuning"] == "problem-images"
     problem = resolve_problem(ROOT, "double-ended-saddle-search/lj38")
     settings = _settings(template, problem, COMMIT)
     assert settings["n_interior"] == 5

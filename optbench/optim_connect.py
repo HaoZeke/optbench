@@ -4,6 +4,11 @@ The binary is the Wales OPTIM build pinned in ``codes/registry.toml``.
 Each ``POTENTIAL`` entry is one uncached socket calculate on the spec
 potential. The judged point is a refined saddle from that connect run.
 Verification Hessian calls are not search cost.
+
+This is the problem-image setup (``optim/dneb-hef``). Image count, step
+length, and ``STEPS`` come from the problem. The 2014 preambles live in
+``templates/optim/preambles`` and are scored by ``optim/de-lj38``,
+``optim/de-pt``, and ``optim/de-2ts``.
 """
 
 from __future__ import annotations
@@ -287,7 +292,12 @@ def _judge(
     cap: int,
     project_rigid: bool,
 ) -> dict:
-    """Pick a dumped saddle. One search call reads its force. The Hessian is verification."""
+    """Pick a dumped saddle. One search call reads its force. The Hessian is verification.
+
+    OPTIM's ``Converged to TS`` line requires a negative lowest mode.
+    The harness index is the free-atom Hessian after rigid projection.
+    A higher index is ``wrong_stationary`` when that line is present.
+    """
     mask = np.asarray(free, dtype=bool)
     box_flat = None if box is None else tuple(float(value) for value in np.asarray(box, dtype=np.float64).reshape(-1))
 

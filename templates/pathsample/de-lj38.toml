@@ -1,0 +1,20 @@
+# PATHSAMPLE on the 2014 LJ38 double-ended preamble.
+id = "pathsample/de-lj38"
+engine = "pathsample"
+problem = "double-ended-saddle-search/lj38"
+code = "optim"
+code_version = "svn-snapshot"
+commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+algorithm = "PATHSAMPLE"
+tuning = "wales-2014"
+note = "DIJINITSTART. odata.connect is the 2014 DNEB preamble. odata.start and odata.finish are the 2014 LJ38 minimizer plus DUMPDATA and NOFRQS. CONNECTIONS 1 1 is one connect attempt. The score sums pes.evaluate over every OPTIM child. The archive OPTIM mean is 131 from one process."
+
+[pathsample]
+preamble = "templates/optim/preambles/de-lj38.txt"
+endpoint = "templates/optim/preambles/min-lj.txt"
+symbol = "AX"
+cycles = 1
+connections = 1
+attempts = 1
+archive_force_calls = 131
+timeout = 7200
