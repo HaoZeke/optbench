@@ -256702,5 +256702,589 @@
         "unit": "fraction",
         "version": "54289beee97255c41b6c66e2b89008ae5007043ad1c9d7012fb42f0495113694"
     },
-    "version": 2
+    "version": 2,
+    "bench_flame.FlameLj150Minhocao.time_search": {
+        "code": "class _FlameSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _binary_ready():\n            raise NotImplementedError(\"FLAME binary is not available\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_flame.FlameLj150Minhocao.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'314159'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 86400,
+        "type": "time",
+        "unit": "seconds",
+        "version": "e7a60582e1570a2bf8a8e6f99e66960d38f8d454f5d87ce8749455d20ff1a194",
+        "warmup_time": 0
+    },
+    "bench_flame.FlameLj150Minhocao.track_failure_cap": {
+        "code": "class _FlameSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _binary_ready():\n            raise NotImplementedError(\"FLAME binary is not available\")\n        self.record = None",
+        "name": "bench_flame.FlameLj150Minhocao.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'314159'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 86400,
+        "type": "track",
+        "unit": "count",
+        "version": "d06e67b80229947e8620d8fcbaf140d14ecf534124cd0f3e9edd0b6157f4b026"
+    },
+    "bench_flame.FlameLj150Minhocao.track_failure_crash": {
+        "code": "class _FlameSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _binary_ready():\n            raise NotImplementedError(\"FLAME binary is not available\")\n        self.record = None",
+        "name": "bench_flame.FlameLj150Minhocao.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'314159'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 86400,
+        "type": "track",
+        "unit": "count",
+        "version": "bed0657cbfb3428af38ffdc3a9abdda3ef2b858ba893bbaa2d55256aeefbf2b9"
+    },
+    "bench_flame.FlameLj150Minhocao.track_failure_divergence": {
+        "code": "class _FlameSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _binary_ready():\n            raise NotImplementedError(\"FLAME binary is not available\")\n        self.record = None",
+        "name": "bench_flame.FlameLj150Minhocao.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'314159'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 86400,
+        "type": "track",
+        "unit": "count",
+        "version": "c5a4f3279faa3b1fe79352e1dc7e62007317b9e2129b94fba92c787a17066103"
+    },
+    "bench_flame.FlameLj150Minhocao.track_failure_wrong_stationary": {
+        "code": "class _FlameSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _binary_ready():\n            raise NotImplementedError(\"FLAME binary is not available\")\n        self.record = None",
+        "name": "bench_flame.FlameLj150Minhocao.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'314159'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 86400,
+        "type": "track",
+        "unit": "count",
+        "version": "f4eb46504ccafce2a1af39e354e91305805b82c3e67deae2961ceb54a0f977e3"
+    },
+    "bench_flame.FlameLj150Minhocao.track_force_calls": {
+        "code": "class _FlameSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _binary_ready():\n            raise NotImplementedError(\"FLAME binary is not available\")\n        self.record = None",
+        "name": "bench_flame.FlameLj150Minhocao.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'314159'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 86400,
+        "type": "track",
+        "unit": "force calls",
+        "version": "4b6e02e5fd9fe1ade249fb77c6310d88f31f72a929c61f69f6777818cdb1da1a"
+    },
+    "bench_flame.FlameLj150Minhocao.track_success": {
+        "code": "class _FlameSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _binary_ready():\n            raise NotImplementedError(\"FLAME binary is not available\")\n        self.record = None",
+        "name": "bench_flame.FlameLj150Minhocao.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'314159'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 86400,
+        "type": "track",
+        "unit": "fraction",
+        "version": "b28abc022947ff439f8019ac0d1d6b6b5b2fddd59ca830bd89f44be0138f6b5e"
+    },
+    "bench_flame.FlameLj38Minhocao.time_search": {
+        "code": "class _FlameSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _binary_ready():\n            raise NotImplementedError(\"FLAME binary is not available\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_flame.FlameLj38Minhocao.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'314159'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 86400,
+        "type": "time",
+        "unit": "seconds",
+        "version": "e7a60582e1570a2bf8a8e6f99e66960d38f8d454f5d87ce8749455d20ff1a194",
+        "warmup_time": 0
+    },
+    "bench_flame.FlameLj38Minhocao.track_failure_cap": {
+        "code": "class _FlameSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _binary_ready():\n            raise NotImplementedError(\"FLAME binary is not available\")\n        self.record = None",
+        "name": "bench_flame.FlameLj38Minhocao.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'314159'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 86400,
+        "type": "track",
+        "unit": "count",
+        "version": "d06e67b80229947e8620d8fcbaf140d14ecf534124cd0f3e9edd0b6157f4b026"
+    },
+    "bench_flame.FlameLj38Minhocao.track_failure_crash": {
+        "code": "class _FlameSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _binary_ready():\n            raise NotImplementedError(\"FLAME binary is not available\")\n        self.record = None",
+        "name": "bench_flame.FlameLj38Minhocao.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'314159'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 86400,
+        "type": "track",
+        "unit": "count",
+        "version": "bed0657cbfb3428af38ffdc3a9abdda3ef2b858ba893bbaa2d55256aeefbf2b9"
+    },
+    "bench_flame.FlameLj38Minhocao.track_failure_divergence": {
+        "code": "class _FlameSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _binary_ready():\n            raise NotImplementedError(\"FLAME binary is not available\")\n        self.record = None",
+        "name": "bench_flame.FlameLj38Minhocao.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'314159'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 86400,
+        "type": "track",
+        "unit": "count",
+        "version": "c5a4f3279faa3b1fe79352e1dc7e62007317b9e2129b94fba92c787a17066103"
+    },
+    "bench_flame.FlameLj38Minhocao.track_failure_wrong_stationary": {
+        "code": "class _FlameSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _binary_ready():\n            raise NotImplementedError(\"FLAME binary is not available\")\n        self.record = None",
+        "name": "bench_flame.FlameLj38Minhocao.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'314159'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 86400,
+        "type": "track",
+        "unit": "count",
+        "version": "f4eb46504ccafce2a1af39e354e91305805b82c3e67deae2961ceb54a0f977e3"
+    },
+    "bench_flame.FlameLj38Minhocao.track_force_calls": {
+        "code": "class _FlameSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _binary_ready():\n            raise NotImplementedError(\"FLAME binary is not available\")\n        self.record = None",
+        "name": "bench_flame.FlameLj38Minhocao.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'314159'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 86400,
+        "type": "track",
+        "unit": "force calls",
+        "version": "4b6e02e5fd9fe1ade249fb77c6310d88f31f72a929c61f69f6777818cdb1da1a"
+    },
+    "bench_flame.FlameLj38Minhocao.track_success": {
+        "code": "class _FlameSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _binary_ready():\n            raise NotImplementedError(\"FLAME binary is not available\")\n        self.record = None",
+        "name": "bench_flame.FlameLj38Minhocao.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'314159'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 86400,
+        "type": "track",
+        "unit": "fraction",
+        "version": "b28abc022947ff439f8019ac0d1d6b6b5b2fddd59ca830bd89f44be0138f6b5e"
+    },
+    "bench_flame.FlameLj75Minhocao.time_search": {
+        "code": "class _FlameSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _binary_ready():\n            raise NotImplementedError(\"FLAME binary is not available\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_flame.FlameLj75Minhocao.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'314159'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 86400,
+        "type": "time",
+        "unit": "seconds",
+        "version": "e7a60582e1570a2bf8a8e6f99e66960d38f8d454f5d87ce8749455d20ff1a194",
+        "warmup_time": 0
+    },
+    "bench_flame.FlameLj75Minhocao.track_failure_cap": {
+        "code": "class _FlameSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _binary_ready():\n            raise NotImplementedError(\"FLAME binary is not available\")\n        self.record = None",
+        "name": "bench_flame.FlameLj75Minhocao.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'314159'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 86400,
+        "type": "track",
+        "unit": "count",
+        "version": "d06e67b80229947e8620d8fcbaf140d14ecf534124cd0f3e9edd0b6157f4b026"
+    },
+    "bench_flame.FlameLj75Minhocao.track_failure_crash": {
+        "code": "class _FlameSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _binary_ready():\n            raise NotImplementedError(\"FLAME binary is not available\")\n        self.record = None",
+        "name": "bench_flame.FlameLj75Minhocao.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'314159'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 86400,
+        "type": "track",
+        "unit": "count",
+        "version": "bed0657cbfb3428af38ffdc3a9abdda3ef2b858ba893bbaa2d55256aeefbf2b9"
+    },
+    "bench_flame.FlameLj75Minhocao.track_failure_divergence": {
+        "code": "class _FlameSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _binary_ready():\n            raise NotImplementedError(\"FLAME binary is not available\")\n        self.record = None",
+        "name": "bench_flame.FlameLj75Minhocao.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'314159'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 86400,
+        "type": "track",
+        "unit": "count",
+        "version": "c5a4f3279faa3b1fe79352e1dc7e62007317b9e2129b94fba92c787a17066103"
+    },
+    "bench_flame.FlameLj75Minhocao.track_failure_wrong_stationary": {
+        "code": "class _FlameSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _binary_ready():\n            raise NotImplementedError(\"FLAME binary is not available\")\n        self.record = None",
+        "name": "bench_flame.FlameLj75Minhocao.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'314159'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 86400,
+        "type": "track",
+        "unit": "count",
+        "version": "f4eb46504ccafce2a1af39e354e91305805b82c3e67deae2961ceb54a0f977e3"
+    },
+    "bench_flame.FlameLj75Minhocao.track_force_calls": {
+        "code": "class _FlameSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _binary_ready():\n            raise NotImplementedError(\"FLAME binary is not available\")\n        self.record = None",
+        "name": "bench_flame.FlameLj75Minhocao.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'314159'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 86400,
+        "type": "track",
+        "unit": "force calls",
+        "version": "4b6e02e5fd9fe1ade249fb77c6310d88f31f72a929c61f69f6777818cdb1da1a"
+    },
+    "bench_flame.FlameLj75Minhocao.track_success": {
+        "code": "class _FlameSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _binary_ready():\n            raise NotImplementedError(\"FLAME binary is not available\")\n        self.record = None",
+        "name": "bench_flame.FlameLj75Minhocao.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'314159'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 86400,
+        "type": "track",
+        "unit": "fraction",
+        "version": "b28abc022947ff439f8019ac0d1d6b6b5b2fddd59ca830bd89f44be0138f6b5e"
+    },
+    "bench_flame.FlameLj98Minhocao.time_search": {
+        "code": "class _FlameSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _binary_ready():\n            raise NotImplementedError(\"FLAME binary is not available\")\n        self.record = None",
+        "min_run_count": 1,
+        "name": "bench_flame.FlameLj98Minhocao.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'314159'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 86400,
+        "type": "time",
+        "unit": "seconds",
+        "version": "e7a60582e1570a2bf8a8e6f99e66960d38f8d454f5d87ce8749455d20ff1a194",
+        "warmup_time": 0
+    },
+    "bench_flame.FlameLj98Minhocao.track_failure_cap": {
+        "code": "class _FlameSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _binary_ready():\n            raise NotImplementedError(\"FLAME binary is not available\")\n        self.record = None",
+        "name": "bench_flame.FlameLj98Minhocao.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'314159'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 86400,
+        "type": "track",
+        "unit": "count",
+        "version": "d06e67b80229947e8620d8fcbaf140d14ecf534124cd0f3e9edd0b6157f4b026"
+    },
+    "bench_flame.FlameLj98Minhocao.track_failure_crash": {
+        "code": "class _FlameSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _binary_ready():\n            raise NotImplementedError(\"FLAME binary is not available\")\n        self.record = None",
+        "name": "bench_flame.FlameLj98Minhocao.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'314159'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 86400,
+        "type": "track",
+        "unit": "count",
+        "version": "bed0657cbfb3428af38ffdc3a9abdda3ef2b858ba893bbaa2d55256aeefbf2b9"
+    },
+    "bench_flame.FlameLj98Minhocao.track_failure_divergence": {
+        "code": "class _FlameSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _binary_ready():\n            raise NotImplementedError(\"FLAME binary is not available\")\n        self.record = None",
+        "name": "bench_flame.FlameLj98Minhocao.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'314159'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 86400,
+        "type": "track",
+        "unit": "count",
+        "version": "c5a4f3279faa3b1fe79352e1dc7e62007317b9e2129b94fba92c787a17066103"
+    },
+    "bench_flame.FlameLj98Minhocao.track_failure_wrong_stationary": {
+        "code": "class _FlameSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _binary_ready():\n            raise NotImplementedError(\"FLAME binary is not available\")\n        self.record = None",
+        "name": "bench_flame.FlameLj98Minhocao.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'314159'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 86400,
+        "type": "track",
+        "unit": "count",
+        "version": "f4eb46504ccafce2a1af39e354e91305805b82c3e67deae2961ceb54a0f977e3"
+    },
+    "bench_flame.FlameLj98Minhocao.track_force_calls": {
+        "code": "class _FlameSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _binary_ready():\n            raise NotImplementedError(\"FLAME binary is not available\")\n        self.record = None",
+        "name": "bench_flame.FlameLj98Minhocao.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'314159'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 86400,
+        "type": "track",
+        "unit": "force calls",
+        "version": "4b6e02e5fd9fe1ade249fb77c6310d88f31f72a929c61f69f6777818cdb1da1a"
+    },
+    "bench_flame.FlameLj98Minhocao.track_success": {
+        "code": "class _FlameSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _binary_ready():\n            raise NotImplementedError(\"FLAME binary is not available\")\n        self.record = None",
+        "name": "bench_flame.FlameLj98Minhocao.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'314159'"
+            ],
+            [
+                "'0'"
+            ]
+        ],
+        "timeout": 86400,
+        "type": "track",
+        "unit": "fraction",
+        "version": "b28abc022947ff439f8019ac0d1d6b6b5b2fddd59ca830bd89f44be0138f6b5e"
+    }
 }
