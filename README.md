@@ -102,6 +102,10 @@ uv run optbench/pele_lj38.py \
 
 Memory 100 at step 0.2 averages 178 calls. The 2014 file is 179. The other six files are `results/campaign/pele-0.1.2-lbfgs-*.dat`.
 
+The ranked LJ38 transition-state means keep every force call. `pele/lj38-ts-ffd` averages 254.48 and `pele/lj38-ts-cd` averages 335.06. After the rms tolerance is met, pele refreshes the lowest eigenvector and runs a transverse mode screen. That screen averages 44.435 calls for forward differences and 67.73 calls for central differences. Subtracting the screen calls leaves 210.045 and 267.33. The 2014 driver breaks at the first rms below the tolerance and then does one eigenvector search. That stop averages 207.51 and 263.52. The 2014 table lists 192 and 254. Each of the 200 starts takes the same number of hybrid-eigenvector steps under both stops, and the screen runs at most once. The per-start counts are `results/campaign/pele-b7081b93-lj38-ts-ffd.screen.jsonl` and `results/campaign/pele-b7081b93-lj38-ts-cd.screen.jsonl`, with `force_calls`, `screen_calls`, `unscreened_calls`, and `stop2014_calls`.
+
+`pele/pt-island-ts-ffd` uses the quench in `bin/js850/tsopt_morse.py` from the 2014 optbench tree at `0f26b796`. The Rayleigh-Ritz step is forward difference, memory 10, tol 0.02, maxstep 3, and 20 steps. Tangent memory is 10 and maxstep is 2. The outer loop is 10 steps, the tangent steps are 11 and 30, and the uphill step is 1.1. Zero-mode projection is off. The initial eigenvector is the free displacement from the reactant. The potential is this problem's `morse/smooth/linear` kernel. The ranked mean is 111.265. The screen averages 19.592 calls. Subtracting those calls leaves 91.673. The 2014 stop averages 88.551. The 2014 file lists 88. The per-start counts are `results/campaign/pele-b7081b93-pt-island-ts-ffd.screen.jsonl`.
+
 Sella 2.6.0 needs `sella==2.6.0` and ASE. The stop is the Euclidean norm of the force at 0.001, or 1000 steps, on 200 geometries, with cutoff 40 and the archived trust-region numbers:
 
 ```bash

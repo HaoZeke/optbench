@@ -17,12 +17,13 @@ A lowest-eigenvector success is calls under the cap and absolute
 overlap of at least 0.99 with the reference mode. The Hessian index is
 recorded and does not decide that score.
 
-A saddle-search row is one single-atom displacement. The climb cap is
-1000 force calls. Each endpoint minimization has a budget of 2000. The
-PAR-2 cap is 5064, which leaves 64 calls for a climb step that finishes
-as the counter reaches the cap. The initial minimization of the
-minimum is outside that count. Connection is Cartesian RMSD of the free
-atoms. The substrate pins the frame.
+A saddle-search row is one single-atom displacement. The climb uses the
+published per-search cap of 5064 force calls. Each endpoint minimization
+has a budget of 2000, and those calls are part of the same per-search
+cost. The PAR-2 cap is 5064. The initial minimization of the minimum is
+outside that count. Both endpoint minima are stored. Connection is
+Cartesian RMSD in the substrate frame, and the mean over every free atom
+is recorded beside it. The substrate pins the frame.
 """
 
 from __future__ import annotations
@@ -57,7 +58,7 @@ PELE_VERSION = "0.1.2"
 _SADDLE_ENDPOINT_BUDGET = 2000
 _SADDLE_CLIMB_OVERSHOOT = 64
 _SADDLE_MINIMIZE_BUDGET = 5000
-_SADDLE_SEARCH_CAP = 1000 + _SADDLE_CLIMB_OVERSHOOT + 2 * _SADDLE_ENDPOINT_BUDGET
+_SADDLE_SEARCH_CAP = 5064
 
 
 class HarnessPotential:
@@ -162,6 +163,16 @@ def _import_pele():
 def _outcome(reasons: list[str]) -> tuple[bool, str | None]:
     failure = classify_failure(reasons)
     return failure is None, failure
+
+
+def _mean_free_rmsd(moved: np.ndarray, reference: np.ndarray) -> float:
+    """RMSD averaged over every free atom.
+
+    A one-atom hop is diluted by the rest of the island, so both
+    endpoints of a real hop can fall inside 0.5.
+    """
+    delta = np.asarray(moved, dtype=np.float64) - np.asarray(reference, dtype=np.float64)
+    return float(np.sqrt(np.mean(np.sum(delta * delta, axis=-1))))
 
 
 def _unit(values: np.ndarray) -> np.ndarray:
@@ -419,21 +430,40 @@ def _climb(spec: dict) -> dict:
     eigenval = None
     eigenvec = None
     nfev = None
+    screen_calls = 0
+    screen_passes = 0
+    from pele.transition_states._transition_state_refinement import FindTransitionState
+
+    original_screen = FindTransitionState._get_lowest_transverse_eigenvector
+
+    def _counting_screen(self, coords, gradient):
+        nonlocal screen_calls, screen_passes
+        before = int(pot.calls)
+        try:
+            return original_screen(self, coords, gradient)
+        finally:
+            screen_passes += 1
+            screen_calls += int(pot.calls) - before
+
+    FindTransitionState._get_lowest_transverse_eigenvector = _counting_screen
     try:
-        with _silent_stdout():
-            result = findTransitionState(x, pot, **kwargs)
-        point = np.asarray(result.coords, dtype=np.float64).reshape(-1)
-        library_converged = bool(result.success)
-        steps = int(result.nsteps)
-        eigenval = float(result.eigenval)
-        eigenvec = np.asarray(result.eigenvec, dtype=np.float64).reshape(-1).copy()
-        nfev = int(getattr(result, "nfev", pot.calls))
-    except ForceCallCap:
-        point = pot.last.copy() if pot.last is not None else x
-    except LineSearchError:
-        point = pot.last.copy() if pot.last is not None else x
-    except Exception as exc:
-        return _crash(spec["name"], pot.calls, pot.verify_calls, exc.__class__.__name__)
+        try:
+            with _silent_stdout():
+                result = findTransitionState(x, pot, **kwargs)
+            point = np.asarray(result.coords, dtype=np.float64).reshape(-1)
+            library_converged = bool(result.success)
+            steps = int(result.nsteps)
+            eigenval = float(result.eigenval)
+            eigenvec = np.asarray(result.eigenvec, dtype=np.float64).reshape(-1).copy()
+            nfev = int(getattr(result, "nfev", pot.calls))
+        except ForceCallCap:
+            point = pot.last.copy() if pot.last is not None else x
+        except LineSearchError:
+            point = pot.last.copy() if pot.last is not None else x
+        except Exception as exc:
+            return _crash(spec["name"], pot.calls, pot.verify_calls, exc.__class__.__name__)
+    finally:
+        FindTransitionState._get_lowest_transverse_eigenvector = original_screen
     with pot.verification():
         energy, gradient = pot.energy_forces(point)
     if spec.get("defer_hessian"):
@@ -451,6 +481,9 @@ def _climb(spec: dict) -> dict:
             "eigenval": None if eigenval is None or not math.isfinite(float(eigenval)) else float(eigenval),
             "library_evaluations": nfev,
             "failure": None,
+            "screen_calls": int(screen_calls),
+            "screen_passes": int(screen_passes),
+            "unscreened_calls": int(pot.calls) - int(screen_calls),
         }
     record = _judge_ts(
         spec["name"],
@@ -468,6 +501,9 @@ def _climb(spec: dict) -> dict:
         library_evaluations=nfev,
     )
     record["mode"] = None if eigenvec is None else [float(value) for value in eigenvec]
+    record["screen_calls"] = int(screen_calls)
+    record["screen_passes"] = int(screen_passes)
+    record["unscreened_calls"] = int(pot.calls) - int(screen_calls)
     return record
 
 
@@ -806,12 +842,22 @@ def _one_displacement(spec: dict, *, evaluate, minimum: np.ndarray, min_energy: 
             )
             record["endpoint_calls"] = int(plus_calls + minus_calls)
             record["force_calls"] = climb_calls + record["endpoint_calls"]
-            record["rmsd_plus"] = _cartesian_rmsd(plus.reshape(-1, 3), minimum.reshape(-1, 3))
-            record["rmsd_minus"] = _cartesian_rmsd(minus.reshape(-1, 3), minimum.reshape(-1, 3))
+            record["endpoint_plus"] = [float(value) for value in plus]
+            record["endpoint_minus"] = [float(value) for value in minus]
+            plus_atoms = plus.reshape(-1, 3)
+            minus_atoms = minus.reshape(-1, 3)
+            minimum_atoms = minimum.reshape(-1, 3)
+            record["rmsd_plus"] = _cartesian_rmsd(plus_atoms, minimum_atoms)
+            record["rmsd_minus"] = _cartesian_rmsd(minus_atoms, minimum_atoms)
+            record["legacy_rmsd_plus"] = _mean_free_rmsd(plus_atoms, minimum_atoms)
+            record["legacy_rmsd_minus"] = _mean_free_rmsd(minus_atoms, minimum_atoms)
             record["barrier"] = float(outcome["energy"] - min_energy)
             record["_point"] = point
             record["_axis_links"] = (record["rmsd_plus"] <= limits["connect_rmsd"]) ^ (
                 record["rmsd_minus"] <= limits["connect_rmsd"]
+            )
+            record["_legacy_links"] = (record["legacy_rmsd_plus"] <= limits["connect_rmsd"]) ^ (
+                record["legacy_rmsd_minus"] <= limits["connect_rmsd"]
             )
     success, failure = _outcome(record["reasons"])
     record["success"] = success
@@ -861,6 +907,7 @@ def _saddle_once(root: Path, problem: dict, template: dict) -> dict:
     spec["eigenvec0"] = "kick"
     spec["name"] = "rep1-search1"
     found: list[np.ndarray] = []
+    found_legacy: list[np.ndarray] = []
     record = _finish_saddle_record(
         _one_displacement(
             spec,
@@ -873,22 +920,56 @@ def _saddle_once(root: Path, problem: dict, template: dict) -> dict:
             force_tol=force_tol,
         ),
         found=found,
+        found_legacy=found_legacy,
         limits=limits,
     )
     return record
 
 
-def _finish_saddle_record(record: dict, *, found: list[np.ndarray], limits: dict) -> dict:
+def _restore_saddles(saved: list[dict], limits: dict) -> tuple[list[np.ndarray], list[np.ndarray]]:
+    found: list[np.ndarray] = []
+    found_legacy: list[np.ndarray] = []
+    tol = float(limits["connect_rmsd"])
+    for row in saved:
+        raw = row.get("saddle_x")
+        if raw is None:
+            continue
+        saddle = np.asarray(raw, dtype=np.float64)
+        atoms = saddle.reshape(-1, 3)
+        if all(_cartesian_rmsd(atoms, old.reshape(-1, 3)) > tol for old in found):
+            found.append(saddle)
+        if all(_mean_free_rmsd(atoms, old.reshape(-1, 3)) > tol for old in found_legacy):
+            found_legacy.append(saddle.copy())
+    return found, found_legacy
+
+
+def _finish_saddle_record(
+    record: dict,
+    *,
+    found: list[np.ndarray],
+    found_legacy: list[np.ndarray],
+    limits: dict,
+) -> dict:
     point = record.pop("_point", None)
     links = record.pop("_axis_links", False)
+    legacy_links = record.pop("_legacy_links", False)
     if point is None:
+        record["legacy_success"] = False
         return record
-    novel = all(_cartesian_rmsd(point.reshape(-1, 3), old.reshape(-1, 3)) > limits["connect_rmsd"] for old in found)
+    saddle = np.asarray(point, dtype=np.float64)
+    record["saddle_x"] = [float(value) for value in saddle]
+    novel = all(
+        _cartesian_rmsd(saddle.reshape(-1, 3), old.reshape(-1, 3)) > limits["connect_rmsd"] for old in found
+    )
+    legacy_novel = all(
+        _mean_free_rmsd(saddle.reshape(-1, 3), old.reshape(-1, 3)) > limits["connect_rmsd"] for old in found_legacy
+    )
     barrier = float(record.get("barrier") or 0.0)
     reasons: list[str] = []
     if novel:
-        found.append(np.asarray(point, dtype=np.float64))
-        record["saddle_x"] = [float(value) for value in point]
+        found.append(saddle.copy())
+    if legacy_novel:
+        found_legacy.append(saddle.copy())
     if links and novel and barrier < limits["barrier_max"]:
         record["reasons"] = []
     else:
@@ -902,6 +983,15 @@ def _finish_saddle_record(record: dict, *, found: list[np.ndarray], limits: dict
     success, failure = _outcome(record["reasons"])
     record["success"] = success
     record["failure"] = failure
+    legacy_reasons: list[str] = []
+    if not legacy_links:
+        legacy_reasons.append("not_connected")
+    if not legacy_novel:
+        legacy_reasons.append("duplicate")
+    if barrier >= limits["barrier_max"]:
+        legacy_reasons.append("barrier")
+    record["legacy_success"] = not legacy_reasons
+    record["legacy_reasons"] = legacy_reasons
     return record
 
 
@@ -949,7 +1039,8 @@ def _run_saddle_search(
     limits["goal"] = goal
     limits["barrier_max"] = float((problem.get("goal") or {}).get("barrier_below_eV", limits["barrier_max"]))
     climb_cap = int(cap)
-    search_cap = climb_cap + _SADDLE_CLIMB_OVERSHOOT + 2 * int(limits["endpoint_budget"])
+    search_cap = _SADDLE_SEARCH_CAP
+    account_cap = climb_cap + _SADDLE_CLIMB_OVERSHOOT + 2 * int(limits["endpoint_budget"])
     free = np.flatnonzero(~fixed)
     raw = potential_from_problem(problem)
     comments = []
@@ -973,7 +1064,7 @@ def _run_saddle_search(
                 min_energy = float(header["min_energy"])
                 minimize_calls = int(header["minimize_calls"])
                 min_ok = bool(header["min_ok"])
-                found = [np.asarray(row["saddle_x"], dtype=np.float64) for row in saved if row.get("saddle_x") is not None]
+                found, found_legacy = _restore_saddles(saved, limits)
                 connected = sum(1 for row in saved if row.get("success"))
                 searches = len(saved)
                 rng = _rng_restore(saved[-1]["rng_state"]) if saved else np.random.default_rng(20261015 + rep)
@@ -987,6 +1078,7 @@ def _run_saddle_search(
                 )
                 rng = np.random.default_rng(20261015 + rep)
                 found = []
+                found_legacy = []
                 connected = 0
                 searches = 0
                 header_path.parent.mkdir(parents=True, exist_ok=True)
@@ -1069,12 +1161,14 @@ def _run_saddle_search(
                 for item, record in zip(batch, outcomes):
                     if connected >= goal:
                         break
-                    record = _finish_saddle_record(record, found=found, limits=limits)
+                    record = _finish_saddle_record(
+                        record, found=found, found_legacy=found_legacy, limits=limits
+                    )
                     if record.get("success"):
                         connected += 1
-                    if record.get("success") and int(record["force_calls"]) >= search_cap:
+                    if record.get("success") and int(record["force_calls"]) >= account_cap:
                         raise RuntimeError(
-                            f"{template['id']} success {record['start']} spent {search_cap} or more force calls"
+                            f"{template['id']} success {record['start']} spent {account_cap} or more force calls"
                         )
                     all_records.append({key: value for key, value in record.items() if key != "saddle_x"})
                     stored = {key: value for key, value in record.items() if key != "saddle_x"}
@@ -1103,7 +1197,9 @@ def _run_saddle_search(
                 f"# rep {rep} force_calls {sum(int(row['force_calls']) for row in all_records)} "
                 f"unique_saddles {len(found)} fraction_connected {fraction} "
                 f"total_searches {searches} connected {connected} "
-                f"minimize_calls {minimize_calls} minimum_converged {int(min_ok)} seed {20261015 + rep}"
+                f"minimize_calls {minimize_calls} minimum_converged {int(min_ok)} "
+                f"legacy_connected {sum(1 for row in all_records if row.get('legacy_success'))} "
+                f"seed {20261015 + rep}"
             )
             finished = connected >= goal or searches >= limits["max_searches"]
         text, metrics = _summarize(all_records, template, search_cap, problem["id"], partial=not finished)

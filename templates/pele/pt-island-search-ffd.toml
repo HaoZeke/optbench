@@ -7,18 +7,18 @@ algorithm = "hybrid eigenvector following"
 problem = "saddle-search/pt-island"
 task = "saddle-search"
 tuning = "tuned"
-note = "The Pt-island displacement protocol with the LJ38 forward-difference quench controls. The climb cap is 1000 force calls. Each endpoint minimization has a budget of 2000. The PAR-2 cap is 5064."
+note = "The Pt-island displacement protocol with the LJ38 forward-difference quench controls. The climb uses the published per-search cap of 5064 force calls. Each endpoint minimization has a budget of 2000 and those calls stay in the same per-search cost. The PAR-2 cap is 5064."
 
 [stop]
 force_norm = 0.001
 
 [ini.Optimizer]
-max_iterations = 1000
+max_iterations = 5064
 converged_force = 0.001
 max_move = 0.2
 
 [hef]
-nsteps = 1001
+nsteps = 10000
 nfail_max = 200
 nsteps_tangent1 = 14
 nsteps_tangent2 = 16

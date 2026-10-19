@@ -7,19 +7,19 @@ algorithm = "hybrid eigenvector following"
 problem = "tsopt/pt-island"
 task = "transition-state"
 tuning = "tuned"
-note = "The archived pt-island driver is a dangling path, so the quench controls are the LJ38 forward-difference set. The stop is this problem's Euclidean force norm. orthogZeroEigs is unset because the substrate fixes the frame. The initial eigenvector is the free displacement from the reactant. A converged candidate also pays for the transverse mode screen."
+note = "Quench controls from bin/js850/tsopt_morse.py in the 2014 optbench tree at 0f26b796. The Rayleigh-Ritz step is forward difference, memory 10, maxstep 3, tol 0.02, 20 steps. Tangent memory is 10 and maxstep is 2. Outer steps are 10, tangent steps 11 and 30, and the uphill step is 1.1. orthogZeroEigs is unset. The initial eigenvector is the free displacement from the reactant. The potential is this problem's morse/smooth/linear kernel. A converged candidate also pays for the transverse mode screen."
 
 [stop]
 force_norm = 0.001
 max_force_calls = 10000
 
 [hef]
-nsteps = 1001
+nsteps = 10
 nfail_max = 200
-nsteps_tangent1 = 14
-nsteps_tangent2 = 16
-max_uphill_step = 0.2
-max_uphill_step_initial = 0.2
+nsteps_tangent1 = 11
+nsteps_tangent2 = 30
+max_uphill_step = 1.1
+max_uphill_step_initial = 1.1
 demand_initial_negative_vec = false
 check_negative = false
 index_seed = 0
@@ -27,14 +27,12 @@ orthog = "none"
 eigenvec0 = "reactant"
 
 [hef.lowest]
-nsteps = 40
-tol = 0.33
-maxstep = 0.2
+nsteps = 20
+tol = 0.02
+maxstep = 3.0
 first_order = true
-H0 = 0.1
-M = 82
+M = 10
 
 [hef.tangent]
-maxstep = 0.2
-M = 4
-H0 = 0.1
+maxstep = 2.0
+M = 10

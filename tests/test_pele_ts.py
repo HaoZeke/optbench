@@ -39,7 +39,7 @@ def test_pele_templates_use_the_problem_cap_and_the_pinned_commit():
         assert cap is not None
         assert cap >= 1000
         if problem["id"] == "saddle-search/pt-island":
-            assert cap == 1000
+            assert cap == 5064
         else:
             assert cap == 10000
         assert template["commit"] == COMMIT
@@ -163,6 +163,8 @@ def test_ffd_and_forward_match_one_archived_start(tmp_path: Path, monkeypatch):
     assert row["force_calls"] < 500
     assert row["force_norm"] <= 0.001
     assert row["counter"] == "harness"
+    assert row["screen_calls"] >= 0
+    assert row["unscreened_calls"] + row["screen_calls"] == row["force_calls"]
     assert (tmp_path / "ffd.starts.jsonl").is_file()
 
     mode = run_template(
