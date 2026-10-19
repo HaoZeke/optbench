@@ -1,5 +1,5 @@
-nfailed 24
-starts 24
+nfailed 28
+starts 28
 code pyamff
 code_version 0.1.0-beta
 commit 240f51d01ca22969369f9bc21760c61cbb3b6665
@@ -15,8 +15,8 @@ median 60000
 median_low 60000
 median_high 60000
 wilson_low 0
-wilson_high 0.1379762
-n_cap 24
+wilson_high 0.1206433
+n_cap 28
 n_divergence 0
 n_wrong_stationary 0
 n_crash 0
