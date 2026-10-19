@@ -3,7 +3,7 @@
   "bootstrap_seed": 20261015,
   "note": "Harness Lennard-Jones, cutoff 40, no shift. The Lennard-Jones 75 minimum is the Cambridge Cluster Database energy on the problem file.",
   "par_factor": 2,
-  "partial": true,
+  "partial": false,
   "problem": "globalopt/lj75",
   "runs": [
     {
@@ -18,7 +18,7 @@
         "force_calls_max": 1000000,
         "force_calls_median": 2.0,
         "force_calls_min": 2,
-        "nfailed": 198
+        "nfailed": 200
       },
       "metrics": {
         "bootstrap_resamples": 2000,
@@ -32,12 +32,12 @@
         "median": 2000000.0,
         "median_high": 2000000.0,
         "median_low": 2000000.0,
-        "n": 198,
-        "n_cap": 10,
+        "n": 200,
+        "n_cap": 11,
         "n_crash": 0,
-        "n_divergence": 188,
+        "n_divergence": 189,
         "n_wrong_stationary": 0,
-        "nfailed": 198,
+        "nfailed": 200,
         "par2_mean": 2000000.0,
         "par_applied": true,
         "par_factor": 2,
@@ -47,7 +47,7 @@
         "success_only_mean": null,
         "success_rate": 0.0,
         "successes": 0,
-        "wilson_high": 0.019032060326648184,
+        "wilson_high": 0.018845326377266575,
         "wilson_low": 0.0
       },
       "parameters": {
@@ -3447,6 +3447,40 @@
           ],
           "schema": "optbench.start/v2",
           "start": "coords.198",
+          "success": false,
+          "threshold": -397.491331,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -396.2822358638839,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822358638839,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "coords.199",
+          "success": false,
+          "threshold": -397.491331,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": 594415807.8052843,
+          "failure": "divergence",
+          "force_calls": 2,
+          "lowest_energy": 594415807.8052843,
+          "reasons": [
+            "divergence"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "coords.200",
           "success": false,
           "threshold": -397.491331,
           "verify_calls": 0
