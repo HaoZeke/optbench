@@ -1091,7 +1091,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="neb/Pt-heptamer" data-template="gman/neb-pt-glbfgs-line">
    <td>Pt-heptamer</td>
    <td data-field="template">gman/neb-pt-glbfgs-line</td>
-   <td data-field="version">Gman r235</td>
+   <td data-field="version">Gman 1.0.0.01</td>
    <td data-field="commit">299795f6dc44</td>
    <td data-field="par2_mean">803.077</td>
    <td data-field="mean_calls">803.077</td>
@@ -1100,4 +1100,7 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">13</td>
    </tr>
    </tbody></table></div>
+   <p>No full ranked run</p><ul>
+   <li>gman/neb-pt-glbfgs-line: no per-start record.</li>
+   </ul>
    </section>

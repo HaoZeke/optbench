@@ -1,0 +1,22 @@
+# Gman r235, package version 1.0.0.01. Newest public release. glbfgs.init() with no arguments.
+# Climbing-image NEB on the 13 Pt-heptamer pairs, fmax 0.01, spring 5, tangent new, 8 images.
+# The count is pot.count, Gman's native force counter.
+force_calls 803
+force_calls_min 456
+force_calls_max 1080
+force_calls_median 760
+force_calls_per_image 100
+call_unit total
+successes 13
+nfailed 0
+n 13
+transition_states 0
+code Gman
+code_version 1.0.0.01
+commit 299795f6dc4410b49d3db3006ffea0bbb8613c2ab44126be2937ae7b34842849
+algorithm lbfgs
+template gman/neb-pt-glbfgs-line
+problem neb/Pt-heptamer
+tuning default
+counter harness
+images 8

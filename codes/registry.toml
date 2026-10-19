@@ -180,7 +180,7 @@ role = "nudged elastic band"
 repository = "https://gitlab.com/optbench/optbench"
 ref = "r235"
 commit = "299795f6dc4410b49d3db3006ffea0bbb8613c2ab44126be2937ae7b34842849"
-note = "Gman r235. No public git commit. The pin is the sha256 of website/codes/Gman-r235.tgz in the public archive at 0f26b796, 1826749 bytes. The Pt-heptamer GL-BFGS line row runs the r235 glbfgs.step. The Morse extension is f2py of pot/morse/code/morse.f. The dat integer is pot.count divided by 8, then the truncated mean the 2013 script writes. The ranked PAR-2 is the band total of that same counter."
+note = "Gman r235, package version 1.0.0.01, the newest public release. No public git commit. The pin is the sha256 of website/codes/Gman-r235.tgz in the public archive at 0f26b796, 1826749 bytes. The Pt-heptamer row calls glbfgs.init with no arguments. The harness score is pot.count."
 
 [[template]]
 id = "sella-0.1.1/lj38-loweig"
@@ -692,6 +692,6 @@ ranked = false
 id = "gman/neb-pt-glbfgs-line"
 code = "gman"
 problem = "neb/Pt-heptamer"
-profile = "archive"
+profile = "default"
 task = "neb"
 ranked = true
