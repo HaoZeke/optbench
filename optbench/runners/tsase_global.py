@@ -748,10 +748,11 @@ def _publish(
         commit=str(template.get("commit") or ""),
         parameters=parameters,
     )
-    note = (
-        "Harness Lennard-Jones, cutoff 40, no shift. "
-        "The Lennard-Jones 38 minimum is the harness energy of the published truncated octahedron."
-    )
+    if problem_id == "globalopt/lj75":
+        minimum = "The Lennard-Jones 75 minimum is the Cambridge Cluster Database energy on the problem file."
+    else:
+        minimum = "The Lennard-Jones 38 minimum is the harness energy of the published truncated octahedron."
+    note = f"Harness Lennard-Jones, cutoff 40, no shift. {minimum}"
     if threshold is None:
         note = (
             "Harness Lennard-Jones, cutoff 40, no shift. "
