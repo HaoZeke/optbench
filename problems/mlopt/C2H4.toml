@@ -4,6 +4,7 @@ suite = "mlopt"
 problem = "C2H4"
 contract = "partial"
 entry_count = 6
+remark = "The ranked Optax force rows are the finite-difference fingerprint derivative. The neighbor list is held fixed and the cutoff is the value in fpParas.dat. PyAMFF python loop_FPs at 8037eb98 sorts neighbor indices and leaves the periodic offsets unsorted. On this trajectory that pairing does not change the stored neighbor blocks. calculate_dG2 raises UnboundLocalError on every image, so the python path has no force loss. The archived configs set fp_engine to Fortran. That Fortran derivative was not executed. There is no separate paper-comparable row. templates/optax/README.md has the comparison."
 
 [sample]
 initializations = 50
