@@ -588,15 +588,20 @@ def run_template(
         names = [f"{label}.{index}" for index in range(1, int(config["starts"]) + 1)]
     else:
         names = _load_start_names(root, problem, geometries, work, output)
-    if raw_tolerance is None:
+    # The vendored reference is the LJ38 minimum. Another size that sets a
+    # structure budget stays on that budget instead of comparing to LJ38.
+    wales = load_wales_coordinates()
+    window = raw_tolerance is not None and int(config["natoms"]) == wales.shape[0]
+    if raw_tolerance is not None and not window and not config.get("budget_structures"):
+        raise ValueError(
+            f"{template['id']} cannot use the LJ38 reference for {config['natoms']} atoms"
+        )
+    if not window:
         reference = None
         tolerance = None
     else:
         tolerance = float(raw_tolerance)
-        coords = load_wales_coordinates()
-        if coords.shape[0] != config["natoms"]:
-            raise ValueError(f"Wales file has {coords.shape[0]} atoms, template has {config['natoms']}")
-        reference = reference_energy(coords)
+        reference = reference_energy(wales)
     jobs = [_job(template, index, name, binary, reference, tolerance) for index, name in enumerate(names)]
     if workers <= 1:
         records = []
