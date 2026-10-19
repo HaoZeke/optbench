@@ -433,6 +433,19 @@ def run(
             limit=limit,
             resume=resume,
         )
+    if template["engine"] == "geometric":
+        from .geometric_ts import run_template
+
+        if template.get("problem") and template["problem"] != problem_name:
+            raise ValueError(f"{template_name} belongs to {template['problem']}")
+        return run_template(
+            root,
+            template_name,
+            output=output,
+            workers=workers,
+            limit=limit,
+            resume=resume,
+        )
     if template["engine"] in {"ase", "sella"} or (
         template["engine"] == "geodesic" and template.get("backend") == "ase"
     ):

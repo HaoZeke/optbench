@@ -1,0 +1,34 @@
+force_calls 1061
+force_calls_min 1053
+force_calls_median 1059
+force_calls_max 1094
+nfailed 0
+starts 49
+code geomeTRIC
+code_version 1.1.1
+commit f657e69bae9c81bf7a23e7375db98502ca5c8c30
+algorithm geomeTRIC
+profile harness
+template geometric/pt-island-ts-harness
+problem tsopt/pt-island
+counter harness
+reducer all
+parameter_source harness
+method {"counter":"harness attach_ase_counter","parameter_source":"harness","parameters":{"convergence_dmax":0.0018,"convergence_drms":0.0012,"convergence_energy":1e-06,"convergence_gmax":1e-08,"convergence_grms":1e-08,"coordsys":"cart","finite_difference_step_bohr":0.001,"frequency":false,"hessian":"harness","maxiter":10000,"n_atoms":343,"n_coordinates":525,"n_free":175,"subfrctor":0,"tmax":0.03,"tmin":0.0001,"transition":true,"trust":0.01},"potential":{"D":0.7102,"alpha":1.6047,"form":"smooth","kind":"morse","pbc":[true,true,false],"r0":2.897,"rc":9.5},"profile":"harness","reducer":"all","stop":{"force_norm":0.001,"max_force_calls":10000,"max_steps":10000,"norm":"l2"}}
+note geomeTRIC 1.1.1 transition-state search on the free atoms. Substrate atoms stay at the input coordinates. Coordinates are Cartesian because delocalized internals on this slab did not finish building. The initial Hessian is the harness smooth Morse Hessian on the free coordinates, charged as the 2*3*N finite-difference stencil it replaces. Net force and torque stay in the gradient. v2 success is the harness cap, the Euclidean force norm 0.001, and Hessian index 1.
+host cursor
+date 2026-10-18
+contributor Rohit Goswami
+scoring par2-wilson-bootstrap
+par2_mean 1061.122449
+par2_median 1059
+par2_median_low 1058
+par2_median_high 1060
+par2_iqr 7
+success_rate 1
+wilson_low 0.9273021808
+wilson_high 1
+par_applied true
+par_factor 2
+bootstrap_resamples 2000
+bootstrap_seed 20261015

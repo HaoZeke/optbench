@@ -259,6 +259,48 @@ note = "TorchSim 0.6.2, tag v0.6.2. FIRE uses the ASE flavor at the constructor 
 
 # generated ASE and Sella templates
 
+[[code]]
+id = "geometric"
+name = "geomeTRIC"
+role = "transition-state optimization"
+repository = "https://github.com/leeping/geomeTRIC"
+ref = "1.1.1"
+commit = "f657e69bae9c81bf7a23e7375db98502ca5c8c30"
+committed = "2026-05-18"
+note = "geomeTRIC 1.1.1. Transition-state searches use the --transition trust region. Finite-difference Hessians and harness Hessians are counted as force calls. LJ38 and pt-island use Cartesian coordinates. On pt-island the coordinates are the free atoms. Delocalized internals did not finish on this slab, and on two LJ38 starts the coordinate conversion was still running after 30 minutes."
+
+[[template]]
+id = "geometric/lj38-ts-fd"
+code = "geometric"
+problem = "tsopt/LJ38"
+profile = "default"
+task = "transition"
+ranked = true
+
+[[template]]
+id = "geometric/lj38-ts-harness"
+code = "geometric"
+problem = "tsopt/LJ38"
+profile = "harness"
+task = "transition"
+ranked = true
+
+[[template]]
+id = "geometric/pt-island-ts-fd"
+code = "geometric"
+problem = "tsopt/pt-island"
+profile = "default"
+task = "transition"
+ranked = true
+
+[[template]]
+id = "geometric/pt-island-ts-harness"
+code = "geometric"
+problem = "tsopt/pt-island"
+profile = "harness"
+task = "transition"
+ranked = true
+
 # generated ASE and Sella templates
 
 [[template]]

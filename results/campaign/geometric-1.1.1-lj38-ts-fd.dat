@@ -1,0 +1,34 @@
+force_calls 379
+force_calls_min 232
+force_calls_median 246
+force_calls_max 10000
+nfailed 5
+starts 200
+code geomeTRIC
+code_version 1.1.1
+commit f657e69bae9c81bf7a23e7375db98502ca5c8c30
+algorithm geomeTRIC
+profile default
+template geometric/lj38-ts-fd
+problem tsopt/LJ38
+counter harness
+reducer all
+parameter_source default
+method {"counter":"harness attach_ase_counter","parameter_source":"default","parameters":{"convergence_dmax":0.0018,"convergence_drms":0.0012,"convergence_energy":1e-06,"convergence_gmax":1e-08,"convergence_grms":1e-08,"coordsys":"cart","finite_difference_step_bohr":0.001,"frequency":false,"hessian":"finite-difference","maxiter":10000,"n_atoms":38,"n_coordinates":114,"n_free":38,"subfrctor":1,"tmax":0.03,"tmin":0.0001,"transition":true,"trust":0.01},"potential":{"epsilon":1.0,"kind":"lennard-jones","pbc":[false,false,false],"rc":40.0,"sigma":1.0},"profile":"default","reducer":"all","stop":{"force_norm":0.001,"max_force_calls":10000,"max_steps":10000,"norm":"l2"}}
+note geomeTRIC 1.1.1 transition-state search. Coordinates are Cartesian. Delocalized internals are the library default; the coordinate conversion on two LJ38 starts was still running after 30 minutes. The initial Hessian is the library central Cartesian finite difference, step 1e-3 bohr, and each displacement is a harness force call. Optimizer gradient thresholds are 1e-8 so the Euclidean force norm 0.001 is the stop. v2 success is the harness cap, that norm, and Hessian index 1.
+host cursor
+date 2026-10-18
+contributor Rohit Goswami
+scoring par2-wilson-bootstrap
+par2_mean 760.675
+par2_median 246
+par2_median_low 244.5
+par2_median_high 248.5
+par2_iqr 26.25
+success_rate 0.975
+wilson_low 0.9428216596
+wilson_high 0.9892752803
+par_applied true
+par_factor 2
+bootstrap_resamples 2000
+bootstrap_seed 20261015
