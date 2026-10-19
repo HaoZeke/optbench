@@ -128,13 +128,14 @@ The number is written only after the run finishes under the problem rule.
    <li>Al: partial.</li>
    <li>Pt: partial.</li>
    <li>lj38: partial.</li>
+   <li>Morse bulk: not yet on the harness counter.</li>
    <li>Pt-heptamer: not yet on the harness counter, partial.</li>
    <li>Pt heptamer island: not yet on the harness counter, partial.</li>
    <li>LJ38: not yet on the harness counter, partial.</li>
    <li>pt-island: not yet on the harness counter, partial.</li>
    <li>eon-ci-neb: no per-start record.</li>
    <li>eon-ci-swdneb: no per-start record; does not reproduce the 2014 archive.</li>
-   <li>eon-cg: no per-start record; does not reproduce the 2014 archive.</li>
+   <li>eon-cg: no per-start record.</li>
    <li>eon-fire: no per-start record.</li>
    <li>eon-lbfgs: no per-start record.</li>
    <li>eon-qm: no per-start record.</li>
@@ -145,7 +146,6 @@ The number is written only after the run finishes under the problem rule.
    <li>eon-client/morse-cg: no per-start record.</li>
    <li>eon-client/morse-fire: no per-start record.</li>
    <li>eon-client/morse-lbfgs: no per-start record.</li>
-   <li>eon-client/morse-sd: no per-start record; does not reproduce the 2014 archive.</li>
    <li>eon-client/qm: no per-start record.</li>
    <li>eon-client/sd-twopoint: no per-start record.</li>
    <li>eon-client/sd: no per-start record.</li>

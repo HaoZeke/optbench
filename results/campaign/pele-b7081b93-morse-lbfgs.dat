@@ -1,0 +1,30 @@
+# counter harness. One force call is one getEnergyGradient entry.
+# The potential is the problem potential. A repeated coordinate is cached.
+# The stop is the Euclidean norm of the gradient.
+# v2 success is under the cap, at the force stop, and Hessian index 0.
+# energy and Kabsch RMSD were not applied: the problem file has no energy_tol, rmsd_tol, or per-start reference.
+# Archive minimization/morse-bulk/pele-lbfgs/run.sh sets M 100 and maxstep 2.0. maxErise is 1e-4 and H0 is 0.1, the constructor values. The potential is the shifted Morse with the pele Morse bulk cutoff 9.5, D 0.7102, alpha 1.6047, r0 2.897. The stop is the Euclidean norm of the gradient at the problem force norm. The iteration budget is the force-call cap.
+force_calls 51
+force_calls_min 24
+force_calls_max 84
+nfailed 0
+median 49
+code pele
+code_version 0.1.2
+commit b7081b932a060be11342fbe8287ac35da8ada879
+algorithm LBFGS
+template pele/morse-lbfgs
+tuning archive
+counter harness
+problem minimization/morse-bulk
+par2_mean 51.07
+wilson_low 0.963006501793
+wilson_high 1
+par2_median 49
+par2_median_low 48
+par2_median_high 51
+v2_nfailed 0
+v2_successes 100
+n 100
+energy_min -1421.45132351
+energy_max -1421.45128462

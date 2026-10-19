@@ -50,6 +50,76 @@
       "wilson_low": 0.9500079920442688
     }
   ],
-  "ranked": [],
+  "profile": {
+    "area_log10": {
+      "pele/lj38-basinhopping 0.1.2 archive campaign b7081b9": 1.2041199826559248
+    },
+    "rho": {
+      "pele/lj38-basinhopping 0.1.2 archive campaign b7081b9": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "solved": {
+      "pele/lj38-basinhopping 0.1.2 archive campaign b7081b9": 1.0
+    },
+    "taus": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ]
+  },
+  "ranked": [
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 3000000,
+      "code": "pele",
+      "code_version": "0.1.2",
+      "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "pele-b7081b93-lj38-basinhopping",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 100,
+      "history": false,
+      "max_calls": 2765495.0,
+      "mean_calls": 528657.52,
+      "mean_per_image": null,
+      "median": 385463.5,
+      "median_calls": 385463.5,
+      "median_high": 435265.76249999984,
+      "median_low": 306322.0,
+      "median_per_image": null,
+      "min_calls": 6208.0,
+      "n": 100,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 528657.52,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat",
+      "problem": "globalopt/lj38",
+      "registry_match": false,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "pele/lj38-basinhopping",
+      "tuning": "archive",
+      "wilson_high": 1.0,
+      "wilson_low": 0.9630065017930143
+    }
+  ],
   "title": "Lennard-Jones 38 global minimum"
 }

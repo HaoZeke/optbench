@@ -35,7 +35,7 @@ def test_the_ledger_covers_the_oracle_in_order():
             assert row["cause"]
         if (row.get("rerun") or {}).get("paper_baseline"):
             assert status == "reproduced"
-    assert counts == {"reproduced": 45, "not_reproduced": 27, "not_rerun": 79}
+    assert counts == {"reproduced": 53, "not_reproduced": 19, "not_rerun": 79}
     assert reproduction_errors(ROOT) == []
 
 
@@ -82,10 +82,15 @@ def test_a_paper_baseline_outside_the_archive_fails(tmp_path: Path):
 
 
 def test_legacy_rows_that_miss_are_marked_in_place():
-    problem = load_problem(ROOT / "problems" / "minimization" / "lj38.toml")
     oracle = load_oracle(ROOT / "oracle" / "entries.jsonl")
-    html = problem_html(problem, oracle)
-    assert ">eon-cg<" in html
-    assert "pele-fire · not reproduced" in html
-    assert "outside the archive tolerance" in html
-    assert "eon-cg · not reproduced" not in html
+    lj38 = problem_html(load_problem(ROOT / "problems" / "minimization" / "lj38.toml"), oracle)
+    morse = problem_html(load_problem(ROOT / "problems" / "minimization" / "morse-bulk.toml"), oracle)
+    assert ">eon-cg<" in lj38
+    assert ">pele-fire<" in lj38
+    assert "pele-fire · not reproduced" not in lj38
+    assert "eon-cg · not reproduced" not in lj38
+    assert "optim · not reproduced" in morse
+    assert "outside the archive tolerance" in morse
+    assert "pele-lbfgs · not reproduced" not in morse
+    assert "eon-sd · not reproduced" not in morse
+    assert "ase-fire · not reproduced" not in morse

@@ -134,17 +134,17 @@ MATCHES: list[dict] = [
     {"key": "minimization/lj38/pele-lbfgs-M4-maxstep0.05", "template": "pele-lbfgs-M4-maxstep0.05", "branch": "main", "path": "results/campaign/pele-0.1.2-lbfgs-M4-maxstep0.05.dat"},
     {"key": "minimization/lj38/pele-lbfgs-M4-maxstep0.1", "template": "pele-lbfgs-M4-maxstep0.1", "branch": "main", "path": "results/campaign/pele-0.1.2-lbfgs-M4-maxstep0.1.dat"},
     {"key": "minimization/lj38/pele-lbfgs-M4-maxstep0.2", "template": "pele-lbfgs-M4-maxstep0.2", "branch": "main", "path": "results/campaign/pele-0.1.2-lbfgs-M4-maxstep0.2.dat"},
-    {"key": "minimization/lj38/pele-fire", "template": "pele/lj38-fire", "branch": "cells/pele/min", "path": "results/campaign/pele-b7081b93-lj38-fire.dat", "cause": "pele_fire"},
+    {"key": "minimization/lj38/pele-fire", "template": "pele/lj38-fire", "branch": "main", "path": "results/campaign/pele-b7081b93-lj38-fire.dat"},
     # minimization / morse
     {"key": "minimization/morse-bulk/eon-lbfgs", "template": "eon-client/morse-lbfgs", "branch": "main", "path": "results/campaign/eon-client-morse-lbfgs.dat"},
     {"key": "minimization/morse-bulk/eon-cg", "template": "eon-client/morse-cg", "branch": "main", "path": "results/campaign/eon-client-morse-cg.dat"},
     {"key": "minimization/morse-bulk/eon-fire", "template": "eon-client/morse-fire", "branch": "main", "path": "results/campaign/eon-client-morse-fire.dat"},
-    {"key": "minimization/morse-bulk/eon-sd", "template": "eon-client/morse-sd", "branch": "main", "path": "results/campaign/eon-client-morse-sd.dat", "cause": "morse_sd"},
+    {"key": "minimization/morse-bulk/eon-sd", "template": "eon-client/morse-sd", "branch": "main", "path": "results/campaign/eon-client-morse-sd.dat"},
     {"key": "minimization/morse-bulk/optim", "template": "optim/morse-lbfgs-tuned", "branch": "cells/optim/min", "path": "results/campaign/optim-02aaf45245af-morse-lbfgs-tuned.dat", "cause": "optim_morse_memory"},
-    {"key": "minimization/morse-bulk/pele-lbfgs", "template": "pele/morse-lbfgs", "branch": "cells/pele/min", "path": "results/campaign/pele-b7081b93-morse-lbfgs.dat", "cause": "pele_morse"},
-    {"key": "minimization/morse-bulk/ase-lbfgs", "template": "ase/morse-lbfgs-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-morse-lbfgs-tuned.dat", "cause": "ase_morse_script"},
-    {"key": "minimization/morse-bulk/ase-fire", "template": "ase/morse-fire-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-morse-fire-tuned.dat", "cause": "ase_morse_script"},
-    {"key": "minimization/morse-bulk/ase-preconLBFGS", "template": "ase/morse-preconlbfgs-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-morse-preconlbfgs-tuned.dat", "cause": "ase_morse_script"},
+    {"key": "minimization/morse-bulk/pele-lbfgs", "template": "pele/morse-lbfgs", "branch": "main", "path": "results/campaign/pele-b7081b93-morse-lbfgs.dat"},
+    {"key": "minimization/morse-bulk/ase-lbfgs", "template": "ase/morse-lbfgs-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-morse-lbfgs-tuned.dat"},
+    {"key": "minimization/morse-bulk/ase-fire", "template": "ase/morse-fire-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-morse-fire-tuned.dat"},
+    {"key": "minimization/morse-bulk/ase-preconLBFGS", "template": "ase/morse-preconlbfgs-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-morse-preconlbfgs-tuned.dat"},
     # lowest eigenvector
     {"key": "lowest-eigenvector/lj38/eon-dimer-cg", "template": "eon-client/low-lj38-dimer-cg", "branch": "main", "path": "results/campaign/eon-client-low-lj38-dimer-cg.dat"},
     {"key": "lowest-eigenvector/lj38/eon-dimer-lbfgs", "template": "eon-client/low-lj38-dimer-lbfgs", "branch": "main", "path": "results/campaign/eon-client-low-lj38-dimer-lbfgs.dat"},
@@ -182,7 +182,7 @@ MATCHES: list[dict] = [
     {"key": "double-ended-saddle-search/pt-island/optim", "template": "optim/de-pt", "branch": "cells/optim/saddle-pt", "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-pt-island--optim-de-pt.dat", "cause": "optim_pt_units"},
     # neb per-image means already stored in the 3.5.0 files
     {"key": "neb/Pt-heptamer/eon-lbfgs", "template": "eon-lbfgs", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-lbfgs.dat", "hold": ["eon-client/neb-pt-lbfgs", "eon/neb-pt-lbfgs"]},
-    {"key": "neb/Pt-heptamer/eon-cg", "template": "eon-cg", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-cg.dat", "cause": "heptamer_cg", "hold": ["eon-client/neb-pt-cg"]},
+    {"key": "neb/Pt-heptamer/eon-cg", "template": "eon-cg", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-cg.dat", "hold": ["eon-client/neb-pt-cg"]},
     {"key": "neb/Pt-heptamer/eon-fire", "template": "eon-fire", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-fire.dat", "hold": ["eon-client/neb-pt-fire"]},
     {"key": "neb/Pt-heptamer/eon-qm", "template": "eon-qm", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-qm.dat", "hold": ["eon-client/neb-pt-qm"]},
     # saddle search
@@ -192,8 +192,8 @@ MATCHES: list[dict] = [
     {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm0", "template": "softsaddle/saddle-lanczos-sm0", "branch": "cells/softsaddle/ts-reps", "path": "results/campaign/softsaddle-2019.04-saddle-lanczos-sm0.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
     # globalopt and htst and aladatom rates
     {"key": "globalopt/lj38/eon-basinhopping", "template": "eon-client/bh-lj38", "branch": "entries/eon-svn-lane-a", "path": "results/campaign/eon-client-bh-lj38.dat"},
-    {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "branch": "cells/pele/go", "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat", "cause": "pele_bh_defaults"},
-    {"key": "hTST/Al/eon-dimer-cg", "template": "eon-svn/htst-al-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-al-dimer.dat", "kind": "htst", "cause": "htst_al"},
+    {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "branch": "main", "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat"},
+    {"key": "hTST/Al/eon-dimer-cg", "template": "eon-svn/htst-al-dimer", "branch": "main", "path": "results/campaign/eon-svn-htst-al-dimer.dat", "kind": "htst", "cause": "htst_al"},
     {"key": "hTST/Pt/eon-dimer-cg", "template": "eon-svn/htst-pt-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-pt-dimer.dat", "kind": "htst"},
 ]
 
@@ -267,7 +267,7 @@ CAUSE_TEXT = {
         "The harness uses pele LJCluster defaults (temperature 1, step 0.6, LBFGS memory 4) on unshifted cutoff 40. "
         "The mean is 688720 against 521595."
     ),
-    "htst_al": "The r2549 Al dimer with the archived rotation string (CG, max 50, tol 1) misses barrier_force_calls and rate_force_calls by about 30 percent. Pt dimer CG with max 10 reproduces all four hTST counts.",
+    "htst_al": "The 28 Jan 2013 client (git a1ae6103) with the archived Al ini reproduces the barrier window: barrier_jobs 45 against 48 and barrier_force_calls 2.772e+04 against 2.887e+04. The rate window does not. Fourteen windows average rate_jobs 2030 against 1511 and rate_force_calls 1.224e+06 against 8.979e+05. Each rate-window search costs about the archived 594 force calls. The four 0.233 eV processes leave the escape rate a few thousand per second short of 0.999 of the reference, and the later windows stay long.",
     "akmc_vs_langevin": (
         "The archive rows are Langevin parallel replica. The harness rows are AKMC. "
         "On infra/aladatom-repro, eon/aladatom-akmc true_rate 3.597591452e9 is 14.1 times 2.542941e8, "

@@ -76,17 +76,25 @@ def lennard_jones(coords: Sequence[float] | np.ndarray) -> tuple[float, np.ndarr
     return float(energy), grad.reshape(-1)
 
 
-def morse_bulk(coords: Sequence[float] | np.ndarray, box: Sequence[float]) -> tuple[float, np.ndarray]:
-    """Shifted Morse on an orthorhombic cell. The shift does not change the force."""
+def morse_bulk(
+    coords: Sequence[float] | np.ndarray,
+    box: Sequence[float],
+    cutoff: float = MORSE_CUTOFF,
+) -> tuple[float, np.ndarray]:
+    """Shifted Morse on an orthorhombic cell. The shift does not change the force.
+
+    The default cutoff is the eOn ``morse_pt`` value, 7. The 2014 pele Morse
+    bulk example and the ASE Morse scripts use 9.5.
+    """
     pos = _as_positions(coords)
     lengths = np.asarray(box, dtype=np.float64)
-    iu, ju, diff, r2 = _pairs(pos, MORSE_CUTOFF, lengths)
+    rc = float(cutoff)
+    iu, ju, diff, r2 = _pairs(pos, rc, lengths)
     if iu.size == 0:
         return 0.0, np.zeros(pos.size, dtype=np.float64)
     r = np.sqrt(r2)
     x = np.exp(-MORSE_ALPHA * (r - MORSE_R0))
     raw = MORSE_D0 * (x * x - 2.0 * x)
-    rc = MORSE_CUTOFF
     xc = np.exp(-MORSE_ALPHA * (rc - MORSE_R0))
     shift = MORSE_D0 * (xc * xc - 2.0 * xc)
     energy = float(np.sum(raw - shift))
@@ -141,10 +149,14 @@ def lennard_jones_hessian(coords: Sequence[float] | np.ndarray) -> np.ndarray:
     return _hessian_from_pairs(pos.shape[0], iu, ju, diff, r2, first, second)
 
 
-def morse_bulk_hessian(coords: Sequence[float] | np.ndarray, box: Sequence[float]) -> np.ndarray:
+def morse_bulk_hessian(
+    coords: Sequence[float] | np.ndarray,
+    box: Sequence[float],
+    cutoff: float = MORSE_CUTOFF,
+) -> np.ndarray:
     pos = _as_positions(coords)
     lengths = np.asarray(box, dtype=np.float64)
-    iu, ju, diff, r2 = _pairs(pos, MORSE_CUTOFF, lengths)
+    iu, ju, diff, r2 = _pairs(pos, float(cutoff), lengths)
     r = np.sqrt(r2) if r2.size else r2
     x = np.exp(-MORSE_ALPHA * (r - MORSE_R0)) if r2.size else r2
     first = 2.0 * MORSE_D0 * MORSE_ALPHA * x * (1.0 - x) if r2.size else r2

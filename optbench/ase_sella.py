@@ -262,8 +262,40 @@ def vibrational_index(atoms, step: float = 1e-4, tol: float = 1e-6) -> int:
     return int(np.sum(values < -float(tol)))
 
 
+def _analytic_morse_index(atoms, tol: float = 1e-6) -> int | None:
+    """Index of the shifted Morse Hessian.
+
+    A central difference with step 1e-4 crosses the minimum-image plane on
+    this bulk cell: pair vectors sit within 1e-7 of the plane, and the
+    sampled force then has nothing to do with the derivative. The analytic
+    pair Hessian is the same matrix the finite difference recovers with a
+    step that stays inside the plane.
+    """
+    import numpy as np
+
+    calc = getattr(atoms, "calc", None)
+    if calc is None or getattr(calc, "form", None) != "shift":
+        return None
+    if not all(hasattr(calc, name) for name in ("D", "alpha", "r0", "rc")):
+        return None
+    from .potentials import morse_bulk_hessian
+
+    positions = np.asarray(atoms.positions, dtype=float)
+    hessian = morse_bulk_hessian(positions, np.asarray(atoms.cell.lengths(), dtype=float), float(calc.rc))
+    # A minimum-image bulk has three acoustic modes. atoms.pbc can still be
+    # false: the archive reader never sets it, and the Fortran kernel ignores it.
+    periodic = bool(getattr(calc, "minimum_image", False)) or bool(np.any(atoms.pbc))
+    rotations = 0 if periodic else 3
+    hessian = _project_rigid(hessian, positions, rotations)
+    values = np.linalg.eigvalsh(hessian)
+    return int(np.sum(values < -float(tol)))
+
+
 def _verify_index(atoms, expected: int) -> int:
     """Count a Hessian as verification, not as search cost."""
+    analytic = _analytic_morse_index(atoms)
+    if analytic is not None:
+        return analytic
     state = getattr(getattr(atoms, "calc", None), "optbench_counter", None)
     previous = False
     if state is not None:
@@ -285,6 +317,19 @@ def entry_id(template: dict) -> str:
 def raw_cap(template: dict) -> int:
     """Harness-call cap. A band stops on the total across every image."""
     return int(template["stop"]["max_force_calls"])
+
+
+def _stop_measure(template: dict) -> tuple[str, float]:
+    """Return the stop the archived script used.
+
+    ``l2`` is the Euclidean norm on ``force_norm``. ``fmax`` is the largest
+    per-atom force, which is what ``Optimizer.run(fmax=...)`` applies. The
+    Morse PreconLBFGS script is the fmax case.
+    """
+    stop = template["stop"]
+    if str(stop.get("norm") or "l2") == "fmax":
+        return "fmax", float(stop["fmax"])
+    return "l2", float(stop.get("force_norm", stop.get("gradient_norm")))
 
 
 def _plain(value: object) -> object:
@@ -373,6 +418,10 @@ def discover(material: Path, template: dict) -> list[tuple[str, list[Path], int 
     select = (template.get("input") or {}).get("select", "con")
     if material.is_file():
         return [(material.name, [material], None)]
+    if select == "poscar":
+        files = [path for path in material.rglob("*") if path.is_file() and path.name.startswith("POSCAR_")]
+        files.sort(key=lambda path: int(path.name.split("_", 1)[1]))
+        return [(path.name, [path], None) for path in files]
     files = [path for path in material.rglob("*") if path.is_file() and path.suffix == ".con"]
     if select == "cluster":
         files = [path for path in files if path.name.startswith("cluster_")]
@@ -504,7 +553,16 @@ class _Morse:
 
     implemented_properties = ["energy", "forces"]
 
-    def __init__(self, D: float, alpha: float, r0: float, rc: float, form: str):
+    def __init__(
+        self,
+        D: float,
+        alpha: float,
+        r0: float,
+        rc: float,
+        form: str,
+        *,
+        minimum_image: bool = False,
+    ):
         from ase.calculators.calculator import Calculator
 
         class _Calc(Calculator):
@@ -517,16 +575,21 @@ class _Morse:
                 self.r0 = r0
                 self.rc = rc
                 self.form = form
+                # tsase morse.f minimum-images on the orthorhombic cell even
+                # when ase.io.read left atoms.pbc false. The preconditioner
+                # still sees that flag.
+                self.minimum_image = minimum_image
 
             def calculate(self, atoms=None, properties=("energy", "forces"), system_changes=None):
                 from ase.calculators.calculator import all_changes
 
                 changes = all_changes if system_changes is None else system_changes
                 super().calculate(atoms, properties, changes)
+                pbc = (True, True, True) if self.minimum_image else atoms.pbc
                 energy, forces = _morse_arrays(
                     atoms.positions,
                     atoms.cell.array,
-                    atoms.pbc,
+                    pbc,
                     self.D,
                     self.alpha,
                     self.r0,
@@ -590,6 +653,7 @@ def _inner_calculator(potential: dict):
             float(potential["r0"]),
             float(potential["rc"]),
             str(potential["form"]),
+            minimum_image=bool(potential.get("minimum_image", False)),
         ).calc
     raise ValueError(potential["kind"])
 
@@ -799,6 +863,25 @@ def _cap_row(row: dict, atoms, message: str = "force-call cap") -> dict:
     return row
 
 
+def _drive_fmax(
+    opt,
+    bucket: CallCounter,
+    tol: float,
+    max_steps: int,
+    atoms,
+) -> tuple[bool, float | None]:
+    """Stop on the largest per-atom force, as ``Optimizer.run(fmax=tol)`` does."""
+    try:
+        opt.run(fmax=tol, steps=max_steps)
+    except Exception as exc:
+        if not _cap_error(exc):
+            raise
+        return True, _fmax(atoms)
+    norm = _fmax(atoms)
+    failed = norm is None or norm > tol or bucket[0] >= bucket[1]
+    return failed, norm
+
+
 def _run_minimize(payload: dict, bucket: CallCounter) -> dict:
     atoms = _attach(_read_atoms(Path(payload["paths"][0])), payload["potential"], bucket)
     opt = _build_optimizer(payload["optimizer"], atoms)
@@ -806,7 +889,10 @@ def _run_minimize(payload: dict, bucket: CallCounter) -> dict:
     if payload.get("snapshot"):
         row["parameters"] = _snapshot_optimizer(opt, payload["optimizer"])
     try:
-        failed, norm = _drive_l2(opt, atoms.calc, bucket, payload["tol"], payload["max_steps"], atoms)
+        if payload.get("stop_norm") == "fmax":
+            failed, norm = _drive_fmax(opt, bucket, payload["tol"], payload["max_steps"], atoms)
+        else:
+            failed, norm = _drive_l2(opt, atoms.calc, bucket, payload["tol"], payload["max_steps"], atoms)
     except Exception as exc:
         if _cap_error(exc):
             return _cap_row(row, atoms)
@@ -1461,7 +1547,7 @@ def run_template(
         starts_path.unlink()
         done = {}
     cap = raw_cap(template)
-    tol = float(template["stop"].get("force_norm", template["stop"].get("gradient_norm")))
+    stop_norm, tol = _stop_measure(template)
     payloads = []
     for name, paths, seed in jobs:
         if name in done:
@@ -1479,6 +1565,7 @@ def run_template(
                 "reactant_positions": reactant_positions,
                 "seed": 0 if seed is None else seed,
                 "tol": tol,
+                "stop_norm": stop_norm,
                 "max_steps": int(template["stop"]["max_steps"]),
                 "raw_cap": cap,
                 "snapshot": False,
@@ -1582,7 +1669,7 @@ def run_point(root: Path, template_name: str, start: str, seed: int, *, cache: P
     if (template.get("sella") or {}).get("v0") == "reactant":
         reactant = next(path for path in material.rglob("reactant.con") if path.is_file())
         reactant_positions = _read_positions(reactant)
-    tol = float(template["stop"].get("force_norm", template["stop"].get("gradient_norm")))
+    stop_norm, tol = _stop_measure(template)
     payload = {
         "start": name,
         "task": template["task"],
@@ -1595,6 +1682,7 @@ def run_point(root: Path, template_name: str, start: str, seed: int, *, cache: P
         "reactant_positions": reactant_positions,
         "seed": job_seed_i,
         "tol": tol,
+        "stop_norm": stop_norm,
         "max_steps": int(template["stop"]["max_steps"]),
         "raw_cap": raw_cap(template),
         "snapshot": True,

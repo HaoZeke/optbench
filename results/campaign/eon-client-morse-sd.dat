@@ -1,8 +1,9 @@
-force_calls 7038
-force_calls_min 4026
-force_calls_max 9851
-nfailed 19
+force_calls 196
+force_calls_min 95
+force_calls_max 360
+nfailed 0
 code eOn
 code_version 3.5.0
 algorithm SD
 template eon-client/morse-sd
+problem minimization/morse-bulk

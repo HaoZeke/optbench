@@ -169,12 +169,12 @@ def _tuned_minimizer(problem: str, name: str) -> tuple[dict, str, str]:
             "LBFGS": (
                 {"maxstep": 0.2, "alpha": 25.0, "memory": 20},
                 "archive",
-                "Archive minimization/morse-bulk/ase-lbfgs sets memory 20, maxstep 0.2, alpha 25.",
+                "Archive minimization/morse-bulk/ase-lbfgs reads the POSCAR archive and sets memory 20, maxstep 0.2, alpha 25. The calculator is morse with rc 9.5.",
             ),
             "FIRE": (
                 {"maxstep": 0.2},
                 "archive",
-                "Archive minimization/morse-bulk/ase-fire sets maxstep 0.2.",
+                "Archive minimization/morse-bulk/ase-fire reads the POSCAR archive and sets maxstep 0.2. The calculator is morse with rc 9.5.",
             ),
             "BFGSLineSearch": (
                 {"maxstep": 0.2, "alpha": 1.0 / 0.003},
@@ -189,7 +189,7 @@ def _tuned_minimizer(problem: str, name: str) -> tuple[dict, str, str]:
             "PreconLBFGS": (
                 {"maxstep": 0.1, **exp},
                 "archive",
-                "Archive minimization/morse-bulk/ase-preconLBFGS sets Exp A 3 and maxstep 0.1.",
+                "Archive minimization/morse-bulk/ase-preconLBFGS/opt.py reads pos_*.con with ase.io.read, which leaves pbc false, builds tsase morse(rc=9.5), and runs PreconLBFGS(Exp A=3, maxstep=0.1) at fmax 0.01. tsase morse.f still minimum-images on the cell. The Exp neighbor list follows atoms.pbc.",
             ),
             "PreconFIRE": (
                 {"maxstep": 0.2, **exp},
@@ -244,6 +244,45 @@ def _minimization_specs() -> list[dict]:
                         )
                 else:
                     params, source, note = _tuned_minimizer(problem, name)
+                row_potential = potential
+                row_archive = archive
+                row_select = select
+                row_stop = stop
+                # The 2014 ASE Morse scripts construct tsase morse(rc=9.5).
+                # The eOn morse_pt kernel stays at cutoff 7.
+                # LBFGS and FIRE read the POSCAR archive. PreconLBFGS reads
+                # the con archive named by its run.sh.
+                if (
+                    profile == "tuned"
+                    and problem == "minimization/morse-bulk"
+                    and name in {"LBFGS", "FIRE", "PreconLBFGS"}
+                ):
+                    row_potential = {**potential, "rc": 9.5}
+                if (
+                    profile == "tuned"
+                    and problem == "minimization/morse-bulk"
+                    and name == "PreconLBFGS"
+                ):
+                    # ase.io.read leaves pbc false. The Fortran kernel does not.
+                    row_potential = {**row_potential, "pbc": [False, False, False], "minimum_image": True}
+                if (
+                    profile == "tuned"
+                    and problem == "minimization/morse-bulk"
+                    and name in {"LBFGS", "FIRE"}
+                ):
+                    row_archive = "website/minimization/morse-bulk/ase-lbfgs/morse-bulk.tgz"
+                    row_select = "poscar"
+                if (
+                    profile == "tuned"
+                    and problem == "minimization/morse-bulk"
+                    and name == "PreconLBFGS"
+                ):
+                    row_stop = {
+                        "norm": "fmax",
+                        "fmax": 0.01,
+                        "max_force_calls": 10000,
+                        "max_steps": 10000,
+                    }
                 specs.append(
                     {
                         "id": f"ase/{slug}-{_opt_slug(name)}-{profile}",
@@ -260,9 +299,9 @@ def _minimization_specs() -> list[dict]:
                         "parameter_source": source,
                         "note": note,
                         "optimizer": {"name": name, "parameters": params},
-                        "potential": potential,
-                        "stop": stop,
-                        "input": {"archive_path": archive, "select": select},
+                        "potential": row_potential,
+                        "stop": row_stop,
+                        "input": {"archive_path": row_archive, "select": row_select},
                     }
                 )
         # Sella can minimize with order 0.

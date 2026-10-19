@@ -284,6 +284,37 @@ def run(
             work=work,
             limit=limit,
         )
+    if template["engine"] == "pele":
+        problem = resolve_problem(root, problem_name)
+        stated = template.get("problem")
+        if stated and stated != problem["id"]:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        if problem.get("suite") == "globalopt":
+            from .runners.pele_bh import run_template
+
+            return run_template(
+                root,
+                problem,
+                template,
+                geometries=geometries,
+                output=output,
+                workers=workers,
+                work=work,
+                limit=limit,
+                resume=resume,
+            )
+        from .runners.pele_min import run_template
+
+        return run_template(
+            root,
+            problem,
+            template,
+            geometries=geometries,
+            output=output,
+            workers=workers,
+            work=work,
+            limit=limit,
+        )
     if template["engine"] == "rgmin":
         from .runners.rgmin_min import run_template
 
@@ -357,7 +388,9 @@ def run(
         dest.mkdir(parents=True, exist_ok=True)
         with tarfile.open(archive) as packed:
             packed.extractall(dest, filter="data")
-        cons = sorted(dest.rglob("*.con"))
+            names = [member.name for member in packed.getmembers() if member.name.endswith(".con")]
+        cons = [path for path in (dest / name for name in names) if path.is_file()]
+        cons.sort()
         if not cons:
             raise FileNotFoundError(f"{archive} has no .con files")
     else:

@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>pele</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="minimization/lj38">
    <th scope="row"><a href="#lj38">Lennard-Jones 38 clusters</a></th>
    <td data-code="eOn" data-template="eon/lj38-lbfgs-m100" data-par2="180.137"><span class="bench-score">180.137</span><a href="#lj38-templates">eon/lj38-lbfgs-m100</a></td>
@@ -22,6 +22,7 @@
    <td data-code="dlfind" data-template="dlfind/lbfgs-lj38" data-par2="231.908"><span class="bench-score">231.908</span><a href="#lj38-templates">dlfind/lbfgs-lj38</a></td>
    <td data-code="lammps" data-template="lammps/hftn-lj38" data-par2="1123.81"><span class="bench-score">1123.81</span><a href="#lj38-templates">lammps/hftn-lj38</a></td>
    <td data-code="optim" data-template="optim/lbfgs-lj38" data-par2="270.341"><span class="bench-score">270.341</span><a href="#lj38-templates">optim/lbfgs-lj38</a></td>
+   <td data-code="pele" data-template="pele/lj38-fire" data-par2="767.132"><span class="bench-score">767.132</span><a href="#lj38-templates">pele/lj38-fire</a></td>
    <td data-code="tsase" data-template="tsase/lbfgs-lj38" data-par2="257.2"><span class="bench-score">257.2</span><a href="#lj38-templates">tsase/lbfgs-lj38</a></td>
    </tr>
    <tr data-problem="minimization/lj38-noise">
@@ -38,6 +39,7 @@
    <td data-code="dlfind" data-template="dlfind/lbfgs-lj38-noise-s0" data-par2="231.908"><span class="bench-score">231.908</span><a href="#lj38-noise-templates">dlfind/lbfgs-lj38-noise-s0</a></td>
    <td data-code="lammps" data-template="lammps/hftn-lj38-noise-s0" data-par2="1123.81"><span class="bench-score">1123.81</span><a href="#lj38-noise-templates">lammps/hftn-lj38-noise-s0</a></td>
    <td data-code="optim">—</td>
+   <td data-code="pele">—</td>
    <td data-code="tsase">—</td>
    </tr>
    <tr data-problem="minimization/morse-bulk">
@@ -54,6 +56,7 @@
    <td data-code="dlfind" data-template="dlfind/lbfgs-morse" data-par2="13626.5"><span class="bench-score">13626.5</span><a href="#morse-bulk-templates">dlfind/lbfgs-morse</a></td>
    <td data-code="lammps" data-template="lammps/fire-morse" data-par2="17656.7"><span class="bench-score">17656.7</span><a href="#morse-bulk-templates">lammps/fire-morse</a></td>
    <td data-code="optim" data-template="optim/lbfgs-morse" data-par2="17408.8"><span class="bench-score">17408.8</span><a href="#morse-bulk-templates">optim/lbfgs-morse</a></td>
+   <td data-code="pele" data-template="pele/morse-lbfgs" data-par2="51.07"><span class="bench-score">51.07</span><a href="#morse-bulk-templates">pele/morse-lbfgs</a></td>
    <td data-code="tsase" data-template="tsase/lbfgs-morse" data-par2="17606.4"><span class="bench-score">17606.4</span><a href="#morse-bulk-templates">tsase/lbfgs-morse</a></td>
    </tr>
    </tbody></table></div></section><section class="bench" id="lj38" data-problem="minimization/lj38">
@@ -70,7 +73,7 @@
    <figure class="bench-plot"><a href="../../_static/board/minimization-lj38-profile.svg"><picture><source srcset="../../_static/board/minimization-lj38-profile.webp" type="image/webp"><img src="../../_static/board/minimization-lj38-profile.png" alt="Dolan-More profile for minimization/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/minimization-lj38-cost.svg"><picture><source srcset="../../_static/board/minimization-lj38-cost.webp" type="image/webp"><img src="../../_static/board/minimization-lj38-cost.png" alt="Cost versus success for minimization/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="lj38-templates">
-   <summary>All templates (102 ranked)</summary>
+   <summary>All templates (103 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="minimization/lj38">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
@@ -125,6 +128,7 @@
    <tr><td data-field="template">ase/lj38-fire-tuned</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">719.638</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.996173</td><td data-field="wilson_high">1</td><td data-field="median_calls">610.5</td><td data-field="mean_calls">719.638</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">ase/lj38-preconlbfgs-default</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">asv</td><td data-field="current">yes</td><td data-field="par2_mean">728.405</td><td data-field="success_rate">0.998</td><td data-field="wilson_low">0.992737</td><td data-field="wilson_high">0.999451</td><td data-field="median_calls">652.5</td><td data-field="mean_calls">690.119</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 2</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">ase/lj38-fire-tuned</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">asv</td><td data-field="current">yes</td><td data-field="par2_mean">738.781</td><td data-field="success_rate">0.999</td><td data-field="wilson_low">0.994357</td><td data-field="wilson_high">0.999823</td><td data-field="median_calls">610.5</td><td data-field="mean_calls">719.638</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 1</td><td data-field="n">1000</td></tr>
+   <tr><td data-field="template">pele/lj38-fire</td><td data-field="version">pele 0.1.2</td><td data-field="commit">b7081b932a06</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">767.132</td><td data-field="success_rate">0.997</td><td data-field="wilson_low">0.991217</td><td data-field="wilson_high">0.998979</td><td data-field="median_calls">621</td><td data-field="mean_calls">708.815</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 3</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">rgmin/lj38-fire</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">769.36</td><td data-field="success_rate">0.997</td><td data-field="wilson_low">0.991217</td><td data-field="wilson_high">0.998979</td><td data-field="median_calls">625.5</td><td data-field="mean_calls">711.609</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 3</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">rgmin/lj38-fire</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">f15726f1c798</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">769.36</td><td data-field="success_rate">0.997</td><td data-field="wilson_low">0.991217</td><td data-field="wilson_high">0.998979</td><td data-field="median_calls">625.5</td><td data-field="mean_calls">711.609</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 3</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">rgmin/lj38-fire-tuned</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">769.36</td><td data-field="success_rate">0.997</td><td data-field="wilson_low">0.991217</td><td data-field="wilson_high">0.998979</td><td data-field="median_calls">625.5</td><td data-field="mean_calls">711.609</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 3</td><td data-field="n">1000</td></tr>
@@ -260,7 +264,7 @@
    <h3>Legacy 2014 archive</h3>
    <details class="bench-details">
    <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
@@ -485,7 +489,7 @@
    </tr>
    <tr id="minimization-lj38-pele-fire">
    <td class="num">20</td>
-   <td class="text">pele-fire · not reproduced</td>
+   <td class="text">pele-fire</td>
    <td class="text"></td>
    <td class="num">7.09000e+02</td>
    <td class="num">2.0790e+03</td>
@@ -668,11 +672,11 @@
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
+   <p class="bench-gaps">eOn rows are not yet on the harness counter. Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
    <figure class="bench-plot"><a href="../../_static/board/minimization-morse-bulk-profile.svg"><picture><source srcset="../../_static/board/minimization-morse-bulk-profile.webp" type="image/webp"><img src="../../_static/board/minimization-morse-bulk-profile.png" alt="Dolan-More profile for minimization/morse-bulk" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/minimization-morse-bulk-cost.svg"><picture><source srcset="../../_static/board/minimization-morse-bulk-cost.webp" type="image/webp"><img src="../../_static/board/minimization-morse-bulk-cost.png" alt="Cost versus success for minimization/morse-bulk" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="morse-bulk-templates">
-   <summary>All templates (89 ranked)</summary>
+   <summary>All templates (96 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="minimization/morse-bulk">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
@@ -700,24 +704,29 @@
    <tr><td data-field="template">rgmin/morse-diis-tuned</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">f15726f1c798</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">27.44</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">28</td><td data-field="mean_calls">27.44</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">sella/morse-min-default</td><td data-field="version">Sella 2.6.0</td><td data-field="commit">6cfb60cdb100</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">28.89</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">28</td><td data-field="mean_calls">28.89</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">ase/morse-bfgslinesearch-default</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">28.91</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">28</td><td data-field="mean_calls">28.91</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">ase/morse-preconlbfgs-tuned</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">asv</td><td data-field="current">yes</td><td data-field="par2_mean">28.98</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">29</td><td data-field="mean_calls">28.98</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-dogleg</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">31.26</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">32.5</td><td data-field="mean_calls">31.26</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-dogleg-tuned</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">31.26</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">32.5</td><td data-field="mean_calls">31.26</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-dogleg-tuned</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">f15726f1c798</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">31.26</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">32.5</td><td data-field="mean_calls">31.26</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">ase/morse-lbfgs-tuned</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">asv</td><td data-field="current">yes</td><td data-field="par2_mean">32.03</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">32</td><td data-field="mean_calls">32.03</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-bb</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">33.22</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">34</td><td data-field="mean_calls">33.22</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-bb</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">f15726f1c798</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">33.22</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">34</td><td data-field="mean_calls">33.22</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-bb-tuned</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">33.22</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">34</td><td data-field="mean_calls">33.22</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-bb-tuned</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">f15726f1c798</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">33.22</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">34</td><td data-field="mean_calls">33.22</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">ase/morse-preconlbfgs-tuned</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">33.9</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">33.5</td><td data-field="mean_calls">33.9</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">ase/morse-preconode12r-default</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">41.78</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">44</td><td data-field="mean_calls">41.78</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">ase/morse-preconode12r-tuned</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">41.78</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">44</td><td data-field="mean_calls">41.78</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-cg</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">50.49</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">50</td><td data-field="mean_calls">50.49</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-cg</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">f15726f1c798</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">50.49</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">50</td><td data-field="mean_calls">50.49</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-cg-tuned</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">50.49</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">50</td><td data-field="mean_calls">50.49</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-cg-tuned</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">f15726f1c798</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">50.49</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">50</td><td data-field="mean_calls">50.49</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">pele/morse-lbfgs</td><td data-field="version">pele 0.1.2</td><td data-field="commit">b7081b932a06</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">51.07</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">49</td><td data-field="mean_calls">51.07</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">ase/morse-bfgs-default</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">53.36</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">54</td><td data-field="mean_calls">53.36</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">ase/morse-lbfgs-default</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">53.36</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">54</td><td data-field="mean_calls">53.36</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-bfgs</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">f15726f1c798</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">54.04</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">50</td><td data-field="mean_calls">54.04</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">eon/morse-lbfgs-m100</td><td data-field="version">eOn 3.6.0</td><td data-field="commit">1d71c9445018</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">54.18</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">53</td><td data-field="mean_calls">54.18</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">eon/morse-lbfgs</td><td data-field="version">eOn 3.6.0</td><td data-field="commit">1d71c9445018</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">54.31</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">52</td><td data-field="mean_calls">54.31</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">ase/morse-lbfgs-tuned</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">54.74</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">53</td><td data-field="mean_calls">54.74</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">ase/morse-bfgs-tuned</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">54.92</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">55</td><td data-field="mean_calls">54.92</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-sr2</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">59.53</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">61</td><td data-field="mean_calls">59.53</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-sr2</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">f15726f1c798</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">59.53</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">61</td><td data-field="mean_calls">59.53</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
@@ -746,10 +755,12 @@
    <tr><td data-field="template">rgmin/morse-fire-tuned</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">113.19</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">113</td><td data-field="mean_calls">113.19</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-fire-tuned</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">f15726f1c798</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">113.19</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">113</td><td data-field="mean_calls">113.19</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">ase/morse-fire-default</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">113.36</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">112</td><td data-field="mean_calls">113.36</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">ase/morse-fire-tuned</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">asv</td><td data-field="current">yes</td><td data-field="par2_mean">113.36</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">112</td><td data-field="mean_calls">113.36</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-fire2</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">f15726f1c798</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">121.85</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">124</td><td data-field="mean_calls">121.85</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-fire2</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">121.87</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">124</td><td data-field="mean_calls">121.87</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-fire2-tuned</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">121.87</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">124</td><td data-field="mean_calls">121.87</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-fire2-tuned</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">f15726f1c798</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">121.87</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">124</td><td data-field="mean_calls">121.87</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">ase/morse-fire-tuned</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">147.47</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">145.5</td><td data-field="mean_calls">147.47</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-adam</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">219.34</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">222</td><td data-field="mean_calls">219.34</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-adam</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">f15726f1c798</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">219.34</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">222</td><td data-field="mean_calls">219.34</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-adam-tuned</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">219.34</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">222</td><td data-field="mean_calls">219.34</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
@@ -802,9 +813,6 @@
    <li>rgmin/morse-diis rgmin 0.4.0 campaign, asv n=100 PAR-2=16153.4 mean=8153.43</li>
    </ul>
    <h3>Partial</h3><ul>
-   <li>ase/morse-fire-tuned ASE campaign, asv n=100, does not reproduce the 2014 archive.</li>
-   <li>ase/morse-lbfgs-tuned ASE campaign, asv n=100, does not reproduce the 2014 archive.</li>
-   <li>ase/morse-preconlbfgs-tuned ASE campaign, asv n=100, does not reproduce the 2014 archive.</li>
    <li>ase/morse-preconode12r-tuned ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
    <li>ase/morse-bfgs-default ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
    <li>ase/morse-bfgslinesearch-default ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
@@ -822,11 +830,13 @@
    <li>ase/morse-lbfgs-tuned ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
    <li>ase/morse-preconlbfgs-tuned ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
    </ul>
+   <h3>Not a harness score</h3><ul>
+   <li>eon-client/morse-sd eOn n=100, not yet on the harness counter.</li>
+   </ul>
    <h3>Not scored</h3><ul>
    <li>eon-client/morse-cg: no per-start record</li>
    <li>eon-client/morse-fire: no per-start record</li>
    <li>eon-client/morse-lbfgs: no per-start record</li>
-   <li>eon-client/morse-sd: no per-start record; does not reproduce the 2014 archive</li>
    <li>eon-svn/morse-cg: no per-start record</li>
    <li>eon-svn/morse-fire: no per-start record</li>
    <li>eon-svn/morse-lbfgs: no per-start record</li>
@@ -865,7 +875,7 @@
    </tr>
    <tr id="minimization-morse-bulk-ase-preconlbfgs">
    <td class="num">2</td>
-   <td class="text">ase-preconLBFGS · not reproduced</td>
+   <td class="text">ase-preconLBFGS</td>
    <td class="text"></td>
    <td class="num">34</td>
    <td class="num">47</td>
@@ -887,7 +897,7 @@
    </tr>
    <tr id="minimization-morse-bulk-pele-lbfgs">
    <td class="num">4</td>
-   <td class="text">pele-lbfgs · not reproduced</td>
+   <td class="text">pele-lbfgs</td>
    <td class="text"></td>
    <td class="num">5.10000e+01</td>
    <td class="num">8.4000e+01</td>
@@ -909,7 +919,7 @@
    </tr>
    <tr id="minimization-morse-bulk-ase-lbfgs">
    <td class="num">6</td>
-   <td class="text">ase-lbfgs · not reproduced</td>
+   <td class="text">ase-lbfgs</td>
    <td class="text">ASE 3.6.0</td>
    <td class="num">53.8</td>
    <td class="num">91</td>
@@ -942,7 +952,7 @@
    </tr>
    <tr id="minimization-morse-bulk-ase-fire">
    <td class="num">9</td>
-   <td class="text">ase-fire · not reproduced</td>
+   <td class="text">ase-fire</td>
    <td class="text">ASE 3.6.0</td>
    <td class="num">147.47</td>
    <td class="num">216</td>
@@ -964,7 +974,7 @@
    </tr>
    <tr id="minimization-morse-bulk-eon-sd">
    <td class="num">11</td>
-   <td class="text">eon-sd · not reproduced</td>
+   <td class="text">eon-sd</td>
    <td class="text">Eon r2030</td>
    <td class="num">196</td>
    <td class="num">360</td>

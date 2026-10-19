@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-45 reproduced, 27 not reproduced, 79 not rerun. 151 archive rows.
+53 reproduced, 19 not reproduced, 79 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -59,7 +59,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj38/gmin-csm | — | — | not rerun |
 | lj38/gmin-nosym | — | — | not rerun |
 | lj38/gmin-symmetrise | — | — | not rerun |
-| lj38/pele-basinhopping | force_calls 521595 | 688720 | not reproduced; pele_bh_defaults |
+| lj38/pele-basinhopping | force_calls 521595 | 528658 | reproduced |
 | lj75/gmin | — | — | not rerun |
 | lj98/gmin-nosym | — | — | not rerun |
 | lj98/gmin-symmetrise | — | — | not rerun |
@@ -74,7 +74,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
-| Al/eon-dimer-cg | barrier_force_calls 28870, barrier_jobs 48, rate_force_calls 897900, rate_jobs 1511 | 19660, 50, 620600, 1600 | not reproduced; htst_al |
+| Al/eon-dimer-cg | barrier_force_calls 28870, barrier_jobs 48, rate_force_calls 897900, rate_jobs 1511 | 27720, 45, 1.224e+06, 2030 | not reproduced; htst_al |
 | Al/eon-dimer-cg2 | — | — | not rerun |
 | Pt/alpha_dimer-qm | — | — | not rerun |
 | Pt/eon-dimer-cg | barrier_force_calls 496000, barrier_jobs 1050, rate_force_calls 25630, rate_jobs 54 | 506000, 1062, 27160, 57 | reproduced |
@@ -122,7 +122,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj38/eon-sd-twopoint | force_calls 539 | 532 | reproduced |
 | lj38/newton-method | — | — | not rerun |
 | lj38/optim | force_calls 176 | 176 | reproduced |
-| lj38/pele-fire | force_calls 709 | 1264 | not reproduced; pele_fire |
+| lj38/pele-fire | force_calls 709 | 709 | reproduced |
 | lj38/pele-lbfgs-M1-maxstep0.1 | force_calls 287 | 286 | reproduced |
 | lj38/pele-lbfgs-M10-maxstep0.1 | force_calls 235 | 235 | reproduced |
 | lj38/pele-lbfgs-M100-maxstep0.2 | force_calls 179 | 178 | reproduced |
@@ -132,16 +132,16 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj38/pele-lbfgs-M4-maxstep0.2 | force_calls 230 | 228 | reproduced |
 | lj38/scipy-lbfgs | — | — | not rerun |
 | lj38/tsase-sdlbfgs | — | — | not rerun |
-| morse-bulk/ase-fire | force_calls 147.47 | 113 | not reproduced; ase_morse_script |
-| morse-bulk/ase-lbfgs | force_calls 53.8 | 32 | not reproduced; ase_morse_script |
-| morse-bulk/ase-preconLBFGS | force_calls 34 | 29 | not reproduced; ase_morse_script |
+| morse-bulk/ase-fire | force_calls 147.47 | 147 | reproduced |
+| morse-bulk/ase-lbfgs | force_calls 53.8 | 55 | reproduced |
+| morse-bulk/ase-preconLBFGS | force_calls 34 | 34 | reproduced |
 | morse-bulk/eon-cg | force_calls 106 | 106 | reproduced |
 | morse-bulk/eon-fire | force_calls 156 | 156 | reproduced |
 | morse-bulk/eon-lbfgs | force_calls 52 | 52 | reproduced |
-| morse-bulk/eon-sd | force_calls 196 | 7038 | not reproduced; morse_sd |
+| morse-bulk/eon-sd | force_calls 196 | 196 | reproduced |
 | morse-bulk/eon-sd-twopoint | — | — | not rerun |
 | morse-bulk/optim | force_calls 46 | 27 | not reproduced; optim_morse_memory |
-| morse-bulk/pele-lbfgs | force_calls 51 | 92 | not reproduced; pele_morse |
+| morse-bulk/pele-lbfgs | force_calls 51 | 51 | reproduced |
 | morse-bulk/tsase-sdlbfgs | — | — | not rerun |
 
 ## mlopt
@@ -165,7 +165,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
-| Pt-heptamer/eon-cg | force_calls 120 | 142 | not reproduced; heptamer_cg |
+| Pt-heptamer/eon-cg | force_calls 120 | 116 | reproduced |
 | Pt-heptamer/eon-fire | force_calls 86 | 85 | reproduced |
 | Pt-heptamer/eon-lbfgs | force_calls 42 | 40 | reproduced |
 | Pt-heptamer/eon-qm | force_calls 164 | 165 | reproduced |
@@ -263,15 +263,9 @@ archive run.sh divides coordinates by r0 = 2.897 and scales rho and rcut into th
 - double-ended-saddle-search/pt-island/optim
 - tsopt/pt-island/optim_ffd
 
-### pele_bh_defaults
-
-The archived driver is the dangling path bin/js850/globalopt.py. The harness uses pele LJCluster defaults (temperature 1, step 0.6, LBFGS memory 4) on unshifted cutoff 40. The mean is 688720 against 521595.
-
-- globalopt/lj38/pele-basinhopping
-
 ### htst_al
 
-The r2549 Al dimer with the archived rotation string (CG, max 50, tol 1) misses barrier_force_calls and rate_force_calls by about 30 percent. Pt dimer CG with max 10 reproduces all four hTST counts.
+The 28 Jan 2013 client (git a1ae6103) with the archived Al ini reproduces the barrier window: barrier_jobs 45 against 48 and barrier_force_calls 2.772e+04 against 2.887e+04. The rate window does not. Fourteen windows average rate_jobs 2030 against 1511 and rate_force_calls 1.224e+06 against 8.979e+05. Each rate-window search costs about the archived 594 force calls. The four 0.233 eV processes leave the escape rate a few thousand per second short of 0.999 of the reference, and the later windows stay long.
 
 - hTST/Al/eon-dimer-cg
 
@@ -281,43 +275,11 @@ The Rayleigh-Ritz template uses updates 4. The archived first-order mean is 25 a
 
 - lowest-eigenvector/lj38/optim-first-order
 
-### pele_fire
-
-pele FIRE on LJ38 scores 1264 with 7 failures. The archive is 709 with 0 failures. The M100 L-BFGS row on the same build reproduces, so this is the FIRE step, not the LJ kernel.
-
-- minimization/lj38/pele-fire
-
-### ase_morse_script
-
-ASE 3.29 with the archived Morse script (L-BFGS memory 20, maxstep 0.2, alpha 25; FIRE maxstep 0.2; PreconLBFGS Exp A 3) scores 32, 113, and 29 against 53.8, 147.47, and 34. Constructor-default L-BFGS scores 53, next to 53.8, but that is not the archived alpha and memory. eOn Morse L-BFGS and FIRE on the same bulk file reproduce, so the geometry set is not the split.
-
-- minimization/morse-bulk/ase-fire
-- minimization/morse-bulk/ase-lbfgs
-- minimization/morse-bulk/ase-preconLBFGS
-
-### morse_sd
-
-eOn Morse steepest descent scores 7038 with 19 failures. The archive is 196 with 0. Morse L-BFGS, CG, and FIRE on the same client reproduce, so the kernel is not the split.
-
-- minimization/morse-bulk/eon-sd
-
 ### optim_morse_memory
 
 comments.txt sets L-BFGS memory 100 and maximum move 2.0. That rerun scores 27. OPTIM defaults (updates 4) score 46, which is the archived integer, but that is not the comment's setup. The odata preamble was not archived.
 
 - minimization/morse-bulk/optim
-
-### pele_morse
-
-pele Morse L-BFGS scores 92. The archive is 51. eOn Morse L-BFGS on the same bulk file reproduces at 52, so the gap is the pele memory and step, not the shared Morse parameters.
-
-- minimization/morse-bulk/pele-lbfgs
-
-### heptamer_cg
-
-The 3.5.0 file already stores the per-image mean, 142 against the archive 120. L-BFGS, FIRE, and QM on the same 8-image spring-5 climb reproduce, so the image count is not the split.
-
-- neb/Pt-heptamer/eon-cg
 
 ### saddle_novelty
 

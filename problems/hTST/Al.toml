@@ -4,6 +4,32 @@ suite = "hTST"
 problem = "Al"
 contract = "partial"
 entry_count = 2
+remark = "A start is one barrier window. The window closes when each reference barrier below 0.4 eV has been matched once from the processtable. Force calls are sad-fcs. The rate sum uses the search row's harmonic prefactor when the row carries one, and 1.2e12 otherwise. r2006 stops on the largest per-atom force. The potential is eam_al."
+
+[potential]
+evaluator = "eam_al"
+kind = "eam"
+name = "eam_al"
+
+[htst]
+temperature = 300
+rate_ref = 592041917.0
+rate_accuracy = 0.999
+prefactor = 1.2e12
+kb = 8.6173324e-5
+barrier_ceiling = 0.4
+barriers = [0.233, 0.233, 0.233, 0.233, 0.372, 0.372, 0.372, 0.372]
+
+[convergence]
+norm = "max_atom"
+force_norm = 0.001
+force_unit = "eV/Angstrom"
+
+[sample]
+starts = 639
+
+[input]
+archive_path = "website/hTST/Al/eon-dimer-cg/pos.con"
 
 [metrics]
 required = ["barrier_force_calls", "barrier_jobs", "rate_force_calls", "rate_jobs"]

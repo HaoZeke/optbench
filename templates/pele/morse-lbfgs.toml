@@ -1,0 +1,22 @@
+id = "pele/morse-lbfgs"
+engine = "pele"
+problem = "minimization/morse-bulk"
+code = "pele"
+code_version = "0.1.2"
+commit = "b7081b932a060be11342fbe8287ac35da8ada879"
+algorithm = "LBFGS"
+tuning = "archive"
+note = "Archive minimization/morse-bulk/pele-lbfgs/run.sh sets M 100 and maxstep 2.0. maxErise is 1e-4 and H0 is 0.1, the constructor values. The potential is the shifted Morse with the pele Morse bulk cutoff 9.5, D 0.7102, alpha 1.6047, r0 2.897. The stop is the Euclidean norm of the gradient at the problem force norm. The iteration budget is the force-call cap."
+
+[pele]
+method = "lbfgs"
+M = 100
+maxstep = 2.0
+
+[potential]
+kind = "morse"
+rc = 9.5
+
+[ini.Optimizer]
+converged_force = 1.0e-3
+max_iterations = 10000

@@ -31,7 +31,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <h3>Legacy 2014 archive</h3>
    <details class="bench-details">
    <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
@@ -256,7 +256,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="minimization-lj38-pele-fire">
    <td class="num">20</td>
-   <td class="text">pele-fire · not reproduced</td>
+   <td class="text">pele-fire</td>
    <td class="text"></td>
    <td class="num">7.09000e+02</td>
    <td class="num">2.0790e+03</td>
@@ -348,7 +348,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td data-field="template">rgmin/morse-newton</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">8.35</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">9</td><td data-field="mean_calls">8.35</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
-   <p class="bench-gaps">Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
+   <p class="bench-gaps">eOn rows are not yet on the harness counter. Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
    <p><a href="generated/suites/minimization.html#morse-bulk">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="morse-bulk-legacy">
    <h3>Legacy 2014 archive</h3>
@@ -381,7 +381,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="minimization-morse-bulk-ase-preconlbfgs">
    <td class="num">2</td>
-   <td class="text">ase-preconLBFGS · not reproduced</td>
+   <td class="text">ase-preconLBFGS</td>
    <td class="text"></td>
    <td class="num">34</td>
    <td class="num">47</td>
@@ -403,7 +403,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="minimization-morse-bulk-pele-lbfgs">
    <td class="num">4</td>
-   <td class="text">pele-lbfgs · not reproduced</td>
+   <td class="text">pele-lbfgs</td>
    <td class="text"></td>
    <td class="num">5.10000e+01</td>
    <td class="num">8.4000e+01</td>
@@ -425,7 +425,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="minimization-morse-bulk-ase-lbfgs">
    <td class="num">6</td>
-   <td class="text">ase-lbfgs · not reproduced</td>
+   <td class="text">ase-lbfgs</td>
    <td class="text">ASE 3.6.0</td>
    <td class="num">53.8</td>
    <td class="num">91</td>
@@ -458,7 +458,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="minimization-morse-bulk-ase-fire">
    <td class="num">9</td>
-   <td class="text">ase-fire · not reproduced</td>
+   <td class="text">ase-fire</td>
    <td class="text">ASE 3.6.0</td>
    <td class="num">147.47</td>
    <td class="num">216</td>
@@ -480,7 +480,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="minimization-morse-bulk-eon-sd">
    <td class="num">11</td>
-   <td class="text">eon-sd · not reproduced</td>
+   <td class="text">eon-sd</td>
    <td class="text">Eon r2030</td>
    <td class="num">196</td>
    <td class="num">360</td>
@@ -1072,7 +1072,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/lj38">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="13">No full harness row.</td></tr>
+   <tr><td data-field="template">pele/lj38-basinhopping</td><td data-field="version">pele 0.1.2</td><td data-field="commit">b7081b932a06</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">528658</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">385464</td><td data-field="mean_calls">528658</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/globalopt.html#lj38">Full ranked table and performance profile</a>.</p>
@@ -1080,7 +1080,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <h3>Legacy 2014 archive</h3>
    <details class="bench-details">
    <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
@@ -1140,7 +1140,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="globalopt-lj38-pele-basinhopping">
    <td class="num">5</td>
-   <td class="text">pele-basinhopping · not reproduced</td>
+   <td class="text">pele-basinhopping</td>
    <td class="text">pele</td>
    <td class="num">5.21595e+05</td>
    <td class="num">9.4470e+03</td>
@@ -2126,7 +2126,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <h3>Legacy 2014 archive</h3>
    <details class="bench-details">
    <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
@@ -2211,7 +2211,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="neb-pt-heptamer-eon-cg">
    <td class="num">8</td>
-   <td class="text">eon-cg · not reproduced</td>
+   <td class="text">eon-cg</td>
    <td class="text">Eon r2090</td>
    <td class="num">120</td>
    <td class="num">211</td>

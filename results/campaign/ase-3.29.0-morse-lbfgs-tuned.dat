@@ -1,7 +1,7 @@
-force_calls 32
-force_calls_min 26
-force_calls_median 32
-force_calls_max 36
+force_calls 55
+force_calls_min 36
+force_calls_median 53
+force_calls_max 92
 nfailed 0
 starts 100
 code ASE
@@ -14,8 +14,21 @@ problem minimization/morse-bulk
 counter harness
 reducer capped
 parameter_source archive
-method {"counter":"harness calculator force evaluations","parameter_source":"archive","parameters":{"alpha":25.0,"damping":1.0,"maxstep":0.2,"memory":20,"use_line_search":false},"potential":{"D":0.7102,"alpha":1.6047,"form":"shift","kind":"morse","pbc":[true,true,true],"r0":2.897,"rc":7.0},"profile":"tuned","reducer":"capped","stop":{"force_norm":0.001,"max_force_calls":10000,"max_steps":10000,"norm":"l2"}}
-note Archive minimization/morse-bulk/ase-lbfgs sets memory 20, maxstep 0.2, alpha 25.
+method {"counter":"harness attach_ase_counter","parameter_source":"archive","parameters":{"alpha":25.0,"damping":1.0,"maxstep":0.2,"memory":20,"use_line_search":false},"potential":{"D":0.7102,"alpha":1.6047,"form":"shift","kind":"morse","pbc":[true,true,true],"r0":2.897,"rc":9.5},"profile":"tuned","reducer":"capped","stop":{"force_norm":0.001,"max_force_calls":10000,"max_steps":10000,"norm":"l2"}}
+note Archive minimization/morse-bulk/ase-lbfgs reads the POSCAR archive and sets memory 20, maxstep 0.2, alpha 25. The calculator is morse with rc 9.5. v2 success is the harness cap, the stop norm, and the Hessian index (0 minimum, 1 saddle) after rigid modes are projected out when no atom is fixed. Energy and Kabsch RMSD are not applied: these starts have no reference geometry.
 host cursor
-date 2026-10-15
+date 2026-10-19
 contributor Rohit Goswami
+scoring par2-wilson-bootstrap
+par2_mean 54.74
+par2_median 53
+par2_median_low 50
+par2_median_high 55.5125
+par2_iqr 17.25
+success_rate 1
+wilson_low 0.9630065018
+wilson_high 1
+par_applied true
+par_factor 2
+bootstrap_resamples 2000
+bootstrap_seed 20261015
