@@ -1,0 +1,48 @@
+id = "sella-0.1.1/lj38-ts"
+engine = "sella"
+code = "Sella"
+code_version = "0.1.1"
+commit = "0.1.1"
+algorithm = "Sella"
+problem = "tsopt/LJ38"
+task = "sella"
+profile = "archive"
+reducer = "all"
+ranked = true
+parameter_source = "archive"
+note = "Archive tsopt_lj38.py on Sella 0.1.1: method rsprfo, order 1, eta 1e-6, gamma 0.4, delta0 1.3e-3, rho_inc 1.035, rho_dec 5, sigma_inc 1.15, sigma_dec 0.65. ASE 3.18 irun, fmax 0, 1000 steps. Stop is the Euclidean force norm at 1e-3. A start fails when nsteps reaches 1000. The score is PESWrapper.calls. ASE Lennard-Jones cutoff 40."
+
+[optimizer]
+name = "Sella"
+
+[optimizer.parameters]
+method = "rsprfo"
+order = 1
+eta = 1e-6
+gamma = 0.4
+rho_inc = 1.035
+rho_dec = 5.0
+sigma_inc = 1.15
+sigma_dec = 0.65
+delta0 = 1.3e-3
+
+[potential]
+kind = "lennard-jones"
+epsilon = 1.0
+sigma = 1.0
+rc = 40.0
+pbc = [false, false, false]
+
+[stop]
+norm = "l2"
+force_norm = 0.001
+max_steps = 1000
+max_force_calls = 10000
+
+[input]
+archive_path = "website/tsopt/LJ38/coords-con.tar.gz"
+select = "con"
+
+[sella]
+order = 1
+v0 = "none"

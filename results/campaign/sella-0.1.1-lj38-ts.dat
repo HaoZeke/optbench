@@ -1,0 +1,16 @@
+force_calls 69.515
+force_calls_min 24
+force_calls_median 64.0
+force_calls_max 160
+nfailed 0
+starts 200
+code Sella
+code_version 0.1.1
+commit 0.1.1
+algorithm Sella
+template sella-0.1.1/lj38-ts
+problem tsopt/LJ38
+counter harness
+reducer all
+parameter_source archive
+note Archive tsopt_lj38.py: Sella 0.1.1 method rsprfo, order 1, eta 1e-6, gamma 0.4, delta0 1.3e-3, rho_inc 1.035, rho_dec 5, sigma_inc 1.15, sigma_dec 0.65. ASE 3.18 irun with fmax 0 and 1000 steps. Stop is the Euclidean force norm at 1e-3. A start fails when nsteps reaches 1000. ASE Lennard-Jones cutoff 40. One harness force call is one PESWrapper.calls evaluation.

@@ -166,12 +166,12 @@ note = "No public git commit. The pin is the sha256 of the Wales svn.tar.bz2 sna
 [[code]]
 id = "sella-0.1.1"
 name = "Sella"
-role = "lowest eigenvector"
+role = "lowest eigenvector and saddle search"
 repository = "https://github.com/zadorlab/sella"
 ref = "0.1.1"
 commit = "0.1.1"
 committed = "2019-12-10"
-note = "Sella 0.1.1 PESWrapper.diag for the lowest-eigenvector row. eta 1e-6, gamma 1e-16, vreftol 0.99, gradient v0, rigid-mode projection. This pin is not Sella 2.6.0."
+note = "Sella 0.1.1 from the PyPI sdist Sella-0.1.1.tar.gz. The lowest-eigenvector row is PESWrapper.diag. The LJ38 transition-state row is Sella with the archived trust region and the ASE 3.18 irun loop. The score is PESWrapper.calls. This pin is not Sella 2.6.0."
 
 [[template]]
 id = "sella-0.1.1/lj38-loweig"
@@ -179,6 +179,14 @@ code = "sella-0.1.1"
 problem = "lowest-eigenvector/lj38"
 profile = "archive"
 task = "lowest-eigenvector"
+ranked = true
+
+[[template]]
+id = "sella-0.1.1/lj38-ts"
+code = "sella-0.1.1"
+problem = "tsopt/LJ38"
+profile = "archive"
+task = "sella"
 ranked = true
 
 # generated ASE and Sella templates
