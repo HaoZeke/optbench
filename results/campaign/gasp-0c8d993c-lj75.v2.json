@@ -1,0 +1,145 @@
+{
+  "bootstrap_resamples": 2000,
+  "bootstrap_seed": 20261015,
+  "note": "Harness counter. Each call is a LAMMPS lj/cut force evaluation.",
+  "par_factor": 2,
+  "problem": "globalopt/lj75",
+  "runs": [
+    {
+      "algorithm": "GASP",
+      "cap": 1000000,
+      "code": "gasp",
+      "code_version": "0.1",
+      "commit": "0c8d993c82e0e1c69a05b3c34bbb2fcbbdbb7f07",
+      "entry": "gasp-0c8d993c-lj75",
+      "metrics": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 1000000,
+        "includes_failures": true,
+        "iqr": 0.0,
+        "iqr_high": 0.0,
+        "iqr_low": 0.0,
+        "mean": 2000000.0,
+        "median": 2000000.0,
+        "median_high": 2000000.0,
+        "median_low": 2000000.0,
+        "n": 4,
+        "n_cap": 0,
+        "n_crash": 0,
+        "n_divergence": 0,
+        "n_wrong_stationary": 4,
+        "nfailed": 4,
+        "par2_mean": 2000000.0,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 2000000.0,
+        "q75": 2000000.0,
+        "scoring": "par2-wilson-bootstrap",
+        "success_only_mean": null,
+        "success_rate": 0.0,
+        "successes": 0,
+        "wilson_high": 0.4898908364545973,
+        "wilson_low": 0.0
+      },
+      "parameters": {
+        "min_eval": 20000,
+        "num_energy_calcs": 800
+      },
+      "present_source": true,
+      "provenance": {
+        "code": "gasp",
+        "code_version": "0.1",
+        "commit": "0c8d993c82e0e1c69a05b3c34bbb2fcbbdbb7f07",
+        "machine": {
+          "machine": "x86_64",
+          "node": "cursor",
+          "python": "3.12.3",
+          "system": "Linux"
+        },
+        "parameters": {
+          "min_eval": 20000,
+          "num_energy_calcs": 800
+        }
+      },
+      "starts": [
+        {
+          "cap": 1000000,
+          "comparable": true,
+          "counter": "harness",
+          "energy": -396.282248825573,
+          "energy_calcs": 800,
+          "failed_calcs": 0,
+          "failure": "wrong_stationary",
+          "force_calls": 381801,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "seed": 20261016,
+          "start": "coords.2",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "cap": 1000000,
+          "comparable": true,
+          "counter": "harness",
+          "energy": -392.504705950977,
+          "energy_calcs": 800,
+          "failed_calcs": 0,
+          "failure": "wrong_stationary",
+          "force_calls": 360976,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "seed": 20261018,
+          "start": "coords.4",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "cap": 1000000,
+          "comparable": true,
+          "counter": "harness",
+          "energy": -392.147811849144,
+          "energy_calcs": 800,
+          "failed_calcs": 0,
+          "failure": "wrong_stationary",
+          "force_calls": 344569,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "seed": 20261019,
+          "start": "coords.5",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "cap": 1000000,
+          "comparable": true,
+          "counter": "harness",
+          "energy": -391.364134970416,
+          "energy_calcs": 800,
+          "failed_calcs": 0,
+          "failure": "wrong_stationary",
+          "force_calls": 364074,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "seed": 20261020,
+          "start": "coords.6",
+          "success": false,
+          "verify_calls": 0
+        }
+      ],
+      "tuning": "default"
+    }
+  ],
+  "schema": "optbench.result/v2",
+  "scoring": "par2-wilson-bootstrap",
+  "status": "archive"
+}
