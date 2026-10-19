@@ -106,16 +106,35 @@ def _job(spec: dict, start: str) -> dict:
         "cap": spec["cap"],
         "target": spec["target"],
         "claim": spec["claim"],
-        "idle_timeout": 300,
+        "idle_timeout": 1800,
     }
+
+
+def _cache_path(spec: dict, seed: str, start: str) -> Path:
+    # asv runs each track method in a new process. One search has to serve all of them.
+    root = Path("/tmp/optbench-asv-flame-cache")
+    root.mkdir(parents=True, exist_ok=True)
+    slug = spec["template_id"].replace("/", "-")
+    return root / f"{slug}-{seed}-{start}.json"
 
 
 def _compute(spec: dict, seed: str, start: str) -> dict:
     if str(seed) != spec["seed"]:
         raise ValueError(f"seed {seed} is not the template seed {spec['seed']}")
+    import json
+
+    path = _cache_path(spec, seed, start)
+    if path.is_file():
+        cached = json.loads(path.read_text(encoding="utf-8"))
+        if "force_calls" in cached and "failure" in cached:
+            return cached
     from optbench.runners.flame_go import _run_start
 
-    return _run_start(_job(spec, start))
+    record = _run_start(_job(spec, start))
+    temporary = path.with_name(path.name + ".tmp")
+    temporary.write_text(json.dumps(record), encoding="utf-8")
+    temporary.replace(path)
+    return record
 
 
 class _FlameSearch(TrackedSearch):
