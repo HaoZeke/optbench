@@ -1,0 +1,64 @@
+{
+  "counter": "harness",
+  "legacy": {
+    "force_calls": 3473,
+    "force_calls_max": 9498,
+    "force_calls_median": 2265,
+    "force_calls_min": 1295,
+    "n": 51,
+    "nfailed": 10,
+    "successes": 41,
+    "transition_states": 41
+  },
+  "problem": "double-ended-saddle-search/lj38_2ts_separation",
+  "provenance": {
+    "code": "compass",
+    "code_version": "1.0.0",
+    "commit": "22da7bd5f69cbd64d59853c8f8d7f8d44c2d18df",
+    "machine": {
+      "machine": "x86_64",
+      "node": "cursor",
+      "python": "3.12.3",
+      "system": "Linux"
+    },
+    "parameters": {
+      "counter": "harness",
+      "fixed_cell": true,
+      "forcetol": 0.001,
+      "minimize_fmax": 0.001,
+      "potential": "lj"
+    }
+  },
+  "schema": "optbench.score/v2",
+  "score": {
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 20261015,
+    "cap": 10000,
+    "includes_failures": true,
+    "iqr": 5202.0,
+    "iqr_high": 17968.524999999998,
+    "iqr_low": 3276.4125,
+    "mean": 6713.3725490196075,
+    "median": 4105.0,
+    "median_high": 5336.0,
+    "median_low": 2139.0,
+    "n": 51,
+    "n_cap": 9,
+    "n_crash": 0,
+    "n_divergence": 0,
+    "n_wrong_stationary": 1,
+    "nfailed": 10,
+    "par2_mean": 6713.3725490196075,
+    "par_applied": true,
+    "par_factor": 2,
+    "q25": 2030.5,
+    "q75": 7232.5,
+    "scoring": "par2-wilson-bootstrap",
+    "success_only_mean": 3472.731707317073,
+    "success_rate": 0.803921568627451,
+    "successes": 41,
+    "wilson_high": 0.889846574875333,
+    "wilson_low": 0.6754192051863439
+  },
+  "template": "compass/sqnm"
+}

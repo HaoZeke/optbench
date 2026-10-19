@@ -1,0 +1,17 @@
+# TSASE solid-state dimer on the LJ38 transition-state guesses.
+id = "tsase/dimer-lj38"
+engine = "tsase"
+problem = "tsopt/LJ38"
+code = "tsase"
+code_version = "1.0"
+commit = "98aac60b5d9905e81ee4e6b8c385f169258d0218"
+algorithm = "SSDimer"
+tuning = "default"
+note = "ss is false. Rigid translation and rotation are projected. The initial mode is seeded and random."
+
+[tsase]
+method = "dimer"
+max_step = 0.2
+dr = 0.001
+phi_tol = 5.0
+rotation_max = 4

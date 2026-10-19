@@ -1,0 +1,64 @@
+{
+  "counter": "harness",
+  "legacy": {
+    "force_calls": 1484,
+    "force_calls_max": 4471,
+    "force_calls_median": 1310.0,
+    "force_calls_min": 396,
+    "n": 1000,
+    "nfailed": 126,
+    "successes": 874,
+    "transition_states": 38
+  },
+  "problem": "minimization/lj38-noise",
+  "provenance": {
+    "code": "lammps",
+    "code_version": "30 Sep 2026",
+    "commit": "8de817dd79bfe4525d5d39246a212d833e6dee07",
+    "machine": {
+      "machine": "x86_64",
+      "node": "cursor",
+      "python": "3.12.3",
+      "system": "Linux"
+    },
+    "parameters": {
+      "counter": "harness",
+      "fix": "external pf/callback",
+      "min_style": "cg",
+      "pair_style": "zero",
+      "sigma": 0.01
+    }
+  },
+  "schema": "optbench.score/v2",
+  "score": {
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 20261015,
+    "cap": 10000,
+    "includes_failures": true,
+    "iqr": 1103.5,
+    "iqr_high": 1256.00625,
+    "iqr_low": 984.9749999999999,
+    "mean": 3816.63,
+    "median": 1436.5,
+    "median_high": 1511.5,
+    "median_low": 1367.0,
+    "n": 1000,
+    "n_cap": 0,
+    "n_crash": 0,
+    "n_divergence": 88,
+    "n_wrong_stationary": 38,
+    "nfailed": 126,
+    "par2_mean": 3816.63,
+    "par_applied": true,
+    "par_factor": 2,
+    "q25": 1074.75,
+    "q75": 2178.25,
+    "scoring": "par2-wilson-bootstrap",
+    "success_only_mean": 1483.558352402746,
+    "success_rate": 0.874,
+    "successes": 874,
+    "wilson_high": 0.8931470893129909,
+    "wilson_low": 0.8519904953398139
+  },
+  "template": "lammps/cg-lj38-noise-s1em2"
+}

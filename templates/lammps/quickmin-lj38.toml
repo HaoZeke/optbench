@@ -1,0 +1,13 @@
+# LAMMPS Quickmin on LJ38.
+id = "lammps/quickmin-lj38"
+engine = "lammps"
+problem = "minimization/lj38"
+code = "lammps"
+code_version = "30 Sep 2026"
+commit = "8de817dd79bfe4525d5d39246a212d833e6dee07"
+algorithm = "Quickmin"
+tuning = "default"
+note = "fix external pf/callback and pair_style zero. min_modify dmax 0.2 and norm two. Quickmin uses timestep 0.002. The stop is the problem Euclidean force norm. Hessian index 0 is required."
+
+[lammps]
+min_style = "quickmin"
