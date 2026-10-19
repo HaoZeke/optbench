@@ -58,7 +58,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj38/eon-basinhopping | force_calls 508011 | 503146 | reproduced |
 | lj38/gmin-csm | — | — | not rerun |
 | lj38/gmin-nosym | — | — | not rerun |
-| lj38/gmin-symmetrise | force_calls 22711, force_calls_median 15998, force_calls_min 720, force_calls_max 121180 | 22123, 15998, 720, 121410 | reproduced |
+| lj38/gmin-symmetrise | force_calls 22711, force_calls_median 15998, force_calls_min 720, force_calls_max 121180 | 22123, 15998, 720, 121410 | reproduced; residual |
 | lj38/pele-basinhopping | force_calls 521595 | 688720 | not reproduced; pele_bh_defaults |
 | lj75/gmin | — | — | not rerun |
 | lj98/gmin-nosym | — | — | not rerun |
@@ -217,6 +217,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 ## Residuals inside the band
 
+- globalopt/lj38/gmin-symmetrise: The ranked row is current GMIN, SVNREV df8da599267534fbe43a250e578f7396a7946311, stock examples/GMIN/LJ38 input, archived starts, target energy -173.9284264418, EDIFF 0.003. Target-hit calls are 42285, median 30745.5, min 2505, max 322607, and nfailed 0. The archive is 22711, median 15998, min 720, max 121180. The gap is left as found. The 2014 diagnostic stays unranked.
 - tsopt/LJ38/pele_cd: Inside the 10% band (263.52 vs 254). The same xyz-versus-con starting set as ts-ffd. findTS_local.py for the CD row does not pass orthogZeroEigs; the harness template sets orthog translations-rotations. The paper baseline is this 2014-stop mean, not the harness-stop mean 335.06.
 - tsopt/LJ38/pele_ffd: Inside the 10% band (207.51 vs 192). Archive run.sh unpacks coords-xyz.tar.gz (200 xyz, max pair about 4.4). The harness problem points at coords-con.tar.gz (max pair about 37). Kabsch RMS is about 6.33, so the sets are not the same geometry. Neither set has a pair past cutoff 40, and both drivers use RMS tolerance 1e-3/sqrt(114). The 8% residual is the starting set. The paper baseline is this 2014-stop mean, not the harness-stop mean 254.48.
 

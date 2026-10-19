@@ -9,8 +9,7 @@ code GMIN
 code_version 27058
 commit 144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348
 algorithm basin-hopping with symmetrise moves
-template gmin/lj38-symmetrise
+template gmin/lj38-symmetrise-2014
 tuning archive
 problem globalopt/lj38
-counter harness
-reducer harness
+counter diagnostic

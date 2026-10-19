@@ -158,11 +158,11 @@ note = "Commit a4ce10dd, 2025-10-29. The clone has no tag, so the installed pack
 id = "gmin"
 name = "GMIN"
 role = "global optimization"
-repository = "https://optbench.org/codes/wales-27058.tar.bz2"
-ref = "27058"
-commit = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
-committed = "2014-08-07"
-note = "The optbench.org tarball wales-27058.tar.bz2. SVNREV in the tree is 27059. LJ38 symmetrise uses the archived data file. The score is the Target-hit function-call count. gfortran 13 needs the biased-torsion slice patch, which is not on the LJ path."
+repository = "https://www-wales.ch.cam.ac.uk/svn.tar.bz2"
+ref = "df8da599267534fbe43a250e578f7396a7946311"
+commit = "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
+committed = "2026-10-19"
+note = "Current Wales svn.tar.bz2, fetched 2026-10-19. SVNREV is df8da599267534fbe43a250e578f7396a7946311. The pin is the sha256 of that tarball. LJ38 symmetrise uses the stock examples/GMIN/LJ38 data file and GMIN's own target-hit function calls. The source is unmodified."
 
 [[code]]
 id = "optim"

@@ -197,7 +197,7 @@ MATCHES: list[dict] = [
     {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm0", "template": "softsaddle/saddle-lanczos-sm0", "branch": "cells/softsaddle/ts-reps", "path": "results/campaign/softsaddle-2019.04-saddle-lanczos-sm0.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
     # globalopt and htst and aladatom rates
     {"key": "globalopt/lj38/eon-basinhopping", "template": "eon-client/bh-lj38", "branch": "entries/eon-svn-lane-a", "path": "results/campaign/eon-client-bh-lj38.dat"},
-    {"key": "globalopt/lj38/gmin-symmetrise", "template": "gmin/lj38-symmetrise", "branch": "repro/globalopt-lj38-gmin-symmetrise", "path": "results/campaign/gmin-27058-lj38-symmetrise.dat", "metrics": ["force_calls", "force_calls_median", "force_calls_min", "force_calls_max"]},
+    {"key": "globalopt/lj38/gmin-symmetrise", "template": "gmin/lj38-symmetrise", "branch": "repro/globalopt-lj38-gmin-symmetrise", "path": "results/campaign/gmin-27058-lj38-symmetrise.dat", "metrics": ["force_calls", "force_calls_median", "force_calls_min", "force_calls_max"], "cause": "gmin_stock", "extra": {"stock_version": "df8da599267534fbe43a250e578f7396a7946311", "stock_tarball": "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31", "stock_path": "results/campaign/gmin-df8da599-lj38-symmetrise.dat", "stock_force_calls": 42285, "stock_force_calls_median": 30745.5, "stock_force_calls_min": 2505, "stock_force_calls_max": 322607, "stock_nfailed": 0}},
     {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "branch": "cells/pele/go", "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat", "cause": "pele_bh_defaults"},
     {"key": "hTST/Al/eon-dimer-cg", "template": "eon-svn/htst-al-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-al-dimer.dat", "kind": "htst", "cause": "htst_al"},
     {"key": "hTST/Pt/eon-dimer-cg", "template": "eon-svn/htst-pt-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-pt-dimer.dat", "kind": "htst"},
@@ -267,6 +267,13 @@ CAUSE_TEXT = {
         "Distinct saddles collapse: benchmark_unique_saddles is 0, 0.7, and 0.5 against the archive 115, 143, and 130. "
         "benchmark_fraction_connected stays near 1 while the v2 connected fraction is about 0. "
         "The per-search cap of 5064 then puts every repetition on the PAR-2 cap."
+    ),
+    "gmin_stock": (
+        "The ranked row is current GMIN, SVNREV df8da599267534fbe43a250e578f7396a7946311, "
+        "stock examples/GMIN/LJ38 input, archived starts, target energy -173.9284264418, EDIFF 0.003. "
+        "Target-hit calls are 42285, median 30745.5, min 2505, max 322607, and nfailed 0. "
+        "The archive is 22711, median 15998, min 720, max 121180. The gap is left as found. "
+        "The 2014 diagnostic stays unranked."
     ),
     "pele_bh_defaults": (
         "The archived driver is the dangling path bin/js850/globalopt.py. "

@@ -1043,9 +1043,9 @@ The number is written only after the run finishes under the problem rule.
    <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
    <td>global optimization</td>
-   <td>27058</td>
-   <td>144a703eef67</td>
-   <td><a href="https://optbench.org/codes/wales-27058.tar.bz2">https://optbench.org/codes/wales-27058.tar.bz2</a></td>
+   <td>df8da599267534fbe43a250e578f7396a7946311</td>
+   <td>738fafe3df5a</td>
+   <td><a href="https://www-wales.ch.cam.ac.uk/svn.tar.bz2">https://www-wales.ch.cam.ac.uk/svn.tar.bz2</a></td>
    </tr>
    </tbody></table></div>
    <div class="bench-scroll"><table data-board-table="code-best">
@@ -1054,15 +1054,18 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="globalopt/lj38" data-template="gmin/lj38-symmetrise">
    <td>Lennard-Jones 38 global minimum</td>
    <td data-field="template">gmin/lj38-symmetrise</td>
-   <td data-field="version">GMIN 27058</td>
-   <td data-field="commit">144a703eef67</td>
-   <td data-field="par2_mean">22122.7</td>
-   <td data-field="mean_calls">22122.7</td>
-   <td data-field="median_calls">15998</td>
+   <td data-field="version">GMIN df8da599267534fbe43a250e578f7396a7946311</td>
+   <td data-field="commit">738fafe3df5a</td>
+   <td data-field="par2_mean">42285.1</td>
+   <td data-field="mean_calls">42285.1</td>
+   <td data-field="median_calls">30745.5</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>
+   <p>No full ranked run</p><ul>
+   <li>Lennard-Jones 38 global minimum: not yet on the harness counter.</li>
+   </ul>
    <h3>OPTIM</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>

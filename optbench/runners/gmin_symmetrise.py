@@ -1,8 +1,8 @@
-"""GMIN basin-hopping with the archived symmetrise data file.
+"""GMIN basin-hopping with the stock symmetrise data file.
 
-The binary is the optbench.org ``wales-27058.tar.bz2``. One start is one
-xyz geometry from the LJ38 archive. The score is GMIN's own function-call
-count on ``Target hit after``, written with the 2014 ``getdata.py`` rounding.
+The binary is the current Wales ``svn.tar.bz2``. One start is one xyz
+geometry from the LJ38 archive. The score is GMIN's own function-call
+count on ``Target hit after``.
 """
 
 from __future__ import annotations
@@ -19,8 +19,9 @@ from pathlib import Path
 from optbench.campaign import geometry_archive, resolve_problem, write_starts
 
 ENGINE = "gmin"
-SHA256 = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
-SNAPSHOT = "https://optbench.org/codes/wales-27058.tar.bz2"
+SHA256 = "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
+SNAPSHOT = "https://www-wales.ch.cam.ac.uk/svn.tar.bz2"
+_STOCK = "SYMMETRISE 1 0.02 0.045 0.1 0.1 0.5 20 0.35 2.0"
 _TARGET = re.compile(
     r"Target hit after\s+(\d+)\s+quenches\s+(\d+)\s+function calls"
 )
@@ -30,7 +31,7 @@ def binary_path() -> Path:
     env = os.environ.get("GMIN_BIN")
     if env:
         return Path(env)
-    return Path("/tmp/gmin-build/GMIN")
+    return Path("/tmp/gmin-latest/GMIN")
 
 
 def available() -> str | None:
@@ -122,7 +123,11 @@ def run_template(
     if not data_path.is_file():
         raise FileNotFoundError(f"{data_rel} is not the archived data file")
     data = data_path.read_text(encoding="utf-8")
-    if "SYMMETRISE 1 0.04 0.03 0.09 0.09 0.4 18 0.4 1.7" not in data:
+    method = str((template.get("gmin") or {}).get("method") or "")
+    if method == "stock":
+        if _STOCK not in data:
+            raise RuntimeError("data file is not the stock LJ38 symmetrise input")
+    elif "SYMMETRISE 1 0.04 0.03 0.09 0.09 0.4 18 0.4 1.7" not in data:
         raise RuntimeError("data file is not the archived symmetrise input")
     geometries = _xyz_members(geometry_archive(root, problem))
     if limit:
@@ -143,6 +148,41 @@ def run_template(
     failed = len(details) - len(calls)
     if not calls:
         raise RuntimeError("GMIN reported no target hit")
+    if method == "stock":
+        from optbench.engines.common import write_campaign
+
+        records = []
+        for (name, _text), detail in zip(geometries, details):
+            records.append(
+                {
+                    "failure": None if detail["success"] else "crash",
+                    "force_calls": detail["force_calls"] if detail["success"] else 0,
+                    "quenches": detail["quenches"],
+                    "schema": "optbench.start/v2",
+                    "start": Path(name).stem,
+                    "success": bool(detail["success"]),
+                }
+            )
+        cap = int(template.get("failure_cap") or 0)
+        return write_campaign(
+            output,
+            records,
+            template,
+            problem,
+            {"cap": cap},
+            {
+                "counter": "GMIN target-hit function calls",
+                "data": "examples/GMIN/LJ38",
+                "keyword": "SYMMETRISE",
+                "potential": "lj",
+                "version": template["code_version"],
+            },
+            images=None,
+            comment=(
+                "# Current GMIN. Stock examples/GMIN/LJ38 data file. "
+                "The count is GMIN's target-hit function calls."
+            ),
+        )
     mean = statistics.fmean(calls)
     median = statistics.median(calls)
     lines = [
@@ -160,8 +200,7 @@ def run_template(
         f"template {template['id']}",
         f"tuning {template.get('tuning', 'archive')}",
         f"problem {problem['id']}",
-        "counter harness",
-        "reducer harness",
+        "counter diagnostic",
     ]
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -173,8 +212,8 @@ def run_template(
                 "code": template["code"],
                 "code_version": template["code_version"],
                 "commit": template["commit"],
-                "comparable": True,
-                "counter": "harness",
+                "comparable": False,
+                "counter": "diagnostic",
                 "failure": None if detail["success"] else "crash",
                 "force_calls": detail["force_calls"] if detail["success"] else 0,
                 "problem": problem["id"],
