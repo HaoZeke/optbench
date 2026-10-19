@@ -1,5 +1,6 @@
 """SciPy global-optimizer templates and the harness stop."""
 
+import copy
 import json
 import tomllib
 from pathlib import Path
@@ -51,14 +52,18 @@ def test_scipyglobal_templates_match_the_registry_pin():
         assert template["tuning"] == "default"
         assert template["scipy"]["method"] in METHODS
         assert int(template["scipy"]["seed"]) == 314159
-        assert int(template["failure_cap"]) == eon_cap == 2000000
-        assert int(template["stop"]["max_force_calls"]) == 2000000
+        problem = resolve_problem(ROOT, template["problem"])
+        problem_cap = (problem.get("convergence") or {}).get("max_force_calls")
+        expected_cap = int(problem_cap) if problem_cap is not None else eon_cap
+        assert int(template["failure_cap"]) == expected_cap
+        assert int(template["stop"]["max_force_calls"]) == expected_cap
+        if problem_cap is None:
+            assert expected_cap == 2000000
         method = template["scipy"]["method"]
         if method in BOUNDED:
             assert float(template["scipy"]["bound"]) == COORD_BOUND
         else:
             assert "bound" not in template["scipy"]
-        problem = resolve_problem(ROOT, template["problem"])
         _check_stop(problem, template)
         seen.add((template["problem"], method))
     for problem in ("globalopt/lj38", "globalopt/lj75"):
@@ -73,7 +78,10 @@ def test_lj38_minimum_matches_the_quoted_wales_energy():
     problem = resolve_problem(ROOT, "globalopt/lj38")
     target = energy_target(problem)
     assert target == pytest.approx(float(energy) + 0.001)
-    assert energy_target(resolve_problem(ROOT, "globalopt/lj75")) is None
+    lj75 = resolve_problem(ROOT, "globalopt/lj75")
+    window = float(lj75["convergence"]["energy_above_minimum"])
+    assert energy_target(lj75) == pytest.approx(float(lj75["reference"]["energy"]) + window)
+    assert int(lj75["convergence"]["max_force_calls"]) == 1000000
 
 
 def test_lj_starts_are_centered_inside_the_bound(tmp_path: Path):
@@ -165,10 +173,13 @@ def test_missing_window_writes_a_partial_row(tmp_path: Path):
     template = dict(load_template(ROOT, "scipyglobal/lj75-basinhopping"))
     template["failure_cap"] = 12
     template["stop"] = {"max_force_calls": 12}
+    problem = copy.deepcopy(resolve_problem(ROOT, "globalopt/lj75"))
+    problem.pop("reference", None)
+    problem["convergence"] = {"max_force_calls": 12}
     output = tmp_path / "benchmark.dat"
     summary = __import__("optbench.runners.scipyglobal", fromlist=["run_template"]).run_template(
         ROOT,
-        resolve_problem(ROOT, "globalopt/lj75"),
+        problem,
         template,
         output=output,
         workers=1,
@@ -185,6 +196,101 @@ def test_missing_window_writes_a_partial_row(tmp_path: Path):
     assert row["force_calls"] == 12
     assert row["energy"] is not None
     assert "trace" not in row
+
+
+def test_a_longer_trace_clips_to_the_problem_cap():
+    from optbench.runners.scipyglobal import _reusable, method_parameters
+
+    old_cap = 20
+    new_cap = 10
+    old_parameters = method_parameters("basinhopping", old_cap, 2, None)
+    new_parameters = method_parameters("basinhopping", new_cap, 2, None)
+    old_parameters["seed"] = 1
+    new_parameters["seed"] = 1
+    saved = {
+        "schema": "optbench.start/v2",
+        "parameters": old_parameters,
+        "cap": old_cap,
+        "commit": COMMIT,
+        "seed": 1,
+        "method": "basinhopping",
+        "target": None,
+        "force_calls": 20,
+        "energy": -10.0,
+        "best_calls": 15,
+        "stop": "cap",
+        "success": False,
+        "failure": "cap",
+        "reasons": ["cap"],
+        "trace": [[3, -1.0], [8, -4.0], [15, -10.0]],
+    }
+    job = {
+        "cap": new_cap,
+        "commit": COMMIT,
+        "seed": 1,
+        "method": "basinhopping",
+        "target": -5.0,
+        "parameters": new_parameters,
+        "coords": [0.0, 0.0],
+        "bound": None,
+    }
+    capped = _reusable(saved, job)
+    assert capped is not None
+    assert capped["success"] is False
+    assert capped["failure"] == "cap"
+    assert capped["force_calls"] == 10
+    assert capped["energy"] == pytest.approx(-4.0)
+    assert capped["parameters"]["niter"] == 10
+    job["target"] = -3.0
+    hit = _reusable(saved, job)
+    assert hit is not None
+    assert hit["success"] is True
+    assert hit["force_calls"] == 8
+    assert hit["energy"] == pytest.approx(-4.0)
+    assert hit["stop"] == "hit"
+
+
+def test_shgo_crash_reuses_under_the_lower_cap():
+    from optbench.runners.scipyglobal import _reusable, method_parameters
+
+    old_parameters = method_parameters("shgo", 2000000, 4, COORD_BOUND)
+    new_parameters = method_parameters("shgo", 1000000, 4, COORD_BOUND)
+    old_parameters["seed"] = 314159
+    new_parameters["seed"] = 314159
+    saved = {
+        "schema": "optbench.start/v2",
+        "parameters": old_parameters,
+        "cap": 2000000,
+        "commit": COMMIT,
+        "seed": 314159,
+        "method": "shgo",
+        "target": None,
+        "force_calls": 0,
+        "energy": None,
+        "best_calls": None,
+        "stop": "crash",
+        "success": False,
+        "failure": "crash",
+        "reasons": ["crash"],
+        "error": "MemoryError: ",
+        "trace": [],
+    }
+    job = {
+        "cap": 1000000,
+        "commit": COMMIT,
+        "seed": 314159,
+        "method": "shgo",
+        "target": -397.491331,
+        "parameters": new_parameters,
+        "coords": [0.0, 0.0, 0.0, 0.0],
+        "bound": COORD_BOUND,
+    }
+    found = _reusable(saved, job)
+    assert found is not None
+    assert found["failure"] == "crash"
+    assert found["force_calls"] == 0
+    assert found["cap"] == 1000000
+    assert found["energy"] is None
 
 
 def test_declared_partial_reason_reaches_the_board(tmp_path: Path):

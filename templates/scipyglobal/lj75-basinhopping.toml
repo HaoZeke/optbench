@@ -6,12 +6,12 @@ code_version = "1.18.1"
 commit = "e4e854eaa8f18d807cd3496028e257e36caa93cc"
 algorithm = "basinhopping"
 tuning = "default"
-failure_cap = 2000000
-note = "SciPy 1.18.1 basinhopping at the constructor defaults, with niter set to the force-call cap. The local minimizer is BFGS with the analytic gradient of optbench.potentials.lennard_jones. Temperature is 1, stepsize is 0.5, interval is 50, target_accept_rate is 0.5, and stepwise_factor is 0.9. The seed is 314159 plus the start index. Starts are centered. The force-call cap is 2000000, the same budget as the eOn LJ38 basin-hopping rows."
+failure_cap = 1000000
+note = "SciPy 1.18.1 basinhopping at the constructor defaults, with niter set to the force-call cap. The local minimizer is BFGS with the analytic gradient of optbench.potentials.lennard_jones. Temperature is 1, stepsize is 0.5, interval is 50, target_accept_rate is 0.5, and stepwise_factor is 0.9. The seed is 314159 plus the start index. Starts are centered. The force-call cap is 1000000, the cap stated on globalopt/lj75."
 
 [scipy]
 method = "basinhopping"
 seed = 314159
 
 [stop]
-max_force_calls = 2000000
+max_force_calls = 1000000

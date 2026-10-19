@@ -7,8 +7,9 @@ gradient read of one geometry are one evaluation. ``ForceCallCap`` is a
 ``SearchStop``, a ``BaseException``, and the refused call is not counted.
 
 The LJ38 window is the measured energy of the Wales coordinates plus the
-problem ``energy_above_minimum``. A hit on the call that fills the cap is
-a cap failure. LJ75 stays partial while the problem file states no window.
+problem ``energy_above_minimum``. LJ75 uses the Cambridge reference energy
+on the problem plus that window. The force-call cap is the cap stated on
+the problem. A hit on the call that fills the cap is a cap failure.
 """
 
 from __future__ import annotations
@@ -386,34 +387,100 @@ def _write_checkpoint(job: dict, record: dict) -> None:
     temporary.replace(path)
 
 
-def _rescore(saved: dict, target: float, cap: int) -> dict:
-    """Apply a new energy window to a finished trace.
+def _prefix(trace: list, cap: int, target: float | None) -> tuple[int | None, float | None, int | None, float | None]:
+    """Best energy at or before ``cap``, and the first hit strictly under it."""
+    best_calls = None
+    best_energy = None
+    hit_calls = None
+    hit_energy = None
+    for calls, energy in trace:
+        calls = int(calls)
+        energy = float(energy)
+        if calls > int(cap):
+            break
+        best_calls = calls
+        best_energy = energy
+        if target is not None and energy <= float(target) and calls < int(cap):
+            hit_calls = calls
+            hit_energy = energy
+            break
+    return hit_calls, hit_energy, best_calls, best_energy
 
-    The trace records the call count of each new lowest energy. The first
-    point at or below the window is the call where an early stop would have
-    fired.
+
+def _rescore(saved: dict, target: float | None, cap: int) -> dict:
+    """Apply a cap and an energy window to a finished trace.
+
+    The trace records the call count of each new lowest energy. Points after
+    ``cap`` are dropped. The first point at or below the window, strictly
+    under the cap, is where an early stop would have fired. The energy of a
+    cap failure is the best value counted at or before the cap.
     """
     record = dict(saved)
-    record["target"] = float(target)
-    hit = None
-    for calls, energy in saved.get("trace") or []:
-        if float(energy) <= float(target) and int(calls) < int(cap):
-            hit = int(calls)
-            break
-    if hit is not None:
-        record["force_calls"] = hit
+    record["cap"] = int(cap)
+    record["target"] = None if target is None else float(target)
+    if saved.get("failure") == "crash" or saved.get("stop") == "crash":
+        record["success"] = False
+        record["failure"] = "crash"
+        record["reasons"] = ["crash"]
+        return record
+    hit_calls, hit_energy, best_calls, best_energy = _prefix(list(saved.get("trace") or []), cap, target)
+    if hit_calls is not None:
+        record["force_calls"] = hit_calls
+        record["best_calls"] = hit_calls
+        record["energy"] = hit_energy
         record["success"] = True
         record["failure"] = None
         record["reasons"] = []
         record["stop"] = "hit"
         record.pop("error", None)
         return record
-    calls = int(saved.get("force_calls") or 0)
-    success, failure, reasons = _classify(calls, cap, saved.get("energy"), target, saved.get("stop"), "")
+    ran = int(saved.get("force_calls") or 0)
+    reached = ran >= int(cap) or saved.get("stop") == "cap"
+    if reached:
+        record["force_calls"] = int(cap)
+        record["best_calls"] = best_calls
+        record["energy"] = best_energy
+        record["stop"] = "cap"
+        success, failure, reasons = _classify(int(cap), int(cap), best_energy, target, "cap", "")
+        record["success"] = success
+        record["failure"] = failure
+        record["reasons"] = reasons
+        record.pop("error", None)
+        return record
+    energy = best_energy if best_energy is not None else saved.get("energy")
+    record["energy"] = energy
+    if best_calls is not None:
+        record["best_calls"] = best_calls
+    success, failure, reasons = _classify(ran, int(cap), energy, target, saved.get("stop"), "")
     record["success"] = success
     record["failure"] = failure
     record["reasons"] = reasons
     return record
+
+
+def _same_search(saved: dict, job: dict) -> bool:
+    """True when the checkpoint used this method and only the cap-tied limits differ."""
+    saved_parameters = saved.get("parameters")
+    job_parameters = job.get("parameters")
+    if saved_parameters == job_parameters:
+        return True
+    method = str(job.get("method") or "")
+    coords = job.get("coords")
+    if method not in {"basinhopping", "dual_annealing", "differential_evolution", "shgo"}:
+        return False
+    if not isinstance(coords, list):
+        return False
+    try:
+        old_cap = int(saved["cap"])
+        new_cap = int(job["cap"])
+        seed = int(job["seed"])
+    except (KeyError, TypeError, ValueError):
+        return False
+    old = method_parameters(method, old_cap, len(coords), job.get("bound"))
+    new = method_parameters(method, new_cap, len(coords), job.get("bound"))
+    old["seed"] = seed
+    new["seed"] = seed
+    return saved_parameters == old and job_parameters == new
 
 
 def _reusable(saved: dict, job: dict) -> dict | None:
@@ -421,25 +488,43 @@ def _reusable(saved: dict, job: dict) -> dict | None:
         return None
     if saved.get("schema") != "optbench.start/v2":
         return None
-    if saved.get("parameters") != job.get("parameters"):
-        return None
-    if int(saved.get("cap") or -1) != int(job["cap"]):
+    if saved.get("method") != job.get("method"):
         return None
     if str(saved.get("commit") or "") != str(job.get("commit") or ""):
         return None
     if int(saved.get("seed") or -1) != int(job["seed"]):
         return None
-    old = saved.get("target")
-    new = job.get("target")
-    if old == new:
-        return saved
-    if new is None or not saved.get("trace"):
+    if not _same_search(saved, job):
         return None
-    if saved.get("stop") == "hit" and old is not None and float(new) < float(old):
+    old_cap = int(saved.get("cap") or -1)
+    new_cap = int(job["cap"])
+    old_target = saved.get("target")
+    new_target = job.get("target")
+    if old_cap == new_cap and old_target == new_target:
+        return saved
+    if old_cap < 1 or new_cap < 1:
+        return None
+    if old_cap < new_cap and saved.get("stop") == "cap":
+        return None
+    if old_cap < new_cap and not saved.get("success") and saved.get("failure") != "crash":
+        return None
+    if old_cap > new_cap and saved.get("failure") != "crash" and not saved.get("trace"):
+        return None
+    if new_target is None and old_target is not None:
+        return None
+    if (
+        saved.get("stop") == "hit"
+        and old_target is not None
+        and new_target is not None
+        and float(new_target) < float(old_target)
+    ):
         energy = saved.get("energy")
-        if energy is None or float(energy) > float(new):
+        if energy is None or float(energy) > float(new_target):
             return None
-    return _rescore(saved, float(new), int(job["cap"]))
+    found = _rescore(saved, None if new_target is None else float(new_target), new_cap)
+    if job.get("parameters") is not None:
+        found["parameters"] = job["parameters"]
+    return found
 
 
 def _load_checkpoint(job: dict) -> dict | None:
@@ -493,9 +578,14 @@ def energy_target(problem: dict) -> float | None:
         return float(potential["energy_minimum"]) + window
     if "energy_minimum" in convergence:
         return float(convergence["energy_minimum"]) + window
+    # LJ38 rows were scored against the measured Wales geometry. Later problem
+    # files also carry a quoted reference. Keep the measured window.
     if problem.get("id") == "globalopt/lj38":
         energy, _gradient = lennard_jones(np.asarray(LJ38_MINIMUM, dtype=np.float64))
         return float(energy) + window
+    reference = problem.get("reference") or {}
+    if reference.get("energy") not in (None, ""):
+        return float(reference["energy"]) + window
     return None
 
 
@@ -793,6 +883,9 @@ def run_template(
             raise RuntimeError(f"scipy {info['version']} does not match template {version}")
     method, base_seed, bound = _section(template)
     cap = _cap_of(template)
+    stated_cap = (problem.get("convergence") or {}).get("max_force_calls")
+    if stated_cap is not None and int(stated_cap) != cap:
+        raise ValueError(f"{template['id']} cap {cap} is not the problem force-call cap {int(stated_cap)}")
     target = energy_target(problem)
     work_dir = Path(work) if work is not None else CHECKPOINT_ROOT
     starts = load_starts(root, problem, work_dir)

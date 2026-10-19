@@ -6,8 +6,8 @@ code_version = "1.18.1"
 commit = "e4e854eaa8f18d807cd3496028e257e36caa93cc"
 algorithm = "shgo"
 tuning = "default"
-failure_cap = 2000000
-note = "SciPy 1.18.1 shgo at the constructor defaults. sampling_method is simplicial, n is 100, and iters is 1. The constructor replaces that n with 2**dim+1. The local minimizer is SLSQP with the analytic gradient and ftol 1e-12. Each centered coordinate lies in [-6, 6]. The shgo call leaves x0 and rng unset. The force-call cap is 2000000. The simplicial complex is allocated before the potential is called. The worker address space is limited to 2 GiB, and MemoryError is recorded as a crash."
+failure_cap = 1000000
+note = "SciPy 1.18.1 shgo at the constructor defaults. sampling_method is simplicial, n is 100, and iters is 1. The constructor replaces that n with 2**dim+1. The local minimizer is SLSQP with the analytic gradient and ftol 1e-12. Each centered coordinate lies in [-6, 6]. The shgo call leaves x0 and rng unset. The force-call cap is 1000000, the cap stated on globalopt/lj75. The simplicial complex is allocated before the potential is called. The worker address space is limited to 2 GiB, and MemoryError is recorded as a crash."
 
 [scipy]
 method = "shgo"
@@ -15,4 +15,4 @@ seed = 314159
 bound = 6.0
 
 [stop]
-max_force_calls = 2000000
+max_force_calls = 1000000
