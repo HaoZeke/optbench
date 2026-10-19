@@ -1,0 +1,21 @@
+id = "tsase-410/lj38-lanczos"
+engine = "tsase-410"
+code = "tsase"
+code_version = "410"
+commit = "f77cda4a261872a633da45d05d77225d0bba0f96"
+algorithm = "Lanczos"
+problem = "lowest-eigenvector/lj38"
+task = "lowest-eigenvector"
+profile = "archive"
+reducer = "all"
+ranked = true
+parameter_source = "archive"
+note = "Archive dimer_rotate.py at TSASE git revision 410: lanczos_atoms phi_tol 0, ss false, dR 0.001. The score is forceCalls of the rotationMax that first exceeds overlap 0.99. report.sh writes nfailed 0."
+
+[stop]
+norm = "overlap"
+overlap = 0.99
+max_force_calls = 10000
+
+[input]
+archive_path = "website/lowest-eigenvector/lj38/coords-con.tar.gz"

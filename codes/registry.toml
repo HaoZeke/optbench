@@ -181,6 +181,14 @@ profile = "archive"
 task = "lowest-eigenvector"
 ranked = true
 
+[[template]]
+id = "tsase-410/lj38-lanczos"
+code = "tsase"
+problem = "lowest-eigenvector/lj38"
+profile = "archive"
+task = "lowest-eigenvector"
+ranked = true
+
 # generated ASE and Sella templates
 
 [[template]]
