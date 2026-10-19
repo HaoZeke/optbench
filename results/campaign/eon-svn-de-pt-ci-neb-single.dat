@@ -1,0 +1,15 @@
+force_calls 115
+force_calls_min 30
+force_calls_max 1003
+force_calls_median 62.0
+call_unit total
+nfailed 1
+code Eon svn
+code_version r2549
+commit r2549
+algorithm CI-NEB
+template eon-svn/de-pt-ci-neb-single
+problem double-ended-saddle-search/pt-island
+reducer harness
+counter harness
+count_keys HarnessCounter
