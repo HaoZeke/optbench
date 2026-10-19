@@ -1,0 +1,34 @@
+# counter harness. One fresh coordinate is one force call.
+# A repeated coordinate is free. A call at the cap is refused and is not counted.
+# Legacy success is the force stop. v2 success also requires Hessian index 0.
+# TorchSim 0.6.2 FIRE defaults: dt_start 0.1, alpha_start 0.1, flavor ase_fire. The model returns the harness energy and forces. Float64. Convergence is checked every step, and the harness Euclidean norm ends the run.
+force_calls 720
+force_calls_min 196
+force_calls_max 3136
+force_calls_median 610.5
+nfailed 0
+median 610.5
+code torch-sim
+code_version 0.6.2
+commit 2e9c16f5afe354282279630a57885f46521a1cc0
+algorithm FIRE
+template torch-sim/min-lj38-fire
+problem minimization/lj38
+tuning default
+counter harness
+cap 10000
+par2_mean 835.693
+wilson_low 0.986971831758
+wilson_high 0.997247330858
+par2_median 611.5
+par2_median_low 590
+par2_median_high 637.5125
+v2_nfailed 6
+v2_successes 994
+n 1000
+n_cap 0
+n_wrong_stationary 6
+n_divergence 0
+n_crash 0
+energy_min -171.886218361
+energy_max -152.683590572

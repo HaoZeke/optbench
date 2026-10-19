@@ -1,0 +1,33 @@
+# counter harness. One fresh coordinate is one force call.
+# A repeated coordinate is free. A call at the cap is refused and is not counted.
+# pele findTransitionState. The RMS tolerance is the Euclidean force stop divided by sqrt(3N). nsteps is the force-call cap. orthogZeroEigs keeps translation and rotation. A success is an index-1 stop.
+force_calls 1147
+force_calls_min 456
+force_calls_max 7274
+force_calls_median 968
+nfailed 1
+median 968
+code pele
+code_version 0.1.2
+commit b7081b932a060be11342fbe8287ac35da8ada879
+algorithm hybrid eigenvector following
+template pele/ts-lj38
+problem tsopt/LJ38
+tuning default
+counter harness
+cap 10000
+par2_mean 1240.86
+wilson_low 0.972226295602
+wilson_high 0.999116831284
+par2_median 970.5
+par2_median_low 919
+par2_median_high 1058
+v2_nfailed 1
+v2_successes 199
+n 200
+n_cap 1
+n_wrong_stationary 0
+n_divergence 0
+n_crash 0
+energy_min -171.462970624
+energy_max -162.958783313
