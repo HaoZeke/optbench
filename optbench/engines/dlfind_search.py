@@ -96,7 +96,7 @@ def _import_dlfind():
 def _execute(job: dict) -> dict:
     os.environ.setdefault("OMP_NUM_THREADS", "1")
     from optbench.counter import ForceCallCap, HarnessCounter
-    from optbench.failures import classify_failure
+    from optbench.failures import classify_outcome
     from optbench.noise import converged_under_noise, stop_threshold
     from optbench.pes import evaluate
 
@@ -256,7 +256,20 @@ def _execute(job: dict) -> dict:
         record["noise_stopped"] = noise_stopped
         if not noise_stopped and "cap" not in record["reasons"] and "crash" not in record["reasons"]:
             record["reasons"].append("force_norm")
-            record["failure"] = classify_failure(record["reasons"])
+            components = 0 if point is None else int(np.asarray(point).size)
+            threshold = stop_threshold(clean_tol, sigma, components, job["kappa"]) if components else clean_tol
+            record["failure"] = classify_outcome(
+                energy=record.get("energy"),
+                geometry=point,
+                force=record.get("force_norm"),
+                calls=float(record["force_calls"]),
+                cap=cap,
+                force_tol=threshold,
+                dissociated="divergence" in prefix,
+                hessian_index=record.get("hessian_index"),
+                expected_index=record.get("expected_index") if record.get("hessian_index") is not None else None,
+                force_above=True,
+            )
             record["success"] = record["failure"] is None
             record["converged"] = record["success"]
     if error and not record["success"]:

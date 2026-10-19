@@ -14,7 +14,7 @@ from collections.abc import Callable, Sequence
 from pathlib import Path
 
 from .counter import CountedPotential
-from .failures import classify_failure
+from .failures import classify_outcome
 from .score import score_v2
 from .stationary import jacobi_eigenvalues, judge_stationary, numerical_hessian
 
@@ -42,6 +42,7 @@ V2_KEYS = (
     "n_cap",
     "n_wrong_stationary",
     "n_divergence",
+    "n_not_converged",
     "n_crash",
 )
 
@@ -169,13 +170,25 @@ def record_start(
             eigenvalue_tol=eigenvalue_tol,
         )
     reasons = list(judged["reasons"])
-    if not finite or outcome.get("diverged"):
+    if not finite:
         reasons.append("divergence")
     if potential.calls >= cap:
         reasons.append("cap")
-    if (not outcome["converged"]) or (not finite) or observed_force > force_norm:
+    if finite and (not outcome["converged"] or observed_force > force_norm):
         reasons.append("force_norm")
-    failure = classify_failure(reasons)
+    failure = classify_outcome(
+        energy=energy,
+        geometry=point,
+        force=observed_force,
+        calls=potential.calls,
+        cap=cap,
+        force_tol=force_norm,
+        hessian_index=judged["hessian_index"],
+        expected_index=judged["expected_index"],
+        energy_rejected="energy" in judged["reasons"],
+        rmsd_rejected="rmsd" in judged["reasons"],
+        unmet=bool(finite and not outcome["converged"] and observed_force <= force_norm),
+    )
     return {
         "schema": "optbench.start/v2",
         "start": name,

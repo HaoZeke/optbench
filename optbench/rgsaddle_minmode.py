@@ -30,7 +30,7 @@ import numpy as np
 
 from .connection import connected_endpoints, link_tolerance, per_atom_max
 from .counter import HarnessCounter
-from .failures import classify_failure
+from .failures import classify_outcome
 from .potserver import RgpotCounter
 from .score import half_even, score_v2
 from .stationary import judge_stationary, negative_index, numerical_hessian
@@ -260,11 +260,6 @@ class HarnessSurface:
         return self.rgpot.counter.verification()
 
 
-def _outcome(reasons: list[str]) -> tuple[bool, str | None]:
-    failure = classify_failure(reasons)
-    return failure is None, failure
-
-
 def _callback(lib, potential, dof: int):
     errors: list[str] = []
 
@@ -450,7 +445,17 @@ def _saddle_record(
         reasons.append("force_norm")
     # judge_stationary already appends hessian_index when the index is wrong.
     reasons = list(dict.fromkeys(reasons))
-    success, failure = _outcome(reasons)
+    failure = classify_outcome(
+        energy=float(energy),
+        geometry=point,
+        force=force_norm,
+        calls=int(potential.calls),
+        cap=cap,
+        force_tol=force_tol,
+        hessian_index=int(index),
+        expected_index=1,
+    )
+    success = failure is None
     return {
         "schema": "optbench.start/v2",
         "start": name,
@@ -615,7 +620,15 @@ def _run_minmode(spec: dict) -> dict:
                 reasons.append("cap")
             if solver_rc != OK:
                 reasons.append("solver")
-            success, failure = _outcome(reasons)
+            failure = classify_outcome(
+                energy=float(energy),
+                geometry=point,
+                force=_norm(gradient),
+                calls=int(potential.calls),
+                cap=cap,
+                unmet="mode_overlap" in reasons or "solver" in reasons,
+            )
+            success = failure is None
             record = {
                 "schema": "optbench.start/v2",
                 "start": spec["name"],
@@ -678,8 +691,14 @@ def _run_minmode(spec: dict) -> dict:
         lib.rgsaddle_minmode_free(session)
         del callback
     if solver_rc != OK and not _finite_point(point):
-        reasons = ["solver"]
-        success, failure = _outcome(reasons)
+        reasons = ["divergence"]
+        failure = classify_outcome(
+            energy=float("nan"),
+            geometry=point,
+            calls=int(potential.calls),
+            cap=cap,
+        )
+        success = failure is None
         return {
             "schema": "optbench.start/v2",
             "start": spec["name"],
@@ -949,6 +968,7 @@ def _summarize(records: list[dict], template: dict, cap: int, problem_id: str) -
     lines.append(f"n_cap {metrics['n_cap']}")
     lines.append(f"n_wrong_stationary {metrics['n_wrong_stationary']}")
     lines.append(f"n_divergence {metrics['n_divergence']}")
+    lines.append(f"n_not_converged {metrics['n_not_converged']}")
     lines.append(f"n_crash {metrics['n_crash']}")
     lines.append("counter harness")
     lines.append(f"code {template.get('code', 'rgsaddle')}")
@@ -1342,8 +1362,24 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
             endpoint_calls = int(potential.calls - before_outer)
             record["force_calls"] = climb + endpoint_calls
             record["endpoint_calls"] = endpoint_calls
-            success, failure = _outcome(record["reasons"])
-            record["success"] = success
+            names = set(record["reasons"])
+            point = outcome.get("x")
+            energy = outcome.get("energy")
+            observed = outcome.get("force_norm")
+            failure = classify_outcome(
+                energy=None if energy is None else float(energy),
+                geometry=point,
+                force=None if observed is None else float(observed),
+                calls=float(record["force_calls"]),
+                cap=cap,
+                force_tol=force_tol,
+                hessian_index=None if record.get("hessian_index") is None else int(record["hessian_index"]),
+                expected_index=1 if record.get("hessian_index") is not None else None,
+                stationary_rejected=bool(names & {"not_connected", "duplicate", "barrier"}),
+                force_above=True if "force_norm" in names and observed is None else None,
+                unmet=bool(names & {"solver", "mode_overlap"}) or point is None,
+            )
+            record["success"] = failure is None
             record["failure"] = failure
             search_calls += climb
             all_records.append(record)

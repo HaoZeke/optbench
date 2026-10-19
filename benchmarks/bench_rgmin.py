@@ -201,6 +201,9 @@ class _RgminSearch(TrackedSearch):
     def track_failure_crash(self, seed, start) -> float:
         return 1.0 if self._stored(seed, start)["failure"] == "crash" else 0.0
 
+    def track_failure_not_converged(self, seed, start) -> float:
+        return 1.0 if self._stored(seed, start)["failure"] == "not_converged" else 0.0
+
 
 _RgminSearch.track_force_calls.unit = "force calls"
 _RgminSearch.track_success.unit = "fraction"
@@ -208,6 +211,7 @@ _RgminSearch.track_failure_cap.unit = "count"
 _RgminSearch.track_failure_wrong_stationary.unit = "count"
 _RgminSearch.track_failure_divergence.unit = "count"
 _RgminSearch.track_failure_crash.unit = "count"
+_RgminSearch.track_failure_not_converged.unit = "count"
 
 
 def _benchmark(spec: dict):

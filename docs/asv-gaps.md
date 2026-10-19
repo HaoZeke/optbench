@@ -6,7 +6,7 @@ The local pieces that stay until then:
 
 - `optbench/asv_uv.py` creates the `uv-pip` environment. It is the discovery bridge, not a scoring fork.
 - `optbench/asv_score.py` reads track values with `asv.results` and calls `score_v2`. It does not patch `Results.save` or `compute_stats`.
-- Failure classes are four `track_failure_*` floats, because a result file cannot store a per-parameter cause.
+- Failure classes in a saved asv file are four `track_failure_*` floats, because a result file cannot store a per-parameter cause. The harness class `not_converged` is scored from campaign records. A saved asv file has no `track_failure_not_converged` track, and a reader treats that missing track as absent.
 - `cap` is a class attribute. The score records the cap it used in `results/validation/statistics.json`.
 
 ## 1. Track units other than seconds and bytes

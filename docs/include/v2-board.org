@@ -10,7 +10,7 @@
    <th scope="row"><a href="generated/suites/minimization.html#lj38">Lennard-Jones 38 clusters</a></th>
    <td data-code="eOn" data-template="eon/lj38-lbfgs-m100" data-par2="180.137"><span class="bench-score">180.137</span><a href="generated/suites/minimization.html#lj38-templates">eon/lj38-lbfgs-m100</a></td>
    <td data-code="Eon svn">—</td>
-   <td data-code="rgmin" data-template="rgmin/lj38-dogleg" data-par2="81.881"><span class="bench-score">81.881</span><a href="generated/suites/minimization.html#lj38-templates">rgmin/lj38-dogleg</a></td>
+   <td data-code="rgmin" data-template="rgmin/lj38-dogleg" data-par2="1"><span class="bench-score">81.881</span><a href="generated/suites/minimization.html#lj38-templates">rgmin/lj38-dogleg</a></td>
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE" data-template="ase/lj38-lbfgs-tuned" data-par2="395.645"><span class="bench-score">395.645</span><a href="generated/suites/minimization.html#lj38-templates">ase/lj38-lbfgs-tuned</a></td>
    <td data-code="Sella" data-template="sella/lj38-min-tuned" data-par2="253.921"><span class="bench-score">253.921</span><a href="generated/suites/minimization.html#lj38-templates">sella/lj38-min-tuned</a></td>

@@ -623,7 +623,7 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
     """
     import statistics
 
-    from optbench.failures import classify_failure
+    from optbench.failures import classify_outcome
     from optbench.v2 import write_starts
 
     settings = point_settings(problem)
@@ -661,10 +661,11 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
         rng = np.random.default_rng(20261015 + rep)
         found: list[np.ndarray] = []
         connected = 0
+        low_barrier = 0
         searches = 0
         search_calls = 0
         width = max(1, int(workers))
-        while connected < goal and searches < max_searches:
+        while low_barrier < goal and searches < max_searches:
             batch = []
             while len(batch) < width and searches + len(batch) < max_searches:
                 index = searches + len(batch) + 1
@@ -706,7 +707,7 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
                 flush=True,
             )
             for record in run_jobs(batch, _execute, width):
-                if connected >= goal:
+                if low_barrier >= goal:
                     break
                 searches += 1
                 climb = int(record["force_calls"])
@@ -747,25 +748,32 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
                     record["reasons"] = []
                     if novel:
                         found.append(saddle[free].copy())
-                    if links and novel and 0.0 < barrier < barrier_max:
+                    if links:
                         record["success"] = True
                         record["failure"] = None
                         connected += 1
+                        if novel and 0.0 < barrier < barrier_max:
+                            low_barrier += 1
                     else:
-                        if not links:
-                            record["reasons"].append("not_connected")
-                        if not novel:
-                            record["reasons"].append("duplicate")
-                        if barrier <= 0.0 or barrier >= barrier_max:
-                            record["reasons"].append("barrier")
+                        record["reasons"].append("not_connected")
+                        record["failure"] = classify_outcome(
+                            energy=record.get("energy"),
+                            geometry=saddle,
+                            force=record.get("force_norm"),
+                            calls=float(record["force_calls"]),
+                            cap=budget,
+                            force_tol=float(settings["force_norm"]),
+                            hessian_index=None if record.get("hessian_index") is None else int(record["hessian_index"]),
+                            expected_index=1,
+                            stationary_rejected=True,
+                        )
                         record["success"] = False
-                        record["failure"] = classify_failure(record["reasons"])
                 search_calls += int(record["force_calls"])
                 record.pop("positions", None)
                 record.pop("lowest_mode", None)
                 records.append(record)
         total_calls = int(minimize_calls + search_calls)
-        if connected < goal:
+        if low_barrier < goal:
             failed_reps += 1
         fraction = connected / searches if searches else 0.0
         comments.append(

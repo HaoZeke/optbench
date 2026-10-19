@@ -43,8 +43,8 @@ distance_difference = 0.1
 [scoring.v2]
 version = "par2-wilson-bootstrap"
 cost = "one displacement search: the climb plus the two endpoint minimizations"
-success = "index 1 at eigenvalue tolerance 1e-6, force norm at the stop, barrier below 1.5 eV, and exactly one endpoint the same as the minimized reactant by the eOn r2205 rule: Matter::perAtomNorm strictly below distance_difference 0.1 angstrom. ProcessSearchJob calls Matter::compare with indistinguishable left false."
-note = "The result file stores the cap: climb budget 1000, 64 calls of overshoot, and two endpoint budgets of 2000. The initial minimization is outside that count. An index-1 saddle that misses the link, the novelty test, or the barrier is a failure, and those reasons fall through to divergence. A legacy file that records only a campaign ratio has no per-search cap, so PAR-2 is not applied to that ratio. The archived eOn config.ini does not set Structure Comparison, so the 0.1 angstrom default applies. Matter::pbc folds every positive cell axis."
+success = "index 1 at eigenvalue tolerance 1e-6, force norm at the stop, and exactly one endpoint the same as the minimized reactant by the eOn r2205 rule: Matter::perAtomNorm strictly below distance_difference 0.1 angstrom. ProcessSearchJob calls Matter::compare with indistinguishable left false. The barrier window and the saddle-novelty test count the catalogue. They do not reject a connected index-1 saddle."
+note = "The result file stores the cap: climb budget 1000, 64 calls of overshoot, and two endpoint budgets of 2000. The initial minimization is outside that count. A finite search that does not reach an index-1 saddle is not_converged. An index-1 saddle that misses the link is wrong_stationary. A finite clean stop is not divergence. A legacy file that records only a campaign ratio has no per-search cap, so PAR-2 is not applied to that ratio. The archived eOn config.ini does not set Structure Comparison, so the 0.1 angstrom default applies. Matter::pbc folds every positive cell axis."
 counter = "harness"
 required = [
   "schema",
@@ -68,5 +68,6 @@ required = [
   "n_cap",
   "n_wrong_stationary",
   "n_divergence",
+  "n_not_converged",
   "n_crash",
 ]
