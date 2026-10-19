@@ -383,6 +383,17 @@ wheels = [
 ]
 
 [[package]]
+name = "geodesic-interpolate"
+version = "1.0.0"
+source = { git = "https://github.com/virtualzx-nad/geodesic-interpolate.git?rev=476aa041f562d37d5fb4121b86817a52d75e4c5d#476aa041f562d37d5fb4121b86817a52d75e4c5d" }
+dependencies = [
+    { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
+    { name = "numpy", version = "2.5.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
+    { name = "scipy", version = "1.17.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
+    { name = "scipy", version = "1.18.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
+]
+
+[[package]]
 name = "importlib-metadata"
 version = "9.0.1"
 source = { registry = "https://pypi.org/simple" }
@@ -982,6 +993,7 @@ dependencies = [
 [package.dev-dependencies]
 campaign = [
     { name = "ase" },
+    { name = "geodesic-interpolate" },
     { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
     { name = "numpy", version = "2.5.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
     { name = "scipy", version = "1.17.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
@@ -991,6 +1003,7 @@ campaign = [
 dev = [
     { name = "asv" },
     { name = "asv-runner" },
+    { name = "geodesic-interpolate" },
     { name = "pytest" },
 ]
 
@@ -1004,6 +1017,7 @@ requires-dist = [
 [package.metadata.requires-dev]
 campaign = [
     { name = "ase", specifier = "==3.29.0" },
+    { name = "geodesic-interpolate", git = "https://github.com/virtualzx-nad/geodesic-interpolate.git?rev=476aa041f562d37d5fb4121b86817a52d75e4c5d" },
     { name = "numpy" },
     { name = "scipy" },
     { name = "sella", specifier = "==2.6.0" },
@@ -1011,6 +1025,7 @@ campaign = [
 dev = [
     { name = "asv", specifier = "==0.6.6" },
     { name = "asv-runner", specifier = "==0.3.1" },
+    { name = "geodesic-interpolate", git = "https://github.com/virtualzx-nad/geodesic-interpolate.git?rev=476aa041f562d37d5fb4121b86817a52d75e4c5d" },
     { name = "pytest", specifier = ">=8.3" },
 ]
 
