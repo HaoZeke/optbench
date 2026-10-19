@@ -1023,6 +1023,7 @@
         "cap": 7,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 51,
@@ -1068,6 +1069,7 @@
         "cap": 8,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 51,

@@ -1217,21 +1217,22 @@
       "entry": "artn-1.1.0-saddle-search-pt-island--partn-saddle-pt",
       "failures": {
         "cap": 0,
-        "crash": 13,
-        "divergence": 187,
-        "wrong_stationary": 0
+        "crash": 22,
+        "divergence": 0,
+        "not_converged": 1,
+        "wrong_stationary": 177
       },
       "full_n": null,
       "history": false,
-      "max_calls": 1816.0,
-      "mean_calls": 772.09,
+      "max_calls": 2000.0,
+      "mean_calls": 786.23,
       "mean_per_image": null,
       "median": 12000.0,
-      "median_calls": 667.0,
+      "median_calls": 726.5,
       "median_high": 12000.0,
       "median_low": 12000.0,
       "median_per_image": null,
-      "min_calls": 306.0,
+      "min_calls": 393.0,
       "n": 200,
       "nfailed": 200,
       "note": "starts.jsonl",
@@ -1245,7 +1246,7 @@
       "source": "campaign",
       "success_rate": 0.0,
       "template": "partn/saddle-pt",
-      "tuning": "optbench-pt111",
+      "tuning": "beland-radial",
       "wilson_high": 0.018845326377266575,
       "wilson_low": 0.0
     }

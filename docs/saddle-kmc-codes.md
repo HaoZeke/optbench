@@ -22,7 +22,7 @@ success-only median. A row with no success has no median.
 | lowest-eigenvector/lj38 | partn/mode-lj38 | 174/200 | 26 divergence | 22 |
 | tsopt/pt-island | partn/ts-pt | 49/49 | 0 | 325 |
 | tsopt/LJ38 | partn/ts-lj38 | 178/200 | 21 cap, 1 crash | 3302 |
-| saddle-search/pt-island | partn/saddle-pt | 0/200 | 187 divergence, 13 crash | — |
+| saddle-search/pt-island | partn/saddle-pt | 0/200 | 177 wrong_stationary, 22 crash, 1 not_converged | — |
 | lowest-eigenvector/lj38 | tsase/mode-lj38 | 178/200 | 22 divergence | 221.5 |
 | tsopt/pt-island | tsase/dimer-pt | 49/49 | 0 | 892 |
 | tsopt/LJ38 | tsase/dimer-lj38 | 0/200 | 200 cap | — |
@@ -220,9 +220,14 @@ free atoms. `rep1-search5` met that test: barrier 0.9963657039054397 eV,
 Fraction connected was 0.005 and the PAR-2 mean was 11944.625. The same
 200 searches were rerun under the eOn r2205 link, with the same template.
 The repetition total is 154419 again. Connected is 0 of 200,
-`fraction_connected` is 0.0, and the PAR-2 mean is 12000.0. Failures are
-187 divergence and 13 crash. There is no success, so there is no success
-median.
+`fraction_connected` is 0.0, and the PAR-2 mean is 12000.0. The stored
+failure string on those 187 rows was `divergence`. That string is the old
+classifier: `not_connected`, `duplicate`, and `barrier` were not class
+names, so they fell through. `classify_stored` ignores the stored string.
+On this file, with cap 6000 and force tolerance `1e-3`, it returns
+`wrong_stationary` for all 187 stored-endpoint searches and `crash` for
+the 13 `EIGENVALUE LOST` rows. Every stored force is at or under the
+stop. There is no success, so there is no success median.
 
 `rep1-search5` now stores per-atom maxima 1.5927587365713207 and
 4.171209680571467. Both endpoints differ from the reactant, so the r2205
@@ -235,6 +240,81 @@ unique saddle: per-atom maxima 4.600110085030538 and 3.21627565547626,
 barrier 1.623944584138144 eV. The OptBench catalogue calls a saddle
 connected when the nearer minimum's `delr` is under 0.5. That is a
 different test from either harness link.
+
+The 138 linked searches are not one repeated push. The initial vector is
+confined to atoms 0-6, the z component is set to zero, and each selected
+atom is given its own length from 0.05 to 0.5 angstrom. One
+`numpy` Generator, seeded `20261016` (`20261015` plus the repetition),
+draws a new atom count, a new subset, and a new direction for every
+search in the parent, before the workers start. The pushes are
+reproducible from that seed. They are not one fixed vector, and the seed
+is not a separate seed per search. `zseed` is `pair_seed` of `0:` plus
+the search name, so pARTn's own generator does change with the name.
+The saddle counter is `rmsd_connect` 0.5 on the free atoms. Among the
+138 linked searches, 48 product minima differ by the r2205 test
+(per-atom maximum strictly below 0.1 angstrom). Three saddle geometries
+sit outside RMSD 0.5 of each other, and the other linked saddles fall
+inside that radius of one of those three.
+
+The published saddle-search table has no ARTn row.
+`archive/entries/saddle-search/pt-island/` has the eOn and SoftSaddle
+entries and no pARTn directory. Chill et al., J. Chem. Theory Comput.
+2014, 10, 5476, name ARTn as the Lanczos min-mode method. The
+Pt-heptamer numbers in that paper are EON Lanczos on a known saddle
+(average 106 force calls, minimum 71, maximum 163, 0 failed), not this
+catalog. The pARTn source example
+`examples/OptBench_SaddleSearch.d/launch_script.py` is the catalog
+setup: `ninit` 3, `lanczos_max_size` 20, `eigen_step_size` 0.3,
+`nperp_limitation` 6 10 12 14 -1, `nsmooth` 2, `nnewchance` 0,
+`eigval_thr` -0.05, `lpush_final` true, force norm `1e-3`, and
+`minimize` 2000. The push uses atoms 0-6, between 1 and 7 of them, lengths
+0.05 to 0.5 angstrom, with z set to zero. The script then divides those
+lengths by 0.529177 before `set`. `set_param` stores `push_init` without
+a unit conversion, and this harness applies `next_displ` as returned, so
+the in-plane row passed 0.05 to 0.5 as angstroms. The script sets
+`nnewchance` 0. The in-plane template used 2, from
+`examples/LAMMPS.Pt111.d/artn.in`. The example's pair is
+`morse/smooth/linear` 9.5 with D 0.7102, alpha 1.6047, r0 2.897, which
+is the harness potential. The archive eOn rows set `potential = morse_pt`.
+`Morse::setParameters(0.7102, 1.6047, 2.8970, 9.5)` subtracts the pair
+energy at the cutoff and leaves the Morse force, so the energy is shifted
+and the force is not smoothed. `morse/smooth/linear` zeroes both.
+
+The Béland 2015 profile named for the pyKMC run is not that script.
+`ninit` is 1, the push is radial with length 0.4 angstrom out to 3.0
+angstrom, and Lanczos runs from 12 to 15. The in-plane template had
+`ninit` 3, `lanczos_min_size` 2, `lanczos_max_size` 20, and no radius.
+`partn/saddle-pt` now uses that profile. The center is drawn from atoms
+0-6. Every free atom within 3.0 angstrom is given an independent draw in
+`[-0.5, 0.5]^3`, and the whole vector is scaled to length 0.4 angstrom,
+the `generate_push_init` scaling when the per-atom flag is off. The draw
+is not in-plane. `lanczos_min_size` is 12 and `lanczos_max_size` is 15.
+The same parent stream, seed 20261016, draws a new center and a new
+vector each search. Two hundred searches, workers 8, finished with
+repetition total 157247, `unique_saddles` 3, `fraction_connected` 0.0,
+and PAR-2 12000.0. Of the 177 stored-endpoint searches, 156 are linked
+and 21 are not. The 156 linked searches reach 58 product minima under
+the 0.1 angstrom test, against 48 for the in-plane run. The saddle RMSD
+still keeps three geometries. `classify_stored` labels 177
+`wrong_stationary`, 22 `crash`, and 1 `not_converged`. The
+`not_converged` row is `rep1-search129`: 2000 calls, force norm
+0.00914072701088663, no endpoints. That is the pARTn budget of 2000.
+The harness cap is 6000, so the class is not `cap`. The three saddles
+outside RMSD 0.5 are `rep1-search1` (1096 calls, barrier
+5.374785894651268 eV, per-atom maxima 2.8160424963629502 and
+8.579613988266921e-05), `rep1-search16` (1246 calls, barrier
+2.447158015067771 eV, per-atom maxima 4.094828296264062 and
+9.279633004924133e-05), and `rep1-search26` (1174 calls, barrier
+0.9988702934294906 eV, per-atom maxima 4.174952512157817 and
+1.592806184352314, not connected). There is no success.
+
+| row | potential | push | force calls | fraction connected | searches | unique | PAR-2 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| archive eon-md r2205, 15 Jul 2014 | `morse_pt`, energy shifted at 9.5 | radius 3.3, magnitude 0.1, atoms 0-6 | 1478168 | 0.886966 | 800.222 | 51.6667 | not applied |
+| archive eon-dimer r2205, 15 Jul 2014 | `morse_pt`, energy shifted at 9.5 | dimer, same displacement list | 3778880 | 0.746017 | 11366.8 | 109.222 | not applied |
+| archive ARTn | no saddle-search entry | — | — | — | — | — | — |
+| partn/saddle-pt in-plane, `58c7eea3` | `morse/smooth/linear` | in-plane 0.05-0.5, ninit 3, Lanczos 20 | 154419 | 0.0 | 200 | 3 | 12000.0 |
+| partn/saddle-pt `beland-radial` | `morse/smooth/linear` | vector length 0.4 within 3.0, ninit 1, Lanczos 12-15 | 157247 | 0.0 | 200 | 3 | 12000.0 |
 
 ## Pt-island endpoint link
 
@@ -261,9 +341,10 @@ Two minima are the same when that maximum is strictly below 0.1 Å. A
 search is connected when exactly one endpoint matches. `rmsd_connect` 0.5
 stays the saddle-novelty test and is not this link.
 
-The pARTn row is that rerun. Both endpoint minima are in
+The pARTn file on disk is the radial run. Both endpoint minima are in
 `artn-1.1.0-saddle-search-pt-island--partn-saddle-pt.endpoints.npz`
-(187 finite endpoint pairs, 13 `not_minimized` crash rows). The other
+(177 finite endpoint pairs, 23 `not_minimized` rows). The in-plane
+r2205 run is the `58c7eea3` row in the table above. The other
 saddle-search/pt-island rows still have no endpoint coordinates, so
 their connected counts and PAR-2 are unchanged. `pykmc/lattice` writes
 nothing, so there is no pyKMC row to rescore. The MATLAB smoke in
@@ -294,7 +375,7 @@ directory, outside the HTML tables.
 | rgsaddle/saddle-dimer-rotskip | absent; RMSD scalars on 19718 of 20000 | 0/20000 | 0/20000 | 10128 | 10128 |
 | rgsaddle/saddle-lanczos | absent; RMSD scalars on 4068 of 20000 | 0/20000 | 0/20000 | 10128 | 10128 |
 | rgsaddle/saddle-lanczos-tuned | absent; RMSD scalars on 13743 of 20000 | 0/20000 | 0/20000 | 10128 | 10128 |
-| partn/saddle-pt | float32 free-atom endpoints; 187 stored, 13 not minimized | 1/200 | 0/200 | 11944.625 | 12000.0 |
+| partn/saddle-pt in-plane, `58c7eea3` | float32 free-atom endpoints; 187 stored, 13 not minimized | 1/200 | 0/200 | 11944.625 | 12000.0 |
 | ase/dimer-pt-island-default, campaign n=16 | absent | 16/16 | 16/16 | 1118.0625 | 1118.0625 |
 | ase/dimer-pt-island-tuned, campaign n=16 | absent | 16/16 | 16/16 | 915.4375 | 915.4375 |
 | ase/dimer-pt-island-default, asv n=1 | absent | 1/1 | 1/1 | 699 | 699 |
