@@ -286,3 +286,13 @@ def test_short_cap_stops_on_the_first_lj38_pair():
     assert int(record["aid_force_calls"]) <= int(record["force_calls"])
     assert record["n_free"] == 38
     assert record["n_images"] == 7
+
+
+def test_asv_class_binds_the_problem_and_the_first_start():
+    from benchmarks.bench_gpatom import HeptamerGpatomAidneb, PtIslandGpatomAidneb
+
+    assert PtIslandGpatomAidneb.problem_name == "double-ended-saddle-search/pt-island"
+    assert PtIslandGpatomAidneb.params[0] == ["0"]
+    assert PtIslandGpatomAidneb.params[1] == ["product_0"]
+    assert HeptamerGpatomAidneb.problem_name == "neb/Pt-heptamer"
+    assert HeptamerGpatomAidneb.track_force_calls.unit == "force calls"

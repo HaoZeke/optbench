@@ -111,12 +111,12 @@ def _measure(problem_name: str, seed: str, start: str) -> dict:
     return record
 
 
-def _bind(class_name: str, problem_name: str, starts: list[str]) -> type:
+def _bind(class_name: str, problem: str, starts: list[str]) -> type:
     class _Benchmark(_TrackedSearch):
         param_names = ["seed", "start"]
         params = [["0"], list(starts)]
         timeout = 86400
-        problem_name = problem_name
+        problem_name = problem
 
         def setup(self, seed, start):
             path = sidecar_path(self.problem_name, str(seed), str(start))
