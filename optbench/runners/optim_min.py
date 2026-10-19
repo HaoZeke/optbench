@@ -2,9 +2,10 @@
 
 The binary is the Wales-group OPTIM built from the pinned svn export.
 ``BFGSMIN`` is LBFGS. ``USERPOT`` is last in ``odata``, and the
-coordinates follow it. Each geometry is one TCP ``calculate`` on
-``PotServer``. ``HarnessCounter(cache=True)`` counts that geometry once
-when OPTIM asks for the energy and then the gradient.
+coordinates follow it. Each ``USERPOT`` entry is one TCP ``calculate``
+on ``PotServer``. ``HarnessCounter(cache=True)`` keeps the last geometry only. A second
+request at those coordinates is the same evaluation. These BFGSMIN runs
+send a new geometry on every request, and each request is charged.
 
 The RMS stop is the problem force norm divided by ``sqrt(3N)``. The
 recorded force norm is a direct clean evaluation and is not a search
@@ -375,6 +376,7 @@ def _minimize_job(job: dict) -> dict:
         "start": job["start"],
         "index": job["index"],
         "force_calls": calls,
+        "cache_hits": int(counter.hits),
         "verify_calls": verify_calls,
         "counter": "harness",
         "comparable": True,

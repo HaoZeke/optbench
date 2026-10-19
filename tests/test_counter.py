@@ -1,6 +1,26 @@
 from optbench.counter import CountedPotential, ForceCallCap, HarnessCounter, PeleCounter, attach_ase_counter
 
 
+def test_cache_hit_is_only_the_last_geometry():
+    counter = HarnessCounter(cache=True)
+    fresh, _cached = counter.charge((1.0, 0.0))
+    assert fresh is True
+    counter.remember((1.0, 0.0), (0.0, (0.0, 0.0)))
+    fresh, cached = counter.charge((1.0, 0.0))
+    assert fresh is False
+    assert cached == (0.0, (0.0, 0.0))
+    fresh, _cached = counter.charge((2.0, 0.0))
+    assert fresh is True
+    counter.remember((2.0, 0.0), (1.0, (0.0, 0.0)))
+    fresh, _cached = counter.charge((1.0, 0.0))
+    assert fresh is True
+    assert counter.calls == 3
+    assert counter.hits == 1
+    counter.reset()
+    assert counter.hits == 0
+    assert counter.calls == 0
+
+
 def test_repeated_coordinates_are_one_force_call():
     seen = []
 
