@@ -19,7 +19,7 @@
         "median_energy_rmse": 0.05154574231297054,
         "median_epoch": 3873,
         "median_force_rmse": 0.5463402383761725,
-        "nfailed": 36
+        "nfailed": 39
       },
       "metrics": {
         "bootstrap_resamples": 2000,
@@ -27,29 +27,29 @@
         "cap": 30000,
         "includes_failures": true,
         "iqr": 0.0,
-        "iqr_high": 55113.0,
+        "iqr_high": 54099.25,
         "iqr_low": 0.0,
-        "mean": 47220.936170212764,
+        "mean": 47987.68,
         "median": 60000.0,
         "median_high": 60000.0,
         "median_low": 60000.0,
-        "n": 47,
-        "n_cap": 36,
+        "n": 50,
+        "n_cap": 39,
         "n_crash": 0,
         "n_divergence": 0,
         "n_wrong_stationary": 0,
-        "nfailed": 36,
-        "par2_mean": 47220.936170212764,
+        "nfailed": 39,
+        "par2_mean": 47987.68,
         "par_applied": true,
         "par_factor": 2,
         "q25": 60000.0,
         "q75": 60000.0,
         "scoring": "par2-wilson-bootstrap",
         "success_only_mean": 5398.545454545455,
-        "success_rate": 0.23404255319148937,
+        "success_rate": 0.22,
         "successes": 11,
-        "wilson_high": 0.37224257550155593,
-        "wilson_low": 0.13603274586227188
+        "wilson_high": 0.3524154958125367,
+        "wilson_low": 0.1275391597021442
       },
       "parameters": {
         "activation": "tanh",
@@ -788,6 +788,51 @@
           "schema": "optbench.start/v2",
           "start": "0046",
           "success": true
+        },
+        {
+          "comparable": true,
+          "counter": "harness",
+          "energy_rmse": 0.00903098050152727,
+          "failure": "cap",
+          "force_calls": 30000,
+          "force_rmse": 0.11879734270042781,
+          "max_group_norm": 1538.660588959815,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "0047",
+          "success": false
+        },
+        {
+          "comparable": true,
+          "counter": "harness",
+          "energy_rmse": 0.007838966584361241,
+          "failure": "cap",
+          "force_calls": 30000,
+          "force_rmse": 0.10026915682395403,
+          "max_group_norm": 7649.0975048696755,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "0048",
+          "success": false
+        },
+        {
+          "comparable": true,
+          "counter": "harness",
+          "energy_rmse": 0.011392814565741328,
+          "failure": "cap",
+          "force_calls": 30000,
+          "force_rmse": 0.1452871662066758,
+          "max_group_norm": 1671.8591162282373,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "0049",
+          "success": false
         }
       ],
       "tuning": "default"
