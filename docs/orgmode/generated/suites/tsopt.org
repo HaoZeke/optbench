@@ -50,7 +50,7 @@
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">eOn rows are not yet on the harness counter. Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
+   <p class="bench-gaps">eOn rows are not yet on the harness counter. optim rows are off the ranked table. Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
    <figure class="bench-plot"><a href="../../_static/board/tsopt-LJ38-profile.svg"><picture><source srcset="../../_static/board/tsopt-LJ38-profile.webp" type="image/webp"><img src="../../_static/board/tsopt-LJ38-profile.png" alt="Dolan-More profile for tsopt/LJ38" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/tsopt-LJ38-cost.svg"><picture><source srcset="../../_static/board/tsopt-LJ38-cost.webp" type="image/webp"><img src="../../_static/board/tsopt-LJ38-cost.png" alt="Cost versus success for tsopt/LJ38" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="LJ38-templates">
@@ -92,6 +92,7 @@
    <h3>Not a harness score</h3><ul>
    <li>eon/ts-lj38-dimer-m100 eOn n=200, not yet on the harness counter.</li>
    <li>eon/ts-lj38-dimer eOn n=200, not yet on the harness counter.</li>
+   <li>optim/lj38-hef-cd optim n=200, counter optim.</li>
    </ul>
    <h3>Not scored</h3><ul>
    <li>sella-lj38: no per-start record</li>

@@ -1,0 +1,19 @@
+# counter optim. OPTIM energy+gradient calls. The ASE socket is not this score.
+# wales-27058. USEDIAG is unset, so NSECDIAG stays 1 (central differences on energies).
+# unrounded_mean 223.15
+# unrounded_median 182.5
+force_calls 223
+force_calls_median 182
+force_calls_min 77
+force_calls_max 772
+nfailed 0
+n 200
+successes 200
+code optim
+code_version 27058
+commit 144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348
+algorithm hybrid eigenvector following
+template optim/lj38-hef-cd
+problem tsopt/LJ38
+tuning archive
+counter optim

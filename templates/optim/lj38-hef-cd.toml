@@ -1,0 +1,17 @@
+# OPTIM hybrid eigenvector following, second-order central differences, LJ38.
+# The 2014 odata leaves USEDIAG unset, so NSECDIAG stays 1 (energies).
+id = "optim/lj38-hef-cd"
+engine = "optim"
+problem = "tsopt/LJ38"
+code = "optim"
+code_version = "27058"
+commit = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
+algorithm = "hybrid eigenvector following"
+tuning = "archive"
+note = "wales-27058. Archived odata: BFGSTS 45 14 16 0.68 100, BFGSSTEPS 100, BFGSCONV 9.36585D-05, NOHESS. USEDIAG is unset. Starts are coords-xyz. The score is OPTIM energy+gradient calls, not the ASE socket."
+
+[optim]
+method = "hef-cd"
+preamble = "archive/entries/tsopt/LJ38/optim_cd/odata.preamble"
+geometry = "website/tsopt/LJ38/coords-xyz.tar.gz"
+starts = 200

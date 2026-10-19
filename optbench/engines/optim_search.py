@@ -1,22 +1,29 @@
-"""OPTIM L-BFGS through the ASE socket.
+"""OPTIM L-BFGS through the ASE socket, plus the 2014 LJ38 central-difference search.
 
-The binary is the OPTIM target from the Wales snapshot
+The minimization binary is the OPTIM target from the Wales snapshot
 ``http://www-wales.ch.cam.ac.uk/svn.tar.bz2``. The pin is the sha256 of
 that file. The snapshot has no git commit. Each ``COMPUTE`` on the relay
-is one ``pes.evaluate``. OPTIM's own counter is not the score.
+is one ``pes.evaluate``. OPTIM's own counter is not that score.
 
-``optim/unhooked`` and every template that is not minimization L-BFGS
-raise before a file is written. Noise, saddle search, NEB, and PATHSAMPLE
-are not this runner.
+``optim/lj38-hef-cd`` is the 2014 tsopt row. It runs wales-27058 on the
+archived odata and coords-xyz, and the score is OPTIM's energy+gradient
+counter. That tarball is not the snapshot pin.
+
+``optim/unhooked`` and every other template that is not minimization
+L-BFGS raise before a file is written. Noise, NEB, and PATHSAMPLE are
+not this runner.
 """
 
 from __future__ import annotations
 
+import hashlib
+import json
 import math
 import os
 import shutil
 import subprocess
 import sys
+import tarfile
 from pathlib import Path
 
 import numpy as np
@@ -28,6 +35,8 @@ ENGINE = "optim"
 CODE = "optim"
 SNAPSHOT = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
 SHA256 = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+WALES_27058 = "https://optbench.org/codes/wales-27058.tar.bz2"
+WALES_27058_SHA256 = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
 _RELAY = Path(__file__).with_name("fmlip_relay.py")
 
 
@@ -55,6 +64,14 @@ def binary_path() -> Path:
     if env:
         return Path(env)
     return Path("/tmp/src/wales-full/build-optim/OPTIM")
+
+
+def binary_27058() -> Path:
+    """OPTIM from wales-27058.tar.bz2, not the later svn snapshot."""
+    env = os.environ.get("OPTIM_27058")
+    if env:
+        return Path(env)
+    return Path("/tmp/src/wales/OPTIM/bin/gfortran/OPTIM")
 
 
 def available() -> str | None:
@@ -280,7 +297,251 @@ def _job(start: dict, settings: dict, template: dict) -> dict:
     }
 
 
+def odata_text(preamble: str, points: list[tuple[str, str, str]]) -> str:
+    """Archived ``run_optim.sh``: preamble, ``points``, then ``AX`` plus three spaces."""
+    body = preamble if preamble.endswith("\n") else preamble + "\n"
+    lines = [body.rstrip("\n"), "points"]
+    for x_coord, y_coord, z_coord in points:
+        lines.append(f"AX   {x_coord} {y_coord} {z_coord}")
+    return "\n".join(lines) + "\n"
+
+
+def energy_gradient_calls(log: str) -> int | None:
+    """Field 6 of the last ``energy+gradient calls`` line. That is OPTIM's FCALL."""
+    last = None
+    for line in log.splitlines():
+        if "energy+gradient calls" not in line:
+            continue
+        parts = line.split()
+        if len(parts) >= 6:
+            last = parts[5]
+    if last is None:
+        return None
+    try:
+        return int(float(last))
+    except ValueError:
+        return None
+
+
+def paper_counts(calls: list[int], successes: list[bool]) -> dict:
+    """``getdata.py``: unsuccessful starts stay out of the mean and count as nfailed.
+
+    ``round`` is the same call the 2014 script makes on the numpy mean.
+    """
+    if len(calls) != len(successes):
+        raise ValueError("calls and successes differ in length")
+    kept = [int(call) for call, ok in zip(calls, successes, strict=True) if ok]
+    failed = sum(1 for ok in successes if not ok)
+    if not kept:
+        raise ValueError("no successful starts")
+    values = np.asarray(kept, dtype=float)
+    mean = np.mean(values)
+    median = np.median(values)
+    return {
+        "force_calls": int(round(mean)),
+        "force_calls_median": int(round(median)),
+        "force_calls_min": int(round(np.min(values))),
+        "force_calls_max": int(round(np.max(values))),
+        "nfailed": int(failed),
+        "unrounded_mean": float(mean),
+        "unrounded_median": float(median),
+        "n": len(successes),
+        "successes": len(kept),
+    }
+
+
+def _stored_archive(root: Path, archive_path: str) -> Path:
+    manifest = root / "inputs" / "manifest.jsonl"
+    for line in manifest.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        row = json.loads(line)
+        if row.get("path") != archive_path:
+            continue
+        found = root / row["stored"]
+        digest = hashlib.sha256(found.read_bytes()).hexdigest()
+        if digest != row["sha256"]:
+            raise RuntimeError(f"{archive_path} sha256 is {digest}, the manifest says {row['sha256']}")
+        return found
+    raise FileNotFoundError(archive_path)
+
+
+def _xyz_starts(archive: Path) -> list[tuple[str, list[tuple[str, str, str]]]]:
+    rows: list[tuple[str, list[tuple[str, str, str]]]] = []
+    with tarfile.open(archive) as packed:
+        members = [item for item in packed.getmembers() if item.name.endswith(".xyz")]
+        members.sort(key=lambda item: item.name)
+        for member in members:
+            extracted = packed.extractfile(member)
+            if extracted is None:
+                raise FileNotFoundError(member.name)
+            lines = extracted.read().decode("utf-8").splitlines()
+            points: list[tuple[str, str, str]] = []
+            for line in lines[2:]:
+                parts = line.split()
+                if len(parts) < 4:
+                    continue
+                points.append((parts[1], parts[2], parts[3]))
+            rows.append((Path(member.name).stem, points))
+    return rows
+
+
+def _hef_one(job: dict) -> dict:
+    os.environ.setdefault("OMP_NUM_THREADS", "1")
+    import tempfile
+
+    name = str(job["name"])
+    calls = None
+    success = False
+    error = ""
+    try:
+        with tempfile.TemporaryDirectory(prefix=f"optim-cd-{name}-") as raw:
+            folder = Path(raw)
+            (folder / "odata").write_text(odata_text(job["preamble"], job["points"]), encoding="utf-8")
+            env = os.environ.copy()
+            env["OMP_NUM_THREADS"] = "1"
+            try:
+                proc = subprocess.run(
+                    [str(job["binary"])],
+                    cwd=folder,
+                    env=env,
+                    capture_output=True,
+                    text=True,
+                    timeout=600,
+                    check=False,
+                )
+                log = proc.stdout + "\n" + proc.stderr
+            except subprocess.TimeoutExpired:
+                log = ""
+                error = "OPTIM exceeded 600s"
+            calls = energy_gradient_calls(log)
+            success = "**** CONVERGED ****" in log
+            if calls is None and not error:
+                error = "OPTIM log has no energy+gradient calls"
+    except Exception as exc:
+        error = f"{type(exc).__name__}: {exc}"
+    record = {
+        "schema": "optbench.start/v2",
+        "start": name,
+        "force_calls": -1 if calls is None else int(calls),
+        "success": bool(success),
+        "failure": None if success else "divergence",
+        "counter": "optim",
+        "comparable": False,
+        "template": job["template"],
+        "problem": job["problem"],
+        "code": job["code"],
+        "code_version": job["code_version"],
+        "commit": job["commit"],
+        "tuning": job["tuning"],
+    }
+    if error:
+        record["error"] = error
+    return record
+
+
+def _hef_dat(counts: dict, template: dict) -> str:
+    lines = [
+        "# counter optim. OPTIM energy+gradient calls. The ASE socket is not this score.",
+        "# wales-27058. USEDIAG is unset, so NSECDIAG stays 1 (central differences on energies).",
+        f"# unrounded_mean {counts['unrounded_mean']:.10g}",
+        f"# unrounded_median {counts['unrounded_median']:.10g}",
+        f"force_calls {counts['force_calls']}",
+        f"force_calls_median {counts['force_calls_median']}",
+        f"force_calls_min {counts['force_calls_min']}",
+        f"force_calls_max {counts['force_calls_max']}",
+        f"nfailed {counts['nfailed']}",
+        f"n {counts['n']}",
+        f"successes {counts['successes']}",
+        f"code {template['code']}",
+        f"code_version {template['code_version']}",
+        f"commit {template['commit']}",
+        f"algorithm {template['algorithm']}",
+        f"template {template['id']}",
+        f"problem {template.get('problem', '')}",
+        f"tuning {template['tuning']}",
+        "counter optim",
+    ]
+    return "\n".join(lines) + "\n"
+
+
+def _run_hef_cd(root: Path, problem_name: str, template_name: str, *, output: Path, workers: int) -> dict:
+    from optbench.campaign import load_template, resolve_problem
+
+    root = Path(root)
+    problem = resolve_problem(root, problem_name)
+    template = load_template(root, template_name)
+    if template["engine"] != ENGINE:
+        raise ValueError(f"{template_name} engine is {template['engine']}")
+    stated = template.get("problem")
+    if stated and stated != problem_name:
+        raise ValueError(f"{template_name} belongs to {stated}")
+    if template.get("code") != CODE:
+        raise ValueError(f"{template_name} code is not {CODE}")
+    if template.get("commit") != WALES_27058_SHA256:
+        raise ValueError(f"{template_name} commit is not the wales-27058 sha256 {WALES_27058_SHA256}")
+    section = dict(template.get("optim") or {})
+    if str(section.get("method", "")) != "hef-cd":
+        raise ValueError(f"{template_name} method is not hef-cd")
+    binary = binary_27058()
+    if not binary.is_file():
+        raise RuntimeError(
+            "OPTIM 27058 is not built. "
+            f"The pin is the sha256 {WALES_27058_SHA256} of {WALES_27058}. "
+            f"{binary} is not present. Set OPTIM_27058 to the gfortran binary."
+        )
+    preamble_path = root / str(section["preamble"])
+    preamble = preamble_path.read_text(encoding="utf-8")
+    archive = _stored_archive(root, str(section["geometry"]))
+    starts = _xyz_starts(archive)
+    expected = int(section.get("starts", (problem.get("sample") or {}).get("starts", 0)))
+    if len(starts) != expected:
+        raise RuntimeError(f"{archive} has {len(starts)} xyz starts, the template states {expected}")
+    jobs = [
+        {
+            "name": name,
+            "points": points,
+            "preamble": preamble,
+            "binary": str(binary),
+            "template": template["id"],
+            "problem": problem["id"],
+            "code": template["code"],
+            "code_version": str(template["code_version"]),
+            "commit": template["commit"],
+            "tuning": template["tuning"],
+        }
+        for name, points in starts
+    ]
+    records = run_jobs(jobs, _hef_one, workers)
+    counts = paper_counts(
+        [int(row["force_calls"]) for row in records],
+        [bool(row["success"]) for row in records],
+    )
+    output = Path(output)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(_hef_dat(counts, template), encoding="utf-8")
+    starts_path = output.with_suffix(".starts.jsonl")
+    starts_path.write_text(
+        "".join(json.dumps(row, sort_keys=True) + "\n" for row in records),
+        encoding="utf-8",
+    )
+    return {
+        "force_calls": counts["force_calls"],
+        "nfailed": counts["nfailed"],
+        "starts": counts["n"],
+        "template": template["id"],
+        "problem": problem["id"],
+        "unrounded_mean": counts["unrounded_mean"],
+        "unrounded_median": counts["unrounded_median"],
+    }
+
+
 def run(root: Path, problem_name: str, template_name: str, *, output: Path, workers: int = 1) -> dict:
+    from optbench.campaign import load_template
+
+    preview = load_template(Path(root), template_name)
+    if str((preview.get("optim") or {}).get("method", "")) == "hef-cd":
+        return _run_hef_cd(root, problem_name, template_name, output=output, workers=workers)
     reason = available()
     if reason:
         raise RuntimeError(reason)
