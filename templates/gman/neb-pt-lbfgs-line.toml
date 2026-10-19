@@ -1,0 +1,11 @@
+id = "gman/neb-pt-lbfgs-line"
+engine = "gman"
+problem = "neb/Pt-heptamer"
+code = "Gman"
+code_version = "r235"
+commit = "r235"
+algorithm = "lbfgs"
+paper_baseline = true
+note = """
+Gman r235 climbing-image NEB on the 13 Pt-heptamer pairs. The driver is the archived opt.py: L-BFGS maxmove 0.2, alpha 0.05, memory 25, minimizer line, 8 images, spring 5, tangent new, itrmax 1000, fmax 0.01, method ci, converge Fmag. The score is pot.count divided by 8, then the integer mean over the 13 pairs. The potential is the Fortran Morse shipped in Gman-r235 (De 0.7102, alpha 1.6047, r0 2.897, cutoff 9.5).
+"""
