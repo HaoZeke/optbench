@@ -1,0 +1,24 @@
+# pele a68ec5, the 2014-08-06 pin in pele-a68ec5.tgz
+# dec_morse.py from double-ended-saddle-search/pt-island/pele/pele.tgz
+# Morse bulk rho 1.6047, r0 2.8970, A 0.7102, cutoff 9.5, frozen atoms from the con file
+# DNEB image_density 1, iter_density 30, k 0.05, reinterpolate 50, adjustk_freq 50
+# NEB quench tol 0.01, maxstep 2, then hybrid eigenvector following from the highest image
+# TS tol 1e-3/sqrt(3*nfree), max_uphill_step 0.4, tangent maxstep 0.4
+# lowestEigenvectorQuench nsteps 1000, tol 0.4, maxstep 1, demand_initial_negative_vec false
+# products 1 through 58, the range in dec_morse.py. product_0 is not in that driver
+# force_calls is the Python 2 round of PotWrapperIncr counts on successes. A success flag of 0 is a failure
+force_calls 246
+force_calls_median 225
+force_calls_min 96
+force_calls_max 634
+nfailed 2
+n 58
+code pele
+code_version a68ec5
+commit a68ec5e7706a64b93a85ac34ffe22cd08eb1c1c9
+algorithm hybrid eigenvector following
+template pele/de-pt-island
+problem double-ended-saddle-search/pt-island
+tuning archive
+ranked false
+counter pele-2014

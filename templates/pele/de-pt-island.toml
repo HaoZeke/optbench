@@ -1,0 +1,45 @@
+# pele a68ec5 double-ended saddle search on the Pt island.
+# The archived driver is dec_morse.py. It builds one DNEB, then one hybrid
+# eigenvector-following search from the highest image. The count is
+# PotWrapperIncr on getEnergy and getEnergyGradient. Products 1 through 58.
+id = "pele/de-pt-island"
+engine = "pele-a68ec5"
+code = "pele"
+code_version = "a68ec5"
+commit = "a68ec5e7706a64b93a85ac34ffe22cd08eb1c1c9"
+algorithm = "hybrid eigenvector following"
+problem = "double-ended-saddle-search/pt-island"
+tuning = "archive"
+ranked = false
+paper_baseline = true
+note = "Commit a68ec5 (2014-08-06). MorseBulkFrozen rho 1.6047, r0 2.8970, A 0.7102, rcut 9.5, periodic box from the con file, frozen atoms removed from the coordinate vector. NEB image_density 1, iter_density 30, k 0.05, reinterpolate 50, adjustk_freq 50, quench tol 0.01, maxstep 2. findTransitionState tol is 1e-3/sqrt(3*nfree), which is an L2 force of 0.001. max_uphill_step 0.4, tangent maxstep 0.4, lowest-eigenvector quench nsteps 1000 tol 0.4 maxstep 1, nsteps_tangent1 3, nsteps_tangent2 20, demand_initial_negative_vec false. The driver loop is range(1, 59)."
+
+[stop]
+norm = "l2"
+force_norm = 0.001
+
+[potential]
+kind = "morse"
+rho = 1.6047
+r0 = 2.8970
+A = 0.7102
+rcut = 9.5
+
+[neb]
+image_density = 1.0
+iter_density = 30.0
+k = 0.05
+reinterpolate = 50
+adjustk_freq = 50
+quench_tol = 0.01
+quench_maxstep = 2.0
+
+[ts]
+max_uphill_step = 0.4
+tangent_maxstep = 0.4
+eigenvector_nsteps = 1000
+eigenvector_tol = 0.4
+eigenvector_maxstep = 1.0
+nsteps_tangent1 = 3
+nsteps_tangent2 = 20
+demand_initial_negative_vec = false
