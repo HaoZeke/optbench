@@ -43,6 +43,8 @@ def _ready(family: str) -> bool:
             from optbench.runners.nlopt_min import load_nlopt
 
             load_nlopt()
+        elif family == "scipy":
+            import scipy  # noqa: F401
         else:
             return False
     except ImportError:

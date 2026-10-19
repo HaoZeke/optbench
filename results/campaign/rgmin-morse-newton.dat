@@ -1,14 +1,15 @@
 # counter harness. One force call is one RgpotCounter.calculate entry.
-# Newton and dogleg Hessians are analytic and are not force calls.
+# Each analytic Hessian costs one force call per coordinate.
+# gradient_calls is the harness energy and gradient. hessian_calls counts matrices. hessian_force_calls is matrices times the dimension. force_calls is their sum.
 # v2 success is under the cap, at the force stop, and Hessian index 0.
 # energy and Kabsch RMSD were not applied: the problem file has no energy_tol, rmsd_tol, or per-start reference.
 # energy_min and energy_max are the final potential values on the recorded points.
 # Default row. gtol and the iteration budget are the problem force norm and the force-call cap. No displacement cap. istep is 0.1. The session line search is strong Wolfe. The same values are used for every start.
-force_calls 199
-force_calls_min 4
-force_calls_max 6789
-nfailed 1
-median 8
+force_calls 4955
+force_calls_min 2308
+force_calls_max 9998
+nfailed 14
+median 4615
 code rgmin
 code_version 0.4.0
 commit 24236559f3815847cac89ba0a7be634ce0beb4a9
@@ -16,14 +17,14 @@ algorithm NEWTON
 template rgmin/morse-newton
 tuning default
 counter harness
-par2_mean 396.69
-wilson_low 0.945513803821
-wilson_high 0.998232567936
-par2_median 8
-par2_median_low 7
-par2_median_high 8
-v2_nfailed 1
-v2_successes 99
+par2_mean 7061.12
+wilson_low 0.77862811789
+wilson_high 0.914736563401
+par2_median 5384
+par2_median_low 4615
+par2_median_high 5384
+v2_nfailed 14
+v2_successes 86
 n 100
 energy_min -1396.17323768
 energy_max -950.107174792

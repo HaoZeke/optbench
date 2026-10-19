@@ -833,6 +833,7 @@ def _benchmark_index() -> dict[str, dict]:
         "benchmarks.bench_ase_sella",
         "benchmarks.bench_rgsaddle",
         "benchmarks.bench_noise",
+        "benchmarks.bench_scipy",
         "benchmarks.quadratic",
     )
     for module_name in modules:
@@ -1477,6 +1478,8 @@ def _problem_anchor(problem: dict, templates: bool) -> str:
 
 def _board_problem_link(problem: dict, templates: bool = False) -> str:
     ident = str(problem.get("id") or "")
+    if templates and ident in SWEEP_PAGES:
+        return f"generated/suites/{SWEEP_PAGES[ident]}.html#{_problem_anchor(problem, True)}"
     suite, _, name = ident.partition("/")
     anchor = _problem_anchor(problem, templates)
     if not suite or not name:
@@ -1538,6 +1541,70 @@ def headline_table(problem: dict) -> str:
     else:
         lines.append(f'<tr><td colspan="{len(headers)}">No full harness row.</td></tr>')
     lines.append("</tbody></table></div>")
+    return "\n".join(lines)
+
+
+# The noise sweep is one row per code on the suite page. The full sigma
+# table is a separate page: a collapsed <details> block still counts
+# toward the DOM budget.
+SWEEP_PAGES = {
+    "minimization/lj38-noise": "minimization-lj38-noise",
+}
+
+
+def render_sweep_section(
+    problem: dict,
+    plots: set[str],
+    *,
+    asset_prefix: str = "_static/board",
+    preamble: str = "",
+    section_id: str | None = None,
+    detail_href: str,
+    unparsed: list[dict] | None = None,
+    heading: str = "h2",
+) -> str:
+    """One ranked row per code. Every sigma stays on ``detail_href``."""
+    per_image = _show_per_image(problem)
+    headers = _headers(problem)
+    ident = section_id or _slug(problem["id"])
+    ranked = list(problem.get("ranked") or [])
+    chosen = list(best_ranked_by_code(ranked).values())
+    lines = [
+        f'<section class="bench" id="{_cell(ident)}" data-problem="{_cell(problem["id"])}">',
+        f"<{heading}>{_cell(problem['title'])}</{heading}>",
+    ]
+    if preamble:
+        lines.append(preamble)
+    lines.append(
+        "<p>One row per code, the lowest PAR-2 full run. "
+        f'<a href="{_cell(detail_href)}">Every sigma</a> is on the noise page.</p>'
+    )
+    lead = gap_paragraph(problem, unparsed)
+    if lead:
+        lines.append(lead)
+    slug = _slug(problem["id"])
+    prefix = asset_prefix.rstrip("/")
+    for kind, label in (("profile", "Dolan-More profile"), ("cost", "Cost versus success")):
+        name = f"{slug}-{kind}.svg"
+        if name in plots:
+            lines.append(_plot_html(prefix, name, label, str(problem["id"])))
+    if problem.get("profile_gap") and f"{slug}-profile.svg" not in plots:
+        lines.append(f'<p class="bench-gaps">{_cell(problem["profile_gap"])}</p>')
+    lines.append('<div class="bench-scroll">')
+    lines.append(
+        f'<table data-board-table="sweep" data-problem="{_cell(problem["id"])}" '
+        f'id="{_cell(ident)}-templates">'
+    )
+    lines.append(
+        "<caption>Lowest PAR-2 full run of each code. "
+        "The noise page lists every sigma.</caption>"
+    )
+    lines.append("<thead><tr>" + "".join(f"<th>{_cell(header)}</th>" for header in headers) + "</tr></thead><tbody>")
+    for row in chosen:
+        lines.append(f"<tr>{_row_cells(row, per_image)}</tr>")
+    if not chosen:
+        lines.append(f'<tr><td colspan="{len(headers)}">No full harness row.</td></tr>')
+    lines.append("</tbody></table></div></section>")
     return "\n".join(lines)
 
 

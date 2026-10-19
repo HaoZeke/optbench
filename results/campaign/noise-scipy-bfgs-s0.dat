@@ -1,0 +1,32 @@
+# counter harness. One force call is one clean energy and gradient.
+# Noise is added after the call. A repeated coordinate keeps that sample.
+# The index uses the clean Hessian. Six rigid modes are removed.
+# A curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6).
+# Energy and Kabsch RMSD are not applied: the problem file has no per-start reference.
+# Default profile. fun and jac are the harness kernel. A repeated coordinate returns the cached sample and does not add a call. The per-atom cap is 0.2. A larger trial is mapped back inside that ball before the potential runs. The stop is the noise-aware force norm, and at positive sigma the clean-energy window. The index is the clean Hessian with the rigid-mode rule.
+force_calls 389
+force_calls_min 191
+force_calls_max 927
+nfailed 1
+median 373
+code SciPy
+code_version 1.18.1
+commit e4e854eaa8f18d807cd3496028e257e36caa93cc
+algorithm BFGS
+template noise/scipy-bfgs-s0
+tuning default
+counter harness
+problem minimization/lj38-noise
+sigma 0
+par2_mean 487.471
+wilson_low 0.988349044627
+wilson_high 0.997862464473
+par2_median 373.5
+par2_median_low 367
+par2_median_high 380
+v2_nfailed 5
+v2_successes 995
+n 1000
+cap 10000
+energy_min -170.922759289
+energy_max -89.5533823002

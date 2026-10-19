@@ -1,7 +1,7 @@
 {
   "bootstrap_resamples": 2000,
   "bootstrap_seed": 20261015,
-  "note": "Harness counter. Analytic Hessians are not force calls. Energy and Kabsch RMSD were not applied.",
+  "note": "Harness counter. Each analytic Hessian costs one force call per coordinate. Energy and Kabsch RMSD were not applied.",
   "par_factor": 2,
   "problem": "minimization/morse-bulk",
   "runs": [
@@ -13,41 +13,41 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "entry": "rgmin-0.4.1-morse-dogleg",
       "legacy": {
-        "force_calls": 31,
-        "force_calls_max": 47,
-        "force_calls_min": 7,
-        "median": 32.5,
-        "nfailed": 0
+        "force_calls": 7883,
+        "force_calls_max": 9998,
+        "force_calls_min": 4615,
+        "median": 8075.5,
+        "nfailed": 92
       },
       "metrics": {
         "bootstrap_resamples": 2000,
         "bootstrap_seed": 20261015,
         "cap": 10000,
         "includes_failures": true,
-        "iqr": 16.0,
-        "iqr_high": 19.25,
-        "iqr_low": 12.25,
-        "mean": 31.26,
-        "median": 32.5,
-        "median_high": 35.01249999999993,
-        "median_low": 29.4875,
+        "iqr": 0.0,
+        "iqr_high": 0.0,
+        "iqr_low": 0.0,
+        "mean": 19030.66,
+        "median": 20000.0,
+        "median_high": 20000.0,
+        "median_low": 20000.0,
         "n": 100,
-        "n_cap": 0,
+        "n_cap": 92,
         "n_crash": 0,
         "n_divergence": 0,
         "n_wrong_stationary": 0,
-        "nfailed": 0,
-        "par2_mean": 31.26,
+        "nfailed": 92,
+        "par2_mean": 19030.66,
         "par_applied": true,
         "par_factor": 2,
-        "q25": 24.0,
-        "q75": 40.0,
+        "q25": 20000.0,
+        "q75": 20000.0,
         "scoring": "par2-wilson-bootstrap",
-        "success_only_mean": 31.26,
-        "success_rate": 1.0,
-        "successes": 100,
-        "wilson_high": 1.0,
-        "wilson_low": 0.9630065017930143
+        "success_only_mean": 7883.25,
+        "success_rate": 0.08,
+        "successes": 8,
+        "wilson_high": 0.14998107700948735,
+        "wilson_low": 0.041093461484380624
       },
       "parameters": {
         "gtol": 0.001,
@@ -79,9 +79,11 @@
           "energy": -1396.1732376758944,
           "expected_index": 0,
           "failure": null,
-          "force_calls": 7,
+          "force_calls": 4615,
           "force_norm": 3.097297755093222e-06,
+          "gradient_calls": 7,
           "hessian_calls": 6,
+          "hessian_force_calls": 4608,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.7484576827720586e-14,
@@ -108,9 +110,11 @@
           "energy": -1396.1732376758948,
           "expected_index": 0,
           "failure": null,
-          "force_calls": 9,
+          "force_calls": 6153,
           "force_norm": 3.686700767848974e-07,
+          "gradient_calls": 9,
           "hessian_calls": 8,
+          "hessian_force_calls": 6144,
           "hessian_index": 0,
           "min_eigenvalues": [
             -9.466618967748988e-15,
@@ -137,9 +141,11 @@
           "energy": -1396.173237675895,
           "expected_index": 0,
           "failure": null,
-          "force_calls": 11,
+          "force_calls": 7691,
           "force_norm": 4.582757657141883e-07,
+          "gradient_calls": 11,
           "hessian_calls": 10,
+          "hessian_force_calls": 7680,
           "hessian_index": 0,
           "min_eigenvalues": [
             -2.1316282072803006e-14,
@@ -166,9 +172,11 @@
           "energy": -1396.1732376650361,
           "expected_index": 0,
           "failure": null,
-          "force_calls": 11,
+          "force_calls": 7691,
           "force_norm": 0.00042597336190134007,
+          "gradient_calls": 11,
           "hessian_calls": 10,
+          "hessian_force_calls": 7680,
           "hessian_index": 0,
           "min_eigenvalues": [
             3.654656214590453e-15,
@@ -195,9 +203,11 @@
           "energy": -1396.173237675895,
           "expected_index": 0,
           "failure": null,
-          "force_calls": 12,
+          "force_calls": 8460,
           "force_norm": 1.7794786867863132e-06,
+          "gradient_calls": 12,
           "hessian_calls": 11,
+          "hessian_force_calls": 8448,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.0753747997508346e-13,
@@ -224,9 +234,11 @@
           "energy": -1396.1732376155044,
           "expected_index": 0,
           "failure": null,
-          "force_calls": 13,
+          "force_calls": 9229,
           "force_norm": 0.000997078002727391,
+          "gradient_calls": 13,
           "hessian_calls": 12,
+          "hessian_force_calls": 9216,
           "hessian_index": 0,
           "min_eigenvalues": [
             -3.908298245011139e-14,
@@ -253,9 +265,11 @@
           "energy": -1396.1732376697028,
           "expected_index": 0,
           "failure": null,
-          "force_calls": 13,
+          "force_calls": 9229,
           "force_norm": 0.0003468394593088859,
+          "gradient_calls": 13,
           "hessian_calls": 12,
+          "hessian_force_calls": 9216,
           "hessian_index": 0,
           "min_eigenvalues": [
             -7.01165801644264e-15,
@@ -282,9 +296,11 @@
           "energy": -1396.1732376758946,
           "expected_index": 0,
           "failure": null,
-          "force_calls": 14,
+          "force_calls": 9998,
           "force_norm": 2.9395144057672196e-06,
+          "gradient_calls": 14,
           "hessian_calls": 13,
+          "hessian_force_calls": 9984,
           "hessian_index": 0,
           "min_eigenvalues": [
             3.9079733257237904e-14,
@@ -306,14 +322,16 @@
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 15,
+          "failure": "cap",
+          "force_calls": 10767,
           "force_norm": 1.0398122191783836e-06,
+          "gradient_calls": 15,
           "hessian_calls": 14,
+          "hessian_force_calls": 10752,
           "hessian_index": 0,
           "min_eigenvalues": [
             -5.5238611572601874e-14,
@@ -325,24 +343,28 @@
             1.3057874436516097,
             1.3057874443717368
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 14,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0008",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 16,
+          "failure": "cap",
+          "force_calls": 11536,
           "force_norm": 6.616591188436434e-07,
+          "gradient_calls": 16,
           "hessian_calls": 15,
+          "hessian_force_calls": 11520,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.0931414072896942e-14,
@@ -354,24 +376,28 @@
             1.3057874441287491,
             1.3057874444108954
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 15,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0009",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376694795,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 16,
+          "failure": "cap",
+          "force_calls": 11536,
           "force_norm": 0.00035899741903142095,
+          "gradient_calls": 16,
           "hessian_calls": 15,
+          "hessian_force_calls": 11520,
           "hessian_index": 0,
           "min_eigenvalues": [
             4.8343630429394355e-15,
@@ -383,24 +409,28 @@
             1.3057865553128536,
             1.3057868410463935
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 15,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0010",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 17,
+          "failure": "cap",
+          "force_calls": 12305,
           "force_norm": 1.2535913638836458e-06,
+          "gradient_calls": 17,
           "hessian_calls": 16,
+          "hessian_force_calls": 12288,
           "hessian_index": 0,
           "min_eigenvalues": [
             8.472044894167918e-15,
@@ -412,24 +442,28 @@
             1.3057874422738738,
             1.30578744438015
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 16,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0011",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 18,
+          "failure": "cap",
+          "force_calls": 13074,
           "force_norm": 9.10185603352742e-08,
+          "gradient_calls": 18,
           "hessian_calls": 17,
+          "hessian_force_calls": 13056,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.8835641557526707e-14,
@@ -441,24 +475,28 @@
             1.3057874455313854,
             1.3057874455468392
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 17,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0012",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376758948,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 18,
+          "failure": "cap",
+          "force_calls": 13074,
           "force_norm": 1.937851942773114e-06,
+          "gradient_calls": 18,
           "hessian_calls": 17,
+          "hessian_force_calls": 13056,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.4530735949090334e-14,
@@ -470,24 +508,28 @@
             1.3057874423345783,
             1.305787444150877
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 17,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0013",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 19,
+          "failure": "cap",
+          "force_calls": 13843,
           "force_norm": 5.818396888101388e-07,
+          "gradient_calls": 19,
           "hessian_calls": 18,
+          "hessian_force_calls": 13824,
           "hessian_index": 0,
           "min_eigenvalues": [
             -4.2637100586301677e-14,
@@ -499,24 +541,28 @@
             1.3057874444282125,
             1.3057874449622915
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 18,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0014",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376629684,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 19,
+          "failure": "cap",
+          "force_calls": 13843,
           "force_norm": 0.0005066795748819606,
+          "gradient_calls": 19,
           "hessian_calls": 18,
+          "hessian_force_calls": 13824,
           "hessian_index": 0,
           "min_eigenvalues": [
             -3.9080188704038914e-14,
@@ -528,24 +574,28 @@
             1.3057855065721005,
             1.3057862207905229
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 18,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0015",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 20,
+          "failure": "cap",
+          "force_calls": 14612,
           "force_norm": 2.863477043848624e-07,
+          "gradient_calls": 20,
           "hessian_calls": 19,
+          "hessian_force_calls": 14592,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.0280754245276919e-14,
@@ -557,24 +607,28 @@
             1.3057874449332432,
             1.305787445139323
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 19,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0016",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376758855,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 20,
+          "failure": "cap",
+          "force_calls": 14612,
           "force_norm": 1.2952011547534722e-05,
+          "gradient_calls": 20,
           "hessian_calls": 19,
+          "hessian_force_calls": 14592,
           "hessian_index": 0,
           "min_eigenvalues": [
             -4.8427376542185016e-14,
@@ -586,24 +640,28 @@
             1.3057873933666175,
             1.3057874032503556
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 19,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0017",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376627183,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 22,
+          "failure": "cap",
+          "force_calls": 16150,
           "force_norm": 0.00041590254834652943,
+          "gradient_calls": 22,
           "hessian_calls": 21,
+          "hessian_force_calls": 16128,
           "hessian_index": 0,
           "min_eigenvalues": [
             -9.23755797466303e-14,
@@ -615,24 +673,28 @@
             1.3057866064771815,
             1.3057871360105795
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 21,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0018",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376758832,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 21,
+          "failure": "cap",
+          "force_calls": 15381,
           "force_norm": 1.4551789235055177e-05,
+          "gradient_calls": 21,
           "hessian_calls": 20,
+          "hessian_force_calls": 15360,
           "hessian_index": 0,
           "min_eigenvalues": [
             -9.82237716946254e-15,
@@ -644,24 +706,28 @@
             1.305787398984056,
             1.3057874099706739
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 20,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0019",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 22,
+          "failure": "cap",
+          "force_calls": 16150,
           "force_norm": 3.495391657486874e-07,
+          "gradient_calls": 22,
           "hessian_calls": 21,
+          "hessian_force_calls": 16128,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.066745502191069e-14,
@@ -673,24 +739,28 @@
             1.3057874447441948,
             1.3057874453101432
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 21,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0020",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237666199,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 22,
+          "failure": "cap",
+          "force_calls": 16150,
           "force_norm": 0.00044479877397896647,
+          "gradient_calls": 22,
           "hessian_calls": 21,
+          "hessian_force_calls": 16128,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.2816419130189628e-14,
@@ -702,24 +772,28 @@
             1.305785519594396,
             1.3057858895742462
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 21,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0021",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 23,
+          "failure": "cap",
+          "force_calls": 16919,
           "force_norm": 1.5608845748923652e-06,
+          "gradient_calls": 23,
           "hessian_calls": 22,
+          "hessian_force_calls": 16896,
           "hessian_index": 0,
           "min_eigenvalues": [
             -7.816317955956194e-14,
@@ -731,24 +805,28 @@
             1.3057874412632462,
             1.305787442129649
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 22,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0022",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 24,
+          "failure": "cap",
+          "force_calls": 17688,
           "force_norm": 1.9653895256886923e-08,
+          "gradient_calls": 24,
           "hessian_calls": 23,
+          "hessian_force_calls": 17664,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.4210923502157078e-14,
@@ -760,24 +838,28 @@
             1.3057874456529632,
             1.3057874456790362
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 23,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0023",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 24,
+          "failure": "cap",
+          "force_calls": 17688,
           "force_norm": 8.435847441560173e-07,
+          "gradient_calls": 24,
           "hessian_calls": 23,
+          "hessian_force_calls": 17664,
           "hessian_index": 0,
           "min_eigenvalues": [
             -4.618527782440651e-14,
@@ -789,24 +871,28 @@
             1.3057874431491974,
             1.3057874440732984
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 23,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0024",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376757404,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 24,
+          "failure": "cap",
+          "force_calls": 17688,
           "force_norm": 5.489397496877842e-05,
+          "gradient_calls": 24,
           "hessian_calls": 23,
+          "hessian_force_calls": 17664,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.117302154935227e-14,
@@ -818,24 +904,28 @@
             1.305787208232403,
             1.3057872456462885
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 23,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0025",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 25,
+          "failure": "cap",
+          "force_calls": 18457,
           "force_norm": 2.1185506994678248e-07,
+          "gradient_calls": 25,
           "hessian_calls": 24,
+          "hessian_force_calls": 18432,
           "hessian_index": 0,
           "min_eigenvalues": [
             -9.237055564881302e-14,
@@ -847,24 +937,28 @@
             1.305787445398201,
             1.3057874455087846
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 24,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0026",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 25,
+          "failure": "cap",
+          "force_calls": 18457,
           "force_norm": 1.0089030743986827e-06,
+          "gradient_calls": 25,
           "hessian_calls": 24,
+          "hessian_force_calls": 18432,
           "hessian_index": 0,
           "min_eigenvalues": [
             -3.9968028886505635e-14,
@@ -876,24 +970,28 @@
             1.305787442279306,
             1.3057874449452715
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 24,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0027",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376754137,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 25,
+          "failure": "cap",
+          "force_calls": 18457,
           "force_norm": 9.772532573813378e-05,
+          "gradient_calls": 25,
           "hessian_calls": 24,
+          "hessian_force_calls": 18432,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.3812303041108776e-14,
@@ -905,24 +1003,28 @@
             1.3057870174033164,
             1.3057871199026527
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 24,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0028",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 26,
+          "failure": "cap",
+          "force_calls": 19226,
           "force_norm": 2.5996028721691904e-07,
+          "gradient_calls": 26,
           "hessian_calls": 25,
+          "hessian_force_calls": 19200,
           "hessian_index": 0,
           "min_eigenvalues": [
             -2.1316282072803006e-14,
@@ -934,24 +1036,28 @@
             1.3057874448413571,
             1.3057874453761737
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 25,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0029",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376758914,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 27,
+          "failure": "cap",
+          "force_calls": 19995,
           "force_norm": 7.2523284164282e-06,
+          "gradient_calls": 27,
           "hessian_calls": 26,
+          "hessian_force_calls": 19968,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.2822112524323719e-14,
@@ -963,24 +1069,28 @@
             1.3057873899751464,
             1.3057874119911097
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 26,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0030",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 26,
+          "failure": "cap",
+          "force_calls": 19226,
           "force_norm": 1.2968570266993676e-06,
+          "gradient_calls": 26,
           "hessian_calls": 25,
+          "hessian_force_calls": 19200,
           "hessian_index": 0,
           "min_eigenvalues": [
             5.3273204564834935e-14,
@@ -992,24 +1102,28 @@
             1.3057874417154844,
             1.3057874429176812
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 25,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0031",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 28,
+          "failure": "cap",
+          "force_calls": 20764,
           "force_norm": 5.441334122717074e-08,
+          "gradient_calls": 28,
           "hessian_calls": 27,
+          "hessian_force_calls": 20736,
           "hessian_index": 0,
           "min_eigenvalues": [
             -5.4067861299245124e-14,
@@ -1021,24 +1135,28 @@
             1.305787445625918,
             1.305787445678464
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 27,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0032",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 27,
+          "failure": "cap",
+          "force_calls": 19995,
           "force_norm": 2.5759735179951244e-07,
+          "gradient_calls": 27,
           "hessian_calls": 26,
+          "hessian_force_calls": 19968,
           "hessian_index": 0,
           "min_eigenvalues": [
             3.375077994860476e-14,
@@ -1050,24 +1168,28 @@
             1.305787444974655,
             1.3057874451332514
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 26,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0033",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237664486,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 28,
+          "failure": "cap",
+          "force_calls": 20764,
           "force_norm": 0.0004697883696745564,
+          "gradient_calls": 28,
           "hessian_calls": 27,
+          "hessian_force_calls": 20736,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.2079275014545833e-13,
@@ -1079,24 +1201,28 @@
             1.3057849217142743,
             1.3057861951194216
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 27,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0034",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376719924,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 27,
+          "failure": "cap",
+          "force_calls": 19995,
           "force_norm": 0.0002827614879562211,
+          "gradient_calls": 27,
           "hessian_calls": 26,
+          "hessian_force_calls": 19968,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.1419118226475924e-14,
@@ -1108,24 +1234,28 @@
             1.3057862838518304,
             1.3057868281258778
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 26,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0035",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376758948,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 28,
+          "failure": "cap",
+          "force_calls": 20764,
           "force_norm": 4.3159168864183657e-07,
+          "gradient_calls": 28,
           "hessian_calls": 27,
+          "hessian_force_calls": 20736,
           "hessian_index": 0,
           "min_eigenvalues": [
             -5.684341886080802e-14,
@@ -1137,24 +1267,28 @@
             1.305787444442531,
             1.305787444732875
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 27,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0036",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 29,
+          "failure": "cap",
+          "force_calls": 21533,
           "force_norm": 7.287458054280506e-07,
+          "gradient_calls": 29,
           "hessian_calls": 28,
+          "hessian_force_calls": 21504,
           "hessian_index": 0,
           "min_eigenvalues": [
             -2.3655814877184464e-14,
@@ -1166,24 +1300,28 @@
             1.3057874396135305,
             1.305787440502764
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 28,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0037",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 29,
+          "failure": "cap",
+          "force_calls": 21533,
           "force_norm": 1.0403956260664081e-07,
+          "gradient_calls": 29,
           "hessian_calls": 28,
+          "hessian_force_calls": 21504,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.4496932300148967e-14,
@@ -1195,24 +1333,28 @@
             1.3057874453051934,
             1.3057874454430969
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 28,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0038",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376722402,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 29,
+          "failure": "cap",
+          "force_calls": 21533,
           "force_norm": 0.00025522499001188586,
+          "gradient_calls": 29,
           "hessian_calls": 28,
+          "hessian_force_calls": 21504,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.7763665713285816e-14,
@@ -1224,24 +1366,28 @@
             1.3057865150962373,
             1.3057865966708613
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 28,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0039",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 29,
+          "failure": "cap",
+          "force_calls": 21533,
           "force_norm": 1.3892841556896434e-06,
+          "gradient_calls": 29,
           "hessian_calls": 28,
+          "hessian_force_calls": 21504,
           "hessian_index": 0,
           "min_eigenvalues": [
             -5.329279005466712e-14,
@@ -1253,24 +1399,28 @@
             1.3057874431826832,
             1.3057874449011027
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 28,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0040",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376709956,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 31,
+          "failure": "cap",
+          "force_calls": 23071,
           "force_norm": 0.000268103707554826,
+          "gradient_calls": 31,
           "hessian_calls": 30,
+          "hessian_force_calls": 23040,
           "hessian_index": 0,
           "min_eigenvalues": [
             -2.576165003239193e-14,
@@ -1282,24 +1432,28 @@
             1.3057859969006331,
             1.3057864454550483
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 30,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0041",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 30,
+          "failure": "cap",
+          "force_calls": 22302,
           "force_norm": 9.405279570997113e-07,
+          "gradient_calls": 30,
           "hessian_calls": 29,
+          "hessian_force_calls": 22272,
           "hessian_index": 0,
           "min_eigenvalues": [
             -5.417888360170764e-14,
@@ -1311,24 +1465,28 @@
             1.3057874427197753,
             1.3057874447052764
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 29,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0042",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 31,
+          "failure": "cap",
+          "force_calls": 23071,
           "force_norm": 1.899437805185837e-08,
+          "gradient_calls": 31,
           "hessian_calls": 30,
+          "hessian_force_calls": 23040,
           "hessian_index": 0,
           "min_eigenvalues": [
             -3.9351472674181776e-14,
@@ -1340,24 +1498,28 @@
             1.3057874456650698,
             1.3057874456830016
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 30,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0043",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.17323766529,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 31,
+          "failure": "cap",
+          "force_calls": 23071,
           "force_norm": 0.00042126022810925096,
+          "gradient_calls": 31,
           "hessian_calls": 30,
+          "hessian_force_calls": 23040,
           "hessian_index": 0,
           "min_eigenvalues": [
             -2.1093797832998884e-14,
@@ -1369,24 +1531,28 @@
             1.305784065408533,
             1.3057859891201034
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 30,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0044",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 31,
+          "failure": "cap",
+          "force_calls": 23071,
           "force_norm": 3.1468588478930714e-07,
+          "gradient_calls": 31,
           "hessian_calls": 30,
+          "hessian_force_calls": 23040,
           "hessian_index": 0,
           "min_eigenvalues": [
             -4.97386468839057e-14,
@@ -1398,24 +1564,28 @@
             1.3057874449289788,
             1.3057874452123106
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 30,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0045",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 31,
+          "failure": "cap",
+          "force_calls": 23071,
           "force_norm": 5.795406065613411e-07,
+          "gradient_calls": 31,
           "hessian_calls": 30,
+          "hessian_force_calls": 23040,
           "hessian_index": 0,
           "min_eigenvalues": [
             -3.669071533167846e-17,
@@ -1427,24 +1597,28 @@
             1.3057874440727486,
             1.3057874448228324
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 30,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0046",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 32,
+          "failure": "cap",
+          "force_calls": 23840,
           "force_norm": 7.93734646345783e-08,
+          "gradient_calls": 32,
           "hessian_calls": 31,
+          "hessian_force_calls": 23808,
           "hessian_index": 0,
           "min_eigenvalues": [
             -6.9160269156590975e-15,
@@ -1456,24 +1630,28 @@
             1.3057874454939793,
             1.3057874455946694
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 31,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0047",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 32,
+          "failure": "cap",
+          "force_calls": 23840,
           "force_norm": 1.662969628149293e-07,
+          "gradient_calls": 32,
           "hessian_calls": 31,
+          "hessian_force_calls": 23808,
           "hessian_index": 0,
           "min_eigenvalues": [
             -3.552713678800501e-15,
@@ -1485,24 +1663,28 @@
             1.3057874453889609,
             1.305787445474178
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 31,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0048",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 32,
+          "failure": "cap",
+          "force_calls": 23840,
           "force_norm": 4.769834709990147e-07,
+          "gradient_calls": 32,
           "hessian_calls": 31,
+          "hessian_force_calls": 23808,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.7767190272086404e-14,
@@ -1514,24 +1696,28 @@
             1.3057874447948827,
             1.3057874452259768
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 31,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0049",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 33,
+          "failure": "cap",
+          "force_calls": 24609,
           "force_norm": 4.183093564043595e-08,
+          "gradient_calls": 33,
           "hessian_calls": 32,
+          "hessian_force_calls": 24576,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.7886671116887088e-14,
@@ -1543,24 +1729,28 @@
             1.3057874455829,
             1.3057874456501186
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 32,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0050",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 33,
+          "failure": "cap",
+          "force_calls": 24609,
           "force_norm": 1.3981544474887062e-07,
+          "gradient_calls": 33,
           "hessian_calls": 32,
+          "hessian_force_calls": 24576,
           "hessian_index": 0,
           "min_eigenvalues": [
             -9.800688940809115e-15,
@@ -1572,24 +1762,28 @@
             1.305787445357766,
             1.3057874454948326
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 32,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0051",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 34,
+          "failure": "cap",
+          "force_calls": 25378,
           "force_norm": 2.9143624315270056e-08,
+          "gradient_calls": 34,
           "hessian_calls": 33,
+          "hessian_force_calls": 25344,
           "hessian_index": 0,
           "min_eigenvalues": [
             -5.645484080218921e-14,
@@ -1601,24 +1795,28 @@
             1.305787445620075,
             1.3057874456505179
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 33,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0052",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 34,
+          "failure": "cap",
+          "force_calls": 25378,
           "force_norm": 6.140718084287902e-08,
+          "gradient_calls": 34,
           "hessian_calls": 33,
+          "hessian_force_calls": 25344,
           "hessian_index": 0,
           "min_eigenvalues": [
             -4.869520020712495e-14,
@@ -1630,24 +1828,28 @@
             1.3057874455471956,
             1.3057874456026661
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 33,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0053",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376563132,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 33,
+          "failure": "cap",
+          "force_calls": 24609,
           "force_norm": 0.0006345984965163608,
+          "gradient_calls": 33,
           "hessian_calls": 32,
+          "hessian_force_calls": 24576,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.0666402854031899e-14,
@@ -1659,24 +1861,28 @@
             1.3057851930481306,
             1.305785804791177
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 32,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0054",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 35,
+          "failure": "cap",
+          "force_calls": 26147,
           "force_norm": 2.9101631630138484e-08,
+          "gradient_calls": 35,
           "hessian_calls": 34,
+          "hessian_force_calls": 26112,
           "hessian_index": 0,
           "min_eigenvalues": [
             -5.4946965851635533e-14,
@@ -1688,24 +1894,28 @@
             1.305787445606777,
             1.3057874456459608
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 34,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0055",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376749205,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 34,
+          "failure": "cap",
+          "force_calls": 25378,
           "force_norm": 0.00013258045565962994,
+          "gradient_calls": 34,
           "hessian_calls": 33,
+          "hessian_force_calls": 25344,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.0302869668521453e-13,
@@ -1717,24 +1927,28 @@
             1.3057867896145958,
             1.3057869193817984
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 33,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0056",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 35,
+          "failure": "cap",
+          "force_calls": 26147,
           "force_norm": 2.2998743279444338e-07,
+          "gradient_calls": 35,
           "hessian_calls": 34,
+          "hessian_force_calls": 26112,
           "hessian_index": 0,
           "min_eigenvalues": [
             -5.239136280340431e-14,
@@ -1746,24 +1960,28 @@
             1.305787444951922,
             1.3057874454616105
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 34,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0057",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376758948,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 35,
+          "failure": "cap",
+          "force_calls": 26147,
           "force_norm": 4.800654620805414e-07,
+          "gradient_calls": 35,
           "hessian_calls": 34,
+          "hessian_force_calls": 26112,
           "hessian_index": 0,
           "min_eigenvalues": [
             -4.2632690541208916e-14,
@@ -1775,24 +1993,28 @@
             1.3057874451377656,
             1.3057874453862985
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 34,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0058",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 35,
+          "failure": "cap",
+          "force_calls": 26147,
           "force_norm": 1.6890619486845467e-06,
+          "gradient_calls": 35,
           "hessian_calls": 34,
+          "hessian_force_calls": 26112,
           "hessian_index": 0,
           "min_eigenvalues": [
             -4.9746373140915693e-14,
@@ -1804,24 +2026,28 @@
             1.3057874425716576,
             1.3057874428501661
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 34,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0059",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 36,
+          "failure": "cap",
+          "force_calls": 26916,
           "force_norm": 1.309537512280311e-07,
+          "gradient_calls": 36,
           "hessian_calls": 35,
+          "hessian_force_calls": 26880,
           "hessian_index": 0,
           "min_eigenvalues": [
             -6.395088225536479e-14,
@@ -1833,24 +2059,28 @@
             1.3057874452165812,
             1.3057874453447984
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 35,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0060",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 36,
+          "failure": "cap",
+          "force_calls": 26916,
           "force_norm": 5.596999150178321e-07,
+          "gradient_calls": 36,
           "hessian_calls": 35,
+          "hessian_force_calls": 26880,
           "hessian_index": 0,
           "min_eigenvalues": [
             -2.0623724723776816e-15,
@@ -1862,24 +2092,28 @@
             1.3057874450336346,
             1.305787445282508
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 35,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0061",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 37,
+          "failure": "cap",
+          "force_calls": 27685,
           "force_norm": 8.057338193403913e-08,
+          "gradient_calls": 37,
           "hessian_calls": 36,
+          "hessian_force_calls": 27648,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.065917256785103e-14,
@@ -1891,24 +2125,28 @@
             1.3057874456325917,
             1.305787445664809
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 36,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0062",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376758948,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 36,
+          "failure": "cap",
+          "force_calls": 26916,
           "force_norm": 1.6520385062675402e-06,
+          "gradient_calls": 36,
           "hessian_calls": 35,
+          "hessian_force_calls": 26880,
           "hessian_index": 0,
           "min_eigenvalues": [
             -4.263304393451397e-14,
@@ -1920,24 +2158,28 @@
             1.3057874428411793,
             1.3057874438627386
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 35,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0063",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 37,
+          "failure": "cap",
+          "force_calls": 27685,
           "force_norm": 1.8269512201853366e-07,
+          "gradient_calls": 37,
           "hessian_calls": 36,
+          "hessian_force_calls": 27648,
           "hessian_index": 0,
           "min_eigenvalues": [
             2.8942880675301285e-15,
@@ -1949,24 +2191,28 @@
             1.30578744514733,
             1.3057874453459675
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 36,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0064",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 37,
+          "failure": "cap",
+          "force_calls": 27685,
           "force_norm": 5.588748571793394e-07,
+          "gradient_calls": 37,
           "hessian_calls": 36,
+          "hessian_force_calls": 27648,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.8004517464633456e-14,
@@ -1978,24 +2224,28 @@
             1.3057874450391196,
             1.3057874451232434
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 36,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0065",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376614582,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 37,
+          "failure": "cap",
+          "force_calls": 27685,
           "force_norm": 0.0004788410680583659,
+          "gradient_calls": 37,
           "hessian_calls": 36,
+          "hessian_force_calls": 27648,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.5093248077029532e-14,
@@ -2007,24 +2257,28 @@
             1.30578453492237,
             1.3057857622689053
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 36,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0066",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376744208,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 37,
+          "failure": "cap",
+          "force_calls": 27685,
           "force_norm": 0.00015551199388461244,
+          "gradient_calls": 37,
           "hessian_calls": 36,
+          "hessian_force_calls": 27648,
           "hessian_index": 0,
           "min_eigenvalues": [
             -6.3009680800395865e-15,
@@ -2036,24 +2290,28 @@
             1.3057864566571296,
             1.3057867894938036
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 36,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0067",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376736813,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 38,
+          "failure": "cap",
+          "force_calls": 28454,
           "force_norm": 0.00018402392993053612,
+          "gradient_calls": 38,
           "hessian_calls": 37,
+          "hessian_force_calls": 28416,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.4003182155729304e-14,
@@ -2065,24 +2323,28 @@
             1.3057864527786773,
             1.305786584478332
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 37,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0068",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 38,
+          "failure": "cap",
+          "force_calls": 28454,
           "force_norm": 4.204755680988505e-07,
+          "gradient_calls": 38,
           "hessian_calls": 37,
+          "hessian_force_calls": 28416,
           "hessian_index": 0,
           "min_eigenvalues": [
             -2.4871311758316107e-14,
@@ -2094,24 +2356,28 @@
             1.305787445034737,
             1.3057874452695688
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 37,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0069",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 39,
+          "failure": "cap",
+          "force_calls": 29223,
           "force_norm": 2.691500285601481e-07,
+          "gradient_calls": 39,
           "hessian_calls": 38,
+          "hessian_force_calls": 29184,
           "hessian_index": 0,
           "min_eigenvalues": [
             -4.973799150320701e-14,
@@ -2123,24 +2389,28 @@
             1.30578744477536,
             1.3057874453923644
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 38,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0070",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 41,
+          "failure": "cap",
+          "force_calls": 30761,
           "force_norm": 9.214056826786314e-08,
+          "gradient_calls": 41,
           "hessian_calls": 40,
+          "hessian_force_calls": 30720,
           "hessian_index": 0,
           "min_eigenvalues": [
             -5.0798247615471824e-14,
@@ -2152,24 +2422,28 @@
             1.3057874456331817,
             1.3057874456483192
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 40,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0071",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376453713,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 39,
+          "failure": "cap",
+          "force_calls": 29223,
           "force_norm": 0.000760201417652952,
+          "gradient_calls": 39,
           "hessian_calls": 38,
+          "hessian_force_calls": 29184,
           "hessian_index": 0,
           "min_eigenvalues": [
             -7.527239108539658e-15,
@@ -2181,24 +2455,28 @@
             1.305784693775834,
             1.3057851848855087
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 38,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0072",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 40,
+          "failure": "cap",
+          "force_calls": 29992,
           "force_norm": 4.1724986568148574e-08,
+          "gradient_calls": 40,
           "hessian_calls": 39,
+          "hessian_force_calls": 29952,
           "hessian_index": 0,
           "min_eigenvalues": [
             -3.197442310920451e-14,
@@ -2210,24 +2488,28 @@
             1.3057874456187557,
             1.3057874456473944
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 39,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0073",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675722,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 40,
+          "failure": "cap",
+          "force_calls": 29992,
           "force_norm": 5.9481814447116663e-05,
+          "gradient_calls": 40,
           "hessian_calls": 39,
+          "hessian_force_calls": 29952,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.7766506975162526e-14,
@@ -2239,24 +2521,28 @@
             1.3057872325077569,
             1.3057872938719963
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 39,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0074",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 40,
+          "failure": "cap",
+          "force_calls": 29992,
           "force_norm": 4.3910962826306423e-07,
+          "gradient_calls": 40,
           "hessian_calls": 39,
+          "hessian_force_calls": 29952,
           "hessian_index": 0,
           "min_eigenvalues": [
             -7.105427357601002e-14,
@@ -2268,24 +2554,28 @@
             1.3057874448048152,
             1.3057874449664633
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 39,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0075",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376758948,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 40,
+          "failure": "cap",
+          "force_calls": 29992,
           "force_norm": 1.213399624640742e-06,
+          "gradient_calls": 40,
           "hessian_calls": 39,
+          "hessian_force_calls": 29952,
           "hessian_index": 0,
           "min_eigenvalues": [
             1.424896766275599e-15,
@@ -2297,24 +2587,28 @@
             1.3057874431498389,
             1.305787444531635
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 39,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0076",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237659111,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 40,
+          "failure": "cap",
+          "force_calls": 29992,
           "force_norm": 0.0005673466612308869,
+          "gradient_calls": 40,
           "hessian_calls": 39,
+          "hessian_force_calls": 29952,
           "hessian_index": 0,
           "min_eigenvalues": [
             -2.864445685369249e-14,
@@ -2326,24 +2620,28 @@
             1.3057848260786697,
             1.3057853008778586
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 39,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0077",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 41,
+          "failure": "cap",
+          "force_calls": 30761,
           "force_norm": 3.424446224906966e-07,
+          "gradient_calls": 41,
           "hessian_calls": 40,
+          "hessian_force_calls": 30720,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.0302869668521453e-13,
@@ -2355,24 +2653,28 @@
             1.3057874447618205,
             1.3057874450210496
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 40,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0078",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376706389,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 41,
+          "failure": "cap",
+          "force_calls": 30761,
           "force_norm": 0.0003330161467364037,
+          "gradient_calls": 41,
           "hessian_calls": 40,
+          "hessian_force_calls": 30720,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.1121148803583818e-13,
@@ -2384,24 +2686,28 @@
             1.3057857494272584,
             1.305786581484545
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 40,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0079",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 41,
+          "failure": "cap",
+          "force_calls": 30761,
           "force_norm": 7.35525876584234e-07,
+          "gradient_calls": 41,
           "hessian_calls": 40,
+          "hessian_force_calls": 30720,
           "hessian_index": 0,
           "min_eigenvalues": [
             -4.263277794700711e-14,
@@ -2413,24 +2719,28 @@
             1.305787443748274,
             1.3057874439446215
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 40,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0080",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376729537,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 41,
+          "failure": "cap",
+          "force_calls": 30761,
           "force_norm": 0.00022386605880461165,
+          "gradient_calls": 41,
           "hessian_calls": 40,
+          "hessian_force_calls": 30720,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.0760406462195967e-14,
@@ -2442,24 +2752,28 @@
             1.305785690193179,
             1.3057861776464057
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 40,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0081",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 42,
+          "failure": "cap",
+          "force_calls": 31530,
           "force_norm": 5.08762803423654e-07,
+          "gradient_calls": 42,
           "hessian_calls": 41,
+          "hessian_force_calls": 31488,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.3148633350404567e-14,
@@ -2471,24 +2785,28 @@
             1.305787444452619,
             1.3057874450988258
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 41,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0082",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 42,
+          "failure": "cap",
+          "force_calls": 31530,
           "force_norm": 6.818508150759744e-07,
+          "gradient_calls": 42,
           "hessian_calls": 41,
+          "hessian_force_calls": 31488,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.0662664028336298e-14,
@@ -2500,24 +2818,28 @@
             1.3057874439839734,
             1.305787444972893
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 41,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0083",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376758796,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 42,
+          "failure": "cap",
+          "force_calls": 31530,
           "force_norm": 1.4608568471006618e-05,
+          "gradient_calls": 42,
           "hessian_calls": 41,
+          "hessian_force_calls": 31488,
           "hessian_index": 0,
           "min_eigenvalues": [
             7.63555624325102e-16,
@@ -2529,24 +2851,28 @@
             1.3057873303879375,
             1.305787348749717
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 41,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0084",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 43,
+          "failure": "cap",
+          "force_calls": 32299,
           "force_norm": 9.051644689970647e-07,
+          "gradient_calls": 43,
           "hessian_calls": 42,
+          "hessian_force_calls": 32256,
           "hessian_index": 0,
           "min_eigenvalues": [
             -3.2862601528904634e-14,
@@ -2558,24 +2884,28 @@
             1.3057874442853854,
             1.3057874446787407
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 42,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0085",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 43,
+          "failure": "cap",
+          "force_calls": 32299,
           "force_norm": 8.140774136525001e-07,
+          "gradient_calls": 43,
           "hessian_calls": 42,
+          "hessian_force_calls": 32256,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.1412052506264494e-14,
@@ -2587,24 +2917,28 @@
             1.305787442615836,
             1.3057874444650521
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 42,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0086",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376758603,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 43,
+          "failure": "cap",
+          "force_calls": 32299,
           "force_norm": 2.2712276319964114e-05,
+          "gradient_calls": 43,
           "hessian_calls": 42,
+          "hessian_force_calls": 32256,
           "hessian_index": 0,
           "min_eigenvalues": [
             -2.1034683303106359e-16,
@@ -2616,24 +2950,28 @@
             1.3057872507733916,
             1.305787324656734
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 42,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0087",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237665717,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 43,
+          "failure": "cap",
+          "force_calls": 32299,
           "force_norm": 0.0004138123642975867,
+          "gradient_calls": 43,
           "hessian_calls": 42,
+          "hessian_force_calls": 32256,
           "hessian_index": 0,
           "min_eigenvalues": [
             -3.530557661562583e-14,
@@ -2645,24 +2983,28 @@
             1.3057839544713299,
             1.305785256109081
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 42,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0088",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376637422,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 44,
+          "failure": "cap",
+          "force_calls": 33068,
           "force_norm": 0.00042022284096530205,
+          "gradient_calls": 44,
           "hessian_calls": 43,
+          "hessian_force_calls": 33024,
           "hessian_index": 0,
           "min_eigenvalues": [
             -4.1125796252415185e-14,
@@ -2674,24 +3016,28 @@
             1.3057836801232832,
             1.3057846114304998
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 43,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0089",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376552218,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 44,
+          "failure": "cap",
+          "force_calls": 33068,
           "force_norm": 0.0006281089965654692,
+          "gradient_calls": 44,
           "hessian_calls": 43,
+          "hessian_force_calls": 33024,
           "hessian_index": 0,
           "min_eigenvalues": [
             1.4206268842496667e-14,
@@ -2703,24 +3049,28 @@
             1.3057846154653758,
             1.3057859596584827
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 43,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0090",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 45,
+          "failure": "cap",
+          "force_calls": 33837,
           "force_norm": 5.210711224331943e-08,
+          "gradient_calls": 45,
           "hessian_calls": 44,
+          "hessian_force_calls": 33792,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.0630852741177223e-15,
@@ -2732,24 +3082,28 @@
             1.3057874454667833,
             1.3057874455079517
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 44,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0091",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 44,
+          "failure": "cap",
+          "force_calls": 33068,
           "force_norm": 9.977240695386329e-07,
+          "gradient_calls": 44,
           "hessian_calls": 43,
+          "hessian_force_calls": 33024,
           "hessian_index": 0,
           "min_eigenvalues": [
             -5.867303977371162e-15,
@@ -2761,24 +3115,28 @@
             1.3057874440383619,
             1.3057874444218809
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 43,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0092",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376757593,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 44,
+          "failure": "cap",
+          "force_calls": 33068,
           "force_norm": 4.541671743898691e-05,
+          "gradient_calls": 44,
           "hessian_calls": 43,
+          "hessian_force_calls": 33024,
           "hessian_index": 0,
           "min_eigenvalues": [
             6.337121613551837e-15,
@@ -2790,24 +3148,28 @@
             1.3057870872995605,
             1.3057872521401181
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 43,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0093",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376758425,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 47,
+          "failure": "cap",
+          "force_calls": 35375,
           "force_norm": 2.7822792663492927e-05,
+          "gradient_calls": 47,
           "hessian_calls": 46,
+          "hessian_force_calls": 35328,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.980275432976682e-14,
@@ -2819,24 +3181,28 @@
             1.3057872236078008,
             1.3057872821204595
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 46,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0094",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 45,
+          "failure": "cap",
+          "force_calls": 33837,
           "force_norm": 6.212183819911925e-07,
+          "gradient_calls": 45,
           "hessian_calls": 44,
+          "hessian_force_calls": 33792,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.7780592593760418e-14,
@@ -2848,24 +3214,28 @@
             1.3057874435122214,
             1.305787444270016
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 44,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0095",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 45,
+          "failure": "cap",
+          "force_calls": 33837,
           "force_norm": 1.0432164202088697e-06,
+          "gradient_calls": 45,
           "hessian_calls": 44,
+          "hessian_force_calls": 33792,
           "hessian_index": 0,
           "min_eigenvalues": [
             -2.4869413790217074e-14,
@@ -2877,24 +3247,28 @@
             1.3057874422105125,
             1.3057874441081931
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 44,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0096",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376758941,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 46,
+          "failure": "cap",
+          "force_calls": 34606,
           "force_norm": 3.2052004633168377e-06,
+          "gradient_calls": 46,
           "hessian_calls": 45,
+          "hessian_force_calls": 34560,
           "hessian_index": 0,
           "min_eigenvalues": [
             1.2500387262665705e-14,
@@ -2906,24 +3280,28 @@
             1.3057874246408645,
             1.305787427714196
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 45,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0097",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.173237675895,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 46,
+          "failure": "cap",
+          "force_calls": 34606,
           "force_norm": 1.4903230963931693e-07,
+          "gradient_calls": 46,
           "hessian_calls": 45,
+          "hessian_force_calls": 34560,
           "hessian_index": 0,
           "min_eigenvalues": [
             -2.376567158014189e-14,
@@ -2935,24 +3313,28 @@
             1.3057874454764398,
             1.305787445603046
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 45,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0098",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": true,
+          "converged": false,
           "counter": "harness",
           "energy": -1396.1732376737941,
           "expected_index": 0,
-          "failure": null,
-          "force_calls": 46,
+          "failure": "cap",
+          "force_calls": 34606,
           "force_norm": 0.00017434690910263332,
+          "gradient_calls": 46,
           "hessian_calls": 45,
+          "hessian_force_calls": 34560,
           "hessian_index": 0,
           "min_eigenvalues": [
             -1.908173000493712e-14,
@@ -2964,12 +3346,14 @@
             1.3057857674785045,
             1.3057859818573228
           ],
-          "reasons": [],
+          "reasons": [
+            "cap"
+          ],
           "rgmin_steps": 45,
           "rgmin_stop": "Stop.TOLERANCE",
           "schema": "optbench.start/v2",
           "start": "pos_0099",
-          "success": true,
+          "success": false,
           "verify_calls": 0
         }
       ],

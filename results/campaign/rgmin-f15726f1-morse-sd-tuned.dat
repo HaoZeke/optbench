@@ -1,5 +1,4 @@
 # counter harness. One force call is one RgpotCounter.calculate entry.
-# Newton and dogleg Hessians are analytic and are not force calls.
 # v2 success is under the cap, at the force stop, and Hessian index 0.
 # energy and Kabsch RMSD were not applied: the problem file has no energy_tol, rmsd_tol, or per-start reference.
 # energy_min and energy_max are the final potential values on the recorded points.

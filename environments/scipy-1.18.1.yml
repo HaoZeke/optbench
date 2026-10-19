@@ -1,0 +1,13 @@
+# SciPy 1.18.1 is not selected from a conda channel here. This file does
+# not invent a build string. The minimizers the benchmarks run are the
+# source build pinned in codes/registry.toml under id scipy:
+#   ref = v1.18.1
+#   commit = e4e854eaa8f18d807cd3496028e257e36caa93cc
+#   version string 1.18.1
+# asv has one environment_type, so this yml cannot be bound to one
+# class. Those classes import scipy.
+name: scipy-1.18.1
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12

@@ -120,6 +120,7 @@ def test_pending_grid_is_every_problem_and_code():
         "ase",
         "sella",
         "nlopt",
+        "scipy",
         "artn",
         "tsase",
         "pykmc",

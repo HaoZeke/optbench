@@ -1,14 +1,16 @@
 # counter harness. One force call is one clean energy and gradient.
+# Each analytic Hessian costs one force call per coordinate.
+# gradient_calls is the harness energy and gradient. hessian_calls counts matrices. hessian_force_calls is matrices times the dimension. force_calls is their sum.
 # Noise is added after the call. A repeated coordinate keeps that sample.
 # The index uses the clean Hessian. Six rigid modes are removed.
 # A curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6).
 # Energy and Kabsch RMSD are not applied: the problem file has no per-start reference.
 # Default profile at sigma 0. Newton and dogleg call the analytic Hessian of the clean force. Positive sigma has no template: the noisy force is not that gradient.
-force_calls 67
-force_calls_min 35
-force_calls_max 128
-nfailed 0
-median 64
+force_calls 7130
+force_calls_min 3911
+force_calls_max 9891
+nfailed 103
+median 7016
 code rgmin
 code_version 0.4.1
 commit 9a2e7ff11fa65826f9e847856bee10d3d70b7156
@@ -18,14 +20,14 @@ tuning default
 counter harness
 problem minimization/lj38-noise
 sigma 0
-par2_mean 166.337
-wilson_low 0.988349044627
-wilson_high 0.997862464473
-par2_median 64
-par2_median_low 63
-par2_median_high 65.5
-v2_nfailed 5
-v2_successes 995
+par2_mean 8520.277
+wilson_low 0.87124101991
+wilson_high 0.909758801437
+par2_median 7246
+par2_median_low 7131
+par2_median_high 7418.5
+v2_nfailed 108
+v2_successes 892
 n 1000
 cap 10000
 energy_min -170.826515852
