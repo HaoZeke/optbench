@@ -14,11 +14,11 @@
       "commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218",
       "entry": "tsase-98aac60b-lj38-basinhopping",
       "legacy": {
-        "force_calls": 1024844,
+        "force_calls": 956575,
         "force_calls_max": 2000000,
         "force_calls_median": 2000000.0,
         "force_calls_min": 529824,
-        "nfailed": 44
+        "nfailed": 45
       },
       "metrics": {
         "bootstrap_resamples": 2000,
@@ -28,27 +28,27 @@
         "iqr": 0.0,
         "iqr_high": 0.0,
         "iqr_low": 0.0,
-        "mean": 3752070.2916666665,
+        "mean": 3695657.48,
         "median": 4000000.0,
         "median_high": 4000000.0,
         "median_low": 4000000.0,
-        "n": 48,
-        "n_cap": 44,
+        "n": 50,
+        "n_cap": 45,
         "n_crash": 0,
         "n_divergence": 0,
         "n_wrong_stationary": 0,
-        "nfailed": 44,
-        "par2_mean": 3752070.2916666665,
+        "nfailed": 45,
+        "par2_mean": 3695657.48,
         "par_applied": true,
         "par_factor": 2,
         "q25": 4000000.0,
         "q75": 4000000.0,
         "scoring": "par2-wilson-bootstrap",
-        "success_only_mean": 1024843.5,
-        "success_rate": 0.08333333333333333,
-        "successes": 4,
-        "wilson_high": 0.1955330179036728,
-        "wilson_low": 0.032883756818091775
+        "success_only_mean": 956574.8,
+        "success_rate": 0.1,
+        "successes": 5,
+        "wilson_high": 0.21360231437479654,
+        "wilson_low": 0.04347576493189041
       },
       "parameters": {
         "distribution": "uniform",
@@ -894,6 +894,38 @@
           "schema": "optbench.start/v2",
           "start": "47",
           "success": false,
+          "threshold": -173.92742624400097,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -172.9586236567934,
+          "failure": "cap",
+          "force_calls": 2000000,
+          "lowest_energy": -172.9586236567934,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "48",
+          "success": false,
+          "threshold": -173.92742624400097,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": true,
+          "counter": "harness",
+          "energy": -173.92757966066662,
+          "failure": null,
+          "force_calls": 683500,
+          "lowest_energy": -173.92757966066662,
+          "reasons": [],
+          "schema": "optbench.start/v2",
+          "start": "49",
+          "success": true,
           "threshold": -173.92742624400097,
           "verify_calls": 0
         }
