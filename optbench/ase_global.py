@@ -738,9 +738,12 @@ def _dat(template: dict, records: list[dict], *, partial: bool, cap: int, target
     lines = [
         "# counter harness. One force call is one calculator evaluation.",
         "# The potential is free-cluster Lennard-Jones, epsilon 1, sigma 1, cutoff 40.",
-        "# ASE 3.29.0 BasinHopping keeps the library displacement and Metropolis test.",
-        "# A success is a lowest energy at or below the stop, with calls under the cap.",
     ]
+    if template.get("algorithm") == "MinimaHopping":
+        lines.append("# ASE 3.29.0 MinimaHopping keeps the library dynamics, quench, and acceptance test.")
+    else:
+        lines.append("# ASE 3.29.0 BasinHopping keeps the library displacement and Metropolis test.")
+    lines.append("# A success is a lowest energy at or below the stop, with calls under the cap.")
     if target is None:
         lines.append("# This problem file states no stop energy. The row is partial.")
     else:
