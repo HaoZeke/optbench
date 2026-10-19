@@ -49,6 +49,7 @@ def test_lj38_template_uses_the_budget_cap():
     assert [row["id"] for row in list_templates(ROOT) if str(row["id"]).startswith("scgo/")] == [
         "scgo/lj38-bh-tuned",
         "scgo/lj38-bh",
+        "scgo/lj75-bh",
     ]
 
 
@@ -61,6 +62,18 @@ def test_tuned_template_uses_the_airss_call_ceiling():
     assert template["scgo"]["temperature"] == pytest.approx(1.0)
     assert int(template["scgo"]["niter"]) == AIRSS_LJ38_CALL_CEILING
     assert _check_stop(problem, template) == AIRSS_LJ38_CALL_CEILING
+
+
+def test_lj75_template_uses_the_problem_window():
+    template = load_template(ROOT, "scgo/lj75-bh")
+    problem = resolve_problem(ROOT, "globalopt/lj75")
+    assert template["failure_cap"] == 1000000
+    assert int(template["scgo"]["niter"]) == 1000000
+    assert template["scgo"]["dr"] == pytest.approx(0.2)
+    assert template["scgo"]["temperature"] == pytest.approx(1.0)
+    assert _check_stop(problem, template) == 1000000
+    assert problem["reference"]["energy"] == pytest.approx(-397.492331)
+    assert problem["convergence"]["energy_above_minimum"] == pytest.approx(0.001)
 
 
 def test_harness_potential_has_no_atom_symbol():
@@ -122,6 +135,10 @@ def test_asv_grid_is_one_start_until_full(monkeypatch):
     assert bench.ScgoLj38BhTuned.cap == AIRSS_LJ38_CALL_CEILING
     assert bench.ScgoLj38BhTuned.template_id == "scgo/lj38-bh-tuned"
     assert bench.ScgoLj38BhTuned.params[1] == ["0"]
+    assert bench.ScgoLj75Bh.cap == 1000000
+    assert bench.ScgoLj75Bh.template_id == "scgo/lj75-bh"
+    assert bench.ScgoLj75Bh.problem_id == "globalopt/lj75"
+    assert bench.ScgoLj75Bh.params[1] == ["0"]
     monkeypatch.setenv("OPTBENCH_ASV_FULL", "1")
     reloaded = importlib.reload(bench)
     assert reloaded.ScgoLj38Bh.params[1] == [str(index) for index in range(100)]
@@ -184,4 +201,17 @@ def test_installed_library_budget_matches_the_template():
     assert tuned_settings["temperature"] == pytest.approx(1.0)
     assert tuned_settings["niter_local_relaxation"] == 233
     assert tuned_settings["niter"] == AIRSS_LJ38_CALL_CEILING
+    assert tuned_settings["judge"] == ""
+    lj75 = load_template(ROOT, "scgo/lj75-bh")
+    lj75_problem = resolve_problem(ROOT, "globalopt/lj75")
+    lj75_settings = bh_settings(lj75_problem, lj75, 75)
+    assert lj75_settings["dr"] == pytest.approx(0.2)
+    assert lj75_settings["temperature"] == pytest.approx(1.0)
+    assert lj75_settings["niter_local_relaxation"] == 266
+    assert lj75_settings["niter"] == 1000000
+    assert lj75_settings["cap"] == 1000000
+    assert lj75_settings["reference_energy"] == pytest.approx(-397.492331)
+    assert lj75_settings["threshold"] == pytest.approx(-397.491331)
+    assert lj75_settings["judge"] == "globalopt"
+    assert lj75_settings["stop_on_energy"] is True
     assert tuned_settings["cap"] == AIRSS_LJ38_CALL_CEILING

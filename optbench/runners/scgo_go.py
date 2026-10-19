@@ -19,7 +19,8 @@ is a cap failure. A quenched energy outside the window is
 
 The tuned template keeps that FIRE length, step size, and Metropolis
 scale. Its hop count is the AIRSS Lennard-Jones 38 call ceiling, so a
-start ends on the Cambridge window or on that harness count. The atom
+start ends on the Cambridge window or on that harness count. A problem
+that states ``max_force_calls`` uses that cap the same way. The atom
 symbol is a distance-floor label. ``harness_lj`` is the only energy
 and force evaluation.
 """
@@ -147,9 +148,12 @@ def harness_lj(coords: np.ndarray) -> tuple[float, np.ndarray]:
 def reference_energy(problem: dict) -> float | None:
     """Known minimum used by ``energy_above_minimum``.
 
-    A number on the problem file wins. Lennard-Jones 38 otherwise uses
-    the harness energy of the quenched Cambridge geometry.
+    ``reference.energy`` on the problem file wins. Lennard-Jones 38
+    otherwise uses the harness energy of the quenched Cambridge geometry.
     """
+    reference = problem.get("reference") or {}
+    if reference.get("energy") not in (None, ""):
+        return float(reference["energy"])
     convergence = problem.get("convergence") or {}
     potential = problem.get("potential") or {}
     for source in (convergence, potential):
@@ -301,11 +305,7 @@ def _dat(summary: dict, template: dict, metrics: dict, *, partial: bool, energy_
             if energy_rule
             else "# The problem states no energy_above_minimum. success means a finite quench under the FIRE force tolerance. energy is that quenched energy, or the lowest energy seen when the force never met fmax."
         ),
-        (
-            "# The force-call cap is the AIRSS Lennard-Jones 38 call ceiling, counted in FIRE evaluations."
-            if str(template.get("tuning") or "") == "tuned"
-            else "# The force-call cap is the default basin-hopping budget, counted in FIRE evaluations."
-        ),
+        _cap_comment(template),
     ]
     if partial:
         if energy_rule:
@@ -323,6 +323,18 @@ def _dat(summary: dict, template: dict, metrics: dict, *, partial: bool, energy_
             continue
         lines.append(f"{key} {_format_field(value)}")
     return "\n".join(lines) + "\n"
+
+
+def _cap_comment(template: dict) -> str:
+    """One dat comment for the force-call cap this template spends."""
+    tuning = str(template.get("tuning") or "")
+    stated = template.get("failure_cap")
+    hops = (template.get("scgo") or {}).get("niter")
+    if tuning == "tuned":
+        return "# The force-call cap is the AIRSS Lennard-Jones 38 call ceiling, counted in FIRE evaluations."
+    if stated not in (None, "") and hops not in (None, "") and int(hops) >= int(stated):
+        return "# The force-call cap is max_force_calls from the problem file, counted in FIRE evaluations."
+    return "# The force-call cap is the default basin-hopping budget, counted in FIRE evaluations."
 
 
 def _silence_scgo() -> None:
@@ -372,6 +384,7 @@ def _one_start(job: dict) -> dict:
             self.counter = HarnessCounter(cache=True, cap=cap)
             self.fmax = float(job["fmax"])
             self.threshold = job["threshold"]
+            self.stop_on_energy = bool(job.get("stop_on_energy"))
             self.best_energy: float | None = None
             self.best_force_norm: float | None = None
             self.lowest_energy: float | None = None
@@ -400,11 +413,9 @@ def _one_start(job: dict) -> dict:
                 if max_atom <= self.fmax and (self.best_energy is None or energy < self.best_energy):
                     self.best_energy = float(energy)
                     self.best_force_norm = force_norm
-                if (
-                    self.threshold is not None
-                    and energy <= float(self.threshold)
-                    and max_atom <= self.fmax
-                ):
+                in_window = self.threshold is not None and energy <= float(self.threshold)
+                quenched = max_atom <= self.fmax
+                if in_window and (self.stop_on_energy or quenched):
                     raise SearchStop("target", float(energy), force_norm)
             energy, flat = cached
             self.results["energy"] = float(energy)
@@ -481,17 +492,30 @@ def _one_start(job: dict) -> dict:
         and kind == "target"
     )
     reasons: list[str] = []
-    if error:
-        reasons.append("crash")
-    elif not finite:
-        reasons.append("divergence")
-    elif kind == "cap" or calls >= cap:
-        reasons.append("cap")
-    elif not quenched:
-        reasons.append("divergence")
-    elif has_window and not in_window:
-        reasons.append("energy")
-    failure = classify_failure(reasons)
+    if job.get("judge") == "globalopt" and not error:
+        from optbench.globalopt import judge_globalopt
+
+        judged = judge_globalopt(
+            float(energy) if finite else None,
+            calls,
+            reference=float(job["reference_energy"]),
+            tolerance=float(job["energy_above_minimum"]),
+            cap=cap,
+        )
+        reasons = list(judged["reasons"])
+        failure = judged["failure"]
+    else:
+        if error:
+            reasons.append("crash")
+        elif not finite:
+            reasons.append("divergence")
+        elif kind == "cap" or calls >= cap:
+            reasons.append("cap")
+        elif not quenched:
+            reasons.append("divergence")
+        elif has_window and not in_window:
+            reasons.append("energy")
+        failure = classify_failure(reasons)
     record = {
         "schema": "optbench.start/v2",
         "start": job["start"],
@@ -523,7 +547,7 @@ def _one_start(job: dict) -> dict:
     }
     if error:
         record["error"] = error
-    if not quenched and failure is None:
+    if job.get("judge") != "globalopt" and not quenched and failure is None:
         record["success"] = False
         record["failure"] = "divergence"
         record["reasons"] = ["divergence"]
@@ -591,6 +615,8 @@ def _write_campaign(output: Path, template: dict, problem: dict, records: list[d
             + (
                 "The cap is the AIRSS Lennard-Jones 38 call ceiling."
                 if str(template.get("tuning") or "") == "tuned"
+                else "The cap is max_force_calls from the problem file."
+                if _cap_comment(template).startswith("# The force-call cap is max_force_calls")
                 else "The cap is the default SCGO basin-hopping budget."
             )
         ),
@@ -671,6 +697,9 @@ def bh_settings(problem: dict, template: dict, n_atoms: int) -> dict:
     tuning = str(template.get("tuning") or "default")
     dr = float(block["dr"])
     temperature = float(block["temperature"])
+    problem_cap = (problem.get("convergence") or {}).get("max_force_calls")
+    judge = ""
+    stop_on_energy = False
     if tuning == "tuned":
         if int(stated_cap) != AIRSS_LJ38_CALL_CEILING:
             raise ValueError(
@@ -689,6 +718,24 @@ def bh_settings(problem: dict, template: dict, n_atoms: int) -> dict:
             raise ValueError(
                 f"{template['id']} dr {dr} and temperature {temperature} differ from the documented preset"
             )
+    elif problem_cap not in (None, ""):
+        cap = int(problem_cap)
+        if stated_cap is None or int(stated_cap) != cap:
+            raise ValueError(f"{template['id']} failure_cap {stated_cap} is not the problem cap {cap}")
+        stated_hops = section.get("niter")
+        niter = cap if stated_hops in (None, "") else int(stated_hops)
+        if niter < cap:
+            raise ValueError(f"{template['id']} hop count {niter} can end before the call ceiling {cap}")
+        if "dr" in section:
+            dr = float(section["dr"])
+        if "temperature" in section:
+            temperature = float(section["temperature"])
+        if dr != float(block["dr"]) or temperature != float(block["temperature"]):
+            raise ValueError(
+                f"{template['id']} dr {dr} and temperature {temperature} differ from the documented preset"
+            )
+        judge = "globalopt"
+        stop_on_energy = True
     elif stated_cap is not None and int(stated_cap) != library_cap:
         raise ValueError(f"{template['id']} failure_cap {stated_cap} is not the budget {library_cap}")
     else:
@@ -712,6 +759,8 @@ def bh_settings(problem: dict, template: dict, n_atoms: int) -> dict:
         "reference_energy": known,
         "energy_above_minimum": window,
         "threshold": threshold,
+        "judge": judge,
+        "stop_on_energy": stop_on_energy,
         "connectivity_factor": defaults["connectivity_factor"],
         "potential": "lennard-jones",
         "epsilon": 1.0,
@@ -748,6 +797,8 @@ def make_job(
         "threshold": settings["threshold"],
         "reference_energy": settings["reference_energy"],
         "energy_above_minimum": settings["energy_above_minimum"],
+        "judge": settings.get("judge") or "",
+        "stop_on_energy": bool(settings.get("stop_on_energy")),
         "optimizer": settings["optimizer"],
         "dr": settings["dr"],
         "move_fraction": settings["move_fraction"],
