@@ -1,0 +1,57 @@
+id = "eon-svn/htst-pt-lanczos-cg"
+engine = "eon"
+problem = "hTST/Pt"
+code = "Eon svn"
+code_version = "r2549"
+commit = "r2549"
+algorithm = "Lanczos-CG rotation: max=10, tol=0.05"
+reducer = "harness-htst"
+pass_limit = 8000
+note = "AKMC on the Pt island with the r2549 client. morse_pt is the C++ Morse potential in that binary. Temperature 700 K, seed 42, confidence 1.9, confidence_scheme old. thermally_accessible_window is 22 so a 1.207 eV barrier stays inside the table at 700 K. The min-mode method is Lanczos, tolerance 0.05, max_iterations 10. quit_early is false: r2549 defaults it to true, which was added after the 2013 Lanczos used for this row, and the early exit lengthens the climb. Translation is conjugate gradient. finite_difference is 0.001. convergence_metric is max_atom, the force check hardcoded in the 2013 min-mode search. Displacement is the least coordinated atom, weight 1, radius 3.3, magnitude 0.3. Optimizer and saddle converged_force are 0.001, max_iterations 5000, saddle max_energy 1000. Prefactor default_value is 1.2e12. A start is one barrier window from optbench.htst. Communicator num_jobs 32."
+
+[ini.Main]
+job = "akmc"
+temperature = 700
+finite_difference = 0.001
+random_seed = 42
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "cg"
+convergence_metric = "max_atom"
+converged_force = 0.001
+max_move = 0.2
+max_iterations = 5000
+
+[ini.AKMC]
+confidence = 1.9
+confidence_scheme = "old"
+thermally_accessible_window = 22
+
+[ini."Process Search"]
+minimize_first = true
+
+[ini.Communicator]
+type = "local"
+num_jobs = 32
+number_of_CPUs = 1
+client_path = "eonclient"
+
+[ini."Saddle Search"]
+min_mode_method = "lanczos"
+displace_least_coordinated_weight = 1.0
+displace_radius = 3.3
+displace_magnitude = 0.3
+max_energy = 1000.0
+max_iterations = 5000
+converged_force = 0.001
+
+[ini.Prefactor]
+default_value = 1.2e12
+
+[ini.Lanczos]
+tolerance = 0.05
+max_iterations = 10
+quit_early = false

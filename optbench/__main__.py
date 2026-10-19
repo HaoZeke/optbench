@@ -338,6 +338,41 @@ def board(
             )
 
 
+@app.command
+def htst(
+    template: str,
+    *,
+    root: Path = Path("."),
+    client: Path | None = None,
+    output: Path = Path("benchmark.dat"),
+    workers: int = 1,
+    work: Path | None = None,
+    resume: bool = False,
+) -> None:
+    """Run one hTST template until the problem's barrier windows are complete."""
+    from optbench.htst_eon import run_htst
+
+    destination = work if work is not None else output.with_suffix(".work")
+    summary = run_htst(
+        root,
+        template,
+        _eon_client(client),
+        output,
+        destination,
+        workers,
+        resume=resume,
+    )
+    print(
+        f"{summary.get('problem')} {summary.get('template')} "
+        f"barrier_windows={summary.get('barrier_windows')}/{summary.get('target')} "
+        f"barrier_jobs={summary.get('barrier_jobs')} "
+        f"barrier_force_calls={summary.get('barrier_force_calls')} "
+        f"rate_jobs={summary.get('rate_jobs')} "
+        f"rate_force_calls={summary.get('rate_force_calls')} "
+        f"partial={summary.get('partial')}"
+    )
+
+
 @app.command(name="validate-counter")
 def validate_counter(
     output: Path = Path("results/validation/lj38-counter.dat"),

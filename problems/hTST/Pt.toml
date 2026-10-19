@@ -4,6 +4,36 @@ suite = "hTST"
 problem = "Pt"
 contract = "partial"
 entry_count = 11
+remark = "A start is one barrier window. The window closes when each reference barrier below 1.3 eV has been matched once from the processtable. Force calls are sad-fcs. The rate sum uses 1.2e12. The stop is the maximum force on any atom. The potential is morse_pt."
+
+[potential]
+evaluator = "morse_pt"
+kind = "morse"
+name = "morse_pt"
+D = 0.7102
+alpha = 1.6047
+r0 = 2.897
+cutoff = 9.5
+
+[htst]
+temperature = 700
+rate_ref = 155055901.244
+rate_accuracy = 0.999
+prefactor = 1.2e12
+kb = 8.6173324e-5
+barrier_ceiling = 1.3
+barriers = [0.601, 0.601, 0.620, 0.986, 0.987, 0.989, 0.986, 0.987, 0.989, 1.196, 1.196, 1.196, 1.196, 1.207, 1.207]
+
+[convergence]
+norm = "max_atom"
+force_norm = 0.001
+force_unit = "eV/Angstrom"
+
+[sample]
+starts = 10
+
+[input]
+archive_path = "website/hTST/Pt/eon-lanczos-cg/pos.con"
 
 [metrics]
 required = ["barrier_force_calls", "barrier_jobs", "rate_force_calls", "rate_jobs"]
