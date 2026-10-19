@@ -15,6 +15,7 @@ from optbench.optim_saddle import (
     climb_reasons,
     minimize_odata,
     optim_seed,
+    repair_cap_row,
     paper_keyword_lines,
     read_vector_dump,
     search_displacement,
@@ -140,6 +141,14 @@ def test_climb_reasons_match_the_socket_budget():
         hang=False, error=None, finite=True, capped=False, calls=10, climb_cap=1000,
         force_norm=1e-4, force_tol=1e-3, index=1,
     ) is None
+    assert climb_reasons(
+        hang=False, error=None, finite=False, capped=True, calls=1000, climb_cap=1000,
+        force_norm=None, force_tol=1e-3, index=None,
+    ) == ["cap", "force_norm"]
+    assert climb_reasons(
+        hang=False, error=None, finite=False, capped=False, calls=12, climb_cap=1000,
+        force_norm=None, force_tol=1e-3, index=None,
+    ) == ["divergence"]
 
 
 def test_cap_stays_in_the_fraction_and_novelty_is_find_repeat(tmp_path: Path):
@@ -248,6 +257,98 @@ def test_cap_stays_in_the_fraction_and_novelty_is_find_repeat(tmp_path: Path):
     assert catalog.qualifying == 1
     assert catalog.not_connected == 0
     assert catalog.fraction_connected == 1.0
+
+
+def test_unrecovered_climb_budget_and_endpoint_budget_are_caps(tmp_path: Path):
+    free = np.array([0, 1])
+    cell = np.array([20.0, 20.0, 30.0])
+    archive = EndpointArchive(tmp_path / "saddle.endpoints.npz", 2)
+    archive.reset(cell, free)
+    catalog = ProcessCatalog(cell)
+    minimum = np.zeros(6)
+    stored = {
+        "judged": False,
+        "climb_calls": 1000,
+        "reasons": ["divergence"],
+        "failure": "divergence",
+        "success": False,
+    }
+    repaired = repair_cap_row(stored, 1000)
+    assert repaired["failure"] == "cap"
+    assert repaired["reasons"] == ["cap", "force_norm"]
+    assert repair_cap_row({"judged": False, "climb_calls": 12, "reasons": ["divergence"]}, 1000)["reasons"] == ["divergence"]
+    missing = {
+        "hang": False,
+        "error": None,
+        "finite": False,
+        "capped": True,
+        "climb": 1000,
+        "force_norm": None,
+        "hessian_index": None,
+        "endpoint_calls": 0,
+        "verify_calls": 0,
+        "converged": False,
+        "plus": None,
+        "minus": None,
+        "energy": None,
+        "coords": None,
+        "lowest_eigenvalue": None,
+    }
+    record, _stored = _score_one(
+        catalog,
+        missing,
+        {"seed": 11, "epicenter": 2},
+        minimum=minimum,
+        min_energy=-10.0,
+        free=free,
+        fixed=np.array([False, False]),
+        cell=cell,
+        tolerance=0.1,
+        climb_cap=1000,
+        force_tol=1e-3,
+        name="rep1-search1",
+        archive=archive,
+    )
+    assert record["failure"] == "cap"
+    assert catalog.not_connected == 0
+    quench = {
+        "hang": False,
+        "error": None,
+        "finite": True,
+        "capped": False,
+        "climb": 40,
+        "force_norm": 1e-4,
+        "hessian_index": 1,
+        "endpoint_calls": 2000,
+        "endpoint_capped": True,
+        "endpoint_error": "endpoint has no geometry",
+        "verify_calls": 4,
+        "converged": True,
+        "plus": None,
+        "minus": None,
+        "energy": -9.6,
+        "coords": np.zeros((2, 3)),
+        "lowest_eigenvalue": -0.2,
+    }
+    endpoint, _endpoint_stored = _score_one(
+        catalog,
+        quench,
+        {"seed": 12, "epicenter": 1},
+        minimum=minimum,
+        min_energy=-10.0,
+        free=free,
+        fixed=np.array([False, False]),
+        cell=cell,
+        tolerance=0.1,
+        climb_cap=1000,
+        force_tol=1e-3,
+        name="rep1-search2",
+        archive=archive,
+    )
+    assert endpoint["failure"] == "cap"
+    assert endpoint["reasons"] == ["cap", "force_norm"]
+    assert catalog.searches == 2
+    assert catalog.not_connected == 0
 
 
 def test_socket_kind_is_morse_force():

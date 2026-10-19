@@ -97,10 +97,13 @@ def climb_reasons(
     """
     if hang or error:
         return ["crash"]
-    if not finite:
-        return ["divergence"]
+    # The socket refuses the call past the climb budget and the launch
+    # then skips the trajectory match, so a capped climb has no geometry.
+    # That spent budget is a cap, not a divergence.
     if capped or int(calls) >= int(climb_cap):
         return ["cap", "force_norm"]
+    if not finite:
+        return ["divergence"]
     if force_norm is None or not math.isfinite(float(force_norm)) or float(force_norm) > float(force_tol) + 1e-10:
         return ["force_norm"]
     if index != 1:
@@ -407,6 +410,7 @@ def _saddle_attempt(spec: dict) -> dict:
         "minus": None,
         "endpoint_calls": 0,
         "endpoint_error": None,
+        "endpoint_capped": False,
         "converged": False,
     }
     climb_work = Path(spec["work"])
@@ -456,6 +460,8 @@ def _saddle_attempt(spec: dict) -> dict:
             quench["vector"] = None
             done = _launch(quench)
             endpoint_calls += int(done["calls"])
+            if done.get("capped") or int(done["calls"]) >= ENDPOINT_BUDGET:
+                result["endpoint_capped"] = True
             point = done.get("coords")
             if done.get("hang") or done.get("error") or point is None or not np.all(np.isfinite(point)):
                 result["endpoint_error"] = done.get("error") or ("no new force calls" if done.get("hang") else "endpoint has no geometry")
@@ -553,6 +559,23 @@ def _tarball_comment() -> str:
 def _outcome(reasons: list[str]) -> tuple[bool, str | None]:
     failure = classify_failure(reasons)
     return failure is None, failure
+
+
+def repair_cap_row(row: dict, climb_cap: int) -> dict:
+    """Correct a capped climb that was stored as a divergence.
+
+    The geometry is absent because the launch does not match a trajectory
+    after the socket cap. Resume rewrites that row before it is scored.
+    """
+    reasons = [str(item) for item in (row.get("reasons") or [])]
+    climb = int(row.get("climb_calls") or 0)
+    if row.get("judged") or climb < int(climb_cap) or reasons != ["divergence"]:
+        return row
+    fixed = dict(row)
+    fixed["reasons"] = ["cap", "force_norm"]
+    fixed["failure"] = "cap"
+    fixed["success"] = False
+    return fixed
 
 
 def run_saddle(
@@ -683,7 +706,8 @@ def run_saddle(
                 minimize_calls = int(header["minimize_calls"])
                 min_ok = bool(header["min_ok"])
                 catalog = ProcessCatalog(cell, tolerance=tolerance, barrier_max=barrier_max)
-                for row in saved:
+                for raw in saved:
+                    row = repair_cap_row(raw, climb_cap)
                     linked = bool(row.get("judged")) and "not_connected" not in (row.get("reasons") or [])
                     saddle = None if row.get("saddle_x") is None else np.asarray(row["saddle_x"], dtype=np.float64)
                     catalog.observe(
@@ -905,8 +929,15 @@ def _score_one(
     minus_rows = None
     per_plus = None
     per_minus = None
-    if reasons is None and (plus is None or minus is None or outcome.get("endpoint_error")):
-        reasons = ["crash"] if outcome.get("endpoint_error") or outcome.get("error") else ["divergence"]
+    if reasons is None and (
+        plus is None or minus is None or outcome.get("endpoint_error") or outcome.get("endpoint_capped")
+    ):
+        if outcome.get("endpoint_capped"):
+            reasons = ["cap", "force_norm"]
+        elif outcome.get("endpoint_error") or outcome.get("error"):
+            reasons = ["crash"]
+        else:
+            reasons = ["divergence"]
     if reasons is None:
         minimum_rows = np.asarray(minimum, dtype=np.float64).reshape(-1, 3)
         plus_rows = _as_rows(plus, free)
