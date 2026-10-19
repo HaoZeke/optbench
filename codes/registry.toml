@@ -177,11 +177,11 @@ note = "Sella 0.1.1 PESWrapper.diag for the lowest-eigenvector row. eta 1e-6, ga
 id = "gmin"
 name = "GMIN"
 role = "global optimization"
-repository = "https://optbench.org/codes/wales-27058.tar.bz2"
-ref = "27058"
-commit = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
-committed = "2014-08-06"
-note = "Wales group tarball wales-27058.tar.bz2, 20942854 bytes, SVNREV 27059. The LJ38 basin-hopping row is this source built with ifort classic 2021.1.1 -O3 and WITH_MPI off. The score is GMIN NPCALL at the target hit, not a harness socket. The makefile default compiler is ifort. gfortran 13 on the same source is outside the archived band."
+repository = "https://www-wales.ch.cam.ac.uk/svn.tar.bz2"
+ref = "df8da5992675"
+commit = "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
+committed = "2026-10-19"
+note = "Latest Wales svn.tar.bz2 fetched 2026-10-19, 118 MB, sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. GMIN source/SVNREV is df8da599267534fbe43a250e578f7396a7946311. The LJ38 row is this tree unmodified, gfortran 13.3.0, MPI off, stock keyword defaults. The score is GMIN NPCALL at the target hit."
 
 [[template]]
 id = "sella-0.1.1/lj38-loweig"

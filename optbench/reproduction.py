@@ -196,7 +196,20 @@ MATCHES: list[dict] = [
     {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm50", "template": "softsaddle/saddle-lanczos-sm50", "branch": "cells/softsaddle/ts-reps", "path": "results/campaign/softsaddle-2019.04-saddle-lanczos-sm50.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
     {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm0", "template": "softsaddle/saddle-lanczos-sm0", "branch": "cells/softsaddle/ts-reps", "path": "results/campaign/softsaddle-2019.04-saddle-lanczos-sm0.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
     # globalopt and htst and aladatom rates
-    {"key": "globalopt/lj38/gmin-nosym", "template": "gmin/lj38-nosym", "branch": "repro/globalopt-lj38-gmin-nosym", "path": "results/campaign/gmin-27058-lj38-nosym.dat"},
+    {
+        "key": "globalopt/lj38/gmin-nosym",
+        "template": "gmin/lj38-nosym",
+        "branch": "repro/globalopt-lj38-gmin-nosym",
+        "path": "results/campaign/gmin-27058-lj38-nosym.dat",
+        "cause": "gmin_lj38_stock",
+        "extra": {
+            "latest_code_version": "df8da599267534fbe43a250e578f7396a7946311",
+            "latest_tarball_sha256": "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31",
+            "latest_template": "gmin/lj38-stock",
+            "latest_success_only_mean": 810487,
+            "latest_nfailed": 34,
+        },
+    },
     {"key": "globalopt/lj38/eon-basinhopping", "template": "eon-client/bh-lj38", "branch": "entries/eon-svn-lane-a", "path": "results/campaign/eon-client-bh-lj38.dat"},
     {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "branch": "cells/pele/go", "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat", "cause": "pele_bh_defaults"},
     {"key": "hTST/Al/eon-dimer-cg", "template": "eon-svn/htst-al-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-al-dimer.dat", "kind": "htst", "cause": "htst_al"},
@@ -205,6 +218,13 @@ MATCHES: list[dict] = [
 
 
 CAUSE_TEXT = {
+    "gmin_lj38_stock": (
+        "The ranked row is unmodified GMIN SVNREV df8da599267534fbe43a250e578f7396a7946311 "
+        "from svn.tar.bz2 sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31, "
+        "gfortran 13.3.0, stock keyword defaults, archive TARGET and EDIFF 0.003. "
+        "66 of 100 starts hit. The success-only NPCALL mean is 810487 and 34 starts reach the 2000000 cap. "
+        "That gap from the archive is the finding."
+    ),
     "lj38_ts_starts": (
         "Inside the 10% band (207.51 vs 192). "
         "Archive run.sh unpacks coords-xyz.tar.gz (200 xyz, max pair about 4.4). "
