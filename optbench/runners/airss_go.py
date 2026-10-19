@@ -595,8 +595,16 @@ def run_template(
         tolerance = float(raw_tolerance)
         coords = load_wales_coordinates()
         if coords.shape[0] != config["natoms"]:
-            raise ValueError(f"Wales file has {coords.shape[0]} atoms, template has {config['natoms']}")
-        reference = reference_energy(coords)
+            # The Wales file is the N=38 minimum. A budget template for another
+            # size keeps that budget and does not score against this energy.
+            if not config.get("budget_structures"):
+                raise ValueError(
+                    f"Wales file has {coords.shape[0]} atoms, template has {config['natoms']}"
+                )
+            reference = None
+            tolerance = None
+        else:
+            reference = reference_energy(coords)
     jobs = [_job(template, index, name, binary, reference, tolerance) for index, name in enumerate(names)]
     if workers <= 1:
         records = []
