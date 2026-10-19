@@ -2,7 +2,7 @@
 # The potential is epsilon 1, sigma 1, cutoff 40, no shift.
 # A success is a quenched energy within energy_above_minimum of the reference, under the force cap.
 # Default pool. nPool is 10, the offspring loop is 1000 steps, the mutation probability is 0.1, the mutation is random, and the crossover is weighted. r_ij is 3.0 and boxAdd is 10, the values in Examples/Run.py. The first pool member is the quenched archived geometry. Later members and operators are the code's own draws. minMut and Select call random.seed() with no argument, so those draws follow the system time. The local quench stops at Euclidean force 0.001 or 1000 evaluations, the archived eon basin-hopping settings on this potential. The scheduled budget is one quench for every pool member and iteration. Success is the Cambridge N=75 minimum plus 0.001. The search stops at the problem force cap of 1000000.
-nfailed 36
+nfailed 56
 code BPGA
 code_version 0
 commit b32cd227e8071429825f990449048eb21c7f8730
@@ -14,14 +14,14 @@ counter harness
 cap 1000000
 par2_mean 2000000.0
 wilson_low 0.0
-wilson_high 0.09641862859446367
+wilson_high 0.06419393671876342
 par2_median 2000000.0
 par2_median_low 2000000.0
 par2_median_high 2000000.0
-v2_nfailed 36
+v2_nfailed 56
 v2_successes 0
-n 36
+n 56
 energy_min -395.72831257979294
-energy_max -390.70302355113097
+energy_max -389.87617854616246
 reference_energy -397.492331
 partial true
