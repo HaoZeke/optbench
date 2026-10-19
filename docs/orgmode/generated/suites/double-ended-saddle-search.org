@@ -146,7 +146,7 @@
    <tr><td data-field="template">tsase/neb</td><td data-field="version">tsase 1.0</td><td data-field="commit">98aac60b5d99</td><td data-field="source">campaign</td><td data-field="par2_mean">5000</td><td data-field="success_rate">0</td><td data-field="wilson">0–0.0713476</td><td data-field="median_calls">1633</td><td data-field="mean_calls">1652.86</td><td data-field="mean_per_image">330.572</td><td data-field="failures">crash 0, divergence 36, cap 14, wrong_stationary 0</td><td data-field="n">50</td></tr>
    </tbody></table></div>
    <h3>Partial</h3><ul>
-   <li>gpatom/aidneb gpatom campaign n=5, result file sets partial true.</li>
+   <li>gpatom/aidneb gpatom campaign n=7, result file sets partial true.</li>
    <li>eon/develop-de-lj38-cap-accept-energy eOn asv n=1, smoke run; scored 1 of 50 starts.</li>
    <li>eon/develop-de-lj38-ew eOn asv n=1, smoke run; scored 1 of 50 starts.</li>
    <li>eon/develop-de-lj38-oci eOn asv n=1, smoke run; scored 1 of 50 starts.</li>
@@ -467,7 +467,7 @@
    <li>eon-client/de-pt-dimer eOn campaign n=59, result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5).</li>
    <li>eon-client/de-pt-lanczos-improved eOn campaign n=59, result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5).</li>
    <li>eon-client/de-pt-lanczos eOn campaign n=59, result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5).</li>
-   <li>gpatom/aidneb gpatom campaign n=21, result file sets partial true.</li>
+   <li>gpatom/aidneb gpatom campaign n=24, result file sets partial true.</li>
    <li>eon/develop-de-pt-ew eOn asv n=1, smoke run; scored 1 of 59 starts.</li>
    <li>eon/develop-de-pt-oci eOn asv n=1, smoke run; scored 1 of 59 starts.</li>
    <li>ase/de-pt-island-tuned ASE asv n=1, smoke run; scored 1 of 59 starts.</li>
