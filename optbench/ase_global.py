@@ -19,6 +19,14 @@ test, and the local minimizer are the library's. ASE displaces from the
 coordinates it stored before the quench. The local iteration bound is the
 template value. Without it the ASE optimizer default is 1e8 steps, and one
 overlapping trial does not return.
+
+``MinimaHopping`` keeps the library molecular dynamics, local minimizer,
+acceptance test, and temperature update. Step trajectories are not written.
+ASE reads those files only to resume, and each frame is fsynced. The minima
+list is kept in memory. The identity test is ASE's greedy same-element
+pairing, evaluated at the same distances, so a revisit decision matches
+``ComparePositions``. The scan stops at the first match. That can change the
+logged closest distance and leaves the acceptance decision unchanged.
 """
 
 from __future__ import annotations
@@ -399,6 +407,190 @@ def _mh_settings(parameters: dict, work: Path, seed: int) -> dict:
     return kwargs
 
 
+class _StepTrajectory:
+    """In-memory stand-in for an ``md`` or ``qn`` trajectory.
+
+    The optimizer and the dynamics writer call ``write``, ``set_description``,
+    and ``len``. None of those results are read during a fresh search.
+    """
+
+    def __init__(self, filename, mode="w", atoms=None, **kwargs):
+        del filename, mode, kwargs
+        self.atoms = atoms
+        self._count = 0
+
+    def write(self, atoms=None, **kwargs):
+        del atoms, kwargs
+        self._count += 1
+
+    def close(self) -> None:
+        return None
+
+    def __len__(self) -> int:
+        return self._count
+
+    def set_description(self, description) -> None:
+        del description
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc) -> None:
+        return None
+
+
+def _one_element(atoms) -> bool:
+    symbols = atoms.get_chemical_symbols()
+    return bool(symbols) and all(symbol == symbols[0] for symbol in symbols)
+
+
+def _greedy_dmax(pos1, pos2) -> float:
+    """Maximum greedy nearest-neighbor distance, in ``pos1`` order.
+
+    ``np.argmin`` keeps the first tied index, which is the order of the
+    remaining atoms in ``ComparePositions``.
+    """
+    import numpy as np
+
+    remaining = np.array(pos2, dtype=float, copy=True)
+    worst = 0.0
+    for point in pos1:
+        delta = remaining - point
+        dist = np.sqrt(np.einsum("ij,ij->i", delta, delta))
+        index = int(np.argmin(dist))
+        if dist[index] > worst:
+            worst = float(dist[index])
+        remaining = np.delete(remaining, index, axis=0)
+    return worst
+
+
+def _translated_dmax(pos1, pos2) -> float:
+    """Smallest ``_greedy_dmax`` after translating each atom of ``pos2`` onto ``pos1[0]``."""
+    import numpy as np
+
+    standard = pos1 - pos1[0]
+    shifted = pos2[None, :, :] - pos2[:, None, :]
+    count = pos1.shape[0]
+    active = np.ones((count, count), dtype=bool)
+    worst = np.zeros(count, dtype=float)
+    rows = np.arange(count)
+    for point in standard:
+        delta = shifted - point
+        dist = np.sqrt(np.einsum("ijk,ijk->ij", delta, delta))
+        dist = np.where(active, dist, np.inf)
+        chosen = np.argmin(dist, axis=1)
+        np.maximum(worst, dist[rows, chosen], out=worst)
+        active[rows, chosen] = False
+    return float(worst.min())
+
+
+class _MinimaRuntime:
+    """Drop step trajectories and evaluate the identity test in numpy.
+
+    The patch is process-local. A mixed-element or periodic pair falls back
+    to ``ComparePositions``.
+    """
+
+    def __enter__(self):
+        import ase.io as io
+        import ase.io.trajectory as trajectory
+        from ase.optimize.minimahopping import ComparePositions, MinimaHopping
+
+        self._io = io
+        self._trajectory = trajectory
+        self._compare = ComparePositions
+        self._hopping = MinimaHopping
+        self._io_trajectory = io.Trajectory
+        self._module_trajectory = trajectory.Trajectory
+        self._compare_call = ComparePositions.__call__
+        self._unique = MinimaHopping._unique_minimum_position
+        self._record = MinimaHopping._record_minimum
+        self._read = MinimaHopping._read_minima
+        real = trajectory.Trajectory
+
+        def open_trajectory(filename, mode="r", atoms=None, **kwargs):
+            name = Path(str(filename)).name
+            if name.startswith(("md", "qn")):
+                return _StepTrajectory(filename, mode, atoms)
+            return real(filename, mode, atoms, **kwargs)
+
+        def compare_call(compare, atoms1, atoms2):
+            import numpy as np
+
+            if (
+                np.any(atoms1.pbc)
+                or np.any(atoms2.pbc)
+                or not _one_element(atoms1)
+                or atoms1.get_chemical_symbols() != atoms2.get_chemical_symbols()
+            ):
+                return self._compare_call(compare, atoms1, atoms2)
+            pos1 = np.asarray(atoms1.positions, dtype=float)
+            pos2 = np.asarray(atoms2.positions, dtype=float)
+            if pos1.shape != pos2.shape or pos1.ndim != 2 or pos1.shape[1] != 3:
+                return self._compare_call(compare, atoms1, atoms2)
+            if compare._translate:
+                return _translated_dmax(pos1, pos2)
+            return _greedy_dmax(pos1, pos2)
+
+        def remember(self):
+            from ase import Atoms
+
+            symbols = self._atoms.get_chemical_symbols()
+            stored = Atoms(
+                symbols,
+                positions=self._atoms.get_positions().copy(),
+                pbc=self._atoms.pbc,
+                cell=self._atoms.get_cell(),
+            )
+            found = getattr(self, "_optbench_minima", None)
+            if found is None:
+                found = []
+                self._optbench_minima = found
+                self._optbench_loaded = True
+            found.append(stored)
+            self._minima = found
+            self._log("msg", "Recorded minima #%i." % (len(found) - 1))
+
+        def recall(self):
+            if getattr(self, "_optbench_loaded", False):
+                self._minima = self._optbench_minima
+                return True
+            exists = self_read(self)
+            self._optbench_minima = list(self._minima)
+            self._optbench_loaded = True
+            return exists
+
+        def unique(self):
+            closest = 99999.0
+            compare = ComparePositions(translate=True)
+            self._read_minima()
+            threshold = float(self._minima_threshold)
+            for minimum in reversed(self._minima):
+                distance = float(compare(minimum, self._atoms))
+                if distance < closest:
+                    closest = distance
+                if distance < threshold:
+                    return False, closest
+            return True, closest
+
+        self_read = self._read
+        io.Trajectory = open_trajectory
+        trajectory.Trajectory = open_trajectory
+        ComparePositions.__call__ = compare_call
+        MinimaHopping._record_minimum = remember
+        MinimaHopping._read_minima = recall
+        MinimaHopping._unique_minimum_position = unique
+        return self
+
+    def __exit__(self, *exc) -> None:
+        self._io.Trajectory = self._io_trajectory
+        self._trajectory.Trajectory = self._module_trajectory
+        self._compare.__call__ = self._compare_call
+        self._hopping._record_minimum = self._record
+        self._hopping._read_minima = self._read
+        self._hopping._unique_minimum_position = self._unique
+
+
 def _run_minima(atoms, calc, payload: dict) -> dict:
     from ase.optimize.minimahopping import MinimaHopping
 
@@ -409,8 +601,31 @@ def _run_minima(atoms, calc, payload: dict) -> dict:
     hit_cap = False
     try:
         os.chdir(work)
+        with _MinimaRuntime():
+            return _minima_search(atoms, calc, payload, work, MinimaHopping)
+    except Exception as exc:
+        if _cap_error(exc):
+            return _outcome(payload, int(calc.optbench_harness.calls), best, hops, True)
+        return _record(
+            payload,
+            calls=int(getattr(getattr(calc, "optbench_harness", None), "calls", 0)),
+            energy=best,
+            hops=hops,
+            reasons=["crash"],
+            error=exc.__class__.__name__,
+        )
+    finally:
+        os.chdir(previous)
+        shutil.rmtree(work, ignore_errors=True)
+
+
+def _minima_search(atoms, calc, payload: dict, work: Path, minima_hopping) -> dict:
+    hops = 0
+    best = None
+    hit_cap = False
+    try:
         kwargs = _mh_settings(payload["parameters"], work, int(payload["seed"]))
-        hopper = MinimaHopping(atoms, **kwargs)
+        hopper = minima_hopping(atoms, **kwargs)
         try:
             hopper._startup()
         except RuntimeError as exc:
@@ -456,9 +671,6 @@ def _run_minima(atoms, calc, payload: dict) -> dict:
             reasons=["crash"],
             error=exc.__class__.__name__,
         )
-    finally:
-        os.chdir(previous)
-        shutil.rmtree(work, ignore_errors=True)
 
 
 def _finite_energy(atoms) -> float | None:

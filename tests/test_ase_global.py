@@ -220,3 +220,63 @@ def test_the_force_cap_is_a_failure(tmp_path: Path):
     assert row["failure"] == "cap"
     assert row["force_calls"] <= 30
     assert row["counter"] == "harness"
+
+
+def test_minima_identity_matches_ase_compare():
+    ase = pytest.importorskip("ase")
+    numpy = pytest.importorskip("numpy")
+    del ase
+    from ase import Atoms
+    from ase.optimize.minimahopping import ComparePositions
+
+    from optbench.ase_global import _greedy_dmax, _translated_dmax
+
+    rng = numpy.random.default_rng(2)
+    translated = ComparePositions(translate=True)
+    plain = ComparePositions(translate=False)
+    for index in range(12):
+        pos1 = rng.normal(scale=3.0, size=(38, 3))
+        if index % 3 == 0:
+            pos2 = pos1[rng.permutation(38)] + rng.normal(scale=1e-8, size=(38, 3))
+        elif index % 3 == 1:
+            pos2 = pos1 + rng.normal(scale=0.02, size=(38, 3))
+        else:
+            pos2 = rng.normal(scale=3.0, size=(38, 3))
+        atoms1 = Atoms("C38", positions=pos1, pbc=False)
+        atoms2 = Atoms("C38", positions=pos2, pbc=False)
+        assert abs(float(translated(atoms1, atoms2)) - _translated_dmax(pos1, pos2)) < 1e-12
+        assert abs(float(plain(atoms1, atoms2)) - _greedy_dmax(pos1, pos2)) < 1e-12
+
+
+def test_minima_hopping_repeats_for_one_seed(tmp_path: Path):
+    pytest.importorskip("ase")
+    from optbench.ase_global import materialize, run_start
+
+    archive = geometry_archive(
+        ROOT,
+        {"id": "globalopt/lj38", "input": {"archive_path": ARCHIVES["globalopt/lj38"]}},
+    )
+    cache = materialize(archive, tmp_path / "geo")
+    payload = {
+        "start": "100_lj38/0.con",
+        "path": str(cache / "100_lj38/0.con"),
+        "kind": "eon",
+        "method": "MinimaHopping",
+        "parameters": {"local_steps": 1000},
+        "potential": {"epsilon": 1.0, "sigma": 1.0, "rc": 40.0},
+        "seed": 0,
+        "cap": 20000,
+        "max_hops": 3,
+        "target": -173.927427,
+        "problem": "globalopt/lj38",
+        "template": "asebh/lj38-mh-default",
+        "tuning": "default",
+        "algorithm": "MinimaHopping",
+    }
+    first = run_start(payload)
+    second = run_start(payload)
+    assert first["failure"] != "crash"
+    assert first["hops"] == 3
+    assert first["force_calls"] == second["force_calls"]
+    assert first["lowest_energy"] == second["lowest_energy"]
+    assert first["counter"] == "harness"
