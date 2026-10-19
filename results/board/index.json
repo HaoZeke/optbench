@@ -41186,35 +41186,36 @@
       ],
       "profile": {
         "area_log10": {
-          "eon-client/ts-pt-dimer 3.5.0 campaign 4d8b34b": 0.9491660067364305,
-          "eon-client/ts-pt-lanczos 3.5.0 campaign 4d8b34b": 0.9123051909408411,
+          "eon-client/ts-pt-dimer 3.5.0 campaign 4d8b34b": 0.9430225374371657,
+          "eon-client/ts-pt-lanczos 3.5.0 campaign 4d8b34b": 0.906161721641576,
           "eon-client/ts-pt-lanczos-improved 3.5.0 campaign 4d8b34b": 1.0474615155246694,
           "eon-svn/ts-pt-dimer-smooth r2549 campaign r2549": 1.0474615155246694,
           "eon-svn/ts-pt-lanczos-improved r2549 campaign r2549": 1.0536049848239342,
           "eon-svn/ts-pt-lanczos-smooth r2549 campaign r2549": 0.9491660067364305,
+          "optim/hef-cd-ts-pt 27059 archive campaign 144a703": 1.0689636580720965,
           "partn/ts-pt 1.1.0 default campaign 9b75351": 0.5314100943864157,
           "rgsaddle/pt-dimer-fire 0.2.2 default campaign, asv c0db2b8": 0.0,
-          "rgsaddle/pt-dimer-fire-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.1382280592334608,
+          "rgsaddle/pt-dimer-fire-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.13208458993419586,
           "rgsaddle/pt-dimer-lbfgs 0.2.2 default campaign, asv c0db2b8": 0.06757816229191416,
-          "rgsaddle/pt-dimer-lbfgs-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.28874305706545134,
+          "rgsaddle/pt-dimer-lbfgs-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.28259958776618643,
           "rgsaddle/pt-dimer-rotskip 0.2.2 default campaign, asv c0db2b8": 0.9092334562912086,
-          "rgsaddle/pt-dimer-rotskip-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.7218576426636284,
+          "rgsaddle/pt-dimer-rotskip-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.7157141733643635,
           "rgsaddle/pt-lanczos 0.2.2 default campaign, asv c0db2b8": 0.1351563245838283,
-          "rgsaddle/pt-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.24266703732096445,
-          "sella/pt-island-ts-default 2.6.0 default campaign, asv 6cfb60c": 1.2041199826559248,
-          "tsase/dimer-pt 1.0 default campaign 98aac60": 0.15973020178088798
+          "rgsaddle/pt-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.23652356802169955,
+          "sella/pt-island-ts-default 2.6.0 default campaign, asv 6cfb60c": 1.191833044057395,
+          "tsase/dimer-pt 1.0 default campaign 98aac60": 0.15358673248162308
         },
         "rho": {
           "eon-client/ts-pt-dimer 3.5.0 campaign 4d8b34b": [
             0.0,
             0.6530612244897959,
-            1.0,
+            0.9795918367346939,
             1.0,
             1.0
           ],
           "eon-client/ts-pt-lanczos 3.5.0 campaign 4d8b34b": [
             0.0,
-            0.5510204081632653,
+            0.5306122448979592,
             0.9795918367346939,
             1.0,
             1.0
@@ -41247,6 +41248,13 @@
             1.0,
             1.0
           ],
+          "optim/hef-cd-ts-pt 27059 archive campaign 144a703": [
+            0.10204081632653061,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
           "partn/ts-pt 1.1.0 default campaign 9b75351": [
             0.0,
             0.02040816326530612,
@@ -41265,7 +41273,7 @@
             0.0,
             0.0,
             0.0,
-            0.04081632653061224,
+            0.02040816326530612,
             0.8367346938775511
           ],
           "rgsaddle/pt-dimer-lbfgs 0.2.2 default campaign, asv c0db2b8": [
@@ -41278,7 +41286,7 @@
           "rgsaddle/pt-dimer-lbfgs-tuned 0.2.2 tuned campaign, asv c0db2b8": [
             0.0,
             0.0,
-            0.061224489795918366,
+            0.04081632653061224,
             0.5918367346938775,
             0.6122448979591837
           ],
@@ -41291,7 +41299,7 @@
           ],
           "rgsaddle/pt-dimer-rotskip-tuned 0.2.2 tuned campaign, asv c0db2b8": [
             0.0,
-            0.20408163265306123,
+            0.1836734693877551,
             0.8367346938775511,
             0.8571428571428571,
             1.0
@@ -41306,12 +41314,12 @@
           "rgsaddle/pt-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": [
             0.0,
             0.0,
-            0.08163265306122448,
+            0.061224489795918366,
             0.46938775510204084,
             0.5102040816326531
           ],
           "sella/pt-island-ts-default 2.6.0 default campaign, asv 6cfb60c": [
-            1.0,
+            0.9183673469387755,
             1.0,
             1.0,
             1.0,
@@ -41321,7 +41329,7 @@
             0.0,
             0.0,
             0.0,
-            0.16326530612244897,
+            0.14285714285714285,
             0.7346938775510204
           ]
         },
@@ -41332,6 +41340,7 @@
           "eon-svn/ts-pt-dimer-smooth r2549 campaign r2549": 1.0,
           "eon-svn/ts-pt-lanczos-improved r2549 campaign r2549": 1.0,
           "eon-svn/ts-pt-lanczos-smooth r2549 campaign r2549": 1.0,
+          "optim/hef-cd-ts-pt 27059 archive campaign 144a703": 1.0,
           "partn/ts-pt 1.1.0 default campaign 9b75351": 0.9183673469387755,
           "rgsaddle/pt-dimer-fire 0.2.2 default campaign, asv c0db2b8": 0.9795918367346939,
           "rgsaddle/pt-dimer-fire-tuned 0.2.2 tuned campaign, asv c0db2b8": 1.0,
@@ -41395,6 +41404,51 @@
           "success_rate": 1.0,
           "template": "sella/pt-island-ts-default",
           "tuning": "default",
+          "wilson_high": 1.0,
+          "wilson_low": 0.9273021807795035
+        },
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": 10000,
+          "code": "optim",
+          "code_version": "27059",
+          "commit": "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348",
+          "comparable": true,
+          "counter": "harness",
+          "current": true,
+          "entry": "optim-27059-hef-cd-ts-pt",
+          "failures": {
+            "cap": 0,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 0
+          },
+          "full_n": 49,
+          "history": false,
+          "max_calls": 199.0,
+          "mean_calls": 90.04081632653062,
+          "mean_per_image": null,
+          "median": 86.0,
+          "median_calls": 86.0,
+          "median_high": 92.0,
+          "median_low": 84.0,
+          "median_per_image": null,
+          "min_calls": 52.0,
+          "n": 49,
+          "nfailed": 0,
+          "note": "starts.jsonl",
+          "par2_mean": 90.04081632653062,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/optim-27059-hef-cd-ts-pt.dat",
+          "problem": "tsopt/pt-island",
+          "registry_match": true,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 1.0,
+          "template": "optim/hef-cd-ts-pt",
+          "tuning": "archive",
           "wilson_high": 1.0,
           "wilson_low": 0.9273021807795035
         },
@@ -42122,7 +42176,7 @@
       "title": "pt-island"
     }
   },
-  "ranked_count": 439,
+  "ranked_count": 440,
   "schema": "optbench.board/v1",
   "unmapped": [
     {

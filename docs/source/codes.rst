@@ -1047,6 +1047,12 @@ The number is written only after the run finishes under the problem rule.
    <td>02aaf45245af</td>
    <td><a href="http://www-wales.ch.cam.ac.uk/svn.tar.bz2">http://www-wales.ch.cam.ac.uk/svn.tar.bz2</a></td>
    </tr>
+   <tr>
+   <td>saddle search</td>
+   <td>27059</td>
+   <td>144a703eef67</td>
+   <td><a href="https://optbench.org/codes/wales-27058.tar.bz2">https://optbench.org/codes/wales-27058.tar.bz2</a></td>
+   </tr>
    </tbody></table></div>
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
@@ -1072,6 +1078,17 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="median_calls">65</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 87</td>
    <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="tsopt/pt-island" data-template="optim/hef-cd-ts-pt">
+   <td>pt-island</td>
+   <td data-field="template">optim/hef-cd-ts-pt</td>
+   <td data-field="version">optim 27059</td>
+   <td data-field="commit">144a703eef67</td>
+   <td data-field="par2_mean">90.0408</td>
+   <td data-field="mean_calls">90.0408</td>
+   <td data-field="median_calls">86</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">49</td>
    </tr>
    </tbody></table></div>
    </section>

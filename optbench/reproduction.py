@@ -111,6 +111,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+    "repro/tsopt-pt-island-optim-cd": "0000000000000000000000000000000000000000",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -170,6 +171,7 @@ MATCHES: list[dict] = [
     {"key": "tsopt/pt-island/sella", "template": "sella/pt-island-ts-tuned", "branch": "main", "path": "results/campaign/sella-2.6.0-pt-island-ts-tuned.dat", "cause": "sella_trust"},
     {"key": "tsopt/pt-island/pele", "template": "pele/pt-island-ts-ffd", "branch": "cells/pele/ts-repro", "path": "results/campaign/pele-b7081b93-pt-island-ts-ffd.screen.jsonl", "kind": "screen"},
     {"key": "tsopt/pt-island/optim_ffd", "template": "optim/hef-ffd-ts-pt", "branch": "cells/optim/saddle-pt", "path": "results/campaign/optim-df8da599-hef-ffd-ts-pt.dat", "cause": "optim_pt_units"},
+    {"key": "tsopt/pt-island/optim_cd", "template": "optim/hef-cd-ts-pt", "branch": "repro/tsopt-pt-island-optim-cd", "path": "results/campaign/optim-27059-hef-cd-ts-pt.dat", "extra": {"unrounded_mean": 90.04081632653062}},
     # double-ended
     {"key": "double-ended-saddle-search/lj38/eon-ci-neb", "template": "eon-svn/de-lj38-ci-neb", "branch": "main", "path": "results/campaign/eon-svn-de-lj38-ci-neb.dat"},
     {"key": "double-ended-saddle-search/lj38/eon-ci-swdneb", "template": "eon-3.5.0/de-lj38-ci-swdneb", "branch": "main", "path": "results/campaign/eon-3.5.0-de-lj38-ci-swdneb.dat", "cause": "de_exclusion", "hold": ["eon-client/de-lj38-ci-swdneb"]},
@@ -809,6 +811,8 @@ def render_markdown(rows: list[dict]) -> str:
         "The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.",
         "",
         "OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.",
+        "",
+        "OPTIM Pt-island central differences: the archived integer is 90 and the unrounded mean of OPTIM energy+gradient calls is 90.04081632653062.",
         "",
         "EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.",
         "",

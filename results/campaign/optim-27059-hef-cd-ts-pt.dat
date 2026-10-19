@@ -1,0 +1,18 @@
+# OPTIM version 27059, wales-27058.tar.bz2. Native periodic Morse, USEDIAG 2, BFGSTS 30 11 30 0.063 100.
+# The count is OPTIM's energy+gradient calls, the 2014 paper counter. A start is kept when the log contains CONVERGED.
+force_calls 90
+force_calls_min 52
+force_calls_max 199
+force_calls_median 86
+successes 49
+nfailed 0
+n 49
+transition_states 0
+code optim
+code_version 27059
+commit 144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348
+algorithm hybrid eigenvector following
+template optim/hef-cd-ts-pt
+problem tsopt/pt-island
+tuning archive
+counter harness

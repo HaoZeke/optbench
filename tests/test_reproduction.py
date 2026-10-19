@@ -35,8 +35,31 @@ def test_the_ledger_covers_the_oracle_in_order():
             assert row["cause"]
         if (row.get("rerun") or {}).get("paper_baseline"):
             assert status == "reproduced"
-    assert counts == {"reproduced": 46, "not_reproduced": 29, "not_rerun": 76}
+    assert counts == {"reproduced": 47, "not_reproduced": 29, "not_rerun": 75}
     assert reproduction_errors(ROOT) == []
+
+
+def test_pt_island_optim_cd_matches_the_archive():
+    ledger = {row_id(row): row for row in load_ledger(ROOT / "oracle" / "reproduction.jsonl")}
+    row = ledger["tsopt/pt-island/optim_cd"]
+    assert row["status"] == "reproduced"
+    assert row["in_paper"] is False
+    check = row["checks"][0]
+    assert check["metric"] == "force_calls"
+    assert check["archive"] == 90
+    assert check["rerun"] == 90
+    assert check["ok"] is True
+    assert row["failure_check"]["rerun"] == 0
+    assert row["failure_check"]["ok"] is True
+    assert row["rerun"]["paper_baseline"] is True
+    assert row["rerun"]["template"] == "optim/hef-cd-ts-pt"
+    assert row["rerun"]["unrounded_mean"] == 90.04081632653062
+    text = (ROOT / row["rerun"]["path"]).read_text(encoding="utf-8")
+    assert "force_calls 90\n" in text
+    assert "force_calls_median 86\n" in text
+    assert "force_calls_min 52\n" in text
+    assert "force_calls_max 199\n" in text
+    assert "nfailed 0\n" in text
 
 
 def test_pele_paper_baseline_is_the_2014_stop():

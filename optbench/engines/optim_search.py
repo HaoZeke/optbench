@@ -6,8 +6,9 @@ that file. The snapshot has no git commit. Each ``COMPUTE`` on the relay
 is one ``pes.evaluate``. OPTIM's own counter is not the score.
 
 ``optim/unhooked`` and every template that is not minimization L-BFGS
-raise before a file is written. Noise, saddle search, NEB, and PATHSAMPLE
-are not this runner.
+or the Pt-island central-difference search raise before a file is written.
+Noise, NEB, and PATHSAMPLE are not this runner. The central-difference
+search is ``optim_cd`` and uses OPTIM's own energy+gradient counter.
 """
 
 from __future__ import annotations
@@ -281,9 +282,6 @@ def _job(start: dict, settings: dict, template: dict) -> dict:
 
 
 def run(root: Path, problem_name: str, template_name: str, *, output: Path, workers: int = 1) -> dict:
-    reason = available()
-    if reason:
-        raise RuntimeError(reason)
     root = Path(root)
     from optbench.campaign import load_template, resolve_problem
 
@@ -291,12 +289,21 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
 
     problem = resolve_problem(root, problem_name)
     template = load_template(root, template_name)
-    require_pin(template, registry_pin(root, CODE))
+    code_id = str(template.get("code") or CODE)
+    require_pin(template, registry_pin(root, code_id))
     if template["engine"] != ENGINE:
         raise ValueError(f"{template_name} engine is {template['engine']}")
     stated = template.get("problem")
     if stated and stated != problem_name:
         raise ValueError(f"{template_name} belongs to {stated}")
+    method = str((template.get("optim") or {}).get("method", ""))
+    if method == "hef-cd":
+        from .optim_cd import run_hef_cd
+
+        return run_hef_cd(root, problem, template, output, workers)
+    reason = available()
+    if reason:
+        raise RuntimeError(reason)
     section = _section(template)
     if problem.get("suite") != "minimization" or section["method"] != "lbfgs":
         raise _unhooked(template_name)

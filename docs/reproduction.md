@@ -2,11 +2,13 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+47 reproduced, 29 not reproduced, 75 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
 OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.
+
+OPTIM Pt-island central differences: the archived integer is 90 and the unrounded mean of OPTIM energy+gradient calls is 90.04081632653062.
 
 EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.
 
@@ -210,7 +212,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | pt-island/eon-dimer | force_calls 116 | 115 | reproduced |
 | pt-island/eon-lanczos | force_calls 143 | 146 | reproduced |
 | pt-island/eon-lanczos-improved | force_calls 106 | 106 | reproduced |
-| pt-island/optim_cd | — | — | not rerun |
+| pt-island/optim_cd | force_calls 90 | 90 | reproduced |
 | pt-island/optim_ffd | force_calls 71 | 170 | not reproduced; optim_pt_units |
 | pt-island/pele | force_calls 88 | 88.551 | reproduced |
 | pt-island/sella | force_calls 53 | 88 | not reproduced; sella_trust |
