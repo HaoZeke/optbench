@@ -1,0 +1,29 @@
+id = "gman/neb-pt-cg"
+engine = "gman"
+problem = "neb/Pt-heptamer"
+code = "Gman"
+code_version = "r235"
+commit = "r235"
+algorithm = "cg"
+failure_cap = 10000
+paper_baseline = true
+tuning = "archive"
+note = "Archived opt.py builds Gopt.cg with maxmove 0.2 and dR 0.0001, then relaxes a climbing-image NEB: 8 images, spring 5, tangent new, fmax 0.01, converge Fmag, fsaddle off, itrmax 1000. The Morse force is the r235 Fortran routine (U0 0.7102, alpha 1.6047, r0 2.897, rc 9.5). force_calls is the truncated mean of pot.count()/8. PAR-2 ranks pot.count(), Gman's native counter, labelled harness. The archived script writes algorithm lbfgs for every Gman optimizer; the optimizer that runs is conjugate gradient."
+
+[stop]
+force_norm = 0.01
+
+[gman]
+optimizer = "cg"
+d_r = 0.0001
+maxmove = 0.2
+images = 8
+spring = 5.0
+tangent = "new"
+itrmax = 1000
+ppd = 1
+fmax = 0.01
+fsaddle = "off"
+method = "ci"
+converge = "Fmag"
+potential = "morse"
