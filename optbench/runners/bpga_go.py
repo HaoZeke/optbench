@@ -856,7 +856,34 @@ def _target(problem: dict, reference: float | None) -> float | None:
     return float(reference) + float(convergence["energy_above_minimum"])
 
 
+def _stated_cap(problem: dict) -> int | None:
+    stated = (problem.get("convergence") or {}).get("max_force_calls")
+    if stated in (None, ""):
+        return None
+    return int(stated)
+
+
+def _runtime_cap(problem: dict, template: dict) -> int:
+    """Stop at the scheduled budget, and earlier when the problem cap is lower."""
+    cap = int(template["failure_cap"])
+    stated = _stated_cap(problem)
+    if stated is not None:
+        cap = min(cap, stated)
+    return cap
+
+
+def _score_cap(problem: dict, template: dict) -> int:
+    """PAR-2 uses the cap the problem states. The schedule fills that gap."""
+    stated = _stated_cap(problem)
+    if stated is not None:
+        return stated
+    return int(template["failure_cap"])
+
+
 def _reference_for(problem: dict) -> float | None:
+    reference = problem.get("reference") or {}
+    if reference.get("energy") not in (None, ""):
+        return float(reference["energy"])
     convergence = problem.get("convergence") or {}
     for key in ("reference_energy", "minimum_energy", "energy_minimum", "known_minimum"):
         if key in convergence:
@@ -946,7 +973,8 @@ def _manifest_archive(root: Path, archive_path: str) -> Path:
 def _job_from_template(template: dict, problem: dict, item: tuple[int, str, np.ndarray], reference: float | None, paths: dict) -> dict:
     section = _section(template)
     method = str(section["method"])
-    cap = int(template["failure_cap"])
+    schedule = int(template["failure_cap"])
+    cap = _runtime_cap(problem, template)
     quench_force = float(section.get("quench_force", QUENCH_FORCE))
     quench_maxfun = int(section.get("quench_maxfun", QUENCH_MAXFUN))
     seed_base = int(section.get("seed", 20261015))
@@ -989,12 +1017,12 @@ def _job_from_template(template: dict, problem: dict, item: tuple[int, str, np.n
     }
     if method == "pybcga":
         scheduled = scheduled_pybcga_cap(job["pop_size"], job["max_generation"], job["offspring"], job["quench_maxfun"])
-        if cap > scheduled:
-            raise ValueError(f"{template['id']} failure_cap {cap} exceeds the generation budget {scheduled}")
+        if schedule > scheduled:
+            raise ValueError(f"{template['id']} failure_cap {schedule} exceeds the generation budget {scheduled}")
     elif method == "pool":
         scheduled = scheduled_pool_cap(job["n_pool"], job["iterations"], job["quench_maxfun"])
-        if cap != scheduled:
-            raise ValueError(f"{template['id']} failure_cap {cap} is not the pool budget {scheduled}")
+        if schedule != scheduled:
+            raise ValueError(f"{template['id']} failure_cap {schedule} is not the pool budget {scheduled}")
     else:
         raise ValueError(f"{template['id']} method {method} is not pybcga or pool")
     return job
@@ -1023,7 +1051,7 @@ def _dat(summary: dict, template: dict, metrics: dict, commit: str, version: str
         "problem": template.get("problem"),
         "tuning": template.get("tuning", ""),
         "counter": "harness",
-        "cap": template.get("failure_cap"),
+        "cap": metrics.get("cap"),
         "par2_mean": metrics.get("par2_mean"),
         "wilson_low": metrics.get("wilson_low"),
         "wilson_high": metrics.get("wilson_high"),
@@ -1132,7 +1160,7 @@ def run_template(
 
 
 def _write_result(output: Path, template: dict, problem: dict, records: list[dict], reference: float | None, partial: bool) -> dict:
-    cap = int(template["failure_cap"])
+    cap = _score_cap(problem, template)
     legacy_counts = [cap if not row["success"] else int(row["force_calls"]) for row in records]
     summary = summarize_capped(legacy_counts, cap)
     successes = [int(row["force_calls"]) for row in records if row["success"]]

@@ -7,7 +7,7 @@ commit = "fb646c19b1829656bf16cc72ca318bef2d37bfeb"
 algorithm = "BCGA"
 tuning = "tuned"
 failure_cap = 530000
-note = "Lennard-Jones batch example. remove_duplicates is true and the generation limit is 20. Population, offspring, and mutation probability stay at the library default. The force cap is that quench budget extended to 20 generations. globalopt/lj75 states no energy window on this commit, so a finished search is not a success and the row is partial. The energy and the calls are the search record."
+note = "Lennard-Jones batch example. remove_duplicates is true and the generation limit is 20. Population, offspring, and mutation probability stay at the library default. The force cap is that quench budget extended to 20 generations. Success is the Cambridge N=75 minimum plus 0.001. The problem force cap is 1000000."
 
 [bpga]
 method = "pybcga"

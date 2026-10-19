@@ -7,7 +7,7 @@ commit = "b32cd227e8071429825f990449048eb21c7f8730"
 algorithm = "pool GA"
 tuning = "default"
 failure_cap = 1010000
-note = "Default pool. nPool is 10, the offspring loop is 1000 steps, the mutation probability is 0.1, the mutation is random, and the crossover is weighted. r_ij is 3.0 and boxAdd is 10, the values in Examples/Run.py. The first pool member is the quenched archived geometry. Later members and operators are the code's own draws. minMut and Select call random.seed() with no argument, so those draws follow the system time. The local quench stops at Euclidean force 0.001 or 1000 evaluations, the archived eon basin-hopping settings on this potential. The force cap is one quench budget for every scheduled structure. globalopt/lj75 states no energy window on this commit, so a finished search is not a success and the row is partial. The energy and the calls are the search record."
+note = "Default pool. nPool is 10, the offspring loop is 1000 steps, the mutation probability is 0.1, the mutation is random, and the crossover is weighted. r_ij is 3.0 and boxAdd is 10, the values in Examples/Run.py. The first pool member is the quenched archived geometry. Later members and operators are the code's own draws. minMut and Select call random.seed() with no argument, so those draws follow the system time. The local quench stops at Euclidean force 0.001 or 1000 evaluations, the archived eon basin-hopping settings on this potential. The scheduled budget is one quench for every pool member and iteration. Success is the Cambridge N=75 minimum plus 0.001. The search stops at the problem force cap of 1000000."
 
 [bpga]
 method = "pool"

@@ -51,17 +51,20 @@ def _specs() -> list[dict]:
             continue
         sample = 1
         problem_id = str(template["problem"])
-        if os.environ.get("OPTBENCH_ASV_FULL") == "1":
-            from optbench.campaign import resolve_problem
+        from optbench.campaign import resolve_problem
 
-            stated = (resolve_problem(ROOT, problem_id).get("sample") or {}).get("starts")
-            sample = int(stated) if stated not in (None, "", 0, "0") else 1
+        problem = resolve_problem(ROOT, problem_id)
+        if os.environ.get("OPTBENCH_ASV_FULL") == "1":
+            stated_n = (problem.get("sample") or {}).get("starts")
+            sample = int(stated_n) if stated_n not in (None, "", 0, "0") else 1
+        stated_cap = (problem.get("convergence") or {}).get("max_force_calls")
+        cap = int(stated_cap) if stated_cap not in (None, "") else int(template["failure_cap"])
         found.append(
             {
                 "class_name": _class_name(str(template["id"])),
                 "template_id": str(template["id"]),
                 "problem_id": problem_id,
-                "cap": int(template["failure_cap"]),
+                "cap": cap,
                 "n": sample,
             }
         )

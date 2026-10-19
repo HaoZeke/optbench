@@ -46,7 +46,11 @@ def test_templates_use_the_scheduled_budgets():
             continue
         found.append(template["id"])
         problem = resolve_problem(ROOT, template["problem"])
-        assert _check_stop(problem, template) == int(template["failure_cap"])
+        stated = (problem.get("convergence") or {}).get("max_force_calls")
+        if stated in (None, ""):
+            assert _check_stop(problem, template) == int(template["failure_cap"])
+        else:
+            assert _check_stop(problem, template) == int(stated)
         section = template["bpga"]
         if section["method"] == "pybcga":
             scheduled = scheduled_pybcga_cap(

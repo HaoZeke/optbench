@@ -183,6 +183,14 @@ commit = "fb646c19b1829656bf16cc72ca318bef2d37bfeb"
 committed = "2016-02-26"
 note = "Birmingham cluster genetic algorithm, setup.py version 0, commit fb646c19. Each local relaxation is L-BFGS-B on the harness Lennard-Jones potential. Pele's Lennard-Jones is not called."
 
+[[template]]
+id = "ase-globalopt/lj75-basinhopping"
+code = "ase"
+problem = "globalopt/lj75"
+profile = "default"
+task = "basin-hopping"
+ranked = true
+
 # generated ASE and Sella templates
 
 [[template]]

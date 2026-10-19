@@ -7,7 +7,7 @@ commit = "b32cd227e8071429825f990449048eb21c7f8730"
 algorithm = "pool GA"
 tuning = "tuned"
 failure_cap = 1010000
-note = "Tuned pool. The loop, the pool size, and the force cap match the default. The mutation is move, which displaces 20 percent of the atoms by up to 1, and r_ij is 2**(1/6), the Lennard-Jones nearest-neighbour distance. random and r_ij 3.0 are the metal-example settings. globalopt/lj75 states no energy window on this commit, so a finished search is not a success and the row is partial. The energy and the calls are the search record."
+note = "Tuned pool. The loop, the pool size, and the force cap match the default. The mutation is move, which displaces 20 percent of the atoms by up to 1, and r_ij is 2**(1/6), the Lennard-Jones nearest-neighbour distance. random and r_ij 3.0 are the metal-example settings. Success is the Cambridge N=75 minimum plus 0.001. The search stops at the problem force cap of 1000000."
 
 [bpga]
 method = "pool"
