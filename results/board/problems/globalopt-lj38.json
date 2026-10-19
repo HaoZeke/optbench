@@ -50,6 +50,76 @@
       "wilson_low": 0.9500079920442688
     }
   ],
-  "ranked": [],
+  "profile": {
+    "area_log10": {
+      "ogolem/lj38 2016.CURRENT default campaign cce35a3": 1.2041199826559248
+    },
+    "rho": {
+      "ogolem/lj38 2016.CURRENT default campaign cce35a3": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "solved": {
+      "ogolem/lj38 2016.CURRENT default campaign cce35a3": 1.0
+    },
+    "taus": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ]
+  },
+  "ranked": [
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 5000000,
+      "code": "ogolem",
+      "code_version": "2016.CURRENT",
+      "commit": "cce35a376d929852ab1e80e98105c0d13d784b8d",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "ogolem-cce35a37-lj38",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 100,
+      "history": false,
+      "max_calls": 4926401.0,
+      "mean_calls": 1261457.19,
+      "mean_per_image": null,
+      "median": 1098157.5,
+      "median_calls": 1098157.5,
+      "median_high": 1341466.5,
+      "median_low": 779742.45,
+      "median_per_image": null,
+      "min_calls": 1742.0,
+      "n": 100,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 1261457.19,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/ogolem-cce35a37-lj38.dat",
+      "problem": "globalopt/lj38",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "ogolem/lj38",
+      "tuning": "default",
+      "wilson_high": 1.0,
+      "wilson_low": 0.9630065017930143
+    }
+  ],
   "title": "Lennard-Jones 38 global minimum"
 }
