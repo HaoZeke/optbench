@@ -1,0 +1,1974 @@
+{
+  "svn_ref": "origin/entries/eon-svn-fortran",
+  "asv": "results/asv/cursor/06efc6dd-existing-py_workspace_.venv_bin_python.json",
+  "pairs": [
+    {
+      "template": "eon/develop-ts-lj38-dimer",
+      "svn_template": "eon-svn/ts-lj38-dimer",
+      "develop_par2": 4805.81,
+      "develop_cap": 10000,
+      "develop_score": {
+        "par2_mean": 4805.81,
+        "successes": 170,
+        "nfailed": 30,
+        "success_only_mean": 2124.4823529411765,
+        "median": 1136.5,
+        "n_cap": 28,
+        "n_divergence": 2,
+        "n_crash": 0,
+        "n_wrong_stationary": 0,
+        "cap": 10000,
+        "n": 200
+      },
+      "develop_par2_at_previous_cap": null,
+      "previous_cap_score": null,
+      "svn_par2": 644.135,
+      "svn_cap": 10000,
+      "svn_score": {
+        "par2_mean": 644.135,
+        "successes": 199,
+        "nfailed": 1,
+        "success_only_mean": 546.8693467336683,
+        "median": 360.5,
+        "n_cap": 0,
+        "n_divergence": 1,
+        "n_crash": 0,
+        "n_wrong_stationary": 0,
+        "cap": 10000,
+        "n": 200
+      },
+      "svn_dat_par2": 644.135,
+      "svn_dat_n": 400,
+      "svn_replicate": "svn-all",
+      "svn_replicates_identical_force_calls": {
+        "svn-all": true,
+        "fortran": true
+      },
+      "config": {
+        "develop_failure_cap": 10000,
+        "svn_failure_cap": 10000,
+        "only_develop": [
+          {
+            "key": "LBFGS.lbfgs_accept",
+            "develop": "energy"
+          },
+          {
+            "key": "LBFGS.lbfgs_angle_reset",
+            "develop": true
+          },
+          {
+            "key": "LBFGS.lbfgs_auto_scale",
+            "develop": true
+          },
+          {
+            "key": "LBFGS.lbfgs_cautious_alpha",
+            "develop": 0.01
+          },
+          {
+            "key": "LBFGS.lbfgs_cautious_eps",
+            "develop": 1e-06
+          },
+          {
+            "key": "LBFGS.lbfgs_curvature",
+            "develop": "reset"
+          },
+          {
+            "key": "LBFGS.lbfgs_distance_reset",
+            "develop": true
+          },
+          {
+            "key": "LBFGS.lbfgs_extra_updates",
+            "develop": 0
+          },
+          {
+            "key": "LBFGS.lbfgs_h0",
+            "develop": "sy_yy"
+          },
+          {
+            "key": "LBFGS.lbfgs_inverse_curvature",
+            "develop": 0.01
+          },
+          {
+            "key": "LBFGS.lbfgs_max_inverse_curvature",
+            "develop": 0.0
+          },
+          {
+            "key": "LBFGS.lbfgs_memory",
+            "develop": 20
+          },
+          {
+            "key": "LBFGS.lbfgs_precon",
+            "develop": "none"
+          },
+          {
+            "key": "LBFGS.lbfgs_precon_A",
+            "develop": 3.0
+          },
+          {
+            "key": "LBFGS.lbfgs_precon_mu",
+            "develop": 1.0
+          },
+          {
+            "key": "LBFGS.lbfgs_precon_rcut",
+            "develop": 0.0
+          },
+          {
+            "key": "LBFGS.lbfgs_project_rigid",
+            "develop": false
+          },
+          {
+            "key": "LBFGS.lbfgs_secant",
+            "develop": "standard"
+          },
+          {
+            "key": "LBFGS.lbfgs_step",
+            "develop": "lbfgs"
+          }
+        ],
+        "only_svn": [
+          {
+            "key": "Optimizer.lbfgs_angle_reset",
+            "svn": true
+          },
+          {
+            "key": "Optimizer.lbfgs_auto_scale",
+            "svn": true
+          },
+          {
+            "key": "Optimizer.lbfgs_distance_reset",
+            "svn": true
+          },
+          {
+            "key": "Optimizer.lbfgs_inverse_curvature",
+            "svn": 0.01
+          },
+          {
+            "key": "Optimizer.lbfgs_max_inverse_curvature",
+            "svn": 0.0
+          },
+          {
+            "key": "Optimizer.lbfgs_memory",
+            "svn": 20
+          }
+        ],
+        "changed": [],
+        "lbfgs_catalog_versus_header_defaults": [
+          {
+            "key": "lbfgs_memory",
+            "develop": 20,
+            "header_default": 20,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_inverse_curvature",
+            "develop": 0.01,
+            "header_default": 0.01,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_max_inverse_curvature",
+            "develop": 0.0,
+            "header_default": 0.0,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_auto_scale",
+            "develop": true,
+            "header_default": true,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_angle_reset",
+            "develop": true,
+            "header_default": true,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_distance_reset",
+            "develop": true,
+            "header_default": true,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_curvature",
+            "develop": "reset",
+            "header_default": "reset",
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_project_rigid",
+            "develop": false,
+            "header_default": false,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_secant",
+            "develop": "standard",
+            "header_default": "standard",
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_precon",
+            "develop": "none",
+            "header_default": "none",
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_step",
+            "develop": "lbfgs",
+            "header_default": "lbfgs",
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_h0",
+            "develop": "sy_yy",
+            "header_default": "sy_yy",
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_accept",
+            "develop": "energy",
+            "header_default": "none",
+            "equals_default": false
+          },
+          {
+            "key": "lbfgs_extra_updates",
+            "develop": 0,
+            "header_default": 0,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_cautious_eps",
+            "develop": 1e-06,
+            "header_default": 1e-06,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_cautious_alpha",
+            "develop": 0.01,
+            "header_default": 0.01,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_precon_A",
+            "develop": 3.0,
+            "header_default": 3.0,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_precon_mu",
+            "develop": 1.0,
+            "header_default": 1.0,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_precon_rcut",
+            "develop": 0.0,
+            "header_default": 0.0,
+            "equals_default": true
+          }
+        ]
+      },
+      "counting": {
+        "starts": 200,
+        "client_known": 200,
+        "harness_equals_client": 0,
+        "cache_known": 200,
+        "cache_equals_asv_harness": 200,
+        "svn_success_develop_harness_fail": 29,
+        "develop_harness_success_svn_fail": 0,
+        "both_harness_success_ratio_develop_over_svn": {
+          "n": 170,
+          "median": 1.442928735899073,
+          "min": 0.8191365227537923,
+          "max": 69.96153846153847
+        }
+      },
+      "first_start": {
+        "start": "0000",
+        "develop_harness": 4265.0,
+        "develop_client": 3443,
+        "develop_cache_seconds": 8.039622176000194,
+        "svn_harness": 286.0,
+        "svn_client": 286,
+        "svn_seconds": 0.8530742250000003
+      },
+      "matched_svn_ini": {
+        "name": "ts-lj38-dimer",
+        "develop_template": "eon/develop-ts-lj38-dimer",
+        "svn_template": "eon-svn/ts-lj38-dimer",
+        "kind": "ts-lj38",
+        "seed": 1,
+        "start": "0000",
+        "eon_commit": "7095b23ac17d49f434a5e08ccb072897ceca698e",
+        "probe_cap": 100000,
+        "potential": "ljcluster",
+        "counter": "harness",
+        "force_calls": 300.0,
+        "verify_calls": 0,
+        "client_calls": 300,
+        "client_reason": "0",
+        "extrema": null,
+        "seconds": 0.7866803270007949
+      },
+      "ablation": [
+        {
+          "label": "develop-template",
+          "start": "0000",
+          "force_calls": 4265.0,
+          "client_calls": 4265,
+          "client_reason": "0",
+          "seconds": 8.367102787015028
+        },
+        {
+          "label": "svn-ini",
+          "start": "0000",
+          "force_calls": 300.0,
+          "client_calls": 300,
+          "client_reason": "0",
+          "seconds": 0.8064056470175274
+        },
+        {
+          "label": "svn-plus-full-lbfgs-section",
+          "start": "0000",
+          "force_calls": 4265.0,
+          "client_calls": 4265,
+          "client_reason": "0",
+          "seconds": 8.586709766997956
+        },
+        {
+          "label": "svn-plus-classic-lbfgs-section",
+          "start": "0000",
+          "force_calls": 300.0,
+          "client_calls": 300,
+          "client_reason": "0",
+          "seconds": 0.782766771997558
+        },
+        {
+          "label": "svn-plus-lbfgs_curvature",
+          "start": "0000",
+          "force_calls": 300.0,
+          "client_calls": 300,
+          "client_reason": "0",
+          "seconds": 0.7914877090079244
+        },
+        {
+          "label": "svn-plus-lbfgs_project_rigid",
+          "start": "0000",
+          "force_calls": 300.0,
+          "client_calls": 300,
+          "client_reason": "0",
+          "seconds": 0.7884499990032054
+        },
+        {
+          "label": "svn-plus-lbfgs_secant",
+          "start": "0000",
+          "force_calls": 300.0,
+          "client_calls": 300,
+          "client_reason": "0",
+          "seconds": 0.7983467479934916
+        },
+        {
+          "label": "svn-plus-lbfgs_precon",
+          "start": "0000",
+          "force_calls": 300.0,
+          "client_calls": 300,
+          "client_reason": "0",
+          "seconds": 0.7984626719844528
+        },
+        {
+          "label": "svn-plus-lbfgs_step",
+          "start": "0000",
+          "force_calls": 300.0,
+          "client_calls": 300,
+          "client_reason": "0",
+          "seconds": 0.8040284860180691
+        },
+        {
+          "label": "svn-plus-lbfgs_h0",
+          "start": "0000",
+          "force_calls": 300.0,
+          "client_calls": 300,
+          "client_reason": "0",
+          "seconds": 0.8012499159958679
+        },
+        {
+          "label": "svn-plus-lbfgs_accept",
+          "start": "0000",
+          "force_calls": 4265.0,
+          "client_calls": 4265,
+          "client_reason": "0",
+          "seconds": 8.511821401014458
+        },
+        {
+          "label": "svn-plus-lbfgs_extra_updates",
+          "start": "0000",
+          "force_calls": 300.0,
+          "client_calls": 300,
+          "client_reason": "0",
+          "seconds": 0.7870841280091554
+        },
+        {
+          "label": "svn-plus-lbfgs_cautious_eps",
+          "start": "0000",
+          "force_calls": 300.0,
+          "client_calls": 300,
+          "client_reason": "0",
+          "seconds": 0.8191302330233157
+        },
+        {
+          "label": "svn-plus-lbfgs_cautious_alpha",
+          "start": "0000",
+          "force_calls": 300.0,
+          "client_calls": 300,
+          "client_reason": "0",
+          "seconds": 0.7813992729934398
+        },
+        {
+          "label": "svn-plus-lbfgs_precon_A",
+          "start": "0000",
+          "force_calls": 300.0,
+          "client_calls": 300,
+          "client_reason": "0",
+          "seconds": 0.7825777289981488
+        },
+        {
+          "label": "svn-plus-lbfgs_precon_mu",
+          "start": "0000",
+          "force_calls": 300.0,
+          "client_calls": 300,
+          "client_reason": "0",
+          "seconds": 0.7825936140143313
+        },
+        {
+          "label": "svn-plus-lbfgs_precon_rcut",
+          "start": "0000",
+          "force_calls": 300.0,
+          "client_calls": 300,
+          "client_reason": "0",
+          "seconds": 0.8118351600132883
+        }
+      ],
+      "confirm": [
+        {
+          "label": "svn-ini",
+          "start": "0001",
+          "force_calls": 184.0,
+          "client_calls": 184,
+          "client_reason": "0",
+          "seconds": 0.5871169969905168
+        },
+        {
+          "label": "svn-plus-accept",
+          "start": "0001",
+          "force_calls": 862.0,
+          "client_calls": 862,
+          "client_reason": "0",
+          "seconds": 1.860327848000452
+        }
+      ],
+      "reruns": [
+        {
+          "start": "0000",
+          "develop_harness": 4265.0,
+          "develop_client": 3443,
+          "svn_harness": 286.0,
+          "svn_client": 286,
+          "svn_ini": 300.0,
+          "svn_ini_client": 300,
+          "develop_template_rerun": 4265.0,
+          "accept_energy": 4265.0
+        },
+        {
+          "start": "0001",
+          "develop_harness": 862.0,
+          "develop_client": 345,
+          "svn_harness": 145.0,
+          "svn_client": 145,
+          "svn_ini": 184.0,
+          "accept_energy": 862.0
+        }
+      ],
+      "verdict": "config mismatch"
+    },
+    {
+      "template": "eon/develop-ts-lj38-lanczos",
+      "svn_template": "eon-svn/ts-lj38-lanczos",
+      "develop_par2": 3144.555,
+      "develop_cap": 10000,
+      "develop_score": {
+        "par2_mean": 3144.555,
+        "successes": 173,
+        "nfailed": 27,
+        "success_only_mean": 513.9364161849711,
+        "median": 454.5,
+        "n_cap": 0,
+        "n_divergence": 27,
+        "n_crash": 0,
+        "n_wrong_stationary": 0,
+        "cap": 10000,
+        "n": 200
+      },
+      "develop_par2_at_previous_cap": null,
+      "previous_cap_score": null,
+      "svn_par2": 2974.825,
+      "svn_cap": 10000,
+      "svn_score": {
+        "par2_mean": 2974.825,
+        "successes": 175,
+        "nfailed": 25,
+        "success_only_mean": 542.6571428571428,
+        "median": 454.5,
+        "n_cap": 0,
+        "n_divergence": 25,
+        "n_crash": 0,
+        "n_wrong_stationary": 0,
+        "cap": 10000,
+        "n": 200
+      },
+      "svn_dat_par2": 2974.6875,
+      "svn_dat_n": 400,
+      "svn_replicate": "svn-all",
+      "svn_replicates_identical_force_calls": {
+        "svn-all": true,
+        "fortran": false
+      },
+      "config": {
+        "develop_failure_cap": 10000,
+        "svn_failure_cap": 10000,
+        "only_develop": [],
+        "only_svn": [],
+        "changed": [],
+        "lbfgs_catalog_versus_header_defaults": []
+      },
+      "counting": {
+        "starts": 200,
+        "client_known": 200,
+        "harness_equals_client": 200,
+        "cache_known": 200,
+        "cache_equals_asv_harness": 200,
+        "svn_success_develop_harness_fail": 2,
+        "develop_harness_success_svn_fail": 0,
+        "both_harness_success_ratio_develop_over_svn": {
+          "n": 173,
+          "median": 1.0,
+          "min": 0.7924528301886793,
+          "max": 1.0167810831426392
+        }
+      },
+      "first_start": {
+        "start": "0000",
+        "develop_harness": 1038.0,
+        "develop_client": 1038,
+        "develop_cache_seconds": 2.2285341140004675,
+        "svn_harness": 1038.0,
+        "svn_client": 1038,
+        "svn_seconds": 2.2541801140000643
+      },
+      "matched_svn_ini": null,
+      "ablation": null,
+      "confirm": [],
+      "reruns": [],
+      "verdict": "not a regression"
+    },
+    {
+      "template": "eon/develop-ts-pt-dimer",
+      "svn_template": "eon-svn/ts-pt-dimer",
+      "develop_par2": 1657.8775510204082,
+      "develop_cap": 10000,
+      "develop_score": {
+        "par2_mean": 1657.8775510204082,
+        "successes": 49,
+        "nfailed": 0,
+        "success_only_mean": 1657.8775510204082,
+        "median": 575.0,
+        "n_cap": 0,
+        "n_divergence": 0,
+        "n_crash": 0,
+        "n_wrong_stationary": 0,
+        "cap": 10000,
+        "n": 49
+      },
+      "develop_par2_at_previous_cap": null,
+      "previous_cap_score": null,
+      "svn_par2": 116.06122448979592,
+      "svn_cap": 10000,
+      "svn_score": {
+        "par2_mean": 116.06122448979592,
+        "successes": 49,
+        "nfailed": 0,
+        "success_only_mean": 116.06122448979592,
+        "median": 114.0,
+        "n_cap": 0,
+        "n_divergence": 0,
+        "n_crash": 0,
+        "n_wrong_stationary": 0,
+        "cap": 10000,
+        "n": 49
+      },
+      "svn_dat_par2": 116.06122448979592,
+      "svn_dat_n": 98,
+      "svn_replicate": "svn-all",
+      "svn_replicates_identical_force_calls": {
+        "svn-all": true,
+        "fortran": true
+      },
+      "config": {
+        "develop_failure_cap": 10000,
+        "svn_failure_cap": 10000,
+        "only_develop": [
+          {
+            "key": "LBFGS.lbfgs_accept",
+            "develop": "energy"
+          },
+          {
+            "key": "LBFGS.lbfgs_angle_reset",
+            "develop": true
+          },
+          {
+            "key": "LBFGS.lbfgs_auto_scale",
+            "develop": true
+          },
+          {
+            "key": "LBFGS.lbfgs_cautious_alpha",
+            "develop": 0.01
+          },
+          {
+            "key": "LBFGS.lbfgs_cautious_eps",
+            "develop": 1e-06
+          },
+          {
+            "key": "LBFGS.lbfgs_curvature",
+            "develop": "reset"
+          },
+          {
+            "key": "LBFGS.lbfgs_distance_reset",
+            "develop": true
+          },
+          {
+            "key": "LBFGS.lbfgs_extra_updates",
+            "develop": 0
+          },
+          {
+            "key": "LBFGS.lbfgs_h0",
+            "develop": "sy_yy"
+          },
+          {
+            "key": "LBFGS.lbfgs_inverse_curvature",
+            "develop": 0.01
+          },
+          {
+            "key": "LBFGS.lbfgs_max_inverse_curvature",
+            "develop": 0.0
+          },
+          {
+            "key": "LBFGS.lbfgs_memory",
+            "develop": 20
+          },
+          {
+            "key": "LBFGS.lbfgs_precon",
+            "develop": "none"
+          },
+          {
+            "key": "LBFGS.lbfgs_precon_A",
+            "develop": 3.0
+          },
+          {
+            "key": "LBFGS.lbfgs_precon_mu",
+            "develop": 1.0
+          },
+          {
+            "key": "LBFGS.lbfgs_precon_rcut",
+            "develop": 0.0
+          },
+          {
+            "key": "LBFGS.lbfgs_project_rigid",
+            "develop": false
+          },
+          {
+            "key": "LBFGS.lbfgs_secant",
+            "develop": "standard"
+          },
+          {
+            "key": "LBFGS.lbfgs_step",
+            "develop": "lbfgs"
+          }
+        ],
+        "only_svn": [
+          {
+            "key": "Optimizer.lbfgs_angle_reset",
+            "svn": true
+          },
+          {
+            "key": "Optimizer.lbfgs_auto_scale",
+            "svn": true
+          },
+          {
+            "key": "Optimizer.lbfgs_distance_reset",
+            "svn": true
+          },
+          {
+            "key": "Optimizer.lbfgs_inverse_curvature",
+            "svn": 0.01
+          },
+          {
+            "key": "Optimizer.lbfgs_max_inverse_curvature",
+            "svn": 0.0
+          },
+          {
+            "key": "Optimizer.lbfgs_memory",
+            "svn": 20
+          }
+        ],
+        "changed": [],
+        "lbfgs_catalog_versus_header_defaults": [
+          {
+            "key": "lbfgs_memory",
+            "develop": 20,
+            "header_default": 20,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_inverse_curvature",
+            "develop": 0.01,
+            "header_default": 0.01,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_max_inverse_curvature",
+            "develop": 0.0,
+            "header_default": 0.0,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_auto_scale",
+            "develop": true,
+            "header_default": true,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_angle_reset",
+            "develop": true,
+            "header_default": true,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_distance_reset",
+            "develop": true,
+            "header_default": true,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_curvature",
+            "develop": "reset",
+            "header_default": "reset",
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_project_rigid",
+            "develop": false,
+            "header_default": false,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_secant",
+            "develop": "standard",
+            "header_default": "standard",
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_precon",
+            "develop": "none",
+            "header_default": "none",
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_step",
+            "develop": "lbfgs",
+            "header_default": "lbfgs",
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_h0",
+            "develop": "sy_yy",
+            "header_default": "sy_yy",
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_accept",
+            "develop": "energy",
+            "header_default": "none",
+            "equals_default": false
+          },
+          {
+            "key": "lbfgs_extra_updates",
+            "develop": 0,
+            "header_default": 0,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_cautious_eps",
+            "develop": 1e-06,
+            "header_default": 1e-06,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_cautious_alpha",
+            "develop": 0.01,
+            "header_default": 0.01,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_precon_A",
+            "develop": 3.0,
+            "header_default": 3.0,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_precon_mu",
+            "develop": 1.0,
+            "header_default": 1.0,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_precon_rcut",
+            "develop": 0.0,
+            "header_default": 0.0,
+            "equals_default": true
+          }
+        ]
+      },
+      "counting": {
+        "starts": 49,
+        "client_known": 49,
+        "harness_equals_client": 0,
+        "cache_known": 49,
+        "cache_equals_asv_harness": 49,
+        "svn_success_develop_harness_fail": 0,
+        "develop_harness_success_svn_fail": 0,
+        "both_harness_success_ratio_develop_over_svn": {
+          "n": 49,
+          "median": 5.093457943925234,
+          "min": 1.0480769230769231,
+          "max": 47.2
+        }
+      },
+      "first_start": {
+        "start": "initial_0",
+        "develop_harness": 3690.0,
+        "develop_client": 3210,
+        "develop_cache_seconds": 37.180600464000236,
+        "svn_harness": 83.0,
+        "svn_client": 83,
+        "svn_seconds": 0.6375805870002296
+      },
+      "matched_svn_ini": {
+        "name": "ts-pt-dimer",
+        "develop_template": "eon/develop-ts-pt-dimer",
+        "svn_template": "eon-svn/ts-pt-dimer",
+        "kind": "ts-pt",
+        "seed": 1,
+        "start": "initial_0",
+        "eon_commit": "7095b23ac17d49f434a5e08ccb072897ceca698e",
+        "probe_cap": 100000,
+        "potential": "morse_pt",
+        "counter": "harness",
+        "force_calls": 94.0,
+        "verify_calls": 0,
+        "client_calls": 94,
+        "client_reason": "0",
+        "extrema": null,
+        "seconds": 0.6981801179936156
+      },
+      "ablation": null,
+      "confirm": [
+        {
+          "label": "svn-plus-accept",
+          "start": "initial_0",
+          "force_calls": 3690.0,
+          "client_calls": 3690,
+          "client_reason": "0",
+          "seconds": 19.631355239020195
+        },
+        {
+          "label": "svn-ini",
+          "start": "initial_1",
+          "force_calls": 111.0,
+          "client_calls": 111,
+          "client_reason": "0",
+          "seconds": 0.818223663023673
+        },
+        {
+          "label": "svn-plus-accept",
+          "start": "initial_1",
+          "force_calls": 109.0,
+          "client_calls": 109,
+          "client_reason": "0",
+          "seconds": 0.8002943340106867
+        }
+      ],
+      "reruns": [
+        {
+          "start": "initial_0",
+          "develop_harness": 3690.0,
+          "develop_client": 3210,
+          "svn_harness": 83.0,
+          "svn_client": 83,
+          "svn_ini": 94.0,
+          "svn_ini_client": 94,
+          "accept_energy": 3690.0
+        },
+        {
+          "start": "initial_1",
+          "develop_harness": 109.0,
+          "develop_client": 44,
+          "svn_harness": 104.0,
+          "svn_client": 104,
+          "svn_ini": 111.0,
+          "accept_energy": 109.0
+        }
+      ],
+      "verdict": "config mismatch"
+    },
+    {
+      "template": "eon/develop-ts-pt-lanczos",
+      "svn_template": "eon-svn/ts-pt-lanczos",
+      "develop_par2": 238.83673469387756,
+      "develop_cap": 10000,
+      "develop_score": {
+        "par2_mean": 238.83673469387756,
+        "successes": 49,
+        "nfailed": 0,
+        "success_only_mean": 238.83673469387756,
+        "median": 173.0,
+        "n_cap": 0,
+        "n_divergence": 0,
+        "n_crash": 0,
+        "n_wrong_stationary": 0,
+        "cap": 10000,
+        "n": 49
+      },
+      "develop_par2_at_previous_cap": null,
+      "previous_cap_score": null,
+      "svn_par2": 223.59183673469389,
+      "svn_cap": 10000,
+      "svn_score": {
+        "par2_mean": 223.59183673469389,
+        "successes": 49,
+        "nfailed": 0,
+        "success_only_mean": 223.59183673469389,
+        "median": 173.0,
+        "n_cap": 0,
+        "n_divergence": 0,
+        "n_crash": 0,
+        "n_wrong_stationary": 0,
+        "cap": 10000,
+        "n": 49
+      },
+      "svn_dat_par2": 223.59183673469389,
+      "svn_dat_n": 98,
+      "svn_replicate": "svn-all",
+      "svn_replicates_identical_force_calls": {
+        "svn-all": true,
+        "fortran": true
+      },
+      "config": {
+        "develop_failure_cap": 10000,
+        "svn_failure_cap": 10000,
+        "only_develop": [],
+        "only_svn": [],
+        "changed": [],
+        "lbfgs_catalog_versus_header_defaults": []
+      },
+      "counting": {
+        "starts": 49,
+        "client_known": 49,
+        "harness_equals_client": 49,
+        "cache_known": 49,
+        "cache_equals_asv_harness": 49,
+        "svn_success_develop_harness_fail": 0,
+        "develop_harness_success_svn_fail": 0,
+        "both_harness_success_ratio_develop_over_svn": {
+          "n": 49,
+          "median": 1.0,
+          "min": 0.9974226804123711,
+          "max": 3.046448087431694
+        }
+      },
+      "first_start": {
+        "start": "initial_0",
+        "develop_harness": 127.0,
+        "develop_client": 127,
+        "develop_cache_seconds": 0.8498507579997749,
+        "svn_harness": 127.0,
+        "svn_client": 127,
+        "svn_seconds": 0.8437005360001422
+      },
+      "matched_svn_ini": null,
+      "ablation": null,
+      "confirm": [],
+      "reruns": [],
+      "verdict": "not a regression"
+    },
+    {
+      "template": "eon/develop-de-lj38-cap",
+      "svn_template": "eon-svn/de-lj38-ci",
+      "develop_par2": 4568.14,
+      "develop_cap": 2500,
+      "develop_score": {
+        "par2_mean": 4568.14,
+        "successes": 6,
+        "nfailed": 44,
+        "success_only_mean": 1401.1666666666667,
+        "median": 5000.0,
+        "n_cap": 43,
+        "n_divergence": 1,
+        "n_crash": 0,
+        "n_wrong_stationary": 0,
+        "cap": 2500,
+        "n": 50
+      },
+      "develop_par2_at_previous_cap": null,
+      "previous_cap_score": null,
+      "svn_par2": 1180.1,
+      "svn_cap": 2500,
+      "svn_score": {
+        "par2_mean": 1180.1,
+        "successes": 45,
+        "nfailed": 5,
+        "success_only_mean": 755.6666666666666,
+        "median": 657.0,
+        "n_cap": 5,
+        "n_divergence": 0,
+        "n_crash": 0,
+        "n_wrong_stationary": 0,
+        "cap": 2500,
+        "n": 50
+      },
+      "svn_dat_par2": 1180.1,
+      "svn_dat_n": 100,
+      "svn_replicate": "svn-all",
+      "svn_replicates_identical_force_calls": {
+        "svn-all": true,
+        "fortran": true
+      },
+      "config": {
+        "develop_failure_cap": 2500,
+        "svn_failure_cap": 2500,
+        "only_develop": [
+          {
+            "key": "LBFGS.lbfgs_accept",
+            "develop": "energy"
+          },
+          {
+            "key": "LBFGS.lbfgs_angle_reset",
+            "develop": true
+          },
+          {
+            "key": "LBFGS.lbfgs_auto_scale",
+            "develop": true
+          },
+          {
+            "key": "LBFGS.lbfgs_cautious_alpha",
+            "develop": 0.01
+          },
+          {
+            "key": "LBFGS.lbfgs_cautious_eps",
+            "develop": 1e-06
+          },
+          {
+            "key": "LBFGS.lbfgs_curvature",
+            "develop": "reset"
+          },
+          {
+            "key": "LBFGS.lbfgs_distance_reset",
+            "develop": true
+          },
+          {
+            "key": "LBFGS.lbfgs_extra_updates",
+            "develop": 0
+          },
+          {
+            "key": "LBFGS.lbfgs_h0",
+            "develop": "sy_yy"
+          },
+          {
+            "key": "LBFGS.lbfgs_inverse_curvature",
+            "develop": 0.01
+          },
+          {
+            "key": "LBFGS.lbfgs_max_inverse_curvature",
+            "develop": 0.0
+          },
+          {
+            "key": "LBFGS.lbfgs_memory",
+            "develop": 20
+          },
+          {
+            "key": "LBFGS.lbfgs_precon",
+            "develop": "none"
+          },
+          {
+            "key": "LBFGS.lbfgs_precon_A",
+            "develop": 3.0
+          },
+          {
+            "key": "LBFGS.lbfgs_precon_mu",
+            "develop": 1.0
+          },
+          {
+            "key": "LBFGS.lbfgs_precon_rcut",
+            "develop": 0.0
+          },
+          {
+            "key": "LBFGS.lbfgs_project_rigid",
+            "develop": false
+          },
+          {
+            "key": "LBFGS.lbfgs_secant",
+            "develop": "standard"
+          },
+          {
+            "key": "LBFGS.lbfgs_step",
+            "develop": "lbfgs"
+          },
+          {
+            "key": "Nudged Elastic Band.ci_mmf",
+            "develop": false
+          },
+          {
+            "key": "Nudged Elastic Band.climbing_image_band_slack",
+            "develop": 10.0
+          },
+          {
+            "key": "Nudged Elastic Band.energy_weighted",
+            "develop": false
+          },
+          {
+            "key": "Nudged Elastic Band.opt_method",
+            "develop": "lbfgs"
+          },
+          {
+            "key": "Nudged Elastic Band.setup_mmf_peaks",
+            "develop": true
+          }
+        ],
+        "only_svn": [
+          {
+            "key": "Optimizer.lbfgs_angle_reset",
+            "svn": true
+          },
+          {
+            "key": "Optimizer.lbfgs_auto_scale",
+            "svn": true
+          },
+          {
+            "key": "Optimizer.lbfgs_distance_reset",
+            "svn": true
+          },
+          {
+            "key": "Optimizer.lbfgs_inverse_curvature",
+            "svn": 0.01
+          },
+          {
+            "key": "Optimizer.lbfgs_max_inverse_curvature",
+            "svn": 0.0
+          },
+          {
+            "key": "Optimizer.lbfgs_memory",
+            "svn": 20
+          }
+        ],
+        "changed": [],
+        "lbfgs_catalog_versus_header_defaults": [
+          {
+            "key": "lbfgs_memory",
+            "develop": 20,
+            "header_default": 20,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_inverse_curvature",
+            "develop": 0.01,
+            "header_default": 0.01,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_max_inverse_curvature",
+            "develop": 0.0,
+            "header_default": 0.0,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_auto_scale",
+            "develop": true,
+            "header_default": true,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_angle_reset",
+            "develop": true,
+            "header_default": true,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_distance_reset",
+            "develop": true,
+            "header_default": true,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_curvature",
+            "develop": "reset",
+            "header_default": "reset",
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_project_rigid",
+            "develop": false,
+            "header_default": false,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_secant",
+            "develop": "standard",
+            "header_default": "standard",
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_precon",
+            "develop": "none",
+            "header_default": "none",
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_step",
+            "develop": "lbfgs",
+            "header_default": "lbfgs",
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_h0",
+            "develop": "sy_yy",
+            "header_default": "sy_yy",
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_accept",
+            "develop": "energy",
+            "header_default": "none",
+            "equals_default": false
+          },
+          {
+            "key": "lbfgs_extra_updates",
+            "develop": 0,
+            "header_default": 0,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_cautious_eps",
+            "develop": 1e-06,
+            "header_default": 1e-06,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_cautious_alpha",
+            "develop": 0.01,
+            "header_default": 0.01,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_precon_A",
+            "develop": 3.0,
+            "header_default": 3.0,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_precon_mu",
+            "develop": 1.0,
+            "header_default": 1.0,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_precon_rcut",
+            "develop": 0.0,
+            "header_default": 0.0,
+            "equals_default": true
+          }
+        ]
+      },
+      "counting": {
+        "starts": 50,
+        "client_known": 50,
+        "harness_equals_client": 50,
+        "cache_known": 50,
+        "cache_equals_asv_harness": 50,
+        "svn_success_develop_harness_fail": 0,
+        "develop_harness_success_svn_fail": 4,
+        "both_harness_success_ratio_develop_over_svn": {
+          "n": 45,
+          "median": 24.472668810289388,
+          "min": 2.0919540229885056,
+          "max": 164.70932754880695
+        }
+      },
+      "first_start": {
+        "start": "pair_00",
+        "develop_harness": 7197.0,
+        "develop_client": 7197,
+        "develop_cache_seconds": 33.537520979999954,
+        "svn_harness": 382.0,
+        "svn_client": 382,
+        "svn_seconds": 0.9486123960000441
+      },
+      "matched_svn_ini": {
+        "name": "de-lj38-ci",
+        "develop_template": "eon/develop-de-lj38-cap",
+        "svn_template": "eon-svn/de-lj38-ci",
+        "kind": "de-lj38",
+        "seed": 1,
+        "start": "pair_00",
+        "eon_commit": "7095b23ac17d49f434a5e08ccb072897ceca698e",
+        "probe_cap": 100000,
+        "potential": "lammps",
+        "counter": "harness",
+        "force_calls": 382.0,
+        "verify_calls": 0,
+        "client_calls": 382,
+        "client_reason": "0",
+        "extrema": 2,
+        "seconds": 0.9273595479899086
+      },
+      "ablation": null,
+      "confirm": [
+        {
+          "label": "svn-plus-accept",
+          "start": "pair_00",
+          "force_calls": 7197.0,
+          "client_calls": 7197,
+          "client_reason": "0",
+          "seconds": 14.171687213995028
+        },
+        {
+          "label": "svn-ini",
+          "start": "pair_01",
+          "force_calls": 707.0,
+          "client_calls": 707,
+          "client_reason": "0",
+          "seconds": 1.6671630469791126
+        },
+        {
+          "label": "svn-plus-accept",
+          "start": "pair_01",
+          "force_calls": 14642.0,
+          "client_calls": 14642,
+          "client_reason": "0",
+          "seconds": 28.84629364099237
+        }
+      ],
+      "reruns": [
+        {
+          "start": "pair_00",
+          "develop_harness": 7197.0,
+          "develop_client": 7197,
+          "svn_harness": 382.0,
+          "svn_client": 382,
+          "svn_ini": 382.0,
+          "svn_ini_client": 382,
+          "accept_energy": 7197.0
+        },
+        {
+          "start": "pair_01",
+          "develop_harness": 14642.0,
+          "develop_client": 14642,
+          "svn_harness": 662.0,
+          "svn_client": 662,
+          "svn_ini": 707.0,
+          "accept_energy": 14642.0
+        }
+      ],
+      "verdict": "config mismatch"
+    },
+    {
+      "template": "eon/develop-de-2ts",
+      "svn_template": "eon-svn/de-2ts-ci",
+      "develop_par2": 20000.0,
+      "develop_cap": 10000,
+      "develop_score": {
+        "par2_mean": 20000.0,
+        "successes": 0,
+        "nfailed": 51,
+        "success_only_mean": null,
+        "median": 20000.0,
+        "n_cap": 9,
+        "n_divergence": 42,
+        "n_crash": 0,
+        "n_wrong_stationary": 0,
+        "cap": 10000,
+        "n": 51
+      },
+      "develop_par2_at_previous_cap": 168924.17647058822,
+      "previous_cap_score": {
+        "par2_mean": 168924.17647058822,
+        "successes": 9,
+        "nfailed": 42,
+        "success_only_mean": 23903.666666666668,
+        "median": 200000.0,
+        "n_cap": 0,
+        "n_divergence": 42,
+        "n_crash": 0,
+        "n_wrong_stationary": 0,
+        "cap": 100000,
+        "n": 51
+      },
+      "svn_par2": 13384.941176470587,
+      "svn_cap": 10000,
+      "svn_score": {
+        "par2_mean": 13384.941176470587,
+        "successes": 21,
+        "nfailed": 30,
+        "success_only_mean": 3934.8571428571427,
+        "median": 20000.0,
+        "n_cap": 30,
+        "n_divergence": 0,
+        "n_crash": 0,
+        "n_wrong_stationary": 0,
+        "cap": 10000,
+        "n": 51
+      },
+      "svn_dat_par2": 13384.941176470587,
+      "svn_dat_n": 102,
+      "svn_replicate": "svn-all",
+      "svn_replicates_identical_force_calls": {
+        "svn-all": true,
+        "fortran": true
+      },
+      "config": {
+        "develop_failure_cap": 10000,
+        "svn_failure_cap": 10000,
+        "only_develop": [
+          {
+            "key": "LBFGS.lbfgs_accept",
+            "develop": "energy"
+          },
+          {
+            "key": "LBFGS.lbfgs_angle_reset",
+            "develop": true
+          },
+          {
+            "key": "LBFGS.lbfgs_auto_scale",
+            "develop": true
+          },
+          {
+            "key": "LBFGS.lbfgs_cautious_alpha",
+            "develop": 0.01
+          },
+          {
+            "key": "LBFGS.lbfgs_cautious_eps",
+            "develop": 1e-06
+          },
+          {
+            "key": "LBFGS.lbfgs_curvature",
+            "develop": "reset"
+          },
+          {
+            "key": "LBFGS.lbfgs_distance_reset",
+            "develop": true
+          },
+          {
+            "key": "LBFGS.lbfgs_extra_updates",
+            "develop": 0
+          },
+          {
+            "key": "LBFGS.lbfgs_h0",
+            "develop": "sy_yy"
+          },
+          {
+            "key": "LBFGS.lbfgs_inverse_curvature",
+            "develop": 0.01
+          },
+          {
+            "key": "LBFGS.lbfgs_max_inverse_curvature",
+            "develop": 0.0
+          },
+          {
+            "key": "LBFGS.lbfgs_memory",
+            "develop": 20
+          },
+          {
+            "key": "LBFGS.lbfgs_precon",
+            "develop": "none"
+          },
+          {
+            "key": "LBFGS.lbfgs_precon_A",
+            "develop": 3.0
+          },
+          {
+            "key": "LBFGS.lbfgs_precon_mu",
+            "develop": 1.0
+          },
+          {
+            "key": "LBFGS.lbfgs_precon_rcut",
+            "develop": 0.0
+          },
+          {
+            "key": "LBFGS.lbfgs_project_rigid",
+            "develop": false
+          },
+          {
+            "key": "LBFGS.lbfgs_secant",
+            "develop": "standard"
+          },
+          {
+            "key": "LBFGS.lbfgs_step",
+            "develop": "lbfgs"
+          },
+          {
+            "key": "Nudged Elastic Band.ci_mmf",
+            "develop": false
+          },
+          {
+            "key": "Nudged Elastic Band.climbing_image_band_slack",
+            "develop": 10.0
+          },
+          {
+            "key": "Nudged Elastic Band.energy_weighted",
+            "develop": false
+          },
+          {
+            "key": "Nudged Elastic Band.opt_method",
+            "develop": "lbfgs"
+          },
+          {
+            "key": "Nudged Elastic Band.setup_mmf_peaks",
+            "develop": true
+          }
+        ],
+        "only_svn": [
+          {
+            "key": "Optimizer.lbfgs_angle_reset",
+            "svn": true
+          },
+          {
+            "key": "Optimizer.lbfgs_auto_scale",
+            "svn": true
+          },
+          {
+            "key": "Optimizer.lbfgs_distance_reset",
+            "svn": true
+          },
+          {
+            "key": "Optimizer.lbfgs_inverse_curvature",
+            "svn": 0.01
+          },
+          {
+            "key": "Optimizer.lbfgs_max_inverse_curvature",
+            "svn": 0.0
+          },
+          {
+            "key": "Optimizer.lbfgs_memory",
+            "svn": 20
+          }
+        ],
+        "changed": [],
+        "lbfgs_catalog_versus_header_defaults": [
+          {
+            "key": "lbfgs_memory",
+            "develop": 20,
+            "header_default": 20,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_inverse_curvature",
+            "develop": 0.01,
+            "header_default": 0.01,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_max_inverse_curvature",
+            "develop": 0.0,
+            "header_default": 0.0,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_auto_scale",
+            "develop": true,
+            "header_default": true,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_angle_reset",
+            "develop": true,
+            "header_default": true,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_distance_reset",
+            "develop": true,
+            "header_default": true,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_curvature",
+            "develop": "reset",
+            "header_default": "reset",
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_project_rigid",
+            "develop": false,
+            "header_default": false,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_secant",
+            "develop": "standard",
+            "header_default": "standard",
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_precon",
+            "develop": "none",
+            "header_default": "none",
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_step",
+            "develop": "lbfgs",
+            "header_default": "lbfgs",
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_h0",
+            "develop": "sy_yy",
+            "header_default": "sy_yy",
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_accept",
+            "develop": "energy",
+            "header_default": "none",
+            "equals_default": false
+          },
+          {
+            "key": "lbfgs_extra_updates",
+            "develop": 0,
+            "header_default": 0,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_cautious_eps",
+            "develop": 1e-06,
+            "header_default": 1e-06,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_cautious_alpha",
+            "develop": 0.01,
+            "header_default": 0.01,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_precon_A",
+            "develop": 3.0,
+            "header_default": 3.0,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_precon_mu",
+            "develop": 1.0,
+            "header_default": 1.0,
+            "equals_default": true
+          },
+          {
+            "key": "lbfgs_precon_rcut",
+            "develop": 0.0,
+            "header_default": 0.0,
+            "equals_default": true
+          }
+        ]
+      },
+      "counting": {
+        "starts": 51,
+        "client_known": 51,
+        "harness_equals_client": 51,
+        "cache_known": 51,
+        "cache_equals_asv_harness": 51,
+        "svn_success_develop_harness_fail": 16,
+        "develop_harness_success_svn_fail": 4,
+        "both_harness_success_ratio_develop_over_svn": {
+          "n": 5,
+          "median": 15.59378733572282,
+          "min": 4.274905702240958,
+          "max": 29.209592641261498
+        }
+      },
+      "first_start": {
+        "start": "pair_00",
+        "develop_harness": 19267.0,
+        "develop_client": 19267,
+        "develop_cache_seconds": 536.4801021379999,
+        "svn_harness": 4507.0,
+        "svn_client": 4507,
+        "svn_seconds": 8.926373379999859
+      },
+      "matched_svn_ini": {
+        "name": "de-2ts-ci",
+        "develop_template": "eon/develop-de-2ts",
+        "svn_template": "eon-svn/de-2ts-ci",
+        "kind": "de-2ts",
+        "seed": 1,
+        "start": "pair_00",
+        "eon_commit": "7095b23ac17d49f434a5e08ccb072897ceca698e",
+        "probe_cap": 100000,
+        "potential": "ljcluster",
+        "counter": "harness",
+        "force_calls": 1657.0,
+        "verify_calls": 0,
+        "client_calls": 1657,
+        "client_reason": "0",
+        "extrema": 4,
+        "seconds": 3.2743562489922624
+      },
+      "ablation": null,
+      "confirm": [
+        {
+          "label": "svn-plus-accept",
+          "start": "pair_00",
+          "force_calls": 19267.0,
+          "client_calls": 19267,
+          "client_reason": "0",
+          "seconds": 37.69136160999187
+        },
+        {
+          "label": "svn-ini",
+          "start": "pair_49",
+          "force_calls": 932.0,
+          "client_calls": 932,
+          "client_reason": "0",
+          "seconds": 2.066071687004296
+        },
+        {
+          "label": "svn-plus-accept",
+          "start": "pair_49",
+          "force_calls": 13052.0,
+          "client_calls": 13052,
+          "client_reason": "0",
+          "seconds": 25.498938923003152
+        }
+      ],
+      "reruns": [
+        {
+          "start": "pair_00",
+          "develop_harness": 19267.0,
+          "develop_client": 19267,
+          "svn_harness": 4507.0,
+          "svn_client": 4507,
+          "svn_ini": 1657.0,
+          "svn_ini_client": 1657,
+          "accept_energy": 19267.0
+        },
+        {
+          "start": "pair_49",
+          "develop_harness": 13052.0,
+          "develop_client": 13052,
+          "svn_harness": 837.0,
+          "svn_client": 837,
+          "svn_ini": 932.0,
+          "accept_energy": 13052.0
+        }
+      ],
+      "verdict": "config mismatch"
+    },
+    {
+      "template": "eon/develop-low-lj38-dimer",
+      "svn_template": "eon-svn/low-lj38-dimer",
+      "develop_par2": 30.355,
+      "develop_cap": 10000,
+      "develop_score": {
+        "par2_mean": 30.355,
+        "successes": 200,
+        "nfailed": 0,
+        "success_only_mean": 30.355,
+        "median": 29.0,
+        "n_cap": 0,
+        "n_divergence": 0,
+        "n_crash": 0,
+        "n_wrong_stationary": 0,
+        "cap": 10000,
+        "n": 200
+      },
+      "develop_par2_at_previous_cap": null,
+      "previous_cap_score": null,
+      "svn_par2": 30.355,
+      "svn_cap": 10000,
+      "svn_score": {
+        "par2_mean": 30.355,
+        "successes": 200,
+        "nfailed": 0,
+        "success_only_mean": 30.355,
+        "median": 29.0,
+        "n_cap": 0,
+        "n_divergence": 0,
+        "n_crash": 0,
+        "n_wrong_stationary": 0,
+        "cap": 10000,
+        "n": 200
+      },
+      "svn_dat_par2": 30.355,
+      "svn_dat_n": 400,
+      "svn_replicate": "svn-all",
+      "svn_replicates_identical_force_calls": {
+        "svn-all": true,
+        "fortran": true
+      },
+      "config": {
+        "develop_failure_cap": 10000,
+        "svn_failure_cap": 10000,
+        "only_develop": [],
+        "only_svn": [],
+        "changed": [],
+        "lbfgs_catalog_versus_header_defaults": []
+      },
+      "counting": {
+        "starts": 200,
+        "client_known": 200,
+        "harness_equals_client": 0,
+        "cache_known": 200,
+        "cache_equals_asv_harness": 200,
+        "svn_success_develop_harness_fail": 0,
+        "develop_harness_success_svn_fail": 0,
+        "both_harness_success_ratio_develop_over_svn": {
+          "n": 200,
+          "median": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        }
+      },
+      "first_start": {
+        "start": "0000",
+        "develop_harness": 30.0,
+        "develop_client": 2,
+        "develop_cache_seconds": 1.392296917000749,
+        "svn_harness": 30.0,
+        "svn_client": 30,
+        "svn_seconds": 1.344901605999894
+      },
+      "matched_svn_ini": null,
+      "ablation": null,
+      "confirm": [],
+      "reruns": [],
+      "verdict": "not a regression"
+    },
+    {
+      "template": "eon/develop-low-lj38-lanczos",
+      "svn_template": "eon-svn/low-lj38-lanczos",
+      "develop_par2": 26.385,
+      "develop_cap": 10000,
+      "develop_score": {
+        "par2_mean": 26.385,
+        "successes": 200,
+        "nfailed": 0,
+        "success_only_mean": 26.385,
+        "median": 25.0,
+        "n_cap": 0,
+        "n_divergence": 0,
+        "n_crash": 0,
+        "n_wrong_stationary": 0,
+        "cap": 10000,
+        "n": 200
+      },
+      "develop_par2_at_previous_cap": null,
+      "previous_cap_score": null,
+      "svn_par2": 26.385,
+      "svn_cap": 10000,
+      "svn_score": {
+        "par2_mean": 26.385,
+        "successes": 200,
+        "nfailed": 0,
+        "success_only_mean": 26.385,
+        "median": 25.0,
+        "n_cap": 0,
+        "n_divergence": 0,
+        "n_crash": 0,
+        "n_wrong_stationary": 0,
+        "cap": 10000,
+        "n": 200
+      },
+      "svn_dat_par2": 26.385,
+      "svn_dat_n": 400,
+      "svn_replicate": "svn-all",
+      "svn_replicates_identical_force_calls": {
+        "svn-all": true,
+        "fortran": true
+      },
+      "config": {
+        "develop_failure_cap": 10000,
+        "svn_failure_cap": 10000,
+        "only_develop": [],
+        "only_svn": [],
+        "changed": [],
+        "lbfgs_catalog_versus_header_defaults": []
+      },
+      "counting": {
+        "starts": 200,
+        "client_known": 200,
+        "harness_equals_client": 200,
+        "cache_known": 200,
+        "cache_equals_asv_harness": 200,
+        "svn_success_develop_harness_fail": 0,
+        "develop_harness_success_svn_fail": 0,
+        "both_harness_success_ratio_develop_over_svn": {
+          "n": 200,
+          "median": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        }
+      },
+      "first_start": {
+        "start": "0000",
+        "develop_harness": 29.0,
+        "develop_client": 29,
+        "develop_cache_seconds": 1.8644073539999226,
+        "svn_harness": 29.0,
+        "svn_client": 29,
+        "svn_seconds": 1.2843214140002601
+      },
+      "matched_svn_ini": null,
+      "ablation": null,
+      "confirm": [],
+      "reruns": [],
+      "verdict": "not a regression"
+    }
+  ],
+  "lowest": {
+    "low-lj38-dimer": {
+      "template": "eon/develop-low-lj38-dimer",
+      "harness_sequence_equals_svn_replicate": true,
+      "starts": 200,
+      "cache_seconds_differ_from_svn": 200,
+      "cache_overlap_differ_from_svn": 200,
+      "first_develop_seconds": 1.392296917000749,
+      "first_svn_seconds": 1.344901605999894,
+      "first_develop_overlap": 0.9905460019722689,
+      "first_svn_overlap": 0.9905461285470829,
+      "client_calls_min": 2,
+      "client_calls_max": 2,
+      "copied_from_svn_files": false
+    },
+    "low-lj38-lanczos": {
+      "template": "eon/develop-low-lj38-lanczos",
+      "harness_sequence_equals_svn_replicate": true,
+      "starts": 200,
+      "cache_seconds_differ_from_svn": 200,
+      "cache_overlap_differ_from_svn": 200,
+      "first_develop_seconds": 1.8644073539999226,
+      "first_svn_seconds": 1.2843214140002601,
+      "first_develop_overlap": 0.9920554366138775,
+      "first_svn_overlap": 0.9920547720649405,
+      "client_calls_min": 13,
+      "client_calls_max": 63,
+      "copied_from_svn_files": false
+    }
+  }
+}

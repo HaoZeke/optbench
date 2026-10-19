@@ -1,0 +1,130 @@
+    wuid       type    barrier   max-dist    sad-fcs   mins-fcs   pref-fcs    result
+-------------------------------------------------------------------------------------
+       0     random    0.42971    0.91567        153        122          0    good-2670802842512741531
+       1     random    0.00000    9.07568       1651         32          0    Saddle Search Terminated High Energy
+       2     random    0.42772    1.28647        137        123          0    good-1891722521816435296
+       3     random    0.42778    0.96546        133        135          0    good-9159242925289712038
+       4     random    0.42970    1.18678        203        121          0    good-8747834399814956591
+       5     random    0.00000    5.80206       1164        172          0    Not Connected
+       6     random    0.00000    4.72131        569        123          0    Not Connected
+       7     random    0.42971    1.20502        197        119          0    repeat-2670802842512741531
+       8     random    0.42970    1.03547        179        122          0    repeat-8747834399814956591
+       9     random    0.00000    5.36602       1842         32          0    Saddle Search Terminated High Energy
+      10     random    0.00000    6.70470        564         32          0    Saddle Search Terminated High Energy
+      11     random    0.00000    4.96441        712        124          0    Not Connected
+      12     random    0.00000    3.32481        267        131          0    Not Connected
+      13     random    0.00000    6.29188        592         32          0    Saddle Search Terminated High Energy
+      14     random    0.00000    5.17104        413         32          0    Saddle Search Terminated High Energy
+      15     random    0.42972    1.37579        177        122          0    repeat-2670802842512741531
+      16     random    0.00000    5.87312       1169         32          0    Saddle Search Terminated High Energy
+      17     random    0.00000    3.14631        331        197          0    Not Connected
+      18     random    0.42970    0.99556        209        125          0    repeat-8747834399814956591
+      19     random    0.00000    4.58734        598        141          0    Not Connected
+      20     random    0.42776    1.17328        287        129          0    repeat-1891722521816435296
+      21     random    0.42970    0.98179        131        121          0    repeat-8747834399814956591
+      22     random    0.00000    4.32262        528        194          0    Not Connected
+      23     random    0.00000    5.15012       1524         32          0    Saddle Search Terminated High Energy
+      24     random    0.00000    7.21100        743         32          0    Saddle Search Terminated High Energy
+      25     random    0.00000    3.11733        591        118          0    Not Connected
+      26     random    0.00000    4.69129       1372         32          0    Saddle Search Terminated High Energy
+      27     random    0.00000    7.99803       2588         32          0    Saddle Search Terminated High Energy
+      28     random    0.00000   27.60978       1018         32          0    Saddle Search Terminated High Energy
+      29     random    0.00000    2.93904        259        118          0    Not Connected
+      30     random    0.00000    7.57861        602        190          0    Not Connected
+      31     random    0.00000    3.56424        602        155          0    Not Connected
+      32     random    0.00000    7.03111       1120         32          0    Saddle Search Terminated High Energy
+      33     random    0.00000    4.17732        716        132          0    Not Connected
+      34     random    0.00000    4.83823        284         32          0    Saddle Search Terminated High Energy
+      35     random    0.00000    3.30989        491        119          0    Not Connected
+      36     random    0.42970    1.28413        168        125          0    repeat-8747834399814956591
+      37     random    0.00000    5.80947       1320         32          0    Saddle Search Terminated High Energy
+      38     random    0.00000    7.31852        497         32          0    Saddle Search Terminated High Energy
+      39     random    0.00000    3.11704        249        120          0    Not Connected
+      40     random    0.00000    3.21818        357        131          0    Not Connected
+      41     random    0.00000    6.29184       1433         32          0    Saddle Search Terminated High Energy
+      42     random    0.00000    7.13628        875         32          0    Saddle Search Terminated High Energy
+      43     random    0.42775    0.96221        133        127          0    repeat-9159242925289712038
+      44     random    0.00000    5.89988        735        123          0    Not Connected
+      45     random    0.42776    1.77713        300        131          0    repeat-9159242925289712038
+      46     random    0.00000    4.00966        929         32          0    Saddle Search Terminated High Energy
+      47     random    0.00000    3.40367        515        140          0    Not Connected
+      48     random    0.42970    1.11510        233        122          0    repeat-8747834399814956591
+      49     random    0.00000    2.90015        297        124          0    Not Connected
+      50     random    0.00000    5.12816       1274         32          0    Saddle Search Terminated High Energy
+      51     random    0.15218    1.33161        201        127          0    good-2733373896167907748
+      52     random    0.00000   10.27134       1473         32          0    Saddle Search Terminated High Energy
+      53     random    0.00000    3.01639        419        117          0    Not Connected
+      54     random    0.42972    1.30333        157        126          0    repeat-2670802842512741531
+      55     random    0.00000    7.01074       4320         32          0    Saddle Search Terminated Total Iterations
+      56     random    0.00000    2.87642        621        124          0    Not Connected
+      57     random    0.00000    4.60016        408         32          0    Saddle Search Terminated High Energy
+      58     random    0.00000   21.97913       1372         32          0    Saddle Search Terminated High Energy
+      59     random    0.42970    1.32106        213        123          0    repeat-2670802842512741531
+      60     random    0.00000    2.75264        248        119          0    Not Connected
+      61     random    0.42971    1.07108        239        122          0    repeat-2670802842512741531
+      62     random    0.42970    1.24049        219        122          0    repeat-8747834399814956591
+      63     random    0.00000    5.93402        899         32          0    Saddle Search Terminated High Energy
+      64     random    0.42970    0.92697        179        123          0    repeat-8747834399814956591
+      65     random    0.00000    3.40870        879        146          0    Not Connected
+      66     random    0.42778    1.17150        163        135          0    repeat-9159242925289712038
+      67     random    0.00000    4.50096       1067        169          0    Not Connected
+      68     random    0.00000    3.57362        466         32          0    Saddle Search Terminated High Energy
+      69     random    0.00000    3.98168        198         32          0    Saddle Search Terminated High Energy
+      70     random    0.42778    1.32323        241        137          0    repeat-1891722521816435296
+      71     random    0.00000    6.63698       2265        126          0    Not Connected
+      72     random    0.42775    1.11190        127        141          0    repeat-1891722521816435296
+      73     random    0.00000    3.38491        582        125          0    Not Connected
+      74     random    0.42777    1.54587        167        131          0    repeat-9159242925289712038
+      75     random    0.00000    6.57226       1139         32          0    Saddle Search Terminated High Energy
+      76     random    0.00000    5.47099       2128         32          0    Saddle Search Terminated High Energy
+      77     random    0.00000    8.37330       1925         32          0    Saddle Search Terminated High Energy
+      78     random    0.00000    4.00384        451        121          0    Not Connected
+      79     random    0.00000    5.50048       1613         32          0    Saddle Search Terminated High Energy
+      80     random    0.00000    7.51127       1113         32          0    Saddle Search Terminated High Energy
+      81     random    0.00000    3.87524        650         32          0    Saddle Search Terminated High Energy
+      82     random    0.00000    6.15579       2837         32          0    Saddle Search Terminated High Energy
+      83     random    0.00000    8.74963        566         32          0    Saddle Search Terminated High Energy
+      84     random    0.00000    7.23894       1601         32          0    Saddle Search Terminated High Energy
+      85     random    0.42776    1.60013        249        133          0    repeat-9159242925289712038
+      86     random    0.00000    5.89474       1096        177          0    Not Connected
+      87     random    0.00000    5.43335       1257         32          0    Saddle Search Terminated High Energy
+      88     random    0.42970    0.91945        189        121          0    repeat-8747834399814956591
+      89     random    0.00000    7.60837       3427         32          0    Saddle Search Terminated High Energy
+      90     random    0.42972    1.02243        165        122          0    repeat-8747834399814956591
+      91     random    0.00000    7.15206       2123         32          0    Saddle Search Terminated High Energy
+      92     random    0.00000    5.19340       1503         32          0    Saddle Search Terminated High Energy
+      93     random    0.42776    1.21548        135        127          0    repeat-9159242925289712038
+      94     random    0.00000    7.05925       1036         32          0    Saddle Search Terminated High Energy
+      95     random    0.00000    3.62831        769        122          0    Not Connected
+      96     random    0.00000    6.33833       1185         32          0    Saddle Search Terminated High Energy
+      97     random    0.00000    6.32565        923         32          0    Saddle Search Terminated High Energy
+      98     random    0.00000    3.15712        297        123          0    Not Connected
+      99     random    0.42971    1.28138        273        121          0    repeat-8747834399814956591
+     100     random    0.00000    3.57167        709         32          0    Saddle Search Terminated High Energy
+     101     random    0.00000    3.10683        285        119          0    Not Connected
+     102     random    0.00000    3.17526        295        192          0    Not Connected
+     103     random    0.00000    2.10478        273         32          0    Saddle Search Terminated High Energy
+     104     random    0.00000    4.67578        537        121          0    Not Connected
+     105     random    0.00000    4.42938        501         32          0    Saddle Search Terminated High Energy
+     106     random    0.00000    3.23825        220        124          0    Not Connected
+     107     random    0.42970    0.80679        171        121          0    repeat-8747834399814956591
+     108     random    0.00000    3.58106       1057         32          0    Saddle Search Terminated High Energy
+     109     random    0.42780    1.16724        145        127          0    repeat-1891722521816435296
+     110     random    0.42776    1.23333        223        130          0    repeat-9159242925289712038
+     111     random    0.00000   72.59775       1313         32          0    Saddle Search Terminated High Energy
+     112     random    0.42970    0.82834        149        121          0    repeat-8747834399814956591
+     113     random    0.00000    4.01975        515        120          0    Not Connected
+     114     random    0.00000    5.36324       1414         32          0    Saddle Search Terminated High Energy
+     115     random    0.00000    6.09690        323         32          0    Saddle Search Terminated High Energy
+     116     random    0.42775    1.12557        215        139          0    repeat-1891722521816435296
+     117     random    0.00000   11.73450       3256         32          0    Saddle Search Terminated High Energy
+     118     random    0.00000    2.89911        277        216          0    Not Connected
+     119     random    0.00000    7.54643       2207        178          0    Not Connected
+     120     random    0.00000    2.92079        271        123          0    Not Connected
+     121     random    0.00000    2.98087        297        118          0    Not Connected
+     122     random    0.42776    1.31801        244        129          0    repeat-9159242925289712038
+     123     random    0.42776    1.30634        185        130          0    repeat-1891722521816435296
+     124     random    0.00000    2.00282        435        137          0    Not Connected
+     125     random    0.00000    5.68860        781        130          0    Not Connected
+     126     random    0.00000    3.07167        616        126          0    Not Connected
+     127     random    0.00000    2.84467        321        119          0    Not Connected

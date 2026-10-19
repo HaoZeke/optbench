@@ -1,0 +1,31 @@
+# counter harness. One force call is one getEnergyGradient entry.
+# The potential is the problem potential. A repeated coordinate is cached.
+# The stop is the Euclidean norm of the gradient.
+# v2 success is under the cap, at the force stop, and Hessian index 0.
+# energy and Kabsch RMSD were not applied: the problem file has no energy_tol, rmsd_tol, or per-start reference.
+# LJ38 index removes the six rigid modes. A curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6).
+# Default row. MYLBFGS uses the Fortran step update on LBFGS. Memory is 4, maxstep is 0.1, maxErise is 1e-4, and H0 is 0.1. The stop is the Euclidean norm of the gradient at the problem force norm. The iteration budget is the force-call cap. The same values are used for every start.
+force_calls 248
+force_calls_min 127
+force_calls_max 595
+nfailed 0
+median 235
+code pele
+code_version 0.1.2
+commit b7081b932a060be11342fbe8287ac35da8ada879
+algorithm MYLBFGS
+template pele/lj38-mylbfgs
+tuning default
+counter harness
+problem minimization/lj38
+par2_mean 268.036
+wilson_low 0.994357441402
+wilson_high 0.999823453629
+par2_median 235
+par2_median_low 231
+par2_median_high 241
+v2_nfailed 1
+v2_successes 999
+n 1000
+energy_min -171.782302767
+energy_max -150.441421041
