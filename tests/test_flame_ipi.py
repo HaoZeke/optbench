@@ -227,11 +227,20 @@ def test_lj38_ceiling_matches_the_2014_stop():
     assert reference_energy(problem, template) == LJ38_REFERENCE
     assert abs(success_ceiling(problem, template) - (LJ38_REFERENCE + 0.001)) < 1e-12
     assert abs((LJ38_REFERENCE + 0.001) - (-173.927427)) < 1e-9
+    from optbench.runners.flame_go import cap_of, fire_dt_of
+
     bare = resolve_problem(root, "globalopt/lj75")
     other = load_template(root, "flame/lj75-minhocao")
-    assert success_ceiling(bare, other) is None
+    assert abs(success_ceiling(bare, other) - (-397.492331 + 0.001)) < 1e-9
     assert abs(search_target(bare, other) - (-397.492331 + 0.001)) < 1e-9
-    from optbench.runners.flame_go import fire_dt_of
-
+    assert cap_of(bare, other) == 1_000_000
+    lj98 = resolve_problem(root, "globalopt/lj98")
+    template98 = load_template(root, "flame/lj98-minhocao")
+    assert abs(success_ceiling(lj98, template98) - (-543.665361 + 0.001)) < 1e-9
+    assert cap_of(lj98, template98) == 1_000_000_000
+    lj150 = resolve_problem(root, "globalopt/lj150")
+    template150 = load_template(root, "flame/lj150-minhocao")
+    assert abs(success_ceiling(lj150, template150) - (-893.310258 + 0.001)) < 1e-9
+    assert cap_of(lj150, template150) == 10_000_000
     assert fire_dt_of(template) == {}
     assert fire_dt_of(other) == {"init": "1.d-9", "min": "1.d-12"}

@@ -4,13 +4,13 @@
 # ioput is the documented minhocao start 1.d-2 5.d2 1.d5. earr tolerances are 2.d-3 1.d-1.
 # Local optimisation is the code default FIRE tolerance 2.d-4 Ha/Bohr.
 # GEOFIREDTINIT 1.d-9 and GEOFIREDTMIN 1.d-12 replace the code defaults 10 and 1. Pairs in this archive sit near 0.02 sigma, and the default first step moves those atoms by more than the cell.
-# No energy_above_minimum is stated. partial is true and the row is not ranked. A Cambridge reference ends the search at that energy plus 0.001. reference_bound marks a start that reached it. force_calls is that count. The start is not a ranked success.
-# minhocao on the lj75 coordinate archive. ioput, earr tolerances, fingerprint, seed, and the FIRE force tolerance match flame/lj38-minhocao. GEOFIREDTINIT is 1.d-9 and GEOFIREDTMIN is 1.d-12. The code defaults are 10 and 1. Pairs in this archive sit near 0.02 sigma, and the default first step moves those atoms by more than the cell. The problem file does not state energy_above_minimum, so the row stays partial and is not ranked. The search ends at the Cambridge minimum -397.492331 plus 0.001. reference_bound marks a start that reached that energy, and force_calls is the harness count at that point.
-force_calls 1180550
+# Success is a relaxed enthalpy at or below -397.491331, the reference plus energy_above_minimum. The count stops before the next hop is charged.
+# minhocao on the lj75 coordinate archive. ioput, earr tolerances, fingerprint, seed, and the FIRE force tolerance match flame/lj38-minhocao. GEOFIREDTINIT is 1.d-9 and GEOFIREDTMIN is 1.d-12. The code defaults are 10 and 1. Pairs in this archive sit near 0.02 sigma, and the default first step moves those atoms by more than the cell. The problem states energy_above_minimum 0.001 above the Cambridge minimum -397.492331 and max_force_calls 1000000.
+force_calls 339309
 force_calls_min 70539
-force_calls_max 8789932
-nfailed 8
-median 483128
+force_calls_max 943188
+nfailed 0
+median 240166
 code FLAME
 code_version 1.0
 commit 99a615acaef6bc6afe44d895f666c6d60250f7d8
@@ -19,16 +19,16 @@ template flame/lj75-minhocao
 problem globalopt/lj75
 tuning dtinit
 counter harness
-par2_mean 20000000
+par2_mean 2000000
 wilson_low 0
-wilson_high 0.0343473597466
-par2_median 20000000
-par2_median_low 20000000
-par2_median_high 20000000
-v2_nfailed 108
+wilson_high 0.0513279521969
+par2_median 2000000
+par2_median_low 2000000
+par2_median_high 2000000
+v2_nfailed 71
 v2_successes 0
-n 108
-energy_min -397.48501282
+n 71
+energy_min -394.814244373
 energy_max -378.788488414
-calls_to_best_mean 716709.185185
+calls_to_best_mean 196846.126761
 partial true

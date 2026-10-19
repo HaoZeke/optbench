@@ -4,8 +4,8 @@
 # ioput is the documented minhocao start 1.d-2 5.d2 1.d5. earr tolerances are 2.d-3 1.d-1.
 # Local optimisation is the code default FIRE tolerance 2.d-4 Ha/Bohr.
 # GEOFIREDTINIT 1.d-9 and GEOFIREDTMIN 1.d-12 replace the code defaults 10 and 1. Pairs in this archive sit near 0.02 sigma, and the default first step moves those atoms by more than the cell.
-# No energy_above_minimum is stated. partial is true and the row is not ranked. A Cambridge reference ends the search at that energy plus 0.001. reference_bound marks a start that reached it. force_calls is that count. The start is not a ranked success.
-# minhocao on the lj150 coordinate archive. ioput, earr tolerances, fingerprint, seed, and the FIRE force tolerance match flame/lj38-minhocao. GEOFIREDTINIT is 1.d-9 and GEOFIREDTMIN is 1.d-12. The code defaults are 10 and 1. Pairs in this archive sit near 0.02 sigma, and the default first step moves those atoms by more than the cell. The problem file does not state energy_above_minimum, so the row stays partial and is not ranked. The search ends at the Cambridge minimum -893.310258 plus 0.001. reference_bound marks a start that reached that energy, and force_calls is the harness count at that point.
+# Success is a relaxed enthalpy at or below -893.309258, the reference plus energy_above_minimum. The count stops before the next hop is charged.
+# minhocao on the lj150 coordinate archive. ioput, earr tolerances, fingerprint, seed, and the FIRE force tolerance match flame/lj38-minhocao. GEOFIREDTINIT is 1.d-9 and GEOFIREDTMIN is 1.d-12. The code defaults are 10 and 1. Pairs in this archive sit near 0.02 sigma, and the default first step moves those atoms by more than the cell. The problem states energy_above_minimum 0.001 above the Cambridge minimum -893.310258 and max_force_calls 10000000.
 force_calls 122859
 force_calls_min 49497
 force_calls_max 285533

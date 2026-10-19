@@ -7,7 +7,7 @@ commit = "99a615acaef6bc6afe44d895f666c6d60250f7d8"
 algorithm = "minhocao"
 tuning = "dtinit"
 failure_cap = 10000000
-note = "minhocao on the lj150 coordinate archive. ioput, earr tolerances, fingerprint, seed, and the FIRE force tolerance match flame/lj38-minhocao. GEOFIREDTINIT is 1.d-9 and GEOFIREDTMIN is 1.d-12. The code defaults are 10 and 1. Pairs in this archive sit near 0.02 sigma, and the default first step moves those atoms by more than the cell. The problem file does not state energy_above_minimum, so the row stays partial and is not ranked. The search ends at the Cambridge minimum -893.310258 plus 0.001. reference_bound marks a start that reached that energy, and force_calls is the harness count at that point."
+note = "minhocao on the lj150 coordinate archive. ioput, earr tolerances, fingerprint, seed, and the FIRE force tolerance match flame/lj38-minhocao. GEOFIREDTINIT is 1.d-9 and GEOFIREDTMIN is 1.d-12. The code defaults are 10 and 1. Pairs in this archive sit near 0.02 sigma, and the default first step moves those atoms by more than the cell. The problem states energy_above_minimum 0.001 above the Cambridge minimum -893.310258 and max_force_calls 10000000."
 
 [flame]
 seed = 314159

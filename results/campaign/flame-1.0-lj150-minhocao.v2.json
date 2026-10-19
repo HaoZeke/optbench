@@ -55,7 +55,7 @@
         },
         "parameters": {
           "cap": 10000000,
-          "ceiling": null,
+          "ceiling": -893.309258,
           "cell_angstrom": 10000000.0,
           "geofiredtinit": "1.d-9",
           "geofiredtmin": "1.d-12",
