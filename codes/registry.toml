@@ -125,6 +125,15 @@ committed = "2026-10-13"
 note = "Geometry optimizer at 767e2c0c13ff2b851ac82101ccd5aab9a558a4f1. The version string is 0.5.1.dev2+g767e2c0c1. Transition-state steps on this revision are RS_I_RFO and P_RFO. RS_PRFO is a comment on the RFO base class and is not a step type. The Lennard-Jones 38 and Pt-island rows use Cartesian coordinates and one initial harness Hessian. A Hessian is the central difference of the harness gradient, and those evaluations are force calls."
 
 [[code]]
+id = "optim-svnrev"
+name = "OPTIM"
+role = "saddle search"
+repository = "https://www-wales.ch.cam.ac.uk/svn.tar.bz2"
+ref = "df8da599267534fbe43a250e578f7396a7946311"
+commit = "df8da599267534fbe43a250e578f7396a7946311"
+note = "Wales group OPTIM from the git software image at https://www-wales.ch.cam.ac.uk/svn.tar.bz2, sha256 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f. The source revision recorded in OPTIM/source/SVNREV is df8da599267534fbe43a250e578f7396a7946311. Hybrid eigenvector-following is BFGSTS with NOHESS and forward Rayleigh-Ritz differences (USEDIAG 3). BFGS-TS is the same search with central differences (USEDIAG 2). The lowest eigenvector is EIGENONLY with central differences, because that entry point does not pass a base gradient into the forward quotient. Force calls are harness socket evaluations."
+
+[[code]]
 id = "artn"
 name = "pARTn"
 role = "saddle search"
@@ -201,7 +210,7 @@ role = "saddle search"
 repository = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
 ref = "svn-snapshot"
 commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
-note = "No public git commit. The pin is the sha256 of the Wales svn.tar.bz2 snapshot, 122743078 bytes. Minimization L-BFGS, the archived double-ended preambles, and PATHSAMPLE call the ASE socket. The score is pes.evaluate summed over every OPTIM child. OPTIM's own call counter is not a score. The 2014 rows used wales-27058 and stay in the archive."
+note = "No public git commit. The pin is the sha256 of the Wales svn.tar.bz2 snapshot, 122743078 bytes. Minimization L-BFGS, the archived double-ended preambles, and PATHSAMPLE call the ASE socket. The score is pes.evaluate summed over every OPTIM child. OPTIM's own call counter is not a score. The 2014 rows used wales-27058 and stay in the archive. Transition-state and lowest-eigenvector rows on this snapshot use BFGSTS, BFGS-TS, and EIGENONLY."
 
 [[code]]
 id = "airss"

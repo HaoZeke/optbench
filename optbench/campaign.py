@@ -103,6 +103,19 @@ def iter_geometries(path: Path) -> list[Path]:
 _EON_ENGINES = {"eon-client", "eon"}
 
 
+_OPTIM_TRANSITION = frozenset({"hef-ffd", "bfgsts", "rr-ffd"})
+
+
+def _optim_transition(template: dict) -> bool:
+    """Transition-state, saddle, and lowest-eigenvector OPTIM templates.
+
+    Minimization L-BFGS stays on the engine plugin. That plugin refuses
+    every other OPTIM method.
+    """
+    main = ((template.get("ini") or {}).get("Main") or {})
+    return str(main.get("method") or "") in _OPTIM_TRANSITION
+
+
 def _check_stop(problem: dict, template: dict) -> int | None:
     """Return the force-call cap, or None when the problem does not state one.
 
@@ -381,6 +394,23 @@ def run(
             output=output,
             workers=workers,
             work=work,
+        )
+    if template["engine"] == "optim" and _optim_transition(template):
+        from .optim_campaign import run_template
+
+        problem = resolve_problem(root, problem_name)
+        stated = template.get("problem")
+        if stated and stated != problem["id"]:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return run_template(
+            root,
+            problem,
+            template,
+            output=output,
+            workers=workers,
+            work=work,
+            limit=limit,
+            resume=resume,
         )
     if template["engine"] == "rgsaddle":
         from .rgsaddle_minmode import run_template

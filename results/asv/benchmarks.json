@@ -805499,5 +805499,735 @@
     "type": "track",
     "unit": "fraction",
     "version": "cd2f56a181dcf5d11ee5f312c40f7e858f1449fd1d1c13c2a4d464c5bf9bf62e"
+  },
+  "bench_optim.OptimLj38Bfgsts.time_search": {
+    "code": "class _Benchmark:\n    def time_search(self, seed, start):\n        self.record = self.measure(seed, start)\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "min_run_count": 1,
+    "name": "bench_optim.OptimLj38Bfgsts.time_search",
+    "number": 1,
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0000'"
+      ]
+    ],
+    "repeat": 1,
+    "rounds": 1,
+    "sample_time": 0,
+    "timeout": 1800,
+    "type": "time",
+    "unit": "seconds",
+    "version": "6d7b91d1cd2467f8156570d1ffdc769648a75f360565ab2ea275ebc350f17e6a",
+    "warmup_time": 0
+  },
+  "bench_optim.OptimLj38Bfgsts.track_failure_cap": {
+    "code": "class _Benchmark:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if _load(template_id, problem_id, start, seed)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "name": "bench_optim.OptimLj38Bfgsts.track_failure_cap",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0000'"
+      ]
+    ],
+    "timeout": 1800,
+    "type": "track",
+    "unit": "count",
+    "version": "67c20eb068b626adab61b46ff35b25d344a521ea2b57a21b922a028163575785"
+  },
+  "bench_optim.OptimLj38Bfgsts.track_failure_crash": {
+    "code": "class _Benchmark:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if _load(template_id, problem_id, start, seed)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "name": "bench_optim.OptimLj38Bfgsts.track_failure_crash",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0000'"
+      ]
+    ],
+    "timeout": 1800,
+    "type": "track",
+    "unit": "count",
+    "version": "481d75913e85ad7cb81490e1c109bad1146bde59b846b6a18413ce1ccc31b4fb"
+  },
+  "bench_optim.OptimLj38Bfgsts.track_failure_divergence": {
+    "code": "class _Benchmark:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if _load(template_id, problem_id, start, seed)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "name": "bench_optim.OptimLj38Bfgsts.track_failure_divergence",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0000'"
+      ]
+    ],
+    "timeout": 1800,
+    "type": "track",
+    "unit": "count",
+    "version": "b9fd232e08e7f4bd93f9bd90014824d3f6af3aa983ca9665af9e4d2d5022dc15"
+  },
+  "bench_optim.OptimLj38Bfgsts.track_failure_wrong_stationary": {
+    "code": "class _Benchmark:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if _load(template_id, problem_id, start, seed)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "name": "bench_optim.OptimLj38Bfgsts.track_failure_wrong_stationary",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0000'"
+      ]
+    ],
+    "timeout": 1800,
+    "type": "track",
+    "unit": "count",
+    "version": "33804be0593d81932a6c6d809e7d2818ba93f30737ed27f532797c9fffc6b4f8"
+  },
+  "bench_optim.OptimLj38Bfgsts.track_force_calls": {
+    "code": "class _Benchmark:\n    def track_force_calls(self, seed, start) -> float:\n        return float(_load(template_id, problem_id, start, seed)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "name": "bench_optim.OptimLj38Bfgsts.track_force_calls",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0000'"
+      ]
+    ],
+    "timeout": 1800,
+    "type": "track",
+    "unit": "force calls",
+    "version": "c66370e1de49c015ca758d877b8f3c8a9779317e71d4755b699abe3e901849b2"
+  },
+  "bench_optim.OptimLj38Bfgsts.track_success": {
+    "code": "class _Benchmark:\n    def track_success(self, seed, start) -> float:\n        record = _load(template_id, problem_id, start, seed)\n        return 1.0 if record[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "name": "bench_optim.OptimLj38Bfgsts.track_success",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0000'"
+      ]
+    ],
+    "timeout": 1800,
+    "type": "track",
+    "unit": "fraction",
+    "version": "ae650a7ffffd5740fc4038c8550fe2a243adb39d8a2f98e5efd4c3e525247412"
+  },
+  "bench_optim.OptimLj38Hef.time_search": {
+    "code": "class _Benchmark:\n    def time_search(self, seed, start):\n        self.record = self.measure(seed, start)\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "min_run_count": 1,
+    "name": "bench_optim.OptimLj38Hef.time_search",
+    "number": 1,
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0000'"
+      ]
+    ],
+    "repeat": 1,
+    "rounds": 1,
+    "sample_time": 0,
+    "timeout": 1800,
+    "type": "time",
+    "unit": "seconds",
+    "version": "6d7b91d1cd2467f8156570d1ffdc769648a75f360565ab2ea275ebc350f17e6a",
+    "warmup_time": 0
+  },
+  "bench_optim.OptimLj38Hef.track_failure_cap": {
+    "code": "class _Benchmark:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if _load(template_id, problem_id, start, seed)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "name": "bench_optim.OptimLj38Hef.track_failure_cap",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0000'"
+      ]
+    ],
+    "timeout": 1800,
+    "type": "track",
+    "unit": "count",
+    "version": "67c20eb068b626adab61b46ff35b25d344a521ea2b57a21b922a028163575785"
+  },
+  "bench_optim.OptimLj38Hef.track_failure_crash": {
+    "code": "class _Benchmark:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if _load(template_id, problem_id, start, seed)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "name": "bench_optim.OptimLj38Hef.track_failure_crash",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0000'"
+      ]
+    ],
+    "timeout": 1800,
+    "type": "track",
+    "unit": "count",
+    "version": "481d75913e85ad7cb81490e1c109bad1146bde59b846b6a18413ce1ccc31b4fb"
+  },
+  "bench_optim.OptimLj38Hef.track_failure_divergence": {
+    "code": "class _Benchmark:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if _load(template_id, problem_id, start, seed)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "name": "bench_optim.OptimLj38Hef.track_failure_divergence",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0000'"
+      ]
+    ],
+    "timeout": 1800,
+    "type": "track",
+    "unit": "count",
+    "version": "b9fd232e08e7f4bd93f9bd90014824d3f6af3aa983ca9665af9e4d2d5022dc15"
+  },
+  "bench_optim.OptimLj38Hef.track_failure_wrong_stationary": {
+    "code": "class _Benchmark:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if _load(template_id, problem_id, start, seed)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "name": "bench_optim.OptimLj38Hef.track_failure_wrong_stationary",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0000'"
+      ]
+    ],
+    "timeout": 1800,
+    "type": "track",
+    "unit": "count",
+    "version": "33804be0593d81932a6c6d809e7d2818ba93f30737ed27f532797c9fffc6b4f8"
+  },
+  "bench_optim.OptimLj38Hef.track_force_calls": {
+    "code": "class _Benchmark:\n    def track_force_calls(self, seed, start) -> float:\n        return float(_load(template_id, problem_id, start, seed)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "name": "bench_optim.OptimLj38Hef.track_force_calls",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0000'"
+      ]
+    ],
+    "timeout": 1800,
+    "type": "track",
+    "unit": "force calls",
+    "version": "c66370e1de49c015ca758d877b8f3c8a9779317e71d4755b699abe3e901849b2"
+  },
+  "bench_optim.OptimLj38Hef.track_success": {
+    "code": "class _Benchmark:\n    def track_success(self, seed, start) -> float:\n        record = _load(template_id, problem_id, start, seed)\n        return 1.0 if record[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "name": "bench_optim.OptimLj38Hef.track_success",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0000'"
+      ]
+    ],
+    "timeout": 1800,
+    "type": "track",
+    "unit": "fraction",
+    "version": "ae650a7ffffd5740fc4038c8550fe2a243adb39d8a2f98e5efd4c3e525247412"
+  },
+  "bench_optim.OptimLj38RayleighRitz.time_search": {
+    "code": "class _Benchmark:\n    def time_search(self, seed, start):\n        self.record = self.measure(seed, start)\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "min_run_count": 1,
+    "name": "bench_optim.OptimLj38RayleighRitz.time_search",
+    "number": 1,
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0000'"
+      ]
+    ],
+    "repeat": 1,
+    "rounds": 1,
+    "sample_time": 0,
+    "timeout": 1800,
+    "type": "time",
+    "unit": "seconds",
+    "version": "6d7b91d1cd2467f8156570d1ffdc769648a75f360565ab2ea275ebc350f17e6a",
+    "warmup_time": 0
+  },
+  "bench_optim.OptimLj38RayleighRitz.track_failure_cap": {
+    "code": "class _Benchmark:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if _load(template_id, problem_id, start, seed)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "name": "bench_optim.OptimLj38RayleighRitz.track_failure_cap",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0000'"
+      ]
+    ],
+    "timeout": 1800,
+    "type": "track",
+    "unit": "count",
+    "version": "67c20eb068b626adab61b46ff35b25d344a521ea2b57a21b922a028163575785"
+  },
+  "bench_optim.OptimLj38RayleighRitz.track_failure_crash": {
+    "code": "class _Benchmark:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if _load(template_id, problem_id, start, seed)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "name": "bench_optim.OptimLj38RayleighRitz.track_failure_crash",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0000'"
+      ]
+    ],
+    "timeout": 1800,
+    "type": "track",
+    "unit": "count",
+    "version": "481d75913e85ad7cb81490e1c109bad1146bde59b846b6a18413ce1ccc31b4fb"
+  },
+  "bench_optim.OptimLj38RayleighRitz.track_failure_divergence": {
+    "code": "class _Benchmark:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if _load(template_id, problem_id, start, seed)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "name": "bench_optim.OptimLj38RayleighRitz.track_failure_divergence",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0000'"
+      ]
+    ],
+    "timeout": 1800,
+    "type": "track",
+    "unit": "count",
+    "version": "b9fd232e08e7f4bd93f9bd90014824d3f6af3aa983ca9665af9e4d2d5022dc15"
+  },
+  "bench_optim.OptimLj38RayleighRitz.track_failure_wrong_stationary": {
+    "code": "class _Benchmark:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if _load(template_id, problem_id, start, seed)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "name": "bench_optim.OptimLj38RayleighRitz.track_failure_wrong_stationary",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0000'"
+      ]
+    ],
+    "timeout": 1800,
+    "type": "track",
+    "unit": "count",
+    "version": "33804be0593d81932a6c6d809e7d2818ba93f30737ed27f532797c9fffc6b4f8"
+  },
+  "bench_optim.OptimLj38RayleighRitz.track_force_calls": {
+    "code": "class _Benchmark:\n    def track_force_calls(self, seed, start) -> float:\n        return float(_load(template_id, problem_id, start, seed)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "name": "bench_optim.OptimLj38RayleighRitz.track_force_calls",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0000'"
+      ]
+    ],
+    "timeout": 1800,
+    "type": "track",
+    "unit": "force calls",
+    "version": "c66370e1de49c015ca758d877b8f3c8a9779317e71d4755b699abe3e901849b2"
+  },
+  "bench_optim.OptimLj38RayleighRitz.track_success": {
+    "code": "class _Benchmark:\n    def track_success(self, seed, start) -> float:\n        record = _load(template_id, problem_id, start, seed)\n        return 1.0 if record[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "name": "bench_optim.OptimLj38RayleighRitz.track_success",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0000'"
+      ]
+    ],
+    "timeout": 1800,
+    "type": "track",
+    "unit": "fraction",
+    "version": "ae650a7ffffd5740fc4038c8550fe2a243adb39d8a2f98e5efd4c3e525247412"
+  },
+  "bench_optim.OptimPtBfgsts.time_search": {
+    "code": "class _Benchmark:\n    def time_search(self, seed, start):\n        self.record = self.measure(seed, start)\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "min_run_count": 1,
+    "name": "bench_optim.OptimPtBfgsts.time_search",
+    "number": 1,
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'initial_0'"
+      ]
+    ],
+    "repeat": 1,
+    "rounds": 1,
+    "sample_time": 0,
+    "timeout": 3600,
+    "type": "time",
+    "unit": "seconds",
+    "version": "6d7b91d1cd2467f8156570d1ffdc769648a75f360565ab2ea275ebc350f17e6a",
+    "warmup_time": 0
+  },
+  "bench_optim.OptimPtBfgsts.track_failure_cap": {
+    "code": "class _Benchmark:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if _load(template_id, problem_id, start, seed)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "name": "bench_optim.OptimPtBfgsts.track_failure_cap",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'initial_0'"
+      ]
+    ],
+    "timeout": 3600,
+    "type": "track",
+    "unit": "count",
+    "version": "67c20eb068b626adab61b46ff35b25d344a521ea2b57a21b922a028163575785"
+  },
+  "bench_optim.OptimPtBfgsts.track_failure_crash": {
+    "code": "class _Benchmark:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if _load(template_id, problem_id, start, seed)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "name": "bench_optim.OptimPtBfgsts.track_failure_crash",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'initial_0'"
+      ]
+    ],
+    "timeout": 3600,
+    "type": "track",
+    "unit": "count",
+    "version": "481d75913e85ad7cb81490e1c109bad1146bde59b846b6a18413ce1ccc31b4fb"
+  },
+  "bench_optim.OptimPtBfgsts.track_failure_divergence": {
+    "code": "class _Benchmark:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if _load(template_id, problem_id, start, seed)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "name": "bench_optim.OptimPtBfgsts.track_failure_divergence",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'initial_0'"
+      ]
+    ],
+    "timeout": 3600,
+    "type": "track",
+    "unit": "count",
+    "version": "b9fd232e08e7f4bd93f9bd90014824d3f6af3aa983ca9665af9e4d2d5022dc15"
+  },
+  "bench_optim.OptimPtBfgsts.track_failure_wrong_stationary": {
+    "code": "class _Benchmark:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if _load(template_id, problem_id, start, seed)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "name": "bench_optim.OptimPtBfgsts.track_failure_wrong_stationary",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'initial_0'"
+      ]
+    ],
+    "timeout": 3600,
+    "type": "track",
+    "unit": "count",
+    "version": "33804be0593d81932a6c6d809e7d2818ba93f30737ed27f532797c9fffc6b4f8"
+  },
+  "bench_optim.OptimPtBfgsts.track_force_calls": {
+    "code": "class _Benchmark:\n    def track_force_calls(self, seed, start) -> float:\n        return float(_load(template_id, problem_id, start, seed)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "name": "bench_optim.OptimPtBfgsts.track_force_calls",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'initial_0'"
+      ]
+    ],
+    "timeout": 3600,
+    "type": "track",
+    "unit": "force calls",
+    "version": "c66370e1de49c015ca758d877b8f3c8a9779317e71d4755b699abe3e901849b2"
+  },
+  "bench_optim.OptimPtBfgsts.track_success": {
+    "code": "class _Benchmark:\n    def track_success(self, seed, start) -> float:\n        record = _load(template_id, problem_id, start, seed)\n        return 1.0 if record[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "name": "bench_optim.OptimPtBfgsts.track_success",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'initial_0'"
+      ]
+    ],
+    "timeout": 3600,
+    "type": "track",
+    "unit": "fraction",
+    "version": "ae650a7ffffd5740fc4038c8550fe2a243adb39d8a2f98e5efd4c3e525247412"
+  },
+  "bench_optim.OptimPtHef.time_search": {
+    "code": "class _Benchmark:\n    def time_search(self, seed, start):\n        self.record = self.measure(seed, start)\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "min_run_count": 1,
+    "name": "bench_optim.OptimPtHef.time_search",
+    "number": 1,
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'initial_0'"
+      ]
+    ],
+    "repeat": 1,
+    "rounds": 1,
+    "sample_time": 0,
+    "timeout": 3600,
+    "type": "time",
+    "unit": "seconds",
+    "version": "6d7b91d1cd2467f8156570d1ffdc769648a75f360565ab2ea275ebc350f17e6a",
+    "warmup_time": 0
+  },
+  "bench_optim.OptimPtHef.track_failure_cap": {
+    "code": "class _Benchmark:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if _load(template_id, problem_id, start, seed)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "name": "bench_optim.OptimPtHef.track_failure_cap",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'initial_0'"
+      ]
+    ],
+    "timeout": 3600,
+    "type": "track",
+    "unit": "count",
+    "version": "67c20eb068b626adab61b46ff35b25d344a521ea2b57a21b922a028163575785"
+  },
+  "bench_optim.OptimPtHef.track_failure_crash": {
+    "code": "class _Benchmark:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if _load(template_id, problem_id, start, seed)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "name": "bench_optim.OptimPtHef.track_failure_crash",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'initial_0'"
+      ]
+    ],
+    "timeout": 3600,
+    "type": "track",
+    "unit": "count",
+    "version": "481d75913e85ad7cb81490e1c109bad1146bde59b846b6a18413ce1ccc31b4fb"
+  },
+  "bench_optim.OptimPtHef.track_failure_divergence": {
+    "code": "class _Benchmark:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if _load(template_id, problem_id, start, seed)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "name": "bench_optim.OptimPtHef.track_failure_divergence",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'initial_0'"
+      ]
+    ],
+    "timeout": 3600,
+    "type": "track",
+    "unit": "count",
+    "version": "b9fd232e08e7f4bd93f9bd90014824d3f6af3aa983ca9665af9e4d2d5022dc15"
+  },
+  "bench_optim.OptimPtHef.track_failure_wrong_stationary": {
+    "code": "class _Benchmark:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if _load(template_id, problem_id, start, seed)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "name": "bench_optim.OptimPtHef.track_failure_wrong_stationary",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'initial_0'"
+      ]
+    ],
+    "timeout": 3600,
+    "type": "track",
+    "unit": "count",
+    "version": "33804be0593d81932a6c6d809e7d2818ba93f30737ed27f532797c9fffc6b4f8"
+  },
+  "bench_optim.OptimPtHef.track_force_calls": {
+    "code": "class _Benchmark:\n    def track_force_calls(self, seed, start) -> float:\n        return float(_load(template_id, problem_id, start, seed)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "name": "bench_optim.OptimPtHef.track_force_calls",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'initial_0'"
+      ]
+    ],
+    "timeout": 3600,
+    "type": "track",
+    "unit": "force calls",
+    "version": "c66370e1de49c015ca758d877b8f3c8a9779317e71d4755b699abe3e901849b2"
+  },
+  "bench_optim.OptimPtHef.track_success": {
+    "code": "class _Benchmark:\n    def track_success(self, seed, start) -> float:\n        record = _load(template_id, problem_id, start, seed)\n        return 1.0 if record[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        from optbench.optim_campaign import optim_binary\n    \n        optim_binary()",
+    "name": "bench_optim.OptimPtHef.track_success",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'initial_0'"
+      ]
+    ],
+    "timeout": 3600,
+    "type": "track",
+    "unit": "fraction",
+    "version": "ae650a7ffffd5740fc4038c8550fe2a243adb39d8a2f98e5efd4c3e525247412"
   }
 }

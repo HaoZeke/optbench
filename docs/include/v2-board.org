@@ -298,7 +298,7 @@
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
-   <td data-code="optim">—</td>
+   <td data-code="optim" data-template="optim/bfgsts-ts-lj38" data-par2="835.01"><span class="bench-score">835.01</span><a href="generated/suites/tsopt.html#LJ38-templates">optim/bfgsts-ts-lj38</a></td>
    <td data-code="optking" data-template="optking/lj38-p-rfo" data-par2="7030.36"><span class="bench-score">7030.36</span><a href="generated/suites/tsopt.html#LJ38-templates">optking/lj38-p-rfo</a></td>
    <td data-code="softsaddle">—</td>
    <td data-code="tsase" data-template="tsase/dimer-lj38" data-par2="20000"><span class="bench-score">20000</span><a href="generated/suites/tsopt.html#LJ38-templates">tsase/dimer-lj38</a></td>
@@ -325,7 +325,7 @@
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
-   <td data-code="optim">—</td>
+   <td data-code="optim" data-template="optim/bfgsts-ts-pt" data-par2="281.592"><span class="bench-score">281.592</span><a href="generated/suites/tsopt.html#pt-island-templates">optim/bfgsts-ts-pt</a></td>
    <td data-code="optking" data-template="optking/pt-rs-irfo" data-par2="1059.98"><span class="bench-score">1059.98</span><a href="generated/suites/tsopt.html#pt-island-templates">optking/pt-rs-irfo</a></td>
    <td data-code="softsaddle">—</td>
    <td data-code="tsase" data-template="tsase/dimer-pt" data-par2="1144.31"><span class="bench-score">1144.31</span><a href="generated/suites/tsopt.html#pt-island-templates">tsase/dimer-pt</a></td>

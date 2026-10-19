@@ -1,0 +1,27 @@
+id = "optim/hef-ffd-ts-lj38"
+engine = "optim"
+problem = "tsopt/LJ38"
+code = "optim"
+code_version = "df8da599"
+commit = "df8da599267534fbe43a250e578f7396a7946311"
+algorithm = "hybrid eigenvector-following"
+tuning = "default"
+
+[ini.Main]
+method = "hef-ffd"
+
+[ini.Optim]
+nevs = 500
+nbfgsmax1 = 10
+nbfgsmax2 = 100
+ceig = 1.0e-4
+usediag = 3
+maxstep = 0.2
+maxbfgs = 0.2
+updates = 4
+seed = 2014
+convu = 1.0
+
+[ini.Optimizer]
+converged_force = 0.001
+max_iterations = 10000

@@ -40,6 +40,10 @@ def test_campaign_names_map_to_problems():
     assert campaign_problem("rgsaddle-0.2.2-dimer-lbfgs-ts-pt") == "tsopt/pt-island"
     assert campaign_problem("rgsaddle-0.2.2-mode-dimer-loweig") == "lowest-eigenvector/lj38"
     assert campaign_problem("rgsaddle-0.2.2-dimer-lbfgs-saddle-pt") == "saddle-search/pt-island"
+    assert campaign_problem("optim-df8da599-hef-ffd-ts-lj38") == "tsopt/LJ38"
+    assert campaign_problem("optim-df8da599-bfgsts-ts-pt") == "tsopt/pt-island"
+    assert campaign_problem("optim-df8da599-rr-loweig") == "lowest-eigenvector/lj38"
+    assert campaign_problem("optim-df8da599-saddle-hef-ffd-pt") == "saddle-search/pt-island"
 
 
 def test_lj38_table_ranks_the_archived_scores():

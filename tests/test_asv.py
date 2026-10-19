@@ -144,6 +144,7 @@ def test_pending_grid_is_every_problem_and_code():
         "gmin",
         "pele",
         "optking",
+        "optim-svnrev",
         "artn",
         "tsase",
         "pykmc",
