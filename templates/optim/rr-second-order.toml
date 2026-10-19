@@ -1,0 +1,42 @@
+# Second-order Rayleigh-Ritz on the archived LJ38 xyz set.
+id = "optim/rr-second-order"
+engine = "optim-loweig"
+code = "OPTIM"
+code_version = "df8da599"
+commit = "df8da599267534fbe43a250e578f7396a7946311"
+algorithm = "hybrid eigenvector following"
+problem = "lowest-eigenvector/lj38"
+task = "lowest-eigenvector"
+profile = "archive"
+reducer = "all"
+ranked = false
+parameter_source = "archive"
+note = "Website odata.preamble: usediag 2, updates 4 100, maxbfgs 0.2 1.0, eigenonly 1D-13 0.99, READVEC. BFGSTSPC 1.0D10 restores the cover stop on df8da599. The score is OPTIM energy+gradient calls, not the harness socket."
+
+[optimizer]
+name = "XMYLBFGS"
+
+[optimizer.parameters]
+usediag = 2
+mupdate = 4
+xmupdate = 100
+maxbfgs = 0.2
+maxxbfgs = 1.0
+ceig = 1e-13
+cover = 0.99
+bfgstspc = 1.0e10
+
+[potential]
+kind = "lennard-jones"
+epsilon = 1.0
+sigma = 1.0
+rc = 40.0
+pbc = [false, false, false]
+
+[stop]
+norm = "overlap"
+overlap = 0.99
+max_force_calls = 10000
+
+[input]
+archive_path = "website/lowest-eigenvector/lj38/coords.tar.gz"
