@@ -6,7 +6,7 @@ code_version = "3.11.2.dev2+g22d94a6fa"
 commit = "22d94a6fae8cf2d08d51ecc8b9291a47667aa95c"
 algorithm = "basin hopping"
 tuning = "default"
-note = "Basin hopping uses the same sampler, rattle, local optimizer, and seed rule as agox/lj38-bh. The confinement cube is 36 Å inside a 48 Å cell. The potential is the harness Lennard-Jones potential, cutoff 40, epsilon 1, sigma 1, no shift. Geometries come from the problem archive. A success is an energy at or below the problem reference -397.492331 plus 0.001. The force-call cap is 1000000."
+note = "Basin hopping uses the same sampler, rattle, local optimizer, and seed rule as agox/lj38-bh. The confinement cube is 36 Å inside a 48 Å cell. The potential is the harness Lennard-Jones potential, cutoff 40, epsilon 1, sigma 1, no shift. Geometries come from the problem archive. Several of those geometries overlap, and an uncapped L-BFGS-B step puts them on the confinement wall. While the peak atomic force is above 1000, and for at most 40 steps, a local step moves at most 0.2 along that force. A success is an energy at or below the problem reference -397.492331 plus 0.001. The force-call cap is 1000000."
 
 [agox]
 method = "basin_hopping"

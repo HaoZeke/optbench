@@ -242,7 +242,9 @@ class FastLBFGS:
     ``run`` calls observers at step 0 so AGOX can record ``E_initial``.
     The step stops when the ASE maximum atomic force is at ``fmax`` or
     ``steps`` evaluations have run. Bounds come from an AGOX box constraint
-    on the atoms.
+    on the atoms. While the peak atomic force is above 1000, and for at
+    most 40 steps, the atom moves at most 0.2 along that force. Without
+    that cap, L-BFGS-B puts an overlapped cluster on the confinement wall.
     """
 
     def __new__(cls, atoms, logfile=None, trajectory=None, **kwargs):
@@ -262,13 +264,14 @@ class FastLBFGS:
                 self.call_observers()
                 x0 = np.array(opt.get_x(), dtype=np.float64, copy=True)
                 bounds = _box_bounds(self.atoms)
+                lo = hi = None
                 if bounds is not None:
                     lo = np.array([pair[0] for pair in bounds], dtype=np.float64)
                     hi = np.array([pair[1] for pair in bounds], dtype=np.float64)
                     x0 = np.minimum(np.maximum(x0, lo), hi)
                     opt.set_x(x0)
 
-                def fun(x):
+                def evaluate(x):
                     opt.set_x(x)
                     energy = float(opt.get_value())
                     gradient = np.asarray(opt.get_gradient(), dtype=np.float64)
@@ -278,7 +281,32 @@ class FastLBFGS:
                         raise _OptStop()
                     return energy, gradient
 
+                # L-BFGS-B takes the box bound on the first step when the
+                # force is huge. The atoms then sit on the confinement wall
+                # and stop interacting. Walk at most 0.2 along the force
+                # until the peak atomic force is 1000, and at most 40 such
+                # steps. A near-minimum structure leaves this loop at once.
+                x = x0
+                walked = 0
                 try:
+                    while self.nsteps < int(steps):
+                        _energy, gradient = evaluate(x)
+                        atomic = np.linalg.norm(gradient.reshape(-1, 3), axis=1)
+                        peak = float(atomic.max()) if atomic.size else 0.0
+                        walked += 1
+                        if peak <= 1000.0 or walked >= 40:
+                            break
+                        direction = gradient.reshape(-1, 3) / np.maximum(atomic, 1e-30)[:, None]
+                        x = x - (0.2 * direction).reshape(-1)
+                        if lo is not None:
+                            x = np.minimum(np.maximum(x, lo), hi)
+                    else:
+                        raise _OptStop()
+                    x0 = np.array(x, dtype=np.float64, copy=True)
+
+                    def fun(x):
+                        return evaluate(x)
+
                     minimize(
                         fun,
                         x0,
