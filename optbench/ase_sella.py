@@ -381,6 +381,13 @@ def discover(material: Path, template: dict) -> list[tuple[str, list[Path], int 
     select = (template.get("input") or {}).get("select", "con")
     if material.is_file():
         return [(material.name, [material], None)]
+    if select == "poscar":
+        files = [
+            path
+            for path in material.rglob("*")
+            if path.is_file() and path.name.startswith("POSCAR")
+        ]
+        return [(path.name, [path], None) for path in sorted(files, key=_nat_key)]
     files = [path for path in material.rglob("*") if path.is_file() and path.suffix == ".con"]
     if select == "cluster":
         files = [path for path in files if path.name.startswith("cluster_")]
@@ -816,7 +823,36 @@ def _cap_row(row: dict, atoms, message: str = "force-call cap") -> dict:
     return row
 
 
+def _paper_lbfgs36(template_or_optimizer: dict) -> bool:
+    optimizer = template_or_optimizer.get("optimizer") or template_or_optimizer
+    return str(optimizer.get("implementation") or "") == "3.6.0"
+
+
+def _run_lbfgs36(payload: dict) -> dict:
+    """ASE 3.6.0 LBFGS. The paper count is ``force_calls`` on the optimizer."""
+    from .ase_lbfgs36 import minimize_poscar
+
+    result = minimize_poscar(
+        Path(payload["paths"][0]),
+        payload["potential"],
+        dict(payload["optimizer"].get("parameters") or {}),
+        float(payload["tol"]),
+        int(payload["max_steps"]),
+    )
+    row = {
+        "failed": bool(result["failed"]),
+        "force_norm": float(result["force_norm"]),
+        "optimizer_force_calls": int(result["force_calls"]),
+        "energy": float(result["energy"]),
+    }
+    if payload.get("snapshot"):
+        row["parameters"] = result["parameters"]
+    return row
+
+
 def _run_minimize(payload: dict, bucket: CallCounter) -> dict:
+    if _paper_lbfgs36(payload["optimizer"]):
+        return _run_lbfgs36(payload)
     atoms = _attach(_read_atoms(Path(payload["paths"][0])), payload["potential"], bucket)
     opt = _build_optimizer(payload["optimizer"], atoms)
     row = {"failed": True, "force_norm": None, "expected_index": 0}
@@ -1240,7 +1276,8 @@ def _run_start(payload: dict) -> dict:
         else:
             row["failed"] = True
             row["error"] = f"{type(exc).__name__}: {exc}"[:500]
-    row["force_calls"] = int(bucket[0])
+    counted = row.get("optimizer_force_calls")
+    row["force_calls"] = int(counted) if counted is not None else int(bucket[0])
     row["verify_calls"] = int(bucket.state["verify_calls"])
     reasons = _reason_list(row, bucket[1], float(payload["tol"]))
     # NEB success is the band residual, not a Hessian index.
@@ -1292,6 +1329,10 @@ def _summarize(rows: list[dict], template: dict) -> dict:
         summary = summarize_capped(counts, cap)
         ok = [count for count in counts if count < cap]
         summary["force_calls_median"] = float(statistics.median(ok)) if ok else None
+        # The 2013 script writes np.mean of LBFGS.force_calls. half_even would
+        # move 53.72 to 54. Keep the unrounded mean for that counter.
+        if _paper_lbfgs36(template) and rows:
+            summary["force_calls"] = statistics.fmean(int(row["force_calls"]) for row in rows)
         return summary
     if reducer == "all":
         return summarize_all(
@@ -1368,17 +1409,20 @@ def _write_dat(
     partial: bool,
     scored: dict | None = None,
 ) -> None:
+    paper_steps = _paper_lbfgs36(template)
     method = {
         "profile": template["profile"],
         "parameter_source": template.get("parameter_source", ""),
-        "counter": "harness attach_ase_counter",
+        "counter": "ASE 3.6.0 LBFGS.force_calls" if paper_steps else "harness attach_ase_counter",
         "reducer": template["reducer"],
         "parameters": parameters,
         "potential": template.get("potential") or {},
         "stop": template.get("stop") or {},
     }
     note = template.get("note", "")
-    if template["task"] in {"minimize", "sella", "sella-search", "dimer"}:
+    if paper_steps:
+        note = note.strip()
+    elif template["task"] in {"minimize", "sella", "sella-search", "dimer"}:
         note = (
             note
             + " v2 success is the harness cap, the stop norm, and the Hessian index"

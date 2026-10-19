@@ -1,0 +1,34 @@
+force_calls 53.65
+force_calls_min 35
+force_calls_median 52
+force_calls_max 91
+nfailed 0
+starts 100
+code ASE
+code_version 3.6.0
+commit r2515
+algorithm LBFGS
+profile tuned
+template ase-3.6.0/morse-lbfgs
+problem minimization/morse-bulk
+counter harness
+reducer capped
+parameter_source archive
+method {"counter":"ASE 3.6.0 LBFGS.force_calls","parameter_source":"archive","parameters":{"H0":0.04,"alpha":25.0,"damping":1.0,"maxstep":0.2,"memory":20,"use_line_search":false},"potential":{"D":0.7102,"alpha":1.6047,"form":"tsase","kind":"morse","pbc":[true,true,true],"r0":2.897,"rc":9.5},"profile":"tuned","reducer":"capped","stop":{"force_norm":0.001,"max_force_calls":10000,"max_steps":10000,"norm":"l2"}}
+note Archive minimization/morse-bulk/ase-lbfgs. ASE 3.6.0 LBFGS uses memory 20, maxstep 0.2, and alpha 1/0.04, so the inverse Hessian stays 0.04. The potential is TSASE Morse on the archived POSCAR starts: D 0.7102, alpha 1.6047, r0 2.897, cutoff 9.5, pair energy shifted to zero at the cutoff, orthorhombic DNINT minimum image. The count is LBFGS.force_calls, one per accepted step.
+host cursor
+date 2026-10-19
+contributor Rohit Goswami
+scoring par2-wilson-bootstrap
+par2_mean 53.65
+par2_median 52
+par2_median_low 49
+par2_median_high 54.5125
+par2_iqr 17.25
+success_rate 1
+wilson_low 0.9630065018
+wilson_high 1
+par_applied true
+par_factor 2
+bootstrap_resamples 2000
+bootstrap_seed 20261015

@@ -181,6 +181,16 @@ profile = "archive"
 task = "lowest-eigenvector"
 ranked = true
 
+[[code]]
+id = "ase-3.6.0"
+name = "ASE"
+role = "minimization"
+repository = "https://gitlab.com/ase/ase"
+ref = "3.6.0"
+commit = "r2515"
+committed = "2012-02-24"
+note = "Atomic Simulation Environment 3.6.0, svn r2515, released 24 Feb 2012. The Debian orig python-ase_3.6.0.2515.orig.tar.gz has md5 e3db4f1f83e96654db04e94dd15eab59. LBFGS keeps the initial inverse Hessian at 1/alpha and, with line search off, increments force_calls once per accepted step. The Morse row uses TSASE calculators/morse at svn r338: cutoff 9.5, pair energy shifted to zero at the cutoff, orthorhombic DNINT minimum image."
+
 # generated ASE and Sella templates
 
 [[template]]
