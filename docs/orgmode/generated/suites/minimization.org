@@ -670,7 +670,7 @@
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
+   <p class="bench-gaps">Eon svn rows are not yet on the harness counter. Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
    <figure class="bench-plot"><a href="../../_static/board/minimization-morse-bulk-profile.svg"><picture><source srcset="../../_static/board/minimization-morse-bulk-profile.webp" type="image/webp"><img src="../../_static/board/minimization-morse-bulk-profile.png" alt="Dolan-More profile for minimization/morse-bulk" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/minimization-morse-bulk-cost.svg"><picture><source srcset="../../_static/board/minimization-morse-bulk-cost.webp" type="image/webp"><img src="../../_static/board/minimization-morse-bulk-cost.png" alt="Cost versus success for minimization/morse-bulk" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="morse-bulk-templates">
@@ -823,6 +823,9 @@
    <li>sella/morse-min-default Sella asv n=1, smoke run; scored 1 of 100 starts.</li>
    <li>ase/morse-lbfgs-tuned ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
    <li>ase/morse-preconlbfgs-tuned ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
+   </ul>
+   <h3>Not a harness score</h3><ul>
+   <li>eon-svn/morse-sd-twopoint Eon svn n=100, not yet on the harness counter.</li>
    </ul>
    <h3>Not scored</h3><ul>
    <li>eon-client/morse-cg: no per-start record</li>
