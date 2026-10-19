@@ -35,8 +35,26 @@ def test_the_ledger_covers_the_oracle_in_order():
             assert row["cause"]
         if (row.get("rerun") or {}).get("paper_baseline"):
             assert status == "reproduced"
-    assert counts == {"reproduced": 46, "not_reproduced": 29, "not_rerun": 76}
+    assert counts == {"reproduced": 47, "not_reproduced": 29, "not_rerun": 75}
     assert reproduction_errors(ROOT) == []
+
+
+def test_gman_qm_reproduces_the_archive_integers():
+    ledger = {row_id(row): row for row in load_ledger(ROOT / "oracle" / "reproduction.jsonl")}
+    row = ledger["neb/Pt-heptamer/gman-qm"]
+    assert row["status"] == "reproduced"
+    assert row["in_paper"] is False
+    assert row["failure_check"] is None
+    checks = {item["metric"]: item for item in row["checks"]}
+    assert checks["force_calls"]["archive"] == 190
+    assert checks["force_calls"]["rerun"] == 190
+    assert checks["force_calls_max"]["archive"] == 316
+    assert checks["force_calls_max"]["rerun"] == 316
+    assert checks["force_calls_min"]["archive"] == 103
+    assert checks["force_calls_min"]["rerun"] == 103
+    assert row["rerun"]["unrounded_mean"] == 190.92307692307693
+    assert row["rerun"]["paper_baseline"] is True
+    assert row["rerun"]["sha"] == "657e004099d6fcc5caa9640d40d979f24b802a53"
 
 
 def test_pele_paper_baseline_is_the_2014_stop():
