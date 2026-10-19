@@ -5,12 +5,14 @@ differences of the gradient), Rayleigh-Ritz memory 100, and a maximum
 Rayleigh-Ritz step of 1. The geometries are the archived xyz set in
 ``website/lowest-eigenvector/lj38/coords.tar.gz``.
 
-``df8da599`` still requires the eigenvalue percent change to stay under
-``EVPC`` (default 1) after the overlap crosses the cover. The keyword
-documentation says a cover value takes ``ceig`` out of function.
-``BFGSTSPC 1.0D10`` restores that cover stop. The score is OPTIM's
-printed energy-and-gradient count, the same field ``run_optim.sh`` reads.
-A start is a failure only when that count is at least 10000.
+The paper binary is ``wales-27058.tar.bz2``. ``OPTIM/source/SVNREV`` in
+that tarball is 27059, and ``EVPC`` defaults to 50, so the cover stop is
+the overlap. The later snapshot ``df8da599`` defaults ``EVPC`` to 1 and
+is a separate row on the same preamble. Neither row adds ``BFGSTSPC``.
+
+The score is OPTIM's printed energy-and-gradient count, the same field
+``run_optim.sh`` reads. A start is a failure only when that count is at
+least 10000.
 """
 
 from __future__ import annotations
@@ -27,31 +29,60 @@ ROOT = Path(__file__).resolve().parents[1]
 ARCHIVE_KEY = "website/lowest-eigenvector/lj38/coords.tar.gz"
 CAP = 10000
 OVERLAP = 0.99
-COMMIT = "df8da599267534fbe43a250e578f7396a7946311"
-TEMPLATE = "optim/rr-second-order"
 
-# The website odata.preamble, plus BFGSTSPC. The extra keyword is not in
-# the 2014 preamble. It disables the later eigenvalue-change veto.
-PREAMBLE = """\
-debug
-bfgssteps 1000
-comment convergence tolerance is norm(gradient)=1e-3, or that RMS(gradient)=1e-3 / sqrt(3*natoms) = 9.36585D-05
-comment bfgsconv 9.36585D-05
-nohess
-eigenonly 1D-13 0.99
-maxbfgs 0.2 1.0
-updates 4 100
-usediag 2
-READVEC
-BFGSTSPC 1.0D10
-"""
+# Exact bytes of the 2014 website odata.preamble, including the trailing
+# space on the updates line. No keyword is added.
+PREAMBLE_LINES = (
+    "debug",
+    "bfgssteps 1000",
+    "comment convergence tolerance is norm(gradient)=1e-3, or that RMS(gradient)=1e-3 / sqrt(3*natoms) = 9.36585D-05",
+    "comment bfgsconv 9.36585D-05",
+    "nohess",
+    "eigenonly 1D-13 0.99",
+    "maxbfgs 0.2 1.0",
+    "updates 4 100 ",
+    "usediag 2",
+    "READVEC",
+)
+PREAMBLE = "\n".join(PREAMBLE_LINES) + "\n"
+
+PAPER_COMMIT = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
+PAPER_VERSION = "27058"
+PAPER_TEMPLATE = "optim/rr-second-order"
+PAPER_DAT = "optim-27058-rr-second-order.dat"
+
+CURRENT_COMMIT = "df8da599267534fbe43a250e578f7396a7946311"
+CURRENT_VERSION = "df8da599"
+CURRENT_TEMPLATE = "optim/rr-second-order-current"
+CURRENT_DAT = "optim-df8da599-rr-second-order.dat"
 
 
-def binary_path() -> Path:
+def paper_binary() -> Path:
+    """OPTIM built from wales-27058.tar.bz2."""
+    env = os.environ.get("OPTIM_27058", "")
+    candidates = [Path(env)] if env else []
+    candidates.extend(
+        [
+            Path("/tmp/src/wales-27058/build-optim/OPTIM"),
+            Path("/tmp/src/wales/OPTIM/bin/gfortran/OPTIM"),
+        ]
+    )
+    for path in candidates:
+        if path.is_file():
+            return path
+    raise FileNotFoundError(
+        "OPTIM 27058 is not built. The pin is the sha256 "
+        f"{PAPER_COMMIT} of https://optbench.org/codes/wales-27058.tar.bz2. "
+        "Set OPTIM_27058 to the gfortran binary."
+    )
+
+
+def current_binary() -> Path:
+    """OPTIM from the later public snapshot, SVNREV df8da599."""
     env = os.environ.get("OPTIM_BIN", "")
     path = Path(env) if env else Path("/tmp/src/wales/OPTIM/build/gfortran/OPTIM")
     if not path.is_file():
-        raise FileNotFoundError(f"OPTIM binary is not at {path}")
+        raise FileNotFoundError(f"current OPTIM binary is not at {path}")
     return path
 
 
@@ -94,7 +125,7 @@ def _run_one(binary: str, coords: str, index: int) -> dict:
     root = Path(coords)
     prefix = f"{index:04d}"
     work = root / f"run-{prefix}"
-    work.mkdir(parents=True)
+    work.mkdir(parents=True, exist_ok=True)
     mode = (root / f"{prefix}_mode").read_text(encoding="utf-8")
     initial = (root / "initial_mode").read_text(encoding="utf-8")
     (work / "odata").write_text(_odata(root / f"{prefix}.xyz"), encoding="utf-8")
@@ -152,11 +183,12 @@ def extract_coords(root: Path, dest: Path) -> Path:
     return coords
 
 
-def run_all(coords: Path, workers: int = 1) -> list[dict]:
-    binary = str(binary_path())
-    specs = [(binary, str(coords), index) for index in range(200)]
+def run_all(coords: Path, binary: Path, workers: int = 1) -> list[dict]:
+    if "BFGSTSPC" in PREAMBLE.upper():
+        raise RuntimeError("the archived preamble must not add BFGSTSPC")
+    specs = [(str(binary), str(coords), index) for index in range(200)]
     if workers <= 1:
-        rows = [_run_one(binary, str(coords), index) for index in range(200)]
+        rows = [_run_one(str(binary), str(coords), index) for index in range(200)]
     else:
         with ProcessPoolExecutor(max_workers=workers) as pool:
             rows = list(pool.map(_job, specs))
@@ -164,7 +196,34 @@ def run_all(coords: Path, workers: int = 1) -> list[dict]:
     return rows
 
 
-def write_dat(rows: list[dict], output: Path) -> dict:
+def _note(role: str, raw: float, rounded: int) -> str:
+    if role == "paper":
+        return (
+            "wales-27058.tar.bz2 sha256 "
+            f"{PAPER_COMMIT}. OPTIM/source/SVNREV in that tarball is 27059. "
+            "EVPC defaults to 50. Archived website preamble unchanged: usediag 2, "
+            "updates 4 100, maxbfgs 0.2 1.0, eigenonly 1D-13 0.99, READVEC, "
+            "native Lennard-Jones. No BFGSTSPC. The score is OPTIM energy+gradient calls. "
+            f"Unrounded mean {raw:.10g}. Half-even mean {rounded}."
+        )
+    return (
+        "Later snapshot SVNREV "
+        f"{CURRENT_COMMIT} on the same archived preamble. "
+        "keywords.F90 sets EVPC to 1. No BFGSTSPC. "
+        f"The printed energy+gradient mean is {raw:.10g} and the half-even integer is {rounded}. "
+        "That is outside 10 percent of the archive 46. This is not the paper baseline."
+    )
+
+
+def write_dat(
+    rows: list[dict],
+    output: Path,
+    *,
+    role: str,
+    code_version: str,
+    commit: str,
+    template: str,
+) -> dict:
     from optbench.score import half_even
 
     if len(rows) != 200:
@@ -176,13 +235,6 @@ def write_dat(rows: list[dict], output: Path) -> dict:
     raw = sum(calls) / len(calls)
     rounded = half_even(raw)
     median = statistics.median(calls)
-    note = (
-        "Website odata.preamble: usediag 2, updates 4 100, maxbfgs 0.2 1.0, "
-        "eigenonly 1D-13 0.99, READVEC, native Lennard-Jones. "
-        "BFGSTSPC 1.0D10 turns off the df8da599 eigenvalue-change veto so the "
-        "cover stop is the overlap. The score is OPTIM energy+gradient calls. "
-        f"Unrounded mean {raw:.10g}. Half-even mean {rounded}."
-    )
     text = [
         f"force_calls {rounded}",
         f"force_calls_min {min(calls)}",
@@ -192,15 +244,15 @@ def write_dat(rows: list[dict], output: Path) -> dict:
         "nfailed 0",
         "starts 200",
         "code OPTIM",
-        "code_version df8da599",
-        f"commit {COMMIT}",
+        f"code_version {code_version}",
+        f"commit {commit}",
         "algorithm hybrid eigenvector following",
-        f"template {TEMPLATE}",
+        f"template {template}",
         "problem lowest-eigenvector/lj38",
         "counter optim",
         "reducer all",
         "parameter_source archive",
-        f"note {note}",
+        f"note {_note(role, raw, rounded)}",
     ]
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text("\n".join(text) + "\n", encoding="utf-8")
@@ -231,17 +283,43 @@ def write_dat(rows: list[dict], output: Path) -> dict:
         "median": median,
         "nfailed": 0,
         "n": 200,
+        "path": str(output),
     }
 
 
-def main() -> None:
-    dest = Path("/tmp/optbench-optim-loweig")
+def _campaign(role: str, binary: Path, dest: Path, workers: int) -> dict:
     coords = extract_coords(ROOT, dest)
+    rows = run_all(coords, binary, workers=workers)
+    if role == "paper":
+        output = ROOT / "results" / "campaign" / PAPER_DAT
+        summary = write_dat(
+            rows,
+            output,
+            role=role,
+            code_version=PAPER_VERSION,
+            commit=PAPER_COMMIT,
+            template=PAPER_TEMPLATE,
+        )
+    else:
+        output = ROOT / "results" / "campaign" / CURRENT_DAT
+        summary = write_dat(
+            rows,
+            output,
+            role=role,
+            code_version=CURRENT_VERSION,
+            commit=CURRENT_COMMIT,
+            template=CURRENT_TEMPLATE,
+        )
+    summary["role"] = role
+    return summary
+
+
+def main() -> None:
     workers = int(os.environ.get("WORKERS", "8"))
-    rows = run_all(coords, workers=workers)
-    output = ROOT / "results" / "campaign" / "optim-df8da599-rr-second-order.dat"
-    summary = write_dat(rows, output)
-    print(summary, flush=True)
+    paper = _campaign("paper", paper_binary(), Path("/tmp/optbench-optim-27058"), workers)
+    current = _campaign("current", current_binary(), Path("/tmp/optbench-optim-df8da599"), workers)
+    print(paper, flush=True)
+    print(current, flush=True)
 
 
 if __name__ == "__main__":

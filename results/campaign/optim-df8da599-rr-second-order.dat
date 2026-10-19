@@ -1,17 +1,17 @@
-force_calls 46
-force_calls_min 22
-force_calls_max 118
-force_calls_median 44
-unrounded_mean 46.1
+force_calls 54
+force_calls_min 28
+force_calls_max 120
+force_calls_median 52
+unrounded_mean 54.43
 nfailed 0
 starts 200
 code OPTIM
 code_version df8da599
 commit df8da599267534fbe43a250e578f7396a7946311
 algorithm hybrid eigenvector following
-template optim/rr-second-order
+template optim/rr-second-order-current
 problem lowest-eigenvector/lj38
 counter optim
 reducer all
 parameter_source archive
-note Website odata.preamble: usediag 2, updates 4 100, maxbfgs 0.2 1.0, eigenonly 1D-13 0.99, READVEC, native Lennard-Jones. BFGSTSPC 1.0D10 turns off the df8da599 eigenvalue-change veto so the cover stop is the overlap. The score is OPTIM energy+gradient calls. Unrounded mean 46.1. Half-even mean 46.
+note Later snapshot SVNREV df8da599267534fbe43a250e578f7396a7946311 on the same archived preamble. keywords.F90 sets EVPC to 1. No BFGSTSPC. The printed energy+gradient mean is 54.43 and the half-even integer is 54. That is outside 10 percent of the archive 46. This is not the paper baseline.

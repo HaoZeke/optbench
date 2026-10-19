@@ -1,0 +1,17 @@
+force_calls 46
+force_calls_min 22
+force_calls_max 126
+force_calls_median 42
+unrounded_mean 46.35
+nfailed 0
+starts 200
+code OPTIM
+code_version 27058
+commit 144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348
+algorithm hybrid eigenvector following
+template optim/rr-second-order
+problem lowest-eigenvector/lj38
+counter optim
+reducer all
+parameter_source archive
+note wales-27058.tar.bz2 sha256 144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348. OPTIM/source/SVNREV in that tarball is 27059. EVPC defaults to 50. Archived website preamble unchanged: usediag 2, updates 4 100, maxbfgs 0.2 1.0, eigenonly 1D-13 0.99, READVEC, native Lennard-Jones. No BFGSTSPC. The score is OPTIM energy+gradient calls. Unrounded mean 46.35. Half-even mean 46.
