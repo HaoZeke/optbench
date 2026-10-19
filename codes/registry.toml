@@ -173,6 +173,16 @@ commit = "0.1.1"
 committed = "2019-12-10"
 note = "Sella 0.1.1 PESWrapper.diag for the lowest-eigenvector row. eta 1e-6, gamma 1e-16, vreftol 0.99, gradient v0, rigid-mode projection. This pin is not Sella 2.6.0."
 
+[[code]]
+id = "pyamff"
+name = "Pyamff"
+role = "machine learning optimization"
+repository = "https://gitlab.com/pyamff/pyamff"
+ref = "8037eb98"
+commit = "8037eb98e2288c132c112aa6c2032f00cd5c5277"
+committed = "2022-12-06"
+note = "Commit 8037eb98, 2022-12-06, comment out loss writing for lbfgs. Behler-Parrinello fingerprints use the Fortran engine. The C2H4 ADAM row is hidden layers 10 7, tanh, random_uniform on [-1, 1), NoScaler, one batch, learning rate 0.01, weight decay 0, force coefficient 0, epochs_max 10000. The stop is the maximum absolute loss gradient on each parameter set below 0.02. The benchmark writer records force RMSE as -1 for that coefficient."
+
 [[template]]
 id = "sella-0.1.1/lj38-loweig"
 code = "sella-0.1.1"

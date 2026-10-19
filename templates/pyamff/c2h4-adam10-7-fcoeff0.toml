@@ -1,0 +1,36 @@
+id = "pyamff/c2h4-adam10-7-fcoeff0"
+engine = "pyamff"
+code = "Pyamff"
+code_version = "8037eb98"
+commit = "8037eb98e2288c132c112aa6c2032f00cd5c5277"
+algorithm = "ADAM"
+problem = "mlopt/C2H4"
+task = "trainFF"
+profile = "archive"
+ranked = false
+paper_baseline = true
+parameter_source = "archive"
+note = "Archive config.ini: Behler-Parrinello fingerprints, Fortran engine, hidden layers 10 7, tanh, random_uniform on [-1, 1), NoScaler, one batch, ADAM learning rate 0.01, weight decay 0, force coefficient 0, epochs_max 10000. The stop is the maximum absolute loss gradient on each parameter set below 0.02. Fifty starts. The benchmark writer records force RMSE as -1."
+
+[model]
+hidden_layers = [10, 7]
+activation = "tanh"
+initial_weights = "random_uniform"
+scaler = "NoScaler"
+
+[loss]
+type = "SE"
+energy_coefficient = 1.0
+force_coefficient = 0.0
+loss_grad_tol = 0.02
+epochs_max = 10000
+
+[optimizer]
+name = "ADAM"
+learning_rate = 0.01
+weight_decay = 0.0
+
+[sample]
+initializations = 50
+initialization = "uniform[-1, 1)"
+trajectory = "C2H4_md.traj"

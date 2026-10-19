@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+47 reproduced, 29 not reproduced, 75 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -148,7 +148,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
-| C2H4/pyamff-adam10-7-fcoeff0 | — | — | not rerun |
+| C2H4/pyamff-adam10-7-fcoeff0 | mean_epoch 4395.3, median_epoch 4106, mean_energy_rmse 0.0117657, median_energy_rmse 0.0120491, mean_force_rmse -1, median_force_rmse -1 | 4282.86, 3852.5, 0.0119846, 0.0124457, -1, -1 | reproduced |
 | C2H4/pyamff-adam10-7-fcoeff0_1 | — | — | not rerun |
 | C2H4/pyamff-lbfgs10-7-fcoeff0 | — | — | not rerun |
 | C2H4/pyamff-lbfgs10-7-fcoeff0_1 | — | — | not rerun |

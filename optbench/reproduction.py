@@ -97,6 +97,7 @@ SAMPLE_N = {
     "lowest-eigenvector/lj38": 200,
     "globalopt/lj38": 100,
     "neb/Pt-heptamer": 13,
+    "mlopt/C2H4": 50,
 }
 
 SHA = {
@@ -111,6 +112,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+    "repro/mlopt-c2h4-pyamff-adam10-7-fcoeff0": "0000000000000000000000000000000000000000",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -199,6 +201,21 @@ MATCHES: list[dict] = [
     {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "branch": "cells/pele/go", "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat", "cause": "pele_bh_defaults"},
     {"key": "hTST/Al/eon-dimer-cg", "template": "eon-svn/htst-al-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-al-dimer.dat", "kind": "htst", "cause": "htst_al"},
     {"key": "hTST/Pt/eon-dimer-cg", "template": "eon-svn/htst-pt-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-pt-dimer.dat", "kind": "htst"},
+    # mlopt. The archived writer stores force RMSE as -1 when the force coefficient is 0.
+    {
+        "key": "mlopt/C2H4/pyamff-adam10-7-fcoeff0",
+        "template": "pyamff/c2h4-adam10-7-fcoeff0",
+        "branch": "repro/mlopt-c2h4-pyamff-adam10-7-fcoeff0",
+        "path": "results/campaign/pyamff-8037eb98-c2h4-adam10-7-fcoeff0.dat",
+        "metrics": [
+            "mean_epoch",
+            "median_epoch",
+            "mean_energy_rmse",
+            "median_energy_rmse",
+            "mean_force_rmse",
+            "median_force_rmse",
+        ],
+    },
 ]
 
 
