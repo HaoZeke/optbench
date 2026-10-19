@@ -128,6 +128,7 @@ def test_pending_grid_is_every_problem_and_code():
         "pysisyphus",
         "optim",
         "sella-0.1.1",
+        "pyamff",
     ]
     assert Pending.params[1] == code_ids()
     assert Pending.track_force_calls.unit == "force calls"

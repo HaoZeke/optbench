@@ -1,0 +1,12 @@
+id = "pyamff/c2h4-rprop"
+engine = "pyamff"
+problem = "mlopt/C2H4"
+code = "Pyamff"
+code_version = "8037eb98"
+commit = "8037eb98e2288c132c112aa6c2032f00cd5c5277"
+algorithm = "Rprop"
+tuning = "archive"
+paper_baseline = true
+failure_cap = 10000
+ranked = true
+note = "Archive mlopt/C2H4/pyamff-rprop10-7-fcoeff0. PyAMFF 8037eb98, torch.optim.Rprop learning rate 0.01, network 10 7 tanh, weights uniform[-1, 1), energy coefficient 1, force coefficient 0, loss gradient tolerance 0.02, energy RMSE tolerance 0.0001, force RMSE tolerance 0.01, cap 10000. Fortran Behler-Parrinello fingerprints from the archived fpParas.dat on C2H4_md.traj. A logged epoch is one loss and gradient evaluation, including the initial weights. The score pools two sets of 50 initializations. The archived report writes force RMSE as -1 when the force coefficient is 0."
