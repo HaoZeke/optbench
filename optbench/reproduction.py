@@ -106,6 +106,7 @@ SHA = {
     "cells/pele/min": "5bb7c3801f52b697c48ada5811c5f766dd81a23d",
     "cells/pele/go": "0528a37b8ff6e54805b9fa75345ee3c40b756a5d",
     "cells/pele/ts-repro": "54ac7e7a1aa6581c261c17fc2c52a20e77121911",
+    "repro/double-ended-saddle-search-pt-island-pele": "cab2ab34721b5b00cc17fb989f76ba6f48531a00",
     "cells/softsaddle/ts-reps": "bd1a5c9fc2685f5876266d53715accb31a049e73",
     "entries/eon-svn-htst": "715bc521c827f1f18102c1c027d99d0d8624b0fb",
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
@@ -184,6 +185,7 @@ MATCHES: list[dict] = [
     {"key": "double-ended-saddle-search/pt-island/eon-lanczos", "template": "eon-svn/de-pt-lanczos", "branch": "main", "path": "results/campaign/eon-svn-de-pt-lanczos.dat", "cause": "pt_lanczos"},
     {"key": "double-ended-saddle-search/pt-island/eon-lanczos-improved", "template": "eon-svn/de-pt-lanczos-improved", "branch": "main", "path": "results/campaign/eon-svn-de-pt-lanczos-improved.dat", "cause": "pt_lanczos"},
     {"key": "double-ended-saddle-search/pt-island/optim", "template": "optim/de-pt", "branch": "cells/optim/saddle-pt", "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-pt-island--optim-de-pt.dat", "cause": "optim_pt_units"},
+    {"key": "double-ended-saddle-search/pt-island/pele", "template": "pele/de-pt-island", "branch": "repro/double-ended-saddle-search-pt-island-pele", "path": "results/campaign/pele-a68ec5-de-pt-island.dat"},
     # neb per-image means already stored in the 3.5.0 files
     {"key": "neb/Pt-heptamer/eon-lbfgs", "template": "eon-lbfgs", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-lbfgs.dat", "hold": ["eon-client/neb-pt-lbfgs", "eon/neb-pt-lbfgs"]},
     {"key": "neb/Pt-heptamer/eon-cg", "template": "eon-cg", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-cg.dat", "cause": "heptamer_cg", "hold": ["eon-client/neb-pt-cg"]},

@@ -1074,4 +1074,26 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>
+   <h3>pele</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>double-ended saddle search</td>
+   <td>a68ec5</td>
+   <td>a68ec5e7706a</td>
+   <td><a href="https://github.com/pele-python/pele">https://github.com/pele-python/pele</a></td>
+   </tr>
+   </tbody></table></div>
+   <p>No full ranked run.</p>
+   <p>No full ranked run</p><ul>
+   <li>pt-island: partial.</li>
+   <li>pele-lbfgs-M1-maxstep0.1: no per-start record.</li>
+   <li>pele-lbfgs-M10-maxstep0.1: no per-start record.</li>
+   <li>pele-lbfgs-M100-maxstep0.2: no per-start record.</li>
+   <li>pele-lbfgs-M20-maxstep0.1: no per-start record.</li>
+   <li>pele-lbfgs-M4-maxstep0.05: no per-start record.</li>
+   <li>pele-lbfgs-M4-maxstep0.1: no per-start record.</li>
+   <li>pele-lbfgs-M4-maxstep0.2: no per-start record.</li>
+   </ul>
    </section>
