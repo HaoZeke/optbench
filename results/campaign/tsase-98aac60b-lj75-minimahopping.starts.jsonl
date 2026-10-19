@@ -1,0 +1,1 @@
+{"comparable": false, "converged": false, "counter": "harness", "energy": -396.282243516023, "failure": "cap", "force_calls": 2000000, "lowest_energy": -396.282243516023, "reasons": ["cap"], "schema": "optbench.start/v2", "start": "coords.1", "success": false, "threshold": null, "unruled": true, "verify_calls": 0}
