@@ -1,0 +1,27 @@
+id = "saddlesearchjl/lj38-static"
+engine = "saddlesearchjl"
+problem = "tsopt/LJ38"
+code = "saddlesearchjl"
+code_version = "0.0.2"
+commit = "47b4f35953bb3fc0f0726c171adca8f5b628af5e"
+algorithm = "Static dimer"
+tuning = "default"
+
+[ini.Main]
+job = "saddle_search"
+
+[ini.Optimizer]
+opt_method = "static"
+convergence_metric = "norm"
+converged_force = 0.001
+max_iterations = 10000
+
+[search]
+
+method = "static"
+a_trans = 0.002
+a_rot = 0.002
+
+len = 0.001
+tol_rot = 0.01
+mode_seed = "gradient"

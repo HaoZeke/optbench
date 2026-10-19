@@ -234,6 +234,16 @@ committed = "2026-10-18"
 note = "No public git commit. The pin is the sha256 of the Wales svn.tar.bz2 snapshot, 122743078 bytes. The banner is OPTIM version 02aaf452. Minimization L-BFGS, the archived double-ended preambles, and PATHSAMPLE call the ASE socket. The score is pes.evaluate summed over every OPTIM child. OPTIM's own call counter is not a score. The 2014 rows used wales-27058 and stay in the archive. Transition-state and lowest-eigenvector rows on this snapshot use BFGSTS, BFGS-TS, and EIGENONLY. optim/de-lj38, optim/de-pt, and optim/de-2ts are those 2014 preambles. optim/dneb-hef is the problem-image band: NEWCONNECT 1 1, NEWNEB at the problem image count, BFGSMIN, and the harness socket in codes/optim. One POTENTIAL entry is one uncached calculate. ALIGN is off. The build uses system BLAS and LAPACK, and OpenMP is off. USERPOT minimization rows use code version 02aaf45245af. LBFGS on those rows is BFGSMIN on the harness potential. ASE-socket rows use code version svn-snapshot."
 
 [[code]]
+id = "saddlesearchjl"
+name = "SaddleSearch.jl"
+role = "saddle search"
+repository = "https://github.com/cortner/SaddleSearch.jl"
+ref = "master"
+commit = "47b4f35953bb3fc0f0726c171adca8f5b628af5e"
+committed = "2024-11-07"
+note = "SaddleSearch.jl 0.0.2, built from source on Julia 1.10.10. The resolved packages are Dierckx 0.5.4, ForwardDiff 0.10.39, and Parameters 0.12.3. Templates call run! for StaticDimer, BBDimer, SuperlinearDimer, and ODEDimer. The potential is the harness kernel. The library stops on an infinity-norm residual, and the driver continues until the Euclidean force is at the problem stop. A lowest-mode row holds the translation at zero and scores the overlap. AccelDimer is not a row: it needs a second-derivative product the spec potential does not supply. blocklanczos is in backup/ and is not part of the module. Force calls are harness entries."
+
+[[code]]
 id = "airss"
 name = "AIRSS"
 role = "random structure search"

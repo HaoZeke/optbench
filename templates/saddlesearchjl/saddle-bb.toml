@@ -1,0 +1,33 @@
+id = "saddlesearchjl/saddle-bb"
+engine = "saddlesearchjl"
+problem = "saddle-search/pt-island"
+code = "saddlesearchjl"
+code_version = "0.0.2"
+commit = "47b4f35953bb3fc0f0726c171adca8f5b628af5e"
+algorithm = "BB dimer"
+tuning = "default"
+
+[ini.Main]
+job = "saddle_search"
+
+[ini.Optimizer]
+opt_method = "bb"
+convergence_metric = "norm"
+converged_force = 0.001
+max_iterations = 1000
+
+[search]
+
+method = "bb"
+a0_trans = 0.001
+a0_rot = 0.001
+
+len = 0.001
+tol_rot = 0.01
+
+mode_seed = "file"
+repetitions = 1
+displace_atoms = "0,1,2,3,4,5,6"
+displace_magnitude = 0.1
+rmsd_connect = 0.5
+max_searches = 20000

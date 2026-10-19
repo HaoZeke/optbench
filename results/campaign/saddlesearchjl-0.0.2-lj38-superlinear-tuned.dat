@@ -1,0 +1,24 @@
+force_calls 1915
+force_calls_min 211
+force_calls_median 1587
+force_calls_max 6677
+nfailed 39
+par2_mean 5441.3100000000
+successes 161
+wilson_low 0.7445595563
+wilson_high 0.8539447947
+par2_median 2113.5000000000
+n_cap 32
+n_wrong_stationary 7
+n_divergence 0
+n_crash 0
+counter harness
+code saddlesearchjl
+code_version 0.0.2
+commit 47b4f35953bb3fc0f0726c171adca8f5b628af5e
+algorithm Superlinear dimer
+tuning tuned
+template saddlesearchjl/lj38-superlinear-tuned
+problem tsopt/LJ38
+n 200
+cap 10000
