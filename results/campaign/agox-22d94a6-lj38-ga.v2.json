@@ -17,7 +17,7 @@
         "force_calls_max": null,
         "force_calls_min": null,
         "median": null,
-        "nfailed": 71
+        "nfailed": 73
       },
       "metrics": {
         "bootstrap_resamples": 2000,
@@ -31,12 +31,12 @@
         "median": 1000000.0,
         "median_high": 1000000.0,
         "median_low": 1000000.0,
-        "n": 71,
-        "n_cap": 71,
+        "n": 73,
+        "n_cap": 73,
         "n_crash": 0,
         "n_divergence": 0,
         "n_wrong_stationary": 0,
-        "nfailed": 71,
+        "nfailed": 73,
         "par2_mean": 1000000.0,
         "par_applied": true,
         "par_factor": 2,
@@ -46,7 +46,7 @@
         "success_only_mean": null,
         "success_rate": 0.0,
         "successes": 0,
-        "wilson_high": 0.05132795219689034,
+        "wilson_high": 0.0499920079557311,
         "wilson_low": 0.0
       },
       "parameters": {
@@ -1421,6 +1421,25 @@
           "target_energy": -173.9274265117895
         },
         {
+          "calls_at_lowest": 136640,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 500000,
+          "iterations": 262,
+          "lowest_energy": -173.13418913686456,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.9284265117895,
+          "schema": "optbench.start/v2",
+          "seed": 314229,
+          "start": "70.con",
+          "success": false,
+          "target_energy": -173.9274265117895
+        },
+        {
           "calls_at_lowest": 300087,
           "comparable": true,
           "counter": "harness",
@@ -1436,6 +1455,25 @@
           "schema": "optbench.start/v2",
           "seed": 314230,
           "start": "71.con",
+          "success": false,
+          "target_energy": -173.9274265117895
+        },
+        {
+          "calls_at_lowest": 495259,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 500000,
+          "iterations": 237,
+          "lowest_energy": -172.8775218882891,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.9284265117895,
+          "schema": "optbench.start/v2",
+          "seed": 314233,
+          "start": "74.con",
           "success": false,
           "target_energy": -173.9274265117895
         }
