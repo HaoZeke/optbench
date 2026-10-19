@@ -197,6 +197,17 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
+   <tr data-problem="hTST/Pt" data-template="eon-svn/htst-pt-lanczos-cg">
+   <td>Pt</td>
+   <td data-field="template">eon-svn/htst-pt-lanczos-cg</td>
+   <td data-field="version">Eon svn r2549</td>
+   <td data-field="commit">r2549</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="mean_calls">639616</td>
+   <td data-field="median_calls">576602</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">10</td>
+   </tr>
    <tr data-problem="lowest-eigenvector/lj38" data-template="eon-svn/low-lj38-lanczos-ljcut">
    <td>lj38</td>
    <td data-field="template">eon-svn/low-lj38-lanczos-ljcut</td>
