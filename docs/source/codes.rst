@@ -1051,14 +1051,14 @@ The number is written only after the run finishes under the problem rule.
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr data-problem="double-ended-saddle-search/lj38" data-template="optim/de-lj38">
+   <tr data-problem="double-ended-saddle-search/lj38" data-template="optim/de-lj38-stock">
    <td>LJ38 double-ended saddle</td>
-   <td data-field="template">optim/de-lj38</td>
-   <td data-field="version">optim wales-27058</td>
-   <td data-field="commit">144a703eef67</td>
-   <td data-field="par2_mean">130.52</td>
-   <td data-field="mean_calls">130.52</td>
-   <td data-field="median_calls">120</td>
+   <td data-field="template">optim/de-lj38-stock</td>
+   <td data-field="version">optim df8da599</td>
+   <td data-field="commit">df8da5992675</td>
+   <td data-field="par2_mean">121.6</td>
+   <td data-field="mean_calls">121.6</td>
+   <td data-field="median_calls">102.5</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
@@ -1085,4 +1085,7 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>
+   <p>No full ranked run</p><ul>
+   <li>LJ38 double-ended saddle: not yet on the harness counter.</li>
+   </ul>
    </section>

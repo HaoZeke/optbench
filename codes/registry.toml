@@ -161,7 +161,7 @@ role = "saddle search"
 repository = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
 ref = "svn-snapshot"
 commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
-note = "No public git commit. The pin is the sha256 of the Wales svn.tar.bz2 snapshot, 122743078 bytes, used by minimization L-BFGS. That row calls the ASE socket and scores pes.evaluate. The LJ38 double-ended row builds wales-27058.tar.bz2 (sha256 144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348) and scores OPTIM's energy+gradient calls. Noise and PATHSAMPLE are not scored."
+note = "No public git commit. The pin is the sha256 of the Wales svn.tar.bz2 snapshot, 122743078 bytes, used by minimization L-BFGS. That row calls the ASE socket and scores pes.evaluate. The ranked LJ38 double-ended row runs the current source, SVNREV df8da599267534fbe43a250e578f7396a7946311, unmodified, and scores OPTIM energy+gradient calls. The wales-27058 campaign is an unranked diagnostic. Noise and PATHSAMPLE are not scored."
 
 [[code]]
 id = "sella-0.1.1"

@@ -8,6 +8,8 @@ The pele transition-state paper score is the 2014 stop: break at the first RMS b
 
 OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.
 
+LJ38 OPTIM double-ended stock SVNREV df8da599267534fbe43a250e578f7396a7946311 scores 122. The unrounded mean is 121.6, inside 10% of the archive 131. The maximum is 411 against 260. The wales-27058 file is an unranked diagnostic.
+
 EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.
 
 Table 10 prints EON Lanczos 165. The archive file is 325. CI-NEB(3) prints 3 failures; the archive file has 0.
@@ -30,7 +32,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj38/eon-dimer | force_calls 337 | 377 | not reproduced; improved_unset |
 | lj38/eon-lanczos | force_calls 364 | 342 | reproduced |
 | lj38/eon-lanczos-improved | force_calls 287 | 259 | reproduced |
-| lj38/optim | force_calls 131 | 131 | reproduced |
+| lj38/optim | force_calls 131 | 122 | reproduced |
 | lj38/optim-cl-string | — | — | not rerun |
 | lj38/pele | — | — | not rerun |
 | lj38_2ts_separation/optim | force_calls 2885 | 3454 | not reproduced; optim_pes_counter |

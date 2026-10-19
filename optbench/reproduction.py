@@ -177,7 +177,7 @@ MATCHES: list[dict] = [
     {"key": "double-ended-saddle-search/lj38/eon-dimer", "template": "eon-svn/de-lj38-dimer", "branch": "main", "path": "results/campaign/eon-svn-de-lj38-dimer.dat", "cause": "improved_unset"},
     {"key": "double-ended-saddle-search/lj38/eon-lanczos", "template": "eon-client/de-lj38-lanczos", "branch": "main", "path": "results/campaign/eon-client-de-lj38-lanczos.dat"},
     {"key": "double-ended-saddle-search/lj38/eon-lanczos-improved", "template": "eon-client/de-lj38-lanczos-improved", "branch": "main", "path": "results/campaign/eon-client-de-lj38-lanczos-improved.dat"},
-    {"key": "double-ended-saddle-search/lj38/optim", "template": "optim/de-lj38", "branch": "repro/double-ended-saddle-search-lj38-optim", "path": "results/campaign/optim-wales-27058-double-ended-saddle-search-lj38--optim-de-lj38.dat"},
+    {"key": "double-ended-saddle-search/lj38/optim", "template": "optim/de-lj38-stock", "branch": "repro/double-ended-saddle-search-lj38-optim", "path": "results/campaign/optim-df8da599-double-ended-saddle-search-lj38--optim-de-lj38-stock.dat", "extra": {"unrounded_mean": 121.6}},
     {"key": "double-ended-saddle-search/lj38_2ts_separation/optim", "template": "optim/de-2ts", "branch": "cells/optim/saddle-pt", "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-lj38_2ts_separation--optim-de-2ts.dat", "cause": "optim_pes_counter"},
     {"key": "double-ended-saddle-search/pt-island/eon-ci-neb", "template": "eon-svn/de-pt-ci-neb", "branch": "main", "path": "results/campaign/eon-svn-de-pt-ci-neb.dat"},
     {"key": "double-ended-saddle-search/pt-island/eon-ci-swdneb", "template": "eon-svn/de-pt-ci-swdneb", "branch": "main", "path": "results/campaign/eon-svn-de-pt-ci-swdneb.dat"},

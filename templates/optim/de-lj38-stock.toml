@@ -1,0 +1,16 @@
+# Current OPTIM, stock DNEB plus hybrid eigenvector following.
+id = "optim/de-lj38-stock"
+engine = "optim"
+problem = "double-ended-saddle-search/lj38"
+code = "optim"
+code_version = "df8da599"
+commit = "df8da599267534fbe43a250e578f7396a7946311"
+algorithm = "DNEB + hybrid eigenvector following"
+tuning = "stock"
+note = "Current Wales source, OPTIM/source/SVNREV df8da599267534fbe43a250e578f7396a7946311, built unmodified. NEWNEB, BFGSTS, and OPTIMIZETS take keyword defaults. BFGSCONV is the archive gradient norm 0.001 as an RMS. STEPS 200 and BFGSSTEPS 5000 are the step budgets in the release LJ38 double-ended example; the keyword default NSTEPS is 1 and stops before that criterion. Symbol AX is LJDIFF. The score is the last energy+gradient call count."
+
+[optim]
+method = "stock"
+preamble = "templates/optim/preambles/de-lj38-stock.txt"
+symbol = "AX"
+timeout = 600

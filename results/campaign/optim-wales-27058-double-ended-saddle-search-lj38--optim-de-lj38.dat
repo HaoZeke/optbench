@@ -1,4 +1,4 @@
-# counter harness. The score is OPTIM's last energy+gradient call count from wales-27058. A success is a log that contains Converged to TS.
+# Unranked diagnostic. The 2014 wales-27058 binary. The score is OPTIM's last energy+gradient call count. A success is a log that contains Converged to TS.
 # odata preamble de-lj38.txt is the 2014 archive file. Symbol AX is LJDIFF. Archive force_calls 131.
 force_calls 131
 force_calls_min 66
@@ -15,4 +15,4 @@ algorithm DNEB + hybrid eigenvector following
 template optim/de-lj38
 problem double-ended-saddle-search/lj38
 tuning wales-2014
-counter harness
+counter diagnostic

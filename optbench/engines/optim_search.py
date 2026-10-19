@@ -8,7 +8,11 @@ is one ``pes.evaluate``. OPTIM's own counter is not the minimization score.
 ``optim/de-lj38`` builds OPTIM from ``wales-27058.tar.bz2``. That tree
 writes the NEWNEB RMS tolerance into ``RMSTOL``. The score is the last
 ``energy+gradient calls`` field, and a start succeeds when the log
-contains ``Converged to TS``.
+contains ``Converged to TS``. That campaign is an unranked diagnostic.
+
+``optim/de-lj38-stock`` runs the current Wales source unmodified.
+``NEWNEB``, ``BFGSTS``, and ``OPTIMIZETS`` keep keyword defaults. The
+score is the same energy+gradient field.
 
 ``optim/unhooked`` and every other non-L-BFGS template raise before a
 file is written.
@@ -71,6 +75,17 @@ def wales_27058_binary() -> Path:
     if env:
         return Path(env)
     return Path("/tmp/wales27058/build/OPTIM")
+
+
+SVNREV = "df8da599267534fbe43a250e578f7396a7946311"
+
+
+def latest_binary() -> Path:
+    """Unmodified OPTIM from the current Wales source tree."""
+    env = os.environ.get("OPTIM_LATEST_BIN")
+    if env:
+        return Path(env)
+    return Path("/tmp/optim-latest/build/OPTIM")
 
 
 def available() -> str | None:
@@ -466,6 +481,56 @@ def _run_dneb(root: Path, problem: dict, template: dict, *, output: Path, worker
     )
 
 
+def _run_stock(root: Path, problem: dict, template: dict, *, output: Path, workers: int) -> dict:
+    """Current OPTIM, keyword defaults, archive gradient stop, native counter."""
+    from .common import band_settings, cached_pairs
+
+    section = template.get("optim") or {}
+    binary = latest_binary()
+    if not binary.is_file():
+        raise RuntimeError(
+            f"{template['id']} needs an unmodified OPTIM binary. "
+            f"{binary} is not present. Set OPTIM_LATEST_BIN. "
+            f"The source stamp is SVNREV {SVNREV}."
+        )
+    if template.get("commit") != SVNREV:
+        raise ValueError(f"{template['id']} commit does not match SVNREV {SVNREV}")
+    preamble_path = root / str(section.get("preamble", ""))
+    if not preamble_path.is_file():
+        raise RuntimeError(f"{template['id']} preamble is not at {preamble_path}")
+    settings = band_settings(problem)
+    if settings["potential"] != "lj":
+        raise ValueError(f"{template['id']} uses builtin LJDIFF and {settings['potential']} is not lj")
+    preamble = preamble_path.read_text(encoding="utf-8")
+    pairs = list(cached_pairs(root, problem, settings).values())
+    jobs = [_dneb_job(pair, settings, template, preamble, binary) for pair in pairs]
+    records = run_jobs(jobs, _dneb_one, workers)
+    comment = (
+        "# counter harness. The score is OPTIM's last energy+gradient call count. "
+        f"SVNREV {SVNREV}. A success is a log that contains Converged to TS.\n"
+        "# NEWNEB, BFGSTS, and OPTIMIZETS use keyword defaults. "
+        "BFGSCONV is the archive gradient norm 0.001 as an RMS. "
+        "STEPS 200 and BFGSSTEPS 5000 are the release LJ38 double-ended step budgets."
+    )
+    parameters = {
+        "method": "stock",
+        "preamble": str(section.get("preamble", "")),
+        "symbol": str(section.get("symbol", "AX")),
+        "counter": "energy+gradient",
+        "svnrev": SVNREV,
+    }
+    return write_campaign(
+        output,
+        records,
+        template,
+        problem,
+        settings,
+        parameters,
+        images=None,
+        comment=comment,
+    )
+
+
 def run(root: Path, problem_name: str, template_name: str, *, output: Path, workers: int = 1) -> dict:
     root = Path(root)
     from optbench.campaign import load_template, resolve_problem
@@ -480,9 +545,11 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
     if stated and stated != problem_name:
         raise ValueError(f"{template_name} belongs to {stated}")
     section = _section(template)
-    if problem.get("suite") == "double-ended-saddle-search" and section["method"] == "dneb":
+    if problem.get("suite") == "double-ended-saddle-search" and section["method"] in {"dneb", "stock"}:
         if template.get("code") != CODE:
             raise ValueError(f"{template_name} code is not {CODE}")
+        if section["method"] == "stock":
+            return _run_stock(root, problem, template, output=output, workers=workers)
         return _run_dneb(root, problem, template, output=output, workers=workers)
     reason = available()
     if reason:

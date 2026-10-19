@@ -1,0 +1,18 @@
+# counter harness. The score is OPTIM's last energy+gradient call count. SVNREV df8da599267534fbe43a250e578f7396a7946311. A success is a log that contains Converged to TS.
+# NEWNEB, BFGSTS, and OPTIMIZETS use keyword defaults. BFGSCONV is the archive gradient norm 0.001 as an RMS. STEPS 200 and BFGSSTEPS 5000 are the release LJ38 double-ended step budgets.
+force_calls 122
+force_calls_min 50
+force_calls_max 411
+force_calls_median 102.5
+successes 50
+nfailed 0
+n 50
+transition_states 0
+code optim
+code_version df8da599
+commit df8da599267534fbe43a250e578f7396a7946311
+algorithm DNEB + hybrid eigenvector following
+template optim/de-lj38-stock
+problem double-ended-saddle-search/lj38
+tuning stock
+counter harness
