@@ -6,11 +6,11 @@
 # GEOFIREDTINIT 1.d-9 and GEOFIREDTMIN 1.d-12 replace the code defaults 10 and 1. Pairs in this archive sit near 0.02 sigma, and the default first step moves those atoms by more than the cell.
 # No energy_above_minimum is stated. partial is true and the row is not ranked. A Cambridge reference ends the search at that energy plus 0.001. reference_bound marks a start that reached it. force_calls is that count. The start is not a ranked success.
 # minhocao on the lj75 coordinate archive. ioput, earr tolerances, fingerprint, seed, and the FIRE force tolerance match flame/lj38-minhocao. GEOFIREDTINIT is 1.d-9 and GEOFIREDTMIN is 1.d-12. The code defaults are 10 and 1. Pairs in this archive sit near 0.02 sigma, and the default first step moves those atoms by more than the cell. The problem file does not state energy_above_minimum, so the row stays partial and is not ranked. The search ends at the Cambridge minimum -397.492331 plus 0.001. reference_bound marks a start that reached that energy, and force_calls is the harness count at that point.
-force_calls 834002
+force_calls 834789
 force_calls_min 70539
 force_calls_max 4192367
 nfailed 2
-median 353322
+median 369572
 code FLAME
 code_version 1.0
 commit 99a615acaef6bc6afe44d895f666c6d60250f7d8
@@ -21,14 +21,14 @@ tuning dtinit
 counter harness
 par2_mean 20000000
 wilson_low 0
-wilson_high 0.0896668537076
+wilson_high 0.0876216011973
 par2_median 20000000
 par2_median_low 20000000
 par2_median_high 20000000
-v2_nfailed 39
+v2_nfailed 40
 v2_successes 0
-n 39
+n 40
 energy_min -394.814244373
 energy_max -378.788488414
-calls_to_best_mean 499257.282051
+calls_to_best_mean 497060.75
 partial true
