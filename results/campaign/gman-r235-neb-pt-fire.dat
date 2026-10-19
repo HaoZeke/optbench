@@ -1,0 +1,14 @@
+# Paper script: int(sum(pot.count()/8)/13) with Python %d truncation.
+force_calls 82
+force_calls_max 119
+force_calls_min 54
+nfailed 0
+code Gman
+code_version r235
+algorithm FIRE
+template gman/neb-pt-fire
+problem neb/Pt-heptamer
+counter harness
+reducer harness
+commit r235
+baseline_metric force_calls

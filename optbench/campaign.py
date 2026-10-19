@@ -328,6 +328,14 @@ def run(
             limit=limit,
             resume=resume,
         )
+    if template["engine"] == "gman":
+        from .gman_neb import run_template as run_gman
+
+        problem = resolve_problem(root, problem_name)
+        stated = template.get("problem")
+        if stated and stated != problem["id"]:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return run_gman(root, problem, template, output=output, work=work)
     from .engines import find as find_engine
 
     plugged = find_engine(str(template["engine"]))
