@@ -1,0 +1,14 @@
+# TSASE SDLBFGS on LJ38 minimisation.
+id = "tsase/lbfgs-lj38"
+engine = "tsase"
+problem = "minimization/lj38"
+code = "tsase"
+code_version = "1.0"
+commit = "98aac60b5d9905e81ee4e6b8c385f169258d0218"
+algorithm = "SDLBFGS"
+tuning = "default"
+note = "The stop is the problem Euclidean force norm. Hessian index 0 is required. maxstep is the total step of SDLBFGS."
+
+[tsase]
+method = "lbfgs"
+max_step = 0.2
