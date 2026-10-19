@@ -155,6 +155,26 @@ committed = "2025-10-29"
 note = "Commit a4ce10dd, 2025-10-29. The clone has no tag, so the installed package reports 0.1.dev1. GPL-3.0. Cartesian L-BFGS, conjugate gradient, and steepest descent use the library defaults. The RMS stop is the Euclidean force stop divided by sqrt of the Cartesian components. Lanczos uses dx 5e-3 and dl 1e-2. The harness calculator is the score. The dimer and NEB are not in these rows."
 
 [[code]]
+id = "gmin"
+name = "GMIN"
+role = "global optimization"
+repository = "https://optbench.org/codes/wales-27058.tar.bz2"
+ref = "27058"
+commit = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
+committed = "2014-08-07"
+note = "Hosted tarball wales-27058.tar.bz2. SVNREV in the tree is 27059. LJ38 symmetrise CSM uses the archived data file. The score is GMIN NPCALL at the target hit, ranked as the native counter. Built with gfortran 13.3.0, cmake Release, WITH_MPI off, system BLAS and LAPACK. The compile line is -ffixed-line-length-200 -ffree-line-length-200 -fPIC -O3 -DNDEBUG."
+
+[[code]]
+id = "gmin-df8da599"
+name = "GMIN"
+role = "global optimization"
+repository = "https://www-wales.ch.cam.ac.uk/svn.tar.bz2"
+ref = "df8da599"
+commit = "df8da599267534fbe43a250e578f7396a7946311"
+committed = "2026-10-19"
+note = "Current Wales svn.tar.bz2, sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31, SVNREV df8da599267534fbe43a250e578f7396a7946311. LJ38 stock basin-hopping uses the default unshifted Lennard-Jones and the keyword block in codes/gmin/lj38-stock.data. The score is GMIN NPCALL, ranked as the native counter. Built with gfortran 13.3.0, cmake Release, WITH_MPI off, system BLAS and LAPACK. The compile line is -ffixed-line-length-200 -ffree-line-length-200 -fPIC -fallow-argument-mismatch -std=legacy -ffixed-line-length-132 -ffree-line-length-0 -O3."
+
+[[code]]
 id = "optim"
 name = "OPTIM"
 role = "saddle search"

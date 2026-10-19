@@ -126,6 +126,8 @@ def test_pending_grid_is_every_problem_and_code():
         "dlfind",
         "compass",
         "pysisyphus",
+        "gmin",
+        "gmin-df8da599",
         "optim",
         "sella-0.1.1",
     ]

@@ -1,12 +1,13 @@
-# GMIN wales-27058, tarball sha256 144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348.
-# Built with gfortran 13.3, Release, system BLAS and LAPACK, MPI off.
-# One force call is one GMIN potential evaluation, NPCALL, read from "Target hit after".
-# That is the 2014 getdata.py count: round(mean) of successful starts. The unrounded mean is 6888.15.
+# GMIN wales-27058.tar.bz2, sha256 144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348.
+# Compiler gfortran 13.3.0, cmake Release, WITH_MPI off, WITH_MYBLAS off, WITH_MYLAPACK off, COMPILER_SWITCH gfortran.
+# Fortran flags -ffixed-line-length-200 -ffree-line-length-200 -fPIC -O3 -DNDEBUG.
+# One force call is GMIN NPCALL, read from the last "Target hit after" line.
+# getdata.py rounds the mean of successful starts. The unrounded mean is 6888.15.
+# The ranked PAR-2 is that native count over the per-start records. failure_cap 2000000 is above every start.
 # data file codes/gmin/lj38-csm.data, sha256 c4f6d8c33544c5b8fd8c12b8ccaf9837c9be89902d92b1c306e6a721c5d1c053.
 # SYMMETRISECSM 1 CI 1.0D-6 30 1 50. TARGET -173.9284264418. EDIFF 0.003. TEMPERATURE 3.0. STEP 0.43 0.52.
 # SLOPPYCONV 0.002. TIGHTCONV 1.0D-5. MAXIT 1000 1000. STEPS 90000000. CENTRE. PERMDIST 0.005. AVOID 1.25 18. NEWRESTART 30.
 # Starts are the archived 100 xyz files. The default seed is 2002. All 100 hits are the global minimum.
-# The archived minimum is 77 and this rerun minimum is 77. The archived maximum is 26977 and this rerun maximum is 42570.
 force_calls 6888
 force_calls_median 4351
 force_calls_min 77
@@ -14,11 +15,11 @@ force_calls_max 42570
 nfailed 0
 n 100
 code GMIN
-code_version 27058
+code_version paper_baseline (wales-27058)
 commit 144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348
 algorithm basin-hopping with symmetrise csm moves
 template gmin/lj38-csm
 problem globalopt/lj38
-counter client
+counter harness
+reducer harness
 tuning archive
-ranked false

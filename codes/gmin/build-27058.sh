@@ -1,6 +1,9 @@
 #!/bin/bash
 # Build GMIN from the 2014 OptBench tarball wales-27058.tar.bz2.
 # The pin is the tarball sha256. The tree is not a git revision.
+# The LJ38 CSM binary was gfortran 13.3.0, cmake Release, WITH_MPI off,
+# system BLAS and LAPACK. The compile line is
+# -ffixed-line-length-200 -ffree-line-length-200 -fPIC -O3 -DNDEBUG.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
