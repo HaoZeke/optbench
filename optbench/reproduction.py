@@ -146,7 +146,7 @@ MATCHES: list[dict] = [
     {"key": "minimization/morse-bulk/eon-sd", "template": "eon-client/morse-sd", "branch": "main", "path": "results/campaign/eon-client-morse-sd.dat", "cause": "morse_sd"},
     {"key": "minimization/morse-bulk/optim", "template": "optim/morse-lbfgs-tuned", "branch": "cells/optim/min", "path": "results/campaign/optim-02aaf45245af-morse-lbfgs-tuned.dat", "cause": "optim_morse_memory"},
     {"key": "minimization/morse-bulk/pele-lbfgs", "template": "pele/morse-lbfgs", "branch": "cells/pele/min", "path": "results/campaign/pele-b7081b93-morse-lbfgs.dat", "cause": "pele_morse"},
-    {"key": "minimization/morse-bulk/ase-lbfgs", "template": "ase-3.6.0/morse-lbfgs", "branch": "repro/minimization-morse-bulk-ase-lbfgs", "path": "results/campaign/ase-3.6.0-morse-lbfgs.dat", "cause": "ase_lbfgs36", "hold": ["ase/morse-lbfgs-tuned"]},
+    {"key": "minimization/morse-bulk/ase-lbfgs", "template": "ase-3.29.0/morse-lbfgs-current", "branch": "repro/minimization-morse-bulk-ase-lbfgs", "path": "results/campaign/ase-3.6.0-morse-lbfgs.dat", "cause": "ase_lbfgs36", "hold": ["ase/morse-lbfgs-tuned"], "extra": {"code_version": "3.29.0", "current_par2": 89.45}},
     {"key": "minimization/morse-bulk/ase-fire", "template": "ase/morse-fire-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-morse-fire-tuned.dat", "cause": "ase_morse_script"},
     {"key": "minimization/morse-bulk/ase-preconLBFGS", "template": "ase/morse-preconlbfgs-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-morse-preconlbfgs-tuned.dat", "cause": "ase_morse_script"},
     # lowest eigenvector
@@ -226,10 +226,11 @@ CAUSE_TEXT = {
         "Dimer and climbing-image on that kernel reproduce. Lanczos does not, and the failure count is 0 against 5 or 8."
     ),
     "ase_lbfgs36": (
-        "ASE 3.6.0 svn r2515 LBFGS (memory 20, maxstep 0.2, alpha 1/0.04, fixed inverse Hessian 0.04) "
-        "on the archived POSCAR starts and TSASE Morse (D 0.7102, alpha 1.6047, r0 2.897, cutoff 9.5, "
-        "pair energy shifted to zero at the cutoff, orthorhombic DNINT minimum image) scores 53.65. "
-        "The count is LBFGS.force_calls, one per accepted step. The archive mean is 53.8. Min is 35 and max is 91."
+        "The archive mean 53.8 is the paper row. "
+        "Current ASE 3.29.0 LBFGS uses stock constructor defaults (memory 100, alpha 70, maxstep 0.2, damping 1, no line search) "
+        "on the archived POSCAR starts and the paper force norm 0.001. "
+        "The harness PAR-2 is 89.45, min 63, max 143. That gap is a finding and is not tuned. "
+        "The ASE 3.6.0 script diagnostic scores 53.65 and stays off the ranked table."
     ),
     "ase_morse_script": (
         "ASE 3.29 FIRE with the archived maxstep 0.2 scores 113 against 147.47. "

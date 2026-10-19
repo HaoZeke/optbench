@@ -9,7 +9,7 @@ code_version 3.6.0
 commit r2515
 algorithm LBFGS
 profile tuned
-template ase-3.6.0/morse-lbfgs
+template ase-3.29.0/morse-lbfgs-current
 problem minimization/morse-bulk
 counter harness
 reducer capped
