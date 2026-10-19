@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-45 reproduced, 27 not reproduced, 79 not rerun. 151 archive rows.
+48 reproduced, 24 not reproduced, 79 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -26,8 +26,8 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
 | lj38/eon-ci-neb | force_calls 827 | 762 | reproduced |
-| lj38/eon-ci-swdneb | force_calls 861 | 708 | not reproduced; de_exclusion |
-| lj38/eon-dimer | force_calls 337 | 377 | not reproduced; improved_unset |
+| lj38/eon-ci-swdneb | force_calls 861 | 790 | reproduced |
+| lj38/eon-dimer | force_calls 337 | 315 | reproduced |
 | lj38/eon-lanczos | force_calls 364 | 342 | reproduced |
 | lj38/eon-lanczos-improved | force_calls 287 | 259 | reproduced |
 | lj38/optim | force_calls 131 | 147 | not reproduced; optim_pes_counter |
@@ -201,7 +201,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | --- | --- | --- | --- |
 | LJ38/eon-dimer | force_calls 528 | 523 | reproduced |
 | LJ38/eon-lanczos | force_calls 321 | 293 | reproduced |
-| LJ38/eon-lanczos-improved | force_calls 237 | 271 | not reproduced; improved_unset |
+| LJ38/eon-lanczos-improved | force_calls 237 | 226 | reproduced |
 | LJ38/optim_cd | — | — | not rerun |
 | LJ38/optim_ffd | force_calls 145 | 489 | not reproduced; optim_lj38_ts |
 | LJ38/pele_cd | force_calls 254 | 263.52 | reproduced; residual |
@@ -228,19 +228,6 @@ The archive rows are Langevin parallel replica. The harness rows are AKMC. On in
 
 - accelerated-md/aladatom/true_standard/eon-pr-langevin
 - accelerated-md/standard_aladatom/eon-md-langevin
-
-### de_exclusion
-
-The 3.5.0 doubly-nudged file is the per-band mean under the 2500-call exclusion (708, 5 failures). The archive mean is 861. The client total is a different counter and is also outside 10 percent.
-
-- double-ended-saddle-search/lj38/eon-ci-swdneb
-
-### improved_unset
-
-The r2549 template turns improved on. The 2014 ini left that key unset. The mean lands outside 10 percent.
-
-- double-ended-saddle-search/lj38/eon-dimer
-- tsopt/LJ38/eon-lanczos-improved
 
 ### optim_pes_counter
 

@@ -735,7 +735,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="double-ended-saddle-search-lj38-eon-dimer">
    <td class="num">4</td>
-   <td class="text">eon-dimer · not reproduced</td>
+   <td class="text">eon-dimer</td>
    <td class="text">Eon r2156</td>
    <td class="num">337</td>
    <td class="num">89</td>
@@ -783,7 +783,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="double-ended-saddle-search-lj38-eon-ci-swdneb">
    <td class="num">8</td>
-   <td class="text">eon-ci-swdneb · not reproduced</td>
+   <td class="text">eon-ci-swdneb</td>
    <td class="text">Eon r2156</td>
    <td class="num">861</td>
    <td class="num">407</td>
@@ -1713,7 +1713,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="tsopt-lj38-eon-lanczos-improved">
    <td class="num">5</td>
-   <td class="text">eon-lanczos-improved · not reproduced</td>
+   <td class="text">eon-lanczos-improved</td>
    <td class="text">Eon r2156</td>
    <td class="num">237</td>
    <td class="num">1898</td>

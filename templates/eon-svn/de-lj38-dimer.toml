@@ -6,12 +6,12 @@ code_version = "r2549"
 commit = "r2549"
 algorithm = "Dimer L-BFGS"
 reducer = "harness"
-failure_cap = 2500
+failure_cap = 3000
 kind = "de-lj38-mode"
 kernel = "lj40"
 asv_class = "EonSvnDeLj38Dimer"
 note = '''
-Min-mode dimer from the interpolated end points of the 50 LJ38 pairs. pos.con is the reactant. displacement.con is the reactant plus half the minimum-image product difference. direction.dat is that difference, normalized. max_energy 1e9. Dimer converged_angle 5, rotations_max 10, improved true. LBFGS max_iterations 1000, converged_force 0.001. The harness kernel is unshifted lj/cut with epsilon 1, sigma 1, and cutoff 40.
+Min-mode dimer from the interpolated end points of the 50 LJ38 pairs. pos.con is the reactant. displacement.con is the reactant plus half the minimum-image product difference, written at six decimal places the way 2014 aselite write_con did, and direction.dat is rebuilt from that rounded file. max_energy 1e9. The 2014 ini left finite_difference and dimer improved unset; r2549 defaults are 0.01 and true. Dimer converged_angle 5, rotations_max 10. LBFGS max_iterations 1000, converged_force 0.001. The harness kernel is unshifted lj/cut with epsilon 1, sigma 1, and cutoff 40.
 '''
 seeds = [1]
 asv_timeout = 900
@@ -19,7 +19,7 @@ budget_seconds = 600
 
 [ini.Main]
 job = "saddle_search"
-finite_difference = 0.001
+finite_difference = 0.01
 random_seed = 1
 
 [ini.Potential]

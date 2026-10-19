@@ -35,7 +35,7 @@ def test_the_ledger_covers_the_oracle_in_order():
             assert row["cause"]
         if (row.get("rerun") or {}).get("paper_baseline"):
             assert status == "reproduced"
-    assert counts == {"reproduced": 45, "not_reproduced": 27, "not_rerun": 79}
+    assert counts == {"reproduced": 48, "not_reproduced": 24, "not_rerun": 79}
     assert reproduction_errors(ROOT) == []
 
 

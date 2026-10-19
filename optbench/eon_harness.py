@@ -447,28 +447,58 @@ def _mode_text(rows: np.ndarray) -> str:
     return "".join(f"{x:.16e} {y:.16e} {z:.16e}\n" for x, y, z in rows)
 
 
+def _six_decimals(value: float) -> float:
+    """2014 ``aselite.write_con`` prints coordinates with ``%12.6f``."""
+    return float("%12.6f" % float(value))
+
+
 def _interpolated(reactant: Path, product: Path, dest: Path) -> tuple[str, str]:
-    """2014 ``interpolate.py`` plus ``make_mode.py`` for an orthorhombic cell."""
+    """2014 ``interpolate.py`` plus ``make_mode.py`` for an orthorhombic cell.
+
+    ``write_con`` rounds the midpoint to six decimal places. ``make_mode.py``
+    reads that file back and normalizes the minimum-image difference, so the
+    direction is not the unrounded half-step.
+    """
     left_text = reactant.read_text(encoding="utf-8", errors="replace")
     left, _fixed, cell = read_con(left_text)
     right, _fixed_right, _cell_right = read_con(product.read_text(encoding="utf-8", errors="replace"))
     if len(left) != len(right):
         raise ValueError(f"{product} has {len(right)} atoms and {reactant} has {len(left)}")
     delta = _pbc_delta(right - left, cell)
-    norm = float(np.linalg.norm(delta))
+    if float(np.linalg.norm(delta)) == 0.0:
+        raise ValueError(f"{product} matches {reactant}")
+    midpoint = np.vectorize(_six_decimals)(left + 0.5 * delta)
+    displaced = _replace_coords(left_text, midpoint)
+    (dest / "displacement.con").write_text(displaced, encoding="utf-8")
+    written, _fixed_written, _cell_written = read_con(displaced)
+    rounded = _pbc_delta(written - left, cell)
+    norm = float(np.linalg.norm(rounded))
     if norm == 0.0:
         raise ValueError(f"{product} matches {reactant}")
-    displaced = _replace_coords(left_text, left + 0.5 * delta)
-    (dest / "displacement.con").write_text(displaced, encoding="utf-8")
-    return str(dest / "displacement.con"), _mode_text(delta / norm)
+    return str(dest / "displacement.con"), _mode_text(rounded / norm)
 
 
-def _files(kind: str, start: str, work: Path) -> tuple[list[tuple[str, str]], list[tuple[str, str]]]:
+def _numpy_archive_mode(natoms: int, seed: int) -> str:
+    """2014 ``random_mode.py``: ``np.random.seed`` then ``np.random.random``."""
+    rng = np.random.RandomState(int(seed))
+    return _mode_text(rng.random((natoms, 3)))
+
+
+def _files(
+    kind: str,
+    start: str,
+    work: Path,
+    *,
+    direction: str = "python",
+) -> tuple[list[tuple[str, str]], list[tuple[str, str]]]:
     work.mkdir(parents=True, exist_ok=True)
     if kind == "ts-lj38":
         archive = _archive("website/tsopt/LJ38/coords-con.tar.gz")
         con = _extract_suffix(archive, f"/{start}.con", work / "src.con")
-        mode = _seeded_mode(38, int(start))
+        if direction == "numpy":
+            mode = _numpy_archive_mode(38, int(start))
+        else:
+            mode = _seeded_mode(38, int(start))
         return [(str(con), "pos.con"), (str(con), "displacement.con")], [("direction.dat", mode)]
     if kind == "ts-pt":
         archive = _archive("website/tsopt/pt-island/pt-island-con.tgz")
@@ -794,7 +824,12 @@ def run_case(
                     record["uncached"] = True
                 record = _guard(record, record.get("client_calls"))
             else:
-                copies, texts = _files(kind, str(start), work / "src")
+                copies, texts = _files(
+                    kind,
+                    str(start),
+                    work / "src",
+                    direction=str(template.get("direction") or "python"),
+                )
                 found = _run_client(
                     client,
                     _ini_text(template, int(seed), wrapper, python_job=python_job),
