@@ -1,15 +1,9 @@
-# pot.count is Gman's native counter, one call on every movable image.
-# force_calls is the truncated mean of pot.count()/8, the 2014 integer.
-# PAR-2 ranks pot.count(), the band total, with that native counter labelled harness.
 force_calls 120
 force_calls_min 57
 force_calls_max 321
 nfailed 0
+algorithm lbfgs
 code Gman
 code_version r235
-commit r235
-algorithm cg
-template gman/neb-pt-cg
+template gman-cg
 problem neb/Pt-heptamer
-tuning archive
-counter harness

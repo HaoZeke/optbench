@@ -399,12 +399,12 @@ def run_template(
     calls = [float(row["force_calls"]) for row in rows]
     nfailed = sum(1 for row in rows if not row["success"])
     output.parent.mkdir(parents=True, exist_ok=True)
-    native = settings["optimizer"] == "cg"
+    native = str(template.get("tuning") or "") == "stock"
     header = ""
     if native:
         header = (
             "# pot.count is Gman's native counter, one call on every movable image.\n"
-            "# force_calls is the truncated mean of pot.count()/8, the 2014 integer.\n"
+            "# force_calls is the truncated mean of pot.count()/8.\n"
             "# PAR-2 ranks pot.count(), the band total, with that native counter labelled harness."
         )
     output.write_text(

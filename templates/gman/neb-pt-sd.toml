@@ -6,7 +6,7 @@ code_version = "r235"
 commit = "r235"
 algorithm = "sd"
 failure_cap = 10000
-paper_baseline = true
+paper_baseline = false
 tuning = "archive"
 note = "Archived opt.py builds Gopt.sd with stepR 0.02 and maxmove 0.2, then relaxes a climbing-image NEB: 8 images, spring 5, tangent new, fmax 0.01, converge Fmag, fsaddle off, itrmax 10000. The Morse force is the r235 Fortran routine (U0 0.7102, alpha 1.6047, r0 2.897, rc 9.5). force_calls is pot.count()/8, and the published integer is the truncated mean of the 13 paths. The archived script writes algorithm lbfgs for every Gman optimizer; the optimizer that runs is steepest descent."
 
