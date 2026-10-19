@@ -259,6 +259,8 @@ note = "TorchSim 0.6.2, tag v0.6.2. FIRE uses the ASE flavor at the constructor 
 
 # generated ASE and Sella templates
 
+# generated ASE and Sella templates
+
 [[template]]
 id = "ase/lj38-bfgs-default"
 code = "ase"
@@ -722,3 +724,13 @@ problem = "saddle-search/pt-island"
 profile = "tuned"
 task = "sella-search"
 ranked = false
+
+[[template]]
+id = "ase-globalopt/lj75-basinhopping"
+code = "ase"
+problem = "globalopt/lj75"
+profile = "default"
+task = "basin-hopping"
+ranked = true
+
+# generated ASE and Sella templates

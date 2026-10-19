@@ -4,6 +4,29 @@ suite = "globalopt"
 problem = "lj98"
 contract = "partial"
 entry_count = 2
+remark = "Success is an energy at or below the Cambridge Cluster Database N=98 minimum plus 0.001. The start set is the 100 numbered coordinate files. The cap of 1000000000 force calls is above the archived nosym energy-call mean 5.98857238e+07 plus ten times its standard deviation 6.21561817e+07."
+
+[potential]
+kind = "lennard-jones"
+epsilon = 1.0
+sigma = 1.0
+cutoff = 40.0
+
+[reference]
+energy = -543.665361
+symmetry = "Td"
+page = "https://www-wales.ch.cam.ac.uk/~jon/structures/LJ/tables.150.html"
+points = "https://www-wales.ch.cam.ac.uk/~jon/structures/LJ/points/98"
+
+[sample]
+starts = 100
+
+[convergence]
+energy_above_minimum = 0.001
+max_force_calls = 1000000000
+
+[input]
+archive_path = "website/globalopt/lj98/lj98_clusters.tgz"
 
 [metrics]
 required = ["basin_hopping_steps_mean", "basin_hopping_steps_stddev", "cpu_time_mean", "cpu_time_stddev", "energy_calls_mean", "energy_calls_stddev", "nfailed"]

@@ -4,6 +4,26 @@ suite = "globalopt"
 problem = "tip4p20"
 contract = "partial"
 entry_count = 2
+remark = "Success is an energy at or below the Cambridge Cluster Database TIP4P N=20 minimum plus 0.001. The cap of 200000000 force calls is above the archived GMIN maximum of 143400000."
+
+[potential]
+kind = "tip4p"
+rigid = true
+
+[reference]
+energy = -872.9887544952
+page = "http://www-wales.ch.cam.ac.uk/~wales/CCD/TIP4P-water.html"
+points = "https://www-wales.ch.cam.ac.uk/~wales/CCD/TIP4P/xyz/TIP4P-20.xyz"
+
+[sample]
+starts = 100
+
+[convergence]
+energy_above_minimum = 0.001
+max_force_calls = 200000000
+
+[input]
+archive_path = "website/globalopt/tip4p20/100_tip4p20.tar.gz"
 
 [metrics]
 required = ["force_calls", "force_calls_max", "force_calls_median", "force_calls_min", "nfailed"]
