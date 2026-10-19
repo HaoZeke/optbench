@@ -111,6 +111,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+    "repro/globalopt-lj100-binary-eon-basinhopping": "aa4c69da13b1a8b58ece52042c6d1116c8184fe1",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -196,6 +197,7 @@ MATCHES: list[dict] = [
     {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm0", "template": "softsaddle/saddle-lanczos-sm0", "branch": "cells/softsaddle/ts-reps", "path": "results/campaign/softsaddle-2019.04-saddle-lanczos-sm0.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
     # globalopt and htst and aladatom rates
     {"key": "globalopt/lj38/eon-basinhopping", "template": "eon-client/bh-lj38", "branch": "entries/eon-svn-lane-a", "path": "results/campaign/eon-client-bh-lj38.dat"},
+    {"key": "globalopt/lj100-binary/eon-basinhopping", "template": "eon-svn/bh-lj100-binary", "branch": "repro/globalopt-lj100-binary-eon-basinhopping", "path": "results/campaign/eon-svn-bh-lj100-binary.dat"},
     {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "branch": "cells/pele/go", "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat", "cause": "pele_bh_defaults"},
     {"key": "hTST/Al/eon-dimer-cg", "template": "eon-svn/htst-al-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-al-dimer.dat", "kind": "htst", "cause": "htst_al"},
     {"key": "hTST/Pt/eon-dimer-cg", "template": "eon-svn/htst-pt-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-pt-dimer.dat", "kind": "htst"},
