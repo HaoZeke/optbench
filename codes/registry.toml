@@ -95,6 +95,16 @@ committed = "2026-10-15"
 note = "Sella 2.6.0. Order 1 is a saddle and order 0 is a minimum. The Sella 0.1.1 rows on the 2014 tables are legacy and are not this pin. Force calls are harness calculator evaluations."
 
 [[code]]
+id = "gmin"
+name = "GMIN"
+role = "minimization"
+repository = "https://www-wales.ch.cam.ac.uk/svn.tar.bz2"
+ref = "svn.tar.bz2"
+commit = "df8da599267534fbe43a250e578f7396a7946311"
+committed = "2026-10-18"
+note = "Wales group GMIN. Tarball sha256 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f. SVNREV df8da599267534fbe43a250e578f7396a7946311, fetched 2026-10-18. The quench is source/mymylbfgs.F90. Keyword defaults are MUPDATE 4, DGUESS 0.1, MAXBFGS 0.4, and MAXERISE 1e-10. The RMS tolerance is the Euclidean force norm divided by sqrt(3N). The potential is the harness Lennard-Jones or Morse through POTENTIAL. Force calls are HarnessCounter entries."
+
+[[code]]
 id = "artn"
 name = "pARTn"
 role = "saddle search"

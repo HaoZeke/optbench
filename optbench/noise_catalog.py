@@ -21,6 +21,8 @@ ASE_COMMIT = "f27c0005ae6a67ea419f996e728668865bfc1f86"
 ASE_VERSION = "3.29.0"
 SELLA_COMMIT = "6cfb60cdb100a146c3c6f0587d5308b247aa8010"
 SELLA_VERSION = "2.6.0"
+GMIN_COMMIT = "df8da599267534fbe43a250e578f7396a7946311"
+GMIN_VERSION = "df8da5992675"
 
 _SLUGS = ((0.0, "s0"), (1e-4, "s1em4"), (1e-3, "s1em3"), (1e-2, "s1em2"))
 
@@ -161,6 +163,34 @@ def specs() -> list[dict]:
                 "Sella",
                 sella_note,
                 {"family": "sella", "order": 0},
+                sigma,
+            )
+        )
+    gmin_note = (
+        "Default GMIN LBFGS. Memory 4, initial inverse-Hessian diagonal 0.1, maximum step 0.4, "
+        "and MAXERISE 1e-10 are the keyword defaults. The RMS tolerance is the noise-aware force "
+        "norm divided by sqrt(3N). At positive sigma the quench returns once that force stop and "
+        "the clean-energy window both hold. The index is the clean Hessian with the rigid-mode rule."
+    )
+    gmin_solver = {
+        "family": "gmin",
+        "method": "lbfgs",
+        "m": 4,
+        "maxbfgs": 0.4,
+        "dguess": 0.1,
+        "maxerise": 1e-10,
+        "maxefall": -1e300,
+    }
+    for sigma in SIGMAS:
+        found.append(
+            _base(
+                f"noise/gmin-lbfgs-{sigma_slug(sigma)}",
+                "GMIN",
+                GMIN_VERSION,
+                GMIN_COMMIT,
+                "LBFGS",
+                gmin_note,
+                gmin_solver,
                 sigma,
             )
         )

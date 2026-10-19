@@ -39,6 +39,10 @@ def _ready(family: str) -> bool:
             import ase  # noqa: F401
         elif family == "sella":
             import sella  # noqa: F401
+        elif family == "gmin":
+            from optbench.gmin_lbfgs import available
+
+            return available()
         else:
             return False
     except ImportError:

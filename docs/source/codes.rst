@@ -712,6 +712,54 @@ The number is written only after the run finishes under the problem rule.
    <li>pt-island: partial.</li>
    <li>sella-lj38: no per-start record.</li>
    </ul>
+   <h3>GMIN</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization</td>
+   <td>svn.tar.bz2</td>
+   <td>df8da5992675</td>
+   <td><a href="https://www-wales.ch.cam.ac.uk/svn.tar.bz2">https://www-wales.ch.cam.ac.uk/svn.tar.bz2</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="minimization/lj38" data-template="gmin/lj38-lbfgs">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="template">gmin/lj38-lbfgs</td>
+   <td data-field="version">GMIN df8da5992675</td>
+   <td data-field="commit">df8da5992675</td>
+   <td data-field="par2_mean">301.399</td>
+   <td data-field="mean_calls">242.093</td>
+   <td data-field="median_calls">223</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-template="noise/gmin-lbfgs-s0">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="template">noise/gmin-lbfgs-s0</td>
+   <td data-field="version">GMIN df8da5992675</td>
+   <td data-field="commit">df8da5992675</td>
+   <td data-field="par2_mean">301.399</td>
+   <td data-field="mean_calls">242.093</td>
+   <td data-field="median_calls">223</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-template="gmin/morse-lbfgs">
+   <td>Morse bulk</td>
+   <td data-field="template">gmin/morse-lbfgs</td>
+   <td data-field="version">GMIN df8da5992675</td>
+   <td data-field="commit">df8da5992675</td>
+   <td data-field="par2_mean">34.4</td>
+   <td data-field="mean_calls">34.4</td>
+   <td data-field="median_calls">35</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table></div>
    <h3>pARTn</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
