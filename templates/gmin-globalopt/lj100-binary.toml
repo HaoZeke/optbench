@@ -1,0 +1,38 @@
+id = "gmin-globalopt/lj100-binary"
+engine = "gmin-go"
+code = "GMIN"
+code_version = "df8da5992675"
+commit = "df8da599267534fbe43a250e578f7396a7946311"
+algorithm = "basin-hopping"
+problem = "globalopt/lj100-binary"
+task = "basin-hopping"
+profile = "default"
+tuning = "default"
+reducer = "par2"
+ranked = true
+note = "Wales and Doye, J. Phys. Chem. A 1997, 101, 5111, and the Lennard-Jones example in the GMIN user guide: SLOPPYCONV 0.01, TIGHTCONV 1.0D-3, CENTRE, SORT, MAXIT 250 500, STEPS with tfac 1.0, STEP 0.36 0.4, TEMPERATURE 0.8. The acceptance ratio 0.5 is adjusted every 50 steps, the GMIN defaults. The quench is LBFGS, the current GMIN default. EDIFF 0.001 and TARGET equal the Cambridge minimum, which is the problem success rule. RANSEED is the coordinate index. dprand reduces a seed by mod(i, 10000)+1, and the indices of one problem stay distinct under that reduction. force_calls is NPCALL on the target hit or miss line. The native potential is replayed through the harness kernel in the matched run. BLJCLUSTER_NOCUT takes 42 atoms of type A, unlike epsilon 1, BB epsilon 1, unlike sigma 1.15 (the arithmetic mean) and BB sigma 1.3. There is no cutoff. MAX_NPCALL is the problem cap, 2000000."
+
+[gmin]
+potential = "blj"
+archive = "coords"
+coordinate_lines = 100
+atoms = 100
+sloppy_rms = 0.01
+tight_rms = 0.001
+maxit_sloppy = 250
+maxit_tight = 500
+temperature = 0.8
+step = 0.36
+angular_step = 0.4
+steps = 100000000
+tfac = 1.0
+ediff = 0.001
+n_A = 42
+epsilon_ab = 1.0
+epsilon_bb = 1.0
+sigma_ab = 1.15
+sigma_bb = 1.3
+
+[stop]
+energy_above_minimum = 0.001
+max_force_calls = 2000000

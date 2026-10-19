@@ -1,0 +1,34 @@
+id = "gmin-globalopt/tip4p20"
+engine = "gmin-go"
+code = "GMIN"
+code_version = "df8da5992675"
+commit = "df8da599267534fbe43a250e578f7396a7946311"
+algorithm = "basin-hopping"
+problem = "globalopt/tip4p20"
+task = "basin-hopping"
+profile = "default"
+tuning = "default"
+reducer = "par2"
+ranked = true
+note = "The TIP4P example in the GMIN user guide: SLOPPYCONV 0.01, TIGHTCONV 0.0001, TIP 4, CENTRE, MAXIT 1000 1000, STEPS with tfac 1.0, STEP 0.6 0.0 0.9 200, TEMPERATURE 5.0. TIP 4 uses the DEFTIP4 parameters, C6 2552.24, C12 2510.4D3, charges 0.52 and -1.04, M site at -0.15. EDIFF 0.001 and TARGET equal the Cambridge minimum. RANSEED is the coordinate index. force_calls is NPCALL on the target hit or miss line. The native TIP 4 potential is compared with the harness constants on the GMIN oxygen-frame chart in the matched run. MAX_NPCALL is the problem cap, 200000000."
+
+[gmin]
+potential = "tip4p"
+archive = "aa"
+coordinate_lines = 40
+atoms = 20
+sloppy_rms = 0.01
+tight_rms = 0.0001
+maxit_sloppy = 1000
+maxit_tight = 1000
+temperature = 5.0
+step = 0.6
+orient_step = 0.9
+block = 200
+steps = 100000000
+tfac = 1.0
+ediff = 0.001
+
+[stop]
+energy_above_minimum = 0.001
+max_force_calls = 200000000

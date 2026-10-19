@@ -1,0 +1,38 @@
+--- a/potential.f90
++++ b/potential.f90
+@@ -48,6 +48,7 @@
+    USE QC1, ONLY: GET_QC
+    USE QUMODE, ONLY: GET_QUMODE
+    USE KPO, ONLY: GET_KPO
++   USE GMIN_HARNESS, ONLY: GMIN_HARNESS_ON
+    USE MODAMBER9, ONLY: ATMASS1
+    USE HIRE_OPEP_INTERFACE_MOD, ONLY: OPEP_ENERGY_AND_GRADIENT, OPEP_NUM_HESS
+    USE HIRE_INTERFACE, ONLY: HIRE_ENERGY_GRAD, HIRE_NUMHESS
+@@ -100,6 +101,7 @@
+ !yp297> end 
+    USE POWERLAW_MOD, ONLY: POWERLAW
+    IMPLICIT NONE
++   EXTERNAL GMIN_TRACE
+    
+ ! gq208> Napshift energy and gradient
+    REAL(KIND=REAL64) :: NAPSHIFTGRAD(3*NATOMS)
+@@ -213,6 +215,10 @@
+ !
+ ! Count the number of potential calls.
+    NPCALL=NPCALL+1
++      IF (GMIN_HARNESS_ON()) THEN
++         CALL GMIN_HARNESS_EVAL(X, GRAD, EREAL, 3*NATOMS)
++         GOTO 20
++      END IF
+ 10 CONTINUE
+ 
+ ! pp555> shift fractional coordinates into minimum image?
+@@ -2676,6 +2682,8 @@
+       CALL HARMOVECONSTR(X, I, J, GRAD, EREAL)
+    END IF 
+ 
++20    CONTINUE
++      CALL GMIN_TRACE(X, GRAD, EREAL, 3*NATOMS, GRADT)
+    IF (GRADT .OR. WHICH_POT .EQ. PCSM) THEN
+       IF (FREEZE) THEN
+          DO J1=1, NATOMS
