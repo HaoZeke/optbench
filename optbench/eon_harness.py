@@ -3,7 +3,9 @@
 Each force evaluation is one ``HarnessCounter`` charge. eonclient is
 started with ``potential = ext_pot``. A small C program forwards
 ``from_eon_to_extpot`` to ``PotServer``. The template still names the
-2014 potential. The kernel is the problem surface:
+2014 potential. A template with ``native_potential`` keeps that
+potential and scores the client's ``total_force_calls``. The kernel is
+the problem surface:
 
 * ``lj40`` is unshifted ``lj/cut`` with epsilon 1, sigma 1, cutoff 40.
 * ``morse`` is LAMMPS ``morse/smooth/linear`` (D 0.7102, alpha 1.6047,
@@ -398,7 +400,8 @@ def _ini_text(template: dict, seed: int, wrapper: Path, *, python_job: bool) -> 
     main["random_seed"] = int(seed)
     if not python_job:
         main["parallel"] = False
-    sections["Potential"] = {"potential": "ext_pot", "ext_pot_path": str(wrapper)}
+    if not template.get("native_potential"):
+        sections["Potential"] = {"potential": "ext_pot", "ext_pot_path": str(wrapper)}
     return format_ini(sections)
 
 
@@ -778,11 +781,13 @@ def run_case(
     started = time.monotonic()
     work = Path(tempfile.mkdtemp(prefix="optbench-eon-"))
     server = None
+    native = bool(template.get("native_potential"))
     try:
         client = _client(family)
         evaluate = kernel_for(str(template["kernel"]))
-        server = PotServer(evaluate, cap=cap).start()
-        os.environ["OPTBENCH_POTSERVER"] = server.endpoint()
+        if not native:
+            server = PotServer(evaluate, cap=cap).start()
+            os.environ["OPTBENCH_POTSERVER"] = server.endpoint()
         try:
             wrapper = bridge_binary()
             if kind == "lowest":
@@ -838,8 +843,12 @@ def run_case(
                     texts,
                     None,
                 )
-                calls, _verify = remote_count(server.host, server.port)
                 fields = found["fields"]
+                if native:
+                    raw_calls = fields.get("total_force_calls") or fields.get("force_calls_neb")
+                    calls = int(float(raw_calls)) if raw_calls not in (None, "") else 0
+                else:
+                    calls, _verify = remote_count(server.host, server.port)
                 if kind == "basin":
                     energy_text = fields.get("minimum_energy")
                     stop = float(template["ini"]["Basin Hopping"]["stop_energy"])
@@ -897,7 +906,8 @@ def run_case(
                 record["client_reason"] = fields.get("termination_reason")
                 record = _guard(record, record.get("client_calls"))
         finally:
-            server.stop()
+            if server is not None:
+                server.stop()
             os.environ.pop("OPTBENCH_POTSERVER", None)
         record["seconds"] = time.monotonic() - started
         record["counter"] = "harness"

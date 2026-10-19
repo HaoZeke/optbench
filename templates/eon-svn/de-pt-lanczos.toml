@@ -9,9 +9,10 @@ reducer = "harness"
 failure_cap = 3000
 kind = "de-pt-mode"
 kernel = "morse_shift"
+native_potential = true
 asv_class = "EonSvnDePtLanczos"
 note = '''
-Lanczos from the interpolated Pt-island end points. max_iterations 10, tolerance 0.05, quit_early false. max_energy 1e9. LBFGS max_iterations 1000, converged_force 0.001. The harness kernel is r2549 Morse::force: cutoff 9.5, pair energy shifted to zero at the cutoff, minimum image on the box diagonal. D 0.7102, alpha 1.6047, r0 2.897.
+Lanczos from the interpolated Pt-island end points. The archive leaves finite_difference unset, so the client default 0.01 applies. Lanczos max_iterations 10, tolerance 0.05, quit_early false. max_energy 1e9. LBFGS max_iterations 1000, converged_force 0.001. The client keeps potential morse_pt (cutoff 9.5, pair energy shifted to zero at the cutoff, minimum image on the box diagonal, D 0.7102, alpha 1.6047, r0 2.897) and the score is its total_force_calls. The Lanczos loop is the r2169 bound, which writes one column past the row-major matrix, built with Fortran and Eigen 3.2.10.
 '''
 seeds = [1]
 asv_timeout = 900
@@ -19,7 +20,6 @@ budget_seconds = 600
 
 [ini.Main]
 job = "saddle_search"
-finite_difference = 0.001
 random_seed = 1
 
 [ini.Potential]
