@@ -1068,6 +1068,17 @@
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="globalopt/lj100-binary" data-template="airss/lj100-binary">
+   <td>Binary Lennard-Jones 100</td>
+   <td data-field="template">airss/lj100-binary</td>
+   <td data-field="version">AIRSS 0.9.4</td>
+   <td data-field="commit">5593cc4ee360</td>
+   <td data-field="par2_mean">4e+06</td>
+   <td data-field="mean_calls">2.00073e+06</td>
+   <td data-field="median_calls">2.00072e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 100, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
    <tr data-problem="globalopt/lj38" data-template="airss/lj38">
    <td>Lennard-Jones 38 global minimum</td>
    <td data-field="template">airss/lj38</td>
@@ -1079,9 +1090,17 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
+   <tr data-problem="globalopt/lj75" data-template="airss/lj75">
+   <td>lj75</td>
+   <td data-field="template">airss/lj75</td>
+   <td data-field="version">AIRSS 0.9.4</td>
+   <td data-field="commit">5593cc4ee360</td>
+   <td data-field="par2_mean">1.99333e+06</td>
+   <td data-field="mean_calls">998908</td>
+   <td data-field="median_calls">1.00047e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 199, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
    </tbody></table></div>
-   <p>No full ranked run</p><ul>
-   <li>lj75: partial.</li>
-   </ul>
    </section>
 #+end_export
