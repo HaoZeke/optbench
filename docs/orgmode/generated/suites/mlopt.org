@@ -35,6 +35,7 @@
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
+   <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <figure class="bench-plot"><a href="../../_static/board/mlopt-C2H4-profile.svg"><picture><source srcset="../../_static/board/mlopt-C2H4-profile.webp" type="image/webp"><img src="../../_static/board/mlopt-C2H4-profile.png" alt="Dolan-More profile for mlopt/C2H4" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/mlopt-C2H4-cost.svg"><picture><source srcset="../../_static/board/mlopt-C2H4-cost.webp" type="image/webp"><img src="../../_static/board/mlopt-C2H4-cost.png" alt="Cost versus success for mlopt/C2H4" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="C2H4-templates">
@@ -54,6 +55,18 @@
    <tr><td data-field="template">kliff/c2h4-adam-tuned-force</td><td data-field="version">KLIFF 1.0.1</td><td data-field="commit">df2d4de2d8c0</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">60000</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.0713476</td><td data-field="median_calls">30000</td><td data-field="mean_calls">30000</td><td data-field="failures">crash 0, divergence 0, cap 50, wrong_stationary 0</td><td data-field="n">50</td></tr>
    <tr><td data-field="template">kliff/c2h4-rprop-force</td><td data-field="version">KLIFF 1.0.1</td><td data-field="commit">df2d4de2d8c0</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">60000</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.0713476</td><td data-field="median_calls">30000</td><td data-field="mean_calls">27562.6</td><td data-field="failures">crash 0, divergence 24, cap 26, wrong_stationary 0</td><td data-field="n">50</td></tr>
    </tbody></table></div>
+   <h3>Partial</h3><ul>
+   <li>kliff/c2h4-adam KLIFF asv n=1, smoke run; scored 1 of 50 starts.</li>
+   <li>kliff/c2h4-adam-force KLIFF asv n=1, smoke run; scored 1 of 50 starts.</li>
+   <li>kliff/c2h4-adam-tuned KLIFF asv n=1, smoke run; scored 1 of 50 starts.</li>
+   <li>kliff/c2h4-adam-tuned-force KLIFF asv n=1, smoke run; scored 1 of 50 starts.</li>
+   <li>kliff/c2h4-lbfgs KLIFF asv n=1, smoke run; scored 1 of 50 starts.</li>
+   <li>kliff/c2h4-lbfgs-force KLIFF asv n=1, smoke run; scored 1 of 50 starts.</li>
+   <li>kliff/c2h4-lbfgs-tuned KLIFF asv n=1, smoke run; scored 1 of 50 starts.</li>
+   <li>kliff/c2h4-lbfgs-tuned-force KLIFF asv n=1, smoke run; scored 1 of 50 starts.</li>
+   <li>kliff/c2h4-rprop KLIFF asv n=1, smoke run; scored 1 of 50 starts.</li>
+   <li>kliff/c2h4-rprop-force KLIFF asv n=1, smoke run; scored 1 of 50 starts.</li>
+   </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="C2H4-legacy">
    <h3>Legacy 2014 archive</h3>
@@ -170,6 +183,7 @@
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
+   <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <figure class="bench-plot"><a href="../../_static/board/mlopt-emt-pt38-profile.svg"><picture><source srcset="../../_static/board/mlopt-emt-pt38-profile.webp" type="image/webp"><img src="../../_static/board/mlopt-emt-pt38-profile.png" alt="Dolan-More profile for mlopt/emt-pt38" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/mlopt-emt-pt38-cost.svg"><picture><source srcset="../../_static/board/mlopt-emt-pt38-cost.webp" type="image/webp"><img src="../../_static/board/mlopt-emt-pt38-cost.png" alt="Cost versus success for mlopt/emt-pt38" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="emt-pt38-templates">
@@ -189,6 +203,18 @@
    <tr><td data-field="template">kliff/emt-pt38-adam-tuned-force</td><td data-field="version">KLIFF 1.0.1</td><td data-field="commit">df2d4de2d8c0</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">13339.5</td><td data-field="success_rate">0.42</td><td data-field="wilson_low">0.29375</td><td data-field="wilson_high">0.557666</td><td data-field="median_calls">10000</td><td data-field="mean_calls">7539.48</td><td data-field="failures">crash 0, divergence 0, cap 29, wrong_stationary 0</td><td data-field="n">50</td></tr>
    <tr><td data-field="template">kliff/emt-pt38-rprop-force</td><td data-field="version">KLIFF 1.0.1</td><td data-field="commit">df2d4de2d8c0</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">16492.1</td><td data-field="success_rate">0.22</td><td data-field="wilson_low">0.127539</td><td data-field="wilson_high">0.352415</td><td data-field="median_calls">9996</td><td data-field="mean_calls">8566.06</td><td data-field="failures">crash 0, divergence 26, cap 13, wrong_stationary 0</td><td data-field="n">50</td></tr>
    </tbody></table></div>
+   <h3>Partial</h3><ul>
+   <li>kliff/emt-pt38-adam KLIFF asv n=1, smoke run; scored 1 of 50 starts.</li>
+   <li>kliff/emt-pt38-adam-force KLIFF asv n=1, smoke run; scored 1 of 50 starts.</li>
+   <li>kliff/emt-pt38-adam-tuned KLIFF asv n=1, smoke run; scored 1 of 50 starts.</li>
+   <li>kliff/emt-pt38-adam-tuned-force KLIFF asv n=1, smoke run; scored 1 of 50 starts.</li>
+   <li>kliff/emt-pt38-lbfgs KLIFF asv n=1, smoke run; scored 1 of 50 starts.</li>
+   <li>kliff/emt-pt38-lbfgs-force KLIFF asv n=1, smoke run; scored 1 of 50 starts.</li>
+   <li>kliff/emt-pt38-lbfgs-tuned KLIFF asv n=1, smoke run; scored 1 of 50 starts.</li>
+   <li>kliff/emt-pt38-lbfgs-tuned-force KLIFF asv n=1, smoke run; scored 1 of 50 starts.</li>
+   <li>kliff/emt-pt38-rprop KLIFF asv n=1, smoke run; scored 1 of 50 starts.</li>
+   <li>kliff/emt-pt38-rprop-force KLIFF asv n=1, smoke run; scored 1 of 50 starts.</li>
+   </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="emt-pt38-legacy">
    <h3>Legacy 2014 archive</h3>

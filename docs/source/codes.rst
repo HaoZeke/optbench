@@ -701,4 +701,8 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">50</td>
    </tr>
    </tbody></table></div>
+   <p>No full ranked run</p><ul>
+   <li>C2H4: partial.</li>
+   <li>EMT Pt 38 nanoparticle: partial.</li>
+   </ul>
    </section>
