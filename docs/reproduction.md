@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+47 reproduced, 28 not reproduced, 76 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -42,7 +42,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | pt-island/eon-dimer | force_calls 182 | 192 | reproduced |
 | pt-island/eon-lanczos | force_calls 325 | 222 | not reproduced; pt_lanczos |
 | pt-island/eon-lanczos-improved | force_calls 222 | 181 | not reproduced; pt_lanczos |
-| pt-island/optim | force_calls 103 | 138 | not reproduced; optim_pt_units |
+| pt-island/optim | force_calls 103 | 103 | reproduced |
 | pt-island/optim-6 | — | — | not rerun |
 | pt-island/optim-cl-string | — | — | not rerun |
 | pt-island/pele | — | — | not rerun |
@@ -256,13 +256,6 @@ The svn template uses the archived Lanczos keys (10 iterations, tolerance 0.05) 
 - double-ended-saddle-search/pt-island/eon-lanczos
 - double-ended-saddle-search/pt-island/eon-lanczos-improved
 
-### optim_pt_units
-
-archive run.sh divides coordinates by r0 = 2.897 and scales rho and rcut into those units. The harness keeps the problem Morse in eV/Angstrom on the unscaled con file.
-
-- double-ended-saddle-search/pt-island/optim
-- tsopt/pt-island/optim_ffd
-
 ### pele_bh_defaults
 
 The archived driver is the dangling path bin/js850/globalopt.py. The harness uses pele LJCluster defaults (temperature 1, step 0.6, LBFGS memory 4) on unshifted cutoff 40. The mean is 688720 against 521595.
@@ -357,5 +350,11 @@ Sella 2.6.0 with the archived trust-region numbers (eta, gamma, delta0, rho, sig
 
 - tsopt/LJ38/sella
 - tsopt/pt-island/sella
+
+### optim_pt_units
+
+archive run.sh divides coordinates by r0 = 2.897 and scales rho and rcut into those units. The harness keeps the problem Morse in eV/Angstrom on the unscaled con file.
+
+- tsopt/pt-island/optim_ffd
 
 Rows with no exact-setup campaign stay not rerun and are not given a cause. AKMC on aladatom is a different method from Langevin parallel replica; the ratios above are that comparison, and the archive rows stay not rerun.
