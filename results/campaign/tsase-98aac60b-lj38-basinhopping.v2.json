@@ -18,7 +18,7 @@
         "force_calls_max": 2000000,
         "force_calls_median": 2000000.0,
         "force_calls_min": 529824,
-        "nfailed": 38
+        "nfailed": 39
       },
       "metrics": {
         "bootstrap_resamples": 2000,
@@ -28,27 +28,27 @@
         "iqr": 0.0,
         "iqr_high": 0.0,
         "iqr_low": 0.0,
-        "mean": 3716651.761904762,
+        "mean": 3723241.2558139535,
         "median": 4000000.0,
         "median_high": 4000000.0,
         "median_low": 4000000.0,
-        "n": 42,
-        "n_cap": 38,
+        "n": 43,
+        "n_cap": 39,
         "n_crash": 0,
         "n_divergence": 0,
         "n_wrong_stationary": 0,
-        "nfailed": 38,
-        "par2_mean": 3716651.761904762,
+        "nfailed": 39,
+        "par2_mean": 3723241.2558139535,
         "par_applied": true,
         "par_factor": 2,
         "q25": 4000000.0,
         "q75": 4000000.0,
         "scoring": "par2-wilson-bootstrap",
         "success_only_mean": 1024843.5,
-        "success_rate": 0.09523809523809523,
+        "success_rate": 0.09302325581395349,
         "successes": 4,
-        "wilson_high": 0.22065105808571023,
-        "wilson_low": 0.03766224880557388
+        "wilson_high": 0.21602703641253587,
+        "wilson_low": 0.03677164063171276
       },
       "parameters": {
         "distribution": "uniform",
@@ -792,6 +792,23 @@
           "schema": "optbench.start/v2",
           "start": "41",
           "success": true,
+          "threshold": -173.92742624400097,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -173.25235698746553,
+          "failure": "cap",
+          "force_calls": 2000000,
+          "lowest_energy": -173.25235698746553,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "42",
+          "success": false,
           "threshold": -173.92742624400097,
           "verify_calls": 0
         }
