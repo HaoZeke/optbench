@@ -808273,5 +808273,2709 @@
     "type": "track",
     "unit": "fraction",
     "version": "9d0d7807056dad1ebd43c1349303971cacc821bd9b53177f16639526a3e831f5"
+  },
+  "bench_geomoptjl.GeomoptjlLj38Cg.time_search": {
+    "code": "class _GeomoptjlSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "min_run_count": 1,
+    "name": "bench_geomoptjl.GeomoptjlLj38Cg.time_search",
+    "number": 1,
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "repeat": 1,
+    "rounds": 1,
+    "sample_time": 0,
+    "timeout": 7200,
+    "type": "time",
+    "unit": "seconds",
+    "version": "9344e39bbf1c7bd716f6b56b63572f8252759c7543939e16f25a4cf1d9063595",
+    "warmup_time": 0
+  },
+  "bench_geomoptjl.GeomoptjlLj38Cg.track_failure_cap": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlLj38Cg.track_failure_cap",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "75601a5143cd6e7868a2d1538a10e6d8c11a47aecc665609836cfba879fa2ec1"
+  },
+  "bench_geomoptjl.GeomoptjlLj38Cg.track_failure_crash": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlLj38Cg.track_failure_crash",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "b89aa4d48c56dfd82cf9b444ded683f1c337dd10822da6af393ad275264ada5e"
+  },
+  "bench_geomoptjl.GeomoptjlLj38Cg.track_failure_divergence": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlLj38Cg.track_failure_divergence",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "e8e2ee916960c2b5dffb1e55a6b04efa0f764b84c8f591580800db751b4ff769"
+  },
+  "bench_geomoptjl.GeomoptjlLj38Cg.track_failure_wrong_stationary": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlLj38Cg.track_failure_wrong_stationary",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "651e87c4df26b9c7447e8b818c1338fdc303343098d01bcb9349e08d5b3540b7"
+  },
+  "bench_geomoptjl.GeomoptjlLj38Cg.track_force_calls": {
+    "code": "class _GeomoptjlSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlLj38Cg.track_force_calls",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "force calls",
+    "version": "d1112cd8067aa571b5788c6fe6216017a19cbb5e29f72a5089d253dbd68989bc"
+  },
+  "bench_geomoptjl.GeomoptjlLj38Cg.track_success": {
+    "code": "class _GeomoptjlSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlLj38Cg.track_success",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "fraction",
+    "version": "3a423f01535981ed7f7283de0e0cdd263b00fe6ec1ebeaaf4d88ad750394bfff"
+  },
+  "bench_geomoptjl.GeomoptjlLj38Gradientdescent.time_search": {
+    "code": "class _GeomoptjlSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "min_run_count": 1,
+    "name": "bench_geomoptjl.GeomoptjlLj38Gradientdescent.time_search",
+    "number": 1,
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "repeat": 1,
+    "rounds": 1,
+    "sample_time": 0,
+    "timeout": 7200,
+    "type": "time",
+    "unit": "seconds",
+    "version": "9344e39bbf1c7bd716f6b56b63572f8252759c7543939e16f25a4cf1d9063595",
+    "warmup_time": 0
+  },
+  "bench_geomoptjl.GeomoptjlLj38Gradientdescent.track_failure_cap": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlLj38Gradientdescent.track_failure_cap",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "75601a5143cd6e7868a2d1538a10e6d8c11a47aecc665609836cfba879fa2ec1"
+  },
+  "bench_geomoptjl.GeomoptjlLj38Gradientdescent.track_failure_crash": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlLj38Gradientdescent.track_failure_crash",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "b89aa4d48c56dfd82cf9b444ded683f1c337dd10822da6af393ad275264ada5e"
+  },
+  "bench_geomoptjl.GeomoptjlLj38Gradientdescent.track_failure_divergence": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlLj38Gradientdescent.track_failure_divergence",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "e8e2ee916960c2b5dffb1e55a6b04efa0f764b84c8f591580800db751b4ff769"
+  },
+  "bench_geomoptjl.GeomoptjlLj38Gradientdescent.track_failure_wrong_stationary": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlLj38Gradientdescent.track_failure_wrong_stationary",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "651e87c4df26b9c7447e8b818c1338fdc303343098d01bcb9349e08d5b3540b7"
+  },
+  "bench_geomoptjl.GeomoptjlLj38Gradientdescent.track_force_calls": {
+    "code": "class _GeomoptjlSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlLj38Gradientdescent.track_force_calls",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "force calls",
+    "version": "d1112cd8067aa571b5788c6fe6216017a19cbb5e29f72a5089d253dbd68989bc"
+  },
+  "bench_geomoptjl.GeomoptjlLj38Gradientdescent.track_success": {
+    "code": "class _GeomoptjlSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlLj38Gradientdescent.track_success",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "fraction",
+    "version": "3a423f01535981ed7f7283de0e0cdd263b00fe6ec1ebeaaf4d88ad750394bfff"
+  },
+  "bench_geomoptjl.GeomoptjlLj38Lbfgs.time_search": {
+    "code": "class _GeomoptjlSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "min_run_count": 1,
+    "name": "bench_geomoptjl.GeomoptjlLj38Lbfgs.time_search",
+    "number": 1,
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "repeat": 1,
+    "rounds": 1,
+    "sample_time": 0,
+    "timeout": 7200,
+    "type": "time",
+    "unit": "seconds",
+    "version": "9344e39bbf1c7bd716f6b56b63572f8252759c7543939e16f25a4cf1d9063595",
+    "warmup_time": 0
+  },
+  "bench_geomoptjl.GeomoptjlLj38Lbfgs.track_failure_cap": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlLj38Lbfgs.track_failure_cap",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "75601a5143cd6e7868a2d1538a10e6d8c11a47aecc665609836cfba879fa2ec1"
+  },
+  "bench_geomoptjl.GeomoptjlLj38Lbfgs.track_failure_crash": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlLj38Lbfgs.track_failure_crash",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "b89aa4d48c56dfd82cf9b444ded683f1c337dd10822da6af393ad275264ada5e"
+  },
+  "bench_geomoptjl.GeomoptjlLj38Lbfgs.track_failure_divergence": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlLj38Lbfgs.track_failure_divergence",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "e8e2ee916960c2b5dffb1e55a6b04efa0f764b84c8f591580800db751b4ff769"
+  },
+  "bench_geomoptjl.GeomoptjlLj38Lbfgs.track_failure_wrong_stationary": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlLj38Lbfgs.track_failure_wrong_stationary",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "651e87c4df26b9c7447e8b818c1338fdc303343098d01bcb9349e08d5b3540b7"
+  },
+  "bench_geomoptjl.GeomoptjlLj38Lbfgs.track_force_calls": {
+    "code": "class _GeomoptjlSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlLj38Lbfgs.track_force_calls",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "force calls",
+    "version": "d1112cd8067aa571b5788c6fe6216017a19cbb5e29f72a5089d253dbd68989bc"
+  },
+  "bench_geomoptjl.GeomoptjlLj38Lbfgs.track_success": {
+    "code": "class _GeomoptjlSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlLj38Lbfgs.track_success",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "fraction",
+    "version": "3a423f01535981ed7f7283de0e0cdd263b00fe6ec1ebeaaf4d88ad750394bfff"
+  },
+  "bench_geomoptjl.GeomoptjlMorseCg.time_search": {
+    "code": "class _GeomoptjlSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "min_run_count": 1,
+    "name": "bench_geomoptjl.GeomoptjlMorseCg.time_search",
+    "number": 1,
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "repeat": 1,
+    "rounds": 1,
+    "sample_time": 0,
+    "timeout": 7200,
+    "type": "time",
+    "unit": "seconds",
+    "version": "9344e39bbf1c7bd716f6b56b63572f8252759c7543939e16f25a4cf1d9063595",
+    "warmup_time": 0
+  },
+  "bench_geomoptjl.GeomoptjlMorseCg.track_failure_cap": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlMorseCg.track_failure_cap",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "75601a5143cd6e7868a2d1538a10e6d8c11a47aecc665609836cfba879fa2ec1"
+  },
+  "bench_geomoptjl.GeomoptjlMorseCg.track_failure_crash": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlMorseCg.track_failure_crash",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "b89aa4d48c56dfd82cf9b444ded683f1c337dd10822da6af393ad275264ada5e"
+  },
+  "bench_geomoptjl.GeomoptjlMorseCg.track_failure_divergence": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlMorseCg.track_failure_divergence",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "e8e2ee916960c2b5dffb1e55a6b04efa0f764b84c8f591580800db751b4ff769"
+  },
+  "bench_geomoptjl.GeomoptjlMorseCg.track_failure_wrong_stationary": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlMorseCg.track_failure_wrong_stationary",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "651e87c4df26b9c7447e8b818c1338fdc303343098d01bcb9349e08d5b3540b7"
+  },
+  "bench_geomoptjl.GeomoptjlMorseCg.track_force_calls": {
+    "code": "class _GeomoptjlSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlMorseCg.track_force_calls",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "force calls",
+    "version": "d1112cd8067aa571b5788c6fe6216017a19cbb5e29f72a5089d253dbd68989bc"
+  },
+  "bench_geomoptjl.GeomoptjlMorseCg.track_success": {
+    "code": "class _GeomoptjlSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlMorseCg.track_success",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "fraction",
+    "version": "3a423f01535981ed7f7283de0e0cdd263b00fe6ec1ebeaaf4d88ad750394bfff"
+  },
+  "bench_geomoptjl.GeomoptjlMorseGradientdescent.time_search": {
+    "code": "class _GeomoptjlSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "min_run_count": 1,
+    "name": "bench_geomoptjl.GeomoptjlMorseGradientdescent.time_search",
+    "number": 1,
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "repeat": 1,
+    "rounds": 1,
+    "sample_time": 0,
+    "timeout": 7200,
+    "type": "time",
+    "unit": "seconds",
+    "version": "9344e39bbf1c7bd716f6b56b63572f8252759c7543939e16f25a4cf1d9063595",
+    "warmup_time": 0
+  },
+  "bench_geomoptjl.GeomoptjlMorseGradientdescent.track_failure_cap": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlMorseGradientdescent.track_failure_cap",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "75601a5143cd6e7868a2d1538a10e6d8c11a47aecc665609836cfba879fa2ec1"
+  },
+  "bench_geomoptjl.GeomoptjlMorseGradientdescent.track_failure_crash": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlMorseGradientdescent.track_failure_crash",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "b89aa4d48c56dfd82cf9b444ded683f1c337dd10822da6af393ad275264ada5e"
+  },
+  "bench_geomoptjl.GeomoptjlMorseGradientdescent.track_failure_divergence": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlMorseGradientdescent.track_failure_divergence",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "e8e2ee916960c2b5dffb1e55a6b04efa0f764b84c8f591580800db751b4ff769"
+  },
+  "bench_geomoptjl.GeomoptjlMorseGradientdescent.track_failure_wrong_stationary": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlMorseGradientdescent.track_failure_wrong_stationary",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "651e87c4df26b9c7447e8b818c1338fdc303343098d01bcb9349e08d5b3540b7"
+  },
+  "bench_geomoptjl.GeomoptjlMorseGradientdescent.track_force_calls": {
+    "code": "class _GeomoptjlSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlMorseGradientdescent.track_force_calls",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "force calls",
+    "version": "d1112cd8067aa571b5788c6fe6216017a19cbb5e29f72a5089d253dbd68989bc"
+  },
+  "bench_geomoptjl.GeomoptjlMorseGradientdescent.track_success": {
+    "code": "class _GeomoptjlSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlMorseGradientdescent.track_success",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "fraction",
+    "version": "3a423f01535981ed7f7283de0e0cdd263b00fe6ec1ebeaaf4d88ad750394bfff"
+  },
+  "bench_geomoptjl.GeomoptjlMorseLbfgs.time_search": {
+    "code": "class _GeomoptjlSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "min_run_count": 1,
+    "name": "bench_geomoptjl.GeomoptjlMorseLbfgs.time_search",
+    "number": 1,
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "repeat": 1,
+    "rounds": 1,
+    "sample_time": 0,
+    "timeout": 7200,
+    "type": "time",
+    "unit": "seconds",
+    "version": "9344e39bbf1c7bd716f6b56b63572f8252759c7543939e16f25a4cf1d9063595",
+    "warmup_time": 0
+  },
+  "bench_geomoptjl.GeomoptjlMorseLbfgs.track_failure_cap": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlMorseLbfgs.track_failure_cap",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "75601a5143cd6e7868a2d1538a10e6d8c11a47aecc665609836cfba879fa2ec1"
+  },
+  "bench_geomoptjl.GeomoptjlMorseLbfgs.track_failure_crash": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlMorseLbfgs.track_failure_crash",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "b89aa4d48c56dfd82cf9b444ded683f1c337dd10822da6af393ad275264ada5e"
+  },
+  "bench_geomoptjl.GeomoptjlMorseLbfgs.track_failure_divergence": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlMorseLbfgs.track_failure_divergence",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "e8e2ee916960c2b5dffb1e55a6b04efa0f764b84c8f591580800db751b4ff769"
+  },
+  "bench_geomoptjl.GeomoptjlMorseLbfgs.track_failure_wrong_stationary": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlMorseLbfgs.track_failure_wrong_stationary",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "651e87c4df26b9c7447e8b818c1338fdc303343098d01bcb9349e08d5b3540b7"
+  },
+  "bench_geomoptjl.GeomoptjlMorseLbfgs.track_force_calls": {
+    "code": "class _GeomoptjlSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlMorseLbfgs.track_force_calls",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "force calls",
+    "version": "d1112cd8067aa571b5788c6fe6216017a19cbb5e29f72a5089d253dbd68989bc"
+  },
+  "bench_geomoptjl.GeomoptjlMorseLbfgs.track_success": {
+    "code": "class _GeomoptjlSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlMorseLbfgs.track_success",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "fraction",
+    "version": "3a423f01535981ed7f7283de0e0cdd263b00fe6ec1ebeaaf4d88ad750394bfff"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseCgS0.time_search": {
+    "code": "class _GeomoptjlSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "min_run_count": 1,
+    "name": "bench_geomoptjl.GeomoptjlNoiseCgS0.time_search",
+    "number": 1,
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "repeat": 1,
+    "rounds": 1,
+    "sample_time": 0,
+    "timeout": 7200,
+    "type": "time",
+    "unit": "seconds",
+    "version": "9344e39bbf1c7bd716f6b56b63572f8252759c7543939e16f25a4cf1d9063595",
+    "warmup_time": 0
+  },
+  "bench_geomoptjl.GeomoptjlNoiseCgS0.track_failure_cap": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseCgS0.track_failure_cap",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "75601a5143cd6e7868a2d1538a10e6d8c11a47aecc665609836cfba879fa2ec1"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseCgS0.track_failure_crash": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseCgS0.track_failure_crash",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "b89aa4d48c56dfd82cf9b444ded683f1c337dd10822da6af393ad275264ada5e"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseCgS0.track_failure_divergence": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseCgS0.track_failure_divergence",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "e8e2ee916960c2b5dffb1e55a6b04efa0f764b84c8f591580800db751b4ff769"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseCgS0.track_failure_wrong_stationary": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseCgS0.track_failure_wrong_stationary",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "651e87c4df26b9c7447e8b818c1338fdc303343098d01bcb9349e08d5b3540b7"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseCgS0.track_force_calls": {
+    "code": "class _GeomoptjlSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseCgS0.track_force_calls",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "force calls",
+    "version": "d1112cd8067aa571b5788c6fe6216017a19cbb5e29f72a5089d253dbd68989bc"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseCgS0.track_success": {
+    "code": "class _GeomoptjlSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseCgS0.track_success",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "fraction",
+    "version": "3a423f01535981ed7f7283de0e0cdd263b00fe6ec1ebeaaf4d88ad750394bfff"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseCgS1em2.time_search": {
+    "code": "class _GeomoptjlSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "min_run_count": 1,
+    "name": "bench_geomoptjl.GeomoptjlNoiseCgS1em2.time_search",
+    "number": 1,
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "repeat": 1,
+    "rounds": 1,
+    "sample_time": 0,
+    "timeout": 7200,
+    "type": "time",
+    "unit": "seconds",
+    "version": "9344e39bbf1c7bd716f6b56b63572f8252759c7543939e16f25a4cf1d9063595",
+    "warmup_time": 0
+  },
+  "bench_geomoptjl.GeomoptjlNoiseCgS1em2.track_failure_cap": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseCgS1em2.track_failure_cap",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "75601a5143cd6e7868a2d1538a10e6d8c11a47aecc665609836cfba879fa2ec1"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseCgS1em2.track_failure_crash": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseCgS1em2.track_failure_crash",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "b89aa4d48c56dfd82cf9b444ded683f1c337dd10822da6af393ad275264ada5e"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseCgS1em2.track_failure_divergence": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseCgS1em2.track_failure_divergence",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "e8e2ee916960c2b5dffb1e55a6b04efa0f764b84c8f591580800db751b4ff769"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseCgS1em2.track_failure_wrong_stationary": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseCgS1em2.track_failure_wrong_stationary",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "651e87c4df26b9c7447e8b818c1338fdc303343098d01bcb9349e08d5b3540b7"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseCgS1em2.track_force_calls": {
+    "code": "class _GeomoptjlSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseCgS1em2.track_force_calls",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "force calls",
+    "version": "d1112cd8067aa571b5788c6fe6216017a19cbb5e29f72a5089d253dbd68989bc"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseCgS1em2.track_success": {
+    "code": "class _GeomoptjlSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseCgS1em2.track_success",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "fraction",
+    "version": "3a423f01535981ed7f7283de0e0cdd263b00fe6ec1ebeaaf4d88ad750394bfff"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseCgS1em3.time_search": {
+    "code": "class _GeomoptjlSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "min_run_count": 1,
+    "name": "bench_geomoptjl.GeomoptjlNoiseCgS1em3.time_search",
+    "number": 1,
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "repeat": 1,
+    "rounds": 1,
+    "sample_time": 0,
+    "timeout": 7200,
+    "type": "time",
+    "unit": "seconds",
+    "version": "9344e39bbf1c7bd716f6b56b63572f8252759c7543939e16f25a4cf1d9063595",
+    "warmup_time": 0
+  },
+  "bench_geomoptjl.GeomoptjlNoiseCgS1em3.track_failure_cap": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseCgS1em3.track_failure_cap",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "75601a5143cd6e7868a2d1538a10e6d8c11a47aecc665609836cfba879fa2ec1"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseCgS1em3.track_failure_crash": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseCgS1em3.track_failure_crash",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "b89aa4d48c56dfd82cf9b444ded683f1c337dd10822da6af393ad275264ada5e"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseCgS1em3.track_failure_divergence": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseCgS1em3.track_failure_divergence",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "e8e2ee916960c2b5dffb1e55a6b04efa0f764b84c8f591580800db751b4ff769"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseCgS1em3.track_failure_wrong_stationary": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseCgS1em3.track_failure_wrong_stationary",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "651e87c4df26b9c7447e8b818c1338fdc303343098d01bcb9349e08d5b3540b7"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseCgS1em3.track_force_calls": {
+    "code": "class _GeomoptjlSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseCgS1em3.track_force_calls",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "force calls",
+    "version": "d1112cd8067aa571b5788c6fe6216017a19cbb5e29f72a5089d253dbd68989bc"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseCgS1em3.track_success": {
+    "code": "class _GeomoptjlSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseCgS1em3.track_success",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "fraction",
+    "version": "3a423f01535981ed7f7283de0e0cdd263b00fe6ec1ebeaaf4d88ad750394bfff"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseCgS1em4.time_search": {
+    "code": "class _GeomoptjlSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "min_run_count": 1,
+    "name": "bench_geomoptjl.GeomoptjlNoiseCgS1em4.time_search",
+    "number": 1,
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "repeat": 1,
+    "rounds": 1,
+    "sample_time": 0,
+    "timeout": 7200,
+    "type": "time",
+    "unit": "seconds",
+    "version": "9344e39bbf1c7bd716f6b56b63572f8252759c7543939e16f25a4cf1d9063595",
+    "warmup_time": 0
+  },
+  "bench_geomoptjl.GeomoptjlNoiseCgS1em4.track_failure_cap": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseCgS1em4.track_failure_cap",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "75601a5143cd6e7868a2d1538a10e6d8c11a47aecc665609836cfba879fa2ec1"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseCgS1em4.track_failure_crash": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseCgS1em4.track_failure_crash",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "b89aa4d48c56dfd82cf9b444ded683f1c337dd10822da6af393ad275264ada5e"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseCgS1em4.track_failure_divergence": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseCgS1em4.track_failure_divergence",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "e8e2ee916960c2b5dffb1e55a6b04efa0f764b84c8f591580800db751b4ff769"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseCgS1em4.track_failure_wrong_stationary": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseCgS1em4.track_failure_wrong_stationary",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "651e87c4df26b9c7447e8b818c1338fdc303343098d01bcb9349e08d5b3540b7"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseCgS1em4.track_force_calls": {
+    "code": "class _GeomoptjlSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseCgS1em4.track_force_calls",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "force calls",
+    "version": "d1112cd8067aa571b5788c6fe6216017a19cbb5e29f72a5089d253dbd68989bc"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseCgS1em4.track_success": {
+    "code": "class _GeomoptjlSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseCgS1em4.track_success",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "fraction",
+    "version": "3a423f01535981ed7f7283de0e0cdd263b00fe6ec1ebeaaf4d88ad750394bfff"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseGradientdescentS0.time_search": {
+    "code": "class _GeomoptjlSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "min_run_count": 1,
+    "name": "bench_geomoptjl.GeomoptjlNoiseGradientdescentS0.time_search",
+    "number": 1,
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "repeat": 1,
+    "rounds": 1,
+    "sample_time": 0,
+    "timeout": 7200,
+    "type": "time",
+    "unit": "seconds",
+    "version": "9344e39bbf1c7bd716f6b56b63572f8252759c7543939e16f25a4cf1d9063595",
+    "warmup_time": 0
+  },
+  "bench_geomoptjl.GeomoptjlNoiseGradientdescentS0.track_failure_cap": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseGradientdescentS0.track_failure_cap",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "75601a5143cd6e7868a2d1538a10e6d8c11a47aecc665609836cfba879fa2ec1"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseGradientdescentS0.track_failure_crash": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseGradientdescentS0.track_failure_crash",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "b89aa4d48c56dfd82cf9b444ded683f1c337dd10822da6af393ad275264ada5e"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseGradientdescentS0.track_failure_divergence": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseGradientdescentS0.track_failure_divergence",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "e8e2ee916960c2b5dffb1e55a6b04efa0f764b84c8f591580800db751b4ff769"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseGradientdescentS0.track_failure_wrong_stationary": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseGradientdescentS0.track_failure_wrong_stationary",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "651e87c4df26b9c7447e8b818c1338fdc303343098d01bcb9349e08d5b3540b7"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseGradientdescentS0.track_force_calls": {
+    "code": "class _GeomoptjlSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseGradientdescentS0.track_force_calls",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "force calls",
+    "version": "d1112cd8067aa571b5788c6fe6216017a19cbb5e29f72a5089d253dbd68989bc"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseGradientdescentS0.track_success": {
+    "code": "class _GeomoptjlSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseGradientdescentS0.track_success",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "fraction",
+    "version": "3a423f01535981ed7f7283de0e0cdd263b00fe6ec1ebeaaf4d88ad750394bfff"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em2.time_search": {
+    "code": "class _GeomoptjlSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "min_run_count": 1,
+    "name": "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em2.time_search",
+    "number": 1,
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "repeat": 1,
+    "rounds": 1,
+    "sample_time": 0,
+    "timeout": 7200,
+    "type": "time",
+    "unit": "seconds",
+    "version": "9344e39bbf1c7bd716f6b56b63572f8252759c7543939e16f25a4cf1d9063595",
+    "warmup_time": 0
+  },
+  "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em2.track_failure_cap": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em2.track_failure_cap",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "75601a5143cd6e7868a2d1538a10e6d8c11a47aecc665609836cfba879fa2ec1"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em2.track_failure_crash": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em2.track_failure_crash",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "b89aa4d48c56dfd82cf9b444ded683f1c337dd10822da6af393ad275264ada5e"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em2.track_failure_divergence": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em2.track_failure_divergence",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "e8e2ee916960c2b5dffb1e55a6b04efa0f764b84c8f591580800db751b4ff769"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em2.track_failure_wrong_stationary": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em2.track_failure_wrong_stationary",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "651e87c4df26b9c7447e8b818c1338fdc303343098d01bcb9349e08d5b3540b7"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em2.track_force_calls": {
+    "code": "class _GeomoptjlSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em2.track_force_calls",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "force calls",
+    "version": "d1112cd8067aa571b5788c6fe6216017a19cbb5e29f72a5089d253dbd68989bc"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em2.track_success": {
+    "code": "class _GeomoptjlSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em2.track_success",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "fraction",
+    "version": "3a423f01535981ed7f7283de0e0cdd263b00fe6ec1ebeaaf4d88ad750394bfff"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em3.time_search": {
+    "code": "class _GeomoptjlSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "min_run_count": 1,
+    "name": "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em3.time_search",
+    "number": 1,
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "repeat": 1,
+    "rounds": 1,
+    "sample_time": 0,
+    "timeout": 7200,
+    "type": "time",
+    "unit": "seconds",
+    "version": "9344e39bbf1c7bd716f6b56b63572f8252759c7543939e16f25a4cf1d9063595",
+    "warmup_time": 0
+  },
+  "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em3.track_failure_cap": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em3.track_failure_cap",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "75601a5143cd6e7868a2d1538a10e6d8c11a47aecc665609836cfba879fa2ec1"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em3.track_failure_crash": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em3.track_failure_crash",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "b89aa4d48c56dfd82cf9b444ded683f1c337dd10822da6af393ad275264ada5e"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em3.track_failure_divergence": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em3.track_failure_divergence",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "e8e2ee916960c2b5dffb1e55a6b04efa0f764b84c8f591580800db751b4ff769"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em3.track_failure_wrong_stationary": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em3.track_failure_wrong_stationary",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "651e87c4df26b9c7447e8b818c1338fdc303343098d01bcb9349e08d5b3540b7"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em3.track_force_calls": {
+    "code": "class _GeomoptjlSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em3.track_force_calls",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "force calls",
+    "version": "d1112cd8067aa571b5788c6fe6216017a19cbb5e29f72a5089d253dbd68989bc"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em3.track_success": {
+    "code": "class _GeomoptjlSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em3.track_success",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "fraction",
+    "version": "3a423f01535981ed7f7283de0e0cdd263b00fe6ec1ebeaaf4d88ad750394bfff"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em4.time_search": {
+    "code": "class _GeomoptjlSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "min_run_count": 1,
+    "name": "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em4.time_search",
+    "number": 1,
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "repeat": 1,
+    "rounds": 1,
+    "sample_time": 0,
+    "timeout": 7200,
+    "type": "time",
+    "unit": "seconds",
+    "version": "9344e39bbf1c7bd716f6b56b63572f8252759c7543939e16f25a4cf1d9063595",
+    "warmup_time": 0
+  },
+  "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em4.track_failure_cap": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em4.track_failure_cap",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "75601a5143cd6e7868a2d1538a10e6d8c11a47aecc665609836cfba879fa2ec1"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em4.track_failure_crash": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em4.track_failure_crash",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "b89aa4d48c56dfd82cf9b444ded683f1c337dd10822da6af393ad275264ada5e"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em4.track_failure_divergence": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em4.track_failure_divergence",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "e8e2ee916960c2b5dffb1e55a6b04efa0f764b84c8f591580800db751b4ff769"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em4.track_failure_wrong_stationary": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em4.track_failure_wrong_stationary",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "651e87c4df26b9c7447e8b818c1338fdc303343098d01bcb9349e08d5b3540b7"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em4.track_force_calls": {
+    "code": "class _GeomoptjlSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em4.track_force_calls",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "force calls",
+    "version": "d1112cd8067aa571b5788c6fe6216017a19cbb5e29f72a5089d253dbd68989bc"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em4.track_success": {
+    "code": "class _GeomoptjlSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseGradientdescentS1em4.track_success",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "fraction",
+    "version": "3a423f01535981ed7f7283de0e0cdd263b00fe6ec1ebeaaf4d88ad750394bfff"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseLbfgsS0.time_search": {
+    "code": "class _GeomoptjlSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "min_run_count": 1,
+    "name": "bench_geomoptjl.GeomoptjlNoiseLbfgsS0.time_search",
+    "number": 1,
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "repeat": 1,
+    "rounds": 1,
+    "sample_time": 0,
+    "timeout": 7200,
+    "type": "time",
+    "unit": "seconds",
+    "version": "9344e39bbf1c7bd716f6b56b63572f8252759c7543939e16f25a4cf1d9063595",
+    "warmup_time": 0
+  },
+  "bench_geomoptjl.GeomoptjlNoiseLbfgsS0.track_failure_cap": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseLbfgsS0.track_failure_cap",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "75601a5143cd6e7868a2d1538a10e6d8c11a47aecc665609836cfba879fa2ec1"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseLbfgsS0.track_failure_crash": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseLbfgsS0.track_failure_crash",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "b89aa4d48c56dfd82cf9b444ded683f1c337dd10822da6af393ad275264ada5e"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseLbfgsS0.track_failure_divergence": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseLbfgsS0.track_failure_divergence",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "e8e2ee916960c2b5dffb1e55a6b04efa0f764b84c8f591580800db751b4ff769"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseLbfgsS0.track_failure_wrong_stationary": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseLbfgsS0.track_failure_wrong_stationary",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "651e87c4df26b9c7447e8b818c1338fdc303343098d01bcb9349e08d5b3540b7"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseLbfgsS0.track_force_calls": {
+    "code": "class _GeomoptjlSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseLbfgsS0.track_force_calls",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "force calls",
+    "version": "d1112cd8067aa571b5788c6fe6216017a19cbb5e29f72a5089d253dbd68989bc"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseLbfgsS0.track_success": {
+    "code": "class _GeomoptjlSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseLbfgsS0.track_success",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "fraction",
+    "version": "3a423f01535981ed7f7283de0e0cdd263b00fe6ec1ebeaaf4d88ad750394bfff"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em2.time_search": {
+    "code": "class _GeomoptjlSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "min_run_count": 1,
+    "name": "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em2.time_search",
+    "number": 1,
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "repeat": 1,
+    "rounds": 1,
+    "sample_time": 0,
+    "timeout": 7200,
+    "type": "time",
+    "unit": "seconds",
+    "version": "9344e39bbf1c7bd716f6b56b63572f8252759c7543939e16f25a4cf1d9063595",
+    "warmup_time": 0
+  },
+  "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em2.track_failure_cap": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em2.track_failure_cap",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "75601a5143cd6e7868a2d1538a10e6d8c11a47aecc665609836cfba879fa2ec1"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em2.track_failure_crash": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em2.track_failure_crash",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "b89aa4d48c56dfd82cf9b444ded683f1c337dd10822da6af393ad275264ada5e"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em2.track_failure_divergence": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em2.track_failure_divergence",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "e8e2ee916960c2b5dffb1e55a6b04efa0f764b84c8f591580800db751b4ff769"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em2.track_failure_wrong_stationary": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em2.track_failure_wrong_stationary",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "651e87c4df26b9c7447e8b818c1338fdc303343098d01bcb9349e08d5b3540b7"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em2.track_force_calls": {
+    "code": "class _GeomoptjlSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em2.track_force_calls",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "force calls",
+    "version": "d1112cd8067aa571b5788c6fe6216017a19cbb5e29f72a5089d253dbd68989bc"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em2.track_success": {
+    "code": "class _GeomoptjlSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em2.track_success",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "fraction",
+    "version": "3a423f01535981ed7f7283de0e0cdd263b00fe6ec1ebeaaf4d88ad750394bfff"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em3.time_search": {
+    "code": "class _GeomoptjlSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "min_run_count": 1,
+    "name": "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em3.time_search",
+    "number": 1,
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "repeat": 1,
+    "rounds": 1,
+    "sample_time": 0,
+    "timeout": 7200,
+    "type": "time",
+    "unit": "seconds",
+    "version": "9344e39bbf1c7bd716f6b56b63572f8252759c7543939e16f25a4cf1d9063595",
+    "warmup_time": 0
+  },
+  "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em3.track_failure_cap": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em3.track_failure_cap",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "75601a5143cd6e7868a2d1538a10e6d8c11a47aecc665609836cfba879fa2ec1"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em3.track_failure_crash": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em3.track_failure_crash",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "b89aa4d48c56dfd82cf9b444ded683f1c337dd10822da6af393ad275264ada5e"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em3.track_failure_divergence": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em3.track_failure_divergence",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "e8e2ee916960c2b5dffb1e55a6b04efa0f764b84c8f591580800db751b4ff769"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em3.track_failure_wrong_stationary": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em3.track_failure_wrong_stationary",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "651e87c4df26b9c7447e8b818c1338fdc303343098d01bcb9349e08d5b3540b7"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em3.track_force_calls": {
+    "code": "class _GeomoptjlSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em3.track_force_calls",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "force calls",
+    "version": "d1112cd8067aa571b5788c6fe6216017a19cbb5e29f72a5089d253dbd68989bc"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em3.track_success": {
+    "code": "class _GeomoptjlSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em3.track_success",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "fraction",
+    "version": "3a423f01535981ed7f7283de0e0cdd263b00fe6ec1ebeaaf4d88ad750394bfff"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em4.time_search": {
+    "code": "class _GeomoptjlSearch:\n    def time_search(self, seed, start):\n        self.record = _compute(self.spec, seed, start)\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "min_run_count": 1,
+    "name": "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em4.time_search",
+    "number": 1,
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "repeat": 1,
+    "rounds": 1,
+    "sample_time": 0,
+    "timeout": 7200,
+    "type": "time",
+    "unit": "seconds",
+    "version": "9344e39bbf1c7bd716f6b56b63572f8252759c7543939e16f25a4cf1d9063595",
+    "warmup_time": 0
+  },
+  "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em4.track_failure_cap": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em4.track_failure_cap",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "75601a5143cd6e7868a2d1538a10e6d8c11a47aecc665609836cfba879fa2ec1"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em4.track_failure_crash": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em4.track_failure_crash",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "b89aa4d48c56dfd82cf9b444ded683f1c337dd10822da6af393ad275264ada5e"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em4.track_failure_divergence": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em4.track_failure_divergence",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "e8e2ee916960c2b5dffb1e55a6b04efa0f764b84c8f591580800db751b4ff769"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em4.track_failure_wrong_stationary": {
+    "code": "class _GeomoptjlSearch:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em4.track_failure_wrong_stationary",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "count",
+    "version": "651e87c4df26b9c7447e8b818c1338fdc303343098d01bcb9349e08d5b3540b7"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em4.track_force_calls": {
+    "code": "class _GeomoptjlSearch:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._stored(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em4.track_force_calls",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "force calls",
+    "version": "d1112cd8067aa571b5788c6fe6216017a19cbb5e29f72a5089d253dbd68989bc"
+  },
+  "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em4.track_success": {
+    "code": "class _GeomoptjlSearch:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._stored(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        if not _julia_ready():\n            raise NotImplementedError(\"julia is not installed in this environment\")\n        self.record = None",
+    "name": "bench_geomoptjl.GeomoptjlNoiseLbfgsS1em4.track_success",
+    "param_names": [
+      "seed",
+      "start"
+    ],
+    "params": [
+      [
+        "'0'"
+      ],
+      [
+        "'0'"
+      ]
+    ],
+    "timeout": 7200,
+    "type": "track",
+    "unit": "fraction",
+    "version": "3a423f01535981ed7f7283de0e0cdd263b00fe6ec1ebeaaf4d88ad750394bfff"
+  },
+  "bench_geomoptjl.TrackedSearch.time_search": {
+    "code": "class TrackedSearch:\n    def time_search(self, *params):\n        self.measure(*params)\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+    "min_run_count": 1,
+    "name": "bench_geomoptjl.TrackedSearch.time_search",
+    "number": 1,
+    "param_names": [],
+    "params": [],
+    "repeat": 1,
+    "rounds": 1,
+    "sample_time": 0,
+    "timeout": 120,
+    "type": "time",
+    "unit": "seconds",
+    "version": "fa2497443f0d63056655666560b1b940a793d2f91f58eaaf9b6dd78634f86c15",
+    "warmup_time": 0
+  },
+  "bench_geomoptjl.TrackedSearch.track_failure_cap": {
+    "code": "class TrackedSearch:\n    def track_failure_cap(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+    "name": "bench_geomoptjl.TrackedSearch.track_failure_cap",
+    "param_names": [],
+    "params": [],
+    "timeout": 120,
+    "type": "track",
+    "unit": "count",
+    "version": "373d7cf83e6f15c1e9d2c744717df93edf6bf9382d62e9a38d10d547e8cca9e1"
+  },
+  "bench_geomoptjl.TrackedSearch.track_failure_crash": {
+    "code": "class TrackedSearch:\n    def track_failure_crash(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+    "name": "bench_geomoptjl.TrackedSearch.track_failure_crash",
+    "param_names": [],
+    "params": [],
+    "timeout": 120,
+    "type": "track",
+    "unit": "count",
+    "version": "cffe524df0a3ed978b8d05b25d97957d40c7cdde6026513b4dfa9fd770a47a92"
+  },
+  "bench_geomoptjl.TrackedSearch.track_failure_divergence": {
+    "code": "class TrackedSearch:\n    def track_failure_divergence(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+    "name": "bench_geomoptjl.TrackedSearch.track_failure_divergence",
+    "param_names": [],
+    "params": [],
+    "timeout": 120,
+    "type": "track",
+    "unit": "count",
+    "version": "d14e3c71e50f637c4ab7a4bc6b5af42271eb47a4aa55635b9d2039b30a1cf58b"
+  },
+  "bench_geomoptjl.TrackedSearch.track_failure_wrong_stationary": {
+    "code": "class TrackedSearch:\n    def track_failure_wrong_stationary(self, *params) -> float:\n        return 1.0 if self.record[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+    "name": "bench_geomoptjl.TrackedSearch.track_failure_wrong_stationary",
+    "param_names": [],
+    "params": [],
+    "timeout": 120,
+    "type": "track",
+    "unit": "count",
+    "version": "5c6a9d026c5fb80591a0ac9c273086d5a61b536de60b5b45b4f7479a1adbac3e"
+  },
+  "bench_geomoptjl.TrackedSearch.track_force_calls": {
+    "code": "class TrackedSearch:\n    def track_force_calls(self, *params) -> float:\n        return float(self.record[\"force_calls\"])\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+    "name": "bench_geomoptjl.TrackedSearch.track_force_calls",
+    "param_names": [],
+    "params": [],
+    "timeout": 120,
+    "type": "track",
+    "unit": "force calls",
+    "version": "cc592df53c84d2e319aec7ecd5e73d561fa0a01d5d6bfb8cb76f31f001e29c3f"
+  },
+  "bench_geomoptjl.TrackedSearch.track_success": {
+    "code": "class TrackedSearch:\n    def track_success(self, *params) -> float:\n        return 1.0 if self.record[\"success\"] else 0.0\n\n    def setup(self, *params):\n        self.record = self.measure(*params)",
+    "name": "bench_geomoptjl.TrackedSearch.track_success",
+    "param_names": [],
+    "params": [],
+    "timeout": 120,
+    "type": "track",
+    "unit": "fraction",
+    "version": "54289beee97255c41b6c66e2b89008ae5007043ad1c9d7012fb42f0495113694"
   }
 }

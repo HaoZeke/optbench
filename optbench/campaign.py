@@ -432,6 +432,24 @@ def run(
             limit=limit,
             resume=resume,
         )
+    if template["engine"] == "geomoptjl":
+        from .runners.geomoptjl_min import run_template
+
+        problem = resolve_problem(root, problem_name)
+        stated = template.get("problem")
+        if stated and stated != problem["id"]:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return run_template(
+            root,
+            problem,
+            template,
+            geometries=geometries,
+            output=output,
+            workers=workers,
+            work=work,
+            limit=limit,
+            resume=resume,
+        )
     if template["engine"] == "rgsaddle":
         from .rgsaddle_minmode import run_template
 

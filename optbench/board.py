@@ -850,6 +850,7 @@ def _benchmark_index() -> dict[str, dict]:
         "benchmarks.bench_globalopt",
         "benchmarks.bench_n2p2",
         "benchmarks.bench_optax",
+        "benchmarks.bench_geomoptjl",
         "benchmarks.quadratic",
     )
     for module_name in modules:

@@ -1,0 +1,20 @@
+id = "geomoptjl/noise-gradientdescent-s1em3"
+engine = "geomoptjl"
+problem = "minimization/lj38-noise"
+code = "GeometryOptimization.jl"
+code_version = "0.1.6"
+commit = "5b145886c19042f2ef13e21627f28d86027f719c"
+algorithm = "GradientDescent"
+tuning = "default"
+note = "GeometryOptimization 0.1.6 OptimSD calls Optim.jl GradientDescent. BackTracking linesearch of order 2 and maxstep 0.8 bohr. The iteration ceiling is the force-call cap. The potential is the harness callback. The callback stops on the noise-aware force norm. At positive sigma the clean energy over the last window is part of that stop. The index is the clean Hessian with the rigid-mode rule. Positions are labeled bohr and the energy is labeled hartree, so austrip leaves the spec numbers unchanged."
+
+[geomoptjl]
+method = "gradientdescent"
+
+[ini.Optimizer]
+converged_force = 0.01
+max_iterations = 10000
+
+[noise]
+sigma = 1e-3
+seed = 20261016

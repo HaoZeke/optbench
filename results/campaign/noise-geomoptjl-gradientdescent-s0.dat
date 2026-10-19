@@ -1,0 +1,27 @@
+# counter harness. One force call is one RgpotCounter.calculate entry.
+# GeometryOptimization LBFGS, CG, and GradientDescent call the spec potential.
+# The callback stops at the problem Euclidean force norm, or the noise-aware rule.
+# v2 success is under the cap, at that stop, and Hessian index 0.
+# Noise is added after the clean call. The index uses the clean Hessian.
+# GeometryOptimization 0.1.6 OptimSD calls Optim.jl GradientDescent. BackTracking linesearch of order 2 and maxstep 0.8 bohr. The iteration ceiling is the force-call cap. The potential is the harness callback. Sigma is 0, so the stop is the clean Euclidean force norm 0.01. The index is the clean Hessian with the rigid-mode rule. Positions are labeled bohr and the energy is labeled hartree, so austrip leaves the spec numbers unchanged.
+nfailed 1000
+code GeometryOptimization.jl
+code_version 0.1.6
+commit 5b145886c19042f2ef13e21627f28d86027f719c
+algorithm GradientDescent
+template geomoptjl/noise-gradientdescent-s0
+tuning default
+counter harness
+problem minimization/lj38-noise
+par2_mean 20000
+wilson_low 0
+wilson_high 0.00382675848556
+par2_median 20000
+par2_median_low 20000
+par2_median_high 20000
+v2_nfailed 1000
+v2_successes 0
+n 1000
+energy_min -137.491273405
+energy_max 383.071132152
+sigma 0

@@ -158,6 +158,7 @@ def test_pending_grid_is_every_problem_and_code():
         "pele",
         "optking",
         "optim-svnrev",
+        "geomoptjl",
         "artn",
         "tsase",
         "pykmc",

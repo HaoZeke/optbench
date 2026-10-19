@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>LAMMPS</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>TorchSim</th><th>geomeTRIC</th><th>CP2K</th><th>n2p2</th><th>Optax</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>optking</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>GeometryOptimization.jl</th><th>LAMMPS</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>TorchSim</th><th>geomeTRIC</th><th>CP2K</th><th>n2p2</th><th>Optax</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>optking</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="neb/Pt-heptamer">
    <th scope="row"><a href="#Pt-heptamer">Pt-heptamer</a></th>
    <td data-code="eOn" data-template="eon/neb-pt-lbfgs-m100" data-par2="3523.85"><span class="bench-score">3523.85</span><a href="#Pt-heptamer-templates">eon/neb-pt-lbfgs-m100</a></td>
@@ -19,6 +19,7 @@
    <td data-code="Sella">—</td>
    <td data-code="GMIN">—</td>
    <td data-code="pele" data-template="pele/neb-tuned" data-par2="957.923"><span class="bench-score">957.923</span><a href="#Pt-heptamer-templates">pele/neb-tuned</a></td>
+   <td data-code="GeometryOptimization.jl">—</td>
    <td data-code="LAMMPS" data-template="lammpsneb/ci-fire" data-par2="1398.46"><span class="bench-score">1398.46</span><a href="#Pt-heptamer-templates">lammpsneb/ci-fire</a></td>
    <td data-code="pysisyphus">—</td>
    <td data-code="AIRSS">—</td>

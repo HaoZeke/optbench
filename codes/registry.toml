@@ -134,6 +134,16 @@ commit = "df8da599267534fbe43a250e578f7396a7946311"
 note = "Wales group OPTIM from the git software image at https://www-wales.ch.cam.ac.uk/svn.tar.bz2, sha256 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f. The source revision recorded in OPTIM/source/SVNREV is df8da599267534fbe43a250e578f7396a7946311. Hybrid eigenvector-following is BFGSTS with NOHESS and forward Rayleigh-Ritz differences (USEDIAG 3). BFGS-TS is the same search with central differences (USEDIAG 2). The lowest eigenvector is EIGENONLY with central differences, because that entry point does not pass a base gradient into the forward quotient. Force calls are harness socket evaluations."
 
 [[code]]
+id = "geomoptjl"
+name = "GeometryOptimization.jl"
+role = "minimization"
+repository = "https://github.com/JuliaMolSim/GeometryOptimization.jl"
+ref = "0.1.6"
+commit = "5b145886c19042f2ef13e21627f28d86027f719c"
+committed = "2026-08-12"
+note = "GeometryOptimization 0.1.6, tag v0.1.6, commit 5b145886. Optim.jl 1.13.3, registry tree 48968edaf014f67e58fe4c8a4ce72d392aed3294. The minimizers are OptimLBFGS, OptimCG, and OptimSD. OptimSD is GradientDescent. The linesearch is BackTracking of order 2 with maxstep 0.8 bohr. LBFGS uses the Hager-Zhang initial step. Force calls are harness evaluations of the spec potential."
+
+[[code]]
 id = "artn"
 name = "pARTn"
 role = "saddle search"
