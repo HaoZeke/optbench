@@ -2,16 +2,15 @@
 id = "optim/cl-string-lj38"
 engine = "optim"
 problem = "double-ended-saddle-search/lj38"
-code = "optim"
+code = "optim-27058"
 code_version = "27058"
-commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+commit = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
 algorithm = "climbing string"
 tuning = "wales-2014"
 paper_baseline = true
-note = "wales-27058 odata: debug, CLSTRING, GROWSTRING 5 1000 0.3 1.0 3D-04 1.1, INE_NEW 9.36585D-05 100 1D-9 100 2D-3 4D2. AX with ZSTAR 0 is LJDIFF. Success is the line Converged to TS. The mean is the half-even mean of those successes. The harness cap of 2500 is not the paper failure rule."
+note = "wales-27058 OPTIM 27058. CLSTRING, GROWSTRING 5 1000 0.3 1.0 3D-04 1.1, INE_NEW 9.36585D-05 100 1D-9 100 2D-3 4D2. AX with ZSTAR 0 is LJDIFF. The score is OPTIM energy+gradient calls. A start is kept when the log contains Converged to TS. getdata.py writes 10000 over a failed start. The harness cap of 2500 is not that cap."
 
 [optim]
 method = "cl-string"
 preamble = "templates/optim/preambles/cl-string-lj38.txt"
 symbol = "AX"
-counter = "optim"

@@ -5,9 +5,11 @@ The minimization binary is the OPTIM target from the Wales snapshot
 that file. The snapshot has no git commit. Each ``COMPUTE`` on the relay
 is one ``pes.evaluate``. That path does not score OPTIM's own counter.
 
-The LJ38 climbing-string row is the other path. It runs OPTIM 27058 with
-the 2014 preamble and scores the last ``energy+gradient calls`` field.
-Success is the line ``Converged to TS``. Failures stay out of the mean.
+The LJ38 climbing-string row is the other path. It runs OPTIM 27058 from
+``wales-27058.tar.bz2`` and scores the last ``energy+gradient calls``
+field, the same campaign writer as the native OPTIM counter. Success is
+the line ``Converged to TS``. ``getdata.py`` writes 10000 over a failed
+start and leaves it out of the mean. That 10000 is the PAR-2 cap.
 
 ``optim/unhooked`` and every other template raise before a file is written.
 Noise, NEB, and PATHSAMPLE are not this runner.
@@ -33,6 +35,12 @@ CODE = "optim"
 SNAPSHOT = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
 SHA256 = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
 _RELAY = Path(__file__).with_name("fmlip_relay.py")
+_CL_TARBALL = "https://optbench.org/codes/wales-27058.tar.bz2"
+_CL_SHA256 = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
+_CL_VERSION = "27058"
+_CL_BAKED = Path("/tmp/src/wales-27058/wales/OPTIM/bin/gfortran/OPTIM")
+# getdata.py writes this over a start whose success flag is 0.
+_PAPER_CAP = 10000
 
 
 class _Calls:
@@ -323,20 +331,25 @@ def _last_call_count(log: str) -> int | None:
     return int(float(found))
 
 
-def _paper_integers(rows: list[tuple[int, bool]]) -> dict[str, int]:
-    """getdata.py: half-even mean, median, min, and max of the successes."""
-    successes = [calls for calls, ok in rows if ok]
-    if not successes:
-        raise RuntimeError("climbing string produced no converged transition states")
-    values = np.asarray(successes, dtype=np.float64)
-    return {
-        "force_calls": int(round(float(np.mean(values)))),
-        "force_calls_min": int(round(float(np.min(values)))),
-        "force_calls_max": int(round(float(np.max(values)))),
-        "force_calls_median": int(round(float(np.median(values)))),
-        "nfailed": sum(1 for _calls, ok in rows if not ok),
-        "n": len(rows),
-    }
+def _cl_binary() -> Path:
+    env = os.environ.get("OPTIM_CL_BIN")
+    if env:
+        return Path(env)
+    if _CL_BAKED.is_file():
+        return _CL_BAKED
+    fallback = os.environ.get("OPTIM_BIN")
+    if fallback:
+        return Path(fallback)
+    return _CL_BAKED
+
+
+def _cl_missing(binary: Path) -> str:
+    return (
+        "OPTIM 27058 is not available. "
+        f"The pin is the sha256 {_CL_SHA256} of {_CL_TARBALL}. "
+        f"{binary} is not present. "
+        "The climbing-string score is OPTIM's energy+gradient calls."
+    )
 
 
 def _require_27058(binary: Path) -> None:
@@ -352,17 +365,22 @@ def _require_27058(binary: Path) -> None:
     except subprocess.TimeoutExpired as exc:
         raise RuntimeError(f"{binary} did not print a version within 60s") from exc
     banner = f"{proc.stdout}\n{proc.stderr}"
-    if "version 27058" not in banner:
-        raise RuntimeError(f"{binary} is not OPTIM version 27058")
+    if f"version {_CL_VERSION}" not in banner:
+        raise RuntimeError(
+            f"{binary} is not OPTIM version {_CL_VERSION}. "
+            f"The pin is the sha256 {_CL_SHA256} of {_CL_TARBALL}."
+        )
 
 
 def _execute_cl_string(job: dict) -> dict:
+    """One climbing-string search. The count is OPTIM's energy+gradient calls."""
     os.environ.setdefault("OMP_NUM_THREADS", "1")
     import tempfile
 
     name = str(job["name"])
-    calls = -1
-    success = False
+    cap = int(job["cap"])
+    calls = None
+    converged = False
     error = ""
     try:
         with tempfile.TemporaryDirectory(prefix="optim-cl-") as raw:
@@ -373,6 +391,7 @@ def _execute_cl_string(job: dict) -> dict:
             env["OMP_NUM_THREADS"] = "1"
             log_path = folder / "OPTIM.log"
             stderr_path = folder / "stderr.txt"
+            proc = None
             try:
                 with log_path.open("w", encoding="utf-8") as stdout, stderr_path.open("w", encoding="utf-8") as stderr:
                     proc = subprocess.run(
@@ -386,74 +405,39 @@ def _execute_cl_string(job: dict) -> dict:
                         check=False,
                     )
             except subprocess.TimeoutExpired:
-                proc = None
                 error = "OPTIM exceeded 3600s"
             log = log_path.read_text(encoding="utf-8", errors="replace") if log_path.is_file() else ""
-            parsed = _last_call_count(log)
-            if parsed is not None:
-                calls = parsed
-            success = "Converged to TS" in log
-            if proc is not None and proc.returncode != 0 and not success and parsed is None:
+            calls = _last_call_count(log)
+            converged = "Converged to TS" in log
+            if proc is not None and proc.returncode != 0 and not converged and calls is None:
                 detail = _tail(stderr_path) or _tail(log_path) or f"exit {proc.returncode}"
                 error = f"OPTIM exit {proc.returncode}: {detail}"
     except Exception as exc:
         error = f"{type(exc).__name__}: {exc}"
-    if success:
-        failure = None
-        reasons: list[str] = []
-    elif error and calls < 0:
-        failure = "crash"
-        reasons = ["crash"]
-    else:
-        failure = "divergence"
-        reasons = ["divergence"]
-    return {
-        "schema": "optbench.start/v2",
+    success = bool(converged) and calls is not None and calls < cap and not error
+    record = {
         "start": name,
-        "force_calls": int(calls),
-        "verify_calls": 0,
-        "counter": "optim",
-        "comparable": False,
+        "force_calls": int(calls) if calls is not None else cap,
         "success": success,
-        "failure": failure,
-        "reasons": reasons,
-        "error": error,
-        "converged": success,
+        "failure": None if success else ("crash" if calls is None or error else "divergence"),
+        "counter": "harness",
+        "converged": bool(converged),
+        "optim_energy_gradient_calls": None if calls is None else int(calls),
     }
+    if error:
+        record["error"] = error
+    return record
 
 
-def _cl_string_text(summary: dict[str, int], template: dict) -> str:
-    lines = [
-        "# counter optim. wales-27058 energy+gradient calls.",
-        "# Success is the line Converged to TS. Failures stay out of the mean.",
-        "# The harness cap is not this failure rule.",
-        f"force_calls {summary['force_calls']}",
-        f"force_calls_min {summary['force_calls_min']}",
-        f"force_calls_max {summary['force_calls_max']}",
-        f"force_calls_median {summary['force_calls_median']}",
-        f"nfailed {summary['nfailed']}",
-        f"starts {summary['n']}",
-        f"code {template['code']}",
-        f"code_version {template['code_version']}",
-        f"commit {template['commit']}",
-        f"algorithm {template['algorithm']}",
-        f"template {template['id']}",
-        f"problem {template['problem']}",
-        f"tuning {template['tuning']}",
-        "counter optim",
-        "ranked false",
-    ]
-    return "\n".join(lines) + "\n"
-
-
-def _run_cl_string(root: Path, problem: dict, template: dict, section: dict, *, output: Path, workers: int) -> dict:
-    from optbench.campaign import geometry_archive, write_starts
+def _run_cl_string(root: Path, problem: dict, template: dict, *, output: Path, workers: int) -> dict:
+    from optbench.campaign import geometry_archive
     from optbench.engines.common import band_settings
 
-    binary = binary_path()
+    binary = _cl_binary()
     if not binary.is_file():
-        raise RuntimeError(f"{binary} is not present")
+        raise RuntimeError(_cl_missing(binary))
     _require_27058(binary)
+    section = _section(template)
     settings = band_settings(problem)
     if settings["geometry"] != "xyz-pairs":
         raise ValueError(f"{problem['id']} geometry is {settings['geometry']}")
@@ -467,41 +451,49 @@ def _run_cl_string(root: Path, problem: dict, template: dict, section: dict, *, 
     if not preamble.endswith("\n"):
         preamble += "\n"
     symbol = str(section.get("symbol") or "AX")
+    cap = _PAPER_CAP
     jobs = []
     for name, start_text, end_text in _pair_texts(geometry_archive(root, problem), settings["pairs"]):
         start_lines = _xyz_coordinate_lines(start_text)
         end_lines = _xyz_coordinate_lines(end_text)
         odata = preamble + "points\n" + "\n".join(f"{symbol} {row}" for row in start_lines) + "\n"
         finish = "\n".join(end_lines) + "\n"
-        jobs.append({"name": name, "odata": odata, "finish": finish, "binary": str(binary)})
+        jobs.append(
+            {
+                "name": name,
+                "cap": cap,
+                "binary": str(binary),
+                "odata": odata,
+                "finish": finish,
+            }
+        )
     records = run_jobs(jobs, _execute_cl_string, workers)
-    stamped = []
-    for record in records:
-        row = dict(record)
-        row["problem"] = problem["id"]
-        row["template"] = template["id"]
-        row["code"] = template["code"]
-        row["code_version"] = template["code_version"]
-        row["commit"] = template["commit"]
-        row["algorithm"] = template["algorithm"]
-        row["tuning"] = template["tuning"]
-        stamped.append(row)
-    summary = _paper_integers([(int(row["force_calls"]), bool(row["success"])) for row in stamped])
-    output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(_cl_string_text(summary, template), encoding="utf-8")
-    write_starts(output.with_suffix(".starts.jsonl"), stamped)
-    return {
-        "problem": problem["id"],
-        "template": template["id"],
-        "force_calls": summary["force_calls"],
-        "force_calls_median": summary["force_calls_median"],
-        "force_calls_min": summary["force_calls_min"],
-        "force_calls_max": summary["force_calls_max"],
-        "nfailed": summary["nfailed"],
-        "starts": summary["n"],
-        "successes": summary["n"] - summary["nfailed"],
-        "output": str(output),
-    }
+    comment = (
+        "# OPTIM version 27058, wales-27058.tar.bz2. "
+        "CLSTRING, GROWSTRING 5 1000 0.3 1.0 3D-04 1.1, "
+        "INE_NEW 9.36585D-05 100 1D-9 100 2D-3 4D2.\n"
+        "# The count is OPTIM's energy+gradient calls, the 2014 paper counter. "
+        "A start is kept when the log contains Converged to TS. "
+        "getdata.py writes 10000 over a failed start and leaves it out of the mean."
+    )
+    published = dict(template)
+    published["code"] = "optim"
+    return write_campaign(
+        output,
+        records,
+        published,
+        problem,
+        {"cap": cap},
+        {
+            "method": "cl-string",
+            "keyword": "CLSTRING",
+            "counter": "optim energy+gradient calls",
+            "potential": "lj",
+            "version": _CL_VERSION,
+        },
+        images=None,
+        comment=comment,
+    )
 
 
 def _job(start: dict, settings: dict, template: dict) -> dict:
@@ -520,9 +512,6 @@ def _job(start: dict, settings: dict, template: dict) -> dict:
 
 
 def run(root: Path, problem_name: str, template_name: str, *, output: Path, workers: int = 1) -> dict:
-    reason = available()
-    if reason:
-        raise RuntimeError(reason)
     root = Path(root)
     from optbench.campaign import load_template, resolve_problem
 
@@ -530,15 +519,20 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
 
     problem = resolve_problem(root, problem_name)
     template = load_template(root, template_name)
-    require_pin(template, registry_pin(root, CODE))
+    code_id = str(template.get("code") or CODE)
+    require_pin(template, registry_pin(root, code_id))
     if template["engine"] != ENGINE:
         raise ValueError(f"{template_name} engine is {template['engine']}")
     stated = template.get("problem")
     if stated and stated != problem_name:
         raise ValueError(f"{template_name} belongs to {stated}")
+    method = str((template.get("optim") or {}).get("method", ""))
+    if method == "cl-string":
+        return _run_cl_string(root, problem, template, output=output, workers=workers)
+    reason = available()
+    if reason:
+        raise RuntimeError(reason)
     section = _section(template)
-    if section["method"] == "cl-string":
-        return _run_cl_string(root, problem, template, section, output=output, workers=workers)
     if problem.get("suite") != "minimization" or section["method"] != "lbfgs":
         raise _unhooked(template_name)
     if template.get("noise"):

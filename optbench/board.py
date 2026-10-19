@@ -687,6 +687,35 @@ def _dedup(rows: list[dict]) -> list[dict]:
     return merged
 
 
+def _stored_cap(group: dict[str, Path]) -> int | None:
+    """Cap ``write_campaign`` stored on the v2 score.
+
+    The board re-scores the starts with that cap. A paper cap that is not
+    the problem's harness cap stays the PAR-2 cap. A file without it keeps
+    the problem cap.
+    """
+    path = group.get("v2")
+    if path is None:
+        return None
+    try:
+        document = json.loads(path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError, UnicodeError):
+        return None
+    score = document.get("score") if isinstance(document, dict) else None
+    if not isinstance(score, dict) or "cap" not in score:
+        return None
+    raw = score.get("cap")
+    if raw in (None, ""):
+        return None
+    try:
+        number = float(raw)
+    except (TypeError, ValueError):
+        return None
+    if not math.isfinite(number) or not number.is_integer():
+        return None
+    return int(number)
+
+
 def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, dict]) -> tuple[list[dict], list[dict]]:
     rows: list[dict] = []
     unparsed: list[dict] = []
@@ -718,7 +747,9 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
             or ""
         )
         problem = problems.get(problem_id)
-        cap = _cap_of(problem, template, fields)
+        cap = _stored_cap(group)
+        if cap is None:
+            cap = _cap_of(problem, template, fields)
         force_tol = _force_tol(problem, template)
         images = _image_count(problem, template, fields)
         try:

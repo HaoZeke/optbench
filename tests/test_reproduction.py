@@ -39,6 +39,59 @@ def test_the_ledger_covers_the_oracle_in_order():
     assert reproduction_errors(ROOT) == []
 
 
+def test_lj38_climbing_string_is_ranked_on_the_paper_cap():
+    ledger = {row_id(row): row for row in load_ledger(ROOT / "oracle" / "reproduction.jsonl")}
+    row = ledger["double-ended-saddle-search/lj38/optim-cl-string"]
+    assert row["status"] == "reproduced"
+    assert row["in_paper"] is False
+    check = row["checks"][0]
+    assert check["metric"] == "force_calls"
+    assert check["archive"] == 786
+    assert check["rerun"] == 785
+    assert check["ok"] is True
+    assert row["failure_check"]["rerun"] == 3
+    assert row["failure_check"]["ok"] is True
+    assert row["rerun"]["paper_baseline"] is True
+    assert row["rerun"]["template"] == "optim/cl-string-lj38"
+    text = (ROOT / row["rerun"]["path"]).read_text(encoding="utf-8")
+    assert "force_calls 785\n" in text
+    assert "force_calls_median 621\n" in text
+    assert "force_calls_min 270\n" in text
+    assert "force_calls_max 2794\n" in text
+    assert "nfailed 3\n" in text
+    assert "counter harness\n" in text
+    assert "ranked false" not in text
+    v2 = json.loads((ROOT / "results/campaign/optim-27058-cl-string-lj38.v2.json").read_text(encoding="utf-8"))
+    assert v2["provenance"]["parameters"]["counter"] == "optim energy+gradient calls"
+    assert v2["score"]["cap"] == 10000
+    assert v2["score"]["nfailed"] == 3
+    assert v2["counter"] == "harness"
+    board = json.loads(
+        (ROOT / "results/board/problems/double-ended-saddle-search-lj38.json").read_text(encoding="utf-8")
+    )
+    ranked = [item for item in board["ranked"] if item["template"] == "optim/cl-string-lj38"]
+    assert len(ranked) == 1
+    item = ranked[0]
+    assert item["partial"] is False
+    assert item["comparable"] is True
+    assert item["counter"] == "harness"
+    assert item["cap"] == 10000
+    assert item["nfailed"] == 3
+    assert item["failures"]["cap"] == 0
+    assert item["failures"]["divergence"] == 3
+    assert item["par2_mean"] == v2["score"]["par2_mean"]
+    assert [item for item in board["partial"] if item["template"] == "optim/cl-string-lj38"] == []
+    kept = [
+        json.loads(line)
+        for line in (ROOT / "results/campaign/optim-27058-cl-string-lj38.starts.jsonl").read_text(encoding="utf-8").splitlines()
+        if line.strip()
+    ]
+    pair = next(start for start in kept if start["start"] == "start_20.xyz")
+    assert pair["force_calls"] == 2794
+    assert pair["success"] is True
+    assert pair["counter"] == "harness"
+
+
 def test_pele_paper_baseline_is_the_2014_stop():
     ledger = {row_id(row): row for row in load_ledger(ROOT / "oracle" / "reproduction.jsonl")}
     forward = ledger["tsopt/LJ38/pele_ffd"]

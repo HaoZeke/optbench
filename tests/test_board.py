@@ -292,6 +292,22 @@ def test_a_problem_without_a_sample_count_does_not_invent_one(tmp_path: Path):
     assert {row["n"] for row in problem["ranked"]} == {2, 4}
 
 
+def test_campaign_score_cap_is_the_par2_cap(tmp_path: Path):
+    _problem(tmp_path, starts=2, cap=10)
+    _template(tmp_path)
+    _registry(tmp_path)
+    _dat(tmp_path, "toy-fast", PIN)
+    _starts(tmp_path, "toy-fast", [_row(15, True, "0"), _row(4, True, "1")])
+    path = tmp_path / "results" / "campaign" / "toy-fast.v2.json"
+    path.write_text(json.dumps({"score": {"cap": 100}}) + "\n", encoding="utf-8")
+
+    row = build_board(tmp_path)["problems"]["minimization/toy"]["ranked"][0]
+    assert row["cap"] == 100
+    assert row["nfailed"] == 0
+    assert row["failures"]["cap"] == 0
+    assert row["par2_mean"] == (15 + 4) / 2
+
+
 def test_ranked_false_stays_off_the_table(tmp_path: Path):
     _problem(tmp_path, starts=2, cap=10)
     _template(tmp_path)
