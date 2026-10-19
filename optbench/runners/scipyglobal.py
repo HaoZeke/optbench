@@ -10,6 +10,15 @@ The success window is the Cambridge Cluster Database energy on the problem
 plus ``energy_above_minimum``. The force-call cap is the cap stated on the
 problem when the problem states one. A hit on the call that fills the cap
 is a cap failure.
+
+``shgo`` uses Sobol sampling, the documented construction for a
+high-dimensional problem. SciPy rounds that sample up to a power of two
+and builds the Delaunay complex before it calls the potential. The sample
+is the smallest power of two above ``3N + 1``. One iteration and SLSQP
+with ``ftol`` 1e-12 are the local-minimizer settings. At 114 and 225
+dimensions that complex does not fit: Qhull raises QH6080 while it is
+still adding points. The worker address space is limited to 10 GiB so the
+failure is a recorded crash.
 """
 
 from __future__ import annotations
@@ -40,10 +49,14 @@ LJ75_ARCHIVE = "website/globalopt/lj75/lj75_clusters.tgz"
 SOURCE_TREE = Path("/tmp/scipy-src")
 BOUNDED = frozenset({"dual_annealing", "differential_evolution", "shgo"})
 CHECKPOINT_ROOT = Path("/tmp/optbench-scipyglobal")
-# shgo builds the whole simplicial complex before it calls the potential.
-# For these dimensions that complex does not fit. The worker raises
-# MemoryError at this address-space limit instead of being killed.
-SHGO_ADDRESS_BYTES = 2 * 1024**3
+# Smallest Sobol complex that can triangulate LJ38 or LJ75. Qhull raises
+# QH6080 inside that complex at 6 GiB and again at 10 GiB, before the
+# potential is called. The cap turns the allocation failure into a crash
+# record instead of an unbounded kill.
+SHGO_ADDRESS_BYTES = 10 * 1024**3
+SHGO_ITERS = 1
+SHGO_FTOL = 1e-12
+SHGO_MINIMIZER = "SLSQP"
 
 
 class SearchStop(BaseException):
@@ -121,6 +134,20 @@ def _ls_maxiter(dim: int) -> int:
     return min(max(int(dim) * 6, 100), 1000)
 
 
+def shgo_sample_count(dim: int) -> int:
+    """Smallest Sobol sample that can triangulate ``dim`` coordinates.
+
+    ``scipy.optimize.shgo`` rounds a Sobol ``n`` up to a power of two.
+    The Delaunay complex is built only when the sample has more than
+    ``dim + 1`` points, so the next power of two is the smallest count
+    the Sobol sampler will actually triangulate.
+    """
+    need = int(dim) + 2
+    if need < 2:
+        need = 2
+    return 1 << (need - 1).bit_length()
+
+
 def method_parameters(method: str, cap: int, dim: int, bound: float | None) -> dict:
     """Constructor values for one method. Iteration limits follow the force-call cap."""
     if method == "basinhopping":
@@ -170,11 +197,11 @@ def method_parameters(method: str, cap: int, dim: int, bound: float | None) -> d
     if method == "shgo":
         return {
             "method": method,
-            "n": 100,
-            "iters": 1,
-            "sampling_method": "simplicial",
-            "minimizer": "SLSQP",
-            "ftol": 1e-12,
+            "n": shgo_sample_count(dim),
+            "iters": SHGO_ITERS,
+            "sampling_method": "sobol",
+            "minimizer": SHGO_MINIMIZER,
+            "ftol": SHGO_FTOL,
             "jac": True,
             "workers": 1,
             "bound": bound,
@@ -253,11 +280,15 @@ def _invoke(method: str, objective: HarnessObjective, x0: np.ndarray, cap: int, 
         optimize.shgo(
             fun,
             limits,
-            n=100,
-            iters=1,
-            sampling_method="simplicial",
+            n=shgo_sample_count(x0.size),
+            iters=SHGO_ITERS,
+            sampling_method="sobol",
             workers=1,
-            minimizer_kwargs={"jac": jac, "options": {"ftol": 1e-12}},
+            minimizer_kwargs={
+                "method": SHGO_MINIMIZER,
+                "jac": jac,
+                "options": {"ftol": SHGO_FTOL},
+            },
             callback=lambda _xk: objective.stop is not None,
         )
         return
@@ -319,7 +350,8 @@ def search_start(job: dict) -> dict:
     if job.get("limit_address_space"):
         import resource
 
-        resource.setrlimit(resource.RLIMIT_AS, (SHGO_ADDRESS_BYTES, SHGO_ADDRESS_BYTES))
+        limit = int((job.get("parameters") or {}).get("address_space_bytes") or SHGO_ADDRESS_BYTES)
+        resource.setrlimit(resource.RLIMIT_AS, (limit, limit))
     evaluate = job.get("evaluate", lennard_jones)
     label = f"{job.get('template_id', method)}:{job.get('start')}"
     objective = HarnessObjective(evaluate, cap, target, label=label)
@@ -926,7 +958,8 @@ def run_template(
             import multiprocessing as mp
 
             context = mp.get_context("spawn")
-            pool_workers = min(int(workers), 4) if method == "shgo" else int(workers)
+            # One shgo worker. Its Sobol complex is allowed 10 GiB.
+            pool_workers = 1 if method == "shgo" else int(workers)
             with ProcessPoolExecutor(
                 max_workers=pool_workers,
                 mp_context=context,

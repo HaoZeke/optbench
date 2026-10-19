@@ -5,9 +5,9 @@ code = "SciPy"
 code_version = "1.18.1"
 commit = "e4e854eaa8f18d807cd3496028e257e36caa93cc"
 algorithm = "shgo"
-tuning = "default"
+tuning = "sobol"
 failure_cap = 1000000
-note = "SciPy 1.18.1 shgo at the constructor defaults. sampling_method is simplicial, n is 100, and iters is 1. The constructor replaces that n with 2**dim+1. The local minimizer is SLSQP with the analytic gradient and ftol 1e-12. Each centered coordinate lies in [-6, 6]. The shgo call leaves x0 and rng unset. The force-call cap is 1000000, the cap stated on globalopt/lj75. The simplicial complex is allocated before the potential is called. The worker address space is limited to 2 GiB, and MemoryError is recorded as a crash."
+note = "SciPy 1.18.1 shgo with Sobol sampling, the documented high-dimensional construction. n is 256 and iters is 1. SciPy rounds a Sobol n up to a power of two, and 256 is the smallest count above 3N+1 = 226. The local minimizer is SLSQP with the analytic gradient and ftol 1e-12. The call leaves x0 and rng unset. The force-call cap is 1000000, the cap stated on globalopt/lj75. The Delaunay complex is built before the potential is called. n=128 does not triangulate: shgo returns nfev 0 in 0.02 s at 149032 KB. A 227-point Sobol prefix is rejected by Qhull QH6239 in 0.58 s at 101688 KB, and Sobol will not request that length. shgo of the 256 Sobol points at a 10 GiB address cap raised QH6080 after 956 s (1971793 regions, 229 of 256 points processed, 2216133 facets). The worker address space is limited to 10 GiB, and that Qhull failure is recorded as a crash."
 
 [scipy]
 method = "shgo"
