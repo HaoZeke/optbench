@@ -257,7 +257,7 @@ The number is written only after the run finishes under the problem rule.
    <li>aladatom: partial.</li>
    <li>LJ38 double-ended saddle: partial.</li>
    <li>lj38_2ts_separation: partial.</li>
-   <li>pt-island: not yet on the harness counter, partial.</li>
+   <li>pt-island: partial.</li>
    <li>Lennard-Jones 38 global minimum: partial.</li>
    <li>Al: partial.</li>
    <li>Pt: partial.</li>

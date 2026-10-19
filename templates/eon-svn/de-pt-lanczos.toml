@@ -2,47 +2,33 @@ id = "eon-svn/de-pt-lanczos"
 engine = "eon"
 problem = "double-ended-saddle-search/pt-island"
 code = "Eon svn"
-code_version = "r2549"
-commit = "r2549"
+code_version = "r2156"
+commit = "r2156"
 algorithm = "Lanczos L-BFGS"
 reducer = "archive"
 failure_cap = 3000
-kind = "de-pt-mode"
 kernel = "morse_shift"
 native_potential = true
-asv_class = "EonSvnDePtLanczos"
 note = '''
-Lanczos from the interpolated Pt-island end points. The 29 Aug 2013 ini sets max_iterations 10, tolerance 0.05, quit_early false, and leaves finite_difference unset. The r2549 default is 0.01, so that key is 0.01 here. The score is the client's total_force_calls on morse_pt. report.sh keeps totals under 3000 in the mean and counts termination_reason other than 0 as nfailed. The client is r2549 with the Lanczos loop bound from r2169, before r2186 changed the test to max_iterations minus one. That bound takes one step past the allocated tridiagonal. Stock r2549 Lanczos does not match this archive. codes/eon-r2549-lanczos-r2169-bound.patch is that one-line bound.
+Paper row for the 29 Aug 2013 Pt-island Lanczos entry. The archive names r2156 in code_version and in code_file eon-r2156.tgz, and report.sh writes that revision. That date is the day report.sh ran. r2168, which adds Lanczos quit_early, is the same day and is not the revision the archive names. The client is unmodified r2156, built with Fortran, using that revision's Morse potential. The ini is the archived config. Omitted keys stay at the r2156 defaults, including finite_difference 0.01. r2156 does not read quit_early. report.sh on this rerun is 451 force calls and 0 failures. The archive is 325 and 5. Stock r2549 on morse_pt is the separate current-SVN row eon-svn/de-pt-lanczos-current (233 calls, 0 failures).
 '''
 seeds = [1]
-asv_timeout = 900
 budget_seconds = 600
 
 [ini.Main]
 job = "saddle_search"
-finite_difference = 0.01
-random_seed = 1
 
 [ini.Potential]
 potential = "morse_pt"
 
 [ini.Optimizer]
 opt_method = "lbfgs"
-convergence_metric = "norm"
 converged_force = 0.001
-max_move = 0.2
 max_iterations = 1000
-lbfgs_memory = 20
-
-[ini.LBFGS]
-lbfgs_memory = 20
 
 [ini."Saddle Search"]
-min_mode_method = "lanczos"
-client_displace_type = "load"
-converged_force = 0.001
 max_iterations = 1000
-displace_magnitude = 0.1
+min_mode_method = "lanczos"
 max_energy = 1000000000
 
 [ini.Lanczos]

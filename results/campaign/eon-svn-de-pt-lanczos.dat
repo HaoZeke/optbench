@@ -1,12 +1,12 @@
-force_calls 306
-force_calls_min 95
-force_calls_max 1974
-force_calls_median 206.0
+force_calls 451
+force_calls_min 186
+force_calls_max 1063
+force_calls_median 399.0
 call_unit total
-nfailed 5
+nfailed 0
 code Eon svn
-code_version r2549
-commit r2549
+code_version r2156
+commit r2156
 algorithm Lanczos L-BFGS
 template eon-svn/de-pt-lanczos
 problem double-ended-saddle-search/pt-island

@@ -367,7 +367,7 @@
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">eOn and Eon svn band rows are not yet on the harness counter. Partial rows stay off the ranked table.</p>
+   <p class="bench-gaps">eOn and Eon svn current band rows are not yet on the harness counter. Partial rows stay off the ranked table.</p>
    <figure class="bench-plot"><a href="../../_static/board/double-ended-saddle-search-pt-island-profile.svg"><picture><source srcset="../../_static/board/double-ended-saddle-search-pt-island-profile.webp" type="image/webp"><img src="../../_static/board/double-ended-saddle-search-pt-island-profile.png" alt="Dolan-More profile for double-ended-saddle-search/pt-island" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/double-ended-saddle-search-pt-island-cost.svg"><picture><source srcset="../../_static/board/double-ended-saddle-search-pt-island-cost.webp" type="image/webp"><img src="../../_static/board/double-ended-saddle-search-pt-island-cost.png" alt="Cost versus success for double-ended-saddle-search/pt-island" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="pt-island-templates">
@@ -410,6 +410,7 @@
    <li>eon-client/de-pt-lanczos-improved eOn campaign n=59, result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5).</li>
    <li>eon-client/de-pt-lanczos eOn campaign n=59, result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5).</li>
    <li>eon-svn/de-pt-lanczos-improved Eon svn campaign n=59, does not reproduce the 2014 archive.</li>
+   <li>eon-svn/de-pt-lanczos Eon svn campaign n=59, does not reproduce the 2014 archive.</li>
    <li>eon/develop-de-pt-ew eOn asv n=1, smoke run; scored 1 of 59 starts.</li>
    <li>eon/develop-de-pt-oci eOn asv n=1, smoke run; scored 1 of 59 starts.</li>
    <li>ase/de-pt-island-tuned ASE asv n=1, smoke run; scored 1 of 59 starts.</li>
@@ -422,7 +423,7 @@
    <h3>Not a harness score</h3><ul>
    <li>eon/de-pt-lbfgs-m100 eOn n=59, not yet on the harness counter.</li>
    <li>eon/de-pt-lbfgs eOn n=59, not yet on the harness counter.</li>
-   <li>eon-svn/de-pt-lanczos Eon svn n=59, not yet on the harness counter.</li>
+   <li>eon-svn/de-pt-lanczos-current Eon svn current n=59, not yet on the harness counter.</li>
    </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="pt-island-legacy">
@@ -554,7 +555,7 @@
    </tr>
    <tr id="double-ended-saddle-search-pt-island-eon-lanczos">
    <td class="num">10</td>
-   <td class="text">eon-lanczos</td>
+   <td class="text">eon-lanczos · not reproduced</td>
    <td class="text">Eon r2156</td>
    <td class="num">325</td>
    <td class="num">2660</td>
