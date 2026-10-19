@@ -23,9 +23,11 @@ start total sums both stages on every replica, including the
 endpoints. The harness then judges the climbing replica: free-atom
 gradient at the problem norm, and Hessian index 1. A last stage whose
 stopping criterion is ``max iterations`` or ``max force evaluations``
-used the N1/N2 budget. If the climbing image is still above the force
-stop, the reason list includes ``cap``. ``classify_failure`` then
-returns that harness class name from ``optbench.failures.FAILURES``.
+is the method's N1/N2 budget. That fact is stored as ``step_limit``
+and ``lammps_stop``. It is ``cap`` only when the pair-compute count
+has reached the harness cap. Under the cap it is ``not_converged``
+when the climbing image is still above the force stop.
+:func:`optbench.failures.classify_outcome` names the class.
 Finite-difference probes are ``verify_calls`` and are not part of the
 search cost.
 """
@@ -47,7 +49,7 @@ from pathlib import Path
 import numpy as np
 
 from .campaign import geometry_archive, load_template, resolve_problem
-from .failures import classify_failure
+from .failures import classify_outcome, ended_on_step_limit
 from .pes import evaluate, load_pairs
 from .rgsaddle_band import vibrational_index
 from .score import score_v2
@@ -61,7 +63,6 @@ _FD_STEP = 1e-5
 _LJ_PAD = 100.0
 _MORSE_CUTOFF = 9.5
 _TIMESTEP = {"lj": 0.005, "morse_pt": 0.001}
-_STEP_LIMITS = frozenset({"max iterations", "max force evaluations"})
 _CLIMBING = re.compile(r"Climbing replica = (\d+)")
 _DEFAULT_BIN = Path("/tmp/lammps/install/bin/lmp")
 
@@ -150,16 +151,6 @@ def stage_lengths(settings: dict) -> tuple[int, int]:
     raise ValueError(f"step budget {budget}")
 
 
-def ended_on_step_limit(replica_blocks: list[list[tuple[str, int]]]) -> bool:
-    """True when every replica's last stage hit an N1/N2 limit."""
-    if not replica_blocks:
-        return False
-    for blocks in replica_blocks:
-        if not blocks or blocks[-1][0] not in _STEP_LIMITS:
-            return False
-    return True
-
-
 def unanimous_stop(replica_blocks: list[list[tuple[str, int]]]) -> str:
     """The shared last-stage criterion, or ``mixed`` when replicas differ."""
     if not replica_blocks:
@@ -181,15 +172,14 @@ def band_reasons(
     cap: int,
     force: float | None,
     force_norm: float,
-    step_limit: bool,
     hessian_index: int | None,
 ) -> list[str]:
-    """Reasons for one search. An empty list is a saddle under the cap.
+    """Facts for one search. An empty list is a saddle under the cap.
 
-    A step-limit stop that is still above the force norm is cap. A
-    force-tolerance stop that is still above the harness norm is
-    divergence. A step-limit stop whose force is already under the norm
-    is judged by the Hessian.
+    ``cap`` is recorded only when the pair-compute count has reached
+    the harness cap. An N1/N2 stop is not that fact. A force still
+    above the problem norm is ``force_norm``. The class is
+    :func:`optbench.failures.classify_outcome`.
     """
     reasons: list[str] = []
     if not complete:
@@ -202,8 +192,6 @@ def band_reasons(
     finite = force is not None and bool(np.isfinite(force))
     above = not finite or float(force) > force_norm
     if above:
-        if step_limit and finite and "cap" not in reasons:
-            reasons.append("cap")
         reasons.append("force_norm")
         return reasons
     if "cap" not in reasons and hessian_index is not None and int(hessian_index) != 1:
@@ -809,10 +797,21 @@ def _finish(
         cap=cap,
         force=force,
         force_norm=force_norm,
-        step_limit=step_limit,
         hessian_index=hessian_index,
     )
-    failure = classify_failure(reasons)
+    failure = classify_outcome(
+        energy=None if energy is None else float(energy),
+        geometry=None if coords is None else np.asarray(coords, dtype=np.float64),
+        force=None if force is None else float(force),
+        calls=float(calls),
+        cap=cap,
+        force_tol=force_norm,
+        process_failed=not measured,
+        dissociated=_dissociated(error),
+        hessian_index=hessian_index,
+        expected_index=None if hessian_index is None else 1,
+        step_limit=bool(step_limit),
+    )
     record = _blank(
         name,
         calls=calls,
@@ -834,7 +833,15 @@ def _finish(
     record["reasons"] = reasons
     record["converged"] = failure is None
     record["lammps_stop"] = lammps_stop
+    record["step_limit"] = bool(step_limit)
+    record["force_tol"] = force_norm
     return record
+
+
+def _dissociated(error: str) -> bool:
+    """True when the log reports a lost-atom or neighbor-bin blow-up."""
+    text = error or ""
+    return "Lost atoms" in text or ("exposed" in text and "atoms" in text) or "Too many neighbor bins" in text
 
 
 _PAIR_CACHE: dict[tuple[str, str], dict] = {}

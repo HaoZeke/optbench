@@ -7,7 +7,7 @@ import numpy as np
 import pytest
 
 from optbench.campaign import geometry_archive, list_templates, load_template, resolve_problem
-from optbench.failures import classify_failure
+from optbench.failures import classify_outcome, classify_stored
 from optbench.lammps_neb import (
     COMMIT,
     band_reasons,
@@ -125,7 +125,7 @@ def test_cap_budget_reaches_the_problem_cap():
         assert total + images > cap
 
 
-def test_step_limit_above_the_force_stop_is_cap():
+def test_step_limit_under_the_harness_cap_is_not_converged():
     limited = [
         [("force tolerance", 4), ("max iterations", 9)],
         [("force tolerance", 4), ("max iterations", 9)],
@@ -144,43 +144,112 @@ def test_step_limit_above_the_force_stop_is_cap():
         cap=2500,
         force=0.016,
         force_norm=0.001,
-        step_limit=True,
         hessian_index=None,
     )
-    assert reasons == ["cap", "force_norm"]
-    assert classify_failure(reasons) == "cap"
+    assert reasons == ["force_norm"]
+    assert (
+        classify_outcome(
+            energy=-1.0,
+            force=0.016,
+            calls=2485,
+            cap=2500,
+            force_tol=0.001,
+            step_limit=True,
+        )
+        == "not_converged"
+    )
+    stored = classify_stored(
+        {
+            "success": False,
+            "failure": "cap",
+            "reasons": ["cap", "force_norm"],
+            "energy": -1.0,
+            "force_norm": 0.016,
+            "force_calls": 2485,
+            "lammps_stop": "max iterations",
+            "step_limit": True,
+        },
+        2500,
+        0.001,
+    )
+    assert stored == "not_converged"
+    at_cap = band_reasons(
+        complete=True,
+        calls=2500,
+        cap=2500,
+        force=0.016,
+        force_norm=0.001,
+        hessian_index=None,
+    )
+    assert at_cap == ["cap", "force_norm"]
+    assert (
+        classify_outcome(
+            energy=-1.0,
+            force=0.016,
+            calls=2500,
+            cap=2500,
+            force_tol=0.001,
+            step_limit=True,
+        )
+        == "cap"
+    )
     early = band_reasons(
         complete=True,
         calls=400,
         cap=2500,
         force=0.016,
         force_norm=0.001,
-        step_limit=False,
         hessian_index=None,
     )
     assert early == ["force_norm"]
-    assert classify_failure(early) == "divergence"
+    assert (
+        classify_outcome(energy=-1.0, force=0.016, calls=400, cap=2500, force_tol=0.001, step_limit=False)
+        == "not_converged"
+    )
     saddle = band_reasons(
         complete=True,
         calls=2485,
         cap=2500,
         force=7.3e-4,
         force_norm=0.001,
-        step_limit=True,
         hessian_index=1,
     )
     assert saddle == []
-    assert classify_failure(saddle) is None
+    assert (
+        classify_outcome(
+            energy=-1.0,
+            force=7.3e-4,
+            calls=2485,
+            cap=2500,
+            force_tol=0.001,
+            hessian_index=1,
+            expected_index=1,
+            step_limit=True,
+        )
+        is None
+    )
     wrong = band_reasons(
         complete=True,
         calls=2485,
         cap=2500,
         force=1.0e-7,
         force_norm=0.001,
-        step_limit=True,
         hessian_index=0,
     )
-    assert classify_failure(wrong) == "wrong_stationary"
+    assert wrong == ["hessian_index"]
+    assert (
+        classify_outcome(
+            energy=-1.0,
+            force=1.0e-7,
+            calls=2485,
+            cap=2500,
+            force_tol=0.001,
+            hessian_index=0,
+            expected_index=1,
+            step_limit=True,
+        )
+        == "wrong_stationary"
+    )
 
 
 def test_timestep_scale_keeps_the_problem_image_count():
@@ -294,9 +363,11 @@ def test_short_quickmin_band_counts_pair_computes_and_holds_the_reactant(tmp_pat
         n2=2,
         work=tmp_path,
     )
-    assert record["failure"] == "cap"
     assert record["lammps_stop"] == "max iterations"
-    assert "cap" in record["reasons"]
+    assert record["step_limit"] is True
+    assert record["force_calls"] < 2500
+    assert "cap" not in record["reasons"]
+    assert record["failure"] == "not_converged"
     assert record["success"] is False
     assert record["n_images"] == 7
     logs = [tmp_path.joinpath(f"log.lammps.{index}").read_text(encoding="utf-8") for index in range(7)]
