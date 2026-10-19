@@ -1,0 +1,27 @@
+id = "pyamff/c2h4-adam-paper"
+engine = "pyamff-archive"
+problem = "mlopt/C2H4"
+code = "pyamff-8037eb98"
+code_version = "8037eb98"
+commit = "8037eb98e2288c132c112aa6c2032f00cd5c5277"
+algorithm = "Adam"
+tuning = "paper"
+archive = "mlopt/C2H4/pyamff-adam10-7-fcoeff0"
+ranked = true
+note = "Paper reproduction of the archived PyAMFF 8037eb98 Adam run on mlopt/C2H4. Force coefficient 0. The process is that commit's pyamff entry point and Trainer, with the archived config.ini, fpParas.dat, and trajectory. Fingerprints are that commit's Fortran engine. The ini sets fp_engine to Fortran. The logged epoch is one Trainer iteration. The stop is max(abs(parameter gradient)) below 0.02, budget 10000. The ini sets learning_rate to 0.01. Loss SE, NoScaler, hidden layers 10 7, weights uniform on [-1, 1). One batch is the full trajectory."
+
+[pyamff]
+optimizer = "ADAM"
+learning_rate = 0.01
+hidden_layers = [10, 7]
+activation = "tanh"
+loss = "SE"
+energy_coefficient = 1.0
+force_coefficient = 0.0
+force_training = true
+initial_weights = "random_uniform"
+
+[stop]
+max_steps = 10000
+gradient_norm = 0.02
+norm = "max_abs"

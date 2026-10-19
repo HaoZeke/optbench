@@ -8,7 +8,8 @@ code pyamff
 code_version 0.1.0-beta
 commit 240f51d01ca22969369f9bc21760c61cbb3b6665
 algorithm Rprop
-tuning default
+tuning torch.optim
+ranked false
 template pyamff/emt-pt38-rprop-force
 problem mlopt/emt-pt38
 counter harness
@@ -29,4 +30,4 @@ mean_energy_rmse 0.00068267232
 median_energy_rmse 0.00067129476
 mean_force_rmse 0.086180573
 median_force_rmse 0.086764145
-note One harness call is one SSE loss and its parameter gradient. The stop is the L2 norm of every parameter gradient.
+note Extra torch.optim row, not the 8037eb98 paper baseline. One harness call is one SSE loss and its parameter gradient. The stop is the L2 norm of every parameter gradient.

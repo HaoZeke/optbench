@@ -8,7 +8,8 @@ code pyamff
 code_version 0.1.0-beta
 commit 240f51d01ca22969369f9bc21760c61cbb3b6665
 algorithm NAdam
-tuning default
+tuning torch.optim
+ranked false
 template pyamff/emt-pt38-nadam-force
 problem mlopt/emt-pt38
 counter harness
@@ -30,4 +31,4 @@ median_energy_rmse 0.00053678606
 mean_force_rmse 0.077868865
 median_force_rmse 0.077868865
 partial true
-note One harness call is one SSE loss and its parameter gradient. The stop is the L2 norm of every parameter gradient.
+note Extra torch.optim row, not the 8037eb98 paper baseline. One harness call is one SSE loss and its parameter gradient. The stop is the L2 norm of every parameter gradient.

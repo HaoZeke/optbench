@@ -118,7 +118,7 @@
           "start": "0",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -140,7 +140,7 @@
           "start": "1",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -162,7 +162,7 @@
           "start": "2",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -184,7 +184,7 @@
           "start": "3",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -206,7 +206,7 @@
           "start": "4",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -228,7 +228,7 @@
           "start": "5",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -250,7 +250,7 @@
           "start": "6",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -272,7 +272,7 @@
           "start": "7",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -294,7 +294,7 @@
           "start": "8",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -316,7 +316,7 @@
           "start": "9",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -338,7 +338,7 @@
           "start": "10",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -360,7 +360,7 @@
           "start": "11",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -382,7 +382,7 @@
           "start": "12",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -404,7 +404,7 @@
           "start": "13",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -426,7 +426,7 @@
           "start": "14",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -448,7 +448,7 @@
           "start": "15",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -470,7 +470,7 @@
           "start": "16",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -492,7 +492,7 @@
           "start": "17",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -514,7 +514,7 @@
           "start": "18",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -536,7 +536,7 @@
           "start": "19",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -558,7 +558,7 @@
           "start": "20",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -580,7 +580,7 @@
           "start": "21",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -602,7 +602,7 @@
           "start": "22",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -624,7 +624,7 @@
           "start": "23",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -646,7 +646,7 @@
           "start": "24",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -668,7 +668,7 @@
           "start": "25",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -690,7 +690,7 @@
           "start": "26",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -712,7 +712,7 @@
           "start": "27",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -734,7 +734,7 @@
           "start": "28",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -756,7 +756,7 @@
           "start": "29",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -778,7 +778,7 @@
           "start": "30",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -800,7 +800,7 @@
           "start": "31",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -822,7 +822,7 @@
           "start": "32",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -844,7 +844,7 @@
           "start": "33",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -866,7 +866,7 @@
           "start": "34",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -888,7 +888,7 @@
           "start": "35",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -910,7 +910,7 @@
           "start": "36",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -932,7 +932,7 @@
           "start": "37",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -954,7 +954,7 @@
           "start": "38",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -976,7 +976,7 @@
           "start": "39",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -998,7 +998,7 @@
           "start": "40",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -1020,7 +1020,7 @@
           "start": "41",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -1042,7 +1042,7 @@
           "start": "42",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -1064,7 +1064,7 @@
           "start": "43",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -1086,7 +1086,7 @@
           "start": "44",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -1108,7 +1108,7 @@
           "start": "45",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -1130,7 +1130,7 @@
           "start": "46",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -1152,7 +1152,7 @@
           "start": "47",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -1174,7 +1174,7 @@
           "start": "48",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "SGD",
@@ -1196,7 +1196,7 @@
           "start": "49",
           "success": false,
           "template": "pyamff/emt-pt38-sgd",
-          "tuning": "default"
+          "tuning": "torch.optim"
         }
       ]
     }

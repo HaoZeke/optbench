@@ -35,7 +35,8 @@ def test_pyamff_templates_cover_both_problems_and_seven_optimizers():
     for template in found:
         assert template["commit"] == COMMIT
         assert template["code_version"] == "0.1.0-beta"
-        assert template["tuning"] == "default"
+        assert template["tuning"] == "torch.optim"
+        assert template["ranked"] is False
         assert template["problem"] in PROBLEMS
         problem = resolve_problem(ROOT, template["problem"])
         assert stated_full_n(ROOT, problem) == 50

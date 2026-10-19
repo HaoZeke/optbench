@@ -118,7 +118,7 @@
           "start": "0",
           "success": false,
           "template": "pyamff/emt-pt38-nadam-force",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "NAdam",
@@ -140,7 +140,7 @@
           "start": "1",
           "success": false,
           "template": "pyamff/emt-pt38-nadam-force",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "NAdam",
@@ -162,7 +162,7 @@
           "start": "2",
           "success": false,
           "template": "pyamff/emt-pt38-nadam-force",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "NAdam",
@@ -184,7 +184,7 @@
           "start": "3",
           "success": false,
           "template": "pyamff/emt-pt38-nadam-force",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "NAdam",
@@ -206,7 +206,7 @@
           "start": "4",
           "success": false,
           "template": "pyamff/emt-pt38-nadam-force",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "NAdam",
@@ -228,7 +228,7 @@
           "start": "5",
           "success": false,
           "template": "pyamff/emt-pt38-nadam-force",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "NAdam",
@@ -250,7 +250,7 @@
           "start": "6",
           "success": false,
           "template": "pyamff/emt-pt38-nadam-force",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "NAdam",
@@ -272,7 +272,7 @@
           "start": "7",
           "success": false,
           "template": "pyamff/emt-pt38-nadam-force",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "NAdam",
@@ -294,7 +294,7 @@
           "start": "8",
           "success": false,
           "template": "pyamff/emt-pt38-nadam-force",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "NAdam",
@@ -316,7 +316,7 @@
           "start": "9",
           "success": false,
           "template": "pyamff/emt-pt38-nadam-force",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "NAdam",
@@ -338,7 +338,7 @@
           "start": "10",
           "success": false,
           "template": "pyamff/emt-pt38-nadam-force",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "NAdam",
@@ -360,7 +360,7 @@
           "start": "11",
           "success": false,
           "template": "pyamff/emt-pt38-nadam-force",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "NAdam",
@@ -382,7 +382,7 @@
           "start": "12",
           "success": false,
           "template": "pyamff/emt-pt38-nadam-force",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "NAdam",
@@ -404,7 +404,7 @@
           "start": "13",
           "success": false,
           "template": "pyamff/emt-pt38-nadam-force",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "NAdam",
@@ -426,7 +426,7 @@
           "start": "14",
           "success": true,
           "template": "pyamff/emt-pt38-nadam-force",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "NAdam",
@@ -448,7 +448,7 @@
           "start": "15",
           "success": false,
           "template": "pyamff/emt-pt38-nadam-force",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "NAdam",
@@ -470,7 +470,7 @@
           "start": "16",
           "success": false,
           "template": "pyamff/emt-pt38-nadam-force",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "NAdam",
@@ -492,7 +492,7 @@
           "start": "17",
           "success": false,
           "template": "pyamff/emt-pt38-nadam-force",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "NAdam",
@@ -514,7 +514,7 @@
           "start": "18",
           "success": false,
           "template": "pyamff/emt-pt38-nadam-force",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "NAdam",
@@ -536,7 +536,7 @@
           "start": "19",
           "success": false,
           "template": "pyamff/emt-pt38-nadam-force",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "NAdam",
@@ -558,7 +558,7 @@
           "start": "20",
           "success": false,
           "template": "pyamff/emt-pt38-nadam-force",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "NAdam",
@@ -580,7 +580,7 @@
           "start": "21",
           "success": false,
           "template": "pyamff/emt-pt38-nadam-force",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "NAdam",
@@ -602,7 +602,7 @@
           "start": "22",
           "success": false,
           "template": "pyamff/emt-pt38-nadam-force",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "NAdam",
@@ -624,7 +624,7 @@
           "start": "23",
           "success": false,
           "template": "pyamff/emt-pt38-nadam-force",
-          "tuning": "default"
+          "tuning": "torch.optim"
         }
       ]
     }

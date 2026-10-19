@@ -5,8 +5,9 @@ code = "pyamff"
 code_version = "0.1.0-beta"
 commit = "240f51d01ca22969369f9bc21760c61cbb3b6665"
 algorithm = "LBFGS"
-tuning = "default"
-note = "torch.optim.LBFGS on the PyAMFF 10-7 tanh network for C2H4. Force training uses force coefficient 0.1. The stop is an L2 norm of 0.1 on every parameter gradient and a budget of 30000 loss evaluations. Learning rate 0.01 and weight decay 0. The 50 initial weights are uniform on [-1, 1), seeded from 20261015 plus the start index. Fingerprints are the archived Behler-Parrinello set from the Fortran engine, with NoScaler and one batch."
+tuning = "torch.optim"
+ranked = false
+note = "Extra torch.optim row, not the PyAMFF 8037eb98 paper baseline. torch.optim.LBFGS on the PyAMFF 10-7 tanh network for C2H4. Force training uses force coefficient 0.1. The stop is an L2 norm of 0.1 on every parameter gradient and a budget of 30000 loss evaluations. Learning rate 0.01 and weight decay 0. The 50 initial weights are uniform on [-1, 1), seeded from 20261015 plus the start index. Fingerprints are the archived Behler-Parrinello set from the Fortran engine, with NoScaler and one batch."
 
 [pyamff]
 optimizer = "LBFGS"

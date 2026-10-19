@@ -677,8 +677,11 @@ def _write_dat(path: Path, template: dict, problem: dict, records: list[dict], c
         lines.append(f"median_force_rmse {_fmt(_median(force))}")
     if len(records) < full_n:
         lines.append("partial true")
+    if str(template.get("ranked")).lower() == "false":
+        lines.append("ranked false")
     lines.append(
-        "note One harness call is one SSE loss and its parameter gradient. "
+        "note Extra torch.optim row, not the 8037eb98 paper baseline. "
+        "One harness call is one SSE loss and its parameter gradient. "
         "The stop is the L2 norm of every parameter gradient."
     )
     path.parent.mkdir(parents=True, exist_ok=True)

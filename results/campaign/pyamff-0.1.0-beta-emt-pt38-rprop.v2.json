@@ -118,7 +118,7 @@
           "start": "0",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -140,7 +140,7 @@
           "start": "1",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -162,7 +162,7 @@
           "start": "2",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -184,7 +184,7 @@
           "start": "3",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -206,7 +206,7 @@
           "start": "4",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -228,7 +228,7 @@
           "start": "5",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -250,7 +250,7 @@
           "start": "6",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -272,7 +272,7 @@
           "start": "7",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -294,7 +294,7 @@
           "start": "8",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -316,7 +316,7 @@
           "start": "9",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -338,7 +338,7 @@
           "start": "10",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -360,7 +360,7 @@
           "start": "11",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -382,7 +382,7 @@
           "start": "12",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -404,7 +404,7 @@
           "start": "13",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -426,7 +426,7 @@
           "start": "14",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -448,7 +448,7 @@
           "start": "15",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -470,7 +470,7 @@
           "start": "16",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -492,7 +492,7 @@
           "start": "17",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -514,7 +514,7 @@
           "start": "18",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -536,7 +536,7 @@
           "start": "19",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -558,7 +558,7 @@
           "start": "20",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -580,7 +580,7 @@
           "start": "21",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -602,7 +602,7 @@
           "start": "22",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -624,7 +624,7 @@
           "start": "23",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -646,7 +646,7 @@
           "start": "24",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -668,7 +668,7 @@
           "start": "25",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -690,7 +690,7 @@
           "start": "26",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -712,7 +712,7 @@
           "start": "27",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -734,7 +734,7 @@
           "start": "28",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -756,7 +756,7 @@
           "start": "29",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -778,7 +778,7 @@
           "start": "30",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -800,7 +800,7 @@
           "start": "31",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -822,7 +822,7 @@
           "start": "32",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -844,7 +844,7 @@
           "start": "33",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -866,7 +866,7 @@
           "start": "34",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -888,7 +888,7 @@
           "start": "35",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -910,7 +910,7 @@
           "start": "36",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -932,7 +932,7 @@
           "start": "37",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -954,7 +954,7 @@
           "start": "38",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -976,7 +976,7 @@
           "start": "39",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -998,7 +998,7 @@
           "start": "40",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -1020,7 +1020,7 @@
           "start": "41",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -1042,7 +1042,7 @@
           "start": "42",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -1064,7 +1064,7 @@
           "start": "43",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -1086,7 +1086,7 @@
           "start": "44",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -1108,7 +1108,7 @@
           "start": "45",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -1130,7 +1130,7 @@
           "start": "46",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -1152,7 +1152,7 @@
           "start": "47",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -1174,7 +1174,7 @@
           "start": "48",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         },
         {
           "algorithm": "Rprop",
@@ -1196,7 +1196,7 @@
           "start": "49",
           "success": true,
           "template": "pyamff/emt-pt38-rprop",
-          "tuning": "default"
+          "tuning": "torch.optim"
         }
       ]
     }
