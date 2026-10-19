@@ -1043,5 +1043,53 @@
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>
+   <h3>CP2K</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>band</td>
+   <td>v2026.2</td>
+   <td>67b5da876dd6</td>
+   <td><a href="https://github.com/cp2k/cp2k">https://github.com/cp2k/cp2k</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="double-ended-saddle-search/lj38" data-template="cp2k/ci-neb">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="template">cp2k/ci-neb</td>
+   <td data-field="version">CP2K 2026.2</td>
+   <td data-field="commit">67b5da876dd6</td>
+   <td data-field="par2_mean">4655.5</td>
+   <td data-field="mean_calls">2455.5</td>
+   <td data-field="median_calls">2500</td>
+   <td data-field="failures">crash 0, divergence 0, cap 44, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="cp2k/ci-neb-tuned">
+   <td>pt-island</td>
+   <td data-field="template">cp2k/ci-neb-tuned</td>
+   <td data-field="version">CP2K 2026.2</td>
+   <td data-field="commit">67b5da876dd6</td>
+   <td data-field="par2_mean">2555.76</td>
+   <td data-field="mean_calls">2148.98</td>
+   <td data-field="median_calls">2070</td>
+   <td data-field="failures">crash 0, divergence 0, cap 8, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-template="cp2k/ci-neb-tuned">
+   <td>Pt-heptamer</td>
+   <td data-field="template">cp2k/ci-neb-tuned</td>
+   <td data-field="version">CP2K 2026.2</td>
+   <td data-field="commit">67b5da876dd6</td>
+   <td data-field="par2_mean">1893.85</td>
+   <td data-field="mean_calls">1893.85</td>
+   <td data-field="median_calls">1800</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   </tbody></table></div>
    </section>
 #+end_export

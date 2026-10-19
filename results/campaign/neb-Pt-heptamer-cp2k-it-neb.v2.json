@@ -1,0 +1,67 @@
+{
+  "counter": "harness",
+  "legacy": {
+    "n": 13,
+    "nfailed": 13,
+    "successes": 0,
+    "transition_states": 0
+  },
+  "problem": "neb/Pt-heptamer",
+  "provenance": {
+    "code": "CP2K",
+    "code_version": "2026.2",
+    "commit": "67b5da876dd6a76b8b021d5a04d1c81ba79a4c50",
+    "machine": {
+      "machine": "x86_64",
+      "node": "cursor",
+      "python": "3.12.3",
+      "system": "Linux"
+    },
+    "parameters": {
+      "band_type": "IT-NEB",
+      "counter": "harness",
+      "k_spring": 0.02,
+      "max_dr": 10.0,
+      "max_force": "problem L2 changed to hartree/bohr and divided by sqrt(n_free*3)",
+      "max_step_angstrom": 0.2,
+      "max_steps": 10000,
+      "opt_type": "DIIS",
+      "potential": "morse_pt",
+      "rms_dr": 10.0,
+      "rms_force": 10.0,
+      "seed": "0"
+    }
+  },
+  "schema": "optbench.score/v2",
+  "score": {
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 20261015,
+    "cap": 10000,
+    "includes_failures": true,
+    "iqr": 0.0,
+    "iqr_high": 0.0,
+    "iqr_low": 0.0,
+    "mean": 20000.0,
+    "median": 20000.0,
+    "median_high": 20000.0,
+    "median_low": 20000.0,
+    "n": 13,
+    "n_cap": 8,
+    "n_crash": 0,
+    "n_divergence": 5,
+    "n_wrong_stationary": 0,
+    "nfailed": 13,
+    "par2_mean": 20000.0,
+    "par_applied": true,
+    "par_factor": 2,
+    "q25": 20000.0,
+    "q75": 20000.0,
+    "scoring": "par2-wilson-bootstrap",
+    "success_only_mean": null,
+    "success_rate": 0.0,
+    "successes": 0,
+    "wilson_high": 0.22809537235419838,
+    "wilson_low": 0.0
+  },
+  "template": "cp2k/it-neb"
+}

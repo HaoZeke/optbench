@@ -1,0 +1,19 @@
+# CP2K 2026.2 CI-NEB with the MD band optimizer from tests/NEB/regtest-1/2gly_CI-NEB.inp.
+# Manual: https://manual.cp2k.org/trunk/CP2K_INPUT/MOTION/BAND.html
+# K_SPRING 0.05, TIMESTEP 0.5 fs, TEMPERATURE 100 K, ANNEALING 0.95.
+# Henkelman, Uberuaga, and Jonsson, J. Chem. Phys. 113, 9901 (2000), doi:10.1063/1.1329672.
+id = "cp2k/ci-neb-tuned"
+engine = "cp2k-band"
+code = "CP2K"
+code_version = "2026.2"
+commit = "67b5da876dd6a76b8b021d5a04d1c81ba79a4c50"
+algorithm = "CI-NEB"
+tuning = "tuned"
+
+[band]
+band_type = "CI-NEB"
+opt_type = "MD"
+k_spring = 0.05
+timestep = 0.5
+temperature = 100.0
+annealing = 0.95
