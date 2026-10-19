@@ -37,7 +37,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj38_2ts_separation/pele | — | — | not rerun |
 | pt-island/eon-ci-neb | force_calls 248 | 226 | reproduced |
 | pt-island/eon-ci-neb-5 | — | — | not rerun |
-| pt-island/eon-ci-neb-single | force_calls 110 | 115 | reproduced |
+| pt-island/eon-ci-neb-single | force_calls 110 | 112 | reproduced |
 | pt-island/eon-ci-swdneb | force_calls 256 | 246 | reproduced |
 | pt-island/eon-dimer | force_calls 182 | 192 | reproduced |
 | pt-island/eon-lanczos | force_calls 325 | 222 | not reproduced; pt_lanczos |
