@@ -35,7 +35,7 @@ def test_the_ledger_covers_the_oracle_in_order():
             assert row["cause"]
         if (row.get("rerun") or {}).get("paper_baseline"):
             assert status == "reproduced"
-    assert counts == {"reproduced": 46, "not_reproduced": 29, "not_rerun": 76}
+    assert counts == {"reproduced": 47, "not_reproduced": 29, "not_rerun": 75}
     assert reproduction_errors(ROOT) == []
 
 
@@ -79,6 +79,35 @@ def test_a_paper_baseline_outside_the_archive_fails(tmp_path: Path):
     errors = baseline_errors(tmp_path)
     assert errors
     assert any("force_calls" in line and "1000" in line for line in errors)
+
+
+def test_lj150_nosym_is_inside_the_published_deviation():
+    from optbench.reproduction import standard_error, within_mean
+
+    ledger = {row_id(row): row for row in load_ledger(ROOT / "oracle" / "reproduction.jsonl")}
+    row = ledger["globalopt/lj150/gmin-nosym"]
+    assert row["status"] == "reproduced"
+    assert row["rerun"]["paper_baseline"] is True
+    assert row["rerun"]["template"] == "gmin/lj150-nosym"
+    assert row["failure_check"]["rerun"] == 0
+    archived = {
+        "basin_hopping_steps_mean": "3.28089e+03",
+        "basin_hopping_steps_stddev": "2.72295e+03",
+        "energy_calls_mean": "6.9596491e+05",
+        "energy_calls_stddev": "5.8454129e+05",
+        "cpu_time_mean": "2.8136e+02",
+        "cpu_time_stddev": "2.3615e+02",
+    }
+    by_metric = {item["metric"]: item for item in row["checks"]}
+    for metric, item in by_metric.items():
+        error = standard_error(archived, metric, item["archive"])
+        assert item["se"] == error
+        assert item["ok"] is True
+        assert within_mean(item["archive"], item["rerun"], error)
+        assert abs(item["rerun"] - item["archive"]) / abs(item["archive"]) > 0.10
+    steps = by_metric["basin_hopping_steps_mean"]
+    assert steps["rerun"] == 3628.18
+    assert not within_mean(steps["archive"], steps["archive"] * 2.2, steps["se"])
 
 
 def test_legacy_rows_that_miss_are_marked_in_place():

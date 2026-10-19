@@ -1,0 +1,20 @@
+# GMIN gsaveit quenches and function calls, and the mc timer.
+# Means leave out starts with no Target hit after line.
+problem globalopt/lj150
+template gmin/lj150-nosym
+code GMIN
+code_version df8da5992675
+commit 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31
+algorithm no symmetrisation
+tuning archive
+counter harness
+reducer harness
+cap 10000000
+n 100
+nfailed 0
+basin_hopping_steps_mean 3628.18
+basin_hopping_steps_stddev 3091.921972
+energy_calls_mean 768457.79
+energy_calls_stddev 662850.9007
+cpu_time_mean 93.43842327
+cpu_time_stddev 80.89163824
