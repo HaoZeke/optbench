@@ -52,6 +52,19 @@ def _quiet_threads() -> None:
         os.environ[name] = "1"
 
 
+def _exception_text(exc: BaseException) -> str:
+    """One ``Type: message`` string.
+
+    geomeTRIC already stores ``RuntimeError: Not bracketed``. Raising that
+    text again must not add a second type prefix.
+    """
+    message = str(exc)
+    prefix = f"{type(exc).__name__}: "
+    if message.startswith(prefix):
+        return message
+    return prefix + message
+
+
 class _Observed:
     """Clean potential plus the noisy force the stepper sees."""
 
@@ -159,9 +172,9 @@ def _minimize_job(job: dict) -> dict:
         else:
             raise ValueError(f"unknown solver family {family}")
     except ForceCallCap as exc:
-        error = f"ForceCallCap: {exc}"
+        error = _exception_text(exc)
     except Exception as exc:
-        error = f"{type(exc).__name__}: {exc}"
+        error = _exception_text(exc)
     if point is None and potential is not None and getattr(potential, "last_point", None) is not None:
         point = potential.last_point
     if potential is not None and point is not None:

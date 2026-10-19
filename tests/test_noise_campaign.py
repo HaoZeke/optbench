@@ -86,3 +86,14 @@ def test_exact_hessian_job_is_refused():
     }
     with pytest.raises(ValueError, match="exact Hessian"):
         _minimize_job(job)
+
+
+def test_exception_text_keeps_a_single_type_prefix():
+    from optbench.counter import ForceCallCap
+    from optbench.runners.noise_min import _exception_text
+
+    assert _exception_text(RuntimeError("RuntimeError: Not bracketed")) == "RuntimeError: Not bracketed"
+    assert _exception_text(RuntimeError("coordinate rebuild did not settle")) == (
+        "RuntimeError: coordinate rebuild did not settle"
+    )
+    assert _exception_text(ForceCallCap("ForceCallCap: force-call cap")) == "ForceCallCap: force-call cap"
