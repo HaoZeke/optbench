@@ -36,6 +36,8 @@ Measured on LJ38 pair 00, Cartesian primitives, `nnodes` 11, `DMAX` 0.1, stock c
 
 A dissociated Lennard-Jones cluster has no pairs inside the cutoff, so the energy and the force are both about zero. That point is not a saddle of the intact cluster.
 
+That measurement stored the reduced Lennard-Jones energy as a Hartree. `ASELoT` divides an eV energy by the Hartree before the same storage (`level_of_theories/ase.py`), and the harness follows that conversion. A 1 ε/Å projection is then 0.037 in the displacement units, under the 0.05 cap. The one-sided comparison is unchanged.
+
 ## Fix
 
 Clamp on the absolute projection. `np.sign` already preserves the direction:

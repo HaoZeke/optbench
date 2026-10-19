@@ -56,7 +56,7 @@ def test_template_matches_the_registry_pin():
     assert template["algorithm"] == "DE-GSM"
     assert template["tuning"] == "default"
     assert template["code_version"] == "1.0.0+692.g1b4d5a5.dirty"
-    assert template["gsm"]["coordinate"] == "cartesian"
+    assert template["gsm"]["coordinate"] == "tric"
     assert template["gsm"]["nnodes"] == 11
     assert template["gsm"]["dmax"] == 0.1
     assert template["gsm"]["add_node_tol"] == 0.01
