@@ -173,6 +173,14 @@ commit = "22d94a6fae8cf2d08d51ecc8b9291a47667aa95c"
 committed = "2026-05-05"
 note = "AGOX dev, two commits after tag v3.11.1. The version string is 3.11.2.dev2+g22d94a6fa. Tag v3.11.1 imports IndexedConstraint from ase.constraints. ASE 3.29.0 keeps that name in ase.constraints.constraint, so that tag does not import. This commit is the import fix. Basin hopping, random structure search, the genetic algorithm, and GOFEE. The potential is the harness cutoff-40 Lennard-Jones with no shift. Force calls are harness calculator evaluations. Local steps are SciPy L-BFGS-B."
 
+[[template]]
+id = "ase-globalopt/lj75-basinhopping"
+code = "ase"
+problem = "globalopt/lj75"
+profile = "default"
+task = "basin-hopping"
+ranked = true
+
 # generated ASE and Sella templates
 
 [[template]]
