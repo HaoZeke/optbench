@@ -13,13 +13,13 @@
       "commit": "8f35990f5e3dd6cb296b953448cb11694d0cff3d",
       "entry": "aenet-2.0.5-c2h4-force-lm",
       "legacy": {
-        "mean_energy_rmse": 0.03692533683720068,
-        "mean_epoch": 5512,
-        "mean_force_rmse": 0.6330812348114403,
+        "mean_energy_rmse": 0.04016806071952819,
+        "mean_epoch": 5399,
+        "mean_force_rmse": 0.6346661221534968,
         "median_energy_rmse": 0.05154574231297054,
-        "median_epoch": 740,
+        "median_epoch": 3873,
         "median_force_rmse": 0.5463402383761725,
-        "nfailed": 30
+        "nfailed": 36
       },
       "metrics": {
         "bootstrap_resamples": 2000,
@@ -27,29 +27,29 @@
         "cap": 30000,
         "includes_failures": true,
         "iqr": 0.0,
-        "iqr_high": 56127.0,
+        "iqr_high": 55113.0,
         "iqr_low": 0.0,
-        "mean": 47425.89743589744,
+        "mean": 47220.936170212764,
         "median": 60000.0,
         "median_high": 60000.0,
         "median_low": 60000.0,
-        "n": 39,
-        "n_cap": 30,
+        "n": 47,
+        "n_cap": 36,
         "n_crash": 0,
         "n_divergence": 0,
         "n_wrong_stationary": 0,
-        "nfailed": 30,
-        "par2_mean": 47425.89743589744,
+        "nfailed": 36,
+        "par2_mean": 47220.936170212764,
         "par_applied": true,
         "par_factor": 2,
         "q25": 60000.0,
         "q75": 60000.0,
         "scoring": "par2-wilson-bootstrap",
-        "success_only_mean": 5512.222222222223,
-        "success_rate": 0.23076923076923078,
-        "successes": 9,
-        "wilson_high": 0.3833625722834177,
-        "wilson_low": 0.1264580412514285
+        "success_only_mean": 5398.545454545455,
+        "success_rate": 0.23404255319148937,
+        "successes": 11,
+        "wilson_high": 0.37224257550155593,
+        "wilson_low": 0.13603274586227188
       },
       "parameters": {
         "activation": "tanh",
@@ -663,6 +663,36 @@
         {
           "comparable": true,
           "counter": "harness",
+          "energy_rmse": 0.010195215628563311,
+          "failure": "cap",
+          "force_calls": 30000,
+          "force_rmse": 0.13409869611326405,
+          "max_group_norm": 200.4265005272028,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "0038",
+          "success": false
+        },
+        {
+          "comparable": true,
+          "counter": "harness",
+          "energy_rmse": 0.00885594791629478,
+          "failure": "cap",
+          "force_calls": 30000,
+          "force_rmse": 0.11323681353628527,
+          "max_group_norm": 268.3102777760652,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "0039",
+          "success": false
+        },
+        {
+          "comparable": true,
+          "counter": "harness",
           "energy_rmse": 0.05154574231297054,
           "failure": null,
           "force_calls": 740,
@@ -671,6 +701,92 @@
           "reasons": [],
           "schema": "optbench.start/v2",
           "start": "0040",
+          "success": true
+        },
+        {
+          "comparable": true,
+          "counter": "harness",
+          "energy_rmse": 0.008370580362257093,
+          "failure": "cap",
+          "force_calls": 30000,
+          "force_rmse": 0.10555184469204637,
+          "max_group_norm": 0.27992871802252234,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "0041",
+          "success": false
+        },
+        {
+          "comparable": true,
+          "counter": "harness",
+          "energy_rmse": 0.05868427972693166,
+          "failure": null,
+          "force_calls": 4577,
+          "force_rmse": 1.0660503366305714,
+          "max_group_norm": 0.09333402655208525,
+          "reasons": [],
+          "schema": "optbench.start/v2",
+          "start": "0042",
+          "success": true
+        },
+        {
+          "comparable": true,
+          "counter": "harness",
+          "energy_rmse": 0.013372080088109384,
+          "failure": "cap",
+          "force_calls": 30000,
+          "force_rmse": 0.15723924867490094,
+          "max_group_norm": 215.22592168880863,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "0043",
+          "success": false
+        },
+        {
+          "comparable": true,
+          "counter": "harness",
+          "energy_rmse": 0.008512219985007608,
+          "failure": "cap",
+          "force_calls": 30000,
+          "force_rmse": 0.10683530798611512,
+          "max_group_norm": 5.6322665089257296,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "0044",
+          "success": false
+        },
+        {
+          "comparable": true,
+          "counter": "harness",
+          "energy_rmse": 0.010907218001077162,
+          "failure": "cap",
+          "force_calls": 30000,
+          "force_rmse": 0.13868734936009025,
+          "max_group_norm": 5.7338231516814915,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "0045",
+          "success": false
+        },
+        {
+          "comparable": true,
+          "counter": "harness",
+          "energy_rmse": 0.05083635665307234,
+          "failure": null,
+          "force_calls": 5197,
+          "force_rmse": 0.21754589375493102,
+          "max_group_norm": 0.09936609112415581,
+          "reasons": [],
+          "schema": "optbench.start/v2",
+          "start": "0046",
           "success": true
         }
       ],
