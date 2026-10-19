@@ -1074,10 +1074,10 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">pygsm/de-gsm</td>
    <td data-field="version">pygsm 1.0.0+692.g1b4d5a5.dirty</td>
    <td data-field="commit">1b4d5a5557a6</td>
-   <td data-field="par2_mean">4921.72</td>
-   <td data-field="mean_calls">2028.18</td>
+   <td data-field="par2_mean">5000</td>
+   <td data-field="mean_calls">2493.28</td>
    <td data-field="median_calls">2500</td>
-   <td data-field="failures">crash 0, divergence 15, cap 29, wrong_stationary 5</td>
+   <td data-field="failures">crash 0, divergence 1, cap 49, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="pygsm/de-gsm">
@@ -1085,10 +1085,10 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">pygsm/de-gsm</td>
    <td data-field="version">pygsm 1.0.0+692.g1b4d5a5.dirty</td>
    <td data-field="commit">1b4d5a5557a6</td>
-   <td data-field="par2_mean">19633</td>
-   <td data-field="mean_calls">3247.33</td>
-   <td data-field="median_calls">2014</td>
-   <td data-field="failures">crash 0, divergence 38, cap 7, wrong_stationary 5</td>
+   <td data-field="par2_mean">20000</td>
+   <td data-field="mean_calls">9093.33</td>
+   <td data-field="median_calls">10000</td>
+   <td data-field="failures">crash 0, divergence 8, cap 43, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
    </tbody></table></div>
