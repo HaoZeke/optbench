@@ -169,10 +169,14 @@
   height: auto;
 }
 
-.bench-score {
-  display: block;
+table[data-board-table="summary"] td[data-par2] {
   font-variant-numeric: tabular-nums;
   font-weight: 650;
+}
+
+table[data-board-table="summary"] td[data-par2] a {
+  display: block;
+  font-weight: 400;
 }
 
 .bench-details {

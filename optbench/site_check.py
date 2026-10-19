@@ -258,7 +258,6 @@ def check_site(root: Path) -> list[str]:
     except MissingAsvCommit as exc:
         return [str(exc)]
     problems = load_all(root / "problems") if (root / "problems").is_dir() else {}
-    codes = summary_codes(document, _registry(root))
     errors: list[str] = []
     pages = _page_texts(root)
     if not pages:
@@ -280,7 +279,19 @@ def check_site(root: Path) -> list[str]:
             elif kind == "code-best":
                 errors.extend(_check_code_best(label, table, document))
             elif kind == "summary":
-                errors.extend(_check_summary(label, table, document, codes))
+                shown = {
+                    row["attrs"].get("data-problem", "")
+                    for row in table["rows"]
+                    if row["attrs"].get("data-problem", "")
+                }
+                errors.extend(
+                    _check_summary(
+                        label,
+                        table,
+                        document,
+                        summary_codes(document, _registry(root), shown),
+                    )
+                )
 
     for problem in problems.values():
         suite_label = f"docs/orgmode/generated/suites/{problem['suite']}.org"

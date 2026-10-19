@@ -833,7 +833,15 @@ def _benchmark_index() -> dict[str, dict]:
         "benchmarks.bench_ase_sella",
         "benchmarks.bench_rgsaddle",
         "benchmarks.bench_pygsm",
+        "benchmarks.bench_geodesic",
+        "benchmarks.bench_airss",
+        "benchmarks.bench_softsaddle",
+        "benchmarks.bench_lammpsneb",
         "benchmarks.bench_noise",
+        "benchmarks.bench_gmin",
+        "benchmarks.bench_vcsqnm",
+        "benchmarks.bench_pele",
+        "benchmarks.bench_optking",
         "benchmarks.bench_torchsim",
         "benchmarks.quadratic",
     )
@@ -1300,16 +1308,18 @@ def _show_per_image(problem: dict) -> bool:
 
 
 def _headers(problem: dict) -> list[str]:
+    # The ranked table and the headline table list the current version only.
+    # Older versions stay in the history list, so a Current column is yes on
+    # every ranked row. The Wilson interval is one cell, low then high.
+    # Two separate columns push the minimization page over the DOM budget.
     headers = [
         "Template",
         "Version",
         "Commit",
         "Source",
-        "Current",
         "PAR-2",
         "Success",
-        "Wilson low",
-        "Wilson high",
+        "Wilson",
         "Median calls",
         "Mean calls",
     ]
@@ -1323,17 +1333,21 @@ def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
     """Visible ranked-table cells, in column order.
 
     The site check compares these strings with the rendered table.
+    The current flag stays on the board document. Every ranked row is
+    the newest full version of its template, and the paragraph above
+    the table already says so.
     """
     cells = [
         ("template", str(row.get("template") or row.get("entry") or "")),
         ("version", f"{row.get('code') or ''} {row.get('code_version') or ''}"),
         ("commit", str(row.get("commit") or "")[:12]),
         ("source", str(row.get("source") or "")),
-        ("current", "yes" if row.get("current") else "no"),
         ("par2_mean", _format_number(row.get("par2_mean"))),
         ("success_rate", _format_number(row.get("success_rate"))),
-        ("wilson_low", _format_number(row.get("wilson_low"))),
-        ("wilson_high", _format_number(row.get("wilson_high"))),
+        (
+            "wilson",
+            f"{_format_number(row.get('wilson_low'))}–{_format_number(row.get('wilson_high'))}",
+        ),
         ("median_calls", _format_number(row.get("median_calls"))),
         ("mean_calls", _format_number(row.get("mean_calls"))),
     ]
@@ -1443,10 +1457,21 @@ def _problem_order(problem: dict) -> tuple:
     return (index, ident.lower())
 
 
-def summary_codes(document: dict, registry: list[dict]) -> list[str]:
-    """Codes that have a full ranked run, in registry order, then any extras."""
+def summary_codes(
+    document: dict,
+    registry: list[dict],
+    problem_ids: set[str] | None = None,
+) -> list[str]:
+    """Codes that have a full ranked run, in registry order, then any extras.
+
+    ``problem_ids`` limits the scan to the problems in one table. The board
+    summary covers every problem. A suite page covers that suite, so a code
+    with no ranked row there does not take a column of dashes.
+    """
     present: set[str] = set()
-    for problem in (document.get("problems") or {}).values():
+    for problem_id, problem in (document.get("problems") or {}).items():
+        if problem_ids is not None and problem_id not in problem_ids:
+            continue
         for row in problem.get("ranked") or []:
             code = str(row.get("code") or "").strip()
             if code:
@@ -1516,7 +1541,7 @@ def summary_table(problems: list[dict], codes: list[str], link) -> str:
             par2 = dict(ranked_cells(row, False))["par2_mean"]
             lines.append(
                 f'<td data-code="{_cell(code)}" data-template="{_cell(template)}" data-par2="{_cell(par2)}">'
-                f'<span class="bench-score">{_cell(par2)}</span>'
+                f"{_cell(par2)}"
                 f'<a href="{_cell(detail)}">{_cell(template)}</a>'
                 "</td>"
             )

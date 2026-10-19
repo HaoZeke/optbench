@@ -18,11 +18,12 @@ ini does not set ``parallel``: the Python schema rejects the option and
 exits before the first search. Those jobs keep the client default. The
 harness still counts every ``force()``. ``sad-fcs`` plus ``mins-fcs``
 starts after the reactant evaluation, one real force call per search.
-``python -m optbench.extpot`` forwards each ``force()`` to a
-``PotServer`` in this process. The server refuses a search call at
-``failure_cap`` before the potential runs, and that run is ``cap``. The
-client's ``total_force_calls`` is stored beside the harness count. The
-binary is the develop source build named by ``EONCLIENT``
+A native bridge forwards each call to a ``PotServer`` in this process,
+and ``python -m optbench.extpot`` does that when the bridge is not built.
+The server refuses a search call at ``failure_cap`` before the potential
+runs, and that run is ``cap``. The client's ``total_force_calls`` is
+stored beside the harness count and is not the track. The binary is the
+develop source build named by ``EONCLIENT``
 (commit 7095b23ac17d49f434a5e08ccb072897ceca698e). The conda-forge 3.5.0
 pin is a different environment.
 
@@ -56,6 +57,11 @@ EON_VERSION_TOKEN = "7095b23"
 MORSE_D = 0.7102
 MORSE_A = 1.6047
 MORSE_RE = 2.897
+# rgpot MorsePot defaults. eOn ``morse_pt`` is that kernel: cutoff 9.5,
+# energy shifted so a pair at the cutoff is zero, no quintic switch.
+MORSE_CUTOFF = 9.5
+_MORSE_GAP_CUT = 1.0 - math.exp(-MORSE_A * (MORSE_CUTOFF - MORSE_RE))
+MORSE_SHIFT = MORSE_D * _MORSE_GAP_CUT * _MORSE_GAP_CUT - MORSE_D
 _CACHE = Path(os.environ.get("OPTBENCH_ASV_CACHE", "/tmp/optbench-asv"))
 _CLIENT_OK = False
 
@@ -65,25 +71,78 @@ def full_grid() -> bool:
 
 
 def selected(values: list) -> list:
-    """Import-time parameter slice. One entry unless the full flag is set."""
-    if full_grid():
-        return list(values)
-    return list(values[:1])
+    """Import-time parameter slice. One entry unless the full flag is set.
 
-
-def morse_cluster(positions, atomic_numbers=None, box=None):
-    """Pair Morse used by eOn ``morse_pt`` (D, a, r_e) = (0.7102, 1.6047, 2.897).
-
-    Energy is ``D (1 - exp(-a (r - r_e)))^2``. The returned forces are
-    the negative gradient. There is no cutoff. The box is ignored.
+    ``OPTBENCH_ASV_SLICE=worker/count`` strides an axis that already has
+    more than one entry. A length-1 axis is left whole, so the only seed
+    or the only start stays on every worker.
     """
-    del atomic_numbers, box
+    if full_grid():
+        chosen = list(values)
+    else:
+        chosen = list(values[:1])
+    spec = os.environ.get("OPTBENCH_ASV_SLICE", "")
+    if not spec or len(chosen) <= 1:
+        return chosen
+    worker_text, count_text = spec.split("/")
+    worker = int(worker_text)
+    count = int(count_text)
+    if count <= 0 or worker < 0 or worker >= count:
+        raise ValueError(f"OPTBENCH_ASV_SLICE must be worker/count, got {spec}")
+    return chosen[worker::count]
+
+
+def _morse_lengths(box) -> tuple[float, float, float] | None:
+    """Orthogonal periodic widths, or ``None`` for a free cluster.
+
+    eOn writes the cell column-major, which is how ``read_extpot`` stores
+    the nine floats. A zero cell is the non-periodic box ``Matter`` hands
+    a potential. Widths sit on the diagonal (indices 0, 4, 8), the same
+    places rgpot reads for an orthorhombic cell.
+    """
+    if box is None:
+        return None
+    vals = [float(value) for value in box]
+    if len(vals) != 9:
+        raise ValueError("box is nine floats")
+    if all(value == 0.0 for value in vals):
+        return None
+    off = (vals[1], vals[2], vals[3], vals[5], vals[6], vals[7])
+    if any(value != 0.0 for value in off):
+        raise ValueError("morse_pt minimum image is implemented for an orthogonal cell")
+    lengths = (vals[0], vals[4], vals[8])
+    if any(length <= 0.0 for length in lengths):
+        raise ValueError("morse_pt box lengths must be positive")
+    return lengths
+
+
+def _morse_fold(delta: float, length: float) -> float:
+    """Nearest image. Half-integers round away from zero, as rgpot ``visit_round``."""
+    scaled = delta / length
+    image = float(int(scaled + math.copysign(0.5, scaled)))
+    return delta - length * image
+
+
+def _morse_python(positions, atomic_numbers=None, box=None):
+    """Pair Morse used by eOn ``morse_pt``, the rgpot ``MorsePot`` defaults.
+
+    ``(D, a, r_e, cutoff)`` = (0.7102, 1.6047, 2.897, 9.5). The pair energy
+    is ``D (1 - exp(-a (r - r_e)))^2 - D``, shifted so the cutoff is zero.
+    Pairs at or beyond the cutoff are left out. A non-zero orthogonal box
+    is periodic in all three directions and uses the minimum image. A
+    missing or zero box is a free cluster, which is what eOn passes when
+    periodic boundaries are off.
+    """
+    del atomic_numbers
     count = len(positions)
     if count % 3 != 0:
         raise ValueError("positions must be x, y, z triples")
     atoms = count // 3
+    lengths = _morse_lengths(box)
+    cutoff2 = MORSE_CUTOFF * MORSE_CUTOFF
     forces = [0.0] * count
     energy = 0.0
+    two_de_a = 2.0 * MORSE_D * MORSE_A
     for i in range(atoms):
         ix = 3 * i
         for j in range(i + 1, atoms):
@@ -91,15 +150,17 @@ def morse_cluster(positions, atomic_numbers=None, box=None):
             dx = float(positions[ix]) - float(positions[jx])
             dy = float(positions[ix + 1]) - float(positions[jx + 1])
             dz = float(positions[ix + 2]) - float(positions[jx + 2])
+            if lengths is not None:
+                dx = _morse_fold(dx, lengths[0])
+                dy = _morse_fold(dy, lengths[1])
+                dz = _morse_fold(dz, lengths[2])
             r2 = dx * dx + dy * dy + dz * dz
-            if r2 <= 0.0:
+            if r2 <= 0.0 or r2 > cutoff2:
                 continue
             r = math.sqrt(r2)
-            e1 = math.exp(-MORSE_A * (r - MORSE_RE))
-            gap = 1.0 - e1
-            energy += MORSE_D * gap * gap
-            dv_dr = 2.0 * MORSE_D * MORSE_A * (e1 - e1 * e1)
-            scale = -dv_dr / r
+            gap = 1.0 - math.exp(-MORSE_A * (r - MORSE_RE))
+            energy += MORSE_D * gap * gap - MORSE_D - MORSE_SHIFT
+            scale = two_de_a * gap * (gap - 1.0) / r
             fx = scale * dx
             fy = scale * dy
             fz = scale * dz
@@ -112,7 +173,19 @@ def morse_cluster(positions, atomic_numbers=None, box=None):
     return energy, tuple(forces)
 
 
-def lj_cut(positions, atomic_numbers=None, box=None, *, epsilon=1.0, sigma=1.0, cutoff=40.0):
+def morse_cluster(positions, atomic_numbers=None, box=None):
+    """``morse_pt`` energy and forces. The native kernel matches ``_morse_python``."""
+    if os.environ.get("OPTBENCH_FASTPOT") != "0":
+        from optbench.fastpot import morse_forces
+
+        lengths = _morse_lengths(box)
+        got = morse_forces(positions, lengths, MORSE_D, MORSE_A, MORSE_RE, MORSE_CUTOFF, MORSE_SHIFT)
+        if got is not None:
+            return got
+    return _morse_python(positions, atomic_numbers, box)
+
+
+def _lj_cut_python(positions, atomic_numbers=None, box=None, *, epsilon=1.0, sigma=1.0, cutoff=40.0):
     """Unshifted Lennard-Jones, the archived ``pair_style lj/cut`` kernel.
 
     ``in.lammps`` sets ``lj/cut/opt`` with cutoff 40 and ``pair_coeff * * 1 1``.
@@ -156,6 +229,17 @@ def lj_cut(positions, atomic_numbers=None, box=None, *, epsilon=1.0, sigma=1.0, 
             forces[jx + 1] -= fy
             forces[jx + 2] -= fz
     return energy, tuple(forces)
+
+
+def lj_cut(positions, atomic_numbers=None, box=None, *, epsilon=1.0, sigma=1.0, cutoff=40.0):
+    """``lj/cut`` energy and forces. The native kernel matches ``_lj_cut_python``."""
+    if os.environ.get("OPTBENCH_FASTPOT") != "0":
+        from optbench.fastpot import lj_cut_forces
+
+        got = lj_cut_forces(positions, epsilon, sigma, cutoff)
+        if got is not None:
+            return got
+    return _lj_cut_python(positions, atomic_numbers, box, epsilon=epsilon, sigma=sigma, cutoff=cutoff)
 
 
 def lammps_lj_params(path: Path) -> tuple[float, float, float]:
@@ -262,6 +346,16 @@ def _evaluate(potential: str):
 
 
 def _write_wrapper(path: Path) -> None:
+    from optbench.fastpot import bridge_executable
+
+    binary = bridge_executable()
+    if binary is not None:
+        try:
+            path.unlink()
+        except FileNotFoundError:
+            pass
+        path.symlink_to(binary)
+        return
     path.write_text(
         "#!/usr/bin/env python3\n"
         "import os\n"
@@ -426,6 +520,18 @@ def _client_files(kind: str, start: str, work: Path):
             work / "product.con",
         )
         return [(str(reactant), "reactant.con"), (str(product), "product.con")], []
+    if kind == "neb-pt":
+        from optbench.eon_jobs import _extract as _unpack
+
+        unpacked = _unpack(
+            _stored(ROOT, "website/neb/Pt-heptamer/eon-lbfgs/minima.tgz"),
+            work / "unpacked",
+        )
+        src = unpacked / "minima" / start
+        return (
+            [(str(src / "a.con"), "reactant.con"), (str(src / "b.con"), "product.con")],
+            [],
+        )
     if kind == "de-2ts":
         from optbench.eon_parse import xyz_to_con
 
@@ -573,6 +679,7 @@ def run_case(template_name: str, kind: str, seed: int, start: str, *, passes: in
                 record = _run_akmc(template, seed, work, server, wrapper, cap, passes, workers)
             else:
                 copies, texts = _client_files(kind, start, work)
+                count_key = "force_calls_neb" if kind == "neb-pt" else "total_force_calls"
                 found = _execute(
                     (
                         _client(),
@@ -580,7 +687,7 @@ def run_case(template_name: str, kind: str, seed: int, start: str, *, passes: in
                         str(work / "run"),
                         copies,
                         texts,
-                        "total_force_calls",
+                        count_key,
                     )
                 )
                 calls, _verify = remote_count(server.host, server.port)
@@ -718,26 +825,48 @@ def _specs() -> list[dict]:
     workers = min(8, os.cpu_count() or 1)
     rows = [
         ("EonDevelopTsLj38Lanczos", "eon/develop-ts-lj38-lanczos", "ts-lj38", ["1"], lj, 900),
-        ("EonDevelopTsLj38Dimer", "eon/develop-ts-lj38-dimer", "ts-lj38", ["1"], lj, 900),
+        ("EonDevelopTsLj38Dimer", "eon/develop-ts-lj38-dimer-accept-energy", "ts-lj38", ["1"], lj, 900),
+        ("EonDevelopTsLj38DimerMatched", "eon/develop-ts-lj38-dimer", "ts-lj38", ["1"], lj, 900),
         ("EonDevelopTsPtLanczos", "eon/develop-ts-pt-lanczos", "ts-pt", ["1"], [f"initial_{i}" for i in range(49)], 1800),
-        ("EonDevelopTsPtDimer", "eon/develop-ts-pt-dimer", "ts-pt", ["1"], [f"initial_{i}" for i in range(49)], 1800),
+        ("EonDevelopTsPtDimer", "eon/develop-ts-pt-dimer-accept-energy", "ts-pt", ["1"], [f"initial_{i}" for i in range(49)], 1800),
+        ("EonDevelopTsPtDimerMatched", "eon/develop-ts-pt-dimer", "ts-pt", ["1"], [f"initial_{i}" for i in range(49)], 1800),
+        (
+            "EonDevelopNebPtLbfgs",
+            "eon/neb-pt-lbfgs",
+            "neb-pt",
+            ["1"],
+            [f"min{i:02d}" for i in range(1, 14)],
+            3600,
+        ),
+        (
+            "EonDevelopNebPtLbfgsM100",
+            "eon/neb-pt-lbfgs-m100",
+            "neb-pt",
+            ["1"],
+            [f"min{i:02d}" for i in range(1, 14)],
+            3600,
+        ),
         ("EonDevelopDeLj38Ew", "eon/develop-de-lj38-ew", "de-lj38", ["1"], [f"pair_{i:02d}" for i in range(50)], 3600),
         ("EonDevelopDeLj38Oci", "eon/develop-de-lj38-oci", "de-lj38", ["1"], [f"pair_{i:02d}" for i in range(50)], 3600),
-        ("EonDevelopDeLj38Cap", "eon/develop-de-lj38-cap", "de-lj38", ["1"], [f"pair_{i:02d}" for i in range(50)], 7200),
+        ("EonDevelopDeLj38Cap", "eon/develop-de-lj38-cap-accept-energy", "de-lj38", ["1"], [f"pair_{i:02d}" for i in range(50)], 7200),
+        ("EonDevelopDeLj38CapMatched", "eon/develop-de-lj38-cap", "de-lj38", ["1"], [f"pair_{i:02d}" for i in range(50)], 7200),
         ("EonDevelopDePtEw", "eon/develop-de-pt-ew", "de-pt", ["1"], [f"product_{i}" for i in range(59)], 3600),
         ("EonDevelopDePtOci", "eon/develop-de-pt-oci", "de-pt", ["1"], [f"product_{i}" for i in range(59)], 3600),
-        ("EonDevelopDe2ts", "eon/develop-de-2ts", "de-2ts", ["1"], [f"pair_{i:02d}" for i in range(51)], 3600),
+        ("EonDevelopDe2ts", "eon/develop-de-2ts-accept-energy", "de-2ts", ["1"], [f"pair_{i:02d}" for i in range(51)], 3600),
+        ("EonDevelopDe2tsMatched", "eon/develop-de-2ts", "de-2ts", ["1"], [f"pair_{i:02d}" for i in range(51)], 3600),
         ("EonDevelopDe2tsOci", "eon/develop-de-2ts-oci", "de-2ts", ["1"], [f"pair_{i:02d}" for i in range(51)], 3600),
         ("EonDevelopDe2tsEw", "eon/develop-de-2ts-ew", "de-2ts", ["1"], [f"pair_{i:02d}" for i in range(51)], 3600),
         ("EonDevelopLowLj38Dimer", "eon/develop-low-lj38-dimer", "lowest", ["1"], lj, 1800),
         ("EonDevelopLowLj38Lanczos", "eon/develop-low-lj38-lanczos", "lowest", ["1"], lj, 1800),
+        # Asv bound for one repetition, not the problem cap. pass_limit is
+        # what stops a search that has not reached 27 saddles.
         (
             "EonDevelopSaddlePtDimer",
             "eon/develop-saddle-pt-dimer",
             "akmc",
             [str(seed) for seed in range(1000, 1010)],
             ["pt-island"],
-            7200,
+            21600,
         ),
         (
             "EonDevelopSaddlePtLanczos",
@@ -745,7 +874,7 @@ def _specs() -> list[dict]:
             "akmc",
             ["1000", "1001"],
             ["pt-island"],
-            7200,
+            21600,
         ),
     ]
     specs = []
@@ -766,6 +895,8 @@ def _specs() -> list[dict]:
         }
         if kind == "akmc":
             spec["passes"] = _akmc_passes(int(template.get("pass_limit", 1)))
+        if not spec["seeds"] or not spec["starts"]:
+            continue
         specs.append(spec)
     return specs
 

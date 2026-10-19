@@ -1,10 +1,24 @@
+import math
 import os
+import tarfile
+from pathlib import Path
 
 import pytest
 
 from benchmarks.bench_eon_develop import (
+    MORSE_A,
+    MORSE_CUTOFF,
+    MORSE_D,
+    MORSE_RE,
+    MORSE_SHIFT,
     EonDevelopDe2ts,
+    EonDevelopDe2tsMatched,
     EonDevelopDeLj38Cap,
+    EonDevelopDeLj38CapMatched,
+    EonDevelopTsLj38Dimer,
+    EonDevelopTsLj38DimerMatched,
+    EonDevelopTsPtDimer,
+    EonDevelopTsPtDimerMatched,
     EonDevelopSaddlePtDimer,
     EonDevelopSaddlePtLanczos,
     EonDevelopTsLj38Lanczos,
@@ -17,6 +31,7 @@ from benchmarks.bench_eon_develop import (
     morse_cluster,
     selected,
 )
+from optbench.eon_jobs import _stored
 from optbench.asv_tracks import TrackedSearch as _TrackedSearch
 from optbench.counter import HarnessCounter
 
@@ -62,6 +77,9 @@ def test_default_grid_is_one_real_start():
 def test_full_grid_follows_the_environment(monkeypatch):
     monkeypatch.setenv("OPTBENCH_ASV_FULL", "1")
     assert selected(["0000", "0001"]) == ["0000", "0001"]
+    monkeypatch.setenv("OPTBENCH_ASV_SLICE", "1/8")
+    assert selected(["only"]) == ["only"]
+    assert selected([f"{i:04d}" for i in range(16)]) == ["0001", "0009"]
 
 
 def test_failure_classes_follow_the_harness_order():
@@ -85,6 +103,19 @@ def test_failure_classes_follow_the_harness_order():
     assert spent["force_calls"] == 2500
     assert classify_client(calls=2499, reason=None, cap=2500)["failure"] == "crash"
     assert EonDevelopDeLj38Cap.cap == 2500
+    assert EonDevelopDeLj38Cap.template_name == "eon/develop-de-lj38-cap-accept-energy"
+    assert EonDevelopDeLj38CapMatched.template_name == "eon/develop-de-lj38-cap"
+    assert EonDevelopDeLj38CapMatched.cap == 2500
+    assert EonDevelopTsLj38Dimer.template_name == "eon/develop-ts-lj38-dimer-accept-energy"
+    assert EonDevelopTsLj38DimerMatched.template_name == "eon/develop-ts-lj38-dimer"
+    assert EonDevelopTsPtDimer.template_name == "eon/develop-ts-pt-dimer-accept-energy"
+    assert EonDevelopTsPtDimerMatched.template_name == "eon/develop-ts-pt-dimer"
+    assert EonDevelopDe2ts.template_name == "eon/develop-de-2ts-accept-energy"
+    assert EonDevelopDe2tsMatched.template_name == "eon/develop-de-2ts"
+    assert len(EonDevelopTsLj38DimerMatched.campaign_starts) == 200
+    assert len(EonDevelopTsPtDimerMatched.campaign_starts) == 49
+    assert len(EonDevelopDeLj38CapMatched.campaign_starts) == 50
+    assert len(EonDevelopDe2tsMatched.campaign_starts) == 51
 
 
 def test_ext_pot_ini_uses_one_potential(tmp_path):
@@ -136,13 +167,73 @@ def test_reactant_prefetch_is_one_force_call_per_search():
     assert counter.calls - window == searches
 
 
+def _pair_energy(distance: float) -> float:
+    gap = 1.0 - math.exp(-MORSE_A * (distance - MORSE_RE))
+    return MORSE_D * gap * gap - MORSE_D - MORSE_SHIFT
+
+
 def test_morse_and_lj_cut_kernels():
-    energy, forces = morse_cluster([0.0, 0.0, 0.0, 2.897, 0.0, 0.0])
-    assert energy == pytest.approx(0.0, abs=1e-12)
+    energy, forces = morse_cluster([0.0, 0.0, 0.0, MORSE_RE, 0.0, 0.0])
+    assert energy == pytest.approx(_pair_energy(MORSE_RE), abs=1e-12)
+    assert energy == pytest.approx(-MORSE_D * (1.0 - math.exp(-MORSE_A * (MORSE_CUTOFF - MORSE_RE))) ** 2)
     assert forces == pytest.approx([0.0] * 6, abs=1e-8)
+    beyond, beyond_forces = morse_cluster([0.0, 0.0, 0.0, MORSE_CUTOFF + 0.1, 0.0, 0.0])
+    assert beyond == 0.0
+    assert beyond_forces == pytest.approx([0.0] * 6)
+    # The long separation is outside the cutoff. The periodic image is not.
+    side = 12.0
+    box = [side, 0.0, 0.0, 0.0, side, 0.0, 0.0, 0.0, side]
+    wrapped = side - 1.5
+    energy, forces = morse_cluster([0.0, 0.0, 0.0, wrapped, 0.0, 0.0], box=box)
+    direct, direct_forces = morse_cluster([0.0, 0.0, 0.0, 1.5, 0.0, 0.0])
+    assert energy == pytest.approx(direct)
+    assert forces[0] == pytest.approx(-direct_forces[0])
+    assert abs(forces[0]) > 1.0
     distance = 2.0 ** (1.0 / 6.0)
     energy, forces = lj_cut([0.0, 0.0, 0.0, distance, 0.0, 0.0])
     assert energy == pytest.approx(-1.0, abs=1e-8)
     assert forces == pytest.approx([0.0] * 6, abs=1e-6)
     far, _forces = lj_cut([0.0, 0.0, 0.0, 40.0, 0.0, 0.0])
     assert far == 0.0
+
+
+def test_pt_island_reactant_is_a_morse_minimum():
+    """The archived reactant is a minimum only with the cutoff and the cell.
+
+    ``morse_pt`` is periodic. Dropping the 9.5 Å cutoff and the minimum
+    image leaves free-atom forces near 1 eV/Å, and the dimer and Lanczos
+    searches then stop as divergence after a few dozen calls.
+    """
+    archive = _stored(
+        Path(__file__).resolve().parents[1],
+        "website/tsopt/pt-island/pt-island-con.tgz",
+    )
+    with tarfile.open(archive) as packed:
+        text = packed.extractfile("pt-island-con/reactant.con").read().decode()
+    lines = [line for line in text.splitlines() if line.strip()]
+    lengths = [float(part) for part in lines[2].split()]
+    box = [lengths[0], 0.0, 0.0, 0.0, lengths[1], 0.0, 0.0, 0.0, lengths[2]]
+    start = next(i for i, line in enumerate(lines) if line.lower().startswith("coordinates"))
+    positions: list[float] = []
+    free: list[bool] = []
+    for line in lines[start + 1 :]:
+        parts = line.split()
+        if len(parts) < 5:
+            break
+        positions.extend(float(part) for part in parts[:3])
+        free.append(int(float(parts[3])) == 0)
+    _energy, forces = morse_cluster(positions, box=box)
+    _bare, bare = morse_cluster(positions)
+
+    def max_free(values: tuple[float, ...]) -> float:
+        highest = 0.0
+        for index, is_free in enumerate(free):
+            if not is_free:
+                continue
+            base = 3 * index
+            norm = math.sqrt(sum(values[base + axis] ** 2 for axis in range(3)))
+            highest = max(highest, norm)
+        return highest
+
+    assert max_free(forces) < 1.0e-4
+    assert max_free(bare) > 0.1

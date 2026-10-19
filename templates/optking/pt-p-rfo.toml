@@ -1,0 +1,35 @@
+id = "optking/pt-p-rfo"
+engine = "optking"
+problem = "tsopt/pt-island"
+code = "optking"
+code_version = "0.5.1.dev2+g767e2c0c1"
+commit = "767e2c0c13ff2b851ac82101ccd5aab9a558a4f1"
+algorithm = "P_RFO"
+tuning = "default"
+reducer = "all"
+ranked = true
+note = "OptKing transition-state step P_RFO in Cartesian coordinates on the free Pt atoms. The potential is the smooth-linear Morse of the problem file, with the frozen substrate held in place. full_hess_every is 0, so the first Hessian is computed and later steps use the Bofill update. The field default of full_hess_every is -1, a model Hessian and no harness Hessian. This revision has no step type named RS_PRFO. The initial Hessian is a central difference of the harness gradient on the free atoms, step 1e-5, and those evaluations are force calls. The stop is the problem Euclidean force norm 0.001. The force-call cap is 10000."
+
+[optking]
+step_type = "P_RFO"
+opt_coordinates = "CARTESIAN"
+full_hess_every = 0
+fd_step = 1.0e-5
+
+[potential]
+kind = "morse"
+D = 0.7102
+alpha = 1.6047
+r0 = 2.897
+rc = 9.5
+form = "smooth"
+pbc = [true, true, false]
+
+[stop]
+norm = "l2"
+force_norm = 0.001
+max_force_calls = 10000
+
+[input]
+archive_path = "website/tsopt/pt-island/pt-island-con.tgz"
+select = "initial"

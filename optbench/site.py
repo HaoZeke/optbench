@@ -101,6 +101,22 @@ def _bits(problem: dict) -> list[tuple[str, str]]:
     sample = problem.get("sample") or {}
     if sample.get("starts"):
         bits.append(("Starts", str(sample["starts"])))
+    potential = problem.get("potential") or {}
+    if potential.get("kind"):
+        label = str(potential["kind"])
+        if potential.get("name"):
+            label = f"{label} ({potential['name']})"
+        bits.append(("Potential", label))
+    thermal = problem.get("thermal") or {}
+    if thermal.get("temperature_K") is not None:
+        bits.append(("Temperature", f"{thermal['temperature_K']} K"))
+    reference = problem.get("reference") or {}
+    if reference.get("true_rate") is not None:
+        bits.append(("Reference rate", f"{float(reference['true_rate']):.6g} per second"))
+    if sample.get("products"):
+        bits.append(("Products", str(sample["products"])))
+    if sample.get("repetitions"):
+        bits.append(("Repetitions", str(sample["repetitions"])))
     scoring = problem.get("scoring") or {}
     archive = scoring.get("archive") or {}
     if archive.get("failure"):
@@ -630,15 +646,19 @@ def render(root: Path) -> None:
 
     suite_dir = root / "docs" / "orgmode" / "generated" / "suites"
     suite_dir.mkdir(parents=True, exist_ok=True)
-    codes = summary_codes(document, _registry(root))
     for suite in order:
         group = by_suite.get(suite)
         if not group:
             continue
         sections: list[str] = []
         views = [_board_view(problem, document) for problem in _sorted_problems(group)]
+        suite_codes = summary_codes(
+            document,
+            _registry(root),
+            {str(view.get("id") or "") for view in views},
+        )
         sections.append('<section class="bench" id="summary">')
-        sections.append(summary_table(views, codes, _suite_problem_link))
+        sections.append(summary_table(views, suite_codes, _suite_problem_link))
         sections.append("</section>")
         for problem in sorted(group, key=lambda item: item["problem"].lower()):
             view = _board_view(problem, document)
