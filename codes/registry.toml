@@ -65,6 +65,16 @@ committed = "2026-10-15"
 note = "0.2.2 at main c0db2b8d. Band and min-mode sessions on this main. Stencil.band presets are not built here; the campaign calls the C band and min-mode API. OCI-NEB is CI-NEB followed by a min-mode refinement. Dimer, Lanczos, and P-RFO scores use this commit. Nonlinear CG is refused by check_force_driven; the min-mode translators are L-BFGS and FIRE."
 
 [[code]]
+id = "geodesic"
+name = "geodesic"
+role = "band initialiser"
+repository = "https://github.com/virtualzx-nad/geodesic-interpolate"
+ref = "main"
+commit = "476aa041f562d37d5fb4121b86817a52d75e4c5d"
+committed = "2026-06-01"
+note = "geodesic-interpolate 1.0.0 at 476aa041. This pin is the initial path for the ASE and rgsaddle NEB templates, an initialiser ablation. The smoother uses the package command-line defaults: scaling 1.7, distance cutoff 3, friction 0.01, tolerance 0.002, 15 iterations, and a sweep above 35 atoms. It does not evaluate the spec potential, so its steps are not force calls. The archive symbols A and Pt are absent from the radius table and use the library fallback radius 1.5."
+
+[[code]]
 id = "ase"
 name = "ASE"
 role = "minimization and saddle search"
@@ -83,6 +93,36 @@ ref = "2.6.0"
 commit = "6cfb60cdb100a146c3c6f0587d5308b247aa8010"
 committed = "2026-10-15"
 note = "Sella 2.6.0. Order 1 is a saddle and order 0 is a minimum. The Sella 0.1.1 rows on the 2014 tables are legacy and are not this pin. Force calls are harness calculator evaluations."
+
+[[code]]
+id = "gmin"
+name = "GMIN"
+role = "minimization"
+repository = "https://www-wales.ch.cam.ac.uk/svn.tar.bz2"
+ref = "svn.tar.bz2"
+commit = "df8da599267534fbe43a250e578f7396a7946311"
+committed = "2026-10-18"
+note = "Wales group GMIN. Tarball sha256 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f. SVNREV df8da599267534fbe43a250e578f7396a7946311, fetched 2026-10-18. The quench is source/mymylbfgs.F90. Keyword defaults are MUPDATE 4, DGUESS 0.1, MAXBFGS 0.4, and MAXERISE 1e-10. The RMS tolerance is the Euclidean force norm divided by sqrt(3N). The potential is the harness Lennard-Jones or Morse through POTENTIAL. Force calls are HarnessCounter entries."
+
+[[code]]
+id = "pele"
+name = "pele"
+role = "minimization"
+repository = "https://github.com/pele-python/pele"
+ref = "main"
+commit = "b7081b932a060be11342fbe8287ac35da8ada879"
+committed = "2026-10-12"
+note = "0.1.2 at main b7081b93, built from source. LBFGS and FIRE are the Python classes. MYLBFGS is the Fortran step update on that LBFGS. Steepest descent is the update in pele.optimize.steepest_descent. Campaigns call the harness Lennard-Jones or Morse potential. Force calls are harness entries to getEnergyGradient. The 2014 rows counted nfev on pele's own potential and stay on the archive table."
+
+[[code]]
+id = "optking"
+name = "OptKing"
+role = "transition-state search"
+repository = "https://github.com/psi-rking/optking"
+ref = "767e2c0c13ff2b851ac82101ccd5aab9a558a4f1"
+commit = "767e2c0c13ff2b851ac82101ccd5aab9a558a4f1"
+committed = "2026-10-13"
+note = "Geometry optimizer at 767e2c0c13ff2b851ac82101ccd5aab9a558a4f1. The version string is 0.5.1.dev2+g767e2c0c1. Transition-state steps on this revision are RS_I_RFO and P_RFO. RS_PRFO is a comment on the RFO base class and is not a step type. The Lennard-Jones 38 and Pt-island rows use Cartesian coordinates and one initial harness Hessian. A Hessian is the central difference of the harness gradient, and those evaluations are force calls."
 
 [[code]]
 id = "artn"
@@ -170,6 +210,46 @@ problem = "globalopt/lj75"
 profile = "default"
 task = "basin-hopping"
 ranked = true
+
+[[code]]
+id = "airss"
+name = "AIRSS"
+role = "random structure search"
+repository = "https://www.mtg.msm.cam.ac.uk/Codes/AIRSS"
+ref = "0.9.4"
+commit = "5593cc4ee360d998764fceb188284fdf0ef781d206754176dcb360c65103ddaa"
+committed = "2023-06"
+note = "Version 0.9.4, June 2023. The commit is the sha256 of https://www.mtg.msm.cam.ac.uk/files/airss-v0.9.4.tgz. buildcell from that tarball draws the cells. The scored relaxation is the pp3 two-point step on the harness Lennard-Jones potential."
+
+[[code]]
+id = "vcsqnm"
+name = "vc-SQNM"
+role = "minimization"
+repository = "https://github.com/moritzgubler/vc-sqnm"
+ref = "v1.3"
+commit = "4241692173cccb42a9ae05974bfd62285ec2cd7b"
+committed = "2025-03-28"
+note = "Tag v1.3. The Python distribution built from that commit reports version 1.2. Rows use that package: SQNM, vc-SQNM, and aseOptimizer. The C++ and Fortran mains call the Bazant potential and are not these scores. initial_step_size is -1e-7, alpha_min is 1e-3, and eps_subsp is 1e-5. The wrapper constructor uses -0.01 and eps_subsp 1e-3. Both of those leave some LJ38 starts outside the cutoff. Variable-cell rows are Morse bulk. The spec Lennard-Jones potential has no cell."
+
+[[code]]
+id = "softsaddle"
+name = "SoftSaddle"
+role = "saddle search"
+repository = "https://github.com/henkelmangroup/optbench"
+ref = "website/codes/softsaddle.tar.gz"
+commit = "5a00aeede06fd822ef302624ec4c9bc7889d21fc0b5804b701a5785695c68d16"
+committed = "2019-04-01"
+note = "April 2019 adaptive hypersphere with LBFGS memory 60, from softsaddle.tar.gz sha256 5a00aeed. Lanczos and Davidson are the bundled C++ solvers, built without the Morse library, and the harness potential supplies every gradient. Davidson keeps its 525-coordinate Pt minimum Hessian anchor and uses the current point for any other dimension. Saddle rows are one repetition of the sm50 Davidson walk and the sm0 and sm50 Lanczos walks, stopped at 27 connected saddles. Lowest-eigenvector rows repeat the same eigen-solver from the gradient until overlap 0.99."
+
+[[code]]
+id = "lammpsneb"
+name = "LAMMPS"
+role = "saddle search"
+repository = "https://github.com/lammps/lammps"
+ref = "stable_30Sep2026"
+commit = "8de817dd79bfe4525d5d39246a212d833e6dee07"
+committed = "2026-09-30"
+note = "LAMMPS 30 Sep 2026, tag stable_30Sep2026. Band rows use fix neb with a climbing stage and min_style quickmin or fire. The pair style is the spec potential: lj/cut 40 with no shift, and morse 9.5 with pair_modify shift yes. Kspring is 1.0 with the default parallel neigh spring. The timestep is the unit default. Force calls are pair computes summed across replicas. The FIRE row leaves one fifth of the cap unused so a velocity-reset evaluation stays inside the cap."
 
 [[code]]
 id = "nloptglobal"

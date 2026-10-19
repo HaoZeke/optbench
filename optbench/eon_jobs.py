@@ -583,20 +583,26 @@ JOBS = {
     "ts-pt-dimer-m100": ("eon/ts-pt-dimer-m100", run_ts_pt),
     "ts-lj38-lanczos": ("eon/develop-ts-lj38-lanczos", run_ts_lj38),
     "ts-lj38-dimer-develop": ("eon/develop-ts-lj38-dimer", run_ts_lj38),
+    "ts-lj38-dimer-develop-accept-energy": ("eon/develop-ts-lj38-dimer-accept-energy", run_ts_lj38),
     "ts-pt-lanczos": ("eon/develop-ts-pt-lanczos", run_ts_pt),
     "ts-pt-dimer-develop": ("eon/develop-ts-pt-dimer", run_ts_pt),
+    "ts-pt-dimer-develop-accept-energy": ("eon/develop-ts-pt-dimer-accept-energy", run_ts_pt),
     "de-lj38-ew": ("eon/develop-de-lj38-ew", run_de_lj38),
     "de-lj38-oci": ("eon/develop-de-lj38-oci", run_de_lj38),
     "de-lj38-cap": ("eon/develop-de-lj38-cap", run_de_lj38),
+    "de-lj38-cap-accept-energy": ("eon/develop-de-lj38-cap-accept-energy", run_de_lj38),
     "de-pt-ew": ("eon/develop-de-pt-ew", run_de_pt),
     "de-pt-oci": ("eon/develop-de-pt-oci", run_de_pt),
     "de-2ts": ("eon/develop-de-2ts", run_de_2ts),
+    "de-2ts-accept-energy": ("eon/develop-de-2ts-accept-energy", run_de_2ts),
     "de-2ts-oci": ("eon/develop-de-2ts-oci", run_de_2ts),
     "de-2ts-ew": ("eon/develop-de-2ts-ew", run_de_2ts),
     "low-lj38-dimer": ("eon/develop-low-lj38-dimer", run_lowest),
     "low-lj38-lanczos": ("eon/develop-low-lj38-lanczos", run_lowest),
     "saddle-pt-dimer": ("eon/develop-saddle-pt-dimer", None),
     "saddle-pt-lanczos": ("eon/develop-saddle-pt-lanczos", None),
+    "aladatom-akmc": ("eon/aladatom-akmc", "amd"),
+    "standard-aladatom-akmc": ("eon/standard-aladatom-akmc", "amd"),
 }
 
 
@@ -619,6 +625,10 @@ def run_named(
         from .eon_akmc import run_saddle
 
         fn = run_saddle
+    elif fn == "amd":
+        from .eon_amd import run_amd
+
+        fn = run_amd
     if repetitions is None:
         summary = fn(root, template_name, client, output, scratch, workers)
     else:

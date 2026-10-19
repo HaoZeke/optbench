@@ -1,0 +1,40 @@
+force_calls 544
+force_calls_min 330
+force_calls_median 522
+force_calls_max 770
+nfailed 0
+force_calls_raw 544
+force_calls_per_image 68
+force_calls_per_image_min 41
+force_calls_per_image_max 96
+force_calls_per_image_median 65.25
+call_unit total
+starts 13
+code geodesic
+code_version 1.0.0
+commit 476aa041f562d37d5fb4121b86817a52d75e4c5d
+algorithm NEB-FIRE geodesic
+profile ablation
+template geodesic/ase-heptamer-default
+problem neb/Pt-heptamer
+counter harness
+reducer per_image
+parameter_source ablation
+method {"counter":"harness attach_ase_counter","parameter_source":"ablation","parameters":{"Nmin":5,"a":0.0941480149401,"astart":0.1,"climb":false,"downhill_check":false,"dt":0.09250312430322713,"dtmax":1.0,"fa":0.99,"fdec":0.5,"finc":1.1,"interpolate":"geodesic","maxstep":0.2,"method":"improvedtangent","moving_images":8,"spring":0.1},"potential":{"D":0.7102,"alpha":1.6047,"form":"shift","kind":"morse","pbc":[true,true,false],"r0":2.897,"rc":7.0},"profile":"ablation","reducer":"per_image","stop":{"force_norm":0.01,"max_force_calls":10000,"max_steps":10000,"norm":"fmax"}}
+note Initialiser ablation of ase/neb-pt-heptamer-default. The path is geodesic-interpolate 1.0.0 at 476aa041. Eight images, spring 0.1, climb off, and FIRE match that template. force_calls is the harness total across the 8 images. The force cap is the problem cap 10000. v2 success is the harness cap and the template fmax stop. The band has no reference saddle, so the Hessian and Kabsch RMSD are not applied.
+host cursor
+date 2026-10-18
+contributor Rohit Goswami
+scoring par2-wilson-bootstrap
+par2_mean 543.5384615
+par2_median 522
+par2_median_low 498
+par2_median_high 578
+par2_iqr 80
+success_rate 1
+wilson_low 0.7719046276
+wilson_high 1
+par_applied true
+par_factor 2
+bootstrap_resamples 2000
+bootstrap_seed 20261015
