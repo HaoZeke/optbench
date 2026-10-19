@@ -2,6 +2,7 @@ import tomllib
 from pathlib import Path
 
 from optbench.ase_catalog import OPTIMIZERS, all_specs, write_all
+from optbench.ase_sella import archive_failure_reasons
 from optbench.campaign import load_template
 from optbench.site import campaign_problem
 
@@ -47,6 +48,12 @@ def test_templates_match_the_catalog_and_registry():
         assert loaded["problem"] == spec["problem"]
         assert loaded["optimizer"]["name"]
         assert loaded["stop"]["max_force_calls"] > 0
+    precon = load_template(ROOT, "ase/lj38-preconlbfgs-tuned")
+    assert precon["archive_failure"] == "cap"
+    assert precon["stop"]["norm"] == "fmax"
+    assert archive_failure_reasons(["hessian_index"], "cap") == []
+    assert archive_failure_reasons(["cap", "hessian_index"], "cap") == ["cap"]
+    assert archive_failure_reasons(["hessian_index"], None) == ["hessian_index"]
     tuned = load_template(ROOT, "ase/lj38-lbfgs-tuned")
     assert tuned["optimizer"]["parameters"]["memory"] == 100
     assert abs(float(tuned["optimizer"]["parameters"]["alpha"]) - 1000.0) < 1e-9

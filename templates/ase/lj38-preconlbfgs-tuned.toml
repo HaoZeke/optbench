@@ -10,7 +10,8 @@ profile = "tuned"
 reducer = "capped"
 ranked = true
 parameter_source = "archive"
-note = "Archive minimization/lj38/ase-preconlbfgs/opt.py builds Exp with A 3 and PreconLBFGS maxstep 0.1, then stops on ASE fmax 0.01. The script uses a tsase LJ cutoff of 35. This row uses the harness cutoff 40."
+note = "Archive minimization/lj38/ase-preconlbfgs/opt.py builds Exp with A 3 and PreconLBFGS maxstep 0.1, then stops on ASE fmax 0.01. The script uses a tsase LJ cutoff of 35. This row uses the harness cutoff 40. Archive report.sh counts a failure only when a written total_force_calls is at least 10000."
+archive_failure = "cap"
 
 [optimizer]
 name = "PreconLBFGS"

@@ -1176,6 +1176,17 @@ def _run_dimer(payload: dict, bucket: CallCounter) -> dict:
     return row
 
 
+def archive_failure_reasons(reasons: list[str], rule: str | None) -> list[str]:
+    """Apply the archived report.sh failure rule.
+
+    ``cap`` drops a Hessian-index reason. The archive awk counts a start
+    as failed only when its written force-call total reaches the cap.
+    """
+    if rule != "cap":
+        return list(reasons)
+    return [reason for reason in reasons if reason != "hessian_index"]
+
+
 def _reason_list(row: dict, cap: int, tol: float) -> list[str]:
     reasons: list[str] = []
     if int(row.get("force_calls") or 0) >= cap or row.get("error") == "force-call cap":
@@ -1246,6 +1257,7 @@ def _run_start(payload: dict) -> dict:
     # NEB success is the band residual, not a Hessian index.
     if payload["task"] in {"neb", "sella-neb"}:
         reasons = [reason for reason in reasons if reason != "hessian_index"]
+    reasons = archive_failure_reasons(reasons, payload.get("archive_failure"))
     row["reasons"] = reasons
     row["success"] = not reasons
     row["failed"] = not row["success"]
@@ -1377,8 +1389,16 @@ def _write_dat(
         "potential": template.get("potential") or {},
         "stop": template.get("stop") or {},
     }
+    if template.get("archive_failure"):
+        method["archive_failure"] = template["archive_failure"]
     note = template.get("note", "")
-    if template["task"] in {"minimize", "sella", "sella-search", "dimer"}:
+    if template.get("archive_failure") == "cap":
+        note = (
+            note
+            + " The Hessian index is recorded after rigid modes are projected out and is not a failure."
+            + " Energy and Kabsch RMSD are not applied: these starts have no reference geometry."
+        ).strip()
+    elif template["task"] in {"minimize", "sella", "sella-search", "dimer"}:
         note = (
             note
             + " v2 success is the harness cap, the stop norm, and the Hessian index"
@@ -1508,6 +1528,7 @@ def run_template(
                 "norm": str(template["stop"].get("norm") or "l2"),
                 "max_steps": int(template["stop"]["max_steps"]),
                 "raw_cap": cap,
+                "archive_failure": template.get("archive_failure"),
                 "snapshot": False,
             }
         )
@@ -1625,6 +1646,7 @@ def run_point(root: Path, template_name: str, start: str, seed: int, *, cache: P
         "norm": str(template["stop"].get("norm") or "l2"),
         "max_steps": int(template["stop"]["max_steps"]),
         "raw_cap": raw_cap(template),
+        "archive_failure": template.get("archive_failure"),
         "snapshot": True,
     }
     started = time.perf_counter()

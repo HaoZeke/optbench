@@ -263,33 +263,41 @@ def _minimization_specs() -> list[dict]:
                 else:
                     params, source, note = _tuned_minimizer(problem, name)
                 row_stop = stop
+                archive_failure = None
                 if (
                     problem == "minimization/lj38"
                     and name == "PreconLBFGS"
                     and profile == "tuned"
                 ):
                     row_stop = {**stop, "norm": "fmax"}
-                specs.append(
-                    {
-                        "id": f"ase/{slug}-{_opt_slug(name)}-{profile}",
-                        "engine": "ase",
-                        "code": "ASE",
-                        "code_version": ASE_VERSION,
-                        "commit": ASE_COMMIT,
-                        "algorithm": name,
-                        "problem": problem,
-                        "task": "minimize",
-                        "profile": profile,
-                        "reducer": "capped",
-                        "ranked": True,
-                        "parameter_source": source,
-                        "note": note,
-                        "optimizer": {"name": name, "parameters": params},
-                        "potential": potential,
-                        "stop": row_stop,
-                        "input": {"archive_path": archive, "select": select},
-                    }
-                )
+                    # report.sh fails a start only when total_force_calls is at least 10000.
+                    archive_failure = "cap"
+                    note += (
+                        " Archive report.sh counts a failure only when a written"
+                        " total_force_calls is at least 10000."
+                    )
+                spec = {
+                    "id": f"ase/{slug}-{_opt_slug(name)}-{profile}",
+                    "engine": "ase",
+                    "code": "ASE",
+                    "code_version": ASE_VERSION,
+                    "commit": ASE_COMMIT,
+                    "algorithm": name,
+                    "problem": problem,
+                    "task": "minimize",
+                    "profile": profile,
+                    "reducer": "capped",
+                    "ranked": True,
+                    "parameter_source": source,
+                    "note": note,
+                    "optimizer": {"name": name, "parameters": params},
+                    "potential": potential,
+                    "stop": row_stop,
+                    "input": {"archive_path": archive, "select": select},
+                }
+                if archive_failure:
+                    spec["archive_failure"] = archive_failure
+                specs.append(spec)
         # Sella can minimize with order 0.
         for profile in ("default", "tuned"):
             if profile == "default":
@@ -798,6 +806,8 @@ def render_toml(spec: dict) -> str:
     )
     for key in scalars:
         lines.append(f"{key} = {_toml_scalar(spec[key])}")
+    if spec.get("archive_failure"):
+        lines.append(f"archive_failure = {_toml_scalar(spec['archive_failure'])}")
     lines.append("")
     _write_table(lines, "optimizer", spec["optimizer"])
     _write_table(lines, "potential", spec["potential"])

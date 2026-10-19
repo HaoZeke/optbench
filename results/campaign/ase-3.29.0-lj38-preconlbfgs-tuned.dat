@@ -1,8 +1,8 @@
-force_calls 2605
+force_calls 2602
 force_calls_min 499
 force_calls_median 2385.5
 force_calls_max 8717
-nfailed 10
+nfailed 0
 starts 1000
 code ASE
 code_version 3.29.0
@@ -14,20 +14,20 @@ problem minimization/lj38
 counter harness
 reducer capped
 parameter_source archive
-method {"counter":"harness attach_ase_counter","parameter_source":"archive","parameters":{"alpha":70.0,"c1":0.23,"c2":0.46,"damping":1.0,"maxstep":0.1,"memory":100,"precon":"Exp A=3.0","use_armijo":true,"variable_cell":false},"potential":{"epsilon":1.0,"kind":"lennard-jones","pbc":[false,false,false],"rc":40.0,"sigma":1.0},"profile":"tuned","reducer":"capped","stop":{"force_norm":0.01,"max_force_calls":10000,"max_steps":10000,"norm":"fmax"}}
-note Archive minimization/lj38/ase-preconlbfgs/opt.py builds Exp with A 3 and PreconLBFGS maxstep 0.1, then stops on ASE fmax 0.01. The script uses a tsase LJ cutoff of 35. This row uses the harness cutoff 40. v2 success is the harness cap, the stop norm, and the Hessian index (0 minimum, 1 saddle) after rigid modes are projected out when no atom is fixed. Energy and Kabsch RMSD are not applied: these starts have no reference geometry.
+method {"archive_failure":"cap","counter":"harness attach_ase_counter","parameter_source":"archive","parameters":{"alpha":70.0,"c1":0.23,"c2":0.46,"damping":1.0,"maxstep":0.1,"memory":100,"precon":"Exp A=3.0","use_armijo":true,"variable_cell":false},"potential":{"epsilon":1.0,"kind":"lennard-jones","pbc":[false,false,false],"rc":40.0,"sigma":1.0},"profile":"tuned","reducer":"capped","stop":{"force_norm":0.01,"max_force_calls":10000,"max_steps":10000,"norm":"fmax"}}
+note Archive minimization/lj38/ase-preconlbfgs/opt.py builds Exp with A 3 and PreconLBFGS maxstep 0.1, then stops on ASE fmax 0.01. The script uses a tsase LJ cutoff of 35. This row uses the harness cutoff 40. Archive report.sh counts a failure only when a written total_force_calls is at least 10000. The Hessian index is recorded after rigid modes are projected out and is not a failure. Energy and Kabsch RMSD are not applied: these starts have no reference geometry.
 host cursor
 date 2026-10-19
 contributor Rohit Goswami
 scoring par2-wilson-bootstrap
-par2_mean 2778.506
-par2_median 2413.5
-par2_median_low 2339.9875
-par2_median_high 2500
-par2_iqr 1433
-success_rate 0.99
-wilson_low 0.9816905311
-wilson_high 0.9945592456
+par2_mean 2602.016
+par2_median 2385.5
+par2_median_low 2320.9875
+par2_median_high 2491
+par2_iqr 1390.25
+success_rate 1
+wilson_low 0.9961732415
+wilson_high 1
 par_applied true
 par_factor 2
 bootstrap_resamples 2000
