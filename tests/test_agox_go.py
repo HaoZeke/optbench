@@ -32,11 +32,14 @@ def test_cambridge_coordinates_match_this_potential():
     assert float(np.linalg.norm(gradient75)) < 0.02
     problem = resolve_problem(ROOT, "globalopt/lj38")
     energy, source = reference_energy(ROOT, problem, 38)
-    assert source == "cambridge"
-    assert energy == pytest.approx(lj38)
+    assert source == "problem"
+    assert energy == pytest.approx(-173.928427)
     assert target_energy(problem, energy) == pytest.approx(energy + 0.001)
     lj75_problem = resolve_problem(ROOT, "globalopt/lj75")
-    assert target_energy(lj75_problem, energy) is None
+    energy75, source75 = reference_energy(ROOT, lj75_problem, 75)
+    assert source75 == "problem"
+    assert energy75 == pytest.approx(-397.492331)
+    assert target_energy(lj75_problem, energy75) == pytest.approx(energy75 + 0.001)
 
 
 def test_agox_templates_pin_the_registry_and_the_cap():
@@ -54,7 +57,8 @@ def test_agox_templates_pin_the_registry_and_the_cap():
         assert template["tuning"] == "default"
         assert template["agox"]["method"] in METHODS
         problem = resolve_problem(ROOT, template["problem"])
-        assert _check_stop(problem, template) == 500000
+        expected = 1000000 if template["problem"] == "globalopt/lj75" else 500000
+        assert _check_stop(problem, template) == expected
         seen.add((template["problem"], template["agox"]["method"]))
     for problem in ("globalopt/lj38", "globalopt/lj75"):
         for method in METHODS:

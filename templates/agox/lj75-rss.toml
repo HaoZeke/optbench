@@ -6,7 +6,7 @@ code_version = "3.11.2.dev2+g22d94a6fa"
 commit = "22d94a6fae8cf2d08d51ecc8b9291a47667aa95c"
 algorithm = "random structure search"
 tuning = "default"
-note = "Random structure search follows agox/lj38-rss. The confinement cube, archive, missing energy window, and cap are the same as agox/lj75-bh."
+note = "Random structure search follows agox/lj38-rss. The confinement cube, archive, success window, and cap are the same as agox/lj75-bh."
 
 [agox]
 method = "rss"
@@ -20,4 +20,4 @@ cell = 48.0
 confinement = 36.0
 
 [stop]
-max_force_calls = 500000
+max_force_calls = 1000000

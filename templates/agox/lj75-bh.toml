@@ -6,7 +6,7 @@ code_version = "3.11.2.dev2+g22d94a6fa"
 commit = "22d94a6fae8cf2d08d51ecc8b9291a47667aa95c"
 algorithm = "basin hopping"
 tuning = "default"
-note = "Basin hopping uses the same sampler, rattle, local optimizer, seed rule, and harness Lennard-Jones potential as agox/lj38-bh. The confinement cube is 36 Å inside a 48 Å cell. The problem file states no energy window and does not name an archive. Geometries come from website/globalopt/lj75/lj75_clusters.tgz in the input manifest. The run records the lowest energy and the calls at that energy. The force-call cap is 500000."
+note = "Basin hopping uses the same sampler, rattle, local optimizer, and seed rule as agox/lj38-bh. The confinement cube is 36 Å inside a 48 Å cell. The potential is the harness Lennard-Jones potential, cutoff 40, epsilon 1, sigma 1, no shift. Geometries come from the problem archive. A success is an energy at or below the problem reference -397.492331 plus 0.001. The force-call cap is 1000000."
 
 [agox]
 method = "basin_hopping"
@@ -20,4 +20,4 @@ cell = 48.0
 confinement = 36.0
 
 [stop]
-max_force_calls = 500000
+max_force_calls = 1000000
