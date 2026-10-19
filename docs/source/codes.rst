@@ -539,6 +539,12 @@ The number is written only after the run finishes under the problem rule.
    <td>6cfb60cdb100</td>
    <td><a href="https://github.com/zadorlab/sella">https://github.com/zadorlab/sella</a></td>
    </tr>
+   <tr>
+   <td>lowest eigenvector</td>
+   <td>0.1.1</td>
+   <td>0.1.1</td>
+   <td><a href="https://github.com/zadorlab/sella">https://github.com/zadorlab/sella</a></td>
+   </tr>
    </tbody></table></div>
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
@@ -575,6 +581,17 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="median_calls">374</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="lowest-eigenvector/lj38" data-template="sella-0.1.1/lj38-loweig">
+   <td>lj38</td>
+   <td data-field="template">sella-0.1.1/lj38-loweig</td>
+   <td data-field="version">Sella 0.1.1</td>
+   <td data-field="commit">0.1.1</td>
+   <td data-field="par2_mean">17.8</td>
+   <td data-field="mean_calls">17.8</td>
+   <td data-field="median_calls">17</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
    </tr>
    <tr data-problem="minimization/lj38" data-template="sella/lj38-min-tuned">
    <td>Lennard-Jones 38 clusters</td>
