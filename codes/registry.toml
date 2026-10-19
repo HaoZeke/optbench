@@ -85,6 +85,16 @@ committed = "2026-10-15"
 note = "Sella 2.6.0. Order 1 is a saddle and order 0 is a minimum. The Sella 0.1.1 rows on the 2014 tables are legacy and are not this pin. Force calls are harness calculator evaluations."
 
 [[code]]
+id = "pele"
+name = "pele"
+role = "minimization"
+repository = "https://github.com/pele-python/pele"
+ref = "main"
+commit = "b7081b932a060be11342fbe8287ac35da8ada879"
+committed = "2026-10-12"
+note = "0.1.2 at main b7081b93. FIRE is pele.optimize.Fire. The LJ38 archive row sets maxstep 0.1; the other FIRE parameters stay at the constructor values. Campaigns call the harness Lennard-Jones potential. One force call is one getEnergyGradient entry."
+
+[[code]]
 id = "artn"
 name = "pARTn"
 role = "saddle search"
