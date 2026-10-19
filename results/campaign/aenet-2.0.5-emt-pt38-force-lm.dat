@@ -1,0 +1,43 @@
+# counter harness. One call is one full-dataset loss and gradient.
+# An L-BFGS-B line-search request and an LM error retry each count.
+# A repeated weight vector is cached and is not counted again.
+# Success requires every parameter-tensor gradient L2 at or below the stop, with the call count under the cap.
+# pyamff 8037eb98 stopped on the max absolute entry of each tensor. This row uses the L2 test.
+# There is no weight-space Hessian, so wrong_stationary is unused.
+# mean_epoch is the half-even mean of the successful call counts.
+# RMSE means are arithmetic means of the successes. force_rmse is -1 when the force coefficient is 0.
+# Behler-Parrinello squared-error loss on the problem trajectory. Fingerprints come from the archived fpParas.dat. The network has hidden layers 10 and 7, tanh, and a linear output, with NoScaler. Each start is uniform[-1, 1) from PCG64(20261015 + index). One harness call is one full-dataset loss and gradient. The stop is the L2 norm of each parameter-tensor gradient. pyamff 8037eb98 used the max absolute entry. Levenberg-Marquardt uses learnrate 0.01, adjust 10, and one batch. A rising error retries at most five times, and each retry is a call. The energy coefficient is 1 and the force coefficient is 0.1. The stop is 0.1 and the cap is 30000.
+problem mlopt/emt-pt38
+mean_epoch 2270
+median_epoch 1437
+mean_energy_rmse 0.00141276426062
+median_energy_rmse 0.00139461150437
+mean_force_rmse 0.0674086500124
+median_force_rmse 0.0633250833875
+force_calls 2270
+force_calls_min 384
+force_calls_max 5737
+nfailed 0
+median 1437
+code aenet
+code_version 2.0.5
+commit 8f35990f5e3dd6cb296b953448cb11694d0cff3d
+algorithm LM
+template aenet/emt-pt38-force-lm
+tuning default
+counter harness
+par2_mean 2270.30769231
+wilson_low 0.771904627646
+wilson_high 1
+par2_median 1437
+par2_median_low 1019
+par2_median_high 2711
+v2_nfailed 0
+v2_successes 13
+n 13
+n_cap 0
+n_divergence 0
+n_crash 0
+n_wrong_stationary 0
+cap 30000
+partial true
