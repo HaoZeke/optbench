@@ -58,10 +58,8 @@
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
-   <h3>Partial</h3><ul>
-   <li>eon-client/htst-al-dimer-cg eOn campaign n=1, result file sets partial true.</li>
-   <li>eon-svn/htst-al-dimer-cg Eon svn campaign n=1, result file sets partial true.</li>
-   </ul>
+   <h3>Partial</h3>
+   <p>eon-client/htst-al-dimer-cg eOn campaign n=1, result file sets partial true. eon-svn/htst-al-dimer-cg Eon svn campaign n=1, result file sets partial true.</p>
    </details>
    </section><section class="bench bench-legacy-section" id="Al-legacy">
    <h3>Legacy 2014 archive</h3>
@@ -122,12 +120,8 @@
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
-   <h3>Partial</h3><ul>
-   <li>eon-client/htst-pt-dimer-lbfgs eOn campaign n=1, result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5).</li>
-   <li>eon-client/htst-pt-lanczos-lbfgs eOn campaign n=1, result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5).</li>
-   <li>eon-svn/htst-pt-dimer-lbfgs Eon svn campaign n=1, result file sets partial true.</li>
-   <li>eon-svn/htst-pt-lanczos-lbfgs Eon svn campaign n=1, result file sets partial true.</li>
-   </ul>
+   <h3>Partial</h3>
+   <p>eon-client/htst-pt-dimer-lbfgs eOn campaign n=1, result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5). eon-client/htst-pt-lanczos-lbfgs eOn campaign n=1, result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5). eon-svn/htst-pt-dimer-lbfgs Eon svn campaign n=1, result file sets partial true. eon-svn/htst-pt-lanczos-lbfgs Eon svn campaign n=1, result file sets partial true.</p>
    </details>
    </section><section class="bench bench-legacy-section" id="Pt-legacy">
    <h3>Legacy 2014 archive</h3>

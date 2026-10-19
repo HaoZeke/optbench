@@ -58,12 +58,8 @@
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
-   <h3>Partial</h3><ul>
-   <li>eon-client/amd-hyper eOn campaign n=1, result file sets partial true.</li>
-   <li>eon-client/amd-prd eOn campaign n=1, result file sets partial true.</li>
-   <li>eon-svn/amd-hyper Eon svn campaign n=1, result file sets partial true.</li>
-   <li>eon-svn/amd-prd Eon svn campaign n=1, result file sets partial true.</li>
-   </ul>
+   <h3>Partial</h3>
+   <p>eon-client/amd-hyper eOn campaign n=1, result file sets partial true. eon-client/amd-prd eOn campaign n=1, result file sets partial true. eon-svn/amd-hyper Eon svn campaign n=1, result file sets partial true. eon-svn/amd-prd Eon svn campaign n=1, result file sets partial true.</p>
    </details>
    </section><section class="bench bench-legacy-section" id="aladatom-legacy">
    <h3>Legacy 2014 archive</h3>

@@ -10,54 +10,54 @@
    <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>jaxmd</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="minimization/lj38">
    <th scope="row"><a href="#lj38">Lennard-Jones 38 clusters</a></th>
-   <td data-code="eOn" data-template="eon/lj38-lbfgs-m100" data-par2="180.137"><span class="bench-score">180.137</span><a href="#lj38-templates">eon/lj38-lbfgs-m100</a></td>
+   <td class="bench-score" data-code="eOn" data-template="eon/lj38-lbfgs-m100" data-par2="180.137">180.137<a href="#lj38-templates">eon/lj38-lbfgs-m100</a></td>
    <td data-code="Eon svn">—</td>
-   <td data-code="rgmin" data-template="rgmin/lj38-dogleg" data-par2="81.881"><span class="bench-score">81.881</span><a href="#lj38-templates">rgmin/lj38-dogleg</a></td>
+   <td class="bench-score" data-code="rgmin" data-template="rgmin/lj38-dogleg" data-par2="81.881">81.881<a href="#lj38-templates">rgmin/lj38-dogleg</a></td>
    <td data-code="rgsaddle">—</td>
-   <td data-code="ASE" data-template="ase/lj38-lbfgs-tuned" data-par2="395.645"><span class="bench-score">395.645</span><a href="#lj38-templates">ase/lj38-lbfgs-tuned</a></td>
-   <td data-code="Sella" data-template="sella/lj38-min-tuned" data-par2="253.921"><span class="bench-score">253.921</span><a href="#lj38-templates">sella/lj38-min-tuned</a></td>
-   <td data-code="pysisyphus" data-template="pysisyphus/cg-lj38" data-par2="15124.7"><span class="bench-score">15124.7</span><a href="#lj38-templates">pysisyphus/cg-lj38</a></td>
-   <td data-code="jaxmd" data-template="jaxmd/lj38-optax-lbfgs" data-par2="278.365"><span class="bench-score">278.365</span><a href="#lj38-templates">jaxmd/lj38-optax-lbfgs</a></td>
+   <td class="bench-score" data-code="ASE" data-template="ase/lj38-lbfgs-tuned" data-par2="395.645">395.645<a href="#lj38-templates">ase/lj38-lbfgs-tuned</a></td>
+   <td class="bench-score" data-code="Sella" data-template="sella/lj38-min-tuned" data-par2="253.921">253.921<a href="#lj38-templates">sella/lj38-min-tuned</a></td>
+   <td class="bench-score" data-code="pysisyphus" data-template="pysisyphus/cg-lj38" data-par2="15124.7">15124.7<a href="#lj38-templates">pysisyphus/cg-lj38</a></td>
+   <td class="bench-score" data-code="jaxmd" data-template="jaxmd/lj38-optax-lbfgs" data-par2="278.365">278.365<a href="#lj38-templates">jaxmd/lj38-optax-lbfgs</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
-   <td data-code="dlfind" data-template="dlfind/lbfgs-lj38" data-par2="231.908"><span class="bench-score">231.908</span><a href="#lj38-templates">dlfind/lbfgs-lj38</a></td>
-   <td data-code="lammps" data-template="lammps/hftn-lj38" data-par2="1123.81"><span class="bench-score">1123.81</span><a href="#lj38-templates">lammps/hftn-lj38</a></td>
-   <td data-code="optim" data-template="optim/lbfgs-lj38" data-par2="270.341"><span class="bench-score">270.341</span><a href="#lj38-templates">optim/lbfgs-lj38</a></td>
-   <td data-code="tsase" data-template="tsase/lbfgs-lj38" data-par2="257.2"><span class="bench-score">257.2</span><a href="#lj38-templates">tsase/lbfgs-lj38</a></td>
+   <td class="bench-score" data-code="dlfind" data-template="dlfind/lbfgs-lj38" data-par2="231.908">231.908<a href="#lj38-templates">dlfind/lbfgs-lj38</a></td>
+   <td class="bench-score" data-code="lammps" data-template="lammps/hftn-lj38" data-par2="1123.81">1123.81<a href="#lj38-templates">lammps/hftn-lj38</a></td>
+   <td class="bench-score" data-code="optim" data-template="optim/lbfgs-lj38" data-par2="270.341">270.341<a href="#lj38-templates">optim/lbfgs-lj38</a></td>
+   <td class="bench-score" data-code="tsase" data-template="tsase/lbfgs-lj38" data-par2="257.2">257.2<a href="#lj38-templates">tsase/lbfgs-lj38</a></td>
    </tr>
    <tr data-problem="minimization/lj38-noise">
    <th scope="row"><a href="#lj38-noise">Lennard-Jones 38 clusters with Gaussian force noise</a></th>
    <td data-code="eOn">—</td>
-   <td data-code="Eon svn" data-template="eon-svn/lj38-noise-0" data-par2="300.052"><span class="bench-score">300.052</span><a href="#lj38-noise-templates">eon-svn/lj38-noise-0</a></td>
-   <td data-code="rgmin" data-template="noise/rgmin-dogleg-s0" data-par2="81.881"><span class="bench-score">81.881</span><a href="#lj38-noise-templates">noise/rgmin-dogleg-s0</a></td>
+   <td class="bench-score" data-code="Eon svn" data-template="eon-svn/lj38-noise-0" data-par2="300.052">300.052<a href="#lj38-noise-templates">eon-svn/lj38-noise-0</a></td>
+   <td class="bench-score" data-code="rgmin" data-template="noise/rgmin-dogleg-s0" data-par2="81.881">81.881<a href="#lj38-noise-templates">noise/rgmin-dogleg-s0</a></td>
    <td data-code="rgsaddle">—</td>
-   <td data-code="ASE" data-template="noise/ase-lbfgs-s0" data-par2="396.55"><span class="bench-score">396.55</span><a href="#lj38-noise-templates">noise/ase-lbfgs-s0</a></td>
-   <td data-code="Sella" data-template="noise/sella-min-s0" data-par2="729.433"><span class="bench-score">729.433</span><a href="#lj38-noise-templates">noise/sella-min-s0</a></td>
+   <td class="bench-score" data-code="ASE" data-template="noise/ase-lbfgs-s0" data-par2="396.55">396.55<a href="#lj38-noise-templates">noise/ase-lbfgs-s0</a></td>
+   <td class="bench-score" data-code="Sella" data-template="noise/sella-min-s0" data-par2="729.433">729.433<a href="#lj38-noise-templates">noise/sella-min-s0</a></td>
    <td data-code="pysisyphus">—</td>
-   <td data-code="jaxmd" data-template="jaxmd/noise-optax-lbfgs-s0" data-par2="278.365"><span class="bench-score">278.365</span><a href="#lj38-noise-templates">jaxmd/noise-optax-lbfgs-s0</a></td>
+   <td class="bench-score" data-code="jaxmd" data-template="jaxmd/noise-optax-lbfgs-s0" data-par2="278.365">278.365<a href="#lj38-noise-templates">jaxmd/noise-optax-lbfgs-s0</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
-   <td data-code="dlfind" data-template="dlfind/lbfgs-lj38-noise-s0" data-par2="231.908"><span class="bench-score">231.908</span><a href="#lj38-noise-templates">dlfind/lbfgs-lj38-noise-s0</a></td>
-   <td data-code="lammps" data-template="lammps/hftn-lj38-noise-s0" data-par2="1123.81"><span class="bench-score">1123.81</span><a href="#lj38-noise-templates">lammps/hftn-lj38-noise-s0</a></td>
+   <td class="bench-score" data-code="dlfind" data-template="dlfind/lbfgs-lj38-noise-s0" data-par2="231.908">231.908<a href="#lj38-noise-templates">dlfind/lbfgs-lj38-noise-s0</a></td>
+   <td class="bench-score" data-code="lammps" data-template="lammps/hftn-lj38-noise-s0" data-par2="1123.81">1123.81<a href="#lj38-noise-templates">lammps/hftn-lj38-noise-s0</a></td>
    <td data-code="optim">—</td>
    <td data-code="tsase">—</td>
    </tr>
    <tr data-problem="minimization/morse-bulk">
    <th scope="row"><a href="#morse-bulk">Morse bulk</a></th>
-   <td data-code="eOn" data-template="eon/morse-lbfgs-m100" data-par2="54.18"><span class="bench-score">54.18</span><a href="#morse-bulk-templates">eon/morse-lbfgs-m100</a></td>
+   <td class="bench-score" data-code="eOn" data-template="eon/morse-lbfgs-m100" data-par2="54.18">54.18<a href="#morse-bulk-templates">eon/morse-lbfgs-m100</a></td>
    <td data-code="Eon svn">—</td>
-   <td data-code="rgmin" data-template="rgmin/morse-newton" data-par2="8.35"><span class="bench-score">8.35</span><a href="#morse-bulk-templates">rgmin/morse-newton</a></td>
+   <td class="bench-score" data-code="rgmin" data-template="rgmin/morse-newton" data-par2="8.35">8.35<a href="#morse-bulk-templates">rgmin/morse-newton</a></td>
    <td data-code="rgsaddle">—</td>
-   <td data-code="ASE" data-template="ase/morse-bfgslinesearch-default" data-par2="28.91"><span class="bench-score">28.91</span><a href="#morse-bulk-templates">ase/morse-bfgslinesearch-default</a></td>
-   <td data-code="Sella" data-template="sella/morse-min-default" data-par2="28.89"><span class="bench-score">28.89</span><a href="#morse-bulk-templates">sella/morse-min-default</a></td>
+   <td class="bench-score" data-code="ASE" data-template="ase/morse-bfgslinesearch-default" data-par2="28.91">28.91<a href="#morse-bulk-templates">ase/morse-bfgslinesearch-default</a></td>
+   <td class="bench-score" data-code="Sella" data-template="sella/morse-min-default" data-par2="28.89">28.89<a href="#morse-bulk-templates">sella/morse-min-default</a></td>
    <td data-code="pysisyphus">—</td>
-   <td data-code="jaxmd" data-template="jaxmd/morse-optax-lbfgs" data-par2="27.35"><span class="bench-score">27.35</span><a href="#morse-bulk-templates">jaxmd/morse-optax-lbfgs</a></td>
+   <td class="bench-score" data-code="jaxmd" data-template="jaxmd/morse-optax-lbfgs" data-par2="27.35">27.35<a href="#morse-bulk-templates">jaxmd/morse-optax-lbfgs</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
-   <td data-code="dlfind" data-template="dlfind/lbfgs-morse" data-par2="13626.5"><span class="bench-score">13626.5</span><a href="#morse-bulk-templates">dlfind/lbfgs-morse</a></td>
-   <td data-code="lammps" data-template="lammps/fire-morse" data-par2="17656.7"><span class="bench-score">17656.7</span><a href="#morse-bulk-templates">lammps/fire-morse</a></td>
-   <td data-code="optim" data-template="optim/lbfgs-morse" data-par2="17408.8"><span class="bench-score">17408.8</span><a href="#morse-bulk-templates">optim/lbfgs-morse</a></td>
-   <td data-code="tsase" data-template="tsase/lbfgs-morse" data-par2="17606.4"><span class="bench-score">17606.4</span><a href="#morse-bulk-templates">tsase/lbfgs-morse</a></td>
+   <td class="bench-score" data-code="dlfind" data-template="dlfind/lbfgs-morse" data-par2="13626.5">13626.5<a href="#morse-bulk-templates">dlfind/lbfgs-morse</a></td>
+   <td class="bench-score" data-code="lammps" data-template="lammps/fire-morse" data-par2="17656.7">17656.7<a href="#morse-bulk-templates">lammps/fire-morse</a></td>
+   <td class="bench-score" data-code="optim" data-template="optim/lbfgs-morse" data-par2="17408.8">17408.8<a href="#morse-bulk-templates">optim/lbfgs-morse</a></td>
+   <td class="bench-score" data-code="tsase" data-template="tsase/lbfgs-morse" data-par2="17606.4">17606.4<a href="#morse-bulk-templates">tsase/lbfgs-morse</a></td>
    </tr>
    </tbody></table></div></section><section class="bench" id="lj38" data-problem="minimization/lj38">
    <h2>Lennard-Jones 38 clusters</h2>
@@ -185,87 +185,12 @@
    <tr><td data-field="template">pysisyphus/lbfgs-lj38</td><td data-field="version">pysisyphus 0.1.dev1</td><td data-field="commit">a4ce10dd6d7f</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">20000</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.00382676</td><td data-field="median_calls">10000</td><td data-field="mean_calls">10000</td><td data-field="failures">crash 0, divergence 0, cap 1000, wrong_stationary 0</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">tsase/mdmin-lj38</td><td data-field="version">tsase 1.0</td><td data-field="commit">98aac60b5d99</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">20000</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.00382676</td><td data-field="median_calls">10000</td><td data-field="mean_calls">10000</td><td data-field="failures">crash 0, divergence 0, cap 1000, wrong_stationary 0</td><td data-field="n">1000</td></tr>
    </tbody></table></div>
-   <h3>History</h3><ul>
-   <li>rgmin/lj38-dogleg rgmin 0.4.0 campaign, asv n=1000 PAR-2=81.881 mean=81.881</li>
-   <li>rgmin/lj38-dogleg-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=81.881 mean=81.881</li>
-   <li>rgmin/lj38-newton rgmin 0.4.0 campaign, asv n=1000 PAR-2=166.337 mean=66.649</li>
-   <li>rgmin/lj38-newton-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=166.337 mean=66.649</li>
-   <li>rgmin/lj38-lbfgs-m100 rgmin 0.4.0 campaign, asv n=1000 PAR-2=197.228 mean=177.367</li>
-   <li>rgmin/lj38-lbfgs-m100-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=197.228 mean=177.367</li>
-   <li>rgmin/lj38-lbfgs-m20 rgmin 0.4.0 campaign, asv n=1000 PAR-2=282.64 mean=203.366</li>
-   <li>rgmin/lj38-lbfgs-m20-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=282.64 mean=203.366</li>
-   <li>rgmin/lj38-lbfgs rgmin 0.4.0 campaign, asv n=1000 PAR-2=294.105 mean=214.951</li>
-   <li>rgmin/lj38-lbfgs-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=294.105 mean=214.951</li>
-   <li>rgmin/lj38-bb rgmin 0.4.0 campaign, asv n=1000 PAR-2=639.474 mean=521.461</li>
-   <li>rgmin/lj38-bb-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=639.474 mean=521.461</li>
-   <li>rgmin/lj38-cg rgmin 0.4.0 campaign, asv n=1000 PAR-2=669.237 mean=591.346</li>
-   <li>rgmin/lj38-cg-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=669.237 mean=591.346</li>
-   <li>rgmin/lj38-fire rgmin 0.4.0 campaign, asv n=1000 PAR-2=769.36 mean=711.609</li>
-   <li>rgmin/lj38-fire-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=769.36 mean=711.609</li>
-   <li>rgmin/lj38-fire2 rgmin 0.4.0 campaign, asv n=1000 PAR-2=845.947 mean=730.952</li>
-   <li>rgmin/lj38-fire2-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=845.947 mean=730.952</li>
-   <li>rgmin/lj38-bfgs rgmin 0.4.0 campaign, asv n=1000 PAR-2=1010.45 mean=1010.45</li>
-   <li>rgmin/lj38-bfgs-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=1010.45 mean=1010.45</li>
-   <li>rgmin/lj38-quickmin rgmin 0.4.0 campaign, asv n=1000 PAR-2=1933 mean=1897.22</li>
-   <li>rgmin/lj38-quickmin-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=1933 mean=1897.22</li>
-   <li>rgmin/lj38-sd rgmin 0.4.0 campaign, asv n=1000 PAR-2=8392.75 mean=6350.19</li>
-   <li>rgmin/lj38-sd-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=8392.75 mean=6350.19</li>
-   <li>rgmin/lj38-adam rgmin 0.4.0 campaign, asv n=1000 PAR-2=16420.2 mean=9110.16</li>
-   <li>rgmin/lj38-adam-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=16420.2 mean=9110.16</li>
-   <li>rgmin/lj38-sr1 rgmin 0.4.0 campaign, asv n=1000 PAR-2=19908.9 mean=8133.1</li>
-   <li>rgmin/lj38-sr1-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=19908.9 mean=8133.1</li>
-   <li>rgmin/lj38-diis rgmin 0.4.0 campaign, asv n=1000 PAR-2=19945 mean=9836.21</li>
-   <li>rgmin/lj38-diis-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=19945 mean=9836.21</li>
-   <li>rgmin/lj38-sr2 rgmin 0.4.0 campaign, asv n=1000 PAR-2=20000 mean=9990.45</li>
-   <li>rgmin/lj38-sr2-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=20000 mean=9990.45</li>
-   </ul>
-   <h3>Partial</h3><ul>
-   <li>jaxmd/lj38-fire jaxmd asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>jaxmd/lj38-gd jaxmd asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>jaxmd/lj38-lbfgs jaxmd asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>jaxmd/lj38-optax-lbfgs jaxmd asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>ase/lj38-lbfgs-default ASE asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>ase/lj38-gpmin-default ASE asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>ase/lj38-bfgs-default ASE asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>ase/lj38-bfgslinesearch-default ASE asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>ase/lj38-fire-default ASE asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>ase/lj38-lbfgs-tuned ASE asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>ase/lj38-preconfire-tuned ASE asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>sella/lj38-min-default Sella asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>ase/lj38-gpmin-tuned ASE asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>ase/lj38-preconode12r-tuned ASE asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>ase/lj38-preconlbfgs-default ASE asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>sella/lj38-min-tuned Sella asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>ase/lj38-preconode12r-default ASE asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>ase/lj38-bfgs-tuned ASE asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>ase/lj38-bfgslinesearch-tuned ASE asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>ase/lj38-fire-tuned ASE asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>ase/lj38-preconfire-default ASE asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>ase/lj38-preconlbfgs-tuned ASE asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   </ul>
-   <h3>Not scored</h3><ul>
-   <li>eon-client/cg: no per-start record</li>
-   <li>eon-client/fire: no per-start record</li>
-   <li>eon-client/lbfgs-m100: no per-start record</li>
-   <li>eon-client/lbfgs-m20: no per-start record</li>
-   <li>eon-client/qm: no per-start record</li>
-   <li>eon-client/sd-twopoint: no per-start record</li>
-   <li>eon-client/sd: no per-start record</li>
-   <li>eon-svn/cg: no per-start record</li>
-   <li>eon-svn/fire: no per-start record</li>
-   <li>eon-svn/lbfgs-m100: no per-start record</li>
-   <li>eon-svn/lbfgs-m20: no per-start record</li>
-   <li>eon-svn/qm: no per-start record</li>
-   <li>eon-svn/sd-twopoint: no per-start record</li>
-   <li>eon-svn/sd: no per-start record</li>
-   <li>pele-lbfgs-M1-maxstep0.1: no per-start record</li>
-   <li>pele-lbfgs-M10-maxstep0.1: no per-start record</li>
-   <li>pele-lbfgs-M100-maxstep0.2: no per-start record</li>
-   <li>pele-lbfgs-M20-maxstep0.1: no per-start record</li>
-   <li>pele-lbfgs-M4-maxstep0.05: no per-start record</li>
-   <li>pele-lbfgs-M4-maxstep0.1: no per-start record</li>
-   <li>pele-lbfgs-M4-maxstep0.2: no per-start record</li>
-   </ul>
+   <h3>History</h3>
+   <p>rgmin/lj38-dogleg rgmin 0.4.0 campaign, asv n=1000 PAR-2=81.881 mean=81.881. rgmin/lj38-dogleg-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=81.881 mean=81.881. rgmin/lj38-newton rgmin 0.4.0 campaign, asv n=1000 PAR-2=166.337 mean=66.649. rgmin/lj38-newton-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=166.337 mean=66.649. rgmin/lj38-lbfgs-m100 rgmin 0.4.0 campaign, asv n=1000 PAR-2=197.228 mean=177.367. rgmin/lj38-lbfgs-m100-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=197.228 mean=177.367. rgmin/lj38-lbfgs-m20 rgmin 0.4.0 campaign, asv n=1000 PAR-2=282.64 mean=203.366. rgmin/lj38-lbfgs-m20-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=282.64 mean=203.366. rgmin/lj38-lbfgs rgmin 0.4.0 campaign, asv n=1000 PAR-2=294.105 mean=214.951. rgmin/lj38-lbfgs-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=294.105 mean=214.951. rgmin/lj38-bb rgmin 0.4.0 campaign, asv n=1000 PAR-2=639.474 mean=521.461. rgmin/lj38-bb-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=639.474 mean=521.461. rgmin/lj38-cg rgmin 0.4.0 campaign, asv n=1000 PAR-2=669.237 mean=591.346. rgmin/lj38-cg-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=669.237 mean=591.346. rgmin/lj38-fire rgmin 0.4.0 campaign, asv n=1000 PAR-2=769.36 mean=711.609. rgmin/lj38-fire-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=769.36 mean=711.609. rgmin/lj38-fire2 rgmin 0.4.0 campaign, asv n=1000 PAR-2=845.947 mean=730.952. rgmin/lj38-fire2-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=845.947 mean=730.952. rgmin/lj38-bfgs rgmin 0.4.0 campaign, asv n=1000 PAR-2=1010.45 mean=1010.45. rgmin/lj38-bfgs-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=1010.45 mean=1010.45. rgmin/lj38-quickmin rgmin 0.4.0 campaign, asv n=1000 PAR-2=1933 mean=1897.22. rgmin/lj38-quickmin-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=1933 mean=1897.22. rgmin/lj38-sd rgmin 0.4.0 campaign, asv n=1000 PAR-2=8392.75 mean=6350.19. rgmin/lj38-sd-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=8392.75 mean=6350.19. rgmin/lj38-adam rgmin 0.4.0 campaign, asv n=1000 PAR-2=16420.2 mean=9110.16. rgmin/lj38-adam-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=16420.2 mean=9110.16. rgmin/lj38-sr1 rgmin 0.4.0 campaign, asv n=1000 PAR-2=19908.9 mean=8133.1. rgmin/lj38-sr1-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=19908.9 mean=8133.1. rgmin/lj38-diis rgmin 0.4.0 campaign, asv n=1000 PAR-2=19945 mean=9836.21. rgmin/lj38-diis-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=19945 mean=9836.21. rgmin/lj38-sr2 rgmin 0.4.0 campaign, asv n=1000 PAR-2=20000 mean=9990.45. rgmin/lj38-sr2-tuned rgmin 0.4.0 campaign, asv n=1000 PAR-2=20000 mean=9990.45.</p>
+   <h3>Partial</h3>
+   <p>jaxmd/lj38-fire jaxmd asv n=1, smoke run; scored 1 of 1000 starts. jaxmd/lj38-gd jaxmd asv n=1, smoke run; scored 1 of 1000 starts. jaxmd/lj38-lbfgs jaxmd asv n=1, smoke run; scored 1 of 1000 starts. jaxmd/lj38-optax-lbfgs jaxmd asv n=1, smoke run; scored 1 of 1000 starts. ase/lj38-lbfgs-default ASE asv n=1, smoke run; scored 1 of 1000 starts. ase/lj38-gpmin-default ASE asv n=1, smoke run; scored 1 of 1000 starts. ase/lj38-bfgs-default ASE asv n=1, smoke run; scored 1 of 1000 starts. ase/lj38-bfgslinesearch-default ASE asv n=1, smoke run; scored 1 of 1000 starts. ase/lj38-fire-default ASE asv n=1, smoke run; scored 1 of 1000 starts. ase/lj38-lbfgs-tuned ASE asv n=1, smoke run; scored 1 of 1000 starts. ase/lj38-preconfire-tuned ASE asv n=1, smoke run; scored 1 of 1000 starts. sella/lj38-min-default Sella asv n=1, smoke run; scored 1 of 1000 starts. ase/lj38-gpmin-tuned ASE asv n=1, smoke run; scored 1 of 1000 starts. ase/lj38-preconode12r-tuned ASE asv n=1, smoke run; scored 1 of 1000 starts. ase/lj38-preconlbfgs-default ASE asv n=1, smoke run; scored 1 of 1000 starts. sella/lj38-min-tuned Sella asv n=1, smoke run; scored 1 of 1000 starts. ase/lj38-preconode12r-default ASE asv n=1, smoke run; scored 1 of 1000 starts. ase/lj38-bfgs-tuned ASE asv n=1, smoke run; scored 1 of 1000 starts. ase/lj38-bfgslinesearch-tuned ASE asv n=1, smoke run; scored 1 of 1000 starts. ase/lj38-fire-tuned ASE asv n=1, smoke run; scored 1 of 1000 starts. ase/lj38-preconfire-default ASE asv n=1, smoke run; scored 1 of 1000 starts. ase/lj38-preconlbfgs-tuned ASE asv n=1, smoke run; scored 1 of 1000 starts.</p>
+   <h3>Not scored</h3>
+   <p>eon-client/cg: no per-start record. eon-client/fire: no per-start record. eon-client/lbfgs-m100: no per-start record. eon-client/lbfgs-m20: no per-start record. eon-client/qm: no per-start record. eon-client/sd-twopoint: no per-start record. eon-client/sd: no per-start record. eon-svn/cg: no per-start record. eon-svn/fire: no per-start record. eon-svn/lbfgs-m100: no per-start record. eon-svn/lbfgs-m20: no per-start record. eon-svn/qm: no per-start record. eon-svn/sd-twopoint: no per-start record. eon-svn/sd: no per-start record. pele-lbfgs-M1-maxstep0.1: no per-start record. pele-lbfgs-M10-maxstep0.1: no per-start record. pele-lbfgs-M100-maxstep0.2: no per-start record. pele-lbfgs-M20-maxstep0.1: no per-start record. pele-lbfgs-M4-maxstep0.05: no per-start record. pele-lbfgs-M4-maxstep0.1: no per-start record. pele-lbfgs-M4-maxstep0.2: no per-start record.</p>
    </details>
    </section><section class="bench bench-legacy-section" id="lj38-legacy">
    <h3>Legacy 2014 archive</h3>
@@ -666,24 +591,8 @@
    <tr><td data-field="template">lammps/hftn-lj38-noise-s1em4</td><td data-field="version">lammps 30 Sep 2026</td><td data-field="commit">8de817dd79bf</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">17071.9</td><td data-field="success_rate">0.224</td><td data-field="wilson_low">0.199243</td><td data-field="wilson_high">0.250869</td><td data-field="median_calls">9256</td><td data-field="mean_calls">8785.81</td><td data-field="failures">crash 0, divergence 776, cap 0, wrong_stationary 0</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">lammps/sd-lj38-noise-s1em4</td><td data-field="version">lammps 30 Sep 2026</td><td data-field="commit">8de817dd79bf</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">19840</td><td data-field="success_rate">0.012</td><td data-field="wilson_low">0.00687765</td><td data-field="wilson_high">0.0208573</td><td data-field="median_calls">10000</td><td data-field="mean_calls">9959.99</td><td data-field="failures">crash 0, divergence 0, cap 988, wrong_stationary 0</td><td data-field="n">1000</td></tr>
    </tbody></table></div>
-   <h3>Partial</h3><ul>
-   <li>jaxmd/noise-fire-s0 jaxmd asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>jaxmd/noise-fire-s1em2 jaxmd asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>jaxmd/noise-fire-s1em3 jaxmd asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>jaxmd/noise-fire-s1em4 jaxmd asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>jaxmd/noise-gd-s0 jaxmd asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>jaxmd/noise-gd-s1em2 jaxmd asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>jaxmd/noise-gd-s1em3 jaxmd asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>jaxmd/noise-gd-s1em4 jaxmd asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>jaxmd/noise-lbfgs-s0 jaxmd asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>jaxmd/noise-lbfgs-s1em2 jaxmd asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>jaxmd/noise-lbfgs-s1em3 jaxmd asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>jaxmd/noise-lbfgs-s1em4 jaxmd asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>jaxmd/noise-optax-lbfgs-s0 jaxmd asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>jaxmd/noise-optax-lbfgs-s1em2 jaxmd asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>jaxmd/noise-optax-lbfgs-s1em3 jaxmd asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   <li>jaxmd/noise-optax-lbfgs-s1em4 jaxmd asv n=1, smoke run; scored 1 of 1000 starts.</li>
-   </ul>
+   <h3>Partial</h3>
+   <p>jaxmd/noise-fire-s0 jaxmd asv n=1, smoke run; scored 1 of 1000 starts. jaxmd/noise-fire-s1em2 jaxmd asv n=1, smoke run; scored 1 of 1000 starts. jaxmd/noise-fire-s1em3 jaxmd asv n=1, smoke run; scored 1 of 1000 starts. jaxmd/noise-fire-s1em4 jaxmd asv n=1, smoke run; scored 1 of 1000 starts. jaxmd/noise-gd-s0 jaxmd asv n=1, smoke run; scored 1 of 1000 starts. jaxmd/noise-gd-s1em2 jaxmd asv n=1, smoke run; scored 1 of 1000 starts. jaxmd/noise-gd-s1em3 jaxmd asv n=1, smoke run; scored 1 of 1000 starts. jaxmd/noise-gd-s1em4 jaxmd asv n=1, smoke run; scored 1 of 1000 starts. jaxmd/noise-lbfgs-s0 jaxmd asv n=1, smoke run; scored 1 of 1000 starts. jaxmd/noise-lbfgs-s1em2 jaxmd asv n=1, smoke run; scored 1 of 1000 starts. jaxmd/noise-lbfgs-s1em3 jaxmd asv n=1, smoke run; scored 1 of 1000 starts. jaxmd/noise-lbfgs-s1em4 jaxmd asv n=1, smoke run; scored 1 of 1000 starts. jaxmd/noise-optax-lbfgs-s0 jaxmd asv n=1, smoke run; scored 1 of 1000 starts. jaxmd/noise-optax-lbfgs-s1em2 jaxmd asv n=1, smoke run; scored 1 of 1000 starts. jaxmd/noise-optax-lbfgs-s1em3 jaxmd asv n=1, smoke run; scored 1 of 1000 starts. jaxmd/noise-optax-lbfgs-s1em4 jaxmd asv n=1, smoke run; scored 1 of 1000 starts.</p>
    </details>
    </section><section class="bench bench-legacy-section" id="lj38-noise-legacy">
    <h3>Legacy 2014 archive</h3>
@@ -820,73 +729,12 @@
    <tr><td data-field="template">lammps/sd-morse</td><td data-field="version">lammps 30 Sep 2026</td><td data-field="commit">8de817dd79bf</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">19211.2</td><td data-field="success_rate">0.04</td><td data-field="wilson_low">0.0156633</td><td data-field="wilson_high">0.0983707</td><td data-field="median_calls">258.5</td><td data-field="mean_calls">262.2</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 96</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">lammps/hftn-morse</td><td data-field="version">lammps 30 Sep 2026</td><td data-field="commit">8de817dd79bf</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">19415</td><td data-field="success_rate">0.03</td><td data-field="wilson_low">0.0102545</td><td data-field="wilson_high">0.0845194</td><td data-field="median_calls">480</td><td data-field="mean_calls">512.54</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 97</td><td data-field="n">100</td></tr>
    </tbody></table></div>
-   <h3>History</h3><ul>
-   <li>rgmin/morse-newton-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=8.35 mean=8.35</li>
-   <li>rgmin/morse-dogleg rgmin 0.4.0 campaign, asv n=100 PAR-2=10.11 mean=10.11</li>
-   <li>rgmin/morse-lbfgs-m20-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=26.87 mean=26.87</li>
-   <li>rgmin/morse-lbfgs-m100-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=26.91 mean=26.91</li>
-   <li>rgmin/morse-lbfgs-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=26.93 mean=26.93</li>
-   <li>rgmin/morse-lbfgs-m20 rgmin 0.4.0 campaign, asv n=100 PAR-2=27.05 mean=27.05</li>
-   <li>rgmin/morse-lbfgs-m100 rgmin 0.4.0 campaign, asv n=100 PAR-2=27.12 mean=27.12</li>
-   <li>rgmin/morse-lbfgs rgmin 0.4.0 campaign, asv n=100 PAR-2=27.18 mean=27.18</li>
-   <li>rgmin/morse-dogleg-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=31.26 mean=31.26</li>
-   <li>rgmin/morse-bb-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=33.22 mean=33.22</li>
-   <li>rgmin/morse-cg-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=50.49 mean=50.49</li>
-   <li>rgmin/morse-bfgs rgmin 0.4.0 campaign, asv n=100 PAR-2=54.04 mean=54.04</li>
-   <li>rgmin/morse-cg rgmin 0.4.0 campaign, asv n=100 PAR-2=54.72 mean=54.72</li>
-   <li>rgmin/morse-quickmin-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=61.75 mean=61.75</li>
-   <li>rgmin/morse-quickmin rgmin 0.4.0 campaign, asv n=100 PAR-2=62.03 mean=62.03</li>
-   <li>rgmin/morse-bfgs-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=70.53 mean=70.53</li>
-   <li>rgmin/morse-sd-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=90.48 mean=90.48</li>
-   <li>rgmin/morse-sd rgmin 0.4.0 campaign, asv n=100 PAR-2=96.59 mean=96.59</li>
-   <li>rgmin/morse-fire-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=113.19 mean=113.19</li>
-   <li>rgmin/morse-fire rgmin 0.4.0 campaign, asv n=100 PAR-2=116.19 mean=116.19</li>
-   <li>rgmin/morse-fire2 rgmin 0.4.0 campaign, asv n=100 PAR-2=121.85 mean=121.85</li>
-   <li>rgmin/morse-fire2-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=121.87 mean=121.87</li>
-   <li>rgmin/morse-adam rgmin 0.4.0 campaign, asv n=100 PAR-2=285.73 mean=285.73</li>
-   <li>rgmin/morse-adam-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=285.73 mean=285.73</li>
-   <li>rgmin/morse-sr2 rgmin 0.4.0 campaign, asv n=100 PAR-2=341.13 mean=341.13</li>
-   <li>rgmin/morse-newton rgmin 0.4.0 campaign, asv n=100 PAR-2=396.69 mean=296.69</li>
-   <li>rgmin/morse-sr1 rgmin 0.4.0 campaign, asv n=100 PAR-2=566.31 mean=366.31</li>
-   <li>rgmin/morse-sr1-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=1187.31 mean=787.31</li>
-   <li>rgmin/morse-sr2-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=1198.65 mean=798.65</li>
-   <li>rgmin/morse-bb rgmin 0.4.0 campaign, asv n=100 PAR-2=15606.6 mean=7806.64</li>
-   <li>rgmin/morse-diis-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=15819.4 mean=8019.42</li>
-   <li>rgmin/morse-diis rgmin 0.4.0 campaign, asv n=100 PAR-2=16153.4 mean=8153.43</li>
-   </ul>
-   <h3>Partial</h3><ul>
-   <li>jaxmd/morse-fire jaxmd asv n=1, smoke run; scored 1 of 100 starts.</li>
-   <li>jaxmd/morse-gd jaxmd asv n=1, smoke run; scored 1 of 100 starts.</li>
-   <li>jaxmd/morse-lbfgs jaxmd asv n=1, smoke run; scored 1 of 100 starts.</li>
-   <li>jaxmd/morse-optax-lbfgs jaxmd asv n=1, smoke run; scored 1 of 100 starts.</li>
-   <li>ase/morse-preconode12r-tuned ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
-   <li>ase/morse-bfgs-default ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
-   <li>ase/morse-bfgslinesearch-default ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
-   <li>ase/morse-bfgslinesearch-tuned ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
-   <li>ase/morse-fire-tuned ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
-   <li>ase/morse-preconfire-default ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
-   <li>ase/morse-bfgs-tuned ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
-   <li>ase/morse-fire-default ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
-   <li>ase/morse-lbfgs-default ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
-   <li>ase/morse-preconlbfgs-default ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
-   <li>sella/morse-min-tuned Sella asv n=1, smoke run; scored 1 of 100 starts.</li>
-   <li>ase/morse-preconode12r-default ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
-   <li>ase/morse-preconfire-tuned ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
-   <li>sella/morse-min-default Sella asv n=1, smoke run; scored 1 of 100 starts.</li>
-   <li>ase/morse-lbfgs-tuned ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
-   <li>ase/morse-preconlbfgs-tuned ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
-   </ul>
-   <h3>Not scored</h3><ul>
-   <li>eon-client/morse-cg: no per-start record</li>
-   <li>eon-client/morse-fire: no per-start record</li>
-   <li>eon-client/morse-lbfgs: no per-start record</li>
-   <li>eon-client/morse-sd: no per-start record</li>
-   <li>eon-svn/morse-cg: no per-start record</li>
-   <li>eon-svn/morse-fire: no per-start record</li>
-   <li>eon-svn/morse-lbfgs: no per-start record</li>
-   <li>eon-svn/morse-sd: no per-start record</li>
-   <li>ase/morse-gpmin-tuned: AseMorseGpminTuned (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;pos_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li>
-   </ul>
+   <h3>History</h3>
+   <p>rgmin/morse-newton-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=8.35 mean=8.35. rgmin/morse-dogleg rgmin 0.4.0 campaign, asv n=100 PAR-2=10.11 mean=10.11. rgmin/morse-lbfgs-m20-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=26.87 mean=26.87. rgmin/morse-lbfgs-m100-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=26.91 mean=26.91. rgmin/morse-lbfgs-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=26.93 mean=26.93. rgmin/morse-lbfgs-m20 rgmin 0.4.0 campaign, asv n=100 PAR-2=27.05 mean=27.05. rgmin/morse-lbfgs-m100 rgmin 0.4.0 campaign, asv n=100 PAR-2=27.12 mean=27.12. rgmin/morse-lbfgs rgmin 0.4.0 campaign, asv n=100 PAR-2=27.18 mean=27.18. rgmin/morse-dogleg-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=31.26 mean=31.26. rgmin/morse-bb-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=33.22 mean=33.22. rgmin/morse-cg-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=50.49 mean=50.49. rgmin/morse-bfgs rgmin 0.4.0 campaign, asv n=100 PAR-2=54.04 mean=54.04. rgmin/morse-cg rgmin 0.4.0 campaign, asv n=100 PAR-2=54.72 mean=54.72. rgmin/morse-quickmin-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=61.75 mean=61.75. rgmin/morse-quickmin rgmin 0.4.0 campaign, asv n=100 PAR-2=62.03 mean=62.03. rgmin/morse-bfgs-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=70.53 mean=70.53. rgmin/morse-sd-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=90.48 mean=90.48. rgmin/morse-sd rgmin 0.4.0 campaign, asv n=100 PAR-2=96.59 mean=96.59. rgmin/morse-fire-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=113.19 mean=113.19. rgmin/morse-fire rgmin 0.4.0 campaign, asv n=100 PAR-2=116.19 mean=116.19. rgmin/morse-fire2 rgmin 0.4.0 campaign, asv n=100 PAR-2=121.85 mean=121.85. rgmin/morse-fire2-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=121.87 mean=121.87. rgmin/morse-adam rgmin 0.4.0 campaign, asv n=100 PAR-2=285.73 mean=285.73. rgmin/morse-adam-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=285.73 mean=285.73. rgmin/morse-sr2 rgmin 0.4.0 campaign, asv n=100 PAR-2=341.13 mean=341.13. rgmin/morse-newton rgmin 0.4.0 campaign, asv n=100 PAR-2=396.69 mean=296.69. rgmin/morse-sr1 rgmin 0.4.0 campaign, asv n=100 PAR-2=566.31 mean=366.31. rgmin/morse-sr1-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=1187.31 mean=787.31. rgmin/morse-sr2-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=1198.65 mean=798.65. rgmin/morse-bb rgmin 0.4.0 campaign, asv n=100 PAR-2=15606.6 mean=7806.64. rgmin/morse-diis-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=15819.4 mean=8019.42. rgmin/morse-diis rgmin 0.4.0 campaign, asv n=100 PAR-2=16153.4 mean=8153.43.</p>
+   <h3>Partial</h3>
+   <p>jaxmd/morse-fire jaxmd asv n=1, smoke run; scored 1 of 100 starts. jaxmd/morse-gd jaxmd asv n=1, smoke run; scored 1 of 100 starts. jaxmd/morse-lbfgs jaxmd asv n=1, smoke run; scored 1 of 100 starts. jaxmd/morse-optax-lbfgs jaxmd asv n=1, smoke run; scored 1 of 100 starts. ase/morse-preconode12r-tuned ASE asv n=1, smoke run; scored 1 of 100 starts. ase/morse-bfgs-default ASE asv n=1, smoke run; scored 1 of 100 starts. ase/morse-bfgslinesearch-default ASE asv n=1, smoke run; scored 1 of 100 starts. ase/morse-bfgslinesearch-tuned ASE asv n=1, smoke run; scored 1 of 100 starts. ase/morse-fire-tuned ASE asv n=1, smoke run; scored 1 of 100 starts. ase/morse-preconfire-default ASE asv n=1, smoke run; scored 1 of 100 starts. ase/morse-bfgs-tuned ASE asv n=1, smoke run; scored 1 of 100 starts. ase/morse-fire-default ASE asv n=1, smoke run; scored 1 of 100 starts. ase/morse-lbfgs-default ASE asv n=1, smoke run; scored 1 of 100 starts. ase/morse-preconlbfgs-default ASE asv n=1, smoke run; scored 1 of 100 starts. sella/morse-min-tuned Sella asv n=1, smoke run; scored 1 of 100 starts. ase/morse-preconode12r-default ASE asv n=1, smoke run; scored 1 of 100 starts. ase/morse-preconfire-tuned ASE asv n=1, smoke run; scored 1 of 100 starts. sella/morse-min-default Sella asv n=1, smoke run; scored 1 of 100 starts. ase/morse-lbfgs-tuned ASE asv n=1, smoke run; scored 1 of 100 starts. ase/morse-preconlbfgs-tuned ASE asv n=1, smoke run; scored 1 of 100 starts.</p>
+   <h3>Not scored</h3>
+   <p>eon-client/morse-cg: no per-start record. eon-client/morse-fire: no per-start record. eon-client/morse-lbfgs: no per-start record. eon-client/morse-sd: no per-start record. eon-svn/morse-cg: no per-start record. eon-svn/morse-fire: no per-start record. eon-svn/morse-lbfgs: no per-start record. eon-svn/morse-sd: no per-start record. ase/morse-gpmin-tuned: AseMorseGpminTuned (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;pos_0000.con&#x27;&quot;) track_force_calls was skipped or failed.</p>
    </details>
    </section><section class="bench bench-legacy-section" id="morse-bulk-legacy">
    <h3>Legacy 2014 archive</h3>
