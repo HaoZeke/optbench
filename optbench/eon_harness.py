@@ -1,4 +1,4 @@
-"""Harness runs for eOn SVN r2549 and the 3.5.0 source build.
+"""Harness runs for eOn SVN r2549, the develop source build, and 3.5.0.
 
 Each force evaluation is one ``HarnessCounter`` charge. eonclient is
 started with ``potential = ext_pot``. A small C program forwards
@@ -6,12 +6,22 @@ started with ``potential = ext_pot``. A small C program forwards
 2014 potential. The kernel is the problem surface:
 
 * ``lj40`` is unshifted ``lj/cut`` with epsilon 1, sigma 1, cutoff 40.
+* ``blj20`` is binary Lennard-Jones, cutoff 20, the archived
+  ``lj100-binary`` pair coefficients.
 * ``morse`` is LAMMPS ``morse/smooth/linear`` (D 0.7102, alpha 1.6047,
   r0 2.897, cutoff 9.5) with periodic boundaries in x and y.
 * ``morse_shift`` is r2549 ``Morse::force``: the same depth, alpha, and
   r0, cutoff 9.5, pair energy shifted to zero at the cutoff, minimum
   image on the box diagonal.
 * ``eam`` calls the r2549 Aluminum Fortran ``force_`` in this process.
+
+TIP4P is not a kernel. The r2549 Water potential is a flexible TIP4P:
+``client/potentials/Water/tip4p_ccl.cpp`` says quadratic restraints were
+added to the OH and HH distances so the potential can be used without
+constraints. develop commit 7095b23 routes ``potential = tip4p`` to
+``rgpot::TIP4PPot`` and its monomer test evaluates a distorted Cartesian
+geometry. The Cambridge TIP4P rows are rigid-body angle-axis searches.
+Neither client supplies that constraint.
 
 A tsopt success is a client stop under the cap, a free-atom Euclidean
 force norm at the problem stop, and Hessian index 1. That Hessian is
@@ -31,6 +41,7 @@ import argparse
 import ctypes
 import hashlib
 import json
+import math
 import os
 import shutil
 import signal
@@ -38,6 +49,7 @@ import subprocess
 import tarfile
 import tempfile
 import time
+from functools import lru_cache
 from pathlib import Path
 
 import numpy as np
@@ -54,6 +66,7 @@ from .campaign import (
 )
 from .eon_jobs import _client_env, _numpy_direction, _read_dat, _seeded_mode
 from .eon_parse import abs_overlap, flat_floats, xyz_to_con
+from .globalopt import energy_tolerance, judge_globalopt, reference_energy
 from .stationary import negative_index, vibrational_eigenvalues
 from .surfaces import lennard_jones, morse_smooth_linear, read_con
 
@@ -81,6 +94,14 @@ FAMILIES = {
         "flag": "--version",
         "token": "4d8b34ba",
         "cache": "4d8b34ba",
+    },
+    "develop": {
+        "prefix": "eon-develop/",
+        "env": "EONCLIENT",
+        "default": Path.home() / "opt" / "eon-develop" / "bin" / "eonclient",
+        "flag": "--version",
+        "token": "7095b23",
+        "cache": "7095b23",
     },
 }
 
@@ -305,9 +326,97 @@ def saddle_index(kernel, text: str, *, periodic: bool) -> dict:
     }
 
 
+def blj20(positions, atomic_numbers=None, box=None):
+    """Binary Lennard-Jones, cutoff 20. Forces are the negative gradient.
+
+    The archived ``in.lammps`` for ``globalopt/lj100-binary`` sets
+    ``pair_style lj/cut 20`` and ``pair_coeff`` sigma 1.3 on type 1,
+    sigma 1.0 on type 2, epsilon 1, and the unlike sigma 1.15. r2549
+    ``LAMMPS.cpp`` numbers types in order of first appearance. The con
+    files list H and then C, so H is type 1 (B, sigma 1.3) and C is
+    type 2 (A, sigma 1.0).
+    """
+    from .potentials import binary_lennard_jones
+
+    del box
+    coords = np.asarray(positions, dtype=np.float64).reshape(-1, 3)
+    numbers = [int(value) for value in (atomic_numbers or [])]
+    if len(numbers) != len(coords):
+        raise ValueError("binary Lennard-Jones needs one atomic number per atom")
+    species = []
+    for number in numbers:
+        if number == 1:
+            species.append(1)
+        elif number == 6:
+            species.append(0)
+        else:
+            raise ValueError(f"binary Lennard-Jones atomic number {number}")
+    energy, gradient = binary_lennard_jones(
+        coords,
+        species,
+        sigma_aa=1.0,
+        sigma_bb=1.3,
+        epsilon_aa=1.0,
+        epsilon_bb=1.0,
+        epsilon_ab=1.0,
+        cutoff=20.0,
+    )
+    return float(energy), tuple(float(value) for value in np.ravel(-gradient))
+
+
+def coords_to_con(text: str) -> str:
+    """Bare ``x y z`` rows to a free-cluster ``.con``.
+
+    The cube is at least 100 and at least 80 past the span, the same
+    rule as ``xyz_to_con``, so a periodic image stays outside cutoff 40.
+    """
+    coords: list[tuple[float, float, float]] = []
+    for line in text.splitlines():
+        parts = line.split()
+        if len(parts) < 3:
+            continue
+        try:
+            coords.append((float(parts[0]), float(parts[1]), float(parts[2])))
+        except ValueError:
+            continue
+    if not coords:
+        raise ValueError("coordinate file has no xyz rows")
+    natoms = len(coords)
+    xs = [point[0] for point in coords]
+    ys = [point[1] for point in coords]
+    zs = [point[2] for point in coords]
+    span = max(max(xs) - min(xs), max(ys) - min(ys), max(zs) - min(zs))
+    side = max(100.0, span + 80.0)
+    shift = (
+        side / 2.0 - sum(xs) / natoms,
+        side / 2.0 - sum(ys) / natoms,
+        side / 2.0 - sum(zs) / natoms,
+    )
+    rows = [
+        "Generated by optbench",
+        "0.0000 TIME",
+        f"{side:.6f}  {side:.6f}  {side:.6f}",
+        "90.000000   90.000000   90.000000",
+        "0 0",
+        "0 0 0",
+        "1",
+        str(natoms),
+        "1.00000",
+        "H",
+        "Coordinates of Component 1",
+    ]
+    for index, (x, y, z) in enumerate(coords):
+        rows.append(
+            f"  {x + shift[0]:.8f}   {y + shift[1]:.8f}   {z + shift[2]:.8f}  0     {index}"
+        )
+    return "\n".join(rows) + "\n"
+
+
 def kernel_for(name: str):
     if name == "lj40":
         return lj40
+    if name == "blj20":
+        return blj20
     if name == "morse":
         return morse_pt
     if name == "morse_shift":
@@ -350,6 +459,61 @@ def classify_flag(*, calls, cap, ok, crashed=False) -> dict:
     return {"force_calls": float(count), "success": False, "failure": "wrong_stationary"}
 
 
+def classify_cambridge(
+    *,
+    calls,
+    cap: int,
+    energy: float | None,
+    returncode: int,
+    reference: float,
+    tolerance: float,
+) -> dict:
+    """Cambridge energy rule for one basin-hopping start.
+
+    A call count at the cap is ``cap`` whether or not a minimum was
+    written. Under the cap, a missing energy or a nonzero client status
+    is a crash. A clean exit is ``judge_globalopt``: at or below the
+    published minimum plus the tolerance, and still under the cap.
+    """
+    finite = energy is not None and math.isfinite(float(energy))
+    stored = float(energy) if finite else None
+    if calls is None:
+        return {
+            "force_calls": 0.0,
+            "success": False,
+            "failure": "crash",
+            "minimum_energy": stored,
+        }
+    count = int(calls)
+    if count >= cap:
+        return {
+            "force_calls": float(count),
+            "success": False,
+            "failure": "cap",
+            "minimum_energy": stored,
+        }
+    if returncode != 0 or not finite:
+        return {
+            "force_calls": float(count),
+            "success": False,
+            "failure": "crash",
+            "minimum_energy": stored,
+        }
+    judged = judge_globalopt(
+        float(energy),
+        count,
+        reference=reference,
+        tolerance=tolerance,
+        cap=cap,
+    )
+    return {
+        "force_calls": float(judged["force_calls"]),
+        "success": bool(judged["success"]),
+        "failure": judged["failure"],
+        "minimum_energy": stored,
+    }
+
+
 def classify_akmc(*, calls, cap, reached, crashed) -> dict:
     if calls is None:
         return {"force_calls": 0.0, "success": False, "failure": "crash"}
@@ -389,7 +553,7 @@ def _family_of(template: dict) -> str:
     for name, spec in FAMILIES.items():
         if ident.startswith(spec["prefix"]) and template.get("kind"):
             return name
-    raise ValueError(f"{ident} is not an r2549 or 3.5.0 harness template")
+    raise ValueError(f"{ident} is not an eOn harness template")
 
 
 def _ini_text(template: dict, seed: int, wrapper: Path, *, python_job: bool) -> str:
@@ -404,6 +568,91 @@ def _ini_text(template: dict, seed: int, wrapper: Path, *, python_job: bool) -> 
 
 def _archive(path: str) -> Path:
     return geometry_archive(ROOT, {"id": path, "input": {"archive_path": path}})
+
+
+def _extract_basename(archive: Path, basename: str, dest: Path) -> Path:
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    with tarfile.open(archive) as packed:
+        match = None
+        for member in packed.getmembers():
+            if member.isfile() and Path(member.name).name == basename:
+                match = member
+                break
+        if match is None:
+            raise FileNotFoundError(f"{basename} is not in {archive}")
+        extracted = packed.extractfile(match)
+        if extracted is None:
+            raise FileNotFoundError(basename)
+        dest.write_bytes(extracted.read())
+    return dest
+
+
+@lru_cache(maxsize=32)
+def _archive_start_ids(archive_path: str, select: str) -> tuple[str, ...]:
+    """Numbered geometry ids in one archived start set.
+
+    ``coords`` keeps ``coords.<digits>`` and drops an unnumbered
+    ``coords`` member. ``con`` keeps ``<digits>.con``.
+    """
+    archive = _archive(archive_path)
+    found: set[int] = set()
+    with tarfile.open(archive) as packed:
+        for member in packed.getmembers():
+            if not member.isfile():
+                continue
+            base = Path(member.name).name
+            if select == "coords":
+                prefix = "coords."
+                suffix = base[len(prefix) :] if base.startswith(prefix) else ""
+                if suffix.isdigit():
+                    found.add(int(suffix))
+            elif select == "con":
+                if base.endswith(".con") and base[: -len(".con")].isdigit():
+                    found.add(int(base[: -len(".con")]))
+            else:
+                raise ValueError(f"unknown geometry select {select}")
+    return tuple(str(value) for value in sorted(found))
+
+
+def template_starts(template: dict) -> list[str]:
+    """Starts for one harness template.
+
+    An explicit ``starts`` list wins. Otherwise a template archive is
+    listed. The LJ38 basin and minima templates leave both unset and
+    keep ``default_starts``.
+    """
+    explicit = template.get("starts")
+    if explicit:
+        return [str(start) for start in explicit]
+    raw = (template.get("input") or {}).get("archive_path")
+    if raw:
+        select = str((template.get("input") or {}).get("select") or "con")
+        return list(_archive_start_ids(str(raw), select))
+    return default_starts(str(template["kind"]))
+
+
+def _pos_con(template: dict | None, start: str, work: Path, kind: str):
+    """Reactant ``pos.con`` for a basin or minima start."""
+    work.mkdir(parents=True, exist_ok=True)
+    raw = (template or {}).get("input", {}).get("archive_path") if template else None
+    if not raw:
+        archive = _archive("website/globalopt/lj38/100_lj38.tar.gz")
+        con = _extract_suffix(archive, f"/{int(start)}.con", work / "src.con")
+        return [(str(con), "pos.con")], []
+    select = str((template.get("input") or {}).get("select") or "con")
+    archive = _archive(str(raw))
+    if select == "coords":
+        text_path = _extract_basename(archive, f"coords.{start}", work / "coords.txt")
+        dest = work / "src.con"
+        dest.write_text(
+            coords_to_con(text_path.read_text(encoding="utf-8", errors="replace")),
+            encoding="utf-8",
+        )
+        return [(str(dest), "pos.con")], []
+    if select == "con":
+        con = _extract_basename(archive, f"{start}.con", work / "src.con")
+        return [(str(con), "pos.con")], []
+    raise ValueError(f"{kind} select {select} is not coords or con")
 
 
 def _extract_suffix(archive: Path, suffix: str, dest: Path) -> Path:
@@ -529,9 +778,7 @@ def _files(kind: str, start: str, work: Path) -> tuple[list[tuple[str, str]], li
             )
         return [], [("reactant.con", reactant_text), ("product.con", product_text)]
     if kind in {"basin", "minima"}:
-        archive = _archive("website/globalopt/lj38/100_lj38.tar.gz")
-        con = _extract_suffix(archive, f"/{int(start)}.con", work / "src.con")
-        return [(str(con), "pos.con")], []
+        return _pos_con(None, start, work, kind)
     if kind in {"prd", "hyper"}:
         path = _archive("website/accelerated-md/reactant.con")
         return [(str(path), "pos.con")], []
@@ -604,18 +851,20 @@ def _guard(record: dict, client_calls) -> dict:
 
 def _cache_path(family: str, template_name: str, seed: int, start: str, passes: int) -> Path:
     safe = template_name.replace("/", "-")
-    kernel = str(load_template(ROOT, template_name).get("kernel") or "unset")
-    return (
-        CACHE
-        / "harness-1"
-        / FAMILIES[family]["cache"]
-        / KERNEL
-        / kernel
-        / safe
-        / f"passes-{passes}"
-        / str(seed)
-        / f"{start}.json"
-    )
+    template = load_template(ROOT, template_name)
+    kernel = str(template.get("kernel") or "unset")
+    token = str(template.get("cache_token") or "")
+    parts = [
+        CACHE,
+        "harness-1",
+        FAMILIES[family]["cache"],
+        KERNEL,
+        kernel,
+    ]
+    if token:
+        parts.append(token)
+    parts.extend([safe, f"passes-{passes}", str(seed), f"{start}.json"])
+    return Path(*parts)
 
 
 def _read_cache(family: str, template_name: str, seed: int, start: str, passes: int) -> dict | None:
@@ -794,7 +1043,10 @@ def run_case(
                     record["uncached"] = True
                 record = _guard(record, record.get("client_calls"))
             else:
-                copies, texts = _files(kind, str(start), work / "src")
+                if kind in {"basin", "minima"} and (template.get("input") or {}).get("archive_path"):
+                    copies, texts = _pos_con(template, str(start), work / "src", kind)
+                else:
+                    copies, texts = _files(kind, str(start), work / "src")
                 found = _run_client(
                     client,
                     _ini_text(template, int(seed), wrapper, python_job=python_job),
@@ -805,7 +1057,19 @@ def run_case(
                 )
                 calls, _verify = remote_count(server.host, server.port)
                 fields = found["fields"]
-                if kind == "basin":
+                if kind == "basin" and template.get("cambridge"):
+                    energy_text = fields.get("minimum_energy")
+                    energy = float(energy_text) if energy_text is not None else None
+                    problem = resolve_problem(ROOT, template["problem"])
+                    record = classify_cambridge(
+                        calls=calls,
+                        cap=cap,
+                        energy=energy,
+                        returncode=int(found["returncode"]),
+                        reference=reference_energy(problem),
+                        tolerance=energy_tolerance(problem),
+                    )
+                elif kind == "basin":
                     energy_text = fields.get("minimum_energy")
                     stop = float(template["ini"]["Basin Hopping"]["stop_energy"])
                     energy = float(energy_text) if energy_text is not None else None
@@ -900,7 +1164,7 @@ def _jobs(family: str) -> list[dict]:
 
 def grid_points(template: dict, *, full: bool, limit: int = 0) -> list[tuple[int, str]]:
     seeds = [int(seed) for seed in template.get("seeds", [1])]
-    starts = [str(start) for start in (template.get("starts") or default_starts(str(template["kind"])))]
+    starts = template_starts(template)
     if not full:
         seeds, starts = seeds[:1], starts[:1]
     points = [(seed, start) for seed in seeds for start in starts]
@@ -971,6 +1235,8 @@ def write_campaign(template: dict, rows: list[tuple[int, str, dict]], output: Pa
         summary["force_calls_median"] = float(np.median(calls))
     text = benchmark_text(summary, template)
     extra = ["counter harness", "count_keys HarnessCounter"]
+    if template.get("tuning"):
+        extra.append(f"tuning {template['tuning']}")
     if partial:
         extra.append("partial true")
     output.parent.mkdir(parents=True, exist_ok=True)
@@ -983,9 +1249,35 @@ def write_campaign(template: dict, rows: list[tuple[int, str, dict]], output: Pa
     return summary
 
 
+def _start_order(start: str) -> tuple:
+    text = str(start)
+    if text.isdigit():
+        return (0, int(text))
+    return (1, text)
+
+
+def _publish(template: dict, rows: list) -> dict | None:
+    ordered = sorted(rows, key=lambda item: (item[0], _start_order(item[1])))
+    stem = str(template["id"]).replace("/", "-")
+    output = ROOT / "results" / "campaign" / f"{stem}.dat"
+    summary = write_campaign(template, ordered, output)
+    if summary:
+        print(
+            f"{summary['problem']} {summary['template']} "
+            f"force_calls={summary.get('force_calls')} nfailed={summary['nfailed']} "
+            f"starts={summary['starts']} partial={summary['partial']}",
+            flush=True,
+        )
+    return summary
+
+
 def fill(family: str, *, kinds: set[str] | None = None, workers: int = 1, limit: int = 0, full: bool = True) -> list[dict]:
-    """Run harness starts and write one campaign file per template."""
-    from concurrent.futures import ProcessPoolExecutor
+    """Run harness starts and write one campaign file per template.
+
+    The campaign file is rewritten after each finished start, sorted by
+    seed and start index, so a long grid keeps the starts that returned.
+    """
+    from concurrent.futures import ProcessPoolExecutor, as_completed
 
     jobs = []
     templates = {}
@@ -997,30 +1289,30 @@ def fill(family: str, *, kinds: set[str] | None = None, workers: int = 1, limit:
         passes = int(template.get("pass_limit") or 0)
         for seed, start in grid_points(template, full=full, limit=limit):
             jobs.append((template["id"], seed, start, passes))
+    grouped: dict[str, list] = {ident: [] for ident in templates}
+
+    def _take(row: dict) -> None:
+        grouped.setdefault(row["template"], []).append((row["seed"], row["start"], row))
+        template = templates.get(row["template"])
+        if template is not None:
+            _publish(template, grouped[row["template"]])
+
     if workers <= 1:
-        results = [_fill_job(job) for job in jobs]
+        for job in jobs:
+            _take(_fill_job(job))
     else:
         import multiprocessing as mp
 
         with ProcessPoolExecutor(max_workers=workers, mp_context=mp.get_context("spawn")) as pool:
-            results = list(pool.map(_fill_job, jobs))
-    grouped: dict[str, list] = {ident: [] for ident in templates}
-    for row in results:
-        grouped.setdefault(row["template"], []).append((row["seed"], row["start"], row))
+            pending = [pool.submit(_fill_job, job) for job in jobs]
+            for future in as_completed(pending):
+                _take(future.result())
     written = []
     for ident, template in templates.items():
-        stem = ident.replace("/", "-")
-        output = ROOT / "results" / "campaign" / f"{stem}.dat"
         rows = grouped.get(ident, [])
-        summary = write_campaign(template, rows, output)
+        summary = _publish(template, rows)
         if summary:
             written.append(summary)
-            print(
-                f"{summary['problem']} {summary['template']} "
-                f"force_calls={summary.get('force_calls')} nfailed={summary['nfailed']} "
-                f"starts={summary['starts']} partial={summary['partial']}",
-                flush=True,
-            )
         else:
             errors = [str(row.get("error") or row.get("failure") or "") for _seed, _start, row in rows]
             print(
@@ -1063,7 +1355,7 @@ def install_benchmarks(family: str, namespace: dict) -> None:
         kind = str(template["kind"])
         asv_full = bool(template.get("asv_full", True))
         seeds = [int(seed) for seed in template.get("seeds", [1])]
-        starts = [str(start) for start in (template.get("starts") or default_starts(kind))]
+        starts = template_starts(template)
         if full_grid() and asv_full:
             used_seeds, used_starts = seeds, starts
             passes = int(template.get("pass_limit") or 0)
