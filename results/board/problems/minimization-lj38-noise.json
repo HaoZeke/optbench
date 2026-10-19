@@ -2189,6 +2189,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 6
       },
       "full_n": 1000,
@@ -2509,7 +2510,8 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 16,
+        "divergence": 0,
+        "not_converged": 16,
         "wrong_stationary": 17
       },
       "full_n": 1000,
@@ -2600,7 +2602,8 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 30,
+        "divergence": 0,
+        "not_converged": 30,
         "wrong_stationary": 6
       },
       "full_n": 1000,
@@ -3795,7 +3798,8 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 9,
+        "divergence": 0,
+        "not_converged": 9,
         "wrong_stationary": 188
       },
       "full_n": 1000,
@@ -4576,8 +4580,9 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 1000,
-        "wrong_stationary": 0
+        "divergence": 0,
+        "not_converged": 991,
+        "wrong_stationary": 9
       },
       "full_n": 1000,
       "history": false,
@@ -4621,8 +4626,9 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 1000,
-        "wrong_stationary": 0
+        "divergence": 0,
+        "not_converged": 997,
+        "wrong_stationary": 3
       },
       "full_n": 1000,
       "history": false,
@@ -4666,8 +4672,9 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 1000,
-        "wrong_stationary": 0
+        "divergence": 0,
+        "not_converged": 997,
+        "wrong_stationary": 3
       },
       "full_n": 1000,
       "history": false,
@@ -4711,8 +4718,9 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 1000,
-        "wrong_stationary": 0
+        "divergence": 0,
+        "not_converged": 992,
+        "wrong_stationary": 8
       },
       "full_n": 1000,
       "history": false,

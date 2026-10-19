@@ -5803,6 +5803,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 6
       },
       "full_n": 1000,
@@ -7963,8 +7964,9 @@
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 1000,
-        "wrong_stationary": 0
+        "divergence": 0,
+        "not_converged": 991,
+        "wrong_stationary": 9
       },
       "full_n": 1000,
       "history": false,

@@ -1075,9 +1075,9 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="version">pygsm 1.0.0+692.g1b4d5a5.dirty</td>
    <td data-field="commit">1b4d5a5557a6</td>
    <td data-field="par2_mean">5000</td>
-   <td data-field="mean_calls">2493.28</td>
-   <td data-field="median_calls">2500</td>
-   <td data-field="failures">crash 0, divergence 1, cap 49, wrong_stationary 0</td>
+   <td data-field="mean_calls">1982.72</td>
+   <td data-field="median_calls">1968.5</td>
+   <td data-field="failures">crash 0, divergence 31, cap 19, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="pygsm/de-gsm">
@@ -1086,9 +1086,9 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="version">pygsm 1.0.0+692.g1b4d5a5.dirty</td>
    <td data-field="commit">1b4d5a5557a6</td>
    <td data-field="par2_mean">20000</td>
-   <td data-field="mean_calls">9093.33</td>
-   <td data-field="median_calls">10000</td>
-   <td data-field="failures">crash 0, divergence 8, cap 43, wrong_stationary 0</td>
+   <td data-field="mean_calls">2015.16</td>
+   <td data-field="median_calls">1719</td>
+   <td data-field="failures">crash 0, divergence 51, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
    </tbody></table></div>
@@ -1096,4 +1096,52 @@ The number is written only after the run finishes under the problem rule.
    <li>LJ38 double-ended saddle: partial.</li>
    <li>lj38_2ts_separation: partial.</li>
    </ul>
+   <h3>TorchSim</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization</td>
+   <td>v0.6.2</td>
+   <td>5540d893a849</td>
+   <td><a href="https://github.com/TorchSim/torch-sim">https://github.com/TorchSim/torch-sim</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="minimization/lj38" data-template="torchsim/lj38-fire">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="template">torchsim/lj38-fire</td>
+   <td data-field="version">TorchSim 0.6.2</td>
+   <td data-field="commit">5540d893a849</td>
+   <td data-field="par2_mean">835.693</td>
+   <td data-field="mean_calls">719.902</td>
+   <td data-field="median_calls">610.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 6</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-template="torchsim/lj38-noise-fire-s0">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="template">torchsim/lj38-noise-fire-s0</td>
+   <td data-field="version">TorchSim 0.6.2</td>
+   <td data-field="commit">5540d893a849</td>
+   <td data-field="par2_mean">835.693</td>
+   <td data-field="mean_calls">719.902</td>
+   <td data-field="median_calls">610.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 6</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-template="torchsim/morse-fire">
+   <td>Morse bulk</td>
+   <td data-field="template">torchsim/morse-fire</td>
+   <td data-field="version">TorchSim 0.6.2</td>
+   <td data-field="commit">5540d893a849</td>
+   <td data-field="par2_mean">113.81</td>
+   <td data-field="mean_calls">113.81</td>
+   <td data-field="median_calls">112</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table></div>
    </section>
