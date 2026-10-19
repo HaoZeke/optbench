@@ -171,6 +171,85 @@ profile = "default"
 task = "basin-hopping"
 ranked = true
 
+[[template]]
+id = "ase-globalopt/lj38-basin"
+code = "ase"
+problem = "globalopt/lj38"
+profile = "default"
+task = "basin-hopping"
+ranked = true
+
+[[template]]
+id = "ase-globalopt/lj38-minima"
+code = "ase"
+problem = "globalopt/lj38"
+profile = "default"
+task = "minima-hopping"
+ranked = true
+
+[[template]]
+id = "ase-globalopt/lj75-basin"
+code = "ase"
+problem = "globalopt/lj75"
+profile = "default"
+task = "basin-hopping"
+ranked = true
+
+[[template]]
+id = "ase-globalopt/lj75-minima"
+code = "ase"
+problem = "globalopt/lj75"
+profile = "default"
+task = "minima-hopping"
+ranked = true
+
+[[template]]
+id = "ase-globalopt/lj98-basin"
+code = "ase"
+problem = "globalopt/lj98"
+profile = "default"
+task = "basin-hopping"
+ranked = true
+
+[[template]]
+id = "ase-globalopt/lj98-minima"
+code = "ase"
+problem = "globalopt/lj98"
+profile = "default"
+task = "minima-hopping"
+ranked = true
+
+[[template]]
+id = "ase-globalopt/lj150-basin"
+code = "ase"
+problem = "globalopt/lj150"
+profile = "default"
+task = "basin-hopping"
+ranked = true
+
+[[template]]
+id = "ase-globalopt/lj150-minima"
+code = "ase"
+problem = "globalopt/lj150"
+profile = "default"
+task = "minima-hopping"
+ranked = true
+
+[[template]]
+id = "ase-globalopt/lj100-binary-basin"
+code = "ase"
+problem = "globalopt/lj100-binary"
+profile = "default"
+task = "basin-hopping"
+ranked = true
+
+[[template]]
+id = "ase-globalopt/lj100-binary-minima"
+code = "ase"
+problem = "globalopt/lj100-binary"
+profile = "default"
+task = "minima-hopping"
+ranked = true
 # generated ASE and Sella templates
 
 [[template]]

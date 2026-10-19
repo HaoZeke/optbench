@@ -1,0 +1,35 @@
+id = "ase-globalopt/lj75-basin"
+engine = "ase"
+code = "ASE"
+code_version = "3.29.0"
+commit = "f27c0005ae6a67ea419f996e728668865bfc1f86"
+algorithm = "BasinHopping"
+problem = "globalopt/lj75"
+task = "basin-hopping"
+profile = "default"
+reducer = "par2"
+ranked = true
+parameter_source = "documented"
+note = """
+ASE 3.29.0 BasinHopping at commit f27c0005ae6a67ea419f996e728668865bfc1f86. doc/ase/optimize.rst at that commit constructs BasinHopping with temperature = 100 * kB, dr = 0.5, optimizer = LBFGS, and fmax = 0.1. ase/test/test_basin.py at that commit calls BasinHopping with temperature = 100 * kB and dr = 0.5. The constructor in ase/optimize/basin.py defaults to temperature = 100 * units.kB, dr = 0.1, optimizer = FIRE, and fmax = 0.1. This row uses the documentation example. The harness seeds numpy.random with 314159 plus the start index, the seed integer in templates/eon-svn/bh-lj38.toml. BasinHopping.initialize stores the quenched coordinates, and an accepted step stores the displaced coordinates from move. The energy window is the problem file. Coords files carry positions only. Those atoms use symbol C, the symbol on the lj38 con geometries, and ASE's carbon mass. Binary con files keep the written symbol and mass. Component 1 is species B and component 2 is species A, matching pair_coeff sigma 1.3 and sigma 1.0 in archive/entries/globalopt/lj100-binary/eon-basinhopping/in.lammps.
+"""
+
+[optimizer]
+name = "BasinHopping"
+local = "LBFGS"
+
+[optimizer.parameters]
+temperature = 0.008617330337217212
+dr = 0.5
+fmax = 0.1
+seed = 314159
+
+[potential]
+kind = "lennard-jones"
+
+[stop]
+energy_above_minimum = 0.001
+max_force_calls = 1000000
+
+[input]
+archive_path = "website/globalopt/lj75/lj75_clusters.tgz"
