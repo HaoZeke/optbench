@@ -436,7 +436,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="minimization-morse-bulk-eon-sd-twopoint">
    <td class="num">7</td>
-   <td class="text">eon-sd-twopoint</td>
+   <td class="text">eon-sd-twopoint · not reproduced</td>
    <td class="text">Eon r2030</td>
    <td class="num">64</td>
    <td class="num">138</td>

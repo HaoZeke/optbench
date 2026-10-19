@@ -262,7 +262,7 @@ The number is written only after the run finishes under the problem rule.
    <li>Al: partial.</li>
    <li>Pt: partial.</li>
    <li>lj38: partial.</li>
-   <li>Morse bulk: not yet on the harness counter.</li>
+   <li>Morse bulk: not yet on the harness counter, partial.</li>
    <li>Pt heptamer island: partial.</li>
    <li>LJ38: partial.</li>
    <li>pt-island: partial.</li>

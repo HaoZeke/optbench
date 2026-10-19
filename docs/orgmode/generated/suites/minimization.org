@@ -807,6 +807,7 @@
    <li>ase/morse-fire-tuned ASE campaign, asv n=100, does not reproduce the 2014 archive.</li>
    <li>ase/morse-lbfgs-tuned ASE campaign, asv n=100, does not reproduce the 2014 archive.</li>
    <li>ase/morse-preconlbfgs-tuned ASE campaign, asv n=100, does not reproduce the 2014 archive.</li>
+   <li>eon-svn/morse-sd-twopoint Eon svn campaign n=100, does not reproduce the 2014 archive.</li>
    <li>ase/morse-preconode12r-tuned ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
    <li>ase/morse-bfgs-default ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
    <li>ase/morse-bfgslinesearch-default ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
@@ -825,7 +826,7 @@
    <li>ase/morse-preconlbfgs-tuned ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
    </ul>
    <h3>Not a harness score</h3><ul>
-   <li>eon-svn/morse-sd-twopoint Eon svn n=100, not yet on the harness counter.</li>
+   <li>eon-svn/morse-sd-twopoint-current-svn Eon svn n=100, not yet on the harness counter.</li>
    </ul>
    <h3>Not scored</h3><ul>
    <li>eon-client/morse-cg: no per-start record</li>
@@ -925,7 +926,7 @@
    </tr>
    <tr id="minimization-morse-bulk-eon-sd-twopoint">
    <td class="num">7</td>
-   <td class="text">eon-sd-twopoint</td>
+   <td class="text">eon-sd-twopoint · not reproduced</td>
    <td class="text">Eon r2030</td>
    <td class="num">64</td>
    <td class="num">138</td>
