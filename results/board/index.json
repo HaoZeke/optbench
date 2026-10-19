@@ -15181,18 +15181,27 @@
       ],
       "profile": {
         "area_log10": {
-          "eon/htst-al-dimer 3.6.0 Dimer-CG rotation: max=50 tol=1 campaign 1d71c94": 1.2041199826559248
+          "eon-svn/htst-al-dimer r2549 Dimer-CG rotation: max=50 tol=1 campaign r2549": 0.6227881913423836,
+          "eon/htst-al-dimer 3.6.0 Dimer-CG rotation: max=50 tol=1 campaign 1d71c94": 1.190929309919475
         },
         "rho": {
+          "eon-svn/htst-al-dimer r2549 Dimer-CG rotation: max=50 tol=1 campaign r2549": [
+            0.06885758998435054,
+            0.20657276995305165,
+            0.5226917057902973,
+            0.8247261345852895,
+            0.9608763693270735
+          ],
           "eon/htst-al-dimer 3.6.0 Dimer-CG rotation: max=50 tol=1 campaign 1d71c94": [
-            1.0,
-            1.0,
+            0.9311424100156495,
+            0.9906103286384976,
             1.0,
             1.0,
             1.0
           ]
         },
         "solved": {
+          "eon-svn/htst-al-dimer r2549 Dimer-CG rotation: max=50 tol=1 campaign r2549": 1.0,
           "eon/htst-al-dimer 3.6.0 Dimer-CG rotation: max=50 tol=1 campaign 1d71c94": 1.0
         },
         "taus": [
@@ -15245,6 +15254,51 @@
           "source": "campaign",
           "success_rate": 1.0,
           "template": "eon/htst-al-dimer",
+          "tuning": "Dimer-CG rotation: max=50 tol=1",
+          "wilson_high": 1.0,
+          "wilson_low": 0.9940242515973671
+        },
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": null,
+          "code": "Eon svn",
+          "code_version": "r2549",
+          "commit": "r2549",
+          "comparable": true,
+          "counter": "htst-reducer",
+          "current": true,
+          "entry": "eon-svn-htst-al-dimer",
+          "failures": {
+            "cap": 0,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 0
+          },
+          "full_n": 639,
+          "history": false,
+          "max_calls": 80805.0,
+          "mean_calls": 19656.744913928014,
+          "mean_per_image": null,
+          "median": 16858.0,
+          "median_calls": 16858.0,
+          "median_high": 17963.874999999996,
+          "median_low": 16129.0,
+          "median_per_image": null,
+          "min_calls": 2965.0,
+          "n": 639,
+          "nfailed": 0,
+          "note": "starts.jsonl",
+          "par2_mean": null,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/eon-svn-htst-al-dimer.dat",
+          "problem": "hTST/Al",
+          "registry_match": true,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 1.0,
+          "template": "eon-svn/htst-al-dimer",
           "tuning": "Dimer-CG rotation: max=50 tol=1",
           "wilson_high": 1.0,
           "wilson_low": 0.9940242515973671
@@ -15441,18 +15495,27 @@
       ],
       "profile": {
         "area_log10": {
-          "eon/htst-pt-dimer 3.6.0 Dimer-CG rotation: max=10, tol=1 campaign 1d71c94": 1.2041199826559248
+          "eon-svn/htst-pt-dimer r2549 Dimer-CG rotation: max=10, tol=1 campaign r2549": 1.0651830615802411,
+          "eon/htst-pt-dimer 3.6.0 Dimer-CG rotation: max=10, tol=1 campaign 1d71c94": 1.0767611383365483
         },
         "rho": {
+          "eon-svn/htst-pt-dimer r2549 Dimer-CG rotation: max=10, tol=1 campaign r2549": [
+            0.5384615384615384,
+            0.7692307692307693,
+            1.0,
+            1.0,
+            1.0
+          ],
           "eon/htst-pt-dimer 3.6.0 Dimer-CG rotation: max=10, tol=1 campaign 1d71c94": [
-            1.0,
-            1.0,
+            0.46153846153846156,
+            0.8461538461538461,
             1.0,
             1.0,
             1.0
           ]
         },
         "solved": {
+          "eon-svn/htst-pt-dimer r2549 Dimer-CG rotation: max=10, tol=1 campaign r2549": 1.0,
           "eon/htst-pt-dimer 3.6.0 Dimer-CG rotation: max=10, tol=1 campaign 1d71c94": 1.0
         },
         "taus": [
@@ -15505,6 +15568,51 @@
           "source": "campaign",
           "success_rate": 1.0,
           "template": "eon/htst-pt-dimer",
+          "tuning": "Dimer-CG rotation: max=10, tol=1",
+          "wilson_high": 1.0,
+          "wilson_low": 0.7719046276458016
+        },
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": null,
+          "code": "Eon svn",
+          "code_version": "r2549",
+          "commit": "r2549",
+          "comparable": true,
+          "counter": "htst-reducer",
+          "current": true,
+          "entry": "eon-svn-htst-pt-dimer",
+          "failures": {
+            "cap": 0,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 0
+          },
+          "full_n": 13,
+          "history": false,
+          "max_calls": 875022.0,
+          "mean_calls": 506026.23076923075,
+          "mean_per_image": null,
+          "median": 540811.0,
+          "median_calls": 540811.0,
+          "median_high": 588777.0,
+          "median_low": 308305.0,
+          "median_per_image": null,
+          "min_calls": 185469.0,
+          "n": 13,
+          "nfailed": 0,
+          "note": "starts.jsonl",
+          "par2_mean": null,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/eon-svn-htst-pt-dimer.dat",
+          "problem": "hTST/Pt",
+          "registry_match": true,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 1.0,
+          "template": "eon-svn/htst-pt-dimer",
           "tuning": "Dimer-CG rotation: max=10, tol=1",
           "wilson_high": 1.0,
           "wilson_low": 0.7719046276458016
@@ -41344,7 +41452,7 @@
       "title": "pt-island"
     }
   },
-  "ranked_count": 459,
+  "ranked_count": 461,
   "schema": "optbench.board/v1",
   "unmapped": [
     {

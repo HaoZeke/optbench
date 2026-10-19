@@ -222,3 +222,26 @@ the table above. The ci starts are `pair_02`, `pair_17`, `pair_18`,
 `pair_28`, and `pair_38`. The neb starts are `pair_05`, `pair_09`,
 `pair_13`, `pair_17`, `pair_18`, `pair_28`, `pair_37`, `pair_38`, and
 `pair_42`.
+
+## hTST windows
+
+`optbench.htst` reduces `states/0/processtable` and
+`search_results.txt` the way the 2014 `report.py` scripts do. A start
+is one barrier window. The client is this r2549 binary.
+`eon-svn/htst-al-dimer` calls `eam_al`. `eon-svn/htst-pt-dimer` calls
+`morse_pt`. Both stayed on state 0, missed no reference barriers, and
+are not partial. The aluminium run resumed one state after the r2549
+communicator stopped submitting jobs. `seconds` on that dat is the
+completing process, 3102.16. The archived rows are the 2014 means.
+
+| row | barrier jobs | barrier force calls | barrier windows | rate jobs | rate force calls | rate windows |
+|---|---:|---:|---:|---:|---:|---:|
+| archive Al eon-dimer-cg | 48 | 2.887e+04 | 639 | 1511 | 8.979e+05 | 20 |
+| r2549 Al eon-svn/htst-al-dimer | 50 | 1.966e+04 | 639 | 1600 | 6.206e+05 | 19 |
+| archive Al eon-dimer-cg2 | 46 | 2.107e+04 | 432 | 1671 | 7.663e+05 | 11 |
+| archive Pt eon-dimer-cg | 1050 | 4.960e+05 | 13 | 54 | 2.563e+04 | 276 |
+| r2549 Pt eon-svn/htst-pt-dimer | 1062 | 5.060e+05 | 13 | 57 | 2.716e+04 | 242 |
+
+The r2549 aluminium search log has 32346 rows. The platinum log has
+13824. The archive aluminium dimer-cg log that the reducer test reads
+has 30997.

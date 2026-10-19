@@ -352,15 +352,19 @@ def htst(
     """Run one hTST template and reduce states/0 with the barrier and rate windows."""
     from optbench.htst_eon import run_htst
 
+    root = root.resolve()
     destination = output or Path("results/campaign") / f"{name.replace('/', '-')}.dat"
     if not destination.is_absolute():
-        destination = root / destination
+        destination = (root / destination).resolve()
+    work_dir = work or Path("work") / name.replace("/", "-")
+    if not work_dir.is_absolute():
+        work_dir = (root / work_dir).resolve()
     summary = run_htst(
         root,
         name,
         _eon_client(client),
         destination,
-        work or Path("work") / name.replace("/", "-"),
+        work_dir,
         workers,
         resume=resume,
     )
