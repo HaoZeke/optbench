@@ -231,6 +231,11 @@ def _minimize_job(job: dict) -> dict:
         "seconds": time.perf_counter() - started,
         "rgmin_stop": None if report is None else str(getattr(report, "stop", "")),
     }
+    meta = getattr(potential, "geometric_meta", None) if potential is not None else None
+    if meta:
+        record["coordinate_system"] = meta["coordinate_system"]
+        record["geometric_steps"] = meta["geometric_steps"]
+        record["rebuilds"] = meta["rebuilds"]
     if error:
         record["error"] = error
     return record
@@ -367,11 +372,17 @@ def _drive_geometric(job, x0, observed, potential, cap, clean_tol, energy_tol, c
             "neighbors": int(job["options"].get("neighbors") or 2),
             "element": str(job["options"].get("element") or "H"),
             "cap": cap,
+            "start": job.get("start"),
         },
         evaluate,
         stop,
     )
     potential.last_point = report["point"]
+    potential.geometric_meta = {
+        "coordinate_system": str(report.get("coordinate_system") or ""),
+        "geometric_steps": int(report.get("steps") or 0),
+        "rebuilds": int(report.get("rebuilds") or 0),
+    }
     if report.get("error"):
         text = str(report["error"])
         if "ForceCallCap" in text or "force-call cap" in text:
@@ -395,7 +406,7 @@ def _drive_sella(job, x0, observed, potential, cap, clean_tol, energy_tol, compo
     return point, stopped
 
 
-def _dat(summary: dict, template: dict, metrics: dict, sigma: float) -> str:
+def _dat(summary: dict, template: dict, metrics: dict, sigma: float, ended: dict[str, int] | None = None) -> str:
     rows = {
         "force_calls": summary.get("force_calls"),
         "force_calls_min": summary.get("force_calls_min"),
@@ -431,6 +442,9 @@ def _dat(summary: dict, template: dict, metrics: dict, sigma: float) -> str:
         "# A curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6).",
         "# Energy and Kabsch RMSD are not applied: the problem file has no per-start reference.",
     ]
+    if ended:
+        parts = ", ".join(f"{name} {count}" for name, count in sorted(ended.items()))
+        lines.append("# final coordinate system: " + parts)
     note = str(template.get("note") or "").strip()
     if note:
         lines.append("# " + note.replace("\n", " "))
@@ -620,8 +634,13 @@ def run_template(
             }
         ],
     }
+    ended: dict[str, int] = {}
+    for record in records:
+        name = str(record.get("coordinate_system") or "")
+        if name:
+            ended[name] = ended.get(name, 0) + 1
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(_dat(summary, template, metrics, sigma), encoding="utf-8")
+    output.write_text(_dat(summary, template, metrics, sigma, ended), encoding="utf-8")
     write_starts(output.with_suffix(".starts.jsonl"), records)
     output.with_suffix(".v2.json").write_text(json.dumps(document, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     if partial_path.is_file() and len(records) == len(jobs):
