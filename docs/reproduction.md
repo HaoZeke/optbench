@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-47 reproduced, 28 not reproduced, 76 not rerun. 151 archive rows.
+46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -140,7 +140,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | morse-bulk/eon-lbfgs | force_calls 52 | 52 | reproduced |
 | morse-bulk/eon-sd | force_calls 196 | 7038 | not reproduced; morse_sd |
 | morse-bulk/eon-sd-twopoint | — | — | not rerun |
-| morse-bulk/optim | force_calls 46 | 50 | reproduced; residual |
+| morse-bulk/optim | force_calls 46 | 55 | not reproduced; optim_morse_memory |
 | morse-bulk/pele-lbfgs | force_calls 51 | 92 | not reproduced; pele_morse |
 | morse-bulk/tsase-sdlbfgs | — | — | not rerun |
 
@@ -217,7 +217,6 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 ## Residuals inside the band
 
-- minimization/morse-bulk/optim: Inside the 10% band (50 vs 46, unrounded mean 49.94). run.sh divides coordinates by r0 = 2.897. The missing preamble is OPTIM bulk Morse: atom M, BULK, PARAMS rho = 1.6047*r0, box and cutoff 9.5 in those units. comments.txt is UPDATES 100 and MAXBFGS 2.0. BFGSMIN is the force norm over sqrt(3N). The score is OPTIM's energy+gradient calls. Cutoff 7 on that same preamble scores 26.
 - tsopt/LJ38/pele_cd: Inside the 10% band (263.52 vs 254). The same xyz-versus-con starting set as ts-ffd. findTS_local.py for the CD row does not pass orthogZeroEigs; the harness template sets orthog translations-rotations. The paper baseline is this 2014-stop mean, not the harness-stop mean 335.06.
 - tsopt/LJ38/pele_ffd: Inside the 10% band (207.51 vs 192). Archive run.sh unpacks coords-xyz.tar.gz (200 xyz, max pair about 4.4). The harness problem points at coords-con.tar.gz (max pair about 37). Kabsch RMS is about 6.33, so the sets are not the same geometry. Neither set has a pair past cutoff 40, and both drivers use RMS tolerance 1e-3/sqrt(114). The 8% residual is the starting set. The paper baseline is this 2014-stop mean, not the harness-stop mean 254.48.
 
@@ -313,6 +312,12 @@ ASE 3.29 with the archived Morse script (L-BFGS memory 20, maxstep 0.2, alpha 25
 eOn Morse steepest descent scores 7038 with 19 failures. The archive is 196 with 0. Morse L-BFGS, CG, and FIRE on the same client reproduce, so the kernel is not the split.
 
 - minimization/morse-bulk/eon-sd
+
+### optim_morse_memory
+
+Current OPTIM SVNREV df8da599, unmodified, stock L-BFGS (UPDATES 4, MAXBFGS 0.2). BFGSMIN is the archive force norm over sqrt(3N). BFGSSTEPS is the cap. Coordinates, the box, and cutoff 9.5 are divided by r0. PARAMS rho is 1.6047*r0. The score is OPTIM energy+gradient calls: 55 against 46, unrounded mean 54.65, nfailed 0. The ranked row is optim/morse-lbfgs-stock. The memory-100 preamble stays an unranked diagnostic.
+
+- minimization/morse-bulk/optim
 
 ### pele_morse
 

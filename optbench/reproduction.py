@@ -111,7 +111,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
-    "repro/minimization-morse-bulk-optim": "ccd7658cb4262f07c38b7f73b0f0ef78dc682d7b",
+    "repro/minimization-morse-bulk-optim": "4870220eb0668839b48485510d00cb688aacaa28",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -144,7 +144,7 @@ MATCHES: list[dict] = [
     {"key": "minimization/morse-bulk/eon-cg", "template": "eon-client/morse-cg", "branch": "main", "path": "results/campaign/eon-client-morse-cg.dat"},
     {"key": "minimization/morse-bulk/eon-fire", "template": "eon-client/morse-fire", "branch": "main", "path": "results/campaign/eon-client-morse-fire.dat"},
     {"key": "minimization/morse-bulk/eon-sd", "template": "eon-client/morse-sd", "branch": "main", "path": "results/campaign/eon-client-morse-sd.dat", "cause": "morse_sd"},
-    {"key": "minimization/morse-bulk/optim", "template": "optim/morse-lbfgs-tuned", "branch": "repro/minimization-morse-bulk-optim", "path": "results/campaign/optim-morse-lbfgs-tuned.dat", "cause": "optim_morse_memory", "extra": {"unrounded_mean": 49.94}},
+    {"key": "minimization/morse-bulk/optim", "template": "optim/df8da599-morse-lbfgs", "branch": "repro/minimization-morse-bulk-optim", "path": "results/ledger/optim-df8da599-morse-lbfgs.dat", "cause": "optim_morse_memory", "extra": {"code_version": "df8da599", "unrounded_mean": 54.65}},
     {"key": "minimization/morse-bulk/pele-lbfgs", "template": "pele/morse-lbfgs", "branch": "cells/pele/min", "path": "results/campaign/pele-b7081b93-morse-lbfgs.dat", "cause": "pele_morse"},
     {"key": "minimization/morse-bulk/ase-lbfgs", "template": "ase/morse-lbfgs-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-morse-lbfgs-tuned.dat", "cause": "ase_morse_script"},
     {"key": "minimization/morse-bulk/ase-fire", "template": "ase/morse-fire-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-morse-fire-tuned.dat", "cause": "ase_morse_script"},
@@ -240,11 +240,11 @@ CAUSE_TEXT = {
         "The harness score is pes.evaluate on the harness potential."
     ),
     "optim_morse_memory": (
-        "Inside the 10% band (50 vs 46, unrounded mean 49.94). "
-        "run.sh divides coordinates by r0 = 2.897. The missing preamble is OPTIM bulk Morse: atom M, BULK, "
-        "PARAMS rho = 1.6047*r0, box and cutoff 9.5 in those units. "
-        "comments.txt is UPDATES 100 and MAXBFGS 2.0. BFGSMIN is the force norm over sqrt(3N). "
-        "The score is OPTIM's energy+gradient calls. Cutoff 7 on that same preamble scores 26."
+        "Current OPTIM SVNREV df8da599, unmodified, stock L-BFGS (UPDATES 4, MAXBFGS 0.2). "
+        "BFGSMIN is the archive force norm over sqrt(3N). BFGSSTEPS is the cap. "
+        "Coordinates, the box, and cutoff 9.5 are divided by r0. PARAMS rho is 1.6047*r0. "
+        "The score is OPTIM energy+gradient calls: 55 against 46, unrounded mean 54.65, nfailed 0. "
+        "The ranked row is optim/morse-lbfgs-stock. The memory-100 preamble stays an unranked diagnostic."
     ),
     "optim_rr_defaults": (
         "The Rayleigh-Ritz template uses updates 4. The archived first-order mean is 25 and the second-order mean is 46. "
