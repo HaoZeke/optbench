@@ -1,0 +1,39 @@
+# rep 1 force_calls 1926475 total_searches 2336 repeats 20 eon_repeats 20 rate 33598760 confidence 0.95 reached 1
+# rep 2 force_calls 3609880 total_searches 4312 repeats 20 eon_repeats 20 rate 33584480 confidence 0.95 reached 1
+# rep 3 force_calls 2847726 total_searches 3400 repeats 20 eon_repeats 20 rate 33587420 confidence 0.95 reached 1
+code eOn
+code_version 3.6.0
+commit 1d71c944501832bfafb955ffe13b9aae50c8efd4
+counter harness
+count_keys eon_search_calls+pref-fcs
+contributor Rohit Goswami
+repetitions 3
+workers 8
+temperature_K 150
+thermostat akmc
+reference_rate 835900
+reference_products 5000
+true_rate 33590220
+uncertainty 4353.527306
+percent_uncertainty 0.01296069899
+rate_accuracy 0
+catalogue_accuracy 0.8110605786
+force_calls_per_simulated_time 1.877487439e+10
+force_calls 2794693.667
+nfailed 0
+# vineyard rep 1 barrier 0.15218 prefactor 8.48564e+11 rate 6539820 channel 4
+# vineyard rep 1 barrier 0.13915 prefactor 9.07549e+11 rate 19171400 channel 1
+# vineyard rep 1 barrier 0.1734 prefactor 9.04284e+11 rate 1349480 channel 3
+# vineyard rep 1 barrier 0.15219 prefactor 8.49105e+11 rate 6538060 channel 2
+# vineyard rep 2 barrier 0.13912 prefactor 9.04246e+11 rate 19149900 channel 1
+# vineyard rep 2 barrier 0.17341 prefactor 9.02914e+11 rate 1346630 channel 3
+# vineyard rep 2 barrier 0.1522 prefactor 8.48656e+11 rate 6534390 channel 4
+# vineyard rep 2 barrier 0.15218 prefactor 8.50365e+11 rate 6553560 channel 2
+# vineyard rep 3 barrier 0.1734 prefactor 9.03273e+11 rate 1348710 channel 3
+# vineyard rep 3 barrier 0.15218 prefactor 8.49549e+11 rate 6547570 channel 4
+# vineyard rep 3 barrier 0.13912 prefactor 9.03726e+11 rate 19138700 channel 1
+# vineyard rep 3 barrier 0.15218 prefactor 8.50206e+11 rate 6552440 channel 2
+algorithm AKMC dimer Vineyard
+template eon/standard-aladatom-akmc-vineyard
+problem accelerated-md/standard_aladatom
+reducer amd-catalogue

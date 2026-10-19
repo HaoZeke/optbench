@@ -1,0 +1,73 @@
+id = "eon/standard-aladatom-akmc-vineyard"
+engine = "eon"
+problem = "accelerated-md/standard_aladatom"
+code = "eOn"
+code_version = "3.6.0"
+commit = "1d71c944501832bfafb955ffe13b9aae50c8efd4"
+algorithm = "AKMC dimer Vineyard"
+reducer = "amd-catalogue"
+failure_cap = 1000000000
+pass_limit = 800
+confidence_min_searches = 2336
+count_prefactor = true
+note = "AKMC on the 151-atom Al adatom with the built-in eam_al potential at 150 K. The prefactor is the Vineyard harmonic value from the filtered Hessian. default_value 0 runs that calculation. filter_scheme is fraction and filter_fraction is 0.25. rate_estimation is htst. The finite difference is 0.001 and the stencil is the client default, one sided. all_free_atoms stays off. Fraction 0.90 puts about 98 atoms into the Hessian of the 0.15218 eV exchange, and that reactant Hessian has two negative eigenvalues, so the client rejects the process. The cutoff filter at 0.25 A still leaves one negative eigenvalue at the reactant. Fraction 0.25 keeps the two atoms that carry the motion and their neighbors. On that saddle the set is 10 atoms and the prefactor is 8.48564e11. Fraction 0.20 returns the same prefactor. The run stays on the reactant. eOn confidence is 1.1 with the old scheme, so akmc() does not take a KMC step. The harness stops when the old-scheme confidence of the rate-relevant streak reaches 0.95, the thermal-window rate is positive, and total_searches has reached 2336. A process is rate-relevant when its rate is at least 1 percent of the current thermal-window rate. The ranked cost is eon_search_calls plus pref-fcs. Classic dimer, improved false, rotations_max 20, converged_angle 5. Optimizer L-BFGS, max_move 0.2, max_iterations 1000, converged_force 0.001. The displacement epicenter is atom 150, the adatom, with radius 3.3 and magnitude 0.3. Thermal window 20 kT. Seed is 20261018 plus the repetition index. Communicator num_jobs 8. The reference stays the 2012 parallel-replica rate. The catalogue probabilities on this problem were measured at 250 K."
+
+[ini.Main]
+job = "akmc"
+temperature = 150
+finite_difference = 0.001
+random_seed = 1
+
+[ini.Potential]
+potential = "eam_al"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+convergence_metric = "norm"
+converged_force = 0.001
+max_move = 0.2
+max_iterations = 1000
+
+[ini.AKMC]
+confidence = 1.1
+thermally_accessible_window = 20
+confidence_scheme = "old"
+
+[ini."Process Search"]
+minimize_first = true
+
+[ini.Communicator]
+type = "local"
+num_jobs = 8
+jobs_per_bundle = 8
+number_of_CPUs = 1
+client_path = "eonclient"
+
+[ini."Saddle Search"]
+method = "min_mode"
+min_mode_method = "dimer"
+displace_radius = 3.3
+displace_magnitude = 0.3
+displace_listed_atom_weight = 1.0
+displace_random_weight = 0.0
+displace_atom_list = "150"
+displace_all_listed = false
+max_energy = 10.0
+max_iterations = 1000
+converged_force = 0.001
+
+[ini.Prefactor]
+default_value = 0
+rate_estimation = "htst"
+filter_scheme = "fraction"
+filter_fraction = 0.25
+min_value = 1e9
+max_value = 1e21
+
+[ini.Dimer]
+improved = false
+opt_method = "sd"
+converged_angle = 5.0
+rotations_max = 20
+rotations_min = 1
+finite_angle = 0.005

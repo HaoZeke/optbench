@@ -1,0 +1,31 @@
+# rep 1 force_calls 107186854 events 8 time_s 9.519408e-08 rate 84038839.39 uncertainty 29712216.61 reached 1
+# rep 2 force_calls 62157802 events 8 time_s 5.492248e-08 rate 145659846.4 uncertainty 51498532.56 reached 1
+# rep 3 force_calls 62526185 events 8 time_s 5.531424e-08 rate 144628218.7 uncertainty 51133797.1 reached 1
+code eOn
+code_version 3.6.0
+commit 1d71c944501832bfafb955ffe13b9aae50c8efd4
+counter harness
+count_keys eon_dynamics_calls
+contributor Rohit Goswami
+repetitions 3
+workers 8
+escapes 8
+events 24
+time_s 2.054308e-07
+reactant_energy -470.239689
+temperature_K 150
+thermostat langevin_0.001
+reference_rate 835900
+reference_products 5000
+true_rate 116827661.7
+uncertainty 23847346.58
+percent_uncertainty 20.41241452
+rate_accuracy 0
+catalogue_accuracy 0.7564661853
+force_calls_per_simulated_time 1.12870534e+15
+force_calls 77290280.33
+nfailed 0
+algorithm Parallel replica Langevin
+template eon/standard-aladatom-pr
+problem accelerated-md/standard_aladatom
+reducer amd-catalogue

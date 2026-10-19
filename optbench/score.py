@@ -246,6 +246,16 @@ def eon_search_calls(saddle_calls: int, minimization_calls: int) -> int:
     return _force_count(saddle_calls) + _force_count(minimization_calls)
 
 
+def eon_process_calls(saddle_calls: int, minimization_calls: int, prefactor_calls: int) -> int:
+    """Saddle, minimisation, and prefactor calls from one search line.
+
+    The prefactor term is ``pref-fcs``. It is zero when the prefactor is
+    a constant. A Vineyard row includes it because those calls are
+    Hessian evaluations of ``eam_al``.
+    """
+    return eon_search_calls(saddle_calls, minimization_calls) + _force_count(prefactor_calls)
+
+
 def _force_count(value: int) -> int:
     if isinstance(value, bool) or not isinstance(value, int):
         raise ValueError("a force-call count is an integer")

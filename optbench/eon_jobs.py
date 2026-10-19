@@ -599,6 +599,10 @@ JOBS = {
     "saddle-pt-lanczos": ("eon/develop-saddle-pt-lanczos", None),
     "aladatom-akmc": ("eon/aladatom-akmc", "amd"),
     "standard-aladatom-akmc": ("eon/standard-aladatom-akmc", "amd"),
+    "aladatom-akmc-vineyard": ("eon/aladatom-akmc-vineyard", "amd"),
+    "standard-aladatom-akmc-vineyard": ("eon/standard-aladatom-akmc-vineyard", "amd"),
+    "aladatom-pr": ("eon/aladatom-pr", "pr"),
+    "standard-aladatom-pr": ("eon/standard-aladatom-pr", "pr"),
 }
 
 
@@ -625,6 +629,10 @@ def run_named(
         from .eon_amd import run_amd
 
         fn = run_amd
+    elif fn == "pr":
+        from .eon_pr import run_pr
+
+        fn = run_pr
     if repetitions is None:
         summary = fn(root, template_name, client, output, scratch, workers)
     else:

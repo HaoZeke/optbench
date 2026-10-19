@@ -1,0 +1,63 @@
+# rep 1 force_calls 1926475 total_searches 2336 repeats 20 eon_repeats 278 rate 3162017222 confidence 0.95 reached 1
+# rep 2 force_calls 3609880 total_searches 4312 repeats 20 eon_repeats 21 rate 3159589858 confidence 0.95 reached 1
+# rep 3 force_calls 2847726 total_searches 3400 repeats 20 eon_repeats 59 rate 3160149180 confidence 0.95 reached 1
+code eOn
+code_version 3.6.0
+commit 1d71c944501832bfafb955ffe13b9aae50c8efd4
+counter harness
+count_keys eon_search_calls+pref-fcs
+contributor Rohit Goswami
+repetitions 3
+workers 8
+temperature_K 250
+thermostat akmc
+reference_rate 254294100
+reference_products 5000
+true_rate 3160585420
+uncertainty 733882.994
+percent_uncertainty 0.02321984368
+rate_accuracy 0
+catalogue_accuracy 0.9322157031
+force_calls_per_simulated_time 1.766573421e+12
+force_calls 2794693.667
+nfailed 0
+# vineyard rep 1 barrier 0.42971 prefactor 7.95498e+12 rate 17302.2 channel None
+# vineyard rep 1 barrier 0.42778 prefactor 4.64819e+12 rate 11054.4 channel None
+# vineyard rep 1 barrier 0.4297 prefactor 7.92412e+12 rate 17239.7 channel None
+# vineyard rep 1 barrier 0.42776 prefactor 4.64676e+12 rate 11064.3 channel None
+# vineyard rep 1 barrier 0.15218 prefactor 8.48564e+11 rate 725794000 channel 4
+# vineyard rep 1 barrier 0.13915 prefactor 9.07549e+11 rate 1421480000 channel 1
+# vineyard rep 1 barrier 0.1734 prefactor 9.04284e+11 rate 288817000 channel 3
+# vineyard rep 1 barrier 0.15219 prefactor 8.49105e+11 rate 725862000 channel 2
+# vineyard rep 1 barrier 0.43578 prefactor 2.30251e+12 rate 3778.74 channel None
+# vineyard rep 1 barrier 0.43578 prefactor 2.30471e+12 rate 3782.37 channel None
+# vineyard rep 2 barrier 0.42971 prefactor 7.94052e+12 rate 17273.7 channel None
+# vineyard rep 2 barrier 0.42777 prefactor 4.65555e+12 rate 11077.9 channel None
+# vineyard rep 2 barrier 0.42971 prefactor 7.94935e+12 rate 17289.9 channel None
+# vineyard rep 2 barrier 0.42777 prefactor 4.66759e+12 rate 11106.9 channel None
+# vineyard rep 2 barrier 0.13912 prefactor 9.04246e+11 rate 1418450000 channel 1
+# vineyard rep 2 barrier 0.17341 prefactor 9.02914e+11 rate 288275000 channel 3
+# vineyard rep 2 barrier 0.41588 prefactor 2.4035e+12 rate 9931.09 channel None
+# vineyard rep 2 barrier 0.1522 prefactor 8.48656e+11 rate 725464000 channel 4
+# vineyard rep 2 barrier 0.15218 prefactor 8.50365e+11 rate 727325000 channel 2
+# vineyard rep 2 barrier 0.43575 prefactor 2.34367e+12 rate 3851.69 channel None
+# vineyard rep 2 barrier 0.44178 prefactor 2.14084e+12 rate 2658.87 channel None
+# vineyard rep 2 barrier 0.44174 prefactor 2.14394e+12 rate 2667.7 channel None
+# vineyard rep 3 barrier 0.42971 prefactor 7.90128e+12 rate 17184.8 channel None
+# vineyard rep 3 barrier 0.42776 prefactor 4.64519e+12 rate 11060.7 channel None
+# vineyard rep 3 barrier 0.4297 prefactor 7.92601e+12 rate 17244 channel None
+# vineyard rep 3 barrier 0.42778 prefactor 4.63689e+12 rate 11029.5 channel None
+# vineyard rep 3 barrier 0.43575 prefactor 2.3141e+12 rate 3801.95 channel None
+# vineyard rep 3 barrier 0.1734 prefactor 9.03273e+11 rate 288588000 channel 3
+# vineyard rep 3 barrier 0.15218 prefactor 8.49549e+11 rate 726647000 channel 4
+# vineyard rep 3 barrier 0.44175 prefactor 2.14039e+12 rate 2661.86 channel None
+# vineyard rep 3 barrier 0.13912 prefactor 9.03726e+11 rate 1417630000 channel 1
+# vineyard rep 3 barrier 0.41173 prefactor 1.5739e+12 rate 7885.99 channel None
+# vineyard rep 3 barrier 0.15218 prefactor 8.50206e+11 rate 727196000 channel 2
+# vineyard rep 3 barrier 0.41442 prefactor 2.42438e+12 rate 10724.3 channel None
+# vineyard rep 3 barrier 0.44174 prefactor 2.25836e+12 rate 2809.66 channel None
+# vineyard rep 3 barrier 0.43579 prefactor 2.30272e+12 rate 3777.44 channel None
+algorithm AKMC dimer Vineyard
+template eon/aladatom-akmc-vineyard
+problem accelerated-md/aladatom
+reducer amd-catalogue

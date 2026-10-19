@@ -4,7 +4,7 @@ suite = "accelerated-md"
 problem = "aladatom"
 contract = "stated"
 entry_count = 1
-remark = "Aluminum adatom on Al(100). The reactant is the 151-atom legacy con, and the potential is the Voter-Chen EAM built into eOn as eam_al. The reference escape rate is the 250 K parallel-replica row. One repetition is one AKMC catalogue. The stated sample is three seeds. The published method sample is 5000 products, and that count turns the rate into simulated time."
+remark = "Aluminum adatom on Al(100). The reactant is the 151-atom legacy con, and the potential is the Voter-Chen EAM built into eOn as eam_al. The reference escape rate is the 250 K parallel-replica row. That 2012 rate stays the reference for every row. One repetition is one AKMC catalogue or one parallel-replica seed. The stated sample is three seeds. The published method sample is 5000 products, and that count turns the rate into simulated time."
 
 [potential]
 kind = "eam_al"
@@ -115,7 +115,7 @@ par_factor = 2
 bootstrap_resamples = 2000
 bootstrap_seed = 20261015
 counter = "harness"
-note = "The ranked cost is eon_search_calls, the sum of sad-fcs and mins-fcs. That sum matches HarnessCounter on an ext_pot saddle search when the prefactor is a constant. Prefactor calls stay out of the sum. The potential stays the built-in Voter-Chen eam_al. The run stops on the old-scheme confidence of the rate-relevant streak after at least 2336 searches. A process counts when its rate is at least 1 percent of the thermal-window rate. A slower repeat does not. A shorter search can repeat the 0.43 eV hops before an exchange is found."
+note = "The ranked cost is the harness force_calls of the row. For the constant-prefactor AKMC row that is eon_search_calls, the sum of sad-fcs and mins-fcs. That sum matches HarnessCounter on an ext_pot saddle search when the prefactor is a constant. Prefactor calls stay out of that sum. A Vineyard row adds pref-fcs. A parallel-replica row uses eon_dynamics_calls. Rate accuracy of every row, including the parallel-replica reproduction, is against the 2012 rate. The potential stays the built-in Voter-Chen eam_al. The AKMC run stops on the old-scheme confidence of the rate-relevant streak after at least 2336 searches. A process counts when its rate is at least 1 percent of the thermal-window rate. A slower repeat does not. A shorter search can repeat the 0.43 eV hops before an exchange is found."
 required = [
   "schema",
   "counter",

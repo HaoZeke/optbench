@@ -1,10 +1,11 @@
-"""asv tracks for the two aluminum adatom AKMC templates.
+"""asv tracks for the aluminum adatom templates.
 
 The campaign states three repetitions. The default grid is the first
 start, seed 20261018 and ``rep-1``. ``measure`` reads that committed
 campaign start. It does not launch eonclient and it does not import
-eOn. The recorded cost is ``eon_search_calls`` from the 151-atom
-Voter-Chen ``eam_al`` catalogue with prefactor ``1e12``.
+eOn. The constant-prefactor AKMC classes record ``eon_search_calls``.
+The Vineyard classes record that sum plus ``pref-fcs``. The parallel
+replica classes record ``eon_dynamics_calls``.
 """
 
 from __future__ import annotations
@@ -113,3 +114,9 @@ def _spec(cls: str, template_name: str) -> dict:
 
 EonAladatomAkmc = _bind(_spec("EonAladatomAkmc", "eon/aladatom-akmc"))
 EonStandardAladatomAkmc = _bind(_spec("EonStandardAladatomAkmc", "eon/standard-aladatom-akmc"))
+EonAladatomAkmcVineyard = _bind(_spec("EonAladatomAkmcVineyard", "eon/aladatom-akmc-vineyard"))
+EonStandardAladatomAkmcVineyard = _bind(
+    _spec("EonStandardAladatomAkmcVineyard", "eon/standard-aladatom-akmc-vineyard")
+)
+EonAladatomPr = _bind(_spec("EonAladatomPr", "eon/aladatom-pr"))
+EonStandardAladatomPr = _bind(_spec("EonStandardAladatomPr", "eon/standard-aladatom-pr"))

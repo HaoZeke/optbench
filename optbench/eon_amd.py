@@ -42,9 +42,10 @@ from .amd import (
 )
 from .campaign import format_ini, geometry_archive, load_template, resolve_problem, write_starts
 from .eon_akmc import prepare_client_env
-from .score import eon_search_calls
+from .score import eon_process_calls, eon_search_calls
 
 COUNT_KEY = "eon_search_calls"
+PREFACTOR_COUNT_KEY = "eon_search_calls+pref-fcs"
 
 # A process below this share of the thermal-window rate does not
 # advance the old-scheme streak. One percent keeps the 0.17 eV
@@ -65,17 +66,24 @@ def _search_lines(text: str) -> list[list[str]]:
     return rows
 
 
-def search_cost(text: str) -> dict:
+def search_cost(text: str, *, include_prefactor: bool = False) -> dict:
     """Sum saddle and minimisation calls, and count repeat lines.
 
-    Prefactor calls are the seventh field and stay out of the sum.
+    Prefactor calls are the seventh field. They stay out of the sum
+    unless ``include_prefactor`` is set, which is the Vineyard row.
     """
     force_calls = 0
     searches = 0
     repeats = 0
     for fields in _search_lines(text):
         searches += 1
-        force_calls += eon_search_calls(int(float(fields[4])), int(float(fields[5])))
+        saddle_calls = int(float(fields[4]))
+        minimization_calls = int(float(fields[5]))
+        if include_prefactor:
+            prefactor_calls = int(float(fields[6])) if len(fields) > 6 else 0
+            force_calls += eon_process_calls(saddle_calls, minimization_calls, prefactor_calls)
+        else:
+            force_calls += eon_search_calls(saddle_calls, minimization_calls)
         if any(token.startswith("repeat-") for token in fields):
             repeats += 1
     return {
@@ -181,6 +189,8 @@ def catalogue_confidence(
     window: float,
     min_barrier: float,
     metadata_repeats: int | None,
+    *,
+    include_prefactor: bool = False,
 ) -> dict:
     """Confidence that stops the reactant search.
 
@@ -188,7 +198,7 @@ def catalogue_confidence(
     inside the thermal window. The streak does not, and it is the
     count the old-scheme confidence uses.
     """
-    progress = search_cost(text)
+    progress = search_cost(text, include_prefactor=include_prefactor)
     progress["eon_repeats"] = (
         metadata_repeats if metadata_repeats is not None else progress["repeat_lines"]
     )
@@ -224,6 +234,7 @@ def _parse_processes(text: str) -> list[dict]:
             rows.append(
                 {
                     "id": int(parts[0]),
+                    "prefactor": float(parts[2]),
                     "barrier": float(parts[6]),
                     "rate": float(parts[7]),
                 }
@@ -294,6 +305,7 @@ def _score_products(
     window: float,
 ) -> dict:
     channels: list[tuple[int | None, float]] = []
+    detailed: list[dict] = []
     procdata = work / "states" / "0" / "procdata"
     kept_rate = 0.0
     thermal = select_thermal(processes, temperature, window, min_barrier)
@@ -301,20 +313,28 @@ def _score_products(
         if process["barrier"] < min_barrier or process["rate"] <= 0:
             continue
         product_path = procdata / f"product_{process['id']}.con"
+        channel: int | None
         if not product_path.is_file():
-            channels.append((None, process["rate"]))
-            kept_rate += process["rate"]
-            continue
-        points, _fixed = _load_geometry(product_path)
-        if points.shape != reactant.shape:
-            channels.append((None, process["rate"]))
-            kept_rate += process["rate"]
-            continue
-        if mobile_rmsd(points, reactant, mobile) < tolerance:
-            continue
-        channels.append((match_product(points, products, mobile, tolerance), process["rate"]))
+            channel = None
+        else:
+            points, _fixed = _load_geometry(product_path)
+            if points.shape != reactant.shape:
+                channel = None
+            elif mobile_rmsd(points, reactant, mobile) < tolerance:
+                continue
+            else:
+                channel = match_product(points, products, mobile, tolerance)
+        channels.append((channel, process["rate"]))
         kept_rate += process["rate"]
-    return {"channels": channels, "rate": kept_rate}
+        detailed.append(
+            {
+                "barrier": float(process["barrier"]),
+                "prefactor": float(process.get("prefactor") or 0.0),
+                "rate": float(process["rate"]),
+                "channel": channel,
+            }
+        )
+    return {"channels": channels, "rate": kept_rate, "prefactors": detailed}
 
 
 def _read_progress(
@@ -326,6 +346,8 @@ def _read_progress(
     reactant: np.ndarray,
     products: list[np.ndarray],
     mobile: np.ndarray,
+    *,
+    include_prefactor: bool = False,
 ) -> dict:
     """Confidence, rate, and force calls from the reactant state on disk."""
     results = work / "states" / "0" / "search_results.txt"
@@ -343,6 +365,7 @@ def _read_progress(
         window,
         min_barrier,
         _metadata_repeats(work / "states" / "0" / "info"),
+        include_prefactor=include_prefactor,
     )
     progress.update(
         _score_products(
@@ -407,6 +430,7 @@ def _one_repetition(
     prepare_client_env(client)
     target = float((problem.get("convergence") or {}).get("confidence", 0.95))
     min_searches = int(template.get("confidence_min_searches", 0))
+    include_prefactor = bool(template.get("count_prefactor"))
     min_barrier = float((problem.get("convergence") or {}).get("min_barrier_eV", 0.01))
     tolerance = float((problem.get("convergence") or {}).get("catalogue_rmsd", 0.15))
     window = float(
@@ -450,7 +474,15 @@ def _one_repetition(
                 last_error = f"{type(exc).__name__}: {exc}"
                 break
             progress = _read_progress(
-                work, temperature, window, min_barrier, tolerance, reactant, products, mobile
+                work,
+                temperature,
+                window,
+                min_barrier,
+                tolerance,
+                reactant,
+                products,
+                mobile,
+                include_prefactor=include_prefactor,
             )
             progress["passes"] = index + 1
             print(
@@ -481,7 +513,15 @@ def _one_repetition(
                 last_error = last_error or f"{type(exc).__name__}: {exc}"
             done = int(progress.get("passes") or passes)
             progress = _read_progress(
-                work, temperature, window, min_barrier, tolerance, reactant, products, mobile
+                work,
+                temperature,
+                window,
+                min_barrier,
+                tolerance,
+                reactant,
+                products,
+                mobile,
+                include_prefactor=include_prefactor,
             )
             progress["passes"] = done
             progress["reached"] = catalogue_reached(progress, target, min_searches)
@@ -587,8 +627,9 @@ def _write_result(
     lines.append(f"code {template.get('code', 'eOn')}")
     lines.append(f"code_version {template.get('code_version', '')}")
     lines.append(f"commit {template.get('commit', '')}")
+    count_key = PREFACTOR_COUNT_KEY if template.get("count_prefactor") else COUNT_KEY
     lines.append("counter harness")
-    lines.append(f"count_keys {COUNT_KEY}")
+    lines.append(f"count_keys {count_key}")
     lines.append("contributor Rohit Goswami")
     lines.append(f"repetitions {len(rows)}")
     lines.append(f"workers {workers}")
@@ -613,6 +654,18 @@ def _write_result(
             continue
         lines.append(f"{key} {_fmt(float(value))}")
     lines.append(f"nfailed {failed}")
+    if template.get("count_prefactor"):
+        for row in rows:
+            for item in row.get("prefactors") or []:
+                channel = item.get("channel")
+                lines.append(
+                    "# vineyard "
+                    f"rep {row.get('repetition')} "
+                    f"barrier {_fmt(float(item['barrier']))} "
+                    f"prefactor {_fmt(float(item['prefactor']))} "
+                    f"rate {_fmt(float(item['rate']))} "
+                    f"channel {channel}"
+                )
     if template.get("algorithm"):
         lines.append(f"algorithm {template['algorithm']}")
     lines.append(f"template {template['id']}")
@@ -630,7 +683,7 @@ def _write_result(
             "start": f"rep-{row['repetition']}",
             "geometry": f"rep-{row['repetition']}",
             "force_calls": int(row.get("force_calls") or 0),
-            "count_key": COUNT_KEY,
+            "count_key": count_key,
             "counter": "harness",
             "comparable": True,
             "success": success,
@@ -644,6 +697,15 @@ def _write_result(
             "channels": [
                 [None if channel is None else int(channel), float(rate)]
                 for channel, rate in (row.get("channels") or [])
+            ],
+            "prefactors": [
+                {
+                    "barrier": float(item["barrier"]),
+                    "prefactor": float(item["prefactor"]),
+                    "rate": float(item["rate"]),
+                    "channel": None if item["channel"] is None else int(item["channel"]),
+                }
+                for item in (row.get("prefactors") or [])
             ],
             "seconds": row.get("seconds"),
             "problem": problem["id"],
