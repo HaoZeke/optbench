@@ -100,6 +100,18 @@ def run(
             limit=limit,
             resume=resume,
         )
+    elif loaded["engine"] == "cp2k-band":
+        from optbench.cp2k_band import run as run_cp2k_band
+
+        summary = run_cp2k_band(
+            root,
+            problem,
+            template,
+            output=output,
+            workers=workers,
+            limit=limit,
+            resume=resume,
+        )
     else:
         client_path = _eon_client(client) if loaded["engine"] in {"eon-client", "eon"} else client
         summary = run_campaign(

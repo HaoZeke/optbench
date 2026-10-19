@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>LAMMPS</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>TorchSim</th><th>geomeTRIC</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>optking</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>LAMMPS</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>TorchSim</th><th>geomeTRIC</th><th>CP2K</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>optking</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="tsopt/LJ38">
    <th scope="row"><a href="#LJ38">LJ38</a></th>
    <td data-code="eOn" data-template="eon-client/ts-lj38-lanczos-improved" data-par2="280.33"><span class="bench-score">280.33</span><a href="#LJ38-templates">eon-client/ts-lj38-lanczos-improved</a></td>
@@ -25,6 +25,7 @@
    <td data-code="vc-SQNM">—</td>
    <td data-code="TorchSim">—</td>
    <td data-code="geomeTRIC" data-template="geometric/lj38-ts-harness" data-par2="661.295"><span class="bench-score">661.295</span><a href="#LJ38-templates">geometric/lj38-ts-harness</a></td>
+   <td data-code="CP2K">—</td>
    <td data-code="artn" data-template="partn/ts-lj38" data-par2="5514.77"><span class="bench-score">5514.77</span><a href="#LJ38-templates">partn/ts-lj38</a></td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -51,6 +52,7 @@
    <td data-code="vc-SQNM">—</td>
    <td data-code="TorchSim">—</td>
    <td data-code="geomeTRIC" data-template="geometric/pt-island-ts-fd" data-par2="1061.12"><span class="bench-score">1061.12</span><a href="#pt-island-templates">geometric/pt-island-ts-fd</a></td>
+   <td data-code="CP2K">—</td>
    <td data-code="artn" data-template="partn/ts-pt" data-par2="452.735"><span class="bench-score">452.735</span><a href="#pt-island-templates">partn/ts-pt</a></td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>

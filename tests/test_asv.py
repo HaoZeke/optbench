@@ -158,6 +158,7 @@ def test_pending_grid_is_every_problem_and_code():
         "lammpsneb",
         "torchsim",
         "geometric",
+        "cp2k",
     ]
     assert Pending.params[1] == code_ids()
     assert Pending.track_force_calls.unit == "force calls"
