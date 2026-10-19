@@ -757,8 +757,7 @@ def _partial_reason(problem: dict, records: list[dict], expected: int | None, ta
     reasons = []
     if target is None:
         reasons.append(
-            "no energy window on this problem; each start stores its lowest harness energy and call count, "
-            "and the divergence class is a placeholder"
+            "no energy window on this problem; each start stores its lowest harness energy and call count"
         )
     if expected is not None and len(records) < int(expected):
         reasons.append(f"scored {len(records)} of {int(expected)} starts")
