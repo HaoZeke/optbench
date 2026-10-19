@@ -24,11 +24,11 @@ A saddle-search row is one single-atom displacement. The climb uses the
 published per-search cap of 5064 force calls. Each endpoint minimization
 has a budget of 2000, and those calls are part of the same per-search
 cost. The PAR-2 cap is 5064. The initial minimization of the minimum is
-outside that count. Both endpoint minima and the reactant minimum are
-stored. The link is the eOn r2205 test: exactly one endpoint has
+outside that count. The link is the eOn r2205 test: exactly one endpoint has
 per-atom maximum minimum-image distance strictly below 0.1 angstrom.
 The mean over every free atom is recorded beside it. Saddle novelty
-stays that mean at 0.5.
+stays that mean at 0.5. The two endpoint minima and the reactant
+minimum are float64 arrays next to the starts file.
 """
 
 from __future__ import annotations
@@ -739,14 +739,53 @@ def _summarize(records: list[dict], template: dict, cap: int, problem_id: str, *
     return "\n".join(lines) + "\n", metrics
 
 
+def _store_endpoints(output: Path, records: list[dict]) -> None:
+    """Write endpoint minima beside ``output`` and drop them from ``records``.
+
+    One row of each array is one search, in starts-file order. A search
+    that never reached the endpoints is a row of NaN.
+    """
+    if not any(row.get("endpoint_plus") is not None or row.get("endpoint_minus") is not None for row in records):
+        return
+    width = 0
+    for row in records:
+        for key in ("endpoint_plus", "endpoint_minus", "minimum"):
+            value = row.get(key)
+            if value is not None:
+                width = len(value)
+                break
+        if width:
+            break
+    count = len(records)
+    plus = np.full((count, width), np.nan, dtype=np.float64)
+    minus = np.full((count, width), np.nan, dtype=np.float64)
+    minimum = np.full((count, width), np.nan, dtype=np.float64)
+    for index, row in enumerate(records):
+        if row.get("endpoint_plus") is not None:
+            plus[index] = row["endpoint_plus"]
+        if row.get("endpoint_minus") is not None:
+            minus[index] = row["endpoint_minus"]
+        if row.get("minimum") is not None:
+            minimum[index] = row["minimum"]
+        row.pop("endpoint_plus", None)
+        row.pop("endpoint_minus", None)
+        row.pop("minimum", None)
+    plus_path = output.with_name(output.stem + ".endpoints-plus.npz")
+    minus_path = output.with_name(output.stem + ".endpoints-minus.npz")
+    np.savez_compressed(plus_path, endpoint_plus=plus, minimum=minimum)
+    np.savez_compressed(minus_path, endpoint_minus=minus)
+
+
 def _write_campaign(output: Path, text: str, records: list[dict], template: dict, problem_id: str) -> None:
     output.parent.mkdir(parents=True, exist_ok=True)
     temporary = output.with_suffix(output.suffix + ".tmp")
     temporary.write_text(text, encoding="utf-8")
     os.replace(temporary, output)
+    public = [_public(row, template, problem_id) for row in records]
+    _store_endpoints(output, public)
     starts = output.with_suffix(".starts.jsonl")
     temporary_starts = starts.with_suffix(".jsonl.tmp")
-    write_starts(temporary_starts, [_public(row, template, problem_id) for row in records])
+    write_starts(temporary_starts, public)
     os.replace(temporary_starts, starts)
 
 
