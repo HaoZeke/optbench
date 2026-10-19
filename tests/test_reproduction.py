@@ -35,7 +35,12 @@ def test_the_ledger_covers_the_oracle_in_order():
             assert row["cause"]
         if (row.get("rerun") or {}).get("paper_baseline"):
             assert status == "reproduced"
-    assert counts == {"reproduced": 46, "not_reproduced": 29, "not_rerun": 76}
+    assert counts == {"reproduced": 47, "not_reproduced": 29, "not_rerun": 75}
+    lanczos = next(row for row in ledger if row_id(row) == "lowest-eigenvector/lj38/tsase-lanczos")
+    assert lanczos["status"] == "reproduced"
+    assert lanczos["checks"][0]["archive"] == 25
+    assert lanczos["checks"][0]["rerun"] == 25
+    assert lanczos["rerun"]["paper_baseline"] is True
     assert reproduction_errors(ROOT) == []
 
 

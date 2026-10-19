@@ -188,18 +188,19 @@
   "profile": {
     "area_log10": {
       "eon-client/low-lj38-dimer-cg 3.5.0 campaign 4d8b34b": 0.9632959861247398,
-      "eon-client/low-lj38-dimer-lbfgs 3.5.0 campaign 4d8b34b": 0.9828629358428986,
-      "eon-client/low-lj38-lanczos 3.5.0 campaign 4d8b34b": 1.0039350355393772,
+      "eon-client/low-lj38-dimer-lbfgs 3.5.0 campaign 4d8b34b": 0.9813577858645787,
+      "eon-client/low-lj38-lanczos 3.5.0 campaign 4d8b34b": 1.0009247355827375,
       "eon-svn/low-lj38-dimer-cg r2549 campaign r2549": 0.9632959861247398,
-      "eon-svn/low-lj38-dimer-lbfgs r2549 campaign r2549": 0.9828629358428986,
-      "eon-svn/low-lj38-lanczos-ljcut r2549 campaign r2549": 1.0039350355393772,
+      "eon-svn/low-lj38-dimer-lbfgs r2549 campaign r2549": 0.9813577858645787,
+      "eon-svn/low-lj38-lanczos-ljcut r2549 campaign r2549": 1.0009247355827375,
       "partn/mode-lj38 1.1.0 default campaign 9b75351": 0.8940590871220242,
       "pysisyphus/lanczos-lj38 0.1.dev1 default campaign a4ce10d": 0.833100513000068,
-      "rgsaddle/mode-dimer 0.2.2 default campaign, asv c0db2b8": 0.9422238864282612,
+      "rgsaddle/mode-dimer 0.2.2 default campaign, asv c0db2b8": 0.9407187364499412,
       "rgsaddle/mode-dimer-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.7962243385312302,
       "rgsaddle/mode-lanczos 0.2.2 default campaign, asv c0db2b8": 1.038553485040735,
       "rgsaddle/mode-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.8820178872954649,
-      "sella-0.1.1/lj38-loweig 0.1.1 archive campaign, asv 0.1.1": 1.1740169830895266,
+      "sella-0.1.1/lj38-loweig 0.1.1 archive campaign, asv 0.1.1": 1.1732644081003667,
+      "tsase-410/lj38-lanczos 410 archive campaign f77cda4": 1.0159762353659365,
       "tsase/mode-lj38 1.0 default campaign 98aac60": 0.15804074772359014
     },
     "rho": {
@@ -211,14 +212,14 @@
         1.0
       ],
       "eon-client/low-lj38-dimer-lbfgs 3.5.0 campaign 4d8b34b": [
-        0.01,
+        0.0,
         0.78,
         0.98,
         1.0,
         1.0
       ],
       "eon-client/low-lj38-lanczos 3.5.0 campaign 4d8b34b": [
-        0.04,
+        0.02,
         0.825,
         0.99,
         1.0,
@@ -232,14 +233,14 @@
         1.0
       ],
       "eon-svn/low-lj38-dimer-lbfgs r2549 campaign r2549": [
-        0.01,
+        0.0,
         0.78,
         0.98,
         1.0,
         1.0
       ],
       "eon-svn/low-lj38-lanczos-ljcut r2549 campaign r2549": [
-        0.04,
+        0.02,
         0.825,
         0.99,
         1.0,
@@ -261,7 +262,7 @@
       ],
       "rgsaddle/mode-dimer 0.2.2 default campaign, asv c0db2b8": [
         0.0,
-        0.635,
+        0.63,
         0.995,
         1.0,
         1.0
@@ -288,9 +289,16 @@
         1.0
       ],
       "sella-0.1.1/lj38-loweig 0.1.1 archive campaign, asv 0.1.1": [
-        0.8,
+        0.795,
         1.0,
         1.0,
+        1.0,
+        1.0
+      ],
+      "tsase-410/lj38-lanczos 410 archive campaign f77cda4": [
+        0.05,
+        0.86,
+        0.99,
         1.0,
         1.0
       ],
@@ -316,6 +324,7 @@
       "rgsaddle/mode-lanczos 0.2.2 default campaign, asv c0db2b8": 1.0,
       "rgsaddle/mode-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 1.0,
       "sella-0.1.1/lj38-loweig 0.1.1 archive campaign, asv 0.1.1": 1.0,
+      "tsase-410/lj38-lanczos 410 archive campaign f77cda4": 1.0,
       "tsase/mode-lj38 1.0 default campaign 98aac60": 0.89
     },
     "taus": [
@@ -368,6 +377,51 @@
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "sella-0.1.1/lj38-loweig",
+      "tuning": "archive",
+      "wilson_high": 1.0,
+      "wilson_low": 0.9811546736227335
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "tsase",
+      "code_version": "410",
+      "commit": "f77cda4a261872a633da45d05d77225d0bba0f96",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "tsase-410-lj38-lanczos",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 200,
+      "history": false,
+      "max_calls": 52.0,
+      "mean_calls": 25.05,
+      "mean_per_image": null,
+      "median": 24.0,
+      "median_calls": 24.0,
+      "median_high": 25.0,
+      "median_low": 23.0,
+      "median_per_image": null,
+      "min_calls": 13.0,
+      "n": 200,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 25.05,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/tsase-410-lj38-lanczos.dat",
+      "problem": "lowest-eigenvector/lj38",
+      "registry_match": false,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "tsase-410/lj38-lanczos",
       "tuning": "archive",
       "wilson_high": 1.0,
       "wilson_low": 0.9811546736227335
