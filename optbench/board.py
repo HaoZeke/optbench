@@ -430,6 +430,8 @@ def _campaign_groups(directory: Path) -> dict[str, dict[str, Path]]:
         if not path.is_file():
             continue
         if name.endswith(".starts.jsonl"):
+            if path.stat().st_size == 0:
+                continue
             stem, kind = name[: -len(".starts.jsonl")], "starts_jsonl"
         elif name.endswith(".v2.json"):
             stem, kind = name[: -len(".v2.json")], "v2"
@@ -758,10 +760,17 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
             cap=cap,
             note=parse_note or record_source,
         )
+        named = str(fields.get("potential") or "").strip()
         if str(fields.get("ranked") or "").lower() == "false":
-            row["_declared_partial"] = "result file sets ranked false"
+            reason = "result file sets ranked false"
+            if named:
+                reason = f"{reason}; potential {named}"
+            row["_declared_partial"] = reason
         elif str(fields.get("partial") or "").lower() == "true":
-            row["_declared_partial"] = "result file sets partial true"
+            reason = "result file sets partial true"
+            if named:
+                reason = f"{reason}; potential {named}"
+            row["_declared_partial"] = reason
         if not records:
             row["note"] = "no per-start record"
             unparsed.append(row)
@@ -784,6 +793,9 @@ def _benchmark_index() -> dict[str, dict]:
     modules = (
         "benchmarks.bench_lj38",
         "benchmarks.bench_eon_develop",
+        "benchmarks.bench_eon_svn",
+        "benchmarks.bench_eon_lane",
+        "benchmarks.bench_eon_client",
         "benchmarks.bench_rgmin",
         "benchmarks.bench_jaxmd",
         "benchmarks.bench_ase_sella",

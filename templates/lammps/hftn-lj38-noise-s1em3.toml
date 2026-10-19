@@ -1,0 +1,19 @@
+# LAMMPS Hessian-free truncated Newton on LJ38 with sigma 1e-3.
+id = "lammps/hftn-lj38-noise-s1em3"
+engine = "lammps"
+problem = "minimization/lj38-noise"
+code = "lammps"
+code_version = "30 Sep 2026"
+commit = "8de817dd79bfe4525d5d39246a212d833e6dee07"
+algorithm = "Hessian-free truncated Newton"
+tuning = "default"
+note = "sigma 1e-3. The stop uses the noisy force and a clean-energy window. The Hessian is clean. sigma is not a LAMMPS keyword. dmax is 0.2."
+
+[lammps]
+min_style = "hftn"
+
+[noise]
+sigma = 0.001
+kappa = 3.0
+window = 5
+seed = 20261016
