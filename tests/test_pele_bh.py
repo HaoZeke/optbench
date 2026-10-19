@@ -8,27 +8,17 @@ from optbench.runners.pele_bh import _options, _rule
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_template_uses_the_archived_driver():
+def test_template_is_the_latest_release_stock():
     template = load_template(ROOT, "pele/lj38-basinhopping")
     problem = resolve_problem(ROOT, "globalopt/lj38")
     options = _options(template)
     minimum, tolerance, partial = _rule(problem, template)
-    assert template["tuning"] == "archive"
-    assert template["code_version"] == "0.1"
-    assert template["commit"] == "2d5bc8e3ed5fd980ae7d8e916f2964ae522f62f9"
-    assert options == {
-        "temperature": 1.0,
-        "stepsize": 0.41,
-        "quench": "mylbfgs",
-        "quench_tol": 1e-3,
-        "quench_maxstep": 0.1,
-        "quench_m": 4,
-        "quench_nsteps": 10000,
-        "acc_ratio": 0.5,
-        "factor": 0.9,
-        "interval": 100,
-        "takestep": "adaptive",
-    }
+    assert template["tuning"] == "stock"
+    assert template["code"] == "pele"
+    assert template["code_version"] == "0.1.2"
+    assert template["commit"] == "b7081b932a060be11342fbe8287ac35da8ada879"
+    assert options == {"stock": True}
+    assert "0.1.2" in template["note"]
     assert minimum == -173.9284
     assert tolerance == 0.001
     assert partial == ""

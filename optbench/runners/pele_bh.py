@@ -1,25 +1,20 @@
-"""Basin hopping with the archived ``bin/js850/globalopt.py`` settings.
+"""Basin hopping on Lennard-Jones 38.
 
-SVN r269 builds ``LJClusterWrap``, sets ``structural_quench_params.tol``
-to 1e-3, temperature 1, and steps with ``RandomDisplacement(0.41)``
-inside ``AdaptiveStepsize`` (acceptance 0.5, factor 0.9, interval 100).
-The quench is whatever ``get_minimizer`` returns in the pele commit
-named by the template. A run stops when the Markov energy is at most
-``-173.9284 + 1e-3``. The check happens after each hop, including the
-first hop after the initial quench. The in-memory database is the one
-the script passes into ``get_basinhopping``.
+The ranked row is unmodified pele 0.1.2. ``takestep = "stock"`` calls
+``LJCluster.get_basinhopping`` with that version's ``get_takestep`` and
+``get_minimizer`` and does not replace the step size, temperature,
+acceptance schedule, or quench tolerance. A run stops when the Markov
+energy is at most ``-173.9284 + 1e-3``. The check happens after each
+hop, including the first hop after the initial quench. One
+``PeleCounter`` is shared by the hopper and the quench, so a
+``getEnergy`` or ``getEnergyGradient`` is one harness call.
 
-The paper row is unmodified pele ``2d5bc8e3`` (27 Aug 2013). Its
-minimizer is ``mylbfgs``, and that linesearch already divides a rising
-step by 10. Those numbers were counted by ``LJClusterWrap`` and are
-stored with the campaign file. This module does not rebuild that
-Python 2 extension.
-
-``current-pele/lj38-basinhopping`` is unpatched pele 0.1.2. Its
-minimizer is stock ``lbfgs_cpp``, which multiplies a rising step by
-1/2. The ranked count is one ``PeleCounter`` entry per ``getEnergy``
-or ``getEnergyGradient``. The numpy generator is seeded with the
-integer in the start name before the first displacement.
+``takestep = "adaptive"`` keeps the archived ``globalopt.py`` driver
+for diagnostic templates: temperature 1, ``RandomDisplacement(0.41)``,
+``AdaptiveStepsize`` (acceptance 0.5, factor 0.9, interval 100), and
+quench tolerance 1e-3. ``mylbfgs`` counts are the 2013 wrapper and stay
+off the ranked table. The numpy generator is seeded with the integer
+in the start name before the first displacement.
 """
 
 from __future__ import annotations
@@ -198,14 +193,20 @@ def _budget(problem: dict, template: dict) -> int:
     return int(cap)
 
 
+def _stock(template: dict) -> bool:
+    return str((template.get("pele") or {}).get("takestep") or "") == "stock"
+
+
 def _options(template: dict) -> dict:
     section = template.get("pele") or {}
+    takestep = str(section.get("takestep") or "adaptive")
+    if takestep == "stock":
+        return {"stock": True}
     quench = str(section.get("quench") or "lbfgs_cpp")
     if quench not in {"lbfgs_cpp", "mylbfgs"}:
         raise ValueError(f"{template['id']} quench {quench} is not the archived get_minimizer")
-    takestep = str(section.get("takestep") or "adaptive")
     if takestep != "adaptive":
-        raise ValueError(f"{template['id']} takestep {takestep} is not the archived AdaptiveStepsize")
+        raise ValueError(f"{template['id']} takestep {takestep} is not stock or the archived AdaptiveStepsize")
     return {
         "temperature": float(section.get("temperature", 1.0)),
         "stepsize": float(section.get("stepsize", 0.41)),
@@ -222,13 +223,141 @@ def _options(template: dict) -> dict:
 
 
 def _counter_name(template: dict) -> str:
+    if _stock(template):
+        return "harness"
     quench = str((template.get("pele") or {}).get("quench") or "")
     if quench == "mylbfgs":
         return "pele-wrapper"
     return "harness"
 
 
+def _finish_start(job, system, opt, steps, energy, rms, converged, error, caught_cap) -> dict:
+    cap = int(job["cap"])
+    minimum = float(job["energy_minimum"])
+    tolerance = float(job["energy_tolerance"])
+    calls = int(system.counted.calls) if getattr(system, "counted", None) is not None else 0
+    if calls > cap:
+        calls = cap
+        caught_cap = True
+    success = (
+        error == ""
+        and energy is not None
+        and math.isfinite(energy)
+        and energy <= minimum + tolerance
+        and energy >= minimum - _BELOW_MINIMUM
+        and calls < cap
+    )
+    reasons: list[str] = []
+    if error:
+        reasons.append("crash")
+    elif energy is None or not math.isfinite(energy if energy is not None else math.nan):
+        reasons.append("divergence" if not caught_cap and calls < cap else "cap")
+    elif energy < minimum - _BELOW_MINIMUM:
+        reasons.append("divergence")
+    elif calls >= cap or caught_cap:
+        reasons.append("cap")
+    elif not success:
+        reasons.append("cap")
+    if success:
+        reasons = []
+    failure = classify_failure(reasons)
+    return {
+        "schema": "optbench.start/v2",
+        "start": job["start"],
+        "index": job["index"],
+        "seed": int(job["seed"]),
+        "force_calls": calls,
+        "verify_calls": 0,
+        "counter": "harness" if job.get("stock") or str(job.get("quench") or "") != "mylbfgs" else "pele-wrapper",
+        "comparable": True,
+        "success": failure is None,
+        "failure": failure,
+        "reasons": reasons,
+        "energy": None if energy is None else float(energy),
+        "lowest_energy": None if energy is None else float(energy),
+        "force_norm": rms,
+        "quench_converged": converged,
+        "bh_steps": steps,
+        "energy_minimum": minimum,
+        "energy_tolerance": tolerance,
+        "problem": job["problem"],
+        "template": job["template"],
+        "code": "pele",
+        "code_version": job["code_version"],
+        "commit": job["commit"],
+        "tuning": job["tuning"],
+        "error": error,
+    }
+
+
+def _counted_cluster():
+    from pele.potentials import LJ
+    from pele.systems import LJCluster
+
+    from optbench.counter import PeleCounter
+
+    class LJClusterWrap(LJCluster):
+        def get_potential(self):
+            counted = getattr(self, "counted", None)
+            if counted is None:
+                counted = PeleCounter(LJ())
+                self.counted = counted
+            return counted
+
+    return LJClusterWrap(38)
+
+
+def _run_until(opt, system, minimum: float, tolerance: float, cap: int):
+    error = ""
+    steps = 0
+    caught_cap = False
+    energy = None
+    rms = None
+    converged = False
+    try:
+        for steps in range(1, 100001):
+            opt.run(1)
+            energy = float(opt.markovE)
+            rms = None if opt.rms is None else float(opt.rms)
+            converged = math.isfinite(energy)
+            if energy <= minimum + tolerance:
+                break
+            if int(system.counted.calls) > cap:
+                caught_cap = True
+                break
+    except Exception as exc:
+        error = f"{type(exc).__name__}: {exc}"
+        if energy is None and opt is not None:
+            try:
+                energy = float(opt.markovE)
+            except Exception:
+                energy = None
+    return steps, energy, rms, converged, error, caught_cap
+
+
+def _stock_hop(job: dict) -> dict:
+    import numpy as np
+
+    cap = int(job["cap"])
+    minimum = float(job["energy_minimum"])
+    tolerance = float(job["energy_tolerance"])
+    np.random.seed(int(job["seed"]))
+    system = _counted_cluster()
+    opt = None
+    try:
+        opt = system.get_basinhopping(
+            coords=np.asarray(job["coords"], dtype=np.float64),
+            outstream=None,
+        )
+    except Exception as exc:
+        return _finish_start(job, system, opt, 0, None, None, False, f"{type(exc).__name__}: {exc}", False)
+    steps, energy, rms, converged, error, caught_cap = _run_until(opt, system, minimum, tolerance, cap)
+    return _finish_start(job, system, opt, steps, energy, rms, converged, error, caught_cap)
+
+
 def _hop_job(job: dict) -> dict:
+    if job.get("stock"):
+        return _stock_hop(job)
     import numpy as np
     from pele.potentials import LJ
     from pele.systems import LJCluster
@@ -401,7 +530,10 @@ def _dat(summary: dict, template: dict, metrics: dict, commit: str, version: str
         "energy_max": summary.get("energy_max"),
     }
     counter = _counter_name(template)
-    if counter == "pele-wrapper":
+    if _stock(template):
+        counted = "# counter harness. One force call is one PeleCounter entry, a getEnergy or a getEnergyGradient."
+        quench = "# Unmodified pele 0.1.2. get_basinhopping uses that release's get_takestep and get_minimizer."
+    elif counter == "pele-wrapper":
         counted = "# counter pele-wrapper. One force call is one getEnergy or one getEnergyGradient on LJClusterWrap."
         quench = "# The quench is mylbfgs from pele 2d5bc8e3. A rising step is divided by 10."
     else:

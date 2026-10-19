@@ -196,7 +196,17 @@ MATCHES: list[dict] = [
     {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm0", "template": "softsaddle/saddle-lanczos-sm0", "branch": "cells/softsaddle/ts-reps", "path": "results/campaign/softsaddle-2019.04-saddle-lanczos-sm0.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
     # globalopt and htst and aladatom rates
     {"key": "globalopt/lj38/eon-basinhopping", "template": "eon-client/bh-lj38", "branch": "entries/eon-svn-lane-a", "path": "results/campaign/eon-client-bh-lj38.dat"},
-    {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "branch": "repro/globalopt-lj38-pele-basinhopping", "path": "results/campaign/pele-2d5bc8e3-lj38-basinhopping.dat"},
+    {
+        "key": "globalopt/lj38/pele-basinhopping",
+        "template": "pele-0.1.2/lj38-basinhopping",
+        "branch": "repro/globalopt-lj38-pele-basinhopping",
+        "path": "results/findings/pele-0.1.2-lj38-basinhopping.dat",
+        "cause": "pele_stock",
+        "extra": {
+            "code_version": "0.1.2",
+            "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
+        },
+    },
     {"key": "hTST/Al/eon-dimer-cg", "template": "eon-svn/htst-al-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-al-dimer.dat", "kind": "htst", "cause": "htst_al"},
     {"key": "hTST/Pt/eon-dimer-cg", "template": "eon-svn/htst-pt-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-pt-dimer.dat", "kind": "htst"},
 ]
@@ -248,6 +258,13 @@ CAUSE_TEXT = {
         "This default scores 61, so it is not either archived order."
     ),
     "pele_fire": "pele FIRE on LJ38 scores 1264 with 7 failures. The archive is 709 with 0 failures. The M100 L-BFGS row on the same build reproduces, so this is the FIRE step, not the LJ kernel.",
+    "pele_stock": (
+        "pele 0.1.2 at b7081b93 is the v0.1.2 release, unmodified. "
+        "LJCluster.get_basinhopping uses that release's get_takestep and get_minimizer. "
+        "The Markov stop is the archived window, -173.9284 + 0.001. "
+        "One hundred archived starts score 737270 force calls with 0 failures. The archive is 521595. "
+        "The gap is the stock step and quench, and it is left as measured."
+    ),
     "pele_morse": "pele Morse L-BFGS scores 92. The archive is 51. eOn Morse L-BFGS on the same bulk file reproduces at 52, so the gap is the pele memory and step, not the shared Morse parameters.",
     "morse_sd": "eOn Morse steepest descent scores 7038 with 19 failures. The archive is 196 with 0. Morse L-BFGS, CG, and FIRE on the same client reproduce, so the kernel is not the split.",
     "improved_unset": "The r2549 template turns improved on. The 2014 ini left that key unset. The mean lands outside 10 percent.",

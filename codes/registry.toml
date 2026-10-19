@@ -181,7 +181,7 @@ repository = "https://github.com/pele-python/pele"
 ref = "master"
 commit = "b7081b932a060be11342fbe8287ac35da8ada879"
 committed = "2026-10-12"
-note = "pele 0.1.2 at b7081b93, unpatched. The current-pele Lennard-Jones 38 basin hopping row uses the archived globalopt.py settings on this commit: temperature 1, RandomDisplacement 0.41, AdaptiveStepsize acceptance 0.5 factor 0.9 interval 100, and stock lbfgs_cpp, which multiplies a rising step by 1/2. The paper row is unmodified pele 2d5bc8e3 from 27 Aug 2013. Its mylbfgs linesearch already divides a rising step by 10."
+note = "pele 0.1.2 at b7081b93, the v0.1.2 release, unmodified. The Lennard-Jones 38 basin hopping row calls LJCluster.get_basinhopping with that release's get_takestep and get_minimizer. The stop is the archived Markov energy window, -173.9284 + 1e-3."
 
 [[template]]
 id = "sella-0.1.1/lj38-loweig"

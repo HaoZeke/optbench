@@ -1,4 +1,4 @@
-# counter harness. One force call is one PeleCounter entry, a getEnergy or a getEnergyGradient.
+# Unranked diagnostic. These calls are PeleCounter entries from the archived globalopt.py driver, not the ranked harness row.
 # The quench is stock lbfgs_cpp from unpatched pele 0.1.2. A rising step is multiplied by 1/2.
 # A start succeeds when the Markov energy is within energy_tolerance of energy_minimum and the call count is under the cap.
 # The numpy generator is seeded with the integer in the start name.
@@ -16,7 +16,7 @@ algorithm basin hopping
 template current-pele/lj38-basinhopping
 problem globalopt/lj38
 tuning archive
-counter harness
+counter archive-driver
 cap 4000000
 partial false
 energy_minimum -173.9284
