@@ -110,7 +110,7 @@ success-only median. A row with no success has no median.
 | minimization/lj38 | pysisyphus/cg-lj38 | 254/1000 | 745 cap, 1 wrong stationary | 693 |
 | minimization/lj38 | pysisyphus/sd-lj38 | 205/1000 | 795 cap | 808 |
 | tsopt/pt-island | pykmc/ts-pt | 46/49 | 1 cap, 2 divergence | 746.5 |
-| hTST/Pt | pykmc/htst-pt | 0/1 | partial, 1 divergence | — |
+| hTST/Pt | pykmc/htst-pt | 13/13 | 0 | 3367604 |
 | hTST/Al | pykmc/htst-al | 16/16 | partial | 58189.5 |
 | accelerated-md/aladatom | pykmc/aladatom | 3/3 | 0 | 166853 |
 | accelerated-md/standard_aladatom | pykmc/standard-aladatom | 3/3 | 0 | 119079 |
@@ -510,7 +510,7 @@ island atoms is 1.449. The slab mean is stored as `rmsd_plus_free` and
 | problem | template | successes | failures | median calls | PAR-2 |
 | --- | --- | --- | --- | --- | --- |
 | tsopt/pt-island | pykmc/ts-pt | 46/49 | 1 cap, 2 divergence | 746.5 | 1956.45 |
-| hTST/Pt | pykmc/htst-pt | 0/1 | partial, 1 divergence | — | 1e8 |
+| hTST/Pt | pykmc/htst-pt | 13/13 | 0 | 3367604 | — |
 | hTST/Al | pykmc/htst-al | 16/16 | partial | 58189.5 | 57877.875 |
 | accelerated-md/aladatom | pykmc/aladatom | 3/3 | 0 | 166853 | 178325.67 |
 | accelerated-md/standard_aladatom | pykmc/standard-aladatom | 3/3 | 0 | 119079 | 126131.67 |
@@ -608,25 +608,27 @@ not repeat the coordinates. The hTST and aladatom campaigns were not
 rescored under this saddle rule. Process identity in those rows is the
 top-window RMSD from the run that wrote them.
 
-`pykmc/htst-pt` is a KMC campaign at 700 K with prefactor 1.2e12. The
-cycle rules are `archive/entries/hTST/Pt/eon-dimer-lbfgs/report.py`. A
-barrier matches only when `round(barrier, 3)` is still in the reference
-list. The reference list has 15 barriers and the barrier-cycle target is
-13. The rate target is 0.999 of 155055901.244, and the rate-cycle target
-is 224. The run was stopped after 662 searches and 95 processes. It is
-`partial true`. Six of the 15 reference barriers were matched. The
-unmatched list is 0.620, 0.986, 0.986, 1.196 four times, and 1.207 twice.
-The smooth-linear searches found 0.619, 0.985, and 1.195, each 0.001 eV
-under the reference value, so the three-decimal test does not take them.
-No barrier cycle closed, so the result has no `barrier_jobs` or
-`barrier_force_calls`. Eight rate cycles closed: `rate_jobs` 82,
-`rate_force_calls` 113199.5, `rate_average_over` 8. The scored start is
-the unfinished campaign, 914633 calls, divergence. PAR-2 is 1e8 because
-the failure cap is 5e7. The row stays off the ranked table. The archived
-`eon-dimer-lbfgs` row is barrier force calls 7.788e+05 averaged over 13
-and rate force calls 4.705e+04 averaged over 224. Dimer-LBFGS, Eon r2006,
-Penghao Xiao, 28 Jan 2013. The template ceiling is 20000 searches. That
-ceiling was not the stop.
+`pykmc/htst-pt` is a KMC campaign at 700 K with prefactor 1.2e12 on the
+shifted Morse potential. The cycle rules are
+`archive/entries/hTST/Pt/eon-dimer-lbfgs/report.py`. A barrier matches
+only when `round(barrier, 3)` is still in the reference list. The
+reference list has 15 barriers and the barrier-cycle target is 13. The
+rate target is 0.999 of 155055901.244. The run stopped when the 13th
+barrier window closed, on the search that found the last missing
+reference process. It used 36096 searches and 374 processes, and matched
+15 of 15 reference barriers. The result file has no `cap` key and no
+`partial` flag. The 13 window costs are the scored starts, all successes.
+`barrier_jobs` is 2776.076923, `barrier_force_calls` is 3833527,
+`barrier_average_over` is 13. The median is 3367604. The bootstrap
+interval is 2033873 to 5315178. The window costs run from 1424997 to
+7695865. `par_applied` is false and `par2_mean` is null, so the rank is
+the median. Rate windows are reported and do not decide the rank: 386
+closed, `rate_jobs` 93.31088083, `rate_force_calls` 128857.3912. The
+archived `eon-dimer-lbfgs` row is barrier force calls 7.788e+05 averaged
+over 13 and rate force calls 4.705e+04 averaged over 224. Dimer-LBFGS,
+Eon r2006, Penghao Xiao, 28 Jan 2013. This mean barrier cost is 4.922
+times that archive mean. The template ceiling is 250000 searches. The
+run stopped at 13 windows, short of that ceiling.
 
 `pykmc/htst-al` uses the same reducer at 300 K and prefactor 1.2e12, from
 `archive/entries/hTST/Al/eon-dimer-cg/report.py`. The reference list is
@@ -644,7 +646,8 @@ the cycle do not add rate, so these 18 processes cannot close a rate
 cycle. The archived `eon-dimer-cg` row is barrier force calls 2.887e+04
 averaged over 639 and rate force calls 8.979e+05 averaged over 20.
 Dimer-CG, Eon r2006, Penghao Xiao, 28 Jan 2013. The template ceiling is
-20000 searches. That ceiling was not the stop.
+400000 searches. These 16 windows stay partial until 639 barrier windows
+close.
 
 `pykmc/aladatom` and `pykmc/standard-aladatom` stay on the minimized
 reactant and stop when the old-scheme confidence `max(0, 1 - 1/repeats)`
