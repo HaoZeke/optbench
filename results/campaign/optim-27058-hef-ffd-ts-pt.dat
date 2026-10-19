@@ -1,0 +1,19 @@
+# counter optim. Wales OPTIM 27058 energy+gradient calls. The mean is the 2014 round of converged starts.
+# odata is the archived preamble. Coordinates, rho, and rcut use the run.sh bc -l scaling. The mode is the genmode displacement from reactant.con.
+# A success is the line **** CONVERGED **** under the cap. Failures stay out of the mean.
+force_calls 71
+force_calls_min 43
+force_calls_max 143
+force_calls_median 70
+successes 49
+nfailed 0
+n 49
+transition_states 0
+code optim-27058
+code_version 27058
+commit 144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348
+algorithm hybrid eigenvector following
+template optim/hef-ffd-ts-pt
+problem tsopt/pt-island
+tuning archive
+counter optim

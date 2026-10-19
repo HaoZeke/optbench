@@ -1,0 +1,13 @@
+# OPTIM hybrid eigenvector following on the Pt(111) heptamer island.
+id = "optim/hef-ffd-ts-pt"
+engine = "optim"
+problem = "tsopt/pt-island"
+code = "optim-27058"
+code_version = "27058"
+commit = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
+algorithm = "hybrid eigenvector following"
+tuning = "archive"
+note = "wales-27058 native Morse bulk. Coordinates, rho, and rcut are scaled by r0 = 2.897 as in archive run.sh. The odata preamble is the published file: BFGSTS 20 11 30 0.060 100, USEDIAG 3, NOHESS, BFGSCONV 4.3895D-5. The initial mode is the genmode displacement from reactant.con. The score is the rounded mean of OPTIM energy-plus-gradient calls on converged starts."
+
+[optim]
+method = "hef-ffd"

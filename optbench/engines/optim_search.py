@@ -1,13 +1,17 @@
-"""OPTIM L-BFGS through the ASE socket.
+"""OPTIM L-BFGS through the ASE socket, and one 2014 saddle search.
 
-The binary is the OPTIM target from the Wales snapshot
+The minimization binary is the OPTIM target from the Wales snapshot
 ``http://www-wales.ch.cam.ac.uk/svn.tar.bz2``. The pin is the sha256 of
 that file. The snapshot has no git commit. Each ``COMPUTE`` on the relay
-is one ``pes.evaluate``. OPTIM's own counter is not the score.
+is one ``pes.evaluate``. OPTIM's own counter is not that score.
 
-``optim/unhooked`` and every template that is not minimization L-BFGS
-raise before a file is written. Noise, saddle search, NEB, and PATHSAMPLE
-are not this runner.
+``optim/hef-ffd-ts-pt`` is the archived Pt-island hybrid eigenvector
+following row. It runs the ``wales-27058`` binary on the native Morse
+bulk potential. The score is that binary's energy-plus-gradient count.
+
+``optim/unhooked`` and every other template that is not minimization
+L-BFGS raise before a file is written. Noise, NEB, and PATHSAMPLE are
+not this runner.
 """
 
 from __future__ import annotations
@@ -55,6 +59,24 @@ def binary_path() -> Path:
     if env:
         return Path(env)
     return Path("/tmp/src/wales-full/build-optim/OPTIM")
+
+
+# ``bc -l`` output of the archived run.sh expressions. r0 = 2.8970,
+# rho = 1.6047, rcut = 9.5. Scale is 1/r0, rho is multiplied by r0,
+# and rcut is divided by r0.
+_BC_SCALE = ".34518467380048325854"
+_BC_RHO = "4.64881590"
+_BC_RCUT = "3.27925440110459095616"
+_PREAMBLE = Path(__file__).with_name("optim_ffd_preamble.txt")
+_WALES_27058 = "https://optbench.org/codes/wales-27058.tar.bz2"
+_WALES_27058_SHA = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
+
+
+def hef_binary() -> Path:
+    env = os.environ.get("OPTIM_27058_BIN")
+    if env:
+        return Path(env)
+    return Path("/tmp/optim27058/build/OPTIM")
 
 
 def available() -> str | None:
@@ -280,10 +302,210 @@ def _job(start: dict, settings: dict, template: dict) -> dict:
     }
 
 
+def _published_con(path: Path) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """The 2014 ``read_con_file`` layout: box on line 3, count on line 8, coords from line 12."""
+    lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+    box = np.array([float(part) for part in lines[2].split()[:3]], dtype=np.float64)
+    count = int(float(lines[7].split()[0]))
+    coords = np.zeros((count, 3), dtype=np.float64)
+    frozen = np.zeros(count, dtype=bool)
+    row = 0
+    for line in lines[11:]:
+        if row >= count:
+            break
+        parts = line.split()
+        coords[row] = [float(parts[0]), float(parts[1]), float(parts[2])]
+        frozen[row] = int(float(parts[3])) != 0
+        row += 1
+    if row != count:
+        raise ValueError(f"{path} has {row} coordinates, the header states {count}")
+    return coords, frozen, box
+
+
+def _displacement(start: Path, reactant: Path, dest: Path) -> None:
+    """genmode.x: eigenvalue 100, then the unscaled start minus the reactant."""
+
+    def points(path: Path) -> list[tuple[float, float, float]]:
+        lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+        found = []
+        for line in lines[11:]:
+            if not line.strip():
+                continue
+            parts = line.split()
+            if len(parts) < 3:
+                continue
+            try:
+                found.append((float(parts[0]), float(parts[1]), float(parts[2])))
+            except ValueError:
+                break
+        return found
+
+    left = points(start)
+    right = points(reactant)
+    if len(left) != len(right):
+        raise ValueError(f"{start.name} and {reactant.name} have different atom counts")
+    lines = ["  100.0"]
+    for (x1, y1, z1), (x2, y2, z2) in zip(left, right, strict=True):
+        lines.append(f" {x1 - x2: .16e} {y1 - y2: .16e} {z1 - z2: .16e}")
+    dest.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def _hef_odata(folder: Path, coords: np.ndarray, frozen: np.ndarray, box: np.ndarray) -> None:
+    scale = float(_BC_SCALE)
+    scaled = coords * scale
+    lengths = box * scale
+    box_text = "%f %f %f" % (float(lengths[0]), float(lengths[1]), float(lengths[2]))
+    preamble = _PREAMBLE.read_text(encoding="utf-8")
+    lines = [preamble.rstrip("\n"), f"PARAMS {_BC_RHO} {box_text} {_BC_RCUT}"]
+    indices = [str(index) for index in (np.flatnonzero(frozen) + 1).tolist()]
+    for start in range(0, len(indices), 8):
+        lines.append("FREEZE " + " ".join(indices[start : start + 8]))
+    lines.append("points")
+    for row in scaled:
+        lines.append("M " + " ".join(f"{float(value):.16f}" for value in row))
+    (folder / "odata").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def _paper_calls(log_text: str) -> tuple[int | None, bool]:
+    calls = None
+    for line in log_text.splitlines():
+        if "energy+gradient calls" in line:
+            calls = int(line.split()[5])
+    return calls, "**** CONVERGED ****" in log_text
+
+
+def _execute_hef(job: dict) -> dict:
+    """One native OPTIM search. The score is the paper's energy-plus-gradient count."""
+    os.environ.setdefault("OMP_NUM_THREADS", "1")
+    import tempfile
+
+    name = str(job["name"])
+    calls = 10000
+    success = False
+    error = ""
+    try:
+        with tempfile.TemporaryDirectory(prefix="optim-hef-") as raw:
+            folder = Path(raw)
+            coords, frozen, box = _published_con(Path(job["con"]))
+            _hef_odata(folder, coords, frozen, box)
+            _displacement(Path(job["con"]), Path(job["reactant"]), folder / "vector.dump")
+            env = os.environ.copy()
+            env["OMP_NUM_THREADS"] = "1"
+            stdout_path = folder / "OPTIM.log"
+            try:
+                with stdout_path.open("w", encoding="utf-8") as stdout:
+                    proc = subprocess.run(
+                        [str(job["binary"])],
+                        cwd=folder,
+                        env=env,
+                        stdout=stdout,
+                        stderr=subprocess.STDOUT,
+                        text=True,
+                        timeout=600,
+                        check=False,
+                    )
+            except subprocess.TimeoutExpired:
+                proc = None
+                error = "OPTIM exceeded 600s"
+            log_text = stdout_path.read_text(encoding="utf-8", errors="replace") if stdout_path.is_file() else ""
+            parsed, converged = _paper_calls(log_text)
+            if parsed is not None:
+                calls = parsed
+            success = converged and parsed is not None and calls < int(job["cap"])
+            if proc is not None and proc.returncode != 0 and not success:
+                error = error or f"OPTIM exit {proc.returncode}"
+            elif not success and not error:
+                error = "OPTIM did not converge"
+    except Exception as exc:
+        error = f"{type(exc).__name__}: {exc}"
+        success = False
+    record = {
+        "schema": "optbench.start/v2",
+        "start": name,
+        "force_calls": int(calls),
+        "verify_calls": 0,
+        "counter": "optim",
+        "comparable": False,
+        "success": success,
+        "failure": None if success else "divergence",
+        "reasons": [] if success else ["divergence"],
+        "hessian_index": None,
+        "expected_index": 1,
+        "converged": success,
+    }
+    if error and not success:
+        record["error"] = error
+    return record
+
+
+def _run_hef(root: Path, problem: dict, template: dict, output: Path, workers: int) -> dict:
+    binary = hef_binary()
+    if not binary.is_file():
+        raise RuntimeError(
+            "OPTIM 27058 is not built. "
+            f"The pin is the sha256 {_WALES_27058_SHA} of {_WALES_27058} "
+            "(20942854 bytes). Set OPTIM_27058_BIN to that OPTIM binary."
+        )
+    if not _PREAMBLE.is_file():
+        raise RuntimeError(f"{_PREAMBLE} is missing")
+    from .geometries import _extract, _stored, load_starts
+
+    scratch = output.parent / "work" / template["id"].replace("/", "-")
+    starts = load_starts(root, problem, scratch)
+    folder = _extract(_stored(root, problem["input"]["archive_path"]), scratch / "geometries")
+    island = folder / "pt-island-con"
+    reactant = island / "reactant.con"
+    if not reactant.is_file():
+        raise FileNotFoundError(reactant)
+    cap = int((problem.get("convergence") or {})["max_force_calls"])
+    jobs = []
+    for start in starts:
+        con = island / f"{start['name']}.con"
+        if not con.is_file():
+            raise FileNotFoundError(con)
+        jobs.append(
+            {
+                "name": start["name"],
+                "con": str(con),
+                "reactant": str(reactant),
+                "binary": str(binary),
+                "cap": cap,
+            }
+        )
+    records = run_jobs(jobs, _execute_hef, workers)
+    settings = point_settings(problem)
+    settings["cap"] = cap
+    comment = (
+        "# counter optim. Wales OPTIM 27058 energy+gradient calls. "
+        "The mean is the 2014 round of converged starts.\n"
+        "# odata is the archived preamble. Coordinates, rho, and rcut use the run.sh bc -l scaling. "
+        "The mode is the genmode displacement from reactant.con.\n"
+        "# A success is the line **** CONVERGED **** under the cap. Failures stay out of the mean."
+    )
+    parameters = {
+        "method": "hef-ffd",
+        "keyword": "BFGSTS",
+        "usediag": 3,
+        "scale": _BC_SCALE,
+        "rho": _BC_RHO,
+        "rcut": _BC_RCUT,
+        "counter": "optim",
+        "binary": "wales-27058",
+    }
+    return write_campaign(
+        output,
+        records,
+        template,
+        problem,
+        settings,
+        parameters,
+        images=None,
+        comment=comment,
+        counter="optim",
+    )
+
+
 def run(root: Path, problem_name: str, template_name: str, *, output: Path, workers: int = 1) -> dict:
-    reason = available()
-    if reason:
-        raise RuntimeError(reason)
     root = Path(root)
     from optbench.campaign import load_template, resolve_problem
 
@@ -291,13 +513,20 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
 
     problem = resolve_problem(root, problem_name)
     template = load_template(root, template_name)
-    require_pin(template, registry_pin(root, CODE))
+    require_pin(template, registry_pin(root, str(template.get("code") or CODE)))
     if template["engine"] != ENGINE:
         raise ValueError(f"{template_name} engine is {template['engine']}")
     stated = template.get("problem")
     if stated and stated != problem_name:
         raise ValueError(f"{template_name} belongs to {stated}")
     section = _section(template)
+    if section["method"] == "hef-ffd":
+        if problem_name != "tsopt/pt-island":
+            raise ValueError(f"{template_name} is the Pt-island forward-difference search")
+        return _run_hef(root, problem, template, output, workers)
+    reason = available()
+    if reason:
+        raise RuntimeError(reason)
     if problem.get("suite") != "minimization" or section["method"] != "lbfgs":
         raise _unhooked(template_name)
     if template.get("noise"):

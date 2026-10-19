@@ -1,0 +1,27 @@
+comment natoms = 343
+comment !R0 =  2.8970
+comment !A =   0.7102
+comment !rho = 1.6047
+comment !cubic box with boxl = 90.
+comment rcut = 9.5
+comment ! rho scaled = rho * r0 = 4.6488159
+comment convergence tolerance is norm(gradient)=1e-3, or that RMS(gradient)=1e-3 / sqrt(3*natoms) = 3.12D-5
+comment scaled tolerance is tol / A = 4.3895D-5
+comment scaled maxstep = maxstep / R0 = 0.690369347601
+comment scaled boxl = boxl / R0 = 6.630583 6.562582 10.355540
+comment scaled rcut = rcut / R0 = 3.2792544011
+comment params 4.6488159 6.630583 6.562582 10.355540 3.2792544011 this line will be written in the run.sh
+maxmax .1
+debug
+bfgsts 20 11 30 0.060 100
+bfgssteps 10000
+steps 200
+updates 100 
+maxbfgs 0.2 0.2
+bulk
+nohess
+bfgsconv 4.3895D-5
+permdist
+READVEC
+DUMPVECTOR
+usediag 3
