@@ -111,7 +111,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
-    "repro/minimization-morse-bulk-tsase-sdlbfgs": "130fa4c337815867f564d3eb32d433ea35354c63",
+    "repro/minimization-morse-bulk-tsase-sdlbfgs": "498dfc6bc14c150d61bc2043a4f0e56a8018f928",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -149,7 +149,7 @@ MATCHES: list[dict] = [
     {"key": "minimization/morse-bulk/ase-lbfgs", "template": "ase/morse-lbfgs-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-morse-lbfgs-tuned.dat", "cause": "ase_morse_script"},
     {"key": "minimization/morse-bulk/ase-fire", "template": "ase/morse-fire-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-morse-fire-tuned.dat", "cause": "ase_morse_script"},
     {"key": "minimization/morse-bulk/ase-preconLBFGS", "template": "ase/morse-preconlbfgs-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-morse-preconlbfgs-tuned.dat", "cause": "ase_morse_script"},
-    {"key": "minimization/morse-bulk/tsase-sdlbfgs", "template": "tsase/sdlbfgs-morse", "branch": "repro/minimization-morse-bulk-tsase-sdlbfgs", "path": "results/campaign/tsase-1.0-minimization-morse-bulk--tsase-sdlbfgs-morse.dat"},
+    {"key": "minimization/morse-bulk/tsase-sdlbfgs", "template": "tsase/sdlbfgs-morse", "branch": "repro/minimization-morse-bulk-tsase-sdlbfgs", "path": "results/campaign/tsase-1.0-minimization-morse-bulk--tsase-sdlbfgs-morse.dat", "extra": {"code_version": "1.0"}},
     # lowest eigenvector
     {"key": "lowest-eigenvector/lj38/eon-dimer-cg", "template": "eon-client/low-lj38-dimer-cg", "branch": "main", "path": "results/campaign/eon-client-low-lj38-dimer-cg.dat"},
     {"key": "lowest-eigenvector/lj38/eon-dimer-lbfgs", "template": "eon-client/low-lj38-dimer-lbfgs", "branch": "main", "path": "results/campaign/eon-client-low-lj38-dimer-lbfgs.dat"},
@@ -811,6 +811,8 @@ def render_markdown(rows: list[dict]) -> str:
         "The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.",
         "",
         "OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.",
+        "",
+        "TSASE 1.0 (98aac60) SDLBFGS stock defaults on morse-bulk stop at the archive max-atom force 0.01. The harness count is 17, unrounded 16.65, against the archive 19. That ranked row is tsase/sdlbfgs-morse-stock. The maxstep 0.1 calculator rerun remains an unranked diagnostic.",
         "",
         "EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.",
         "",

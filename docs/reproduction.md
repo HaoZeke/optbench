@@ -8,6 +8,8 @@ The pele transition-state paper score is the 2014 stop: break at the first RMS b
 
 OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.
 
+TSASE 1.0 (98aac60) SDLBFGS stock defaults on morse-bulk stop at the archive max-atom force 0.01. The harness count is 17, unrounded 16.65, against the archive 19. That ranked row is tsase/sdlbfgs-morse-stock. The maxstep 0.1 calculator rerun remains an unranked diagnostic.
+
 EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.
 
 Table 10 prints EON Lanczos 165. The archive file is 325. CI-NEB(3) prints 3 failures; the archive file has 0.
