@@ -1,0 +1,13 @@
+force_calls 9.57088e+05
+force_calls_median 6.80903e+05
+force_calls_min 1.2190e+04
+force_calls_max 4.9356e+06
+nfailed 3
+code GMIN
+code_version df8da5992675
+commit df8da599267534fbe43a250e578f7396a7946311
+algorithm basin-hopping
+template gmin/tip4p15-stock
+problem globalopt/tip4p15
+tuning stock
+counter harness

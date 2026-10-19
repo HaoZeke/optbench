@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-47 reproduced, 29 not reproduced, 75 not rerun. 151 archive rows.
+46 reproduced, 30 not reproduced, 75 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -66,7 +66,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | tip4p10/gmin | — | — | not rerun |
 | tip4p10/gmin-tbp | — | — | not rerun |
 | tip4p15/gmin | — | — | not rerun |
-| tip4p15/gmin-tbp | force_calls 625362 | 638316 | reproduced |
+| tip4p15/gmin-tbp | force_calls 625362 | 957088 | not reproduced; gmin_stock |
 | tip4p20/gmin | — | — | not rerun |
 | tip4p20/gmin-tbp | — | — | not rerun |
 
@@ -350,6 +350,12 @@ The classic dimer campaign (improved false, the 2014 key) has fraction_connected
 Archive run.sh unpacks coords-xyz.tar.gz. The harness uses the problem coords-con set (Kabsch RMS about 6.33). The odata preamble is not in the archive snapshot. The template uses updates 4. The mean is 489 against 145.
 
 - tsopt/LJ38/optim_ffd
+
+### gmin_stock
+
+Latest public GMIN, SVNREV df8da5992675, unmodified. Stock TIP4P basin-hopping from the GMIN manual: STEP 0.6 0.0 0.9 200, temperature 5, 50000 steps, sloppy RMS 0.01, tight RMS 0.0001, MAXIT 1000. The archived starts and the archived stop are unchanged: NTIP 4, target -628.3734, EDIFF 0.001, RANSEED 100. The success-only mean is 957088 against 625362. Three starts exhaust the stock step budget. The harness score is results/campaign/gmin-df8da5992675-tip4p15-stock.dat, template gmin/tip4p15-stock.
+
+- globalopt/tip4p15/gmin-tbp
 
 ### sella_trust
 

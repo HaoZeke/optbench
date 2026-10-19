@@ -1,0 +1,57 @@
+{
+  "counter": "harness",
+  "legacy": {
+    "force_calls": 957088,
+    "force_calls_max": 4935633,
+    "force_calls_median": 680903,
+    "force_calls_min": 12190,
+    "n": 500,
+    "nfailed": 3,
+    "successes": 497
+  },
+  "problem": "globalopt/tip4p15",
+  "provenance": {
+    "code": "GMIN",
+    "code_version": "df8da5992675",
+    "commit": "df8da599267534fbe43a250e578f7396a7946311",
+    "parameters": {
+      "counter": "GMIN function calls",
+      "method": "basin-hopping",
+      "potential": "NTIP 4",
+      "tuning": "stock",
+      "version": "df8da5992675"
+    }
+  },
+  "schema": "optbench.score/v2",
+  "score": {
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 20261015,
+    "cap": 10000000,
+    "includes_failures": true,
+    "iqr": 1058745.5,
+    "iqr_high": 1194647.04375,
+    "iqr_low": 946869.41875,
+    "mean": 1071345.044,
+    "median": 691364.0,
+    "median_high": 762059.0,
+    "median_low": 611828.6124999999,
+    "n": 500,
+    "n_cap": 3,
+    "n_crash": 0,
+    "n_divergence": 0,
+    "n_wrong_stationary": 0,
+    "nfailed": 3,
+    "par2_mean": 1071345.044,
+    "par_applied": true,
+    "par_factor": 2,
+    "q25": 322228.5,
+    "q75": 1380974.0,
+    "scoring": "par2-wilson-bootstrap",
+    "success_only_mean": 957087.569416499,
+    "success_rate": 0.994,
+    "successes": 497,
+    "wilson_high": 0.9979574037280398,
+    "wilson_low": 0.9825097478959467
+  },
+  "template": "gmin/tip4p15-stock"
+}

@@ -1377,7 +1377,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/tip4p15">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="13">No full harness row.</td></tr>
+   <tr><td data-field="template">gmin/tip4p15-stock</td><td data-field="version">GMIN df8da5992675</td><td data-field="commit">df8da5992675</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">1.07135e+06</td><td data-field="success_rate">0.994</td><td data-field="wilson_low">0.98251</td><td data-field="wilson_high">0.997957</td><td data-field="median_calls">691364</td><td data-field="mean_calls">983480</td><td data-field="failures">crash 0, divergence 0, cap 3, wrong_stationary 0</td><td data-field="n">500</td></tr>
    </tbody></table></div>
    <p class="bench-gaps">GMIN rows are off the ranked table.</p>
    <p><a href="generated/suites/globalopt.html#tip4p15">Full ranked table and performance profile</a>.</p>
@@ -1385,7 +1385,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <h3>Legacy 2014 archive</h3>
    <details class="bench-details">
    <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
@@ -1402,7 +1402,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr></thead><tbody>
    <tr id="globalopt-tip4p15-gmin-tbp" class="best">
    <td class="num">1</td>
-   <td class="text">gmin-tbp</td>
+   <td class="text">gmin-tbp · not reproduced</td>
    <td class="text">GMIN</td>
    <td class="num">6.25362e+05</td>
    <td class="num">6.1769e+06</td>
