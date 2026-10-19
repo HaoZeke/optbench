@@ -1,0 +1,15 @@
+force_calls 41666
+force_calls_min 41666
+force_calls_max 41666
+force_calls_median 41666.0
+call_unit total
+nfailed 0
+code eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)
+code_version 3.6.0
+commit a7aa57472fb7d823953fd36b78cd755fa4842d30
+algorithm Dimer-LBFGS rotation: max=10, tol=1
+template eon-develop/htst-pt-dimer-lbfgs2
+problem hTST/Pt
+reducer harness
+counter harness
+count_keys HarnessCounter

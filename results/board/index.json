@@ -5286,7 +5286,7 @@
         "divergence": 0,
         "wrong_stationary": 0
       },
-      "full_n": null,
+      "full_n": 1,
       "history": false,
       "max_calls": 1469.0,
       "mean_calls": 1469.0,
@@ -5331,7 +5331,7 @@
         "divergence": 0,
         "wrong_stationary": 0
       },
-      "full_n": null,
+      "full_n": 1,
       "history": false,
       "max_calls": 1696.0,
       "mean_calls": 1696.0,
@@ -5376,7 +5376,7 @@
         "divergence": 0,
         "wrong_stationary": 0
       },
-      "full_n": null,
+      "full_n": 1,
       "history": false,
       "max_calls": 1044.0,
       "mean_calls": 1044.0,
@@ -5421,7 +5421,7 @@
         "divergence": 0,
         "wrong_stationary": 0
       },
-      "full_n": null,
+      "full_n": 1,
       "history": false,
       "max_calls": 717.0,
       "mean_calls": 717.0,
@@ -16074,7 +16074,7 @@
       "title": "Al"
     },
     "hTST/Pt": {
-      "full_n": null,
+      "full_n": 1,
       "history": [],
       "id": "hTST/Pt",
       "not_comparable": [],
@@ -16096,7 +16096,7 @@
             "divergence": 0,
             "wrong_stationary": 0
           },
-          "full_n": null,
+          "full_n": 1,
           "history": false,
           "max_calls": 1469.0,
           "mean_calls": 1469.0,
@@ -16141,7 +16141,7 @@
             "divergence": 0,
             "wrong_stationary": 0
           },
-          "full_n": null,
+          "full_n": 1,
           "history": false,
           "max_calls": 1696.0,
           "mean_calls": 1696.0,
@@ -16186,7 +16186,7 @@
             "divergence": 0,
             "wrong_stationary": 0
           },
-          "full_n": null,
+          "full_n": 1,
           "history": false,
           "max_calls": 1044.0,
           "mean_calls": 1044.0,
@@ -16231,7 +16231,7 @@
             "divergence": 0,
             "wrong_stationary": 0
           },
-          "full_n": null,
+          "full_n": 1,
           "history": false,
           "max_calls": 717.0,
           "mean_calls": 717.0,
@@ -16260,7 +16260,131 @@
           "wilson_low": 0.20654931437723745
         }
       ],
-      "ranked": [],
+      "profile": {
+        "area_log10": {
+          "eon-develop/htst-pt-dimer-lbfgs2 3.6.0 campaign a7aa574": 1.0536049848239342,
+          "eon-svn/htst-pt-dimer-lbfgs2 r2549 campaign r2549": 1.2041199826559248
+        },
+        "rho": {
+          "eon-develop/htst-pt-dimer-lbfgs2 3.6.0 campaign a7aa574": [
+            0.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "eon-svn/htst-pt-dimer-lbfgs2 r2549 campaign r2549": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "solved": {
+          "eon-develop/htst-pt-dimer-lbfgs2 3.6.0 campaign a7aa574": 1.0,
+          "eon-svn/htst-pt-dimer-lbfgs2 r2549 campaign r2549": 1.0
+        },
+        "taus": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ]
+      },
+      "ranked": [
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": 2000000,
+          "code": "EON (SVN r2549)",
+          "code_version": "r2549",
+          "commit": "r2549",
+          "comparable": true,
+          "counter": "harness",
+          "current": true,
+          "entry": "eon-svn-htst-pt-dimer-lbfgs2",
+          "failures": {
+            "cap": 0,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 0
+          },
+          "full_n": 1,
+          "history": false,
+          "max_calls": 39163.0,
+          "mean_calls": 39163.0,
+          "mean_per_image": null,
+          "median": 39163.0,
+          "median_calls": 39163.0,
+          "median_high": 39163.0,
+          "median_low": 39163.0,
+          "median_per_image": null,
+          "min_calls": 39163.0,
+          "n": 1,
+          "nfailed": 0,
+          "note": "starts",
+          "par2_mean": 39163.0,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/eon-svn-htst-pt-dimer-lbfgs2.dat",
+          "problem": "hTST/Pt",
+          "registry_match": false,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 1.0,
+          "template": "eon-svn/htst-pt-dimer-lbfgs2",
+          "tuning": "",
+          "wilson_high": 1.0,
+          "wilson_low": 0.20654931437723745
+        },
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": 2000000,
+          "code": "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)",
+          "code_version": "3.6.0",
+          "commit": "a7aa57472fb7d823953fd36b78cd755fa4842d30",
+          "comparable": true,
+          "counter": "harness",
+          "current": true,
+          "entry": "eon-develop-htst-pt-dimer-lbfgs2",
+          "failures": {
+            "cap": 0,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 0
+          },
+          "full_n": 1,
+          "history": false,
+          "max_calls": 41666.0,
+          "mean_calls": 41666.0,
+          "mean_per_image": null,
+          "median": 41666.0,
+          "median_calls": 41666.0,
+          "median_high": 41666.0,
+          "median_low": 41666.0,
+          "median_per_image": null,
+          "min_calls": 41666.0,
+          "n": 1,
+          "nfailed": 0,
+          "note": "starts",
+          "par2_mean": 41666.0,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/eon-develop-htst-pt-dimer-lbfgs2.dat",
+          "problem": "hTST/Pt",
+          "registry_match": false,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 1.0,
+          "template": "eon-develop/htst-pt-dimer-lbfgs2",
+          "tuning": "",
+          "wilson_high": 1.0,
+          "wilson_low": 0.20654931437723745
+        }
+      ],
       "title": "Pt"
     },
     "lowest-eigenvector/lj38": {
@@ -42122,7 +42246,7 @@
       "title": "pt-island"
     }
   },
-  "ranked_count": 439,
+  "ranked_count": 441,
   "schema": "optbench.board/v1",
   "unmapped": [
     {

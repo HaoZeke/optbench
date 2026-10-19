@@ -1,0 +1,56 @@
+id = "eon-develop/htst-pt-dimer-lbfgs2"
+engine = "eon"
+problem = "hTST/Pt"
+code = "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)"
+code_version = "3.6.0"
+commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+algorithm = "Dimer-LBFGS rotation: max=10, tol=1"
+reducer = "harness"
+failure_cap = 2000000
+kind = "htst"
+kernel = "morse_shift"
+note = "Stock eOn develop a7aa57472fb7d823953fd36b78cd755fa4842d30. Same reactant, seed, and archive ini as EON (SVN r2549). No improved, memory, or auto-scale key is set. The harness replaces morse_pt with ext_pot and counts HarnessCounter on the same r2549 Morse::force surface. One start is the archive reactant. Success is one good saddle below 1.5 eV in the pass. The local communicator runs 8 jobs per pass."
+seeds = [42]
+starts = ["pos"]
+geometry = "website/hTST/Pt/eon-dimer-lbfgs2/pos.con"
+pass_limit = 8
+workers = 4
+
+[ini.Main]
+job = "akmc"
+temperature = 700
+random_seed = 42
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Prefactor]
+default_value = "1.2e12"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+converged_force = 0.001
+max_iterations = 5000
+
+[ini.AKMC]
+confidence = 1.9
+
+[ini."Process Search"]
+minimize_first = true
+
+[ini.Communicator]
+type = "local"
+num_jobs = 8
+number_of_CPUs = 1
+client_path = "eonclient"
+
+[ini."Saddle Search"]
+displace_least_coordinated_weight = 1.0
+displace_radius = 3.3
+displace_magnitude = 0.3
+min_mode_method = "dimer"
+max_energy = 1000.0
+
+[ini.Dimer]
+rotations_max = 10
+converged_angle = 1.0

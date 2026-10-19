@@ -4,6 +4,13 @@ suite = "hTST"
 problem = "Pt"
 contract = "partial"
 entry_count = 11
+remark = "The start is the archive reactant. Ranked rows are harness scores of that start under the archive force and dimer stops. The 2014 table is a separate legacy mean."
+
+[sample]
+starts = 1
+
+[input]
+archive_path = "website/hTST/Pt/eon-dimer-lbfgs2/pos.con"
 
 [metrics]
 required = ["barrier_force_calls", "barrier_jobs", "rate_force_calls", "rate_jobs"]

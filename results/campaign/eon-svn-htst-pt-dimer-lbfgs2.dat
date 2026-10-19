@@ -1,0 +1,15 @@
+force_calls 39163
+force_calls_min 39163
+force_calls_max 39163
+force_calls_median 39163.0
+call_unit total
+nfailed 0
+code EON (SVN r2549)
+code_version r2549
+commit r2549
+algorithm Dimer-LBFGS rotation: max=10, tol=1
+template eon-svn/htst-pt-dimer-lbfgs2
+problem hTST/Pt
+reducer harness
+counter harness
+count_keys HarnessCounter
