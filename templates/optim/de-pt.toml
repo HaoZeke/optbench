@@ -1,0 +1,16 @@
+# OPTIM double-ended Pt island. Native morse_bulk on wales-27058.
+id = "optim/de-pt"
+engine = "optim"
+problem = "double-ended-saddle-search/pt-island"
+code = "optim"
+code_version = "27058"
+commit = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
+algorithm = "DNEB + hybrid eigenvector following"
+tuning = "wales-2014"
+note = "wales-27058 morse_bulk. Coordinates, the box, and rcut 9.5 are divided by r0 2.897. PARAMS rho is 1.6047 times r0. FREEZE lists the atoms the con file marks fixed. The score is the last OPTIM energy+gradient calls line. Success is a log line that says Converged to TS. Archive mean 103."
+
+[optim]
+method = "dneb"
+preamble = "templates/optim/preambles/de-pt.txt"
+symbol = "M"
+timeout = 7200

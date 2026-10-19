@@ -67,6 +67,7 @@ def test_new_templates_match_a_problem_stop():
         "tsase/neb",
         "pykmc/lattice",
         "optim/unhooked",
+        "optim/de-pt",
         "optim/lbfgs-lj38",
         "optim/lbfgs-morse",
         "lammps/cg-lj38",
