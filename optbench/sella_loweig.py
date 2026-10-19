@@ -199,6 +199,12 @@ def write_asv(commit: str) -> Path:
             "version": "3.29.0",
             "cap": 10000,
         },
+        {
+            "name": "bench_ase_sella.AseLj38PreconlbfgsTuned",
+            "path": ROOT / "results" / "campaign" / "ase-3.29.0-lj38-preconlbfgs-tuned.starts.jsonl",
+            "version": "3.29.0",
+            "cap": 10000,
+        },
     )
     wrote = 0
     for job in jobs:
