@@ -26,6 +26,7 @@ def test_named_engines_are_in_the_table():
         "dlfind",
         "compass",
         "pysisyphus",
+        "pathsample",
     ]
     assert find("eon") is None
     assert find("rgsaddle-band") is None
@@ -48,6 +49,7 @@ def test_named_engines_are_in_the_table():
     assert found["dlfind"] is None or "libdlfind" in found["dlfind"]
     assert found["compass"] is None or "compass.py" in found["compass"]
     assert found["pysisyphus"] is None or "a4ce10dd" in found["pysisyphus"]
+    assert found["pathsample"] is None or SHA256 in found["pathsample"] or found["pathsample"] == found["optim"]
 
 
 def test_new_templates_match_a_problem_stop():
@@ -69,6 +71,12 @@ def test_new_templates_match_a_problem_stop():
         "optim/unhooked",
         "optim/lbfgs-lj38",
         "optim/lbfgs-morse",
+        "optim/de-lj38",
+        "optim/de-2ts",
+        "optim/de-pt",
+        "pathsample/de-lj38",
+        "pathsample/de-2ts",
+        "pathsample/de-pt",
         "lammps/cg-lj38",
         "lammps/cg-morse",
         "lammps/cg-lj38-noise-s0",
@@ -143,6 +151,19 @@ def test_pykmc_and_optim_write_nothing(tmp_path: Path):
         run(ROOT, "neb/Pt-heptamer", "optim/unhooked", output=output, workers=1)
     assert not output.exists()
     assert not output.with_suffix(".starts.jsonl").exists()
+
+
+def test_partn_coordinate_rows_follow_the_python_wrapper():
+    import numpy as np
+
+    from optbench.engines.partn import _atom_rows
+
+    nat = 4
+    rows = np.arange(nat * 3, dtype=np.float64).reshape(nat, 3)
+    assert _atom_rows(rows, nat).shape == (nat, 3)
+    assert np.allclose(_atom_rows(rows.T, nat), rows)
+    with pytest.raises(RuntimeError, match="shape"):
+        _atom_rows(np.zeros(5), nat)
 
 
 def test_partn_engine_is_dispatched(monkeypatch, tmp_path: Path):

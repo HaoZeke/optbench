@@ -2,19 +2,19 @@
 # ninit initial pushes use push_init along x of the first free atom.
 # A success is under the cap, at the force stop, and Hessian index 1.
 # nevalf is the pARTn tally and is not this count.
-force_calls 368
-force_calls_min 102
-force_calls_max 1072
-force_calls_median 247
-successes 45
-nfailed 4
+force_calls 453
+force_calls_min 165
+force_calls_max 1738
+force_calls_median 325
+successes 49
+nfailed 0
 n 49
-transition_states 45
+transition_states 49
 code artn
 code_version 1.1.0
 commit 9b753517c6c0eccae51425b83eb4e04ef554550b
 algorithm ARTn
 template partn/ts-pt
 problem tsopt/pt-island
-tuning default
+tuning pt111
 counter harness

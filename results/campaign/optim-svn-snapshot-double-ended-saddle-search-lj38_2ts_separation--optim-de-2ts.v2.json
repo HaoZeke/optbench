@@ -1,0 +1,66 @@
+{
+  "counter": "harness",
+  "legacy": {
+    "force_calls": 3454,
+    "force_calls_max": 9680,
+    "force_calls_median": 2832.5,
+    "force_calls_min": 695,
+    "n": 51,
+    "nfailed": 7,
+    "successes": 44,
+    "transition_states": 44
+  },
+  "problem": "double-ended-saddle-search/lj38_2ts_separation",
+  "provenance": {
+    "code": "optim",
+    "code_version": "svn-snapshot",
+    "commit": "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f",
+    "machine": {
+      "machine": "x86_64",
+      "node": "cursor",
+      "python": "3.12.3",
+      "system": "Linux"
+    },
+    "parameters": {
+      "archive_force_calls": 2885,
+      "counter": "harness",
+      "method": "newconnect",
+      "preamble": "templates/optim/preambles/de-2ts.txt",
+      "scale": "lj",
+      "socket": "ASE",
+      "symbol": "AX"
+    }
+  },
+  "schema": "optbench.score/v2",
+  "score": {
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 20261015,
+    "cap": 10000,
+    "includes_failures": true,
+    "iqr": 4288.0,
+    "iqr_high": 7350.674999999998,
+    "iqr_low": 3141.5125000000003,
+    "mean": 5725.156862745098,
+    "median": 3268.0,
+    "median_high": 5291.0,
+    "median_low": 2433.0,
+    "n": 51,
+    "n_cap": 7,
+    "n_crash": 0,
+    "n_divergence": 0,
+    "n_wrong_stationary": 0,
+    "nfailed": 7,
+    "par2_mean": 5725.156862745098,
+    "par_applied": true,
+    "par_factor": 2,
+    "q25": 1793.0,
+    "q75": 6081.0,
+    "scoring": "par2-wilson-bootstrap",
+    "success_only_mean": 3454.159090909091,
+    "success_rate": 0.8627450980392157,
+    "successes": 44,
+    "wilson_high": 0.9318889826494312,
+    "wilson_low": 0.7427830774241833
+  },
+  "template": "optim/de-2ts"
+}
