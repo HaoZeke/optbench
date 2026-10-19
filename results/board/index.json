@@ -39782,59 +39782,60 @@
       ],
       "profile": {
         "area_log10": {
-          "eon-client/ts-lj38-dimer 3.5.0 campaign 4d8b34b": 0.32962784525205946,
-          "eon-client/ts-lj38-lanczos 3.5.0 campaign 4d8b34b": 0.560668366924165,
-          "eon-client/ts-lj38-lanczos-improved 3.5.0 campaign 4d8b34b": 0.6600082654932787,
-          "eon-svn/ts-lj38-dimer-ljcut r2549 campaign r2549": 0.4071430691355346,
-          "eon-svn/ts-lj38-lanczos-ljcut r2549 campaign r2549": 0.6569979655366389,
+          "eon-client/ts-lj38-dimer 3.5.0 campaign 4d8b34b": 0.32059694538214,
+          "eon-client/ts-lj38-lanczos 3.5.0 campaign 4d8b34b": 0.5456168671409659,
+          "eon-client/ts-lj38-lanczos-improved 3.5.0 campaign 4d8b34b": 0.6464619156883997,
+          "eon-svn/ts-lj38-dimer-ljcut r2549 campaign r2549": 0.3920915693523356,
+          "eon-svn/ts-lj38-lanczos-ljcut r2549 campaign r2549": 0.6434516157317598,
           "partn/ts-lj38 1.1.0 default campaign 9b75351": 0.0,
           "rgsaddle/dimer-fire 0.2.2 default campaign, asv c0db2b8": 0.0,
           "rgsaddle/dimer-fire-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.0,
           "rgsaddle/dimer-lbfgs 0.2.2 default campaign, asv c0db2b8": 0.0,
           "rgsaddle/dimer-lbfgs-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.0,
-          "rgsaddle/dimer-rotskip 0.2.2 default campaign, asv c0db2b8": 0.27017442110842316,
-          "rgsaddle/dimer-rotskip-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.08729869874255455,
+          "rgsaddle/dimer-rotskip 0.2.2 default campaign, asv c0db2b8": 0.2611435212385037,
+          "rgsaddle/dimer-rotskip-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.08579354876423465,
           "rgsaddle/lanczos 0.2.2 default campaign, asv c0db2b8": 0.0,
           "rgsaddle/lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.0015051499783199063,
-          "rgsaddle/prfo 0.2.2 default campaign, asv c0db2b8": 0.0782677988726351,
-          "rgsaddle/prfo-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.7360183393984341,
-          "sella/lj38-ts-default 2.6.0 default campaign, asv 6cfb60c": 1.201862257688445,
+          "rgsaddle/prfo 0.2.2 default campaign, asv c0db2b8": 0.0737523489376754,
+          "rgsaddle/prfo-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.7254822895501947,
+          "sella-0.1.1/lj38-ts 0.1.1 archive campaign 0.1.1": 1.1025223591193312,
+          "sella/lj38-ts-default 2.6.0 default campaign, asv 6cfb60c": 1.1627283582521275,
           "tsase/dimer-lj38 1.0 default campaign 98aac60": 0.0
         },
         "rho": {
           "eon-client/ts-lj38-dimer 3.5.0 campaign 4d8b34b": [
             0.0,
             0.0,
-            0.005,
-            0.65,
+            0.0,
+            0.625,
             0.88
           ],
           "eon-client/ts-lj38-lanczos 3.5.0 campaign 4d8b34b": [
             0.0,
-            0.005,
-            0.4,
+            0.0,
+            0.355,
             0.965,
             0.985
           ],
           "eon-client/ts-lj38-lanczos-improved 3.5.0 campaign 4d8b34b": [
             0.0,
-            0.01,
-            0.715,
-            0.975,
+            0.0,
+            0.685,
+            0.97,
             0.985
           ],
           "eon-svn/ts-lj38-dimer-ljcut r2549 campaign r2549": [
             0.0,
             0.0,
-            0.065,
-            0.795,
-            0.985
+            0.05,
+            0.765,
+            0.975
           ],
           "eon-svn/ts-lj38-lanczos-ljcut r2549 campaign r2549": [
             0.0,
-            0.005,
-            0.71,
-            0.97,
+            0.0,
+            0.675,
+            0.965,
             0.995
           ],
           "partn/ts-lj38 1.1.0 default campaign 9b75351": [
@@ -39874,15 +39875,15 @@
           ],
           "rgsaddle/dimer-rotskip 0.2.2 default campaign, asv c0db2b8": [
             0.0,
-            0.005,
-            0.205,
-            0.42,
+            0.0,
+            0.185,
+            0.415,
             0.535
           ],
           "rgsaddle/dimer-rotskip-tuned 0.2.2 tuned campaign, asv c0db2b8": [
             0.0,
             0.0,
-            0.08,
+            0.075,
             0.14,
             0.14
           ],
@@ -39903,20 +39904,27 @@
           "rgsaddle/prfo 0.2.2 default campaign, asv c0db2b8": [
             0.0,
             0.005,
-            0.02,
-            0.13,
+            0.015,
+            0.12,
             0.21
           ],
           "rgsaddle/prfo-tuned 0.2.2 tuned campaign, asv c0db2b8": [
-            0.015,
-            0.14,
-            0.82,
+            0.0,
+            0.12,
+            0.815,
             0.98,
-            0.995
+            0.99
+          ],
+          "sella-0.1.1/lj38-ts 0.1.1 archive campaign 0.1.1": [
+            0.325,
+            1.0,
+            1.0,
+            1.0,
+            1.0
           ],
           "sella/lj38-ts-default 2.6.0 default campaign, asv 6cfb60c": [
+            0.755,
             0.985,
-            1.0,
             1.0,
             1.0,
             1.0
@@ -39946,6 +39954,7 @@
           "rgsaddle/lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.05,
           "rgsaddle/prfo 0.2.2 default campaign, asv c0db2b8": 0.25,
           "rgsaddle/prfo-tuned 0.2.2 tuned campaign, asv c0db2b8": 1.0,
+          "sella-0.1.1/lj38-ts 0.1.1 archive campaign 0.1.1": 1.0,
           "sella/lj38-ts-default 2.6.0 default campaign, asv 6cfb60c": 1.0,
           "tsase/dimer-lj38 1.0 default campaign 98aac60": 0.0
         },
@@ -40000,6 +40009,51 @@
           "success_rate": 1.0,
           "template": "sella/lj38-ts-default",
           "tuning": "default",
+          "wilson_high": 1.0,
+          "wilson_low": 0.9811546736227335
+        },
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": 10000,
+          "code": "Sella",
+          "code_version": "0.1.1",
+          "commit": "0.1.1",
+          "comparable": true,
+          "counter": "harness",
+          "current": true,
+          "entry": "sella-0.1.1-lj38-ts",
+          "failures": {
+            "cap": 0,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 0
+          },
+          "full_n": 200,
+          "history": false,
+          "max_calls": 160.0,
+          "mean_calls": 69.515,
+          "mean_per_image": null,
+          "median": 64.0,
+          "median_calls": 64.0,
+          "median_high": 67.0,
+          "median_low": 61.0,
+          "median_per_image": null,
+          "min_calls": 24.0,
+          "n": 200,
+          "nfailed": 0,
+          "note": "starts.jsonl",
+          "par2_mean": 69.515,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/sella-0.1.1-lj38-ts.dat",
+          "problem": "tsopt/LJ38",
+          "registry_match": true,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 1.0,
+          "template": "sella-0.1.1/lj38-ts",
+          "tuning": "archive",
           "wilson_high": 1.0,
           "wilson_low": 0.9811546736227335
         },
@@ -42122,7 +42176,7 @@
       "title": "pt-island"
     }
   },
-  "ranked_count": 439,
+  "ranked_count": 440,
   "schema": "optbench.board/v1",
   "unmapped": [
     {

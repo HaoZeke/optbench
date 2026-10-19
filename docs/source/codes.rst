@@ -540,7 +540,7 @@ The number is written only after the run finishes under the problem rule.
    <td><a href="https://github.com/zadorlab/sella">https://github.com/zadorlab/sella</a></td>
    </tr>
    <tr>
-   <td>lowest eigenvector</td>
+   <td>lowest eigenvector and saddle search</td>
    <td>0.1.1</td>
    <td>0.1.1</td>
    <td><a href="https://github.com/zadorlab/sella">https://github.com/zadorlab/sella</a></td>

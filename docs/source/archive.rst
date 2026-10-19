@@ -1665,7 +1665,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr></thead><tbody>
    <tr id="tsopt-lj38-sella" class="best">
    <td class="num">1</td>
-   <td class="text">sella · not reproduced</td>
+   <td class="text">sella</td>
    <td class="text">Sella 0.1.1 legacy</td>
    <td class="num">69.55</td>
    <td class="num">158</td>

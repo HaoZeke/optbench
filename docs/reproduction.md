@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+47 reproduced, 28 not reproduced, 76 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -206,7 +206,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | LJ38/optim_ffd | force_calls 145 | 489 | not reproduced; optim_lj38_ts |
 | LJ38/pele_cd | force_calls 254 | 263.52 | reproduced; residual |
 | LJ38/pele_ffd | force_calls 192 | 207.51 | reproduced; residual |
-| LJ38/sella | force_calls 69.55 | 93 | not reproduced; sella_trust |
+| LJ38/sella | force_calls 69.55 | 69.515 | reproduced |
 | pt-island/eon-dimer | force_calls 116 | 115 | reproduced |
 | pt-island/eon-lanczos | force_calls 143 | 146 | reproduced |
 | pt-island/eon-lanczos-improved | force_calls 106 | 106 | reproduced |
@@ -355,7 +355,6 @@ Archive run.sh unpacks coords-xyz.tar.gz. The harness uses the problem coords-co
 
 Sella 2.6.0 with the archived trust-region numbers (eta, gamma, delta0, rho, sigma) is the parameter_source=archive row. It misses the 2014 mean. The constructor-default row is a different setup.
 
-- tsopt/LJ38/sella
 - tsopt/pt-island/sella
 
 Rows with no exact-setup campaign stay not rerun and are not given a cause. AKMC on aladatom is a different method from Langevin parallel replica; the ratios above are that comparison, and the archive rows stay not rerun.

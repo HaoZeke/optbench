@@ -35,7 +35,7 @@ def test_the_ledger_covers_the_oracle_in_order():
             assert row["cause"]
         if (row.get("rerun") or {}).get("paper_baseline"):
             assert status == "reproduced"
-    assert counts == {"reproduced": 46, "not_reproduced": 29, "not_rerun": 76}
+    assert counts == {"reproduced": 47, "not_reproduced": 28, "not_rerun": 76}
     assert reproduction_errors(ROOT) == []
 
 
@@ -54,6 +54,13 @@ def test_pele_paper_baseline_is_the_2014_stop():
     assert central["rerun"]["harness_stop_mean"] == 335.06
     assert island["rerun"]["stop2014_calls"] == 88.551
     assert island["rerun"]["paper_baseline"] is True
+    sella = ledger["tsopt/LJ38/sella"]
+    assert sella["status"] == "reproduced"
+    assert sella["rerun"]["template"] == "sella-0.1.1/lj38-ts"
+    assert sella["rerun"]["paper_baseline"] is True
+    assert sella["checks"][0]["ok"] is True
+    assert sella["checks"][0]["rerun"] == 69.515
+    assert sella["failure_check"]["rerun"] == 0.0
     assert "starting set" in forward["note"]
     held = holdback(ROOT)
     assert ("tsopt/LJ38", "sella/lj38-ts-tuned") in held.templates
