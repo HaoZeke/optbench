@@ -36,7 +36,15 @@ def test_start_counts_match_the_archives():
 def test_lj38_stop_is_the_archived_eon_energy():
     problem = load_problem(ROOT / "problems" / "globalopt" / "lj38.toml")
     assert target_energy(problem) == -173.927427
-    assert target_energy(load_problem(ROOT / "problems" / "globalopt" / "lj75.toml")) is None
+    lj75 = load_problem(ROOT / "problems" / "globalopt" / "lj75.toml")
+    lj98 = load_problem(ROOT / "problems" / "globalopt" / "lj98.toml")
+    lj150 = load_problem(ROOT / "problems" / "globalopt" / "lj150.toml")
+    assert target_energy(lj75) == -397.492331 + 0.001
+    assert target_energy(lj98) == -543.665361 + 0.001
+    assert target_energy(lj150) == -893.310258 + 0.001
+    assert load_template(ROOT, "asebh/lj75-basin-default")["stop"]["max_force_calls"] == 1000000
+    assert load_template(ROOT, "asebh/lj98-mh-default")["stop"]["max_force_calls"] == 1000000000
+    assert load_template(ROOT, "asebh/lj150-basin-tuned")["stop"]["max_force_calls"] == 10000000
     tuned = load_template(ROOT, "asebh/lj38-basin-tuned")
     assert tuned["method"]["parameters"]["temperature_kelvin"] == 8000
     assert tuned["method"]["parameters"]["dr"] == 0.5

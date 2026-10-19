@@ -11,7 +11,7 @@ tuning = "tuned"
 reducer = "harness"
 ranked = true
 seed = 314159
-note = "Temperature 8000 K, displacement 0.5, and the LBFGS force stop 0.001 are the Lennard-Jones 38 eOn archive. This problem has no basin-hopping config of its own. ASE stores the temperature as kT = 8000 * kB and does not adjust the step size. The local iteration bound is 1000, the archived max_iterations. Seed 314159 is the archived random_seed, reused for every start. The problem file states no force-call cap. This cap is 2000000, above the archived eOn Lennard-Jones 38 maximum of 1795901."
+note = "Temperature 8000 K, displacement 0.5, and the LBFGS force stop 0.001 are the Lennard-Jones 38 eOn archive. This problem has no basin-hopping config of its own. ASE stores the temperature as kT = 8000 * kB and does not adjust the step size. The local iteration bound is 1000, the archived max_iterations. Seed 314159 is the archived random_seed, reused for every start. The problem file caps a start at 10000000 force calls."
 
 [method]
 name = "BasinHopping"
@@ -33,7 +33,7 @@ smooth = false
 pbc = [false, false, false]
 
 [stop]
-max_force_calls = 2000000
+max_force_calls = 10000000
 max_hops = 10000000
 
 [input]

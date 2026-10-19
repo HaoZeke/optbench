@@ -73,21 +73,32 @@ _OPTIMIZERS = ("FIRE", "LBFGS", "BFGS", "QuasiNewton")
 def target_energy(problem: dict) -> float | None:
     """Stop energy from the problem file, or None when the file states no rule.
 
-    ``minimum_energy`` in the convergence table is the reference. Lennard-Jones
-    38 has no such key on this revision. Its reference is the minimum implied
-    by the archived eOn stop and ``energy_above_minimum``.
+    Lennard-Jones 38 keeps the archived eOn stop, which is the Cambridge
+    minimum plus ``energy_above_minimum``. A later problem states that
+    minimum under ``reference.energy``. The stop is that minimum plus the gap.
     """
     convergence = problem.get("convergence") or {}
     if "energy_above_minimum" not in convergence:
         return None
     gap = float(convergence["energy_above_minimum"])
+    if problem.get("id") == "globalopt/lj38" and abs(gap - 0.001) < 1e-15:
+        return LJ38_STOP
     if "minimum_energy" in convergence:
         return float(convergence["minimum_energy"]) + gap
+    reference = (problem.get("reference") or {}).get("energy")
+    if reference not in (None, ""):
+        return float(reference) + gap
     if problem.get("id") == "globalopt/lj38":
-        if abs(gap - 0.001) < 1e-15:
-            return LJ38_STOP
         return LJ38_MINIMUM + gap
     return None
+
+
+def _force_cap(problem: dict, template: dict) -> int:
+    """Problem cap when the file states one, otherwise the template cap."""
+    stated = (problem.get("convergence") or {}).get("max_force_calls")
+    if stated not in (None, "", 0, "0"):
+        return int(stated)
+    return int((template.get("stop") or {})["max_force_calls"])
 
 
 def _archive_path(problem: dict, template: dict) -> str:
@@ -850,7 +861,7 @@ def run_point(root: Path, template_name: str, start: str, seed: int) -> dict:
         "parameters": parameters,
         "potential": dict(loaded.get("potential") or {}),
         "seed": int(seed),
-        "cap": int(loaded["stop"]["max_force_calls"]),
+        "cap": _force_cap(spec, loaded),
         "max_hops": int(loaded["stop"].get("max_hops", 10_000_000)),
         "target": target_energy(spec),
         "problem": spec["id"],
@@ -892,7 +903,7 @@ def run(
         names = names[: int(limit)]
     cache = materialize(archive, Path(tempfile.gettempdir()) / "optbench-asebh" / spec["id"].replace("/", "-"))
     target = target_energy(spec)
-    cap = int((loaded.get("stop") or {})["max_force_calls"])
+    cap = _force_cap(spec, loaded)
     max_hops = int((loaded.get("stop") or {}).get("max_hops", 10_000_000))
     parameters = dict((loaded.get("method") or {}).get("parameters") or {})
     parameters.setdefault("local_steps", 1000)
