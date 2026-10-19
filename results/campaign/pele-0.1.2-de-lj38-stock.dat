@@ -1,0 +1,20 @@
+# pele 0.1.2 stock double-ended LJ38, commit b7081b932a060be11342fbe8287ac35da8ada879
+# PeleCounter charges one harness call for each potential entry
+# NEB and hybrid eigenvector following stay at the library defaults
+# the RMS stop is the archive Euclidean norm 0.001
+# the mean leaves cap failures out; the ranked score is the harness PAR-2
+# the gap from the 2014 archive is a finding
+force_calls 1752.17857143
+force_calls_median 1687
+force_calls_min 1223
+force_calls_max 2482
+nfailed 22
+n 50
+algorithm hybrid eigenvector following
+code pele
+code_version 0.1.2
+commit b7081b932a060be11342fbe8287ac35da8ada879
+template pele/de-lj38-stock
+tuning stock
+counter harness
+problem double-ended-saddle-search/lj38

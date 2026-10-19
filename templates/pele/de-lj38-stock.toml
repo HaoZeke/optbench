@@ -1,0 +1,13 @@
+# pele 0.1.2, the current release, unmodified.
+# One NEB at the library defaults, then hybrid eigenvector following from
+# the highest image. The tangent guess is the NEB tangent. The RMS stop
+# is 0.001/sqrt(3*38), the archive Euclidean norm 0.001. PeleCounter
+# scores the search. The cap is the problem budget, 2500.
+id = "pele/de-lj38-stock"
+engine = "pele-0.1.2"
+code = "pele"
+code_version = "0.1.2"
+commit = "b7081b932a060be11342fbe8287ac35da8ada879"
+algorithm = "hybrid eigenvector following"
+problem = "double-ended-saddle-search/lj38"
+tuning = "stock"
