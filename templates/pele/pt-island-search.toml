@@ -7,7 +7,7 @@ algorithm = "hybrid eigenvector following"
 problem = "saddle-search/pt-island"
 task = "saddle-search"
 tuning = "default"
-note = "Hybrid eigenvector following on single-atom displacements of the minimized Pt island. Library quench controls. The climb uses the published per-search cap of 5064 force calls. Each endpoint minimization has a budget of 2000 and those calls stay in the same per-search cost. The PAR-2 cap is 5064."
+note = "Hybrid eigenvector following on single-atom displacements of the minimized Pt island. Library quench controls. The climb uses the published per-search cap of 5064 force calls. Each endpoint minimization has a budget of 2000 and those calls stay in the same per-search cost. The PAR-2 cap is 5064. The link is the eOn r2205 per-atom maximum, strictly below 0.1 angstrom. The mean over every free atom is stored beside it."
 
 [stop]
 force_norm = 0.001

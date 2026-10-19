@@ -21,9 +21,11 @@ A saddle-search row is one single-atom displacement. The climb uses the
 published per-search cap of 5064 force calls. Each endpoint minimization
 has a budget of 2000, and those calls are part of the same per-search
 cost. The PAR-2 cap is 5064. The initial minimization of the minimum is
-outside that count. Both endpoint minima are stored. Connection is
-Cartesian RMSD in the substrate frame, and the mean over every free atom
-is recorded beside it. The substrate pins the frame.
+outside that count. Both endpoint minima and the reactant minimum are
+stored. The link is the eOn r2205 test: exactly one endpoint has
+per-atom maximum minimum-image distance strictly below 0.1 angstrom.
+The mean over every free atom is recorded beside it. Saddle novelty
+stays that mean at 0.5.
 """
 
 from __future__ import annotations
@@ -46,6 +48,7 @@ os.environ.setdefault("NUMEXPR_NUM_THREADS", "1")
 
 import numpy as np
 
+from .connection import connected_endpoints, link_tolerance, per_atom_max
 from .counter import ForceCallCap, HarnessCounter
 from .failures import classify_failure
 from .rgsaddle_minmode import _cartesian_rmsd, _geometries, _stored, _vibrational_eigenvalues
@@ -844,17 +847,22 @@ def _one_displacement(spec: dict, *, evaluate, minimum: np.ndarray, min_energy: 
             record["force_calls"] = climb_calls + record["endpoint_calls"]
             record["endpoint_plus"] = [float(value) for value in plus]
             record["endpoint_minus"] = [float(value) for value in minus]
+            record["minimum"] = [float(value) for value in minimum]
             plus_atoms = plus.reshape(-1, 3)
             minus_atoms = minus.reshape(-1, 3)
             minimum_atoms = minimum.reshape(-1, 3)
+            cell = spec["cell"]
+            tolerance = float(limits.get("link_tolerance", link_tolerance(None)))
             record["rmsd_plus"] = _cartesian_rmsd(plus_atoms, minimum_atoms)
             record["rmsd_minus"] = _cartesian_rmsd(minus_atoms, minimum_atoms)
             record["legacy_rmsd_plus"] = _mean_free_rmsd(plus_atoms, minimum_atoms)
             record["legacy_rmsd_minus"] = _mean_free_rmsd(minus_atoms, minimum_atoms)
+            record["per_atom_max_plus"] = per_atom_max(plus_atoms, minimum_atoms, cell)
+            record["per_atom_max_minus"] = per_atom_max(minus_atoms, minimum_atoms, cell)
             record["barrier"] = float(outcome["energy"] - min_energy)
             record["_point"] = point
-            record["_axis_links"] = (record["rmsd_plus"] <= limits["connect_rmsd"]) ^ (
-                record["rmsd_minus"] <= limits["connect_rmsd"]
+            record["_axis_links"] = connected_endpoints(
+                minimum_atoms, plus_atoms, minus_atoms, cell, tolerance
             )
             record["_legacy_links"] = (record["legacy_rmsd_plus"] <= limits["connect_rmsd"]) ^ (
                 record["legacy_rmsd_minus"] <= limits["connect_rmsd"]
@@ -873,6 +881,7 @@ def _saddle_once(root: Path, problem: dict, template: dict) -> dict:
     con_path = next(path for path in paths if str(path).endswith(".con"))
     positions, fixed, cell = load_con(_stored(root, con_path))
     limits = _saddle_limits(template)
+    limits["link_tolerance"] = link_tolerance(problem)
     climb_cap = int(_check_stop(problem, template) or 1000)
     force_tol = float((problem.get("convergence") or {}).get("force_norm", 1e-3))
     free = np.flatnonzero(~fixed)
@@ -1038,6 +1047,7 @@ def _run_saddle_search(
     goal = int((problem.get("goal") or {}).get("connected_saddles", limits["goal"]))
     limits["goal"] = goal
     limits["barrier_max"] = float((problem.get("goal") or {}).get("barrier_below_eV", limits["barrier_max"]))
+    limits["link_tolerance"] = link_tolerance(problem)
     climb_cap = int(cap)
     search_cap = _SADDLE_SEARCH_CAP
     account_cap = climb_cap + _SADDLE_CLIMB_OVERSHOOT + 2 * int(limits["endpoint_budget"])
