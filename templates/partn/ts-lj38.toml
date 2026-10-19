@@ -6,16 +6,19 @@ code = "artn"
 code_version = "1.1.0"
 commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
 algorithm = "ARTn"
-tuning = "default"
-note = "ninit is 0. engine_units is lammps/lj. fire_dt_init is 0.05 and lanczos_disp is 0.001. etot_diff_limit is 1e6 because the library default of 80 is below ordinary LJ energy changes. The FIRE default of 20 leaves the cluster."
+tuning = "lj-refine"
+note = "examples/LAMMPS.LJ.SaddleRefine.d: ninit 0, nperp_limitation 10 20 30 40 50, push_step_size 0.05, eigen_step_size 0.05, push_over 0.8, lanczos_disp 2.5e-6, lanczos_max_size 30. The example timestep is 0.015 and the LAMMPS fix caps the step with dmax 0.1. That cap is not a next_displ input. fire_dt_init 0.005 and fire_dt_max_f 1 keep the FIRE step from reaching the length that trips BOX EXPLOSION. etot_diff_limit stays 1e6. engine_units is lammps/lj."
 
 [partn]
-push_step_size = 0.1
-eigen_step_size = 0.01
+push_step_size = 0.05
+eigen_step_size = 0.05
 ninit = 0
-lanczos_max_size = 32
-lanczos_disp = 0.001
+lanczos_max_size = 30
+lanczos_disp = 2.5e-6
+push_over = 0.8
 lpush_final = false
 converge_property = "norm"
-fire_dt_init = 0.05
+nperp_limitation = [10, 20, 30, 40, 50]
+fire_dt_init = 0.005
+fire_dt_max_f = 1.0
 etot_diff_limit = 1000000.0

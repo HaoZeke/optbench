@@ -9,6 +9,7 @@ coordinates stay on disk.
 
 from __future__ import annotations
 
+import fcntl
 import os
 import socket
 import struct
@@ -51,10 +52,63 @@ def _write_count(calls: int) -> None:
             handle.write(f"{calls}\n")
 
 
+def _shared_total() -> int | None:
+    """Aggregate tally for every OPTIM child of one PATHSAMPLE start.
+
+    The file holds one integer. Children lock it. A missing file is a
+    per-process counter, which is the minimization OPTIM path.
+    """
+    path = os.environ.get("OPTBENCH_CALL_LOG")
+    if not path:
+        return None
+    if not os.path.exists(path):
+        with open(path, "w", encoding="utf-8") as handle:
+            handle.write("0\n")
+    return 0
+
+
+def _reserve_shared(cap: int | None) -> int | None:
+    """Take one aggregate call. ``None`` means the cap is already spent."""
+    path = os.environ.get("OPTBENCH_CALL_LOG")
+    if not path:
+        return None
+    with open(path, "a+", encoding="utf-8") as handle:
+        fcntl.flock(handle.fileno(), fcntl.LOCK_EX)
+        handle.seek(0)
+        text = handle.read().strip()
+        calls = int(text) if text else 0
+        if cap is not None and calls >= cap:
+            return None
+        calls += 1
+        handle.seek(0)
+        handle.truncate()
+        handle.write(f"{calls}\n")
+        handle.flush()
+        return calls
+
+
 def _write_last(coords: np.ndarray) -> None:
     path = os.environ.get("OPTBENCH_LAST_PATH")
     if path:
         np.savetxt(path, np.asarray(coords, dtype=np.float64), fmt="%.16e")
+
+
+def _append_traj(coords: np.ndarray) -> None:
+    """Every COMPUTE geometry. The converged saddle is one of these frames.
+
+    ``debug`` writes ``lbfgs.xyz`` at the start of a minimiser call and
+    returns when the RMS test passes, before that call dumps the
+    converged point. ``last.txt`` is then overwritten by the curvature
+    probe. The trajectory is the socket history in harness units.
+    """
+    path = os.environ.get("OPTBENCH_TRAJ_PATH")
+    if not path:
+        return
+    rows = np.asarray(coords, dtype=np.float64)
+    with open(path, "a", encoding="utf-8") as handle:
+        handle.write(f"{len(rows)}\noptbench\n")
+        for row in rows:
+            handle.write(f"{row[0]:.16e} {row[1]:.16e} {row[2]:.16e}\n")
 
 
 def _mark_capped() -> None:
@@ -80,8 +134,12 @@ def serve(port: int) -> None:
     sys.stdout.write(f"READY {bound}\n")
     sys.stdout.flush()
     conn, _addr = listener.accept()
+    shared = bool(os.environ.get("OPTBENCH_CALL_LOG"))
+    if shared:
+        _shared_total()
     calls = 0
-    _write_count(calls)
+    if not shared:
+        _write_count(calls)
     try:
         while True:
             try:
@@ -104,7 +162,14 @@ def serve(port: int) -> None:
             _recv(conn, 4)
             _recv(conn, 4)
             _recv(conn, 4)
-            if cap is not None and calls >= cap:
+            reserved = None
+            if shared:
+                reserved = _reserve_shared(cap)
+                if reserved is None:
+                    _mark_capped()
+                    conn.sendall(struct.pack("<i", STATUS_ERR))
+                    break
+            elif cap is not None and calls >= cap:
                 _mark_capped()
                 conn.sendall(struct.pack("<i", STATUS_ERR))
                 break
@@ -115,15 +180,17 @@ def serve(port: int) -> None:
                 conn.sendall(struct.pack("<i", STATUS_ERR))
                 break
             force = (-np.asarray(gradient, dtype=np.float64) / scale_l) * scale_e
-            calls += 1
+            calls = int(reserved) if shared else calls + 1
             _write_last(coords)
+            _append_traj(coords)
             _write_count(calls)
             conn.sendall(struct.pack("<i", STATUS_OK))
             conn.sendall(struct.pack("<d", float(energy) * scale_e))
             conn.sendall(np.ascontiguousarray(force, dtype="<f8").tobytes())
             conn.sendall(struct.pack("<9d", *([0.0] * 9)))
     finally:
-        _write_count(calls)
+        if not shared:
+            _write_count(calls)
         conn.close()
         listener.close()
 
@@ -138,9 +205,11 @@ def main() -> None:
         if flag == "--port":
             port = int(value)
         elif flag == "--e-to-ev":
-            os.environ["OPTBENCH_E_SCALE"] = value
+            # ASE always passes the EV/ANG factors, which are 1. The parent
+            # sets the 2014 r0 and D scales before it launches OPTIM.
+            os.environ.setdefault("OPTBENCH_E_SCALE", value)
         elif flag == "--l-to-ang":
-            os.environ["OPTBENCH_L_SCALE"] = value
+            os.environ.setdefault("OPTBENCH_L_SCALE", value)
         index += 2 if flag.startswith("--") else 1
     serve(port)
 
