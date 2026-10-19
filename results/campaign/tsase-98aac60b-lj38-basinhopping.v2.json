@@ -18,7 +18,7 @@
         "force_calls_max": 2000000,
         "force_calls_median": 2000000.0,
         "force_calls_min": 23719,
-        "nfailed": 79
+        "nfailed": 80
       },
       "metrics": {
         "bootstrap_resamples": 2000,
@@ -28,27 +28,27 @@
         "iqr": 0.0,
         "iqr_high": 0.0,
         "iqr_low": 0.0,
-        "mean": 3685295.897727273,
+        "mean": 3688831.8988764044,
         "median": 4000000.0,
         "median_high": 4000000.0,
         "median_low": 4000000.0,
-        "n": 88,
-        "n_cap": 79,
+        "n": 89,
+        "n_cap": 80,
         "n_crash": 0,
         "n_divergence": 0,
         "n_wrong_stationary": 0,
-        "nfailed": 79,
-        "par2_mean": 3685295.897727273,
+        "nfailed": 80,
+        "par2_mean": 3688831.8988764044,
         "par_applied": true,
         "par_factor": 2,
         "q25": 4000000.0,
         "q75": 4000000.0,
         "scoring": "par2-wilson-bootstrap",
         "success_only_mean": 922893.2222222222,
-        "success_rate": 0.10227272727272728,
+        "success_rate": 0.10112359550561797,
         "successes": 9,
-        "wilson_high": 0.18307248423524602,
-        "wilson_low": 0.05474450061182731
+        "wilson_high": 0.1811368993077429,
+        "wilson_low": 0.054118546891964145
       },
       "parameters": {
         "distribution": "uniform",
@@ -1563,6 +1563,23 @@
           ],
           "schema": "optbench.start/v2",
           "start": "87",
+          "success": false,
+          "threshold": -173.92742624400097,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -173.25235392176876,
+          "failure": "cap",
+          "force_calls": 2000000,
+          "lowest_energy": -173.25235392176876,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "88",
           "success": false,
           "threshold": -173.92742624400097,
           "verify_calls": 0
