@@ -79,6 +79,10 @@ def test_rendered_pages_use_the_board_rank():
     assert f'data-field="par2_mean">{cells["par2_mean"]}<' in minimization
     assert 'data-field="current"' not in minimization
     assert "<th>Current</th>" not in minimization
+    assert 'data-field="wilson_low"' not in minimization
+    assert 'data-field="wilson_high"' not in minimization
+    assert f'data-field="wilson">{cells["wilson"]}<' in minimization
+    assert "<th>Wilson</th>" in minimization
     assert lj38["current"] is True
     assert "minimization-lj38-profile.svg" in minimization
     assert "minimization-lj38-profile.webp" in minimization
