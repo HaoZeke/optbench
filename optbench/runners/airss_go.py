@@ -6,9 +6,10 @@ pp3 two-point step (Barzilai and Borwein), two passes, on
 subtracts a cutoff shift, so the scored evaluations stay on the spec
 potential and the harness counter.
 
-One archived start index is one independent search. The search stops
-when the harness energy is at or below the Wales minimum plus the
-problem tolerance. The problem states no force-call cap.
+One archived start name is one independent search. The search stops
+when the harness energy is at or below the Cambridge Cluster Database
+minimum plus the problem tolerance. A problem that states a force-call
+cap also stops at that cap.
 """
 
 from __future__ import annotations
@@ -23,7 +24,8 @@ from pathlib import Path
 import numpy as np
 
 from optbench.counter import CountedPotential
-from optbench.potentials import lennard_jones
+from optbench.globalopt import judge_globalopt
+from optbench.potentials import binary_lennard_jones, lennard_jones
 from optbench.score import half_even, score_v2
 from optbench.v2 import collect_provenance
 
@@ -115,16 +117,31 @@ def cell_text(
     nform: int,
     seed: tuple[int, ...],
     element: str = "Al",
+    composition: tuple[tuple[str, int], ...] | None = None,
+    minsep_pairs: tuple[tuple[str, str, float], ...] | None = None,
 ) -> str:
     """AIRSS example 1.4, with the lengths passed in.
 
     Example 1.4 uses sigma 2. The spec potential uses sigma 1, so the
     caller passes lengths scaled by one half and a free cubic box.
+    ``composition`` replaces the single ``NUM`` line when the cluster has
+    more than one species.
     """
     if len(seed) != 8:
         raise ValueError("buildcell expects eight seed integers")
+    counts = composition if composition else ((element, int(natoms)),)
+    if sum(count for _label, count in counts) != int(natoms):
+        raise ValueError("composition does not add up to natoms")
     side = int(box) if float(box).is_integer() else box
     seed_text = " ".join(str(int(word)) for word in seed)
+    position_lines = [
+        f"{label} 0 0 0 # {label}1 % NUM={int(count)}" for label, count in counts
+    ]
+    if minsep_pairs:
+        pair_text = " ".join(f"{left}-{right}={gap}" for left, right, gap in minsep_pairs)
+        minsep_line = f"#MINSEP={minsep} {pair_text}"
+    else:
+        minsep_line = f"#MINSEP={minsep}"
     return (
         "%BLOCK LATTICE_CART\n"
         f"{side} 0 0\n"
@@ -133,10 +150,10 @@ def cell_text(
         "#FIX\n"
         "%ENDBLOCK LATTICE_CART\n"
         "%BLOCK POSITIONS_FRAC\n"
-        f"{element} 0 0 0 # {element}1 % NUM={int(natoms)}\n"
-        "%ENDBLOCK POSITIONS_FRAC\n"
+        + "\n".join(position_lines)
+        + "\n%ENDBLOCK POSITIONS_FRAC\n"
         "FIX_ALL_CELL : true\n"
-        f"#MINSEP={minsep}\n"
+        f"{minsep_line}\n"
         "#CLUSTER\n"
         f"#POSAMP={posamp}\n"
         f"#SEED={seed_text}\n"
@@ -145,12 +162,13 @@ def cell_text(
     )
 
 
-def positions_from_cell(text: str, natoms: int) -> np.ndarray:
-    """Cartesian positions from a buildcell ``LATTICE_ABC`` cell."""
+def _parsed_cell(text: str) -> tuple[np.ndarray, list[str]]:
+    """Cartesian positions and species labels from a buildcell cell."""
     length = None
     in_abc = False
     in_pos = False
     coords: list[list[float]] = []
+    labels: list[str] = []
     for line in text.splitlines():
         stripped = line.strip()
         upper = stripped.upper()
@@ -173,16 +191,31 @@ def positions_from_cell(text: str, natoms: int) -> np.ndarray:
             parts = stripped.split()
             if len(parts) < 4:
                 raise BuildFailure("a position line has fewer than four fields")
+            labels.append(parts[0])
             coords.append([float(parts[1]), float(parts[2]), float(parts[3])])
     if length is None:
         raise BuildFailure("buildcell wrote no LATTICE_ABC length")
+    if not coords:
+        raise BuildFailure("buildcell wrote no positions")
+    return np.asarray(coords, dtype=np.float64) * length, labels
+
+
+def positions_from_cell(text: str, natoms: int) -> np.ndarray:
+    """Cartesian positions from a buildcell ``LATTICE_ABC`` cell."""
+    coords, _labels = _parsed_cell(text)
     if len(coords) != natoms:
         raise BuildFailure(f"buildcell wrote {len(coords)} atoms, expected {natoms}")
-    return np.asarray(coords, dtype=np.float64) * length
+    return coords
 
 
-def build_positions(binary: Path, text: str, natoms: int, *, timeout: float = 60.0) -> np.ndarray:
-    """Run ``buildcell`` on ``text`` and return Cartesian coordinates."""
+def build_structure(
+    binary: Path,
+    text: str,
+    natoms: int,
+    *,
+    timeout: float = 60.0,
+) -> tuple[np.ndarray, list[str]]:
+    """Run ``buildcell`` and return Cartesian coordinates and species labels."""
     try:
         proc = subprocess.run(
             [str(binary)],
@@ -198,7 +231,16 @@ def build_positions(binary: Path, text: str, natoms: int, *, timeout: float = 60
         detail = (proc.stderr or proc.stdout or "").strip().splitlines()
         tail = detail[-1] if detail else f"exit {proc.returncode}"
         raise BuildFailure(tail)
-    return positions_from_cell(proc.stdout, natoms)
+    coords, labels = _parsed_cell(proc.stdout)
+    if len(coords) != natoms:
+        raise BuildFailure(f"buildcell wrote {len(coords)} atoms, expected {natoms}")
+    return coords, labels
+
+
+def build_positions(binary: Path, text: str, natoms: int, *, timeout: float = 60.0) -> np.ndarray:
+    """Run ``buildcell`` on ``text`` and return Cartesian coordinates."""
+    coords, _labels = build_structure(binary, text, natoms, timeout=timeout)
+    return coords
 
 
 def _bb_pass(
@@ -259,9 +301,16 @@ def relax_positions(
     *,
     etol: float = 1e-10,
     maxsteps: int = 9999,
+    evaluate=None,
 ) -> tuple[np.ndarray, float, int, bool]:
-    """Two pp3 passes on a counted harness Lennard-Jones potential."""
-    potential = CountedPotential(lambda coords: lennard_jones(np.asarray(coords, dtype=np.float64)))
+    """Two pp3 passes on a counted harness potential.
+
+    ``evaluate`` defaults to the unary Lennard-Jones potential. A binary
+    cluster passes ``binary_lennard_jones`` closed over its species labels.
+    """
+    if evaluate is None:
+        evaluate = lambda coords: lennard_jones(np.asarray(coords, dtype=np.float64))
+    potential = CountedPotential(evaluate)
     point = np.asarray(pos, dtype=np.float64)
     converged = True
     energy = 0.0
@@ -292,10 +341,43 @@ def _config(template: dict) -> dict:
     if section.get("starts") not in (None, ""):
         config["starts"] = int(section["starts"])
         config["start_label"] = str(section.get("start_label") or "start")
+    composition = section.get("composition")
+    if composition:
+        parsed = []
+        for item in composition:
+            if isinstance(item, str):
+                label, count = item.split(":")
+                parsed.append((label, int(count)))
+            else:
+                label, count = item
+                parsed.append((str(label), int(count)))
+        config["composition"] = tuple(parsed)
+    pairs = section.get("minsep_pairs")
+    if pairs:
+        parsed_pairs = []
+        for item in pairs:
+            if isinstance(item, str):
+                names, gap = item.rsplit(":", 1)
+                left, right = names.split("-")
+                parsed_pairs.append((left, right, float(gap)))
+            else:
+                left, right, gap = item
+                parsed_pairs.append((str(left), str(right), float(gap)))
+        config["minsep_pairs"] = tuple(parsed_pairs)
+    if section.get("potential"):
+        config["potential"] = str(section["potential"])
     return config
 
 
-def _job(template: dict, index: int, start: str, binary: Path, reference: float | None, tolerance: float | None) -> dict:
+def _job(
+    template: dict,
+    index: int,
+    start: str,
+    binary: Path,
+    reference: float | None,
+    tolerance: float | None,
+    cap: int | None,
+) -> dict:
     config = _config(template)
     threshold = None if reference is None or tolerance is None else float(reference) + float(tolerance)
     job = {
@@ -304,6 +386,7 @@ def _job(template: dict, index: int, start: str, binary: Path, reference: float 
         "buildcell": str(binary),
         "reference_energy": reference,
         "threshold": threshold,
+        "cap": cap,
         "safety": SAFETY_STRUCTURES,
         "code": template.get("code", "AIRSS"),
         "code_version": template.get("code_version", ""),
@@ -317,7 +400,12 @@ def _job(template: dict, index: int, start: str, binary: Path, reference: float 
         "nform": config["nform"],
         "etol": config["etol"],
         "maxsteps": config["maxsteps"],
+        "potential": config.get("potential", "lennard-jones"),
     }
+    if config.get("composition"):
+        job["composition"] = config["composition"]
+    if config.get("minsep_pairs"):
+        job["minsep_pairs"] = config["minsep_pairs"]
     if config.get("budget_structures"):
         job["budget"] = int(config["budget_structures"])
     return job
@@ -371,10 +459,56 @@ def _capped(job: dict, calls: int, energy: float, structures: int) -> dict:
     }
 
 
-def search_start(job: dict) -> dict:
-    """Search one start until the energy window, and return a v2 record.
+def _evaluate(job: dict, labels: list[str]):
+    """Harness energy and gradient for one built cell."""
+    if job.get("potential") == "binary-lennard-jones":
+        species = list(labels)
 
-    With no threshold, stop after ``budget`` structures and keep the lowest energy.
+        def binary(coords):
+            return binary_lennard_jones(np.asarray(coords, dtype=np.float64), species)
+
+        return binary
+    return lambda coords: lennard_jones(np.asarray(coords, dtype=np.float64))
+
+
+def _judged(job: dict, calls: int, energy: float | None, structures: int) -> dict:
+    """Classify a finished start with the problem cap and the CCD window."""
+    finite = energy is not None and math.isfinite(float(energy))
+    judged = judge_globalopt(
+        float(energy) if finite else None,
+        calls,
+        reference=float(job["reference_energy"]),
+        tolerance=float(job["threshold"]) - float(job["reference_energy"]),
+        cap=int(job["cap"]),
+    )
+    return {
+        "schema": "optbench.start/v2",
+        "start": job["start"],
+        "index": job["index"],
+        "force_calls": calls,
+        "verify_calls": 0,
+        "counter": "harness",
+        "comparable": True,
+        "success": judged["success"],
+        "failure": judged["failure"],
+        "reasons": judged["reasons"],
+        "energy": judged["energy"],
+        "structures": structures,
+        "reference_energy": job["reference_energy"],
+        "converged": bool(judged["success"]),
+        "code": job["code"],
+        "code_version": job["code_version"],
+        "commit": job["commit"],
+        "tuning": job["tuning"],
+    }
+
+
+def search_start(job: dict) -> dict:
+    """Search one start until the energy window or the force-call cap.
+
+    With no threshold and no cap, stop after ``budget`` structures and keep
+    the lowest energy. A cap uses ``judge_globalopt``: success is an energy
+    at or below the reference plus the tolerance, with fewer calls than the cap.
     """
     binary = Path(job["buildcell"])
     calls = 0
@@ -382,9 +516,19 @@ def search_start(job: dict) -> dict:
     build_failures = 0
     nonfinite = 0
     best = math.inf
-    budget_only = job.get("threshold") is None
-    limit = int(job["budget"]) if budget_only else int(job["safety"])
-    for structure_index in range(limit):
+    cap = job.get("cap")
+    threshold = job.get("threshold")
+    budget = job.get("budget")
+    structure_index = 0
+    while True:
+        if cap is not None and calls >= int(cap):
+            return _judged(job, calls, None if best is math.inf else best, structures)
+        if budget is not None and structures >= int(budget):
+            if best is math.inf:
+                return _crash(job, calls, None, structures, "budget")
+            return _capped(job, calls, best, structures)
+        if cap is None and budget is None and structures >= int(job["safety"]):
+            return _crash(job, calls, None if best is math.inf else best, structures, "safety")
         text = cell_text(
             natoms=job["natoms"],
             box=job["box"],
@@ -393,9 +537,12 @@ def search_start(job: dict) -> dict:
             symmops=job["symmops"],
             nform=job["nform"],
             seed=seed_words(job["index"], structure_index),
+            composition=job.get("composition"),
+            minsep_pairs=job.get("minsep_pairs"),
         )
+        structure_index += 1
         try:
-            pos = build_positions(binary, text, job["natoms"])
+            pos, labels = build_structure(binary, text, job["natoms"])
         except BuildFailure:
             build_failures += 1
             if build_failures >= 30:
@@ -408,8 +555,11 @@ def search_start(job: dict) -> dict:
             job["box"],
             etol=job["etol"],
             maxsteps=job["maxsteps"],
+            evaluate=_evaluate(job, labels),
         )
         calls += used
+        if used <= 0:
+            return _crash(job, calls, None if best is math.inf else best, structures, "relax")
         if not math.isfinite(energy):
             nonfinite += 1
             if nonfinite >= 20:
@@ -422,15 +572,15 @@ def search_start(job: dict) -> dict:
                 f"{job['start']} structures={structures} calls={calls} best={best:.6f}",
                 flush=True,
             )
-        if not budget_only and reached_minimum(
+        if threshold is not None and reached_minimum(
             energy,
             float(job["reference_energy"]),
             float(job["threshold"]) - float(job["reference_energy"]),
         ):
-            return _success(job, calls, energy, structures)
-    if budget_only and best is not math.inf:
-        return _capped(job, calls, best, structures)
-    return _crash(job, calls, None if best is math.inf else best, structures, "safety")
+            if cap is None or calls < int(cap):
+                return _success(job, calls, energy, structures)
+        if cap is not None and calls >= int(cap):
+            return _judged(job, calls, best, structures)
 
 
 def _success(job: dict, calls: int, energy: float, structures: int) -> dict:
@@ -460,7 +610,6 @@ def _load_start_names(root: Path, problem: dict, geometries: Path | None, work: 
     import tarfile
 
     from optbench.campaign import geometry_archive, iter_geometries
-    from optbench.potentials import read_con
 
     if geometries is None:
         archive = geometry_archive(root, problem)
@@ -476,24 +625,27 @@ def _load_start_names(root: Path, problem: dict, geometries: Path | None, work: 
             with tarfile.open(archive) as packed:
                 packed.extractall(dest, filter="data")
             marker.write_text(recorded, encoding="utf-8")
-        cons = sorted(dest.rglob("*.con"))
-        if not cons:
-            raise FileNotFoundError(f"{archive} has no .con files")
+        cons = sorted(path for path in dest.rglob("*.con") if path.is_file())
+        numbered = []
+        for path in dest.rglob("coords.*"):
+            if not path.is_file():
+                continue
+            suffix = path.name.split(".", 1)[1]
+            if suffix.isdigit():
+                numbered.append((int(suffix), path))
+        numbered.sort()
     else:
-        cons = iter_geometries(geometries)
+        cons = list(iter_geometries(geometries))
+        numbered = []
     expected = (problem.get("sample") or {}).get("starts")
-    if geometries is None and expected is not None and len(cons) != int(expected):
-        raise ValueError(f"{problem['id']} expected {expected} starts, found {len(cons)}")
-    names = []
-    natoms = None
-    for path in cons:
-        pos, _box = read_con(path.read_text(encoding="utf-8", errors="replace"))
-        if natoms is None:
-            natoms = int(pos.shape[0])
-        elif int(pos.shape[0]) != natoms:
-            raise ValueError(f"{path} has {pos.shape[0]} atoms, expected {natoms}")
-        names.append(path.stem)
-    return names
+    if cons and (expected is None or len(cons) == int(expected)):
+        # ``0.con`` is start ``0``. ``Path.stem`` drops that suffix only.
+        return [path.stem for path in cons]
+    if numbered and (expected is None or len(numbered) == int(expected)):
+        # ``coords.12`` has stem ``coords``. The start name is the filename.
+        return [path.name for _number, path in numbered]
+    found = len(cons) or len(numbered)
+    raise ValueError(f"{problem['id']} expected {expected} starts, found {found}")
 
 
 def _format_field(value: object) -> str:
@@ -536,16 +688,23 @@ def _dat(summary: dict, template: dict, metrics: dict) -> str:
     }
     if summary.get("partial"):
         lines = [
-            "# counter harness. One force call is one Lennard-Jones evaluation inside the two-point step.",
+            "# counter harness. One force call is one potential evaluation inside the two-point step.",
             "# The problem states no energy window. Each start stops after the structure budget.",
             "# failure is cap. cap is the largest harness count in this file, so PAR-2 is twice that count.",
             "# force_calls is the half-even mean of those counts. energy_min and energy_max are the best energies.",
         ]
+    elif summary.get("cap") is not None:
+        lines = [
+            "# counter harness. One force call is one potential evaluation inside the two-point step.",
+            "# buildcell draws the cell. The archived files name the starts.",
+            "# A start succeeds when the harness energy is at or below the Cambridge minimum plus energy_above_minimum and the call count is under the cap.",
+            "# A miss costs twice the problem cap.",
+        ]
     else:
         lines = [
-            "# counter harness. One force call is one Lennard-Jones evaluation inside the two-point step.",
+            "# counter harness. One force call is one potential evaluation inside the two-point step.",
             "# buildcell draws the cell. The archived .con files name the starts.",
-            "# A start succeeds when the harness energy is at or below the Wales minimum plus energy_above_minimum.",
+            "# A start succeeds when the harness energy is at or below the Cambridge minimum plus energy_above_minimum.",
             "# The problem states no force-call cap, so par2_mean is unset and the median is the call median.",
         ]
     note = str(template.get("note") or "").strip()
@@ -578,7 +737,8 @@ def run_template(
     convergence = problem.get("convergence") or {}
     config = _config(template)
     raw_tolerance = convergence.get("energy_above_minimum")
-    if raw_tolerance is None and not config.get("budget_structures"):
+    raw_cap = convergence.get("max_force_calls")
+    if raw_tolerance is None and raw_cap is None and not config.get("budget_structures"):
         raise ValueError(
             f"{problem['id']} has no energy_above_minimum and {template['id']} has no airss.budget_structures"
         )
@@ -588,61 +748,93 @@ def run_template(
         names = [f"{label}.{index}" for index in range(1, int(config["starts"]) + 1)]
     else:
         names = _load_start_names(root, problem, geometries, work, output)
+    cap = None if raw_cap in (None, "") else int(raw_cap)
     if raw_tolerance is None:
         reference = None
         tolerance = None
     else:
         tolerance = float(raw_tolerance)
-        coords = load_wales_coordinates()
-        if coords.shape[0] != config["natoms"]:
-            raise ValueError(f"Wales file has {coords.shape[0]} atoms, template has {config['natoms']}")
-        reference = reference_energy(coords)
-    jobs = [_job(template, index, name, binary, reference, tolerance) for index, name in enumerate(names)]
-    if workers <= 1:
-        records = []
-        total = len(jobs)
-        for done, job in enumerate(jobs, 1):
-            record = search_start(job)
-            records.append(record)
-            print(
-                f"{template['id']} {done}/{total} start={record['start']} "
-                f"calls={record['force_calls']} energy={record['energy']} success={record['success']}",
-                flush=True,
-            )
-    else:
-        import multiprocessing as mp
+        stated = (problem.get("reference") or {}).get("energy")
+        if stated not in (None, ""):
+            reference = float(stated)
+        else:
+            coords = load_wales_coordinates()
+            if coords.shape[0] != config["natoms"]:
+                raise ValueError(f"Wales file has {coords.shape[0]} atoms, template has {config['natoms']}")
+            reference = reference_energy(coords)
+    jobs = [
+        _job(template, index, name, binary, reference, tolerance, cap) for index, name in enumerate(names)
+    ]
+    import json
 
-        context = mp.get_context("spawn")
-        with ProcessPoolExecutor(max_workers=workers, mp_context=context) as pool:
-            futures = [pool.submit(search_start, job) for job in jobs]
-            records = []
-            total = len(futures)
-            for done, future in enumerate(as_completed(futures), 1):
-                record = future.result()
-                records.append(record)
+    for key in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "NUMEXPR_NUM_THREADS"):
+        os.environ.setdefault(key, "1")
+    progress_path = output.with_suffix(".progress.jsonl")
+    saved: dict[int, dict] = {}
+    if progress_path.is_file():
+        for line in progress_path.read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            row = json.loads(line)
+            saved[int(row["index"])] = row
+    pending = [job for job in jobs if job["index"] not in saved]
+    progress_file = progress_path.open("a", encoding="utf-8")
+
+    def _store(record: dict) -> None:
+        saved[int(record["index"])] = record
+        progress_file.write(json.dumps(record, sort_keys=True) + "\n")
+        progress_file.flush()
+
+    total = len(jobs)
+    try:
+        if not pending:
+            pass
+        elif workers <= 1:
+            done = total - len(pending)
+            for job in pending:
+                record = search_start(job)
+                _store(record)
+                done += 1
                 print(
                     f"{template['id']} {done}/{total} start={record['start']} "
                     f"calls={record['force_calls']} energy={record['energy']} success={record['success']}",
                     flush=True,
                 )
-    records.sort(key=lambda row: row["index"])
-    budget_only = reference is None
+        else:
+            import multiprocessing as mp
+
+            context = mp.get_context("spawn")
+            with ProcessPoolExecutor(max_workers=workers, mp_context=context) as pool:
+                futures = [pool.submit(search_start, job) for job in pending]
+                done = total - len(pending)
+                for future in as_completed(futures):
+                    record = future.result()
+                    _store(record)
+                    done += 1
+                    print(
+                        f"{template['id']} {done}/{total} start={record['start']} "
+                        f"calls={record['force_calls']} energy={record['energy']} success={record['success']}",
+                        flush=True,
+                    )
+    finally:
+        progress_file.close()
+    records = [saved[job["index"]] for job in jobs]
+    budget_only = reference is None and cap is None
     crashes = [row for row in records if row.get("failure") == "crash"]
     missed = [row for row in records if not row["success"]]
-    if crashes or (missed and not budget_only):
+    if crashes:
         partial_path = output.with_suffix(".partial.jsonl")
         for row in records:
             row.pop("index", None)
         write_starts(partial_path, records)
-        raise RuntimeError(
-            f"{len(missed)} of {len(records)} starts missed the minimum; wrote {partial_path}"
-        )
+        raise RuntimeError(f"{len(crashes)} of {len(records)} starts crashed; wrote {partial_path}")
+    progress_path.unlink(missing_ok=True)
     for row in records:
         row.pop("index", None)
     calls = [int(row["force_calls"]) for row in records]
     energies = [float(row["energy"]) for row in records if row.get("energy") is not None]
     structures = [int(row["structures"]) for row in records]
-    cap = max(calls) if budget_only else None
+    scored_cap = cap if cap is not None else (max(calls) if budget_only else None)
     summary = {
         "force_calls": half_even(sum(calls) / len(calls)),
         "force_calls_min": min(calls),
@@ -653,18 +845,29 @@ def run_template(
         "structures_min": min(structures),
         "structures_max": max(structures),
         "partial": budget_only,
-        "cap": cap,
+        "cap": scored_cap,
     }
     scored = [
         {"force_calls": row["force_calls"], "success": row["success"], "failure": row["failure"]}
         for row in records
     ]
-    metrics = score_v2(scored, cap)
-    passed = dict(config)
+    metrics = score_v2(scored, scored_cap)
+
+    def _jsonable(value):
+        if isinstance(value, tuple):
+            return [_jsonable(item) for item in value]
+        return value
+
+    passed = {key: _jsonable(value) for key, value in config.items()}
     if reference is not None:
         passed["reference_energy"] = reference
         passed["energy_above_minimum"] = tolerance
-        passed["wales"] = WALES_URL
+        if (problem.get("reference") or {}).get("page"):
+            passed["reference_page"] = problem["reference"]["page"]
+        else:
+            passed["wales"] = WALES_URL
+    if scored_cap is not None:
+        passed["max_force_calls"] = scored_cap
     provenance = collect_provenance(
         code=str(template.get("code", "AIRSS")),
         code_version=str(template.get("code_version", "")),
@@ -680,12 +883,16 @@ def run_template(
         "bootstrap_resamples": 2000,
         "bootstrap_seed": 20261015,
         "note": (
-            "Harness counter on optbench.potentials.lennard_jones. "
+            "Harness counter on the spec potential. "
             "buildcell generates each cell. "
             + (
                 "The problem states no energy window, so each start stops at the structure budget."
                 if budget_only
-                else "The problem states no force-call cap."
+                else (
+                    "Success is the Cambridge minimum plus energy_above_minimum, under the force-call cap."
+                    if scored_cap is not None
+                    else "The problem states no force-call cap."
+                )
             )
         ),
         "runs": [

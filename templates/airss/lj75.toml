@@ -6,17 +6,14 @@ code_version = "0.9.4"
 commit = "5593cc4ee360d998764fceb188284fdf0ef781d206754176dcb360c65103ddaa"
 algorithm = "random structure search"
 tuning = "default"
-note = "Partial row. globalopt/lj75 states no energy window and no start count. The 200 indices coords.1 through coords.200 follow the archived GMIN loop. Each index is an independent AIRSS search of 20 cells. POSAMP 2.351945 is the LJ38 value 1.875 times (75/38)^(1/3). MINSEP, SYMMOPS, and NFORM match the LJ38 cell. The recorded energy is the lowest harness energy in the budget. Every start stops at that budget."
+note = "AIRSS 0.9.4 example 1.4. Lengths are half the documented sigma-2 values because the spec Lennard-Jones sigma is 1. POSAMP 2.3519449967459938 is 1.875 times (75/38)^(1/3), the example 1.4 radius at the example 1.4 number density. MINSEP 0.75, SYMMOPS 2-5, NFORM 1, cubic box 100. The 200 archived coords names are the starts. A start succeeds at or below the Cambridge N=75 minimum plus 0.001, under 1000000 force calls."
 
 [airss]
 natoms = 75
 box = 100.0
-posamp = 2.351945
+posamp = 2.3519449967459938
 minsep = 0.75
 symmops = "2-5"
 nform = 1
 etol = 1e-10
 maxsteps = 9999
-budget_structures = 20
-starts = 200
-start_label = "coords"

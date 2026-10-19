@@ -1,12 +1,12 @@
-# counter harness. One force call is one Lennard-Jones evaluation inside the two-point step.
-# The problem states no energy window. Each start stops after the structure budget.
-# failure is cap. cap is the largest harness count in this file, so PAR-2 is twice that count.
-# force_calls is the half-even mean of those counts. energy_min and energy_max are the best energies.
-# Partial row. globalopt/lj75 states no energy window and no start count. The 200 indices coords.1 through coords.200 follow the archived GMIN loop. Each index is an independent AIRSS search of 20 cells. POSAMP 2.351945 is the LJ38 value 1.875 times (75/38)^(1/3). MINSEP, SYMMOPS, and NFORM match the LJ38 cell. The recorded energy is the lowest harness energy in the budget. Every start stops at that budget.
-force_calls 17134
-force_calls_min 11787
-force_calls_max 25281
-nfailed 200
+# counter harness. One force call is one potential evaluation inside the two-point step.
+# buildcell draws the cell. The archived files name the starts.
+# A start succeeds when the harness energy is at or below the Cambridge minimum plus energy_above_minimum and the call count is under the cap.
+# A miss costs twice the problem cap.
+# AIRSS 0.9.4 example 1.4. Lengths are half the documented sigma-2 values because the spec Lennard-Jones sigma is 1. POSAMP 2.3519449967459938 is 1.875 times (75/38)^(1/3), the example 1.4 radius at the example 1.4 number density. MINSEP 0.75, SYMMOPS 2-5, NFORM 1, cubic box 100. The 200 archived coords names are the starts. A start succeeds at or below the Cambridge N=75 minimum plus 0.001, under 1000000 force calls.
+force_calls 998908
+force_calls_min 666056
+force_calls_max 1002434
+nfailed 199
 code AIRSS
 code_version 0.9.4
 commit 5593cc4ee360d998764fceb188284fdf0ef781d206754176dcb360c65103ddaa
@@ -15,18 +15,17 @@ template airss/lj75
 problem globalopt/lj75
 tuning default
 counter harness
-par2_mean 50562
-wilson_low 0
-wilson_high 0.0188453263773
-par2_median 50562
-par2_median_low 50562
-par2_median_high 50562
-v2_nfailed 200
-v2_successes 0
+par2_mean 1993330.28
+wilson_low 0.000883168715601
+wilson_high 0.0277737043979
+par2_median 2000000
+par2_median_low 2000000
+par2_median_high 2000000
+v2_nfailed 199
+v2_successes 1
 n 200
-energy_min -395.083468261
-energy_max -379.319927123
-structures_min 20
-structures_max 20
-partial true
-cap 25281
+energy_min -397.492330983
+energy_max -389.49874642
+structures_min 764
+structures_max 1208
+cap 1000000

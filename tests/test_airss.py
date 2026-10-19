@@ -135,7 +135,7 @@ def test_template_pins_the_tarball_and_the_asv_grid_is_one_start(monkeypatch, tm
         AirssLj38().setup("0", "0")
 
 
-def test_lj75_budget_writes_partial_rows(tmp_path, monkeypatch):
+def test_lj75_cap_scores_the_archived_start_count(tmp_path, monkeypatch):
     import json
 
     import optbench.runners.airss_go as airss
@@ -156,12 +156,12 @@ def test_lj75_budget_writes_partial_rows(tmp_path, monkeypatch):
         work=tmp_path / "work",
     )
     text = output.read_text(encoding="utf-8")
-    assert "partial true" in text
-    assert "cap 299" in text
+    assert "partial true" not in text
+    assert "cap 1000000" in text
     assert "n 200" in text
     assert summary["starts"] == 200
     assert summary["nfailed"] == 200
-    assert summary["par2_mean"] == 598
+    assert summary["par2_mean"] == 2000000
     rows = [
         json.loads(line)
         for line in output.with_suffix(".starts.jsonl").read_text(encoding="utf-8").splitlines()
