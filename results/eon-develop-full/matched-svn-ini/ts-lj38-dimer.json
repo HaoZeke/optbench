@@ -1,0 +1,19 @@
+{
+  "name": "ts-lj38-dimer",
+  "develop_template": "eon/develop-ts-lj38-dimer",
+  "svn_template": "eon-svn/ts-lj38-dimer",
+  "kind": "ts-lj38",
+  "seed": 1,
+  "start": "0000",
+  "eon_commit": "7095b23ac17d49f434a5e08ccb072897ceca698e",
+  "probe_cap": 100000,
+  "potential": "ljcluster",
+  "counter": "harness",
+  "force_calls": 300.0,
+  "verify_calls": 0,
+  "client_calls": 300,
+  "client_reason": "0",
+  "extrema": null,
+  "seconds": 0.7866803270007949,
+  "ini": "[Main]\njob = saddle_search\nfinite_difference = 0.001\nrandom_seed = 1\nparallel = false\n\n[Potential]\npotential = ext_pot\next_pot_path = /tmp/optbench-extpot-p3opwk7y/extpot-bridge\n\n[Optimizer]\nopt_method = lbfgs\nconvergence_metric = norm\nconverged_force = 0.001\nmax_move = 0.1\nmax_iterations = 3000\nlbfgs_memory = 20\nlbfgs_inverse_curvature = 0.01\nlbfgs_max_inverse_curvature = 0.0\nlbfgs_auto_scale = true\nlbfgs_angle_reset = true\nlbfgs_distance_reset = true\n\n[Dimer]\nopt_method = cg\nimproved = true\nfinite_angle = 0.005\nconverged_angle = 0.1\nrotations_max = 20\nrotations_min = 1\n\n[Saddle Search]\nmin_mode_method = dimer\nclient_displace_type = load\nconverged_force = 0.001\nmax_iterations = 3000\ndisplace_magnitude = 0.1\n"
+}

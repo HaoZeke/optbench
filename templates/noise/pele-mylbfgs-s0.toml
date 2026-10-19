@@ -1,0 +1,17 @@
+id = "noise/pele-mylbfgs-s0"
+engine = "noise"
+problem = "minimization/lj38-noise"
+code = "pele"
+code_version = "0.1.2"
+commit = "b7081b932a060be11342fbe8287ac35da8ada879"
+algorithm = "MYLBFGS"
+tuning = "default"
+note = "Default profile. LBFGS and MYLBFGS use memory 4 and maxstep 0.1. FIRE uses dt 0.1 and maxstep 0.5. Steepest descent uses dx 1e-4. The stop is the noise-aware force norm, and at positive sigma the clean energy over the last window. The index is the clean Hessian with the rigid-mode rule."
+
+[solver]
+family = "pele"
+method = "mylbfgs"
+
+[noise]
+sigma = 0.0
+seed = 20261016
