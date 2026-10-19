@@ -25,7 +25,7 @@ It does not run a campaign.
    <td data-code="ASE" data-template="ase/lj38-lbfgs-tuned" data-par2="395.645"><span class="bench-score">395.645</span><a href="generated/suites/minimization.html#lj38-templates">ase/lj38-lbfgs-tuned</a></td>
    <td data-code="Sella" data-template="sella/lj38-min-tuned" data-par2="253.921"><span class="bench-score">253.921</span><a href="generated/suites/minimization.html#lj38-templates">sella/lj38-min-tuned</a></td>
    <td data-code="pysisyphus" data-template="pysisyphus/cg-lj38" data-par2="15124.7"><span class="bench-score">15124.7</span><a href="generated/suites/minimization.html#lj38-templates">pysisyphus/cg-lj38</a></td>
-   <td data-code="TorchSim" data-template="torchsim/lj38-gd" data-par2="187.966"><span class="bench-score">187.966</span><a href="generated/suites/minimization.html#lj38-templates">torchsim/lj38-gd</a></td>
+   <td data-code="TorchSim" data-template="torchsim/lj38-fire" data-par2="835.693"><span class="bench-score">835.693</span><a href="generated/suites/minimization.html#lj38-templates">torchsim/lj38-fire</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind" data-template="dlfind/lbfgs-lj38" data-par2="231.908"><span class="bench-score">231.908</span><a href="generated/suites/minimization.html#lj38-templates">dlfind/lbfgs-lj38</a></td>
@@ -42,7 +42,7 @@ It does not run a campaign.
    <td data-code="ASE" data-template="noise/ase-lbfgs-s0" data-par2="396.55"><span class="bench-score">396.55</span><a href="generated/suites/minimization.html#lj38-noise-templates">noise/ase-lbfgs-s0</a></td>
    <td data-code="Sella" data-template="noise/sella-min-s0" data-par2="729.433"><span class="bench-score">729.433</span><a href="generated/suites/minimization.html#lj38-noise-templates">noise/sella-min-s0</a></td>
    <td data-code="pysisyphus">—</td>
-   <td data-code="TorchSim" data-template="torchsim/lj38-noise-gd-s1em2" data-par2="66.098"><span class="bench-score">66.098</span><a href="generated/suites/minimization.html#lj38-noise-templates">torchsim/lj38-noise-gd-s1em2</a></td>
+   <td data-code="TorchSim" data-template="torchsim/lj38-noise-fire-s0" data-par2="835.693"><span class="bench-score">835.693</span><a href="generated/suites/minimization.html#lj38-noise-templates">torchsim/lj38-noise-fire-s0</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind" data-template="dlfind/lbfgs-lj38-noise-s0" data-par2="231.908"><span class="bench-score">231.908</span><a href="generated/suites/minimization.html#lj38-noise-templates">dlfind/lbfgs-lj38-noise-s0</a></td>

@@ -1069,26 +1069,26 @@ The number is written only after the run finishes under the problem rule.
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr data-problem="minimization/lj38" data-template="torchsim/lj38-gd">
+   <tr data-problem="minimization/lj38" data-template="torchsim/lj38-fire">
    <td>Lennard-Jones 38 clusters</td>
-   <td data-field="template">torchsim/lj38-gd</td>
+   <td data-field="template">torchsim/lj38-fire</td>
    <td data-field="version">TorchSim 0.6.2</td>
    <td data-field="commit">5540d893a849</td>
-   <td data-field="par2_mean">187.966</td>
-   <td data-field="mean_calls">10.874</td>
-   <td data-field="median_calls">2</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 9</td>
+   <td data-field="par2_mean">835.693</td>
+   <td data-field="mean_calls">719.902</td>
+   <td data-field="median_calls">610.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 6</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/lj38-noise" data-template="torchsim/lj38-noise-gd-s1em2">
+   <tr data-problem="minimization/lj38-noise" data-template="torchsim/lj38-noise-fire-s0">
    <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
-   <td data-field="template">torchsim/lj38-noise-gd-s1em2</td>
+   <td data-field="template">torchsim/lj38-noise-fire-s0</td>
    <td data-field="version">TorchSim 0.6.2</td>
    <td data-field="commit">5540d893a849</td>
-   <td data-field="par2_mean">66.098</td>
-   <td data-field="mean_calls">6.116</td>
-   <td data-field="median_calls">6</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 3</td>
+   <td data-field="par2_mean">835.693</td>
+   <td data-field="mean_calls">719.902</td>
+   <td data-field="median_calls">610.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 6</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-template="torchsim/morse-fire">
