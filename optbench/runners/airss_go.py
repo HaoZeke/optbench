@@ -6,9 +6,11 @@ pp3 two-point step (Barzilai and Borwein), two passes, on
 subtracts a cutoff shift, so the scored evaluations stay on the spec
 potential and the harness counter.
 
-One archived start index is one independent search. The search stops
-when the harness energy is at or below the Wales minimum plus the
-problem tolerance. The problem states no force-call cap.
+One archived start index is one independent search. When the problem
+states a reference energy, the window is that energy plus
+``energy_above_minimum``. Otherwise the window is the harness energy
+of the vendored Wales LJ38 geometry plus the same tolerance. A problem
+with no tolerance stops each start after the structure budget.
 """
 
 from __future__ import annotations
@@ -591,12 +593,19 @@ def run_template(
     if raw_tolerance is None:
         reference = None
         tolerance = None
+        used_wales = False
     else:
         tolerance = float(raw_tolerance)
-        coords = load_wales_coordinates()
-        if coords.shape[0] != config["natoms"]:
-            raise ValueError(f"Wales file has {coords.shape[0]} atoms, template has {config['natoms']}")
-        reference = reference_energy(coords)
+        stated = (problem.get("reference") or {}).get("energy")
+        if stated not in (None, ""):
+            reference = float(stated)
+            used_wales = False
+        else:
+            coords = load_wales_coordinates()
+            if coords.shape[0] != config["natoms"]:
+                raise ValueError(f"Wales file has {coords.shape[0]} atoms, template has {config['natoms']}")
+            reference = reference_energy(coords)
+            used_wales = True
     jobs = [_job(template, index, name, binary, reference, tolerance) for index, name in enumerate(names)]
     if workers <= 1:
         records = []
@@ -664,7 +673,8 @@ def run_template(
     if reference is not None:
         passed["reference_energy"] = reference
         passed["energy_above_minimum"] = tolerance
-        passed["wales"] = WALES_URL
+        if used_wales:
+            passed["wales"] = WALES_URL
     provenance = collect_provenance(
         code=str(template.get("code", "AIRSS")),
         code_version=str(template.get("code_version", "")),
