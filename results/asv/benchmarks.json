@@ -256994,5 +256994,377 @@
         "type": "track",
         "unit": "fraction",
         "version": "fb9e440dda631ba62979eef5bbbddd4322d40b712e9c8f48d4cf288f9de9017c"
+    },
+    "bench_pygsm.PygsmLj38De.track_failure_not_converged": {
+        "code": "class _Benchmark:\n    def track_failure_not_converged(self, seed, start) -> float:\n        return 1.0 if self._ready(seed, start)[\"failure\"] == \"not_converged\" else 0.0\n\n    def setup(self, seed, start):\n        ensure_pygsm()\n        path = sidecar_path(self.problem_name, self.template_id, str(seed), str(start))\n        self.record = None\n        if path.is_file():\n            loaded = json.loads(path.read_text(encoding=\"utf-8\"))\n            calls = float(loaded.get(\"force_calls\") or 0)\n            # A zero-call crash is a missing import, not a finished search.\n            if not (loaded.get(\"failure\") == \"crash\" and calls == 0.0):\n                self.record = loaded",
+        "name": "bench_pygsm.PygsmLj38De.track_failure_not_converged",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "5349008fdf7a917fb2a6a68f619f943c35f73680fb2e1cd701e667413b6d6779"
+    },
+    "bench_pygsm.PygsmLj38DeClimb.time_search": {
+        "code": "class _Benchmark:\n    def time_search(self, seed, start):\n        print(f\"start {self.template_id} {start}\", file=sys.stderr, flush=True)\n        began = time.perf_counter()\n        record = self.measure(seed, start)\n        record[\"search_seconds\"] = time.perf_counter() - began\n        _write_sidecar(self.problem_name, self.template_id, str(seed), str(start), record)\n        self.record = record\n        print(\n            f\"done {self.template_id} {start} calls={record['force_calls']} \"\n            f\"success={record['success']} failure={record['failure']}\",\n            file=sys.stderr,\n            flush=True,\n        )\n\n    def setup(self, seed, start):\n        ensure_pygsm()\n        path = sidecar_path(self.problem_name, self.template_id, str(seed), str(start))\n        self.record = None\n        if path.is_file():\n            loaded = json.loads(path.read_text(encoding=\"utf-8\"))\n            calls = float(loaded.get(\"force_calls\") or 0)\n            # A zero-call crash is a missing import, not a finished search.\n            if not (loaded.get(\"failure\") == \"crash\" and calls == 0.0):\n                self.record = loaded",
+        "min_run_count": 1,
+        "name": "bench_pygsm.PygsmLj38DeClimb.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 1800,
+        "type": "time",
+        "unit": "seconds",
+        "version": "47899dff3d9a1e655cdfbae83744df6853c017f91dd3f647a48e4923174b72ca",
+        "warmup_time": 0
+    },
+    "bench_pygsm.PygsmLj38DeClimb.track_failure_cap": {
+        "code": "class _Benchmark:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._ready(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        ensure_pygsm()\n        path = sidecar_path(self.problem_name, self.template_id, str(seed), str(start))\n        self.record = None\n        if path.is_file():\n            loaded = json.loads(path.read_text(encoding=\"utf-8\"))\n            calls = float(loaded.get(\"force_calls\") or 0)\n            # A zero-call crash is a missing import, not a finished search.\n            if not (loaded.get(\"failure\") == \"crash\" and calls == 0.0):\n                self.record = loaded",
+        "name": "bench_pygsm.PygsmLj38DeClimb.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "1bc8d10531a797819d3dc62208e6f29ef61ad562a4e76a7bb570141baabc0aa6"
+    },
+    "bench_pygsm.PygsmLj38DeClimb.track_failure_crash": {
+        "code": "class _Benchmark:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._ready(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        ensure_pygsm()\n        path = sidecar_path(self.problem_name, self.template_id, str(seed), str(start))\n        self.record = None\n        if path.is_file():\n            loaded = json.loads(path.read_text(encoding=\"utf-8\"))\n            calls = float(loaded.get(\"force_calls\") or 0)\n            # A zero-call crash is a missing import, not a finished search.\n            if not (loaded.get(\"failure\") == \"crash\" and calls == 0.0):\n                self.record = loaded",
+        "name": "bench_pygsm.PygsmLj38DeClimb.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "8b1f8ec5194f4deeac43aaeec7a0b2c9ce362cb0ba750fb89a0be179ab532e26"
+    },
+    "bench_pygsm.PygsmLj38DeClimb.track_failure_divergence": {
+        "code": "class _Benchmark:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._ready(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        ensure_pygsm()\n        path = sidecar_path(self.problem_name, self.template_id, str(seed), str(start))\n        self.record = None\n        if path.is_file():\n            loaded = json.loads(path.read_text(encoding=\"utf-8\"))\n            calls = float(loaded.get(\"force_calls\") or 0)\n            # A zero-call crash is a missing import, not a finished search.\n            if not (loaded.get(\"failure\") == \"crash\" and calls == 0.0):\n                self.record = loaded",
+        "name": "bench_pygsm.PygsmLj38DeClimb.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "3f467c133fff1f234cee544aa1edd01147e361be2f9b97d9af91badfa4f318ad"
+    },
+    "bench_pygsm.PygsmLj38DeClimb.track_failure_not_converged": {
+        "code": "class _Benchmark:\n    def track_failure_not_converged(self, seed, start) -> float:\n        return 1.0 if self._ready(seed, start)[\"failure\"] == \"not_converged\" else 0.0\n\n    def setup(self, seed, start):\n        ensure_pygsm()\n        path = sidecar_path(self.problem_name, self.template_id, str(seed), str(start))\n        self.record = None\n        if path.is_file():\n            loaded = json.loads(path.read_text(encoding=\"utf-8\"))\n            calls = float(loaded.get(\"force_calls\") or 0)\n            # A zero-call crash is a missing import, not a finished search.\n            if not (loaded.get(\"failure\") == \"crash\" and calls == 0.0):\n                self.record = loaded",
+        "name": "bench_pygsm.PygsmLj38DeClimb.track_failure_not_converged",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "5349008fdf7a917fb2a6a68f619f943c35f73680fb2e1cd701e667413b6d6779"
+    },
+    "bench_pygsm.PygsmLj38DeClimb.track_failure_wrong_stationary": {
+        "code": "class _Benchmark:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._ready(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        ensure_pygsm()\n        path = sidecar_path(self.problem_name, self.template_id, str(seed), str(start))\n        self.record = None\n        if path.is_file():\n            loaded = json.loads(path.read_text(encoding=\"utf-8\"))\n            calls = float(loaded.get(\"force_calls\") or 0)\n            # A zero-call crash is a missing import, not a finished search.\n            if not (loaded.get(\"failure\") == \"crash\" and calls == 0.0):\n                self.record = loaded",
+        "name": "bench_pygsm.PygsmLj38DeClimb.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "count",
+        "version": "c38d27fa42516e3068bb5eb6f566861b0e9687f05d171984d090a1246347f545"
+    },
+    "bench_pygsm.PygsmLj38DeClimb.track_force_calls": {
+        "code": "class _Benchmark:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._ready(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        ensure_pygsm()\n        path = sidecar_path(self.problem_name, self.template_id, str(seed), str(start))\n        self.record = None\n        if path.is_file():\n            loaded = json.loads(path.read_text(encoding=\"utf-8\"))\n            calls = float(loaded.get(\"force_calls\") or 0)\n            # A zero-call crash is a missing import, not a finished search.\n            if not (loaded.get(\"failure\") == \"crash\" and calls == 0.0):\n                self.record = loaded",
+        "name": "bench_pygsm.PygsmLj38DeClimb.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "force calls",
+        "version": "8161e1d7a80a0e43870497a8a35a7349015a3d6330421e4ed434844a710fb9b5"
+    },
+    "bench_pygsm.PygsmLj38DeClimb.track_success": {
+        "code": "class _Benchmark:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._ready(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        ensure_pygsm()\n        path = sidecar_path(self.problem_name, self.template_id, str(seed), str(start))\n        self.record = None\n        if path.is_file():\n            loaded = json.loads(path.read_text(encoding=\"utf-8\"))\n            calls = float(loaded.get(\"force_calls\") or 0)\n            # A zero-call crash is a missing import, not a finished search.\n            if not (loaded.get(\"failure\") == \"crash\" and calls == 0.0):\n                self.record = loaded",
+        "name": "bench_pygsm.PygsmLj38DeClimb.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 1800,
+        "type": "track",
+        "unit": "fraction",
+        "version": "fb9e440dda631ba62979eef5bbbddd4322d40b712e9c8f48d4cf288f9de9017c"
+    },
+    "bench_pygsm.PygsmLj38TwoTs.track_failure_not_converged": {
+        "code": "class _Benchmark:\n    def track_failure_not_converged(self, seed, start) -> float:\n        return 1.0 if self._ready(seed, start)[\"failure\"] == \"not_converged\" else 0.0\n\n    def setup(self, seed, start):\n        ensure_pygsm()\n        path = sidecar_path(self.problem_name, self.template_id, str(seed), str(start))\n        self.record = None\n        if path.is_file():\n            loaded = json.loads(path.read_text(encoding=\"utf-8\"))\n            calls = float(loaded.get(\"force_calls\") or 0)\n            # A zero-call crash is a missing import, not a finished search.\n            if not (loaded.get(\"failure\") == \"crash\" and calls == 0.0):\n                self.record = loaded",
+        "name": "bench_pygsm.PygsmLj38TwoTs.track_failure_not_converged",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5349008fdf7a917fb2a6a68f619f943c35f73680fb2e1cd701e667413b6d6779"
+    },
+    "bench_pygsm.PygsmLj38TwoTsClimb.time_search": {
+        "code": "class _Benchmark:\n    def time_search(self, seed, start):\n        print(f\"start {self.template_id} {start}\", file=sys.stderr, flush=True)\n        began = time.perf_counter()\n        record = self.measure(seed, start)\n        record[\"search_seconds\"] = time.perf_counter() - began\n        _write_sidecar(self.problem_name, self.template_id, str(seed), str(start), record)\n        self.record = record\n        print(\n            f\"done {self.template_id} {start} calls={record['force_calls']} \"\n            f\"success={record['success']} failure={record['failure']}\",\n            file=sys.stderr,\n            flush=True,\n        )\n\n    def setup(self, seed, start):\n        ensure_pygsm()\n        path = sidecar_path(self.problem_name, self.template_id, str(seed), str(start))\n        self.record = None\n        if path.is_file():\n            loaded = json.loads(path.read_text(encoding=\"utf-8\"))\n            calls = float(loaded.get(\"force_calls\") or 0)\n            # A zero-call crash is a missing import, not a finished search.\n            if not (loaded.get(\"failure\") == \"crash\" and calls == 0.0):\n                self.record = loaded",
+        "min_run_count": 1,
+        "name": "bench_pygsm.PygsmLj38TwoTsClimb.time_search",
+        "number": 1,
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "repeat": 1,
+        "rounds": 1,
+        "sample_time": 0,
+        "timeout": 7200,
+        "type": "time",
+        "unit": "seconds",
+        "version": "47899dff3d9a1e655cdfbae83744df6853c017f91dd3f647a48e4923174b72ca",
+        "warmup_time": 0
+    },
+    "bench_pygsm.PygsmLj38TwoTsClimb.track_failure_cap": {
+        "code": "class _Benchmark:\n    def track_failure_cap(self, seed, start) -> float:\n        return 1.0 if self._ready(seed, start)[\"failure\"] == \"cap\" else 0.0\n\n    def setup(self, seed, start):\n        ensure_pygsm()\n        path = sidecar_path(self.problem_name, self.template_id, str(seed), str(start))\n        self.record = None\n        if path.is_file():\n            loaded = json.loads(path.read_text(encoding=\"utf-8\"))\n            calls = float(loaded.get(\"force_calls\") or 0)\n            # A zero-call crash is a missing import, not a finished search.\n            if not (loaded.get(\"failure\") == \"crash\" and calls == 0.0):\n                self.record = loaded",
+        "name": "bench_pygsm.PygsmLj38TwoTsClimb.track_failure_cap",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "1bc8d10531a797819d3dc62208e6f29ef61ad562a4e76a7bb570141baabc0aa6"
+    },
+    "bench_pygsm.PygsmLj38TwoTsClimb.track_failure_crash": {
+        "code": "class _Benchmark:\n    def track_failure_crash(self, seed, start) -> float:\n        return 1.0 if self._ready(seed, start)[\"failure\"] == \"crash\" else 0.0\n\n    def setup(self, seed, start):\n        ensure_pygsm()\n        path = sidecar_path(self.problem_name, self.template_id, str(seed), str(start))\n        self.record = None\n        if path.is_file():\n            loaded = json.loads(path.read_text(encoding=\"utf-8\"))\n            calls = float(loaded.get(\"force_calls\") or 0)\n            # A zero-call crash is a missing import, not a finished search.\n            if not (loaded.get(\"failure\") == \"crash\" and calls == 0.0):\n                self.record = loaded",
+        "name": "bench_pygsm.PygsmLj38TwoTsClimb.track_failure_crash",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "8b1f8ec5194f4deeac43aaeec7a0b2c9ce362cb0ba750fb89a0be179ab532e26"
+    },
+    "bench_pygsm.PygsmLj38TwoTsClimb.track_failure_divergence": {
+        "code": "class _Benchmark:\n    def track_failure_divergence(self, seed, start) -> float:\n        return 1.0 if self._ready(seed, start)[\"failure\"] == \"divergence\" else 0.0\n\n    def setup(self, seed, start):\n        ensure_pygsm()\n        path = sidecar_path(self.problem_name, self.template_id, str(seed), str(start))\n        self.record = None\n        if path.is_file():\n            loaded = json.loads(path.read_text(encoding=\"utf-8\"))\n            calls = float(loaded.get(\"force_calls\") or 0)\n            # A zero-call crash is a missing import, not a finished search.\n            if not (loaded.get(\"failure\") == \"crash\" and calls == 0.0):\n                self.record = loaded",
+        "name": "bench_pygsm.PygsmLj38TwoTsClimb.track_failure_divergence",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "3f467c133fff1f234cee544aa1edd01147e361be2f9b97d9af91badfa4f318ad"
+    },
+    "bench_pygsm.PygsmLj38TwoTsClimb.track_failure_not_converged": {
+        "code": "class _Benchmark:\n    def track_failure_not_converged(self, seed, start) -> float:\n        return 1.0 if self._ready(seed, start)[\"failure\"] == \"not_converged\" else 0.0\n\n    def setup(self, seed, start):\n        ensure_pygsm()\n        path = sidecar_path(self.problem_name, self.template_id, str(seed), str(start))\n        self.record = None\n        if path.is_file():\n            loaded = json.loads(path.read_text(encoding=\"utf-8\"))\n            calls = float(loaded.get(\"force_calls\") or 0)\n            # A zero-call crash is a missing import, not a finished search.\n            if not (loaded.get(\"failure\") == \"crash\" and calls == 0.0):\n                self.record = loaded",
+        "name": "bench_pygsm.PygsmLj38TwoTsClimb.track_failure_not_converged",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "5349008fdf7a917fb2a6a68f619f943c35f73680fb2e1cd701e667413b6d6779"
+    },
+    "bench_pygsm.PygsmLj38TwoTsClimb.track_failure_wrong_stationary": {
+        "code": "class _Benchmark:\n    def track_failure_wrong_stationary(self, seed, start) -> float:\n        return 1.0 if self._ready(seed, start)[\"failure\"] == \"wrong_stationary\" else 0.0\n\n    def setup(self, seed, start):\n        ensure_pygsm()\n        path = sidecar_path(self.problem_name, self.template_id, str(seed), str(start))\n        self.record = None\n        if path.is_file():\n            loaded = json.loads(path.read_text(encoding=\"utf-8\"))\n            calls = float(loaded.get(\"force_calls\") or 0)\n            # A zero-call crash is a missing import, not a finished search.\n            if not (loaded.get(\"failure\") == \"crash\" and calls == 0.0):\n                self.record = loaded",
+        "name": "bench_pygsm.PygsmLj38TwoTsClimb.track_failure_wrong_stationary",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "count",
+        "version": "c38d27fa42516e3068bb5eb6f566861b0e9687f05d171984d090a1246347f545"
+    },
+    "bench_pygsm.PygsmLj38TwoTsClimb.track_force_calls": {
+        "code": "class _Benchmark:\n    def track_force_calls(self, seed, start) -> float:\n        return float(self._ready(seed, start)[\"force_calls\"])\n\n    def setup(self, seed, start):\n        ensure_pygsm()\n        path = sidecar_path(self.problem_name, self.template_id, str(seed), str(start))\n        self.record = None\n        if path.is_file():\n            loaded = json.loads(path.read_text(encoding=\"utf-8\"))\n            calls = float(loaded.get(\"force_calls\") or 0)\n            # A zero-call crash is a missing import, not a finished search.\n            if not (loaded.get(\"failure\") == \"crash\" and calls == 0.0):\n                self.record = loaded",
+        "name": "bench_pygsm.PygsmLj38TwoTsClimb.track_force_calls",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "force calls",
+        "version": "8161e1d7a80a0e43870497a8a35a7349015a3d6330421e4ed434844a710fb9b5"
+    },
+    "bench_pygsm.PygsmLj38TwoTsClimb.track_success": {
+        "code": "class _Benchmark:\n    def track_success(self, seed, start) -> float:\n        return 1.0 if self._ready(seed, start)[\"success\"] else 0.0\n\n    def setup(self, seed, start):\n        ensure_pygsm()\n        path = sidecar_path(self.problem_name, self.template_id, str(seed), str(start))\n        self.record = None\n        if path.is_file():\n            loaded = json.loads(path.read_text(encoding=\"utf-8\"))\n            calls = float(loaded.get(\"force_calls\") or 0)\n            # A zero-call crash is a missing import, not a finished search.\n            if not (loaded.get(\"failure\") == \"crash\" and calls == 0.0):\n                self.record = loaded",
+        "name": "bench_pygsm.PygsmLj38TwoTsClimb.track_success",
+        "param_names": [
+            "seed",
+            "start"
+        ],
+        "params": [
+            [
+                "'0'"
+            ],
+            [
+                "'pair_00'"
+            ]
+        ],
+        "timeout": 7200,
+        "type": "track",
+        "unit": "fraction",
+        "version": "fb9e440dda631ba62979eef5bbbddd4322d40b712e9c8f48d4cf288f9de9017c"
     }
 }
