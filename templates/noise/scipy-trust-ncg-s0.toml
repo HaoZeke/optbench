@@ -1,0 +1,18 @@
+id = "noise/scipy-trust-ncg-s0"
+engine = "noise"
+problem = "minimization/lj38-noise"
+code = "SciPy"
+code_version = "1.18.1"
+commit = "e4e854eaa8f18d807cd3496028e257e36caa93cc"
+algorithm = "trust-ncg"
+tuning = "default"
+note = "Default profile at sigma 0. Each analytic Hessian-vector product counts as one force call. trust-krylov and trust-ncg refuse a trial past the 0.2 per-atom cap. Newton-CG maps that trial back inside the ball; the map is the identity through 0.18. Positive sigma has no template: the noisy force is not that gradient."
+
+[solver]
+family = "scipy"
+method = "trust-ncg"
+maxstep = 0.2
+
+[noise]
+sigma = 0.0
+seed = 20261016

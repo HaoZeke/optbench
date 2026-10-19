@@ -1,0 +1,16 @@
+id = "scipy/morse-trust-ncg"
+engine = "scipy"
+problem = "minimization/morse-bulk"
+code = "SciPy"
+code_version = "1.18.1"
+commit = "e4e854eaa8f18d807cd3496028e257e36caa93cc"
+algorithm = "trust-ncg"
+tuning = "default"
+note = "Default row. fun and jac are the harness kernel. A repeated coordinate returns the cached energy and forces and does not add a call. Each analytic Hessian-vector product counts as one force call. Morse bulk has no per-atom cap. The trust-region gtol is the Euclidean problem force norm. Library trust-radius defaults are unchanged. The iteration ceiling sits above the force-call cap. The harness counter is the budget."
+
+[scipy]
+method = "trust-ncg"
+
+[ini.Optimizer]
+converged_force = 0.001
+max_iterations = 10000

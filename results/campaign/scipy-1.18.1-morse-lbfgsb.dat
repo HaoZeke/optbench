@@ -1,0 +1,27 @@
+# counter harness. fun and jac are one potential evaluation when the coordinates match.
+# v2 success is under the cap, at the force stop, and Hessian index 0.
+# energy and Kabsch RMSD were not applied: the problem file has no energy_tol, rmsd_tol, or per-start reference.
+# Default row. fun and jac are the harness kernel. A repeated coordinate returns the cached energy and forces and does not add a call. Morse bulk has no per-atom cap. The cell is periodic. The SciPy infinity-norm gtol is the problem force norm divided by sqrt(n), so a library stop is inside the Euclidean stop. The callback stops when the Euclidean norm meets the problem value. L-BFGS-B ftol is machine epsilon, so the relative energy test does not return ahead of the force stop. The iteration ceiling sits above the force-call cap. The harness counter is the budget.
+force_calls 26
+force_calls_min 22
+force_calls_max 30
+nfailed 0
+median 26
+code SciPy
+code_version 1.18.1
+commit e4e854eaa8f18d807cd3496028e257e36caa93cc
+algorithm L-BFGS-B
+template scipy/morse-lbfgsb
+tuning default
+counter harness
+par2_mean 26.31
+wilson_low 0.963006501793
+wilson_high 1
+par2_median 26
+par2_median_low 25.5
+par2_median_high 27
+v2_nfailed 0
+v2_successes 100
+n 100
+energy_min -1396.17323767
+energy_max -1396.17323751

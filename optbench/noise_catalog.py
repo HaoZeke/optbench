@@ -10,6 +10,10 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from optbench.runners.scipy_min import COMMIT as SCIPY_COMMIT
+from optbench.runners.scipy_min import HESSIAN_METHODS as SCIPY_HESSIAN
+from optbench.runners.scipy_min import VERSION as SCIPY_VERSION
+
 SIGMAS = (0.0, 1e-4, 1e-3, 1e-2)
 HESSIAN_METHODS = frozenset({"newton", "dogleg", "rfo"})
 PROBLEM = "minimization/lj38-noise"
@@ -90,6 +94,7 @@ def specs() -> list[dict]:
     )
     hessian_note = (
         "Default profile at sigma 0. Newton and dogleg call the analytic Hessian of the clean force. "
+        "Each matrix costs one force call per coordinate. "
         "Positive sigma has no template: the noisy force is not that gradient."
     )
     rgmin_force = (
@@ -253,6 +258,62 @@ def specs() -> list[dict]:
                     sigma,
                 )
             )
+    scipy_lbfgsb_note = (
+        "Default profile. fun and jac are the harness kernel. "
+        "A repeated coordinate returns the cached sample and does not add a call. "
+        "The per-atom cap is 0.2. A trial past that cap is refused before the potential runs. "
+        "The stop is the noise-aware force norm, and at positive sigma "
+        "the clean-energy window. The index is the clean Hessian with the rigid-mode rule."
+    )
+    scipy_wolfe_note = (
+        "Default profile. fun and jac are the harness kernel. "
+        "A repeated coordinate returns the cached sample and does not add a call. "
+        "The per-atom cap is 0.2. A larger trial is mapped back inside that ball before the potential runs. "
+        "The map is the identity through 0.18 and smooth beyond it. "
+        "The stop is the noise-aware force norm, and at positive sigma "
+        "the clean-energy window. The index is the clean Hessian with the rigid-mode rule."
+    )
+    scipy_hess_note = (
+        "Default profile at sigma 0. Each analytic Hessian-vector product counts as one force call. "
+        "trust-krylov and trust-ncg refuse a trial past the 0.2 per-atom cap. "
+        "Newton-CG maps that trial back inside the ball; the map is the identity through 0.18. "
+        "Positive sigma has no template: the noisy force is not that gradient."
+    )
+    for slug, method, algorithm, note in (
+        ("lbfgsb", "L-BFGS-B", "L-BFGS-B", scipy_lbfgsb_note),
+        ("bfgs", "BFGS", "BFGS", scipy_wolfe_note),
+        ("cg", "CG", "CG", scipy_wolfe_note),
+    ):
+        for sigma in SIGMAS:
+            found.append(
+                _base(
+                    f"noise/scipy-{slug}-{sigma_slug(sigma)}",
+                    "SciPy",
+                    SCIPY_VERSION,
+                    SCIPY_COMMIT,
+                    algorithm,
+                    note,
+                    {"family": "scipy", "method": method, "maxstep": 0.2},
+                    sigma,
+                )
+            )
+    for slug, method, algorithm in (
+        ("trust-krylov", "trust-krylov", "trust-krylov"),
+        ("trust-ncg", "trust-ncg", "trust-ncg"),
+        ("newton-cg", "Newton-CG", "Newton-CG"),
+    ):
+        found.append(
+            _base(
+                f"noise/scipy-{slug}-s0",
+                "SciPy",
+                SCIPY_VERSION,
+                SCIPY_COMMIT,
+                algorithm,
+                scipy_hess_note,
+                {"family": "scipy", "method": method, "maxstep": 0.2},
+                0.0,
+            )
+        )
     return found
 
 
@@ -282,3 +343,8 @@ def exact_hessian(method: str) -> bool:
 def allows_method(method: str, sigma: float) -> bool:
     """Exact Hessians are the clean force, so they stop at sigma 0."""
     return not (exact_hessian(method) and float(sigma) != 0.0)
+
+
+def allows_scipy(method: str, sigma: float) -> bool:
+    """Analytic Hessian-vector products are the clean force."""
+    return not (str(method) in SCIPY_HESSIAN and float(sigma) != 0.0)

@@ -2,9 +2,10 @@
 
 The callback is ``RgpotCounter.calculate`` on a ``HarnessCounter`` that
 caches a repeated coordinate and raises ``ForceCallCap`` before a search
-call once the budget is spent. That refused call is not counted. Analytic
-Hessians used by Newton and dogleg are not force calls. They are counted
-separately.
+call once the budget is spent. That refused call is not counted. Newton,
+dogleg, and rfo take a full analytic Hessian. Each matrix costs one force
+call per coordinate, the forward-difference price of that matrix. The
+index Hessian is not a search call.
 
 A legacy success is a start whose harness count is under the cap and whose
 force norm is at the problem stop. A v2 success also has Hessian index 0.
@@ -24,7 +25,8 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
 
 from optbench.bound import note_unbound
-from optbench.counter import HarnessCounter
+from optbench.counter import ForceCallCap, HarnessCounter
+from optbench.curvature import full_hessian_cost
 from optbench.failures import classify_outcome
 from optbench.noise import converged_under_noise, stop_threshold
 from optbench.potentials import (
@@ -102,6 +104,7 @@ def _minimize_job(job: dict) -> dict:
     calls = 0
     verify_calls = 0
     hessian_calls = 0
+    hessian_cost = 0
     error = ""
     report = None
     energy = None
@@ -146,8 +149,14 @@ def _minimize_job(job: dict) -> dict:
             return float(value), grad
 
         def hess(coords):
-            nonlocal hessian_calls
+            nonlocal hessian_calls, hessian_cost
+            flat = np.asarray(coords, dtype=np.float64).reshape(-1)
+            cost = full_hessian_cost(int(flat.size))
+            if counter.calls + hessian_cost + cost > cap:
+                raise ForceCallCap(f"force-call cap {cap}")
             hessian_calls += 1
+            hessian_cost += cost
+            counter.cap = cap - hessian_cost
             if kind == "lj":
                 return lennard_jones_hessian(coords)
             return morse_bulk_hessian(coords, box)
@@ -165,14 +174,14 @@ def _minimize_job(job: dict) -> dict:
         solver = rgmin.Solver(x.size, config)
         energy_tol = max(float(job["gtol"]), kappa * sigma)
         for _ in range(int(job["maxiter"])):
-            if counter.calls >= cap:
+            if counter.calls + hessian_cost >= cap:
                 break
             if method in HESSIAN_METHODS:
                 report = solver.step_hess(fg, hess, x)
             else:
                 report = solver.step(fg, x)
             if sigma > 0.0:
-                if counter.calls >= cap:
+                if counter.calls + hessian_cost >= cap:
                     break
                 fg(x)
                 if noisy_norm is not None and converged_under_noise(
@@ -196,8 +205,10 @@ def _minimize_job(job: dict) -> dict:
         error = f"{type(exc).__name__}: {exc}"
         if "x" in locals():
             point = [float(value) for value in x]
+    gradient_calls = 0
     if potential is not None:
-        calls = int(potential.counter.calls)
+        gradient_calls = int(potential.counter.calls)
+        calls = gradient_calls + hessian_cost
         if point is not None:
             try:
                 with potential.counter.verification():
@@ -271,6 +282,7 @@ def _minimize_job(job: dict) -> dict:
         "start": job["start"],
         "index": job["index"],
         "force_calls": calls,
+        "gradient_calls": gradient_calls,
         "verify_calls": verify_calls,
         "counter": "harness",
         "comparable": True,
@@ -286,6 +298,7 @@ def _minimize_job(job: dict) -> dict:
         "expected_index": 0,
         "converged": at_force,
         "hessian_calls": hessian_calls,
+        "hessian_force_calls": hessian_cost,
         "min_eigenvalues": min_eigenvalues,
         "rgmin_steps": None if report is None else int(report.steps),
         "rgmin_stop": None if report is None else str(report.stop),
@@ -331,11 +344,18 @@ def _dat(summary: dict, template: dict, metrics: dict, commit: str, version: str
     }
     lines = [
         "# counter harness. One force call is one RgpotCounter.calculate entry.",
-        "# Newton and dogleg Hessians are analytic and are not force calls.",
         "# v2 success is under the cap, at the force stop, and Hessian index 0.",
         "# energy and Kabsch RMSD were not applied: the problem file has no energy_tol, rmsd_tol, or per-start reference.",
         "# energy_min and energy_max are the final potential values on the recorded points.",
     ]
+    method_name = str((template.get("rgmin") or {}).get("method") or "")
+    if method_name in HESSIAN_METHODS:
+        lines.append("# Each analytic Hessian costs one force call per coordinate.")
+        lines.append(
+            "# gradient_calls is the harness energy and gradient. "
+            "hessian_calls counts matrices. hessian_force_calls is matrices times the dimension. "
+            "force_calls is their sum."
+        )
     if str(template.get("problem")) in {"minimization/lj38", "minimization/lj38-noise"}:
         lines.append(
             "# LJ38 index removes the six rigid modes. A curvature is negative only below "
@@ -553,8 +573,13 @@ def _run(
         "bootstrap_resamples": 2000,
         "bootstrap_seed": 20261015,
         "note": (
-            "Harness counter. Analytic Hessians are not force calls. "
-            "Energy and Kabsch RMSD were not applied."
+            "Harness counter. "
+            + (
+                "Each analytic Hessian costs one force call per coordinate. "
+                if method in HESSIAN_METHODS
+                else "This method does not request a Hessian. "
+            )
+            + "Energy and Kabsch RMSD were not applied."
         ),
         "runs": [
             {
