@@ -1804,7 +1804,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="tsopt-pt-island-optim-ffd">
    <td class="num">2</td>
-   <td class="text">optim_ffd</td>
+   <td class="text">optim_ffd · not reproduced</td>
    <td class="text">OPTIM</td>
    <td class="num">7.10000e+01</td>
    <td class="num">1.4300e+02</td>
@@ -1817,11 +1817,11 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <tr id="tsopt-pt-island-current-optim" class="current">
    <td class="num"></td>
    <td class="text">current-OPTIM</td>
-   <td class="text">OPTIM svn-snapshot</td>
-   <td class="num">82</td>
-   <td class="num">158</td>
-   <td class="num">77</td>
-   <td class="num">54</td>
+   <td class="text">OPTIM df8da599</td>
+   <td class="num">588</td>
+   <td class="num">5041</td>
+   <td class="num">497</td>
+   <td class="num">223</td>
    <td class="num">0</td>
    <td class="text"></td>
    <td class="text"></td>
@@ -1887,7 +1887,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <td class="text">29 Aug 2013</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:8"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "tsopt-pt-island-sella", "entry": "sella", "code": "Sella 0.1.1 legacy", "value": 53.0, "best": true, "held": false, "failed": false}, {"id": "tsopt-pt-island-optim-ffd", "entry": "optim_ffd", "code": "OPTIM", "value": 71.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-current-optim", "entry": "current-OPTIM", "code": "OPTIM svn-snapshot", "value": 82.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-pele", "entry": "pele", "code": "pele", "value": 88.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-optim-cd", "entry": "optim_cd", "code": "OPTIM", "value": 90.0, "best": false, "held": true, "failed": false}, {"id": "tsopt-pt-island-eon-lanczos-improved", "entry": "eon-lanczos-improved", "code": "Eon r2156", "value": 106.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-eon-dimer", "entry": "eon-dimer", "code": "Eon r2156", "value": 116.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-eon-lanczos", "entry": "eon-lanczos", "code": "Eon r2156", "value": 143.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:8"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "tsopt-pt-island-sella", "entry": "sella", "code": "Sella 0.1.1 legacy", "value": 53.0, "best": true, "held": false, "failed": false}, {"id": "tsopt-pt-island-optim-ffd", "entry": "optim_ffd", "code": "OPTIM", "value": 71.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-current-optim", "entry": "current-OPTIM", "code": "OPTIM df8da599", "value": 588.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-pele", "entry": "pele", "code": "pele", "value": 88.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-optim-cd", "entry": "optim_cd", "code": "OPTIM", "value": 90.0, "best": false, "held": true, "failed": false}, {"id": "tsopt-pt-island-eon-lanczos-improved", "entry": "eon-lanczos-improved", "code": "Eon r2156", "value": 106.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-eon-dimer", "entry": "eon-dimer", "code": "Eon r2156", "value": 116.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-eon-lanczos", "entry": "eon-lanczos", "code": "Eon r2156", "value": 143.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section>
    <h2 id="suite-mlopt">Machine learning optimization</h2>

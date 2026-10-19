@@ -74,7 +74,7 @@ def test_a_current_row_sits_beside_the_paper_entry():
     assert ">OPTIM svn-snapshot<" in html
     assert "It is not a 2014 score." in html
     assert html.index(">2<") < html.index(">3<")
-    assert "optim_ffd · not reproduced" not in html
+    assert "optim_ffd · not reproduced" in html
 
 
 def test_lj38_table_ranks_the_archived_scores():
@@ -136,7 +136,7 @@ def test_rendered_pages_use_the_board_rank():
     current = tsopt.index('id="tsopt-pt-island-current-optim"')
     pele = tsopt.index('id="tsopt-pt-island-pele"')
     assert paper < current < pele
-    assert "optim_ffd · not reproduced" not in tsopt
+    assert "optim_ffd · not reproduced" in tsopt
     ts_ranked = [row["template"] for row in document["problems"]["tsopt/LJ38"]["ranked"]]
     assert "sella/lj38-ts-default" in ts_ranked
     assert "sella/lj38-ts-tuned" not in ts_ranked

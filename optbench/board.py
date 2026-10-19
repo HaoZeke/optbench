@@ -15,7 +15,8 @@ An asv result that covers one start is a smoke run and is partial.
 The full set is the problem file's sample, or the Morse archive when
 that file gives no sample count. It is not the largest campaign file.
 A result that sets ``ranked false`` stays off the ranked table.
-A template that does not reproduce the 2014 archive stays off it too.
+A template that does not reproduce the 2014 archive stays off it too,
+unless the template labels that run as the current code beside the archive.
 Partial rows stay in the output. A campaign file and an asv track for
 the same run are one row. Only the newest full version of a template
 is ranked. Older full versions stay in the history list.
@@ -979,7 +980,12 @@ def _matches_hold(row: dict, held) -> bool:
 
 
 def _apply_reproduction_hold(row: dict, held) -> None:
-    """Keep an exact archive rerun that missed the tolerance off the ranked table."""
+    """Keep an exact archive rerun that missed the tolerance off the ranked table.
+
+    A labelled current row stays on the ranked table. The ledger records the gap.
+    """
+    if row.get("label"):
+        return
     if not _matches_hold(row, held) or row.get("_declared_partial"):
         return
     n = int(row.get("n") or 0)

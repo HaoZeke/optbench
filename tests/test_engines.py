@@ -71,6 +71,7 @@ def test_new_templates_match_a_problem_stop():
         "optim/lbfgs-morse",
         "optim/hef-ffd-ts-pt",
         "optim/hef-ffd-ts-pt-current",
+        "optim/hef-ffd-ts-pt-latest",
         "lammps/cg-lj38",
         "lammps/cg-morse",
         "lammps/cg-lj38-noise-s0",

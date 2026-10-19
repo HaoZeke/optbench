@@ -9,9 +9,12 @@ is one ``pes.evaluate``. OPTIM's own counter is not that score.
 following row. It runs the ``wales-27058`` binary on the native Morse
 bulk potential. The score is that binary's energy-plus-gradient count.
 
-``optim/hef-ffd-ts-pt-current`` runs the current Wales snapshot on that
-same archived input. The keywords are not retuned. The score is the
-snapshot's energy-plus-gradient count.
+``optim/hef-ffd-ts-pt-current`` reruns that archived input on the
+current snapshot. It stays an unranked diagnostic.
+
+``optim/hef-ffd-ts-pt-latest`` is the current snapshot with stock
+``BFGSTS`` settings. The stop and the cap are the problem's. The score
+is OPTIM's energy-plus-gradient count, ranked on the harness counter.
 
 ``optim/unhooked`` and every other template that is not minimization
 L-BFGS raise before a file is written. Noise, NEB, and PATHSAMPLE are
@@ -365,6 +368,49 @@ def _displacement(start: Path, reactant: Path, dest: Path) -> None:
     dest.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
+def _stock_gmax(natoms: int, force_norm: float) -> float:
+    """Problem L2 stop as OPTIM's RMS tolerance.
+
+    The archived preamble states RMS = L2 / sqrt(3N), then divides by the
+    Morse well depth A = 0.7102 because the native energy is in those units.
+    """
+    return float(force_norm) / math.sqrt(3 * int(natoms)) / 0.7102
+
+
+def _stock_odata(
+    folder: Path,
+    coords: np.ndarray,
+    frozen: np.ndarray,
+    box: np.ndarray,
+    cap: int,
+    force_norm: float,
+) -> None:
+    """Stock BFGSTS. USEDIAG 3 is this entry's forward difference, not a search parameter."""
+    scale = float(_BC_SCALE)
+    scaled = coords * scale
+    lengths = box * scale
+    box_text = "%f %f %f" % (float(lengths[0]), float(lengths[1]), float(lengths[2]))
+    gmax = _stock_gmax(int(coords.shape[0]), force_norm)
+    lines = [
+        "BFGSTS",
+        f"BFGSSTEPS {int(cap)}",
+        f"STEPS {int(cap)}",
+        f"BFGSCONV {_fortran_float(gmax)}",
+        "BULK",
+        "NOHESS",
+        "USEDIAG 3",
+        "READVEC",
+        f"PARAMS {_BC_RHO} {box_text} {_BC_RCUT}",
+    ]
+    indices = [str(index) for index in (np.flatnonzero(frozen) + 1).tolist()]
+    for start in range(0, len(indices), 8):
+        lines.append("FREEZE " + " ".join(indices[start : start + 8]))
+    lines.append("points")
+    for row in scaled:
+        lines.append("M " + " ".join(f"{float(value):.16f}" for value in row))
+    (folder / "odata").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
 def _hef_odata(folder: Path, coords: np.ndarray, frozen: np.ndarray, box: np.ndarray) -> None:
     scale = float(_BC_SCALE)
     scaled = coords * scale
@@ -402,7 +448,10 @@ def _execute_hef(job: dict) -> dict:
         with tempfile.TemporaryDirectory(prefix="optim-hef-") as raw:
             folder = Path(raw)
             coords, frozen, box = _published_con(Path(job["con"]))
-            _hef_odata(folder, coords, frozen, box)
+            if job.get("stock"):
+                _stock_odata(folder, coords, frozen, box, int(job["cap"]), float(job["force_norm"]))
+            else:
+                _hef_odata(folder, coords, frozen, box)
             _displacement(Path(job["con"]), Path(job["reactant"]), folder / "vector.dump")
             env = os.environ.copy()
             env["OMP_NUM_THREADS"] = "1"
@@ -434,13 +483,14 @@ def _execute_hef(job: dict) -> dict:
     except Exception as exc:
         error = f"{type(exc).__name__}: {exc}"
         success = False
+    native = "harness" if job.get("stock") else "optim"
     record = {
         "schema": "optbench.start/v2",
         "start": name,
         "force_calls": int(calls),
         "verify_calls": 0,
-        "counter": "optim",
-        "comparable": False,
+        "counter": native,
+        "comparable": native == "harness",
         "success": success,
         "failure": None if success else "divergence",
         "reasons": [] if success else ["divergence"],
@@ -453,7 +503,7 @@ def _execute_hef(job: dict) -> dict:
     return record
 
 
-def _run_hef(root: Path, problem: dict, template: dict, output: Path, workers: int) -> dict:
+def _run_hef(root: Path, problem: dict, template: dict, output: Path, workers: int, *, stock: bool = False) -> dict:
     code = str(template.get("code") or "")
     if code == CODE:
         binary = snapshot_binary()
@@ -487,6 +537,7 @@ def _run_hef(root: Path, problem: dict, template: dict, output: Path, workers: i
     if not reactant.is_file():
         raise FileNotFoundError(reactant)
     cap = int((problem.get("convergence") or {})["max_force_calls"])
+    force_norm = float((problem.get("convergence") or {})["force_norm"])
     jobs = []
     for start in starts:
         con = island / f"{start['name']}.con"
@@ -499,12 +550,22 @@ def _run_hef(root: Path, problem: dict, template: dict, output: Path, workers: i
                 "reactant": str(reactant),
                 "binary": str(binary),
                 "cap": cap,
+                "force_norm": force_norm,
+                "stock": stock,
             }
         )
     records = run_jobs(jobs, _execute_hef, workers)
     settings = point_settings(problem)
     settings["cap"] = cap
-    if binary_label == "svn-snapshot":
+    if stock:
+        comment = (
+            "# counter harness. Current Wales OPTIM snapshot, SVNREV df8da599, stock BFGSTS.\n"
+            "# USEDIAG 3 is forward difference. BFGSCONV is the problem L2 stop as an RMS in reduced units. "
+            "The cap is the problem cap. The mode is the reactant displacement.\n"
+            "# The count is OPTIM's energy+gradient calls. A success is **** CONVERGED **** under the cap."
+        )
+        score_counter = "harness"
+    elif binary_label == "svn-snapshot":
         comment = (
             "# counter optim. Current Wales OPTIM snapshot energy+gradient calls. "
             "The mean is the 2014 round of converged starts.\n"
@@ -512,6 +573,7 @@ def _run_hef(root: Path, problem: dict, template: dict, output: Path, workers: i
             "The mode is the genmode displacement from reactant.con.\n"
             "# A success is the line **** CONVERGED **** under the cap. Failures stay out of the mean."
         )
+        score_counter = "optim"
     else:
         comment = (
             "# counter optim. Wales OPTIM 27058 energy+gradient calls. "
@@ -520,16 +582,19 @@ def _run_hef(root: Path, problem: dict, template: dict, output: Path, workers: i
             "The mode is the genmode displacement from reactant.con.\n"
             "# A success is the line **** CONVERGED **** under the cap. Failures stay out of the mean."
         )
+        score_counter = "optim"
     parameters = {
-        "method": "hef-ffd",
+        "method": "hef-stock" if stock else "hef-ffd",
         "keyword": "BFGSTS",
         "usediag": 3,
         "scale": _BC_SCALE,
         "rho": _BC_RHO,
         "rcut": _BC_RCUT,
-        "counter": "optim",
-        "binary": binary_label,
+        "counter": score_counter,
+        "binary": "df8da599" if stock else binary_label,
     }
+    if stock:
+        parameters["bfgsconv"] = _stock_gmax(343, force_norm)
     return write_campaign(
         output,
         records,
@@ -539,7 +604,7 @@ def _run_hef(root: Path, problem: dict, template: dict, output: Path, workers: i
         parameters,
         images=None,
         comment=comment,
-        counter="optim",
+        counter=score_counter,
     )
 
 
@@ -558,10 +623,10 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
     if stated and stated != problem_name:
         raise ValueError(f"{template_name} belongs to {stated}")
     section = _section(template)
-    if section["method"] == "hef-ffd":
+    if section["method"] in {"hef-ffd", "hef-stock"}:
         if problem_name != "tsopt/pt-island":
             raise ValueError(f"{template_name} is the Pt-island forward-difference search")
-        return _run_hef(root, problem, template, output, workers)
+        return _run_hef(root, problem, template, output, workers, stock=section["method"] == "hef-stock")
     reason = available()
     if reason:
         raise RuntimeError(reason)

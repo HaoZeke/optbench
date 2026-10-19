@@ -1,0 +1,19 @@
+# counter harness. Current Wales OPTIM snapshot, SVNREV df8da599, stock BFGSTS.
+# USEDIAG 3 is forward difference. BFGSCONV is the problem L2 stop as an RMS in reduced units. The cap is the problem cap. The mode is the reactant displacement.
+# The count is OPTIM's energy+gradient calls. A success is **** CONVERGED **** under the cap.
+force_calls 588
+force_calls_min 223
+force_calls_max 5041
+force_calls_median 497
+successes 49
+nfailed 0
+n 49
+transition_states 0
+code optim
+code_version df8da599
+commit 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f
+algorithm hybrid eigenvector following
+template optim/hef-ffd-ts-pt-latest
+problem tsopt/pt-island
+tuning default
+counter harness

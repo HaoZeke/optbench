@@ -435,7 +435,7 @@ def _legacy_section(
 
 
 def current_companions(root: Path, document: dict) -> dict[str, dict[str, list[dict]]]:
-    """Archive entry to current-code rows that are not already ranked.
+    """Archive entry to the labelled current-code row beside that entry.
 
     The key is the problem id. Each value maps an archive entry name to
     the campaign rows that declare ``beside`` that entry.
@@ -454,15 +454,15 @@ def current_companions(root: Path, document: dict) -> dict[str, dict[str, list[d
     problems = load_all(root / "problems")
     found: dict[str, dict[str, list[dict]]] = {}
     for problem_id, view in (document.get("problems") or {}).items():
-        ranked = {str(row.get("template") or "") for row in view.get("ranked") or []}
         problem = problems.get(problem_id)
         if problem is None:
             continue
         required = list((problem.get("metrics") or {}).get("required") or [])
         primary = _primary(problem)
-        for row in view.get("not_comparable") or []:
+        listed = list(view.get("ranked") or []) + list(view.get("not_comparable") or [])
+        for row in listed:
             template_id = str(row.get("template") or "")
-            if not template_id or template_id in ranked:
+            if not template_id:
                 continue
             if row.get("partial"):
                 continue

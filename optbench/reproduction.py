@@ -170,7 +170,7 @@ MATCHES: list[dict] = [
     {"key": "tsopt/pt-island/eon-lanczos-improved", "template": "eon-svn/ts-pt-lanczos-improved", "branch": "main", "path": "results/campaign/eon-svn-ts-pt-lanczos-improved.dat"},
     {"key": "tsopt/pt-island/sella", "template": "sella/pt-island-ts-tuned", "branch": "main", "path": "results/campaign/sella-2.6.0-pt-island-ts-tuned.dat", "cause": "sella_trust"},
     {"key": "tsopt/pt-island/pele", "template": "pele/pt-island-ts-ffd", "branch": "cells/pele/ts-repro", "path": "results/campaign/pele-b7081b93-pt-island-ts-ffd.screen.jsonl", "kind": "screen"},
-    {"key": "tsopt/pt-island/optim_ffd", "template": "optim/hef-ffd-ts-pt", "branch": "repro/tsopt-pt-island-optim-ffd", "path": "results/campaign/optim-27058-hef-ffd-ts-pt.dat"},
+    {"key": "tsopt/pt-island/optim_ffd", "template": "optim/hef-ffd-ts-pt-latest", "branch": "repro/tsopt-pt-island-optim-ffd", "path": "results/campaign/optim-df8da599-hef-ffd-ts-pt-latest.dat", "cause": "optim_stock_defaults", "extra": {"unrounded_mean": 588.1224489795918}},
     # double-ended
     {"key": "double-ended-saddle-search/lj38/eon-ci-neb", "template": "eon-svn/de-lj38-ci-neb", "branch": "main", "path": "results/campaign/eon-svn-de-lj38-ci-neb.dat"},
     {"key": "double-ended-saddle-search/lj38/eon-ci-swdneb", "template": "eon-3.5.0/de-lj38-ci-swdneb", "branch": "main", "path": "results/campaign/eon-3.5.0-de-lj38-ci-swdneb.dat", "cause": "de_exclusion", "hold": ["eon-client/de-lj38-ci-swdneb"]},
@@ -216,6 +216,11 @@ CAUSE_TEXT = {
         "Inside the 10% band (263.52 vs 254). The same xyz-versus-con starting set as ts-ffd. "
         "findTS_local.py for the CD row does not pass orthogZeroEigs; the harness template sets orthog translations-rotations. "
         "The paper baseline is this 2014-stop mean, not the harness-stop mean 335.06."
+    ),
+    "optim_stock_defaults": (
+        "Latest Wales OPTIM, SVNREV df8da599, uses stock BFGSTS on the Pt-island starts. "
+        "USEDIAG 3 is forward difference. The RMS stop is the problem L2 tolerance divided by sqrt(3N) and by the Morse well depth. "
+        "The cap is 10000. The mean is 588 against the archived 71. The 2014 preamble stays an unranked diagnostic."
     ),
     "optim_lj38_ts": (
         "Archive run.sh unpacks coords-xyz.tar.gz. The harness uses the problem coords-con set (Kabsch RMS about 6.33). "

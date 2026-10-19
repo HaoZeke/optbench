@@ -1,0 +1,68 @@
+{
+  "counter": "harness",
+  "legacy": {
+    "force_calls": 588,
+    "force_calls_max": 5041,
+    "force_calls_median": 497,
+    "force_calls_min": 223,
+    "n": 49,
+    "nfailed": 0,
+    "successes": 49,
+    "transition_states": 0
+  },
+  "problem": "tsopt/pt-island",
+  "provenance": {
+    "code": "optim",
+    "code_version": "df8da599",
+    "commit": "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f",
+    "machine": {
+      "machine": "x86_64",
+      "node": "cursor",
+      "python": "3.12.3",
+      "system": "Linux"
+    },
+    "parameters": {
+      "bfgsconv": 4.389465547652419e-05,
+      "binary": "df8da599",
+      "counter": "harness",
+      "keyword": "BFGSTS",
+      "method": "hef-stock",
+      "rcut": "3.27925440110459095616",
+      "rho": "4.64881590",
+      "scale": ".34518467380048325854",
+      "usediag": 3
+    }
+  },
+  "schema": "optbench.score/v2",
+  "score": {
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 20261015,
+    "cap": 10000,
+    "includes_failures": true,
+    "iqr": 212.0,
+    "iqr_high": 405.0,
+    "iqr_low": 176.0,
+    "mean": 588.1224489795918,
+    "median": 497.0,
+    "median_high": 544.0,
+    "median_low": 377.0,
+    "n": 49,
+    "n_cap": 0,
+    "n_crash": 0,
+    "n_divergence": 0,
+    "n_wrong_stationary": 0,
+    "nfailed": 0,
+    "par2_mean": 588.1224489795918,
+    "par_applied": true,
+    "par_factor": 2,
+    "q25": 360.0,
+    "q75": 572.0,
+    "scoring": "par2-wilson-bootstrap",
+    "success_only_mean": 588.1224489795918,
+    "success_rate": 1.0,
+    "successes": 49,
+    "wilson_high": 1.0,
+    "wilson_low": 0.9273021807795035
+  },
+  "template": "optim/hef-ffd-ts-pt-latest"
+}
