@@ -18,37 +18,37 @@
         "force_calls_max": 2000000,
         "force_calls_median": 2000000.0,
         "force_calls_min": 30179,
-        "nfailed": 50
+        "nfailed": 52
       },
       "metrics": {
         "bootstrap_resamples": 2000,
         "bootstrap_seed": 20261015,
         "cap": 2000000,
         "includes_failures": true,
-        "iqr": 3802205.0,
-        "iqr_high": 3845633.5,
-        "iqr_low": 3699449.0749999997,
-        "mean": 2207287.8,
+        "iqr": 3791452.0,
+        "iqr_high": 3845118.0,
+        "iqr_low": 3689180.0,
+        "mean": 2244250.93814433,
         "median": 4000000.0,
         "median_high": 4000000.0,
-        "median_low": 339300.0,
-        "n": 95,
-        "n_cap": 50,
+        "median_low": 372163.60000000003,
+        "n": 97,
+        "n_cap": 52,
         "n_crash": 0,
         "n_divergence": 0,
         "n_wrong_stationary": 0,
-        "nfailed": 50,
-        "par2_mean": 2207287.8,
+        "nfailed": 52,
+        "par2_mean": 2244250.93814433,
         "par_applied": true,
         "par_factor": 2,
-        "q25": 197795.0,
+        "q25": 208548.0,
         "q75": 4000000.0,
         "scoring": "par2-wilson-bootstrap",
         "success_only_mean": 215385.35555555555,
-        "success_rate": 0.47368421052631576,
+        "success_rate": 0.4639175257731959,
         "successes": 45,
-        "wilson_high": 0.5731465182998152,
-        "wilson_low": 0.37626742136015695
+        "wilson_high": 0.5626357925336326,
+        "wilson_low": 0.3679483136280337
       },
       "parameters": {
         "Ediff0": 0.5,
@@ -1607,6 +1607,40 @@
           "schema": "optbench.start/v2",
           "start": "94",
           "success": true,
+          "threshold": -173.92742624400097,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -173.25237295049024,
+          "failure": "cap",
+          "force_calls": 2000000,
+          "lowest_energy": -173.25237295049024,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "95",
+          "success": false,
+          "threshold": -173.92742624400097,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -173.13430839840123,
+          "failure": "cap",
+          "force_calls": 2000000,
+          "lowest_energy": -173.13430839840123,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "96",
+          "success": false,
           "threshold": -173.92742624400097,
           "verify_calls": 0
         }
