@@ -63,6 +63,7 @@ def test_new_templates_match_a_problem_stop():
         "tsase/lbfgs-lj38",
         "tsase/lbfgs-morse",
         "tsase/mdmin-lj38",
+        "tsase/sdlbfgs-morse",
         "tsase/mode-lj38",
         "tsase/neb",
         "pykmc/lattice",

@@ -543,6 +543,123 @@ def _execute_minimize(job: dict) -> dict:
     return record
 
 
+class _ArchiveMorse:
+    """TSASE ``morse.py`` cache around the shifted cutoff-9.5 Morse.
+
+    ``calculate`` increments ``force_calls`` once. A later energy or force
+    request on equal atoms does not. That is the June 2020 calculator: the
+    2021 ``.all()`` edit raises on a Python float and is not this cache.
+    The pair matches ``tsase/calculators/morse/code/morse.f`` FORCE.
+    """
+
+    def __init__(self, box: np.ndarray):
+        self.box = np.asarray(box, dtype=np.float64).reshape(-1)[:3]
+        self.atoms = None
+        self.u = None
+        self.f = None
+        self.force_calls = 0
+
+    def calculate(self):
+        from optbench.pes import morse_pt
+
+        pos = np.asarray(self.atoms.positions, dtype=np.float64)
+        energy, grad = morse_pt(pos, self.box)
+        self.u = float(energy)
+        self.f = -np.asarray(grad, dtype=np.float64)
+        self.force_calls += 1
+
+    def get_potential_energy(self, atoms=None, force_consistent=False):
+        del force_consistent
+        if self.calculation_required(atoms):
+            self.atoms = atoms.copy()
+            self.calculate()
+        return self.u
+
+    def get_forces(self, atoms):
+        if self.calculation_required(atoms):
+            self.atoms = atoms.copy()
+            self.calculate()
+        return self.f.copy()
+
+    def calculation_required(self, atoms):
+        if atoms != self.atoms or self.atoms is None:
+            return True
+        if self.f is None or self.u is None or atoms is None:
+            return True
+        return False
+
+    def set_atoms(self, atoms):
+        del atoms
+
+
+def _execute_archive_minimize(job: dict) -> dict:
+    """SDLBFGS.run with the archived max-atom stop.
+
+    report.sh counts a start as failed only when ``force_calls`` is at
+    least the cap. The Euclidean norm and the Hessian index are not the score.
+    """
+    os.environ.setdefault("OMP_NUM_THREADS", "1")
+    from ase import Atoms
+    from ase.constraints import FixAtoms
+
+    opt_cls = _load_minimizer("lbfgs")
+    positions = np.asarray(job["positions"], dtype=np.float64)
+    free = np.asarray(job["free"], dtype=bool)
+    cap = int(job["cap"])
+    box = np.asarray(job["box"], dtype=np.float64)
+    calc = _ArchiveMorse(box)
+    error = ""
+    calls = cap
+    energy = None
+    max_atom = None
+    try:
+        atoms = Atoms(positions=positions, cell=_cell(positions, box), pbc=True)
+        fixed = [index for index, flag in enumerate(free) if not flag]
+        if fixed:
+            atoms.set_constraint(FixAtoms(indices=fixed))
+        atoms.calc = calc
+        opt = opt_cls(
+            atoms,
+            maxstep=float(job["max_step"]),
+            memory=int(job["memory"]),
+            logfile=None,
+            trajectory=None,
+        )
+        opt.run(
+            fmax=float(job["fmax"]),
+            emax=float(job["emax"]),
+            steps=cap,
+            optimizer=str(job["optimizer"]),
+        )
+        calls = int(calc.force_calls)
+        energy = float(calc.u)
+        forces = np.asarray(calc.f, dtype=np.float64)
+        max_atom = float(np.sqrt((forces**2).sum(axis=1).max()))
+    except Exception as exc:
+        error = f"{type(exc).__name__}: {exc}"
+        calls = int(calc.force_calls)
+    failed = bool(error) or calls >= cap
+    return {
+        "schema": "optbench.start/v2",
+        "start": job["name"],
+        "force_calls": int(calls),
+        "verify_calls": 0,
+        "counter": "archive",
+        "comparable": False,
+        "success": not failed,
+        "failure": None if not failed else ("crash" if error else "cap"),
+        "reasons": ["crash"] if error else (["cap"] if calls >= cap else []),
+        "energy": energy,
+        "force_norm": max_atom,
+        "hessian_index": None,
+        "expected_index": None,
+        "converged": not failed,
+        "error": error,
+        "seed": "0",
+        "minimizer": "sdlbfgs-maxatom",
+    }
+
+
 def search_named(root: Path, problem_name: str, template_name: str, start: str, seed: str = "0") -> dict:
     reason = available()
     if reason:
@@ -618,6 +735,58 @@ def _run_points(root, problem, template, settings, output: Path, workers: int, e
     )
 
 
+def _run_archive_minimize(root, problem, template, settings, output: Path, workers: int) -> dict:
+    scratch = output.parent / "work" / template["id"].replace("/", "-")
+    starts = load_starts(root, problem, scratch)
+    section = dict(template.get("tsase") or {})
+    jobs = []
+    for start in starts:
+        jobs.append(
+            {
+                "name": start["name"],
+                "positions": start["positions"],
+                "free": [not bool(flag) for flag in start["fixed"]],
+                "box": start["box"],
+                "cap": settings["cap"],
+                "max_step": float(section.get("max_step", 0.1)),
+                "memory": int(section.get("memory", 100)),
+                "fmax": float(section.get("fmax", 0.01)),
+                "emax": float(section.get("emax", 0.0001)),
+                "optimizer": str(section.get("optimizer", "maxatom")),
+            }
+        )
+    records = run_jobs(jobs, _execute_archive_minimize, workers)
+    parameters = {
+        "potential": "morse_pt",
+        "rc": 9.5,
+        "cap": settings["cap"],
+        "counter": "archive",
+        "failure": "total_force_calls >= cap",
+        "seed": "0",
+        **section,
+    }
+    comment = (
+        "# counter archive. One force call is one TSASE Morse calculate.\n"
+        "# SDLBFGS maxstep 0.1, memory 100, max-atom force 0.01, optimizer maxatom.\n"
+        "# report.sh counts a failure only when total_force_calls is at least 10000.\n"
+        "# The pair is shifted Morse rc 9.5, the same FORCE as calculators/morse/code/morse.f."
+    )
+    ranked = template.get("ranked")
+    ranked_flag = None if ranked is None else bool(ranked)
+    return write_campaign(
+        output,
+        records,
+        template,
+        problem,
+        settings,
+        parameters,
+        images=None,
+        comment=comment,
+        counter="archive",
+        ranked=ranked_flag,
+    )
+
+
 def run(root: Path, problem_name: str, template_name: str, *, output: Path, workers: int = 1) -> dict:
     reason = available()
     if reason:
@@ -648,6 +817,13 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
             raise ValueError(f"{problem['id']} has no force-call cap")
         settings["task"] = "minimize"
         return _run_points(root, problem, template, settings, output, workers, _execute_minimize)
+    if method == "sdlbfgs-maxatom":
+        settings = point_settings(problem)
+        if settings["cap"] is None:
+            raise ValueError(f"{problem['id']} has no force-call cap")
+        if settings["potential"] != "morse_pt":
+            raise ValueError(f"{template_name} is the shifted Morse calculator")
+        return _run_archive_minimize(root, problem, template, settings, output, workers)
     problem, template, settings = prepared(root, problem_name, template_name, CODE)
     if template["engine"] != ENGINE:
         raise ValueError(f"{template_name} engine is {template['engine']}")

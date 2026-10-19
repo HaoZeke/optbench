@@ -1,0 +1,19 @@
+# TSASE SDLBFGS on Morse bulk, the archived max-atom stop.
+id = "tsase/sdlbfgs-morse"
+engine = "tsase"
+problem = "minimization/morse-bulk"
+code = "tsase"
+code_version = "1.0"
+commit = "98aac60b5d9905e81ee4e6b8c385f169258d0218"
+algorithm = "SDLBFGS"
+tuning = "archive"
+ranked = false
+note = "Archive minimization/morse-bulk/tsase-sdlbfgs/opt.py builds SDLBFGS with maxstep 0.1 and memory 100, then stops on max-atom force 0.01 (optimizer maxatom, emax 0.0001, 10000 steps). The calculator is Morse rc 9.5. report.sh counts a failure only when total_force_calls is at least 10000, and the mean is the rounded average of the rest. This row counts that calculator. The harness Euclidean stop and Hessian index are a different score."
+
+[tsase]
+method = "sdlbfgs-maxatom"
+max_step = 0.1
+memory = 100
+fmax = 0.01
+emax = 0.0001
+optimizer = "maxatom"

@@ -1,0 +1,21 @@
+# counter archive. One force call is one TSASE Morse calculate.
+# SDLBFGS maxstep 0.1, memory 100, max-atom force 0.01, optimizer maxatom.
+# report.sh counts a failure only when total_force_calls is at least 10000.
+# The pair is shifted Morse rc 9.5, the same FORCE as calculators/morse/code/morse.f.
+force_calls 19
+force_calls_min 11
+force_calls_max 25
+force_calls_median 20
+successes 100
+nfailed 0
+n 100
+transition_states 0
+code tsase
+code_version 1.0
+commit 98aac60b5d9905e81ee4e6b8c385f169258d0218
+algorithm SDLBFGS
+template tsase/sdlbfgs-morse
+problem minimization/morse-bulk
+tuning archive
+counter archive
+ranked false

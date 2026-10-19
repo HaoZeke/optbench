@@ -807,6 +807,7 @@
    <li>ase/morse-fire-tuned ASE campaign, asv n=100, does not reproduce the 2014 archive.</li>
    <li>ase/morse-lbfgs-tuned ASE campaign, asv n=100, does not reproduce the 2014 archive.</li>
    <li>ase/morse-preconlbfgs-tuned ASE campaign, asv n=100, does not reproduce the 2014 archive.</li>
+   <li>tsase/sdlbfgs-morse tsase campaign n=100, result file sets ranked false.</li>
    <li>ase/morse-preconode12r-tuned ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
    <li>ase/morse-bfgs-default ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
    <li>ase/morse-bfgslinesearch-default ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
