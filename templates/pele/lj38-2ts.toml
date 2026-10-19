@@ -1,0 +1,14 @@
+id = "pele/lj38-2ts"
+engine = "pele"
+code = "pele"
+code_version = "0.1.2"
+commit = "b7081b932a060be11342fbe8287ac35da8ada879"
+algorithm = "DNEB + hybrid eigenvector following"
+problem = "double-ended-saddle-search/lj38_2ts_separation"
+profile = "default"
+note = "pele 0.1.2 unmodified double-ended connect defaults on the 51 LJ38 pairs. Lennard-Jones eps 1 sig 1. The harness counts potential entries and stops at 10000 calls. Stock DNEB uses k 100 and image density 10. The transition-state tolerance is the pele default 1e-4, inside the problem force norm 0.001."
+
+[stop]
+norm = "l2"
+force_norm = 0.001
+max_force_calls = 10000

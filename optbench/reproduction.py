@@ -111,7 +111,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
-    "repro/double-ended-saddle-search-lj38-2ts-separation-pele": "",
+    "repro/double-ended-saddle-search-lj38-2ts-separation-pele": "3071edaacdfdcc96d9d3da4b77754962307e6235",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -179,7 +179,7 @@ MATCHES: list[dict] = [
     {"key": "double-ended-saddle-search/lj38/eon-lanczos-improved", "template": "eon-client/de-lj38-lanczos-improved", "branch": "main", "path": "results/campaign/eon-client-de-lj38-lanczos-improved.dat"},
     {"key": "double-ended-saddle-search/lj38/optim", "template": "optim/de-lj38", "branch": "cells/optim/saddle-pt", "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-lj38--optim-de-lj38.dat", "cause": "optim_pes_counter"},
     {"key": "double-ended-saddle-search/lj38_2ts_separation/optim", "template": "optim/de-2ts", "branch": "cells/optim/saddle-pt", "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-lj38_2ts_separation--optim-de-2ts.dat", "cause": "optim_pes_counter"},
-    {"key": "double-ended-saddle-search/lj38_2ts_separation/pele", "template": "pele/de-lj38-2ts", "branch": "repro/double-ended-saddle-search-lj38-2ts-separation-pele", "path": "results/campaign/pele-a68ec5-lj38-2ts-dneb.dat"},
+    {"key": "double-ended-saddle-search/lj38_2ts_separation/pele", "template": "pele/lj38-2ts-compare", "branch": "repro/double-ended-saddle-search-lj38-2ts-separation-pele", "path": "results/campaign/pele-0.1.2-lj38-2ts-compare.dat", "cause": "pele_stock_dneb"},
     {"key": "double-ended-saddle-search/pt-island/eon-ci-neb", "template": "eon-svn/de-pt-ci-neb", "branch": "main", "path": "results/campaign/eon-svn-de-pt-ci-neb.dat"},
     {"key": "double-ended-saddle-search/pt-island/eon-ci-swdneb", "template": "eon-svn/de-pt-ci-swdneb", "branch": "main", "path": "results/campaign/eon-svn-de-pt-ci-swdneb.dat"},
     {"key": "double-ended-saddle-search/pt-island/eon-dimer", "template": "eon-svn/de-pt-dimer", "branch": "main", "path": "results/campaign/eon-svn-de-pt-dimer.dat"},
@@ -248,6 +248,11 @@ CAUSE_TEXT = {
     "optim_rr_defaults": (
         "The Rayleigh-Ritz template uses updates 4. The archived first-order mean is 25 and the second-order mean is 46. "
         "This default scores 61, so it is not either archived order."
+    ),
+    "pele_stock_dneb": (
+        "pele 0.1.2 stock double-ended connect, unmodified, scores 7424 force calls on 7 successes and 44 cap failures. "
+        "The archive is 25022 force calls and 3 failures. "
+        "The harness stops at 10000 calls. Stock DNEB uses k 100 and image density 10. The 2014 parameters were not copied."
     ),
     "pele_fire": "pele FIRE on LJ38 scores 1264 with 7 failures. The archive is 709 with 0 failures. The M100 L-BFGS row on the same build reproduces, so this is the FIRE step, not the LJ kernel.",
     "pele_morse": "pele Morse L-BFGS scores 92. The archive is 51. eOn Morse L-BFGS on the same bulk file reproduces at 52, so the gap is the pele memory and step, not the shared Morse parameters.",
@@ -480,14 +485,6 @@ def _sha(branch: str) -> str:
 
         SHA[branch] = subprocess.check_output(
             ["git", "rev-parse", "origin/cells/pele/ts"],
-            text=True,
-        ).strip()
-    if branch == "repro/double-ended-saddle-search-lj38-2ts-separation-pele" and len(SHA.get(branch, "")) < 12:
-        import subprocess
-
-        SHA[branch] = subprocess.check_output(
-            ["git", "rev-parse", "HEAD"],
-            cwd=Path(__file__).resolve().parents[1],
             text=True,
         ).strip()
     return SHA[branch]
@@ -819,6 +816,8 @@ def render_markdown(rows: list[dict]) -> str:
         "The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.",
         "",
         "OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.",
+        "",
+        "pele 0.1.2 stock double-ended connect on the LJ38 two-step pairs scores 7424 force calls and 44 cap failures. The archive is 25022 and 3.",
         "",
         "EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.",
         "",
