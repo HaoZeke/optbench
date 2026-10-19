@@ -17,5 +17,7 @@ codes/gmin/*.o
 codes/gmin/*.mod
 codes/gmin/*.so
 codes/gmin/svn.tar.bz2
+results/lammpsneb-asv/
+results/campaign/*.parts/
 results/campaign/work/
 results/campaign/geometries/

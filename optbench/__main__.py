@@ -88,6 +88,18 @@ def run(
             output=output,
             workers=workers,
         )
+    elif loaded["engine"] == "lammps-neb":
+        from optbench.lammps_neb import run as run_lammps
+
+        summary = run_lammps(
+            root,
+            problem,
+            template,
+            output=output,
+            workers=workers,
+            limit=limit,
+            resume=resume,
+        )
     else:
         client_path = _eon_client(client) if loaded["engine"] in {"eon-client", "eon"} else client
         summary = run_campaign(
