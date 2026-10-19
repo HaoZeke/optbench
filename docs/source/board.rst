@@ -346,7 +346,7 @@ It does not run a campaign.
    </tr>
    <tr data-problem="hTST/Al">
    <th scope="row"><a href="generated/suites/hTST.html#Al">Al</a></th>
-   <td data-code="eOn">—</td>
+   <td data-code="eOn" data-template="eon/htst-al-dimer" data-par2=""><span class="bench-score"></span><a href="generated/suites/hTST.html#Al-templates">eon/htst-al-dimer</a></td>
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
@@ -370,7 +370,7 @@ It does not run a campaign.
    </tr>
    <tr data-problem="hTST/Pt">
    <th scope="row"><a href="generated/suites/hTST.html#Pt">Pt</a></th>
-   <td data-code="eOn">—</td>
+   <td data-code="eOn" data-template="eon/htst-pt-dimer" data-par2=""><span class="bench-score"></span><a href="generated/suites/hTST.html#Pt-templates">eon/htst-pt-dimer</a></td>
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>

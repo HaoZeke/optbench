@@ -10,7 +10,7 @@
    <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>LAMMPS</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>TorchSim</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>optking</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="hTST/Al">
    <th scope="row"><a href="#Al">Al</a></th>
-   <td data-code="eOn">—</td>
+   <td data-code="eOn" data-template="eon/htst-al-dimer" data-par2=""><span class="bench-score"></span><a href="#Al-templates">eon/htst-al-dimer</a></td>
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
@@ -35,7 +35,7 @@
    </tr>
    <tr data-problem="hTST/Pt">
    <th scope="row"><a href="#Pt">Pt</a></th>
-   <td data-code="eOn">—</td>
+   <td data-code="eOn" data-template="eon/htst-pt-dimer" data-par2=""><span class="bench-score"></span><a href="#Pt-templates">eon/htst-pt-dimer</a></td>
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
@@ -61,18 +61,25 @@
    </tbody></table></div></section><section class="bench" id="Al" data-problem="hTST/Al">
    <h2>Al</h2>
    <dl class="bench-rule">
+   <dt>Stop</dt><dd>maximum force on any atom at or below 0.001 eV/Angstrom</dd>
+   <dt>Starts</dt><dd>639</dd>
+   <dt>Potential</dt><dd>eam (eam_al)</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
+   <dt>v2 cost</dt><dd>one barrier window: sad-fcs summed until every reference barrier has been seen once</dd>
+   <dt>Note</dt><dd>A start is one barrier window. The window closes when each reference barrier below 0.4 eV has been matched once from the processtable. Force calls are sad-fcs. The rate sum uses the search row&#x27;s harmonic prefactor when the row carries one, and 1.2e12 otherwise. The stop is the maximum force on any atom. The potential is eam_al.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
    <p class="bench-gaps">Partial rows stay off the ranked table.</p>
+   <figure class="bench-plot"><a href="../../_static/board/hTST-Al-profile.svg"><picture><source srcset="../../_static/board/hTST-Al-profile.webp" type="image/webp"><img src="../../_static/board/hTST-Al-profile.png" alt="Dolan-More profile for hTST/Al" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="../../_static/board/hTST-Al-cost.svg"><picture><source srcset="../../_static/board/hTST-Al-cost.webp" type="image/webp"><img src="../../_static/board/hTST-Al-cost.png" alt="Cost versus success for hTST/Al" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="Al-templates">
-   <summary>All templates (0 ranked)</summary>
+   <summary>All templates (1 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="hTST/Al">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="11">No full harness row.</td></tr>
+   <tr><td data-field="template">eon/htst-al-dimer</td><td data-field="version">eOn 3.6.0</td><td data-field="commit">1d71c9445018</td><td data-field="source">campaign</td><td data-field="par2_mean"></td><td data-field="success_rate">1</td><td data-field="wilson">0.994024–1</td><td data-field="median_calls">4242</td><td data-field="mean_calls">5563.49</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">639</td></tr>
    </tbody></table></div>
    <h3>Partial</h3><ul>
    <li>eon-client/htst-al-dimer-cg eOn campaign n=1, result file sets partial true.</li>
@@ -125,18 +132,25 @@
    </section><section class="bench" id="Pt" data-problem="hTST/Pt">
    <h2>Pt</h2>
    <dl class="bench-rule">
+   <dt>Stop</dt><dd>maximum force on any atom at or below 0.001 eV/Angstrom</dd>
+   <dt>Starts</dt><dd>13</dd>
+   <dt>Potential</dt><dd>morse (morse_pt)</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
+   <dt>v2 cost</dt><dd>one barrier window: sad-fcs summed until every reference barrier has been seen once</dd>
+   <dt>Note</dt><dd>A start is one barrier window. The window closes when each reference barrier below 1.3 eV has been matched once from the processtable. Force calls are sad-fcs. The rate sum uses the search row&#x27;s harmonic prefactor when the row carries one, and 1.2e12 otherwise. The stop is the maximum force on any atom. The potential is morse_pt.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
    <p class="bench-gaps">Partial rows stay off the ranked table.</p>
+   <figure class="bench-plot"><a href="../../_static/board/hTST-Pt-profile.svg"><picture><source srcset="../../_static/board/hTST-Pt-profile.webp" type="image/webp"><img src="../../_static/board/hTST-Pt-profile.png" alt="Dolan-More profile for hTST/Pt" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="../../_static/board/hTST-Pt-cost.svg"><picture><source srcset="../../_static/board/hTST-Pt-cost.webp" type="image/webp"><img src="../../_static/board/hTST-Pt-cost.png" alt="Cost versus success for hTST/Pt" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="Pt-templates">
-   <summary>All templates (0 ranked)</summary>
+   <summary>All templates (1 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="hTST/Pt">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="11">No full harness row.</td></tr>
+   <tr><td data-field="template">eon/htst-pt-dimer</td><td data-field="version">eOn 3.6.0</td><td data-field="commit">1d71c9445018</td><td data-field="source">campaign</td><td data-field="par2_mean"></td><td data-field="success_rate">1</td><td data-field="wilson">0.771905–1</td><td data-field="median_calls">343695</td><td data-field="mean_calls">423080</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">13</td></tr>
    </tbody></table></div>
    <h3>Partial</h3><ul>
    <li>eon-client/htst-pt-dimer-lbfgs eOn campaign n=1, result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5).</li>

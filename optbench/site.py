@@ -81,8 +81,14 @@ def _bits(problem: dict) -> list[tuple[str, str]]:
     convergence = problem.get("convergence") or {}
     if "force_norm" in convergence:
         unit = convergence.get("force_unit", "")
-        kind = "L2 norm" if str(convergence.get("norm", "")).lower() == "l2" else "norm"
-        bits.append(("Stop", f"{kind} of the force at or below {convergence['force_norm']} {unit}".strip()))
+        norm = str(convergence.get("norm", "")).lower()
+        if norm == "l2":
+            stop = f"L2 norm of the force at or below {convergence['force_norm']} {unit}"
+        elif norm == "max_atom":
+            stop = f"maximum force on any atom at or below {convergence['force_norm']} {unit}"
+        else:
+            stop = f"norm of the force at or below {convergence['force_norm']} {unit}"
+        bits.append(("Stop", stop.strip()))
     if "gradient_norm" in convergence:
         bits.append(("Stop", f"gradient norm below {convergence['gradient_norm']}"))
     if "max_force_calls" in convergence:
