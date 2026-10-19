@@ -74,6 +74,7 @@ def test_new_templates_match_a_problem_stop():
         "optim/de-lj38",
         "optim/de-2ts",
         "optim/de-pt",
+        "optim/saddle-pt",
         "pathsample/de-lj38",
         "pathsample/de-2ts",
         "pathsample/de-pt",

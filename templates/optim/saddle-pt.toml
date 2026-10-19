@@ -1,0 +1,47 @@
+# Paper-baseline single-ended OPTIM search on the Pt island.
+#
+# The published OPTIM pt-island file is the 2014 tsopt preamble
+# optim_ffd/odata.preamble. There is no OPTIM row on the saddle-search
+# page. The displacement is the eon-dimer archive: one epicentre from
+# free atoms 0-6, every free atom within 3.3 angstrom, Gaussian
+# standard deviation 0.1. That Gaussian is the geometry change and the
+# min-mode direction. The link is the r2205 per-atom test. Novelty is
+# AKMCState.find_repeat on the saddle.
+#
+# Coordinates are divided by r0 2.897 and the energy OPTIM sees is
+# divided by D 0.7102. PARAMS is rho*r0, the box over r0, and rcut over
+# r0. bfgsconv 4.3895D-5 is the paper's scaled RMS. The socket potential
+# is eOn Morse::force. RANSEED is search_seed modulo 10000.
+
+id = "optim/saddle-pt"
+engine = "optim"
+problem = "saddle-search/pt-island"
+code = "optim"
+code_version = "svn-snapshot"
+commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+algorithm = "hybrid eigenvector-following"
+tuning = "archive-2014"
+
+[ini.Main]
+job = "saddle_search"
+method = "hef-ffd"
+
+[ini.Optimizer]
+opt_method = "bfgsts"
+converged_force = 0.001
+max_iterations = 1000
+
+[ini.Search]
+repetitions = 1
+displace_atoms = "0,1,2,3,4,5,6"
+displace_radius = 3.3
+displace_magnitude = 0.1
+displace_all_listed = false
+max_searches = 20000
+
+[optim]
+method = "hef-ffd"
+preamble = "templates/optim/preambles/saddle-pt.txt"
+scale = "morse-2014"
+bfgsconv = 4.3895e-5
+symbol = "Pt"

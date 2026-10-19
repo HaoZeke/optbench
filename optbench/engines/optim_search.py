@@ -5,9 +5,9 @@ The binary is the OPTIM target from the Wales snapshot
 that file. The snapshot has no git commit. Each ``COMPUTE`` on the relay
 is one ``pes.evaluate``. OPTIM's own counter is not the score.
 
-``optim/unhooked`` and every template that is not minimization L-BFGS
-raise before a file is written. Noise, saddle search, NEB, and PATHSAMPLE
-are not this runner.
+``optim/unhooked`` raises before a file is written. Minimization L-BFGS,
+the archived double-ended preambles, and the Pt-island saddle search
+call the ASE socket. Noise, NEB, and PATHSAMPLE are not this runner.
 """
 
 from __future__ import annotations
@@ -711,7 +711,16 @@ def statistics_median(values: list[float]) -> str:
     return f"{statistics.median(values):.6g}"
 
 
-def run(root: Path, problem_name: str, template_name: str, *, output: Path, workers: int = 1) -> dict:
+def run(
+    root: Path,
+    problem_name: str,
+    template_name: str,
+    *,
+    output: Path,
+    workers: int = 1,
+    resume: bool = False,
+    limit: int = 0,
+) -> dict:
     reason = available()
     if reason:
         raise RuntimeError(reason)
@@ -729,6 +738,18 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
     if stated and stated != problem_name:
         raise ValueError(f"{template_name} belongs to {stated}")
     section = _section(template)
+    if problem.get("suite") == "saddle-search":
+        from optbench.optim_saddle import run_saddle
+
+        return run_saddle(
+            root,
+            problem,
+            template,
+            output=output,
+            workers=workers,
+            resume=resume,
+            limit=limit,
+        )
     if problem.get("suite") == "double-ended-saddle-search" and section["method"] in {"dneb", "newconnect"}:
         return _run_double_ended(root, problem, template, output=output, workers=workers)
     if problem.get("suite") != "minimization" or section["method"] != "lbfgs":

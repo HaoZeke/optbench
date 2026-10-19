@@ -335,12 +335,17 @@ def run(
         stated = template.get("problem")
         if stated and stated != problem_name:
             raise ValueError(f"{template_name} belongs to {stated}")
+        extra = {}
+        if str(template["engine"]) == "optim":
+            extra["resume"] = resume
+            extra["limit"] = limit
         return plugged.run(
             root,
             problem_name,
             template_name,
             output=output,
             workers=workers,
+            **extra,
         )
     if template["engine"] not in _EON_ENGINES:
         raise ValueError(f"unknown engine {template['engine']}")

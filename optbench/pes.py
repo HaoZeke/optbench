@@ -175,6 +175,17 @@ def _pair_geometry(coords: np.ndarray, box: np.ndarray | None) -> tuple[np.ndarr
 def evaluate(kind: str, coords: np.ndarray, box: np.ndarray | None) -> tuple[float, np.ndarray]:
     if kind == "morse_pt":
         return morse_pt(coords, box)
+    if kind == "morse_eon":
+        from optbench.surfaces import morse_eon
+
+        return morse_eon(
+            np.asarray(coords, dtype=np.float64),
+            depth=MORSE_D,
+            alpha=MORSE_ALPHA,
+            r0=MORSE_R0,
+            cutoff=MORSE_CUTOFF,
+            cell=box,
+        )
     if kind == "lj":
         return lennard_jones(coords, None)
     raise ValueError(f"unknown potential {kind}")
