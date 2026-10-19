@@ -1,15 +1,20 @@
 id = "eon-svn/de-pt-ci-neb-single"
 engine = "eon"
 problem = "double-ended-saddle-search/pt-island"
-code = "Eon svn"
-code_version = "r2156"
-commit = "r2156"
+code = "EON"
+code_version = "(SVN r2549)"
+commit = "r2549"
 algorithm = "CI-NEB"
-reducer = "report-capped"
+reducer = "harness"
 failure_cap = 3000
+kind = "de-pt"
+kernel = "morse_shift"
+asv_class = "EonSvnDePtCiNebSingle"
 note = '''
-Single-image climbing-image NEB on the 59 Pt-island products. Unpatched SVN r2156, Fortran linked, built-in morse_pt (Morse::force in that revision). g++ 13 compiles the 2013 sources as gnu++98. No source edits. The archived ini is copied as written: images 1, climbing_image true, L-BFGS, converged_force 0.001, max_iterations 1000. r2156 reads climbing_image_method, which stays at its default true, so the band climbs. Spring stays 5, max_move stays 0.2, and L-BFGS memory stays 20. The score is the client's total_force_calls. report.sh averages every total_force_calls under 3000 and counts a non-zero termination_reason as a failure.
+Single-image climbing-image NEB on the 59 Pt-island products. EON is the SVN client, not the git eOn client. This build is unpatched SVN r2549 with Fortran linked. The archived ini is copied as written: images 1, climbing_image true, L-BFGS, converged_force 0.001, max_iterations 1000. No spring, max_move, memory, or tangent change. r2549 reads climbing_image_method, which stays at its default true, so the band climbs. The harness replaces morse_pt with ext_pot and counts HarnessCounter. The kernel is r2549 Morse::force: cutoff 9.5, pair energy shifted to zero at the cutoff, minimum image on the box diagonal. D 0.7102, alpha 1.6047, r0 2.897.
 '''
+seeds = [1]
+asv_timeout = 3600
 
 [ini.Main]
 job = "nudged_elastic_band"

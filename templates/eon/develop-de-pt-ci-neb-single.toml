@@ -1,0 +1,30 @@
+id = "eon/develop-de-pt-ci-neb-single"
+engine = "eon"
+problem = "double-ended-saddle-search/pt-island"
+code = "eOn"
+code_version = "(develop a7aa57472fb7d823953fd36b78cd755fa4842d30)"
+commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+algorithm = "CI-NEB"
+reducer = "harness"
+failure_cap = 3000
+kind = "de-pt"
+kernel = "morse_cluster"
+note = '''
+Single-image climbing-image NEB on the 59 Pt-island products. eOn is the git client at current develop, not the SVN client. The archived ini is copied as written: images 1, climbing_image true, L-BFGS, converged_force 0.001, max_iterations 1000. No spring, max_move, memory, or tangent change. develop reads climbing_image_method, which stays at its default true, so the band climbs. The harness replaces morse_pt with ext_pot, sets Main.parallel false, and counts HarnessCounter. The kernel is the develop harness Morse: D 0.7102, alpha 1.6047, r0 2.897, no cutoff, box ignored.
+'''
+seeds = [1]
+
+[ini.Main]
+job = "nudged_elastic_band"
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+converged_force = 0.001
+max_iterations = 1000
+
+[ini."Nudged Elastic Band"]
+images = 1
+climbing_image = true

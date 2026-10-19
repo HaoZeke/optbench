@@ -32,7 +32,7 @@ repository = "https://github.com/TheochemUI/eon"
 ref = "develop"
 commit = "7095b23ac17d49f434a5e08ccb072897ceca698e"
 committed = "2026-10-16"
-note = "develop HEAD built from source. The version string is 3.6.0 (7095b23a). GPR-dimer is absent: TheochemUI/gpr_optim is private and eonclient reports GPRD disabled. This pin is not the conda-forge 3.5.0 binary."
+note = "develop at 7095b23, built from source. The version string is 3.6.0 (7095b23a). GPR-dimer is absent: TheochemUI/gpr_optim is private and eonclient reports GPRD disabled. This pin is not the conda-forge 3.5.0 binary and not the later develop pin."
 
 [[code]]
 id = "eon-svn"
@@ -172,6 +172,26 @@ ref = "0.1.1"
 commit = "0.1.1"
 committed = "2019-12-10"
 note = "Sella 0.1.1 PESWrapper.diag for the lowest-eigenvector row. eta 1e-6, gamma 1e-16, vreftol 0.99, gradient v0, rigid-mode projection. This pin is not Sella 2.6.0."
+
+[[code]]
+id = "EON"
+name = "EON"
+role = "minimization and saddle search"
+repository = "https://theory.cm.utexas.edu/svn/eon"
+ref = "r2549"
+commit = "r2549"
+committed = "2026-01-23"
+note = "SVN revision 2549, last changed 2026-01-23. eonclient -v prints r2549. Fortran is linked and the sources are unpatched. This is the SVN client. It is not the git eOn client."
+
+[[code]]
+id = "eon-develop-a7aa574"
+name = "eOn"
+role = "minimization and saddle search"
+repository = "https://github.com/TheochemUI/eon"
+ref = "develop"
+commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+committed = "2026-10-18"
+note = "Current develop a7aa57472fb7d823953fd36b78cd755fa4842d30, 2026-10-18. eonclient --version prints 3.6.0 (a7aa5747). Fortran is linked. The sources are unpatched. GPR-dimer stays disabled because TheochemUI/gpr_optim is private. This pin is not the 7095b23 develop pin and not the SVN client."
 
 [[template]]
 id = "sella-0.1.1/lj38-loweig"
