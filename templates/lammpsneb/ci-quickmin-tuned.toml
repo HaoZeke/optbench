@@ -1,0 +1,19 @@
+# LAMMPS 30 Sep 2026 fix neb. The second stage climbs.
+# Five-start calibration, declared and not scored: unit timestep,
+# the problem image count, and a 1:2 split of the default quickmin budget.
+# N1 is one third of that total and N2 is the rest.
+id = "lammpsneb/ci-quickmin-tuned"
+engine = "lammps-neb"
+code = "LAMMPS"
+code_version = "30 Sep 2026"
+commit = "8de817dd79bfe4525d5d39246a212d833e6dee07"
+algorithm = "CI-NEB-quickmin"
+tuning = "tuned"
+
+[band]
+climbing = true
+min_style = "quickmin"
+spring_k = 1.0
+parallel = "neigh"
+call_reserve = 0.0
+step_budget = "climb"

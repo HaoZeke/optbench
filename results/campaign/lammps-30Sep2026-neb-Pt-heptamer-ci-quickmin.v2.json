@@ -40,7 +40,9 @@
       "potential": "morse_pt",
       "seed": "0",
       "spring_k": 1.0,
+      "step_budget": "slack",
       "timestep": 0.001,
+      "timestep_scale": 1.0,
       "units": "metal"
     }
   },

@@ -1,0 +1,1 @@
+{"cap": 3000, "failure": null, "force_calls": 2720, "hessian_index": 1, "lammps_stop": "force tolerance", "min_style": "quickmin", "n1": 297, "n2": 298, "n_images": 5, "policy": "slack", "problem": "double-ended-saddle-search/pt-island", "reasons": [], "returncode": 0, "source": "campaign", "start": "product_0", "success": true, "timestep": 0.001, "timestep_scale": 1.0}

@@ -125,7 +125,7 @@
    <td data-code="Sella" data-template="sella/de-lj38-tuned" data-par2="1753.96"><span class="bench-score">1753.96</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">sella/de-lj38-tuned</a></td>
    <td data-code="GMIN">—</td>
    <td data-code="pele">—</td>
-   <td data-code="LAMMPS" data-template="lammpsneb/ci-fire" data-par2="4526.2"><span class="bench-score">4526.2</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">lammpsneb/ci-fire</a></td>
+   <td data-code="LAMMPS" data-template="lammpsneb/ci-fire-tuned" data-par2="4102.14"><span class="bench-score">4102.14</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">lammpsneb/ci-fire-tuned</a></td>
    <td data-code="pysisyphus">—</td>
    <td data-code="AIRSS">—</td>
    <td data-code="vc-SQNM">—</td>
@@ -152,7 +152,7 @@
    <td data-code="Sella" data-template="sella/de-lj38-2ts-tuned" data-par2="30105.9"><span class="bench-score">30105.9</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">sella/de-lj38-2ts-tuned</a></td>
    <td data-code="GMIN">—</td>
    <td data-code="pele">—</td>
-   <td data-code="LAMMPS" data-template="lammpsneb/ci-quickmin" data-par2="19017.8"><span class="bench-score">19017.8</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">lammpsneb/ci-quickmin</a></td>
+   <td data-code="LAMMPS" data-template="lammpsneb/ci-quickmin-tuned" data-par2="18035.7"><span class="bench-score">18035.7</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">lammpsneb/ci-quickmin-tuned</a></td>
    <td data-code="pysisyphus">—</td>
    <td data-code="AIRSS">—</td>
    <td data-code="vc-SQNM">—</td>
