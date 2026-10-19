@@ -201,7 +201,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | --- | --- | --- | --- |
 | LJ38/eon-dimer | force_calls 528 | 523 | reproduced |
 | LJ38/eon-lanczos | force_calls 321 | 293 | reproduced |
-| LJ38/eon-lanczos-improved | force_calls 237 | 226 | reproduced |
+| LJ38/eon-lanczos-improved | force_calls 237 | 226 | reproduced; residual |
 | LJ38/optim_cd | — | — | not rerun |
 | LJ38/optim_ffd | force_calls 145 | 489 | not reproduced; optim_lj38_ts |
 | LJ38/pele_cd | force_calls 254 | 263.52 | reproduced; residual |
@@ -217,6 +217,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 ## Residuals inside the band
 
+- tsopt/LJ38/eon-lanczos-improved: EON and eOn are different codes. EON (SVN r2549) is the Fortran SVN client, unpatched, on the archived config.ini and random_mode.py directions. The harness mean is 226 against 237 (4.6%), min 63, max 1281, median 182, nfailed 0. eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) is the git client on the same problem, starts, and convergence criterion. Its harness mean is 284 against 237 (19.8%), min 70, max 4769, median 212, nfailed 0. That gap is a finding. Neither campaign was tuned.
 - tsopt/LJ38/pele_cd: Inside the 10% band (263.52 vs 254). The same xyz-versus-con starting set as ts-ffd. findTS_local.py for the CD row does not pass orthogZeroEigs; the harness template sets orthog translations-rotations. The paper baseline is this 2014-stop mean, not the harness-stop mean 335.06.
 - tsopt/LJ38/pele_ffd: Inside the 10% band (207.51 vs 192). Archive run.sh unpacks coords-xyz.tar.gz (200 xyz, max pair about 4.4). The harness problem points at coords-con.tar.gz (max pair about 37). Kabsch RMS is about 6.33, so the sets are not the same geometry. Neither set has a pair past cutoff 40, and both drivers use RMS tolerance 1e-3/sqrt(114). The 8% residual is the starting set. The paper baseline is this 2014-stop mean, not the harness-stop mean 254.48.
 

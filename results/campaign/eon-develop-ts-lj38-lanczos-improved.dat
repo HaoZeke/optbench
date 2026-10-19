@@ -1,0 +1,15 @@
+force_calls 284
+force_calls_min 70
+force_calls_max 4769
+force_calls_median 212.0
+call_unit total
+nfailed 0
+code eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)
+code_version a7aa57472fb7d823953fd36b78cd755fa4842d30
+commit a7aa57472fb7d823953fd36b78cd755fa4842d30
+algorithm Lanczos improved L-BFGS
+template eon-develop/ts-lj38-lanczos-improved
+problem tsopt/LJ38
+reducer harness
+counter harness
+count_keys HarnessCounter

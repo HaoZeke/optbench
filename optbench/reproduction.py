@@ -111,7 +111,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
-    "repro/tsopt-lj38-eon-lanczos-improved": "f57204ef36397774bed5991f71616738766d34bc",
+    "repro/tsopt-lj38-eon-lanczos-improved": "4ae51447b6fc381ad0dce5f351874482507e3aab",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -160,7 +160,21 @@ MATCHES: list[dict] = [
     # tsopt
     {"key": "tsopt/LJ38/eon-dimer", "template": "eon-svn/ts-lj38-dimer-ljcut", "branch": "main", "path": "results/campaign/eon-svn-ts-lj38-dimer-ljcut.dat"},
     {"key": "tsopt/LJ38/eon-lanczos", "template": "eon-svn/ts-lj38-lanczos-ljcut", "branch": "main", "path": "results/campaign/eon-svn-ts-lj38-lanczos-ljcut.dat"},
-    {"key": "tsopt/LJ38/eon-lanczos-improved", "template": "eon-svn/ts-lj38-lanczos-improved", "branch": "repro/tsopt-lj38-eon-lanczos-improved", "path": "results/campaign/eon-svn-ts-lj38-lanczos-improved.dat"},
+    {
+        "key": "tsopt/LJ38/eon-lanczos-improved",
+        "template": "eon-svn/ts-lj38-lanczos-improved",
+        "branch": "repro/tsopt-lj38-eon-lanczos-improved",
+        "path": "results/campaign/eon-svn-ts-lj38-lanczos-improved.dat",
+        "cause": "lj38_lanczos_codes",
+        "extra": {
+            "code": "EON (SVN r2549)",
+            "eon_develop_code": "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)",
+            "eon_develop_force_calls": 284,
+            "eon_develop_nfailed": 0,
+            "eon_develop_template": "eon-develop/ts-lj38-lanczos-improved",
+            "eon_develop_path": "results/campaign/eon-develop-ts-lj38-lanczos-improved.dat",
+        },
+    },
     {"key": "tsopt/LJ38/sella", "template": "sella/lj38-ts-tuned", "branch": "main", "path": "results/campaign/sella-2.6.0-lj38-ts-tuned.dat", "cause": "sella_trust"},
     {"key": "tsopt/LJ38/pele_ffd", "template": "pele/lj38-ts-ffd", "branch": "cells/pele/ts-repro", "path": "results/campaign/pele-b7081b93-lj38-ts-ffd.screen.jsonl", "kind": "screen", "cause": "lj38_ts_starts"},
     {"key": "tsopt/LJ38/pele_cd", "template": "pele/lj38-ts-cd", "branch": "cells/pele/ts-repro", "path": "results/campaign/pele-b7081b93-lj38-ts-cd.screen.jsonl", "kind": "screen", "cause": "lj38_ts_starts_cd"},
@@ -252,6 +266,16 @@ CAUSE_TEXT = {
     "pele_morse": "pele Morse L-BFGS scores 92. The archive is 51. eOn Morse L-BFGS on the same bulk file reproduces at 52, so the gap is the pele memory and step, not the shared Morse parameters.",
     "morse_sd": "eOn Morse steepest descent scores 7038 with 19 failures. The archive is 196 with 0. Morse L-BFGS, CG, and FIRE on the same client reproduce, so the kernel is not the split.",
     "improved_unset": "The r2549 template turns improved on. The 2014 ini left that key unset. The mean lands outside 10 percent.",
+    "lj38_lanczos_codes": (
+        "EON and eOn are different codes. "
+        "EON (SVN r2549) is the Fortran SVN client, unpatched, on the archived config.ini "
+        "and random_mode.py directions. The harness mean is 226 against 237 (4.6%), "
+        "min 63, max 1281, median 182, nfailed 0. "
+        "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) is the git client "
+        "on the same problem, starts, and convergence criterion. "
+        "Its harness mean is 284 against 237 (19.8%), min 70, max 4769, median 212, nfailed 0. "
+        "That gap is a finding. Neither campaign was tuned."
+    ),
     "sella_trust": "Sella 2.6.0 with the archived trust-region numbers (eta, gamma, delta0, rho, sigma) is the parameter_source=archive row. It misses the 2014 mean. The constructor-default row is a different setup.",
     "heptamer_cg": "The 3.5.0 file already stores the per-image mean, 142 against the archive 120. L-BFGS, FIRE, and QM on the same 8-image spring-5 climb reproduce, so the image count is not the split.",
     "de_exclusion": "The 3.5.0 doubly-nudged file is the per-band mean under the 2500-call exclusion (708, 5 failures). The archive mean is 861. The client total is a different counter and is also outside 10 percent.",
