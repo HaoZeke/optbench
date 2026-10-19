@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-47 reproduced, 29 not reproduced, 75 not rerun. 151 archive rows.
+46 reproduced, 30 not reproduced, 75 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -45,7 +45,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | pt-island/optim | force_calls 103 | 138 | not reproduced; optim_pt_units |
 | pt-island/optim-6 | — | — | not rerun |
 | pt-island/optim-cl-string | — | — | not rerun |
-| pt-island/pele | force_calls 255 | 246 | reproduced |
+| pt-island/pele | force_calls 255 | 1001 | not reproduced; pele_stock |
 
 ## globalopt
 
@@ -262,6 +262,12 @@ archive run.sh divides coordinates by r0 = 2.897 and scales rho and rcut into th
 
 - double-ended-saddle-search/pt-island/optim
 - tsopt/pt-island/optim_ffd
+
+### pele_stock
+
+pele 0.1.2 stock DoubleEndedConnect scores 1001 force calls and 3 failures. The archive is 255 and 2. The run uses the problem images, the L2 stop 0.001, and the 3000-call cap. The spring, image density, and eigenvector-following schedule are the 0.1.2 defaults.
+
+- double-ended-saddle-search/pt-island/pele
 
 ### pele_bh_defaults
 

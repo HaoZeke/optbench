@@ -956,7 +956,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="double-ended-saddle-search-pt-island-pele">
    <td class="num">7</td>
-   <td class="text">pele</td>
+   <td class="text">pele · not reproduced</td>
    <td class="text">pele</td>
    <td class="num">2.55000e+02</td>
    <td class="num">7.8200e+02</td>

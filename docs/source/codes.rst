@@ -1080,12 +1080,26 @@ The number is written only after the run finishes under the problem rule.
    <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
    <td>double-ended saddle search</td>
-   <td>a68ec5</td>
-   <td>a68ec5e7706a</td>
+   <td>v0.1.2</td>
+   <td>b7081b932a06</td>
    <td><a href="https://github.com/pele-python/pele">https://github.com/pele-python/pele</a></td>
    </tr>
    </tbody></table></div>
-   <p>No full ranked run.</p>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="pele/de-pt-island-stock">
+   <td>pt-island</td>
+   <td data-field="template">pele/de-pt-island-stock</td>
+   <td data-field="version">pele 0.1.2</td>
+   <td data-field="commit">b7081b932a06</td>
+   <td data-field="par2_mean">1255.27</td>
+   <td data-field="mean_calls">1017.58</td>
+   <td data-field="median_calls">953</td>
+   <td data-field="failures">crash 0, divergence 2, cap 1, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   </tbody></table></div>
    <p>No full ranked run</p><ul>
    <li>pt-island: partial.</li>
    <li>pele-lbfgs-M1-maxstep0.1: no per-start record.</li>
