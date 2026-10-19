@@ -8,16 +8,16 @@
 # RMSE means are arithmetic means of the successes. force_rmse is -1 when the force coefficient is 0.
 # Behler-Parrinello squared-error loss on the problem trajectory. Fingerprints come from the archived fpParas.dat. The network has hidden layers 10 and 7, tanh, and a linear output, with NoScaler. Each start is uniform[-1, 1) from PCG64(20261015 + index). One harness call is one full-dataset loss and gradient. The stop is the L2 norm of each parameter-tensor gradient. pyamff 8037eb98 used the max absolute entry. Levenberg-Marquardt uses learnrate 0.01, adjust 10, and one batch. A rising error retries at most five times, and each retry is a call. The energy coefficient is 1 and the force coefficient is 0.1. The stop is 0.1 and the cap is 30000.
 problem mlopt/C2H4
-mean_epoch 4479
+mean_epoch 6109
 median_epoch 2211.5
-mean_energy_rmse 0.0355916151376
+mean_energy_rmse 0.0350977861527
 median_energy_rmse 0.0368656289151
-mean_force_rmse 0.620789190412
+mean_force_rmse 0.643923859366
 median_force_rmse 0.43076802151
-force_calls 4479
+force_calls 6109
 force_calls_min 18
-force_calls_max 14388
-nfailed 14
+force_calls_max 21952
+nfailed 22
 median 2211.5
 code aenet
 code_version 2.0.5
@@ -26,16 +26,16 @@ algorithm LM
 template aenet/c2h4-force-lm
 tuning default
 counter harness
-par2_mean 43343.75
-wilson_low 0.145477244868
-wilson_high 0.518972818354
+par2_mean 45629
+wilson_low 0.141826633196
+wilson_high 0.444479616952
 par2_median 60000
-par2_median_low 37194
+par2_median_low 60000
 par2_median_high 60000
-v2_nfailed 14
-v2_successes 6
-n 20
-n_cap 14
+v2_nfailed 22
+v2_successes 8
+n 30
+n_cap 22
 n_divergence 0
 n_crash 0
 n_wrong_stationary 0
