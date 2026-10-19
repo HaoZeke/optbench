@@ -212,7 +212,7 @@ It does not run a campaign.
    <td data-code="ASE" data-template="ase/neb-pt-heptamer-tuned" data-par2="442.615"><span class="bench-score">442.615</span><a href="generated/suites/neb.html#Pt-heptamer-templates">ase/neb-pt-heptamer-tuned</a></td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
-   <td data-code="Gman" data-template="gman/neb-pt-glbfgs-hess" data-par2="358.308"><span class="bench-score">358.308</span><a href="generated/suites/neb.html#Pt-heptamer-templates">gman/neb-pt-glbfgs-hess</a></td>
+   <td data-code="Gman" data-template="gman/neb-pt-vtst-661" data-par2="408"><span class="bench-score">408</span><a href="generated/suites/neb.html#Pt-heptamer-templates">gman/neb-pt-vtst-661</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass" data-template="compass/sqnm" data-par2="561.462"><span class="bench-score">561.462</span><a href="generated/suites/neb.html#Pt-heptamer-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>

@@ -171,7 +171,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | Pt-heptamer/eon-qm | force_calls 164 | 165 | reproduced |
 | Pt-heptamer/gman-cg | — | — | not rerun |
 | Pt-heptamer/gman-fire | — | — | not rerun |
-| Pt-heptamer/gman-glbfgs-hess | force_calls 48 | 44 | reproduced; residual |
+| Pt-heptamer/gman-glbfgs-hess | force_calls 48 | 51 | reproduced; residual |
 | Pt-heptamer/gman-glbfgs-line | — | — | not rerun |
 | Pt-heptamer/gman-lbfgs-hess | — | — | not rerun |
 | Pt-heptamer/gman-lbfgs-line | — | — | not rerun |
@@ -217,7 +217,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 ## Residuals inside the band
 
-- neb/Pt-heptamer/gman-glbfgs-hess: Inside the 10% band (44 vs 48). Anonymous SVN does not export Gman r235. The step is VTST lbfgs.F file revision 128, exported at peg r147 (2011-10-10), Hessian branch: LLINEOPT false, LGLOBAL true, memory 25, inverse curvature 0.05, maxmove 0.2. The step length cap is maxmove times the square root of the image count. The band is 8 interior images, spring 5, climbing image, improved tangent, and Fmag 0.01 on the shifted Morse slab. The score is the archived opt.py rule: pot.count() divided by 8, then the %d truncation of the mean.
+- neb/Pt-heptamer/gman-glbfgs-hess: Inside the 10% band (51 vs 48). Gman r235 is not a public release. The ranked run is vtstcode 6.6.1, commit 68930c55, unmodified. Stock LBFGS is memory 20, LAUTOSCALE, damping 2, FDSTEP 0.005, maxmove 0.2, global, and no line search. Stock NEB is spring magnitude 5, climbing image, and the improved tangent. IMAGES is the problem's 8 and the stop is Fmag 0.01. No INCAR tag was set to close the gap. The integer is the archived opt.py rule: Morse evaluations divided by 8, then %d. The vtst-r128 transcription remains an unranked diagnostic.
 - tsopt/LJ38/pele_cd: Inside the 10% band (263.52 vs 254). The same xyz-versus-con starting set as ts-ffd. findTS_local.py for the CD row does not pass orthogZeroEigs; the harness template sets orthog translations-rotations. The paper baseline is this 2014-stop mean, not the harness-stop mean 335.06.
 - tsopt/LJ38/pele_ffd: Inside the 10% band (207.51 vs 192). Archive run.sh unpacks coords-xyz.tar.gz (200 xyz, max pair about 4.4). The harness problem points at coords-con.tar.gz (max pair about 37). Kabsch RMS is about 6.33, so the sets are not the same geometry. Neither set has a pair past cutoff 40, and both drivers use RMS tolerance 1e-3/sqrt(114). The 8% residual is the starting set. The paper baseline is this 2014-stop mean, not the harness-stop mean 254.48.
 

@@ -39,6 +39,24 @@ def test_the_ledger_covers_the_oracle_in_order():
     assert reproduction_errors(ROOT) == []
 
 
+def test_pt_heptamer_gman_stock_release_matches_the_archive():
+    ledger = {row_id(row): row for row in load_ledger(ROOT / "oracle" / "reproduction.jsonl")}
+    row = ledger["neb/Pt-heptamer/gman-glbfgs-hess"]
+    assert row["status"] == "reproduced"
+    check = row["checks"][0]
+    assert check["metric"] == "force_calls"
+    assert check["archive"] == 48
+    assert check["rerun"] == 51
+    assert check["ok"] is True
+    assert row["rerun"]["paper_baseline"] is True
+    assert row["rerun"]["template"] == "gman/neb-pt-vtst-661"
+    assert row["rerun"]["unrounded_mean"] == 51.0
+    assert row["rerun"]["sha"] == "10c556f7fcde938139bd0d0411dc7a7623abab26"
+    text = (ROOT / row["rerun"]["path"]).read_text(encoding="utf-8")
+    assert "code_version 6.6.1\n" in text
+    assert "counter harness\n" in text
+
+
 def test_pele_paper_baseline_is_the_2014_stop():
     ledger = {row_id(row): row for row in load_ledger(ROOT / "oracle" / "reproduction.jsonl")}
     forward = ledger["tsopt/LJ38/pele_ffd"]
