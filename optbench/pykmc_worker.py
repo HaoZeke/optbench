@@ -116,6 +116,19 @@ def _potential(job: dict):
             )
 
         return evaluate
+    if kind == "morse_shift":
+        from optbench.eon_harness import morse_shift
+
+        box = np.zeros(9, dtype=np.float64)
+        box[0], box[4], box[8] = (float(value) for value in lengths)
+
+        def evaluate(coords: np.ndarray):
+            flat = np.asarray(coords, dtype=np.float64).reshape(-1)
+            energy, forces = morse_shift(flat, None, box)
+            gradient = -np.asarray(forces, dtype=np.float64).reshape(-1, 3)
+            return float(energy), gradient
+
+        return evaluate
     if kind == "eam":
         from optbench.eon_harness import eam_al
 

@@ -262,6 +262,15 @@ def _cap_error(text: str) -> bool:
     return "force-call cap" in text or "ForceCallCap" in text
 
 
+def _clean_stop_error(text: str) -> bool:
+    """A search that finished without a saddle. The geometry stayed finite."""
+    return (
+        "No event found" in text
+        or "EVENT_NOT_FOUND" in text
+        or "returned no result" in text
+    )
+
+
 def _dissociated_error(text: str) -> bool:
     return "Lost atoms" in text or ("exposed" in text and "atoms" in text) or "Too many neighbor bins" in text
 
@@ -354,7 +363,12 @@ def classify_stored(record: dict, cap: int | None, force_tol: float | None) -> s
             dissociated = False
         elif geometry_nonfinite(geometry):
             dissociated = True
-    process_failed = bool(error.strip()) and not _cap_error(error) and not _dissociated_error(error)
+    process_failed = (
+        bool(error.strip())
+        and not _cap_error(error)
+        and not _dissociated_error(error)
+        and not _clean_stop_error(error)
+    )
     if record.get("failure") == "crash" and not process_failed and energy is None and force is None and geometry is None:
         process_failed = True
     above = None

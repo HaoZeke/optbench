@@ -7,11 +7,10 @@ code_version = "0.0.1"
 commit = "9fd1f6e9085ef92642142406f3dd74e574209898"
 algorithm = "pARTn KMC"
 tuning = "beland-2015-pt111"
-kernel = "morse"
+kernel = "morse_shift"
 reducer = "htst-cycles"
-failure_cap = 50000000
 geometry = "website/hTST/Pt/eon-dimer-lbfgs/pos.con"
-note = "KMC on the minimized reactant. Temperature 700 K, prefactor 1.2e12, and the barrier and rate cycle targets are archive/entries/hTST/Pt/eon-dimer-lbfgs/report.py: 13 barrier cycles and 224 rate cycles. A reference barrier matches only at three decimals. The push is the published Pt profile in pykmc/saddle-pt. The link test is unchanged. The potential is morse/smooth/linear. The 2014 Pt barriers were measured with shifted Morse. eon-svn hTST Pt uses kernel morse_shift. eon-client hTST Pt uses this smooth-linear kernel."
+note = "KMC on the minimized reactant. Temperature 700 K and prefactor 1.2e12 are archive/entries/hTST/Pt/eon-dimer-lbfgs/report.py. The ranked sample is 13 barrier windows. A window closes when every reference barrier, rounded to three decimals, has been seen once. The rank is the median sad-fcs of those windows. There is no force-call cap, so PAR-2 stays unset. Rate windows are reported and do not decide the rank. The push is the published Pt profile in pykmc/saddle-pt. Process identity is the top-window RMSD test plus a 0.05 eV barrier gate. The potential is r2549 shifted Morse, the potential of the 2014 Pt barriers."
 
 [pykmc]
 ninit = 1
@@ -41,4 +40,4 @@ rnei = 3.0
 timeout = 1800
 
 [kmc]
-max_searches = 20000
+max_searches = 40000

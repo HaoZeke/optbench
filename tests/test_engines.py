@@ -70,6 +70,7 @@ def test_new_templates_match_a_problem_stop():
         "tsase/neb",
         "pykmc/ts-pt",
         "pykmc/saddle-pt",
+        "pykmc/saddle-pt-smooth",
         "pykmc/htst-pt",
         "pykmc/htst-al",
         "pykmc/aladatom",
@@ -187,7 +188,7 @@ def test_unlinked_saddle_is_not_a_success():
         pbc=(False, False, False),
     )
     assert out["success"] is False
-    assert out["failure"] == "divergence"
+    assert out["failure"] == "not_converged"
     assert "barrier" not in out
 
 

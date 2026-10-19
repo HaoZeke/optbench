@@ -168,8 +168,10 @@ def judge_saddle(
     hessian_index = None
     lowest_mode = None
     finite_point = point is not None and np.all(np.isfinite(point))
-    if not finite_point and "crash" not in reasons and "cap" not in reasons:
-        reasons.append("divergence")
+    # A missing geometry is a finished search with no saddle. A blow-up is
+    # only the caller's divergence prefix, or a non-finite energy below.
+    if not finite_point and "crash" not in reasons and "cap" not in reasons and "divergence" not in reasons:
+        reasons.append("solver")
     if calls >= cap and "cap" not in reasons:
         reasons.append("cap")
     if finite_point and gradient is not None and "crash" not in reasons:

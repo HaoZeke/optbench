@@ -1,0 +1,33 @@
+# rep 1 force_calls 765865 unique_saddles 163 fraction_connected 0.6417112299465241 fraction_eon_connected 0.6417112299465241 total_searches 561 connected 360 eon_connected 360 minimize_calls 14 minimum_converged 1 seed 20261016
+# A harness success is an index-1 saddle at the force stop whose endpoints pass the eOn r2205 link. The barrier window and the novelty test are catalogue counts. They do not reject a connected index-1 saddle.
+# Of the 360 connected searches, 348 were stored as divergence. Every one of those 348 is index 1. Their force norms run from 0.00039215 to 0.00099997, so each is at the 0.001 stop. Call counts run from 823 to 2466. None missed the force stop, the Hessian index, the endpoint relaxation, or the harness cap of 20000. The old class came from the barrier window and the duplicate test.
+# 62 searches finished with no index-1 saddle. 61 are EVENT_NOT_FOUND. One stopped on the method budget at 10000 calls, under the harness cap of 20000. Those are not_converged. A finite clean stop is not divergence.
+# fraction_eon_connected is the eOn r2205 link. Both endpoint minima are in pykmc-0.0.1-saddle-search-pt-island--pykmc-saddle-pt-smooth.endpoints.jsonl.
+# The catalogue stopped 160 searches after the last new unique saddle under 1.5 eV. That saddle is search 401, barrier 1.493 eV. unique_saddles is 163. The novel saddles under 1.5 eV number 12. The sample was rescored and was not rerun.
+# Potential is morse/smooth/linear. The 2014 Pt archive used shifted Morse. This row is the extra labelled sample. The baseline is pykmc/saddle-pt.
+force_calls 765865
+force_calls_min 765865
+force_calls_max 765865
+code pykmc
+code_version 0.0.1
+commit 9fd1f6e9085ef92642142406f3dd74e574209898
+algorithm pARTn event search
+tuning beland-2015-pt111
+template pykmc/saddle-pt-smooth
+problem saddle-search/pt-island
+counter harness
+cap 20000
+repetitions 1
+nfailed 201
+n 561
+goal 27
+connected 360
+eon_connected 360
+fraction_connected 0.6417112299465241
+fraction_eon_connected 0.6417112299465241
+total_searches 561
+endpoints pykmc-0.0.1-saddle-search-pt-island--pykmc-saddle-pt-smooth.endpoints.jsonl
+endpoint_rows 561
+profile beland-2015-pt111
+ranked false
+potential morse/smooth/linear

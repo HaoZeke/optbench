@@ -168,20 +168,28 @@ def _invoke(root: Path, job: dict) -> dict:
         return payload
 
 
+def _morse_surface(spec: dict, kind: str) -> dict:
+    pbc = spec.get("pbc") or [True, True, False]
+    return {
+        "kind": kind,
+        "element": "Pt",
+        "pbc": [bool(pbc[0]), bool(pbc[1]), bool(pbc[2])],
+        "depth": float(spec.get("D", 0.7102)),
+        "alpha": float(spec.get("alpha", 1.6047)),
+        "r0": float(spec.get("r0", 2.897)),
+        "cutoff": float(spec.get("cutoff", 9.5)),
+    }
+
+
 def _surface(problem: dict, template: dict) -> dict:
     spec = problem.get("potential") or {}
     kernel = str(template.get("kernel") or spec.get("kind") or "")
+    # An explicit template kernel wins. The shared Pt problem stays
+    # smooth-linear so other codes keep that row.
+    if kernel == "morse_shift":
+        return _morse_surface(spec, "morse_shift")
     if kernel in {"morse", "morse_pt"} or spec.get("kind") == "morse":
-        pbc = spec.get("pbc") or [True, True, False]
-        return {
-            "kind": "morse",
-            "element": "Pt",
-            "pbc": [bool(pbc[0]), bool(pbc[1]), bool(pbc[2])],
-            "depth": float(spec.get("D", 0.7102)),
-            "alpha": float(spec.get("alpha", 1.6047)),
-            "r0": float(spec.get("r0", 2.897)),
-            "cutoff": float(spec.get("cutoff", 9.5)),
-        }
+        return _morse_surface(spec, "morse")
     if kernel == "eam":
         return {
             "kind": "eam",
@@ -193,6 +201,26 @@ def _surface(problem: dict, template: dict) -> dict:
             "cutoff": 6.5,
         }
     raise ValueError(f"{template['id']} has no Morse or EAM kernel")
+
+
+def kernel_matches(state: dict | None, kind: str) -> bool:
+    """True when a checkpoint was produced with this potential.
+
+    A snap written before the kernel was stored is smooth-linear Morse
+    or the r2549 EAM. It does not resume a shifted-Morse run.
+    """
+    if not state:
+        return False
+    stored = state.get("kernel")
+    if stored in (None, ""):
+        return kind in {"morse", "eam"}
+    return str(stored) == kind
+
+
+def _diagonal_cell(lengths: np.ndarray) -> np.ndarray:
+    cell = np.zeros(9, dtype=np.float64)
+    cell[0], cell[4], cell[8] = (float(value) for value in lengths)
+    return cell
 
 
 def _evaluator(surface: dict, box: np.ndarray):
@@ -214,10 +242,22 @@ def _evaluator(surface: dict, box: np.ndarray):
             )
 
         return evaluate
+    if surface["kind"] == "morse_shift":
+        from optbench.eon_harness import morse_shift
+
+        cell = _diagonal_cell(lengths)
+
+        def evaluate(coords, _box):
+            # r2549 Morse::force returns forces. The harness wants dE/dx.
+            flat = np.asarray(coords, dtype=np.float64).reshape(-1)
+            energy, forces = morse_shift(flat, None, cell)
+            gradient = -np.asarray(forces, dtype=np.float64).reshape(-1, 3)
+            return float(energy), gradient
+
+        return evaluate
     from optbench.eon_harness import eam_al
 
-    cell = np.zeros(9, dtype=np.float64)
-    cell[0], cell[4], cell[8] = (float(value) for value in lengths)
+    cell = _diagonal_cell(lengths)
 
     def evaluate(coords, _box):
         # The Fortran library is one global object. Parallel searches share it.
@@ -424,7 +464,20 @@ def _link(record: dict, *, evaluator, free, box, minimum, min_energy, force_norm
     and aladatom campaigns used for process identity.
     """
     from optbench.connection import connected_endpoints, per_atom_max
-    from optbench.failures import classify_failure
+    from optbench.failures import classify_outcome
+
+    def unfinished(row: dict) -> dict:
+        """No saddle was stored. A clean stop is not a blow-up."""
+        row.pop("positions", None)
+        row.pop("lowest_mode", None)
+        if row.get("success"):
+            row["success"] = False
+            row["failure"] = "not_converged"
+            reasons = [item for item in (row.get("reasons") or []) if item != "divergence"]
+            if "solver" not in reasons:
+                reasons.append("solver")
+            row["reasons"] = reasons
+        return row
 
     record["endpoint_plus"] = None
     record["endpoint_minus"] = None
@@ -434,23 +487,11 @@ def _link(record: dict, *, evaluator, free, box, minimum, min_energy, force_norm
     mode = record.get("lowest_mode")
     entered = bool(record.get("success"))
     if saddle is None or not mode:
-        if entered:
-            record["success"] = False
-            record["reasons"].append("divergence")
-            record["failure"] = classify_failure(record["reasons"])
-        record.pop("positions", None)
-        record.pop("lowest_mode", None)
-        return record
+        return unfinished(record)
     axis = np.asarray(mode, dtype=np.float64)
     scale = float(np.linalg.norm(axis))
     if scale < 1e-14:
-        if entered:
-            record["success"] = False
-            record["reasons"].append("divergence")
-            record["failure"] = classify_failure(record["reasons"])
-        record.pop("positions", None)
-        record.pop("lowest_mode", None)
-        return record
+        return unfinished(record)
     axis = axis / scale
     saddle_free = saddle[free].reshape(-1)
     plus, _plus_ok, plus_calls, _plus_energy = _minimize_free(
@@ -493,19 +534,27 @@ def _link(record: dict, *, evaluator, free, box, minimum, min_energy, force_norm
     record["positions"] = saddle.reshape(-1).tolist()
     if novel:
         found.append(saddle[mask].copy())
-    if links and novel and 0.0 < barrier < barrier_max:
+    # The catalogue still stops on a new unique saddle under the barrier
+    # window. That count is not the per-search success.
+    record["low_barrier"] = bool(links and novel and 0.0 < barrier < barrier_max)
+    if links:
         record["success"] = True
         record["failure"] = None
         record["reasons"] = []
     else:
-        if not links:
-            record["reasons"].append("not_connected")
-        if not novel:
-            record["reasons"].append("duplicate")
-        if barrier <= 0.0 or barrier >= barrier_max:
-            record["reasons"].append("barrier")
+        record["reasons"] = ["not_connected"]
         record["success"] = False
-        record["failure"] = classify_failure(record["reasons"])
+        record["failure"] = classify_outcome(
+            energy=record.get("energy"),
+            geometry=saddle,
+            force=record.get("force_norm"),
+            calls=float(record["force_calls"]),
+            cap=None,
+            force_tol=float(force_norm),
+            hessian_index=None if record.get("hessian_index") is None else int(record["hessian_index"]),
+            expected_index=1,
+            stationary_rejected=True,
+        )
     record.pop("lowest_mode", None)
     return record
 
@@ -718,7 +767,7 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
     free = np.asarray([not bool(flag) for flag in base["fixed"]], dtype=bool)
     box = np.asarray(base["box"], dtype=np.float64)
     evaluator = _evaluator(surface, box)
-    kind = "morse_pt"
+    kind = surface["kind"]
     work = output.parent / "work" / template["id"].replace("/", "-")
     snap_path = work / "catalog.json"
     snap_path.parent.mkdir(parents=True, exist_ok=True)
@@ -734,6 +783,7 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
         resume = (
             state
             and state.get("profile") == PROFILE
+            and kernel_matches(state, surface["kind"])
             and int(state.get("rep") or 0) == rep
             and state.get("minimum") is not None
         )
@@ -749,11 +799,12 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
             records = list(state.get("records") or [])
             rng = np.random.default_rng()
             rng.bit_generator.state = state["rng"]
-            last_success = 0
+            connected = sum(1 for saved in records if saved.get("low_barrier"))
+            last_low = 0
             for index, saved in enumerate(records, start=1):
-                if saved.get("success"):
-                    last_success = index
-            stall = searches - last_success
+                if saved.get("low_barrier"):
+                    last_low = index
+            stall = searches - last_low
             _truncate_endpoints(endpoints_path, searches)
         else:
             if rep == 1:
@@ -772,39 +823,41 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
 
         def publish(partial: bool) -> None:
             total_calls = int(minimize_calls + search_calls)
-            fraction = connected / searches if searches else 0.0
+            successes = sum(1 for row in records if row.get("success"))
+            fraction = successes / searches if searches else 0.0
             eon_count = sum(1 for row in records if row.get("eon_connected"))
             eon_fraction = eon_count / searches if searches else 0.0
             lines = [
                 f"# rep {rep} force_calls {total_calls} unique_saddles {len(found)} "
                 f"fraction_connected {fraction} fraction_eon_connected {eon_fraction} "
-                f"total_searches {searches} connected {connected} eon_connected {eon_count} "
+                f"total_searches {searches} connected {successes} eon_connected {eon_count} "
                 f"minimize_calls {minimize_calls} minimum_converged {int(min_ok)} seed {_SEED_BASE + rep}"
             ]
             last_at = 0
             last_barrier = None
             for index, saved in enumerate(records, start=1):
-                if saved.get("success"):
+                if saved.get("low_barrier"):
                     last_at = index
                     last_barrier = saved.get("barrier")
             if last_at and searches > last_at:
                 barrier_text = f"{float(last_barrier):.3f}" if last_barrier is not None else "unknown"
                 lines.append(
-                    "# fraction_connected counts harness successes under the eOn r2205 link, connected/total_searches. "
-                    f"The last harness success is search {last_at}, barrier {barrier_text} eV. "
+                    "# fraction_connected counts index-1 saddles whose endpoints pass the eOn r2205 link. "
+                    f"The catalogue goal is {goal} unique saddles under {barrier_max:g} eV. "
+                    f"The last one is search {last_at}, barrier {barrier_text} eV. "
                     f"The next {searches - last_at} searches added none. "
-                    "The runner exits after 160 searches with no new harness success "
-                    f"once 200 searches have run. The goal is {goal}."
+                    "The runner exits after 160 searches with no new unique saddle under that window "
+                    "once 200 searches have run."
                 )
+            potential = "morse_shift" if surface["kind"] == "morse_shift" else "morse/smooth/linear"
             lines.append(
                 "# fraction_eon_connected is the eOn r2205 link: exactly one endpoint has "
                 "perAtomNorm strictly below distance_difference 0.1 angstrom. "
-                f"Both endpoint minima are in {endpoints_path.name}."
+                f"A connected index-1 saddle is a harness success. Both endpoint minima are in {endpoints_path.name}."
             )
             lines.append(
-                "# Potential is morse/smooth/linear. The 2014 Pt archive used shifted Morse. "
-                "eon-svn hTST Pt uses kernel morse_shift. Develop morse_pt has no cutoff. "
-                "eon-client kernel morse is this same smooth-linear potential."
+                f"# Potential is {potential}. The 2014 Pt archive used shifted Morse. "
+                "Smooth-linear is a separate labelled row."
             )
             endpoint_rows = 0
             if endpoints_path.is_file():
@@ -828,7 +881,7 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
                 f"nfailed {failed_reps}\n"
                 f"n {len(records)}\n"
                 f"goal {goal}\n"
-                f"connected {connected}\n"
+                f"connected {successes}\n"
                 f"eon_connected {eon_count}\n"
                 f"fraction_connected {fraction}\n"
                 f"fraction_eon_connected {eon_fraction}\n"
@@ -837,6 +890,9 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
                 f"endpoint_rows {endpoint_rows}\n"
                 f"profile {PROFILE}\n"
             )
+            if surface["kind"] != "morse_shift":
+                text += "ranked false\n"
+            text += f"potential {potential}\n"
             if partial:
                 text += "partial true\n"
             output.parent.mkdir(parents=True, exist_ok=True)
@@ -866,10 +922,9 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
                     ),
                     "score": scored,
                     "note": (
-                        "The link is the eOn r2205 per-atom maximum, distance_difference 0.1. "
-                        "fraction_connected counts harness successes. "
-                        "fraction_eon_connected counts searches whose endpoints pass that link. "
-                        f"Endpoint minima are in {endpoints_path.name}."
+                        "A harness success is an index-1 saddle at the force stop whose endpoints "
+                        "pass the eOn r2205 link. The barrier window and the novelty test count "
+                        f"unique saddles. Endpoint minima are in {endpoints_path.name}."
                     ),
                 }
                 output.with_suffix(".v2.json").write_text(
@@ -941,16 +996,19 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
                     pbc=surface["pbc"],
                     tolerance=link_tolerance(problem),
                 )
-                if record["success"]:
+                if record.get("low_barrier"):
                     connected += 1
                     stall = 0
                 else:
                     stall += 1
                 if int(record["force_calls"]) >= failure_cap and record["success"]:
+                    was_low = bool(record.get("low_barrier"))
                     record["success"] = False
                     record["failure"] = "cap"
                     record["reasons"] = ["cap"]
-                    connected -= 1
+                    record["low_barrier"] = False
+                    if was_low:
+                        connected -= 1
                 search_calls += int(record["force_calls"])
                 _spill_endpoints(
                     endpoints_path,
@@ -974,6 +1032,7 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
                     json.dumps(
                         {
                             "profile": PROFILE,
+                            "kernel": surface["kind"],
                             "rep": rep,
                             "minimum": minimum.reshape(-1).tolist(),
                             "min_energy": min_energy,

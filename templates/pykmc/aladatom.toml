@@ -11,7 +11,7 @@ kernel = "eam"
 reducer = "amd-catalogue"
 failure_cap = 50000000
 geometry = "website/accelerated-md/reactant.con"
-note = "One AKMC catalogue on the minimized reactant, with the same columns as the eOn AKMC reducer. Prefactor 1e12 is the eOn template default_value. Temperature 250 K, confidence 0.95, and the 20 kT window are the problem values. The push is the published Pt profile in pykmc/saddle-pt. The link test is unchanged. The kernel is the r2549 Aluminum EAM through the harness. The eOn AKMC row uses the client's built-in eam_al and a client counter."
+note = "Three independent AKMC catalogues on the minimized reactant, with the same columns as the eOn AKMC reducer. Seed 1 keeps the original catalogue. Prefactor 1e12 is the eOn template default_value. Temperature 250 K, confidence 0.95, and the 20 kT window are the problem values. The push is the published Pt profile in pykmc/saddle-pt. Process identity is the top-window RMSD test plus a 0.05 eV barrier gate. The kernel is the r2549 Aluminum EAM through the harness. The eOn AKMC row uses the client's built-in eam_al and a client counter. rate_accuracy is zero when the HTST catalogue rate is at least twice the parallel-replica reference."
 
 [pykmc]
 ninit = 1
@@ -43,3 +43,4 @@ timeout = 1800
 [kmc]
 prefactor = 1.0e12
 max_searches = 8000
+seeds = 3

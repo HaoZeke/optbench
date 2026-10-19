@@ -12,6 +12,7 @@ from optbench.pykmc_kmc import (
     HTST,
     endpoint_record,
     reduce_htst,
+    rescore_saddle_start,
     searches_to_launch,
 )
 
@@ -157,6 +158,15 @@ def test_templates_pin_the_push_profiles():
     assert saddle["pykmc"]["lanczos_min_size"] == 12
     assert saddle["pykmc"]["lanczos_max_size"] == 15
     assert saddle["search"]["displace_magnitude"] == 0.0
+    assert saddle["kernel"] == "morse_shift"
+    assert "failure_cap" not in tomllib.loads((root / "htst-pt.toml").read_text(encoding="utf-8"))
+    assert "failure_cap" not in tomllib.loads((root / "htst-al.toml").read_text(encoding="utf-8"))
+    assert tomllib.loads((root / "htst-pt.toml").read_text(encoding="utf-8"))["kernel"] == "morse_shift"
+    assert tomllib.loads((root / "aladatom.toml").read_text(encoding="utf-8"))["kmc"]["seeds"] >= 3
+    assert tomllib.loads((root / "standard-aladatom.toml").read_text(encoding="utf-8"))["kmc"]["seeds"] >= 3
+    smooth = tomllib.loads((root / "saddle-pt-smooth.toml").read_text(encoding="utf-8"))
+    assert smooth["kernel"] == "morse"
+    assert smooth["id"] == "pykmc/saddle-pt-smooth"
     guess = tomllib.loads((root / "ts-pt.toml").read_text(encoding="utf-8"))
     assert guess["pykmc"]["ninit"] == 0
     assert guess["pykmc"]["push_mode"] == "list"
@@ -164,3 +174,108 @@ def test_templates_pin_the_push_profiles():
     assert guess["pykmc"]["nsmooth"] == 3
     assert guess["pykmc"]["lanczos_disp"] == 0.0005
     assert guess["pykmc"]["dmax"] == 6.0
+
+
+def test_connected_index_one_is_a_success_and_a_clean_stop_is_not_divergence():
+    connected = rescore_saddle_start(
+        {
+            "force_calls": 907,
+            "energy": -1769.8,
+            "force_norm": 0.00099,
+            "hessian_index": 1,
+            "expected_index": 1,
+            "eon_connected": True,
+            "barrier": 1.51,
+            "reasons": ["barrier"],
+            "success": False,
+            "failure": "divergence",
+        },
+        force_tol=0.001,
+        cap=20000,
+    )
+    assert connected["success"] is True
+    assert connected["failure"] is None
+    assert connected["low_barrier"] is False
+    duplicate = rescore_saddle_start(
+        {
+            "force_calls": 1100,
+            "energy": -1770.0,
+            "force_norm": 0.0004,
+            "hessian_index": 1,
+            "expected_index": 1,
+            "eon_connected": True,
+            "barrier": 0.62,
+            "reasons": ["duplicate", "barrier"],
+            "success": False,
+            "failure": "divergence",
+        },
+        force_tol=0.001,
+        cap=20000,
+    )
+    assert duplicate["success"] is True
+    assert duplicate["low_barrier"] is False
+    novel = rescore_saddle_start(
+        {
+            "force_calls": 1200,
+            "energy": -1770.0,
+            "force_norm": 0.0004,
+            "hessian_index": 1,
+            "expected_index": 1,
+            "eon_connected": True,
+            "barrier": 0.62,
+            "reasons": ["barrier"],
+            "success": False,
+            "failure": "divergence",
+        },
+        force_tol=0.001,
+        cap=20000,
+    )
+    assert novel["low_barrier"] is True
+    missed = rescore_saddle_start(
+        {
+            "force_calls": 1261,
+            "energy": -1769.9,
+            "force_norm": 0.00094,
+            "hessian_index": 1,
+            "expected_index": 1,
+            "eon_connected": False,
+            "reasons": ["not_connected"],
+            "success": False,
+            "failure": "divergence",
+        },
+        force_tol=0.001,
+        cap=20000,
+    )
+    assert missed["success"] is False
+    assert missed["failure"] == "wrong_stationary"
+    clean = rescore_saddle_start(
+        {
+            "force_calls": 800,
+            "energy": None,
+            "force_norm": None,
+            "hessian_index": None,
+            "eon_connected": False,
+            "reasons": ["divergence"],
+            "error": "ErrorType.EVENT_NOT_FOUND: No event found",
+            "success": False,
+            "failure": "divergence",
+        },
+        force_tol=0.001,
+        cap=20000,
+    )
+    assert clean["failure"] == "not_converged"
+    capped = rescore_saddle_start(
+        {
+            "force_calls": 10000,
+            "energy": -1.0,
+            "force_norm": 0.5,
+            "hessian_index": None,
+            "eon_connected": False,
+            "reasons": ["cap"],
+            "success": False,
+            "failure": "cap",
+        },
+        force_tol=0.001,
+        cap=10000,
+    )
+    assert capped["failure"] == "cap"

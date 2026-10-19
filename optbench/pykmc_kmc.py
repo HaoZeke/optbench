@@ -6,8 +6,10 @@ the sum of ``prefactor * exp(-barrier / kT)`` reaches 0.999 of the
 reference rate. The aluminum adatom score uses the same columns as the
 eOn AKMC reducer in ``optbench/eon_amd.py``.
 
-The saddle catalogue writes one endpoint record per search. The link
-test itself is unchanged. A later rescore can read the two minima.
+The saddle catalogue writes one endpoint record per search. A harness
+success is a connected index-1 saddle at the force stop. The barrier
+window and the novelty test count the catalogue. A finite clean stop
+is not divergence.
 """
 
 from __future__ import annotations
@@ -209,6 +211,65 @@ def endpoint_record(
     }
 
 
+def rescore_saddle_start(record: Mapping, *, force_tol: float, cap: int | None) -> dict:
+    """Class one stored saddle search. The geometries and the call count stay.
+
+    A connected index-1 saddle whose force is at the stop is a success.
+    The barrier window and the duplicate test are not that decision.
+    A finite search with no index-1 saddle is ``not_converged``. An
+    index-1 saddle that misses the link is ``wrong_stationary``.
+    """
+    out = dict(record)
+    calls = float(out["force_calls"])
+    energy = out.get("energy")
+    force = out.get("force_norm")
+    hessian = out.get("hessian_index")
+    expected = 1 if out.get("expected_index") is None else int(out["expected_index"])
+    finite_energy = isinstance(energy, (int, float)) and math.isfinite(float(energy))
+    finite_force = isinstance(force, (int, float)) and math.isfinite(float(force))
+    blown = (energy is not None and not finite_energy) or (force is not None and not finite_force)
+    at_cap = cap is not None and math.isfinite(calls) and calls >= float(cap)
+    at_stop = finite_force and float(force) <= float(force_tol)
+    index_ok = hessian is not None and int(hessian) == expected
+    linked = bool(out.get("eon_connected"))
+    old_reasons = {str(item) for item in (record.get("reasons") or [])}
+    barrier = out.get("barrier")
+    out["low_barrier"] = False
+    if blown:
+        out["success"] = False
+        out["failure"] = "divergence"
+        out["reasons"] = ["divergence"]
+        return out
+    if at_cap:
+        out["success"] = False
+        out["failure"] = "cap"
+        out["reasons"] = ["cap"]
+        return out
+    if linked and at_stop and index_ok and finite_energy:
+        out["success"] = True
+        out["failure"] = None
+        out["reasons"] = []
+        novel = "duplicate" not in old_reasons
+        out["low_barrier"] = bool(
+            novel and isinstance(barrier, (int, float)) and 0.0 < float(barrier) < 1.5
+        )
+        return out
+    if at_stop and finite_energy and hessian is not None and int(hessian) != expected:
+        out["success"] = False
+        out["failure"] = "wrong_stationary"
+        out["reasons"] = ["hessian_index"]
+        return out
+    if at_stop and index_ok and finite_energy:
+        out["success"] = False
+        out["failure"] = "wrong_stationary"
+        out["reasons"] = ["not_connected"]
+        return out
+    out["success"] = False
+    out["failure"] = "not_converged"
+    out["reasons"] = ["solver"]
+    return out
+
+
 def _fmt(value: float) -> str:
     return f"{float(value):.10g}"
 
@@ -251,7 +312,9 @@ def htst_dat(
     lines.append(f"problem {problem['id']}")
     lines.append("counter harness")
     lines.append(f"reducer {template.get('reducer', 'htst-cycles')}")
-    lines.append(f"cap {int(template['failure_cap'])}")
+    cap = template.get("failure_cap")
+    if cap not in (None, ""):
+        lines.append(f"cap {int(cap)}")
     if partial:
         lines.append("partial true")
     return "\n".join(lines) + "\n"
