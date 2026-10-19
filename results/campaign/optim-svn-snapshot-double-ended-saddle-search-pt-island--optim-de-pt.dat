@@ -1,0 +1,19 @@
+# counter harness. Each ASE COMPUTE is one pes.evaluate. OPTIM's energy+gradient calls are not the score.
+# odata preamble de-pt.txt is the 2014 archive file. Archive force_calls 103. The binary is the svn snapshot, not wales-27058.
+# wall_s_median 8.69287
+force_calls 138
+force_calls_min 95
+force_calls_max 327
+force_calls_median 133
+successes 59
+nfailed 0
+n 59
+transition_states 59
+code optim
+code_version svn-snapshot
+commit 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f
+algorithm DNEB + hybrid eigenvector following
+template optim/de-pt
+problem double-ended-saddle-search/pt-island
+tuning wales-2014
+counter harness
