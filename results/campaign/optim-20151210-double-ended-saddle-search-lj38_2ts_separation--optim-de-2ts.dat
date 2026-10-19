@@ -3,8 +3,7 @@
 # One force call is the last OPTIM energy+gradient calls value. A success is Connected path found.
 # Native LJDIFF, symbol AX, archived odata, PERMDIST compiled in.
 # Tarball sha256 79c722dc6a63514acfe623ba007696778064d0b4e327a4798fd4233cc880b97c.
-# The socket runner does not build this row. The board ranks this campaign file.
-# Pair 32 connected in 15415 calls. That is past the harness cap of 10000, and the paper still counts it. The start sets counted_past_cap so the ranked cost stays the call count.
+# Paper-era diagnostic from the December 2015 binary. Not the ranked row.
 force_calls 3102
 force_calls_min 665
 force_calls_max 15415
@@ -22,5 +21,5 @@ algorithm DNEB + hybrid eigenvector following + Djikstra shortest path
 template optim/de-2ts
 problem double-ended-saddle-search/lj38_2ts_separation
 tuning archive
-counter harness
+counter optim
 images 5

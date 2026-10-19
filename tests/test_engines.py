@@ -68,6 +68,7 @@ def test_new_templates_match_a_problem_stop():
         "pykmc/lattice",
         "optim/unhooked",
         "optim/de-2ts",
+        "optim/de-2ts-stock",
         "optim/lbfgs-lj38",
         "optim/lbfgs-morse",
         "lammps/cg-lj38",

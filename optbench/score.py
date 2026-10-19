@@ -226,22 +226,8 @@ def wilson_interval(successes: int, starts: int, z: float = WILSON_Z) -> tuple[f
     return low, high
 
 
-def penalised_cost(
-    force_calls: float,
-    success: bool,
-    cap: int | None,
-    factor: int = PAR_FACTOR,
-    *,
-    counted_past_cap: bool = False,
-) -> float:
-    """PAR cost. A failure, or a success at or above the cap, costs ``factor * cap``.
-
-    ``counted_past_cap`` is a recorded success the problem cap does not
-    describe. The cost stays the call count. A harness or asv start does
-    not set it, so a success at the cap remains a penalty.
-    """
-    if counted_past_cap and success:
-        return float(force_calls)
+def penalised_cost(force_calls: float, success: bool, cap: int | None, factor: int = PAR_FACTOR) -> float:
+    """PAR cost. A failure, or a success at or above the cap, costs ``factor * cap``."""
     if cap is not None and (not success or force_calls >= cap):
         return float(factor * cap)
     if not success:
@@ -353,15 +339,7 @@ def score_v2(
         success = bool(record["success"])
         if success:
             successes += 1
-        costs.append(
-            penalised_cost(
-                float(record["force_calls"]),
-                success,
-                cap,
-                factor,
-                counted_past_cap=record.get("counted_past_cap") is True,
-            )
-        )
+        costs.append(penalised_cost(float(record["force_calls"]), success, cap, factor))
     starts = len(records)
     low, high = wilson_interval(successes, starts)
     summary = distribution_summary(costs, resamples=resamples, seed=seed)

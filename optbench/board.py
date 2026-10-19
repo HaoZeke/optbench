@@ -335,15 +335,9 @@ def _record_from_raw(raw: dict, cap: int | None, force_tol: float | None) -> dic
         failure = None
     else:
         return None
-    # A start at the cap is a failure. ``counted_past_cap`` is the one
-    # exception: the campaign recorded a success the harness cap does not
-    # describe, and the call count stays the cost.
-    counted_past_cap = raw.get("counted_past_cap") is True
-    if cap is not None and calls >= cap and not counted_past_cap:
+    if cap is not None and calls >= cap:
         success = False
     record: dict = {"force_calls": calls, "success": success, "start": raw.get("start") or raw.get("geometry")}
-    if counted_past_cap:
-        record["counted_past_cap"] = True
     if raw.get("per_image") is not None:
         try:
             record["per_image"] = float(raw["per_image"])

@@ -7,7 +7,7 @@ code_version = "2015-12-10"
 commit = "79c722dc6a63514acfe623ba007696778064d0b4e327a4798fd4233cc880b97c"
 algorithm = "DNEB + hybrid eigenvector following + Djikstra shortest path"
 tuning = "archive"
-note = "December 2015 Wales svn.tar.bz2 (sha256 79c722dc6a63514acfe623ba007696778064d0b4e327a4798fd4233cc880b97c, 21974243 bytes). Native LJDIFF via symbol AX, not the ASE socket. odata is templates/optim/preambles/de-2ts.txt plus the start coordinates, and finish is the bare end coordinates. PERMDIST is compiled in. The score is 51 pairs, start_0.xyz through start_50.xyz. The 2014 run.sh loop is {0..49} and does not run pair 50. The coordinate archive and this problem's sample are 51 pairs, so the campaign scores all 51. A success is the line Connected path found. force_calls is round of the mean of the last energy+gradient calls value over those successes. Pair 32 connected in 15415 calls, past the harness cap of 10000, and the paper still counts it. That start sets counted_past_cap, so the ranked cost stays the call count. The socket runner does not build this row. The campaign file is what the board ranks."
+note = "December 2015 Wales svn.tar.bz2 (sha256 79c722dc6a63514acfe623ba007696778064d0b4e327a4798fd4233cc880b97c, 21974243 bytes). Unranked diagnostic. Native LJDIFF via symbol AX and the archived odata, 51 pairs, start_0.xyz through start_50.xyz. The ranked row is optim/de-2ts-stock."
 
 [optim]
 method = "dneb"

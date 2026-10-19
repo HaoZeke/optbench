@@ -35,8 +35,28 @@ def test_the_ledger_covers_the_oracle_in_order():
             assert row["cause"]
         if (row.get("rerun") or {}).get("paper_baseline"):
             assert status == "reproduced"
-    assert counts == {"reproduced": 47, "not_reproduced": 28, "not_rerun": 76}
+    assert counts == {"reproduced": 46, "not_reproduced": 29, "not_rerun": 76}
     assert reproduction_errors(ROOT) == []
+
+
+def test_lj38_2ts_stock_records_the_version_and_stays_ranked():
+    ledger = {row_id(row): row for row in load_ledger(ROOT / "oracle" / "reproduction.jsonl")}
+    row = ledger["double-ended-saddle-search/lj38_2ts_separation/optim"]
+    assert row["status"] == "not_reproduced"
+    assert row["cause"] == "optim_stock"
+    assert row["rerun"]["paper_baseline"] is False
+    assert row["rerun"]["code_version"] == "r26635"
+    assert row["rerun"]["exact"] is False
+    assert row["rerun"]["template"] == "optim/de-2ts-stock"
+    assert row["checks"][0]["archive"] == 2885
+    assert row["checks"][0]["rerun"] == 6118
+    assert row["checks"][0]["ok"] is False
+    assert row["failure_check"]["rerun"] == 45
+    assert row["failure_check"]["sample"] == 51
+    held = holdback(ROOT)
+    problem = "double-ended-saddle-search/lj38_2ts_separation"
+    assert (problem, "optim/de-2ts-stock") not in held.templates
+    assert row["rerun"]["path"] not in held.paths
 
 
 def test_pele_paper_baseline_is_the_2014_stop():

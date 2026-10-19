@@ -5,10 +5,11 @@ The binary is the OPTIM target from the Wales snapshot
 that file. The snapshot has no git commit. Each ``COMPUTE`` on the relay
 is one ``pes.evaluate``. That harness count is the minimization score.
 
-``optim/de-2ts`` is the December 2015 native LJDIFF campaign. Its score
-is OPTIM's own energy-plus-gradient counter on all 51 pairs, written in
-the campaign file. That file is the ranked row. This socket runner
-refuses the template.
+``optim/de-2ts-stock`` is the current public OPTIM binary with the
+stock LJ38 ``newconnect.bfgsts.nohess`` keywords. The campaign records
+OPTIM's energy-plus-gradient counter on the 51 archive pairs, and that
+file is the ranked row. ``optim/de-2ts`` is the December 2015 diagnostic
+and stays unranked. This socket runner runs neither template.
 
 ``optim/unhooked`` and every other template that is not minimization
 L-BFGS raise before a file is written. Noise, saddle search, NEB, and
@@ -286,10 +287,24 @@ def _job(start: dict, settings: dict, template: dict) -> dict:
 
 
 def run(root: Path, problem_name: str, template_name: str, *, output: Path, workers: int = 1) -> dict:
+    if template_name == "optim/de-2ts-stock":
+        root = Path(root)
+        from optbench.campaign import load_template, resolve_problem
+
+        from .optim_dneb import run_dneb_stock
+
+        problem = resolve_problem(root, problem_name)
+        template = load_template(root, template_name)
+        if template["engine"] != ENGINE:
+            raise ValueError(f"{template_name} engine is {template['engine']}")
+        stated = template.get("problem")
+        if stated and stated != problem_name:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return run_dneb_stock(root, problem, template, output, workers)
     if template_name == "optim/de-2ts":
         raise RuntimeError(
-            "optim/de-2ts is scored from the December 2015 native OPTIM "
-            "energy+gradient counter. The ASE socket does not run it."
+            "optim/de-2ts is the December 2015 diagnostic. "
+            "The ranked row is optim/de-2ts-stock. The ASE socket does not run either."
         )
     reason = available()
     if reason:

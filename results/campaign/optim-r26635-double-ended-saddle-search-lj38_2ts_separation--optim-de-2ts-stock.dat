@@ -1,0 +1,21 @@
+# OPTIM r26635, current public svn.tar.bz2. Stock newconnect.bfgsts.nohess keywords. Archive pairs 0-50.
+# The count is OPTIM's energy+gradient calls. A success is Connected path found under the problem cap.
+force_calls 6118
+force_calls_min 3749
+force_calls_max 8205
+force_calls_median 6162.5
+force_calls_per_image 1224
+call_unit total
+successes 6
+nfailed 45
+n 51
+transition_states 0
+code optim
+code_version r26635
+commit 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31
+algorithm DNEB + hybrid eigenvector following + Djikstra shortest path
+template optim/de-2ts-stock
+problem double-ended-saddle-search/lj38_2ts_separation
+tuning default
+counter harness
+images 5

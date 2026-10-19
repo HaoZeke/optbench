@@ -177,7 +177,7 @@ MATCHES: list[dict] = [
     {"key": "double-ended-saddle-search/lj38/eon-lanczos", "template": "eon-client/de-lj38-lanczos", "branch": "main", "path": "results/campaign/eon-client-de-lj38-lanczos.dat"},
     {"key": "double-ended-saddle-search/lj38/eon-lanczos-improved", "template": "eon-client/de-lj38-lanczos-improved", "branch": "main", "path": "results/campaign/eon-client-de-lj38-lanczos-improved.dat"},
     {"key": "double-ended-saddle-search/lj38/optim", "template": "optim/de-lj38", "branch": "cells/optim/saddle-pt", "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-lj38--optim-de-lj38.dat", "cause": "optim_pes_counter"},
-    {"key": "double-ended-saddle-search/lj38_2ts_separation/optim", "template": "optim/de-2ts", "branch": "repro/double-ended-saddle-search-lj38-2ts-separation-optim", "path": "results/campaign/optim-20151210-double-ended-saddle-search-lj38_2ts_separation--optim-de-2ts.dat"},
+    {"key": "double-ended-saddle-search/lj38_2ts_separation/optim", "template": "optim/de-2ts-stock", "branch": "repro/double-ended-saddle-search-lj38-2ts-separation-optim", "path": "results/campaign/optim-r26635-double-ended-saddle-search-lj38_2ts_separation--optim-de-2ts-stock.dat", "cause": "optim_stock", "extra": {"code_version": "r26635", "exact": False}},
     {"key": "double-ended-saddle-search/pt-island/eon-ci-neb", "template": "eon-svn/de-pt-ci-neb", "branch": "main", "path": "results/campaign/eon-svn-de-pt-ci-neb.dat"},
     {"key": "double-ended-saddle-search/pt-island/eon-ci-swdneb", "template": "eon-svn/de-pt-ci-swdneb", "branch": "main", "path": "results/campaign/eon-svn-de-pt-ci-swdneb.dat"},
     {"key": "double-ended-saddle-search/pt-island/eon-dimer", "template": "eon-svn/de-pt-dimer", "branch": "main", "path": "results/campaign/eon-svn-de-pt-dimer.dat"},
@@ -237,6 +237,10 @@ CAUSE_TEXT = {
     "optim_pes_counter": (
         "The template note records the 2014 mean as OPTIM's own energy-plus-gradient calls. "
         "The harness score is pes.evaluate on the harness potential."
+    ),
+    "optim_stock": (
+        "OPTIM r26635 with the stock LJ38 newconnect.bfgsts.nohess keywords on the 51 archive pairs. "
+        "The archived number is the paper row. The gap is the finding. The keywords were not tuned."
     ),
     "optim_morse_memory": (
         "comments.txt sets L-BFGS memory 100 and maximum move 2.0. That rerun scores 27. "
@@ -530,7 +534,9 @@ def holdback(root: Path) -> Hold:
         rerun = row.get("rerun") or {}
         problem = f"{row['suite']}/{row['problem']}"
         template = str(rerun.get("template") or "")
-        if row.get("status") == "not_reproduced":
+        # A stock run is not an exact archive setup. The gap stays in the
+        # ledger, and the full harness row stays on the ranked table.
+        if row.get("status") == "not_reproduced" and rerun.get("exact") is not False:
             if template:
                 found.templates.add((problem, template))
             rel = str(rerun.get("path") or "")
