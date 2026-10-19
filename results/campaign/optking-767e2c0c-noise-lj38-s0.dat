@@ -1,0 +1,35 @@
+# counter harness. One fresh coordinate is one force call.
+# A repeated coordinate is free. A call at the cap is refused and is not counted.
+# Legacy success is the force stop. v2 success also requires Hessian index 0.
+# sigma 0 uses the clean force and Hessian rule. Positive sigma compares the clean energy and Kabsch RMSD with an uncounted clean minimization. The tolerance is max(0.01, kappa * sigma).
+# sigma 0.0. Noise is drawn inside the harness evaluation, so one geometry keeps one sample. Positive sigma is compared with an uncounted clean minimization of the same start.
+force_calls 752
+force_calls_min 240
+force_calls_max 6331
+force_calls_median 576
+nfailed 0
+median 576
+code optking
+code_version 767e2c0c
+commit 767e2c0c13ff2b851ac82101ccd5aab9a558a4f1
+algorithm OptKing
+template optking/noise-lj38-s0
+problem minimization/lj38-noise
+tuning s0
+counter harness
+cap 10000
+par2_mean 810.782
+wilson_low 0.991216985946
+wilson_high 0.998979216119
+par2_median 577.5
+par2_median_low 552
+par2_median_high 591
+v2_nfailed 3
+v2_successes 997
+n 1000
+n_cap 0
+n_wrong_stationary 3
+n_divergence 0
+n_crash 0
+energy_min -170.875837828
+energy_max -150.84182006
