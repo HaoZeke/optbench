@@ -9,8 +9,8 @@ commit f77cda4a261872a633da45d05d77225d0bba0f96
 algorithm Lanczos
 template tsase-410/lj38-lanczos
 problem lowest-eigenvector/lj38
-counter harness
+counter diagnostic
 reducer all
 parameter_source archive
 unrounded_mean 25.05
-note Archive dimer_rotate.py: lanczos_atoms phi_tol 0, ss false, dR 0.001, shared RandomState(314159) mode. report.sh keeps forceCalls of the rotationMax that first exceeds overlap 0.99 and writes nfailed 0. One harness force call is one update_general_forces on that successful object. The potential is lj/cut epsilon 1 sigma 1 cutoff 40.
+note Unranked diagnostic of the 2014 dimer_rotate.py setup at r410. The ranked row is stock TSASE 1.0. Archive settings were phi_tol 0, ss false, dR 0.001, and the shared RandomState(314159) mode. report.sh keeps forceCalls of the rotationMax that first exceeds overlap 0.99.

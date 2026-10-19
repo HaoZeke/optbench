@@ -1,0 +1,15 @@
+# counter harness. One force call is one ASE calculate inside stock lanczos_atoms.
+# TSASE 1.0 commit 98aac60, constructor defaults only. numpy.random.seed(0) pins vrand.
+# Success is absolute overlap 0.99. The search is not extended to reach it.
+successes 0
+nfailed 200
+n 200
+transition_states 0
+code tsase
+code_version 1.0
+commit 98aac60b5d9905e81ee4e6b8c385f169258d0218
+algorithm Lanczos
+template tsase/lj38-lanczos
+problem lowest-eigenvector/lj38
+tuning stock
+counter harness

@@ -158,7 +158,7 @@ It does not run a campaign.
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
    <td data-code="optim">—</td>
-   <td data-code="tsase" data-template="tsase-410/lj38-lanczos" data-par2="25.05"><span class="bench-score">25.05</span><a href="generated/suites/lowest-eigenvector.html#lj38-templates">tsase-410/lj38-lanczos</a></td>
+   <td data-code="tsase" data-template="tsase/mode-lj38" data-par2="2420.61"><span class="bench-score">2420.61</span><a href="generated/suites/lowest-eigenvector.html#lj38-templates">tsase/mode-lj38</a></td>
    </tr>
    <tr data-problem="tsopt/LJ38">
    <th scope="row"><a href="generated/suites/tsopt.html#LJ38">LJ38</a></th>

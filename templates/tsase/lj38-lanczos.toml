@@ -1,0 +1,20 @@
+# Stock Lanczos from TSASE current main. Constructor defaults are not the 2014 script.
+id = "tsase/lj38-lanczos"
+engine = "tsase-stock"
+problem = "lowest-eigenvector/lj38"
+code = "tsase"
+code_version = "1.0"
+commit = "98aac60b5d9905e81ee4e6b8c385f169258d0218"
+algorithm = "Lanczos"
+tuning = "stock"
+ranked = true
+parameter_source = "stock"
+note = "TSASE main 98aac60, lanczos_atoms defaults (phi_tol 5 degrees, rotationMax 4, dR 0.001, ss false, random mode). The harness scores overlap 0.99 on the archive starts. Defaults are not adjusted toward the 2014 mean."
+
+[stop]
+norm = "overlap"
+overlap = 0.99
+max_force_calls = 10000
+
+[input]
+archive_path = "website/lowest-eigenvector/lj38/coords-con.tar.gz"

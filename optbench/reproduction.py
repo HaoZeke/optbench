@@ -154,7 +154,7 @@ MATCHES: list[dict] = [
     {"key": "lowest-eigenvector/lj38/eon-dimer-lbfgs", "template": "eon-client/low-lj38-dimer-lbfgs", "branch": "main", "path": "results/campaign/eon-client-low-lj38-dimer-lbfgs.dat"},
     {"key": "lowest-eigenvector/lj38/eon-lanczos", "template": "eon-svn/low-lj38-lanczos-ljcut", "branch": "main", "path": "results/campaign/eon-svn-low-lj38-lanczos-ljcut.dat"},
     {"key": "lowest-eigenvector/lj38/sella", "template": "sella-0.1.1/lj38-loweig", "branch": "cells/fill-not-rerun", "path": "results/campaign/sella-0.1.1-lj38-loweig.dat"},
-    {"key": "lowest-eigenvector/lj38/tsase-lanczos", "template": "tsase-410/lj38-lanczos", "branch": "repro/lowest-eigenvector-lj38-tsase-lanczos", "path": "results/campaign/tsase-410-lj38-lanczos.dat"},
+    {"key": "lowest-eigenvector/lj38/tsase-lanczos", "template": "tsase-410/lj38-lanczos", "branch": "repro/lowest-eigenvector-lj38-tsase-lanczos", "path": "results/campaign/tsase-410-lj38-lanczos.dat", "extra": {"current_code_version": "1.0", "current_commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218", "current_template": "tsase/lj38-lanczos", "current_path": "results/campaign/tsase-1.0-lj38-lanczos.dat"}},
     {"key": "lowest-eigenvector/lj38/pele-first-order", "template": "pele/lj38-loweig-forward", "branch": "cells/pele/ts", "path": "results/campaign/pele-b7081b93-lj38-loweig-forward.dat"},
     {"key": "lowest-eigenvector/lj38/pele-second-order", "template": "pele/lj38-loweig-central", "branch": "cells/pele/ts", "path": "results/campaign/pele-b7081b93-lj38-loweig-central.dat"},
     {"key": "lowest-eigenvector/lj38/optim-first-order", "template": "optim/rr-loweig", "branch": "cells/optim/saddle-pt", "path": "results/campaign/optim-df8da599-rr-loweig.dat", "cause": "optim_rr_defaults"},

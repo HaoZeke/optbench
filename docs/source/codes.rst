@@ -766,15 +766,15 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 20, cap 1, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
-   <tr data-problem="lowest-eigenvector/lj38" data-template="tsase-410/lj38-lanczos">
+   <tr data-problem="lowest-eigenvector/lj38" data-template="tsase/mode-lj38">
    <td>lj38</td>
-   <td data-field="template">tsase-410/lj38-lanczos</td>
-   <td data-field="version">tsase 410</td>
-   <td data-field="commit">f77cda4a2618</td>
-   <td data-field="par2_mean">25.05</td>
-   <td data-field="mean_calls">25.05</td>
-   <td data-field="median_calls">24</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="template">tsase/mode-lj38</td>
+   <td data-field="version">tsase 1.0</td>
+   <td data-field="commit">98aac60b5d99</td>
+   <td data-field="par2_mean">2420.61</td>
+   <td data-field="mean_calls">267.945</td>
+   <td data-field="median_calls">233</td>
+   <td data-field="failures">crash 0, divergence 22, cap 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="minimization/lj38" data-template="tsase/lbfgs-lj38">
@@ -833,6 +833,9 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">49</td>
    </tr>
    </tbody></table></div>
+   <p>No full ranked run</p><ul>
+   <li>lj38: not yet on the harness counter.</li>
+   </ul>
    <h3>pyKMC</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
