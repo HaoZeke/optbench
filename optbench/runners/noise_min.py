@@ -170,6 +170,20 @@ def _minimize_job(job: dict) -> dict:
                 drive_pyberny(x0, observed, _met, cap, job["options"], sink)
             point = [float(value) for value in sink["point"]]
             stopped = bool(sink["stopped"])
+        elif family == "gmin":
+            point, stopped = _drive_gmin(job, x0, observed, potential, cap, clean_tol, energy_tol, components)
+        elif family == "vcsqnm":
+            point, stopped, drive_error = _drive_vcsqnm(
+                job, x0, observed, potential, cap, clean_tol, energy_tol, components
+            )
+            if drive_error:
+                error = drive_error
+        elif family == "pele":
+            point, stopped, drive_error = _drive_pele(
+                job, x0, observed, cap, clean_tol, energy_tol, components
+            )
+            if drive_error:
+                error = drive_error
         else:
             raise ValueError(f"unknown solver family {family}")
     except ForceCallCap as exc:
@@ -350,6 +364,41 @@ def _step_optimizer(opt, observed, potential, cap, clean_tol, energy_tol, compon
     return observed.met(clean_tol, energy_tol, components)
 
 
+def _drive_gmin(job, x0, observed, potential, cap, clean_tol, energy_tol, components):
+    import numpy as np
+
+    from optbench.gmin_lbfgs import DEFAULTS, minimize
+
+    x = np.asarray(x0, dtype=np.float64).copy()
+    sigma = float(job["sigma"])
+    options = job["options"]
+    threshold = stop_threshold(clean_tol, sigma, components, KAPPA)
+
+    def evaluate(coords):
+        energy, gradient = observed(coords)
+        return float(energy), np.asarray(gradient, dtype=np.float64)
+
+    def ready():
+        return observed.met(clean_tol, energy_tol, components)
+
+    result = minimize(
+        x,
+        evaluate,
+        gtol=threshold,
+        cap=cap,
+        m=int(options.get("m", DEFAULTS["m"])),
+        maxbfgs=float(options.get("maxbfgs", DEFAULTS["maxbfgs"])),
+        dguess=float(options.get("dguess", DEFAULTS["dguess"])),
+        maxerise=float(options.get("maxerise", DEFAULTS["maxerise"])),
+        maxefall=float(options.get("maxefall", DEFAULTS["maxefall"])),
+        ready=ready,
+    )
+    if result.capped:
+        raise ForceCallCap("force-call cap")
+    stopped = bool(result.mflag and result.info == 0 and observed.met(clean_tol, energy_tol, components))
+    return [float(value) for value in result.coords], stopped
+
+
 def _drive_ase(job, x0, observed, potential, cap, clean_tol, energy_tol, components):
     from optbench.ase_sella import _build_optimizer
 
@@ -361,6 +410,84 @@ def _drive_ase(job, x0, observed, potential, cap, clean_tol, energy_tol, compone
     stopped = _step_optimizer(opt, observed, potential, cap, clean_tol, energy_tol, components)
     point = [float(value) for row in atoms.positions for value in row]
     return point, stopped
+
+
+def _drive_vcsqnm(job, x0, observed, potential, cap, clean_tol, energy_tol, components):
+    import numpy as np
+
+    from optbench.runners.vcsqnm_min import drive
+
+    method = str(job["method"])
+    if method not in {"sqnm", "ase"}:
+        raise ValueError(f"{method} is not a fixed-cell SQNM method")
+
+    class _Noisy:
+        def __init__(self):
+            self.energy = None
+            self.grad = None
+            self.last_deriv = None
+
+        def __call__(self, flat, cell=None):
+            energy, grad = observed(flat)
+            self.energy = float(energy)
+            self.grad = np.asarray(grad, dtype=np.float64).reshape(-1)
+            return self.energy, self.grad
+
+    seen = _Noisy()
+    result = drive(
+        x0,
+        method,
+        dict(job["options"]),
+        seen,
+        lambda: observed.met(clean_tol, energy_tol, components),
+        lambda: potential.counter.calls,
+        cap,
+        None,
+    )
+    return result["point"], bool(result["stopped"]), str(result["error"])
+
+
+class _PeleObserved:
+    """pele potential over the noisy harness force.
+
+    Counting stays in ``observed``. ``last`` is the last evaluated point.
+    """
+
+    def __init__(self, observed):
+        self.observed = observed
+        self.counter = observed.potential.counter
+        self.last: list[float] | None = None
+
+    def getEnergyGradient(self, coords):
+        import numpy as np
+
+        flat = np.asarray(coords, dtype=np.float64).reshape(-1)
+        energy, gradient = self.observed(flat)
+        self.last = [float(value) for value in flat]
+        return float(energy), np.asarray(gradient, dtype=np.float64)
+
+    def getEnergy(self, coords):
+        energy, _gradient = self.getEnergyGradient(coords)
+        return energy
+
+
+def _drive_pele(job, x0, observed, cap, clean_tol, energy_tol, components):
+    from optbench.runners.pele_min import drive_minimizer, merged_options
+
+    method = str(job["method"])
+    options = merged_options(method, dict(job["options"]))
+
+    def stop(*, energy, gradient, tol, coords=None) -> bool:
+        return observed.met(clean_tol, energy_tol, components)
+
+    return drive_minimizer(
+        method,
+        x0,
+        _PeleObserved(observed),
+        stop=stop,
+        cap=int(cap),
+        options=options,
+    )
 
 
 def _drive_sella(job, x0, observed, potential, cap, clean_tol, energy_tol, components):
@@ -539,6 +666,30 @@ def run_template(
         version = library_version(family)
         if template.get("code_version") and version != str(template["code_version"]):
             raise RuntimeError(f"{family} {version} does not match template {template['code_version']}")
+    if family == "gmin":
+        from optbench.gmin_lbfgs import require_revision
+
+        found = require_revision(str(template.get("commit") or ""))
+        version = str(template.get("code_version") or "")
+        if version and not found.startswith(version):
+            raise RuntimeError(f"GMIN revision {found} does not match template {version}")
+    if family == "vcsqnm":
+        from optbench.runners.vcsqnm_min import assert_pin
+        from optbench.vcsqnm_catalog import CODE_VERSION, COMMIT
+
+        assert_pin()
+        if str(template.get("commit") or "") != COMMIT:
+            raise RuntimeError(f"{template['id']} commit is not {COMMIT}")
+        if str(template.get("code_version") or "") != CODE_VERSION:
+            raise RuntimeError(f"{template['id']} code_version is not tag {CODE_VERSION}")
+        if str(solver.get("method")) not in {"sqnm", "ase"}:
+            raise ValueError(f"{template['id']} moves a cell this potential does not have")
+    if family == "pele":
+        from importlib.metadata import version
+
+        found = version("pele")
+        if template.get("code_version") and found != str(template["code_version"]):
+            raise RuntimeError(f"pele {found} does not match template {template['code_version']}")
     convergence = problem.get("convergence") or {}
     clean_tol = float(convergence["force_norm"])
     if "energy_tol" not in convergence:

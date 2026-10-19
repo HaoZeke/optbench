@@ -76,6 +76,8 @@ def _specs() -> list[dict]:
         if engine not in {"optking", "pyberny"}:
             continue
         problem_id = str(template["problem"])
+        if not problem_id.startswith("minimization/"):
+            continue
         if problem_id not in counts:
             counts[problem_id] = _archive_count(problem_id) if os.environ.get("OPTBENCH_ASV_FULL") == "1" else 1
         problem = resolve_problem(ROOT, problem_id)

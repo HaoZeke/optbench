@@ -30,7 +30,8 @@ def test_geomopt_templates_match_the_registry_pins():
     found = [
         row
         for row in list_templates(ROOT)
-        if str(row["id"]).startswith("optking/") or str(row["id"]).startswith("pyberny/")
+        if str(row.get("problem")) == "minimization/lj38"
+        and (str(row["id"]).startswith("optking/") or str(row["id"]).startswith("pyberny/"))
     ]
     assert {row["id"] for row in found} == {
         "optking/lj38-rfo-cartesian",

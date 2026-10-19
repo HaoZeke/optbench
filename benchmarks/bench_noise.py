@@ -34,12 +34,20 @@ def _class_name(template_id: str) -> str:
 def _ready(family: str) -> bool:
     import importlib.util
 
+    if family == "gmin":
+        try:
+            from optbench.gmin_lbfgs import available
+        except ImportError:
+            return False
+        return available()
     names = {
         "rgmin": "rgmin",
         "ase": "ase",
         "sella": "sella",
         "optking": "optking",
         "pyberny": "berny",
+        "vcsqnm": "sqnm.sqnm",
+        "pele": "pele",
     }
     module = names.get(family)
     if module is None:

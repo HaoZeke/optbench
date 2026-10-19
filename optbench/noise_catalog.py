@@ -25,6 +25,10 @@ OPTKING_COMMIT = "767e2c0c13ff2b851ac82101ccd5aab9a558a4f1"
 OPTKING_VERSION = "0.5.1.dev2+g767e2c0c1"
 PYBERNY_COMMIT = "2c732230c543455dc4c318fed8ab8cb7b5f9face"
 PYBERNY_VERSION = "0.7.0.post2.dev0+2c73223"
+GMIN_COMMIT = "df8da599267534fbe43a250e578f7396a7946311"
+GMIN_VERSION = "df8da5992675"
+PELE_COMMIT = "b7081b932a060be11342fbe8287ac35da8ada879"
+PELE_VERSION = "0.1.2"
 
 _SLUGS = ((0.0, "s0"), (1e-4, "s1em4"), (1e-3, "s1em3"), (1e-2, "s1em2"))
 
@@ -225,6 +229,91 @@ def specs() -> list[dict]:
                 sigma,
             )
         )
+    gmin_note = (
+        "Default GMIN LBFGS. Memory 4, initial inverse-Hessian diagonal 0.1, maximum step 0.4, "
+        "and MAXERISE 1e-10 are the keyword defaults. The RMS tolerance is the noise-aware force "
+        "norm divided by sqrt(3N). At positive sigma the quench returns once that force stop and "
+        "the clean-energy window both hold. The index is the clean Hessian with the rigid-mode rule."
+    )
+    gmin_solver = {
+        "family": "gmin",
+        "method": "lbfgs",
+        "m": 4,
+        "maxbfgs": 0.4,
+        "dguess": 0.1,
+        "maxerise": 1e-10,
+        "maxefall": -1e300,
+    }
+    for sigma in SIGMAS:
+        found.append(
+            _base(
+                f"noise/gmin-lbfgs-{sigma_slug(sigma)}",
+                "GMIN",
+                GMIN_VERSION,
+                GMIN_COMMIT,
+                "LBFGS",
+                gmin_note,
+                gmin_solver,
+                sigma,
+            )
+        )
+    from optbench.vcsqnm_catalog import CODE, CODE_VERSION, COMMIT, DEFAULT
+
+    sqnm_note = (
+        "Default profile. initial_step_size is -1e-7, alpha_min is 1e-3, and eps_subsp is 1e-5. "
+        "The wrapper constructor uses -0.01 and eps_subsp 1e-3, which let LJ38 leave the cutoff. "
+        "The stop is the noise-aware force norm, and at positive sigma the clean energy over the last window. "
+        "The index is the clean Hessian with the rigid-mode rule. "
+        "Variable-cell SQNM is not on this problem: the spec potential has no cell."
+    )
+    for method, algorithm in (("sqnm", "SQNM"), ("ase", "ASE-SQNM")):
+        for sigma in SIGMAS:
+            solver = {
+                "family": "vcsqnm",
+                "method": method,
+                "initial_step_size": DEFAULT["initial_step_size"],
+                "nhist_max": DEFAULT["nhist_max"],
+                "alpha_min": DEFAULT["alpha_min"],
+                "eps_subsp": DEFAULT["eps_subsp"],
+                "lattice_weight": DEFAULT["lattice_weight"],
+            }
+            found.append(
+                _base(
+                    f"noise/vcsqnm-{method}-{sigma_slug(sigma)}",
+                    CODE,
+                    CODE_VERSION,
+                    COMMIT,
+                    algorithm,
+                    sqnm_note,
+                    solver,
+                    sigma,
+                )
+            )
+    pele_note = (
+        "Default profile. LBFGS and MYLBFGS use memory 4 and maxstep 0.1. "
+        "FIRE uses dt 0.1 and maxstep 0.5. Steepest descent uses dx 1e-4. "
+        "The stop is the noise-aware force norm, and at positive sigma the clean energy over the last window. "
+        "The index is the clean Hessian with the rigid-mode rule."
+    )
+    for slug, method, algorithm in (
+        ("lbfgs", "lbfgs", "LBFGS"),
+        ("mylbfgs", "mylbfgs", "MYLBFGS"),
+        ("fire", "fire", "FIRE"),
+        ("sd", "sd", "steepest descent"),
+    ):
+        for sigma in SIGMAS:
+            found.append(
+                _base(
+                    f"noise/pele-{slug}-{sigma_slug(sigma)}",
+                    "pele",
+                    PELE_VERSION,
+                    PELE_COMMIT,
+                    algorithm,
+                    pele_note,
+                    {"family": "pele", "method": method},
+                    sigma,
+                )
+            )
     return found
 
 
