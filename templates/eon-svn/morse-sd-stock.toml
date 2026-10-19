@@ -1,0 +1,20 @@
+id = "eon-svn/morse-sd-stock"
+engine = "eon-client"
+problem = "minimization/morse-bulk"
+code = "EON (SVN r2549)"
+code_version = "r2549"
+commit = "r2549"
+algorithm = "SD"
+tuning = "stock"
+
+[ini.Main]
+job = "minimization"
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "sd"
+convergence_metric = "norm"
+converged_force = 0.001
+max_iterations = 10000

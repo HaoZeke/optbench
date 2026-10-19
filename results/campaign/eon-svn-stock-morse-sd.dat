@@ -1,0 +1,23 @@
+# EON SVN r2549, Fortran linked, unpatched. Stock steepest descent on the archive force norm.
+# HarnessCounter through ext_pot. Kernel is r2549 Morse::force. sd_alpha stays at the default 0.1 and max_move at 0.2.
+# The step sits on that cap, the force norm oscillates, and every start reaches the 10000-call budget.
+counter harness
+count_keys HarnessCounter
+code EON (SVN r2549)
+code_version r2549
+commit r2549
+algorithm SD
+tuning stock
+template eon-svn/morse-sd-stock
+problem minimization/morse-bulk
+reducer harness
+cap 10000
+n 100
+par2_mean 20000.0
+nfailed 100
+mean_calls 10000.0
+median_calls 10000.0
+n_crash 0
+n_divergence 0
+n_cap 100
+n_wrong_stationary 0
