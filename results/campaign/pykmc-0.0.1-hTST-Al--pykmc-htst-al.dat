@@ -1,20 +1,22 @@
 # counter harness. pyKMC partn_search on the minimized reactant.
 # Temperature 300 K, prefactor 1.2e+12, from archive/entries/hTST/Al/eon-dimer-cg/report.py.
-# A barrier cycle ends when every reference barrier, rounded to 3 decimals, has been seen.
-# A rate cycle ends at 0.999 of rate_ref. The link test is unchanged.
+# A barrier window closes when every reference barrier, rounded to 3 decimals, has been seen once.
+# The ranked sample is 639 barrier windows. The rank is their median sad-fcs. There is no force-call cap.
+# A rate window closes at 0.999 of rate_ref. A missing rate window does not unrank a finished barrier window.
+# Process identity is the top-window RMSD test plus a 0.05 eV barrier gate.
 # The kernel is the r2549 Aluminum EAM, the same family as the eon-svn and eon-client hTST Al rows.
-# matched 8 of 8 reference barriers after 1074 searches.
-# observed barriers: 0.233 0.372 0.452 0.460 0.917 1.064 1.150
-barrier_jobs 65.0625
-barrier_force_calls 57877.875
-barrier_average_over 16
+# matched 8 of 8 reference barriers after 46274 searches. barrier windows 639. rate windows 0.
+# observed barriers: 0.233 0.372 0.438 0.452 0.459 0.460 0.917 0.939 1.056 1.064 1.079 1.144 1.150 1.153 1.204 1.293 1.308 1.336 1.341 1.346
+barrier_jobs 72.41158059
+barrier_force_calls 64635.96401
+barrier_average_over 639
 temperature_K 300
 prefactor 1.2e+12
 rate_ref 592041917
 matched_barriers 8
 reference_barriers 8
-processes 18
-total_searches 1074
+processes 35
+total_searches 46274
 minimize_calls 1
 code pykmc
 code_version 0.0.1
@@ -25,5 +27,3 @@ template pykmc/htst-al
 problem hTST/Al
 counter harness
 reducer htst-cycles
-cap 50000000
-partial true

@@ -1,5 +1,5 @@
 {
-  "full_n": null,
+  "full_n": 639,
   "history": [],
   "id": "hTST/Al",
   "not_comparable": [],
@@ -22,7 +22,7 @@
         "not_converged": 0,
         "wrong_stationary": 0
       },
-      "full_n": null,
+      "full_n": 639,
       "history": false,
       "max_calls": 1216.0,
       "mean_calls": 1216.0,
@@ -68,7 +68,7 @@
         "not_converged": 0,
         "wrong_stationary": 0
       },
-      "full_n": null,
+      "full_n": 639,
       "history": false,
       "max_calls": 1405.0,
       "mean_calls": 1405.0,
@@ -95,41 +95,68 @@
       "tuning": "",
       "wilson_high": 1.0,
       "wilson_low": 0.20654931437723745
+    }
+  ],
+  "profile": {
+    "area_log10": {
+      "pykmc/htst-al 0.0.1 beland-2015-pt111 campaign 9fd1f6e": 1.2041199826559248
     },
+    "rho": {
+      "pykmc/htst-al 0.0.1 beland-2015-pt111 campaign 9fd1f6e": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "solved": {
+      "pykmc/htst-al 0.0.1 beland-2015-pt111 campaign 9fd1f6e": 1.0
+    },
+    "taus": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ]
+  },
+  "ranked": [
     {
       "asv_commit": "",
       "call_unit": "total",
-      "cap": 50000000,
+      "cap": null,
       "code": "pykmc",
       "code_version": "0.0.1",
       "commit": "9fd1f6e9085ef92642142406f3dd74e574209898",
       "comparable": true,
       "counter": "harness",
-      "current": false,
+      "current": true,
       "entry": "pykmc-0.0.1-hTST-Al--pykmc-htst-al",
       "failures": {
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
-      "full_n": null,
+      "full_n": 639,
       "history": false,
-      "max_calls": 109534.0,
-      "mean_calls": 57877.875,
+      "max_calls": 268072.0,
+      "mean_calls": 64635.96400625978,
       "mean_per_image": null,
-      "median": 58189.5,
-      "median_calls": 58189.5,
-      "median_high": 78205.0,
-      "median_low": 36067.0,
+      "median": 56329.0,
+      "median_calls": 56329.0,
+      "median_high": 60108.0,
+      "median_low": 53919.0,
       "median_per_image": null,
-      "min_calls": 13533.0,
-      "n": 16,
+      "min_calls": 7710.0,
+      "n": 639,
       "nfailed": 0,
       "note": "starts.jsonl",
-      "par2_mean": 57877.875,
-      "partial": true,
-      "partial_reason": "result file sets partial true",
+      "par2_mean": null,
+      "partial": false,
+      "partial_reason": "",
       "path": "results/campaign/pykmc-0.0.1-hTST-Al--pykmc-htst-al.dat",
       "problem": "hTST/Al",
       "registry_match": true,
@@ -139,9 +166,8 @@
       "template": "pykmc/htst-al",
       "tuning": "beland-2015-pt111",
       "wilson_high": 1.0,
-      "wilson_low": 0.8063923194655637
+      "wilson_low": 0.9940242515973671
     }
   ],
-  "ranked": [],
   "title": "Al"
 }

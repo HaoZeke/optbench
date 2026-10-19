@@ -111,7 +111,7 @@ success-only median. A row with no success has no median.
 | minimization/lj38 | pysisyphus/sd-lj38 | 205/1000 | 795 cap | 808 |
 | tsopt/pt-island | pykmc/ts-pt | 46/49 | 1 cap, 2 divergence | 746.5 |
 | hTST/Pt | pykmc/htst-pt | 13/13 | 0 | 3367604 |
-| hTST/Al | pykmc/htst-al | 16/16 | partial | 58189.5 |
+| hTST/Al | pykmc/htst-al | 639/639 | 0 | 56329 |
 | accelerated-md/aladatom | pykmc/aladatom | 3/3 | 0 | 166853 |
 | accelerated-md/standard_aladatom | pykmc/standard-aladatom | 3/3 | 0 | 119079 |
 | saddle-search/pt-island | pykmc/saddle-pt | 512/792 | 210 wrong stationary, 69 crash, 1 not converged | 1260.5 |
@@ -511,7 +511,7 @@ island atoms is 1.449. The slab mean is stored as `rmsd_plus_free` and
 | --- | --- | --- | --- | --- | --- |
 | tsopt/pt-island | pykmc/ts-pt | 46/49 | 1 cap, 2 divergence | 746.5 | 1956.45 |
 | hTST/Pt | pykmc/htst-pt | 13/13 | 0 | 3367604 | — |
-| hTST/Al | pykmc/htst-al | 16/16 | partial | 58189.5 | 57877.875 |
+| hTST/Al | pykmc/htst-al | 639/639 | 0 | 56329 | — |
 | accelerated-md/aladatom | pykmc/aladatom | 3/3 | 0 | 166853 | 178325.67 |
 | accelerated-md/standard_aladatom | pykmc/standard-aladatom | 3/3 | 0 | 119079 | 126131.67 |
 | saddle-search/pt-island | pykmc/saddle-pt | 512/792 | 210 wrong stationary, 69 crash, 1 not converged | 1260.5 | 14983.76 |
@@ -631,23 +631,25 @@ times that archive mean. The template ceiling is 250000 searches. The
 run stopped at 13 windows, short of that ceiling.
 
 `pykmc/htst-al` uses the same reducer at 300 K and prefactor 1.2e12, from
-`archive/entries/hTST/Al/eon-dimer-cg/report.py`. The reference list is
-four 0.233 eV barriers and four 0.372 eV barriers. The targets are 639
-barrier cycles and 20 rate cycles. The run was stopped after 1074
-searches and 18 processes. It is `partial true`. All 8 reference barriers
-were matched. Sixteen barrier cycles closed: `barrier_jobs` 65.0625,
-`barrier_force_calls` 57877.875, `barrier_average_over` 16. The 16 cycle
-costs have median 58189.5 and PAR-2 57877.875. No rate cycle closed, so
-the result has no `rate_jobs` or `rate_force_calls`. The 18 process rates
-sum to 590951652.693. The cycle threshold is 0.999 × 592041917 =
-591449875.083. The gap is 498222.390. Four processes sit at 0.23285 eV,
-which rounds to 0.233, and four sit at 0.372. Repeats of an id already in
-the cycle do not add rate, so these 18 processes cannot close a rate
-cycle. The archived `eon-dimer-cg` row is barrier force calls 2.887e+04
-averaged over 639 and rate force calls 8.979e+05 averaged over 20.
-Dimer-CG, Eon r2006, Penghao Xiao, 28 Jan 2013. The template ceiling is
-400000 searches. These 16 windows stay partial until 639 barrier windows
-close.
+`archive/entries/hTST/Al/eon-dimer-cg/report.py`. The kernel is the r2549
+aluminum EAM. The reference list is four 0.233 eV barriers and four
+0.372 eV barriers. The barrier-cycle target is 639. The run resumed the
+stored EAM checkpoint and stopped when the 639th barrier window closed,
+after 46274 searches and 35 processes. It matched 8 of 8 reference
+barriers. The result file has no `cap` key and no `partial` flag.
+`barrier_jobs` is 72.41158059, `barrier_force_calls` is 64635.96401,
+`barrier_average_over` is 639. The median is 56329. The bootstrap
+interval is 53919 to 60108. The window costs run from 7710 to 268072.
+`par_applied` is false and `par2_mean` is null, so the rank is the
+median. No rate window closed. The HTST sum of the 35 catalogue
+processes is 591004711.377. The cycle threshold is 0.999 × 592041917 =
+591449875.083. The gap is 445163.706. A repeat of a process already in
+the open window does not add rate. The archived `eon-dimer-cg` row is
+barrier force calls 2.887e+04 averaged over 639 and rate force calls
+8.979e+05 averaged over 20. Dimer-CG, Eon r2006, Penghao Xiao, 28 Jan
+2013. This mean barrier cost is 2.239 times that archive mean. The
+template ceiling is 400000 searches. The run stopped at 639 windows,
+short of that ceiling.
 
 `pykmc/aladatom` and `pykmc/standard-aladatom` stay on the minimized
 reactant and stop when the old-scheme confidence `max(0, 1 - 1/repeats)`

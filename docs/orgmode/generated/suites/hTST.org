@@ -22,7 +22,7 @@
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
    <td data-code="optim">—</td>
-   <td data-code="pykmc">—</td>
+   <td data-code="pykmc" data-template="pykmc/htst-al" data-par2=""><span class="bench-score"></span><a href="#Al-templates">pykmc/htst-al</a></td>
    <td data-code="tsase">—</td>
    </tr>
    <tr data-problem="hTST/Pt">
@@ -39,29 +39,32 @@
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
    <td data-code="optim">—</td>
-   <td data-code="pykmc">—</td>
+   <td data-code="pykmc" data-template="pykmc/htst-pt" data-par2=""><span class="bench-score"></span><a href="#Pt-templates">pykmc/htst-pt</a></td>
    <td data-code="tsase">—</td>
    </tr>
    </tbody></table></div></section><section class="bench" id="Al" data-problem="hTST/Al">
    <h2>Al</h2>
    <dl class="bench-rule">
+   <dt>Starts</dt><dd>639</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
+   <dt>Note</dt><dd>A start is one barrier window. The window closes when each reference barrier has been matched once. Force calls are the sad-fcs sum of that window. The rank is the median. PAR-2 stays unset when the problem states no force-call cap. A missing rate window does not unrank a finished barrier window. The potential is the Aluminum EAM.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
    <p class="bench-gaps">Partial rows stay off the ranked table.</p>
+   <figure class="bench-plot"><a href="../../_static/board/hTST-Al-profile.svg"><picture><source srcset="../../_static/board/hTST-Al-profile.webp" type="image/webp"><img src="../../_static/board/hTST-Al-profile.png" alt="Dolan-More profile for hTST/Al" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="../../_static/board/hTST-Al-cost.svg"><picture><source srcset="../../_static/board/hTST-Al-cost.webp" type="image/webp"><img src="../../_static/board/hTST-Al-cost.png" alt="Cost versus success for hTST/Al" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="Al-templates">
-   <summary>All templates (0 ranked)</summary>
+   <summary>All templates (1 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="hTST/Al">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="13">No full harness row.</td></tr>
+   <tr><td data-field="template">pykmc/htst-al</td><td data-field="version">pykmc 0.0.1</td><td data-field="commit">9fd1f6e9085e</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean"></td><td data-field="success_rate">1</td><td data-field="wilson_low">0.994024</td><td data-field="wilson_high">1</td><td data-field="median_calls">56329</td><td data-field="mean_calls">64636</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">639</td></tr>
    </tbody></table></div>
    <h3>Partial</h3><ul>
    <li>eon-client/htst-al-dimer-cg eOn campaign n=1, result file sets partial true.</li>
    <li>eon-svn/htst-al-dimer-cg Eon svn campaign n=1, result file sets partial true.</li>
-   <li>pykmc/htst-al pykmc campaign n=16, result file sets partial true.</li>
    </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="Al-legacy">
@@ -110,25 +113,28 @@
    </section><section class="bench" id="Pt" data-problem="hTST/Pt">
    <h2>Pt</h2>
    <dl class="bench-rule">
+   <dt>Starts</dt><dd>13</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
+   <dt>Note</dt><dd>A start is one barrier window. The window closes when each reference barrier has been matched once. Force calls are the sad-fcs sum of that window. The rank is the median. PAR-2 stays unset when the problem states no force-call cap. A missing rate window does not unrank a finished barrier window. The 2014 Pt archive used shifted Morse.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
    <p class="bench-gaps">Partial rows stay off the ranked table.</p>
+   <figure class="bench-plot"><a href="../../_static/board/hTST-Pt-profile.svg"><picture><source srcset="../../_static/board/hTST-Pt-profile.webp" type="image/webp"><img src="../../_static/board/hTST-Pt-profile.png" alt="Dolan-More profile for hTST/Pt" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="../../_static/board/hTST-Pt-cost.svg"><picture><source srcset="../../_static/board/hTST-Pt-cost.webp" type="image/webp"><img src="../../_static/board/hTST-Pt-cost.png" alt="Cost versus success for hTST/Pt" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="Pt-templates">
-   <summary>All templates (0 ranked)</summary>
+   <summary>All templates (1 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="hTST/Pt">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="13">No full harness row.</td></tr>
+   <tr><td data-field="template">pykmc/htst-pt</td><td data-field="version">pykmc 0.0.1</td><td data-field="commit">9fd1f6e9085e</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean"></td><td data-field="success_rate">1</td><td data-field="wilson_low">0.771905</td><td data-field="wilson_high">1</td><td data-field="median_calls">3.3676e+06</td><td data-field="mean_calls">3.83353e+06</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">13</td></tr>
    </tbody></table></div>
    <h3>Partial</h3><ul>
    <li>eon-client/htst-pt-dimer-lbfgs eOn campaign n=1, result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5).</li>
    <li>eon-client/htst-pt-lanczos-lbfgs eOn campaign n=1, result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5).</li>
    <li>eon-svn/htst-pt-dimer-lbfgs Eon svn campaign n=1, result file sets partial true.</li>
    <li>eon-svn/htst-pt-lanczos-lbfgs Eon svn campaign n=1, result file sets partial true.</li>
-   <li>pykmc/htst-pt pykmc campaign n=1, result file sets partial true.</li>
    </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="Pt-legacy">

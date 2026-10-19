@@ -18,6 +18,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1,
@@ -90,23 +91,24 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 1,
       "history": false,
-      "max_calls": 93065.0,
-      "mean_calls": 93065.0,
+      "max_calls": 166251.0,
+      "mean_calls": 126131.66666666667,
       "mean_per_image": null,
-      "median": 93065.0,
-      "median_calls": 93065.0,
-      "median_high": 93065.0,
+      "median": 119079.0,
+      "median_calls": 119079.0,
+      "median_high": 166251.0,
       "median_low": 93065.0,
       "median_per_image": null,
       "min_calls": 93065.0,
-      "n": 1,
+      "n": 3,
       "nfailed": 0,
       "note": "starts.jsonl",
-      "par2_mean": 93065.0,
+      "par2_mean": 126131.66666666667,
       "partial": false,
       "partial_reason": "",
       "path": "results/campaign/pykmc-0.0.1-accelerated-md-standard_aladatom--pykmc-standard-aladatom.dat",
@@ -118,7 +120,7 @@
       "template": "pykmc/standard-aladatom",
       "tuning": "beland-2015-pt111",
       "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "wilson_low": 0.4385029682449546
     }
   ],
   "title": "Al adatom on Al(100) at 150 K"

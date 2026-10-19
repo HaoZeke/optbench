@@ -18,6 +18,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -63,6 +64,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -110,6 +112,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -155,6 +158,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -200,6 +204,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 1,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -245,6 +250,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 1,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -290,6 +296,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -335,6 +342,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -568,6 +576,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -613,6 +622,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -658,6 +668,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -703,6 +714,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -748,6 +760,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -793,6 +806,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -838,6 +852,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -883,6 +898,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -928,6 +944,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -973,6 +990,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -1018,6 +1036,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -1063,6 +1082,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -1108,6 +1128,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -1151,8 +1172,9 @@
       "entry": "pykmc-0.0.1-tsopt-pt-island--pykmc-ts-pt",
       "failures": {
         "cap": 1,
-        "crash": 0,
-        "divergence": 2,
+        "crash": 2,
+        "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -1198,6 +1220,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -1243,6 +1266,7 @@
         "cap": 18,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -1288,6 +1312,7 @@
         "cap": 23,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -1333,6 +1358,7 @@
         "cap": 24,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,
@@ -1378,6 +1404,7 @@
         "cap": 28,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "full_n": 49,

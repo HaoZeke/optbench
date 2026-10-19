@@ -1,5 +1,5 @@
 {
-  "full_n": null,
+  "full_n": 13,
   "history": [],
   "id": "hTST/Pt",
   "not_comparable": [],
@@ -22,7 +22,7 @@
         "not_converged": 0,
         "wrong_stationary": 0
       },
-      "full_n": null,
+      "full_n": 13,
       "history": false,
       "max_calls": 1469.0,
       "mean_calls": 1469.0,
@@ -68,7 +68,7 @@
         "not_converged": 0,
         "wrong_stationary": 0
       },
-      "full_n": null,
+      "full_n": 13,
       "history": false,
       "max_calls": 1696.0,
       "mean_calls": 1696.0,
@@ -114,7 +114,7 @@
         "not_converged": 0,
         "wrong_stationary": 0
       },
-      "full_n": null,
+      "full_n": 13,
       "history": false,
       "max_calls": 1044.0,
       "mean_calls": 1044.0,
@@ -160,7 +160,7 @@
         "not_converged": 0,
         "wrong_stationary": 0
       },
-      "full_n": null,
+      "full_n": 13,
       "history": false,
       "max_calls": 717.0,
       "mean_calls": 717.0,
@@ -187,53 +187,79 @@
       "tuning": "",
       "wilson_high": 1.0,
       "wilson_low": 0.20654931437723745
+    }
+  ],
+  "profile": {
+    "area_log10": {
+      "pykmc/htst-pt 0.0.1 beland-2015-pt111 campaign 9fd1f6e": 1.2041199826559248
     },
+    "rho": {
+      "pykmc/htst-pt 0.0.1 beland-2015-pt111 campaign 9fd1f6e": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "solved": {
+      "pykmc/htst-pt 0.0.1 beland-2015-pt111 campaign 9fd1f6e": 1.0
+    },
+    "taus": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ]
+  },
+  "ranked": [
     {
       "asv_commit": "",
       "call_unit": "total",
-      "cap": 50000000,
+      "cap": null,
       "code": "pykmc",
       "code_version": "0.0.1",
       "commit": "9fd1f6e9085ef92642142406f3dd74e574209898",
       "comparable": true,
       "counter": "harness",
-      "current": false,
+      "current": true,
       "entry": "pykmc-0.0.1-hTST-Pt--pykmc-htst-pt",
       "failures": {
         "cap": 0,
         "crash": 0,
-        "divergence": 1,
+        "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
-      "full_n": null,
+      "full_n": 13,
       "history": false,
-      "max_calls": 914633.0,
-      "mean_calls": 914633.0,
+      "max_calls": 7695865.0,
+      "mean_calls": 3833527.0,
       "mean_per_image": null,
-      "median": 100000000.0,
-      "median_calls": 914633.0,
-      "median_high": 100000000.0,
-      "median_low": 100000000.0,
+      "median": 3367604.0,
+      "median_calls": 3367604.0,
+      "median_high": 5315178.0,
+      "median_low": 2033873.0,
       "median_per_image": null,
-      "min_calls": 914633.0,
-      "n": 1,
-      "nfailed": 1,
+      "min_calls": 1424997.0,
+      "n": 13,
+      "nfailed": 0,
       "note": "starts.jsonl",
-      "par2_mean": 100000000.0,
-      "partial": true,
-      "partial_reason": "result file sets partial true",
+      "par2_mean": null,
+      "partial": false,
+      "partial_reason": "",
       "path": "results/campaign/pykmc-0.0.1-hTST-Pt--pykmc-htst-pt.dat",
       "problem": "hTST/Pt",
       "registry_match": true,
       "scored": true,
       "source": "campaign",
-      "success_rate": 0.0,
+      "success_rate": 1.0,
       "template": "pykmc/htst-pt",
       "tuning": "beland-2015-pt111",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "wilson_high": 1.0,
+      "wilson_low": 0.7719046276458016
     }
   ],
-  "ranked": [],
   "title": "Pt"
 }
