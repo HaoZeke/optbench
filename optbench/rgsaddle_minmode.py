@@ -29,7 +29,7 @@ from pathlib import Path
 import numpy as np
 
 from .counter import HarnessCounter
-from .failures import classify_outcome
+from .failures import classify_failure, classify_outcome
 from .potserver import RgpotCounter
 from .score import half_even, score_v2
 from .stationary import judge_stationary, negative_index, numerical_hessian
@@ -223,6 +223,11 @@ def _extract(archive: Path, dest: Path) -> Path:
 
 def _norm(values) -> float:
     return float(np.linalg.norm(np.asarray(values, dtype=np.float64)))
+
+
+def _outcome(reasons: list[str]) -> tuple[bool, str | None]:
+    failure = classify_failure(reasons)
+    return failure is None, failure
 
 
 def _unit(values: np.ndarray) -> np.ndarray:
