@@ -164,6 +164,16 @@ commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
 note = "No public git commit. The pin is the sha256 of the Wales svn.tar.bz2 snapshot, 122743078 bytes. Minimization L-BFGS calls the ASE socket and pes.evaluate. OPTIM's own call counter is not a score. Saddle search, NEB, noise, and PATHSAMPLE are not scored."
 
 [[code]]
+id = "pyamff"
+name = "PyAMFF"
+role = "machine learning potential"
+repository = "https://gitlab.com/pyamff/pyamff"
+ref = "master"
+commit = "240f51d01ca22969369f9bc21760c61cbb3b6665"
+committed = "2026-07-04"
+note = "Master 240f51d0, 2026-07-04, later than tag v3.0.0. The VERSION file says 0.1.0-beta. The EMT Pt 38 row is stock torch Rprop on the 10-7 tanh network, force coefficient 0, uniform[-1, 1) starts, and the archive gradient stop 0.02. One harness call is one evaluation of the squared-error loss and its gradient."
+
+[[code]]
 id = "sella-0.1.1"
 name = "Sella"
 role = "lowest eigenvector"
