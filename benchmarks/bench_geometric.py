@@ -180,12 +180,14 @@ _GeometricSearch.track_failure_crash.unit = "count"
 
 def _benchmark(spec: dict):
     bound = spec
+    starts = selected_indices(spec["n"])
+    limit = spec["cap"]
 
     class _Benchmark(_GeometricSearch):
         param_names = ["seed", "start"]
-        params = [[SEED], selected_indices(spec["n"])]
+        params = [[SEED], starts]
         timeout = 7200
-        cap = bound["cap"]
+        cap = limit
         spec = bound
         template_id = bound["template_id"]
         problem_id = bound["problem_id"]
