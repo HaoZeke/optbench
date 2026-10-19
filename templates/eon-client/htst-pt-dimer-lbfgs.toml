@@ -6,7 +6,6 @@ code_version = "3.5.0"
 commit = "4d8b34baf1ba8d2d980df29838bac1f969d1662c"
 algorithm = "Dimer L-BFGS"
 reducer = "harness"
-failure_cap = 2000000
 kind = "htst"
 kernel = "morse"
 asv_class = "EonClientHtstPtDimerLbfgs"
