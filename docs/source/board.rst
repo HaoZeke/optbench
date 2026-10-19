@@ -15,7 +15,7 @@ It does not run a campaign.
    <div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>Gman</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="minimization/lj38">
    <th scope="row"><a href="generated/suites/minimization.html#lj38">Lennard-Jones 38 clusters</a></th>
    <td data-code="eOn" data-template="eon/lj38-lbfgs-m100" data-par2="180.137"><span class="bench-score">180.137</span><a href="generated/suites/minimization.html#lj38-templates">eon/lj38-lbfgs-m100</a></td>
@@ -25,6 +25,7 @@ It does not run a campaign.
    <td data-code="ASE" data-template="ase/lj38-lbfgs-tuned" data-par2="395.645"><span class="bench-score">395.645</span><a href="generated/suites/minimization.html#lj38-templates">ase/lj38-lbfgs-tuned</a></td>
    <td data-code="Sella" data-template="sella/lj38-min-tuned" data-par2="253.921"><span class="bench-score">253.921</span><a href="generated/suites/minimization.html#lj38-templates">sella/lj38-min-tuned</a></td>
    <td data-code="pysisyphus" data-template="pysisyphus/cg-lj38" data-par2="15124.7"><span class="bench-score">15124.7</span><a href="generated/suites/minimization.html#lj38-templates">pysisyphus/cg-lj38</a></td>
+   <td data-code="Gman">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind" data-template="dlfind/lbfgs-lj38" data-par2="231.908"><span class="bench-score">231.908</span><a href="generated/suites/minimization.html#lj38-templates">dlfind/lbfgs-lj38</a></td>
@@ -41,6 +42,7 @@ It does not run a campaign.
    <td data-code="ASE" data-template="noise/ase-lbfgs-s0" data-par2="396.55"><span class="bench-score">396.55</span><a href="generated/suites/minimization.html#lj38-noise-templates">noise/ase-lbfgs-s0</a></td>
    <td data-code="Sella" data-template="noise/sella-min-s0" data-par2="729.433"><span class="bench-score">729.433</span><a href="generated/suites/minimization.html#lj38-noise-templates">noise/sella-min-s0</a></td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="Gman">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind" data-template="dlfind/lbfgs-lj38-noise-s0" data-par2="231.908"><span class="bench-score">231.908</span><a href="generated/suites/minimization.html#lj38-noise-templates">dlfind/lbfgs-lj38-noise-s0</a></td>
@@ -57,6 +59,7 @@ It does not run a campaign.
    <td data-code="ASE" data-template="ase/morse-bfgslinesearch-default" data-par2="28.91"><span class="bench-score">28.91</span><a href="generated/suites/minimization.html#morse-bulk-templates">ase/morse-bfgslinesearch-default</a></td>
    <td data-code="Sella" data-template="sella/morse-min-default" data-par2="28.89"><span class="bench-score">28.89</span><a href="generated/suites/minimization.html#morse-bulk-templates">sella/morse-min-default</a></td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="Gman">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind" data-template="dlfind/lbfgs-morse" data-par2="13626.5"><span class="bench-score">13626.5</span><a href="generated/suites/minimization.html#morse-bulk-templates">dlfind/lbfgs-morse</a></td>
@@ -73,6 +76,7 @@ It does not run a campaign.
    <td data-code="ASE">—</td>
    <td data-code="Sella" data-template="sella/pt-island-search-default" data-par2="5201.62"><span class="bench-score">5201.62</span><a href="generated/suites/saddle-search.html#pt-island-templates">sella/pt-island-search-default</a></td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="Gman">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -89,6 +93,7 @@ It does not run a campaign.
    <td data-code="ASE" data-template="ase/de-lj38-tuned" data-par2="3463.64"><span class="bench-score">3463.64</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">ase/de-lj38-tuned</a></td>
    <td data-code="Sella" data-template="sella/de-lj38-tuned" data-par2="1753.96"><span class="bench-score">1753.96</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">sella/de-lj38-tuned</a></td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="Gman">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass" data-template="compass/sqnm" data-par2="1517.3"><span class="bench-score">1517.3</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
@@ -105,6 +110,7 @@ It does not run a campaign.
    <td data-code="ASE" data-template="ase/de-lj38-2ts-default" data-par2="20000"><span class="bench-score">20000</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">ase/de-lj38-2ts-default</a></td>
    <td data-code="Sella" data-template="sella/de-lj38-2ts-tuned" data-par2="30105.9"><span class="bench-score">30105.9</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">sella/de-lj38-2ts-tuned</a></td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="Gman">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass" data-template="compass/sqnm" data-par2="6713.37"><span class="bench-score">6713.37</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
@@ -121,6 +127,7 @@ It does not run a campaign.
    <td data-code="ASE" data-template="ase/de-pt-island-tuned" data-par2="847.678"><span class="bench-score">847.678</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">ase/de-pt-island-tuned</a></td>
    <td data-code="Sella" data-template="sella/de-pt-island-tuned" data-par2="615.153"><span class="bench-score">615.153</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">sella/de-pt-island-tuned</a></td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="Gman">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass" data-template="compass/sqnm" data-par2="1078.12"><span class="bench-score">1078.12</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
@@ -137,6 +144,7 @@ It does not run a campaign.
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="Gman">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -153,6 +161,7 @@ It does not run a campaign.
    <td data-code="ASE">—</td>
    <td data-code="Sella" data-template="sella-0.1.1/lj38-loweig" data-par2="17.8"><span class="bench-score">17.8</span><a href="generated/suites/lowest-eigenvector.html#lj38-templates">sella-0.1.1/lj38-loweig</a></td>
    <td data-code="pysisyphus" data-template="pysisyphus/lanczos-lj38" data-par2="4017.14"><span class="bench-score">4017.14</span><a href="generated/suites/lowest-eigenvector.html#lj38-templates">pysisyphus/lanczos-lj38</a></td>
+   <td data-code="Gman">—</td>
    <td data-code="artn" data-template="partn/mode-lj38" data-par2="2619.84"><span class="bench-score">2619.84</span><a href="generated/suites/lowest-eigenvector.html#lj38-templates">partn/mode-lj38</a></td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -169,6 +178,7 @@ It does not run a campaign.
    <td data-code="ASE">—</td>
    <td data-code="Sella" data-template="sella/lj38-ts-default" data-par2="68.74"><span class="bench-score">68.74</span><a href="generated/suites/tsopt.html#LJ38-templates">sella/lj38-ts-default</a></td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="Gman">—</td>
    <td data-code="artn" data-template="partn/ts-lj38" data-par2="20000"><span class="bench-score">20000</span><a href="generated/suites/tsopt.html#LJ38-templates">partn/ts-lj38</a></td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -185,6 +195,7 @@ It does not run a campaign.
    <td data-code="ASE">—</td>
    <td data-code="Sella" data-template="sella/pt-island-ts-default" data-par2="74.2857"><span class="bench-score">74.2857</span><a href="generated/suites/tsopt.html#pt-island-templates">sella/pt-island-ts-default</a></td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="Gman">—</td>
    <td data-code="artn" data-template="partn/ts-pt" data-par2="1970.22"><span class="bench-score">1970.22</span><a href="generated/suites/tsopt.html#pt-island-templates">partn/ts-pt</a></td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -201,6 +212,7 @@ It does not run a campaign.
    <td data-code="ASE" data-template="ase/neb-pt-heptamer-tuned" data-par2="442.615"><span class="bench-score">442.615</span><a href="generated/suites/neb.html#Pt-heptamer-templates">ase/neb-pt-heptamer-tuned</a></td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="Gman" data-template="gman/neb-pt-qm" data-par2="1527.38"><span class="bench-score">1527.38</span><a href="generated/suites/neb.html#Pt-heptamer-templates">gman/neb-pt-qm</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass" data-template="compass/sqnm" data-par2="561.462"><span class="bench-score">561.462</span><a href="generated/suites/neb.html#Pt-heptamer-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
@@ -217,6 +229,7 @@ It does not run a campaign.
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="Gman">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -233,6 +246,7 @@ It does not run a campaign.
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="Gman">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -249,6 +263,7 @@ It does not run a campaign.
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="Gman">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -258,5 +273,5 @@ It does not run a campaign.
    </tr>
    </tbody></table></div>
    </section>
-   <section id="unparsed"><h2>Not scored</h2><ul><li>results/campaign/eon-3.5.0-de-lj38-ci-neb.dat: no per-start record</li><li>results/campaign/eon-3.5.0-de-lj38-ci-swdneb.dat: no per-start record; does not reproduce the 2014 archive</li><li>results/campaign/eon-3.5.0-neb-pt-cg.dat: no per-start record; does not reproduce the 2014 archive</li><li>results/campaign/eon-3.5.0-neb-pt-fire.dat: no per-start record</li><li>results/campaign/eon-3.5.0-neb-pt-lbfgs.dat: no per-start record</li><li>results/campaign/eon-3.5.0-neb-pt-qm.dat: no per-start record</li><li>results/campaign/eon-client-cg.dat: no per-start record</li><li>results/campaign/eon-client-fire.dat: no per-start record</li><li>results/campaign/eon-client-lbfgs-m100.dat: no per-start record</li><li>results/campaign/eon-client-lbfgs-m20.dat: no per-start record</li><li>results/campaign/eon-client-morse-cg.dat: no per-start record</li><li>results/campaign/eon-client-morse-fire.dat: no per-start record</li><li>results/campaign/eon-client-morse-lbfgs.dat: no per-start record</li><li>results/campaign/eon-client-morse-sd.dat: no per-start record; does not reproduce the 2014 archive</li><li>results/campaign/eon-client-qm.dat: no per-start record</li><li>results/campaign/eon-client-sd-twopoint.dat: no per-start record</li><li>results/campaign/eon-client-sd.dat: no per-start record</li><li>results/campaign/eon-svn-cg.dat: no per-start record</li><li>results/campaign/eon-svn-fire.dat: no per-start record</li><li>results/campaign/eon-svn-lbfgs-m100.dat: no per-start record</li><li>results/campaign/eon-svn-lbfgs-m20.dat: no per-start record</li><li>results/campaign/eon-svn-morse-cg.dat: no per-start record</li><li>results/campaign/eon-svn-morse-fire.dat: no per-start record</li><li>results/campaign/eon-svn-morse-lbfgs.dat: no per-start record</li><li>results/campaign/eon-svn-morse-sd.dat: no per-start record</li><li>results/campaign/eon-svn-qm.dat: no per-start record</li><li>results/campaign/eon-svn-sd-twopoint.dat: no per-start record</li><li>results/campaign/eon-svn-sd.dat: no per-start record</li><li>results/campaign/gman-r235-neb-pt-qm.dat: no per-start record</li><li>results/campaign/pele-0.1.2-lbfgs-M1-maxstep0.1.dat: no per-start record</li><li>results/campaign/pele-0.1.2-lbfgs-M10-maxstep0.1.dat: no per-start record</li><li>results/campaign/pele-0.1.2-lbfgs-M100-maxstep0.2.dat: no per-start record</li><li>results/campaign/pele-0.1.2-lbfgs-M20-maxstep0.1.dat: no per-start record</li><li>results/campaign/pele-0.1.2-lbfgs-M4-maxstep0.05.dat: no per-start record</li><li>results/campaign/pele-0.1.2-lbfgs-M4-maxstep0.1.dat: no per-start record</li><li>results/campaign/pele-0.1.2-lbfgs-M4-maxstep0.2.dat: no per-start record</li><li>results/campaign/sella-2.6.0-ts-lj38.dat: no per-start record</li><li>results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d: AseMorseGpminTuned (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;pos_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Lj38EonCg (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;lj38-clusters/cluster_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Lj38EonFire (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;lj38-clusters/cluster_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Lj38EonLbfgsM100 (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;lj38-clusters/cluster_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Lj38EonLbfgsM20 (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;lj38-clusters/cluster_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Lj38EonQm (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;lj38-clusters/cluster_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Lj38EonSd (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;lj38-clusters/cluster_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Lj38EonSdTwopoint (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;lj38-clusters/cluster_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Pending.track_success matched nothing in commit d4513f42b39edd0b69ade46ce63fd106e0f406c3</li></ul></section>
+   <section id="unparsed"><h2>Not scored</h2><ul><li>results/campaign/eon-3.5.0-de-lj38-ci-neb.dat: no per-start record</li><li>results/campaign/eon-3.5.0-de-lj38-ci-swdneb.dat: no per-start record; does not reproduce the 2014 archive</li><li>results/campaign/eon-3.5.0-neb-pt-cg.dat: no per-start record; does not reproduce the 2014 archive</li><li>results/campaign/eon-3.5.0-neb-pt-fire.dat: no per-start record</li><li>results/campaign/eon-3.5.0-neb-pt-lbfgs.dat: no per-start record</li><li>results/campaign/eon-3.5.0-neb-pt-qm.dat: no per-start record</li><li>results/campaign/eon-client-cg.dat: no per-start record</li><li>results/campaign/eon-client-fire.dat: no per-start record</li><li>results/campaign/eon-client-lbfgs-m100.dat: no per-start record</li><li>results/campaign/eon-client-lbfgs-m20.dat: no per-start record</li><li>results/campaign/eon-client-morse-cg.dat: no per-start record</li><li>results/campaign/eon-client-morse-fire.dat: no per-start record</li><li>results/campaign/eon-client-morse-lbfgs.dat: no per-start record</li><li>results/campaign/eon-client-morse-sd.dat: no per-start record; does not reproduce the 2014 archive</li><li>results/campaign/eon-client-qm.dat: no per-start record</li><li>results/campaign/eon-client-sd-twopoint.dat: no per-start record</li><li>results/campaign/eon-client-sd.dat: no per-start record</li><li>results/campaign/eon-svn-cg.dat: no per-start record</li><li>results/campaign/eon-svn-fire.dat: no per-start record</li><li>results/campaign/eon-svn-lbfgs-m100.dat: no per-start record</li><li>results/campaign/eon-svn-lbfgs-m20.dat: no per-start record</li><li>results/campaign/eon-svn-morse-cg.dat: no per-start record</li><li>results/campaign/eon-svn-morse-fire.dat: no per-start record</li><li>results/campaign/eon-svn-morse-lbfgs.dat: no per-start record</li><li>results/campaign/eon-svn-morse-sd.dat: no per-start record</li><li>results/campaign/eon-svn-qm.dat: no per-start record</li><li>results/campaign/eon-svn-sd-twopoint.dat: no per-start record</li><li>results/campaign/eon-svn-sd.dat: no per-start record</li><li>results/campaign/pele-0.1.2-lbfgs-M1-maxstep0.1.dat: no per-start record</li><li>results/campaign/pele-0.1.2-lbfgs-M10-maxstep0.1.dat: no per-start record</li><li>results/campaign/pele-0.1.2-lbfgs-M100-maxstep0.2.dat: no per-start record</li><li>results/campaign/pele-0.1.2-lbfgs-M20-maxstep0.1.dat: no per-start record</li><li>results/campaign/pele-0.1.2-lbfgs-M4-maxstep0.05.dat: no per-start record</li><li>results/campaign/pele-0.1.2-lbfgs-M4-maxstep0.1.dat: no per-start record</li><li>results/campaign/pele-0.1.2-lbfgs-M4-maxstep0.2.dat: no per-start record</li><li>results/campaign/sella-2.6.0-ts-lj38.dat: no per-start record</li><li>results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d: AseMorseGpminTuned (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;pos_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Lj38EonCg (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;lj38-clusters/cluster_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Lj38EonFire (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;lj38-clusters/cluster_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Lj38EonLbfgsM100 (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;lj38-clusters/cluster_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Lj38EonLbfgsM20 (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;lj38-clusters/cluster_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Lj38EonQm (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;lj38-clusters/cluster_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Lj38EonSd (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;lj38-clusters/cluster_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Lj38EonSdTwopoint (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;lj38-clusters/cluster_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Pending.track_success matched nothing in commit d4513f42b39edd0b69ade46ce63fd106e0f406c3</li></ul></section>
    <section id="unmapped"><h2>Not a problem template</h2><ul><li>quadratic.QuadraticDimer: benchmark quadratic.QuadraticDimer is not a problem template</li><li>quadratic.QuadraticDisplacement: benchmark quadratic.QuadraticDisplacement is not a problem template</li><li>quadratic.QuadraticFailureCap: benchmark quadratic.QuadraticFailureCap is not a problem template</li><li>quadratic.QuadraticFailureCrash: benchmark quadratic.QuadraticFailureCrash is not a problem template</li><li>quadratic.QuadraticFailureDivergence: benchmark quadratic.QuadraticFailureDivergence is not a problem template</li><li>quadratic.QuadraticFailureWrongStationary: benchmark quadratic.QuadraticFailureWrongStationary is not a problem template</li><li>quadratic.QuadraticKept: benchmark quadratic.QuadraticKept is not a problem template</li><li>quadratic.QuadraticNoise0: benchmark quadratic.QuadraticNoise0 is not a problem template</li><li>quadratic.QuadraticNoise1em02: benchmark quadratic.QuadraticNoise1em02 is not a problem template</li><li>quadratic.QuadraticNoise1em03: benchmark quadratic.QuadraticNoise1em03 is not a problem template</li><li>quadratic.QuadraticNoise1em04: benchmark quadratic.QuadraticNoise1em04 is not a problem template</li><li>quadratic.QuadraticProfileCap30: benchmark quadratic.QuadraticProfileCap30 is not a problem template</li><li>quadratic.QuadraticProfileStep001: benchmark quadratic.QuadraticProfileStep001 is not a problem template</li><li>quadratic.QuadraticProfileStep005: benchmark quadratic.QuadraticProfileStep005 is not a problem template</li></ul></section>

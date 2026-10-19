@@ -54,7 +54,8 @@ def test_gman_qm_reproduces_the_archive_integers():
     assert checks["force_calls_min"]["rerun"] == 103
     assert row["rerun"]["unrounded_mean"] == 190.92307692307693
     assert row["rerun"]["paper_baseline"] is True
-    assert row["rerun"]["sha"] == "657e004099d6fcc5caa9640d40d979f24b802a53"
+    assert row["rerun"]["template"] == "gman/neb-pt-qm"
+    assert row["rerun"]["sha"] == "45b4ee530c41bab68c696c90c737110f0c669c10"
 
 
 def test_pele_paper_baseline_is_the_2014_stop():
