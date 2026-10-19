@@ -5182,6 +5182,51 @@
     {
       "asv_commit": "",
       "call_unit": "total",
+      "cap": 25281,
+      "code": "AIRSS",
+      "code_version": "0.9.4",
+      "commit": "5593cc4ee360d998764fceb188284fdf0ef781d206754176dcb360c65103ddaa",
+      "comparable": true,
+      "counter": "harness",
+      "current": false,
+      "entry": "airss-0.9.4-lj75",
+      "failures": {
+        "cap": 200,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": null,
+      "history": false,
+      "max_calls": 25281.0,
+      "mean_calls": 17134.035,
+      "mean_per_image": null,
+      "median": 50562.0,
+      "median_calls": 17054.0,
+      "median_high": 50562.0,
+      "median_low": 50562.0,
+      "median_per_image": null,
+      "min_calls": 11787.0,
+      "n": 200,
+      "nfailed": 200,
+      "note": "starts.jsonl",
+      "par2_mean": 50562.0,
+      "partial": true,
+      "partial_reason": "result file sets partial true",
+      "path": "results/campaign/airss-0.9.4-lj75.dat",
+      "problem": "globalopt/lj75",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 0.0,
+      "template": "airss/lj75",
+      "tuning": "default",
+      "wilson_high": 0.018845326377266575,
+      "wilson_low": 0.0
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
       "cap": 2000000,
       "code": "eOn",
       "code_version": "3.5.0",
@@ -16260,8 +16305,133 @@
           "wilson_low": 0.9500079920442688
         }
       ],
-      "ranked": [],
+      "profile": {
+        "area_log10": {
+          "airss/lj38 0.9.4 default campaign 5593cc4": 1.2041199826559248
+        },
+        "rho": {
+          "airss/lj38 0.9.4 default campaign 5593cc4": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "solved": {
+          "airss/lj38 0.9.4 default campaign 5593cc4": 1.0
+        },
+        "taus": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ]
+      },
+      "ranked": [
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": null,
+          "code": "AIRSS",
+          "code_version": "0.9.4",
+          "commit": "5593cc4ee360d998764fceb188284fdf0ef781d206754176dcb360c65103ddaa",
+          "comparable": true,
+          "counter": "harness",
+          "current": true,
+          "entry": "airss-0.9.4-lj38",
+          "failures": {
+            "cap": 0,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 0
+          },
+          "full_n": 100,
+          "history": false,
+          "max_calls": 955658.0,
+          "mean_calls": 112134.16,
+          "mean_per_image": null,
+          "median": 70635.5,
+          "median_calls": 70635.5,
+          "median_high": 96391.5,
+          "median_low": 46380.0,
+          "median_per_image": null,
+          "min_calls": 1672.0,
+          "n": 100,
+          "nfailed": 0,
+          "note": "starts.jsonl",
+          "par2_mean": null,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/airss-0.9.4-lj38.dat",
+          "problem": "globalopt/lj38",
+          "registry_match": true,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 1.0,
+          "template": "airss/lj38",
+          "tuning": "default",
+          "wilson_high": 1.0,
+          "wilson_low": 0.9630065017930143
+        }
+      ],
       "title": "Lennard-Jones 38 global minimum"
+    },
+    "globalopt/lj75": {
+      "full_n": null,
+      "history": [],
+      "id": "globalopt/lj75",
+      "not_comparable": [],
+      "partial": [
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": 25281,
+          "code": "AIRSS",
+          "code_version": "0.9.4",
+          "commit": "5593cc4ee360d998764fceb188284fdf0ef781d206754176dcb360c65103ddaa",
+          "comparable": true,
+          "counter": "harness",
+          "current": false,
+          "entry": "airss-0.9.4-lj75",
+          "failures": {
+            "cap": 200,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 0
+          },
+          "full_n": null,
+          "history": false,
+          "max_calls": 25281.0,
+          "mean_calls": 17134.035,
+          "mean_per_image": null,
+          "median": 50562.0,
+          "median_calls": 17054.0,
+          "median_high": 50562.0,
+          "median_low": 50562.0,
+          "median_per_image": null,
+          "min_calls": 11787.0,
+          "n": 200,
+          "nfailed": 200,
+          "note": "starts.jsonl",
+          "par2_mean": 50562.0,
+          "partial": true,
+          "partial_reason": "result file sets partial true",
+          "path": "results/campaign/airss-0.9.4-lj75.dat",
+          "problem": "globalopt/lj75",
+          "registry_match": true,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 0.0,
+          "template": "airss/lj75",
+          "tuning": "default",
+          "wilson_high": 0.018845326377266575,
+          "wilson_low": 0.0
+        }
+      ],
+      "ranked": [],
+      "title": "lj75"
     },
     "hTST/Al": {
       "full_n": null,
@@ -42871,7 +43041,7 @@
       "title": "pt-island"
     }
   },
-  "ranked_count": 471,
+  "ranked_count": 472,
   "schema": "optbench.board/v1",
   "unmapped": [
     {
