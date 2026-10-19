@@ -802,6 +802,7 @@ def _benchmark_index() -> dict[str, dict]:
         "benchmarks.bench_rgsaddle",
         "benchmarks.bench_noise",
         "benchmarks.bench_scipyglobal",
+        "benchmarks.bench_globalopt",
         "benchmarks.quadratic",
     )
     for module_name in modules:

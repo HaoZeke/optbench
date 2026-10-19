@@ -173,6 +173,14 @@ commit = "e4e854eaa8f18d807cd3496028e257e36caa93cc"
 committed = "2026-08-21"
 note = "SciPy 1.18.1 built from commit e4e854eaa8f18d807cd3496028e257e36caa93cc. The globalopt rows call basinhopping, dual_annealing, differential_evolution, and shgo. Force calls are harness evaluations of optbench.potentials.lennard_jones."
 
+[[template]]
+id = "ase-globalopt/lj75-basinhopping"
+code = "ase"
+problem = "globalopt/lj75"
+profile = "default"
+task = "basin-hopping"
+ranked = true
+
 # generated ASE and Sella templates
 
 [[template]]
