@@ -537,7 +537,7 @@ def _dat(summary: dict, template: dict, metrics: dict) -> str:
     if summary.get("partial"):
         lines = [
             "# counter harness. One force call is one Lennard-Jones evaluation inside the two-point step.",
-            "# The problem states no energy window. Each start stops after the structure budget.",
+            "# Each start stops after the structure budget.",
             "# failure is cap. cap is the largest harness count in this file, so PAR-2 is twice that count.",
             "# force_calls is the half-even mean of those counts. energy_min and energy_max are the best energies.",
         ]
@@ -588,7 +588,9 @@ def run_template(
         names = [f"{label}.{index}" for index in range(1, int(config["starts"]) + 1)]
     else:
         names = _load_start_names(root, problem, geometries, work, output)
-    if raw_tolerance is None:
+    # A structure budget is the stop for that template. A problem energy
+    # window belongs to searches that run until the Cambridge minimum.
+    if config.get("budget_structures"):
         reference = None
         tolerance = None
     else:
@@ -683,7 +685,7 @@ def run_template(
             "Harness counter on optbench.potentials.lennard_jones. "
             "buildcell generates each cell. "
             + (
-                "The problem states no energy window, so each start stops at the structure budget."
+                "Each start stops at the structure budget."
                 if budget_only
                 else "The problem states no force-call cap."
             )
