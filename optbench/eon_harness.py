@@ -82,6 +82,14 @@ FAMILIES = {
         "token": "4d8b34ba",
         "cache": "4d8b34ba",
     },
+    "develop": {
+        "prefix": "eon-develop-stock/",
+        "env": "EON_DEVELOP_CLIENT",
+        "default": Path.home() / "opt" / "eon-develop" / "bin" / "eonclient",
+        "flag": "--version",
+        "token": "a7aa5747",
+        "cache": "a7aa57472fb7",
+    },
 }
 
 
@@ -389,7 +397,7 @@ def _family_of(template: dict) -> str:
     for name, spec in FAMILIES.items():
         if ident.startswith(spec["prefix"]) and template.get("kind"):
             return name
-    raise ValueError(f"{ident} is not an r2549 or 3.5.0 harness template")
+    raise ValueError(f"{ident} is not an r2549, develop, or 3.5.0 harness template")
 
 
 def _ini_text(template: dict, seed: int, wrapper: Path, *, python_job: bool) -> str:

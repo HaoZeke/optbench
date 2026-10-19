@@ -111,7 +111,6 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
-    "repro/neb-pt-heptamer-eon-cg": "ab5c80dd8ea922e629185649aed9cf9c9e3ec785",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -187,7 +186,7 @@ MATCHES: list[dict] = [
     {"key": "double-ended-saddle-search/pt-island/optim", "template": "optim/de-pt", "branch": "cells/optim/saddle-pt", "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-pt-island--optim-de-pt.dat", "cause": "optim_pt_units"},
     # neb per-image means already stored in the 3.5.0 files
     {"key": "neb/Pt-heptamer/eon-lbfgs", "template": "eon-lbfgs", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-lbfgs.dat", "hold": ["eon-client/neb-pt-lbfgs", "eon/neb-pt-lbfgs"]},
-    {"key": "neb/Pt-heptamer/eon-cg", "template": "eon-r2090/neb-pt-cg", "branch": "repro/neb-pt-heptamer-eon-cg", "path": "results/campaign/eon-r2090-neb-pt-cg.dat", "hold": ["eon-client/neb-pt-cg", "eon-cg"]},
+    {"key": "neb/Pt-heptamer/eon-cg", "template": "eon-cg", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-cg.dat", "cause": "heptamer_cg", "hold": ["eon-client/neb-pt-cg"], "extra": {"ranked_codes": [{"label": "EON (SVN r2549)", "template": "eon-svn/neb-pt-cg", "path": "results/campaign/eon-svn-neb-pt-cg.dat", "force_calls": 929, "nfailed": 0, "starts": 13}, {"label": "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)", "template": "eon-develop-stock/neb-pt-cg", "path": "results/campaign/eon-develop-stock-neb-pt-cg.dat", "force_calls": 1141, "nfailed": 0, "starts": 13}]}},
     {"key": "neb/Pt-heptamer/eon-fire", "template": "eon-fire", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-fire.dat", "hold": ["eon-client/neb-pt-fire"]},
     {"key": "neb/Pt-heptamer/eon-qm", "template": "eon-qm", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-qm.dat", "hold": ["eon-client/neb-pt-qm"]},
     # saddle search
@@ -204,6 +203,13 @@ MATCHES: list[dict] = [
 
 
 CAUSE_TEXT = {
+    "heptamer_cg": (
+        "The 3.5.0 file already stores the per-image mean, 142 against the archive 120. "
+        "L-BFGS, FIRE, and QM on the same 8-image spring-5 climb reproduce, so the image count is not the split. "
+        "The archived 120 stays the paper row. EON (SVN r2549) and eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) "
+        "are separate codes. Stock harness totals on the same 13 starts and the same converged_force 0.01 stop are 929 and 1141, both with nfailed 0. "
+        "Those rows are ranked beside the archive. The gap is left as measured."
+    ),
     "lj38_ts_starts": (
         "Inside the 10% band (207.51 vs 192). "
         "Archive run.sh unpacks coords-xyz.tar.gz (200 xyz, max pair about 4.4). "

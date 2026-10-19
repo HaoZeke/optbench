@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-47 reproduced, 28 not reproduced, 76 not rerun. 151 archive rows.
+46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -165,7 +165,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
-| Pt-heptamer/eon-cg | force_calls 120 | 120 | reproduced |
+| Pt-heptamer/eon-cg | force_calls 120 | 142 | not reproduced; heptamer_cg |
 | Pt-heptamer/eon-fire | force_calls 86 | 85 | reproduced |
 | Pt-heptamer/eon-lbfgs | force_calls 42 | 40 | reproduced |
 | Pt-heptamer/eon-qm | force_calls 164 | 165 | reproduced |
@@ -324,6 +324,12 @@ comments.txt sets L-BFGS memory 100 and maximum move 2.0. That rerun scores 27. 
 pele Morse L-BFGS scores 92. The archive is 51. eOn Morse L-BFGS on the same bulk file reproduces at 52, so the gap is the pele memory and step, not the shared Morse parameters.
 
 - minimization/morse-bulk/pele-lbfgs
+
+### heptamer_cg
+
+The 3.5.0 file already stores the per-image mean, 142 against the archive 120. L-BFGS, FIRE, and QM on the same 8-image spring-5 climb reproduce, so the image count is not the split. The archived 120 stays the paper row. EON (SVN r2549) and eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) are separate codes. Stock harness totals on the same 13 starts and the same converged_force 0.01 stop are 929 and 1141, both with nfailed 0. Those rows are ranked beside the archive. The gap is left as measured.
+
+- neb/Pt-heptamer/eon-cg
 
 ### saddle_novelty
 

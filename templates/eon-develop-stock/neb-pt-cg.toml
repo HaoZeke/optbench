@@ -1,0 +1,35 @@
+id = "eon-develop-stock/neb-pt-cg"
+engine = "eon"
+problem = "neb/Pt-heptamer"
+code = "eOn (develop"
+code_version = "a7aa57472fb7d823953fd36b78cd755fa4842d30)"
+commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+algorithm = "CG"
+reducer = "harness"
+failure_cap = 10000
+kind = "neb-pt"
+kernel = "morse_shift"
+note = '''
+Ranked label: eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30). Stock develop client, untuned. Same 13 Pt-heptamer pairs, 8 images, spring 5, climbing image, converged_force 0.01, max_move 0.2, and CG band optimizer as the archive. The develop NEB default optimizer is LBFGS, so the band section sets cg. The harness kernel is r2549 Morse::force: cutoff 9.5, pair energy shifted to zero at the cutoff, minimum image on the box diagonal. D 0.7102, alpha 1.6047, r0 2.897.
+'''
+asv_timeout = 900
+budget_seconds = 900
+
+[ini.Main]
+job = "nudged_elastic_band"
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "cg"
+converged_force = 0.01
+max_move = 0.2
+
+[ini."Nudged Elastic Band"]
+images = 8
+climbing_image_method = true
+doubly_nudged = false
+doubly_nudged_switching = false
+opt_method = "cg"
+spring = 5
