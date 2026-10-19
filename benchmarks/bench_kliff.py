@@ -170,12 +170,14 @@ _KliffSearch.track_failure_crash.unit = "count"
 
 def _benchmark(spec: dict):
     bound = spec
+    count = int(spec["n"])
+    limit = int(spec["cap"])
 
     class _Benchmark(_KliffSearch):
         param_names = ["seed", "start"]
-        params = [[str(SEED_BASE)], selected_indices(spec["n"])]
+        params = [[str(SEED_BASE)], selected_indices(count)]
         timeout = 14400
-        cap = spec["cap"]
+        cap = limit
         spec = bound
 
     _Benchmark.__name__ = spec["class_name"]
