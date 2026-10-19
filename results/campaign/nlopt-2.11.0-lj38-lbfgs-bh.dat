@@ -1,0 +1,33 @@
+# counter harness. One force call is one HarnessCounter entry.
+# The potential is Lennard-Jones, epsilon 1, sigma 1, cutoff 40, no shift.
+# A success is under the cap and at or below the Cambridge minimum plus 0.001.
+# Basin hopping. Each quench is NLopt LD_LBFGS. A trial coordinate step is limited to 0.2 because Luksan L-BFGS has no step cap, and a long step dissociates the cluster. Displacement is 0.5 and kT is 0.8, the archived basin-hopping schedule. Pairs closer than 0.9 use a quadratic core matched to the 12-6 value and slope. The recorded energy is the harness potential. The seed is the start index. GN_MLSL, CRS2, ISRES, and StoGO on the half-width 6 cube do not reach this minimum inside the cap.
+force_calls 445100
+force_calls_min 101806
+force_calls_max 976491
+nfailed 72
+median 389874
+code NLopt
+code_version 2.11.0
+commit 88c424d4f458412787df96fcc95218acbca224fd
+algorithm BasinHopping
+template nloptglobal/lj38-lbfgs-bh
+problem globalopt/lj38
+tuning default
+counter harness
+cap 1000000
+par2_mean 1564627.98
+wilson_low 0.201396852112
+wilson_high 0.374880287099
+par2_median 2000000
+par2_median_low 2000000
+par2_median_high 2000000
+v2_nfailed 72
+v2_successes 28
+n 100
+n_cap 72
+n_wrong_stationary 0
+n_divergence 0
+n_crash 0
+energy_min -173.928426591
+energy_max -172.877736411
