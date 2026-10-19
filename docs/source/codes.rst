@@ -679,15 +679,26 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 26, cap 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
+   <tr data-problem="saddle-search/pt-island" data-template="partn/saddle-pt">
+   <td>Pt heptamer island</td>
+   <td data-field="template">partn/saddle-pt</td>
+   <td data-field="version">artn 1.1.0</td>
+   <td data-field="commit">9b753517c6c0</td>
+   <td data-field="par2_mean">10980.2</td>
+   <td data-field="mean_calls">772.09</td>
+   <td data-field="median_calls">667</td>
+   <td data-field="failures">crash 13, divergence 169, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
    <tr data-problem="tsopt/LJ38" data-template="partn/ts-lj38">
    <td>LJ38</td>
    <td data-field="template">partn/ts-lj38</td>
    <td data-field="version">artn 1.1.0</td>
    <td data-field="commit">9b753517c6c0</td>
-   <td data-field="par2_mean">20000</td>
-   <td data-field="mean_calls">49.045</td>
-   <td data-field="median_calls">45</td>
-   <td data-field="failures">crash 200, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="par2_mean">5514.77</td>
+   <td data-field="mean_calls">4367.19</td>
+   <td data-field="median_calls">3679</td>
+   <td data-field="failures">crash 1, divergence 0, cap 21, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="tsopt/pt-island" data-template="partn/ts-pt">
@@ -695,10 +706,10 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">partn/ts-pt</td>
    <td data-field="version">artn 1.1.0</td>
    <td data-field="commit">9b753517c6c0</td>
-   <td data-field="par2_mean">1970.22</td>
-   <td data-field="mean_calls">380.224</td>
-   <td data-field="median_calls">265</td>
-   <td data-field="failures">crash 4, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="par2_mean">452.735</td>
+   <td data-field="mean_calls">452.735</td>
+   <td data-field="median_calls">325</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">49</td>
    </tr>
    </tbody></table></div>
@@ -1034,6 +1045,39 @@ The number is written only after the run finishes under the problem rule.
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="double-ended-saddle-search/lj38" data-template="optim/de-lj38">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="template">optim/de-lj38</td>
+   <td data-field="version">optim svn-snapshot</td>
+   <td data-field="commit">02aaf45245af</td>
+   <td data-field="par2_mean">146.82</td>
+   <td data-field="mean_calls">146.82</td>
+   <td data-field="median_calls">129</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="optim/de-2ts">
+   <td>lj38_2ts_separation</td>
+   <td data-field="template">optim/de-2ts</td>
+   <td data-field="version">optim svn-snapshot</td>
+   <td data-field="commit">02aaf45245af</td>
+   <td data-field="par2_mean">5725.16</td>
+   <td data-field="mean_calls">4352.61</td>
+   <td data-field="median_calls">3268</td>
+   <td data-field="failures">crash 0, divergence 0, cap 7, wrong_stationary 0</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="optim/de-pt">
+   <td>pt-island</td>
+   <td data-field="template">optim/de-pt</td>
+   <td data-field="version">optim svn-snapshot</td>
+   <td data-field="commit">02aaf45245af</td>
+   <td data-field="par2_mean">138</td>
+   <td data-field="mean_calls">138</td>
+   <td data-field="median_calls">133</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
    <tr data-problem="minimization/lj38" data-template="optim/lbfgs-lj38">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="template">optim/lbfgs-lj38</td>

@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 
-from .dat import normalize
+from .dat import normalize, parse_lenient
+from .endpoints import archive_error
 from .problems import load_all
 
 
@@ -44,6 +46,108 @@ def archive_gaps(problems: dict[str, dict], rows: list[dict]) -> list[str]:
             gaps.append(
                 f"duplicate {row['path']} {item['key']} kept {item['kept']!r} also {item['also']!r}"
             )
+    return gaps
+
+
+def _dat_for(starts: Path) -> Path:
+    name = starts.name
+    if name.endswith(".starts.jsonl"):
+        stem = name[: -len(".starts.jsonl")]
+    elif name.endswith(".starts"):
+        stem = name[: -len(".starts")]
+    else:
+        stem = starts.stem
+    return starts.with_name(stem + ".dat")
+
+
+def _json_records(path: Path) -> list[dict]:
+    records = []
+    for lineno, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+        stripped = line.strip()
+        if not stripped:
+            continue
+        try:
+            payload = json.loads(stripped)
+        except json.JSONDecodeError as exc:
+            raise ValueError(f"missing endpoints {path.name} line {lineno}") from exc
+        if not isinstance(payload, dict):
+            raise ValueError(f"missing endpoints {path.name} line {lineno}")
+        records.append(payload)
+    return records
+
+
+def _problem_of(starts: Path) -> str:
+    dat = _dat_for(starts)
+    if dat.is_file():
+        fields, _duplicates = parse_lenient(dat.read_text(encoding="utf-8"))
+        if fields.get("problem"):
+            return str(fields["problem"])
+    try:
+        records = _json_records(starts)
+    except ValueError:
+        return ""
+    if records and records[0].get("problem"):
+        return str(records[0]["problem"])
+    return ""
+
+
+def _start_files(campaign: Path) -> list[Path]:
+    found = [
+        path
+        for pattern in ("*.starts.jsonl", "*.starts")
+        for path in campaign.glob(pattern)
+        if path.is_file()
+    ]
+    return sorted(found, key=lambda path: path.name)
+
+
+def _legacy_hashes(path: Path) -> dict[str, str]:
+    found: dict[str, str] = {}
+    if not path.is_file():
+        return found
+    for line in path.read_text(encoding="utf-8").splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+        parts = stripped.split()
+        if len(parts) != 2:
+            raise ValueError(f"oracle/saddle_endpoint_legacy.txt has {stripped!r}")
+        name, digest = parts
+        found[name] = digest
+    return found
+
+
+def saddle_search_starts(root: Path) -> list[Path]:
+    """Campaign starts files whose problem id is ``saddle-search/...``."""
+    campaign = Path(root) / "results" / "campaign"
+    if not campaign.is_dir():
+        return []
+    return [path for path in _start_files(campaign) if _problem_of(path).startswith("saddle-search/")]
+
+
+def saddle_endpoint_gaps(root: Path) -> list[str]:
+    """Saddle-search starts files that do not carry both endpoint minima.
+
+    ``oracle/saddle_endpoint_legacy.txt`` lists the sha256 of starts files
+    scored before those coordinates were stored. A file whose bytes still
+    match is exempt. A replaced file has a new hash and is checked.
+    """
+    legacy = _legacy_hashes(Path(root) / "oracle" / "saddle_endpoint_legacy.txt")
+    gaps: list[str] = []
+    for starts in saddle_search_starts(root):
+        digest = hashlib.sha256(starts.read_bytes()).hexdigest()
+        if legacy.get(starts.name) == digest:
+            continue
+        try:
+            records = _json_records(starts)
+        except ValueError as exc:
+            gaps.append(str(exc))
+            continue
+        name = str(records[0].get("endpoints") or "") if records else ""
+        archive = starts.parent / name if name else starts.with_name("missing.endpoints.npz")
+        error = archive_error(archive, records, starts.name)
+        if error:
+            gaps.append(error)
     return gaps
 
 
@@ -89,9 +193,15 @@ def check(problems_dir: Path, oracle_path: Path) -> int:
             if line not in gaps:
                 print(f"- {line}")
         return 1
+    root = oracle_path.resolve().parent.parent
+    endpoint_gaps = saddle_endpoint_gaps(root)
+    if endpoint_gaps:
+        print(f"endpoint_gaps {len(endpoint_gaps)}")
+        for line in endpoint_gaps:
+            print(line)
+        return 1
     from .site_check import check_site
 
-    root = oracle_path.resolve().parent.parent
     site_errors = check_site(root)
     if site_errors:
         print(f"site {len(site_errors)}")

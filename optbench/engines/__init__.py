@@ -18,6 +18,7 @@ from . import (
     lammps_min,
     optim_search,
     partn,
+    pathsample_search,
     pykmc_search,
     pysis_search,
     tsase_search,
@@ -32,6 +33,7 @@ _MODULES = (
     dlfind_search,
     compass_search,
     pysis_search,
+    pathsample_search,
 )
 ENGINES = {module.ENGINE: module for module in _MODULES}
 

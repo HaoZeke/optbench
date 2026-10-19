@@ -8,10 +8,10 @@ algorithm = "Dynamics"
 reducer = "harness"
 failure_cap = 20000000
 kind = "akmc"
-kernel = "morse"
+kernel = "morse_shift"
 asv_class = "EonClientSaddlePtMd"
 note = '''
-High-temperature dynamics process search from the 2014 eon-md ini. confidence_scheme dynamics, dynamics temperature 2800, Langevin friction 0.004, time_step 2, time 10000. num_jobs is 1 and pass_limit is 1 so one search is the partial. The 2014 file asked for 8 jobs. Success remains 27 good saddles. The harness kernel is morse/smooth/linear with D 0.7102, alpha 1.6047, r0 2.897, cutoff 9.5, and periodic boundaries in x and y.
+High-temperature dynamics process search from the 2014 eon-md ini. confidence_scheme dynamics, dynamics temperature 2800, Langevin friction 0.004, time_step 2, time 10000. num_jobs is 1 and pass_limit is 1 so one search is the partial. The 2014 file asked for 8 jobs. Success remains 27 good saddles. The harness kernel is Morse::force: cutoff 9.5, pair energy shifted to zero at the cutoff, raw Morse force, minimum image on every positive box axis.
 '''
 seeds = [0]
 starts = ["pt-island"]
