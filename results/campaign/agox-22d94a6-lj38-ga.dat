@@ -2,7 +2,7 @@
 # Local steps are SciPy L-BFGS-B stopped on the ASE maximum atomic force.
 # The genetic algorithm follows the AGOX tests_ea script: population 10, SimpleFingerprint, and DistanceComparator with threshold 0.5. The archived geometry starts in the population. The first iteration draws 9 random structures, so the population stays at 10. From iteration 5 the schedule is 2 random and 8 rattles, and from iteration 10 it is 10 rattles. The rattle matches agox/lj38-bh, one quarter of the atoms at amplitude 3 Å. The script default rattles 3 atoms. Local optimization, seed, potential, success window, and cap are the same as agox/lj38-bh. The reference energy is the Cambridge cluster coordinates evaluated with this potential.
 # partial true. The row is not a full ranked score.
-nfailed 65
+nfailed 67
 code AGOX
 code_version 3.11.2.dev2+g22d94a6fa
 commit 22d94a6fae8cf2d08d51ecc8b9291a47667aa95c
@@ -14,14 +14,14 @@ counter harness
 cap 500000
 par2_mean 1000000
 wilson_low 0
-wilson_high 0.0558015313229
+wilson_high 0.0542261393913
 par2_median 1000000
 par2_median_low 1000000
 par2_median_high 1000000
-v2_nfailed 65
+v2_nfailed 67
 v2_successes 0
-n 65
-n_cap 65
+n 67
+n_cap 67
 n_wrong_stationary 0
 n_divergence 0
 n_crash 0
