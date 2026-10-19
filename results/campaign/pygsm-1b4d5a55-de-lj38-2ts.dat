@@ -1,15 +1,15 @@
 # counter harness
 # force_calls count raw potential evaluations and are not divided by the image count
 # the mean is round-half-even over successes; a failure is outside that mean
-n 21
+n 51
 successes 0
-nfailed 21
+nfailed 51
 par2_mean 20000.0000000000
 par2_median 20000.0000000000
 wilson_low 0.0000000000
-wilson_high 0.1546390189
+wilson_high 0.0700466199
 n_crash 0
-n_divergence 21
+n_divergence 51
 n_cap 0
 n_not_converged 0
 n_wrong_stationary 0
