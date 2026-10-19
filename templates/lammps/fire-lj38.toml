@@ -1,0 +1,13 @@
+# LAMMPS FIRE on LJ38.
+id = "lammps/fire-lj38"
+engine = "lammps"
+problem = "minimization/lj38"
+code = "lammps"
+code_version = "30 Sep 2026"
+commit = "8de817dd79bfe4525d5d39246a212d833e6dee07"
+algorithm = "FIRE"
+tuning = "default"
+note = "fix external pf/callback and pair_style zero. min_modify dmax 0.2 and norm two. FIRE uses timestep 0.002 because its velocity kick is not limited by dmax. The stop is the problem Euclidean force norm. Hessian index 0 is required."
+
+[lammps]
+min_style = "fire"

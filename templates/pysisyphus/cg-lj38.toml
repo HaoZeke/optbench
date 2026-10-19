@@ -1,0 +1,13 @@
+# pysisyphus conjugate gradient on LJ38.
+id = "pysisyphus/cg-lj38"
+engine = "pysisyphus"
+problem = "minimization/lj38"
+code = "pysisyphus"
+code_version = "0.1.dev1"
+commit = "a4ce10dd6d7fdcb3d813f1c730eb365d29041999"
+algorithm = "conjugate gradient"
+tuning = "default"
+note = "Fletcher-Reeves conjugate gradient. alpha is 0.1 and max_step is the Optimizer default 0.04 Bohr. The potential is evaluated in the harness unit. The RMS threshold matches the harness Euclidean force stop. Hessian index 0 is required."
+
+[pysisyphus]
+method = "cg"
