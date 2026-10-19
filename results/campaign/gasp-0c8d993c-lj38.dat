@@ -2,11 +2,11 @@
 # A minimize line contributes its force-evaluation count. The dump's run 0 contributes one.
 # GASP 0.1 runs with the yaml, lattice, and species shims, and the energy is the final minimization stat.
 # Default fixed-composition search. The composition is C and both atom limits are 38, because the archive holds 38-atom clusters and GASP reduces a formula to one atom. The archived geometry is the file organism, and 27 random organisms make the default initial population of 28. Pool size, variation fractions, the redundancy guard, and the 800-calculation stop are the fixed-composition defaults. The search also stops at an extensive energy of -173.927426590629, which is 0.001 above the Wales LJ38 geometry quenched with LAMMPS 8de817dd, pair_style lj/cut 40, pair_coeff * * 1 1, units lj, and thermo_modify norm no. Each calculation is minimize cg to a force tolerance of 1e-8 and at most 20000 force evaluations, then run 0 for the dump. The force cap is one above 800 times 20001, so a finished calculation budget stays under the cap. The seed is 20261015 plus the start index. This revision runs with shims for PyYAML, Structure.modify_lattice, species_and_occu, Structure.to, Lattice.from_lengths_and_angles, and PeriodicSite equality. MoleculeMatcher.fit keeps the InChI of a geometry and returns false when the two InChI strings differ; a matching InChI still uses the original RMSD test.
-# scored 80 of 100 starts
+# scored 89 of 100 starts
 force_calls 284277
 force_calls_min 190499
 force_calls_max 378609
-nfailed 73
+nfailed 82
 median 286578
 code gasp
 code_version 0.1
@@ -16,15 +16,15 @@ template gasp/lj38-default
 problem globalopt/lj38
 tuning default
 counter harness
-par2_mean 29226336.0375
-wilson_low 0.0430320017821
-wilson_high 0.169767955085
+par2_mean 29506980.9101
+wilson_low 0.0386198221652
+wilson_high 0.15355142382
 par2_median 32001602
 par2_median_low 32001602
 par2_median_high 32001602
-v2_nfailed 73
+v2_nfailed 82
 v2_successes 7
-n 80
+n 89
 cap 16000801
 energy_min -173.928426591
 energy_max -170.989860473
