@@ -105,7 +105,7 @@
    <td data-code="TorchSim">—</td>
    <td data-code="geomeTRIC">—</td>
    <td data-code="CP2K">—</td>
-   <td data-code="artn">—</td>
+   <td data-code="artn" data-template="partn/saddle-pt" data-par2="10980.2"><span class="bench-score">10980.2</span><a href="generated/suites/saddle-search.html#pt-island-templates">partn/saddle-pt</a></td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>

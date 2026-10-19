@@ -1,4 +1,4 @@
-"""Published Pt-island saddle counts.
+"""Published Pt-island saddle counts, and the stored pARTn endpoints.
 
 The 2014 eOn rows store ``done.py`` output. The nested run tarballs
 hold ``benchmark.dat``, ``done.py``, ``config.ini``, ``pos.con``, and
@@ -6,20 +6,36 @@ hold ``benchmark.dat``, ``done.py``, ``config.ini``, ``pos.con``, and
 minima, so ``Matter::compare`` cannot be reapplied to those searches.
 ``calc_benchmarks.py`` is the per-run list that averages to the
 published row.
+
+The pARTn campaign stored both endpoint minima. Cartesian RMSD 0.5
+over the 175 free atoms merges distinct products. The rerun applies
+``find_repeat`` to the saddle. A product rejudge of the same archive
+agrees: 48 good saddles, 18 inside the barrier window, fraction 0.755.
 """
 
 from __future__ import annotations
 
+import json
 import re
 import statistics
 from pathlib import Path
 
+import numpy as np
 import pytest
 
+from optbench.connection import rescore_endpoints
 from optbench.dat import parse_lenient
+from optbench.endpoints import load_endpoints
+from optbench.score import score_v2
 
 ROOT = Path(__file__).resolve().parents[1]
 ARCHIVE = ROOT / "archive" / "entries" / "saddle-search" / "pt-island"
+PARTN = "artn-1.1.0-saddle-search-pt-island--partn-saddle-pt"
+
+
+def _partn(suffix: str) -> Path:
+    # The campaign stem contains dots, so Path.with_suffix would cut at 1.1.
+    return ROOT / "results" / "campaign" / f"{PARTN}{suffix}"
 
 
 def _assignments(path: Path) -> dict[str, list[float]]:
@@ -82,3 +98,61 @@ def test_r2213_per_run_lists_average_to_the_published_row():
         for key in ("force_calls", "unique_saddles", "fraction_connected", "total_searches"):
             assert statistics.fmean(listed[key]) == pytest.approx(float(published[key]))
 
+
+def test_partn_endpoints_match_find_repeat_not_rmsd():
+    records = [json.loads(line) for line in _partn(".starts.jsonl").read_text().splitlines() if line.strip()]
+    for record in records:
+        record["reasons"] = list(record.get("reasons") or [])
+    reactant, plus, minus, cell, _free_index = load_endpoints(_partn(".endpoints.npz"))
+    catalog = rescore_endpoints(records, reactant, plus, minus, cell)
+    assert catalog.searches == 200
+    assert catalog.not_connected == 49
+    assert catalog.unique == 48
+    assert catalog.qualifying == 18
+    assert catalog.fraction_connected == 151 / 200
+    assert sum(bool(record["success"]) for record in records) == 18
+    dat = _partn(".dat").read_text(encoding="utf-8")
+    assert "unique_saddles 48" in dat
+    assert "fraction_connected 0.755" in dat
+    assert "connected 18" in dat
+    assert "force_calls 154413" in dat
+    assert "par2_mean 10980.2" in dat
+    metrics = score_v2(
+        [
+            {"force_calls": record["force_calls"], "success": record["success"], "failure": record["failure"]}
+            for record in records
+        ],
+        6000,
+    )
+    assert metrics["successes"] == 18
+    assert metrics["nfailed"] == 182
+    assert metrics["n_crash"] == 13
+    # A missed link, novelty, or barrier is wrong_stationary. The stored
+    # v2 file still says divergence; score_v2 follows the current class.
+    assert metrics["n_divergence"] == 0
+    assert metrics["n_wrong_stationary"] == 169
+    assert f"par2_mean {metrics['par2_mean']}" in dat
+
+    def rmsd(moved: np.ndarray, reference: np.ndarray) -> float:
+        delta = moved - reference
+        return float(np.sqrt(np.mean(np.sum(delta * delta, axis=-1))))
+
+    clusters: list[np.ndarray] = []
+    linked_low = 0
+    for index, record in enumerate(records):
+        if not record.get("barrier") or not (0.0 < float(record["barrier"]) < 1.5):
+            continue
+        row_plus = plus[index]
+        row_minus = minus[index]
+        if not (np.isfinite(row_plus).all() and np.isfinite(row_minus).all()):
+            continue
+        row_reactant = reactant[index]
+        # The nearer endpoint is the reactant under the r2205 test for a linked search.
+        product = row_plus if rmsd(row_minus, row_reactant) < rmsd(row_plus, row_reactant) else row_minus
+        if "not_connected" in record["reasons"]:
+            continue
+        linked_low += 1
+        if all(rmsd(product, old) > 0.5 for old in clusters):
+            clusters.append(product)
+    assert linked_low == 65
+    assert len(clusters) == 2

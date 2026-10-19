@@ -49487,6 +49487,52 @@
           "wilson_low": 0.0
         },
         {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": 6000,
+          "code": "artn",
+          "code_version": "1.1.0",
+          "commit": "9b753517c6c0eccae51425b83eb4e04ef554550b",
+          "comparable": true,
+          "counter": "harness",
+          "current": true,
+          "entry": "artn-1.1.0-saddle-search-pt-island--partn-saddle-pt",
+          "failures": {
+            "cap": 0,
+            "crash": 13,
+            "divergence": 0,
+            "not_converged": 0,
+            "wrong_stationary": 169
+          },
+          "full_n": null,
+          "history": false,
+          "max_calls": 1816.0,
+          "mean_calls": 772.06,
+          "mean_per_image": null,
+          "median": 12000.0,
+          "median_calls": 667.0,
+          "median_high": 12000.0,
+          "median_low": 12000.0,
+          "median_per_image": null,
+          "min_calls": 306.0,
+          "n": 200,
+          "nfailed": 182,
+          "note": "starts.jsonl",
+          "par2_mean": 10980.2,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/artn-1.1.0-saddle-search-pt-island--partn-saddle-pt.dat",
+          "problem": "saddle-search/pt-island",
+          "registry_match": true,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 0.09,
+          "template": "partn/saddle-pt",
+          "tuning": "optbench-pt111",
+          "wilson_high": 0.13776571876716542,
+          "wilson_low": 0.05768744886219316
+        },
+        {
           "asv_commit": "7e58986ea7a975b0f70e17294067de84e8db803d",
           "call_unit": "total",
           "cap": 100000000,
@@ -53645,7 +53691,7 @@
       "title": "pt-island"
     }
   },
-  "ranked_count": 625,
+  "ranked_count": 626,
   "schema": "optbench.board/v1",
   "unmapped": [
     {

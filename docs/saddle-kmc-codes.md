@@ -24,7 +24,7 @@ success-only median. A row with no success has no median.
 | lowest-eigenvector/lj38 | partn/mode-lj38 | 174/200 | 26 divergence | 22 |
 | tsopt/pt-island | partn/ts-pt | 49/49 | 0 | 325 |
 | tsopt/LJ38 | partn/ts-lj38 | 178/200 | 21 cap, 1 crash | 3302 |
-| saddle-search/pt-island | partn/saddle-pt | 18/200 | 169 divergence, 13 crash | 652 |
+| saddle-search/pt-island | partn/saddle-pt | 18/200 | 169 wrong stationary, 13 crash | 652 |
 | lowest-eigenvector/lj38 | tsase/mode-lj38 | 178/200 | 22 divergence | 221.5 |
 | tsopt/pt-island | tsase/dimer-pt | 49/49 | 0 | 892 |
 | tsopt/LJ38 | tsase/dimer-lj38 | 0/200 | 200 cap | — |
@@ -236,11 +236,49 @@ on those product minima leaves 2 clusters. `AKMCState.find_repeat` on the
 product minimum leaves 48 good saddles, 18 of them with a barrier
 strictly inside (0, 1.5) eV. Saddle coordinates were not stored, so the
 product is the geometry that test would have applied to `saddle.con`.
-`fraction_connected` is (200 - 49) / 200 = 0.755. The PAR-2 mean is
-10980.175. The success-only median is 652. Failures are 169 divergence
-and 13 crash. `rep1-search1` is linked and good, barrier
+`fraction_connected` is (200 - 49) / 200 = 0.755. The PAR-2 mean on
+those call counts is 10980.175. The success-only median is 652. Failures
+are 169 wrong stationary and 13 crash. `rep1-search1` is linked and good, barrier
 1.8580995421641546 eV, and it is not a success because the barrier is
 above 1.5 eV.
+
+The published saddle-search table has no ARTn row. Poberznik et al.,
+Comput. Phys. Commun. (2023), section 10.2, is one LAMMPS file push on
+this heptamer: `ninit` 1, `lanczos_max_size` 10, `eigval_thr` -0.02,
+`nsmooth` 2, force norm `1e-3`, barrier 1.47 eV. That example is not a
+catalog and does not publish a connected fraction, a unique count, or a
+PAR-2 mean. The catalog the authors ship is
+`examples/OptBench_SaddleSearch.d/launch_script.py`: an in-plane push on
+1 to 7 of atoms 0-6, lengths 0.05 to 0.5 Å, `ninit` 3, `lanczos_max_size`
+20, `eigen_step_size` 0.3, `eigval_thr` -0.05, `nsmooth` 2, `nnewchance`
+0, and `minimize` 2000, until 27 saddles under 1.5 eV. The script's pair
+is `morse/smooth/linear`. This row keeps that push and uses `nnewchance`
+2 from `examples/LAMMPS.Pt111.d/artn.in`. The potential is `pes.morse_pt`,
+which matches eOn `Morse::force`. `cells/partn/saddle-pt-repro` at
+`d1ef3d52` calls `_radial_push`. It does not call `draw_search_start`,
+so this branch does not add that variant.
+
+The file on this branch is a rerun of the in-plane row under that
+potential, the r2205 link, and `find_repeat` on the saddle. There is no
+wall-clock cap. `max_searches` stays 200 and `search_budget` stays 2000.
+Workers were 8. `nevalf` matches the `58c7eea3` file on all 200 searches.
+The largest barrier difference is 1.5916157281026244e-12 eV. Nine
+endpoint minimizations change length. The repetition total is 154413
+against 154419. Saddle `find_repeat` and a product rejudge of the new
+endpoints agree on every row: unique 48, connected 18, `not_connected`
+49, fraction 0.755. PAR-2 is 10980.2. The 0.025 gap from 10980.175 is
+five extra calls on the successes, `rep1-search2` 422 to 424 and
+`rep1-search50` 552 to 555. The success-only median stays 652. Failures
+stay 169 wrong stationary and 13 crash. The RMSD score, unique 3, fraction
+0.0, PAR-2 12000.0, does not recur. The goal of 27 is not met.
+
+| row | push | searches | connected | fraction | unique | PAR-2 | force calls |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| in-plane `58c7eea3`, RMSD 0.5 on the saddle | 1-7 atoms, 0.05-0.5 Å | 200 | 0 | 0.0 | 3 | 12000.0 | 154419 |
+| in-plane `58c7eea3`, `find_repeat` on the product | same | 200 | 18 | 0.755 | 48 | 10980.175 | 154419 |
+| in-plane rerun, `find_repeat` on the saddle | same | 200 | 18 | 0.755 | 48 | 10980.2 | 154413 |
+| `beland-radial` `d1ef3d52`, RMSD 0.5 on the saddle | radial, 0.4 Å within 3.0 Å | 200 | 0 | 0.0 | 3 | 12000.0 | 157247 |
+| `beland-radial` `d1ef3d52`, `find_repeat` on the product | same, not rerun | 200 | 15 | 0.895 | 58 | not recomputed | 157247 |
 
 ## Pt-island endpoint link
 
@@ -307,11 +345,14 @@ The MATLAB reducer that wrote those rows is
 `1 - (unique_sp_sofar - n_connected_sp) / N_searches`, which is not the
 `done.py` ratio. The harness follows `done.py`.
 
-The pARTn saddle-search Pt-island campaign result files, including
-`artn-1.1.0-saddle-search-pt-island--partn-saddle-pt.endpoints.npz`,
-stay out of this tree. The recount on that held run was 18 connected,
-48 unique, fraction 0.755, PAR-2 10980.175. The result file at
-`58c7eea3` was 0 connected, 3 unique, fraction 0.0, PAR-2 12000.0.
+The pARTn campaign on this branch stores both endpoint minima in
+`artn-1.1.0-saddle-search-pt-island--partn-saddle-pt.endpoints.npz`
+(187 finite endpoint pairs, 13 `not_minimized` crash rows). The stored
+score is the saddle-level rerun: 18 connected, 48 unique, fraction
+0.755, PAR-2 10980.2. A product rejudge of that archive agrees on every
+row. The result file at `58c7eea3` was 0 connected, 3 unique, fraction
+0.0, PAR-2 12000.0. The same successes on those call counts are PAR-2
+10980.175.
 
 A new saddle-search campaign stores both endpoint minima beside the
 starts file. `<stem>.endpoints.npz` is format 2: float32 free-atom
@@ -320,7 +361,7 @@ reactant, compressed, in `free_index` order, with the orthorhombic cell
 lengths. Format 1, absolute float32 `plus` and `minus`, still loads.
 Absolute float16 is not used, because a coordinate near 20 Å is coarser
 than the 0.1 Å link. A search that stops before those minimizations has
-status `not_minimized` and NaN deltas. git-LFS is not used.
+status `not_minimized` and NaN deltas. The npz is git-LFS tracked with the other endpoint archives.
 `optbench check` rejects a `saddle-search/` starts file whose sha256 is
 absent from `oracle/saddle_endpoint_legacy.txt` when that archive is
 missing or does not match the records. The names in that file are the
@@ -340,7 +381,7 @@ directory, outside the HTML tables.
 | rgsaddle/saddle-dimer-rotskip | absent; RMSD scalars on 19718 of 20000 | 0/20000 | 0/20000 | 10128 | 10128 |
 | rgsaddle/saddle-lanczos | absent; RMSD scalars on 4068 of 20000 | 0/20000 | 0/20000 | 10128 | 10128 |
 | rgsaddle/saddle-lanczos-tuned | absent; RMSD scalars on 13743 of 20000 | 0/20000 | 0/20000 | 10128 | 10128 |
-| partn/saddle-pt | free-atom endpoints; 187 stored, 13 not minimized | 0/200 at 58c7eea3 | 18/200 | 12000.0 | 10980.175 |
+| partn/saddle-pt | free-atom endpoints; 187 stored, 13 not minimized | 0/200 at 58c7eea3 | 18/200 | 12000.0 | 10980.2 |
 | ase/dimer-pt-island-default, campaign n=16 | absent | 16/16 | 16/16 | 1118.0625 | 1118.0625 |
 | ase/dimer-pt-island-tuned, campaign n=16 | absent | 16/16 | 16/16 | 915.4375 | 915.4375 |
 | ase/dimer-pt-island-default, asv n=1 | absent | 1/1 | 1/1 | 699 | 699 |
@@ -532,7 +573,7 @@ on `cells/softsaddle/ts-reps`.
 
 | template | geometries | before unique | after unique | before connected | after connected | before fraction | after fraction | before PAR-2 | after PAR-2 | archive unique | archive fraction |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| partn/saddle-pt | 187 finite free-atom pairs, 13 not minimized | 3 | 48 | 0/200 | 18/200 | 0.0 | 0.755 | 12000.0 | 10980.175 |  |  |
+| partn/saddle-pt | 187 finite free-atom pairs, 13 not minimized | 3 | 48 | 0/200 | 18/200 | 0.0 | 0.755 | 12000.0 | 10980.2 |  |  |
 | pykmc/saddle-pt | 499 finite 343-atom pairs, 62 not finite | 163 | 99 | 12/561 | 13/561 | 0.0213903743315508 | 0.7522281639928698 | 39172.08021390374 | 39103.130124777184 |  |  |
 | optim/saddle-hef-ffd-pt | absent; `saddle_free` on 1 of 124 | 1 | 1 | 0/124 | 0/124 | 0.0 | 0.0 | 10128.0 | 10128.0 |  |  |
 | cp2k/saddle-dimer-cg-tuned | absent; RMSD on 750 of 20000 | 1 | 1 | 0/20000 | 0/20000 | 0.0 | 0.0 | 10128.0 | 10128.0 |  |  |
@@ -576,8 +617,9 @@ tuned archive is in the displacement section above.
 
 `cells/partn/saddle-pt-repro` at `d1ef3d52` is a different pARTn run
 (`tuning` `beland-radial`, `force_calls` 157247, PAR-2 12000.0,
-`unique_saddles` 3, `connected` 0, `fraction_connected` 0.0). Its
-endpoint archive is 585274 bytes and is not copied here. 177 of 200
+`unique_saddles` 3, `connected` 0, `fraction_connected` 0.0). The push
+is `_radial_push`, not `draw_search_start`. Its endpoint archive is
+585274 bytes and is not copied here. 177 of 200
 pairs are finite. 156 are linked. Grouping those products by the
 0.1 Å per-atom test gives 58 groups, as a greedy walk and as connected
 components. `find_repeat` on the products leaves unique 58 and

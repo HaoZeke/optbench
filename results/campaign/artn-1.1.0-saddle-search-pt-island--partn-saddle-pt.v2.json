@@ -1,0 +1,66 @@
+{
+  "counter": "harness",
+  "legacy": {
+    "force_calls": 669,
+    "force_calls_max": 1046,
+    "force_calls_median": 652.0,
+    "force_calls_min": 424,
+    "n": 200,
+    "nfailed": 182,
+    "successes": 18,
+    "transition_states": 187
+  },
+  "problem": "saddle-search/pt-island",
+  "provenance": {
+    "code": "artn",
+    "code_version": "1.1.0",
+    "commit": "9b753517c6c0eccae51425b83eb4e04ef554550b",
+    "machine": {
+      "machine": "x86_64",
+      "node": "cursor",
+      "python": "3.12.3",
+      "system": "Linux"
+    },
+    "parameters": {
+      "cap": 6000,
+      "counter": "harness",
+      "distance_difference": 0.1,
+      "geometry": "tau_sad",
+      "goal": 27,
+      "max_searches": 200,
+      "search_budget": 2000
+    }
+  },
+  "schema": "optbench.score/v2",
+  "score": {
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 20261015,
+    "cap": 6000,
+    "includes_failures": true,
+    "iqr": 0.0,
+    "iqr_high": 0.0,
+    "iqr_low": 0.0,
+    "mean": 10980.2,
+    "median": 12000.0,
+    "median_high": 12000.0,
+    "median_low": 12000.0,
+    "n": 200,
+    "n_cap": 0,
+    "n_crash": 13,
+    "n_divergence": 169,
+    "n_wrong_stationary": 0,
+    "nfailed": 182,
+    "par2_mean": 10980.2,
+    "par_applied": true,
+    "par_factor": 2,
+    "q25": 12000.0,
+    "q75": 12000.0,
+    "scoring": "par2-wilson-bootstrap",
+    "success_only_mean": 668.8888888888889,
+    "success_rate": 0.09,
+    "successes": 18,
+    "wilson_high": 0.13776571876716542,
+    "wilson_low": 0.05768744886219316
+  },
+  "template": "partn/saddle-pt"
+}
