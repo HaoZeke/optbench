@@ -19,15 +19,17 @@ PROBLEMS = (
 
 def test_registry_pins_the_tarball():
     registry = tomllib.loads((ROOT / "codes" / "registry.toml").read_text(encoding="utf-8"))
-    row = next(item for item in registry["code"] if item["id"] == "gmin")
+    row = next(item for item in registry["code"] if item["id"] == "gmin-bh")
     assert row["name"] == "GMIN"
     assert row["commit"] == TARBALL_SHA256
     assert row["ref"] == CODE_VERSION
     assert TARBALL_SHA256.startswith(row["ref"])
+    quench = next(item for item in registry["code"] if item["id"] == "gmin")
+    assert TARBALL_SHA256 in quench["note"]
 
 
 def test_eight_templates_cover_bh_and_bhpt():
-    found = [item for item in list_templates(ROOT) if item.get("engine") == "gmin"]
+    found = [item for item in list_templates(ROOT) if item.get("engine") == "gmin-bh"]
     ids = sorted(item["id"] for item in found)
     assert ids == sorted(
         f"gmin/{problem.split('/')[1]}-{method}"
@@ -114,7 +116,7 @@ def test_bhpt_keyword_order_and_repeated_coords():
 
 
 def test_asv_classes_import_with_one_start():
-    import benchmarks.bench_gmin as bench
+    import benchmarks.bench_gmin_bh as bench
 
     classes = [
         value
@@ -125,7 +127,7 @@ def test_asv_classes_import_with_one_start():
     caps = {
         item["id"]: int(item["failure_cap"])
         for item in list_templates(ROOT)
-        if item.get("engine") == "gmin"
+        if item.get("engine") == "gmin-bh"
     }
     for benchmark in classes:
         assert benchmark.params == [["0"], ["0"]]

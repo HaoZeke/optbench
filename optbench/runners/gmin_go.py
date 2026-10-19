@@ -46,7 +46,7 @@ def gmin_binary() -> Path:
     env = os.environ.get("OPTBENCH_GMIN", "")
     path = Path(env) if env else Path(shutil.which("GMIN") or "")
     if not path.is_file():
-        raise RuntimeError("set OPTBENCH_GMIN to the GMIN binary built by codes/gmin/build.sh")
+        raise RuntimeError("set OPTBENCH_GMIN to the GMIN binary built by codes/gmin/build-bh.sh")
     return path
 
 

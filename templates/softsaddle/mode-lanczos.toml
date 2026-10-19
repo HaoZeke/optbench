@@ -1,0 +1,25 @@
+id = "softsaddle/mode-lanczos"
+engine = "softsaddle"
+problem = "lowest-eigenvector/lj38"
+code = "softsaddle"
+code_version = "2019.04"
+commit = "5a00aeede06fd822ef302624ec4c9bc7889d21fc0b5804b701a5785695c68d16"
+algorithm = "Lanczos"
+tuning = "default"
+
+[ini.Main]
+job = "lowest_eigenvector"
+solver = "lanczos"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+max_iterations = 10000
+finite_diff = 1.0e-4
+
+[ini.SaddleSearch]
+mode_seed = "gradient"
+lanc_iter = 8
+lanc_abs_tol = 0.01
+lanc_finite = 1.0e-4
+save_lanczos_call = true
+save_lanczos_factor = 50.0

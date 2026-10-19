@@ -1,5 +1,5 @@
 id = "gmin/lj150-bhpt"
-engine = "gmin"
+engine = "gmin-bh"
 problem = "globalopt/lj150"
 code = "GMIN"
 code_version = "02aaf45245af"

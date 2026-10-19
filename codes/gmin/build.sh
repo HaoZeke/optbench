@@ -1,67 +1,54 @@
-#!/bin/bash
-# Build GMIN from the Wales svn.tar.bz2 and the OptBench LJ hook.
-# The pin is the tarball sha256. The tree is not a git revision.
+#!/usr/bin/env bash
+# Build libgminlbfgs.so from the pinned Wales svn.tar.bz2.
+# The objects are source/mymylbfgs.F90 and source/blas_wrappers.F90.
+# stubs.f90 and driver.f90 are the OptBench callback.
 set -euo pipefail
 
-ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
-TARBALL="${1:-/tmp/wales-src/svn.tar.bz2}"
-DEST="${2:-/tmp/wales-src}"
-BUILD="${3:-/tmp/gmin-build}"
-EXPECTED="02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+here=$(cd "$(dirname "$0")" && pwd)
+sha=02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f
+rev=df8da599267534fbe43a250e578f7396a7946311
+prefix=${PREFIX:-/opt/gmin}
+tarball=${GMIN_TARBALL:-}
 
-if [[ ! -f "$TARBALL" ]]; then
-  echo "missing tarball $TARBALL" >&2
+if [[ -z "$tarball" ]]; then
+  if [[ -f /tmp/gmin-src/svn.tar.bz2 ]]; then
+    tarball=/tmp/gmin-src/svn.tar.bz2
+  else
+    tarball=$here/svn.tar.bz2
+    curl -fsSL -o "$tarball" "https://www-wales.ch.cam.ac.uk/svn.tar.bz2"
+  fi
+fi
+
+echo "$sha  $tarball" | sha256sum -c -
+
+work=$(mktemp -d)
+trap 'rm -rf "$work"' EXIT
+tar -xjf "$tarball" -C "$work" \
+  ./wales/GMIN/source/mymylbfgs.F90 \
+  ./wales/GMIN/source/blas_wrappers.F90 \
+  ./wales/GMIN/source/SVNREV
+got=$(tr -d '[:space:]' < "$work/wales/GMIN/source/SVNREV")
+if [[ "$got" != "$rev" ]]; then
+  echo "SVNREV is $got, expected $rev" >&2
   exit 1
 fi
-got="$(sha256sum "$TARBALL" | awk '{print $1}')"
-if [[ "$got" != "$EXPECTED" ]]; then
-  echo "tarball sha256 $got" >&2
-  exit 1
+
+cp "$here/stubs.f90" "$here/driver.f90" "$work/"
+flags=(-fPIC -O2 -fmax-stack-var-size=32768 -ffree-line-length-none)
+(
+  cd "$work"
+  gfortran -c "${flags[@]}" -std=f2008 stubs.f90
+  gfortran -c "${flags[@]}" wales/GMIN/source/blas_wrappers.F90
+  gfortran -c "${flags[@]}" wales/GMIN/source/mymylbfgs.F90
+  gfortran -c "${flags[@]}" driver.f90
+  gfortran -shared -Wl,--no-undefined -o libgminlbfgs.so \
+    stubs.o blas_wrappers.o mymylbfgs.o driver.o -lblas
+)
+cp "$work/libgminlbfgs.so" "$here/libgminlbfgs.so"
+if mkdir -p "$prefix/lib" 2>/dev/null && cp "$here/libgminlbfgs.so" "$prefix/lib/libgminlbfgs.so"; then
+  echo "installed $prefix/lib/libgminlbfgs.so"
+else
+  sudo mkdir -p "$prefix/lib"
+  sudo cp "$here/libgminlbfgs.so" "$prefix/lib/libgminlbfgs.so"
+  echo "installed $prefix/lib/libgminlbfgs.so"
 fi
-
-if [[ ! -f "$DEST/wales/GMIN/source/lj.F90" ]]; then
-  tar -xjf "$TARBALL" -C "$DEST"
-fi
-
-rm -f "$DEST/wales/INTERFACES/optbench_pot.f90"
-cp "$ROOT/codes/gmin/optbench_pot.F90" "$DEST/wales/INTERFACES/optbench_pot.F90"
-mkdir -p "$DEST/wales/HiRE"
-cp "$ROOT/codes/gmin/hire_interface.F90" "$DEST/wales/HiRE/hire_interface.F90"
-
-python3 - "$DEST/wales/GMIN/source/lj.F90" << 'PY'
-import sys
-from pathlib import Path
-path = Path(sys.argv[1])
-text = path.read_text()
-if "OPTBENCH_ACTIVE" in text:
-    raise SystemExit(0)
-needle = "      USE BLAS_WRAPPERS, ONLY: DSYMV_W, DDOT_W, DGEMV_W\n"
-use = needle + "      USE OPTBENCH_POT, ONLY: OPTBENCH_ACTIVE, OPTBENCH_LJ\n"
-old = "      REAL(KIND = REAL64) :: R6, DIST, DUMMY\n"
-hook = """      REAL(KIND = REAL64) :: R6, DIST, DUMMY
-
-      IF (OPTBENCH_ACTIVE() .AND. .NOT. STEST) THEN
-         CALL OPTBENCH_LJ(NATOMS, X, V, ELJ, GTEST)
-         VT(1:NATOMS) = ELJ / DBLE(NATOMS)
-         RETURN
-      END IF
-"""
-if needle not in text or old not in text:
-    raise SystemExit("lj.F90 anchors missing")
-text = text.replace(needle, use, 1).replace(old, hook, 1)
-path.write_text(text)
-PY
-
-mkdir -p "$BUILD"
-cd "$BUILD"
-FC=mpif90 CC=gcc CXX=g++ cmake "$DEST/wales/GMIN/source" \
-  -DWITH_MPI=ON \
-  -DWITH_ALIGN=OFF \
-  -DWITH_MYBLAS=OFF \
-  -DWITH_MYLAPACK=OFF \
-  -DCOMPILER_SWITCH=gfortran \
-  -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_C_COMPILER=gcc \
-  -DCMAKE_CXX_COMPILER=g++
-make -j"$(nproc)" GMIN
-echo "built $BUILD/GMIN"
