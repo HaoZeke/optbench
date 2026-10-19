@@ -458,6 +458,14 @@ def read_campaign(root: Path, branch: str, path: str) -> str:
 
 
 def _sha(branch: str) -> str:
+    if branch == "repro/globalopt-lj38-pele-basinhopping" and branch not in SHA:
+        import subprocess
+
+        SHA[branch] = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"],
+            cwd=Path(__file__).resolve().parents[1],
+            text=True,
+        ).strip()
     if branch == "cells/fill-not-rerun" and len(SHA.get(branch, "")) < 12:
         import subprocess
 

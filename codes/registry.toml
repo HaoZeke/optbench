@@ -173,6 +173,16 @@ commit = "0.1.1"
 committed = "2019-12-10"
 note = "Sella 0.1.1 PESWrapper.diag for the lowest-eigenvector row. eta 1e-6, gamma 1e-16, vreftol 0.99, gradient v0, rigid-mode projection. This pin is not Sella 2.6.0."
 
+[[code]]
+id = "pele"
+name = "pele"
+role = "global optimization"
+repository = "https://github.com/pele-python/pele"
+ref = "master"
+commit = "b7081b932a060be11342fbe8287ac35da8ada879"
+committed = "2026-10-12"
+note = "pele 0.1.2 at b7081b93. Lennard-Jones 38 basin hopping follows bin/js850/globalopt.py: temperature 1, RandomDisplacement 0.41, AdaptiveStepsize acceptance 0.5 factor 0.9 interval 100, LBFGS RMS tolerance 1e-3, memory 4, maxstep 0.1. pele 0.1.2 multiplies a rising LBFGS step by 1/2. The archived a68ec5 quench divides that step by 10. codes/pele-a68ec5-lbfgs-linesearch.patch restores the division and makes the CVODE import optional when Sundials is not linked. Force calls count getEnergy and getEnergyGradient separately."
+
 [[template]]
 id = "sella-0.1.1/lj38-loweig"
 code = "sella-0.1.1"
