@@ -61,7 +61,7 @@ It does not run a campaign.
    <td data-code="compass">—</td>
    <td data-code="dlfind" data-template="dlfind/lbfgs-morse" data-par2="13626.5"><span class="bench-score">13626.5</span><a href="generated/suites/minimization.html#morse-bulk-templates">dlfind/lbfgs-morse</a></td>
    <td data-code="lammps" data-template="lammps/fire-morse" data-par2="17656.7"><span class="bench-score">17656.7</span><a href="generated/suites/minimization.html#morse-bulk-templates">lammps/fire-morse</a></td>
-   <td data-code="optim" data-template="optim/lbfgs-morse" data-par2="17408.8"><span class="bench-score">17408.8</span><a href="generated/suites/minimization.html#morse-bulk-templates">optim/lbfgs-morse</a></td>
+   <td data-code="optim" data-template="optim/morse-lbfgs-stock" data-par2="54.65"><span class="bench-score">54.65</span><a href="generated/suites/minimization.html#morse-bulk-templates">optim/morse-lbfgs-stock</a></td>
    <td data-code="tsase" data-template="tsase/lbfgs-morse" data-par2="17606.4"><span class="bench-score">17606.4</span><a href="generated/suites/minimization.html#morse-bulk-templates">tsase/lbfgs-morse</a></td>
    </tr>
    <tr data-problem="saddle-search/pt-island">

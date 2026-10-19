@@ -1047,6 +1047,12 @@ The number is written only after the run finishes under the problem rule.
    <td>02aaf45245af</td>
    <td><a href="http://www-wales.ch.cam.ac.uk/svn.tar.bz2">http://www-wales.ch.cam.ac.uk/svn.tar.bz2</a></td>
    </tr>
+   <tr>
+   <td>minimization</td>
+   <td>df8da599267534fbe43a250e578f7396a7946311</td>
+   <td>df8da5992675</td>
+   <td><a href="https://www-wales.ch.cam.ac.uk/svn.tar.bz2">https://www-wales.ch.cam.ac.uk/svn.tar.bz2</a></td>
+   </tr>
    </tbody></table></div>
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
@@ -1062,15 +1068,15 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 2</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/morse-bulk" data-template="optim/lbfgs-morse">
+   <tr data-problem="minimization/morse-bulk" data-template="optim/morse-lbfgs-stock">
    <td>Morse bulk</td>
-   <td data-field="template">optim/lbfgs-morse</td>
-   <td data-field="version">optim svn-snapshot</td>
-   <td data-field="commit">02aaf45245af</td>
-   <td data-field="par2_mean">17408.8</td>
-   <td data-field="mean_calls">65.19</td>
-   <td data-field="median_calls">65</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 87</td>
+   <td data-field="template">optim/morse-lbfgs-stock</td>
+   <td data-field="version">optim df8da599</td>
+   <td data-field="commit">df8da5992675</td>
+   <td data-field="par2_mean">54.65</td>
+   <td data-field="mean_calls">54.65</td>
+   <td data-field="median_calls">53.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>
