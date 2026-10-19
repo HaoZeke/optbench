@@ -826,9 +826,6 @@ The number is written only after the run finishes under the problem rule.
    </tr>
    </tbody></table></div>
    <p>No full ranked run.</p>
-<<<<<<< HEAD
-   <h3>OPTIM</h3>
-=======
    <h3>LAMMPS</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
@@ -878,15 +875,11 @@ The number is written only after the run finishes under the problem rule.
    </tr>
    </tbody></table></div>
    <h3>DL-FIND</h3>
->>>>>>> origin/main
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
    <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
    <td>minimization</td>
-<<<<<<< HEAD
-   <td>svn-export</td>
-=======
    <td>0.0.3</td>
    <td>4167998d16d8</td>
    <td><a href="https://github.com/digital-chemistry-laboratory/libdlfind">https://github.com/digital-chemistry-laboratory/libdlfind</a></td>
@@ -1030,9 +1023,8 @@ The number is written only after the run finishes under the problem rule.
    <caption>Registry pins.</caption>
    <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
-   <td>saddle search</td>
-   <td>svn-snapshot</td>
->>>>>>> origin/main
+   <td>minimization</td>
+   <td>svn-export</td>
    <td>02aaf45245af</td>
    <td><a href="http://www-wales.ch.cam.ac.uk/svn.tar.bz2">http://www-wales.ch.cam.ac.uk/svn.tar.bz2</a></td>
    </tr>
@@ -1040,7 +1032,6 @@ The number is written only after the run finishes under the problem rule.
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-<<<<<<< HEAD
    <tr data-problem="minimization/lj38" data-template="optim/lj38-lbfgs-tuned">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="template">optim/lj38-lbfgs-tuned</td>
@@ -1072,28 +1063,6 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="mean_calls">26.66</td>
    <td data-field="median_calls">27</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
-=======
-   <tr data-problem="minimization/lj38" data-template="optim/lbfgs-lj38">
-   <td>Lennard-Jones 38 clusters</td>
-   <td data-field="template">optim/lbfgs-lj38</td>
-   <td data-field="version">optim svn-snapshot</td>
-   <td data-field="commit">02aaf45245af</td>
-   <td data-field="par2_mean">270.341</td>
-   <td data-field="mean_calls">230.724</td>
-   <td data-field="median_calls">217</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 2</td>
-   <td data-field="n">1000</td>
-   </tr>
-   <tr data-problem="minimization/morse-bulk" data-template="optim/lbfgs-morse">
-   <td>Morse bulk</td>
-   <td data-field="template">optim/lbfgs-morse</td>
-   <td data-field="version">optim svn-snapshot</td>
-   <td data-field="commit">02aaf45245af</td>
-   <td data-field="par2_mean">17408.8</td>
-   <td data-field="mean_calls">65.19</td>
-   <td data-field="median_calls">65</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 87</td>
->>>>>>> origin/main
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>

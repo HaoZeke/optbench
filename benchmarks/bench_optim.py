@@ -82,7 +82,8 @@ def _specs() -> list[dict]:
     found = []
     counts: dict[str, int] = {}
     for template in list_templates(ROOT):
-        if template.get("engine") != "optim":
+        # ASE-socket rows and the unhooked template share this engine name.
+        if template.get("engine") != "optim" or str(template.get("code_version")) != "02aaf45245af":
             continue
         problem_id = str(template["problem"])
         if problem_id not in counts:

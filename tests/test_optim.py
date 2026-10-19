@@ -33,6 +33,28 @@ def test_odata_puts_userpot_last_and_writes_d_exponents(tmp_path: Path):
     assert fortran_d(0.1).endswith("D-01") or "D" in fortran_d(0.1)
 
 
+def test_asv_discovers_only_the_userpot_templates():
+    from benchmarks import bench_optim
+
+    classes = [
+        value
+        for value in vars(bench_optim).values()
+        if isinstance(value, type) and getattr(value, "spec", None)
+    ]
+    assert {row.spec["template_id"] for row in classes} == {
+        "optim/lj38-lbfgs",
+        "optim/lj38-lbfgs-tuned",
+        "optim/morse-lbfgs",
+        "optim/morse-lbfgs-tuned",
+        "optim/noise-lbfgs-s0",
+        "optim/noise-lbfgs-s1em4",
+        "optim/noise-lbfgs-s1em3",
+        "optim/noise-lbfgs-s1em2",
+    }
+    assert all(row.spec["code_version"] == VERSION for row in classes)
+    assert all(row.params == [["0"], ["0"]] for row in classes)
+
+
 def test_optim_templates_match_the_tarball_pin():
     registry = tomllib.loads((ROOT / "codes" / "registry.toml").read_text(encoding="utf-8"))
     pinned = next(row for row in registry["code"] if row["id"] == "optim")
