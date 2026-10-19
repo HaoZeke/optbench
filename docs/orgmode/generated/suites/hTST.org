@@ -123,6 +123,7 @@
    <h3>Partial</h3><ul>
    <li>eon-client/htst-pt-dimer-lbfgs eOn campaign n=1, result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5).</li>
    <li>eon-client/htst-pt-lanczos-lbfgs eOn campaign n=1, result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5).</li>
+   <li>eon-svn/htst-pt-dimer-cg2 Eon svn campaign n=13, result file sets ranked false.</li>
    <li>eon-svn/htst-pt-dimer-lbfgs Eon svn campaign n=1, result file sets partial true.</li>
    <li>eon-svn/htst-pt-lanczos-lbfgs Eon svn campaign n=1, result file sets partial true.</li>
    </ul>

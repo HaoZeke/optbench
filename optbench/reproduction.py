@@ -108,6 +108,7 @@ SHA = {
     "cells/pele/ts-repro": "54ac7e7a1aa6581c261c17fc2c52a20e77121911",
     "cells/softsaddle/ts-reps": "bd1a5c9fc2685f5876266d53715accb31a049e73",
     "entries/eon-svn-htst": "715bc521c827f1f18102c1c027d99d0d8624b0fb",
+    "repro/htst-pt-eon-dimer-cg2": "8078bff9e342846f02a45fa38aa1101d627c3914",
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
