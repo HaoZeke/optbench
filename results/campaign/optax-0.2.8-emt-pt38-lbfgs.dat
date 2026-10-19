@@ -1,0 +1,35 @@
+# counter harness. One force call is one evaluation of the squared-error loss and its gradient.
+# The network is the PyAMFF 10-7 tanh model. Initial weights are uniform[-1, 1).
+# A start that first meets the stop on the call at the cap is a cap failure.
+# L-BFGS counts each zoom line-search evaluation. The RMSE at the accepted point is a verification call.
+# mean_force_rmse and median_force_rmse are -1 because the force coefficient is 0. The stop still reads the force RMSE.
+# Default row. L-BFGS keeps 10 vector pairs and takes its step from the Optax zoom line search. Each line-search evaluation counts. Energy coefficient 1 and force coefficient 0. The gradient tolerance is 0.02 and the cap is 10000 calls. The network is the PyAMFF 10-7 tanh model on the Behler-Parrinello fingerprints of the EMT Pt 38 trajectory. The loss is the PyAMFF squared error. A start stops when every parameter gradient component is below the tolerance, or when the energy RMSE is below 0.0001 and the force RMSE is below 0.01. One harness call is one evaluation of that loss and its gradient. Initial weights are uniform[-1, 1) from jax.random.key(20261018 + start). A start that first meets the stop on the call at the cap is a cap failure.
+problem mlopt/emt-pt38
+template optax/emt-pt38-lbfgs
+cap 10000
+counter harness
+code Optax
+code_version 0.2.8
+commit 107e9ad20ca62bcbee1a8c016daab71c690a678c
+tuning default
+algorithm LBFGS
+n 50
+force_calls 55
+force_calls_min 7
+force_calls_max 149
+nfailed 0
+median 52.5
+mean_epoch 42.28
+median_epoch 40
+mean_energy_rmse 0.00373452691253
+median_energy_rmse 0.00359686834707
+mean_force_rmse -1
+median_force_rmse -1
+par2_mean 54.98
+wilson_low 0.928652400867
+wilson_high 1
+par2_median 52.5
+par2_median_low 40
+par2_median_high 57
+v2_nfailed 0
+v2_successes 50

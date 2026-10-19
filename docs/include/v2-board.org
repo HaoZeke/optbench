@@ -5,7 +5,7 @@
    <div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>LAMMPS</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>TorchSim</th><th>geomeTRIC</th><th>CP2K</th><th>n2p2</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>optking</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>LAMMPS</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>TorchSim</th><th>geomeTRIC</th><th>CP2K</th><th>n2p2</th><th>Optax</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>optking</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="minimization/lj38">
    <th scope="row"><a href="generated/suites/minimization.html#lj38">Lennard-Jones 38 clusters</a></th>
    <td data-code="eOn" data-template="eon/lj38-lbfgs-m100" data-par2="180.137"><span class="bench-score">180.137</span><a href="generated/suites/minimization.html#lj38-templates">eon/lj38-lbfgs-m100</a></td>
@@ -25,6 +25,7 @@
    <td data-code="geomeTRIC">—</td>
    <td data-code="CP2K">—</td>
    <td data-code="n2p2">—</td>
+   <td data-code="Optax">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind" data-template="dlfind/lbfgs-lj38" data-par2="231.908"><span class="bench-score">231.908</span><a href="generated/suites/minimization.html#lj38-templates">dlfind/lbfgs-lj38</a></td>
@@ -53,6 +54,7 @@
    <td data-code="geomeTRIC">—</td>
    <td data-code="CP2K">—</td>
    <td data-code="n2p2">—</td>
+   <td data-code="Optax">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind" data-template="dlfind/lbfgs-lj38-noise-s0" data-par2="231.908"><span class="bench-score">231.908</span><a href="generated/suites/minimization.html#lj38-noise-templates">dlfind/lbfgs-lj38-noise-s0</a></td>
@@ -81,6 +83,7 @@
    <td data-code="geomeTRIC">—</td>
    <td data-code="CP2K">—</td>
    <td data-code="n2p2">—</td>
+   <td data-code="Optax">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind" data-template="dlfind/lbfgs-morse" data-par2="13626.5"><span class="bench-score">13626.5</span><a href="generated/suites/minimization.html#morse-bulk-templates">dlfind/lbfgs-morse</a></td>
@@ -109,6 +112,7 @@
    <td data-code="geomeTRIC">—</td>
    <td data-code="CP2K">—</td>
    <td data-code="n2p2">—</td>
+   <td data-code="Optax">—</td>
    <td data-code="artn" data-template="partn/saddle-pt" data-par2="10980.2"><span class="bench-score">10980.2</span><a href="generated/suites/saddle-search.html#pt-island-templates">partn/saddle-pt</a></td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -137,6 +141,7 @@
    <td data-code="geomeTRIC">—</td>
    <td data-code="CP2K" data-template="cp2k/ci-neb" data-par2="4655.5"><span class="bench-score">4655.5</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">cp2k/ci-neb</a></td>
    <td data-code="n2p2">—</td>
+   <td data-code="Optax">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass" data-template="compass/sqnm" data-par2="1517.3"><span class="bench-score">1517.3</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
@@ -165,6 +170,7 @@
    <td data-code="geomeTRIC">—</td>
    <td data-code="CP2K">—</td>
    <td data-code="n2p2">—</td>
+   <td data-code="Optax">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass" data-template="compass/sqnm" data-par2="6713.37"><span class="bench-score">6713.37</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
@@ -193,6 +199,7 @@
    <td data-code="geomeTRIC">—</td>
    <td data-code="CP2K" data-template="cp2k/ci-neb-tuned" data-par2="2555.76"><span class="bench-score">2555.76</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">cp2k/ci-neb-tuned</a></td>
    <td data-code="n2p2">—</td>
+   <td data-code="Optax">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass" data-template="compass/sqnm" data-par2="1078.12"><span class="bench-score">1078.12</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
@@ -221,6 +228,7 @@
    <td data-code="geomeTRIC">—</td>
    <td data-code="CP2K">—</td>
    <td data-code="n2p2">—</td>
+   <td data-code="Optax">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -249,6 +257,7 @@
    <td data-code="geomeTRIC">—</td>
    <td data-code="CP2K">—</td>
    <td data-code="n2p2">—</td>
+   <td data-code="Optax">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -277,6 +286,7 @@
    <td data-code="geomeTRIC">—</td>
    <td data-code="CP2K">—</td>
    <td data-code="n2p2">—</td>
+   <td data-code="Optax">—</td>
    <td data-code="artn" data-template="partn/mode-lj38" data-par2="2619.84"><span class="bench-score">2619.84</span><a href="generated/suites/lowest-eigenvector.html#lj38-templates">partn/mode-lj38</a></td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -305,6 +315,7 @@
    <td data-code="geomeTRIC" data-template="geometric/lj38-ts-harness" data-par2="661.295"><span class="bench-score">661.295</span><a href="generated/suites/tsopt.html#LJ38-templates">geometric/lj38-ts-harness</a></td>
    <td data-code="CP2K" data-template="cp2k/lj38-dimer-cg-tuned" data-par2="1139.41"><span class="bench-score">1139.41</span><a href="generated/suites/tsopt.html#LJ38-templates">cp2k/lj38-dimer-cg-tuned</a></td>
    <td data-code="n2p2">—</td>
+   <td data-code="Optax">—</td>
    <td data-code="artn" data-template="partn/ts-lj38" data-par2="5514.77"><span class="bench-score">5514.77</span><a href="generated/suites/tsopt.html#LJ38-templates">partn/ts-lj38</a></td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -333,6 +344,7 @@
    <td data-code="geomeTRIC" data-template="geometric/pt-island-ts-fd" data-par2="1061.12"><span class="bench-score">1061.12</span><a href="generated/suites/tsopt.html#pt-island-templates">geometric/pt-island-ts-fd</a></td>
    <td data-code="CP2K" data-template="cp2k/pt-island-dimer-cg-tuned" data-par2="852.98"><span class="bench-score">852.98</span><a href="generated/suites/tsopt.html#pt-island-templates">cp2k/pt-island-dimer-cg-tuned</a></td>
    <td data-code="n2p2">—</td>
+   <td data-code="Optax">—</td>
    <td data-code="artn" data-template="partn/ts-pt" data-par2="452.735"><span class="bench-score">452.735</span><a href="generated/suites/tsopt.html#pt-island-templates">partn/ts-pt</a></td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -361,6 +373,7 @@
    <td data-code="geomeTRIC">—</td>
    <td data-code="CP2K">—</td>
    <td data-code="n2p2" data-template="n2p2/c2h4-kalman" data-par2="16021.6"><span class="bench-score">16021.6</span><a href="generated/suites/mlopt.html#C2H4-templates">n2p2/c2h4-kalman</a></td>
+   <td data-code="Optax" data-template="optax/c2h4-lbfgs" data-par2="336.84"><span class="bench-score">336.84</span><a href="generated/suites/mlopt.html#C2H4-templates">optax/c2h4-lbfgs</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -389,6 +402,7 @@
    <td data-code="geomeTRIC">—</td>
    <td data-code="CP2K">—</td>
    <td data-code="n2p2" data-template="n2p2/emt-pt38-kalman" data-par2="31.5"><span class="bench-score">31.5</span><a href="generated/suites/mlopt.html#emt-pt38-templates">n2p2/emt-pt38-kalman</a></td>
+   <td data-code="Optax" data-template="optax/emt-pt38-lbfgs" data-par2="54.98"><span class="bench-score">54.98</span><a href="generated/suites/mlopt.html#emt-pt38-templates">optax/emt-pt38-lbfgs</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -417,6 +431,7 @@
    <td data-code="geomeTRIC">—</td>
    <td data-code="CP2K" data-template="cp2k/ci-neb-tuned" data-par2="1893.85"><span class="bench-score">1893.85</span><a href="generated/suites/neb.html#Pt-heptamer-templates">cp2k/ci-neb-tuned</a></td>
    <td data-code="n2p2">—</td>
+   <td data-code="Optax">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass" data-template="compass/sqnm" data-par2="561.462"><span class="bench-score">561.462</span><a href="generated/suites/neb.html#Pt-heptamer-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
@@ -445,6 +460,7 @@
    <td data-code="geomeTRIC">—</td>
    <td data-code="CP2K">—</td>
    <td data-code="n2p2">—</td>
+   <td data-code="Optax">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -473,6 +489,7 @@
    <td data-code="geomeTRIC">—</td>
    <td data-code="CP2K">—</td>
    <td data-code="n2p2">—</td>
+   <td data-code="Optax">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -501,6 +518,7 @@
    <td data-code="geomeTRIC">—</td>
    <td data-code="CP2K">—</td>
    <td data-code="n2p2">—</td>
+   <td data-code="Optax">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -529,6 +547,7 @@
    <td data-code="geomeTRIC">—</td>
    <td data-code="CP2K">—</td>
    <td data-code="n2p2">—</td>
+   <td data-code="Optax">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>

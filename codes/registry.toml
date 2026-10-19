@@ -330,6 +330,16 @@ commit = "29b9c9f10b1ac9ea45631b3d556a129ca3b701c2"
 committed = "2025-03-17"
 note = "n2p2 2.3.0, commit 29b9c9f10b1ac9ea45631b3d556a129ca3b701c2. The row uses the standard Kalman filter and the recommended parameters: epsilon 0.01, q0 0.01, qtau 2.302, qmin 1e-6, eta 0.01, etatau 2.302, etamax 1. The published taus are divided by the number of structures in an epoch. One combined filter updates the total-energy residual. The potential is the pyamff 8037eb98 energy-only squared error on the problem trajectory and fpParas.dat. A force call is one loss-gradient evaluation."
 
+[[code]]
+id = "optax"
+name = "Optax"
+role = "machine-learning optimization"
+repository = "https://github.com/google-deepmind/optax"
+ref = "v0.2.8"
+commit = "107e9ad20ca62bcbee1a8c016daab71c690a678c"
+committed = "2026-03-20"
+note = "Optax 0.2.8 at 107e9ad20ca62bcbee1a8c016daab71c690a678c. Adam, Rprop, and L-BFGS train the PyAMFF 10-7 tanh network on the Behler-Parrinello fingerprints and the squared-error loss from pyamff 8037eb98. One harness call is one evaluation of that loss and its gradient with respect to the network parameters. L-BFGS uses the Optax zoom line search, and each line-search evaluation counts. Initial weights are uniform[-1, 1)."
+
 # generated ASE and Sella templates
 
 [[template]]
