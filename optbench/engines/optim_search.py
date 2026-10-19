@@ -1,13 +1,15 @@
-"""OPTIM L-BFGS through the ASE socket.
+"""OPTIM minimization through the ASE socket, and OPTIM 27058 hybrid eigenvector-following.
 
-The binary is the OPTIM target from the Wales snapshot
+The minimization binary is the OPTIM target from the Wales snapshot
 ``http://www-wales.ch.cam.ac.uk/svn.tar.bz2``. The pin is the sha256 of
 that file. The snapshot has no git commit. Each ``COMPUTE`` on the relay
-is one ``pes.evaluate``. OPTIM's own counter is not the score.
+is one ``pes.evaluate``. OPTIM's own counter is not the score for that socket.
 
 ``optim/unhooked`` and every template that is not minimization L-BFGS
-raise before a file is written. Noise, saddle search, NEB, and PATHSAMPLE
-are not this runner.
+raise before a file is written. Noise, NEB, and PATHSAMPLE are not this runner.
+The LJ38 hybrid eigenvector-following row is pin ``optim-27058``. It runs the
+native binary on the archived odata preamble and ``coords-xyz``. The score is
+the last ``energy+gradient calls`` line.
 """
 
 from __future__ import annotations
@@ -281,16 +283,24 @@ def _job(start: dict, settings: dict, template: dict) -> dict:
 
 
 def run(root: Path, problem_name: str, template_name: str, *, output: Path, workers: int = 1) -> dict:
-    reason = available()
-    if reason:
-        raise RuntimeError(reason)
     root = Path(root)
     from optbench.campaign import load_template, resolve_problem
 
+    template = load_template(root, template_name)
+    if str((template.get("optim") or {}).get("method") or "") == "hef-ffd":
+        return _run_hef_ffd(
+            root,
+            resolve_problem(root, problem_name),
+            template,
+            output=output,
+            workers=workers,
+        )
+    reason = available()
+    if reason:
+        raise RuntimeError(reason)
     from .common import registry_pin, require_pin
 
     problem = resolve_problem(root, problem_name)
-    template = load_template(root, template_name)
     require_pin(template, registry_pin(root, CODE))
     if template["engine"] != ENGINE:
         raise ValueError(f"{template_name} engine is {template['engine']}")
@@ -322,6 +332,232 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
         "maxstep": section["maxstep"],
         "counter": "harness",
         "socket": "ASE",
+    }
+    return write_campaign(
+        output,
+        records,
+        template,
+        problem,
+        settings,
+        parameters,
+        images=None,
+        comment=comment,
+    )
+
+
+_HEF_TARBALL = "https://optbench.org/codes/wales-27058.tar.bz2"
+_HEF_SHA256 = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
+
+
+def hef_binary() -> Path | None:
+    """OPTIM 27058. ``OPTIM_BIN`` wins, then the gfortran build of that tarball."""
+    env = os.environ.get("OPTIM_BIN")
+    candidates = []
+    if env:
+        candidates.append(Path(env))
+    candidates.append(Path("/tmp/src/wales/OPTIM/bin/gfortran/OPTIM"))
+    for path in candidates:
+        if path.is_file():
+            return path
+    return None
+
+
+def _stored_archive(root: Path, archive_path: str) -> Path:
+    import json
+
+    manifest = root / "inputs" / "manifest.jsonl"
+    for line in manifest.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        row = json.loads(line)
+        if row.get("path") == archive_path:
+            return root / row["stored"]
+    raise FileNotFoundError(archive_path)
+
+
+def odata_for_xyz(preamble: str, xyz_text: str) -> str:
+    """The 2014 ``run_optim.sh`` file: preamble, then ``points``, then ``AX`` rows.
+
+    ``awk '{print "AX  ", $2,$3,$4}'`` inserts the output separator, so the
+    symbol is followed by three spaces.
+    """
+    body = preamble if preamble.endswith("\n") else preamble + "\n"
+    lines = [body + "points"]
+    for raw in xyz_text.splitlines()[2:]:
+        parts = raw.split()
+        if len(parts) < 4:
+            continue
+        lines.append(f"AX   {parts[1]} {parts[2]} {parts[3]}")
+    return "\n".join(lines) + "\n"
+
+
+def parse_optim_log(text: str) -> dict:
+    """Last ``energy+gradient calls`` line and the CONVERGED marker.
+
+    ``getdata.py`` keeps a start out of the mean when that marker is absent.
+    """
+    calls = None
+    for line in text.splitlines():
+        if "energy+gradient calls=" not in line:
+            continue
+        token = line.split("energy+gradient calls=", 1)[1].split()[0]
+        calls = int(token)
+    return {"force_calls": calls, "converged": "**** CONVERGED ****" in text}
+
+
+def _execute_hef(job: dict) -> dict:
+    import tempfile
+
+    os.environ.setdefault("OMP_NUM_THREADS", "1")
+    name = str(job["name"])
+    cap = int(job["cap"])
+    calls = None
+    converged = False
+    error = ""
+    try:
+        with tempfile.TemporaryDirectory(prefix="optim-hef-") as raw:
+            folder = Path(raw)
+            (folder / "odata").write_text(job["odata"], encoding="utf-8")
+            env = os.environ.copy()
+            env["OMP_NUM_THREADS"] = "1"
+            stdout_path = folder / "OPTIM.log"
+            stderr_path = folder / "OPTIM.err"
+            try:
+                with stdout_path.open("w", encoding="utf-8") as stdout, stderr_path.open("w", encoding="utf-8") as stderr:
+                    proc = subprocess.run(
+                        [str(job["binary"])],
+                        cwd=folder,
+                        env=env,
+                        stdout=stdout,
+                        stderr=stderr,
+                        text=True,
+                        timeout=600,
+                        check=False,
+                    )
+            except subprocess.TimeoutExpired:
+                proc = None
+                error = "OPTIM exceeded 600s"
+            parsed = parse_optim_log(stdout_path.read_text(encoding="utf-8", errors="replace"))
+            calls = parsed["force_calls"]
+            converged = bool(parsed["converged"])
+            if proc is not None and proc.returncode != 0 and not converged:
+                detail = _tail(stderr_path) or _tail(stdout_path) or f"exit {proc.returncode}"
+                error = f"OPTIM exit {proc.returncode}: {detail}"
+    except Exception as exc:
+        error = f"{type(exc).__name__}: {exc}"
+    success = bool(converged) and calls is not None and calls < cap and not error
+    failure = None
+    reasons: list[str] = []
+    if not success:
+        if error or calls is None:
+            failure = "crash"
+            reasons = ["crash"]
+        elif calls >= cap:
+            failure = "cap"
+            reasons = ["cap"]
+        else:
+            failure = "divergence"
+            reasons = ["divergence"]
+    return {
+        "schema": "optbench.start/v2",
+        "start": name,
+        "force_calls": int(calls or 0),
+        "verify_calls": 0,
+        "counter": "harness",
+        "comparable": True,
+        "success": success,
+        "failure": failure,
+        "reasons": reasons,
+        "converged": bool(converged),
+        "hessian_index": None,
+        "expected_index": 1,
+        "error": error,
+    }
+
+
+def _run_hef_ffd(root: Path, problem: dict, template: dict, *, output: Path, workers: int) -> dict:
+    """Native OPTIM 27058 on the archived preamble and ``coords-xyz`` starts."""
+    import tarfile
+
+    from .common import registry_pin, require_pin, run_jobs, write_campaign
+
+    if template["engine"] != ENGINE:
+        raise ValueError(f"{template['id']} engine is {template['engine']}")
+    stated = template.get("problem")
+    if stated and stated != problem["id"]:
+        raise ValueError(f"{template['id']} belongs to {stated}")
+    require_pin(template, registry_pin(root, str(template["code"])))
+    section = dict(template.get("optim") or {})
+    binary = hef_binary()
+    if binary is None:
+        raise RuntimeError(
+            f"{template['id']} needs OPTIM 27058. The pin is the sha256 {_HEF_SHA256} "
+            f"of {_HEF_TARBALL} (20942854 bytes). Set OPTIM_BIN or build "
+            "source/build.csh gfortran optim. The score is energy+gradient calls."
+        )
+    import tempfile
+
+    with tempfile.TemporaryDirectory(prefix="optim-version-") as raw:
+        banner = subprocess.run(
+            [str(binary)],
+            cwd=raw,
+            input="",
+            capture_output=True,
+            text=True,
+            timeout=30,
+            check=False,
+        )
+    version_text = f"{banner.stdout}\n{banner.stderr}"
+    if "27058" not in version_text:
+        raise RuntimeError(f"{binary} is not OPTIM 27058")
+    preamble_path = root / str(section["preamble"])
+    preamble = preamble_path.read_text(encoding="utf-8")
+    archive = _stored_archive(root, str(section["coords"]))
+    settings = point_settings(problem)
+    if settings["cap"] is None:
+        raise ValueError(f"{problem['id']} has no force-call cap")
+    jobs = []
+    with tarfile.open(archive) as packed:
+        for member in packed.getmembers():
+            name = Path(member.name).name
+            if not name.endswith(".xyz"):
+                continue
+            extracted = packed.extractfile(member)
+            if extracted is None:
+                continue
+            xyz = extracted.read().decode("utf-8")
+            jobs.append(
+                {
+                    "name": Path(name).stem,
+                    "binary": str(binary),
+                    "cap": int(settings["cap"]),
+                    "odata": odata_for_xyz(preamble, xyz),
+                }
+            )
+    jobs.sort(key=lambda job: job["name"])
+    if len(jobs) != int((problem.get("sample") or {}).get("starts") or len(jobs)):
+        raise RuntimeError(f"{template['id']} read {len(jobs)} xyz starts")
+    records = run_jobs(jobs, _execute_hef, workers)
+    comment = (
+        "# OPTIM 27058 native Lennard-Jones, symbol AX, no cutoff. "
+        "The odata preamble is the 2014 file: BFGSTS 40 14 16 0.33, "
+        "UPDATES 82 10, BFGSSTEPS 100, BFGSCONV 9.36585D-05, NOHESS, "
+        "MAXMAX 0.2, MAXBFGS 0.2 0.2, USEDIAG 3.\n"
+        "# Starts are coords-xyz, 0000.xyz through 0199.xyz. "
+        "force_calls is the last energy+gradient calls line. "
+        "A start is a success only when the log contains CONVERGED and the count is under the cap."
+    )
+    parameters = {
+        "method": "hef-ffd",
+        "keyword": "BFGSTS",
+        "bfgsts": "40 14 16 0.33",
+        "updates": "82 10",
+        "usediag": 3,
+        "bfgsconv": "9.36585D-05",
+        "counter": "energy+gradient",
+        "potential": "LJDIFF",
+        "starts": "coords-xyz",
+        "code_file": "wales-27058.tar.bz2",
     }
     return write_campaign(
         output,

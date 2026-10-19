@@ -1,0 +1,18 @@
+# OPTIM 27058 native Lennard-Jones, symbol AX, no cutoff. The odata preamble is the 2014 file: BFGSTS 40 14 16 0.33, UPDATES 82 10, BFGSSTEPS 100, BFGSCONV 9.36585D-05, NOHESS, MAXMAX 0.2, MAXBFGS 0.2 0.2, USEDIAG 3.
+# Starts are coords-xyz, 0000.xyz through 0199.xyz. force_calls is the last energy+gradient calls line. A start is a success only when the log contains CONVERGED and the count is under the cap.
+force_calls 145
+force_calls_min 57
+force_calls_max 565
+force_calls_median 119
+successes 200
+nfailed 0
+n 200
+transition_states 0
+code optim-27058
+code_version 27058
+commit 144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348
+algorithm hybrid eigenvector following
+template optim/hef-ffd-ts-lj38
+problem tsopt/LJ38
+tuning archive
+counter harness

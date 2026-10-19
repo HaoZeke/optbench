@@ -159,9 +159,9 @@ other 87 meet the force stop with a Hessian index other than 0, so they
 are wrong stationary. The success median is 72. Start `pos_0000` took 55
 harness calls and stopped at force `0.000842553062284986`, energy
 `-1421.4513232624358`, vibrational index 6. `optim/unhooked` writes nothing.
-Noise is not scored: the relay has no noisy-force window. Saddle search,
-NEB, tsopt, and hTST are not scored: those OPTIM keywords are not connected
-to this socket. PATHSAMPLE is in the same snapshot. The PATHSAMPLE target linked
+Noise is not scored: the relay has no noisy-force window. Noise, NEB, and hTST are not this socket. The LJ38 hybrid
+eigenvector-following row is OPTIM 27058, the archived odata preamble, and
+coords-xyz. Its score is the native energy+gradient call count. PATHSAMPLE is in the same snapshot. The PATHSAMPLE target linked
 (gfortran, `WITH_OPENMP` off). It does not call `pes.evaluate`. It writes
 `odata.*` and submits the `EXEC` program, which is OPTIM. No PATHSAMPLE
 number is written.

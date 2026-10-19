@@ -127,6 +127,7 @@ def test_pending_grid_is_every_problem_and_code():
         "compass",
         "pysisyphus",
         "optim",
+        "optim-27058",
         "sella-0.1.1",
     ]
     assert Pending.params[1] == code_ids()

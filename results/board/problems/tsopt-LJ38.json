@@ -503,11 +503,12 @@
   ],
   "profile": {
     "area_log10": {
-      "eon-client/ts-lj38-dimer 3.5.0 campaign 4d8b34b": 0.32962784525205946,
+      "eon-client/ts-lj38-dimer 3.5.0 campaign 4d8b34b": 0.32812269527373955,
       "eon-client/ts-lj38-lanczos 3.5.0 campaign 4d8b34b": 0.560668366924165,
       "eon-client/ts-lj38-lanczos-improved 3.5.0 campaign 4d8b34b": 0.6600082654932787,
-      "eon-svn/ts-lj38-dimer-ljcut r2549 campaign r2549": 0.4071430691355346,
+      "eon-svn/ts-lj38-dimer-ljcut r2549 campaign r2549": 0.40563791915721464,
       "eon-svn/ts-lj38-lanczos-ljcut r2549 campaign r2549": 0.6569979655366389,
+      "optim/hef-ffd-ts-lj38 27058 archive campaign 144a703": 0.8887910621979045,
       "partn/ts-lj38 1.1.0 default campaign 9b75351": 0.0,
       "rgsaddle/dimer-fire 0.2.2 default campaign, asv c0db2b8": 0.0,
       "rgsaddle/dimer-fire-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.0,
@@ -517,8 +518,8 @@
       "rgsaddle/dimer-rotskip-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.08729869874255455,
       "rgsaddle/lanczos 0.2.2 default campaign, asv c0db2b8": 0.0,
       "rgsaddle/lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.0015051499783199063,
-      "rgsaddle/prfo 0.2.2 default campaign, asv c0db2b8": 0.0782677988726351,
-      "rgsaddle/prfo-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.7360183393984341,
+      "rgsaddle/prfo 0.2.2 default campaign, asv c0db2b8": 0.07676264889431521,
+      "rgsaddle/prfo-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.7337606144309542,
       "sella/lj38-ts-default 2.6.0 default campaign, asv 6cfb60c": 1.201862257688445,
       "tsase/dimer-lj38 1.0 default campaign 98aac60": 0.0
     },
@@ -526,7 +527,7 @@
       "eon-client/ts-lj38-dimer 3.5.0 campaign 4d8b34b": [
         0.0,
         0.0,
-        0.005,
+        0.0,
         0.65,
         0.88
       ],
@@ -548,7 +549,7 @@
         0.0,
         0.0,
         0.065,
-        0.795,
+        0.79,
         0.985
       ],
       "eon-svn/ts-lj38-lanczos-ljcut r2549 campaign r2549": [
@@ -557,6 +558,13 @@
         0.71,
         0.97,
         0.995
+      ],
+      "optim/hef-ffd-ts-lj38 27058 archive campaign 144a703": [
+        0.015,
+        0.465,
+        0.98,
+        1.0,
+        1.0
       ],
       "partn/ts-lj38 1.1.0 default campaign 9b75351": [
         0.0,
@@ -624,12 +632,12 @@
       "rgsaddle/prfo 0.2.2 default campaign, asv c0db2b8": [
         0.0,
         0.005,
-        0.02,
+        0.015,
         0.13,
         0.21
       ],
       "rgsaddle/prfo-tuned 0.2.2 tuned campaign, asv c0db2b8": [
-        0.015,
+        0.0,
         0.14,
         0.82,
         0.98,
@@ -656,6 +664,7 @@
       "eon-client/ts-lj38-lanczos-improved 3.5.0 campaign 4d8b34b": 1.0,
       "eon-svn/ts-lj38-dimer-ljcut r2549 campaign r2549": 0.995,
       "eon-svn/ts-lj38-lanczos-ljcut r2549 campaign r2549": 1.0,
+      "optim/hef-ffd-ts-lj38 27058 archive campaign 144a703": 1.0,
       "partn/ts-lj38 1.1.0 default campaign 9b75351": 0.0,
       "rgsaddle/dimer-fire 0.2.2 default campaign, asv c0db2b8": 0.04,
       "rgsaddle/dimer-fire-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.235,
@@ -721,6 +730,51 @@
       "success_rate": 1.0,
       "template": "sella/lj38-ts-default",
       "tuning": "default",
+      "wilson_high": 1.0,
+      "wilson_low": 0.9811546736227335
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "optim-27058",
+      "code_version": "27058",
+      "commit": "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "optim-27058-hef-ffd-ts-lj38",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 200,
+      "history": false,
+      "max_calls": 565.0,
+      "mean_calls": 144.62,
+      "mean_per_image": null,
+      "median": 119.0,
+      "median_calls": 119.0,
+      "median_high": 124.5,
+      "median_low": 115.0,
+      "median_per_image": null,
+      "min_calls": 57.0,
+      "n": 200,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 144.62,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/optim-27058-hef-ffd-ts-lj38.dat",
+      "problem": "tsopt/LJ38",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "optim/hef-ffd-ts-lj38",
+      "tuning": "archive",
       "wilson_high": 1.0,
       "wilson_low": 0.9811546736227335
     },

@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+47 reproduced, 28 not reproduced, 76 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -203,7 +203,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | LJ38/eon-lanczos | force_calls 321 | 293 | reproduced |
 | LJ38/eon-lanczos-improved | force_calls 237 | 271 | not reproduced; improved_unset |
 | LJ38/optim_cd | — | — | not rerun |
-| LJ38/optim_ffd | force_calls 145 | 489 | not reproduced; optim_lj38_ts |
+| LJ38/optim_ffd | force_calls 145 | 145 | reproduced |
 | LJ38/pele_cd | force_calls 254 | 263.52 | reproduced; residual |
 | LJ38/pele_ffd | force_calls 192 | 207.51 | reproduced; residual |
 | LJ38/sella | force_calls 69.55 | 93 | not reproduced; sella_trust |
@@ -344,12 +344,6 @@ The harness link and novelty test uses Cartesian RMSD 0.5 over the full island. 
 The classic dimer campaign (improved false, the 2014 key) has fraction_connected 0.692 against 0.746, inside 10 percent, but force calls 6.97e6 against 3.78e6 and unique saddles 91.7 against 109.2. The archive standard error on the force calls is 5.27e5. This eOn AKMC counter is not the harness RMSD link test.
 
 - saddle-search/pt-island/eon-dimer
-
-### optim_lj38_ts
-
-Archive run.sh unpacks coords-xyz.tar.gz. The harness uses the problem coords-con set (Kabsch RMS about 6.33). The odata preamble is not in the archive snapshot. The template uses updates 4. The mean is 489 against 145.
-
-- tsopt/LJ38/optim_ffd
 
 ### sella_trust
 
