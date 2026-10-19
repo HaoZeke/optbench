@@ -1,7 +1,7 @@
 {
   "bootstrap_resamples": 2000,
   "bootstrap_seed": 20261015,
-  "note": "scored 12 of 200 starts",
+  "note": "scored 14 of 200 starts",
   "par_factor": 2,
   "problem": "globalopt/lj75",
   "runs": [
@@ -17,7 +17,7 @@
         "force_calls_max": null,
         "force_calls_min": null,
         "median": null,
-        "nfailed": 12
+        "nfailed": 14
       },
       "metrics": {
         "bootstrap_resamples": 2000,
@@ -31,12 +31,12 @@
         "median": 2000000.0,
         "median_high": 2000000.0,
         "median_low": 2000000.0,
-        "n": 12,
-        "n_cap": 12,
+        "n": 14,
+        "n_cap": 14,
         "n_crash": 0,
         "n_divergence": 0,
         "n_wrong_stationary": 0,
-        "nfailed": 12,
+        "nfailed": 14,
         "par2_mean": 2000000.0,
         "par_applied": true,
         "par_factor": 2,
@@ -46,7 +46,7 @@
         "success_only_mean": null,
         "success_rate": 0.0,
         "successes": 0,
-        "wilson_high": 0.24249400665524085,
+        "wilson_high": 0.2153108027376358,
         "wilson_low": 0.0
       },
       "parameters": {
@@ -587,6 +587,92 @@
           "schema": "optbench.start/v2",
           "seed": 314170,
           "start": "12",
+          "stop": "cap",
+          "success": false,
+          "target": -397.491331,
+          "verify_calls": 0
+        },
+        {
+          "best_calls": 761657,
+          "bound": 6.0,
+          "cap": 1000000,
+          "code_version": "1.18.1",
+          "commit": "e4e854eaa8f18d807cd3496028e257e36caa93cc",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -28.886257682351143,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "method": "differential_evolution",
+          "parameters": {
+            "atol": 0.0,
+            "bound": 6.0,
+            "init": "latinhypercube",
+            "maxiter": 1000000,
+            "method": "differential_evolution",
+            "mutation": [
+              0.5,
+              1.0
+            ],
+            "polish": true,
+            "popsize": 15,
+            "recombination": 0.7,
+            "seed": 314171,
+            "strategy": "best1bin",
+            "tol": 0.01,
+            "updating": "immediate",
+            "vectorized": false,
+            "workers": 1
+          },
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "seed": 314171,
+          "start": "13",
+          "stop": "cap",
+          "success": false,
+          "target": -397.491331,
+          "verify_calls": 0
+        },
+        {
+          "best_calls": 121016,
+          "bound": 6.0,
+          "cap": 1000000,
+          "code_version": "1.18.1",
+          "commit": "e4e854eaa8f18d807cd3496028e257e36caa93cc",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -29.141373467567334,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "method": "differential_evolution",
+          "parameters": {
+            "atol": 0.0,
+            "bound": 6.0,
+            "init": "latinhypercube",
+            "maxiter": 1000000,
+            "method": "differential_evolution",
+            "mutation": [
+              0.5,
+              1.0
+            ],
+            "polish": true,
+            "popsize": 15,
+            "recombination": 0.7,
+            "seed": 314172,
+            "strategy": "best1bin",
+            "tol": 0.01,
+            "updating": "immediate",
+            "vectorized": false,
+            "workers": 1
+          },
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "seed": 314172,
+          "start": "14",
           "stop": "cap",
           "success": false,
           "target": -397.491331,
