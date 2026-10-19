@@ -783,7 +783,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="double-ended-saddle-search-lj38-eon-ci-swdneb">
    <td class="num">8</td>
-   <td class="text">eon-ci-swdneb · not reproduced</td>
+   <td class="text">eon-ci-swdneb</td>
    <td class="text">Eon r2156</td>
    <td class="num">861</td>
    <td class="num">407</td>

@@ -11,7 +11,7 @@ kind = "de-lj38"
 kernel = "lj40"
 asv_class = "EonSvnDeLj38CiSwdneb"
 note = '''
-Doubly nudged climbing image on the 50 LJ38 pairs. Spring 10, doubly_nudged true, doubly_nudged_switching true, images 5, max_move 0.05, converged_force 0.001. The 2014 file set max_iterations to 1000 and then to 600. This template uses 1000. climbing_image is also written as climbing_image_method, which is the key r2549 reads. The harness kernel is unshifted lj/cut with epsilon 1, sigma 1, and cutoff 40.
+Doubly nudged climbing image on the 50 LJ38 pairs. Spring 10, doubly_nudged true, doubly_nudged_switching true, images 5, max_move 0.05, converged_force 0.001. The 2014 file set max_iterations to 1000 and then to 600. The client keeps the last value, so this template uses 600. climbing_image is also written as climbing_image_method, which is the key r2549 reads. The harness kernel is unshifted lj/cut with epsilon 1, sigma 1, and cutoff 40.
 '''
 seeds = [1]
 asv_timeout = 900
@@ -28,7 +28,7 @@ opt_method = "lbfgs"
 convergence_metric = "norm"
 converged_force = 0.001
 max_move = 0.05
-max_iterations = 1000
+max_iterations = 600
 lbfgs_memory = 20
 
 [ini."Nudged Elastic Band"]
@@ -39,7 +39,7 @@ doubly_nudged = true
 doubly_nudged_switching = true
 opt_method = "lbfgs"
 converged_force = 0.001
-max_iterations = 1000
+max_iterations = 600
 spring = 10
 
 [ini.LBFGS]
