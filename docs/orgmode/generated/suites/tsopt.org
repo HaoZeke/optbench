@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>optking</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>optking</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="tsopt/LJ38">
    <th scope="row"><a href="#LJ38">LJ38</a></th>
    <td data-code="eOn" data-template="eon-client/ts-lj38-lanczos-improved" data-par2="280.33"><span class="bench-score">280.33</span><a href="#LJ38-templates">eon-client/ts-lj38-lanczos-improved</a></td>
@@ -16,7 +16,14 @@
    <td data-code="rgsaddle" data-template="rgsaddle/prfo-tuned" data-par2="192.6"><span class="bench-score">192.6</span><a href="#LJ38-templates">rgsaddle/prfo-tuned</a></td>
    <td data-code="ASE">—</td>
    <td data-code="Sella" data-template="sella/lj38-ts-default" data-par2="68.74"><span class="bench-score">68.74</span><a href="#LJ38-templates">sella/lj38-ts-default</a></td>
+   <td data-code="pysisyphus">—</td>
+   <td data-code="artn" data-template="partn/ts-lj38" data-par2="20000"><span class="bench-score">20000</span><a href="#LJ38-templates">partn/ts-lj38</a></td>
+   <td data-code="compass">—</td>
+   <td data-code="dlfind">—</td>
+   <td data-code="lammps">—</td>
+   <td data-code="optim">—</td>
    <td data-code="optking" data-template="optking/lj38-p-rfo" data-par2="7030.36"><span class="bench-score">7030.36</span><a href="#LJ38-templates">optking/lj38-p-rfo</a></td>
+   <td data-code="tsase" data-template="tsase/dimer-lj38" data-par2="20000"><span class="bench-score">20000</span><a href="#LJ38-templates">tsase/dimer-lj38</a></td>
    </tr>
    <tr data-problem="tsopt/pt-island">
    <th scope="row"><a href="#pt-island">pt-island</a></th>
@@ -26,7 +33,14 @@
    <td data-code="rgsaddle" data-template="rgsaddle/pt-dimer-rotskip" data-par2="223.898"><span class="bench-score">223.898</span><a href="#pt-island-templates">rgsaddle/pt-dimer-rotskip</a></td>
    <td data-code="ASE">—</td>
    <td data-code="Sella" data-template="sella/pt-island-ts-default" data-par2="74.2857"><span class="bench-score">74.2857</span><a href="#pt-island-templates">sella/pt-island-ts-default</a></td>
+   <td data-code="pysisyphus">—</td>
+   <td data-code="artn" data-template="partn/ts-pt" data-par2="1970.22"><span class="bench-score">1970.22</span><a href="#pt-island-templates">partn/ts-pt</a></td>
+   <td data-code="compass">—</td>
+   <td data-code="dlfind">—</td>
+   <td data-code="lammps">—</td>
+   <td data-code="optim">—</td>
    <td data-code="optking" data-template="optking/pt-rs-irfo" data-par2="1059.98"><span class="bench-score">1059.98</span><a href="#pt-island-templates">optking/pt-rs-irfo</a></td>
+   <td data-code="tsase" data-template="tsase/dimer-pt" data-par2="1144.31"><span class="bench-score">1144.31</span><a href="#pt-island-templates">tsase/dimer-pt</a></td>
    </tr>
    </tbody></table></div></section><section class="bench" id="LJ38" data-problem="tsopt/LJ38">
    <h2>LJ38</h2>
@@ -42,7 +56,7 @@
    <figure class="bench-plot"><a href="../../_static/board/tsopt-LJ38-profile.svg"><picture><source srcset="../../_static/board/tsopt-LJ38-profile.webp" type="image/webp"><img src="../../_static/board/tsopt-LJ38-profile.png" alt="Dolan-More profile for tsopt/LJ38" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/tsopt-LJ38-cost.svg"><picture><source srcset="../../_static/board/tsopt-LJ38-cost.webp" type="image/webp"><img src="../../_static/board/tsopt-LJ38-cost.png" alt="Cost versus success for tsopt/LJ38" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="LJ38-templates">
-   <summary>All templates (21 ranked)</summary>
+   <summary>All templates (23 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="tsopt/LJ38">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
@@ -67,7 +81,9 @@
    <tr><td data-field="template">rgsaddle/lanczos</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">19418.8</td><td data-field="success_rate">0.035</td><td data-field="wilson_low">0.0170555</td><td data-field="wilson_high">0.0704706</td><td data-field="median_calls">10011</td><td data-field="mean_calls">9779.39</td><td data-field="failures">crash 0, divergence 0, cap 193, wrong_stationary 0</td><td data-field="n">200</td></tr>
    <tr><td data-field="template">rgsaddle/dimer-fire</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">19455</td><td data-field="success_rate">0.04</td><td data-field="wilson_low">0.0204056</td><td data-field="wilson_high">0.0769321</td><td data-field="median_calls">3666</td><td data-field="mean_calls">4792.34</td><td data-field="failures">crash 0, divergence 164, cap 28, wrong_stationary 0</td><td data-field="n">200</td></tr>
    <tr><td data-field="template">rgsaddle/dimer-lbfgs-tuned</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">19924.8</td><td data-field="success_rate">0.005</td><td data-field="wilson_low">0.000883169</td><td data-field="wilson_high">0.0277737</td><td data-field="median_calls">10009</td><td data-field="mean_calls">9983.53</td><td data-field="failures">crash 0, divergence 0, cap 199, wrong_stationary 0</td><td data-field="n">200</td></tr>
+   <tr><td data-field="template">partn/ts-lj38</td><td data-field="version">artn 1.1.0</td><td data-field="commit">9b753517c6c0</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">20000</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.0188453</td><td data-field="median_calls">45</td><td data-field="mean_calls">49.045</td><td data-field="failures">crash 200, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
    <tr><td data-field="template">rgsaddle/dimer-lbfgs</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">20000</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.0188453</td><td data-field="median_calls">10011</td><td data-field="mean_calls">9991.44</td><td data-field="failures">crash 0, divergence 0, cap 199, wrong_stationary 1</td><td data-field="n">200</td></tr>
+   <tr><td data-field="template">tsase/dimer-lj38</td><td data-field="version">tsase 1.0</td><td data-field="commit">98aac60b5d99</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">20000</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.0188453</td><td data-field="median_calls">10000</td><td data-field="mean_calls">10000</td><td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 0</td><td data-field="n">200</td></tr>
    </tbody></table></div>
    <h3>Partial</h3><ul>
    <li>eon-svn/ts-lj38-dimer Eon svn campaign, asv n=200, result file sets ranked false; potential ljcluster (shifted, cutoff 15).</li>
@@ -219,7 +235,7 @@
    <figure class="bench-plot"><a href="../../_static/board/tsopt-pt-island-profile.svg"><picture><source srcset="../../_static/board/tsopt-pt-island-profile.webp" type="image/webp"><img src="../../_static/board/tsopt-pt-island-profile.png" alt="Dolan-More profile for tsopt/pt-island" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/tsopt-pt-island-cost.svg"><picture><source srcset="../../_static/board/tsopt-pt-island-cost.webp" type="image/webp"><img src="../../_static/board/tsopt-pt-island-cost.png" alt="Cost versus success for tsopt/pt-island" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="pt-island-templates">
-   <summary>All templates (18 ranked)</summary>
+   <summary>All templates (20 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="tsopt/pt-island">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
@@ -237,6 +253,8 @@
    <tr><td data-field="template">optking/pt-rs-irfo</td><td data-field="version">optking 0.5.1.dev2+g767e2c0c1</td><td data-field="commit">767e2c0c13ff</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">1059.98</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.927302</td><td data-field="wilson_high">1</td><td data-field="median_calls">1060</td><td data-field="mean_calls">1059.98</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">49</td></tr>
    <tr><td data-field="template">optking/pt-p-rfo</td><td data-field="version">optking 0.5.1.dev2+g767e2c0c1</td><td data-field="commit">767e2c0c13ff</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">1060.63</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.927302</td><td data-field="wilson_high">1</td><td data-field="median_calls">1059</td><td data-field="mean_calls">1060.63</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">49</td></tr>
    <tr><td data-field="template">rgsaddle/pt-dimer-fire-tuned</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">1096.9</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.927302</td><td data-field="wilson_high">1</td><td data-field="median_calls">918</td><td data-field="mean_calls">1096.9</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">49</td></tr>
+   <tr><td data-field="template">tsase/dimer-pt</td><td data-field="version">tsase 1.0</td><td data-field="commit">98aac60b5d99</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">1144.31</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.927302</td><td data-field="wilson_high">1</td><td data-field="median_calls">892</td><td data-field="mean_calls">1144.31</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">49</td></tr>
+   <tr><td data-field="template">partn/ts-pt</td><td data-field="version">artn 1.1.0</td><td data-field="commit">9b753517c6c0</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">1970.22</td><td data-field="success_rate">0.918367</td><td data-field="wilson_low">0.808109</td><td data-field="wilson_high">0.967797</td><td data-field="median_calls">265</td><td data-field="mean_calls">380.224</td><td data-field="failures">crash 4, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">49</td></tr>
    <tr><td data-field="template">rgsaddle/pt-dimer-fire</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">3274.14</td><td data-field="success_rate">0.979592</td><td data-field="wilson_low">0.893065</td><td data-field="wilson_high">0.996388</td><td data-field="median_calls">2337</td><td data-field="mean_calls">3070.14</td><td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td><td data-field="n">49</td></tr>
    <tr><td data-field="template">rgsaddle/pt-dimer-lbfgs-tuned</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">7701.71</td><td data-field="success_rate">0.632653</td><td data-field="wilson_low">0.492671</td><td data-field="wilson_high">0.753348</td><td data-field="median_calls">542</td><td data-field="mean_calls">4031.55</td><td data-field="failures">crash 0, divergence 0, cap 18, wrong_stationary 0</td><td data-field="n">49</td></tr>
    <tr><td data-field="template">rgsaddle/pt-lanczos</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">9736.8</td><td data-field="success_rate">0.530612</td><td data-field="wilson_low">0.393809</td><td data-field="wilson_high">0.662965</td><td data-field="median_calls">974</td><td data-field="mean_calls">5048.08</td><td data-field="failures">crash 0, divergence 0, cap 23, wrong_stationary 0</td><td data-field="n">49</td></tr>
