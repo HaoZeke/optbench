@@ -6,11 +6,21 @@ refuse with a concrete reason and write no file.
 
 from pathlib import Path
 
+import hashlib
+
 import pytest
 
-from optbench.campaign import _check_stop, list_templates, resolve_problem, run
+from optbench.campaign import _check_stop, geometry_archive, list_templates, resolve_problem, run
 from optbench.engines import ENGINES, find, reasons
-from optbench.engines.optim_search import SHA256, available as optim_available
+from optbench.engines.common import band_settings, cached_pairs
+from optbench.engines.optim_search import (
+    SHA256,
+    available as optim_available,
+    clstring_calls,
+    clstring_converged,
+    clstring_finish,
+    clstring_odata,
+)
 from optbench.engines.pykmc_search import available as pykmc_available
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -69,6 +79,7 @@ def test_new_templates_match_a_problem_stop():
         "optim/unhooked",
         "optim/lbfgs-lj38",
         "optim/lbfgs-morse",
+        "optim/de-pt-cl-string",
         "lammps/cg-lj38",
         "lammps/cg-morse",
         "lammps/cg-lj38-noise-s0",
@@ -143,6 +154,59 @@ def test_pykmc_and_optim_write_nothing(tmp_path: Path):
         run(ROOT, "neb/Pt-heptamer", "optim/unhooked", output=output, workers=1)
     assert not output.exists()
     assert not output.with_suffix(".starts.jsonl").exists()
+
+
+def test_clstring_odata_follows_the_2014_script():
+    problem = resolve_problem(ROOT, "double-ended-saddle-search/pt-island")
+    settings = band_settings(problem)
+    pair = cached_pairs(ROOT, problem, settings)["product_0"]
+    preamble = (ROOT / "templates/optim/preambles/de-pt-cl-string.txt").read_text(encoding="utf-8")
+    archive = (ROOT / "archive/entries/double-ended-saddle-search/pt-island/optim-cl-string/odata.preamble").read_text(
+        encoding="utf-8"
+    )
+    assert preamble == archive
+    odata = clstring_odata(preamble, pair.reactant, pair.free, pair.box)
+    finish = clstring_finish(pair.product)
+    assert odata.startswith(
+        "debug\nbulk\nCLSTRING\nGROWSTRING 2 1000 0.64 1.0 1D-4 0.8\n"
+        "INE_NEW 4.3895D-5 100 1D-8 1000 2D-3 4D2\n"
+        "PARAMS 4.64881590 6.630583 6.562582 10.355540 3.27925440110459095616\n"
+        "FREEZE  8 9 10 11 12 13 20 21\n"
+    )
+    assert "\npoints\nM 2.5868151198550220 2.5633924158474279 5.0306142322747665\n" in odata
+    assert hashlib.sha256(odata.encode()).hexdigest() == (
+        "39f7e209f05b0f747bd6539bfc29c2a0cc1156907b0819e7908b5cc0ed78d7af"
+    )
+    assert hashlib.sha256(finish.encode()).hexdigest() == (
+        "584054f975bad1e3680aa06a4d69a0fe14a720fea73b234786aa891503decea4"
+    )
+    assert geometry_archive(ROOT, problem).is_file()
+
+
+def test_clstring_keeps_the_last_energy_gradient_tally():
+    log = (
+        " OPTIM> # of energy+gradient calls=                 6 time=           0.01 %= 59.9\n"
+        " Converged to TS\n"
+        " OPTIM> # of energy+gradient calls=               211 time=           0.27 %= 78.8\n"
+    )
+    assert clstring_calls(log) == 211
+    assert clstring_converged(log) is True
+    assert clstring_calls("no tally\n") is None
+    assert clstring_converged("OPTIM> not a transition state\n") is False
+
+
+def test_clstring_refuses_without_its_binary(monkeypatch, tmp_path: Path):
+    monkeypatch.setenv("OPTIM_CLSTRING_BIN", str(tmp_path / "missing-OPTIM"))
+    output = tmp_path / "benchmark.dat"
+    with pytest.raises(RuntimeError, match="27058"):
+        run(
+            ROOT,
+            "double-ended-saddle-search/pt-island",
+            "optim/de-pt-cl-string",
+            output=output,
+            workers=1,
+        )
+    assert not output.exists()
 
 
 def test_partn_engine_is_dispatched(monkeypatch, tmp_path: Path):

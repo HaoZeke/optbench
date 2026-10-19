@@ -773,16 +773,17 @@
   ],
   "profile": {
     "area_log10": {
-      "ase/de-pt-island-default 3.29.0 default asv f27c000": 0.5153225349502051,
-      "ase/de-pt-island-default 3.29.0 default campaign f27c000": 0.5153225349502051,
+      "ase/de-pt-island-default 3.29.0 default asv f27c000": 0.5102203316338665,
+      "ase/de-pt-island-default 3.29.0 default campaign f27c000": 0.5102203316338665,
       "ase/de-pt-island-tuned 3.29.0 tuned asv f27c000": 0.7857393107161543,
       "ase/de-pt-island-tuned 3.29.0 tuned campaign f27c000": 0.7857393107161543,
-      "compass/sqnm 1.0.0 default campaign 22da7bd": 0.4387894852051252,
-      "eon-svn/de-pt-ci r2549 default campaign, asv r2549": 1.0561560864821036,
-      "eon-svn/de-pt-ci-neb r2549 campaign r2549": 1.0561560864821036,
-      "eon-svn/de-pt-ci-swdneb r2549 campaign r2549": 1.0434005781912568,
-      "eon-svn/de-pt-dimer r2549 campaign r2549": 1.142893542859861,
-      "eon-svn/de-pt-neb r2549 default campaign, asv r2549": 1.0485027815075956,
+      "compass/sqnm 1.0.0 default campaign 22da7bd": 0.4362383835469558,
+      "eon-svn/de-pt-ci r2549 default campaign, asv r2549": 1.0485027815075956,
+      "eon-svn/de-pt-ci-neb r2549 campaign r2549": 1.0485027815075956,
+      "eon-svn/de-pt-ci-swdneb r2549 campaign r2549": 1.0382983748749182,
+      "eon-svn/de-pt-dimer r2549 campaign r2549": 1.1326891362271836,
+      "eon-svn/de-pt-neb r2549 default campaign, asv r2549": 1.043400578191257,
+      "optim/de-pt-cl-string 27058 wales-2014 campaign 144a703": 0.9337032068899755,
       "rgsaddle/ci-neb 0.2.2 default campaign, asv c0db2b8": 0.6122643979606397,
       "rgsaddle/ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 0.9566631218134997,
       "rgsaddle/ew-ci-neb 0.2.2 default campaign, asv c0db2b8": 0.6505309228331797,
@@ -795,9 +796,9 @@
       "rgsaddle/oci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 0.951560918497161,
       "rgsaddle/sidpp-ci-neb 0.2.2 default campaign, asv c0db2b8": 0.6250199062514865,
       "rgsaddle/sidpp-ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 0.959214223471669,
-      "sella/de-pt-island-default 2.6.0 default asv 6cfb60c": 0.5076692299756972,
+      "sella/de-pt-island-default 2.6.0 default asv 6cfb60c": 0.5025670266593585,
       "sella/de-pt-island-tuned 2.6.0 tuned asv 6cfb60c": 0.7882904123743236,
-      "tsase/ci-neb 1.0 default campaign 98aac60": 0.44389168852146377,
+      "tsase/ci-neb 1.0 default campaign 98aac60": 0.4387894852051251,
       "tsase/neb 1.0 default campaign 98aac60": 0.0
     },
     "rho": {
@@ -805,14 +806,14 @@
         0.0,
         0.0,
         0.3898305084745763,
-        0.8305084745762712,
+        0.8135593220338984,
         0.9830508474576272
       ],
       "ase/de-pt-island-default 3.29.0 default campaign f27c000": [
         0.0,
         0.0,
         0.3898305084745763,
-        0.8305084745762712,
+        0.8135593220338984,
         0.9830508474576272
       ],
       "ase/de-pt-island-tuned 3.29.0 tuned asv f27c000": [
@@ -834,42 +835,49 @@
         0.0,
         0.01694915254237288,
         0.9491525423728814,
-        0.9830508474576272
+        0.9661016949152542
       ],
       "eon-svn/de-pt-ci r2549 default campaign, asv r2549": [
-        0.0847457627118644,
-        0.9830508474576272,
+        0.06779661016949153,
+        0.9661016949152542,
         0.9830508474576272,
         1.0,
         1.0
       ],
       "eon-svn/de-pt-ci-neb r2549 campaign r2549": [
-        0.0847457627118644,
-        0.9830508474576272,
+        0.06779661016949153,
+        0.9661016949152542,
         0.9830508474576272,
         1.0,
         1.0
       ],
       "eon-svn/de-pt-ci-swdneb r2549 campaign r2549": [
         0.0,
-        0.9830508474576272,
+        0.9661016949152542,
         0.9830508474576272,
         1.0,
         1.0
       ],
       "eon-svn/de-pt-dimer r2549 campaign r2549": [
         0.6610169491525424,
-        0.9661016949152542,
-        1.0,
+        0.9491525423728814,
+        0.9830508474576272,
         1.0,
         1.0
       ],
       "eon-svn/de-pt-neb r2549 default campaign, asv r2549": [
         0.15254237288135594,
-        0.9491525423728814,
+        0.9322033898305084,
         0.9830508474576272,
         0.9830508474576272,
         0.9830508474576272
+      ],
+      "optim/de-pt-cl-string 27058 wales-2014 campaign 144a703": [
+        0.01694915254237288,
+        0.6949152542372882,
+        0.9152542372881356,
+        0.9830508474576272,
+        1.0
       ],
       "rgsaddle/ci-neb 0.2.2 default campaign, asv c0db2b8": [
         0.0,
@@ -959,7 +967,7 @@
         0.0,
         0.0,
         0.3559322033898305,
-        0.8305084745762712,
+        0.8135593220338984,
         1.0
       ],
       "sella/de-pt-island-tuned 2.6.0 tuned asv 6cfb60c": [
@@ -973,7 +981,7 @@
         0.0,
         0.0,
         0.5084745762711864,
-        0.6440677966101694,
+        0.6271186440677966,
         0.6440677966101694
       ],
       "tsase/neb 1.0 default campaign 98aac60": [
@@ -995,6 +1003,7 @@
       "eon-svn/de-pt-ci-swdneb r2549 campaign r2549": 1.0,
       "eon-svn/de-pt-dimer r2549 campaign r2549": 1.0,
       "eon-svn/de-pt-neb r2549 default campaign, asv r2549": 0.9830508474576272,
+      "optim/de-pt-cl-string 27058 wales-2014 campaign 144a703": 1.0,
       "rgsaddle/ci-neb 0.2.2 default campaign, asv c0db2b8": 0.9152542372881356,
       "rgsaddle/ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 0.9152542372881356,
       "rgsaddle/ew-ci-neb 0.2.2 default campaign, asv c0db2b8": 0.9322033898305084,
@@ -1245,6 +1254,51 @@
       "tuning": "default",
       "wilson_high": 0.9970017660816444,
       "wilson_low": 0.9100427403585771
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 3000,
+      "code": "optim-27058",
+      "code_version": "27058",
+      "commit": "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "optim-27058-double-ended-saddle-search-pt-island--optim-cl-string",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 59,
+      "history": false,
+      "max_calls": 1559.0,
+      "mean_calls": 344.54237288135596,
+      "mean_per_image": 114.84745762711864,
+      "median": 288.0,
+      "median_calls": 288.0,
+      "median_high": 327.0,
+      "median_low": 248.0,
+      "median_per_image": 96.0,
+      "min_calls": 36.0,
+      "n": 59,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 344.54237288135596,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/optim-27058-double-ended-saddle-search-pt-island--optim-cl-string.dat",
+      "problem": "double-ended-saddle-search/pt-island",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "optim/de-pt-cl-string",
+      "tuning": "wales-2014",
+      "wilson_high": 1.0,
+      "wilson_low": 0.9388706294732116
     },
     {
       "asv_commit": "19e5e5f275cc59e67893ae3e761f1fb0097841f2",

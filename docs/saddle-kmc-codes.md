@@ -166,6 +166,16 @@ to this socket. PATHSAMPLE is in the same snapshot. The PATHSAMPLE target linked
 `odata.*` and submits the `EXEC` program, which is OPTIM. No PATHSAMPLE
 number is written.
 
+Pin `optim-27058`. The file is
+`https://optbench.org/codes/wales-27058.tar.bz2`, 20942854 bytes, sha256
+`144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348`.
+`build.csh gfortran` compiles with gfortran `-O2`. The Pt-island climbing
+string is `CLSTRING`, `GROWSTRING 2 1000 0.64 1.0 1D-4 0.8`, and
+`INE_NEW 4.3895D-5 100 1D-8 1000 2D-3 4D2`. Coordinates are divided by
+`r0 = 2.8970`. `PARAMS` uses the `bc -l` strings `rho*r0`, the `%f` scaled
+box, and `rcut/r0`. The score is the last `energy+gradient calls` line.
+A start that does not print `Converged to TS` is left out of the mean.
+
 ## pARTn
 
 Pin `artn`, 1.1.0, DEVEL `9b753517`. `libartn.so` is the engine plugin and

@@ -1,13 +1,17 @@
-"""OPTIM L-BFGS through the ASE socket.
+"""OPTIM L-BFGS through the ASE socket, and the 2014 climbing string.
 
-The binary is the OPTIM target from the Wales snapshot
+The minimization binary is the OPTIM target from the Wales snapshot
 ``http://www-wales.ch.cam.ac.uk/svn.tar.bz2``. The pin is the sha256 of
 that file. The snapshot has no git commit. Each ``COMPUTE`` on the relay
-is one ``pes.evaluate``. OPTIM's own counter is not the score.
+is one ``pes.evaluate``. OPTIM's own counter is not that score.
 
 ``optim/unhooked`` and every template that is not minimization L-BFGS
 raise before a file is written. Noise, saddle search, NEB, and PATHSAMPLE
-are not this runner.
+are not the socket runner.
+
+``optim/de-pt-cl-string`` is the 2014 Wales tarball ``wales-27058.tar.bz2``.
+It runs before the snapshot check. The tally is OPTIM's own
+``energy+gradient calls`` line on the native periodic Morse.
 """
 
 from __future__ import annotations
@@ -28,6 +32,12 @@ ENGINE = "optim"
 CODE = "optim"
 SNAPSHOT = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
 SHA256 = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+CLSTRING_CODE = "optim-27058"
+CLSTRING_SHA256 = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
+# `bc -l` strings from the 2014 run.sh: 1/2.8970, 1.6047*2.8970, 9.5/2.8970.
+CLSTRING_SCALE = ".34518467380048325854"
+CLSTRING_RHO = "4.64881590"
+CLSTRING_RCUT = "3.27925440110459095616"
 _RELAY = Path(__file__).with_name("fmlip_relay.py")
 
 
@@ -55,6 +65,13 @@ def binary_path() -> Path:
     if env:
         return Path(env)
     return Path("/tmp/src/wales-full/build-optim/OPTIM")
+
+
+def clstring_binary() -> Path:
+    env = os.environ.get("OPTIM_CLSTRING_BIN")
+    if env:
+        return Path(env)
+    return Path("/tmp/src/wales/OPTIM/bin/gfortran/OPTIM")
 
 
 def available() -> str | None:
@@ -265,6 +282,249 @@ def _execute(job: dict) -> dict:
     return record
 
 
+def clstring_calls(text: str) -> int | None:
+    """Last OPTIM energy-and-gradient tally.
+
+    The 2014 ``run_optim.sh`` keeps awk field 6 of the last line that
+    contains ``energy+gradient calls``. That field is the integer after
+    ``calls=``.
+    """
+    found = None
+    for line in text.splitlines():
+        if "energy+gradient calls" not in line:
+            continue
+        parts = line.split()
+        if len(parts) < 6 or not parts[5].lstrip("-").isdigit():
+            return None
+        found = int(parts[5])
+    return found
+
+
+def clstring_converged(text: str) -> bool:
+    """True when OPTIM printed its transition-state stop."""
+    return "Converged to TS" in text
+
+
+def _scaled(values, scale: float) -> np.ndarray:
+    return np.asarray(values, dtype=np.float64) * float(scale)
+
+
+def _coord_text(row: np.ndarray) -> str:
+    return f"{float(row[0]):.16f} {float(row[1]):.16f} {float(row[2]):.16f}"
+
+
+def clstring_finish(coords: np.ndarray, scale: str = CLSTRING_SCALE) -> str:
+    """Product endpoint. One ``x y z`` line per atom, scaled by ``1/r0``."""
+    scaled = _scaled(coords, float(scale))
+    return "".join(_coord_text(row) + "\n" for row in scaled)
+
+
+def clstring_odata(
+    preamble: str,
+    reactant: np.ndarray,
+    free: np.ndarray,
+    box: np.ndarray,
+    scale: str = CLSTRING_SCALE,
+    symbol: str = "M",
+) -> str:
+    """``odata`` for one climbing-string pair.
+
+    ``PARAMS``, ``FREEZE``, and ``points`` follow the 2014 ``run.sh``:
+    ``bc -l`` parameter strings, ``%f`` box lengths, eight frozen indices
+    per line, and ``%.16f`` coordinates.
+    """
+    text = preamble if preamble.endswith("\n") else preamble + "\n"
+    scaled_box = _scaled(np.asarray(box, dtype=np.float64).reshape(-1)[:3], float(scale))
+    box_text = "%f %f %f" % tuple(float(value) for value in scaled_box)
+    lines = [text.rstrip("\n")]
+    lines.append(f"PARAMS {CLSTRING_RHO} {box_text} {CLSTRING_RCUT}")
+    frozen = np.flatnonzero(~np.asarray(free, dtype=bool)) + 1
+    for start in range(0, len(frozen), 8):
+        chunk = " ".join(str(int(index)) for index in frozen[start : start + 8])
+        lines.append(f"FREEZE  {chunk}")
+    lines.append("points")
+    scaled = _scaled(reactant, float(scale))
+    for row in scaled:
+        lines.append(f"{symbol} {_coord_text(row)}")
+    return "\n".join(lines) + "\n"
+
+
+def _execute_clstring(job: dict) -> dict:
+    import tempfile
+
+    name = str(job["name"])
+    cap = int(job["cap"])
+    error = ""
+    calls = None
+    converged = False
+    log = ""
+    try:
+        with tempfile.TemporaryDirectory(prefix="optim-cl-") as raw:
+            folder = Path(raw)
+            (folder / "odata").write_text(
+                clstring_odata(
+                    str(job["preamble"]),
+                    job["reactant"],
+                    job["free"],
+                    job["box"],
+                    symbol=str(job["symbol"]),
+                ),
+                encoding="utf-8",
+            )
+            (folder / "finish").write_text(clstring_finish(job["product"]), encoding="utf-8")
+            env = os.environ.copy()
+            env["OMP_NUM_THREADS"] = "1"
+            try:
+                proc = subprocess.run(
+                    [str(job["binary"])],
+                    cwd=folder,
+                    env=env,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    text=True,
+                    timeout=int(job["timeout"]),
+                    check=False,
+                )
+                log = f"{proc.stdout}\n{proc.stderr}"
+                if proc.returncode != 0:
+                    error = f"OPTIM exit {proc.returncode}"
+            except subprocess.TimeoutExpired as exc:
+                stdout = exc.stdout or ""
+                stderr = exc.stderr or ""
+                if isinstance(stdout, bytes):
+                    stdout = stdout.decode("utf-8", errors="replace")
+                if isinstance(stderr, bytes):
+                    stderr = stderr.decode("utf-8", errors="replace")
+                log = f"{stdout}\n{stderr}"
+                error = f"OPTIM exceeded {int(job['timeout'])}s"
+            calls = clstring_calls(log)
+            converged = clstring_converged(log)
+    except Exception as exc:
+        error = f"{type(exc).__name__}: {exc}"
+    counted = calls is not None
+    success = error == "" and converged and counted and int(calls) < cap
+    reasons: list[str] = []
+    failure = None
+    if not success:
+        if error or not counted:
+            reasons = ["crash"]
+            failure = "crash"
+        elif int(calls) >= cap:
+            reasons = ["cap"]
+            failure = "cap"
+        else:
+            reasons = ["divergence"]
+            failure = "divergence"
+    record = {
+        "schema": "optbench.start/v2",
+        "start": name,
+        "force_calls": 0 if calls is None else int(calls),
+        "verify_calls": 0,
+        "counter": "harness",
+        "comparable": True,
+        "success": success,
+        "failure": failure,
+        "reasons": reasons,
+        "energy": None,
+        "force_norm": None,
+        "hessian_index": None,
+        "expected_index": 1,
+        "converged": success,
+    }
+    if error:
+        record["error"] = error
+    return record
+
+
+def _clstring_preamble(root: Path, template: dict) -> str:
+    section = template.get("optim") or {}
+    relative = section.get("preamble")
+    if not relative:
+        raise ValueError(f"{template['id']} has no climbing-string preamble")
+    path = root / str(relative)
+    if not path.is_file():
+        raise FileNotFoundError(f"{template['id']} preamble {relative} is missing")
+    text = path.read_text(encoding="utf-8")
+    if not text.endswith("\n"):
+        text += "\n"
+    return text
+
+
+def _run_clstring(root: Path, problem: dict, template: dict, output: Path, workers: int) -> dict:
+    from .common import band_settings, cached_pairs, registry_pin, require_pin
+
+    pin = registry_pin(root, CLSTRING_CODE)
+    require_pin(template, pin)
+    if template["engine"] != ENGINE:
+        raise ValueError(f"{template['id']} engine is {template['engine']}")
+    stated = template.get("problem")
+    if stated and stated != problem["id"]:
+        raise ValueError(f"{template['id']} belongs to {stated}")
+    if problem.get("suite") != "double-ended-saddle-search":
+        raise ValueError(f"{template['id']} is a double-ended climbing string")
+    binary = clstring_binary()
+    if not binary.is_file():
+        raise RuntimeError(
+            "OPTIM 27058 climbing string is not built. "
+            f"The pin is sha256 {CLSTRING_SHA256} of "
+            "https://optbench.org/codes/wales-27058.tar.bz2 (20942854 bytes). "
+            f"{binary} is not present. Set OPTIM_CLSTRING_BIN to the gfortran OPTIM target."
+        )
+    settings = band_settings(problem)
+    section = template.get("optim") or {}
+    symbol = str(section.get("symbol", "M"))
+    timeout = int(section.get("timeout", 600))
+    preamble = _clstring_preamble(root, template)
+    pairs = cached_pairs(root, problem, settings)
+    jobs = []
+    for index in range(int(settings["pairs"])):
+        pair = pairs[f"product_{index}"]
+        if pair.box is None:
+            raise ValueError(f"{pair.name} has no box")
+        jobs.append(
+            {
+                "name": pair.name,
+                "reactant": np.asarray(pair.reactant, dtype=np.float64),
+                "product": np.asarray(pair.product, dtype=np.float64),
+                "free": np.asarray(pair.free, dtype=bool),
+                "box": np.asarray(pair.box, dtype=np.float64),
+                "cap": int(settings["cap"]),
+                "binary": str(binary),
+                "preamble": preamble,
+                "symbol": symbol,
+                "timeout": timeout,
+            }
+        )
+    records = run_jobs(jobs, _execute_clstring, workers)
+    comment = (
+        "# counter harness. The tally is OPTIM's last energy+gradient calls line.\n"
+        "# Each call is one native Morse-bulk energy and gradient on the scaled cell.\n"
+        "# A start without Converged to TS is a failure and is left out of the mean."
+    )
+    parameters = {
+        "method": "clstring",
+        "keywords": "CLSTRING GROWSTRING INE_NEW",
+        "rho": 1.6047,
+        "r0": 2.8970,
+        "rcut": 9.5,
+        "scale": CLSTRING_SCALE,
+        "rho_scaled": CLSTRING_RHO,
+        "rcut_scaled": CLSTRING_RCUT,
+        "symbol": symbol,
+        "counter": "OPTIM energy+gradient calls",
+    }
+    return write_campaign(
+        output,
+        records,
+        template,
+        problem,
+        settings,
+        parameters,
+        images=None,
+        comment=comment,
+    )
+
+
 def _job(start: dict, settings: dict, template: dict) -> dict:
     section = _section(template)
     return {
@@ -281,16 +541,18 @@ def _job(start: dict, settings: dict, template: dict) -> dict:
 
 
 def run(root: Path, problem_name: str, template_name: str, *, output: Path, workers: int = 1) -> dict:
-    reason = available()
-    if reason:
-        raise RuntimeError(reason)
     root = Path(root)
     from optbench.campaign import load_template, resolve_problem
 
-    from .common import registry_pin, require_pin
-
     problem = resolve_problem(root, problem_name)
     template = load_template(root, template_name)
+    if str((template.get("optim") or {}).get("method", "")) == "clstring":
+        return _run_clstring(root, problem, template, output, workers)
+    reason = available()
+    if reason:
+        raise RuntimeError(reason)
+    from .common import registry_pin, require_pin
+
     require_pin(template, registry_pin(root, CODE))
     if template["engine"] != ENGINE:
         raise ValueError(f"{template_name} engine is {template['engine']}")
