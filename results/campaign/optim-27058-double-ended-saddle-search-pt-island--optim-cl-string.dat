@@ -1,4 +1,5 @@
-# counter harness. The tally is OPTIM's last energy+gradient calls line.
+# 2014 wales-27058 diagnostic. Unranked: this counter is not the harness score.
+# The tally is that run's last energy+gradient calls line. It is not the ranked row.
 # Each call is one native Morse-bulk energy and gradient on the scaled cell.
 # A start without Converged to TS is a failure and is left out of the mean.
 force_calls 345
@@ -16,4 +17,4 @@ algorithm climbing string
 template optim/de-pt-cl-string
 problem double-ended-saddle-search/pt-island
 tuning wales-2014
-counter harness
+counter diagnostic

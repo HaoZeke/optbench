@@ -1,0 +1,15 @@
+# Latest OPTIM climbing string on the Pt island, stock keywords.
+id = "optim/de-pt-cl-string-latest"
+engine = "optim"
+problem = "double-ended-saddle-search/pt-island"
+code = "optim-df8da599"
+code_version = "df8da599"
+commit = "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
+algorithm = "climbing string"
+tuning = "stock"
+note = "Current svn.tar.bz2, SVNREV df8da599267534fbe43a250e578f7396a7946311. cmake and gfortran, unmodified. Keywords are BULK, CLSTRING, and GROWSTRING with no numbers. The score is OPTIM's last energy+gradient calls line. A start without OPTIM's convergence line is left out of the mean."
+
+[optim]
+method = "clstring-stock"
+symbol = "M"
+timeout = 120

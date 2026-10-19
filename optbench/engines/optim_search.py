@@ -11,7 +11,9 @@ are not the socket runner.
 
 ``optim/de-pt-cl-string`` is the 2014 Wales tarball ``wales-27058.tar.bz2``.
 It runs before the snapshot check. The tally is OPTIM's own
-``energy+gradient calls`` line on the native periodic Morse.
+``energy+gradient calls`` line on the native periodic Morse. That
+campaign is a diagnostic. The ranked row is ``optim/de-pt-cl-string-latest``:
+the current ``svn.tar.bz2`` release, stock keywords, same native tally.
 """
 
 from __future__ import annotations
@@ -38,6 +40,17 @@ CLSTRING_SHA256 = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf
 CLSTRING_SCALE = ".34518467380048325854"
 CLSTRING_RHO = "4.64881590"
 CLSTRING_RCUT = "3.27925440110459095616"
+LATEST_CODE = "optim-df8da599"
+LATEST_URL = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
+LATEST_SHA256 = "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
+LATEST_VERSION = "df8da599"
+LATEST_SVNREV = "df8da599267534fbe43a250e578f7396a7946311"
+# Unmodified morse_bulk hardcodes R0 = 1 and A = 1. These are the Pt Morse
+# constants the problem states, expressed in that unit system.
+LATEST_R0 = 2.8970
+LATEST_RHO = 1.6047
+LATEST_RCUT = 9.5
+STOCK_KEYWORDS = ("BULK", "CLSTRING", "GROWSTRING")
 _RELAY = Path(__file__).with_name("fmlip_relay.py")
 
 
@@ -540,12 +553,215 @@ def _job(start: dict, settings: dict, template: dict) -> dict:
     }
 
 
+def latest_binary() -> Path:
+    env = os.environ.get("OPTIM_LATEST_BIN")
+    if env:
+        return Path(env)
+    return Path("/tmp/src/wales-latest/wales/OPTIM/builds/gfortran/OPTIM")
+
+
+def stock_converged(text: str) -> bool:
+    """OPTIM's own climbing-string stop, not a harness force threshold."""
+    return (
+        "Converged to TS" in text
+        or "SUCCESS! - the last image converged!" in text
+        or "SUCCESS! - whole string converged!" in text
+    )
+
+
+def stock_odata(reactant: np.ndarray, free: np.ndarray, box: np.ndarray, product: np.ndarray) -> tuple[str, str]:
+    """Stock ``odata`` and ``finish`` for one pair.
+
+    Keywords are ``BULK``, ``CLSTRING``, and ``GROWSTRING`` with no
+    numbers. Image count, iteration density, reparameterisation, growth
+    and string tolerances, and ``GMAX`` stay at the values the source
+    initialises. Frozen atoms and the two endpoints are the pair.
+    """
+    scale = 1.0 / LATEST_R0
+    lengths = np.asarray(box, dtype=np.float64).reshape(-1)[:3] * scale
+    lines = list(STOCK_KEYWORDS)
+    lines.append(
+        "PARAMS %.16g %.16g %.16g %.16g %.16g"
+        % (
+            LATEST_RHO * LATEST_R0,
+            float(lengths[0]),
+            float(lengths[1]),
+            float(lengths[2]),
+            LATEST_RCUT * scale,
+        )
+    )
+    frozen = np.flatnonzero(~np.asarray(free, dtype=bool)) + 1
+    for start in range(0, len(frozen), 8):
+        chunk = " ".join(str(int(index)) for index in frozen[start : start + 8])
+        lines.append(f"FREEZE {chunk}")
+    lines.append("points")
+    scaled = np.asarray(reactant, dtype=np.float64) * scale
+    for row in scaled:
+        lines.append("M %.16g %.16g %.16g" % (float(row[0]), float(row[1]), float(row[2])))
+    finish_rows = np.asarray(product, dtype=np.float64) * scale
+    finish = "".join(
+        "%.16g %.16g %.16g\n" % (float(row[0]), float(row[1]), float(row[2])) for row in finish_rows
+    )
+    return "\n".join(lines) + "\n", finish
+
+
+def _execute_stock(job: dict) -> dict:
+    import tempfile
+
+    name = str(job["name"])
+    cap = int(job["cap"])
+    error = ""
+    calls = None
+    converged = False
+    try:
+        with tempfile.TemporaryDirectory(prefix="optim-stock-") as raw:
+            folder = Path(raw)
+            odata, finish = stock_odata(job["reactant"], job["free"], job["box"], job["product"])
+            (folder / "odata").write_text(odata, encoding="utf-8")
+            (folder / "finish").write_text(finish, encoding="utf-8")
+            env = os.environ.copy()
+            env["OMP_NUM_THREADS"] = "1"
+            try:
+                proc = subprocess.run(
+                    [str(job["binary"])],
+                    cwd=folder,
+                    env=env,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    text=True,
+                    timeout=int(job["timeout"]),
+                    check=False,
+                )
+                log = f"{proc.stdout}\n{proc.stderr}"
+                if proc.returncode != 0:
+                    error = f"OPTIM exit {proc.returncode}"
+            except subprocess.TimeoutExpired as exc:
+                stdout = exc.stdout or ""
+                stderr = exc.stderr or ""
+                if isinstance(stdout, bytes):
+                    stdout = stdout.decode("utf-8", errors="replace")
+                if isinstance(stderr, bytes):
+                    stderr = stderr.decode("utf-8", errors="replace")
+                log = f"{stdout}\n{stderr}"
+                error = f"OPTIM exceeded {int(job['timeout'])}s"
+            calls = clstring_calls(log)
+            converged = stock_converged(log)
+    except Exception as exc:
+        error = f"{type(exc).__name__}: {exc}"
+    counted = calls is not None
+    success = error == "" and converged and counted and int(calls) < cap
+    failure = None
+    reasons: list[str] = []
+    if not success:
+        if error or not counted:
+            reasons = ["crash"]
+            failure = "crash"
+        elif int(calls) >= cap:
+            reasons = ["cap"]
+            failure = "cap"
+        else:
+            reasons = ["divergence"]
+            failure = "divergence"
+    record = {
+        "schema": "optbench.start/v2",
+        "start": name,
+        "force_calls": 0 if calls is None else int(calls),
+        "verify_calls": 0,
+        "counter": "harness",
+        "comparable": True,
+        "success": success,
+        "failure": failure,
+        "reasons": reasons,
+        "energy": None,
+        "force_norm": None,
+        "hessian_index": None,
+        "expected_index": 1,
+        "converged": success,
+    }
+    if error:
+        record["error"] = error
+    return record
+
+
+def _run_latest(root: Path, problem: dict, template: dict, output: Path, workers: int) -> dict:
+    from .common import band_settings, cached_pairs, registry_pin, require_pin
+
+    pin = registry_pin(root, LATEST_CODE)
+    require_pin(template, pin)
+    if template["engine"] != ENGINE:
+        raise ValueError(f"{template['id']} engine is {template['engine']}")
+    stated = template.get("problem")
+    if stated and stated != problem["id"]:
+        raise ValueError(f"{template['id']} belongs to {stated}")
+    if problem.get("suite") != "double-ended-saddle-search":
+        raise ValueError(f"{template['id']} is a double-ended climbing string")
+    binary = latest_binary()
+    if not binary.is_file():
+        raise RuntimeError(
+            "The latest OPTIM release is not built. "
+            f"The pin is sha256 {LATEST_SHA256} of {LATEST_URL}. "
+            f"SVNREV is {LATEST_SVNREV}. {binary} is not present. "
+            "Set OPTIM_LATEST_BIN to the cmake OPTIM target."
+        )
+    settings = band_settings(problem)
+    timeout = int((template.get("optim") or {}).get("timeout", 120))
+    pairs = cached_pairs(root, problem, settings)
+    jobs = []
+    for index in range(int(settings["pairs"])):
+        pair = pairs[f"product_{index}"]
+        if pair.box is None:
+            raise ValueError(f"{pair.name} has no box")
+        jobs.append(
+            {
+                "name": pair.name,
+                "reactant": np.asarray(pair.reactant, dtype=np.float64),
+                "product": np.asarray(pair.product, dtype=np.float64),
+                "free": np.asarray(pair.free, dtype=bool),
+                "box": np.asarray(pair.box, dtype=np.float64),
+                "binary": str(binary),
+                "cap": int(settings["cap"]),
+                "timeout": timeout,
+            }
+        )
+    records = run_jobs(jobs, _execute_stock, workers)
+    comment = (
+        f"# OPTIM SVNREV {LATEST_SVNREV}, {LATEST_URL}, sha256 {LATEST_SHA256}.\n"
+        "# Stock keywords: BULK, CLSTRING, GROWSTRING. No numeric keyword is set.\n"
+        "# Native periodic Morse. The unmodified source hardcodes R0 = 1 and A = 1, "
+        "so the Pt coordinates, rho, and cutoff are in units of r0.\n"
+        "# The count is OPTIM's last energy+gradient calls line. "
+        "A start counts only when OPTIM prints its convergence line and the tally is under the cap."
+    )
+    published = dict(template)
+    published["code"] = "optim"
+    return write_campaign(
+        output,
+        records,
+        published,
+        problem,
+        {"cap": int(settings["cap"])},
+        {
+            "method": "clstring",
+            "keywords": " ".join(STOCK_KEYWORDS),
+            "counter": "optim energy+gradient calls",
+            "potential": "morse_bulk",
+            "version": LATEST_VERSION,
+            "svnrev": LATEST_SVNREV,
+            "tarball_sha256": LATEST_SHA256,
+        },
+        images=None,
+        comment=comment,
+    )
+
+
 def run(root: Path, problem_name: str, template_name: str, *, output: Path, workers: int = 1) -> dict:
     root = Path(root)
     from optbench.campaign import load_template, resolve_problem
 
     problem = resolve_problem(root, problem_name)
     template = load_template(root, template_name)
+    if str((template.get("optim") or {}).get("method", "")) == "clstring-stock":
+        return _run_latest(root, problem, template, output, workers)
     if str((template.get("optim") or {}).get("method", "")) == "clstring":
         return _run_clstring(root, problem, template, output, workers)
     reason = available()

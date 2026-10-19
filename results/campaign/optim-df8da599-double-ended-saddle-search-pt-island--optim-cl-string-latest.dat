@@ -1,0 +1,16 @@
+# OPTIM SVNREV df8da599267534fbe43a250e578f7396a7946311, http://www-wales.ch.cam.ac.uk/svn.tar.bz2, sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31.
+# Stock keywords: BULK, CLSTRING, GROWSTRING. No numeric keyword is set.
+# Native periodic Morse. The unmodified source hardcodes R0 = 1 and A = 1, so the Pt coordinates, rho, and cutoff are in units of r0.
+# The count is OPTIM's last energy+gradient calls line. A start counts only when OPTIM prints its convergence line and the tally is under the cap.
+successes 0
+nfailed 59
+n 59
+transition_states 0
+code optim
+code_version df8da599
+commit 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31
+algorithm climbing string
+template optim/de-pt-cl-string-latest
+problem double-ended-saddle-search/pt-island
+tuning stock
+counter harness

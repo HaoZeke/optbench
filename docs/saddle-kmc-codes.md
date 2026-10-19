@@ -175,6 +175,17 @@ string is `CLSTRING`, `GROWSTRING 2 1000 0.64 1.0 1D-4 0.8`, and
 `r0 = 2.8970`. `PARAMS` uses the `bc -l` strings `rho*r0`, the `%f` scaled
 box, and `rcut/r0`. The score is the last `energy+gradient calls` line.
 A start that does not print `Converged to TS` is left out of the mean.
+That campaign file is an unranked diagnostic.
+
+Pin `optim-df8da599`. The file is the current
+`http://www-wales.ch.cam.ac.uk/svn.tar.bz2`, sha256
+`738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31`,
+SVNREV `df8da599267534fbe43a250e578f7396a7946311`. The build is stock
+cmake with gfortran. The ranked Pt-island climbing string publishes
+code `optim` and version `df8da599`. Keywords are `BULK`, `CLSTRING`,
+and `GROWSTRING` with no numbers. The score is the last
+`energy+gradient calls` line. A start that does not print OPTIM's
+convergence line is left out of the mean.
 
 ## pARTn
 

@@ -15,11 +15,14 @@ from optbench.engines import ENGINES, find, reasons
 from optbench.engines.common import band_settings, cached_pairs
 from optbench.engines.optim_search import (
     SHA256,
+    STOCK_KEYWORDS,
     available as optim_available,
     clstring_calls,
     clstring_converged,
     clstring_finish,
     clstring_odata,
+    stock_converged,
+    stock_odata,
 )
 from optbench.engines.pykmc_search import available as pykmc_available
 
@@ -80,6 +83,7 @@ def test_new_templates_match_a_problem_stop():
         "optim/lbfgs-lj38",
         "optim/lbfgs-morse",
         "optim/de-pt-cl-string",
+        "optim/de-pt-cl-string-latest",
         "lammps/cg-lj38",
         "lammps/cg-morse",
         "lammps/cg-lj38-noise-s0",
@@ -193,6 +197,37 @@ def test_clstring_keeps_the_last_energy_gradient_tally():
     assert clstring_converged(log) is True
     assert clstring_calls("no tally\n") is None
     assert clstring_converged("OPTIM> not a transition state\n") is False
+
+
+def test_stock_clstring_keywords_carry_no_numbers():
+    problem = resolve_problem(ROOT, "double-ended-saddle-search/pt-island")
+    settings = band_settings(problem)
+    pair = cached_pairs(ROOT, problem, settings)["product_0"]
+    odata, finish = stock_odata(pair.reactant, pair.free, pair.box, pair.product)
+    head = odata.splitlines()[:3]
+    assert head == list(STOCK_KEYWORDS)
+    assert "INE_NEW" not in odata
+    assert "GROWSTRING " not in odata
+    assert "CLSTRING " not in odata
+    assert odata.splitlines()[3].startswith("PARAMS ")
+    assert finish.count("\n") == len(pair.reactant)
+    assert stock_converged("SUCCESS! - the last image converged!\n")
+    assert stock_converged(" Converged to TS\n")
+    assert not stock_converged("Number of final evolution steps exceeded maximum")
+
+
+def test_stock_clstring_refuses_without_its_binary(monkeypatch, tmp_path: Path):
+    monkeypatch.setenv("OPTIM_LATEST_BIN", str(tmp_path / "missing-OPTIM"))
+    output = tmp_path / "benchmark.dat"
+    with pytest.raises(RuntimeError, match="738fafe3"):
+        run(
+            ROOT,
+            "double-ended-saddle-search/pt-island",
+            "optim/de-pt-cl-string-latest",
+            output=output,
+            workers=1,
+        )
+    assert not output.exists()
 
 
 def test_clstring_refuses_without_its_binary(monkeypatch, tmp_path: Path):
