@@ -1,0 +1,10 @@
+id = "pele/de-lj38-2ts"
+engine = "pele"
+code = "pele"
+code_version = "a68ec5"
+commit = "a68ec5e7706a64b93a85ac34ffe22cd08eb1c1c9"
+algorithm = "DNEB + hybrid eigenvector following"
+problem = "double-ended-saddle-search/lj38_2ts_separation"
+profile = "archive"
+ranked = false
+note = "Archived bin/js850/dec_lj38_2ts.py on pele a68ec5. LJCluster of 38 atoms, unshifted LJ, eps 1, sig 1. Double-ended connect, not one local connect. NEB image_density 3, iter_density 10, reinterpolate 50, adjustk_freq 50, adaptive_niter true, adaptive_nimages true, k 1.5, NEB quench tol 0.01. Transition-state tolerance 1e-3/sqrt(3*38), lowest-eigenvector quench nsteps 20 and tol 0.1, nsteps_tangent1 3, nsteps_tangent2 35, max_uphill_step 0.4, tangent-space maxstep 0.05. Pairs start_0.xyz through start_49.xyz. np.random.seed(0). getdata_ts.py averages force calls and transition states over successes only. The structural quench is the C++ LBFGS. The band and the eigenvector search use mylbfgs."
