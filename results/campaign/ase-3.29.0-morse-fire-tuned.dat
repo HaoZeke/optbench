@@ -5,17 +5,17 @@ force_calls_max 216
 nfailed 0
 starts 100
 code ASE
-code_version 3.29.0
+code_version 3.6.0
 commit f27c0005ae6a67ea419f996e728668865bfc1f86
 algorithm FIRE
-profile tuned
-template ase/morse-fire-tuned
+profile diagnostic
+template ase/morse-fire-stock
 problem minimization/morse-bulk
 counter harness
 reducer capped
 parameter_source archive
 method {"counter":"harness attach_ase_counter","parameter_source":"archive","parameters":{"Nmin":5,"a":0.1,"astart":0.1,"downhill_check":false,"dt":0.1,"dtmax":1.0,"fa":0.99,"fdec":0.5,"finc":1.1,"maxstep":0.2},"potential":{"D":0.7102,"alpha":1.6047,"form":"shift","kind":"morse","pbc":[true,true,true],"r0":2.897,"rc":9.5},"profile":"tuned","reducer":"capped","stop":{"force_norm":0.001,"max_force_calls":10000,"max_steps":10000,"norm":"l2","stationary":false}}
-note Archive minimization/morse-bulk/ase-fire/run.py reads POSCAR_i and builds tsase.calculators.morse(rc=9.5) with FIRE maxmove 0.2. TSASE Morse defaults are D 0.7102, alpha 1.6047, r0 2.897, and the pair energy is shifted to zero at the cutoff. The stop is the Euclidean force norm 0.001. The rounded morse-bulk .con set is a different geometry. The archived mean counts every start under the force-call cap. A finite-difference Hessian is not that count.
+note Paper-era diagnostic, kept off the current rank. ASE 3.29.0 executed the 2014 script settings. The archived code label is 3.6.0. The ranked row is stock ASE 3.29.0 FIRE.
 host cursor
 date 2026-10-19
 contributor Rohit Goswami
