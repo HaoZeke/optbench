@@ -5,6 +5,7 @@ from pathlib import Path
 from optbench.campaign import _check_stop, list_templates, resolve_problem
 from optbench.runners.gasp_global import (
     _energy_limit,
+    _harness_cap,
     _load_starts,
     _start_name,
     lammps_final_energy,
@@ -62,23 +63,38 @@ def test_gasp_templates_match_the_cap_formula():
         problem = resolve_problem(ROOT, template["problem"])
         cap = _check_stop(problem, template)
         section = template["gasp"]
-        assert cap == search_force_cap(int(section["num_energy_calcs"]), int(section["min_eval"]))
+        method = search_force_cap(int(section["num_energy_calcs"]), int(section["min_eval"]))
+        stated = (problem.get("convergence") or {}).get("max_force_calls")
+        if stated is None:
+            assert cap == method
+        else:
+            assert cap == int(stated)
+            assert method > cap
+        assert _harness_cap(problem, template) == cap
+        assert int(template["failure_cap"]) == cap
         assert template["commit"] == "0c8d993c82e0e1c69a05b3c34bbb2fcbbdbb7f07"
         assert template["code"] == "gasp"
     assert found == ["gasp/lj38-default", "gasp/lj75-default"]
 
 
-def test_start_name_uses_the_integer_suffix():
+def test_start_name_keeps_con_stems_and_coords_files():
     assert _start_name(Path("12.con")) == "12"
-    assert _start_name(Path("coords.12")) == "12"
+    assert _start_name(Path("coords.12")) == "coords.12"
     assert _start_name(Path("POSCAR")) == "POSCAR"
 
 
-def test_lj75_archive_has_no_energy_rule(tmp_path: Path):
+def test_lj38_energy_stop_follows_the_problem_reference():
+    template = next(row for row in list_templates(ROOT) if row["id"] == "gasp/lj38-default")
+    problem = resolve_problem(ROOT, "globalopt/lj38")
+    assert _energy_limit(problem, template) == float(problem["reference"]["energy"]) + 0.001
+
+
+def test_lj75_uses_the_problem_rule(tmp_path: Path):
     template = next(row for row in list_templates(ROOT) if row["id"] == "gasp/lj75-default")
     problem = resolve_problem(ROOT, "globalopt/lj75")
-    assert _energy_limit(problem, template) is None
+    assert _energy_limit(problem, template) == -397.492331 + 0.001
+    assert int(template["failure_cap"]) == 1000000
     assert "energy_minimum" not in template["gasp"]
     loaded = _load_starts(ROOT, problem, template, tmp_path)
-    assert [name for name, _coords in loaded] == [str(index) for index in range(1, 201)]
+    assert [name for name, _coords in loaded] == [f"coords.{index}" for index in range(1, 201)]
     assert {len(coords) for _name, coords in loaded} == {75}

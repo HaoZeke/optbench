@@ -743,10 +743,35 @@ def _energy_limit(problem: dict, template: dict) -> float | None:
     convergence = problem.get("convergence") or {}
     if "energy_above_minimum" not in convergence:
         return None
+    reference = (problem.get("reference") or {}).get("energy")
+    if reference in (None, ""):
+        section = _gasp_section(template)
+        if "energy_minimum" not in section:
+            raise ValueError(f"{template['id']} needs gasp.energy_minimum for {problem['id']}")
+        reference = section["energy_minimum"]
+    return float(reference) + float(convergence["energy_above_minimum"])
+
+
+def _harness_cap(problem: dict, template: dict) -> int:
+    """Problem force cap when the problem states one, otherwise the method ceiling.
+
+    A finished genetic-algorithm budget stays under the method ceiling, so
+    that ceiling is not a cap failure. A problem ``max_force_calls`` is the
+    budget the row is scored against.
+    """
     section = _gasp_section(template)
-    if "energy_minimum" not in section:
-        raise ValueError(f"{template['id']} needs gasp.energy_minimum for {problem['id']}")
-    return float(section["energy_minimum"]) + float(convergence["energy_above_minimum"])
+    method = search_force_cap(int(section["num_energy_calcs"]), int(section["min_eval"]))
+    stated = template.get("failure_cap")
+    if stated is None:
+        raise ValueError(f"{template['id']} needs failure_cap")
+    problem_cap = (problem.get("convergence") or {}).get("max_force_calls")
+    if problem_cap is not None:
+        if int(stated) != int(problem_cap):
+            raise ValueError(f"{template['id']} failure_cap must be the problem cap {int(problem_cap)}")
+        return int(problem_cap)
+    if int(stated) != method:
+        raise ValueError(f"{template['id']} failure_cap must be {method}")
+    return method
 
 
 def _archive_for(root: Path, problem: dict, template: dict) -> Path:
@@ -780,11 +805,14 @@ def _member_key(name: str) -> tuple:
 
 
 def _start_name(path: Path) -> str:
-    """Geometry label. ``12.con`` stays ``12``. ``coords.12`` stays ``12``."""
+    """Geometry label. ``12.con`` stays ``12``. ``coords.12`` stays ``coords.12``."""
+    name = path.name
+    if name.startswith("coords.") and name.removeprefix("coords.").isdigit():
+        return name
     stem = path.stem
     if stem.isdigit():
         return stem
-    tail = path.name.rsplit(".", 1)[-1]
+    tail = name.rsplit(".", 1)[-1]
     if tail.isdigit():
         return tail
     return stem
@@ -854,10 +882,7 @@ def _jobs(root: Path, problem: dict, template: dict, work: Path, *, limit: int) 
     section = _gasp_section(template)
     num_energy_calcs = int(section["num_energy_calcs"])
     min_eval = int(section["min_eval"])
-    cap = search_force_cap(num_energy_calcs, min_eval)
-    stated = template.get("failure_cap")
-    if stated is None or int(stated) != cap:
-        raise ValueError(f"{template['id']} failure_cap must be {cap}")
+    cap = _harness_cap(problem, template)
     limit_energy = _energy_limit(problem, template)
     natoms = int(section["natoms"])
     symbol = str(section.get("symbol") or "C")
