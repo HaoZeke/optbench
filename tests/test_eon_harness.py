@@ -56,3 +56,13 @@ def test_client_default_grid_is_one_start():
 
     assert len(EonClientNebPtLbfgs.params[1]) == 1
     assert EonClientNebPtLbfgs.template_name == "eon-client/neb-pt-lbfgs"
+
+
+def test_htst_classes_use_the_problem_force_call_cap():
+    from benchmarks.bench_eon_client import EonClientHtstAlDimerCg, EonClientHtstPtDimerLbfgs
+    from benchmarks.bench_eon_lane import EonSvnHtstAlDimerCg, EonSvnHtstPtDimerLbfgs
+
+    assert EonSvnHtstPtDimerLbfgs.cap == 20000000
+    assert EonClientHtstPtDimerLbfgs.cap == 20000000
+    assert EonSvnHtstAlDimerCg.cap == 1000000
+    assert EonClientHtstAlDimerCg.cap == 1000000

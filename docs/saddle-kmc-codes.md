@@ -630,7 +630,9 @@ is `archive/entries/hTST/Al/eon-dimer-cg/benchmark.dat`, `barrier_force_calls`
 over 432. The same next-million rule, applied to that largest published
 mean, gives 1000000, written as `problems/hTST/Al.toml`
 `convergence.max_force_calls`. The six eOn hTST templates no longer set
-`failure_cap`. The board reads the problem number for every code.
+`failure_cap`. The board reads the problem number for every code. The
+eOn harness classes do the same when a template states no
+`failure_cap`: the asv cap is `convergence.max_force_calls`.
 
 `pykmc/aladatom` and `pykmc/standard-aladatom` stay on the minimized
 reactant and stop when the old-scheme confidence `max(0, 1 - 1/repeats)`
