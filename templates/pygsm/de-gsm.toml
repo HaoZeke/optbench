@@ -8,10 +8,12 @@ algorithm = "DE-GSM"
 tuning = "default"
 
 [gsm]
-coordinate = "distance-tric"
-contact_cutoff = 1.35
+coordinate = "cartesian"
+nnodes = 11
+dmax = 0.1
 add_node_tol = 0.01
 max_opt_steps = 3
+nn_limit = 2.0
 growth_direction = 0
 rtype = 2
 linesearch = "NoLineSearch"

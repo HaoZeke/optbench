@@ -5,19 +5,22 @@ string ends in ``dirty`` because versioningit rewrites ``_version.py``
 while building, and the repository has no release tag. The level of
 theory is the harness kernel. Endpoints stay the archived pair.
 
-LJ38 has no covalent graph. The coordinate system is the union of
-endpoint contacts inside 1.35, plus translation and rotation. That
-cutoff sits in the flat first-neighbour shell. Angles and dihedrals
-are left out: a covalent-radius topology builds tens of thousands of
-primitives. Delocalized internals of the contact set span the
-Cartesian space, which is what eigenvector following requires.
-
-``nnodes`` is the problem's interior image count plus the two ends.
-``DMAX`` is the problem ``max_move``. The Cartesian force norm and the
-call cap are the problem stop. ``ADD_NODE_TOL`` and the three
-optimizer steps per cycle are the DE-GSM command-line defaults.
-``CONV_TOL`` is the force norm divided by ``sqrt(3N)``, so the
-delocalized RMS target matches that Cartesian norm. Numpy 2 removed
+The string uses a delocalized basis of the 3N Cartesian primitives.
+``CartesianCoordinates`` does not accept the tangent constraint, and
+eigenvector following raises ``NotImplementedError`` for that class.
+``nnodes`` is 11 and ``DMAX`` is 0.1, the double-ended defaults in
+``bin/gsm`` and ``examples/ase_api_de_gsm.py``. ``DQMAG_MAX`` (default
+0.8) applies only when the product node is absent, which is the
+single-ended branch of ``GSM.add_node``. ``ADD_NODE_TOL`` and the three
+optimizer steps per cycle are the command-line defaults. ``CONV_TOL``
+is the force norm divided by ``sqrt(3N)``, so the delocalized RMS
+target matches that Cartesian norm. The climb displacement in
+``base_optimizer`` is the tangent projection of the gradient, and the
+0.05 limit there is applied only when that projection is positive. The
+runner applies the same limit when the projection is negative, so one
+climb step cannot walk an atom out of the cluster. A geometry whose
+largest nearest-neighbour distance reaches 2 sigma is divergence.
+Numpy 2 removed
 ``ndarray.tostring`` and rejects a generator passed to ``np.sum``.
 The rotation eigensolve can also fail to converge on these clusters.
 The shims below restore those calls. They run in the worker.
@@ -53,9 +56,7 @@ from .score import score_v2
 from .stationary import numerical_hessian
 from .v2 import collect_provenance, write_starts
 
-_CONTACT_CUTOFF = 1.35
-_ADD_NODE_TOL = 0.01
-_MAX_OPT_STEPS = 3
+_NN_LIMIT = 2.0
 _EIGEN_TOL = 1e-6
 _FD_STEP = 1e-5
 _SYMBOL = "Ar"
@@ -131,6 +132,25 @@ def _stable_sorted_eigh(original):
     return sorted_eigh
 
 
+def _both_signs(original):
+    """Apply the climb step limit when the tangent gradient is negative."""
+
+    def get_constraint_steps(self, molecule, opt_type, g):
+        steps = original(self, molecule, opt_type, g)
+        if opt_type != "CLIMB" or molecule.constraints is None:
+            return steps
+        column = np.asarray(molecule.constraints[:, 0], dtype=np.float64).reshape(-1)
+        gradient = np.asarray(g, dtype=np.float64).reshape(-1)
+        projected = float(np.dot(gradient, column))
+        limit = abs(0.05 / float(self.SCALE_CLIMB))
+        if abs(projected) <= limit:
+            return steps
+        capped = float(np.sign(projected) * limit)
+        return (capped * column)[:, np.newaxis]
+
+    return get_constraint_steps
+
+
 def ensure_runtime() -> None:
     """Import pyGSM and apply the Numpy 2 shims once in this process."""
     global _PATCHED
@@ -138,88 +158,68 @@ def ensure_runtime() -> None:
         return
     from pyGSM.coordinate_systems import PrimitiveInternalCoordinates, rotate
     from pyGSM.coordinate_systems.internal_coordinates import InternalCoordinates
+    from pyGSM.optimizers.base_optimizer import base_optimizer
 
     _patch_wilson(PrimitiveInternalCoordinates)
     _patch_wilson(InternalCoordinates)
     rotate.sorted_eigh = _stable_sorted_eigh(rotate.sorted_eigh)
+    base_optimizer.get_constraint_steps = _both_signs(base_optimizer.get_constraint_steps)
     np.dot = _dot_scalar
     np.sum = _sum_generators
     _PATCHED = True
 
 
-def contact_pairs(coords: np.ndarray, cutoff: float) -> list[tuple[int, int]]:
-    """Undirected pairs whose distance is below ``cutoff``."""
-    points = np.asarray(coords, dtype=np.float64)
+def largest_nearest_neighbour(coords: np.ndarray) -> float:
+    """Largest nearest-neighbour distance. Sigma is 1 for this Lennard-Jones cluster."""
+    points = np.asarray(coords, dtype=np.float64).reshape(-1, 3)
+    if len(points) < 2:
+        return 0.0
     diff = points[:, None, :] - points[None, :, :]
     dist = np.linalg.norm(diff, axis=-1)
-    left, right = np.triu_indices(len(points), k=1)
-    return [
-        (int(i), int(j))
-        for i, j, gap in zip(left, right, dist[left, right])
-        if gap < cutoff
-    ]
+    np.fill_diagonal(dist, np.inf)
+    return float(np.max(np.min(dist, axis=1)))
 
 
 def _geom(coords: np.ndarray, symbol: str):
     return [(symbol, float(row[0]), float(row[1]), float(row[2])) for row in coords]
 
 
-def _distance_tric(reactant: np.ndarray, product: np.ndarray, atoms, cutoff: float):
+def _cartesian(reactant: np.ndarray, atoms):
+    """Delocalized basis of one Cartesian primitive per coordinate."""
     from pyGSM.coordinate_systems import DelocalizedInternalCoordinates, PrimitiveInternalCoordinates
-    from pyGSM.coordinate_systems.slots import (
-        Distance,
-        RotationA,
-        RotationB,
-        RotationC,
-        TranslationX,
-        TranslationY,
-        TranslationZ,
-    )
+    from pyGSM.coordinate_systems.slots import CartesianX, CartesianY, CartesianZ
     from pyGSM.coordinate_systems.topology import MyG
 
-    bonds = sorted(set(contact_pairs(reactant, cutoff)) | set(contact_pairs(product, cutoff)))
     graph = MyG()
-    for index in range(len(reactant)):
+    size = len(reactant)
+    for index in range(size):
         graph.add_node(index)
-    for left, right in bonds:
-        graph.add_edge(left, right)
+    for index in range(size - 1):
+        graph.add_edge(index, index + 1)
     prim = PrimitiveInternalCoordinates.from_options(
         xyz=reactant,
         atoms=atoms,
         topology=graph,
         connect=False,
-        addtr=True,
+        addtr=False,
         addcart=False,
         form_topology=False,
     )
-    nodes = list(range(len(reactant)))
-    weight = np.ones(len(nodes)) / len(nodes)
-    prim.Internals = [
-        TranslationX(nodes, weight),
-        TranslationY(nodes, weight),
-        TranslationZ(nodes, weight),
-    ]
-    flat = np.asarray(reactant, dtype=np.float64).reshape(-1)
-    centered = reactant - reactant.mean(axis=0)
-    radius = float(np.sqrt(np.mean(np.sum(centered**2, axis=1))))
-    prim.Internals.extend(
-        [
-            RotationA(nodes, flat, prim.Rotators, w=radius),
-            RotationB(nodes, flat, prim.Rotators, w=radius),
-            RotationC(nodes, flat, prim.Rotators, w=radius),
-        ]
-    )
-    prim.Internals.extend(Distance(left, right) for left, right in bonds)
+    prim.Internals = []
+    for index in range(size):
+        prim.Internals.append(CartesianX(index, w=1.0))
+        prim.Internals.append(CartesianY(index, w=1.0))
+        prim.Internals.append(CartesianZ(index, w=1.0))
     count = len(prim.Internals)
-    prim.block_info = [(0, len(reactant), 0, count, "reg")]
+    prim.block_info = [(0, size, 0, count, "reg")]
     prim.prim_only_block_info = list(prim.block_info)
     prim.fragments = [graph]
     return DelocalizedInternalCoordinates.from_options(
         xyz=reactant,
         atoms=atoms,
         connect=False,
-        addtr=True,
-        addcart=False,
+        addtr=False,
+        addcart=True,
         primitives=prim,
     )
 
@@ -273,7 +273,17 @@ def _lot_class():
     return HarnessLot
 
 
-def _build(reactant, product, counter, evaluate_fn, *, nnodes: int, force_norm: float, max_move: float):
+def _build(
+    reactant,
+    product,
+    counter,
+    evaluate_fn,
+    *,
+    nnodes: int,
+    force_norm: float,
+    dmax: float,
+    add_node_tol: float,
+):
     from pyGSM.growing_string_methods import DE_GSM
     from pyGSM.molecule import Molecule
     from pyGSM.optimizers import eigenvector_follow
@@ -291,7 +301,7 @@ def _build(reactant, product, counter, evaluate_fn, *, nnodes: int, force_norm: 
     pes = PES.from_options(lot=lot, ad_idx=0, multiplicity=1)
     table = elements.ElementData()
     atoms = [table.from_symbol(_SYMBOL) for _ in range(len(reactant))]
-    coord = _distance_tric(reactant, product, atoms, _CONTACT_CUTOFF)
+    coord = _cartesian(reactant, atoms)
     molecule_r = Molecule.from_options(
         geom=_geom(reactant, _SYMBOL),
         PES=pes,
@@ -312,7 +322,7 @@ def _build(reactant, product, counter, evaluate_fn, *, nnodes: int, force_norm: 
         conv_Ediff=100.0,
         conv_dE=1.0,
         conv_gmax=100.0,
-        DMAX=float(max_move),
+        DMAX=float(dmax),
     )
     return DE_GSM.from_options(
         reactant=molecule_r,
@@ -322,7 +332,7 @@ def _build(reactant, product, counter, evaluate_fn, *, nnodes: int, force_norm: 
         CONV_gmax=100.0,
         CONV_Ediff=100.0,
         CONV_dE=1.0,
-        ADD_NODE_TOL=_ADD_NODE_TOL,
+        ADD_NODE_TOL=float(add_node_tol),
         growth_direction=0,
         optimizer=optimizer,
         ID=0,
@@ -345,6 +355,23 @@ def _stored(node) -> tuple[float, np.ndarray, np.ndarray] | None:
     if not np.allclose(xyz, coords, rtol=0.0, atol=1e-12):
         return None
     return float(energy), np.asarray(grad, dtype=np.float64), np.asarray(coords, dtype=np.float64)
+
+
+def _string_nn(gsm) -> float | None:
+    """Largest nearest-neighbour distance among interior nodes."""
+    if gsm is None:
+        return None
+    nodes = list(gsm.nodes)
+    worst = None
+    for index, node in enumerate(nodes):
+        if node is None or index == 0 or index == len(nodes) - 1:
+            continue
+        xyz = getattr(node, "xyz", None)
+        if xyz is None:
+            continue
+        gap = largest_nearest_neighbour(np.asarray(xyz, dtype=np.float64))
+        worst = gap if worst is None else max(worst, gap)
+    return worst
 
 
 def _candidate(gsm) -> dict | None:
@@ -378,6 +405,8 @@ def _judge(
     crashed: str,
     potential: str,
     diverged: bool = False,
+    string_nn: float | None = None,
+    nn_limit: float = _NN_LIMIT,
 ) -> dict:
     reasons: list[str] = []
     if crashed:
@@ -395,6 +424,12 @@ def _judge(
         force = float(np.linalg.norm(np.asarray(candidate["gradient"], dtype=np.float64).reshape(-1)))
     if not np.isfinite(force) or force > force_norm:
         reasons.append("force_norm")
+    gap = string_nn
+    if coords is not None:
+        candidate_nn = largest_nearest_neighbour(coords)
+        gap = candidate_nn if gap is None else max(gap, candidate_nn)
+    if gap is not None and (not np.isfinite(gap) or gap >= float(nn_limit)):
+        reasons.append("divergence")
     hessian_index = None
     if "crash" not in reasons and "divergence" not in reasons and "cap" not in reasons and "force_norm" not in reasons and coords is not None:
         shape = coords.shape
@@ -433,6 +468,7 @@ def _judge(
         "energy": None if not np.isfinite(energy) else energy,
         "force_norm": None if not np.isfinite(force) else force,
         "hessian_index": hessian_index,
+        "max_nn": None if gap is None or not np.isfinite(gap) else float(gap),
         "converged": failure is None,
         "error": crashed or None,
         "grown": candidate is not None,
@@ -446,10 +482,13 @@ def search_pair(
     *,
     force_norm: float,
     cap: int,
-    max_move: float,
-    n_interior: int,
+    nnodes: int,
+    dmax: float,
+    add_node_tol: float,
+    max_opt_steps: int,
     project_rigid: bool,
     potential: str = "lj",
+    nn_limit: float = _NN_LIMIT,
 ) -> dict:
     """One double-ended growing string. The call cap is the problem cap."""
     _threads_one()
@@ -479,17 +518,18 @@ def search_pair(
                     product,
                     counter,
                     evaluate_fn,
-                    nnodes=int(n_interior) + 2,
+                    nnodes=int(nnodes),
                     force_norm=float(force_norm),
-                    max_move=float(max_move),
+                    dmax=float(dmax),
+                    add_node_tol=float(add_node_tol),
                 )
                 gsm.set_V0()
                 gsm.add_GSM_nodes(2)
-                gsm.grow_string(max_iters=1_000_000, max_opt_steps=_MAX_OPT_STEPS)
+                gsm.grow_string(max_iters=1_000_000, max_opt_steps=int(max_opt_steps))
                 if gsm.nodes and all(node is not None for node in gsm.nodes):
                     gsm.done_growing = True
                     gsm.reparameterize()
-                    gsm.optimize_string(max_iter=1_000_000, opt_steps=_MAX_OPT_STEPS, rtype=2)
+                    gsm.optimize_string(max_iter=1_000_000, opt_steps=int(max_opt_steps), rtype=2)
             except ForceCallCap:
                 pass
             except Exception as exc:
@@ -506,6 +546,7 @@ def search_pair(
         os.chdir(previous)
         shutil.rmtree(work, ignore_errors=True)
     candidate = _candidate(gsm) if gsm is not None else None
+    string_nn = _string_nn(gsm)
     record = _judge(
         name,
         counter,
@@ -516,6 +557,8 @@ def search_pair(
         crashed=crashed,
         potential=potential,
         diverged=diverged,
+        string_nn=string_nn,
+        nn_limit=float(nn_limit),
     )
     return record
 
@@ -533,6 +576,8 @@ def _registry(root: Path) -> dict:
 def _settings(template: dict, problem: dict, commit: str) -> dict:
     if template.get("commit") != commit:
         raise ValueError(f"{template['id']} commit does not match the pygsm registry")
+    if str(template["gsm"].get("coordinate")) != "cartesian":
+        raise ValueError(f"{template['id']} coordinate is {template['gsm'].get('coordinate')}")
     band = problem["band"]
     convergence = problem["convergence"]
     return {
@@ -543,10 +588,12 @@ def _settings(template: dict, problem: dict, commit: str) -> dict:
         "cap": int(convergence["max_force_calls"]),
         "pairs": int(problem["sample"]["pairs"]),
         "geometry": problem["geometry"]["kind"],
-        "contact_cutoff": _CONTACT_CUTOFF,
-        "add_node_tol": _ADD_NODE_TOL,
-        "max_opt_steps": _MAX_OPT_STEPS,
-        "coordinate": "distance-tric",
+        "nnodes": int(template["gsm"]["nnodes"]),
+        "dmax": float(template["gsm"]["dmax"]),
+        "add_node_tol": float(template["gsm"]["add_node_tol"]),
+        "max_opt_steps": int(template["gsm"]["max_opt_steps"]),
+        "coordinate": str(template["gsm"]["coordinate"]),
+        "nn_limit": float(template["gsm"]["nn_limit"]),
     }
 
 
@@ -569,10 +616,13 @@ def _execute(job: dict) -> dict:
         job["product"],
         force_norm=settings["force_norm"],
         cap=settings["cap"],
-        max_move=settings["max_move"],
-        n_interior=settings["n_interior"],
+        nnodes=settings["nnodes"],
+        dmax=settings["dmax"],
+        add_node_tol=settings["add_node_tol"],
+        max_opt_steps=settings["max_opt_steps"],
         project_rigid=bool(job["project_rigid"]),
         potential=str(settings["potential"]),
+        nn_limit=settings["nn_limit"],
     )
 
 
@@ -620,9 +670,9 @@ def _dat(records: list[dict], template: dict, settings: dict, problem: dict, sco
     lines.append(f"images {settings['n_interior']}")
     lines.append(
         "note pyGSM DE-GSM. The harness Lennard-Jones kernel is the level of theory. "
-        f"{settings['n_interior'] + 2} nodes. Distance-plus-rigid coordinates, contact cutoff "
-        f"{settings['contact_cutoff']}. Endpoints fixed. DMAX {settings['max_move']}. "
-        f"Call cap {settings['cap']}."
+        f"{settings['nnodes']} nodes. Cartesian primitives. Endpoints fixed. "
+        f"DMAX {settings['dmax']}. Climb step limited to 0.05. "
+        f"Nearest-neighbour limit {settings['nn_limit']}. Call cap {settings['cap']}."
     )
     return "\n".join(lines) + "\n"
 
