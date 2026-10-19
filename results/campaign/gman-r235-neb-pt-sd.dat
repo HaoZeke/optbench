@@ -1,0 +1,11 @@
+force_calls 412
+force_calls_min 214
+force_calls_max 697
+nfailed 0
+code Gman
+code_version r235
+commit r235
+algorithm sd
+template gman/neb-pt-sd
+problem neb/Pt-heptamer
+counter client
