@@ -1,0 +1,12 @@
+id = "gmin/lj100-binary-bh"
+engine = "gmin"
+problem = "globalopt/lj100-binary"
+code = "GMIN"
+code_version = "27058"
+commit = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
+algorithm = "basin-hopping"
+tuning = "archive"
+paper_baseline = true
+note = """
+Serial GMIN from optbench.org/codes/wales-27058.tar.bz2 (sha256 144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348), the 07 Aug 2014 code_file. CMake build with gfortran, MPI off, and system BLAS/LAPACK. gfortran 13 rejects a one-element slice in biased_torsional_sampling.f90, which this GLJ run does not call; the slice end is +3 so the binary links. The published input is archive/entries/globalopt/lj100-binary/gmin/data from gmin.tgz: GLJ 42 58 with epsilon 1, 1, 1 and sigma 1, 1.15, 1.3, SLOPPYCONV 0.0005, TIGHTCONV 1e-7, MAXIT 1000 1000, STEPS 1000000 1.0, max_npcall 2000000, RADIUS 5, TEMPERATURE 0.08, STEP 1.3 0.5, NEWRESTART 125, AVOID 0 0, PERMDIST 0.005, HOMOREF 0 0 1 36, RANSEED 100. Starts are coords.0 through coords.99. The score is the lowest energy in each lowest file, the same fields getdata.py writes. Ranked force-call means are not this score.
+"""

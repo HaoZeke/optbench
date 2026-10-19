@@ -1,0 +1,15 @@
+# Wales GMIN revision 27058, published data file, 100 coords starts.
+# Score is numpy min, max, and mean of the lowest-file energies, printed as getdata.py %.5e.
+# unrounded min -601.0859614 max -577.8622742 avg -589.3242393690001
+min_energy -6.01086e+02
+max_energy -5.77862e+02
+avg_energy -5.89324e+02
+n 100
+nfailed 0
+code GMIN
+code_version 27058
+algorithm basin-hopping
+template gmin/lj100-binary-bh
+problem globalopt/lj100-binary
+counter client
+commit 144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348
