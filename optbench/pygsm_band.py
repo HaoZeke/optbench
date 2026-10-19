@@ -16,11 +16,11 @@ optimizer steps per cycle are the command-line defaults. ``CONV_TOL``
 is the force norm divided by ``sqrt(3N)``, so the delocalized RMS
 target matches that Cartesian norm. The climb displacement in
 ``base_optimizer`` is the tangent projection of the gradient, and the
-0.05 limit there is applied only when that projection is positive. The
-runner applies the same limit when the projection is negative, so one
-climb step cannot walk an atom out of the cluster. A geometry whose
-largest nearest-neighbour distance reaches 2 sigma is divergence.
-Numpy 2 removed
+0.05 limit there is applied only when that projection is positive.
+``pygsm/de-gsm`` leaves that step as shipped. ``pygsm/de-gsm-climbclamp``
+applies the absolute-value clamp recorded in
+``templates/pygsm/de-gsm-climbclamp.diff``. A separated cluster is
+divergence by the harness connected-cluster rule. Numpy 2 removed
 ``ndarray.tostring`` and rejects a generator passed to ``np.sum``.
 The rotation eigensolve can also fail to converge on these clusters.
 The shims below restore those calls. They run in the worker.
@@ -47,20 +47,21 @@ os.environ.setdefault("NUMEXPR_NUM_THREADS", "1")
 
 import numpy as np
 
+from .bound import note_unbound
 from .campaign import geometry_archive, load_template, resolve_problem
 from .counter import ForceCallCap, HarnessCounter
-from .failures import classify_failure
+from .failures import FAILURES, classify_outcome
 from .pes import evaluate, load_pairs
 from .rgsaddle_band import vibrational_index
 from .score import score_v2
 from .stationary import numerical_hessian
 from .v2 import collect_provenance, write_starts
 
-_NN_LIMIT = 2.0
 _EIGEN_TOL = 1e-6
 _FD_STEP = 1e-5
 _SYMBOL = "Ar"
 _PATCHED = False
+_CLIMB_CLAMP = False
 _NP_SUM = np.sum
 _NP_DOT = np.dot
 
@@ -133,11 +134,16 @@ def _stable_sorted_eigh(original):
 
 
 def _both_signs(original):
-    """Apply the climb step limit when the tangent gradient is negative."""
+    """Stock climb step, or the absolute-value clamp when this template asks.
+
+    The shipped condition is ``gts > abs(max_step)``. The clamp template
+    changes that comparison to ``abs(gts) > abs(max_step)``, which is
+    ``templates/pygsm/de-gsm-climbclamp.diff``.
+    """
 
     def get_constraint_steps(self, molecule, opt_type, g):
         steps = original(self, molecule, opt_type, g)
-        if opt_type != "CLIMB" or molecule.constraints is None:
+        if not _CLIMB_CLAMP or opt_type != "CLIMB" or molecule.constraints is None:
             return steps
         column = np.asarray(molecule.constraints[:, 0], dtype=np.float64).reshape(-1)
         gradient = np.asarray(g, dtype=np.float64).reshape(-1)
@@ -152,7 +158,10 @@ def _both_signs(original):
 
 
 def ensure_runtime() -> None:
-    """Import pyGSM and apply the Numpy 2 shims once in this process."""
+    """Import pyGSM and apply the Numpy 2 shims once in this process.
+
+    The climb clamp stays off until the template sets ``_CLIMB_CLAMP``.
+    """
     global _PATCHED
     if _PATCHED:
         return
@@ -357,21 +366,20 @@ def _stored(node) -> tuple[float, np.ndarray, np.ndarray] | None:
     return float(energy), np.asarray(grad, dtype=np.float64), np.asarray(coords, dtype=np.float64)
 
 
-def _string_nn(gsm) -> float | None:
-    """Largest nearest-neighbour distance among interior nodes."""
+def _interior_geometries(gsm) -> list[np.ndarray]:
+    """Interior-node coordinates. Endpoints are the archived pair."""
     if gsm is None:
-        return None
+        return []
     nodes = list(gsm.nodes)
-    worst = None
+    found = []
     for index, node in enumerate(nodes):
         if node is None or index == 0 or index == len(nodes) - 1:
             continue
         xyz = getattr(node, "xyz", None)
         if xyz is None:
             continue
-        gap = largest_nearest_neighbour(np.asarray(xyz, dtype=np.float64))
-        worst = gap if worst is None else max(worst, gap)
-    return worst
+        found.append(np.asarray(xyz, dtype=np.float64))
+    return found
 
 
 def _candidate(gsm) -> dict | None:
@@ -405,33 +413,51 @@ def _judge(
     crashed: str,
     potential: str,
     diverged: bool = False,
-    string_nn: float | None = None,
-    nn_limit: float = _NN_LIMIT,
+    geometries: list[np.ndarray] | None = None,
 ) -> dict:
     reasons: list[str] = []
     if crashed:
         reasons.append("crash")
     if diverged:
         reasons.append("divergence")
-    if counter.calls >= cap:
+    calls = int(counter.calls)
+    if calls >= cap:
         reasons.append("cap")
-    energy = float("nan")
-    force = float("nan")
+    energy = None
+    force = None
     coords = None
     if candidate is not None:
         energy = float(candidate["energy"])
         coords = np.asarray(candidate["coords"], dtype=np.float64)
         force = float(np.linalg.norm(np.asarray(candidate["gradient"], dtype=np.float64).reshape(-1)))
-    if not np.isfinite(force) or force > force_norm:
-        reasons.append("force_norm")
-    gap = string_nn
+    points: list[np.ndarray] = []
+    if geometries:
+        points.extend(np.asarray(item, dtype=np.float64) for item in geometries)
     if coords is not None:
-        candidate_nn = largest_nearest_neighbour(coords)
-        gap = candidate_nn if gap is None else max(gap, candidate_nn)
-    if gap is not None and (not np.isfinite(gap) or gap >= float(nn_limit)):
-        reasons.append("divergence")
+        points.append(coords)
+    gap = None
+    for point in points:
+        neighbour = largest_nearest_neighbour(point)
+        gap = neighbour if gap is None else max(gap, neighbour)
+    if "crash" not in reasons and "cap" not in reasons:
+        for point in points:
+            note_unbound(reasons, point, kind=potential)
+    at_force = (
+        coords is not None
+        and force is not None
+        and np.isfinite(force)
+        and force <= force_norm
+        and energy is not None
+        and np.isfinite(energy)
+    )
     hessian_index = None
-    if "crash" not in reasons and "divergence" not in reasons and "cap" not in reasons and "force_norm" not in reasons and coords is not None:
+    if (
+        "crash" not in reasons
+        and "divergence" not in reasons
+        and "cap" not in reasons
+        and at_force
+        and coords is not None
+    ):
         shape = coords.shape
 
         def gradient(point):
@@ -454,19 +480,31 @@ def _judge(
         )
         if hessian_index != 1:
             reasons.append("hessian_index")
-    failure = classify_failure(reasons)
+    failure = classify_outcome(
+        energy=energy,
+        geometry=coords,
+        force=force,
+        calls=calls,
+        cap=cap,
+        force_tol=force_norm,
+        process_failed="crash" in reasons,
+        dissociated="divergence" in reasons,
+        hessian_index=hessian_index,
+        expected_index=1 if hessian_index is not None else None,
+        unmet=candidate is None and "crash" not in reasons and "cap" not in reasons and "divergence" not in reasons,
+    )
     return {
         "schema": "optbench.start/v2",
         "start": name,
-        "force_calls": int(counter.calls),
+        "force_calls": calls,
         "verify_calls": int(counter.verify_calls),
         "counter": "harness",
         "comparable": True,
         "success": failure is None,
         "failure": failure,
         "reasons": reasons,
-        "energy": None if not np.isfinite(energy) else energy,
-        "force_norm": None if not np.isfinite(force) else force,
+        "energy": None if energy is None or not np.isfinite(energy) else energy,
+        "force_norm": None if force is None or not np.isfinite(force) else force,
         "hessian_index": hessian_index,
         "max_nn": None if gap is None or not np.isfinite(gap) else float(gap),
         "converged": failure is None,
@@ -488,9 +526,11 @@ def search_pair(
     max_opt_steps: int,
     project_rigid: bool,
     potential: str = "lj",
-    nn_limit: float = _NN_LIMIT,
+    climb_clamp: bool = False,
 ) -> dict:
     """One double-ended growing string. The call cap is the problem cap."""
+    global _CLIMB_CLAMP
+    _CLIMB_CLAMP = bool(climb_clamp)
     _threads_one()
     ensure_runtime()
     reactant = np.asarray(reactant, dtype=np.float64)
@@ -546,7 +586,6 @@ def search_pair(
         os.chdir(previous)
         shutil.rmtree(work, ignore_errors=True)
     candidate = _candidate(gsm) if gsm is not None else None
-    string_nn = _string_nn(gsm)
     record = _judge(
         name,
         counter,
@@ -557,8 +596,7 @@ def search_pair(
         crashed=crashed,
         potential=potential,
         diverged=diverged,
-        string_nn=string_nn,
-        nn_limit=float(nn_limit),
+        geometries=_interior_geometries(gsm),
     )
     return record
 
@@ -593,7 +631,7 @@ def _settings(template: dict, problem: dict, commit: str) -> dict:
         "add_node_tol": float(template["gsm"]["add_node_tol"]),
         "max_opt_steps": int(template["gsm"]["max_opt_steps"]),
         "coordinate": str(template["gsm"]["coordinate"]),
-        "nn_limit": float(template["gsm"]["nn_limit"]),
+        "climb_clamp": bool(template["gsm"].get("climb_clamp", False)),
     }
 
 
@@ -622,7 +660,7 @@ def _execute(job: dict) -> dict:
         max_opt_steps=settings["max_opt_steps"],
         project_rigid=bool(job["project_rigid"]),
         potential=str(settings["potential"]),
-        nn_limit=settings["nn_limit"],
+        climb_clamp=bool(settings["climb_clamp"]),
     )
 
 
@@ -657,7 +695,7 @@ def _dat(records: list[dict], template: dict, settings: dict, problem: dict, sco
     lines.append(f"par2_median {score['median']:.10f}")
     lines.append(f"wilson_low {score['wilson_low']:.10f}")
     lines.append(f"wilson_high {score['wilson_high']:.10f}")
-    for name in ("cap", "wrong_stationary", "divergence", "crash"):
+    for name in FAILURES:
         lines.append(f"n_{name} {score[f'n_{name}']}")
     lines.append(f"code {template['code']}")
     lines.append(f"code_version {template['code_version']}")
@@ -668,12 +706,26 @@ def _dat(records: list[dict], template: dict, settings: dict, problem: dict, sco
     lines.append("counter harness")
     lines.append(f"problem {problem['id']}")
     lines.append(f"images {settings['n_interior']}")
-    lines.append(
-        "note pyGSM DE-GSM. The harness Lennard-Jones kernel is the level of theory. "
+    shared = (
         f"{settings['nnodes']} nodes. Cartesian primitives. Endpoints fixed. "
-        f"DMAX {settings['dmax']}. Climb step limited to 0.05. "
-        f"Nearest-neighbour limit {settings['nn_limit']}. Call cap {settings['cap']}."
+        f"DMAX {settings['dmax']}. "
+        "A separated cluster is divergence by the harness connected-cluster rule at 1.5 sigma. "
+        f"Call cap {settings['cap']}."
     )
+    if settings["climb_clamp"]:
+        note = (
+            "pyGSM DE-GSM with the negative-projection climb clamp. This row is not stock pyGSM. "
+            "The patch is templates/pygsm/de-gsm-climbclamp.diff. "
+            "The 0.05 limit applies when the absolute tangent projection exceeds 0.05. "
+            + shared
+        )
+    else:
+        note = (
+            "pyGSM DE-GSM, stock climb step. "
+            "The 0.05 limit in base_optimizer applies only when the tangent projection is positive. "
+            + shared
+        )
+    lines.append(f"note {note}")
     return "\n".join(lines) + "\n"
 
 

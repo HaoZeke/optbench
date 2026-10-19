@@ -24,7 +24,7 @@ def test_asv_runtime_requires_the_campaign_scipy():
 
 
 def test_benchmark_classes_publish_the_problem_cap():
-    from benchmarks.bench_pygsm import PygsmLj38De, PygsmLj38TwoTs
+    from benchmarks.bench_pygsm import PygsmLj38De, PygsmLj38DeClimb, PygsmLj38TwoTs, PygsmLj38TwoTsClimb
 
     assert PygsmLj38De.problem_name == "double-ended-saddle-search/lj38"
     assert PygsmLj38De.template_id == "pygsm/de-gsm"
@@ -35,13 +35,21 @@ def test_benchmark_classes_publish_the_problem_cap():
     assert PygsmLj38TwoTs.cap == 10000
     assert PygsmLj38TwoTs.timeout == 7200
     assert PygsmLj38TwoTs.params[1] == ["pair_00"]
+    assert PygsmLj38DeClimb.template_id == "pygsm/de-gsm-climbclamp"
+    assert PygsmLj38DeClimb.problem_name == PygsmLj38De.problem_name
+    assert PygsmLj38DeClimb.cap == 2500
+    assert PygsmLj38TwoTsClimb.template_id == "pygsm/de-gsm-climbclamp"
+    assert PygsmLj38TwoTsClimb.cap == 10000
 
 
 def test_template_matches_the_registry_pin():
     registry = tomllib.loads((ROOT / "codes" / "registry.toml").read_text(encoding="utf-8"))
     pinned = next(row for row in registry["code"] if row["id"] == "pygsm")
     template = load_template(ROOT, "pygsm/de-gsm")
+    clamp = load_template(ROOT, "pygsm/de-gsm-climbclamp")
     assert pinned["commit"] == COMMIT
+    assert "de-gsm-climbclamp" in pinned["note"]
+    assert "stock climb step" in pinned["note"]
     assert template["commit"] == pinned["commit"]
     assert template["code"] == "pygsm"
     assert template["engine"] == "pygsm-band"
@@ -53,9 +61,18 @@ def test_template_matches_the_registry_pin():
     assert template["gsm"]["dmax"] == 0.1
     assert template["gsm"]["add_node_tol"] == 0.01
     assert template["gsm"]["max_opt_steps"] == 3
-    assert template["gsm"]["nn_limit"] == 2.0
+    assert template["gsm"]["climb_clamp"] is False
     assert template["gsm"]["endpoints"] == "fixed"
     assert "problem" not in template
+    assert clamp["id"] == "pygsm/de-gsm-climbclamp"
+    assert clamp["tuning"] == "climbclamp"
+    assert clamp["gsm"]["climb_clamp"] is True
+    assert clamp["gsm"]["nnodes"] == template["gsm"]["nnodes"]
+    assert clamp["gsm"]["dmax"] == template["gsm"]["dmax"]
+    assert clamp["commit"] == template["commit"]
+    diff = (ROOT / "templates" / "pygsm" / "de-gsm-climbclamp.diff").read_text(encoding="utf-8")
+    assert "-            if gts > np.abs(max_step):" in diff
+    assert "+            if np.abs(gts) > np.abs(max_step):" in diff
 
 
 def test_largest_nearest_neighbour_is_the_worst_contact():
@@ -85,7 +102,7 @@ def test_rotation_eigensolve_symmetrizes_and_falls_back():
     assert vectors.shape == (2, 2)
 
 
-def test_a_separated_neighbour_is_divergence_before_the_hessian():
+def test_a_separated_cluster_is_divergence_before_the_hessian():
     from optbench.counter import HarnessCounter
     from optbench.pygsm_band import _judge
 
@@ -99,7 +116,6 @@ def test_a_separated_neighbour_is_divergence_before_the_hessian():
         project_rigid=False,
         crashed="",
         potential="lj",
-        nn_limit=2.0,
     )
     assert record["success"] is False
     assert record["failure"] == "divergence"
@@ -107,9 +123,74 @@ def test_a_separated_neighbour_is_divergence_before_the_hessian():
     assert record["max_nn"] == 3.0
 
 
-def test_the_climb_step_limit_applies_when_the_tangent_gradient_is_negative():
+def test_two_compact_fragments_are_divergence_under_the_cluster_rule():
+    from optbench.counter import HarnessCounter
+    from optbench.pygsm_band import _judge
+
+    coords = np.array(
+        [[0.0, 0.0, 0.0], [1.1, 0.0, 0.0], [10.0, 0.0, 0.0], [11.1, 0.0, 0.0]],
+        dtype=np.float64,
+    )
+    record = _judge(
+        "pair",
+        HarnessCounter(cache=True, cap=10),
+        {"energy": -2.0, "gradient": np.zeros(12), "coords": coords},
+        force_norm=0.001,
+        cap=10,
+        project_rigid=False,
+        crashed="",
+        potential="lj",
+    )
+    assert record["failure"] == "divergence"
+    assert record["hessian_index"] is None
+    assert record["max_nn"] == 1.1
+
+
+def test_a_capped_separated_cluster_stays_cap():
+    from optbench.counter import HarnessCounter
+    from optbench.pygsm_band import _judge
+
+    counter = HarnessCounter(cache=True, cap=10)
+    counter.calls = 10
+    coords = np.array([[0.0, 0.0, 0.0], [3.0, 0.0, 0.0], [6.0, 0.0, 0.0]], dtype=np.float64)
+    record = _judge(
+        "pair",
+        counter,
+        {"energy": -1.0e-5, "gradient": np.zeros(9), "coords": coords},
+        force_norm=0.001,
+        cap=10,
+        project_rigid=False,
+        crashed="",
+        potential="lj",
+    )
+    assert record["failure"] == "cap"
+    assert record["hessian_index"] is None
+
+
+def test_a_connected_early_stop_is_not_converged():
+    from optbench.counter import HarnessCounter
+    from optbench.pygsm_band import _judge
+
+    coords = np.array([[0.0, 0.0, 0.0], [1.1, 0.0, 0.0], [0.55, 0.95, 0.0]], dtype=np.float64)
+    record = _judge(
+        "pair",
+        HarnessCounter(cache=True, cap=10),
+        {"energy": -3.0, "gradient": np.full(9, 0.2), "coords": coords},
+        force_norm=0.001,
+        cap=10,
+        project_rigid=False,
+        crashed="",
+        potential="lj",
+    )
+    assert record["failure"] == "not_converged"
+    assert record["hessian_index"] is None
+
+
+def test_stock_climb_leaves_a_negative_projection_raw():
+    import optbench.pygsm_band as pygsm_band
     from optbench.pygsm_band import ensure_runtime
 
+    pygsm_band._CLIMB_CLAMP = False
     ensure_runtime()
     from pyGSM.optimizers.base_optimizer import base_optimizer
 
@@ -120,9 +201,32 @@ def test_the_climb_step_limit_applies_when_the_tangent_gradient_is_negative():
         constraints = np.eye(2)
 
     steps = base_optimizer.get_constraint_steps(Optimizer(), Molecule(), "CLIMB", np.array([-4.0, 0.2]))
-    assert abs(float(np.asarray(steps).reshape(-1)[0])) == 0.05
+    assert float(np.asarray(steps).reshape(-1)[0]) == -4.0
     positive = base_optimizer.get_constraint_steps(Optimizer(), Molecule(), "CLIMB", np.array([4.0, 0.0]))
     assert abs(float(np.asarray(positive).reshape(-1)[0])) == 0.05
+
+
+def test_the_climb_step_limit_applies_when_the_tangent_gradient_is_negative():
+    import optbench.pygsm_band as pygsm_band
+    from optbench.pygsm_band import ensure_runtime
+
+    pygsm_band._CLIMB_CLAMP = True
+    ensure_runtime()
+    from pyGSM.optimizers.base_optimizer import base_optimizer
+
+    class Optimizer:
+        SCALE_CLIMB = 1.0
+
+    class Molecule:
+        constraints = np.eye(2)
+
+    try:
+        steps = base_optimizer.get_constraint_steps(Optimizer(), Molecule(), "CLIMB", np.array([-4.0, 0.2]))
+        assert abs(float(np.asarray(steps).reshape(-1)[0])) == 0.05
+        positive = base_optimizer.get_constraint_steps(Optimizer(), Molecule(), "CLIMB", np.array([4.0, 0.0]))
+        assert abs(float(np.asarray(positive).reshape(-1)[0])) == 0.05
+    finally:
+        pygsm_band._CLIMB_CLAMP = False
 
 
 def test_generator_sum_adds_vectors():

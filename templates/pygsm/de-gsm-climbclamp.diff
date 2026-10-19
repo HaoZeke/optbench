@@ -1,0 +1,11 @@
+--- a/pyGSM/optimizers/base_optimizer.py
++++ b/pyGSM/optimizers/base_optimizer.py
+@@ -368,7 +368,7 @@
+             gts = np.dot(g.T, molecule.constraints[:, 0])
+             # stepsize=np.linalg.norm(constraint_steps)
+             max_step = 0.05/self.SCALE_CLIMB
+-            if gts > np.abs(max_step):
++            if np.abs(gts) > np.abs(max_step):
+                 gts = np.sign(gts)*max_step
+                 # constraint_steps = constraint_steps*max_step/stepsize
+             print(" gts %1.4f" % gts)

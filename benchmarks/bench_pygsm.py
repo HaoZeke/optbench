@@ -1,6 +1,8 @@
 """pyGSM double-ended growing string as airspeed-velocity benchmarks.
 
-One class is one problem and the ``pygsm/de-gsm`` template. Parameters
+One class is one problem and one pyGSM template. ``pygsm/de-gsm`` is the
+stock climb step. ``pygsm/de-gsm-climbclamp`` is the absolute-value
+clamp. Parameters
 are the seed and the archived start. The default grid is one seed and
 the first geometry. ``OPTBENCH_ASV_FULL=1`` selects every start, and
 it is read at import.
@@ -135,9 +137,8 @@ def _write_sidecar(problem_name: str, template_name: str, seed: str, start: str,
     path.write_text(json.dumps(record, sort_keys=True) + "\n", encoding="utf-8")
 
 
-def _bind(class_name: str, problem: str, call_cap: int, limit: int):
+def _bind(class_name: str, problem: str, call_cap: int, limit: int, template: str):
     starts = _starts(problem)
-    template = "pygsm/de-gsm"
 
     class _Benchmark(_TrackedSearch):
         param_names = ["seed", "start"]
@@ -218,6 +219,9 @@ def _bind(class_name: str, problem: str, call_cap: int, limit: int):
         def track_failure_crash(self, seed, start) -> float:
             return 1.0 if self._ready(seed, start)["failure"] == "crash" else 0.0
 
+        def track_failure_not_converged(self, seed, start) -> float:
+            return 1.0 if self._ready(seed, start)["failure"] == "not_converged" else 0.0
+
     _Benchmark.__name__ = class_name
     _Benchmark.__qualname__ = class_name
     _Benchmark.__module__ = __name__
@@ -227,16 +231,32 @@ def _bind(class_name: str, problem: str, call_cap: int, limit: int):
     _Benchmark.track_failure_wrong_stationary.unit = "count"
     _Benchmark.track_failure_divergence.unit = "count"
     _Benchmark.track_failure_crash.unit = "count"
+    _Benchmark.track_failure_not_converged.unit = "count"
     CLASS_PROBLEM[class_name] = problem
     CLASS_TEMPLATE[class_name] = template
     CLASS_CAP[class_name] = call_cap
     return _Benchmark
 
 
-PygsmLj38De = _bind("PygsmLj38De", "double-ended-saddle-search/lj38", 2500, 1800)
+PygsmLj38De = _bind("PygsmLj38De", "double-ended-saddle-search/lj38", 2500, 1800, "pygsm/de-gsm")
 PygsmLj38TwoTs = _bind(
     "PygsmLj38TwoTs",
     "double-ended-saddle-search/lj38_2ts_separation",
     10000,
     7200,
+    "pygsm/de-gsm",
+)
+PygsmLj38DeClimb = _bind(
+    "PygsmLj38DeClimb",
+    "double-ended-saddle-search/lj38",
+    2500,
+    1800,
+    "pygsm/de-gsm-climbclamp",
+)
+PygsmLj38TwoTsClimb = _bind(
+    "PygsmLj38TwoTsClimb",
+    "double-ended-saddle-search/lj38_2ts_separation",
+    10000,
+    7200,
+    "pygsm/de-gsm-climbclamp",
 )
