@@ -3,7 +3,7 @@
   "problem": "neb/Pt-heptamer",
   "provenance": {
     "code": "Gman",
-    "code_version": "r235",
+    "code_version": "1.0.0.01",
     "commit": "r235",
     "machine": {
       "machine": "x86_64",
@@ -13,18 +13,18 @@
     },
     "parameters": {
       "alpha": 0.05,
-      "converge": "Fmag",
       "counter": "Gman pot.count",
       "fmax": 0.01,
       "images": 8,
+      "maxmove": 0.2,
       "memory": 25,
       "method": "ci",
       "minimizer": "line",
       "optimizer": "lbfgs",
       "potential": "morse",
-      "spring": 5.0,
-      "tangent": "new",
-      "version": "r235"
+      "release": "r235",
+      "settings": "stock",
+      "version": "1.0.0.01"
     }
   },
   "schema": "optbench.score/v2",

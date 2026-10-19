@@ -1,30 +1,20 @@
-"""Gman r235 climbing-image NEB on the Pt heptamer.
+"""Stock Gman climbing-image NEB on the Pt heptamer.
 
-Steepest descent is ``archive/entries/neb/Pt-heptamer/gman-sd/opt.py``:
-``Gopt.sd`` with ``stepR=0.02`` and ``maxmove=0.2``, then ``neb.relax``
-with spring 5, the improved tangent, ``fmax=0.01``, ``converge="Fmag"``,
-``fsaddle="off"``, ``method="ci"``, and ``itrmax=10000``.
+Gman 1.0.0.01 is the version file in the last public release, r235.
+``codes/gman/r235`` is that package. Two edits sit off the counted path so
+it imports on Python 3: version-string parsing in ``Gman/__init__.py``, and
+an extrema sort by key after ``extfind`` in ``Gman/neb/neb.py``. The Morse
+force is the package ``morse.f``.
 
-L-BFGS with the line minimizer is
-``archive/entries/neb/Pt-heptamer/gman-lbfgs-line/opt.py``: ``Gopt.lbfgs``
-with ``maxmove=0.2``, ``alpha=0.05``, ``memory=25``, ``min="line"``, and
-``itrmax=1000``. The other relax arguments match the steepest-descent row.
+The ranked L-BFGS row calls ``lbfgs.init()`` and ``neb.relax`` with the
+package defaults. The run still uses the archived 13 pairs, 8 images, the
+climbing image, and ``fmax=0.01``. Nothing else is passed. ``pot.count`` is
+the native counter, the same role as OPTIM's energy+gradient calls, so each
+pair is stored with ``counter harness`` and ranked by PAR-2. The published
+integer remains ``"%d" % (sum(pot.count()/8) / 13)``.
 
-Each iteration calls the potential on the 8 movable images. ``pot.count()``
-is that band total, including line-search calls. The published integer is
-``"%d" % (sum(pot.count()/8) / 13)``, which truncates toward zero.
-
-Gman r235 is the package in the public archive tarball
-``website/codes/Gman-r235.tgz``. ``codes/gman/r235`` is that package after
-lib2to3, with two edits off the counted path: version-string parsing in
-``Gman/__init__.py``, and an extrema sort by key after ``extfind`` in
-``Gman/neb/neb.py``. The Morse force is the original ``morse.f``, compiled
-with ``f2py --lower`` so the gfortran ``force_`` symbol matches.
-
-The archived script writes ``algorithm lbfgs`` for every Gman optimizer.
-This runner records the optimizer the script actually calls. ``pot.count``
-is the native counter, the same role as OPTIM's energy+gradient calls, so
-each pair is stored with ``counter harness`` and ranked by PAR-2.
+Steepest descent stays available for the sibling row. It follows
+``archive/entries/neb/Pt-heptamer/gman-sd/opt.py``.
 """
 
 from __future__ import annotations
@@ -52,36 +42,13 @@ def _source_root(root: Path) -> Path:
 
 def _settings(template: dict, problem: dict) -> dict:
     section = template.get("gman") or {}
-    required = (
-        "optimizer",
-        "maxmove",
-        "images",
-        "spring",
-        "tangent",
-        "itrmax",
-        "ppd",
-        "fmax",
-        "fsaddle",
-        "method",
-        "converge",
-        "potential",
-    )
-    missing = [key for key in required if key not in section]
-    if missing:
-        raise ValueError(f"{template['id']} gman section needs {', '.join(missing)}")
-    optimizer = str(section["optimizer"])
+    optimizer = str(section.get("optimizer") or "")
     if optimizer not in {"sd", "lbfgs"}:
-        raise ValueError(f"{template['id']} optimizer {optimizer} is not this runner")
-    if optimizer == "sd" and "step_r" not in section:
-        raise ValueError(f"{template['id']} gman section needs step_r")
-    if optimizer == "lbfgs":
-        for key in ("alpha", "memory", "minimizer"):
-            if key not in section:
-                raise ValueError(f"{template['id']} gman section needs {key}")
-        if str(section["minimizer"]) != "line":
-            raise ValueError(f"{template['id']} minimizer {section['minimizer']} is not this runner")
-    if section["potential"] != "morse":
-        raise ValueError(f"{template['id']} potential {section['potential']} is not this runner")
+        raise ValueError(f"{template['id']} optimizer {optimizer or 'missing'} is not this runner")
+    if section.get("potential") != "morse":
+        raise ValueError(f"{template['id']} potential {section.get('potential')} is not this runner")
+    if "fmax" not in section or "images" not in section:
+        raise ValueError(f"{template['id']} gman section needs fmax and images")
     fmax = float(section["fmax"])
     stop = float((template.get("stop") or {}).get("force_norm", fmax))
     problem_stop = float((problem.get("convergence") or {})["force_norm"])
@@ -101,25 +68,40 @@ def _settings(template: dict, problem: dict) -> dict:
         raise ValueError(f"{template['id']} has no force-call cap")
     settings = {
         "optimizer": optimizer,
-        "maxmove": float(section["maxmove"]),
         "images": images,
-        "spring": float(section["spring"]),
-        "tangent": str(section["tangent"]),
-        "itrmax": int(section["itrmax"]),
-        "ppd": int(section["ppd"]),
         "fmax": fmax,
-        "fsaddle": str(section["fsaddle"]),
-        "method": str(section["method"]),
-        "converge": str(section["converge"]),
         "pairs": pairs,
         "cap": int(cap),
     }
     if optimizer == "sd":
-        settings["step_r"] = float(section["step_r"])
-    else:
-        settings["alpha"] = float(section["alpha"])
-        settings["memory"] = int(section["memory"])
-        settings["minimizer"] = str(section["minimizer"])
+        required = ("step_r", "maxmove", "spring", "tangent", "itrmax", "ppd", "fsaddle", "method", "converge")
+        missing = [key for key in required if key not in section]
+        if missing:
+            raise ValueError(f"{template['id']} gman section needs {', '.join(missing)}")
+        settings.update(
+            {
+                "step_r": float(section["step_r"]),
+                "maxmove": float(section["maxmove"]),
+                "spring": float(section["spring"]),
+                "tangent": str(section["tangent"]),
+                "itrmax": int(section["itrmax"]),
+                "ppd": int(section["ppd"]),
+                "fsaddle": str(section["fsaddle"]),
+                "method": str(section["method"]),
+                "converge": str(section["converge"]),
+            }
+        )
+        return settings
+    pinned = [
+        key
+        for key in ("alpha", "memory", "minimizer", "maxmove", "itrmax", "spring", "tangent", "ppd", "fsaddle", "converge")
+        if key in section
+    ]
+    if pinned:
+        raise ValueError(f"{template['id']} stock lbfgs does not take {', '.join(pinned)}")
+    if str(section.get("method")) != "ci":
+        raise ValueError(f"{template['id']} method is not the climbing-image problem")
+    settings["method"] = "ci"
     return settings
 
 
@@ -225,31 +207,34 @@ def _one_path(minima: Path, name: str, settings: dict) -> dict:
     if potential is None:
         raise RuntimeError("Gman failed to load the Morse potential")
     pot.countReset()
+    band = Gneb.neb()
+    band.new(first, second, images=settings["images"])
+    stock: dict = {}
     if settings["optimizer"] == "sd":
         opt = Gopt.sd()
         opt.init(stepR=settings["step_r"], maxmove=settings["maxmove"])
+        band.relax(
+            potential,
+            opt.step,
+            k=settings["spring"],
+            tangent=settings["tangent"],
+            itrmax=settings["itrmax"],
+            ppd=settings["ppd"],
+            fmax=settings["fmax"],
+            fsaddle=settings["fsaddle"],
+            method=settings["method"],
+            converge=settings["converge"],
+        )
     else:
         opt = Gopt.lbfgs()
-        opt.init(
-            maxmove=settings["maxmove"],
-            alpha=settings["alpha"],
-            memory=settings["memory"],
-            min=settings["minimizer"],
-        )
-    band = Gneb.neb()
-    band.new(first, second, images=settings["images"])
-    band.relax(
-        potential,
-        opt.step,
-        k=settings["spring"],
-        tangent=settings["tangent"],
-        itrmax=settings["itrmax"],
-        ppd=settings["ppd"],
-        fmax=settings["fmax"],
-        fsaddle=settings["fsaddle"],
-        method=settings["method"],
-        converge=settings["converge"],
-    )
+        opt.init()
+        stock = {
+            "maxmove": float(opt.maxmove),
+            "alpha": float(opt.alpha),
+            "memory": int(opt.memory),
+            "minimizer": str(opt.min),
+        }
+        band.relax(potential, opt.step, fmax=settings["fmax"], method=settings["method"])
     raw = int(pot.count())
     pot.countReset()
     per_image = raw / float(settings["images"])
@@ -260,6 +245,7 @@ def _one_path(minima: Path, name: str, settings: dict) -> dict:
         "raw": raw,
         "converged": converged,
         "success": converged,
+        "stock": stock,
     }
 
 
@@ -280,18 +266,24 @@ def _write_v2(output: Path, rows: list[dict], template: dict, problem: dict, set
         "counter": "Gman pot.count",
         "optimizer": settings["optimizer"],
         "images": settings["images"],
-        "spring": settings["spring"],
-        "tangent": settings["tangent"],
         "fmax": settings["fmax"],
-        "method": settings["method"],
-        "converge": settings["converge"],
         "potential": "morse",
         "version": template["code_version"],
+        "release": template["commit"],
     }
     if settings["optimizer"] == "lbfgs":
-        parameters["minimizer"] = settings["minimizer"]
-        parameters["memory"] = settings["memory"]
-        parameters["alpha"] = settings["alpha"]
+        parameters["settings"] = "stock"
+        parameters["method"] = settings["method"]
+        parameters.update(settings.get("stock") or {})
+    else:
+        parameters.update(
+            {
+                "spring": settings["spring"],
+                "tangent": settings["tangent"],
+                "method": settings["method"],
+                "converge": settings["converge"],
+            }
+        )
     document = {
         "schema": "optbench.score/v2",
         "problem": problem["id"],
@@ -315,6 +307,10 @@ def _benchmark_text(rows: list[dict], template: dict, problem: dict) -> str:
     calls = [float(row["force_calls"]) for row in rows]
     nfailed = sum(1 for row in rows if not row["success"])
     lines = [
+        (
+            f"# Gman {template['code_version']}, release {template['commit']}. "
+            "Native pot.count. Stock lbfgs.init and neb.relax."
+        ),
         "force_calls %d" % (sum(calls) / len(calls)),
         "force_calls_min %d" % min(calls),
         "force_calls_max %d" % max(calls),
@@ -325,6 +321,7 @@ def _benchmark_text(rows: list[dict], template: dict, problem: dict) -> str:
         f"algorithm {template['algorithm']}",
         f"template {template['id']}",
         f"problem {problem['id']}",
+        f"tuning {template.get('tuning') or 'stock'}",
         "counter harness",
     ]
     return "\n".join(lines) + "\n"
@@ -355,6 +352,12 @@ def run_template(
     log_path = scratch / "neb.log"
     rows: list[dict] = []
     _prepare_import(source)
+    import Gman
+
+    if str(Gman.__version__) != str(template["code_version"]):
+        raise RuntimeError(
+            f"Gman {Gman.__version__} is not the template version {template['code_version']}"
+        )
     with log_path.open("w", encoding="utf-8") as log:
         with redirect_stdout(log), redirect_stderr(log):
             for name in names:
@@ -362,6 +365,8 @@ def run_template(
                 print(f"{name} {rows[-1]['force_calls']}", flush=True)
     calls = [float(row["force_calls"]) for row in rows]
     nfailed = sum(1 for row in rows if not row["success"])
+    if rows and rows[0].get("stock"):
+        settings = {**settings, "stock": rows[0]["stock"]}
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(_benchmark_text(rows, template, problem), encoding="utf-8")
     start_rows = []
@@ -407,7 +412,7 @@ def main() -> None:
     template = load_template(root, template_id)
     problem = resolve_problem(root, template["problem"])
     stem = template_id.split("/", 1)[-1]
-    output = root / "results" / "campaign" / f"gman-r235-{stem}.dat"
+    output = root / "results" / "campaign" / f"gman-{template['code_version']}-{stem}.dat"
     summary = run_template(root, problem, template, output=output)
     print(json.dumps({key: summary[key] for key in ("force_calls", "force_calls_min", "force_calls_max", "nfailed", "starts")}))
     print(" ".join(str(value) for value in summary["counts"]))

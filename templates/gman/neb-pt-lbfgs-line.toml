@@ -2,30 +2,20 @@ id = "gman/neb-pt-lbfgs-line"
 engine = "gman"
 problem = "neb/Pt-heptamer"
 code = "Gman"
-code_version = "r235"
+code_version = "1.0.0.01"
 commit = "r235"
 algorithm = "lbfgs"
 failure_cap = 10000
 paper_baseline = true
-tuning = "archive"
-note = "Archived opt.py builds Gopt.lbfgs with maxmove 0.2, alpha 0.05, memory 25, and minimizer line, then relaxes a climbing-image NEB: 8 images, spring 5, tangent new, fmax 0.01, converge Fmag, fsaddle off, itrmax 1000. The Morse force is the r235 Fortran routine (U0 0.7102, alpha 1.6047, r0 2.897, rc 9.5). force_calls in the dat is pot.count()/8, and the published integer is the truncated mean of the 13 paths. The ranked cost is the band total, pot.count, with counter harness."
+tuning = "stock"
+note = "Gman 1.0.0.01 is the version file in the last public release, r235. The ranked run calls lbfgs.init() and neb.relax with the package defaults, on the 13 archived pairs, with 8 images, the climbing image, and fmax 0.01. pot.count is the native counter. force_calls in the dat is the truncated per-image mean. The ranked cost is the band total. results/campaign/gman-r235-neb-pt-lbfgs-line.dat is the earlier paper-script diagnostic and has no per-start record."
 
 [stop]
 force_norm = 0.01
 
 [gman]
 optimizer = "lbfgs"
-maxmove = 0.2
-alpha = 0.05
-memory = 25
-minimizer = "line"
 images = 8
-spring = 5.0
-tangent = "new"
-itrmax = 1000
-ppd = 1
 fmax = 0.01
-fsaddle = "off"
 method = "ci"
-converge = "Fmag"
 potential = "morse"

@@ -1,0 +1,13 @@
+# Gman 1.0.0.01, release r235. Native pot.count. Stock lbfgs.init and neb.relax.
+force_calls 108
+force_calls_min 63
+force_calls_max 155
+nfailed 0
+code Gman
+code_version 1.0.0.01
+commit r235
+algorithm lbfgs
+template gman/neb-pt-lbfgs-line
+problem neb/Pt-heptamer
+tuning stock
+counter harness
