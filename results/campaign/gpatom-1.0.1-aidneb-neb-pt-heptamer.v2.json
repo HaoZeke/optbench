@@ -1,12 +1,12 @@
 {
   "counter": "harness",
   "legacy": {
-    "n": 12,
-    "nfailed": 12,
+    "n": 13,
+    "nfailed": 13,
     "successes": 0,
     "transition_states": 0
   },
-  "partial": true,
+  "partial": false,
   "problem": "neb/Pt-heptamer",
   "provenance": {
     "code": "gpatom",
@@ -58,12 +58,12 @@
     "median": 20000.0,
     "median_high": 20000.0,
     "median_low": 20000.0,
-    "n": 12,
+    "n": 13,
     "n_cap": 0,
-    "n_crash": 12,
+    "n_crash": 13,
     "n_divergence": 0,
     "n_wrong_stationary": 0,
-    "nfailed": 12,
+    "nfailed": 13,
     "par2_mean": 20000.0,
     "par_applied": true,
     "par_factor": 2,
@@ -73,7 +73,7 @@
     "success_only_mean": null,
     "success_rate": 0.0,
     "successes": 0,
-    "wilson_high": 0.24249400665524085,
+    "wilson_high": 0.22809537235419838,
     "wilson_low": 0.0
   },
   "template": "gpatom/aidneb"
