@@ -17,7 +17,7 @@
         "force_calls_max": 254008,
         "force_calls_min": 254008,
         "median": 254008,
-        "nfailed": 82
+        "nfailed": 83
       },
       "metrics": {
         "bootstrap_resamples": 2000,
@@ -27,27 +27,27 @@
         "iqr": 0.0,
         "iqr_high": 0.0,
         "iqr_low": 0.0,
-        "mean": 991012.1445783132,
+        "mean": 991119.1428571428,
         "median": 1000000.0,
         "median_high": 1000000.0,
         "median_low": 1000000.0,
-        "n": 83,
-        "n_cap": 82,
+        "n": 84,
+        "n_cap": 83,
         "n_crash": 0,
         "n_divergence": 0,
         "n_wrong_stationary": 0,
-        "nfailed": 82,
-        "par2_mean": 991012.1445783132,
+        "nfailed": 83,
+        "par2_mean": 991119.1428571428,
         "par_applied": true,
         "par_factor": 2,
         "q25": 1000000.0,
         "q75": 1000000.0,
         "scoring": "par2-wilson-bootstrap",
         "success_only_mean": 254008.0,
-        "success_rate": 0.012048192771084338,
+        "success_rate": 0.011904761904761904,
         "successes": 1,
-        "wilson_high": 0.06513580668032404,
-        "wilson_low": 0.0021299774281082692
+        "wilson_high": 0.064395437507714,
+        "wilson_low": 0.002104583087549225
       },
       "parameters": {
         "cap": 500000,
@@ -1663,6 +1663,25 @@
           "seed": 314241,
           "start": "82.con",
           "success": true,
+          "target_energy": -173.9274265117895
+        },
+        {
+          "calls_at_lowest": 197067,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 500000,
+          "iterations": 213,
+          "lowest_energy": -171.54235413970838,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.9284265117895,
+          "schema": "optbench.start/v2",
+          "seed": 314243,
+          "start": "84.con",
+          "success": false,
           "target_energy": -173.9274265117895
         }
       ],
