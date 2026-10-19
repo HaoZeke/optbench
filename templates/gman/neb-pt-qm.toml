@@ -1,0 +1,18 @@
+# Latest Gman release, library quick-min, archive force stop.
+id = "gman/neb-pt-qm"
+engine = "gman"
+problem = "neb/Pt-heptamer"
+code = "Gman"
+code_version = "r235"
+commit = "r235"
+algorithm = "quick-min"
+failure_cap = 10000
+tuning = "default"
+note = "Gman r235 is the latest release. Quick-min, spring 5, tangent new, and climbing image off are the library defaults. fmax 0.01 and the 10000-call cap are the archive convergence criterion. The count is pot.count. The archived 412 is the paper row."
+
+[stop]
+force_norm = 0.01
+
+[gman]
+optimizer = "qm"
+potential = "morse"

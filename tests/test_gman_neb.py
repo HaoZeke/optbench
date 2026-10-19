@@ -83,7 +83,7 @@ def test_recorded_gman_heptamer_matches_the_archive_integers():
     assert fields["force_calls_max"] == "697"
     assert fields["force_calls_min"] == "214"
     assert fields["nfailed"] == "0"
-    assert fields["counter"] == "harness"
+    assert fields["counter"] == "client"
     assert fields["algorithm"] == "sd"
     assert fields["template"] == "gman/neb-pt-sd"
     assert fields["tuning"] == "archive"
@@ -98,7 +98,7 @@ def test_recorded_gman_heptamer_matches_the_archive_integers():
     assert max(per_image) == 697
     assert min(per_image) == 214
     assert all(
-        row["counter"] == "harness"
+        row["counter"] == "client"
         and row["count_key"] == "force_calls_neb"
         and row["gman_pot_count"] == row["raw"]
         and row["force_calls"] == row["raw"] // 8
@@ -110,9 +110,41 @@ def test_recorded_gman_heptamer_matches_the_archive_integers():
     assert [row["force_calls"] for row in ranked] == [row["raw"] for row in starts]
     assert statistics.fmean(row["per_image"] for row in ranked) == statistics.fmean(per_image)
     document = json.loads(dat_path.with_suffix(".v2.json").read_text(encoding="utf-8"))
-    assert document["counter"] == "harness"
+    assert document["counter"] == "client"
     assert document["provenance"]["parameters"]["counter"] == "gman pot.count()/8"
     assert document["legacy"]["force_calls"] == 412
     assert document["score"]["par2_mean"] == statistics.fmean(per_image)
     assert document["score"]["n"] == 13
     assert document["score"]["nfailed"] == 0
+
+
+def test_latest_gman_ranks_its_own_counter():
+    import statistics
+
+    dat_path = ROOT / "results" / "campaign" / "gman-r235-neb-pt-qm.dat"
+    fields = parse(dat_path.read_text(encoding="utf-8"))
+    assert fields["counter"] == "harness"
+    assert fields["code_version"] == "r235"
+    assert fields["algorithm"] == "quick-min"
+    assert fields["n"] == "13"
+    assert fields["nfailed"] == "0"
+    assert fields["tuning"] == "default"
+    assert "ranked" not in fields
+    assert "partial" not in fields
+    starts = [
+        json.loads(line)
+        for line in dat_path.with_suffix(".starts.jsonl").read_text(encoding="utf-8").splitlines()
+        if line.strip()
+    ]
+    assert len(starts) == 13
+    assert [row["start"] for row in starts] == [f"min{index:02d}" for index in range(1, 14)]
+    calls = [row["force_calls"] for row in starts]
+    assert all(row["counter"] == "harness" and row["gman_pot_count"] == row["force_calls"] and row["success"] for row in starts)
+    assert fields["force_calls"] == str(int(round(statistics.fmean(calls))))
+    document = json.loads(dat_path.with_suffix(".v2.json").read_text(encoding="utf-8"))
+    assert document["counter"] == "harness"
+    assert document["provenance"]["parameters"]["counter"] == "gman pot.count"
+    assert document["provenance"]["code_version"] == "r235"
+    assert document["score"]["n"] == 13
+    assert document["score"]["nfailed"] == 0
+    assert document["score"]["par2_mean"] == statistics.fmean(calls)

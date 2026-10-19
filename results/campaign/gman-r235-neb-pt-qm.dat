@@ -1,0 +1,22 @@
+# Gman r235 is the latest release. Quick-min NEB uses the library defaults (maxmove 0.2, dt 0.15, spring 5, tangent new, climbing image off).
+# The count is Gman's pot.count, the code's force-call counter.
+# fmax 0.01 and the 10000-call cap are the archive convergence criterion. The archived 412 is the paper row. This run is not tuned toward it.
+force_calls 1541
+force_calls_min 640
+force_calls_max 2520
+force_calls_median 1392
+force_calls_per_image 193
+call_unit total
+successes 13
+nfailed 0
+n 13
+transition_states 0
+code Gman
+code_version r235
+commit r235
+algorithm quick-min
+template gman/neb-pt-qm
+problem neb/Pt-heptamer
+tuning default
+counter harness
+images 8

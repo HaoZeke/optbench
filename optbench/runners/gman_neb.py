@@ -48,8 +48,37 @@ def _source_root(root: Path) -> Path:
     return path
 
 
+def _stock_settings(template: dict, problem: dict, section: dict) -> dict:
+    """Library defaults. Only the archive force stop and cap are applied."""
+    if section.get("potential", "morse") != "morse":
+        raise ValueError(f"{template['id']} potential {section.get('potential')} is not this runner")
+    convergence = problem.get("convergence") or {}
+    fmax = float(convergence["force_norm"])
+    stated = (template.get("stop") or {}).get("force_norm")
+    if stated is not None and abs(float(stated) - fmax) > 1e-12:
+        raise ValueError(f"{template['id']} force stop is not the problem force norm")
+    images = int((problem.get("band") or {})["interior_images"])
+    if "images" in section and int(section["images"]) != images:
+        raise ValueError(f"{template['id']} images are not the problem band")
+    cap = int(convergence["max_force_calls"])
+    pairs = int((problem.get("sample") or {})["pairs"])
+    if pairs < 1 or cap < 1 or images < 1:
+        raise ValueError(f"{problem['id']} is missing a band, cap, or sample")
+    return {
+        "optimizer": "qm",
+        "stock": True,
+        "images": images,
+        "fmax": fmax,
+        "itrmax": cap,
+        "cap": cap,
+        "pairs": pairs,
+    }
+
+
 def _settings(template: dict, problem: dict) -> dict:
     section = template.get("gman") or {}
+    if section.get("optimizer") == "qm":
+        return _stock_settings(template, problem, section)
     required = (
         "optimizer",
         "step_r",
@@ -68,7 +97,7 @@ def _settings(template: dict, problem: dict) -> dict:
     missing = [key for key in required if key not in section]
     if missing:
         raise ValueError(f"{template['id']} gman section needs {', '.join(missing)}")
-    if section["optimizer"] != "sd":
+    if section["optimizer"] not in {"sd", "qm"}:
         raise ValueError(f"{template['id']} optimizer {section['optimizer']} is not this runner")
     if section["potential"] != "morse":
         raise ValueError(f"{template['id']} potential {section['potential']} is not this runner")
@@ -202,22 +231,29 @@ def _one_path(minima: Path, name: str, settings: dict) -> dict:
     if potential is None:
         raise RuntimeError("Gman failed to load the Morse potential")
     pot.countReset()
-    opt = Gopt.sd()
-    opt.init(stepR=settings["step_r"], maxmove=settings["maxmove"])
-    band = Gneb.neb()
-    band.new(first, second, images=settings["images"])
-    band.relax(
-        potential,
-        opt.step,
-        k=settings["spring"],
-        tangent=settings["tangent"],
-        itrmax=settings["itrmax"],
-        ppd=settings["ppd"],
-        fmax=settings["fmax"],
-        fsaddle=settings["fsaddle"],
-        method=settings["method"],
-        converge=settings["converge"],
-    )
+    if settings.get("stock"):
+        opt = Gopt.qm()
+        opt.init()
+        band = Gneb.neb()
+        band.new(first, second, images=settings["images"])
+        band.relax(potential, opt.step, itrmax=settings["itrmax"], fmax=settings["fmax"])
+    else:
+        opt = Gopt.sd()
+        opt.init(stepR=settings["step_r"], maxmove=settings["maxmove"])
+        band = Gneb.neb()
+        band.new(first, second, images=settings["images"])
+        band.relax(
+            potential,
+            opt.step,
+            k=settings["spring"],
+            tangent=settings["tangent"],
+            itrmax=settings["itrmax"],
+            ppd=settings["ppd"],
+            fmax=settings["fmax"],
+            fsaddle=settings["fsaddle"],
+            method=settings["method"],
+            converge=settings["converge"],
+        )
     raw = int(pot.count())
     pot.countReset()
     per_image = raw / float(settings["images"])
@@ -305,6 +341,67 @@ def _publish(output: Path, rows: list[dict], template: dict, problem: dict, sett
     return published
 
 
+def _publish_stock(output: Path, rows: list[dict], template: dict, problem: dict, settings: dict) -> dict:
+    """Rank Gman's own counter the way OPTIM ranks energy+gradient calls."""
+    from optbench.engines.common import write_campaign
+
+    cap = int(settings["cap"])
+    records = []
+    for row in rows:
+        raw = int(row["raw"])
+        converged = bool(row["success"])
+        success = converged and raw < cap
+        failure = None
+        if not success:
+            failure = "cap" if raw >= cap else "divergence"
+        records.append(
+            {
+                "start": row["geometry"],
+                "force_calls": raw,
+                "gman_pot_count": raw,
+                "success": success,
+                "failure": failure,
+                "counter": "harness",
+                "converged": converged,
+            }
+        )
+    comment = (
+        "# Gman r235 is the latest release. Quick-min NEB uses the library defaults "
+        "(maxmove 0.2, dt 0.15, spring 5, tangent new, climbing image off).\n"
+        "# The count is Gman's pot.count, the code's force-call counter.\n"
+        "# fmax 0.01 and the 10000-call cap are the archive convergence criterion. "
+        "The archived 412 is the paper row. This run is not tuned toward it."
+    )
+    published = write_campaign(
+        output,
+        records,
+        template,
+        problem,
+        {"cap": cap},
+        {
+            "method": "neb",
+            "optimizer": "qm",
+            "counter": "gman pot.count",
+            "potential": "morse",
+            "version": template["code_version"],
+            "images": settings["images"],
+            "fmax": settings["fmax"],
+            "itrmax": settings["itrmax"],
+            "maxmove": 0.2,
+            "dt": 0.15,
+            "spring": 5.0,
+            "tangent": "new",
+        },
+        images=settings["images"],
+        comment=comment,
+    )
+    calls = [int(row["force_calls"]) for row in records]
+    published["force_calls_min"] = min(calls) if calls else None
+    published["force_calls_max"] = max(calls) if calls else None
+    published["counts"] = calls
+    return published
+
+
 def run_template(
     root: Path,
     problem: dict,
@@ -335,6 +432,8 @@ def run_template(
             for name in names:
                 rows.append(_one_path(minima, name, settings))
                 print(f"{name} {rows[-1]['force_calls']}", flush=True)
+    if settings.get("stock"):
+        return _publish_stock(output, rows, template, problem, settings)
     return _publish(output, rows, template, problem, settings)
 
 

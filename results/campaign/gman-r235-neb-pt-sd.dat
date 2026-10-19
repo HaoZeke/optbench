@@ -16,4 +16,4 @@ algorithm sd
 template gman/neb-pt-sd
 problem neb/Pt-heptamer
 tuning archive
-counter harness
+counter client

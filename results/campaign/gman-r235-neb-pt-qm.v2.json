@@ -1,0 +1,71 @@
+{
+  "counter": "harness",
+  "legacy": {
+    "force_calls": 1541,
+    "force_calls_max": 2520,
+    "force_calls_median": 1392,
+    "force_calls_min": 640,
+    "n": 13,
+    "nfailed": 0,
+    "successes": 13,
+    "transition_states": 0
+  },
+  "problem": "neb/Pt-heptamer",
+  "provenance": {
+    "code": "Gman",
+    "code_version": "r235",
+    "commit": "r235",
+    "machine": {
+      "machine": "x86_64",
+      "node": "cursor",
+      "python": "3.12.15",
+      "system": "Linux"
+    },
+    "parameters": {
+      "counter": "gman pot.count",
+      "dt": 0.15,
+      "fmax": 0.01,
+      "images": 8,
+      "itrmax": 10000,
+      "maxmove": 0.2,
+      "method": "neb",
+      "optimizer": "qm",
+      "potential": "morse",
+      "spring": 5.0,
+      "tangent": "new",
+      "version": "r235"
+    }
+  },
+  "schema": "optbench.score/v2",
+  "score": {
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 20261015,
+    "cap": 10000,
+    "includes_failures": true,
+    "iqr": 640.0,
+    "iqr_high": 1248.0,
+    "iqr_low": 152.0,
+    "mean": 1540.923076923077,
+    "median": 1392.0,
+    "median_high": 1880.0,
+    "median_low": 1240.0,
+    "n": 13,
+    "n_cap": 0,
+    "n_crash": 0,
+    "n_divergence": 0,
+    "n_wrong_stationary": 0,
+    "nfailed": 0,
+    "par2_mean": 1540.923076923077,
+    "par_applied": true,
+    "par_factor": 2,
+    "q25": 1240.0,
+    "q75": 1880.0,
+    "scoring": "par2-wilson-bootstrap",
+    "success_only_mean": 1540.923076923077,
+    "success_rate": 1.0,
+    "successes": 13,
+    "wilson_high": 1.0,
+    "wilson_low": 0.7719046276458016
+  },
+  "template": "gman/neb-pt-qm"
+}
