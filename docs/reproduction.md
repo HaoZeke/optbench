@@ -2,11 +2,13 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+46 reproduced, 30 not reproduced, 75 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
 OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.
+
+pele 0.1.2 stock double-ended connect on the LJ38 two-step pairs scores 7424 force calls and 44 cap failures. The archive is 25022 and 3.
 
 EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.
 
@@ -34,7 +36,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj38/optim-cl-string | — | — | not rerun |
 | lj38/pele | — | — | not rerun |
 | lj38_2ts_separation/optim | force_calls 2885 | 3454 | not reproduced; optim_pes_counter |
-| lj38_2ts_separation/pele | — | — | not rerun |
+| lj38_2ts_separation/pele | force_calls 25022 | 7424 | not reproduced; pele_stock_dneb |
 | pt-island/eon-ci-neb | force_calls 248 | 226 | reproduced |
 | pt-island/eon-ci-neb-5 | — | — | not rerun |
 | pt-island/eon-ci-neb-single | — | — | not rerun |
@@ -248,6 +250,12 @@ The template note records the 2014 mean as OPTIM's own energy-plus-gradient call
 
 - double-ended-saddle-search/lj38/optim
 - double-ended-saddle-search/lj38_2ts_separation/optim
+
+### pele_stock_dneb
+
+pele 0.1.2 stock double-ended connect, unmodified, scores 7424 force calls on 7 successes and 44 cap failures. The archive is 25022 force calls and 3 failures. The harness stops at 10000 calls. Stock DNEB uses k 100 and image density 10. The 2014 parameters were not copied.
+
+- double-ended-saddle-search/lj38_2ts_separation/pele
 
 ### pt_lanczos
 
