@@ -274,7 +274,7 @@ def _execute_morse(job: dict) -> dict:
         "start": name,
         "force_calls": int(calls),
         "verify_calls": 0,
-        "counter": "optim",
+        "counter": str(job.get("counter") or "optim"),
         "comparable": True,
         "success": failure is None,
         "failure": failure,
@@ -314,15 +314,17 @@ def _run_morse_bulk(root: Path, problem: dict, template: dict, section: dict, se
                 "r0": float(section["r0"]),
                 "cutoff": float(section["cutoff"]),
                 "binary": str(binary),
+                "counter": str(template.get("counter") or "optim"),
             }
         )
     records = run_jobs(jobs, _execute_morse, workers)
+    label = str(template.get("counter") or "optim")
     comment = (
         "# force_calls is OPTIM's energy+gradient count. Each one is a potential evaluation.\n"
-        "# run.sh divides coordinates by r0. morse_bulk keeps the well at distance 1 and energy 1.\n"
-        "# PARAMS rho is alpha times r0. The box and the cutoff are divided by r0.\n"
-        "# UPDATES and MAXBFGS are the comments.txt memory and maximum move.\n"
-        "# BFGSMIN is the Euclidean force norm divided by sqrt(3N).\n"
+        "# Coordinates, the box, and the cutoff are divided by r0. morse_bulk keeps the well at distance 1 and energy 1.\n"
+        "# PARAMS rho is alpha times r0.\n"
+        f"# UPDATES {int(section['updates'])} and MAXBFGS {float(section['maxbfgs'])} are the values in the template.\n"
+        "# BFGSMIN is the Euclidean force norm divided by sqrt(3N). BFGSSTEPS is the cap.\n"
         "# A start fails when it does not converge under the force-call cap."
     )
     parameters = {
@@ -334,10 +336,12 @@ def _run_morse_bulk(root: Path, problem: dict, template: dict, section: dict, se
         "rho": float(section["rho"]),
         "r0": float(section["r0"]),
         "cutoff": float(section["cutoff"]),
-        "counter": "optim",
+        "counter": "optim energy+gradient calls" if label == "harness" else "optim",
+        "version": str(template.get("code_version") or ""),
     }
     stamped = dict(template)
-    stamped["counter"] = "optim"
+    stamped["counter"] = label
+    stamped["code"] = "optim"
     return write_campaign(
         output,
         records,
@@ -506,7 +510,8 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
 
     problem = resolve_problem(root, problem_name)
     template = load_template(root, template_name)
-    require_pin(template, registry_pin(root, CODE))
+    code_id = str(template.get("code") or CODE)
+    require_pin(template, registry_pin(root, code_id))
     if template["engine"] != ENGINE:
         raise ValueError(f"{template_name} engine is {template['engine']}")
     stated = template.get("problem")

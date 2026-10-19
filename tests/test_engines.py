@@ -70,6 +70,7 @@ def test_new_templates_match_a_problem_stop():
         "optim/lbfgs-lj38",
         "optim/lbfgs-morse",
         "optim/morse-lbfgs-tuned",
+        "optim/morse-lbfgs-stock",
         "lammps/cg-lj38",
         "lammps/cg-morse",
         "lammps/cg-lj38-noise-s0",

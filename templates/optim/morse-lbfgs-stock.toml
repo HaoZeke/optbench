@@ -1,0 +1,20 @@
+# Current OPTIM, stock L-BFGS, on the archived Morse bulk starts.
+id = "optim/morse-lbfgs-stock"
+engine = "optim"
+problem = "minimization/morse-bulk"
+code = "optim-df8da599"
+code_version = "df8da599"
+commit = "df8da599267534fbe43a250e578f7396a7946311"
+algorithm = "L-BFGS"
+tuning = "default"
+counter = "harness"
+note = "Unmodified OPTIM SVNREV df8da599. Stock L-BFGS is UPDATES 4 and MAXBFGS 0.2. BFGSMIN is the archive force norm over sqrt(3N) and BFGSSTEPS is the cap. Coordinates, box, and cutoff 9.5 are divided by r0. PARAMS rho is 1.6047*r0. The score is OPTIM energy+gradient calls, ranked on the harness counter."
+
+[optim]
+method = "lbfgs"
+potential = "morse-bulk"
+updates = 4
+maxbfgs = 0.2
+rho = 1.6047
+r0 = 2.897
+cutoff = 9.5

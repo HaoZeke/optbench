@@ -164,6 +164,15 @@ commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
 note = "No public git commit. The pin is the sha256 of the Wales svn.tar.bz2 snapshot, 122743078 bytes. Minimization L-BFGS calls the ASE socket and pes.evaluate. OPTIM's own call counter is not a score. Saddle search, NEB, noise, and PATHSAMPLE are not scored."
 
 [[code]]
+id = "optim-df8da599"
+name = "OPTIM"
+role = "minimization"
+repository = "https://www-wales.ch.cam.ac.uk/svn.tar.bz2"
+ref = "df8da599267534fbe43a250e578f7396a7946311"
+commit = "df8da599267534fbe43a250e578f7396a7946311"
+note = "Current Wales software image. OPTIM/source/SVNREV is df8da599267534fbe43a250e578f7396a7946311. The binary is unmodified. Stock L-BFGS is UPDATES 4 and MAXBFGS 0.2. Morse bulk is ranked from OPTIM energy+gradient calls."
+
+[[code]]
 id = "sella-0.1.1"
 name = "Sella"
 role = "lowest eigenvector"
