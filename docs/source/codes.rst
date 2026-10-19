@@ -664,4 +664,41 @@ The number is written only after the run finishes under the problem rule.
    </tr>
    </tbody></table></div>
    <p>No full ranked run.</p>
+   <h3>KLIFF</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>machine learning potential training</td>
+   <td>main</td>
+   <td>df2d4de2d8c0</td>
+   <td><a href="https://github.com/openkim/kliff">https://github.com/openkim/kliff</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="mlopt/C2H4" data-template="kliff/c2h4-lbfgs">
+   <td>C2H4</td>
+   <td data-field="template">kliff/c2h4-lbfgs</td>
+   <td data-field="version">KLIFF 1.0.1</td>
+   <td data-field="commit">df2d4de2d8c0</td>
+   <td data-field="par2_mean">269.36</td>
+   <td data-field="mean_calls">269.36</td>
+   <td data-field="median_calls">138</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="mlopt/emt-pt38" data-template="kliff/emt-pt38-lbfgs">
+   <td>EMT Pt 38 nanoparticle</td>
+   <td data-field="template">kliff/emt-pt38-lbfgs</td>
+   <td data-field="version">KLIFF 1.0.1</td>
+   <td data-field="commit">df2d4de2d8c0</td>
+   <td data-field="par2_mean">24.16</td>
+   <td data-field="mean_calls">24.16</td>
+   <td data-field="median_calls">14</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   </tbody></table></div>
    </section>
