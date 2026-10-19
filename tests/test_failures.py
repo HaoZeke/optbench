@@ -388,6 +388,10 @@ def test_a_measured_dissociation_stays_divergence():
     plain = dict(stored)
     plain.pop("dissociated")
     assert classify_stored(plain, 2500, 0.001) == "not_converged"
+    from optbench.board import _record_from_raw
+
+    revised = _record_from_raw(stored, 2500, 0.001, "double-ended-saddle-search/lj38")
+    assert revised["failure"] == "divergence"
 
 
 def test_stored_lost_atoms_stay_divergence():

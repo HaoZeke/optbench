@@ -360,6 +360,7 @@ def _record_from_raw(
         "hessian_index",
         "expected_index",
         "reasons",
+        "dissociated",
         "error",
         "sigma",
         "max_displacement",
