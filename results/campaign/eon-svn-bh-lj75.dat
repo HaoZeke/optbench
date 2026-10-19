@@ -1,5 +1,5 @@
 call_unit total
-nfailed 192
+nfailed 200
 code Eon svn
 code_version r2549
 commit r2549
@@ -10,4 +10,3 @@ reducer harness
 counter harness
 count_keys HarnessCounter
 tuning lj38
-partial true
