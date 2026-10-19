@@ -1,0 +1,21 @@
+# pARTn from each LJ38 transition-state guess.
+id = "partn/ts-lj38"
+engine = "partn"
+problem = "tsopt/LJ38"
+code = "artn"
+code_version = "1.1.0"
+commit = "9b753517c6c0eccae51425b83eb4e04ef554550b"
+algorithm = "ARTn"
+tuning = "default"
+note = "ninit is 0. engine_units is lammps/lj. fire_dt_init is 0.05 and lanczos_disp is 0.001. etot_diff_limit is 1e6 because the library default of 80 is below ordinary LJ energy changes. The FIRE default of 20 leaves the cluster."
+
+[partn]
+push_step_size = 0.1
+eigen_step_size = 0.01
+ninit = 0
+lanczos_max_size = 32
+lanczos_disp = 0.001
+lpush_final = false
+converge_property = "norm"
+fire_dt_init = 0.05
+etot_diff_limit = 1000000.0

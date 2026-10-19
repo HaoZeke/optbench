@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="globalopt/lj100-binary">
    <th scope="row"><a href="#lj100-binary">Binary Lennard-Jones 100</a></th>
    <td data-code="eOn">—</td>
@@ -16,6 +16,13 @@
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
+   <td data-code="pysisyphus">—</td>
+   <td data-code="artn">—</td>
+   <td data-code="compass">—</td>
+   <td data-code="dlfind">—</td>
+   <td data-code="lammps">—</td>
+   <td data-code="optim">—</td>
+   <td data-code="tsase">—</td>
    </tr>
    <tr data-problem="globalopt/lj150">
    <th scope="row"><a href="#lj150">lj150</a></th>
@@ -25,6 +32,13 @@
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
+   <td data-code="pysisyphus">—</td>
+   <td data-code="artn">—</td>
+   <td data-code="compass">—</td>
+   <td data-code="dlfind">—</td>
+   <td data-code="lammps">—</td>
+   <td data-code="optim">—</td>
+   <td data-code="tsase">—</td>
    </tr>
    <tr data-problem="globalopt/lj38">
    <th scope="row"><a href="#lj38">Lennard-Jones 38 global minimum</a></th>
@@ -34,6 +48,13 @@
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
+   <td data-code="pysisyphus">—</td>
+   <td data-code="artn">—</td>
+   <td data-code="compass">—</td>
+   <td data-code="dlfind">—</td>
+   <td data-code="lammps">—</td>
+   <td data-code="optim">—</td>
+   <td data-code="tsase">—</td>
    </tr>
    <tr data-problem="globalopt/lj75">
    <th scope="row"><a href="#lj75">lj75</a></th>
@@ -41,8 +62,15 @@
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
-   <td data-code="ASE">—</td>
+   <td data-code="ASE" data-template="ase-globalopt/lj75-basinhopping" data-par2="2e+06"><span class="bench-score">2e+06</span><a href="#lj75-templates">ase-globalopt/lj75-basinhopping</a></td>
    <td data-code="Sella">—</td>
+   <td data-code="pysisyphus">—</td>
+   <td data-code="artn">—</td>
+   <td data-code="compass">—</td>
+   <td data-code="dlfind">—</td>
+   <td data-code="lammps">—</td>
+   <td data-code="optim">—</td>
+   <td data-code="tsase">—</td>
    </tr>
    <tr data-problem="globalopt/lj98">
    <th scope="row"><a href="#lj98">lj98</a></th>
@@ -52,6 +80,13 @@
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
+   <td data-code="pysisyphus">—</td>
+   <td data-code="artn">—</td>
+   <td data-code="compass">—</td>
+   <td data-code="dlfind">—</td>
+   <td data-code="lammps">—</td>
+   <td data-code="optim">—</td>
+   <td data-code="tsase">—</td>
    </tr>
    <tr data-problem="globalopt/tip4p10">
    <th scope="row"><a href="#tip4p10">tip4p10</a></th>
@@ -61,6 +96,13 @@
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
+   <td data-code="pysisyphus">—</td>
+   <td data-code="artn">—</td>
+   <td data-code="compass">—</td>
+   <td data-code="dlfind">—</td>
+   <td data-code="lammps">—</td>
+   <td data-code="optim">—</td>
+   <td data-code="tsase">—</td>
    </tr>
    <tr data-problem="globalopt/tip4p15">
    <th scope="row"><a href="#tip4p15">tip4p15</a></th>
@@ -70,6 +112,13 @@
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
+   <td data-code="pysisyphus">—</td>
+   <td data-code="artn">—</td>
+   <td data-code="compass">—</td>
+   <td data-code="dlfind">—</td>
+   <td data-code="lammps">—</td>
+   <td data-code="optim">—</td>
+   <td data-code="tsase">—</td>
    </tr>
    <tr data-problem="globalopt/tip4p20">
    <th scope="row"><a href="#tip4p20">tip4p20</a></th>
@@ -79,13 +128,22 @@
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
+   <td data-code="pysisyphus">—</td>
+   <td data-code="artn">—</td>
+   <td data-code="compass">—</td>
+   <td data-code="dlfind">—</td>
+   <td data-code="lammps">—</td>
+   <td data-code="optim">—</td>
+   <td data-code="tsase">—</td>
    </tr>
    </tbody></table></div></section><section class="bench" id="lj100-binary" data-problem="globalopt/lj100-binary">
    <h2>Binary Lennard-Jones 100</h2>
    <dl class="bench-rule">
+   <dt>Cap</dt><dd>2000000 force calls</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
    <dt>Starts</dt><dd>100</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
-   <dt>Note</dt><dd>The archived files record energies. They do not record force calls.</dd>
+   <dt>Note</dt><dd>The archived files record energies. They do not record force calls. Success is an energy at or below the improved Cambridge minimum plus 0.001. The cap is the archived evaluation budget of 2000000.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
    <p class="bench-gaps">No committed harness run.</p>
@@ -141,7 +199,11 @@
    </section><section class="bench" id="lj150" data-problem="globalopt/lj150">
    <h2>lj150</h2>
    <dl class="bench-rule">
+   <dt>Cap</dt><dd>10000000 force calls</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
+   <dt>Starts</dt><dd>100</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
+   <dt>Note</dt><dd>Success is an energy at or below the Cambridge Cluster Database N=150 minimum plus 0.001. The start set is the 100 numbered coordinate files. The cap of 10000000 force calls is above the archived nosym energy-call mean 6.9596491e+05 plus ten times its standard deviation 5.8454129e+05.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
@@ -307,18 +369,23 @@
    </section><section class="bench" id="lj75" data-problem="globalopt/lj75">
    <h2>lj75</h2>
    <dl class="bench-rule">
+   <dt>Cap</dt><dd>1000000 force calls</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
+   <dt>Starts</dt><dd>200</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
+   <dt>Note</dt><dd>Success is an energy at or below the Cambridge Cluster Database N=75 minimum plus 0.001. The cap of 1000000 force calls is above the archived GMIN maximum of 310110.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">No committed harness run.</p>
+   <figure class="bench-plot"><a href="../../_static/board/globalopt-lj75-cost.svg"><picture><source srcset="../../_static/board/globalopt-lj75-cost.webp" type="image/webp"><img src="../../_static/board/globalopt-lj75-cost.png" alt="Cost versus success for globalopt/lj75" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
+   <p class="bench-gaps">No performance profile. One start has no finite cost.</p>
    <details class="bench-details" id="lj75-templates">
-   <summary>All templates (0 ranked)</summary>
+   <summary>All templates (1 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="globalopt/lj75">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="13">No full harness row.</td></tr>
+   <tr><td data-field="template">ase-globalopt/lj75-basinhopping</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">2e+06</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.0188453</td><td data-field="median_calls">1e+06</td><td data-field="mean_calls">1e+06</td><td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 0</td><td data-field="n">200</td></tr>
    </tbody></table></div>
    </details>
    </section><section class="bench bench-legacy-section" id="lj75-legacy">
@@ -358,7 +425,11 @@
    </section><section class="bench" id="lj98" data-problem="globalopt/lj98">
    <h2>lj98</h2>
    <dl class="bench-rule">
+   <dt>Cap</dt><dd>1000000000 force calls</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
+   <dt>Starts</dt><dd>100</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
+   <dt>Note</dt><dd>Success is an energy at or below the Cambridge Cluster Database N=98 minimum plus 0.001. The start set is the 100 numbered coordinate files. The cap of 1000000000 force calls is above the archived nosym energy-call mean 5.98857238e+07 plus ten times its standard deviation 6.21561817e+07.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
@@ -427,7 +498,11 @@
    </section><section class="bench" id="tip4p10" data-problem="globalopt/tip4p10">
    <h2>tip4p10</h2>
    <dl class="bench-rule">
+   <dt>Cap</dt><dd>1000000 force calls</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
+   <dt>Starts</dt><dd>10000</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
+   <dt>Note</dt><dd>Success is an energy at or below the Cambridge Cluster Database TIP4P N=10 minimum plus 0.001. The cap of 1000000 force calls is above the archived GMIN maximum of 148360.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
@@ -490,7 +565,11 @@
    </section><section class="bench" id="tip4p15" data-problem="globalopt/tip4p15">
    <h2>tip4p15</h2>
    <dl class="bench-rule">
+   <dt>Cap</dt><dd>10000000 force calls</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
+   <dt>Starts</dt><dd>500</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
+   <dt>Note</dt><dd>Success is an energy at or below the Cambridge Cluster Database TIP4P N=15 minimum plus 0.001. The cap of 10000000 force calls is above the archived GMIN maximum of 6176900.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
@@ -553,7 +632,11 @@
    </section><section class="bench" id="tip4p20" data-problem="globalopt/tip4p20">
    <h2>tip4p20</h2>
    <dl class="bench-rule">
+   <dt>Cap</dt><dd>200000000 force calls</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
+   <dt>Starts</dt><dd>100</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
+   <dt>Note</dt><dd>Success is an energy at or below the Cambridge Cluster Database TIP4P N=20 minimum plus 0.001. The cap of 200000000 force calls is above the archived GMIN maximum of 143400000.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
