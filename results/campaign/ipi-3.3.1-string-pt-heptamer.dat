@@ -3,8 +3,8 @@
 # the mean is round-half-even over successes; cap, force, or Hessian index other than 1 is a failure
 # problem neb/Pt-heptamer
 successes 0
-nfailed 10
-n 10
+nfailed 13
+n 13
 transition_states 0
 code i-PI
 code_version 3.3.1
