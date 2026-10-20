@@ -331,8 +331,13 @@ def _geometry(folder: Path, natoms: int) -> np.ndarray | None:
 
 
 def _launch(spec: dict) -> dict:
-    """One OPTIM process. ``calls`` is the socket counter."""
-    work = Path(spec["work"])
+    """One OPTIM process. ``calls`` is the socket counter.
+
+    OPTIM starts the relay with its own directory as the working
+    directory and joins a relative script path onto that directory.
+    The hook path has to be absolute.
+    """
+    work = Path(spec["work"]).resolve()
     if work.exists():
         shutil.rmtree(work)
     work.mkdir(parents=True, exist_ok=True)
@@ -525,8 +530,10 @@ def run_saddle(
 ) -> dict:
     """Run the stock hybrid-EF search and write the campaign files."""
     del resume
-    root = Path(root)
+    root = Path(root).resolve()
     output = Path(output)
+    if not output.is_absolute():
+        output = (Path.cwd() / output).resolve()
     if template.get("id", "").endswith("-tuned") or str(template.get("tuning", "")) == "tuned":
         raise RuntimeError(f"{template['id']} is not a ranked search")
     binary = binary_path()
@@ -557,7 +564,7 @@ def run_saddle(
     seed = int(section.get("seed", 2014))
     freeze = _freeze_lines(fixed)
     slug = str(template["id"]).replace("/", "-")
-    folder = Path(work) if work is not None else output.parent / "work" / slug
+    folder = Path(work).resolve() if work is not None else (output.parent / "work" / slug).resolve()
     folder.mkdir(parents=True, exist_ok=True)
     header_path = folder / "header.json"
     checkpoint_path = folder / "checkpoint.jsonl"
@@ -620,7 +627,7 @@ def run_saddle(
         "pbc": pbc,
         "morse": morse,
         "python": sys.executable,
-        "binary": str(binary),
+        "binary": str(Path(binary).resolve()),
         "repo": str(root),
     }
     while connected < goal and len(saved) < max_searches:
@@ -743,7 +750,7 @@ def _minimize_reactant(
         "pbc": pbc,
         "morse": morse,
         "python": sys.executable,
-        "binary": str(binary),
+        "binary": str(Path(binary).resolve()),
         "repo": str(root),
         "cap": INITIAL_BUDGET,
         "method": "minimize",

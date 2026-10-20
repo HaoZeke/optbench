@@ -59,6 +59,52 @@ def test_smooth_morse_matches_the_problem_and_the_finite_difference():
     assert abs(finite - gradient[10, 1]) < 1e-7
 
 
+def test_a_relative_socket_hook_is_stored_as_an_absolute_path(tmp_path, monkeypatch):
+    from optbench import optim_saddle as saddle
+
+    work = Path("relative-socket-hook")
+    monkeypatch.chdir(tmp_path)
+    seen = {}
+
+    def fake_popen(cmd, **kwargs):
+        seen["cwd"] = Path(kwargs["cwd"])
+        seen["odata"] = (Path(kwargs["cwd"]) / "odata").read_text(encoding="utf-8")
+
+        class Proc:
+            pid = 1
+
+            def poll(self):
+                return 0
+
+        return Proc()
+
+    monkeypatch.setattr(saddle.subprocess, "Popen", fake_popen)
+    spec = {
+        "work": work / "climb",
+        "positions": np.zeros((2, 3)),
+        "reference": np.zeros((2, 3)),
+        "fixed": np.array([True, False]),
+        "cell": np.array([10.0, 10.0, 10.0]),
+        "cap": 1,
+        "method": "minimize",
+        "vector": None,
+        "gmax": 1e-4,
+        "seed": 2014,
+        "freeze": ["FREEZE 1"],
+        "section": {},
+        "pbc": (True, True, False),
+        "morse": (0.7102, 1.6047, 2.897, 9.5),
+        "python": "python",
+        "binary": "optim",
+        "repo": ".",
+    }
+    saddle._launch(spec)
+    hook = tmp_path / "relative-socket-hook" / "climb" / "hook"
+    assert seen["cwd"].is_absolute()
+    assert str(hook) in seen["odata"]
+    assert "relative-socket-hook/climb/relative-socket-hook" not in seen["odata"]
+
+
 def test_relay_sends_the_negative_gradient():
     source = (ROOT / "optbench" / "engines" / "fmlip_relay.py").read_text(encoding="utf-8")
     assert "force = (-np.asarray(gradient, dtype=np.float64) / scale_l) * scale_e" in source
