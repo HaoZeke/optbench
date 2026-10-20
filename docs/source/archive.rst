@@ -524,7 +524,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <tr id="saddle-search-pt-island-adaptive-hsphere-lbfgs-davidson-sm50" class="best">
    <td class="num">1</td>
    <td class="text">adaptive_HSphere-lbfgs-davidson-sm50</td>
-   <td class="text">SoftSaddle</td>
+   <td class="text">SoftSaddle (April 2019)</td>
    <td class="num">423491.1</td>
    <td class="num">179062.2</td>
    <td class="num">0.8</td>
@@ -536,7 +536,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <tr id="saddle-search-pt-island-adaptive-hsphere-lbfgs-lanczos-sm50">
    <td class="num">2</td>
    <td class="text">adaptive_HSphere-lbfgs-lanczos-sm50</td>
-   <td class="text">SoftSaddle</td>
+   <td class="text">SoftSaddle (April 2019)</td>
    <td class="num">814519.3</td>
    <td class="num">314659.7</td>
    <td class="num">0.9</td>
@@ -548,7 +548,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <tr id="saddle-search-pt-island-adaptive-hsphere-lbfgs-lanczos-sm0">
    <td class="num">3</td>
    <td class="text">adaptive_HSphere-lbfgs-lanczos-sm0</td>
-   <td class="text">SoftSaddle</td>
+   <td class="text">SoftSaddle (April 2019)</td>
    <td class="num">1003433.0</td>
    <td class="num">417022.4</td>
    <td class="num">0.9</td>
@@ -666,7 +666,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <td class="text">13 Jun 2014</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:12"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "saddle-search-pt-island-adaptive-hsphere-lbfgs-davidson-sm50", "entry": "adaptive_HSphere-lbfgs-davidson-sm50", "code": "SoftSaddle", "value": 423491.1, "best": true, "held": false, "failed": false}, {"id": "saddle-search-pt-island-adaptive-hsphere-lbfgs-lanczos-sm50", "entry": "adaptive_HSphere-lbfgs-lanczos-sm50", "code": "SoftSaddle", "value": 814519.3, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-adaptive-hsphere-lbfgs-lanczos-sm0", "entry": "adaptive_HSphere-lbfgs-lanczos-sm0", "code": "SoftSaddle", "value": 1003433.0, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-lbfgs-5-rotations-20-bowl-breakout", "entry": "eon-dimer-lbfgs-5-rotations-20-bowl_breakout", "code": "Eon r2213", "value": 1345465.88889, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-md", "entry": "eon-md", "code": "Eon r2205", "value": 1478168.0, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-lbfgs-5-rotations", "entry": "eon-dimer-lbfgs-5-rotations", "code": "Eon r2213", "value": 1684436.77778, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-lbfgs-20-rotations-20-bowl-breakout", "entry": "eon-dimer-lbfgs-20-rotations-20-bowl_breakout", "code": "Eon r2213", "value": 2732309.11111, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-lbfgs-20-rotations", "entry": "eon-dimer-lbfgs-20-rotations", "code": "Eon r2213", "value": 3341488.0, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-cg-5-rotations-20-bowl-breakout", "entry": "eon-dimer-cg-5-rotations-20-bowl_breakout", "code": "Eon r2213", "value": 3463700.66667, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer", "entry": "eon-dimer", "code": "Eon r2205", "value": 3778880.0, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-cg-20-rotations-20-bowl-breakout", "entry": "eon-dimer-cg-20-rotations-20-bowl_breakout", "code": "Eon r2213", "value": 7174213.66667, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-cg-20-rotations", "entry": "eon-dimer-cg-20-rotations", "code": "Eon r2213", "value": 7947070.11111, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:12"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "saddle-search-pt-island-adaptive-hsphere-lbfgs-davidson-sm50", "entry": "adaptive_HSphere-lbfgs-davidson-sm50", "code": "SoftSaddle (April 2019)", "value": 423491.1, "best": true, "held": false, "failed": false}, {"id": "saddle-search-pt-island-adaptive-hsphere-lbfgs-lanczos-sm50", "entry": "adaptive_HSphere-lbfgs-lanczos-sm50", "code": "SoftSaddle (April 2019)", "value": 814519.3, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-adaptive-hsphere-lbfgs-lanczos-sm0", "entry": "adaptive_HSphere-lbfgs-lanczos-sm0", "code": "SoftSaddle (April 2019)", "value": 1003433.0, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-lbfgs-5-rotations-20-bowl-breakout", "entry": "eon-dimer-lbfgs-5-rotations-20-bowl_breakout", "code": "Eon r2213", "value": 1345465.88889, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-md", "entry": "eon-md", "code": "Eon r2205", "value": 1478168.0, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-lbfgs-5-rotations", "entry": "eon-dimer-lbfgs-5-rotations", "code": "Eon r2213", "value": 1684436.77778, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-lbfgs-20-rotations-20-bowl-breakout", "entry": "eon-dimer-lbfgs-20-rotations-20-bowl_breakout", "code": "Eon r2213", "value": 2732309.11111, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-lbfgs-20-rotations", "entry": "eon-dimer-lbfgs-20-rotations", "code": "Eon r2213", "value": 3341488.0, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-cg-5-rotations-20-bowl-breakout", "entry": "eon-dimer-cg-5-rotations-20-bowl_breakout", "code": "Eon r2213", "value": 3463700.66667, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer", "entry": "eon-dimer", "code": "Eon r2205", "value": 3778880.0, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-cg-20-rotations-20-bowl-breakout", "entry": "eon-dimer-cg-20-rotations-20-bowl_breakout", "code": "Eon r2213", "value": 7174213.66667, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-cg-20-rotations", "entry": "eon-dimer-cg-20-rotations", "code": "Eon r2213", "value": 7947070.11111, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section>
    <h2 id="suite-double-ended-saddle-search">Double-ended saddle search</h2>

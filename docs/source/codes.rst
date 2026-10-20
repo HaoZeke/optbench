@@ -38,6 +38,12 @@ The number is written only after the run finishes under the problem rule.
    <td>7095b23ac17d</td>
    <td><a href="https://github.com/TheochemUI/eon">https://github.com/TheochemUI/eon</a></td>
    </tr>
+   <tr>
+   <td>minimization and saddle search</td>
+   <td>develop</td>
+   <td>500350d9fae8</td>
+   <td><a href="https://github.com/TheochemUI/eon">https://github.com/TheochemUI/eon</a></td>
+   </tr>
    </tbody></table></div>
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
@@ -130,16 +136,16 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
-   <tr data-problem="saddle-search/pt-island" data-template="eon/develop-saddle-pt-lanczos">
+   <tr data-problem="saddle-search/pt-island" data-template="eOn/saddle-pt-lanczos">
    <td>Pt heptamer island</td>
-   <td data-field="template">eon/develop-saddle-pt-lanczos</td>
-   <td data-field="version">eOn 3.6.0</td>
-   <td data-field="commit">7095b23ac17d</td>
-   <td data-field="par2_mean">2e+08</td>
-   <td data-field="mean_calls">3.98507e+06</td>
-   <td data-field="median_calls">3.98507e+06</td>
-   <td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 0</td>
-   <td data-field="n">2</td>
+   <td data-field="template">eOn/saddle-pt-lanczos</td>
+   <td data-field="version">eOn (develop 500350d9fae881f06c7ef194e5868da079c4be5a)</td>
+   <td data-field="commit">500350d9fae8</td>
+   <td data-field="par2_mean">10128</td>
+   <td data-field="mean_calls">5064</td>
+   <td data-field="median_calls">5064</td>
+   <td data-field="failures">crash 0, divergence 0, cap 10, wrong_stationary 0</td>
+   <td data-field="n">10</td>
    </tr>
    <tr data-problem="tsopt/LJ38" data-template="eon-client/ts-lj38-lanczos-improved">
    <td>LJ38</td>
@@ -195,6 +201,32 @@ The number is written only after the run finishes under the problem rule.
    <li>eon-client/sd-twopoint: no per-start record.</li>
    <li>eon-client/sd: no per-start record.</li>
    </ul>
+   <h3>EON</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization and saddle search</td>
+   <td>r2549</td>
+   <td>r2549</td>
+   <td><a href="https://theory.cm.utexas.edu/svn/eon">https://theory.cm.utexas.edu/svn/eon</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="saddle-search/pt-island" data-template="EON/saddle-pt-lanczos">
+   <td>Pt heptamer island</td>
+   <td data-field="template">EON/saddle-pt-lanczos</td>
+   <td data-field="version">EON (SVN r2549)</td>
+   <td data-field="commit">r2549</td>
+   <td data-field="par2_mean">10128</td>
+   <td data-field="mean_calls">5064</td>
+   <td data-field="median_calls">5064</td>
+   <td data-field="failures">crash 0, divergence 0, cap 10, wrong_stationary 0</td>
+   <td data-field="n">10</td>
+   </tr>
+   </tbody></table></div>
    <h3>Eon svn</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
