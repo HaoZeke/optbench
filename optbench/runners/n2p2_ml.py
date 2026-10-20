@@ -102,7 +102,9 @@ def _benchmark_text(summary: dict, records: list[dict], template: dict) -> str:
             "# One force call is one combined loss-gradient evaluation.",
             f"# Each epoch updates every structure and {FORCE_ENERGY_RATIO} force components per structure.",
             f"# Force observations use force_weight {FORCE_WEIGHT}.",
-            "# Structure and component order is a PCG64 permutation after the uniform[-1, 1) weights.",
+            f"# Structure and component order is n2p2 std::shuffle with random_seed {N2P2_RANDOM_SEED}.",
+            "# The property schedule uses the one-process rngGlobalNew stream.",
+            "# Weights are the harness uniform[-1, 1) draw.",
             f"# loss commit {PYAMFF_COMMIT}. gradient tolerance {template['stop']['grad_abs']}.",
         ]
     elif str(template.get("order") or "pcg64") == "n2p2":
@@ -110,7 +112,7 @@ def _benchmark_text(summary: dict, records: list[dict], template: dict) -> str:
             "# n2p2 standard Kalman filter on the pyamff energy-only squared error.",
             "# One force call is one loss-gradient evaluation. The filter updates once per structure.",
             f"# Structure order is n2p2 std::shuffle with random_seed {N2P2_RANDOM_SEED}.",
-            "# Weights stay the PCG64 uniform[-1, 1) draw used by the permutation row.",
+            "# Weights are the harness uniform[-1, 1) draw.",
             f"# loss commit {PYAMFF_COMMIT}. gradient tolerance {GRAD_TOL}. force RMSE is {FORCE_RMSE} because forces are not trained.",
         ]
     else:

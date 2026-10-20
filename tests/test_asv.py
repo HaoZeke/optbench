@@ -115,6 +115,16 @@ def test_n2p2_benchmarks_select_one_start():
     assert N2p2C2h4Kalman.template_id == "n2p2/c2h4-kalman"
     assert N2p2C2h4Kalman.problem_id == "mlopt/C2H4"
     assert N2p2C2h4Kalman.cap == 10000
+    assert N2p2EmtPt38Kalman.spec["order"] == "n2p2"
+    assert N2p2C2h4Kalman.spec["order"] == "n2p2"
+    from benchmarks.bench_n2p2 import N2p2C2h4KalmanForce, N2p2EmtPt38KalmanForce
+
+    assert N2p2EmtPt38KalmanForce.spec["order"] == "n2p2"
+    assert N2p2EmtPt38KalmanForce.spec["loss"] == "force"
+    assert N2p2EmtPt38KalmanForce.cap == 30000
+    assert N2p2C2h4KalmanForce.spec["order"] == "n2p2"
+    assert N2p2C2h4KalmanForce.cap == 30000
+    assert not hasattr(__import__("benchmarks.bench_n2p2", fromlist=["x"]), "N2p2EmtPt38KalmanRng")
 
 
 def test_optking_grid_is_seed_then_the_first_start():

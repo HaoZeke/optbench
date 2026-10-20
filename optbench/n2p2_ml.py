@@ -215,6 +215,8 @@ def _bind(lib: ctypes.CDLL) -> None:
     lib.n2p2_rng_destroy.argtypes = [ctypes.c_void_p]
     lib.n2p2_rng_shuffle.restype = c_int
     lib.n2p2_rng_shuffle.argtypes = [ctypes.c_void_p, ptr_int, c_int]
+    lib.n2p2_rng_shuffle_schedule.restype = c_int
+    lib.n2p2_rng_shuffle_schedule.argtypes = [ctypes.c_void_p, ptr_int, c_int]
 
 
 def _as_int(array: np.ndarray) -> np.ndarray:
@@ -1049,6 +1051,13 @@ class N2p2Order:
             raise RuntimeError("n2p2 shuffle failed")
         return array
 
+    def shuffle_schedule(self, values: np.ndarray) -> np.ndarray:
+        """Shuffle the mixed energy/force schedule with ``rngGlobalNew``."""
+        array = np.array(values, dtype=np.int32, copy=True)
+        if self.lib.n2p2_rng_shuffle_schedule(self.handle, _ptr_int(array), array.size) != 0:
+            raise RuntimeError("n2p2 schedule shuffle failed")
+        return array
+
 
 def _epoch_order(dataset: MlDataset, rng: np.random.Generator | None, native: N2p2Order | None, shuffle: bool) -> np.ndarray:
     identity = np.arange(dataset.n_images, dtype=np.int32)
@@ -1065,26 +1074,31 @@ def _force_schedule(
     dataset: MlDataset,
     rng: np.random.Generator | None,
     shuffle: bool,
+    native: N2p2Order | None = None,
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Energy permutation, force-component sample, and the interleaved schedule.
 
     Energy visits every structure. The force sample has the documented
     update count. The schedule is the property list n2p2 builds by
-    appending force updates, then energy updates, then shuffling. One
-    PCG64 stream does all three draws, continuing after the weight draw.
+    appending force updates, then energy updates, then shuffling.
+    ``native`` follows Training: energy candidates, then force candidates,
+    on ``rngNew``, and the property schedule on ``rngGlobalNew``.
     """
     n_images = dataset.n_images
     n_force = projected_force_updates(n_images, dataset.n_atoms)
     n_components = n_images * dataset.n_atoms * 3
-    if shuffle and rng is not None:
+    schedule = np.concatenate([np.ones(n_force, dtype=np.int32), np.zeros(n_images, dtype=np.int32)])
+    if native is not None:
+        energy_order = native.permutation(n_images)
+        force_ids = native.permutation(n_components)[:n_force]
+        schedule = native.shuffle_schedule(schedule)
+    elif shuffle and rng is not None:
         energy_order = rng.permutation(n_images).astype(np.int32)
         force_ids = rng.permutation(n_components).astype(np.int32)[:n_force]
-        schedule = np.concatenate([np.ones(n_force, dtype=np.int32), np.zeros(n_images, dtype=np.int32)])
         schedule = schedule[rng.permutation(schedule.size)]
     else:
         energy_order = np.arange(n_images, dtype=np.int32)
         force_ids = np.arange(n_force, dtype=np.int32)
-        schedule = np.concatenate([np.ones(n_force, dtype=np.int32), np.zeros(n_images, dtype=np.int32)])
     return energy_order, force_ids, schedule
 
 
@@ -1101,13 +1115,13 @@ def train_one(
 ) -> dict:
     """Check the loss gradient, then take one Kalman epoch, up to ``cap``.
 
-    ``rng`` supplies permutations after the weights were drawn. Dataset
-    order is used when ``shuffle`` is false. ``order="n2p2"`` shuffles
-    with n2p2's engine instead of PCG64. Force loss interleaves the
-    documented force-component updates with the energy updates.
+    ``rng`` supplies the harness weight draw. Dataset order is used when
+    ``shuffle`` is false. ``order="n2p2"`` shuffles with n2p2's engines.
+    Force loss interleaves the documented force-component updates with
+    the energy updates.
     """
     session = KalmanSession(dataset, tol, loss=loss)
-    native = N2p2Order() if order == "n2p2" and shuffle and loss == "energy" else None
+    native = N2p2Order() if order == "n2p2" and shuffle else None
     counter = HarnessCounter(cache=False, cap=int(cap))
     failure = None
     error = None
@@ -1129,7 +1143,7 @@ def train_one(
                 failure = "cap"
                 break
             if loss == "force":
-                energy_order, force_ids, schedule = _force_schedule(dataset, rng, shuffle)
+                energy_order, force_ids, schedule = _force_schedule(dataset, rng, shuffle, native)
                 status = session.epoch_mixed(energy_order, force_ids, schedule)
             else:
                 status = session.epoch(_epoch_order(dataset, rng, native, shuffle))

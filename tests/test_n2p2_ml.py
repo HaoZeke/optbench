@@ -385,6 +385,23 @@ def test_n2p2_shuffle_is_deterministic_and_advances():
 
 
 @pytest.mark.skipif(not N2P2.is_file(), reason="n2p2 source is not on this machine")
+def test_schedule_shuffle_does_not_advance_the_candidate_engine():
+    from optbench.n2p2_ml import N2P2_RANDOM_SEED, N2p2Order
+
+    mixed = N2p2Order(N2P2_RANDOM_SEED)
+    plain = N2p2Order(N2P2_RANDOM_SEED)
+    try:
+        assert mixed.permutation(16).tolist() == plain.permutation(16).tolist()
+        schedule = mixed.shuffle_schedule(np.array([1, 1, 1, 0, 0], dtype=np.int32))
+        assert sorted(schedule.tolist()) == [0, 0, 1, 1, 1]
+        assert schedule.tolist() != [1, 1, 1, 0, 0]
+        assert mixed.permutation(16).tolist() == plain.permutation(16).tolist()
+    finally:
+        mixed.close()
+        plain.close()
+
+
+@pytest.mark.skipif(not N2P2.is_file(), reason="n2p2 source is not on this machine")
 def test_library_force_step_matches_the_reference_filter():
     from optbench.n2p2_ml import (
         FORCE_WEIGHT,

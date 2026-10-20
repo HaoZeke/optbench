@@ -61,6 +61,7 @@ struct Trainer {
 
 struct NativeOrder {
     std::mt19937_64 engine;
+    std::mt19937_64 schedule;
 };
 
 int element_width(int n_fp)
@@ -885,8 +886,9 @@ void* n2p2_rng_create(unsigned long seed)
     }
     gsl_rng_set(rng_global, seed_global);
     NativeOrder* order = new NativeOrder();
-    // Training.cpp seeds rngGlobalNew first, then rngNew. Energy shuffles use rngNew.
-    (void)gsl_rng_get(rng_global);
+    // Training.cpp seeds rngGlobalNew first, then rngNew.
+    // Candidate shuffles use rngNew. A mixed epoch schedule uses rngGlobalNew.
+    order->schedule.seed(gsl_rng_get(rng_global));
     order->engine.seed(gsl_rng_get(rng));
     gsl_rng_free(rng_global);
     gsl_rng_free(rng);
@@ -906,6 +908,18 @@ int n2p2_rng_shuffle(void* handle, int* values, int n)
     NativeOrder* order = static_cast<NativeOrder*>(handle);
     std::vector<int> data(values, values + n);
     std::shuffle(data.begin(), data.end(), order->engine);
+    std::copy(data.begin(), data.end(), values);
+    return 0;
+}
+
+int n2p2_rng_shuffle_schedule(void* handle, int* values, int n)
+{
+    if (handle == nullptr || values == nullptr || n < 0) {
+        return 1;
+    }
+    NativeOrder* order = static_cast<NativeOrder*>(handle);
+    std::vector<int> data(values, values + n);
+    std::shuffle(data.begin(), data.end(), order->schedule);
     std::copy(data.begin(), data.end(), values);
     return 0;
 }
