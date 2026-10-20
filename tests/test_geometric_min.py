@@ -103,6 +103,47 @@ def test_batched_primitives_match_the_library_formulas():
     assert np.max(np.abs(diff - reference_diff)) < 1e-8
 
 
+def test_coordinate_rebuild_keeps_the_stored_bond_list():
+    pytest.importorskip("geometric")
+    import numpy as np
+
+    from geometric.molecule import Molecule
+
+    from optbench.runners.geometric_min import install_keep_read_bonds
+
+    pos = np.array(
+        [
+            [0.0, 0.0, 0.0],
+            [0.5, 0.0, 0.0],
+            [0.0, 0.5, 0.0],
+            [0.0, 0.0, 0.5],
+        ],
+        dtype=np.float64,
+    )
+
+    def fresh():
+        molecule = Molecule()
+        molecule.elem = ["H", "H", "H", "H"]
+        molecule.xyzs = [pos.copy()]
+        molecule.Data["bonds"] = [(0, 1)]
+        molecule.top_settings["read_bonds"] = True
+        return molecule
+
+    discovered = fresh()
+    discovered.build_bonds()
+    assert len(discovered.Data["bonds"]) > 1
+
+    install_keep_read_bonds()
+    kept = fresh()
+    kept.build_topology(force_bonds=True)
+    assert kept.Data["bonds"] == [(0, 1)]
+
+    open_list = fresh()
+    open_list.top_settings["read_bonds"] = False
+    open_list.build_topology(force_bonds=True)
+    assert open_list.Data["bonds"] == discovered.Data["bonds"]
+
+
 def test_cartesian_lj38_start_reaches_the_force_stop():
     pytest.importorskip("geometric")
     from optbench.runners.geometric_min import _minimize_job

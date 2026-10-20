@@ -29,6 +29,12 @@ contact.
 Primitive membership uses a hashed bucket with the same equality test.
 Distance, angle, and dihedral values and first derivatives use the same
 formulas in batches. The other primitive types stay on the library methods.
+
+A coordinate rebuild calls ``Molecule.build_topology`` with bond discovery
+left on. That replaces the stored neighbor list with covalent radii. The
+runner turns discovery off when the bonds were read, so the rebuild keeps
+the two nearest neighbors. Two failed rebuilds still continue in Cartesian
+coordinates.
 """
 
 from __future__ import annotations
@@ -116,6 +122,35 @@ def install_fast_add() -> None:
     PrimitiveInternalCoordinates.add = add
     PrimitiveInternalCoordinates.delete = delete
     PrimitiveInternalCoordinates._optbench_fast_add = True
+
+
+def install_keep_read_bonds() -> None:
+    """Keep a bond list that was read when a coordinate rebuild asks for bonds.
+
+    ``Optimizer.checkCoordinateSystem`` copies the molecule and calls
+    ``build_topology`` with discovery left on. Discovery replaces
+    ``Data['bonds']`` even when ``read_bonds`` is set. The TRIC runs store
+    the two nearest Cartesian neighbors in that list.
+    """
+    from geometric.molecule import Molecule
+
+    current = Molecule.build_topology
+    if getattr(current, "_optbench_keep_read_bonds", False):
+        return
+
+    def build_topology(self, force_bonds=True, bond_order=0.0, metal_bo_factor=0.5, **kwargs):
+        if self.top_settings.get("read_bonds"):
+            force_bonds = False
+        return current(
+            self,
+            force_bonds=force_bonds,
+            bond_order=bond_order,
+            metal_bo_factor=metal_bo_factor,
+            **kwargs,
+        )
+
+    build_topology._optbench_keep_read_bonds = True
+    Molecule.build_topology = build_topology
 
 
 def _cross(left, right):
@@ -483,6 +518,7 @@ def optimize(job: dict, evaluate, stop) -> dict:
     _silence()
     install_fast_add()
     install_batch_primitives()
+    install_keep_read_bonds()
     kind = str(job["kind"])
     coordsys = str(job["coordsys"])
     element = str(job["element"])
