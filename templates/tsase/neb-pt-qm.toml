@@ -7,7 +7,7 @@ code_version = "1.0"
 commit = "98aac60b5d9905e81ee4e6b8c385f169258d0218"
 algorithm = "qm"
 tuning = "default"
-note = "Latest TSASE (setup.py 1.0, commit 98aac60). qm_ssneb is constructed with no arguments, so maxmove is 0.2 and dt is 0.05. The archive passed dt 0.15. The band is the problem: 8 interior images, spring 5, climbing image, force norm 0.01, cap 10000. ssneb multiplies the spring by the image count. The score is the harness calculator count; force_calls in the dat is that total divided by 8."
+note = "Latest TSASE (setup.py 1.0, commit 98aac60). qm_ssneb is constructed with no arguments, so maxmove is 0.2 and dt is 0.05. The archive Gman row passed dt 0.15. The band is the problem: 8 interior images, spring 5, climbing image, force norm 0.01, cap 10000. ssneb multiplies the spring by the image count. force_calls is the harness calculator count, the band total."
 
 [stop]
 force_norm = 0.01

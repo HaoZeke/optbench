@@ -1,22 +1,15 @@
-"""Gman r235 climbing-image NEB on the Pt heptamer.
+"""Gman 1.0.0.01 climbing-image NEB on the Pt heptamer.
 
-The archived driver is ``archive/entries/neb/Pt-heptamer/gman-qm/opt.py``.
-It builds ``Gopt.qm`` with ``dt=0.15`` and ``maxmove=0.2``, then calls
-``neb.relax`` with spring 5, the improved tangent, ``fmax=0.01``,
-``converge="Fmag"``, ``fsaddle="off"``, ``method="ci"``, and ``itrmax=10000``.
-Each iteration calls the potential on the 8 movable images. ``pot.count()/8``
-is that iteration count, including the converging iteration. The published
-integer is ``"%d" % (sum(forceCalls) / 13)``, which truncates toward zero.
+The release tree is ``codes/gman/r235``. Its ``Gman/version`` file is
+``1.0.0.01``. QuickMin is ``qm.init()`` with no arguments, so ``maxmove``
+is 0.2 and ``dt`` is 0.15. The band is the archive problem: 8 interior
+images, spring 5, tangent ``new``, climbing image, ``fmax`` 0.01, and the
+problem iteration cap. Endpoints are not counted. ``pot.count`` is the
+band total. The archive published ``pot.count / 8``.
 
-Gman r235 is the package under ``codes/gman/r235``. The Morse force is the
-original ``morse.f``, compiled with ``f2py --lower`` so the gfortran
-``force_`` symbol matches.
-
-The archived script writes ``algorithm lbfgs`` for every Gman optimizer.
-This runner records the optimizer the script actually calls. The per-pair
-record stores ``pot.count`` as the band total and ``neb.converged`` as the
-success flag. ``counter`` is ``harness`` so that total is the number the
-board ranks with PAR-2, the same band total the other heptamer rows use.
+The Morse force is the original ``morse.f``, compiled with ``f2py --lower``
+so the gfortran ``force_`` symbol matches. ``counter`` is ``harness``.
+The starts store the band total, which is the unit the board ranks.
 """
 
 from __future__ import annotations
@@ -47,7 +40,6 @@ def _settings(template: dict, problem: dict) -> dict:
     optimizer = str(section.get("optimizer") or "")
     required = (
         "optimizer",
-        "maxmove",
         "images",
         "spring",
         "tangent",
@@ -62,8 +54,8 @@ def _settings(template: dict, problem: dict) -> dict:
     missing = [key for key in required if key not in section]
     if optimizer == "sd" and "step_r" not in section:
         missing.append("step_r")
-    if optimizer == "qm" and "dt" not in section:
-        missing.append("dt")
+    if optimizer == "sd" and "maxmove" not in section:
+        missing.append("maxmove")
     if missing:
         raise ValueError(f"{template['id']} gman section needs {', '.join(missing)}")
     if optimizer not in {"sd", "qm"}:
@@ -85,8 +77,8 @@ def _settings(template: dict, problem: dict) -> dict:
     return {
         "optimizer": optimizer,
         "step_r": float(section["step_r"]) if optimizer == "sd" else None,
-        "dt": float(section["dt"]) if optimizer == "qm" else None,
-        "maxmove": float(section["maxmove"]),
+        "dt": float(section["dt"]) if optimizer == "qm" and "dt" in section else None,
+        "maxmove": float(section["maxmove"]) if "maxmove" in section else None,
         "images": images,
         "spring": float(section["spring"]),
         "tangent": str(section["tangent"]),
@@ -189,7 +181,11 @@ def _optimizer(settings: dict):
         opt.init(stepR=settings["step_r"], maxmove=settings["maxmove"])
         return opt
     opt = Gopt.qm()
-    opt.init(dt=settings["dt"], maxmove=settings["maxmove"])
+    # Omitted dt and maxmove are the library defaults (0.15 and 0.2).
+    if settings["dt"] is None and settings["maxmove"] is None:
+        opt.init()
+    else:
+        opt.init(dt=settings["dt"], maxmove=settings["maxmove"])
     return opt
 
 
@@ -234,26 +230,42 @@ def _one_path(minima: Path, name: str, settings: dict) -> dict:
     return {
         "geometry": name,
         "force_calls": per_image,
+        "images": settings["images"],
         "raw": raw,
         "success": bool(band.converged),
     }
 
 
 def _benchmark_text(rows: list[dict], template: dict, problem: dict) -> str:
-    calls = [float(row["force_calls"]) for row in rows]
-    nfailed = sum(1 for row in rows if not row["success"])
+    """Band total in ``force_calls``. The archive unit is the per-image quotient."""
+    totals = [int(row["raw"]) for row in rows]
+    images = int(rows[0]["images"])
+    per_image = [total / images for total in totals]
+    kept = [total for total, row in zip(totals, rows) if row["success"]]
+    nfailed = len(rows) - len(kept)
+    mean_total = sum(totals) / len(totals)
     lines = [
-        "force_calls %d" % (sum(calls) / len(calls)),
-        "force_calls_min %d" % min(calls),
-        "force_calls_max %d" % max(calls),
+        f"# Gman {template['code_version']} stock QuickMin. force_calls is pot.count, the band total.",
+        "# The archive published pot.count/8. Endpoints are not counted.",
+        "force_calls %d" % round(mean_total),
+        "force_calls_min %d" % min(totals),
+        "force_calls_max %d" % max(totals),
+        "force_calls_per_image %d" % (sum(per_image) / len(per_image)),
+        "force_calls_per_image_min %d" % min(per_image),
+        "force_calls_per_image_max %d" % max(per_image),
+        "call_unit total",
+        "successes %d" % len(kept),
         "nfailed %d" % nfailed,
+        "n %d" % len(rows),
         f"code {template['code']}",
         f"code_version {template['code_version']}",
         f"commit {template['commit']}",
         f"algorithm {template['algorithm']}",
         f"template {template['id']}",
         f"problem {problem['id']}",
+        f"tuning {template.get('tuning') or 'default'}",
         "counter harness",
+        f"images {images}",
     ]
     return "\n".join(lines) + "\n"
 
@@ -295,6 +307,7 @@ def run_template(
     start_rows = []
     for row in rows:
         record = {
+            "algorithm": template["algorithm"],
             "call_unit": "total",
             "code": template["code"],
             "code_version": template["code_version"],
@@ -305,8 +318,10 @@ def run_template(
             "images": settings["images"],
             "problem": problem["id"],
             "raw": row["raw"],
+            "start": row["geometry"],
             "success": row["success"],
             "template": template["id"],
+            "tuning": template.get("tuning") or "default",
         }
         if not row["success"]:
             record["failure"] = "cap" if row["force_calls"] >= settings["itrmax"] else "divergence"
@@ -331,7 +346,7 @@ def main() -> None:
 
     template = load_template(root, "gman/neb-pt-qm")
     problem = resolve_problem(root, template["problem"])
-    output = root / "results" / "campaign" / "gman-r235-neb-pt-qm.dat"
+    output = root / "results" / "campaign" / "gman-1.0.0.01-neb-pt-qm.dat"
     summary = run_template(root, problem, template, output=output)
     print(json.dumps({key: summary[key] for key in ("force_calls", "force_calls_min", "force_calls_max", "nfailed", "starts")}))
     print(" ".join(str(value) for value in summary["counts"]))

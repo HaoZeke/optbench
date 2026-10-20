@@ -1,21 +1,20 @@
+# Gman 1.0.0.01 stock QuickMin on the Pt-heptamer band.
 id = "gman/neb-pt-qm"
 engine = "gman"
 problem = "neb/Pt-heptamer"
 code = "Gman"
-code_version = "r235"
+code_version = "1.0.0.01"
 commit = "r235"
 algorithm = "qm"
 failure_cap = 10000
-tuning = "archive"
-note = "Unranked diagnostic. The dat has no per-start record. Archived opt.py builds Gopt.qm with dt 0.15 and maxmove 0.2, then relaxes a climbing-image NEB: 8 images, spring 5, tangent new, fmax 0.01, converge Fmag, fsaddle off, itrmax 10000. The Morse force is the r235 Fortran routine (U0 0.7102, alpha 1.6047, r0 2.897, rc 9.5). force_calls in the dat is pot.count()/8, and the published integer is the truncated mean of the 13 paths. The archived script writes algorithm lbfgs for every Gman optimizer; the optimizer that runs is QuickMin. This dat is not ranked."
+tuning = "default"
+note = "Gman 1.0.0.01 is the version file in the r235 release. QuickMin is qm.init() with no arguments, so maxmove is 0.2 and dt is 0.15. The band is the archive problem: 8 interior images, spring 5, improved tangent, climbing image, fmax 0.01, iteration cap 10000. pot.count is the band total. The archive published that total divided by 8."
 
 [stop]
 force_norm = 0.01
 
 [gman]
 optimizer = "qm"
-dt = 0.15
-maxmove = 0.2
 images = 8
 spring = 5.0
 tangent = "new"

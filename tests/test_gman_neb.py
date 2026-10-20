@@ -1,4 +1,4 @@
-"""Pt-heptamer QuickMin: r235 is an unranked diagnostic, TSASE 1.0 is the ledger row."""
+"""Pt-heptamer QuickMin: Gman 1.0.0.01 is the archive row, TSASE is a separate code."""
 
 import json
 from pathlib import Path
@@ -15,19 +15,21 @@ def test_gman_is_not_an_engine_table_entry():
     assert "gman" not in ENGINES
 
 
-def test_gman_template_matches_the_archived_qm_setup():
+def test_gman_template_is_stock_quickmin():
     template = load_template(ROOT, "gman/neb-pt-qm")
     assert template["id"] == "gman/neb-pt-qm"
     assert template["engine"] == "gman"
     assert template["problem"] == "neb/Pt-heptamer"
     assert template["code"] == "Gman"
-    assert template["code_version"] == "r235"
+    assert template["code_version"] == "1.0.0.01"
+    assert template["commit"] == "r235"
     assert template["algorithm"] == "qm"
+    assert template["tuning"] == "default"
     assert not template.get("paper_baseline")
     section = template["gman"]
     assert section["optimizer"] == "qm"
-    assert section["dt"] == 0.15
-    assert section["maxmove"] == 0.2
+    assert "dt" not in section
+    assert "maxmove" not in section
     assert section["images"] == 8
     assert section["spring"] == 5.0
     assert section["tangent"] == "new"
@@ -71,17 +73,36 @@ def test_gman_dispatch_stays_out_of_the_engine_table(monkeypatch, tmp_path: Path
     assert summary["force_calls"] == 1
 
 
-def test_recorded_gman_heptamer_is_an_unranked_diagnostic():
-    dat = ROOT / "results" / "campaign" / "gman-r235-neb-pt-qm.dat"
+def test_recorded_gman_quickmin_is_the_band_total():
+    dat = ROOT / "results" / "campaign" / "gman-1.0.0.01-neb-pt-qm.dat"
     fields = parse(dat.read_text(encoding="utf-8"))
-    assert fields["force_calls"] == "190"
-    assert fields["force_calls_max"] == "316"
-    assert fields["force_calls_min"] == "103"
+    assert fields["force_calls"] == "1527"
+    assert fields["force_calls_max"] == "2528"
+    assert fields["force_calls_min"] == "824"
+    assert fields["force_calls_per_image"] == "190"
+    assert fields["force_calls_per_image_max"] == "316"
+    assert fields["force_calls_per_image_min"] == "103"
+    assert fields["call_unit"] == "total"
+    assert fields["nfailed"] == "0"
+    assert fields["n"] == "13"
     assert fields["counter"] == "harness"
+    assert fields["code_version"] == "1.0.0.01"
+    assert fields["commit"] == "r235"
     assert fields["template"] == "gman/neb-pt-qm"
     assert "ranked" not in fields
     assert "partial" not in fields
-    assert not (ROOT / "results" / "campaign" / "gman-r235-neb-pt-qm.starts.jsonl").is_file()
+    assert not (ROOT / "results" / "campaign" / "gman-r235-neb-pt-qm.dat").exists()
+    assert not (ROOT / "results" / "campaign" / "gman-r235-neb-pt-qm.starts.jsonl").exists()
+    starts = [
+        json.loads(line)
+        for line in (ROOT / "results" / "campaign" / "gman-1.0.0.01-neb-pt-qm.starts.jsonl")
+        .read_text(encoding="utf-8")
+        .splitlines()
+        if line.strip()
+    ]
+    assert [row["start"] for row in starts] == [f"min{index:02d}" for index in range(1, 14)]
+    assert all(row["counter"] == "harness" and row["success"] and row["call_unit"] == "total" for row in starts)
+    assert all(row["force_calls"] == row["raw"] and row["raw"] % 8 == 0 for row in starts)
 
 
 def test_tsase_template_is_stock_quickmin():
@@ -99,21 +120,20 @@ def test_tsase_template_is_stock_quickmin():
     assert section["ss"] is False
     assert "dt" not in section
     assert "maxmove" not in section
-    problem = resolve_problem(ROOT, "neb/Pt-heptamer")
-    assert _check_stop(problem, template) == 10000
 
 
-def test_recorded_tsase_quickmin_is_the_harness_gap():
+def test_recorded_tsase_quickmin_uses_the_band_total():
     dat = ROOT / "results" / "campaign" / "tsase-1.0-neb-pt-qm.dat"
     fields = parse(dat.read_text(encoding="utf-8"))
-    assert fields["force_calls"] == "456"
-    assert fields["force_calls_max"] == "702"
-    assert fields["force_calls_min"] == "211"
+    assert fields["force_calls"] == "3651"
+    assert fields["force_calls_max"] == "5618"
+    assert fields["force_calls_min"] == "1690"
+    assert fields["force_calls_per_image"] == "456"
+    assert fields["call_unit"] == "total"
     assert fields["nfailed"] == "0"
     assert fields["n"] == "13"
     assert fields["counter"] == "harness"
     assert fields["code_version"] == "1.0"
-    assert fields["template"] == "tsase/neb-pt-qm"
     assert "ranked" not in fields
     assert "partial" not in fields
     starts = [
@@ -124,23 +144,26 @@ def test_recorded_tsase_quickmin_is_the_harness_gap():
         if line.strip()
     ]
     assert [row["start"] for row in starts] == [f"min{index:02d}" for index in range(1, 14)]
-    assert all(row["count_key"] == "force_calls_neb" and row["counter"] == "harness" and row["success"] for row in starts)
-    assert all(row["raw"] == row["iterations"] * 8 + 2 for row in starts)
+    assert all(row["call_unit"] == "total" and row["counter"] == "harness" and row["success"] for row in starts)
+    assert all(row["force_calls"] == row["raw"] for row in starts)
+    assert "count_key" not in starts[0]
 
 
-def test_tsase_quickmin_is_on_the_ranked_board():
+def test_quickmin_rows_share_one_ranked_unit():
     document = build_board(ROOT)
     neb = document["problems"]["neb/Pt-heptamer"]
-    assert not any(item.get("template") == "gman/neb-pt-qm" for item in neb["ranked"])
-    assert any("gman-r235-neb-pt-qm" in str(item.get("path") or "") for item in document["unparsed"])
-    ranked = [row for row in neb["ranked"] if row["template"] == "tsase/neb-pt-qm"]
-    assert len(ranked) == 1
-    row = ranked[0]
-    assert row["n"] == 13
-    assert row["nfailed"] == 0
-    assert row["counter"] == "harness"
-    assert row["partial"] is False
-    assert row["mean_per_image"] == 456.3269230769231
-    assert row["path"] == "results/campaign/tsase-1.0-neb-pt-qm.dat"
-    assert not any(item.get("template") == "tsase/neb-pt-qm" for item in neb["partial"])
-    assert not any(item.get("template") == "tsase/neb-pt-qm" for item in neb["not_comparable"])
+    assert not any("gman-r235-neb-pt-qm" in str(item.get("path") or "") for item in document["unparsed"])
+    ranked = {row["template"]: row for row in neb["ranked"]}
+    gman = ranked["gman/neb-pt-qm"]
+    tsase = ranked["tsase/neb-pt-qm"]
+    for row, per_image in ((gman, 190.92307692307693), (tsase, 456.3269230769231)):
+        assert row["n"] == 13
+        assert row["nfailed"] == 0
+        assert row["counter"] == "harness"
+        assert row["partial"] is False
+        assert row["par2_mean"] == row["mean_calls"]
+        assert row["mean_per_image"] == per_image
+        assert abs(row["par2_mean"] / 8 - row["mean_per_image"]) < 1e-12
+    assert gman["path"] == "results/campaign/gman-1.0.0.01-neb-pt-qm.dat"
+    assert tsase["path"] == "results/campaign/tsase-1.0-neb-pt-qm.dat"
+    assert not any(item.get("template") in {"gman/neb-pt-qm", "tsase/neb-pt-qm"} for item in neb["partial"])

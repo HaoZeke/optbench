@@ -636,9 +636,8 @@ def _execute_qm(job: dict) -> dict:
     """One climbing or plain band. The score is the harness calculator count.
 
     Success is the minimizer's own force stop, the same role as OPTIM's
-    CONVERGED line. The Hessian is not consulted. ``raw`` is the band
-    total and ``force_calls`` is that total divided by the image count,
-    which is the unit the 2014 Gman file published.
+    CONVERGED line. The Hessian is not consulted. ``force_calls`` is the
+    band total, the same unit as the other harness rows on this problem.
     """
     os.environ.setdefault("OMP_NUM_THREADS", "1")
     from ase import Atoms
@@ -754,12 +753,11 @@ def _execute_qm(job: dict) -> dict:
     else:
         success = False
         failure = "divergence"
-    per_image = calls / images if images else float(calls)
     return {
         "start": job["name"],
-        "force_calls": per_image,
+        "force_calls": calls,
         "raw": calls,
-        "count_key": "force_calls_neb",
+        "call_unit": "total",
         "success": success,
         "failure": failure,
         "counter": "harness",
@@ -777,7 +775,7 @@ def _run_qm(root: Path, problem: dict, template: dict, settings: dict, output: P
     section = _section(template)
     comment = (
         "# TSASE 1.0 qm_ssneb, commit 98aac60. Constructor defaults maxmove 0.2 and dt 0.05.\n"
-        "# The count is one harness ASE calculate. force_calls is that total divided by the image count.\n"
+        "# force_calls is the harness ASE calculate count, the band total.\n"
         "# A start is kept when qm_ssneb stops at the problem force norm, under the problem cap.\n"
         "# ssneb multiplies the spring constant by the image count. The Hessian is not the stop."
     )
@@ -797,7 +795,7 @@ def _run_qm(root: Path, problem: dict, template: dict, settings: dict, output: P
             "counter": "harness",
             "version": template["code_version"],
         },
-        images=None,
+        images=int(settings["n_interior"]),
         comment=comment,
     )
 

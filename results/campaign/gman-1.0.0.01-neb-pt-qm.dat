@@ -1,0 +1,21 @@
+# Gman 1.0.0.01 stock QuickMin. force_calls is pot.count, the band total.
+# The archive published pot.count/8. Endpoints are not counted.
+force_calls 1527
+force_calls_min 824
+force_calls_max 2528
+force_calls_per_image 190
+force_calls_per_image_min 103
+force_calls_per_image_max 316
+call_unit total
+successes 13
+nfailed 0
+n 13
+code Gman
+code_version 1.0.0.01
+commit r235
+algorithm qm
+template gman/neb-pt-qm
+problem neb/Pt-heptamer
+tuning default
+counter harness
+images 8

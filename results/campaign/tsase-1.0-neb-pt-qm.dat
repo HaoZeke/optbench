@@ -1,11 +1,13 @@
 # TSASE 1.0 qm_ssneb, commit 98aac60. Constructor defaults maxmove 0.2 and dt 0.05.
-# The count is one harness ASE calculate. force_calls is that total divided by the image count.
+# force_calls is the harness ASE calculate count, the band total.
 # A start is kept when qm_ssneb stops at the problem force norm, under the problem cap.
 # ssneb multiplies the spring constant by the image count. The Hessian is not the stop.
-force_calls 456
-force_calls_min 211
-force_calls_max 702
-force_calls_median 446
+force_calls 3651
+force_calls_min 1690
+force_calls_max 5618
+force_calls_median 3570
+force_calls_per_image 456
+call_unit total
 successes 13
 nfailed 0
 n 13
@@ -18,3 +20,4 @@ template tsase/neb-pt-qm
 problem neb/Pt-heptamer
 tuning default
 counter harness
+images 8
