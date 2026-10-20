@@ -8,7 +8,7 @@ The pele transition-state paper score is the 2014 stop: break at the first RMS b
 
 OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.
 
-GMIN tip4p20 latest release: SVNREV df8da599267534fbe43a250e578f7396a7946311, svn.tar.bz2 sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. Keyword defaults are temperature 0.3 and step 0.3. STEPS 2000 is the current NTIP example length, because the binary does not enter basin-hopping without STEPS. The archive convergence is EDIFF, SLOPPYCONV, and TIGHTCONV 1e-3 with TARGET -872.9887. Native NPCALL on 100 starts has half-even mean 420297 and nfailed 100. The archived paper row stays 2.85967e7 with nfailed 0.
+GMIN tip4p20 basin-hopping is ranked as GMIN df8da599. SVNREV df8da599267534fbe43a250e578f7396a7946311, svn.tar.bz2 sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. The data file is the archived basin-hopping keyword set. READI rejects 1.D4 and 4.D7, so MAXIT is 10000 10000 and STEPS is 40000000. Temperature is 2.20 and the rigid-body step is 0 0 1.41, with FIXBOTH. Native NPCALL on 100 starts has half-even mean 32950596, median 26774949, min 53057, max 149938602, and nfailed 0. The archived paper row is 2.85967e7 with nfailed 0. The mean is 15.2% above that row. PAR-2 equals the mean because every start hit the target under the problem cap 149938603.
 
 EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.
 
@@ -69,7 +69,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | tip4p10/gmin-tbp | — | — | not rerun |
 | tip4p15/gmin | — | — | not rerun |
 | tip4p15/gmin-tbp | — | — | not rerun |
-| tip4p20/gmin | — | — | not rerun |
+| tip4p20/gmin | force_calls 2.85967e+07, nfailed 0 | force_calls 3.29506e+07, nfailed 0 | ranked |
 | tip4p20/gmin-tbp | — | — | not rerun |
 
 ## hTST

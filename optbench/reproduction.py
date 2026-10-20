@@ -733,16 +733,21 @@ def build_rows(root: Path) -> list[dict]:
                 record["cause"] = "akmc_vs_langevin"
                 record["cause_detail"] = CAUSE_TEXT["akmc_vs_langevin"]
             if ident == "globalopt/tip4p20/gmin":
+                path = "results/campaign/gmin-df8da599-tip4p20-bh.dat"
+                fields = parse_dat((root / path).read_text(encoding="utf-8"))
                 record["latest"] = {
                     "code": "GMIN",
-                    "code_version": "df8da599267534fbe43a250e578f7396a7946311",
-                    "commit": "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31",
+                    "code_version": fields["code_version"],
+                    "commit": fields["commit"],
                     "template": "gmin/tip4p20-bh",
-                    "path": "results/campaign/gmin-df8da599-tip4p20-bh.dat",
+                    "path": path,
                     "counter": "GMIN NPCALL",
-                    "n": 100,
-                    "nfailed": 100,
-                    "force_calls": 420297,
+                    "n": int(float(fields["n"])),
+                    "nfailed": int(float(fields["nfailed"])),
+                    "force_calls": int(float(fields["force_calls"])),
+                    "force_calls_min": int(float(fields["force_calls_min"])),
+                    "force_calls_median": float(fields["force_calls_median"]),
+                    "force_calls_max": int(float(fields["force_calls_max"])),
                 }
             built.append(record)
             continue
@@ -807,6 +812,32 @@ def _fmt(value: float) -> str:
     return f"{value:.6g}"
 
 
+def _tip4p20_gmin_paragraph(rows: list[dict]) -> str:
+    latest: dict = {}
+    for row in rows:
+        if row.get("problem") == "tip4p20" and row.get("entry") == "gmin":
+            latest = row.get("latest") or {}
+            break
+    archive = 2.85967e7
+    calls = float(latest.get("force_calls") or 0)
+    gap = (calls - archive) / archive
+    median = latest.get("force_calls_median")
+    median_text = str(int(median)) if isinstance(median, float) and median == int(median) else str(median)
+    return (
+        "GMIN tip4p20 basin-hopping is ranked as GMIN df8da599. "
+        "SVNREV df8da599267534fbe43a250e578f7396a7946311, svn.tar.bz2 sha256 "
+        "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. "
+        "The data file is the archived basin-hopping keyword set. READI rejects 1.D4 and 4.D7, "
+        "so MAXIT is 10000 10000 and STEPS is 40000000. Temperature is 2.20 and the rigid-body "
+        "step is 0 0 1.41, with FIXBOTH. "
+        f"Native NPCALL on 100 starts has half-even mean {int(calls)}, "
+        f"median {median_text}, min {latest.get('force_calls_min')}, "
+        f"max {latest.get('force_calls_max')}, and nfailed {latest.get('nfailed')}. "
+        f"The archived paper row is 2.85967e7 with nfailed 0. The mean is {gap:.1%} above that row. "
+        "PAR-2 equals the mean because every start hit the target under the problem cap 149938603."
+    )
+
+
 def render_markdown(rows: list[dict]) -> str:
     counts = {"reproduced": 0, "not_reproduced": 0, "not_rerun": 0}
     for row in rows:
@@ -822,7 +853,7 @@ def render_markdown(rows: list[dict]) -> str:
         "",
         "OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.",
         "",
-        "GMIN tip4p20 latest release: SVNREV df8da599267534fbe43a250e578f7396a7946311, svn.tar.bz2 sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. Keyword defaults are temperature 0.3 and step 0.3. STEPS 2000 is the current NTIP example length, because the binary does not enter basin-hopping without STEPS. The archive convergence is EDIFF, SLOPPYCONV, and TIGHTCONV 1e-3 with TARGET -872.9887. Native NPCALL on 100 starts has half-even mean 420297 and nfailed 100. The archived paper row stays 2.85967e7 with nfailed 0.",
+        _tip4p20_gmin_paragraph(rows),
         "",
         "EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.",
         "",
@@ -843,13 +874,19 @@ def render_markdown(rows: list[dict]) -> str:
             lines.append("| Row | Archive | Rerun | Status |")
             lines.append("| --- | --- | --- | --- |")
         ident = f"{row['problem']}/{row['entry']}"
-        if row["checks"]:
+        latest = row.get("latest") or {}
+        if ident == "tip4p20/gmin" and latest:
+            archive = "force_calls 2.85967e+07, nfailed 0"
+            rerun = f"force_calls {_fmt(latest['force_calls'])}, nfailed {latest['nfailed']}"
+            status = "ranked"
+        elif row["checks"]:
             archive = ", ".join(f"{item['metric']} {_fmt(item['archive'])}" for item in row["checks"])
             rerun = ", ".join(f"{_fmt(item['rerun'])}" for item in row["checks"])
+            status = row["status"].replace("_", " ")
         else:
             archive = "—"
             rerun = "—"
-        status = row["status"].replace("_", " ")
+            status = row["status"].replace("_", " ")
         if row.get("cause"):
             status = f"{status}; {row['cause']}"
         if row.get("note"):

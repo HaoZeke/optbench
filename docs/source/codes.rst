@@ -1091,12 +1091,12 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="globalopt/tip4p20" data-template="gmin/tip4p20-bh">
    <td>tip4p20</td>
    <td data-field="template">gmin/tip4p20-bh</td>
-   <td data-field="version">GMIN df8da599267534fbe43a250e578f7396a7946311</td>
+   <td data-field="version">GMIN df8da599</td>
    <td data-field="commit">738fafe3df5a</td>
-   <td data-field="par2_mean">2e+06</td>
-   <td data-field="mean_calls">420297</td>
-   <td data-field="median_calls">425755</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 100</td>
+   <td data-field="par2_mean">3.29506e+07</td>
+   <td data-field="mean_calls">3.29506e+07</td>
+   <td data-field="median_calls">2.67749e+07</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>

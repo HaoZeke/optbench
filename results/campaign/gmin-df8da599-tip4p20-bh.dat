@@ -1,22 +1,22 @@
 # GMIN SVNREV df8da599267534fbe43a250e578f7396a7946311 from svn.tar.bz2 sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31.
-# The count is GMIN NPCALL, the native potential-call counter, stored as the harness counter.
-# Keyword defaults: temperature 0.3, step 0.3, angular step 0.3, orientational step 0.3, MAXIT 500.
-# STEPS 2000 is the current NTIP 4 example length. The binary does not enter basin-hopping without STEPS.
-# Convergence is the archive criterion: EDIFF, SLOPPYCONV and TIGHTCONV 1e-3, TARGET -872.9887.
-# Every start missed that target. The 2014 success-only mean is empty. The force_calls fields are the native counts on all 100 starts.
-force_calls 420297
-force_calls_min 219024
-force_calls_max 620767
-force_calls_median 425755
-successes 0
-nfailed 100
+# The count is GMIN NPCALL from gsaveit Target hit after, stored as the harness counter.
+# Archived basin-hopping keywords. READI takes plain integers, so MAXIT is 10000 10000 and STEPS is 40000000.
+# TEMPERATURE 2.20, STEP 0 0 1.41, FIXBOTH, CENTRE, RADIUS 10, MAXBFGS 0.2, MAXERISE 1e-4.
+# Convergence is EDIFF, SLOPPYCONV and TIGHTCONV 1e-3, TARGET -872.9887.
+# The problem force-call cap is 149938603. A count at or above that cap is a failure.
+force_calls 32950596
+force_calls_min 53057
+force_calls_max 149938602
+force_calls_median 26774949
+successes 100
+nfailed 0
 n 100
 transition_states 0
 code GMIN
-code_version df8da599267534fbe43a250e578f7396a7946311
+code_version df8da599
 commit 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31
 algorithm basin-hopping
 template gmin/tip4p20-bh
 problem globalopt/tip4p20
-tuning default
+tuning stock
 counter harness
