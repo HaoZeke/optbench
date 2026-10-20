@@ -111,7 +111,7 @@ SHA = {
     "entries/eon-svn-htst": "715bc521c827f1f18102c1c027d99d0d8624b0fb",
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "cells/gmin/go-paper": "71f366d9e50b7eedcdc22c75ab0cbba0188d578c",
-    "cells/gmin/go": "0281132677ac00e546303eb6061e76fa9b177cdb",
+    "cells/gmin/go": "7e49bdf6da152047d721dc206bd2d526cfcdd189",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
 }
 
