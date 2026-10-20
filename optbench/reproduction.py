@@ -732,6 +732,18 @@ def build_rows(root: Path) -> list[dict]:
             if ident.startswith("accelerated-md/"):
                 record["cause"] = "akmc_vs_langevin"
                 record["cause_detail"] = CAUSE_TEXT["akmc_vs_langevin"]
+            if ident == "globalopt/tip4p20/gmin":
+                record["latest"] = {
+                    "code": "GMIN",
+                    "code_version": "df8da599267534fbe43a250e578f7396a7946311",
+                    "commit": "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31",
+                    "template": "gmin/tip4p20-bh",
+                    "path": "results/campaign/gmin-df8da599-tip4p20-bh.dat",
+                    "counter": "GMIN NPCALL",
+                    "n": 100,
+                    "nfailed": 100,
+                    "force_calls": 420297,
+                }
             built.append(record)
             continue
         kind = match.get("kind", "dat")
@@ -809,6 +821,8 @@ def render_markdown(rows: list[dict]) -> str:
         "The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.",
         "",
         "OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.",
+        "",
+        "GMIN tip4p20 latest release: SVNREV df8da599267534fbe43a250e578f7396a7946311, svn.tar.bz2 sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. Keyword defaults are temperature 0.3 and step 0.3. STEPS 2000 is the current NTIP example length, because the binary does not enter basin-hopping without STEPS. The archive convergence is EDIFF, SLOPPYCONV, and TIGHTCONV 1e-3 with TARGET -872.9887. Native NPCALL on 100 starts has half-even mean 420297 and nfailed 100. The archived paper row stays 2.85967e7 with nfailed 0.",
         "",
         "EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.",
         "",

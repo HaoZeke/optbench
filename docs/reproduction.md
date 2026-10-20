@@ -8,6 +8,8 @@ The pele transition-state paper score is the 2014 stop: break at the first RMS b
 
 OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.
 
+GMIN tip4p20 latest release: SVNREV df8da599267534fbe43a250e578f7396a7946311, svn.tar.bz2 sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. Keyword defaults are temperature 0.3 and step 0.3. STEPS 2000 is the current NTIP example length, because the binary does not enter basin-hopping without STEPS. The archive convergence is EDIFF, SLOPPYCONV, and TIGHTCONV 1e-3 with TARGET -872.9887. Native NPCALL on 100 starts has half-even mean 420297 and nfailed 100. The archived paper row stays 2.85967e7 with nfailed 0.
+
 EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.
 
 Table 10 prints EON Lanczos 165. The archive file is 325. CI-NEB(3) prints 3 failures; the archive file has 0.

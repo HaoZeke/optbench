@@ -39,6 +39,27 @@ def test_the_ledger_covers_the_oracle_in_order():
     assert reproduction_errors(ROOT) == []
 
 
+def test_tip4p20_gmin_latest_is_recorded_and_ranked():
+    ledger = {row_id(row): row for row in load_ledger(ROOT / "oracle" / "reproduction.jsonl")}
+    row = ledger["globalopt/tip4p20/gmin"]
+    assert row["status"] == "not_rerun"
+    assert row["rerun"] is None
+    latest = row["latest"]
+    assert latest["code_version"] == "df8da599267534fbe43a250e578f7396a7946311"
+    assert latest["commit"] == "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
+    assert latest["template"] == "gmin/tip4p20-bh"
+    assert latest["nfailed"] == 100
+    text = (ROOT / latest["path"]).read_text(encoding="utf-8")
+    assert "counter harness\n" in text
+    assert "ranked false" not in text
+    assert "partial true" not in text
+    assert "force_calls 420297\n" in text
+    assert "n 100\n" in text
+    held = holdback(ROOT)
+    assert ("globalopt/tip4p20", "gmin/tip4p20-bh") not in held.templates
+    assert latest["path"] not in held.paths
+
+
 def test_pele_paper_baseline_is_the_2014_stop():
     ledger = {row_id(row): row for row in load_ledger(ROOT / "oracle" / "reproduction.jsonl")}
     forward = ledger["tsopt/LJ38/pele_ffd"]
