@@ -25,7 +25,7 @@ required = ["force_calls", "force_calls_min", "force_calls_max", "nfailed"]
 
 [scoring.legacy]
 label = "legacy"
-rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean. The row stays labelled legacy."
+rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean."
 
 [scoring.v2]
 version = "par2-wilson-bootstrap"

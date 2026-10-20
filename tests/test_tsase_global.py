@@ -8,8 +8,6 @@ import pytest
 from optbench.campaign import _check_stop, list_templates, resolve_problem
 from optbench.runners.tsase_global import (
     PUBLISHED_LJ38_ENERGY,
-    _patch_repeated_line_search,
-    _patch_zero_line_search,
     describe_parameters,
     energy_threshold,
     judge_global,
@@ -70,6 +68,24 @@ def test_success_is_the_energy_window_under_the_cap():
     assert failure == "wrong_stationary"
 
 
+def test_a_stalled_line_search_is_not_divergence():
+    success, failure, reasons = judge_global(
+        calls=3,
+        cap=1_000_000,
+        energy=3.72e6,
+        threshold=-397.491331,
+        crashed=False,
+        exploded=False,
+        stalled=True,
+    )
+    assert success is False
+    assert failure == "stalled"
+    assert reasons == ["stalled"]
+    from optbench.score import penalised_cost
+
+    assert penalised_cost(3, success, 1_000_000) == 2_000_000
+
+
 def test_an_exploded_energy_is_divergence():
     success, failure, _reasons = judge_global(
         calls=4,
@@ -127,32 +143,48 @@ def test_templates_use_the_registry_pin_and_the_problem_stop():
     assert described["dr"] == 0.1
 
 
-def test_an_overlapped_lj75_start_quenches_under_quasinewton():
-    """A clamped step and a later zero step used to stop the quench."""
+def test_stock_quasinewton_stalls_on_an_overlapped_lj75_start():
+    """BFGSLineSearch repeats one clamped step. The harness records the stall."""
     import numpy as np
     from ase.optimize import QuasiNewton
 
     from optbench.counter import HarnessCounter
-    from optbench.runners.tsase_global import Exploded, _attach, _import_tsase, _make_atoms
+    from optbench.runners.tsase_global import Stalled, _attach, _import_tsase, _make_atoms
 
     _import_tsase()
-    _patch_repeated_line_search()
-    _patch_zero_line_search()
     geometries = dict(load_geometries(ROOT, resolve_problem(ROOT, "globalopt/lj75")))
-    for label in ("coords.44", "coords.3"):
-        counter = HarnessCounter(cache=True, cap=8000)
-        atoms = _make_atoms(geometries[label])
-        _attach(atoms, counter, None)
-        try:
-            QuasiNewton(atoms, logfile=None, trajectory=None).run(fmax=0.05, steps=4000)
-        except Exploded as exc:
-            raise AssertionError(f"{label} stopped as {exc}") from exc
-        energy = float(atoms.get_potential_energy())
-        fmax = float(np.linalg.norm(atoms.get_forces(), axis=1).max())
-        assert energy < 0.0
-        assert fmax < 0.05
-        assert counter.calls < 8000
-        assert np.isfinite(energy)
+    counter = HarnessCounter(cache=True, cap=8000)
+    atoms = _make_atoms(geometries["coords.44"])
+    _attach(atoms, counter, None)
+    with pytest.raises(Stalled):
+        QuasiNewton(atoms, logfile=None, trajectory=None).run(fmax=0.05, steps=4000)
+    energy = float(counter.lowest_energy)
+    assert counter.calls < 20
+    assert np.isfinite(energy)
+    success, failure, _reasons = judge_global(
+        calls=counter.calls,
+        cap=1_000_000,
+        energy=energy,
+        threshold=-397.491331,
+        crashed=False,
+        exploded=False,
+        stalled=True,
+    )
+    assert success is False
+    assert failure == "stalled"
+
+
+def test_tsase_rows_are_labelled_with_the_short_commit():
+    from optbench.board import _version_label
+
+    label = _version_label(
+        {
+            "code": "tsase",
+            "code_version": "1.0",
+            "commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218",
+        }
+    )
+    assert label == "TSASE 1.0 (98aac60)"
 
 
 def test_lj75_archive_has_two_hundred_starts():

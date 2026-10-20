@@ -80,6 +80,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "stalled": 0,
         "wrong_stationary": 0
       },
       "full_n": 100,
@@ -125,6 +126,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "stalled": 0,
         "wrong_stationary": 0
       },
       "full_n": 100,
@@ -170,6 +172,7 @@
         "cap": 2,
         "crash": 0,
         "divergence": 0,
+        "stalled": 0,
         "wrong_stationary": 0
       },
       "full_n": 100,
@@ -215,6 +218,7 @@
         "cap": 55,
         "crash": 0,
         "divergence": 0,
+        "stalled": 0,
         "wrong_stationary": 0
       },
       "full_n": 100,
@@ -260,6 +264,7 @@
         "cap": 89,
         "crash": 0,
         "divergence": 0,
+        "stalled": 0,
         "wrong_stationary": 0
       },
       "full_n": 100,

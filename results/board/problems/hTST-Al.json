@@ -19,6 +19,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "stalled": 0,
         "wrong_stationary": 0
       },
       "full_n": null,
@@ -64,6 +65,7 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "stalled": 0,
         "wrong_stationary": 0
       },
       "full_n": null,

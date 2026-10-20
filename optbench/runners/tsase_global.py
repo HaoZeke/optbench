@@ -11,8 +11,8 @@ minima-hopping dimer or energy comparison both go through one
 Lennard-Jones 38 succeeds when the lowest harness energy is at or below the
 published minimum plus ``energy_above_minimum``. The coordinates are minimum
 1 of the Wales group GMIN example ``expected_output/lowest``. A problem
-without that window keeps the lowest energy and the call count and is
-written partial: there is no success rule to score.
+without that window keeps the lowest energy and the call count. There is
+no success rule to score.
 """
 
 from __future__ import annotations
@@ -87,15 +87,19 @@ PUBLISHED_LJ38_ENERGY = -173.9284262
 DEFAULT_SEED = 314159
 MAX_HOPS = 1_000_000
 FAILED_QUENCHES = 50
-# A healthy line search reads one geometry a handful of times. ASE's
-# BFGSLineSearch, which is what ``QuasiNewton`` names in ASE 3.29, can
-# also propose one clamped step forever on an overlapped cluster. Accept
-# that step before the repeated-geometry guard stops the search.
-STUCK_LINE_STEPS = 15
 
 
 class Exploded(Exception):
     """The potential energy left the range a local step can recover from."""
+
+
+class Stalled(Exploded):
+    """The local step repeated one geometry and made no progress.
+
+    Basin hopping's quench uses a bare ``except``, so this stays an
+    ``Exception`` and that search can try another displacement. Minima
+    hopping does not catch it. The start is then the ``stalled`` failure.
+    """
 
 
 class SearchStop(BaseException):
@@ -152,17 +156,23 @@ def judge_global(
     threshold: float | None,
     crashed: bool,
     exploded: bool,
+    stalled: bool = False,
 ) -> tuple[bool, str | None, list[str]]:
     """Success bit, failure class, and reasons for one start.
 
-    Without a threshold every finite run is a failure. The row is partial
-    because the problem has no success rule. A crash or a non-finite energy
-    keeps its own class.
+    Without a threshold every finite run is a failure: the problem has no
+    success rule. A crash, a non-finite energy, and a stalled line search
+    each keep their own class. A stall is a finite repeated geometry, so
+    it is not a divergence.
     """
     finite = energy is not None and math.isfinite(float(energy))
     reasons: list[str] = []
     if crashed:
         reasons.append("crash")
+    elif energy is not None and not math.isfinite(float(energy)):
+        reasons.append("divergence")
+    elif stalled:
+        reasons.append("stalled")
     elif not finite or exploded:
         reasons.append("divergence")
     elif calls >= cap or threshold is None:
@@ -204,7 +214,7 @@ class HarnessLennardJones:
             # A stuck line search repeats one geometry. A real step moves.
             self._repeat = getattr(self, "_repeat", 0) + 1
             if self._repeat > 100:
-                raise Exploded("repeated geometry")
+                raise Stalled("repeated geometry")
         else:
             self._repeat = 0
             energy, gradient = lennard_jones(coords)
@@ -504,71 +514,6 @@ class _DiscardTrajectory:
         return iter(())
 
 
-def _patch_repeated_line_search() -> None:
-    """Accept a QuasiNewton step that the max-step clamp keeps repeating.
-
-    ``ase.optimize.QuasiNewton`` is BFGSLineSearch. On an overlapped
-    Lennard-Jones start the search direction is long, so every trial is
-    clamped onto the point just evaluated. FIRE, the old QuasiNewton, and
-    TSASE's own SDLBFGS all take a real step on that geometry. Leaving the
-    line search there lets this QuasiNewton build a new direction instead
-    of reading one geometry until the harness calls it divergence.
-    """
-    from ase.utils.linesearch import LineSearch
-
-    if getattr(LineSearch.step, "_optbench_repeat", False):
-        return
-    original = LineSearch.step
-
-    def step(self, stp, f, g, c1, c2, xtol, isave, dsave):
-        out = original(self, stp, f, g, c1, c2, xtol, isave, dsave)
-        same = False
-        if str(self.task)[:2] == "FG" and self.old_stp:
-            scale = max(1.0, abs(float(self.old_stp)))
-            same = abs(float(out) - float(self.old_stp)) <= float(xtol) * scale
-        count = getattr(self, "_optbench_same", 0)
-        self._optbench_same = count + 1 if same else 0
-        if self._optbench_same >= STUCK_LINE_STEPS:
-            self.task = "CONVERGENCE"
-            self._optbench_same = 0
-        return out
-
-    step._optbench_repeat = True
-    LineSearch.step = step
-
-
-def _patch_zero_line_search() -> None:
-    """Replace a zero warning step with one max-step along the search direction.
-
-    After the clamped step above is accepted, BFGSLineSearch can return
-    ``WARNING: ROUNDING ERRORS PREVENT PROGRESS`` with step length 0. ASE
-    only drops a warning when ``task[1:4] == 'WARN'``, which does not match
-    that string, so QuasiNewton takes the zero step and stays on the
-    overlapped geometry. One max-step along the current direction is enough
-    for the same optimizer to finish the quench. A healthy line search does
-    not emit the warning.
-    """
-    from ase.utils.linesearch import LineSearch
-
-    if getattr(LineSearch._line_search, "_optbench_zero", False):
-        return
-    original = LineSearch._line_search
-
-    def _line_search(self, *args, **kwargs):
-        stp, fval, old, flag = original(self, *args, **kwargs)
-        warned = str(self.task).startswith("WARN")
-        zero = stp is None or float(stp) == 0.0
-        if warned and zero:
-            length = float(self.get_gradient_norm(np.asarray(self.pk, dtype=float)))
-            if length > 0.0 and float(self.maxstep) > 0.0:
-                stp = float(self.maxstep) / length
-                self.task = "CONVERGENCE"
-        return stp, fval, old, flag
-
-    _line_search._optbench_zero = True
-    LineSearch._line_search = _line_search
-
-
 def _patch_hop_trajectories() -> None:
     """Drop qn.traj and md.traj. The minima list stays on disk."""
     import ase.io
@@ -619,8 +564,6 @@ def _patch_velocity_verlet() -> None:
 def _run_minima(job: dict, positions: np.ndarray, counter: HarnessCounter) -> str:
     _import_tsase()
     _patch_velocity_verlet()
-    _patch_repeated_line_search()
-    _patch_zero_line_search()
     _patch_hop_trajectories()
     from tsase.optimize.minimahopping import MinimaHopping
 
@@ -651,6 +594,7 @@ def run_start(job: dict) -> dict:
     positions = np.asarray(job["positions"], dtype=np.float64)
     crashed = False
     exploded = False
+    stalled = False
     error = ""
     try:
         if job["method"] == "basin_hopping":
@@ -660,6 +604,9 @@ def run_start(job: dict) -> dict:
         exploded = reason == "divergence"
     except SearchStop as exc:
         exploded = exc.reason == "divergence"
+        stalled = exc.reason == "stalled"
+    except Stalled:
+        stalled = True
     except Exploded:
         exploded = True
     except Exception as exc:
@@ -678,6 +625,7 @@ def run_start(job: dict) -> dict:
         threshold=job["threshold"],
         crashed=crashed,
         exploded=exploded,
+        stalled=stalled,
     )
     record = {
         "schema": "optbench.start/v2",
@@ -879,10 +827,15 @@ def _publish(
     else:
         minimum = "The Lennard-Jones 38 minimum is the harness energy of the published truncated octahedron."
     note = f"Harness Lennard-Jones, cutoff 40, no shift. {minimum}"
+    if parameters.get("method") == "minima_hopping" and problem_id == "globalopt/lj75":
+        note += (
+            " Stock QuasiNewton is ASE BFGSLineSearch. On an overlapped archive start"
+            " it repeats one clamped step. The harness records that as stalled and charges PAR-2."
+        )
     if threshold is None:
         note = (
             "Harness Lennard-Jones, cutoff 40, no shift. "
-            "This problem file has no energy_above_minimum, so the starts are partial. "
+            "This problem file has no energy_above_minimum, so there is no success rule. "
             "lowest_energy is the best harness energy on that start."
         )
     document = {

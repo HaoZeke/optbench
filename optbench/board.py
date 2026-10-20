@@ -1274,11 +1274,25 @@ def _show_per_image(problem: dict) -> bool:
     return any(row.get("mean_per_image") is not None for row in rows)
 
 
+def _version_label(row: dict) -> str:
+    """Visible version cell.
+
+    TSASE 1.0 at commit 98aac60 is labelled with the short commit. Other
+    rows stay ``code`` plus ``code_version``.
+    """
+    code = str(row.get("code") or "")
+    version = str(row.get("code_version") or "")
+    commit = str(row.get("commit") or "")
+    if code.lower() == "tsase" and version == "1.0" and commit.startswith("98aac60"):
+        return "TSASE 1.0 (98aac60)"
+    return f"{code} {version}".strip()
+
+
 def _headers(problem: dict) -> list[str]:
-    # The ranked table and the headline table list the current version only.
-    # Older versions stay in the history list, so a Current column is yes on
-    # every ranked row. The Wilson interval is one cell, low then high.
-    # Two separate columns push the minimization page over the DOM budget.
+    # The ranked table and the headline table list the newest full version
+    # only. Older versions stay in the history list. The 95% score interval
+    # is one cell, low then high. Two separate columns push the minimization
+    # page over the DOM budget.
     headers = [
         "Template",
         "Version",
@@ -1286,7 +1300,7 @@ def _headers(problem: dict) -> list[str]:
         "Source",
         "PAR-2",
         "Success",
-        "Wilson",
+        "95%",
         "Median calls",
         "Mean calls",
     ]
@@ -1306,7 +1320,7 @@ def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
     """
     cells = [
         ("template", str(row.get("template") or row.get("entry") or "")),
-        ("version", f"{row.get('code') or ''} {row.get('code_version') or ''}"),
+        ("version", _version_label(row)),
         ("commit", str(row.get("commit") or "")[:12]),
         ("source", str(row.get("source") or "")),
         ("par2_mean", _format_number(row.get("par2_mean"))),
@@ -1365,7 +1379,7 @@ def gap_paragraph(problem: dict, unparsed: list[dict] | None = None) -> str:
     if other:
         bits.append(f"{_joined_names(other)} {kind} are off the ranked table")
     if problem.get("partial"):
-        bits.append("Partial rows stay off the ranked table")
+        bits.append("Rows short of the start count stay off the ranked table")
     if unparsed:
         bits.append("Files with no per-start harness record stay off the ranked table")
     if not bits and not problem.get("ranked"):
@@ -1377,7 +1391,7 @@ def gap_paragraph(problem: dict, unparsed: list[dict] | None = None) -> str:
 
 def _reason_text(row: dict) -> str:
     if row.get("partial"):
-        return str(row.get("partial_reason") or "partial")
+        return str(row.get("partial_reason") or "short of the start count")
     if _off_harness(row):
         return "not yet on the harness counter"
     return f"counter {row.get('counter') or 'unset'}"
@@ -1560,7 +1574,7 @@ def _table(
     headers = _headers(problem)
     caption = (
         "Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. "
-        "Wilson bounds are the 95% interval on the success rate."
+        "The 95% column is the score interval on the success rate."
     )
     if per_image:
         caption += " Per-image mean divides that total by the problem's moving images, the same way for every code."
@@ -1575,7 +1589,7 @@ def _table(
     lines.append(
         "<p>Ranked by the v2 PAR-2 mean of the harness total. "
         "Only the newest full version of a template is in this table. "
-        "A partial row, including a one-start asv smoke run, is not.</p>"
+        "A row short of the problem's start count, including a one-start asv smoke run, is not.</p>"
     )
     lead = gap_paragraph(problem, unparsed)
     if lead:
@@ -1604,14 +1618,14 @@ def _table(
         for row in problem["history"]:
             lines.append(
                 "<li>"
-                f"{_cell(row['template'] or row['entry'])} {_cell(row['code'])} {_cell(row['code_version'])} "
+                f"{_cell(row['template'] or row['entry'])} {_cell(_version_label(row))} "
                 f"{_cell(row['source'])} n={row['n']} PAR-2={_format_number(row['par2_mean'])} "
                 f"mean={_format_number(row['mean_calls'])}"
                 "</li>"
             )
         lines.append("</ul>")
     if problem.get("partial"):
-        lines.append("<h3>Partial</h3><ul>")
+        lines.append("<h3>Short of the start count</h3><ul>")
         for row in problem["partial"]:
             lines.append(
                 "<li>"
