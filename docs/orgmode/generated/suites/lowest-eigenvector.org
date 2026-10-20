@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>EON (SVN r2549)</th><th>eOn (develop 500350d9)</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="lowest-eigenvector/lj38">
    <th scope="row"><a href="#lj38">lj38</a></th>
    <td data-code="eOn" data-template="eon-client/low-lj38-lanczos" data-par2="26.385"><span class="bench-score">26.385</span><a href="#lj38-templates">eon-client/low-lj38-lanczos</a></td>
@@ -17,6 +17,8 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella" data-template="sella-0.1.1/lj38-loweig" data-par2="17.8"><span class="bench-score">17.8</span><a href="#lj38-templates">sella-0.1.1/lj38-loweig</a></td>
    <td data-code="pysisyphus" data-template="pysisyphus/lanczos-lj38" data-par2="4017.14"><span class="bench-score">4017.14</span><a href="#lj38-templates">pysisyphus/lanczos-lj38</a></td>
+   <td data-code="EON (SVN r2549)">—</td>
+   <td data-code="eOn (develop 500350d9)">—</td>
    <td data-code="artn" data-template="partn/mode-lj38" data-par2="2619.84"><span class="bench-score">2619.84</span><a href="#lj38-templates">partn/mode-lj38</a></td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>

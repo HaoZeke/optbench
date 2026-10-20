@@ -173,6 +173,26 @@ commit = "0.1.1"
 committed = "2019-12-10"
 note = "Sella 0.1.1 PESWrapper.diag for the lowest-eigenvector row. eta 1e-6, gamma 1e-16, vreftol 0.99, gradient v0, rigid-mode projection. This pin is not Sella 2.6.0."
 
+[[code]]
+id = "eon-svn-r2549"
+name = "EON (SVN r2549)"
+role = "minimization and saddle search"
+repository = "https://theory.cm.utexas.edu/svn/eon"
+ref = "r2549"
+commit = "r2549"
+committed = "2026-01-23"
+note = "EON, the SVN client, at r2549. Built with Fortran. The LBFGS step is the revision's own step. This is not a version of the git code at https://github.com/TheochemUI/eon. The hTST Pt Lanczos-LBFGS run uses the archived ini and this client's defaults for every key the archive left unset."
+
+[[code]]
+id = "eon-develop-500350d9"
+name = "eOn (develop 500350d9)"
+role = "minimization and saddle search"
+repository = "https://github.com/TheochemUI/eon"
+ref = "fix/develop-regressions-vs-350"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
+committed = "2026-10-20"
+note = "eOn, the git code at https://eondocs.org and https://github.com/TheochemUI/eon, at 500350d9 on fix/develop-regressions-vs-350. Built from source with Fortran. This is not a version of EON SVN. The hTST Pt Lanczos-LBFGS run uses the archived ini. Saddle Search max_iterations is 5000, the archived optimizer iteration cap. Lanczos max_iterations stays 50. The 7095b23 pin above is an older develop snapshot and is a different entry."
+
 [[template]]
 id = "sella-0.1.1/lj38-loweig"
 code = "sella-0.1.1"

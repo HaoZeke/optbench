@@ -1,0 +1,24 @@
+barrier_jobs 1805
+barrier_force_calls 6.322e+05
+barrier_windows 6
+rate_jobs 49
+rate_force_calls  1.724e+04
+rate_windows 251
+searches 12384
+missed_barriers 0
+unexpected_barriers 0
+reference_processes 15
+code eOn (develop 500350d9)
+code_version 3.6.0
+commit 500350d9fae881f06c7ef194e5868da079c4be5a
+counter htst-reducer
+reducer harness-htst
+contributor Rohit Goswami
+random_seed 42
+communicator_jobs 4
+passes 388
+seconds 1866.65
+algorithm Lanczos-LBFGS rotation: max=50, tol=0.05
+template eon/htst-pt-lanczos-lbfgs2
+problem hTST/Pt
+count_keys sad-fcs

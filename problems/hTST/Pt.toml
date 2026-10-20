@@ -4,6 +4,24 @@ suite = "hTST"
 problem = "Pt"
 contract = "partial"
 entry_count = 11
+remark = "A start is one barrier window. The window closes when each reference barrier below 1.3 eV has been matched once from the processtable. Force calls are sad-fcs. The rate sum uses 1.2e12. The potential is morse_pt. EON (SVN r2549) and eOn (develop 500350d9) are separate codes. The 2013 table is the paper row. The Lanczos-LBFGS means use the first 6 barrier windows and the first 251 rate windows."
+
+[potential]
+evaluator = "morse_pt"
+kind = "morse"
+name = "morse_pt"
+
+[htst]
+temperature = 700
+rate_ref = 155055901.244
+rate_accuracy = 0.999
+prefactor = 1.2e12
+kb = 8.6173324e-5
+barrier_ceiling = 1.3
+barriers = [0.601, 0.601, 0.620, 0.986, 0.987, 0.989, 0.986, 0.987, 0.989, 1.196, 1.196, 1.196, 1.196, 1.207, 1.207]
+
+[input]
+archive_path = "website/hTST/Pt/eon-lanczos-lbfgs2/pos.con"
 
 [metrics]
 required = ["barrier_force_calls", "barrier_jobs", "rate_force_calls", "rate_jobs"]

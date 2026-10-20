@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>EON (SVN r2549)</th><th>eOn (develop 500350d9)</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="hTST/Al">
    <th scope="row"><a href="#Al">Al</a></th>
    <td data-code="eOn">—</td>
@@ -17,6 +17,8 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
+   <td data-code="eOn (develop 500350d9)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -33,6 +35,8 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="EON (SVN r2549)" data-template="eon-svn/htst-pt-lanczos-lbfgs2" data-par2=""><span class="bench-score"></span><a href="#Pt-templates">eon-svn/htst-pt-lanczos-lbfgs2</a></td>
+   <td data-code="eOn (develop 500350d9)" data-template="eon/htst-pt-lanczos-lbfgs2" data-par2=""><span class="bench-score"></span><a href="#Pt-templates">eon/htst-pt-lanczos-lbfgs2</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -108,17 +112,21 @@
    <h2>Pt</h2>
    <dl class="bench-rule">
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
+   <dt>Note</dt><dd>A start is one barrier window. The window closes when each reference barrier below 1.3 eV has been matched once from the processtable. Force calls are sad-fcs. The rate sum uses 1.2e12. The potential is morse_pt. EON (SVN r2549) and eOn (develop 500350d9) are separate codes. The 2013 table is the paper row. The Lanczos-LBFGS means use the first 6 barrier windows and the first 251 rate windows.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
    <p class="bench-gaps">Partial rows stay off the ranked table.</p>
+   <figure class="bench-plot"><a href="../../_static/board/hTST-Pt-profile.svg"><picture><source srcset="../../_static/board/hTST-Pt-profile.webp" type="image/webp"><img src="../../_static/board/hTST-Pt-profile.png" alt="Dolan-More profile for hTST/Pt" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="../../_static/board/hTST-Pt-cost.svg"><picture><source srcset="../../_static/board/hTST-Pt-cost.webp" type="image/webp"><img src="../../_static/board/hTST-Pt-cost.png" alt="Cost versus success for hTST/Pt" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="Pt-templates">
-   <summary>All templates (0 ranked)</summary>
+   <summary>All templates (2 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="hTST/Pt">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="13">No full harness row.</td></tr>
+   <tr><td data-field="template">eon/htst-pt-lanczos-lbfgs2</td><td data-field="version">eOn (develop 500350d9) 3.6.0</td><td data-field="commit">500350d9fae8</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean"></td><td data-field="success_rate">1</td><td data-field="wilson_low">0.609666</td><td data-field="wilson_high">1</td><td data-field="median_calls">642758</td><td data-field="mean_calls">632220</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">6</td></tr>
+   <tr><td data-field="template">eon-svn/htst-pt-lanczos-lbfgs2</td><td data-field="version">EON (SVN r2549) r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean"></td><td data-field="success_rate">1</td><td data-field="wilson_low">0.609666</td><td data-field="wilson_high">1</td><td data-field="median_calls">2.82114e+06</td><td data-field="mean_calls">2.91938e+06</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">6</td></tr>
    </tbody></table></div>
    <h3>Partial</h3><ul>
    <li>eon-client/htst-pt-dimer-lbfgs eOn campaign n=1, result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5).</li>

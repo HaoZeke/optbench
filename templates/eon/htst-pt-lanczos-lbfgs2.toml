@@ -1,0 +1,52 @@
+id = "eon/htst-pt-lanczos-lbfgs2"
+engine = "eon"
+problem = "hTST/Pt"
+code = "eOn (develop 500350d9)"
+code_version = "3.6.0"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
+algorithm = "Lanczos-LBFGS rotation: max=50, tol=0.05"
+reducer = "harness-htst"
+windows = 6
+rate_windows = 251
+pass_limit = 20000
+note = "Stock eOn develop 500350d9fae881f06c7ef194e5868da079c4be5a, Fortran build. The ini is the archived file: temperature 700 K, seed 42, morse_pt, prefactor 1.2e12, LBFGS converged_force 0.001, max_iterations 5000, confidence 1.9, minimize_first, least-coordinated displacement weight 1, radius 3.3, magnitude 0.3, Lanczos max 50, tolerance 0.05, saddle max_energy 1000. Saddle Search max_iterations is 5000, the same iteration cap as the archived optimizer. Lanczos max_iterations stays 50. Keys the archive left unset stay at this client's defaults. The means are the first 6 barrier windows and the first 251 rate windows. The local batch is 32 jobs. This code is not EON SVN."
+
+[ini.Main]
+job = "akmc"
+temperature = 700
+random_seed = 42
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+converged_force = 0.001
+max_iterations = 5000
+
+[ini.AKMC]
+confidence = 1.9
+
+[ini."Process Search"]
+minimize_first = true
+
+[ini.Communicator]
+type = "local"
+num_jobs = 32
+number_of_CPUs = 1
+client_path = "eonclient"
+
+[ini."Saddle Search"]
+min_mode_method = "lanczos"
+displace_least_coordinated_weight = 1.0
+displace_radius = 3.3
+displace_magnitude = 0.3
+max_energy = 1000.0
+max_iterations = 5000
+
+[ini.Prefactor]
+default_value = 1.2e12
+
+[ini.Lanczos]
+tolerance = 0.05
+max_iterations = 50
