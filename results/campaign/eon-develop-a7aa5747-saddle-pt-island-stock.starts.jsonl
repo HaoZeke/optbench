@@ -1,0 +1,9 @@
+{"seed":1,"start":"pt-island","geometry":"pt-island","force_calls":1569,"success":false,"failure":"divergence","counter":"harness","client_calls":968,"reason":"6"}
+{"seed":2,"start":"pt-island","geometry":"pt-island","force_calls":1034,"success":false,"failure":"divergence","counter":"harness","client_calls":690,"reason":"6"}
+{"seed":3,"start":"pt-island","geometry":"pt-island","force_calls":1270,"success":false,"failure":"divergence","counter":"harness","client_calls":812,"reason":"6"}
+{"seed":4,"start":"pt-island","geometry":"pt-island","force_calls":1154,"success":false,"failure":"divergence","counter":"harness","client_calls":740,"reason":"6"}
+{"seed":5,"start":"pt-island","geometry":"pt-island","force_calls":1879,"success":false,"failure":"divergence","counter":"harness","client_calls":839,"reason":"0","force_norm":0.0008650490070477745,"hessian_index":1,"barrier":0.6194342563811,"rmsd_reactant":0.0,"rmsd_product":0.22795992785967362}
+{"seed":6,"start":"pt-island","geometry":"pt-island","force_calls":2000,"success":false,"failure":"divergence","counter":"harness","client_calls":1358,"reason":"0","force_norm":0.0009656219949205299,"hessian_index":1,"barrier":0.6010053059813,"rmsd_reactant":0.0,"rmsd_product":0.2270952814465204}
+{"seed":7,"start":"pt-island","geometry":"pt-island","force_calls":763,"success":false,"failure":"divergence","counter":"harness","client_calls":530,"reason":"6"}
+{"seed":8,"start":"pt-island","geometry":"pt-island","force_calls":1667,"success":false,"failure":"divergence","counter":"harness","client_calls":1014,"reason":"6"}
+{"seed":9,"start":"pt-island","geometry":"pt-island","force_calls":637,"success":false,"failure":"divergence","counter":"harness","client_calls":460,"reason":"6"}

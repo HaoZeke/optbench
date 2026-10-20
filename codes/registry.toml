@@ -45,6 +45,26 @@ committed = "2026-01-23"
 note = "SVN revision 2549, last changed 2026-01-23 by eboniw. eonclient -v prints r2549. The 2014 tables used earlier revisions. Export of those trees is forbidden, so the runs here are r2549. QSC sources are not in the revision. LAMMPS is not linked. Min-mode methods in this revision are dimer and lanczos. One harness uses r2549 Morse::force: cutoff 9.5, pair energy shifted to zero at the cutoff, minimum image on the box diagonal. The lane harness uses unshifted lj/cut and morse/smooth/linear. github.com/henkelmangroup/eon mirrors the same tree. The conda-forge 3.5.0 binary is a different pin. The name is Eon svn so it does not collide with the git eOn pins."
 
 [[code]]
+id = "eon-svn-r2549"
+name = "EON (SVN r2549)"
+role = "saddle search"
+repository = "https://theory.cm.utexas.edu/svn/eon"
+ref = "r2549"
+commit = "r2549"
+committed = "2026-01-23"
+note = "The old SVN code. It is not a version of git eOn. Unpatched Fortran build of revision 2549. eonclient -v prints r2549. The henkelmangroup mirror tag v1.1.2549 is the same tree. LAMMPS is not linked. Stock dimer defaults stay as the binary ships them."
+
+[[code]]
+id = "eon-develop-a7aa5747"
+name = "eOn (develop a7aa5747)"
+role = "saddle search"
+repository = "https://github.com/TheochemUI/eon"
+ref = "develop"
+commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+committed = "2026-10-18"
+note = "git eOn from https://eondocs.org. It is not a version of the old SVN code. develop at a7aa57472fb7d823953fd36b78cd755fa4842d30. The binary prints 3.6.0 (a7aa5747). Fortran is on. GPR-dimer is disabled. Stock dimer defaults stay as the binary ships them."
+
+[[code]]
 id = "rgmin"
 name = "rgmin"
 role = "minimization"

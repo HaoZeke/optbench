@@ -1,0 +1,26 @@
+id = "eon/develop-saddle-pt-island-stock"
+engine = "eon"
+problem = "saddle-search/pt-island"
+code = "eOn (develop a7aa5747)"
+code_version = "a7aa5747"
+commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+algorithm = "Dimer"
+reducer = "harness"
+tuning = "stock"
+failure_cap = 5064
+note = """Stock eOn develop a7aa57472fb7d823953fd36b78cd755fa4842d30. The binary prints 3.6.0 (a7aa5747). Fortran is on. No source patch and no GPR-dimer. The same process_search ini, Pt island geometry, displacement seeds 1 through 9, and force stop 0.001 eV/Angstrom as EON SVN r2549. Dimer, optimizer, bowl, prefactor, and max energy stay at the binary defaults. The harness kernel is morse/smooth/linear. The cap is the problem per-search budget. The client total is not the score."""
+
+[ini.Main]
+job = "process_search"
+temperature = 700
+random_seed = 1
+
+[ini.Potential]
+potential = "ext_pot"
+
+[ini.Optimizer]
+converged_force = 0.001
+
+[ini."Saddle Search"]
+min_mode_method = "dimer"
+converged_force = 0.001
