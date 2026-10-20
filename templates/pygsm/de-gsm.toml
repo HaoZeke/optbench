@@ -8,7 +8,7 @@ algorithm = "DE-GSM"
 tuning = "default"
 
 [gsm]
-coordinate = "dlc"
+coordinate = "hybrid"
 nnodes = 11
 dmax = 0.1
 add_node_tol = 0.01

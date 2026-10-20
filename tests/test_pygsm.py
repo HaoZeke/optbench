@@ -55,9 +55,10 @@ def test_template_matches_the_registry_pin():
     lowered = note.lower()
     assert "ASELoT" in note
     assert "eV" in note
-    assert "DLC" in note
+    assert "hybrid_coord_idx_file" in note
     assert "EV_PER_AU" in note
     assert "newMakePrimitives" in note
+    assert "CartesianX" in note
     assert "dirty" not in lowered
     assert "contact-distance" not in lowered
     assert "reproduced" not in lowered
@@ -71,7 +72,7 @@ def test_template_matches_the_registry_pin():
     assert template["tuning"] == "default"
     assert template["code_version"] == "1.0.0+692.g1b4d5a5"
     assert "dirty" not in template["code_version"]
-    assert template["gsm"]["coordinate"] == "dlc"
+    assert template["gsm"]["coordinate"] == "hybrid"
     assert template["gsm"]["nnodes"] == 11
     assert template["gsm"]["dmax"] == 0.1
     assert template["gsm"]["add_node_tol"] == 0.01
@@ -252,3 +253,20 @@ def test_generator_sum_adds_vectors():
     total = _sum_generators(np.array([1.0, 2.0]) for _ in range(3))
     assert np.allclose(total, [3.0, 6.0])
     assert _sum_generators(float(i) for i in range(4)) == 6.0
+
+
+def test_hybrid_primitives_are_cartesian_components():
+    from optbench.pygsm_band import _stock_hybrid, ensure_runtime
+    from pyGSM.utilities import elements
+
+    ensure_runtime()
+    reactant = np.array(
+        [[0.0, 0.0, 0.0], [1.1, 0.0, 0.0], [0.5, 0.9, 0.1], [0.4, 0.2, 1.0]],
+        dtype=np.float64,
+    )
+    product = reactant + np.array([0.2, -0.1, 0.05])
+    atoms = [elements.ElementData().from_symbol("Ar") for _ in range(len(reactant))]
+    coord = _stock_hybrid(reactant, product, atoms)
+    names = [type(prim).__name__ for prim in coord.Prims.Internals]
+    assert names == ["CartesianX", "CartesianY", "CartesianZ"] * len(reactant)
+    assert coord.Vecs.shape == (12, 12)

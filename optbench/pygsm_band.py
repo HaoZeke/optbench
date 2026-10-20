@@ -5,17 +5,19 @@ publishes no release and no tag. A clean checkout imports as
 ``1.0.0+692.g1b4d5a5``. The level of theory is the harness kernel.
 Endpoints stay the archived pair.
 
-The string is DLC, ``bin/gsm -coordinate_type DLC`` (``connect=True``).
-Primitives come from ``Topology.build_topology`` and
-``PrimitiveInternalCoordinates.newMakePrimitives``, then the union of
-the two endpoints, then ``DelocalizedInternalCoordinates``. That is the
-sequence in ``bin/gsm``. ``CartesianCoordinates`` is not a ``bin/gsm``
-choice, and ``eigenvector_follow`` raises ``NotImplementedError`` for
-that class. ``nnodes`` is 11, ``DMAX`` is 0.1, and ``ADD_NODE_TOL`` is
-0.01, the double-ended defaults in ``bin/gsm`` and
-``examples/ase_api_de_gsm.py``. ``DQMAG_MAX`` (default 0.8) applies
-only when the product node is absent, which is the single-ended branch
-of ``GSM.add_node``.
+The string uses ``bin/gsm -coordinate_type TRIC`` with
+``-hybrid_coord_idx_file`` listing every atom. ``newMakePrimitives``
+then emits ``CartesianX``, ``CartesianY``, and ``CartesianZ`` only.
+``Topology.build_bonds`` for argon uses covalent radius 1.06 Å and
+factor 1.2. On LJ38 that graph has about 450 bonds, and the angle and
+dihedral loops emit on the order of 2e5 primitives, whose G matrix is
+not stored. ``CartesianCoordinates`` is not used: its constructor sets
+``extra_kwargs``, which is not an option, and ``eigenvector_follow``
+raises ``NotImplementedError`` for that class. ``nnodes`` is 11,
+``DMAX`` is 0.1, and ``ADD_NODE_TOL`` is 0.01, the double-ended
+defaults in ``bin/gsm`` and ``examples/ase_api_de_gsm.py``.
+``DQMAG_MAX`` (default 0.8) applies only when the product node is
+absent, which is the single-ended branch of ``GSM.add_node``.
 
 The wrapper stores the harness energy ε as ε/``EV_PER_AU`` Hartree and
 the gradient (ε/Å) as that value divided by ``EV_PER_AU`` times
@@ -196,19 +198,23 @@ def _geom(coords: np.ndarray, symbol: str):
     return [(symbol, float(row[0]), float(row[1]), float(row[2])) for row in coords]
 
 
-def _stock_dlc(reactant: np.ndarray, product: np.ndarray, atoms):
-    """Stock DLC, the ``bin/gsm`` path with ``coordinate_type`` DLC.
+def _stock_hybrid(reactant: np.ndarray, product: np.ndarray, atoms):
+    """Hybrid Cartesian primitives, the ``bin/gsm`` path for ``-hybrid_coord_idx_file``.
 
-    ``bin/gsm`` builds each endpoint topology, adds the product bonds
-    into the reactant graph, calls ``newMakePrimitives`` with
-    ``connect=True``, forms the union of those primitives, and wraps
+    The CLI requires ``-coordinate_type TRIC`` with that file. Every
+    atom index is listed, so ``Topology.build_topology`` puts none of
+    them in the bond graph and ``newMakePrimitives`` emits one
+    Cartesian primitive per component. ``bin/gsm`` builds both endpoint
+    topologies, copies product bonds onto the reactant graph, calls
+    ``newMakePrimitives`` again, unites the primitive lists, and wraps
     them in ``DelocalizedInternalCoordinates``.
     """
     from pyGSM.coordinate_systems import DelocalizedInternalCoordinates, PrimitiveInternalCoordinates
     from pyGSM.coordinate_systems.topology import Topology
 
-    top1 = Topology.build_topology(reactant, atoms)
-    top2 = Topology.build_topology(product, atoms)
+    hybrid = list(range(len(atoms)))
+    top1 = Topology.build_topology(reactant, atoms, hybrid_indices=hybrid)
+    top2 = Topology.build_topology(product, atoms, hybrid_indices=hybrid)
     for bond in top2.edges():
         if bond in top1.edges:
             pass
@@ -223,25 +229,27 @@ def _stock_dlc(reactant: np.ndarray, product: np.ndarray, atoms):
     reactant_prims = PrimitiveInternalCoordinates.from_options(
         xyz=reactant,
         atoms=atoms,
-        connect=True,
-        addtr=False,
+        connect=False,
+        addtr=True,
         addcart=False,
         topology=top1,
     )
+    reactant_prims.newMakePrimitives(reactant)
     product_prims = PrimitiveInternalCoordinates.from_options(
         xyz=product,
         atoms=atoms,
-        connect=True,
-        addtr=False,
+        connect=False,
+        addtr=True,
         addcart=False,
         topology=top1,
     )
+    product_prims.newMakePrimitives(product)
     reactant_prims.add_union_primitives(product_prims)
     return DelocalizedInternalCoordinates.from_options(
         xyz=reactant,
         atoms=atoms,
-        connect=True,
-        addtr=False,
+        connect=False,
+        addtr=True,
         addcart=False,
         primitives=reactant_prims,
     )
@@ -330,7 +338,7 @@ def _build(
     pes = PES.from_options(lot=lot, ad_idx=0, multiplicity=1)
     table = elements.ElementData()
     atoms = [table.from_symbol(_SYMBOL) for _ in range(len(reactant))]
-    coord = _stock_dlc(reactant, product, atoms)
+    coord = _stock_hybrid(reactant, product, atoms)
     molecule_r = Molecule.from_options(
         geom=_geom(reactant, _SYMBOL),
         PES=pes,
@@ -715,7 +723,7 @@ def _registry(root: Path) -> dict:
 def _settings(template: dict, problem: dict, commit: str) -> dict:
     if template.get("commit") != commit:
         raise ValueError(f"{template['id']} commit does not match the pygsm registry")
-    if str(template["gsm"].get("coordinate")) != "dlc":
+    if str(template["gsm"].get("coordinate")) != "hybrid":
         raise ValueError(f"{template['id']} coordinate is {template['gsm'].get('coordinate')}")
     if bool(template["gsm"].get("climb_clamp", False)):
         raise ValueError(f"{template['id']} is a tuned climb clamp; the board keeps pygsm/de-gsm only")
@@ -809,7 +817,8 @@ def _dat(records: list[dict], template: dict, settings: dict, problem: dict, sco
     lines.append(f"problem {problem['id']}")
     lines.append(f"images {settings['n_interior']}")
     shared = (
-        f"{settings['nnodes']} nodes. DLC from bin/gsm coordinate_type DLC. "
+        f"{settings['nnodes']} nodes. Hybrid Cartesian primitives from bin/gsm "
+        "-coordinate_type TRIC -hybrid_coord_idx_file, every atom index. "
         "The level of theory stores ε divided by the Hartree. Endpoints fixed. "
         f"DMAX {settings['dmax']}. "
         "A separated cluster is divergence by the harness connected-cluster rule at 1.5 sigma. "
