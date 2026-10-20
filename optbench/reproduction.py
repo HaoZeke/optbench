@@ -239,10 +239,10 @@ CAUSE_TEXT = {
         "The harness score is pes.evaluate on the harness potential."
     ),
     "optim_stock": (
-        "OPTIM df8da599 with the stock LJ38 newconnect.bfgsts.nohess keywords on the 51 archive pairs. "
-        "BFGSSTEPS, NEWCONNECT cycles, and NEWNEB iterations are the problem cap of 250000. "
-        "STEPS stays 200 because that limit is inside one optimiser call, and the outer search is the NEWCONNECT cycle loop. "
-        "The first-cycle image count is 5, the problem's interior image count. The 2014 odata preamble was not archived. "
+        "OPTIM df8da599 uses the archived LJ38 two-transition odata, copied as written. "
+        "NEWCONNECT stays at 20 cycles, NEWNEB stays commented, and STEPS stays 200. "
+        "REOPTIMISEENDPOINTS quenches an endpoint above BFGSMIN 1e-6, and those calls stay in the energy+gradient count. "
+        "The 250000 problem force-call cap is the outer budget. A count at or above that budget is a cap failure. "
         "The archived number is the paper row. The gap is the finding. The keywords were not tuned."
     ),
     "optim_morse_memory": (

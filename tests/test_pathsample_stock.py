@@ -10,8 +10,9 @@ import numpy as np
 
 from optbench.engines.pathsample_child import connect_odata, driver_should_stop
 from optbench.engines.pathsample_stock import (
-    apply_endpoint_cap,
+    child_terminal_line,
     classify_pair,
+    connect_preamble_text,
     endpoint_text,
     pathdata_text,
 )
@@ -21,22 +22,29 @@ ROOT = Path(__file__).resolve().parents[1]
 CHILD = ROOT / "optbench" / "engines" / "pathsample_child.py"
 
 
-def test_iteration_limits_are_the_problem_cap():
+def test_iteration_limits_stay_on_the_archived_deck():
     coords = np.array([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]])
     endpoint = endpoint_text(coords, 250000)
-    assert "bfgssteps 250000\n" in endpoint
+    assert "bfgssteps 10000\n" in endpoint
     assert "DUMPDATA\n" in endpoint
     assert "NOFRQS\n" in endpoint
+    assert "250000" not in endpoint
     assert endpoint.rstrip().endswith("AX 4.0000000000000000 5.0000000000000000 6.0000000000000000")
-    raised = apply_endpoint_cap("bfgssteps 10000\nDUMPDATA\n", 250000)
-    assert raised.startswith("bfgssteps 250000\n")
     pathdata = pathdata_text(38, 250000, "/tmp/optim-child")
-    assert "CONNECTIONS 1 250000\n" in pathdata
-    assert "CYCLES 250000\n" in pathdata
+    assert "CONNECTIONS 1 1\n" in pathdata
+    assert "CYCLES 1\n" in pathdata
+    assert "250000" not in pathdata
     assert "CPUS 1\n" in pathdata
     assert "EXEC /tmp/optim-child\n" in pathdata
     assert "DIJINITSTART\n" in pathdata
     assert "MAKESTART\n" in pathdata
+    connect = connect_preamble_text()
+    assert connect.startswith("debug\nNEWCONNECT 20 1 2.3 13 7 5 0.024\n")
+    assert "comment NEWNEB 50 500 0.0001\n" in connect
+    assert "STEPS 200\n" in connect
+    assert "BFGSSTEPS" not in connect
+    assert connect.rstrip().endswith("DUMPALLPATHS")
+    assert "250000" not in connect
 
 
 def test_connect_odata_uses_the_makestart_coordinates():
@@ -101,13 +109,26 @@ def test_child_adds_the_optim_count_and_rewrites_points(tmp_path: Path):
     assert int(counter.read_text(encoding="utf-8").strip()) == 30
 
 
-def test_bad_endpoints_stop_later_cycles():
+def test_a_quenched_endpoint_is_not_the_terminal_line():
+    quenched = (
+        "checkendpoints> Bad endpoints supplied - initial, final and maximum RMS: 4.688e-6\n"
+        "checkendpoints> Reoptimised initial end point coordinates for reoptimised energy -171.5 and RMS 9.5e-7\n"
+        "ido> Connected path found\n"
+    )
+    assert child_terminal_line(quenched) == ""
+    refused = "checkendpoints> Bad endpoints supplied - initial, final and maximum RMS: 4.688e-6\n"
+    assert "Bad endpoints" in child_terminal_line(refused)
+    dijkstra = "decide> There appear to be no connections left to try in DIJKSTRA\n"
+    assert "no connections left" in child_terminal_line(dijkstra)
+
+
+def test_bad_endpoints_do_not_stop_the_reoptimisation():
     line = (
         "checkendpoints> Bad endpoints supplied - initial, final and maximum RMS: "
         "0.4688286703E-05 0.5691061065E-08 0.1000000000E-05\n"
         "OPTIM> # of energy+gradient calls=                 2 time=           0.00 %=  5.1\n"
     )
-    assert driver_should_stop(2, 4, 250000, line)
+    assert not driver_should_stop(2, 4, 250000, line)
     assert not driver_should_stop(1200, 1202, 250000, "Connected path found\n")
     assert driver_should_stop(None, 0, 250000, "decide> There appear to be no connections left")
     assert driver_should_stop(10, 250000, 250000, "ok")

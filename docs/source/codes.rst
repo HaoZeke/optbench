@@ -1056,10 +1056,10 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">optim/de-2ts-stock</td>
    <td data-field="version">optim df8da599</td>
    <td data-field="commit">df8da5992675</td>
-   <td data-field="par2_mean">490656</td>
-   <td data-field="mean_calls">3.22187e+06</td>
-   <td data-field="median_calls">3.49254e+06</td>
-   <td data-field="failures">crash 1, divergence 1, cap 48, wrong_stationary 0</td>
+   <td data-field="par2_mean">33802.2</td>
+   <td data-field="mean_calls">14629.1</td>
+   <td data-field="median_calls">3358</td>
+   <td data-field="failures">crash 2, divergence 1, cap 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="minimization/lj38" data-template="optim/lbfgs-lj38">

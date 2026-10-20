@@ -100,12 +100,12 @@
    <td data-code="ASE" data-template="ase/de-lj38-2ts-tuned" data-par2="442917"><span class="bench-score">442917</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">ase/de-lj38-2ts-tuned</a></td>
    <td data-code="Sella" data-template="sella/de-lj38-2ts-tuned" data-par2="30105.9"><span class="bench-score">30105.9</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">sella/de-lj38-2ts-tuned</a></td>
    <td data-code="pysisyphus">—</td>
-   <td data-code="PATHSAMPLE" data-template="pathsample/de-2ts-stock" data-par2="492690"><span class="bench-score">492690</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">pathsample/de-2ts-stock</a></td>
+   <td data-code="PATHSAMPLE" data-template="pathsample/de-2ts-stock" data-par2="72483.9"><span class="bench-score">72483.9</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">pathsample/de-2ts-stock</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass" data-template="compass/sqnm" data-par2="100831"><span class="bench-score">100831</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
-   <td data-code="optim" data-template="optim/de-2ts-stock" data-par2="490656"><span class="bench-score">490656</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">optim/de-2ts-stock</a></td>
+   <td data-code="optim" data-template="optim/de-2ts-stock" data-par2="33802.2"><span class="bench-score">33802.2</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">optim/de-2ts-stock</a></td>
    <td data-code="tsase" data-template="tsase/ci-neb" data-par2="451753"><span class="bench-score">451753</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">tsase/ci-neb</a></td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island">

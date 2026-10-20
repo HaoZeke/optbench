@@ -1,13 +1,16 @@
-"""Stock PATHSAMPLE double-ended search for the LJ38 two-transition pairs.
+"""PATHSAMPLE double-ended search for the LJ38 two-transition pairs.
 
 PATHSAMPLE does not call the potential. It quenches the two endpoints
-with OPTIM, then launches child OPTIM connects. The score is the sum of
-those children's ``energy+gradient calls`` lines. ``CYCLES``,
-``CONNECTIONS``, ``MAXTSATTEMPTS``, the child ``BFGSSTEPS``,
-``NEWCONNECT`` cycles, and ``NEWNEB`` iterations, and the endpoint
-``BFGSSTEPS`` are the problem force-call cap. Child ``STEPS`` stays 200:
-it limits one optimiser call, and the outer search is the ``NEWCONNECT``
-cycle loop. A success is a connected path whose sum is under the cap.
+with OPTIM, then launches one child OPTIM connect. The score is the sum
+of those children's ``energy+gradient calls`` lines. The connect deck is
+the archived odata, copied as written. ``NEWCONNECT`` stays at 20 cycles,
+``NEWNEB`` stays commented, and ``STEPS`` stays 200. ``CONNECTIONS 1 1``
+and ``CYCLES 1`` are the archived attempt limits. Endpoint ``BFGSSTEPS``
+stays 10000, the archived LJ38 minimizer. ``DUMPALLPATHS`` is appended
+because this PATHSAMPLE reads ``path.info`` triples and otherwise stops
+after a child that already found a path. It does not change the
+energy+gradient count. The problem force-call cap is only the outer
+budget on that sum.
 """
 
 from __future__ import annotations
@@ -24,11 +27,11 @@ import numpy as np
 from optbench.native_calls import connected_path, energy_gradient_calls
 
 from .common import run_jobs, write_campaign
-from .optim_dneb import VERSION, apply_call_cap, read_xyz
+from .optim_dneb import VERSION, read_xyz
 
 SOURCE_COMMIT = "df8da599267534fbe43a250e578f7396a7946311"
 _ROOT = Path(__file__).resolve().parents[2]
-_PREAMBLE = _ROOT / "templates" / "optim" / "preambles" / "de-2ts-stock.txt"
+_PREAMBLE = _ROOT / "templates" / "optim" / "preambles" / "de-2ts.txt"
 _ENDPOINT = _ROOT / "templates" / "optim" / "preambles" / "min-lj.txt"
 _CHILD = Path(__file__).resolve().parent / "pathsample_child.py"
 _OPTIM = Path("/tmp/wales-latest/build/OPTIM")
@@ -49,19 +52,6 @@ def pathsample_binary() -> Path:
     return _PATHSAMPLE
 
 
-def apply_endpoint_cap(preamble: str, cap: int) -> str:
-    """Set the minimizer ``BFGSSTEPS`` limit to the problem force-call cap."""
-    lines = []
-    for line in preamble.splitlines():
-        parts = line.split()
-        if parts and parts[0].upper() == "BFGSSTEPS" and len(parts) >= 2:
-            parts[1] = str(cap)
-            lines.append(" ".join(parts))
-        else:
-            lines.append(line)
-    return "\n".join(lines) + ("\n" if preamble.endswith("\n") or lines else "")
-
-
 def _points(coords: np.ndarray, symbol: str) -> list[str]:
     lines = ["POINTS"]
     for row in np.asarray(coords, dtype=np.float64):
@@ -70,26 +60,46 @@ def _points(coords: np.ndarray, symbol: str) -> list[str]:
 
 
 def endpoint_text(coords: np.ndarray, cap: int, symbol: str = "AX") -> str:
-    preamble = apply_endpoint_cap(_ENDPOINT.read_text(encoding="utf-8"), cap)
+    """Archived minimizer keywords plus POINTS. ``cap`` is not written here."""
+    del cap
+    preamble = _ENDPOINT.read_text(encoding="utf-8")
     if not preamble.endswith("\n"):
         preamble += "\n"
     lines = [preamble.rstrip("\n"), *_points(coords, symbol)]
     return "\n".join(lines) + "\n"
 
 
+def connect_preamble_text() -> str:
+    """Archived odata plus ``DUMPALLPATHS``.
+
+    The archived deck does not set ``DUMPALLPATHS``. This PATHSAMPLE reads
+    min-sad-min triples from ``path.info.<pid>`` and stops with
+    ``no path.info file`` when that file is absent, including after the
+    child has printed ``Connected path found``. The keyword opens that
+    file. It is not an iteration limit, and it is not written into the
+    standalone OPTIM deck.
+    """
+    text = _PREAMBLE.read_text(encoding="utf-8")
+    if not text.endswith("\n"):
+        text += "\n"
+    if not any(line.strip() == "DUMPALLPATHS" for line in text.splitlines()):
+        text += "DUMPALLPATHS\n"
+    return text
+
+
 def pathdata_text(natoms: int, cap: int, executable: str, symbol: str = "AX") -> str:
-    """PATHSAMPLE keywords. Iteration limits are the problem cap."""
+    """PATHSAMPLE keywords. Attempt limits are the archived deck, not the cap."""
+    del cap
     lines = [
         f"NATOMS {int(natoms)}",
         f"SYSTEM {symbol}",
         "PERMDIST",
         "MAKESTART",
         "DIJINITSTART",
-        # CONNECTIONS above 2 selects the older CYCLE loop, which looks up
-        # path.info by process id only. The double-ended target stays 1.
-        # The second field is MAXTSATTEMPTS, the attempt limit.
-        f"CONNECTIONS 1 {int(cap)}",
-        f"CYCLES {int(cap)}",
+        # CONNECTIONS above 2 selects the older CYCLE loop. The archived
+        # deck asks for one connection and one transition-state attempt.
+        "CONNECTIONS 1 1",
+        "CYCLES 1",
         "CPUS 1",
         "ETOL 1.0D-6",
         "GEOMDIFFTOL 0.05D0",
@@ -143,6 +153,23 @@ def _sum_children(folder: Path) -> tuple[int | None, bool, list[str]]:
         seen = True
         total += int(calls)
     return (total if seen else None), seen, missing
+
+
+def child_terminal_line(text: str) -> str:
+    """A child line that actually stopped the search.
+
+    ``Bad endpoints`` is printed before ``REOPTIMISEENDPOINTS`` quenches
+    the end and continues. It is the stop only when that quench did not run.
+    """
+    quenched = "Reoptimised" in text or "Connected path found" in text
+    chosen = ""
+    for line in text.splitlines():
+        stripped = line.strip()
+        if "no connections left" in stripped:
+            chosen = stripped
+        elif not quenched and "Bad endpoints" in stripped:
+            chosen = stripped
+    return chosen
 
 
 def _stop_reason(log: str, connected: bool, error: str) -> str:
@@ -247,10 +274,9 @@ def _execute(job: dict) -> dict:
                 text = path.read_text(encoding="utf-8", errors="replace")
                 child_connected = child_connected or connected_path(text)
                 children.append({"log": path.name, "calls": energy_gradient_calls(text)})
-                for line in text.splitlines():
-                    stripped = line.strip()
-                    if "Bad endpoints" in stripped or "no connections left" in stripped:
-                        child_stop = stripped
+                terminal = child_terminal_line(text)
+                if terminal:
+                    child_stop = terminal
         finally:
             if folder_cm is not None:
                 folder_cm.cleanup()
@@ -273,10 +299,12 @@ def _execute(job: dict) -> dict:
         )
         if child_connected or connected:
             reason += "; a child OPTIM reported Connected path found"
+    elif success:
+        reason = "Connected path found"
     elif child_stop:
         reason = child_stop
     else:
-        reason = _stop_reason(driver, connected and success, error)
+        reason = _stop_reason(driver, False, error)
     if missing and failure == "crash":
         missing_names = ", ".join(missing)
         reason = f"{reason}; no energy+gradient line in {missing_names}"
@@ -317,7 +345,7 @@ def run_pathsample_stock(root: Path, problem: dict, template: dict, output: Path
     cap = int((problem.get("convergence") or {})["max_force_calls"])
     sample = int((problem.get("sample") or {}).get("pairs") or 51)
     symbol = str((template.get("pathsample") or {}).get("symbol") or "AX")
-    connect = apply_call_cap(_PREAMBLE.read_text(encoding="utf-8"), cap)
+    connect = connect_preamble_text()
     jobs = []
     for index in range(sample):
         reactant = read_xyz(coords / f"start_{index}.xyz")
@@ -339,12 +367,13 @@ def run_pathsample_stock(root: Path, problem: dict, template: dict, output: Path
     records = run_jobs(jobs, _execute, workers)
     comment = (
         f"# PATHSAMPLE {VERSION}, PATHSAMPLE/source/SVNREV in the current public svn.tar.bz2. "
-        f"Child OPTIM is the same tree. "
-        f"CYCLES and MAXTSATTEMPTS are the problem cap {cap}. "
-        f"CONNECTIONS stays 1 so the initial-path loop is used. "
-        f"BFGSSTEPS, NEWCONNECT cycles, and NEWNEB iterations are that same cap.\n"
+        "Child OPTIM is the same tree. The connect deck is the archived odata. "
+        "DUMPALLPATHS is appended so path.info triples exist. "
+        "CONNECTIONS 1 1 and CYCLES 1 are the archived attempt limits. "
+        "NEWCONNECT stays at 20 cycles. Endpoint BFGSSTEPS stays 10000. "
+        f"The outer force-call budget on the sum is {cap}.\n"
         "# Archive pairs 0-50. The count is the sum of child OPTIM energy+gradient calls. "
-        "A success is Connected path found under that cap."
+        "A success is Connected path found under that budget."
     )
     published = dict(template)
     published["code"] = "PATHSAMPLE"
@@ -360,14 +389,14 @@ def run_pathsample_stock(root: Path, problem: dict, template: dict, output: Path
             "counter": "sum of child OPTIM energy+gradient calls",
             "potential": "LJDIFF",
             "version": VERSION,
-            "keywords": "newconnect.bfgsts.nohess",
-            "cycles": cap,
+            "keywords": "archived odata",
+            "cycles": 1,
             "connections": 1,
-            "maxtsattempts": cap,
-            "bfgssteps": cap,
-            "newconnect_cycles": cap,
-            "newneb_iterations": cap,
-            "endpoint_bfgssteps": cap,
+            "maxtsattempts": 1,
+            "newconnect_cycles": 20,
+            "steps": 200,
+            "endpoint_bfgssteps": 10000,
+            "dumpallpaths": True,
             "pairs": sample,
         },
         images=int(images) if images else None,

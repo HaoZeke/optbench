@@ -99,12 +99,12 @@ def _stop_driver() -> None:
 def driver_should_stop(calls: int | None, total: int, cap: int, log_text: str) -> bool:
     """True when another OPTIM child cannot change this pair.
 
-    A missing summary, a sum at the force cap, or an endpoint RMS refusal
-    all end the run. The refusal is identical on every later cycle.
+    A missing summary or a sum at the outer force cap ends the run.
+    ``Bad endpoints`` is not a stop: the archived deck reoptimises that
+    endpoint and keeps the calls in the same OPTIM process.
     """
-    if calls is None or total >= cap:
-        return True
-    return "Bad endpoints" in log_text
+    del log_text
+    return calls is None or total >= cap
 
 
 def main() -> None:
@@ -124,7 +124,6 @@ def main() -> None:
         _stop_driver()
         return
     calls = None
-    log_text = ""
     proc = subprocess.Popen(
         [optim, extension],
         stdout=subprocess.PIPE,
@@ -134,7 +133,6 @@ def main() -> None:
     for raw in proc.stdout:
         sys.stdout.buffer.write(raw)
         decoded = raw.decode("utf-8", "replace")
-        log_text += decoded
         if "energy+gradient calls" not in decoded:
             continue
         found = energy_gradient_calls(decoded)
@@ -145,7 +143,7 @@ def main() -> None:
     total = 0 if calls is None else _counter(counter) + int(calls)
     if calls is not None:
         _write_counter(counter, total)
-    if driver_should_stop(calls, total, cap, log_text):
+    if driver_should_stop(calls, total, cap, ""):
         # The child that crossed the cap, or that refused the endpoints,
         # has already printed its summary. Later cycles would repeat it.
         _stop_driver()

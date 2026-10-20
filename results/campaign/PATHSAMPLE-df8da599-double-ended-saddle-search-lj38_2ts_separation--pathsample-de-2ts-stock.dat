@@ -1,13 +1,13 @@
-# PATHSAMPLE df8da599, PATHSAMPLE/source/SVNREV in the current public svn.tar.bz2. Child OPTIM is the same tree. CYCLES and MAXTSATTEMPTS are the problem cap 250000. CONNECTIONS stays 1 so the initial-path loop is used. BFGSSTEPS, NEWCONNECT cycles, and NEWNEB iterations are that same cap.
-# Archive pairs 0-50. The count is the sum of child OPTIM energy+gradient calls. A success is Connected path found under that cap.
-force_calls 127186
-force_calls_min 127186
-force_calls_max 127186
-force_calls_median 127186
-force_calls_per_image 25437
+# PATHSAMPLE df8da599, PATHSAMPLE/source/SVNREV in the current public svn.tar.bz2. Child OPTIM is the same tree. The connect deck is the archived odata. DUMPALLPATHS is appended so path.info triples exist. CONNECTIONS 1 1 and CYCLES 1 are the archived attempt limits. NEWCONNECT stays at 20 cycles. Endpoint BFGSSTEPS stays 10000. The outer force-call budget on the sum is 250000.
+# Archive pairs 0-50. The count is the sum of child OPTIM energy+gradient calls. A success is Connected path found under that budget.
+force_calls 4470
+force_calls_min 699
+force_calls_max 21148
+force_calls_median 3320.5
+force_calls_per_image 894
 call_unit total
-successes 1
-nfailed 50
+successes 44
+nfailed 7
 n 51
 transition_states 0
 code PATHSAMPLE

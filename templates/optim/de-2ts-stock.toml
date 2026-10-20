@@ -7,11 +7,11 @@ code_version = "df8da599"
 commit = "df8da599267534fbe43a250e578f7396a7946311"
 algorithm = "DNEB + hybrid eigenvector following + Djikstra shortest path"
 tuning = "default"
-note = "Current public Wales svn.tar.bz2, sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. OPTIM/source/SVNREV and GMIN/source/SVNREV are df8da599267534fbe43a250e578f7396a7946311, the same identifier as the other rows from this tree. Keywords are the stock LJ38 newconnect.bfgsts.nohess example. BFGSSTEPS, NEWCONNECT cycles, and NEWNEB iterations are 250000, the problem force-call cap. STEPS stays 200. The first-cycle image count is 5, the problem interior image count; the 2014 odata preamble was not archived. EDIFFTOL is 0.000001, the archive energy tolerance. The 51 archive pairs are the starts. The score is OPTIM energy+gradient calls."
+note = "Current public Wales svn.tar.bz2, sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. OPTIM/source/SVNREV and GMIN/source/SVNREV are df8da599267534fbe43a250e578f7396a7946311, the same identifier as the other rows from this tree. The odata deck is the archived LJ38 two-transition preamble, copied as written: NEWCONNECT 20 cycles, NEWNEB commented out, STEPS 200, BFGSMIN 1e-6, and REOPTIMISEENDPOINTS. The 250000 problem force-call cap is the outer budget. A count at or above that budget is a cap failure. The 51 archive pairs are the starts. The score is OPTIM energy+gradient calls."
 
 [optim]
 method = "dneb-stock"
-preamble = "templates/optim/preambles/de-2ts-stock.txt"
+preamble = "templates/optim/preambles/de-2ts.txt"
 symbol = "AX"
 potential = "LJDIFF"
 pairs = "0-50"
