@@ -18,7 +18,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
-| aladatom/true_standard/eon-pr-langevin | true_rate 2.542941e8 1/s | EON (SVN r2549) true_rate 3.448276e11 1/s, 1000000 force calls; eOn (develop 500350d9) true_rate 3.448276e11 1/s, 5547 force calls | archive row |
+| aladatom/true_standard/eon-pr-langevin | true_rate 2.542941e8 1/s | eOn (develop 500350d9) true_rate 1.179001e9 1/s, 133662174 force calls | archive row |
 | standard_aladatom/eon-md-langevin | — | — | not rerun; akmc_vs_langevin |
 
 ## double-ended-saddle-search
@@ -359,8 +359,8 @@ Sella 2.6.0 with the archived trust-region numbers (eta, gamma, delta0, rho, sig
 
 Rows with no exact-setup campaign stay not rerun and are not given a cause. The standard_aladatom comparison above is AKMC against Langevin parallel replica.
 
-EON and eOn are different codes. The aladatom archive row is the true rate 2.542941e8 1/s, Langevin friction 0.001, parallel replica, on the archived reactant. It sits beside two stock latest-version rows, seed 1. Temperature is 300 K. The dephase time, the state-check interval, and the post-transition time are 1000 fs. Those are the shared library defaults; the archive file records the thermostat and the rate. A detected escape is minimized and compared with the reactant. The dynamics window is 10000000 fs and the force-call cap is 1000000. Nothing else is moved off the library defaults.
+EON and eOn are different codes. The aladatom archive row is the true rate 2.542941e+08 1/s. Its directory contains benchmark.dat and no config.ini and no log. The file records thermostat langevin_0.001, uncertainty 1.785425e+06, and percent uncertainty 7.021105e-01. The page text in force while the surviving force-call total 1.436e+09 was measured says "150 sample escape rates" at 185 K. The text current when the rate was filed says the Langevin thermostat with the Verlet algorithm and a friction coefficient of 0.001 1/fs, and does not restate the temperature or the sample count. 150 K is the later sibling row. The time step is not in the file. The archived accelerated-md configs and the library default are 1 fs. The archived estimator is 1 over the mean first-passage time, and the uncertainty is the population standard deviation of those times divided by the square of the mean and by sqrt(N). Dephase time, the state-check interval, and the post-transition time stay at the library default of 1000 fs.
 
-eOn (develop 500350d9) confirmed a transition at 2.900e-12 s. The true rate is 3.448276e11 1/s from 5547 harness force calls. Stop: the product was minimized, written, and it differs from the reactant.
+eOn (develop 500350d9) ran that protocol on seeds 1 through 150. All 150 trajectories confirmed a transition. The rate is 1.179001e+09 1/s, the uncertainty is 8.103471e+07 1/s, and the harness counted 133662174 force calls (mean 891081). Stop: the product was minimized and it differs from the reactant.
 
-EON (SVN r2549), built with Fortran and unpatched, confirmed the same transition time, 2.900e-12 s, so the true rate is 3.448276e11 1/s. That client does not act on stop_after_transition, so after the confirmation it kept stepping until the harness reached the 1000000 force-call cap. Stop: the product was minimized and it differs from the reactant; the client kept stepping until the force-call cap.
+EON (SVN r2549) is Fortran and unpatched. The harness stops that client when it logs the refined transition time. The same 150-trajectory protocol is the r2549 sample. This row records the eOn develop sample.

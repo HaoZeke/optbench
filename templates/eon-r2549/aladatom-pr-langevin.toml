@@ -7,36 +7,29 @@ commit = "r2549"
 algorithm = "parallel replica"
 reducer = "harness"
 tuning = "stock"
-failure_cap = 1000000
+failure_cap = 50000000
 kind = "prd"
 kernel = "eam"
 note = '''
-Stock unpatched EON r2549 parallel replica on the archived aluminum adatom reactant. Langevin friction is 0.001. Temperature is 300 K and the dephase, state-check, and post-transition times are 1000 fs, the shared library defaults, because the archive file records the thermostat and the rate. The trajectory runs until a transition is minimized and found distinct from the reactant, or until the 1000000 force-call cap. The seed is 1. Nothing is tuned toward the archived rate.
+Unpatched EON r2549 parallel replica on the archived aluminum adatom reactant. The filed row records Langevin friction 0.001. The page that was current while the surviving force-call total was measured requires 150 sample escape rates at 185 K. The time step is 1 fs, the only step recorded in the accelerated-md configs and the library default. The rate is 1 over the mean first-passage time. Dephase, state check, and post-transition time stay at the library defaults because the filed row does not record them. The harness stops the client when the refined transition time is logged.
 '''
-seeds = [1]
+seeds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150]
 starts = ["reactant"]
 asv_full = false
-budget_seconds = 20000
+budget_seconds = 21600
 
 [ini.Main]
 job = "parallel_replica"
-temperature = 300
+temperature = 185
 
 [ini.Potential]
 potential = "eam_al"
 
 [ini.Dynamics]
 time_step = 1
-time = 10000000
+time = 100000000
 thermostat = "langevin"
 langevin_friction = 0.001
 
 [ini."Parallel Replica"]
 stop_after_transition = true
-refine_transition = true
-dephase_time = 1000
-state_check_interval = 1000
-post_transition_time = 1000
-
-[ini.Debug]
-write_movies_interval = 1000

@@ -429,6 +429,7 @@ def _aladatom_rates(root: Path) -> str:
             "Eon",
             "2.542941e+08",
             "1/s",
+            "1.436e+09",
             "archived true rate",
         )
     ]
@@ -437,42 +438,38 @@ def _aladatom_rates(root: Path) -> str:
         ("eon-develop-aladatom-pr-langevin", "eOn (develop 500350d9)"),
     ):
         dat = root / "results" / "campaign" / f"{stem}.dat"
-        starts = root / "results" / "campaign" / f"{stem}.starts"
-        rate = ""
+        fields: dict[str, str] = {}
         reason = ""
-        calls = ""
         if dat.is_file():
             for line in dat.read_text(encoding="utf-8").splitlines():
-                if line.startswith("true_rate "):
-                    rate = line.split(None, 1)[1]
                 if line.startswith("# "):
                     reason = line[2:].strip()
-        if starts.is_file():
-            for line in starts.read_text(encoding="utf-8").splitlines():
-                if not line.strip():
                     continue
-                row = json.loads(line)
-                calls = str(row.get("force_calls", ""))
-                reason = str(row.get("stop_reason") or reason)
-                if row.get("true_rate"):
-                    rate = f"{float(row['true_rate']):.6e}"
-                break
-        quantity = rate if rate else calls
-        unit = "1/s" if rate else "force calls"
-        rows.append((stem, label, quantity or "—", unit, reason or "—"))
+                key, _, value = line.partition(" ")
+                if key:
+                    fields[key] = value
+        # A rate row is the archived estimator: 1/mean(first-passage time)
+        # over the recorded transitions. A file without that sample is not
+        # this measurement.
+        if "n_transitions" not in fields or "true_rate" not in fields:
+            continue
+        rate = f"{float(fields['true_rate']):.6e}"
+        calls = fields.get("force_calls_total") or fields.get("force_calls") or "—"
+        rows.append((stem, label, rate, "1/s", calls, reason or "—"))
     lines = [
         '<table class="bench-rates">',
         "<caption>Archive true rate beside the latest-version parallel-replica rows.</caption>",
-        "<thead><tr><th>Row</th><th>Code</th><th>Value</th><th>Unit</th><th>Stop</th></tr></thead>",
+        "<thead><tr><th>Row</th><th>Code</th><th>Rate</th><th>Unit</th><th>Force calls</th><th>Stop</th></tr></thead>",
         "<tbody>",
     ]
-    for row_id, code, value, unit, stop in rows:
+    for row_id, code, value, unit, calls, stop in rows:
         lines.append(
             "<tr>"
             f"<td>{html.escape(row_id)}</td>"
             f"<td>{html.escape(code)}</td>"
             f"<td>{html.escape(value)}</td>"
             f"<td>{html.escape(unit)}</td>"
+            f"<td>{html.escape(calls)}</td>"
             f"<td>{html.escape(stop)}</td>"
             "</tr>"
         )

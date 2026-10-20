@@ -38,6 +38,7 @@ import signal
 import subprocess
 import tarfile
 import tempfile
+import threading
 import time
 from pathlib import Path
 
@@ -596,6 +597,7 @@ def _run_client(
     timeout: int | None,
     *,
     line_buffer: bool = False,
+    stop_on_transition: bool = False,
 ) -> dict:
     if dest.exists():
         shutil.rmtree(dest)
@@ -610,27 +612,93 @@ def _run_client(
     command = [client]
     if line_buffer and shutil.which("stdbuf"):
         command = ["stdbuf", "-oL", "-eL", client]
-    proc = subprocess.run(
-        command,
-        cwd=dest,
-        env=_client_env(client),
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        check=False,
-        text=True,
-        timeout=timeout,
-    )
+    if not stop_on_transition:
+        proc = subprocess.run(
+            command,
+            cwd=dest,
+            env=_client_env(client),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            check=False,
+            text=True,
+            timeout=timeout,
+        )
+        stdout = proc.stdout or ""
+        stderr = proc.stderr or ""
+        returncode = proc.returncode
+        stopped = False
+    else:
+        streamed = _stream_until_transition(command, dest, _client_env(client), timeout)
+        stdout = streamed["stdout"]
+        stderr = streamed["stderr"]
+        returncode = streamed["returncode"]
+        stopped = streamed["stopped_on_transition"]
     fields = _read_dat(dest / "results.dat")
     disk_log = ""
     log_path = dest / "client.log"
     if log_path.is_file():
         disk_log = log_path.read_text(encoding="utf-8", errors="replace")
     return {
-        "returncode": proc.returncode,
+        "returncode": returncode,
         "fields": fields,
-        "stderr": proc.stderr or "",
-        "log": (proc.stdout or "") + "\n" + disk_log,
+        "stderr": stderr,
+        "log": stdout + "\n" + disk_log,
         "product": (dest / "product.con").is_file(),
+        "stopped_on_transition": stopped,
+    }
+
+
+def _stream_until_transition(command, dest: Path, env, timeout: int | None) -> dict:
+    """Stop the client when it logs a refined transition time.
+
+    Unpatched EON keeps integrating after that line. The problem stop is the
+    confirmed transition, so the harness ends the process there and the force
+    calls are the calls up to that line.
+    """
+    proc = subprocess.Popen(
+        command,
+        cwd=dest,
+        env=env,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        bufsize=1,
+    )
+    lines: list[str] = []
+    err_lines: list[str] = []
+    stopped = False
+    assert proc.stdout is not None
+    assert proc.stderr is not None
+
+    def _drain_stderr() -> None:
+        for err_line in proc.stderr:
+            err_lines.append(err_line)
+
+    drain = threading.Thread(target=_drain_stderr, daemon=True)
+    drain.start()
+    try:
+        for line in proc.stdout:
+            lines.append(line)
+            if _TRANSITION_TIME.search(line):
+                stopped = True
+                print(f"STOP_ON_TRANSITION {line.strip()}", flush=True)
+                proc.terminate()
+                break
+        try:
+            proc.wait(timeout=5)
+        except subprocess.TimeoutExpired:
+            proc.kill()
+            proc.wait(timeout=5)
+    finally:
+        if proc.poll() is None:
+            proc.kill()
+            proc.wait(timeout=5)
+        drain.join(timeout=5)
+    return {
+        "stdout": "".join(lines),
+        "stderr": "".join(err_lines),
+        "returncode": proc.returncode,
+        "stopped_on_transition": stopped,
     }
 
 
@@ -654,9 +722,10 @@ def _prd_record(found: dict, calls: int, cap: int) -> dict:
     raw_simulation = fields.get("simulation_time_s")
     if raw_simulation is not None:
         simulation_time = float(raw_simulation)
-    confirmed = fields.get("transition_found") == "1" or "Transition occurred" in log
-    killed = found["returncode"] is not None and found["returncode"] < 0
-    cap_hit = calls >= cap or killed or "force-call cap" in stderr or "ForceCallCap" in stderr
+    confirmed = fields.get("transition_found") == "1" or "Transition occurred" in log or bool(found.get("stopped_on_transition"))
+    stopped = bool(found.get("stopped_on_transition"))
+    killed = found["returncode"] is not None and found["returncode"] < 0 and not stopped
+    cap_hit = (calls >= cap or killed or "force-call cap" in stderr or "ForceCallCap" in stderr) and not stopped
     if confirmed and transition_time is not None and transition_time > 0.0:
         reason = "transition confirmed: the product was minimized and it differs from the reactant"
         if found.get("product"):
@@ -906,6 +975,7 @@ def run_case(
                     texts,
                     None,
                     line_buffer=kind in {"prd", "hyper"},
+                    stop_on_transition=kind == "prd",
                 )
                 calls, _verify = remote_count(server.host, server.port)
                 fields = found["fields"]
@@ -1074,14 +1144,35 @@ def write_campaign(template: dict, rows: list[tuple[int, str, dict]], output: Pa
         summary["force_calls_min"] = int(min(calls))
         summary["force_calls_max"] = int(max(calls))
         summary["force_calls_median"] = float(np.median(calls))
-    rates = [float(row["true_rate"]) for _seed, _start, row in kept if row.get("true_rate")]
-    if rates:
-        summary["true_rate"] = sum(rates) / len(rates)
+    times = [
+        float(row["transition_time_s"])
+        for _seed, _start, row in kept
+        if row.get("transition_time_s")
+    ]
+    if times:
+        # Archive estimator: rate = 1/mean(first-passage time),
+        # uncertainty = std(t) / (mean(t)^2 * sqrt(N)), population std.
+        mean_t = sum(times) / len(times)
+        variance = sum((item - mean_t) ** 2 for item in times) / len(times)
+        summary["true_rate"] = 1.0 / mean_t
+        summary["uncertainty"] = (variance ** 0.5) / (mean_t ** 2 * (len(times) ** 0.5))
+        summary["n_transitions"] = len(times)
+    else:
+        rates = [float(row["true_rate"]) for _seed, _start, row in kept if row.get("true_rate")]
+        if rates:
+            summary["true_rate"] = sum(rates) / len(rates)
+    summary["force_calls_total"] = int(round(sum(float(row["force_calls"]) for _seed, _start, row in kept)))
     reasons = [str(row["stop_reason"]) for _seed, _start, row in kept if row.get("stop_reason")]
     text = benchmark_text(summary, template)
     extra = ["counter harness", "count_keys HarnessCounter"]
     if summary.get("true_rate") is not None:
         extra.append(f"true_rate {summary['true_rate']:.6e}")
+    if summary.get("uncertainty") is not None:
+        extra.append(f"uncertainty {summary['uncertainty']:.6e}")
+    if summary.get("n_transitions") is not None:
+        extra.append(f"n_transitions {summary['n_transitions']}")
+    if summary.get("force_calls_total") is not None:
+        extra.append(f"force_calls_total {summary['force_calls_total']}")
     if partial:
         extra.append("partial true")
     comment = ""

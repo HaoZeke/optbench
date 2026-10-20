@@ -1,8 +1,8 @@
-# transition confirmed: the product was minimized, written, and it differs from the reactant
-force_calls 5547
-force_calls_min 5547
-force_calls_max 5547
-force_calls_median 5547.0
+# transition confirmed: the product was minimized and it differs from the reactant
+force_calls 891081
+force_calls_min 3340
+force_calls_max 3661676
+force_calls_median 690078.0
 call_unit total
 nfailed 0
 code eOn (develop 500350d9)
@@ -14,4 +14,7 @@ problem accelerated-md/aladatom
 reducer harness
 counter harness
 count_keys HarnessCounter
-true_rate 3.448276e+11
+true_rate 1.179001e+09
+uncertainty 8.103471e+07
+n_transitions 150
+force_calls_total 133662174

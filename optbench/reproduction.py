@@ -391,6 +391,42 @@ def judge_checks(checks: list[dict], failure: dict | None) -> str:
     return "reproduced" if ok else "not_reproduced"
 
 
+def latest_version_beside(root: Path, row: dict, ledger: list[dict]) -> bool:
+    """An unmatched archive row has latest-version rows beside it.
+
+    The problem's board ranks a current row, and every archive row of that
+    problem is unmatched. Those current rows are the latest-version runs.
+    The archive row then carries no rerun status.
+    """
+    if row.get("rerun") is not None:
+        return False
+    key = (row.get("suite"), row.get("problem"))
+    siblings = [item for item in ledger if (item.get("suite"), item.get("problem")) == key]
+    if not siblings or any(item.get("rerun") is not None for item in siblings):
+        return False
+    board = root / "results" / "board" / "problems" / f"{row['suite']}-{row['problem']}.json"
+    if not board.is_file():
+        return False
+    try:
+        data = json.loads(board.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return False
+    ranked = data.get("ranked") or []
+    return any(bool(item.get("current")) for item in ranked)
+
+
+def stored_status(row: dict, root: Path, ledger: list[dict] | None = None) -> str | None:
+    """Status the checker stores. None means the row has no rerun status."""
+    failure = row.get("failure_check") if row.get("rerun") else None
+    status = judge_checks(row.get("checks") or [], failure)
+    if row.get("rerun") is None:
+        rows = ledger if ledger is not None else load_ledger(root / "oracle" / "reproduction.jsonl")
+        if latest_version_beside(root, row, rows):
+            return None
+        return "not_rerun"
+    return status
+
+
 def build_checks(
     archived_fields: dict[str, str],
     rerun_fields: dict[str, str],
@@ -662,9 +698,7 @@ def reproduction_errors(root: Path) -> list[str]:
     if oracle_ids != ledger_ids:
         errors.append("reproduction ledger is not in oracle order")
     for row in ledger:
-        status = judge_checks(row.get("checks") or [], row.get("failure_check") if row.get("rerun") else None)
-        if row.get("rerun") is None:
-            status = "not_rerun"
+        status = stored_status(row, root, ledger)
         if status != row.get("status"):
             errors.append(f"{row_id(row)} stored {row.get('status')} and the checks say {status}")
         if row.get("rerun", {}) and row["rerun"].get("paper_baseline") and row.get("status") != "reproduced":
@@ -795,10 +829,19 @@ def _fmt(value: float) -> str:
     return f"{value:.6g}"
 
 
+def _count_key(row: dict) -> str:
+    status = row.get("status")
+    if status in {"reproduced", "not_reproduced", "not_rerun"}:
+        return str(status)
+    if row.get("rerun") is None:
+        return "not_rerun"
+    return str(status or "not_rerun")
+
+
 def render_markdown(rows: list[dict]) -> str:
     counts = {"reproduced": 0, "not_reproduced": 0, "not_rerun": 0}
     for row in rows:
-        counts[row["status"]] = counts.get(row["status"], 0) + 1
+        counts[_count_key(row)] += 1
     lines = [
         "# Reproduction",
         "",
@@ -835,7 +878,8 @@ def render_markdown(rows: list[dict]) -> str:
         else:
             archive = "—"
             rerun = "—"
-        status = row["status"].replace("_", " ")
+        raw_status = row.get("status")
+        status = "" if not raw_status else str(raw_status).replace("_", " ")
         if row.get("cause"):
             status = f"{status}; {row['cause']}"
         if row.get("note"):
