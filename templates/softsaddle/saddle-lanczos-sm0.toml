@@ -1,0 +1,41 @@
+id = "softsaddle/saddle-lanczos-sm0"
+engine = "softsaddle"
+problem = "saddle-search/pt-island"
+code = "softsaddle"
+code_version = "2019.04"
+commit = "5a00aeede06fd822ef302624ec4c9bc7889d21fc0b5804b701a5785695c68d16"
+algorithm = "adaptive hypersphere LBFGS Lanczos"
+tuning = "sm0"
+
+[ini.Main]
+job = "saddle_search"
+solver = "lanczos"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+convergence_metric = "norm"
+converged_force = 0.001
+max_iterations = 1000
+memory_size = 60
+max_step = 0.5
+finite_diff = 1.0e-4
+cg_err = 1.0e-3
+ls_err = 1.0e-2
+dE_max = 480.0
+
+[ini.SaddleSearch]
+mode_seed = "previous"
+lanc_iter = 8
+lanc_abs_tol = 0.01
+lanc_finite = 1.0e-4
+save_lanczos_call = true
+save_lanczos_factor = 0.0
+
+[ini.Search]
+repetitions = 10
+batch = 25
+hyper_rad0 = 0.1
+mix_prev_hyper_rad = true
+keep_efficiency = 0.2
+displace_atoms = 7
+max_searches = 5000

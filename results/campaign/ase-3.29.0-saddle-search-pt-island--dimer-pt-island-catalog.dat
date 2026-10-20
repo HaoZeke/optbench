@@ -1,0 +1,36 @@
+# rep 1 force_calls 8046697 unique_saddles 174 fraction_connected 0.709280197022277 total_searches 8933 connected 27 minimize_calls 1 minimum_converged 1 search_seed (20261015+1)*1000003+attempt
+force_calls 8046697.0
+force_calls_min 8046697
+force_calls_max 8046697
+unique_saddles 174.0
+fraction_connected 0.709280197022277
+total_searches 8933.0
+code ASE
+code_version 3.29.0
+commit f27c0005ae6a67ea419f996e728668865bfc1f86
+algorithm Dimer
+tuning default
+template ase/dimer-pt-island-catalog
+problem saddle-search/pt-island
+counter harness
+repetitions 1
+nfailed 0
+goal 27
+cap 5064
+n 8933
+par2_mean 10099.621515728199
+successes 27
+wilson_low 0.002078145098997789
+wilson_high 0.004394103411532115
+median 10128.0
+median_low 10128.0
+median_high 10128.0
+n_cap 0
+n_wrong_stationary 7
+n_divergence 8899
+n_crash 0
+v2_nfailed 8906
+contributor Rohit Goswami
+date 2026-10-19
+host cursor
+note ASE 3.29.0 DimerControl defaults. The geometry and the initial eigenmode are draw_search_start. Morse::force at cutoff 9.5. The climb stops at 1000 force calls. The link is r2205 and novelty is find_repeat.

@@ -19,6 +19,61 @@ from __future__ import annotations
 FAILURES = ("crash", "divergence", "cap", "wrong_stationary")
 
 
+def classify_outcome(
+    *,
+    energy: float | None = None,
+    geometry=None,
+    force: float | None = None,
+    calls: float | None = None,
+    cap: int | None = None,
+    force_tol: float | None = None,
+    hessian_index: int | None = None,
+    expected_index: int | None = None,
+    process_failed: bool = False,
+    force_above: bool | None = None,
+    stationary_rejected: bool = False,
+    unmet: bool = False,
+) -> str | None:
+    """One failure class from a finished optimizer point.
+
+    The order matches :func:`classify_failure`. A saddle catalog that has
+    already applied the link test overwrites this class.
+    """
+    reasons: list[str] = []
+    if process_failed:
+        reasons.append("crash")
+    if energy is not None:
+        try:
+            if float(energy) != float(energy):
+                reasons.append("divergence")
+        except (TypeError, ValueError):
+            reasons.append("divergence")
+    if geometry is not None:
+        try:
+            import numpy as np
+
+            if not bool(np.all(np.isfinite(np.asarray(geometry, dtype=np.float64)))):
+                reasons.append("divergence")
+        except (TypeError, ValueError):
+            reasons.append("divergence")
+    if cap is not None and calls is not None and float(calls) >= float(cap):
+        reasons.append("cap")
+    above = force_above
+    if above is None and force is not None and force_tol is not None:
+        above = float(force) > float(force_tol)
+    if above:
+        reasons.append("force_norm")
+    if (
+        expected_index is not None
+        and hessian_index is not None
+        and int(hessian_index) != int(expected_index)
+    ):
+        reasons.append("hessian_index")
+    if stationary_rejected or unmet:
+        reasons.append("divergence")
+    return classify_failure(reasons)
+
+
 def classify_failure(reasons: list[str]) -> str | None:
     """Primary class, or ``None`` when ``reasons`` is empty."""
     if not reasons:
