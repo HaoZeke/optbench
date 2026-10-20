@@ -1,14 +1,14 @@
 {
   "counter": "harness",
   "legacy": {
-    "force_calls": 2037,
-    "force_calls_max": 6434,
-    "force_calls_median": 1576.5,
+    "force_calls": 2430,
+    "force_calls_max": 15799,
+    "force_calls_median": 1589,
     "force_calls_min": 584,
     "n": 51,
-    "nfailed": 17,
-    "successes": 34,
-    "transition_states": 34
+    "nfailed": 16,
+    "successes": 35,
+    "transition_states": 35
   },
   "problem": "double-ended-saddle-search/lj38_2ts_separation",
   "provenance": {
@@ -22,7 +22,7 @@
       "system": "Linux"
     },
     "parameters": {
-      "cap": 10000,
+      "cap": 250000,
       "ci_trigger_factor": 0.5,
       "ci_trigger_force": 0.0,
       "climbing": true,
@@ -53,32 +53,32 @@
   "score": {
     "bootstrap_resamples": 2000,
     "bootstrap_seed": 20261015,
-    "cap": 10000,
+    "cap": 250000,
     "includes_failures": true,
-    "iqr": 18643.5,
-    "iqr_high": 18758.5,
+    "iqr": 498643.5,
+    "iqr_high": 498756.0,
     "iqr_low": 2989.0,
-    "mean": 8024.431372549019,
+    "mean": 158530.29411764705,
     "median": 2414.0,
     "median_high": 5109.0,
     "median_low": 1634.0,
     "n": 51,
-    "n_cap": 16,
+    "n_cap": 0,
     "n_crash": 0,
-    "n_divergence": 1,
+    "n_divergence": 16,
     "n_wrong_stationary": 0,
-    "nfailed": 17,
-    "par2_mean": 8024.431372549019,
+    "nfailed": 16,
+    "par2_mean": 158530.29411764705,
     "par_applied": true,
     "par_factor": 2,
     "q25": 1356.5,
-    "q75": 20000.0,
+    "q75": 500000.0,
     "scoring": "par2-wilson-bootstrap",
-    "success_only_mean": 2036.6470588235295,
-    "success_rate": 0.6666666666666666,
-    "successes": 34,
-    "wilson_high": 0.7803006814641148,
-    "wilson_low": 0.529683778569708
+    "success_only_mean": 2429.8571428571427,
+    "success_rate": 0.6862745098039216,
+    "successes": 35,
+    "wilson_high": 0.7967232153447456,
+    "wilson_low": 0.5497300046930566
   },
   "template": "rgsaddle/ew-ci-neb-lbfgs"
 }
