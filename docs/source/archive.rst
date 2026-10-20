@@ -2267,18 +2267,18 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <h3>Al</h3>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="hTST/Al">
-   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Newest</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
    <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/hTST.html#Al">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="Al-legacy">
-   <h3>Legacy 2014 archive</h3>
+   <h3>Archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
+   <summary>Archive</summary>
+   <p class="bench-legacy">Archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
    <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest barrier force calls first.</caption>
+   <caption>Fewest barrier force calls first.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -2313,24 +2313,24 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <td class="text">28 Jan 2013</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "barrier_force_calls", "scale": "linear", "points": [{"id": "htst-al-eon-dimer-cg2", "entry": "eon-dimer-cg2", "code": "Eon r2006", "value": 21070.0, "best": true, "held": false, "failed": false}, {"id": "htst-al-eon-dimer-cg", "entry": "eon-dimer-cg", "code": "Eon r2006", "value": 28870.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>Archive scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "barrier_force_calls", "scale": "linear", "points": [{"id": "htst-al-eon-dimer-cg2", "entry": "eon-dimer-cg2", "code": "Eon r2006", "value": 21070.0, "best": true, "held": false, "failed": false}, {"id": "htst-al-eon-dimer-cg", "entry": "eon-dimer-cg", "code": "Eon r2006", "value": 28870.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section>
    <h3>Pt</h3>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="hTST/Pt">
-   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">eon-svn/htst-pt-dimer-lbfgs2</td><td data-field="version">EON (SVN r2549) r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">39163</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.206549</td><td data-field="wilson_high">1</td><td data-field="median_calls">39163</td><td data-field="mean_calls">39163</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">1</td></tr>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Newest</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td data-field="template">eon/develop-htst-pt-lbfgs2</td><td data-field="version">eOn (develop 500350d9) 500350d9fae881f06c7ef194e5868da079c4be5a</td><td data-field="commit">500350d9fae8</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean"></td><td data-field="success_rate">1</td><td data-field="wilson_low">0.700855</td><td data-field="wilson_high">1</td><td data-field="median_calls">553799</td><td data-field="mean_calls">599022</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">9</td></tr>
    </tbody></table></div>
    <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/hTST.html#Pt">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="Pt-legacy">
-   <h3>Legacy 2014 archive</h3>
+   <h3>Archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <summary>Archive</summary>
+   <p class="bench-legacy">Archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest barrier force calls first.</caption>
+   <caption>Fewest barrier force calls first.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -2464,7 +2464,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <td class="text">28 Jan 2013</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:11"></div><script type="application/json" class="bench-plot-data">{"metric": "barrier_force_calls", "scale": "log", "points": [{"id": "htst-pt-quench-dimer-qm", "entry": "quench_dimer-qm", "code": "TSASE", "value": 293200.0, "best": true, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-cg", "entry": "eon-dimer-cg", "code": "Eon r2006", "value": 496000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-cg2", "entry": "eon-lanczos-cg2", "code": "Eon r2006", "value": 653000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-cg", "entry": "eon-lanczos-cg", "code": "Eon r2006", "value": 673700.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-cg2", "entry": "eon-dimer-cg2", "code": "Eon r2006", "value": 727100.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-lbfgs", "entry": "eon-dimer-lbfgs", "code": "Eon r2006", "value": 778800.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-lbfgs2", "entry": "eon-dimer-lbfgs2", "code": "Eon r2006", "value": 1122000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-lbfgs", "entry": "eon-lanczos-lbfgs", "code": "Eon r2006", "value": 1284000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-lbfgs2", "entry": "eon-lanczos-lbfgs2", "code": "Eon r2006", "value": 1497000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-tsase-dimer-qm", "entry": "tsase-dimer-qm", "code": "TSASE", "value": 3239000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-alpha-dimer-qm", "entry": "alpha_dimer-qm", "code": "TSASE", "value": 19080000.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>Archive scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:11"></div><script type="application/json" class="bench-plot-data">{"metric": "barrier_force_calls", "scale": "log", "points": [{"id": "htst-pt-quench-dimer-qm", "entry": "quench_dimer-qm", "code": "TSASE", "value": 293200.0, "best": true, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-cg", "entry": "eon-dimer-cg", "code": "Eon r2006", "value": 496000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-cg2", "entry": "eon-lanczos-cg2", "code": "Eon r2006", "value": 653000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-cg", "entry": "eon-lanczos-cg", "code": "Eon r2006", "value": 673700.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-cg2", "entry": "eon-dimer-cg2", "code": "Eon r2006", "value": 727100.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-lbfgs", "entry": "eon-dimer-lbfgs", "code": "Eon r2006", "value": 778800.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-lbfgs2", "entry": "eon-dimer-lbfgs2", "code": "Eon r2006", "value": 1122000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-lbfgs", "entry": "eon-lanczos-lbfgs", "code": "Eon r2006", "value": 1284000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-lbfgs2", "entry": "eon-lanczos-lbfgs2", "code": "Eon r2006", "value": 1497000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-tsase-dimer-qm", "entry": "tsase-dimer-qm", "code": "TSASE", "value": 3239000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-alpha-dimer-qm", "entry": "alpha_dimer-qm", "code": "TSASE", "value": 19080000.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section>
    <h2 id="suite-accelerated-md">Accelerated molecular dynamics</h2>

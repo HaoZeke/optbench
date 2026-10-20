@@ -4,10 +4,34 @@ suite = "hTST"
 problem = "Pt"
 contract = "partial"
 entry_count = 11
-remark = "The start is the archive reactant. Ranked rows are harness scores of that start under the archive force and dimer stops. The 2014 table is a separate legacy mean."
+remark = "A start is one barrier window. The window closes when each reference barrier below 1.3 eV has been matched once from the processtable. Force calls are sad-fcs. The rate sum uses the search row's harmonic prefactor when the row carries one, and 1.2e12 otherwise. The stop is the maximum force on any atom. The potential is morse_pt. The optimizer iteration cap is 5000."
+
+[potential]
+evaluator = "morse_pt"
+kind = "morse"
+name = "morse_pt"
+D = 0.7102
+alpha = 1.6047
+r0 = 2.897
+cutoff = 9.5
+
+[htst]
+temperature = 700
+rate_ref = 155055901.244
+rate_accuracy = 0.999
+prefactor = 1.2e12
+kb = 8.6173324e-5
+barrier_ceiling = 1.3
+barriers = [0.601, 0.601, 0.620, 0.986, 0.987, 0.989, 0.986, 0.987, 0.989, 1.196, 1.196, 1.196, 1.196, 1.207, 1.207]
+
+[convergence]
+norm = "max_atom"
+force_norm = 0.001
+force_unit = "eV/Angstrom"
+max_iterations = 5000
 
 [sample]
-starts = 1
+starts = 9
 
 [input]
 archive_path = "website/hTST/Pt/eon-dimer-lbfgs2/pos.con"
@@ -25,6 +49,7 @@ par_factor = 2
 bootstrap_resamples = 2000
 bootstrap_seed = 20261015
 counter = "harness"
+cost = "one barrier window: sad-fcs summed until every reference barrier has been seen once"
 required = [
   "schema",
   "counter",

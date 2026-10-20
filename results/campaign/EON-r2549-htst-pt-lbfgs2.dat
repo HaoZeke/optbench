@@ -1,0 +1,24 @@
+barrier_jobs 6424
+barrier_force_calls 4.061e+06
+barrier_windows 9
+rate_jobs 106
+rate_force_calls  6.753e+04
+rate_windows 541
+searches 57824
+missed_barriers 0
+unexpected_barriers 0
+reference_processes 15
+code EON (SVN r2549)
+code_version r2549
+commit r2549
+counter htst-reducer
+reducer harness-htst
+contributor Rohit Goswami
+random_seed 42
+communicator_jobs 8
+passes 1808
+seconds 11226.9
+algorithm Dimer-LBFGS rotation: max=10, tol=1
+template eon-svn/htst-pt-lbfgs2
+problem hTST/Pt
+count_keys sad-fcs

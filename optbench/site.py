@@ -135,7 +135,11 @@ def _slug(text: str) -> str:
     return "".join(ch.lower() if ch.isalnum() else "-" for ch in text).strip("-")
 
 
-def _caption(primary: str | None) -> str:
+def _htst_archive(problem: dict) -> bool:
+    return str(problem.get("suite") or problem.get("id") or "").split("/")[0] == "hTST"
+
+
+def _caption(primary: str | None, *, plain: bool = False) -> str:
     captions = {
         "force_calls": "Fewest force calls first. Failures are left out of this mean.",
         "mean_epoch": "Fewest epochs first. Failures are left out of this mean.",
@@ -145,6 +149,8 @@ def _caption(primary: str | None) -> str:
         "true_rate": "Lowest rate first.",
     }
     detail = captions.get(primary or "", "The columns are the archived keys.")
+    if plain:
+        return detail
     return f"Legacy 2014 archive. {detail}"
 
 
@@ -264,6 +270,7 @@ def problem_html(
 
     ident = section_id or str(problem["problem"])
     title = heading_text or str(problem.get("title") or problem["problem"])
+    plain = _htst_archive(problem)
     lines = [f'<section class="bench bench-legacy-section" id="{html.escape(ident)}">']
     lines.append(f"<{heading}>{html.escape(title)}</{heading}>")
     if include_rule:
@@ -276,7 +283,7 @@ def problem_html(
     if smoke_note:
         lines.append(f'<p class="bench-smoke">{html.escape(smoke_note)}</p>')
     lines.append('<details class="bench-details">')
-    lines.append("<summary>Legacy 2014 archive</summary>")
+    lines.append("<summary>Archive</summary>" if plain else "<summary>Legacy 2014 archive</summary>")
 
     misses = _not_reproduced()
     prepared = []
@@ -307,15 +314,13 @@ def problem_html(
                 "current": bool(row.get("current")),
             }
         )
-    legacy = (
-        "Legacy 2014 archive. These rows stay in the published order. "
-        "They are not a v2 score."
-    )
+    lead = "Archive" if plain else "Legacy 2014 archive"
+    legacy = f"{lead}. These rows stay in the published order. They are not a v2 score."
     if any_miss:
         legacy += " A row marked not reproduced has a harness rerun outside the archive tolerance."
     lines.append(f'<p class="bench-legacy">{legacy}</p>')
     lines.append('<div class="bench-table"><table class="bench-legacy">')
-    lines.append(f"<caption>{html.escape(_caption(primary))}</caption>")
+    lines.append(f"<caption>{html.escape(_caption(primary, plain=plain))}</caption>")
     headers = ["", "Entry", "Code", *metrics, "Contributor", "Date"]
     lines.append("<thead><tr>")
     for index, header in enumerate(headers):
@@ -342,7 +347,7 @@ def problem_html(
             lines.append(f'<td class="{kind}">{html.escape(cell)}</td>')
         lines.append("</tr>")
     lines.append("</tbody></table></div>")
-    lines.append(_plot(prepared, primary, "Legacy 2014 scores"))
+    lines.append(_plot(prepared, primary, "Archive scores" if plain else "Legacy 2014 scores"))
     lines.append("</details>")
     lines.append("</section>")
     return "\n".join(lines)
@@ -394,12 +399,13 @@ def _rule_html(problem: dict, smoke_note: str = "") -> str:
 
 
 def _legacy_section(problem: dict, oracle: list[dict]) -> str:
+    heading = "Archive" if _htst_archive(problem) else "Legacy 2014 archive"
     return problem_html(
         problem,
         oracle,
         section_id=f"{problem['problem']}-legacy",
         heading="h3",
-        heading_text="Legacy 2014 archive",
+        heading_text=heading,
         include_rule=False,
     )
 

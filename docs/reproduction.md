@@ -14,7 +14,7 @@ Table 10 prints EON Lanczos 165. The archive file is 325. CI-NEB(3) prints 3 fai
 
 Endpoint minima are free-atom float32 deltas against the reactant, compressed. A file over 1 MB is a git-LFS pointer, not a loose blob.
 
-hTST/Pt/eon-dimer-lbfgs2 stays the archived paper row (Eon r2006): barrier_jobs 1626, barrier_force_calls 1.122e+06, rate_jobs 68, rate_force_calls 4.703e+04. EON (SVN r2549) and eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) are different codes. Stock harness scores on that reactant are 39163 and 41666 force calls. The gap is left as a finding.
+hTST/Pt/eon-dimer-lbfgs2 is the archive row (Eon r2006): barrier_jobs 1626, barrier_force_calls 1.122e+06, rate_jobs 68, rate_force_calls 4.703e+04. EON (SVN r2549) scores barrier_jobs 6424, barrier_force_calls 4.061e+06, rate_jobs 106, rate_force_calls 6.753e+04. eOn (develop 500350d9) scores barrier_jobs 1428, barrier_force_calls 5.990e+05, rate_jobs 47, rate_force_calls 1.980e+04. Both ran nine barrier windows on the archive reactant, with the max-atom force stop 0.001, the optimizer iteration cap 5000, and dimer rotations_max 10. The gaps are findings.
 
 ## accelerated-md
 
@@ -82,7 +82,7 @@ hTST/Pt/eon-dimer-lbfgs2 stays the archived paper row (Eon r2006): barrier_jobs 
 | Pt/eon-dimer-cg | barrier_force_calls 496000, barrier_jobs 1050, rate_force_calls 25630, rate_jobs 54 | 506000, 1062, 27160, 57 | reproduced |
 | Pt/eon-dimer-cg2 | — | — | not rerun |
 | Pt/eon-dimer-lbfgs | — | — | not rerun |
-| Pt/eon-dimer-lbfgs2 | — | — | not rerun; EON (SVN r2549) 39163, eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) 41666 |
+| Pt/eon-dimer-lbfgs2 | barrier_jobs 1626, barrier_force_calls 1.122e+06, rate_jobs 68, rate_force_calls 4.703e+04 | EON (SVN r2549) 6424, 4.061e+06, 106, 6.753e+04; eOn (develop 500350d9) 1428, 5.990e+05, 47, 1.980e+04 | archive row |
 | Pt/eon-lanczos-cg | — | — | not rerun |
 | Pt/eon-lanczos-cg2 | — | — | not rerun |
 | Pt/eon-lanczos-lbfgs | — | — | not rerun |

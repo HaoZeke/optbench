@@ -1299,12 +1299,13 @@ def _show_per_image(problem: dict) -> bool:
 
 
 def _headers(problem: dict) -> list[str]:
+    newest = "Newest" if str(problem.get("id") or "").startswith("hTST/") else "Current"
     headers = [
         "Template",
         "Version",
         "Commit",
         "Source",
-        "Current",
+        newest,
         "PAR-2",
         "Success",
         "Wilson low",

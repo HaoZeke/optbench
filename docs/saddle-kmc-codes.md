@@ -12,6 +12,28 @@ LAMMPS calculator that calls it. The harness has no EAM evaluator. hTST and
 accelerated-md problems state rates and barriers, not a force-call cap, so
 they are not given a force-call row.
 
+## EON and eOn
+
+EON is the SVN code at https://theory.cm.utexas.edu/svn/eon. eOn is the git
+code at https://eondocs.org and https://github.com/TheochemUI/eon. They are
+different codes. The registry names are `EON (SVN r2549)` and
+`eOn (develop 500350d9)`. The pin named `Eon svn` stays for the other r2549
+templates. The pin named `eOn` at
+`7095b23ac17d49f434a5e08ccb072897ceca698e` stays for the templates run on
+that commit.
+
+The hTST/Pt dimer LBFGS archive row is the paper number: Eon r2006,
+barrier jobs 1626, barrier force calls 1.122e+06, rate jobs 68, rate force
+calls 4.703e+04. Two stock, untuned runs use that problem, 9 starts, the
+max-atom force stop 0.001, and the optimizer iteration cap 5000.
+
+| Code | Template | barrier jobs | barrier force calls | rate jobs | rate force calls |
+| --- | --- | --- | --- | --- | --- |
+| EON (SVN r2549) | eon-svn/htst-pt-lbfgs2 | 6424 | 4.061e+06 | 106 | 6.753e+04 |
+| eOn (develop 500350d9) | eon/develop-htst-pt-lbfgs2 | 1428 | 5.990e+05 | 47 | 1.980e+04 |
+
+The gaps against the archive are findings.
+
 ## Rows on disk
 
 Failure classes are the v2 counts. They sum to `nfailed`. The median is the
