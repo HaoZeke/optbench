@@ -2,11 +2,13 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+46 reproduced, 30 not reproduced, 75 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
 OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.
+
+SciPy 1.18.1 L-BFGS-B is the stock minimizer on the LJ38 harness stop. The success mean is 221.439 against the archive 230. Default ftol leaves 262 starts above force norm 0.01.
 
 EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.
 
@@ -130,7 +132,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj38/pele-lbfgs-M4-maxstep0.05 | force_calls 379 | 381 | reproduced |
 | lj38/pele-lbfgs-M4-maxstep0.1 | force_calls 249 | 248 | reproduced |
 | lj38/pele-lbfgs-M4-maxstep0.2 | force_calls 230 | 228 | reproduced |
-| lj38/scipy-lbfgs | — | — | not rerun |
+| lj38/scipy-lbfgs | force_calls 230, force_calls_min 105, force_calls_max 545 | 221, 97, 519 | not reproduced; scipy_stock_ftol |
 | lj38/tsase-sdlbfgs | — | — | not rerun |
 | morse-bulk/ase-fire | force_calls 147.47 | 113 | not reproduced; ase_morse_script |
 | morse-bulk/ase-lbfgs | force_calls 53.8 | 32 | not reproduced; ase_morse_script |
@@ -298,6 +300,12 @@ ASE 3.29 PreconLBFGS with the archived opt.py setup (Exp A 3, maxstep 0.1, ASE f
 pele FIRE on LJ38 scores 1264 with 7 failures. The archive is 709 with 0 failures. The M100 L-BFGS row on the same build reproduces, so this is the FIRE step, not the LJ kernel.
 
 - minimization/lj38/pele-fire
+
+### scipy_stock_ftol
+
+SciPy 1.18.1 L-BFGS-B keeps the library defaults. The success mean is 221 against the archive 230, and the success min and max are inside 10 percent. Default ftol stops 262 of 1000 starts above the Euclidean force norm 0.01, so nfailed is outside the Wilson interval. The gap is that stock stop. It is not tuned.
+
+- minimization/lj38/scipy-lbfgs
 
 ### ase_morse_script
 

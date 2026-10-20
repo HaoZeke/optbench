@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>SciPy</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="minimization/lj38">
    <th scope="row"><a href="#lj38">Lennard-Jones 38 clusters</a></th>
    <td data-code="eOn" data-template="eon/lj38-lbfgs-m100" data-par2="180.137"><span class="bench-score">180.137</span><a href="#lj38-templates">eon/lj38-lbfgs-m100</a></td>
@@ -17,6 +17,7 @@
    <td data-code="ASE" data-template="ase/lj38-lbfgs-tuned" data-par2="395.645"><span class="bench-score">395.645</span><a href="#lj38-templates">ase/lj38-lbfgs-tuned</a></td>
    <td data-code="Sella" data-template="sella/lj38-min-tuned" data-par2="253.921"><span class="bench-score">253.921</span><a href="#lj38-templates">sella/lj38-min-tuned</a></td>
    <td data-code="pysisyphus" data-template="pysisyphus/cg-lj38" data-par2="15124.7"><span class="bench-score">15124.7</span><a href="#lj38-templates">pysisyphus/cg-lj38</a></td>
+   <td data-code="SciPy" data-template="scipy/lj38-lbfgs" data-par2="5403.42"><span class="bench-score">5403.42</span><a href="#lj38-templates">scipy/lj38-lbfgs</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind" data-template="dlfind/lbfgs-lj38" data-par2="231.908"><span class="bench-score">231.908</span><a href="#lj38-templates">dlfind/lbfgs-lj38</a></td>
@@ -33,6 +34,7 @@
    <td data-code="ASE" data-template="noise/ase-lbfgs-s0" data-par2="396.55"><span class="bench-score">396.55</span><a href="#lj38-noise-templates">noise/ase-lbfgs-s0</a></td>
    <td data-code="Sella" data-template="noise/sella-min-s0" data-par2="729.433"><span class="bench-score">729.433</span><a href="#lj38-noise-templates">noise/sella-min-s0</a></td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="SciPy">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind" data-template="dlfind/lbfgs-lj38-noise-s0" data-par2="231.908"><span class="bench-score">231.908</span><a href="#lj38-noise-templates">dlfind/lbfgs-lj38-noise-s0</a></td>
@@ -49,6 +51,7 @@
    <td data-code="ASE" data-template="ase/morse-bfgslinesearch-default" data-par2="28.91"><span class="bench-score">28.91</span><a href="#morse-bulk-templates">ase/morse-bfgslinesearch-default</a></td>
    <td data-code="Sella" data-template="sella/morse-min-default" data-par2="28.89"><span class="bench-score">28.89</span><a href="#morse-bulk-templates">sella/morse-min-default</a></td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="SciPy">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind" data-template="dlfind/lbfgs-morse" data-par2="13626.5"><span class="bench-score">13626.5</span><a href="#morse-bulk-templates">dlfind/lbfgs-morse</a></td>
@@ -70,7 +73,7 @@
    <figure class="bench-plot"><a href="../../_static/board/minimization-lj38-profile.svg"><picture><source srcset="../../_static/board/minimization-lj38-profile.webp" type="image/webp"><img src="../../_static/board/minimization-lj38-profile.png" alt="Dolan-More profile for minimization/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/minimization-lj38-cost.svg"><picture><source srcset="../../_static/board/minimization-lj38-cost.webp" type="image/webp"><img src="../../_static/board/minimization-lj38-cost.png" alt="Cost versus success for minimization/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="lj38-templates">
-   <summary>All templates (102 ranked)</summary>
+   <summary>All templates (103 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="minimization/lj38">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
@@ -163,6 +166,7 @@
    <tr><td data-field="template">dlfind/sd-lj38</td><td data-field="version">dlfind 0.0.3</td><td data-field="commit">4167998d16d8</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">3093.74</td><td data-field="success_rate">0.99</td><td data-field="wilson_low">0.981691</td><td data-field="wilson_high">0.994559</td><td data-field="median_calls">2577</td><td data-field="mean_calls">2993.74</td><td data-field="failures">crash 0, divergence 0, cap 10, wrong_stationary 0</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">lammps/quickmin-lj38</td><td data-field="version">lammps 30 Sep 2026</td><td data-field="commit">8de817dd79bf</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">3138.21</td><td data-field="success_rate">0.991</td><td data-field="wilson_low">0.982984</td><td data-field="wilson_high">0.995258</td><td data-field="median_calls">2545</td><td data-field="mean_calls">3020.94</td><td data-field="failures">crash 0, divergence 5, cap 0, wrong_stationary 4</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">lammps/cg-lj38</td><td data-field="version">lammps 30 Sep 2026</td><td data-field="commit">8de817dd79bf</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">4361.3</td><td data-field="success_rate">0.848</td><td data-field="wilson_low">0.824419</td><td data-field="wilson_high">0.868917</td><td data-field="median_calls">1550.5</td><td data-field="mean_calls">2810.32</td><td data-field="failures">crash 0, divergence 1, cap 148, wrong_stationary 3</td><td data-field="n">1000</td></tr>
+   <tr><td data-field="template">scipy/lj38-lbfgs</td><td data-field="version">SciPy 1.18.1</td><td data-field="commit">1.18.1</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">5403.42</td><td data-field="success_rate">0.738</td><td data-field="wilson_low">0.709872</td><td data-field="wilson_high">0.764306</td><td data-field="median_calls">211</td><td data-field="mean_calls">221.803</td><td data-field="failures">crash 0, divergence 262, cap 0, wrong_stationary 0</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">lammps/fire-lj38</td><td data-field="version">lammps 30 Sep 2026</td><td data-field="commit">8de817dd79bf</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">5844.9</td><td data-field="success_rate">0.727</td><td data-field="wilson_low">0.698559</td><td data-field="wilson_high">0.753704</td><td data-field="median_calls">413</td><td data-field="mean_calls">421.053</td><td data-field="failures">crash 0, divergence 224, cap 0, wrong_stationary 49</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">rgmin/lj38-sd</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">8392.75</td><td data-field="success_rate">0.797</td><td data-field="wilson_low">0.770955</td><td data-field="wilson_high">0.820772</td><td data-field="median_calls">6099</td><td data-field="mean_calls">6350.19</td><td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 3</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">rgmin/lj38-sd</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">f15726f1c798</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">8392.75</td><td data-field="success_rate">0.797</td><td data-field="wilson_low">0.770955</td><td data-field="wilson_high">0.820772</td><td data-field="median_calls">6099</td><td data-field="mean_calls">6350.19</td><td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 3</td><td data-field="n">1000</td></tr>
@@ -256,6 +260,7 @@
    <li>pele-lbfgs-M4-maxstep0.05: no per-start record</li>
    <li>pele-lbfgs-M4-maxstep0.1: no per-start record</li>
    <li>pele-lbfgs-M4-maxstep0.2: no per-start record</li>
+   <li>pele/lj38-scipy-lbfgs: no per-start record</li>
    </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="lj38-legacy">
@@ -355,7 +360,7 @@
    </tr>
    <tr id="minimization-lj38-scipy-lbfgs">
    <td class="num">8</td>
-   <td class="text">scipy-lbfgs</td>
+   <td class="text">scipy-lbfgs · not reproduced</td>
    <td class="text">pele</td>
    <td class="num">2.30000e+02</td>
    <td class="num">5.4500e+02</td>

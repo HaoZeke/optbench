@@ -124,7 +124,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="minimization-lj38-scipy-lbfgs">
    <td class="num">8</td>
-   <td class="text">scipy-lbfgs</td>
+   <td class="text">scipy-lbfgs · not reproduced</td>
    <td class="text">pele</td>
    <td class="num">2.30000e+02</td>
    <td class="num">5.4500e+02</td>
