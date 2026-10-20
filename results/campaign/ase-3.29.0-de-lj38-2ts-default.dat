@@ -1,5 +1,9 @@
-nfailed 51
-starts 51
+force_calls 123762
+force_calls_min 15957
+force_calls_median 127774.5
+force_calls_max 228202
+nfailed 6
+starts 26
 code ASE
 code_version 3.29.0
 commit f27c0005ae6a67ea419f996e728668865bfc1f86
@@ -10,9 +14,23 @@ problem double-ended-saddle-search/lj38_2ts_separation
 counter harness
 reducer capped
 parameter_source default
-method {"counter":"harness calculator force evaluations","parameter_source":"default","parameters":{"Nmin":5,"a":0.1,"astart":0.1,"climb":false,"downhill_check":false,"dt":0.01061073048916069,"dtmax":1.0,"fa":0.99,"fdec":0.5,"finc":1.1,"maxstep":0.2,"method":"improvedtangent","moving_images":5,"spring":0.1},"potential":{"epsilon":1.0,"kind":"lennard-jones","pbc":[false,false,false],"rc":40.0,"sigma":1.0},"profile":"default","reducer":"capped","stop":{"force_norm":0.001,"max_force_calls":2500,"max_steps":1000,"norm":"fmax"}}
-note ASE NEB defaults on the same pairs: spring 0.1, climb off, FIRE, cap 2500.
+method {"counter":"harness attach_ase_counter","parameter_source":"default","parameters":{"Nmin":5,"a":0.1,"astart":0.1,"climb":false,"downhill_check":false,"dt":0.011352812917316053,"dtmax":1.0,"fa":0.99,"fdec":0.5,"finc":1.1,"maxstep":0.2,"method":"improvedtangent","moving_images":5,"spring":0.1},"potential":{"epsilon":1.0,"kind":"lennard-jones","pbc":[false,false,false],"rc":40.0,"sigma":1.0},"profile":"default","reducer":"capped","stop":{"force_norm":0.001,"max_force_calls":250000,"max_steps":250000,"norm":"fmax"}}
+note ASE NEB defaults on the same pairs: spring 0.1, climb off, FIRE. The stop is the problem cap of 250000 force calls and fmax 0.001. archive/entries/double-ended-saddle-search/lj38_2ts_separation/pele/benchmark.dat records an observed maximum of 114490 force calls, and the archive ran uncapped. v2 success is the harness cap and the template fmax stop. The band has no reference saddle, so the Hessian and Kabsch RMSD are not applied.
 host cursor
-date 2026-10-15
+date 2026-10-20
 contributor Rohit Goswami
-transition_states 0
+scoring par2-wilson-bootstrap
+par2_mean 210586.5385
+par2_median 158712
+par2_median_low 116664.5
+par2_median_high 201117
+par2_iqr 146908.75
+success_rate 0.7692307692
+wilson_low 0.5794844592
+wilson_high 0.8896615059
+par_applied true
+par_factor 2
+bootstrap_resamples 2000
+bootstrap_seed 20261015
+partial true
+transition_states 20

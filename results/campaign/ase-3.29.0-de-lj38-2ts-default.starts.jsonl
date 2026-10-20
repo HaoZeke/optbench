@@ -1,51 +1,26 @@
-{"failed": true, "force_calls": 2500, "force_norm": 0.12252094131181916, "parameters": {"Nmin": 5, "a": 0.1, "astart": 0.1, "climb": false, "downhill_check": false, "dt": 0.01061073048916069, "dtmax": 1.0, "fa": 0.99, "fdec": 0.5, "finc": 1.1, "maxstep": 0.2, "method": "improvedtangent", "moving_images": 5, "spring": 0.1}, "start": "0000"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.020397848755951315, "start": "0001"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.07305538160851419, "start": "0002"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.13889201838712772, "start": "0003"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.03540164038475533, "start": "0004"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.5181404348327027, "start": "0005"}
-{"failed": true, "force_calls": 2500, "force_norm": 1.1136300925399196, "start": "0006"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.028038932294375103, "start": "0007"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.16307662576303666, "start": "0008"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.41162618500315773, "start": "0009"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.027021888993592726, "start": "0010"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.09251662664815374, "start": "0011"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.2911438215919954, "start": "0012"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.034104562512655354, "start": "0013"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.041058170210688597, "start": "0014"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.4135446734828384, "start": "0015"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.06421881625878405, "start": "0016"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.17688449685659055, "start": "0017"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.07408222389980568, "start": "0018"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.06611081590033221, "start": "0019"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.37246398530669333, "start": "0020"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.18245412189794608, "start": "0021"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.00751134604531208, "start": "0022"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.1630488681674836, "start": "0023"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.2604732947229267, "start": "0024"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.09009832955066889, "start": "0025"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.19824009386558009, "start": "0026"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.026835808328485575, "start": "0027"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.26587744404399133, "start": "0028"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.25222688301496793, "start": "0029"}
-{"failed": true, "force_calls": 2500, "force_norm": 1.5795469395207222, "start": "0030"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.15822701943645076, "start": "0031"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.04274119478200653, "start": "0032"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.8283825442869687, "start": "0033"}
-{"failed": true, "force_calls": 2500, "force_norm": 1.1159978720736168, "start": "0034"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.03131467540788813, "start": "0035"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.19364255338742425, "start": "0036"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.1767182630997127, "start": "0037"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.03930034141435817, "start": "0038"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.018179506173856053, "start": "0039"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.05580387080310048, "start": "0040"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.05627783278686877, "start": "0041"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.06072768951561924, "start": "0042"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.0393521823701764, "start": "0043"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.12209394042926972, "start": "0044"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.021806812960722684, "start": "0045"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.025760617140319523, "start": "0046"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.04363951771065197, "start": "0047"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.16393988292779757, "start": "0048"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.01897807291885776, "start": "0049"}
-{"failed": true, "force_calls": 2500, "force_norm": 0.13712593385454971, "start": "0050"}
+{"comparable": true, "converged": true, "counter": "harness", "failed": false, "force_calls": 56082, "force_norm": 0.0009182628413082439, "reasons": [], "reference": "none", "schema": "optbench.start/v2", "seed": 0, "start": "0007", "success": true, "verify_calls": 0}
+{"comparable": true, "converged": true, "counter": "harness", "failed": false, "force_calls": 128497, "force_norm": 0.0009863465393994478, "reasons": [], "reference": "none", "schema": "optbench.start/v2", "seed": 0, "start": "0003", "success": true, "verify_calls": 0}
+{"comparable": true, "converged": true, "counter": "harness", "failed": false, "force_calls": 160082, "force_norm": 0.0009176934142137029, "parameters": {"Nmin": 5, "a": 0.1, "astart": 0.1, "climb": false, "downhill_check": false, "dt": 0.011352812917316053, "dtmax": 1.0, "fa": 0.99, "fdec": 0.5, "finc": 1.1, "maxstep": 0.2, "method": "improvedtangent", "moving_images": 5, "spring": 0.1}, "reasons": [], "reference": "none", "schema": "optbench.start/v2", "seed": 0, "start": "0000", "success": true, "verify_calls": 0}
+{"comparable": true, "converged": true, "counter": "harness", "failed": false, "force_calls": 164737, "force_norm": 0.0009539558095490024, "reasons": [], "reference": "none", "schema": "optbench.start/v2", "seed": 0, "start": "0001", "success": true, "verify_calls": 0}
+{"comparable": true, "converged": true, "counter": "harness", "failed": false, "force_calls": 167862, "force_norm": 0.0009476317441499154, "reasons": [], "reference": "none", "schema": "optbench.start/v2", "seed": 0, "start": "0006", "success": true, "verify_calls": 0}
+{"comparable": true, "converged": true, "counter": "harness", "failed": false, "force_calls": 27592, "force_norm": 0.0009288101619340078, "reasons": [], "reference": "none", "schema": "optbench.start/v2", "seed": 0, "start": "0011", "success": true, "verify_calls": 0}
+{"comparable": true, "converged": true, "counter": "harness", "failed": false, "force_calls": 201117, "force_norm": 0.0008401337790624275, "reasons": [], "reference": "none", "schema": "optbench.start/v2", "seed": 0, "start": "0002", "success": true, "verify_calls": 0}
+{"comparable": true, "converged": true, "counter": "harness", "failed": false, "force_calls": 227757, "force_norm": 0.0009572380969824736, "reasons": [], "reference": "none", "schema": "optbench.start/v2", "seed": 0, "start": "0005", "success": true, "verify_calls": 0}
+{"comparable": true, "converged": false, "counter": "harness", "failed": true, "force_calls": 250000, "force_norm": 0.0016570570566050802, "reasons": ["cap", "force_norm"], "reference": "none", "schema": "optbench.start/v2", "seed": 0, "start": "0004", "success": false, "verify_calls": 0}
+{"comparable": true, "converged": true, "counter": "harness", "failed": false, "force_calls": 69967, "force_norm": 0.0009412254104560274, "reasons": [], "reference": "none", "schema": "optbench.start/v2", "seed": 0, "start": "0013", "success": true, "verify_calls": 0}
+{"comparable": true, "converged": true, "counter": "harness", "failed": false, "force_calls": 170607, "force_norm": 0.0009693871407726175, "reasons": [], "reference": "none", "schema": "optbench.start/v2", "seed": 0, "start": "0009", "success": true, "verify_calls": 0}
+{"comparable": true, "converged": false, "counter": "harness", "failed": true, "force_calls": 250000, "force_norm": 1.2940522123795286, "reasons": ["cap", "force_norm"], "reference": "none", "schema": "optbench.start/v2", "seed": 0, "start": "0008", "success": false, "verify_calls": 0}
+{"comparable": true, "converged": true, "counter": "harness", "failed": false, "force_calls": 152647, "force_norm": 0.0008612616425342282, "reasons": [], "reference": "none", "schema": "optbench.start/v2", "seed": 0, "start": "0010", "success": true, "verify_calls": 0}
+{"comparable": true, "converged": true, "counter": "harness", "failed": false, "force_calls": 72817, "force_norm": 0.0008023198134186499, "reasons": [], "reference": "none", "schema": "optbench.start/v2", "seed": 0, "start": "0017", "success": true, "verify_calls": 0}
+{"comparable": true, "converged": true, "counter": "harness", "failed": false, "force_calls": 106277, "force_norm": 0.0009767914233567918, "reasons": [], "reference": "none", "schema": "optbench.start/v2", "seed": 0, "start": "0015", "success": true, "verify_calls": 0}
+{"comparable": true, "converged": true, "counter": "harness", "failed": false, "force_calls": 59407, "force_norm": 0.0008931228855560042, "reasons": [], "reference": "none", "schema": "optbench.start/v2", "seed": 0, "start": "0020", "success": true, "verify_calls": 0}
+{"comparable": true, "converged": true, "counter": "harness", "failed": false, "force_calls": 15957, "force_norm": 0.0007136443968054943, "reasons": [], "reference": "none", "schema": "optbench.start/v2", "seed": 0, "start": "0023", "success": true, "verify_calls": 0}
+{"comparable": true, "converged": true, "counter": "harness", "failed": false, "force_calls": 63572, "force_norm": 0.0009595880834489712, "reasons": [], "reference": "none", "schema": "optbench.start/v2", "seed": 0, "start": "0022", "success": true, "verify_calls": 0}
+{"comparable": true, "converged": false, "counter": "harness", "failed": true, "force_calls": 250000, "force_norm": 0.14679488516505512, "reasons": ["cap", "force_norm"], "reference": "none", "schema": "optbench.start/v2", "seed": 0, "start": "0012", "success": false, "verify_calls": 0}
+{"comparable": true, "converged": false, "counter": "harness", "failed": true, "force_calls": 250000, "force_norm": 0.01594184808829275, "reasons": ["cap", "force_norm"], "reference": "none", "schema": "optbench.start/v2", "seed": 0, "start": "0014", "success": false, "verify_calls": 0}
+{"comparable": true, "converged": true, "counter": "harness", "failed": false, "force_calls": 127052, "force_norm": 0.0008929857581518417, "reasons": [], "reference": "none", "schema": "optbench.start/v2", "seed": 0, "start": "0021", "success": true, "verify_calls": 0}
+{"comparable": true, "converged": true, "counter": "harness", "failed": false, "force_calls": 228202, "force_norm": 0.0009479643161583456, "reasons": [], "reference": "none", "schema": "optbench.start/v2", "seed": 0, "start": "0016", "success": true, "verify_calls": 0}
+{"comparable": true, "converged": true, "counter": "harness", "failed": false, "force_calls": 157342, "force_norm": 0.0009703703131126217, "reasons": [], "reference": "none", "schema": "optbench.start/v2", "seed": 0, "start": "0024", "success": true, "verify_calls": 0}
+{"comparable": true, "converged": false, "counter": "harness", "failed": true, "force_calls": 250000, "force_norm": 0.12168233794868921, "reasons": ["cap", "force_norm"], "reference": "none", "schema": "optbench.start/v2", "seed": 0, "start": "0018", "success": false, "verify_calls": 0}
+{"comparable": true, "converged": false, "counter": "harness", "failed": true, "force_calls": 250000, "force_norm": 0.0018566373777997548, "reasons": ["cap", "force_norm"], "reference": "none", "schema": "optbench.start/v2", "seed": 0, "start": "0019", "success": false, "verify_calls": 0}
+{"comparable": true, "converged": true, "counter": "harness", "failed": false, "force_calls": 117677, "force_norm": 0.0007984976559867659, "reasons": [], "reference": "none", "schema": "optbench.start/v2", "seed": 0, "start": "0028", "success": true, "verify_calls": 0}
