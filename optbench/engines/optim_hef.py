@@ -10,7 +10,9 @@ second-order central-difference expansion. That is ``BFGSTS`` with
 ``NEVS`` and ``NEVL``, the eigenvector iteration limits, are that cap
 too. ``NBFGSMAX1`` and ``NBFGSMAX2`` stay at the source defaults 10 and
 100, and ``CEIG`` stays ``1.0D-10``. ``BFGSCONV`` is the problem
-Euclidean force norm over ``sqrt(3N)``. ``NOHESS`` is set because the
+Euclidean force norm over ``sqrt(3 N_free)``. With ``FREEZE``, OPTIM's
+RMS divides by ``NOPT - 3*NFREEZE``, so ``N`` is the free atoms.
+``NOHESS`` is set because the
 ASE potential returns energy and gradient only. The initial mode is
 the displacement from the reactant, and fixed atoms are the con file's
 frozen list. Each ``COMPUTE`` is one harness evaluation of
@@ -47,6 +49,20 @@ def binary_path() -> Path:
     if env:
         return Path(env)
     return _BUILT
+
+
+def rms_stop(force_norm: float, n_free: int) -> float:
+    """RMS that makes OPTIM stop at the free-atom Euclidean norm.
+
+    ``potential.F90`` zeros frozen gradients and sets
+    ``RMSDOF = NOPT - 3*NFREEZE``. ``RMS`` is ``||g_free|| / sqrt(RMSDOF)``.
+    ``BFGSCONV`` has to use that denominator. Dividing by every atom
+    asks for ``||g_free|| < force_norm * sqrt(N_free / N)``.
+    """
+    count = int(n_free)
+    if count < 1:
+        raise ValueError("BFGSCONV needs at least one free atom")
+    return float(force_norm) / math.sqrt(3 * count)
 
 
 def odata_text(python: str, hook: Path, periodic: bool, gmax: float, steps: int, frozen: np.ndarray) -> str:
@@ -89,7 +105,7 @@ def _execute(job: dict) -> dict:
     force_norm = float(job["force_norm"])
     box = None if job["box"] is None else np.asarray(job["box"], dtype=np.float64)
     natoms = int(positions.shape[0])
-    gmax = force_norm / math.sqrt(3 * natoms)
+    gmax = rms_stop(force_norm, int(np.count_nonzero(free)))
     binary = Path(job["binary"])
     point = None
     energy = None
@@ -293,7 +309,7 @@ def run_hef(root: Path, problem: dict, template: dict, output: Path, workers: in
         f"# OPTIM {SVNREV} from {TARBALL} sha256 {TARBALL_SHA256}. "
         "BFGSTS with USEDIAG 2. NEVS, NEVL, BFGSSTEPS, and STEPS are the problem cap. "
         "NBFGSMAX1 10, NBFGSMAX2 100, and CEIG 1.0D-10 are the source defaults. "
-        "BFGSCONV is the Euclidean force norm over sqrt(3N). "
+        "BFGSCONV is the Euclidean force norm over sqrt(3 N_free). "
         "NOHESS because ASE returns no Hessian. READVEC is initial minus reactant. "
         "A success is under the cap, at the force stop, and Hessian index 1."
     )

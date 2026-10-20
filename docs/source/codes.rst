@@ -1090,9 +1090,9 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">optim/hef-ts-pt</td>
    <td data-field="version">OPTIM df8da599</td>
    <td data-field="commit">738fafe3df5a</td>
-   <td data-field="par2_mean">843</td>
-   <td data-field="mean_calls">843</td>
-   <td data-field="median_calls">893</td>
+   <td data-field="par2_mean">831.408</td>
+   <td data-field="mean_calls">831.408</td>
+   <td data-field="median_calls">797</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">49</td>
    </tr>

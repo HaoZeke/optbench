@@ -4,7 +4,9 @@ from pathlib import Path
 
 import numpy as np
 
-from optbench.engines.optim_hef import SVNREV, TARBALL_SHA256, log_counters, odata_text
+import math
+
+from optbench.engines.optim_hef import SVNREV, TARBALL_SHA256, log_counters, odata_text, rms_stop
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -30,6 +32,15 @@ def test_odata_uses_central_differences_and_the_problem_cap():
     assert 'method = "hef"' in template
     assert "df8da599" in template
     assert TARBALL_SHA256 in template
+
+
+def test_bfgsconv_counts_free_atoms_only():
+    # Pt island: 343 atoms, 168 frozen, 175 free. OPTIM RMSDOF = 3*175.
+    free_rms = rms_stop(0.001, 175)
+    all_atom_rms = 0.001 / math.sqrt(3 * 343)
+    assert free_rms == 0.001 / math.sqrt(3 * 175)
+    assert free_rms > all_atom_rms
+    assert abs(0.001 * math.sqrt(175 / 343) - 0.0007142857142857143) < 1e-15
 
 
 def test_harness_count_is_the_energy_gradient_tally_not_rayleigh_ritz_steps():
