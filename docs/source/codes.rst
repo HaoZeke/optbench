@@ -1093,10 +1093,10 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">scipy/lj38-lbfgs</td>
    <td data-field="version">SciPy 1.18.1</td>
    <td data-field="commit">1.18.1</td>
-   <td data-field="par2_mean">5403.42</td>
-   <td data-field="mean_calls">221.803</td>
+   <td data-field="par2_mean">222.258</td>
+   <td data-field="mean_calls">222.258</td>
    <td data-field="median_calls">211</td>
-   <td data-field="failures">crash 0, divergence 262, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
    </tbody></table></div>

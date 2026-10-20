@@ -111,7 +111,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
-    "repro/minimization-lj38-scipy-lbfgs": "d81f064081d64b9bfdfff03cbc61e8d60eb42f89",
+    "repro/minimization-lj38-scipy-lbfgs": "1c1cd79ca71e3f9cd1b755b096134b265b7fe8d7",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -138,7 +138,7 @@ MATCHES: list[dict] = [
     {"key": "minimization/lj38/pele-lbfgs-M4-maxstep0.05", "template": "pele-lbfgs-M4-maxstep0.05", "branch": "main", "path": "results/campaign/pele-0.1.2-lbfgs-M4-maxstep0.05.dat"},
     {"key": "minimization/lj38/pele-lbfgs-M4-maxstep0.1", "template": "pele-lbfgs-M4-maxstep0.1", "branch": "main", "path": "results/campaign/pele-0.1.2-lbfgs-M4-maxstep0.1.dat"},
     {"key": "minimization/lj38/pele-lbfgs-M4-maxstep0.2", "template": "pele-lbfgs-M4-maxstep0.2", "branch": "main", "path": "results/campaign/pele-0.1.2-lbfgs-M4-maxstep0.2.dat"},
-    {"key": "minimization/lj38/scipy-lbfgs", "template": "scipy/lj38-lbfgs", "branch": "repro/minimization-lj38-scipy-lbfgs", "path": "results/campaign/scipy-1.18.1-lj38-lbfgs.dat", "metrics": ["force_calls", "force_calls_min", "force_calls_max"], "cause": "scipy_stock_ftol", "extra": {"unrounded_mean": 221.4390243902439}},
+    {"key": "minimization/lj38/scipy-lbfgs", "template": "scipy/lj38-lbfgs", "branch": "repro/minimization-lj38-scipy-lbfgs", "path": "results/campaign/scipy-1.18.1-lj38-lbfgs.dat", "metrics": ["force_calls", "force_calls_min", "force_calls_max"], "extra": {"unrounded_mean": 222.258}},
     {"key": "minimization/lj38/pele-fire", "template": "pele/lj38-fire", "branch": "cells/pele/min", "path": "results/campaign/pele-b7081b93-lj38-fire.dat", "cause": "pele_fire"},
     # minimization / morse
     {"key": "minimization/morse-bulk/eon-lbfgs", "template": "eon-client/morse-lbfgs", "branch": "main", "path": "results/campaign/eon-client-morse-lbfgs.dat"},
@@ -255,12 +255,6 @@ CAUSE_TEXT = {
     "improved_unset": "The r2549 template turns improved on. The 2014 ini left that key unset. The mean lands outside 10 percent.",
     "sella_trust": "Sella 2.6.0 with the archived trust-region numbers (eta, gamma, delta0, rho, sigma) is the parameter_source=archive row. It misses the 2014 mean. The constructor-default row is a different setup.",
     "heptamer_cg": "The 3.5.0 file already stores the per-image mean, 142 against the archive 120. L-BFGS, FIRE, and QM on the same 8-image spring-5 climb reproduce, so the image count is not the split.",
-    "scipy_stock_ftol": (
-        "SciPy 1.18.1 L-BFGS-B keeps the library defaults. "
-        "The success mean is 221 against the archive 230, and the success min and max are inside 10 percent. "
-        "Default ftol stops 262 of 1000 starts above the Euclidean force norm 0.01, so nfailed is outside the Wilson interval. "
-        "The gap is that stock stop. It is not tuned."
-    ),
     "de_exclusion": "The 3.5.0 doubly-nudged file is the per-band mean under the 2500-call exclusion (708, 5 failures). The archive mean is 861. The client total is a different counter and is also outside 10 percent.",
     "eon_saddle_count": (
         "The classic dimer campaign (improved false, the 2014 key) has fraction_connected 0.692 against 0.746, inside 10 percent, "
@@ -532,8 +526,7 @@ def holdback(root: Path) -> Hold:
         problem = f"{row['suite']}/{row['problem']}"
         template = str(rerun.get("template") or "")
         rel = str(rerun.get("path") or "")
-        # SciPy 1.18.1 is the ranked stock row beside the archive. Its nfailed gap stays a finding.
-        if row.get("status") == "not_reproduced" and rel != "results/campaign/scipy-1.18.1-lj38-lbfgs.dat":
+        if row.get("status") == "not_reproduced":
             if template:
                 found.templates.add((problem, template))
             if rel:
@@ -827,7 +820,7 @@ def render_markdown(rows: list[dict]) -> str:
         "",
         "OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.",
         "",
-        "SciPy 1.18.1 L-BFGS-B is the stock minimizer on the LJ38 harness stop. The success mean is 221.439 against the archive 230. Default ftol leaves 262 starts above force norm 0.01.",
+        "SciPy 1.18.1 L-BFGS-B stops on the LJ38 Euclidean force norm 0.01. ftol is 0, and maxfun and maxiter are the 10000 cap. The success mean is 222.258 against the archive 230.",
         "",
         "EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.",
         "",
