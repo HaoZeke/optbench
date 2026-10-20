@@ -87,6 +87,11 @@ PUBLISHED_LJ38_ENERGY = -173.9284262
 DEFAULT_SEED = 314159
 MAX_HOPS = 1_000_000
 FAILED_QUENCHES = 50
+# A healthy line search reads one geometry a handful of times. ASE's
+# BFGSLineSearch, which is what ``QuasiNewton`` names in ASE 3.29, can
+# also propose one clamped step forever on an overlapped cluster. Accept
+# that step before the repeated-geometry guard stops the search.
+STUCK_LINE_STEPS = 15
 
 
 class Exploded(Exception):
@@ -465,6 +470,124 @@ def _run_basin(job: dict, positions: np.ndarray, counter: HarnessCounter) -> str
     return ""
 
 
+class _DiscardTrajectory:
+    """Stand-in for the per-step hop files. A fresh start never reads them.
+
+    The file is created so minima hopping can remove it before the next
+    hop. Frames are not stored.
+    """
+
+    def __init__(self, filename, *args, **kwargs):
+        del args, kwargs
+        self.filename = str(filename)
+        Path(self.filename).touch()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc):
+        return False
+
+    def write(self, *args, **kwargs):
+        del args, kwargs
+
+    def set_description(self, *args, **kwargs):
+        del args, kwargs
+
+    def close(self):
+        return None
+
+    def __len__(self):
+        return 0
+
+    def __iter__(self):
+        return iter(())
+
+
+def _patch_repeated_line_search() -> None:
+    """Accept a QuasiNewton step that the max-step clamp keeps repeating.
+
+    ``ase.optimize.QuasiNewton`` is BFGSLineSearch. On an overlapped
+    Lennard-Jones start the search direction is long, so every trial is
+    clamped onto the point just evaluated. FIRE, the old QuasiNewton, and
+    TSASE's own SDLBFGS all take a real step on that geometry. Leaving the
+    line search there lets this QuasiNewton build a new direction instead
+    of reading one geometry until the harness calls it divergence.
+    """
+    from ase.utils.linesearch import LineSearch
+
+    if getattr(LineSearch.step, "_optbench_repeat", False):
+        return
+    original = LineSearch.step
+
+    def step(self, stp, f, g, c1, c2, xtol, isave, dsave):
+        out = original(self, stp, f, g, c1, c2, xtol, isave, dsave)
+        same = False
+        if str(self.task)[:2] == "FG" and self.old_stp:
+            scale = max(1.0, abs(float(self.old_stp)))
+            same = abs(float(out) - float(self.old_stp)) <= float(xtol) * scale
+        count = getattr(self, "_optbench_same", 0)
+        self._optbench_same = count + 1 if same else 0
+        if self._optbench_same >= STUCK_LINE_STEPS:
+            self.task = "CONVERGENCE"
+            self._optbench_same = 0
+        return out
+
+    step._optbench_repeat = True
+    LineSearch.step = step
+
+
+def _patch_zero_line_search() -> None:
+    """Replace a zero warning step with one max-step along the search direction.
+
+    After the clamped step above is accepted, BFGSLineSearch can return
+    ``WARNING: ROUNDING ERRORS PREVENT PROGRESS`` with step length 0. ASE
+    only drops a warning when ``task[1:4] == 'WARN'``, which does not match
+    that string, so QuasiNewton takes the zero step and stays on the
+    overlapped geometry. One max-step along the current direction is enough
+    for the same optimizer to finish the quench. A healthy line search does
+    not emit the warning.
+    """
+    from ase.utils.linesearch import LineSearch
+
+    if getattr(LineSearch._line_search, "_optbench_zero", False):
+        return
+    original = LineSearch._line_search
+
+    def _line_search(self, *args, **kwargs):
+        stp, fval, old, flag = original(self, *args, **kwargs)
+        warned = str(self.task).startswith("WARN")
+        zero = stp is None or float(stp) == 0.0
+        if warned and zero:
+            length = float(self.get_gradient_norm(np.asarray(self.pk, dtype=float)))
+            if length > 0.0 and float(self.maxstep) > 0.0:
+                stp = float(self.maxstep) / length
+                self.task = "CONVERGENCE"
+        return stp, fval, old, flag
+
+    _line_search._optbench_zero = True
+    LineSearch._line_search = _line_search
+
+
+def _patch_hop_trajectories() -> None:
+    """Drop qn.traj and md.traj. The minima list stays on disk."""
+    import ase.io
+    import ase.io.trajectory as trajectory
+
+    if getattr(trajectory.Trajectory, "_optbench_discard", False):
+        return
+    original = trajectory.Trajectory
+
+    def open_trajectory(filename, *args, **kwargs):
+        if os.path.basename(str(filename)) in {"qn.traj", "md.traj"}:
+            return _DiscardTrajectory(filename)
+        return original(filename, *args, **kwargs)
+
+    open_trajectory._optbench_discard = True
+    trajectory.Trajectory = open_trajectory
+    ase.io.Trajectory = open_trajectory
+
+
 def _patch_velocity_verlet() -> None:
     """ASE 3.29 names the step ``timestep``. TSASE still passes ``dt``."""
     import tsase.optimize.minimahopping as hopping
@@ -496,6 +619,9 @@ def _patch_velocity_verlet() -> None:
 def _run_minima(job: dict, positions: np.ndarray, counter: HarnessCounter) -> str:
     _import_tsase()
     _patch_velocity_verlet()
+    _patch_repeated_line_search()
+    _patch_zero_line_search()
+    _patch_hop_trajectories()
     from tsase.optimize.minimahopping import MinimaHopping
 
     atoms = _make_atoms(positions)

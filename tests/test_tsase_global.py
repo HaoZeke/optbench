@@ -8,6 +8,8 @@ import pytest
 from optbench.campaign import _check_stop, list_templates, resolve_problem
 from optbench.runners.tsase_global import (
     PUBLISHED_LJ38_ENERGY,
+    _patch_repeated_line_search,
+    _patch_zero_line_search,
     describe_parameters,
     energy_threshold,
     judge_global,
@@ -105,10 +107,8 @@ def test_templates_use_the_registry_pin_and_the_problem_stop():
     ]
     assert {row["id"] for row in found} == {
         "tsase/lj38-basinhopping",
-        "tsase/lj38-basinhopping-tuned",
         "tsase/lj38-minimahopping",
         "tsase/lj75-basinhopping",
-        "tsase/lj75-basinhopping-tuned",
         "tsase/lj75-minimahopping",
     }
     for template in found:
@@ -116,20 +116,43 @@ def test_templates_use_the_registry_pin_and_the_problem_stop():
         assert template["tsase"]["method"] in {"basin_hopping", "minima_hopping"}
         assert template["commit"] == COMMIT
         assert template["code_version"] == "1.0"
-        assert template["tuning"] in {"default", "tuned"}
+        assert template["tuning"] == "default"
         problem = resolve_problem(ROOT, template["problem"])
         _check_stop(problem, template)
         expected_cap = 1_000_000 if template["problem"] == "globalopt/lj75" else 2_000_000
         assert int(template["stop"]["max_force_calls"]) == expected_cap
-    tuned = next(row for row in found if row["id"] == "tsase/lj38-basinhopping-tuned")
-    described = describe_parameters(tuned["tsase"], -173.927)
-    assert described["fmax"] == 0.01
-    assert described["dr"] == 0.3
-    assert described["temperature"] == pytest.approx(8000 * 8.617333262145e-5)
     default = next(row for row in found if row["id"] == "tsase/lj38-basinhopping")
     described = describe_parameters(default["tsase"], -173.927)
     assert described["fmax"] == 0.1
     assert described["dr"] == 0.1
+
+
+def test_an_overlapped_lj75_start_quenches_under_quasinewton():
+    """A clamped step and a later zero step used to stop the quench."""
+    import numpy as np
+    from ase.optimize import QuasiNewton
+
+    from optbench.counter import HarnessCounter
+    from optbench.runners.tsase_global import Exploded, _attach, _import_tsase, _make_atoms
+
+    _import_tsase()
+    _patch_repeated_line_search()
+    _patch_zero_line_search()
+    geometries = dict(load_geometries(ROOT, resolve_problem(ROOT, "globalopt/lj75")))
+    for label in ("coords.44", "coords.3"):
+        counter = HarnessCounter(cache=True, cap=8000)
+        atoms = _make_atoms(geometries[label])
+        _attach(atoms, counter, None)
+        try:
+            QuasiNewton(atoms, logfile=None, trajectory=None).run(fmax=0.05, steps=4000)
+        except Exploded as exc:
+            raise AssertionError(f"{label} stopped as {exc}") from exc
+        energy = float(atoms.get_potential_energy())
+        fmax = float(np.linalg.norm(atoms.get_forces(), axis=1).max())
+        assert energy < 0.0
+        assert fmax < 0.05
+        assert counter.calls < 8000
+        assert np.isfinite(energy)
 
 
 def test_lj75_archive_has_two_hundred_starts():
