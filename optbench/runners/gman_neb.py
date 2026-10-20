@@ -1,28 +1,10 @@
-"""Gman r235 climbing-image NEB, steepest descent, on the Pt heptamer.
+"""Gman r235 steepest-descent NEB on the Pt heptamer.
 
-The archived driver is ``archive/entries/neb/Pt-heptamer/gman-sd/opt.py``.
-It builds ``Gopt.sd`` with ``stepR=0.02`` and ``maxmove=0.2``, then calls
-``neb.relax`` with spring 5, the improved tangent, ``fmax=0.01``,
-``converge="Fmag"``, ``fsaddle="off"``, ``method="ci"``, and ``itrmax=10000``.
-Each iteration calls the potential on the 8 movable images. ``pot.count()/8``
-is that iteration count, including the converging iteration. The published
-integer is ``"%d" % (sum(forceCalls) / 13)``, which truncates toward zero.
-
-Gman r235 is the package in the public archive tarball
-``website/codes/Gman-r235.tgz``. ``codes/gman/r235`` is that package after
-lib2to3, with two edits off the counted path: version-string parsing in
-``Gman/__init__.py``, and an extrema sort by key after ``extfind`` in
-``Gman/neb/neb.py``. The Morse force is the original ``morse.f``, compiled
-with ``f2py --lower`` so the gfortran ``force_`` symbol matches.
-
-The archived script writes ``algorithm lbfgs`` for every Gman optimizer.
-This runner records ``sd``, the optimizer the script actually calls.
-
-The campaign file is the same writer as a native-counter row.
-``force_calls`` is ``pot.count()/8``, the archived per-image counter.
-``raw`` is ``pot.count()``. ``count_key`` ``force_calls_neb`` ranks that
-band total, and the provenance names Gman's counter. The file's
-``counter`` field is ``harness``.
+The archived ``gman-sd`` script calls ``Gopt.sd``. Its ``algorithm lbfgs``
+line is the label written for every Gman optimizer. Stock ``sd.init`` is
+``maxmove=0.2`` and ``stepR=0.1``. The band uses the shared archive setup:
+8 images, spring 5, tangent ``new``, climbing image on, ``fmax=0.01``.
+The iteration limit is the problem cap.
 """
 
 from __future__ import annotations
@@ -49,7 +31,10 @@ def _source_root(root: Path) -> Path:
 
 
 def _stock_settings(template: dict, problem: dict, section: dict) -> dict:
-    """Library defaults. Only the archive force stop and cap are applied."""
+    """Stock steepest descent. Force stop and iteration cap come from the problem."""
+    optimizer = section.get("optimizer")
+    if optimizer not in {"sd", "qm"}:
+        raise ValueError(f"{template['id']} optimizer {optimizer} is not this runner")
     if section.get("potential", "morse") != "morse":
         raise ValueError(f"{template['id']} potential {section.get('potential')} is not this runner")
     convergence = problem.get("convergence") or {}
@@ -65,7 +50,7 @@ def _stock_settings(template: dict, problem: dict, section: dict) -> dict:
     if pairs < 1 or cap < 1 or images < 1:
         raise ValueError(f"{problem['id']} is missing a band, cap, or sample")
     return {
-        "optimizer": "qm",
+        "optimizer": optimizer,
         "stock": True,
         "images": images,
         "fmax": fmax,
@@ -76,57 +61,7 @@ def _stock_settings(template: dict, problem: dict, section: dict) -> dict:
 
 
 def _settings(template: dict, problem: dict) -> dict:
-    section = template.get("gman") or {}
-    if section.get("optimizer") == "qm":
-        return _stock_settings(template, problem, section)
-    required = (
-        "optimizer",
-        "step_r",
-        "maxmove",
-        "images",
-        "spring",
-        "tangent",
-        "itrmax",
-        "ppd",
-        "fmax",
-        "fsaddle",
-        "method",
-        "converge",
-        "potential",
-    )
-    missing = [key for key in required if key not in section]
-    if missing:
-        raise ValueError(f"{template['id']} gman section needs {', '.join(missing)}")
-    if section["optimizer"] not in {"sd", "qm"}:
-        raise ValueError(f"{template['id']} optimizer {section['optimizer']} is not this runner")
-    if section["potential"] != "morse":
-        raise ValueError(f"{template['id']} potential {section['potential']} is not this runner")
-    fmax = float(section["fmax"])
-    stop = float((template.get("stop") or {}).get("force_norm", fmax))
-    problem_stop = float((problem.get("convergence") or {})["force_norm"])
-    if abs(fmax - stop) > 1e-12 or abs(fmax - problem_stop) > 1e-12:
-        raise ValueError(f"{template['id']} fmax is not the problem force norm")
-    images = int(section["images"])
-    stated = int(((problem.get("band") or {}).get("interior_images")))
-    if images != stated:
-        raise ValueError(f"{template['id']} images {images} are not the problem band")
-    pairs = int((problem.get("sample") or {})["pairs"])
-    if pairs < 1:
-        raise ValueError(f"{problem['id']} has no pairs")
-    return {
-        "step_r": float(section["step_r"]),
-        "maxmove": float(section["maxmove"]),
-        "images": images,
-        "spring": float(section["spring"]),
-        "tangent": str(section["tangent"]),
-        "itrmax": int(section["itrmax"]),
-        "ppd": int(section["ppd"]),
-        "fmax": fmax,
-        "fsaddle": str(section["fsaddle"]),
-        "method": str(section["method"]),
-        "converge": str(section["converge"]),
-        "pairs": pairs,
-    }
+    return _stock_settings(template, problem, template.get("gman") or {})
 
 
 def _compile_morse(source: Path) -> None:
@@ -231,29 +166,22 @@ def _one_path(minima: Path, name: str, settings: dict) -> dict:
     if potential is None:
         raise RuntimeError("Gman failed to load the Morse potential")
     pot.countReset()
-    if settings.get("stock"):
-        opt = Gopt.qm()
-        opt.init()
-        band = Gneb.neb()
-        band.new(first, second, images=settings["images"])
-        band.relax(potential, opt.step, itrmax=settings["itrmax"], fmax=settings["fmax"])
-    else:
-        opt = Gopt.sd()
-        opt.init(stepR=settings["step_r"], maxmove=settings["maxmove"])
-        band = Gneb.neb()
-        band.new(first, second, images=settings["images"])
-        band.relax(
-            potential,
-            opt.step,
-            k=settings["spring"],
-            tangent=settings["tangent"],
-            itrmax=settings["itrmax"],
-            ppd=settings["ppd"],
-            fmax=settings["fmax"],
-            fsaddle=settings["fsaddle"],
-            method=settings["method"],
-            converge=settings["converge"],
-        )
+    opt = Gopt.sd() if settings["optimizer"] == "sd" else Gopt.qm()
+    opt.init()
+    band = Gneb.neb()
+    band.new(first, second, images=settings["images"])
+    band.relax(
+        potential,
+        opt.step,
+        k=5.0,
+        tangent="new",
+        itrmax=settings["itrmax"],
+        ppd=1,
+        fmax=settings["fmax"],
+        fsaddle="off",
+        method="ci",
+        converge="Fmag",
+    )
     raw = int(pot.count())
     pot.countReset()
     per_image = raw / float(settings["images"])
@@ -265,84 +193,8 @@ def _one_path(minima: Path, name: str, settings: dict) -> dict:
     }
 
 
-def _campaign_records(rows: list[dict], images: int, cap: int) -> list[dict]:
-    """Per-path records for ``write_campaign``.
-
-    ``force_calls`` is the archived ``pot.count()/8``. ``raw`` is
-    ``pot.count()``, and ``count_key`` tells the board to rank that total.
-    """
-    records = []
-    for row in rows:
-        raw = int(row["raw"])
-        if images <= 0 or raw % images != 0:
-            raise RuntimeError(f"{row['geometry']} pot.count {raw} is not a multiple of {images}")
-        per_image = raw // images
-        converged = bool(row["success"])
-        success = converged and per_image < cap
-        failure = None
-        if not success:
-            failure = "cap" if per_image >= cap else "divergence"
-        records.append(
-            {
-                "start": row["geometry"],
-                "force_calls": per_image,
-                "raw": raw,
-                "count_key": "force_calls_neb",
-                "gman_pot_count": raw,
-                "success": success,
-                "failure": failure,
-                "counter": "harness",
-                "converged": converged,
-            }
-        )
-    return records
-
-
 def _publish(output: Path, rows: list[dict], template: dict, problem: dict, settings: dict) -> dict:
-    from optbench.engines.common import write_campaign
-
-    cap = int((problem.get("convergence") or {})["max_force_calls"])
-    records = _campaign_records(rows, settings["images"], cap)
-    comment = (
-        "# Gman r235 steepest descent, climbing-image NEB, Morse Pt heptamer.\n"
-        "# The count is Gman's pot.count()/8, the archived per-image counter. "
-        "The published integer truncates the mean of the 13 paths.\n"
-        "# raw is pot.count(). count_key force_calls_neb ranks that band total "
-        "on the same call unit as the other heptamer rows."
-    )
-    published = write_campaign(
-        output,
-        records,
-        template,
-        problem,
-        {"cap": cap},
-        {
-            "method": "ci",
-            "optimizer": "sd",
-            "counter": "gman pot.count()/8",
-            "potential": "morse",
-            "version": template["code_version"],
-            "images": settings["images"],
-            "spring": settings["spring"],
-            "tangent": settings["tangent"],
-            "step_r": settings["step_r"],
-            "maxmove": settings["maxmove"],
-            "fmax": settings["fmax"],
-            "converge": settings["converge"],
-            "fsaddle": settings["fsaddle"],
-        },
-        images=None,
-        comment=comment,
-    )
-    calls = [int(row["force_calls"]) for row in records]
-    published["force_calls_min"] = min(calls)
-    published["force_calls_max"] = max(calls)
-    published["counts"] = calls
-    return published
-
-
-def _publish_stock(output: Path, rows: list[dict], template: dict, problem: dict, settings: dict) -> dict:
-    """Rank Gman's own counter the way OPTIM ranks energy+gradient calls."""
+    """Rank Gman's pot.count through the native-counter campaign writer."""
     from optbench.engines.common import write_campaign
 
     cap = int(settings["cap"])
@@ -365,13 +217,20 @@ def _publish_stock(output: Path, rows: list[dict], template: dict, problem: dict
                 "converged": converged,
             }
         )
-    comment = (
-        "# Gman r235 is the latest release. Quick-min NEB uses the library defaults "
-        "(maxmove 0.2, dt 0.15, spring 5, tangent new, climbing image off).\n"
-        "# The count is Gman's pot.count, the code's force-call counter.\n"
-        "# fmax 0.01 and the 10000-call cap are the archive convergence criterion. "
-        "The archived 412 is the paper row. This run is not tuned toward it."
-    )
+    if settings["optimizer"] == "sd":
+        comment = (
+            "# Gman r235 steepest descent. sd.init is the library default, maxmove 0.2 and stepR 0.1.\n"
+            "# Climbing image, spring 5, and tangent new are the shared NEB setup. "
+            "fmax 0.01. The iteration limit is the problem cap, 10000.\n"
+            "# The count is pot.count."
+        )
+    else:
+        comment = (
+            "# Gman r235 quick-min. qm.init is the library default, maxmove 0.2 and dt 0.15.\n"
+            "# Climbing image, spring 5, and tangent new are the shared NEB setup. "
+            "fmax 0.01. The iteration limit is the problem cap, 10000.\n"
+            "# The count is pot.count."
+        )
     published = write_campaign(
         output,
         records,
@@ -379,8 +238,8 @@ def _publish_stock(output: Path, rows: list[dict], template: dict, problem: dict
         problem,
         {"cap": cap},
         {
-            "method": "neb",
-            "optimizer": "qm",
+            "method": "ci",
+            "optimizer": settings["optimizer"],
             "counter": "gman pot.count",
             "potential": "morse",
             "version": template["code_version"],
@@ -388,7 +247,7 @@ def _publish_stock(output: Path, rows: list[dict], template: dict, problem: dict
             "fmax": settings["fmax"],
             "itrmax": settings["itrmax"],
             "maxmove": 0.2,
-            "dt": 0.15,
+            **({"step_r": 0.1} if settings["optimizer"] == "sd" else {"dt": 0.15}),
             "spring": 5.0,
             "tangent": "new",
         },
@@ -432,8 +291,6 @@ def run_template(
             for name in names:
                 rows.append(_one_path(minima, name, settings))
                 print(f"{name} {rows[-1]['force_calls']}", flush=True)
-    if settings.get("stock"):
-        return _publish_stock(output, rows, template, problem, settings)
     return _publish(output, rows, template, problem, settings)
 
 
@@ -441,9 +298,9 @@ def main() -> None:
     root = Path(__file__).resolve().parents[2]
     from optbench.campaign import load_template, resolve_problem
 
-    template = load_template(root, "gman/neb-pt-qm")
+    template = load_template(root, "gman/neb-pt-sd")
     problem = resolve_problem(root, template["problem"])
-    output = root / "results" / "campaign" / "gman-r235-neb-pt-qm.dat"
+    output = root / "results" / "campaign" / "gman-r235-neb-pt-sd.dat"
     summary = run_template(root, problem, template, output=output)
     print(json.dumps({key: summary[key] for key in ("force_calls", "force_calls_min", "force_calls_max", "nfailed", "starts")}))
     print(" ".join(str(value) for value in summary["counts"]))

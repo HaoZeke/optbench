@@ -1,4 +1,4 @@
-# Latest Gman release, library quick-min, archive force stop.
+# Gman r235 quick-min at the library step, beside the archived quick-min row.
 id = "gman/neb-pt-qm"
 engine = "gman"
 problem = "neb/Pt-heptamer"
@@ -8,7 +8,7 @@ commit = "r235"
 algorithm = "quick-min"
 failure_cap = 10000
 tuning = "default"
-note = "Gman r235 is the latest release. Quick-min, spring 5, tangent new, and climbing image off are the library defaults. fmax 0.01 and the 10000-call cap are the archive convergence criterion. The count is pot.count. The archived 412 is the paper row."
+note = "Gman r235 quick-min. qm.init uses maxmove 0.2 and dt 0.15. Climbing image, spring 5, and tangent new are the shared NEB setup. fmax is 0.01. The iteration limit is the problem cap."
 
 [stop]
 force_norm = 0.01
