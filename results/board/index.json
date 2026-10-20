@@ -5196,7 +5196,7 @@
         "divergence": 0,
         "wrong_stationary": 0
       },
-      "full_n": null,
+      "full_n": 639,
       "history": false,
       "max_calls": 1216.0,
       "mean_calls": 1216.0,
@@ -5241,7 +5241,7 @@
         "divergence": 0,
         "wrong_stationary": 0
       },
-      "full_n": null,
+      "full_n": 639,
       "history": false,
       "max_calls": 1405.0,
       "mean_calls": 1405.0,
@@ -5286,7 +5286,7 @@
         "divergence": 0,
         "wrong_stationary": 0
       },
-      "full_n": null,
+      "full_n": 13,
       "history": false,
       "max_calls": 1469.0,
       "mean_calls": 1469.0,
@@ -5331,7 +5331,7 @@
         "divergence": 0,
         "wrong_stationary": 0
       },
-      "full_n": null,
+      "full_n": 13,
       "history": false,
       "max_calls": 1696.0,
       "mean_calls": 1696.0,
@@ -5376,7 +5376,7 @@
         "divergence": 0,
         "wrong_stationary": 0
       },
-      "full_n": null,
+      "full_n": 13,
       "history": false,
       "max_calls": 1044.0,
       "mean_calls": 1044.0,
@@ -5421,7 +5421,7 @@
         "divergence": 0,
         "wrong_stationary": 0
       },
-      "full_n": null,
+      "full_n": 13,
       "history": false,
       "max_calls": 717.0,
       "mean_calls": 717.0,
@@ -15974,7 +15974,7 @@
       "title": "Lennard-Jones 38 global minimum"
     },
     "hTST/Al": {
-      "full_n": null,
+      "full_n": 639,
       "history": [],
       "id": "hTST/Al",
       "not_comparable": [],
@@ -15996,7 +15996,7 @@
             "divergence": 0,
             "wrong_stationary": 0
           },
-          "full_n": null,
+          "full_n": 639,
           "history": false,
           "max_calls": 1216.0,
           "mean_calls": 1216.0,
@@ -16041,7 +16041,7 @@
             "divergence": 0,
             "wrong_stationary": 0
           },
-          "full_n": null,
+          "full_n": 639,
           "history": false,
           "max_calls": 1405.0,
           "mean_calls": 1405.0,
@@ -16074,7 +16074,7 @@
       "title": "Al"
     },
     "hTST/Pt": {
-      "full_n": null,
+      "full_n": 13,
       "history": [],
       "id": "hTST/Pt",
       "not_comparable": [],
@@ -16096,7 +16096,7 @@
             "divergence": 0,
             "wrong_stationary": 0
           },
-          "full_n": null,
+          "full_n": 13,
           "history": false,
           "max_calls": 1469.0,
           "mean_calls": 1469.0,
@@ -16141,7 +16141,7 @@
             "divergence": 0,
             "wrong_stationary": 0
           },
-          "full_n": null,
+          "full_n": 13,
           "history": false,
           "max_calls": 1696.0,
           "mean_calls": 1696.0,
@@ -16186,7 +16186,7 @@
             "divergence": 0,
             "wrong_stationary": 0
           },
-          "full_n": null,
+          "full_n": 13,
           "history": false,
           "max_calls": 1044.0,
           "mean_calls": 1044.0,
@@ -16231,7 +16231,7 @@
             "divergence": 0,
             "wrong_stationary": 0
           },
-          "full_n": null,
+          "full_n": 13,
           "history": false,
           "max_calls": 717.0,
           "mean_calls": 717.0,
@@ -16260,7 +16260,131 @@
           "wilson_low": 0.20654931437723745
         }
       ],
-      "ranked": [],
+      "profile": {
+        "area_log10": {
+          "eon-svn/htst-pt-lbfgs r2549 Dimer-LBFGS rotation: max=50, tol=1 campaign r2549": 1.0188707545550133,
+          "eon/develop-htst-pt-lbfgs a7aa57472fb7d823953fd36b78cd755fa4842d30 Dimer-LBFGS rotation: max=50, tol=1 campaign a7aa574": 1.1230734453617761
+        },
+        "rho": {
+          "eon-svn/htst-pt-lbfgs r2549 Dimer-LBFGS rotation: max=50, tol=1 campaign r2549": [
+            0.38461538461538464,
+            0.6923076923076923,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "eon/develop-htst-pt-lbfgs a7aa57472fb7d823953fd36b78cd755fa4842d30 Dimer-LBFGS rotation: max=50, tol=1 campaign a7aa574": [
+            0.6153846153846154,
+            0.9230769230769231,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "solved": {
+          "eon-svn/htst-pt-lbfgs r2549 Dimer-LBFGS rotation: max=50, tol=1 campaign r2549": 1.0,
+          "eon/develop-htst-pt-lbfgs a7aa57472fb7d823953fd36b78cd755fa4842d30 Dimer-LBFGS rotation: max=50, tol=1 campaign a7aa574": 1.0
+        },
+        "taus": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ]
+      },
+      "ranked": [
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": null,
+          "code": "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)",
+          "code_version": "a7aa57472fb7d823953fd36b78cd755fa4842d30",
+          "commit": "a7aa57472fb7d823953fd36b78cd755fa4842d30",
+          "comparable": true,
+          "counter": "htst-reducer",
+          "current": true,
+          "entry": "eOn-develop-a7aa574-htst-pt-lbfgs",
+          "failures": {
+            "cap": 0,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 0
+          },
+          "full_n": 13,
+          "history": false,
+          "max_calls": 760239.0,
+          "mean_calls": 484069.23076923075,
+          "mean_per_image": null,
+          "median": 478546.0,
+          "median_calls": 478546.0,
+          "median_high": 601671.0,
+          "median_low": 360889.0,
+          "median_per_image": null,
+          "min_calls": 178288.0,
+          "n": 13,
+          "nfailed": 0,
+          "note": "starts.jsonl",
+          "par2_mean": null,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/eOn-develop-a7aa574-htst-pt-lbfgs.dat",
+          "problem": "hTST/Pt",
+          "registry_match": true,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 1.0,
+          "template": "eon/develop-htst-pt-lbfgs",
+          "tuning": "Dimer-LBFGS rotation: max=50, tol=1",
+          "wilson_high": 1.0,
+          "wilson_low": 0.7719046276458016
+        },
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": null,
+          "code": "EON (SVN r2549)",
+          "code_version": "r2549",
+          "commit": "r2549",
+          "comparable": true,
+          "counter": "htst-reducer",
+          "current": true,
+          "entry": "EON-r2549-htst-pt-lbfgs",
+          "failures": {
+            "cap": 0,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 0
+          },
+          "full_n": 13,
+          "history": false,
+          "max_calls": 1095989.0,
+          "mean_calls": 616766.3076923077,
+          "mean_per_image": null,
+          "median": 608736.0,
+          "median_calls": 608736.0,
+          "median_high": 768486.0,
+          "median_low": 454486.0,
+          "median_per_image": null,
+          "min_calls": 292232.0,
+          "n": 13,
+          "nfailed": 0,
+          "note": "starts.jsonl",
+          "par2_mean": null,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/EON-r2549-htst-pt-lbfgs.dat",
+          "problem": "hTST/Pt",
+          "registry_match": true,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 1.0,
+          "template": "eon-svn/htst-pt-lbfgs",
+          "tuning": "Dimer-LBFGS rotation: max=50, tol=1",
+          "wilson_high": 1.0,
+          "wilson_low": 0.7719046276458016
+        }
+      ],
       "title": "Pt"
     },
     "lowest-eigenvector/lj38": {
@@ -42122,7 +42246,7 @@
       "title": "pt-island"
     }
   },
-  "ranked_count": 439,
+  "ranked_count": 441,
   "schema": "optbench.board/v1",
   "unmapped": [
     {

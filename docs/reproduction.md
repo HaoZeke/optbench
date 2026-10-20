@@ -79,7 +79,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | Pt/alpha_dimer-qm | — | — | not rerun |
 | Pt/eon-dimer-cg | barrier_force_calls 496000, barrier_jobs 1050, rate_force_calls 25630, rate_jobs 54 | 506000, 1062, 27160, 57 | reproduced |
 | Pt/eon-dimer-cg2 | — | — | not rerun |
-| Pt/eon-dimer-lbfgs | — | — | not rerun |
+| Pt/eon-dimer-lbfgs | — | — | not rerun; residual |
 | Pt/eon-dimer-lbfgs2 | — | — | not rerun |
 | Pt/eon-lanczos-cg | — | — | not rerun |
 | Pt/eon-lanczos-cg2 | — | — | not rerun |
@@ -217,6 +217,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 ## Residuals inside the band
 
+- hTST/Pt/eon-dimer-lbfgs: The archived counts stay the paper row. EON (SVN r2549), stock and unpatched, scores barrier_jobs 1264, barrier_force_calls 6.168e+05, rate_jobs 53, rate_force_calls 2.598e+04 (results/campaign/EON-r2549-htst-pt-lbfgs.dat). eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30), stock and unpatched, scores barrier_jobs 1062, barrier_force_calls 4.841e+05, rate_jobs 48, rate_force_calls 2.198e+04 (results/campaign/eOn-develop-a7aa574-htst-pt-lbfgs.dat). Both use the archived problem, 13 starts, and max-atom force 0.001. The gaps are findings.
 - tsopt/LJ38/pele_cd: Inside the 10% band (263.52 vs 254). The same xyz-versus-con starting set as ts-ffd. findTS_local.py for the CD row does not pass orthogZeroEigs; the harness template sets orthog translations-rotations. The paper baseline is this 2014-stop mean, not the harness-stop mean 335.06.
 - tsopt/LJ38/pele_ffd: Inside the 10% band (207.51 vs 192). Archive run.sh unpacks coords-xyz.tar.gz (200 xyz, max pair about 4.4). The harness problem points at coords-con.tar.gz (max pair about 37). Kabsch RMS is about 6.33, so the sets are not the same geometry. Neither set has a pair past cutoff 40, and both drivers use RMS tolerance 1e-3/sqrt(114). The 8% residual is the starting set. The paper baseline is this 2014-stop mean, not the harness-stop mean 254.48.
 
