@@ -34,15 +34,17 @@ def test_stock_bfgs_dimer_stays_ranked_beside_the_archive():
     assert "498dfc6b" not in note
     assert "tsase/mode-lj38-bfgs" in note
     assert "rotationOpt bfgs" in note
-    assert "rotationMax is the 10000-call cap" in note
-    assert "one get_forces runs the rotation" in note
+    assert "dimer_rotate.py" in note
+    assert "phi_tol 0" in note
+    assert "314159" in note
+    assert "2fa92dc" in note
+    assert "e43971c" in note
     assert "SSDimer.search" not in note
-    assert "19" in note
-    assert "median 19.5" in note
-    assert "successes 60" in note
-    assert "nfailed 140" in note
-    assert "14005.805" in note
-    assert "nfailed 73" not in note
+    assert "28" in note
+    assert "median 26" in note
+    assert "successes 200" in note
+    assert "nfailed 0" in note
+    assert "27.895" in note
     fields = _fields(CAMPAIGN)
     assert fields["code"] == "TSASE"
     assert fields["code_version"] == "1.0 (98aac60)"
@@ -52,47 +54,49 @@ def test_stock_bfgs_dimer_stays_ranked_beside_the_archive():
     assert fields["problem"] == "lowest-eigenvector/lj38"
     assert fields["tuning"] == "default"
     assert fields["counter"] == "harness"
-    assert fields["force_calls"] == "19"
-    assert fields["force_calls_min"] == "11"
-    assert fields["force_calls_max"] == "30"
-    assert fields["force_calls_median"] == "19.5"
-    assert fields["successes"] == "60"
-    assert fields["nfailed"] == "140"
+    assert fields["force_calls"] == "28"
+    assert fields["force_calls_min"] == "15"
+    assert fields["force_calls_max"] == "61"
+    assert fields["force_calls_median"] == "26"
+    assert fields["successes"] == "200"
+    assert fields["nfailed"] == "0"
     assert fields["n"] == "200"
     assert fields.get("ranked", "").lower() != "false"
-    assert "rotationOpt is bfgs" in CAMPAIGN.read_text(encoding="utf-8")
-    assert "rotationMax is the 10000-call cap" in CAMPAIGN.read_text(encoding="utf-8")
-    assert "One get_forces runs the rotation" in CAMPAIGN.read_text(encoding="utf-8")
+    assert "Archive dimer_rotate.py" in CAMPAIGN.read_text(encoding="utf-8")
+    assert "phi_tol is 0" in CAMPAIGN.read_text(encoding="utf-8")
+    assert "seed 314159" in CAMPAIGN.read_text(encoding="utf-8")
     assert "SSDimer.search" not in CAMPAIGN.read_text(encoding="utf-8")
     document = json.loads(CAMPAIGN.with_suffix(".v2.json").read_text(encoding="utf-8"))
     assert document["provenance"]["code"] == "TSASE"
     assert document["provenance"]["code_version"] == "1.0 (98aac60)"
+    assert document["provenance"]["parameters"]["driver"] == "dimer_rotate"
     assert document["provenance"]["parameters"]["rotation_opt"] == "bfgs"
     assert document["provenance"]["parameters"]["max_step"] == 0.2
     assert document["provenance"]["parameters"]["dr"] == 0.001
-    assert document["provenance"]["parameters"]["phi_tol"] == 5.0
-    assert document["provenance"]["parameters"]["rotation_max"] == 10000
+    assert document["provenance"]["parameters"]["phi_tol"] == 0.0
+    assert document["provenance"]["parameters"]["rotation_limit"] == 1000
+    assert document["provenance"]["parameters"]["mode_seed"] == 314159
+    assert document["provenance"]["parameters"]["seed"] == "314159"
+    assert "rotation_max" not in document["provenance"]["parameters"]
     assert document["score"]["cap"] == 10000
     assert document["score"]["n_cap"] == 0
-    assert document["score"]["n_divergence"] == 140
+    assert document["score"]["n_divergence"] == 0
     assert document["score"]["n_crash"] == 0
     assert document["score"]["n_wrong_stationary"] == 0
-    assert document["score"]["par2_mean"] == 14005.805
-    assert document["score"]["successes"] == 60
+    assert document["score"]["par2_mean"] == 27.895
+    assert document["score"]["successes"] == 200
     starts = [
         json.loads(line)
         for line in CAMPAIGN.with_suffix(".starts.jsonl").read_text(encoding="utf-8").splitlines()
         if line.strip()
     ]
     assert len(starts) == 200
-    failed = [item for item in starts if not item["success"]]
-    assert len(failed) == 140
-    assert {item["failure"] for item in failed} == {"divergence"}
-    assert all(item["reasons"] == ["mode_overlap"] for item in failed)
-    assert all(item["force_calls"] < 10000 for item in failed)
-    assert all(item["stop_log"] for item in failed)
-    assert all(sum(line.startswith("alpha=") for line in item["stop_log"]) == 1 for item in failed)
-    assert all(any(line.startswith("curvature:") for line in item["stop_log"]) for item in failed)
+    assert all(item["success"] for item in starts)
+    assert all(item["failure"] is None for item in starts)
+    assert all(item["seed"] == "314159" for item in starts)
+    assert min(item["force_calls"] for item in starts) == 15
+    assert max(item["force_calls"] for item in starts) == 61
+    assert all(item["overlap"] >= 0.99 for item in starts)
     assert not (ROOT / "results" / "diagnostic" / "tsase-408-lj38-dimer-bfgs.dat").exists()
     assert not (ROOT / "results" / "campaign" / "tsase-408-lj38-dimer-bfgs.dat").exists()
     assert not (ROOT / "results" / "campaign" / "tsase-1.0-lowest-eigenvector-lj38--tsase-mode-lj38-bfgs.dat").exists()

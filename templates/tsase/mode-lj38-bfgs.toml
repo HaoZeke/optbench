@@ -7,12 +7,14 @@ code_version = "1.0 (98aac60)"
 commit = "98aac60b5d9905e81ee4e6b8c385f169258d0218"
 algorithm = "SSDimer BFGS"
 tuning = "default"
-note = "SSDimer rotationOpt is bfgs. rotationMax is the 10000-call cap. maxStep, dR, and phi_tol stay at the constructor defaults. The geometry stays fixed. One get_forces runs the rotation and the run ends when that rotation returns. Overlap >= 0.99 is a success. A finished rotation under the overlap is a wrong-mode failure."
+note = "Archive dimer_rotate.py on TSASE 1.0. rotationOpt is bfgs, phi_tol is 0, dR is 0.001, and ss is false. maxStep and noZeroModes stay at the constructor defaults. rotationMax increases from 1 until absolute overlap 0.99. The initial mode is seed 314159 for every start. The harness counts the ASE calls of the scored rotation."
 
 [tsase]
 method = "dimer"
+driver = "dimer_rotate"
 rotation_opt = "bfgs"
-max_step = 0.2
 dr = 0.001
-phi_tol = 5.0
-rotation_max = 10000
+phi_tol = 0.0
+max_step = 0.2
+rotation_limit = 1000
+mode_seed = 314159

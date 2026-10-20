@@ -1,16 +1,15 @@
 # counter harness. One force call is one ASE calculate inside the solid-state dimer.
-# rotationOpt is bfgs. rotationMax is the 10000-call cap.
-# maxStep, dR, and phi_tol stay at the SSDimer constructor defaults.
-# The geometry stays fixed. One get_forces runs the rotation.
-# The run ends when that rotation returns. Overlap >= 0.99 is a success.
-# A finished rotation under the overlap is a wrong-mode failure.
+# Archive dimer_rotate.py. rotationOpt is bfgs, phi_tol is 0, dR is 0.001, ss is false.
+# maxStep and noZeroModes stay at the constructor defaults.
+# rotationMax increases from 1. The initial mode is seed 314159 for every start.
+# The harness counts the ASE calls of the scored rotation. Overlap >= 0.99 is a success.
 # TSASE forceCalls is not this count.
-force_calls 19
-force_calls_min 11
-force_calls_max 30
-force_calls_median 19.5
-successes 60
-nfailed 140
+force_calls 28
+force_calls_min 15
+force_calls_max 61
+force_calls_median 26
+successes 200
+nfailed 0
 n 200
 transition_states 0
 code TSASE

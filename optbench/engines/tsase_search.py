@@ -319,6 +319,19 @@ def _surface(kind: str, free: np.ndarray, box):
     return _Surface
 
 
+def _archive_direction(n_atoms: int, seed: int) -> np.ndarray:
+    """Initial mode from ``random_mode.py``: one seed, uniform draws, then normalized.
+
+    ``run.sh`` calls that script for every start and the script ignores the
+    start index, so every geometry uses this same direction.
+    """
+    draw = np.random.RandomState(int(seed)).random_sample((int(n_atoms), 3))
+    scale = float(np.linalg.norm(draw))
+    if scale <= 1e-14:
+        raise ValueError("archive initial mode has no direction")
+    return draw / scale
+
+
 def _mode_overlap(mode, n_atoms: int, free: np.ndarray, reference) -> float:
     current = np.asarray(mode, dtype=np.float64)
     piece = current[:n_atoms][free].reshape(-1)
@@ -350,11 +363,12 @@ def _execute_dimer(job: dict) -> dict:
     gradient = None
     point = positions.copy()
     log_text = ""
-    # A lowest-mode run whose rotationMax reaches the call cap is one
-    # rotation. The geometry stays fixed. When minmodesearch returns, the
-    # run ends. A shorter rotationMax still returns between translational
-    # steps, and those runs keep the unchanged-overlap stop.
-    bound_by_cap = task == "mode" and int(job["rotation_max"]) >= cap
+    # dimer_rotate.py rebuilds SSDimer with rotationMax = 1, 2, ... and calls
+    # get_forces once. The geometry stays fixed. A lowest-mode run whose
+    # rotationMax reaches the call cap is one rotation instead. A shorter
+    # rotationMax still returns between translational steps.
+    archive_rotate = task == "mode" and str(job.get("driver") or "") == "dimer_rotate"
+    bound_by_cap = task == "mode" and not archive_rotate and int(job["rotation_max"]) >= cap
     previous = Path.cwd()
     try:
         with tempfile.TemporaryDirectory(prefix="tsase-dimer-") as folder:
@@ -362,29 +376,57 @@ def _execute_dimer(job: dict) -> dict:
             log = Path(folder) / "stdout.txt"
             atoms = Atoms(positions=positions, cell=_cell(positions, box), pbc=box is not None)
             atoms.calc = attach_ase_counter(_surface(kind, free, box)(), cap=cap, counter=counter)
-            rng = np.random.default_rng(int(job["zseed"]))
-            mode = rng.normal(size=positions.shape)
-            mode[~free] = 0.0
-            scale = float(np.linalg.norm(mode))
-            mode = mode / scale
+            if archive_rotate:
+                mode = _archive_direction(positions.shape[0], int(job["mode_seed"]))
+            else:
+                rng = np.random.default_rng(int(job["zseed"]))
+                mode = rng.normal(size=positions.shape)
+                mode[~free] = 0.0
+                scale = float(np.linalg.norm(mode))
+                mode = mode / scale
             seen = {"overlap": 0.0}
             try:
                 with log.open("w", encoding="utf-8") as handle, redirect_stdout(handle):
-                    dimer = dimer_cls(
-                        R0=atoms,
-                        mode=mode,
-                        maxStep=float(job["max_step"]),
-                        dR=float(job["dr"]),
-                        phi_tol=float(job["phi_tol"]),
-                        rotationMax=int(job["rotation_max"]),
-                        ss=False,
-                        noZeroModes=bool(np.all(free)),
-                        rotationOpt=str(job["rotation_opt"]),
-                    )
+                    dimer = None
+                    if not archive_rotate:
+                        dimer = dimer_cls(
+                            R0=atoms,
+                            mode=mode,
+                            maxStep=float(job["max_step"]),
+                            dR=float(job["dr"]),
+                            phi_tol=float(job["phi_tol"]),
+                            rotationMax=int(job["rotation_max"]),
+                            ss=False,
+                            noZeroModes=bool(np.all(free)),
+                            rotationOpt=str(job["rotation_opt"]),
+                        )
                     n_atoms = positions.shape[0]
                     reference = job["reference"]
                     target = float(job["overlap"])
-                    if bound_by_cap:
+                    if archive_rotate:
+                        # dimer_rotate.py: phi_tol 0, dR 0.001, rotationOpt
+                        # bfgs, ss false. maxStep and noZeroModes stay at the
+                        # constructor defaults. Each pass is a new dimer from
+                        # the original mode. The harness counts that pass.
+                        limit = int(job["rotation_limit"])
+                        for rotmax in range(1, limit + 1):
+                            counter.reset()
+                            dimer = dimer_cls(
+                                R0=atoms,
+                                mode=np.array(mode, copy=True),
+                                rotationMax=rotmax,
+                                phi_tol=float(job["phi_tol"]),
+                                ss=False,
+                                dR=float(job["dr"]),
+                                rotationOpt=str(job["rotation_opt"]),
+                            )
+                            dimer.get_forces()
+                            overlap = _mode_overlap(dimer.N, n_atoms, free, reference)
+                            seen["overlap"] = overlap
+                            print(rotmax, overlap)
+                            if overlap >= target:
+                                break
+                    elif bound_by_cap:
                         # Archive dimer_rotate.py calls get_forces once per
                         # rotation and does not translate. phi_tol or
                         # rotationMax ends that call. A second get_forces
@@ -394,7 +436,7 @@ def _execute_dimer(job: dict) -> dict:
                         seen["overlap"] = overlap
                     stalled = 0
                     previous_overlap = None
-                    while not bound_by_cap and counter.calls < cap:
+                    while not archive_rotate and not bound_by_cap and counter.calls < cap:
                         before = counter.calls
                         if task == "mode":
                             dimer.get_forces()
@@ -425,7 +467,7 @@ def _execute_dimer(job: dict) -> dict:
                     log_text = log.read_text(encoding="utf-8", errors="replace")
             # The finished rotation is the whole mode run. A later read would
             # charge calls after TSASE had already returned.
-            if not bound_by_cap:
+            if not bound_by_cap and not archive_rotate:
                 point = np.asarray(atoms.get_positions(), dtype=np.float64)
                 point[~free] = positions[~free]
                 atoms.set_positions(point)
@@ -442,7 +484,7 @@ def _execute_dimer(job: dict) -> dict:
         os.chdir(previous)
     if task == "mode":
         record = judge_mode(job["name"], int(counter.calls), cap, overlap, float(job["overlap"]), error)
-        record["seed"] = "0"
+        record["seed"] = str(job["mode_seed"]) if archive_rotate else "0"
         if not record["success"]:
             tail = [line.strip() for line in log_text.splitlines() if line.strip()]
             record["stop_log"] = tail[-12:]
@@ -495,6 +537,9 @@ def _dimer_job(start: dict, settings: dict, template: dict) -> dict:
         "phi_tol": float(section.get("phi_tol", 5.0)),
         "rotation_max": int(section.get("rotation_max", 4)),
         "rotation_opt": str(section.get("rotation_opt", "cg")),
+        "driver": str(section.get("driver") or ""),
+        "rotation_limit": int(section.get("rotation_limit", 1000)),
+        "mode_seed": int(section.get("mode_seed", 314159)),
         "zseed": pair_seed(f"0:{start['name']}", 20261015),
     }
 
@@ -631,7 +676,17 @@ def _run_points(root, problem, template, settings, output: Path, workers: int, e
         section = dict(template.get("tsase") or {})
         rotation = str(section.get("rotation_opt", "cg"))
         rotation_max = section.get("rotation_max")
-        if settings["task"] == "mode" and rotation_max is not None and int(rotation_max) >= int(settings["cap"]):
+        driver = str(section.get("driver") or "")
+        if settings["task"] == "mode" and driver == "dimer_rotate":
+            comment = (
+                "# counter harness. One force call is one ASE calculate inside the solid-state dimer.\n"
+                "# Archive dimer_rotate.py. rotationOpt is bfgs, phi_tol is 0, dR is 0.001, ss is false.\n"
+                "# maxStep and noZeroModes stay at the constructor defaults.\n"
+                "# rotationMax increases from 1. The initial mode is seed 314159 for every start.\n"
+                "# The harness counts the ASE calls of the scored rotation. Overlap >= 0.99 is a success.\n"
+                "# TSASE forceCalls is not this count."
+            )
+        elif settings["task"] == "mode" and rotation_max is not None and int(rotation_max) >= int(settings["cap"]):
             comment = (
                 "# counter harness. One force call is one ASE calculate inside the solid-state dimer.\n"
                 f"# rotationOpt is {rotation}. rotationMax is the {int(settings['cap'])}-call cap.\n"
@@ -655,7 +710,9 @@ def _run_points(root, problem, template, settings, output: Path, workers: int, e
         "force_norm": settings["force_norm"],
         "task": settings["task"],
         "counter": "harness",
-        "seed": "0",
+        "seed": str((template.get("tsase") or {}).get("mode_seed", "0"))
+        if str((template.get("tsase") or {}).get("driver") or "") == "dimer_rotate"
+        else "0",
         **dict(template.get("tsase") or {}),
     }
     return write_campaign(
