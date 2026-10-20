@@ -1,27 +1,21 @@
-# GL-BFGS Hessian CI-NEB. The problem file supplies the image count, the cap, and the force norm.
+# Gman r235 global L-BFGS, Hessian step, library defaults, archive force stop.
 id = "gman/neb-pt-glbfgs-hess"
 engine = "gman"
 problem = "neb/Pt-heptamer"
 code = "Gman"
-code_version = "vtst-r128"
-commit = "vtst-lbfgs-r128"
-algorithm = "lbfgs"
+code_version = "r235"
+commit = "r235"
+algorithm = "glbfgs-hess"
 counter = "harness"
-reducer = "opt-py"
+tuning = "default"
 failure_cap = 10000
-note = "Archived opt.py calls Gopt.glbfgs().init(maxmove=0.2, min='hess', alpha=0.05, memory=25) and neb.relax with 8 images, spring 5, tangent new, method ci, Fmag 0.01. Anonymous SVN does not export Gman r235. The step is VTST lbfgs.F file revision 128 at peg r147, Hessian branch, global cap maxmove*sqrt(images). The dat integer is the archived %d mean of evaluations/8."
+note = "Gman r235 is the latest release. glbfgs.init is called with min=hess only. maxmove 0.2, dR 1e-4, memory 25, and alpha 0.05 are the library defaults. neb.relax keeps library spring 5, tangent new, climbing image off, and Fmag. fmax 0.01 and the 10000-call cap are the archive convergence criterion. The integer is pot.count() divided by 8, then %d. No parameter was set to move the score toward the archive."
 
 [stop]
 force_norm = 0.01
 max_force_calls = 10000
 
-[glbfgs]
-memory = 25
-alpha = 0.05
-maxmove = 0.2
-min = "hess"
-images = 8
-spring = 5.0
-tangent = "new"
-method = "ci"
-converge = "Fmag"
+[gman]
+optimizer = "glbfgs"
+minimizer = "hess"
+potential = "morse"

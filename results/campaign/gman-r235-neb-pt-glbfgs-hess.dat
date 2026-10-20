@@ -1,0 +1,19 @@
+# force_calls is int(mean(pot.count()/images)), the archived opt.py %d rule
+# Gman r235 glbfgs.init(min='hess'). maxmove 0.2, dR 1e-4, memory 25, and alpha 0.05 are library defaults.
+# neb.relax keeps library spring 5, tangent new, climbing image off, and Fmag. fmax 0.01 and the 10000-call cap are the archive criterion.
+# Starts store pot.count(), the band total. No parameter was set to close the gap to the archive.
+force_calls 45
+force_calls_min 24
+force_calls_max 62
+force_calls_unrounded 45.53846153846154
+nfailed 0
+starts 13
+code Gman
+code_version r235
+commit r235
+algorithm glbfgs-hess
+template gman/neb-pt-glbfgs-hess
+problem neb/Pt-heptamer
+tuning default
+counter harness
+images 8

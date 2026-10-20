@@ -316,7 +316,7 @@ def run(
             work=work,
         )
     if template["engine"] == "gman":
-        from .gman_glbfgs import run_template
+        from .runners.gman_glbfgs import run_template
 
         problem = resolve_problem(root, problem_name)
         stated = template.get("problem")
@@ -327,7 +327,7 @@ def run(
             problem,
             template,
             output=output,
-            workers=workers,
+            work=work,
             limit=limit,
         )
     if template["engine"] in {"ase", "sella"}:
