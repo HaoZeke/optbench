@@ -1,15 +1,16 @@
-force_calls 1934
-force_calls_min 942
-force_calls_max 3567
-force_calls_median 1607.0
+force_calls 38081
+force_calls_min 722
+force_calls_max 238427
+force_calls_median 14257.0
 call_unit total
-nfailed 41
+nfailed 0
 code eOn
-code_version 3.5.0
-commit 4d8b34baf1ba8d2d980df29838bac1f969d1662c
+code_version (develop 500350d9)
+commit 500350d9fae881f06c7ef194e5868da079c4be5a
 algorithm CI-NEB
 template eon-client/de-2ts-ci-neb
 problem double-ended-saddle-search/lj38_2ts_separation
 reducer harness
 counter harness
 count_keys HarnessCounter
+potential lj
