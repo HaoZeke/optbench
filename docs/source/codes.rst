@@ -1504,15 +1504,15 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 25, not_converged 12, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="pygsm/de-gsm-climbclamp">
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="pygsm/de-gsm">
    <td>lj38_2ts_separation</td>
-   <td data-field="template">pygsm/de-gsm-climbclamp</td>
+   <td data-field="template">pygsm/de-gsm</td>
    <td data-field="version">pygsm 1.0.0+692.g1b4d5a5.dirty</td>
    <td data-field="commit">1b4d5a5557a6</td>
-   <td data-field="par2_mean">13796.2</td>
-   <td data-field="mean_calls">5257.53</td>
-   <td data-field="median_calls">4010</td>
-   <td data-field="failures">crash 0, divergence 6, cap 14, not_converged 13, wrong_stationary 0</td>
+   <td data-field="par2_mean">14938.5</td>
+   <td data-field="mean_calls">4451.18</td>
+   <td data-field="median_calls">3170</td>
+   <td data-field="failures">crash 0, divergence 18, cap 10, not_converged 8, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
    </tbody></table></div>
