@@ -162,7 +162,11 @@ def test_rgsaddle_templates_match_their_problem_stop():
         problem = resolve_problem(ROOT, template["problem"])
         cap = _check_stop(problem, template)
         assert cap >= 1000
-        assert template["commit"] == "c0db2b8d333c557251635cb8bb7b3d81f0088a71"
+        expected = "c0db2b8d333c557251635cb8bb7b3d81f0088a71"
+        if template["problem"] == "saddle-search/pt-island" and template.get("tuning") == "default":
+            expected = "df8ec2f8debaf22326e8f7ba1859ae277840e20a"
+        assert template["commit"] == expected
+        assert "rmsd_connect" not in ((template.get("ini") or {}).get("Search") or {})
         assert template["engine"] == "rgsaddle"
     assert "rgsaddle/dimer-lbfgs" in found
     assert "rgsaddle/prfo-tuned" in found
