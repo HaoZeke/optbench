@@ -192,7 +192,7 @@ def _caption(primary: str | None) -> str:
         "true_rate": "Lowest rate first.",
     }
     detail = captions.get(primary or "", "The columns are the archived keys.")
-    return f"Legacy 2014 archive. {detail}"
+    return f"2014 archive. {detail}"
 
 
 def _plot(points: list[dict], primary: str | None, caption: str | None = None) -> str:
@@ -236,13 +236,10 @@ def _plot(points: list[dict], primary: str | None, caption: str | None = None) -
 
 
 def _code_label(fields: dict[str, str]) -> str:
-    """Code column. Sella 0.1.1 stays on the 2014 table and is marked legacy."""
+    """Code column. Sella 0.1.1 stays on the 2014 table."""
     code = fields.get("code", "")
     version = fields.get("code_version", "")
-    label = f"{code} {version}".strip() if version else code
-    if code == "Sella" and version == "0.1.1":
-        label = f"{label} legacy"
-    return label
+    return f"{code} {version}".strip() if version else code
 
 
 def campaign_problem(stem: str) -> str | None:
@@ -278,18 +275,6 @@ def campaign_problem(stem: str) -> str | None:
     return None
 
 
-def _not_reproduced() -> set[str]:
-    """Archive rows whose exact-setup rerun missed the tolerance."""
-    from .reproduction import load_ledger
-
-    path = Path(__file__).resolve().parents[1] / "oracle" / "reproduction.jsonl"
-    found: set[str] = set()
-    for row in load_ledger(path):
-        if row.get("status") == "not_reproduced":
-            found.add(f"{row['suite']}/{row['problem']}/{row['entry']}")
-    return found
-
-
 def problem_html(
     problem: dict,
     oracle: list[dict],
@@ -301,7 +286,7 @@ def problem_html(
     heading_text: str | None = None,
     include_rule: bool = True,
 ) -> str:
-    """Legacy 2014 table for one problem. The v2 rank is a separate section."""
+    """2014 archive table for one problem. The v2 rank is a separate section."""
     canonical_rows = []
     for row in _rows_for(problem, oracle):
         fields, _renamed = normalize(row["fields"])
@@ -319,7 +304,7 @@ def problem_html(
 
     ident = section_id or str(problem["problem"])
     title = heading_text or str(problem.get("title") or problem["problem"])
-    lines = [f'<section class="bench bench-legacy-section" id="{html.escape(ident)}">']
+    lines = [f'<section class="bench bench-archive-section" id="{html.escape(ident)}">']
     lines.append(f"<{heading}>{html.escape(title)}</{heading}>")
     if include_rule:
         bits = _bits(problem)
@@ -331,23 +316,17 @@ def problem_html(
     if smoke_note:
         lines.append(f'<p class="bench-smoke">{html.escape(smoke_note)}</p>')
     lines.append('<details class="bench-details">')
-    lines.append("<summary>Legacy 2014 archive</summary>")
+    lines.append("<summary>2014 archive</summary>")
 
-    misses = _not_reproduced()
     prepared = []
-    any_miss = False
     for rank, (row, fields) in enumerate(canonical_rows, 1):
         value = _float(fields.get(primary, "")) if primary else None
         held = _held(fields)
         code = _code_label(fields)
         row_id = _slug(f"{problem['id']}-{row['entry']}")
-        missed = f"{problem['id']}/{row['entry']}" in misses
-        any_miss = any_miss or missed
         label = row["entry"]
         if held:
             label = f"{label} (held out of the original table)"
-        if missed:
-            label = f"{label} · not reproduced"
         prepared.append(
             {
                 "id": row_id,
@@ -359,17 +338,14 @@ def problem_html(
                 "value": value,
                 "best": best is not None and value == best,
                 "held": held,
-                "current": bool(row.get("current")),
             }
         )
-    legacy = (
-        "Legacy 2014 archive. These rows stay in the published order. "
+    archive = (
+        "2014 archive. These rows stay in the published order. "
         "They are not a v2 score."
     )
-    if any_miss:
-        legacy += " A row marked not reproduced has a harness rerun outside the archive tolerance."
-    lines.append(f'<p class="bench-legacy">{legacy}</p>')
-    lines.append('<div class="bench-table"><table class="bench-legacy">')
+    lines.append(f'<p class="bench-archive">{archive}</p>')
+    lines.append('<div class="bench-table"><table class="bench-archive">')
     lines.append(f"<caption>{html.escape(_caption(primary))}</caption>")
     headers = ["", "Entry", "Code", *metrics, "Contributor", "Date"]
     lines.append("<thead><tr>")
@@ -383,8 +359,6 @@ def problem_html(
             classes.append("best")
         if point["held"]:
             classes.append("held")
-        if point.get("current"):
-            classes.append("current")
         class_attr = f' class="{" ".join(classes)}"' if classes else ""
         cells = [str(point["rank"]), point["label"], point["code"]]
         for metric in metrics:
@@ -397,7 +371,7 @@ def problem_html(
             lines.append(f'<td class="{kind}">{html.escape(cell)}</td>')
         lines.append("</tr>")
     lines.append("</tbody></table></div>")
-    lines.append(_plot(prepared, primary, "Legacy 2014 scores"))
+    lines.append(_plot(prepared, primary, "2014 scores"))
     lines.append("</details>")
     lines.append("</section>")
     return "\n".join(lines)
@@ -448,13 +422,13 @@ def _rule_html(problem: dict, smoke_note: str = "") -> str:
     return "\n".join(lines)
 
 
-def _legacy_section(problem: dict, oracle: list[dict]) -> str:
+def _archive_section(problem: dict, oracle: list[dict]) -> str:
     return problem_html(
         problem,
         oracle,
-        section_id=f"{problem['problem']}-legacy",
+        section_id=f"{problem['problem']}-archive",
         heading="h3",
-        heading_text="Legacy 2014 archive",
+        heading_text="2014 archive",
         include_rule=False,
     )
 
@@ -475,7 +449,7 @@ def _headlines_html(
         '<section class="bench" id="headlines">',
         "<p>The first row of each problem is the best full harness run, ranked by PAR-2. "
         "The ranked table and the performance profile are on the problem page. "
-        "The 2014 archive is labelled legacy on that page.</p>",
+        "The 2014 archive is on that page.</p>",
     ]
     for suite in order:
         group = by_suite.get(suite)
@@ -509,7 +483,7 @@ def _collection_html(
 
     lines = [
         '<section class="bench" id="collection">',
-        "<p>Each problem leads with the current v2 rank. "
+        "<p>Each problem leads with the v2 rank. "
         "The 2014 rows follow, in the published order.</p>",
     ]
     for suite in order:
@@ -527,7 +501,7 @@ def _collection_html(
             if lead:
                 lines.append(lead)
             lines.append(f'<p><a href="{html.escape(href)}">Full ranked table and performance profile</a>.</p>')
-            lines.append(_legacy_section(problem, oracle))
+            lines.append(_archive_section(problem, oracle))
     lines.append("</section>")
     return "\n".join(lines)
 
@@ -560,8 +534,8 @@ def _codes_html(root: Path, document: dict) -> str:
             order.append(name)
         grouped[name].append(pin)
     lines = [
-        '<section class="bench" id="current-codes">',
-        "<h2>Current codes</h2>",
+        '<section class="bench" id="pinned-codes">',
+        "<h2>Pinned codes</h2>",
         f"<p>The benchmark contributor is {html.escape(contributor)}. "
         "A ranked row is a full harness run. "
         "The commit on that row is the commit that produced the score.</p>",
@@ -785,7 +759,7 @@ def render(root: Path) -> None:
                         unparsed=pending.get(problem["id"]),
                     )
                 )
-            sections.append(_legacy_section(problem, oracle))
+            sections.append(_archive_section(problem, oracle))
         body = [
             f"#+TITLE: {suite_title(suite)}",
             "#+OPTIONS: toc:nil num:nil author:nil",

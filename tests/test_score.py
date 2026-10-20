@@ -1,6 +1,8 @@
 import subprocess
 
-from optbench.score import half_even, summarize_all, summarize_capped, summarize_divided
+import pytest
+
+from optbench.score import finite_difference_equivalent, half_even, summarize_all, summarize_capped, summarize_divided
 
 
 def test_cap_splits_failures_from_the_mean():
@@ -28,6 +30,16 @@ def test_divided_heptamer_mean_is_the_band_total():
     assert summary["force_calls_max"] == 160
     assert summary["force_calls_per_image"] == 15
     assert summary["call_unit"] == "total"
+
+
+def test_finite_difference_equivalent_is_one_force_call_per_coordinate():
+    assert finite_difference_equivalent(0, 114) == 0
+    assert finite_difference_equivalent(2, 114) == 228
+    assert finite_difference_equivalent(1.5, 6) == 9
+    with pytest.raises(ValueError):
+        finite_difference_equivalent(1, 0)
+    with pytest.raises(ValueError):
+        finite_difference_equivalent(-1, 3)
 
 
 def test_half_even_matches_awk_printf():

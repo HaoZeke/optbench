@@ -5,7 +5,14 @@ from pathlib import Path
 
 import pytest
 
-from optbench.board import MissingAsvCommit, build_board, write_board
+from optbench.board import (
+    MissingAsvCommit,
+    build_board,
+    coordinate_count,
+    render_problem_section,
+    uses_analytic_hessian,
+    write_board,
+)
 from optbench.score import wilson_interval
 
 PIN = "a" * 40
@@ -153,7 +160,7 @@ def test_full_harness_row_is_ranked_by_par2(tmp_path: Path):
     low, high = wilson_interval(1, 2)
     assert row["wilson_low"] == low
     assert row["wilson_high"] == high
-    assert row["current"] is True
+    assert row["newest"] is True
     assert row["registry_match"] is True
     assert row["partial"] is False
 
@@ -189,8 +196,8 @@ def test_duplicate_files_are_kept_and_the_registry_commit_is_current(tmp_path: P
     assert len(ranked) == 2
     by_commit = {row["commit"]: row for row in ranked}
     assert set(by_commit) == {PIN, OTHER}
-    assert by_commit[PIN]["current"] is True
-    assert by_commit[OTHER]["current"] is True
+    assert by_commit[PIN]["newest"] is True
+    assert by_commit[OTHER]["newest"] is True
     assert by_commit[PIN]["history"] is False
     assert by_commit[OTHER]["history"] is False
     assert kept.is_file()
@@ -205,7 +212,7 @@ def test_duplicate_files_are_kept_and_the_registry_commit_is_current(tmp_path: P
     tied_board = build_board(tmp_path)["problems"]["minimization/toy"]["ranked"]
     same = [row["commit"] for row in tied_board if row["par2_mean"] == 3]
     assert same == [OTHER, PIN]
-    assert {row["current"] for row in tied_board if row["par2_mean"] == 3} == {True}
+    assert {row["newest"] for row in tied_board if row["par2_mean"] == 3} == {True}
 
 
 def test_client_counter_is_not_on_the_ranked_board(tmp_path: Path):
@@ -507,9 +514,9 @@ def test_only_the_newest_full_version_is_ranked(tmp_path: Path):
 
     problem = build_board(tmp_path)["problems"]["minimization/toy"]
     assert [row["code_version"] for row in problem["ranked"]] == ["0.4.1"]
-    assert problem["ranked"][0]["current"] is True
+    assert problem["ranked"][0]["newest"] is True
     assert [row["code_version"] for row in problem["history"]] == ["0.4.0"]
-    assert problem["history"][0]["current"] is False
+    assert problem["history"][0]["newest"] is False
     assert problem["history"][0]["history"] is True
     assert [row["code_version"] for row in problem["partial"]] == ["0.4.2"]
     assert old.is_file()
@@ -775,6 +782,139 @@ def test_shipped_band_starts_share_one_call_unit():
                 assert norm["force_calls"] == float(raw["force_calls"])
             if norm["force_calls"]:
                 assert abs(norm["force_calls"] / norm["per_image"] - images) < 1e-9
+
+
+def test_fd_equivalent_sits_beside_an_unchanged_gradient_score(tmp_path: Path):
+    problem = tmp_path / "problems" / "minimization" / "toy.toml"
+    problem.parent.mkdir(parents=True)
+    problem.write_text(
+        "\n".join(
+            [
+                'id = "minimization/toy"',
+                'title = "Toy"',
+                'suite = "minimization"',
+                'problem = "toy"',
+                'contract = "stated"',
+                "",
+                "[sample]",
+                "starts = 2",
+                "",
+                "[convergence]",
+                "force_norm = 0.01",
+                "max_force_calls = 100",
+                "",
+                "[bound]",
+                "atoms = 4",
+                "",
+                "[metrics]",
+                'required = ["force_calls"]',
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    dogleg = tmp_path / "templates" / "toy" / "dogleg.toml"
+    dogleg.parent.mkdir(parents=True)
+    dogleg.write_text(
+        "\n".join(
+            [
+                'id = "toy/dogleg"',
+                'engine = "rgmin"',
+                'problem = "minimization/toy"',
+                'code = "rgmin"',
+                'code_version = "1.0"',
+                f'commit = "{PIN}"',
+                'tuning = "default"',
+                "",
+                "[rgmin]",
+                'method = "dogleg"',
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    _template(tmp_path)
+    _registry(tmp_path)
+    _dat(tmp_path, "toy-dogleg", PIN, template="toy/dogleg", code="rgmin")
+    _dat(tmp_path, "toy-fast", PIN)
+    _starts(
+        tmp_path,
+        "toy-dogleg",
+        [
+            {**_row(3, True, "0"), "hessian_calls": 2},
+            {**_row(4, True, "1"), "hessian_calls": 1},
+        ],
+    )
+    _starts(
+        tmp_path,
+        "toy-fast",
+        [
+            {**_row(5, True, "0"), "hessian_calls": 9},
+            {**_row(5, True, "1"), "hessian_calls": 9},
+        ],
+    )
+
+    document = build_board(tmp_path)
+    ranked = {row["template"]: row for row in document["problems"]["minimization/toy"]["ranked"]}
+    assert ranked["toy/dogleg"]["par2_mean"] == 3.5
+    assert ranked["toy/dogleg"]["mean_calls"] == 3.5
+    assert ranked["toy/dogleg"]["mean_hessian_evals"] == 1.5
+    assert ranked["toy/dogleg"]["mean_fd_equivalent"] == 18
+    assert ranked["toy/fast"]["par2_mean"] == 5
+    assert ranked["toy/fast"]["mean_calls"] == 5
+    assert ranked["toy/fast"]["mean_fd_equivalent"] is None
+    page = render_problem_section(document["problems"]["minimization/toy"], set())
+    assert "<th>FD equivalent</th>" in page
+    assert 'data-field="fd_equivalent">18<' in page
+    assert 'data-field="par2_mean">3.5<' in page
+    assert "it is not the ranked score" in page
+
+
+def test_a_finite_difference_hessian_is_not_charged_again(tmp_path: Path):
+    _problem(tmp_path, starts=1, cap=100)
+    path = tmp_path / "problems" / "minimization" / "toy.toml"
+    path.write_text(path.read_text(encoding="utf-8") + "\n[bound]\natoms = 38\n", encoding="utf-8")
+    _template(tmp_path, "toy/p-rfo")
+    _registry(tmp_path)
+    _dat(tmp_path, "toy-prfo", PIN, template="toy/p-rfo")
+    _starts(tmp_path, "toy-prfo", [{**_row(40, True, "0"), "hessian_calls": 1}])
+
+    document = build_board(tmp_path)
+    row = document["problems"]["minimization/toy"]["ranked"][0]
+    assert row["par2_mean"] == 40
+    assert row["mean_calls"] == 40
+    assert row["mean_fd_equivalent"] is None
+    page = render_problem_section(document["problems"]["minimization/toy"], set())
+    assert "FD equivalent" not in page
+
+
+def test_published_hessian_rows_keep_the_gradient_score():
+    import json
+    import tomllib
+
+    from optbench.score import finite_difference_equivalent
+
+    root = Path(__file__).resolve().parents[1]
+    dat_path = root / "results" / "campaign" / "rgmin-0.4.1-lj38-dogleg.dat"
+    dat = dat_path.read_text(encoding="utf-8")
+    assert "par2_mean 81.881" in dat
+    assert "\nforce_calls 82\n" in dat
+    assert "12033" not in dat
+    template = tomllib.loads((root / "templates" / "rgmin" / "lj38-dogleg.toml").read_text(encoding="utf-8"))
+    problem = tomllib.loads((root / "problems" / "minimization" / "lj38.toml").read_text(encoding="utf-8"))
+    assert uses_analytic_hessian(template)
+    assert coordinate_count(problem) == 114
+    starts = dat_path.with_suffix(".starts.jsonl")
+    values = [
+        finite_difference_equivalent(float(json.loads(line)["hessian_calls"]), 114)
+        for line in starts.read_text(encoding="utf-8").splitlines()
+        if line.strip()
+    ]
+    mean = sum(values) / len(values)
+    rendered = str(int(mean)) if mean.is_integer() else f"{mean:.12g}"
+    assert f"fd_equivalent {rendered}" in dat
+    optking = (root / "results" / "campaign" / "optking-767e2c0c-lj38-p-rfo.dat").read_text(encoding="utf-8")
+    assert "fd_equivalent" not in optking
 
 
 def test_the_current_ase_benchmark_records_the_band_total():

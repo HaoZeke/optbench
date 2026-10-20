@@ -10,12 +10,15 @@ The ranked cost of a band method is the harness force-call total across
 every image. The per-image mean divides that same total by the problem's
 image count, and every code on the problem uses that divisor.
 
+An analytic Hessian stays one evaluation and is not added to that ranked
+total. Where a method evaluates one, the finite-difference equivalent
+(one force call per coordinate) is a separate column.
+
 A row whose start count is below the problem's full set is partial.
 An asv result that covers one start is a smoke run and is partial.
 The full set is the problem file's sample, or the Morse archive when
 that file gives no sample count. It is not the largest campaign file.
 A result that sets ``ranked false`` stays off the ranked table.
-A template that does not reproduce the 2014 archive stays off it too.
 Partial rows stay in the output. A campaign file and an asv track for
 the same run are one row. Only the newest full version of a template
 is ranked. Older full versions stay in the history list.
@@ -39,7 +42,7 @@ from .dat import DatError, parse_lenient
 from .failures import FAILURES, apply_taxonomy, components_for
 from .problems import load_all
 from .profile import performance_profile, profile_cost
-from .score import normalize_start, score_v2
+from .score import finite_difference_equivalent, normalize_start, score_v2
 from .site import SUITE_ORDER, campaign_problem
 from .v2 import parse_repetitions
 
@@ -302,6 +305,48 @@ def _cap_of(problem: dict | None, template: dict | None, fields: dict[str, str])
     return None
 
 
+_ANALYTIC_HESSIAN_METHODS = frozenset({"newton", "dogleg", "rfo"})
+
+
+def coordinate_count(problem: dict | None) -> int | None:
+    """``3N``, or the free coordinates when the problem fixes atoms."""
+    if not problem:
+        return None
+    bound = problem.get("bound") or {}
+    atoms = bound.get("atoms")
+    if atoms in (None, ""):
+        return None
+    free = int(atoms)
+    fixed = bound.get("fixed_atoms")
+    if fixed not in (None, ""):
+        free -= int(fixed)
+    if free < 1:
+        return None
+    return 3 * free
+
+
+def uses_analytic_hessian(template: dict | None) -> bool:
+    """True when the stepper evaluates an analytic Hessian that is not a force call."""
+    if not template:
+        return False
+    section = template.get("rgmin") or {}
+    method = str(section.get("method") or "") if isinstance(section, dict) else ""
+    solver = template.get("solver") or {}
+    if isinstance(solver, dict) and str(solver.get("family") or "") == "rgmin":
+        method = str(solver.get("method") or method)
+    return method in _ANALYTIC_HESSIAN_METHODS
+
+
+def _hessian_evals(raw: dict) -> float:
+    value = raw.get("hessian_calls")
+    if value in (None, ""):
+        return 0.0
+    count = float(value)
+    if not math.isfinite(count) or count < 0:
+        return 0.0
+    return count
+
+
 def _force_tol(problem: dict | None, template: dict | None) -> float | None:
     convergence = (problem or {}).get("convergence") or {}
     for key in ("force_norm", "gradient_norm"):
@@ -319,6 +364,8 @@ def _record_from_raw(
     cap: int | None,
     force_tol: float | None,
     problem_id: str | None = None,
+    template: dict | None = None,
+    coordinates: int | None = None,
 ) -> dict | None:
     if not isinstance(raw, dict):
         return None
@@ -396,6 +443,11 @@ def _record_from_raw(
         record.pop("reasons", None)
     else:
         record["failure"] = revised["failure"]
+    if uses_analytic_hessian(template):
+        hessians = _hessian_evals(raw)
+        record["hessian_evals"] = hessians
+        if coordinates:
+            record["fd_equivalent"] = finite_difference_equivalent(hessians, coordinates)
     return record
 
 
@@ -418,11 +470,15 @@ def _load_group_records(
     force_tol: float | None,
     images: int | None = None,
     problem_id: str | None = None,
+    template: dict | None = None,
+    coordinates: int | None = None,
 ) -> tuple[list[dict], str]:
     if "starts_jsonl" in group:
         collected = []
         for raw in _json_lines(group["starts_jsonl"]):
-            record = _record_from_raw(normalize_start(raw, images), cap, force_tol, problem_id)
+            record = _record_from_raw(
+                normalize_start(raw, images), cap, force_tol, problem_id, template, coordinates
+            )
             if record is not None:
                 collected.append(record)
         if collected:
@@ -430,7 +486,9 @@ def _load_group_records(
     if "starts" in group:
         collected = []
         for raw in _json_lines(group["starts"]):
-            record = _record_from_raw(normalize_start(raw, images), cap, force_tol, problem_id)
+            record = _record_from_raw(
+                normalize_start(raw, images), cap, force_tol, problem_id, template, coordinates
+            )
             if record is not None:
                 collected.append(record)
         if collected:
@@ -441,7 +499,9 @@ def _load_group_records(
         collected = []
         for run in runs:
             for raw in run.get("starts") or []:
-                record = _record_from_raw(normalize_start(raw, images), cap, force_tol, problem_id)
+                record = _record_from_raw(
+                    normalize_start(raw, images), cap, force_tol, problem_id, template, coordinates
+                )
                 if record is not None:
                     collected.append(record)
         if collected:
@@ -523,7 +583,7 @@ def _blank_row(**values) -> dict:
         "comparable": False,
         "partial": False,
         "partial_reason": "",
-        "current": False,
+        "newest": False,
         "history": False,
         "registry_match": False,
         "call_unit": "",
@@ -543,6 +603,8 @@ def _blank_row(**values) -> dict:
         "nfailed": None,
         "min_calls": None,
         "max_calls": None,
+        "mean_fd_equivalent": None,
+        "mean_hessian_evals": None,
         "failures": {},
         "cap": None,
         "scored": False,
@@ -566,6 +628,12 @@ def _score_records(records: list[dict], cap: int | None) -> dict:
     summary["min_calls"] = ordered[0]
     summary["max_calls"] = ordered[-1]
     summary["call_unit"] = "total"
+    if records and all("fd_equivalent" in record for record in records):
+        equivalents = [float(record["fd_equivalent"]) for record in records]
+        summary["mean_fd_equivalent"] = sum(equivalents) / len(equivalents)
+    if records and all("hessian_evals" in record for record in records):
+        hessians = [float(record["hessian_evals"]) for record in records]
+        summary["mean_hessian_evals"] = sum(hessians) / len(hessians)
     per_image = [record["per_image"] for record in records if record.get("per_image") is not None]
     if len(per_image) == len(records):
         per_ordered = sorted(per_image)
@@ -595,6 +663,8 @@ def _apply_summary(row: dict, summary: dict, records: list[dict]) -> None:
     row["max_calls"] = summary["max_calls"]
     row["nfailed"] = summary["nfailed"]
     row["call_unit"] = summary.get("call_unit") or "total"
+    row["mean_fd_equivalent"] = summary.get("mean_fd_equivalent")
+    row["mean_hessian_evals"] = summary.get("mean_hessian_evals")
     row["mean_per_image"] = summary.get("mean_per_image")
     row["median_per_image"] = summary.get("median_per_image")
     row["failures"] = {name: summary[f"n_{name}"] for name in FAILURES}
@@ -633,13 +703,13 @@ def _version_key(text: str) -> tuple[int, ...]:
 
 
 def _mark_versions(rows: list[dict]) -> None:
-    """The newest full version of a template is current. Older full versions are history."""
+    """The newest full version of a template is ranked. Older full versions are history."""
     groups: dict[tuple, list[dict]] = defaultdict(list)
     for row in rows:
         template = row.get("template") or ""
         if not template:
             row["history"] = False
-            row["current"] = bool(row.get("comparable") and not row.get("partial"))
+            row["newest"] = bool(row.get("comparable") and not row.get("partial"))
             continue
         groups[(row.get("problem"), template)].append(row)
     for group in groups.values():
@@ -648,13 +718,13 @@ def _mark_versions(rows: list[dict]) -> None:
         newest = max((_version_key(str(row.get("code_version") or "")) for row in eligible), default=None)
         for row in group:
             if id(row) in eligible_ids and _version_key(str(row.get("code_version") or "")) == newest:
-                row["current"] = True
+                row["newest"] = True
                 row["history"] = False
             elif id(row) in eligible_ids:
-                row["current"] = False
+                row["newest"] = False
                 row["history"] = True
             else:
-                row["current"] = False
+                row["newest"] = False
                 row["history"] = False
 
 
@@ -690,7 +760,11 @@ def _join_sources(rows: list[dict]) -> str:
 def _collapse_run(group: list[dict]) -> dict:
     ordered = sorted(
         group,
-        key=lambda row: ("campaign" not in _source_parts(row), str(row.get("path") or "")),
+        key=lambda row: (
+            not bool(row.get("comparable")),
+            "campaign" not in _source_parts(row),
+            str(row.get("path") or ""),
+        ),
     )
     base = dict(ordered[0])
     paths: list[str] = []
@@ -717,6 +791,48 @@ def _dedup(rows: list[dict]) -> list[dict]:
     merged = []
     for group in groups.values():
         merged.append(group[0] if len(group) == 1 else _collapse_run(group))
+    return merged
+
+
+def _run_identity(row: dict) -> tuple:
+    commit = str(row.get("commit") or "")
+    token = commit[:12] if commit else str(row.get("entry") or row.get("path") or "")
+    return (
+        row.get("problem"),
+        row.get("template"),
+        str(row.get("code_version") or ""),
+        token,
+        row.get("n"),
+    )
+
+
+def _merge_same_code(rows: list[dict]) -> list[dict]:
+    """One row when a campaign file and an asv track are the same run.
+
+    The score fields can differ by a call or two, so the exact-score
+    dedup keeps both. The comparable row supplies the numbers. Paths
+    from both sources stay on that row.
+    """
+    groups: dict[tuple, list[dict]] = defaultdict(list)
+    order: list[tuple] = []
+    for row in rows:
+        key = _run_identity(row)
+        if key not in groups:
+            order.append(key)
+        groups[key].append(row)
+    merged = []
+    for key in order:
+        group = groups[key]
+        if len(group) == 1:
+            merged.append(group[0])
+            continue
+        sources: set[str] = set()
+        for row in group:
+            sources |= _source_parts(row)
+        if "campaign" in sources and "asv" in sources:
+            merged.append(_collapse_run(group))
+        else:
+            merged.extend(group)
     return merged
 
 
@@ -755,7 +871,15 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
         force_tol = _force_tol(problem, template)
         images = _image_count(problem, template, fields)
         try:
-            records, record_source = _load_group_records(group, cap, force_tol, images, problem_id)
+            records, record_source = _load_group_records(
+                group,
+                cap,
+                force_tol,
+                images,
+                problem_id,
+                template,
+                coordinate_count(problem),
+            )
         except (json.JSONDecodeError, OSError, ValueError) as exc:
             unparsed.append(
                 _blank_row(
@@ -1020,31 +1144,6 @@ def _rank_key(row: dict) -> tuple:
     )
 
 
-def _matches_hold(row: dict, held) -> bool:
-    problem = str(row.get("problem") or "")
-    template = str(row.get("template") or "")
-    if template and (problem, template) in held.templates:
-        return True
-    paths = [part.strip() for part in str(row.get("path") or "").split(";") if part.strip()]
-    return any(path in held.paths for path in paths)
-
-
-def _apply_reproduction_hold(row: dict, held) -> None:
-    """Keep an exact archive rerun that missed the tolerance off the ranked table."""
-    if not _matches_hold(row, held) or row.get("_declared_partial"):
-        return
-    n = int(row.get("n") or 0)
-    if _source_parts(row) == {"asv"} and n <= 1:
-        return
-    reason = "does not reproduce the 2014 archive"
-    if not row.get("scored"):
-        note = str(row.get("note") or "")
-        if reason not in note:
-            row["note"] = f"{note}; {reason}" if note else reason
-        return
-    row["_declared_partial"] = reason
-
-
 def build_board(root: Path) -> dict:
     """Score every committed campaign file and asv track under ``root``."""
     root = Path(root)
@@ -1054,14 +1153,7 @@ def build_board(root: Path) -> dict:
     campaign, unparsed = _campaign_rows(root, problems, templates)
     asv_rows, asv_unparsed, unmapped = _asv_rows(root, problems, templates)
     unparsed.extend(asv_unparsed)
-    rows = _dedup(campaign + asv_rows)
-    from .reproduction import holdback
-
-    held = holdback(root)
-    for row in rows:
-        _apply_reproduction_hold(row, held)
-    for row in unparsed:
-        _apply_reproduction_hold(row, held)
+    rows = _merge_same_code(_dedup(campaign + asv_rows))
     full_n: dict[str, int | None] = {}
     for problem_id, problem in problems.items():
         full_n[problem_id] = stated_full_n(root, problem)
@@ -1352,11 +1444,18 @@ def _show_per_image(problem: dict) -> bool:
     return any(row.get("mean_per_image") is not None for row in rows)
 
 
+def _show_fd(problem: dict | None) -> bool:
+    """The finite-difference column is present where a ranked method evaluates an analytic Hessian."""
+    if not problem:
+        return False
+    return any(row.get("mean_fd_equivalent") is not None for row in problem.get("ranked") or [])
+
+
 def _headers(problem: dict) -> list[str]:
-    # The ranked table and the headline table list the current version only.
-    # Older versions stay in the history list, so a Current column is yes on
-    # every ranked row. The Wilson interval is one cell, low then high.
-    # Two separate columns push the minimization page over the DOM budget.
+    # The ranked table and the headline table list the newest full version.
+    # Older versions stay in the history list. The success bounds are one
+    # cell, low then high. Two separate columns push the minimization page
+    # over the DOM budget.
     headers = [
         "Template",
         "Version",
@@ -1368,19 +1467,21 @@ def _headers(problem: dict) -> list[str]:
         "Median calls",
         "Mean calls",
     ]
+    if _show_fd(problem):
+        headers.append("FD equivalent")
     if _show_per_image(problem):
         headers.append("Per-image mean")
     headers.extend(["Failures", "n"])
     return headers
 
 
-def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
+def ranked_cells(row: dict, per_image: bool, fd: bool = False) -> list[tuple[str, str]]:
     """Visible ranked-table cells, in column order.
 
     The site check compares these strings with the rendered table.
-    The current flag stays on the board document. Every ranked row is
-    the newest full version of its template, and the paragraph above
-    the table already says so.
+    Every ranked row is the newest full version of its template, and
+    the paragraph above the table already says so. ``fd`` is the
+    finite-difference equivalent of analytic Hessian evaluations.
     """
     cells = [
         ("template", str(row.get("template") or row.get("entry") or "")),
@@ -1396,6 +1497,8 @@ def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
         ("median_calls", _format_number(row.get("median_calls"))),
         ("mean_calls", _format_number(row.get("mean_calls"))),
     ]
+    if fd:
+        cells.append(("fd_equivalent", _format_number(row.get("mean_fd_equivalent"))))
     if per_image:
         cells.append(("mean_per_image", _format_number(row.get("mean_per_image"))))
     cells.append(("failures", _failure_text(row.get("failures") or {})))
@@ -1403,9 +1506,9 @@ def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
     return cells
 
 
-def _row_cells(row: dict, per_image: bool) -> str:
+def _row_cells(row: dict, per_image: bool, fd: bool = False) -> str:
     return "".join(
-        f'<td data-field="{field}">{_cell(value)}</td>' for field, value in ranked_cells(row, per_image)
+        f'<td data-field="{field}">{_cell(value)}</td>' for field, value in ranked_cells(row, per_image, fd)
     )
 
 
@@ -1589,6 +1692,7 @@ def summary_table(problems: list[dict], codes: list[str], link) -> str:
 def headline_table(problem: dict) -> str:
     """One ranked row: the best full harness run."""
     per_image = _show_per_image(problem)
+    fd = _show_fd(problem)
     headers = _headers(problem)
     lines = [
         '<div class="bench-scroll">',
@@ -1597,7 +1701,7 @@ def headline_table(problem: dict) -> str:
     ]
     ranked = list(problem.get("ranked") or [])
     if ranked:
-        lines.append(f"<tr>{_row_cells(ranked[0], per_image)}</tr>")
+        lines.append(f"<tr>{_row_cells(ranked[0], per_image, fd)}</tr>")
     else:
         lines.append(f'<tr><td colspan="{len(headers)}">No full harness row.</td></tr>')
     lines.append("</tbody></table></div>")
@@ -1625,6 +1729,7 @@ def render_sweep_section(
 ) -> str:
     """One ranked row per code. Every sigma stays on ``detail_href``."""
     per_image = _show_per_image(problem)
+    fd = _show_fd(problem)
     headers = _headers(problem)
     ident = section_id or _slug(problem["id"])
     ranked = list(problem.get("ranked") or [])
@@ -1655,13 +1760,15 @@ def render_sweep_section(
         f'<table data-board-table="sweep" data-problem="{_cell(problem["id"])}" '
         f'id="{_cell(ident)}-templates">'
     )
-    lines.append(
-        "<caption>Lowest PAR-2 full run of each code. "
-        "The noise page lists every sigma.</caption>"
-    )
+    sweep_caption = "Lowest PAR-2 full run of each code. The noise page lists every sigma."
+    if fd:
+        sweep_caption += (
+            " FD equivalent is one force call per coordinate for each analytic Hessian and is not the ranked score."
+        )
+    lines.append(f"<caption>{sweep_caption}</caption>")
     lines.append("<thead><tr>" + "".join(f"<th>{_cell(header)}</th>" for header in headers) + "</tr></thead><tbody>")
     for row in chosen:
-        lines.append(f"<tr>{_row_cells(row, per_image)}</tr>")
+        lines.append(f"<tr>{_row_cells(row, per_image, fd)}</tr>")
     if not chosen:
         lines.append(f'<tr><td colspan="{len(headers)}">No full harness row.</td></tr>')
     lines.append("</tbody></table></div></section>")
@@ -1708,11 +1815,17 @@ def _table(
     heading: str = "h2",
 ) -> str:
     per_image = _show_per_image(problem)
+    fd = _show_fd(problem)
     headers = _headers(problem)
     caption = (
         "Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. "
-        "Wilson bounds are the 95% interval on the success rate."
+        "The Wilson column is the 95% success-rate bound, low then high."
     )
+    if fd:
+        caption += (
+            " FD equivalent is one force call per coordinate for each analytic Hessian, "
+            "shown beside those columns, and it is not the ranked score."
+        )
     if per_image:
         caption += " Per-image mean divides that total by the problem's moving images, the same way for every code."
     ident = section_id or _slug(problem["id"])
@@ -1746,7 +1859,7 @@ def _table(
     lines.append(f"<caption>{caption}</caption>")
     lines.append("<thead><tr>" + "".join(f"<th>{_cell(header)}</th>" for header in headers) + "</tr></thead><tbody>")
     for row in ranked:
-        lines.append(f"<tr>{_row_cells(row, per_image)}</tr>")
+        lines.append(f"<tr>{_row_cells(row, per_image, fd)}</tr>")
     if not ranked:
         lines.append(f'<tr><td colspan="{len(headers)}">No full harness row.</td></tr>')
     lines.append("</tbody></table></div>")

@@ -6,9 +6,28 @@ import numpy as np
 import pytest
 
 from optbench.campaign import _check_stop, list_templates, resolve_problem
-from optbench.softsaddle_run import hypersphere, library_path, run_mode_point
+from optbench.softsaddle_run import _endpoint_link, hypersphere, library_path, run_mode_point
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def test_saddle_identity_is_the_per_atom_link_not_cartesian_rmsd():
+    atoms = 175
+    reactant = np.zeros((atoms, 3))
+    plus = reactant.copy()
+    plus[0, 0] = 2.71
+    minus = reactant.copy()
+    rmsd = float(np.sqrt(np.mean(np.sum((plus - reactant) ** 2, axis=1))))
+    assert rmsd < 0.5
+    linked, plus_span, minus_span = _endpoint_link(plus, minus, reactant, None, 0.1)
+    assert linked is True
+    assert plus_span == 2.71
+    assert minus_span == 0.0
+    both = plus.copy()
+    far, far_plus, far_minus = _endpoint_link(both, plus, reactant, None, 0.1)
+    assert far is False
+    assert far_plus > 0.1
+    assert far_minus > 0.1
 
 
 def test_softsaddle_templates_match_the_registry_pin():

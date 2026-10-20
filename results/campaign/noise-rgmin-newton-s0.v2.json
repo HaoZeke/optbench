@@ -23,6 +23,8 @@
         "bootstrap_resamples": 2000,
         "bootstrap_seed": 20261015,
         "cap": 10000,
+        "fd_equivalent": 7483.986,
+        "hessian_evals": 65.649,
         "includes_failures": true,
         "iqr": 22.0,
         "iqr_high": 23.25,

@@ -1,4 +1,5 @@
 # counter harness. One force call is one clean energy and gradient.
+# fd_equivalent is the mean, over every start, of analytic Hessian evaluations times the coordinate count.
 # Noise is added after the call. A repeated coordinate keeps that sample.
 # The index uses the clean Hessian. Six rigid modes are removed.
 # A curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6).
@@ -7,6 +8,8 @@
 force_calls 67
 force_calls_min 35
 force_calls_max 128
+hessian_evals 65.649
+fd_equivalent 7483.986
 nfailed 0
 median 64
 code rgmin

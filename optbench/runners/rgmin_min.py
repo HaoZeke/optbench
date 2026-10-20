@@ -4,7 +4,8 @@ The callback is ``RgpotCounter.calculate`` on a ``HarnessCounter`` that
 caches a repeated coordinate and raises ``ForceCallCap`` before a search
 call once the budget is spent. That refused call is not counted. Analytic
 Hessians used by Newton and dogleg are not force calls. They are counted
-separately.
+once per evaluation. The finite-difference equivalent, one force call per
+coordinate, is recorded beside that count and is not the ranked score.
 
 A legacy success is a start whose harness count is under the cap and whose
 force norm is at the problem stop. A v2 success also has Hessian index 0.
@@ -35,7 +36,7 @@ from optbench.potentials import (
     read_con,
 )
 from optbench.potserver import RgpotCounter
-from optbench.score import score_v2, summarize_capped
+from optbench.score import finite_difference_equivalent, score_v2, summarize_capped
 from optbench.stationary import curvature_tolerance, negative_index, vibrational_eigenvalues
 from optbench.v2 import collect_provenance, write_starts
 
@@ -317,6 +318,8 @@ def _dat(summary: dict, template: dict, metrics: dict, commit: str, version: str
         "template": template["id"],
         "tuning": template.get("tuning", ""),
         "counter": "harness",
+        "hessian_evals": metrics.get("hessian_evals"),
+        "fd_equivalent": metrics.get("fd_equivalent"),
         "par2_mean": metrics.get("par2_mean"),
         "wilson_low": metrics.get("wilson_low"),
         "wilson_high": metrics.get("wilson_high"),
@@ -347,6 +350,10 @@ def _dat(summary: dict, template: dict, metrics: dict, commit: str, version: str
             "The stop is the noisy force norm at max(clean tolerance, kappa * sigma * sqrt(components)), "
             "and the clean energy over the last window evaluations spans at most max(clean tolerance, kappa * sigma). "
             "The Hessian is the clean force."
+        )
+    if metrics.get("fd_equivalent") is not None:
+        lines.append(
+            "# fd_equivalent is the mean, over every start, of analytic Hessian evaluations times the coordinate count."
         )
     note = str(template.get("note") or "").strip()
     if note:
@@ -526,6 +533,13 @@ def _run(
         ],
         cap,
     )
+    if method in HESSIAN_METHODS and jobs:
+        coordinates = len(jobs[0]["coords"])
+        hessians = [float(record.get("hessian_calls") or 0) for record in records]
+        metrics["hessian_evals"] = sum(hessians) / len(hessians)
+        metrics["fd_equivalent"] = sum(
+            finite_difference_equivalent(value, coordinates) for value in hessians
+        ) / len(hessians)
     passed = {
         "gtol": gtol,
         "maxiter": cap,

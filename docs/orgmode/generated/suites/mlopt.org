@@ -95,7 +95,7 @@
    <summary>All templates (17 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="mlopt/C2H4">
-   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
+   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. The Wilson column is the 95% success-rate bound, low then high.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td data-field="template">kliff/c2h4-lbfgs</td><td data-field="version">KLIFF 1.0.1</td><td data-field="commit">df2d4de2d8c0</td><td data-field="source">campaign</td><td data-field="par2_mean">269.36</td><td data-field="success_rate">1</td><td data-field="wilson">0.928652–1</td><td data-field="median_calls">138</td><td data-field="mean_calls">269.36</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">50</td></tr>
    <tr><td data-field="template">optax/c2h4-lbfgs</td><td data-field="version">Optax 0.2.8</td><td data-field="commit">107e9ad20ca6</td><td data-field="source">campaign</td><td data-field="par2_mean">336.84</td><td data-field="success_rate">1</td><td data-field="wilson">0.928652–1</td><td data-field="median_calls">327</td><td data-field="mean_calls">336.84</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">50</td></tr>
@@ -118,13 +118,13 @@
    <h3>Partial</h3>
    <p>optax/c2h4-adam Optax asv n=1, smoke run; scored 1 of 50 starts. optax/c2h4-adam-force Optax asv n=1, smoke run; scored 1 of 50 starts. optax/c2h4-lbfgs Optax asv n=1, smoke run; scored 1 of 50 starts. optax/c2h4-lbfgs-force Optax asv n=1, smoke run; scored 1 of 50 starts. optax/c2h4-rprop Optax asv n=1, smoke run; scored 1 of 50 starts. optax/c2h4-rprop-force Optax asv n=1, smoke run; scored 1 of 50 starts. n2p2/c2h4-kalman n2p2 asv n=1, smoke run; scored 1 of 50 starts. kliff/c2h4-adam KLIFF asv n=1, smoke run; scored 1 of 50 starts. kliff/c2h4-adam-force KLIFF asv n=1, smoke run; scored 1 of 50 starts. kliff/c2h4-lbfgs KLIFF asv n=1, smoke run; scored 1 of 50 starts. kliff/c2h4-lbfgs-force KLIFF asv n=1, smoke run; scored 1 of 50 starts. kliff/c2h4-rprop KLIFF asv n=1, smoke run; scored 1 of 50 starts. kliff/c2h4-rprop-force KLIFF asv n=1, smoke run; scored 1 of 50 starts.</p>
    </details>
-   </section><section class="bench bench-legacy-section" id="C2H4-legacy">
-   <h3>Legacy 2014 archive</h3>
+   </section><section class="bench bench-archive-section" id="C2H4-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest epochs first. Failures are left out of this mean.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Fewest epochs first. Failures are left out of this mean.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -224,7 +224,7 @@
    <td class="text">13 Dec 2022</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:6"></div><script type="application/json" class="bench-plot-data">{"metric": "mean_epoch", "scale": "log", "points": [{"id": "mlopt-c2h4-pyamff-rprop10-7-fcoeff0", "entry": "pyamff-rprop10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 184.56, "best": true, "held": false, "failed": false}, {"id": "mlopt-c2h4-pyamff-lbfgs10-7-fcoeff0", "entry": "pyamff-lbfgs10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 2157.14, "best": false, "held": false, "failed": false}, {"id": "mlopt-c2h4-pyamff-adam10-7-fcoeff0", "entry": "pyamff-adam10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 4395.3, "best": false, "held": false, "failed": false}, {"id": "mlopt-c2h4-pyamff-rprop10-7-fcoeff0-1", "entry": "pyamff-rprop10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 12926.88, "best": false, "held": false, "failed": false}, {"id": "mlopt-c2h4-pyamff-adam10-7-fcoeff0-1", "entry": "pyamff-adam10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 13876.7, "best": false, "held": false, "failed": false}, {"id": "mlopt-c2h4-pyamff-lbfgs10-7-fcoeff0-1", "entry": "pyamff-lbfgs10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 23314.46, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:6"></div><script type="application/json" class="bench-plot-data">{"metric": "mean_epoch", "scale": "log", "points": [{"id": "mlopt-c2h4-pyamff-rprop10-7-fcoeff0", "entry": "pyamff-rprop10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 184.56, "best": true, "held": false, "failed": false}, {"id": "mlopt-c2h4-pyamff-lbfgs10-7-fcoeff0", "entry": "pyamff-lbfgs10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 2157.14, "best": false, "held": false, "failed": false}, {"id": "mlopt-c2h4-pyamff-adam10-7-fcoeff0", "entry": "pyamff-adam10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 4395.3, "best": false, "held": false, "failed": false}, {"id": "mlopt-c2h4-pyamff-rprop10-7-fcoeff0-1", "entry": "pyamff-rprop10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 12926.88, "best": false, "held": false, "failed": false}, {"id": "mlopt-c2h4-pyamff-adam10-7-fcoeff0-1", "entry": "pyamff-adam10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 13876.7, "best": false, "held": false, "failed": false}, {"id": "mlopt-c2h4-pyamff-lbfgs10-7-fcoeff0-1", "entry": "pyamff-lbfgs10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 23314.46, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section><section class="bench" id="emt-pt38" data-problem="mlopt/emt-pt38">
    <h2>EMT Pt 38 nanoparticle</h2>
@@ -244,7 +244,7 @@
    <summary>All templates (17 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="mlopt/emt-pt38">
-   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
+   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. The Wilson column is the 95% success-rate bound, low then high.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td data-field="template">kliff/emt-pt38-lbfgs</td><td data-field="version">KLIFF 1.0.1</td><td data-field="commit">df2d4de2d8c0</td><td data-field="source">campaign</td><td data-field="par2_mean">24.16</td><td data-field="success_rate">1</td><td data-field="wilson">0.928652–1</td><td data-field="median_calls">14</td><td data-field="mean_calls">24.16</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">50</td></tr>
    <tr><td data-field="template">n2p2/emt-pt38-kalman</td><td data-field="version">n2p2 2.3.0</td><td data-field="commit">29b9c9f10b1a</td><td data-field="source">campaign</td><td data-field="par2_mean">31.5</td><td data-field="success_rate">1</td><td data-field="wilson">0.928652–1</td><td data-field="median_calls">22.5</td><td data-field="mean_calls">31.5</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">50</td></tr>
@@ -267,13 +267,13 @@
    <h3>Partial</h3>
    <p>optax/emt-pt38-adam Optax asv n=1, smoke run; scored 1 of 50 starts. optax/emt-pt38-adam-force Optax asv n=1, smoke run; scored 1 of 50 starts. optax/emt-pt38-lbfgs Optax asv n=1, smoke run; scored 1 of 50 starts. optax/emt-pt38-lbfgs-force Optax asv n=1, smoke run; scored 1 of 50 starts. optax/emt-pt38-rprop Optax asv n=1, smoke run; scored 1 of 50 starts. optax/emt-pt38-rprop-force Optax asv n=1, smoke run; scored 1 of 50 starts. n2p2/emt-pt38-kalman n2p2 asv n=1, smoke run; scored 1 of 50 starts. kliff/emt-pt38-adam KLIFF asv n=1, smoke run; scored 1 of 50 starts. kliff/emt-pt38-adam-force KLIFF asv n=1, smoke run; scored 1 of 50 starts. kliff/emt-pt38-lbfgs KLIFF asv n=1, smoke run; scored 1 of 50 starts. kliff/emt-pt38-lbfgs-force KLIFF asv n=1, smoke run; scored 1 of 50 starts. kliff/emt-pt38-rprop KLIFF asv n=1, smoke run; scored 1 of 50 starts. kliff/emt-pt38-rprop-force KLIFF asv n=1, smoke run; scored 1 of 50 starts.</p>
    </details>
-   </section><section class="bench bench-legacy-section" id="emt-pt38-legacy">
-   <h3>Legacy 2014 archive</h3>
+   </section><section class="bench bench-archive-section" id="emt-pt38-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest epochs first. Failures are left out of this mean.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Fewest epochs first. Failures are left out of this mean.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -373,7 +373,7 @@
    <td class="text">09 Dec 2022</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:6"></div><script type="application/json" class="bench-plot-data">{"metric": "mean_epoch", "scale": "log", "points": [{"id": "mlopt-emt-pt38-pyamff-rprop10-7-fcoeff0", "entry": "pyamff-rprop10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 97.58, "best": true, "held": false, "failed": false}, {"id": "mlopt-emt-pt38-pyamff-rprop10-7-fcoeff0-1", "entry": "pyamff-rprop10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 1022.86, "best": false, "held": false, "failed": false}, {"id": "mlopt-emt-pt38-pyamff-adam10-7-fcoeff0", "entry": "pyamff-adam10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 1103.24, "best": false, "held": false, "failed": false}, {"id": "mlopt-emt-pt38-pyamff-adam10-7-fcoeff0-1", "entry": "pyamff-adam10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 1708.8, "best": false, "held": false, "failed": false}, {"id": "mlopt-emt-pt38-pyamff-lbfgs10-7-fcoeff0", "entry": "pyamff-lbfgs10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 1791.8, "best": false, "held": false, "failed": false}, {"id": "mlopt-emt-pt38-pyamff-lbfgs10-7-fcoeff0-1", "entry": "pyamff-lbfgs10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 1943.34, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:6"></div><script type="application/json" class="bench-plot-data">{"metric": "mean_epoch", "scale": "log", "points": [{"id": "mlopt-emt-pt38-pyamff-rprop10-7-fcoeff0", "entry": "pyamff-rprop10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 97.58, "best": true, "held": false, "failed": false}, {"id": "mlopt-emt-pt38-pyamff-rprop10-7-fcoeff0-1", "entry": "pyamff-rprop10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 1022.86, "best": false, "held": false, "failed": false}, {"id": "mlopt-emt-pt38-pyamff-adam10-7-fcoeff0", "entry": "pyamff-adam10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 1103.24, "best": false, "held": false, "failed": false}, {"id": "mlopt-emt-pt38-pyamff-adam10-7-fcoeff0-1", "entry": "pyamff-adam10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 1708.8, "best": false, "held": false, "failed": false}, {"id": "mlopt-emt-pt38-pyamff-lbfgs10-7-fcoeff0", "entry": "pyamff-lbfgs10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 1791.8, "best": false, "held": false, "failed": false}, {"id": "mlopt-emt-pt38-pyamff-lbfgs10-7-fcoeff0-1", "entry": "pyamff-lbfgs10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 1943.34, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section>
 #+end_export

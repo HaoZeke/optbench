@@ -35,7 +35,7 @@ from optbench.noise import (
 from optbench.noise_catalog import HESSIAN_METHODS, allows_method
 from optbench.potentials import lennard_jones, lennard_jones_hessian
 from optbench.potserver import RgpotCounter
-from optbench.score import score_v2, summarize_capped
+from optbench.score import finite_difference_equivalent, score_v2, summarize_capped
 from optbench.stationary import curvature_tolerance, negative_index, vibrational_eigenvalues
 from optbench.v2 import collect_provenance, write_starts
 
@@ -517,6 +517,8 @@ def _dat(summary: dict, template: dict, metrics: dict, sigma: float) -> str:
         "counter": "harness",
         "problem": template.get("problem"),
         "sigma": sigma,
+        "hessian_evals": metrics.get("hessian_evals"),
+        "fd_equivalent": metrics.get("fd_equivalent"),
         "par2_mean": metrics.get("par2_mean"),
         "wilson_low": metrics.get("wilson_low"),
         "wilson_high": metrics.get("wilson_high"),
@@ -537,6 +539,10 @@ def _dat(summary: dict, template: dict, metrics: dict, sigma: float) -> str:
         "# A curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6).",
         "# Energy and Kabsch RMSD are not applied: the problem file has no per-start reference.",
     ]
+    if metrics.get("fd_equivalent") is not None:
+        lines.append(
+            "# fd_equivalent is the mean, over every start, of analytic Hessian evaluations times the coordinate count."
+        )
     note = str(template.get("note") or "").strip()
     if note:
         lines.append("# " + note.replace("\n", " "))
@@ -674,6 +680,13 @@ def run_template(
         ],
         cap,
     )
+    if str(solver.get("method") or "") in HESSIAN_METHODS and jobs:
+        coordinates = len(jobs[0]["coords"])
+        hessians = [float(record.get("hessian_calls") or 0) for record in records]
+        metrics["hessian_evals"] = sum(hessians) / len(hessians)
+        metrics["fd_equivalent"] = sum(
+            finite_difference_equivalent(value, coordinates) for value in hessians
+        ) / len(hessians)
     passed = {"sigma": sigma, "family": family, "method": method, "cap": cap, "energy_tol": energy_tol, **options}
     provenance = collect_provenance(
         code=str(template.get("code")),

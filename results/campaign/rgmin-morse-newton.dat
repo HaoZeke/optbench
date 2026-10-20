@@ -1,4 +1,5 @@
 # counter harness. One force call is one RgpotCounter.calculate entry.
+# fd_equivalent is the mean, over every start, of analytic Hessian evaluations times the coordinate count.
 # Newton and dogleg Hessians are analytic and are not force calls.
 # v2 success is under the cap, at the force stop, and Hessian index 0.
 # energy and Kabsch RMSD were not applied: the problem file has no energy_tol, rmsd_tol, or per-start reference.
@@ -7,6 +8,8 @@
 force_calls 199
 force_calls_min 4
 force_calls_max 6789
+hessian_evals 295.69
+fd_equivalent 227089.92
 nfailed 1
 median 8
 code rgmin

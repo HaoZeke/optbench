@@ -11,29 +11,29 @@ set those problems in J. Chem. Theory Comput. 2014, 10, 5476-5482
 A run in that archive counts as finished when it stops under 10000
 force calls.
 
-Each problem below leads with the current v2 rank.
-The 2014 rows follow, in the published order, inside Legacy 2014 archive.
+Each problem below leads with the v2 rank.
+The 2014 rows follow, in the published order, inside the 2014 archive.
 
 .. raw:: html
 
    <section class="bench" id="collection">
-   <p>Each problem leads with the current v2 rank. The 2014 rows follow, in the published order.</p>
+   <p>Each problem leads with the v2 rank. The 2014 rows follow, in the published order.</p>
    <h2 id="suite-minimization">Minimization</h2>
    <h3>Lennard-Jones 38 clusters</h3>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="minimization/lj38">
-   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">rgmin/lj38-dogleg</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">81.881</td><td data-field="success_rate">1</td><td data-field="wilson">0.996173–1</td><td data-field="median_calls">79</td><td data-field="mean_calls">81.881</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">1000</td></tr>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>FD equivalent</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td data-field="template">rgmin/lj38-dogleg</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">81.881</td><td data-field="success_rate">1</td><td data-field="wilson">0.996173–1</td><td data-field="median_calls">79</td><td data-field="mean_calls">81.881</td><td data-field="fd_equivalent">9220.43</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">1000</td></tr>
    </tbody></table></div>
    <p class="bench-gaps">Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
    <p><a href="generated/suites/minimization.html#lj38">Full ranked table and performance profile</a>.</p>
-   <section class="bench bench-legacy-section" id="lj38-legacy">
-   <h3>Legacy 2014 archive</h3>
+   <section class="bench bench-archive-section" id="lj38-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -256,7 +256,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="minimization-lj38-pele-fire">
    <td class="num">20</td>
-   <td class="text">pele-fire · not reproduced</td>
+   <td class="text">pele-fire</td>
    <td class="text"></td>
    <td class="num">7.09000e+02</td>
    <td class="num">2.0790e+03</td>
@@ -310,24 +310,24 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <td class="text">24 Jun 2013</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:24"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "minimization-lj38-newton-method", "entry": "newton-method", "code": "", "value": 79.0, "best": true, "held": false, "failed": false}, {"id": "minimization-lj38-tsase-sdlbfgs", "entry": "tsase-sdlbfgs", "code": "", "value": 166.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-optim", "entry": "optim", "code": "OPTIM", "value": 176.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-pele-lbfgs-m100-maxstep0-2", "entry": "pele-lbfgs-M100-maxstep0.2", "code": "", "value": 179.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-eon-lbfgs", "entry": "eon-lbfgs", "code": "Eon r2025", "value": 181.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-pele-lbfgs-m20-maxstep0-1", "entry": "pele-lbfgs-M20-maxstep0.1", "code": "", "value": 222.0, "best": false, "held": true, "failed": false}, {"id": "minimization-lj38-pele-lbfgs-m4-maxstep0-2", "entry": "pele-lbfgs-M4-maxstep0.2", "code": "", "value": 230.0, "best": false, "held": true, "failed": false}, {"id": "minimization-lj38-scipy-lbfgs", "entry": "scipy-lbfgs", "code": "pele", "value": 230.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-pele-lbfgs-m10-maxstep0-1", "entry": "pele-lbfgs-M10-maxstep0.1", "code": "", "value": 235.0, "best": false, "held": true, "failed": false}, {"id": "minimization-lj38-pele-lbfgs-m4-maxstep0-1", "entry": "pele-lbfgs-M4-maxstep0.1", "code": "", "value": 249.0, "best": false, "held": true, "failed": false}, {"id": "minimization-lj38-pele-lbfgs-m1-maxstep0-1", "entry": "pele-lbfgs-M1-maxstep0.1", "code": "", "value": 287.0, "best": false, "held": true, "failed": false}, {"id": "minimization-lj38-ase-lbfgs", "entry": "ase-lbfgs", "code": "ASE 3.6.1", "value": 355.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-pele-lbfgs-m4-maxstep0-05", "entry": "pele-lbfgs-M4-maxstep0.05", "code": "", "value": 379.0, "best": false, "held": true, "failed": false}, {"id": "minimization-lj38-ase-lbfgslinesearch", "entry": "ase-lbfgslinesearch", "code": "ASE 3.6.0", "value": 417.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-eon-cg", "entry": "eon-cg", "code": "Eon r2025", "value": 453.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-ase-bfgs", "entry": "ase-BFGS", "code": "", "value": 463.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-ase-bfgslinesearch", "entry": "ase-bfgslinesearch", "code": "ASE 3.6.0", "value": 500.0, "best": false, "held": true, "failed": false}, {"id": "minimization-lj38-eon-sd-twopoint", "entry": "eon-sd-twopoint", "code": "Eon r2025", "value": 539.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-ase-fire", "entry": "ase-fire", "code": "ASE 3.6.0", "value": 656.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-pele-fire", "entry": "pele-fire", "code": "", "value": 709.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-eon-fire", "entry": "eon-fire", "code": "Eon r2025", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-ase-preconlbfgs", "entry": "ase-preconlbfgs", "code": "", "value": 2686.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-eon-qm", "entry": "eon-qm", "code": "Eon r2025", "value": 3523.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-eon-sd", "entry": "eon-sd", "code": "Eon r2025", "value": 4901.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:24"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "minimization-lj38-newton-method", "entry": "newton-method", "code": "", "value": 79.0, "best": true, "held": false, "failed": false}, {"id": "minimization-lj38-tsase-sdlbfgs", "entry": "tsase-sdlbfgs", "code": "", "value": 166.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-optim", "entry": "optim", "code": "OPTIM", "value": 176.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-pele-lbfgs-m100-maxstep0-2", "entry": "pele-lbfgs-M100-maxstep0.2", "code": "", "value": 179.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-eon-lbfgs", "entry": "eon-lbfgs", "code": "Eon r2025", "value": 181.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-pele-lbfgs-m20-maxstep0-1", "entry": "pele-lbfgs-M20-maxstep0.1", "code": "", "value": 222.0, "best": false, "held": true, "failed": false}, {"id": "minimization-lj38-pele-lbfgs-m4-maxstep0-2", "entry": "pele-lbfgs-M4-maxstep0.2", "code": "", "value": 230.0, "best": false, "held": true, "failed": false}, {"id": "minimization-lj38-scipy-lbfgs", "entry": "scipy-lbfgs", "code": "pele", "value": 230.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-pele-lbfgs-m10-maxstep0-1", "entry": "pele-lbfgs-M10-maxstep0.1", "code": "", "value": 235.0, "best": false, "held": true, "failed": false}, {"id": "minimization-lj38-pele-lbfgs-m4-maxstep0-1", "entry": "pele-lbfgs-M4-maxstep0.1", "code": "", "value": 249.0, "best": false, "held": true, "failed": false}, {"id": "minimization-lj38-pele-lbfgs-m1-maxstep0-1", "entry": "pele-lbfgs-M1-maxstep0.1", "code": "", "value": 287.0, "best": false, "held": true, "failed": false}, {"id": "minimization-lj38-ase-lbfgs", "entry": "ase-lbfgs", "code": "ASE 3.6.1", "value": 355.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-pele-lbfgs-m4-maxstep0-05", "entry": "pele-lbfgs-M4-maxstep0.05", "code": "", "value": 379.0, "best": false, "held": true, "failed": false}, {"id": "minimization-lj38-ase-lbfgslinesearch", "entry": "ase-lbfgslinesearch", "code": "ASE 3.6.0", "value": 417.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-eon-cg", "entry": "eon-cg", "code": "Eon r2025", "value": 453.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-ase-bfgs", "entry": "ase-BFGS", "code": "", "value": 463.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-ase-bfgslinesearch", "entry": "ase-bfgslinesearch", "code": "ASE 3.6.0", "value": 500.0, "best": false, "held": true, "failed": false}, {"id": "minimization-lj38-eon-sd-twopoint", "entry": "eon-sd-twopoint", "code": "Eon r2025", "value": 539.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-ase-fire", "entry": "ase-fire", "code": "ASE 3.6.0", "value": 656.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-pele-fire", "entry": "pele-fire", "code": "", "value": 709.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-eon-fire", "entry": "eon-fire", "code": "Eon r2025", "value": 731.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-ase-preconlbfgs", "entry": "ase-preconlbfgs", "code": "", "value": 2686.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-eon-qm", "entry": "eon-qm", "code": "Eon r2025", "value": 3523.0, "best": false, "held": false, "failed": false}, {"id": "minimization-lj38-eon-sd", "entry": "eon-sd", "code": "Eon r2025", "value": 4901.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section>
    <h3>Lennard-Jones 38 clusters with Gaussian force noise</h3>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="minimization/lj38-noise">
-   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">noise/rgmin-dogleg-s0</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">81.881</td><td data-field="success_rate">1</td><td data-field="wilson">0.996173–1</td><td data-field="median_calls">79</td><td data-field="mean_calls">81.881</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">1000</td></tr>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>FD equivalent</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td data-field="template">noise/rgmin-dogleg-s0</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">81.881</td><td data-field="success_rate">1</td><td data-field="wilson">0.996173–1</td><td data-field="median_calls">79</td><td data-field="mean_calls">81.881</td><td data-field="fd_equivalent">9220.43</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">1000</td></tr>
    </tbody></table></div>
    <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/minimization-lj38-noise.html">Full ranked table and performance profile</a>.</p>
-   <section class="bench bench-legacy-section" id="lj38-noise-legacy">
-   <h3>Legacy 2014 archive</h3>
+   <section class="bench bench-archive-section" id="lj38-noise-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -346,18 +346,18 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <h3>Morse bulk</h3>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="minimization/morse-bulk">
-   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">rgmin/morse-newton</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">8.35</td><td data-field="success_rate">1</td><td data-field="wilson">0.963007–1</td><td data-field="median_calls">9</td><td data-field="mean_calls">8.35</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>FD equivalent</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td data-field="template">rgmin/morse-newton</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">8.35</td><td data-field="success_rate">1</td><td data-field="wilson">0.963007–1</td><td data-field="median_calls">9</td><td data-field="mean_calls">8.35</td><td data-field="fd_equivalent">5644.8</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    <p class="bench-gaps">Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
    <p><a href="generated/suites/minimization.html#morse-bulk">Full ranked table and performance profile</a>.</p>
-   <section class="bench bench-legacy-section" id="morse-bulk-legacy">
-   <h3>Legacy 2014 archive</h3>
+   <section class="bench bench-archive-section" id="morse-bulk-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -382,7 +382,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="minimization-morse-bulk-ase-preconlbfgs">
    <td class="num">2</td>
-   <td class="text">ase-preconLBFGS · not reproduced</td>
+   <td class="text">ase-preconLBFGS</td>
    <td class="text"></td>
    <td class="num">34</td>
    <td class="num">47</td>
@@ -393,7 +393,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="minimization-morse-bulk-optim">
    <td class="num">3</td>
-   <td class="text">optim · not reproduced</td>
+   <td class="text">optim</td>
    <td class="text">OPTIM</td>
    <td class="num">4.60000e+01</td>
    <td class="num">8.0000e+01</td>
@@ -404,7 +404,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="minimization-morse-bulk-pele-lbfgs">
    <td class="num">4</td>
-   <td class="text">pele-lbfgs · not reproduced</td>
+   <td class="text">pele-lbfgs</td>
    <td class="text"></td>
    <td class="num">5.10000e+01</td>
    <td class="num">8.4000e+01</td>
@@ -426,7 +426,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="minimization-morse-bulk-ase-lbfgs">
    <td class="num">6</td>
-   <td class="text">ase-lbfgs · not reproduced</td>
+   <td class="text">ase-lbfgs</td>
    <td class="text">ASE 3.6.0</td>
    <td class="num">53.8</td>
    <td class="num">91</td>
@@ -459,7 +459,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="minimization-morse-bulk-ase-fire">
    <td class="num">9</td>
-   <td class="text">ase-fire · not reproduced</td>
+   <td class="text">ase-fire</td>
    <td class="text">ASE 3.6.0</td>
    <td class="num">147.47</td>
    <td class="num">216</td>
@@ -481,7 +481,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="minimization-morse-bulk-eon-sd">
    <td class="num">11</td>
-   <td class="text">eon-sd · not reproduced</td>
+   <td class="text">eon-sd</td>
    <td class="text">Eon r2030</td>
    <td class="num">196</td>
    <td class="num">360</td>
@@ -491,7 +491,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <td class="text">23 Aug 2013</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:11"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "minimization-morse-bulk-tsase-sdlbfgs", "entry": "tsase-sdlbfgs", "code": "", "value": 19.0, "best": true, "held": false, "failed": false}, {"id": "minimization-morse-bulk-ase-preconlbfgs", "entry": "ase-preconLBFGS", "code": "", "value": 34.0, "best": false, "held": false, "failed": false}, {"id": "minimization-morse-bulk-optim", "entry": "optim", "code": "OPTIM", "value": 46.0, "best": false, "held": false, "failed": false}, {"id": "minimization-morse-bulk-pele-lbfgs", "entry": "pele-lbfgs", "code": "", "value": 51.0, "best": false, "held": false, "failed": false}, {"id": "minimization-morse-bulk-eon-lbfgs", "entry": "eon-lbfgs", "code": "Eon r2030", "value": 52.0, "best": false, "held": false, "failed": false}, {"id": "minimization-morse-bulk-ase-lbfgs", "entry": "ase-lbfgs", "code": "ASE 3.6.0", "value": 53.8, "best": false, "held": false, "failed": false}, {"id": "minimization-morse-bulk-eon-sd-twopoint", "entry": "eon-sd-twopoint", "code": "Eon r2030", "value": 64.0, "best": false, "held": false, "failed": false}, {"id": "minimization-morse-bulk-eon-cg", "entry": "eon-cg", "code": "Eon r2030", "value": 106.0, "best": false, "held": false, "failed": false}, {"id": "minimization-morse-bulk-ase-fire", "entry": "ase-fire", "code": "ASE 3.6.0", "value": 147.47, "best": false, "held": false, "failed": false}, {"id": "minimization-morse-bulk-eon-fire", "entry": "eon-fire", "code": "Eon r2030", "value": 156.0, "best": false, "held": false, "failed": false}, {"id": "minimization-morse-bulk-eon-sd", "entry": "eon-sd", "code": "Eon r2030", "value": 196.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:11"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "minimization-morse-bulk-tsase-sdlbfgs", "entry": "tsase-sdlbfgs", "code": "", "value": 19.0, "best": true, "held": false, "failed": false}, {"id": "minimization-morse-bulk-ase-preconlbfgs", "entry": "ase-preconLBFGS", "code": "", "value": 34.0, "best": false, "held": false, "failed": false}, {"id": "minimization-morse-bulk-optim", "entry": "optim", "code": "OPTIM", "value": 46.0, "best": false, "held": false, "failed": false}, {"id": "minimization-morse-bulk-pele-lbfgs", "entry": "pele-lbfgs", "code": "", "value": 51.0, "best": false, "held": false, "failed": false}, {"id": "minimization-morse-bulk-eon-lbfgs", "entry": "eon-lbfgs", "code": "Eon r2030", "value": 52.0, "best": false, "held": false, "failed": false}, {"id": "minimization-morse-bulk-ase-lbfgs", "entry": "ase-lbfgs", "code": "ASE 3.6.0", "value": 53.8, "best": false, "held": false, "failed": false}, {"id": "minimization-morse-bulk-eon-sd-twopoint", "entry": "eon-sd-twopoint", "code": "Eon r2030", "value": 64.0, "best": false, "held": false, "failed": false}, {"id": "minimization-morse-bulk-eon-cg", "entry": "eon-cg", "code": "Eon r2030", "value": 106.0, "best": false, "held": false, "failed": false}, {"id": "minimization-morse-bulk-ase-fire", "entry": "ase-fire", "code": "ASE 3.6.0", "value": 147.47, "best": false, "held": false, "failed": false}, {"id": "minimization-morse-bulk-eon-fire", "entry": "eon-fire", "code": "Eon r2030", "value": 156.0, "best": false, "held": false, "failed": false}, {"id": "minimization-morse-bulk-eon-sd", "entry": "eon-sd", "code": "Eon r2030", "value": 196.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section>
    <h2 id="suite-saddle-search">Saddle search</h2>
@@ -503,13 +503,13 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tbody></table></div>
    <p class="bench-gaps">Eon rows are not yet on the harness counter. Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/saddle-search.html#pt-island">Full ranked table and performance profile</a>.</p>
-   <section class="bench bench-legacy-section" id="pt-island-legacy">
-   <h3>Legacy 2014 archive</h3>
+   <section class="bench bench-archive-section" id="pt-island-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -524,7 +524,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr></thead><tbody>
    <tr id="saddle-search-pt-island-adaptive-hsphere-lbfgs-davidson-sm50" class="best">
    <td class="num">1</td>
-   <td class="text">adaptive_HSphere-lbfgs-davidson-sm50 · not reproduced</td>
+   <td class="text">adaptive_HSphere-lbfgs-davidson-sm50</td>
    <td class="text">SoftSaddle</td>
    <td class="num">423491.1</td>
    <td class="num">179062.2</td>
@@ -536,7 +536,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="saddle-search-pt-island-adaptive-hsphere-lbfgs-lanczos-sm50">
    <td class="num">2</td>
-   <td class="text">adaptive_HSphere-lbfgs-lanczos-sm50 · not reproduced</td>
+   <td class="text">adaptive_HSphere-lbfgs-lanczos-sm50</td>
    <td class="text">SoftSaddle</td>
    <td class="num">814519.3</td>
    <td class="num">314659.7</td>
@@ -548,7 +548,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="saddle-search-pt-island-adaptive-hsphere-lbfgs-lanczos-sm0">
    <td class="num">3</td>
-   <td class="text">adaptive_HSphere-lbfgs-lanczos-sm0 · not reproduced</td>
+   <td class="text">adaptive_HSphere-lbfgs-lanczos-sm0</td>
    <td class="text">SoftSaddle</td>
    <td class="num">1003433.0</td>
    <td class="num">417022.4</td>
@@ -632,7 +632,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="saddle-search-pt-island-eon-dimer">
    <td class="num">10</td>
-   <td class="text">eon-dimer · not reproduced</td>
+   <td class="text">eon-dimer</td>
    <td class="text">Eon r2205</td>
    <td class="num">3.77888e+06</td>
    <td class="num">527337</td>
@@ -667,7 +667,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <td class="text">13 Jun 2014</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:12"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "saddle-search-pt-island-adaptive-hsphere-lbfgs-davidson-sm50", "entry": "adaptive_HSphere-lbfgs-davidson-sm50", "code": "SoftSaddle", "value": 423491.1, "best": true, "held": false, "failed": false}, {"id": "saddle-search-pt-island-adaptive-hsphere-lbfgs-lanczos-sm50", "entry": "adaptive_HSphere-lbfgs-lanczos-sm50", "code": "SoftSaddle", "value": 814519.3, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-adaptive-hsphere-lbfgs-lanczos-sm0", "entry": "adaptive_HSphere-lbfgs-lanczos-sm0", "code": "SoftSaddle", "value": 1003433.0, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-lbfgs-5-rotations-20-bowl-breakout", "entry": "eon-dimer-lbfgs-5-rotations-20-bowl_breakout", "code": "Eon r2213", "value": 1345465.88889, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-md", "entry": "eon-md", "code": "Eon r2205", "value": 1478168.0, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-lbfgs-5-rotations", "entry": "eon-dimer-lbfgs-5-rotations", "code": "Eon r2213", "value": 1684436.77778, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-lbfgs-20-rotations-20-bowl-breakout", "entry": "eon-dimer-lbfgs-20-rotations-20-bowl_breakout", "code": "Eon r2213", "value": 2732309.11111, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-lbfgs-20-rotations", "entry": "eon-dimer-lbfgs-20-rotations", "code": "Eon r2213", "value": 3341488.0, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-cg-5-rotations-20-bowl-breakout", "entry": "eon-dimer-cg-5-rotations-20-bowl_breakout", "code": "Eon r2213", "value": 3463700.66667, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer", "entry": "eon-dimer", "code": "Eon r2205", "value": 3778880.0, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-cg-20-rotations-20-bowl-breakout", "entry": "eon-dimer-cg-20-rotations-20-bowl_breakout", "code": "Eon r2213", "value": 7174213.66667, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-cg-20-rotations", "entry": "eon-dimer-cg-20-rotations", "code": "Eon r2213", "value": 7947070.11111, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:12"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "saddle-search-pt-island-adaptive-hsphere-lbfgs-davidson-sm50", "entry": "adaptive_HSphere-lbfgs-davidson-sm50", "code": "SoftSaddle", "value": 423491.1, "best": true, "held": false, "failed": false}, {"id": "saddle-search-pt-island-adaptive-hsphere-lbfgs-lanczos-sm50", "entry": "adaptive_HSphere-lbfgs-lanczos-sm50", "code": "SoftSaddle", "value": 814519.3, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-adaptive-hsphere-lbfgs-lanczos-sm0", "entry": "adaptive_HSphere-lbfgs-lanczos-sm0", "code": "SoftSaddle", "value": 1003433.0, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-lbfgs-5-rotations-20-bowl-breakout", "entry": "eon-dimer-lbfgs-5-rotations-20-bowl_breakout", "code": "Eon r2213", "value": 1345465.88889, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-md", "entry": "eon-md", "code": "Eon r2205", "value": 1478168.0, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-lbfgs-5-rotations", "entry": "eon-dimer-lbfgs-5-rotations", "code": "Eon r2213", "value": 1684436.77778, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-lbfgs-20-rotations-20-bowl-breakout", "entry": "eon-dimer-lbfgs-20-rotations-20-bowl_breakout", "code": "Eon r2213", "value": 2732309.11111, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-lbfgs-20-rotations", "entry": "eon-dimer-lbfgs-20-rotations", "code": "Eon r2213", "value": 3341488.0, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-cg-5-rotations-20-bowl-breakout", "entry": "eon-dimer-cg-5-rotations-20-bowl_breakout", "code": "Eon r2213", "value": 3463700.66667, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer", "entry": "eon-dimer", "code": "Eon r2205", "value": 3778880.0, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-cg-20-rotations-20-bowl-breakout", "entry": "eon-dimer-cg-20-rotations-20-bowl_breakout", "code": "Eon r2213", "value": 7174213.66667, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-cg-20-rotations", "entry": "eon-dimer-cg-20-rotations", "code": "Eon r2213", "value": 7947070.11111, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section>
    <h2 id="suite-double-ended-saddle-search">Double-ended saddle search</h2>
@@ -675,17 +675,17 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="double-ended-saddle-search/lj38">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Per-image mean</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">pathsample/de-lj38</td><td data-field="version">optim svn-snapshot</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign</td><td data-field="par2_mean">148.84</td><td data-field="success_rate">1</td><td data-field="wilson">0.928652–1</td><td data-field="median_calls">131</td><td data-field="mean_calls">148.84</td><td data-field="mean_per_image">29.768</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">50</td></tr>
+   <tr><td data-field="template">optim/de-lj38</td><td data-field="version">optim svn-snapshot</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign</td><td data-field="par2_mean">146.82</td><td data-field="success_rate">1</td><td data-field="wilson">0.928652–1</td><td data-field="median_calls">129</td><td data-field="mean_calls">146.82</td><td data-field="mean_per_image">29.364</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">50</td></tr>
    </tbody></table></div>
    <p class="bench-gaps">eOn band rows are not yet on the harness counter. Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
    <p><a href="generated/suites/double-ended-saddle-search.html#lj38">Full ranked table and performance profile</a>.</p>
-   <section class="bench bench-legacy-section" id="lj38-legacy">
-   <h3>Legacy 2014 archive</h3>
+   <section class="bench bench-archive-section" id="lj38-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -700,7 +700,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr></thead><tbody>
    <tr id="double-ended-saddle-search-lj38-optim" class="best">
    <td class="num">1</td>
-   <td class="text">optim · not reproduced</td>
+   <td class="text">optim</td>
    <td class="text">OPTIM</td>
    <td class="num">1.31000e+02</td>
    <td class="num">6.6000e+01</td>
@@ -736,7 +736,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="double-ended-saddle-search-lj38-eon-dimer">
    <td class="num">4</td>
-   <td class="text">eon-dimer · not reproduced</td>
+   <td class="text">eon-dimer</td>
    <td class="text">Eon r2156</td>
    <td class="num">337</td>
    <td class="num">89</td>
@@ -784,7 +784,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="double-ended-saddle-search-lj38-eon-ci-swdneb">
    <td class="num">8</td>
-   <td class="text">eon-ci-swdneb · not reproduced</td>
+   <td class="text">eon-ci-swdneb</td>
    <td class="text">Eon r2156</td>
    <td class="num">861</td>
    <td class="num">407</td>
@@ -795,7 +795,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <td class="text">22 Aug 2013</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:8"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "double-ended-saddle-search-lj38-optim", "entry": "optim", "code": "OPTIM", "value": 131.0, "best": true, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-eon-lanczos-improved", "entry": "eon-lanczos-improved", "code": "Eon r2156", "value": 287.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-pele", "entry": "pele", "code": "pele", "value": 293.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-eon-dimer", "entry": "eon-dimer", "code": "Eon r2156", "value": 337.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-eon-lanczos", "entry": "eon-lanczos", "code": "Eon r2156", "value": 364.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-optim-cl-string", "entry": "optim-cl-string", "code": "OPTIM", "value": 786.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-eon-ci-neb", "entry": "eon-ci-neb", "code": "Eon r2156", "value": 827.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-eon-ci-swdneb", "entry": "eon-ci-swdneb", "code": "Eon r2156", "value": 861.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:8"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "double-ended-saddle-search-lj38-optim", "entry": "optim", "code": "OPTIM", "value": 131.0, "best": true, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-eon-lanczos-improved", "entry": "eon-lanczos-improved", "code": "Eon r2156", "value": 287.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-pele", "entry": "pele", "code": "pele", "value": 293.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-eon-dimer", "entry": "eon-dimer", "code": "Eon r2156", "value": 337.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-eon-lanczos", "entry": "eon-lanczos", "code": "Eon r2156", "value": 364.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-optim-cl-string", "entry": "optim-cl-string", "code": "OPTIM", "value": 786.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-eon-ci-neb", "entry": "eon-ci-neb", "code": "Eon r2156", "value": 827.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-eon-ci-swdneb", "entry": "eon-ci-swdneb", "code": "Eon r2156", "value": 861.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section>
    <h3>lj38_2ts_separation</h3>
@@ -806,13 +806,13 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tbody></table></div>
    <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation">Full ranked table and performance profile</a>.</p>
-   <section class="bench bench-legacy-section" id="lj38_2ts_separation-legacy">
-   <h3>Legacy 2014 archive</h3>
+   <section class="bench bench-archive-section" id="lj38_2ts_separation-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -828,7 +828,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr></thead><tbody>
    <tr id="double-ended-saddle-search-lj38-2ts-separation-optim" class="best">
    <td class="num">1</td>
-   <td class="text">optim · not reproduced</td>
+   <td class="text">optim</td>
    <td class="text">OPTIM</td>
    <td class="num">2.88500e+03</td>
    <td class="num">7.1380e+03</td>
@@ -853,24 +853,24 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <td class="text">06 Aug 2014</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "double-ended-saddle-search-lj38-2ts-separation-optim", "entry": "optim", "code": "OPTIM", "value": 2885.0, "best": true, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-2ts-separation-pele", "entry": "pele", "code": "pele", "value": 25022.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "double-ended-saddle-search-lj38-2ts-separation-optim", "entry": "optim", "code": "OPTIM", "value": 2885.0, "best": true, "held": false, "failed": false}, {"id": "double-ended-saddle-search-lj38-2ts-separation-pele", "entry": "pele", "code": "pele", "value": 25022.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section>
    <h3>pt-island</h3>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="double-ended-saddle-search/pt-island">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Per-image mean</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">pathsample/de-pt</td><td data-field="version">optim svn-snapshot</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign</td><td data-field="par2_mean">145.559</td><td data-field="success_rate">1</td><td data-field="wilson">0.938871–1</td><td data-field="median_calls">137</td><td data-field="mean_calls">145.559</td><td data-field="mean_per_image">48.5198</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">59</td></tr>
+   <tr><td data-field="template">optim/de-pt</td><td data-field="version">optim svn-snapshot</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign</td><td data-field="par2_mean">138</td><td data-field="success_rate">1</td><td data-field="wilson">0.938871–1</td><td data-field="median_calls">133</td><td data-field="mean_calls">138</td><td data-field="mean_per_image">46</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">59</td></tr>
    </tbody></table></div>
    <p class="bench-gaps">eOn band rows are not yet on the harness counter. Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/double-ended-saddle-search.html#pt-island">Full ranked table and performance profile</a>.</p>
-   <section class="bench bench-legacy-section" id="pt-island-legacy">
-   <h3>Legacy 2014 archive</h3>
+   <section class="bench bench-archive-section" id="pt-island-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -885,7 +885,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr></thead><tbody>
    <tr id="double-ended-saddle-search-pt-island-optim" class="best">
    <td class="num">1</td>
-   <td class="text">optim · not reproduced</td>
+   <td class="text">optim</td>
    <td class="text">OPTIM</td>
    <td class="num">1.03000e+02</td>
    <td class="num">1.9400e+02</td>
@@ -933,7 +933,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="double-ended-saddle-search-pt-island-eon-lanczos-improved">
    <td class="num">5</td>
-   <td class="text">eon-lanczos-improved · not reproduced</td>
+   <td class="text">eon-lanczos-improved</td>
    <td class="text">Eon r2156</td>
    <td class="num">222</td>
    <td class="num">2039</td>
@@ -993,7 +993,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="double-ended-saddle-search-pt-island-eon-lanczos">
    <td class="num">10</td>
-   <td class="text">eon-lanczos · not reproduced</td>
+   <td class="text">eon-lanczos</td>
    <td class="text">Eon r2156</td>
    <td class="num">325</td>
    <td class="num">2660</td>
@@ -1016,7 +1016,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <td class="text">23 Aug 2013</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:11"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "double-ended-saddle-search-pt-island-optim", "entry": "optim", "code": "OPTIM", "value": 103.0, "best": true, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-eon-ci-neb-single", "entry": "eon-ci-neb-single", "code": "Eon r2156", "value": 110.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-optim-6", "entry": "optim-6", "code": "OPTIM", "value": 117.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-eon-dimer", "entry": "eon-dimer", "code": "Eon r2156", "value": 182.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-eon-lanczos-improved", "entry": "eon-lanczos-improved", "code": "Eon r2156", "value": 222.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-eon-ci-neb", "entry": "eon-ci-neb", "code": "Eon r2156", "value": 248.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-pele", "entry": "pele", "code": "pele", "value": 255.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-eon-ci-swdneb", "entry": "eon-ci-swdneb", "code": "Eon r2156", "value": 256.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-optim-cl-string", "entry": "optim-cl-string", "code": "OPTIM", "value": 319.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-eon-lanczos", "entry": "eon-lanczos", "code": "Eon r2156", "value": 325.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-eon-ci-neb-5", "entry": "eon-ci-neb-5", "code": "Eon r2156", "value": 391.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:11"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "double-ended-saddle-search-pt-island-optim", "entry": "optim", "code": "OPTIM", "value": 103.0, "best": true, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-eon-ci-neb-single", "entry": "eon-ci-neb-single", "code": "Eon r2156", "value": 110.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-optim-6", "entry": "optim-6", "code": "OPTIM", "value": 117.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-eon-dimer", "entry": "eon-dimer", "code": "Eon r2156", "value": 182.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-eon-lanczos-improved", "entry": "eon-lanczos-improved", "code": "Eon r2156", "value": 222.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-eon-ci-neb", "entry": "eon-ci-neb", "code": "Eon r2156", "value": 248.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-pele", "entry": "pele", "code": "pele", "value": 255.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-eon-ci-swdneb", "entry": "eon-ci-swdneb", "code": "Eon r2156", "value": 256.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-optim-cl-string", "entry": "optim-cl-string", "code": "OPTIM", "value": 319.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-eon-lanczos", "entry": "eon-lanczos", "code": "Eon r2156", "value": 325.0, "best": false, "held": false, "failed": false}, {"id": "double-ended-saddle-search-pt-island-eon-ci-neb-5", "entry": "eon-ci-neb-5", "code": "Eon r2156", "value": 391.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section>
    <h2 id="suite-globalopt">Global optimization</h2>
@@ -1028,13 +1028,13 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tbody></table></div>
    <p class="bench-gaps">No committed harness run.</p>
    <p><a href="generated/suites/globalopt.html#lj100-binary">Full ranked table and performance profile</a>.</p>
-   <section class="bench bench-legacy-section" id="lj100-binary-legacy">
-   <h3>Legacy 2014 archive</h3>
+   <section class="bench bench-archive-section" id="lj100-binary-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Lowest energy first.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Lowest energy first.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -1076,13 +1076,13 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <tr><td data-field="template">airss/lj38</td><td data-field="version">AIRSS 0.9.4</td><td data-field="commit">5593cc4ee360</td><td data-field="source">campaign</td><td data-field="par2_mean"></td><td data-field="success_rate">1</td><td data-field="wilson">0.963007–1</td><td data-field="median_calls">70635.5</td><td data-field="mean_calls">112134</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    <p><a href="generated/suites/globalopt.html#lj38">Full ranked table and performance profile</a>.</p>
-   <section class="bench bench-legacy-section" id="lj38-legacy">
-   <h3>Legacy 2014 archive</h3>
+   <section class="bench bench-archive-section" id="lj38-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -1140,7 +1140,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="globalopt-lj38-pele-basinhopping">
    <td class="num">5</td>
-   <td class="text">pele-basinhopping · not reproduced</td>
+   <td class="text">pele-basinhopping</td>
    <td class="text">pele</td>
    <td class="num">5.21595e+05</td>
    <td class="num">9.4470e+03</td>
@@ -1150,7 +1150,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <td class="text">29 Aug 2013</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:5"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "globalopt-lj38-gmin-csm", "entry": "gmin-csm", "code": "GMIN", "value": 6421.0, "best": true, "held": false, "failed": false}, {"id": "globalopt-lj38-gmin-symmetrise", "entry": "gmin-symmetrise", "code": "GMIN", "value": 22711.0, "best": false, "held": false, "failed": false}, {"id": "globalopt-lj38-gmin-nosym", "entry": "gmin-nosym", "code": "GMIN", "value": 265951.0, "best": false, "held": false, "failed": false}, {"id": "globalopt-lj38-eon-basinhopping", "entry": "eon-basinhopping", "code": "Eon r2156", "value": 508011.0, "best": false, "held": false, "failed": false}, {"id": "globalopt-lj38-pele-basinhopping", "entry": "pele-basinhopping", "code": "pele", "value": 521595.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:5"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "globalopt-lj38-gmin-csm", "entry": "gmin-csm", "code": "GMIN", "value": 6421.0, "best": true, "held": false, "failed": false}, {"id": "globalopt-lj38-gmin-symmetrise", "entry": "gmin-symmetrise", "code": "GMIN", "value": 22711.0, "best": false, "held": false, "failed": false}, {"id": "globalopt-lj38-gmin-nosym", "entry": "gmin-nosym", "code": "GMIN", "value": 265951.0, "best": false, "held": false, "failed": false}, {"id": "globalopt-lj38-eon-basinhopping", "entry": "eon-basinhopping", "code": "Eon r2156", "value": 508011.0, "best": false, "held": false, "failed": false}, {"id": "globalopt-lj38-pele-basinhopping", "entry": "pele-basinhopping", "code": "pele", "value": 521595.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section>
    <h3>lj150</h3>
@@ -1160,13 +1160,13 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <tr><td data-field="template">gmin/lj150-bh</td><td data-field="version">GMIN 02aaf45245af</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign</td><td data-field="par2_mean">1.75804e+06</td><td data-field="success_rate">0.99</td><td data-field="wilson">0.945514–0.998233</td><td data-field="median_calls">1.14412e+06</td><td data-field="mean_calls">1.65804e+06</td><td data-field="failures">crash 0, divergence 0, cap 1, not_converged 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    <p><a href="generated/suites/globalopt.html#lj150">Full ranked table and performance profile</a>.</p>
-   <section class="bench bench-legacy-section" id="lj150-legacy">
-   <h3>Legacy 2014 archive</h3>
+   <section class="bench bench-archive-section" id="lj150-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. The columns are the archived keys.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. The columns are the archived keys.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -1210,7 +1210,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <td class="text">03 Oct 2022</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "basin_hopping_steps_mean", "scale": "linear", "points": [{"id": "globalopt-lj150-gmin-symmetrise", "entry": "gmin-symmetrise", "code": "GMIN", "value": 667.38, "best": true, "held": false, "failed": false}, {"id": "globalopt-lj150-gmin-nosym", "entry": "gmin-nosym", "code": "GMIN", "value": 3280.89, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "basin_hopping_steps_mean", "scale": "linear", "points": [{"id": "globalopt-lj150-gmin-symmetrise", "entry": "gmin-symmetrise", "code": "GMIN", "value": 667.38, "best": true, "held": false, "failed": false}, {"id": "globalopt-lj150-gmin-nosym", "entry": "gmin-nosym", "code": "GMIN", "value": 3280.89, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section>
    <h3>lj75</h3>
@@ -1221,13 +1221,13 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tbody></table></div>
    <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/globalopt.html#lj75">Full ranked table and performance profile</a>.</p>
-   <section class="bench bench-legacy-section" id="lj75-legacy">
-   <h3>Legacy 2014 archive</h3>
+   <section class="bench bench-archive-section" id="lj75-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -1264,13 +1264,13 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tbody></table></div>
    <p class="bench-gaps">No committed harness run.</p>
    <p><a href="generated/suites/globalopt.html#lj98">Full ranked table and performance profile</a>.</p>
-   <section class="bench bench-legacy-section" id="lj98-legacy">
-   <h3>Legacy 2014 archive</h3>
+   <section class="bench bench-archive-section" id="lj98-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. The columns are the archived keys.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. The columns are the archived keys.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -1314,7 +1314,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <td class="text">03 Oct 2022</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "basin_hopping_steps_mean", "scale": "log", "points": [{"id": "globalopt-lj98-gmin-symmetrise", "entry": "gmin-symmetrise", "code": "GMIN", "value": 1281.92, "best": true, "held": false, "failed": false}, {"id": "globalopt-lj98-gmin-nosym", "entry": "gmin-nosym", "code": "GMIN", "value": 43819.76, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "basin_hopping_steps_mean", "scale": "log", "points": [{"id": "globalopt-lj98-gmin-symmetrise", "entry": "gmin-symmetrise", "code": "GMIN", "value": 1281.92, "best": true, "held": false, "failed": false}, {"id": "globalopt-lj98-gmin-nosym", "entry": "gmin-nosym", "code": "GMIN", "value": 43819.76, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section>
    <h3>tip4p10</h3>
@@ -1325,13 +1325,13 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tbody></table></div>
    <p class="bench-gaps">No committed harness run.</p>
    <p><a href="generated/suites/globalopt.html#tip4p10">Full ranked table and performance profile</a>.</p>
-   <section class="bench bench-legacy-section" id="tip4p10-legacy">
-   <h3>Legacy 2014 archive</h3>
+   <section class="bench bench-archive-section" id="tip4p10-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -1369,7 +1369,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <td class="text">05 May 2014</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "globalopt-tip4p10-gmin-tbp", "entry": "gmin-tbp", "code": "GMIN", "value": 16099.0, "best": true, "held": false, "failed": false}, {"id": "globalopt-tip4p10-gmin", "entry": "gmin", "code": "GMIN", "value": 16236.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "globalopt-tip4p10-gmin-tbp", "entry": "gmin-tbp", "code": "GMIN", "value": 16099.0, "best": true, "held": false, "failed": false}, {"id": "globalopt-tip4p10-gmin", "entry": "gmin", "code": "GMIN", "value": 16236.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section>
    <h3>tip4p15</h3>
@@ -1380,13 +1380,13 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tbody></table></div>
    <p class="bench-gaps">No committed harness run.</p>
    <p><a href="generated/suites/globalopt.html#tip4p15">Full ranked table and performance profile</a>.</p>
-   <section class="bench bench-legacy-section" id="tip4p15-legacy">
-   <h3>Legacy 2014 archive</h3>
+   <section class="bench bench-archive-section" id="tip4p15-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -1424,7 +1424,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <td class="text">05 May 2014</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "globalopt-tip4p15-gmin-tbp", "entry": "gmin-tbp", "code": "GMIN", "value": 625362.0, "best": true, "held": false, "failed": false}, {"id": "globalopt-tip4p15-gmin", "entry": "gmin", "code": "GMIN", "value": 670645.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "globalopt-tip4p15-gmin-tbp", "entry": "gmin-tbp", "code": "GMIN", "value": 625362.0, "best": true, "held": false, "failed": false}, {"id": "globalopt-tip4p15-gmin", "entry": "gmin", "code": "GMIN", "value": 670645.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section>
    <h3>tip4p20</h3>
@@ -1435,13 +1435,13 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tbody></table></div>
    <p class="bench-gaps">No committed harness run.</p>
    <p><a href="generated/suites/globalopt.html#tip4p20">Full ranked table and performance profile</a>.</p>
-   <section class="bench bench-legacy-section" id="tip4p20-legacy">
-   <h3>Legacy 2014 archive</h3>
+   <section class="bench bench-archive-section" id="tip4p20-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -1479,7 +1479,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <td class="text">09 May 2014</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "globalopt-tip4p20-gmin-tbp", "entry": "gmin-tbp", "code": "GMIN", "value": 25566700.0, "best": true, "held": false, "failed": false}, {"id": "globalopt-tip4p20-gmin", "entry": "gmin", "code": "GMIN", "value": 28596700.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "globalopt-tip4p20-gmin-tbp", "entry": "gmin-tbp", "code": "GMIN", "value": 25566700.0, "best": true, "held": false, "failed": false}, {"id": "globalopt-tip4p20-gmin", "entry": "gmin", "code": "GMIN", "value": 28596700.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section>
    <h2 id="suite-lowest-eigenvector">Lowest eigenvector</h2>
@@ -1491,13 +1491,13 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tbody></table></div>
    <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/lowest-eigenvector.html#lj38">Full ranked table and performance profile</a>.</p>
-   <section class="bench bench-legacy-section" id="lj38-legacy">
-   <h3>Legacy 2014 archive</h3>
+   <section class="bench bench-archive-section" id="lj38-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -1512,7 +1512,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <tr id="lowest-eigenvector-lj38-sella" class="best">
    <td class="num">1</td>
    <td class="text">sella</td>
-   <td class="text">Sella 0.1.1 legacy</td>
+   <td class="text">Sella 0.1.1</td>
    <td class="num">17.8</td>
    <td class="num">37.0</td>
    <td class="num">4.0</td>
@@ -1522,7 +1522,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="lowest-eigenvector-lj38-optim-first-order">
    <td class="num">2</td>
-   <td class="text">optim-first-order · not reproduced</td>
+   <td class="text">optim-first-order</td>
    <td class="text">OPTIM</td>
    <td class="num">2.50000e+01</td>
    <td class="num">5.8000e+01</td>
@@ -1631,7 +1631,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <td class="text">06 Aug 2014</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:11"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "lowest-eigenvector-lj38-sella", "entry": "sella", "code": "Sella 0.1.1 legacy", "value": 17.8, "best": true, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-optim-first-order", "entry": "optim-first-order", "code": "OPTIM", "value": 25.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-pele-first-order", "entry": "pele-first-order", "code": "pele", "value": 25.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-tsase-lanczos", "entry": "tsase-lanczos", "code": "TSASE 410", "value": 25.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-tsase-dimer-bfgs", "entry": "tsase-dimer-bfgs", "code": "TSASE 408", "value": 27.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-eon-dimer-lbfgs", "entry": "eon-dimer-lbfgs", "code": "Eon r2156", "value": 28.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-eon-lanczos", "entry": "eon-lanczos", "code": "Eon r2156", "value": 28.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-tsase-dimer-cg", "entry": "tsase-dimer-cg", "code": "TSASE 408", "value": 29.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-eon-dimer-cg", "entry": "eon-dimer-cg", "code": "Eon r2156", "value": 30.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-optim-second-order", "entry": "optim-second-order", "code": "OPTIM", "value": 46.0, "best": false, "held": true, "failed": false}, {"id": "lowest-eigenvector-lj38-pele-second-order", "entry": "pele-second-order", "code": "pele", "value": 47.0, "best": false, "held": true, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:11"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "lowest-eigenvector-lj38-sella", "entry": "sella", "code": "Sella 0.1.1", "value": 17.8, "best": true, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-optim-first-order", "entry": "optim-first-order", "code": "OPTIM", "value": 25.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-pele-first-order", "entry": "pele-first-order", "code": "pele", "value": 25.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-tsase-lanczos", "entry": "tsase-lanczos", "code": "TSASE 410", "value": 25.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-tsase-dimer-bfgs", "entry": "tsase-dimer-bfgs", "code": "TSASE 408", "value": 27.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-eon-dimer-lbfgs", "entry": "eon-dimer-lbfgs", "code": "Eon r2156", "value": 28.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-eon-lanczos", "entry": "eon-lanczos", "code": "Eon r2156", "value": 28.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-tsase-dimer-cg", "entry": "tsase-dimer-cg", "code": "TSASE 408", "value": 29.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-eon-dimer-cg", "entry": "eon-dimer-cg", "code": "Eon r2156", "value": 30.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-optim-second-order", "entry": "optim-second-order", "code": "OPTIM", "value": 46.0, "best": false, "held": true, "failed": false}, {"id": "lowest-eigenvector-lj38-pele-second-order", "entry": "pele-second-order", "code": "pele", "value": 47.0, "best": false, "held": true, "failed": false}]}</script></figure>
    </details>
    </section>
    <h2 id="suite-tsopt">Transition state optimization</h2>
@@ -1643,13 +1643,13 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tbody></table></div>
    <p class="bench-gaps">eOn rows are not yet on the harness counter. Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
    <p><a href="generated/suites/tsopt.html#LJ38">Full ranked table and performance profile</a>.</p>
-   <section class="bench bench-legacy-section" id="LJ38-legacy">
-   <h3>Legacy 2014 archive</h3>
+   <section class="bench bench-archive-section" id="LJ38-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -1664,8 +1664,8 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr></thead><tbody>
    <tr id="tsopt-lj38-sella" class="best">
    <td class="num">1</td>
-   <td class="text">sella · not reproduced</td>
-   <td class="text">Sella 0.1.1 legacy</td>
+   <td class="text">sella</td>
+   <td class="text">Sella 0.1.1</td>
    <td class="num">69.55</td>
    <td class="num">158</td>
    <td class="num">64.0</td>
@@ -1676,7 +1676,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="tsopt-lj38-optim-ffd">
    <td class="num">2</td>
-   <td class="text">optim_ffd · not reproduced</td>
+   <td class="text">optim_ffd</td>
    <td class="text">OPTIM</td>
    <td class="num">1.45000e+02</td>
    <td class="num">5.6500e+02</td>
@@ -1712,7 +1712,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="tsopt-lj38-eon-lanczos-improved">
    <td class="num">5</td>
-   <td class="text">eon-lanczos-improved · not reproduced</td>
+   <td class="text">eon-lanczos-improved</td>
    <td class="text">Eon r2156</td>
    <td class="num">237</td>
    <td class="num">1898</td>
@@ -1759,7 +1759,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <td class="text">02 Jul 2013</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:8"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "tsopt-lj38-sella", "entry": "sella", "code": "Sella 0.1.1 legacy", "value": 69.55, "best": true, "held": false, "failed": false}, {"id": "tsopt-lj38-optim-ffd", "entry": "optim_ffd", "code": "OPTIM", "value": 145.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-lj38-pele-ffd", "entry": "pele_ffd", "code": "pele", "value": 192.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-lj38-optim-cd", "entry": "optim_cd", "code": "OPTIM", "value": 223.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-lj38-eon-lanczos-improved", "entry": "eon-lanczos-improved", "code": "Eon r2156", "value": 237.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-lj38-pele-cd", "entry": "pele_cd", "code": "pele", "value": 254.0, "best": false, "held": true, "failed": false}, {"id": "tsopt-lj38-eon-lanczos", "entry": "eon-lanczos", "code": "Eon r2156", "value": 321.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-lj38-eon-dimer", "entry": "eon-dimer", "code": "Eon r2156", "value": 528.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:8"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "tsopt-lj38-sella", "entry": "sella", "code": "Sella 0.1.1", "value": 69.55, "best": true, "held": false, "failed": false}, {"id": "tsopt-lj38-optim-ffd", "entry": "optim_ffd", "code": "OPTIM", "value": 145.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-lj38-pele-ffd", "entry": "pele_ffd", "code": "pele", "value": 192.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-lj38-optim-cd", "entry": "optim_cd", "code": "OPTIM", "value": 223.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-lj38-eon-lanczos-improved", "entry": "eon-lanczos-improved", "code": "Eon r2156", "value": 237.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-lj38-pele-cd", "entry": "pele_cd", "code": "pele", "value": 254.0, "best": false, "held": true, "failed": false}, {"id": "tsopt-lj38-eon-lanczos", "entry": "eon-lanczos", "code": "Eon r2156", "value": 321.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-lj38-eon-dimer", "entry": "eon-dimer", "code": "Eon r2156", "value": 528.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section>
    <h3>pt-island</h3>
@@ -1770,13 +1770,13 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tbody></table></div>
    <p class="bench-gaps">eOn rows are not yet on the harness counter. Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/tsopt.html#pt-island">Full ranked table and performance profile</a>.</p>
-   <section class="bench bench-legacy-section" id="pt-island-legacy">
-   <h3>Legacy 2014 archive</h3>
+   <section class="bench bench-archive-section" id="pt-island-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -1791,8 +1791,8 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr></thead><tbody>
    <tr id="tsopt-pt-island-sella" class="best">
    <td class="num">1</td>
-   <td class="text">sella · not reproduced</td>
-   <td class="text">Sella 0.1.1 legacy</td>
+   <td class="text">sella</td>
+   <td class="text">Sella 0.1.1</td>
    <td class="num">53</td>
    <td class="num">108</td>
    <td class="num">51.0</td>
@@ -1803,7 +1803,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="tsopt-pt-island-optim-ffd">
    <td class="num">2</td>
-   <td class="text">optim_ffd · not reproduced</td>
+   <td class="text">optim_ffd</td>
    <td class="text">OPTIM</td>
    <td class="num">7.10000e+01</td>
    <td class="num">1.4300e+02</td>
@@ -1874,7 +1874,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <td class="text">29 Aug 2013</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:7"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "tsopt-pt-island-sella", "entry": "sella", "code": "Sella 0.1.1 legacy", "value": 53.0, "best": true, "held": false, "failed": false}, {"id": "tsopt-pt-island-optim-ffd", "entry": "optim_ffd", "code": "OPTIM", "value": 71.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-pele", "entry": "pele", "code": "pele", "value": 88.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-optim-cd", "entry": "optim_cd", "code": "OPTIM", "value": 90.0, "best": false, "held": true, "failed": false}, {"id": "tsopt-pt-island-eon-lanczos-improved", "entry": "eon-lanczos-improved", "code": "Eon r2156", "value": 106.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-eon-dimer", "entry": "eon-dimer", "code": "Eon r2156", "value": 116.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-eon-lanczos", "entry": "eon-lanczos", "code": "Eon r2156", "value": 143.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:7"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "tsopt-pt-island-sella", "entry": "sella", "code": "Sella 0.1.1", "value": 53.0, "best": true, "held": false, "failed": false}, {"id": "tsopt-pt-island-optim-ffd", "entry": "optim_ffd", "code": "OPTIM", "value": 71.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-pele", "entry": "pele", "code": "pele", "value": 88.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-optim-cd", "entry": "optim_cd", "code": "OPTIM", "value": 90.0, "best": false, "held": true, "failed": false}, {"id": "tsopt-pt-island-eon-lanczos-improved", "entry": "eon-lanczos-improved", "code": "Eon r2156", "value": 106.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-eon-dimer", "entry": "eon-dimer", "code": "Eon r2156", "value": 116.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-eon-lanczos", "entry": "eon-lanczos", "code": "Eon r2156", "value": 143.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section>
    <h2 id="suite-mlopt">Machine learning optimization</h2>
@@ -1886,13 +1886,13 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tbody></table></div>
    <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/mlopt.html#C2H4">Full ranked table and performance profile</a>.</p>
-   <section class="bench bench-legacy-section" id="C2H4-legacy">
-   <h3>Legacy 2014 archive</h3>
+   <section class="bench bench-archive-section" id="C2H4-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest epochs first. Failures are left out of this mean.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Fewest epochs first. Failures are left out of this mean.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -1992,7 +1992,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <td class="text">13 Dec 2022</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:6"></div><script type="application/json" class="bench-plot-data">{"metric": "mean_epoch", "scale": "log", "points": [{"id": "mlopt-c2h4-pyamff-rprop10-7-fcoeff0", "entry": "pyamff-rprop10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 184.56, "best": true, "held": false, "failed": false}, {"id": "mlopt-c2h4-pyamff-lbfgs10-7-fcoeff0", "entry": "pyamff-lbfgs10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 2157.14, "best": false, "held": false, "failed": false}, {"id": "mlopt-c2h4-pyamff-adam10-7-fcoeff0", "entry": "pyamff-adam10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 4395.3, "best": false, "held": false, "failed": false}, {"id": "mlopt-c2h4-pyamff-rprop10-7-fcoeff0-1", "entry": "pyamff-rprop10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 12926.88, "best": false, "held": false, "failed": false}, {"id": "mlopt-c2h4-pyamff-adam10-7-fcoeff0-1", "entry": "pyamff-adam10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 13876.7, "best": false, "held": false, "failed": false}, {"id": "mlopt-c2h4-pyamff-lbfgs10-7-fcoeff0-1", "entry": "pyamff-lbfgs10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 23314.46, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:6"></div><script type="application/json" class="bench-plot-data">{"metric": "mean_epoch", "scale": "log", "points": [{"id": "mlopt-c2h4-pyamff-rprop10-7-fcoeff0", "entry": "pyamff-rprop10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 184.56, "best": true, "held": false, "failed": false}, {"id": "mlopt-c2h4-pyamff-lbfgs10-7-fcoeff0", "entry": "pyamff-lbfgs10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 2157.14, "best": false, "held": false, "failed": false}, {"id": "mlopt-c2h4-pyamff-adam10-7-fcoeff0", "entry": "pyamff-adam10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 4395.3, "best": false, "held": false, "failed": false}, {"id": "mlopt-c2h4-pyamff-rprop10-7-fcoeff0-1", "entry": "pyamff-rprop10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 12926.88, "best": false, "held": false, "failed": false}, {"id": "mlopt-c2h4-pyamff-adam10-7-fcoeff0-1", "entry": "pyamff-adam10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 13876.7, "best": false, "held": false, "failed": false}, {"id": "mlopt-c2h4-pyamff-lbfgs10-7-fcoeff0-1", "entry": "pyamff-lbfgs10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 23314.46, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section>
    <h3>EMT Pt 38 nanoparticle</h3>
@@ -2003,13 +2003,13 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tbody></table></div>
    <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/mlopt.html#emt-pt38">Full ranked table and performance profile</a>.</p>
-   <section class="bench bench-legacy-section" id="emt-pt38-legacy">
-   <h3>Legacy 2014 archive</h3>
+   <section class="bench bench-archive-section" id="emt-pt38-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest epochs first. Failures are left out of this mean.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Fewest epochs first. Failures are left out of this mean.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -2109,7 +2109,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <td class="text">09 Dec 2022</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:6"></div><script type="application/json" class="bench-plot-data">{"metric": "mean_epoch", "scale": "log", "points": [{"id": "mlopt-emt-pt38-pyamff-rprop10-7-fcoeff0", "entry": "pyamff-rprop10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 97.58, "best": true, "held": false, "failed": false}, {"id": "mlopt-emt-pt38-pyamff-rprop10-7-fcoeff0-1", "entry": "pyamff-rprop10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 1022.86, "best": false, "held": false, "failed": false}, {"id": "mlopt-emt-pt38-pyamff-adam10-7-fcoeff0", "entry": "pyamff-adam10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 1103.24, "best": false, "held": false, "failed": false}, {"id": "mlopt-emt-pt38-pyamff-adam10-7-fcoeff0-1", "entry": "pyamff-adam10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 1708.8, "best": false, "held": false, "failed": false}, {"id": "mlopt-emt-pt38-pyamff-lbfgs10-7-fcoeff0", "entry": "pyamff-lbfgs10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 1791.8, "best": false, "held": false, "failed": false}, {"id": "mlopt-emt-pt38-pyamff-lbfgs10-7-fcoeff0-1", "entry": "pyamff-lbfgs10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 1943.34, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:6"></div><script type="application/json" class="bench-plot-data">{"metric": "mean_epoch", "scale": "log", "points": [{"id": "mlopt-emt-pt38-pyamff-rprop10-7-fcoeff0", "entry": "pyamff-rprop10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 97.58, "best": true, "held": false, "failed": false}, {"id": "mlopt-emt-pt38-pyamff-rprop10-7-fcoeff0-1", "entry": "pyamff-rprop10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 1022.86, "best": false, "held": false, "failed": false}, {"id": "mlopt-emt-pt38-pyamff-adam10-7-fcoeff0", "entry": "pyamff-adam10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 1103.24, "best": false, "held": false, "failed": false}, {"id": "mlopt-emt-pt38-pyamff-adam10-7-fcoeff0-1", "entry": "pyamff-adam10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 1708.8, "best": false, "held": false, "failed": false}, {"id": "mlopt-emt-pt38-pyamff-lbfgs10-7-fcoeff0", "entry": "pyamff-lbfgs10-7-fcoeff0", "code": "Pyamff 8037eb98", "value": 1791.8, "best": false, "held": false, "failed": false}, {"id": "mlopt-emt-pt38-pyamff-lbfgs10-7-fcoeff0-1", "entry": "pyamff-lbfgs10-7-fcoeff0_1", "code": "Pyamff 8037eb98", "value": 1943.34, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section>
    <h2 id="suite-neb">Nudged elastic band</h2>
@@ -2117,17 +2117,17 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="neb/Pt-heptamer">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Per-image mean</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">rgsaddle/idpp-ci-neb-lbfgs</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">318.308</td><td data-field="success_rate">1</td><td data-field="wilson">0.771905–1</td><td data-field="median_calls">314</td><td data-field="mean_calls">318.308</td><td data-field="mean_per_image">39.7885</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">13</td></tr>
+   <tr><td data-field="template">eon-client/neb-pt-lbfgs</td><td data-field="version">eOn 3.5.0</td><td data-field="commit">4d8b34baf1ba</td><td data-field="source">campaign</td><td data-field="par2_mean">317.077</td><td data-field="success_rate">1</td><td data-field="wilson">0.771905–1</td><td data-field="median_calls">314</td><td data-field="mean_calls">317.077</td><td data-field="mean_per_image">39.6346</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">13</td></tr>
    </tbody></table></div>
-   <p class="bench-gaps">eOn band rows are not yet on the harness counter. Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
+   <p class="bench-gaps">Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
    <p><a href="generated/suites/neb.html#Pt-heptamer">Full ranked table and performance profile</a>.</p>
-   <section class="bench bench-legacy-section" id="Pt-heptamer-legacy">
-   <h3>Legacy 2014 archive</h3>
+   <section class="bench bench-archive-section" id="Pt-heptamer-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -2210,7 +2210,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="neb-pt-heptamer-eon-cg">
    <td class="num">8</td>
-   <td class="text">eon-cg · not reproduced</td>
+   <td class="text">eon-cg</td>
    <td class="text">Eon r2090</td>
    <td class="num">120</td>
    <td class="num">211</td>
@@ -2259,7 +2259,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <td class="text">Thu Apr  4 12:06:22 2013</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:12"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "neb-pt-heptamer-eon-lbfgs", "entry": "eon-lbfgs", "code": "Eon r2090", "value": 42.0, "best": true, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-glbfgs-hess", "entry": "gman-glbfgs-hess", "code": "Gman r235", "value": 48.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-fire", "entry": "gman-fire", "code": "Gman r235", "value": 82.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-eon-fire", "entry": "eon-fire", "code": "Eon r2090", "value": 86.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-glbfgs-line", "entry": "gman-glbfgs-line", "code": "Gman r235", "value": 100.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-lbfgs-line", "entry": "gman-lbfgs-line", "code": "Gman r235", "value": 108.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-cg", "entry": "gman-cg", "code": "Gman r235", "value": 111.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-eon-cg", "entry": "eon-cg", "code": "Eon r2090", "value": 120.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-eon-qm", "entry": "eon-qm", "code": "Eon r2090", "value": 164.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-qm", "entry": "gman-qm", "code": "Gman r235", "value": 190.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-lbfgs-hess", "entry": "gman-lbfgs-hess", "code": "Gman r235", "value": 217.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-sd", "entry": "gman-sd", "code": "Gman r235", "value": 412.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:12"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "neb-pt-heptamer-eon-lbfgs", "entry": "eon-lbfgs", "code": "Eon r2090", "value": 42.0, "best": true, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-glbfgs-hess", "entry": "gman-glbfgs-hess", "code": "Gman r235", "value": 48.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-fire", "entry": "gman-fire", "code": "Gman r235", "value": 82.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-eon-fire", "entry": "eon-fire", "code": "Eon r2090", "value": 86.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-glbfgs-line", "entry": "gman-glbfgs-line", "code": "Gman r235", "value": 100.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-lbfgs-line", "entry": "gman-lbfgs-line", "code": "Gman r235", "value": 108.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-cg", "entry": "gman-cg", "code": "Gman r235", "value": 111.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-eon-cg", "entry": "eon-cg", "code": "Eon r2090", "value": 120.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-eon-qm", "entry": "eon-qm", "code": "Eon r2090", "value": 164.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-qm", "entry": "gman-qm", "code": "Gman r235", "value": 190.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-lbfgs-hess", "entry": "gman-lbfgs-hess", "code": "Gman r235", "value": 217.0, "best": false, "held": false, "failed": false}, {"id": "neb-pt-heptamer-gman-sd", "entry": "gman-sd", "code": "Gman r235", "value": 412.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section>
    <h2 id="suite-hTST">Harmonic transition state theory</h2>
@@ -2271,13 +2271,13 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tbody></table></div>
    <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/hTST.html#Al">Full ranked table and performance profile</a>.</p>
-   <section class="bench bench-legacy-section" id="Al-legacy">
-   <h3>Legacy 2014 archive</h3>
+   <section class="bench bench-archive-section" id="Al-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest barrier force calls first.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Fewest barrier force calls first.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -2302,7 +2302,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="htst-al-eon-dimer-cg">
    <td class="num">2</td>
-   <td class="text">eon-dimer-cg · not reproduced</td>
+   <td class="text">eon-dimer-cg</td>
    <td class="text">Eon r2006</td>
    <td class="num">2.887e+04</td>
    <td class="num">48</td>
@@ -2312,7 +2312,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <td class="text">28 Jan 2013</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "barrier_force_calls", "scale": "linear", "points": [{"id": "htst-al-eon-dimer-cg2", "entry": "eon-dimer-cg2", "code": "Eon r2006", "value": 21070.0, "best": true, "held": false, "failed": false}, {"id": "htst-al-eon-dimer-cg", "entry": "eon-dimer-cg", "code": "Eon r2006", "value": 28870.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "barrier_force_calls", "scale": "linear", "points": [{"id": "htst-al-eon-dimer-cg2", "entry": "eon-dimer-cg2", "code": "Eon r2006", "value": 21070.0, "best": true, "held": false, "failed": false}, {"id": "htst-al-eon-dimer-cg", "entry": "eon-dimer-cg", "code": "Eon r2006", "value": 28870.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section>
    <h3>Pt</h3>
@@ -2323,13 +2323,13 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tbody></table></div>
    <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/hTST.html#Pt">Full ranked table and performance profile</a>.</p>
-   <section class="bench bench-legacy-section" id="Pt-legacy">
-   <h3>Legacy 2014 archive</h3>
+   <section class="bench bench-archive-section" id="Pt-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest barrier force calls first.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Fewest barrier force calls first.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -2463,7 +2463,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <td class="text">28 Jan 2013</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:11"></div><script type="application/json" class="bench-plot-data">{"metric": "barrier_force_calls", "scale": "log", "points": [{"id": "htst-pt-quench-dimer-qm", "entry": "quench_dimer-qm", "code": "TSASE", "value": 293200.0, "best": true, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-cg", "entry": "eon-dimer-cg", "code": "Eon r2006", "value": 496000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-cg2", "entry": "eon-lanczos-cg2", "code": "Eon r2006", "value": 653000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-cg", "entry": "eon-lanczos-cg", "code": "Eon r2006", "value": 673700.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-cg2", "entry": "eon-dimer-cg2", "code": "Eon r2006", "value": 727100.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-lbfgs", "entry": "eon-dimer-lbfgs", "code": "Eon r2006", "value": 778800.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-lbfgs2", "entry": "eon-dimer-lbfgs2", "code": "Eon r2006", "value": 1122000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-lbfgs", "entry": "eon-lanczos-lbfgs", "code": "Eon r2006", "value": 1284000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-lbfgs2", "entry": "eon-lanczos-lbfgs2", "code": "Eon r2006", "value": 1497000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-tsase-dimer-qm", "entry": "tsase-dimer-qm", "code": "TSASE", "value": 3239000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-alpha-dimer-qm", "entry": "alpha_dimer-qm", "code": "TSASE", "value": 19080000.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:11"></div><script type="application/json" class="bench-plot-data">{"metric": "barrier_force_calls", "scale": "log", "points": [{"id": "htst-pt-quench-dimer-qm", "entry": "quench_dimer-qm", "code": "TSASE", "value": 293200.0, "best": true, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-cg", "entry": "eon-dimer-cg", "code": "Eon r2006", "value": 496000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-cg2", "entry": "eon-lanczos-cg2", "code": "Eon r2006", "value": 653000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-cg", "entry": "eon-lanczos-cg", "code": "Eon r2006", "value": 673700.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-cg2", "entry": "eon-dimer-cg2", "code": "Eon r2006", "value": 727100.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-lbfgs", "entry": "eon-dimer-lbfgs", "code": "Eon r2006", "value": 778800.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-lbfgs2", "entry": "eon-dimer-lbfgs2", "code": "Eon r2006", "value": 1122000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-lbfgs", "entry": "eon-lanczos-lbfgs", "code": "Eon r2006", "value": 1284000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-lbfgs2", "entry": "eon-lanczos-lbfgs2", "code": "Eon r2006", "value": 1497000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-tsase-dimer-qm", "entry": "tsase-dimer-qm", "code": "TSASE", "value": 3239000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-alpha-dimer-qm", "entry": "alpha_dimer-qm", "code": "TSASE", "value": 19080000.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section>
    <h2 id="suite-accelerated-md">Accelerated molecular dynamics</h2>
@@ -2474,13 +2474,13 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <tr><td data-field="template">eon/standard-aladatom-akmc</td><td data-field="version">eOn 3.6.0</td><td data-field="commit">1d71c9445018</td><td data-field="source">campaign</td><td data-field="par2_mean">2.74292e+06</td><td data-field="success_rate">1</td><td data-field="wilson">0.438503–1</td><td data-field="median_calls">2.79404e+06</td><td data-field="mean_calls">2.74292e+06</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">3</td></tr>
    </tbody></table></div>
    <p><a href="generated/suites/accelerated-md.html#standard_aladatom">Full ranked table and performance profile</a>.</p>
-   <section class="bench bench-legacy-section" id="standard_aladatom-legacy">
-   <h3>Legacy 2014 archive</h3>
+   <section class="bench bench-archive-section" id="standard_aladatom-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Lowest rate first.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Lowest rate first.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -2515,13 +2515,13 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tbody></table></div>
    <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/accelerated-md.html#aladatom">Full ranked table and performance profile</a>.</p>
-   <section class="bench bench-legacy-section" id="aladatom-legacy">
-   <h3>Legacy 2014 archive</h3>
+   <section class="bench bench-archive-section" id="aladatom-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Lowest rate first.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Lowest rate first.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>

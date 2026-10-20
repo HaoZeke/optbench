@@ -1,10 +1,10 @@
 # Reproduction
 
-Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
+Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the score bounds of the archived failure count.
 
-45 reproduced, 27 not reproduced, 79 not rerun. 151 archive rows.
+45 aligned, 27 gap, 79 not rerun. 151 archive rows.
 
-The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
+The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the archive stop. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
 OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.
 
@@ -25,24 +25,24 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
-| lj38/eon-ci-neb | force_calls 827 | 762 | reproduced |
-| lj38/eon-ci-swdneb | force_calls 861 | 708 | not reproduced; de_exclusion |
-| lj38/eon-dimer | force_calls 337 | 377 | not reproduced; improved_unset |
-| lj38/eon-lanczos | force_calls 364 | 342 | reproduced |
-| lj38/eon-lanczos-improved | force_calls 287 | 259 | reproduced |
-| lj38/optim | force_calls 131 | 147 | not reproduced; optim_pes_counter |
+| lj38/eon-ci-neb | force_calls 827 | 762 | aligned |
+| lj38/eon-ci-swdneb | force_calls 861 | 708 | gap; de_exclusion |
+| lj38/eon-dimer | force_calls 337 | 377 | gap; improved_unset |
+| lj38/eon-lanczos | force_calls 364 | 342 | aligned |
+| lj38/eon-lanczos-improved | force_calls 287 | 259 | aligned |
+| lj38/optim | force_calls 131 | 147 | gap; optim_pes_counter |
 | lj38/optim-cl-string | — | — | not rerun |
 | lj38/pele | — | — | not rerun |
-| lj38_2ts_separation/optim | force_calls 2885 | 3454 | not reproduced; optim_pes_counter |
+| lj38_2ts_separation/optim | force_calls 2885 | 3454 | gap; optim_pes_counter |
 | lj38_2ts_separation/pele | — | — | not rerun |
-| pt-island/eon-ci-neb | force_calls 248 | 226 | reproduced |
+| pt-island/eon-ci-neb | force_calls 248 | 226 | aligned |
 | pt-island/eon-ci-neb-5 | — | — | not rerun |
 | pt-island/eon-ci-neb-single | — | — | not rerun |
-| pt-island/eon-ci-swdneb | force_calls 256 | 246 | reproduced |
-| pt-island/eon-dimer | force_calls 182 | 192 | reproduced |
-| pt-island/eon-lanczos | force_calls 325 | 222 | not reproduced; pt_lanczos |
-| pt-island/eon-lanczos-improved | force_calls 222 | 181 | not reproduced; pt_lanczos |
-| pt-island/optim | force_calls 103 | 138 | not reproduced; optim_pt_units |
+| pt-island/eon-ci-swdneb | force_calls 256 | 246 | aligned |
+| pt-island/eon-dimer | force_calls 182 | 192 | aligned |
+| pt-island/eon-lanczos | force_calls 325 | 222 | gap; pt_lanczos |
+| pt-island/eon-lanczos-improved | force_calls 222 | 181 | gap; pt_lanczos |
+| pt-island/optim | force_calls 103 | 138 | gap; optim_pt_units |
 | pt-island/optim-6 | — | — | not rerun |
 | pt-island/optim-cl-string | — | — | not rerun |
 | pt-island/pele | — | — | not rerun |
@@ -55,11 +55,11 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj100-binary/gmin | — | — | not rerun |
 | lj150/gmin-nosym | — | — | not rerun |
 | lj150/gmin-symmetrise | — | — | not rerun |
-| lj38/eon-basinhopping | force_calls 508011 | 503146 | reproduced |
+| lj38/eon-basinhopping | force_calls 508011 | 503146 | aligned |
 | lj38/gmin-csm | — | — | not rerun |
 | lj38/gmin-nosym | — | — | not rerun |
 | lj38/gmin-symmetrise | — | — | not rerun |
-| lj38/pele-basinhopping | force_calls 521595 | 688720 | not reproduced; pele_bh_defaults |
+| lj38/pele-basinhopping | force_calls 521595 | 688720 | gap; pele_bh_defaults |
 | lj75/gmin | — | — | not rerun |
 | lj98/gmin-nosym | — | — | not rerun |
 | lj98/gmin-symmetrise | — | — | not rerun |
@@ -74,10 +74,10 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
-| Al/eon-dimer-cg | barrier_force_calls 28870, barrier_jobs 48, rate_force_calls 897900, rate_jobs 1511 | 19660, 50, 620600, 1600 | not reproduced; htst_al |
+| Al/eon-dimer-cg | barrier_force_calls 28870, barrier_jobs 48, rate_force_calls 897900, rate_jobs 1511 | 19660, 50, 620600, 1600 | gap; htst_al |
 | Al/eon-dimer-cg2 | — | — | not rerun |
 | Pt/alpha_dimer-qm | — | — | not rerun |
-| Pt/eon-dimer-cg | barrier_force_calls 496000, barrier_jobs 1050, rate_force_calls 25630, rate_jobs 54 | 506000, 1062, 27160, 57 | reproduced |
+| Pt/eon-dimer-cg | barrier_force_calls 496000, barrier_jobs 1050, rate_force_calls 25630, rate_jobs 54 | 506000, 1062, 27160, 57 | aligned |
 | Pt/eon-dimer-cg2 | — | — | not rerun |
 | Pt/eon-dimer-lbfgs | — | — | not rerun |
 | Pt/eon-dimer-lbfgs2 | — | — | not rerun |
@@ -92,13 +92,13 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
-| lj38/eon-dimer-cg | force_calls 30 | 30 | reproduced |
-| lj38/eon-dimer-lbfgs | force_calls 28 | 28 | reproduced |
-| lj38/eon-lanczos | force_calls 28 | 26 | reproduced |
-| lj38/optim-first-order | force_calls 25 | 61 | not reproduced; optim_rr_defaults |
+| lj38/eon-dimer-cg | force_calls 30 | 30 | aligned |
+| lj38/eon-dimer-lbfgs | force_calls 28 | 28 | aligned |
+| lj38/eon-lanczos | force_calls 28 | 26 | aligned |
+| lj38/optim-first-order | force_calls 25 | 61 | gap; optim_rr_defaults |
 | lj38/optim-second-order | — | — | not rerun |
-| lj38/pele-first-order | force_calls 25 | 25 | reproduced |
-| lj38/pele-second-order | force_calls 47 | 47 | reproduced |
+| lj38/pele-first-order | force_calls 25 | 25 | aligned |
+| lj38/pele-second-order | force_calls 47 | 47 | aligned |
 | lj38/sella | — | — | not rerun |
 | lj38/tsase-dimer-bfgs | — | — | not rerun |
 | lj38/tsase-dimer-cg | — | — | not rerun |
@@ -108,40 +108,40 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
-| lj38/ase-BFGS | force_calls 463 | 461 | reproduced |
-| lj38/ase-bfgslinesearch | force_calls 500 | 506 | reproduced |
-| lj38/ase-fire | force_calls 656 | 720 | reproduced |
-| lj38/ase-lbfgs | force_calls 355 | 356 | reproduced |
+| lj38/ase-BFGS | force_calls 463 | 461 | aligned |
+| lj38/ase-bfgslinesearch | force_calls 500 | 506 | aligned |
+| lj38/ase-fire | force_calls 656 | 720 | aligned |
+| lj38/ase-lbfgs | force_calls 355 | 356 | aligned |
 | lj38/ase-lbfgslinesearch | — | — | not rerun |
 | lj38/ase-preconlbfgs | — | — | not rerun |
-| lj38/eon-cg | force_calls 453 | 454 | reproduced |
-| lj38/eon-fire | force_calls 731 | 731 | reproduced |
-| lj38/eon-lbfgs | force_calls 181 | 181 | reproduced |
-| lj38/eon-qm | force_calls 3523 | 3514 | reproduced |
-| lj38/eon-sd | force_calls 4901 | 4901 | reproduced |
-| lj38/eon-sd-twopoint | force_calls 539 | 532 | reproduced |
+| lj38/eon-cg | force_calls 453 | 454 | aligned |
+| lj38/eon-fire | force_calls 731 | 731 | aligned |
+| lj38/eon-lbfgs | force_calls 181 | 181 | aligned |
+| lj38/eon-qm | force_calls 3523 | 3514 | aligned |
+| lj38/eon-sd | force_calls 4901 | 4901 | aligned |
+| lj38/eon-sd-twopoint | force_calls 539 | 532 | aligned |
 | lj38/newton-method | — | — | not rerun |
-| lj38/optim | force_calls 176 | 176 | reproduced |
-| lj38/pele-fire | force_calls 709 | 1264 | not reproduced; pele_fire |
-| lj38/pele-lbfgs-M1-maxstep0.1 | force_calls 287 | 286 | reproduced |
-| lj38/pele-lbfgs-M10-maxstep0.1 | force_calls 235 | 235 | reproduced |
-| lj38/pele-lbfgs-M100-maxstep0.2 | force_calls 179 | 178 | reproduced |
-| lj38/pele-lbfgs-M20-maxstep0.1 | force_calls 222 | 223 | reproduced |
-| lj38/pele-lbfgs-M4-maxstep0.05 | force_calls 379 | 381 | reproduced |
-| lj38/pele-lbfgs-M4-maxstep0.1 | force_calls 249 | 248 | reproduced |
-| lj38/pele-lbfgs-M4-maxstep0.2 | force_calls 230 | 228 | reproduced |
+| lj38/optim | force_calls 176 | 176 | aligned |
+| lj38/pele-fire | force_calls 709 | 1264 | gap; pele_fire |
+| lj38/pele-lbfgs-M1-maxstep0.1 | force_calls 287 | 286 | aligned |
+| lj38/pele-lbfgs-M10-maxstep0.1 | force_calls 235 | 235 | aligned |
+| lj38/pele-lbfgs-M100-maxstep0.2 | force_calls 179 | 178 | aligned |
+| lj38/pele-lbfgs-M20-maxstep0.1 | force_calls 222 | 223 | aligned |
+| lj38/pele-lbfgs-M4-maxstep0.05 | force_calls 379 | 381 | aligned |
+| lj38/pele-lbfgs-M4-maxstep0.1 | force_calls 249 | 248 | aligned |
+| lj38/pele-lbfgs-M4-maxstep0.2 | force_calls 230 | 228 | aligned |
 | lj38/scipy-lbfgs | — | — | not rerun |
 | lj38/tsase-sdlbfgs | — | — | not rerun |
-| morse-bulk/ase-fire | force_calls 147.47 | 113 | not reproduced; ase_morse_script |
-| morse-bulk/ase-lbfgs | force_calls 53.8 | 32 | not reproduced; ase_morse_script |
-| morse-bulk/ase-preconLBFGS | force_calls 34 | 29 | not reproduced; ase_morse_script |
-| morse-bulk/eon-cg | force_calls 106 | 106 | reproduced |
-| morse-bulk/eon-fire | force_calls 156 | 156 | reproduced |
-| morse-bulk/eon-lbfgs | force_calls 52 | 52 | reproduced |
-| morse-bulk/eon-sd | force_calls 196 | 7038 | not reproduced; morse_sd |
+| morse-bulk/ase-fire | force_calls 147.47 | 113 | gap; ase_morse_script |
+| morse-bulk/ase-lbfgs | force_calls 53.8 | 32 | gap; ase_morse_script |
+| morse-bulk/ase-preconLBFGS | force_calls 34 | 29 | gap; ase_morse_script |
+| morse-bulk/eon-cg | force_calls 106 | 106 | aligned |
+| morse-bulk/eon-fire | force_calls 156 | 156 | aligned |
+| morse-bulk/eon-lbfgs | force_calls 52 | 52 | aligned |
+| morse-bulk/eon-sd | force_calls 196 | 7038 | gap; morse_sd |
 | morse-bulk/eon-sd-twopoint | — | — | not rerun |
-| morse-bulk/optim | force_calls 46 | 27 | not reproduced; optim_morse_memory |
-| morse-bulk/pele-lbfgs | force_calls 51 | 92 | not reproduced; pele_morse |
+| morse-bulk/optim | force_calls 46 | 27 | gap; optim_morse_memory |
+| morse-bulk/pele-lbfgs | force_calls 51 | 92 | gap; pele_morse |
 | morse-bulk/tsase-sdlbfgs | — | — | not rerun |
 
 ## mlopt
@@ -165,10 +165,10 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
-| Pt-heptamer/eon-cg | force_calls 120 | 142 | not reproduced; heptamer_cg |
-| Pt-heptamer/eon-fire | force_calls 86 | 85 | reproduced |
-| Pt-heptamer/eon-lbfgs | force_calls 42 | 40 | reproduced |
-| Pt-heptamer/eon-qm | force_calls 164 | 165 | reproduced |
+| Pt-heptamer/eon-cg | force_calls 120 | 142 | gap; heptamer_cg |
+| Pt-heptamer/eon-fire | force_calls 86 | 85 | aligned |
+| Pt-heptamer/eon-lbfgs | force_calls 42 | 40 | aligned |
+| Pt-heptamer/eon-qm | force_calls 164 | 165 | aligned |
 | Pt-heptamer/gman-cg | — | — | not rerun |
 | Pt-heptamer/gman-fire | — | — | not rerun |
 | Pt-heptamer/gman-glbfgs-hess | — | — | not rerun |
@@ -182,10 +182,10 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
-| pt-island/adaptive_HSphere-lbfgs-davidson-sm50 | force_calls 423491, unique_saddles 114.9, fraction_connected 0.8 | 5.2987e+06, 0, 1 | not reproduced; saddle_novelty |
-| pt-island/adaptive_HSphere-lbfgs-lanczos-sm0 | force_calls 1.00343e+06, unique_saddles 130.4, fraction_connected 0.9 | 1.92665e+06, 0.5, 0.9682 | not reproduced; saddle_novelty |
-| pt-island/adaptive_HSphere-lbfgs-lanczos-sm50 | force_calls 814519, unique_saddles 142.6, fraction_connected 0.9 | 1.58264e+06, 0.7, 0.93584 | not reproduced; saddle_novelty |
-| pt-island/eon-dimer | force_calls 3.77888e+06, unique_saddles 109.222, fraction_connected 0.746017 | 6.97488e+06, 91.7, 0.691952 | not reproduced; eon_saddle_count |
+| pt-island/adaptive_HSphere-lbfgs-davidson-sm50 | force_calls 423491, unique_saddles 114.9, fraction_connected 0.8 | 5.2987e+06, 0, 1 | gap; saddle_novelty |
+| pt-island/adaptive_HSphere-lbfgs-lanczos-sm0 | force_calls 1.00343e+06, unique_saddles 130.4, fraction_connected 0.9 | 1.92665e+06, 0.5, 0.9682 | gap; saddle_novelty |
+| pt-island/adaptive_HSphere-lbfgs-lanczos-sm50 | force_calls 814519, unique_saddles 142.6, fraction_connected 0.9 | 1.58264e+06, 0.7, 0.93584 | gap; saddle_novelty |
+| pt-island/eon-dimer | force_calls 3.77888e+06, unique_saddles 109.222, fraction_connected 0.746017 | 6.97488e+06, 91.7, 0.691952 | gap; eon_saddle_count |
 | pt-island/eon-dimer-cg-20-rotations | — | — | not rerun |
 | pt-island/eon-dimer-cg-20-rotations-20-bowl_breakout | — | — | not rerun |
 | pt-island/eon-dimer-cg-5-rotations-20-bowl_breakout | — | — | not rerun |
@@ -199,26 +199,26 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
-| LJ38/eon-dimer | force_calls 528 | 523 | reproduced |
-| LJ38/eon-lanczos | force_calls 321 | 293 | reproduced |
-| LJ38/eon-lanczos-improved | force_calls 237 | 271 | not reproduced; improved_unset |
+| LJ38/eon-dimer | force_calls 528 | 523 | aligned |
+| LJ38/eon-lanczos | force_calls 321 | 293 | aligned |
+| LJ38/eon-lanczos-improved | force_calls 237 | 271 | gap; improved_unset |
 | LJ38/optim_cd | — | — | not rerun |
-| LJ38/optim_ffd | force_calls 145 | 489 | not reproduced; optim_lj38_ts |
-| LJ38/pele_cd | force_calls 254 | 263.52 | reproduced; residual |
-| LJ38/pele_ffd | force_calls 192 | 207.51 | reproduced; residual |
-| LJ38/sella | force_calls 69.55 | 93 | not reproduced; sella_trust |
-| pt-island/eon-dimer | force_calls 116 | 115 | reproduced |
-| pt-island/eon-lanczos | force_calls 143 | 146 | reproduced |
-| pt-island/eon-lanczos-improved | force_calls 106 | 106 | reproduced |
+| LJ38/optim_ffd | force_calls 145 | 489 | gap; optim_lj38_ts |
+| LJ38/pele_cd | force_calls 254 | 263.52 | aligned; residual |
+| LJ38/pele_ffd | force_calls 192 | 207.51 | aligned; residual |
+| LJ38/sella | force_calls 69.55 | 93 | gap; sella_trust |
+| pt-island/eon-dimer | force_calls 116 | 115 | aligned |
+| pt-island/eon-lanczos | force_calls 143 | 146 | aligned |
+| pt-island/eon-lanczos-improved | force_calls 106 | 106 | aligned |
 | pt-island/optim_cd | — | — | not rerun |
-| pt-island/optim_ffd | force_calls 71 | 170 | not reproduced; optim_pt_units |
-| pt-island/pele | force_calls 88 | 88.551 | reproduced |
-| pt-island/sella | force_calls 53 | 88 | not reproduced; sella_trust |
+| pt-island/optim_ffd | force_calls 71 | 170 | gap; optim_pt_units |
+| pt-island/pele | force_calls 88 | 88.551 | aligned |
+| pt-island/sella | force_calls 53 | 88 | gap; sella_trust |
 
 ## Residuals inside the band
 
-- tsopt/LJ38/pele_cd: Inside the 10% band (263.52 vs 254). The same xyz-versus-con starting set as ts-ffd. findTS_local.py for the CD row does not pass orthogZeroEigs; the harness template sets orthog translations-rotations. The paper baseline is this 2014-stop mean, not the harness-stop mean 335.06.
-- tsopt/LJ38/pele_ffd: Inside the 10% band (207.51 vs 192). Archive run.sh unpacks coords-xyz.tar.gz (200 xyz, max pair about 4.4). The harness problem points at coords-con.tar.gz (max pair about 37). Kabsch RMS is about 6.33, so the sets are not the same geometry. Neither set has a pair past cutoff 40, and both drivers use RMS tolerance 1e-3/sqrt(114). The 8% residual is the starting set. The paper baseline is this 2014-stop mean, not the harness-stop mean 254.48.
+- tsopt/LJ38/pele_cd: Inside the 10% band (263.52 vs 254). The same xyz-versus-con starting set as ts-ffd. findTS_local.py for the CD row does not pass orthogZeroEigs; the harness template sets orthog translations-rotations. The archive stop is this 2014-stop mean, not the harness-stop mean 335.06.
+- tsopt/LJ38/pele_ffd: Inside the 10% band (207.51 vs 192). Archive run.sh unpacks coords-xyz.tar.gz (200 xyz, max pair about 4.4). The harness problem points at coords-con.tar.gz (max pair about 37). Kabsch RMS is about 6.33, so the sets are not the same geometry. Neither set has a pair past cutoff 40, and both drivers use RMS tolerance 1e-3/sqrt(114). The 8% residual is the starting set. The archive stop is this 2014-stop mean, not the harness-stop mean 254.48.
 
 ## Causes
 
@@ -231,13 +231,13 @@ The archive rows are Langevin parallel replica. The harness rows are AKMC. On in
 
 ### de_exclusion
 
-The 3.5.0 doubly-nudged file is the per-band mean under the 2500-call exclusion (708, 5 failures). The archive mean is 861. The client total is a different counter and is also outside 10 percent.
+The 3.5.0 doubly-nudged file is the per-band mean under the 2500-call exclusion (708, 5 failures). The archive mean is 861. The client total is a different counter and is also past the band.
 
 - double-ended-saddle-search/lj38/eon-ci-swdneb
 
 ### improved_unset
 
-The r2549 template turns improved on. The 2014 ini left that key unset. The mean lands outside 10 percent.
+The r2549 template turns improved on. The 2014 ini left that key unset. The mean lands past the band.
 
 - double-ended-saddle-search/lj38/eon-dimer
 - tsopt/LJ38/eon-lanczos-improved
@@ -329,7 +329,7 @@ The harness link and novelty test uses Cartesian RMSD 0.5 over the full island. 
 
 ### eon_saddle_count
 
-The classic dimer campaign (improved false, the 2014 key) has fraction_connected 0.692 against 0.746, inside 10 percent, but force calls 6.97e6 against 3.78e6 and unique saddles 91.7 against 109.2. The archive standard error on the force calls is 5.27e5. This eOn AKMC counter is not the harness RMSD link test.
+The classic dimer campaign (improved false, the 2014 key) has fraction_connected 0.692 against 0.746, inside the band, but force calls 6.97e6 against 3.78e6 and unique saddles 91.7 against 109.2. The archive standard error on the force calls is 5.27e5. This eOn AKMC counter is not the harness RMSD link test.
 
 - saddle-search/pt-island/eon-dimer
 

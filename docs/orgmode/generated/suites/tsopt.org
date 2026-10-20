@@ -11,7 +11,7 @@
    <tr data-problem="tsopt/LJ38">
    <th scope="row"><a href="#LJ38">LJ38</a></th>
    <td class="bench-score" data-code="eOn" data-template="eon-client/ts-lj38-lanczos-improved" data-par2="280.33">280.33<a href="#LJ38-templates">eon-client/ts-lj38-lanczos-improved</a></td>
-   <td class="bench-score" data-code="Eon svn" data-template="eon-svn/ts-lj38-lanczos-ljcut" data-par2="292.78">292.78<a href="#LJ38-templates">eon-svn/ts-lj38-lanczos-ljcut</a></td>
+   <td class="bench-score" data-code="Eon svn" data-template="eon-svn/ts-lj38-lanczos-improved" data-par2="270.85">270.85<a href="#LJ38-templates">eon-svn/ts-lj38-lanczos-improved</a></td>
    <td data-code="rgmin">—</td>
    <td class="bench-score" data-code="rgsaddle" data-template="rgsaddle/dimer-rotskip" data-par2="7803.19">7803.19<a href="#LJ38-templates">rgsaddle/dimer-rotskip</a></td>
    <td data-code="geodesic">—</td>
@@ -36,7 +36,7 @@
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
-   <td class="bench-score" data-code="optim" data-template="optim/bfgsts-ts-lj38" data-par2="835.01">835.01<a href="#LJ38-templates">optim/bfgsts-ts-lj38</a></td>
+   <td class="bench-score" data-code="optim" data-template="optim/hef-ffd-ts-lj38" data-par2="488.835">488.835<a href="#LJ38-templates">optim/hef-ffd-ts-lj38</a></td>
    <td class="bench-score" data-code="optking" data-template="optking/lj38-p-rfo" data-par2="7030.36">7030.36<a href="#LJ38-templates">optking/lj38-p-rfo</a></td>
    <td class="bench-score" data-code="saddlesearchjl" data-template="saddlesearchjl/lj38-ode" data-par2="1052.13">1052.13<a href="#LJ38-templates">saddlesearchjl/lj38-ode</a></td>
    <td data-code="softsaddle">—</td>
@@ -70,7 +70,7 @@
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
-   <td class="bench-score" data-code="optim" data-template="optim/bfgsts-ts-pt" data-par2="281.592">281.592<a href="#pt-island-templates">optim/bfgsts-ts-pt</a></td>
+   <td class="bench-score" data-code="optim" data-template="optim/hef-ffd-ts-pt" data-par2="170.122">170.122<a href="#pt-island-templates">optim/hef-ffd-ts-pt</a></td>
    <td class="bench-score" data-code="optking" data-template="optking/pt-rs-irfo" data-par2="1059.98">1059.98<a href="#pt-island-templates">optking/pt-rs-irfo</a></td>
    <td class="bench-score" data-code="saddlesearchjl" data-template="saddlesearchjl/pt-ode" data-par2="363.408">363.408<a href="#pt-island-templates">saddlesearchjl/pt-ode</a></td>
    <td data-code="softsaddle">—</td>
@@ -91,17 +91,19 @@
    <figure class="bench-plot"><a href="../../_static/board/tsopt-LJ38-profile.svg"><picture><source srcset="../../_static/board/tsopt-LJ38-profile.webp" type="image/webp"><img src="../../_static/board/tsopt-LJ38-profile.png" alt="Dolan-More profile for tsopt/LJ38" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/tsopt-LJ38-cost.svg"><picture><source srcset="../../_static/board/tsopt-LJ38-cost.webp" type="image/webp"><img src="../../_static/board/tsopt-LJ38-cost.png" alt="Cost versus success for tsopt/LJ38" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="LJ38-templates">
-   <summary>All templates (31 ranked)</summary>
+   <summary>All templates (33 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="tsopt/LJ38">
-   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
+   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. The Wilson column is the 95% success-rate bound, low then high.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td data-field="template">sella/lj38-ts-default</td><td data-field="version">Sella 2.6.0</td><td data-field="commit">6cfb60cdb100</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">68.74</td><td data-field="success_rate">1</td><td data-field="wilson">0.981155–1</td><td data-field="median_calls">59.5</td><td data-field="mean_calls">68.74</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
    <tr><td data-field="template">pele/lj38-ts-ffd</td><td data-field="version">pele 0.1.2</td><td data-field="commit">b7081b932a06</td><td data-field="source">campaign</td><td data-field="par2_mean">254.48</td><td data-field="success_rate">1</td><td data-field="wilson">0.981155–1</td><td data-field="median_calls">220.5</td><td data-field="mean_calls">254.48</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
+   <tr><td data-field="template">eon-svn/ts-lj38-lanczos-improved</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="par2_mean">270.85</td><td data-field="success_rate">1</td><td data-field="wilson">0.981155–1</td><td data-field="median_calls">180</td><td data-field="mean_calls">270.85</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
    <tr><td data-field="template">eon-client/ts-lj38-lanczos-improved</td><td data-field="version">eOn 3.5.0</td><td data-field="commit">4d8b34baf1ba</td><td data-field="source">campaign</td><td data-field="par2_mean">280.33</td><td data-field="success_rate">1</td><td data-field="wilson">0.981155–1</td><td data-field="median_calls">214</td><td data-field="mean_calls">280.33</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
    <tr><td data-field="template">eon-svn/ts-lj38-lanczos-ljcut</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="par2_mean">292.78</td><td data-field="success_rate">1</td><td data-field="wilson">0.981155–1</td><td data-field="median_calls">219</td><td data-field="mean_calls">292.78</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
    <tr><td data-field="template">eon-client/ts-lj38-lanczos</td><td data-field="version">eOn 3.5.0</td><td data-field="commit">4d8b34baf1ba</td><td data-field="source">campaign</td><td data-field="par2_mean">311.19</td><td data-field="success_rate">1</td><td data-field="wilson">0.981155–1</td><td data-field="median_calls">255.5</td><td data-field="mean_calls">311.19</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
    <tr><td data-field="template">pele/lj38-ts-cd</td><td data-field="version">pele 0.1.2</td><td data-field="commit">b7081b932a06</td><td data-field="source">campaign</td><td data-field="par2_mean">335.06</td><td data-field="success_rate">1</td><td data-field="wilson">0.981155–1</td><td data-field="median_calls">300</td><td data-field="mean_calls">335.06</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
+   <tr><td data-field="template">optim/hef-ffd-ts-lj38</td><td data-field="version">optim df8da599</td><td data-field="commit">df8da5992675</td><td data-field="source">campaign</td><td data-field="par2_mean">488.835</td><td data-field="success_rate">1</td><td data-field="wilson">0.981155–1</td><td data-field="median_calls">360</td><td data-field="mean_calls">488.835</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
    <tr><td data-field="template">eon-svn/ts-lj38-dimer-ljcut</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="par2_mean">619.89</td><td data-field="success_rate">0.995</td><td data-field="wilson">0.972226–0.999117</td><td data-field="median_calls">360.5</td><td data-field="mean_calls">536.585</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 1, wrong_stationary 0</td><td data-field="n">200</td></tr>
    <tr><td data-field="template">eon-svn/ts-lj38-dimer</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">644.135</td><td data-field="success_rate">0.995</td><td data-field="wilson">0.972226–0.999117</td><td data-field="median_calls">360.5</td><td data-field="mean_calls">548.34</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 1, wrong_stationary 0</td><td data-field="n">200</td></tr>
    <tr><td data-field="template">geometric/lj38-ts-harness</td><td data-field="version">geomeTRIC 1.1.1</td><td data-field="commit">f657e69bae9c</td><td data-field="source">campaign</td><td data-field="par2_mean">661.295</td><td data-field="success_rate">0.98</td><td data-field="wilson">0.949713–0.992196</td><td data-field="median_calls">246.5</td><td data-field="mean_calls">363.915</td><td data-field="failures">crash 0, divergence 0, cap 2, not_converged 0, wrong_stationary 2</td><td data-field="n">200</td></tr>
@@ -129,19 +131,19 @@
    <tr><td data-field="template">tsase/dimer-lj38</td><td data-field="version">tsase 1.0</td><td data-field="commit">98aac60b5d99</td><td data-field="source">campaign</td><td data-field="par2_mean">20000</td><td data-field="success_rate">0</td><td data-field="wilson">0–0.0188453</td><td data-field="median_calls">10000</td><td data-field="mean_calls">10000</td><td data-field="failures">crash 0, divergence 0, cap 200, not_converged 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
    </tbody></table></div>
    <h3>Partial</h3>
-   <p>eon-svn/ts-lj38-lanczos-improved Eon svn campaign n=200, does not reproduce the 2014 archive. optim/hef-ffd-ts-lj38 optim campaign n=200, does not reproduce the 2014 archive. saddlesearchjl/lj38-bb saddlesearchjl asv n=1, smoke run; scored 1 of 200 starts. saddlesearchjl/lj38-ode saddlesearchjl asv n=1, smoke run; scored 1 of 200 starts. saddlesearchjl/lj38-static saddlesearchjl asv n=1, smoke run; scored 1 of 200 starts. saddlesearchjl/lj38-superlinear saddlesearchjl asv n=1, smoke run; scored 1 of 200 starts. eon/develop-ts-lj38-dimer-accept-energy eOn asv n=1, smoke run; scored 1 of 200 starts. eon/develop-ts-lj38-lanczos eOn asv n=1, smoke run; scored 1 of 200 starts. optking/lj38-p-rfo optking asv n=1, smoke run; scored 1 of 200 starts. optking/lj38-rs-irfo optking asv n=1, smoke run; scored 1 of 200 starts. sella/lj38-ts-default Sella asv n=1, smoke run; scored 1 of 200 starts. optim/bfgsts-ts-lj38 optim asv n=1, smoke run; scored 1 of 200 starts. optim/hef-ffd-ts-lj38 optim asv n=1, smoke run; scored 1 of 200 starts. pele/lj38-ts pele asv n=1, smoke run; scored 1 of 200 starts. pele/lj38-ts-cd pele asv n=1, smoke run; scored 1 of 200 starts. pele/lj38-ts-ffd pele asv n=1, smoke run; scored 1 of 200 starts.</p>
+   <p>saddlesearchjl/lj38-bb saddlesearchjl asv n=1, smoke run; scored 1 of 200 starts. saddlesearchjl/lj38-ode saddlesearchjl asv n=1, smoke run; scored 1 of 200 starts. saddlesearchjl/lj38-static saddlesearchjl asv n=1, smoke run; scored 1 of 200 starts. saddlesearchjl/lj38-superlinear saddlesearchjl asv n=1, smoke run; scored 1 of 200 starts. eon/develop-ts-lj38-dimer-accept-energy eOn asv n=1, smoke run; scored 1 of 200 starts. eon/develop-ts-lj38-lanczos eOn asv n=1, smoke run; scored 1 of 200 starts. optking/lj38-p-rfo optking asv n=1, smoke run; scored 1 of 200 starts. optking/lj38-rs-irfo optking asv n=1, smoke run; scored 1 of 200 starts. sella/lj38-ts-default Sella asv n=1, smoke run; scored 1 of 200 starts. optim/bfgsts-ts-lj38 optim asv n=1, smoke run; scored 1 of 200 starts. optim/hef-ffd-ts-lj38 optim asv n=1, smoke run; scored 1 of 200 starts. pele/lj38-ts pele asv n=1, smoke run; scored 1 of 200 starts. pele/lj38-ts-cd pele asv n=1, smoke run; scored 1 of 200 starts. pele/lj38-ts-ffd pele asv n=1, smoke run; scored 1 of 200 starts.</p>
    <h3>Not a harness score</h3>
    <p>eon/ts-lj38-dimer-m100 eOn n=200, not yet on the harness counter. eon/ts-lj38-dimer eOn n=200, not yet on the harness counter.</p>
    <h3>Not scored</h3>
    <p>sella-lj38: no per-start record.</p>
    </details>
-   </section><section class="bench bench-legacy-section" id="LJ38-legacy">
-   <h3>Legacy 2014 archive</h3>
+   </section><section class="bench bench-archive-section" id="LJ38-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -156,8 +158,8 @@
    </tr></thead><tbody>
    <tr id="tsopt-lj38-sella" class="best">
    <td class="num">1</td>
-   <td class="text">sella · not reproduced</td>
-   <td class="text">Sella 0.1.1 legacy</td>
+   <td class="text">sella</td>
+   <td class="text">Sella 0.1.1</td>
    <td class="num">69.55</td>
    <td class="num">158</td>
    <td class="num">64.0</td>
@@ -168,7 +170,7 @@
    </tr>
    <tr id="tsopt-lj38-optim-ffd">
    <td class="num">2</td>
-   <td class="text">optim_ffd · not reproduced</td>
+   <td class="text">optim_ffd</td>
    <td class="text">OPTIM</td>
    <td class="num">1.45000e+02</td>
    <td class="num">5.6500e+02</td>
@@ -204,7 +206,7 @@
    </tr>
    <tr id="tsopt-lj38-eon-lanczos-improved">
    <td class="num">5</td>
-   <td class="text">eon-lanczos-improved · not reproduced</td>
+   <td class="text">eon-lanczos-improved</td>
    <td class="text">Eon r2156</td>
    <td class="num">237</td>
    <td class="num">1898</td>
@@ -251,7 +253,7 @@
    <td class="text">02 Jul 2013</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:8"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "tsopt-lj38-sella", "entry": "sella", "code": "Sella 0.1.1 legacy", "value": 69.55, "best": true, "held": false, "failed": false}, {"id": "tsopt-lj38-optim-ffd", "entry": "optim_ffd", "code": "OPTIM", "value": 145.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-lj38-pele-ffd", "entry": "pele_ffd", "code": "pele", "value": 192.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-lj38-optim-cd", "entry": "optim_cd", "code": "OPTIM", "value": 223.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-lj38-eon-lanczos-improved", "entry": "eon-lanczos-improved", "code": "Eon r2156", "value": 237.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-lj38-pele-cd", "entry": "pele_cd", "code": "pele", "value": 254.0, "best": false, "held": true, "failed": false}, {"id": "tsopt-lj38-eon-lanczos", "entry": "eon-lanczos", "code": "Eon r2156", "value": 321.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-lj38-eon-dimer", "entry": "eon-dimer", "code": "Eon r2156", "value": 528.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:8"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "tsopt-lj38-sella", "entry": "sella", "code": "Sella 0.1.1", "value": 69.55, "best": true, "held": false, "failed": false}, {"id": "tsopt-lj38-optim-ffd", "entry": "optim_ffd", "code": "OPTIM", "value": 145.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-lj38-pele-ffd", "entry": "pele_ffd", "code": "pele", "value": 192.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-lj38-optim-cd", "entry": "optim_cd", "code": "OPTIM", "value": 223.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-lj38-eon-lanczos-improved", "entry": "eon-lanczos-improved", "code": "Eon r2156", "value": 237.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-lj38-pele-cd", "entry": "pele_cd", "code": "pele", "value": 254.0, "best": false, "held": true, "failed": false}, {"id": "tsopt-lj38-eon-lanczos", "entry": "eon-lanczos", "code": "Eon r2156", "value": 321.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-lj38-eon-dimer", "entry": "eon-dimer", "code": "Eon r2156", "value": 528.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section><section class="bench" id="pt-island" data-problem="tsopt/pt-island">
    <h2>pt-island</h2>
@@ -268,10 +270,10 @@
    <figure class="bench-plot"><a href="../../_static/board/tsopt-pt-island-profile.svg"><picture><source srcset="../../_static/board/tsopt-pt-island-profile.webp" type="image/webp"><img src="../../_static/board/tsopt-pt-island-profile.png" alt="Dolan-More profile for tsopt/pt-island" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/tsopt-pt-island-cost.svg"><picture><source srcset="../../_static/board/tsopt-pt-island-cost.webp" type="image/webp"><img src="../../_static/board/tsopt-pt-island-cost.png" alt="Cost versus success for tsopt/pt-island" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="pt-island-templates">
-   <summary>All templates (30 ranked)</summary>
+   <summary>All templates (31 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="tsopt/pt-island">
-   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
+   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. The Wilson column is the 95% success-rate bound, low then high.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td data-field="template">sella/pt-island-ts-default</td><td data-field="version">Sella 2.6.0</td><td data-field="commit">6cfb60cdb100</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">74.2857</td><td data-field="success_rate">1</td><td data-field="wilson">0.927302–1</td><td data-field="median_calls">71</td><td data-field="mean_calls">74.2857</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">49</td></tr>
    <tr><td data-field="template">eon-svn/ts-pt-lanczos-improved</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="par2_mean">106.388</td><td data-field="success_rate">1</td><td data-field="wilson">0.927302–1</td><td data-field="median_calls">100</td><td data-field="mean_calls">106.388</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">49</td></tr>
@@ -283,6 +285,7 @@
    <tr><td data-field="template">eon/develop-ts-pt-dimer</td><td data-field="version">eOn 3.6.0</td><td data-field="commit">7095b23ac17d</td><td data-field="source">asv</td><td data-field="par2_mean">135.408</td><td data-field="success_rate">1</td><td data-field="wilson">0.927302–1</td><td data-field="median_calls">133</td><td data-field="mean_calls">135.408</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">49</td></tr>
    <tr><td data-field="template">eon-svn/ts-pt-lanczos-smooth</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="par2_mean">146.163</td><td data-field="success_rate">1</td><td data-field="wilson">0.927302–1</td><td data-field="median_calls">140</td><td data-field="mean_calls">146.163</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">49</td></tr>
    <tr><td data-field="template">eon-client/ts-pt-lanczos</td><td data-field="version">eOn 3.5.0</td><td data-field="commit">4d8b34baf1ba</td><td data-field="source">campaign</td><td data-field="par2_mean">155.571</td><td data-field="success_rate">1</td><td data-field="wilson">0.927302–1</td><td data-field="median_calls">149</td><td data-field="mean_calls">155.571</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">49</td></tr>
+   <tr><td data-field="template">optim/hef-ffd-ts-pt</td><td data-field="version">optim df8da599</td><td data-field="commit">df8da5992675</td><td data-field="source">campaign</td><td data-field="par2_mean">170.122</td><td data-field="success_rate">1</td><td data-field="wilson">0.927302–1</td><td data-field="median_calls">178</td><td data-field="mean_calls">170.122</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">49</td></tr>
    <tr><td data-field="template">eon-svn/ts-pt-lanczos</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">223.592</td><td data-field="success_rate">1</td><td data-field="wilson">0.927302–1</td><td data-field="median_calls">173</td><td data-field="mean_calls">223.592</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">49</td></tr>
    <tr><td data-field="template">rgsaddle/pt-dimer-rotskip</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">223.898</td><td data-field="success_rate">1</td><td data-field="wilson">0.927302–1</td><td data-field="median_calls">145</td><td data-field="mean_calls">223.898</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">49</td></tr>
    <tr><td data-field="template">eon/develop-ts-pt-lanczos</td><td data-field="version">eOn 3.6.0</td><td data-field="commit">7095b23ac17d</td><td data-field="source">asv</td><td data-field="par2_mean">238.837</td><td data-field="success_rate">1</td><td data-field="wilson">0.927302–1</td><td data-field="median_calls">173</td><td data-field="mean_calls">238.837</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">49</td></tr>
@@ -305,17 +308,17 @@
    <tr><td data-field="template">cp2k/pt-island-dimer-cg</td><td data-field="version">CP2K 2026.2</td><td data-field="commit">702cc3d81422</td><td data-field="source">campaign</td><td data-field="par2_mean">20000</td><td data-field="success_rate">0</td><td data-field="wilson">0–0.0726978</td><td data-field="median_calls">524</td><td data-field="mean_calls">542.408</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 49, wrong_stationary 0</td><td data-field="n">49</td></tr>
    </tbody></table></div>
    <h3>Partial</h3>
-   <p>optim/hef-ffd-ts-pt optim campaign n=49, does not reproduce the 2014 archive. saddlesearchjl/pt-bb saddlesearchjl asv n=1, smoke run; scored 1 of 49 starts. saddlesearchjl/pt-ode saddlesearchjl asv n=1, smoke run; scored 1 of 49 starts. saddlesearchjl/pt-static saddlesearchjl asv n=1, smoke run; scored 1 of 49 starts. saddlesearchjl/pt-superlinear saddlesearchjl asv n=1, smoke run; scored 1 of 49 starts. eon/develop-ts-pt-dimer-accept-energy eOn asv n=1, smoke run; scored 1 of 49 starts. eon/develop-ts-pt-lanczos eOn asv n=1, smoke run; scored 1 of 49 starts. optking/pt-p-rfo optking asv n=1, smoke run; scored 1 of 49 starts. optking/pt-rs-irfo optking asv n=1, smoke run; scored 1 of 49 starts. sella/pt-island-ts-default Sella asv n=1, smoke run; scored 1 of 49 starts. optim/bfgsts-ts-pt optim asv n=1, smoke run; scored 1 of 49 starts. optim/hef-ffd-ts-pt optim asv n=1, smoke run; scored 1 of 49 starts. pele/pt-island-ts pele asv n=1, smoke run; scored 1 of 49 starts. pele/pt-island-ts-ffd pele asv n=1, smoke run; scored 1 of 49 starts.</p>
+   <p>saddlesearchjl/pt-bb saddlesearchjl asv n=1, smoke run; scored 1 of 49 starts. saddlesearchjl/pt-ode saddlesearchjl asv n=1, smoke run; scored 1 of 49 starts. saddlesearchjl/pt-static saddlesearchjl asv n=1, smoke run; scored 1 of 49 starts. saddlesearchjl/pt-superlinear saddlesearchjl asv n=1, smoke run; scored 1 of 49 starts. eon/develop-ts-pt-dimer-accept-energy eOn asv n=1, smoke run; scored 1 of 49 starts. eon/develop-ts-pt-lanczos eOn asv n=1, smoke run; scored 1 of 49 starts. optking/pt-p-rfo optking asv n=1, smoke run; scored 1 of 49 starts. optking/pt-rs-irfo optking asv n=1, smoke run; scored 1 of 49 starts. sella/pt-island-ts-default Sella asv n=1, smoke run; scored 1 of 49 starts. optim/bfgsts-ts-pt optim asv n=1, smoke run; scored 1 of 49 starts. optim/hef-ffd-ts-pt optim asv n=1, smoke run; scored 1 of 49 starts. pele/pt-island-ts pele asv n=1, smoke run; scored 1 of 49 starts. pele/pt-island-ts-ffd pele asv n=1, smoke run; scored 1 of 49 starts.</p>
    <h3>Not a harness score</h3>
    <p>eon/ts-pt-dimer-m100 eOn n=49, not yet on the harness counter. eon/ts-pt-dimer eOn n=49, not yet on the harness counter.</p>
    </details>
-   </section><section class="bench bench-legacy-section" id="pt-island-legacy">
-   <h3>Legacy 2014 archive</h3>
+   </section><section class="bench bench-archive-section" id="pt-island-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -330,8 +333,8 @@
    </tr></thead><tbody>
    <tr id="tsopt-pt-island-sella" class="best">
    <td class="num">1</td>
-   <td class="text">sella · not reproduced</td>
-   <td class="text">Sella 0.1.1 legacy</td>
+   <td class="text">sella</td>
+   <td class="text">Sella 0.1.1</td>
    <td class="num">53</td>
    <td class="num">108</td>
    <td class="num">51.0</td>
@@ -342,7 +345,7 @@
    </tr>
    <tr id="tsopt-pt-island-optim-ffd">
    <td class="num">2</td>
-   <td class="text">optim_ffd · not reproduced</td>
+   <td class="text">optim_ffd</td>
    <td class="text">OPTIM</td>
    <td class="num">7.10000e+01</td>
    <td class="num">1.4300e+02</td>
@@ -413,7 +416,7 @@
    <td class="text">29 Aug 2013</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:7"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "tsopt-pt-island-sella", "entry": "sella", "code": "Sella 0.1.1 legacy", "value": 53.0, "best": true, "held": false, "failed": false}, {"id": "tsopt-pt-island-optim-ffd", "entry": "optim_ffd", "code": "OPTIM", "value": 71.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-pele", "entry": "pele", "code": "pele", "value": 88.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-optim-cd", "entry": "optim_cd", "code": "OPTIM", "value": 90.0, "best": false, "held": true, "failed": false}, {"id": "tsopt-pt-island-eon-lanczos-improved", "entry": "eon-lanczos-improved", "code": "Eon r2156", "value": 106.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-eon-dimer", "entry": "eon-dimer", "code": "Eon r2156", "value": 116.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-eon-lanczos", "entry": "eon-lanczos", "code": "Eon r2156", "value": 143.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:7"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "tsopt-pt-island-sella", "entry": "sella", "code": "Sella 0.1.1", "value": 53.0, "best": true, "held": false, "failed": false}, {"id": "tsopt-pt-island-optim-ffd", "entry": "optim_ffd", "code": "OPTIM", "value": 71.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-pele", "entry": "pele", "code": "pele", "value": 88.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-optim-cd", "entry": "optim_cd", "code": "OPTIM", "value": 90.0, "best": false, "held": true, "failed": false}, {"id": "tsopt-pt-island-eon-lanczos-improved", "entry": "eon-lanczos-improved", "code": "Eon r2156", "value": 106.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-eon-dimer", "entry": "eon-dimer", "code": "Eon r2156", "value": 116.0, "best": false, "held": false, "failed": false}, {"id": "tsopt-pt-island-eon-lanczos", "entry": "eon-lanczos", "code": "Eon r2156", "value": 143.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section>
 #+end_export

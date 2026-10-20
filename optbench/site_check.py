@@ -9,6 +9,7 @@ from .board import (
     SWEEP_PAGES,
     MissingAsvCommit,
     _registry,
+    _show_fd,
     _show_per_image,
     best_ranked_by_code,
     build_board,
@@ -96,10 +97,11 @@ def _check_ranked(label: str, table: dict, document: dict) -> list[str]:
     if len(body) != len(ranked):
         return [f"{label} {problem_id} ranked rows {len(body)} != board {len(ranked)}"]
     per_image = _show_per_image(problem) if problem else False
+    fd = _show_fd(problem)
     errors: list[str] = []
     for index, (got_row, board_row) in enumerate(zip(body, ranked), start=1):
         got = _cell_map(got_row)
-        expected = dict(ranked_cells(board_row, per_image))
+        expected = dict(ranked_cells(board_row, per_image, fd))
         for field, value in expected.items():
             if got.get(field) != value:
                 errors.append(
@@ -118,10 +120,11 @@ def _check_sweep(label: str, table: dict, document: dict) -> list[str]:
     if len(body) != len(chosen):
         return [f"{label} {problem_id} sweep rows {len(body)} != board {len(chosen)}"]
     per_image = _show_per_image(problem) if problem else False
+    fd = _show_fd(problem)
     errors: list[str] = []
     for index, (got_row, board_row) in enumerate(zip(body, chosen), start=1):
         got = _cell_map(got_row)
-        expected = dict(ranked_cells(board_row, per_image))
+        expected = dict(ranked_cells(board_row, per_image, fd))
         for field, value in expected.items():
             if got.get(field) != value:
                 errors.append(
@@ -143,7 +146,7 @@ def _check_headline(label: str, table: dict, document: dict) -> list[str]:
         return [f"{label} {problem_id} headline rows {len(body)} != 1"]
     per_image = _show_per_image(problem) if problem else False
     got = _cell_map(body[0])
-    expected = dict(ranked_cells(ranked[0], per_image))
+    expected = dict(ranked_cells(ranked[0], per_image, _show_fd(problem)))
     errors = []
     for field, value in expected.items():
         if got.get(field) != value:

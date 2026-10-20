@@ -494,7 +494,7 @@ at `02405b0d` return the same coordinates for `search_seed(1, 1)`,
 `(1, 2)`, `(1, 50)`, `(2, 1)`, and `(3, 17)`. The maximum absolute
 difference is 0. Each draw moves 7 atoms, from epicentres 5, 2, 2,
 1, and 0. A generator that continues after
-`search_seed(1, 1)` does not reproduce `search_seed(1, 2)`.
+`search_seed(1, 1)` does not match `search_seed(1, 2)`.
 `partn/saddle-pt` itself still pushes 1 to 7 island atoms in plane,
 which is the authors' script. Sella's pt-island searches displace every
 free atom from seeds 0 through 15. ASE dimer leaves the reactant and

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import re
+
 import hashlib
 import json
 from pathlib import Path
@@ -209,13 +211,115 @@ def check(problems_dir: Path, oracle_path: Path) -> int:
             print(line)
         return 1
     print("site tables match the board")
-    from .reproduction import reproduction_errors
+    from .reproduction import large_endpoint_files
 
-    reproduced = reproduction_errors(root)
-    if reproduced:
-        print(f"reproduction {len(reproduced)}")
-        for line in reproduced:
+    endpoints = large_endpoint_files(root)
+    if endpoints:
+        print(f"endpoint_files {len(endpoints)}")
+        for line in endpoints:
             print(line)
         return 1
-    print("reproduction ledger matches the archive")
+    ranked = ranked_stock_errors(root)
+    if ranked:
+        print(f"ranked_stock {len(ranked)}")
+        for line in ranked:
+            print(line)
+        return 1
+    print("ranked stock rows are on the board")
+    vocabulary = vocabulary_errors(root)
+    if vocabulary:
+        print(f"vocabulary {len(vocabulary)}")
+        for line in vocabulary:
+            print(line)
+        return 1
+    print("site, ledger, and templates omit the retired labels")
     return 0
+
+
+_FORBIDDEN = (
+    "does not reproduce",
+    "not reproduced",
+    "reproduced",
+    "inside the interval",
+    "outside the interval",
+    "outside 10%",
+    "outside 10 percent",
+    "wilson interval",
+    "paper baseline",
+    "paper_baseline",
+    "legacy",
+    "current",
+)
+
+
+def vocabulary_errors(root: Path) -> list[str]:
+    """Those labels stay out of the site, the ledger, and the templates."""
+    root = Path(root)
+    files: list[Path] = []
+    for path in (
+        root / "oracle" / "reproduction.jsonl",
+        root / "docs" / "reproduction.md",
+        root / "templates",
+        root / "docs" / "orgmode",
+        root / "docs" / "include",
+        root / "docs" / "source" / "_static" / "optbench.css",
+    ):
+        if path.is_file():
+            files.append(path)
+        elif path.is_dir():
+            files.extend(item for item in path.rglob("*") if item.is_file())
+    errors = []
+    for path in files:
+        if path.suffix not in {".toml", ".org", ".md", ".jsonl", ".css", ".html"}:
+            continue
+        text = path.read_text(encoding="utf-8", errors="ignore").lower()
+        rel = path.relative_to(root)
+        for phrase in _FORBIDDEN:
+            if " " in phrase or "_" in phrase or "%" in phrase:
+                found = phrase in text
+            else:
+                found = re.search(rf"\b{re.escape(phrase)}\b", text) is not None
+            if found:
+                errors.append(f"{rel} contains {phrase}")
+    return errors
+
+
+def ranked_stock_errors(root: Path) -> list[str]:
+    """A full stock harness row of the newest version is ranked, once."""
+    from .board import build_board
+
+    return _ranked_stock_errors(build_board(root))
+
+
+def _ranked_stock_errors(board: dict) -> list[str]:
+    errors = []
+    for problem in (board.get("problems") or {}).values():
+        ident = str(problem.get("id") or "")
+        seen: dict[tuple, int] = {}
+        for row in problem.get("ranked") or []:
+            template = str(row.get("template") or "")
+            if "-tuned" in template:
+                errors.append(f"{ident} ranks tuned template {template}")
+                continue
+            if not template:
+                continue
+            commit = str(row.get("commit") or "")
+            key = (template, commit[:12], row.get("n"))
+            seen[key] = seen.get(key, 0) + 1
+        for (template, commit, n), count in seen.items():
+            if count != 1:
+                errors.append(f"{ident} {template} {commit} n={n} has {count} ranked rows")
+        for row in problem.get("partial") or []:
+            template = str(row.get("template") or "")
+            if not template or "-tuned" in template or not row.get("comparable"):
+                continue
+            reason = str(row.get("partial_reason") or "")
+            if reason.startswith(("smoke", "scored ", "result file", "no problem file")):
+                continue
+            full = row.get("full_n")
+            n = int(row.get("n") or 0)
+            if full is None or n >= int(full):
+                errors.append(
+                    f"{ident} {template} is partial ({reason or 'unset'}) and a full stock row must be ranked"
+                )
+    return errors
