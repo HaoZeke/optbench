@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-47 reproduced, 29 not reproduced, 75 not rerun. 151 archive rows.
+46 reproduced, 30 not reproduced, 75 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -81,7 +81,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | Pt/eon-dimer-cg2 | — | — | not rerun |
 | Pt/eon-dimer-lbfgs | — | — | not rerun |
 | Pt/eon-dimer-lbfgs2 | — | — | not rerun |
-| Pt/eon-lanczos-cg | barrier_force_calls 673700, barrier_jobs 1419, rate_force_calls 25860, rate_jobs 54 | 639600, 1348, 27100, 57 | reproduced |
+| Pt/eon-lanczos-cg | barrier_force_calls 673700, barrier_jobs 1419, rate_force_calls 25860, rate_jobs 54 | 1.695e+06, 1916, 50440, 57 | not reproduced; htst_pt_lanczos_stock |
 | Pt/eon-lanczos-cg2 | — | — | not rerun |
 | Pt/eon-lanczos-lbfgs | — | — | not rerun |
 | Pt/eon-lanczos-lbfgs2 | — | — | not rerun |
@@ -274,6 +274,12 @@ The archived driver is the dangling path bin/js850/globalopt.py. The harness use
 The r2549 Al dimer with the archived rotation string (CG, max 50, tol 1) misses barrier_force_calls and rate_force_calls by about 30 percent. Pt dimer CG with max 10 reproduces all four hTST counts.
 
 - hTST/Al/eon-dimer-cg
+
+### htst_pt_lanczos_stock
+
+Stock EON SVN r2549, Fortran client, no physics patches. The ini is the archived AKMC setup and the stop is max_atom at 0.001. finite_difference, quit_early, and thermally_accessible_window stay at the r2549 defaults. barrier_jobs 1916 vs 1419, barrier_force_calls 1695000 vs 673700, and rate_force_calls 50440 vs 25860 are outside 10 percent. rate_jobs 57 vs 54 is inside. eOn develop a7aa574 is a different code and is ranked on the same problem: barrier_jobs 1720, barrier_force_calls 1468000, rate_jobs 54, rate_force_calls 46850.
+
+- hTST/Pt/eon-lanczos-cg
 
 ### optim_rr_defaults
 
