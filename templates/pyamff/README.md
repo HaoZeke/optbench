@@ -26,7 +26,7 @@ A central difference with step `1e-5` checks the 240f51d Fortran derivative on t
 
 ## Why the epochs differ
 
-EMT Pt38 Rprop with force coefficient 0.1 is the clearest gap: the harness success mean is 3464.5625 epochs and the archive mean is 1022.86. The fingerprints are not the cause of that gap. The harness rows already use Fortran fingerprints, and their energy RMSE is in the same range as the archive (often lower). The training loop is different in the five places below.
+EMT Pt38 Rprop with force coefficient 0.1 is the clearest gap: the extra torch.optim harness success mean is 3464.5625 epochs and the archive mean is 1022.86. The same problem on the 8037eb98 trainer, with that commit's Fortran fingerprints and the archived ini, has an all-parsed mean of 1022.92 epochs, energy RMSE 0.0008367074, and force RMSE 0.10000784, with no failed start. The archive row is 1022.86 epochs, energy RMSE 0.0008239920000000001, and force RMSE 0.09958615799999998. The fingerprints are not the cause of the torch gap. The harness rows already use Fortran fingerprints, and their energy RMSE is in the same range as the archive (often lower). The training loop is different in the five places below.
 
 Epochs. For Rprop and ADAM, 8037eb98 increments `nIter` once per loop. The loop body is one `optimizer.step()` and then one `getLoss`, and `getLoss` is one full-batch SE loss plus the parameter gradient. The log line is written after the increment, so the integer in the line equals the number of loss-gradient evaluations. The first `step` happens before any gradient exists. `mlrf0_optb.py` reads that integer from `tail -2 pyamff.log` and averages every parsed run, including a run whose next line is `Max Epoch Reached`. The harness counts the same kind of evaluation, including that first empty step, but `mean_epoch` leaves failures out. LBFGS in 8037eb98 logs `nIter` inside the closure before the increment, so the logged epoch is one behind the closure count. `torch.optim.LBFGS` is built with `max_iter=1`, so a step is a short closure sequence rather than a 20-iteration solve. A harness call is every closure evaluation.
 
@@ -56,3 +56,26 @@ The remaining sample difference is the initial weights. Both draw uniform `[-1, 
 | mlopt/C2H4 | LBFGS | 0 | 2157.14 | 0.008125548399999998 | 3193.4082 | 0.0061878103 |
 
 The archive force RMSE on EMT Pt38 is 0.09958615799999998 for Rprop and 0.1053114 for Adam. The harness force RMSE is 0.086180573 for Rprop and 0.094044504 for Adam. The archive LBFGS energy row has `nfailed 1`. The harness LBFGS energy row has `nfailed 4`, and the harness Rprop force row has `nfailed 2`. The archive energy files store force RMSE as `-1`, including when the trainer still evaluated forces, because `mlrf0_optb.py` writes that sentinel. The harness energy rows do the same.
+
+The extra EMT Pt38 force rows that are not in that table are LBFGS, success mean 4522.06 epochs, energy RMSE 0.00076352096, force RMSE 0.092042391, and `nfailed 0`. SGD is 50 divergences, PAR-2 60000. NAdam has one success at 27771 epochs and 49 caps, PAR-2 59355.42. RAdam is 50 caps, PAR-2 60000. AdamW with weight decay 0 matches Adam. On C2H4 forces the extra rows are cap-heavy: Rprop success mean 6566 with `nfailed 46`, Adam and AdamW success mean 9281.6429 with `nfailed 36`, LBFGS success mean 24598.667 with `nfailed 47`, NAdam and RAdam 50 caps, and SGD 50 divergences. Those success means leave the caps out. The archive C2H4 force means keep the capped epochs.
+
+## Archive against the paper baseline
+
+Paper epochs and RMSE below are the all-parsed means, the same average `mlrf0_optb.py` wrote into `benchmark.dat`. When `nfailed` is 0 that mean equals the harness success mean. Energy rows keep the archive sentinel `-1` for force RMSE. A capped LBFGS start can make the all-parsed energy RMSE much larger than the success-only energy RMSE.
+
+| Problem | Optimizer | Force coefficient | Archive epoch | Archive energy RMSE | Archive force RMSE | Archive nfailed | Paper epoch | Paper energy RMSE | Paper force RMSE | Paper nfailed |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| mlopt/emt-pt38 | Rprop | 0 | 97.58 | 0.0039067848 | -1 | 0 | 101.82 | 0.003879705 | -1 | 0 |
+| mlopt/emt-pt38 | Adam | 0 | 1103.24 | 0.004438631199999999 | -1 | 0 | 1119.24 | 0.004420459 | -1 | 0 |
+| mlopt/emt-pt38 | LBFGS | 0 | 1791.8 | 0.0038950800000000004 | -1 | 1 | 1929.58 | 0.14879437 | -1 | 2 |
+| mlopt/emt-pt38 | Rprop | 0.1 | 1022.86 | 0.0008239920000000001 | 0.09958615799999998 | 0 | 1022.92 | 0.0008367074 | 0.10000784 | 0 |
+| mlopt/emt-pt38 | Adam | 0.1 | 1708.8 | 0.0008996777999999999 | 0.1053114 | 0 | 1876.82 | 0.0008860064 | 0.10441512 | 0 |
+| mlopt/emt-pt38 | LBFGS | 0.1 | 1943.34 | 0.0008561802000000001 | 0.1003695 | 0 | 2027.32 | 0.0008492646 | 0.10150263 | 0 |
+| mlopt/C2H4 | Rprop | 0 | 184.56 | 0.008634755400000001 | -1 | 0 | 202.12 | 0.0080378594 | -1 | 0 |
+| mlopt/C2H4 | Adam | 0 | 4395.3 | 0.011765715000000001 | -1 | 0 | 4547.52 | 0.011330292 | -1 | 0 |
+| mlopt/C2H4 | LBFGS | 0 | 2157.14 | 0.008125548399999998 | -1 | 0 | 2994.12 | 0.0080290046 | -1 | 2 |
+| mlopt/C2H4 | Rprop | 0.1 | 12926.88 | 0.018268401 | 0.16424474439999998 | 18 | 11892.38 | 0.01910448 | 0.16751768 | 15 |
+| mlopt/C2H4 | Adam | 0.1 | 13876.7 | 0.021102213999999998 | 0.15999126959999999 | 10 | 14637.68 | 0.021640955 | 0.16185791 | 15 |
+| mlopt/C2H4 | LBFGS | 0.1 | 23314.46 | 0.011536104600000001 | 0.11970228499999998 | 19 | 25634.96 | 0.011180646 | 0.095277654 | 26 |
+
+Where the paper row has failures, the success-only epoch and RMSE are separate from the table. EMT Pt38 LBFGS energy: success mean 1593.3542 epochs and energy RMSE 0.0035440294. C2H4 LBFGS energy: success mean 2702.25 epochs and energy RMSE 0.008107385. C2H4 Rprop force: success mean 4131.9714 epochs, energy RMSE 0.021225425, force RMSE 0.17982375. C2H4 Adam force: success mean 8053.8286, energy RMSE 0.02542363, force RMSE 0.18019143. C2H4 LBFGS force: success mean 20907.25, energy RMSE 0.010606372, force RMSE 0.091643817. The EMT LBFGS energy all-parsed energy RMSE is large because a capped start finished with a large energy RMSE. The C2H4 LBFGS force all-parsed force RMSE is lower than the archive while the epoch is higher, and this row has 26 caps against the archive's 19.
