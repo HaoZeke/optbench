@@ -4,7 +4,7 @@
   "commit": "r2549",
   "template": "eon-svn/htst-al-dimer-cg2-r2549",
   "seed": 42,
-  "searches": 3428,
+  "searches": 4460,
   "reference_ids": [
     0,
     1,
@@ -16,35 +16,35 @@
     7
   ],
   "reference_complete": true,
-  "barrier_windows": 73,
+  "barrier_windows": 98,
   "barrier_target": 432,
   "rate_windows": 1,
   "rate_target": 11,
   "barrier_jobs": {
-    "n": 73,
-    "mean": 46.89041095890411,
-    "median": 40.0,
+    "n": 98,
+    "mean": 44.93877551020408,
+    "median": 38.5,
     "min": 13.0,
     "max": 106.0
   },
   "barrier_force_calls": {
-    "n": 73,
-    "mean": 38031.17808219178,
-    "median": 26348.0,
+    "n": 98,
+    "mean": 36354.26530612245,
+    "median": 26294.5,
     "min": 6413.0,
     "max": 135807.0
   },
   "barrier_sad_fcs": {
-    "n": 73,
-    "mean": 30815.794520547945,
-    "median": 19887.0,
+    "n": 98,
+    "mean": 29437.775510204083,
+    "median": 19575.0,
     "min": 4194.0,
     "max": 126395.0
   },
   "barrier_mins_fcs": {
-    "n": 73,
-    "mean": 7215.3835616438355,
-    "median": 6234.0,
+    "n": 98,
+    "mean": 6916.489795918367,
+    "median": 6041.5,
     "min": 2091.0,
     "max": 15988.0
   },
@@ -76,11 +76,11 @@
     "min": 505404.0,
     "max": 505404.0
   },
-  "open_barrier_jobs": 5,
-  "open_rate_jobs": 146,
-  "open_rate_sum": 591085800.8340697,
+  "open_barrier_jobs": 56,
+  "open_rate_jobs": 1178,
+  "open_rate_sum": 591435315.7680922,
   "client_matches_harness": true,
   "client_mismatch": 0,
   "done": false,
-  "running_s": 12072.562603654333
+  "running_s": 15660.862158610536
 }
