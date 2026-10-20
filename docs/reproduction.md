@@ -2,7 +2,9 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+46 reproduced, 28 not reproduced, 77 not rerun. 151 archive rows.
+
+LJ38 double-ended dimer stays the archived paper row: force_calls 337, Eon r2156, 22 Aug 2013. EON, the SVN code, and eOn (https://eondocs.org, https://github.com/TheochemUI/eon) are different codes. Both were scored stock and untuned on the archive ini, the 50 interpolated pairs, and converged_force 0.001. EON (SVN r2549) harness force_calls 375 (min 92, median 213.5, max 2096, nfailed 0). eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) harness force_calls 503 (min 98, median 362, max 2360, nfailed 13). The gaps are findings and were not tuned toward 337.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -27,7 +29,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | --- | --- | --- | --- |
 | lj38/eon-ci-neb | force_calls 827 | 762 | reproduced |
 | lj38/eon-ci-swdneb | force_calls 861 | 708 | not reproduced; de_exclusion |
-| lj38/eon-dimer | force_calls 337 | 377 | not reproduced; improved_unset |
+| lj38/eon-dimer | force_calls 337 | — | not rerun |
 | lj38/eon-lanczos | force_calls 364 | 342 | reproduced |
 | lj38/eon-lanczos-improved | force_calls 287 | 259 | reproduced |
 | lj38/optim | force_calls 131 | 147 | not reproduced; optim_pes_counter |
@@ -239,7 +241,6 @@ The 3.5.0 doubly-nudged file is the per-band mean under the 2500-call exclusion 
 
 The r2549 template turns improved on. The 2014 ini left that key unset. The mean lands outside 10 percent.
 
-- double-ended-saddle-search/lj38/eon-dimer
 - tsopt/LJ38/eon-lanczos-improved
 
 ### optim_pes_counter

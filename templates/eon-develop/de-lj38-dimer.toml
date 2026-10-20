@@ -1,0 +1,36 @@
+id = "eon-develop/de-lj38-dimer"
+engine = "eon"
+problem = "double-ended-saddle-search/lj38"
+code = "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)"
+code_version = "3.6.0"
+commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+algorithm = "Dimer L-BFGS"
+reducer = "harness"
+failure_cap = 2500
+kind = "de-lj38-mode"
+kernel = "lj40"
+note = '''
+eOn at develop a7aa57472fb7d823953fd36b78cd755fa4842d30. Fortran linked and untuned. This is not EON, the SVN code. Min-mode dimer from the interpolated end points of the 50 LJ38 pairs. The ini is the archive config and nothing else: L-BFGS, converged_force 0.001, max_iterations 1000, dimer converged_angle 5, rotations_max 10, max_energy 1e9. Unset keys stay at the develop defaults. The archived force_calls 337 is the paper row. This stock run scores force_calls 503 (min 98, median 362, max 2360, nfailed 13). The gap is a finding and was not tuned closed.
+'''
+seeds = [1]
+budget_seconds = 600
+
+[ini.Main]
+job = "saddle_search"
+
+[ini.Potential]
+potential = "lammps"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+converged_force = 0.001
+max_iterations = 1000
+
+[ini."Saddle Search"]
+max_iterations = 1000
+min_mode_method = "dimer"
+max_energy = 1000000000
+
+[ini.Dimer]
+converged_angle = 5.0
+rotations_max = 10

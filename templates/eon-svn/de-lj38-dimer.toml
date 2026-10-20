@@ -1,7 +1,7 @@
 id = "eon-svn/de-lj38-dimer"
 engine = "eon"
 problem = "double-ended-saddle-search/lj38"
-code = "Eon svn"
+code = "EON (SVN r2549)"
 code_version = "r2549"
 commit = "r2549"
 algorithm = "Dimer L-BFGS"
@@ -11,7 +11,7 @@ kind = "de-lj38-mode"
 kernel = "lj40"
 asv_class = "EonSvnDeLj38Dimer"
 note = '''
-Min-mode dimer from the interpolated end points of the 50 LJ38 pairs. pos.con is the reactant. displacement.con is the reactant plus half the minimum-image product difference. direction.dat is that difference, normalized. max_energy 1e9. Dimer converged_angle 5, rotations_max 10, improved true. LBFGS max_iterations 1000, converged_force 0.001. The harness kernel is unshifted lj/cut with epsilon 1, sigma 1, and cutoff 40.
+EON, the SVN code, at r2549. Fortran linked and unpatched. This is not eOn. Min-mode dimer from the interpolated end points of the 50 LJ38 pairs. The ini is the archive config and nothing else: L-BFGS, converged_force 0.001, max_iterations 1000, dimer converged_angle 5, rotations_max 10, max_energy 1e9. Unset keys stay at the r2549 defaults. The archived force_calls 337 is the paper row. This stock run scores force_calls 375 (min 92, median 213.5, max 2096, nfailed 0). The gap is a finding and was not tuned closed.
 '''
 seeds = [1]
 asv_timeout = 900
@@ -19,34 +19,20 @@ budget_seconds = 600
 
 [ini.Main]
 job = "saddle_search"
-finite_difference = 0.001
-random_seed = 1
 
 [ini.Potential]
 potential = "lammps"
 
 [ini.Optimizer]
 opt_method = "lbfgs"
-convergence_metric = "norm"
 converged_force = 0.001
-max_move = 0.2
 max_iterations = 1000
-lbfgs_memory = 20
-
-[ini.LBFGS]
-lbfgs_memory = 20
 
 [ini."Saddle Search"]
-min_mode_method = "dimer"
-client_displace_type = "load"
-converged_force = 0.001
 max_iterations = 1000
-displace_magnitude = 0.1
+min_mode_method = "dimer"
 max_energy = 1000000000
 
 [ini.Dimer]
-opt_method = "cg"
-improved = true
-converged_angle = 5
+converged_angle = 5.0
 rotations_max = 10
-rotations_min = 1
