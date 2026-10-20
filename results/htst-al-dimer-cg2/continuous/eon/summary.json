@@ -4,7 +4,7 @@
   "commit": "500350d9fae881f06c7ef194e5868da079c4be5a",
   "template": "eon/develop-htst-al-dimer-cg2",
   "seed": 42,
-  "searches": 326,
+  "searches": 1603,
   "reference_ids": [
     3205649230725008167,
     5766593102652856590,
@@ -16,47 +16,47 @@
     221911627621273699
   ],
   "reference_complete": true,
-  "barrier_windows": 11,
+  "barrier_windows": 40,
   "barrier_target": 432,
   "rate_windows": 0,
   "rate_target": 11,
   "barrier_jobs": {
-    "n": 11,
-    "mean": 28.818181818181817,
-    "median": 28.0,
+    "n": 40,
+    "mean": 36.975,
+    "median": 33.0,
     "min": 14.0,
-    "max": 55.0
+    "max": 94.0
   },
   "barrier_force_calls": {
-    "n": 11,
-    "mean": 27075.090909090908,
-    "median": 17072.0,
+    "n": 40,
+    "mean": 39943.125,
+    "median": 23798.5,
     "min": 7567.0,
-    "max": 80742.0
+    "max": 152624.0
   },
   "barrier_sad_fcs": {
-    "n": 11,
-    "mean": 22655.363636363636,
-    "median": 12803.0,
+    "n": 40,
+    "mean": 34254.15,
+    "median": 17617.5,
     "min": 5399.0,
-    "max": 74849.0
+    "max": 142907.0
   },
   "barrier_mins_fcs": {
-    "n": 11,
-    "mean": 4419.545454545455,
-    "median": 4377.0,
+    "n": 40,
+    "mean": 5688.675,
+    "median": 4936.0,
     "min": 2168.0,
-    "max": 8583.0
+    "max": 14232.0
   },
   "rate_jobs": null,
   "rate_force_calls": null,
   "rate_sad_fcs": null,
   "rate_mins_fcs": null,
-  "open_barrier_jobs": 9,
-  "open_rate_jobs": 326,
-  "open_rate_sum": 591048397.162521,
+  "open_barrier_jobs": 124,
+  "open_rate_jobs": 1603,
+  "open_rate_sum": 591412373.2899764,
   "client_matches_harness": false,
-  "client_mismatch": 2,
+  "client_mismatch": 12,
   "done": false,
-  "running_s": 1234.5692004770244
+  "running_s": 6721.835765582015
 }

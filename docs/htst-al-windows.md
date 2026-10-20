@@ -70,19 +70,19 @@ Mean, median, min, and max are over the closed windows.
 
 | | archive | EON (SVN r2549) | eOn (develop 500350d9) |
 | --- | ---: | ---: | ---: |
-| barrier windows | 432 | 4 / 432 | 11 / 432 |
+| barrier windows | 432 | 40 / 432 | 40 / 432 |
 | rate windows | 11 | 0 / 11 | 0 / 11 |
-| barrier jobs | 46 | 63 / 72 / 17 / 91 | 28.8182 / 28 / 14 / 55 |
-| barrier harness calls |  | 65092 / 76462 / 11146 / 96298 | 27075.1 / 17072 / 7567 / 80742 |
-| barrier sad-fcs | 21070 | 55441.5 / 64104.5 / 8363 / 85194 | 22655.4 / 12803 / 5399 / 74849 |
-| barrier mins-fcs |  | 9650.5 / 11034 / 2783 / 13751 | 4419.55 / 4377 / 2168 / 8583 |
+| barrier jobs | 46 | 45.9 / 38.5 / 17 / 96 | 36.975 / 33 / 14 / 94 |
+| barrier harness calls |  | 38258.3 / 24698.5 / 11146 / 135807 | 39943.1 / 23798.5 / 7567 / 152624 |
+| barrier sad-fcs | 21070 | 31205.2 / 18497.5 / 8363 / 126395 | 34254.2 / 17617.5 / 5399 / 142907 |
+| barrier mins-fcs |  | 7053.15 / 6109 / 2783 / 14978 | 5688.68 / 4936 / 2168 / 14232 |
 | rate jobs | 1671 |  |  |
 | rate harness calls |  |  |  |
 | rate sad-fcs | 766300 |  |  |
 | rate mins-fcs |  |  |  |
 
-EON (SVN r2549): 318 searches, reference ids 8/8, open barrier jobs 66, open rate jobs 318, client_matches_harness True.
-eOn (develop 500350d9): 326 searches, reference ids 8/8, open barrier jobs 9, open rate jobs 326, client_matches_harness False.
+EON (SVN r2549): 1862 searches, reference ids 8/8, open barrier jobs 26, open rate jobs 1862, client_matches_harness True.
+eOn (develop 500350d9): 1603 searches, reference ids 8/8, open barrier jobs 124, open rate jobs 1603, client_matches_harness False.
 <!-- counts:end -->
 
 ## Clients
