@@ -6,9 +6,9 @@ code_version = "(SVN r2549)"
 commit = "r2549"
 algorithm = "Dimer L-BFGS"
 reducer = "harness"
-failure_cap = 5064
+failure_cap = 100000000
 tuning = "default"
-note = """EON, the SVN code, at r2549. This is not a version of eOn. Stock and untuned: the ini carries the archive keys the r2549 schema accepts, and dimer improved and dimer opt_method are unset so the r2549 client default remains. Optimizer L-BFGS, converged_force 0.001, max_iterations 1000, max_move 0.2. Dimer rotations_max 20, converged_angle 5. Displacement atoms 0-6, radius 3.3, magnitude 0.1, listed weight 1. Temperature 700 K, confidence 1.1, thermally_accessible_window 99999, minimize_first, prefactor default_value 5e12, max_energy 5, num_jobs 10. The potential the client evaluates is ext_pot. The harness kernel is morse/smooth/linear. The run stops at 27 client-good saddles below 1.5 eV, the 2014 done.py line. The ranked score is the harness per-search record, not a retune toward the archived mean."""
+note = """EON, the SVN code, at r2549. This is not a version of eOn. The method the row names is the setup: Optimizer opt_method lbfgs and Dimer rotations_max 20, written with the r2549 keys. Dimer improved and dimer opt_method stay unset, so the r2549 defaults remain. The other ini keys are the archive AKMC problem: converged_force 0.001, temperature 700, confidence 1.1, thermally_accessible_window 99999, minimize_first, displacement atoms 0-6 with radius 3.3 and magnitude 0.1, max_energy 5, prefactor default_value 5e12. The potential the client evaluates is ext_pot. The harness kernel is morse/smooth/linear. One campaign stops at 27 connected saddles below 1.5 eV. A connected saddle is a minimized endpoint pair in which exactly one endpoint lies within the archive distance_difference of 0.1 Å (minimum image on the stored cell, with a bijection for identical atoms). The ranked cost is sad-fcs plus mins-fcs through that saddle. r2549 has one potential and one force counter, so that sum and the PotServer total differ by the calls still in the uncollected batch. The campaign cap is 100000000 force calls. Prefactor calls stay at 0 because default_value skips the Hessian, which is the archive sum."""
 
 [ini.Main]
 job = "akmc"

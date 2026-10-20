@@ -59,14 +59,14 @@
    </tr>
    <tr data-problem="saddle-search/pt-island">
    <th scope="row"><a href="generated/suites/saddle-search.html#pt-island">Pt heptamer island</a></th>
-   <td data-code="eOn" data-template="eon/develop-saddle-pt-lbfgs-20" data-par2="10128"><span class="bench-score">10128</span><a href="generated/suites/saddle-search.html#pt-island-templates">eon/develop-saddle-pt-lbfgs-20</a></td>
+   <td data-code="eOn" data-template="eon/develop-saddle-pt-lbfgs-20" data-par2="4.43784e+06"><span class="bench-score">4.43784e+06</span><a href="generated/suites/saddle-search.html#pt-island-templates">eon/develop-saddle-pt-lbfgs-20</a></td>
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/saddle-dimer-rotskip-tuned" data-par2="10127.1"><span class="bench-score">10127.1</span><a href="generated/suites/saddle-search.html#pt-island-templates">rgsaddle/saddle-dimer-rotskip-tuned</a></td>
    <td data-code="ASE">—</td>
    <td data-code="Sella" data-template="sella/pt-island-search-default" data-par2="5201.62"><span class="bench-score">5201.62</span><a href="generated/suites/saddle-search.html#pt-island-templates">sella/pt-island-search-default</a></td>
    <td data-code="pysisyphus">—</td>
-   <td data-code="EON" data-template="eon-svn/saddle-pt-lbfgs-20" data-par2="10128"><span class="bench-score">10128</span><a href="generated/suites/saddle-search.html#pt-island-templates">eon-svn/saddle-pt-lbfgs-20</a></td>
+   <td data-code="EON" data-template="eon-svn/saddle-pt-lbfgs-20" data-par2="7.31375e+06"><span class="bench-score">7.31375e+06</span><a href="generated/suites/saddle-search.html#pt-island-templates">eon-svn/saddle-pt-lbfgs-20</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>

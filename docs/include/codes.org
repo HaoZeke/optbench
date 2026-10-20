@@ -85,16 +85,16 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
-   <tr data-problem="saddle-search/pt-island" data-template="eon-svn/saddle-pt-lbfgs-20">
+   <tr data-problem="saddle-search/pt-island" data-template="eon/develop-saddle-pt-lbfgs-20">
    <td>Pt heptamer island</td>
-   <td data-field="template">eon-svn/saddle-pt-lbfgs-20</td>
-   <td data-field="version">EON (SVN r2549)</td>
-   <td data-field="commit">r2549</td>
-   <td data-field="par2_mean">10128</td>
-   <td data-field="mean_calls">370.504</td>
-   <td data-field="median_calls">366</td>
-   <td data-field="failures">crash 0, divergence 19739, cap 0, wrong_stationary 1</td>
-   <td data-field="n">19740</td>
+   <td data-field="template">eon/develop-saddle-pt-lbfgs-20</td>
+   <td data-field="version">eOn (develop 500350d9)</td>
+   <td data-field="commit">500350d9fae8</td>
+   <td data-field="par2_mean">4.43784e+06</td>
+   <td data-field="mean_calls">4.43784e+06</td>
+   <td data-field="median_calls">4.43784e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">1</td>
    </tr>
    <tr data-problem="tsopt/LJ38" data-template="eon-client/ts-lj38-lanczos-improved">
    <td>LJ38</td>

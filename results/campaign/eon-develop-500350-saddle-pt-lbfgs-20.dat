@@ -1,0 +1,30 @@
+code eOn
+code_version (develop 500350d9)
+commit 500350d9fae881f06c7ef194e5868da079c4be5a
+counter harness
+contributor Rohit Goswami
+template eon/develop-saddle-pt-lbfgs-20
+problem saddle-search/pt-island
+algorithm Dimer L-BFGS
+tuning default
+reducer harness
+cap 100000000
+n 1
+par2_mean 4437845.0
+median 4437845.0
+median_low 4437845.0
+median_high 4437845.0
+wilson_low 0.20654931437723745
+wilson_high 1.0
+nfailed 0
+n_cap 0
+n_divergence 0
+n_wrong_stationary 0
+n_crash 0
+force_calls 4437845
+unique_saddles 76
+fraction_connected 0.7526078637121165
+total_searches 16201
+qualifying 27
+harness_calls 4450058
+count_keys sad-fcs+mins-fcs

@@ -19,7 +19,9 @@ import traceback
 from pathlib import Path
 
 from .campaign import format_ini, geometry_archive, load_template, write_starts
-from .eon_parse import saddle_progress
+from .eon_parse import archive_connected, saddle_progress
+from .score import score_v2
+from .surfaces import read_con
 
 
 def _mean(values: list[float]) -> float:
@@ -313,6 +315,132 @@ def _write_saddle(template: dict, rows: list[dict], output: Path, workers: int) 
     summary["starts"] = len(rows)
     summary["template"] = template["id"]
     summary["problem"] = template.get("problem")
+    return summary
+
+
+def _accept_state(state: Path, *, pbc: tuple[bool, bool, bool] = (True, True, True)):
+    """Harness acceptance for ``states/0`` process files.
+
+    The reference is the state's minimized reactant. Endpoint files are
+    the client's minimizations from the saddle. The match is the archive
+    distance test on the stored cell.
+    """
+    reference, _fixed, cell = read_con((state / "reactant.con").read_text(encoding="utf-8", errors="replace"))
+    proc = state / "procdata"
+
+    def accept(proc_id: str, height: float) -> bool:
+        reactant_path = proc / f"reactant_{proc_id}.con"
+        product_path = proc / f"product_{proc_id}.con"
+        if not reactant_path.is_file() or not product_path.is_file():
+            return False
+        reactant, _fixed_reactant, _cell_reactant = read_con(
+            reactant_path.read_text(encoding="utf-8", errors="replace")
+        )
+        product, _fixed_product, _cell_product = read_con(
+            product_path.read_text(encoding="utf-8", errors="replace")
+        )
+        return archive_connected(reactant, product, reference, cell, height, pbc=pbc)
+
+    return accept
+
+
+def progress_from_state(
+    state: Path,
+    *,
+    target: int = 27,
+    barrier: float = 1.5,
+    pbc: tuple[bool, bool, bool] = (True, True, True),
+) -> dict:
+    """Campaign cost through ``target`` archive-accepted saddles.
+
+    Force calls are ``sad-fcs + mins-fcs``. Prefactor calls stay out of
+    that sum. A client ``good`` below ``barrier`` counts only when the
+    minimized endpoints pass ``archive_connected``.
+    """
+    text = (state / "search_results.txt").read_text(encoding="utf-8", errors="replace")
+    return saddle_progress(text, target=target, barrier=barrier, accept=_accept_state(state, pbc=pbc))
+
+
+def write_ranked_campaign(
+    template: dict,
+    progress: dict,
+    output: Path,
+    *,
+    cap: int,
+    harness_calls: int | None = None,
+) -> dict:
+    """One campaign record. ``n`` is 1. A miss costs twice ``cap``.
+
+    The ranked ``force_calls`` are the client ``sad-fcs + mins-fcs``
+    through the stopping line. That is the sum the 2014 table used.
+    """
+    reached = bool(progress.get("reached"))
+    calls = int(progress["force_calls"])
+    record = {
+        "schema": "optbench.start/v2",
+        "start": "campaign-1",
+        "counter": "harness",
+        "comparable": True,
+        "code": template.get("code", ""),
+        "code_version": template.get("code_version", ""),
+        "commit": template.get("commit", ""),
+        "tuning": template.get("tuning", "default"),
+        "force_calls": calls,
+        "success": reached,
+        "failure": None if reached else "cap",
+        "qualifying": progress.get("qualifying"),
+        "unique_saddles": progress.get("unique_saddles"),
+        "fraction_connected": progress.get("fraction_connected"),
+        "total_searches": progress.get("total_searches"),
+        "harness_calls": harness_calls,
+        "registered_calls": calls,
+        "pref_calls": 0,
+        "distance_difference_A": 0.1,
+        "barrier_below_eV": 1.5,
+        "rejected": progress.get("rejected", 0),
+    }
+    summary = score_v2([record], cap)
+    fraction = progress.get("fraction_connected")
+    fraction_text = "na" if fraction is None else f"{float(fraction):.16g}"
+    lines = [
+        f"code {template.get('code', '')}",
+        f"code_version {template.get('code_version', '')}",
+        f"commit {template.get('commit', '')}",
+        "counter harness",
+        "contributor Rohit Goswami",
+        f"template {template.get('id', '')}",
+        f"problem {template.get('problem', '')}",
+        f"algorithm {template.get('algorithm', '')}",
+        f"tuning {template.get('tuning', 'default')}",
+        f"reducer {template.get('reducer', 'harness')}",
+        f"cap {cap}",
+        f"n {summary['n']}",
+        f"par2_mean {summary['par2_mean']}",
+        f"median {summary['median']}",
+        f"median_low {summary['median_low']}",
+        f"median_high {summary['median_high']}",
+        f"wilson_low {summary['wilson_low']}",
+        f"wilson_high {summary['wilson_high']}",
+        f"nfailed {summary['nfailed']}",
+        f"n_cap {summary['n_cap']}",
+        f"n_divergence {summary['n_divergence']}",
+        f"n_wrong_stationary {summary['n_wrong_stationary']}",
+        f"n_crash {summary['n_crash']}",
+        f"force_calls {calls}",
+        f"unique_saddles {progress.get('unique_saddles')}",
+        f"fraction_connected {fraction_text}",
+        f"total_searches {progress.get('total_searches')}",
+        f"qualifying {progress.get('qualifying')}",
+    ]
+    if harness_calls is not None:
+        lines.append(f"harness_calls {int(harness_calls)}")
+    lines.append("count_keys sad-fcs+mins-fcs")
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    starts = output.with_name(output.name[: -len(".dat")] + ".starts.jsonl")
+    starts.write_text(json.dumps(record, sort_keys=True) + "\n", encoding="utf-8")
+    summary["progress"] = progress
+    summary["starts"] = str(starts)
     return summary
 
 

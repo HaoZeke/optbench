@@ -7,6 +7,8 @@ file the force calls came from.
 
 from __future__ import annotations
 
+import numpy as np
+
 
 def xyz_to_con(text: str, *, box: float | None = None) -> str:
     """Extended XYZ to a free-cluster ``.con``.
@@ -120,7 +122,162 @@ def first_success(evaluate, *, limit: int = 256):
     return best
 
 
-def saddle_progress(text: str, *, target: int = 27, barrier: float = 1.5) -> dict:
+# Archive structure comparison. distance_difference is 0.1 Å. The indexed
+# distance is Matter::perAtomNorm, which is what ProcessSearchJob::compare
+# calls. The bijection is geometry::identical, used when atoms are
+# indistinguishable. max_energy is the archive saddle window; done.py then
+# stops at 27 goods below 1.5 eV.
+DISTANCE_DIFFERENCE_A = 0.1
+ARCHIVE_MAX_ENERGY_EV = 5.0
+STOP_BARRIER_EV = 1.5
+
+
+def _minimum_image(delta, cell, pbc: tuple[bool, bool, bool]):
+    """Orthorhombic minimum image, the same fold as ``surfaces.minimum_image``."""
+    from .surfaces import minimum_image
+
+    return minimum_image(delta, cell, pbc)
+
+
+def max_atom_distance(left, right, cell, *, pbc: tuple[bool, bool, bool] = (True, True, True)) -> float:
+    """Largest per-atom minimum-image distance, in angstroms.
+
+    This is ``Matter::perAtomNorm``. Atom ``i`` is compared with atom ``i``.
+    """
+    a = np.asarray(left, dtype=np.float64)
+    b = np.asarray(right, dtype=np.float64)
+    if a.shape != b.shape or a.ndim != 2 or a.shape[1] != 3:
+        raise ValueError("positions must be matching (N, 3) arrays")
+    delta = _minimum_image(a - b, np.asarray(cell, dtype=np.float64), pbc)
+    return float(np.linalg.norm(delta, axis=1).max())
+
+
+def _permutation_match(left, right, cell, tolerance: float, pbc: tuple[bool, bool, bool]) -> bool:
+    """Bijection of atoms inside ``tolerance``, the develop ``geometry::identical`` test."""
+    a = np.asarray(left, dtype=np.float64)
+    b = np.asarray(right, dtype=np.float64)
+    count = a.shape[0]
+    adjacency: list[list[int]] = []
+    for index in range(count):
+        delta = _minimum_image(a[index] - b, np.asarray(cell, dtype=np.float64), pbc)
+        adjacency.append(np.nonzero(np.linalg.norm(delta, axis=1) < tolerance)[0].tolist())
+    match_right = [-1] * count
+
+    def augment(origin: int, seen: list[bool]) -> bool:
+        for other in adjacency[origin]:
+            if seen[other]:
+                continue
+            seen[other] = True
+            if match_right[other] == -1 or augment(match_right[other], seen):
+                match_right[other] = origin
+                return True
+        return False
+
+    matched = 0
+    for origin in range(count):
+        if augment(origin, [False] * count):
+            matched += 1
+    return matched == count
+
+
+def same_minimum(
+    left,
+    right,
+    cell,
+    *,
+    tolerance: float = DISTANCE_DIFFERENCE_A,
+    pbc: tuple[bool, bool, bool] = (True, True, True),
+    permute: bool = True,
+) -> bool:
+    """True when ``left`` and ``right`` are one minimum.
+
+    The indexed test is the distance ``ProcessSearchJob`` actually calls.
+    ``permute`` adds the indistinguishable-atom bijection: atoms may be
+    paired in any order when each pair is inside ``tolerance`` under the
+    minimum image. Distances are angstroms.
+    """
+    if tolerance <= 0:
+        raise ValueError("tolerance must be positive")
+    if max_atom_distance(left, right, cell, pbc=pbc) < tolerance:
+        return True
+    if not permute:
+        return False
+    return _permutation_match(left, right, cell, tolerance, pbc)
+
+
+def within_energy_window(
+    barrier: float,
+    *,
+    stop: float = STOP_BARRIER_EV,
+    ceiling: float = ARCHIVE_MAX_ENERGY_EV,
+) -> bool:
+    """True for a non-negative barrier inside the archive window and below the stop."""
+    if ceiling < stop:
+        raise ValueError("ceiling is below the stop")
+    height = float(barrier)
+    return 0.0 <= height <= ceiling and height < stop
+
+
+def endpoint_link(reactant, product, reference, cell, **kwargs) -> dict:
+    """Connectivity after minimization from the saddle.
+
+    Exactly one endpoint has to be the reactant minimum. Both endpoints
+    matching is the client's "both minima are the initial state". Neither
+    matching is not connected.
+    """
+    reactant_same = same_minimum(reactant, reference, cell, **kwargs)
+    product_same = same_minimum(product, reference, cell, **kwargs)
+    return {
+        "reactant_same": reactant_same,
+        "product_same": product_same,
+        "connected": reactant_same ^ product_same,
+        "reactant_distance": max_atom_distance(reactant, reference, cell, pbc=kwargs.get("pbc", (True, True, True))),
+        "product_distance": max_atom_distance(product, reference, cell, pbc=kwargs.get("pbc", (True, True, True))),
+    }
+
+
+def archive_connected(
+    reactant,
+    product,
+    reference,
+    cell,
+    barrier: float,
+    *,
+    tolerance: float = DISTANCE_DIFFERENCE_A,
+    pbc: tuple[bool, bool, bool] = (True, True, True),
+    stop: float = STOP_BARRIER_EV,
+    ceiling: float = ARCHIVE_MAX_ENERGY_EV,
+) -> bool:
+    """Archive acceptance for one minimized saddle.
+
+    The barrier has to sit in the archive window and below the stop.
+    Minimization from the saddle has to leave exactly one endpoint on
+    the reactant. That match is ``distance_difference`` under the
+    minimum image, then a bijection when the atoms are identical.
+    ``Matter::pbc`` folds every axis of the stored cell, so the default
+    ``pbc`` does too.
+    """
+    if not within_energy_window(barrier, stop=stop, ceiling=ceiling):
+        return False
+    return bool(
+        endpoint_link(
+            reactant,
+            product,
+            reference,
+            cell,
+            tolerance=tolerance,
+            pbc=pbc,
+        )["connected"]
+    )
+
+
+def saddle_progress(
+    text: str,
+    *,
+    target: int = 27,
+    barrier: float = 1.5,
+    accept=None,
+) -> dict:
     """Cost of reaching ``target`` good saddles below ``barrier``.
 
     This is the 2014 ``done.py`` rule. The first two lines are the
@@ -129,6 +286,11 @@ def saddle_progress(text: str, *, target: int = 27, barrier: float = 1.5) -> dic
     containing ``Connected`` increments the not-connected count, which
     is how that script matches ``Not Connected``. Lines after the
     target are ignored. ``reached`` is false when the file ends first.
+
+    ``accept(proc_id, height)`` is the harness check on a client-good
+    saddle below ``barrier``. ``None`` keeps the client token, which is
+    what ``done.py`` counted. A rejected saddle stays in the unique
+    count and does not advance the stop.
     """
     if target <= 0:
         raise ValueError("target must be positive")
@@ -138,6 +300,7 @@ def saddle_progress(text: str, *, target: int = 27, barrier: float = 1.5) -> dic
     not_connected = 0
     searches = 0
     found = 0
+    rejected = 0
     reached = False
     for line in lines[2:]:
         fields = line.split()
@@ -152,10 +315,15 @@ def saddle_progress(text: str, *, target: int = 27, barrier: float = 1.5) -> dic
         if "Connected" in result:
             not_connected += 1
         if "good" in result and height < barrier:
-            found += 1
-            if found >= target:
-                reached = True
-                break
+            proc_id = result.split("-", 1)[1] if "-" in result else result
+            ok = True if accept is None else bool(accept(proc_id, height))
+            if ok:
+                found += 1
+                if found >= target:
+                    reached = True
+                    break
+            else:
+                rejected += 1
     fraction = None
     if searches:
         fraction = (searches - not_connected) / searches
@@ -166,4 +334,5 @@ def saddle_progress(text: str, *, target: int = 27, barrier: float = 1.5) -> dic
         "fraction_connected": fraction,
         "total_searches": searches,
         "qualifying": found,
+        "rejected": rejected,
     }

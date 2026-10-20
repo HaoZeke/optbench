@@ -2,13 +2,13 @@ id = "eon/develop-saddle-pt-lbfgs-20"
 engine = "eon"
 problem = "saddle-search/pt-island"
 code = "eOn"
-code_version = "(develop a7aa57472fb7d823953fd36b78cd755fa4842d30)"
-commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+code_version = "(develop 500350d9)"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
 algorithm = "Dimer L-BFGS"
 reducer = "harness"
-failure_cap = 5064
+failure_cap = 100000000
 tuning = "default"
-note = """eOn, the git code at https://github.com/TheochemUI/eon develop a7aa57472fb7d823953fd36b78cd755fa4842d30. This is not a version of EON. Stock and untuned: the ini carries the archive keys the develop schema accepts, and dimer improved and dimer opt_method are unset so the develop client default remains. Optimizer L-BFGS, converged_force 0.001, max_iterations 1000, max_move 0.2. Dimer rotations_max 20, converged_angle 5. Displacement atoms 0-6, radius 3.3, magnitude 0.1, listed weight 1. Temperature 700 K, confidence 1.1, thermally_accessible_window 99999, minimize_first, prefactor default_value 5e12, max_energy 5, num_jobs 10. The potential the client evaluates is ext_pot. The harness kernel is morse/smooth/linear. The run stops at 27 client-good saddles below 1.5 eV, the 2014 done.py line. The ranked score is the harness per-search record, not a retune toward the archived mean."""
+note = """eOn, the git code at https://github.com/TheochemUI/eon, develop 500350d9 on fix/develop-regressions-vs-350. This is not a version of EON. The method the row names is the setup: Optimizer opt_method lbfgs and Dimer rotations_max 20, written with the develop keys. Dimer improved and dimer opt_method stay unset, so the develop defaults remain. Main.parallel stays at its default. The other ini keys are the archive AKMC problem: converged_force 0.001, temperature 700, confidence 1.1, thermally_accessible_window 99999, minimize_first, displacement atoms 0-6 with radius 3.3 and magnitude 0.1, max_energy 5, prefactor default_value 5e12. The potential the client evaluates is ext_pot. The harness kernel is morse/smooth/linear. One campaign stops at 27 connected saddles below 1.5 eV. A connected saddle is a minimized endpoint pair in which exactly one endpoint lies within the archive distance_difference of 0.1 Å (minimum image on the stored cell, with a bijection for identical atoms). The ranked cost is sad-fcs plus mins-fcs through that saddle. Commit 500350d9 charges that sum with potRegistryForceCalls, so every image potential in the process is included. On a7aa574 the same job added only pot->forceCallCounter. Main.parallel is the default and the dimer builds a second potential for the other image, so the PotServer total was 4261497 while the registered sum was 2208099. The campaign cap is 100000000 force calls. Prefactor calls stay at 0 because default_value skips the Hessian, which is the archive sum."""
 
 [ini.Main]
 job = "akmc"
