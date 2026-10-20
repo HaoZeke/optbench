@@ -14,4 +14,4 @@ counter harness
 tuning stock
 call_unit total
 cap 1000000
-note Latest unmodified GMIN df8da599267534fbe43a250e578f7396a7946311, tarball sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. Stock temperature 0.3 and steps 0.3, STEPS 0. Archive starts and convergence: NTIP 4, EDIFF 1e-3, TARGET -391.0233. force_calls is the success-only NPCALL mean. The harness score is NPCALL on every start.
+note Latest unmodified GMIN df8da599267534fbe43a250e578f7396a7946311, tarball sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. Stock temperature 0.3 and steps 0.3. STEPS and MAX_NPCALL are 1000000. Archive starts and convergence: NTIP 4, EDIFF 1e-3, TARGET -391.0233. force_calls is the success-only NPCALL mean of the 11 target hits. The other 9989 runs reach the call cap. The harness score is NPCALL on every start.

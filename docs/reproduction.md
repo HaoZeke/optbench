@@ -271,7 +271,7 @@ The archived driver is the dangling path bin/js850/globalopt.py. The harness use
 
 ### gmin_stock
 
-Latest unmodified GMIN, source revision df8da599267534fbe43a250e578f7396a7946311, tarball sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. Stock basin hopping: temperature 0.3, steps 0.3, and STEPS 0 so the program runs the default of zero Monte Carlo steps. The problem, the 10000 archived angle-axis starts, and the convergence window are the archive: NTIP 4, EDIFF 1e-3, SLOPPYCONV 1e-3, TIGHTCONV 1e-3, MAXIT 10000, TARGET -391.0233. Eleven starts hit the target. The success-only mean is 266 against 16236, and nfailed is 9989 against 0. The gap is the finding. The ranked score is GMIN NPCALL on the harness counter, cap 1000000.
+Latest unmodified GMIN, source revision df8da599267534fbe43a250e578f7396a7946311, tarball sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. Temperature and step sizes are the code defaults, 0.3. STEPS and MAX_NPCALL are the problem cap, 1000000. The 10000 archived starts and the convergence window are the archive: NTIP 4, EDIFF 1e-3, SLOPPYCONV 1e-3, TIGHTCONV 1e-3, MAXIT 10000, TARGET -391.0233. Eleven initial quenches hit the target. The success-only mean is 266 against 16236. The other 9989 runs reach the call cap. The ranked score is GMIN NPCALL on the harness counter.
 
 - globalopt/tip4p10/gmin
 
