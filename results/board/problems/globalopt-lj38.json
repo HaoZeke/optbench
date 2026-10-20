@@ -408,7 +408,7 @@
       "source": "campaign",
       "success_rate": 0.0,
       "template": "scipyglobal/lj38-shgo",
-      "tuning": "default",
+      "tuning": "sobol",
       "wilson_high": 0.03699349820698568,
       "wilson_low": 0.0
     }

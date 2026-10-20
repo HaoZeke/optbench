@@ -50,7 +50,7 @@ def test_scipyglobal_templates_match_the_registry_pin():
         assert template["code_version"] == "1.18.1"
         assert template["commit"] == COMMIT
         method = template["scipy"]["method"]
-        if method == "shgo":
+        if method == "shgo" and template["problem"] == "globalopt/lj38":
             assert template["tuning"] == "sobol"
         else:
             assert template["tuning"] == "default"
@@ -96,6 +96,7 @@ def test_lj_starts_are_centered_inside_the_bound(tmp_path: Path):
     assert [name for name, _coords in lj38] == [str(index) for index in range(100)]
     for _name, coords in lj38:
         assert coords.shape == (114,)
+        assert coords.dtype == np.float64
         assert float(np.max(np.abs(coords))) <= COORD_BOUND
     lj75 = load_starts(ROOT, resolve_problem(ROOT, "globalopt/lj75"), tmp_path)
     assert len(lj75) == 200
@@ -103,6 +104,7 @@ def test_lj_starts_are_centered_inside_the_bound(tmp_path: Path):
     assert lj75[-1][0] == "200"
     for _name, coords in lj75:
         assert coords.shape == (225,)
+        assert coords.dtype == np.float64
         assert float(np.max(np.abs(coords))) <= COORD_BOUND
 
 
@@ -162,8 +164,9 @@ def test_cap_stops_at_five_calls(method: str):
     bound = None if method == "basinhopping" else COORD_BOUND
     job = _job(method, _constant, 5, 0.0, bound)
     if method == "shgo":
-        # Sobol n for two coordinates is 4, so that sample finishes under a cap
-        # of five. Four coordinates request eight points, and the fifth evaluation stops.
+        # Two coordinates request five simplicial vertices, which can finish
+        # on the cap boundary. Four coordinates request 17 vertices, so the
+        # fifth evaluation stops the search.
         job["coords"] = [0.0, 0.0, 0.0, 0.0]
         parameters = method_parameters("shgo", 5, 4, bound)
         parameters["seed"] = 314159
@@ -374,23 +377,38 @@ def test_scipyglobal_engine_does_not_need_eonclient(monkeypatch, tmp_path: Path)
     assert summary["problem"] == "globalopt/lj38"
 
 
-def test_shgo_sobol_sample_is_the_power_of_two_above_the_dimension():
-    from optbench.runners.scipyglobal import SHGO_ADDRESS_BYTES, method_parameters, shgo_sample_count
+def test_shgo_default_sampling_is_the_constructor_and_sobol_stays_available():
+    from optbench.runners.scipyglobal import (
+        SHGO_ADDRESS_BYTES,
+        SHGO_SOBOL_ADDRESS_BYTES,
+        method_parameters,
+        shgo_sample_count,
+    )
 
     assert shgo_sample_count(2) == 4
     assert shgo_sample_count(4) == 8
     assert shgo_sample_count(114) == 128
     assert shgo_sample_count(225) == 256
-    parameters = method_parameters("shgo", 2000000, 114, COORD_BOUND)
+    stock = method_parameters("shgo", 1000000, 225, COORD_BOUND)
+    assert stock["sampling_method"] == "simplicial"
+    assert stock["n"] == 100
+    assert stock["iters"] == 1
+    assert stock["minimizer"] == "SLSQP"
+    assert stock["ftol"] == 1e-12
+    assert stock["jac"] is True
+    assert stock["workers"] == 1
+    assert stock["address_space_bytes"] == SHGO_ADDRESS_BYTES
+    assert SHGO_ADDRESS_BYTES == 2 * 1024**3
+    parameters = method_parameters("shgo", 2000000, 114, COORD_BOUND, "sobol")
     assert parameters["sampling_method"] == "sobol"
     assert parameters["n"] == 128
     assert parameters["iters"] == 1
     assert parameters["minimizer"] == "SLSQP"
     assert parameters["ftol"] == 1e-12
     assert parameters["jac"] is True
-    assert parameters["address_space_bytes"] == SHGO_ADDRESS_BYTES
-    assert SHGO_ADDRESS_BYTES == 10 * 1024**3
-    wide = method_parameters("shgo", 1000000, 225, COORD_BOUND)
+    assert parameters["address_space_bytes"] == SHGO_SOBOL_ADDRESS_BYTES
+    assert SHGO_SOBOL_ADDRESS_BYTES == 10 * 1024**3
+    wide = method_parameters("shgo", 1000000, 225, COORD_BOUND, "sobol")
     assert wide["n"] == 256
     assert wide["sampling_method"] == "sobol"
 

@@ -112,7 +112,8 @@ def _job(spec: dict, start: str) -> dict:
     template = spec["template"]
     method, base_seed, bound = _section(template)
     problem = resolve_problem(ROOT, spec["problem_id"])
-    parameters = method_parameters(method, spec["cap"], int(coords.size), bound)
+    sampling = str(template.get("tuning") or "") if method == "shgo" else None
+    parameters = method_parameters(method, spec["cap"], int(coords.size), bound, sampling)
     parameters["seed"] = base_seed + index
     return {
         "index": index,

@@ -11,14 +11,14 @@ plus ``energy_above_minimum``. The force-call cap is the cap stated on the
 problem when the problem states one. A hit on the call that fills the cap
 is a cap failure.
 
-``shgo`` uses Sobol sampling, the documented construction for a
-high-dimensional problem. SciPy rounds that sample up to a power of two
-and builds the Delaunay complex before it calls the potential. The sample
-is the smallest power of two above ``3N + 1``. One iteration and SLSQP
-with ``ftol`` 1e-12 are the local-minimizer settings. At 114 and 225
-dimensions that complex does not fit: Qhull raises QH6080 while it is
-still adding points. The worker address space is limited to 10 GiB so the
-failure is a recorded crash.
+``shgo`` on a default template uses the constructor arguments.
+``sampling_method`` is simplicial, ``n`` is 100, and ``iters`` is 1.
+SciPy replaces that ``n`` with ``2**dim + 1`` and builds the complex
+before it calls the potential. At 225 dimensions the build raises
+``MemoryError`` in ``cyclic_product`` with an empty message and no
+force call. The worker address space is limited to 2 GiB so that
+allocation is a recorded crash, charged at twice the cap. A template
+whose tuning is ``sobol`` keeps the Sobol sample from the LJ38 row.
 """
 
 from __future__ import annotations
@@ -28,6 +28,7 @@ import math
 import os
 import statistics
 import tarfile
+import traceback
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
 
@@ -49,11 +50,13 @@ LJ75_ARCHIVE = "website/globalopt/lj75/lj75_clusters.tgz"
 SOURCE_TREE = Path("/tmp/scipy-src")
 BOUNDED = frozenset({"dual_annealing", "differential_evolution", "shgo"})
 CHECKPOINT_ROOT = Path("/tmp/optbench-scipyglobal")
-# Smallest Sobol complex that can triangulate LJ38 or LJ75. Qhull raises
-# QH6080 inside that complex at 6 GiB and again at 10 GiB, before the
-# potential is called. The cap turns the allocation failure into a crash
-# record instead of an unbounded kill.
-SHGO_ADDRESS_BYTES = 10 * 1024**3
+# Default shgo builds a simplicial complex of 2**dim+1 vertices before
+# the potential is called. The limit turns that allocation failure into
+# a recorded crash.
+SHGO_ADDRESS_BYTES = 2 * 1024**3
+# Sobol shgo triangulates a power-of-two sample. Qhull raises QH6080
+# inside that complex at 6 GiB and again at 10 GiB.
+SHGO_SOBOL_ADDRESS_BYTES = 10 * 1024**3
 SHGO_ITERS = 1
 SHGO_FTOL = 1e-12
 SHGO_MINIMIZER = "SLSQP"
@@ -148,7 +151,13 @@ def shgo_sample_count(dim: int) -> int:
     return 1 << (need - 1).bit_length()
 
 
-def method_parameters(method: str, cap: int, dim: int, bound: float | None) -> dict:
+def method_parameters(
+    method: str,
+    cap: int,
+    dim: int,
+    bound: float | None,
+    sampling: str | None = None,
+) -> dict:
     """Constructor values for one method. Iteration limits follow the force-call cap."""
     if method == "basinhopping":
         return {
@@ -195,13 +204,26 @@ def method_parameters(method: str, cap: int, dim: int, bound: float | None) -> d
             "bound": bound,
         }
     if method == "shgo":
+        if sampling == "sobol":
+            return {
+                "method": method,
+                "n": shgo_sample_count(dim),
+                "iters": SHGO_ITERS,
+                "sampling_method": "sobol",
+                "minimizer": SHGO_MINIMIZER,
+                "ftol": SHGO_FTOL,
+                "jac": True,
+                "workers": 1,
+                "bound": bound,
+                "address_space_bytes": SHGO_SOBOL_ADDRESS_BYTES,
+            }
         return {
             "method": method,
-            "n": shgo_sample_count(dim),
-            "iters": SHGO_ITERS,
-            "sampling_method": "sobol",
-            "minimizer": SHGO_MINIMIZER,
-            "ftol": SHGO_FTOL,
+            "n": 100,
+            "iters": 1,
+            "sampling_method": "simplicial",
+            "minimizer": "SLSQP",
+            "ftol": 1e-12,
             "jac": True,
             "workers": 1,
             "bound": bound,
@@ -210,7 +232,15 @@ def method_parameters(method: str, cap: int, dim: int, bound: float | None) -> d
     raise ValueError(f"unknown scipy method {method}")
 
 
-def _invoke(method: str, objective: HarnessObjective, x0: np.ndarray, cap: int, bound: float | None, rng) -> None:
+def _invoke(
+    method: str,
+    objective: HarnessObjective,
+    x0: np.ndarray,
+    cap: int,
+    bound: float | None,
+    rng,
+    sampling: str | None = None,
+) -> None:
     import scipy.optimize as optimize
 
     fun = objective.fun
@@ -277,18 +307,30 @@ def _invoke(method: str, objective: HarnessObjective, x0: np.ndarray, cap: int, 
         )
         return
     if method == "shgo":
+        if sampling == "sobol":
+            optimize.shgo(
+                fun,
+                limits,
+                n=shgo_sample_count(x0.size),
+                iters=SHGO_ITERS,
+                sampling_method="sobol",
+                workers=1,
+                minimizer_kwargs={
+                    "method": SHGO_MINIMIZER,
+                    "jac": jac,
+                    "options": {"ftol": SHGO_FTOL},
+                },
+                callback=lambda _xk: objective.stop is not None,
+            )
+            return
         optimize.shgo(
             fun,
             limits,
-            n=shgo_sample_count(x0.size),
-            iters=SHGO_ITERS,
-            sampling_method="sobol",
+            n=100,
+            iters=1,
+            sampling_method="simplicial",
             workers=1,
-            minimizer_kwargs={
-                "method": SHGO_MINIMIZER,
-                "jac": jac,
-                "options": {"ftol": SHGO_FTOL},
-            },
+            minimizer_kwargs={"jac": jac, "options": {"ftol": 1e-12}},
             callback=lambda _xk: objective.stop is not None,
         )
         return
@@ -308,6 +350,32 @@ def _classify(calls: int, cap: int, best: float | None, target: float | None, st
     if best <= target and calls < cap:
         return True, None, []
     return False, "wrong_stationary", ["energy"]
+
+
+def _crash_text(exc: BaseException) -> str:
+    """Exception class and the SciPy frame that raised it.
+
+    ``MemoryError`` from the simplicial builder carries an empty message.
+    The frame is the text recorded on the start.
+    """
+    frames = traceback.extract_tb(exc.__traceback__)
+    chosen = None
+    for frame in reversed(frames):
+        if "scipy" in frame.filename.replace("\\", "/"):
+            chosen = frame
+            break
+    detail = str(exc).strip()
+    kind = type(exc).__name__
+    if chosen is None:
+        return f"{kind}: {detail}" if detail else kind
+    path = Path(chosen.filename).as_posix()
+    marker = "scipy/"
+    if marker in path:
+        path = path[path.index(marker) :]
+    located = f"{kind} at {path}:{chosen.lineno} {chosen.name}"
+    if detail:
+        return f"{located}: {detail}"
+    return located
 
 
 def _blank_crash(job: dict, message: str) -> dict:
@@ -358,15 +426,16 @@ def search_start(job: dict) -> dict:
     error = ""
     try:
         rng = None if method == "shgo" else np.random.default_rng(int(job["seed"]))
-        _invoke(method, objective, x0, cap, bound, rng)
+        sampling = str((job.get("parameters") or {}).get("sampling_method") or "")
+        _invoke(method, objective, x0, cap, bound, rng, sampling)
         if objective.stop is None:
             objective.stop = "return"
     except SearchStop:
         pass
     except MemoryError as exc:
-        error = f"MemoryError: {exc}"
+        error = _crash_text(exc)
     except Exception as exc:
-        error = f"{type(exc).__name__}: {exc}"
+        error = _crash_text(exc)
     if error and not objective.stop:
         objective.stop = "crash"
     calls = int(objective.counter.calls)
@@ -397,6 +466,8 @@ def search_start(job: dict) -> dict:
     }
     if error:
         record["error"] = error
+        record["reasons"] = ["crash", error]
+        print(f"{label} {error}", flush=True)
     _write_checkpoint(job, record)
     return record
 
@@ -919,7 +990,8 @@ def run_template(
         starts = starts[: int(limit)]
     jobs = []
     for index, (name, coords) in enumerate(starts):
-        parameters = method_parameters(method, cap, coords.size, bound)
+        sampling = str(template.get("tuning") or "") if method == "shgo" else None
+        parameters = method_parameters(method, cap, coords.size, bound, sampling)
         parameters["seed"] = base_seed + index
         job = {
             "index": index,
@@ -958,8 +1030,12 @@ def run_template(
             import multiprocessing as mp
 
             context = mp.get_context("spawn")
-            # One shgo worker. Its Sobol complex is allowed 10 GiB.
-            pool_workers = 1 if method == "shgo" else int(workers)
+            # Sobol shgo is one worker: that complex is allowed 10 GiB.
+            # The default simplicial sampler runs one start per worker.
+            sobol = any(
+                (job.get("parameters") or {}).get("sampling_method") == "sobol" for job in pending
+            )
+            pool_workers = 1 if method == "shgo" and sobol else int(workers)
             with ProcessPoolExecutor(
                 max_workers=pool_workers,
                 mp_context=context,
