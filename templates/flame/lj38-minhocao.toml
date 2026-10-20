@@ -7,9 +7,17 @@ commit = "99a615acaef6bc6afe44d895f666c6d60250f7d8"
 algorithm = "minhocao"
 tuning = "default"
 failure_cap = 2000000
-note = "Default minhocao. The local optimiser, softening, molecular-dynamics length, and FIRE tolerance are the params_new defaults (FIRE, GEOTOLMXF 2.d-4 Ha/Bohr, SOFTNIT 10, MDNIT 300, dtion_md 20). ioput is the documented start 1.d-2 5.d2 1.d5 and the earr tolerances are 2.d-3 1.d-1. The seed is 314159. Free boundaries select the Gaussian molecular fingerprint. VERBOSE is 0 so a geometry file is not written on every force call; global.mon still records every hop. The reference energy is the Cambridge LJ38 minimum -173.928427; success is that value plus the problem tolerance 0.001, which is the 2014 eOn stop -173.927427. failure_cap is 2000000. A start with 2000000 calls or more is a cap failure and PAR-2 charges 4000000. The potential is the harness Lennard-Jones kernel through msock."
+note = "The campaign counts are the params_new default search (GEOTOLMXF 2.d-4 Ha/Bohr, SOFTNIT 10, MDNIT 300, dtion_md 20, ioput 1.d-2 5.d2 1.d5, earr tolerances 2.d-3 1.d-1), scored at cap 2000000. A start with 2000000 calls or more is a cap failure and PAR-2 charges 4000000. The [flame] block is the published setting shared with lj75, lj98, and lj150. ediff 1.1, ekin 0.09, nsoften 20, mdmin 3, etoler 1e-3 and fmaxtol 1e-3 are the values in tests/minhopp_LJ. ediff and etoler are divided by Ha_eV 27.21138386. ekin 0.09 per degree of freedom is 2033.84 K for N=38, and the temperature cap stays 1e5 K. The published timestep 0.01 at unit mass is 14.59 atomic units with the carbon mass 12.011, and that step still crosses the repulsive wall at 1e5 K. MDDTINIT is 2, the timestep in tests/minhocao_blj_mhm. GEOFIREDTINIT is 1.d-9 and GEOFIREDTMIN is 1.d-12. The seed is 314159. The reference energy is the Cambridge LJ38 minimum -173.928427. The potential is the harness Lennard-Jones kernel through msock."
 
 [flame]
 seed = 314159
 reference_energy = -173.928427
 nlminx = 100000
+geofiredtinit = "1.d-9"
+geofiredtmin = "1.d-12"
+mddtinit = "2"
+softnit = 20
+mdmininit = 3
+geotolmxf = "1.d-3"
+ioput = "4.0424257938d-2 2.0338421935d3 1.d5"
+earr_tolerance = "  3.6749325398E-05   1.000000E-01"

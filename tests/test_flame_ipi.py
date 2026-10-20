@@ -242,7 +242,7 @@ def test_lj38_ceiling_matches_the_2014_stop():
     template150 = load_template(root, "flame/lj150-minhocao")
     assert abs(success_ceiling(lj150, template150) - (-893.310258 + 0.001)) < 1e-9
     assert cap_of(lj150, template150) == 10_000_000
-    assert fire_dt_of(template) == {}
+    assert fire_dt_of(template) == {"init": "1.d-9", "min": "1.d-12"}
     assert fire_dt_of(other) == {"init": "1.d-9", "min": "1.d-12"}
 
 
@@ -252,7 +252,6 @@ def test_one_cap_is_shared_and_written(tmp_path: Path):
     from optbench.campaign import load_template, resolve_problem
     from optbench.runners.flame_go import (
         HA_EV,
-        IOPUT,
         _dat,
         _write_case,
         cap_of,
@@ -282,29 +281,29 @@ def test_one_cap_is_shared_and_written(tmp_path: Path):
             {"id": "flame/lj75-minhocao", "failure_cap": 2_000_000},
         )
 
-    assert md_lines_of(flame38) == []
-    assert ioput_text(flame38) == IOPUT
-    assert md_lines_of(flame98) == ["MDDTINIT 2"]
-    assert md_lines_of(flame150) == ["MDDTINIT 2"]
-    assert ioput_text(flame98) == IOPUT
-    assert earr_text(flame98).strip() == "2.000000E-03   1.000000E-01"
-    published = md_lines_of(flame75)
-    assert published == [
+    published = [
         "MDDTINIT 2",
         "SOFTNIT 20",
         "MDMININIT 3",
         "GEOTOLMXF 1.d-3",
     ]
-    ediff, temperature, tmax = (float(part.replace("d", "e").replace("D", "E")) for part in ioput_text(flame75).split())
-    assert abs(ediff - (1.1 / HA_EV)) < 5e-13
+    assert md_lines_of(flame38) == published
+    assert md_lines_of(flame75) == published
+    assert md_lines_of(flame98) == published
+    assert md_lines_of(flame150) == published
     # minhopp ekin 0.09 is kinetic energy per remaining degree of freedom.
     # 1.5 N kT matches that total when T = 0.18 (N-1) / N / kB.
-    kelvin = 0.18 * (74 / 75) / (3.1668154197285284e-6 * HA_EV)
-    assert abs(temperature - kelvin) < 5e-4
-    assert tmax == 1.0e5
-    enthalpy, fingerprint = (float(part) for part in earr_text(flame75).split())
-    assert abs(enthalpy - (1.0e-3 / HA_EV)) < 5e-16
-    assert fingerprint == 0.1
+    for flame, count in ((flame38, 38), (flame75, 75), (flame98, 98), (flame150, 150)):
+        ediff, temperature, tmax = (
+            float(part.replace("d", "e").replace("D", "E")) for part in ioput_text(flame).split()
+        )
+        kelvin = 0.18 * ((count - 1) / count) / (3.1668154197285284e-6 * HA_EV)
+        assert abs(ediff - (1.1 / HA_EV)) < 5e-13
+        assert abs(temperature - kelvin) < 5e-4
+        assert tmax == 1.0e5
+        enthalpy, fingerprint = (float(part) for part in earr_text(flame).split())
+        assert abs(enthalpy - (1.0e-3 / HA_EV)) < 5e-16
+        assert fingerprint == 0.1
 
     positions = np.zeros((4, 3))
     _write_case(tmp_path, positions, 9, 3, 4, {"init": "1.d-9", "min": "1.d-12"}, published, ioput_text(flame75), earr_text(flame75))

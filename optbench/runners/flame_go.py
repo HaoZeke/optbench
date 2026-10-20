@@ -511,6 +511,14 @@ def _run_start(job: dict) -> dict:
             raise SearchStopped("divergence")
         key = tuple(float(value) for value in pos)
         _fresh, _cached = counter.charge(key)
+        if counter.calls % 1000 == 0:
+            try:
+                (work / "calls.progress").write_text(
+                    f"{counter.calls} {state['best']}\n",
+                    encoding="utf-8",
+                )
+            except OSError:
+                pass
         energy, gradient = lennard_jones(pos)
         if state["first_energy"] is None:
             state["first_energy"] = float(energy)
