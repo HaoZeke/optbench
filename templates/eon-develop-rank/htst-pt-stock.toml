@@ -5,20 +5,16 @@ code = "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)"
 code_version = "3.6.0"
 commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
 algorithm = "Dimer"
-reducer = "harness"
-failure_cap = 2000000
-kind = "htst"
-kernel = "morse_shift"
+reducer = "harness-htst"
 tuning = "stock"
 note = '''
-Stock, untuned eOn develop on the same hTST/Pt reactant, seed, displacement, and convergence as the archived alpha_dimer-qm config. Unspecified keys stay at the develop defaults. The harness scores the same Morse::force kernel through ext_pot. The start ends at the first good saddle below 1.5 eV. Nothing was tuned toward the archived window means. This code is not EON SVN.
+Stock, untuned eOn develop a7aa57472fb7d823953fd36b78cd755fa4842d30 on the same hTST/Pt reactant, seed, displacement, and convergence as the archived alpha_dimer-qm config. Unspecified keys stay at the develop defaults. The client is that develop tree's eonclient and the potential is its morse_pt. A start is one barrier window from optbench.htst, the same 15 barriers, rate_ref, prefactor, and rate_accuracy as the 2014 report. Force calls are sad-fcs. This code is not EON SVN. Nothing was tuned toward the archived means.
 '''
 seeds = [42]
 starts = ["pt"]
 geometry = "website/hTST/Pt/alpha_dimer-qm/pos.con"
-pass_limit = 40
+pass_limit = 8000
 workers = 8
-budget_seconds = 1200
 
 [ini.Main]
 job = "akmc"

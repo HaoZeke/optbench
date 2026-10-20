@@ -1,16 +1,25 @@
-force_calls 5648
-force_calls_min 5648
-force_calls_max 5648
-force_calls_median 5648.0
-call_unit total
-nfailed 0
+barrier_jobs 2455
+barrier_force_calls 1.921e+06
+barrier_windows 1
+rate_jobs 245
+rate_force_calls  1.917e+05
+rate_windows 10
+searches 2456
+missed_barriers 0
+unexpected_barriers 0
+reference_processes 15
 code eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)
 code_version 3.6.0
 commit a7aa57472fb7d823953fd36b78cd755fa4842d30
+counter htst-reducer
+reducer harness-htst
+tuning stock
+contributor Rohit Goswami
+random_seed 42
+communicator_jobs 8
+passes 308
+seconds 613.419
 algorithm Dimer
 template eon-develop-rank/htst-pt-stock
 problem hTST/Pt
-reducer harness
-counter harness
-count_keys HarnessCounter
-tuning stock
+count_keys sad-fcs

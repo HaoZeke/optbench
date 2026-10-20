@@ -1,0 +1,25 @@
+barrier_jobs 2352
+barrier_force_calls 5.577e+06
+barrier_windows 1
+rate_jobs 137
+rate_force_calls  3.209e+05
+rate_windows 16
+searches 2352
+missed_barriers 0
+unexpected_barriers 0
+reference_processes 15
+code TSASE
+code_version 1.0
+commit 98aac60b5d9905e81ee4e6b8c385f169258d0218
+counter htst-reducer
+reducer harness-htst
+tuning stock
+contributor Rohit Goswami
+random_seed 42
+communicator_jobs 8
+passes 295
+seconds 3215.67
+algorithm alphaDimer-QM
+template tsase-rank/htst-pt-alpha-dimer
+problem hTST/Pt
+count_keys sad-fcs

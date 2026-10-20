@@ -88,7 +88,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | Pt/quench_dimer-qm | — | — | not rerun |
 | Pt/tsase-dimer-qm | — | — | not rerun |
 
-Pt/alpha_dimer-qm stays the archived paper row. Two stock harness runs are ranked beside it, untuned: EON (SVN r2549) and eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30). A gap against the archived window is a finding.
+Pt/alpha_dimer-qm stays the archived paper row. Three stock runs are ranked beside it on the archived reactant, seed 42, and the 2014 barrier and rate windows. EON (SVN r2549) scored barrier_jobs 2339, barrier_force_calls 9.862e+05, rate_jobs 135, rate_force_calls 5.699e+04 over 1 barrier window and 17 rate windows. eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) scored barrier_jobs 2455, barrier_force_calls 1.921e+06, rate_jobs 245, rate_force_calls 1.917e+05 over 1 barrier window and 10 rate windows. TSASE 1.0 (98aac60b) alphaDimer-QM scored barrier_jobs 2352, barrier_force_calls 5.577e+06, rate_jobs 137, rate_force_calls 3.209e+05 over 1 barrier window and 16 rate windows. The archive is 6192, 1.908e+07, 49, and 1.509e+05, averaged over 1 barrier window and 142 rate windows. The pin SSDimer constructor has no alpha or alpha2 argument. The gaps are findings.
 
 ## lowest-eigenvector
 

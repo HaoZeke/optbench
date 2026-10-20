@@ -1,16 +1,25 @@
-force_calls 10516
-force_calls_min 10516
-force_calls_max 10516
-force_calls_median 10516.0
-call_unit total
-nfailed 0
+barrier_jobs 2339
+barrier_force_calls 9.862e+05
+barrier_windows 1
+rate_jobs 135
+rate_force_calls  5.699e+04
+rate_windows 17
+searches 2344
+missed_barriers 0
+unexpected_barriers 0
+reference_processes 15
 code EON (SVN r2549)
 code_version r2549
 commit r2549
+counter htst-reducer
+reducer harness-htst
+tuning stock
+contributor Rohit Goswami
+random_seed 42
+communicator_jobs 8
+passes 294
+seconds 458.767
 algorithm Dimer
 template eon-svn/htst-pt-stock
 problem hTST/Pt
-reducer harness
-counter harness
-count_keys HarnessCounter
-tuning stock
+count_keys sad-fcs

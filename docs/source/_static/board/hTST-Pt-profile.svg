@@ -191,6 +191,18 @@ L 486.707379 37.32381
 L 486.707379 37.32381 
 " clip-path="url(#p4e380cea4b)" style="fill: none; stroke: #ff7f0e; stroke-width: 1.5; stroke-linecap: square"/>
    </g>
+   <g id="line2d_14">
+    <path d="M 68.854964 260.6 
+L 173.318068 260.6 
+L 173.318068 260.6 
+L 277.781172 260.6 
+L 277.781172 260.6 
+L 382.244276 260.6 
+L 382.244276 37.32381 
+L 486.707379 37.32381 
+L 486.707379 37.32381 
+" clip-path="url(#p4e380cea4b)" style="fill: none; stroke: #2ca02c; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
    <g id="patch_3">
     <path d="M 47.962344 260.6 
 L 47.962344 26.16 
@@ -219,36 +231,47 @@ L 507.6 26.16
      <path d="M 261.4625 257.1 
 L 502.7 257.1 
 Q 504.1 257.1 504.1 255.7 
-L 504.1 235.398906 
-Q 504.1 233.998906 502.7 233.998906 
-L 261.4625 233.998906 
-Q 260.0625 233.998906 260.0625 235.398906 
+L 504.1 224.898359 
+Q 504.1 223.498359 502.7 223.498359 
+L 261.4625 223.498359 
+Q 260.0625 223.498359 260.0625 224.898359 
 L 260.0625 255.7 
 Q 260.0625 257.1 261.4625 257.1 
 z
 " style="fill: #ffffff; opacity: 0.8; stroke: #cccccc; stroke-linejoin: miter"/>
     </g>
-    <g id="line2d_14">
+    <g id="line2d_15">
+     <path d="M 262.8625 229.167266 
+L 269.8625 229.167266 
+L 269.8625 229.167266 
+L 276.8625 229.167266 
+L 276.8625 229.167266 
+" style="fill: none; stroke: #1f77b4; stroke-width: 1.5; stroke-linecap: square"/>
+    </g>
+    <g id="text_15">
+     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="282.4625" y="231.617266" transform="rotate(-0 282.4625 231.617266)">eon-svn/htst-pt-stock r2549 stock campaign r2549</text>
+    </g>
+    <g id="line2d_16">
      <path d="M 262.8625 239.667813 
 L 269.8625 239.667813 
 L 269.8625 239.667813 
 L 276.8625 239.667813 
 L 276.8625 239.667813 
-" style="fill: none; stroke: #1f77b4; stroke-width: 1.5; stroke-linecap: square"/>
+" style="fill: none; stroke: #ff7f0e; stroke-width: 1.5; stroke-linecap: square"/>
     </g>
-    <g id="text_15">
+    <g id="text_16">
      <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="282.4625" y="242.117813" transform="rotate(-0 282.4625 242.117813)">eon-develop-rank/htst-pt-stock 3.6.0 stock campaign a7aa574</text>
     </g>
-    <g id="line2d_15">
+    <g id="line2d_17">
      <path d="M 262.8625 250.168359 
 L 269.8625 250.168359 
 L 269.8625 250.168359 
 L 276.8625 250.168359 
 L 276.8625 250.168359 
-" style="fill: none; stroke: #ff7f0e; stroke-width: 1.5; stroke-linecap: square"/>
+" style="fill: none; stroke: #2ca02c; stroke-width: 1.5; stroke-linecap: square"/>
     </g>
-    <g id="text_16">
-     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="282.4625" y="252.618359" transform="rotate(-0 282.4625 252.618359)">eon-svn/htst-pt-stock r2549 stock campaign r2549</text>
+    <g id="text_17">
+     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="282.4625" y="252.618359" transform="rotate(-0 282.4625 252.618359)">tsase-rank/htst-pt-alpha-dimer 1.0 stock campaign 98aac60</text>
     </g>
    </g>
   </g>

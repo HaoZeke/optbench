@@ -5,23 +5,16 @@ code = "EON (SVN r2549)"
 code_version = "r2549"
 commit = "r2549"
 algorithm = "Dimer"
-reducer = "harness"
-failure_cap = 2000000
-kind = "htst"
-kernel = "morse_shift"
-asv_class = "EonSvnHtstPtStock"
+reducer = "harness-htst"
 tuning = "stock"
 note = '''
-Stock, untuned EON SVN r2549 on the archived hTST/Pt reactant. The ini is the alpha_dimer-qm config: temperature 700, seed 42, morse_pt, confidence 1.9, optimizer converged_force 0.001, max_iterations 5000, least-coordinated displacement weight 1, radius 3.3, magnitude 0.3, dimer rotations_max 50, converged_angle 5. Unspecified keys stay at the r2549 defaults, including optimizer cg and saddle-search converged_force 0.01. The harness scores Morse::force through ext_pot. The start ends at the first good saddle below 1.5 eV. Nothing was tuned toward the archived window means.
+Stock, untuned EON SVN r2549 on the archived hTST/Pt alpha_dimer-qm reactant. The ini is the archived config: temperature 700, seed 42, morse_pt, confidence 1.9, optimizer converged_force 0.001, max_iterations 5000, least-coordinated displacement weight 1, radius 3.3, magnitude 0.3, dimer rotations_max 50, converged_angle 5. Unspecified keys stay at the r2549 defaults, including optimizer cg, dimer improved, dimer opt_method sd, and saddle-search converged_force 0.01. The client is the unpatched r2549 eonclient with Fortran Morse. A start is one barrier window from optbench.htst: the archived 15 barriers below 1.3 eV, rate_ref 155055901.244, prefactor 1.2e12, rate_accuracy 0.999. Force calls are sad-fcs. The stop is one barrier window, the archive average-over count. Nothing was tuned toward the archived means.
 '''
 seeds = [42]
 starts = ["pt"]
 geometry = "website/hTST/Pt/alpha_dimer-qm/pos.con"
-pass_limit = 40
+pass_limit = 8000
 workers = 8
-asv_full = false
-asv_timeout = 1200
-budget_seconds = 1200
 
 [ini.Main]
 job = "akmc"

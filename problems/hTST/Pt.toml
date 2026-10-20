@@ -5,6 +5,21 @@ problem = "Pt"
 contract = "partial"
 entry_count = 11
 
+[input]
+archive_path = "website/hTST/Pt/alpha_dimer-qm/pos.con"
+
+[htst]
+temperature = 700
+rate_ref = 155055901.244
+rate_accuracy = 0.999
+prefactor = 1.2e12
+kb = 8.6173324e-5
+barrier_ceiling = 1.3
+barriers = [0.601, 0.601, 0.620, 0.986, 0.987, 0.989, 0.986, 0.987, 0.989, 1.196, 1.196, 1.196, 1.196, 1.207, 1.207]
+
+[sample]
+starts = 1
+
 [metrics]
 required = ["barrier_force_calls", "barrier_jobs", "rate_force_calls", "rate_jobs"]
 
