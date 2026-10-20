@@ -2,20 +2,20 @@ id = "eon-client/de-2ts-ci-neb"
 engine = "eon"
 problem = "double-ended-saddle-search/lj38_2ts_separation"
 code = "eOn"
-code_version = "3.5.0"
-commit = "4d8b34baf1ba8d2d980df29838bac1f969d1662c"
+code_version = "(develop 500350d9)"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
 algorithm = "CI-NEB"
 reducer = "harness"
-failure_cap = 10000
+failure_cap = 250000
 kind = "de-2ts"
 kernel = "lj40"
 asv_class = "EonClientDe2tsCiNeb"
 note = '''
-No 2014 eon config is in the archive for this problem. The band uses the LJ38 climbing-image settings and the problem cap of 10000 force calls, five interior images, and converged_force 0.001. Spring 5. The harness kernel is unshifted lj/cut with epsilon 1, sigma 1, and cutoff 40.
+Climbing-image NEB on all 51 pairs. Five interior images, spring 5, L-BFGS memory 20, max_move 0.05, converged_force 0.001. The stop is the L2 norm. Optimizer max_iterations, band max_iterations, and failure_cap are 250000. The harness kernel is unshifted lj/cut with epsilon 1, sigma 1, and cutoff 40. The binary is eOn develop 500350d9.
 '''
 seeds = [1]
 asv_timeout = 1200
-budget_seconds = 900
+budget_seconds = 0
 
 [ini.Main]
 job = "nudged_elastic_band"
@@ -28,7 +28,7 @@ opt_method = "lbfgs"
 convergence_metric = "norm"
 converged_force = 0.001
 max_move = 0.05
-max_iterations = 1000
+max_iterations = 250000
 lbfgs_memory = 20
 
 [ini."Nudged Elastic Band"]
@@ -39,7 +39,7 @@ doubly_nudged = false
 doubly_nudged_switching = false
 opt_method = "lbfgs"
 converged_force = 0.001
-max_iterations = 1000
+max_iterations = 250000
 spring = 5
 
 [ini.LBFGS]

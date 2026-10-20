@@ -35,6 +35,16 @@ committed = "2026-10-16"
 note = "develop HEAD built from source. The version string is 3.6.0 (7095b23a). GPR-dimer is absent: TheochemUI/gpr_optim is private and eonclient reports GPRD disabled. This pin is not the conda-forge 3.5.0 binary."
 
 [[code]]
+id = "eon-develop-500350d9"
+name = "eOn"
+role = "minimization and saddle search"
+repository = "https://github.com/TheochemUI/eon"
+ref = "fix/develop-regressions-vs-350"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
+committed = "2026-10-20"
+note = "Branch fix/develop-regressions-vs-350 at 500350d9. The version string is 3.6.0 (500350d9). Built from that commit with the stock meson wraps. GPR-dimer is absent. The lj38_2ts_separation double-ended rows use this pin."
+
+[[code]]
 id = "eon-svn"
 name = "Eon svn"
 role = "minimization and saddle search"

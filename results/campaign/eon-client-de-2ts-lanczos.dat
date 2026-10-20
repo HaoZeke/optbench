@@ -1,15 +1,16 @@
-force_calls 565
+force_calls 574
 force_calls_min 212
-force_calls_max 1958
+force_calls_max 1822
 force_calls_median 482.0
 call_unit total
 nfailed 0
 code eOn
-code_version 3.5.0
-commit 4d8b34baf1ba8d2d980df29838bac1f969d1662c
+code_version (develop 500350d9)
+commit 500350d9fae881f06c7ef194e5868da079c4be5a
 algorithm Lanczos L-BFGS
 template eon-client/de-2ts-lanczos
 problem double-ended-saddle-search/lj38_2ts_separation
 reducer harness
 counter harness
 count_keys HarnessCounter
+potential lj
