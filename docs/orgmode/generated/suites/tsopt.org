@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>LAMMPS</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>optking</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>LAMMPS</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optking</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="tsopt/LJ38">
    <th scope="row"><a href="#LJ38">LJ38</a></th>
    <td data-code="eOn" data-template="eon-client/ts-lj38-lanczos-improved" data-par2="280.33"><span class="bench-score">280.33</span><a href="#LJ38-templates">eon-client/ts-lj38-lanczos-improved</a></td>
@@ -27,7 +27,6 @@
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
-   <td data-code="optim">—</td>
    <td data-code="optking" data-template="optking/lj38-p-rfo" data-par2="7030.36"><span class="bench-score">7030.36</span><a href="#LJ38-templates">optking/lj38-p-rfo</a></td>
    <td data-code="softsaddle">—</td>
    <td data-code="tsase" data-template="tsase/dimer-lj38" data-par2="20000"><span class="bench-score">20000</span><a href="#LJ38-templates">tsase/dimer-lj38</a></td>
@@ -51,7 +50,6 @@
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
-   <td data-code="optim">—</td>
    <td data-code="optking" data-template="optking/pt-rs-irfo" data-par2="1059.98"><span class="bench-score">1059.98</span><a href="#pt-island-templates">optking/pt-rs-irfo</a></td>
    <td data-code="softsaddle">—</td>
    <td data-code="tsase" data-template="tsase/dimer-pt" data-par2="1144.31"><span class="bench-score">1144.31</span><a href="#pt-island-templates">tsase/dimer-pt</a></td>

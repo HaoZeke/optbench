@@ -1,8 +1,7 @@
 """OPTIM L-BFGS through the ASE socket.
 
-The binary is the OPTIM target from the Wales snapshot
-``http://www-wales.ch.cam.ac.uk/svn.tar.bz2``. The pin is the sha256 of
-that file. The snapshot has no git commit. Each ``COMPUTE`` on the relay
+The binary is the OPTIM target at SVNREV
+``df8da599267534fbe43a250e578f7396a7946311``. Each ``COMPUTE`` on the relay
 is one ``pes.evaluate``. OPTIM's own counter is not the score.
 
 ``optim/unhooked`` and every template that is not minimization L-BFGS
@@ -26,8 +25,7 @@ from .geometries import load_starts, point_settings
 
 ENGINE = "optim"
 CODE = "optim"
-SNAPSHOT = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
-SHA256 = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+COMMIT = "df8da599267534fbe43a250e578f7396a7946311"
 _RELAY = Path(__file__).with_name("fmlip_relay.py")
 
 
@@ -64,8 +62,7 @@ def available() -> str | None:
     missing = binary if not binary.is_file() else _RELAY
     return (
         "OPTIM has no harness potential in this tree. "
-        f"The pin is the sha256 {SHA256} of {SNAPSHOT} "
-        "(122743078 bytes). The archive is not a git commit. "
+        f"The pin is SVNREV {COMMIT}. "
         f"{missing} is not present. "
         "OPTIM's own call count is not a score."
     )
@@ -81,7 +78,7 @@ def _section(template: dict) -> dict:
 
 def _unhooked(template_name: str) -> RuntimeError:
     return RuntimeError(
-        f"{template_name} writes nothing. The pin is the sha256 {SHA256}. "
+        f"{template_name} writes nothing. The pin is SVNREV {COMMIT}. "
         "Only a minimization L-BFGS template calls the ASE socket. "
         "Noise, saddle search, NEB, tsopt, hTST, and PATHSAMPLE are not scored."
     )

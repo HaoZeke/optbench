@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>LAMMPS</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>optking</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>LAMMPS</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optking</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="minimization/lj38">
    <th scope="row"><a href="#lj38">Lennard-Jones 38 clusters</a></th>
    <td data-code="eOn" data-template="eon/lj38-lbfgs-m100" data-par2="180.137"><span class="bench-score">180.137</span><a href="#lj38-templates">eon/lj38-lbfgs-m100</a></td>
@@ -27,7 +27,6 @@
    <td data-code="compass">—</td>
    <td data-code="dlfind" data-template="dlfind/lbfgs-lj38" data-par2="231.908"><span class="bench-score">231.908</span><a href="#lj38-templates">dlfind/lbfgs-lj38</a></td>
    <td data-code="lammps" data-template="lammps/hftn-lj38" data-par2="1123.81"><span class="bench-score">1123.81</span><a href="#lj38-templates">lammps/hftn-lj38</a></td>
-   <td data-code="optim" data-template="optim/lbfgs-lj38" data-par2="270.341"><span class="bench-score">270.341</span><a href="#lj38-templates">optim/lbfgs-lj38</a></td>
    <td data-code="optking">—</td>
    <td data-code="softsaddle">—</td>
    <td data-code="tsase" data-template="tsase/lbfgs-lj38" data-par2="257.2"><span class="bench-score">257.2</span><a href="#lj38-templates">tsase/lbfgs-lj38</a></td>
@@ -51,7 +50,6 @@
    <td data-code="compass">—</td>
    <td data-code="dlfind" data-template="dlfind/lbfgs-lj38-noise-s0" data-par2="231.908"><span class="bench-score">231.908</span><a href="#lj38-noise-templates">dlfind/lbfgs-lj38-noise-s0</a></td>
    <td data-code="lammps" data-template="lammps/hftn-lj38-noise-s0" data-par2="1123.81"><span class="bench-score">1123.81</span><a href="#lj38-noise-templates">lammps/hftn-lj38-noise-s0</a></td>
-   <td data-code="optim">—</td>
    <td data-code="optking">—</td>
    <td data-code="softsaddle">—</td>
    <td data-code="tsase">—</td>
@@ -75,7 +73,6 @@
    <td data-code="compass">—</td>
    <td data-code="dlfind" data-template="dlfind/lbfgs-morse" data-par2="13626.5"><span class="bench-score">13626.5</span><a href="#morse-bulk-templates">dlfind/lbfgs-morse</a></td>
    <td data-code="lammps" data-template="lammps/fire-morse" data-par2="17656.7"><span class="bench-score">17656.7</span><a href="#morse-bulk-templates">lammps/fire-morse</a></td>
-   <td data-code="optim" data-template="optim/lbfgs-morse" data-par2="17408.8"><span class="bench-score">17408.8</span><a href="#morse-bulk-templates">optim/lbfgs-morse</a></td>
    <td data-code="optking">—</td>
    <td data-code="softsaddle">—</td>
    <td data-code="tsase" data-template="tsase/lbfgs-morse" data-par2="17606.4"><span class="bench-score">17606.4</span><a href="#morse-bulk-templates">tsase/lbfgs-morse</a></td>
@@ -95,7 +92,7 @@
    <figure class="bench-plot"><a href="../../_static/board/minimization-lj38-profile.svg"><picture><source srcset="../../_static/board/minimization-lj38-profile.webp" type="image/webp"><img src="../../_static/board/minimization-lj38-profile.png" alt="Dolan-More profile for minimization/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/minimization-lj38-cost.svg"><picture><source srcset="../../_static/board/minimization-lj38-cost.webp" type="image/webp"><img src="../../_static/board/minimization-lj38-cost.png" alt="Cost versus success for minimization/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="lj38-templates">
-   <summary>All templates (112 ranked)</summary>
+   <summary>All templates (111 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="minimization/lj38">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
@@ -119,7 +116,6 @@
    <tr><td data-field="template">sella/lj38-min-tuned</td><td data-field="version">Sella 2.6.0</td><td data-field="commit">6cfb60cdb100</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">253.921</td><td data-field="success_rate">1</td><td data-field="wilson">0.996173–1</td><td data-field="median_calls">248</td><td data-field="mean_calls">253.921</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">tsase/lbfgs-lj38</td><td data-field="version">tsase 1.0</td><td data-field="commit">98aac60b5d99</td><td data-field="source">campaign</td><td data-field="par2_mean">257.2</td><td data-field="success_rate">0.996</td><td data-field="wilson">0.98976–0.998443</td><td data-field="median_calls">169</td><td data-field="mean_calls">177.96</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 4</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">pele/lj38-mylbfgs</td><td data-field="version">pele 0.1.2</td><td data-field="commit">b7081b932a06</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">268.036</td><td data-field="success_rate">0.999</td><td data-field="wilson">0.994357–0.999823</td><td data-field="median_calls">235</td><td data-field="mean_calls">248.224</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 1</td><td data-field="n">1000</td></tr>
-   <tr><td data-field="template">optim/lbfgs-lj38</td><td data-field="version">optim svn-snapshot</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign</td><td data-field="par2_mean">270.341</td><td data-field="success_rate">0.998</td><td data-field="wilson">0.992737–0.999451</td><td data-field="median_calls">217</td><td data-field="mean_calls">230.724</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 2</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">rgmin/lj38-lbfgs-m20</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">282.64</td><td data-field="success_rate">0.996</td><td data-field="wilson">0.98976–0.998443</td><td data-field="median_calls">192</td><td data-field="mean_calls">203.366</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 4</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">rgmin/lj38-lbfgs-m20</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">f15726f1c798</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">282.64</td><td data-field="success_rate">0.996</td><td data-field="wilson">0.98976–0.998443</td><td data-field="median_calls">192</td><td data-field="mean_calls">203.366</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 4</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">rgmin/lj38-lbfgs-m20-tuned</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">282.64</td><td data-field="success_rate">0.996</td><td data-field="wilson">0.98976–0.998443</td><td data-field="median_calls">192</td><td data-field="mean_calls">203.366</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 4</td><td data-field="n">1000</td></tr>
@@ -736,7 +732,7 @@
    <figure class="bench-plot"><a href="../../_static/board/minimization-morse-bulk-profile.svg"><picture><source srcset="../../_static/board/minimization-morse-bulk-profile.webp" type="image/webp"><img src="../../_static/board/minimization-morse-bulk-profile.png" alt="Dolan-More profile for minimization/morse-bulk" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/minimization-morse-bulk-cost.svg"><picture><source srcset="../../_static/board/minimization-morse-bulk-cost.webp" type="image/webp"><img src="../../_static/board/minimization-morse-bulk-cost.png" alt="Cost versus success for minimization/morse-bulk" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="morse-bulk-templates">
-   <summary>All templates (105 ranked)</summary>
+   <summary>All templates (104 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="minimization/morse-bulk">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
@@ -837,7 +833,6 @@
    <tr><td data-field="template">ase/morse-preconfire-tuned</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">365.52</td><td data-field="success_rate">1</td><td data-field="wilson">0.963007–1</td><td data-field="median_calls">372</td><td data-field="mean_calls">365.52</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">dlfind/lbfgs-morse</td><td data-field="version">dlfind 0.0.3</td><td data-field="commit">4167998d16d8</td><td data-field="source">campaign</td><td data-field="par2_mean">13626.5</td><td data-field="success_rate">0.32</td><td data-field="wilson">0.236691–0.416626</td><td data-field="median_calls">74.5</td><td data-field="mean_calls">80.42</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 68</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">dlfind/cg-morse</td><td data-field="version">dlfind 0.0.3</td><td data-field="commit">4167998d16d8</td><td data-field="source">campaign</td><td data-field="par2_mean">16449.2</td><td data-field="success_rate">0.18</td><td data-field="wilson">0.117002–0.266674</td><td data-field="median_calls">234.5</td><td data-field="mean_calls">247.59</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 82</td><td data-field="n">100</td></tr>
-   <tr><td data-field="template">optim/lbfgs-morse</td><td data-field="version">optim svn-snapshot</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign</td><td data-field="par2_mean">17408.8</td><td data-field="success_rate">0.13</td><td data-field="wilson">0.0775717–0.209804</td><td data-field="median_calls">65</td><td data-field="mean_calls">65.19</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 87</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">dlfind/sd-morse</td><td data-field="version">dlfind 0.0.3</td><td data-field="commit">4167998d16d8</td><td data-field="source">campaign</td><td data-field="par2_mean">17438.6</td><td data-field="success_rate">0.13</td><td data-field="wilson">0.0775717–0.209804</td><td data-field="median_calls">264</td><td data-field="mean_calls">282.19</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 87</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">tsase/lbfgs-morse</td><td data-field="version">tsase 1.0</td><td data-field="commit">98aac60b5d99</td><td data-field="source">campaign</td><td data-field="par2_mean">17606.4</td><td data-field="success_rate">0.12</td><td data-field="wilson">0.0699941–0.198121</td><td data-field="median_calls">50</td><td data-field="mean_calls">50.37</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 88</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">lammps/fire-morse</td><td data-field="version">lammps 30 Sep 2026</td><td data-field="commit">8de817dd79bf</td><td data-field="source">campaign</td><td data-field="par2_mean">17656.7</td><td data-field="success_rate">0.12</td><td data-field="wilson">0.0699941–0.198121</td><td data-field="median_calls">478</td><td data-field="mean_calls">473.48</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 88</td><td data-field="n">100</td></tr>

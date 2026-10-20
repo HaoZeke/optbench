@@ -84,8 +84,6 @@ success-only median. A row with no success has no median.
 | minimization/lj38-noise | dlfind/lbfgs-lj38-noise-s1em2 | 974/1000 | 26 wrong stationary | 199 |
 | minimization/morse-bulk | dlfind/lbfgs-morse | 32/100 | 68 wrong stationary | 77 |
 | minimization/morse-bulk | dlfind/sd-morse | 13/100 | 87 wrong stationary | 253 |
-| minimization/morse-bulk | optim/lbfgs-morse | 13/100 | 87 wrong stationary | 72 |
-| minimization/lj38 | optim/lbfgs-lj38 | 998/1000 | 2 wrong stationary | 217 |
 | double-ended-saddle-search/lj38 | compass/sqnm | 47/50 | 3 cap | 1221 |
 | double-ended-saddle-search/lj38_2ts_separation | compass/sqnm | 41/51 | 9 cap, 1 wrong stationary | 2265 |
 | neb/Pt-heptamer | compass/sqnm | 13/13 | 0 | 548 |
@@ -138,33 +136,23 @@ because the cap is raised before that geometry is stored. The class is cap.
 
 ## OPTIM and PATHSAMPLE
 
-Pin `optim`. The snapshot is `http://www-wales.ch.cam.ac.uk/svn.tar.bz2`,
-122743078 bytes, sha256
-`02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f`.
-There is no git commit. `OPTIM/source/py.f90` is the Paramonov–Yaliraki
-ellipsoid potential, not a Python hook. The external hook is the ASE socket
-in `INTERFACES/pysocket/ase_interface.f90`. The tarball does not contain
-`fmlip_relay.py`. The harness server speaks that protocol: each `COMPUTE`
-is one `pes.evaluate`. `EV` and `ANG` scales are 1. The OPTIM target was
-built with gfortran, `WITH_ALIGN` off and `WITH_OPENMP` off. Minimization
-L-BFGS sends `BFGSMIN` with an RMS stop equal to the Euclidean force norm
-divided by `sqrt(3N)`, `UPDATES` 4, `MAXSTEP` 0.2, and `STEPS` equal to
-the cap. The relay refuses the call that would pass the cap and does not
-count it. A one-start check on LJ38 `cluster_0000` made 228 harness calls.
-OPTIM reported 228 energy-and-gradient calls. The stored point re-evaluates
-to energy `-163.2168156980899` and Euclidean force `0.00817050460275337`.
-That check is not itself a campaign row. The 1000-start LJ38 L-BFGS row is
-998 of 1000, 2 wrong stationary, success median 217. Morse bulk L-BFGS is 13 of 100. The
-other 87 meet the force stop with a Hessian index other than 0, so they
-are wrong stationary. The success median is 72. Start `pos_0000` took 55
-harness calls and stopped at force `0.000842553062284986`, energy
-`-1421.4513232624358`, vibrational index 6. `optim/unhooked` writes nothing.
-Noise is not scored: the relay has no noisy-force window. Saddle search,
-NEB, tsopt, and hTST are not scored: those OPTIM keywords are not connected
-to this socket. PATHSAMPLE is in the same snapshot. The PATHSAMPLE target linked
-(gfortran, `WITH_OPENMP` off). It does not call `pes.evaluate`. It writes
-`odata.*` and submits the `EXEC` program, which is OPTIM. No PATHSAMPLE
-number is written.
+Pin `optim`, SVNREV `df8da599267534fbe43a250e578f7396a7946311`.
+`OPTIM/source/py.f90` is the Paramonov–Yaliraki ellipsoid potential, not a
+Python hook. The external hook is the ASE socket in
+`INTERFACES/pysocket/ase_interface.f90`. The harness server speaks that
+protocol: each `COMPUTE` is one `pes.evaluate`. `EV` and `ANG` scales are
+1. The OPTIM target was built with gfortran, `WITH_ALIGN` off and
+`WITH_OPENMP` off. Minimization L-BFGS sends `BFGSMIN` with an RMS stop
+equal to the Euclidean force norm divided by `sqrt(3N)`, `UPDATES` 4,
+`MAXSTEP` 0.2, and `STEPS` equal to the cap. The relay refuses the call
+that would pass the cap and does not count it. A one-start check on LJ38
+`cluster_0000` made 228 harness calls. OPTIM reported 228
+energy-and-gradient calls. The stored point evaluates to energy
+`-163.2168156980899` and Euclidean force `0.00817050460275337`. That
+check is not itself a campaign row. `optim/unhooked` writes nothing.
+Noise is not scored: the relay has no noisy-force window. PATHSAMPLE does
+not call `pes.evaluate`. It writes `odata.*` and submits the `EXEC`
+program, which is OPTIM. No PATHSAMPLE number is written.
 
 ## pARTn
 
