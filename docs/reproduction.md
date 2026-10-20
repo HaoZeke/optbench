@@ -8,7 +8,7 @@ The pele transition-state paper score is the 2014 stop: break at the first RMS b
 
 OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.
 
-OPTIM image 26635 on the Pt-island DNEB row is the current svn.tar.bz2, sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. Stock NEWNEB and BFGSTS take one step. Every start spends 116 energy+gradient calls and none contain Converged to TS, so there is no success mean. The harness rank is PAR-2 6000 on all 59 starts. The archive success mean stays 117 with nfailed 0.
+OPTIM image 26635 on the Pt-island DNEB row is the current svn.tar.bz2, sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. BFGSSTEPS, STEPS, and the NEWNEB iteration field default to 1, so a deck that omits them stops after one step. The deck sets those limits, and the BFGSTS step fields, to the problem cap 3000, and sets the RMS gradient to 0.001. All 59 logs contain Converged to TS. 57 energy+gradient tallies are over that cap. The success mean of the two starts under the cap is 1620, median 1619.5, min 934, max 2305, nfailed 57. The archive success mean stays 117 with nfailed 0. The harness rank is PAR-2 5851.51.
 
 EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.
 
@@ -45,7 +45,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | pt-island/eon-lanczos | force_calls 325 | 222 | not reproduced; pt_lanczos |
 | pt-island/eon-lanczos-improved | force_calls 222 | 181 | not reproduced; pt_lanczos |
 | pt-island/optim | force_calls 103 | 138 | not reproduced; optim_pt_units |
-| pt-island/optim-6 | nfailed 0 | nfailed 59 | not rerun |
+| pt-island/optim-6 | nfailed 0 | nfailed 57 | not rerun |
 | pt-island/optim-cl-string | — | — | not rerun |
 | pt-island/pele | — | — | not rerun |
 
