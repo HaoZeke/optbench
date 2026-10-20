@@ -141,26 +141,26 @@
    <td data-code="eOn" data-template="eon-client/de-2ts-lanczos-improved" data-par2="520.333">520.333<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">eon-client/de-2ts-lanczos-improved</a></td>
    <td data-code="Eon svn" data-template="eon-svn/de-2ts-lanczos-improved" data-par2="502.784">502.784<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">eon-svn/de-2ts-lanczos-improved</a></td>
    <td data-code="rgmin">—</td>
-   <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="8024.43">8024.43<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
-   <td data-code="geodesic" data-template="geodesic/ci-neb-lbfgs" data-par2="16807.4">16807.4<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">geodesic/ci-neb-lbfgs</a></td>
-   <td data-code="ASE" data-template="ase/de-lj38-2ts-default" data-par2="20000">20000<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">ase/de-lj38-2ts-default</a></td>
+   <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="168024">168024<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
+   <td data-code="geodesic" data-template="geodesic/ci-neb-lbfgs" data-par2="412102">412102<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">geodesic/ci-neb-lbfgs</a></td>
+   <td data-code="ASE" data-template="ase/de-lj38-2ts-tuned" data-par2="442917">442917<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">ase/de-lj38-2ts-tuned</a></td>
    <td data-code="Sella" data-template="sella/de-lj38-2ts-tuned" data-par2="30105.9">30105.9<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">sella/de-lj38-2ts-tuned</a></td>
    <td data-code="GMIN">—</td>
    <td data-code="pele">—</td>
-   <td data-code="LAMMPS" data-template="lammpsneb/ci-quickmin" data-par2="19017.8">19017.8<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">lammpsneb/ci-quickmin</a></td>
+   <td data-code="LAMMPS" data-template="lammpsneb/ci-quickmin" data-par2="451959">451959<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">lammpsneb/ci-quickmin</a></td>
    <td data-code="pysisyphus">—</td>
    <td data-code="AIRSS">—</td>
    <td data-code="vc-SQNM">—</td>
    <td data-code="TorchSim">—</td>
    <td data-code="artn">—</td>
-   <td data-code="compass" data-template="compass/sqnm" data-par2="6713.37">6713.37<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">compass/sqnm</a></td>
+   <td data-code="compass" data-template="compass/sqnm" data-par2="100831">100831<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
    <td data-code="optim">—</td>
    <td data-code="optking">—</td>
-   <td data-code="pygsm" data-template="pygsm/de-gsm" data-par2="14938.5">14938.5<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">pygsm/de-gsm</a></td>
+   <td data-code="pygsm" data-template="pygsm/de-gsm" data-par2="296472">296472<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">pygsm/de-gsm</a></td>
    <td data-code="softsaddle">—</td>
-   <td data-code="tsase" data-template="tsase/ci-neb" data-par2="18812.1">18812.1<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">tsase/ci-neb</a></td>
+   <td data-code="tsase" data-template="tsase/ci-neb" data-par2="451753">451753<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">tsase/ci-neb</a></td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island">
    <th scope="row"><a href="generated/suites/double-ended-saddle-search.html#pt-island">pt-island</a></th>

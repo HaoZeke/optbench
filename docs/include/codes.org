@@ -396,10 +396,10 @@
    <td data-field="template">rgsaddle/ew-ci-neb-lbfgs</td>
    <td data-field="version">rgsaddle 0.2.2</td>
    <td data-field="commit">c0db2b8d333c</td>
-   <td data-field="par2_mean">8024.43</td>
+   <td data-field="par2_mean">168024</td>
    <td data-field="mean_calls">4639.8</td>
    <td data-field="median_calls">2414</td>
-   <td data-field="failures">crash 0, divergence 0, cap 16, not_converged 0, wrong_stationary 1</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 16, wrong_stationary 1</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-template="rgsaddle/ew-ci-neb-lbfgs">
@@ -499,10 +499,10 @@
    <td data-field="template">geodesic/ci-neb-lbfgs</td>
    <td data-field="version">geodesic 1.0.0</td>
    <td data-field="commit">476aa041f562</td>
-   <td data-field="par2_mean">16807.4</td>
+   <td data-field="par2_mean">412102</td>
    <td data-field="mean_calls">8401.49</td>
    <td data-field="median_calls">10000</td>
-   <td data-field="failures">crash 0, divergence 0, cap 38, not_converged 0, wrong_stationary 4</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 38, wrong_stationary 4</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-template="geodesic/ase-de-pt-tuned">
@@ -553,15 +553,15 @@
    <td data-field="failures">crash 0, divergence 0, cap 29, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="ase/de-lj38-2ts-default">
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="ase/de-lj38-2ts-tuned">
    <td>lj38_2ts_separation</td>
-   <td data-field="template">ase/de-lj38-2ts-default</td>
+   <td data-field="template">ase/de-lj38-2ts-tuned</td>
    <td data-field="version">ASE 3.29.0</td>
    <td data-field="commit">f27c0005ae6a</td>
-   <td data-field="par2_mean">20000</td>
-   <td data-field="mean_calls">2500</td>
-   <td data-field="median_calls">2500</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 51, wrong_stationary 0</td>
+   <td data-field="par2_mean">442917</td>
+   <td data-field="mean_calls">37035.3</td>
+   <td data-field="median_calls">40001</td>
+   <td data-field="failures">crash 0, divergence 0, cap 45, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-template="ase/de-pt-island-tuned">
@@ -978,10 +978,10 @@
    <td data-field="template">tsase/ci-neb</td>
    <td data-field="version">tsase 1.0</td>
    <td data-field="commit">98aac60b5d99</td>
-   <td data-field="par2_mean">18812.1</td>
+   <td data-field="par2_mean">451753</td>
    <td data-field="mean_calls">9690.35</td>
    <td data-field="median_calls">10000</td>
-   <td data-field="failures">crash 0, divergence 0, cap 43, not_converged 1, wrong_stationary 2</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 44, wrong_stationary 2</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-template="tsase/ci-neb">
@@ -1110,7 +1110,7 @@
    <td data-field="template">lammpsneb/ci-quickmin</td>
    <td data-field="version">LAMMPS 30 Sep 2026</td>
    <td data-field="commit">8de817dd79bf</td>
-   <td data-field="par2_mean">19017.8</td>
+   <td data-field="par2_mean">451959</td>
    <td data-field="mean_calls">9982</td>
    <td data-field="median_calls">9982</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 45, wrong_stationary 1</td>
@@ -1250,10 +1250,10 @@
    <td data-field="template">compass/sqnm</td>
    <td data-field="version">compass 1.0.0</td>
    <td data-field="commit">22da7bd5f69c</td>
-   <td data-field="par2_mean">6713.37</td>
+   <td data-field="par2_mean">100831</td>
    <td data-field="mean_calls">4586.12</td>
    <td data-field="median_calls">4031</td>
-   <td data-field="failures">crash 0, divergence 0, cap 9, not_converged 0, wrong_stationary 1</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 9, wrong_stationary 1</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-template="compass/sqnm">
@@ -1497,10 +1497,10 @@
    <td data-field="template">pygsm/de-gsm</td>
    <td data-field="version">pygsm 1.0.0+692.g1b4d5a5.dirty</td>
    <td data-field="commit">1b4d5a5557a6</td>
-   <td data-field="par2_mean">14938.5</td>
-   <td data-field="mean_calls">4451.18</td>
+   <td data-field="par2_mean">296472</td>
+   <td data-field="mean_calls">5486.86</td>
    <td data-field="median_calls">3170</td>
-   <td data-field="failures">crash 0, divergence 18, cap 10, not_converged 8, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 20, cap 0, not_converged 10, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
    </tbody></table></div>
