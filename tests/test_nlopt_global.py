@@ -427,6 +427,116 @@ def test_a_checkpoint_resumes_the_same_trajectory(tmp_path: Path):
     assert resumed["success"] == full["success"]
 
 
+def test_a_killed_lj98_start_resumes_its_checkpoint(tmp_path: Path):
+    """SIGKILL leaves the last finished hop, and that file resumes exactly."""
+    pytest.importorskip("nlopt")
+    import os
+    import signal
+    import subprocess
+    import sys
+    import time
+
+    from optbench.campaign import resolve_problem
+    from optbench.globalopt import energy_tolerance, reference_energy
+    from optbench.runners.nlopt_global import _job, _load_geometries, _restore_basin, _settings, run_job
+
+    shard = tmp_path / "shard"
+    shard.mkdir()
+    child = tmp_path / "child.py"
+    child.write_text(
+        "\n".join(
+            [
+                "import os",
+                "from pathlib import Path",
+                "os.environ.setdefault('OMP_NUM_THREADS', '1')",
+                "from optbench.campaign import load_template, resolve_problem",
+                "from optbench.runners.nlopt_global import run_basin_shard",
+                f"root = Path({str(ROOT)!r})",
+                "problem = resolve_problem(root, 'globalopt/lj98')",
+                "template = load_template(root, 'nloptglobal/lj98-lbfgs-bh')",
+                "run_basin_shard(",
+                "    root, problem, template, [90], workers=1,",
+                f"    shard_dir=Path({str(shard)!r}), cap=50_000_000, checkpoint_calls=0,",
+                ")",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    env = os.environ.copy()
+    env["OMP_NUM_THREADS"] = "1"
+    proc = subprocess.Popen(
+        [sys.executable, str(child)],
+        cwd=ROOT,
+        env=env,
+        start_new_session=True,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+    progress = shard / "090.progress.json"
+    deadline = time.perf_counter() + 90.0
+    killed = None
+    while time.perf_counter() < deadline:
+        if progress.is_file():
+            try:
+                killed = json.loads(progress.read_text(encoding="utf-8"))
+            except json.JSONDecodeError:
+                killed = None
+            if killed and int(killed.get("calls", 0)) >= 15_000:
+                break
+        if proc.poll() is not None:
+            break
+        time.sleep(0.05)
+    os.killpg(proc.pid, signal.SIGKILL)
+    proc.wait(timeout=10)
+    assert killed is not None and int(killed["calls"]) >= 15_000
+    killed = json.loads(progress.read_text(encoding="utf-8"))
+    assert killed["schema"] == "optbench.bh-progress/v3"
+    assert killed["potential"] == "lj-cut"
+    assert killed["start"] == "coords.91"
+    assert killed["index"] == 90
+
+    problem = resolve_problem(ROOT, "globalopt/lj98")
+    template = load_template(ROOT, "nloptglobal/lj98-lbfgs-bh")
+    settings = _settings(problem, template)
+    loaded = _load_geometries(
+        ROOT,
+        problem,
+        None,
+        ROOT / "results" / "campaign" / "geometries",
+        shard / "geometries.dat",
+    )
+    name, coords = loaded[90]
+    base = _job(90, name, coords, settings, reference_energy(problem), energy_tolerance(problem))
+    base["cap"] = 50_000_000
+    base["checkpoint_calls"] = 0
+    restored = _restore_basin(killed, base, len(base["coords"]))
+    assert restored is not None
+    assert restored["calls"] == int(killed["calls"])
+    assert restored["rng"].bit_generator.state == killed["rng"]
+    assert np.array_equal(restored["current"], np.asarray(killed["current"], dtype=np.float64))
+    assert np.array_equal(restored["best"], np.asarray(killed["best"], dtype=np.float64))
+
+    def resume(path: Path, hops: int) -> dict:
+        path.write_text(json.dumps(killed) + "\n", encoding="utf-8")
+        job = dict(base)
+        job["checkpoint"] = str(path)
+        job["max_hops"] = hops
+        return run_job(job)
+
+    resume(shard / "idle.progress.json", 0)
+    idle = json.loads((shard / "idle.progress.json").read_text(encoding="utf-8"))
+    for key in ("calls", "code", "current", "current_energy", "best", "best_energy", "rng", "seed", "start"):
+        assert idle[key] == killed[key]
+    resume(shard / "left.progress.json", 2)
+    resume(shard / "right.progress.json", 2)
+    left = json.loads((shard / "left.progress.json").read_text(encoding="utf-8"))
+    right = json.loads((shard / "right.progress.json").read_text(encoding="utf-8"))
+    assert int(left["calls"]) > int(killed["calls"])
+    for key in ("calls", "code", "current", "current_energy", "best", "best_energy", "rng"):
+        assert left[key] == right[key]
+
+
 def test_a_shard_keeps_finished_starts(tmp_path: Path):
     pytest.importorskip("nlopt")
     from optbench.campaign import resolve_problem
