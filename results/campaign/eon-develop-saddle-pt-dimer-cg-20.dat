@@ -1,0 +1,21 @@
+force_calls 8143547
+force_calls_min 8143547
+force_calls_max 8143547
+force_calls_median 8143547.0
+call_unit total
+nfailed 0
+code eOn
+code_version (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)
+commit a7aa57472fb7d823953fd36b78cd755fa4842d30
+algorithm Dimer CG
+template eon/develop-saddle-pt-dimer-cg-20
+problem saddle-search/pt-island
+reducer harness
+counter harness
+count_keys HarnessCounter
+unique_saddles 56
+fraction_connected 0.5437258778122941
+total_searches 10623
+qualifying 27
+client_calls 5174786
+note Stock unpatched eOn develop a7aa57472fb7d823953fd36b78cd755fa4842d30, Fortran build, harness morse/smooth/linear, seed 1000, pt-island, stop at 27 good saddles below 1.5 eV. HarnessCounter is 8143547 and the client search table is 5174786. The archived eon-dimer-cg-20-rotations mean stays the paper row.

@@ -1,0 +1,21 @@
+force_calls 6507064
+force_calls_min 6507064
+force_calls_max 6507064
+force_calls_median 6507064.0
+call_unit total
+nfailed 0
+code EON
+code_version (SVN r2549)
+commit r2549
+algorithm Dimer CG
+template eon-svn/saddle-pt-dimer-cg-20
+problem saddle-search/pt-island
+reducer harness
+counter harness
+count_keys HarnessCounter
+unique_saddles 111
+fraction_connected 0.6535559802836737
+total_searches 9941
+qualifying 27
+client_calls 6499595
+note Stock unpatched EON SVN r2549, Fortran build, harness morse/smooth/linear, seed 1000, pt-island, stop at 27 good saddles below 1.5 eV. The archived eon-dimer-cg-20-rotations mean stays the paper row.

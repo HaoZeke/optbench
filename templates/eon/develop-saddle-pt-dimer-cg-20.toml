@@ -1,0 +1,68 @@
+id = "eon/develop-saddle-pt-dimer-cg-20"
+engine = "eon"
+problem = "saddle-search/pt-island"
+code = "eOn"
+code_version = "(develop a7aa57472fb7d823953fd36b78cd755fa4842d30)"
+commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+algorithm = "Dimer CG"
+reducer = "harness"
+failure_cap = 100000000
+tuning = "default"
+kind = "akmc"
+kernel = "morse"
+note = """Stock eOn develop a7aa57472fb7d823953fd36b78cd755fa4842d30, built with Fortran and not patched. This is the git code at https://github.com/TheochemUI/eon, not EON SVN. The archived eon-dimer-cg-20-rotations number stays the paper row. This run is the same Pt-island start, the same 0.001 eV/Ang force stop, and the same stop at 27 good saddles below 1.5 eV. Optimizer opt_method is cg, max_move 0.2, max_iterations 1000. Dimer rotations_max is 20 and converged_angle is 5. improved and the dimer rotation method stay at the develop defaults, improved true and conjugate gradient. Displacement is atoms 0-6, radius 3.3, magnitude 0.1. Temperature 700 K, confidence 1.1, prefactor 5e12, max_energy 5. Communicator num_jobs is 8. Bowl breakout stays off. The potential is the harness morse/smooth/linear kernel. Seed 1000."""
+
+seeds = [1000]
+starts = ["pt-island"]
+pass_limit = 4000
+workers = 8
+declare_partial = false
+asv_full = false
+
+[ini.Main]
+job = "akmc"
+temperature = 700
+random_seed = 1
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "cg"
+convergence_metric = "norm"
+converged_force = 0.001
+max_move = 0.2
+max_iterations = 1000
+
+[ini.AKMC]
+confidence = 1.1
+thermally_accessible_window = 99999
+confidence_scheme = "old"
+
+[ini."Process Search"]
+minimize_first = true
+
+[ini.Communicator]
+type = "local"
+num_jobs = 8
+number_of_CPUs = 1
+client_path = "eonclient"
+
+[ini."Saddle Search"]
+min_mode_method = "dimer"
+displace_listed_atom_weight = 1
+displace_all_listed = false
+displace_atom_list = "0,1,2,3,4,5,6"
+displace_radius = 3.3
+displace_magnitude = 0.1
+max_energy = 5.0
+max_iterations = 1000
+converged_force = 0.001
+
+[ini.Prefactor]
+default_value = 5e12
+
+[ini.Dimer]
+converged_angle = 5.0
+rotations_max = 20
+rotations_min = 1
