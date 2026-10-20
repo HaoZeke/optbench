@@ -414,7 +414,9 @@ def specs() -> list[dict]:
                 "ase-ga RandomMutation length 2, then an ASE LBFGS quench at fmax 0.001. A raw mutant energy is not a hit.",
             )
         )
-        if slug != "binary":
+        # LJ38 and LJ75 PyBCGA belong to cells/bpga/go. A second template
+        # would put the same code on the board twice.
+        if slug not in {"binary", "lj38", "lj75"}:
             found.append(
                 _spec(
                     f"pybcga/{slug}",
