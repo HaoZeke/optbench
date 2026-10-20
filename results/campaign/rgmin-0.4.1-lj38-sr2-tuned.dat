@@ -18,8 +18,8 @@ template rgmin/lj38-sr2-tuned
 tuning tuned
 counter harness
 par2_mean 2298.441
-wilson_low 0.986971831758
-wilson_high 0.997247330858
+rate_low 0.986971831758
+rate_high 0.997247330858
 par2_median 1840.5
 par2_median_low 1773.4875
 par2_median_high 1911

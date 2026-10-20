@@ -1,6 +1,6 @@
 {
   "counter": "harness",
-  "legacy": {
+  "success_mean": {
     "force_calls": 3079,
     "force_calls_max": 5081,
     "force_calls_median": 2902.5,
@@ -73,12 +73,12 @@
     "par_factor": 2,
     "q25": 20000.0,
     "q75": 20000.0,
-    "scoring": "par2-wilson-bootstrap",
+    "scoring": "par2-rate-bootstrap",
     "success_only_mean": 3078.9,
     "success_rate": 0.19607843137254902,
     "successes": 10,
-    "wilson_high": 0.3245807948136561,
-    "wilson_low": 0.11015342512466689
+    "rate_high": 0.3245807948136561,
+    "rate_low": 0.11015342512466689
   },
   "template": "rgsaddle/oci-neb"
 }

@@ -1,6 +1,6 @@
 {
   "counter": "harness",
-  "legacy": {
+  "success_mean": {
     "force_calls": 23,
     "force_calls_max": 33,
     "force_calls_median": 22.0,
@@ -66,12 +66,12 @@
     "par_factor": 2,
     "q25": 20.0,
     "q75": 27.25,
-    "scoring": "par2-wilson-bootstrap",
+    "scoring": "par2-rate-bootstrap",
     "success_only_mean": 22.798850574712645,
     "success_rate": 0.87,
     "successes": 174,
-    "wilson_high": 0.9097179772033067,
-    "wilson_low": 0.8163364812775159
+    "rate_high": 0.9097179772033067,
+    "rate_low": 0.8163364812775159
   },
   "template": "partn/mode-lj38"
 }

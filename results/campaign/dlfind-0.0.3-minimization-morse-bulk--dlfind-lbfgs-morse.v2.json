@@ -1,6 +1,6 @@
 {
   "counter": "harness",
-  "legacy": {
+  "success_mean": {
     "force_calls": 83,
     "force_calls_max": 146,
     "force_calls_median": 77.0,
@@ -53,12 +53,12 @@
     "par_factor": 2,
     "q25": 103.0,
     "q75": 20000.0,
-    "scoring": "par2-wilson-bootstrap",
+    "scoring": "par2-rate-bootstrap",
     "success_only_mean": 82.6875,
     "success_rate": 0.32,
     "successes": 32,
-    "wilson_high": 0.41662618610452384,
-    "wilson_low": 0.23669147324999093
+    "rate_high": 0.41662618610452384,
+    "rate_low": 0.23669147324999093
   },
   "template": "dlfind/lbfgs-morse"
 }

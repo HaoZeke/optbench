@@ -10,7 +10,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-newton-tuned",
       "failures": {
         "cap": 0,
@@ -30,6 +29,7 @@
       "median_per_image": null,
       "min_calls": 4.0,
       "n": 100,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 8.35,
@@ -37,14 +37,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-newton-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-newton-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -55,7 +55,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-dogleg",
       "failures": {
         "cap": 0,
@@ -75,6 +74,7 @@
       "median_per_image": null,
       "min_calls": 6.0,
       "n": 100,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 10.11,
@@ -82,14 +82,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-dogleg.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-dogleg",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -100,7 +100,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-lbfgs-m20-tuned",
       "failures": {
         "cap": 0,
@@ -120,6 +119,7 @@
       "median_per_image": null,
       "min_calls": 22.0,
       "n": 100,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 26.87,
@@ -127,14 +127,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-lbfgs-m20-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-lbfgs-m20-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -145,7 +145,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-lbfgs-m100-tuned",
       "failures": {
         "cap": 0,
@@ -165,6 +164,7 @@
       "median_per_image": null,
       "min_calls": 22.0,
       "n": 100,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 26.91,
@@ -172,14 +172,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-lbfgs-m100-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-lbfgs-m100-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -190,7 +190,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-lbfgs-tuned",
       "failures": {
         "cap": 0,
@@ -210,6 +209,7 @@
       "median_per_image": null,
       "min_calls": 22.0,
       "n": 100,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 26.93,
@@ -217,14 +217,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-lbfgs-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-lbfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -235,7 +235,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-lbfgs-m20",
       "failures": {
         "cap": 0,
@@ -255,6 +254,7 @@
       "median_per_image": null,
       "min_calls": 23.0,
       "n": 100,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 27.05,
@@ -262,14 +262,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-lbfgs-m20.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-lbfgs-m20",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -280,7 +280,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-lbfgs-m100",
       "failures": {
         "cap": 0,
@@ -300,6 +299,7 @@
       "median_per_image": null,
       "min_calls": 23.0,
       "n": 100,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 27.12,
@@ -307,14 +307,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-lbfgs-m100.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-lbfgs-m100",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -325,7 +325,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-lbfgs",
       "failures": {
         "cap": 0,
@@ -345,6 +344,7 @@
       "median_per_image": null,
       "min_calls": 23.0,
       "n": 100,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 27.18,
@@ -352,14 +352,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-lbfgs.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-lbfgs",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -370,7 +370,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-dogleg-tuned",
       "failures": {
         "cap": 0,
@@ -390,6 +389,7 @@
       "median_per_image": null,
       "min_calls": 7.0,
       "n": 100,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 31.26,
@@ -397,14 +397,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-dogleg-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-dogleg-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -415,7 +415,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-bb-tuned",
       "failures": {
         "cap": 0,
@@ -435,6 +434,7 @@
       "median_per_image": null,
       "min_calls": 24.0,
       "n": 100,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 33.22,
@@ -442,14 +442,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-bb-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-bb-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -460,7 +460,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-cg-tuned",
       "failures": {
         "cap": 0,
@@ -480,6 +479,7 @@
       "median_per_image": null,
       "min_calls": 36.0,
       "n": 100,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 50.49,
@@ -487,14 +487,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-cg-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-cg-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -505,7 +505,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-bfgs",
       "failures": {
         "cap": 0,
@@ -525,6 +524,7 @@
       "median_per_image": null,
       "min_calls": 28.0,
       "n": 100,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 54.04,
@@ -532,14 +532,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-bfgs.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-bfgs",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -550,7 +550,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-cg",
       "failures": {
         "cap": 0,
@@ -570,6 +569,7 @@
       "median_per_image": null,
       "min_calls": 38.0,
       "n": 100,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 54.72,
@@ -577,14 +577,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-cg.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-cg",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -595,7 +595,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-quickmin-tuned",
       "failures": {
         "cap": 0,
@@ -615,6 +614,7 @@
       "median_per_image": null,
       "min_calls": 45.0,
       "n": 100,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 61.75,
@@ -622,14 +622,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-quickmin-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-quickmin-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -640,7 +640,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-quickmin",
       "failures": {
         "cap": 0,
@@ -660,6 +659,7 @@
       "median_per_image": null,
       "min_calls": 45.0,
       "n": 100,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 62.03,
@@ -667,14 +667,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-quickmin.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-quickmin",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -685,7 +685,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-bfgs-tuned",
       "failures": {
         "cap": 0,
@@ -705,6 +704,7 @@
       "median_per_image": null,
       "min_calls": 28.0,
       "n": 100,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 70.53,
@@ -712,14 +712,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-bfgs-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-bfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -730,7 +730,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-sd-tuned",
       "failures": {
         "cap": 0,
@@ -750,6 +749,7 @@
       "median_per_image": null,
       "min_calls": 64.0,
       "n": 100,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 90.48,
@@ -757,14 +757,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-sd-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-sd-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -775,7 +775,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-sd",
       "failures": {
         "cap": 0,
@@ -795,6 +794,7 @@
       "median_per_image": null,
       "min_calls": 64.0,
       "n": 100,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 96.59,
@@ -802,14 +802,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-sd.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-sd",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -820,7 +820,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-fire-tuned",
       "failures": {
         "cap": 0,
@@ -840,6 +839,7 @@
       "median_per_image": null,
       "min_calls": 92.0,
       "n": 100,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 113.19,
@@ -847,14 +847,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-fire-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-fire-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -865,7 +865,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-fire",
       "failures": {
         "cap": 0,
@@ -885,6 +884,7 @@
       "median_per_image": null,
       "min_calls": 92.0,
       "n": 100,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 116.19,
@@ -892,14 +892,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-fire.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-fire",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -910,7 +910,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-fire2",
       "failures": {
         "cap": 0,
@@ -930,6 +929,7 @@
       "median_per_image": null,
       "min_calls": 101.0,
       "n": 100,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 121.85,
@@ -937,14 +937,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-fire2.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-fire2",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -955,7 +955,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-fire2-tuned",
       "failures": {
         "cap": 0,
@@ -975,6 +974,7 @@
       "median_per_image": null,
       "min_calls": 101.0,
       "n": 100,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 121.87,
@@ -982,14 +982,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-fire2-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-fire2-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -1000,7 +1000,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-adam",
       "failures": {
         "cap": 0,
@@ -1020,6 +1019,7 @@
       "median_per_image": null,
       "min_calls": 219.0,
       "n": 100,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 285.73,
@@ -1027,14 +1027,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-adam.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-adam",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -1045,7 +1045,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-adam-tuned",
       "failures": {
         "cap": 0,
@@ -1065,6 +1064,7 @@
       "median_per_image": null,
       "min_calls": 219.0,
       "n": 100,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 285.73,
@@ -1072,14 +1072,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-adam-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-adam-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -1090,7 +1090,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-sr2",
       "failures": {
         "cap": 0,
@@ -1110,6 +1109,7 @@
       "median_per_image": null,
       "min_calls": 235.0,
       "n": 100,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 341.13,
@@ -1117,14 +1117,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-sr2.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-sr2",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -1135,7 +1135,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-newton",
       "failures": {
         "cap": 1,
@@ -1155,6 +1154,7 @@
       "median_per_image": null,
       "min_calls": 4.0,
       "n": 100,
+      "newest": false,
       "nfailed": 1,
       "note": "starts.jsonl",
       "par2_mean": 396.69,
@@ -1162,14 +1162,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-newton.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 0.9982325679358593,
+      "rate_low": 0.9455138038212946,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.99,
       "template": "rgmin/morse-newton",
-      "tuning": "default",
-      "wilson_high": 0.9982325679358593,
-      "wilson_low": 0.9455138038212946
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -1180,7 +1180,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-sr1",
       "failures": {
         "cap": 2,
@@ -1200,6 +1199,7 @@
       "median_per_image": null,
       "min_calls": 54.0,
       "n": 100,
+      "newest": false,
       "nfailed": 2,
       "note": "starts.jsonl",
       "par2_mean": 566.31,
@@ -1207,14 +1207,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-sr1.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 0.9944980324498376,
+      "rate_low": 0.929988209271456,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.98,
       "template": "rgmin/morse-sr1",
-      "tuning": "default",
-      "wilson_high": 0.9944980324498376,
-      "wilson_low": 0.929988209271456
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -1225,7 +1225,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-sr1-tuned",
       "failures": {
         "cap": 4,
@@ -1245,6 +1244,7 @@
       "median_per_image": null,
       "min_calls": 54.0,
       "n": 100,
+      "newest": false,
       "nfailed": 4,
       "note": "starts.jsonl",
       "par2_mean": 1187.31,
@@ -1252,14 +1252,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-sr1-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 0.9843366960084523,
+      "rate_low": 0.9016292856411208,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.96,
       "template": "rgmin/morse-sr1-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9843366960084523,
-      "wilson_low": 0.9016292856411208
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -1270,7 +1270,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-sr2-tuned",
       "failures": {
         "cap": 4,
@@ -1290,6 +1289,7 @@
       "median_per_image": null,
       "min_calls": 235.0,
       "n": 100,
+      "newest": false,
       "nfailed": 4,
       "note": "starts.jsonl",
       "par2_mean": 1198.65,
@@ -1297,14 +1297,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-sr2-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 0.9843366960084523,
+      "rate_low": 0.9016292856411208,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.96,
       "template": "rgmin/morse-sr2-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9843366960084523,
-      "wilson_low": 0.9016292856411208
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -1315,7 +1315,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-bb",
       "failures": {
         "cap": 78,
@@ -1335,6 +1334,7 @@
       "median_per_image": null,
       "min_calls": 24.0,
       "n": 100,
+      "newest": false,
       "nfailed": 78,
       "note": "starts.jsonl",
       "par2_mean": 15606.64,
@@ -1342,14 +1342,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-bb.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 0.31070353514985793,
+      "rate_low": 0.150012823846054,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.22,
       "template": "rgmin/morse-bb",
-      "tuning": "default",
-      "wilson_high": 0.31070353514985793,
-      "wilson_low": 0.150012823846054
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -1360,7 +1360,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-diis-tuned",
       "failures": {
         "cap": 78,
@@ -1380,6 +1379,7 @@
       "median_per_image": null,
       "min_calls": 156.0,
       "n": 100,
+      "newest": false,
       "nfailed": 78,
       "note": "starts.jsonl",
       "par2_mean": 15819.42,
@@ -1387,14 +1387,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-diis-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 0.31070353514985793,
+      "rate_low": 0.150012823846054,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.22,
       "template": "rgmin/morse-diis-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.31070353514985793,
-      "wilson_low": 0.150012823846054
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -1405,7 +1405,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-morse-diis",
       "failures": {
         "cap": 80,
@@ -1425,6 +1424,7 @@
       "median_per_image": null,
       "min_calls": 153.0,
       "n": 100,
+      "newest": false,
       "nfailed": 80,
       "note": "starts.jsonl",
       "par2_mean": 16153.43,
@@ -1432,14 +1432,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-morse-diis.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 0.2888291655931589,
+      "rate_low": 0.1333669333310325,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.2,
       "template": "rgmin/morse-diis",
-      "tuning": "default",
-      "wilson_high": 0.2888291655931589,
-      "wilson_low": 0.1333669333310325
+      "tuning": "default"
     }
   ],
   "id": "minimization/morse-bulk",
@@ -1454,7 +1454,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseMorsePreconode12rTuned",
       "failures": {
         "cap": 0,
@@ -1474,6 +1473,7 @@
       "median_per_image": null,
       "min_calls": 21.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 21.0,
@@ -1481,14 +1481,14 @@
       "partial_reason": "smoke run; scored 1 of 100 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/morse-preconode12r-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "tuned"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1499,7 +1499,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseMorseBfgsDefault",
       "failures": {
         "cap": 0,
@@ -1519,6 +1518,7 @@
       "median_per_image": null,
       "min_calls": 44.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 44.0,
@@ -1526,14 +1526,14 @@
       "partial_reason": "smoke run; scored 1 of 100 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/morse-bfgs-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1544,7 +1544,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseMorseBfgslinesearchDefault",
       "failures": {
         "cap": 0,
@@ -1564,6 +1563,7 @@
       "median_per_image": null,
       "min_calls": 21.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 21.0,
@@ -1571,14 +1571,14 @@
       "partial_reason": "smoke run; scored 1 of 100 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/morse-bfgslinesearch-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1589,7 +1589,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseMorseBfgslinesearchTuned",
       "failures": {
         "cap": 0,
@@ -1609,6 +1608,7 @@
       "median_per_image": null,
       "min_calls": 70.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 70.0,
@@ -1616,14 +1616,14 @@
       "partial_reason": "smoke run; scored 1 of 100 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/morse-bfgslinesearch-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "tuned"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1634,7 +1634,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseMorseFireTuned",
       "failures": {
         "cap": 0,
@@ -1654,6 +1653,7 @@
       "median_per_image": null,
       "min_calls": 98.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 98.0,
@@ -1661,14 +1661,14 @@
       "partial_reason": "smoke run; scored 1 of 100 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/morse-fire-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "tuned"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1679,7 +1679,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseMorsePreconfireDefault",
       "failures": {
         "cap": 0,
@@ -1699,6 +1698,7 @@
       "median_per_image": null,
       "min_calls": 272.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 272.0,
@@ -1706,14 +1706,14 @@
       "partial_reason": "smoke run; scored 1 of 100 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/morse-preconfire-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1724,7 +1724,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseMorseBfgsTuned",
       "failures": {
         "cap": 0,
@@ -1744,6 +1743,7 @@
       "median_per_image": null,
       "min_calls": 44.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 44.0,
@@ -1751,14 +1751,14 @@
       "partial_reason": "smoke run; scored 1 of 100 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/morse-bfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "tuned"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1769,7 +1769,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseMorseFireDefault",
       "failures": {
         "cap": 0,
@@ -1789,6 +1788,7 @@
       "median_per_image": null,
       "min_calls": 98.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 98.0,
@@ -1796,14 +1796,14 @@
       "partial_reason": "smoke run; scored 1 of 100 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/morse-fire-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1814,7 +1814,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseMorseLbfgsDefault",
       "failures": {
         "cap": 0,
@@ -1834,6 +1833,7 @@
       "median_per_image": null,
       "min_calls": 44.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 44.0,
@@ -1841,14 +1841,14 @@
       "partial_reason": "smoke run; scored 1 of 100 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/morse-lbfgs-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1859,7 +1859,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseMorsePreconlbfgsDefault",
       "failures": {
         "cap": 0,
@@ -1879,6 +1878,7 @@
       "median_per_image": null,
       "min_calls": 16.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 16.0,
@@ -1886,14 +1886,14 @@
       "partial_reason": "smoke run; scored 1 of 100 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/morse-preconlbfgs-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1904,7 +1904,6 @@
       "commit": "6cfb60cdb100a146c3c6f0587d5308b247aa8010",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.SellaMorseMinTuned",
       "failures": {
         "cap": 0,
@@ -1924,6 +1923,7 @@
       "median_per_image": null,
       "min_calls": 49.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 49.0,
@@ -1931,14 +1931,14 @@
       "partial_reason": "smoke run; scored 1 of 100 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "sella/morse-min-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "tuned"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1949,7 +1949,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseMorsePreconode12rDefault",
       "failures": {
         "cap": 0,
@@ -1969,6 +1968,7 @@
       "median_per_image": null,
       "min_calls": 21.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 21.0,
@@ -1976,14 +1976,14 @@
       "partial_reason": "smoke run; scored 1 of 100 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/morse-preconode12r-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1994,7 +1994,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseMorsePreconfireTuned",
       "failures": {
         "cap": 0,
@@ -2014,6 +2013,7 @@
       "median_per_image": null,
       "min_calls": 291.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 291.0,
@@ -2021,14 +2021,14 @@
       "partial_reason": "smoke run; scored 1 of 100 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/morse-preconfire-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "tuned"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -2039,7 +2039,6 @@
       "commit": "6cfb60cdb100a146c3c6f0587d5308b247aa8010",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.SellaMorseMinDefault",
       "failures": {
         "cap": 0,
@@ -2059,6 +2058,7 @@
       "median_per_image": null,
       "min_calls": 20.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 20.0,
@@ -2066,14 +2066,14 @@
       "partial_reason": "smoke run; scored 1 of 100 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "sella/morse-min-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -2084,7 +2084,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseMorseLbfgsTuned",
       "failures": {
         "cap": 0,
@@ -2104,6 +2103,7 @@
       "median_per_image": null,
       "min_calls": 26.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 26.0,
@@ -2111,14 +2111,14 @@
       "partial_reason": "smoke run; scored 1 of 100 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/morse-lbfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "tuned"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -2129,7 +2129,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseMorsePreconlbfgsTuned",
       "failures": {
         "cap": 0,
@@ -2149,6 +2148,7 @@
       "median_per_image": null,
       "min_calls": 16.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 16.0,
@@ -2156,14 +2156,14 @@
       "partial_reason": "smoke run; scored 1 of 100 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/morse-preconlbfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "tuned"
     }
   ],
   "profile": {
@@ -3136,7 +3136,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-newton",
       "failures": {
         "cap": 0,
@@ -3156,6 +3155,7 @@
       "median_per_image": null,
       "min_calls": 4.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 8.35,
@@ -3163,14 +3163,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-newton.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-newton",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -3181,7 +3181,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-newton",
       "failures": {
         "cap": 0,
@@ -3201,6 +3200,7 @@
       "median_per_image": null,
       "min_calls": 4.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 8.35,
@@ -3208,14 +3208,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-newton.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-newton",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -3226,7 +3226,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-newton-tuned",
       "failures": {
         "cap": 0,
@@ -3246,6 +3245,7 @@
       "median_per_image": null,
       "min_calls": 4.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 8.35,
@@ -3253,14 +3253,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-newton-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-newton-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -3271,7 +3271,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-newton-tuned",
       "failures": {
         "cap": 0,
@@ -3291,6 +3290,7 @@
       "median_per_image": null,
       "min_calls": 4.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 8.35,
@@ -3298,14 +3298,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-newton-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-newton-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -3316,7 +3316,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-dogleg",
       "failures": {
         "cap": 0,
@@ -3336,6 +3335,7 @@
       "median_per_image": null,
       "min_calls": 6.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 10.11,
@@ -3343,14 +3343,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-dogleg.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-dogleg",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -3361,7 +3361,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-lbfgs-m20",
       "failures": {
         "cap": 0,
@@ -3381,6 +3380,7 @@
       "median_per_image": null,
       "min_calls": 22.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 26.87,
@@ -3388,14 +3388,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-lbfgs-m20.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-lbfgs-m20",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -3406,7 +3406,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-lbfgs-m20",
       "failures": {
         "cap": 0,
@@ -3426,6 +3425,7 @@
       "median_per_image": null,
       "min_calls": 22.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 26.87,
@@ -3433,14 +3433,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-lbfgs-m20.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-lbfgs-m20",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -3451,7 +3451,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-lbfgs-m20-tuned",
       "failures": {
         "cap": 0,
@@ -3471,6 +3470,7 @@
       "median_per_image": null,
       "min_calls": 22.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 26.87,
@@ -3478,14 +3478,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-lbfgs-m20-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-lbfgs-m20-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -3496,7 +3496,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-lbfgs-m20-tuned",
       "failures": {
         "cap": 0,
@@ -3516,6 +3515,7 @@
       "median_per_image": null,
       "min_calls": 22.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 26.87,
@@ -3523,14 +3523,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-lbfgs-m20-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-lbfgs-m20-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -3541,7 +3541,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-lbfgs-m100",
       "failures": {
         "cap": 0,
@@ -3561,6 +3560,7 @@
       "median_per_image": null,
       "min_calls": 22.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 26.91,
@@ -3568,14 +3568,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-lbfgs-m100.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-lbfgs-m100",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -3586,7 +3586,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-lbfgs-m100",
       "failures": {
         "cap": 0,
@@ -3606,6 +3605,7 @@
       "median_per_image": null,
       "min_calls": 22.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 26.91,
@@ -3613,14 +3613,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-lbfgs-m100.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-lbfgs-m100",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -3631,7 +3631,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-lbfgs-m100-tuned",
       "failures": {
         "cap": 0,
@@ -3651,6 +3650,7 @@
       "median_per_image": null,
       "min_calls": 22.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 26.91,
@@ -3658,14 +3658,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-lbfgs-m100-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-lbfgs-m100-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -3676,7 +3676,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-lbfgs-m100-tuned",
       "failures": {
         "cap": 0,
@@ -3696,6 +3695,7 @@
       "median_per_image": null,
       "min_calls": 22.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 26.91,
@@ -3703,14 +3703,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-lbfgs-m100-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-lbfgs-m100-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -3721,7 +3721,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-lbfgs",
       "failures": {
         "cap": 0,
@@ -3741,6 +3740,7 @@
       "median_per_image": null,
       "min_calls": 22.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 26.93,
@@ -3748,14 +3748,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-lbfgs.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-lbfgs",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -3766,7 +3766,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-lbfgs",
       "failures": {
         "cap": 0,
@@ -3786,6 +3785,7 @@
       "median_per_image": null,
       "min_calls": 22.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 26.93,
@@ -3793,14 +3793,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-lbfgs.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-lbfgs",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -3811,7 +3811,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-lbfgs-tuned",
       "failures": {
         "cap": 0,
@@ -3831,6 +3830,7 @@
       "median_per_image": null,
       "min_calls": 22.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 26.93,
@@ -3838,14 +3838,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-lbfgs-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-lbfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -3856,7 +3856,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-lbfgs-tuned",
       "failures": {
         "cap": 0,
@@ -3876,6 +3875,7 @@
       "median_per_image": null,
       "min_calls": 22.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 26.93,
@@ -3883,14 +3883,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-lbfgs-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-lbfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -3901,7 +3901,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-diis",
       "failures": {
         "cap": 0,
@@ -3921,6 +3920,7 @@
       "median_per_image": null,
       "min_calls": 21.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 27.44,
@@ -3928,14 +3928,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-diis.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-diis",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -3946,7 +3946,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-diis",
       "failures": {
         "cap": 0,
@@ -3966,6 +3965,7 @@
       "median_per_image": null,
       "min_calls": 21.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 27.44,
@@ -3973,14 +3973,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-diis.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-diis",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -3991,7 +3991,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-diis-tuned",
       "failures": {
         "cap": 0,
@@ -4011,6 +4010,7 @@
       "median_per_image": null,
       "min_calls": 21.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 27.44,
@@ -4018,14 +4018,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-diis-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-diis-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -4036,7 +4036,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-diis-tuned",
       "failures": {
         "cap": 0,
@@ -4056,6 +4055,7 @@
       "median_per_image": null,
       "min_calls": 21.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 27.44,
@@ -4063,14 +4063,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-diis-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-diis-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -4081,7 +4081,6 @@
       "commit": "6cfb60cdb100a146c3c6f0587d5308b247aa8010",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "sella-2.6.0-morse-min-default",
       "failures": {
         "cap": 0,
@@ -4101,6 +4100,7 @@
       "median_per_image": null,
       "min_calls": 20.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 28.89,
@@ -4108,14 +4108,14 @@
       "partial_reason": "",
       "path": "results/campaign/sella-2.6.0-morse-min-default.dat; results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "sella/morse-min-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -4126,7 +4126,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "ase-3.29.0-morse-bfgslinesearch-default",
       "failures": {
         "cap": 0,
@@ -4146,6 +4145,7 @@
       "median_per_image": null,
       "min_calls": 21.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 28.91,
@@ -4153,14 +4153,14 @@
       "partial_reason": "",
       "path": "results/campaign/ase-3.29.0-morse-bfgslinesearch-default.dat; results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "ase/morse-bfgslinesearch-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -4171,7 +4171,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "ase-3.29.0-morse-preconlbfgs-tuned",
       "failures": {
         "cap": 0,
@@ -4191,6 +4190,7 @@
       "median_per_image": null,
       "min_calls": 16.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 28.98,
@@ -4198,14 +4198,14 @@
       "partial_reason": "",
       "path": "results/campaign/ase-3.29.0-morse-preconlbfgs-tuned.dat; results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "ase/morse-preconlbfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -4216,7 +4216,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-dogleg",
       "failures": {
         "cap": 0,
@@ -4236,6 +4235,7 @@
       "median_per_image": null,
       "min_calls": 7.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 31.26,
@@ -4243,14 +4243,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-dogleg.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-dogleg",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -4261,7 +4261,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-dogleg-tuned",
       "failures": {
         "cap": 0,
@@ -4281,6 +4280,7 @@
       "median_per_image": null,
       "min_calls": 7.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 31.26,
@@ -4288,14 +4288,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-dogleg-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-dogleg-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -4306,7 +4306,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-dogleg-tuned",
       "failures": {
         "cap": 0,
@@ -4326,6 +4325,7 @@
       "median_per_image": null,
       "min_calls": 7.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 31.26,
@@ -4333,14 +4333,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-dogleg-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-dogleg-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -4351,7 +4351,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "ase-3.29.0-morse-lbfgs-tuned",
       "failures": {
         "cap": 0,
@@ -4371,6 +4370,7 @@
       "median_per_image": null,
       "min_calls": 26.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 32.03,
@@ -4378,14 +4378,14 @@
       "partial_reason": "",
       "path": "results/campaign/ase-3.29.0-morse-lbfgs-tuned.dat; results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "ase/morse-lbfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -4396,7 +4396,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-bb",
       "failures": {
         "cap": 0,
@@ -4416,6 +4415,7 @@
       "median_per_image": null,
       "min_calls": 24.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 33.22,
@@ -4423,14 +4423,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-bb.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-bb",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -4441,7 +4441,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-bb",
       "failures": {
         "cap": 0,
@@ -4461,6 +4460,7 @@
       "median_per_image": null,
       "min_calls": 24.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 33.22,
@@ -4468,14 +4468,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-bb.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-bb",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -4486,7 +4486,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-bb-tuned",
       "failures": {
         "cap": 0,
@@ -4506,6 +4505,7 @@
       "median_per_image": null,
       "min_calls": 24.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 33.22,
@@ -4513,14 +4513,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-bb-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-bb-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -4531,7 +4531,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-bb-tuned",
       "failures": {
         "cap": 0,
@@ -4551,6 +4550,7 @@
       "median_per_image": null,
       "min_calls": 24.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 33.22,
@@ -4558,14 +4558,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-bb-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-bb-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "1999eab667e0b9e0e4108c2d59c0fb9d9a6fadec",
@@ -4576,7 +4576,6 @@
       "commit": "df8da599267534fbe43a250e578f7396a7946311",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "gmin-df8da5992675-morse-lbfgs",
       "failures": {
         "cap": 0,
@@ -4596,6 +4595,7 @@
       "median_per_image": null,
       "min_calls": 21.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 34.4,
@@ -4603,14 +4603,14 @@
       "partial_reason": "",
       "path": "results/campaign/gmin-df8da5992675-morse-lbfgs.dat; results/asv/1999eab667e0b9e0e4108c2d59c0fb9d9a6fadec",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "gmin/morse-lbfgs",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "739fce9b10553193c9e8d49c56a7226020617bf5",
@@ -4621,7 +4621,6 @@
       "commit": "4241692173cccb42a9ae05974bfd62285ec2cd7b",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "vcsqnm-42416921-morse-ase",
       "failures": {
         "cap": 0,
@@ -4641,6 +4640,7 @@
       "median_per_image": null,
       "min_calls": 23.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 40.51,
@@ -4648,14 +4648,14 @@
       "partial_reason": "",
       "path": "results/campaign/vcsqnm-42416921-morse-ase.dat; results/asv/739fce9b10553193c9e8d49c56a7226020617bf5",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "vcsqnm/morse-ase",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "739fce9b10553193c9e8d49c56a7226020617bf5",
@@ -4666,7 +4666,6 @@
       "commit": "4241692173cccb42a9ae05974bfd62285ec2cd7b",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "vcsqnm-42416921-morse-sqnm",
       "failures": {
         "cap": 0,
@@ -4686,6 +4685,7 @@
       "median_per_image": null,
       "min_calls": 23.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 40.51,
@@ -4693,14 +4693,14 @@
       "partial_reason": "",
       "path": "results/campaign/vcsqnm-42416921-morse-sqnm.dat; results/asv/739fce9b10553193c9e8d49c56a7226020617bf5",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "vcsqnm/morse-sqnm",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -4711,7 +4711,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "ase-3.29.0-morse-preconode12r-default",
       "failures": {
         "cap": 0,
@@ -4731,6 +4730,7 @@
       "median_per_image": null,
       "min_calls": 21.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 41.78,
@@ -4738,14 +4738,14 @@
       "partial_reason": "",
       "path": "results/campaign/ase-3.29.0-morse-preconode12r-default.dat; results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "ase/morse-preconode12r-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -4756,7 +4756,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "ase-3.29.0-morse-preconode12r-tuned",
       "failures": {
         "cap": 0,
@@ -4776,6 +4775,7 @@
       "median_per_image": null,
       "min_calls": 21.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 41.78,
@@ -4783,14 +4783,14 @@
       "partial_reason": "",
       "path": "results/campaign/ase-3.29.0-morse-preconode12r-tuned.dat; results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "ase/morse-preconode12r-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "739fce9b10553193c9e8d49c56a7226020617bf5",
@@ -4801,7 +4801,6 @@
       "commit": "4241692173cccb42a9ae05974bfd62285ec2cd7b",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "vcsqnm-42416921-morse-ase-tuned",
       "failures": {
         "cap": 0,
@@ -4821,6 +4820,7 @@
       "median_per_image": null,
       "min_calls": 24.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 44.27,
@@ -4828,14 +4828,14 @@
       "partial_reason": "",
       "path": "results/campaign/vcsqnm-42416921-morse-ase-tuned.dat; results/asv/739fce9b10553193c9e8d49c56a7226020617bf5",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "vcsqnm/morse-ase-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "739fce9b10553193c9e8d49c56a7226020617bf5",
@@ -4846,7 +4846,6 @@
       "commit": "4241692173cccb42a9ae05974bfd62285ec2cd7b",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "vcsqnm-42416921-morse-sqnm-tuned",
       "failures": {
         "cap": 0,
@@ -4866,6 +4865,7 @@
       "median_per_image": null,
       "min_calls": 24.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 44.27,
@@ -4873,14 +4873,14 @@
       "partial_reason": "",
       "path": "results/campaign/vcsqnm-42416921-morse-sqnm-tuned.dat; results/asv/739fce9b10553193c9e8d49c56a7226020617bf5",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "vcsqnm/morse-sqnm-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "739fce9b10553193c9e8d49c56a7226020617bf5",
@@ -4891,7 +4891,6 @@
       "commit": "4241692173cccb42a9ae05974bfd62285ec2cd7b",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "vcsqnm-42416921-morse-vc",
       "failures": {
         "cap": 0,
@@ -4911,6 +4910,7 @@
       "median_per_image": null,
       "min_calls": 26.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 48.73,
@@ -4918,14 +4918,14 @@
       "partial_reason": "",
       "path": "results/campaign/vcsqnm-42416921-morse-vc.dat; results/asv/739fce9b10553193c9e8d49c56a7226020617bf5",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "vcsqnm/morse-vc",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "739fce9b10553193c9e8d49c56a7226020617bf5",
@@ -4936,7 +4936,6 @@
       "commit": "4241692173cccb42a9ae05974bfd62285ec2cd7b",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "vcsqnm-42416921-morse-ase-vc-tuned",
       "failures": {
         "cap": 0,
@@ -4956,6 +4955,7 @@
       "median_per_image": null,
       "min_calls": 27.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 48.78,
@@ -4963,14 +4963,14 @@
       "partial_reason": "",
       "path": "results/campaign/vcsqnm-42416921-morse-ase-vc-tuned.dat; results/asv/739fce9b10553193c9e8d49c56a7226020617bf5",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "vcsqnm/morse-ase-vc-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "739fce9b10553193c9e8d49c56a7226020617bf5",
@@ -4981,7 +4981,6 @@
       "commit": "4241692173cccb42a9ae05974bfd62285ec2cd7b",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "vcsqnm-42416921-morse-ase-vc",
       "failures": {
         "cap": 0,
@@ -5001,6 +5000,7 @@
       "median_per_image": null,
       "min_calls": 26.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 49.37,
@@ -5008,14 +5008,14 @@
       "partial_reason": "",
       "path": "results/campaign/vcsqnm-42416921-morse-ase-vc.dat; results/asv/739fce9b10553193c9e8d49c56a7226020617bf5",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "vcsqnm/morse-ase-vc",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "739fce9b10553193c9e8d49c56a7226020617bf5",
@@ -5026,7 +5026,6 @@
       "commit": "4241692173cccb42a9ae05974bfd62285ec2cd7b",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "vcsqnm-42416921-morse-vc-tuned",
       "failures": {
         "cap": 0,
@@ -5046,6 +5045,7 @@
       "median_per_image": null,
       "min_calls": 27.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 49.56,
@@ -5053,14 +5053,14 @@
       "partial_reason": "",
       "path": "results/campaign/vcsqnm-42416921-morse-vc-tuned.dat; results/asv/739fce9b10553193c9e8d49c56a7226020617bf5",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "vcsqnm/morse-vc-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -5071,7 +5071,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-cg",
       "failures": {
         "cap": 0,
@@ -5091,6 +5090,7 @@
       "median_per_image": null,
       "min_calls": 36.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 50.49,
@@ -5098,14 +5098,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-cg.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-cg",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -5116,7 +5116,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-cg",
       "failures": {
         "cap": 0,
@@ -5136,6 +5135,7 @@
       "median_per_image": null,
       "min_calls": 36.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 50.49,
@@ -5143,14 +5143,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-cg.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-cg",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -5161,7 +5161,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-cg-tuned",
       "failures": {
         "cap": 0,
@@ -5181,6 +5180,7 @@
       "median_per_image": null,
       "min_calls": 36.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 50.49,
@@ -5188,14 +5188,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-cg-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-cg-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -5206,7 +5206,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-cg-tuned",
       "failures": {
         "cap": 0,
@@ -5226,6 +5225,7 @@
       "median_per_image": null,
       "min_calls": 36.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 50.49,
@@ -5233,14 +5233,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-cg-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-cg-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -5251,7 +5251,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "ase-3.29.0-morse-bfgs-default",
       "failures": {
         "cap": 0,
@@ -5271,6 +5270,7 @@
       "median_per_image": null,
       "min_calls": 44.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 53.36,
@@ -5278,14 +5278,14 @@
       "partial_reason": "",
       "path": "results/campaign/ase-3.29.0-morse-bfgs-default.dat; results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "ase/morse-bfgs-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -5296,7 +5296,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "ase-3.29.0-morse-lbfgs-default",
       "failures": {
         "cap": 0,
@@ -5316,6 +5315,7 @@
       "median_per_image": null,
       "min_calls": 44.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 53.36,
@@ -5323,14 +5323,14 @@
       "partial_reason": "",
       "path": "results/campaign/ase-3.29.0-morse-lbfgs-default.dat; results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "ase/morse-lbfgs-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -5341,7 +5341,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-bfgs",
       "failures": {
         "cap": 0,
@@ -5361,6 +5360,7 @@
       "median_per_image": null,
       "min_calls": 28.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 54.04,
@@ -5368,14 +5368,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-bfgs.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-bfgs",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -5386,7 +5386,6 @@
       "commit": "1d71c944501832bfafb955ffe13b9aae50c8efd4",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "eon-main-morse-lbfgs-m100",
       "failures": {
         "cap": 0,
@@ -5406,6 +5405,7 @@
       "median_per_image": null,
       "min_calls": 36.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts",
       "par2_mean": 54.18,
@@ -5413,14 +5413,14 @@
       "partial_reason": "",
       "path": "results/campaign/eon-main-morse-lbfgs-m100.dat",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "eon/morse-lbfgs-m100",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -5431,7 +5431,6 @@
       "commit": "1d71c944501832bfafb955ffe13b9aae50c8efd4",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "eon-main-morse-lbfgs",
       "failures": {
         "cap": 0,
@@ -5451,6 +5450,7 @@
       "median_per_image": null,
       "min_calls": 35.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts",
       "par2_mean": 54.31,
@@ -5458,14 +5458,14 @@
       "partial_reason": "",
       "path": "results/campaign/eon-main-morse-lbfgs.dat",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "eon/morse-lbfgs",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": ""
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -5476,7 +5476,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "ase-3.29.0-morse-bfgs-tuned",
       "failures": {
         "cap": 0,
@@ -5496,6 +5495,7 @@
       "median_per_image": null,
       "min_calls": 44.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 54.92,
@@ -5503,14 +5503,14 @@
       "partial_reason": "",
       "path": "results/campaign/ase-3.29.0-morse-bfgs-tuned.dat; results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "ase/morse-bfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -5521,7 +5521,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-sr2",
       "failures": {
         "cap": 0,
@@ -5541,6 +5540,7 @@
       "median_per_image": null,
       "min_calls": 40.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 59.53,
@@ -5548,14 +5548,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-sr2.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-sr2",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -5566,7 +5566,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-sr2",
       "failures": {
         "cap": 0,
@@ -5586,6 +5585,7 @@
       "median_per_image": null,
       "min_calls": 40.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 59.53,
@@ -5593,14 +5593,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-sr2.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-sr2",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -5611,7 +5611,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-sr2-tuned",
       "failures": {
         "cap": 0,
@@ -5631,6 +5630,7 @@
       "median_per_image": null,
       "min_calls": 40.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 59.53,
@@ -5638,14 +5638,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-sr2-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-sr2-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -5656,7 +5656,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-sr2-tuned",
       "failures": {
         "cap": 0,
@@ -5676,6 +5675,7 @@
       "median_per_image": null,
       "min_calls": 40.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 59.53,
@@ -5683,14 +5683,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-sr2-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-sr2-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -5701,7 +5701,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "ase-3.29.0-morse-preconlbfgs-default",
       "failures": {
         "cap": 0,
@@ -5721,6 +5720,7 @@
       "median_per_image": null,
       "min_calls": 16.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 59.83,
@@ -5728,14 +5728,14 @@
       "partial_reason": "",
       "path": "results/campaign/ase-3.29.0-morse-preconlbfgs-default.dat; results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "ase/morse-preconlbfgs-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -5746,7 +5746,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-sr1",
       "failures": {
         "cap": 0,
@@ -5766,6 +5765,7 @@
       "median_per_image": null,
       "min_calls": 30.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 61.53,
@@ -5773,14 +5773,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-sr1.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-sr1",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -5791,7 +5791,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-sr1",
       "failures": {
         "cap": 0,
@@ -5811,6 +5810,7 @@
       "median_per_image": null,
       "min_calls": 30.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 61.53,
@@ -5818,14 +5818,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-sr1.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-sr1",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -5836,7 +5836,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-sr1-tuned",
       "failures": {
         "cap": 0,
@@ -5856,6 +5855,7 @@
       "median_per_image": null,
       "min_calls": 30.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 61.53,
@@ -5863,14 +5863,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-sr1-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-sr1-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -5881,7 +5881,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-sr1-tuned",
       "failures": {
         "cap": 0,
@@ -5901,6 +5900,7 @@
       "median_per_image": null,
       "min_calls": 30.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 61.53,
@@ -5908,14 +5908,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-sr1-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-sr1-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -5926,7 +5926,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-quickmin",
       "failures": {
         "cap": 0,
@@ -5946,6 +5945,7 @@
       "median_per_image": null,
       "min_calls": 45.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 61.75,
@@ -5953,14 +5953,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-quickmin.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-quickmin",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -5971,7 +5971,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-quickmin",
       "failures": {
         "cap": 0,
@@ -5991,6 +5990,7 @@
       "median_per_image": null,
       "min_calls": 45.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 61.75,
@@ -5998,14 +5998,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-quickmin.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-quickmin",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -6016,7 +6016,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-quickmin-tuned",
       "failures": {
         "cap": 0,
@@ -6036,6 +6035,7 @@
       "median_per_image": null,
       "min_calls": 45.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 61.75,
@@ -6043,14 +6043,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-quickmin-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-quickmin-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -6061,7 +6061,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-quickmin-tuned",
       "failures": {
         "cap": 0,
@@ -6081,6 +6080,7 @@
       "median_per_image": null,
       "min_calls": 45.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 61.75,
@@ -6088,14 +6088,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-quickmin-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-quickmin-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -6106,7 +6106,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-bfgs",
       "failures": {
         "cap": 0,
@@ -6126,6 +6125,7 @@
       "median_per_image": null,
       "min_calls": 28.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 70.53,
@@ -6133,14 +6133,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-bfgs.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-bfgs",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -6151,7 +6151,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-bfgs-tuned",
       "failures": {
         "cap": 0,
@@ -6171,6 +6170,7 @@
       "median_per_image": null,
       "min_calls": 28.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 70.53,
@@ -6178,14 +6178,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-bfgs-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-bfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -6196,7 +6196,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-bfgs-tuned",
       "failures": {
         "cap": 0,
@@ -6216,6 +6215,7 @@
       "median_per_image": null,
       "min_calls": 28.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 70.53,
@@ -6223,14 +6223,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-bfgs-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-bfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -6241,7 +6241,6 @@
       "commit": "6cfb60cdb100a146c3c6f0587d5308b247aa8010",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "sella-2.6.0-morse-min-tuned",
       "failures": {
         "cap": 0,
@@ -6261,6 +6260,7 @@
       "median_per_image": null,
       "min_calls": 49.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 71.43,
@@ -6268,14 +6268,14 @@
       "partial_reason": "",
       "path": "results/campaign/sella-2.6.0-morse-min-tuned.dat; results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "sella/morse-min-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -6286,7 +6286,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-sd",
       "failures": {
         "cap": 0,
@@ -6306,6 +6305,7 @@
       "median_per_image": null,
       "min_calls": 64.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 90.48,
@@ -6313,14 +6313,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-sd.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-sd",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -6331,7 +6331,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-sd",
       "failures": {
         "cap": 0,
@@ -6351,6 +6350,7 @@
       "median_per_image": null,
       "min_calls": 64.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 90.48,
@@ -6358,14 +6358,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-sd.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-sd",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -6376,7 +6376,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-sd-tuned",
       "failures": {
         "cap": 0,
@@ -6396,6 +6395,7 @@
       "median_per_image": null,
       "min_calls": 64.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 90.48,
@@ -6403,14 +6403,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-sd-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-sd-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -6421,7 +6421,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-sd-tuned",
       "failures": {
         "cap": 0,
@@ -6441,6 +6440,7 @@
       "median_per_image": null,
       "min_calls": 64.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 90.48,
@@ -6448,14 +6448,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-sd-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-sd-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "52ce661f309ef267b070534a1e52e4a15fed6d11",
@@ -6466,7 +6466,6 @@
       "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "pele-b7081b93-morse-lbfgs",
       "failures": {
         "cap": 0,
@@ -6486,6 +6485,7 @@
       "median_per_image": null,
       "min_calls": 23.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 92.06,
@@ -6493,14 +6493,14 @@
       "partial_reason": "",
       "path": "results/campaign/pele-b7081b93-morse-lbfgs.dat; results/asv/52ce661f309ef267b070534a1e52e4a15fed6d11",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "pele/morse-lbfgs",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "52ce661f309ef267b070534a1e52e4a15fed6d11",
@@ -6511,7 +6511,6 @@
       "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "pele-b7081b93-morse-mylbfgs",
       "failures": {
         "cap": 0,
@@ -6531,6 +6530,7 @@
       "median_per_image": null,
       "min_calls": 23.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 92.06,
@@ -6538,14 +6538,14 @@
       "partial_reason": "",
       "path": "results/campaign/pele-b7081b93-morse-mylbfgs.dat; results/asv/52ce661f309ef267b070534a1e52e4a15fed6d11",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "pele/morse-mylbfgs",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -6556,7 +6556,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "ase-3.29.0-morse-bfgslinesearch-tuned",
       "failures": {
         "cap": 0,
@@ -6576,6 +6575,7 @@
       "median_per_image": null,
       "min_calls": 70.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 93.44,
@@ -6583,14 +6583,14 @@
       "partial_reason": "",
       "path": "results/campaign/ase-3.29.0-morse-bfgslinesearch-tuned.dat; results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "ase/morse-bfgslinesearch-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -6601,7 +6601,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-fire",
       "failures": {
         "cap": 0,
@@ -6621,6 +6620,7 @@
       "median_per_image": null,
       "min_calls": 92.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 113.19,
@@ -6628,14 +6628,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-fire.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-fire",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -6646,7 +6646,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-fire",
       "failures": {
         "cap": 0,
@@ -6666,6 +6665,7 @@
       "median_per_image": null,
       "min_calls": 92.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 113.19,
@@ -6673,14 +6673,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-fire.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-fire",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -6691,7 +6691,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-fire-tuned",
       "failures": {
         "cap": 0,
@@ -6711,6 +6710,7 @@
       "median_per_image": null,
       "min_calls": 92.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 113.19,
@@ -6718,14 +6718,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-fire-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-fire-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -6736,7 +6736,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-fire-tuned",
       "failures": {
         "cap": 0,
@@ -6756,6 +6755,7 @@
       "median_per_image": null,
       "min_calls": 92.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 113.19,
@@ -6763,14 +6763,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-fire-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-fire-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -6781,7 +6781,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "ase-3.29.0-morse-fire-default",
       "failures": {
         "cap": 0,
@@ -6801,6 +6800,7 @@
       "median_per_image": null,
       "min_calls": 98.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 113.36,
@@ -6808,14 +6808,14 @@
       "partial_reason": "",
       "path": "results/campaign/ase-3.29.0-morse-fire-default.dat; results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "ase/morse-fire-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -6826,7 +6826,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "ase-3.29.0-morse-fire-tuned",
       "failures": {
         "cap": 0,
@@ -6846,6 +6845,7 @@
       "median_per_image": null,
       "min_calls": 98.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 113.36,
@@ -6853,14 +6853,14 @@
       "partial_reason": "",
       "path": "results/campaign/ase-3.29.0-morse-fire-tuned.dat; results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "ase/morse-fire-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "52ce661f309ef267b070534a1e52e4a15fed6d11",
@@ -6871,7 +6871,6 @@
       "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "pele-b7081b93-morse-fire",
       "failures": {
         "cap": 0,
@@ -6891,6 +6890,7 @@
       "median_per_image": null,
       "min_calls": 92.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 118.84,
@@ -6898,14 +6898,14 @@
       "partial_reason": "",
       "path": "results/campaign/pele-b7081b93-morse-fire.dat; results/asv/52ce661f309ef267b070534a1e52e4a15fed6d11",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "pele/morse-fire",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -6916,7 +6916,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-fire2",
       "failures": {
         "cap": 0,
@@ -6936,6 +6935,7 @@
       "median_per_image": null,
       "min_calls": 101.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 121.85,
@@ -6943,14 +6943,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-fire2.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-fire2",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -6961,7 +6961,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-fire2",
       "failures": {
         "cap": 0,
@@ -6981,6 +6980,7 @@
       "median_per_image": null,
       "min_calls": 101.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 121.87,
@@ -6988,14 +6988,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-fire2.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-fire2",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -7006,7 +7006,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-fire2-tuned",
       "failures": {
         "cap": 0,
@@ -7026,6 +7025,7 @@
       "median_per_image": null,
       "min_calls": 101.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 121.87,
@@ -7033,14 +7033,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-fire2-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-fire2-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -7051,7 +7051,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-fire2-tuned",
       "failures": {
         "cap": 0,
@@ -7071,6 +7070,7 @@
       "median_per_image": null,
       "min_calls": 101.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 121.87,
@@ -7078,14 +7078,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-fire2-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-fire2-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -7096,7 +7096,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-adam",
       "failures": {
         "cap": 0,
@@ -7116,6 +7115,7 @@
       "median_per_image": null,
       "min_calls": 170.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 219.34,
@@ -7123,14 +7123,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-adam.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-adam",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -7141,7 +7141,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-adam",
       "failures": {
         "cap": 0,
@@ -7161,6 +7160,7 @@
       "median_per_image": null,
       "min_calls": 170.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 219.34,
@@ -7168,14 +7168,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-adam.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-adam",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -7186,7 +7186,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-morse-adam-tuned",
       "failures": {
         "cap": 0,
@@ -7206,6 +7205,7 @@
       "median_per_image": null,
       "min_calls": 170.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 219.34,
@@ -7213,14 +7213,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-morse-adam-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-adam-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -7231,7 +7231,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-morse-adam-tuned",
       "failures": {
         "cap": 0,
@@ -7251,6 +7250,7 @@
       "median_per_image": null,
       "min_calls": 170.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 219.34,
@@ -7258,14 +7258,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-morse-adam-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/morse-adam-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -7276,7 +7276,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "ase-3.29.0-morse-preconfire-default",
       "failures": {
         "cap": 0,
@@ -7296,6 +7295,7 @@
       "median_per_image": null,
       "min_calls": 272.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 363.32,
@@ -7303,14 +7303,14 @@
       "partial_reason": "",
       "path": "results/campaign/ase-3.29.0-morse-preconfire-default.dat; results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "ase/morse-preconfire-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -7321,7 +7321,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "ase-3.29.0-morse-preconfire-tuned",
       "failures": {
         "cap": 0,
@@ -7341,6 +7340,7 @@
       "median_per_image": null,
       "min_calls": 291.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 365.52,
@@ -7348,14 +7348,14 @@
       "partial_reason": "",
       "path": "results/campaign/ase-3.29.0-morse-preconfire-tuned.dat; results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "minimization/morse-bulk",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "ase/morse-preconfire-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -7366,7 +7366,6 @@
       "commit": "4167998d16d8dac4a484ba9305f27d6325a7a28d",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "dlfind-0.0.3-minimization-morse-bulk--dlfind-lbfgs-morse",
       "failures": {
         "cap": 0,
@@ -7386,6 +7385,7 @@
       "median_per_image": null,
       "min_calls": 46.0,
       "n": 100,
+      "newest": true,
       "nfailed": 68,
       "note": "starts.jsonl",
       "par2_mean": 13626.46,
@@ -7393,14 +7393,14 @@
       "partial_reason": "",
       "path": "results/campaign/dlfind-0.0.3-minimization-morse-bulk--dlfind-lbfgs-morse.dat",
       "problem": "minimization/morse-bulk",
+      "rate_high": 0.41662618610452384,
+      "rate_low": 0.23669147324999093,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.32,
       "template": "dlfind/lbfgs-morse",
-      "tuning": "default",
-      "wilson_high": 0.41662618610452384,
-      "wilson_low": 0.23669147324999093
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -7411,7 +7411,6 @@
       "commit": "4167998d16d8dac4a484ba9305f27d6325a7a28d",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "dlfind-0.0.3-minimization-morse-bulk--dlfind-cg-morse",
       "failures": {
         "cap": 0,
@@ -7431,6 +7430,7 @@
       "median_per_image": null,
       "min_calls": 132.0,
       "n": 100,
+      "newest": true,
       "nfailed": 82,
       "note": "starts.jsonl",
       "par2_mean": 16449.19,
@@ -7438,14 +7438,14 @@
       "partial_reason": "",
       "path": "results/campaign/dlfind-0.0.3-minimization-morse-bulk--dlfind-cg-morse.dat",
       "problem": "minimization/morse-bulk",
+      "rate_high": 0.2666735838630073,
+      "rate_low": 0.1170022549894635,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.18,
       "template": "dlfind/cg-morse",
-      "tuning": "default",
-      "wilson_high": 0.2666735838630073,
-      "wilson_low": 0.1170022549894635
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -7456,7 +7456,6 @@
       "commit": "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "optim-svn-snapshot-minimization-morse-bulk--optim-lbfgs-morse",
       "failures": {
         "cap": 0,
@@ -7476,6 +7475,7 @@
       "median_per_image": null,
       "min_calls": 29.0,
       "n": 100,
+      "newest": true,
       "nfailed": 87,
       "note": "starts.jsonl",
       "par2_mean": 17408.79,
@@ -7483,14 +7483,14 @@
       "partial_reason": "",
       "path": "results/campaign/optim-svn-snapshot-minimization-morse-bulk--optim-lbfgs-morse.dat",
       "problem": "minimization/morse-bulk",
+      "rate_high": 0.20980351440076428,
+      "rate_low": 0.07757167427240512,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.13,
       "template": "optim/lbfgs-morse",
-      "tuning": "default",
-      "wilson_high": 0.20980351440076428,
-      "wilson_low": 0.07757167427240512
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -7501,7 +7501,6 @@
       "commit": "4167998d16d8dac4a484ba9305f27d6325a7a28d",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "dlfind-0.0.3-minimization-morse-bulk--dlfind-sd-morse",
       "failures": {
         "cap": 0,
@@ -7521,6 +7520,7 @@
       "median_per_image": null,
       "min_calls": 120.0,
       "n": 100,
+      "newest": true,
       "nfailed": 87,
       "note": "starts.jsonl",
       "par2_mean": 17438.59,
@@ -7528,14 +7528,14 @@
       "partial_reason": "",
       "path": "results/campaign/dlfind-0.0.3-minimization-morse-bulk--dlfind-sd-morse.dat",
       "problem": "minimization/morse-bulk",
+      "rate_high": 0.20980351440076428,
+      "rate_low": 0.07757167427240512,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.13,
       "template": "dlfind/sd-morse",
-      "tuning": "default",
-      "wilson_high": 0.20980351440076428,
-      "wilson_low": 0.07757167427240512
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -7546,7 +7546,6 @@
       "commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "tsase-1.0-minimization-morse-bulk--tsase-lbfgs-morse",
       "failures": {
         "cap": 0,
@@ -7566,6 +7565,7 @@
       "median_per_image": null,
       "min_calls": 36.0,
       "n": 100,
+      "newest": true,
       "nfailed": 88,
       "note": "starts.jsonl",
       "par2_mean": 17606.37,
@@ -7573,14 +7573,14 @@
       "partial_reason": "",
       "path": "results/campaign/tsase-1.0-minimization-morse-bulk--tsase-lbfgs-morse.dat",
       "problem": "minimization/morse-bulk",
+      "rate_high": 0.19812099426711421,
+      "rate_low": 0.06999406437019488,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.12,
       "template": "tsase/lbfgs-morse",
-      "tuning": "default",
-      "wilson_high": 0.19812099426711421,
-      "wilson_low": 0.06999406437019488
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -7591,7 +7591,6 @@
       "commit": "8de817dd79bfe4525d5d39246a212d833e6dee07",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "lammps-30Sep2026-minimization-morse-bulk--lammps-fire-morse",
       "failures": {
         "cap": 0,
@@ -7611,6 +7610,7 @@
       "median_per_image": null,
       "min_calls": 225.0,
       "n": 100,
+      "newest": true,
       "nfailed": 88,
       "note": "starts.jsonl",
       "par2_mean": 17656.66,
@@ -7618,14 +7618,14 @@
       "partial_reason": "",
       "path": "results/campaign/lammps-30Sep2026-minimization-morse-bulk--lammps-fire-morse.dat",
       "problem": "minimization/morse-bulk",
+      "rate_high": 0.19812099426711421,
+      "rate_low": 0.06999406437019488,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.12,
       "template": "lammps/fire-morse",
-      "tuning": "default",
-      "wilson_high": 0.19812099426711421,
-      "wilson_low": 0.06999406437019488
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -7636,7 +7636,6 @@
       "commit": "8de817dd79bfe4525d5d39246a212d833e6dee07",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "lammps-30Sep2026-minimization-morse-bulk--lammps-cg-morse",
       "failures": {
         "cap": 0,
@@ -7656,6 +7655,7 @@
       "median_per_image": null,
       "min_calls": 45.0,
       "n": 100,
+      "newest": true,
       "nfailed": 95,
       "note": "starts.jsonl",
       "par2_mean": 19004.73,
@@ -7663,14 +7663,14 @@
       "partial_reason": "",
       "path": "results/campaign/lammps-30Sep2026-minimization-morse-bulk--lammps-cg-morse.dat",
       "problem": "minimization/morse-bulk",
+      "rate_high": 0.11175046923191913,
+      "rate_low": 0.02154367915436796,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.05,
       "template": "lammps/cg-morse",
-      "tuning": "default",
-      "wilson_high": 0.11175046923191913,
-      "wilson_low": 0.02154367915436796
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -7681,7 +7681,6 @@
       "commit": "8de817dd79bfe4525d5d39246a212d833e6dee07",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "lammps-30Sep2026-minimization-morse-bulk--lammps-quickmin-morse",
       "failures": {
         "cap": 0,
@@ -7701,6 +7700,7 @@
       "median_per_image": null,
       "min_calls": 263.0,
       "n": 100,
+      "newest": true,
       "nfailed": 95,
       "note": "starts.jsonl",
       "par2_mean": 19150.82,
@@ -7708,14 +7708,14 @@
       "partial_reason": "",
       "path": "results/campaign/lammps-30Sep2026-minimization-morse-bulk--lammps-quickmin-morse.dat",
       "problem": "minimization/morse-bulk",
+      "rate_high": 0.11175046923191913,
+      "rate_low": 0.02154367915436796,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.05,
       "template": "lammps/quickmin-morse",
-      "tuning": "default",
-      "wilson_high": 0.11175046923191913,
-      "wilson_low": 0.02154367915436796
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -7726,7 +7726,6 @@
       "commit": "8de817dd79bfe4525d5d39246a212d833e6dee07",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "lammps-30Sep2026-minimization-morse-bulk--lammps-sd-morse",
       "failures": {
         "cap": 0,
@@ -7746,6 +7745,7 @@
       "median_per_image": null,
       "min_calls": 131.0,
       "n": 100,
+      "newest": true,
       "nfailed": 96,
       "note": "starts.jsonl",
       "par2_mean": 19211.17,
@@ -7753,14 +7753,14 @@
       "partial_reason": "",
       "path": "results/campaign/lammps-30Sep2026-minimization-morse-bulk--lammps-sd-morse.dat",
       "problem": "minimization/morse-bulk",
+      "rate_high": 0.0983707143588792,
+      "rate_low": 0.01566330399154762,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.04,
       "template": "lammps/sd-morse",
-      "tuning": "default",
-      "wilson_high": 0.0983707143588792,
-      "wilson_low": 0.01566330399154762
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -7771,7 +7771,6 @@
       "commit": "8de817dd79bfe4525d5d39246a212d833e6dee07",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "lammps-30Sep2026-minimization-morse-bulk--lammps-hftn-morse",
       "failures": {
         "cap": 0,
@@ -7791,6 +7790,7 @@
       "median_per_image": null,
       "min_calls": 230.0,
       "n": 100,
+      "newest": true,
       "nfailed": 97,
       "note": "starts.jsonl",
       "par2_mean": 19415.04,
@@ -7798,14 +7798,14 @@
       "partial_reason": "",
       "path": "results/campaign/lammps-30Sep2026-minimization-morse-bulk--lammps-hftn-morse.dat",
       "problem": "minimization/morse-bulk",
+      "rate_high": 0.0845193642905276,
+      "rate_low": 0.010254524024038925,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.03,
       "template": "lammps/hftn-morse",
-      "tuning": "default",
-      "wilson_high": 0.0845193642905276,
-      "wilson_low": 0.010254524024038925
+      "tuning": "default"
     },
     {
       "asv_commit": "52ce661f309ef267b070534a1e52e4a15fed6d11",
@@ -7816,7 +7816,6 @@
       "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "pele-b7081b93-morse-sd",
       "failures": {
         "cap": 100,
@@ -7836,6 +7835,7 @@
       "median_per_image": null,
       "min_calls": 10000.0,
       "n": 100,
+      "newest": true,
       "nfailed": 100,
       "note": "starts.jsonl",
       "par2_mean": 20000.0,
@@ -7843,14 +7843,14 @@
       "partial_reason": "",
       "path": "results/campaign/pele-b7081b93-morse-sd.dat; results/asv/52ce661f309ef267b070534a1e52e4a15fed6d11",
       "problem": "minimization/morse-bulk",
+      "rate_high": 0.03699349820698568,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.0,
       "template": "pele/morse-sd",
-      "tuning": "default",
-      "wilson_high": 0.03699349820698568,
-      "wilson_low": 0.0
+      "tuning": "default"
     }
   ],
   "title": "Morse bulk"

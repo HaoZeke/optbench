@@ -12,7 +12,7 @@
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "entry": "noise-rgmin-fire-s1em2",
-      "legacy": {
+      "success_mean": {
         "force_calls": 376,
         "force_calls_max": 1046,
         "force_calls_min": 153,
@@ -42,12 +42,12 @@
         "par_factor": 2,
         "q25": 289.0,
         "q75": 591.25,
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-rate-bootstrap",
         "success_only_mean": 376.3168927250308,
         "success_rate": 0.811,
         "successes": 811,
-        "wilson_high": 0.8340581379252162,
-        "wilson_low": 0.7855616182967687
+        "rate_high": 0.8340581379252162,
+        "rate_low": 0.7855616182967687
       },
       "parameters": {
         "cap": 10000,
@@ -31461,6 +31461,6 @@
     }
   ],
   "schema": "optbench.result/v2",
-  "scoring": "par2-wilson-bootstrap",
+  "scoring": "par2-rate-bootstrap",
   "status": "archive"
 }

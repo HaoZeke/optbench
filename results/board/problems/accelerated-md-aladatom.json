@@ -12,7 +12,6 @@
       "commit": "1d71c944501832bfafb955ffe13b9aae50c8efd4",
       "comparable": false,
       "counter": "client",
-      "current": false,
       "entry": "eon-3.6.0-aladatom-akmc",
       "failures": {
         "cap": 0,
@@ -32,6 +31,7 @@
       "median_per_image": null,
       "min_calls": 108435.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 108435.0,
@@ -39,14 +39,14 @@
       "partial_reason": "",
       "path": "results/campaign/eon-3.6.0-aladatom-akmc.dat",
       "problem": "accelerated-md/aladatom",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "eon/aladatom-akmc",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": ""
     }
   ],
   "partial": [
@@ -59,7 +59,6 @@
       "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "eon-client-amd-hyper",
       "failures": {
         "cap": 0,
@@ -79,6 +78,7 @@
       "median_per_image": null,
       "min_calls": 2409.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "starts",
       "par2_mean": 2409.0,
@@ -86,14 +86,14 @@
       "partial_reason": "result file sets partial true",
       "path": "results/campaign/eon-client-amd-hyper.dat",
       "problem": "accelerated-md/aladatom",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "eon-client/amd-hyper",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -104,7 +104,6 @@
       "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "eon-client-amd-prd",
       "failures": {
         "cap": 0,
@@ -124,6 +123,7 @@
       "median_per_image": null,
       "min_calls": 6313.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "starts",
       "par2_mean": 6313.0,
@@ -131,14 +131,14 @@
       "partial_reason": "result file sets partial true",
       "path": "results/campaign/eon-client-amd-prd.dat",
       "problem": "accelerated-md/aladatom",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "eon-client/amd-prd",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -149,7 +149,6 @@
       "commit": "r2549",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "eon-svn-amd-hyper",
       "failures": {
         "cap": 0,
@@ -169,6 +168,7 @@
       "median_per_image": null,
       "min_calls": 3411.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "starts",
       "par2_mean": 3411.0,
@@ -176,14 +176,14 @@
       "partial_reason": "result file sets partial true",
       "path": "results/campaign/eon-svn-amd-hyper.dat",
       "problem": "accelerated-md/aladatom",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "eon-svn/amd-hyper",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -194,7 +194,6 @@
       "commit": "r2549",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "eon-svn-amd-prd",
       "failures": {
         "cap": 0,
@@ -214,6 +213,7 @@
       "median_per_image": null,
       "min_calls": 6377.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "starts",
       "par2_mean": 6377.0,
@@ -221,14 +221,14 @@
       "partial_reason": "result file sets partial true",
       "path": "results/campaign/eon-svn-amd-prd.dat",
       "problem": "accelerated-md/aladatom",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "eon-svn/amd-prd",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": ""
     }
   ],
   "ranked": [],

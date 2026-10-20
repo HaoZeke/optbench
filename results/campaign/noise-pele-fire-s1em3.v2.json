@@ -12,7 +12,7 @@
       "code_version": "0.1.2",
       "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
       "entry": "noise-pele-fire-s1em3",
-      "legacy": {
+      "success_mean": {
         "force_calls": 777,
         "force_calls_max": 3748,
         "force_calls_min": 234,
@@ -42,12 +42,12 @@
         "par_factor": 2,
         "q25": 465.75,
         "q75": 1013.5,
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-rate-bootstrap",
         "success_only_mean": 775.3039319872477,
         "success_rate": 0.941,
         "successes": 941,
-        "wilson_high": 0.9539857017871995,
-        "wilson_low": 0.9246390972285408
+        "rate_high": 0.9539857017871995,
+        "rate_low": 0.9246390972285408
       },
       "parameters": {
         "cap": 10000,
@@ -31199,6 +31199,6 @@
     }
   ],
   "schema": "optbench.result/v2",
-  "scoring": "par2-wilson-bootstrap",
+  "scoring": "par2-rate-bootstrap",
   "status": "archive"
 }

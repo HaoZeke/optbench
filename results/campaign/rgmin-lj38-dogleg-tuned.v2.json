@@ -12,7 +12,7 @@
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "entry": "rgmin-lj38-dogleg-tuned",
-      "legacy": {
+      "success_mean": {
         "force_calls": 82,
         "force_calls_max": 162,
         "force_calls_min": 45,
@@ -42,12 +42,12 @@
         "par_factor": 2,
         "q25": 69.0,
         "q75": 92.0,
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-rate-bootstrap",
         "success_only_mean": 81.881,
         "success_rate": 1.0,
         "successes": 1000,
-        "wilson_high": 1.0,
-        "wilson_low": 0.996173241514445
+        "rate_high": 1.0,
+        "rate_low": 0.996173241514445
       },
       "parameters": {
         "gtol": 0.01,
@@ -29079,6 +29079,6 @@
     }
   ],
   "schema": "optbench.result/v2",
-  "scoring": "par2-wilson-bootstrap",
+  "scoring": "par2-rate-bootstrap",
   "status": "archive"
 }

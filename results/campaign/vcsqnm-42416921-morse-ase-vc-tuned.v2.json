@@ -12,7 +12,7 @@
       "code_version": "1.3",
       "commit": "4241692173cccb42a9ae05974bfd62285ec2cd7b",
       "entry": "vcsqnm-42416921-morse-ase-vc-tuned",
-      "legacy": {
+      "success_mean": {
         "force_calls": 49,
         "force_calls_max": 562,
         "force_calls_min": 27,
@@ -42,12 +42,12 @@
         "par_factor": 2,
         "q25": 38.5,
         "q75": 50.0,
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-rate-bootstrap",
         "success_only_mean": 48.78,
         "success_rate": 1.0,
         "successes": 100,
-        "wilson_high": 1.0,
-        "wilson_low": 0.9630065017930143
+        "rate_high": 1.0,
+        "rate_low": 0.9630065017930143
       },
       "parameters": {
         "alpha_min": 0.001,
@@ -2987,6 +2987,6 @@
     }
   ],
   "schema": "optbench.result/v2",
-  "scoring": "par2-wilson-bootstrap",
+  "scoring": "par2-rate-bootstrap",
   "status": "archive"
 }

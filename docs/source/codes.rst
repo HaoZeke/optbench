@@ -1,19 +1,19 @@
-=============
-Current codes
-=============
+=====
+Codes
+=====
 
 
 The table is the registry pin and the ranked harness runs for that code.
 A code with no full run on a problem is listed with the reason.
 The sections each client reads, and the commands that rerun a score, are in the README and on the Run a score page.
 A timestep or a band method in the wrong section is ignored.
-The Sella 0.1.1 rows stay on the 2014 tables and are labelled legacy.
+The Sella 0.1.1 rows stay on the 2014 tables and are archive rows.
 A new score is entered by Rohit Goswami.
 The number is written only after the run finishes under the problem rule.
 
 .. raw:: html
 
-   <section class="bench" id="current-codes">
+   <section class="bench" id="ranked-codes">
    <h2>Current codes</h2>
    <p>The benchmark contributor is Rohit Goswami. A ranked row is a full harness run. The commit on that row is the commit that produced the score.</p>
    <h3>eOn</h3>
@@ -119,14 +119,14 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
-   <tr data-problem="neb/Pt-heptamer" data-template="eon/neb-pt-lbfgs">
+   <tr data-problem="neb/Pt-heptamer" data-template="eon/neb-pt-lbfgs-m100">
    <td>Pt-heptamer</td>
-   <td data-field="template">eon/neb-pt-lbfgs</td>
+   <td data-field="template">eon/neb-pt-lbfgs-m100</td>
    <td data-field="version">eOn 3.6.0</td>
    <td data-field="commit">1d71c9445018</td>
-   <td data-field="par2_mean">3517.69</td>
-   <td data-field="mean_calls">3517.69</td>
-   <td data-field="median_calls">3738</td>
+   <td data-field="par2_mean">3523.85</td>
+   <td data-field="mean_calls">3523.85</td>
+   <td data-field="median_calls">3714</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
@@ -587,6 +587,17 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 5, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
+   <tr data-problem="globalopt/lj75" data-template="ase-globalopt/lj75-basinhopping">
+   <td>lj75</td>
+   <td data-field="template">ase-globalopt/lj75-basinhopping</td>
+   <td data-field="version">ASE 3.29.0</td>
+   <td data-field="commit">f27c0005ae6a</td>
+   <td data-field="par2_mean">2e+06</td>
+   <td data-field="mean_calls">1e+06</td>
+   <td data-field="median_calls">1e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
    <tr data-problem="minimization/lj38" data-template="ase/lj38-lbfgs-tuned">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="template">ase/lj38-lbfgs-tuned</td>
@@ -776,10 +787,60 @@ The number is written only after the run finishes under the problem rule.
    <td>df8da5992675</td>
    <td><a href="https://www-wales.ch.cam.ac.uk/svn.tar.bz2">https://www-wales.ch.cam.ac.uk/svn.tar.bz2</a></td>
    </tr>
+   <tr>
+   <td>global optimization</td>
+   <td>02aaf45245af</td>
+   <td>02aaf45245af</td>
+   <td><a href="https://www-wales.ch.cam.ac.uk/svn.tar.bz2">https://www-wales.ch.cam.ac.uk/svn.tar.bz2</a></td>
+   </tr>
    </tbody></table></div>
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="globalopt/lj150" data-template="gmin/lj150-bh">
+   <td>lj150</td>
+   <td data-field="template">gmin/lj150-bh</td>
+   <td data-field="version">GMIN df8da599</td>
+   <td data-field="commit">02aaf45245af</td>
+   <td data-field="par2_mean">1.75804e+06</td>
+   <td data-field="mean_calls">1.65804e+06</td>
+   <td data-field="median_calls">1.14412e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="globalopt/lj38" data-template="gmin/lj38-csm">
+   <td>Lennard-Jones 38 global minimum</td>
+   <td data-field="template">gmin/lj38-csm</td>
+   <td data-field="version">GMIN df8da599</td>
+   <td data-field="commit">02aaf45245af</td>
+   <td data-field="par2_mean">5883.83</td>
+   <td data-field="mean_calls">5883.83</td>
+   <td data-field="median_calls">3980.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="globalopt/lj75" data-template="gmin/lj75-bhpt">
+   <td>lj75</td>
+   <td data-field="template">gmin/lj75-bhpt</td>
+   <td data-field="version">GMIN df8da599</td>
+   <td data-field="commit">02aaf45245af</td>
+   <td data-field="par2_mean">1.96655e+06</td>
+   <td data-field="mean_calls">986545</td>
+   <td data-field="median_calls">1e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 196, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="globalopt/lj98" data-template="gmin/lj98-bh">
+   <td>lj98</td>
+   <td data-field="template">gmin/lj98-bh</td>
+   <td data-field="version">GMIN df8da599</td>
+   <td data-field="commit">02aaf45245af</td>
+   <td data-field="par2_mean">282815</td>
+   <td data-field="mean_calls">282815</td>
+   <td data-field="median_calls">173058</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
    <tr data-problem="minimization/lj38" data-template="gmin/lj38-lbfgs">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="template">gmin/lj38-lbfgs</td>

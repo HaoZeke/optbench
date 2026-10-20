@@ -4,16 +4,36 @@ suite = "globalopt"
 problem = "tip4p10"
 contract = "partial"
 entry_count = 2
+remark = "Success is an energy at or below the Cambridge Cluster Database TIP4P N=10 minimum plus 0.001. The cap of 1000000 force calls is above the archived GMIN maximum of 148360."
+
+[potential]
+kind = "tip4p"
+rigid = true
+
+[reference]
+energy = -391.0226842125
+page = "http://www-wales.ch.cam.ac.uk/~wales/CCD/TIP4P-water.html"
+points = "https://www-wales.ch.cam.ac.uk/~wales/CCD/TIP4P/xyz/TIP4P-10.xyz"
+
+[sample]
+starts = 10000
+
+[convergence]
+energy_above_minimum = 0.001
+max_force_calls = 1000000
+
+[input]
+archive_path = "website/globalopt/tip4p10/10000_tip4p10.tar.gz"
 
 [metrics]
 required = ["force_calls", "force_calls_max", "force_calls_median", "force_calls_min", "nfailed"]
 
-[scoring.legacy]
-label = "legacy"
-rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean. The row stays labelled legacy."
+[scoring.archive]
+label = "archive"
+rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean. The row stays on the archive table."
 
 [scoring.v2]
-version = "par2-wilson-bootstrap"
+version = "par2-rate-bootstrap"
 par_factor = 2
 bootstrap_resamples = 2000
 bootstrap_seed = 20261015
@@ -33,8 +53,8 @@ required = [
   "median",
   "median_low",
   "median_high",
-  "wilson_low",
-  "wilson_high",
+  "rate_low",
+  "rate_high",
   "n",
   "nfailed",
   "n_cap",

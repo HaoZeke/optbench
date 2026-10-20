@@ -99,4 +99,13 @@ def check(problems_dir: Path, oracle_path: Path) -> int:
             print(line)
         return 1
     print("site tables match the board")
+    from .findings import findings_errors
+
+    finding_errors = findings_errors(root)
+    if finding_errors:
+        print(f"findings {len(finding_errors)}")
+        for line in finding_errors:
+            print(line)
+        return 1
+    print("findings match the archive rows")
     return 0
