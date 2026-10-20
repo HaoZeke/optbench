@@ -493,7 +493,7 @@ force differs from `Morse::force` by more than that.
 `pair_style = "eon-morse"` on `saddle-search/pt-island` selects
 `morse_eon` in `potential_from_problem`. pARTn already calls
 `pes.morse_pt`. The eOn client and bounded SVN saddle-pt kernels are
-`morse_shift`. The develop saddle-pt templates name `morse_eon`. Sella
+`morse_shift`. The develop dimer template names `morse_pt`. The develop lanczos saddle-pt template names `morse_eon`. Sella
 and ASE dimer on this problem use energy-shifted Morse at cutoff 9.5.
 `tsopt/pt-island` stays `morse/smooth/linear`.
 

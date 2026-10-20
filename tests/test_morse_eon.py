@@ -87,7 +87,7 @@ def test_saddle_templates_name_the_eon_kernel():
         "eon-svn/saddle-pt-md",
     ):
         assert load_template(ROOT, name)["kernel"] == "morse_shift"
-    assert load_template(ROOT, "eon/develop-saddle-pt-dimer")["ini"]["Potential"]["potential"] == "morse_eon"
+    assert load_template(ROOT, "eon/develop-saddle-pt-dimer")["ini"]["Potential"]["potential"] == "morse_pt"
     assert load_template(ROOT, "eon/develop-saddle-pt-lanczos")["ini"]["Potential"]["potential"] == "morse_eon"
     for name in (
         "sella/pt-island-search-default",

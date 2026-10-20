@@ -51,7 +51,7 @@ def test_default_grid_is_one_real_start():
     assert EonDevelopSaddlePtDimer.campaign_seeds == [str(seed) for seed in range(1000, 1010)]
     assert EonDevelopSaddlePtDimer.params == [["1000"], ["pt-island"]]
     assert EonDevelopSaddlePtDimer.passes == 1
-    assert EonDevelopSaddlePtDimer.potential == "morse_eon"
+    assert EonDevelopSaddlePtDimer.potential == "morse_pt"
     assert EonDevelopSaddlePtLanczos.potential == "morse_eon"
     assert EonDevelopSaddlePtLanczos.campaign_seeds == ["1000", "1001"]
     assert EonDevelopSaddlePtLanczos.params[0] == ["1000"]
