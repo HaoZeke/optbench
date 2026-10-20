@@ -4,7 +4,13 @@ Archive commit `0f26b796`. A rerun matches when each archived metric is within o
 
 47 reproduced, 28 not reproduced, 76 not rerun. 151 archive rows.
 
-The archived Pt-island adaptive hypersphere row is the paper row. EON (SVN r2549) and eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) are different codes, ranked beside that row on the same start and the 0.001 force stop. Their harness gaps stay as findings.
+EON (SVN r2549) and eOn (develop 500350d9) are separate codes on the same pt-island start and the 0.001 force stop. The counts sit beside the archive. Differences are findings.
+
+| Code | Harness calls | Unique saddles | Fraction connected | Searches | Stop |
+| --- | ---: | ---: | ---: | ---: | --- |
+| Archive, adaptive hypersphere | 423491.1 | 114.9 | 0.8 | 1737.5 | |
+| EON (SVN r2549) | 7416339 | 120 | 0.7082292667307076 | 15615 | 27 qualifying saddles |
+| eOn (develop 500350d9) | 3459857 | 80 | 0.6868992035155177 | 7282 | 27 qualifying saddles |
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 

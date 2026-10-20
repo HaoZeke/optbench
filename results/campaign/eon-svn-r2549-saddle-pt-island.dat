@@ -1,7 +1,6 @@
 # EON (SVN r2549). HarnessCounter through ext_pot. Stock untuned AKMC.
 # problem saddle-search/pt-island start pt-island converged_force 0.001
 counter harness
-comparable true
 code EON (SVN r2549)
 code_version r2549
 commit r2549
@@ -28,7 +27,8 @@ n_crash 0
 n_divergence 0
 n_cap 0
 n_wrong_stationary 0
-# finding_mean_unique_saddles 120.0
-# finding_mean_fraction_connected 0.7082292667307076
-# finding_mean_total_searches 15615.0
-# finding_mean_qualifying 27.0
+unique_saddles 120.0
+fraction_connected 0.7082292667307076
+total_searches 15615.0
+qualifying 27.0
+stop 27 qualifying saddles

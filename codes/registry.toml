@@ -55,14 +55,14 @@ committed = "2026-01-23"
 note = "The old SVN code, not a version of https://github.com/TheochemUI/eon. Latest revision r2549, built with Fortran and without source patches. eonclient is the henkelman mirror tag v1.1.2549 because historical docs in the SVN tree are forbidden. The Pt-island saddle row uses the stock classic dimer and the harness counter. It is not tuned toward the archived SoftSaddle number."
 
 [[code]]
-id = "eon-develop-a7aa574"
-name = "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)"
+id = "eon-develop-500350d9"
+name = "eOn (develop 500350d9)"
 role = "minimization and saddle search"
 repository = "https://github.com/TheochemUI/eon"
-ref = "develop"
-commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
-committed = "2026-10-18"
-note = "Current develop of https://github.com/TheochemUI/eon, a different code from the SVN EON tree. Stock meson build, Fortran on, no source patches. GPR-dimer stays off because TheochemUI/gpr_optim is private. The Pt-island saddle row uses the stock classic dimer and the harness counter. It is not tuned toward the archived SoftSaddle number. The older develop pin 7095b23 stays for the scores that were run on it."
+ref = "fix/develop-regressions-vs-350"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
+committed = "2026-10-20"
+note = "eOn on fix/develop-regressions-vs-350 at 500350d9fae881f06c7ef194e5868da079c4be5a, a different code from the SVN EON tree. The commit includes 44931a78, which counts saddle calls on every image. Stock meson build, Fortran on, no source patches. GPR-dimer stays off because TheochemUI/gpr_optim is private. The Pt-island saddle row uses the stock classic dimer and the harness counter. Settings are not adjusted toward the archived SoftSaddle counts. The older develop pin 7095b23 stays for the scores that were run on it."
 
 [[code]]
 id = "rgmin"

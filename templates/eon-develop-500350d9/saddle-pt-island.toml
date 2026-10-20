@@ -1,14 +1,14 @@
-id = "eon-develop-a7aa574/saddle-pt-island"
+id = "eon-develop-500350d9/saddle-pt-island"
 engine = "eon"
 problem = "saddle-search/pt-island"
-code = "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)"
+code = "eOn (develop 500350d9)"
 code_version = "3.6.0"
-commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
 algorithm = "Dimer"
 reducer = "harness"
 failure_cap = 100000000
 tuning = "default"
-note = """Stock, untuned AKMC on the Pt island. Same start and convergence as the archive: pt-island.con, converged_force 0.001. Classic dimer, improved false, rotations_max 20, converged_angle 5, rotation steepest descent. Optimizer L-BFGS, max_move 0.2, max_iterations 1000. Displacement is restricted to atoms 0-6, radius 3.3, magnitude 0.1. Potential morse_pt. Temperature 700 K. The ranked repetition is Main random_seed 1000 on pt-island. pass_limit 800. The binary is current develop a7aa57472fb7d823953fd36b78cd755fa4842d30, Fortran left on, no source patches. The run swaps the potential for ext_pot. The harness kernel is the shifted Morse the stock morse_pt potential uses: cutoff 9.5, pair energy zero at the cutoff. Settings are the stock eon/develop-saddle-pt-dimer keys. Nothing was changed to close a gap with the archived SoftSaddle row."""
+note = """Stock, untuned AKMC on the Pt island. Same start and convergence as the archive: pt-island.con, converged_force 0.001. Classic dimer, improved false, rotations_max 20, converged_angle 5, rotation steepest descent. Optimizer L-BFGS, max_move 0.2, max_iterations 1000. Displacement is restricted to atoms 0-6, radius 3.3, magnitude 0.1. Potential morse_pt. Temperature 700 K. The ranked repetition is Main random_seed 1000 on pt-island. The stop is 27 qualifying saddles or pass_limit 800. The binary is eOn 500350d9fae881f06c7ef194e5868da079c4be5a on fix/develop-regressions-vs-350, which includes 44931a78 so saddle calls are counted on every image. Fortran left on, no source patches. The run swaps the potential for ext_pot. The harness kernel is the shifted Morse the stock morse_pt potential uses: cutoff 9.5, pair energy zero at the cutoff. Settings are the stock eon/develop-saddle-pt-dimer keys. Nothing was changed to close a gap with the archived SoftSaddle counts."""
 
 pass_limit = 800
 
