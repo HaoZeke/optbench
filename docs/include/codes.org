@@ -343,7 +343,7 @@
    <td data-field="template">rgsaddle/ew-ci-neb-lbfgs</td>
    <td data-field="version">rgsaddle 0.2.2</td>
    <td data-field="commit">c0db2b8d333c</td>
-   <td data-field="par2_mean">8024.43</td>
+   <td data-field="par2_mean">168024</td>
    <td data-field="mean_calls">4639.8</td>
    <td data-field="median_calls">2414</td>
    <td data-field="failures">crash 0, divergence 0, cap 16, wrong_stationary 1</td>
@@ -441,15 +441,15 @@
    <td data-field="failures">crash 0, divergence 0, cap 29, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="ase/de-lj38-2ts-default">
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="ase/de-lj38-2ts-tuned">
    <td>lj38_2ts_separation</td>
-   <td data-field="template">ase/de-lj38-2ts-default</td>
+   <td data-field="template">ase/de-lj38-2ts-tuned</td>
    <td data-field="version">ASE 3.29.0</td>
    <td data-field="commit">f27c0005ae6a</td>
-   <td data-field="par2_mean">20000</td>
-   <td data-field="mean_calls">2500</td>
-   <td data-field="median_calls">2500</td>
-   <td data-field="failures">crash 0, divergence 51, cap 0, wrong_stationary 0</td>
+   <td data-field="par2_mean">442917</td>
+   <td data-field="mean_calls">37035.3</td>
+   <td data-field="median_calls">40001</td>
+   <td data-field="failures">crash 0, divergence 0, cap 45, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-template="ase/de-pt-island-tuned">
@@ -737,7 +737,7 @@
    <td data-field="template">tsase/ci-neb</td>
    <td data-field="version">tsase 1.0</td>
    <td data-field="commit">98aac60b5d99</td>
-   <td data-field="par2_mean">18812.1</td>
+   <td data-field="par2_mean">451753</td>
    <td data-field="mean_calls">9690.35</td>
    <td data-field="median_calls">10000</td>
    <td data-field="failures">crash 0, divergence 1, cap 43, wrong_stationary 2</td>
@@ -959,7 +959,7 @@
    <td data-field="template">compass/sqnm</td>
    <td data-field="version">compass 1.0.0</td>
    <td data-field="commit">22da7bd5f69c</td>
-   <td data-field="par2_mean">6713.37</td>
+   <td data-field="par2_mean">100831</td>
    <td data-field="mean_calls">4586.12</td>
    <td data-field="median_calls">4031</td>
    <td data-field="failures">crash 0, divergence 0, cap 9, wrong_stationary 1</td>

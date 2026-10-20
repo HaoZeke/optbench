@@ -6,9 +6,9 @@ commit = "b7081b932a060be11342fbe8287ac35da8ada879"
 algorithm = "DNEB + hybrid eigenvector following"
 problem = "double-ended-saddle-search/lj38_2ts_separation"
 profile = "default"
-note = "pele 0.1.2 unmodified double-ended connect defaults on the 51 LJ38 pairs. Lennard-Jones eps 1 sig 1. The harness stops at max_force_calls 10000 from problems/double-ended-saddle-search/lj38_2ts_separation.toml. The archive states no force cap. Stock DNEB uses k 100 and image density 10. The transition-state tolerance is the pele default 1e-4, inside the problem force norm 0.001."
+note = "pele 0.1.2. Unmodified double-ended connect defaults on the 51 LJ38 pairs. Lennard-Jones eps 1 sig 1. The harness stops at the problem cap of 250000 calls. Stock DNEB uses k 100 and image density 10. The transition-state tolerance is the pele default 1e-4, inside the problem force norm 0.001."
 
 [stop]
 norm = "l2"
 force_norm = 0.001
-max_force_calls = 10000
+max_force_calls = 250000
