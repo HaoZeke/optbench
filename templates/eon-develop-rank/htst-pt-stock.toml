@@ -1,14 +1,14 @@
 id = "eon-develop-rank/htst-pt-stock"
 engine = "eon"
 problem = "hTST/Pt"
-code = "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)"
+code = "eOn (develop 500350d9)"
 code_version = "3.6.0"
-commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
 algorithm = "Dimer"
 reducer = "harness-htst"
 tuning = "stock"
 note = '''
-Stock, untuned eOn develop a7aa57472fb7d823953fd36b78cd755fa4842d30 on the same hTST/Pt reactant, seed, displacement, and convergence as the archived alpha_dimer-qm config. Unspecified keys stay at the develop defaults. The client is that develop tree's eonclient and the potential is its morse_pt. A start is one barrier window from optbench.htst, the same 15 barriers, rate_ref, prefactor, and rate_accuracy as the 2014 report. Force calls are sad-fcs. This code is not EON SVN. Nothing was tuned toward the archived means.
+Stock, untuned eOn at 500350d9fae881f06c7ef194e5868da079c4be5a on branch fix/develop-regressions-vs-350. Same hTST/Pt reactant, seed, displacement, and convergence as the archived alpha_dimer-qm config. Unspecified keys stay at that tree's defaults. The client is that tree's eonclient and the potential is its morse_pt. A start is one barrier window from optbench.htst, the same 15 barriers, rate_ref, prefactor, and rate_accuracy as the 2014 report. Force calls are sad-fcs. This code is not EON SVN. Nothing was tuned toward the archived means.
 '''
 seeds = [42]
 starts = ["pt"]

@@ -7,11 +7,11 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>TSASE</th><th>pysisyphus</th><th>EON (SVN r2549)</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>eOn (develop 500350d9)</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>TSASE</th><th>pysisyphus</th><th>EON (SVN r2549)</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="minimization/lj38">
    <th scope="row"><a href="#lj38">Lennard-Jones 38 clusters</a></th>
    <td data-code="eOn" data-template="eon/lj38-lbfgs-m100" data-par2="180.137"><span class="bench-score">180.137</span><a href="#lj38-templates">eon/lj38-lbfgs-m100</a></td>
-   <td data-code="eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)">—</td>
+   <td data-code="eOn (develop 500350d9)">—</td>
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin" data-template="rgmin/lj38-dogleg" data-par2="81.881"><span class="bench-score">81.881</span><a href="#lj38-templates">rgmin/lj38-dogleg</a></td>
    <td data-code="rgsaddle">—</td>
@@ -30,7 +30,7 @@
    <tr data-problem="minimization/lj38-noise">
    <th scope="row"><a href="#lj38-noise">Lennard-Jones 38 clusters with Gaussian force noise</a></th>
    <td data-code="eOn">—</td>
-   <td data-code="eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)">—</td>
+   <td data-code="eOn (develop 500350d9)">—</td>
    <td data-code="Eon svn" data-template="eon-svn/lj38-noise-0" data-par2="300.052"><span class="bench-score">300.052</span><a href="#lj38-noise-templates">eon-svn/lj38-noise-0</a></td>
    <td data-code="rgmin" data-template="noise/rgmin-dogleg-s0" data-par2="81.881"><span class="bench-score">81.881</span><a href="#lj38-noise-templates">noise/rgmin-dogleg-s0</a></td>
    <td data-code="rgsaddle">—</td>
@@ -49,7 +49,7 @@
    <tr data-problem="minimization/morse-bulk">
    <th scope="row"><a href="#morse-bulk">Morse bulk</a></th>
    <td data-code="eOn" data-template="eon/morse-lbfgs-m100" data-par2="54.18"><span class="bench-score">54.18</span><a href="#morse-bulk-templates">eon/morse-lbfgs-m100</a></td>
-   <td data-code="eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)">—</td>
+   <td data-code="eOn (develop 500350d9)">—</td>
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin" data-template="rgmin/morse-newton" data-par2="8.35"><span class="bench-score">8.35</span><a href="#morse-bulk-templates">rgmin/morse-newton</a></td>
    <td data-code="rgsaddle">—</td>

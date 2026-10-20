@@ -26,13 +26,13 @@ note = "Current main, including merged pull request 776. The version string is 3
 
 [[code]]
 id = "eon-develop"
-name = "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)"
+name = "eOn (develop 500350d9)"
 role = "minimization and saddle search"
 repository = "https://github.com/TheochemUI/eon"
-ref = "develop"
-commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
-committed = "2026-10-18"
-note = "Current develop HEAD, a different code from EON SVN r2549. The version string is 3.6.0. Built from source with Fortran through rgpot. GPR-dimer is absent: TheochemUI/gpr_optim is private. This pin is not the conda-forge 3.5.0 binary. Scores run on 7095b23ac17d49f434a5e08ccb072897ceca698e keep that commit and the name eOn."
+ref = "fix/develop-regressions-vs-350"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
+committed = "2026-10-20"
+note = "Commit 500350d9fae881f06c7ef194e5868da079c4be5a on branch fix/develop-regressions-vs-350. A different code from EON SVN r2549. The version string is 3.6.0. Built from source with Fortran through rgpot. GPR-dimer is absent: TheochemUI/gpr_optim is private. This pin is not the conda-forge 3.5.0 binary. Scores run on 7095b23ac17d49f434a5e08ccb072897ceca698e keep that commit and the name eOn."
 
 [[code]]
 id = "eon-svn"

@@ -144,14 +144,14 @@ The number is written only after the run finishes under the problem rule.
    <li>eon-client/sd-twopoint: no per-start record.</li>
    <li>eon-client/sd: no per-start record.</li>
    </ul>
-   <h3>eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)</h3>
+   <h3>eOn (develop 500350d9)</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
    <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
    <td>minimization and saddle search</td>
-   <td>develop</td>
-   <td>a7aa57472fb7</td>
+   <td>fix/develop-regressions-vs-350</td>
+   <td>500350d9fae8</td>
    <td><a href="https://github.com/TheochemUI/eon">https://github.com/TheochemUI/eon</a></td>
    </tr>
    </tbody></table></div>
@@ -161,8 +161,8 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="hTST/Pt" data-template="eon-develop-rank/htst-pt-stock">
    <td>Pt</td>
    <td data-field="template">eon-develop-rank/htst-pt-stock</td>
-   <td data-field="version">eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) 3.6.0</td>
-   <td data-field="commit">a7aa57472fb7</td>
+   <td data-field="version">eOn (develop 500350d9) 3.6.0</td>
+   <td data-field="commit">500350d9fae8</td>
    <td data-field="par2_mean"></td>
    <td data-field="mean_calls">1.92108e+06</td>
    <td data-field="median_calls">1.92108e+06</td>

@@ -76,7 +76,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | --- | --- | --- | --- |
 | Al/eon-dimer-cg | barrier_force_calls 28870, barrier_jobs 48, rate_force_calls 897900, rate_jobs 1511 | 19660, 50, 620600, 1600 | not reproduced; htst_al |
 | Al/eon-dimer-cg2 | — | — | not rerun |
-| Pt/alpha_dimer-qm | — | — | not rerun |
+| Pt/alpha_dimer-qm | — | — | paper row |
 | Pt/eon-dimer-cg | barrier_force_calls 496000, barrier_jobs 1050, rate_force_calls 25630, rate_jobs 54 | 506000, 1062, 27160, 57 | reproduced |
 | Pt/eon-dimer-cg2 | — | — | not rerun |
 | Pt/eon-dimer-lbfgs | — | — | not rerun |
@@ -88,7 +88,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | Pt/quench_dimer-qm | — | — | not rerun |
 | Pt/tsase-dimer-qm | — | — | not rerun |
 
-Pt/alpha_dimer-qm stays the archived paper row. Three stock runs are ranked beside it on the archived reactant, seed 42, and the 2014 barrier and rate windows. EON (SVN r2549) scored barrier_jobs 2339, barrier_force_calls 9.862e+05, rate_jobs 135, rate_force_calls 5.699e+04 over 1 barrier window and 17 rate windows. eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) scored barrier_jobs 2455, barrier_force_calls 1.921e+06, rate_jobs 245, rate_force_calls 1.917e+05 over 1 barrier window and 10 rate windows. TSASE 1.0 (98aac60b) alphaDimer-QM scored barrier_jobs 2352, barrier_force_calls 5.577e+06, rate_jobs 137, rate_force_calls 3.209e+05 over 1 barrier window and 16 rate windows. The archive is 6192, 1.908e+07, 49, and 1.509e+05, averaged over 1 barrier window and 142 rate windows. The pin SSDimer constructor has no alpha or alpha2 argument. The gaps are findings.
+The Pt/alpha_dimer-qm archive row is the paper row. Three stock runs are ranked beside it on the archived reactant, seed 42, and the same windows and stops. EON (SVN r2549) scored barrier_jobs 2339, barrier_force_calls 9.862e+05, rate_jobs 135, rate_force_calls 5.699e+04 over 1 barrier window and 17 rate windows. eOn (develop 500350d9) scored barrier_jobs 2455, barrier_force_calls 1.921e+06, rate_jobs 245, rate_force_calls 1.917e+05 over 1 barrier window and 10 rate windows. TSASE 1.0 (98aac60) alphaDimer-QM scored barrier_jobs 2352, barrier_force_calls 5.577e+06, rate_jobs 137, rate_force_calls 3.209e+05 over 1 barrier window and 16 rate windows. The paper row is barrier_jobs 6192, barrier_force_calls 1.908e+07, rate_jobs 49, rate_force_calls 1.509e+05 over 1 barrier window and 142 rate windows. The TSASE 1.0 SSDimer constructor has no alpha or alpha2 argument. The differences are findings.
 
 ## lowest-eigenvector
 
