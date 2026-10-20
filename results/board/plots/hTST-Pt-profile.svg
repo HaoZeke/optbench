@@ -216,39 +216,39 @@ L 507.6 26.16
    </g>
    <g id="legend_1">
     <g id="patch_7">
-     <path d="M 125.46125 257.1 
+     <path d="M 140.312187 257.1 
 L 502.7 257.1 
 Q 504.1 257.1 504.1 255.7 
 L 504.1 235.398906 
 Q 504.1 233.998906 502.7 233.998906 
-L 125.46125 233.998906 
-Q 124.06125 233.998906 124.06125 235.398906 
-L 124.06125 255.7 
-Q 124.06125 257.1 125.46125 257.1 
+L 140.312187 233.998906 
+Q 138.912187 233.998906 138.912187 235.398906 
+L 138.912187 255.7 
+Q 138.912187 257.1 140.312187 257.1 
 z
 " style="fill: #ffffff; opacity: 0.8; stroke: #cccccc; stroke-linejoin: miter"/>
     </g>
     <g id="line2d_14">
-     <path d="M 126.86125 239.667813 
-L 133.86125 239.667813 
-L 133.86125 239.667813 
-L 140.86125 239.667813 
-L 140.86125 239.667813 
+     <path d="M 141.712187 239.667813 
+L 148.712187 239.667813 
+L 148.712187 239.667813 
+L 155.712187 239.667813 
+L 155.712187 239.667813 
 " style="fill: none; stroke: #1f77b4; stroke-width: 1.5; stroke-linecap: square"/>
     </g>
     <g id="text_15">
-     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="146.46125" y="242.117813" transform="rotate(-0 146.46125 242.117813)">EON/htst-pt-dimer-cg2 r2549 Dimer-CG rotation: max=50, tol=1 campaign r2549</text>
+     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="161.312187" y="242.117813" transform="rotate(-0 161.312187 242.117813)">EON/htst-pt-dimer-cg2 r2549 Dimer-CG rotation: max=50, tol=1 campaign r2549</text>
     </g>
     <g id="line2d_15">
-     <path d="M 126.86125 250.168359 
-L 133.86125 250.168359 
-L 133.86125 250.168359 
-L 140.86125 250.168359 
-L 140.86125 250.168359 
+     <path d="M 141.712187 250.168359 
+L 148.712187 250.168359 
+L 148.712187 250.168359 
+L 155.712187 250.168359 
+L 155.712187 250.168359 
 " style="fill: none; stroke: #ff7f0e; stroke-width: 1.5; stroke-linecap: square"/>
     </g>
     <g id="text_16">
-     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="146.46125" y="252.618359" transform="rotate(-0 146.46125 252.618359)">eOn/develop-htst-pt-dimer-cg2 a7aa57472fb7 Dimer-CG rotation: max=50, tol=1 campaign a7aa574</text>
+     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="161.312187" y="252.618359" transform="rotate(-0 161.312187 252.618359)">eOn/develop-htst-pt-dimer-cg2 500350d9 Dimer-CG rotation: max=50, tol=1 campaign 500350d</text>
     </g>
    </g>
   </g>

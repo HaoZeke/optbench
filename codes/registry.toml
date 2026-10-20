@@ -45,14 +45,14 @@ committed = "2026-01-23"
 note = "EON is the SVN code. It is not eOn. This pin is unmodified r2549, Fortran linked. eonclient -v prints r2549. ImprovedDimer at r2006 uses theta = F_R + thetaOld * F_R_Old.norm() * gamma. r2222, which this revision still has, uses theta = F_R + thetaOld * gamma. The hTST Pt dimer-CG run leaves finite difference, the convergence metric, and the thermal window at this revision's defaults."
 
 [[code]]
-id = "eOn-develop-a7aa574"
-name = "eOn (develop a7aa57472fb7)"
+id = "eOn-develop-500350d9"
+name = "eOn (develop 500350d9)"
 role = "minimization and saddle search"
 repository = "https://github.com/TheochemUI/eon"
-ref = "develop"
-commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
-committed = "2026-10-18"
-note = "eOn is the git code at https://eondocs.org and https://github.com/TheochemUI/eon. It is not EON. This pin is current develop a7aa57472fb7d823953fd36b78cd755fa4842d30, stock. The 3.6.0 pin at 7095b23 stays for the scores that were run on it. GPR-dimer is disabled on this build."
+ref = "fix/develop-regressions-vs-350"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
+committed = "2026-10-20"
+note = "eOn is the git code at https://eondocs.org and https://github.com/TheochemUI/eon. It is not EON. This pin is 500350d9fae881f06c7ef194e5868da079c4be5a on fix/develop-regressions-vs-350, stock. The 3.6.0 pin at 7095b23 stays for the scores that were run on it. GPR-dimer is disabled on this build. ImprovedDimer CG uses theta = F_R + thetaOld * gamma, then removes the component along tau. r2006 uses theta = F_R + thetaOld * F_R_Old.norm() * gamma."
 
 [[code]]
 id = "eon-svn"

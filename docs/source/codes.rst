@@ -176,14 +176,14 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">9</td>
    </tr>
    </tbody></table></div>
-   <h3>eOn (develop a7aa57472fb7)</h3>
+   <h3>eOn (develop 500350d9)</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
    <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
    <td>minimization and saddle search</td>
-   <td>develop</td>
-   <td>a7aa57472fb7</td>
+   <td>fix/develop-regressions-vs-350</td>
+   <td>500350d9fae8</td>
    <td><a href="https://github.com/TheochemUI/eon">https://github.com/TheochemUI/eon</a></td>
    </tr>
    </tbody></table></div>
@@ -193,8 +193,8 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="hTST/Pt" data-template="eOn/develop-htst-pt-dimer-cg2">
    <td>Pt</td>
    <td data-field="template">eOn/develop-htst-pt-dimer-cg2</td>
-   <td data-field="version">eOn (develop a7aa57472fb7) a7aa57472fb7</td>
-   <td data-field="commit">a7aa57472fb7</td>
+   <td data-field="version">eOn (develop 500350d9) 500350d9</td>
+   <td data-field="commit">500350d9fae8</td>
    <td data-field="par2_mean"></td>
    <td data-field="mean_calls">855210</td>
    <td data-field="median_calls">763424</td>

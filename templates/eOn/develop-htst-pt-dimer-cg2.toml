@@ -1,15 +1,15 @@
 id = "eOn/develop-htst-pt-dimer-cg2"
 engine = "eon"
 problem = "hTST/Pt"
-code = "eOn (develop a7aa57472fb7)"
-code_version = "a7aa57472fb7"
-commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+code = "eOn (develop 500350d9)"
+code_version = "500350d9"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
 algorithm = "Dimer-CG rotation: max=50, tol=1"
 reducer = "harness-htst"
 pass_limit = 4000
 window_target = 9
 geometry = "website/hTST/Pt/eon-dimer-cg2/pos.con"
-note = "eOn is the git code at https://github.com/TheochemUI/eon, not EON. This row is develop a7aa57472fb7d823953fd36b78cd755fa4842d30, stock and unmodified. The archive dated 29 Jan 2013 is the paper row. ImprovedDimer at r2006 uses theta = F_R + thetaOld * F_R_Old.norm() * gamma. r2222, which later EON revisions keep, uses theta = F_R + thetaOld * gamma. The ini is the archive file: confidence 1.9, rotations_max 50, converged_angle 1, morse_pt, seed 42, converged_force 0.001, max_iterations 5000, and the archive displacement. Finite difference, the convergence metric, the thermal window, and the dimer optimizer stay at this revision's defaults. The gap is that rotation change. Nothing is tuned to close it. A start is one barrier window. The archived mean is over 9."
+note = "eOn is the git code at https://github.com/TheochemUI/eon, not EON. This row is 500350d9fae881f06c7ef194e5868da079c4be5a on fix/develop-regressions-vs-350, stock and unmodified. ImprovedDimer CG uses theta = F_R + thetaOld * gamma, then removes the component along tau. r2006 uses theta = F_R + thetaOld * F_R_Old.norm() * gamma. The ini matches the archive file: confidence 1.9, rotations_max 50, converged_angle 1, morse_pt, seed 42, converged_force 0.001, max_iterations 5000, and the archive displacement. Finite difference, the convergence metric, the thermal window, and the dimer optimizer stay at this revision's defaults. A start is one barrier window. The archived mean is over 9."
 
 [htst]
 temperature = 700

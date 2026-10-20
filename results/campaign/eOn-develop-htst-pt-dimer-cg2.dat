@@ -8,16 +8,16 @@ searches 13644
 missed_barriers 0
 unexpected_barriers 0
 reference_processes 15
-code eOn (develop a7aa57472fb7)
-code_version a7aa57472fb7
-commit a7aa57472fb7d823953fd36b78cd755fa4842d30
+code eOn (develop 500350d9)
+code_version 500350d9
+commit 500350d9fae881f06c7ef194e5868da079c4be5a
 counter htst-reducer
 reducer harness-htst
 contributor Rohit Goswami
 random_seed 42
 communicator_jobs 4
 passes 3412
-seconds 3608.74
+seconds 3359.69
 algorithm Dimer-CG rotation: max=50, tol=1
 template eOn/develop-htst-pt-dimer-cg2
 problem hTST/Pt

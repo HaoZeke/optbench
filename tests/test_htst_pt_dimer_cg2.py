@@ -1,4 +1,4 @@
-"""Pt dimer-CG max=50: the archive is the paper row, and the two codes stay stock."""
+"""Pt dimer-CG max=50: EON and eOn stay separate stock rows."""
 
 from pathlib import Path
 
@@ -57,8 +57,9 @@ def test_eon_svn_and_eon_git_are_separate_stock_rows():
     assert eon["code"] == "EON (SVN r2549)"
     assert eon["code_version"] == "r2549"
     assert eon["commit"] == "r2549"
-    assert git["code"] == "eOn (develop a7aa57472fb7)"
-    assert git["commit"] == "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+    assert git["code"] == "eOn (develop 500350d9)"
+    assert git["code_version"] == "500350d9"
+    assert git["commit"] == "500350d9fae881f06c7ef194e5868da079c4be5a"
     assert eon["code"] != git["code"]
     _untuned(eon)
     _untuned(git)
