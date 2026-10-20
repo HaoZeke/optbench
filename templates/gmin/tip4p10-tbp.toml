@@ -1,11 +1,12 @@
+# Latest GMIN, TIP4P water n=10, temperature basin-paving.
 id = "gmin/tip4p10-tbp"
 engine = "gmin"
 problem = "globalopt/tip4p10"
 code = "GMIN"
-code_version = "r27059"
-commit = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
+code_version = "df8da599"
+commit = "df8da599267534fbe43a250e578f7396a7946311"
 algorithm = "linear temperature basin-paving"
-paper_baseline = false
+tuning = "archive"
 note = """
-Linear temperature basin-paving for TIP4P water, n=10. The keyword file is archive/entries/globalopt/tip4p10/gmin-tbp/data from the 2014 gmin-tbp inputs: NTIP 4, CENTRE, EDIFF 1.D-3, SLOPPYCONV 1.D-3, TIGHTCONV 1.D-3, MAXIT 1.D4 1.D4, FIXBOTH, RANSEED 100, RADIUS 1.D1, MAXBFGS 1.D0, MAXERISE 1.D-4, TARGET -391.0233D0, STEPS 2.D6, STEP 0.D0 0.D0 1.56D0, TEMPERATURE 6.65D0, TBP -391.2 0.5 200 0.003 0.001 20. The 10000 starts are the archived angle-axis coordinates. A start succeeds when saveit writes "Target hit after". The recorded force call is NPCALL on that line, which is awk field 7. A missing line is a failure and is left out of the mean. The source is wales-27058.tar.bz2, SVNREV 27059. The binary was built with gfortran 13, serial, against libblas and liblapack. The score is that GMIN NPCALL, not a harness counter.
+Wales GMIN df8da599267534fbe43a250e578f7396a7946311, the SVNREV in svn.tar.bz2 sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. The source is unmodified. The binary is the project's gfortran Release build, serial, against libblas and liblapack. The keyword file is the 2014 gmin-tbp data file. NTIP 4, CENTRE, EDIFF 1.D-3, SLOPPYCONV 1.D-3, TIGHTCONV 1.D-3, FIXBOTH, RANSEED 100, RADIUS 1.D1, MAXBFGS 1.D0, MAXERISE 1.D-4, TARGET -391.0233D0, STEP 0.D0 0.D0 1.56D0, TEMPERATURE 6.65D0, and TBP -391.2 0.5 200 0.003 0.001 20 are copied as written. MAXIT 1.D4 1.D4 and STEPS 2.D6 are the same numbers written as MAXIT 10000 10000 and STEPS 2000000, because this GMIN reads those arguments as integers. Commented lines stay off. The 10000 starts are the archived angle-axis coordinates. A start is a hit when mc writes "target hit". The recorded call is NPCALL on that line, stored as force_calls with counter harness. The problem cap is 1000000 force calls. A miss costs 2000000.
 """

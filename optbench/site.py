@@ -287,11 +287,15 @@ def problem_html(
         code = _code_label(fields)
         row_id = _slug(f"{problem['id']}-{row['entry']}")
         missed = f"{problem['id']}/{row['entry']}" in misses
-        any_miss = any_miss or missed
+        archive_label = problem["id"] == "globalopt/tip4p10" and row["entry"] == "gmin-tbp"
+        any_miss = any_miss or (missed and not archive_label)
         label = row["entry"]
+        if archive_label:
+            year = str(fields.get("date") or "").split()[-1:]
+            label = " ".join([str(fields.get("code") or "GMIN"), *year]).strip()
         if held:
             label = f"{label} (held out of the original table)"
-        if missed:
+        if missed and not archive_label:
             label = f"{label} · not reproduced"
         prepared.append(
             {
