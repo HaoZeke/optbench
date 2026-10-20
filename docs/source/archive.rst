@@ -1322,15 +1322,14 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/tip4p10">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">gmin/tip4p10-stock</td><td data-field="version">GMIN df8da599</td><td data-field="commit">df8da5992675</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">8.05591e+06</td><td data-field="success_rate">0.5649</td><td data-field="wilson_low">0.55516</td><td data-field="wilson_high">0.57459</td><td data-field="median_calls">743216</td><td data-field="mean_calls">1.29676e+06</td><td data-field="failures">crash 0, divergence 0, cap 4351, wrong_stationary 0</td><td data-field="n">10000</td></tr>
+   <tr><td data-field="template">gmin/tip4p10-tbp</td><td data-field="version">GMIN df8da599</td><td data-field="commit">df8da5992675</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">16547.9</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.999616</td><td data-field="wilson_high">1</td><td data-field="median_calls">11980.5</td><td data-field="mean_calls">16547.9</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">10000</td></tr>
    </tbody></table></div>
-   <p class="bench-gaps">GMIN rows are off the ranked table.</p>
    <p><a href="generated/suites/globalopt.html#tip4p10">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="tip4p10-legacy">
    <h3>Legacy 2014 archive</h3>
    <details class="bench-details">
    <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
@@ -1347,7 +1346,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr></thead><tbody>
    <tr id="globalopt-tip4p10-gmin-tbp" class="best">
    <td class="num">1</td>
-   <td class="text">gmin-tbp · not reproduced</td>
+   <td class="text">GMIN 2014</td>
    <td class="text">GMIN</td>
    <td class="num">1.60990e+04</td>
    <td class="num">1.4512e+05</td>

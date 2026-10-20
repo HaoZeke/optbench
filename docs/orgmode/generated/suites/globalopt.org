@@ -102,7 +102,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
-   <td data-code="GMIN" data-template="gmin/tip4p10-stock" data-par2="8.05591e+06"><span class="bench-score">8.05591e+06</span><a href="#tip4p10-templates">gmin/tip4p10-stock</a></td>
+   <td data-code="GMIN" data-template="gmin/tip4p10-tbp" data-par2="16547.9"><span class="bench-score">16547.9</span><a href="#tip4p10-templates">gmin/tip4p10-tbp</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -491,30 +491,27 @@
    </section><section class="bench" id="tip4p10" data-problem="globalopt/tip4p10">
    <h2>tip4p10</h2>
    <dl class="bench-rule">
+   <dt>Cap</dt><dd>1000000 force calls</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">GMIN rows are off the ranked table.</p>
+   <figure class="bench-plot"><a href="../../_static/board/globalopt-tip4p10-profile.svg"><picture><source srcset="../../_static/board/globalopt-tip4p10-profile.webp" type="image/webp"><img src="../../_static/board/globalopt-tip4p10-profile.png" alt="Dolan-More profile for globalopt/tip4p10" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/globalopt-tip4p10-cost.svg"><picture><source srcset="../../_static/board/globalopt-tip4p10-cost.webp" type="image/webp"><img src="../../_static/board/globalopt-tip4p10-cost.png" alt="Cost versus success for globalopt/tip4p10" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
-   <p class="bench-gaps">No performance profile. One start has no finite cost.</p>
    <details class="bench-details" id="tip4p10-templates">
    <summary>All templates (1 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="globalopt/tip4p10">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">gmin/tip4p10-stock</td><td data-field="version">GMIN df8da599</td><td data-field="commit">df8da5992675</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">8.05591e+06</td><td data-field="success_rate">0.5649</td><td data-field="wilson_low">0.55516</td><td data-field="wilson_high">0.57459</td><td data-field="median_calls">743216</td><td data-field="mean_calls">1.29676e+06</td><td data-field="failures">crash 0, divergence 0, cap 4351, wrong_stationary 0</td><td data-field="n">10000</td></tr>
+   <tr><td data-field="template">gmin/tip4p10-tbp</td><td data-field="version">GMIN df8da599</td><td data-field="commit">df8da5992675</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">16547.9</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.999616</td><td data-field="wilson_high">1</td><td data-field="median_calls">11980.5</td><td data-field="mean_calls">16547.9</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">10000</td></tr>
    </tbody></table></div>
-   <h3>Not a harness score</h3><ul>
-   <li>gmin/tip4p10-tbp GMIN n=10000, counter gmin.</li>
-   </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="tip4p10-legacy">
    <h3>Legacy 2014 archive</h3>
    <details class="bench-details">
    <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
@@ -531,7 +528,7 @@
    </tr></thead><tbody>
    <tr id="globalopt-tip4p10-gmin-tbp" class="best">
    <td class="num">1</td>
-   <td class="text">gmin-tbp · not reproduced</td>
+   <td class="text">GMIN 2014</td>
    <td class="text">GMIN</td>
    <td class="num">1.60990e+04</td>
    <td class="num">1.4512e+05</td>
