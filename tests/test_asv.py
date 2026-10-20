@@ -104,6 +104,27 @@ def test_quadratic_grid_uses_the_sample_seeds():
     assert dimer["hessian_index"] == 1
 
 
+def test_optking_grid_is_seed_then_the_first_start():
+    from benchmarks import bench_optking
+
+    expected = {
+        "OptkingLj38RsIrfo": ("optking/lj38-rs-irfo", "tsopt/LJ38", "0000", 10000),
+        "OptkingLj38PRfo": ("optking/lj38-p-rfo", "tsopt/LJ38", "0000", 10000),
+        "OptkingPtRsIrfo": ("optking/pt-rs-irfo", "tsopt/pt-island", "initial_0", 10000),
+        "OptkingPtPRfo": ("optking/pt-p-rfo", "tsopt/pt-island", "initial_0", 10000),
+    }
+    for name, (template_id, problem_id, start, cap) in expected.items():
+        benchmark = getattr(bench_optking, name)
+        assert benchmark.param_names == ["seed", "start"]
+        assert benchmark.params == [["0"], [start]]
+        assert benchmark.template_id == template_id
+        assert benchmark.problem_id == problem_id
+        assert benchmark.cap == cap
+        assert benchmark.timeout == 14400
+        assert benchmark.repeat == 1
+        assert benchmark.track_force_calls.unit == "force calls"
+
+
 def test_pending_grid_is_every_problem_and_code():
     from benchmarks.pending import Pending
 
@@ -117,8 +138,12 @@ def test_pending_grid_is_every_problem_and_code():
         "eon-svn",
         "rgmin",
         "rgsaddle",
+        "geodesic",
         "ase",
         "sella",
+        "gmin",
+        "pele",
+        "optking",
         "artn",
         "tsase",
         "pykmc",
@@ -128,6 +153,10 @@ def test_pending_grid_is_every_problem_and_code():
         "pysisyphus",
         "optim",
         "gasp",
+        "airss",
+        "vcsqnm",
+        "softsaddle",
+        "lammpsneb",
     ]
     assert Pending.params[1] == code_ids()
     assert Pending.track_force_calls.unit == "force calls"
