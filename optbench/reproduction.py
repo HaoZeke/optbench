@@ -199,6 +199,15 @@ MATCHES: list[dict] = [
     {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "branch": "cells/pele/go", "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat", "cause": "pele_bh_defaults"},
     {"key": "hTST/Al/eon-dimer-cg", "template": "eon-svn/htst-al-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-al-dimer.dat", "kind": "htst", "cause": "htst_al"},
     {"key": "hTST/Pt/eon-dimer-cg", "template": "eon-svn/htst-pt-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-pt-dimer.dat", "kind": "htst"},
+    # The ranked PAR-2 rows stay on their own templates. This path is the
+    # rate comparison, so a miss does not take those rows off the board.
+    {
+        "key": "accelerated-md/standard_aladatom/eon-md-langevin",
+        "template": "stock-langevin/standard-aladatom",
+        "branch": "repro/accelerated-md-standard-aladatom-eon-md-langevin",
+        "path": "results/rates/standard-aladatom-langevin.dat",
+        "cause": "stock_langevin",
+    },
 ]
 
 
@@ -289,9 +298,26 @@ CAUSE_TEXT = {
         "The Wilson interval on 0 failures out of 1000 is about 0 to 3.83."
     ),
     "akmc_vs_langevin": (
-        "The archive rows are Langevin parallel replica. The harness rows are AKMC. "
-        "On infra/aladatom-repro, eon/aladatom-akmc true_rate 3.597591452e9 is 14.1 times 2.542941e8, "
-        "and eon/standard-aladatom-akmc true_rate 3.80613e7 is 45.5 times 8.359e5."
+        "The true_standard archive row is Langevin parallel replica at 2.542941e8. "
+        "No campaign is matched to that row. "
+        "On infra/aladatom-repro, eon/aladatom-akmc true_rate 3.597591452e9 is 14.1 times 2.542941e8."
+    ),
+    "stock_langevin": (
+        "The archive page scores 150 K Langevin Verlet parallel replica with friction 0.001/fs. "
+        "The archived uncertainty 7.211e4 on 8.359e5 is the Poisson standard error on 134 escapes. "
+        "This rerun uses that thermostat on the published 151-atom reactant. "
+        "Timestep 1 fs, dephase 1000 fs, state check 1000 fs, transition refinement, and the CG quench are the client defaults. "
+        "The censor window is 5 ns. An escape is a new quenched minimum. "
+        "The rate is the escape count divided by the summed exposure, and the uncertainty is that rate over sqrt of the escape count. "
+        "The closed set is 14 trajectories. EON SVN r2549, seeds 8-21, has 7 escapes in 4.900360e-8 s: "
+        "rate 1.428466e8, uncertainty 5.399096e7. "
+        "eOn develop, seeds 7, 8, and 10-21, has 8 escapes in 5.432650e-8 s: "
+        "rate 1.472578e8, uncertainty 5.206349e7. "
+        "Both lie outside the archived standard error. "
+        "r2549 loads stop_after_transition and does not read it, so its mean cost is the full window, 5235991 calls, PAR-2 5.23599e6. "
+        "develop leaves the MD loop at the escape, mean 4064914 calls, PAR-2 4.06491e6. "
+        "Quenched products sit near -470.257 eV and -470.291 eV. The reactant is near -470.239 eV. "
+        "The 18 Oct 2012 file on the archive site, eon-md-langevin/r.dat, is 2.543e8, the same figure as the true_standard row."
     ),
 }
 
@@ -471,6 +497,14 @@ def _sha(branch: str) -> str:
 
         SHA[branch] = subprocess.check_output(
             ["git", "rev-parse", "origin/cells/optim/saddle-pt"],
+            text=True,
+        ).strip()
+    if branch == "repro/accelerated-md-standard-aladatom-eon-md-langevin":
+        import subprocess
+
+        return subprocess.check_output(
+            ["git", "rev-parse", "HEAD"],
+            cwd=Path(__file__).resolve().parents[1],
             text=True,
         ).strip()
     if branch == "cells/pele/ts" and "cells/pele/ts" not in SHA:
@@ -863,7 +897,7 @@ def render_markdown(rows: list[dict]) -> str:
         for ident in idents:
             lines.append(f"- {ident}")
         lines.append("")
-    lines.append("Rows with no exact-setup campaign stay not rerun and are not given a cause. AKMC on aladatom is a different method from Langevin parallel replica; the ratios above are that comparison, and the archive rows stay not rerun. The archived standard_aladatom Langevin true_rate 8.359e5 is the paper row. Stock untuned harness scores of EON (SVN r2549) and eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) are ranked beside it.")
+    lines.append("A row with no exact-setup campaign has no rerun. The standard_aladatom Langevin paper row is the archived true_rate 8.359e5. Stock EON (SVN r2549) and eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) ran that parallel-replica protocol. The gap is the rate. Cost and PAR-2 are the ranked scores beside the archive.")
     lines.append("")
     return "\n".join(lines)
 

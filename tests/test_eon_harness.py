@@ -50,6 +50,26 @@ def test_svn_default_grid_is_one_start():
     assert EonSvnTsLj38DimerLjcut.template_name == "eon-svn/ts-lj38-dimer-ljcut"
 
 
+def test_native_eam_ini_keeps_the_client_potential():
+    from optbench.eon_harness import _ini_text
+
+    text = _ini_text(
+        {
+            "ini": {"Main": {"job": "parallel_replica"}, "Potential": {"potential": "eam_al"}},
+            "native_eam": True,
+            "failure_cap": 20,
+        },
+        3,
+        None,
+        python_job=False,
+    )
+    assert "potential = eam_al" in text
+    assert "ext_pot" not in text
+    assert "max_force_calls = 20" in text
+    assert "random_seed = 3" in text
+    assert "parallel = false" in text
+
+
 def test_client_default_grid_is_one_start():
     assert os.environ.get("OPTBENCH_ASV_FULL") != "1"
     from benchmarks.bench_eon_client import EonClientNebPtLbfgs

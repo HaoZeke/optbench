@@ -12,6 +12,8 @@ started with ``potential = ext_pot``. A small C program forwards
   r0, cutoff 9.5, pair energy shifted to zero at the cutoff, minimum
   image on the box diagonal.
 * ``eam`` calls the r2549 Aluminum Fortran ``force_`` in this process.
+  A template with ``native_eam`` skips that bridge and uses the client's
+  own ``eam_al``. The counted calls are ``total_force_calls``.
 
 A tsopt success is a client stop under the cap, a free-atom Euclidean
 force norm at the problem stop, and Hessian index 1. That Hessian is
@@ -400,13 +402,18 @@ def _family_of(template: dict) -> str:
     raise ValueError(f"{ident} is not an r2549 or 3.5.0 harness template")
 
 
-def _ini_text(template: dict, seed: int, wrapper: Path, *, python_job: bool) -> str:
+def _ini_text(template: dict, seed: int, wrapper: Path | None, *, python_job: bool) -> str:
     sections = json.loads(json.dumps(template["ini"]))
     main = sections.setdefault("Main", {})
     main["random_seed"] = int(seed)
     if not python_job:
         main["parallel"] = False
-    sections["Potential"] = {"potential": "ext_pot", "ext_pot_path": str(wrapper)}
+    if template.get("native_eam"):
+        # Stock eam_al. Potential::force increments fcalls once per
+        # evaluation, the same boundary HarnessCounter charges through ext_pot.
+        main["max_force_calls"] = int(template["failure_cap"])
+    else:
+        sections["Potential"] = {"potential": "ext_pot", "ext_pot_path": str(wrapper)}
     return format_ini(sections)
 
 
@@ -745,6 +752,7 @@ def run_case(
     if cached is not None:
         return cached
     cap = int(template["failure_cap"])
+    native_eam = bool(template.get("native_eam"))
     python_job = kind in {"akmc", "htst"}
     if budget is None:
         budget = int(template.get("budget_seconds") or 0)
@@ -759,10 +767,11 @@ def run_case(
     try:
         client = _client(family)
         evaluate = kernel_for(str(template["kernel"]))
-        server = PotServer(evaluate, cap=cap).start()
-        os.environ["OPTBENCH_POTSERVER"] = server.endpoint()
+        server = None if native_eam else PotServer(evaluate, cap=cap).start()
+        if server is not None:
+            os.environ["OPTBENCH_POTSERVER"] = server.endpoint()
         try:
-            wrapper = bridge_binary()
+            wrapper = None if native_eam else bridge_binary()
             if kind == "lowest":
                 record = _run_lowest(template, seed, start, work, server, wrapper, cap, client)
             elif kind in {"akmc", "htst"}:
@@ -811,8 +820,12 @@ def run_case(
                     texts,
                     None,
                 )
-                calls, _verify = remote_count(server.host, server.port)
                 fields = found["fields"]
+                if native_eam:
+                    raw_calls = fields.get("total_force_calls")
+                    calls = float(raw_calls) if raw_calls not in (None, "") else 0.0
+                else:
+                    calls, _verify = remote_count(server.host, server.port)
                 if kind == "basin":
                     energy_text = fields.get("minimum_energy")
                     stop = float(template["ini"]["Basin Hopping"]["stop_energy"])
@@ -834,11 +847,21 @@ def run_case(
                     record["minimum_energy"] = energy
                 elif kind in {"prd", "hyper"}:
                     transition = fields.get("transition_found") == "1"
+                    censored = fields.get("simulation_time_s") not in (None, "")
+                    completed = found["returncode"] == 0 and (transition or censored)
                     crashed = found["returncode"] != 0 or "total_force_calls" not in fields and calls == 0
-                    record = classify_flag(calls=calls, cap=cap, ok=transition, crashed=crashed)
+                    # A censored first-passage window is a finished observation.
+                    # transition_found stays the event bit for the rate.
+                    ok = completed if template.get("censor_ok") else transition
+                    record = classify_flag(calls=calls, cap=cap, ok=ok, crashed=crashed)
                     record["transition_found"] = 1 if transition else 0
                     if fields.get("transition_time_s") not in (None, ""):
                         record["transition_time_s"] = float(fields["transition_time_s"])
+                    if fields.get("simulation_time_s") not in (None, ""):
+                        record["simulation_time_s"] = float(fields["simulation_time_s"])
+                    for energy_key in ("potential_energy_reactant", "potential_energy_product"):
+                        if fields.get(energy_key) not in (None, ""):
+                            record[energy_key] = float(fields[energy_key])
                 else:
                     reason = fields.get("termination_reason")
                     record = classify_client(
@@ -872,7 +895,8 @@ def run_case(
                 record["client_reason"] = fields.get("termination_reason")
                 record = _guard(record, record.get("client_calls"))
         finally:
-            server.stop()
+            if server is not None:
+                server.stop()
             os.environ.pop("OPTBENCH_POTSERVER", None)
         record["seconds"] = time.monotonic() - started
         record["counter"] = "harness"
@@ -946,6 +970,9 @@ def _start_row(seed: int, start: str, record: dict) -> dict:
         "passes",
         "transition_found",
         "transition_time_s",
+        "simulation_time_s",
+        "potential_energy_reactant",
+        "potential_energy_product",
         "error",
         "force_norm",
         "hessian_index",

@@ -7,14 +7,16 @@ commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
 algorithm = "Parallel replica"
 reducer = "harness"
 tuning = "stock"
-failure_cap = 1000000
+failure_cap = 20000000
 kind = "prd"
 kernel = "eam"
+native_eam = true
+censor_ok = true
 asv_class = "EonDevelopStandardAladatomLangevin"
 note = '''
-Stock parallel replica of eOn develop a7aa57472fb7d823953fd36b78cd755fa4842d30 on the published accelerated-md reactant. Temperature 150 K, Langevin thermostat, Verlet, friction 0.001/fs. The shared trajectory length is 20000 fs, the same window as EON SVN r2549. Timestep, dephase, state check, correlation, refinement, and the CG quench stay at this binary's defaults. Nothing is tuned toward the archived true_rate 8.359e5, which stays the paper row. Success is transition_found 1. The harness kernel is the r2549 Aluminum EAM Fortran force routine.
+Stock parallel replica of eOn develop a7aa57472fb7d823953fd36b78cd755fa4842d30 on website/accelerated-md/reactant.con. The archive page requires 150 K, Langevin, Verlet, and friction 0.001/fs, and scores true_rate with its uncertainty. The archived uncertainty is the Poisson standard error on 134 escapes. Timestep 1 fs, dephase 1000 fs, state check 1000 fs, transition refinement, distance 0.1 angstrom, and the CG quench stay at the client defaults. The censor window is 5 ns, the same window as EON SVN r2549. An escape is a new quenched minimum. Exposure is transition_time_s, or 5 ns when the window ends on the reactant. The rate is the escape count divided by the summed exposure. The uncertainty is that rate divided by sqrt of the escape count. Seeds 7, 8, and 10-21 are the closed set. stop_after_transition is set and this client leaves the MD loop when an escape is found. The client's eam_al potential is used. total_force_calls is the cost. A finished trajectory is a success. The archived true_rate 8.359e5 stays the paper row.
 '''
-seeds = [1]
+seeds = [7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
 starts = ["0"]
 asv_full = false
 asv_timeout = 3600
@@ -26,7 +28,13 @@ temperature = 150
 [ini.Potential]
 potential = "eam_al"
 
+[ini."Parallel Replica"]
+stop_after_transition = true
+
 [ini.Dynamics]
-time = 20000
+time = 5000000
 thermostat = "langevin"
 langevin_friction = 0.001
+
+[ini.Debug]
+write_movies_interval = 1000

@@ -290,8 +290,8 @@ It does not run a campaign.
    <th scope="row"><a href="generated/suites/accelerated-md.html#standard_aladatom">standard_aladatom</a></th>
    <td data-code="eOn">—</td>
    <td data-code="Eon svn">—</td>
-   <td data-code="EON (SVN r2549)" data-template="eon-svn/standard-aladatom-langevin" data-par2="2e+06"><span class="bench-score">2e+06</span><a href="generated/suites/accelerated-md.html#standard_aladatom-templates">eon-svn/standard-aladatom-langevin</a></td>
-   <td data-code="eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)" data-template="eon-develop/standard-aladatom-langevin" data-par2="2e+06"><span class="bench-score">2e+06</span><a href="generated/suites/accelerated-md.html#standard_aladatom-templates">eon-develop/standard-aladatom-langevin</a></td>
+   <td data-code="EON (SVN r2549)" data-template="eon-svn/standard-aladatom-langevin" data-par2="5.23599e+06"><span class="bench-score">5.23599e+06</span><a href="generated/suites/accelerated-md.html#standard_aladatom-templates">eon-svn/standard-aladatom-langevin</a></td>
+   <td data-code="eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)" data-template="eon-develop/standard-aladatom-langevin" data-par2="4.06491e+06"><span class="bench-score">4.06491e+06</span><a href="generated/suites/accelerated-md.html#standard_aladatom-templates">eon-develop/standard-aladatom-langevin</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>

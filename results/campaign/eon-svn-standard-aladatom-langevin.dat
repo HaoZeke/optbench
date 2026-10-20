@@ -1,5 +1,15 @@
+force_calls 5235991
+force_calls_min 5231881
+force_calls_max 5237567
+force_calls_median 5237200.0
 call_unit total
-nfailed 1
+nfailed 0
+true_rate 1.428466e+08
+uncertainty 5.399096e+07
+percent_uncertainty 3.779645e+01
+thermostat langevin_0.001
+escapes 7
+exposure_s 4.900360e-08
 code EON (SVN r2549)
 code_version r2549
 commit r2549

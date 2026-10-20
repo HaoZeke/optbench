@@ -296,11 +296,11 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">eon-svn/standard-aladatom-langevin</td>
    <td data-field="version">EON (SVN r2549) r2549</td>
    <td data-field="commit">r2549</td>
-   <td data-field="par2_mean">2e+06</td>
-   <td data-field="mean_calls">23047</td>
-   <td data-field="median_calls">23047</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 1</td>
-   <td data-field="n">1</td>
+   <td data-field="par2_mean">5.23599e+06</td>
+   <td data-field="mean_calls">5.23599e+06</td>
+   <td data-field="median_calls">5.2372e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">14</td>
    </tr>
    </tbody></table></div>
    <h3>eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)</h3>
@@ -322,11 +322,11 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">eon-develop/standard-aladatom-langevin</td>
    <td data-field="version">eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) 3.6.0</td>
    <td data-field="commit">a7aa57472fb7</td>
-   <td data-field="par2_mean">2e+06</td>
-   <td data-field="mean_calls">22001</td>
-   <td data-field="median_calls">22001</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 1</td>
-   <td data-field="n">1</td>
+   <td data-field="par2_mean">4.06491e+06</td>
+   <td data-field="mean_calls">4.06491e+06</td>
+   <td data-field="median_calls">3.9427e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">14</td>
    </tr>
    </tbody></table></div>
    <h3>rgmin</h3>

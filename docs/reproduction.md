@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+46 reproduced, 30 not reproduced, 75 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -19,7 +19,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
 | aladatom/true_standard/eon-pr-langevin | — | — | not rerun; akmc_vs_langevin |
-| standard_aladatom/eon-md-langevin | — | — | not rerun; akmc_vs_langevin |
+| standard_aladatom/eon-md-langevin | true_rate 835900 | 1.42847e+08 | not reproduced; stock_langevin |
 
 ## double-ended-saddle-search
 
@@ -224,9 +224,14 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 ### akmc_vs_langevin
 
-The archive rows are Langevin parallel replica. The harness rows are AKMC. On infra/aladatom-repro, eon/aladatom-akmc true_rate 3.597591452e9 is 14.1 times 2.542941e8, and eon/standard-aladatom-akmc true_rate 3.80613e7 is 45.5 times 8.359e5.
+The true_standard archive row is Langevin parallel replica at 2.542941e8. No campaign is matched to that row. On infra/aladatom-repro, eon/aladatom-akmc true_rate 3.597591452e9 is 14.1 times 2.542941e8.
 
 - accelerated-md/aladatom/true_standard/eon-pr-langevin
+
+### stock_langevin
+
+The archive page scores 150 K Langevin Verlet parallel replica with friction 0.001/fs. The archived uncertainty 7.211e4 on 8.359e5 is the Poisson standard error on 134 escapes. This rerun uses that thermostat on the published 151-atom reactant. Timestep 1 fs, dephase 1000 fs, state check 1000 fs, transition refinement, and the CG quench are the client defaults. The censor window is 5 ns. An escape is a new quenched minimum. The rate is the escape count divided by the summed exposure, and the uncertainty is that rate over sqrt of the escape count. The closed set is 14 trajectories. EON SVN r2549, seeds 8-21, has 7 escapes in 4.900360e-8 s: rate 1.428466e8, uncertainty 5.399096e7. eOn develop, seeds 7, 8, and 10-21, has 8 escapes in 5.432650e-8 s: rate 1.472578e8, uncertainty 5.206349e7. Both lie outside the archived standard error. r2549 loads stop_after_transition and does not read it, so its mean cost is the full window, 5235991 calls, PAR-2 5.23599e6. develop leaves the MD loop at the escape, mean 4064914 calls, PAR-2 4.06491e6. Quenched products sit near -470.257 eV and -470.291 eV. The reactant is near -470.239 eV. The 18 Oct 2012 file on the archive site, eon-md-langevin/r.dat, is 2.543e8, the same figure as the true_standard row.
+
 - accelerated-md/standard_aladatom/eon-md-langevin
 
 ### de_exclusion
@@ -358,4 +363,4 @@ Sella 2.6.0 with the archived trust-region numbers (eta, gamma, delta0, rho, sig
 - tsopt/LJ38/sella
 - tsopt/pt-island/sella
 
-Rows with no exact-setup campaign stay not rerun and are not given a cause. AKMC on aladatom is a different method from Langevin parallel replica; the ratios above are that comparison, and the archive rows stay not rerun. The archived standard_aladatom Langevin true_rate 8.359e5 is the paper row. Stock untuned harness scores of EON (SVN r2549) and eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) are ranked beside it.
+A row with no exact-setup campaign has no rerun. The standard_aladatom Langevin paper row is the archived true_rate 8.359e5. Stock EON (SVN r2549) and eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) ran that parallel-replica protocol. The gap is the rate. Cost and PAR-2 are the ranked scores beside the archive.

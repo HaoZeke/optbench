@@ -1,5 +1,15 @@
+force_calls 4064914
+force_calls_min 1753001
+force_calls_max 5236521
+force_calls_median 3942699.0
 call_unit total
-nfailed 1
+nfailed 0
+true_rate 1.472578e+08
+uncertainty 5.206349e+07
+percent_uncertainty 3.535534e+01
+thermostat langevin_0.001
+escapes 8
+exposure_s 5.432650e-08
 code eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)
 code_version 3.6.0
 commit a7aa57472fb7d823953fd36b78cd755fa4842d30

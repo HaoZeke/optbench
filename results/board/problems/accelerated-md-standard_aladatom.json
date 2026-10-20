@@ -1,15 +1,47 @@
 {
-  "full_n": 1,
+  "full_n": 14,
   "history": [],
   "id": "accelerated-md/standard_aladatom",
   "not_comparable": [],
   "partial": [],
-  "profile_gap": "No performance profile. One start has no finite cost.",
+  "profile": {
+    "area_log10": {
+      "eon-develop/standard-aladatom-langevin 3.6.0 stock campaign a7aa574": 1.1826178401084975,
+      "eon-svn/standard-aladatom-langevin r2549 stock campaign r2549": 1.0536049848239342
+    },
+    "rho": {
+      "eon-develop/standard-aladatom-langevin 3.6.0 stock campaign a7aa574": [
+        0.8571428571428571,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "eon-svn/standard-aladatom-langevin r2549 stock campaign r2549": [
+        0.14285714285714285,
+        0.9285714285714286,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "solved": {
+      "eon-develop/standard-aladatom-langevin 3.6.0 stock campaign a7aa574": 1.0,
+      "eon-svn/standard-aladatom-langevin r2549 stock campaign r2549": 1.0
+    },
+    "taus": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ]
+  },
   "ranked": [
     {
       "asv_commit": "",
       "call_unit": "total",
-      "cap": 1000000,
+      "cap": 20000000,
       "code": "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)",
       "code_version": "3.6.0",
       "commit": "a7aa57472fb7d823953fd36b78cd755fa4842d30",
@@ -21,23 +53,23 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "wrong_stationary": 1
+        "wrong_stationary": 0
       },
-      "full_n": 1,
+      "full_n": 14,
       "history": false,
-      "max_calls": 22001.0,
-      "mean_calls": 22001.0,
+      "max_calls": 5236521.0,
+      "mean_calls": 4064913.5714285714,
       "mean_per_image": null,
-      "median": 2000000.0,
-      "median_calls": 22001.0,
-      "median_high": 2000000.0,
-      "median_low": 2000000.0,
+      "median": 3942699.0,
+      "median_calls": 3942699.0,
+      "median_high": 5236029.0,
+      "median_low": 3289403.0,
       "median_per_image": null,
-      "min_calls": 22001.0,
-      "n": 1,
-      "nfailed": 1,
+      "min_calls": 1753001.0,
+      "n": 14,
+      "nfailed": 0,
       "note": "starts",
-      "par2_mean": 2000000.0,
+      "par2_mean": 4064913.5714285714,
       "partial": false,
       "partial_reason": "",
       "path": "results/campaign/eon-develop-standard-aladatom-langevin.dat",
@@ -45,16 +77,16 @@
       "registry_match": true,
       "scored": true,
       "source": "campaign",
-      "success_rate": 0.0,
+      "success_rate": 1.0,
       "template": "eon-develop/standard-aladatom-langevin",
       "tuning": "stock",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "wilson_high": 1.0,
+      "wilson_low": 0.7846891972623643
     },
     {
       "asv_commit": "",
       "call_unit": "total",
-      "cap": 1000000,
+      "cap": 20000000,
       "code": "EON (SVN r2549)",
       "code_version": "r2549",
       "commit": "r2549",
@@ -66,23 +98,23 @@
         "cap": 0,
         "crash": 0,
         "divergence": 0,
-        "wrong_stationary": 1
+        "wrong_stationary": 0
       },
-      "full_n": 1,
+      "full_n": 14,
       "history": false,
-      "max_calls": 23047.0,
-      "mean_calls": 23047.0,
+      "max_calls": 5237567.0,
+      "mean_calls": 5235990.857142857,
       "mean_per_image": null,
-      "median": 2000000.0,
-      "median_calls": 23047.0,
-      "median_high": 2000000.0,
-      "median_low": 2000000.0,
+      "median": 5237200.0,
+      "median_calls": 5237200.0,
+      "median_high": 5237305.55,
+      "median_low": 5234945.0,
       "median_per_image": null,
-      "min_calls": 23047.0,
-      "n": 1,
-      "nfailed": 1,
+      "min_calls": 5231881.0,
+      "n": 14,
+      "nfailed": 0,
       "note": "starts",
-      "par2_mean": 2000000.0,
+      "par2_mean": 5235990.857142857,
       "partial": false,
       "partial_reason": "",
       "path": "results/campaign/eon-svn-standard-aladatom-langevin.dat",
@@ -90,11 +122,11 @@
       "registry_match": true,
       "scored": true,
       "source": "campaign",
-      "success_rate": 0.0,
+      "success_rate": 1.0,
       "template": "eon-svn/standard-aladatom-langevin",
       "tuning": "stock",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "wilson_high": 1.0,
+      "wilson_low": 0.7846891972623643
     }
   ],
   "title": "standard_aladatom"
