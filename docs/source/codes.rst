@@ -165,7 +165,7 @@ The number is written only after the run finishes under the problem rule.
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
-   <li>Al adatom on Al(100) at 250 K: not yet on the harness counter, partial.</li>
+   <li>Al adatom on Al(100) at 185 K: not yet on the harness counter, unfinished.</li>
    <li>Al adatom on Al(100) at 150 K: not yet on the harness counter.</li>
    <li>LJ38 double-ended saddle: not yet on the harness counter, partial.</li>
    <li>lj38_2ts_separation: partial.</li>
@@ -310,7 +310,7 @@ The number is written only after the run finishes under the problem rule.
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
-   <li>Al adatom on Al(100) at 250 K: partial.</li>
+   <li>Al adatom on Al(100) at 185 K: unfinished.</li>
    <li>lj38_2ts_separation: partial.</li>
    <li>Al: partial.</li>
    <li>Pt: partial.</li>
@@ -330,6 +330,58 @@ The number is written only after the run finishes under the problem rule.
    <li>eon-svn/sd-twopoint: no per-start record.</li>
    <li>eon-svn/sd: no per-start record.</li>
    </ul>
+   <h3>EON (SVN r2549)</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>parallel replica</td>
+   <td>r2549</td>
+   <td>r2549</td>
+   <td><a href="https://theory.cm.utexas.edu/svn/eon">https://theory.cm.utexas.edu/svn/eon</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="accelerated-md/aladatom" data-template="eon-r2549/aladatom-pr-langevin">
+   <td>Al adatom on Al(100) at 185 K</td>
+   <td data-field="template">eon-r2549/aladatom-pr-langevin</td>
+   <td data-field="version">EON (SVN r2549) r2549</td>
+   <td data-field="commit">r2549</td>
+   <td data-field="par2_mean">829272</td>
+   <td data-field="mean_calls">829272</td>
+   <td data-field="median_calls">557591</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">150</td>
+   </tr>
+   </tbody></table></div>
+   <h3>eOn (develop 80e94f88)</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>parallel replica</td>
+   <td>develop</td>
+   <td>80e94f88b54e</td>
+   <td><a href="https://github.com/TheochemUI/eon">https://github.com/TheochemUI/eon</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="accelerated-md/aladatom" data-template="eon-develop/aladatom-pr-langevin">
+   <td>Al adatom on Al(100) at 185 K</td>
+   <td data-field="template">eon-develop/aladatom-pr-langevin</td>
+   <td data-field="version">eOn (develop 80e94f88) 3.6.0</td>
+   <td data-field="commit">80e94f88b54e</td>
+   <td data-field="par2_mean">891081</td>
+   <td data-field="mean_calls">891081</td>
+   <td data-field="median_calls">690078</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">150</td>
+   </tr>
+   </tbody></table></div>
    <h3>rgmin</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
