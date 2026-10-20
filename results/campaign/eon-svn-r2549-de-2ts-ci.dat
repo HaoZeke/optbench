@@ -10,10 +10,10 @@ template eon-svn/de-2ts-ci
 problem double-ended-saddle-search/lj38_2ts_separation
 reducer harness
 cap 250000
-n 30
-par2_mean 24469.166666666668
+n 40
+par2_mean 26484.5
 nfailed 0
-mean_calls 24469.166666666668
+mean_calls 26484.5
 median_calls 15794.5
 min_calls 1147.0
 max_calls 126497.0
