@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+46 reproduced, 30 not reproduced, 75 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -190,7 +190,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | pt-island/eon-dimer-cg-20-rotations-20-bowl_breakout | — | — | not rerun |
 | pt-island/eon-dimer-cg-5-rotations-20-bowl_breakout | — | — | not rerun |
 | pt-island/eon-dimer-lbfgs-20-rotations | — | — | not rerun |
-| pt-island/eon-dimer-lbfgs-20-rotations-20-bowl_breakout | — | — | not rerun |
+| pt-island/eon-dimer-lbfgs-20-rotations-20-bowl_breakout | force_calls 2.73231e+06, unique_saddles 101.333, fraction_connected 0.796864, total_searches 7772.22 | 2.14926e+06, 93.1111, 0.803887, 5751 | not reproduced; bowl_search_total |
 | pt-island/eon-dimer-lbfgs-5-rotations | — | — | not rerun |
 | pt-island/eon-dimer-lbfgs-5-rotations-20-bowl_breakout | — | — | not rerun |
 | pt-island/eon-md | — | — | not rerun |
@@ -344,6 +344,12 @@ The harness link and novelty test uses Cartesian RMSD 0.5 over the full island. 
 The classic dimer campaign (improved false, the 2014 key) has fraction_connected 0.692 against 0.746, inside 10 percent, but force calls 6.97e6 against 3.78e6 and unique saddles 91.7 against 109.2. The archive standard error on the force calls is 5.27e5. This eOn AKMC counter is not the harness RMSD link test.
 
 - saddle-search/pt-island/eon-dimer
+
+### bowl_search_total
+
+Nine unseeded EON r2549 AKMC campaigns stop when state 0 holds 27 good saddles below 1.5 eV. The harness force-call mean is 2.14926e6 against the archive 2.73231e6, inside the archived standard error 1.15332e6. Unique saddles 93.1111 against 101.333 and the connected fraction 0.803887 against 0.796864 stay inside 10 percent. Total searches average 5751 against 7772.22, 26.0 percent lower. The walker stays in state 0.
+
+- saddle-search/pt-island/eon-dimer-lbfgs-20-rotations-20-bowl_breakout
 
 ### optim_lj38_ts
 

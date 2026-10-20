@@ -1,0 +1,30 @@
+code eOn (develop 500350d9)
+commit 500350d9fae881f06c7ef194e5868da079c4be5a
+algorithm Dimer L-BFGS bowl breakout
+tuning default
+template eon-develop-500350d9/saddle-pt-dimer-lbfgs-bowl
+problem saddle-search/pt-island
+counter harness
+reducer harness
+cap 100000000
+n 9
+nfailed 0
+goal 27
+kernel morse
+force_calls 5699032.444444444
+unique_saddles 85.77777777777777
+fraction_connected 0.7455028813746469
+total_searches 18394.33333333333
+client_force_calls 5689650.555555556
+force_calls_min 3152968
+force_calls_max 8339654
+par2_mean 5699032.444444444
+median 5989432
+median_low 3258889
+median_high 7412662
+wilson_low 0.7008549515804559
+wilson_high 1
+n_cap 0
+n_wrong_stationary 0
+n_divergence 0
+n_crash 0

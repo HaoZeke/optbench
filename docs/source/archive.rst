@@ -595,7 +595,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="saddle-search-pt-island-eon-dimer-lbfgs-20-rotations-20-bowl-breakout">
    <td class="num">7</td>
-   <td class="text">eon-dimer-lbfgs-20-rotations-20-bowl_breakout</td>
+   <td class="text">eon-dimer-lbfgs-20-rotations-20-bowl_breakout · not reproduced</td>
    <td class="text">Eon r2213</td>
    <td class="num">2732309.11111</td>
    <td class="num">1153317.06817</td>
