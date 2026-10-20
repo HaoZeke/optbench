@@ -1,9 +1,9 @@
-force_calls 19344
+force_calls 24387
 force_calls_min 742
-force_calls_max 108777
-force_calls_median 11997.0
+force_calls_max 136872
+force_calls_median 12417.0
 call_unit total
-nfailed 0
+nfailed 3
 code Eon svn
 code_version r2549
 commit r2549
