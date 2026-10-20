@@ -418,3 +418,56 @@ def test_double_well_ci_neb_is_an_index_one_saddle(monkeypatch):
     assert record["counter"] == "harness"
     assert charged["n"] >= record["force_calls"] + record["verify_calls"]
     assert record["energy"] == pytest.approx(1.0, abs=1e-3)
+
+
+@pytest.mark.skipif(library_path() is None, reason="librgsaddle.so is not built")
+def test_a_failed_band_step_does_not_publish_image_zero():
+    """A step that hits the cap returns an error and does not fill the report.
+
+    The C entry leaves the host buffer untouched. A zero ci_index is
+    image 0, the reactant, and is not a climbing image.
+    """
+    from optbench.rgsaddle_band import run_band_search
+
+    def evaluate_full(coords):
+        xyz = np.asarray(coords, dtype=np.float64).reshape(1, 3)
+        x, y, z = xyz[0]
+        bend = y - 0.5 + 0.5 * x * x
+        energy = (x * x - 1.0) ** 2 + bend * bend + z * z
+        grad = np.array([[4.0 * x * (x * x - 1.0) + 2.0 * x * bend, 2.0 * bend, 2.0 * z]])
+        return float(energy), grad
+
+    record = run_band_search(
+        name="double-well-cap",
+        reactant=np.array([[-1.0, 0.0, 0.0]]),
+        product=np.array([[1.0, 0.0, 0.0]]),
+        free=np.array([True]),
+        box=None,
+        evaluate_full=evaluate_full,
+        n_interior=3,
+        force_norm=1e-2,
+        cap=1,
+        max_move=0.2,
+        climbing=False,
+        spring="uniform",
+        path="linear",
+        refine="",
+        method="fire",
+        memory=20,
+        spring_k=5.0,
+        k_min=0.97,
+        k_max=9.7,
+        ci_trigger_factor=0.0,
+        ci_trigger_force=0.0,
+        idpp_spring_k=1.0,
+        idpp_force_tol=0.01,
+        idpp_max_steps=80,
+        sidpp_stage_steps=50,
+        project_rigid=False,
+        keep_translation=True,
+    )
+    assert record["failure"] == "cap"
+    assert record["force_calls"] == 1
+    assert record["success"] is False
+    assert record["ci_index"] is None
+    assert record["candidate"] == "highest"

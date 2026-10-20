@@ -520,9 +520,13 @@ def _relax(
             if surface.rgpot is not None and surface.calls() >= surface.cap:
                 surface.hit_cap = True
                 break
-            rc, report = session.step()
+            rc, stepped = session.step()
             if rc != _OK:
+                # rgsaddle_band_step writes the report only on Ok.
+                # Err leaves the zero-filled host buffer alone, so
+                # ci_index 0 would be read as image 0.
                 break
+            report = stepped
             evaluation = session.evaluation()
             if evaluation is not None:
                 energies, grads = evaluation
@@ -1316,7 +1320,14 @@ def write_outputs(
             parameters=parameters,
         ),
         "score": score_v2(
-            [{"force_calls": row["force_calls"], "success": row["success"]} for row in records],
+            [
+                {
+                    "force_calls": row["force_calls"],
+                    "success": row["success"],
+                    "failure": row.get("failure"),
+                }
+                for row in records
+            ],
             settings["cap"],
         ),
         "legacy": _legacy(records),
