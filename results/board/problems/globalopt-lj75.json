@@ -61,7 +61,7 @@
       "current": false,
       "entry": "ogolem-cce35a37-lj75",
       "failures": {
-        "cap": 55,
+        "cap": 65,
         "crash": 0,
         "divergence": 0,
         "wrong_stationary": 0
@@ -77,12 +77,12 @@
       "median_low": 2000000.0,
       "median_per_image": null,
       "min_calls": 1000000.0,
-      "n": 55,
-      "nfailed": 55,
+      "n": 65,
+      "nfailed": 65,
       "note": "starts.jsonl",
       "par2_mean": 2000000.0,
       "partial": true,
-      "partial_reason": "scored 55 of 200 starts; lowest energy -396.28224883; mean calls 1000000.0; median calls 1000000.0",
+      "partial_reason": "scored 65 of 200 starts; lowest energy -396.28224883; mean calls 1000000.0; median calls 1000000.0",
       "path": "results/campaign/ogolem-cce35a37-lj75.dat",
       "problem": "globalopt/lj75",
       "registry_match": true,
@@ -91,7 +91,7 @@
       "success_rate": 0.0,
       "template": "ogolem/lj75",
       "tuning": "default",
-      "wilson_high": 0.06528490111708637,
+      "wilson_high": 0.05580153132285689,
       "wilson_low": 0.0
     }
   ],
