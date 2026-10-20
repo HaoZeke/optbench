@@ -1,7 +1,7 @@
-# rep 1 force_calls 20243145 unique_saddles 0 fraction_connected 0.0 total_searches 20000 connected 0 minimize_calls 14 minimum_converged 1 seed 20261016
-force_calls 20243145.0
-force_calls_min 20243145
-force_calls_max 20243145
+# rep 1 force_calls 20254847 unique_saddles 0 fraction_connected 1.0 total_searches 20000 connected 0 minimize_calls 1 minimum_converged 1 search_seed (20261015+1)*1000003+attempt
+force_calls 20254847.0
+force_calls_min 20254847
+force_calls_max 20254847
 code rgsaddle
 code_version 0.2.2
 commit c0db2b8d333c557251635cb8bb7b3d81f0088a71

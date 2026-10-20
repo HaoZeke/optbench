@@ -374,11 +374,12 @@ directory, outside the HTML tables.
 Sella and ASE successes are order-1 convergence, not this endpoint link.
 The eOn client, eOn SVN, eOn 3.5.0, and archive fractions are those codes'
 own `Not Connected` labels. PAR-2 is not applied to a legacy campaign
-ratio or to the 2014 archive. The rgsaddle comment lines still record
-the RMSD-novel `unique_saddles`. Those starts have no endpoint
-coordinates, so that count was not recomputed. A later run of those
-templates uses `find_repeat` on the saddle and the listed-atom kick
-below.
+ratio or to the 2014 archive. The eight rgsaddle rows in this table are
+the files at `5496911c`. The climb was `morse/smooth/linear` and the kick
+was one atom. Those starts have no endpoint coordinates. The comment
+lines record the RMSD-novel `unique_saddles`. This branch replaces those
+files. The replacement campaigns are the recount rows and the Morse::force
+rerun below.
 
 ## Listed-atom displacement
 
@@ -501,7 +502,7 @@ Rows that need a new physics run because the stored search used another
 surface. The numbers above are the reactant gap. No new score is
 invented for them:
 
-- rgsaddle saddle-pt campaigns. The climb used `morse/smooth/linear`, and the kick was one atom from a shared stream.
+- rgsaddle saddle-pt campaigns at `5496911c`. The climb used `morse/smooth/linear`, and the kick was one atom from a shared stream. This branch replaces those files. The scores are the rerun section.
 - `eon-client/saddle-pt-dimer`, `eon-client/saddle-pt-lanczos`, `eon-client/saddle-pt-md`, `eon-svn/saddle-pt-dimer-bounded`, `eon-svn/saddle-pt-lanczos-bounded`, `eon-svn/saddle-pt-md`. The kernel was `morse`, which is smooth-linear.
 - `eon/develop-saddle-pt-dimer` and `eon/develop-saddle-pt-lanczos`. The ext_pot kernel was `morse_cluster`, which has no cutoff.
 - `sella/pt-island-search-default`, `sella/pt-island-search-tuned`, `ase/dimer-pt-island-default`, `ase/dimer-pt-island-tuned`. The cutoff was 7 Å.
@@ -523,7 +524,8 @@ potential score here.
 (0, 1.5) eV. `unique` is the good count, including a barrier at or above
 1.5 eV. `fraction` is the `done.py` ratio. Before is the stored result
 file. After is a rejudge of stored endpoint minima. A campaign with no
-endpoint coordinates has the same numbers in both columns. The 549-search
+endpoint coordinates has the same numbers in both columns. A campaign
+written with `find_repeat` has the same numbers in both columns. The 549-search
 OPTIM run described with per-atom distances of about 0.001 Å and 1.59 Å
 is not in the fetched history. The stored OPTIM campaign is the 124-search
 file on `cells/optim/ts`. pyKMC geometries are on `cells/pykmc/kmc` and
@@ -543,14 +545,14 @@ on `cells/softsaddle/ts-reps`.
 | softsaddle/saddle-davidson-sm50 | absent | 0 | 0 | 0/5000 | 0/5000 | 0.0 | 0.0 | 10128.0 | 10128.0 | 114.9 | 0.8 |
 | softsaddle/saddle-lanczos-sm0 | absent; RMSD on 4204 of 5000 | 103 | 103 | 2/5000 | 2/5000 | 0.0004 | 0.0004 | 10124.2218 | 10124.2218 | 130.4 | 0.9 |
 | softsaddle/saddle-lanczos-sm50 | absent | 21 | 21 | 0/5000 | 0/5000 | 0.0 | 0.0 | 10128.0 | 10128.0 | 142.6 | 0.9 |
-| rgsaddle/saddle-dimer-fire | absent | 0 | 0 | 0/20000 | 0/20000 | 0.0 | 0.0 | 10128 | 10128 |  |  |
-| rgsaddle/saddle-dimer-fire-tuned | absent | 1 | 1 | 0/20000 | 0/20000 | 0.0 | 0.0 | 10128 | 10128 |  |  |
-| rgsaddle/saddle-dimer-lbfgs | absent | 0 | 0 | 0/20000 | 0/20000 | 0.0 | 0.0 | 10128 | 10128 |  |  |
-| rgsaddle/saddle-dimer-lbfgs-tuned | absent | 1 | 1 | 0/20000 | 0/20000 | 0.0 | 0.0 | 10128 | 10128 |  |  |
-| rgsaddle/saddle-dimer-rotskip | absent | 323 | 323 | 0/20000 | 0/20000 | 0.0 | 0.0 | 10128 | 10128 |  |  |
-| rgsaddle/saddle-dimer-rotskip-tuned | absent | 762 | 762 | 2/20000 | 2/20000 | 0.0001 | 0.0001 | 10127.05255 | 10127.05255 |  |  |
-| rgsaddle/saddle-lanczos | absent | 1 | 1 | 0/20000 | 0/20000 | 0.0 | 0.0 | 10128 | 10128 |  |  |
-| rgsaddle/saddle-lanczos-tuned | absent | 2 | 2 | 0/20000 | 0/20000 | 0.0 | 0.0 | 10128 | 10128 |  |  |
+| rgsaddle/saddle-dimer-fire | format 2; 0 finite of 20000 | 0 | 0 | 0/20000 | 0/20000 | 1.0 | 1.0 | 10128.0 | 10128.0 |  |  |
+| rgsaddle/saddle-dimer-fire-tuned | format 2; 0 finite of 20000 | 0 | 0 | 0/20000 | 0/20000 | 1.0 | 1.0 | 10128.0 | 10128.0 |  |  |
+| rgsaddle/saddle-dimer-lbfgs | format 2; 0 finite of 20000 | 0 | 0 | 0/20000 | 0/20000 | 1.0 | 1.0 | 10128.0 | 10128.0 | 108.0 | 0.745814111111 |
+| rgsaddle/saddle-dimer-lbfgs-tuned | format 2; 14056 finite of 20000 | 48 | 48 | 11/20000 | 11/20000 | 0.99955 | 0.99955 | 10122.9898 | 10122.9898 |  |  |
+| rgsaddle/saddle-dimer-rotskip | format 2; 7750 finite of 8190 | 92 | 92 | 27/8190 | 27/8190 | 0.38412698412698415 | 0.38412698412698415 | 10096.200366300367 | 10096.200366300367 | 109.222 | 0.746017 |
+| rgsaddle/saddle-dimer-rotskip-tuned | format 2; 7213 finite of 8933 | 154 | 154 | 27/8933 | 27/8933 | 0.3010186947274152 | 0.3010186947274152 | 10098.701220194784 | 10098.701220194784 |  |  |
+| rgsaddle/saddle-lanczos | format 2; 2158 finite of 20000 | 30 | 30 | 5/20000 | 5/20000 | 1.0 | 1.0 | 10125.7305 | 10125.7305 |  |  |
+| rgsaddle/saddle-lanczos-tuned | format 2; 6643 finite of 20000 | 93 | 93 | 25/20000 | 25/20000 | 0.9976 | 0.9976 | 10116.45705 | 10116.45705 |  |  |
 | eon-client/saddle-pt-dimer | absent | 2 | 2 | 2/32 | 2/32 | 0.8125 | 0.8125 | 40000000 | 40000000 |  |  |
 | eon-client/saddle-pt-lanczos | absent | 6 | 6 | 6/32 | 6/32 | 1.0 | 1.0 | 40000000 | 40000000 |  |  |
 | eon-client/saddle-pt-md | absent | 0 | 0 | 0/1 | 0/1 | 0.0 | 0.0 | 40000000 | 40000000 |  |  |
@@ -571,8 +573,9 @@ every finite row. The SoftSaddle repetition file records harness
 `unique_saddles` means of 0, 0.5, and 0.7 for davidson-sm50, lanczos-sm0,
 and lanczos-sm50. That column is the mean of harness successes, not a
 geometric rejudge. The single-run files in the table are repetition 1. The rgsaddle
-rows are the campaigns on this branch. The relink branch's endpoint
-archives are not copied here, and the product recount of the L-BFGS
+rows are the Morse::force campaigns on this branch. Both columns are that
+run. The files at `5496911c` are the link table above. The relink branch's
+endpoint archives are not copied here, and the product recount of the L-BFGS
 tuned archive is in the displacement section above.
 
 `cells/partn/saddle-pt-repro` at `d1ef3d52` is a different pARTn run
@@ -593,6 +596,58 @@ Pairwise Cartesian RMSD of the 156 products runs from
 0.4261666593500097. A greedy walk at RMSD 0.5 keeps 4 product
 representatives. The smallest RMSD among those four is
 0.5184810883019555. The graph of products within RMSD 0.5 is one component.
+
+## rgsaddle Morse::force rerun
+
+The eight `rgsaddle/saddle-*` templates on `saddle-search/pt-island` were
+run again on this branch. The potential is `Morse::force`. The kick is
+`draw_search_start`. The link is the r2205 per-atom maximum of 0.1 Å.
+Novelty is `AKMCState.find_repeat`. One repetition uses
+`search_seed(1, attempt) = (20261015 + 1) * 1000003 + attempt`. The stop
+is 27 good saddles with a barrier strictly below 1.5 eV, or `max_searches`
+20000. The climb cap written in the result file is 5064. The 2014 tarballs
+do not store RNG seeds. There is no archived rgsaddle row.
+
+`rgsaddle/saddle-dimer-rotskip` is the nearest eOn dimer.
+`archive/entries/saddle-search/pt-island/eon-dimer/config.ini` sets
+L-BFGS, `max_move` 0.2, dimer, `rotations_max` 20, `converged_angle` 5.0,
+`displace_radius` 3.3, `displace_atomlist` `0,1,2,3,4,5,6`, and
+`displace_magnitude` 0.1. `rotation_angle_tol` on that template is
+0.08726646259971647. Stock `rgsaddle/saddle-dimer-lbfgs` leaves
+`rotation_angle_tol` at 0. The published L-BFGS dimer mean without that
+angle stop is `eon-dimer-lbfgs-20-rotations` r2213. SoftSaddle lanczos is
+a different search. `adaptive_HSphere-lbfgs-lanczos-sm0` is
+`unique_saddles` 130.4, `fraction_connected` 0.9, `total_searches` 2752.5.
+`adaptive_HSphere-lbfgs-lanczos-sm50` is `unique_saddles` 142.6,
+`fraction_connected` 0.9, `total_searches` 3072.5.
+
+| template | archive row | archive searches | archive unique | archive fraction | searches | unique | fraction | connected | force calls | PAR-2 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| rgsaddle/saddle-dimer-rotskip | eon-dimer r2205 | 11366.8 | 109.222 | 0.746017 | 8190 | 92 | 0.38412698412698415 | 27 | 4599920 | 10096.200366300367 |
+| rgsaddle/saddle-dimer-lbfgs | eon-dimer-lbfgs-20-rotations r2213 | 9666.11111111 | 108.0 | 0.745814111111 | 20000 | 0 | 1.0 | 0 | 20254847 | 10128.0 |
+| rgsaddle/saddle-dimer-rotskip-tuned |  |  |  |  | 8933 | 154 | 0.3010186947274152 | 27 | 6545279 | 10098.701220194784 |
+| rgsaddle/saddle-dimer-lbfgs-tuned |  |  |  |  | 20000 | 48 | 0.99955 | 11 | 18733672 | 10122.9898 |
+| rgsaddle/saddle-dimer-fire |  |  |  |  | 20000 | 0 | 1.0 | 0 | 20170494 | 10128.0 |
+| rgsaddle/saddle-dimer-fire-tuned |  |  |  |  | 20000 | 0 | 1.0 | 0 | 19996343 | 10128.0 |
+| rgsaddle/saddle-lanczos |  |  |  |  | 20000 | 30 | 1.0 | 5 | 20025697 | 10125.7305 |
+| rgsaddle/saddle-lanczos-tuned | lanczos-sm0, lanczos-sm50 | 2752.5, 3072.5 | 130.4, 142.6 | 0.9, 0.9 | 20000 | 93 | 0.9976 | 25 | 18885518 | 10116.45705 |
+
+`fraction_connected` 1.0 on a row that reached `max_searches` with
+`connected` 0 is the `done.py` ratio. A cap does not contain `Connected`,
+so `not_connected` stays 0. Stock dimer and both FIRE templates stored no
+finite endpoint pair. `rgsaddle/saddle-dimer-rotskip` reaches the goal of
+27. Its `unique_saddles` is 92. The r2205 mean is 109.222. The nine r2213
+L-BFGS runs in `calc_benchmarks.py` have `unique_saddles` 88, 94, 101, 101,
+105, 110, 112, 121, and 140, and `fraction_connected` from 0.739946 to
+0.752052. The rotskip fraction is 0.38412698412698415. That published
+fraction does not reproduce. `rgsaddle/saddle-lanczos-tuned` stops at 25
+qualifying saddles and `unique_saddles` 93. The SoftSaddle unique counts
+and fraction 0.9 do not reproduce on that row. The harness record is one
+repetition at the seed above. The archive row is the nine-run mean.
+
+eOn's server default `random_mode` draws a second Gaussian for the mode.
+`draw_search_start` uses the displacement vector as the geometry kick and
+as the min-mode direction.
 
 ## TSASE
 

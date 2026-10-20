@@ -1,7 +1,7 @@
-# rep 1 force_calls 9599611 unique_saddles 323 fraction_connected 0.0 total_searches 20000 connected 0 minimize_calls 14 minimum_converged 1 seed 20261016
-force_calls 9599611.0
-force_calls_min 9599611
-force_calls_max 9599611
+# rep 1 force_calls 4599920 unique_saddles 92 fraction_connected 0.38412698412698415 total_searches 8190 connected 27 minimize_calls 1 minimum_converged 1 search_seed (20261015+1)*1000003+attempt
+force_calls 4599920.0
+force_calls_min 4599920
+force_calls_max 4599920
 code rgsaddle
 code_version 0.2.2
 commit c0db2b8d333c557251635cb8bb7b3d81f0088a71
@@ -11,9 +11,9 @@ template rgsaddle/saddle-dimer-rotskip
 problem saddle-search/pt-island
 counter harness
 repetitions 1
-nfailed 1
+nfailed 0
 goal 27
 cap 5064
-n 20000
-par2_mean 10128.0
-v2_nfailed 20000
+n 8190
+par2_mean 10096.200366300367
+v2_nfailed 8163

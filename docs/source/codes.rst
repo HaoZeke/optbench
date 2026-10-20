@@ -392,16 +392,16 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
-   <tr data-problem="saddle-search/pt-island" data-template="rgsaddle/saddle-dimer-rotskip-tuned">
+   <tr data-problem="saddle-search/pt-island" data-template="rgsaddle/saddle-dimer-rotskip">
    <td>Pt heptamer island</td>
-   <td data-field="template">rgsaddle/saddle-dimer-rotskip-tuned</td>
+   <td data-field="template">rgsaddle/saddle-dimer-rotskip</td>
    <td data-field="version">rgsaddle 0.2.2</td>
    <td data-field="commit">c0db2b8d333c</td>
-   <td data-field="par2_mean">10127.1</td>
-   <td data-field="mean_calls">619.017</td>
-   <td data-field="median_calls">550</td>
-   <td data-field="failures">crash 0, divergence 17717, cap 2246, wrong_stationary 35</td>
-   <td data-field="n">20000</td>
+   <td data-field="par2_mean">10096.2</td>
+   <td data-field="mean_calls">561.651</td>
+   <td data-field="median_calls">502</td>
+   <td data-field="failures">crash 0, divergence 7723, cap 384, wrong_stationary 56</td>
+   <td data-field="n">8190</td>
    </tr>
    <tr data-problem="tsopt/LJ38" data-template="rgsaddle/prfo-tuned">
    <td>LJ38</td>
