@@ -5,12 +5,11 @@ Minimization uses the OPTIM target from the Wales snapshot
 that file. The snapshot has no git commit. Each ``COMPUTE`` on the relay
 is one ``pes.evaluate``. OPTIM's own counter is not that score.
 
-Pt-island DNEB on wales-27058 is the paper-era diagnostic. The current
-public svn export runs the same starts with stock optimizer settings.
-The potential is the built-in ``morse_bulk`` in reduced units. The count
-is OPTIM's own ``energy+gradient calls`` line, filed on the harness
-counter so the board can rank it. A success is ``Converged to TS``
-under the problem force-call cap.
+Pt-island DNEB on the current public svn export uses native ``morse_bulk``
+and the archive DNEB plus hybrid eigenvector-following keywords. The count
+is the last OPTIM ``energy+gradient calls`` line, one per gradient
+evaluation, filed on the harness counter so the board can rank it. A
+success is ``Converged to TS`` under the problem force-call cap.
 
 ``optim/unhooked`` and every other template raise before a file is
 written. Noise, single-ended saddle search, and PATHSAMPLE are not this
@@ -530,34 +529,52 @@ def _run_dneb(root: Path, problem: dict, template: dict, section: dict, output: 
     )
 
 
-def _stock_preamble(box: np.ndarray) -> str:
-    """Archive search and convergence, stock optimizer numbers.
+def _stock_preamble(box: np.ndarray, cap: int) -> str:
+    """Archive DNEB plus hybrid eigenvector following on this release.
 
-    ``BULK`` takes the cell. The 2014 keyword did not. ``morse_bulk``
-    still reads the cell, rho, and the cutoff from ``PARAMS``. ``NOHESS``
-    is required: this potential has no second derivative. ``STEPS`` and
-    ``BFGSSTEPS`` are the archive ceilings. The default of one step is
-    not a search. Spring constant, memory, step lengths, and ``BFGSTS``
-    stay at the program defaults.
+    ``BFGSCONV`` is the problem L2 stop of 0.001 as an RMS over
+    ``sqrt(3*343)``, divided by the Morse depth 0.7102, which is
+    4.3895D-5. ``NEWNEB 2 6 0.03`` stops the band at RMS 0.03, looser
+    than that criterion.     ``BFGSTS 14 10 30 0.050 100`` is the archive
+    eigenvector search: Rayleigh-Ritz uses a 0.05 percent eigenvalue
+    change, not the source default 1e-10, and the eigenvector budgets
+    stay at the archive integers. Raising those integers to the cap
+    lets that search run out to the percent test and spend thousands of
+    gradient calls. ``BFGSTSPC 50`` is the 2014 Rayleigh-Ritz percent
+    change. This release defaults that tolerance to 1. ``STEPS`` is the
+    BFGSTS iteration limit and ``BFGSSTEPS`` is the LBFGS limit; both
+    default to 1 and are the problem cap. ``USEDIAG 3`` is one forward
+    difference per curvature.
+    ``NOHESS`` is required because ``morse_bulk`` has no second
+    derivative. ``BULK`` carries the scaled cell. A bare ``BULK`` leaves
+    the box at 0.
     """
     lengths = np.asarray(box, dtype=np.float64).reshape(-1)[:3]
     cell = " ".join(f"{float(value):.6f}" for value in lengths)
     return "\n".join(
         [
             f"BULK {cell}",
+            "ADJUSTK 1 5 1.5",
+            "MAXBFGS 1.2 0.3",
+            "NEBK 5.0",
+            "MAXSTEP 0.3",
             "NEWNEB 2 6 0.03",
-            "OPTIMIZETS",
-            "BFGSTS",
+            "UPDATES 100 100",
+            "BFGSTS 14 10 30 0.050 100",
+            "BFGSTSPC 50",
+            "MAXMAX 0.13",
+            f"BFGSSTEPS {cap}",
+            f"STEPS {cap}",
             "NOHESS",
             "BFGSCONV 4.3895D-5",
-            "STEPS 200",
-            "BFGSSTEPS 10000",
+            "USEDIAG 3",
+            "OPTIMIZETS",
         ]
     )
 
 
 def _require_stock(template: dict) -> None:
-    if template.get("code") != CODE:
+    if str(template.get("code") or "").casefold() != CODE:
         raise ValueError(f"{template['id']} code is not {CODE}")
     if template.get("commit") != STOCK_SHA256:
         raise ValueError(f"{template['id']} commit is not the current svn export")
@@ -577,6 +594,7 @@ def _run_dneb_stock(root: Path, problem: dict, template: dict, output: Path, wor
     symbol = "M"
     timeout = 7200
     settings = band_settings(problem)
+    cap = int(settings["cap"])
     scale = 1.0 / _R0
     jobs = []
     for pair in cached_pairs(root, problem, settings).values():
@@ -591,7 +609,7 @@ def _run_dneb_stock(root: Path, problem: dict, template: dict, output: Path, wor
                 "product": np.asarray(pair.product, dtype=np.float64) * scale,
                 "box": box,
                 "frozen": frozen,
-                "preamble": _stock_preamble(box),
+                "preamble": _stock_preamble(box, cap),
                 "symbol": symbol,
                 "binary": str(binary),
                 "timeout": timeout,
@@ -602,7 +620,6 @@ def _run_dneb_stock(root: Path, problem: dict, template: dict, output: Path, wor
     order = {f"product_{index}": index for index in range(len(jobs))}
     jobs.sort(key=lambda job: order.get(job["name"], 10**9))
     records = run_jobs(jobs, _execute_dneb, workers)
-    cap = int(settings["cap"])
     for record in records:
         if record["success"] and int(record["force_calls"]) >= cap:
             record["success"] = False
@@ -613,21 +630,31 @@ def _run_dneb_stock(root: Path, problem: dict, template: dict, output: Path, wor
         f"# OPTIM SVNREV {STOCK_SVNREV}, svn.tar.bz2 sha256 {STOCK_SHA256}. "
         "Unmodified gfortran build. Native morse_bulk, A=1 and R0=1. "
         "Coordinates, the box, and rcut 9.5 are divided by r0 2.897.\n"
-        "# Stock BFGSTS, NEBK, UPDATES, USEDIAG, MAXSTEP, and MAXMAX. "
-        "BFGSCONV is 4.3895D-5. NEWNEB is 2 6 0.03 and OPTIMIZETS is set. "
-        "BULK carries the scaled cell. NOHESS is set because morse_bulk has no Hessian.\n"
-        "# force_calls is the last OPTIM energy+gradient calls count, ranked on the harness counter. "
+        "# DNEB plus hybrid eigenvector following. "
+        "NEWNEB 2 6 0.03, BFGSTS 14 10 30 0.050 100, BFGSTSPC 50, USEDIAG 3, NOHESS, OPTIMIZETS. "
+        "BFGSCONV 4.3895D-5 is 0.001/sqrt(3*343)/0.7102. "
+        f"STEPS and BFGSSTEPS are the problem cap {cap}. "
+        "BULK carries the scaled cell.\n"
+        "# force_calls is the last OPTIM energy+gradient calls count, one per gradient evaluation. "
+        "DNEB images and forward-difference curvature are included. Hessian calls are not. "
+        "Endpoints are not reoptimised. That line is the archive counter, filed on the harness counter. "
         f"A success converged to a TS under the harness cap {cap}."
     )
     parameters = {
-        "method": "dneb-stock",
+        "method": "dneb",
         "binary": STOCK_SVNREV[:8],
         "rho": _RHO * _R0,
         "r0": _R0,
         "rcut": _RCUT / _R0,
         "counter": "optim energy+gradient calls",
+        "bfgsts": "14 10 30 0.050 100",
+        "bfgstspc": 50,
+        "usediag": 3,
+        "steps": cap,
+        "bfgssteps": cap,
         "bfgsconv": "4.3895D-5",
         "newneb": "2 6 0.03",
+        "nohess": True,
         "success": "Converged to TS",
     }
     return write_campaign(

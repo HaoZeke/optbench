@@ -184,7 +184,7 @@ MATCHES: list[dict] = [
     {"key": "double-ended-saddle-search/pt-island/eon-dimer", "template": "eon-svn/de-pt-dimer", "branch": "main", "path": "results/campaign/eon-svn-de-pt-dimer.dat"},
     {"key": "double-ended-saddle-search/pt-island/eon-lanczos", "template": "eon-svn/de-pt-lanczos", "branch": "main", "path": "results/campaign/eon-svn-de-pt-lanczos.dat", "cause": "pt_lanczos"},
     {"key": "double-ended-saddle-search/pt-island/eon-lanczos-improved", "template": "eon-svn/de-pt-lanczos-improved", "branch": "main", "path": "results/campaign/eon-svn-de-pt-lanczos-improved.dat", "cause": "pt_lanczos"},
-    {"key": "double-ended-saddle-search/pt-island/optim", "template": "optim/de-pt-record", "branch": "repro/double-ended-saddle-search-pt-island-optim", "path": "results/native/optim-df8da599-de-pt.dat", "cause": "optim_stock", "extra": {"code_version": "df8da599", "commit": "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31", "ranked_template": "optim/de-pt-stock"}},
+    {"key": "double-ended-saddle-search/pt-island/optim", "template": "optim/de-pt-stock", "branch": "repro/double-ended-saddle-search-pt-island-optim", "path": "results/campaign/optim-df8da599-double-ended-saddle-search-pt-island--optim-de-pt-stock.dat", "extra": {"code_version": "df8da599", "commit": "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"}},
     # neb per-image means already stored in the 3.5.0 files
     {"key": "neb/Pt-heptamer/eon-lbfgs", "template": "eon-lbfgs", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-lbfgs.dat", "hold": ["eon-client/neb-pt-lbfgs", "eon/neb-pt-lbfgs"]},
     {"key": "neb/Pt-heptamer/eon-cg", "template": "eon-cg", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-cg.dat", "cause": "heptamer_cg", "hold": ["eon-client/neb-pt-cg"]},
@@ -230,17 +230,6 @@ CAUSE_TEXT = {
         "scores 32, 113, and 29 against 53.8, 147.47, and 34. "
         "Constructor-default L-BFGS scores 53, next to 53.8, but that is not the archived alpha and memory. "
         "eOn Morse L-BFGS and FIRE on the same bulk file reproduce, so the geometry set is not the split."
-    ),
-    "optim_stock": (
-        "The current Wales svn export, SVNREV df8da599, is unmodified. "
-        "BFGSTS, NEBK, UPDATES, USEDIAG, MAXSTEP, and MAXMAX stay at the program defaults. "
-        "BFGSCONV is 4.3895D-5, NEWNEB is 2 6 0.03, and OPTIMIZETS selects hybrid eigenvector following. "
-        "The scaled cell is passed on BULK, which is how this release reads the box. "
-        "Native morse_bulk has no Hessian, so NOHESS is set. "
-        "The harness cap is 3000. One start converged past that cap. "
-        "The success mean is 1068 against 103. "
-        "The ranked campaign is optim/de-pt-stock. "
-        "The wales-27058 file stays an unranked diagnostic."
     ),
     "optim_pt_units": (
         "archive run.sh divides coordinates by r0 = 2.897 and scales rho and rcut into those units. "

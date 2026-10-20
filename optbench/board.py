@@ -1442,14 +1442,27 @@ def _problem_order(problem: dict) -> tuple:
     return (index, ident.lower())
 
 
+def _column_code(code: str, registry: list[dict]) -> str:
+    """One summary column for OPTIM. Other campaign codes stay as written."""
+    text = str(code or "").strip()
+    if text.casefold() != "optim":
+        return text
+    for pin in registry:
+        name = str(pin.get("name") or "").strip()
+        ident = str(pin.get("id") or "").strip()
+        if name.casefold() == "optim" or ident.casefold() == "optim":
+            return "optim"
+    return text
+
+
 def summary_codes(document: dict, registry: list[dict]) -> list[str]:
     """Codes that have a full ranked run, in registry order, then any extras."""
     present: set[str] = set()
     for problem in (document.get("problems") or {}).values():
         for row in problem.get("ranked") or []:
-            code = str(row.get("code") or "").strip()
-            if code:
-                present.add(code)
+            label = _column_code(str(row.get("code") or ""), registry)
+            if label:
+                present.add(label)
     ordered: list[str] = []
     for pin in registry:
         name = str(pin.get("name") or "").strip()
@@ -1460,13 +1473,17 @@ def summary_codes(document: dict, registry: list[dict]) -> list[str]:
     return ordered
 
 
-def best_ranked_by_code(ranked: list[dict]) -> dict[str, dict]:
+def best_ranked_by_code(ranked: list[dict], registry: list[dict] | None = None) -> dict[str, dict]:
     """First ranked row of each code. The list is already best-PAR-2 first."""
+    labels = registry or []
     best: dict[str, dict] = {}
     for row in ranked:
         code = str(row.get("code") or "").strip()
-        if code and code not in best:
-            best[code] = row
+        if not code:
+            continue
+        key = _column_code(code, labels) if labels else code
+        if key not in best:
+            best[key] = row
     return best
 
 
@@ -1485,7 +1502,7 @@ def _board_problem_link(problem: dict, templates: bool = False) -> str:
     return f"generated/suites/{suite}.html#{anchor}"
 
 
-def summary_table(problems: list[dict], codes: list[str], link) -> str:
+def summary_table(problems: list[dict], codes: list[str], link, registry: list[dict] | None = None) -> str:
     """One cell per code: the best full harness run, codes side by side.
 
     ``link(problem, templates=False)`` returns the href for that problem.
@@ -1501,7 +1518,7 @@ def summary_table(problems: list[dict], codes: list[str], link) -> str:
         + "</tr></thead><tbody>",
     ]
     for problem in sorted(problems, key=_problem_order):
-        best = best_ranked_by_code(list(problem.get("ranked") or []))
+        best = best_ranked_by_code(list(problem.get("ranked") or []), registry)
         lines.append(f'<tr data-problem="{_cell(problem["id"])}">')
         title = str(problem.get("title") or problem["id"])
         lines.append(f'<th scope="row"><a href="{_cell(link(problem))}">{_cell(title)}</a></th>')
@@ -1719,7 +1736,7 @@ def write_board(root: Path, output: Path) -> dict:
     if ordered:
         sections.append('<section class="bench" id="summary">')
         sections.append(
-            summary_table(ordered, summary_codes(document, _registry(root)), _board_problem_link)
+            summary_table(ordered, summary_codes(document, _registry(root)), _board_problem_link, _registry(root))
         )
         sections.append("</section>")
     _drop_unwritten(plot_dir, written_names)

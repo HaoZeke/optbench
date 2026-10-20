@@ -662,7 +662,7 @@ def render(root: Path) -> None:
         sections: list[str] = []
         views = [_board_view(problem, document) for problem in _sorted_problems(group)]
         sections.append('<section class="bench" id="summary">')
-        sections.append(summary_table(views, codes, _suite_problem_link))
+        sections.append(summary_table(views, codes, _suite_problem_link, _registry(root)))
         sections.append("</section>")
         for problem in sorted(group, key=lambda item: item["problem"].lower()):
             view = _board_view(problem, document)

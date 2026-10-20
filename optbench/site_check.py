@@ -128,7 +128,13 @@ def _check_headline(label: str, table: dict, document: dict) -> list[str]:
     return errors
 
 
-def _check_summary(label: str, table: dict, document: dict, codes: list[str]) -> list[str]:
+def _check_summary(
+    label: str,
+    table: dict,
+    document: dict,
+    codes: list[str],
+    registry: list[dict],
+) -> list[str]:
     """Best-per-code cells stay equal to the ranked board."""
     errors: list[str] = []
     for row in table["rows"]:
@@ -137,7 +143,7 @@ def _check_summary(label: str, table: dict, document: dict, codes: list[str]) ->
             continue
         problem = (document.get("problems") or {}).get(problem_id)
         ranked = list(problem.get("ranked") or []) if problem else []
-        best = best_ranked_by_code(ranked)
+        best = best_ranked_by_code(ranked, registry)
         seen: dict[str, dict] = {}
         for cell in row["cells"]:
             code = cell["attrs"].get("data-code", "")
@@ -280,7 +286,7 @@ def check_site(root: Path) -> list[str]:
             elif kind == "code-best":
                 errors.extend(_check_code_best(label, table, document))
             elif kind == "summary":
-                errors.extend(_check_summary(label, table, document, codes))
+                errors.extend(_check_summary(label, table, document, codes, _registry(root)))
 
     for problem in problems.values():
         suite_label = f"docs/orgmode/generated/suites/{problem['suite']}.org"

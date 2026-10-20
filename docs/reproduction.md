@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+47 reproduced, 28 not reproduced, 76 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -42,7 +42,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | pt-island/eon-dimer | force_calls 182 | 192 | reproduced |
 | pt-island/eon-lanczos | force_calls 325 | 222 | not reproduced; pt_lanczos |
 | pt-island/eon-lanczos-improved | force_calls 222 | 181 | not reproduced; pt_lanczos |
-| pt-island/optim | force_calls 103 | 1068 | not reproduced; optim_stock |
+| pt-island/optim | force_calls 103 | 110 | reproduced |
 | pt-island/optim-6 | — | — | not rerun |
 | pt-island/optim-cl-string | — | — | not rerun |
 | pt-island/pele | — | — | not rerun |
@@ -255,12 +255,6 @@ The svn template uses the archived Lanczos keys (10 iterations, tolerance 0.05) 
 
 - double-ended-saddle-search/pt-island/eon-lanczos
 - double-ended-saddle-search/pt-island/eon-lanczos-improved
-
-### optim_stock
-
-The current Wales svn export, SVNREV df8da599, is unmodified. BFGSTS, NEBK, UPDATES, USEDIAG, MAXSTEP, and MAXMAX stay at the program defaults. BFGSCONV is 4.3895D-5, NEWNEB is 2 6 0.03, and OPTIMIZETS selects hybrid eigenvector following. The scaled cell is passed on BULK, which is how this release reads the box. Native morse_bulk has no Hessian, so NOHESS is set. The harness cap is 3000. One start converged past that cap. The success mean is 1068 against 103. The ranked campaign is optim/de-pt-stock. The wales-27058 file stays an unranked diagnostic.
-
-- double-ended-saddle-search/pt-island/optim
 
 ### pele_bh_defaults
 
