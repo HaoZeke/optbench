@@ -1,15 +1,34 @@
-# Latest PyAMFF release on the EMT Pt38 problem.
+# Latest PyAMFF on the EMT Pt38 energy-only ADAM problem.
 id = "pyamff/emt-pt38"
 engine = "pyamff"
 problem = "mlopt/emt-pt38"
 code = "Pyamff"
-code_version = "0.1.0-beta"
+code_version = "240f51d0"
 commit = "240f51d01ca22969369f9bc21760c61cbb3b6665"
 algorithm = "ADAM"
-tuning = "one-batch"
+tuning = "stock"
+ranked = true
+parameter_source = "default"
 failure_cap = 10000
-note = "PyAMFF 0.1.0-beta, commit 240f51d0, 2026-07-04. One batch, so the max absolute loss gradient below 0.02 is the full dataset, and one epoch is one logged pass. Stock sigmoid, hidden layers 20 10, LinearScaler, SSE, force coefficient 0.02, learning rate 0.01. Fifty uniform[-1, 1) starts. The release default of 100 batches checks only the last batch. The epoch cap is 10000. The archive mean epoch stays the paper row."
+paper_baseline = true
+note = "PyAMFF master 240f51d0 (2026-07-04). The VERSION file says 0.1.0-beta. Stock torch Adam, learning rate 0.01, weight decay 0. The network is 10-7 tanh on the archived Behler-Parrinello fingerprints. Force coefficient 0, energy coefficient 1, NoScaler, SSE, one batch. Fifty uniform[-1, 1) starts. The stop is the archive energy-only rule: every parameter gradient component below 0.02, cap 10000. init_model_parameters is true because this revision opens saved_model_params.pyamff when the flag is false. One harness call is one logged epoch. Mean epoch 1003.92, median 940. Energy RMSE mean 0.0043060298, median 0.004335635. Force RMSE is -1 because the force coefficient is 0."
+
+[pyamff]
+optimizer = "ADAM"
+learning_rate = 0.01
+weight_decay = 0.0
+hidden_layers = [10, 7]
+activation = "tanh"
+initial_weights = "random_uniform"
+loss_type = "SSE"
+energy_coefficient = 1.0
+force_coefficient = 0.0
+scaler = "NoScaler"
+batch_num_per_proc = 1
+loss_grad_tol = 0.02
+epochs_max = 10000
+init_model_parameters = true
 
 [stop]
+max_force_calls = 10000
 max_epochs = 10000
-loss_grad_tol = 0.02

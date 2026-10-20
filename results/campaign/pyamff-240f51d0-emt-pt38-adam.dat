@@ -1,0 +1,29 @@
+# PyAMFF 240f51d0 (2026-07-04). One harness call is one logged epoch.
+# Stock torch Adam, learning rate 0.01, weight decay 0. Network 10-7 tanh, force coefficient 0, energy coefficient 1, NoScaler, SSE, one batch.
+# Fifty uniform[-1, 1) starts. Stop when every parameter gradient component is below 0.02, or at 10000 epochs.
+# mean_force_rmse and median_force_rmse are -1 because the force coefficient is 0.
+problem mlopt/emt-pt38
+template pyamff/emt-pt38
+cap 10000
+counter harness
+code Pyamff
+code_version 240f51d0
+commit 240f51d01ca22969369f9bc21760c61cbb3b6665
+tuning stock
+algorithm ADAM
+n 50
+force_calls 1003.92
+force_calls_min 159
+force_calls_max 3161
+nfailed 0
+median 940
+mean_epoch 1003.92
+median_epoch 940
+mean_energy_rmse 0.0043060298
+median_energy_rmse 0.004335635
+mean_force_rmse -1
+median_force_rmse -1
+par2_mean 1003.92
+wilson_low 0.928652400867
+wilson_high 1
+note PyAMFF 240f51d0 (2026-07-04). Stock torch Adam, learning rate 0.01, weight decay 0. Network 10-7 tanh, force coefficient 0, energy coefficient 1, NoScaler, SSE, one batch. Fifty uniform[-1, 1) starts. The stop is every parameter gradient component below 0.02, or 10000 epochs. One harness call is one logged epoch. mean_force_rmse and median_force_rmse are -1 because the force coefficient is 0.
