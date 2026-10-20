@@ -1,10 +1,12 @@
-"""Train PyAMFF networks and count each loss-gradient evaluation.
+"""Train the latest PyAMFF release and count each loss-gradient evaluation.
 
 One harness call is one full-batch loss and the parameter gradient of that
-loss. The network, fingerprints, and SSE loss are PyAMFF's. Fingerprints
-come from the Fortran engine, ``fmodules.fpcalc.calcfps``. torch.optim
-steps the parameters. A start succeeds when every parameter gradient has
-L2 norm at or below the template stop and the call count is under the cap.
+loss. The network, fingerprints, SSE loss, and optimizer settings are the
+stock release. Fingerprints come from the Fortran engine,
+``fmodules.fpcalc.calcfps``. A start succeeds when the largest absolute
+parameter-gradient component is strictly below the problem tolerance and
+the call count is under the cap. A start that reaches the cap fails, and
+PAR-2 charges it twice the cap.
 """
 
 from __future__ import annotations
@@ -26,11 +28,16 @@ from optbench.v2 import collect_provenance, write_starts
 
 SEED_BASE = 20261015
 CACHE_ROOT = Path("/tmp/optbench-pyamff/cache")
-OPTIMIZERS = ("Adam", "Rprop", "LBFGS", "AdamW", "NAdam", "RAdam", "SGD")
+OPTIMIZERS = ("Adam", "Rprop", "LBFGS")
 
 
 class _Diverged(RuntimeError):
     """The loss or a parameter gradient left the finite reals."""
+
+
+def max_abs_converged(abs_max: float, tol: float) -> bool:
+    """True when max(abs(gradient)) is strictly below the problem tolerance."""
+    return abs_max < tol
 
 
 def classify_stop(
@@ -92,7 +99,7 @@ def _section(template: dict) -> dict:
 
 
 def _stop(problem: dict, template: dict) -> tuple[int, float, float]:
-    """Cap, L2 tolerance, and force coefficient for this template."""
+    """Cap, max-abs tolerance, and force coefficient for this template."""
     section = _section(template)
     stop = template.get("stop") or {}
     if "max_steps" not in stop or "gradient_norm" not in stop:
@@ -240,14 +247,6 @@ def _optimizer(name: str, params, lr: float):
 
     if name == "Adam":
         return torch.optim.Adam(params, lr=lr, weight_decay=0.0)
-    if name == "AdamW":
-        return torch.optim.AdamW(params, lr=lr, weight_decay=0.0)
-    if name == "NAdam":
-        return torch.optim.NAdam(params, lr=lr, weight_decay=0.0)
-    if name == "RAdam":
-        return torch.optim.RAdam(params, lr=lr, weight_decay=0.0)
-    if name == "SGD":
-        return torch.optim.SGD(params, lr=lr, weight_decay=0.0)
     if name == "Rprop":
         return torch.optim.Rprop(params, lr=lr)
     if name == "LBFGS":
@@ -426,7 +425,7 @@ def _evaluate(model, criterion, batch, counter: HarnessCounter, tol: float) -> d
         "force_rmse": force_rmse,
         "l2_max": l2_max,
         "abs_max": abs_max,
-        "converged": l2_max <= tol,
+        "converged": max_abs_converged(abs_max, tol),
     }
 
 
@@ -484,7 +483,7 @@ def _train_loaded(job: dict, batch) -> dict:
             if counter.calls % 1000 == 0:
                 print(
                     f"{job['template']} start {job['index']} calls {counter.calls} "
-                    f"energy_rmse {energy_rmse:.6g} l2 {l2_max:.6g}",
+                    f"energy_rmse {energy_rmse:.6g} abs {abs_max:.6g}",
                     flush=True,
                 )
     except _Diverged:
@@ -677,12 +676,15 @@ def _write_dat(path: Path, template: dict, problem: dict, records: list[dict], c
         lines.append(f"median_force_rmse {_fmt(_median(force))}")
     if len(records) < full_n:
         lines.append("partial true")
-    if str(template.get("ranked")).lower() == "false":
-        lines.append("ranked false")
+    version = template.get("code_version", "")
+    commit = template.get("commit", "")
     lines.append(
-        "note Extra torch.optim row, not the 8037eb98 paper baseline. "
+        "note "
+        f"PyAMFF {version} at {commit}. "
+        "Stock optimizer settings from that release. "
+        "The stop is max(abs(parameter gradient)) strictly below the problem tolerance. "
         "One harness call is one SSE loss and its parameter gradient. "
-        "The stop is the L2 norm of every parameter gradient."
+        "A capped start scores twice the cap."
     )
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(path.suffix + ".tmp")

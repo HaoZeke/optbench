@@ -171,17 +171,7 @@ repository = "https://gitlab.com/pyamff/pyamff"
 ref = "master"
 commit = "240f51d01ca22969369f9bc21760c61cbb3b6665"
 committed = "2026-07-04"
-note = "PyAMFF 0.1.0-beta at master 240f51d0. These rows are the extra torch.optim runs. Fortran Behler-Parrinello fingerprints, a 10-7 tanh network, NoScaler, and the SSE loss. The archived loss name is SE. Weights are uniform on [-1, 1). torch.optim Adam, Rprop, LBFGS, AdamW, NAdam, RAdam, and SGD use learning rate 0.01 and zero weight decay. One harness call is one loss and parameter-gradient evaluation. Energy training stops at an L2 gradient of 0.02 within 10000 calls. Force training uses force coefficient 0.1, an L2 gradient of 0.1, and 30000 calls. The paper baseline is the pyamff-8037eb98 pin."
-
-[[code]]
-id = "pyamff-8037eb98"
-name = "PyAMFF"
-role = "machine-learning optimization"
-repository = "https://gitlab.com/pyamff/pyamff"
-ref = "8037eb98"
-commit = "8037eb98e2288c132c112aa6c2032f00cd5c5277"
-committed = "2022-12-06"
-note = "Paper-reproduction pin. The 2022 archive ran this commit's pyamff entry point, Trainer, and Fortran fingerprints. Rprop, ADAM, and LBFGS are the torch.optim objects that training.py builds, with this commit's epoch counter and max-abs gradient stop. The archived configs, fpParas.dat, and trajectories are the run. This is not the 240f51d torch.optim reimplementation."
+note = "PyAMFF 0.1.0-beta at master 240f51d01ca22969369f9bc21760c61cbb3b6665 (2026-07-04, v3.0.0 plus 475 commits). Fortran Behler-Parrinello fingerprints, a 10-7 tanh network, NoScaler, and the SSE loss. The archived loss name is SE. Rprop, Adam, and LBFGS are the stock torch.optim objects from that release, learning rate 0.01, weight decay 0. Weights are uniform on [-1, 1). One harness call is one loss and parameter-gradient evaluation. The stop is the problem criterion: max(abs(gradient)) strictly below 0.02 within 10000 calls when the force coefficient is 0, and strictly below 0.1 within 30000 calls when it is 0.1. A capped start scores twice the cap."
 
 # generated ASE and Sella templates
 

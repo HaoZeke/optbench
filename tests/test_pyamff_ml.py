@@ -9,7 +9,7 @@ import pytest
 
 from optbench.board import stated_full_n
 from optbench.campaign import list_templates, resolve_problem
-from optbench.runners.pyamff_ml import OPTIMIZERS, classify_stop
+from optbench.runners.pyamff_ml import OPTIMIZERS, classify_stop, max_abs_converged
 
 ROOT = Path(__file__).resolve().parents[1]
 COMMIT = "240f51d01ca22969369f9bc21760c61cbb3b6665"
@@ -25,18 +25,26 @@ def test_stop_classes():
     assert classify_stop(calls=4, cap=100, converged=False, finite=True, error="") == (False, "wrong_stationary")
 
 
-def test_pyamff_templates_cover_both_problems_and_seven_optimizers():
+def test_max_abs_stop_is_strict():
+    assert max_abs_converged(0.099999, 0.1) is True
+    assert max_abs_converged(0.1, 0.1) is False
+    assert max_abs_converged(0.02, 0.02) is False
+
+
+def test_pyamff_templates_cover_the_archive_cells():
     registry = tomllib.loads((ROOT / "codes" / "registry.toml").read_text(encoding="utf-8"))
     pinned = next(row for row in registry["code"] if row["id"] == "pyamff")
     assert pinned["commit"] == COMMIT
+    assert not any(row["id"] == "pyamff-8037eb98" for row in registry["code"])
     found = [row for row in list_templates(ROOT) if row.get("engine") == "pyamff"]
-    assert len(found) == 28
+    assert len(found) == 12
     seen = set()
     for template in found:
         assert template["commit"] == COMMIT
         assert template["code_version"] == "0.1.0-beta"
-        assert template["tuning"] == "torch.optim"
-        assert template["ranked"] is False
+        assert template["tuning"] == "default"
+        assert template.get("ranked") is not False
+        assert "8037eb98" not in template["id"]
         assert template["problem"] in PROBLEMS
         problem = resolve_problem(ROOT, template["problem"])
         assert stated_full_n(ROOT, problem) == 50
@@ -48,7 +56,7 @@ def test_pyamff_templates_cover_both_problems_and_seven_optimizers():
         assert section["initial_weights"] == "random_uniform"
         assert section["seed_base"] == 20261015
         stop = template["stop"]
-        assert stop["norm"] == "l2"
+        assert stop["norm"] == "max_abs"
         coeff = section["force_coefficient"]
         if template["id"].endswith("-force"):
             assert coeff == 0.1
