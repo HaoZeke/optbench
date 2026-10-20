@@ -89,24 +89,50 @@ def _fp_paras(root: Path, problem_id: str) -> Path:
 
 
 def _section(template: dict) -> dict:
-    section = template.get("pyamff") or {}
+    section = dict(template.get("pyamff") or {})
+    if "optimizer" not in section and template.get("algorithm"):
+        section["optimizer"] = template["algorithm"]
     if "optimizer" not in section:
         raise ValueError(f"{template['id']} needs pyamff.optimizer")
-    name = str(section["optimizer"])
+    name = {"ADAM": "Adam"}.get(str(section["optimizer"]), str(section["optimizer"]))
     if name not in OPTIMIZERS:
         raise ValueError(f"{template['id']} optimizer {name} is outside {OPTIMIZERS}")
+    section["optimizer"] = name
     return section
 
 
 def _stop(problem: dict, template: dict) -> tuple[int, float, float]:
-    """Cap, max-abs tolerance, and force coefficient for this template."""
+    """Cap, max-abs tolerance, and force coefficient for this template.
+
+    Each archive row carries its own stop. Force coefficient 0 uses the
+    energy-only threshold. Force coefficient 0.1 uses the force-training
+    threshold. The cap is that row's epoch limit.
+    """
     section = _section(template)
+    ident = str(template["id"])
+    raw_coeff = section.get("force_coefficient")
+    if raw_coeff in (None, ""):
+        raw_coeff = 0.1 if ident.endswith("-force") or ident.endswith("fcoeff0_1") else 0.0
+    coeff = float(raw_coeff)
     stop = template.get("stop") or {}
-    if "max_steps" not in stop or "gradient_norm" not in stop:
-        raise ValueError(f"{template['id']} needs stop.max_steps and stop.gradient_norm")
-    cap = int(stop["max_steps"])
-    tol = float(stop["gradient_norm"])
-    coeff = float(section.get("force_coefficient", 0.0))
+    if stop.get("max_steps") not in (None, "") and stop.get("gradient_norm") not in (None, ""):
+        cap = int(stop["max_steps"])
+        tol = float(stop["gradient_norm"])
+    elif section.get("epochs_max") not in (None, "") and section.get("loss_grad_tol") not in (None, ""):
+        cap = int(section["epochs_max"])
+        tol = float(section["loss_grad_tol"])
+    elif template.get("failure_cap") not in (None, "") or stop.get("max_steps") not in (None, "") or stop.get("max_force_calls") not in (None, ""):
+        raw_cap = template.get("failure_cap")
+        if raw_cap in (None, ""):
+            raw_cap = stop.get("max_steps", stop.get("max_force_calls"))
+        cap = int(raw_cap)
+        convergence = problem.get("convergence") or {}
+        key = "energy_only_grad_norm" if coeff == 0.0 else "force_training_grad_norm"
+        if convergence.get(key) in (None, ""):
+            raise ValueError(f"{ident} has a cap and no problem gradient stop")
+        tol = float(convergence[key])
+    else:
+        raise ValueError(f"{ident} needs a stop, a pyamff tolerance, or failure_cap")
     convergence = problem.get("convergence") or {}
     if coeff == 0.0:
         stated_tol = convergence.get("energy_only_grad_norm")
@@ -115,9 +141,9 @@ def _stop(problem: dict, template: dict) -> tuple[int, float, float]:
         stated_tol = convergence.get("force_training_grad_norm")
         stated_cap = convergence.get("force_max_epochs")
     if stated_tol not in (None, "") and abs(float(stated_tol) - tol) > 1e-12:
-        raise ValueError(f"{template['id']} gradient_norm is not the problem stop")
+        raise ValueError(f"{ident} gradient_norm is not the problem stop")
     if stated_cap not in (None, "") and int(stated_cap) != cap:
-        raise ValueError(f"{template['id']} max_steps is not the problem epoch cap")
+        raise ValueError(f"{ident} max_steps is not the problem epoch cap")
     return cap, tol, coeff
 
 

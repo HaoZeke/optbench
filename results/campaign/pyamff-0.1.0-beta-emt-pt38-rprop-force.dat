@@ -4,7 +4,7 @@ force_calls_max 2283
 force_calls_median 931.5
 nfailed 0
 starts 50
-code pyamff
+code PyAMFF
 code_version 0.1.0-beta
 commit 240f51d01ca22969369f9bc21760c61cbb3b6665
 algorithm Rprop

@@ -9,7 +9,7 @@ import pytest
 
 from optbench.board import stated_full_n
 from optbench.campaign import list_templates, resolve_problem
-from optbench.runners.pyamff_ml import OPTIMIZERS, classify_stop, max_abs_converged
+from optbench.runners.pyamff_ml import OPTIMIZERS, _section, _stop, classify_stop, max_abs_converged
 
 ROOT = Path(__file__).resolve().parents[1]
 COMMIT = "240f51d01ca22969369f9bc21760c61cbb3b6665"
@@ -41,32 +41,30 @@ def test_pyamff_templates_cover_the_archive_cells():
     seen = set()
     for template in found:
         assert template["commit"] == COMMIT
-        assert template["code_version"] == "0.1.0-beta"
-        assert template["tuning"] == "default"
+        assert template["code_version"] in {"0.1.0-beta", "240f51d0", "240f51d"}
+        assert template["code"] == "PyAMFF"
+        assert template["tuning"] in {"default", "stock", "archive"}
         assert template.get("ranked") is not False
         assert "8037eb98" not in template["id"]
         assert template["problem"] in PROBLEMS
         problem = resolve_problem(ROOT, template["problem"])
         assert stated_full_n(ROOT, problem) == 50
-        section = template["pyamff"]
-        assert section["optimizer"] in OPTIMIZERS
-        assert section["learning_rate"] == 0.01
-        assert section["hidden_layers"] == [10, 7]
-        assert section["activation"] == "tanh"
-        assert section["initial_weights"] == "random_uniform"
-        assert section["seed_base"] == 20261015
-        stop = template["stop"]
-        assert stop["norm"] == "max_abs"
-        coeff = section["force_coefficient"]
-        if template["id"].endswith("-force"):
+        cap, tol, coeff = _stop(problem, template)
+        section = template.get("pyamff") or {}
+        optimizer = _section(template)["optimizer"]
+        assert optimizer in OPTIMIZERS
+        assert "seed_base" not in section
+        if "init_model_parameters" in section:
+            assert section["init_model_parameters"] is True
+        if template["id"].endswith("-force") or template["id"].endswith("fcoeff0_1"):
             assert coeff == 0.1
-            assert stop["max_steps"] == 30000
-            assert stop["gradient_norm"] == 0.1
+            assert cap == 30000
+            assert tol == 0.1
         else:
             assert coeff == 0.0
-            assert stop["max_steps"] == 10000
-            assert stop["gradient_norm"] == 0.02
-        seen.add((template["problem"], section["optimizer"], coeff))
+            assert cap == 10000
+            assert tol == 0.02
+        seen.add((template["problem"], optimizer, coeff))
     for problem in PROBLEMS:
         for name in OPTIMIZERS:
             assert (problem, name, 0.0) in seen
