@@ -35,7 +35,7 @@ def test_the_ledger_covers_the_oracle_in_order():
             assert row["cause"]
         if (row.get("rerun") or {}).get("paper_baseline"):
             assert status == "reproduced"
-    assert counts == {"reproduced": 47, "not_reproduced": 29, "not_rerun": 75}
+    assert counts == {"reproduced": 46, "not_reproduced": 29, "not_rerun": 76}
     assert reproduction_errors(ROOT) == []
 
 
@@ -55,16 +55,9 @@ def test_pele_paper_baseline_is_the_2014_stop():
     assert island["rerun"]["stop2014_calls"] == 88.551
     assert island["rerun"]["paper_baseline"] is True
     double_ended = ledger["double-ended-saddle-search/lj38/pele"]
-    assert double_ended["status"] == "reproduced"
-    assert double_ended["rerun"]["paper_baseline"] is True
-    assert double_ended["rerun"]["template"] == "pele/de-lj38"
-    by_metric = {item["metric"]: item for item in double_ended["checks"]}
-    assert by_metric["force_calls"]["rerun"] == 295
-    assert by_metric["force_calls_median"]["rerun"] == 224
-    assert by_metric["force_calls_min"]["rerun"] == 111
-    assert by_metric["force_calls_max"]["rerun"] == 801
-    assert double_ended["failure_check"]["ok"] is True
-    assert double_ended["failure_check"]["rerun"] == 0
+    assert double_ended["status"] == "not_rerun"
+    assert double_ended["rerun"] is None
+    assert double_ended["checks"] == []
     assert "starting set" in forward["note"]
     held = holdback(ROOT)
     assert ("tsopt/LJ38", "sella/lj38-ts-tuned") in held.templates

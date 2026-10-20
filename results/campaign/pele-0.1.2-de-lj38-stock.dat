@@ -1,14 +1,13 @@
 # pele 0.1.2 stock double-ended LJ38, commit b7081b932a060be11342fbe8287ac35da8ada879
-# PeleCounter charges one harness call for each potential entry
-# NEB and hybrid eigenvector following stay at the library defaults
-# the RMS stop is the archive Euclidean norm 0.001
-# the mean leaves cap failures out; the ranked score is the harness PAR-2
-# the gap from the 2014 archive is a finding
-force_calls 1752.17857143
-force_calls_median 1687
-force_calls_min 1223
-force_calls_max 2482
-nfailed 22
+# RMS stop is 0.001/sqrt(114) for the saddle and the minimum checks
+# saddle, tangent, eigenvector, and minimizer iteration limits are 2500
+# the band keeps the library iteration count and the force cap is 2500
+# one harness call is one energy and gradient; endpoint insertion is not counted
+force_calls 1639.8
+force_calls_median 1519.5
+force_calls_min 1028
+force_calls_max 2442
+nfailed 20
 n 50
 algorithm hybrid eigenvector following
 code pele

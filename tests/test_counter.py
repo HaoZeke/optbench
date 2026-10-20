@@ -97,6 +97,10 @@ def test_pele_energy_is_one_gradient_entry():
 
     wrapped = PeleCounter(Inner())
     assert wrapped.getEnergy([0.0, 0.0, 0.0]) == 1.0
+    energy, gradient = wrapped.getEnergyGradient([0.0, 0.0, 0.0])
+    assert energy == 1.0
+    assert list(gradient) == [0.0, 0.0, 0.0]
+    assert wrapped.getEnergy([0.0, 0.0, 0.0]) == 1.0
     wrapped.getEnergyGradient([0.1, 0.0, 0.0])
     assert wrapped.calls == 2
     assert wrapped._inner.entries == 2

@@ -1,8 +1,12 @@
-# pele 0.1.2, the current release, unmodified.
+# pele 0.1.2, commit b7081b932a060be11342fbe8287ac35da8ada879.
+# GitHub main is that commit, the same commit as tag v0.1.2.
 # One NEB at the library defaults, then hybrid eigenvector following from
-# the highest image. The tangent guess is the NEB tangent. The RMS stop
-# is 0.001/sqrt(3*38), the archive Euclidean norm 0.001. PeleCounter
-# scores the search. The cap is the problem budget, 2500.
+# the highest image. The tangent guess is the NEB tangent.
+# The saddle RMS stop and the minimum-check RMS stop are 0.001/sqrt(3*38).
+# Saddle, tangent, eigenvector, and structural-minimizer iteration limits are 2500.
+# The band keeps its library iteration count. The force cap is 2500.
+# PeleCounter charges one energy and gradient of a geometry once.
+# Endpoint insertion is not counted, and the connection pushoff is not run.
 id = "pele/de-lj38-stock"
 engine = "pele-0.1.2"
 code = "pele"
@@ -11,3 +15,4 @@ commit = "b7081b932a060be11342fbe8287ac35da8ada879"
 algorithm = "hybrid eigenvector following"
 problem = "double-ended-saddle-search/lj38"
 tuning = "stock"
+note = "pele 0.1.2, commit b7081b932a06. Stock NEB and hybrid eigenvector following. The saddle and minimum RMS stops are 0.001/sqrt(114). Saddle, tangent, eigenvector, and minimizer iteration limits are 2500."

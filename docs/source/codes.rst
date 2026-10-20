@@ -1093,15 +1093,14 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">pele/de-lj38-stock</td>
    <td data-field="version">pele 0.1.2</td>
    <td data-field="commit">b7081b932a06</td>
-   <td data-field="par2_mean">3181.22</td>
-   <td data-field="mean_calls">2081.22</td>
-   <td data-field="median_calls">2296</td>
-   <td data-field="failures">crash 0, divergence 0, cap 22, wrong_stationary 0</td>
+   <td data-field="par2_mean">2983.88</td>
+   <td data-field="mean_calls">1943.2</td>
+   <td data-field="median_calls">1940</td>
+   <td data-field="failures">crash 0, divergence 0, cap 17, wrong_stationary 3</td>
    <td data-field="n">50</td>
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
-   <li>LJ38 double-ended saddle: not yet on the harness counter.</li>
    <li>pele-lbfgs-M1-maxstep0.1: no per-start record.</li>
    <li>pele-lbfgs-M10-maxstep0.1: no per-start record.</li>
    <li>pele-lbfgs-M100-maxstep0.2: no per-start record.</li>

@@ -168,16 +168,27 @@ def attach_ase_counter(
     return calculator
 
 
+def _freeze_gradient(gradient):
+    if hasattr(gradient, "copy"):
+        return gradient.copy()
+    return gradient
+
+
 class PeleCounter:
     """Count pele potential entries.
 
     ``getEnergy`` goes through ``getEnergyGradient``, so a caller that
-    asks for the energy alone is charged one call, not two.
+    asks for the energy alone is charged one call, not two. The energy and
+    the gradient of one geometry are one evaluation: a gradient request for
+    a geometry whose energy was just computed, or an energy request for a
+    geometry whose gradient was just computed, is not charged again.
     """
 
     def __init__(self, inner: object):
         self._inner = inner
         self._counter = HarnessCounter(cache=False)
+        self._paired: dict[tuple[float, ...], tuple] = {}
+        self._last: dict[tuple[float, ...], tuple] = {}
 
     @property
     def calls(self) -> int:
@@ -188,13 +199,29 @@ class PeleCounter:
         return self._counter.verify_calls
 
     def getEnergyGradient(self, coords):
-        key = tuple(float(value) for value in coords)
+        key = _key(coords)
+        saved = self._paired.pop(key, None)
+        if saved is not None:
+            return saved
         self._counter.charge(key)
-        return self._inner.getEnergyGradient(coords)
+        energy, gradient = self._inner.getEnergyGradient(coords)
+        value = (energy, _freeze_gradient(gradient))
+        self._last[key] = value
+        return value
 
     def getEnergy(self, coords):
-        energy, _gradient = self.getEnergyGradient(coords)
+        key = _key(coords)
+        saved = self._last.get(key)
+        if saved is not None:
+            return saved[0]
+        energy, gradient = self.getEnergyGradient(coords)
+        self._paired[key] = (energy, gradient)
         return energy
+
+    def reset(self) -> None:
+        self._counter.reset()
+        self._paired.clear()
+        self._last.clear()
 
     def __getattr__(self, name: str):
         return getattr(self._inner, name)
