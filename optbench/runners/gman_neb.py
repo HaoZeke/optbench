@@ -1,10 +1,13 @@
-"""Gman r235 steepest-descent NEB on the Pt heptamer.
+"""Gman 1.0.0.01 steepest descent and quick-min on the Pt heptamer.
 
-The archived ``gman-sd`` script calls ``Gopt.sd``. Its ``algorithm lbfgs``
-line is the label written for every Gman optimizer. Stock ``sd.init`` is
-``maxmove=0.2`` and ``stepR=0.1``. The band uses the shared archive setup:
-8 images, spring 5, tangent ``new``, climbing image on, ``fmax=0.01``.
-The iteration limit is the problem cap.
+Release r235. The package version file is 1.0.0.01. The archived
+``gman-sd`` script calls ``Gopt.sd``. Its ``algorithm lbfgs`` line is the
+label written for every Gman optimizer. Stock ``sd.init`` is
+``maxmove=0.2`` and ``stepR=0.1``. Stock ``qm.init`` is ``maxmove=0.2``
+and ``dt=0.15``. The band uses the shared archive setup: 8 images,
+spring 5, tangent ``new``, climbing image on, ``fmax=0.01``. The
+iteration limit is the problem cap, 10000. The harness ranks
+``pot.count``, so that cap is 80000 calls.
 """
 
 from __future__ import annotations
@@ -31,7 +34,7 @@ def _source_root(root: Path) -> Path:
 
 
 def _stock_settings(template: dict, problem: dict, section: dict) -> dict:
-    """Stock steepest descent. Force stop and iteration cap come from the problem."""
+    """Stock optimizer. The iteration cap is the problem's; the score cap is pot.count."""
     optimizer = section.get("optimizer")
     if optimizer not in {"sd", "qm"}:
         raise ValueError(f"{template['id']} optimizer {optimizer} is not this runner")
@@ -55,7 +58,7 @@ def _stock_settings(template: dict, problem: dict, section: dict) -> dict:
         "images": images,
         "fmax": fmax,
         "itrmax": cap,
-        "cap": cap,
+        "cap": cap * images,
         "pairs": pairs,
     }
 
@@ -219,16 +222,16 @@ def _publish(output: Path, rows: list[dict], template: dict, problem: dict, sett
         )
     if settings["optimizer"] == "sd":
         comment = (
-            "# Gman r235 steepest descent. sd.init is the library default, maxmove 0.2 and stepR 0.1.\n"
+            "# Gman 1.0.0.01, release r235. sd.init is the library default, maxmove 0.2 and stepR 0.1.\n"
             "# Climbing image, spring 5, and tangent new are the shared NEB setup. "
-            "fmax 0.01. The iteration limit is the problem cap, 10000.\n"
+            "fmax 0.01. The iteration limit is 10000. The harness ranks pot.count, so the cap is 80000.\n"
             "# The count is pot.count."
         )
     else:
         comment = (
-            "# Gman r235 quick-min. qm.init is the library default, maxmove 0.2 and dt 0.15.\n"
+            "# Gman 1.0.0.01, release r235. qm.init is the library default, maxmove 0.2 and dt 0.15.\n"
             "# Climbing image, spring 5, and tangent new are the shared NEB setup. "
-            "fmax 0.01. The iteration limit is the problem cap, 10000.\n"
+            "fmax 0.01. The iteration limit is 10000. The harness ranks pot.count, so the cap is 80000.\n"
             "# The count is pot.count."
         )
     published = write_campaign(
@@ -240,7 +243,7 @@ def _publish(output: Path, rows: list[dict], template: dict, problem: dict, sett
         {
             "method": "ci",
             "optimizer": settings["optimizer"],
-            "counter": "gman pot.count",
+            "counter": "pot.count",
             "potential": "morse",
             "version": template["code_version"],
             "images": settings["images"],

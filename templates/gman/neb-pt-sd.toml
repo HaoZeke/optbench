@@ -1,14 +1,14 @@
-# Gman r235 steepest descent at the library step.
+# Gman 1.0.0.01 steepest descent at the library step. Release r235.
 id = "gman/neb-pt-sd"
 engine = "gman"
 problem = "neb/Pt-heptamer"
 code = "Gman"
-code_version = "r235"
+code_version = "1.0.0.01"
 commit = "r235"
 algorithm = "sd"
 failure_cap = 10000
 tuning = "default"
-note = "Gman r235 steepest descent. sd.init uses maxmove 0.2 and stepR 0.1. Climbing image, spring 5, and tangent new are the shared NEB setup. fmax is 0.01. The iteration limit is the problem cap."
+note = "Gman 1.0.0.01 (release r235) steepest descent. sd.init uses maxmove 0.2 and stepR 0.1. Climbing image, spring 5, and tangent new are the shared NEB setup. fmax is 0.01. The iteration limit is 10000. The harness ranks pot.count, so the cap is 80000."
 
 [stop]
 force_norm = 0.01

@@ -1,5 +1,5 @@
-# Gman r235 quick-min. qm.init is the library default, maxmove 0.2 and dt 0.15.
-# Climbing image, spring 5, and tangent new are the shared NEB setup. fmax 0.01. The iteration limit is the problem cap, 10000.
+# Gman 1.0.0.01, release r235. qm.init is the library default, maxmove 0.2 and dt 0.15.
+# Climbing image, spring 5, and tangent new are the shared NEB setup. fmax 0.01. The iteration limit is 10000. The harness ranks pot.count, so the cap is 80000.
 # The count is pot.count.
 force_calls 1527
 force_calls_min 824
@@ -12,7 +12,7 @@ nfailed 0
 n 13
 transition_states 0
 code Gman
-code_version r235
+code_version 1.0.0.01
 commit r235
 algorithm quick-min
 template gman/neb-pt-qm
