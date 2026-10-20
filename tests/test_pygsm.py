@@ -59,6 +59,7 @@ def test_template_matches_the_registry_pin():
     assert "EV_PER_AU" in note
     assert "newMakePrimitives" in note
     assert "CartesianX" in note
+    assert "write_xyzs_w_comments" in note
     assert "dirty" not in lowered
     assert "contact-distance" not in lowered
     assert "reproduced" not in lowered
@@ -253,6 +254,21 @@ def test_generator_sum_adds_vectors():
     total = _sum_generators(np.array([1.0, 2.0]) for _ in range(3))
     assert np.allclose(total, [3.0, 6.0])
     assert _sum_generators(float(i) for i in range(4)) == 6.0
+
+
+def test_the_trajectory_rewrite_is_skipped():
+    from optbench.pygsm_band import ensure_runtime
+
+    ensure_runtime()
+    from pyGSM.utilities import manage_xyz as namespaced
+    from utilities import manage_xyz as flat
+
+    assert namespaced.write_xyzs_w_comments(None, None, None) is None
+    assert flat.write_xyzs_w_comments(None, None, None) is None
+    import importlib
+
+    optimizer = importlib.import_module("pyGSM.optimizers.eigenvector_follow")
+    assert optimizer.manage_xyz.write_xyzs_w_comments(None, None, None) is None
 
 
 def test_hybrid_primitives_are_cartesian_components():

@@ -37,6 +37,9 @@ removed ``ndarray.tostring`` and rejects a generator passed to
 ``np.sum``. ``wilsonB`` is rebound to the shipped body with
 ``tobytes`` in place of that call. The wrapper also sums those
 generators and returns a size-1 ``np.dot`` as a float.
+``eigenvector_follow`` rewrites the whole node trajectory on each
+optimizer step. The wrapper replaces ``write_xyzs_w_comments`` with a
+no-op. That file is not an input to the step.
 """
 
 from __future__ import annotations
@@ -47,6 +50,7 @@ import json
 import os
 import shutil
 import statistics
+import sys
 import tempfile
 import textwrap
 import traceback
@@ -156,22 +160,42 @@ def _wilson_tobytes(cls) -> None:
     cls.wilsonB = namespace["wilsonB"]
 
 
+def _skip_trajectory(*_args, **_kwargs) -> None:
+    """Drop the optimizer trajectory rewrite.
+
+    ``eigenvector_follow`` calls ``write_xyzs_w_comments`` with the
+    whole node history on each step. The next step does not read that
+    file.
+    """
+    return None
+
+
 def ensure_runtime() -> None:
     """Import pyGSM once and restore the Numpy 2 calls it makes.
 
     ``wilsonB`` is rebound to the shipped body with ``tobytes``.
     ``np.sum`` accepts a generator. A size-1 ``np.dot`` result is a
-    float. No other pyGSM method is replaced, and pyGSM's files are not
-    edited.
+    float. ``write_xyzs_w_comments`` is a no-op so a long search is not
+    spent rewriting its trajectory. pyGSM's files are not edited.
     """
     global _PATCHED
     if _PATCHED:
         return
     from pyGSM.coordinate_systems import PrimitiveInternalCoordinates
     from pyGSM.coordinate_systems.internal_coordinates import InternalCoordinates
+    from pyGSM.utilities import manage_xyz
 
     _wilson_tobytes(PrimitiveInternalCoordinates)
     _wilson_tobytes(InternalCoordinates)
+    # eigenvector_follow imports ``utilities.manage_xyz``. That load is a
+    # different module object from ``pyGSM.utilities.manage_xyz``.
+    package = str(Path(manage_xyz.__file__).resolve().parents[1])
+    if package not in sys.path:
+        sys.path.append(package)
+    import utilities.manage_xyz as flat_xyz
+
+    manage_xyz.write_xyzs_w_comments = _skip_trajectory
+    flat_xyz.write_xyzs_w_comments = _skip_trajectory
     np.dot = _dot_scalar
     np.sum = _sum_generators
     _PATCHED = True
