@@ -17263,6 +17263,62 @@
       ],
       "title": "Binary Lennard-Jones 100"
     },
+    "globalopt/lj150": {
+      "full_n": 100,
+      "history": [],
+      "id": "globalopt/lj150",
+      "not_comparable": [],
+      "partial": [],
+      "profile_gap": "No performance profile. One start has no finite cost.",
+      "ranked": [
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": 10000000,
+          "code": "AIRSS",
+          "code_version": "0.9.4",
+          "commit": "5593cc4ee360d998764fceb188284fdf0ef781d206754176dcb360c65103ddaa",
+          "comparable": true,
+          "counter": "harness",
+          "current": true,
+          "entry": "airss-0.9.4-lj150",
+          "failures": {
+            "cap": 100,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 0
+          },
+          "full_n": 100,
+          "history": false,
+          "max_calls": 10003225.0,
+          "mean_calls": 10000833.59,
+          "mean_per_image": null,
+          "median": 20000000.0,
+          "median_calls": 10000719.5,
+          "median_high": 20000000.0,
+          "median_low": 20000000.0,
+          "median_per_image": null,
+          "min_calls": 10000016.0,
+          "n": 100,
+          "nfailed": 100,
+          "note": "starts.jsonl",
+          "par2_mean": 20000000.0,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/airss-0.9.4-lj150.dat",
+          "problem": "globalopt/lj150",
+          "registry_match": true,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 0.0,
+          "template": "airss/lj150",
+          "tuning": "default",
+          "wilson_high": 0.03699349820698568,
+          "wilson_low": 0.0
+        }
+      ],
+      "title": "lj150"
+    },
     "globalopt/lj38": {
       "full_n": 100,
       "history": [],
@@ -17315,7 +17371,7 @@
         {
           "asv_commit": "",
           "call_unit": "total",
-          "cap": null,
+          "cap": 2000000,
           "code": "AIRSS",
           "code_version": "0.9.4",
           "commit": "5593cc4ee360d998764fceb188284fdf0ef781d206754176dcb360c65103ddaa",
@@ -17343,7 +17399,7 @@
           "n": 100,
           "nfailed": 0,
           "note": "starts.jsonl",
-          "par2_mean": null,
+          "par2_mean": 112134.16,
           "partial": false,
           "partial_reason": "",
           "path": "results/campaign/airss-0.9.4-lj38.dat",
@@ -48029,7 +48085,7 @@
       "title": "pt-island"
     }
   },
-  "ranked_count": 562,
+  "ranked_count": 563,
   "schema": "optbench.board/v1",
   "unmapped": [
     {

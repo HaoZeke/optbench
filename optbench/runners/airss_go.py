@@ -1,19 +1,23 @@
 """AIRSS random structure search on the harness Lennard-Jones potential.
 
 ``buildcell`` from AIRSS 0.9.4 draws each cell. The relaxation is the
-pp3 two-point step (Barzilai and Borwein), two passes, on
-``optbench.potentials.lennard_jones``. pp3's built-in pair potential
-subtracts a cutoff shift, so the scored evaluations stay on the spec
-potential and the harness counter.
+pp3 two-point step (Barzilai and Borwein), two passes, on the spec
+Lennard-Jones potential. pp3's built-in pair potential subtracts a
+cutoff shift, so the scored evaluations stay on the spec potential.
+Each evaluation is one harness call. The compiled kernel in
+``lj_flat.c`` is that potential; the NumPy function is the reference.
 
 One archived start name is one independent search. The search stops
 when the harness energy is at or below the Cambridge Cluster Database
-minimum plus the problem tolerance. A problem that states a force-call
-cap also stops at that cap.
+minimum plus the problem tolerance. A problem force-call cap, or the
+template ``failure_cap`` when the problem leaves the number out, also
+stops the search.
 """
 
 from __future__ import annotations
 
+import ctypes
+import hashlib
 import math
 import os
 import shutil
@@ -23,7 +27,6 @@ from pathlib import Path
 
 import numpy as np
 
-from optbench.counter import CountedPotential
 from optbench.globalopt import judge_globalopt
 from optbench.potentials import binary_lennard_jones, lennard_jones
 from optbench.score import half_even, score_v2
@@ -34,10 +37,106 @@ TARBALL_SHA256 = "5593cc4ee360d998764fceb188284fdf0ef781d206754176dcb360c65103dd
 # Runaway guard. A hit is a crash, not a scored cap: the problem states none.
 SAFETY_STRUCTURES = 4000
 _PASSES = 2
+_LIB = None
+_LIB_FAILED = False
 
 
 class BuildFailure(RuntimeError):
     """buildcell returned no usable cell."""
+
+
+class _StepPotential:
+    """One harness call per ``energy_forces`` entry.
+
+    The two-point step asks for the energy and the gradient together, so
+    there is no second read of the same geometry to collapse.
+    """
+
+    def __init__(self, evaluate):
+        self.calls = 0
+        self._evaluate = evaluate
+
+    def energy_forces(self, coords):
+        self.calls += 1
+        energy, gradient = self._evaluate(coords)
+        return float(energy), gradient
+
+
+def search_cap(problem: dict, template: dict) -> int | None:
+    """Force-call cap from the problem, or the template when the problem omits it.
+
+    ``globalopt/lj38`` leaves ``max_force_calls`` out. The other rows on
+    that board carry ``failure_cap`` 2000000, and the board scores them
+    against that number.
+    """
+    raw = (problem.get("convergence") or {}).get("max_force_calls")
+    if raw not in (None, ""):
+        return int(raw)
+    raw = template.get("failure_cap")
+    if raw not in (None, ""):
+        return int(raw)
+    return None
+
+
+def _kernel_library():
+    """Compile ``lj_flat.c`` once and return the shared library, or None."""
+    global _LIB, _LIB_FAILED
+    if _LIB is not None:
+        return _LIB
+    if _LIB_FAILED:
+        return None
+    source = Path(__file__).with_name("lj_flat.c")
+    digest = hashlib.sha256(source.read_bytes()).hexdigest()[:16]
+    cache = Path(os.environ.get("OPTBENCH_LJ_CACHE", Path.home() / ".cache" / "optbench"))
+    cache.mkdir(parents=True, exist_ok=True)
+    so = cache / f"lj_flat-{digest}.so"
+    if not so.is_file():
+        temporary = cache / f"lj_flat-{digest}-{os.getpid()}.so"
+        try:
+            subprocess.run(
+                ["gcc", "-O3", "-march=native", "-fPIC", "-shared", "-o", str(temporary), str(source), "-lm"],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+        except (OSError, subprocess.CalledProcessError):
+            temporary.unlink(missing_ok=True)
+            _LIB_FAILED = True
+            return None
+        os.replace(temporary, so)
+    lib = ctypes.CDLL(str(so))
+    lib.lj_cluster.argtypes = [
+        ctypes.POINTER(ctypes.c_double),
+        ctypes.c_int,
+        ctypes.POINTER(ctypes.c_double),
+        ctypes.POINTER(ctypes.c_double),
+    ]
+    lib.lj_cluster.restype = None
+    _LIB = lib
+    return lib
+
+
+def cluster_lennard_jones(coords) -> tuple[float, np.ndarray]:
+    """Spec Lennard-Jones energy and flat gradient.
+
+    Uses the compiled kernel when gcc can build it. Otherwise the NumPy
+    potential, which is the same formula.
+    """
+    pos = np.ascontiguousarray(coords, dtype=np.float64).reshape(-1)
+    if pos.size % 3 != 0:
+        raise ValueError("coordinates must be a multiple of 3")
+    lib = _kernel_library()
+    if lib is None:
+        return lennard_jones(pos)
+    grad = np.empty(pos.shape, dtype=np.float64)
+    energy = ctypes.c_double()
+    lib.lj_cluster(
+        pos.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
+        pos.size // 3,
+        ctypes.byref(energy),
+        grad.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
+    )
+    return float(energy.value), grad
 
 
 def wales_path() -> Path:
@@ -246,7 +345,7 @@ def build_positions(binary: Path, text: str, natoms: int, *, timeout: float = 60
 def _bb_pass(
     pos: np.ndarray,
     box: float,
-    potential: CountedPotential,
+    potential: _StepPotential,
     *,
     etol: float,
     maxsteps: int,
@@ -309,8 +408,8 @@ def relax_positions(
     cluster passes ``binary_lennard_jones`` closed over its species labels.
     """
     if evaluate is None:
-        evaluate = lambda coords: lennard_jones(np.asarray(coords, dtype=np.float64))
-    potential = CountedPotential(evaluate)
+        evaluate = cluster_lennard_jones
+    potential = _StepPotential(evaluate)
     point = np.asarray(pos, dtype=np.float64)
     converged = True
     energy = 0.0
@@ -468,7 +567,7 @@ def _evaluate(job: dict, labels: list[str]):
             return binary_lennard_jones(np.asarray(coords, dtype=np.float64), species)
 
         return binary
-    return lambda coords: lennard_jones(np.asarray(coords, dtype=np.float64))
+    return cluster_lennard_jones
 
 
 def _judged(job: dict, calls: int, energy: float | None, structures: int) -> dict:
@@ -503,12 +602,39 @@ def _judged(job: dict, calls: int, energy: float | None, structures: int) -> dic
     }
 
 
+def _checkpoint_file(job: dict) -> Path | None:
+    raw = job.get("checkpoint")
+    if not raw:
+        return None
+    return Path(raw)
+
+
+def _read_checkpoint(path: Path) -> dict | None:
+    if not path.is_file():
+        return None
+    import json
+
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _write_checkpoint(path: Path, payload: dict) -> None:
+    import json
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    temporary.write_text(json.dumps(payload, sort_keys=True), encoding="utf-8")
+    temporary.replace(path)
+
+
 def search_start(job: dict) -> dict:
     """Search one start until the energy window or the force-call cap.
 
     With no threshold and no cap, stop after ``budget`` structures and keep
     the lowest energy. A cap uses ``judge_globalopt``: success is an energy
     at or below the reference plus the tolerance, with fewer calls than the cap.
+    A checkpoint file resumes at the next structure. The seed is a function
+    of the structure index, so the continued search matches a run that was
+    not interrupted.
     """
     binary = Path(job["buildcell"])
     calls = 0
@@ -520,15 +646,47 @@ def search_start(job: dict) -> dict:
     threshold = job.get("threshold")
     budget = job.get("budget")
     structure_index = 0
+    checkpoint = _checkpoint_file(job)
+    restored = _read_checkpoint(checkpoint) if checkpoint is not None else None
+    if restored:
+        structure_index = int(restored["structure_index"])
+        calls = int(restored["calls"])
+        structures = int(restored["structures"])
+        nonfinite = int(restored["nonfinite"])
+        best = math.inf if restored.get("best") is None else float(restored["best"])
+        print(
+            f"{job['start']} resume structures={structures} calls={calls}",
+            flush=True,
+        )
+
+    def _persist() -> None:
+        if checkpoint is None:
+            return
+        _write_checkpoint(
+            checkpoint,
+            {
+                "structure_index": structure_index,
+                "calls": calls,
+                "structures": structures,
+                "best": None if best is math.inf else best,
+                "nonfinite": nonfinite,
+            },
+        )
+
+    def _finish(record: dict) -> dict:
+        if checkpoint is not None:
+            checkpoint.unlink(missing_ok=True)
+        return record
+
     while True:
         if cap is not None and calls >= int(cap):
-            return _judged(job, calls, None if best is math.inf else best, structures)
+            return _finish(_judged(job, calls, None if best is math.inf else best, structures))
         if budget is not None and structures >= int(budget):
             if best is math.inf:
-                return _crash(job, calls, None, structures, "budget")
-            return _capped(job, calls, best, structures)
+                return _finish(_crash(job, calls, None, structures, "budget"))
+            return _finish(_capped(job, calls, best, structures))
         if cap is None and budget is None and structures >= int(job["safety"]):
-            return _crash(job, calls, None if best is math.inf else best, structures, "safety")
+            return _finish(_crash(job, calls, None if best is math.inf else best, structures, "safety"))
         text = cell_text(
             natoms=job["natoms"],
             box=job["box"],
@@ -546,7 +704,7 @@ def search_start(job: dict) -> dict:
         except BuildFailure:
             build_failures += 1
             if build_failures >= 30:
-                return _crash(job, calls, None if best is math.inf else best, structures, "buildcell")
+                return _finish(_crash(job, calls, None if best is math.inf else best, structures, "buildcell"))
             continue
         build_failures = 0
         structures += 1
@@ -559,14 +717,16 @@ def search_start(job: dict) -> dict:
         )
         calls += used
         if used <= 0:
-            return _crash(job, calls, None if best is math.inf else best, structures, "relax")
+            return _finish(_crash(job, calls, None if best is math.inf else best, structures, "relax"))
         if not math.isfinite(energy):
             nonfinite += 1
             if nonfinite >= 20:
-                return _crash(job, calls, None if best is math.inf else best, structures, "nonfinite")
+                return _finish(_crash(job, calls, None if best is math.inf else best, structures, "nonfinite"))
+            _persist()
             continue
         if energy < best:
             best = energy
+        _persist()
         if structures % 100 == 0:
             print(
                 f"{job['start']} structures={structures} calls={calls} best={best:.6f}",
@@ -578,9 +738,9 @@ def search_start(job: dict) -> dict:
             float(job["threshold"]) - float(job["reference_energy"]),
         ):
             if cap is None or calls < int(cap):
-                return _success(job, calls, energy, structures)
+                return _finish(_success(job, calls, energy, structures))
         if cap is not None and calls >= int(cap):
-            return _judged(job, calls, best, structures)
+            return _finish(_judged(job, calls, best, structures))
 
 
 def _success(job: dict, calls: int, energy: float, structures: int) -> dict:
@@ -698,7 +858,7 @@ def _dat(summary: dict, template: dict, metrics: dict) -> str:
             "# counter harness. One force call is one potential evaluation inside the two-point step.",
             "# buildcell draws the cell. The archived files name the starts.",
             "# A start succeeds when the harness energy is at or below the Cambridge minimum plus energy_above_minimum and the call count is under the cap.",
-            "# A miss costs twice the problem cap.",
+            "# A miss costs twice the cap.",
         ]
     else:
         lines = [
@@ -717,120 +877,92 @@ def _dat(summary: dict, template: dict, metrics: dict) -> str:
     return "\n".join(lines) + "\n"
 
 
-def run_template(
+def assemble_campaign(
     root: Path,
     problem: dict,
     template: dict,
-    *,
-    geometries: Path | None,
+    shards: list[Path],
     output: Path,
-    workers: int,
-    work: Path | None,
+    *,
+    work: Path | None = None,
 ) -> dict:
-    from optbench.campaign import write_starts
+    """Score one campaign from shard ``.starts.jsonl`` files.
 
-    stated = template.get("problem")
-    if stated and stated != problem["id"]:
-        raise ValueError(f"{template['id']} belongs to {stated}")
-    if template.get("commit") != TARBALL_SHA256:
-        raise RuntimeError(f"{template['id']} commit is not the AIRSS 0.9.4 tarball sha256")
-    convergence = problem.get("convergence") or {}
+    ``shards`` are the ``.dat`` paths or the jsonl paths. The archived
+    start list supplies the order. A partial set raises.
+    """
+    import json
+
+    names = _load_start_names(root, problem, None, work, output)
+    records = []
+    for shard in shards:
+        path = shard if shard.name.endswith(".jsonl") else shard.with_suffix(".starts.jsonl")
+        for line in path.read_text(encoding="utf-8").splitlines():
+            if line.strip():
+                records.append(json.loads(line))
+    ordered = order_starts(names, records)
     config = _config(template)
-    raw_tolerance = convergence.get("energy_above_minimum")
-    raw_cap = convergence.get("max_force_calls")
-    if raw_tolerance is None and raw_cap is None and not config.get("budget_structures"):
-        raise ValueError(
-            f"{problem['id']} has no energy_above_minimum and {template['id']} has no airss.budget_structures"
-        )
-    binary = find_buildcell()
-    if config.get("starts"):
-        label = str(config.get("start_label") or "start")
-        names = [f"{label}.{index}" for index in range(1, int(config["starts"]) + 1)]
-    else:
-        names = _load_start_names(root, problem, geometries, work, output)
-    cap = None if raw_cap in (None, "") else int(raw_cap)
+    cap = search_cap(problem, template)
+    raw_tolerance = (problem.get("convergence") or {}).get("energy_above_minimum")
     if raw_tolerance is None:
         reference = None
         tolerance = None
     else:
         tolerance = float(raw_tolerance)
         stated = (problem.get("reference") or {}).get("energy")
-        if stated not in (None, ""):
-            reference = float(stated)
-        else:
-            coords = load_wales_coordinates()
-            if coords.shape[0] != config["natoms"]:
-                raise ValueError(f"Wales file has {coords.shape[0]} atoms, template has {config['natoms']}")
-            reference = reference_energy(coords)
-    jobs = [
-        _job(template, index, name, binary, reference, tolerance, cap) for index, name in enumerate(names)
-    ]
-    import json
+        reference = None if stated in (None, "") else float(stated)
+    return _publish(
+        problem,
+        template,
+        config,
+        ordered,
+        output,
+        reference=reference,
+        tolerance=tolerance,
+        cap=cap,
+        budget_only=reference is None and cap is None,
+    )
 
-    for key in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "NUMEXPR_NUM_THREADS"):
-        os.environ.setdefault(key, "1")
-    progress_path = output.with_suffix(".progress.jsonl")
-    saved: dict[int, dict] = {}
-    if progress_path.is_file():
-        for line in progress_path.read_text(encoding="utf-8").splitlines():
-            if not line.strip():
-                continue
-            row = json.loads(line)
-            saved[int(row["index"])] = row
-    pending = [job for job in jobs if job["index"] not in saved]
-    progress_file = progress_path.open("a", encoding="utf-8")
 
-    def _store(record: dict) -> None:
-        saved[int(record["index"])] = record
-        progress_file.write(json.dumps(record, sort_keys=True) + "\n")
-        progress_file.flush()
+def order_starts(names: list[str], records: list[dict]) -> list[dict]:
+    """Put shard records into archived start order.
 
-    total = len(jobs)
-    try:
-        if not pending:
-            pass
-        elif workers <= 1:
-            done = total - len(pending)
-            for job in pending:
-                record = search_start(job)
-                _store(record)
-                done += 1
-                print(
-                    f"{template['id']} {done}/{total} start={record['start']} "
-                    f"calls={record['force_calls']} energy={record['energy']} success={record['success']}",
-                    flush=True,
-                )
-        else:
-            import multiprocessing as mp
-
-            context = mp.get_context("spawn")
-            with ProcessPoolExecutor(max_workers=workers, mp_context=context) as pool:
-                futures = [pool.submit(search_start, job) for job in pending]
-                done = total - len(pending)
-                for future in as_completed(futures):
-                    record = future.result()
-                    _store(record)
-                    done += 1
-                    print(
-                        f"{template['id']} {done}/{total} start={record['start']} "
-                        f"calls={record['force_calls']} energy={record['energy']} success={record['success']}",
-                        flush=True,
-                    )
-    finally:
-        progress_file.close()
-    records = [saved[job["index"]] for job in jobs]
-    budget_only = reference is None and cap is None
-    crashes = [row for row in records if row.get("failure") == "crash"]
-    missed = [row for row in records if not row["success"]]
-    if crashes:
-        partial_path = output.with_suffix(".partial.jsonl")
-        for row in records:
-            row.pop("index", None)
-        write_starts(partial_path, records)
-        raise RuntimeError(f"{len(crashes)} of {len(records)} starts crashed; wrote {partial_path}")
-    progress_path.unlink(missing_ok=True)
-    for row in records:
+    A record may still carry ``index`` from a checkpoint. The written row
+    does not. Every archived name is required once.
+    """
+    position = {name: index for index, name in enumerate(names)}
+    found: dict[int, dict] = {}
+    for record in records:
+        start = str(record["start"])
+        if start not in position:
+            raise ValueError(f"unknown start {start}")
+        index = position[start]
+        if index in found:
+            raise ValueError(f"duplicate start {start}")
+        row = dict(record)
         row.pop("index", None)
+        found[index] = row
+    missing = [name for index, name in enumerate(names) if index not in found]
+    if missing:
+        raise ValueError(f"missing {len(missing)} starts, first {missing[0]}")
+    return [found[index] for index in range(len(names))]
+
+
+def _publish(
+    problem: dict,
+    template: dict,
+    config: dict,
+    records: list[dict],
+    output: Path,
+    *,
+    reference: float | None,
+    tolerance: float | None,
+    cap: int | None,
+    budget_only: bool,
+) -> dict:
+    from optbench.campaign import write_starts
+
+    missed = [row for row in records if not row["success"]]
     calls = [int(row["force_calls"]) for row in records]
     energies = [float(row["energy"]) for row in records if row.get("energy") is not None]
     structures = [int(row["structures"]) for row in records]
@@ -912,11 +1044,11 @@ def run_template(
             }
         ],
     }
+    import json
+
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(_dat(summary, template, metrics), encoding="utf-8")
     write_starts(output.with_suffix(".starts.jsonl"), records)
-    import json
-
     output.with_suffix(".v2.json").write_text(
         json.dumps(document, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
@@ -928,3 +1060,144 @@ def run_template(
     summary["median"] = metrics["median"]
     summary["v2_nfailed"] = metrics["nfailed"]
     return summary
+
+
+def run_template(
+    root: Path,
+    problem: dict,
+    template: dict,
+    *,
+    geometries: Path | None,
+    output: Path,
+    workers: int,
+    work: Path | None,
+    index_start: int = 0,
+    index_stop: int | None = None,
+) -> dict:
+    from optbench.campaign import write_starts
+
+    stated = template.get("problem")
+    if stated and stated != problem["id"]:
+        raise ValueError(f"{template['id']} belongs to {stated}")
+    if template.get("commit") != TARBALL_SHA256:
+        raise RuntimeError(f"{template['id']} commit is not the AIRSS 0.9.4 tarball sha256")
+    convergence = problem.get("convergence") or {}
+    config = _config(template)
+    raw_tolerance = convergence.get("energy_above_minimum")
+    cap = search_cap(problem, template)
+    if raw_tolerance is None and cap is None and not config.get("budget_structures"):
+        raise ValueError(
+            f"{problem['id']} has no energy_above_minimum and {template['id']} has no airss.budget_structures"
+        )
+    binary = find_buildcell()
+    if config.get("starts"):
+        label = str(config.get("start_label") or "start")
+        names = [f"{label}.{index}" for index in range(1, int(config["starts"]) + 1)]
+    else:
+        names = _load_start_names(root, problem, geometries, work, output)
+    indexed = list(enumerate(names))
+    stop = len(indexed) if index_stop is None else int(index_stop)
+    if index_start < 0 or stop > len(indexed) or index_start >= stop:
+        raise ValueError(f"{template['id']} index range {index_start}:{stop} is outside 0:{len(indexed)}")
+    indexed = indexed[int(index_start) : stop]
+    if raw_tolerance is None:
+        reference = None
+        tolerance = None
+    else:
+        tolerance = float(raw_tolerance)
+        stated = (problem.get("reference") or {}).get("energy")
+        if stated not in (None, ""):
+            reference = float(stated)
+        else:
+            coords = load_wales_coordinates()
+            if coords.shape[0] != config["natoms"]:
+                raise ValueError(f"Wales file has {coords.shape[0]} atoms, template has {config['natoms']}")
+            reference = reference_energy(coords)
+    checkpoint_dir = output.parent / f"{output.name}.checkpoints"
+    jobs = []
+    for index, name in indexed:
+        job = _job(template, index, name, binary, reference, tolerance, cap)
+        job["checkpoint"] = str(checkpoint_dir / f"{index}.json")
+        jobs.append(job)
+    if _kernel_library() is None:
+        print(f"{template['id']} Lennard-Jones kernel: numpy", flush=True)
+    else:
+        print(f"{template['id']} Lennard-Jones kernel: compiled", flush=True)
+    import json
+
+    for key in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "NUMEXPR_NUM_THREADS"):
+        os.environ.setdefault(key, "1")
+    progress_path = output.with_suffix(".progress.jsonl")
+    saved: dict[int, dict] = {}
+    if progress_path.is_file():
+        for line in progress_path.read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            row = json.loads(line)
+            saved[int(row["index"])] = row
+    pending = [job for job in jobs if job["index"] not in saved]
+    progress_file = progress_path.open("a", encoding="utf-8")
+
+    def _store(record: dict) -> None:
+        saved[int(record["index"])] = record
+        progress_file.write(json.dumps(record, sort_keys=True) + "\n")
+        progress_file.flush()
+
+    total = len(jobs)
+    try:
+        if not pending:
+            pass
+        elif workers <= 1:
+            done = total - len(pending)
+            for job in pending:
+                record = search_start(job)
+                _store(record)
+                done += 1
+                print(
+                    f"{template['id']} {done}/{total} start={record['start']} "
+                    f"calls={record['force_calls']} energy={record['energy']} success={record['success']}",
+                    flush=True,
+                )
+        else:
+            import multiprocessing as mp
+
+            context = mp.get_context("spawn")
+            with ProcessPoolExecutor(max_workers=workers, mp_context=context) as pool:
+                futures = [pool.submit(search_start, job) for job in pending]
+                done = total - len(pending)
+                for future in as_completed(futures):
+                    record = future.result()
+                    _store(record)
+                    done += 1
+                    print(
+                        f"{template['id']} {done}/{total} start={record['start']} "
+                        f"calls={record['force_calls']} energy={record['energy']} success={record['success']}",
+                        flush=True,
+                    )
+    finally:
+        progress_file.close()
+    records = [saved[job["index"]] for job in jobs]
+    budget_only = reference is None and cap is None
+    crashes = [row for row in records if row.get("failure") == "crash"]
+    if crashes:
+        partial_path = output.with_suffix(".partial.jsonl")
+        for row in records:
+            row.pop("index", None)
+        write_starts(partial_path, records)
+        raise RuntimeError(f"{len(crashes)} of {len(records)} starts crashed; wrote {partial_path}")
+    progress_path.unlink(missing_ok=True)
+    if checkpoint_dir.is_dir():
+        shutil.rmtree(checkpoint_dir)
+    for row in records:
+        row.pop("index", None)
+    return _publish(
+        problem,
+        template,
+        config,
+        records,
+        output,
+        reference=reference,
+        tolerance=tolerance,
+        cap=cap,
+        budget_only=budget_only,
+    )
