@@ -6,7 +6,7 @@ from pathlib import Path
 import numpy as np
 
 from optbench.campaign import load_template
-from optbench.pygsm_band import _stable_sorted_eigh, _sum_generators, largest_nearest_neighbour
+from optbench.pygsm_band import _STEP_BUDGET, _both_signs, _sum_generators, largest_nearest_neighbour
 
 ROOT = Path(__file__).resolve().parents[1]
 COMMIT = "1b4d5a5557a61adc6a3df7405d6b7255b1fa4865"
@@ -51,22 +51,32 @@ def test_template_matches_the_registry_pin():
     pinned = next(row for row in registry["code"] if row["id"] == "pygsm")
     template = load_template(ROOT, "pygsm/de-gsm")
     assert pinned["commit"] == COMMIT
-    assert "11484" in pinned["note"]
-    assert "ASELoT" in pinned["note"]
-    assert "eV" in pinned["note"]
-    assert "contact-distance TRIC" in pinned["note"]
-    assert "de-gsm-climbclamp" not in pinned["note"]
+    note = pinned["note"]
+    lowered = note.lower()
+    assert "ASELoT" in note
+    assert "eV" in note
+    assert "DLC" in note
+    assert "EV_PER_AU" in note
+    assert "newMakePrimitives" in note
+    assert "dirty" not in lowered
+    assert "contact-distance" not in lowered
+    assert "reproduced" not in lowered
+    assert "legacy" not in lowered
+    assert "current" not in lowered
+    assert "de-gsm-climbclamp" not in note
     assert template["commit"] == pinned["commit"]
     assert template["code"] == "pygsm"
     assert template["engine"] == "pygsm-band"
     assert template["algorithm"] == "DE-GSM"
     assert template["tuning"] == "default"
-    assert template["code_version"] == "1.0.0+692.g1b4d5a5.dirty"
-    assert template["gsm"]["coordinate"] == "tric"
+    assert template["code_version"] == "1.0.0+692.g1b4d5a5"
+    assert "dirty" not in template["code_version"]
+    assert template["gsm"]["coordinate"] == "dlc"
     assert template["gsm"]["nnodes"] == 11
     assert template["gsm"]["dmax"] == 0.1
     assert template["gsm"]["add_node_tol"] == 0.01
-    assert template["gsm"]["max_opt_steps"] == 3
+    assert "max_opt_steps" not in template["gsm"]
+    assert _STEP_BUDGET >= 250000
     assert template["gsm"]["climb_clamp"] is False
     assert template["gsm"]["endpoints"] == "fixed"
     assert "problem" not in template
@@ -109,28 +119,6 @@ def test_a_broken_delocalized_basis_is_divergence():
 def test_largest_nearest_neighbour_is_the_worst_contact():
     coords = np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [4.0, 0.0, 0.0]], dtype=np.float64)
     assert largest_nearest_neighbour(coords) == 3.0
-
-
-def test_rotation_eigensolve_symmetrizes_and_falls_back():
-    def original(mat, b=None, asc=False):
-        assert np.allclose(mat, mat.T)
-        values = np.linalg.eigvalsh(mat)
-        order = np.argsort(values)
-        if not asc:
-            order = order[::-1]
-        return values[order], np.eye(len(values))
-
-    matrix = np.array([[1.0, 2.0], [0.0, 3.0]])
-    expected = np.linalg.eigvalsh(np.array([[1.0, 1.0], [1.0, 3.0]]))[::-1]
-    values, _vectors = _stable_sorted_eigh(original)(matrix)
-    assert np.allclose(values, expected)
-
-    def failing(mat, b=None, asc=False):
-        raise np.linalg.LinAlgError("Eigenvalues did not converge")
-
-    values, vectors = _stable_sorted_eigh(failing)(matrix)
-    assert np.allclose(values, expected)
-    assert vectors.shape == (2, 2)
 
 
 def test_a_separated_cluster_is_divergence_before_the_hessian():
@@ -239,11 +227,10 @@ def test_stock_climb_leaves_a_negative_projection_raw():
 
 def test_the_climb_step_limit_applies_when_the_tangent_gradient_is_negative():
     import optbench.pygsm_band as pygsm_band
-    from optbench.pygsm_band import ensure_runtime
+    from pyGSM.optimizers.base_optimizer import base_optimizer
 
     pygsm_band._CLIMB_CLAMP = True
-    ensure_runtime()
-    from pyGSM.optimizers.base_optimizer import base_optimizer
+    wrapped = _both_signs(base_optimizer.get_constraint_steps)
 
     class Optimizer:
         SCALE_CLIMB = 1.0
@@ -252,10 +239,11 @@ def test_the_climb_step_limit_applies_when_the_tangent_gradient_is_negative():
         constraints = np.eye(2)
 
     try:
-        steps = base_optimizer.get_constraint_steps(Optimizer(), Molecule(), "CLIMB", np.array([-4.0, 0.2]))
+        steps = wrapped(Optimizer(), Molecule(), "CLIMB", np.array([-4.0, 0.2]))
         assert abs(float(np.asarray(steps).reshape(-1)[0])) == 0.05
-        positive = base_optimizer.get_constraint_steps(Optimizer(), Molecule(), "CLIMB", np.array([4.0, 0.0]))
+        positive = wrapped(Optimizer(), Molecule(), "CLIMB", np.array([4.0, 0.0]))
         assert abs(float(np.asarray(positive).reshape(-1)[0])) == 0.05
+        assert base_optimizer.get_constraint_steps is not wrapped
     finally:
         pygsm_band._CLIMB_CLAMP = False
 

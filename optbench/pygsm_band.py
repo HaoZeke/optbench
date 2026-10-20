@@ -1,34 +1,40 @@
 """pyGSM double-ended growing string on the harness potential.
 
-The pin is ZimmermanGroup/pyGSM commit 1b4d5a55. The import version
-string ends in ``dirty`` because versioningit rewrites ``_version.py``
-while building, and the repository has no release tag. The level of
-theory is the harness kernel. Endpoints stay the archived pair.
+The pin is ZimmermanGroup/pyGSM commit 1b4d5a55. That repository
+publishes no release and no tag. A clean checkout imports as
+``1.0.0+692.g1b4d5a5``. The level of theory is the harness kernel.
+Endpoints stay the archived pair.
 
-The string is TRIC, the ``bin/gsm`` default: translation and rotation
-primitives plus one distance for every pair inside the harness contact
-cutoff. The authors' primitive builder also emits an angle, a dihedral,
-and an out-of-plane at every contact. Argon's covalent radius bonds
-LJ38 out to 2.544 Å, and the first shell alone is already 11,484
-primitives. ``CartesianCoordinates`` does not accept the tangent
-constraint, and eigenvector following raises ``NotImplementedError``
-for that class. ``nnodes`` is 11 and ``DMAX`` is 0.1, the double-ended
-defaults in
-``bin/gsm`` and ``examples/ase_api_de_gsm.py``. ``DQMAG_MAX`` (default
-0.8) applies only when the product node is absent, which is the
-single-ended branch of ``GSM.add_node``. ``ADD_NODE_TOL`` and the three
-optimizer steps per cycle are the command-line defaults. The harness
-energy is stored as an eV divided by the Hartree, which is the ASE
-level of theory. The first pass uses ``bin/gsm``'s ``CONV_TOL`` of
-0.0005. A second pass tightens that RMS to the Cartesian force norm.
-The climb displacement in
-``base_optimizer`` is the tangent projection of the gradient, and the
-0.05 limit there is applied only when that projection is positive.
-``pygsm/de-gsm`` leaves that step as shipped. A separated cluster is
-divergence by the harness connected-cluster rule. Numpy 2 removed
-``ndarray.tostring`` and rejects a generator passed to ``np.sum``.
-The rotation eigensolve can also fail to converge on these clusters.
-The shims below restore those calls. They run in the worker.
+The string is DLC, ``bin/gsm -coordinate_type DLC`` (``connect=True``).
+Primitives come from ``Topology.build_topology`` and
+``PrimitiveInternalCoordinates.newMakePrimitives``, then the union of
+the two endpoints, then ``DelocalizedInternalCoordinates``. That is the
+sequence in ``bin/gsm``. ``CartesianCoordinates`` is not a ``bin/gsm``
+choice, and ``eigenvector_follow`` raises ``NotImplementedError`` for
+that class. ``nnodes`` is 11, ``DMAX`` is 0.1, and ``ADD_NODE_TOL`` is
+0.01, the double-ended defaults in ``bin/gsm`` and
+``examples/ase_api_de_gsm.py``. ``DQMAG_MAX`` (default 0.8) applies
+only when the product node is absent, which is the single-ended branch
+of ``GSM.add_node``.
+
+The wrapper stores the harness energy ε as ε/``EV_PER_AU`` Hartree and
+the gradient (ε/Å) as that value divided by ``EV_PER_AU`` times
+``ANGSTROM_TO_AU``, in Hartree/Bohr. Those two constants are
+``pyGSM.utilities.units``, the factors ``ASELoT`` uses. pyGSM's files
+are not edited. The first pass uses ``bin/gsm``'s ``CONV_TOL`` of
+0.0005. While the Cartesian force is still above the problem threshold,
+later passes set the internal RMS that matches that threshold.
+Iteration counts and optimizer step counts passed into pyGSM are
+``_STEP_BUDGET``, which sits above either problem cap. A fresh
+evaluation raises ``ForceCallCap`` at the problem cap. The climb
+displacement in ``base_optimizer`` is the tangent projection of the
+gradient, and the 0.05 limit there is applied only when that projection
+is positive. ``pygsm/de-gsm`` leaves that step as shipped. A separated
+cluster is divergence by the harness connected-cluster rule. Numpy 2
+removed ``ndarray.tostring`` and rejects a generator passed to
+``np.sum``. ``wilsonB`` is rebound to the shipped body with
+``tobytes`` in place of that call. The wrapper also sums those
+generators and returns a size-1 ``np.dot`` as a float.
 """
 
 from __future__ import annotations
@@ -52,7 +58,7 @@ os.environ.setdefault("NUMEXPR_NUM_THREADS", "1")
 
 import numpy as np
 
-from .bound import distance_for_kind, note_unbound
+from .bound import note_unbound
 from .campaign import geometry_archive, load_template, resolve_problem
 from .counter import ForceCallCap, HarnessCounter
 from .failures import FAILURES, classify_outcome
@@ -69,6 +75,8 @@ _PATCHED = False
 _CLIMB_CLAMP = False
 _NP_SUM = np.sum
 _NP_DOT = np.dot
+# Above either problem cap. ForceCallCap stops a search at that cap.
+_STEP_BUDGET = 1_000_000_000
 
 
 _THREAD_LIMIT = None
@@ -109,35 +117,6 @@ def _sum_generators(values, *args, **kwargs):
     return _NP_SUM(stacked, axis=0)
 
 
-def _patch_wilson(cls) -> None:
-    original = cls.wilsonB
-    source = textwrap.dedent(inspect.getsource(original)).replace(".tostring()", ".tobytes()")
-    namespace: dict = {}
-    exec(source, original.__globals__, namespace)
-    cls.wilsonB = namespace["wilsonB"]
-
-
-def _stable_sorted_eigh(original):
-    def sorted_eigh(mat, b=None, asc=False):
-        matrix = np.array(mat, dtype=np.float64, copy=True)
-        matrix = 0.5 * (matrix + matrix.T)
-        try:
-            return original(matrix, b=b, asc=asc)
-        except np.linalg.LinAlgError:
-            from scipy import linalg
-
-            if b is None:
-                values, vectors = linalg.eigh(matrix, driver="ev")
-            else:
-                values, vectors = linalg.eigh(matrix, np.asarray(b, dtype=np.float64), driver="ev")
-            if not asc:
-                values = values[::-1].copy()
-                vectors = np.array(vectors[:, ::-1], copy=True)
-            return values, vectors
-
-    return sorted_eigh
-
-
 def _both_signs(original):
     """Stock climb step. The shipped condition is ``gts > abs(max_step)``.
 
@@ -161,22 +140,36 @@ def _both_signs(original):
     return get_constraint_steps
 
 
-def ensure_runtime() -> None:
-    """Import pyGSM and apply the Numpy 2 shims once in this process.
+def _wilson_tobytes(cls) -> None:
+    """Rebind ``wilsonB`` so its coordinate hash uses ``tobytes``.
 
-    The climb clamp stays off until the template sets ``_CLIMB_CLAMP``.
+    Numpy 2 removed ``ndarray.tostring`` and will not accept the name as
+    an alias. ``wilsonB`` uses that call as a cache key. The method body
+    is otherwise the one shipped in pyGSM.
+    """
+    original = cls.wilsonB
+    source = textwrap.dedent(inspect.getsource(original)).replace(".tostring()", ".tobytes()")
+    namespace: dict = {}
+    exec(source, original.__globals__, namespace)
+    cls.wilsonB = namespace["wilsonB"]
+
+
+def ensure_runtime() -> None:
+    """Import pyGSM once and restore the Numpy 2 calls it makes.
+
+    ``wilsonB`` is rebound to the shipped body with ``tobytes``.
+    ``np.sum`` accepts a generator. A size-1 ``np.dot`` result is a
+    float. No other pyGSM method is replaced, and pyGSM's files are not
+    edited.
     """
     global _PATCHED
     if _PATCHED:
         return
-    from pyGSM.coordinate_systems import PrimitiveInternalCoordinates, rotate
+    from pyGSM.coordinate_systems import PrimitiveInternalCoordinates
     from pyGSM.coordinate_systems.internal_coordinates import InternalCoordinates
-    from pyGSM.optimizers.base_optimizer import base_optimizer
 
-    _patch_wilson(PrimitiveInternalCoordinates)
-    _patch_wilson(InternalCoordinates)
-    rotate.sorted_eigh = _stable_sorted_eigh(rotate.sorted_eigh)
-    base_optimizer.get_constraint_steps = _both_signs(base_optimizer.get_constraint_steps)
+    _wilson_tobytes(PrimitiveInternalCoordinates)
+    _wilson_tobytes(InternalCoordinates)
     np.dot = _dot_scalar
     np.sum = _sum_generators
     _PATCHED = True
@@ -203,101 +196,54 @@ def _geom(coords: np.ndarray, symbol: str):
     return [(symbol, float(row[0]), float(row[1]), float(row[2])) for row in coords]
 
 
-def _contact_graph(coords: np.ndarray, cutoff: float):
-    """Pairs at or inside the harness contact distance."""
-    from pyGSM.coordinate_systems.topology import MyG
+def _stock_dlc(reactant: np.ndarray, product: np.ndarray, atoms):
+    """Stock DLC, the ``bin/gsm`` path with ``coordinate_type`` DLC.
 
-    points = np.asarray(coords, dtype=np.float64).reshape(-1, 3)
-    graph = MyG()
-    size = len(points)
-    for index in range(size):
-        graph.add_node(index)
-    limit = float(cutoff) * (1.0 + 1e-8)
-    diff = points[:, None, :] - points[None, :, :]
-    dist = np.linalg.norm(diff, axis=-1)
-    for left in range(size):
-        for right in range(left + 1, size):
-            if dist[left, right] <= limit:
-                graph.add_edge(left, right)
-    return graph
-
-
-def _tric(reactant: np.ndarray, product: np.ndarray, atoms, cutoff: float):
-    """Delocalized TRIC on the union of the endpoint contact graphs.
-
-    ``bin/gsm`` defaults to TRIC. The translation and rotation primitives
-    are the ones ``PrimitiveInternalCoordinates.makePrimitives`` adds
-    when ``addtr`` is set. The distances are the contacts inside the
-    harness cutoff, on either endpoint, instead of the angle, dihedral,
-    and out-of-plane primitives that builder also emits.
+    ``bin/gsm`` builds each endpoint topology, adds the product bonds
+    into the reactant graph, calls ``newMakePrimitives`` with
+    ``connect=True``, forms the union of those primitives, and wraps
+    them in ``DelocalizedInternalCoordinates``.
     """
-    from collections import OrderedDict
-
-    import networkx as nx
     from pyGSM.coordinate_systems import DelocalizedInternalCoordinates, PrimitiveInternalCoordinates
-    from pyGSM.coordinate_systems.slots import (
-        Distance,
-        RotationA,
-        RotationB,
-        RotationC,
-        TranslationX,
-        TranslationY,
-        TranslationZ,
-    )
+    from pyGSM.coordinate_systems.topology import Topology
 
-    graph = _contact_graph(reactant, cutoff)
-    other = _contact_graph(product, cutoff)
-    for edge in other.edges():
-        left, right = int(edge[0]), int(edge[1])
-        if not graph.has_edge(left, right):
-            graph.add_edge(left, right)
-    prim = PrimitiveInternalCoordinates.from_options(
+    top1 = Topology.build_topology(reactant, atoms)
+    top2 = Topology.build_topology(product, atoms)
+    for bond in top2.edges():
+        if bond in top1.edges:
+            pass
+        elif (bond[1], bond[0]) in top1.edges():
+            pass
+        elif bond[0] > bond[1]:
+            top1.add_edge(bond[0], bond[1])
+        else:
+            top1.add_edge(bond[1], bond[0])
+    reactant_prims = PrimitiveInternalCoordinates.from_options(
         xyz=reactant,
         atoms=atoms,
-        topology=graph,
-        connect=False,
-        addtr=True,
+        connect=True,
+        addtr=False,
         addcart=False,
-        form_topology=False,
+        topology=top1,
     )
-    prim.topology = graph
-    prim.Internals = []
-    prim.Rotators = OrderedDict()
-    fragments = []
-    for component in nx.connected_components(graph):
-        fragment = graph.subgraph(component).copy()
-        fragment.__class__ = type(graph)
-        fragments.append(fragment)
-    prim.fragments = fragments
-    flat = np.asarray(reactant, dtype=np.float64).reshape(-1)
-    points = np.asarray(reactant, dtype=np.float64).reshape(-1, 3)
-    for fragment in fragments:
-        indices = sorted(int(node) for node in fragment.nodes())
-        if len(indices) < 2:
-            continue
-        weight = np.ones(len(indices), dtype=np.float64) / len(indices)
-        prim.Internals.append(TranslationX(indices, w=weight))
-        prim.Internals.append(TranslationY(indices, w=weight))
-        prim.Internals.append(TranslationZ(indices, w=weight))
-        selected = points[indices] - np.mean(points[indices], axis=0)
-        radius = float(np.sqrt(np.mean(np.sum(selected * selected, axis=1))))
-        prim.Internals.append(RotationA(indices, flat, prim.Rotators, w=radius))
-        prim.Internals.append(RotationB(indices, flat, prim.Rotators, w=radius))
-        prim.Internals.append(RotationC(indices, flat, prim.Rotators, w=radius))
-    for edge in graph.edges():
-        left, right = sorted((int(edge[0]), int(edge[1])))
-        prim.Internals.append(Distance(left, right))
-    count = len(prim.Internals)
-    size = len(points)
-    prim.block_info = [(0, size, 0, count, "reg")]
-    prim.prim_only_block_info = list(prim.block_info)
+    reactant_prims.newMakePrimitives(reactant)
+    product_prims = PrimitiveInternalCoordinates.from_options(
+        xyz=product,
+        atoms=atoms,
+        connect=True,
+        addtr=False,
+        addcart=False,
+        topology=top1,
+    )
+    product_prims.newMakePrimitives(product)
+    reactant_prims.add_union_primitives(product_prims)
     return DelocalizedInternalCoordinates.from_options(
         xyz=reactant,
         atoms=atoms,
-        connect=False,
-        addtr=True,
+        connect=True,
+        addtr=False,
         addcart=False,
-        primitives=prim,
+        primitives=reactant_prims,
     )
 
 
@@ -366,7 +312,6 @@ def _build(
     force_norm: float,
     dmax: float,
     add_node_tol: float,
-    potential: str,
 ):
     from pyGSM.growing_string_methods import DE_GSM
     from pyGSM.molecule import Molecule
@@ -385,7 +330,7 @@ def _build(
     pes = PES.from_options(lot=lot, ad_idx=0, multiplicity=1)
     table = elements.ElementData()
     atoms = [table.from_symbol(_SYMBOL) for _ in range(len(reactant))]
-    coord = _tric(reactant, product, atoms, distance_for_kind(potential))
+    coord = _stock_dlc(reactant, product, atoms)
     molecule_r = Molecule.from_options(
         geom=_geom(reactant, _SYMBOL),
         PES=pes,
@@ -611,35 +556,44 @@ def _cartesian_force(gsm) -> float | None:
     return float(np.linalg.norm(np.asarray(candidate["gradient"], dtype=np.float64).reshape(-1)))
 
 
-def _optimize(gsm, *, max_opt_steps: int, force_norm: float, natoms: int) -> None:
-    """Grow, climb, then tighten to the harness force.
+def _force_open(gsm, counter: HarnessCounter, force_norm: float) -> bool:
+    """True while the Cartesian force is above the problem threshold and under the cap."""
+    if counter.cap is not None and int(counter.calls) >= int(counter.cap):
+        return False
+    force = _cartesian_force(gsm)
+    return force is not None and force > float(force_norm)
+
+
+def _optimize(gsm, counter: HarnessCounter, *, force_norm: float, natoms: int) -> None:
+    """Grow, then keep optimizing until the problem force or the force cap.
 
     The first pass uses ``bin/gsm``'s ``CONV_TOL`` of 0.0005 so the
     climb and the exact TS search start on the authors' schedule. That
-    threshold is an internal RMS in Hartree per coordinate. The second
-    pass sets the RMS that corresponds to the problem force norm.
+    threshold is an internal RMS in Hartree per coordinate. Later passes
+    set the RMS that corresponds to the problem force norm. pyGSM can
+    return after that internal RMS is met, or after its own step
+    argument. ``_STEP_BUDGET`` is above either problem cap, and a pass
+    that evaluates nothing is not repeated.
     """
-    gsm.grow_string(max_iters=1_000_000, max_opt_steps=int(max_opt_steps))
+    budget = _STEP_BUDGET
+    gsm.grow_string(max_iters=budget, max_opt_steps=budget)
     if not (gsm.nodes and all(node is not None for node in gsm.nodes)):
         return
     gsm.done_growing = True
     gsm.reparameterize()
-    gsm.optimize_string(max_iter=1_000_000, opt_steps=int(max_opt_steps), rtype=2)
-    # The delocalized RMS is not the Cartesian L2. One string pass
-    # uses the Cartesian-equivalent RMS. A further string pass
-    # reparameterizes the images and walks off the saddle, so any
-    # remaining gap is closed on the TS node alone.
-    force = _cartesian_force(gsm)
-    if force is not None and force > float(force_norm):
+    gsm.optimize_string(max_iter=budget, opt_steps=budget, rtype=2)
+    while _force_open(gsm, counter, force_norm):
+        before = int(counter.calls)
         gsm.CONV_TOL = _harness_conv(force_norm, natoms)
         gsm.isConverged = False
-        gsm.optimize_string(max_iter=1_000_000, opt_steps=int(max_opt_steps), rtype=2)
-        force = _cartesian_force(gsm)
-    if force is not None and force > float(force_norm):
-        _polish_ts(gsm)
+        gsm.optimize_string(max_iter=budget, opt_steps=budget, rtype=2)
+        if int(counter.calls) == before:
+            _polish_ts(gsm, opt_steps=budget)
+        if int(counter.calls) == before:
+            return
 
 
-def _polish_ts(gsm) -> None:
+def _polish_ts(gsm, *, opt_steps: int) -> None:
     """Exact TS steps on the highest node, with the string held fixed."""
     index = int(gsm.TSnode)
     node = gsm.nodes[index]
@@ -653,7 +607,7 @@ def _polish_ts(gsm) -> None:
         molecule=node,
         refE=gsm.nodes[0].energy,
         opt_type="TS",
-        opt_steps=40,
+        opt_steps=int(opt_steps),
         ictan=gsm.ictan[index],
         xyzframerate=1,
         path=path,
@@ -670,7 +624,6 @@ def search_pair(
     nnodes: int,
     dmax: float,
     add_node_tol: float,
-    max_opt_steps: int,
     project_rigid: bool,
     potential: str = "lj",
     climb_clamp: bool = False,
@@ -709,13 +662,12 @@ def search_pair(
                     force_norm=float(force_norm),
                     dmax=float(dmax),
                     add_node_tol=float(add_node_tol),
-                    potential=potential,
                 )
                 gsm.set_V0()
                 gsm.add_GSM_nodes(2)
                 _optimize(
                     gsm,
-                    max_opt_steps=int(max_opt_steps),
+                    counter,
                     force_norm=float(force_norm),
                     natoms=len(reactant),
                 )
@@ -763,7 +715,7 @@ def _registry(root: Path) -> dict:
 def _settings(template: dict, problem: dict, commit: str) -> dict:
     if template.get("commit") != commit:
         raise ValueError(f"{template['id']} commit does not match the pygsm registry")
-    if str(template["gsm"].get("coordinate")) != "tric":
+    if str(template["gsm"].get("coordinate")) != "dlc":
         raise ValueError(f"{template['id']} coordinate is {template['gsm'].get('coordinate')}")
     if bool(template["gsm"].get("climb_clamp", False)):
         raise ValueError(f"{template['id']} is a tuned climb clamp; the board keeps pygsm/de-gsm only")
@@ -780,7 +732,7 @@ def _settings(template: dict, problem: dict, commit: str) -> dict:
         "nnodes": int(template["gsm"]["nnodes"]),
         "dmax": float(template["gsm"]["dmax"]),
         "add_node_tol": float(template["gsm"]["add_node_tol"]),
-        "max_opt_steps": int(template["gsm"]["max_opt_steps"]),
+        "step_budget": _STEP_BUDGET,
         "coordinate": str(template["gsm"]["coordinate"]),
         "climb_clamp": bool(template["gsm"].get("climb_clamp", False)),
     }
@@ -808,7 +760,6 @@ def _execute(job: dict) -> dict:
         nnodes=settings["nnodes"],
         dmax=settings["dmax"],
         add_node_tol=settings["add_node_tol"],
-        max_opt_steps=settings["max_opt_steps"],
         project_rigid=bool(job["project_rigid"]),
         potential=str(settings["potential"]),
         climb_clamp=bool(settings["climb_clamp"]),
@@ -858,11 +809,12 @@ def _dat(records: list[dict], template: dict, settings: dict, problem: dict, sco
     lines.append(f"problem {problem['id']}")
     lines.append(f"images {settings['n_interior']}")
     shared = (
-        f"{settings['nnodes']} nodes. Contact-distance TRIC. "
-        "The level of theory stores ε as an eV. Endpoints fixed. "
+        f"{settings['nnodes']} nodes. DLC from bin/gsm coordinate_type DLC. "
+        "The level of theory stores ε divided by the Hartree. Endpoints fixed. "
         f"DMAX {settings['dmax']}. "
         "A separated cluster is divergence by the harness connected-cluster rule at 1.5 sigma. "
-        f"Call cap {settings['cap']}."
+        f"Call cap {settings['cap']}. "
+        f"GSM iteration and optimizer step arguments are {settings['step_budget']}."
     )
     note = (
         "pyGSM DE-GSM, stock climb step. "

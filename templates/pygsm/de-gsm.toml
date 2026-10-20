@@ -2,17 +2,16 @@
 id = "pygsm/de-gsm"
 engine = "pygsm-band"
 code = "pygsm"
-code_version = "1.0.0+692.g1b4d5a5.dirty"
+code_version = "1.0.0+692.g1b4d5a5"
 commit = "1b4d5a5557a61adc6a3df7405d6b7255b1fa4865"
 algorithm = "DE-GSM"
 tuning = "default"
 
 [gsm]
-coordinate = "tric"
+coordinate = "dlc"
 nnodes = 11
 dmax = 0.1
 add_node_tol = 0.01
-max_opt_steps = 3
 climb_clamp = false
 growth_direction = 0
 rtype = 2
