@@ -208,6 +208,8 @@ def _code_label(fields: dict[str, str]) -> str:
     """Code column. Sella 0.1.1 stays on the 2014 table and is marked legacy."""
     code = fields.get("code", "")
     version = fields.get("code_version", "")
+    if code == "SoftSaddle" and fields.get("date") == "April 2019":
+        return "SoftSaddle (April 2019)"
     label = f"{code} {version}".strip() if version else code
     if code == "Sella" and version == "0.1.1":
         label = f"{label} legacy"

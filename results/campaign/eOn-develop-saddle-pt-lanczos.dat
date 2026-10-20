@@ -1,0 +1,23 @@
+force_calls 5064
+force_calls_min 5064
+force_calls_max 5064
+call_unit total
+code eOn
+code_version (develop 500350d9fae881f06c7ef194e5868da079c4be5a)
+commit 500350d9fae881f06c7ef194e5868da079c4be5a
+counter harness
+count_keys HarnessCounter
+contributor Rohit Goswami
+repetitions 10
+tuning default
+algorithm adaptive hypersphere LBFGS Lanczos
+template eOn/saddle-pt-lanczos
+problem saddle-search/pt-island
+reducer harness
+nfailed 10
+unique_saddles 6.1
+fraction_connected 0.8699317311
+total_searches 18.6
+qualifying 4.5
+cap 5064
+goal 27
