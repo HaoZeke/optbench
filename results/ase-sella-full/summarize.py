@@ -58,7 +58,11 @@ def tolerant_rows(result, class_name: str) -> tuple[list[dict], list[str]]:
             missing.append(label)
             continue
         success = float(raw["track_success"])
-        hits = [name for name in FAILURES if float(raw[f"track_failure_{name}"]) == 1.0]
+        hits = [
+            name
+            for name in FAILURES
+            if float(raw.get(f"track_failure_{name}") or 0.0) == 1.0
+        ]
         if success == 1.0:
             if hits:
                 raise SystemExit(f"{class_name} {combo} is a success with failure tracks {hits}")

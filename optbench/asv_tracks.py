@@ -48,6 +48,9 @@ class TrackedSearch:
     def track_failure_crash(self, *params) -> float:
         return 1.0 if self.record["failure"] == "crash" else 0.0
 
+    def track_failure_stalled(self, *params) -> float:
+        return 1.0 if self.record["failure"] == "stalled" else 0.0
+
 
 TrackedSearch.track_force_calls.unit = "force calls"
 TrackedSearch.track_success.unit = "fraction"
@@ -55,3 +58,4 @@ TrackedSearch.track_failure_cap.unit = "count"
 TrackedSearch.track_failure_wrong_stationary.unit = "count"
 TrackedSearch.track_failure_divergence.unit = "count"
 TrackedSearch.track_failure_crash.unit = "count"
+TrackedSearch.track_failure_stalled.unit = "count"
