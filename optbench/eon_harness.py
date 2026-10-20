@@ -82,6 +82,14 @@ FAMILIES = {
         "token": "4d8b34ba",
         "cache": "4d8b34ba",
     },
+    "develop-current": {
+        "prefix": "eon-develop-current/",
+        "env": "EON_DEVELOP_CLIENT",
+        "default": Path.home() / "opt" / "eon-develop-current" / "bin" / "eonclient",
+        "flag": "--version",
+        "token": "a7aa574",
+        "cache": "a7aa574",
+    },
 }
 
 
@@ -1058,8 +1066,10 @@ def _optional(row: dict, key: str) -> float:
 
 
 def install_benchmarks(family: str, namespace: dict) -> None:
-    """Define one asv class per harness template in ``namespace``."""
+    """Define one asv class per harness template that sets ``asv_class``."""
     for template in _jobs(family):
+        if not template.get("asv_class"):
+            continue
         kind = str(template["kind"])
         asv_full = bool(template.get("asv_full", True))
         seeds = [int(seed) for seed in template.get("seeds", [1])]

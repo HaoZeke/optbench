@@ -16260,7 +16260,131 @@
           "wilson_low": 0.20654931437723745
         }
       ],
-      "ranked": [],
+      "profile": {
+        "area_log10": {
+          "eon-develop-current/htst-pt-quench-stock 3.6.0 stock campaign a7aa574": 1.2041199826559248,
+          "eon-svn/htst-pt-quench-stock r2549 stock campaign r2549": 0.0
+        },
+        "rho": {
+          "eon-develop-current/htst-pt-quench-stock 3.6.0 stock campaign a7aa574": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "eon-svn/htst-pt-quench-stock r2549 stock campaign r2549": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "solved": {
+          "eon-develop-current/htst-pt-quench-stock 3.6.0 stock campaign a7aa574": 1.0,
+          "eon-svn/htst-pt-quench-stock r2549 stock campaign r2549": 0.0
+        },
+        "taus": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ]
+      },
+      "ranked": [
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": 2000000,
+          "code": "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)",
+          "code_version": "3.6.0",
+          "commit": "a7aa57472fb7d823953fd36b78cd755fa4842d30",
+          "comparable": true,
+          "counter": "harness",
+          "current": true,
+          "entry": "eon-develop-a7aa574-htst-pt-quench-stock",
+          "failures": {
+            "cap": 0,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 0
+          },
+          "full_n": null,
+          "history": false,
+          "max_calls": 32999.0,
+          "mean_calls": 32999.0,
+          "mean_per_image": null,
+          "median": 32999.0,
+          "median_calls": 32999.0,
+          "median_high": 32999.0,
+          "median_low": 32999.0,
+          "median_per_image": null,
+          "min_calls": 32999.0,
+          "n": 1,
+          "nfailed": 0,
+          "note": "starts",
+          "par2_mean": 32999.0,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/eon-develop-a7aa574-htst-pt-quench-stock.dat",
+          "problem": "hTST/Pt",
+          "registry_match": true,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 1.0,
+          "template": "eon-develop-current/htst-pt-quench-stock",
+          "tuning": "stock",
+          "wilson_high": 1.0,
+          "wilson_low": 0.20654931437723745
+        },
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": 2000000,
+          "code": "EON (SVN r2549)",
+          "code_version": "r2549",
+          "commit": "r2549",
+          "comparable": true,
+          "counter": "harness",
+          "current": true,
+          "entry": "eon-svn-r2549-htst-pt-quench-stock",
+          "failures": {
+            "cap": 0,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 1
+          },
+          "full_n": null,
+          "history": false,
+          "max_calls": 3969.0,
+          "mean_calls": 3969.0,
+          "mean_per_image": null,
+          "median": 4000000.0,
+          "median_calls": 3969.0,
+          "median_high": 4000000.0,
+          "median_low": 4000000.0,
+          "median_per_image": null,
+          "min_calls": 3969.0,
+          "n": 1,
+          "nfailed": 1,
+          "note": "starts",
+          "par2_mean": 4000000.0,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/eon-svn-r2549-htst-pt-quench-stock.dat",
+          "problem": "hTST/Pt",
+          "registry_match": true,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 0.0,
+          "template": "eon-svn/htst-pt-quench-stock",
+          "tuning": "stock",
+          "wilson_high": 0.7934506856227626,
+          "wilson_low": 0.0
+        }
+      ],
       "title": "Pt"
     },
     "lowest-eigenvector/lj38": {
@@ -42122,7 +42246,7 @@
       "title": "pt-island"
     }
   },
-  "ranked_count": 439,
+  "ranked_count": 441,
   "schema": "optbench.board/v1",
   "unmapped": [
     {

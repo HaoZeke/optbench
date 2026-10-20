@@ -1,0 +1,16 @@
+force_calls 32999
+force_calls_min 32999
+force_calls_max 32999
+force_calls_median 32999.0
+call_unit total
+nfailed 0
+code eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)
+code_version 3.6.0
+commit a7aa57472fb7d823953fd36b78cd755fa4842d30
+algorithm Dimer QM
+template eon-develop-current/htst-pt-quench-stock
+problem hTST/Pt
+reducer harness
+counter harness
+count_keys HarnessCounter
+tuning stock

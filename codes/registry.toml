@@ -173,6 +173,26 @@ commit = "0.1.1"
 committed = "2019-12-10"
 note = "Sella 0.1.1 PESWrapper.diag for the lowest-eigenvector row. eta 1e-6, gamma 1e-16, vreftol 0.99, gradient v0, rigid-mode projection. This pin is not Sella 2.6.0."
 
+[[code]]
+id = "eon-svn-r2549"
+name = "EON (SVN r2549)"
+role = "harmonic transition state theory"
+repository = "https://theory.cm.utexas.edu/svn/eon"
+ref = "r2549"
+commit = "r2549"
+committed = "2026-01-23"
+note = "EON, the Henkelman SVN client, is not the git code eOn. This pin is latest SVN r2549, built with Fortran and without NO_FORTRAN. QSC sources are not in the revision, so that potential is left out of the link. The dimer and the QM optimizer are the revision's own code. eonclient -v prints r2549MP because the build tree drops that missing potential. The name Eon svn remains the older registry pin used by the other r2549 rows."
+
+[[code]]
+id = "eon-develop-a7aa574"
+name = "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)"
+role = "harmonic transition state theory"
+repository = "https://github.com/TheochemUI/eon"
+ref = "develop"
+commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+committed = "2026-10-19"
+note = "eOn at current develop, https://eondocs.org and https://github.com/TheochemUI/eon. This is not a newer EON. The pin eon-develop stays at 7095b23. This entry is develop HEAD a7aa57472fb7d823953fd36b78cd755fa4842d30, built with Fortran. eonclient --version prints 3.6.0 (a7aa5747). GPR-dimer is not linked."
+
 [[template]]
 id = "sella-0.1.1/lj38-loweig"
 code = "sella-0.1.1"
