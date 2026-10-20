@@ -190,7 +190,7 @@ MATCHES: list[dict] = [
     {"key": "neb/Pt-heptamer/eon-cg", "template": "eon-cg", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-cg.dat", "cause": "heptamer_cg", "hold": ["eon-client/neb-pt-cg"]},
     {"key": "neb/Pt-heptamer/eon-fire", "template": "eon-fire", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-fire.dat", "hold": ["eon-client/neb-pt-fire"]},
     {"key": "neb/Pt-heptamer/eon-qm", "template": "eon-qm", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-qm.dat", "hold": ["eon-client/neb-pt-qm"]},
-    {"key": "neb/Pt-heptamer/gman-cg", "template": "gman/neb-pt-cg-stock", "branch": "repro/neb-pt-heptamer-gman-cg", "path": "results/campaign/gman-r235-neb-pt-cg-stock.dat", "extra": {"code_version": "r235"}},
+    {"key": "neb/Pt-heptamer/gman-cg", "template": "gman/neb-pt-cg-stock", "branch": "repro/neb-pt-heptamer-gman-cg", "path": "results/campaign/gman-r235-neb-pt-cg-stock.dat", "cause": "gman_problem_cap", "extra": {"code_version": "r235"}},
     # saddle search
     {"key": "saddle-search/pt-island/eon-dimer", "template": "eon-svn/saddle-pt-dimer", "branch": "main", "path": "results/campaign/eon-3.5.0-saddle-pt-classic.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "cause": "eon_saddle_count"},
     {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-davidson-sm50", "template": "softsaddle/saddle-davidson-sm50", "branch": "cells/softsaddle/ts-reps", "path": "results/campaign/softsaddle-2019.04-saddle-davidson-sm50.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
@@ -255,6 +255,11 @@ CAUSE_TEXT = {
     "improved_unset": "The r2549 template turns improved on. The 2014 ini left that key unset. The mean lands outside 10 percent.",
     "sella_trust": "Sella 2.6.0 with the archived trust-region numbers (eta, gamma, delta0, rho, sigma) is the parameter_source=archive row. It misses the 2014 mean. The constructor-default row is a different setup.",
     "heptamer_cg": "The 3.5.0 file already stores the per-image mean, 142 against the archive 120. L-BFGS, FIRE, and QM on the same 8-image spring-5 climb reproduce, so the image count is not the split.",
+    "gman_problem_cap": (
+        "Gman r235 keeps stock cg.init and neb.relax settings. "
+        "The iteration limit is the problem cap, 10000, on every pair. "
+        "All 13 paths converge. The truncated per-image mean is 125 against the archive 111."
+    ),
     "de_exclusion": "The 3.5.0 doubly-nudged file is the per-band mean under the 2500-call exclusion (708, 5 failures). The archive mean is 861. The client total is a different counter and is also outside 10 percent.",
     "eon_saddle_count": (
         "The classic dimer campaign (improved false, the 2014 key) has fraction_connected 0.692 against 0.746, inside 10 percent, "

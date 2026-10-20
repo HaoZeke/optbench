@@ -331,6 +331,12 @@ The 3.5.0 file already stores the per-image mean, 142 against the archive 120. L
 
 - neb/Pt-heptamer/eon-cg
 
+### gman_problem_cap
+
+Gman r235 keeps stock cg.init and neb.relax settings. The iteration limit is the problem cap, 10000, on every pair. All 13 paths converge. The truncated per-image mean is 125 against the archive 111.
+
+- neb/Pt-heptamer/gman-cg
+
 ### saddle_novelty
 
 The harness link and novelty test uses Cartesian RMSD 0.5 over the full island. Distinct saddles collapse: benchmark_unique_saddles is 0, 0.7, and 0.5 against the archive 115, 143, and 130. benchmark_fraction_connected stays near 1 while the v2 connected fraction is about 0. The per-search cap of 5064 then puts every repetition on the PAR-2 cap.
