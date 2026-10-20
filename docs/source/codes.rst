@@ -1074,4 +1074,30 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>
+   <h3>Pyamff</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>neural network force field</td>
+   <td>master</td>
+   <td>240f51d01ca2</td>
+   <td><a href="https://gitlab.com/pyamff/pyamff">https://gitlab.com/pyamff/pyamff</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="mlopt/C2H4" data-template="pyamff/c2h4-lbfgs10-7-fcoeff0">
+   <td>C2H4</td>
+   <td data-field="template">pyamff/c2h4-lbfgs10-7-fcoeff0</td>
+   <td data-field="version">Pyamff 0.1.0-beta</td>
+   <td data-field="commit">240f51d01ca2</td>
+   <td data-field="par2_mean">3127.94</td>
+   <td data-field="mean_calls">2527.88</td>
+   <td data-field="median_calls">1551</td>
+   <td data-field="failures">crash 0, divergence 0, cap 3, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   </tbody></table></div>
    </section>

@@ -1,0 +1,18 @@
+mean_epoch 2527.88
+median_epoch 1551.0
+mean_energy_rmse 0.0078292642
+median_energy_rmse 0.00699742
+mean_force_rmse 2.1580105998000003
+median_force_rmse 1.76620994
+nfailed 3
+cap 10000
+code Pyamff
+code_version 0.1.0-beta
+commit 240f51d01ca22969369f9bc21760c61cbb3b6665
+algorithm LBFGS
+template pyamff/c2h4-lbfgs10-7-fcoeff0
+problem mlopt/C2H4
+starts 50
+counter harness
+tuning stock
+note Pyamff 0.1.0-beta commit 240f51d0, unmodified. The archived C2H4 trajectory, 50 random_uniform[-1, 1) starts, hidden layers 10 7, tanh, NoScaler, force coefficient 0, LBFGS, loss grad tol 0.02, epoch cap 10000. This release names the sum-of-squares loss SSE, and a fresh start sets init_model_parameters because the default opens a saved parameter file. One harness call is one logged training epoch. Mean epoch 2527.88 against the archive 2157.14. The gap is a finding.

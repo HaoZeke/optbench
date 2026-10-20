@@ -146,11 +146,13 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 ## mlopt
 
+Pyamff 0.1.0-beta (`240f51d0`) is the ranked harness row for C2H4/pyamff-lbfgs10-7-fcoeff0. Mean epoch 2527.88 against the archive 2157.14, with 3 starts at the 10000 epoch cap. The gap is a finding. The archive number stays the paper row.
+
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
 | C2H4/pyamff-adam10-7-fcoeff0 | — | — | not rerun |
 | C2H4/pyamff-adam10-7-fcoeff0_1 | — | — | not rerun |
-| C2H4/pyamff-lbfgs10-7-fcoeff0 | — | — | not rerun |
+| C2H4/pyamff-lbfgs10-7-fcoeff0 | mean_epoch 2157.14 | 2527.88 | not rerun; Pyamff 0.1.0-beta |
 | C2H4/pyamff-lbfgs10-7-fcoeff0_1 | — | — | not rerun |
 | C2H4/pyamff-rprop10-7-fcoeff0 | — | — | not rerun |
 | C2H4/pyamff-rprop10-7-fcoeff0_1 | — | — | not rerun |
