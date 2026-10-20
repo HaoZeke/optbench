@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>EON (SVN r2549)</th><th>eOn (develop a7aa574)</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>EON (SVN r2549)</th><th>eOn (develop 500350d9)</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="hTST/Al">
    <th scope="row"><a href="#Al">Al</a></th>
    <td data-code="eOn">—</td>
@@ -18,7 +18,7 @@
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
    <td data-code="EON (SVN r2549)">—</td>
-   <td data-code="eOn (develop a7aa574)">—</td>
+   <td data-code="eOn (develop 500350d9)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -36,7 +36,7 @@
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
    <td data-code="EON (SVN r2549)" data-template="eon-svn/htst-pt-lanczos-cg" data-par2=""><span class="bench-score"></span><a href="#Pt-templates">eon-svn/htst-pt-lanczos-cg</a></td>
-   <td data-code="eOn (develop a7aa574)" data-template="eon-develop/htst-pt-lanczos-cg" data-par2=""><span class="bench-score"></span><a href="#Pt-templates">eon-develop/htst-pt-lanczos-cg</a></td>
+   <td data-code="eOn (develop 500350d9)" data-template="eon-develop/htst-pt-lanczos-cg" data-par2=""><span class="bench-score"></span><a href="#Pt-templates">eon-develop/htst-pt-lanczos-cg</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -56,22 +56,22 @@
    <summary>All templates (0 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="hTST/Al">
-   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
-   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="13">No full harness row.</td></tr>
+   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Success low and success high bound the success rate.</caption>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Success low</th><th>Success high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td colspan="12">No full harness row.</td></tr>
    </tbody></table></div>
    <h3>Partial</h3><ul>
    <li>eon-client/htst-al-dimer-cg eOn campaign n=1, result file sets partial true.</li>
    <li>eon-svn/htst-al-dimer-cg Eon svn campaign n=1, result file sets partial true.</li>
    </ul>
    </details>
-   </section><section class="bench bench-legacy-section" id="Al-legacy">
-   <h3>Legacy 2014 archive</h3>
+   </section><p class="bench-gaps">eon-dimer-cg: barrier_force_calls 19660 vs 28870 (31.9%); barrier_jobs 50 vs 48 (4.2%); rate_force_calls 620600 vs 897900 (30.9%); rate_jobs 1600 vs 1511 (5.9%)</p><section class="bench bench-archive-section" id="Al-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest barrier force calls first.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Fewest barrier force calls first.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -96,7 +96,7 @@
    </tr>
    <tr id="htst-al-eon-dimer-cg">
    <td class="num">2</td>
-   <td class="text">eon-dimer-cg · not reproduced</td>
+   <td class="text">eon-dimer-cg</td>
    <td class="text">Eon r2006</td>
    <td class="num">2.887e+04</td>
    <td class="num">48</td>
@@ -106,7 +106,7 @@
    <td class="text">28 Jan 2013</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "barrier_force_calls", "scale": "linear", "points": [{"id": "htst-al-eon-dimer-cg2", "entry": "eon-dimer-cg2", "code": "Eon r2006", "value": 21070.0, "best": true, "held": false, "failed": false}, {"id": "htst-al-eon-dimer-cg", "entry": "eon-dimer-cg", "code": "Eon r2006", "value": 28870.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "barrier_force_calls", "scale": "linear", "points": [{"id": "htst-al-eon-dimer-cg2", "entry": "eon-dimer-cg2", "code": "Eon r2006", "value": 21070.0, "best": true, "held": false, "failed": false}, {"id": "htst-al-eon-dimer-cg", "entry": "eon-dimer-cg", "code": "Eon r2006", "value": 28870.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section><section class="bench" id="Pt" data-problem="hTST/Pt">
    <h2>Pt</h2>
@@ -125,10 +125,10 @@
    <summary>All templates (2 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="hTST/Pt">
-   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
-   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">eon-svn/htst-pt-lanczos-cg</td><td data-field="version">EON (SVN r2549) r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean"></td><td data-field="success_rate">1</td><td data-field="wilson_low">0.722467</td><td data-field="wilson_high">1</td><td data-field="median_calls">1.42466e+06</td><td data-field="mean_calls">1.6953e+06</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">10</td></tr>
-   <tr><td data-field="template">eon-develop/htst-pt-lanczos-cg</td><td data-field="version">eOn (develop a7aa574) a7aa574</td><td data-field="commit">a7aa57472fb7</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean"></td><td data-field="success_rate">1</td><td data-field="wilson_low">0.722467</td><td data-field="wilson_high">1</td><td data-field="median_calls">1.52046e+06</td><td data-field="mean_calls">1.46827e+06</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">10</td></tr>
+   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Success low and success high bound the success rate.</caption>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Success low</th><th>Success high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td data-field="template">eon-svn/htst-pt-lanczos-cg</td><td data-field="version">EON (SVN r2549) r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="par2_mean"></td><td data-field="success_rate">1</td><td data-field="wilson_low">0.722467</td><td data-field="wilson_high">1</td><td data-field="median_calls">1.42466e+06</td><td data-field="mean_calls">1.6953e+06</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">10</td></tr>
+   <tr><td data-field="template">eon-develop/htst-pt-lanczos-cg</td><td data-field="version">eOn (develop 500350d9) 500350d9</td><td data-field="commit">500350d9fae8</td><td data-field="source">campaign</td><td data-field="par2_mean"></td><td data-field="success_rate">1</td><td data-field="wilson_low">0.722467</td><td data-field="wilson_high">1</td><td data-field="median_calls">1.52046e+06</td><td data-field="mean_calls">1.46827e+06</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">10</td></tr>
    </tbody></table></div>
    <h3>Partial</h3><ul>
    <li>eon-client/htst-pt-dimer-lbfgs eOn campaign n=1, result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5).</li>
@@ -137,13 +137,13 @@
    <li>eon-svn/htst-pt-lanczos-lbfgs Eon svn campaign n=1, result file sets partial true.</li>
    </ul>
    </details>
-   </section><section class="bench bench-legacy-section" id="Pt-legacy">
-   <h3>Legacy 2014 archive</h3>
+   </section><p class="bench-gaps">eon-dimer-cg: barrier_force_calls 506000 vs 496000 (2.0%); barrier_jobs 1062 vs 1050 (1.1%); rate_force_calls 27160 vs 25630 (6.0%); rate_jobs 57 vs 54 (5.6%) EON (SVN r2549): barrier_force_calls 1.695e+06 vs 673700 (151.6%); barrier_jobs 1916 vs 1419 (35.0%); rate_force_calls 50440 vs 25860 (95.1%); rate_jobs 57 vs 54 (5.6%) eOn (develop 500350d9): barrier_force_calls 1.468e+06 vs 673700 (117.9%); barrier_jobs 1720 vs 1419 (21.2%); rate_force_calls 46850 vs 25860 (81.2%); rate_jobs 54 vs 54 (0.0%)</p><section class="bench bench-archive-section" id="Pt-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest barrier force calls first.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Fewest barrier force calls first.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -190,7 +190,7 @@
    </tr>
    <tr id="htst-pt-eon-lanczos-cg">
    <td class="num">4</td>
-   <td class="text">eon-lanczos-cg · not reproduced</td>
+   <td class="text">eon-lanczos-cg</td>
    <td class="text">Eon r2006</td>
    <td class="num">6.737e+05</td>
    <td class="num">1419</td>
@@ -277,7 +277,7 @@
    <td class="text">28 Jan 2013</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:11"></div><script type="application/json" class="bench-plot-data">{"metric": "barrier_force_calls", "scale": "log", "points": [{"id": "htst-pt-quench-dimer-qm", "entry": "quench_dimer-qm", "code": "TSASE", "value": 293200.0, "best": true, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-cg", "entry": "eon-dimer-cg", "code": "Eon r2006", "value": 496000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-cg2", "entry": "eon-lanczos-cg2", "code": "Eon r2006", "value": 653000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-cg", "entry": "eon-lanczos-cg", "code": "Eon r2006", "value": 673700.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-cg2", "entry": "eon-dimer-cg2", "code": "Eon r2006", "value": 727100.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-lbfgs", "entry": "eon-dimer-lbfgs", "code": "Eon r2006", "value": 778800.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-lbfgs2", "entry": "eon-dimer-lbfgs2", "code": "Eon r2006", "value": 1122000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-lbfgs", "entry": "eon-lanczos-lbfgs", "code": "Eon r2006", "value": 1284000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-lbfgs2", "entry": "eon-lanczos-lbfgs2", "code": "Eon r2006", "value": 1497000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-tsase-dimer-qm", "entry": "tsase-dimer-qm", "code": "TSASE", "value": 3239000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-alpha-dimer-qm", "entry": "alpha_dimer-qm", "code": "TSASE", "value": 19080000.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:11"></div><script type="application/json" class="bench-plot-data">{"metric": "barrier_force_calls", "scale": "log", "points": [{"id": "htst-pt-quench-dimer-qm", "entry": "quench_dimer-qm", "code": "TSASE", "value": 293200.0, "best": true, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-cg", "entry": "eon-dimer-cg", "code": "Eon r2006", "value": 496000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-cg2", "entry": "eon-lanczos-cg2", "code": "Eon r2006", "value": 653000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-cg", "entry": "eon-lanczos-cg", "code": "Eon r2006", "value": 673700.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-cg2", "entry": "eon-dimer-cg2", "code": "Eon r2006", "value": 727100.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-lbfgs", "entry": "eon-dimer-lbfgs", "code": "Eon r2006", "value": 778800.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-lbfgs2", "entry": "eon-dimer-lbfgs2", "code": "Eon r2006", "value": 1122000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-lbfgs", "entry": "eon-lanczos-lbfgs", "code": "Eon r2006", "value": 1284000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-lbfgs2", "entry": "eon-lanczos-lbfgs2", "code": "Eon r2006", "value": 1497000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-tsase-dimer-qm", "entry": "tsase-dimer-qm", "code": "TSASE", "value": 3239000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-alpha-dimer-qm", "entry": "alpha_dimer-qm", "code": "TSASE", "value": 19080000.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section>
 #+end_export

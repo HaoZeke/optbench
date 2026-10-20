@@ -112,7 +112,7 @@ uv run optbench/sella_lj38.py \
   --version 2.6.0
 ```
 
-The recorded file is `results/campaign/sella-2.6.0-ts-lj38.dat`: mean 93, two starts at the step cap. Sella 0.1.1 was mean 69.55 with none failed. Those 0.1.1 rows stay on the 2014 tables and are labelled legacy.
+The recorded file is `results/campaign/sella-2.6.0-ts-lj38.dat`: mean 93, two starts at the step cap. Sella 0.1.1 was mean 69.55 with none failed. Those 0.1.1 rows stay on the 2014 tables.
 
 ASE 3.29.0 and Sella 2.6.0 templates live under `templates/ase/` and `templates/sella/`. A default row is the library constructor. A tuned row is the archived script when one exists. Force calls are calculator evaluations counted by the harness, for both codes. The ranked set is:
 

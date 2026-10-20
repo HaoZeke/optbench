@@ -184,14 +184,14 @@ committed = "2026-01-23"
 note = "Latest EON SVN revision, r2549, last changed 2026-01-23. eonclient -v prints r2549. Built with Fortran and no physics patches. This is the old SVN code, not the git eOn at TheochemUI/eon. The Eon svn pin stays for the other r2549 templates."
 
 [[code]]
-id = "eon-develop-a7aa574"
-name = "eOn (develop a7aa574)"
+id = "eon-develop-500350d9"
+name = "eOn (develop 500350d9)"
 role = "kinetic Monte Carlo"
 repository = "https://github.com/TheochemUI/eon"
-ref = "develop"
-commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
-committed = "2026-10-18"
-note = "Current develop of https://github.com/TheochemUI/eon (https://eondocs.org), commit a7aa574. Built with Fortran enabled and no physics patches. This is not the SVN code. The eon-develop pin at 7095b23 stays for the scores that were run on it."
+ref = "fix/develop-regressions-vs-350"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
+committed = "2026-10-20"
+note = "eOn from https://github.com/TheochemUI/eon branch fix/develop-regressions-vs-350 at 500350d9. Built with Fortran enabled and no physics patches. This is not the SVN code. The eon-develop pin at 7095b23 stays for the scores that were run on it."
 
 [[template]]
 id = "sella-0.1.1/lj38-loweig"

@@ -7,7 +7,7 @@ commit = "r2549"
 algorithm = "Lanczos-CG rotation: max=10, tol=0.05"
 reducer = "harness-htst"
 pass_limit = 8000
-note = "Stock EON SVN r2549 on the Pt island. The client is the Fortran build of r2549 with no physics patches. The ini is the archived AKMC setup: temperature 700 K, seed 42, morse_pt, prefactor 1.2e12, confidence 1.9, minimize_first, least-coordinated displacement weight 1, radius 3.3, magnitude 0.3, Lanczos tolerance 0.05 and max_iterations 10, optimizer converged_force 0.001 and max_iterations 5000, saddle max_energy 1000. convergence_metric max_atom and the saddle converged_force 0.001 are the 2013 min-mode stop, matter maxForce. finite_difference, quit_early, thermally_accessible_window, confidence_scheme, and opt_method stay at the r2549 defaults. A start is one barrier window from optbench.htst. Communicator num_jobs 32."
+note = "Stock EON SVN r2549 on the Pt island. The client is the Fortran build of r2549 with no physics patches. The ini is the archived AKMC setup: temperature 700 K, seed 42, morse_pt, prefactor 1.2e12, confidence 1.9, minimize_first, least-coordinated displacement weight 1, radius 3.3, magnitude 0.3, Lanczos tolerance 0.05 and max_iterations 10, optimizer converged_force 0.001 and max_iterations 5000, saddle max_energy 1000. convergence_metric max_atom and the saddle converged_force 0.001 are the 2013 min-mode stop, matter maxForce. finite_difference, quit_early, thermally_accessible_window, confidence_scheme, and opt_method stay at the r2549 defaults. A start is one barrier window from optbench.htst. Communicator num_jobs 32. Gaps against the archive: barrier_jobs 35.0%, barrier_force_calls 151.6%, rate_jobs 5.6%, rate_force_calls 95.1%."
 
 [ini.Main]
 job = "akmc"

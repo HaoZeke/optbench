@@ -187,11 +187,11 @@
   ],
   "profile": {
     "area_log10": {
-      "eon-develop/htst-pt-lanczos-cg a7aa574 Lanczos-CG rotation: max=10, tol=0.05 campaign a7aa574": 1.038553485040735,
+      "eon-develop/htst-pt-lanczos-cg 500350d9 Lanczos-CG rotation: max=10, tol=0.05 campaign 500350d": 1.038553485040735,
       "eon-svn/htst-pt-lanczos-cg r2549 Lanczos-CG rotation: max=10, tol=0.05 campaign r2549": 1.0686564846071334
     },
     "rho": {
-      "eon-develop/htst-pt-lanczos-cg a7aa574 Lanczos-CG rotation: max=10, tol=0.05 campaign a7aa574": [
+      "eon-develop/htst-pt-lanczos-cg 500350d9 Lanczos-CG rotation: max=10, tol=0.05 campaign 500350d": [
         0.5,
         0.7,
         1.0,
@@ -207,7 +207,7 @@
       ]
     },
     "solved": {
-      "eon-develop/htst-pt-lanczos-cg a7aa574 Lanczos-CG rotation: max=10, tol=0.05 campaign a7aa574": 1.0,
+      "eon-develop/htst-pt-lanczos-cg 500350d9 Lanczos-CG rotation: max=10, tol=0.05 campaign 500350d": 1.0,
       "eon-svn/htst-pt-lanczos-cg r2549 Lanczos-CG rotation: max=10, tol=0.05 campaign r2549": 1.0
     },
     "taus": [
@@ -268,9 +268,9 @@
       "asv_commit": "",
       "call_unit": "total",
       "cap": null,
-      "code": "eOn (develop a7aa574)",
-      "code_version": "a7aa574",
-      "commit": "a7aa57472fb7d823953fd36b78cd755fa4842d30",
+      "code": "eOn (develop 500350d9)",
+      "code_version": "500350d9",
+      "commit": "500350d9fae881f06c7ef194e5868da079c4be5a",
       "comparable": true,
       "counter": "htst-reducer",
       "current": true,

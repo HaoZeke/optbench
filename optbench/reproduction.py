@@ -206,17 +206,17 @@ MATCHES: list[dict] = [
 
 CAUSE_TEXT = {
     "lj38_ts_starts": (
-        "Inside the 10% band (207.51 vs 192). "
+        "207.51 vs 192 (8.1%). "
         "Archive run.sh unpacks coords-xyz.tar.gz (200 xyz, max pair about 4.4). "
         "The harness problem points at coords-con.tar.gz (max pair about 37). "
         "Kabsch RMS is about 6.33, so the sets are not the same geometry. "
         "Neither set has a pair past cutoff 40, and both drivers use RMS tolerance 1e-3/sqrt(114). "
-        "The 8% residual is the starting set. The paper baseline is this 2014-stop mean, not the harness-stop mean 254.48."
+        "The 8.1% gap is the starting set. This 2014-stop mean is the archived score. The harness-stop mean is 254.48."
     ),
     "lj38_ts_starts_cd": (
-        "Inside the 10% band (263.52 vs 254). The same xyz-versus-con starting set as ts-ffd. "
+        "263.52 vs 254 (3.7%). The same xyz-versus-con starting set as ts-ffd. "
         "findTS_local.py for the CD row does not pass orthogZeroEigs; the harness template sets orthog translations-rotations. "
-        "The paper baseline is this 2014-stop mean, not the harness-stop mean 335.06."
+        "This 2014-stop mean is the archived score. The harness-stop mean is 335.06."
     ),
     "optim_lj38_ts": (
         "Archive run.sh unpacks coords-xyz.tar.gz. The harness uses the problem coords-con set (Kabsch RMS about 6.33). "
@@ -252,12 +252,12 @@ CAUSE_TEXT = {
     "pele_fire": "pele FIRE on LJ38 scores 1264 with 7 failures. The archive is 709 with 0 failures. The M100 L-BFGS row on the same build reproduces, so this is the FIRE step, not the LJ kernel.",
     "pele_morse": "pele Morse L-BFGS scores 92. The archive is 51. eOn Morse L-BFGS on the same bulk file reproduces at 52, so the gap is the pele memory and step, not the shared Morse parameters.",
     "morse_sd": "eOn Morse steepest descent scores 7038 with 19 failures. The archive is 196 with 0. Morse L-BFGS, CG, and FIRE on the same client reproduce, so the kernel is not the split.",
-    "improved_unset": "The r2549 template turns improved on. The 2014 ini left that key unset. The mean lands outside 10 percent.",
+    "improved_unset": "The r2549 template turns improved on. The 2014 ini left that key unset. The mean is 377 against 337 (11.9%).",
     "sella_trust": "Sella 2.6.0 with the archived trust-region numbers (eta, gamma, delta0, rho, sigma) is the parameter_source=archive row. It misses the 2014 mean. The constructor-default row is a different setup.",
     "heptamer_cg": "The 3.5.0 file already stores the per-image mean, 142 against the archive 120. L-BFGS, FIRE, and QM on the same 8-image spring-5 climb reproduce, so the image count is not the split.",
-    "de_exclusion": "The 3.5.0 doubly-nudged file is the per-band mean under the 2500-call exclusion (708, 5 failures). The archive mean is 861. The client total is a different counter and is also outside 10 percent.",
+    "de_exclusion": "The 3.5.0 doubly-nudged file is the per-band mean under the 2500-call exclusion (708, 5 failures). The archive mean is 861 (17.8%). The client total is a different counter.",
     "eon_saddle_count": (
-        "The classic dimer campaign (improved false, the 2014 key) has fraction_connected 0.692 against 0.746, inside 10 percent, "
+        "The classic dimer campaign (improved false, the 2014 key) has fraction_connected 0.692 against 0.746 (7.2%), "
         "but force calls 6.97e6 against 3.78e6 and unique saddles 91.7 against 109.2. "
         "The archive standard error on the force calls is 5.27e5. "
         "This eOn AKMC counter is not the harness RMSD link test."
@@ -278,26 +278,27 @@ CAUSE_TEXT = {
         "Stock EON SVN r2549, Fortran client, no physics patches. "
         "The ini is the archived AKMC setup and the stop is max_atom at 0.001. "
         "finite_difference, quit_early, and thermally_accessible_window stay at the r2549 defaults. "
-        "barrier_jobs 1916 vs 1419, barrier_force_calls 1695000 vs 673700, and rate_force_calls 50440 vs 25860 are outside 10 percent. "
-        "rate_jobs 57 vs 54 is inside. "
-        "eOn develop a7aa574 is a different code and is ranked on the same problem: "
-        "barrier_jobs 1720, barrier_force_calls 1468000, rate_jobs 54, rate_force_calls 46850."
+        "barrier_jobs 1916 vs 1419 (35.0%), barrier_force_calls 1695000 vs 673700 (151.6%), "
+        "rate_jobs 57 vs 54 (5.6%), rate_force_calls 50440 vs 25860 (95.1%). "
+        "eOn 500350d9 is a different code and is ranked on the same problem: "
+        "barrier_jobs 1720 vs 1419 (21.2%), barrier_force_calls 1468000 vs 673700 (117.9%), "
+        "rate_jobs 54 vs 54 (0.0%), rate_force_calls 46850 vs 25860 (81.2%)."
     ),
     "precon_hessian_index": (
         "ASE 3.29 PreconLBFGS with the archived opt.py setup (Exp A 3, maxstep 0.1, ASE fmax 0.01) "
-        "scores 2605 against 2686, inside 10 percent. "
+        "scores 2605 against 2686 (3.0%). "
         "The script uses a tsase LJ cutoff of 35. This row uses the harness cutoff 40. "
         "report.sh counts a failure only when a written total_force_calls is at least 10000. "
         "The harness records 10 failures, each a Hessian index of 1 after the maximum force is under 0.01. "
-        "The Wilson interval on 0 failures out of 1000 is about 0 to 3.83."
+        "The bound on 0 failures out of 1000 is about 0 to 3.83."
     ),
     "linesearch_exceptions": (
         "ASE 3.29 LBFGSLineSearch with the archived opt.py arguments (maxstep 0.2, alpha 1/0.001, memory 100) "
-        "scores 410 against 417, inside 10 percent. "
+        "scores 410 against 417 (1.7%). "
         "report.sh counts a start as failed only when a written total_force_calls is at least 10000, and the benchmark.dat label says M=5 while opt.py sets memory 100. "
         "The harness records 7 failures: 5 RuntimeError LineSearch failed (ASE 3.8.2 already raises that; ASE 3.6.0 is not on PyPI) "
         "and 2 Hessian index 1 after the Euclidean force norm is under 0.01. "
-        "The Wilson interval on 0 failures out of 1000 is about 0 to 3.83."
+        "The bound on 0 failures out of 1000 is about 0 to 3.83."
     ),
     "akmc_vs_langevin": (
         "The archive rows are Langevin parallel replica. The harness rows are AKMC. "
@@ -807,6 +808,13 @@ def _fmt(value: float) -> str:
     return f"{value:.6g}"
 
 
+def _percent_clause(archive: float, rerun: float) -> str:
+    if archive:
+        relative = abs(rerun - archive) / abs(archive)
+        return f"{_fmt(rerun)} vs {_fmt(archive)} ({relative:.1%})"
+    return f"{_fmt(rerun)} vs {_fmt(archive)}"
+
+
 def render_markdown(rows: list[dict]) -> str:
     counts = {"reproduced": 0, "not_reproduced": 0, "not_rerun": 0}
     for row in rows:
@@ -814,11 +822,11 @@ def render_markdown(rows: list[dict]) -> str:
     lines = [
         "# Reproduction",
         "",
-        "Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.",
+        "Archive commit `0f26b796`. Each row is the archive. A latest-version rerun is listed beside it. A gap is the relative difference, as a percentage.",
         "",
-        f"{counts['reproduced']} reproduced, {counts['not_reproduced']} not reproduced, {counts['not_rerun']} not rerun. {len(rows)} archive rows.",
+        f"{counts['reproduced']} rows on the archived metrics, {counts['not_reproduced']} rows with a gap, {counts['not_rerun']} rows with no rerun. {len(rows)} archive rows.",
         "",
-        "The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.",
+        "The pele transition-state score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88. The ranked harness-stop means are 111.27, 254.48, and 335.06.",
         "",
         "OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.",
         "",
@@ -847,14 +855,17 @@ def render_markdown(rows: list[dict]) -> str:
         else:
             archive = "—"
             rerun = "—"
-        status = row["status"].replace("_", " ")
+        if row["checks"]:
+            status = "; ".join(
+                f"{item['metric']} {_percent_clause(item['archive'], item['rerun'])}" for item in row["checks"]
+            )
+        else:
+            status = "—"
         if row.get("cause"):
-            status = f"{status}; {row['cause']}"
-        if row.get("note"):
-            status = f"{status}; residual"
+            status = f"{status}; {row['cause']}" if status != "—" else row["cause"]
         lines.append(f"| {ident} | {archive} | {rerun} | {status} |")
     lines.append("")
-    lines.append("## Residuals inside the band")
+    lines.append("## Notes")
     lines.append("")
     for row in rows:
         if row.get("note"):
@@ -875,7 +886,7 @@ def render_markdown(rows: list[dict]) -> str:
         for ident in idents:
             lines.append(f"- {ident}")
         lines.append("")
-    lines.append("Rows with no exact-setup campaign stay not rerun and are not given a cause. AKMC on aladatom is a different method from Langevin parallel replica; the ratios above are that comparison, and the archive rows stay not rerun.")
+    lines.append("Rows with no exact-setup campaign have no rerun and are not given a cause. AKMC on aladatom is a different method from Langevin parallel replica; the ratios above are that comparison, and those archive rows have no rerun.")
     lines.append("")
     return "\n".join(lines)
 

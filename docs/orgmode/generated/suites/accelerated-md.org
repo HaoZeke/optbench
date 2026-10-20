@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>EON (SVN r2549)</th><th>eOn (develop a7aa574)</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>EON (SVN r2549)</th><th>eOn (develop 500350d9)</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="accelerated-md/aladatom">
    <th scope="row"><a href="#aladatom">aladatom</a></th>
    <td data-code="eOn">—</td>
@@ -18,7 +18,7 @@
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
    <td data-code="EON (SVN r2549)">—</td>
-   <td data-code="eOn (develop a7aa574)">—</td>
+   <td data-code="eOn (develop 500350d9)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -36,7 +36,7 @@
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
    <td data-code="EON (SVN r2549)">—</td>
-   <td data-code="eOn (develop a7aa574)">—</td>
+   <td data-code="eOn (develop 500350d9)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -56,9 +56,9 @@
    <summary>All templates (0 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="accelerated-md/aladatom">
-   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
-   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="13">No full harness row.</td></tr>
+   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Success low and success high bound the success rate.</caption>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Success low</th><th>Success high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td colspan="12">No full harness row.</td></tr>
    </tbody></table></div>
    <h3>Partial</h3><ul>
    <li>eon-client/amd-hyper eOn campaign n=1, result file sets partial true.</li>
@@ -67,13 +67,13 @@
    <li>eon-svn/amd-prd Eon svn campaign n=1, result file sets partial true.</li>
    </ul>
    </details>
-   </section><section class="bench bench-legacy-section" id="aladatom-legacy">
-   <h3>Legacy 2014 archive</h3>
+   </section><section class="bench bench-archive-section" id="aladatom-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Lowest rate first.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Lowest rate first.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -111,18 +111,18 @@
    <summary>All templates (0 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="accelerated-md/standard_aladatom">
-   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
-   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="13">No full harness row.</td></tr>
+   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Success low and success high bound the success rate.</caption>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Success low</th><th>Success high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td colspan="12">No full harness row.</td></tr>
    </tbody></table></div>
    </details>
-   </section><section class="bench bench-legacy-section" id="standard_aladatom-legacy">
-   <h3>Legacy 2014 archive</h3>
+   </section><section class="bench bench-archive-section" id="standard_aladatom-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Lowest rate first.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Lowest rate first.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
