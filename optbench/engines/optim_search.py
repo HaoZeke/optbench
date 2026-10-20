@@ -6,12 +6,15 @@ that file. The snapshot has no git commit. Each ``COMPUTE`` on the relay
 is one ``pes.evaluate``. That path does not score OPTIM's own counter.
 
 The LJ38 climbing-string row is the other path. It runs the current
-public ``svn.tar.bz2`` unmodified. The odata is ``CLSTRING`` and
-``GROWSTRING`` at the source defaults, with the problem's image count
-and Euclidean force norm. The count is the last ``energy+gradient calls``
-field, written by the same campaign writer as the native OPTIM counter.
-Success is the line ``Converged to TS``. The PAR-2 cap is the problem
-harness cap.
+public ``svn.tar.bz2`` unmodified. The odata is the archived climbing
+string: ``CLSTRING``, ``GROWSTRING``, and ``INE_NEW``. Image count and
+the Euclidean force norm stay on the problem. Iteration density is the
+archived value. Iteration limits that default to 1 or another small
+count are the problem cap. Step size, reparametrization, and the growth
+tolerance stay at the source defaults. The count is the last
+``energy+gradient calls`` field, written by the same campaign writer as
+the native OPTIM counter. Success is the line ``Converged to TS``. The
+PAR-2 cap is the problem harness cap.
 
 ``optim/unhooked`` and every other template raise before a file is written.
 Noise, NEB, and PATHSAMPLE are not this runner.
@@ -373,17 +376,36 @@ def _require_release(binary: Path) -> None:
         )
 
 
-def _stock_preamble(n_interior: int, force_norm: float, dof: int) -> str:
-    """CLSTRING plus GROWSTRING at the assigned source defaults.
+def _fortran_double(value: float) -> str:
+    return f"{float(value):.12E}".replace("E", "D")
 
-    ``keywords.F90`` sets reparametrization 0.75, growth tolerance 0.25,
-    and max step 0.1. Iteration density is not assigned. ``GSCONV`` is the
-    problem Euclidean force norm divided by ``sqrt(dof)``, the climbing
-    test ``SQRT(LAST%FNORM2) < GSCONV*SQRT(NC)``.
+
+def _stock_preamble(n_interior: int, force_norm: float, dof: int, cap: int) -> str:
+    """Archived climbing string, with iteration limits that can reach the cap.
+
+    The 2014 ``odata.preamble`` is ``CLSTRING``, ``GROWSTRING 5 1000``,
+    and ``INE_NEW``. Iteration density 1000 is that second ``GROWSTRING``
+    field. ``MAXGROWSTEPS``, ``STEPS``, ``BFGSSTEPS``, and the ``BFGSTS``
+    iteration counts default to 1000 or 1, so an unassigned run leaves the
+    string after one step. Those counts are the problem cap. ``GSCONV``
+    and the inexact-Newton RMS stop are the Euclidean force norm 0.001
+    divided by ``sqrt(dof)``. The archived ``INE_NEW`` iteration counts
+    are 100. Reparametrization 0.75, growth tolerance 0.25, and max step
+    0.1 are the source defaults. ``debug`` is the archived keyword that
+    prints ``Converged to TS``.
     """
-    gsconv = float(force_norm) / math.sqrt(float(dof))
-    conv = f"{gsconv:.12E}".replace("E", "D")
-    return f"CLSTRING\nGROWSTRING {int(n_interior)} 0 0.75 0.25 {conv} 0.1\n"
+    conv = _fortran_double(float(force_norm) / math.sqrt(float(dof)))
+    limit = int(cap)
+    return (
+        "debug\n"
+        "CLSTRING\n"
+        f"GROWSTRING {int(n_interior)} 1000 0.75 0.25 {conv} 0.1\n"
+        f"MAXGROWSTEPS {limit}\n"
+        f"STEPS {limit}\n"
+        f"BFGSSTEPS {limit}\n"
+        f"BFGSTS {limit} {limit} {limit} 1.0D-10 {limit}\n"
+        f"INE_NEW {conv} 100 1.0D-9 100 2.0D-3 4.0D2\n"
+    )
 
 
 def _execute_cl_string(job: dict) -> dict:
@@ -429,11 +451,19 @@ def _execute_cl_string(job: dict) -> dict:
     except Exception as exc:
         error = f"{type(exc).__name__}: {exc}"
     success = bool(converged) and calls is not None and calls < cap and not error
+    if success:
+        failure = None
+    elif calls is None or error:
+        failure = "crash"
+    elif calls >= cap:
+        failure = "cap"
+    else:
+        failure = "divergence"
     record = {
         "start": name,
         "force_calls": int(calls) if calls is not None else cap,
         "success": success,
-        "failure": None if success else ("crash" if calls is None or error else "divergence"),
+        "failure": failure,
         "counter": "harness",
         "converged": bool(converged),
         "optim_energy_gradient_calls": None if calls is None else int(calls),
@@ -459,7 +489,7 @@ def _run_cl_string(root: Path, problem: dict, template: dict, *, output: Path, w
     cap = int(settings["cap"])
     pairs = _pair_texts(geometry_archive(root, problem), settings["pairs"])
     dof = 3 * len(_xyz_coordinate_lines(pairs[0][1]))
-    preamble = _stock_preamble(settings["n_interior"], settings["force_norm"], dof)
+    preamble = _stock_preamble(settings["n_interior"], settings["force_norm"], dof, cap)
     jobs = []
     for name, start_text, end_text in pairs:
         start_lines = _xyz_coordinate_lines(start_text)
@@ -477,17 +507,16 @@ def _run_cl_string(root: Path, problem: dict, template: dict, *, output: Path, w
         )
     records = run_jobs(jobs, _execute_cl_string, workers)
     comment = (
-        f"# OPTIM SVNREV {_CL_VERSION}, {_CL_TARBALL}. "
-        "Unmodified. CLSTRING and GROWSTRING at the source defaults, "
-        f"iteration density 0, and the problem force norm {settings['force_norm']}.\n"
+        f"# OPTIM SVNREV {_CL_VERSION}, {_CL_TARBALL}. Unmodified.\n"
+        "# CLSTRING, GROWSTRING iteration density 1000, and INE_NEW. "
+        f"Five images. Force norm {settings['force_norm']}. "
+        f"STEPS, BFGSSTEPS, MAXGROWSTEPS, and the BFGSTS iteration limits are {cap}. "
+        "Reparametrization 0.75, growth tolerance 0.25, and max step 0.1.\n"
         "# The count is OPTIM's energy+gradient calls. "
-        "A start is kept when the log contains Converged to TS. "
-        f"The harness cap is {cap}. "
-        "Iteration density is unassigned in this release, so the evolving string "
-        "exits on the first step and does not meet that force norm."
+        "A start is kept when the log contains Converged to TS and the count is under the cap."
     )
     published = dict(template)
-    published["code"] = "optim"
+    published["code"] = "OPTIM"
     return write_campaign(
         output,
         records,

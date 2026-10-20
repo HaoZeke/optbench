@@ -1,10 +1,15 @@
-# OPTIM SVNREV df8da599, http://www-wales.ch.cam.ac.uk/svn.tar.bz2. Unmodified. CLSTRING and GROWSTRING at the source defaults, iteration density 0, and the problem force norm 0.001.
-# The count is OPTIM's energy+gradient calls. A start is kept when the log contains Converged to TS. The harness cap is 2500. Iteration density is unassigned in this release, so the evolving string exits on the first step and does not meet that force norm.
-successes 0
-nfailed 50
+# OPTIM SVNREV df8da599, http://www-wales.ch.cam.ac.uk/svn.tar.bz2. Unmodified.
+# CLSTRING, GROWSTRING iteration density 1000, and INE_NEW. Five images. Force norm 0.001. STEPS, BFGSSTEPS, MAXGROWSTEPS, and the BFGSTS iteration limits are 2500. Reparametrization 0.75, growth tolerance 0.25, and max step 0.1.
+# The count is OPTIM's energy+gradient calls. A start is kept when the log contains Converged to TS and the count is under the cap.
+force_calls 830
+force_calls_min 293
+force_calls_max 2106
+force_calls_median 705
+successes 41
+nfailed 9
 n 50
 transition_states 0
-code optim
+code OPTIM
 code_version df8da599
 commit 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31
 algorithm climbing string
