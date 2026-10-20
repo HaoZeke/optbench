@@ -7,7 +7,6 @@
 # rep 7 seed 1006 force_calls 1370977 unique_saddles 54 fraction_connected 0.8959459459 total_searches 740 reached 1 harness_calls 1391005
 # rep 8 seed 1007 force_calls 2494049 unique_saddles 57 fraction_connected 0.8939283102 total_searches 1367 reached 1 harness_calls 2509844
 # rep 9 seed 1008 force_calls 1804073 unique_saddles 57 fraction_connected 0.881147541 total_searches 976 reached 1 harness_calls 1821825
-# note eOn a7aa574 is not a board row. Same seed 1000 and the same 27-saddle stop: it was stopped at 5160 searches with 25 of 27 good saddles below 1.5 eV. EON SVN r2549 reached 27 at 551 searches on that seed.
 code EON (SVN r2549)
 code_version r2549
 commit r2549

@@ -1,0 +1,79 @@
+id = "eon/develop-saddle-pt-md"
+engine = "eon"
+problem = "saddle-search/pt-island"
+code = "eOn (develop 500350d9)"
+code_version = "500350d9"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
+algorithm = "Dynamics"
+reducer = "harness"
+failure_cap = 20000000
+kernel = "morse_shift"
+tuning = "default"
+note = '''
+eOn (develop 500350d9), commit 500350d9fae881f06c7ef194e5868da079c4be5a on branch fix/develop-regressions-vs-350 of https://github.com/TheochemUI/eon. Same Pt-island dynamics ini as eon-svn/saddle-pt-md. confidence 1.1 with confidence_scheme dynamics, so the KMC step never fires and state 0 keeps searching. Dynamics temperature 2800, Langevin friction 0.004, time_step 2, time 10000, state check 600, record interval 40, linear interpolation, dephase_time 0. NEB is 3 images, spring 5, climbing image, 100 iterations, converged force 0.1. Optimizer is L-BFGS, max_move 0.2, max_iterations 1000, converged_force 0.001. Dimer rotations_max 20 and converged_angle 5 stay at the archive values; improved stays at the client default. The client potential is morse_pt, swapped to ext_pot on r2549 Morse::force for the run. num_jobs is 8 and number_of_CPUs is 4. Seeds 1000 through 1008. A repetition stops at 27 good saddles below 1.5 eV. The score is the report.sh mean of those nine runs: sad-fcs plus mins-fcs, failures left out.
+'''
+seeds = [1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008]
+starts = ["pt-island"]
+pass_limit = 4000
+workers = 4
+
+[ini.Main]
+job = "akmc"
+temperature = 700
+finite_difference = 0.001
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+converged_force = 0.001
+max_move = 0.2
+max_iterations = 1000
+lbfgs_memory = 20
+
+[ini.AKMC]
+confidence = 1.1
+confidence_scheme = "dynamics"
+thermally_accessible_window = 99999
+
+[ini."Process Search"]
+minimize_first = true
+
+[ini.Communicator]
+type = "local"
+num_jobs = 8
+number_of_CPUs = 4
+client_path = "eonclient"
+
+[ini."Nudged Elastic Band"]
+images = 3
+max_iterations = 100
+spring = 5.0
+climbing_image_method = true
+converged_force = 0.1
+
+[ini."Saddle Search"]
+method = "dynamics"
+dynamics_temperature = 2800
+dynamics_state_check_interval = 600
+dynamics_record_interval = 40
+dynamics_linear_interpolation = true
+max_energy = 1000
+max_iterations = 300
+
+[ini."Parallel Replica"]
+dephase_time = 0
+
+[ini.Dynamics]
+time_step = 2.0
+time = 10000
+thermostat = "langevin"
+langevin_friction = 0.004
+
+[ini.Dimer]
+rotations_max = 20
+converged_angle = 5.0
+
+[ini.Prefactor]
+default_value = "5e12"
