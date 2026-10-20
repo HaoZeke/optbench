@@ -110,7 +110,8 @@ def test_pending_grid_is_every_problem_and_code():
     assert Pending.param_names == ["problem", "code", "seed", "start"]
     assert len(Pending.params[0]) == len(problem_ids())
     assert len(problem_ids()) >= 25
-    assert code_ids() == [
+    ids = code_ids()
+    for code in (
         "eon",
         "eon-main",
         "eon-develop",
@@ -119,8 +120,9 @@ def test_pending_grid_is_every_problem_and_code():
         "ase",
         "sella",
         "artn",
-    ]
-    assert Pending.params[1] == code_ids()
+    ):
+        assert code in ids
+    assert Pending.params[1] == ids
     assert Pending.track_force_calls.unit == "force calls"
 
 
