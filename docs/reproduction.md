@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-56 reproduced, 35 not reproduced, 60 not rerun. 151 archive rows.
+62 reproduced, 37 not reproduced, 52 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -31,21 +31,21 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj38/eon-lanczos | force_calls 364 | 342 | reproduced |
 | lj38/eon-lanczos-improved | force_calls 287 | 259 | reproduced |
 | lj38/optim | force_calls 131 | 147 | not reproduced; optim_pes_counter |
-| lj38/optim-cl-string | — | — | not rerun |
-| lj38/pele | — | — | not rerun |
+| lj38/optim-cl-string | force_calls 786 | 785 | reproduced |
+| lj38/pele | force_calls 293 | 305 | reproduced |
 | lj38_2ts_separation/optim | force_calls 2885 | 3454 | not reproduced; optim_pes_counter |
-| lj38_2ts_separation/pele | — | — | not rerun |
+| lj38_2ts_separation/pele | force_calls 25022 | 27844 | not reproduced; pele_2ts_drift |
 | pt-island/eon-ci-neb | force_calls 248 | 226 | reproduced |
-| pt-island/eon-ci-neb-5 | — | — | not rerun |
-| pt-island/eon-ci-neb-single | — | — | not rerun |
+| pt-island/eon-ci-neb-5 | force_calls 391 | 359 | reproduced |
+| pt-island/eon-ci-neb-single | force_calls 110 | 127 | not reproduced; eon_neb_single |
 | pt-island/eon-ci-swdneb | force_calls 256 | 246 | reproduced |
 | pt-island/eon-dimer | force_calls 182 | 192 | reproduced |
 | pt-island/eon-lanczos | force_calls 325 | 222 | not reproduced; pt_lanczos |
 | pt-island/eon-lanczos-improved | force_calls 222 | 181 | not reproduced; pt_lanczos |
 | pt-island/optim | force_calls 103 | 138 | not reproduced; optim_pt_units |
-| pt-island/optim-6 | — | — | not rerun |
-| pt-island/optim-cl-string | — | — | not rerun |
-| pt-island/pele | — | — | not rerun |
+| pt-island/optim-6 | force_calls 117 | 118 | reproduced |
+| pt-island/optim-cl-string | force_calls 319 | 335 | reproduced |
+| pt-island/pele | force_calls 255 | 247 | reproduced |
 
 ## globalopt
 
@@ -248,6 +248,18 @@ The template note records the 2014 mean as OPTIM's own energy-plus-gradient call
 
 - double-ended-saddle-search/lj38/optim
 - double-ended-saddle-search/lj38_2ts_separation/optim
+
+### pele_2ts_drift
+
+pele a68ec5 with the archived dec_lj38_2ts.py loop of 50 pairs. The mean is 27844 against 25022. nfailed is 3 against 3. The LJ38 double-ended row on the same build is 305 against 293. The driver is the 2014 script with print statements and floor division ported to Python 3.11.
+
+- double-ended-saddle-search/lj38_2ts_separation/pele
+
+### eon_neb_single
+
+r2549 eonclient, Fortran on, with the archived config.ini: one image, climbing image, morse_pt, L-BFGS, converged_force 0.001. report.sh averages total_force_calls under 3000. The mean is 127 against 110. The five-image row on the same binary is 359 against 391. nfailed is 3, inside the Wilson interval of 0 failures out of 59.
+
+- double-ended-saddle-search/pt-island/eon-ci-neb-single
 
 ### pt_lanczos
 

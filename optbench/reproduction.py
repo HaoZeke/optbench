@@ -116,7 +116,7 @@ SHA = {
     "entries/eon-svn-htst": "715bc521c827f1f18102c1c027d99d0d8624b0fb",
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
-    "cells/fill-not-rerun": "f0b0d4e0748170b3e7415a481a5283382cd0c4d2",
+    "cells/fill-not-rerun": "e34d3411ceff99a0fa17f5f5ff8f1fe926a657c6",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -190,6 +190,14 @@ MATCHES: list[dict] = [
     {"key": "double-ended-saddle-search/pt-island/eon-lanczos", "template": "eon-svn/de-pt-lanczos", "branch": "main", "path": "results/campaign/eon-svn-de-pt-lanczos.dat", "cause": "pt_lanczos"},
     {"key": "double-ended-saddle-search/pt-island/eon-lanczos-improved", "template": "eon-svn/de-pt-lanczos-improved", "branch": "main", "path": "results/campaign/eon-svn-de-pt-lanczos-improved.dat", "cause": "pt_lanczos"},
     {"key": "double-ended-saddle-search/pt-island/optim", "template": "optim/de-pt", "branch": "cells/optim/saddle-pt", "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-pt-island--optim-de-pt.dat", "cause": "optim_pt_units"},
+    {"key": "double-ended-saddle-search/lj38/optim-cl-string", "template": "archive-optim/de-lj38-clstring", "branch": "cells/fill-not-rerun", "path": "results/campaign/optim-wales27058-de-lj38-clstring.dat"},
+    {"key": "double-ended-saddle-search/lj38/pele", "template": "archive-pele/de-lj38", "branch": "cells/fill-not-rerun", "path": "results/campaign/pele-a68ec5-de-lj38.dat"},
+    {"key": "double-ended-saddle-search/lj38_2ts_separation/pele", "template": "archive-pele/de-2ts", "branch": "cells/fill-not-rerun", "path": "results/campaign/pele-a68ec5-de-2ts.dat", "cause": "pele_2ts_drift"},
+    {"key": "double-ended-saddle-search/pt-island/eon-ci-neb-5", "template": "eon-svn/de-pt-ci-neb-5", "branch": "cells/fill-not-rerun", "path": "results/campaign/eon-r2549-de-pt-ci-neb-5.dat"},
+    {"key": "double-ended-saddle-search/pt-island/eon-ci-neb-single", "template": "eon-svn/de-pt-ci-neb-single", "branch": "cells/fill-not-rerun", "path": "results/campaign/eon-r2549-de-pt-ci-neb-single.dat", "cause": "eon_neb_single"},
+    {"key": "double-ended-saddle-search/pt-island/optim-6", "template": "archive-optim/de-pt-6", "branch": "cells/fill-not-rerun", "path": "results/campaign/optim-wales27058-de-pt-6.dat"},
+    {"key": "double-ended-saddle-search/pt-island/optim-cl-string", "template": "archive-optim/de-pt-clstring", "branch": "cells/fill-not-rerun", "path": "results/campaign/optim-wales27058-de-pt-clstring.dat"},
+    {"key": "double-ended-saddle-search/pt-island/pele", "template": "archive-pele/de-pt", "branch": "cells/fill-not-rerun", "path": "results/campaign/pele-a68ec5-de-pt.dat"},
     # neb per-image means already stored in the 3.5.0 files
     {"key": "neb/Pt-heptamer/eon-lbfgs", "template": "eon-lbfgs", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-lbfgs.dat", "hold": ["eon-client/neb-pt-lbfgs", "eon/neb-pt-lbfgs"]},
     {"key": "neb/Pt-heptamer/eon-cg", "template": "eon-cg", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-cg.dat", "cause": "heptamer_cg", "hold": ["eon-client/neb-pt-cg"]},
@@ -316,6 +324,18 @@ CAUSE_TEXT = {
         "The harness records 7 failures: 5 RuntimeError LineSearch failed (ASE 3.8.2 already raises that; ASE 3.6.0 is not on PyPI) "
         "and 2 Hessian index 1 after the Euclidean force norm is under 0.01. "
         "The Wilson interval on 0 failures out of 1000 is about 0 to 3.83."
+    ),
+    "eon_neb_single": (
+        "r2549 eonclient, Fortran on, with the archived config.ini: one image, climbing image, morse_pt, L-BFGS, converged_force 0.001. "
+        "report.sh averages total_force_calls under 3000. The mean is 127 against 110. "
+        "The five-image row on the same binary is 359 against 391. "
+        "nfailed is 3, inside the Wilson interval of 0 failures out of 59."
+    ),
+    "pele_2ts_drift": (
+        "pele a68ec5 with the archived dec_lj38_2ts.py loop of 50 pairs. "
+        "The mean is 27844 against 25022. nfailed is 3 against 3. "
+        "The LJ38 double-ended row on the same build is 305 against 293. "
+        "The driver is the 2014 script with print statements and floor division ported to Python 3.11."
     ),
     "akmc_vs_langevin": (
         "The archive rows are Langevin parallel replica. The harness rows are AKMC. "

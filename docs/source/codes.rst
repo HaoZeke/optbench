@@ -149,6 +149,8 @@ The number is written only after the run finishes under the problem rule.
    <li>eon-client/qm: no per-start record.</li>
    <li>eon-client/sd-twopoint: no per-start record.</li>
    <li>eon-client/sd: no per-start record.</li>
+   <li>eon-svn/de-pt-ci-neb-5: no per-start record.</li>
+   <li>eon-svn/de-pt-ci-neb-single: no per-start record; does not reproduce the 2014 archive.</li>
    <li>eon-svn/bh-lj100: no per-start record.</li>
    </ul>
    <h3>Eon svn</h3>
@@ -1075,4 +1077,9 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>
+   <p>No full ranked run</p><ul>
+   <li>archive-optim/de-lj38-clstring: no per-start record.</li>
+   <li>archive-optim/de-pt-6: no per-start record.</li>
+   <li>archive-optim/de-pt-clstring: no per-start record.</li>
+   </ul>
    </section>
