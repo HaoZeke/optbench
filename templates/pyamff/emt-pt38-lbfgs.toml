@@ -1,0 +1,10 @@
+id = "pyamff/emt-pt38-lbfgs"
+engine = "pyamff"
+code = "Pyamff"
+code_version = "240f51d"
+commit = "240f51d01ca22969369f9bc21760c61cbb3b6665"
+algorithm = "LBFGS"
+problem = "mlopt/emt-pt38"
+tuning = "stock"
+failure_cap = 30000
+note = "PyAMFF master 240f51d, unmodified. Archive problem: EMT Pt38, 50 uniform[-1, 1) starts, hidden layers 10 and 7, tanh, NoScaler, one batch, learning rate 0.01, force coefficient 0.1, LBFGS, loss-gradient tolerance 0.1, 30000 epochs. The current schema names the archive SE loss SSE. The runner's init_model_parameters flag is the opposite of main_old.py, so True is the random-weight branch."

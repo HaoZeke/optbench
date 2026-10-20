@@ -215,6 +215,10 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | pt-island/pele | force_calls 88 | 88.551 | reproduced |
 | pt-island/sella | force_calls 53 | 88 | not reproduced; sella_trust |
 
+## Latest release beside the archive
+
+- mlopt/emt-pt38/pyamff-lbfgs10-7-fcoeff0_1: PyAMFF 240f51d (master, 2026-07-04) is the latest published tree. Tags stop at v3.0.0, which is older than archive pin 8037eb98, and the VERSION file still says 0.1.0-beta. The code was not modified. Stock LBFGS on the archive EMT Pt38 problem: 50 uniform[-1, 1) starts, hidden layers 10 and 7, tanh, NoScaler, one batch, learning rate 0.01, force coefficient 0.1, loss-gradient tolerance 0.1, 30000 epochs. The current schema names the archive SE loss SSE, and pyamff_runner treats init_model_parameters the opposite of main_old.py, so True is the random-weight branch. Harness row pyamff/emt-pt38-lbfgs mean_epoch 3019.26 vs 1943.34 (55.4%), median_epoch 1705.5 vs 1403 (21.6%), mean_energy_rmse 0.0391974734 vs 0.0008561802, median_energy_rmse 0.00073348 vs 0.00073764, mean_force_rmse 0.1088077472 vs 0.1003695, median_force_rmse 0.08815838 vs 0.0904135, nfailed 1 vs 0. One start reached the epoch cap at energy RMSE 1.90392552. The archive number stays the paper row. Ranked PAR-2 is 3619.28.
+
 ## Residuals inside the band
 
 - tsopt/LJ38/pele_cd: Inside the 10% band (263.52 vs 254). The same xyz-versus-con starting set as ts-ffd. findTS_local.py for the CD row does not pass orthogZeroEigs; the harness template sets orthog translations-rotations. The paper baseline is this 2014-stop mean, not the harness-stop mean 335.06.

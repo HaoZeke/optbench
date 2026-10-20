@@ -1,0 +1,18 @@
+mean_epoch 3019.26
+median_epoch 1705.5
+mean_energy_rmse 0.0391974734
+median_energy_rmse 0.00073348
+mean_force_rmse 0.1088077472
+median_force_rmse 0.08815838
+nfailed 1
+code Pyamff
+code_version 240f51d
+commit 240f51d01ca22969369f9bc21760c61cbb3b6665
+algorithm LBFGS
+template pyamff/emt-pt38-lbfgs
+problem mlopt/emt-pt38
+counter harness
+tuning stock
+cap 30000
+starts 50
+note PyAMFF master 240f51d unmodified. Fifty uniform[-1, 1) starts on the archive EMT Pt38 problem. Epochs are the harness call count. The archive row remains the paper number.
