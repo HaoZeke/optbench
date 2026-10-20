@@ -1,4 +1,4 @@
-"""Gman 1.0.0.01 steepest descent and quick-min on the Pt heptamer."""
+"""Gman 1.0.0.01 steepest descent on the Pt heptamer."""
 
 import json
 import statistics
@@ -17,25 +17,23 @@ def test_gman_is_not_an_engine_table_entry():
     assert "gman" not in ENGINES
 
 
-def test_gman_templates_name_the_archive_optimizers():
+def test_gman_template_uses_the_archive_protocol():
     steep = load_template(ROOT, "gman/neb-pt-sd")
-    quick = load_template(ROOT, "gman/neb-pt-qm")
+    assert not (ROOT / "templates" / "gman" / "neb-pt-qm.toml").exists()
     assert steep["code"] == "Gman" and steep["code_version"] == "1.0.0.01"
-    assert quick["code"] == "Gman" and quick["code_version"] == "1.0.0.01"
-    assert steep["commit"] == "r235" and quick["commit"] == "r235"
+    assert steep["commit"] == "r235"
     assert steep["algorithm"] == "sd"
-    assert quick["algorithm"] == "quick-min"
     assert steep["gman"]["optimizer"] == "sd"
-    assert quick["gman"]["optimizer"] == "qm"
+    assert steep["gman"]["step_r"] == 0.02
+    assert steep["gman"]["maxmove"] == 0.2
+    assert steep["gman"]["spring"] == 5.0
     assert steep.get("paper_baseline") is not True
     problem = resolve_problem(ROOT, "neb/Pt-heptamer")
     assert _check_stop(problem, steep) == 10000
-    assert _check_stop(problem, quick) == 10000
-    assert _settings(steep, problem)["itrmax"] == 10000
-    assert _settings(steep, problem)["cap"] == 80000
-    assert _settings(quick, problem)["cap"] == 80000
-    assert _cap_of(problem, steep, {}) == 80000
-    assert _cap_of(problem, quick, {}) == 80000
+    settings = _settings(steep, problem)
+    assert settings["itrmax"] >= 10000
+    assert settings["cap"] == 10000
+    assert _cap_of(problem, steep, {}) == 10000
     assert _cap_of(problem, load_template(ROOT, "rgsaddle/neb"), {}) == 10000
 
 
@@ -72,8 +70,9 @@ def _starts(path: Path) -> list[dict]:
     return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
 
 
-def test_stock_steepest_descent_is_ranked_on_its_own_counter():
+def test_archive_steepest_descent_is_ranked_on_pot_count():
     dat_path = ROOT / "results" / "campaign" / "gman-r235-neb-pt-sd.dat"
+    assert not (ROOT / "results" / "campaign" / "gman-r235-neb-pt-qm.dat").exists()
     fields = parse(dat_path.read_text(encoding="utf-8"))
     assert fields["code"] == "Gman"
     assert fields["code_version"] == "1.0.0.01"
@@ -81,40 +80,28 @@ def test_stock_steepest_descent_is_ranked_on_its_own_counter():
     assert fields["algorithm"] == "sd"
     assert fields["counter"] == "harness"
     assert fields["n"] == "13"
-    assert fields["nfailed"] == "13"
+    assert fields["nfailed"] == "0"
     assert "ranked" not in fields
     assert "partial" not in fields
     starts = _starts(dat_path.with_suffix(".starts.jsonl"))
     assert [row["start"] for row in starts] == [f"min{index:02d}" for index in range(1, 14)]
-    assert all(row["counter"] == "harness" and row["gman_pot_count"] == 80000 and not row["success"] for row in starts)
+    calls = [row["gman_pot_count"] for row in starts]
+    per_image = [count / 8 for count in calls]
+    assert int(sum(per_image) / len(per_image)) == 412
+    assert int(max(per_image)) == 697
+    assert int(min(per_image)) == 214
+    assert all(row["counter"] == "harness" and row["success"] and row["gman_pot_count"] < 10000 for row in starts)
     document = json.loads(dat_path.with_suffix(".v2.json").read_text(encoding="utf-8"))
     assert document["provenance"]["code"] == "Gman"
     assert document["provenance"]["code_version"] == "1.0.0.01"
     assert document["provenance"]["commit"] == "r235"
     assert document["provenance"]["parameters"]["counter"] == "pot.count"
     assert document["provenance"]["parameters"]["optimizer"] == "sd"
+    assert document["provenance"]["parameters"]["step_r"] == 0.02
+    assert document["provenance"]["parameters"]["spring"] == 5.0
+    assert document["provenance"]["parameters"]["version"] == "1.0.0.01"
     assert document["score"]["n"] == 13
-    assert document["score"]["nfailed"] == 13
-    assert document["score"]["cap"] == 80000
-    assert document["score"]["par2_mean"] == 160000
-
-
-def test_stock_quick_min_matches_the_archived_quick_min_integers():
-    dat_path = ROOT / "results" / "campaign" / "gman-r235-neb-pt-qm.dat"
-    fields = parse(dat_path.read_text(encoding="utf-8"))
-    starts = _starts(dat_path.with_suffix(".starts.jsonl"))
-    per_image = [row["gman_pot_count"] / 8 for row in starts]
-    assert int(sum(per_image) / len(per_image)) == 190
-    assert int(max(per_image)) == 316
-    assert int(min(per_image)) == 103
-    assert fields["nfailed"] == "0"
-    assert fields["code_version"] == "1.0.0.01"
-    assert fields["algorithm"] == "quick-min"
-    calls = [row["force_calls"] for row in starts]
-    document = json.loads(dat_path.with_suffix(".v2.json").read_text(encoding="utf-8"))
     assert document["score"]["nfailed"] == 0
-    assert document["score"]["cap"] == 80000
+    assert document["score"]["cap"] == 10000
     assert document["score"]["par2_mean"] == statistics.fmean(calls)
     assert document["score"]["par2_mean"] == document["score"]["mean"]
-    assert document["provenance"]["parameters"]["counter"] == "pot.count"
-    assert document["provenance"]["parameters"]["optimizer"] == "qm"

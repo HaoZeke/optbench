@@ -1,8 +1,14 @@
-# Gman 1.0.0.01, release r235. sd.init is the library default, maxmove 0.2 and stepR 0.1.
-# Climbing image, spring 5, and tangent new are the shared NEB setup. fmax 0.01. The iteration limit is 10000. The harness ranks pot.count, so the cap is 80000.
-# The count is pot.count.
-successes 0
-nfailed 13
+# Gman 1.0.0.01 steepest descent. Source commit r235.
+# sd.init(stepR=0.02, maxmove=0.2) is the archive protocol. Spring 5, tangent new, climbing image, fmax 0.01.
+# The iteration limit is 10000. The harness ranks pot.count. A band total at or above 10000 is a failure.
+force_calls 3298
+force_calls_min 1712
+force_calls_max 5576
+force_calls_median 2936
+force_calls_per_image 412
+call_unit total
+successes 13
+nfailed 0
 n 13
 transition_states 0
 code Gman

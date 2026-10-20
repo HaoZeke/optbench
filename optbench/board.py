@@ -283,27 +283,11 @@ def _commit_divides_band(root: Path, commit: str) -> bool:
     return divides
 
 
-def _gman_pot_cap(problem: dict | None, template: dict | None, cap: int) -> int:
-    """Iteration cap in ``pot.count`` for a Gman band.
-
-    One iteration calls the potential on every interior image. Gman rows
-    rank that total, so the cap is the iteration limit times the image
-    count. A failure at 10000 iterations on 8 images is 80000 calls.
-    Other codes keep the problem cap.
-    """
-    if (template or {}).get("engine") != "gman":
-        return cap
-    images = _image_count(problem, template, {})
-    if not images or images <= 1:
-        return cap
-    return cap * images
-
-
 def _cap_of(problem: dict | None, template: dict | None, fields: dict[str, str]) -> int | None:
     if problem is not None:
         stated = (problem.get("convergence") or {}).get("max_force_calls")
         if stated not in (None, ""):
-            return _gman_pot_cap(problem, template, int(stated))
+            return int(stated)
     if template is not None:
         if template.get("failure_cap") not in (None, ""):
             return int(template["failure_cap"])

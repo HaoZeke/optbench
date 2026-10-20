@@ -1,13 +1,12 @@
-"""Gman 1.0.0.01 steepest descent and quick-min on the Pt heptamer.
+"""Gman 1.0.0.01 steepest descent on the Pt heptamer.
 
-Release r235. The package version file is 1.0.0.01. The archived
-``gman-sd`` script calls ``Gopt.sd``. Its ``algorithm lbfgs`` line is the
-label written for every Gman optimizer. Stock ``sd.init`` is
-``maxmove=0.2`` and ``stepR=0.1``. Stock ``qm.init`` is ``maxmove=0.2``
-and ``dt=0.15``. The band uses the shared archive setup: 8 images,
-spring 5, tangent ``new``, climbing image on, ``fmax=0.01``. The
-iteration limit is the problem cap, 10000. The harness ranks
-``pot.count``, so that cap is 80000 calls.
+Source commit r235. The archived ``gman-sd`` script calls ``Gopt.sd``
+and ``sd.init(stepR=0.02, maxmove=0.2)``. Its ``algorithm lbfgs`` line
+is the label written for every Gman optimizer. The band uses that
+script: 8 images, spring 5, tangent ``new``, climbing image on,
+``fmax=0.01``. The iteration limit is at least 10000. The harness ranks
+``pot.count``, and a band total at or above the problem cap, 10000, is
+a failure.
 """
 
 from __future__ import annotations
@@ -23,6 +22,12 @@ from pathlib import Path
 
 from optbench.campaign import geometry_archive
 
+_MIN_ITERATIONS = 10000
+
+
+class _BandCap(Exception):
+    """The potential call would pass the band-total cap."""
+
 
 def _source_root(root: Path) -> Path:
     path = (root / "codes" / "gman" / "r235").resolve()
@@ -34,9 +39,9 @@ def _source_root(root: Path) -> Path:
 
 
 def _stock_settings(template: dict, problem: dict, section: dict) -> dict:
-    """Stock optimizer. The iteration cap is the problem's; the score cap is pot.count."""
+    """Archive steepest descent. The score cap is the problem's band total."""
     optimizer = section.get("optimizer")
-    if optimizer not in {"sd", "qm"}:
+    if optimizer != "sd":
         raise ValueError(f"{template['id']} optimizer {optimizer} is not this runner")
     if section.get("potential", "morse") != "morse":
         raise ValueError(f"{template['id']} potential {section.get('potential')} is not this runner")
@@ -52,14 +57,21 @@ def _stock_settings(template: dict, problem: dict, section: dict) -> dict:
     pairs = int((problem.get("sample") or {})["pairs"])
     if pairs < 1 or cap < 1 or images < 1:
         raise ValueError(f"{problem['id']} is missing a band, cap, or sample")
+    step_r = float(section.get("step_r", 0.02))
+    maxmove = float(section.get("maxmove", 0.2))
+    spring = float(section.get("spring", 5.0))
+    if abs(step_r - 0.02) > 1e-12 or abs(maxmove - 0.2) > 1e-12 or abs(spring - 5.0) > 1e-12:
+        raise ValueError(f"{template['id']} step is not the archive steepest-descent protocol")
     return {
         "optimizer": optimizer,
-        "stock": True,
         "images": images,
         "fmax": fmax,
-        "itrmax": cap,
-        "cap": cap * images,
+        "itrmax": max(_MIN_ITERATIONS, cap),
+        "cap": cap,
         "pairs": pairs,
+        "step_r": step_r,
+        "maxmove": maxmove,
+        "spring": spring,
     }
 
 
@@ -148,6 +160,18 @@ def _prepare_import(source: Path) -> None:
         sys.path.insert(0, root)
 
 
+def _bounded(potential, cap: int):
+    """Stop once ``pot.count`` has reached the band-total cap."""
+    from Gman.pot import pot
+
+    def wrapped(point, count=True):
+        if int(pot.count()) >= cap:
+            raise _BandCap()
+        return potential(point, count)
+
+    return wrapped
+
+
 def _one_path(minima: Path, name: str, settings: dict) -> dict:
     import Gman.data as data
     import Gman.io as io
@@ -169,22 +193,26 @@ def _one_path(minima: Path, name: str, settings: dict) -> dict:
     if potential is None:
         raise RuntimeError("Gman failed to load the Morse potential")
     pot.countReset()
-    opt = Gopt.sd() if settings["optimizer"] == "sd" else Gopt.qm()
-    opt.init()
+    opt = Gopt.sd()
+    opt.init(stepR=settings["step_r"], maxmove=settings["maxmove"])
     band = Gneb.neb()
     band.new(first, second, images=settings["images"])
-    band.relax(
-        potential,
-        opt.step,
-        k=5.0,
-        tangent="new",
-        itrmax=settings["itrmax"],
-        ppd=1,
-        fmax=settings["fmax"],
-        fsaddle="off",
-        method="ci",
-        converge="Fmag",
-    )
+    try:
+        band.relax(
+            _bounded(potential, int(settings["cap"])),
+            opt.step,
+            k=settings["spring"],
+            tangent="new",
+            itrmax=settings["itrmax"],
+            ppd=1,
+            fmax=settings["fmax"],
+            fsaddle="off",
+            method="ci",
+            converge="Fmag",
+        )
+        converged = bool(band.converged)
+    except _BandCap:
+        converged = False
     raw = int(pot.count())
     pot.countReset()
     per_image = raw / float(settings["images"])
@@ -192,7 +220,7 @@ def _one_path(minima: Path, name: str, settings: dict) -> dict:
         "geometry": name,
         "force_calls": per_image,
         "raw": raw,
-        "success": bool(band.converged),
+        "success": converged,
     }
 
 
@@ -220,20 +248,13 @@ def _publish(output: Path, rows: list[dict], template: dict, problem: dict, sett
                 "converged": converged,
             }
         )
-    if settings["optimizer"] == "sd":
-        comment = (
-            "# Gman 1.0.0.01, release r235. sd.init is the library default, maxmove 0.2 and stepR 0.1.\n"
-            "# Climbing image, spring 5, and tangent new are the shared NEB setup. "
-            "fmax 0.01. The iteration limit is 10000. The harness ranks pot.count, so the cap is 80000.\n"
-            "# The count is pot.count."
-        )
-    else:
-        comment = (
-            "# Gman 1.0.0.01, release r235. qm.init is the library default, maxmove 0.2 and dt 0.15.\n"
-            "# Climbing image, spring 5, and tangent new are the shared NEB setup. "
-            "fmax 0.01. The iteration limit is 10000. The harness ranks pot.count, so the cap is 80000.\n"
-            "# The count is pot.count."
-        )
+    comment = (
+        "# Gman 1.0.0.01 steepest descent. Source commit r235.\n"
+        "# sd.init(stepR=0.02, maxmove=0.2) is the archive protocol. "
+        "Spring 5, tangent new, climbing image, fmax 0.01.\n"
+        "# The iteration limit is 10000. The harness ranks pot.count. "
+        "A band total at or above 10000 is a failure."
+    )
     published = write_campaign(
         output,
         records,
@@ -242,16 +263,16 @@ def _publish(output: Path, rows: list[dict], template: dict, problem: dict, sett
         {"cap": cap},
         {
             "method": "ci",
-            "optimizer": settings["optimizer"],
+            "optimizer": "sd",
             "counter": "pot.count",
             "potential": "morse",
             "version": template["code_version"],
             "images": settings["images"],
             "fmax": settings["fmax"],
             "itrmax": settings["itrmax"],
-            "maxmove": 0.2,
-            **({"step_r": 0.1} if settings["optimizer"] == "sd" else {"dt": 0.15}),
-            "spring": 5.0,
+            "maxmove": settings["maxmove"],
+            "step_r": settings["step_r"],
+            "spring": settings["spring"],
             "tangent": "new",
         },
         images=settings["images"],
