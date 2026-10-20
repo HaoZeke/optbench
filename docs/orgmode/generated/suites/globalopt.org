@@ -469,7 +469,7 @@
    </tbody></table></div>
    <h3>Partial</h3><ul>
    <li>airss/lj75 AIRSS campaign n=200, result file sets partial true.</li>
-   <li>ogolem/lj75 ogolem campaign n=83, scored 83 of 200 starts; lowest energy -396.28224883; mean calls 985345.7; median calls 1000000.0.</li>
+   <li>ogolem/lj75 ogolem campaign n=87, scored 87 of 200 starts; lowest energy -396.28224883; mean calls 986019.5; median calls 1000000.0.</li>
    </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="lj75-legacy">
@@ -528,7 +528,7 @@
    <tr><td colspan="11">No full harness row.</td></tr>
    </tbody></table></div>
    <h3>Partial</h3><ul>
-   <li>ogolem/lj98 ogolem campaign n=5, scored 5 of 100 starts; lowest energy -543.64295724; mean calls 4185407.6; median calls 3575450.0.</li>
+   <li>ogolem/lj98 ogolem campaign n=9, scored 9 of 100 starts; lowest energy -543.64295724; mean calls 5053568.0; median calls 5623660.0.</li>
    </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="lj98-legacy">
