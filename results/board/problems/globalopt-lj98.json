@@ -37,7 +37,7 @@
       "note": "starts.jsonl",
       "par2_mean": 2000000000.0,
       "partial": true,
-      "partial_reason": "scored 9 of 100 starts; lowest energy -543.64295724; mean calls 5053568.0; median calls 5623660.0",
+      "partial_reason": "scored 9 of 100 starts; lowest energy -543.64295724; 7 of 9 starts at -543.64295724; mean calls 5053568.0; median calls 5623660.0",
       "path": "results/campaign/ogolem-cce35a37-lj98.dat",
       "problem": "globalopt/lj98",
       "registry_match": true,

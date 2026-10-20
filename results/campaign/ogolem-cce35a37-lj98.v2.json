@@ -1,7 +1,7 @@
 {
   "bootstrap_resamples": 2000,
   "bootstrap_seed": 20261015,
-  "note": "scored 9 of 100 starts; lowest energy -543.64295724; mean calls 5053568.0; median calls 5623660.0",
+  "note": "scored 9 of 100 starts; lowest energy -543.64295724; 7 of 9 starts at -543.64295724; mean calls 5053568.0; median calls 5623660.0",
   "par_factor": 2,
   "problem": "globalopt/lj98",
   "runs": [
