@@ -1,5 +1,5 @@
-# ASE 3.29.0 BasinHopping documentation example on globalopt/lj75.
-# temperature 0.008617330337217212 (100 * kB), dr 0.5, LBFGS, fmax 0.1. Seed 314159 plus the start index.
+# ASE 3.29.0 BasinHopping constructor defaults on globalopt/lj75.
+# temperature 0.008617330337217212 (100 * kB), dr 0.1, FIRE, fmax 0.1. Seed 314159 plus the start index.
 # The energy stop and the force-call cap are the problem file, except lj38.
 problem globalopt/lj75
 template ase-globalopt/lj75-basin
@@ -9,16 +9,16 @@ commit f27c0005ae6a67ea419f996e728668865bfc1f86
 algorithm BasinHopping
 tuning default
 counter harness
-n 12
-nfailed 12
+n 200
+nfailed 200
 par2_mean 2000000
 median 2000000
 median_low 2000000
 median_high 2000000
 wilson_low 0
-wilson_high 0.2424940067
+wilson_high 0.01884532638
 success_rate 0
-n_cap 12
+n_cap 200
 n_wrong_stationary 0
 n_divergence 0
 n_crash 0
@@ -26,6 +26,5 @@ cap 1000000
 force_calls_min 1000000
 force_calls_max 1000000
 force_calls_median 1000000
-energy_min -357.6825201
-energy_max 2897015797
-partial true
+energy_min -396.2378237
+energy_max -382.5559996
