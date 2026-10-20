@@ -137,3 +137,151 @@ def test_registry_pins_r2549():
     row = next(item for item in data["code"] if item["id"] == "eon-svn")
     assert row["commit"] == "r2549"
     assert row["name"] == "Eon svn"
+
+
+def _two_step_endpoints() -> list[tuple[str, str, list[float]]]:
+    """Centered free-cluster con text and coordinates for both ends of all 51 pairs."""
+    import tarfile
+
+    from optbench.eon_jobs import _stored
+    from optbench.eon_parse import xyz_to_con
+    from optbench.lj import read_component_coordinates
+
+    archive = _stored(ROOT, "website/double-ended-saddle-search/lj38_2ts_separation/coords.tgz")
+    found = []
+    with tarfile.open(archive) as packed:
+        for index in range(51):
+            for side in ("start", "end"):
+                member = packed.extractfile(f"coords/{side}_{index}.xyz")
+                assert member is not None
+                text = xyz_to_con(member.read().decode("utf-8"))
+                found.append((f"{side}_{index}", text, read_component_coordinates(text)))
+    return found
+
+
+def _max_pair(positions: list[float]) -> float:
+    atoms = len(positions) // 3
+    best = 0.0
+    for i in range(atoms):
+        ix = 3 * i
+        for j in range(i + 1, atoms):
+            jx = 3 * j
+            dx = positions[ix] - positions[jx]
+            dy = positions[ix + 1] - positions[jx + 1]
+            dz = positions[ix + 2] - positions[jx + 2]
+            best = max(best, (dx * dx + dy * dy + dz * dz) ** 0.5)
+    return best
+
+
+def _max_atom_force(forces) -> float:
+    best = 0.0
+    for index in range(0, len(forces), 3):
+        norm = (forces[index] ** 2 + forces[index + 1] ** 2 + forces[index + 2] ** 2) ** 0.5
+        best = max(best, norm)
+    return best
+
+
+def test_lj38_2ts_endpoints_match_unshifted_cutoff_40():
+    """The harness kernel for these pairs is unshifted Lennard-Jones, cutoff 40.
+
+    Every pair sits inside 15, so a cutoff of 15 and a cutoff of 40 see the
+    same pairs. The shifted kernel still differs by the cutoff constant.
+    """
+    from optbench.eon_harness import lj40
+    from optbench.lj import lj_cluster
+    from optbench.potentials import lennard_jones
+
+    endpoints = _two_step_endpoints()
+    assert len(endpoints) == 102
+    for name, _text, positions in endpoints:
+        energy, forces = lj_cut(positions, cutoff=40.0)
+        other, gradient = lennard_jones(positions)
+        surface, surface_forces = lj40(positions)
+        shifted, _shifted_forces = lj_cluster(positions)
+        assert _max_pair(positions) < 15.0, name
+        assert abs(energy - other) < 1e-8, name
+        assert abs(energy - surface) < 1e-8, name
+        assert abs(energy - shifted) > 1e-4, name
+        assert len(forces) == len(gradient) == len(surface_forces)
+        for left, right in zip(forces, gradient, strict=True):
+            assert abs(left + float(right)) < 1e-8
+        for left, right in zip(forces, surface_forces, strict=True):
+            assert abs(left - right) < 1e-8
+
+
+def _svn_client() -> Path | None:
+    import os
+
+    env = os.environ.get("EON_SVN_CLIENT")
+    if env and Path(env).is_file():
+        return Path(env)
+    default = Path.home() / "opt" / "eon-svn" / "bin" / "eonclient"
+    if default.is_file():
+        return default
+    return None
+
+
+def _single_point(client: Path, con: Path, potential: str, work: Path) -> tuple[float, float]:
+    import subprocess
+
+    work.mkdir(parents=True, exist_ok=True)
+    completed = subprocess.run(
+        [str(client), "-s", "-p", potential, str(con)],
+        cwd=work,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    energy = force = None
+    for line in completed.stdout.splitlines():
+        if line.startswith("Energy:"):
+            energy = float(line.split()[1])
+        elif line.startswith("Max atom force:"):
+            force = float(line.split()[-1])
+    assert completed.returncode == 0, completed.stderr
+    assert energy is not None and force is not None, completed.stdout
+    return energy, force
+
+
+def test_r2549_lj_cluster_and_ext_pot_match_the_harness_on_lj38_2ts(tmp_path: Path):
+    """r2549 ``lj_cluster`` is all-pairs and unshifted. These clusters match cutoff 40.
+
+    The campaign does not call that built-in. It serves the same kernel through
+    ``ext_pot`` so the harness counter sees every force evaluation.
+    """
+    import os
+    import shutil
+    import subprocess
+
+    import pytest
+
+    from optbench.eon_harness import bridge_binary
+    from optbench.potserver import PotServer
+
+    client = _svn_client()
+    if client is None:
+        pytest.skip("r2549 eonclient is not installed")
+    version = subprocess.run([str(client), "-v"], check=False, capture_output=True, text=True)
+    assert "r2549" in (version.stdout + version.stderr)
+    endpoints = _two_step_endpoints()
+    builtin = tmp_path / "builtin"
+    external = tmp_path / "ext"
+    external.mkdir()
+    shutil.copy(bridge_binary(), external / "ext_pot")
+    os.chmod(external / "ext_pot", 0o755)
+    server = PotServer(lambda positions, numbers, box: lj_cut(positions, numbers, box)).start()
+    os.environ["OPTBENCH_POTSERVER"] = server.endpoint()
+    try:
+        for name, text, positions in endpoints:
+            reference, forces = lj_cut(positions)
+            con = tmp_path / f"{name}.con"
+            con.write_text(text, encoding="utf-8")
+            energy, peak = _single_point(client, con, "lj_cluster", builtin)
+            served, served_peak = _single_point(client, con, "ext_pot", external)
+            assert abs(energy - reference) < 1e-8, name
+            assert abs(served - reference) < 1e-8, name
+            assert abs(peak - _max_atom_force(forces)) < 1e-6, name
+            assert abs(served_peak - _max_atom_force(forces)) < 1e-6, name
+    finally:
+        server.stop()
+        os.environ.pop("OPTBENCH_POTSERVER", None)

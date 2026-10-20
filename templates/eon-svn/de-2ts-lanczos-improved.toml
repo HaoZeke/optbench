@@ -6,16 +6,16 @@ code_version = "r2549"
 commit = "r2549"
 algorithm = "Lanczos improved L-BFGS"
 reducer = "harness"
-failure_cap = 10000
+failure_cap = 250000
 kind = "de-2ts-mode"
 kernel = "lj40"
 asv_class = "EonSvnDe2tsLanczosImproved"
 note = '''
-No 2014 eon config is in the archive for this problem. The band uses the LJ38 climbing-image settings and the problem cap of 10000 force calls, five interior images, and converged_force 0.001. Lanczos max_iterations 20, tolerance 0.05, quit_early true. The harness kernel is unshifted lj/cut with epsilon 1, sigma 1, and cutoff 40.
+Improved Lanczos on the interpolated end points of all 51 pairs. converged_force 0.001, max_move 0.1, saddle max_iterations 250000. Lanczos max_iterations 20, tolerance 0.05, quit_early true. failure_cap is the problem cap, 250000. convergence_metric norm is the Euclidean force norm. The harness kernel is unshifted lj/cut with epsilon 1, sigma 1, and cutoff 40.
 '''
 seeds = [1]
 asv_timeout = 1200
-budget_seconds = 900
+budget_seconds = 0
 
 [ini.Main]
 job = "saddle_search"
@@ -30,7 +30,7 @@ opt_method = "lbfgs"
 convergence_metric = "norm"
 converged_force = 0.001
 max_move = 0.1
-max_iterations = 1000
+max_iterations = 250000
 lbfgs_memory = 20
 
 [ini.LBFGS]
@@ -40,7 +40,7 @@ lbfgs_memory = 20
 min_mode_method = "lanczos"
 client_displace_type = "load"
 converged_force = 0.001
-max_iterations = 1000
+max_iterations = 250000
 displace_magnitude = 0.1
 max_energy = 1000000000
 

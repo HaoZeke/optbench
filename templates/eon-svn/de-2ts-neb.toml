@@ -4,11 +4,11 @@ problem = "double-ended-saddle-search/lj38_2ts_separation"
 code = "Eon svn"
 code_version = "r2549"
 commit = "r2549"
-algorithm = "LBFGS"
+algorithm = "NEB"
 reducer = "harness"
 failure_cap = 250000
 tuning = "default"
-note = """Plain NEB. Same settings as eon-svn/de-2ts-ci with climbing_image_method false. The harness cap is the problem cap, 250000. The stored run still used an earlier cap. The run swaps the potential for ext_pot. The harness kernel is the develop kernel for this potential name. The 2014 table used r2156. The binary is SVN r2549, the registry pin. Export of the 2014 revision is forbidden, so this row is r2549."""
+note = """Plain NEB. Same band and optimizer as eon-svn/de-2ts-ci with climbing_image_method false. Five images, spring 5, L-BFGS memory 20, max_move 0.05, converged_force 0.001, max_iterations 250000. failure_cap is the problem cap, 250000. convergence_metric norm is the Euclidean force norm. The run swaps the named potential for ext_pot. The kernel is lj_cut, unshifted Lennard-Jones, epsilon 1, sigma 1, cutoff 40. The binary is SVN r2549 with the Fortran potentials linked."""
 
 
 [ini.Main]
@@ -16,14 +16,14 @@ job = "nudged_elastic_band"
 random_seed = 1
 
 [ini.Potential]
-potential = "ljcluster"
+potential = "lj_cut"
 
 [ini.Optimizer]
 opt_method = "lbfgs"
 convergence_metric = "norm"
 converged_force = 0.001
 max_move = 0.05
-max_iterations = 2000
+max_iterations = 250000
 lbfgs_memory = 20
 lbfgs_inverse_curvature = 0.01
 lbfgs_max_inverse_curvature = 0.0
@@ -40,4 +40,4 @@ old_tangent = false
 doubly_nudged = false
 doubly_nudged_switching = false
 converged_force = 0.001
-max_iterations = 2000
+max_iterations = 250000
