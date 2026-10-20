@@ -1,0 +1,56 @@
+{
+  "counter": "harness",
+  "problem": "saddle-search/pt-island",
+  "provenance": {
+    "code": "optim",
+    "code_version": "svn-snapshot",
+    "commit": "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f",
+    "machine": {
+      "machine": "x86_64",
+      "node": "cursor",
+      "python": "3.12.3",
+      "system": "Linux"
+    },
+    "parameters": {
+      "cap": 5064,
+      "counter": "harness",
+      "distance_difference": 0.1,
+      "goal": 27,
+      "max_searches": 20000,
+      "potential": "morse_eon",
+      "preamble": "templates/optim/preambles/saddle-pt.txt"
+    }
+  },
+  "schema": "optbench.score/v2",
+  "score": {
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 20261015,
+    "cap": 5064,
+    "includes_failures": true,
+    "iqr": 0.0,
+    "iqr_high": 0.0,
+    "iqr_low": 0.0,
+    "mean": 10123.1558,
+    "median": 10128.0,
+    "median_high": 10128.0,
+    "median_low": 10128.0,
+    "n": 20000,
+    "n_cap": 10,
+    "n_crash": 0,
+    "n_divergence": 19980,
+    "n_wrong_stationary": 0,
+    "nfailed": 19990,
+    "par2_mean": 10123.1558,
+    "par_applied": true,
+    "par_factor": 2,
+    "q25": 10128.0,
+    "q75": 10128.0,
+    "scoring": "par2-wilson-bootstrap",
+    "success_only_mean": 439.6,
+    "success_rate": 0.0005,
+    "successes": 10,
+    "wilson_high": 0.0009202228750329448,
+    "wilson_low": 0.000271621145015576
+  },
+  "template": "optim/saddle-pt"
+}
