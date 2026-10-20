@@ -1,0 +1,12 @@
+id = "gmin/lj75-stock"
+engine = "gmin"
+problem = "globalopt/lj75"
+code = "GMIN"
+code_version = "df8da599"
+commit = "df8da599267534fbe43a250e578f7396a7946311"
+algorithm = "basin-hopping"
+tuning = "stock (df8da599)"
+failure_cap = 8832091
+note = """
+Unmodified public svn.tar.bz2, SVNREV df8da599267534fbe43a250e578f7396a7946311. The tarball sha256 is 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. Stock basin-hopping: no SYMMETRISE, temperature 0.3, step 0.3, seed 2002, Lennard-Jones, cutoff 1.0e6. The archive convergence is kept: TARGET -397.4923304165, EDIFF 0.003, TIGHTCONV 1.0D-5, SLOPPYCONV 0.007, and STEPS 100000. DUMPINT 1000000 only suppresses restart files. The score is GMIN's function-call count. failure_cap 8832091 sits above every recorded call. The data file does not set it. 6 of 200 starts hit the target.
+"""

@@ -12,6 +12,4 @@ problem globalopt/lj75
 counter gmin
 reducer gmin
 tuning archive
-ranked false
-partial true
 potential native lennard-jones cutoff 1.0e6

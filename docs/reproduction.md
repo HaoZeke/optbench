@@ -60,7 +60,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj38/gmin-nosym | — | — | not rerun |
 | lj38/gmin-symmetrise | — | — | not rerun |
 | lj38/pele-basinhopping | force_calls 521595 | 688720 | not reproduced; pele_bh_defaults |
-| lj75/gmin | force_calls 60692 | 61316 | reproduced |
+| lj75/gmin | force_calls 60692 | 61316 | reproduced; residual |
 | lj98/gmin-nosym | — | — | not rerun |
 | lj98/gmin-symmetrise | — | — | not rerun |
 | tip4p10/gmin | — | — | not rerun |
@@ -217,6 +217,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 ## Residuals inside the band
 
+- globalopt/lj75/gmin: Ranked row gmin/lj75-stock is unmodified GMIN SVNREV df8da599267534fbe43a250e578f7396a7946311 with stock basin-hopping. The archive convergence is TARGET -397.4923304165, EDIFF 0.003, TIGHTCONV 1.0D-5, SLOPPYCONV 0.007, and STEPS 100000. 6 of 200 starts hit the target. The success-only mean is 1602834 against 60692, and nfailed is 194 against 0. The gap is left as found.
 - tsopt/LJ38/pele_cd: Inside the 10% band (263.52 vs 254). The same xyz-versus-con starting set as ts-ffd. findTS_local.py for the CD row does not pass orthogZeroEigs; the harness template sets orthog translations-rotations. The paper baseline is this 2014-stop mean, not the harness-stop mean 335.06.
 - tsopt/LJ38/pele_ffd: Inside the 10% band (207.51 vs 192). Archive run.sh unpacks coords-xyz.tar.gz (200 xyz, max pair about 4.4). The harness problem points at coords-con.tar.gz (max pair about 37). Kabsch RMS is about 6.33, so the sets are not the same geometry. Neither set has a pair past cutoff 40, and both drivers use RMS tolerance 1e-3/sqrt(114). The 8% residual is the starting set. The paper baseline is this 2014-stop mean, not the harness-stop mean 254.48.
 
