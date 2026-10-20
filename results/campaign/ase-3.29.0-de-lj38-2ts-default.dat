@@ -1,8 +1,8 @@
-force_calls 118804
-force_calls_min 12782
-force_calls_median 122364.5
-force_calls_max 247122
-nfailed 17
+force_calls 115649
+force_calls_min 4532
+force_calls_median 108824.5
+force_calls_max 241137
+nfailed 21
 starts 51
 code ASE
 code_version 3.29.0
@@ -14,22 +14,22 @@ problem double-ended-saddle-search/lj38_2ts_separation
 counter harness
 reducer capped
 parameter_source default
-method {"counter":"harness attach_ase_counter","parameter_source":"default","parameters":{"Nmin":5,"a":0.1,"astart":0.1,"climb":false,"downhill_check":false,"dt":0.011352812917316053,"dtmax":1.0,"fa":0.99,"fdec":0.5,"finc":1.1,"maxstep":0.2,"method":"improvedtangent","moving_images":5,"spring":0.1},"potential":{"epsilon":1.0,"kind":"lennard-jones","pbc":[false,false,false],"rc":40.0,"sigma":1.0},"profile":"default","reducer":"capped","stop":{"force_norm":0.001,"max_force_calls":250000,"max_steps":250000,"norm":"fmax"}}
-note ASE NEB defaults on the same pairs: spring 0.1, climb off, FIRE. The stop is the problem cap of 250000 force calls and fmax 0.001. archive/entries/double-ended-saddle-search/lj38_2ts_separation/pele/benchmark.dat records an observed maximum of 114490 force calls, and the archive ran uncapped. v2 success is the harness cap and the template fmax stop. The band has no reference saddle, so the Hessian and Kabsch RMSD are not applied.
+method {"counter":"harness attach_ase_counter","parameter_source":"default","parameters":{"Nmin":5,"a":0.07936142836436554,"astart":0.1,"climb":false,"downhill_check":false,"dt":0.08624177211987147,"dtmax":1.0,"fa":0.99,"fdec":0.5,"finc":1.1,"maxstep":0.2,"method":"improvedtangent","moving_images":5,"spring":0.1},"potential":{"epsilon":1.0,"kind":"lennard-jones","pbc":[false,false,false],"rc":40.0,"sigma":1.0},"profile":"default","reducer":"capped","stop":{"force_norm":0.001,"max_force_calls":250000,"max_steps":250000,"norm":"l2"}}
+note ASE NEB defaults on the same pairs: spring 0.1, climb off, FIRE. The harness stops when the L2 norm of the true force on the highest-energy image is at most 0.001, or at the problem cap of 250000 force calls. archive/entries/double-ended-saddle-search/lj38_2ts_separation/pele/benchmark.dat records an observed maximum of 114490 force calls, and the archive ran uncapped. v2 success is the harness cap and the L2 norm of the true force on the highest-energy image. The band has no reference saddle, so the Hessian and Kabsch RMSD are not applied.
 host cursor
 date 2026-10-20
 contributor Rohit Goswami
 scoring par2-wilson-bootstrap
-par2_mean 245869.6667
-par2_median 167862
-par2_median_low 128497
-par2_median_high 228202
-par2_iqr 410453
-success_rate 0.6666666667
-wilson_low 0.5296837786
-wilson_high 0.7803006815
+par2_mean 273911.3725
+par2_median 211227
+par2_median_low 131597
+par2_median_high 500000
+par2_iqr 423985.5
+success_rate 0.5882352941
+wilson_low 0.4516533721
+wilson_high 0.712456048
 par_applied true
 par_factor 2
 bootstrap_resamples 2000
 bootstrap_seed 20261015
-transition_states 34
+transition_states 30
