@@ -41,6 +41,8 @@ def test_the_ledger_covers_the_oracle_in_order():
     assert lanczos["checks"][0]["archive"] == 25
     assert lanczos["checks"][0]["rerun"] == 25
     assert lanczos["rerun"]["paper_baseline"] is True
+    assert lanczos["rerun"]["template"] == "tsase/lj38-lanczos"
+    assert lanczos["rerun"]["path"] == "results/campaign/tsase-1.0-lj38-lanczos.dat"
     assert reproduction_errors(ROOT) == []
 
 
