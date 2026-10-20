@@ -121,6 +121,13 @@ def _one_repetition(
         "potfiles",
     ):
         (work / relative).mkdir(parents=True, exist_ok=True)
+    # r2549 creates states/state_table only when it creates the states
+    # directory. This harness creates that directory first, so the KMC
+    # step opens a missing file once confidence is reached. An empty
+    # table is the file the server would have written.
+    table = work / "states" / "state_table"
+    if not table.exists():
+        table.write_text("", encoding="utf-8")
     try:
         os.chdir(work)
         import inspect
