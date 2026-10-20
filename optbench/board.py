@@ -1321,13 +1321,20 @@ def _headers(problem: dict) -> list[str]:
 def _version_text(row: dict) -> str:
     """Version cell.
 
-    The LJ38 SDLBFGS row uses the registry name plus the short commit,
-    the same shape as the archived TSASE labels.
+    A latest TSASE row is the registry name, the 1.0 string, and the
+    short commit. Archived TSASE 410 and TSASE 408 labels stay on the
+    2014 table.
     """
     code = str(row.get("code") or "")
     version = str(row.get("code_version") or "")
-    if row.get("template") == "tsase/lj38-sdlbfgs" and code.lower() == "tsase":
-        code = "TSASE"
+    commit = str(row.get("commit") or "")
+    if (
+        code.lower() == "tsase"
+        and version == "1.0"
+        and commit.startswith("98aac60")
+        and row.get("current") is True
+    ):
+        return "TSASE 1.0 (98aac60)"
     return f"{code} {version}".strip()
 
 

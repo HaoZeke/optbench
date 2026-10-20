@@ -2449,7 +2449,7 @@
       "sella/lj38-min-default 2.6.0 default campaign, asv 6cfb60c": 0.16902834256532548,
       "sella/lj38-min-tuned 2.6.0 tuned campaign, asv 6cfb60c": 0.6065754412629222,
       "tsase/lbfgs-lj38 1.0 default campaign 98aac60": 0.7613048590342085,
-      "tsase/lj38-sdlbfgs 98aac60 default campaign 98aac60": 0.7613048590342085,
+      "tsase/lj38-sdlbfgs 1.0 default campaign 98aac60": 0.7613048590342085,
       "tsase/mdmin-lj38 1.0 default campaign 98aac60": 0.0
     },
     "rho": {
@@ -3160,7 +3160,7 @@
         0.996,
         0.996
       ],
-      "tsase/lj38-sdlbfgs 98aac60 default campaign 98aac60": [
+      "tsase/lj38-sdlbfgs 1.0 default campaign 98aac60": [
         0.0,
         0.169,
         0.866,
@@ -3277,7 +3277,7 @@
       "sella/lj38-min-default 2.6.0 default campaign, asv 6cfb60c": 1.0,
       "sella/lj38-min-tuned 2.6.0 tuned campaign, asv 6cfb60c": 1.0,
       "tsase/lbfgs-lj38 1.0 default campaign 98aac60": 0.996,
-      "tsase/lj38-sdlbfgs 98aac60 default campaign 98aac60": 0.996,
+      "tsase/lj38-sdlbfgs 1.0 default campaign 98aac60": 0.996,
       "tsase/mdmin-lj38 1.0 default campaign 98aac60": 0.0
     },
     "taus": [
@@ -4059,7 +4059,7 @@
       "call_unit": "total",
       "cap": 10000,
       "code": "tsase",
-      "code_version": "98aac60",
+      "code_version": "1.0",
       "commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218",
       "comparable": true,
       "counter": "harness",

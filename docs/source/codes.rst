@@ -736,7 +736,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="double-ended-saddle-search/lj38" data-template="tsase/ci-neb">
    <td>LJ38 double-ended saddle</td>
    <td data-field="template">tsase/ci-neb</td>
-   <td data-field="version">tsase 1.0</td>
+   <td data-field="version">TSASE 1.0 (98aac60)</td>
    <td data-field="commit">98aac60b5d99</td>
    <td data-field="par2_mean">3119.56</td>
    <td data-field="mean_calls">1726.98</td>
@@ -747,7 +747,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="tsase/ci-neb">
    <td>lj38_2ts_separation</td>
    <td data-field="template">tsase/ci-neb</td>
-   <td data-field="version">tsase 1.0</td>
+   <td data-field="version">TSASE 1.0 (98aac60)</td>
    <td data-field="commit">98aac60b5d99</td>
    <td data-field="par2_mean">18812.1</td>
    <td data-field="mean_calls">9690.35</td>
@@ -758,7 +758,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="double-ended-saddle-search/pt-island" data-template="tsase/ci-neb">
    <td>pt-island</td>
    <td data-field="template">tsase/ci-neb</td>
-   <td data-field="version">tsase 1.0</td>
+   <td data-field="version">TSASE 1.0 (98aac60)</td>
    <td data-field="commit">98aac60b5d99</td>
    <td data-field="par2_mean">2524.53</td>
    <td data-field="mean_calls">639.61</td>
@@ -769,7 +769,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="lowest-eigenvector/lj38" data-template="tsase/mode-lj38">
    <td>lj38</td>
    <td data-field="template">tsase/mode-lj38</td>
-   <td data-field="version">tsase 1.0</td>
+   <td data-field="version">TSASE 1.0 (98aac60)</td>
    <td data-field="commit">98aac60b5d99</td>
    <td data-field="par2_mean">2420.61</td>
    <td data-field="mean_calls">267.945</td>
@@ -780,7 +780,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="minimization/lj38" data-template="tsase/lbfgs-lj38">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="template">tsase/lbfgs-lj38</td>
-   <td data-field="version">tsase 1.0</td>
+   <td data-field="version">TSASE 1.0 (98aac60)</td>
    <td data-field="commit">98aac60b5d99</td>
    <td data-field="par2_mean">257.2</td>
    <td data-field="mean_calls">177.96</td>
@@ -791,7 +791,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="minimization/morse-bulk" data-template="tsase/lbfgs-morse">
    <td>Morse bulk</td>
    <td data-field="template">tsase/lbfgs-morse</td>
-   <td data-field="version">tsase 1.0</td>
+   <td data-field="version">TSASE 1.0 (98aac60)</td>
    <td data-field="commit">98aac60b5d99</td>
    <td data-field="par2_mean">17606.4</td>
    <td data-field="mean_calls">50.37</td>
@@ -802,7 +802,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="neb/Pt-heptamer" data-template="tsase/ci-neb">
    <td>Pt-heptamer</td>
    <td data-field="template">tsase/ci-neb</td>
-   <td data-field="version">tsase 1.0</td>
+   <td data-field="version">TSASE 1.0 (98aac60)</td>
    <td data-field="commit">98aac60b5d99</td>
    <td data-field="par2_mean">1521.15</td>
    <td data-field="mean_calls">1521.15</td>
@@ -813,7 +813,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="tsopt/LJ38" data-template="tsase/dimer-lj38">
    <td>LJ38</td>
    <td data-field="template">tsase/dimer-lj38</td>
-   <td data-field="version">tsase 1.0</td>
+   <td data-field="version">TSASE 1.0 (98aac60)</td>
    <td data-field="commit">98aac60b5d99</td>
    <td data-field="par2_mean">20000</td>
    <td data-field="mean_calls">10000</td>
@@ -824,7 +824,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="tsopt/pt-island" data-template="tsase/dimer-pt">
    <td>pt-island</td>
    <td data-field="template">tsase/dimer-pt</td>
-   <td data-field="version">tsase 1.0</td>
+   <td data-field="version">TSASE 1.0 (98aac60)</td>
    <td data-field="commit">98aac60b5d99</td>
    <td data-field="par2_mean">1144.31</td>
    <td data-field="mean_calls">1144.31</td>
