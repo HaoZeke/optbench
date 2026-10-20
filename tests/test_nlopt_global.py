@@ -54,11 +54,14 @@ def test_templates_pin_the_registry_commit():
             assert int(template["stop"]["max_force_calls"]) == HOP_CAPS[name]
             assert float(template["nlopt"]["displacement"]) == 0.5
             assert float(template["nlopt"]["temperature"]) == 0.8
-            assert float(template["nlopt"]["tolg"]) == 1e-5
+            assert float(template["nlopt"]["max_move"]) == 0.2
+            assert float(template["nlopt"]["converged_force"]) == 0.001
+            assert int(template["nlopt"]["max_iterations"]) == 1000
             assert int(template["nlopt"]["local_maxeval"]) == 4000
             assert "maxstep" not in template["nlopt"]
             assert "core_radius" not in template["nlopt"]
-            assert "stock NLopt LD_LBFGS" in template["note"]
+            assert "tolg" not in template["nlopt"]
+            assert "max_move" in template["note"]
             assert "1e-12" in template["note"]
         else:
             assert template["problem"] == "globalopt/lj38"
@@ -373,7 +376,9 @@ def test_the_c_quench_matches_the_python_quench(monkeypatch):
     kwargs = {
         "cap": 20000,
         "local_max": 4000,
-        "tolg": 1e-5,
+        "converged_force": 0.001,
+        "max_move": 0.2,
+        "max_iterations": 1000,
     }
     monkeypatch.setenv("OPTBENCH_PYTHON_QUENCH", "1")
     python_counter = HarnessCounter(cache=True, cap=20000)
@@ -411,7 +416,7 @@ def test_a_checkpoint_resumes_the_same_trajectory(tmp_path: Path):
     partial = run_job(partial_job)
     assert partial["force_calls"] < full["force_calls"]
     saved = json.loads((tmp_path / "progress.json").read_text(encoding="utf-8"))
-    assert saved["schema"] == "optbench.bh-progress/v2"
+    assert saved["schema"] == "optbench.bh-progress/v3"
     assert saved["potential"] == "lj-cut"
     assert int(saved["calls"]) == partial["force_calls"]
     resumed = run_job(dict(partial_job, max_hops=None))

@@ -378,6 +378,8 @@ def quench_library() -> ctypes.CDLL | None:
         ctypes.c_int,
         ctypes.c_double,
         ctypes.c_double,
+        ctypes.c_double,
+        ctypes.c_int,
         ctypes.POINTER(_QuenchOut),
     ]
     lib.optbench_lj_quench.restype = ctypes.c_int
@@ -390,14 +392,17 @@ def lj_lbfgs_quench(
     *,
     cap: int,
     local_max: int,
-    tolg: float,
+    converged_force: float,
+    max_move: float,
+    max_iterations: int,
     cutoff: float = 40.0,
 ):
-    """One stock LD_LBFGS quench, with no coordinate bounds.
+    """One LD_LBFGS quench bounded by eOn's per-step ``max_move``.
 
     Returns ``(point, energy, min_distance, calls, code, capped)``, or
     ``None`` when the native quench is unavailable. ``calls`` counts fresh
     geometries only. ``capped`` means the next geometry was refused.
+    ``converged_force`` is the Euclidean force norm.
     """
     import numpy as np
 
@@ -414,8 +419,10 @@ def lj_lbfgs_quench(
         int(point.size),
         int(cap),
         int(local_max),
-        float(tolg),
+        float(converged_force),
         float(cutoff),
+        float(max_move),
+        int(max_iterations),
         ctypes.byref(out),
     )
     if code != 0:

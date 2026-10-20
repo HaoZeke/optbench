@@ -128,11 +128,15 @@ from the scalar sum by about 1e-12 in the energy on the LJ98 minimum.
 ``OPTBENCH_SCALAR_LJ=1`` selects the scalar kernel. The potential is the
 same either way: unshifted 12-6, cutoff 40, no quadratic core. A
 coincident pair is the true singularity. There is no NLopt entry under
-``archive/entries/globalopt``. The archived eOn basin hop
-(``archive/entries/globalopt/lj38/eon-basinhopping/config.ini``,
-displacement 0.5, temperature 8000; ``in.lammps`` ``lj/cut/opt 40.0``) does
-not set a core or an L-BFGS step bound, so the quench is stock NLopt
-LD_LBFGS. A dissociated or non-finite result is a failure.
+``archive/entries/globalopt``. The quench follows the archived eOn basin
+hop (``opt_method=lbfgs``, displacement 0.5, temperature 8000,
+``in.lammps`` ``lj/cut/opt 40.0``). eOn r2549 defaults ``max_move`` to 0.2
+(``client/Parameters.cpp`` line 108). The archive ``config.ini`` does not
+set it, and lines 11-12 set ``converged_force = 0.001`` and
+``max_iterations = 1000``. NLopt cannot scale an L-BFGS step, so each
+solve is limited to a window of that half-width and the accepted
+displacement is scaled so the largest atomic move is at most 0.2.
+A dissociated or non-finite result is a failure.
 
 The v2 counter, the seed sample, and the noise rule are ``docs/v2.md``.
 ``optbench statistics`` reads asv tracks from ``results/asv`` (``docs/asv.md``).

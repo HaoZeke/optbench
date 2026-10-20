@@ -16,14 +16,19 @@ The recorded geometry is the point the search returned, and the recorded
 energy is the harness value of that point. A non-finite energy is a
 divergence, scored as a failure.
 
-Basin hopping uses one stock NLopt LD_LBFGS quench per trial. There is
-no coordinate step bound and no quadratic core. The archive has no NLopt
-global row; the eOn basin hop uses plain cutoff Lennard-Jones. A quench
-that dissociates the cluster is a finding and scores as a failure. The
-quench calls the NLopt C API directly. A fresh geometry is still one
-harness force call, and a repeated coordinate is not counted again. A
-progress file written after a finished hop resumes that hop, so a
-restarted start repeats no completed quench.
+Basin hopping quenches each trial with NLopt LD_LBFGS. The archive
+protocol is eOn basin hopping with ``opt_method=lbfgs``. eOn r2549
+moves any atom by at most ``max_move`` in one optimizer step, default
+0.2, and the archive config leaves that default in place. NLopt cannot
+scale a step inside LD_LBFGS, so each solve runs in a window of
+half-width ``max_move`` centered on the current point and the accepted
+displacement is scaled the way eOn scales it. The window is recentered
+after every solve. A coincident pair is the true singularity. A
+dissociated or non-finite result is a failure. The quench calls the
+NLopt C API directly. A fresh geometry is still one harness force call,
+and a repeated coordinate is not counted again. A progress file written
+after a finished hop resumes that hop, so a restarted start repeats no
+completed quench.
 """
 
 from __future__ import annotations
@@ -46,7 +51,7 @@ from optbench.v2 import collect_provenance, write_starts
 MAXEVAL = 5
 MAXTIME = 6
 _REFERENCE_NAME = "lj38_global_minimum.con"
-_PROGRESS_SCHEMA = "optbench.bh-progress/v2"
+_PROGRESS_SCHEMA = "optbench.bh-progress/v3"
 
 
 def duplicate_sites(coords: np.ndarray) -> bool:
@@ -155,13 +160,15 @@ def _settings(problem: dict, template: dict) -> dict:
         for name in ("maxstep", "core_radius"):
             if name in section:
                 raise ValueError(
-                    f"{template['id']} nlopt.{name} is not in the archive and is not stock LD_LBFGS"
+                    f"{template['id']} nlopt.{name} is not the eOn per-step move bound"
                 )
-        for name in ("displacement", "temperature", "tolg"):
+        for name in ("displacement", "temperature", "max_move", "converged_force"):
             if name not in section:
                 raise ValueError(f"{template['id']} needs nlopt.{name}")
             if float(section[name]) <= 0.0:
                 raise ValueError(f"{template['id']} nlopt.{name} must be positive")
+        if "max_iterations" not in section or int(section["max_iterations"]) <= 0:
+            raise ValueError(f"{template['id']} needs a positive nlopt.max_iterations")
         if "local_maxeval" not in section or int(section["local_maxeval"]) <= 0:
             raise ValueError(f"{template['id']} needs a positive nlopt.local_maxeval")
         half_width = float(domain["half_width"]) if "half_width" in domain else None
@@ -237,13 +244,43 @@ def _search_value(
     return float(value), np.asarray(gradient, dtype=np.float64), float(minimum)
 
 
+def _force_norm(gradient: np.ndarray) -> float:
+    """Euclidean norm, summed in coordinate order so it matches the C quench."""
+    total = 0.0
+    for value in np.asarray(gradient, dtype=np.float64).reshape(-1):
+        number = float(value)
+        total += number * number
+    return math.sqrt(total)
+
+
+def _scale_atomic_step(anchor: np.ndarray, point: np.ndarray, max_move: float) -> np.ndarray:
+    """eOn ``maxAtomMotionAppliedV``: scale when the largest atomic move is too big."""
+    start = np.asarray(anchor, dtype=np.float64).reshape(-1)
+    trial = np.asarray(point, dtype=np.float64).reshape(-1)
+    motion = 0.0
+    for atom in range(0, start.size, 3):
+        dx = float(trial[atom]) - float(start[atom])
+        dy = float(trial[atom + 1]) - float(start[atom + 1])
+        dz = float(trial[atom + 2]) - float(start[atom + 2])
+        length = math.sqrt(dx * dx + dy * dy + dz * dz)
+        if length > motion:
+            motion = length
+    factor = max_move / motion if motion > max_move else 1.0
+    dest = np.empty(start.size, dtype=np.float64)
+    for index in range(start.size):
+        dest[index] = float(start[index]) + factor * (float(trial[index]) - float(start[index]))
+    return dest
+
+
 def _native_quench(
     counter: HarnessCounter,
     origin: np.ndarray,
     *,
     cap: int,
     local_max: int,
-    tolg: float,
+    converged_force: float,
+    max_move: float,
+    max_iterations: int,
 ) -> tuple[np.ndarray, float, int | None] | None:
     """The C quench, or ``None`` when that library cannot be built."""
     from optbench.fastpot import lj_lbfgs_quench
@@ -255,7 +292,9 @@ def _native_quench(
         origin,
         cap=remaining,
         local_max=int(local_max),
-        tolg=float(tolg),
+        converged_force=float(converged_force),
+        max_move=float(max_move),
+        max_iterations=int(max_iterations),
     )
     if got is None:
         return None
@@ -272,9 +311,16 @@ def _quench(
     *,
     cap: int,
     local_max: int,
-    tolg: float,
+    converged_force: float,
+    max_move: float,
+    max_iterations: int,
 ) -> tuple[np.ndarray, float, int | None]:
-    """Stock LD_LBFGS. The returned energy is the harness potential."""
+    """LD_LBFGS with one eOn ``max_move`` window per solve.
+
+    The returned energy is the harness potential. NLopt has no per-step
+    scale, so the window keeps the line search near the current point and
+    the accepted displacement is scaled afterwards.
+    """
     native = None
     if os.environ.get("OPTBENCH_PYTHON_QUENCH") != "1":
         native = _native_quench(
@@ -282,51 +328,82 @@ def _quench(
             origin,
             cap=cap,
             local_max=local_max,
-            tolg=tolg,
+            converged_force=converged_force,
+            max_move=max_move,
+            max_iterations=max_iterations,
         )
     if native is not None:
         return native
     import nlopt
 
-    x = np.asarray(origin, dtype=np.float64).reshape(-1).copy()
+    working = np.asarray(origin, dtype=np.float64).reshape(-1).copy()
     opened = counter.calls
-    value, gradient, _minimum = _search_value(counter, x)
-    if float(np.max(np.abs(gradient))) <= tolg:
-        return x, float(value), 1
-    remain = min(int(local_max) - (counter.calls - opened), int(cap) - counter.calls)
-    if remain < 1:
-        return x, float(value), None
+    value, gradient, _minimum = _search_value(counter, working)
+    if math.isfinite(value) and _force_norm(gradient) < converged_force:
+        return working, float(value), 1
 
-    def objective(point, grad):
-        reported, reported_grad, _pair = _search_value(counter, point)
-        if grad.size:
-            grad[:] = reported_grad
-        return reported
+    def budget() -> int:
+        return min(int(local_max) - (counter.calls - opened), int(cap) - counter.calls)
 
-    opt = nlopt.opt(nlopt.LD_LBFGS, x.size)
-    opt.set_min_objective(objective)
-    opt.set_xtol_rel(1e-14)
-    opt.set_ftol_abs(1e-14)
-    opt.set_maxeval(int(remain))
-    opt.set_param("tolg", tolg)
-    local_code: int | None = None
-    try:
-        returned = np.asarray(opt.optimize(x.copy()), dtype=np.float64)
-        local_code = int(opt.last_optimize_result())
-    except ForceCallCap:
-        raise
-    except Exception as exc:
-        if "ForceCallCap" in type(exc).__name__ or "force-call cap" in str(exc):
-            raise ForceCallCap(str(exc)) from exc
+    for _iteration in range(int(max_iterations)):
+        remain = budget()
+        if remain < 1:
+            break
+        anchor = working.copy()
+        holder = {"last": anchor.copy(), "capped": False}
+
+        def objective(point, grad, holder=holder):
+            if counter.calls - opened >= int(local_max):
+                opt.force_stop()
+                if grad.size:
+                    grad[:] = 0.0
+                return 1.0e300
+            try:
+                reported, reported_grad, _pair = _search_value(counter, point)
+            except ForceCallCap:
+                holder["capped"] = True
+                opt.force_stop()
+                if grad.size:
+                    grad[:] = 0.0
+                return 1.0e300
+            holder["last"] = np.array(point, dtype=np.float64, copy=True)
+            if grad.size:
+                grad[:] = reported_grad if math.isfinite(reported) else 0.0
+            if math.isfinite(reported) and _force_norm(reported_grad) < converged_force:
+                opt.force_stop()
+            if not math.isfinite(reported):
+                return 1.0e300
+            return float(reported)
+
+        opt = nlopt.opt(nlopt.LD_LBFGS, working.size)
+        opt.set_min_objective(objective)
+        lower = [float(anchor[index]) - float(max_move) for index in range(anchor.size)]
+        upper = [float(anchor[index]) + float(max_move) for index in range(anchor.size)]
+        opt.set_lower_bounds(lower)
+        opt.set_upper_bounds(upper)
+        opt.set_xtol_rel(1e-14)
+        opt.set_ftol_abs(1e-14)
+        opt.set_maxeval(int(remain))
+        opt.set_param("tolg", 1e-14)
         try:
-            local_code = int(opt.last_optimize_result())
-        except Exception:
-            local_code = None
-        returned = x
-    if returned.size != x.size or not bool(np.all(np.isfinite(returned))):
-        return x, float(value), local_code
-    reported, _reported_grad, _pair = _search_value(counter, returned)
-    return returned, float(reported), local_code
+            opt.optimize(anchor.copy())
+        except ForceCallCap:
+            raise
+        except Exception as exc:
+            if "ForceCallCap" in type(exc).__name__ or "force-call cap" in str(exc):
+                raise ForceCallCap(str(exc)) from exc
+        if holder["capped"]:
+            raise ForceCallCap(f"force-call cap {cap}")
+        scaled = _scale_atomic_step(anchor, holder["last"], float(max_move))
+        if np.array_equal(scaled, anchor):
+            break
+        if not np.array_equal(scaled, holder["last"]) and budget() < 1:
+            break
+        working = scaled
+        value, gradient, _minimum = _search_value(counter, working)
+        if math.isfinite(value) and _force_norm(gradient) < converged_force:
+            return working, float(value), 1
+    return working, float(value), 5
 
 
 def _json_energy(value: float) -> float | str:
@@ -421,7 +498,9 @@ def _run_basin_hop(job: dict) -> dict:
         quench = {
             "cap": cap,
             "local_max": int(job["local_maxeval"]),
-            "tolg": float(job["tolg"]),
+            "converged_force": float(job["converged_force"]),
+            "max_move": float(job["max_move"]),
+            "max_iterations": int(job["max_iterations"]),
         }
         checkpoint = Path(job["checkpoint"]) if job.get("checkpoint") else None
         checkpoint_calls = int(job.get("checkpoint_calls") or 0)
@@ -912,11 +991,12 @@ def _job(index: int, name: str, coords: np.ndarray, settings: dict, reference: f
         "reference": reference,
         "tolerance": tolerance,
     }
-    for name in ("displacement", "temperature", "tolg"):
+    for name in ("displacement", "temperature", "max_move", "converged_force"):
         if section.get(name) is not None:
             job[name] = float(section[name])
-    if section.get("local_maxeval") is not None:
-        job["local_maxeval"] = int(section["local_maxeval"])
+    for name in ("max_iterations", "local_maxeval"):
+        if section.get(name) is not None:
+            job[name] = int(section[name])
     return job
 
 
@@ -1092,9 +1172,9 @@ def _write_campaign(
         "reference_energy": reference,
         "seed": "start index",
     }
-    for name in ("displacement", "temperature", "tolg", "local_maxeval"):
+    for name in ("displacement", "temperature", "max_move", "converged_force", "max_iterations", "local_maxeval"):
         if section.get(name) is not None:
-            passed[name] = int(section[name]) if name == "local_maxeval" else float(section[name])
+            passed[name] = int(section[name]) if name in ("max_iterations", "local_maxeval") else float(section[name])
     passed = {key: value for key, value in passed.items() if value is not None}
     provenance = collect_provenance(
         code=str(template.get("code")),
