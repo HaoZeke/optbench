@@ -35,7 +35,7 @@ def test_the_ledger_covers_the_oracle_in_order():
             assert row["cause"]
         if (row.get("rerun") or {}).get("paper_baseline"):
             assert status == "reproduced"
-    assert counts == {"reproduced": 47, "not_reproduced": 29, "not_rerun": 75}
+    assert counts == {"reproduced": 46, "not_reproduced": 30, "not_rerun": 75}
     assert reproduction_errors(ROOT) == []
 
 
@@ -81,15 +81,22 @@ def test_a_paper_baseline_outside_the_archive_fails(tmp_path: Path):
     assert any("force_calls" in line and "1000" in line for line in errors)
 
 
-def test_lj150_nosym_is_inside_the_published_deviation():
-    from optbench.reproduction import standard_error, within_mean
+def test_lj150_nosym_is_outside_one_standard_error():
+    from optbench.reproduction import RANKED_MISSES, standard_error, within_mean
 
     ledger = {row_id(row): row for row in load_ledger(ROOT / "oracle" / "reproduction.jsonl")}
     row = ledger["globalopt/lj150/gmin-nosym"]
-    assert row["status"] == "reproduced"
-    assert row["rerun"]["paper_baseline"] is True
+    assert row["status"] == "not_reproduced"
+    assert row["cause"] == "lj150_gmin_nosym"
+    assert row["rerun"]["paper_baseline"] is False
+    assert row["rerun"]["code_version"] == "df8da5992675"
     assert row["rerun"]["template"] == "gmin/lj150-nosym"
+    dat = (ROOT / "results/campaign/gmin-df8da5992675-lj150-nosym.dat").read_text(encoding="utf-8")
+    assert "ranked false" not in dat
+    assert "partial true" not in dat
+    assert "counter harness" in dat
     assert row["failure_check"]["rerun"] == 0
+    assert row["failure_check"]["ok"] is True
     archived = {
         "basin_hopping_steps_mean": "3.28089e+03",
         "basin_hopping_steps_stddev": "2.72295e+03",
@@ -99,15 +106,21 @@ def test_lj150_nosym_is_inside_the_published_deviation():
         "cpu_time_stddev": "2.3615e+02",
     }
     by_metric = {item["metric"]: item for item in row["checks"]}
-    for metric, item in by_metric.items():
-        error = standard_error(archived, metric, item["archive"])
-        assert item["se"] == error
-        assert item["ok"] is True
-        assert within_mean(item["archive"], item["rerun"], error)
-        assert abs(item["rerun"] - item["archive"]) / abs(item["archive"]) > 0.10
-    steps = by_metric["basin_hopping_steps_mean"]
-    assert steps["rerun"] == 3628.18
-    assert not within_mean(steps["archive"], steps["archive"] * 2.2, steps["se"])
+    calls = by_metric["energy_calls_mean"]
+    assert standard_error(archived, "energy_calls_mean", calls["archive"]) is None
+    assert calls["se"] is None
+    assert calls["ok"] is False
+    assert calls["rerun"] == 768457.79
+    standard_error_of_mean = 584541.29 / 10
+    assert not within_mean(calls["archive"], calls["rerun"], standard_error_of_mean)
+    assert within_mean(calls["archive"], calls["rerun"], 584541.29)
+    assert "quartiles 1544.75, 3002.5, and 4633" in row["cause_detail"]
+    assert row_id(row) in RANKED_MISSES
+    held = holdback(ROOT)
+    assert ("globalopt/lj150", "gmin/lj150-nosym") not in held.templates
+    problem = load_problem(ROOT / "problems" / "globalopt" / "lj150.toml")
+    html = problem_html(problem, load_oracle(ROOT / "oracle" / "entries.jsonl"))
+    assert "gmin-nosym · not reproduced" in html
 
 
 def test_legacy_rows_that_miss_are_marked_in_place():

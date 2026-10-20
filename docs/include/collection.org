@@ -1149,7 +1149,7 @@
    <h3>Legacy 2014 archive</h3>
    <details class="bench-details">
    <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. The columns are the archived keys.</caption>
    <thead><tr>
@@ -1182,7 +1182,7 @@
    </tr>
    <tr id="globalopt-lj150-gmin-nosym">
    <td class="num">2</td>
-   <td class="text">gmin-nosym</td>
+   <td class="text">gmin-nosym · not reproduced</td>
    <td class="text">GMIN</td>
    <td class="num">3.28089e+03</td>
    <td class="num">2.72295e+03</td>

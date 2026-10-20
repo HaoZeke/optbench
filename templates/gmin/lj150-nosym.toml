@@ -8,7 +8,7 @@ algorithm = "no symmetrisation"
 tuning = "archive"
 reducer = "harness"
 failure_cap = 10000000
-paper_baseline = true
+paper_baseline = false
 note = '''
-Serial GMIN, MPI off, native all-pairs Lennard-Jones. The data file is the archived gmin-nosym input, copied verbatim: temperature 1.1, step 0.43 0.46, EDIFF 0.003, target -893.310258, NEWRESTART 1500, no SYMMETRISE and no RANSEED. Starts are coords.1 through coords.100 from lj150_clusters.tgz. The score is the gsaveit target-hit line (quenches and function calls) and the mc timer. OMP_NUM_THREADS is 1.
+Serial GMIN df8da5992675, MPI off, native all-pairs Lennard-Jones. The data file is the archived gmin-nosym input, copied verbatim: temperature 1.1, step 0.43 0.46, EDIFF 0.003, target -893.310258, NEWRESTART 1500, no SYMMETRISE and no RANSEED. Starts are coords.1 through coords.100 from lj150_clusters.tgz. The harness score is GMIN's native target-hit counter (quenches and function calls) and the mc timer. OMP_NUM_THREADS is 1. The archived means stay the paper row.
 '''
