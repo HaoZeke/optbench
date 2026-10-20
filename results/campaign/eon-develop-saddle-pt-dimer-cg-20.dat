@@ -5,8 +5,8 @@ force_calls_median 8143547.0
 call_unit total
 nfailed 0
 code eOn
-code_version (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)
-commit a7aa57472fb7d823953fd36b78cd755fa4842d30
+code_version (develop 500350d9)
+commit 500350d9fae881f06c7ef194e5868da079c4be5a
 algorithm Dimer CG
 template eon/develop-saddle-pt-dimer-cg-20
 problem saddle-search/pt-island
@@ -17,5 +17,5 @@ unique_saddles 56
 fraction_connected 0.5437258778122941
 total_searches 10623
 qualifying 27
-client_calls 5174786
-note Stock unpatched eOn develop a7aa57472fb7d823953fd36b78cd755fa4842d30, Fortran build, harness morse/smooth/linear, seed 1000, pt-island, stop at 27 good saddles below 1.5 eV. HarnessCounter is 8143547 and the client search table is 5174786. The archived eon-dimer-cg-20-rotations mean stays the paper row.
+client_calls 8134662
+note Stock unpatched eOn develop 500350d9fae881f06c7ef194e5868da079c4be5a, Fortran build, harness morse/smooth/linear, seed 1000, pt-island, stop at 27 good saddles below 1.5 eV. Optimizer opt_method=cg and Dimer rotations_max=20. HarnessCounter is 8143547. The client search table through that saddle is 8134662 (sad-fcs 6206799, mins-fcs 1927863, pref-fcs 0). a7aa574's table was 5174786 on the same harness total because process search read only the primary potential: job 0_10 logged "Got 593 calls in the saddle search" and results.dat total_force_calls 872, while the bridge log counted 1421 runs (extpot instance 0: 767, instance 1: 549, instance 2: 105), pref-fcs 0, and Min2's 105 calls inside mins-fcs. 500350d9 adds the clone to force_calls_saddle; that job logged "Got 1142 calls" and a 16-search sample moved from table 8232 to 12915 against harness 12920. The remaining 8885 harness calls are the one search after the stopping line (730+275) and the eight searches Local.submit_jobs finishes after register_results.

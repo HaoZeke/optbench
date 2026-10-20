@@ -18,4 +18,4 @@ fraction_connected 0.6535559802836737
 total_searches 9941
 qualifying 27
 client_calls 6499595
-note Stock unpatched EON SVN r2549, Fortran build, harness morse/smooth/linear, seed 1000, pt-island, stop at 27 good saddles below 1.5 eV. The archived eon-dimer-cg-20-rotations mean stays the paper row.
+note Stock unpatched EON SVN r2549, Fortran build, harness morse/smooth/linear, seed 1000, pt-island, stop at 27 good saddles below 1.5 eV. Optimizer opt_method=cg and Dimer rotations_max=20. HarnessCounter is 6507064 and the client search table is 6499595.

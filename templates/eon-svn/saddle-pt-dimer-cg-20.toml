@@ -11,7 +11,7 @@ tuning = "default"
 kind = "akmc"
 kernel = "morse"
 asv_class = "EonSvnSaddlePtDimerCg20"
-note = """Stock EON SVN r2549, tag v1.1.2549 of the henkelmangroup mirror, built with Fortran and not patched. The archived eon-dimer-cg-20-rotations number stays the paper row. This run is the same Pt-island start, the same 0.001 eV/Ang force stop, and the same stop at 27 good saddles below 1.5 eV. Optimizer opt_method is cg, max_move 0.2, max_iterations 1000. Dimer rotations_max is 20 and converged_angle is 5. improved and the dimer rotation method stay at the r2549 client defaults, improved true and conjugate gradient. Displacement is atoms 0-6, radius 3.3, magnitude 0.1. Temperature 700 K, confidence 1.1, prefactor 5e12, max_energy 5. Communicator num_jobs is 8. Bowl breakout stays off. The potential is the harness morse/smooth/linear kernel. Seed 1000."""
+note = """Stock EON SVN r2549, tag v1.1.2549 of the henkelmangroup mirror, built with Fortran and not patched. Ranked beside the archived Eon r2213 row and the eOn develop row, on the Pt-island start, the 0.001 eV/Ang force stop, and the stop at 27 good saddles below 1.5 eV. Optimizer opt_method is cg, max_move 0.2, max_iterations 1000. Dimer rotations_max is 20 and converged_angle is 5. Dimer opt_method is omitted; the r2549 default is ImprovedDimer::OPT_CG and dimerImproved defaults true. Displacement is atoms 0-6, radius 3.3, magnitude 0.1. Temperature 700 K, confidence 1.1, prefactor 5e12, max_energy 5. Communicator num_jobs is 8. Bowl breakout stays off. The potential is the harness morse/smooth/linear kernel. Seed 1000. The ranked score is the harness total."""
 
 seeds = [1000]
 starts = ["pt-island"]
