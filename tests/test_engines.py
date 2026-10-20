@@ -171,3 +171,26 @@ def test_partn_engine_is_dispatched(monkeypatch, tmp_path: Path):
     )
     assert captured == {"problem": "neb/Pt-heptamer", "template": "partn/artn", "workers": 2}
     assert summary["force_calls"] == 3
+
+
+def test_pt_island_odata_freezes_the_slab_and_sets_the_cell(tmp_path: Path):
+    import numpy as np
+
+    from optbench.engines.optim_search import _fortran_float, _hef_odata, _stock_gmax
+
+    coords = np.zeros((343, 3), dtype=np.float64)
+    frozen = np.zeros(343, dtype=bool)
+    frozen[:168] = True
+    box = np.array([19.2088, 19.0118, 30.0], dtype=np.float64)
+    _hef_odata(tmp_path, coords, frozen, box, 10000, 0.001)
+    text = (tmp_path / "odata").read_text(encoding="utf-8")
+    assert "BULK 6.630583 6.562582 10.355540\n" in text
+    assert "PARAMS 4.64881590 6.630583 6.562582 10.355540 3.27925440110459095616\n" in text
+    assert f"BFGSCONV {_fortran_float(_stock_gmax(175, 0.001))}\n" in text
+    assert "USEDIAG 3\n" in text
+    assert "NOHESS\n" in text
+    assert "READVEC\n" in text
+    assert "BFGSTS 10000 10 100 1.0D-10 10000\n" in text
+    freeze = [line for line in text.splitlines() if line.startswith("FREEZE ")]
+    indices = [int(token) for line in freeze for token in line.split()[1:]]
+    assert indices == list(range(1, 169))

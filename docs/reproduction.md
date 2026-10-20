@@ -211,7 +211,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | pt-island/eon-lanczos | force_calls 143 | 146 | reproduced |
 | pt-island/eon-lanczos-improved | force_calls 106 | 106 | reproduced |
 | pt-island/optim_cd | — | — | not rerun |
-| pt-island/optim_ffd | — | — | not rerun |
+| pt-island/optim_ffd | — | — | archive |
 | pt-island/pele | force_calls 88 | 88.551 | reproduced |
 | pt-island/sella | force_calls 53 | 88 | not reproduced; sella_trust |
 

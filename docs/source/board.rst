@@ -189,7 +189,7 @@ It does not run a campaign.
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
-   <td data-code="optim" data-template="optim/hef-ffd-ts-pt-latest" data-par2="18788.9"><span class="bench-score">18788.9</span><a href="generated/suites/tsopt.html#pt-island-templates">optim/hef-ffd-ts-pt-latest</a></td>
+   <td data-code="optim" data-template="optim/hef-ffd-ts-pt-latest" data-par2="456.449"><span class="bench-score">456.449</span><a href="generated/suites/tsopt.html#pt-island-templates">optim/hef-ffd-ts-pt-latest</a></td>
    <td data-code="tsase" data-template="tsase/dimer-pt" data-par2="1144.31"><span class="bench-score">1144.31</span><a href="generated/suites/tsopt.html#pt-island-templates">tsase/dimer-pt</a></td>
    </tr>
    <tr data-problem="neb/Pt-heptamer">

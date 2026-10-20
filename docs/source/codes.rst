@@ -1078,10 +1078,10 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">optim/hef-ffd-ts-pt-latest</td>
    <td data-field="version">optim df8da599</td>
    <td data-field="commit">02aaf45245af</td>
-   <td data-field="par2_mean">18788.9</td>
-   <td data-field="mean_calls">17709.2</td>
-   <td data-field="median_calls">10264</td>
-   <td data-field="failures">crash 0, divergence 0, cap 46, wrong_stationary 0</td>
+   <td data-field="par2_mean">456.449</td>
+   <td data-field="mean_calls">456.449</td>
+   <td data-field="median_calls">380</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">49</td>
    </tr>
    </tbody></table></div>

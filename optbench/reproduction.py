@@ -835,6 +835,13 @@ def render_markdown(rows: list[dict]) -> str:
             archive = "—"
             rerun = "—"
         status = row["status"].replace("_", " ")
+        if (
+            row["suite"] == "tsopt"
+            and row["problem"] == "pt-island"
+            and row["entry"] == "optim_ffd"
+            and status == "not rerun"
+        ):
+            status = "archive"
         if row.get("cause"):
             status = f"{status}; {row['cause']}"
         if row.get("note"):

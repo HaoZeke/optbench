@@ -9,8 +9,13 @@ is one ``pes.evaluate``. OPTIM's own counter is not that score.
 hybrid eigenvector-following search. The archive names that method with
 a forward finite-difference second derivative. OPTIM's keyword for the
 search is ``BFGSTS``; ``USEDIAG 3`` and ``NOHESS`` select the derivative.
-Iteration limits are the problem cap. The score is OPTIM's
-energy-plus-gradient count, ranked on the harness counter.
+``FREEZE`` is the substrate fixed in the con file. ``BULK`` is the
+orthorhombic cell in the same reduced units as ``PARAMS``. ``BFGSCONV``
+is the problem L2 stop as an RMS over the free coordinates. ``STEPS``,
+``BFGSSTEPS``, ``NEVS``, and ``NEVL`` are the problem cap.
+``NBFGSMAX1`` and ``NBFGSMAX2`` stay at the source defaults. The harness
+stops the search at the force-call cap. The score is the energy-plus-gradient
+count.
 
 ``optim/unhooked`` and every other template that is not minimization
 L-BFGS raise before a file is written. Noise, NEB, and PATHSAMPLE are
@@ -22,8 +27,10 @@ from __future__ import annotations
 import math
 import os
 import shutil
+import signal
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 import numpy as np
@@ -36,6 +43,7 @@ CODE = "optim"
 SNAPSHOT = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
 SHA256 = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
 _RELAY = Path(__file__).with_name("fmlip_relay.py")
+_CALLCAP_SRC = Path(__file__).with_name("optim_callcap.c")
 
 
 class _Calls:
@@ -72,6 +80,12 @@ _BC_RHO = "4.64881590"
 _BC_RCUT = "3.27925440110459095616"
 # keywords.F90 initialises CEIG to this value. It is not a step limit.
 _CEIG = "1.0D-10"
+# Tangent-space steps per outer iteration. keywords.F90 initialises these
+# to 10 and 100. The force-call cap is a different limit: one tangent-space
+# loop exits on the unprojected RMS, so a cap-sized allowance spends the
+# whole budget before the uphill step.
+_NBFGSMAX1 = 10
+_NBFGSMAX2 = 100
 
 
 def snapshot_binary() -> Path:
@@ -356,13 +370,77 @@ def _displacement(start: Path, reactant: Path, dest: Path) -> None:
     dest.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
-def _stock_gmax(natoms: int, force_norm: float) -> float:
-    """Problem L2 stop as OPTIM's RMS tolerance.
+def _callcap_binary() -> Path:
+    """Compile the gradient-call stop. A newer source replaces the binary."""
+    binary = Path(tempfile.gettempdir()) / "optbench-optim-callcap"
+    if binary.is_file() and binary.stat().st_mtime >= _CALLCAP_SRC.stat().st_mtime:
+        return binary
+    subprocess.run(
+        ["gcc", "-O2", "-o", str(binary), str(_CALLCAP_SRC)],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    return binary
 
-    The archived preamble states RMS = L2 / sqrt(3N), then divides by the
-    Morse well depth A = 0.7102 because the native energy is in those units.
+
+def _text_symbol(binary: Path, name: str) -> int:
+    text = subprocess.check_output(["nm", str(binary)], text=True, errors="replace")
+    for line in text.splitlines():
+        parts = line.split()
+        if len(parts) == 3 and parts[1] == "T" and parts[2] == name:
+            return int(parts[0], 16)
+    raise RuntimeError(f"{binary} has no text symbol {name}")
+
+
+def _reduced_box(box: np.ndarray) -> str:
+    """Orthorhombic cell in the reduced units ``PARAMS`` already uses."""
+    lengths = np.asarray(box, dtype=np.float64) * float(_BC_SCALE)
+    return "%f %f %f" % (float(lengths[0]), float(lengths[1]), float(lengths[2]))
+
+
+def _cap_status(path: Path) -> dict[str, int] | None:
+    if not path.is_file():
+        return None
+    found: dict[str, int] = {}
+    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        parts = line.split()
+        if len(parts) == 2:
+            found[parts[0]] = int(parts[1])
+    if "gradient" not in found:
+        return None
+    return found
+
+
+def _log_stop(log_text: str) -> str:
+    """Last RMS line, so a failure names the stop OPTIM actually reached."""
+    last = ""
+    last_rms = ""
+    fractional = "fractional coordinates" in log_text
+    for line in log_text.splitlines():
+        text = " ".join(line.split())
+        if not text:
+            continue
+        last = text
+        if "RMS" in text:
+            last_rms = text
+    chosen = last_rms or last or "no OPTIM log"
+    if fractional:
+        chosen = "OPTIM used fractional coordinates; " + chosen
+    return chosen[:300]
+
+
+def _stock_gmax(n_free: int, force_norm: float) -> float:
+    """Problem L2 stop as OPTIM's RMS over the free coordinates.
+
+    OPTIM sets the RMS to ``sqrt(sum(g^2) / (3 N_free))`` after zeroing
+    frozen atoms. The native Morse energy is in units of the well depth
+    ``A = 0.7102``, so the threshold is that RMS divided by ``A``.
     """
-    return float(force_norm) / math.sqrt(3 * int(natoms)) / 0.7102
+    count = 3 * int(n_free)
+    if count < 1:
+        raise ValueError("RMS stop needs a free coordinate")
+    return float(force_norm) / math.sqrt(count) / 0.7102
 
 
 def _hef_odata(
@@ -377,23 +455,24 @@ def _hef_odata(
 
     ``BFGSTS`` is OPTIM's keyword for that search. ``USEDIAG 3`` is the
     archive's first-order forward difference. ``NOHESS`` uses that
-    derivative instead of the analytic Hessian. ``STEPS``, ``BFGSSTEPS``,
-    ``NEVS``, ``NBFGSMAX1``, ``NBFGSMAX2``, and ``NEVL`` are the problem
-    cap. ``CEIG`` stays at the source default.
+    derivative instead of the analytic Hessian. ``BULK`` carries the
+    orthorhombic cell in the same reduced units as ``PARAMS``.     ``STEPS``, ``BFGSSTEPS``, ``NEVS``, and ``NEVL`` are the problem cap.
+    ``NBFGSMAX1`` and ``NBFGSMAX2`` stay at the source defaults.
+    ``CEIG`` stays at the source default.
     """
     scale = float(_BC_SCALE)
     scaled = coords * scale
-    lengths = box * scale
-    box_text = "%f %f %f" % (float(lengths[0]), float(lengths[1]), float(lengths[2]))
-    gmax = _stock_gmax(int(coords.shape[0]), force_norm)
+    box_text = _reduced_box(box)
+    n_free = int(coords.shape[0] - np.count_nonzero(frozen))
+    gmax = _stock_gmax(n_free, force_norm)
     limit = int(cap)
     lines = [
         "COMMENT hybrid eigenvector-following, forward finite-difference second derivatives",
-        f"BFGSTS {limit} {limit} {limit} {_CEIG} {limit}",
+        f"BFGSTS {limit} {_NBFGSMAX1} {_NBFGSMAX2} {_CEIG} {limit}",
         f"BFGSSTEPS {limit}",
         f"STEPS {limit}",
         f"BFGSCONV {_fortran_float(gmax)}",
-        "BULK",
+        f"BULK {box_text}",
         "NOHESS",
         "USEDIAG 3",
         "READVEC",
@@ -417,51 +496,85 @@ def _paper_calls(log_text: str) -> tuple[int | None, bool]:
 
 
 def _execute_hef(job: dict) -> dict:
-    """One native OPTIM search. The score is the paper's energy-plus-gradient count."""
+    """One native OPTIM search. The harness stops it at the force-call cap."""
     os.environ.setdefault("OMP_NUM_THREADS", "1")
-    import tempfile
 
     name = str(job["name"])
-    calls = 10000
+    cap = int(job["cap"])
+    calls = cap
     success = False
     error = ""
     try:
         with tempfile.TemporaryDirectory(prefix="optim-hef-") as raw:
             folder = Path(raw)
             coords, frozen, box = _published_con(Path(job["con"]))
-            _hef_odata(folder, coords, frozen, box, int(job["cap"]), float(job["force_norm"]))
+            _hef_odata(folder, coords, frozen, box, cap, float(job["force_norm"]))
             _displacement(Path(job["con"]), Path(job["reactant"]), folder / "vector.dump")
             env = os.environ.copy()
             env["OMP_NUM_THREADS"] = "1"
+            env["GFORTRAN_UNBUFFERED_ALL"] = "1"
             stdout_path = folder / "OPTIM.log"
+            status_path = folder / "callcap.txt"
+            command = [
+                str(job["tracer"]),
+                hex(int(job["symbol"])),
+                str(cap),
+                str(status_path),
+                str(job["binary"]),
+            ]
+            proc = None
             try:
                 with stdout_path.open("w", encoding="utf-8") as stdout:
-                    proc = subprocess.run(
-                        [str(job["binary"])],
+                    proc = subprocess.Popen(
+                        command,
                         cwd=folder,
                         env=env,
                         stdout=stdout,
                         stderr=subprocess.STDOUT,
-                        text=True,
-                        timeout=1800,
-                        check=False,
+                        start_new_session=True,
                     )
+                    proc.wait(timeout=1800)
             except subprocess.TimeoutExpired:
-                proc = None
+                if proc is not None:
+                    os.killpg(proc.pid, signal.SIGKILL)
+                    proc.wait()
                 error = "OPTIM exceeded 1800s"
             log_text = stdout_path.read_text(encoding="utf-8", errors="replace") if stdout_path.is_file() else ""
+            detail = _log_stop(log_text)
+            counted = _cap_status(status_path)
             parsed, converged = _paper_calls(log_text)
-            if parsed is not None:
-                calls = parsed
+            gradient = None if counted is None else int(counted["gradient"])
+            capped = bool(counted and int(counted.get("capped", 0)))
+            if capped:
+                calls = cap
+                error = f"harness stopped the search at {cap} energy+gradient calls; {detail}"
+            elif gradient is None:
+                if parsed is not None:
+                    calls = parsed
+                error = error or "the harness call counter wrote no count"
+                if detail and detail not in error:
+                    error = f"{error}; {detail}"
+            else:
+                calls = int(gradient if parsed is None else parsed)
+                if parsed is not None and parsed != gradient:
+                    error = (
+                        f"harness counted {gradient} energy+gradient calls; "
+                        f"OPTIM printed {parsed}; {detail}"
+                    )
             returncode = None if proc is None else proc.returncode
-            success, failure, reasons, error = _hef_outcome(
-                calls,
-                int(job["cap"]),
-                converged=converged,
-                parsed=parsed,
-                error=error,
-                returncode=returncode,
-            )
+            if gradient is None or error.startswith("harness counted"):
+                success, failure, reasons = False, "crash", ["crash"]
+            else:
+                success, failure, reasons, error = _hef_outcome(
+                    calls,
+                    cap,
+                    converged=converged,
+                    parsed=parsed if parsed is not None else gradient,
+                    error=error,
+                    returncode=returncode,
+                )
+                if not success and detail and detail not in error:
+                    error = f"{error}; {detail}"
     except Exception as exc:
         error = f"{type(exc).__name__}: {exc}"
         success = False
@@ -539,6 +652,11 @@ def _run_hef(root: Path, problem: dict, template: dict, output: Path, workers: i
         raise FileNotFoundError(reactant)
     cap = int((problem.get("convergence") or {})["max_force_calls"])
     force_norm = float((problem.get("convergence") or {})["force_norm"])
+    sample, sample_frozen, sample_box = _published_con(island / "initial_0.con")
+    n_free = int(sample.shape[0] - np.count_nonzero(sample_frozen))
+    box_text = _reduced_box(sample_box)
+    tracer = _callcap_binary()
+    symbol = _text_symbol(binary, "morse_bulk_wrapper_")
     jobs = []
     for start in starts:
         con = island / f"{start['name']}.con"
@@ -550,6 +668,8 @@ def _run_hef(root: Path, problem: dict, template: dict, output: Path, workers: i
                 "con": str(con),
                 "reactant": str(reactant),
                 "binary": str(binary),
+                "tracer": str(tracer),
+                "symbol": symbol,
                 "cap": cap,
                 "force_norm": force_norm,
             }
@@ -560,9 +680,13 @@ def _run_hef(root: Path, problem: dict, template: dict, output: Path, workers: i
     comment = (
         "# counter harness. OPTIM df8da599 hybrid eigenvector-following.\n"
         "# USEDIAG 3 is the forward finite-difference second derivative. NOHESS selects it.\n"
-        "# STEPS, BFGSSTEPS, NEVS, NBFGSMAX1, NBFGSMAX2, and NEVL are the problem cap. "
-        "CEIG stays 1.0D-10. BFGSCONV is the problem L2 stop as an RMS in reduced units.\n"
-        "# The count is OPTIM's energy+gradient calls. A success is **** CONVERGED **** under the cap."
+        "# FREEZE is the substrate fixed in the con file. BULK is the orthorhombic cell\n"
+        "# in the same reduced units as PARAMS. BFGSCONV is the problem L2 stop as an RMS\n"
+        "# over the free coordinates, divided by the Morse well depth.\n"
+        "# STEPS, BFGSSTEPS, NEVS, and NEVL are the problem cap. "
+        "NBFGSMAX1 and NBFGSMAX2 stay at 10 and 100. CEIG stays 1.0D-10.\n"
+        "# The harness stops a search at the force-call cap. "
+        "A success is **** CONVERGED **** under that cap."
     )
     parameters = {
         "method": "hef-ffd",
@@ -571,16 +695,18 @@ def _run_hef(root: Path, problem: dict, template: dict, output: Path, workers: i
         "steps": cap,
         "bfgssteps": cap,
         "nevs": cap,
-        "nbfgsmax1": cap,
-        "nbfgsmax2": cap,
+        "nbfgsmax1": _NBFGSMAX1,
+        "nbfgsmax2": _NBFGSMAX2,
         "nevl": cap,
         "ceig": _CEIG,
         "scale": _BC_SCALE,
         "rho": _BC_RHO,
         "rcut": _BC_RCUT,
+        "bulk": box_text,
+        "n_free": n_free,
         "counter": "harness",
         "binary": "df8da599",
-        "bfgsconv": _stock_gmax(343, force_norm),
+        "bfgsconv": _stock_gmax(n_free, force_norm),
     }
     return write_campaign(
         output,

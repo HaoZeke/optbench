@@ -9,7 +9,7 @@ algorithm = "hybrid eigenvector following"
 tuning = "default"
 label = "OPTIM df8da599"
 beside = "optim_ffd"
-note = "Wales OPTIM SVNREV df8da599. Hybrid eigenvector-following. USEDIAG 3 is the forward finite-difference second derivative. STEPS, BFGSSTEPS, NEVS, NBFGSMAX1, NBFGSMAX2, and NEVL are the problem cap. The score is OPTIM's energy-plus-gradient count."
+note = "Wales OPTIM SVNREV df8da599. Hybrid eigenvector-following. USEDIAG 3 is the forward finite-difference second derivative. FREEZE is the fixed substrate. BULK is the orthorhombic cell in reduced units. BFGSCONV is the problem L2 stop as an RMS over the free coordinates. STEPS, BFGSSTEPS, NEVS, and NEVL are the problem cap. NBFGSMAX1 and NBFGSMAX2 stay at the source defaults. The harness stops the search at the force-call cap. The score is the energy-plus-gradient count."
 
 [optim]
 method = "hef-ffd"

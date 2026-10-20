@@ -1,13 +1,16 @@
 # counter harness. OPTIM df8da599 hybrid eigenvector-following.
 # USEDIAG 3 is the forward finite-difference second derivative. NOHESS selects it.
-# STEPS, BFGSSTEPS, NEVS, NBFGSMAX1, NBFGSMAX2, and NEVL are the problem cap. CEIG stays 1.0D-10. BFGSCONV is the problem L2 stop as an RMS in reduced units.
-# The count is OPTIM's energy+gradient calls. A success is **** CONVERGED **** under the cap.
-force_calls 219
-force_calls_min 151
-force_calls_max 352
-force_calls_median 155
-successes 3
-nfailed 46
+# FREEZE is the substrate fixed in the con file. BULK is the orthorhombic cell
+# in the same reduced units as PARAMS. BFGSCONV is the problem L2 stop as an RMS
+# over the free coordinates, divided by the Morse well depth.
+# STEPS, BFGSSTEPS, NEVS, and NEVL are the problem cap. NBFGSMAX1 and NBFGSMAX2 stay at 10 and 100. CEIG stays 1.0D-10.
+# The harness stops a search at the force-call cap. A success is **** CONVERGED **** under that cap.
+force_calls 456
+force_calls_min 193
+force_calls_max 2458
+force_calls_median 380
+successes 49
+nfailed 0
 n 49
 transition_states 0
 code optim
