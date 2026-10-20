@@ -2,13 +2,13 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+47 reproduced, 29 not reproduced, 75 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
 OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.
 
-OPTIM Pt-island climbing string, release df8da599 (SVNREV df8da599267534fbe43a250e578f7396a7946311, svn.tar.bz2 sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31): stock BULK, CLSTRING, and GROWSTRING. The archived mean is 319 with nfailed 0. OPTIM prints no convergence line on any of the 59 starts, so there is no success mean. The native tallies are 6 or 8 and nfailed is 59.
+OPTIM Pt-island climbing string, release df8da599 (SVNREV df8da599267534fbe43a250e578f7396a7946311, svn.tar.bz2 sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31): GROWSTRING uses interior images 3 and iteration density 3000, and STEPS is 3000. Both limits are the problem's image count and force-call cap. DESMDEBUG prints the climbing-string convergence line. The archived mean is 319 with nfailed 0. This release mean is 289 with nfailed 0.
 
 EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.
 
@@ -46,7 +46,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | pt-island/eon-lanczos-improved | force_calls 222 | 181 | not reproduced; pt_lanczos |
 | pt-island/optim | force_calls 103 | 138 | not reproduced; optim_pt_units |
 | pt-island/optim-6 | — | — | not rerun |
-| pt-island/optim-cl-string | nfailed 0 | df8da599 nfailed 59 | not rerun |
+| pt-island/optim-cl-string | force_calls 319 | 289 | reproduced |
 | pt-island/pele | — | — | not rerun |
 
 ## globalopt
