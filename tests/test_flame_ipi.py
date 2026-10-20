@@ -272,7 +272,7 @@ def test_one_cap_is_shared_and_written(tmp_path: Path):
     lj150 = resolve_problem(root, "globalopt/lj150")
     flame150 = load_template(root, "flame/lj150-minhocao")
 
-    assert cap_of(lj38, flame38) == 10_000_000
+    assert cap_of(lj38, flame38) == 2_000_000
     assert cap_of(lj75, flame75) == 1_000_000
     assert cap_of(lj98, flame98) == 1_000_000_000
     assert cap_of(lj150, flame150) == 10_000_000

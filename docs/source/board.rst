@@ -231,7 +231,7 @@ It does not run a campaign.
    <td data-code="pysisyphus">—</td>
    <td data-code="AIRSS" data-template="airss/lj38" data-par2=""><span class="bench-score"></span><a href="generated/suites/globalopt.html#lj38-templates">airss/lj38</a></td>
    <td data-code="vc-SQNM">—</td>
-   <td data-code="FLAME" data-template="flame/lj38-minhocao" data-par2="986934"><span class="bench-score">986934</span><a href="generated/suites/globalopt.html#lj38-templates">flame/lj38-minhocao</a></td>
+   <td data-code="FLAME" data-template="flame/lj38-minhocao" data-par2="861682"><span class="bench-score">861682</span><a href="generated/suites/globalopt.html#lj38-templates">flame/lj38-minhocao</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>

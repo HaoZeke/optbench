@@ -1509,10 +1509,10 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">flame/lj38-minhocao</td>
    <td data-field="version">FLAME 1.0</td>
    <td data-field="commit">99a615acaef6</td>
-   <td data-field="par2_mean">986934</td>
+   <td data-field="par2_mean">861682</td>
    <td data-field="mean_calls">886934</td>
    <td data-field="median_calls">522630</td>
-   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 9, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="globalopt/lj75" data-template="flame/lj75-minhocao">

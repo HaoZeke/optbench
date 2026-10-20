@@ -7,7 +7,7 @@
     {
       "asv_commit": "da49c50a11704aaefb9b4da883f9e754b7ef75ad",
       "call_unit": "total",
-      "cap": 10000000,
+      "cap": 2000000,
       "code": "FLAME",
       "code_version": "1.0",
       "commit": "99a615acaef6bc6afe44d895f666c6d60250f7d8",
@@ -55,7 +55,7 @@
       "airss/lj38 0.9.4 default campaign 5593cc4": 1.055110134802254,
       "eon-client/bh-lj38 3.5.0 campaign 4d8b34b": 0.4831531430406898,
       "eon-svn/bh-lj38 r2549 campaign r2549": 0.4244522938862135,
-      "flame/lj38-minhocao 1.0 default campaign 99a615a": 0.4063904941463746
+      "flame/lj38-minhocao 1.0 default campaign 99a615a": 0.4048853441680547
     },
     "rho": {
       "airss/lj38 0.9.4 default campaign 5593cc4": [
@@ -84,14 +84,14 @@
         0.23,
         0.3,
         0.43,
-        0.62
+        0.61
       ]
     },
     "solved": {
       "airss/lj38 0.9.4 default campaign 5593cc4": 1.0,
       "eon-client/bh-lj38 3.5.0 campaign 4d8b34b": 1.0,
       "eon-svn/bh-lj38 r2549 campaign r2549": 0.98,
-      "flame/lj38-minhocao 1.0 default campaign 99a615a": 0.99
+      "flame/lj38-minhocao 1.0 default campaign 99a615a": 0.91
     },
     "taus": [
       1.0,
@@ -240,7 +240,7 @@
     {
       "asv_commit": "",
       "call_unit": "total",
-      "cap": 10000000,
+      "cap": 2000000,
       "code": "FLAME",
       "code_version": "1.0",
       "commit": "99a615acaef6bc6afe44d895f666c6d60250f7d8",
@@ -249,7 +249,7 @@
       "current": true,
       "entry": "flame-1.0-lj38-minhocao",
       "failures": {
-        "cap": 1,
+        "cap": 9,
         "crash": 0,
         "divergence": 0,
         "wrong_stationary": 0
@@ -266,9 +266,9 @@
       "median_per_image": null,
       "min_calls": 37000.0,
       "n": 100,
-      "nfailed": 1,
+      "nfailed": 9,
       "note": "starts.jsonl",
-      "par2_mean": 986934.5,
+      "par2_mean": 861682.31,
       "partial": false,
       "partial_reason": "",
       "path": "results/campaign/flame-1.0-lj38-minhocao.dat",
@@ -276,11 +276,11 @@
       "registry_match": true,
       "scored": true,
       "source": "campaign",
-      "success_rate": 0.99,
+      "success_rate": 0.91,
       "template": "flame/lj38-minhocao",
       "tuning": "default",
-      "wilson_high": 0.9982325679358593,
-      "wilson_low": 0.9455138038212946
+      "wilson_high": 0.9519274599974348,
+      "wilson_low": 0.837737871472837
     }
   ],
   "title": "Lennard-Jones 38 global minimum"
