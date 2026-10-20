@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>OPTIM</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="tsopt/LJ38">
    <th scope="row"><a href="#LJ38">LJ38</a></th>
    <td data-code="eOn" data-template="eon-client/ts-lj38-lanczos-improved" data-par2="280.33"><span class="bench-score">280.33</span><a href="#LJ38-templates">eon-client/ts-lj38-lanczos-improved</a></td>
@@ -17,6 +17,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella" data-template="sella/lj38-ts-default" data-par2="68.74"><span class="bench-score">68.74</span><a href="#LJ38-templates">sella/lj38-ts-default</a></td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="OPTIM">—</td>
    <td data-code="artn" data-template="partn/ts-lj38" data-par2="20000"><span class="bench-score">20000</span><a href="#LJ38-templates">partn/ts-lj38</a></td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -33,11 +34,12 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella" data-template="sella/pt-island-ts-default" data-par2="74.2857"><span class="bench-score">74.2857</span><a href="#pt-island-templates">sella/pt-island-ts-default</a></td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="OPTIM" data-template="optim/hef-ts-pt" data-par2="843"><span class="bench-score">843</span><a href="#pt-island-templates">optim/hef-ts-pt</a></td>
    <td data-code="artn" data-template="partn/ts-pt" data-par2="1970.22"><span class="bench-score">1970.22</span><a href="#pt-island-templates">partn/ts-pt</a></td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
-   <td data-code="optim" data-template="optim/hef-ts-pt" data-par2="843"><span class="bench-score">843</span><a href="#pt-island-templates">optim/hef-ts-pt</a></td>
+   <td data-code="optim">—</td>
    <td data-code="tsase" data-template="tsase/dimer-pt" data-par2="1144.31"><span class="bench-score">1144.31</span><a href="#pt-island-templates">tsase/dimer-pt</a></td>
    </tr>
    </tbody></table></div></section><section class="bench" id="LJ38" data-problem="tsopt/LJ38">
@@ -225,7 +227,7 @@
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">eOn rows are not yet on the harness counter. optim-27059 rows are off the ranked table. Partial rows stay off the ranked table.</p>
+   <p class="bench-gaps">eOn rows are not yet on the harness counter. Partial rows stay off the ranked table.</p>
    <figure class="bench-plot"><a href="../../_static/board/tsopt-pt-island-profile.svg"><picture><source srcset="../../_static/board/tsopt-pt-island-profile.webp" type="image/webp"><img src="../../_static/board/tsopt-pt-island-profile.png" alt="Dolan-More profile for tsopt/pt-island" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/tsopt-pt-island-cost.svg"><picture><source srcset="../../_static/board/tsopt-pt-island-cost.webp" type="image/webp"><img src="../../_static/board/tsopt-pt-island-cost.png" alt="Cost versus success for tsopt/pt-island" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="pt-island-templates">
@@ -243,7 +245,7 @@
    <tr><td data-field="template">eon-client/ts-pt-lanczos</td><td data-field="version">eOn 3.5.0</td><td data-field="commit">4d8b34baf1ba</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">155.571</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.927302</td><td data-field="wilson_high">1</td><td data-field="median_calls">149</td><td data-field="mean_calls">155.571</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">49</td></tr>
    <tr><td data-field="template">rgsaddle/pt-dimer-rotskip</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">223.898</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.927302</td><td data-field="wilson_high">1</td><td data-field="median_calls">145</td><td data-field="mean_calls">223.898</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">49</td></tr>
    <tr><td data-field="template">rgsaddle/pt-dimer-rotskip-tuned</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">299.633</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.927302</td><td data-field="wilson_high">1</td><td data-field="median_calls">167</td><td data-field="mean_calls">299.633</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">49</td></tr>
-   <tr><td data-field="template">optim/hef-ts-pt</td><td data-field="version">optim df8da599</td><td data-field="commit">738fafe3df5a</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">843</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.927302</td><td data-field="wilson_high">1</td><td data-field="median_calls">893</td><td data-field="mean_calls">843</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">49</td></tr>
+   <tr><td data-field="template">optim/hef-ts-pt</td><td data-field="version">OPTIM df8da599</td><td data-field="commit">738fafe3df5a</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">843</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.927302</td><td data-field="wilson_high">1</td><td data-field="median_calls">893</td><td data-field="mean_calls">843</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">49</td></tr>
    <tr><td data-field="template">rgsaddle/pt-dimer-fire-tuned</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">1096.9</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.927302</td><td data-field="wilson_high">1</td><td data-field="median_calls">918</td><td data-field="mean_calls">1096.9</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">49</td></tr>
    <tr><td data-field="template">tsase/dimer-pt</td><td data-field="version">tsase 1.0</td><td data-field="commit">98aac60b5d99</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">1144.31</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.927302</td><td data-field="wilson_high">1</td><td data-field="median_calls">892</td><td data-field="mean_calls">1144.31</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">49</td></tr>
    <tr><td data-field="template">partn/ts-pt</td><td data-field="version">artn 1.1.0</td><td data-field="commit">9b753517c6c0</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">1970.22</td><td data-field="success_rate">0.918367</td><td data-field="wilson_low">0.808109</td><td data-field="wilson_high">0.967797</td><td data-field="median_calls">265</td><td data-field="mean_calls">380.224</td><td data-field="failures">crash 4, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">49</td></tr>
@@ -265,7 +267,6 @@
    <h3>Not a harness score</h3><ul>
    <li>eon/ts-pt-dimer-m100 eOn n=49, not yet on the harness counter.</li>
    <li>eon/ts-pt-dimer eOn n=49, not yet on the harness counter.</li>
-   <li>optim/hef-cd-ts-pt optim-27059 n=49, counter native.</li>
    </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="pt-island-legacy">

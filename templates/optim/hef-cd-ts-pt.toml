@@ -7,7 +7,6 @@ code_version = "27059"
 commit = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
 algorithm = "hybrid eigenvector following"
 tuning = "archive"
-paper_baseline = true
 note = "wales-27058 OPTIM 27059. Native periodic Morse, BFGSTS 30 11 30 0.063 100, USEDIAG 2, BFGSCONV 4.3895D-5. The score is OPTIM energy+gradient calls."
 
 [optim]

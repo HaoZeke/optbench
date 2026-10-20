@@ -181,7 +181,7 @@ repository = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
 ref = "df8da599"
 commit = "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
 committed = "2026-10-19"
-note = "Current public tarball svn.tar.bz2, Last-Modified 2026-10-19, 122737951 bytes. OPTIM/source/SVNREV is df8da599267534fbe43a250e578f7396a7946311. Pt-island hybrid eigenvector following uses stock BFGSTS through the ASE socket. The score is harness pes.evaluate."
+note = "Current public tarball svn.tar.bz2, Last-Modified 2026-10-19, 122737951 bytes. OPTIM/source/SVNREV is df8da599267534fbe43a250e578f7396a7946311. Pt-island hybrid eigenvector following uses BFGSTS and USEDIAG 2 through the ASE socket. Iteration limits are the problem cap. The score is harness pes.evaluate."
 
 [[code]]
 id = "sella-0.1.1"

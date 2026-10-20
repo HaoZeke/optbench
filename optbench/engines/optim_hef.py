@@ -1,21 +1,28 @@
-"""Stock hybrid eigenvector following through the ASE socket.
+"""Hybrid eigenvector following, central-difference curvature, through the ASE socket.
 
 The binary is OPTIM from the current public Wales tarball
 ``http://www-wales.ch.cam.ac.uk/svn.tar.bz2``. ``OPTIM/source/SVNREV``
-is ``df8da599267534fbe43a250e578f7396a7946311``. ``BFGSTS`` is written
-with no arguments, so NEVS, the tangent-space limits, and CEIG stay at
-the source defaults. ``NOHESS`` is set because the ASE potential
-returns energy and gradient only. ``USEDIAG`` is left at its default
-of 2. ``BFGSCONV`` is the problem Euclidean force norm over
-``sqrt(3N)``. The initial mode is the displacement from the reactant,
-and fixed atoms are the con file's frozen list. Each ``COMPUTE`` is
-one harness evaluation of ``morse/smooth/linear``.
+is ``df8da599267534fbe43a250e578f7396a7946311``. The archive row is
+hybrid eigenvector following whose Rayleigh-Ritz step uses a
+second-order central-difference expansion. That is ``BFGSTS`` with
+``USEDIAG 2`` (gradients, the source default). ``BFGSSTEPS`` and
+``STEPS`` default to 1, and both are the problem force-call cap.
+``NEVS`` and ``NEVL``, the eigenvector iteration limits, are that cap
+too. ``NBFGSMAX1`` and ``NBFGSMAX2`` stay at the source defaults 10 and
+100, and ``CEIG`` stays ``1.0D-10``. ``BFGSCONV`` is the problem
+Euclidean force norm over ``sqrt(3N)``. ``NOHESS`` is set because the
+ASE potential returns energy and gradient only. The initial mode is
+the displacement from the reactant, and fixed atoms are the con file's
+frozen list. Each ``COMPUTE`` is one harness evaluation of
+``morse/smooth/linear``, the same entry OPTIM counts as an
+energy+gradient call.
 """
 
 from __future__ import annotations
 
 import math
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -43,14 +50,25 @@ def binary_path() -> Path:
 
 
 def odata_text(python: str, hook: Path, periodic: bool, gmax: float, steps: int, frozen: np.ndarray) -> str:
-    """Stock ``BFGSTS`` plus the problem stop, the start mode, and frozen atoms."""
+    """Paper curvature, problem stop, and the iteration caps.
+
+    ``BFGSTS`` arguments are ``NEVS``, ``NBFGSMAX1``, ``NBFGSMAX2``,
+    ``CEIG``, and ``NEVL``. ``NEVS`` and ``NEVL`` are the problem cap.
+    ``10`` and ``100`` are the source defaults of the tangent-space step
+    limits, and ``1.0D-10`` is the source default of ``CEIG``. They are
+    written so the eigenvector limits can be set. The 2014 values
+    ``30 11 30 0.063`` are not copied.
+    """
     pbc = "PBC" if periodic else "NOPBC"
+    cap = int(steps)
     lines = [
         f"ASE geom.xyz {python} {hook} dummy dummy cpu FIXCELL {pbc} EV ANG",
-        "BFGSTS",
+        f"BFGSTS {cap} 10 100 1.0D-10 {cap}",
         "NOHESS",
         f"BFGSCONV {_fortran_float(gmax)}",
-        f"STEPS {int(steps)}",
+        f"BFGSSTEPS {cap}",
+        f"STEPS {cap}",
+        "USEDIAG 2",
         "READVEC",
     ]
     indices = [str(int(index) + 1) for index in np.flatnonzero(np.asarray(frozen, dtype=bool))]
@@ -79,6 +97,7 @@ def _execute(job: dict) -> dict:
     calls = 0
     capped = False
     error = ""
+    log = ""
     import tempfile
 
     try:
@@ -131,6 +150,11 @@ def _execute(job: dict) -> dict:
             count_path = folder / "calls.txt"
             if count_path.is_file():
                 calls = int(count_path.read_text(encoding="utf-8").strip() or "0")
+            if stdout_path.is_file():
+                log = stdout_path.read_text(encoding="utf-8", errors="replace")
+            keep = os.environ.get("OPTBENCH_KEEP_LOG")
+            if keep and log:
+                Path(keep).write_text(log, encoding="utf-8")
             capped = (folder / "capped.txt").is_file() or calls >= cap
             if proc is not None and proc.returncode == 0 and not capped:
                 point = _read_points(folder / "points.final", natoms)
@@ -171,12 +195,37 @@ def _execute(job: dict) -> dict:
     if error:
         record["error"] = error
     record["optim_method"] = "hef"
+    record["curvature"] = "usediag-2"
+    gradient_calls, rr_steps = log_counters(log)
+    record["optim_energy_gradient_calls"] = gradient_calls
+    record["rayleigh_ritz_steps"] = rr_steps
     if os.environ.get("OPTBENCH_PROGRESS"):
         print(
             f"{record['start']} calls={record['force_calls']} success={record['success']} failure={record.get('failure')}",
             flush=True,
         )
     return record
+
+
+_GRADIENT_CALLS = re.compile(r"energy\+gradient calls=\s*(\d+)")
+_RR_STEP = re.compile(r"xmylbfgs> Eigenvalue, RMS, % changes?=.* after\s+(\d+)\s+steps")
+
+
+def log_counters(log: str) -> tuple[int | None, int]:
+    """OPTIM's energy+gradient tally, and Rayleigh-Ritz steps.
+
+    Each ``xmylbfgs`` progress line is one completed Rayleigh-Ritz
+    iteration. Those iterations are not the score. ``USEDIAG 2`` spends
+    two gradient evaluations inside one iteration, and both are
+    energy+gradient calls. The harness counts the same evaluations:
+    one socket ``COMPUTE`` is one ``pes.evaluate``.
+    """
+    calls = None
+    for line in log.splitlines():
+        match = _GRADIENT_CALLS.search(line)
+        if match:
+            calls = int(match.group(1))
+    return calls, len(_RR_STEP.findall(log))
 
 
 class _Calls:
@@ -232,21 +281,27 @@ def run_hef(root: Path, problem: dict, template: dict, output: Path, workers: in
                 "reactant": reactant.tolist(),
             }
         )
-    records = run_jobs(jobs, _execute, workers)
+    if int(workers) <= 1:
+        records = [_execute(job) for job in jobs]
+    else:
+        records = run_jobs(jobs, _execute, workers)
     published = dict(template)
-    published["code"] = "optim"
+    published["code"] = "OPTIM"
     comment = (
         "# counter harness. Each ASE COMPUTE is one pes.evaluate of morse/smooth/linear, "
-        "periodic in x and y.\n"
+        "periodic in x and y. That is OPTIM's energy+gradient call, not a Rayleigh-Ritz step.\n"
         f"# OPTIM {SVNREV} from {TARBALL} sha256 {TARBALL_SHA256}. "
-        "BFGSTS keeps the source defaults. NOHESS is set because ASE returns no Hessian. "
+        "BFGSTS with USEDIAG 2. NEVS, NEVL, BFGSSTEPS, and STEPS are the problem cap. "
+        "NBFGSMAX1 10, NBFGSMAX2 100, and CEIG 1.0D-10 are the source defaults. "
         "BFGSCONV is the Euclidean force norm over sqrt(3N). "
-        "READVEC is initial minus reactant. A success is under the cap, at the force stop, "
-        "and Hessian index 1."
+        "NOHESS because ASE returns no Hessian. READVEC is initial minus reactant. "
+        "A success is under the cap, at the force stop, and Hessian index 1."
     )
     parameters = {
         "method": "hef",
         "keyword": "BFGSTS",
+        "usediag": 2,
+        "ceig": "1.0D-10",
         "nohess": True,
         "counter": "harness",
         "socket": "ASE",

@@ -1088,7 +1088,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="tsopt/pt-island" data-template="optim/hef-ts-pt">
    <td>pt-island</td>
    <td data-field="template">optim/hef-ts-pt</td>
-   <td data-field="version">optim df8da599</td>
+   <td data-field="version">OPTIM df8da599</td>
    <td data-field="commit">738fafe3df5a</td>
    <td data-field="par2_mean">843</td>
    <td data-field="mean_calls">843</td>

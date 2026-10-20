@@ -12,7 +12,7 @@
   },
   "problem": "tsopt/pt-island",
   "provenance": {
-    "code": "optim",
+    "code": "OPTIM",
     "code_version": "df8da599",
     "commit": "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31",
     "machine": {
@@ -22,6 +22,7 @@
       "system": "Linux"
     },
     "parameters": {
+      "ceig": "1.0D-10",
       "counter": "harness",
       "keyword": "BFGSTS",
       "method": "hef",
@@ -29,7 +30,8 @@
       "potential": "morse/smooth/linear",
       "socket": "ASE",
       "svnrev": "df8da599267534fbe43a250e578f7396a7946311",
-      "tarball_sha256": "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
+      "tarball_sha256": "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31",
+      "usediag": 2
     }
   },
   "schema": "optbench.score/v2",
