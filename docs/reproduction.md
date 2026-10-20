@@ -63,7 +63,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj75/gmin | — | — | not rerun |
 | lj98/gmin-nosym | — | — | not rerun |
 | lj98/gmin-symmetrise | — | — | not rerun |
-| tip4p10/gmin | force_calls 16236, force_calls_median 11444, force_calls_min 121, force_calls_max 148360 | 266, 236, 127, 488 | not reproduced; gmin_stock |
+| tip4p10/gmin | force_calls 16236, force_calls_median 11444, force_calls_min 121, force_calls_max 148360 | 16376, 11544, 127, 165300 | not reproduced; gmin_stock |
 | tip4p10/gmin-tbp | — | — | not rerun |
 | tip4p15/gmin | — | — | not rerun |
 | tip4p15/gmin-tbp | — | — | not rerun |
@@ -271,7 +271,7 @@ The archived driver is the dangling path bin/js850/globalopt.py. The harness use
 
 ### gmin_stock
 
-Latest unmodified GMIN, source revision df8da599267534fbe43a250e578f7396a7946311, tarball sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. Temperature and step sizes are the code defaults, 0.3. STEPS and MAX_NPCALL are the problem cap, 1000000. The 10000 archived starts and the convergence window are the archive: NTIP 4, EDIFF 1e-3, SLOPPYCONV 1e-3, TIGHTCONV 1e-3, MAXIT 10000, TARGET -391.0233. Eleven initial quenches hit the target. The success-only mean is 266 against 16236. The other 9989 runs reach the call cap. The ranked score is GMIN NPCALL on the harness counter.
+Latest unmodified GMIN, source revision df8da599267534fbe43a250e578f7396a7946311, tarball sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. The deck is the archive: NTIP 4, temperature 6.65, STEP 0 0 1.64, EDIFF 1e-3, SLOPPYCONV 1e-3, TIGHTCONV 1e-3, MAXIT 10000, TARGET -391.0233, RANSEED 100. STEPS is 2000000, the integer form of the archive 2.D6, and MAX_NPCALL is the problem cap 1000000. All 10000 archived starts hit the target. The success-only mean is 16376 against 16236, the median 11544 against 11444, and the minimum 127 against 121. The maximum is 165300 against 148360 after the archive rounding of the unrounded count 165297. The ranked score is GMIN NPCALL on the harness counter.
 
 - globalopt/tip4p10/gmin
 

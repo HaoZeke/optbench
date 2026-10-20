@@ -112,7 +112,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
-    "repro/globalopt-tip4p10-gmin": "95a535fa94630c61f34cde348a394604e38e9faf",
+    "repro/globalopt-tip4p10-gmin": "0000000000000000000000000000000000000000",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -277,12 +277,13 @@ CAUSE_TEXT = {
     "gmin_stock": (
         "Latest unmodified GMIN, source revision df8da599267534fbe43a250e578f7396a7946311, "
         "tarball sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. "
-        "Temperature and step sizes are the code defaults, 0.3. "
-        "STEPS and MAX_NPCALL are the problem cap, 1000000. "
-        "The 10000 archived starts and the convergence window are the archive: "
-        "NTIP 4, EDIFF 1e-3, SLOPPYCONV 1e-3, TIGHTCONV 1e-3, MAXIT 10000, TARGET -391.0233. "
-        "Eleven initial quenches hit the target. The success-only mean is 266 against 16236. "
-        "The other 9989 runs reach the call cap. The ranked score is GMIN NPCALL on the harness counter."
+        "The deck is the archive: NTIP 4, temperature 6.65, STEP 0 0 1.64, "
+        "EDIFF 1e-3, SLOPPYCONV 1e-3, TIGHTCONV 1e-3, MAXIT 10000, TARGET -391.0233, RANSEED 100. "
+        "STEPS is 2000000, the integer form of the archive 2.D6, and MAX_NPCALL is the problem cap 1000000. "
+        "All 10000 archived starts hit the target. "
+        "The success-only mean is 16376 against 16236, the median 11544 against 11444, and the minimum 127 against 121. "
+        "The maximum is 165300 against 148360 after the archive rounding of the unrounded count 165297. "
+        "The ranked score is GMIN NPCALL on the harness counter."
     ),
     "htst_al": "The r2549 Al dimer with the archived rotation string (CG, max 50, tol 1) misses barrier_force_calls and rate_force_calls by about 30 percent. Pt dimer CG with max 10 reproduces all four hTST counts.",
     "precon_hessian_index": (

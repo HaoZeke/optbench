@@ -1,8 +1,8 @@
-force_calls 2.66000e+02
-force_calls_median 2.36000e+02
+force_calls 1.63760e+04
+force_calls_median 1.15440e+04
 force_calls_min 1.2700e+02
-force_calls_max 4.8800e+02
-nfailed 9989
+force_calls_max 1.6530e+05
+nfailed 0
 starts 10000
 code GMIN
 code_version df8da599267534fbe43a250e578f7396a7946311
@@ -14,4 +14,4 @@ counter harness
 tuning stock
 call_unit total
 cap 1000000
-note Latest unmodified GMIN df8da599267534fbe43a250e578f7396a7946311, tarball sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. Stock temperature 0.3 and steps 0.3. STEPS and MAX_NPCALL are 1000000. Archive starts and convergence: NTIP 4, EDIFF 1e-3, TARGET -391.0233. force_calls is the success-only NPCALL mean of the 11 target hits. The other 9989 runs reach the call cap. The harness score is NPCALL on every start.
+note Latest unmodified GMIN df8da599267534fbe43a250e578f7396a7946311, tarball sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. The deck is the archive: temperature 6.65, STEP 0 0 1.64, NTIP 4, EDIFF 1e-3, SLOPPYCONV 1e-3, TIGHTCONV 1e-3, MAXIT 10000, TARGET -391.0233, RANSEED 100. STEPS is 2000000, the integer form of the archive 2.D6. MAX_NPCALL is 1000000. All 10000 starts hit the target. force_calls is the success-only NPCALL mean. The harness score is NPCALL on every start.
