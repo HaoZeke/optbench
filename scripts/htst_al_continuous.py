@@ -16,6 +16,7 @@ import argparse
 import json
 import math
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -616,6 +617,55 @@ def _print_report(document: dict) -> None:
             print(f"  {key} {_fmt_stats(block.get(key))}")
 
 
+_KNOWN_TRAILER = re.compile(
+    r"^(Co-authored-by|Signed-off-by|Acked-by|Reviewed-by|Tested-by|"
+    r"Reported-by|Suggested-by|Helped-by|Fixes|Change-Id|Made-with|"
+    r"Generated-by|Refs|See-also):",
+    re.IGNORECASE,
+)
+_TRAILER_LINE = re.compile(r"^[A-Za-z][A-Za-z0-9-]*: .+$")
+BRANCH = "cells/htst/al-dimer-cg2"
+
+
+def _body_has_trailer(body: str) -> bool:
+    lines = [line for line in body.splitlines() if line.strip()]
+    if any(_KNOWN_TRAILER.match(line.strip()) for line in lines):
+        return True
+    paragraphs: list[list[str]] = []
+    chunk: list[str] = []
+    for line in body.splitlines():
+        if line.strip():
+            chunk.append(line.strip())
+        elif chunk:
+            paragraphs.append(chunk)
+            chunk = []
+    if chunk:
+        paragraphs.append(chunk)
+    if len(paragraphs) < 2:
+        return False
+    return all(_TRAILER_LINE.match(line) for line in paragraphs[-1])
+
+
+def _strip_trailers(body: str) -> str:
+    lines = [line for line in body.splitlines() if not _KNOWN_TRAILER.match(line.strip())]
+    while lines and not lines[-1].strip():
+        lines.pop()
+    start = None
+    for index in range(len(lines) - 1, -1, -1):
+        if not lines[index].strip():
+            start = index + 1
+            break
+    if (
+        start not in (None, 0)
+        and lines[start:]
+        and all(_TRAILER_LINE.match(line.strip()) for line in lines[start:] if line.strip())
+    ):
+        lines = lines[:start]
+        while lines and not lines[-1].strip():
+            lines.pop()
+    return "\n".join(lines).strip() + "\n"
+
+
 def _git(args: list[str], check: bool = True) -> subprocess.CompletedProcess:
     env = os.environ.copy()
     env["GIT_AUTHOR_NAME"] = "Rohit Goswami"
@@ -625,7 +675,67 @@ def _git(args: list[str], check: bool = True) -> subprocess.CompletedProcess:
     return subprocess.run(args, cwd=ROOT, env=env, check=check, text=True)
 
 
+def _show_unpushed() -> str:
+    result = subprocess.run(
+        ["git", "log", "--format=%B", f"origin/{BRANCH}..HEAD"],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+        check=True,
+    )
+    print(result.stdout, end="" if result.stdout.endswith("\n") or not result.stdout else "\n", flush=True)
+    return result.stdout
+
+
+def _rewrite_unpushed_trailers() -> None:
+    """Drop trailers from commits that are not on the remote. Push stays a fast-forward."""
+    _show_unpushed()
+    revs = subprocess.check_output(
+        ["git", "rev-list", "--reverse", f"origin/{BRANCH}..HEAD"],
+        cwd=ROOT,
+        text=True,
+    ).split()
+    dirty = []
+    bodies = []
+    for rev in revs:
+        body = subprocess.check_output(["git", "log", "-1", "--format=%B", rev], cwd=ROOT, text=True)
+        bodies.append(body)
+        if _body_has_trailer(body):
+            dirty.append(rev)
+    if not dirty:
+        return
+    parent = subprocess.check_output(["git", "rev-parse", f"origin/{BRANCH}"], cwd=ROOT, text=True).strip()
+    for rev, body in zip(revs, bodies):
+        tree = subprocess.check_output(["git", "rev-parse", f"{rev}^{{tree}}"], cwd=ROOT, text=True).strip()
+        author_name = subprocess.check_output(["git", "log", "-1", "--format=%an", rev], cwd=ROOT, text=True).strip()
+        author_email = subprocess.check_output(["git", "log", "-1", "--format=%ae", rev], cwd=ROOT, text=True).strip()
+        author_date = subprocess.check_output(["git", "log", "-1", "--format=%aD", rev], cwd=ROOT, text=True).strip()
+        env = os.environ.copy()
+        env.update(
+            {
+                "GIT_AUTHOR_NAME": author_name,
+                "GIT_AUTHOR_EMAIL": author_email,
+                "GIT_AUTHOR_DATE": author_date,
+                "GIT_COMMITTER_NAME": "Rohit Goswami",
+                "GIT_COMMITTER_EMAIL": "rgoswami@ieee.org",
+            }
+        )
+        parent = subprocess.check_output(
+            ["git", "commit-tree", tree, "-p", parent],
+            cwd=ROOT,
+            input=_strip_trailers(body),
+            text=True,
+            env=env,
+        ).strip()
+    subprocess.run(["git", "reset", "--soft", parent], cwd=ROOT, check=True)
+    cleaned = _show_unpushed()
+    if _body_has_trailer(cleaned):
+        raise SystemExit("unpushed commit still has a trailer")
+
+
 def _commit_and_push(message: str) -> bool:
+    if _body_has_trailer(message):
+        raise SystemExit("refusing to commit a message with a trailer")
     write_doc()
     _git(["git", "add", "--", "results/htst-al-dimer-cg2/continuous", "docs/htst-al-windows.md"])
     diff = subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=ROOT)
@@ -642,9 +752,10 @@ def _commit_and_push(message: str) -> bool:
             message,
         ]
     )
+    _rewrite_unpushed_trailers()
     delay = 4
     for attempt in range(4):
-        push = subprocess.run(["git", "push", "-u", "origin", "cells/htst/al-dimer-cg2"], cwd=ROOT)
+        push = subprocess.run(["git", "push", "-u", "origin", BRANCH], cwd=ROOT)
         if push.returncode == 0:
             print("checkpoint pushed", flush=True)
             return True
@@ -776,6 +887,13 @@ def _self_test() -> None:
             raise SystemExit(f"self-test protocol rate sum {cut['rate_windows'][0]['rate']}")
         if abs(RATE_REF * RATE_ACCURACY - THRESHOLD) > 1e-6:
             raise SystemExit("self-test threshold")
+    sample = "score: checkpoint hTST Al dimer windows\n\nCo-authored-by: Rohit Goswami <rgoswami@ieee.org>\n"
+    if not _body_has_trailer(sample):
+        raise SystemExit("self-test missed a trailer")
+    if _strip_trailers(sample) != "score: checkpoint hTST Al dimer windows\n":
+        raise SystemExit(f"self-test strip {_strip_trailers(sample)!r}")
+    if _body_has_trailer("score: cut hTST Al dimer windows on one AKMC per client\n"):
+        raise SystemExit("self-test treated the subject as a trailer")
     print("self-test ok")
 
 
