@@ -2,16 +2,16 @@
 # TSASE forceCalls is not this count.
 # ssneb multiplies the spring constant by the image count.
 # A success is under the cap, at the potential force stop, and Hessian index 1.
-force_calls 7884
+force_calls 49386
 force_calls_min 6527
-force_calls_max 9918
-force_calls_median 7693
-force_calls_per_image 1577
+force_calls_max 169328
+force_calls_median 15758
+force_calls_per_image 9877
 call_unit total
-successes 5
-nfailed 46
+successes 15
+nfailed 36
 n 51
-transition_states 5
+transition_states 15
 code tsase
 code_version 1.0
 commit 98aac60b5d9905e81ee4e6b8c385f169258d0218
