@@ -161,6 +161,8 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | emt-pt38/pyamff-rprop10-7-fcoeff0 | — | — | not rerun |
 | emt-pt38/pyamff-rprop10-7-fcoeff0_1 | — | — | not rerun |
 
+C2H4/pyamff-rprop10-7-fcoeff0_1 is ranked on the harness at PyAMFF 240f51d0 (0.1.0-beta). The archived 8037eb98 number stays the paper row.
+
 ## neb
 
 | Row | Archive | Rerun | Status |
