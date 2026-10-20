@@ -1,0 +1,1 @@
+{"calls_at_lowest": 375430, "comparable": true, "counter": "harness", "failure": "cap", "force_calls": 500000, "iterations": 2526, "lowest_energy": -172.958606002032, "optimizer": "scipy-lbfgsb", "reasons": ["cap"], "reference_energy": -173.9284265117895, "schema": "optbench.start/v2", "seed": 314159, "start": "0.con", "success": false, "target_energy": -173.9274265117895}
