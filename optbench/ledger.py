@@ -1,9 +1,9 @@
-"""Reproduction ledger for the 2014 archive and the JCTC tables.
+"""Ledger for the 2014 archive and the JCTC tables.
 
-A row is reproduced when every archived metric is within one archived
+A row is a run when every archived metric is within one archived
 standard error or 10 percent, and the failure count sits in the Wilson
 interval of the archived failure count. The ledger is
-``oracle/reproduction.jsonl``. ``paper_baseline`` marks the rerun whose
+``oracle/ledger.jsonl``. ``paper_baseline`` marks the rerun whose
 score is the published comparison. The 2014 pele transition-state stop
 is the first RMS crossing plus one eigenvector search, with the
 transverse-screen calls left out.
@@ -222,13 +222,13 @@ CAUSE_TEXT = {
     ),
     "pt_lanczos": (
         "The svn template uses the archived Lanczos keys (10 iterations, tolerance 0.05) and shifted Morse::force. "
-        "Dimer and climbing-image on that kernel reproduce. Lanczos does not, and the failure count is 0 against 5 or 8."
+        "Dimer and climbing-image on that kernel run. Lanczos does not, and the failure count is 0 against 5 or 8."
     ),
     "ase_morse_script": (
         "ASE 3.29 with the archived Morse script (L-BFGS memory 20, maxstep 0.2, alpha 25; FIRE maxstep 0.2; PreconLBFGS Exp A 3) "
         "scores 32, 113, and 29 against 53.8, 147.47, and 34. "
         "Constructor-default L-BFGS scores 53, next to 53.8, but that is not the archived alpha and memory. "
-        "eOn Morse L-BFGS and FIRE on the same bulk file reproduce, so the geometry set is not the split."
+        "eOn Morse L-BFGS and FIRE on the same bulk file run, so the geometry set is not the split."
     ),
     "optim_pt_units": (
         "archive run.sh divides coordinates by r0 = 2.897 and scales rho and rcut into those units. "
@@ -247,12 +247,12 @@ CAUSE_TEXT = {
         "The Rayleigh-Ritz template uses updates 4. The archived first-order mean is 25 and the second-order mean is 46. "
         "This default scores 61, so it is not either archived order."
     ),
-    "pele_fire": "pele FIRE on LJ38 scores 1264 with 7 failures. The archive is 709 with 0 failures. The M100 L-BFGS row on the same build reproduces, so this is the FIRE step, not the LJ kernel.",
-    "pele_morse": "pele Morse L-BFGS scores 92. The archive is 51. eOn Morse L-BFGS on the same bulk file reproduces at 52, so the gap is the pele memory and step, not the shared Morse parameters.",
-    "morse_sd": "eOn Morse steepest descent scores 7038 with 19 failures. The archive is 196 with 0. Morse L-BFGS, CG, and FIRE on the same client reproduce, so the kernel is not the split.",
+    "pele_fire": "pele FIRE on LJ38 scores 1264 with 7 failures. The archive is 709 with 0 failures. The M100 L-BFGS row on the same build runs, so this is the FIRE step, not the LJ kernel.",
+    "pele_morse": "pele Morse L-BFGS scores 92. The archive is 51. eOn Morse L-BFGS on the same bulk file runs at 52, so the gap is the pele memory and step, not the shared Morse parameters.",
+    "morse_sd": "eOn Morse steepest descent scores 7038 with 19 failures. The archive is 196 with 0. Morse L-BFGS, CG, and FIRE on the same client run, so the kernel is not the split.",
     "improved_unset": "The r2549 template turns improved on. The 2014 ini left that key unset. The mean lands outside 10 percent.",
     "sella_trust": "Sella 2.6.0 with the archived trust-region numbers (eta, gamma, delta0, rho, sigma) is the parameter_source=archive row. It misses the 2014 mean. The constructor-default row is a different setup.",
-    "heptamer_cg": "The 3.5.0 file already stores the per-image mean, 142 against the archive 120. L-BFGS, FIRE, and QM on the same 8-image spring-5 climb reproduce, so the image count is not the split.",
+    "heptamer_cg": "The 3.5.0 file already stores the per-image mean, 142 against the archive 120. L-BFGS, FIRE, and QM on the same 8-image spring-5 climb run, so the image count is not the split.",
     "de_exclusion": "The 3.5.0 doubly-nudged file is the per-band mean under the 2500-call exclusion (708, 5 failures). The archive mean is 861. The client total is a different counter and is also outside 10 percent.",
     "eon_saddle_count": (
         "The classic dimer campaign (improved false, the 2014 key) has fraction_connected 0.692 against 0.746, inside 10 percent, "
@@ -271,7 +271,7 @@ CAUSE_TEXT = {
         "The harness uses pele LJCluster defaults (temperature 1, step 0.6, LBFGS memory 4) on unshifted cutoff 40. "
         "The mean is 688720 against 521595."
     ),
-    "htst_al": "The r2549 Al dimer with the archived rotation string (CG, max 50, tol 1) misses barrier_force_calls and rate_force_calls by about 30 percent. Pt dimer CG with max 10 reproduces all four hTST counts.",
+    "htst_al": "The r2549 Al dimer with the archived rotation string (CG, max 50, tol 1) misses barrier_force_calls and rate_force_calls by about 30 percent. Pt dimer CG with max 10 runs all four hTST counts.",
     "precon_hessian_index": (
         "ASE 3.29 PreconLBFGS with the archived opt.py setup (Exp A 3, maxstep 0.1, ASE fmax 0.01) "
         "scores 2605 against 2686, inside 10 percent. "
@@ -388,7 +388,7 @@ def judge_checks(checks: list[dict], failure: dict | None) -> str:
     ok = all(item["ok"] for item in checks)
     if failure is not None and not failure["ok"]:
         ok = False
-    return "reproduced" if ok else "not_reproduced"
+    return "run" if ok else "not_run"
 
 
 def build_checks(
@@ -507,15 +507,15 @@ class Hold:
 def holdback(root: Path) -> Hold:
     """Templates and campaign paths whose archive rerun missed the tolerance.
 
-    ``hold`` entries are included for every ledger row. A reproduced
+    ``hold`` entries are included for every ledger row. A run of a
     per-image file can still keep a raw-total template off the table.
     """
     found = Hold()
-    for row in load_ledger(root / "oracle" / "reproduction.jsonl"):
+    for row in load_ledger(root / "oracle" / "ledger.jsonl"):
         rerun = row.get("rerun") or {}
         problem = f"{row['suite']}/{row['problem']}"
         template = str(rerun.get("template") or "")
-        if row.get("status") == "not_reproduced":
+        if row.get("status") == "not_run":
             if template:
                 found.templates.add((problem, template))
             rel = str(rerun.get("path") or "")
@@ -536,7 +536,7 @@ def _local_fields(root: Path, rerun: dict) -> dict[str, str] | None:
 def baseline_errors(root: Path) -> list[str]:
     """Paper-baseline rows whose live campaign misses the archive tolerance."""
     errors = []
-    ledger = load_ledger(root / "oracle" / "reproduction.jsonl")
+    ledger = load_ledger(root / "oracle" / "ledger.jsonl")
     marked = []
     for row in ledger:
         rerun = row.get("rerun") or {}
@@ -544,7 +544,7 @@ def baseline_errors(root: Path) -> list[str]:
             continue
         ident = row_id(row)
         marked.append(rerun.get("template"))
-        if row.get("status") != "reproduced":
+        if row.get("status") != "run":
             errors.append(f"{ident} is paper_baseline and {row.get('status')}")
             continue
         fields = _local_fields(root, rerun)
@@ -584,7 +584,7 @@ def baseline_errors(root: Path) -> list[str]:
         for path in templates.rglob("*.toml"):
             data = tomllib.loads(path.read_text(encoding="utf-8"))
             if data.get("paper_baseline") and data.get("id") not in known:
-                errors.append(f"{data.get('id')} sets paper_baseline and is not a reproduced ledger row")
+                errors.append(f"{data.get('id')} sets paper_baseline and is not a run in the ledger")
     return errors
 
 
@@ -646,29 +646,29 @@ def large_endpoint_files(root: Path, limit: int = 1_000_000) -> list[str]:
     return errors
 
 
-def reproduction_errors(root: Path) -> list[str]:
-    ledger_path = root / "oracle" / "reproduction.jsonl"
+def ledger_errors(root: Path) -> list[str]:
+    ledger_path = root / "oracle" / "ledger.jsonl"
     if not ledger_path.is_file():
-        return ["oracle/reproduction.jsonl is missing"]
+        return ["oracle/ledger.jsonl is missing"]
     from .check import load_oracle
 
     oracle = load_oracle(root / "oracle" / "entries.jsonl")
     ledger = load_ledger(ledger_path)
     errors = []
     if len(ledger) != len(oracle):
-        errors.append(f"reproduction ledger has {len(ledger)} rows and the oracle has {len(oracle)}")
+        errors.append(f"ledger has {len(ledger)} rows and the oracle has {len(oracle)}")
     oracle_ids = [row_id(row) for row in oracle]
     ledger_ids = [row_id(row) for row in ledger]
     if oracle_ids != ledger_ids:
-        errors.append("reproduction ledger is not in oracle order")
+        errors.append("ledger is not in oracle order")
     for row in ledger:
         status = judge_checks(row.get("checks") or [], row.get("failure_check") if row.get("rerun") else None)
         if row.get("rerun") is None:
             status = "not_rerun"
         if status != row.get("status"):
             errors.append(f"{row_id(row)} stored {row.get('status')} and the checks say {status}")
-        if row.get("rerun", {}) and row["rerun"].get("paper_baseline") and row.get("status") != "reproduced":
-            errors.append(f"{row_id(row)} paper_baseline is not reproduced")
+        if row.get("rerun", {}) and row["rerun"].get("paper_baseline") and row.get("status") != "run":
+            errors.append(f"{row_id(row)} paper_baseline is not a run")
     errors.extend(baseline_errors(root))
     errors.extend(large_endpoint_files(root))
     return errors
@@ -754,18 +754,18 @@ def build_rows(root: Path) -> list[dict]:
             }
         status = judge_checks(checks, failure)
         named = match.get("cause", "")
-        cause = named if status == "not_reproduced" else ""
+        cause = named if status == "not_run" else ""
         record["checks"] = checks
         record["failure_check"] = failure
         record["status"] = status
-        record["gap"] = _gap(checks, failure) if status == "not_reproduced" else ""
+        record["gap"] = _gap(checks, failure) if status == "not_run" else ""
         record["cause"] = cause
         record["cause_detail"] = CAUSE_TEXT.get(cause, "") if cause else ""
-        record["note"] = CAUSE_TEXT.get(named, "") if status == "reproduced" and named else ""
-        baseline = status == "reproduced"
+        record["note"] = CAUSE_TEXT.get(named, "") if status == "run" and named else ""
+        baseline = status == "run"
         # The ranked harness-stop mean is not the 2014 pele score.
         if kind == "screen":
-            baseline = status == "reproduced"
+            baseline = status == "run"
         rerun = {
             "template": match["template"],
             "branch": match["branch"],
@@ -796,15 +796,15 @@ def _fmt(value: float) -> str:
 
 
 def render_markdown(rows: list[dict]) -> str:
-    counts = {"reproduced": 0, "not_reproduced": 0, "not_rerun": 0}
+    counts = {"run": 0, "not_run": 0, "not_rerun": 0}
     for row in rows:
         counts[row["status"]] = counts.get(row["status"], 0) + 1
     lines = [
-        "# Reproduction",
+        "# Ledger",
         "",
         "Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.",
         "",
-        f"{counts['reproduced']} reproduced, {counts['not_reproduced']} not reproduced, {counts['not_rerun']} not rerun. {len(rows)} archive rows.",
+        f"{counts['run']} run, {counts['not_run']} not run, {counts['not_rerun']} not rerun. {len(rows)} archive rows.",
         "",
         "The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.",
         "",
@@ -817,13 +817,13 @@ def render_markdown(rows: list[dict]) -> str:
         "Endpoint minima are free-atom float32 deltas against the reactant, compressed. A file over 1 MB is a git-LFS pointer, not a loose blob.",
         "",
     ]
-    current = ""
+    opened = ""
     for row in rows:
         suite = row["suite"]
-        if suite != current:
-            if current:
+        if suite != opened:
+            if opened:
                 lines.append("")
-            current = suite
+            opened = suite
             lines.append(f"## {suite}")
             lines.append("")
             lines.append("| Row | Archive | Rerun | Status |")
@@ -870,10 +870,10 @@ def render_markdown(rows: list[dict]) -> str:
 
 def write_ledger(root: Path) -> list[dict]:
     rows = build_rows(root)
-    path = root / "oracle" / "reproduction.jsonl"
+    path = root / "oracle" / "ledger.jsonl"
     payload = "\n".join(json.dumps(row, sort_keys=True) for row in rows) + "\n"
     path.write_text(payload, encoding="utf-8")
-    (root / "docs" / "reproduction.md").write_text(render_markdown(rows), encoding="utf-8")
+    (root / "docs" / "ledger.md").write_text(render_markdown(rows), encoding="utf-8")
     return rows
 
 
@@ -885,7 +885,7 @@ def main() -> None:
         counts[row["status"]] = counts.get(row["status"], 0) + 1
     print(counts)
     for row in rows:
-        if row["status"] == "not_reproduced":
+        if row["status"] == "not_run":
             print(f"{row_id(row)} {row['cause']} {row['gap']}")
 
 

@@ -10,7 +10,7 @@ profile = "tuned"
 reducer = "capped"
 ranked = true
 parameter_source = "archive"
-note = "Archive run.sh calls opt.py: LBFGSLineSearch maxstep 0.2, alpha 1/0.001, memory 100. benchmark.dat labels the row M=5. The script sets memory 100. The stop is the Euclidean force norm 0.01. The script uses a tsase LJ cutoff of 25. This row uses the harness cutoff 40, the same potential as the LBFGS row that reproduces."
+note = "Archive run.sh calls opt.py: LBFGSLineSearch maxstep 0.2, alpha 1/0.001, memory 100. benchmark.dat labels the row M=5. The script sets memory 100. The stop is the Euclidean force norm 0.01. The script uses a tsase LJ cutoff of 25. This row uses the harness cutoff 40, the same potential as the LBFGS row that runs."
 
 [optimizer]
 name = "LBFGSLineSearch"

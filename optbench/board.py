@@ -15,7 +15,7 @@ An asv result that covers one start is a smoke run and is partial.
 The full set is the problem file's sample, or the Morse archive when
 that file gives no sample count. It is not the largest campaign file.
 A result that sets ``ranked false`` stays off the ranked table.
-A template that does not reproduce the 2014 archive stays off it too.
+A template that is not a run of the 2014 archive stays off it too.
 Partial rows stay in the output. A campaign file and an asv track for
 the same run are one row. Only the newest full version of a template
 is ranked. Older full versions stay in the history list.
@@ -490,7 +490,7 @@ def _blank_row(**values) -> dict:
         "comparable": False,
         "partial": False,
         "partial_reason": "",
-        "current": False,
+        "ranked": False,
         "history": False,
         "registry_match": False,
         "call_unit": "",
@@ -600,13 +600,13 @@ def _version_key(text: str) -> tuple[int, ...]:
 
 
 def _mark_versions(rows: list[dict]) -> None:
-    """The newest full version of a template is current. Older full versions are history."""
+    """The newest full version of a template is ranked. Older full versions are history."""
     groups: dict[tuple, list[dict]] = defaultdict(list)
     for row in rows:
         template = row.get("template") or ""
         if not template:
             row["history"] = False
-            row["current"] = bool(row.get("comparable") and not row.get("partial"))
+            row["ranked"] = bool(row.get("comparable") and not row.get("partial"))
             continue
         groups[(row.get("problem"), template)].append(row)
     for group in groups.values():
@@ -615,13 +615,13 @@ def _mark_versions(rows: list[dict]) -> None:
         newest = max((_version_key(str(row.get("code_version") or "")) for row in eligible), default=None)
         for row in group:
             if id(row) in eligible_ids and _version_key(str(row.get("code_version") or "")) == newest:
-                row["current"] = True
+                row["ranked"] = True
                 row["history"] = False
             elif id(row) in eligible_ids:
-                row["current"] = False
+                row["ranked"] = False
                 row["history"] = True
             else:
-                row["current"] = False
+                row["ranked"] = False
                 row["history"] = False
 
 
@@ -975,14 +975,14 @@ def _matches_hold(row: dict, held) -> bool:
     return any(path in held.paths for path in paths)
 
 
-def _apply_reproduction_hold(row: dict, held) -> None:
+def _apply_ledger_hold(row: dict, held) -> None:
     """Keep an exact archive rerun that missed the tolerance off the ranked table."""
     if not _matches_hold(row, held) or row.get("_declared_partial"):
         return
     n = int(row.get("n") or 0)
     if _source_parts(row) == {"asv"} and n <= 1:
         return
-    reason = "does not reproduce the 2014 archive"
+    reason = "not a run of the 2014 archive"
     if not row.get("scored"):
         note = str(row.get("note") or "")
         if reason not in note:
@@ -1001,13 +1001,13 @@ def build_board(root: Path) -> dict:
     asv_rows, asv_unparsed, unmapped = _asv_rows(root, problems, templates)
     unparsed.extend(asv_unparsed)
     rows = _dedup(campaign + asv_rows)
-    from .reproduction import holdback
+    from .ledger import holdback
 
     held = holdback(root)
     for row in rows:
-        _apply_reproduction_hold(row, held)
+        _apply_ledger_hold(row, held)
     for row in unparsed:
-        _apply_reproduction_hold(row, held)
+        _apply_ledger_hold(row, held)
     full_n: dict[str, int | None] = {}
     for problem_id, problem in problems.items():
         full_n[problem_id] = stated_full_n(root, problem)
@@ -1304,7 +1304,7 @@ def _headers(problem: dict) -> list[str]:
         "Version",
         "Commit",
         "Source",
-        "Current",
+        "Ranked",
         "PAR-2",
         "Success",
         "Wilson low",
@@ -1328,7 +1328,7 @@ def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
         ("version", f"{row.get('code') or ''} {row.get('code_version') or ''}"),
         ("commit", str(row.get("commit") or "")[:12]),
         ("source", str(row.get("source") or "")),
-        ("current", "yes" if row.get("current") else "no"),
+        ("ranked", "yes" if row.get("ranked") else "no"),
         ("par2_mean", _format_number(row.get("par2_mean"))),
         ("success_rate", _format_number(row.get("success_rate"))),
         ("wilson_low", _format_number(row.get("wilson_low"))),

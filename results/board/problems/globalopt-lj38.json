@@ -13,7 +13,6 @@
       "commit": "r2549",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "eon-svn-bh-lj38",
       "failures": {
         "cap": 0,
@@ -40,6 +39,7 @@
       "partial_reason": "result file sets partial true; potential unshifted lj/cut, epsilon 1, sigma 1, cutoff 40",
       "path": "results/campaign/eon-svn-bh-lj38.dat",
       "problem": "globalopt/lj38",
+      "ranked": false,
       "registry_match": true,
       "scored": true,
       "source": "campaign",

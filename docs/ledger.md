@@ -1,8 +1,8 @@
-# Reproduction
+# Ledger
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+46 run, 29 not run, 76 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -25,24 +25,24 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
-| lj38/eon-ci-neb | force_calls 827 | 762 | reproduced |
-| lj38/eon-ci-swdneb | force_calls 861 | 708 | not reproduced; de_exclusion |
-| lj38/eon-dimer | force_calls 337 | 377 | not reproduced; improved_unset |
-| lj38/eon-lanczos | force_calls 364 | 342 | reproduced |
-| lj38/eon-lanczos-improved | force_calls 287 | 259 | reproduced |
-| lj38/optim | force_calls 131 | 147 | not reproduced; optim_pes_counter |
+| lj38/eon-ci-neb | force_calls 827 | 762 | run |
+| lj38/eon-ci-swdneb | force_calls 861 | 708 | not run; de_exclusion |
+| lj38/eon-dimer | force_calls 337 | 377 | not run; improved_unset |
+| lj38/eon-lanczos | force_calls 364 | 342 | run |
+| lj38/eon-lanczos-improved | force_calls 287 | 259 | run |
+| lj38/optim | force_calls 131 | 147 | not run; optim_pes_counter |
 | lj38/optim-cl-string | — | — | not rerun |
 | lj38/pele | — | — | not rerun |
-| lj38_2ts_separation/optim | force_calls 2885 | 3454 | not reproduced; optim_pes_counter |
+| lj38_2ts_separation/optim | force_calls 2885 | 3454 | not run; optim_pes_counter |
 | lj38_2ts_separation/pele | — | — | not rerun |
-| pt-island/eon-ci-neb | force_calls 248 | 226 | reproduced |
+| pt-island/eon-ci-neb | force_calls 248 | 226 | run |
 | pt-island/eon-ci-neb-5 | — | — | not rerun |
 | pt-island/eon-ci-neb-single | — | — | not rerun |
-| pt-island/eon-ci-swdneb | force_calls 256 | 246 | reproduced |
-| pt-island/eon-dimer | force_calls 182 | 192 | reproduced |
-| pt-island/eon-lanczos | force_calls 325 | 222 | not reproduced; pt_lanczos |
-| pt-island/eon-lanczos-improved | force_calls 222 | 181 | not reproduced; pt_lanczos |
-| pt-island/optim | force_calls 103 | 138 | not reproduced; optim_pt_units |
+| pt-island/eon-ci-swdneb | force_calls 256 | 246 | run |
+| pt-island/eon-dimer | force_calls 182 | 192 | run |
+| pt-island/eon-lanczos | force_calls 325 | 222 | not run; pt_lanczos |
+| pt-island/eon-lanczos-improved | force_calls 222 | 181 | not run; pt_lanczos |
+| pt-island/optim | force_calls 103 | 138 | not run; optim_pt_units |
 | pt-island/optim-6 | — | — | not rerun |
 | pt-island/optim-cl-string | — | — | not rerun |
 | pt-island/pele | — | — | not rerun |
@@ -55,11 +55,11 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj100-binary/gmin | — | — | not rerun |
 | lj150/gmin-nosym | — | — | not rerun |
 | lj150/gmin-symmetrise | — | — | not rerun |
-| lj38/eon-basinhopping | force_calls 508011 | 503146 | reproduced |
+| lj38/eon-basinhopping | force_calls 508011 | 503146 | run |
 | lj38/gmin-csm | — | — | not rerun |
 | lj38/gmin-nosym | — | — | not rerun |
 | lj38/gmin-symmetrise | — | — | not rerun |
-| lj38/pele-basinhopping | force_calls 521595 | 688720 | not reproduced; pele_bh_defaults |
+| lj38/pele-basinhopping | force_calls 521595 | 688720 | not run; pele_bh_defaults |
 | lj75/gmin | — | — | not rerun |
 | lj98/gmin-nosym | — | — | not rerun |
 | lj98/gmin-symmetrise | — | — | not rerun |
@@ -74,10 +74,10 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
-| Al/eon-dimer-cg | barrier_force_calls 28870, barrier_jobs 48, rate_force_calls 897900, rate_jobs 1511 | 19660, 50, 620600, 1600 | not reproduced; htst_al |
+| Al/eon-dimer-cg | barrier_force_calls 28870, barrier_jobs 48, rate_force_calls 897900, rate_jobs 1511 | 19660, 50, 620600, 1600 | not run; htst_al |
 | Al/eon-dimer-cg2 | — | — | not rerun |
 | Pt/alpha_dimer-qm | — | — | not rerun |
-| Pt/eon-dimer-cg | barrier_force_calls 496000, barrier_jobs 1050, rate_force_calls 25630, rate_jobs 54 | 506000, 1062, 27160, 57 | reproduced |
+| Pt/eon-dimer-cg | barrier_force_calls 496000, barrier_jobs 1050, rate_force_calls 25630, rate_jobs 54 | 506000, 1062, 27160, 57 | run |
 | Pt/eon-dimer-cg2 | — | — | not rerun |
 | Pt/eon-dimer-lbfgs | — | — | not rerun |
 | Pt/eon-dimer-lbfgs2 | — | — | not rerun |
@@ -92,14 +92,14 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
-| lj38/eon-dimer-cg | force_calls 30 | 30 | reproduced |
-| lj38/eon-dimer-lbfgs | force_calls 28 | 28 | reproduced |
-| lj38/eon-lanczos | force_calls 28 | 26 | reproduced |
-| lj38/optim-first-order | force_calls 25 | 61 | not reproduced; optim_rr_defaults |
+| lj38/eon-dimer-cg | force_calls 30 | 30 | run |
+| lj38/eon-dimer-lbfgs | force_calls 28 | 28 | run |
+| lj38/eon-lanczos | force_calls 28 | 26 | run |
+| lj38/optim-first-order | force_calls 25 | 61 | not run; optim_rr_defaults |
 | lj38/optim-second-order | — | — | not rerun |
-| lj38/pele-first-order | force_calls 25 | 25 | reproduced |
-| lj38/pele-second-order | force_calls 47 | 47 | reproduced |
-| lj38/sella | force_calls 17.8 | 17.8 | reproduced |
+| lj38/pele-first-order | force_calls 25 | 25 | run |
+| lj38/pele-second-order | force_calls 47 | 47 | run |
+| lj38/sella | force_calls 17.8 | 17.8 | run |
 | lj38/tsase-dimer-bfgs | — | — | not rerun |
 | lj38/tsase-dimer-cg | — | — | not rerun |
 | lj38/tsase-lanczos | — | — | not rerun |
@@ -108,40 +108,40 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
-| lj38/ase-BFGS | force_calls 463 | 461 | reproduced |
-| lj38/ase-bfgslinesearch | force_calls 500 | 506 | reproduced |
-| lj38/ase-fire | force_calls 656 | 720 | reproduced |
-| lj38/ase-lbfgs | force_calls 355 | 356 | reproduced |
-| lj38/ase-lbfgslinesearch | force_calls 417 | 410 | not reproduced; linesearch_exceptions |
-| lj38/ase-preconlbfgs | force_calls 2686 | 2605 | not reproduced; precon_hessian_index |
-| lj38/eon-cg | force_calls 453 | 454 | reproduced |
-| lj38/eon-fire | force_calls 731 | 731 | reproduced |
-| lj38/eon-lbfgs | force_calls 181 | 181 | reproduced |
-| lj38/eon-qm | force_calls 3523 | 3514 | reproduced |
-| lj38/eon-sd | force_calls 4901 | 4901 | reproduced |
-| lj38/eon-sd-twopoint | force_calls 539 | 532 | reproduced |
+| lj38/ase-BFGS | force_calls 463 | 461 | run |
+| lj38/ase-bfgslinesearch | force_calls 500 | 506 | run |
+| lj38/ase-fire | force_calls 656 | 720 | run |
+| lj38/ase-lbfgs | force_calls 355 | 356 | run |
+| lj38/ase-lbfgslinesearch | force_calls 417 | 410 | not run; linesearch_exceptions |
+| lj38/ase-preconlbfgs | force_calls 2686 | 2605 | not run; precon_hessian_index |
+| lj38/eon-cg | force_calls 453 | 454 | run |
+| lj38/eon-fire | force_calls 731 | 731 | run |
+| lj38/eon-lbfgs | force_calls 181 | 181 | run |
+| lj38/eon-qm | force_calls 3523 | 3514 | run |
+| lj38/eon-sd | force_calls 4901 | 4901 | run |
+| lj38/eon-sd-twopoint | force_calls 539 | 532 | run |
 | lj38/newton-method | — | — | not rerun |
-| lj38/optim | force_calls 176 | 176 | reproduced |
-| lj38/pele-fire | force_calls 709 | 1264 | not reproduced; pele_fire |
-| lj38/pele-lbfgs-M1-maxstep0.1 | force_calls 287 | 286 | reproduced |
-| lj38/pele-lbfgs-M10-maxstep0.1 | force_calls 235 | 235 | reproduced |
-| lj38/pele-lbfgs-M100-maxstep0.2 | force_calls 179 | 178 | reproduced |
-| lj38/pele-lbfgs-M20-maxstep0.1 | force_calls 222 | 223 | reproduced |
-| lj38/pele-lbfgs-M4-maxstep0.05 | force_calls 379 | 381 | reproduced |
-| lj38/pele-lbfgs-M4-maxstep0.1 | force_calls 249 | 248 | reproduced |
-| lj38/pele-lbfgs-M4-maxstep0.2 | force_calls 230 | 228 | reproduced |
+| lj38/optim | force_calls 176 | 176 | run |
+| lj38/pele-fire | force_calls 709 | 1264 | not run; pele_fire |
+| lj38/pele-lbfgs-M1-maxstep0.1 | force_calls 287 | 286 | run |
+| lj38/pele-lbfgs-M10-maxstep0.1 | force_calls 235 | 235 | run |
+| lj38/pele-lbfgs-M100-maxstep0.2 | force_calls 179 | 178 | run |
+| lj38/pele-lbfgs-M20-maxstep0.1 | force_calls 222 | 223 | run |
+| lj38/pele-lbfgs-M4-maxstep0.05 | force_calls 379 | 381 | run |
+| lj38/pele-lbfgs-M4-maxstep0.1 | force_calls 249 | 248 | run |
+| lj38/pele-lbfgs-M4-maxstep0.2 | force_calls 230 | 228 | run |
 | lj38/scipy-lbfgs | — | — | not rerun |
 | lj38/tsase-sdlbfgs | — | — | not rerun |
-| morse-bulk/ase-fire | force_calls 147.47 | 113 | not reproduced; ase_morse_script |
-| morse-bulk/ase-lbfgs | force_calls 53.8 | 32 | not reproduced; ase_morse_script |
-| morse-bulk/ase-preconLBFGS | force_calls 34 | 29 | not reproduced; ase_morse_script |
-| morse-bulk/eon-cg | force_calls 106 | 106 | reproduced |
-| morse-bulk/eon-fire | force_calls 156 | 156 | reproduced |
-| morse-bulk/eon-lbfgs | force_calls 52 | 52 | reproduced |
-| morse-bulk/eon-sd | force_calls 196 | 7038 | not reproduced; morse_sd |
+| morse-bulk/ase-fire | force_calls 147.47 | 113 | not run; ase_morse_script |
+| morse-bulk/ase-lbfgs | force_calls 53.8 | 32 | not run; ase_morse_script |
+| morse-bulk/ase-preconLBFGS | force_calls 34 | 29 | not run; ase_morse_script |
+| morse-bulk/eon-cg | force_calls 106 | 106 | run |
+| morse-bulk/eon-fire | force_calls 156 | 156 | run |
+| morse-bulk/eon-lbfgs | force_calls 52 | 52 | run |
+| morse-bulk/eon-sd | force_calls 196 | 7038 | not run; morse_sd |
 | morse-bulk/eon-sd-twopoint | — | — | not rerun |
-| morse-bulk/optim | force_calls 46 | 27 | not reproduced; optim_morse_memory |
-| morse-bulk/pele-lbfgs | force_calls 51 | 92 | not reproduced; pele_morse |
+| morse-bulk/optim | force_calls 46 | 27 | not run; optim_morse_memory |
+| morse-bulk/pele-lbfgs | force_calls 51 | 92 | not run; pele_morse |
 | morse-bulk/tsase-sdlbfgs | — | — | not rerun |
 
 ## mlopt
@@ -165,10 +165,10 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
-| Pt-heptamer/eon-cg | force_calls 120 | 142 | not reproduced; heptamer_cg |
-| Pt-heptamer/eon-fire | force_calls 86 | 85 | reproduced |
-| Pt-heptamer/eon-lbfgs | force_calls 42 | 40 | reproduced |
-| Pt-heptamer/eon-qm | force_calls 164 | 165 | reproduced |
+| Pt-heptamer/eon-cg | force_calls 120 | 142 | not run; heptamer_cg |
+| Pt-heptamer/eon-fire | force_calls 86 | 85 | run |
+| Pt-heptamer/eon-lbfgs | force_calls 42 | 40 | run |
+| Pt-heptamer/eon-qm | force_calls 164 | 165 | run |
 | Pt-heptamer/gman-cg | — | — | not rerun |
 | Pt-heptamer/gman-fire | — | — | not rerun |
 | Pt-heptamer/gman-glbfgs-hess | — | — | not rerun |
@@ -182,10 +182,10 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
-| pt-island/adaptive_HSphere-lbfgs-davidson-sm50 | force_calls 423491, unique_saddles 114.9, fraction_connected 0.8 | 5.2987e+06, 0, 1 | not reproduced; saddle_novelty |
-| pt-island/adaptive_HSphere-lbfgs-lanczos-sm0 | force_calls 1.00343e+06, unique_saddles 130.4, fraction_connected 0.9 | 1.92665e+06, 0.5, 0.9682 | not reproduced; saddle_novelty |
-| pt-island/adaptive_HSphere-lbfgs-lanczos-sm50 | force_calls 814519, unique_saddles 142.6, fraction_connected 0.9 | 1.58264e+06, 0.7, 0.93584 | not reproduced; saddle_novelty |
-| pt-island/eon-dimer | force_calls 3.77888e+06, unique_saddles 109.222, fraction_connected 0.746017 | 6.97488e+06, 91.7, 0.691952 | not reproduced; eon_saddle_count |
+| pt-island/adaptive_HSphere-lbfgs-davidson-sm50 | force_calls 423491, unique_saddles 114.9, fraction_connected 0.8 | 5.2987e+06, 0, 1 | not run; saddle_novelty |
+| pt-island/adaptive_HSphere-lbfgs-lanczos-sm0 | force_calls 1.00343e+06, unique_saddles 130.4, fraction_connected 0.9 | 1.92665e+06, 0.5, 0.9682 | not run; saddle_novelty |
+| pt-island/adaptive_HSphere-lbfgs-lanczos-sm50 | force_calls 814519, unique_saddles 142.6, fraction_connected 0.9 | 1.58264e+06, 0.7, 0.93584 | not run; saddle_novelty |
+| pt-island/eon-dimer | force_calls 3.77888e+06, unique_saddles 109.222, fraction_connected 0.746017 | 6.97488e+06, 91.7, 0.691952 | not run; eon_saddle_count |
 | pt-island/eon-dimer-cg-20-rotations | — | — | not rerun |
 | pt-island/eon-dimer-cg-20-rotations-20-bowl_breakout | — | — | not rerun |
 | pt-island/eon-dimer-cg-5-rotations-20-bowl_breakout | — | — | not rerun |
@@ -199,21 +199,21 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
-| LJ38/eon-dimer | force_calls 528 | 523 | reproduced |
-| LJ38/eon-lanczos | force_calls 321 | 293 | reproduced |
-| LJ38/eon-lanczos-improved | force_calls 237 | 271 | not reproduced; improved_unset |
+| LJ38/eon-dimer | force_calls 528 | 523 | run |
+| LJ38/eon-lanczos | force_calls 321 | 293 | run |
+| LJ38/eon-lanczos-improved | force_calls 237 | 271 | not run; improved_unset |
 | LJ38/optim_cd | — | — | not rerun |
-| LJ38/optim_ffd | force_calls 145 | 489 | not reproduced; optim_lj38_ts |
-| LJ38/pele_cd | force_calls 254 | 263.52 | reproduced; residual |
-| LJ38/pele_ffd | force_calls 192 | 207.51 | reproduced; residual |
-| LJ38/sella | force_calls 69.55 | 93 | not reproduced; sella_trust |
-| pt-island/eon-dimer | force_calls 116 | 115 | reproduced |
-| pt-island/eon-lanczos | force_calls 143 | 146 | reproduced |
-| pt-island/eon-lanczos-improved | force_calls 106 | 106 | reproduced |
+| LJ38/optim_ffd | force_calls 145 | 489 | not run; optim_lj38_ts |
+| LJ38/pele_cd | force_calls 254 | 263.52 | run; residual |
+| LJ38/pele_ffd | force_calls 192 | 207.51 | run; residual |
+| LJ38/sella | force_calls 69.55 | 93 | not run; sella_trust |
+| pt-island/eon-dimer | force_calls 116 | 115 | run |
+| pt-island/eon-lanczos | force_calls 143 | 146 | run |
+| pt-island/eon-lanczos-improved | force_calls 106 | 106 | run |
 | pt-island/optim_cd | — | — | not rerun |
-| pt-island/optim_ffd | force_calls 71 | 170 | not reproduced; optim_pt_units |
-| pt-island/pele | force_calls 88 | 88.551 | reproduced |
-| pt-island/sella | force_calls 53 | 88 | not reproduced; sella_trust |
+| pt-island/optim_ffd | force_calls 71 | 170 | not run; optim_pt_units |
+| pt-island/pele | force_calls 88 | 88.551 | run |
+| pt-island/sella | force_calls 53 | 88 | not run; sella_trust |
 
 ## Residuals inside the band
 
@@ -251,7 +251,7 @@ The template note records the 2014 mean as OPTIM's own energy-plus-gradient call
 
 ### pt_lanczos
 
-The svn template uses the archived Lanczos keys (10 iterations, tolerance 0.05) and shifted Morse::force. Dimer and climbing-image on that kernel reproduce. Lanczos does not, and the failure count is 0 against 5 or 8.
+The svn template uses the archived Lanczos keys (10 iterations, tolerance 0.05) and shifted Morse::force. Dimer and climbing-image on that kernel run. Lanczos does not, and the failure count is 0 against 5 or 8.
 
 - double-ended-saddle-search/pt-island/eon-lanczos
 - double-ended-saddle-search/pt-island/eon-lanczos-improved
@@ -271,7 +271,7 @@ The archived driver is the dangling path bin/js850/globalopt.py. The harness use
 
 ### htst_al
 
-The r2549 Al dimer with the archived rotation string (CG, max 50, tol 1) misses barrier_force_calls and rate_force_calls by about 30 percent. Pt dimer CG with max 10 reproduces all four hTST counts.
+The r2549 Al dimer with the archived rotation string (CG, max 50, tol 1) misses barrier_force_calls and rate_force_calls by about 30 percent. Pt dimer CG with max 10 runs all four hTST counts.
 
 - hTST/Al/eon-dimer-cg
 
@@ -295,13 +295,13 @@ ASE 3.29 PreconLBFGS with the archived opt.py setup (Exp A 3, maxstep 0.1, ASE f
 
 ### pele_fire
 
-pele FIRE on LJ38 scores 1264 with 7 failures. The archive is 709 with 0 failures. The M100 L-BFGS row on the same build reproduces, so this is the FIRE step, not the LJ kernel.
+pele FIRE on LJ38 scores 1264 with 7 failures. The archive is 709 with 0 failures. The M100 L-BFGS row on the same build runs, so this is the FIRE step, not the LJ kernel.
 
 - minimization/lj38/pele-fire
 
 ### ase_morse_script
 
-ASE 3.29 with the archived Morse script (L-BFGS memory 20, maxstep 0.2, alpha 25; FIRE maxstep 0.2; PreconLBFGS Exp A 3) scores 32, 113, and 29 against 53.8, 147.47, and 34. Constructor-default L-BFGS scores 53, next to 53.8, but that is not the archived alpha and memory. eOn Morse L-BFGS and FIRE on the same bulk file reproduce, so the geometry set is not the split.
+ASE 3.29 with the archived Morse script (L-BFGS memory 20, maxstep 0.2, alpha 25; FIRE maxstep 0.2; PreconLBFGS Exp A 3) scores 32, 113, and 29 against 53.8, 147.47, and 34. Constructor-default L-BFGS scores 53, next to 53.8, but that is not the archived alpha and memory. eOn Morse L-BFGS and FIRE on the same bulk file run, so the geometry set is not the split.
 
 - minimization/morse-bulk/ase-fire
 - minimization/morse-bulk/ase-lbfgs
@@ -309,7 +309,7 @@ ASE 3.29 with the archived Morse script (L-BFGS memory 20, maxstep 0.2, alpha 25
 
 ### morse_sd
 
-eOn Morse steepest descent scores 7038 with 19 failures. The archive is 196 with 0. Morse L-BFGS, CG, and FIRE on the same client reproduce, so the kernel is not the split.
+eOn Morse steepest descent scores 7038 with 19 failures. The archive is 196 with 0. Morse L-BFGS, CG, and FIRE on the same client run, so the kernel is not the split.
 
 - minimization/morse-bulk/eon-sd
 
@@ -321,13 +321,13 @@ comments.txt sets L-BFGS memory 100 and maximum move 2.0. That rerun scores 27. 
 
 ### pele_morse
 
-pele Morse L-BFGS scores 92. The archive is 51. eOn Morse L-BFGS on the same bulk file reproduces at 52, so the gap is the pele memory and step, not the shared Morse parameters.
+pele Morse L-BFGS scores 92. The archive is 51. eOn Morse L-BFGS on the same bulk file runs at 52, so the gap is the pele memory and step, not the shared Morse parameters.
 
 - minimization/morse-bulk/pele-lbfgs
 
 ### heptamer_cg
 
-The 3.5.0 file already stores the per-image mean, 142 against the archive 120. L-BFGS, FIRE, and QM on the same 8-image spring-5 climb reproduce, so the image count is not the split.
+The 3.5.0 file already stores the per-image mean, 142 against the archive 120. L-BFGS, FIRE, and QM on the same 8-image spring-5 climb run, so the image count is not the split.
 
 - neb/Pt-heptamer/eon-cg
 

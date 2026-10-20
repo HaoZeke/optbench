@@ -1,6 +1,6 @@
-=============
-Current codes
-=============
+============
+Ranked codes
+============
 
 
 The table is the registry pin and the ranked harness runs for that code.
@@ -13,8 +13,8 @@ The number is written only after the run finishes under the problem rule.
 
 .. raw:: html
 
-   <section class="bench" id="current-codes">
-   <h2>Current codes</h2>
+   <section class="bench" id="ranked-codes">
+   <h2>Ranked codes</h2>
    <p>The benchmark contributor is Rohit Goswami. A ranked row is a full harness run. The commit on that row is the commit that produced the score.</p>
    <h3>eOn</h3>
    <div class="bench-scroll"><table>
@@ -144,8 +144,8 @@ The number is written only after the run finishes under the problem rule.
    <li>LJ38: not yet on the harness counter, partial.</li>
    <li>pt-island: not yet on the harness counter, partial.</li>
    <li>eon-ci-neb: no per-start record.</li>
-   <li>eon-ci-swdneb: no per-start record; does not reproduce the 2014 archive.</li>
-   <li>eon-cg: no per-start record; does not reproduce the 2014 archive.</li>
+   <li>eon-ci-swdneb: no per-start record; not a run of the 2014 archive.</li>
+   <li>eon-cg: no per-start record; not a run of the 2014 archive.</li>
    <li>eon-fire: no per-start record.</li>
    <li>eon-lbfgs: no per-start record.</li>
    <li>eon-qm: no per-start record.</li>
@@ -156,7 +156,7 @@ The number is written only after the run finishes under the problem rule.
    <li>eon-client/morse-cg: no per-start record.</li>
    <li>eon-client/morse-fire: no per-start record.</li>
    <li>eon-client/morse-lbfgs: no per-start record.</li>
-   <li>eon-client/morse-sd: no per-start record; does not reproduce the 2014 archive.</li>
+   <li>eon-client/morse-sd: no per-start record; not a run of the 2014 archive.</li>
    <li>eon-client/qm: no per-start record.</li>
    <li>eon-client/sd-twopoint: no per-start record.</li>
    <li>eon-client/sd: no per-start record.</li>

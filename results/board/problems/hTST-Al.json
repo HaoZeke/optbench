@@ -13,7 +13,6 @@
       "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "eon-client-htst-al-dimer-cg",
       "failures": {
         "cap": 0,
@@ -40,6 +39,7 @@
       "partial_reason": "result file sets partial true",
       "path": "results/campaign/eon-client-htst-al-dimer-cg.dat",
       "problem": "hTST/Al",
+      "ranked": false,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
@@ -58,7 +58,6 @@
       "commit": "r2549",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "eon-svn-htst-al-dimer-cg",
       "failures": {
         "cap": 0,
@@ -85,6 +84,7 @@
       "partial_reason": "result file sets partial true",
       "path": "results/campaign/eon-svn-htst-al-dimer-cg.dat",
       "problem": "hTST/Al",
+      "ranked": false,
       "registry_match": true,
       "scored": true,
       "source": "campaign",

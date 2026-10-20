@@ -223,14 +223,14 @@ def campaign_problem(stem: str) -> str | None:
     return None
 
 
-def _not_reproduced() -> set[str]:
+def _not_run() -> set[str]:
     """Archive rows whose exact-setup rerun missed the tolerance."""
-    from .reproduction import load_ledger
+    from .ledger import load_ledger
 
-    path = Path(__file__).resolve().parents[1] / "oracle" / "reproduction.jsonl"
+    path = Path(__file__).resolve().parents[1] / "oracle" / "ledger.jsonl"
     found: set[str] = set()
     for row in load_ledger(path):
-        if row.get("status") == "not_reproduced":
+        if row.get("status") == "not_run":
             found.add(f"{row['suite']}/{row['problem']}/{row['entry']}")
     return found
 
@@ -278,7 +278,7 @@ def problem_html(
     lines.append('<details class="bench-details">')
     lines.append("<summary>Legacy 2014 archive</summary>")
 
-    misses = _not_reproduced()
+    misses = _not_run()
     prepared = []
     any_miss = False
     for rank, (row, fields) in enumerate(canonical_rows, 1):
@@ -292,7 +292,7 @@ def problem_html(
         if held:
             label = f"{label} (held out of the original table)"
         if missed:
-            label = f"{label} · not reproduced"
+            label = f"{label} · not run"
         prepared.append(
             {
                 "id": row_id,
@@ -304,7 +304,7 @@ def problem_html(
                 "value": value,
                 "best": best is not None and value == best,
                 "held": held,
-                "current": bool(row.get("current")),
+                "ranked": bool(row.get("ranked")),
             }
         )
     legacy = (
@@ -312,7 +312,7 @@ def problem_html(
         "They are not a v2 score."
     )
     if any_miss:
-        legacy += " A row marked not reproduced has a harness rerun outside the archive tolerance."
+        legacy += " A row marked not run has a harness rerun outside the archive tolerance."
     lines.append(f'<p class="bench-legacy">{legacy}</p>')
     lines.append('<div class="bench-table"><table class="bench-legacy">')
     lines.append(f"<caption>{html.escape(_caption(primary))}</caption>")
@@ -328,8 +328,8 @@ def problem_html(
             classes.append("best")
         if point["held"]:
             classes.append("held")
-        if point.get("current"):
-            classes.append("current")
+        if point.get("ranked"):
+            classes.append("ranked")
         class_attr = f' class="{" ".join(classes)}"' if classes else ""
         cells = [str(point["rank"]), point["label"], point["code"]]
         for metric in metrics:
@@ -454,7 +454,7 @@ def _collection_html(
 
     lines = [
         '<section class="bench" id="collection">',
-        "<p>Each problem leads with the current v2 rank. "
+        "<p>Each problem leads with the ranked v2 rank. "
         "The 2014 rows follow, in the published order.</p>",
     ]
     for suite in order:
@@ -505,8 +505,8 @@ def _codes_html(root: Path, document: dict) -> str:
             order.append(name)
         grouped[name].append(pin)
     lines = [
-        '<section class="bench" id="current-codes">',
-        "<h2>Current codes</h2>",
+        '<section class="bench" id="ranked-codes">',
+        "<h2>Ranked codes</h2>",
         f"<p>The benchmark contributor is {html.escape(contributor)}. "
         "A ranked row is a full harness run. "
         "The commit on that row is the commit that produced the score.</p>",

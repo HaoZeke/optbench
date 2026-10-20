@@ -13,7 +13,6 @@
       "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "eon-client-amd-hyper",
       "failures": {
         "cap": 0,
@@ -40,6 +39,7 @@
       "partial_reason": "result file sets partial true",
       "path": "results/campaign/eon-client-amd-hyper.dat",
       "problem": "accelerated-md/aladatom",
+      "ranked": false,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
@@ -58,7 +58,6 @@
       "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "eon-client-amd-prd",
       "failures": {
         "cap": 0,
@@ -85,6 +84,7 @@
       "partial_reason": "result file sets partial true",
       "path": "results/campaign/eon-client-amd-prd.dat",
       "problem": "accelerated-md/aladatom",
+      "ranked": false,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
@@ -103,7 +103,6 @@
       "commit": "r2549",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "eon-svn-amd-hyper",
       "failures": {
         "cap": 0,
@@ -130,6 +129,7 @@
       "partial_reason": "result file sets partial true",
       "path": "results/campaign/eon-svn-amd-hyper.dat",
       "problem": "accelerated-md/aladatom",
+      "ranked": false,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
@@ -148,7 +148,6 @@
       "commit": "r2549",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "eon-svn-amd-prd",
       "failures": {
         "cap": 0,
@@ -175,6 +174,7 @@
       "partial_reason": "result file sets partial true",
       "path": "results/campaign/eon-svn-amd-prd.dat",
       "problem": "accelerated-md/aladatom",
+      "ranked": false,
       "registry_match": true,
       "scored": true,
       "source": "campaign",

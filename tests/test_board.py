@@ -153,7 +153,7 @@ def test_full_harness_row_is_ranked_by_par2(tmp_path: Path):
     low, high = wilson_interval(1, 2)
     assert row["wilson_low"] == low
     assert row["wilson_high"] == high
-    assert row["current"] is True
+    assert row["ranked"] is True
     assert row["registry_match"] is True
     assert row["partial"] is False
 
@@ -175,12 +175,12 @@ def test_short_grid_stays_off_the_ranked_table(tmp_path: Path):
     assert document["partial"][0]["template"] == "toy/fast"
 
 
-def test_duplicate_files_are_kept_and_the_registry_commit_is_current(tmp_path: Path):
+def test_duplicate_files_are_kept_and_the_registry_commit_is_ranked(tmp_path: Path):
     _problem(tmp_path, starts=2, cap=10)
     _template(tmp_path)
     _registry(tmp_path, PIN)
     kept = _dat(tmp_path, "toy-fast-old", OTHER)
-    current = _dat(tmp_path, "toy-fast", PIN)
+    ranked_file = _dat(tmp_path, "toy-fast", PIN)
     _starts(tmp_path, "toy-fast-old", [_row(4, True, "0"), _row(4, True, "1")])
     _starts(tmp_path, "toy-fast", [_row(3, True, "0"), _row(3, True, "1")])
 
@@ -189,23 +189,23 @@ def test_duplicate_files_are_kept_and_the_registry_commit_is_current(tmp_path: P
     assert len(ranked) == 2
     by_commit = {row["commit"]: row for row in ranked}
     assert set(by_commit) == {PIN, OTHER}
-    assert by_commit[PIN]["current"] is True
-    assert by_commit[OTHER]["current"] is True
+    assert by_commit[PIN]["ranked"] is True
+    assert by_commit[OTHER]["ranked"] is True
     assert by_commit[PIN]["history"] is False
     assert by_commit[OTHER]["history"] is False
     assert kept.is_file()
-    assert current.is_file()
+    assert ranked_file.is_file()
     assert ranked[0]["commit"] == PIN
 
     tied = tmp_path / "results" / "campaign" / "toy-fast-tied.dat"
-    tied.write_text(current.read_text(encoding="utf-8").replace(PIN, OTHER), encoding="utf-8")
+    tied.write_text(ranked_file.read_text(encoding="utf-8").replace(PIN, OTHER), encoding="utf-8")
     _starts(tmp_path, "toy-fast-tied", [_row(3, True, "0"), _row(3, True, "1")])
     # The copy above keeps code_version 1.0 and the other commit. Same PAR-2.
-    # Give the tied file its own stem's starts; the current file stays PIN.
+    # Give the tied file its own stem's starts; the ranked file stays PIN.
     tied_board = build_board(tmp_path)["problems"]["minimization/toy"]["ranked"]
     same = [row["commit"] for row in tied_board if row["par2_mean"] == 3]
     assert same == [OTHER, PIN]
-    assert {row["current"] for row in tied_board if row["par2_mean"] == 3} == {True}
+    assert {row["ranked"] for row in tied_board if row["par2_mean"] == 3} == {True}
 
 
 def test_client_counter_is_not_on_the_ranked_board(tmp_path: Path):
@@ -499,21 +499,21 @@ def test_only_the_newest_full_version_is_ranked(tmp_path: Path):
     _template(tmp_path)
     _registry(tmp_path)
     old = _dat(tmp_path, "old", PIN, version="0.4.0")
-    current = _dat(tmp_path, "current", PIN, version="0.4.1")
+    newest = _dat(tmp_path, "ranked", PIN, version="0.4.1")
     _dat(tmp_path, "short", PIN, version="0.4.2")
     _starts(tmp_path, "old", [_row(4, True, "0"), _row(4, True, "1")])
-    _starts(tmp_path, "current", [_row(3, True, "0"), _row(3, True, "1")])
+    _starts(tmp_path, "ranked", [_row(3, True, "0"), _row(3, True, "1")])
     _starts(tmp_path, "short", [_row(1, True, "0")])
 
     problem = build_board(tmp_path)["problems"]["minimization/toy"]
     assert [row["code_version"] for row in problem["ranked"]] == ["0.4.1"]
-    assert problem["ranked"][0]["current"] is True
+    assert problem["ranked"][0]["ranked"] is True
     assert [row["code_version"] for row in problem["history"]] == ["0.4.0"]
-    assert problem["history"][0]["current"] is False
+    assert problem["history"][0]["ranked"] is False
     assert problem["history"][0]["history"] is True
     assert [row["code_version"] for row in problem["partial"]] == ["0.4.2"]
     assert old.is_file()
-    assert current.is_file()
+    assert newest.is_file()
 
 
 def test_two_codes_on_one_band_rank_the_same_total(tmp_path: Path):
@@ -777,12 +777,12 @@ def test_shipped_band_starts_share_one_call_unit():
                 assert abs(norm["force_calls"] / norm["per_image"] - images) < 1e-9
 
 
-def test_the_current_ase_benchmark_records_the_band_total():
+def test_the_ranked_ase_benchmark_records_the_band_total():
     import subprocess
 
     root = Path(__file__).resolve().parents[1]
-    current = (root / "benchmarks" / "bench_ase_sella.py").read_text(encoding="utf-8")
-    assert 'float(record["force_calls"]) / images' not in current
+    source = (root / "benchmarks" / "bench_ase_sella.py").read_text(encoding="utf-8")
+    assert 'float(record["force_calls"]) / images' not in source
     old = subprocess.check_output(
         [
             "git",

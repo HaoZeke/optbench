@@ -55,7 +55,7 @@
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="hTST/Al">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
-   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Ranked</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
    <h3>Partial</h3><ul>
@@ -67,7 +67,7 @@
    <h3>Legacy 2014 archive</h3>
    <details class="bench-details">
    <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not run has a harness rerun outside the archive tolerance.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest barrier force calls first.</caption>
    <thead><tr>
@@ -94,7 +94,7 @@
    </tr>
    <tr id="htst-al-eon-dimer-cg">
    <td class="num">2</td>
-   <td class="text">eon-dimer-cg · not reproduced</td>
+   <td class="text">eon-dimer-cg · not run</td>
    <td class="text">Eon r2006</td>
    <td class="num">2.887e+04</td>
    <td class="num">48</td>
@@ -119,7 +119,7 @@
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="hTST/Pt">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
-   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Ranked</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
    <h3>Partial</h3><ul>

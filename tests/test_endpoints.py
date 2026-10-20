@@ -5,7 +5,7 @@ from pathlib import Path
 import numpy as np
 
 from optbench.endpoints import FORMAT, load_endpoints, save_endpoints
-from optbench.reproduction import large_endpoint_files
+from optbench.ledger import large_endpoint_files
 
 
 def test_float32_deltas_round_trip_and_beat_a_full_cartesian_archive(tmp_path: Path):

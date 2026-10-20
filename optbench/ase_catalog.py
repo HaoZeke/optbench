@@ -147,7 +147,7 @@ def _tuned_minimizer(problem: str, name: str) -> tuple[dict, str, str]:
                 "benchmark.dat labels the row M=5. The script sets memory 100. "
                 "The stop is the Euclidean force norm 0.01. "
                 "The script uses a tsase LJ cutoff of 25. This row uses the harness cutoff 40, "
-                "the same potential as the LBFGS row that reproduces.",
+                "the same potential as the LBFGS row that runs.",
             ),
             "GPMin": (
                 {"update_hyperparams": True},

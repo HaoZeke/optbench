@@ -85,7 +85,7 @@ def test_rendered_pages_use_the_board_rank():
     assert "Legacy 2014 archive" in minimization
     assert "eon-cg" in minimization
     assert ">eon-cg<" in minimization
-    assert "pele-fire · not reproduced" in minimization
+    assert "pele-fire · not run" in minimization
     assert "par2-wilson-bootstrap" in minimization
     assert "Present runs. Fewer force calls first." not in minimization
     neb_page = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "neb.org").read_text(encoding="utf-8")
