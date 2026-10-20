@@ -145,7 +145,6 @@ The number is written only after the run finishes under the problem rule.
    <li>eon-client/morse-cg: no per-start record.</li>
    <li>eon-client/morse-fire: no per-start record.</li>
    <li>eon-client/morse-lbfgs: no per-start record.</li>
-   <li>eon-client/morse-sd: no per-start record.</li>
    <li>eon-client/qm: no per-start record.</li>
    <li>eon-client/sd-twopoint: no per-start record.</li>
    <li>eon-client/sd: no per-start record.</li>

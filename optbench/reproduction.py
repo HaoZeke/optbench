@@ -143,7 +143,7 @@ MATCHES: list[dict] = [
     {"key": "minimization/morse-bulk/eon-lbfgs", "template": "eon-client/morse-lbfgs", "branch": "main", "path": "results/campaign/eon-client-morse-lbfgs.dat"},
     {"key": "minimization/morse-bulk/eon-cg", "template": "eon-client/morse-cg", "branch": "main", "path": "results/campaign/eon-client-morse-cg.dat"},
     {"key": "minimization/morse-bulk/eon-fire", "template": "eon-client/morse-fire", "branch": "main", "path": "results/campaign/eon-client-morse-fire.dat"},
-    {"key": "minimization/morse-bulk/eon-sd", "template": "eon-client/morse-sd", "branch": "repro/minimization-morse-bulk-eon-sd", "path": "results/campaign/eon-client-morse-sd.dat"},
+    {"key": "minimization/morse-bulk/eon-sd", "template": "eon-svn/morse-sd-stock", "branch": "repro/minimization-morse-bulk-eon-sd", "path": "results/campaign/eon-svn-stock-morse-sd.dat"},
     {"key": "minimization/morse-bulk/optim", "template": "optim/morse-lbfgs-tuned", "branch": "cells/optim/min", "path": "results/campaign/optim-02aaf45245af-morse-lbfgs-tuned.dat", "cause": "optim_morse_memory"},
     {"key": "minimization/morse-bulk/pele-lbfgs", "template": "pele/morse-lbfgs", "branch": "cells/pele/min", "path": "results/campaign/pele-b7081b93-morse-lbfgs.dat", "cause": "pele_morse"},
     {"key": "minimization/morse-bulk/ase-lbfgs", "template": "ase/morse-lbfgs-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-morse-lbfgs-tuned.dat", "cause": "ase_morse_script"},

@@ -1,11 +1,11 @@
 id = "eon-develop/morse-sd-stock"
 engine = "eon-client"
 problem = "minimization/morse-bulk"
-code = "eOn (develop a7aa57472fb7)"
+code = "eOn (develop 500350d9)"
 code_version = "3.6.0"
-commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
 algorithm = "SD"
-tuning = "stock"
+tuning = "archive"
 
 [ini.Main]
 job = "minimization"
@@ -14,8 +14,12 @@ parallel = false
 [ini.Potential]
 potential = "morse_pt"
 
+[ini.SD]
+sd_alpha = 0.04
+
 [ini.Optimizer]
 opt_method = "sd"
+max_move = 0.2
 convergence_metric = "norm"
 converged_force = 0.001
 max_iterations = 10000

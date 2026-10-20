@@ -5,7 +5,7 @@ code = "EON (SVN r2549)"
 code_version = "r2549"
 commit = "r2549"
 algorithm = "SD"
-tuning = "stock"
+tuning = "archive"
 
 [ini.Main]
 job = "minimization"
@@ -15,6 +15,8 @@ potential = "morse_pt"
 
 [ini.Optimizer]
 opt_method = "sd"
+sd_alpha = 0.04
+max_move = 0.2
 convergence_metric = "norm"
 converged_force = 0.001
 max_iterations = 10000

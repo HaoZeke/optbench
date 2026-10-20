@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>EON (SVN r2549)</th><th>artn</th><th>compass</th><th>dlfind</th><th>eOn (develop a7aa57472fb7)</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>EON (SVN r2549)</th><th>artn</th><th>compass</th><th>dlfind</th><th>eOn (develop 500350d9)</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="minimization/lj38">
    <th scope="row"><a href="#lj38">Lennard-Jones 38 clusters</a></th>
    <td data-code="eOn" data-template="eon/lj38-lbfgs-m100" data-par2="180.137"><span class="bench-score">180.137</span><a href="#lj38-templates">eon/lj38-lbfgs-m100</a></td>
@@ -21,7 +21,7 @@
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind" data-template="dlfind/lbfgs-lj38" data-par2="231.908"><span class="bench-score">231.908</span><a href="#lj38-templates">dlfind/lbfgs-lj38</a></td>
-   <td data-code="eOn (develop a7aa57472fb7)">—</td>
+   <td data-code="eOn (develop 500350d9)">—</td>
    <td data-code="lammps" data-template="lammps/hftn-lj38" data-par2="1123.81"><span class="bench-score">1123.81</span><a href="#lj38-templates">lammps/hftn-lj38</a></td>
    <td data-code="optim" data-template="optim/lbfgs-lj38" data-par2="270.341"><span class="bench-score">270.341</span><a href="#lj38-templates">optim/lbfgs-lj38</a></td>
    <td data-code="tsase" data-template="tsase/lbfgs-lj38" data-par2="257.2"><span class="bench-score">257.2</span><a href="#lj38-templates">tsase/lbfgs-lj38</a></td>
@@ -39,7 +39,7 @@
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind" data-template="dlfind/lbfgs-lj38-noise-s0" data-par2="231.908"><span class="bench-score">231.908</span><a href="#lj38-noise-templates">dlfind/lbfgs-lj38-noise-s0</a></td>
-   <td data-code="eOn (develop a7aa57472fb7)">—</td>
+   <td data-code="eOn (develop 500350d9)">—</td>
    <td data-code="lammps" data-template="lammps/hftn-lj38-noise-s0" data-par2="1123.81"><span class="bench-score">1123.81</span><a href="#lj38-noise-templates">lammps/hftn-lj38-noise-s0</a></td>
    <td data-code="optim">—</td>
    <td data-code="tsase">—</td>
@@ -53,11 +53,11 @@
    <td data-code="ASE" data-template="ase/morse-bfgslinesearch-default" data-par2="28.91"><span class="bench-score">28.91</span><a href="#morse-bulk-templates">ase/morse-bfgslinesearch-default</a></td>
    <td data-code="Sella" data-template="sella/morse-min-default" data-par2="28.89"><span class="bench-score">28.89</span><a href="#morse-bulk-templates">sella/morse-min-default</a></td>
    <td data-code="pysisyphus">—</td>
-   <td data-code="EON (SVN r2549)" data-template="eon-svn/morse-sd-stock" data-par2="20000"><span class="bench-score">20000</span><a href="#morse-bulk-templates">eon-svn/morse-sd-stock</a></td>
+   <td data-code="EON (SVN r2549)" data-template="eon-svn/morse-sd-stock" data-par2="196.4"><span class="bench-score">196.4</span><a href="#morse-bulk-templates">eon-svn/morse-sd-stock</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind" data-template="dlfind/lbfgs-morse" data-par2="13626.5"><span class="bench-score">13626.5</span><a href="#morse-bulk-templates">dlfind/lbfgs-morse</a></td>
-   <td data-code="eOn (develop a7aa57472fb7)" data-template="eon-develop/morse-sd-stock" data-par2="20000"><span class="bench-score">20000</span><a href="#morse-bulk-templates">eon-develop/morse-sd-stock</a></td>
+   <td data-code="eOn (develop 500350d9)" data-template="eon-develop/morse-sd-stock" data-par2="196.4"><span class="bench-score">196.4</span><a href="#morse-bulk-templates">eon-develop/morse-sd-stock</a></td>
    <td data-code="lammps" data-template="lammps/fire-morse" data-par2="17656.7"><span class="bench-score">17656.7</span><a href="#morse-bulk-templates">lammps/fire-morse</a></td>
    <td data-code="optim" data-template="optim/lbfgs-morse" data-par2="17408.8"><span class="bench-score">17408.8</span><a href="#morse-bulk-templates">optim/lbfgs-morse</a></td>
    <td data-code="tsase" data-template="tsase/lbfgs-morse" data-par2="17606.4"><span class="bench-score">17606.4</span><a href="#morse-bulk-templates">tsase/lbfgs-morse</a></td>
@@ -758,6 +758,8 @@
    <tr><td data-field="template">rgmin/morse-fire2</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">121.87</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">124</td><td data-field="mean_calls">121.87</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-fire2-tuned</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">121.87</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">124</td><td data-field="mean_calls">121.87</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-fire2-tuned</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">f15726f1c798</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">121.87</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">124</td><td data-field="mean_calls">121.87</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">eon-develop/morse-sd-stock</td><td data-field="version">eOn (develop 500350d9) 3.6.0</td><td data-field="commit">500350d9fae8</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">196.4</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">180</td><td data-field="mean_calls">196.4</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">eon-svn/morse-sd-stock</td><td data-field="version">EON (SVN r2549) r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">196.4</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">180</td><td data-field="mean_calls">196.4</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-adam</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">219.34</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">222</td><td data-field="mean_calls">219.34</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-adam</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">f15726f1c798</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">219.34</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">222</td><td data-field="mean_calls">219.34</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">rgmin/morse-adam-tuned</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">219.34</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">222</td><td data-field="mean_calls">219.34</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
@@ -774,8 +776,6 @@
    <tr><td data-field="template">lammps/quickmin-morse</td><td data-field="version">lammps 30 Sep 2026</td><td data-field="commit">8de817dd79bf</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">19150.8</td><td data-field="success_rate">0.05</td><td data-field="wilson_low">0.0215437</td><td data-field="wilson_high">0.11175</td><td data-field="median_calls">1695.5</td><td data-field="mean_calls">2050.36</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 95</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">lammps/sd-morse</td><td data-field="version">lammps 30 Sep 2026</td><td data-field="commit">8de817dd79bf</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">19211.2</td><td data-field="success_rate">0.04</td><td data-field="wilson_low">0.0156633</td><td data-field="wilson_high">0.0983707</td><td data-field="median_calls">258.5</td><td data-field="mean_calls">262.2</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 96</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">lammps/hftn-morse</td><td data-field="version">lammps 30 Sep 2026</td><td data-field="commit">8de817dd79bf</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">19415</td><td data-field="success_rate">0.03</td><td data-field="wilson_low">0.0102545</td><td data-field="wilson_high">0.0845194</td><td data-field="median_calls">480</td><td data-field="mean_calls">512.54</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 97</td><td data-field="n">100</td></tr>
-   <tr><td data-field="template">eon-develop/morse-sd-stock</td><td data-field="version">eOn (develop a7aa57472fb7) 3.6.0</td><td data-field="commit">a7aa57472fb7</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">20000</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.0369935</td><td data-field="median_calls">10000</td><td data-field="mean_calls">10000</td><td data-field="failures">crash 0, divergence 0, cap 100, wrong_stationary 0</td><td data-field="n">100</td></tr>
-   <tr><td data-field="template">eon-svn/morse-sd-stock</td><td data-field="version">EON (SVN r2549) r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">20000</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.0369935</td><td data-field="median_calls">10000</td><td data-field="mean_calls">10000</td><td data-field="failures">crash 0, divergence 0, cap 100, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    <h3>History</h3><ul>
    <li>rgmin/morse-newton-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=8.35 mean=8.35</li>
@@ -836,7 +836,6 @@
    <li>eon-client/morse-cg: no per-start record</li>
    <li>eon-client/morse-fire: no per-start record</li>
    <li>eon-client/morse-lbfgs: no per-start record</li>
-   <li>eon-client/morse-sd: no per-start record</li>
    <li>eon-svn/morse-cg: no per-start record</li>
    <li>eon-svn/morse-fire: no per-start record</li>
    <li>eon-svn/morse-lbfgs: no per-start record</li>

@@ -1,23 +1,28 @@
-# eOn develop a7aa57472fb7, version 3.6.0, Fortran linked. Stock steepest descent on the archive force norm.
-# HarnessCounter through ext_pot. Kernel is r2549 Morse::force. sd_alpha stays at the default 0.1 and max_move at 0.2.
-# The step sits on that cap, the force norm oscillates, and every start reaches the 10000-call budget.
+# Fixed-step steepest descent. develop reads sd_alpha from [SD]; the step is dr = sd_alpha * F, then the same per-atom cap. sd_twopoint defaults off.
+# Archive config.ini sets sd_alpha 0.04 and max_move 0.2. The library default alpha is 0.1. comments.txt says 0.001; that sentence is the LJ38 comment, and the client does not read it.
+# The stop is the Euclidean norm of the free forces at 0.001, which is r2030 getForcesFreeV().norm() and convergence_metric norm here. Not the max atom force.
+# report.sh counts a start failed at 10000 force calls. That is the problem cap. This run allows 10000.
+# HarnessCounter through ext_pot. Kernel is r2549 Morse::force. Fortran-linked develop 500350d9.
 counter harness
 count_keys HarnessCounter
-code eOn (develop a7aa57472fb7)
+code eOn (develop 500350d9)
 code_version 3.6.0
-commit a7aa57472fb7d823953fd36b78cd755fa4842d30
+commit 500350d9fae881f06c7ef194e5868da079c4be5a
 algorithm SD
-tuning stock
+tuning archive
 template eon-develop/morse-sd-stock
 problem minimization/morse-bulk
 reducer harness
 cap 10000
 n 100
-par2_mean 20000.0
-nfailed 100
-mean_calls 10000.0
-median_calls 10000.0
+par2_mean 196.4
+nfailed 0
+mean_calls 196.4
+median_calls 180.0
+force_calls 196
+force_calls_min 95
+force_calls_max 360
 n_crash 0
 n_divergence 0
-n_cap 100
+n_cap 0
 n_wrong_stationary 0
