@@ -480,14 +480,29 @@ def _collection_html(
 def _code_keys(pins: list[dict]) -> set[str]:
     keys: set[str] = set()
     for pin in pins:
-        keys.add(str(pin.get("id") or "").lower())
-        keys.add(str(pin.get("name") or "").lower())
+        ident = str(pin.get("id") or "")
+        name = str(pin.get("name") or "")
+        if ident:
+            keys.add(ident.lower())
+        if name:
+            keys.add(name.lower())
+        if ident == "EON" or name == "EON":
+            keys.add("EON")
     keys.discard("")
     return keys
 
 
 def _matches_code(row: dict, keys: set[str]) -> bool:
-    return str(row.get("code") or "").lower() in keys
+    code = str(row.get("code") or "")
+    if not code:
+        return False
+    # EON is the SVN code. eOn and the older label Eon are the git client.
+    # Folding those names on case would put both codes in one table.
+    if code.lower() == "eon":
+        if code == "EON":
+            return "EON" in keys
+        return "EON" not in keys and "eon" in keys
+    return code.lower() in keys
 
 
 def _codes_html(root: Path, document: dict) -> str:

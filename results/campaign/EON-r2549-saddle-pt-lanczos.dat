@@ -1,0 +1,20 @@
+force_calls 4291108
+force_calls_min 4252868
+force_calls_max 4327008
+call_unit total
+code EON
+code_version (SVN r2549)
+commit r2549
+counter harness
+count_keys HarnessCounter
+contributor Rohit Goswami
+repetitions 10
+tuning default
+algorithm Lanczos
+template EON/saddle-pt-lanczos
+problem saddle-search/pt-island
+reducer harness
+nfailed 10
+unique_saddles 57.9
+fraction_connected 0.9930875
+total_searches 8000

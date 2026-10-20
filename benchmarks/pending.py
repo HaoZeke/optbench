@@ -1,4 +1,4 @@
-"""One skipped benchmark for every problem and registry code.
+"""One skipped benchmark for every problem and placeholder registry code.
 
 A real code copies ``benchmarks/quadratic.py`` and implements
 ``measure``. This class is the placeholder so the grid exists. It has
@@ -31,9 +31,13 @@ def problem_ids() -> list[str]:
     return found
 
 
+# Scored by a harness campaign, not by this skipped grid.
+_CAMPAIGN_ONLY = {"EON", "eon-develop-head"}
+
+
 def code_ids() -> list[str]:
     data = tomllib.loads((ROOT / "codes" / "registry.toml").read_text(encoding="utf-8"))
-    return [row["id"] for row in data["code"]]
+    return [row["id"] for row in data["code"] if row["id"] not in _CAMPAIGN_ONLY]
 
 
 class Pending:
