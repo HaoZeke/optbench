@@ -47,51 +47,6 @@
       "tuning": "",
       "wilson_high": 1.0,
       "wilson_low": 0.7719046276458016
-    },
-    {
-      "asv_commit": "",
-      "call_unit": "total",
-      "cap": 10000,
-      "code": "Gman-r128",
-      "code_version": "vtst-r128",
-      "commit": "vtst-lbfgs-r128",
-      "comparable": false,
-      "counter": "client",
-      "current": false,
-      "entry": "gman-vtst-r128-neb-pt-glbfgs-hess",
-      "failures": {
-        "cap": 0,
-        "crash": 0,
-        "divergence": 0,
-        "wrong_stationary": 0
-      },
-      "full_n": 13,
-      "history": false,
-      "max_calls": 434.0,
-      "mean_calls": 358.3076923076923,
-      "mean_per_image": 44.78846153846154,
-      "median": 362.0,
-      "median_calls": 362.0,
-      "median_high": 410.0,
-      "median_low": 346.0,
-      "median_per_image": 45.25,
-      "min_calls": 210.0,
-      "n": 13,
-      "nfailed": 0,
-      "note": "starts.jsonl",
-      "par2_mean": 358.3076923076923,
-      "partial": false,
-      "partial_reason": "",
-      "path": "results/campaign/gman-vtst-r128-neb-pt-glbfgs-hess.dat",
-      "problem": "neb/Pt-heptamer",
-      "registry_match": false,
-      "scored": true,
-      "source": "campaign",
-      "success_rate": 1.0,
-      "template": "gman/neb-pt-glbfgs-hess",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
     }
   ],
   "partial": [
@@ -413,35 +368,36 @@
   ],
   "profile": {
     "area_log10": {
-      "ase/neb-pt-heptamer-default 3.29.0 default campaign, asv f27c000": 0.9609803707734784,
+      "ase/neb-pt-heptamer-default 3.29.0 default campaign, asv f27c000": 0.9378242172608645,
       "ase/neb-pt-heptamer-tuned 3.29.0 tuned campaign, asv f27c000": 1.0536049848239342,
       "compass/sqnm 1.0.0 default campaign 22da7bd": 0.9146680637482505,
-      "eon-svn/neb-pt-cg r2549 campaign r2549": 0.7294188356473391,
+      "eon-svn/neb-pt-cg r2549 campaign r2549": 0.7062626821347251,
       "eon-svn/neb-pt-ci r2549 default campaign, asv r2549": 1.0536049848239342,
       "eon-svn/neb-pt-fire r2549 campaign r2549": 0.7988872961851808,
       "eon-svn/neb-pt-lbfgs r2549 campaign r2549": 1.0536049848239342,
-      "eon-svn/neb-pt-neb r2549 default campaign, asv r2549": 1.0651830615802411,
+      "eon-svn/neb-pt-neb r2549 default campaign, asv r2549": 1.0536049848239342,
       "eon-svn/neb-pt-qm r2549 campaign r2549": 0.5441696075464275,
-      "gman/neb-pt-vtst-661 6.6.1 stock campaign 68930c5": 1.0536049848239342,
+      "gman/neb-pt-glbfgs-hess r235 default campaign r235": 1.076761138336548,
       "rgsaddle/ci-neb 0.2.2 default campaign, asv c0db2b8": 0.7988872961851808,
       "rgsaddle/ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 1.111495368605469,
       "rgsaddle/ew-ci-neb 0.2.2 default campaign, asv c0db2b8": 0.752574989159953,
       "rgsaddle/ew-ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 1.0536049848239342,
       "rgsaddle/idpp-ci-neb 0.2.2 default campaign, asv c0db2b8": 0.752574989159953,
-      "rgsaddle/idpp-ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 1.1230734453617761,
+      "rgsaddle/idpp-ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 1.111495368605469,
       "rgsaddle/neb 0.2.2 default campaign, asv c0db2b8": 0.0,
       "rgsaddle/neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 0.0,
       "rgsaddle/oci-neb 0.2.2 default campaign, asv c0db2b8": 0.7757311426725669,
       "rgsaddle/oci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 1.0536049848239342,
       "rgsaddle/sidpp-ci-neb 0.2.2 default campaign, asv c0db2b8": 0.752574989159953,
-      "rgsaddle/sidpp-ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 1.1230734453617761,
+      "rgsaddle/sidpp-ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 1.111495368605469,
       "tsase/ci-neb 1.0 default campaign 98aac60": 0.4515449934959718,
-      "tsase/neb 1.0 default campaign 98aac60": 0.0
+      "tsase/neb 1.0 default campaign 98aac60": 0.0,
+      "vtstcode/neb-pt-glbfgs-hess 6.6.1 stock campaign 68930c5": 1.0536049848239342
     },
     "rho": {
       "ase/neb-pt-heptamer-default 3.29.0 default campaign, asv f27c000": [
         0.0,
-        0.6923076923076923,
+        0.6153846153846154,
         1.0,
         1.0,
         1.0
@@ -462,7 +418,7 @@
       ],
       "eon-svn/neb-pt-cg r2549 campaign r2549": [
         0.0,
-        0.07692307692307693,
+        0.0,
         0.8461538461538461,
         1.0,
         1.0
@@ -489,7 +445,7 @@
         1.0
       ],
       "eon-svn/neb-pt-neb r2549 default campaign, asv r2549": [
-        0.07692307692307693,
+        0.0,
         1.0,
         1.0,
         1.0,
@@ -502,8 +458,8 @@
         1.0,
         1.0
       ],
-      "gman/neb-pt-vtst-661 6.6.1 stock campaign 68930c5": [
-        0.0,
+      "gman/neb-pt-glbfgs-hess r235 default campaign r235": [
+        0.15384615384615385,
         1.0,
         1.0,
         1.0,
@@ -545,7 +501,7 @@
         1.0
       ],
       "rgsaddle/idpp-ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": [
-        0.46153846153846156,
+        0.38461538461538464,
         1.0,
         1.0,
         1.0,
@@ -587,7 +543,7 @@
         1.0
       ],
       "rgsaddle/sidpp-ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": [
-        0.46153846153846156,
+        0.38461538461538464,
         1.0,
         1.0,
         1.0,
@@ -606,6 +562,13 @@
         0.0,
         0.0,
         0.0
+      ],
+      "vtstcode/neb-pt-glbfgs-hess 6.6.1 stock campaign 68930c5": [
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
       ]
     },
     "solved": {
@@ -618,7 +581,7 @@
       "eon-svn/neb-pt-lbfgs r2549 campaign r2549": 1.0,
       "eon-svn/neb-pt-neb r2549 default campaign, asv r2549": 1.0,
       "eon-svn/neb-pt-qm r2549 campaign r2549": 1.0,
-      "gman/neb-pt-vtst-661 6.6.1 stock campaign 68930c5": 1.0,
+      "gman/neb-pt-glbfgs-hess r235 default campaign r235": 1.0,
       "rgsaddle/ci-neb 0.2.2 default campaign, asv c0db2b8": 1.0,
       "rgsaddle/ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 1.0,
       "rgsaddle/ew-ci-neb 0.2.2 default campaign, asv c0db2b8": 1.0,
@@ -632,7 +595,8 @@
       "rgsaddle/sidpp-ci-neb 0.2.2 default campaign, asv c0db2b8": 1.0,
       "rgsaddle/sidpp-ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 1.0,
       "tsase/ci-neb 1.0 default campaign 98aac60": 1.0,
-      "tsase/neb 1.0 default campaign 98aac60": 0.0
+      "tsase/neb 1.0 default campaign 98aac60": 0.0,
+      "vtstcode/neb-pt-glbfgs-hess 6.6.1 stock campaign 68930c5": 1.0
     },
     "taus": [
       1.0,
@@ -959,6 +923,51 @@
       "wilson_low": 0.7719046276458016
     },
     {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "Gman",
+      "code_version": "r235",
+      "commit": "r235",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "gman-r235-neb-pt-glbfgs-hess",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 13,
+      "history": false,
+      "max_calls": 496.0,
+      "mean_calls": 364.3076923076923,
+      "mean_per_image": 45.53846153846154,
+      "median": 376.0,
+      "median_calls": 376.0,
+      "median_high": 384.0,
+      "median_low": 352.0,
+      "median_per_image": 47.0,
+      "min_calls": 192.0,
+      "n": 13,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 364.3076923076923,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/gman-r235-neb-pt-glbfgs-hess.dat",
+      "problem": "neb/Pt-heptamer",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "gman/neb-pt-glbfgs-hess",
+      "tuning": "default",
+      "wilson_high": 1.0,
+      "wilson_low": 0.7719046276458016
+    },
+    {
       "asv_commit": "c1ecf607a10f7ab78d1615e4cbf9af030bebcdbf",
       "call_unit": "total",
       "cap": 10000,
@@ -1007,13 +1016,13 @@
       "asv_commit": "",
       "call_unit": "total",
       "cap": 10000,
-      "code": "Gman",
+      "code": "vtstcode",
       "code_version": "6.6.1",
       "commit": "68930c55f5317839dfab534fec87bca8a14d5b5d",
       "comparable": true,
       "counter": "harness",
       "current": true,
-      "entry": "gman-6.6.1-neb-pt-glbfgs-hess",
+      "entry": "vtstcode-6.6.1-neb-pt-glbfgs-hess",
       "failures": {
         "cap": 0,
         "crash": 0,
@@ -1037,13 +1046,13 @@
       "par2_mean": 408.0,
       "partial": false,
       "partial_reason": "",
-      "path": "results/campaign/gman-6.6.1-neb-pt-glbfgs-hess.dat",
+      "path": "results/campaign/vtstcode-6.6.1-neb-pt-glbfgs-hess.dat",
       "problem": "neb/Pt-heptamer",
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
-      "template": "gman/neb-pt-vtst-661",
+      "template": "vtstcode/neb-pt-glbfgs-hess",
       "tuning": "stock",
       "wilson_high": 1.0,
       "wilson_low": 0.7719046276458016

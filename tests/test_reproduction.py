@@ -43,17 +43,20 @@ def test_pt_heptamer_gman_stock_release_matches_the_archive():
     ledger = {row_id(row): row for row in load_ledger(ROOT / "oracle" / "reproduction.jsonl")}
     row = ledger["neb/Pt-heptamer/gman-glbfgs-hess"]
     assert row["status"] == "reproduced"
+    assert row.get("note", "") == ""
+    assert row.get("cause", "") == ""
     check = row["checks"][0]
     assert check["metric"] == "force_calls"
     assert check["archive"] == 48
-    assert check["rerun"] == 51
+    assert check["rerun"] == 45
     assert check["ok"] is True
     assert row["rerun"]["paper_baseline"] is True
-    assert row["rerun"]["template"] == "gman/neb-pt-vtst-661"
-    assert row["rerun"]["unrounded_mean"] == 51.0
-    assert row["rerun"]["sha"] == "10c556f7fcde938139bd0d0411dc7a7623abab26"
+    assert row["rerun"]["template"] == "gman/neb-pt-glbfgs-hess"
+    assert row["rerun"]["unrounded_mean"] == 45.53846153846154
+    assert row["rerun"]["sha"] == "777096e45bac66431b1e810d4bd5c6552813afd6"
     text = (ROOT / row["rerun"]["path"]).read_text(encoding="utf-8")
-    assert "code_version 6.6.1\n" in text
+    assert "code_version r235\n" in text
+    assert "code Gman\n" in text
     assert "counter harness\n" in text
 
 
