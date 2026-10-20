@@ -94,11 +94,16 @@ class Exploded(Exception):
 
 
 class Stalled(Exploded):
-    """The local step repeated one geometry and made no progress.
+    """BFGSLineSearch is fixed on one geometry and its own stop does not run.
 
-    Basin hopping's quench uses a bare ``except``, so this stays an
-    ``Exception`` and that search can try another displacement. Minima
-    hopping does not catch it. The start is then the ``stalled`` failure.
+    A force re-read of the trial just evaluated is a cache hit. It is not
+    a force call and it is not a stall. A repeated proposal while the
+    bracket is set is the library rounding-error test: that test warns and
+    the quench continues. A repeated proposal with the bracket unset leaves
+    the task ``FG``. The rounding-error and xtol stops do not run, and the
+    same step comes back. Basin hopping's quench uses a bare ``except``, so
+    this stays an ``Exception``. Minima hopping does not catch it. The start
+    is then the ``stalled`` failure.
     """
 
 
@@ -162,7 +167,7 @@ def judge_global(
 
     Without a threshold every finite run is a failure: the problem has no
     success rule. A crash, a non-finite energy, and a stalled line search
-    each keep their own class. A stall is a finite repeated geometry, so
+    each keep their own class. A stall is a line-search fixed point, so
     it is not a divergence.
     """
     finite = energy is not None and math.isfinite(float(energy))
@@ -210,13 +215,9 @@ class HarnessLennardJones:
         except ForceCallCap as exc:
             raise SearchStop("cap") from exc
         if not fresh and cached is not None:
+            # Energy and forces for one geometry are one evaluation.
             energy, gradient = cached
-            # A stuck line search repeats one geometry. A real step moves.
-            self._repeat = getattr(self, "_repeat", 0) + 1
-            if self._repeat > 100:
-                raise Stalled("repeated geometry")
         else:
-            self._repeat = 0
             energy, gradient = lennard_jones(coords)
             gradient = tuple(float(value) for value in np.asarray(gradient, dtype=np.float64).reshape(-1))
             energy = float(energy)
@@ -561,10 +562,43 @@ def _patch_velocity_verlet() -> None:
     hopping.VelocityVerlet = _VelocityVerlet
 
 
+def _watch_stock_line_search() -> None:
+    """Stop a quench when the stock line search is fixed on one trial.
+
+    ``ase.optimize.QuasiNewton`` is BFGSLineSearch. The search evaluates a
+    trial and may propose that same step again. The second calculator
+    request is a cache hit, not a new force call. The rounding-error stop
+    runs only while the bracket is set. A healthy search stays on ``FG``
+    for a few bracketed repeats, then warns, and the quench continues.
+    With the bracket unset those stops do not run. This watcher does not
+    change the step or the task. It stops the start when an unbracketed
+    proposal is the trial just evaluated.
+    """
+    from ase.utils.linesearch import LineSearch
+
+    if getattr(LineSearch.step, "_optbench_stall", False):
+        return
+    original = LineSearch.step
+
+    def step(self, stp, f, g, c1, c2, xtol, isave, dsave):
+        out = original(self, stp, f, g, c1, c2, xtol, isave, dsave)
+        # A bracketed repeat is the library's own rounding-error test.
+        if str(self.task)[:2] != "FG" or not self.old_stp or getattr(self, "bracket", False):
+            return out
+        scale = max(1.0, abs(float(self.old_stp)))
+        if abs(float(out) - float(self.old_stp)) <= float(xtol) * scale:
+            raise Stalled("line search repeated one geometry")
+        return out
+
+    step._optbench_stall = True
+    LineSearch.step = step
+
+
 def _run_minima(job: dict, positions: np.ndarray, counter: HarnessCounter) -> str:
     _import_tsase()
     _patch_velocity_verlet()
     _patch_hop_trajectories()
+    _watch_stock_line_search()
     from tsase.optimize.minimahopping import MinimaHopping
 
     atoms = _make_atoms(positions)
@@ -829,8 +863,12 @@ def _publish(
     note = f"Harness Lennard-Jones, cutoff 40, no shift. {minimum}"
     if parameters.get("method") == "minima_hopping" and problem_id == "globalopt/lj75":
         note += (
-            " Stock QuasiNewton is ASE BFGSLineSearch. On an overlapped archive start"
-            " it repeats one clamped step. The harness records that as stalled and charges PAR-2."
+            " Stock QuasiNewton is ASE BFGSLineSearch. A force re-read of the"
+            " current trial is a cache hit, not a force call. A bracketed repeat"
+            " is the library rounding-error test and the quench continues. On an"
+            " overlapped archive start the bracket stays unset, the same step is"
+            " proposed again, and that test does not run. The harness records"
+            " that fixed point as stalled and charges PAR-2."
         )
     if threshold is None:
         note = (

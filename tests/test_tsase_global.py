@@ -143,35 +143,66 @@ def test_templates_use_the_registry_pin_and_the_problem_stop():
     assert described["dr"] == 0.1
 
 
-def test_stock_quasinewton_stalls_on_an_overlapped_lj75_start():
-    """BFGSLineSearch repeats one clamped step. The harness records the stall."""
-    import numpy as np
-    from ase.optimize import QuasiNewton
-
+def test_a_force_reread_is_not_a_force_call():
+    """Energy and forces at one geometry are one harness call."""
     from optbench.counter import HarnessCounter
-    from optbench.runners.tsase_global import Stalled, _attach, _import_tsase, _make_atoms
+    from optbench.runners.tsase_global import _attach, _import_tsase, _make_atoms, _watch_stock_line_search
 
     _import_tsase()
+    _watch_stock_line_search()
     geometries = dict(load_geometries(ROOT, resolve_problem(ROOT, "globalopt/lj75")))
     counter = HarnessCounter(cache=True, cap=8000)
     atoms = _make_atoms(geometries["coords.44"])
     _attach(atoms, counter, None)
-    with pytest.raises(Stalled):
+    atoms.get_forces()
+    atoms.get_potential_energy()
+    atoms.get_forces()
+    assert counter.calls == 1
+
+
+def test_stock_quasinewton_stalls_on_an_overlapped_lj75_start():
+    """An unbracketed repeat is a fixed point. The rounding-error stop does not run."""
+    import numpy as np
+    from ase.optimize import QuasiNewton
+
+    from optbench.counter import HarnessCounter
+    from optbench.runners.tsase_global import (
+        Stalled,
+        _attach,
+        _import_tsase,
+        _make_atoms,
+        _watch_stock_line_search,
+    )
+
+    _import_tsase()
+    _watch_stock_line_search()
+    geometries = dict(load_geometries(ROOT, resolve_problem(ROOT, "globalopt/lj75")))
+    counter = HarnessCounter(cache=True, cap=8000)
+    atoms = _make_atoms(geometries["coords.44"])
+    _attach(atoms, counter, None)
+    with pytest.raises(Stalled, match="line search repeated one geometry"):
         QuasiNewton(atoms, logfile=None, trajectory=None).run(fmax=0.05, steps=4000)
     energy = float(counter.lowest_energy)
     assert counter.calls < 20
     assert np.isfinite(energy)
-    success, failure, _reasons = judge_global(
-        calls=counter.calls,
-        cap=1_000_000,
-        energy=energy,
-        threshold=-397.491331,
-        crashed=False,
-        exploded=False,
-        stalled=True,
-    )
-    assert success is False
-    assert failure == "stalled"
+
+
+def test_a_warning_is_the_stock_stop_and_the_search_continues():
+    """A bracketed repeat warns. That re-read is not a stall."""
+    from ase.optimize import QuasiNewton
+
+    from optbench.counter import HarnessCounter
+    from optbench.runners.tsase_global import _attach, _import_tsase, _make_atoms, _watch_stock_line_search
+
+    _import_tsase()
+    _watch_stock_line_search()
+    geometries = dict(load_geometries(ROOT, resolve_problem(ROOT, "globalopt/lj75")))
+    counter = HarnessCounter(cache=True, cap=8000)
+    atoms = _make_atoms(geometries["coords.1"])
+    _attach(atoms, counter, None)
+    # Twelve steps pass the bracketed repeats that end in a rounding warning.
+    QuasiNewton(atoms, logfile=None, trajectory=None).run(fmax=0.05, steps=12)
+    assert counter.calls >= 20
 
 
 def test_tsase_rows_are_labelled_with_the_short_commit():

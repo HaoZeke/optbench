@@ -1,7 +1,7 @@
 {
   "bootstrap_resamples": 2000,
   "bootstrap_seed": 20261015,
-  "note": "Harness Lennard-Jones, cutoff 40, no shift. The Lennard-Jones 75 minimum is the Cambridge Cluster Database energy on the problem file. Stock QuasiNewton is ASE BFGSLineSearch. On an overlapped archive start it repeats one clamped step. The harness records that as stalled and charges PAR-2.",
+  "note": "Harness Lennard-Jones, cutoff 40, no shift. The Lennard-Jones 75 minimum is the Cambridge Cluster Database energy on the problem file. Stock QuasiNewton is ASE BFGSLineSearch. A force re-read of the current trial is a cache hit, not a force call. A bracketed repeat is the library rounding-error test and the quench continues. On an overlapped archive start the bracket stays unset, the same step is proposed again, and that test does not run. The harness records that fixed point as stalled and charges PAR-2.",
   "par_factor": 2,
   "partial": false,
   "problem": "globalopt/lj75",
