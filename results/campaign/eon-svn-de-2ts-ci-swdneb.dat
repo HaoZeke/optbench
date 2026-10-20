@@ -1,7 +1,7 @@
-force_calls 24387
+force_calls 27976
 force_calls_min 742
-force_calls_max 136872
-force_calls_median 12417.0
+force_calls_max 196662
+force_calls_median 13032.0
 call_unit total
 nfailed 3
 code Eon svn
@@ -13,4 +13,3 @@ problem double-ended-saddle-search/lj38_2ts_separation
 reducer harness
 counter harness
 count_keys HarnessCounter
-partial true
