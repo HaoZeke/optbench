@@ -212,7 +212,7 @@ It does not run a campaign.
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
-   <td data-code="Pyamff" data-template="pyamff/emt-pt38" data-par2="5.28"><span class="bench-score">5.28</span><a href="generated/suites/mlopt.html#emt-pt38-templates">pyamff/emt-pt38</a></td>
+   <td data-code="Pyamff" data-template="pyamff/emt-pt38" data-par2="170.3"><span class="bench-score">170.3</span><a href="generated/suites/mlopt.html#emt-pt38-templates">pyamff/emt-pt38</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>

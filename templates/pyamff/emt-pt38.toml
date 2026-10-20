@@ -6,9 +6,9 @@ code = "Pyamff"
 code_version = "0.1.0-beta"
 commit = "240f51d01ca22969369f9bc21760c61cbb3b6665"
 algorithm = "ADAM"
-tuning = "stock"
+tuning = "one-batch"
 failure_cap = 10000
-note = "PyAMFF 0.1.0-beta, commit 240f51d0, 2026-07-04. Stock release defaults: sigmoid, hidden layers 20 10, LinearScaler, SSE, force coefficient 0.02, 100 batches, learning rate 0.01. Fifty uniform[-1, 1) starts. The stop is the archive max-absolute gradient 0.02, which this release applies on the Adam loop. The epoch cap is 10000. The archive mean epoch stays the paper row."
+note = "PyAMFF 0.1.0-beta, commit 240f51d0, 2026-07-04. One batch, so the max absolute loss gradient below 0.02 is the full dataset, and one epoch is one logged pass. Stock sigmoid, hidden layers 20 10, LinearScaler, SSE, force coefficient 0.02, learning rate 0.01. Fifty uniform[-1, 1) starts. The release default of 100 batches checks only the last batch. The epoch cap is 10000. The archive mean epoch stays the paper row."
 
 [stop]
 max_epochs = 10000

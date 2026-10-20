@@ -810,7 +810,7 @@ def render_markdown(rows: list[dict]) -> str:
         "",
         "OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.",
         "",
-        "PyAMFF EMT Pt38: the archived mean epoch 1103.24 is the paper row. PyAMFF 0.1.0-beta commit 240f51d0, stock release settings, 50 uniform[-1, 1) starts, and the archive max-absolute gradient stop 0.02, has harness mean epoch 5.28 and energy RMSE 0.013013336. The gap is left as found.",
+        "PyAMFF EMT Pt38: the archived mean epoch 1103.24 is the paper row. PyAMFF 0.1.0-beta commit 240f51d0 uses one batch, so the max-absolute loss gradient below 0.02 is the full dataset and one epoch is one logged pass. Fifty uniform[-1, 1) starts give harness mean epoch 170.3, median 59, and energy RMSE 0.003307246. The release default of 100 batches checks only the last batch.",
         "",
         "EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.",
         "",
