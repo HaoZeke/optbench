@@ -1,0 +1,19 @@
+# GMIN df8da599. NPCALL on the last Target hit line, the same field the archive scored.
+# Unmodified GMIN SVNREV df8da599267534fbe43a250e578f7396a7946311, svn.tar.bz2 sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31, gfortran 13.3.0, MPI off.
+# Archived data file: TEMPERATURE 0.35, STEP 0.47 0.44, SLOPPYCONV 0.006, TIGHTCONV 1.0D-5, MAXIT 1000 1000, STEPS 90000000 1.0, EDIFF 0.003, TARGET -173.9284264418.
+force_calls 266405
+force_calls_min 5228
+force_calls_max 1139080
+force_calls_median 173957.5
+successes 100
+nfailed 0
+n 100
+transition_states 0
+code GMIN
+code_version df8da599
+commit 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31
+algorithm basin-hopping
+template gmin/lj38-nosym
+problem globalopt/lj38
+tuning archive
+counter harness

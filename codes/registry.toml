@@ -178,10 +178,10 @@ id = "gmin"
 name = "GMIN"
 role = "global optimization"
 repository = "https://www-wales.ch.cam.ac.uk/svn.tar.bz2"
-ref = "df8da5992675"
+ref = "df8da599"
 commit = "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
 committed = "2026-10-19"
-note = "Latest Wales svn.tar.bz2 fetched 2026-10-19, 118 MB, sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. GMIN source/SVNREV is df8da599267534fbe43a250e578f7396a7946311. The LJ38 row is this tree unmodified, gfortran 13.3.0, MPI off, stock keyword defaults. The score is GMIN NPCALL at the target hit."
+note = "Latest Wales svn.tar.bz2 fetched 2026-10-19, 118 MB, sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. GMIN source/SVNREV is df8da599267534fbe43a250e578f7396a7946311. The LJ38 row is this tree unmodified, gfortran 13.3.0, MPI off. With no keywords GMIN uses temperature 0.3, step 0.3, sloppy RMS 1e-3, tight RMS 1e-10, and MAXIT 500, which is not the archived nosym method. The row copies the archived data file: TIGHTCONV 1.0D-5, DUMPINT 1000000, CENTRE, EDIFF 0.003, SORT, SAVE 1, MAXIT 1000 1000, STEPS 90000000 1.0, TARGET -173.9284264418, TEMPERATURE 0.35, NEWRESTART 50, AVOID 1.25 20, STEP 0.47 0.44, SLOPPYCONV 0.006, PERMDIST 0.001. Commented FIXBOTH and COOPMOVE stay inactive. No RANSEED, so the first DPRAND call uses seed 0, the same default as the 2014 source. No MAX_NPCALL. STEPS 90000000 is the paper step limit. The problem states no force-call cap, so failure_cap 2000000 is only the PAR-2 cap and sits above the longest run. NPCALL increments once per POTENTIAL entry on the Lennard-Jones path, the same counter the archive scored as awk field 7 of the last Target hit line. The finalio total adds a later tight quench and is not the score."
 
 [[template]]
 id = "sella-0.1.1/lj38-loweig"
