@@ -1,0 +1,15 @@
+avg_energy -530.059
+min_energy -550.764
+max_energy -511.999
+n 100
+code eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)
+code_version 3.6.0
+commit a7aa57472fb7d823953fd36b78cd755fa4842d30
+algorithm Basin hopping
+template eon-develop-a7aa574/bh-lj100-binary
+problem globalopt/lj100-binary
+reducer harness
+counter harness
+tuning default
+cap 2000000
+call_unit total

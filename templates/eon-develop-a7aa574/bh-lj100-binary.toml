@@ -1,0 +1,23 @@
+id = "eon-develop-a7aa574/bh-lj100-binary"
+engine = "eon"
+problem = "globalopt/lj100-binary"
+code = "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)"
+code_version = "3.6.0"
+commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+algorithm = "Basin hopping"
+reducer = "harness"
+tuning = "default"
+failure_cap = 2000000
+note = '''
+Stock eOn develop a7aa57472fb7d823953fd36b78cd755fa4842d30 basin hopping on the same binary LJ100 starts. The local stop is the archive converged_force 0.001. Temperature, displacement, optimizer, and step count stay at the develop defaults (300 K, displacement 0.5, conjugate gradient, 10000 steps). random_seed is 1. The harness counts every ext_pot force call. The energy window is the archive report: the best accepted energy at or before 2000000 calls. The potential matches the archive in.lammps binary Lennard-Jones.
+'''
+
+[ini.Main]
+job = "basin_hopping"
+random_seed = 1
+
+[ini.Potential]
+potential = "ext_pot"
+
+[ini.Optimizer]
+converged_force = 0.001

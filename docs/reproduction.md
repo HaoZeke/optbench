@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-47 reproduced, 29 not reproduced, 75 not rerun. 151 archive rows.
+46 reproduced, 30 not reproduced, 75 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -51,7 +51,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
-| lj100-binary/eon-basinhopping | avg_energy -584.579, min_energy -596.13, max_energy -574.14 | -584.551, -596.44, -574.25 | reproduced |
+| lj100-binary/eon-basinhopping | avg_energy -584.579, min_energy -596.13, max_energy -574.14 | -530.059, -550.76, -512 | not reproduced; stock_binary_lj |
 | lj100-binary/gmin | — | — | not rerun |
 | lj150/gmin-nosym | — | — | not rerun |
 | lj150/gmin-symmetrise | — | — | not rerun |
@@ -262,6 +262,12 @@ archive run.sh divides coordinates by r0 = 2.897 and scales rho and rcut into th
 
 - double-ended-saddle-search/pt-island/optim
 - tsopt/pt-island/optim_ffd
+
+### stock_binary_lj
+
+EON (SVN r2549) and eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) are different codes. Both ran stock and untuned on the archived binary LJ100 starts, seed 1, with the archive force tolerance 0.001 and the harness cap of 2000000 calls. Temperature, displacement, optimizer, and step count stayed at each code's defaults. Every start hit the cap, so both harness PAR-2 means are 4000000. EON (SVN r2549) avg/min/max energy is -530.059, -550.76, and -512 against the archive -584.579, -596.13, and -574.14. eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) is -530.059, -550.764, and -511.999. The two codes agree to the EON bh.dat precision. The maximum is 10.8 percent off the archive. Both full harness runs are ranked beside the archived row.
+
+- globalopt/lj100-binary/eon-basinhopping
 
 ### pele_bh_defaults
 

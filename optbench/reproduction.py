@@ -197,7 +197,33 @@ MATCHES: list[dict] = [
     {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm0", "template": "softsaddle/saddle-lanczos-sm0", "branch": "cells/softsaddle/ts-reps", "path": "results/campaign/softsaddle-2019.04-saddle-lanczos-sm0.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
     # globalopt and htst and aladatom rates
     {"key": "globalopt/lj38/eon-basinhopping", "template": "eon-client/bh-lj38", "branch": "entries/eon-svn-lane-a", "path": "results/campaign/eon-client-bh-lj38.dat"},
-    {"key": "globalopt/lj100-binary/eon-basinhopping", "template": "eon-svn/bh-lj100-binary", "branch": "repro/globalopt-lj100-binary-eon-basinhopping", "path": "results/campaign/eon-svn-bh-lj100-binary.dat"},
+    {
+        "key": "globalopt/lj100-binary/eon-basinhopping",
+        "template": "stock/lj100-binary-eon",
+        "branch": "repro/globalopt-lj100-binary-eon-basinhopping",
+        "path": "results/ledger/lj100-binary-eon-basinhopping.dat",
+        "cause": "stock_binary_lj",
+        "extra": {
+            "eon_svn": {
+                "label": "EON (SVN r2549)",
+                "template": "eon-svn-r2549/bh-lj100-binary",
+                "path": "results/campaign/eon-svn-r2549-bh-lj100-binary.dat",
+                "avg_energy": -530.059,
+                "min_energy": -550.76,
+                "max_energy": -512.0,
+                "par2_mean": 4000000.0,
+            },
+            "eon_develop": {
+                "label": "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)",
+                "template": "eon-develop-a7aa574/bh-lj100-binary",
+                "path": "results/campaign/eon-develop-a7aa574-bh-lj100-binary.dat",
+                "avg_energy": -530.059,
+                "min_energy": -550.764,
+                "max_energy": -511.999,
+                "par2_mean": 4000000.0,
+            },
+        },
+    },
     {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "branch": "cells/pele/go", "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat", "cause": "pele_bh_defaults"},
     {"key": "hTST/Al/eon-dimer-cg", "template": "eon-svn/htst-al-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-al-dimer.dat", "kind": "htst", "cause": "htst_al"},
     {"key": "hTST/Pt/eon-dimer-cg", "template": "eon-svn/htst-pt-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-pt-dimer.dat", "kind": "htst"},
@@ -289,6 +315,16 @@ CAUSE_TEXT = {
         "The harness records 7 failures: 5 RuntimeError LineSearch failed (ASE 3.8.2 already raises that; ASE 3.6.0 is not on PyPI) "
         "and 2 Hessian index 1 after the Euclidean force norm is under 0.01. "
         "The Wilson interval on 0 failures out of 1000 is about 0 to 3.83."
+    ),
+    "stock_binary_lj": (
+        "EON (SVN r2549) and eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) are different codes. "
+        "Both ran stock and untuned on the archived binary LJ100 starts, seed 1, with the archive force tolerance 0.001 and the harness cap of 2000000 calls. "
+        "Temperature, displacement, optimizer, and step count stayed at each code's defaults. "
+        "Every start hit the cap, so both harness PAR-2 means are 4000000. "
+        "EON (SVN r2549) avg/min/max energy is -530.059, -550.76, and -512 against the archive -584.579, -596.13, and -574.14. "
+        "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) is -530.059, -550.764, and -511.999. "
+        "The two codes agree to the EON bh.dat precision. The maximum is 10.8 percent off the archive. "
+        "Both full harness runs are ranked beside the archived row."
     ),
     "akmc_vs_langevin": (
         "The archive rows are Langevin parallel replica. The harness rows are AKMC. "

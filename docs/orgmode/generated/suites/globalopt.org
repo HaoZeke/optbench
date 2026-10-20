@@ -7,11 +7,13 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>EON (SVN r2549)</th><th>eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="globalopt/lj100-binary">
    <th scope="row"><a href="#lj100-binary">Binary Lennard-Jones 100</a></th>
    <td data-code="eOn">—</td>
    <td data-code="Eon svn">—</td>
+   <td data-code="EON (SVN r2549)" data-template="eon-svn-r2549/bh-lj100-binary" data-par2="4e+06"><span class="bench-score">4e+06</span><a href="#lj100-binary-templates">eon-svn-r2549/bh-lj100-binary</a></td>
+   <td data-code="eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)" data-template="eon-develop-a7aa574/bh-lj100-binary" data-par2="4e+06"><span class="bench-score">4e+06</span><a href="#lj100-binary-templates">eon-develop-a7aa574/bh-lj100-binary</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
@@ -28,6 +30,8 @@
    <th scope="row"><a href="#lj150">lj150</a></th>
    <td data-code="eOn">—</td>
    <td data-code="Eon svn">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
+   <td data-code="eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
@@ -44,6 +48,8 @@
    <th scope="row"><a href="#lj38">Lennard-Jones 38 global minimum</a></th>
    <td data-code="eOn">—</td>
    <td data-code="Eon svn">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
+   <td data-code="eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
@@ -60,6 +66,8 @@
    <th scope="row"><a href="#lj75">lj75</a></th>
    <td data-code="eOn">—</td>
    <td data-code="Eon svn">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
+   <td data-code="eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
@@ -76,6 +84,8 @@
    <th scope="row"><a href="#lj98">lj98</a></th>
    <td data-code="eOn">—</td>
    <td data-code="Eon svn">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
+   <td data-code="eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
@@ -92,6 +102,8 @@
    <th scope="row"><a href="#tip4p10">tip4p10</a></th>
    <td data-code="eOn">—</td>
    <td data-code="Eon svn">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
+   <td data-code="eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
@@ -108,6 +120,8 @@
    <th scope="row"><a href="#tip4p15">tip4p15</a></th>
    <td data-code="eOn">—</td>
    <td data-code="Eon svn">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
+   <td data-code="eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
@@ -124,6 +138,8 @@
    <th scope="row"><a href="#tip4p20">tip4p20</a></th>
    <td data-code="eOn">—</td>
    <td data-code="Eon svn">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
+   <td data-code="eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
@@ -144,24 +160,23 @@
    <dt>Note</dt><dd>The archived files record energies. They do not record force calls.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">Files with no per-start harness record stay off the ranked table.</p>
+   <figure class="bench-plot"><a href="../../_static/board/globalopt-lj100-binary-cost.svg"><picture><source srcset="../../_static/board/globalopt-lj100-binary-cost.webp" type="image/webp"><img src="../../_static/board/globalopt-lj100-binary-cost.png" alt="Cost versus success for globalopt/lj100-binary" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
+   <p class="bench-gaps">No performance profile. One start has no finite cost.</p>
    <details class="bench-details" id="lj100-binary-templates">
-   <summary>All templates (0 ranked)</summary>
+   <summary>All templates (2 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="globalopt/lj100-binary">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="13">No full harness row.</td></tr>
+   <tr><td data-field="template">eon-develop-a7aa574/bh-lj100-binary</td><td data-field="version">eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) 3.6.0</td><td data-field="commit">a7aa57472fb7</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">4e+06</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.0369935</td><td data-field="median_calls">2e+06</td><td data-field="mean_calls">2e+06</td><td data-field="failures">crash 0, divergence 0, cap 100, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">eon-svn-r2549/bh-lj100-binary</td><td data-field="version">EON (SVN r2549) r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">4e+06</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.0369935</td><td data-field="median_calls">2e+06</td><td data-field="mean_calls">2e+06</td><td data-field="failures">crash 0, divergence 0, cap 100, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
-   <h3>Not scored</h3><ul>
-   <li>eon-svn/bh-lj100-binary: no per-start record</li>
-   </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="lj100-binary-legacy">
    <h3>Legacy 2014 archive</h3>
    <details class="bench-details">
    <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Lowest energy first.</caption>
    <thead><tr>
@@ -186,7 +201,7 @@
    </tr>
    <tr id="globalopt-lj100-binary-eon-basinhopping">
    <td class="num">2</td>
-   <td class="text">eon-basinhopping</td>
+   <td class="text">eon-basinhopping · not reproduced</td>
    <td class="text">Eon r2156</td>
    <td class="num">-584.579</td>
    <td class="num">-5.9613e+02</td>
