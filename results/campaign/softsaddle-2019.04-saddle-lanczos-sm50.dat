@@ -1,0 +1,49 @@
+# rep 1 force_calls 804653 unique_saddles 676 fraction_connected 0.014210526315789474 total_searches 1900 connected 27 link_connected 141 minimize_calls 1 minimum_converged 1 seed 20261016 hypersphere eb78f6d9cde1e9aae308e3f8ecec777fdb655e3432e356c9da339b950bd3267a
+# rep 2 force_calls 2189099 unique_saddles 1917 fraction_connected 0.0052 total_searches 5000 connected 26 link_connected 211 minimize_calls 1 minimum_converged 1 seed 20361016 hypersphere aa994b50de6bbe02c6ea8ee0cdf4e47906913f1e60be91b58cdd4468010197c6
+# rep 3 force_calls 2182024 unique_saddles 1953 fraction_connected 0.0052 total_searches 5000 connected 26 link_connected 210 minimize_calls 1 minimum_converged 1 seed 20461016 hypersphere 99d59ea0e6075d0f852917d60f480a922572268c98eb01fb273aaf70ea950157
+# rep 4 force_calls 1044504 unique_saddles 998 fraction_connected 0.01125 total_searches 2400 connected 27 link_connected 171 minimize_calls 1 minimum_converged 1 seed 20561016 hypersphere e2aca928c2637c2487bc41c3025d5ac58b356916b29ee14978d2d302a96fc9d4
+# rep 5 force_calls 1013665 unique_saddles 1015 fraction_connected 0.011612903225806452 total_searches 2325 connected 27 link_connected 175 minimize_calls 1 minimum_converged 1 seed 20661016 hypersphere efa0176136278fb2a4b353b2aca3b35c966265f058bf358dc9592ae32ff6a345
+# rep 6 force_calls 1584096 unique_saddles 1378 fraction_connected 0.0073972602739726025 total_searches 3650 connected 27 link_connected 178 minimize_calls 1 minimum_converged 1 seed 20761016 hypersphere 27d3796fcc5a47df606cdc6f92a6b3df9dd3245a4e66489f12965e40cac165bd
+# rep 7 force_calls 1881503 unique_saddles 1561 fraction_connected 0.006279069767441861 total_searches 4300 connected 27 link_connected 203 minimize_calls 1 minimum_converged 1 seed 20861016 hypersphere f043cb68a3c6e2fafadf5587395ab301294fccde8f048aad7cee0f24eee8ece3
+# rep 8 force_calls 2167828 unique_saddles 2190 fraction_connected 0.0052 total_searches 5000 connected 26 link_connected 203 minimize_calls 1 minimum_converged 1 seed 20961016 hypersphere 0a505b66a05a11387a866df88b135faa2573819ffb1a693161cc1de0aaeb3159
+# rep 9 force_calls 1955307 unique_saddles 904 fraction_connected 0.005625 total_searches 4800 connected 27 link_connected 169 minimize_calls 1 minimum_converged 1 seed 21061016 hypersphere 1ce1f597259e75e1360337de5e7249ccbe186666583b62e667bc45e2fcf1c801
+# rep 10 force_calls 1363740 unique_saddles 522 fraction_connected 0.0075524475524475524 total_searches 3575 connected 27 link_connected 141 minimize_calls 1 minimum_converged 1 seed 21161016 hypersphere 6efd3373f4b6a8048137be6bec51b760da8b7cab9486f1be79ce77612a1a69ba
+force_calls 1618641.9
+force_calls_mean_error 532420.3767626667
+force_calls_min 804653
+force_calls_max 2189099
+unique_saddles 1311.4
+fraction_connected 0.007952720713545794
+total_searches 3795.0
+benchmark_force_calls 1618641.9
+benchmark_force_calls_mean_error 532420.3767626667
+benchmark_fraction_connected 0.702106789336813
+benchmark_total_searches 3795.0
+benchmark_unique_saddles 180.2
+success_force_calls 371
+success_force_calls_min 220
+success_force_calls_median 344.0
+success_force_calls_max 994
+code softsaddle
+code_version 2019.04
+commit 5a00aeede06fd822ef302624ec4c9bc7889d21fc0b5804b701a5785695c68d16
+algorithm adaptive hypersphere LBFGS Lanczos
+tuning sm50
+template softsaddle/saddle-lanczos-sm50
+problem saddle-search/pt-island
+counter harness
+repetitions 10
+nfailed 3
+goal 27
+cap 5064
+n 37950
+par2_mean 10059.356837944664
+successes 267
+wilson_low 0.006243103632877494
+wilson_high 0.00792783238170863
+par2_median 10128.0
+n_cap 116
+n_wrong_stationary 168
+n_divergence 37399
+n_crash 0
+v2_nfailed 37683

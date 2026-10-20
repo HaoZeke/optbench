@@ -1099,4 +1099,41 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>
+   <h3>SoftSaddle</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>saddle search</td>
+   <td>website/codes/softsaddle.tar.gz</td>
+   <td>5a00aeede06f</td>
+   <td><a href="https://github.com/henkelmangroup/optbench">https://github.com/henkelmangroup/optbench</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="lowest-eigenvector/lj38" data-template="softsaddle/mode-lanczos-tuned">
+   <td>lj38</td>
+   <td data-field="template">softsaddle/mode-lanczos-tuned</td>
+   <td data-field="version">softsaddle 2019.04</td>
+   <td data-field="commit">5a00aeede06f</td>
+   <td data-field="par2_mean">34.73</td>
+   <td data-field="mean_calls">34.73</td>
+   <td data-field="median_calls">34</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="saddle-search/pt-island" data-template="softsaddle/saddle-davidson-sm50">
+   <td>Pt heptamer island</td>
+   <td data-field="template">softsaddle/saddle-davidson-sm50</td>
+   <td data-field="version">softsaddle 2019.04</td>
+   <td data-field="commit">5a00aeede06f</td>
+   <td data-field="par2_mean">10033.8</td>
+   <td data-field="mean_calls">366.27</td>
+   <td data-field="median_calls">341</td>
+   <td data-field="failures">crash 0, divergence 27513, cap 89, wrong_stationary 29</td>
+   <td data-field="n">27900</td>
+   </tr>
+   </tbody></table></div>
    </section>
