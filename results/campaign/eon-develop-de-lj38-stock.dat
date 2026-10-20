@@ -1,0 +1,16 @@
+force_calls 718
+force_calls_min 362
+force_calls_max 1942
+force_calls_median 612.0
+call_unit total
+nfailed 5
+code eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)
+code_version a7aa57472fb7d823953fd36b78cd755fa4842d30
+commit a7aa57472fb7d823953fd36b78cd755fa4842d30
+algorithm CI-NEB
+template eon/develop-de-lj38-stock
+problem double-ended-saddle-search/lj38
+reducer harness
+counter harness
+count_keys HarnessCounter
+finding archive force_calls 861 nfailed 5; harness success mean 718 nfailed 5

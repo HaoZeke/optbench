@@ -1,0 +1,21 @@
+id = "eon/develop-de-lj38-stock"
+engine = "eon"
+problem = "double-ended-saddle-search/lj38"
+code = "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)"
+code_version = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+algorithm = "CI-NEB"
+reducer = "harness"
+failure_cap = 2500
+kind = "de-lj38"
+kernel = "lj40"
+note = '''
+eOn develop a7aa57472fb7d823953fd36b78cd755fa4842d30, a different code from EON. Stock CI-NEB on the 50 LJ38 pairs. The client keeps its defaults: L-BFGS, five images, spring 5, climbing image on, doubly nudged off, max_iterations 1000, max_move 0.2. The stop copied from the archive is converged_force 0.001, the problem force norm. The harness kernel is unshifted lj/cut, epsilon 1, sigma 1, cutoff 40, and the cap is 2500. Nothing else is tuned. Finding: the archived paper row is 861 force calls and 5 failures. This harness row is 718 and 5 failures, 16.6 percent under the archive mean. The archive number stays the paper row.
+'''
+seeds = [1]
+
+[ini.Main]
+job = "nudged_elastic_band"
+
+[ini.Optimizer]
+converged_force = 0.001

@@ -4,7 +4,7 @@ force_calls_max 2297
 force_calls_median 644.5
 call_unit total
 nfailed 6
-code Eon svn
+code EON (SVN r2549)
 code_version r2549
 commit r2549
 algorithm Doubly nudged CI-NEB
@@ -13,3 +13,4 @@ problem double-ended-saddle-search/lj38
 reducer harness
 counter harness
 count_keys HarnessCounter
+finding archive force_calls 861 nfailed 5; harness success mean 790 nfailed 6

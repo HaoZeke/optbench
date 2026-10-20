@@ -9941,6 +9941,7 @@
           "eon-svn/de-lj38-lanczos r2549 campaign r2549": 1.0536049848239342,
           "eon-svn/de-lj38-lanczos-improved r2549 campaign r2549": 1.155955183349688,
           "eon-svn/de-lj38-neb r2549 default campaign, asv r2549": 0.5268024924119672,
+          "eon/develop-de-lj38-stock a7aa57472fb7d823953fd36b78cd755fa4842d30 campaign a7aa574": 0.6231320910244411,
           "rgsaddle/ci-neb 0.2.2 default campaign, asv c0db2b8": 0.2739372960542229,
           "rgsaddle/ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 0.6291526909377207,
           "rgsaddle/ew-ci-neb 0.2.2 default campaign, asv c0db2b8": 0.27995789596750253,
@@ -10063,6 +10064,13 @@
             0.54,
             0.78,
             0.82
+          ],
+          "eon/develop-de-lj38-stock a7aa57472fb7d823953fd36b78cd755fa4842d30 campaign a7aa574": [
+            0.0,
+            0.04,
+            0.72,
+            0.86,
+            0.9
           ],
           "rgsaddle/ci-neb 0.2.2 default campaign, asv c0db2b8": [
             0.0,
@@ -10193,6 +10201,7 @@
           "eon-svn/de-lj38-lanczos r2549 campaign r2549": 1.0,
           "eon-svn/de-lj38-lanczos-improved r2549 campaign r2549": 1.0,
           "eon-svn/de-lj38-neb r2549 default campaign, asv r2549": 0.82,
+          "eon/develop-de-lj38-stock a7aa57472fb7d823953fd36b78cd755fa4842d30 campaign a7aa574": 0.9,
           "rgsaddle/ci-neb 0.2.2 default campaign, asv c0db2b8": 0.74,
           "rgsaddle/ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 0.86,
           "rgsaddle/ew-ci-neb 0.2.2 default campaign, asv c0db2b8": 0.78,
@@ -10535,6 +10544,51 @@
           "wilson_low": 0.8116175308165717
         },
         {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": 2500,
+          "code": "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)",
+          "code_version": "a7aa57472fb7d823953fd36b78cd755fa4842d30",
+          "commit": "a7aa57472fb7d823953fd36b78cd755fa4842d30",
+          "comparable": true,
+          "counter": "harness",
+          "current": true,
+          "entry": "eon-develop-de-lj38-stock",
+          "failures": {
+            "cap": 5,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 0
+          },
+          "full_n": 50,
+          "history": false,
+          "max_calls": 2500.0,
+          "mean_calls": 896.2,
+          "mean_per_image": 179.24,
+          "median": 674.5,
+          "median_calls": 674.5,
+          "median_high": 809.5,
+          "median_low": 539.5,
+          "median_per_image": 134.9,
+          "min_calls": 362.0,
+          "n": 50,
+          "nfailed": 5,
+          "note": "starts",
+          "par2_mean": 1146.2,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/eon-develop-de-lj38-stock.dat",
+          "problem": "double-ended-saddle-search/lj38",
+          "registry_match": true,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 0.9,
+          "template": "eon/develop-de-lj38-stock",
+          "tuning": "",
+          "wilson_high": 0.9565242350681096,
+          "wilson_low": 0.7863976856252035
+        },
+        {
           "asv_commit": "c1ecf607a10f7ab78d1615e4cbf9af030bebcdbf",
           "call_unit": "total",
           "cap": 2500,
@@ -10763,7 +10817,7 @@
           "asv_commit": "",
           "call_unit": "total",
           "cap": 2500,
-          "code": "Eon svn",
+          "code": "EON (SVN r2549)",
           "code_version": "r2549",
           "commit": "r2549",
           "comparable": true,
@@ -42122,7 +42176,7 @@
       "title": "pt-island"
     }
   },
-  "ranked_count": 439,
+  "ranked_count": 440,
   "schema": "optbench.board/v1",
   "unmapped": [
     {

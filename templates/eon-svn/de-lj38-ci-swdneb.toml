@@ -1,7 +1,7 @@
 id = "eon-svn/de-lj38-ci-swdneb"
 engine = "eon"
 problem = "double-ended-saddle-search/lj38"
-code = "Eon svn"
+code = "EON (SVN r2549)"
 code_version = "r2549"
 commit = "r2549"
 algorithm = "Doubly nudged CI-NEB"
@@ -11,7 +11,7 @@ kind = "de-lj38"
 kernel = "lj40"
 asv_class = "EonSvnDeLj38CiSwdneb"
 note = '''
-Doubly nudged climbing image on the 50 LJ38 pairs. Spring 10, doubly_nudged true, doubly_nudged_switching true, images 5, max_move 0.05, converged_force 0.001. The 2014 file set max_iterations to 1000 and then to 600. The client keeps the last value, so this template uses 600. climbing_image is also written as climbing_image_method, which is the key r2549 reads. The harness kernel is unshifted lj/cut with epsilon 1, sigma 1, and cutoff 40.
+EON (SVN r2549), a different code from eOn. Doubly nudged climbing image on the 50 LJ38 pairs. Spring 10, doubly_nudged true, doubly_nudged_switching true, images 5, max_move 0.05, converged_force 0.001. The 2014 file set max_iterations to 1000 and then to 600. The client keeps the last value, so this template uses 600. climbing_image is also written as climbing_image_method, which is the key r2549 reads. The harness kernel is unshifted lj/cut with epsilon 1, sigma 1, and cutoff 40. Finding: the archived paper row is 861 force calls and 5 failures. This harness row is 790 and 6 failures. The archive number stays the paper row. Nothing was tuned to close that gap.
 '''
 seeds = [1]
 asv_timeout = 900
