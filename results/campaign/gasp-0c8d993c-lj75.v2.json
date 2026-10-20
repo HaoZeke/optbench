@@ -24,12 +24,12 @@
         "median": 2000000.0,
         "median_high": 2000000.0,
         "median_low": 2000000.0,
-        "n": 156,
+        "n": 162,
         "n_cap": 0,
         "n_crash": 0,
         "n_divergence": 0,
-        "n_wrong_stationary": 156,
-        "nfailed": 156,
+        "n_wrong_stationary": 162,
+        "nfailed": 162,
         "par2_mean": 2000000.0,
         "par_applied": true,
         "par_factor": 2,
@@ -39,7 +39,7 @@
         "success_only_mean": null,
         "success_rate": 0.0,
         "successes": 0,
-        "wilson_high": 0.024032931437414938,
+        "wilson_high": 0.023163440842904465,
         "wilson_low": 0.0
       },
       "parameters": {
@@ -2868,6 +2868,114 @@
           "schema": "optbench.start/v2",
           "seed": 20261170,
           "start": "coords.156",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "cap": 1000000,
+          "comparable": true,
+          "counter": "harness",
+          "energy": -391.67843642837,
+          "energy_calcs": 800,
+          "failed_calcs": 0,
+          "failure": "wrong_stationary",
+          "force_calls": 330211,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "seed": 20261171,
+          "start": "coords.157",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "cap": 1000000,
+          "comparable": true,
+          "counter": "harness",
+          "energy": -391.475072912749,
+          "energy_calcs": 800,
+          "failed_calcs": 0,
+          "failure": "wrong_stationary",
+          "force_calls": 351009,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "seed": 20261172,
+          "start": "coords.158",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "cap": 1000000,
+          "comparable": true,
+          "counter": "harness",
+          "energy": -395.334233300186,
+          "energy_calcs": 800,
+          "failed_calcs": 0,
+          "failure": "wrong_stationary",
+          "force_calls": 338357,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "seed": 20261173,
+          "start": "coords.159",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "cap": 1000000,
+          "comparable": true,
+          "counter": "harness",
+          "energy": -396.037195409734,
+          "energy_calcs": 800,
+          "failed_calcs": 0,
+          "failure": "wrong_stationary",
+          "force_calls": 347432,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "seed": 20261174,
+          "start": "coords.160",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "cap": 1000000,
+          "comparable": true,
+          "counter": "harness",
+          "energy": -391.591606172503,
+          "energy_calcs": 800,
+          "failed_calcs": 0,
+          "failure": "wrong_stationary",
+          "force_calls": 480237,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "seed": 20261175,
+          "start": "coords.161",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "cap": 1000000,
+          "comparable": true,
+          "counter": "harness",
+          "energy": -394.733719162238,
+          "energy_calcs": 800,
+          "failed_calcs": 0,
+          "failure": "wrong_stationary",
+          "force_calls": 340903,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "seed": 20261176,
+          "start": "coords.162",
           "success": false,
           "verify_calls": 0
         }
