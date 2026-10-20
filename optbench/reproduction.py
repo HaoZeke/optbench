@@ -111,7 +111,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
-    "repro/double-ended-saddle-search-pt-island-optim-6": "b890da71723986ee32735b1ea1fb83d8b1ba5541",
+    "repro/double-ended-saddle-search-pt-island-optim-6": "c10732e984e3248a24f20751032e2f115977dc69",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -188,7 +188,7 @@ MATCHES: list[dict] = [
     # The campaign has a success mean. Judging force_calls would mark this
     # not_reproduced, and holdback would take the ranked harness row off
     # the table. nfailed is still compared. The mean is in the reproduction note.
-    {"key": "double-ended-saddle-search/pt-island/optim-6", "template": "optim/de-pt-stock", "branch": "repro/double-ended-saddle-search-pt-island-optim-6", "path": "results/campaign/optim-26635-de-pt-stock.dat", "metrics": ["uncompared"], "extra": {"code_version": "26635", "image_sha256": "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31", "optim_source": "df8da599267534fbe43a250e578f7396a7946311"}},
+    {"key": "double-ended-saddle-search/pt-island/optim-6", "template": "optim/de-pt-stock", "branch": "repro/double-ended-saddle-search-pt-island-optim-6", "path": "results/campaign/optim-df8da599-de-pt-stock.dat", "metrics": ["uncompared"], "extra": {"code_version": "df8da599", "image_sha256": "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31", "optim_source": "df8da599267534fbe43a250e578f7396a7946311"}},
     # neb per-image means already stored in the 3.5.0 files
     {"key": "neb/Pt-heptamer/eon-lbfgs", "template": "eon-lbfgs", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-lbfgs.dat", "hold": ["eon-client/neb-pt-lbfgs", "eon/neb-pt-lbfgs"]},
     {"key": "neb/Pt-heptamer/eon-cg", "template": "eon-cg", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-cg.dat", "cause": "heptamer_cg", "hold": ["eon-client/neb-pt-cg"]},
@@ -818,7 +818,7 @@ def render_markdown(rows: list[dict]) -> str:
         "",
         "OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.",
         "",
-        "OPTIM image 26635 on the Pt-island DNEB row is the current svn.tar.bz2, sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. BFGSSTEPS, STEPS, and the NEWNEB iteration field default to 1, so a deck that omits them stops after one step. The deck sets those limits, and the BFGSTS step fields, to the problem cap 3000, and sets the RMS gradient to 0.001. All 59 logs contain Converged to TS. 57 energy+gradient tallies are over that cap. The success mean of the two starts under the cap is 1620, median 1619.5, min 934, max 2305, nfailed 57. The archive success mean stays 117 with nfailed 0. The harness rank is PAR-2 5851.51.",
+        "OPTIM df8da599 on the Pt-island DNEB row is the current svn.tar.bz2, sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. The optim-6 entry uses six DNEB images. NEWNEB iterations, BFGSTS steps, BFGSSTEPS, and STEPS are the problem cap 3000. The band RMS stays at the OPTIM default 0.01, and BFGSMIN is the problem RMS gradient 0.001. The tally is the last energy+gradient line, a band total, which is the unit the archive script stored and the unit the other rows rank. The cap 3000 is that total. All 59 logs contain Converged to TS. 23 tallies are under the cap. Their success mean is 467, median 499, min 273, max 654, nfailed 36. The archive success mean stays 117 with nfailed 0. The harness rank is PAR-2 3842.9.",
         "",
         "EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.",
         "",

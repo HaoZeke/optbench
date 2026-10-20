@@ -1049,7 +1049,7 @@ The number is written only after the run finishes under the problem rule.
    </tr>
    <tr>
    <td>double-ended saddle search</td>
-   <td>26635</td>
+   <td>df8da599</td>
    <td>738fafe3df5a</td>
    <td><a href="http://www-wales.ch.cam.ac.uk/svn.tar.bz2">http://www-wales.ch.cam.ac.uk/svn.tar.bz2</a></td>
    </tr>
@@ -1060,12 +1060,12 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="double-ended-saddle-search/pt-island" data-template="optim/de-pt-stock">
    <td>pt-island</td>
    <td data-field="template">optim/de-pt-stock</td>
-   <td data-field="version">optim 26635</td>
+   <td data-field="version">optim df8da599</td>
    <td data-field="commit">738fafe3df5a</td>
-   <td data-field="par2_mean">5851.51</td>
-   <td data-field="mean_calls">17549.2</td>
-   <td data-field="median_calls">14415</td>
-   <td data-field="failures">crash 0, divergence 0, cap 57, wrong_stationary 0</td>
+   <td data-field="par2_mean">3842.9</td>
+   <td data-field="mean_calls">4442</td>
+   <td data-field="median_calls">3570</td>
+   <td data-field="failures">crash 0, divergence 0, cap 36, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
    <tr data-problem="minimization/lj38" data-template="optim/lbfgs-lj38">
