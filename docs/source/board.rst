@@ -161,7 +161,7 @@ It does not run a campaign.
    <td data-code="ASE" data-template="ase-globalopt/lj75-basinhopping" data-par2="2e+06"><span class="bench-score">2e+06</span><a href="generated/suites/globalopt.html#lj75-templates">ase-globalopt/lj75-basinhopping</a></td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
-   <td data-code="SciPy" data-template="scipyglobal/lj75-shgo" data-par2="2e+06"><span class="bench-score">2e+06</span><a href="generated/suites/globalopt.html#lj75-templates">scipyglobal/lj75-shgo</a></td>
+   <td data-code="SciPy" data-template="scipyglobal/lj75-basinhopping" data-par2="2e+06"><span class="bench-score">2e+06</span><a href="generated/suites/globalopt.html#lj75-templates">scipyglobal/lj75-basinhopping</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>

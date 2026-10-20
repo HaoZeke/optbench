@@ -1091,15 +1091,15 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 45, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
-   <tr data-problem="globalopt/lj75" data-template="scipyglobal/lj75-shgo">
+   <tr data-problem="globalopt/lj75" data-template="scipyglobal/lj75-basinhopping">
    <td>lj75</td>
-   <td data-field="template">scipyglobal/lj75-shgo</td>
+   <td data-field="template">scipyglobal/lj75-basinhopping</td>
    <td data-field="version">SciPy 1.18.1</td>
    <td data-field="commit">e4e854eaa8f1</td>
    <td data-field="par2_mean">2e+06</td>
-   <td data-field="mean_calls">0</td>
-   <td data-field="median_calls">0</td>
-   <td data-field="failures">crash 200, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="mean_calls">1e+06</td>
+   <td data-field="median_calls">1e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
    </tbody></table></div>

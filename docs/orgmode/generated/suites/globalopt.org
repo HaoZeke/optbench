@@ -68,7 +68,7 @@
    <td data-code="ASE" data-template="ase-globalopt/lj75-basinhopping" data-par2="2e+06"><span class="bench-score">2e+06</span><a href="#lj75-templates">ase-globalopt/lj75-basinhopping</a></td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
-   <td data-code="SciPy" data-template="scipyglobal/lj75-shgo" data-par2="2e+06"><span class="bench-score">2e+06</span><a href="#lj75-templates">scipyglobal/lj75-shgo</a></td>
+   <td data-code="SciPy" data-template="scipyglobal/lj75-basinhopping" data-par2="2e+06"><span class="bench-score">2e+06</span><a href="#lj75-templates">scipyglobal/lj75-basinhopping</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -398,18 +398,18 @@
    <figure class="bench-plot"><a href="../../_static/board/globalopt-lj75-cost.svg"><picture><source srcset="../../_static/board/globalopt-lj75-cost.webp" type="image/webp"><img src="../../_static/board/globalopt-lj75-cost.png" alt="Cost versus success for globalopt/lj75" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <p class="bench-gaps">No performance profile. One start has no finite cost.</p>
    <details class="bench-details" id="lj75-templates">
-   <summary>All templates (2 ranked)</summary>
+   <summary>All templates (5 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="globalopt/lj75">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td data-field="template">ase-globalopt/lj75-basinhopping</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">2e+06</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.0188453</td><td data-field="median_calls">1e+06</td><td data-field="mean_calls">1e+06</td><td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 0</td><td data-field="n">200</td></tr>
+   <tr><td data-field="template">scipyglobal/lj75-basinhopping</td><td data-field="version">SciPy 1.18.1</td><td data-field="commit">e4e854eaa8f1</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">2e+06</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.0188453</td><td data-field="median_calls">1e+06</td><td data-field="mean_calls">1e+06</td><td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 0</td><td data-field="n">200</td></tr>
+   <tr><td data-field="template">scipyglobal/lj75-differential-evolution</td><td data-field="version">SciPy 1.18.1</td><td data-field="commit">e4e854eaa8f1</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">2e+06</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.0188453</td><td data-field="median_calls">1e+06</td><td data-field="mean_calls">1e+06</td><td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 0</td><td data-field="n">200</td></tr>
+   <tr><td data-field="template">scipyglobal/lj75-dual-annealing</td><td data-field="version">SciPy 1.18.1</td><td data-field="commit">e4e854eaa8f1</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">2e+06</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.0188453</td><td data-field="median_calls">1e+06</td><td data-field="mean_calls">1e+06</td><td data-field="failures">crash 0, divergence 0, cap 185, wrong_stationary 15</td><td data-field="n">200</td></tr>
    <tr><td data-field="template">scipyglobal/lj75-shgo</td><td data-field="version">SciPy 1.18.1</td><td data-field="commit">e4e854eaa8f1</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">2e+06</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.0188453</td><td data-field="median_calls">0</td><td data-field="mean_calls">0</td><td data-field="failures">crash 200, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
    </tbody></table></div>
    <h3>Partial</h3><ul>
-   <li>scipyglobal/lj75-basinhopping SciPy campaign n=10, scored 10 of 200 starts.</li>
-   <li>scipyglobal/lj75-differential-evolution SciPy campaign n=24, scored 24 of 200 starts.</li>
-   <li>scipyglobal/lj75-dual-annealing SciPy campaign n=65, scored 65 of 200 starts.</li>
    <li>scipyglobal/lj75-basinhopping SciPy asv n=1, smoke run; scored 1 of 200 starts.</li>
    <li>scipyglobal/lj75-differential-evolution SciPy asv n=1, smoke run; scored 1 of 200 starts.</li>
    <li>scipyglobal/lj75-dual-annealing SciPy asv n=1, smoke run; scored 1 of 200 starts.</li>
