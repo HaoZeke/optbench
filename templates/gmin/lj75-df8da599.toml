@@ -1,0 +1,11 @@
+id = "gmin/lj75-df8da599"
+engine = "gmin"
+problem = "globalopt/lj75"
+code = "GMIN"
+code_version = "df8da599"
+commit = "df8da599267534fbe43a250e578f7396a7946311"
+algorithm = "basin-hopping with symmetrise csm moves"
+failure_cap = 8832091
+note = """
+GMIN df8da599267534fbe43a250e578f7396a7946311. The input is the archived data file. Active lines are TIGHTCONV 1.0D-5, DUMPINT 1000000, CENTRE, EDIFF 0.003, SORT, SAVE 1, MAXIT 1000 1000, STEPS 100000 1.0, TARGET -397.4923304165, TEMPERATURE 3.5, NEWRESTART 4, AVOID 3.8 12, STEP 0.43 0.51, SLOPPYCONV 0.007, PERMDIST 0.0175, DGUESS 0.1, UPDATES 4, MAXBFGS 0.40, and SYMMETRISE 1 0.01 0.05 0.3 0.012 0.6 4 0.27 2.4. Commented lines are ignored, including FIXBOTH, COOPMOVE, and STEPS 90000000. There is no BHPT and no RANSEED. The score is the function-call field on the last Target hit after line. failure_cap 8832091 sits above the archived maximum 310110 and every recorded call. The data file does not set it.
+"""

@@ -1,0 +1,15 @@
+# counter is GMIN's Target-hit function calls, the 2014 getdata.py score.
+# unrounded_mean 56700.99
+force_calls 5.67010e+04
+force_calls_median 3.20500e+04
+force_calls_min 9.1000e+02
+force_calls_max 4.7976e+05
+nfailed 0
+code GMIN
+code_version df8da599
+commit df8da599267534fbe43a250e578f7396a7946311
+algorithm basin-hopping with symmetrise csm moves
+template gmin/lj75-df8da599
+problem globalopt/lj75
+counter harness
+reducer harness

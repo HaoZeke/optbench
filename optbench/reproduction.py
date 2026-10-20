@@ -199,19 +199,13 @@ MATCHES: list[dict] = [
     # globalopt and htst and aladatom rates
     {"key": "globalopt/lj38/eon-basinhopping", "template": "eon-client/bh-lj38", "branch": "entries/eon-svn-lane-a", "path": "results/campaign/eon-client-bh-lj38.dat"},
     {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "branch": "cells/pele/go", "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat", "cause": "pele_bh_defaults"},
-    {"key": "globalopt/lj75/gmin", "template": "gmin/lj75-symmetrise", "branch": "repro/globalopt-lj75-gmin", "path": "results/campaign/gmin-27059-lj75-symmetrise.dat", "cause": "gmin_stock", "extra": {"code_version": "df8da599", "commit": "df8da599267534fbe43a250e578f7396a7946311"}},
+    {"key": "globalopt/lj75/gmin", "template": "gmin/lj75-df8da599", "branch": "repro/globalopt-lj75-gmin", "path": "results/campaign/gmin-df8da599-lj75.dat", "extra": {"code_version": "df8da599", "commit": "df8da599267534fbe43a250e578f7396a7946311"}},
     {"key": "hTST/Al/eon-dimer-cg", "template": "eon-svn/htst-al-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-al-dimer.dat", "kind": "htst", "cause": "htst_al"},
     {"key": "hTST/Pt/eon-dimer-cg", "template": "eon-svn/htst-pt-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-pt-dimer.dat", "kind": "htst"},
 ]
 
 
 CAUSE_TEXT = {
-    "gmin_stock": (
-        "Ranked row gmin/lj75-stock is unmodified GMIN SVNREV df8da599267534fbe43a250e578f7396a7946311 "
-        "with stock basin-hopping. The archive convergence is TARGET -397.4923304165, EDIFF 0.003, "
-        "TIGHTCONV 1.0D-5, SLOPPYCONV 0.007, and STEPS 100000. 6 of 200 starts hit the target. "
-        "The success-only mean is 1602834 against 60692, and nfailed is 194 against 0. The gap is left as found."
-    ),
     "lj38_ts_starts": (
         "Inside the 10% band (207.51 vs 192). "
         "Archive run.sh unpacks coords-xyz.tar.gz (200 xyz, max pair about 4.4). "
