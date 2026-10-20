@@ -1,0 +1,29 @@
+# counter harness. One force call is one Lennard-Jones energy and gradient at the same coordinates.
+# cluster_search quenches through the rgmin build linked by anneal.
+# A start succeeds inside the problem energy window and under the problem cap.
+# Stock preset communicating. cluster_search calls Config.communicating and quenches through rgmin 0.2.0 at 20832fd169932a1cd0d47ac84dc77fa9b435f940, the crate anneal 0.11.1 links. The archived start is translated to the origin. The seed is 20261018 plus the start index. One harness call is one Lennard-Jones energy and gradient at the same coordinates. The search stops inside the problem energy window or at 2000000 harness calls.
+force_calls 6294
+force_calls_min 127
+force_calls_max 25021
+nfailed 0
+median 4894.5
+code anneal
+code_version 0.11.1 (communicating)
+commit db22b99d09a0cdf1d4f004136f9ecb04104fcb39
+algorithm cluster search
+template anneal/lj38-communicating
+tuning default
+problem globalopt/lj38
+counter harness
+par2_mean 6294.4
+par2_median 4894.5
+par2_median_low 2927
+par2_median_high 5664.35
+v2_nfailed 0
+v2_successes 100
+n 100
+energy_min -173.928426164
+energy_max -173.927471142
+cap 2000000
+rgmin_version 0.2.0
+rgmin_commit 20832fd169932a1cd0d47ac84dc77fa9b435f940
