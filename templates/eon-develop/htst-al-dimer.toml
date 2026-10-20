@@ -1,0 +1,52 @@
+id = "eon-develop/htst-al-dimer"
+engine = "eon"
+problem = "hTST/Al"
+code = "eOn (develop a7aa574)"
+code_version = "a7aa574"
+commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+algorithm = "Dimer-CG rotation: max=50 tol=1"
+reducer = "harness-htst"
+pass_limit = 8000
+note = "Stock unpatched eOn at current develop a7aa57472fb7d823953fd36b78cd755fa4842d30, https://github.com/TheochemUI/eon, built with gfortran. This is not the SVN code. No dimer patch and no parameter search. The archived config.ini is copied onto the keys this server accepts. finite_difference is omitted, so the client default 0.01 stands. convergence_metric is max_atom because the archive stop is the maximum force on one atom and an unset metric is the Euclidean norm. Optimizer converged_force is 0.001 and max_iterations is 5000, so the saddle stop inherits both. Dimer opt_method and improved are omitted: the client default rotation is conjugate gradient and improved is on. rotations_max is 50 and converged_angle is 1. displace_atom_list is 384, the adatom. On this server -1 means every free atom, which is not the archived last-atom displacement. Radius 3.3, magnitude 0.5, listed weight 1. Temperature 300 K, seed 42, confidence 1.95. Prefactor default_value is 1.2e12. A start is one barrier window."
+
+[ini.Main]
+job = "akmc"
+temperature = 300
+random_seed = 42
+
+[ini.Potential]
+potential = "eam_al"
+
+[ini.Optimizer]
+opt_method = "cg"
+convergence_metric = "max_atom"
+converged_force = 0.001
+max_iterations = 5000
+
+[ini.AKMC]
+confidence = 1.95
+server_side_process_search = false
+
+[ini."Process Search"]
+minimize_first = true
+
+[ini.Communicator]
+type = "local"
+num_jobs = 32
+number_of_CPUs = 1
+client_path = "eonclient"
+
+[ini."Saddle Search"]
+min_mode_method = "dimer"
+displace_listed_atom_weight = 1.0
+displace_atom_list = "384"
+displace_radius = 3.3
+displace_magnitude = 0.5
+max_energy = 100.0
+
+[ini.Prefactor]
+default_value = 1.2e12
+
+[ini.Dimer]
+rotations_max = 50
+converged_angle = 1

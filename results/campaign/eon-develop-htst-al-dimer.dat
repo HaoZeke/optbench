@@ -1,0 +1,24 @@
+barrier_jobs 42
+barrier_force_calls 7.475e+03
+barrier_windows 639
+rate_jobs 4545
+rate_force_calls  7.924e+05
+rate_windows 6
+searches 27432
+missed_barriers 0
+unexpected_barriers 0
+reference_processes 8
+code eOn (develop a7aa574)
+code_version a7aa574
+commit a7aa57472fb7d823953fd36b78cd755fa4842d30
+counter htst-reducer
+reducer harness-htst
+contributor Rohit Goswami
+random_seed 42
+communicator_jobs 8
+passes 222
+seconds 3537.51
+algorithm Dimer-CG rotation: max=50 tol=1
+template eon-develop/htst-al-dimer
+problem hTST/Al
+count_keys sad-fcs

@@ -1,0 +1,24 @@
+barrier_jobs 46
+barrier_force_calls 3.966e+04
+barrier_windows 639
+rate_jobs 1390
+rate_force_calls  1.179e+06
+rate_windows 21
+searches 29977
+missed_barriers 0
+unexpected_barriers 0
+reference_processes 8
+code EON (SVN r2549)
+code_version r2549
+commit r2549
+counter htst-reducer
+reducer harness-htst
+contributor Rohit Goswami
+random_seed 42
+communicator_jobs 4
+passes 886
+seconds 9174.55
+algorithm Dimer-CG rotation: max=50 tol=1
+template eon-svn-r2549/htst-al-dimer
+problem hTST/Al
+count_keys sad-fcs

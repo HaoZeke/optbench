@@ -271,7 +271,7 @@ The archived driver is the dangling path bin/js850/globalopt.py. The harness use
 
 ### htst_al
 
-The r2549 Al dimer with the archived rotation string (CG, max 50, tol 1) misses barrier_force_calls and rate_force_calls by about 30 percent. Pt dimer CG with max 10 reproduces all four hTST counts.
+The archived number is the paper row. EON and eOn are different codes, scored stock and untuned on the same Al adatom, 639 barrier windows, and max-atom force 0.001. EON (SVN r2549) scores barrier_jobs 46, barrier_force_calls 3.966e+04, rate_jobs 1390, rate_force_calls 1.179e+06. eOn (develop a7aa574) scores barrier_jobs 42, barrier_force_calls 7.475e+03, rate_jobs 4545, rate_force_calls 7.924e+05. The gaps stay as measured. Pt dimer CG with max 10 reproduces all four hTST counts.
 
 - hTST/Al/eon-dimer-cg
 

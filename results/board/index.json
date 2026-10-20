@@ -5196,7 +5196,7 @@
         "divergence": 0,
         "wrong_stationary": 0
       },
-      "full_n": null,
+      "full_n": 639,
       "history": false,
       "max_calls": 1216.0,
       "mean_calls": 1216.0,
@@ -5241,7 +5241,7 @@
         "divergence": 0,
         "wrong_stationary": 0
       },
-      "full_n": null,
+      "full_n": 639,
       "history": false,
       "max_calls": 1405.0,
       "mean_calls": 1405.0,
@@ -5286,7 +5286,7 @@
         "divergence": 0,
         "wrong_stationary": 0
       },
-      "full_n": null,
+      "full_n": 13,
       "history": false,
       "max_calls": 1469.0,
       "mean_calls": 1469.0,
@@ -5331,7 +5331,7 @@
         "divergence": 0,
         "wrong_stationary": 0
       },
-      "full_n": null,
+      "full_n": 13,
       "history": false,
       "max_calls": 1696.0,
       "mean_calls": 1696.0,
@@ -5376,7 +5376,7 @@
         "divergence": 0,
         "wrong_stationary": 0
       },
-      "full_n": null,
+      "full_n": 13,
       "history": false,
       "max_calls": 1044.0,
       "mean_calls": 1044.0,
@@ -5421,7 +5421,7 @@
         "divergence": 0,
         "wrong_stationary": 0
       },
-      "full_n": null,
+      "full_n": 13,
       "history": false,
       "max_calls": 717.0,
       "mean_calls": 717.0,
@@ -15974,7 +15974,7 @@
       "title": "Lennard-Jones 38 global minimum"
     },
     "hTST/Al": {
-      "full_n": null,
+      "full_n": 639,
       "history": [],
       "id": "hTST/Al",
       "not_comparable": [],
@@ -15996,7 +15996,7 @@
             "divergence": 0,
             "wrong_stationary": 0
           },
-          "full_n": null,
+          "full_n": 639,
           "history": false,
           "max_calls": 1216.0,
           "mean_calls": 1216.0,
@@ -16041,7 +16041,7 @@
             "divergence": 0,
             "wrong_stationary": 0
           },
-          "full_n": null,
+          "full_n": 639,
           "history": false,
           "max_calls": 1405.0,
           "mean_calls": 1405.0,
@@ -16070,11 +16070,135 @@
           "wilson_low": 0.20654931437723745
         }
       ],
-      "ranked": [],
+      "profile": {
+        "area_log10": {
+          "eon-develop/htst-al-dimer a7aa574 Dimer-CG rotation: max=50 tol=1 campaign a7aa574": 1.1944625258310242,
+          "eon-svn-r2549/htst-al-dimer r2549 Dimer-CG rotation: max=50 tol=1 campaign r2549": 0.5351644367359666
+        },
+        "rho": {
+          "eon-develop/htst-al-dimer a7aa574 Dimer-CG rotation: max=50 tol=1 campaign a7aa574": [
+            0.9514866979655712,
+            0.9921752738654147,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "eon-svn-r2549/htst-al-dimer r2549 Dimer-CG rotation: max=50 tol=1 campaign r2549": [
+            0.048513302034428794,
+            0.18622848200312989,
+            0.4397496087636933,
+            0.6854460093896714,
+            0.8841940532081377
+          ]
+        },
+        "solved": {
+          "eon-develop/htst-al-dimer a7aa574 Dimer-CG rotation: max=50 tol=1 campaign a7aa574": 1.0,
+          "eon-svn-r2549/htst-al-dimer r2549 Dimer-CG rotation: max=50 tol=1 campaign r2549": 1.0
+        },
+        "taus": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ]
+      },
+      "ranked": [
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": null,
+          "code": "eOn (develop a7aa574)",
+          "code_version": "a7aa574",
+          "commit": "a7aa57472fb7d823953fd36b78cd755fa4842d30",
+          "comparable": true,
+          "counter": "htst-reducer",
+          "current": true,
+          "entry": "eon-develop-htst-al-dimer",
+          "failures": {
+            "cap": 0,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 0
+          },
+          "full_n": 639,
+          "history": false,
+          "max_calls": 27177.0,
+          "mean_calls": 7474.978090766823,
+          "mean_per_image": null,
+          "median": 6460.0,
+          "median_calls": 6460.0,
+          "median_high": 6821.0,
+          "median_low": 6079.0,
+          "median_per_image": null,
+          "min_calls": 1068.0,
+          "n": 639,
+          "nfailed": 0,
+          "note": "starts.jsonl",
+          "par2_mean": null,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/eon-develop-htst-al-dimer.dat",
+          "problem": "hTST/Al",
+          "registry_match": false,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 1.0,
+          "template": "eon-develop/htst-al-dimer",
+          "tuning": "Dimer-CG rotation: max=50 tol=1",
+          "wilson_high": 1.0,
+          "wilson_low": 0.9940242515973671
+        },
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": null,
+          "code": "EON (SVN r2549)",
+          "code_version": "r2549",
+          "commit": "r2549",
+          "comparable": true,
+          "counter": "htst-reducer",
+          "current": true,
+          "entry": "eon-svn-r2549-htst-al-dimer",
+          "failures": {
+            "cap": 0,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 0
+          },
+          "full_n": 639,
+          "history": false,
+          "max_calls": 232302.0,
+          "mean_calls": 39659.491392801254,
+          "mean_per_image": null,
+          "median": 29847.0,
+          "median_calls": 29847.0,
+          "median_high": 32704.0,
+          "median_low": 27947.0,
+          "median_per_image": null,
+          "min_calls": 4213.0,
+          "n": 639,
+          "nfailed": 0,
+          "note": "starts.jsonl",
+          "par2_mean": null,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/eon-svn-r2549-htst-al-dimer.dat",
+          "problem": "hTST/Al",
+          "registry_match": false,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 1.0,
+          "template": "eon-svn-r2549/htst-al-dimer",
+          "tuning": "Dimer-CG rotation: max=50 tol=1",
+          "wilson_high": 1.0,
+          "wilson_low": 0.9940242515973671
+        }
+      ],
       "title": "Al"
     },
     "hTST/Pt": {
-      "full_n": null,
+      "full_n": 13,
       "history": [],
       "id": "hTST/Pt",
       "not_comparable": [],
@@ -16096,7 +16220,7 @@
             "divergence": 0,
             "wrong_stationary": 0
           },
-          "full_n": null,
+          "full_n": 13,
           "history": false,
           "max_calls": 1469.0,
           "mean_calls": 1469.0,
@@ -16141,7 +16265,7 @@
             "divergence": 0,
             "wrong_stationary": 0
           },
-          "full_n": null,
+          "full_n": 13,
           "history": false,
           "max_calls": 1696.0,
           "mean_calls": 1696.0,
@@ -16186,7 +16310,7 @@
             "divergence": 0,
             "wrong_stationary": 0
           },
-          "full_n": null,
+          "full_n": 13,
           "history": false,
           "max_calls": 1044.0,
           "mean_calls": 1044.0,
@@ -16231,7 +16355,7 @@
             "divergence": 0,
             "wrong_stationary": 0
           },
-          "full_n": null,
+          "full_n": 13,
           "history": false,
           "max_calls": 717.0,
           "mean_calls": 717.0,
@@ -42122,7 +42246,7 @@
       "title": "pt-island"
     }
   },
-  "ranked_count": 439,
+  "ranked_count": 441,
   "schema": "optbench.board/v1",
   "unmapped": [
     {
