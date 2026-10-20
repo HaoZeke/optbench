@@ -218,6 +218,8 @@ def _stock_dlc(reactant: np.ndarray, product: np.ndarray, atoms):
             top1.add_edge(bond[0], bond[1])
         else:
             top1.add_edge(bond[1], bond[0])
+    # from_options runs newMakePrimitives. bin/gsm calls it once more,
+    # which clears the primitive list and builds the same set again.
     reactant_prims = PrimitiveInternalCoordinates.from_options(
         xyz=reactant,
         atoms=atoms,
@@ -226,7 +228,6 @@ def _stock_dlc(reactant: np.ndarray, product: np.ndarray, atoms):
         addcart=False,
         topology=top1,
     )
-    reactant_prims.newMakePrimitives(reactant)
     product_prims = PrimitiveInternalCoordinates.from_options(
         xyz=product,
         atoms=atoms,
@@ -235,7 +236,6 @@ def _stock_dlc(reactant: np.ndarray, product: np.ndarray, atoms):
         addcart=False,
         topology=top1,
     )
-    product_prims.newMakePrimitives(product)
     reactant_prims.add_union_primitives(product_prims)
     return DelocalizedInternalCoordinates.from_options(
         xyz=reactant,
