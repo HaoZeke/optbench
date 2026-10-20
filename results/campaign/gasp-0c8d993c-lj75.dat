@@ -2,8 +2,8 @@
 # A minimize line contributes its force-evaluation count. The dump's run 0 contributes one.
 # GASP 0.1 runs with the yaml, lattice, and species shims, and the energy is the final minimization stat.
 # Default fixed-composition search. The composition is C and both atom limits are 75, because the archive holds 75-atom clusters and GASP reduces a formula to one atom. Each coords.N file is the file organism, and 27 random organisms make the default initial population of 28. Pool size, variation fractions, the redundancy guard, and the 800-calculation stop are the fixed-composition defaults. The energy stop and the force-call cap are the problem file: 0.001 above the Cambridge minimum -397.492331, and 1000000 force calls. Each calculation is minimize cg to a force tolerance of 1e-8 and at most 20000 force evaluations, then run 0 for the dump. The seed is 20261015 plus the sorted start index. Lennard-Jones relaxation uses LAMMPS pair_style lj/cut, cutoff 40, epsilon 1, sigma 1, units lj, and thermo_modify norm no.
-# scored 150 of 200 starts
-nfailed 150
+# scored 156 of 200 starts
+nfailed 156
 code gasp
 code_version 0.1
 commit 0c8d993c82e0e1c69a05b3c34bbb2fcbbdbb7f07
@@ -14,13 +14,13 @@ tuning default
 counter harness
 par2_mean 2000000
 wilson_low 0
-wilson_high 0.0249702443681
+wilson_high 0.0240329314374
 par2_median 2000000
 par2_median_low 2000000
 par2_median_high 2000000
-v2_nfailed 150
+v2_nfailed 156
 v2_successes 0
-n 150
+n 156
 cap 1000000
 energy_min -396.282248826
 energy_max -384.359111927
