@@ -150,39 +150,31 @@ def test_recorded_gman_heptamer_matches_the_archive_integers():
     assert all(row["counter"] == "client" and row["call_unit"] == "total" and row["success"] for row in starts)
 
 
-def test_archived_gman_cg_rerun_stays_an_unranked_diagnostic():
-    dat_path = ROOT / "results" / "campaign" / "gman-r235-neb-pt-cg.dat"
-    fields = parse(dat_path.read_text(encoding="utf-8"))
-    assert fields["force_calls"] == "120"
-    assert fields["force_calls_max"] == "321"
-    assert fields["force_calls_min"] == "57"
-    assert fields["nfailed"] == "0"
-    assert "counter" not in fields
-    assert not dat_path.with_suffix(".starts.jsonl").is_file()
-    assert not dat_path.with_suffix(".v2.json").is_file()
-
-
-_STOCK_PER_PATH = [45, 41, 95, 95, 105, 200, 163, 177, 175, 95, 93, 109, 123]
+_STOCK_PER_PATH = [45, 41, 95, 95, 105, 319, 163, 177, 175, 95, 93, 109, 123]
 
 
 def test_stock_gman_cg_ranks_the_native_counter():
     template = load_template(ROOT, "gman/neb-pt-cg-stock")
+    problem = resolve_problem(ROOT, "neb/Pt-heptamer")
+    cap = int((problem.get("convergence") or {})["max_force_calls"])
     assert template["tuning"] == "stock"
+    assert template["paper_baseline"] is False
     assert template["code_version"] == "r235"
     assert template["gman"]["method"] == "off"
-    assert template["gman"]["itrmax"] == 100
+    assert template["gman"]["itrmax"] == cap == 10000
     assert template["gman"]["fmax"] == 0.01
     dat_path = ROOT / "results" / "campaign" / "gman-r235-neb-pt-cg-stock.dat"
     fields = parse(dat_path.read_text(encoding="utf-8"))
-    assert fields["force_calls"] == "116"
-    assert fields["force_calls_max"] == "200"
+    assert fields["force_calls"] == "125"
+    assert fields["force_calls_max"] == "319"
     assert fields["force_calls_min"] == "41"
-    assert fields["nfailed"] == "1"
+    assert fields["nfailed"] == "0"
     assert fields["counter"] == "harness"
     assert fields["algorithm"] == "cg"
     assert fields["code_version"] == "r235"
     assert fields["template"] == "gman/neb-pt-cg-stock"
     assert fields["tuning"] == "stock"
+    assert not (ROOT / "results" / "campaign" / "gman-r235-neb-pt-cg.dat").is_file()
     starts = [
         json.loads(line)
         for line in dat_path.with_suffix(".starts.jsonl").read_text(encoding="utf-8").splitlines()
@@ -190,11 +182,9 @@ def test_stock_gman_cg_ranks_the_native_counter():
     ]
     assert [row["per_image"] for row in starts] == _STOCK_PER_PATH
     assert [row["force_calls"] for row in starts] == [count * 8 for count in _STOCK_PER_PATH]
-    assert sum(1 for row in starts if row["success"]) == 12
-    assert starts[5]["success"] is False and starts[5]["failure"] == "divergence"
+    assert all(row["success"] and row["failure"] is None for row in starts)
     assert all(row["counter"] == "harness" and row["call_unit"] == "total" and row["pot_count"] == row["raw"] for row in starts)
     normalized = [normalize_start(row, 8) for row in starts]
-    cap = int((resolve_problem(ROOT, "neb/Pt-heptamer").get("convergence") or {})["max_force_calls"])
     score = score_v2(
         [{"force_calls": row["force_calls"], "success": raw["success"], "failure": raw["failure"]} for raw, row in zip(starts, normalized)],
         cap,
@@ -202,9 +192,11 @@ def test_stock_gman_cg_ranks_the_native_counter():
     document = json.loads(dat_path.with_suffix(".v2.json").read_text(encoding="utf-8"))
     assert document["schema"] == "optbench.score/v2"
     assert document["counter"] == "harness"
-    assert document["legacy"]["force_calls"] == 116
+    assert document["legacy"]["force_calls"] == 125
+    assert document["legacy"]["nfailed"] == 0
     assert document["score"]["par2_mean"] == score["par2_mean"]
     assert document["score"]["n"] == 13
-    assert document["score"]["nfailed"] == 1
+    assert document["score"]["nfailed"] == 0
+    assert document["provenance"]["parameters"]["itrmax"] == 10000
     assert document["provenance"]["parameters"]["counter"] == "pot.count"
     assert document["provenance"]["code_version"] == "r235"

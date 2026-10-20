@@ -1,5 +1,2 @@
-__all__ = ["conf","xyz","vasp","jvasp"]
+__all__ = ["conf"]
 from .conf import *
-from .xyz import *
-from .vasp import *
-from .jvasp import *

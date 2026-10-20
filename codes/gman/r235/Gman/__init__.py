@@ -19,5 +19,5 @@ __author__ = 'Daniel Sheppard <daniel.sheppard@mail.utexas.edu>\nLijun Xu <xulij
 
 __doc__ = '''This is Gman.'''
 
-__all__ = ["data","dyn","func","io","math","opt","parm","pot","min","neb"]
-from . import data,dyn,func,io,math,opt,parm,pot,min,vzr
+__all__ = ["data","func","io","math","opt","pot","neb"]
+from . import data,func,io,math,opt,pot,neb

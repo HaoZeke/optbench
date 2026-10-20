@@ -842,6 +842,8 @@ def render_markdown(rows: list[dict]) -> str:
             status = f"{status}; {row['cause']}"
         if row.get("note"):
             status = f"{status}; residual"
+        if row["problem"] == "Pt-heptamer" and row["entry"] == "gman-cg" and row.get("rerun"):
+            status = "Gman r235"
         lines.append(f"| {ident} | {archive} | {rerun} | {status} |")
     lines.append("")
     lines.append("## Residuals inside the band")

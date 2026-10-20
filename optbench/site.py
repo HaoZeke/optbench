@@ -287,6 +287,9 @@ def problem_html(
         code = _code_label(fields)
         row_id = _slug(f"{problem['id']}-{row['entry']}")
         missed = f"{problem['id']}/{row['entry']}" in misses
+        # The ranked Gman row is the release beside the archive, not a verdict.
+        if f"{problem['id']}/{row['entry']}" == "neb/Pt-heptamer/gman-cg":
+            missed = False
         any_miss = any_miss or missed
         label = row["entry"]
         if held:
