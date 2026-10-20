@@ -2,7 +2,7 @@
 # Local steps are SciPy L-BFGS-B stopped on the ASE maximum atomic force.
 # Random structure search follows agox/lj38-rss. The confinement cube, archive, success window, and cap are the same as agox/lj75-bh.
 # partial true. The row is not a full ranked score.
-nfailed 189
+nfailed 195
 code AGOX
 code_version 3.11.2.dev2+g22d94a6fa
 commit 22d94a6fae8cf2d08d51ecc8b9291a47667aa95c
@@ -14,18 +14,18 @@ counter harness
 cap 1000000
 par2_mean 2000000
 wilson_low 0
-wilson_high 0.0199202953773
+wilson_high 0.0193192045737
 par2_median 2000000
 par2_median_low 2000000
 par2_median_high 2000000
-v2_nfailed 189
+v2_nfailed 195
 v2_successes 0
-n 189
-n_cap 189
+n 195
+n_cap 195
 n_wrong_stationary 0
 n_divergence 0
 n_crash 0
-energy_min -389.854249169
+energy_min -390.041958666
 energy_max -378.898923729
 reference_energy -397.492331
 target_energy -397.491331
