@@ -7,7 +7,7 @@ code_version = "1.0 (98aac60)"
 commit = "98aac60b5d9905e81ee4e6b8c385f169258d0218"
 algorithm = "SSDimer BFGS"
 tuning = "default"
-note = "SSDimer rotationOpt is bfgs. rotationMax is the 10000-call cap. maxStep, dR, and phi_tol stay at the constructor defaults. SSDimer.search owns translation and rotation. The problem stops at absolute overlap 0.99 or the call cap."
+note = "SSDimer rotationOpt is bfgs. rotationMax is the 10000-call cap. maxStep, dR, and phi_tol stay at the constructor defaults. The geometry stays fixed. One get_forces runs the rotation and the run ends when that rotation returns. Overlap >= 0.99 is a success. A finished rotation under the overlap is a wrong-mode failure."
 
 [tsase]
 method = "dimer"

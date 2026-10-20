@@ -16453,20 +16453,20 @@
       "profile": {
         "area_log10": {
           "eon-client/low-lj38-dimer-cg 3.5.0 campaign 4d8b34b": 0.9617908361464198,
-          "eon-client/low-lj38-dimer-lbfgs 3.5.0 campaign 4d8b34b": 0.9828629358428986,
-          "eon-client/low-lj38-lanczos 3.5.0 campaign 4d8b34b": 1.0039350355393772,
+          "eon-client/low-lj38-dimer-lbfgs 3.5.0 campaign 4d8b34b": 0.9806052108754187,
+          "eon-client/low-lj38-lanczos 3.5.0 campaign 4d8b34b": 1.0031824605502173,
           "eon-svn/low-lj38-dimer-cg r2549 campaign r2549": 0.9617908361464198,
-          "eon-svn/low-lj38-dimer-lbfgs r2549 campaign r2549": 0.9828629358428986,
-          "eon-svn/low-lj38-lanczos-ljcut r2549 campaign r2549": 1.0039350355393772,
-          "partn/mode-lj38 1.1.0 default campaign 9b75351": 0.8918013621545442,
+          "eon-svn/low-lj38-dimer-lbfgs r2549 campaign r2549": 0.9806052108754187,
+          "eon-svn/low-lj38-lanczos-ljcut r2549 campaign r2549": 1.0031824605502173,
+          "partn/mode-lj38 1.1.0 default campaign 9b75351": 0.8925539371437041,
           "pysisyphus/lanczos-lj38 0.1.dev1 default campaign a4ce10d": 0.8315953630217481,
-          "rgsaddle/mode-dimer 0.2.2 default campaign, asv c0db2b8": 0.9422238864282612,
-          "rgsaddle/mode-dimer-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.7917088885962705,
+          "rgsaddle/mode-dimer 0.2.2 default campaign, asv c0db2b8": 0.9407187364499412,
+          "rgsaddle/mode-dimer-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.7932140385745905,
           "rgsaddle/mode-lanczos 0.2.2 default campaign, asv c0db2b8": 1.038553485040735,
-          "rgsaddle/mode-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.8775024373605051,
+          "rgsaddle/mode-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.8790075873388251,
           "sella-0.1.1/lj38-loweig 0.1.1 archive campaign, asv 0.1.1": 1.1702541081437268,
-          "tsase/mode-lj38 1.0 default campaign 98aac60": 0.15503044776695035,
-          "tsase/mode-lj38-bfgs 1.0 (98aac60) default campaign 98aac60": 0.5779775916748439
+          "tsase/mode-lj38 1.0 default campaign 98aac60": 0.15653559774527026,
+          "tsase/mode-lj38-bfgs 1.0 (98aac60) default campaign 98aac60": 0.3175866454255002
         },
         "rho": {
           "eon-client/low-lj38-dimer-cg 3.5.0 campaign 4d8b34b": [
@@ -16477,14 +16477,14 @@
             1.0
           ],
           "eon-client/low-lj38-dimer-lbfgs 3.5.0 campaign 4d8b34b": [
-            0.01,
-            0.78,
+            0.005,
+            0.775,
             0.98,
             1.0,
             1.0
           ],
           "eon-client/low-lj38-lanczos 3.5.0 campaign 4d8b34b": [
-            0.04,
+            0.035,
             0.825,
             0.99,
             1.0,
@@ -16498,21 +16498,21 @@
             1.0
           ],
           "eon-svn/low-lj38-dimer-lbfgs r2549 campaign r2549": [
-            0.01,
-            0.78,
+            0.005,
+            0.775,
             0.98,
             1.0,
             1.0
           ],
           "eon-svn/low-lj38-lanczos-ljcut r2549 campaign r2549": [
-            0.04,
+            0.035,
             0.825,
             0.99,
             1.0,
             1.0
           ],
           "partn/mode-lj38 1.1.0 default campaign 9b75351": [
-            0.105,
+            0.11,
             0.74,
             0.865,
             0.87,
@@ -16527,14 +16527,14 @@
           ],
           "rgsaddle/mode-dimer 0.2.2 default campaign, asv c0db2b8": [
             0.0,
-            0.635,
+            0.63,
             0.995,
             1.0,
             1.0
           ],
           "rgsaddle/mode-dimer-tuned 0.2.2 tuned campaign, asv c0db2b8": [
             0.0,
-            0.26,
+            0.265,
             0.885,
             0.985,
             1.0
@@ -16548,7 +16548,7 @@
           ],
           "rgsaddle/mode-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": [
             0.0,
-            0.455,
+            0.46,
             0.96,
             1.0,
             1.0
@@ -16562,17 +16562,17 @@
           ],
           "tsase/mode-lj38 1.0 default campaign 98aac60": [
             0.0,
-            0.0,
+            0.005,
             0.035,
             0.19,
             0.58
           ],
           "tsase/mode-lj38-bfgs 1.0 (98aac60) default campaign 98aac60": [
-            0.045,
-            0.415,
-            0.57,
-            0.6,
-            0.625
+            0.05,
+            0.28,
+            0.3,
+            0.3,
+            0.3
           ]
         },
         "solved": {
@@ -16590,7 +16590,7 @@
           "rgsaddle/mode-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 1.0,
           "sella-0.1.1/lj38-loweig 0.1.1 archive campaign, asv 0.1.1": 1.0,
           "tsase/mode-lj38 1.0 default campaign 98aac60": 0.89,
-          "tsase/mode-lj38-bfgs 1.0 (98aac60) default campaign 98aac60": 0.635
+          "tsase/mode-lj38-bfgs 1.0 (98aac60) default campaign 98aac60": 0.3
         },
         "taus": [
           1.0,
@@ -17243,26 +17243,26 @@
           "current": true,
           "entry": "tsase-98aac60b-lowest-eigenvector-lj38--tsase-mode-lj38-bfgs",
           "failures": {
-            "cap": 73,
+            "cap": 0,
             "crash": 0,
-            "divergence": 0,
+            "divergence": 140,
             "wrong_stationary": 0
           },
           "full_n": 200,
           "history": false,
-          "max_calls": 10000.0,
-          "mean_calls": 3675.595,
+          "max_calls": 30.0,
+          "mean_calls": 18.305,
           "mean_per_image": null,
-          "median": 39.0,
-          "median_calls": 39.0,
-          "median_high": 67.01249999999993,
-          "median_low": 29.0,
+          "median": 20000.0,
+          "median_calls": 18.0,
+          "median_high": 20000.0,
+          "median_low": 20000.0,
           "median_per_image": null,
-          "min_calls": 12.0,
+          "min_calls": 10.0,
           "n": 200,
-          "nfailed": 73,
+          "nfailed": 140,
           "note": "starts.jsonl",
-          "par2_mean": 7325.595,
+          "par2_mean": 14005.805,
           "partial": false,
           "partial_reason": "",
           "path": "results/campaign/tsase-98aac60b-lowest-eigenvector-lj38--tsase-mode-lj38-bfgs.dat",
@@ -17270,11 +17270,11 @@
           "registry_match": true,
           "scored": true,
           "source": "campaign",
-          "success_rate": 0.635,
+          "success_rate": 0.3,
           "template": "tsase/mode-lj38-bfgs",
           "tuning": "default",
-          "wilson_high": 0.698594735350732,
-          "wilson_low": 0.566317026527406
+          "wilson_high": 0.36679068372719265,
+          "wilson_low": 0.24074744682371402
         }
       ],
       "title": "lj38"
