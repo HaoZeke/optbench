@@ -154,7 +154,7 @@ MATCHES: list[dict] = [
     {"key": "lowest-eigenvector/lj38/eon-dimer-lbfgs", "template": "eon-client/low-lj38-dimer-lbfgs", "branch": "main", "path": "results/campaign/eon-client-low-lj38-dimer-lbfgs.dat"},
     {"key": "lowest-eigenvector/lj38/eon-lanczos", "template": "eon-svn/low-lj38-lanczos-ljcut", "branch": "main", "path": "results/campaign/eon-svn-low-lj38-lanczos-ljcut.dat"},
     {"key": "lowest-eigenvector/lj38/sella", "template": "sella-0.1.1/lj38-loweig", "branch": "cells/fill-not-rerun", "path": "results/campaign/sella-0.1.1-lj38-loweig.dat"},
-    {"key": "lowest-eigenvector/lj38/tsase-dimer-cg", "template": "tsase-408/lj38-dimer-cg", "branch": "repro/lowest-eigenvector-lj38-tsase-dimer-cg", "path": "results/campaign/tsase-408-lj38-dimer-cg.dat", "extra": {"unrounded_mean": 29.44}},
+    {"key": "lowest-eigenvector/lj38/tsase-dimer-cg", "template": "tsase-408/lj38-dimer-cg", "branch": "repro/lowest-eigenvector-lj38-tsase-dimer-cg", "path": "results/campaign/tsase-408-lj38-dimer-cg.dat", "cause": "tsase_stock", "extra": {"unrounded_mean": 29.44, "modern_code_version": "1.0", "modern_commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218", "modern_template": "tsase/mode-lj38", "modern_force_calls": 248, "modern_nfailed": 22}},
     {"key": "lowest-eigenvector/lj38/pele-first-order", "template": "pele/lj38-loweig-forward", "branch": "cells/pele/ts", "path": "results/campaign/pele-b7081b93-lj38-loweig-forward.dat"},
     {"key": "lowest-eigenvector/lj38/pele-second-order", "template": "pele/lj38-loweig-central", "branch": "cells/pele/ts", "path": "results/campaign/pele-b7081b93-lj38-loweig-central.dat"},
     {"key": "lowest-eigenvector/lj38/optim-first-order", "template": "optim/rr-loweig", "branch": "cells/optim/saddle-pt", "path": "results/campaign/optim-df8da599-rr-loweig.dat", "cause": "optim_rr_defaults"},
@@ -244,6 +244,13 @@ CAUSE_TEXT = {
         "comments.txt sets L-BFGS memory 100 and maximum move 2.0. That rerun scores 27. "
         "OPTIM defaults (updates 4) score 46, which is the archived integer, but that is not the comment's setup. "
         "The odata preamble was not archived."
+    ),
+    "tsase_stock": (
+        "TSASE 1.0, commit 98aac60, is the ranked harness row. "
+        "Stock SSDimer settings are maxStep 0.2, dR 0.001, phi_tol 5, rotationMax 4, rotationOpt cg, and ss false. "
+        "The stop is absolute overlap 0.99 and the 10000-call cap on the archived 200 geometries. "
+        "The harness success mean is 248 with 22 failures. The archive is 29 with 0 failures. The gap is the finding. "
+        "The rev-list 408 forceCalls file stays an unranked diagnostic."
     ),
     "optim_rr_defaults": (
         "The Rayleigh-Ritz template uses updates 4. The archived first-order mean is 25 and the second-order mean is 46. "

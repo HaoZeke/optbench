@@ -11,7 +11,7 @@ profile = "archive"
 reducer = "all"
 ranked = true
 parameter_source = "archive"
-note = "Archive dimer_rotate.py on TSASE commit 5584461, git rev-list count 408, 18 Jun 2014. rotationOpt cg, phi_tol 0, dR 0.001, ss false. rotationMax rises from 1 until absolute overlap exceeds 0.99. The score is that attempt's forceCalls. direction.dat is numpy seed 314159, one vector for every geometry. The potential is unshifted lj/cut, epsilon 1, sigma 1, cutoff 40. report.sh prints the mean with %.0f and drops a start at 10000 calls."
+note = "Unranked paper-era diagnostic of dimer_rotate.py at TSASE commit 5584461, rev-list count 408. The ranked row is stock TSASE 1.0, template tsase/mode-lj38."
 
 [stop]
 norm = "overlap"

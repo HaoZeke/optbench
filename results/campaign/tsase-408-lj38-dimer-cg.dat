@@ -3,14 +3,14 @@ force_calls_min 13
 force_calls_max 82
 nfailed 0
 starts 200
-code tsase
+code tsase-408
 code_version 408
 commit 55844612b607a0d4b9c0205917021b0c34975cc6
 algorithm dimer CG
 template tsase-408/lj38-dimer-cg
 problem lowest-eigenvector/lj38
-counter harness
+counter diagnostic
 reducer all
 parameter_source archive
 unrounded_mean 29.44
-note Archive dimer_rotate.py: SSDimer CG, phi_tol 0, dR 0.001, ss false. rotationMax rises from 1 until absolute overlap exceeds 0.99. The score is that attempt's forceCalls. The unrounded mean is 29.44; report.sh prints 29.
+note Unranked paper-era diagnostic. SSDimer CG at rev-list 408, phi_tol 0, dR 0.001, ss false. rotationMax rises from 1 until absolute overlap exceeds 0.99. The score is that attempt's forceCalls. The unrounded mean is 29.44; report.sh prints 29. The ranked row is stock TSASE 1.0.

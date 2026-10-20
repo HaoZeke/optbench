@@ -101,7 +101,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj38/pele-second-order | force_calls 47 | 47 | reproduced |
 | lj38/sella | force_calls 17.8 | 17.8 | reproduced |
 | lj38/tsase-dimer-bfgs | — | — | not rerun |
-| lj38/tsase-dimer-cg | force_calls 29 | 29 | reproduced |
+| lj38/tsase-dimer-cg | force_calls 29 | 29 | reproduced; residual |
 | lj38/tsase-lanczos | — | — | not rerun |
 
 ## minimization
@@ -217,6 +217,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 ## Residuals inside the band
 
+- lowest-eigenvector/lj38/tsase-dimer-cg: TSASE 1.0, commit 98aac60, is the ranked harness row. Stock SSDimer settings are maxStep 0.2, dR 0.001, phi_tol 5, rotationMax 4, rotationOpt cg, and ss false. The stop is absolute overlap 0.99 and the 10000-call cap on the archived 200 geometries. The harness success mean is 248 with 22 failures. The archive is 29 with 0 failures. The gap is the finding. The rev-list 408 forceCalls file stays an unranked diagnostic.
 - tsopt/LJ38/pele_cd: Inside the 10% band (263.52 vs 254). The same xyz-versus-con starting set as ts-ffd. findTS_local.py for the CD row does not pass orthogZeroEigs; the harness template sets orthog translations-rotations. The paper baseline is this 2014-stop mean, not the harness-stop mean 335.06.
 - tsopt/LJ38/pele_ffd: Inside the 10% band (207.51 vs 192). Archive run.sh unpacks coords-xyz.tar.gz (200 xyz, max pair about 4.4). The harness problem points at coords-con.tar.gz (max pair about 37). Kabsch RMS is about 6.33, so the sets are not the same geometry. Neither set has a pair past cutoff 40, and both drivers use RMS tolerance 1e-3/sqrt(114). The 8% residual is the starting set. The paper baseline is this 2014-stop mean, not the harness-stop mean 254.48.
 
