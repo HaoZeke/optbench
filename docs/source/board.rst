@@ -191,6 +191,31 @@ It does not run a campaign.
    <td data-code="softsaddle">—</td>
    <td data-code="tsase" data-template="tsase/ci-neb" data-par2="2524.53"><span class="bench-score">2524.53</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">tsase/ci-neb</a></td>
    </tr>
+   <tr data-problem="globalopt/lj150">
+   <th scope="row"><a href="generated/suites/globalopt.html#lj150">lj150</a></th>
+   <td data-code="eOn">—</td>
+   <td data-code="Eon svn">—</td>
+   <td data-code="rgmin">—</td>
+   <td data-code="rgsaddle">—</td>
+   <td data-code="geodesic">—</td>
+   <td data-code="ASE">—</td>
+   <td data-code="Sella">—</td>
+   <td data-code="GMIN">—</td>
+   <td data-code="pele">—</td>
+   <td data-code="LAMMPS">—</td>
+   <td data-code="pysisyphus">—</td>
+   <td data-code="AIRSS">—</td>
+   <td data-code="vc-SQNM">—</td>
+   <td data-code="NLopt" data-template="nloptglobal/lj150-lbfgs-bh" data-par2="1.95544e+07"><span class="bench-score">1.95544e+07</span><a href="generated/suites/globalopt.html#lj150-templates">nloptglobal/lj150-lbfgs-bh</a></td>
+   <td data-code="artn">—</td>
+   <td data-code="compass">—</td>
+   <td data-code="dlfind">—</td>
+   <td data-code="lammps">—</td>
+   <td data-code="optim">—</td>
+   <td data-code="optking">—</td>
+   <td data-code="softsaddle">—</td>
+   <td data-code="tsase">—</td>
+   </tr>
    <tr data-problem="globalopt/lj38">
    <th scope="row"><a href="generated/suites/globalopt.html#lj38">Lennard-Jones 38 global minimum</a></th>
    <td data-code="eOn" data-template="eon-client/bh-lj38" data-par2="503146"><span class="bench-score">503146</span><a href="generated/suites/globalopt.html#lj38-templates">eon-client/bh-lj38</a></td>
@@ -206,7 +231,7 @@ It does not run a campaign.
    <td data-code="pysisyphus">—</td>
    <td data-code="AIRSS" data-template="airss/lj38" data-par2=""><span class="bench-score"></span><a href="generated/suites/globalopt.html#lj38-templates">airss/lj38</a></td>
    <td data-code="vc-SQNM">—</td>
-   <td data-code="NLopt" data-template="nloptglobal/lj38-crs2" data-par2="2e+06"><span class="bench-score">2e+06</span><a href="generated/suites/globalopt.html#lj38-templates">nloptglobal/lj38-crs2</a></td>
+   <td data-code="NLopt" data-template="nloptglobal/lj38-lbfgs-bh" data-par2="1.56463e+06"><span class="bench-score">1.56463e+06</span><a href="generated/suites/globalopt.html#lj38-templates">nloptglobal/lj38-lbfgs-bh</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -231,7 +256,7 @@ It does not run a campaign.
    <td data-code="pysisyphus">—</td>
    <td data-code="AIRSS">—</td>
    <td data-code="vc-SQNM">—</td>
-   <td data-code="NLopt">—</td>
+   <td data-code="NLopt" data-template="nloptglobal/lj75-lbfgs-bh" data-par2="2e+06"><span class="bench-score">2e+06</span><a href="generated/suites/globalopt.html#lj75-templates">nloptglobal/lj75-lbfgs-bh</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>

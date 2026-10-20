@@ -1141,9 +1141,8 @@
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/lj150">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="11">No full harness row.</td></tr>
+   <tr><td data-field="template">nloptglobal/lj150-lbfgs-bh</td><td data-field="version">NLopt 2.11.0</td><td data-field="commit">88c424d4f458</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">1.95544e+07</td><td data-field="success_rate">0.03</td><td data-field="wilson">0.0102545–0.0845194</td><td data-field="median_calls">1e+07</td><td data-field="mean_calls">9.85435e+06</td><td data-field="failures">crash 0, divergence 0, cap 97, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
-   <p class="bench-gaps">No committed harness run.</p>
    <p><a href="generated/suites/globalopt.html#lj150">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="lj150-legacy">
    <h3>Legacy 2014 archive</h3>
