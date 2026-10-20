@@ -1883,15 +1883,14 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="mlopt/C2H4">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="13">No full harness row.</td></tr>
+   <tr><td data-field="template">pyamff/c2h4-adam10-7-fcoeff0_1</td><td data-field="version">Pyamff 0.1.0-beta</td><td data-field="commit">240f51d01ca2</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">15606.4</td><td data-field="success_rate">0.88</td><td data-field="wilson_low">0.761952</td><td data-field="wilson_high">0.943824</td><td data-field="median_calls">8234</td><td data-field="mean_calls">12006.4</td><td data-field="failures">crash 0, divergence 0, cap 6, wrong_stationary 0</td><td data-field="n">50</td></tr>
    </tbody></table></div>
-   <p class="bench-gaps">No committed harness run.</p>
    <p><a href="generated/suites/mlopt.html#C2H4">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="C2H4-legacy">
    <h3>Legacy 2014 archive</h3>
    <details class="bench-details">
    <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest epochs first. Failures are left out of this mean.</caption>
    <thead><tr>
@@ -1966,7 +1965,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="mlopt-c2h4-pyamff-adam10-7-fcoeff0-1">
    <td class="num">5</td>
-   <td class="text">pyamff-adam10-7-fcoeff0_1</td>
+   <td class="text">pyamff-adam10-7-fcoeff0_1 · not reproduced</td>
    <td class="text">Pyamff 8037eb98</td>
    <td class="num">0.021102213999999998</td>
    <td class="num">13876.7</td>
