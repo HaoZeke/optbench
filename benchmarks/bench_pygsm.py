@@ -113,6 +113,12 @@ def sidecar_path(problem_name: str, template_name: str, seed: str, start: str) -
     return result_root() / "results" / "pygsm-asv" / slug / str(seed) / f"{start}.json"
 
 
+def problem_cap(problem_name: str) -> int:
+    from optbench.campaign import resolve_problem
+
+    return int(resolve_problem(ROOT, problem_name)["convergence"]["max_force_calls"])
+
+
 def _starts(problem_name: str) -> list[str]:
     from optbench.campaign import geometry_archive, resolve_problem
     from optbench.pes import load_pairs
@@ -240,7 +246,7 @@ PygsmLj38De = _bind("PygsmLj38De", "double-ended-saddle-search/lj38", 2500, 1800
 PygsmLj38TwoTs = _bind(
     "PygsmLj38TwoTs",
     "double-ended-saddle-search/lj38_2ts_separation",
-    250000,
+    problem_cap("double-ended-saddle-search/lj38_2ts_separation"),
     7200,
     "pygsm/de-gsm",
 )

@@ -24,16 +24,22 @@ def test_asv_runtime_requires_the_campaign_scipy():
 
 
 def test_benchmark_classes_publish_the_problem_cap():
-    from benchmarks.bench_pygsm import PygsmLj38De, PygsmLj38TwoTs
+    from optbench.campaign import resolve_problem
+
+    from benchmarks.bench_pygsm import PygsmLj38De, PygsmLj38TwoTs, problem_cap
 
     assert PygsmLj38De.problem_name == "double-ended-saddle-search/lj38"
     assert PygsmLj38De.template_id == "pygsm/de-gsm"
     assert PygsmLj38De.cap == 2500
     assert PygsmLj38De.timeout == 1800
     assert PygsmLj38De.params[1] == ["pair_00"]
-    assert PygsmLj38TwoTs.problem_name == "double-ended-saddle-search/lj38_2ts_separation"
+    two_ts = "double-ended-saddle-search/lj38_2ts_separation"
+    stated = int(resolve_problem(ROOT, two_ts)["convergence"]["max_force_calls"])
+    assert stated == 250000
+    assert problem_cap(two_ts) == stated
+    assert PygsmLj38TwoTs.problem_name == two_ts
     assert PygsmLj38TwoTs.template_id == "pygsm/de-gsm"
-    assert PygsmLj38TwoTs.cap == 250000
+    assert PygsmLj38TwoTs.cap == stated
     assert PygsmLj38TwoTs.timeout == 7200
     assert PygsmLj38TwoTs.params[1] == ["pair_00"]
 
