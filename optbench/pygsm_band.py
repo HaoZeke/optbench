@@ -24,9 +24,7 @@ level of theory. The first pass uses ``bin/gsm``'s ``CONV_TOL`` of
 The climb displacement in
 ``base_optimizer`` is the tangent projection of the gradient, and the
 0.05 limit there is applied only when that projection is positive.
-``pygsm/de-gsm`` leaves that step as shipped. ``pygsm/de-gsm-climbclamp``
-applies the absolute-value clamp recorded in
-``templates/pygsm/de-gsm-climbclamp.diff``. A separated cluster is
+``pygsm/de-gsm`` leaves that step as shipped. A separated cluster is
 divergence by the harness connected-cluster rule. Numpy 2 removed
 ``ndarray.tostring`` and rejects a generator passed to ``np.sum``.
 The rotation eigensolve can also fail to converge on these clusters.
@@ -141,11 +139,10 @@ def _stable_sorted_eigh(original):
 
 
 def _both_signs(original):
-    """Stock climb step, or the absolute-value clamp when this template asks.
+    """Stock climb step. The shipped condition is ``gts > abs(max_step)``.
 
-    The shipped condition is ``gts > abs(max_step)``. The clamp template
-    changes that comparison to ``abs(gts) > abs(max_step)``, which is
-    ``templates/pygsm/de-gsm-climbclamp.diff``.
+    The flag below is off for ``pygsm/de-gsm``. A negative projection
+    stays the raw displacement.
     """
 
     def get_constraint_steps(self, molecule, opt_type, g):
@@ -768,6 +765,8 @@ def _settings(template: dict, problem: dict, commit: str) -> dict:
         raise ValueError(f"{template['id']} commit does not match the pygsm registry")
     if str(template["gsm"].get("coordinate")) != "tric":
         raise ValueError(f"{template['id']} coordinate is {template['gsm'].get('coordinate')}")
+    if bool(template["gsm"].get("climb_clamp", False)):
+        raise ValueError(f"{template['id']} is a tuned climb clamp; the board keeps pygsm/de-gsm only")
     band = problem["band"]
     convergence = problem["convergence"]
     return {
@@ -865,19 +864,11 @@ def _dat(records: list[dict], template: dict, settings: dict, problem: dict, sco
         "A separated cluster is divergence by the harness connected-cluster rule at 1.5 sigma. "
         f"Call cap {settings['cap']}."
     )
-    if settings["climb_clamp"]:
-        note = (
-            "pyGSM DE-GSM with the negative-projection climb clamp. This row is not stock pyGSM. "
-            "The patch is templates/pygsm/de-gsm-climbclamp.diff. "
-            "The 0.05 limit applies when the absolute tangent projection exceeds 0.05. "
-            + shared
-        )
-    else:
-        note = (
-            "pyGSM DE-GSM, stock climb step. "
-            "The 0.05 limit in base_optimizer applies only when the tangent projection is positive. "
-            + shared
-        )
+    note = (
+        "pyGSM DE-GSM, stock climb step. "
+        "The 0.05 limit in base_optimizer applies only when the tangent projection is positive. "
+        + shared
+    )
     lines.append(f"note {note}")
     return "\n".join(lines) + "\n"
 

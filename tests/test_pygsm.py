@@ -24,7 +24,7 @@ def test_asv_runtime_requires_the_campaign_scipy():
 
 
 def test_benchmark_classes_publish_the_problem_cap():
-    from benchmarks.bench_pygsm import PygsmLj38De, PygsmLj38DeClimb, PygsmLj38TwoTs, PygsmLj38TwoTsClimb
+    from benchmarks.bench_pygsm import PygsmLj38De, PygsmLj38TwoTs
 
     assert PygsmLj38De.problem_name == "double-ended-saddle-search/lj38"
     assert PygsmLj38De.template_id == "pygsm/de-gsm"
@@ -32,24 +32,24 @@ def test_benchmark_classes_publish_the_problem_cap():
     assert PygsmLj38De.timeout == 1800
     assert PygsmLj38De.params[1] == ["pair_00"]
     assert PygsmLj38TwoTs.problem_name == "double-ended-saddle-search/lj38_2ts_separation"
+    assert PygsmLj38TwoTs.template_id == "pygsm/de-gsm"
     assert PygsmLj38TwoTs.cap == 10000
     assert PygsmLj38TwoTs.timeout == 7200
     assert PygsmLj38TwoTs.params[1] == ["pair_00"]
-    assert PygsmLj38DeClimb.template_id == "pygsm/de-gsm-climbclamp"
-    assert PygsmLj38DeClimb.problem_name == PygsmLj38De.problem_name
-    assert PygsmLj38DeClimb.cap == 2500
-    assert PygsmLj38TwoTsClimb.template_id == "pygsm/de-gsm-climbclamp"
-    assert PygsmLj38TwoTsClimb.cap == 10000
 
 
 def test_template_matches_the_registry_pin():
+    from optbench.board import ranked_cells
+
     registry = tomllib.loads((ROOT / "codes" / "registry.toml").read_text(encoding="utf-8"))
     pinned = next(row for row in registry["code"] if row["id"] == "pygsm")
     template = load_template(ROOT, "pygsm/de-gsm")
-    clamp = load_template(ROOT, "pygsm/de-gsm-climbclamp")
     assert pinned["commit"] == COMMIT
-    assert "de-gsm-climbclamp" in pinned["note"]
-    assert "stock climb step" in pinned["note"]
+    assert "11484" in pinned["note"]
+    assert "ASELoT" in pinned["note"]
+    assert "eV" in pinned["note"]
+    assert "contact-distance TRIC" in pinned["note"]
+    assert "de-gsm-climbclamp" not in pinned["note"]
     assert template["commit"] == pinned["commit"]
     assert template["code"] == "pygsm"
     assert template["engine"] == "pygsm-band"
@@ -64,15 +64,31 @@ def test_template_matches_the_registry_pin():
     assert template["gsm"]["climb_clamp"] is False
     assert template["gsm"]["endpoints"] == "fixed"
     assert "problem" not in template
-    assert clamp["id"] == "pygsm/de-gsm-climbclamp"
-    assert clamp["tuning"] == "climbclamp"
-    assert clamp["gsm"]["climb_clamp"] is True
-    assert clamp["gsm"]["nnodes"] == template["gsm"]["nnodes"]
-    assert clamp["gsm"]["dmax"] == template["gsm"]["dmax"]
-    assert clamp["commit"] == template["commit"]
-    diff = (ROOT / "templates" / "pygsm" / "de-gsm-climbclamp.diff").read_text(encoding="utf-8")
-    assert "-            if gts > np.abs(max_step):" in diff
-    assert "+            if np.abs(gts) > np.abs(max_step):" in diff
+    assert not (ROOT / "templates" / "pygsm" / "de-gsm-climbclamp.toml").exists()
+    cells = dict(
+        ranked_cells(
+            {
+                "template": template["id"],
+                "code": template["code"],
+                "code_version": template["code_version"],
+                "commit": template["commit"],
+                "source": "campaign",
+                "par2_mean": 1.0,
+                "success_rate": 1.0,
+                "wilson_low": 0.0,
+                "wilson_high": 1.0,
+                "median_calls": 1.0,
+                "mean_calls": 1.0,
+                "failures": {},
+                "n": 50,
+            },
+            False,
+        )
+    )
+    assert cells["template"] == "pygsm/de-gsm"
+    assert cells["version"] == f"pygsm {template['code_version']}"
+    assert "1b4d5a5" in cells["version"]
+    assert cells["commit"] == COMMIT[:12]
 
 
 def test_a_broken_delocalized_basis_is_divergence():

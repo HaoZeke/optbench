@@ -1,9 +1,7 @@
 """pyGSM double-ended growing string as airspeed-velocity benchmarks.
 
-One class is one problem and one pyGSM template. ``pygsm/de-gsm`` is the
-stock climb step. ``pygsm/de-gsm-climbclamp`` is the absolute-value
-clamp. Parameters
-are the seed and the archived start. The default grid is one seed and
+One class is one problem and the stock ``pygsm/de-gsm`` template.
+Parameters are the seed and the archived start. The default grid is one seed and
 the first geometry. ``OPTBENCH_ASV_FULL=1`` selects every start, and
 it is read at import.
 
@@ -245,18 +243,4 @@ PygsmLj38TwoTs = _bind(
     10000,
     7200,
     "pygsm/de-gsm",
-)
-PygsmLj38DeClimb = _bind(
-    "PygsmLj38DeClimb",
-    "double-ended-saddle-search/lj38",
-    2500,
-    1800,
-    "pygsm/de-gsm-climbclamp",
-)
-PygsmLj38TwoTsClimb = _bind(
-    "PygsmLj38TwoTsClimb",
-    "double-ended-saddle-search/lj38_2ts_separation",
-    10000,
-    7200,
-    "pygsm/de-gsm-climbclamp",
 )
