@@ -49,9 +49,9 @@ def test_lj38_2ts_stock_records_the_version_and_stays_ranked():
     assert row["rerun"]["exact"] is False
     assert row["rerun"]["template"] == "optim/de-2ts-stock"
     assert row["checks"][0]["archive"] == 2885
-    assert row["checks"][0]["rerun"] == 6118
+    assert row["checks"][0]["rerun"] == 23478
     assert row["checks"][0]["ok"] is False
-    assert row["failure_check"]["rerun"] == 45
+    assert row["failure_check"]["rerun"] == 50
     assert row["failure_check"]["sample"] == 51
     held = holdback(ROOT)
     problem = "double-ended-saddle-search/lj38_2ts_separation"

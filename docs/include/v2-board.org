@@ -91,16 +91,16 @@
    <td data-code="eOn" data-template="eon-client/de-2ts-lanczos-improved" data-par2="520.333"><span class="bench-score">520.333</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">eon-client/de-2ts-lanczos-improved</a></td>
    <td data-code="Eon svn" data-template="eon-svn/de-2ts-lanczos-improved" data-par2="502.784"><span class="bench-score">502.784</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">eon-svn/de-2ts-lanczos-improved</a></td>
    <td data-code="rgmin">—</td>
-   <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="8024.43"><span class="bench-score">8024.43</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
-   <td data-code="ASE" data-template="ase/de-lj38-2ts-default" data-par2="20000"><span class="bench-score">20000</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">ase/de-lj38-2ts-default</a></td>
+   <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="168024"><span class="bench-score">168024</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
+   <td data-code="ASE" data-template="ase/de-lj38-2ts-tuned" data-par2="442917"><span class="bench-score">442917</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">ase/de-lj38-2ts-tuned</a></td>
    <td data-code="Sella" data-template="sella/de-lj38-2ts-tuned" data-par2="30105.9"><span class="bench-score">30105.9</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">sella/de-lj38-2ts-tuned</a></td>
    <td data-code="pysisyphus">—</td>
    <td data-code="artn">—</td>
-   <td data-code="compass" data-template="compass/sqnm" data-par2="6713.37"><span class="bench-score">6713.37</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">compass/sqnm</a></td>
+   <td data-code="compass" data-template="compass/sqnm" data-par2="100831"><span class="bench-score">100831</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
-   <td data-code="optim" data-template="optim/de-2ts-stock" data-par2="18366.8"><span class="bench-score">18366.8</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">optim/de-2ts-stock</a></td>
-   <td data-code="tsase" data-template="tsase/ci-neb" data-par2="18812.1"><span class="bench-score">18812.1</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">tsase/ci-neb</a></td>
+   <td data-code="optim" data-template="optim/de-2ts-stock" data-par2="490656"><span class="bench-score">490656</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">optim/de-2ts-stock</a></td>
+   <td data-code="tsase" data-template="tsase/ci-neb" data-par2="451753"><span class="bench-score">451753</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">tsase/ci-neb</a></td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island">
    <th scope="row"><a href="generated/suites/double-ended-saddle-search.html#pt-island">pt-island</a></th>

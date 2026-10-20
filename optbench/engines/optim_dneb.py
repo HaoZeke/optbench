@@ -5,7 +5,10 @@ The binary is the current public Wales ``svn.tar.bz2``.
 the other OPTIM and GMIN rows use. The keyword block is the group's stock
 LJ38 ``newconnect.bfgsts.nohess`` example. ``BFGSSTEPS``, the ``NEWCONNECT``
 cycle limit, and the ``NEWNEB`` iteration limit are the problem force-call
-cap. The starts are the archive pairs. The score is the last
+cap. ``STEPS`` stays 200: it sets ``NSTEPS``, the step limit inside one
+optimiser call, and the outer search is the ``NEWCONNECT`` cycle loop.
+The first-cycle image count is the problem's five interior images.
+The starts are the archive pairs. The score is the last
 ``energy+gradient calls`` value, the same native counter the Pt-island
 central-difference row records, written so the board ranks it.
 """
@@ -86,6 +89,26 @@ def finish_text(coords: np.ndarray) -> str:
     return "\n".join(lines) + "\n"
 
 
+def _stop_reason(log: str, connected: bool, error: str) -> str:
+    """The OPTIM line that says why the pair stopped."""
+    if error:
+        return error
+    if connected:
+        return "Connected path found"
+    markers = (
+        "Number of allowed connection steps reached",
+        "Bad endpoints",
+        "no connections left",
+        "checkendpoints>",
+    )
+    chosen = ""
+    for line in log.splitlines():
+        text = line.strip()
+        if any(marker in text for marker in markers):
+            chosen = text
+    return chosen or "OPTIM finished without a connected path"
+
+
 def paper_calls(log: str) -> tuple[int | None, bool]:
     """Field 6 of the last energy+gradient line, and Connected path found."""
     calls = None
@@ -110,6 +133,7 @@ def _execute(job: dict) -> dict:
     calls = None
     connected = False
     error = ""
+    log = ""
     try:
         with tempfile.TemporaryDirectory(prefix="optim-dneb-") as raw:
             folder = Path(raw)
@@ -127,7 +151,7 @@ def _execute(job: dict) -> dict:
                     stdout=stdout,
                     stderr=stderr,
                     text=True,
-                    timeout=3600,
+                    timeout=28800,
                     check=False,
                 )
             log = stdout_path.read_text(encoding="utf-8", errors="replace")
@@ -154,6 +178,7 @@ def _execute(job: dict) -> dict:
         "counter": "harness",
         "converged": bool(connected),
         "optim_energy_gradient_calls": None if calls is None else int(calls),
+        "optim_stop": _stop_reason(log, connected, error),
         **({"error": error} if error else {}),
     }
 

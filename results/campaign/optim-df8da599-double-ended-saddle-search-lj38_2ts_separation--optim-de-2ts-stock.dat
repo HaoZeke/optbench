@@ -1,13 +1,13 @@
-# OPTIM df8da599, OPTIM/source/SVNREV in the current public svn.tar.bz2. Stock newconnect.bfgsts.nohess keywords. BFGSSTEPS, NEWCONNECT cycles, and NEWNEB iterations are the problem cap 10000.
+# OPTIM df8da599, OPTIM/source/SVNREV in the current public svn.tar.bz2. Stock newconnect.bfgsts.nohess keywords. BFGSSTEPS, NEWCONNECT cycles, and NEWNEB iterations are the problem cap 250000.
 # Archive pairs 0-50. The count is OPTIM's energy+gradient calls. A success is Connected path found under that cap.
-force_calls 6118
-force_calls_min 3749
-force_calls_max 8205
-force_calls_median 6162.5
-force_calls_per_image 1224
+force_calls 23478
+force_calls_min 23478
+force_calls_max 23478
+force_calls_median 23478
+force_calls_per_image 4696
 call_unit total
-successes 6
-nfailed 45
+successes 1
+nfailed 50
 n 51
 transition_states 0
 code optim

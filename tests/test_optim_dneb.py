@@ -6,10 +6,11 @@ import numpy as np
 
 def test_stock_odata_keeps_the_example_keywords_and_the_archive_symbol():
     coords = np.array([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]])
-    text = odata_text(coords, cap=10000)
-    assert text.startswith("NEWCONNECT 10000 1 20.0 20.0 30 5.0 0.025\n")
-    assert "NEWNEB 50 10000 0.025\n" in text
-    assert "BFGSSTEPS 10000\n" in text
+    text = odata_text(coords, cap=250000)
+    assert text.startswith("NEWCONNECT 250000 1 20.0 20.0 30 5.0 0.025\n")
+    assert "NEWNEB 5 250000 0.025\n" in text
+    assert "BFGSSTEPS 250000\n" in text
+    assert "STEPS    200\n" in text
     assert "EDIFFTOL 0.000001\n" in text
     assert "NOHESS\n" in text
     assert "DIJKSTRA 1\n" in text

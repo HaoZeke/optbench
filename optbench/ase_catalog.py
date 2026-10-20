@@ -497,8 +497,8 @@ def _neb_specs() -> list[dict]:
             "stop": {
                 "norm": "fmax",
                 "force_norm": 0.001,
-                "max_force_calls": 40000,
-                "max_steps": 40000,
+                "max_force_calls": 250000,
+                "max_steps": 250000,
             },
             "tuned_optimizer": "LBFGS",
             "tuned_parameters": {"maxstep": 0.01, "damping": 0.2},
@@ -508,19 +508,20 @@ def _neb_specs() -> list[dict]:
             "tuned_climb_after": 0.4,
             "tuned_source": "repaired",
             "tuned_note": (
-                "The problem file states no call cap. "
+                "The problem cap is 250000. "
                 "archive/entries/double-ended-saddle-search/lj38_2ts_separation/pele/benchmark.dat "
-                "records median 20638 and maximum 114490, so this row caps the harness at 40000 "
-                "instead of the LJ38 eOn exclusion of 2500. "
-                "The previous ASE tuned campaign failed all 51 pairs at 2500. "
+                "records an observed maximum of 114490, and the archive ran uncapped. "
+                "The stored campaign still used an earlier stop. "
                 "Interpolation is IDPP. LBFGS maxstep is 0.01 and damping is 0.2. "
                 "Climb stays off until the maximum residual is at or below 0.4. "
                 "Five images and spring 5 are unchanged."
             ),
             "default_note": (
                 "ASE NEB defaults on the same pairs: spring 0.1, climb off, FIRE. "
-                "The cap is 40000, the same harness cap as the tuned row. "
-                "The problem file does not state one."
+                "The problem cap is 250000. "
+                "archive/entries/double-ended-saddle-search/lj38_2ts_separation/pele/benchmark.dat "
+                "records an observed maximum of 114490, and the archive ran uncapped. "
+                "The stored campaign still used an earlier stop."
             ),
         },
     )
