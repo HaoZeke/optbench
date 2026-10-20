@@ -144,7 +144,7 @@ It does not run a campaign.
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
-   <td data-code="GMIN" data-template="gmin/lj38-stock" data-par2="369635"><span class="bench-score">369635</span><a href="generated/suites/globalopt.html#lj38-templates">gmin/lj38-stock</a></td>
+   <td data-code="GMIN" data-template="gmin/lj38-csm" data-par2="2.20338e+06"><span class="bench-score">2.20338e+06</span><a href="generated/suites/globalopt.html#lj38-templates">gmin/lj38-csm</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>

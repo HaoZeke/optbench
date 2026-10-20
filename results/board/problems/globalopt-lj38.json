@@ -50,52 +50,75 @@
       "wilson_low": 0.9500079920442688
     }
   ],
-  "profile_gap": "No performance profile. One start has no finite cost.",
+  "profile": {
+    "area_log10": {
+      "gmin/lj38-csm df8da599 default campaign df8da59": 1.2041199826559248
+    },
+    "rho": {
+      "gmin/lj38-csm df8da599 default campaign df8da59": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "solved": {
+      "gmin/lj38-csm df8da599 default campaign df8da59": 1.0
+    },
+    "taus": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ]
+  },
   "ranked": [
     {
       "asv_commit": "",
       "call_unit": "total",
-      "cap": 2000000,
+      "cap": 100000000,
       "code": "GMIN",
       "code_version": "df8da599",
       "commit": "df8da599267534fbe43a250e578f7396a7946311",
       "comparable": true,
       "counter": "harness",
       "current": true,
-      "entry": "gmin-df8da599-lj38-stock",
+      "entry": "gmin-df8da599-lj38-csm",
       "failures": {
-        "cap": 1,
+        "cap": 0,
         "crash": 0,
         "divergence": 0,
         "wrong_stationary": 0
       },
       "full_n": 100,
       "history": false,
-      "max_calls": 2000097.0,
-      "mean_calls": 349635.79,
+      "max_calls": 22194391.0,
+      "mean_calls": 2203380.67,
       "mean_per_image": null,
-      "median": 254859.5,
-      "median_calls": 254859.5,
-      "median_high": 318623.5,
-      "median_low": 172418.0,
+      "median": 58550.5,
+      "median_calls": 58550.5,
+      "median_high": 121192.0,
+      "median_low": 39591.5,
       "median_per_image": null,
-      "min_calls": 7035.0,
+      "min_calls": 79.0,
       "n": 100,
-      "nfailed": 1,
+      "nfailed": 0,
       "note": "starts.jsonl",
-      "par2_mean": 369634.82,
+      "par2_mean": 2203380.67,
       "partial": false,
       "partial_reason": "",
-      "path": "results/campaign/gmin-df8da599-lj38-stock.dat",
+      "path": "results/campaign/gmin-df8da599-lj38-csm.dat",
       "problem": "globalopt/lj38",
       "registry_match": true,
       "scored": true,
       "source": "campaign",
-      "success_rate": 0.99,
-      "template": "gmin/lj38-stock",
-      "tuning": "stock",
-      "wilson_high": 0.9982325679358593,
-      "wilson_low": 0.9455138038212946
+      "success_rate": 1.0,
+      "template": "gmin/lj38-csm",
+      "tuning": "default",
+      "wilson_high": 1.0,
+      "wilson_low": 0.9630065017930143
     }
   ],
   "title": "Lennard-Jones 38 global minimum"

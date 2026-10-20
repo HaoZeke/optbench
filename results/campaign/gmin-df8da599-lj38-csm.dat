@@ -1,0 +1,25 @@
+# GMIN SVNREV df8da599267534fbe43a250e578f7396a7946311.
+# Tarball sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31.
+# Compiler gfortran 13.3.0, cmake Release, WITH_MPI off, WITH_MYBLAS off, WITH_MYLAPACK off, COMPILER_SWITCH gfortran.
+# Fortran flags -ffixed-line-length-200 -ffree-line-length-200 -fPIC -fallow-argument-mismatch -std=legacy -ffixed-line-length-132 -ffree-line-length-0 -O3.
+# Basin-hopping with symmetrise CSM moves. The keyword is the archived line SYMMETRISECSM 1 CI 1.0D-6 30 1 50.
+# EDIFF 0.003 and TARGET -173.9284264418 are the archive hit window. STEPS 90000000 is the archive ceiling.
+# Temperature 0.3, step 0.3, SLOPPYCONV 1e-3, TIGHTCONV 1e-10, MAXIT 500, and seed 0 are the compiled defaults.
+# One force call is GMIN NPCALL on the last Target hit after line. The unrounded mean is 2203380.67.
+# getdata.py rounds that mean. All 100 starts hit the global minimum. The ranked PAR-2 is 2203380.67.
+# The 2014 archive is 6421 force calls and 0 failures. This gap is left as found.
+force_calls 2203381
+force_calls_median 58550.5
+force_calls_min 79
+force_calls_max 22194391
+nfailed 0
+n 100
+code GMIN
+code_version df8da599
+commit df8da599267534fbe43a250e578f7396a7946311
+algorithm basin-hopping with symmetrise csm moves
+template gmin/lj38-csm
+problem globalopt/lj38
+counter harness
+reducer harness
+tuning default

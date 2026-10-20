@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 30 not reproduced, 75 not rerun. 151 archive rows.
+46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -56,7 +56,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj150/gmin-nosym | — | — | not rerun |
 | lj150/gmin-symmetrise | — | — | not rerun |
 | lj38/eon-basinhopping | force_calls 508011 | 503146 | reproduced |
-| lj38/gmin-csm | force_calls 6421 | 332964 | not reproduced; gmin_latest |
+| lj38/gmin-csm | — | — | not rerun |
 | lj38/gmin-nosym | — | — | not rerun |
 | lj38/gmin-symmetrise | — | — | not rerun |
 | lj38/pele-basinhopping | force_calls 521595 | 688720 | not reproduced; pele_bh_defaults |
@@ -262,12 +262,6 @@ archive run.sh divides coordinates by r0 = 2.897 and scales rho and rcut into th
 
 - double-ended-saddle-search/pt-island/optim
 - tsopt/pt-island/optim_ffd
-
-### gmin_latest
-
-The 2014 archive row is the paper number. Current GMIN df8da599267534fbe43a250e578f7396a7946311 with stock basin-hopping, the archived 100 starts, and EDIFF 0.001, scores native NPCALL 332964 with 1 failure against 6421 and 0. The keywords are the stock block, not the 2014 symmetrise file. The gap is left as found. The ranked harness row is gmin/lj38-stock.
-
-- globalopt/lj38/gmin-csm
 
 ### pele_bh_defaults
 

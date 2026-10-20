@@ -2,19 +2,19 @@ id = "gmin/lj38-csm"
 engine = "gmin"
 problem = "globalopt/lj38"
 code = "GMIN"
-code_version = "wales-27058"
-commit = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
+code_version = "df8da599"
+commit = "df8da599267534fbe43a250e578f7396a7946311"
 algorithm = "basin-hopping with symmetrise csm moves"
-tuning = "archive"
-failure_cap = 2000000
+tuning = "default"
+failure_cap = 100000000
 note = """
-Unranked diagnostic of the gfortran rebuild. Wales GMIN from wales-27058.tar.bz2, sha256 144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348. SVNREV in the tree is 27059. The data file is codes/gmin/lj38-csm.data. SYMMETRISECSM 1 CI 1.0D-6 30 1 50, TARGET -173.9284264418, EDIFF 0.003, TEMPERATURE 3.0, STEP 0.43 0.52, SLOPPYCONV 0.002, TIGHTCONV 1.0D-5, MAXIT 1000 1000, STEPS 90000000, CENTRE, PERMDIST 0.005, AVOID 1.25 18, NEWRESTART 30. The potential is the default unshifted Lennard-Jones. The seed is the GMIN default 2002. force_calls is NPCALL on the Target hit after line. The 2014 archive number is the paper row. This rebuild is not ranked. Built with gfortran 13.3.0, cmake Release, WITH_MPI off, system BLAS and LAPACK. The compile line is -ffixed-line-length-200 -ffree-line-length-200 -fPIC -O3 -DNDEBUG.
+Current GMIN, SVNREV df8da599267534fbe43a250e578f7396a7946311, tarball sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. Unmodified source. The archive row is basin-hopping with symmetrise CSM moves. The keyword is the archived line SYMMETRISECSM 1 CI 1.0D-6 30 1 50. EDIFF 0.003 and TARGET -173.9284264418 are the archive hit window. STEPS 90000000 is the archive ceiling: a step count of 0 skips the basin-hopping loop, so the CSM move would not run. Temperature, step size, quench tolerances, and the seed stay at the compiled defaults (0.3, 0.3, 1e-3, 1e-10, and seed 0). The data file is codes/gmin/lj38-csm-df8da599.data. The starts are the archived 100 xyz files. The score is NPCALL, ranked as the native counter. The 2014 archive is 6421 force calls and 0 failures. Built with gfortran 13.3.0, cmake Release, WITH_MPI off, system BLAS and LAPACK. The compile line is -ffixed-line-length-200 -ffree-line-length-200 -fPIC -fallow-argument-mismatch -std=legacy -ffixed-line-length-132 -ffree-line-length-0 -O3.
 """
 
 [gmin]
-data = "codes/gmin/lj38-csm.data"
+data = "codes/gmin/lj38-csm-df8da599.data"
 potential = "lj"
-seed = 2002
+seed = 0
 target = -173.9284264418
 ediff = 0.003
 symmetrisecsm = "1 CI 1.0D-6 30 1 50"

@@ -1057,15 +1057,15 @@ The number is written only after the run finishes under the problem rule.
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr data-problem="globalopt/lj38" data-template="gmin/lj38-stock">
+   <tr data-problem="globalopt/lj38" data-template="gmin/lj38-csm">
    <td>Lennard-Jones 38 global minimum</td>
-   <td data-field="template">gmin/lj38-stock</td>
+   <td data-field="template">gmin/lj38-csm</td>
    <td data-field="version">GMIN df8da599</td>
    <td data-field="commit">df8da5992675</td>
-   <td data-field="par2_mean">369635</td>
-   <td data-field="mean_calls">349636</td>
-   <td data-field="median_calls">254860</td>
-   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
+   <td data-field="par2_mean">2.20338e+06</td>
+   <td data-field="mean_calls">2.20338e+06</td>
+   <td data-field="median_calls">58550.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>
