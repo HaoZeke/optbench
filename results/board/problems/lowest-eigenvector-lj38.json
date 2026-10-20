@@ -97,6 +97,7 @@
   ],
   "profile": {
     "area_log10": {
+      "pele/eig-lj38 0.1.2 default campaign b7081b9": 0.574967291718204,
       "rgsaddle/mode-dimer 0.2.2 default campaign, asv c0db2b8": 1.1085429590326108,
       "rgsaddle/mode-dimer-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.9106157368835431,
       "rgsaddle/mode-lanczos 0.2.2 default campaign, asv c0db2b8": 1.1273573337616096,
@@ -105,6 +106,13 @@
       "scipy/eig-lj38-lobpcg 1.18.1 default campaign e4e854e": 0.22050447182386623
     },
     "rho": {
+      "pele/eig-lj38 0.1.2 default campaign b7081b9": [
+        0.0,
+        0.0,
+        0.415,
+        0.995,
+        1.0
+      ],
       "rgsaddle/mode-dimer 0.2.2 default campaign, asv c0db2b8": [
         0.365,
         1.0,
@@ -149,6 +157,7 @@
       ]
     },
     "solved": {
+      "pele/eig-lj38 0.1.2 default campaign b7081b9": 1.0,
       "rgsaddle/mode-dimer 0.2.2 default campaign, asv c0db2b8": 1.0,
       "rgsaddle/mode-dimer-tuned 0.2.2 tuned campaign, asv c0db2b8": 1.0,
       "rgsaddle/mode-lanczos 0.2.2 default campaign, asv c0db2b8": 1.0,
@@ -342,6 +351,51 @@
       "success_rate": 1.0,
       "template": "rgsaddle/mode-dimer-tuned",
       "tuning": "tuned",
+      "wilson_high": 1.0,
+      "wilson_low": 0.9811546736227335
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "pele",
+      "code_version": "0.1.2",
+      "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "pele-0.1.2-eig-lj38",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 200,
+      "history": false,
+      "max_calls": 195.0,
+      "mean_calls": 100.35,
+      "mean_per_image": null,
+      "median": 98.0,
+      "median_calls": 98.0,
+      "median_high": 101.5,
+      "median_low": 94.0,
+      "median_per_image": null,
+      "min_calls": 61.0,
+      "n": 200,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 100.35,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/pele-0.1.2-eig-lj38.dat",
+      "problem": "lowest-eigenvector/lj38",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "pele/eig-lj38",
+      "tuning": "default",
       "wilson_high": 1.0,
       "wilson_low": 0.9811546736227335
     },

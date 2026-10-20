@@ -2485,7 +2485,8 @@
       "scipy/min-lj38-trust-ncg 1.18.1 default campaign e4e854e": 0.9795516058905949,
       "sella/lj38-min-default 2.6.0 default campaign 6cfb60c": 0.09738320359729793,
       "sella/lj38-min-tuned 2.6.0 tuned campaign 6cfb60c": 0.480744903075378,
-      "sqnm/min-lj38-tuned 1.3 tuned campaign 4241692": 0.29109600580706985
+      "sqnm/min-lj38-tuned 1.3 tuned campaign 4241692": 0.29109600580706985,
+      "torch-sim/min-lj38-fire 0.6.2 default campaign 2e9c16f": 0.1413335829642392
     },
     "rho": {
       "ase/lj38-bfgs-default 3.29.0 default campaign f27c000": [
@@ -3138,6 +3139,13 @@
         0.0,
         0.471,
         0.992
+      ],
+      "torch-sim/min-lj38-fire 0.6.2 default campaign 2e9c16f": [
+        0.0,
+        0.0,
+        0.001,
+        0.137,
+        0.663
       ]
     },
     "solved": {
@@ -3233,7 +3241,8 @@
       "scipy/min-lj38-trust-ncg 1.18.1 default campaign e4e854e": 0.998,
       "sella/lj38-min-default 2.6.0 default campaign 6cfb60c": 1.0,
       "sella/lj38-min-tuned 2.6.0 tuned campaign 6cfb60c": 1.0,
-      "sqnm/min-lj38-tuned 1.3 tuned campaign 4241692": 0.997
+      "sqnm/min-lj38-tuned 1.3 tuned campaign 4241692": 0.997,
+      "torch-sim/min-lj38-fire 0.6.2 default campaign 2e9c16f": 0.994
     },
     "taus": [
       1.0,
@@ -5808,6 +5817,51 @@
       "tuning": "tuned",
       "wilson_high": 0.9984434118595916,
       "wilson_low": 0.9897604437227377
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "torch-sim",
+      "code_version": "0.6.2",
+      "commit": "2e9c16f5afe354282279630a57885f46521a1cc0",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "torch-sim-0.6.2-min-lj38-fire",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 6
+      },
+      "full_n": 1000,
+      "history": false,
+      "max_calls": 3136.0,
+      "mean_calls": 719.902,
+      "mean_per_image": null,
+      "median": 611.5,
+      "median_calls": 610.5,
+      "median_high": 637.5124999999999,
+      "median_low": 590.0,
+      "median_per_image": null,
+      "min_calls": 196.0,
+      "n": 1000,
+      "nfailed": 6,
+      "note": "starts.jsonl",
+      "par2_mean": 835.693,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/torch-sim-0.6.2-min-lj38-fire.dat",
+      "problem": "minimization/lj38",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 0.994,
+      "template": "torch-sim/min-lj38-fire",
+      "tuning": "default",
+      "wilson_high": 0.9972473308581237,
+      "wilson_low": 0.9869718317581478
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",

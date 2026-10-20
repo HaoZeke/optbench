@@ -2265,7 +2265,8 @@
       "sella/morse-min-default 2.6.0 default campaign 6cfb60c": 0.5870084915447633,
       "sella/morse-min-tuned 2.6.0 tuned campaign 6cfb60c": 0.15954589770191008,
       "sqnm/min-morse-default 1.3 default campaign 4241692": 0.4515449934959718,
-      "sqnm/min-morse-tuned 1.3 tuned campaign 4241692": 0.4515449934959718
+      "sqnm/min-morse-tuned 1.3 tuned campaign 4241692": 0.4515449934959718,
+      "torch-sim/min-morse-fire 0.6.2 default campaign 2e9c16f": 0.07676264889431522
     },
     "rho": {
       "ase/morse-bfgs-default 3.29.0 default campaign f27c000": [
@@ -2953,6 +2954,13 @@
         0.0,
         1.0,
         1.0
+      ],
+      "torch-sim/min-morse-fire 0.6.2 default campaign 2e9c16f": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.51
       ]
     },
     "solved": {
@@ -3053,7 +3061,8 @@
       "sella/morse-min-default 2.6.0 default campaign 6cfb60c": 1.0,
       "sella/morse-min-tuned 2.6.0 tuned campaign 6cfb60c": 1.0,
       "sqnm/min-morse-default 1.3 default campaign 4241692": 1.0,
-      "sqnm/min-morse-tuned 1.3 tuned campaign 4241692": 1.0
+      "sqnm/min-morse-tuned 1.3 tuned campaign 4241692": 1.0,
+      "torch-sim/min-morse-fire 0.6.2 default campaign 2e9c16f": 1.0
     },
     "taus": [
       1.0,
@@ -6796,6 +6805,51 @@
       "success_rate": 1.0,
       "template": "ase/morse-fire-tuned",
       "tuning": "tuned",
+      "wilson_high": 1.0,
+      "wilson_low": 0.9630065017930143
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "torch-sim",
+      "code_version": "0.6.2",
+      "commit": "2e9c16f5afe354282279630a57885f46521a1cc0",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "torch-sim-0.6.2-min-morse-fire",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 100,
+      "history": false,
+      "max_calls": 133.0,
+      "mean_calls": 113.81,
+      "mean_per_image": null,
+      "median": 112.0,
+      "median_calls": 112.0,
+      "median_high": 114.0,
+      "median_low": 111.0,
+      "median_per_image": null,
+      "min_calls": 98.0,
+      "n": 100,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 113.81,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/torch-sim-0.6.2-min-morse-fire.dat",
+      "problem": "minimization/morse-bulk",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "torch-sim/min-morse-fire",
+      "tuning": "default",
       "wilson_high": 1.0,
       "wilson_low": 0.9630065017930143
     },

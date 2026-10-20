@@ -278,6 +278,7 @@
   ],
   "profile": {
     "area_log10": {
+      "pele/ts-lj38 0.1.2 default campaign b7081b9": 0.07074204898103559,
       "rgsaddle/dimer-fire 0.2.2 default campaign, asv c0db2b8": 0.0,
       "rgsaddle/dimer-fire-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.0,
       "rgsaddle/dimer-lbfgs 0.2.2 default campaign, asv c0db2b8": 0.0,
@@ -292,6 +293,13 @@
       "sella/lj38-ts-tuned 2.6.0 tuned campaign 6cfb60c": 1.0520998348456143
     },
     "rho": {
+      "pele/ts-lj38 0.1.2 default campaign b7081b9": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.47
+      ],
       "rgsaddle/dimer-fire 0.2.2 default campaign, asv c0db2b8": [
         0.0,
         0.0,
@@ -378,6 +386,7 @@
       ]
     },
     "solved": {
+      "pele/ts-lj38 0.1.2 default campaign b7081b9": 0.995,
       "rgsaddle/dimer-fire 0.2.2 default campaign, asv c0db2b8": 0.04,
       "rgsaddle/dimer-fire-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.235,
       "rgsaddle/dimer-lbfgs 0.2.2 default campaign, asv c0db2b8": 0.0,
@@ -534,6 +543,51 @@
       "tuning": "tuned",
       "wilson_high": 0.9972533418664555,
       "wilson_low": 0.9642782382838231
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "pele",
+      "code_version": "0.1.2",
+      "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "pele-0.1.2-ts-lj38",
+      "failures": {
+        "cap": 1,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 200,
+      "history": false,
+      "max_calls": 10000.0,
+      "mean_calls": 1190.86,
+      "mean_per_image": null,
+      "median": 970.5,
+      "median_calls": 970.5,
+      "median_high": 1058.0,
+      "median_low": 919.0,
+      "median_per_image": null,
+      "min_calls": 456.0,
+      "n": 200,
+      "nfailed": 1,
+      "note": "starts.jsonl",
+      "par2_mean": 1240.86,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/pele-0.1.2-ts-lj38.dat",
+      "problem": "tsopt/LJ38",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 0.995,
+      "template": "pele/ts-lj38",
+      "tuning": "default",
+      "wilson_high": 0.9991168312843989,
+      "wilson_low": 0.9722262956021069
     },
     {
       "asv_commit": "a914203cbb891442232aea2c92f960df9a48dc1d",

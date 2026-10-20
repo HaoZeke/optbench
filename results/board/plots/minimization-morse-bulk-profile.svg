@@ -1671,7 +1671,7 @@ L 277.781172 258.837656
 L 382.244276 258.837656 
 L 382.244276 258.837656 
 L 486.707379 258.837656 
-L 486.707379 161.334638 
+L 486.707379 145.822795 
 " clip-path="url(#p90a0a51e63)" style="fill: none; stroke: #d62728; stroke-width: 1.5; stroke-linecap: square"/>
    </g>
    <g id="line2d_96">
@@ -1695,7 +1695,7 @@ L 277.781172 258.837656
 L 382.244276 258.837656 
 L 382.244276 258.837656 
 L 486.707379 258.837656 
-L 486.707379 172.414527 
+L 486.707379 161.334638 
 " clip-path="url(#p90a0a51e63)" style="fill: none; stroke: #8c564b; stroke-width: 1.5; stroke-linecap: square"/>
    </g>
    <g id="line2d_98">
@@ -1707,7 +1707,7 @@ L 277.781172 258.837656
 L 382.244276 258.837656 
 L 382.244276 258.837656 
 L 486.707379 258.837656 
-L 486.707379 210.086147 
+L 486.707379 172.414527 
 " clip-path="url(#p90a0a51e63)" style="fill: none; stroke: #e377c2; stroke-width: 1.5; stroke-linecap: square"/>
    </g>
    <g id="line2d_99">
@@ -1755,7 +1755,7 @@ L 277.781172 258.837656
 L 382.244276 258.837656 
 L 382.244276 258.837656 
 L 486.707379 258.837656 
-L 486.707379 254.405701 
+L 486.707379 210.086147 
 " clip-path="url(#p90a0a51e63)" style="fill: none; stroke: #1f77b4; stroke-width: 1.5; stroke-linecap: square"/>
    </g>
    <g id="line2d_103">
@@ -1767,7 +1767,7 @@ L 277.781172 258.837656
 L 382.244276 258.837656 
 L 382.244276 258.837656 
 L 486.707379 258.837656 
-L 486.707379 258.837656 
+L 486.707379 254.405701 
 " clip-path="url(#p90a0a51e63)" style="fill: none; stroke: #ff7f0e; stroke-width: 1.5; stroke-linecap: square"/>
    </g>
    <g id="line2d_104">
@@ -1837,10 +1837,22 @@ L 173.318068 258.837656
 L 277.781172 258.837656 
 L 277.781172 258.837656 
 L 382.244276 258.837656 
+L 382.244276 258.837656 
+L 486.707379 258.837656 
+L 486.707379 258.837656 
+" clip-path="url(#p90a0a51e63)" style="fill: none; stroke: #7f7f7f; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_110">
+    <path d="M 68.854964 258.837656 
+L 173.318068 258.837656 
+L 173.318068 258.837656 
+L 277.781172 258.837656 
+L 277.781172 258.837656 
+L 382.244276 258.837656 
 L 382.244276 52.751732 
 L 486.707379 52.751732 
 L 486.707379 52.751732 
-" clip-path="url(#p90a0a51e63)" style="fill: none; stroke: #7f7f7f; stroke-width: 1.5; stroke-linecap: square"/>
+" clip-path="url(#p90a0a51e63)" style="fill: none; stroke: #bcbd22; stroke-width: 1.5; stroke-linecap: square"/>
    </g>
    <g id="patch_3">
     <path d="M 47.962344 258.837656 

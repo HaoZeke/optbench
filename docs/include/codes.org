@@ -396,6 +396,28 @@
    <table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="globalopt/lj38" data-template="pele/bh-lj38-tuned">
+   <td>Lennard-Jones 38 global minimum</td>
+   <td data-field="template">pele/bh-lj38-tuned</td>
+   <td data-field="version">pele 0.1.2</td>
+   <td data-field="commit">b7081b932a06</td>
+   <td data-field="par2_mean">1.09971e+06</td>
+   <td data-field="mean_calls">669710</td>
+   <td data-field="median_calls">809086</td>
+   <td data-field="failures">crash 0, divergence 0, cap 43, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="lowest-eigenvector/lj38" data-template="pele/eig-lj38">
+   <td>lj38</td>
+   <td data-field="template">pele/eig-lj38</td>
+   <td data-field="version">pele 0.1.2</td>
+   <td data-field="commit">b7081b932a06</td>
+   <td data-field="par2_mean">100.35</td>
+   <td data-field="mean_calls">100.35</td>
+   <td data-field="median_calls">98</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
    <tr data-problem="minimization/lj38" data-template="pele/min-lj38-lbfgs-tuned">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="template">pele/min-lj38-lbfgs-tuned</td>
@@ -405,6 +427,17 @@
    <td data-field="mean_calls">178.096</td>
    <td data-field="median_calls">167</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 1</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-template="pele/noise-lj38-lbfgs-s0">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="template">pele/noise-lj38-lbfgs-s0</td>
+   <td data-field="version">pele 0.1.2</td>
+   <td data-field="commit">b7081b932a06</td>
+   <td data-field="par2_mean">288.145</td>
+   <td data-field="mean_calls">248.601</td>
+   <td data-field="median_calls">235</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 2</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-template="pele/min-morse-lbfgs-tuned">
@@ -417,6 +450,17 @@
    <td data-field="median_calls">46</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="tsopt/LJ38" data-template="pele/ts-lj38">
+   <td>LJ38</td>
+   <td data-field="template">pele/ts-lj38</td>
+   <td data-field="version">pele 0.1.2</td>
+   <td data-field="commit">b7081b932a06</td>
+   <td data-field="par2_mean">1240.86</td>
+   <td data-field="mean_calls">1190.86</td>
+   <td data-field="median_calls">970.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
+   <td data-field="n">200</td>
    </tr>
    </tbody></table>
    <p>No full ranked run</p><ul>
@@ -465,6 +509,17 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
+   <tr data-problem="minimization/lj38-noise" data-template="scipy/noise-lj38-lbfgsb-s0">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="template">scipy/noise-lj38-lbfgsb-s0</td>
+   <td data-field="version">scipy 1.18.1</td>
+   <td data-field="commit">e4e854eaa8f1</td>
+   <td data-field="par2_mean">261.725</td>
+   <td data-field="mean_calls">222.258</td>
+   <td data-field="median_calls">211</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 2</td>
+   <td data-field="n">1000</td>
+   </tr>
    <tr data-problem="minimization/morse-bulk" data-template="scipy/min-morse-trust-exact">
    <td>Morse bulk</td>
    <td data-field="template">scipy/min-morse-trust-exact</td>
@@ -505,6 +560,17 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 3</td>
    <td data-field="n">1000</td>
    </tr>
+   <tr data-problem="minimization/lj38-noise" data-template="sqnm/noise-lj38-tuned-s0">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="template">sqnm/noise-lj38-tuned-s0</td>
+   <td data-field="version">sqnm 1.3</td>
+   <td data-field="commit">4241692173cc</td>
+   <td data-field="par2_mean">457.892</td>
+   <td data-field="mean_calls">399.152</td>
+   <td data-field="median_calls">383</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
    <tr data-problem="minimization/morse-bulk" data-template="sqnm/min-morse-default">
    <td>Morse bulk</td>
    <td data-field="template">sqnm/min-morse-default</td>
@@ -537,6 +603,17 @@
    <tr data-problem="minimization/lj38" data-template="geometric/min-lj38">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="template">geometric/min-lj38</td>
+   <td data-field="version">geometric 1.1.1</td>
+   <td data-field="commit">f657e69bae9c</td>
+   <td data-field="par2_mean">522.963</td>
+   <td data-field="mean_calls">483.716</td>
+   <td data-field="median_calls">405</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 2</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-template="geometric/noise-lj38-s0">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="template">geometric/noise-lj38-s0</td>
    <td data-field="version">geometric 1.1.1</td>
    <td data-field="commit">f657e69bae9c</td>
    <td data-field="par2_mean">522.963</td>
@@ -631,6 +708,17 @@
    <tr data-problem="minimization/lj38" data-template="optking/min-lj38">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="template">optking/min-lj38</td>
+   <td data-field="version">optking 767e2c0c</td>
+   <td data-field="commit">767e2c0c13ff</td>
+   <td data-field="par2_mean">810.782</td>
+   <td data-field="mean_calls">752.098</td>
+   <td data-field="median_calls">576</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-template="optking/noise-lj38-s0">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="template">optking/noise-lj38-s0</td>
    <td data-field="version">optking 767e2c0c</td>
    <td data-field="commit">767e2c0c13ff</td>
    <td data-field="par2_mean">810.782</td>
@@ -785,10 +873,21 @@
    <td><a href="https://gitlab.com/goedeckergroup/ase_mh">https://gitlab.com/goedeckergroup/ase_mh</a></td>
    </tr>
    </tbody></table>
-   <p>No full ranked run.</p>
-   <p>No full ranked run</p><ul>
-   <li>Lennard-Jones 38 global minimum: partial.</li>
-   </ul>
+   <table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="globalopt/lj38" data-template="ase-mh/lj38">
+   <td>Lennard-Jones 38 global minimum</td>
+   <td data-field="template">ase-mh/lj38</td>
+   <td data-field="version">ase-mh 1.1.2</td>
+   <td data-field="commit">6baabf94c48f</td>
+   <td data-field="par2_mean">368164</td>
+   <td data-field="mean_calls">298164</td>
+   <td data-field="median_calls">189133</td>
+   <td data-field="failures">crash 0, divergence 0, cap 7, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table>
    <h3>JAX MD</h3>
    <table>
    <caption>Registry pins.</caption>
@@ -844,7 +943,32 @@
    <td><a href="https://github.com/TorchSim/torch-sim">https://github.com/TorchSim/torch-sim</a></td>
    </tr>
    </tbody></table>
-   <p>No full ranked run.</p>
+   <table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="minimization/lj38" data-template="torch-sim/min-lj38-fire">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="template">torch-sim/min-lj38-fire</td>
+   <td data-field="version">torch-sim 0.6.2</td>
+   <td data-field="commit">2e9c16f5afe3</td>
+   <td data-field="par2_mean">835.693</td>
+   <td data-field="mean_calls">719.902</td>
+   <td data-field="median_calls">610.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 6</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-template="torch-sim/min-morse-fire">
+   <td>Morse bulk</td>
+   <td data-field="template">torch-sim/min-morse-fire</td>
+   <td data-field="version">torch-sim 0.6.2</td>
+   <td data-field="commit">2e9c16f5afe3</td>
+   <td data-field="par2_mean">113.81</td>
+   <td data-field="mean_calls">113.81</td>
+   <td data-field="median_calls">112</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table>
    <h3>AGOX</h3>
    <table>
    <caption>Registry pins.</caption>
@@ -856,7 +980,21 @@
    <td><a href="https://gitlab.com/agox/agox">https://gitlab.com/agox/agox</a></td>
    </tr>
    </tbody></table>
-   <p>No full ranked run.</p>
+   <table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="globalopt/lj38" data-template="agox/bh-lj38">
+   <td>Lennard-Jones 38 global minimum</td>
+   <td data-field="template">agox/bh-lj38</td>
+   <td data-field="version">agox 0.0.1.dev1+g22d94a6fa</td>
+   <td data-field="commit">22d94a6fae8c</td>
+   <td data-field="par2_mean">2e+06</td>
+   <td data-field="mean_calls">1e+06</td>
+   <td data-field="median_calls">1e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 100, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table>
    <h3>EZGA</h3>
    <table>
    <caption>Registry pins.</caption>
@@ -869,6 +1007,9 @@
    </tr>
    </tbody></table>
    <p>No full ranked run.</p>
+   <p>No full ranked run</p><ul>
+   <li>Lennard-Jones 38 global minimum: partial.</li>
+   </ul>
    <h3>Optax</h3>
    <table>
    <caption>Registry pins.</caption>
