@@ -111,7 +111,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
-    "repro/lowest-eigenvector-lj38-optim-first-order": "5c17f10b0f8ab5eaf654ad1ee2e7fae0111578fe",
+    "repro/lowest-eigenvector-lj38-optim-first-order": "270b2ba8e0c40346ba9b052ba3693fe7e69f240c",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -896,7 +896,8 @@ def render_markdown(rows: list[dict]) -> str:
             lines.append("| Row | Archive | Rerun | Status |")
             lines.append("| --- | --- | --- | --- |")
         ident = f"{row['problem']}/{row['entry']}"
-        if ident == "lowest-eigenvector/lj38/optim-first-order" and row.get("figures"):
+        full = f"{row['suite']}/{ident}"
+        if full == "lowest-eigenvector/lj38/optim-first-order" and row.get("figures"):
             pair = row["figures"]
             lines.append(f"| {ident} | {pair['archive']} | {pair['latest']} | |")
             continue

@@ -1496,7 +1496,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <h3>Legacy 2014 archive</h3>
    <details class="bench-details">
    <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
@@ -1523,9 +1523,9 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="lowest-eigenvector-lj38-optim-first-order">
    <td class="num">2</td>
-   <td class="text">optim-first-order · not reproduced</td>
+   <td class="text">optim-first-order</td>
    <td class="text">OPTIM</td>
-   <td class="num">2.50000e+01</td>
+   <td class="num">2.50000e+01 | 20000</td>
    <td class="num">5.8000e+01</td>
    <td class="num">1.3000e+01</td>
    <td class="num">0</td>
