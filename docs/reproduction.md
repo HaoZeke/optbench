@@ -4,6 +4,8 @@ Archive commit `0f26b796`. A rerun matches when each archived metric is within o
 
 47 reproduced, 28 not reproduced, 76 not rerun. 151 archive rows.
 
+The archived Pt-island adaptive hypersphere row is the paper row. EON (SVN r2549) and eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) are different codes, ranked beside that row on the same start and the 0.001 force stop. Their harness gaps stay as findings.
+
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
 OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.

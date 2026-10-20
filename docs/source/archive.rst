@@ -523,7 +523,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr></thead><tbody>
    <tr id="saddle-search-pt-island-adaptive-hsphere-lbfgs-davidson-sm50" class="best">
    <td class="num">1</td>
-   <td class="text">adaptive_HSphere-lbfgs-davidson-sm50 · not reproduced</td>
+   <td class="text">adaptive_HSphere-lbfgs-davidson-sm50</td>
    <td class="text">SoftSaddle</td>
    <td class="num">423491.1</td>
    <td class="num">179062.2</td>
