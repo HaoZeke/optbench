@@ -1054,12 +1054,12 @@
    <tr data-problem="double-ended-saddle-search/lj38" data-template="optim/cl-string-lj38">
    <td>LJ38 double-ended saddle</td>
    <td data-field="template">optim/cl-string-lj38</td>
-   <td data-field="version">optim df8da599</td>
+   <td data-field="version">OPTIM df8da599</td>
    <td data-field="commit">738fafe3df5a</td>
-   <td data-field="par2_mean">5000</td>
-   <td data-field="mean_calls">11.26</td>
-   <td data-field="median_calls">10</td>
-   <td data-field="failures">crash 0, divergence 50, cap 0, wrong_stationary 0</td>
+   <td data-field="par2_mean">1580.32</td>
+   <td data-field="mean_calls">2101.28</td>
+   <td data-field="median_calls">783.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 9, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
    <tr data-problem="minimization/lj38" data-template="optim/lbfgs-lj38">
@@ -1085,8 +1085,5 @@
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>
-   <p>No full ranked run</p><ul>
-   <li>LJ38 double-ended saddle: not yet on the harness counter.</li>
-   </ul>
    </section>
 #+end_export

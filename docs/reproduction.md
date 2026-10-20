@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+46 reproduced, 30 not reproduced, 75 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -31,7 +31,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj38/eon-lanczos | force_calls 364 | 342 | reproduced |
 | lj38/eon-lanczos-improved | force_calls 287 | 259 | reproduced |
 | lj38/optim | force_calls 131 | 147 | not reproduced; optim_pes_counter |
-| lj38/optim-cl-string | — | — | not rerun |
+| lj38/optim-cl-string | force_calls 786 | 830 | not reproduced; optim_cl_string |
 | lj38/pele | — | — | not rerun |
 | lj38_2ts_separation/optim | force_calls 2885 | 3454 | not reproduced; optim_pes_counter |
 | lj38_2ts_separation/pele | — | — | not rerun |
@@ -248,6 +248,12 @@ The template note records the 2014 mean as OPTIM's own energy-plus-gradient call
 
 - double-ended-saddle-search/lj38/optim
 - double-ended-saddle-search/lj38_2ts_separation/optim
+
+### optim_cl_string
+
+OPTIM df8da599 runs the archived climbing string: CLSTRING, GROWSTRING iteration density 1000, and INE_NEW. The force norm is 0.001. STEPS, BFGSSTEPS, MAXGROWSTEPS, and the BFGSTS iteration limits are 2500. Reparametrization 0.75, growth tolerance 0.25, and max step 0.1 are the source defaults. The success mean is 830 against the archive 786. Nine starts reach the 2500-call cap. The archive failure count is 3.
+
+- double-ended-saddle-search/lj38/optim-cl-string
 
 ### pt_lanczos
 

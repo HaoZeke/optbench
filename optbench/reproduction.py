@@ -111,7 +111,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
-    "repro/double-ended-saddle-search-lj38-optim-cl-string": "16217fac01990257c42fe957281d59b411c4d8e3",
+    "repro/double-ended-saddle-search-lj38-optim-cl-string": "5987412a507e8b8a93e36a48e989ea145d14ad7c",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -178,7 +178,7 @@ MATCHES: list[dict] = [
     {"key": "double-ended-saddle-search/lj38/eon-lanczos", "template": "eon-client/de-lj38-lanczos", "branch": "main", "path": "results/campaign/eon-client-de-lj38-lanczos.dat"},
     {"key": "double-ended-saddle-search/lj38/eon-lanczos-improved", "template": "eon-client/de-lj38-lanczos-improved", "branch": "main", "path": "results/campaign/eon-client-de-lj38-lanczos-improved.dat"},
     {"key": "double-ended-saddle-search/lj38/optim", "template": "optim/de-lj38", "branch": "cells/optim/saddle-pt", "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-lj38--optim-de-lj38.dat", "cause": "optim_pes_counter"},
-    {"key": "double-ended-saddle-search/lj38/optim-cl-string", "template": "optim/cl-string-lj38", "branch": "repro/double-ended-saddle-search-lj38-optim-cl-string", "path": "results/campaign/optim-df8da599-cl-string-lj38.dat", "extra": {"code_version": "df8da599"}},
+    {"key": "double-ended-saddle-search/lj38/optim-cl-string", "template": "optim/cl-string-lj38", "branch": "repro/double-ended-saddle-search-lj38-optim-cl-string", "path": "results/campaign/optim-df8da599-cl-string-lj38.dat", "cause": "optim_cl_string", "plain_gap": True, "extra": {"code_version": "df8da599", "stay_ranked": True}},
     {"key": "double-ended-saddle-search/lj38_2ts_separation/optim", "template": "optim/de-2ts", "branch": "cells/optim/saddle-pt", "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-lj38_2ts_separation--optim-de-2ts.dat", "cause": "optim_pes_counter"},
     {"key": "double-ended-saddle-search/pt-island/eon-ci-neb", "template": "eon-svn/de-pt-ci-neb", "branch": "main", "path": "results/campaign/eon-svn-de-pt-ci-neb.dat"},
     {"key": "double-ended-saddle-search/pt-island/eon-ci-swdneb", "template": "eon-svn/de-pt-ci-swdneb", "branch": "main", "path": "results/campaign/eon-svn-de-pt-ci-swdneb.dat"},
@@ -256,6 +256,12 @@ CAUSE_TEXT = {
     "sella_trust": "Sella 2.6.0 with the archived trust-region numbers (eta, gamma, delta0, rho, sigma) is the parameter_source=archive row. It misses the 2014 mean. The constructor-default row is a different setup.",
     "heptamer_cg": "The 3.5.0 file already stores the per-image mean, 142 against the archive 120. L-BFGS, FIRE, and QM on the same 8-image spring-5 climb reproduce, so the image count is not the split.",
     "de_exclusion": "The 3.5.0 doubly-nudged file is the per-band mean under the 2500-call exclusion (708, 5 failures). The archive mean is 861. The client total is a different counter and is also outside 10 percent.",
+    "optim_cl_string": (
+        "OPTIM df8da599 runs the archived climbing string: CLSTRING, GROWSTRING iteration density 1000, and INE_NEW. "
+        "The force norm is 0.001. STEPS, BFGSSTEPS, MAXGROWSTEPS, and the BFGSTS iteration limits are 2500. "
+        "Reparametrization 0.75, growth tolerance 0.25, and max step 0.1 are the source defaults. "
+        "The success mean is 830 against the archive 786. Nine starts reach the 2500-call cap. The archive failure count is 3."
+    ),
     "eon_saddle_count": (
         "The classic dimer campaign (improved false, the 2014 key) has fraction_connected 0.692 against 0.746, inside 10 percent, "
         "but force calls 6.97e6 against 3.78e6 and unique saddles 91.7 against 109.2. "
@@ -525,7 +531,7 @@ def holdback(root: Path) -> Hold:
         rerun = row.get("rerun") or {}
         problem = f"{row['suite']}/{row['problem']}"
         template = str(rerun.get("template") or "")
-        if row.get("status") == "not_reproduced":
+        if row.get("status") == "not_reproduced" and not rerun.get("stay_ranked"):
             if template:
                 found.templates.add((problem, template))
             rel = str(rerun.get("path") or "")
@@ -769,6 +775,11 @@ def build_rows(root: Path) -> list[dict]:
         record["failure_check"] = failure
         record["status"] = status
         record["gap"] = _gap(checks, failure) if status == "not_reproduced" else ""
+        if match.get("plain_gap") and status == "not_reproduced":
+            parts = [part for part in record["gap"].split("; ") if part and "interval " not in part]
+            if failure and not failure["ok"]:
+                parts.append(f"nfailed {failure['rerun']:g} vs {failure['archive']:g}")
+            record["gap"] = "; ".join(parts)
         record["cause"] = cause
         record["cause_detail"] = CAUSE_TEXT.get(cause, "") if cause else ""
         record["note"] = CAUSE_TEXT.get(named, "") if status == "reproduced" and named else ""
