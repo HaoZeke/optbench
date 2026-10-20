@@ -18,7 +18,7 @@
         "force_calls_max": null,
         "force_calls_min": null,
         "median": null,
-        "nfailed": 177
+        "nfailed": 200
       },
       "metrics": {
         "bootstrap_resamples": 2000,
@@ -32,12 +32,12 @@
         "median": 2000000.0,
         "median_high": 2000000.0,
         "median_low": 2000000.0,
-        "n": 177,
+        "n": 200,
         "n_cap": 0,
         "n_crash": 0,
         "n_divergence": 0,
-        "n_wrong_stationary": 177,
-        "nfailed": 177,
+        "n_wrong_stationary": 200,
+        "nfailed": 200,
         "par2_mean": 2000000.0,
         "par_applied": true,
         "par_factor": 2,
@@ -47,7 +47,7 @@
         "success_only_mean": null,
         "success_rate": 0.0,
         "successes": 0,
-        "wilson_high": 0.021242135767677948,
+        "wilson_high": 0.018845326377266575,
         "wilson_low": 0.0
       },
       "parameters": {
@@ -102,7 +102,6 @@
           "failure": "wrong_stationary",
           "force_calls": 314406,
           "force_norm": 0.0008871321744066777,
-          "index": 0,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -176,7 +175,6 @@
           "failure": "wrong_stationary",
           "force_calls": 323207,
           "force_norm": 0.000619256611016537,
-          "index": 1,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -290,7 +288,6 @@
           "failure": "wrong_stationary",
           "force_calls": 313082,
           "force_norm": 0.0008866973585781999,
-          "index": 2,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -384,7 +381,6 @@
           "failure": "wrong_stationary",
           "force_calls": 309833,
           "force_norm": 0.0008769251365265716,
-          "index": 3,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -450,7 +446,6 @@
           "failure": "wrong_stationary",
           "force_calls": 317004,
           "force_norm": 0.0005451543181755623,
-          "index": 4,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -556,7 +551,6 @@
           "failure": "wrong_stationary",
           "force_calls": 314261,
           "force_norm": 0.0009901295216640444,
-          "index": 5,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -650,7 +644,6 @@
           "failure": "wrong_stationary",
           "force_calls": 312714,
           "force_norm": 0.0009552196581595015,
-          "index": 6,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -696,7 +689,6 @@
           "failure": "wrong_stationary",
           "force_calls": 319627,
           "force_norm": 0.0009175575556410346,
-          "index": 7,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -774,7 +766,6 @@
           "failure": "wrong_stationary",
           "force_calls": 306478,
           "force_norm": 0.0007521656637584451,
-          "index": 8,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -860,7 +851,6 @@
           "failure": "wrong_stationary",
           "force_calls": 322509,
           "force_norm": 0.0007489077447935782,
-          "index": 9,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -970,7 +960,6 @@
           "failure": "wrong_stationary",
           "force_calls": 315425,
           "force_norm": 0.0007395527682527301,
-          "index": 10,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -1060,7 +1049,6 @@
           "failure": "wrong_stationary",
           "force_calls": 302317,
           "force_norm": 0.0006112856293708939,
-          "index": 11,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -1142,7 +1130,6 @@
           "failure": "wrong_stationary",
           "force_calls": 309009,
           "force_norm": 0.0006408470449648203,
-          "index": 12,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -1236,7 +1223,6 @@
           "failure": "wrong_stationary",
           "force_calls": 324414,
           "force_norm": 0.0008590009553090724,
-          "index": 13,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -1322,7 +1308,6 @@
           "failure": "wrong_stationary",
           "force_calls": 315677,
           "force_norm": 0.0009464433809682044,
-          "index": 14,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -1404,7 +1389,6 @@
           "failure": "wrong_stationary",
           "force_calls": 318625,
           "force_norm": 0.000787387115835449,
-          "index": 15,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -1498,7 +1482,6 @@
           "failure": "wrong_stationary",
           "force_calls": 300531,
           "force_norm": 0.0007833009960665881,
-          "index": 16,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -1592,7 +1575,6 @@
           "failure": "wrong_stationary",
           "force_calls": 313335,
           "force_norm": 0.0009751090814973321,
-          "index": 17,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -1678,7 +1660,6 @@
           "failure": "wrong_stationary",
           "force_calls": 309431,
           "force_norm": 0.0007882721297008524,
-          "index": 18,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -1784,7 +1765,6 @@
           "failure": "wrong_stationary",
           "force_calls": 316067,
           "force_norm": 0.0005879348615313556,
-          "index": 19,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -1862,7 +1842,6 @@
           "failure": "wrong_stationary",
           "force_calls": 320209,
           "force_norm": 0.000970588542189008,
-          "index": 20,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -1956,7 +1935,6 @@
           "failure": "wrong_stationary",
           "force_calls": 313974,
           "force_norm": 0.0007186306619015869,
-          "index": 21,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -2046,7 +2024,6 @@
           "failure": "wrong_stationary",
           "force_calls": 314402,
           "force_norm": 0.0006172235887730176,
-          "index": 22,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -2140,7 +2117,6 @@
           "failure": "wrong_stationary",
           "force_calls": 324895,
           "force_norm": 0.0006646009486603963,
-          "index": 23,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -2218,7 +2194,6 @@
           "failure": "wrong_stationary",
           "force_calls": 305504,
           "force_norm": 0.0004975614658575488,
-          "index": 24,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -2320,7 +2295,6 @@
           "failure": "wrong_stationary",
           "force_calls": 303345,
           "force_norm": 0.0009924020208896148,
-          "index": 25,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -2418,7 +2392,6 @@
           "failure": "wrong_stationary",
           "force_calls": 317533,
           "force_norm": 0.0007230429879270026,
-          "index": 26,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -2520,7 +2493,6 @@
           "failure": "wrong_stationary",
           "force_calls": 314265,
           "force_norm": 0.0006713452163062106,
-          "index": 27,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -2626,7 +2598,6 @@
           "failure": "wrong_stationary",
           "force_calls": 320939,
           "force_norm": 0.0009118999351735248,
-          "index": 28,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -2720,7 +2691,6 @@
           "failure": "wrong_stationary",
           "force_calls": 311326,
           "force_norm": 0.0006649743323486425,
-          "index": 29,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -2802,7 +2772,6 @@
           "failure": "wrong_stationary",
           "force_calls": 322646,
           "force_norm": 0.0006398488480487179,
-          "index": 30,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -2888,7 +2857,6 @@
           "failure": "wrong_stationary",
           "force_calls": 316831,
           "force_norm": 0.0008755318612548603,
-          "index": 31,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -2982,7 +2950,6 @@
           "failure": "wrong_stationary",
           "force_calls": 321132,
           "force_norm": 0.0005704902791943429,
-          "index": 32,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -3068,7 +3035,6 @@
           "failure": "wrong_stationary",
           "force_calls": 305894,
           "force_norm": 0.000523591816486279,
-          "index": 33,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -3222,7 +3188,6 @@
           "failure": "wrong_stationary",
           "force_calls": 317984,
           "force_norm": 0.0005708791664404974,
-          "index": 34,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -3312,7 +3277,6 @@
           "failure": "wrong_stationary",
           "force_calls": 325562,
           "force_norm": 0.000988459853636299,
-          "index": 35,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -3418,7 +3382,6 @@
           "failure": "wrong_stationary",
           "force_calls": 322362,
           "force_norm": 0.000986015319871043,
-          "index": 36,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -3524,7 +3487,6 @@
           "failure": "wrong_stationary",
           "force_calls": 316476,
           "force_norm": 0.0008410594758919333,
-          "index": 37,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -3646,7 +3608,6 @@
           "failure": "wrong_stationary",
           "force_calls": 331583,
           "force_norm": 0.0006702603088513414,
-          "index": 38,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -3756,7 +3717,6 @@
           "failure": "wrong_stationary",
           "force_calls": 312387,
           "force_norm": 0.0005608081824931576,
-          "index": 39,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -3818,7 +3778,6 @@
           "failure": "wrong_stationary",
           "force_calls": 317018,
           "force_norm": 0.0009357065371628688,
-          "index": 40,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -3912,7 +3871,6 @@
           "failure": "wrong_stationary",
           "force_calls": 312688,
           "force_norm": 0.0009255537110713945,
-          "index": 41,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -4014,7 +3972,6 @@
           "failure": "wrong_stationary",
           "force_calls": 308892,
           "force_norm": 0.0005669554090157196,
-          "index": 42,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -4108,7 +4065,6 @@
           "failure": "wrong_stationary",
           "force_calls": 313952,
           "force_norm": 0.0007534981314081779,
-          "index": 43,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -4194,7 +4150,6 @@
           "failure": "wrong_stationary",
           "force_calls": 325085,
           "force_norm": 0.0009331194670527707,
-          "index": 44,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -4288,7 +4243,6 @@
           "failure": "wrong_stationary",
           "force_calls": 319958,
           "force_norm": 0.0009725878602115326,
-          "index": 45,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -4386,7 +4340,6 @@
           "failure": "wrong_stationary",
           "force_calls": 321604,
           "force_norm": 0.0008809867919363627,
-          "index": 46,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -4460,7 +4413,6 @@
           "failure": "wrong_stationary",
           "force_calls": 304057,
           "force_norm": 0.0006805177207410915,
-          "index": 47,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -4522,7 +4474,6 @@
           "failure": "wrong_stationary",
           "force_calls": 310560,
           "force_norm": 0.0009256485205780051,
-          "index": 48,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -4612,7 +4563,6 @@
           "failure": "wrong_stationary",
           "force_calls": 319838,
           "force_norm": 0.0009912473260110506,
-          "index": 49,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -4690,7 +4640,6 @@
           "failure": "wrong_stationary",
           "force_calls": 319116,
           "force_norm": 0.0007194182968057647,
-          "index": 50,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -4772,7 +4721,6 @@
           "failure": "wrong_stationary",
           "force_calls": 309049,
           "force_norm": 0.0009958004816223978,
-          "index": 51,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -4826,7 +4774,6 @@
           "failure": "wrong_stationary",
           "force_calls": 322136,
           "force_norm": 0.0006493337584806882,
-          "index": 52,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -4936,7 +4883,6 @@
           "failure": "wrong_stationary",
           "force_calls": 301401,
           "force_norm": 0.0009486891363640927,
-          "index": 53,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -5002,7 +4948,6 @@
           "failure": "wrong_stationary",
           "force_calls": 311292,
           "force_norm": 0.0009193754409689849,
-          "index": 54,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -5052,7 +4997,6 @@
           "failure": "wrong_stationary",
           "force_calls": 316567,
           "force_norm": 0.0008482610894855532,
-          "index": 55,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -5174,7 +5118,6 @@
           "failure": "wrong_stationary",
           "force_calls": 312870,
           "force_norm": 0.0008718446988992376,
-          "index": 56,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -5220,7 +5163,6 @@
           "failure": "wrong_stationary",
           "force_calls": 321957,
           "force_norm": 0.0009348039030387221,
-          "index": 57,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -5314,7 +5256,6 @@
           "failure": "wrong_stationary",
           "force_calls": 316467,
           "force_norm": 0.0008309767486600374,
-          "index": 58,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -5384,7 +5325,6 @@
           "failure": "wrong_stationary",
           "force_calls": 319939,
           "force_norm": 0.000677290447288222,
-          "index": 59,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -5474,7 +5414,6 @@
           "failure": "wrong_stationary",
           "force_calls": 317031,
           "force_norm": 0.0006802721434279441,
-          "index": 60,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -5548,7 +5487,6 @@
           "failure": "wrong_stationary",
           "force_calls": 304582,
           "force_norm": 0.0007114287460550469,
-          "index": 61,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -5646,7 +5584,6 @@
           "failure": "wrong_stationary",
           "force_calls": 317569,
           "force_norm": 0.0008645641381542505,
-          "index": 62,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -5736,7 +5673,6 @@
           "failure": "wrong_stationary",
           "force_calls": 313063,
           "force_norm": 0.0009409224488178297,
-          "index": 63,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -5814,7 +5750,6 @@
           "failure": "wrong_stationary",
           "force_calls": 320217,
           "force_norm": 0.0008025815139998474,
-          "index": 64,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -5896,7 +5831,6 @@
           "failure": "wrong_stationary",
           "force_calls": 311731,
           "force_norm": 0.0006453244148918603,
-          "index": 65,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -5990,7 +5924,6 @@
           "failure": "wrong_stationary",
           "force_calls": 316648,
           "force_norm": 0.0007755518331698456,
-          "index": 66,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -6068,7 +6001,6 @@
           "failure": "wrong_stationary",
           "force_calls": 324306,
           "force_norm": 0.0006507906719364742,
-          "index": 67,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -6150,7 +6082,6 @@
           "failure": "wrong_stationary",
           "force_calls": 310969,
           "force_norm": 0.0008253169022114459,
-          "index": 68,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -6240,7 +6171,6 @@
           "failure": "wrong_stationary",
           "force_calls": 319454,
           "force_norm": 0.000808988653027444,
-          "index": 69,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -6306,7 +6236,6 @@
           "failure": "wrong_stationary",
           "force_calls": 315883,
           "force_norm": 0.0007789444488134653,
-          "index": 70,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -6360,7 +6289,6 @@
           "failure": "wrong_stationary",
           "force_calls": 327635,
           "force_norm": 0.0008564817081766936,
-          "index": 71,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -6442,7 +6370,6 @@
           "failure": "wrong_stationary",
           "force_calls": 330994,
           "force_norm": 0.0008605038458538095,
-          "index": 72,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -6556,7 +6483,6 @@
           "failure": "wrong_stationary",
           "force_calls": 323611,
           "force_norm": 0.0006924969270717576,
-          "index": 73,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -6654,7 +6580,6 @@
           "failure": "wrong_stationary",
           "force_calls": 305507,
           "force_norm": 0.0009461942393228308,
-          "index": 74,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -6748,7 +6673,6 @@
           "failure": "wrong_stationary",
           "force_calls": 314159,
           "force_norm": 0.0008344384351854172,
-          "index": 75,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -6846,7 +6770,6 @@
           "failure": "wrong_stationary",
           "force_calls": 313579,
           "force_norm": 0.0006313837051694412,
-          "index": 76,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -6884,7 +6807,6 @@
           "failure": "wrong_stationary",
           "force_calls": 316484,
           "force_norm": 0.0005355039167749779,
-          "index": 77,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -6970,7 +6892,6 @@
           "failure": "wrong_stationary",
           "force_calls": 312399,
           "force_norm": 0.0006497578996119768,
-          "index": 78,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -7072,7 +6993,6 @@
           "failure": "wrong_stationary",
           "force_calls": 330652,
           "force_norm": 0.0006758157392067441,
-          "index": 79,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -7162,7 +7082,6 @@
           "failure": "wrong_stationary",
           "force_calls": 310970,
           "force_norm": 0.0008142459832209507,
-          "index": 80,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -7276,7 +7195,6 @@
           "failure": "wrong_stationary",
           "force_calls": 314988,
           "force_norm": 0.0009803699725760655,
-          "index": 81,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -7330,7 +7248,6 @@
           "failure": "wrong_stationary",
           "force_calls": 318449,
           "force_norm": 0.0009969481822449337,
-          "index": 82,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -7428,7 +7345,6 @@
           "failure": "wrong_stationary",
           "force_calls": 314316,
           "force_norm": 0.0007737833466220741,
-          "index": 83,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -7510,7 +7426,6 @@
           "failure": "wrong_stationary",
           "force_calls": 323920,
           "force_norm": 0.0008104393773561407,
-          "index": 84,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -7616,7 +7531,6 @@
           "failure": "wrong_stationary",
           "force_calls": 311702,
           "force_norm": 0.0005932767153428102,
-          "index": 85,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -7702,7 +7616,6 @@
           "failure": "wrong_stationary",
           "force_calls": 309829,
           "force_norm": 0.0007917191771315263,
-          "index": 86,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -7784,7 +7697,6 @@
           "failure": "wrong_stationary",
           "force_calls": 306583,
           "force_norm": 0.0006034538519449546,
-          "index": 87,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -7870,7 +7782,6 @@
           "failure": "wrong_stationary",
           "force_calls": 321537,
           "force_norm": 0.0008936736948472356,
-          "index": 88,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -7956,7 +7867,6 @@
           "failure": "wrong_stationary",
           "force_calls": 310238,
           "force_norm": 0.0005598627739059221,
-          "index": 89,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -8058,7 +7968,6 @@
           "failure": "wrong_stationary",
           "force_calls": 312272,
           "force_norm": 0.0008166505574750202,
-          "index": 90,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -8144,7 +8053,6 @@
           "failure": "wrong_stationary",
           "force_calls": 317291,
           "force_norm": 0.0008175161784720867,
-          "index": 91,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -8230,7 +8138,6 @@
           "failure": "wrong_stationary",
           "force_calls": 319215,
           "force_norm": 0.0008002414719799195,
-          "index": 92,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -8316,7 +8223,6 @@
           "failure": "wrong_stationary",
           "force_calls": 323426,
           "force_norm": 0.0008732401895507366,
-          "index": 93,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -8402,7 +8308,6 @@
           "failure": "wrong_stationary",
           "force_calls": 318817,
           "force_norm": 0.0006920408756550434,
-          "index": 94,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -8500,7 +8405,6 @@
           "failure": "wrong_stationary",
           "force_calls": 327088,
           "force_norm": 0.0008150694323819927,
-          "index": 95,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -8582,7 +8486,6 @@
           "failure": "wrong_stationary",
           "force_calls": 315483,
           "force_norm": 0.0007605307586242813,
-          "index": 96,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -8696,7 +8599,6 @@
           "failure": "wrong_stationary",
           "force_calls": 303608,
           "force_norm": 0.0007198718145995682,
-          "index": 97,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -8790,7 +8692,6 @@
           "failure": "wrong_stationary",
           "force_calls": 308942,
           "force_norm": 0.0006744832459828695,
-          "index": 98,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -8852,7 +8753,6 @@
           "failure": "wrong_stationary",
           "force_calls": 315767,
           "force_norm": 0.0007457932212174118,
-          "index": 99,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -8946,7 +8846,6 @@
           "failure": "wrong_stationary",
           "force_calls": 311472,
           "force_norm": 0.0008155879695380784,
-          "index": 100,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -9044,7 +8943,6 @@
           "failure": "wrong_stationary",
           "force_calls": 321342,
           "force_norm": 0.0008866226728456525,
-          "index": 101,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -9138,7 +9036,6 @@
           "failure": "wrong_stationary",
           "force_calls": 304786,
           "force_norm": 0.0009217169869315913,
-          "index": 102,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -9228,7 +9125,6 @@
           "failure": "wrong_stationary",
           "force_calls": 314102,
           "force_norm": 0.0009516007863347644,
-          "index": 103,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -9334,7 +9230,6 @@
           "failure": "wrong_stationary",
           "force_calls": 322498,
           "force_norm": 0.0007172240956456227,
-          "index": 104,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -9444,7 +9339,6 @@
           "failure": "wrong_stationary",
           "force_calls": 318037,
           "force_norm": 0.0009414809178173575,
-          "index": 105,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -9510,7 +9404,6 @@
           "failure": "wrong_stationary",
           "force_calls": 318612,
           "force_norm": 0.000836003902864692,
-          "index": 106,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -9612,7 +9505,6 @@
           "failure": "wrong_stationary",
           "force_calls": 315082,
           "force_norm": 0.00090447405482217,
-          "index": 107,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -9706,7 +9598,6 @@
           "failure": "wrong_stationary",
           "force_calls": 300828,
           "force_norm": 0.0007938984283281234,
-          "index": 108,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -9776,7 +9667,6 @@
           "failure": "wrong_stationary",
           "force_calls": 321222,
           "force_norm": 0.0006139638900811904,
-          "index": 109,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -9862,7 +9752,6 @@
           "failure": "wrong_stationary",
           "force_calls": 303288,
           "force_norm": 0.0006347340320868509,
-          "index": 110,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -9984,7 +9873,6 @@
           "failure": "wrong_stationary",
           "force_calls": 305135,
           "force_norm": 0.0007458068875882206,
-          "index": 111,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -10070,7 +9958,6 @@
           "failure": "wrong_stationary",
           "force_calls": 310270,
           "force_norm": 0.0006166500799411276,
-          "index": 112,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -10168,7 +10055,6 @@
           "failure": "wrong_stationary",
           "force_calls": 318961,
           "force_norm": 0.0006567811096787751,
-          "index": 113,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -10262,7 +10148,6 @@
           "failure": "wrong_stationary",
           "force_calls": 302825,
           "force_norm": 0.0006167521803575253,
-          "index": 114,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -10348,7 +10233,6 @@
           "failure": "wrong_stationary",
           "force_calls": 319696,
           "force_norm": 0.0008655792898860737,
-          "index": 115,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -10442,7 +10326,6 @@
           "failure": "wrong_stationary",
           "force_calls": 314249,
           "force_norm": 0.0008172195548001369,
-          "index": 116,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -10560,7 +10443,6 @@
           "failure": "wrong_stationary",
           "force_calls": 309443,
           "force_norm": 0.0005831473722872027,
-          "index": 117,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -10654,7 +10536,6 @@
           "failure": "wrong_stationary",
           "force_calls": 301475,
           "force_norm": 0.0009299855228820125,
-          "index": 118,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -10724,7 +10605,6 @@
           "failure": "wrong_stationary",
           "force_calls": 322528,
           "force_norm": 0.0009687611073961437,
-          "index": 119,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -10806,7 +10686,6 @@
           "failure": "wrong_stationary",
           "force_calls": 322718,
           "force_norm": 0.0009057780989154531,
-          "index": 120,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -10904,7 +10783,6 @@
           "failure": "wrong_stationary",
           "force_calls": 325265,
           "force_norm": 0.0009259968306712961,
-          "index": 121,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -11014,7 +10892,6 @@
           "failure": "wrong_stationary",
           "force_calls": 312197,
           "force_norm": 0.0008951978512143649,
-          "index": 122,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -11096,7 +10973,6 @@
           "failure": "wrong_stationary",
           "force_calls": 308786,
           "force_norm": 0.000941118723461049,
-          "index": 123,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -11166,7 +11042,6 @@
           "failure": "wrong_stationary",
           "force_calls": 316705,
           "force_norm": 0.0009584933486747953,
-          "index": 124,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -11256,7 +11131,6 @@
           "failure": "wrong_stationary",
           "force_calls": 314768,
           "force_norm": 0.0008141693524723165,
-          "index": 125,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -11330,7 +11204,6 @@
           "failure": "wrong_stationary",
           "force_calls": 310910,
           "force_norm": 0.0005833934466470996,
-          "index": 126,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -11400,7 +11273,6 @@
           "failure": "wrong_stationary",
           "force_calls": 325690,
           "force_norm": 0.0009370315848003759,
-          "index": 127,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -11498,7 +11370,6 @@
           "failure": "wrong_stationary",
           "force_calls": 309617,
           "force_norm": 0.0009717248756807116,
-          "index": 128,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -11564,7 +11435,6 @@
           "failure": "wrong_stationary",
           "force_calls": 311668,
           "force_norm": 0.0009226976784051519,
-          "index": 129,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -11670,7 +11540,6 @@
           "failure": "wrong_stationary",
           "force_calls": 314869,
           "force_norm": 0.0009620850380785728,
-          "index": 130,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -11784,7 +11653,6 @@
           "failure": "wrong_stationary",
           "force_calls": 318090,
           "force_norm": 0.0008863332348880278,
-          "index": 131,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -11870,7 +11738,6 @@
           "failure": "wrong_stationary",
           "force_calls": 315599,
           "force_norm": 0.0009687253851993949,
-          "index": 132,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -11952,7 +11819,6 @@
           "failure": "wrong_stationary",
           "force_calls": 317113,
           "force_norm": 0.0008175076295992428,
-          "index": 133,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -12022,7 +11888,6 @@
           "failure": "wrong_stationary",
           "force_calls": 322302,
           "force_norm": 0.0008838292828133879,
-          "index": 134,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -12112,7 +11977,6 @@
           "failure": "wrong_stationary",
           "force_calls": 320857,
           "force_norm": 0.0008996892750188476,
-          "index": 135,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -12222,7 +12086,6 @@
           "failure": "wrong_stationary",
           "force_calls": 318119,
           "force_norm": 0.0009282129451954358,
-          "index": 136,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -12344,7 +12207,6 @@
           "failure": "wrong_stationary",
           "force_calls": 312888,
           "force_norm": 0.0007845642328141332,
-          "index": 137,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -12458,7 +12320,6 @@
           "failure": "wrong_stationary",
           "force_calls": 320816,
           "force_norm": 0.0007852811749157108,
-          "index": 138,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -12580,7 +12441,6 @@
           "failure": "wrong_stationary",
           "force_calls": 320809,
           "force_norm": 0.0008132760428839826,
-          "index": 139,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -12666,7 +12526,6 @@
           "failure": "wrong_stationary",
           "force_calls": 304545,
           "force_norm": 0.0009262937825813492,
-          "index": 140,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -12784,7 +12643,6 @@
           "failure": "wrong_stationary",
           "force_calls": 297413,
           "force_norm": 0.0008279211120252487,
-          "index": 141,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -12858,7 +12716,6 @@
           "failure": "wrong_stationary",
           "force_calls": 327219,
           "force_norm": 0.0007651758063784772,
-          "index": 142,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -12920,7 +12777,6 @@
           "failure": "wrong_stationary",
           "force_calls": 319929,
           "force_norm": 0.0009575473640306535,
-          "index": 143,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -13046,7 +12902,6 @@
           "failure": "wrong_stationary",
           "force_calls": 312685,
           "force_norm": 0.0007514331953997411,
-          "index": 144,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -13112,7 +12967,6 @@
           "failure": "wrong_stationary",
           "force_calls": 313922,
           "force_norm": 0.0009414340443777238,
-          "index": 145,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -13174,7 +13028,6 @@
           "failure": "wrong_stationary",
           "force_calls": 309709,
           "force_norm": 0.0005192641117084477,
-          "index": 146,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -13272,7 +13125,6 @@
           "failure": "wrong_stationary",
           "force_calls": 313866,
           "force_norm": 0.0009428334853202918,
-          "index": 147,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -13342,7 +13194,6 @@
           "failure": "wrong_stationary",
           "force_calls": 326350,
           "force_norm": 0.0008452241292666646,
-          "index": 148,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -13428,7 +13279,6 @@
           "failure": "wrong_stationary",
           "force_calls": 308227,
           "force_norm": 0.0006093396513403167,
-          "index": 149,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -13502,7 +13352,6 @@
           "failure": "wrong_stationary",
           "force_calls": 311058,
           "force_norm": 0.0006709701477430537,
-          "index": 150,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -13592,7 +13441,6 @@
           "failure": "wrong_stationary",
           "force_calls": 305116,
           "force_norm": 0.000683083422215925,
-          "index": 151,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -13674,7 +13522,6 @@
           "failure": "wrong_stationary",
           "force_calls": 316964,
           "force_norm": 0.00097249025578254,
-          "index": 152,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -13780,7 +13627,6 @@
           "failure": "wrong_stationary",
           "force_calls": 316069,
           "force_norm": 0.0008561127788480927,
-          "index": 153,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -13854,7 +13700,6 @@
           "failure": "wrong_stationary",
           "force_calls": 309153,
           "force_norm": 0.0007615597950695044,
-          "index": 154,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -13940,7 +13785,6 @@
           "failure": "wrong_stationary",
           "force_calls": 320021,
           "force_norm": 0.0009869436347387983,
-          "index": 155,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -14030,7 +13874,6 @@
           "failure": "wrong_stationary",
           "force_calls": 320781,
           "force_norm": 0.0009016385550472567,
-          "index": 156,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -14108,7 +13951,6 @@
           "failure": "wrong_stationary",
           "force_calls": 325984,
           "force_norm": 0.0009235029683347516,
-          "index": 157,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -14198,7 +14040,6 @@
           "failure": "wrong_stationary",
           "force_calls": 306995,
           "force_norm": 0.0007841525057327102,
-          "index": 158,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -14276,7 +14117,6 @@
           "failure": "wrong_stationary",
           "force_calls": 327657,
           "force_norm": 0.0008989392959994523,
-          "index": 159,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -14394,7 +14234,6 @@
           "failure": "wrong_stationary",
           "force_calls": 319283,
           "force_norm": 0.0005016217095198517,
-          "index": 160,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -14492,7 +14331,6 @@
           "failure": "wrong_stationary",
           "force_calls": 312080,
           "force_norm": 0.0008614910068120394,
-          "index": 161,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -14578,7 +14416,6 @@
           "failure": "wrong_stationary",
           "force_calls": 317672,
           "force_norm": 0.0009365793885085047,
-          "index": 162,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -14668,7 +14505,6 @@
           "failure": "wrong_stationary",
           "force_calls": 325447,
           "force_norm": 0.0007831593787330685,
-          "index": 163,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -14746,7 +14582,6 @@
           "failure": "wrong_stationary",
           "force_calls": 315769,
           "force_norm": 0.0005318128128224614,
-          "index": 164,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -14836,7 +14671,6 @@
           "failure": "wrong_stationary",
           "force_calls": 314819,
           "force_norm": 0.0007856518578579631,
-          "index": 165,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -14950,7 +14784,6 @@
           "failure": "wrong_stationary",
           "force_calls": 308428,
           "force_norm": 0.0006706059641070595,
-          "index": 166,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -15020,7 +14853,6 @@
           "failure": "wrong_stationary",
           "force_calls": 321265,
           "force_norm": 0.000485221291477141,
-          "index": 167,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -15138,7 +14970,6 @@
           "failure": "wrong_stationary",
           "force_calls": 311557,
           "force_norm": 0.0008385691014439605,
-          "index": 168,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -15240,7 +15071,6 @@
           "failure": "wrong_stationary",
           "force_calls": 303926,
           "force_norm": 0.0009439771670841891,
-          "index": 169,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -15310,7 +15140,6 @@
           "failure": "wrong_stationary",
           "force_calls": 321437,
           "force_norm": 0.0008692777723947748,
-          "index": 170,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -15388,7 +15217,6 @@
           "failure": "wrong_stationary",
           "force_calls": 324069,
           "force_norm": 0.000847351512312618,
-          "index": 171,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -15454,7 +15282,6 @@
           "failure": "wrong_stationary",
           "force_calls": 317134,
           "force_norm": 0.0009968579293693958,
-          "index": 172,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -15540,7 +15367,6 @@
           "failure": "wrong_stationary",
           "force_calls": 306735,
           "force_norm": 0.0007019876485010679,
-          "index": 173,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -15614,7 +15440,6 @@
           "failure": "wrong_stationary",
           "force_calls": 312210,
           "force_norm": 0.000948153873998686,
-          "index": 174,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -15700,7 +15525,6 @@
           "failure": "wrong_stationary",
           "force_calls": 320534,
           "force_norm": 0.000990354290315253,
-          "index": 175,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -15762,6 +15586,224 @@
           "verify_calls": 1
         },
         {
+          "calls_to_best": 306534,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -393.9514136392307,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 311769,
+          "force_norm": 0.0008321209796053419,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 672.8424680550088,
+          "start": "coords.177",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              379,
+              -375.2495410995109
+            ],
+            [
+              7369,
+              -375.5747255353957
+            ],
+            [
+              7369,
+              -375.5747255354
+            ],
+            [
+              8075,
+              -380.11709516888413
+            ],
+            [
+              8075,
+              -380.1170951689
+            ],
+            [
+              9301,
+              -382.7103980207043
+            ],
+            [
+              23509,
+              -383.59472496929095
+            ],
+            [
+              23509,
+              -383.5947249693
+            ],
+            [
+              24560,
+              -384.33285004749115
+            ],
+            [
+              24560,
+              -384.3328500475
+            ],
+            [
+              27984,
+              -388.3244602208923
+            ],
+            [
+              27984,
+              -388.3244602209
+            ],
+            [
+              34017,
+              -388.5073132349644
+            ],
+            [
+              34017,
+              -388.507313235
+            ],
+            [
+              66849,
+              -389.9111869188216
+            ],
+            [
+              168044,
+              -390.0835191644263
+            ],
+            [
+              219961,
+              -390.1758032922561
+            ],
+            [
+              219961,
+              -390.1758032923
+            ],
+            [
+              223305,
+              -390.74738798960493
+            ],
+            [
+              245464,
+              -393.72077166515544
+            ],
+            [
+              245464,
+              -393.7207716652
+            ],
+            [
+              284131,
+              -393.9331433627408
+            ],
+            [
+              306534,
+              -393.9514136392305
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 294093,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -392.249301299962,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 322435,
+          "force_norm": 0.0007243326677435121,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 747.4150160639983,
+          "start": "coords.178",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              434,
+              -381.661086787937
+            ],
+            [
+              9052,
+              -381.78508839159565
+            ],
+            [
+              9052,
+              -381.7850883916
+            ],
+            [
+              11120,
+              -382.5280010690815
+            ],
+            [
+              11120,
+              -382.5280010691
+            ],
+            [
+              17346,
+              -382.91629823504593
+            ],
+            [
+              33042,
+              -386.17841282715096
+            ],
+            [
+              33042,
+              -386.1784128272
+            ],
+            [
+              44493,
+              -388.3142677197286
+            ],
+            [
+              48508,
+              -389.15278394972705
+            ],
+            [
+              76057,
+              -390.9728570063675
+            ],
+            [
+              76057,
+              -390.9728570064
+            ],
+            [
+              155249,
+              -391.02617216843123
+            ],
+            [
+              228167,
+              -391.55139304495844
+            ],
+            [
+              228167,
+              -391.551393045
+            ],
+            [
+              294093,
+              -392.2493012999619
+            ],
+            [
+              294093,
+              -392.2493013
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
           "calls_to_best": 217948,
           "cap": 1000000,
           "code": "BPGA",
@@ -15774,7 +15816,6 @@
           "failure": "wrong_stationary",
           "force_calls": 313783,
           "force_norm": 0.0005712400333789687,
-          "index": 178,
           "problem": "globalopt/lj75",
           "reasons": [
             "energy"
@@ -15814,6 +15855,1771 @@
           ],
           "tuning": "tuned",
           "verify_calls": 1
+        },
+        {
+          "calls_to_best": 267449,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -394.5633381128799,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 323891,
+          "force_norm": 0.000619385906171085,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 680.3375652200048,
+          "start": "coords.180",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              280,
+              -377.36615279837076
+            ],
+            [
+              4974,
+              -377.93522206499017
+            ],
+            [
+              4974,
+              -377.935222065
+            ],
+            [
+              5778,
+              -378.3097099070879
+            ],
+            [
+              5778,
+              -378.3097099071
+            ],
+            [
+              7143,
+              -379.31933116543837
+            ],
+            [
+              8257,
+              -385.52863577758563
+            ],
+            [
+              8257,
+              -385.5286357776
+            ],
+            [
+              10221,
+              -388.753418656707
+            ],
+            [
+              45860,
+              -392.773857499603
+            ],
+            [
+              106641,
+              -392.94465269706814
+            ],
+            [
+              106641,
+              -392.9446526971
+            ],
+            [
+              246163,
+              -393.2852264030309
+            ],
+            [
+              267449,
+              -394.56333811287993
+            ],
+            [
+              267449,
+              -394.5633381129
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 259218,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -394.98353874029453,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 316681,
+          "force_norm": 0.000989082738350829,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 595.8599634190032,
+          "start": "coords.181",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              248,
+              -381.137609101504
+            ],
+            [
+              8798,
+              -385.7450590684522
+            ],
+            [
+              8798,
+              -385.7450590685
+            ],
+            [
+              28468,
+              -386.1356140020767
+            ],
+            [
+              28468,
+              -386.1356140021
+            ],
+            [
+              28878,
+              -394.5588051677107
+            ],
+            [
+              224864,
+              -394.62899270341796
+            ],
+            [
+              259218,
+              -394.98353874029453
+            ],
+            [
+              259218,
+              -394.9835387403
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 280753,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -393.3792853372728,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 320352,
+          "force_norm": 0.0007035082007492746,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 821.0997969820019,
+          "start": "coords.182",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              398,
+              -381.37696361651723
+            ],
+            [
+              9758,
+              -388.5273266218348
+            ],
+            [
+              28794,
+              -389.5981244260811
+            ],
+            [
+              28794,
+              -389.5981244261
+            ],
+            [
+              81561,
+              -389.7959016696899
+            ],
+            [
+              81561,
+              -389.7959016697
+            ],
+            [
+              82261,
+              -390.2332548343553
+            ],
+            [
+              82261,
+              -390.2332548344
+            ],
+            [
+              94675,
+              -390.3822711875011
+            ],
+            [
+              94870,
+              -391.76107963069535
+            ],
+            [
+              94870,
+              -391.7610796307
+            ],
+            [
+              116595,
+              -392.4297645439666
+            ],
+            [
+              116595,
+              -392.429764544
+            ],
+            [
+              131113,
+              -392.5966375974691
+            ],
+            [
+              131113,
+              -392.5966375975
+            ],
+            [
+              280753,
+              -393.3792853372728
+            ],
+            [
+              280753,
+              -393.3792853373
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 295607,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -394.5232444440819,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 312171,
+          "force_norm": 0.0009631250642202846,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 591.013509477998,
+          "start": "coords.183",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              342,
+              -378.0635501577775
+            ],
+            [
+              8530,
+              -380.9458412814629
+            ],
+            [
+              8530,
+              -380.9458412815
+            ],
+            [
+              12319,
+              -382.8790014693124
+            ],
+            [
+              31546,
+              -383.54418255355586
+            ],
+            [
+              31546,
+              -383.5441825536
+            ],
+            [
+              36666,
+              -383.609896303096
+            ],
+            [
+              36666,
+              -383.6098963031
+            ],
+            [
+              41382,
+              -384.63409620531337
+            ],
+            [
+              43028,
+              -384.9478248793612
+            ],
+            [
+              43028,
+              -384.9478248794
+            ],
+            [
+              44319,
+              -386.4838532297807
+            ],
+            [
+              44319,
+              -386.4838532298
+            ],
+            [
+              82653,
+              -387.23464060764377
+            ],
+            [
+              97601,
+              -387.4591502896425
+            ],
+            [
+              113197,
+              -389.5155030141369
+            ],
+            [
+              122536,
+              -391.13061581016115
+            ],
+            [
+              122536,
+              -391.1306158102
+            ],
+            [
+              154013,
+              -392.6577922936447
+            ],
+            [
+              295607,
+              -394.5232444440819
+            ],
+            [
+              295607,
+              -394.5232444441
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 196975,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -395.34760359868875,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 318812,
+          "force_norm": 0.000677641086852116,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 898.7673780689947,
+          "start": "coords.184",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              293,
+              -377.53616603529935
+            ],
+            [
+              7712,
+              -377.84311483927695
+            ],
+            [
+              7712,
+              -377.8431148393
+            ],
+            [
+              8101,
+              -378.73665090391637
+            ],
+            [
+              8351,
+              -383.7037973339267
+            ],
+            [
+              15425,
+              -387.3910177210324
+            ],
+            [
+              32716,
+              -390.105195931882
+            ],
+            [
+              32716,
+              -390.1051959319
+            ],
+            [
+              97866,
+              -390.2007267549982
+            ],
+            [
+              97866,
+              -390.200726755
+            ],
+            [
+              131679,
+              -390.76209406959845
+            ],
+            [
+              131679,
+              -390.7620940696
+            ],
+            [
+              147874,
+              -391.27319039493904
+            ],
+            [
+              195997,
+              -392.99236851084856
+            ],
+            [
+              196975,
+              -395.3476035986887
+            ],
+            [
+              196975,
+              -395.3476035987
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 229301,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -392.04371555131485,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 325729,
+          "force_norm": 0.000692330379925664,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 848.2978822610021,
+          "start": "coords.185",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              251,
+              -371.1906503344045
+            ],
+            [
+              940,
+              -373.60957983807447
+            ],
+            [
+              940,
+              -373.6095798381
+            ],
+            [
+              4706,
+              -383.8541311653886
+            ],
+            [
+              4706,
+              -383.8541311654
+            ],
+            [
+              27037,
+              -384.3029415803897
+            ],
+            [
+              27037,
+              -384.3029415804
+            ],
+            [
+              41414,
+              -387.3782499080195
+            ],
+            [
+              43669,
+              -388.58328865624526
+            ],
+            [
+              126668,
+              -389.26834364657077
+            ],
+            [
+              126668,
+              -389.2683436466
+            ],
+            [
+              132239,
+              -391.800268029029
+            ],
+            [
+              168918,
+              -391.993142033552
+            ],
+            [
+              168918,
+              -391.9931420336
+            ],
+            [
+              229301,
+              -392.0437155513149
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 131341,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -393.84006288069963,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 315723,
+          "force_norm": 0.0009773923642252982,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 634.2487044839945,
+          "start": "coords.186",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              366,
+              -381.074682822328
+            ],
+            [
+              8836,
+              -381.97453504223654
+            ],
+            [
+              12889,
+              -384.465541751519
+            ],
+            [
+              24375,
+              -388.1406498737407
+            ],
+            [
+              31365,
+              -389.8495169092178
+            ],
+            [
+              71355,
+              -392.33865990239383
+            ],
+            [
+              71355,
+              -392.3386599024
+            ],
+            [
+              131341,
+              -393.84006288069963
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 312641,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -394.1354154976082,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 326155,
+          "force_norm": 0.000671680919389821,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 863.8364296950022,
+          "start": "coords.187",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              249,
+              -378.6320954568179
+            ],
+            [
+              1116,
+              -379.3866006468949
+            ],
+            [
+              1116,
+              -379.3866006469
+            ],
+            [
+              2480,
+              -380.2930540846114
+            ],
+            [
+              10725,
+              -386.7966696253634
+            ],
+            [
+              10725,
+              -386.7966696254
+            ],
+            [
+              31299,
+              -389.74735502151566
+            ],
+            [
+              82092,
+              -391.71628182644474
+            ],
+            [
+              190912,
+              -393.0550961597012
+            ],
+            [
+              240054,
+              -394.0300375244238
+            ],
+            [
+              312641,
+              -394.1354154976082
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 131952,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -392.99892386217016,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 317353,
+          "force_norm": 0.0009872285547610664,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 567.5759849129972,
+          "start": "coords.188",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              284,
+              -381.3157898063927
+            ],
+            [
+              9167,
+              -381.4719697496824
+            ],
+            [
+              9167,
+              -381.4719697497
+            ],
+            [
+              11215,
+              -383.4010500610464
+            ],
+            [
+              16900,
+              -387.3036300116835
+            ],
+            [
+              16900,
+              -387.3036300117
+            ],
+            [
+              35781,
+              -387.3323202314619
+            ],
+            [
+              35781,
+              -387.3323202315
+            ],
+            [
+              53112,
+              -388.54840049110464
+            ],
+            [
+              58399,
+              -388.7101337388389
+            ],
+            [
+              68906,
+              -388.9964837218009
+            ],
+            [
+              72713,
+              -389.9165123699329
+            ],
+            [
+              79821,
+              -392.6888248431203
+            ],
+            [
+              116904,
+              -392.8004215502616
+            ],
+            [
+              116904,
+              -392.8004215503
+            ],
+            [
+              131952,
+              -392.99892386217016
+            ],
+            [
+              131952,
+              -392.9989238622
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 270673,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -393.76052468334103,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 319553,
+          "force_norm": 0.0006690542021084627,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 988.9057304439921,
+          "start": "coords.189",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              491,
+              -381.2901666865665
+            ],
+            [
+              9192,
+              -385.9409015193296
+            ],
+            [
+              11154,
+              -387.126588024472
+            ],
+            [
+              11154,
+              -387.1265880245
+            ],
+            [
+              21760,
+              -388.20601354950884
+            ],
+            [
+              55789,
+              -390.6868230286293
+            ],
+            [
+              131689,
+              -391.0544730082423
+            ],
+            [
+              204507,
+              -392.89203337032563
+            ],
+            [
+              261780,
+              -393.0118980139732
+            ],
+            [
+              261780,
+              -393.011898014
+            ],
+            [
+              270673,
+              -393.76052468334103
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 262184,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -395.30778319824907,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 319436,
+          "force_norm": 0.0009970250174581145,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 664.1709984609915,
+          "start": "coords.190",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              346,
+              -387.89840921171253
+            ],
+            [
+              10130,
+              -388.41062414974164
+            ],
+            [
+              22949,
+              -390.774508031981
+            ],
+            [
+              22949,
+              -390.774508032
+            ],
+            [
+              28941,
+              -391.09411483304433
+            ],
+            [
+              45101,
+              -391.125375765948
+            ],
+            [
+              64850,
+              -392.6583760970747
+            ],
+            [
+              64850,
+              -392.6583760971
+            ],
+            [
+              99875,
+              -393.8051156320514
+            ],
+            [
+              99875,
+              -393.8051156321
+            ],
+            [
+              178266,
+              -393.9450375943409
+            ],
+            [
+              235626,
+              -394.21839306758466
+            ],
+            [
+              235626,
+              -394.2183930676
+            ],
+            [
+              251491,
+              -395.25688878597646
+            ],
+            [
+              251491,
+              -395.256888786
+            ],
+            [
+              262184,
+              -395.30778319824907
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 174797,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -391.4193345048828,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 315393,
+          "force_norm": 0.0008375109282482077,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 392.77393024999765,
+          "start": "coords.191",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              299,
+              -379.4674902851916
+            ],
+            [
+              6339,
+              -382.960847640287
+            ],
+            [
+              6339,
+              -382.9608476403
+            ],
+            [
+              38956,
+              -384.906943210022
+            ],
+            [
+              39890,
+              -385.47645627169254
+            ],
+            [
+              39890,
+              -385.4764562717
+            ],
+            [
+              43104,
+              -387.5673529250471
+            ],
+            [
+              54884,
+              -387.9747461126628
+            ],
+            [
+              54884,
+              -387.9747461127
+            ],
+            [
+              58326,
+              -389.5142600031529
+            ],
+            [
+              58326,
+              -389.5142600032
+            ],
+            [
+              174797,
+              -391.4193345048828
+            ],
+            [
+              174797,
+              -391.4193345049
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 253735,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -393.76872392962423,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 317520,
+          "force_norm": 0.0007744997554689967,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 657.8598319509911,
+          "start": "coords.192",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              415,
+              -375.77556705064296
+            ],
+            [
+              4914,
+              -375.7802373342202
+            ],
+            [
+              6696,
+              -377.3480971790194
+            ],
+            [
+              7971,
+              -382.0212864858006
+            ],
+            [
+              10318,
+              -382.3414271149641
+            ],
+            [
+              10318,
+              -382.341427115
+            ],
+            [
+              10974,
+              -390.69546953301614
+            ],
+            [
+              44490,
+              -390.7312885867075
+            ],
+            [
+              166567,
+              -391.98809731328265
+            ],
+            [
+              166567,
+              -391.9880973133
+            ],
+            [
+              253735,
+              -393.76872392962423
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 270053,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -394.88913377880715,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 316298,
+          "force_norm": 0.0006480347690567158,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 776.128879448006,
+          "start": "coords.193",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              359,
+              -371.9003100858842
+            ],
+            [
+              830,
+              -374.54824833308703
+            ],
+            [
+              830,
+              -374.5482483331
+            ],
+            [
+              3193,
+              -381.7163588188381
+            ],
+            [
+              4742,
+              -383.4903303368551
+            ],
+            [
+              4742,
+              -383.4903303369
+            ],
+            [
+              22751,
+              -384.80910491159244
+            ],
+            [
+              22751,
+              -384.8091049116
+            ],
+            [
+              28474,
+              -385.90427776495295
+            ],
+            [
+              28474,
+              -385.904277765
+            ],
+            [
+              47582,
+              -386.4752604922511
+            ],
+            [
+              47582,
+              -386.4752604923
+            ],
+            [
+              52514,
+              -387.28362383918125
+            ],
+            [
+              52514,
+              -387.2836238392
+            ],
+            [
+              72090,
+              -389.2024177638416
+            ],
+            [
+              107827,
+              -393.3791170942692
+            ],
+            [
+              107827,
+              -393.3791170943
+            ],
+            [
+              270053,
+              -394.88913377880715
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 278087,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -395.05879911568024,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 314635,
+          "force_norm": 0.0005270671193576705,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 847.9791340019874,
+          "start": "coords.194",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              303,
+              -379.8618079002086
+            ],
+            [
+              8978,
+              -385.1408741859744
+            ],
+            [
+              8978,
+              -385.140874186
+            ],
+            [
+              12106,
+              -389.6708538448746
+            ],
+            [
+              12106,
+              -389.6708538449
+            ],
+            [
+              61213,
+              -390.75161374590675
+            ],
+            [
+              73351,
+              -391.48836107943566
+            ],
+            [
+              81018,
+              -393.41121959542755
+            ],
+            [
+              186943,
+              -393.58478473416983
+            ],
+            [
+              186943,
+              -393.5847847342
+            ],
+            [
+              278087,
+              -395.05879911568024
+            ],
+            [
+              278087,
+              -395.0587991157
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 190536,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -393.24330786923827,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 314471,
+          "force_norm": 0.000841548609898605,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 484.5175903240015,
+          "start": "coords.195",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              419,
+              -379.7848089827036
+            ],
+            [
+              1420,
+              -380.3530679782744
+            ],
+            [
+              1420,
+              -380.3530679783
+            ],
+            [
+              11706,
+              -381.0168172878971
+            ],
+            [
+              11706,
+              -381.0168172879
+            ],
+            [
+              16305,
+              -384.2509999877004
+            ],
+            [
+              17771,
+              -391.1348047661527
+            ],
+            [
+              17771,
+              -391.1348047662
+            ],
+            [
+              107771,
+              -391.65689114190786
+            ],
+            [
+              170872,
+              -391.79402235660075
+            ],
+            [
+              190536,
+              -393.2433078692384
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 139320,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -393.5959349537767,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 301177,
+          "force_norm": 0.0009872460040579144,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 546.8777297600027,
+          "start": "coords.196",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              555,
+              -380.6573493507852
+            ],
+            [
+              10089,
+              -385.90636910537955
+            ],
+            [
+              10089,
+              -385.9063691054
+            ],
+            [
+              15608,
+              -385.9660627163426
+            ],
+            [
+              33110,
+              -389.15103045388594
+            ],
+            [
+              33110,
+              -389.1510304539
+            ],
+            [
+              39687,
+              -393.01473473189316
+            ],
+            [
+              39687,
+              -393.0147347319
+            ],
+            [
+              139320,
+              -393.59593495377675
+            ],
+            [
+              139320,
+              -393.5959349538
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 271202,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -393.82578395722703,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 326933,
+          "force_norm": 0.0008959957952315722,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 816.9468101359962,
+          "start": "coords.197",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              398,
+              -382.54650456803546
+            ],
+            [
+              10874,
+              -383.24960174816226
+            ],
+            [
+              10874,
+              -383.2496017482
+            ],
+            [
+              12792,
+              -383.2802793740191
+            ],
+            [
+              19594,
+              -384.0677784559243
+            ],
+            [
+              26209,
+              -385.5077685289805
+            ],
+            [
+              26209,
+              -385.507768529
+            ],
+            [
+              35716,
+              -385.78427341590213
+            ],
+            [
+              40568,
+              -385.9562947664898
+            ],
+            [
+              40568,
+              -385.9562947665
+            ],
+            [
+              40878,
+              -389.7532673746406
+            ],
+            [
+              72885,
+              -390.3610176030023
+            ],
+            [
+              87219,
+              -390.8288685432719
+            ],
+            [
+              87219,
+              -390.8288685433
+            ],
+            [
+              96478,
+              -391.6664486168785
+            ],
+            [
+              96478,
+              -391.6664486169
+            ],
+            [
+              97430,
+              -392.01405609374865
+            ],
+            [
+              127325,
+              -392.07529489793103
+            ],
+            [
+              192393,
+              -392.9206732477496
+            ],
+            [
+              268985,
+              -393.32128776957006
+            ],
+            [
+              268985,
+              -393.3212877696
+            ],
+            [
+              271017,
+              -393.71575635535555
+            ],
+            [
+              271017,
+              -393.7157563554
+            ],
+            [
+              271202,
+              -393.82578395722703
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 201857,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -392.4066217233935,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 319464,
+          "force_norm": 0.0008955746411675547,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 718.7682401999919,
+          "start": "coords.198",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              233,
+              -376.7622801183235
+            ],
+            [
+              4095,
+              -384.24840042923677
+            ],
+            [
+              9373,
+              -386.45561435027923
+            ],
+            [
+              9373,
+              -386.4556143503
+            ],
+            [
+              15606,
+              -389.619054040067
+            ],
+            [
+              15606,
+              -389.6190540401
+            ],
+            [
+              96641,
+              -391.41336512025214
+            ],
+            [
+              96641,
+              -391.4133651203
+            ],
+            [
+              159141,
+              -391.56458715724096
+            ],
+            [
+              201857,
+              -392.4066217233935
+            ],
+            [
+              201857,
+              -392.4066217234
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 277353,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -394.4561783714461,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 321029,
+          "force_norm": 0.0009249273142662365,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 748.4597737020085,
+          "start": "coords.199",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              660,
+              -390.5352116607089
+            ],
+            [
+              30289,
+              -391.35401926912596
+            ],
+            [
+              94849,
+              -391.40428871276714
+            ],
+            [
+              94849,
+              -391.4042887128
+            ],
+            [
+              151975,
+              -391.49893151894173
+            ],
+            [
+              209857,
+              -391.65020771487923
+            ],
+            [
+              209857,
+              -391.6502077149
+            ],
+            [
+              239058,
+              -391.6833394476647
+            ],
+            [
+              239058,
+              -391.6833394477
+            ],
+            [
+              277353,
+              -394.456178371446
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 228116,
+          "cap": 1000000,
+          "code": "BPGA",
+          "code_version": "0",
+          "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -390.9879186343513,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 315700,
+          "force_norm": 0.0007384837094795406,
+          "problem": "globalopt/lj75",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -397.492331,
+          "schema": "optbench.start/v2",
+          "seconds": 588.9238777990104,
+          "start": "coords.200",
+          "success": false,
+          "target": -397.491331,
+          "template": "bpga/lj75-pool-tuned",
+          "trace": [
+            [
+              303,
+              -371.9931569673945
+            ],
+            [
+              805,
+              -378.36274340091137
+            ],
+            [
+              6355,
+              -380.3791227288583
+            ],
+            [
+              6355,
+              -380.3791227289
+            ],
+            [
+              17311,
+              -387.66420899478135
+            ],
+            [
+              17311,
+              -387.6642089948
+            ],
+            [
+              78316,
+              -388.02977264999845
+            ],
+            [
+              78316,
+              -388.02977265
+            ],
+            [
+              165545,
+              -389.90135907971427
+            ],
+            [
+              222587,
+              -390.6720352161856
+            ],
+            [
+              222587,
+              -390.6720352162
+            ],
+            [
+              228116,
+              -390.98791863435133
+            ],
+            [
+              228116,
+              -390.9879186344
+            ]
+          ],
+          "tuning": "tuned",
+          "verify_calls": 1
         }
       ],
       "tuning": "tuned"
@@ -15821,5 +17627,5 @@
   ],
   "schema": "optbench.result/v2",
   "scoring": "par2-wilson-bootstrap",
-  "status": "partial"
+  "status": "sota"
 }
