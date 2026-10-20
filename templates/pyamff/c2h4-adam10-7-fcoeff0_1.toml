@@ -1,0 +1,15 @@
+# Latest PyAMFF on the archived C2H4 ADAM 10-7 force-coefficient 0.1 row.
+id = "pyamff/c2h4-adam10-7-fcoeff0_1"
+engine = "pyamff"
+problem = "mlopt/C2H4"
+code = "Pyamff"
+code_version = "0.1.0-beta"
+commit = "240f51d01ca22969369f9bc21760c61cbb3b6665"
+algorithm = "ADAM"
+tuning = "stock"
+ranked = true
+note = "PyAMFF master 240f51d (2026-07-04), package version 0.1.0-beta. Unmodified. Archive config: ADAM, hidden layers 10 7, tanh, random_uniform, force coefficient 0.1, loss_grad_tol 0.10, epochs_max 30000, Fortran Behler-Parrinello, NoScaler, learning rate 0.01, one batch. The 2026 parser names that sum-of-squares loss SSE and requires init_model_parameters to draw the random start."
+
+[stop]
+max_force_calls = 30000
+max_steps = 30000

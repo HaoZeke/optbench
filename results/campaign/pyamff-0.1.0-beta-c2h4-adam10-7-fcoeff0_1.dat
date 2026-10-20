@@ -1,0 +1,20 @@
+mean_epoch 12006.4
+median_epoch 8234
+mean_energy_rmse 0.0222529036
+median_energy_rmse 0.02173124
+mean_force_rmse 0.1709660918
+median_force_rmse 0.179317395
+nfailed 6
+n 50
+code Pyamff
+code_version 0.1.0-beta
+commit 240f51d01ca22969369f9bc21760c61cbb3b6665
+algorithm ADAM
+template pyamff/c2h4-adam10-7-fcoeff0_1
+problem mlopt/C2H4
+tuning stock
+counter harness
+reducer harness
+loss_grad_tol 0.10
+epochs_max 30000
+note PyAMFF master 240f51d (2026-07-04), package version 0.1.0-beta, unmodified. Archive problem: C2H4, 50 random_uniform starts, ADAM, hidden layers 10 7, tanh, force coefficient 0.1, loss_grad_tol 0.10, epochs_max 30000, Fortran Behler-Parrinello, NoScaler, learning rate 0.01, one batch. The 2026 parser names that sum-of-squares loss SSE and requires init_model_parameters to draw the random start. The harness count is the epoch at the stock max-abs loss-gradient stop.

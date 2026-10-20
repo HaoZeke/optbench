@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+46 reproduced, 30 not reproduced, 75 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -149,7 +149,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
 | C2H4/pyamff-adam10-7-fcoeff0 | — | — | not rerun |
-| C2H4/pyamff-adam10-7-fcoeff0_1 | — | — | not rerun |
+| C2H4/pyamff-adam10-7-fcoeff0_1 | mean_epoch 13876.7, median_epoch 9683, mean_energy_rmse 0.0211022, median_energy_rmse 0.01972, mean_force_rmse 0.159991, median_force_rmse 0.173285 | 12006.4, 8234, 0.0222529, 0.0217312, 0.170966, 0.179317 | not reproduced; pyamff_stock |
 | C2H4/pyamff-lbfgs10-7-fcoeff0 | — | — | not rerun |
 | C2H4/pyamff-lbfgs10-7-fcoeff0_1 | — | — | not rerun |
 | C2H4/pyamff-rprop10-7-fcoeff0 | — | — | not rerun |
@@ -324,6 +324,12 @@ comments.txt sets L-BFGS memory 100 and maximum move 2.0. That rerun scores 27. 
 pele Morse L-BFGS scores 92. The archive is 51. eOn Morse L-BFGS on the same bulk file reproduces at 52, so the gap is the pele memory and step, not the shared Morse parameters.
 
 - minimization/morse-bulk/pele-lbfgs
+
+### pyamff_stock
+
+PyAMFF master 240f51d (2026-07-04), package version 0.1.0-beta, unmodified. The archived C2H4 ADAM row is the paper number. This run uses that problem, 50 random_uniform starts, and loss_grad_tol 0.10 with epochs_max 30000. The 2026 parser names the sum-of-squares loss SSE and requires init_model_parameters to draw the random start. Mean epoch 12006.4 versus 13876.7 and median epoch 8234 versus 9683 are outside 10 percent. Median energy RMSE 0.0217312 versus 0.01972 is outside 10 percent. Mean energy RMSE, both force RMSEs, and nfailed 6 are inside the archive band. The harness rank is the epoch at the stock max-abs loss-gradient stop.
+
+- mlopt/C2H4/pyamff-adam10-7-fcoeff0_1
 
 ### heptamer_cg
 
