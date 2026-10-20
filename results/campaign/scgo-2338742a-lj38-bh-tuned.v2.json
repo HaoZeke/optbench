@@ -1,7 +1,7 @@
 {
   "bootstrap_resamples": 2000,
   "bootstrap_seed": 20261015,
-  "note": "Harness counter on optbench.potentials.lennard_jones. A start succeeds when a quenched energy is within energy_above_minimum of the known minimum. The cap is the AIRSS Lennard-Jones 38 call ceiling.",
+  "note": "Harness counter on optbench.potentials.lennard_jones. A start succeeds when the harness energy is within energy_above_minimum of reference.energy. The cap is the AIRSS Lennard-Jones 38 call ceiling.",
   "par_factor": 2,
   "problem": "globalopt/lj38",
   "runs": [
@@ -59,18 +59,20 @@
         "energy_tolerance": 0.1,
         "epsilon": 1.0,
         "fmax": 0.05,
+        "judge": "globalopt",
         "move_fraction": 0.3,
         "move_strategy": "random",
         "niter": 955658,
         "niter_local_relaxation": 233,
         "optimizer": "FIRE",
         "potential": "lennard-jones",
-        "reference_energy": -173.92842659062762,
+        "reference_energy": -173.928427,
         "seed": 314159,
         "sigma": 1.0,
+        "stop_on_energy": true,
         "symbol": "C",
         "temperature": 1.0,
-        "threshold": -173.92742659062762
+        "threshold": -173.927427
       },
       "partial": false,
       "present_source": true,
@@ -94,18 +96,20 @@
           "energy_tolerance": 0.1,
           "epsilon": 1.0,
           "fmax": 0.05,
+          "judge": "globalopt",
           "move_fraction": 0.3,
           "move_strategy": "random",
           "niter": 955658,
           "niter_local_relaxation": 233,
           "optimizer": "FIRE",
           "potential": "lennard-jones",
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "seed": 314159,
           "sigma": 1.0,
+          "stop_on_energy": true,
           "symbol": "C",
           "temperature": 1.0,
-          "threshold": -173.92742659062762
+          "threshold": -173.927427
         }
       },
       "starts": [
@@ -127,9 +131,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -157,9 +162,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -187,9 +193,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -217,9 +224,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -247,9 +255,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -277,9 +286,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -307,9 +317,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -337,9 +348,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -367,9 +379,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -397,9 +410,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -427,9 +441,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -457,9 +472,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -487,9 +503,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -517,9 +534,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -547,9 +565,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -577,9 +596,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -607,9 +627,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -637,9 +658,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -667,9 +689,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -697,9 +720,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -727,9 +751,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -757,9 +782,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -787,9 +813,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -817,9 +844,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -847,9 +875,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -877,9 +906,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -907,9 +937,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -937,9 +968,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -967,9 +999,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -997,9 +1030,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1027,9 +1061,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1057,9 +1092,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1087,9 +1123,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1117,9 +1154,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1147,9 +1185,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1177,9 +1216,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1207,9 +1247,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1237,9 +1278,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1267,9 +1309,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1297,9 +1340,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1327,9 +1371,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1357,9 +1402,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1387,9 +1433,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1417,9 +1464,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1447,9 +1495,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1477,9 +1526,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1507,9 +1557,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1537,9 +1588,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1567,9 +1619,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1597,9 +1650,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1627,9 +1681,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1657,9 +1712,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1687,9 +1743,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1717,9 +1774,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1747,9 +1805,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1777,9 +1836,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1807,9 +1867,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1837,9 +1898,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1867,9 +1929,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1897,9 +1960,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1927,9 +1991,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1957,9 +2022,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1987,9 +2053,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2017,9 +2084,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2047,9 +2115,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2077,9 +2146,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2107,9 +2177,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2137,9 +2208,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2167,9 +2239,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2197,9 +2270,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2227,9 +2301,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2257,9 +2332,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2287,9 +2363,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2317,9 +2394,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2347,9 +2425,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2377,9 +2456,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2407,9 +2487,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2437,9 +2518,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2467,9 +2549,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2497,9 +2580,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2527,9 +2611,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2557,9 +2642,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2587,9 +2673,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2617,9 +2704,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2647,9 +2735,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2677,9 +2766,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2707,9 +2797,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2737,9 +2828,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2767,9 +2859,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2797,9 +2890,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2827,9 +2921,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2857,9 +2952,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2887,9 +2983,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2917,9 +3014,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2947,9 +3045,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2977,9 +3076,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -3007,9 +3107,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -3037,9 +3138,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -3067,9 +3169,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -3097,9 +3200,10 @@
           "problem": "globalopt/lj38",
           "quenched": false,
           "reasons": [
+            "energy",
             "cap"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": null,
           "schema": "optbench.start/v2",
           "seed": "314159",

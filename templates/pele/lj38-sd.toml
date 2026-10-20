@@ -1,0 +1,16 @@
+id = "pele/lj38-sd"
+engine = "pele"
+problem = "minimization/lj38"
+code = "pele"
+code_version = "0.1.2"
+commit = "b7081b932a060be11342fbe8287ac35da8ada879"
+algorithm = "steepest descent"
+tuning = "default"
+note = "Default row. The step is minus dx times the gradient with dx 1e-4, the constructor value. maxstep is off. The stop is the Euclidean norm of the gradient at the problem force norm. The iteration budget is the force-call cap. The same values are used for every start."
+
+[pele]
+method = "sd"
+
+[ini.Optimizer]
+converged_force = 0.01
+max_iterations = 10000

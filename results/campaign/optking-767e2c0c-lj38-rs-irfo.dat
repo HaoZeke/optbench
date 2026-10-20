@@ -1,0 +1,38 @@
+# counter harness. One force call is one HarnessCounter entry.
+# The initial Hessian is a central difference of the harness gradient on the free atoms.
+# Each displaced gradient is a force call. Later steps use the Bofill update and cost one gradient.
+# The Hessian index is analytic and is not a search call.
+# The legacy mean is the half-even mean of starts at the force stop and under the cap.
+# v2 success also requires Hessian index 1.
+# A curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6).
+# LJ38 removes rigid modes. The Pt island keeps fixed atoms out of the matrix and does not project rigid modes.
+# OptKing's own convergence test is not the stop. The stop is the problem Euclidean force norm.
+# Each worker uses one BLAS thread.
+# OptKing transition-state step RS_I_RFO in Cartesian coordinates. full_hess_every is 0, so the first Hessian is computed and later steps use the Bofill update. The field default of full_hess_every is -1, a model Hessian and no harness Hessian. This revision has no step type named RS_PRFO. The initial Hessian is a central difference of the harness gradient on the free atoms, step 1e-5, and those evaluations are force calls. The stop is the problem Euclidean force norm 0.001. The force-call cap is 10000.
+force_calls 354
+force_calls_min 234
+force_calls_max 986
+force_calls_median 332.5
+nfailed 0
+median 332.5
+code optking
+code_version 0.5.1.dev2+g767e2c0c1
+commit 767e2c0c13ff2b851ac82101ccd5aab9a558a4f1
+algorithm RS_I_RFO
+template optking/lj38-rs-irfo
+problem tsopt/LJ38
+tuning default
+counter harness
+par2_mean 7697.42
+wilson_low 0.55614303699
+wilson_high 0.689145631416
+par2_median 367
+par2_median_low 347
+par2_median_high 396
+v2_nfailed 75
+v2_successes 125
+n 200
+n_cap 0
+n_divergence 0
+n_wrong_stationary 75
+n_crash 0

@@ -1,0 +1,26 @@
+# counter harness. One force call is one getEnergyGradient entry.
+# The potential is the problem potential. A repeated coordinate is cached.
+# The stop is the Euclidean norm of the gradient.
+# v2 success is under the cap, at the force stop, and Hessian index 0.
+# energy and Kabsch RMSD were not applied: the problem file has no energy_tol, rmsd_tol, or per-start reference.
+# Default row. The step is minus dx times the gradient with dx 1e-4, the constructor value. maxstep is off. The stop is the Euclidean norm of the gradient at the problem force norm. The iteration budget is the force-call cap. The same values are used for every start.
+nfailed 100
+code pele
+code_version 0.1.2
+commit b7081b932a060be11342fbe8287ac35da8ada879
+algorithm steepest descent
+template pele/morse-sd
+tuning default
+counter harness
+problem minimization/morse-bulk
+par2_mean 20000
+wilson_low 0
+wilson_high 0.036993498207
+par2_median 20000
+par2_median_low 20000
+par2_median_high 20000
+v2_nfailed 100
+v2_successes 0
+n 100
+energy_min -1396.17265179
+energy_max -1396.09854958

@@ -1,7 +1,7 @@
 {
   "bootstrap_resamples": 2000,
   "bootstrap_seed": 20261015,
-  "note": "Harness counter on optbench.potentials.lennard_jones. A start succeeds when a quenched energy is within energy_above_minimum of the known minimum. The cap is the default SCGO basin-hopping budget.",
+  "note": "Harness counter on optbench.potentials.lennard_jones. A start succeeds when the harness energy is within energy_above_minimum of reference.energy. The cap is the default SCGO basin-hopping budget.",
   "par_factor": 2,
   "problem": "globalopt/lj38",
   "runs": [
@@ -59,18 +59,20 @@
         "energy_tolerance": 0.1,
         "epsilon": 1.0,
         "fmax": 0.05,
+        "judge": "globalopt",
         "move_fraction": 0.3,
         "move_strategy": "random",
         "niter": 131,
         "niter_local_relaxation": 233,
         "optimizer": "FIRE",
         "potential": "lennard-jones",
-        "reference_energy": -173.92842659062762,
+        "reference_energy": -173.928427,
         "seed": 314159,
         "sigma": 1.0,
+        "stop_on_energy": true,
         "symbol": "C",
         "temperature": 1.0,
-        "threshold": -173.92742659062762
+        "threshold": -173.927427
       },
       "partial": false,
       "present_source": true,
@@ -94,18 +96,20 @@
           "energy_tolerance": 0.1,
           "epsilon": 1.0,
           "fmax": 0.05,
+          "judge": "globalopt",
           "move_fraction": 0.3,
           "move_strategy": "random",
           "niter": 131,
           "niter_local_relaxation": 233,
           "optimizer": "FIRE",
           "potential": "lennard-jones",
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "seed": 314159,
           "sigma": 1.0,
+          "stop_on_energy": true,
           "symbol": "C",
           "temperature": 1.0,
-          "threshold": -173.92742659062762
+          "threshold": -173.927427
         }
       },
       "starts": [
@@ -125,10 +129,11 @@
           "force_norm": 0.08808795355580143,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -166.74493491601316,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -154,10 +159,11 @@
           "force_norm": 0.0033204520877302404,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -148.45201913117504,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -183,10 +189,11 @@
           "force_norm": 0.0026847495369807907,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -146.69935003349863,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -212,10 +219,11 @@
           "force_norm": 0.06762795318949576,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -158.91667903593725,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -241,10 +249,11 @@
           "force_norm": 0.0018899848812951345,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -152.4365306147102,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -270,10 +279,11 @@
           "force_norm": 0.0020315669864333172,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -159.19166002006057,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -299,10 +309,11 @@
           "force_norm": 0.0023924588655280634,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -158.1755997251027,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -328,10 +339,11 @@
           "force_norm": 0.06016600378625901,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -167.55817567897012,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -357,10 +369,11 @@
           "force_norm": 0.05189272037338544,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -169.1948409667112,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -386,10 +399,11 @@
           "force_norm": 0.0022766733908770515,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -157.24950940019494,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -415,10 +429,11 @@
           "force_norm": 0.059493739723497724,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -165.05512511019992,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -444,10 +459,11 @@
           "force_norm": 0.0022863120292434536,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -160.9086978728789,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -473,10 +489,11 @@
           "force_norm": 0.11932164716723731,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -159.97585383816593,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -502,10 +519,11 @@
           "force_norm": 0.1457528864458466,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -165.28643602640153,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -531,10 +549,11 @@
           "force_norm": 0.13120110821372022,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -149.54527991332657,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -560,10 +579,11 @@
           "force_norm": 0.09101733755437054,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -157.59715105415634,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -589,10 +609,11 @@
           "force_norm": 0.10391451166132042,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -159.14669291574845,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -618,10 +639,11 @@
           "force_norm": 0.12390084603449221,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -140.23973939310335,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -647,10 +669,11 @@
           "force_norm": 0.0030093126669439073,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -157.45292323500888,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -676,10 +699,11 @@
           "force_norm": 0.13163141858570582,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -166.87900717760868,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -705,10 +729,11 @@
           "force_norm": 0.002923787574881951,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -147.95569421998295,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -734,10 +759,11 @@
           "force_norm": 0.12532580245467403,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -163.58224516442553,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -763,10 +789,11 @@
           "force_norm": 0.10957750382544759,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -165.06668393531066,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -792,10 +819,11 @@
           "force_norm": 0.0026845735998378816,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -166.4863891304521,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -821,10 +849,11 @@
           "force_norm": 0.0024841558849304445,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -154.88073762593737,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -850,10 +879,11 @@
           "force_norm": 0.058901403269170524,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -166.49343309983857,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -879,10 +909,11 @@
           "force_norm": 0.002235655364029732,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -156.66212696938615,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -908,10 +939,11 @@
           "force_norm": 0.09468184427781673,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -160.99939086516207,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -937,10 +969,11 @@
           "force_norm": 0.002486538231614616,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -165.43482462490832,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -966,10 +999,11 @@
           "force_norm": 0.1397515773162467,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -162.29824784768869,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -995,10 +1029,11 @@
           "force_norm": 0.06911884100823447,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -159.4659411922907,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1024,10 +1059,11 @@
           "force_norm": 0.0022380896119089688,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -164.84880368289072,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1053,10 +1089,11 @@
           "force_norm": 0.0029989427041791994,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -160.85284040353068,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1082,10 +1119,11 @@
           "force_norm": 0.08384416794042124,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -160.79183609109074,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1111,10 +1149,11 @@
           "force_norm": 0.06387280285342743,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -162.12915322977005,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1140,10 +1179,11 @@
           "force_norm": 0.10249073442384381,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -167.2504375188255,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1169,10 +1209,11 @@
           "force_norm": 0.0018801349393616463,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -159.52792222900212,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1198,10 +1239,11 @@
           "force_norm": 0.002266994534193183,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -161.1903684032568,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1227,10 +1269,11 @@
           "force_norm": 0.0028353935119355554,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -151.79490411018838,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1256,10 +1299,11 @@
           "force_norm": 0.002128705523861558,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -161.1741804907423,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1285,10 +1329,11 @@
           "force_norm": 0.12332088378605535,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -165.14320542571778,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1314,10 +1359,11 @@
           "force_norm": 0.12209089068204157,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -156.14545697621247,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1343,10 +1389,11 @@
           "force_norm": 0.10526721160116606,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -163.23302871450028,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1372,10 +1419,11 @@
           "force_norm": 0.002158932542294368,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -147.20866937398705,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1401,10 +1449,11 @@
           "force_norm": 0.0023681731276265876,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -161.7715783871716,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1430,10 +1479,11 @@
           "force_norm": 0.0032408581223566804,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -152.39838467618742,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1459,10 +1509,11 @@
           "force_norm": 0.0024868504393795285,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -142.70783461171823,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1488,10 +1539,11 @@
           "force_norm": 0.0024925840712318134,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -148.50155220133706,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1517,10 +1569,11 @@
           "force_norm": 0.10091279546353442,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -164.72879927595054,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1546,10 +1599,11 @@
           "force_norm": 0.0022991627952658688,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -165.23011961649678,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1575,10 +1629,11 @@
           "force_norm": 0.0024249715522830177,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -161.3570440411749,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1604,10 +1659,11 @@
           "force_norm": 0.0022041646290773273,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -164.21790218600108,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1633,10 +1689,11 @@
           "force_norm": 0.0025513974768188123,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -161.30188442631112,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1662,10 +1719,11 @@
           "force_norm": 0.0019067462233655257,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -153.57368690655736,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1691,10 +1749,11 @@
           "force_norm": 0.0023770577364031096,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -152.02396532225538,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1720,10 +1779,11 @@
           "force_norm": 0.0018899145067612934,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -155.59822097727462,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1749,10 +1809,11 @@
           "force_norm": 0.002446253268110394,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -167.3286700216727,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1778,10 +1839,11 @@
           "force_norm": 0.002056628686784443,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -156.86047281363943,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1807,10 +1869,11 @@
           "force_norm": 0.0019712673333355233,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -164.38021826522532,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1836,10 +1899,11 @@
           "force_norm": 0.002311794667551441,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -157.84430200218932,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1865,10 +1929,11 @@
           "force_norm": 0.0022751262276045838,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -160.74830617334237,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1894,10 +1959,11 @@
           "force_norm": 0.0023330667158844797,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -150.7063971558693,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1923,10 +1989,11 @@
           "force_norm": 0.0027842762151433225,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -156.93807975693792,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1952,10 +2019,11 @@
           "force_norm": 0.002037589989278604,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -163.5716556304633,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -1981,10 +2049,11 @@
           "force_norm": 0.0019913205738148593,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -158.44647438995548,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2010,10 +2079,11 @@
           "force_norm": 0.09750277051864874,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -165.52915719869975,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2039,10 +2109,11 @@
           "force_norm": 0.0017550199979660727,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -167.1750557583416,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2068,10 +2139,11 @@
           "force_norm": 0.1239324423476775,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -160.06225578098042,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2097,10 +2169,11 @@
           "force_norm": 0.002131016504899249,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -147.1991270622232,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2126,10 +2199,11 @@
           "force_norm": 0.1438350577764728,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -154.42060364196692,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2155,10 +2229,11 @@
           "force_norm": 0.054928151329685246,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -151.75894696231856,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2184,10 +2259,11 @@
           "force_norm": 0.002340850626800022,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -163.60134492374502,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2213,10 +2289,11 @@
           "force_norm": 0.002175303828435016,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -167.64645064671333,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2242,10 +2319,11 @@
           "force_norm": 0.0027127253974821206,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -156.17127982436165,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2271,10 +2349,11 @@
           "force_norm": 0.0019084361506189536,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -162.6847970381707,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2300,10 +2379,11 @@
           "force_norm": 0.002260237916691529,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -162.19969134938498,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2329,10 +2409,11 @@
           "force_norm": 0.08337867421683333,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -158.47373011554515,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2358,10 +2439,11 @@
           "force_norm": 0.002547042716545605,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -152.91165309011487,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2387,10 +2469,11 @@
           "force_norm": 0.0018258122542237647,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -161.03137483421506,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2416,10 +2499,11 @@
           "force_norm": 0.002720615930329095,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -157.83265502754278,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2445,10 +2529,11 @@
           "force_norm": 0.002404797463897486,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -157.8984424217443,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2474,10 +2559,11 @@
           "force_norm": 0.001912764519337067,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -153.9671527461332,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2503,10 +2589,11 @@
           "force_norm": 0.0028460881376722352,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -167.80682327392446,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2532,10 +2619,11 @@
           "force_norm": 0.002518687866348841,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -162.51135330033375,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2561,10 +2649,11 @@
           "force_norm": 0.0020933483683633443,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -151.57974225611497,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2590,10 +2679,11 @@
           "force_norm": 0.00249468752497614,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -159.51878126464158,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2619,10 +2709,11 @@
           "force_norm": 0.07976964861466129,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -162.10307231564457,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2648,10 +2739,11 @@
           "force_norm": 0.0029915232249635077,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -140.24226775957334,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2677,10 +2769,11 @@
           "force_norm": 0.0031755581506624697,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -156.81608106803066,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2706,10 +2799,11 @@
           "force_norm": 0.0020661706861767304,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -158.49009314728698,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2735,10 +2829,11 @@
           "force_norm": 0.0023910277328500727,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -153.6605976087128,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2764,10 +2859,11 @@
           "force_norm": 0.0024261809193460715,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -166.64704701831687,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2793,10 +2889,11 @@
           "force_norm": 0.11186264422466259,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -165.38421314520488,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2822,10 +2919,11 @@
           "force_norm": 0.08136304815407804,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -164.87461849124813,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2851,10 +2949,11 @@
           "force_norm": 0.0032023804198302044,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -160.87788687454432,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2880,10 +2979,11 @@
           "force_norm": 0.0021217539812096054,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -166.35860131901924,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2909,10 +3009,11 @@
           "force_norm": 0.00194384652493791,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -153.48284409194434,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2938,10 +3039,11 @@
           "force_norm": 0.002314190674358011,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -163.41070872621955,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2967,10 +3069,11 @@
           "force_norm": 0.12584647606912078,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -141.48558780468372,
           "schema": "optbench.start/v2",
           "seed": "314159",
@@ -2996,10 +3099,11 @@
           "force_norm": 0.06588308795936812,
           "hessian_index": null,
           "problem": "globalopt/lj38",
+          "quenched": true,
           "reasons": [
             "energy"
           ],
-          "reference_energy": -173.92842659062762,
+          "reference_energy": -173.928427,
           "scgo_returned_energy": -149.21366936536347,
           "schema": "optbench.start/v2",
           "seed": "314159",

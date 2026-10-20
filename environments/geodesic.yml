@@ -1,0 +1,14 @@
+# geodesic-interpolate is not a conda-forge package. This file does not
+# select a build string. The initialiser the band benchmarks run is the
+# source pin in codes/registry.toml under id geodesic:
+#   repository = https://github.com/virtualzx-nad/geodesic-interpolate
+#   ref = main
+#   commit = 476aa041f562d37d5fb4121b86817a52d75e4c5d
+#   version 1.0.0
+# asv has one environment_type, so this yml is not bound to a class.
+# The campaign group installs that commit.
+name: geodesic
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
