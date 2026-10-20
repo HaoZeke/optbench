@@ -1,0 +1,29 @@
+id = "eon-r2549/aladatom-pr-langevin"
+engine = "eon"
+problem = "accelerated-md/aladatom"
+code = "EON (SVN r2549)"
+code_version = "r2549"
+commit = "r2549"
+algorithm = "parallel replica"
+reducer = "harness"
+tuning = "stock"
+failure_cap = 1000000
+kind = "prd"
+kernel = "eam"
+note = '''
+Stock unpatched EON r2549 parallel replica on the archived aluminum adatom reactant. The thermostat is the archive name langevin_0.001. Temperature, timestep, dynamics time, dephase, state check, post-transition time, and the conjugate-gradient force stop stay at the r2549 library defaults. The geometry is the archived reactant and the seed is 1. The run is not tuned toward the archived rate.
+'''
+seeds = [1]
+starts = ["reactant"]
+asv_full = false
+budget_seconds = 1200
+
+[ini.Main]
+job = "parallel_replica"
+
+[ini.Potential]
+potential = "eam_al"
+
+[ini.Dynamics]
+thermostat = "langevin"
+langevin_friction = 0.001

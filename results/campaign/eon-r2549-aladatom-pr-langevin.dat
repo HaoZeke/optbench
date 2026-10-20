@@ -1,0 +1,12 @@
+# Stock unpatched EON r2549. Langevin friction 0.001 on the archived reactant, seed 1, library defaults. Harness force calls 3191. transition_found 0, so this run has no true_rate. The archived true_rate is 2.542941e8. The gap is the finding.
+call_unit total
+nfailed 1
+code EON (SVN r2549)
+code_version r2549
+commit r2549
+algorithm parallel replica
+template eon-r2549/aladatom-pr-langevin
+problem accelerated-md/aladatom
+reducer harness
+counter harness
+count_keys HarnessCounter

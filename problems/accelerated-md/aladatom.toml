@@ -5,6 +5,9 @@ problem = "aladatom"
 contract = "partial"
 entry_count = 1
 
+[sample]
+starts = 1
+
 [metrics]
 required = ["percent_uncertainty", "thermostat", "true_rate", "uncertainty"]
 

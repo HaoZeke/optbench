@@ -82,6 +82,22 @@ FAMILIES = {
         "token": "4d8b34ba",
         "cache": "4d8b34ba",
     },
+    "r2549": {
+        "prefix": "eon-r2549/",
+        "env": "EON_R2549_CLIENT",
+        "default": Path("/tmp/eon-hg/client/eonclient"),
+        "flag": "-v",
+        "token": "r2549",
+        "cache": "r2549-unpatched",
+    },
+    "develop": {
+        "prefix": "eon-develop/",
+        "env": "EON_DEVELOP_CLIENT",
+        "default": Path("/tmp/eon-develop-prefix/bin/eonclient"),
+        "flag": "-v",
+        "token": "3.6.0",
+        "cache": "develop-a7aa574",
+    },
 }
 
 

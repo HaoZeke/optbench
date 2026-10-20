@@ -359,3 +359,5 @@ Sella 2.6.0 with the archived trust-region numbers (eta, gamma, delta0, rho, sig
 - tsopt/pt-island/sella
 
 Rows with no exact-setup campaign stay not rerun and are not given a cause. AKMC on aladatom is a different method from Langevin parallel replica; the ratios above are that comparison, and the archive rows stay not rerun.
+
+EON and eOn are different codes. The archived aladatom true_rate 2.542941e8 stays the paper row. Stock untuned parallel replica, Langevin friction 0.001, the archived reactant, seed 1, and each code's library defaults (300 K, 1 fs, dynamics time 1000 fs, dephase 1000 fs, state check 1000 fs, conjugate-gradient force stop 0.01) scores as follows. EON (SVN r2549) used 3191 harness force calls and found no transition. eOn (develop a7aa57472fb7) used 2141 harness force calls and found no transition. Neither run emits a true_rate. The harness ranks both beside the archive and records the miss as wrong_stationary. The gap is the finding.

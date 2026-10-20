@@ -1,0 +1,29 @@
+id = "eon-develop/aladatom-pr-langevin"
+engine = "eon"
+problem = "accelerated-md/aladatom"
+code = "eOn (develop a7aa57472fb7)"
+code_version = "3.6.0"
+commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+algorithm = "parallel replica"
+reducer = "harness"
+tuning = "stock"
+failure_cap = 1000000
+kind = "prd"
+kernel = "eam"
+note = '''
+Stock eOn develop a7aa57472fb7 parallel replica on the same archived aluminum adatom reactant, seed, thermostat, and library defaults as EON r2549. eOn is not EON. The thermostat is langevin_0.001. Temperature, timestep, dynamics time, dephase, state check, post-transition time, and the conjugate-gradient force stop stay at the library defaults. The run is not tuned toward the archived rate.
+'''
+seeds = [1]
+starts = ["reactant"]
+asv_full = false
+budget_seconds = 1200
+
+[ini.Main]
+job = "parallel_replica"
+
+[ini.Potential]
+potential = "eam_al"
+
+[ini.Dynamics]
+thermostat = "langevin"
+langevin_friction = 0.001

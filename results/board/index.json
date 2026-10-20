@@ -3351,7 +3351,7 @@
         "divergence": 0,
         "wrong_stationary": 0
       },
-      "full_n": null,
+      "full_n": 1,
       "history": false,
       "max_calls": 2409.0,
       "mean_calls": 2409.0,
@@ -3396,7 +3396,7 @@
         "divergence": 0,
         "wrong_stationary": 0
       },
-      "full_n": null,
+      "full_n": 1,
       "history": false,
       "max_calls": 6313.0,
       "mean_calls": 6313.0,
@@ -3441,7 +3441,7 @@
         "divergence": 0,
         "wrong_stationary": 0
       },
-      "full_n": null,
+      "full_n": 1,
       "history": false,
       "max_calls": 3411.0,
       "mean_calls": 3411.0,
@@ -3486,7 +3486,7 @@
         "divergence": 0,
         "wrong_stationary": 0
       },
-      "full_n": null,
+      "full_n": 1,
       "history": false,
       "max_calls": 6377.0,
       "mean_calls": 6377.0,
@@ -9097,7 +9097,7 @@
   ],
   "problems": {
     "accelerated-md/aladatom": {
-      "full_n": null,
+      "full_n": 1,
       "history": [],
       "id": "accelerated-md/aladatom",
       "not_comparable": [],
@@ -9119,7 +9119,7 @@
             "divergence": 0,
             "wrong_stationary": 0
           },
-          "full_n": null,
+          "full_n": 1,
           "history": false,
           "max_calls": 2409.0,
           "mean_calls": 2409.0,
@@ -9164,7 +9164,7 @@
             "divergence": 0,
             "wrong_stationary": 0
           },
-          "full_n": null,
+          "full_n": 1,
           "history": false,
           "max_calls": 6313.0,
           "mean_calls": 6313.0,
@@ -9209,7 +9209,7 @@
             "divergence": 0,
             "wrong_stationary": 0
           },
-          "full_n": null,
+          "full_n": 1,
           "history": false,
           "max_calls": 3411.0,
           "mean_calls": 3411.0,
@@ -9254,7 +9254,7 @@
             "divergence": 0,
             "wrong_stationary": 0
           },
-          "full_n": null,
+          "full_n": 1,
           "history": false,
           "max_calls": 6377.0,
           "mean_calls": 6377.0,
@@ -9283,7 +9283,99 @@
           "wilson_low": 0.20654931437723745
         }
       ],
-      "ranked": [],
+      "profile_gap": "No performance profile. One start has no finite cost.",
+      "ranked": [
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": 1000000,
+          "code": "eOn (develop a7aa57472fb7)",
+          "code_version": "3.6.0",
+          "commit": "a7aa57472fb7d823953fd36b78cd755fa4842d30",
+          "comparable": true,
+          "counter": "harness",
+          "current": true,
+          "entry": "eon-develop-aladatom-pr-langevin",
+          "failures": {
+            "cap": 0,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 1
+          },
+          "full_n": 1,
+          "history": false,
+          "max_calls": 2141.0,
+          "mean_calls": 2141.0,
+          "mean_per_image": null,
+          "median": 2000000.0,
+          "median_calls": 2141.0,
+          "median_high": 2000000.0,
+          "median_low": 2000000.0,
+          "median_per_image": null,
+          "min_calls": 2141.0,
+          "n": 1,
+          "nfailed": 1,
+          "note": "starts",
+          "par2_mean": 2000000.0,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/eon-develop-aladatom-pr-langevin.dat",
+          "problem": "accelerated-md/aladatom",
+          "registry_match": true,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 0.0,
+          "template": "eon-develop/aladatom-pr-langevin",
+          "tuning": "stock",
+          "wilson_high": 0.7934506856227626,
+          "wilson_low": 0.0
+        },
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": 1000000,
+          "code": "EON (SVN r2549)",
+          "code_version": "r2549",
+          "commit": "r2549",
+          "comparable": true,
+          "counter": "harness",
+          "current": true,
+          "entry": "eon-r2549-aladatom-pr-langevin",
+          "failures": {
+            "cap": 0,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 1
+          },
+          "full_n": 1,
+          "history": false,
+          "max_calls": 3191.0,
+          "mean_calls": 3191.0,
+          "mean_per_image": null,
+          "median": 2000000.0,
+          "median_calls": 3191.0,
+          "median_high": 2000000.0,
+          "median_low": 2000000.0,
+          "median_per_image": null,
+          "min_calls": 3191.0,
+          "n": 1,
+          "nfailed": 1,
+          "note": "starts",
+          "par2_mean": 2000000.0,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/eon-r2549-aladatom-pr-langevin.dat",
+          "problem": "accelerated-md/aladatom",
+          "registry_match": true,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 0.0,
+          "template": "eon-r2549/aladatom-pr-langevin",
+          "tuning": "stock",
+          "wilson_high": 0.7934506856227626,
+          "wilson_low": 0.0
+        }
+      ],
       "title": "aladatom"
     },
     "double-ended-saddle-search/lj38": {
@@ -42122,7 +42214,7 @@
       "title": "pt-island"
     }
   },
-  "ranked_count": 439,
+  "ranked_count": 441,
   "schema": "optbench.board/v1",
   "unmapped": [
     {
