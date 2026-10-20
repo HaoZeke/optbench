@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 30 not reproduced, 75 not rerun. 151 archive rows.
+47 reproduced, 29 not reproduced, 75 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -64,7 +64,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj98/gmin-nosym | — | — | not rerun |
 | lj98/gmin-symmetrise | — | — | not rerun |
 | tip4p10/gmin | — | — | not rerun |
-| tip4p10/gmin-tbp | force_calls 16099, force_calls_median 11387, force_calls_min 121, force_calls_max 145120 | 315610, 157398, 168, 2.13634e+06 | not reproduced; gmin_stock |
+| tip4p10/gmin-tbp | force_calls 16099, force_calls_median 11387, force_calls_min 121, force_calls_max 145120 | 16548, 11980, 127, 154327 | GMIN 2014 |
 | tip4p15/gmin | — | — | not rerun |
 | tip4p15/gmin-tbp | — | — | not rerun |
 | tip4p20/gmin | — | — | not rerun |
@@ -268,12 +268,6 @@ archive run.sh divides coordinates by r0 = 2.897 and scales rho and rcut into th
 The archived driver is the dangling path bin/js850/globalopt.py. The harness uses pele LJCluster defaults (temperature 1, step 0.6, LBFGS memory 4) on unshifted cutoff 40. The mean is 688720 against 521595.
 
 - globalopt/lj38/pele-basinhopping
-
-### gmin_stock
-
-Latest GMIN df8da599267534fbe43a250e578f7396a7946311, unmodified, stock basin-hopping (temperature 0.3, step 0.3, temperature basin-paving off). The problem is TIP4P n=10 with the archive convergence, TARGET -391.0233 and EDIFF 1e-3, on the archived 10000 angle-axis starts. The binary is the project's gfortran Release build of svn.tar.bz2 sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. Successful NPCALL sits far above the 2014 linear temperature basin-paving mean, and the failure count is outside the Wilson interval. The ranked harness row is gmin/tip4p10-stock. The MC ceiling that was run is 20000 steps.
-
-- globalopt/tip4p10/gmin-tbp
 
 ### htst_al
 
