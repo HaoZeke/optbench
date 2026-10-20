@@ -2,7 +2,33 @@
   "full_n": 500,
   "history": [],
   "id": "globalopt/tip4p15",
-  "not_comparable": [
+  "not_comparable": [],
+  "partial": [],
+  "profile": {
+    "area_log10": {
+      "gmin/tip4p15-tbp df8da5992675 default campaign df8da59": 1.2041199826559248
+    },
+    "rho": {
+      "gmin/tip4p15-tbp df8da5992675 default campaign df8da59": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "solved": {
+      "gmin/tip4p15-tbp df8da5992675 default campaign df8da59": 1.0
+    },
+    "taus": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ]
+  },
+  "ranked": [
     {
       "asv_commit": "",
       "call_unit": "total",
@@ -10,9 +36,9 @@
       "code": "GMIN",
       "code_version": "df8da5992675",
       "commit": "df8da599267534fbe43a250e578f7396a7946311",
-      "comparable": false,
-      "counter": "gmin",
-      "current": false,
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
       "entry": "gmin-df8da5992675-tip4p15-tbp",
       "failures": {
         "cap": 0,
@@ -47,55 +73,6 @@
       "tuning": "default",
       "wilson_high": 1.0,
       "wilson_low": 0.9923756595384479
-    }
-  ],
-  "partial": [],
-  "profile_gap": "No performance profile. One start has no finite cost.",
-  "ranked": [
-    {
-      "asv_commit": "",
-      "call_unit": "total",
-      "cap": 10000000,
-      "code": "GMIN",
-      "code_version": "df8da5992675",
-      "commit": "df8da599267534fbe43a250e578f7396a7946311",
-      "comparable": true,
-      "counter": "harness",
-      "current": true,
-      "entry": "gmin-df8da5992675-tip4p15-stock",
-      "failures": {
-        "cap": 3,
-        "crash": 0,
-        "divergence": 0,
-        "wrong_stationary": 0
-      },
-      "full_n": 500,
-      "history": false,
-      "max_calls": 5453325.0,
-      "mean_calls": 983479.688,
-      "mean_per_image": null,
-      "median": 691364.0,
-      "median_calls": 691364.0,
-      "median_high": 762059.0,
-      "median_low": 611828.6124999999,
-      "median_per_image": null,
-      "min_calls": 12190.0,
-      "n": 500,
-      "nfailed": 3,
-      "note": "starts.jsonl",
-      "par2_mean": 1071345.044,
-      "partial": false,
-      "partial_reason": "",
-      "path": "results/campaign/gmin-df8da5992675-tip4p15-stock.dat",
-      "problem": "globalopt/tip4p15",
-      "registry_match": false,
-      "scored": true,
-      "source": "campaign",
-      "success_rate": 0.994,
-      "template": "gmin/tip4p15-stock",
-      "tuning": "stock",
-      "wilson_high": 0.9979574037280398,
-      "wilson_low": 0.9825097478959467
     }
   ],
   "title": "tip4p15"

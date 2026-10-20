@@ -9,4 +9,5 @@ commit df8da599267534fbe43a250e578f7396a7946311
 algorithm linear temperature basin-paving
 template gmin/tip4p15-tbp
 problem globalopt/tip4p15
-counter gmin
+tuning default
+counter harness

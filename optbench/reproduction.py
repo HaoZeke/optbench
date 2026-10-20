@@ -198,7 +198,7 @@ MATCHES: list[dict] = [
     {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm0", "template": "softsaddle/saddle-lanczos-sm0", "branch": "cells/softsaddle/ts-reps", "path": "results/campaign/softsaddle-2019.04-saddle-lanczos-sm0.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
     # globalopt and htst and aladatom rates
     {"key": "globalopt/lj38/eon-basinhopping", "template": "eon-client/bh-lj38", "branch": "entries/eon-svn-lane-a", "path": "results/campaign/eon-client-bh-lj38.dat"},
-    {"key": "globalopt/tip4p15/gmin-tbp", "template": "gmin/tip4p15-stock", "branch": "repro/globalopt-tip4p15-gmin-tbp", "path": "results/campaign/gmin-df8da5992675-tip4p15-stock.dat", "cause": "gmin_stock"},
+    {"key": "globalopt/tip4p15/gmin-tbp", "template": "gmin/tip4p15-tbp", "branch": "repro/globalopt-tip4p15-gmin-tbp", "path": "results/campaign/gmin-df8da5992675-tip4p15-tbp.dat"},
     {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "branch": "cells/pele/go", "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat", "cause": "pele_bh_defaults"},
     {"key": "hTST/Al/eon-dimer-cg", "template": "eon-svn/htst-al-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-al-dimer.dat", "kind": "htst", "cause": "htst_al"},
     {"key": "hTST/Pt/eon-dimer-cg", "template": "eon-svn/htst-pt-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-pt-dimer.dat", "kind": "htst"},
@@ -290,14 +290,6 @@ CAUSE_TEXT = {
         "The harness records 7 failures: 5 RuntimeError LineSearch failed (ASE 3.8.2 already raises that; ASE 3.6.0 is not on PyPI) "
         "and 2 Hessian index 1 after the Euclidean force norm is under 0.01. "
         "The Wilson interval on 0 failures out of 1000 is about 0 to 3.83."
-    ),
-    "gmin_stock": (
-        "Latest public GMIN, SVNREV df8da5992675, unmodified. "
-        "Stock TIP4P basin-hopping from the GMIN manual: STEP 0.6 0.0 0.9 200, temperature 5, 50000 steps, "
-        "sloppy RMS 0.01, tight RMS 0.0001, MAXIT 1000. "
-        "The archived starts and the archived stop are unchanged: NTIP 4, target -628.3734, EDIFF 0.001, RANSEED 100. "
-        "The success-only mean is 957088 against 625362. Three starts exhaust the stock step budget. "
-        "The harness score is results/campaign/gmin-df8da5992675-tip4p15-stock.dat, template gmin/tip4p15-stock."
     ),
     "akmc_vs_langevin": (
         "The archive rows are Langevin parallel replica. The harness rows are AKMC. "

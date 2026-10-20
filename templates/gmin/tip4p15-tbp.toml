@@ -6,8 +6,8 @@ code_version = "df8da5992675"
 commit = "df8da599267534fbe43a250e578f7396a7946311"
 algorithm = "linear temperature basin-paving"
 tuning = "default"
-paper_baseline = false
+paper_baseline = true
 failure_cap = 10000000
 note = '''
-TIP4P N=15 linear temperature basin-paving from the archived GMIN data file. NTIP 4, CENTRE, FIXBOTH, SAVE 1, RANSEED 100 on every start, RADIUS 10, MAXBFGS 0.5, MAXERISE 1e-4, SLOPPYCONV 1e-3, TIGHTCONV 1e-3, EDIFF 1e-3, TARGET -628.3734, STEPS 10000000, TBP -628.4 0.5 200 0.003 0.001 20, STEP 0 0 1.44, TEMPERATURE 3.18. The 2014 READI reads a float and truncates, so MAXIT 1.D4 1.D4 and STEPS 1.D7 are 10000 and 10000000. This source reads those keywords as integers, and the run used those same integers. A start succeeds when GMIN prints "Target hit after". The scored count is that line's function-call field. Failures stay out of the mean, median, minimum, and maximum, and the mean uses Python half-even rounding. Wales source tarball sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31, SVNREV df8da599267534fbe43a250e578f7396a7946311. Serial gfortran 13.3, WITH_MPI off and WITH_MYBLAS off.
+Latest public GMIN, the Wales svn.tar.bz2 at SVNREV df8da599267534fbe43a250e578f7396a7946311, sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. Unmodified serial build. Published gmin-tbp keywords on the archived 500 rigid-body starts and the archived stop: NTIP 4, CENTRE, EDIFF 1.D-3, SLOPPYCONV 1.D-3, TIGHTCONV 1.D-3, MAXIT 10000 10000, FIXBOTH, RANSEED 100, RADIUS 1.D1, MAXBFGS 5.D-1, MAXERISE 1.D-4, TARGET -628.3734, SAVE 1, STEPS 10000000, TBP -628.4 0.5 200 0.003 0.001 20, STEP 0.D0 0.D0 1.44D0, TEMPERATURE 3.18D0. Keywords absent from that set stay at this release's defaults. The 2014 reader accepts MAXIT 1.D4 and STEPS 1.D7; this reader needs those same values as integers. The count is GMIN function calls at "Target hit after".
 '''
