@@ -111,12 +111,12 @@ It does not run a campaign.
    <td data-code="Sella" data-template="sella/de-lj38-2ts-tuned" data-par2="30105.9"><span class="bench-score">30105.9</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">sella/de-lj38-2ts-tuned</a></td>
    <td data-code="pysisyphus">—</td>
    <td data-code="artn">—</td>
-   <td data-code="compass" data-template="compass/sqnm" data-par2="100831"><span class="bench-score">100831</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">compass/sqnm</a></td>
+   <td data-code="compass" data-template="compass/sqnm" data-par2="17529.6"><span class="bench-score">17529.6</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
    <td data-code="optim">—</td>
    <td data-code="pele" data-template="pele/lj38-2ts" data-par2="34603.2"><span class="bench-score">34603.2</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">pele/lj38-2ts</a></td>
-   <td data-code="tsase" data-template="tsase/ci-neb" data-par2="451753"><span class="bench-score">451753</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">tsase/ci-neb</a></td>
+   <td data-code="tsase" data-template="tsase/ci-neb" data-par2="367466"><span class="bench-score">367466</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">tsase/ci-neb</a></td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island">
    <th scope="row"><a href="generated/suites/double-ended-saddle-search.html#pt-island">pt-island</a></th>

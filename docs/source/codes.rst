@@ -749,10 +749,10 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">tsase/ci-neb</td>
    <td data-field="version">tsase 1.0</td>
    <td data-field="commit">98aac60b5d99</td>
-   <td data-field="par2_mean">451753</td>
-   <td data-field="mean_calls">9690.35</td>
-   <td data-field="median_calls">10000</td>
-   <td data-field="failures">crash 0, divergence 1, cap 43, wrong_stationary 2</td>
+   <td data-field="par2_mean">367466</td>
+   <td data-field="mean_calls">132326</td>
+   <td data-field="median_calls">111033</td>
+   <td data-field="failures">crash 0, divergence 1, cap 18, wrong_stationary 17</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-template="tsase/ci-neb">
@@ -971,10 +971,10 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">compass/sqnm</td>
    <td data-field="version">compass 1.0.0</td>
    <td data-field="commit">22da7bd5f69c</td>
-   <td data-field="par2_mean">100831</td>
-   <td data-field="mean_calls">4586.12</td>
+   <td data-field="par2_mean">17529.6</td>
+   <td data-field="mean_calls">7755.33</td>
    <td data-field="median_calls">4031</td>
-   <td data-field="failures">crash 0, divergence 0, cap 9, wrong_stationary 1</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 1</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-template="compass/sqnm">
