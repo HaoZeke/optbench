@@ -93,12 +93,12 @@
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation">
    <th scope="row"><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation">lj38_2ts_separation</a></th>
-   <td data-code="eOn" data-template="eon-client/de-2ts-lanczos-improved" data-par2="520.333"><span class="bench-score">520.333</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">eon-client/de-2ts-lanczos-improved</a></td>
+   <td data-code="eOn" data-template="eon-client/de-2ts-lanczos-improved" data-par2="536.667"><span class="bench-score">536.667</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">eon-client/de-2ts-lanczos-improved</a></td>
    <td data-code="Eon svn" data-template="eon-svn/de-2ts-lanczos-improved" data-par2="502.784"><span class="bench-score">502.784</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">eon-svn/de-2ts-lanczos-improved</a></td>
    <td data-code="rgmin">—</td>
-   <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="168024"><span class="bench-score">168024</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
-   <td data-code="ASE" data-template="ase/de-lj38-2ts-tuned" data-par2="442917"><span class="bench-score">442917</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">ase/de-lj38-2ts-tuned</a></td>
-   <td data-code="Sella" data-template="sella/de-lj38-2ts-tuned" data-par2="30105.9"><span class="bench-score">30105.9</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">sella/de-lj38-2ts-tuned</a></td>
+   <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb" data-par2="266216"><span class="bench-score">266216</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">rgsaddle/ew-ci-neb</a></td>
+   <td data-code="ASE" data-template="ase/de-lj38-2ts-default" data-par2="444244"><span class="bench-score">444244</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">ase/de-lj38-2ts-default</a></td>
+   <td data-code="Sella" data-template="sella/de-lj38-2ts-default" data-par2="31447.3"><span class="bench-score">31447.3</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">sella/de-lj38-2ts-default</a></td>
    <td data-code="pysisyphus">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass" data-template="compass/sqnm" data-par2="100831"><span class="bench-score">100831</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">compass/sqnm</a></td>
