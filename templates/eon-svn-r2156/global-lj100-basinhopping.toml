@@ -1,0 +1,34 @@
+id = "eon-svn-r2156/global-lj100-basinhopping"
+engine = "eon"
+problem = "globalopt/lj100-binary"
+code = "Eon svn"
+code_version = "r2156"
+commit = "r2156"
+entry = "archive/entries/globalopt/lj100-binary/eon-basinhopping"
+algorithm = "basin hopping"
+note = '''
+Archived globalopt/lj100-binary/eon-basinhopping config.ini. A later duplicate key replaces the earlier one. potential is lammps. The pair style is the archived in.lammps, not an ext_pot harness. report.sh writes min, max, and average energy. It does not write force calls. The client pin is r2156. The archived-versus-rerun table is docs/eon-svn-paper.md.
+'''
+
+[ini.Main]
+job = "basin_hopping"
+quiet = true
+write_log = false
+temperature = 14000
+
+[ini.Potential]
+potential = "lammps"
+lammps_logging = false
+
+[ini."Basin Hopping"]
+steps = 60000
+random_structure = false
+max_displacement = 0.3
+significant_structure = true
+displacement_distribution = "gaussian"
+swap_probability = 0.0
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+converged_force = 0.001
+max_iterations = 10000

@@ -205,6 +205,72 @@ The number is written only after the run finishes under the problem rule.
    <td>r2549</td>
    <td><a href="https://theory.cm.utexas.edu/svn/eon">https://theory.cm.utexas.edu/svn/eon</a></td>
    </tr>
+   <tr>
+   <td>2014 paper client</td>
+   <td>r2025</td>
+   <td>r2025</td>
+   <td><a href="https://theory.cm.utexas.edu/svn/eon">https://theory.cm.utexas.edu/svn/eon</a></td>
+   </tr>
+   <tr>
+   <td>2014 paper client</td>
+   <td>r2030</td>
+   <td>r2030</td>
+   <td><a href="https://theory.cm.utexas.edu/svn/eon">https://theory.cm.utexas.edu/svn/eon</a></td>
+   </tr>
+   <tr>
+   <td>2014 paper client</td>
+   <td>r2090</td>
+   <td>r2090</td>
+   <td><a href="https://theory.cm.utexas.edu/svn/eon">https://theory.cm.utexas.edu/svn/eon</a></td>
+   </tr>
+   <tr>
+   <td>2014 paper client</td>
+   <td>r2091</td>
+   <td>r2091</td>
+   <td><a href="https://theory.cm.utexas.edu/svn/eon">https://theory.cm.utexas.edu/svn/eon</a></td>
+   </tr>
+   <tr>
+   <td>2014 paper client</td>
+   <td>r2156</td>
+   <td>r2156</td>
+   <td><a href="https://theory.cm.utexas.edu/svn/eon">https://theory.cm.utexas.edu/svn/eon</a></td>
+   </tr>
+   <tr>
+   <td>2014 paper client</td>
+   <td>r2158</td>
+   <td>r2158</td>
+   <td><a href="https://theory.cm.utexas.edu/svn/eon">https://theory.cm.utexas.edu/svn/eon</a></td>
+   </tr>
+   <tr>
+   <td>2014 paper client</td>
+   <td>r2159</td>
+   <td>r2159</td>
+   <td><a href="https://theory.cm.utexas.edu/svn/eon">https://theory.cm.utexas.edu/svn/eon</a></td>
+   </tr>
+   <tr>
+   <td>2014 paper client</td>
+   <td>r2169</td>
+   <td>r2169</td>
+   <td><a href="https://theory.cm.utexas.edu/svn/eon">https://theory.cm.utexas.edu/svn/eon</a></td>
+   </tr>
+   <tr>
+   <td>2014 paper client</td>
+   <td>r2204</td>
+   <td>r2204</td>
+   <td><a href="https://theory.cm.utexas.edu/svn/eon">https://theory.cm.utexas.edu/svn/eon</a></td>
+   </tr>
+   <tr>
+   <td>2014 paper client</td>
+   <td>r2205</td>
+   <td>r2205</td>
+   <td><a href="https://theory.cm.utexas.edu/svn/eon">https://theory.cm.utexas.edu/svn/eon</a></td>
+   </tr>
+   <tr>
+   <td>2014 paper client</td>
+   <td>r2222</td>
+   <td>r2222</td>
+   <td><a href="https://theory.cm.utexas.edu/svn/eon">https://theory.cm.utexas.edu/svn/eon</a></td>
+   </tr>
    </tbody></table></div>
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>

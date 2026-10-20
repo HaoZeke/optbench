@@ -1,0 +1,31 @@
+id = "eon-svn-r2159/global-lj38-basinhopping"
+engine = "eon"
+problem = "globalopt/lj38"
+code = "Eon svn"
+code_version = "r2159"
+commit = "r2159"
+entry = "archive/entries/globalopt/lj38/eon-basinhopping"
+algorithm = "basin hopping"
+note = '''
+Archived globalopt/lj38/eon-basinhopping config.ini. A later duplicate key replaces the earlier one. potential is lammps. The pair style is the archived in.lammps, not an ext_pot harness. report.sh averages every total_force_calls. It does not write nfailed. The client pin is r2159. The archived-versus-rerun table is docs/eon-svn-paper.md.
+'''
+
+[ini.Main]
+job = "basin_hopping"
+temperature = 8000
+random_seed = 314159
+
+[ini.Potential]
+potential = "lammps"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+converged_force = 0.001
+max_iterations = 1000
+
+[ini."Basin Hopping"]
+steps = 10000000
+displacement = 0.5
+adjust_displacement = true
+target_ratio = 0.3
+stop_energy = -173.927427

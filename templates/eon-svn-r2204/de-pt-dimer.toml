@@ -1,0 +1,32 @@
+id = "eon-svn-r2204/de-pt-dimer"
+engine = "eon"
+problem = "double-ended-saddle-search/pt-island"
+code = "Eon svn"
+code_version = "r2204"
+commit = "r2204"
+entry = "archive/entries/double-ended-saddle-search/pt-island/eon-dimer"
+algorithm = "dimer"
+failure_cap = 3000
+note = '''
+Archived double-ended-saddle-search/pt-island/eon-dimer config.ini. A later duplicate key replaces the earlier one. potential is the built-in morse_pt potential. report.sh keeps total_force_calls under 3000 in the mean. The client pin is r2204. The archived-versus-rerun table is docs/eon-svn-paper.md.
+'''
+
+[ini.Main]
+job = "saddle_search"
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+converged_force = 0.001
+max_iterations = 1000
+
+[ini."Saddle Search"]
+max_iterations = 1000
+min_mode_method = "dimer"
+max_energy = 1e9
+
+[ini.Dimer]
+converged_angle = 5.0
+rotations_max = 10

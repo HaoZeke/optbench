@@ -1,0 +1,34 @@
+id = "eon-svn-r2169/de-lj38-lanczos-improved"
+engine = "eon"
+problem = "double-ended-saddle-search/lj38"
+code = "Eon svn"
+code_version = "r2169"
+commit = "r2169"
+entry = "archive/entries/double-ended-saddle-search/lj38/eon-lanczos-improved"
+algorithm = "Lanczos quit_early"
+failure_cap = 3000
+note = '''
+Archived double-ended-saddle-search/lj38/eon-lanczos-improved config.ini. A later duplicate key replaces the earlier one. potential is lammps. The pair style is the archived in.lammps, not an ext_pot harness. report.sh keeps total_force_calls under 3000 in the mean. The client pin is r2169. The archived-versus-rerun table is docs/eon-svn-paper.md.
+'''
+
+[ini.Main]
+job = "saddle_search"
+
+[ini.Potential]
+potential = "lammps"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+converged_force = 0.001
+max_iterations = 1000
+max_move = 0.1
+
+[ini."Saddle Search"]
+max_iterations = 1000
+min_mode_method = "lanczos"
+max_energy = 1e9
+
+[ini.Lanczos]
+max_iterations = 20
+tolerance = 0.05
+quit_early = true

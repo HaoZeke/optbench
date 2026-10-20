@@ -1,0 +1,25 @@
+id = "eon-svn-r2204/min-morse-sd-twopoint"
+engine = "eon"
+problem = "minimization/morse-bulk"
+code = "Eon svn"
+code_version = "r2204"
+commit = "r2204"
+entry = "archive/entries/minimization/morse-bulk/eon-sd-twopoint"
+algorithm = "two-point steepest descent"
+failure_cap = 10000
+note = '''
+Archived minimization/morse-bulk/eon-sd-twopoint config.ini. A later duplicate key replaces the earlier one. potential is the built-in morse_pt potential. report.sh keeps total_force_calls under 10000 in the mean. The client pin is r2204. The archived-versus-rerun table is docs/eon-svn-paper.md.
+'''
+
+[ini.Main]
+job = "minimization"
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "sd"
+sd_alpha = 0.04
+sd_twopoint = true
+max_move = 0.2
+converged_force = 1e-3

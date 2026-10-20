@@ -42,7 +42,117 @@ repository = "https://theory.cm.utexas.edu/svn/eon"
 ref = "r2549"
 commit = "r2549"
 committed = "2026-01-23"
-note = "SVN revision 2549, last changed 2026-01-23 by eboniw. eonclient -v prints r2549. The 2014 tables used earlier revisions. Export of those trees is forbidden, so the runs here are r2549. QSC sources are not in the revision. LAMMPS is not linked. Min-mode methods in this revision are dimer and lanczos. One harness uses r2549 Morse::force: cutoff 9.5, pair energy shifted to zero at the cutoff, minimum image on the box diagonal. The lane harness uses unshifted lj/cut and morse/smooth/linear. github.com/henkelmangroup/eon mirrors the same tree. The conda-forge 3.5.0 binary is a different pin. The name is Eon svn so it does not collide with the git eOn pins."
+note = "SVN revision 2549, last changed 2026-01-23 by eboniw. eonclient -v prints r2549. The 2014 tables used earlier revisions. Those trees are the eon-svn-r2025, eon-svn-r2030, eon-svn-r2090, eon-svn-r2156, and eon-svn-r2205 pins, plus the later revisions that match a row the stamp does not. svn export -r REV fails because it follows copy-from history into paths the server rejects. svn list -R -r REV and svn cat -r REV of the pegged URL export the tree. This pin stays the r2549 harness lane. QSC sources are not in the revision. LAMMPS is not linked. Min-mode methods in this revision are dimer and lanczos. One harness uses r2549 Morse::force: cutoff 9.5, pair energy shifted to zero at the cutoff, minimum image on the box diagonal. The lane harness uses unshifted lj/cut and morse/smooth/linear. github.com/henkelmangroup/eon mirrors the same tree. The conda-forge 3.5.0 binary is a different pin. The name is Eon svn so it does not collide with the git eOn pins."
+
+[[code]]
+id = "eon-svn-r2025"
+name = "Eon svn"
+role = "2014 paper client"
+repository = "https://theory.cm.utexas.edu/svn/eon"
+ref = "r2025"
+commit = "r2025"
+committed = "2013-02-05"
+note = "SVN r2025, 2013-02-05, chill. The LJ38 minimization report.sh stamps this revision. The client converges on the maximum atomic force. Steepest descent arrives in r2029. The unset convergence metric becomes the Euclidean norm in r2092. A Fortran build does not match the archived integers. Those rows match r2156, and the templates are templates/eon-svn-r2156. QSC is the svn:external at QSC r20. Lennard-Jones rows use the archived in.lammps lj/cut/opt cutoff 40, except QuickMin, which sets potential lj."
+
+[[code]]
+id = "eon-svn-r2030"
+name = "Eon svn"
+role = "2014 paper client"
+repository = "https://theory.cm.utexas.edu/svn/eon"
+ref = "r2030"
+commit = "r2030"
+committed = "2013-02-07"
+note = "SVN r2030, 2013-02-07, chill. The Morse report.sh stamps this revision. The archived Morse integers match r2204, and the templates are templates/eon-svn-r2204. The potential is the built-in morse_pt potential."
+
+[[code]]
+id = "eon-svn-r2090"
+name = "Eon svn"
+role = "2014 paper client"
+repository = "https://theory.cm.utexas.edu/svn/eon"
+ref = "r2090"
+commit = "r2090"
+committed = "2013-04-03"
+note = "SVN r2090, 2013-04-03 20:48, chill. Pt-heptamer NEB L-BFGS, conjugate gradient, and QuickMin match this revision. FIRE on this revision does not converge. The next commit says the previous one broke FIRE, and FIRE matches r2091. The potential is the built-in morse_pt potential. The mean is force_calls_neb/8 for totals under 10000. Templates are templates/eon-svn-r2090."
+
+[[code]]
+id = "eon-svn-r2091"
+name = "Eon svn"
+role = "2014 paper client"
+repository = "https://theory.cm.utexas.edu/svn/eon"
+ref = "r2091"
+commit = "r2091"
+committed = "2013-04-03"
+note = "SVN r2091, 2013-04-03 21:35, chill, the FIRE fix after r2090. Pt-heptamer FIRE matches this revision. The rerun client is r2090 plus FIRE.cpp and Parameters.cpp from this revision. The potential is the built-in morse_pt potential. The template is templates/eon-svn-r2091/neb-pt-fire."
+
+[[code]]
+id = "eon-svn-r2156"
+name = "Eon svn"
+role = "2014 paper client"
+repository = "https://theory.cm.utexas.edu/svn/eon"
+ref = "r2156"
+commit = "r2156"
+committed = "2013-07-02"
+note = "SVN r2156, 2013-07-02, chill. The double-ended, tsopt, lowest-eigenvector, and basin-hopping report.sh files stamp this revision. The rows that match it are the LJ38 minimizers other than the QuickMin near-miss, the Pt climbing-image bands, the LJ38 double-ended dimer center, and lowest-eigenvector Lanczos. quit_early does not exist yet. Basin hopping has no stop_energy until r2159. Templates are templates/eon-svn-r2156."
+
+[[code]]
+id = "eon-svn-r2158"
+name = "Eon svn"
+role = "2014 paper client"
+repository = "https://theory.cm.utexas.edu/svn/eon"
+ref = "r2158"
+commit = "r2158"
+committed = "2013-08-22"
+note = "SVN r2158, 2013-08-22, chill. Removes the net translation force from NEB when every atom is free. The LJ38 climbing-image band matches. The doubly nudged band matches the minimum, the median, and the failure count. The rerun client is r2156 plus NudgedElasticBand.cpp from this revision. Templates are templates/eon-svn-r2158."
+
+[[code]]
+id = "eon-svn-r2159"
+name = "Eon svn"
+role = "2014 paper client"
+repository = "https://theory.cm.utexas.edu/svn/eon"
+ref = "r2159"
+commit = "r2159"
+committed = "2013-08-22"
+note = "SVN r2159, 2013-08-22, chill. Adds the basin-hopping stop_energy key. LJ38 basin hopping matches: mean 508011, minimum 4579, maximum 1795901. The rerun client is r2156 plus BasinHoppingJob.cpp, Parameters.cpp, and Parameters.h from this revision. The template is templates/eon-svn-r2159/global-lj38-basinhopping."
+
+[[code]]
+id = "eon-svn-r2169"
+name = "Eon svn"
+role = "2014 paper client"
+repository = "https://theory.cm.utexas.edu/svn/eon"
+ref = "r2169"
+commit = "r2169"
+committed = "2013-09-03"
+note = "SVN r2169, 2013-09-03, chill. r2168 added Lanczos quit_early and does not compile. The loop bound is i >= lanczosMaxIterations, so a search that reaches the iteration limit reads one past the allocated basis. r2186 changes that bound to lanczosMaxIterations-1. The double-ended Lanczos rows match the minimum and the median on this bound. The Pt Lanczos failure count is 5. Cap-hitting searches do not match the archived tail. The rerun client is r2204 with Lanczos.cpp from this revision. Templates are templates/eon-svn-r2169."
+
+[[code]]
+id = "eon-svn-r2204"
+name = "Eon svn"
+role = "2014 paper client"
+repository = "https://theory.cm.utexas.edu/svn/eon"
+ref = "r2204"
+commit = "r2204"
+committed = "2014-05-27"
+note = "SVN r2204, 2014-05-27, chill. Morse conjugate gradient, FIRE, steepest descent, and two-point steepest descent match. Morse L-BFGS matches the mean 52 and the minimum 35. The maximum is 82 against the archive 81, on pos_0049 only. Pt tsopt Lanczos and Lanczos quit_early match. The Pt double-ended dimer matches when displacement.con comes from the archived interpolate.py. The archive stamps r2030 and r2156. Templates are templates/eon-svn-r2204."
+
+[[code]]
+id = "eon-svn-r2205"
+name = "Eon svn"
+role = "2014 paper client"
+repository = "https://theory.cm.utexas.edu/svn/eon"
+ref = "r2205"
+commit = "r2205"
+committed = "2014-06-06"
+note = "SVN r2205, 2014-06-06, graeme. Pt-island saddle search. The potential is the built-in morse_pt potential. random_seed stays at the default -1, so the replicates are independent of the archive. done.py stops at 27 good saddles below 1.5 eV. Templates are templates/eon-svn-r2205."
+
+[[code]]
+id = "eon-svn-r2222"
+name = "Eon svn"
+role = "2014 paper client"
+repository = "https://theory.cm.utexas.edu/svn/eon"
+ref = "r2222"
+commit = "r2222"
+committed = "2014-06-18"
+note = "SVN r2222, 2014-06-18, xph, rotation debug in ImprovedDimer.cpp. Pt tsopt dimer and both lowest-eigenvector dimer rows match. The archive stamps r2156. The rerun client is r2204 plus ImprovedDimer.cpp from this revision. Templates are templates/eon-svn-r2222."
 
 [[code]]
 id = "rgmin"

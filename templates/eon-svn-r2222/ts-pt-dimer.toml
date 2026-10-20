@@ -1,0 +1,31 @@
+id = "eon-svn-r2222/ts-pt-dimer"
+engine = "eon"
+problem = "tsopt/pt-island"
+code = "Eon svn"
+code_version = "r2222"
+commit = "r2222"
+entry = "archive/entries/tsopt/pt-island/eon-dimer"
+algorithm = "dimer"
+failure_cap = 10000
+note = '''
+Archived tsopt/pt-island/eon-dimer config.ini. A later duplicate key replaces the earlier one. potential is the built-in morse_pt potential. report.sh keeps total_force_calls under 10000 in the mean. The client pin is r2222. The archived-versus-rerun table is docs/eon-svn-paper.md.
+'''
+
+[ini.Main]
+job = "saddle_search"
+finite_difference = 0.001
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+converged_force = 0.001
+max_iterations = 1000
+
+[ini."Saddle Search"]
+min_mode_method = "dimer"
+
+[ini.Dimer]
+converged_angle = 5.0
+rotations_max = 10

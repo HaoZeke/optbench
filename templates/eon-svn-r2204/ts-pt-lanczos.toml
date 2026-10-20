@@ -1,0 +1,31 @@
+id = "eon-svn-r2204/ts-pt-lanczos"
+engine = "eon"
+problem = "tsopt/pt-island"
+code = "Eon svn"
+code_version = "r2204"
+commit = "r2204"
+entry = "archive/entries/tsopt/pt-island/eon-lanczos"
+algorithm = "Lanczos"
+failure_cap = 10000
+note = '''
+Archived tsopt/pt-island/eon-lanczos config.ini. A later duplicate key replaces the earlier one. potential is the built-in morse_pt potential. report.sh keeps total_force_calls under 10000 in the mean. The client pin is r2204. The archived-versus-rerun table is docs/eon-svn-paper.md.
+'''
+
+[ini.Main]
+job = "saddle_search"
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+converged_force = 0.001
+max_iterations = 1000
+
+[ini."Saddle Search"]
+min_mode_method = "lanczos"
+
+[ini.Lanczos]
+max_iterations = 20
+tolerance = 0.05
+quit_early = false

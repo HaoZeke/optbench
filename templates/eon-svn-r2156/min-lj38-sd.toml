@@ -1,0 +1,26 @@
+id = "eon-svn-r2156/min-lj38-sd"
+engine = "eon"
+problem = "minimization/lj38"
+code = "Eon svn"
+code_version = "r2156"
+commit = "r2156"
+entry = "archive/entries/minimization/lj38/eon-sd"
+algorithm = "steepest descent"
+failure_cap = 10000
+note = '''
+Archived minimization/lj38/eon-sd config.ini. A later duplicate key replaces the earlier one. potential is lammps. The pair style is the archived in.lammps, not an ext_pot harness. report.sh keeps total_force_calls under 10000 in the mean. The client pin is r2156. The archived-versus-rerun table is docs/eon-svn-paper.md.
+'''
+
+[ini.Main]
+job = "minimization"
+
+[ini.Potential]
+potential = "lammps"
+
+[ini.Optimizer]
+opt_method = "sd"
+sd_alpha = 0.001
+sd_twopoint = false
+max_move = 0.2
+max_iterations = 10000
+converged_force = 0.01
