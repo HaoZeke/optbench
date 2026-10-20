@@ -7,9 +7,9 @@ code_version = "df8da599"
 commit = "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
 algorithm = "climbing string"
 tuning = "stock"
-note = "Current svn.tar.bz2, SVNREV df8da599267534fbe43a250e578f7396a7946311. cmake and gfortran, unmodified. Keywords are BULK, CLSTRING, and GROWSTRING with no numbers. The score is OPTIM's last energy+gradient calls line. A start without OPTIM's convergence line is left out of the mean."
+note = "Current svn.tar.bz2, SVNREV df8da599267534fbe43a250e578f7396a7946311. cmake and gfortran, unmodified. GROWSTRING uses the problem image count and the force-call cap as the iteration density. STEPS is that cap. DESMDEBUG prints the climbing-string convergence line. Other GROWSTRING numbers stay at the source defaults. The score is OPTIM's last energy+gradient calls line."
 
 [optim]
 method = "clstring-stock"
 symbol = "M"
-timeout = 120
+timeout = 600

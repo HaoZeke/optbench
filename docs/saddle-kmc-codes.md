@@ -166,26 +166,21 @@ to this socket. PATHSAMPLE is in the same snapshot. The PATHSAMPLE target linked
 `odata.*` and submits the `EXEC` program, which is OPTIM. No PATHSAMPLE
 number is written.
 
-Pin `optim-27058`. The file is
-`https://optbench.org/codes/wales-27058.tar.bz2`, 20942854 bytes, sha256
-`144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348`.
-`build.csh gfortran` compiles with gfortran `-O2`. The Pt-island climbing
-string is `CLSTRING`, `GROWSTRING 2 1000 0.64 1.0 1D-4 0.8`, and
-`INE_NEW 4.3895D-5 100 1D-8 1000 2D-3 4D2`. Coordinates are divided by
-`r0 = 2.8970`. `PARAMS` uses the `bc -l` strings `rho*r0`, the `%f` scaled
-box, and `rcut/r0`. The score is the last `energy+gradient calls` line.
-A start that does not print `Converged to TS` is left out of the mean.
-That campaign file is an unranked diagnostic.
-
 Pin `optim-df8da599`. The file is the current
 `http://www-wales.ch.cam.ac.uk/svn.tar.bz2`, sha256
 `738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31`,
 SVNREV `df8da599267534fbe43a250e578f7396a7946311`. The build is stock
 cmake with gfortran. The ranked Pt-island climbing string publishes
-code `optim` and version `df8da599`. Keywords are `BULK`, `CLSTRING`,
-and `GROWSTRING` with no numbers. The score is the last
-`energy+gradient calls` line. A start that does not print OPTIM's
-convergence line is left out of the mean.
+code `optim` and version `df8da599`. `GROWSTRING` takes the problem
+image count and the force-call cap as the iteration density. `STEPS`
+is that cap, which OPTIM also copies onto `BFGSSTEPS` while that
+keyword is still 1. `DESMDEBUG` is the documented print switch: the
+climbing-string convergence line is written only when it is on.
+Reparameterisation, growth, convergence, and the maximum string step
+stay at the source defaults. The Morse bulk in this release has no
+second derivatives, so `OPTIMIZETS` and `BFGSTS` exit before a Hessian
+search. The score is the last `energy+gradient calls` line. A start
+that does not print OPTIM's convergence line is left out of the mean.
 
 ## pARTn
 

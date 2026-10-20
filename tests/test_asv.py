@@ -127,7 +127,6 @@ def test_pending_grid_is_every_problem_and_code():
         "compass",
         "pysisyphus",
         "optim",
-        "optim-27058",
         "optim-df8da599",
         "sella-0.1.1",
     ]

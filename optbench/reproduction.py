@@ -820,7 +820,7 @@ def render_markdown(rows: list[dict]) -> str:
         "",
         "OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.",
         "",
-        "OPTIM Pt-island climbing string, release df8da599 (SVNREV df8da599267534fbe43a250e578f7396a7946311, svn.tar.bz2 sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31): stock BULK, CLSTRING, and GROWSTRING. The archived mean is 319 with nfailed 0. OPTIM prints no convergence line on any of the 59 starts, so there is no success mean. The native tallies are 6 or 8 and nfailed is 59.",
+        "OPTIM Pt-island climbing string, release df8da599 (SVNREV df8da599267534fbe43a250e578f7396a7946311, svn.tar.bz2 sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31): GROWSTRING uses interior images 3 and iteration density 3000, and STEPS is 3000. Both limits are the problem's image count and force-call cap. DESMDEBUG prints the climbing-string convergence line. The archived mean is 319 with nfailed 0. This release mean is 289 with nfailed 0.",
         "",
         "EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.",
         "",

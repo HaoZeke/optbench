@@ -164,22 +164,13 @@ commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
 note = "No public git commit. The pin is the sha256 of the Wales svn.tar.bz2 snapshot, 122743078 bytes. Minimization L-BFGS calls the ASE socket and pes.evaluate. OPTIM's own call counter is not a score. Saddle search, NEB, noise, and PATHSAMPLE are not scored."
 
 [[code]]
-id = "optim-27058"
-name = "OPTIM"
-role = "climbing string"
-repository = "https://optbench.org/codes/wales-27058.tar.bz2"
-ref = "27058"
-commit = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
-note = "wales-27058.tar.bz2, 20942854 bytes. The pin is the sha256 of that file. build.csh gfortran is gfortran -O2. The Pt-island climbing string uses CLSTRING, GROWSTRING 2 1000 0.64 1.0 1D-4 0.8, and INE_NEW 4.3895D-5 100 1D-8 1000 2D-3 4D2. Coordinates are divided by r0 2.8970. The score is the last energy+gradient calls line on the native periodic Morse. That campaign is an unranked diagnostic."
-
-[[code]]
 id = "optim-df8da599"
 name = "OPTIM"
 role = "climbing string"
 repository = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
 ref = "df8da599"
 commit = "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
-note = "Latest public svn.tar.bz2 as of 2026-10-19, 122737951 bytes, Last-Modified Mon, 19 Oct 2026 02:01:38 GMT. The pin is the sha256 of that file. SVNREV is df8da599267534fbe43a250e578f7396a7946311. The ranked Pt-island climbing string publishes code optim and this version. Keywords are the stock BULK, CLSTRING, and GROWSTRING lines. The score is OPTIM's last energy+gradient calls line."
+note = "Latest public svn.tar.bz2 as of 2026-10-19, 122737951 bytes, Last-Modified Mon, 19 Oct 2026 02:01:38 GMT. The pin is the sha256 of that file. SVNREV is df8da599267534fbe43a250e578f7396a7946311. The ranked Pt-island climbing string publishes code optim and this version. GROWSTRING uses the problem image count and the force-call cap as the iteration density. STEPS is that cap. DESMDEBUG prints the climbing-string convergence line. The score is OPTIM's last energy+gradient calls line."
 
 [[code]]
 id = "sella-0.1.1"

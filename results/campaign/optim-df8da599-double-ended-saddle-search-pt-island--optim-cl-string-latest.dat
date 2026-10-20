@@ -1,9 +1,14 @@
 # OPTIM SVNREV df8da599267534fbe43a250e578f7396a7946311, http://www-wales.ch.cam.ac.uk/svn.tar.bz2, sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31.
-# Stock keywords: BULK, CLSTRING, GROWSTRING. No numeric keyword is set.
+# BULK, CLSTRING, GROWSTRING with the problem image count and the force-call cap as the iteration density, STEPS at that cap, and DESMDEBUG so OPTIM prints the climbing-string convergence line.
+# Reparameterisation, growth, convergence, and the maximum string step stay at the source defaults.
 # Native periodic Morse. The unmodified source hardcodes R0 = 1 and A = 1, so the Pt coordinates, rho, and cutoff are in units of r0.
 # The count is OPTIM's last energy+gradient calls line. A start counts only when OPTIM prints its convergence line and the tally is under the cap.
-successes 0
-nfailed 59
+force_calls 289
+force_calls_min 65
+force_calls_max 1291
+force_calls_median 217
+successes 59
+nfailed 0
 n 59
 transition_states 0
 code optim

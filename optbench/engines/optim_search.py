@@ -1,4 +1,4 @@
-"""OPTIM L-BFGS through the ASE socket, and the 2014 climbing string.
+"""OPTIM L-BFGS through the ASE socket, and the current climbing string.
 
 The minimization binary is the OPTIM target from the Wales snapshot
 ``http://www-wales.ch.cam.ac.uk/svn.tar.bz2``. The pin is the sha256 of
@@ -9,11 +9,10 @@ is one ``pes.evaluate``. OPTIM's own counter is not that score.
 raise before a file is written. Noise, saddle search, NEB, and PATHSAMPLE
 are not the socket runner.
 
-``optim/de-pt-cl-string`` is the 2014 Wales tarball ``wales-27058.tar.bz2``.
-It runs before the snapshot check. The tally is OPTIM's own
-``energy+gradient calls`` line on the native periodic Morse. That
-campaign is a diagnostic. The ranked row is ``optim/de-pt-cl-string-latest``:
-the current ``svn.tar.bz2`` release, stock keywords, same native tally.
+``optim/de-pt-cl-string-latest`` is the current ``svn.tar.bz2`` release.
+The tally is OPTIM's own ``energy+gradient calls`` line on the native
+periodic Morse. ``STEPS`` and the ``GROWSTRING`` iteration density are
+the problem force-call cap. Image count is the problem's interior images.
 """
 
 from __future__ import annotations
@@ -34,12 +33,6 @@ ENGINE = "optim"
 CODE = "optim"
 SNAPSHOT = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
 SHA256 = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
-CLSTRING_CODE = "optim-27058"
-CLSTRING_SHA256 = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
-# `bc -l` strings from the 2014 run.sh: 1/2.8970, 1.6047*2.8970, 9.5/2.8970.
-CLSTRING_SCALE = ".34518467380048325854"
-CLSTRING_RHO = "4.64881590"
-CLSTRING_RCUT = "3.27925440110459095616"
 LATEST_CODE = "optim-df8da599"
 LATEST_URL = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
 LATEST_SHA256 = "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
@@ -50,7 +43,6 @@ LATEST_SVNREV = "df8da599267534fbe43a250e578f7396a7946311"
 LATEST_R0 = 2.8970
 LATEST_RHO = 1.6047
 LATEST_RCUT = 9.5
-STOCK_KEYWORDS = ("BULK", "CLSTRING", "GROWSTRING")
 _RELAY = Path(__file__).with_name("fmlip_relay.py")
 
 
@@ -78,13 +70,6 @@ def binary_path() -> Path:
     if env:
         return Path(env)
     return Path("/tmp/src/wales-full/build-optim/OPTIM")
-
-
-def clstring_binary() -> Path:
-    env = os.environ.get("OPTIM_CLSTRING_BIN")
-    if env:
-        return Path(env)
-    return Path("/tmp/src/wales/OPTIM/bin/gfortran/OPTIM")
 
 
 def available() -> str | None:
@@ -318,226 +303,6 @@ def clstring_converged(text: str) -> bool:
     return "Converged to TS" in text
 
 
-def _scaled(values, scale: float) -> np.ndarray:
-    return np.asarray(values, dtype=np.float64) * float(scale)
-
-
-def _coord_text(row: np.ndarray) -> str:
-    return f"{float(row[0]):.16f} {float(row[1]):.16f} {float(row[2]):.16f}"
-
-
-def clstring_finish(coords: np.ndarray, scale: str = CLSTRING_SCALE) -> str:
-    """Product endpoint. One ``x y z`` line per atom, scaled by ``1/r0``."""
-    scaled = _scaled(coords, float(scale))
-    return "".join(_coord_text(row) + "\n" for row in scaled)
-
-
-def clstring_odata(
-    preamble: str,
-    reactant: np.ndarray,
-    free: np.ndarray,
-    box: np.ndarray,
-    scale: str = CLSTRING_SCALE,
-    symbol: str = "M",
-) -> str:
-    """``odata`` for one climbing-string pair.
-
-    ``PARAMS``, ``FREEZE``, and ``points`` follow the 2014 ``run.sh``:
-    ``bc -l`` parameter strings, ``%f`` box lengths, eight frozen indices
-    per line, and ``%.16f`` coordinates.
-    """
-    text = preamble if preamble.endswith("\n") else preamble + "\n"
-    scaled_box = _scaled(np.asarray(box, dtype=np.float64).reshape(-1)[:3], float(scale))
-    box_text = "%f %f %f" % tuple(float(value) for value in scaled_box)
-    lines = [text.rstrip("\n")]
-    lines.append(f"PARAMS {CLSTRING_RHO} {box_text} {CLSTRING_RCUT}")
-    frozen = np.flatnonzero(~np.asarray(free, dtype=bool)) + 1
-    for start in range(0, len(frozen), 8):
-        chunk = " ".join(str(int(index)) for index in frozen[start : start + 8])
-        lines.append(f"FREEZE  {chunk}")
-    lines.append("points")
-    scaled = _scaled(reactant, float(scale))
-    for row in scaled:
-        lines.append(f"{symbol} {_coord_text(row)}")
-    return "\n".join(lines) + "\n"
-
-
-def _execute_clstring(job: dict) -> dict:
-    import tempfile
-
-    name = str(job["name"])
-    cap = int(job["cap"])
-    error = ""
-    calls = None
-    converged = False
-    log = ""
-    try:
-        with tempfile.TemporaryDirectory(prefix="optim-cl-") as raw:
-            folder = Path(raw)
-            (folder / "odata").write_text(
-                clstring_odata(
-                    str(job["preamble"]),
-                    job["reactant"],
-                    job["free"],
-                    job["box"],
-                    symbol=str(job["symbol"]),
-                ),
-                encoding="utf-8",
-            )
-            (folder / "finish").write_text(clstring_finish(job["product"]), encoding="utf-8")
-            env = os.environ.copy()
-            env["OMP_NUM_THREADS"] = "1"
-            try:
-                proc = subprocess.run(
-                    [str(job["binary"])],
-                    cwd=folder,
-                    env=env,
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.PIPE,
-                    text=True,
-                    timeout=int(job["timeout"]),
-                    check=False,
-                )
-                log = f"{proc.stdout}\n{proc.stderr}"
-                if proc.returncode != 0:
-                    error = f"OPTIM exit {proc.returncode}"
-            except subprocess.TimeoutExpired as exc:
-                stdout = exc.stdout or ""
-                stderr = exc.stderr or ""
-                if isinstance(stdout, bytes):
-                    stdout = stdout.decode("utf-8", errors="replace")
-                if isinstance(stderr, bytes):
-                    stderr = stderr.decode("utf-8", errors="replace")
-                log = f"{stdout}\n{stderr}"
-                error = f"OPTIM exceeded {int(job['timeout'])}s"
-            calls = clstring_calls(log)
-            converged = clstring_converged(log)
-    except Exception as exc:
-        error = f"{type(exc).__name__}: {exc}"
-    counted = calls is not None
-    success = error == "" and converged and counted and int(calls) < cap
-    reasons: list[str] = []
-    failure = None
-    if not success:
-        if error or not counted:
-            reasons = ["crash"]
-            failure = "crash"
-        elif int(calls) >= cap:
-            reasons = ["cap"]
-            failure = "cap"
-        else:
-            reasons = ["divergence"]
-            failure = "divergence"
-    record = {
-        "schema": "optbench.start/v2",
-        "start": name,
-        "force_calls": 0 if calls is None else int(calls),
-        "verify_calls": 0,
-        "counter": "harness",
-        "comparable": True,
-        "success": success,
-        "failure": failure,
-        "reasons": reasons,
-        "energy": None,
-        "force_norm": None,
-        "hessian_index": None,
-        "expected_index": 1,
-        "converged": success,
-    }
-    if error:
-        record["error"] = error
-    return record
-
-
-def _clstring_preamble(root: Path, template: dict) -> str:
-    section = template.get("optim") or {}
-    relative = section.get("preamble")
-    if not relative:
-        raise ValueError(f"{template['id']} has no climbing-string preamble")
-    path = root / str(relative)
-    if not path.is_file():
-        raise FileNotFoundError(f"{template['id']} preamble {relative} is missing")
-    text = path.read_text(encoding="utf-8")
-    if not text.endswith("\n"):
-        text += "\n"
-    return text
-
-
-def _run_clstring(root: Path, problem: dict, template: dict, output: Path, workers: int) -> dict:
-    from .common import band_settings, cached_pairs, registry_pin, require_pin
-
-    pin = registry_pin(root, CLSTRING_CODE)
-    require_pin(template, pin)
-    if template["engine"] != ENGINE:
-        raise ValueError(f"{template['id']} engine is {template['engine']}")
-    stated = template.get("problem")
-    if stated and stated != problem["id"]:
-        raise ValueError(f"{template['id']} belongs to {stated}")
-    if problem.get("suite") != "double-ended-saddle-search":
-        raise ValueError(f"{template['id']} is a double-ended climbing string")
-    binary = clstring_binary()
-    if not binary.is_file():
-        raise RuntimeError(
-            "OPTIM 27058 climbing string is not built. "
-            f"The pin is sha256 {CLSTRING_SHA256} of "
-            "https://optbench.org/codes/wales-27058.tar.bz2 (20942854 bytes). "
-            f"{binary} is not present. Set OPTIM_CLSTRING_BIN to the gfortran OPTIM target."
-        )
-    settings = band_settings(problem)
-    section = template.get("optim") or {}
-    symbol = str(section.get("symbol", "M"))
-    timeout = int(section.get("timeout", 600))
-    preamble = _clstring_preamble(root, template)
-    pairs = cached_pairs(root, problem, settings)
-    jobs = []
-    for index in range(int(settings["pairs"])):
-        pair = pairs[f"product_{index}"]
-        if pair.box is None:
-            raise ValueError(f"{pair.name} has no box")
-        jobs.append(
-            {
-                "name": pair.name,
-                "reactant": np.asarray(pair.reactant, dtype=np.float64),
-                "product": np.asarray(pair.product, dtype=np.float64),
-                "free": np.asarray(pair.free, dtype=bool),
-                "box": np.asarray(pair.box, dtype=np.float64),
-                "cap": int(settings["cap"]),
-                "binary": str(binary),
-                "preamble": preamble,
-                "symbol": symbol,
-                "timeout": timeout,
-            }
-        )
-    records = run_jobs(jobs, _execute_clstring, workers)
-    comment = (
-        "# counter harness. The tally is OPTIM's last energy+gradient calls line.\n"
-        "# Each call is one native Morse-bulk energy and gradient on the scaled cell.\n"
-        "# A start without Converged to TS is a failure and is left out of the mean."
-    )
-    parameters = {
-        "method": "clstring",
-        "keywords": "CLSTRING GROWSTRING INE_NEW",
-        "rho": 1.6047,
-        "r0": 2.8970,
-        "rcut": 9.5,
-        "scale": CLSTRING_SCALE,
-        "rho_scaled": CLSTRING_RHO,
-        "rcut_scaled": CLSTRING_RCUT,
-        "symbol": symbol,
-        "counter": "OPTIM energy+gradient calls",
-    }
-    return write_campaign(
-        output,
-        records,
-        template,
-        problem,
-        settings,
-        parameters,
-        images=None,
-        comment=comment,
-    )
-
-
 def _job(start: dict, settings: dict, template: dict) -> dict:
     section = _section(template)
     return {
@@ -569,17 +334,35 @@ def stock_converged(text: str) -> bool:
     )
 
 
-def stock_odata(reactant: np.ndarray, free: np.ndarray, box: np.ndarray, product: np.ndarray) -> tuple[str, str]:
+def stock_odata(
+    reactant: np.ndarray,
+    free: np.ndarray,
+    box: np.ndarray,
+    product: np.ndarray,
+    *,
+    images: int,
+    steps: int,
+) -> tuple[str, str]:
     """Stock ``odata`` and ``finish`` for one pair.
 
-    Keywords are ``BULK``, ``CLSTRING``, and ``GROWSTRING`` with no
-    numbers. Image count, iteration density, reparameterisation, growth
-    and string tolerances, and ``GMAX`` stay at the values the source
-    initialises. Frozen atoms and the two endpoints are the pair.
+    ``GROWSTRING`` takes the problem image count and the force-call cap
+    as its iteration density. ``STEPS`` is that same cap, which is also
+    what OPTIM copies onto ``BFGSSTEPS`` when that keyword is still 1.
+    Reparameterisation, growth, convergence, and the maximum string step
+    stay at the values the source initialises. ``DESMDEBUG`` is the
+    documented print switch for a double-ended search: the climbing-string
+    convergence line is written only when that switch is on. Frozen atoms
+    and the two endpoints are the pair.
     """
     scale = 1.0 / LATEST_R0
     lengths = np.asarray(box, dtype=np.float64).reshape(-1)[:3] * scale
-    lines = list(STOCK_KEYWORDS)
+    lines = [
+        "BULK",
+        "CLSTRING",
+        f"GROWSTRING {int(images)} {int(steps)}",
+        f"STEPS {int(steps)}",
+        "DESMDEBUG",
+    ]
     lines.append(
         "PARAMS %.16g %.16g %.16g %.16g %.16g"
         % (
@@ -616,7 +399,14 @@ def _execute_stock(job: dict) -> dict:
     try:
         with tempfile.TemporaryDirectory(prefix="optim-stock-") as raw:
             folder = Path(raw)
-            odata, finish = stock_odata(job["reactant"], job["free"], job["box"], job["product"])
+            odata, finish = stock_odata(
+                job["reactant"],
+                job["free"],
+                job["box"],
+                job["product"],
+                images=int(job["images"]),
+                steps=int(job["cap"]),
+            )
             (folder / "odata").write_text(odata, encoding="utf-8")
             (folder / "finish").write_text(finish, encoding="utf-8")
             env = os.environ.copy()
@@ -720,13 +510,17 @@ def _run_latest(root: Path, problem: dict, template: dict, output: Path, workers
                 "box": np.asarray(pair.box, dtype=np.float64),
                 "binary": str(binary),
                 "cap": int(settings["cap"]),
+                "images": int(settings["n_interior"]),
                 "timeout": timeout,
             }
         )
     records = run_jobs(jobs, _execute_stock, workers)
     comment = (
         f"# OPTIM SVNREV {LATEST_SVNREV}, {LATEST_URL}, sha256 {LATEST_SHA256}.\n"
-        "# Stock keywords: BULK, CLSTRING, GROWSTRING. No numeric keyword is set.\n"
+        "# BULK, CLSTRING, GROWSTRING with the problem image count and the force-call cap "
+        "as the iteration density, STEPS at that cap, and DESMDEBUG so OPTIM prints "
+        "the climbing-string convergence line.\n"
+        "# Reparameterisation, growth, convergence, and the maximum string step stay at the source defaults.\n"
         "# Native periodic Morse. The unmodified source hardcodes R0 = 1 and A = 1, "
         "so the Pt coordinates, rho, and cutoff are in units of r0.\n"
         "# The count is OPTIM's last energy+gradient calls line. "
@@ -742,7 +536,9 @@ def _run_latest(root: Path, problem: dict, template: dict, output: Path, workers
         {"cap": int(settings["cap"])},
         {
             "method": "clstring",
-            "keywords": " ".join(STOCK_KEYWORDS),
+            "keywords": "BULK CLSTRING GROWSTRING STEPS DESMDEBUG",
+            "images": int(settings["n_interior"]),
+            "steps": int(settings["cap"]),
             "counter": "optim energy+gradient calls",
             "potential": "morse_bulk",
             "version": LATEST_VERSION,
@@ -762,8 +558,6 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
     template = load_template(root, template_name)
     if str((template.get("optim") or {}).get("method", "")) == "clstring-stock":
         return _run_latest(root, problem, template, output, workers)
-    if str((template.get("optim") or {}).get("method", "")) == "clstring":
-        return _run_clstring(root, problem, template, output, workers)
     reason = available()
     if reason:
         raise RuntimeError(reason)
