@@ -1,0 +1,33 @@
+id = "eon/develop-de-pt-ci-neb-5"
+engine = "eon"
+problem = "double-ended-saddle-search/pt-island"
+code = "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)"
+code_version = "3.6.0"
+commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+algorithm = "CI-NEB"
+reducer = "harness"
+failure_cap = 3000
+kind = "de-pt"
+kernel = "morse_shift"
+tuning = "default"
+note = '''
+eOn is the git client at https://github.com/TheochemUI/eon, not EON SVN. This row is stock develop a7aa57472fb7d823953fd36b78cd755fa4842d30, built with Fortran, on the same 59 Pt-island products and the same archive stops as EON (SVN r2549): images 5, climbing image on, L-BFGS, converged_force 0.001, max_iterations 1000. Spring, max_move, memory, and the OCI/energy-weighted switches stay at the develop defaults. The harness kernel is the same r2549 Morse::force surface. Nothing is tuned toward the archived 391.
+'''
+seeds = [1]
+budget_seconds = 600
+
+[ini.Main]
+job = "nudged_elastic_band"
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+converged_force = 0.001
+max_iterations = 1000
+
+[ini."Nudged Elastic Band"]
+images = 5
+climbing_image = true
+climbing_image_method = true

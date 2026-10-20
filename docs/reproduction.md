@@ -14,6 +14,8 @@ Table 10 prints EON Lanczos 165. The archive file is 325. CI-NEB(3) prints 3 fai
 
 Endpoint minima are free-atom float32 deltas against the reactant, compressed. A file over 1 MB is a git-LFS pointer, not a loose blob.
 
+Pt-island CI-NEB with five images stays the archived paper row, 391 force calls and 0 failures. EON (SVN r2549) and eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) are different codes. Stock harness runs on the same 59 products and the same stop rank beside that row: 361 and 359 force calls, both with 0 failures. Neither run is tuned toward 391.
+
 ## accelerated-md
 
 | Row | Archive | Rerun | Status |

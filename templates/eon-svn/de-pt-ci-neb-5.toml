@@ -1,7 +1,7 @@
 id = "eon-svn/de-pt-ci-neb-5"
 engine = "eon"
 problem = "double-ended-saddle-search/pt-island"
-code = "Eon svn"
+code = "EON (SVN r2549)"
 code_version = "r2549"
 commit = "r2549"
 algorithm = "CI-NEB"
@@ -9,9 +9,10 @@ reducer = "harness"
 failure_cap = 3000
 kind = "de-pt"
 kernel = "morse_shift"
+tuning = "default"
 asv_class = "EonSvnDePtCiNeb5"
 note = '''
-Climbing-image NEB on the 59 Pt-island products. The archived eon-ci-neb-5 ini sets images 5, climbing_image true, converged_force 0.001, max_iterations 1000, and leaves spring and max_move unset. Spring stays the client default. max_move is 0.2, the same value the reproduced 3-image row uses. climbing_image_method is set. The harness kernel is r2549 Morse::force: cutoff 9.5, pair energy shifted to zero at the cutoff, minimum image on the box diagonal. D 0.7102, alpha 1.6047, r0 2.897. report.sh leaves a start out of the mean when total_force_calls is at least 3000 and counts nfailed from termination_reason other than 0.
+EON is the SVN client, not the git eOn client. This row is stock r2549 CI-NEB on the 59 Pt-island products. The archived ini sets images 5, climbing_image true, opt_method lbfgs, converged_force 0.001, and max_iterations 1000. climbing_image_method is the key r2549 reads, and its default is already true. Spring, max_move, and L-BFGS memory stay the client defaults (5.0, 0.2, and 20). The harness kernel is r2549 Morse::force. The client is built with Fortran. Rules.mk in r2549 still names potentials/QSC, which that revision does not contain, so the build omits that stale entry and nothing else.
 '''
 seeds = [1]
 asv_timeout = 900
@@ -25,21 +26,10 @@ potential = "morse_pt"
 
 [ini.Optimizer]
 opt_method = "lbfgs"
-convergence_metric = "norm"
 converged_force = 0.001
-max_move = 0.2
 max_iterations = 1000
-lbfgs_memory = 20
 
 [ini."Nudged Elastic Band"]
 images = 5
-climbing_image_method = true
 climbing_image = true
-doubly_nudged = false
-doubly_nudged_switching = false
-opt_method = "lbfgs"
-converged_force = 0.001
-max_iterations = 1000
-
-[ini.LBFGS]
-lbfgs_memory = 20
+climbing_image_method = true

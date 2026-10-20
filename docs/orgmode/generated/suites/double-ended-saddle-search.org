@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>EON (SVN r2549)</th><th>eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="double-ended-saddle-search/lj38">
    <th scope="row"><a href="#lj38">LJ38 double-ended saddle</a></th>
    <td data-code="eOn" data-template="eon-client/de-lj38-lanczos-improved" data-par2="259.46"><span class="bench-score">259.46</span><a href="#lj38-templates">eon-client/de-lj38-lanczos-improved</a></td>
@@ -17,6 +17,8 @@
    <td data-code="ASE" data-template="ase/de-lj38-tuned" data-par2="3463.64"><span class="bench-score">3463.64</span><a href="#lj38-templates">ase/de-lj38-tuned</a></td>
    <td data-code="Sella" data-template="sella/de-lj38-tuned" data-par2="1753.96"><span class="bench-score">1753.96</span><a href="#lj38-templates">sella/de-lj38-tuned</a></td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
+   <td data-code="eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass" data-template="compass/sqnm" data-par2="1517.3"><span class="bench-score">1517.3</span><a href="#lj38-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
@@ -33,6 +35,8 @@
    <td data-code="ASE" data-template="ase/de-lj38-2ts-default" data-par2="20000"><span class="bench-score">20000</span><a href="#lj38_2ts_separation-templates">ase/de-lj38-2ts-default</a></td>
    <td data-code="Sella" data-template="sella/de-lj38-2ts-tuned" data-par2="30105.9"><span class="bench-score">30105.9</span><a href="#lj38_2ts_separation-templates">sella/de-lj38-2ts-tuned</a></td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
+   <td data-code="eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass" data-template="compass/sqnm" data-par2="6713.37"><span class="bench-score">6713.37</span><a href="#lj38_2ts_separation-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
@@ -49,6 +53,8 @@
    <td data-code="ASE" data-template="ase/de-pt-island-tuned" data-par2="847.678"><span class="bench-score">847.678</span><a href="#pt-island-templates">ase/de-pt-island-tuned</a></td>
    <td data-code="Sella" data-template="sella/de-pt-island-tuned" data-par2="615.153"><span class="bench-score">615.153</span><a href="#pt-island-templates">sella/de-pt-island-tuned</a></td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="EON (SVN r2549)" data-template="eon-svn/de-pt-ci-neb-5" data-par2="360.729"><span class="bench-score">360.729</span><a href="#pt-island-templates">eon-svn/de-pt-ci-neb-5</a></td>
+   <td data-code="eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)" data-template="eon/develop-de-pt-ci-neb-5" data-par2="359.203"><span class="bench-score">359.203</span><a href="#pt-island-templates">eon/develop-de-pt-ci-neb-5</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass" data-template="compass/sqnm" data-par2="1078.12"><span class="bench-score">1078.12</span><a href="#pt-island-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
@@ -371,7 +377,7 @@
    <figure class="bench-plot"><a href="../../_static/board/double-ended-saddle-search-pt-island-profile.svg"><picture><source srcset="../../_static/board/double-ended-saddle-search-pt-island-profile.webp" type="image/webp"><img src="../../_static/board/double-ended-saddle-search-pt-island-profile.png" alt="Dolan-More profile for double-ended-saddle-search/pt-island" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/double-ended-saddle-search-pt-island-cost.svg"><picture><source srcset="../../_static/board/double-ended-saddle-search-pt-island-cost.webp" type="image/webp"><img src="../../_static/board/double-ended-saddle-search-pt-island-cost.png" alt="Cost versus success for double-ended-saddle-search/pt-island" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="pt-island-templates">
-   <summary>All templates (26 ranked)</summary>
+   <summary>All templates (28 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="double-ended-saddle-search/pt-island">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate. Per-image mean divides that total by the problem's moving images, the same way for every code.</caption>
@@ -381,6 +387,8 @@
    <tr><td data-field="template">eon-svn/de-pt-ci-neb</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">225.881</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.938871</td><td data-field="wilson_high">1</td><td data-field="median_calls">188</td><td data-field="mean_calls">225.881</td><td data-field="mean_per_image">75.2938</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">59</td></tr>
    <tr><td data-field="template">eon-svn/de-pt-ci-swdneb</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">246.271</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.938871</td><td data-field="wilson_high">1</td><td data-field="median_calls">218</td><td data-field="mean_calls">246.271</td><td data-field="mean_per_image">82.0904</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">59</td></tr>
    <tr><td data-field="template">eon-svn/de-pt-neb</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">311.831</td><td data-field="success_rate">0.983051</td><td data-field="wilson_low">0.910043</td><td data-field="wilson_high">0.997002</td><td data-field="median_calls">203</td><td data-field="mean_calls">260.983</td><td data-field="mean_per_image">86.9944</td><td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td><td data-field="n">59</td></tr>
+   <tr><td data-field="template">eon/develop-de-pt-ci-neb-5</td><td data-field="version">eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) 3.6.0</td><td data-field="commit">a7aa57472fb7</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">359.203</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.938871</td><td data-field="wilson_high">1</td><td data-field="median_calls">367</td><td data-field="mean_calls">359.203</td><td data-field="mean_per_image">119.734</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">59</td></tr>
+   <tr><td data-field="template">eon-svn/de-pt-ci-neb-5</td><td data-field="version">EON (SVN r2549) r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">360.729</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.938871</td><td data-field="wilson_high">1</td><td data-field="median_calls">367</td><td data-field="mean_calls">360.729</td><td data-field="mean_per_image">120.243</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">59</td></tr>
    <tr><td data-field="template">rgsaddle/ew-ci-neb-lbfgs</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">422.136</td><td data-field="success_rate">0.966102</td><td data-field="wilson_low">0.884564</td><td data-field="wilson_high">0.990654</td><td data-field="median_calls">226</td><td data-field="mean_calls">224.017</td><td data-field="mean_per_image">74.6723</td><td data-field="failures">crash 0, divergence 2, cap 0, wrong_stationary 0</td><td data-field="n">59</td></tr>
    <tr><td data-field="template">sella/de-pt-island-tuned</td><td data-field="version">Sella 2.6.0</td><td data-field="commit">6cfb60cdb100</td><td data-field="source">asv</td><td data-field="current">yes</td><td data-field="par2_mean">615.153</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.938871</td><td data-field="wilson_high">1</td><td data-field="median_calls">374</td><td data-field="mean_calls">615.153</td><td data-field="mean_per_image">205.051</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">59</td></tr>
    <tr><td data-field="template">rgsaddle/oci-neb-lbfgs</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">677.831</td><td data-field="success_rate">0.932203</td><td data-field="wilson_low">0.838245</td><td data-field="wilson_high">0.973321</td><td data-field="median_calls">238</td><td data-field="mean_calls">474.441</td><td data-field="mean_per_image">158.147</td><td data-field="failures">crash 0, divergence 0, cap 4, wrong_stationary 0</td><td data-field="n">59</td></tr>

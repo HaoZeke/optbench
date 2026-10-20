@@ -173,6 +173,26 @@ commit = "0.1.1"
 committed = "2019-12-10"
 note = "Sella 0.1.1 PESWrapper.diag for the lowest-eigenvector row. eta 1e-6, gamma 1e-16, vreftol 0.99, gradient v0, rigid-mode projection. This pin is not Sella 2.6.0."
 
+[[code]]
+id = "eon-svn-r2549"
+name = "EON (SVN r2549)"
+role = "minimization and saddle search"
+repository = "https://theory.cm.utexas.edu/svn/eon"
+ref = "r2549"
+commit = "r2549"
+committed = "2026-01-23"
+note = "EON, the SVN code, revision 2549. Not the git eOn client. Fortran is linked. The Pt-island CI-NEB row uses the client defaults on the archived five-image stop."
+
+[[code]]
+id = "eon-develop-a7aa574"
+name = "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)"
+role = "minimization and saddle search"
+repository = "https://github.com/TheochemUI/eon"
+ref = "develop"
+commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+committed = "2026-10-18"
+note = "eOn, the git code, develop a7aa57472fb7d823953fd36b78cd755fa4842d30. Not EON SVN. Fortran is enabled. The Pt-island CI-NEB row is stock on the archived five-image stop."
+
 [[template]]
 id = "sella-0.1.1/lj38-loweig"
 code = "sella-0.1.1"
