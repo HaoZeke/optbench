@@ -7,7 +7,7 @@ commit = "r2549"
 algorithm = "Lanczos-CG rotation: max=50, tol=0.05"
 reducer = "harness-htst"
 pass_limit = 8000
-note = "EON (SVN r2549), the old SVN code, stock. morse_pt is the C++ Morse potential in that binary: D 0.7102, alpha 1.6047, r0 2.897, cutoff 9.5, pair energy shifted to zero at the cutoff. The ini is the archived keys only: temperature 700 K, seed 42, confidence 1.9, Lanczos tolerance 0.05, max_iterations 50, conjugate-gradient climb at the r2549 default, converged_force 0.001, max_iterations 5000, least-coordinated displacement weight 1, radius 3.3, magnitude 0.3, prefactor 1.2e12. finite_difference, convergence_metric, thermally_accessible_window, and quit_early stay at the r2549 defaults (0.01, norm, 20, true). A start is one barrier window. Communicator num_jobs 32."
+note = "EON (SVN r2549), the SVN code at r2549, stock. morse_pt is the C++ Morse potential in that binary: D 0.7102, alpha 1.6047, r0 2.897, cutoff 9.5, pair energy shifted to zero at the cutoff. The ini is the archived keys only: temperature 700 K, seed 42, confidence 1.9, Lanczos tolerance 0.05, max_iterations 50, conjugate-gradient climb at the r2549 default, converged_force 0.001, max_iterations 5000, least-coordinated displacement weight 1, radius 3.3, magnitude 0.3, prefactor 1.2e12. finite_difference, convergence_metric, thermally_accessible_window, and quit_early stay at the r2549 defaults (0.01, norm, 20, true). A start is one barrier window. Communicator num_jobs 32."
 
 [ini.Main]
 job = "akmc"

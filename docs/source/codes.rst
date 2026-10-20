@@ -1,20 +1,20 @@
-=============
-Current codes
-=============
+=====
+Codes
+=====
 
 
 The table is the registry pin and the ranked harness runs for that code.
 A code with no full run on a problem is listed with the reason.
 The sections each client reads, and the commands that rerun a score, are in the README and on the Run a score page.
 A timestep or a band method in the wrong section is ignored.
-The Sella 0.1.1 rows stay on the 2014 tables and are labelled legacy.
+The Sella 0.1.1 rows stay on the 2014 tables.
 A new score is entered by Rohit Goswami.
 The number is written only after the run finishes under the problem rule.
 
 .. raw:: html
 
    <section class="bench" id="current-codes">
-   <h2>Current codes</h2>
+   <h2>Codes</h2>
    <p>The benchmark contributor is Rohit Goswami. A ranked row is a full harness run. The commit on that row is the commit that produced the score.</p>
    <h3>eOn</h3>
    <div class="bench-scroll"><table>
@@ -1100,14 +1100,14 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">11</td>
    </tr>
    </tbody></table></div>
-   <h3>eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)</h3>
+   <h3>eOn (develop 500350d9)</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
    <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
    <td>saddle search</td>
-   <td>develop</td>
-   <td>a7aa57472fb7</td>
+   <td>fix/develop-regressions-vs-350</td>
+   <td>500350d9fae8</td>
    <td><a href="https://github.com/TheochemUI/eon">https://github.com/TheochemUI/eon</a></td>
    </tr>
    </tbody></table></div>
@@ -1117,8 +1117,8 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="hTST/Pt" data-template="eon/htst-pt-lanczos-cg2">
    <td>Pt</td>
    <td data-field="template">eon/htst-pt-lanczos-cg2</td>
-   <td data-field="version">eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) 3.6.0</td>
-   <td data-field="commit">a7aa57472fb7</td>
+   <td data-field="version">eOn (develop 500350d9) 3.6.0</td>
+   <td data-field="commit">500350d9fae8</td>
    <td data-field="par2_mean"></td>
    <td data-field="mean_calls">2.16324e+06</td>
    <td data-field="median_calls">2.09708e+06</td>

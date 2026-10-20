@@ -108,7 +108,6 @@ SHA = {
     "cells/pele/ts-repro": "54ac7e7a1aa6581c261c17fc2c52a20e77121911",
     "cells/softsaddle/ts-reps": "bd1a5c9fc2685f5876266d53715accb31a049e73",
     "entries/eon-svn-htst": "715bc521c827f1f18102c1c027d99d0d8624b0fb",
-    "repro/htst-pt-eon-lanczos-cg2": "33123c34df936eba992f5bd8c99c6ae3c7daef30",
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
@@ -200,7 +199,6 @@ MATCHES: list[dict] = [
     {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "branch": "cells/pele/go", "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat", "cause": "pele_bh_defaults"},
     {"key": "hTST/Al/eon-dimer-cg", "template": "eon-svn/htst-al-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-al-dimer.dat", "kind": "htst", "cause": "htst_al"},
     {"key": "hTST/Pt/eon-dimer-cg", "template": "eon-svn/htst-pt-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-pt-dimer.dat", "kind": "htst"},
-    {"key": "hTST/Pt/eon-lanczos-cg2", "template": "eon-svn/htst-pt-lanczos-cg2", "branch": "repro/htst-pt-eon-lanczos-cg2", "path": "results/campaign/eon-svn-htst-pt-lanczos-cg2.dat", "kind": "htst", "cause": "stock_lanczos_defaults"},
 ]
 
 
@@ -223,12 +221,13 @@ CAUSE_TEXT = {
         "The odata preamble is not in the archive snapshot. The template uses updates 4. The mean is 489 against 145."
     ),
     "stock_lanczos_defaults": (
-        "EON (SVN r2549) is the old SVN code. eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) is the current TheochemUI/eon develop tree. "
-        "They are different codes. The archived ini is the paper row. Neither rerun sets quit_early, finite_difference, convergence_metric, or thermally_accessible_window. "
-        "r2549 and develop both default quit_early to true, finite_difference to 0.01, convergence_metric to norm, and the thermal window to 20. "
-        "EON (SVN r2549) barrier force calls are 2212000 against 653000, barrier jobs 1846 against 1361, rate force calls 66180 against 25410, and rate jobs 55 against 52. "
-        "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) on the same archived keys scores barrier force calls 2163000, barrier jobs 1852, rate force calls 61440, and rate jobs 52. "
-        "The gaps are the stock clients."
+        "EON (SVN r2549) is the SVN code. eOn (develop 500350d9) is https://github.com/TheochemUI/eon at 500350d9 on fix/develop-regressions-vs-350. "
+        "They are different codes. The archive row is the archived ini. Neither rerun sets quit_early, finite_difference, convergence_metric, or thermally_accessible_window. "
+        "Both clients default quit_early to true, finite_difference to 0.01, convergence_metric to norm, and the thermal window to 20. "
+        "EON (SVN r2549) barrier force calls are 2212000/653000 = 3.39 (339% of the archive row), barrier jobs 1846/1361 = 1.36 (136%), rate force calls 66180/25410 = 2.60 (260%), and rate jobs 55/52 = 1.06 (106%). "
+        "eOn (develop 500350d9) on the same archived keys scores barrier force calls 2163000/653000 = 3.31 (331%), barrier jobs 1852/1361 = 1.36 (136%), rate force calls 61440/25410 = 2.42 (242%), and rate jobs 52/52 = 1. "
+        "The harness barrier force-call mean is the sad-fcs window mean, 2.163e+06. The client's force_calls_saddle on the same 20384 searches agrees (0 mismatches), so the client barrier-window mean is the same 2.163e+06. "
+        "The client's total_force_calls, saddle plus minimization, averages 2.617e+06 over those windows, 1.21 times the barrier count. The gaps are the stock clients."
     ),
     "pt_lanczos": (
         "The svn template uses the archived Lanczos keys (10 iterations, tolerance 0.05) and shifted Morse::force. "
@@ -526,8 +525,6 @@ def holdback(root: Path) -> Hold:
         problem = f"{row['suite']}/{row['problem']}"
         template = str(rerun.get("template") or "")
         if row.get("status") == "not_reproduced":
-            if f"{row['suite']}/{row['problem']}/{row['entry']}" == "hTST/Pt/eon-lanczos-cg2":
-                continue
             if template:
                 found.templates.add((problem, template))
             rel = str(rerun.get("path") or "")
@@ -744,6 +741,9 @@ def build_rows(root: Path) -> list[dict]:
             if ident.startswith("accelerated-md/"):
                 record["cause"] = "akmc_vs_langevin"
                 record["cause_detail"] = CAUSE_TEXT["akmc_vs_langevin"]
+            if ident == "hTST/Pt/eon-lanczos-cg2":
+                record["cause"] = "stock_lanczos_defaults"
+                record["cause_detail"] = CAUSE_TEXT["stock_lanczos_defaults"]
             built.append(record)
             continue
         kind = match.get("kind", "dat")
@@ -875,7 +875,7 @@ def render_markdown(rows: list[dict]) -> str:
         for ident in idents:
             lines.append(f"- {ident}")
         lines.append("")
-    lines.append("Rows with no exact-setup campaign stay not rerun and are not given a cause. AKMC on aladatom is a different method from Langevin parallel replica; the ratios above are that comparison, and the archive rows stay not rerun.")
+    lines.append("Rows with no exact-setup campaign stay not rerun and are not given a cause. AKMC on aladatom is a different method from Langevin parallel replica; the ratios above are that comparison, and the archive rows stay not rerun. hTST Pt Lanczos-CG2 stays an archive row. EON (SVN r2549) and eOn (develop 500350d9) are ranked beside it. The ratios are in stock_lanczos_defaults.")
     lines.append("")
     return "\n".join(lines)
 

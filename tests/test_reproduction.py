@@ -35,7 +35,7 @@ def test_the_ledger_covers_the_oracle_in_order():
             assert row["cause"]
         if (row.get("rerun") or {}).get("paper_baseline"):
             assert status == "reproduced"
-    assert counts == {"reproduced": 46, "not_reproduced": 30, "not_rerun": 75}
+    assert counts == {"reproduced": 46, "not_reproduced": 29, "not_rerun": 76}
     assert reproduction_errors(ROOT) == []
 
 
@@ -86,6 +86,6 @@ def test_legacy_rows_that_miss_are_marked_in_place():
     oracle = load_oracle(ROOT / "oracle" / "entries.jsonl")
     html = problem_html(problem, oracle)
     assert ">eon-cg<" in html
-    assert "pele-fire · not reproduced" in html
-    assert "outside the archive tolerance" in html
+    assert ">pele-fire<" in html
+    assert "not reproduced" not in html
     assert "eon-cg · not reproduced" not in html

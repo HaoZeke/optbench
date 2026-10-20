@@ -1299,16 +1299,18 @@ def _show_per_image(problem: dict) -> bool:
 
 
 def _headers(problem: dict) -> list[str]:
+    # The ranked table lists the newest full version of each template.
+    # Older versions stay in the history list. The success bounds are one
+    # cell, low then high. Two separate columns push the minimization page
+    # over the DOM budget.
     headers = [
         "Template",
         "Version",
         "Commit",
         "Source",
-        "Current",
         "PAR-2",
         "Success",
-        "Wilson low",
-        "Wilson high",
+        "Wilson",
         "Median calls",
         "Mean calls",
     ]
@@ -1328,11 +1330,12 @@ def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
         ("version", f"{row.get('code') or ''} {row.get('code_version') or ''}"),
         ("commit", str(row.get("commit") or "")[:12]),
         ("source", str(row.get("source") or "")),
-        ("current", "yes" if row.get("current") else "no"),
         ("par2_mean", _format_number(row.get("par2_mean"))),
         ("success_rate", _format_number(row.get("success_rate"))),
-        ("wilson_low", _format_number(row.get("wilson_low"))),
-        ("wilson_high", _format_number(row.get("wilson_high"))),
+        (
+            "wilson",
+            f"{_format_number(row.get('wilson_low'))}–{_format_number(row.get('wilson_high'))}",
+        ),
         ("median_calls", _format_number(row.get("median_calls"))),
         ("mean_calls", _format_number(row.get("mean_calls"))),
     ]
@@ -1578,7 +1581,7 @@ def _table(
     headers = _headers(problem)
     caption = (
         "Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. "
-        "Wilson bounds are the 95% interval on the success rate."
+        "The success bounds are the low and high ends of the success rate."
     )
     if per_image:
         caption += " Per-image mean divides that total by the problem's moving images, the same way for every code."

@@ -1,13 +1,13 @@
 id = "eon/htst-pt-lanczos-cg2"
 engine = "eon"
 problem = "hTST/Pt"
-code = "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)"
+code = "eOn (develop 500350d9)"
 code_version = "3.6.0"
-commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
 algorithm = "Lanczos-CG rotation: max=50, tol=0.05"
 reducer = "harness-htst"
 pass_limit = 8000
-note = "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30), the current TheochemUI/eon develop tree, stock. This is not EON SVN. The ini is the archived keys only: temperature 700 K, seed 42, confidence 1.9, Lanczos tolerance 0.05, max_iterations 50, converged_force 0.001, max_iterations 5000, least-coordinated displacement weight 1, radius 3.3, magnitude 0.3, prefactor 1.2e12. finite_difference, convergence_metric, thermally_accessible_window, quit_early, and the climb method stay at the develop defaults. A start is one barrier window. Communicator num_jobs 32."
+note = "eOn (develop 500350d9) from https://github.com/TheochemUI/eon branch fix/develop-regressions-vs-350. This is not EON SVN. The ini is the archived keys only: temperature 700 K, seed 42, confidence 1.9, Lanczos tolerance 0.05, max_iterations 50, converged_force 0.001, max_iterations 5000, least-coordinated displacement weight 1, radius 3.3, magnitude 0.3, prefactor 1.2e12. finite_difference, convergence_metric, thermally_accessible_window, quit_early, and the climb method stay at that tree's defaults. A start is one barrier window. Communicator num_jobs 32."
 
 [ini.Main]
 job = "akmc"
