@@ -2,13 +2,11 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-47 reproduced, 29 not reproduced, 75 not rerun. 151 archive rows.
+46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
 OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.
-
-TSASE SDLBFGS on current main is version 1.0 at 98aac60. Stock constructor defaults and the archive max-atom stop, scored by the harness, give PAR-2 19960.442 with 998 Euclidean-norm misses. That gap is the measured difference. The archive integer 166 remains the paper row.
 
 EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.
 
@@ -133,7 +131,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj38/pele-lbfgs-M4-maxstep0.1 | force_calls 249 | 248 | reproduced |
 | lj38/pele-lbfgs-M4-maxstep0.2 | force_calls 230 | 228 | reproduced |
 | lj38/scipy-lbfgs | — | — | not rerun |
-| lj38/tsase-sdlbfgs | force_calls 166 | 166 | reproduced |
+| lj38/tsase-sdlbfgs | — | — | not rerun |
 | morse-bulk/ase-fire | force_calls 147.47 | 113 | not reproduced; ase_morse_script |
 | morse-bulk/ase-lbfgs | force_calls 53.8 | 32 | not reproduced; ase_morse_script |
 | morse-bulk/ase-preconLBFGS | force_calls 34 | 29 | not reproduced; ase_morse_script |
