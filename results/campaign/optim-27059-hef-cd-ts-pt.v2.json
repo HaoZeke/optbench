@@ -1,5 +1,5 @@
 {
-  "counter": "harness",
+  "counter": "native",
   "legacy": {
     "force_calls": 90,
     "force_calls_max": 199,
@@ -12,7 +12,7 @@
   },
   "problem": "tsopt/pt-island",
   "provenance": {
-    "code": "optim",
+    "code": "optim-27059",
     "code_version": "27059",
     "commit": "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348",
     "machine": {

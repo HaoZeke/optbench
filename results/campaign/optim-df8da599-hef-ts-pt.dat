@@ -1,0 +1,18 @@
+# counter harness. Each ASE COMPUTE is one pes.evaluate of morse/smooth/linear, periodic in x and y.
+# OPTIM df8da599267534fbe43a250e578f7396a7946311 from http://www-wales.ch.cam.ac.uk/svn.tar.bz2 sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. BFGSTS keeps the source defaults. NOHESS is set because ASE returns no Hessian. BFGSCONV is the Euclidean force norm over sqrt(3N). READVEC is initial minus reactant. A success is under the cap, at the force stop, and Hessian index 1.
+force_calls 843
+force_calls_min 403
+force_calls_max 1578
+force_calls_median 893
+successes 49
+nfailed 0
+n 49
+transition_states 49
+code optim
+code_version df8da599
+commit 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31
+algorithm hybrid eigenvector following
+template optim/hef-ts-pt
+problem tsopt/pt-island
+tuning default
+counter harness

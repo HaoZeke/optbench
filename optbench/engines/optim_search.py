@@ -301,6 +301,10 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
         from .optim_cd import run_hef_cd
 
         return run_hef_cd(root, problem, template, output, workers)
+    if method == "hef":
+        from .optim_hef import run_hef
+
+        return run_hef(root, problem, template, output, workers)
     reason = available()
     if reason:
         raise RuntimeError(reason)

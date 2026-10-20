@@ -812,7 +812,7 @@ def render_markdown(rows: list[dict]) -> str:
         "",
         "OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.",
         "",
-        "OPTIM Pt-island central differences: the archived integer is 90 and the unrounded mean of OPTIM energy+gradient calls is 90.04081632653062.",
+        "OPTIM Pt-island central differences: the archived integer is 90 and the unrounded mean of OPTIM energy+gradient calls is 90.04081632653062. Current public OPTIM df8da599 stock BFGSTS, scored by the harness on morse/smooth/linear, has unrounded mean 843.0 (median 893, min 403, max 1578, 0 failures). The gap is left as found. The ranked row is optim/hef-ts-pt.",
         "",
         "EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.",
         "",
