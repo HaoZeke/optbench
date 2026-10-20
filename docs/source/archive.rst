@@ -2268,7 +2268,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="hTST/Al">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">eon-develop/htst-al-dimer</td><td data-field="version">eOn (develop a7aa574) a7aa574</td><td data-field="commit">a7aa57472fb7</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean"></td><td data-field="success_rate">1</td><td data-field="wilson_low">0.994024</td><td data-field="wilson_high">1</td><td data-field="median_calls">6460</td><td data-field="mean_calls">7474.98</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">639</td></tr>
+   <tr><td data-field="template">eon-svn-r2549/htst-al-dimer</td><td data-field="version">EON (SVN r2549) r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean"></td><td data-field="success_rate">1</td><td data-field="wilson_low">0.994024</td><td data-field="wilson_high">1</td><td data-field="median_calls">35998</td><td data-field="mean_calls">45626.9</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">639</td></tr>
    </tbody></table></div>
    <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/hTST.html#Al">Full ranked table and performance profile</a>.</p>
@@ -2276,7 +2276,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <h3>Legacy 2014 archive</h3>
    <details class="bench-details">
    <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest barrier force calls first.</caption>
    <thead><tr>
@@ -2303,7 +2303,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="htst-al-eon-dimer-cg">
    <td class="num">2</td>
-   <td class="text">eon-dimer-cg · not reproduced</td>
+   <td class="text">eon-dimer-cg</td>
    <td class="text">Eon r2006</td>
    <td class="num">2.887e+04</td>
    <td class="num">48</td>

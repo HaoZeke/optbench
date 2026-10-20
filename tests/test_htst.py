@@ -87,6 +87,8 @@ def test_al_dimer_cg_matches_the_2014_table():
     assert parsed["rate_jobs"] == "1511"
     assert parsed["rate_force_calls"] == "8.979e+05"
     assert parsed["rate_windows"] == "20"
+    assert reduction.barrier_evaluations_mean > reduction.barrier_force_calls_mean
+    assert reduction.barrier_evaluations[0] > reduction.barrier_force_calls[0]
 
 
 def test_a_partial_reference_set_does_not_close_a_window():

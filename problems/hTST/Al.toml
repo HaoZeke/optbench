@@ -4,7 +4,7 @@ suite = "hTST"
 problem = "Al"
 contract = "partial"
 entry_count = 2
-remark = "A start is one barrier window. The window closes when each reference barrier below 0.4 eV has been matched once from the processtable. Force calls are sad-fcs. The stop is the maximum force on any atom. The potential is eam_al."
+remark = "A start is one barrier window. The window closes when each reference barrier below 0.4 eV has been matched once from the processtable. The ranked cost counts every force evaluation: dimer images, minimizations, and prefactor calls. The stop is the maximum force on any atom. The potential is eam_al."
 
 [potential]
 evaluator = "eam_al"

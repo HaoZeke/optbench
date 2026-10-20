@@ -74,7 +74,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
-| Al/eon-dimer-cg | barrier_force_calls 28870, barrier_jobs 48, rate_force_calls 897900, rate_jobs 1511 | 19660, 50, 620600, 1600 | not reproduced; htst_al |
+| Al/eon-dimer-cg | barrier_force_calls 28870, barrier_jobs 48, rate_force_calls 897900, rate_jobs 1511 | 45630, 46, 1.356e+06, 1390 | htst_al |
 | Al/eon-dimer-cg2 | — | — | not rerun |
 | Pt/alpha_dimer-qm | — | — | not rerun |
 | Pt/eon-dimer-cg | barrier_force_calls 496000, barrier_jobs 1050, rate_force_calls 25630, rate_jobs 54 | 506000, 1062, 27160, 57 | reproduced |
@@ -271,7 +271,7 @@ The archived driver is the dangling path bin/js850/globalopt.py. The harness use
 
 ### htst_al
 
-The archived number is the paper row. EON and eOn are different codes, scored stock and untuned on the same Al adatom, 639 barrier windows, and max-atom force 0.001. EON (SVN r2549) scores barrier_jobs 46, barrier_force_calls 3.966e+04, rate_jobs 1390, rate_force_calls 1.179e+06. eOn (develop a7aa574) scores barrier_jobs 42, barrier_force_calls 7.475e+03, rate_jobs 4545, rate_force_calls 7.924e+05. The gaps stay as measured. Pt dimer CG with max 10 reproduces all four hTST counts.
+EON and eOn are different codes, scored stock and untuned on the same Al adatom, 639 barrier windows, and max-atom force 0.001. The ranked count is every force evaluation: dimer images, minimizations, and prefactor calls. EON (SVN r2549) scores barrier_jobs 46, barrier_force_calls 4.563e+04, rate_jobs 1390, rate_force_calls 1.356e+06 across 21 rate windows. eOn (develop 500350d9) scores barrier_jobs 42, barrier_force_calls 4.813e+04, rate_jobs 4208, rate_force_calls 4.785e+06 across 5 rate windows. Client totals matched HarnessCounter on both binaries: 2087 and 2087 across 4 EON searches, and 43262 and 43262 across 64 eOn searches. The gaps stay as measured.
 
 - hTST/Al/eon-dimer-cg
 

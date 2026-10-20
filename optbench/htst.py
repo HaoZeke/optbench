@@ -80,6 +80,13 @@ class Search:
     prefactor: float | None = None
     saddle_energy: float | None = None
     rate: float | None = None
+    minimization_calls: int = 0
+    prefactor_calls: int = 0
+
+
+def search_evaluations(search: Search) -> int:
+    """Saddle images, minimizations, and prefactor evaluations on one search."""
+    return search.force_calls + search.minimization_calls + search.prefactor_calls
 
 
 @dataclass
@@ -98,6 +105,8 @@ class HtstReduction:
     rate_jobs: list[int]
     rate_force_calls: list[int]
     searches: int
+    barrier_evaluations: list[int]
+    rate_evaluations: list[int]
 
     @property
     def barrier_windows(self) -> int:
@@ -127,6 +136,14 @@ class HtstReduction:
     @property
     def rate_force_calls_mean(self) -> float | None:
         return self._mean(self.rate_force_calls)
+
+    @property
+    def barrier_evaluations_mean(self) -> float | None:
+        return self._mean(self.barrier_evaluations)
+
+    @property
+    def rate_evaluations_mean(self) -> float | None:
+        return self._mean(self.rate_evaluations)
 
 
 def spec_from_problem(problem: dict) -> HtstSpec:
@@ -198,6 +215,8 @@ def parse_search_results(text: str) -> list[Search]:
                 barrier=float(fields[2]),
                 status=status,
                 process_id=process_id,
+                minimization_calls=int(fields[5]) if len(fields) >= 8 else 0,
+                prefactor_calls=int(fields[6]) if len(fields) >= 8 else 0,
             )
         )
     return rows
@@ -241,12 +260,16 @@ def reduce_htst(processes: Sequence[Process], searches: Sequence[Search], spec: 
     rate_ids: list[int] = []
     barrier_jobs: list[int] = []
     barrier_calls: list[int] = []
+    barrier_evaluations: list[int] = []
     rate_jobs: list[int] = []
     rate_calls: list[int] = []
+    rate_evaluations: list[int] = []
     search_bnum = 0
     search_rnum = 0
     fcs_bsum = 0
     fcs_rsum = 0
+    eval_bsum = 0
+    eval_rsum = 0
     rate_sumt = 0.0
     thermal = spec.kb * spec.temperature
     for search in searches:
@@ -254,6 +277,9 @@ def reduce_htst(processes: Sequence[Process], searches: Sequence[Search], spec: 
         search_rnum += 1
         fcs_bsum += search.force_calls
         fcs_rsum += search.force_calls
+        evaluated = search_evaluations(search)
+        eval_bsum += evaluated
+        eval_rsum += evaluated
         if search.process_id is None or search.status not in ("good", "repeat"):
             continue
         process_id = search.process_id
@@ -265,9 +291,11 @@ def reduce_htst(processes: Sequence[Process], searches: Sequence[Search], spec: 
             if reference_ids and len(barrier_ids) == len(reference_ids):
                 barrier_jobs.append(search_bnum)
                 barrier_calls.append(fcs_bsum)
+                barrier_evaluations.append(eval_bsum)
                 barrier_ids = []
                 search_bnum = 0
                 fcs_bsum = 0
+                eval_bsum = 0
         prefactor = spec.prefactor if search.prefactor is None else search.prefactor
         if rate_sumt < spec.threshold and process_id not in rate_ids:
             rate_ids.append(process_id)
@@ -275,9 +303,11 @@ def reduce_htst(processes: Sequence[Process], searches: Sequence[Search], spec: 
         if rate_sumt >= spec.threshold:
             rate_jobs.append(search_rnum)
             rate_calls.append(fcs_rsum)
+            rate_evaluations.append(eval_rsum)
             rate_ids = []
             search_rnum = 0
             fcs_rsum = 0
+            eval_rsum = 0
             rate_sumt = 0.0
     return HtstReduction(
         processes=list(processes),
@@ -292,6 +322,8 @@ def reduce_htst(processes: Sequence[Process], searches: Sequence[Search], spec: 
         rate_jobs=rate_jobs,
         rate_force_calls=rate_calls,
         searches=len(searches),
+        barrier_evaluations=barrier_evaluations,
+        rate_evaluations=rate_evaluations,
     )
 
 
@@ -363,19 +395,23 @@ def barrier_start_records(
 ) -> list[dict]:
     """One JSON object per completed barrier window.
 
-    ``force_calls`` is the ``sad-fcs`` sum of that window. The reference
-    processes are the same on every row: they are the saddle energies,
-    prefactors, and rates the window was required to find.
+    ``force_calls`` sums saddle images, minimizations, and prefactor
+    evaluations in that window. ``sad_fcs`` keeps the saddle column alone.
+    The reference processes are the same on every row: they are the saddle
+    energies, prefactors, and rates the window was required to find.
     """
     processes = reference_processes(reduction)
     rows = []
-    for index, (jobs, calls) in enumerate(zip(reduction.barrier_jobs, reduction.barrier_force_calls), start=1):
+    evaluations = reduction.barrier_evaluations or reduction.barrier_force_calls
+    sad = reduction.barrier_force_calls
+    for index, (jobs, calls, saddle_calls) in enumerate(zip(reduction.barrier_jobs, evaluations, sad), start=1):
         rows.append(
             {
                 "code": code,
                 "code_version": code_version,
                 "commit": commit,
-                "counter": "htst-reducer",
+                "counter": "harness",
+                "sad_fcs": saddle_calls,
                 "failed": False,
                 "failure": None,
                 "force_calls": calls,

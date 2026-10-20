@@ -197,7 +197,7 @@ MATCHES: list[dict] = [
     # globalopt and htst and aladatom rates
     {"key": "globalopt/lj38/eon-basinhopping", "template": "eon-client/bh-lj38", "branch": "entries/eon-svn-lane-a", "path": "results/campaign/eon-client-bh-lj38.dat"},
     {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "branch": "cells/pele/go", "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat", "cause": "pele_bh_defaults"},
-    {"key": "hTST/Al/eon-dimer-cg", "template": "eon-svn/htst-al-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-al-dimer.dat", "kind": "htst", "cause": "htst_al"},
+    {"key": "hTST/Al/eon-dimer-cg", "template": "eon-svn-r2549/htst-al-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-r2549-htst-al-dimer.dat", "kind": "htst", "cause": "htst_al"},
     {"key": "hTST/Pt/eon-dimer-cg", "template": "eon-svn/htst-pt-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-pt-dimer.dat", "kind": "htst"},
 ]
 
@@ -271,7 +271,7 @@ CAUSE_TEXT = {
         "The harness uses pele LJCluster defaults (temperature 1, step 0.6, LBFGS memory 4) on unshifted cutoff 40. "
         "The mean is 688720 against 521595."
     ),
-    "htst_al": "The archived number is the paper row. EON and eOn are different codes, scored stock and untuned on the same Al adatom, 639 barrier windows, and max-atom force 0.001. EON (SVN r2549) scores barrier_jobs 46, barrier_force_calls 3.966e+04, rate_jobs 1390, rate_force_calls 1.179e+06. eOn (develop a7aa574) scores barrier_jobs 42, barrier_force_calls 7.475e+03, rate_jobs 4545, rate_force_calls 7.924e+05. The gaps stay as measured. Pt dimer CG with max 10 reproduces all four hTST counts.",
+    "htst_al": "EON and eOn are different codes, scored stock and untuned on the same Al adatom, 639 barrier windows, and max-atom force 0.001. The ranked count is every force evaluation: dimer images, minimizations, and prefactor calls. EON (SVN r2549) scores barrier_jobs 46, barrier_force_calls 4.563e+04, rate_jobs 1390, rate_force_calls 1.356e+06 across 21 rate windows. eOn (develop 500350d9) scores barrier_jobs 42, barrier_force_calls 4.813e+04, rate_jobs 4208, rate_force_calls 4.785e+06 across 5 rate windows. Client totals matched HarnessCounter on both binaries: 2087 and 2087 across 4 EON searches, and 43262 and 43262 across 64 eOn searches. The gaps stay as measured.",
     "precon_hessian_index": (
         "ASE 3.29 PreconLBFGS with the archived opt.py setup (Exp A 3, maxstep 0.1, ASE fmax 0.01) "
         "scores 2605 against 2686, inside 10 percent. "
@@ -515,7 +515,8 @@ def holdback(root: Path) -> Hold:
         rerun = row.get("rerun") or {}
         problem = f"{row['suite']}/{row['problem']}"
         template = str(rerun.get("template") or "")
-        if row.get("status") == "not_reproduced":
+        if row.get("status") == "not_reproduced" and row.get("cause") != "htst_al":
+            # The two Al dimer codes stay on the ranked table. The ledger keeps the gap.
             if template:
                 found.templates.add((problem, template))
             rel = str(rerun.get("path") or "")
@@ -759,6 +760,12 @@ def build_rows(root: Path) -> list[dict]:
         record["failure_check"] = failure
         record["status"] = status
         record["gap"] = _gap(checks, failure) if status == "not_reproduced" else ""
+        if named == "htst_al":
+            record["gap"] = "; ".join(
+                f"{item['metric']} {item['rerun']:g} vs {item['archive']:g}"
+                for item in checks
+                if not item["ok"]
+            )
         record["cause"] = cause
         record["cause_detail"] = CAUSE_TEXT.get(cause, "") if cause else ""
         record["note"] = CAUSE_TEXT.get(named, "") if status == "reproduced" and named else ""
@@ -836,7 +843,9 @@ def render_markdown(rows: list[dict]) -> str:
             archive = "—"
             rerun = "—"
         status = row["status"].replace("_", " ")
-        if row.get("cause"):
+        if row.get("cause") == "htst_al":
+            status = row["cause"]
+        elif row.get("cause"):
             status = f"{status}; {row['cause']}"
         if row.get("note"):
             status = f"{status}; residual"

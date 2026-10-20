@@ -32,7 +32,7 @@ repository = "https://github.com/TheochemUI/eon"
 ref = "develop"
 commit = "7095b23ac17d49f434a5e08ccb072897ceca698e"
 committed = "2026-10-16"
-note = "develop HEAD built from source. The version string is 3.6.0 (7095b23a). GPR-dimer is absent: TheochemUI/gpr_optim is private and eonclient reports GPRD disabled. This pin is not the conda-forge 3.5.0 binary. This is eOn at https://eondocs.org and https://github.com/TheochemUI/eon. It is not a version of the SVN code. The hTST Al dimer campaign is current develop a7aa57472fb7d823953fd36b78cd755fa4842d30, stock and unpatched, labelled eOn (develop a7aa574). The 7095b23 pin stays for the scores already run on it."
+note = "develop HEAD built from source. The version string is 3.6.0 (7095b23a). GPR-dimer is absent: TheochemUI/gpr_optim is private and eonclient reports GPRD disabled. This pin is not the conda-forge 3.5.0 binary. This is eOn at https://eondocs.org and https://github.com/TheochemUI/eon. It is not a version of the SVN code. The hTST Al dimer campaign is fix/develop-regressions-vs-350 at 6d9d629a, which contains 500350d9, stock and unpatched, labelled eOn (develop 500350d9). The 7095b23 pin stays for the scores already run on it."
 
 [[code]]
 id = "eon-svn"
