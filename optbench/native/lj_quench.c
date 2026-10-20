@@ -21,6 +21,46 @@ struct optbench_quench_out {
     int capped;
 };
 
+struct quench_buffers {
+    int dimension;
+    double *best;
+    double *lower;
+    double *upper;
+    double *gradient;
+    double *cache_x;
+    double *cache_gradient;
+    double *working;
+};
+
+static __thread struct quench_buffers reused;
+
+static int ensure_buffers(struct quench_buffers *buffers, int dimension) {
+    if (buffers->dimension == dimension && buffers->best != NULL) {
+        return 0;
+    }
+    free(buffers->best);
+    free(buffers->lower);
+    free(buffers->upper);
+    free(buffers->gradient);
+    free(buffers->cache_x);
+    free(buffers->cache_gradient);
+    free(buffers->working);
+    memset(buffers, 0, sizeof(*buffers));
+    buffers->best = calloc((size_t)dimension, sizeof(double));
+    buffers->lower = calloc((size_t)dimension, sizeof(double));
+    buffers->upper = calloc((size_t)dimension, sizeof(double));
+    buffers->gradient = calloc((size_t)dimension, sizeof(double));
+    buffers->cache_x = calloc((size_t)dimension, sizeof(double));
+    buffers->cache_gradient = calloc((size_t)dimension, sizeof(double));
+    buffers->working = calloc((size_t)dimension, sizeof(double));
+    if (buffers->best == NULL || buffers->lower == NULL || buffers->upper == NULL || buffers->gradient == NULL ||
+        buffers->cache_x == NULL || buffers->cache_gradient == NULL || buffers->working == NULL) {
+        return 1;
+    }
+    buffers->dimension = dimension;
+    return 0;
+}
+
 struct eval_state {
     double *gradient;
     double *cache_x;
@@ -118,24 +158,16 @@ int optbench_lj_quench(double *x, int dimension, int cap, int local_max, int win
         return 1;
     }
     atoms = dimension / 3;
-    best = calloc((size_t)dimension, sizeof(double));
-    lower = calloc((size_t)dimension, sizeof(double));
-    upper = calloc((size_t)dimension, sizeof(double));
-    gradient = calloc((size_t)dimension, sizeof(double));
-    cache_x = calloc((size_t)dimension, sizeof(double));
-    cache_gradient = calloc((size_t)dimension, sizeof(double));
-    working = calloc((size_t)dimension, sizeof(double));
-    if (best == NULL || lower == NULL || upper == NULL || gradient == NULL || cache_x == NULL ||
-        cache_gradient == NULL || working == NULL) {
-        free(best);
-        free(lower);
-        free(upper);
-        free(gradient);
-        free(cache_x);
-        free(cache_gradient);
-        free(working);
+    if (ensure_buffers(&reused, dimension) != 0) {
         return 1;
     }
+    best = reused.best;
+    lower = reused.lower;
+    upper = reused.upper;
+    gradient = reused.gradient;
+    cache_x = reused.cache_x;
+    cache_gradient = reused.cache_gradient;
+    working = reused.working;
     memcpy(working, x, (size_t)dimension * sizeof(double));
     memset(&state, 0, sizeof(state));
     state.gradient = gradient;
@@ -175,13 +207,6 @@ int optbench_lj_quench(double *x, int dimension, int cap, int local_max, int win
         }
         state.opt = nlopt_create(NLOPT_LD_LBFGS, (unsigned)dimension);
         if (state.opt == NULL) {
-            free(best);
-            free(lower);
-            free(upper);
-            free(gradient);
-            free(cache_x);
-            free(cache_gradient);
-            free(working);
             return 1;
         }
         nlopt_set_min_objective(state.opt, objective, &state);
@@ -246,13 +271,7 @@ int optbench_lj_quench(double *x, int dimension, int cap, int local_max, int win
     }
     memcpy(x, best, (size_t)dimension * sizeof(double));
     finish(out, best_energy, best_min, calls, code, state.capped);
+    return 0;
 cleanup:
-    free(best);
-    free(lower);
-    free(upper);
-    free(gradient);
-    free(cache_x);
-    free(cache_gradient);
-    free(working);
     return 0;
 }

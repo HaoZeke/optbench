@@ -19,6 +19,7 @@ from pathlib import Path
 
 NATIVE = Path(__file__).resolve().parent / "native"
 _KERNEL_SRC = NATIVE / "kernels.c"
+_AVX_SRC = NATIVE / "lj_avx.c"
 _QUENCH_SRC = NATIVE / "lj_quench.c"
 _BRIDGE_SRC = NATIVE / "extpot_bridge.c"
 _CFLAGS = [
@@ -47,14 +48,31 @@ def _build_dir() -> Path:
     return root
 
 
-def _compile(source: Path, dest: Path, extra: list[str]) -> bool:
+def _compile_many(dest: Path, units: list[tuple[Path, list[str]]], link: list[str]) -> bool:
+    """Compile each unit with its own flags and link one shared library."""
     gcc = shutil.which("gcc")
-    if gcc is None or not source.is_file():
+    if gcc is None:
         return False
     dest.parent.mkdir(parents=True, exist_ok=True)
+    objects: list[str] = []
+    for source, flags in units:
+        if not source.is_file():
+            return False
+        obj = dest.with_name(dest.name + f".{source.stem}.o")
+        compiled = subprocess.run(
+            [gcc, *_CFLAGS, "-fPIC", *flags, "-c", "-o", str(obj), str(source)],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        log = dest.with_suffix(dest.suffix + ".log")
+        if compiled.returncode != 0:
+            log.write_text(compiled.stderr, encoding="utf-8")
+            return False
+        objects.append(str(obj))
     temporary = dest.with_suffix(dest.suffix + ".tmp")
     result = subprocess.run(
-        [gcc, * _CFLAGS, *extra, "-o", str(temporary), str(source), "-lm"],
+        [gcc, "-shared", "-o", str(temporary), *objects, *link, "-lm"],
         check=False,
         capture_output=True,
         text=True,
@@ -70,6 +88,29 @@ def _compile(source: Path, dest: Path, extra: list[str]) -> bool:
     return True
 
 
+def _compile(source: Path, dest: Path, extra: list[str]) -> bool:
+    if not source.is_file():
+        return False
+    return _compile_many(dest, [(source, extra)], [])
+
+
+def _lj_units(include: Path | None = None) -> list[tuple[Path, list[str]]]:
+    quench_flags = [f"-I{include}"] if include is not None else []
+    return [
+        (_KERNEL_SRC, []),
+        (_AVX_SRC, ["-mavx512f", "-mfma"]),
+        (_QUENCH_SRC, quench_flags),
+    ]
+
+
+def _source_stamp(*sources: Path) -> str:
+    digest = hashlib.sha256()
+    for source in sources:
+        digest.update(source.read_bytes())
+        digest.update(b"\0")
+    return digest.hexdigest()[:16]
+
+
 _KERNELS: ctypes.CDLL | None | bool = None
 
 
@@ -82,8 +123,12 @@ def kernels() -> ctypes.CDLL | None:
         return None
     if isinstance(_KERNELS, ctypes.CDLL):
         return _KERNELS
-    dest = _build_dir() / f"kernels-{_stamp(_KERNEL_SRC)}.so"
-    if not dest.is_file() and not _compile(_KERNEL_SRC, dest, ["-fPIC", "-shared"]):
+    dest = _build_dir() / f"kernels-{_source_stamp(_KERNEL_SRC, _AVX_SRC)}.so"
+    if not dest.is_file() and not _compile_many(
+        dest,
+        [(_KERNEL_SRC, []), (_AVX_SRC, ["-mavx512f", "-mfma"])],
+        [],
+    ):
         _KERNELS = False
         return None
     lib = ctypes.CDLL(str(dest))
@@ -313,45 +358,18 @@ def quench_library() -> ctypes.CDLL | None:
     if isinstance(_QUENCH, ctypes.CDLL):
         return _QUENCH
     dirs = _nlopt_dirs()
-    if dirs is None or not _QUENCH_SRC.is_file() or not _KERNEL_SRC.is_file():
+    if dirs is None or not _QUENCH_SRC.is_file() or not _KERNEL_SRC.is_file() or not _AVX_SRC.is_file():
         _QUENCH = False
         return None
     include, library = dirs
-    stamp = hashlib.sha256(_KERNEL_SRC.read_bytes() + b"\0" + _QUENCH_SRC.read_bytes()).hexdigest()[:16]
-    dest = _build_dir() / f"lj-quench-{stamp}.so"
-    if not dest.is_file():
-        temporary = dest.with_suffix(dest.suffix + ".tmp")
-        gcc = shutil.which("gcc")
-        if gcc is None:
-            _QUENCH = False
-            return None
-        result = subprocess.run(
-            [
-                gcc,
-                *_CFLAGS,
-                "-fPIC",
-                "-shared",
-                f"-I{include}",
-                "-o",
-                str(temporary),
-                str(_KERNEL_SRC),
-                str(_QUENCH_SRC),
-                f"-L{library}",
-                "-lnlopt",
-                "-lm",
-                f"-Wl,-rpath,{library}",
-            ],
-            check=False,
-            capture_output=True,
-            text=True,
-        )
-        if result.returncode != 0:
-            temporary.unlink(missing_ok=True)
-            dest.with_suffix(dest.suffix + ".log").write_text(result.stderr, encoding="utf-8")
-            _QUENCH = False
-            return None
-        temporary.replace(dest)
-        dest.chmod(dest.stat().st_mode | 0o755)
+    dest = _build_dir() / f"lj-quench-{_source_stamp(_KERNEL_SRC, _AVX_SRC, _QUENCH_SRC)}.so"
+    if not dest.is_file() and not _compile_many(
+        dest,
+        _lj_units(include),
+        [f"-L{library}", "-lnlopt", f"-Wl,-rpath,{library}"],
+    ):
+        _QUENCH = False
+        return None
     lib = ctypes.CDLL(str(dest))
     lib.optbench_lj_quench.argtypes = [
         ctypes.POINTER(ctypes.c_double),

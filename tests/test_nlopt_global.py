@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import math
 import tomllib
 from pathlib import Path
@@ -340,6 +341,25 @@ def test_the_native_core_matches_the_numpy_core():
     assert got[2] == pytest.approx(raw_min, abs=1e-12)
     assert got[0] == pytest.approx(raw, abs=1e-9)
     assert np.max(np.abs(got[1] - raw_grad)) < 1e-8
+    coincident = np.zeros(6)
+    got = native(coincident, 0.9)
+    raw, raw_grad, raw_min = capped_lennard_jones(coincident, 0.9)
+    assert got[2] == pytest.approx(0.0, abs=1e-15)
+    assert raw_min == pytest.approx(0.0, abs=1e-15)
+    assert got[0] == pytest.approx(raw, abs=1e-9)
+    assert np.max(np.abs(got[1] - raw_grad)) < 1e-8
+
+
+def test_cambridge_minima_sit_outside_the_quadratic_core():
+    from optbench.ccd import LJ_SIZES, lennard_jones_minimum
+
+    for size in LJ_SIZES:
+        record = lennard_jones_minimum(size)
+        harness, _gradient = lennard_jones(record["positions"])
+        capped, _capped_gradient, minimum = capped_lennard_jones(record["positions"], 0.9)
+        assert minimum > 0.9
+        assert capped == pytest.approx(harness, abs=1e-9)
+        assert harness == pytest.approx(float(record["energy"]), abs=1e-6)
 
 
 def test_the_c_quench_matches_the_python_quench(monkeypatch):
@@ -373,6 +393,66 @@ def test_the_c_quench_matches_the_python_quench(monkeypatch):
     assert native_energy == python_energy
     assert native_code == python_code
     assert np.array_equal(native_point, python_point)
+
+
+def test_a_checkpoint_resumes_the_same_trajectory(tmp_path: Path):
+    pytest.importorskip("nlopt")
+    from optbench.campaign import resolve_problem
+    from optbench.globalopt import reference_energy
+    from optbench.runners.nlopt_global import _job, _settings, run_job
+
+    template = load_template(ROOT, "nloptglobal/lj38-lbfgs-bh")
+    problem = resolve_problem(ROOT, "globalopt/lj38")
+    settings = _settings(problem, template)
+    rng = np.random.default_rng(0)
+    coords = rng.normal(size=(38, 3))
+    coords -= coords.mean(axis=0)
+    reference = reference_energy(problem)
+    job = _job(0, "cloud", coords.reshape(-1), settings, reference, settings["window"])
+    job["cap"] = 2500
+    job["local_maxeval"] = 400
+    full = run_job(dict(job))
+    partial_job = dict(job)
+    partial_job["checkpoint"] = str(tmp_path / "progress.json")
+    partial_job["checkpoint_calls"] = 0
+    partial_job["max_hops"] = 1
+    partial = run_job(partial_job)
+    assert partial["force_calls"] < full["force_calls"]
+    saved = json.loads((tmp_path / "progress.json").read_text(encoding="utf-8"))
+    assert saved["schema"] == "optbench.bh-progress/v1"
+    assert int(saved["calls"]) == partial["force_calls"]
+    resumed = run_job(dict(partial_job, max_hops=None))
+    assert resumed["force_calls"] == full["force_calls"]
+    assert resumed["energy"] == full["energy"]
+    assert resumed["nlopt_code"] == full["nlopt_code"]
+    assert resumed["failure"] == full["failure"]
+    assert resumed["success"] == full["success"]
+
+
+def test_a_shard_keeps_finished_starts(tmp_path: Path):
+    pytest.importorskip("nlopt")
+    from optbench.campaign import resolve_problem
+    from optbench.runners.nlopt_global import assemble_basin_shard, run_basin_shard
+
+    problem = resolve_problem(ROOT, "globalopt/lj38")
+    template = load_template(ROOT, "nloptglobal/lj38-lbfgs-bh")
+    shard = tmp_path / "shard"
+    output = tmp_path / "row.dat"
+    first = run_basin_shard(ROOT, problem, template, [0, 1], workers=2, shard_dir=shard, cap=400)
+    assert sorted(path.name for path in shard.glob("*.done.json")) == ["000.done.json", "001.done.json"]
+    assert list(shard.glob("*.progress.json")) == []
+    second = run_basin_shard(ROOT, problem, template, [0, 1], workers=1, shard_dir=shard, cap=400)
+    assert [row["force_calls"] for row in sorted(second, key=lambda row: row["index"])] == [
+        row["force_calls"] for row in sorted(first, key=lambda row: row["index"])
+    ]
+    assert assemble_basin_shard(ROOT, problem, template, output, shard_dir=shard, expected=100) is None
+    assert not output.exists()
+    summary = assemble_basin_shard(ROOT, problem, template, output, shard_dir=shard, expected=2)
+    assert summary is not None
+    assert summary["starts"] == 2
+    assert output.is_file()
+    assert output.with_suffix(".starts.jsonl").is_file()
+    assert output.with_suffix(".v2.json").is_file()
 
 
 def test_wales_cluster_archives_load_numbered_coords(tmp_path: Path):

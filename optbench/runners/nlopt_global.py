@@ -22,7 +22,8 @@ Pairs inside ``core_radius`` use a quadratic stand-in matched to the
 12-6 value and slope. Outside that radius the search value is the
 harness potential. The quench calls the NLopt C API directly. A fresh
 geometry is still one harness force call, and a repeated coordinate is
-not counted again.
+not counted again. A progress file written after a finished hop resumes
+that hop, so a restarted start repeats no completed quench.
 """
 
 from __future__ import annotations
@@ -415,6 +416,55 @@ def _quench(
     return best_x, float(best_e), local_code
 
 
+def _json_ready(value):
+    """Nested JSON value with numpy scalars turned into Python numbers."""
+    if isinstance(value, dict):
+        return {str(key): _json_ready(item) for key, item in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_json_ready(item) for item in value]
+    if isinstance(value, np.ndarray):
+        return value.tolist()
+    if isinstance(value, np.integer):
+        return int(value)
+    if isinstance(value, np.floating):
+        return float(value)
+    return value
+
+
+def _atomic_json(path: Path, payload: dict) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_name(path.name + ".tmp")
+    temporary.write_text(json.dumps(_json_ready(payload), sort_keys=True) + "\n", encoding="utf-8")
+    os.replace(temporary, path)
+
+
+def _restore_basin(saved: dict | None, job: dict, size: int) -> dict | None:
+    """Hop state for this start, or ``None`` when the file is not usable."""
+    if not saved or saved.get("schema") != "optbench.bh-progress/v1":
+        return None
+    if int(saved.get("seed", -1)) != int(job["seed"]) or saved.get("start") != job["start"]:
+        return None
+    current = np.asarray(saved["current"], dtype=np.float64).reshape(-1)
+    best = np.asarray(saved["best"], dtype=np.float64).reshape(-1)
+    if current.size != size or best.size != size:
+        return None
+    if not bool(np.all(np.isfinite(current))) or not bool(np.all(np.isfinite(best))):
+        return None
+    rng = np.random.default_rng(int(job["seed"]))
+    rng.bit_generator.state = saved["rng"]
+    code = saved.get("code")
+    return {
+        "calls": int(saved["calls"]),
+        "seconds": float(saved.get("seconds") or 0.0),
+        "code": None if code is None else int(code),
+        "current": current,
+        "current_energy": float(saved["current_energy"]),
+        "best": best,
+        "best_energy": float(saved["best_energy"]),
+        "rng": rng,
+    }
+
+
 def _run_basin_hop(job: dict) -> dict:
     """Displace, quench with LD_LBFGS, and accept with the Metropolis rule."""
     calls = 0
@@ -441,12 +491,60 @@ def _run_basin_hop(job: dict) -> dict:
             "core_radius": float(job["core_radius"]),
             "window": int(job.get("lbfgs_window") or 100),
         }
-        rng = np.random.default_rng(int(job["seed"]))
-        started = time.perf_counter()
-        current, current_e, code = _quench(counter, x0, **quench)
-        point = current.copy()
-        best_e = current_e
+        checkpoint = Path(job["checkpoint"]) if job.get("checkpoint") else None
+        checkpoint_calls = int(job.get("checkpoint_calls") or 0)
+        max_hops = None if job.get("max_hops") is None else int(job["max_hops"])
+        restored = None
+        if checkpoint is not None and checkpoint.is_file():
+            try:
+                restored = _restore_basin(json.loads(checkpoint.read_text(encoding="utf-8")), job, x0.size)
+            except (OSError, json.JSONDecodeError, KeyError, TypeError, ValueError):
+                restored = None
+        rng = restored["rng"] if restored is not None else np.random.default_rng(int(job["seed"]))
+        started = time.perf_counter() - (restored["seconds"] if restored is not None else 0.0)
+        last_checkpoint_calls = 0
+
+        def snapshot() -> None:
+            nonlocal last_checkpoint_calls
+            if checkpoint is None:
+                return
+            _atomic_json(
+                checkpoint,
+                {
+                    "schema": "optbench.bh-progress/v1",
+                    "index": int(job["index"]),
+                    "start": job["start"],
+                    "seed": int(job["seed"]),
+                    "calls": int(counter.calls),
+                    "seconds": time.perf_counter() - started,
+                    "code": None if code is None else int(code),
+                    "current": current,
+                    "current_energy": float(current_e),
+                    "best": point,
+                    "best_energy": float(best_e),
+                    "rng": rng.bit_generator.state,
+                },
+            )
+            last_checkpoint_calls = int(counter.calls)
+
+        if restored is None:
+            current, current_e, code = _quench(counter, x0, **quench)
+            point = current.copy()
+            best_e = current_e
+        else:
+            counter.calls = int(restored["calls"])
+            current = restored["current"]
+            current_e = restored["current_energy"]
+            point = restored["best"].copy()
+            best_e = restored["best_energy"]
+            code = restored["code"]
+            last_checkpoint_calls = int(counter.calls)
+        snapshot()
+        hops = 0
         while counter.calls < cap and not (math.isfinite(best_e) and best_e <= limit):
+            if max_hops is not None and hops >= max_hops:
+                snapshot()
+                break
             trial = current + rng.uniform(-dr, dr, size=current.size)
             trial = trial.reshape(-1, 3)
             trial -= trial.mean(axis=0)
@@ -460,6 +558,9 @@ def _run_basin_hop(job: dict) -> dict:
             if accept:
                 current = trial_x
                 current_e = trial_e
+            hops += 1
+            if counter.calls - last_checkpoint_calls >= checkpoint_calls:
+                snapshot()
         if math.isfinite(best_e) and best_e <= limit and counter.calls < cap:
             code = 2
         elif counter.calls >= cap:
@@ -930,9 +1031,10 @@ def run_template(
     pending = [job for job in jobs if job["index"] not in done]
     records = [done[job["index"]] for job in jobs if job["index"] in done]
     if pending and settings["nlopt"].get("displacement") is not None:
-        from optbench.fastpot import lj_capped_gradient
+        from optbench.fastpot import lj_capped_gradient, quench_library
 
         lj_capped_gradient(np.zeros(6, dtype=np.float64), float(settings["nlopt"]["core_radius"]))
+        quench_library()
     if pending:
         if workers <= 1:
             fresh = []
@@ -990,10 +1092,41 @@ def run_template(
                         flush=True,
                     )
         records.extend(fresh)
+    return _write_campaign(
+        records,
+        template=template,
+        problem=problem,
+        output=output,
+        partial=partial,
+        expected=len(jobs),
+        cap=settings["cap"],
+        energy_limit=energy_limit,
+        reference=reference,
+        settings=settings,
+        commit=commit,
+        version=version,
+    )
+
+
+def _write_campaign(
+    records: list[dict],
+    *,
+    template: dict,
+    problem: dict,
+    output: Path,
+    partial: Path | None,
+    expected: int,
+    cap: int,
+    energy_limit: float,
+    reference: float,
+    settings: dict,
+    commit: str,
+    version: str,
+) -> dict:
+    """Write the ranked campaign files for one complete set of starts."""
     records.sort(key=lambda row: row["index"])
     for record in records:
         record.pop("index", None)
-    cap = settings["cap"]
     legacy_counts = [cap if not record["success"] else int(record["force_calls"]) for record in records]
     summary = summarize_capped(legacy_counts, cap)
     successes = [int(record["force_calls"]) for record in records if record["success"]]
@@ -1079,7 +1212,7 @@ def run_template(
         json.dumps(document, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
     )
-    if partial.exists() and len(records) == len(jobs):
+    if partial is not None and partial.exists() and len(records) == expected:
         partial.unlink()
     summary["starts"] = len(records)
     summary["template"] = template["id"]
@@ -1088,6 +1221,257 @@ def run_template(
     summary["v2_nfailed"] = metrics["nfailed"]
     summary["v2_successes"] = metrics["successes"]
     return summary
+
+
+def parse_index_ranges(text: str) -> list[int]:
+    """Parse ``0-7,12`` into a sorted list of unique start indexes."""
+    found: list[int] = []
+    for part in text.split(","):
+        piece = part.strip()
+        if not piece:
+            continue
+        if "-" in piece:
+            start_text, end_text = piece.split("-", 1)
+            start, end = int(start_text), int(end_text)
+            if end < start:
+                raise ValueError(f"index range {piece} is reversed")
+            found.extend(range(start, end + 1))
+        else:
+            found.append(int(piece))
+    if len(found) != len(set(found)):
+        raise ValueError(f"duplicate indexes in {text}")
+    return sorted(found)
+
+
+def shard_directory(root: Path, template: dict, version: str) -> Path:
+    """Per-start files for one basin-hopping template. Not a campaign row."""
+    slug = str(template["id"]).split("/", 1)[-1]
+    return root / "results" / "campaign" / "shards" / f"nlopt-{version}-{slug}"
+
+
+def _done_path(directory: Path, index: int) -> Path:
+    return directory / f"{index:03d}.done.json"
+
+
+def _progress_path(directory: Path, index: int) -> Path:
+    return directory / f"{index:03d}.progress.json"
+
+
+def run_basin_shard(
+    root: Path,
+    problem: dict,
+    template: dict,
+    indexes: list[int],
+    *,
+    workers: int,
+    shard_dir: Path | None = None,
+    cap: int | None = None,
+    checkpoint_calls: int = 0,
+) -> list[dict]:
+    """Run disjoint basin-hopping starts into per-start files.
+
+    A finished start is ``NNN.done.json``. The hop in progress is
+    ``NNN.progress.json`` and is resumed on the next call. This does not
+    write a campaign ``.dat``; that file would be a partial ranked row
+    until every start exists. ``cap`` overrides the template budget for
+    a test. The campaign cap stays on the template.
+    """
+    import nlopt
+
+    for name, value in (
+        ("OMP_NUM_THREADS", "1"),
+        ("OPENBLAS_NUM_THREADS", "1"),
+        ("MKL_NUM_THREADS", "1"),
+        ("NUMEXPR_NUM_THREADS", "1"),
+    ):
+        os.environ.setdefault(name, value)
+    version = f"{nlopt.version_major()}.{nlopt.version_minor()}.{nlopt.version_bugfix()}"
+    if template.get("code_version") and version != str(template["code_version"]):
+        raise RuntimeError(f"nlopt {version} does not match template {template['code_version']}")
+    if template.get("nlopt", {}).get("displacement") is None:
+        raise ValueError(f"{template['id']} is not a basin-hopping template")
+    settings = _settings(problem, template)
+    if cap is not None:
+        settings = dict(settings)
+        settings["cap"] = int(cap)
+    reference = reference_energy(problem)
+    tolerance = energy_tolerance(problem)
+    directory = shard_dir or shard_directory(root, template, version)
+    directory.mkdir(parents=True, exist_ok=True)
+    loaded = _load_geometries(root, problem, None, root / "results" / "campaign" / "geometries", directory / "geometries.dat")
+    if any(index < 0 or index >= len(loaded) for index in indexes):
+        raise IndexError(f"indexes {indexes} do not fit {len(loaded)} starts")
+    pending = []
+    finished: list[dict] = []
+    for index in indexes:
+        done = _done_path(directory, index)
+        if done.is_file():
+            finished.append(json.loads(done.read_text(encoding="utf-8")))
+            continue
+        name, coords = loaded[index]
+        job = _job(index, name, coords, settings, reference, tolerance)
+        job["checkpoint"] = str(_progress_path(directory, index))
+        job["checkpoint_calls"] = int(checkpoint_calls)
+        pending.append(job)
+    if not pending:
+        return finished
+    from optbench.fastpot import lj_capped_gradient, quench_library
+
+    lj_capped_gradient(np.zeros(6, dtype=np.float64), float(settings["nlopt"]["core_radius"]))
+    quench_library()
+
+    def _store(record: dict) -> None:
+        index = int(record["index"])
+        _atomic_json(_done_path(directory, index), record)
+        _progress_path(directory, index).unlink(missing_ok=True)
+        finished.append(record)
+        print(
+            f"{template['id']} shard {record['start']} calls={record['force_calls']} "
+            f"failure={record['failure']} energy={record['energy']}",
+            flush=True,
+        )
+
+    if workers <= 1:
+        for job in pending:
+            _store(run_job(job))
+        return finished
+    import multiprocessing as mp
+
+    context = mp.get_context("spawn")
+    with ProcessPoolExecutor(max_workers=workers, mp_context=context) as pool:
+        futures = {pool.submit(run_job, job): job for job in pending}
+        for future in as_completed(futures):
+            job = futures[future]
+            try:
+                record = future.result()
+            except Exception as exc:
+                print(
+                    f"{template['id']} shard {job['start']} worker failed ({type(exc).__name__}: {exc}); resuming",
+                    flush=True,
+                )
+                record = run_job(job)
+            _store(record)
+    return finished
+
+
+def assemble_basin_shard(
+    root: Path,
+    problem: dict,
+    template: dict,
+    output: Path,
+    *,
+    shard_dir: Path | None = None,
+    expected: int | None = None,
+    commit: str | None = None,
+) -> dict | None:
+    """Publish the ranked row once every start has a done file.
+
+    Returns ``None`` while any start is missing. A partial campaign file
+    is not a ranked row.
+    """
+    import nlopt
+
+    version = f"{nlopt.version_major()}.{nlopt.version_minor()}.{nlopt.version_bugfix()}"
+    settings = _settings(problem, template)
+    reference = reference_energy(problem)
+    tolerance = energy_tolerance(problem)
+    directory = shard_dir or shard_directory(root, template, version)
+    sample = (problem.get("sample") or {}).get("starts")
+    required = int(expected if expected is not None else sample)
+    records = []
+    for index in range(required):
+        path = _done_path(directory, index)
+        if not path.is_file():
+            return None
+        records.append(json.loads(path.read_text(encoding="utf-8")))
+    indexes = [int(record["index"]) for record in records]
+    if indexes != list(range(required)):
+        raise ValueError(f"{directory} indexes are {indexes}, not 0..{required - 1}")
+    pinned = str(commit or template.get("commit") or "")
+    if not pinned:
+        raise RuntimeError(f"{template['id']} has no commit")
+    copied = [dict(record) for record in records]
+    return _write_campaign(
+        copied,
+        template=template,
+        problem=problem,
+        output=output,
+        partial=None,
+        expected=required,
+        cap=settings["cap"],
+        energy_limit=reference + tolerance,
+        reference=reference,
+        settings=settings,
+        commit=pinned,
+        version=version,
+    )
+
+
+def _asv_class_name(template_id: str) -> str:
+    slug = template_id.split("/", 1)[1]
+    return "Nlopt" + "".join(part.capitalize() for part in slug.split("-"))
+
+
+def main_shard(argv: list[str] | None = None) -> None:
+    """Shard entry point. Indexes are a disjoint range such as ``0-7``."""
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Run one basin-hopping shard into per-start files.")
+    parser.add_argument("--root", type=Path, default=Path("."))
+    parser.add_argument("--problem", default="globalopt/lj98")
+    parser.add_argument("--template", default="nloptglobal/lj98-lbfgs-bh")
+    parser.add_argument("--indexes", required=True, help="Disjoint start indexes, for example 0-7 or 8-15")
+    parser.add_argument("--workers", type=int, default=os.cpu_count() or 1)
+    parser.add_argument("--shard-dir", type=Path, default=None)
+    parser.add_argument("--checkpoint-calls", type=int, default=0)
+    parser.add_argument(
+        "--assemble",
+        action="store_true",
+        help="Write the ranked campaign files when every start is done. Does nothing earlier.",
+    )
+    args = parser.parse_args(argv)
+    from optbench.campaign import load_template, resolve_problem
+
+    root = args.root.resolve()
+    problem = resolve_problem(root, args.problem)
+    template = load_template(root, args.template)
+    if args.assemble:
+        version_commit = str(template.get("commit") or "")
+        output = root / "results" / "campaign" / f"nlopt-{template['code_version']}-{args.template.split('/', 1)[1]}.dat"
+        summary = assemble_basin_shard(
+            root,
+            problem,
+            template,
+            output,
+            shard_dir=args.shard_dir,
+            commit=version_commit,
+        )
+        if summary is None:
+            print(f"{args.template} shard is incomplete; no campaign file written", flush=True)
+            return
+        import subprocess
+
+        head = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True).strip()
+        directory = args.shard_dir or shard_directory(root, template, str(template["code_version"]))
+        sample = int((problem.get("sample") or {}).get("starts"))
+        done = [json.loads(_done_path(directory, index).read_text(encoding="utf-8")) for index in range(sample)]
+        write_shard_asv(root, template, done, head)
+        print(
+            f"{summary['problem']} {summary['template']} starts={summary['starts']} "
+            f"nfailed={summary['nfailed']} par2_mean={summary['par2_mean']}",
+            flush=True,
+        )
+        return
+    indexes = parse_index_ranges(args.indexes)
+    run_basin_shard(
+        root,
+        problem,
+        template,
+        indexes,
+        workers=args.workers,
+        shard_dir=args.shard_dir,
+        checkpoint_calls=args.checkpoint_calls,
+    )
 
 
 def write_asv_result(path: Path, commit: str, rows: dict[str, list[dict]], *, env_name: str, machine: dict) -> None:
@@ -1152,3 +1536,39 @@ def write_asv_result(path: Path, commit: str, rows: dict[str, list[dict]], *, en
     }
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(document) + "\n", encoding="utf-8")
+
+
+def write_shard_asv(root: Path, template: dict, records: list[dict], commit: str) -> Path:
+    """Add one basin-hopping class to the asv file named for ``commit``.
+
+    Records are stored in start-index order. Other classes already in
+    that file stay.
+    """
+    ordered = sorted(records, key=lambda row: int(row["index"]))
+    machine_path = root / "results" / "asv" / "cursor" / "machine.json"
+    if machine_path.is_file():
+        machine = json.loads(machine_path.read_text(encoding="utf-8"))
+    else:
+        machine = {"machine": "cursor", "version": 1, "python": "3.12"}
+    machine = dict(machine)
+    machine.setdefault("python", "3.12")
+    dest = root / "results" / "asv" / "cursor" / f"{commit[:8]}-uv-pip-py3.12.json"
+    previous = json.loads(dest.read_text(encoding="utf-8")) if dest.is_file() else None
+    write_asv_result(
+        dest,
+        commit,
+        {_asv_class_name(str(template["id"])): ordered},
+        env_name="uv-pip-py3.12",
+        machine=machine,
+    )
+    if previous and previous.get("results"):
+        fresh = json.loads(dest.read_text(encoding="utf-8"))
+        merged = dict(previous["results"])
+        merged.update(fresh["results"])
+        fresh["results"] = merged
+        dest.write_text(json.dumps(fresh) + "\n", encoding="utf-8")
+    return dest
+
+
+if __name__ == "__main__":
+    main_shard()

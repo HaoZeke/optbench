@@ -8,6 +8,12 @@
 
 #include <math.h>
 #include <stddef.h>
+#include <stdlib.h>
+
+int optbench_lj_capped_avx(const double *positions, int atoms, double core_radius, double cutoff,
+                           double *energy_out, double *gradient, double *min_distance);
+int optbench_lj_capped_scalar(const double *positions, int atoms, double core_radius, double cutoff,
+                              double *energy_out, double *gradient, double *min_distance);
 
 static double morse_fold(double delta, double length) {
     double scaled = delta / length;
@@ -202,9 +208,9 @@ int optbench_lj_cut(const double *positions, int atoms, double epsilon, double s
    unshifted 12-6 at the join. The gradient is dE/dx, not the force.
    Pairs at or beyond cutoff are omitted from the energy. The minimum
    pair distance still includes them. */
-int optbench_lj_capped(const double *positions, int atoms, double core_radius,
-                        double cutoff, double *energy_out, double *gradient,
-                        double *min_distance) {
+int optbench_lj_capped_scalar(const double *positions, int atoms, double core_radius,
+                               double cutoff, double *energy_out, double *gradient,
+                               double *min_distance) {
     int count = atoms * 3;
     int i;
     double core2;
@@ -281,4 +287,19 @@ int optbench_lj_capped(const double *positions, int atoms, double core_radius,
     *energy_out = energy;
     *min_distance = sqrt(min2);
     return 0;
+}
+
+int optbench_lj_capped(const double *positions, int atoms, double core_radius, double cutoff,
+                        double *energy_out, double *gradient, double *min_distance) {
+    static int avx = -1;
+    if (avx < 0) {
+        const char *scalar = getenv("OPTBENCH_SCALAR_LJ");
+        int forced = scalar != NULL && scalar[0] == '1' && scalar[1] == '\0';
+        avx = !forced && __builtin_cpu_supports("avx512f");
+    }
+    if (avx &&
+        optbench_lj_capped_avx(positions, atoms, core_radius, cutoff, energy_out, gradient, min_distance) == 0) {
+        return 0;
+    }
+    return optbench_lj_capped_scalar(positions, atoms, core_radius, cutoff, energy_out, gradient, min_distance);
 }
