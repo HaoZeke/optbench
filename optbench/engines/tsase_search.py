@@ -360,7 +360,7 @@ def _execute_dimer(job: dict) -> dict:
                     rotationMax=int(job["rotation_max"]),
                     ss=False,
                     noZeroModes=bool(np.all(free)),
-                    rotationOpt="cg",
+                    rotationOpt=str(job["rotation_opt"]),
                 )
                 stalled = 0
                 previous_overlap = None
@@ -458,6 +458,7 @@ def _dimer_job(start: dict, settings: dict, template: dict) -> dict:
         "dr": float(section.get("dr", 0.001)),
         "phi_tol": float(section.get("phi_tol", 5.0)),
         "rotation_max": int(section.get("rotation_max", 4)),
+        "rotation_opt": str(section.get("rotation_opt", "cg")),
         "zseed": pair_seed(f"0:{start['name']}", 20261015),
     }
 
@@ -591,8 +592,10 @@ def _run_points(root, problem, template, settings, output: Path, workers: int, e
         )
     else:
         jobs = [_dimer_job(start, settings, template) for start in starts]
+        rotation = str((template.get("tsase") or {}).get("rotation_opt", "cg"))
         comment = (
             "# counter harness. One force call is one ASE calculate inside the solid-state dimer.\n"
+            f"# rotationOpt is {rotation}. Other SSDimer constructor arguments stay at the library default.\n"
             "# TSASE forceCalls is not this count.\n"
             "# A mode success is the problem overlap. A saddle success is Hessian index 1."
         )
