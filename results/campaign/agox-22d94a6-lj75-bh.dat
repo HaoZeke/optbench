@@ -2,7 +2,7 @@
 # Local steps are SciPy L-BFGS-B stopped on the ASE maximum atomic force.
 # Basin hopping uses the same sampler, rattle, local optimizer, and seed rule as agox/lj38-bh. The confinement cube is 36 Å inside a 48 Å cell. The potential is the harness Lennard-Jones potential, cutoff 40, epsilon 1, sigma 1, no shift. Geometries come from the problem archive. Several of those geometries overlap, and an uncapped L-BFGS-B step puts them on the confinement wall. While the peak atomic force is above 1000, and for at most 40 steps, a local step moves at most 0.2 along that force. The local stop reads the harness force. The box constraint removes the outward part, and a dissociated cluster on the wall would otherwise meet the force tolerance. If L-BFGS-B returns before that stop, at most 25 steps of size min(0.05, 5/peak) follow while the peak force is above 30, and L-BFGS-B starts again, at most four times. A success is an energy at or below the problem reference -397.492331 plus 0.001. The force-call cap is 1000000.
 # partial true. The row is not a full ranked score.
-nfailed 185
+nfailed 188
 code AGOX
 code_version 3.11.2.dev2+g22d94a6fa
 commit 22d94a6fae8cf2d08d51ecc8b9291a47667aa95c
@@ -14,14 +14,14 @@ counter harness
 cap 1000000
 par2_mean 2000000
 wilson_low 0
-wilson_high 0.0203422428776
+wilson_high 0.0200241326578
 par2_median 2000000
 par2_median_low 2000000
 par2_median_high 2000000
-v2_nfailed 185
+v2_nfailed 188
 v2_successes 0
-n 185
-n_cap 185
+n 188
+n_cap 188
 n_wrong_stationary 0
 n_divergence 0
 n_crash 0
