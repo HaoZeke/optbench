@@ -537,7 +537,7 @@ def _dat(summary: dict, template: dict, metrics: dict) -> str:
     if summary.get("partial"):
         lines = [
             "# counter harness. One force call is one Lennard-Jones evaluation inside the two-point step.",
-            "# The problem states no energy window. Each start stops after the structure budget.",
+            "# This row stops after the structure budget. It is not a search of the Cambridge window.",
             "# failure is cap. cap is the largest harness count in this file, so PAR-2 is twice that count.",
             "# force_calls is the half-even mean of those counts. energy_min and energy_max are the best energies.",
         ]
@@ -578,7 +578,10 @@ def run_template(
     convergence = problem.get("convergence") or {}
     config = _config(template)
     raw_tolerance = convergence.get("energy_above_minimum")
-    if raw_tolerance is None and not config.get("budget_structures"):
+    # A structure budget is its own row. globalopt/lj75 now has a Cambridge
+    # window, and the 75-atom template does not use the 38-atom Wales file.
+    budget_only = bool(config.get("budget_structures"))
+    if raw_tolerance is None and not budget_only:
         raise ValueError(
             f"{problem['id']} has no energy_above_minimum and {template['id']} has no airss.budget_structures"
         )
@@ -588,7 +591,7 @@ def run_template(
         names = [f"{label}.{index}" for index in range(1, int(config["starts"]) + 1)]
     else:
         names = _load_start_names(root, problem, geometries, work, output)
-    if raw_tolerance is None:
+    if budget_only or raw_tolerance is None:
         reference = None
         tolerance = None
     else:
@@ -626,7 +629,6 @@ def run_template(
                     flush=True,
                 )
     records.sort(key=lambda row: row["index"])
-    budget_only = reference is None
     crashes = [row for row in records if row.get("failure") == "crash"]
     missed = [row for row in records if not row["success"]]
     if crashes or (missed and not budget_only):
@@ -683,7 +685,7 @@ def run_template(
             "Harness counter on optbench.potentials.lennard_jones. "
             "buildcell generates each cell. "
             + (
-                "The problem states no energy window, so each start stops at the structure budget."
+                "This row stops at the structure budget."
                 if budget_only
                 else "The problem states no force-call cap."
             )
