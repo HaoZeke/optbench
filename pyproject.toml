@@ -10,8 +10,20 @@ dependencies = ["cyclopts>=3.24", "numpy>=1.26", "matplotlib>=3.8"]
 optbench = "optbench.__main__:main"
 
 [dependency-groups]
-dev = ["pytest>=8.3", "asv==0.6.6", "asv-runner==0.3.1"]
-campaign = ["ase==3.29.0", "sella==2.6.0", "numpy", "scipy"]
+dev = [
+    "pytest>=8.3",
+    "asv==0.6.6",
+    "asv-runner==0.3.1",
+    "geodesic-interpolate @ git+https://github.com/virtualzx-nad/geodesic-interpolate.git@476aa041f562d37d5fb4121b86817a52d75e4c5d",
+]
+campaign = [
+    "ase==3.29.0",
+    "sella==2.6.0",
+    "numpy",
+    "scipy",
+    "geodesic-interpolate @ git+https://github.com/virtualzx-nad/geodesic-interpolate.git@476aa041f562d37d5fb4121b86817a52d75e4c5d",
+    "optking",
+]
 
 [build-system]
 requires = ["hatchling"]
@@ -26,3 +38,6 @@ packages = ["optbench"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
+
+[tool.uv.sources]
+optking = { git = "https://github.com/psi-rking/optking.git", rev = "767e2c0c13ff2b851ac82101ccd5aab9a558a4f1" }

@@ -1,0 +1,81 @@
+{
+  "runs": [
+    {
+      "client_reason": "0",
+      "client_total_force_calls": 3443,
+      "eon_commit": "7095b23ac17d49f434a5e08ccb072897ceca698e",
+      "force_calls_saddle": "3442",
+      "harness": 4265,
+      "kind": "ts-lj38",
+      "parallel": true,
+      "results_total_force_calls": "3443",
+      "start": "0000",
+      "template": "eon/develop-ts-lj38-dimer-accept-energy",
+      "verify_calls": 0
+    },
+    {
+      "client_reason": "0",
+      "client_total_force_calls": 4265,
+      "eon_commit": "7095b23ac17d49f434a5e08ccb072897ceca698e",
+      "force_calls_saddle": "4264",
+      "harness": 4265,
+      "kind": "ts-lj38",
+      "parallel": false,
+      "results_total_force_calls": "4265",
+      "start": "0000",
+      "template": "eon/develop-ts-lj38-dimer-accept-energy",
+      "verify_calls": 0
+    },
+    {
+      "attempts": 27,
+      "client_total_force_calls": 2,
+      "eon_commit": "7095b23ac17d49f434a5e08ccb072897ceca698e",
+      "force_calls_saddle": "1",
+      "harness": 30,
+      "kept_attempt": 27,
+      "kind": "lowest",
+      "overlap": 0.9905460019722689,
+      "parallel": true,
+      "results_total_force_calls": "2",
+      "start": "0000",
+      "template": "eon/develop-low-lj38-dimer"
+    },
+    {
+      "attempts": 27,
+      "client_total_force_calls": 30,
+      "eon_commit": "7095b23ac17d49f434a5e08ccb072897ceca698e",
+      "force_calls_saddle": "29",
+      "harness": 30,
+      "kept_attempt": 27,
+      "kind": "lowest",
+      "overlap": 0.9905460019722689,
+      "parallel": false,
+      "results_total_force_calls": "30",
+      "start": "0000",
+      "template": "eon/develop-low-lj38-dimer"
+    }
+  ],
+  "stored_low_lj38_dimer_0000": {
+    "client_calls": 2,
+    "client_reason": "5",
+    "counter": "harness",
+    "failure": null,
+    "force_calls": 30.0,
+    "k": 27,
+    "overlap": 0.9905460019722689,
+    "potential": "ljcluster",
+    "seconds": 1.392296917000749,
+    "success": true
+  },
+  "stored_ts_lj38_dimer_0000": {
+    "client_calls": 3443,
+    "client_reason": "0",
+    "counter": "harness",
+    "extrema": null,
+    "failure": null,
+    "force_calls": 4265.0,
+    "potential": "ljcluster",
+    "seconds": 8.039622176000194,
+    "success": true
+  }
+}

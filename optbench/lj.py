@@ -8,6 +8,7 @@ eonclient's ``ljcluster`` potential is ``rgpot::LJClusterPot`` with
 
 from __future__ import annotations
 
+import os
 from collections.abc import Sequence
 
 
@@ -19,7 +20,7 @@ def lj_shift(u0: float, psi: float, cutoff: float) -> float:
     return 4.0 * u0 * ratio * (ratio - 1.0)
 
 
-def lj_cluster(
+def _lj_cluster_python(
     positions: Sequence[float],
     atomic_numbers: Sequence[int] | None = None,
     box: Sequence[float] | None = None,
@@ -90,3 +91,32 @@ def read_component_coordinates(text: str) -> list[float]:
     if not coords:
         raise ValueError("con file has no coordinates")
     return coords
+
+
+def lj_cluster(
+    positions: Sequence[float],
+    atomic_numbers: Sequence[int] | None = None,
+    box: Sequence[float] | None = None,
+    *,
+    u0: float = 1.0,
+    psi: float = 1.0,
+    cutoff: float = 15.0,
+) -> tuple[float, tuple[float, ...]]:
+    """Energy and flat forces. The native kernel matches ``_lj_cluster_python``."""
+    count = len(positions)
+    if count % 3 != 0:
+        raise ValueError("positions must be x, y, z triples")
+    if os.environ.get("OPTBENCH_FASTPOT") != "0" and count >= 6:
+        from optbench.fastpot import lj_cluster_forces
+
+        got = lj_cluster_forces(positions, u0, psi, cutoff, lj_shift(u0, psi, cutoff))
+        if got is not None:
+            return got
+    return _lj_cluster_python(
+        positions,
+        atomic_numbers,
+        box,
+        u0=u0,
+        psi=psi,
+        cutoff=cutoff,
+    )
