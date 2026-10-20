@@ -293,8 +293,6 @@ commit = "8de817dd79bfe4525d5d39246a212d833e6dee07"
 committed = "2026-09-30"
 note = "LAMMPS 30 Sep 2026, tag stable_30Sep2026. Band rows use fix neb with a climbing stage and min_style quickmin or fire. The pair style is the spec potential: lj/cut 40 with no shift, and morse 9.5 with pair_modify shift yes. Kspring is 1.0 with the default parallel neigh spring. The default timestep is the unit default. The replica count is the problem image count. Force calls are pair computes summed across replicas. The default FIRE row leaves one fifth of the cap unused so a velocity-reset evaluation stays inside the cap. A max-iteration stop that is still above the force norm is a cap failure. The tuned rows keep the unit timestep and the problem image count. Their N1/N2 pair is a 1:2 split of that default iteration total, the only split in the declared five-start calibration whose PAR-2 matched or beat the default on every problem."
 
-# generated ASE and Sella templates
-
 [[code]]
 id = "torchsim"
 name = "TorchSim"
@@ -884,5 +882,3 @@ problem = "globalopt/lj75"
 profile = "default"
 task = "basin-hopping"
 ranked = true
-
-# generated ASE and Sella templates
