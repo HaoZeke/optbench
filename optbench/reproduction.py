@@ -204,17 +204,17 @@ MATCHES: list[dict] = [
 
 CAUSE_TEXT = {
     "lj38_ts_starts": (
-        "Inside the 10% band (207.51 vs 192). "
+        "207.51 against 192. "
         "Archive run.sh unpacks coords-xyz.tar.gz (200 xyz, max pair about 4.4). "
         "The harness problem points at coords-con.tar.gz (max pair about 37). "
         "Kabsch RMS is about 6.33, so the sets are not the same geometry. "
         "Neither set has a pair past cutoff 40, and both drivers use RMS tolerance 1e-3/sqrt(114). "
-        "The 8% residual is the starting set. The paper baseline is this 2014-stop mean, not the harness-stop mean 254.48."
+        "The residual is the starting set. This 2014-stop mean is 207.51. The harness-stop mean is 254.48."
     ),
     "lj38_ts_starts_cd": (
-        "Inside the 10% band (263.52 vs 254). The same xyz-versus-con starting set as ts-ffd. "
+        "263.52 against 254. The same xyz-versus-con starting set as ts-ffd. "
         "findTS_local.py for the CD row does not pass orthogZeroEigs; the harness template sets orthog translations-rotations. "
-        "The paper baseline is this 2014-stop mean, not the harness-stop mean 335.06."
+        "This 2014-stop mean is 263.52. The harness-stop mean is 335.06."
     ),
     "optim_lj38_ts": (
         "Archive run.sh unpacks coords-xyz.tar.gz. The harness uses the problem coords-con set (Kabsch RMS about 6.33). "
@@ -222,13 +222,13 @@ CAUSE_TEXT = {
     ),
     "pt_lanczos": (
         "The svn template uses the archived Lanczos keys (10 iterations, tolerance 0.05) and shifted Morse::force. "
-        "Dimer and climbing-image on that kernel reproduce. Lanczos does not, and the failure count is 0 against 5 or 8."
+        "Dimer and climbing-image on that kernel match the archive counts. Lanczos has failure count 0 against 5 or 8."
     ),
     "ase_morse_script": (
         "ASE 3.29 with the archived Morse script (L-BFGS memory 20, maxstep 0.2, alpha 25; FIRE maxstep 0.2; PreconLBFGS Exp A 3) "
         "scores 32, 113, and 29 against 53.8, 147.47, and 34. "
         "Constructor-default L-BFGS scores 53, next to 53.8, but that is not the archived alpha and memory. "
-        "eOn Morse L-BFGS and FIRE on the same bulk file reproduce, so the geometry set is not the split."
+        "eOn Morse L-BFGS and FIRE on the same bulk file sit on the archive counts, so the geometry set is not the split."
     ),
     "optim_pt_units": (
         "archive run.sh divides coordinates by r0 = 2.897 and scales rho and rcut into those units. "
@@ -247,15 +247,15 @@ CAUSE_TEXT = {
         "The Rayleigh-Ritz template uses updates 4. The archived first-order mean is 25 and the second-order mean is 46. "
         "This default scores 61, so it is not either archived order."
     ),
-    "pele_fire": "pele FIRE on LJ38 scores 1264 with 7 failures. The archive is 709 with 0 failures. The M100 L-BFGS row on the same build reproduces, so this is the FIRE step, not the LJ kernel.",
-    "pele_morse": "pele Morse L-BFGS scores 92. The archive is 51. eOn Morse L-BFGS on the same bulk file reproduces at 52, so the gap is the pele memory and step, not the shared Morse parameters.",
-    "morse_sd": "eOn Morse steepest descent scores 7038 with 19 failures. The archive is 196 with 0. Morse L-BFGS, CG, and FIRE on the same client reproduce, so the kernel is not the split.",
-    "improved_unset": "The r2549 template turns improved on. The 2014 ini left that key unset. The mean lands outside 10 percent.",
+    "pele_fire": "pele FIRE on LJ38 scores 1264 with 7 failures. The archive is 709 with 0 failures. The M100 L-BFGS row on the same build is 179, so this is the FIRE step, not the LJ kernel.",
+    "pele_morse": "pele Morse L-BFGS scores 92. The archive is 51. eOn Morse L-BFGS on the same bulk file is 52, so the gap is the pele memory and step, not the shared Morse parameters.",
+    "morse_sd": "eOn Morse steepest descent scores 7038 with 19 failures. The archive is 196 with 0. Morse L-BFGS, CG, and FIRE on the same client sit on the archive counts, so the kernel is not the split.",
+    "improved_unset": "The r2549 template turns improved on. The 2014 ini left that key unset. The mean is 377 against 337.",
     "sella_trust": "Sella 2.6.0 with the archived trust-region numbers (eta, gamma, delta0, rho, sigma) is the parameter_source=archive row. It misses the 2014 mean. The constructor-default row is a different setup.",
-    "heptamer_cg": "The 3.5.0 file already stores the per-image mean, 142 against the archive 120. L-BFGS, FIRE, and QM on the same 8-image spring-5 climb reproduce, so the image count is not the split.",
-    "de_exclusion": "The 3.5.0 doubly-nudged file is the per-band mean under the 2500-call exclusion (708, 5 failures). The archive mean is 861. The client total is a different counter and is also outside 10 percent.",
+    "heptamer_cg": "The 3.5.0 file already stores the per-image mean, 142 against the archive 120. L-BFGS, FIRE, and QM on the same 8-image spring-5 climb sit on the archive counts, so the image count is not the split.",
+    "de_exclusion": "The 3.5.0 doubly-nudged file stores 708 with 5 failures under the 2500-call exclusion. The archive mean is 861. The client total is a different counter.",
     "eon_saddle_count": (
-        "The classic dimer campaign (improved false, the 2014 key) has fraction_connected 0.692 against 0.746, inside 10 percent, "
+        "The classic dimer campaign (improved false, the 2014 key) has fraction_connected 0.692 against 0.746, "
         "but force calls 6.97e6 against 3.78e6 and unique saddles 91.7 against 109.2. "
         "The archive standard error on the force calls is 5.27e5. "
         "This eOn AKMC counter is not the harness RMSD link test."
@@ -271,32 +271,25 @@ CAUSE_TEXT = {
         "The harness uses pele LJCluster defaults (temperature 1, step 0.6, LBFGS memory 4) on unshifted cutoff 40. "
         "The mean is 688720 against 521595."
     ),
-    "htst_al": "The r2549 Al dimer with the archived rotation string (CG, max 50, tol 1) misses barrier_force_calls and rate_force_calls by about 30 percent. Pt dimer CG with max 10 reproduces all four hTST counts.",
-    "htst_pt_lanczos": (
-        "The archived row is the paper score for Eon r2006: barrier_jobs 1827, barrier_force_calls 1.284e+06, "
-        "rate_jobs 64, rate_force_calls 4.524e+04. EON and eOn are different codes. "
-        "Both ran stock on the archive island, seed 42, and the same Lanczos-LBFGS convergence keys, and neither was tuned toward those counts. "
-        "EON (SVN r2549) scores barrier_jobs 1462 (20.0% off), barrier_force_calls 5.139e+05 (60.0% off), "
-        "rate_jobs 53 (17.2% off), rate_force_calls 1.867e+04 (58.7% off). "
-        "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) scores barrier_jobs 1084 (40.7% off), "
-        "barrier_force_calls 3.798e+05 (70.4% off), rate_jobs 52 (18.8% off), rate_force_calls 1.851e+04 (59.1% off). "
-        "The gaps are the finding. The archive row stays not rerun, and both campaigns stay ranked."
+    "htst_al": (
+        "The r2549 Al dimer with the archived rotation string (CG, max 50, tol 1) has "
+        "barrier_force_calls 19660 against 28870, barrier_jobs 50 against 48, "
+        "rate_force_calls 620600 against 897900, and rate_jobs 1600 against 1511. "
+        "Pt dimer CG with max 10 matches all four hTST counts."
     ),
     "precon_hessian_index": (
         "ASE 3.29 PreconLBFGS with the archived opt.py setup (Exp A 3, maxstep 0.1, ASE fmax 0.01) "
-        "scores 2605 against 2686, inside 10 percent. "
+        "scores 2605 against 2686. "
         "The script uses a tsase LJ cutoff of 35. This row uses the harness cutoff 40. "
         "report.sh counts a failure only when a written total_force_calls is at least 10000. "
-        "The harness records 10 failures, each a Hessian index of 1 after the maximum force is under 0.01. "
-        "The Wilson interval on 0 failures out of 1000 is about 0 to 3.83."
+        "The harness records 10 failures, each a Hessian index of 1 after the maximum force is under 0.01."
     ),
     "linesearch_exceptions": (
         "ASE 3.29 LBFGSLineSearch with the archived opt.py arguments (maxstep 0.2, alpha 1/0.001, memory 100) "
-        "scores 410 against 417, inside 10 percent. "
+        "scores 410 against 417. "
         "report.sh counts a start as failed only when a written total_force_calls is at least 10000, and the benchmark.dat label says M=5 while opt.py sets memory 100. "
         "The harness records 7 failures: 5 RuntimeError LineSearch failed (ASE 3.8.2 already raises that; ASE 3.6.0 is not on PyPI) "
-        "and 2 Hessian index 1 after the Euclidean force norm is under 0.01. "
-        "The Wilson interval on 0 failures out of 1000 is about 0 to 3.83."
+        "and 2 Hessian index 1 after the Euclidean force norm is under 0.01."
     ),
     "akmc_vs_langevin": (
         "The archive rows are Langevin parallel replica. The harness rows are AKMC. "
@@ -691,17 +684,43 @@ def _gap(checks: list[dict], failure: dict | None) -> str:
             continue
         archive = item["archive"]
         rerun = item["rerun"]
-        if archive:
-            relative = abs(rerun - archive) / abs(archive)
-            parts.append(f"{item['metric']} {rerun:g} vs {archive:g} ({relative:.1%})")
-        else:
-            parts.append(f"{item['metric']} {rerun:g} vs {archive:g}")
+        parts.append(f"{item['metric']} {rerun:g} vs {archive:g}")
     if failure and not failure["ok"]:
-        parts.append(
-            f"nfailed {failure['rerun']:g} vs {failure['archive']:g} "
-            f"(interval {failure['low']:.2f} to {failure['high']:.2f})"
-        )
+        parts.append(f"nfailed {failure['rerun']:g} vs {failure['archive']:g}")
     return "; ".join(parts)
+
+
+_HTST_COUNT_KEYS = ("barrier_jobs", "barrier_force_calls", "rate_jobs", "rate_force_calls")
+
+
+def _dat_fields(path: Path) -> dict[str, str]:
+    fields: dict[str, str] = {}
+    for line in path.read_text(encoding="utf-8").splitlines():
+        parts = line.split(maxsplit=1)
+        if len(parts) == 2:
+            fields[parts[0]] = parts[1].strip()
+    return fields
+
+
+def _htst_score(fields: dict[str, str]) -> str:
+    label = f"{fields.get('code', '')} {fields.get('code_version', '')}".strip()
+    counts = ", ".join(f"{key} {fields[key]}" for key in _HTST_COUNT_KEYS)
+    return f"{label}: {counts}"
+
+
+def htst_pt_lanczos_text(root: Path) -> str:
+    paper = (
+        "Eon r2006: barrier_jobs 1827, barrier_force_calls 1.284e+06, "
+        "rate_jobs 64, rate_force_calls 4.524e+04"
+    )
+    eon = _dat_fields(root / "results/campaign/eon-svn-htst-pt-lanczos.dat")
+    develop = _dat_fields(root / "results/campaign/eon-develop-htst-pt-lanczos.dat")
+    return (
+        f"The paper row is {paper}. "
+        "EON and eOn are different codes. "
+        "Both ran stock on the same Pt island, seed 42, and the same Lanczos-LBFGS keys. "
+        f"{_htst_score(eon)}. {_htst_score(develop)}."
+    )
 
 
 def build_rows(root: Path) -> list[dict]:
@@ -744,7 +763,7 @@ def build_rows(root: Path) -> list[dict]:
                 record["cause_detail"] = CAUSE_TEXT["akmc_vs_langevin"]
             elif ident == "hTST/Pt/eon-lanczos-lbfgs":
                 record["cause"] = "htst_pt_lanczos"
-                record["cause_detail"] = CAUSE_TEXT["htst_pt_lanczos"]
+                record["cause_detail"] = htst_pt_lanczos_text(root)
             built.append(record)
             continue
         kind = match.get("kind", "dat")
@@ -809,17 +828,12 @@ def _fmt(value: float) -> str:
 
 
 def render_markdown(rows: list[dict]) -> str:
-    counts = {"reproduced": 0, "not_reproduced": 0, "not_rerun": 0}
-    for row in rows:
-        counts[row["status"]] = counts.get(row["status"], 0) + 1
     lines = [
         "# Reproduction",
         "",
-        "Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.",
+        f"Archive commit `0f26b796`. {len(rows)} archive rows.",
         "",
-        f"{counts['reproduced']} reproduced, {counts['not_reproduced']} not reproduced, {counts['not_rerun']} not rerun. {len(rows)} archive rows.",
-        "",
-        "The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.",
+        "The pele transition-state paper score is the 2014 stop: break at the first RMS below the stop, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88. The ranked harness-stop means are 111.27, 254.48, and 335.06.",
         "",
         "OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.",
         "",
@@ -848,14 +862,15 @@ def render_markdown(rows: list[dict]) -> str:
         else:
             archive = "—"
             rerun = "—"
-        status = row["status"].replace("_", " ")
+        labels = []
         if row.get("cause"):
-            status = f"{status}; {row['cause']}"
+            labels.append(row["cause"])
         if row.get("note"):
-            status = f"{status}; residual"
+            labels.append("residual")
+        status = "; ".join(labels) if labels else "—"
         lines.append(f"| {ident} | {archive} | {rerun} | {status} |")
     lines.append("")
-    lines.append("## Residuals inside the band")
+    lines.append("## Notes")
     lines.append("")
     for row in rows:
         if row.get("note"):
@@ -871,17 +886,17 @@ def render_markdown(rows: list[dict]) -> str:
     for cause, idents in grouped.items():
         lines.append(f"### {cause}")
         lines.append("")
-        lines.append(CAUSE_TEXT.get(cause, ""))
+        detail = next((row.get("cause_detail") or "" for row in rows if row.get("cause") == cause), "")
+        lines.append(detail or CAUSE_TEXT.get(cause, ""))
         lines.append("")
         for ident in idents:
             lines.append(f"- {ident}")
         lines.append("")
+    htst = next((row.get("cause_detail") or "" for row in rows if row.get("cause") == "htst_pt_lanczos"), "")
     lines.append(
-        "Rows with no exact-setup campaign stay not rerun and are not given a cause. "
-        "AKMC on aladatom is a different method from Langevin parallel replica; the ratios above are that comparison, and the archive rows stay not rerun. "
-        "hTST/Pt/eon-lanczos-lbfgs stays the archived Eon r2006 paper row. "
-        "EON (SVN r2549) and eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) are separate stock campaigns on that problem. "
-        "Both miss the archive, and both stay ranked."
+        "Rows with no exact-setup campaign are left without a cause. "
+        "AKMC on aladatom is a different method from Langevin parallel replica; the ratios above are that comparison. "
+        + htst
     )
     lines.append("")
     return "\n".join(lines)

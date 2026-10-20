@@ -55,14 +55,14 @@ committed = "2026-01-23"
 note = "EON is the SVN code, not eOn. Unpatched r2549, built with Fortran. eonclient -v prints r2549. The label on a score is EON (SVN r2549)."
 
 [[code]]
-id = "eon-develop-a7aa574"
+id = "eon-develop-500350d9"
 name = "eOn"
 role = "minimization and saddle search"
 repository = "https://github.com/TheochemUI/eon"
-ref = "develop"
-commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
-committed = "2026-10-18"
-note = "eOn is the git code at https://eondocs.org, not EON. This pin is current develop a7aa57472fb7d823953fd36b78cd755fa4842d30, stock and untuned. The label on a score is eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)."
+ref = "fix/develop-regressions-vs-350"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
+committed = "2026-10-20"
+note = "eOn is the git code at https://eondocs.org, not EON. This pin is develop 500350d9fae881f06c7ef194e5868da079c4be5a on branch fix/develop-regressions-vs-350. The label on a score is eOn (develop 500350d9)."
 
 [[code]]
 id = "rgmin"

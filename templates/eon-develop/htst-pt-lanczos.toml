@@ -2,15 +2,15 @@ id = "eon-develop/htst-pt-lanczos"
 engine = "eon"
 problem = "hTST/Pt"
 code = "eOn"
-code_version = "(develop a7aa57472fb7d823953fd36b78cd755fa4842d30)"
-commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+code_version = "(develop 500350d9)"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
 algorithm = "Lanczos-LBFGS rotation: max=10, tol=0.05"
 reducer = "harness-htst"
 tuning = "default"
 pass_limit = 4000
 target_windows = 8
 geometry = "website/hTST/Pt/eon-lanczos-lbfgs/states/0/reactant.con"
-note = "Stock eOn develop a7aa57472fb7d823953fd36b78cd755fa4842d30 on the same Pt island, seed, and convergence keys as the archive. morse_pt. Keys the archive left unset stay at the develop defaults. The communicator is local so the run fits this machine. A start is one barrier window. Nothing was tuned toward the archived counts."
+note = "Stock eOn develop 500350d9 on the same Pt island, seed 42, and Lanczos-LBFGS keys as the paper row. morse_pt. Keys the paper ini left unset stay at the develop defaults. The communicator is local. A start is one barrier window. The paper count is the mean of 8 windows."
 
 [htst]
 temperature = 700

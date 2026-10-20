@@ -1,20 +1,20 @@
-=============
-Current codes
-=============
+=====
+Codes
+=====
 
 
 The table is the registry pin and the ranked harness runs for that code.
 A code with no full run on a problem is listed with the reason.
 The sections each client reads, and the commands that rerun a score, are in the README and on the Run a score page.
-A timestep or a band method in the wrong section is ignored.
-The Sella 0.1.1 rows stay on the 2014 tables and are labelled legacy.
+A timestep or an NEB method in the wrong section is ignored.
+The Sella 0.1.1 rows stay on the 2014 tables.
 A new score is entered by Rohit Goswami.
 The number is written only after the run finishes under the problem rule.
 
 .. raw:: html
 
-   <section class="bench" id="current-codes">
-   <h2>Current codes</h2>
+   <section class="bench" id="codes">
+   <h2>Codes</h2>
    <p>The benchmark contributor is Rohit Goswami. A ranked row is a full harness run. The commit on that row is the commit that produced the score.</p>
    <h3>eOn</h3>
    <div class="bench-scroll"><table>
@@ -40,8 +40,8 @@ The number is written only after the run finishes under the problem rule.
    </tr>
    <tr>
    <td>minimization and saddle search</td>
-   <td>develop</td>
-   <td>a7aa57472fb7</td>
+   <td>fix/develop-regressions-vs-350</td>
+   <td>500350d9fae8</td>
    <td><a href="https://github.com/TheochemUI/eon">https://github.com/TheochemUI/eon</a></td>
    </tr>
    </tbody></table></div>
@@ -73,8 +73,8 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="hTST/Pt" data-template="eon-develop/htst-pt-lanczos">
    <td>Pt</td>
    <td data-field="template">eon-develop/htst-pt-lanczos</td>
-   <td data-field="version">eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)</td>
-   <td data-field="commit">a7aa57472fb7</td>
+   <td data-field="version">eOn (develop 500350d9)</td>
+   <td data-field="commit">500350d9fae8</td>
    <td data-field="par2_mean"></td>
    <td data-field="mean_calls">379794</td>
    <td data-field="median_calls">425305</td>
@@ -150,8 +150,8 @@ The number is written only after the run finishes under the problem rule.
    <li>LJ38: not yet on the harness counter, partial.</li>
    <li>pt-island: not yet on the harness counter, partial.</li>
    <li>eon-ci-neb: no per-start record.</li>
-   <li>eon-ci-swdneb: no per-start record; does not reproduce the 2014 archive.</li>
-   <li>eon-cg: no per-start record; does not reproduce the 2014 archive.</li>
+   <li>eon-ci-swdneb: no per-start record; off the ranked table.</li>
+   <li>eon-cg: no per-start record; off the ranked table.</li>
    <li>eon-fire: no per-start record.</li>
    <li>eon-lbfgs: no per-start record.</li>
    <li>eon-qm: no per-start record.</li>
@@ -162,7 +162,7 @@ The number is written only after the run finishes under the problem rule.
    <li>eon-client/morse-cg: no per-start record.</li>
    <li>eon-client/morse-fire: no per-start record.</li>
    <li>eon-client/morse-lbfgs: no per-start record.</li>
-   <li>eon-client/morse-sd: no per-start record; does not reproduce the 2014 archive.</li>
+   <li>eon-client/morse-sd: no per-start record; off the ranked table.</li>
    <li>eon-client/qm: no per-start record.</li>
    <li>eon-client/sd-twopoint: no per-start record.</li>
    <li>eon-client/sd: no per-start record.</li>

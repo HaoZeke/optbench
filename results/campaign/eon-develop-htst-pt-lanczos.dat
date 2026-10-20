@@ -9,15 +9,15 @@ missed_barriers 0
 unexpected_barriers 0
 reference_processes 15
 code eOn
-code_version (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)
-commit a7aa57472fb7d823953fd36b78cd755fa4842d30
+code_version (develop 500350d9)
+commit 500350d9fae881f06c7ef194e5868da079c4be5a
 counter harness
 reducer harness-htst
 contributor Rohit Goswami
 random_seed 42
 communicator_jobs 4
 passes 273
-seconds 1397.75
+seconds 1299.95
 algorithm Lanczos-LBFGS rotation: max=10, tol=0.05
 template eon-develop/htst-pt-lanczos
 problem hTST/Pt

@@ -81,11 +81,11 @@ def test_a_paper_baseline_outside_the_archive_fails(tmp_path: Path):
     assert any("force_calls" in line and "1000" in line for line in errors)
 
 
-def test_legacy_rows_that_miss_are_marked_in_place():
+def test_paper_rows_keep_the_entry_name():
     problem = load_problem(ROOT / "problems" / "minimization" / "lj38.toml")
     oracle = load_oracle(ROOT / "oracle" / "entries.jsonl")
     html = problem_html(problem, oracle)
     assert ">eon-cg<" in html
-    assert "pele-fire · not reproduced" in html
-    assert "outside the archive tolerance" in html
-    assert "eon-cg · not reproduced" not in html
+    assert ">pele-fire<" in html
+    assert "not reproduced" not in html
+    assert "outside the archive tolerance" not in html

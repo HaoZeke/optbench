@@ -218,7 +218,7 @@
       "note": "starts.jsonl",
       "par2_mean": 87.55102040816327,
       "partial": true,
-      "partial_reason": "does not reproduce the 2014 archive",
+      "partial_reason": "off the ranked table",
       "path": "results/campaign/sella-2.6.0-pt-island-ts-tuned.dat; results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "tsopt/pt-island",
       "registry_match": true,
