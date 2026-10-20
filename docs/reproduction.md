@@ -4,6 +4,8 @@ Archive commit `0f26b796`. A rerun matches when each archived metric is within o
 
 46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
 
+Latest Pyamff on emt-pt38/pyamff-rprop10-7-fcoeff0_1 is package version 0.1.0-beta at master 240f51d01ca22969369f9bc21760c61cbb3b6665 (tagged release v3.0.0 plus 475 commits). The ranked harness score is results/campaign/pyamff-0.1.0-beta-emt-pt38-rprop: mean epoch 947.86 against the archive 1022.86. The archive row stays the paper number.
+
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
 OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.
@@ -159,7 +161,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | emt-pt38/pyamff-lbfgs10-7-fcoeff0 | — | — | not rerun |
 | emt-pt38/pyamff-lbfgs10-7-fcoeff0_1 | — | — | not rerun |
 | emt-pt38/pyamff-rprop10-7-fcoeff0 | — | — | not rerun |
-| emt-pt38/pyamff-rprop10-7-fcoeff0_1 | — | — | not rerun |
+| emt-pt38/pyamff-rprop10-7-fcoeff0_1 | — | — | not rerun; Pyamff 0.1.0-beta 240f51d ranked |
 
 ## neb
 

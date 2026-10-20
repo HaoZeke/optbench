@@ -1,0 +1,79 @@
+{
+  "full_n": null,
+  "history": [],
+  "id": "mlopt/emt-pt38",
+  "not_comparable": [],
+  "partial": [],
+  "profile": {
+    "area_log10": {
+      "pyamff/emt-pt38-rprop 0.1.0-beta default campaign 240f51d": 1.2041199826559248
+    },
+    "rho": {
+      "pyamff/emt-pt38-rprop 0.1.0-beta default campaign 240f51d": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "solved": {
+      "pyamff/emt-pt38-rprop 0.1.0-beta default campaign 240f51d": 1.0
+    },
+    "taus": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ]
+  },
+  "ranked": [
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 30000,
+      "code": "Pyamff",
+      "code_version": "0.1.0-beta",
+      "commit": "240f51d01ca22969369f9bc21760c61cbb3b6665",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "pyamff-0.1.0-beta-emt-pt38-rprop",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": null,
+      "history": false,
+      "max_calls": 2283.0,
+      "mean_calls": 947.86,
+      "mean_per_image": null,
+      "median": 931.5,
+      "median_calls": 931.5,
+      "median_high": 1041.0,
+      "median_low": 771.9125,
+      "median_per_image": null,
+      "min_calls": 374.0,
+      "n": 50,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 947.86,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/pyamff-0.1.0-beta-emt-pt38-rprop.dat",
+      "problem": "mlopt/emt-pt38",
+      "registry_match": false,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "pyamff/emt-pt38-rprop",
+      "tuning": "default",
+      "wilson_high": 1.0,
+      "wilson_low": 0.9286524008666414
+    }
+  ],
+  "title": "EMT Pt 38 nanoparticle"
+}

@@ -1,0 +1,17 @@
+id = "pyamff/emt-pt38-rprop"
+engine = "pyamff"
+problem = "mlopt/emt-pt38"
+code = "Pyamff"
+code_version = "0.1.0-beta"
+commit = "240f51d01ca22969369f9bc21760c61cbb3b6665"
+algorithm = "Rprop"
+tuning = "default"
+profile = "default"
+ranked = true
+note = "Unmodified PyAMFF master 240f51d, package version 0.1.0-beta. The row is the archive problem: Behler-Parrinello fingerprints, hidden layers 10 7, tanh, weights drawn uniform on [-1, 1), no feature scaling, one batch, Rprop, energy coefficient 1, force coefficient 0.1, SSE loss, and a max-absolute parameter gradient below 0.1. The epoch cap is 30000. Learning rate 0.01 and the Rprop etas and step sizes are the library defaults. One harness force call is one logged epoch, including the initial weights. Fifty independent initializations."
+
+[optimizer]
+name = "Rprop"
+
+[stop]
+max_force_calls = 30000

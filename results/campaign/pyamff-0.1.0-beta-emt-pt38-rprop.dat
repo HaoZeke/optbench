@@ -1,0 +1,21 @@
+force_calls 947.86
+force_calls_min 374
+force_calls_max 2283
+nfailed 0
+starts 50
+code Pyamff
+code_version 0.1.0-beta
+commit 240f51d01ca22969369f9bc21760c61cbb3b6665
+algorithm Rprop
+tuning default
+template pyamff/emt-pt38-rprop
+problem mlopt/emt-pt38
+counter harness
+cap 30000
+mean_epoch 947.86
+median_epoch 931.5
+mean_energy_rmse 0.0008461442
+median_energy_rmse 0.00084743
+mean_force_rmse 0.1002201192
+median_force_rmse 0.10008355
+note Unmodified PyAMFF master 240f51d, package version 0.1.0-beta. Fifty uniform[-1, 1) initializations, Rprop library defaults, loss gradient tolerance 0.1, epoch cap 30000. One harness force call is one logged epoch. mean_epoch 947.86 against the archive 1022.86.
