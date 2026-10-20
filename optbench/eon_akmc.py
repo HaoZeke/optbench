@@ -1,10 +1,10 @@
 """AKMC saddle campaign on the Pt island.
 
-One repetition runs the eOn server until ``states/0/search_results.txt``
-contains 27 good saddles below 1.5 eV, or the pass limit is hit. The
-force calls are ``sad-fcs + mins-fcs`` through that line. That is the
-client counter the 2014 ``done.py`` summed. It is not a harness wrap.
-Prefactor calls stay out of the sum.
+One repetition runs until ``states/0/search_results.txt`` contains 27
+good saddles below 1.5 eV, the template force-call cap is reached, or
+the pass limit is hit. A harness run stops on the harness counter.
+The client sum ``sad-fcs + mins-fcs`` is kept beside that count.
+Prefactor calls stay out of the client sum.
 """
 
 from __future__ import annotations
@@ -121,6 +121,21 @@ def _write_config(template: dict, dest: Path, client: Path, seed: int, workers: 
     dest.write_text(format_ini(sections), encoding="utf-8")
 
 
+def _harness_calls() -> int | None:
+    """Force calls on the harness server, when this process is wrapped."""
+    endpoint = os.environ.get("OPTBENCH_POTSERVER", "")
+    if ":" not in endpoint:
+        return None
+    host, port = endpoint.rsplit(":", 1)
+    try:
+        from .potserver import remote_count
+
+        calls, _verify = remote_count(host, int(port))
+    except (OSError, RuntimeError, ValueError):
+        return None
+    return int(calls)
+
+
 def _one_repetition(
     root: Path,
     template: dict,
@@ -203,26 +218,40 @@ def _one_repetition(
             progress["passes"] = 0
             progress["seconds"] = time.monotonic() - started
             return progress
+        cap = int(template.get("failure_cap") or 0)
+
+        def _over_cap(row: dict) -> bool:
+            if cap <= 0:
+                return False
+            spent = _harness_calls()
+            if spent is not None:
+                return spent >= cap
+            return int(row.get("force_calls") or 0) >= cap
+
         for index in range(passes):
             try:
                 akmc_mod.akmc(config)
             except SystemExit as exc:
                 last_error = f"akmc exit {exc.code}"
-                break
             except Exception as exc:
                 last_error = f"{type(exc).__name__}: {exc}\n{traceback.format_exc()}"
-                break
             results = work / "states" / "0" / "search_results.txt"
-            if not results.is_file():
-                continue
-            progress = saddle_progress(results.read_text(encoding="utf-8", errors="replace"))
-            if (index + 1) % 25 == 0 or progress["reached"]:
+            if results.is_file():
+                progress = saddle_progress(results.read_text(encoding="utf-8", errors="replace"))
+            over = _over_cap(progress)
+            if (index + 1) % 25 == 0 or progress.get("reached") or over:
                 print(
-                    f"seed {seed} pass {index + 1} qualifying={progress['qualifying']} "
-                    f"searches={progress['total_searches']} force_calls={progress['force_calls']}",
+                    f"seed {seed} pass {index + 1} qualifying={progress.get('qualifying')} "
+                    f"searches={progress.get('total_searches')} force_calls={progress.get('force_calls')} "
+                    f"harness={_harness_calls()}",
                     flush=True,
                 )
-            if progress["reached"]:
+            if progress.get("reached") or over:
+                progress["passes"] = index + 1
+                if over:
+                    last_error = ""
+                break
+            if last_error:
                 progress["passes"] = index + 1
                 break
         else:
@@ -230,7 +259,7 @@ def _one_repetition(
         # akmc() registers the previous pass, then submits this one.
         # A last call with an empty buffer records the searches that
         # already finished and does not start another batch.
-        if not progress.get("reached"):
+        if not progress.get("reached") and not _over_cap(progress):
             config.comm_job_buffer_size = 0
             try:
                 akmc_mod.akmc(config)
