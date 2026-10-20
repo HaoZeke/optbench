@@ -52,7 +52,7 @@ repository = "https://theory.cm.utexas.edu/svn/eon"
 ref = "r2549"
 commit = "r2549"
 committed = "2026-01-23"
-note = "Latest SVN EON, revision 2549, built with Fortran and unpatched. eonclient prints r2549. This is the old SVN code, not the git eOn client. The binary LJ100 basin hop uses stock defaults and the archive force tolerance 0.001."
+note = "Latest SVN EON, revision 2549, built with Fortran and unpatched. eonclient prints r2549. This is the old SVN code, not the git eOn client. The binary LJ100 basin hop uses the archive config.ini: 60000 steps, displacement 0.3, temperature 14000, L-BFGS, max_iterations 10000, converged_force 0.001. The cap is 2000000 and a capped start is charged 4000000."
 
 [[code]]
 id = "eon-develop-500350d9"
