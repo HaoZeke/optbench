@@ -31,9 +31,13 @@ def problem_ids() -> list[str]:
     return found
 
 
+# Scored by a harness campaign, outside this skipped grid.
+_CAMPAIGN_ONLY = {"EON", "eon-develop-500350d9"}
+
+
 def code_ids() -> list[str]:
     data = tomllib.loads((ROOT / "codes" / "registry.toml").read_text(encoding="utf-8"))
-    return [row["id"] for row in data["code"]]
+    return [row["id"] for row in data["code"] if row["id"] not in _CAMPAIGN_ONLY]
 
 
 class Pending:

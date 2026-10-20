@@ -82,6 +82,23 @@ FAMILIES = {
         "token": "4d8b34ba",
         "cache": "4d8b34ba",
     },
+    # EON is the SVN client. eOn is the git client. They do not share a prefix.
+    "EON": {
+        "prefix": "EON/",
+        "env": "EON_SVN_CLIENT",
+        "default": Path.home() / "opt" / "eon-svn" / "bin" / "eonclient",
+        "flag": "-v",
+        "token": "r2549",
+        "cache": "EON-r2549",
+    },
+    "eOn": {
+        "prefix": "eOn/",
+        "env": "EONCLIENT",
+        "default": Path.home() / "opt" / "eon" / "bin" / "eonclient",
+        "flag": "--version",
+        "token": "500350d9",
+        "cache": "eOn-500350d9",
+    },
 }
 
 
