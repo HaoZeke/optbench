@@ -1,8 +1,8 @@
-force_calls 11235280
-force_calls_min 11235280
-force_calls_max 11235280
+force_calls 1723336
+force_calls_min 1723336
+force_calls_max 1723336
 call_unit total
-nfailed 1
+nfailed 0
 code EON (SVN r2549)
 code_version r2549
 commit r2549
@@ -13,8 +13,8 @@ reducer harness
 counter harness
 count_keys HarnessCounter
 tuning default
-unique_saddles 10
-fraction_connected 0.9131806108897742
-total_searches 12048
-qualifying 9
-client_calls 4797570
+unique_saddles 92
+fraction_connected 0.755086940436552
+total_searches 2703
+qualifying 27
+client_calls 1720566

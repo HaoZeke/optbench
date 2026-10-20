@@ -1,8 +1,8 @@
-force_calls 9551074
-force_calls_min 9551074
-force_calls_max 9551074
+force_calls 11654113
+force_calls_min 11654113
+force_calls_max 11654113
 call_unit total
-nfailed 1
+nfailed 0
 code eOn (develop 500350d9)
 code_version 3.6.0
 commit 500350d9fae881f06c7ef194e5868da079c4be5a
@@ -13,8 +13,8 @@ reducer harness
 counter harness
 count_keys HarnessCounter
 tuning default
-unique_saddles 13
-fraction_connected 0.7605248769819574
-total_searches 14632
-qualifying 10
-client_calls 7244927
+unique_saddles 70
+fraction_connected 0.6019039376893119
+total_searches 16177
+qualifying 27
+client_calls 11645407
