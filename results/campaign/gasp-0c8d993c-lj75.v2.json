@@ -24,12 +24,12 @@
         "median": 2000000.0,
         "median_high": 2000000.0,
         "median_low": 2000000.0,
-        "n": 66,
+        "n": 74,
         "n_cap": 0,
         "n_crash": 0,
         "n_divergence": 0,
-        "n_wrong_stationary": 66,
-        "nfailed": 66,
+        "n_wrong_stationary": 74,
+        "nfailed": 74,
         "par2_mean": 2000000.0,
         "par_applied": true,
         "par_factor": 2,
@@ -39,7 +39,7 @@
         "success_only_mean": null,
         "success_rate": 0.0,
         "successes": 0,
-        "wilson_high": 0.05500255701354129,
+        "wilson_high": 0.04934977939638607,
         "wilson_low": 0.0
       },
       "parameters": {
@@ -1237,6 +1237,24 @@
           "cap": 1000000,
           "comparable": true,
           "counter": "harness",
+          "energy": -395.662786274001,
+          "energy_calcs": 800,
+          "failed_calcs": 0,
+          "failure": "wrong_stationary",
+          "force_calls": 354119,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "seed": 20261080,
+          "start": "coords.66",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "cap": 1000000,
+          "comparable": true,
+          "counter": "harness",
           "energy": -390.300400047962,
           "energy_calcs": 800,
           "failed_calcs": 0,
@@ -1248,6 +1266,132 @@
           "schema": "optbench.start/v2",
           "seed": 20261081,
           "start": "coords.67",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "cap": 1000000,
+          "comparable": true,
+          "counter": "harness",
+          "energy": -394.2901517973,
+          "energy_calcs": 800,
+          "failed_calcs": 0,
+          "failure": "wrong_stationary",
+          "force_calls": 336495,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "seed": 20261082,
+          "start": "coords.68",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "cap": 1000000,
+          "comparable": true,
+          "counter": "harness",
+          "energy": -389.896388394606,
+          "energy_calcs": 800,
+          "failed_calcs": 0,
+          "failure": "wrong_stationary",
+          "force_calls": 371733,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "seed": 20261083,
+          "start": "coords.69",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "cap": 1000000,
+          "comparable": true,
+          "counter": "harness",
+          "energy": -396.037195409734,
+          "energy_calcs": 800,
+          "failed_calcs": 0,
+          "failure": "wrong_stationary",
+          "force_calls": 351003,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "seed": 20261084,
+          "start": "coords.70",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "cap": 1000000,
+          "comparable": true,
+          "counter": "harness",
+          "energy": -395.393573749861,
+          "energy_calcs": 800,
+          "failed_calcs": 0,
+          "failure": "wrong_stationary",
+          "force_calls": 341398,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "seed": 20261085,
+          "start": "coords.71",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "cap": 1000000,
+          "comparable": true,
+          "counter": "harness",
+          "energy": -384.359111926934,
+          "energy_calcs": 800,
+          "failed_calcs": 0,
+          "failure": "wrong_stationary",
+          "force_calls": 525514,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "seed": 20261086,
+          "start": "coords.72",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "cap": 1000000,
+          "comparable": true,
+          "counter": "harness",
+          "energy": -391.294437865202,
+          "energy_calcs": 800,
+          "failed_calcs": 0,
+          "failure": "wrong_stationary",
+          "force_calls": 355973,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "seed": 20261087,
+          "start": "coords.73",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "cap": 1000000,
+          "comparable": true,
+          "counter": "harness",
+          "energy": -393.456510476219,
+          "energy_calcs": 800,
+          "failed_calcs": 0,
+          "failure": "wrong_stationary",
+          "force_calls": 397395,
+          "reasons": [
+            "energy"
+          ],
+          "schema": "optbench.start/v2",
+          "seed": 20261088,
+          "start": "coords.74",
           "success": false,
           "verify_calls": 0
         }
