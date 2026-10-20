@@ -6,26 +6,27 @@
 # rep 6 force_calls 3167149 unique_saddles 94 fraction_connected 0.695 total_searches 6600 reached 1
 # rep 7 force_calls 4206581 unique_saddles 92 fraction_connected 0.6925826631 total_searches 8952 reached 1
 # rep 8 force_calls 8593791 unique_saddles 128 fraction_connected 0.6942491836 total_searches 18067 reached 1
+# rep 9 force_calls 5903428 unique_saddles 111 fraction_connected 0.6962086844 total_searches 12344 reached 1
 code eOn
 code_version (develop 500350d9)
 commit 500350d9fae881f06c7ef194e5868da079c4be5a
 counter client-search-results
 count_keys sad-fcs+mins-fcs
 contributor Rohit Goswami
-repetitions 8
+repetitions 9
 min_mode_method dimer
 dimer_improved false
 communicator_jobs 6
-force_calls 7049076.571
-force_calls_mean_error 1045278.924
+force_calls 6905870.5
+force_calls_mean_error 924376.8193
 force_calls_min 3167149
 force_calls_max 11050138
-unique_saddles 113.5714286
-fraction_connected 0.6939670242
-total_searches 14816.85714
+unique_saddles 113.25
+fraction_connected 0.6942472317
+total_searches 14507.75
 nfailed 1
 algorithm Dimer
 template eon/develop-saddle-pt-dimer
 problem saddle-search/pt-island
 reducer akmc-until-27
-n 129318
+n 141662
