@@ -13,7 +13,7 @@ from optbench.reproduction import (
     reproduction_errors,
     row_id,
 )
-from optbench.site import problem_html
+from optbench.site import _not_reproduced, problem_html
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -45,7 +45,7 @@ def test_lj38_2ts_stock_records_the_version_and_stays_ranked():
     assert row["status"] == "not_reproduced"
     assert row["cause"] == "optim_stock"
     assert row["rerun"]["paper_baseline"] is False
-    assert row["rerun"]["code_version"] == "r26635"
+    assert row["rerun"]["code_version"] == "df8da599"
     assert row["rerun"]["exact"] is False
     assert row["rerun"]["template"] == "optim/de-2ts-stock"
     assert row["checks"][0]["archive"] == 2885
@@ -57,6 +57,7 @@ def test_lj38_2ts_stock_records_the_version_and_stays_ranked():
     problem = "double-ended-saddle-search/lj38_2ts_separation"
     assert (problem, "optim/de-2ts-stock") not in held.templates
     assert row["rerun"]["path"] not in held.paths
+    assert "double-ended-saddle-search/lj38_2ts_separation/optim" not in _not_reproduced()
 
 
 def test_pele_paper_baseline_is_the_2014_stop():

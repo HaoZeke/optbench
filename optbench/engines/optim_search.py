@@ -8,8 +8,8 @@ is one ``pes.evaluate``. That harness count is the minimization score.
 ``optim/de-2ts-stock`` is the current public OPTIM binary with the
 stock LJ38 ``newconnect.bfgsts.nohess`` keywords. The campaign records
 OPTIM's energy-plus-gradient counter on the 51 archive pairs, and that
-file is the ranked row. ``optim/de-2ts`` is the December 2015 diagnostic
-and stays unranked. This socket runner runs neither template.
+file is the ranked row. ``optim/de-2ts`` is not run. This socket runner
+runs neither template.
 
 ``optim/unhooked`` and every other template that is not minimization
 L-BFGS raise before a file is written. Noise, saddle search, NEB, and
@@ -303,7 +303,7 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
         return run_dneb_stock(root, problem, template, output, workers)
     if template_name == "optim/de-2ts":
         raise RuntimeError(
-            "optim/de-2ts is the December 2015 diagnostic. "
+            "optim/de-2ts is not the ranked row. "
             "The ranked row is optim/de-2ts-stock. The ASE socket does not run either."
         )
     reason = available()

@@ -177,7 +177,7 @@ MATCHES: list[dict] = [
     {"key": "double-ended-saddle-search/lj38/eon-lanczos", "template": "eon-client/de-lj38-lanczos", "branch": "main", "path": "results/campaign/eon-client-de-lj38-lanczos.dat"},
     {"key": "double-ended-saddle-search/lj38/eon-lanczos-improved", "template": "eon-client/de-lj38-lanczos-improved", "branch": "main", "path": "results/campaign/eon-client-de-lj38-lanczos-improved.dat"},
     {"key": "double-ended-saddle-search/lj38/optim", "template": "optim/de-lj38", "branch": "cells/optim/saddle-pt", "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-lj38--optim-de-lj38.dat", "cause": "optim_pes_counter"},
-    {"key": "double-ended-saddle-search/lj38_2ts_separation/optim", "template": "optim/de-2ts-stock", "branch": "repro/double-ended-saddle-search-lj38-2ts-separation-optim", "path": "results/campaign/optim-r26635-double-ended-saddle-search-lj38_2ts_separation--optim-de-2ts-stock.dat", "cause": "optim_stock", "extra": {"code_version": "r26635", "exact": False}},
+    {"key": "double-ended-saddle-search/lj38_2ts_separation/optim", "template": "optim/de-2ts-stock", "branch": "repro/double-ended-saddle-search-lj38-2ts-separation-optim", "path": "results/campaign/optim-df8da599-double-ended-saddle-search-lj38_2ts_separation--optim-de-2ts-stock.dat", "cause": "optim_stock", "extra": {"code_version": "df8da599", "exact": False}},
     {"key": "double-ended-saddle-search/pt-island/eon-ci-neb", "template": "eon-svn/de-pt-ci-neb", "branch": "main", "path": "results/campaign/eon-svn-de-pt-ci-neb.dat"},
     {"key": "double-ended-saddle-search/pt-island/eon-ci-swdneb", "template": "eon-svn/de-pt-ci-swdneb", "branch": "main", "path": "results/campaign/eon-svn-de-pt-ci-swdneb.dat"},
     {"key": "double-ended-saddle-search/pt-island/eon-dimer", "template": "eon-svn/de-pt-dimer", "branch": "main", "path": "results/campaign/eon-svn-de-pt-dimer.dat"},
@@ -239,7 +239,8 @@ CAUSE_TEXT = {
         "The harness score is pes.evaluate on the harness potential."
     ),
     "optim_stock": (
-        "OPTIM r26635 with the stock LJ38 newconnect.bfgsts.nohess keywords on the 51 archive pairs. "
+        "OPTIM df8da599 with the stock LJ38 newconnect.bfgsts.nohess keywords on the 51 archive pairs. "
+        "BFGSSTEPS, NEWCONNECT cycles, and NEWNEB iterations are the problem cap of 10000. "
         "The archived number is the paper row. The gap is the finding. The keywords were not tuned."
     ),
     "optim_morse_memory": (
@@ -857,7 +858,10 @@ def render_markdown(rows: list[dict]) -> str:
             archive = "—"
             rerun = "—"
         status = row["status"].replace("_", " ")
-        if row.get("cause"):
+        recorded = row.get("rerun") or {}
+        if recorded.get("exact") is False:
+            status = row.get("cause") or status
+        elif row.get("cause"):
             status = f"{status}; {row['cause']}"
         if row.get("note"):
             status = f"{status}; residual"

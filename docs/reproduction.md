@@ -33,7 +33,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj38/optim | force_calls 131 | 147 | not reproduced; optim_pes_counter |
 | lj38/optim-cl-string | — | — | not rerun |
 | lj38/pele | — | — | not rerun |
-| lj38_2ts_separation/optim | force_calls 2885 | 6118 | not reproduced; optim_stock |
+| lj38_2ts_separation/optim | force_calls 2885 | 6118 | optim_stock |
 | lj38_2ts_separation/pele | — | — | not rerun |
 | pt-island/eon-ci-neb | force_calls 248 | 226 | reproduced |
 | pt-island/eon-ci-neb-5 | — | — | not rerun |
@@ -250,7 +250,7 @@ The template note records the 2014 mean as OPTIM's own energy-plus-gradient call
 
 ### optim_stock
 
-OPTIM r26635 with the stock LJ38 newconnect.bfgsts.nohess keywords on the 51 archive pairs. The archived number is the paper row. The gap is the finding. The keywords were not tuned.
+OPTIM df8da599 with the stock LJ38 newconnect.bfgsts.nohess keywords on the 51 archive pairs. BFGSSTEPS, NEWCONNECT cycles, and NEWNEB iterations are the problem cap of 10000. The archived number is the paper row. The gap is the finding. The keywords were not tuned.
 
 - double-ended-saddle-search/lj38_2ts_separation/optim
 

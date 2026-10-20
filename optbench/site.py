@@ -230,7 +230,8 @@ def _not_reproduced() -> set[str]:
     path = Path(__file__).resolve().parents[1] / "oracle" / "reproduction.jsonl"
     found: set[str] = set()
     for row in load_ledger(path):
-        if row.get("status") == "not_reproduced":
+        rerun = row.get("rerun") or {}
+        if row.get("status") == "not_reproduced" and rerun.get("exact") is not False:
             found.add(f"{row['suite']}/{row['problem']}/{row['entry']}")
     return found
 

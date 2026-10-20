@@ -1,11 +1,13 @@
 """Stock OPTIM double-ended search for the LJ38 two-transition pairs.
 
-The binary is the current public Wales ``svn.tar.bz2``. ``INCLUDE/SVNREV``
-in that tree is 26635. The keyword block is the group's stock LJ38
-``newconnect.bfgsts.nohess`` example, unmodified. The starts are the
-archive pairs. The score is the last ``energy+gradient calls`` value,
-the same native counter the Pt-island central-difference row records,
-written so the board ranks it.
+The binary is the current public Wales ``svn.tar.bz2``.
+``OPTIM/source/SVNREV`` in that tree is ``df8da599``, the same identifier
+the other OPTIM and GMIN rows use. The keyword block is the group's stock
+LJ38 ``newconnect.bfgsts.nohess`` example. ``BFGSSTEPS``, the ``NEWCONNECT``
+cycle limit, and the ``NEWNEB`` iteration limit are the problem force-call
+cap. The starts are the archive pairs. The score is the last
+``energy+gradient calls`` value, the same native counter the Pt-island
+central-difference row records, written so the board ranks it.
 """
 
 from __future__ import annotations
@@ -19,7 +21,8 @@ import numpy as np
 
 from .common import run_jobs, write_campaign
 
-VERSION = "r26635"
+VERSION = "df8da599"
+SOURCE_COMMIT = "df8da599267534fbe43a250e578f7396a7946311"
 _PREAMBLE = Path(__file__).resolve().parents[2] / "templates" / "optim" / "preambles" / "de-2ts-stock.txt"
 _BAKED = Path("/tmp/wales-latest/build/OPTIM")
 
@@ -42,8 +45,34 @@ def read_xyz(path: Path) -> np.ndarray:
     return coords
 
 
-def odata_text(coords: np.ndarray) -> str:
+def apply_call_cap(preamble: str, cap: int) -> str:
+    """Set the stock iteration limits to the problem force-call cap.
+
+    ``NEWCONNECT`` field 1 is the cycle limit, ``NEWNEB`` field 2 is the
+    DNEB iteration limit, and ``BFGSSTEPS`` is the BFGS step limit. The
+    other example keywords stay as written.
+    """
+    lines = []
+    for line in preamble.splitlines():
+        parts = line.split()
+        if parts and parts[0].upper() == "NEWCONNECT" and len(parts) >= 2:
+            parts[1] = str(cap)
+            lines.append(" ".join(parts))
+        elif parts and parts[0].upper() == "NEWNEB" and len(parts) >= 3:
+            parts[2] = str(cap)
+            lines.append(" ".join(parts))
+        elif parts and parts[0].upper() == "BFGSSTEPS" and len(parts) >= 2:
+            parts[1] = str(cap)
+            lines.append(" ".join(parts))
+        else:
+            lines.append(line)
+    return "\n".join(lines) + ("\n" if preamble.endswith("\n") or lines else "")
+
+
+def odata_text(coords: np.ndarray, cap: int | None = None) -> str:
     preamble = _PREAMBLE.read_text(encoding="utf-8")
+    if cap is not None:
+        preamble = apply_call_cap(preamble, cap)
     if not preamble.endswith("\n"):
         preamble += "\n"
     lines = [preamble.rstrip("\n"), "POINTS"]
@@ -155,16 +184,17 @@ def run_dneb_stock(root: Path, problem: dict, template: dict, output: Path, work
                 "name": f"pair_{index:02d}",
                 "cap": cap,
                 "binary": str(binary),
-                "odata": odata_text(read_xyz(coords / f"start_{index}.xyz")),
+                "odata": odata_text(read_xyz(coords / f"start_{index}.xyz"), cap),
                 "finish": finish_text(read_xyz(coords / f"end_{index}.xyz")),
             }
         )
     records = run_jobs(jobs, _execute, workers)
     comment = (
-        f"# OPTIM {VERSION}, current public svn.tar.bz2. "
-        "Stock newconnect.bfgsts.nohess keywords. Archive pairs 0-50.\n"
-        "# The count is OPTIM's energy+gradient calls. "
-        "A success is Connected path found under the problem cap."
+        f"# OPTIM {VERSION}, OPTIM/source/SVNREV in the current public svn.tar.bz2. "
+        f"Stock newconnect.bfgsts.nohess keywords. "
+        f"BFGSSTEPS, NEWCONNECT cycles, and NEWNEB iterations are the problem cap {cap}.\n"
+        "# Archive pairs 0-50. The count is OPTIM's energy+gradient calls. "
+        "A success is Connected path found under that cap."
     )
     published = dict(template)
     published["code"] = "optim"
@@ -181,6 +211,9 @@ def run_dneb_stock(root: Path, problem: dict, template: dict, output: Path, work
             "potential": "LJDIFF",
             "version": VERSION,
             "keywords": "newconnect.bfgsts.nohess",
+            "bfgssteps": cap,
+            "newconnect_cycles": cap,
+            "newneb_iterations": cap,
             "pairs": sample,
         },
         images=int(images) if images else None,

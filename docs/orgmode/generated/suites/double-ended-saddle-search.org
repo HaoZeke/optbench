@@ -256,7 +256,7 @@
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
+   <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <figure class="bench-plot"><a href="../../_static/board/double-ended-saddle-search-lj38_2ts_separation-profile.svg"><picture><source srcset="../../_static/board/double-ended-saddle-search-lj38_2ts_separation-profile.webp" type="image/webp"><img src="../../_static/board/double-ended-saddle-search-lj38_2ts_separation-profile.png" alt="Dolan-More profile for double-ended-saddle-search/lj38_2ts_separation" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/double-ended-saddle-search-lj38_2ts_separation-cost.svg"><picture><source srcset="../../_static/board/double-ended-saddle-search-lj38_2ts_separation-cost.webp" type="image/webp"><img src="../../_static/board/double-ended-saddle-search-lj38_2ts_separation-cost.png" alt="Cost versus success for double-ended-saddle-search/lj38_2ts_separation" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="lj38_2ts_separation-templates">
@@ -286,7 +286,7 @@
    <tr><td data-field="template">rgsaddle/oci-neb-lbfgs</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">16924.7</td><td data-field="success_rate">0.176471</td><td data-field="wilson_low">0.095724</td><td data-field="wilson_high">0.302541</td><td data-field="median_calls">10000</td><td data-field="mean_calls">8228.18</td><td data-field="mean_per_image">1645.64</td><td data-field="failures">crash 0, divergence 0, cap 37, wrong_stationary 5</td><td data-field="n">51</td></tr>
    <tr><td data-field="template">rgsaddle/idpp-ci-neb</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">17645.9</td><td data-field="success_rate">0.137255</td><td data-field="wilson_low">0.068111</td><td data-field="wilson_high">0.257217</td><td data-field="median_calls">10000</td><td data-field="mean_calls">8882.94</td><td data-field="mean_per_image">1776.59</td><td data-field="failures">crash 0, divergence 0, cap 41, wrong_stationary 3</td><td data-field="n">51</td></tr>
    <tr><td data-field="template">rgsaddle/sidpp-ci-neb</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">17925.5</td><td data-field="success_rate">0.117647</td><td data-field="wilson_low">0.0550507</td><td data-field="wilson_high">0.233808</td><td data-field="median_calls">10000</td><td data-field="mean_calls">8880.2</td><td data-field="mean_per_image">1776.04</td><td data-field="failures">crash 0, divergence 0, cap 41, wrong_stationary 4</td><td data-field="n">51</td></tr>
-   <tr><td data-field="template">optim/de-2ts-stock</td><td data-field="version">optim r26635</td><td data-field="commit">738fafe3df5a</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">18366.8</td><td data-field="success_rate">0.117647</td><td data-field="wilson_low">0.0550507</td><td data-field="wilson_high">0.233808</td><td data-field="median_calls">54719</td><td data-field="mean_calls">92581.1</td><td data-field="mean_per_image">18516.2</td><td data-field="failures">crash 0, divergence 1, cap 44, wrong_stationary 0</td><td data-field="n">51</td></tr>
+   <tr><td data-field="template">optim/de-2ts-stock</td><td data-field="version">optim df8da599</td><td data-field="commit">df8da5992675</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">18366.8</td><td data-field="success_rate">0.117647</td><td data-field="wilson_low">0.0550507</td><td data-field="wilson_high">0.233808</td><td data-field="median_calls">565534</td><td data-field="mean_calls">444791</td><td data-field="mean_per_image">88958.3</td><td data-field="failures">crash 0, divergence 1, cap 44, wrong_stationary 0</td><td data-field="n">51</td></tr>
    <tr><td data-field="template">tsase/ci-neb</td><td data-field="version">tsase 1.0</td><td data-field="commit">98aac60b5d99</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">18812.1</td><td data-field="success_rate">0.0980392</td><td data-field="wilson_low">0.0426081</td><td data-field="wilson_high">0.209782</td><td data-field="median_calls">10000</td><td data-field="mean_calls">9690.35</td><td data-field="mean_per_image">1938.07</td><td data-field="failures">crash 0, divergence 1, cap 43, wrong_stationary 2</td><td data-field="n">51</td></tr>
    <tr><td data-field="template">ase/de-lj38-2ts-default</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">20000</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.0700466</td><td data-field="median_calls">2500</td><td data-field="mean_calls">2500</td><td data-field="mean_per_image">500</td><td data-field="failures">crash 0, divergence 51, cap 0, wrong_stationary 0</td><td data-field="n">51</td></tr>
    <tr><td data-field="template">ase/de-lj38-2ts-tuned</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">20000</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.0700466</td><td data-field="median_calls">2500</td><td data-field="mean_calls">2500</td><td data-field="mean_per_image">500</td><td data-field="failures">crash 0, divergence 51, cap 0, wrong_stationary 0</td><td data-field="n">51</td></tr>
@@ -309,15 +309,12 @@
    <li>ase/de-lj38-2ts-default ASE asv n=1, smoke run; scored 1 of 51 starts.</li>
    <li>ase/de-lj38-2ts-tuned ASE asv n=1, smoke run; scored 1 of 51 starts.</li>
    </ul>
-   <h3>Not scored</h3><ul>
-   <li>optim/de-2ts: no per-start record</li>
-   </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="lj38_2ts_separation-legacy">
    <h3>Legacy 2014 archive</h3>
    <details class="bench-details">
    <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
@@ -335,7 +332,7 @@
    </tr></thead><tbody>
    <tr id="double-ended-saddle-search-lj38-2ts-separation-optim" class="best">
    <td class="num">1</td>
-   <td class="text">optim · not reproduced</td>
+   <td class="text">optim</td>
    <td class="text">OPTIM</td>
    <td class="num">2.88500e+03</td>
    <td class="num">7.1380e+03</td>

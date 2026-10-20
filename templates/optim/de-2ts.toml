@@ -7,7 +7,7 @@ code_version = "2015-12-10"
 commit = "79c722dc6a63514acfe623ba007696778064d0b4e327a4798fd4233cc880b97c"
 algorithm = "DNEB + hybrid eigenvector following + Djikstra shortest path"
 tuning = "archive"
-note = "December 2015 Wales svn.tar.bz2 (sha256 79c722dc6a63514acfe623ba007696778064d0b4e327a4798fd4233cc880b97c, 21974243 bytes). Unranked diagnostic. Native LJDIFF via symbol AX and the archived odata, 51 pairs, start_0.xyz through start_50.xyz. The ranked row is optim/de-2ts-stock."
+note = "The socket runner does not run this template. The ranked row is optim/de-2ts-stock."
 
 [optim]
 method = "dneb"

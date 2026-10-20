@@ -1054,11 +1054,11 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="optim/de-2ts-stock">
    <td>lj38_2ts_separation</td>
    <td data-field="template">optim/de-2ts-stock</td>
-   <td data-field="version">optim r26635</td>
-   <td data-field="commit">738fafe3df5a</td>
+   <td data-field="version">optim df8da599</td>
+   <td data-field="commit">df8da5992675</td>
    <td data-field="par2_mean">18366.8</td>
-   <td data-field="mean_calls">92581.1</td>
-   <td data-field="median_calls">54719</td>
+   <td data-field="mean_calls">444791</td>
+   <td data-field="median_calls">565534</td>
    <td data-field="failures">crash 0, divergence 1, cap 44, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
@@ -1085,7 +1085,4 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>
-   <p>No full ranked run</p><ul>
-   <li>optim/de-2ts: no per-start record.</li>
-   </ul>
    </section>

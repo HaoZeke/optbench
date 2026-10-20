@@ -13,8 +13,8 @@
   "problem": "double-ended-saddle-search/lj38_2ts_separation",
   "provenance": {
     "code": "optim",
-    "code_version": "r26635",
-    "commit": "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31",
+    "code_version": "df8da599",
+    "commit": "df8da599267534fbe43a250e578f7396a7946311",
     "machine": {
       "machine": "x86_64",
       "node": "cursor",
@@ -22,12 +22,15 @@
       "system": "Linux"
     },
     "parameters": {
+      "bfgssteps": 10000,
       "counter": "optim energy+gradient calls",
       "keywords": "newconnect.bfgsts.nohess",
       "method": "dneb-stock",
+      "newconnect_cycles": 10000,
+      "newneb_iterations": 10000,
       "pairs": 51,
       "potential": "LJDIFF",
-      "version": "r26635"
+      "version": "df8da599"
     }
   },
   "schema": "optbench.score/v2",
