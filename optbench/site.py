@@ -480,9 +480,10 @@ def _collection_html(
 def _matches_code(row: dict, pins: list[dict], all_names: set[str]) -> bool:
     """True when this row belongs to this code.
 
-    EON and eOn differ only by case, so a row matches a display name exactly.
-    Other rows still match a lowercased id or name, which is how artn meets
-    pARTn and tsase meets TSASE.
+    EON and eOn differ only by case, so an exact display name stays on that
+    code. A legacy spelling such as Eon stays with eOn. Other rows still
+    match a lowercased id or name, which is how artn meets pARTn and tsase
+    meets TSASE.
     """
     code = str(row.get("code") or "")
     if not code:
@@ -492,11 +493,16 @@ def _matches_code(row: dict, pins: list[dict], all_names: set[str]) -> bool:
         return True
     if code in all_names:
         return False
+    ids = {str(pin.get("id") or "") for pin in pins if pin.get("id")}
+    if code in ids:
+        return True
     folded = code.lower()
-    group_folds = {name.lower() for name in names}
-    outside = {name.lower() for name in all_names if name not in names}
-    if folded in group_folds and folded in outside:
-        return False
+    folded_names = [name for name in all_names if name.lower() == folded]
+    if len(folded_names) > 1:
+        chosen = [name for name in folded_names if name != name.upper()]
+        if not chosen:
+            chosen = folded_names
+        return any(name in names for name in chosen)
     for pin in pins:
         pin_id = str(pin.get("id") or "").lower()
         name = str(pin.get("name") or "").lower()
