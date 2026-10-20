@@ -500,34 +500,18 @@ def _neb_specs() -> list[dict]:
                 "max_force_calls": 250000,
                 "max_steps": 250000,
             },
-            "tuned_optimizer": "LBFGS",
-            "tuned_parameters": {"maxstep": 0.01, "damping": 0.2},
-            "tuned_spring": 5.0,
-            "tuned_climb": False,
-            "tuned_interpolate": "idpp",
-            "tuned_climb_after": 0.4,
-            "tuned_source": "repaired",
-            "tuned_note": (
-                "The problem cap is 250000. "
-                "archive/entries/double-ended-saddle-search/lj38_2ts_separation/pele/benchmark.dat "
-                "records an observed maximum of 114490 force calls, and the archive ran uncapped. "
-                "The stored campaign still used an earlier stop. "
-                "Interpolation is IDPP. LBFGS maxstep is 0.01 and damping is 0.2. "
-                "Climb stays off until the maximum residual is at or below 0.4. "
-                "Five images and spring 5 are unchanged."
-            ),
+            "profiles": ("default",),
             "default_note": (
                 "ASE NEB defaults on the same pairs: spring 0.1, climb off, FIRE. "
-                "The stop matches the problem cap of 250000. "
+                "The stop is the problem cap of 250000 force calls and fmax 0.001. "
                 "archive/entries/double-ended-saddle-search/lj38_2ts_separation/pele/benchmark.dat "
-                "records an observed maximum of 114490 force calls, and the archive ran uncapped. "
-                "The stored campaign still used an earlier stop."
+                "records an observed maximum of 114490 force calls, and the archive ran uncapped."
             ),
         },
     )
     specs = []
     for row in rows:
-        for profile in ("default", "tuned"):
+        for profile in row.get("profiles", ("default", "tuned")):
             if profile == "default":
                 optimizer = "FIRE"
                 params: dict = {}

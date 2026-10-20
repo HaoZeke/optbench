@@ -10,7 +10,7 @@ profile = "default"
 reducer = "capped"
 ranked = true
 parameter_source = "default"
-note = "ASE NEB defaults on the same pairs: spring 0.1, climb off, FIRE. The stop matches the problem cap of 250000. archive/entries/double-ended-saddle-search/lj38_2ts_separation/pele/benchmark.dat records an observed maximum of 114490 force calls, and the archive ran uncapped. The stored campaign still used an earlier stop."
+note = "ASE NEB defaults on the same pairs: spring 0.1, climb off, FIRE. The stop is the problem cap of 250000 force calls and fmax 0.001. archive/entries/double-ended-saddle-search/lj38_2ts_separation/pele/benchmark.dat records an observed maximum of 114490 force calls, and the archive ran uncapped."
 
 [optimizer]
 name = "FIRE"

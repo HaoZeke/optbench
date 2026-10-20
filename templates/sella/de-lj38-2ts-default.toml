@@ -10,7 +10,7 @@ profile = "default"
 reducer = "capped"
 ranked = true
 parameter_source = "default"
-note = "Sella 2.6.0 order 1 defaults refine the highest-energy image after the ASE default band (FIRE, spring 0.1, climb off, linear interpolation). The band stops at 80 percent of the call cap and both stages share one harness counter. v0 is unset: a free cluster drops rigid modes, so a full Cartesian mode has the wrong length. ASE NEB defaults on the same pairs: spring 0.1, climb off, FIRE. The stop matches the problem cap of 250000. archive/entries/double-ended-saddle-search/lj38_2ts_separation/pele/benchmark.dat records an observed maximum of 114490 force calls, and the archive ran uncapped. The stored campaign still used an earlier stop."
+note = "Sella 2.6.0 order 1 defaults refine the highest-energy image after the ASE default band (FIRE, spring 0.1, climb off, linear interpolation). The band stops at 80 percent of the call cap and both stages share one harness counter. v0 is unset: a free cluster drops rigid modes, so a full Cartesian mode has the wrong length. ASE NEB defaults on the same pairs: spring 0.1, climb off, FIRE. The stop is the problem cap of 250000 force calls and fmax 0.001. archive/entries/double-ended-saddle-search/lj38_2ts_separation/pele/benchmark.dat records an observed maximum of 114490 force calls, and the archive ran uncapped."
 
 [optimizer]
 name = "Sella"
