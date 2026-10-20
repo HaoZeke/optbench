@@ -129,7 +129,7 @@ def _problem_for_archive(problem: dict) -> dict:
     return copied
 
 
-def load_geometries(root: Path, problem: dict, work: Path) -> list[tuple[str, np.ndarray]]:
+def load_geometries(root: Path, problem: dict, work: Path, *, center: bool = True) -> list[tuple[str, np.ndarray]]:
     from optbench.campaign import geometry_archive
 
     archive = geometry_archive(root, _problem_for_archive(problem))
@@ -143,7 +143,9 @@ def load_geometries(root: Path, problem: dict, work: Path) -> list[tuple[str, np
         raise ValueError(f"{problem['id']} expected {expected} starts, found {len(paths)}")
     loaded = []
     for path in paths:
-        pos = _center(_read_geometry(path))
+        pos = _read_geometry(path)
+        if center:
+            pos = _center(pos)
         # coords.1 has stem "coords". Keep the numeric name. A .con stem is the start index.
         label = path.stem if path.suffix == ".con" else path.name
         loaded.append((label, pos))
@@ -163,6 +165,23 @@ def _section(template: dict) -> dict:
     return section
 
 
+def _archive_lines(job: dict) -> list[str]:
+    """Archive move keywords. Absent keys leave the generic data file unchanged."""
+    lines = []
+    if job.get("fixboth"):
+        lines.append("FIXBOTH")
+    if job.get("permdist") not in (None, ""):
+        lines.append(f"PERMDIST {float(job['permdist']):.8f}")
+    if job.get("newrestart") not in (None, ""):
+        lines.append(f"NEWRESTART {int(job['newrestart'])}")
+    if job.get("sort"):
+        lines.append("SORT")
+    symmetrise = str(job.get("symmetrise") or "").strip()
+    if symmetrise:
+        lines.append(f"SYMMETRISE {symmetrise}")
+    return lines
+
+
 def _data_text(job: dict) -> str:
     # This binary is built with GMIN_MPI. mc.F90 sets the replica index only
     # inside IF (MPIT), and the serial DO loop is compiled out. MPI is required
@@ -178,13 +197,18 @@ def _data_text(job: dict) -> str:
             f"TIGHTCONV {job['tightconv']:.8f}",
             f"EDIFF {job['ediff']:.8f}",
             f"MAXIT {int(job['maxit'])} {int(job['maxit2'])}",
-            "SAVE 2",
+            f"SAVE {int(job.get('save') or 2)}",
             "CENTRE",
-            f"RADIUS {job['radius']:.8f}",
+            *( [f"RADIUS {float(job['radius']):.8f}"] if float(job.get("radius") or 0) > 0 else [] ),
             f"TEMPERATURE {job['temperature']:.8f}",
             f"STEP {job['step']:.8f} {job['astep']:.8f}",
-            f"STEPS {int(job['steps'])}",
-            f"RANSEED {int(job['seed'])}",
+            *_archive_lines(job),
+            (
+                f"STEPS {int(job['steps'])} {float(job['tfac']):.1f}"
+                if job.get("tfac") not in (None, "")
+                else f"STEPS {int(job['steps'])}"
+            ),
+            *([f"RANSEED {int(job['seed'])}"] if job.get("emit_seed", True) else []),
             f"TARGET {job['reference']:.16f}",
             f"MAX_NPCALL {int(job['cap'])}",
         ]
@@ -487,7 +511,7 @@ def run_template(
         raise ValueError("template failure_cap is not the problem max_force_calls")
     binary = gmin_binary()
     scratch = work or output.parent / "work" / template["id"].replace("/", "-")
-    loaded = load_geometries(root, problem, scratch)
+    loaded = load_geometries(root, problem, scratch, center=bool(section.get("center", True)))
     if limit > 0:
         loaded = loaded[: int(limit)]
     natoms = int(loaded[0][1].shape[0])
@@ -527,6 +551,14 @@ def run_template(
         "epsilon": 1.0,
         "sigma": 1.0,
         "cutoff": 40.0,
+        "fixboth": bool(section.get("fixboth", False)),
+        "permdist": section.get("permdist"),
+        "newrestart": section.get("newrestart"),
+        "sort": bool(section.get("sort", False)),
+        "symmetrise": str(section.get("symmetrise") or ""),
+        "save": int(section.get("save") or 2),
+        "tfac": section.get("tfac"),
+        "emit_seed": bool(section.get("emit_seed", True)),
     }
     jobs = []
     lennard_jones_compiled(np.zeros((1, 3)))
@@ -560,7 +592,15 @@ def run_template(
                 "maxit2": passed["maxit2"],
                 "radius": passed["radius"],
                 "steps": passed["steps"],
-                "seed": int(section["seed"]) + index,
+                "seed": int(section["seed"]) if not passed["emit_seed"] else int(section["seed"]) + index,
+                "save": passed["save"],
+                "tfac": passed["tfac"],
+                "emit_seed": passed["emit_seed"],
+                "fixboth": passed["fixboth"],
+                "permdist": passed["permdist"],
+                "newrestart": passed["newrestart"],
+                "sort": passed["sort"],
+                "symmetrise": passed["symmetrise"],
             }
         )
     if workers <= 1:

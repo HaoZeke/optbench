@@ -113,7 +113,7 @@
    <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
-   <td data-code="GMIN">—</td>
+   <td data-code="GMIN" data-template="gmin/lj98-bh" data-par2="282815"><span class="bench-score">282815</span><a href="#lj98-templates">gmin/lj98-bh</a></td>
    <td data-code="pele">—</td>
    <td data-code="LAMMPS">—</td>
    <td data-code="pysisyphus">—</td>
@@ -289,7 +289,7 @@
    <h3>Legacy 2014 archive</h3>
    <details class="bench-details">
    <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. The columns are the archived keys.</caption>
    <thead><tr>
@@ -308,7 +308,7 @@
    </tr></thead><tbody>
    <tr id="globalopt-lj150-gmin-symmetrise" class="best">
    <td class="num">1</td>
-   <td class="text">gmin-symmetrise</td>
+   <td class="text">gmin-symmetrise · not reproduced</td>
    <td class="text">GMIN</td>
    <td class="num">6.6738e+02</td>
    <td class="num">5.4347e+02</td>
@@ -322,7 +322,7 @@
    </tr>
    <tr id="globalopt-lj150-gmin-nosym">
    <td class="num">2</td>
-   <td class="text">gmin-nosym</td>
+   <td class="text">gmin-nosym · not reproduced</td>
    <td class="text">GMIN</td>
    <td class="num">3.28089e+03</td>
    <td class="num">2.72295e+03</td>
@@ -364,7 +364,7 @@
    <h3>Legacy 2014 archive</h3>
    <details class="bench-details">
    <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
@@ -380,7 +380,7 @@
    </tr></thead><tbody>
    <tr id="globalopt-lj38-gmin-csm" class="best">
    <td class="num">1</td>
-   <td class="text">gmin-csm</td>
+   <td class="text">gmin-csm · not reproduced</td>
    <td class="text">GMIN</td>
    <td class="num">6.42100e+03</td>
    <td class="num">7.7000e+01</td>
@@ -424,7 +424,7 @@
    </tr>
    <tr id="globalopt-lj38-pele-basinhopping">
    <td class="num">5</td>
-   <td class="text">pele-basinhopping</td>
+   <td class="text">pele-basinhopping · not reproduced</td>
    <td class="text">pele</td>
    <td class="num">5.21595e+05</td>
    <td class="num">9.4470e+03</td>
@@ -502,30 +502,32 @@
    </section><section class="bench" id="lj98" data-problem="globalopt/lj98">
    <h2>lj98</h2>
    <dl class="bench-rule">
-   <dt>Cap</dt><dd>1000000000 force calls</dd>
+   <dt>Cap</dt><dd>9229732 force calls</dd>
    <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
    <dt>Starts</dt><dd>100</dd>
    <dt>Potential</dt><dd>lennard-jones</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
-   <dt>Note</dt><dd>Success is an energy at or below the Cambridge Cluster Database N=98 minimum plus 0.001. The start set is the 100 numbered coordinate files. The cap of 1000000000 force calls is above the archived nosym energy-call mean 5.98857238e+07 plus ten times its standard deviation 6.21561817e+07.</dd>
+   <dt>Note</dt><dd>Success is an energy at or below the Cambridge Cluster Database N=98 minimum plus 0.001. The start set is the 100 numbered coordinate files. The archive symmetrise data file sets STEPS to 100000 and states no MAX_NPCALL. Its 03 Oct 2022 energy-call mean is 2.4953780e+05 and its standard deviation is 2.0578948e+05, so one trajectory&#x27;s mean plus ten standard deviations is 2307432.6. The harness counts every replica. Basin-hopping is one replica and parallel tempering is four, so the shared cap is 9229732, four times that ceiling, and MAX_NPCALL is the same budget. The archived nosym mean plus ten standard deviations is 6.81447541e+08. A cap of 1000000000 is not used, because a search that stops near two million calls would then be charged two billion under PAR-2.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">No committed harness run.</p>
+   <figure class="bench-plot"><a href="../../_static/board/globalopt-lj98-profile.svg"><picture><source srcset="../../_static/board/globalopt-lj98-profile.webp" type="image/webp"><img src="../../_static/board/globalopt-lj98-profile.png" alt="Dolan-More profile for globalopt/lj98" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="../../_static/board/globalopt-lj98-cost.svg"><picture><source srcset="../../_static/board/globalopt-lj98-cost.webp" type="image/webp"><img src="../../_static/board/globalopt-lj98-cost.png" alt="Cost versus success for globalopt/lj98" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="lj98-templates">
-   <summary>All templates (0 ranked)</summary>
+   <summary>All templates (2 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="globalopt/lj98">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="11">No full harness row.</td></tr>
+   <tr><td data-field="template">gmin/lj98-bh</td><td data-field="version">GMIN 02aaf45245af</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign</td><td data-field="par2_mean">282815</td><td data-field="success_rate">1</td><td data-field="wilson">0.963007–1</td><td data-field="median_calls">173058</td><td data-field="mean_calls">282815</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">gmin/lj98-bhpt</td><td data-field="version">GMIN 02aaf45245af</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign</td><td data-field="par2_mean">523212</td><td data-field="success_rate">1</td><td data-field="wilson">0.963007–1</td><td data-field="median_calls">403002</td><td data-field="mean_calls">523212</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    </details>
    </section><section class="bench bench-legacy-section" id="lj98-legacy">
    <h3>Legacy 2014 archive</h3>
    <details class="bench-details">
    <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. The columns are the archived keys.</caption>
    <thead><tr>
@@ -544,7 +546,7 @@
    </tr></thead><tbody>
    <tr id="globalopt-lj98-gmin-symmetrise" class="best">
    <td class="num">1</td>
-   <td class="text">gmin-symmetrise</td>
+   <td class="text">gmin-symmetrise · not reproduced</td>
    <td class="text">GMIN</td>
    <td class="num">1.28192e+03</td>
    <td class="num">1.06356e+03</td>
@@ -558,7 +560,7 @@
    </tr>
    <tr id="globalopt-lj98-gmin-nosym">
    <td class="num">2</td>
-   <td class="text">gmin-nosym</td>
+   <td class="text">gmin-nosym · not reproduced</td>
    <td class="text">GMIN</td>
    <td class="num">4.381976e+04</td>
    <td class="num">4.566034e+04</td>
@@ -667,7 +669,7 @@
    <h3>Legacy 2014 archive</h3>
    <details class="bench-details">
    <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
@@ -696,7 +698,7 @@
    </tr>
    <tr id="globalopt-tip4p15-gmin">
    <td class="num">2</td>
-   <td class="text">gmin</td>
+   <td class="text">gmin · not reproduced</td>
    <td class="text">GMIN</td>
    <td class="num">6.70645e+05</td>
    <td class="num">5.0265e+06</td>
@@ -735,7 +737,7 @@
    <h3>Legacy 2014 archive</h3>
    <details class="bench-details">
    <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
@@ -764,7 +766,7 @@
    </tr>
    <tr id="globalopt-tip4p20-gmin">
    <td class="num">2</td>
-   <td class="text">gmin</td>
+   <td class="text">gmin · not reproduced</td>
    <td class="text">GMIN</td>
    <td class="num">2.85967e+07</td>
    <td class="num">1.4191e+08</td>

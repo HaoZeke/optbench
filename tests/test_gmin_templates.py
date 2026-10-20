@@ -115,6 +115,62 @@ def test_bhpt_keyword_order_and_repeated_coords():
     assert len(coords.splitlines()) == 8
 
 
+def test_lj98_cap_is_the_symmetrise_envelope_and_the_data_file_uses_it():
+    problem = resolve_problem(ROOT, "globalopt/lj98")
+    cap = int(problem["convergence"]["max_force_calls"])
+    # ceil(2.4953780e5 + 10 * 2.0578948e5) = 2307433 for one trajectory.
+    # The harness sums replicas, and BHPT runs four, so the shared cap is 4 * 2307433.
+    assert cap == 4 * 2_307_433
+    assert cap != 1_000_000_000
+    for name in ("gmin/lj98-bh", "gmin/lj98-bhpt"):
+        template = next(item for item in list_templates(ROOT) if item["id"] == name)
+        assert int(template["failure_cap"]) == cap
+        section = template["gmin"]
+        assert int(section["steps"]) == 100_000
+        assert section["symmetrise"] == "1 0.01 0.05 0.3 0.1 0.6 3 0.3 2.1"
+        text = _data_text(
+            {
+                "replicas": int(section["replicas"]),
+                "pttmin": float(section["pttmin"]),
+                "pttmax": float(section["pttmax"]),
+                "exchprob": float(section["exchprob"]),
+                "sloppyconv": float(section["sloppyconv"]),
+                "tightconv": float(section["tightconv"]),
+                "ediff": float(section["ediff"]),
+                "maxit": int(section["maxit"]),
+                "maxit2": int(section["maxit2"]),
+                "radius": float(section["radius"]),
+                "temperature": float(section["temperature"]),
+                "step": float(section["step"]),
+                "astep": float(section["astep"]),
+                "steps": int(section["steps"]),
+                "seed": int(section["seed"]),
+                "reference": -543.665361,
+                "cap": cap,
+                "fixboth": section["fixboth"],
+                "permdist": section["permdist"],
+                "newrestart": section["newrestart"],
+                "sort": section["sort"],
+                "symmetrise": section["symmetrise"],
+                "save": int(section["save"]),
+                "tfac": float(section["tfac"]),
+                "emit_seed": bool(section["emit_seed"]),
+            }
+        )
+        assert f"MAX_NPCALL {cap}" in text
+        assert "SYMMETRISE 1 0.01 0.05 0.3 0.1 0.6 3 0.3 2.1" in text
+        assert "STEPS 100000 1.0" in text
+        assert "RADIUS" not in text
+        assert "RANSEED" not in text
+        assert "1000000000" not in text
+        assert section["center"] is False
+        if section["method"] == "bh":
+            assert "BHPT" not in text
+            assert "TEMPERATURE 1.30000000" in text
+        else:
+            assert text.startswith("MPI\nBHPT 0.10000000 1.30000000 0.10000000\n")
+
+
 def test_asv_classes_import_with_one_start():
     import benchmarks.bench_gmin_bh as bench
 

@@ -15,6 +15,7 @@ An asv result that covers one start is a smoke run and is partial.
 The full set is the problem file's sample, or the Morse archive when
 that file gives no sample count. It is not the largest campaign file.
 A result that sets ``ranked false`` stays off the ranked table.
+A template that does not reproduce the 2014 archive stays off it too.
 Partial rows stay in the output. A campaign file and an asv track for
 the same run are one row. Only the newest full version of a template
 is ranked. Older full versions stay in the history list.
@@ -974,6 +975,31 @@ def _rank_key(row: dict) -> tuple:
     )
 
 
+def _matches_hold(row: dict, held) -> bool:
+    problem = str(row.get("problem") or "")
+    template = str(row.get("template") or "")
+    if template and (problem, template) in held.templates:
+        return True
+    paths = [part.strip() for part in str(row.get("path") or "").split(";") if part.strip()]
+    return any(path in held.paths for path in paths)
+
+
+def _apply_reproduction_hold(row: dict, held) -> None:
+    """Keep an exact archive rerun that missed the tolerance off the ranked table."""
+    if not _matches_hold(row, held) or row.get("_declared_partial"):
+        return
+    n = int(row.get("n") or 0)
+    if _source_parts(row) == {"asv"} and n <= 1:
+        return
+    reason = "does not reproduce the 2014 archive"
+    if not row.get("scored"):
+        note = str(row.get("note") or "")
+        if reason not in note:
+            row["note"] = f"{note}; {reason}" if note else reason
+        return
+    row["_declared_partial"] = reason
+
+
 def build_board(root: Path) -> dict:
     """Score every committed campaign file and asv track under ``root``."""
     root = Path(root)
@@ -984,6 +1010,13 @@ def build_board(root: Path) -> dict:
     asv_rows, asv_unparsed, unmapped = _asv_rows(root, problems, templates)
     unparsed.extend(asv_unparsed)
     rows = _dedup(campaign + asv_rows)
+    from .reproduction import holdback
+
+    held = holdback(root)
+    for row in rows:
+        _apply_reproduction_hold(row, held)
+    for row in unparsed:
+        _apply_reproduction_hold(row, held)
     full_n: dict[str, int | None] = {}
     for problem_id, problem in problems.items():
         full_n[problem_id] = stated_full_n(root, problem)

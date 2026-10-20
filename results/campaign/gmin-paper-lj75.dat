@@ -1,0 +1,11 @@
+# exact archive data file, serial GMIN, internal potential
+# entry globalopt/lj75/gmin
+# ncalls is the Target hit after function-call field
+nfailed 0
+n 200
+force_calls 5.67010e+04
+force_calls_median 3.20500e+04
+force_calls_min 9.1000e+02
+force_calls_max 4.7976e+05
+cpu_time_mean 2.38260e+00
+cpu_time_stddev 2.9788e+00
