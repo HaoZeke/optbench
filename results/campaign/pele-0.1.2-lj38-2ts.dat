@@ -1,5 +1,5 @@
 # pele 0.1.2 stock double-ended connect. Unmodified defaults: DNEB, k 100, image density 10, transition-state tolerance 1e-4.
-# Harness counter on the potential. The problem cap is 10000 calls. 51 pairs, seed 0. Successes only enter the mean.
+# Harness counter on the potential. Cap 10000 is max_force_calls in problems/double-ended-saddle-search/lj38_2ts_separation.toml. The archive states no force cap. 51 pairs, seed 0. Successes only enter the mean.
 force_calls 7424
 force_calls_min 4534
 force_calls_max 9668
