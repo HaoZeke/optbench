@@ -96,6 +96,44 @@ def test_develop_rows_use_the_paper_method_and_kernel():
     assert load_template(ROOT, "eon/develop-low-lj38-dimer")["kernel"] == "lj40"
 
 
+def test_develop_lanczos_stops_follow_the_archive_protocol():
+    from optbench.campaign import load_template
+
+    de_pt = load_template(ROOT, "eon/develop-de-pt-lanczos-improved")
+    assert de_pt["ini"]["Saddle Search"]["max_energy"] == pytest.approx(1e9)
+    assert de_pt["ini"]["Lanczos"]["max_iterations"] == 10
+    assert de_pt["ini"]["Lanczos"]["tolerance"] == pytest.approx(0.05)
+    assert "finite_difference" not in de_pt["ini"]["Main"]
+
+    de_lj = load_template(ROOT, "eon/develop-de-lj38-lanczos-improved")
+    assert de_lj["ini"]["Saddle Search"]["max_energy"] == pytest.approx(1e9)
+    assert de_lj["ini"]["Lanczos"]["max_iterations"] == 20
+    assert de_lj["ini"]["Lanczos"]["tolerance"] == pytest.approx(0.05)
+    assert "finite_difference" not in de_lj["ini"]["Main"]
+
+    ts_lj = load_template(ROOT, "eon/develop-ts-lj38-lanczos-improved")
+    assert ts_lj["ini"]["Main"]["finite_difference"] == pytest.approx(0.001)
+    assert ts_lj["ini"]["Saddle Search"]["max_energy"] == 1000
+    assert ts_lj["ini"]["Lanczos"]["tolerance"] == pytest.approx(0.01)
+    assert ts_lj["ini"]["Lanczos"]["max_iterations"] == 50
+
+    ts_pt = load_template(ROOT, "eon/develop-ts-pt-lanczos-improved")
+    assert ts_pt["ini"]["Main"]["finite_difference"] == pytest.approx(0.001)
+    assert "max_energy" not in ts_pt["ini"]["Saddle Search"]
+    assert ts_pt["ini"]["Lanczos"]["max_iterations"] == 10
+    assert ts_pt["ini"]["Lanczos"]["tolerance"] == pytest.approx(0.1)
+
+    two = load_template(ROOT, "eon/develop-de-2ts-lanczos-improved")
+    assert two["ini"]["Saddle Search"]["max_energy"] == pytest.approx(1e9)
+    assert "Lanczos" not in two["ini"]
+    assert "finite_difference" not in two["ini"]["Main"]
+
+    low_lanczos = load_template(ROOT, "eon/develop-low-lj38-lanczos")
+    low_dimer = load_template(ROOT, "eon/develop-low-lj38-dimer")
+    assert "max_energy" not in low_lanczos["ini"]["Saddle Search"]
+    assert "max_energy" not in low_dimer["ini"]["Saddle Search"]
+
+
 def test_run_writes_one_benchmark_dat(tmp_path: Path):
     geometries = tmp_path / "geometries"
     geometries.mkdir()

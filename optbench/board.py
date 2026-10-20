@@ -1273,9 +1273,9 @@ def _show_per_image(problem: dict) -> bool:
 
 
 def _headers(problem: dict) -> list[str]:
-    # The ranked table and the headline table list the current version only.
-    # Older versions stay in the history list, so a Current column is yes on
-    # every ranked row. The Wilson interval is one cell, low then high.
+    # The ranked table and the headline table list the newest full version.
+    # Older versions stay in the history list. Wilson bounds are one cell,
+    # low then high.
     # Two separate columns push the minimization page over the DOM budget.
     headers = [
         "Template",

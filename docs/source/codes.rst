@@ -1,20 +1,20 @@
-=============
-Current codes
-=============
+=====
+Codes
+=====
 
 
 The table is the registry pin and the ranked harness runs for that code.
 A code with no full run on a problem is listed with the reason.
 The sections each client reads, and the commands that rerun a score, are in the README and on the Run a score page.
 A timestep or a band method in the wrong section is ignored.
-The Sella 0.1.1 rows stay on the 2014 tables and are labelled legacy.
+The Sella 0.1.1 rows stay on the 2014 tables.
 A new score is entered by Rohit Goswami.
 The number is written only after the run finishes under the problem rule.
 
 .. raw:: html
 
    <section class="bench" id="current-codes">
-   <h2>Current codes</h2>
+   <h2>Codes</h2>
    <p>The benchmark contributor is Rohit Goswami. A ranked row is a full harness run. The commit on that row is the commit that produced the score.</p>
    <h3>eOn</h3>
    <div class="bench-scroll"><table>
@@ -64,15 +64,15 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/pt-island" data-template="eon/develop-de-pt-ci">
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="eon/develop-de-pt-lanczos-improved">
    <td>pt-island</td>
-   <td data-field="template">eon/develop-de-pt-ci</td>
+   <td data-field="template">eon/develop-de-pt-lanczos-improved</td>
    <td data-field="version">eOn eOn (develop 500350d9)</td>
    <td data-field="commit">500350d9fae8</td>
-   <td data-field="par2_mean">311.068</td>
-   <td data-field="mean_calls">260.22</td>
-   <td data-field="median_calls">188</td>
-   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
+   <td data-field="par2_mean">197.542</td>
+   <td data-field="mean_calls">197.542</td>
+   <td data-field="median_calls">159</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
    <tr data-problem="globalopt/lj38" data-template="eon-client/bh-lj38">

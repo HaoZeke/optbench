@@ -13,7 +13,7 @@ asv_class = "EonDevelopDe2tsLanczosImproved"
 seeds = [1]
 asv_timeout = 3600
 budget_seconds = 3600
-note = """Lanczos improved L-BFGS from the interpolated midpoint on the 51 LJ38 two-transition pairs. min_mode_method is lanczos, client_displace_type is load, and the optimizer is lbfgs. converged_force is 0.001. Optimizer max_iterations and the harness cap are 10000. The kernel is unshifted lj/cut with epsilon 1, sigma 1, and cutoff 40."""
+note = """Lanczos improved L-BFGS from the interpolated midpoint on the 51 LJ38 two-transition pairs. min_mode_method is lanczos, client_displace_type is load, and the optimizer is lbfgs. converged_force is 0.001. Optimizer max_iterations and the harness cap are 10000. The archive has no eOn ini for this problem. Saddle Search max_energy is 1e9, the value in the EON r2549 template eon-svn/de-2ts-lanczos-improved. Lanczos tolerance, Lanczos max_iterations, and finite_difference stay at the client defaults because the archive records none. The kernel is unshifted lj/cut with epsilon 1, sigma 1, and cutoff 40."""
 
 [ini.Main]
 job = "saddle_search"
@@ -29,3 +29,4 @@ max_iterations = 10000
 [ini."Saddle Search"]
 min_mode_method = "lanczos"
 client_displace_type = "load"
+max_energy = 1e9
