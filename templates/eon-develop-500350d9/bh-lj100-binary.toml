@@ -1,0 +1,23 @@
+id = "eon-develop-500350d9/bh-lj100-binary"
+engine = "eon"
+problem = "globalopt/lj100-binary"
+code = "eOn (develop 500350d9)"
+code_version = "3.6.0"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
+algorithm = "Basin hopping"
+reducer = "harness"
+tuning = "default"
+failure_cap = 2000000
+note = '''
+Stock eOn at 500350d9 on fix/develop-regressions-vs-350. develop has not fast-forwarded to this commit. The client prints 3.6.0 (500350d9). The force-call cap is 2000000. That number is sample.max_evaluations in problems/globalopt/lj100-binary.toml and the archive report.sh window ($2 <= 2e6). Archive config.ini sets 60000 basin-hopping steps and an inner L-BFGS limit of 10000 iterations. This run keeps the code defaults for temperature, displacement, optimizer, and step count (300 K, displacement 0.5, conjugate gradient, 10000 steps, inner max_iterations 1000) and sets the archive force tolerance 0.001. random_seed is 1. The harness counts every ext_pot force call and stops at the cap. The potential matches the archive in.lammps binary Lennard-Jones.
+'''
+
+[ini.Main]
+job = "basin_hopping"
+random_seed = 1
+
+[ini.Potential]
+potential = "ext_pot"
+
+[ini.Optimizer]
+converged_force = 0.001

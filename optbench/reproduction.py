@@ -214,15 +214,17 @@ MATCHES: list[dict] = [
                 "par2_mean": 4000000.0,
             },
             "eon_develop": {
-                "label": "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)",
-                "template": "eon-develop-a7aa574/bh-lj100-binary",
-                "path": "results/campaign/eon-develop-a7aa574-bh-lj100-binary.dat",
+                "label": "eOn (develop 500350d9)",
+                "template": "eon-develop-500350d9/bh-lj100-binary",
+                "path": "results/campaign/eon-develop-500350d9-bh-lj100-binary.dat",
                 "avg_energy": -530.059,
                 "min_energy": -550.764,
                 "max_energy": -511.999,
                 "par2_mean": 4000000.0,
+                "successes": 0,
             },
         },
+        "rank_only": True,
     },
     {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "branch": "cells/pele/go", "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat", "cause": "pele_bh_defaults"},
     {"key": "hTST/Al/eon-dimer-cg", "template": "eon-svn/htst-al-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-al-dimer.dat", "kind": "htst", "cause": "htst_al"},
@@ -317,13 +319,18 @@ CAUSE_TEXT = {
         "The Wilson interval on 0 failures out of 1000 is about 0 to 3.83."
     ),
     "stock_binary_lj": (
-        "EON (SVN r2549) and eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) are different codes. "
-        "Both ran stock and untuned on the archived binary LJ100 starts, seed 1, with the archive force tolerance 0.001 and the harness cap of 2000000 calls. "
-        "Temperature, displacement, optimizer, and step count stayed at each code's defaults. "
-        "Every start hit the cap, so both harness PAR-2 means are 4000000. "
-        "EON (SVN r2549) avg/min/max energy is -530.059, -550.76, and -512 against the archive -584.579, -596.13, and -574.14. "
-        "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) is -530.059, -550.764, and -511.999. "
-        "The two codes agree to the EON bh.dat precision. The maximum is 10.8 percent off the archive. "
+        "EON (SVN r2549) and eOn (develop 500350d9) are different codes. "
+        "Both ran on the archived binary LJ100 starts, seed 1, with the archive force tolerance 0.001. "
+        "The force-call cap is 2000000, from sample.max_evaluations and from archive report.sh. "
+        "Archive config.ini asks for 60000 basin-hopping steps and an inner L-BFGS limit of 10000 iterations. "
+        "The ranked runs keep each code's own step count of 10000 and its conjugate-gradient inner limit of 1000. "
+        "The cap stops every start at 2000000 calls. eOn records 1000 quenches there. "
+        "Both harness PAR-2 means are 4000000 and both success counts are 0. "
+        "EON (SVN r2549) avg/min/max energy is -530.059, -550.76, and -512. "
+        "eOn (develop 500350d9) is -530.059, -550.764, and -511.999. "
+        "The archive file is -584.579, -596.13, and -574.14. "
+        "The two codes agree to the EON bh.dat precision. "
+        "The maximum is 62.14 above the archive maximum. "
         "Both full harness runs are ranked beside the archived row."
     ),
     "akmc_vs_langevin": (
@@ -427,6 +434,20 @@ def judge_checks(checks: list[dict], failure: dict | None) -> str:
     if failure is not None and not failure["ok"]:
         ok = False
     return "reproduced" if ok else "not_reproduced"
+
+
+def ledger_status(row: dict) -> str:
+    """Status stored on a ledger row.
+
+    A rank_only row keeps the energies and has no pass/fail flag.
+    """
+    checks = row.get("checks") or []
+    if row.get("rerun") and row.get("status") == "ranked" and all("ok" not in item for item in checks):
+        return "ranked"
+    status = judge_checks(checks, row.get("failure_check") if row.get("rerun") else None)
+    if row.get("rerun") is None:
+        return "not_rerun"
+    return status
 
 
 def build_checks(
@@ -700,9 +721,7 @@ def reproduction_errors(root: Path) -> list[str]:
     if oracle_ids != ledger_ids:
         errors.append("reproduction ledger is not in oracle order")
     for row in ledger:
-        status = judge_checks(row.get("checks") or [], row.get("failure_check") if row.get("rerun") else None)
-        if row.get("rerun") is None:
-            status = "not_rerun"
+        status = ledger_status(row)
         if status != row.get("status"):
             errors.append(f"{row_id(row)} stored {row.get('status')} and the checks say {status}")
         if row.get("rerun", {}) and row["rerun"].get("paper_baseline") and row.get("status") != "reproduced":
@@ -792,11 +811,16 @@ def build_rows(root: Path) -> list[dict]:
             }
         status = judge_checks(checks, failure)
         named = match.get("cause", "")
-        cause = named if status == "not_reproduced" else ""
+        if match.get("rank_only"):
+            for item in checks:
+                item.pop("ok", None)
+            status = "ranked"
+            failure = None
+        cause = named if status == "not_reproduced" or match.get("rank_only") else ""
         record["checks"] = checks
         record["failure_check"] = failure
         record["status"] = status
-        record["gap"] = _gap(checks, failure) if status == "not_reproduced" else ""
+        record["gap"] = "" if match.get("rank_only") else (_gap(checks, failure) if status == "not_reproduced" else "")
         record["cause"] = cause
         record["cause_detail"] = CAUSE_TEXT.get(cause, "") if cause else ""
         record["note"] = CAUSE_TEXT.get(named, "") if status == "reproduced" and named else ""
@@ -842,7 +866,12 @@ def render_markdown(rows: list[dict]) -> str:
         "",
         "Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.",
         "",
-        f"{counts['reproduced']} reproduced, {counts['not_reproduced']} not reproduced, {counts['not_rerun']} not rerun. {len(rows)} archive rows.",
+        (
+            f"{counts['reproduced']} reproduced, {counts['not_reproduced']} not reproduced, "
+            f"{counts['not_rerun']} not rerun."
+            + (f" {counts.get('ranked', 0)} ranked beside the archive." if counts.get("ranked") else "")
+            + f" {len(rows)} archive rows."
+        ),
         "",
         "The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.",
         "",

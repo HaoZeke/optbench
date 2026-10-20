@@ -303,25 +303,25 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>
-   <h3>eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)</h3>
+   <h3>eOn (develop 500350d9)</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
    <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
    <td>minimization and saddle search</td>
-   <td>develop</td>
-   <td>a7aa57472fb7</td>
+   <td>fix/develop-regressions-vs-350</td>
+   <td>500350d9fae8</td>
    <td><a href="https://github.com/TheochemUI/eon">https://github.com/TheochemUI/eon</a></td>
    </tr>
    </tbody></table></div>
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr data-problem="globalopt/lj100-binary" data-template="eon-develop-a7aa574/bh-lj100-binary">
+   <tr data-problem="globalopt/lj100-binary" data-template="eon-develop-500350d9/bh-lj100-binary">
    <td>Binary Lennard-Jones 100</td>
-   <td data-field="template">eon-develop-a7aa574/bh-lj100-binary</td>
-   <td data-field="version">eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) 3.6.0</td>
-   <td data-field="commit">a7aa57472fb7</td>
+   <td data-field="template">eon-develop-500350d9/bh-lj100-binary</td>
+   <td data-field="version">eOn (develop 500350d9) 3.6.0</td>
+   <td data-field="commit">500350d9fae8</td>
    <td data-field="par2_mean">4e+06</td>
    <td data-field="mean_calls">2e+06</td>
    <td data-field="median_calls">2e+06</td>

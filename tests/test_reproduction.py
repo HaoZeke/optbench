@@ -8,7 +8,7 @@ from optbench.problems import load_problem
 from optbench.reproduction import (
     baseline_errors,
     holdback,
-    judge_checks,
+    ledger_status,
     load_ledger,
     reproduction_errors,
     row_id,
@@ -23,19 +23,16 @@ def test_the_ledger_covers_the_oracle_in_order():
     ledger = load_ledger(ROOT / "oracle" / "reproduction.jsonl")
     assert len(ledger) == len(oracle) == 151
     assert [row_id(row) for row in ledger] == [row_id(row) for row in oracle]
-    counts = {"reproduced": 0, "not_reproduced": 0, "not_rerun": 0}
+    counts = {"reproduced": 0, "not_reproduced": 0, "not_rerun": 0, "ranked": 0}
     for row in ledger:
-        failure = row.get("failure_check") if row.get("rerun") else None
-        status = judge_checks(row.get("checks") or [], failure)
-        if row.get("rerun") is None:
-            status = "not_rerun"
+        status = ledger_status(row)
         assert row["status"] == status
         counts[status] += 1
         if status == "not_reproduced":
             assert row["cause"]
         if (row.get("rerun") or {}).get("paper_baseline"):
             assert status == "reproduced"
-    assert counts == {"reproduced": 46, "not_reproduced": 30, "not_rerun": 75}
+    assert counts == {"reproduced": 46, "not_reproduced": 29, "not_rerun": 75, "ranked": 1}
     assert reproduction_errors(ROOT) == []
 
 

@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 30 not reproduced, 75 not rerun. 151 archive rows.
+46 reproduced, 29 not reproduced, 75 not rerun. 1 ranked beside the archive. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -51,7 +51,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
-| lj100-binary/eon-basinhopping | avg_energy -584.579, min_energy -596.13, max_energy -574.14 | -530.059, -550.76, -512 | not reproduced; stock_binary_lj |
+| lj100-binary/eon-basinhopping | avg_energy -584.579, min_energy -596.13, max_energy -574.14 | -530.059, -550.76, -512 | ranked; stock_binary_lj |
 | lj100-binary/gmin | — | — | not rerun |
 | lj150/gmin-nosym | — | — | not rerun |
 | lj150/gmin-symmetrise | — | — | not rerun |
@@ -265,7 +265,7 @@ archive run.sh divides coordinates by r0 = 2.897 and scales rho and rcut into th
 
 ### stock_binary_lj
 
-EON (SVN r2549) and eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) are different codes. Both ran stock and untuned on the archived binary LJ100 starts, seed 1, with the archive force tolerance 0.001 and the harness cap of 2000000 calls. Temperature, displacement, optimizer, and step count stayed at each code's defaults. Every start hit the cap, so both harness PAR-2 means are 4000000. EON (SVN r2549) avg/min/max energy is -530.059, -550.76, and -512 against the archive -584.579, -596.13, and -574.14. eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) is -530.059, -550.764, and -511.999. The two codes agree to the EON bh.dat precision. The maximum is 10.8 percent off the archive. Both full harness runs are ranked beside the archived row.
+EON (SVN r2549) and eOn (develop 500350d9) are different codes. Both ran on the archived binary LJ100 starts, seed 1, with the archive force tolerance 0.001. The force-call cap is 2000000, from sample.max_evaluations and from archive report.sh. Archive config.ini asks for 60000 basin-hopping steps and an inner L-BFGS limit of 10000 iterations. The ranked runs keep each code's own step count of 10000 and its conjugate-gradient inner limit of 1000. The cap stops every start at 2000000 calls. eOn records 1000 quenches there. Both harness PAR-2 means are 4000000 and both success counts are 0. EON (SVN r2549) avg/min/max energy is -530.059, -550.76, and -512. eOn (develop 500350d9) is -530.059, -550.764, and -511.999. The archive file is -584.579, -596.13, and -574.14. The two codes agree to the EON bh.dat precision. The maximum is 62.14 above the archive maximum. Both full harness runs are ranked beside the archived row.
 
 - globalopt/lj100-binary/eon-basinhopping
 
