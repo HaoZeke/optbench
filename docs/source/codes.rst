@@ -453,15 +453,15 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 29, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="ase/de-lj38-2ts-tuned">
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="ase/de-lj38-2ts-default">
    <td>lj38_2ts_separation</td>
-   <td data-field="template">ase/de-lj38-2ts-tuned</td>
+   <td data-field="template">ase/de-lj38-2ts-default</td>
    <td data-field="version">ASE 3.29.0</td>
    <td data-field="commit">f27c0005ae6a</td>
-   <td data-field="par2_mean">442917</td>
-   <td data-field="mean_calls">37035.3</td>
-   <td data-field="median_calls">40001</td>
-   <td data-field="failures">crash 0, divergence 0, cap 45, wrong_stationary 0</td>
+   <td data-field="par2_mean">245870</td>
+   <td data-field="mean_calls">162536</td>
+   <td data-field="median_calls">167862</td>
+   <td data-field="failures">crash 0, divergence 0, cap 17, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-template="ase/de-pt-island-tuned">
@@ -522,7 +522,6 @@ The number is written only after the run finishes under the problem rule.
    </tbody></table></div>
    <p>No full ranked run</p><ul>
    <li>LJ38 double-ended saddle: partial.</li>
-   <li>lj38_2ts_separation: partial.</li>
    <li>pt-island: partial.</li>
    <li>Lennard-Jones 38 clusters: partial.</li>
    <li>Morse bulk: partial.</li>
@@ -560,14 +559,14 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="sella/de-lj38-2ts-tuned">
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="sella/de-lj38-2ts-default">
    <td>lj38_2ts_separation</td>
-   <td data-field="template">sella/de-lj38-2ts-tuned</td>
+   <td data-field="template">sella/de-lj38-2ts-default</td>
    <td data-field="version">Sella 2.6.0</td>
    <td data-field="commit">6cfb60cdb100</td>
-   <td data-field="par2_mean">30105.9</td>
-   <td data-field="mean_calls">30105.9</td>
-   <td data-field="median_calls">32141</td>
+   <td data-field="par2_mean">143927</td>
+   <td data-field="mean_calls">143927</td>
+   <td data-field="median_calls">167862</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
@@ -662,7 +661,6 @@ The number is written only after the run finishes under the problem rule.
    </tbody></table></div>
    <p>No full ranked run</p><ul>
    <li>LJ38 double-ended saddle: partial.</li>
-   <li>lj38_2ts_separation: partial.</li>
    <li>pt-island: partial.</li>
    <li>Lennard-Jones 38 clusters: partial.</li>
    <li>Morse bulk: partial.</li>
