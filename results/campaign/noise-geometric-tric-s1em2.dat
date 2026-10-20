@@ -1,16 +1,16 @@
-# partial snapshot: 219 starts scored, the campaign is still running
+# partial snapshot: 402 starts scored, the campaign is still running
 # counter harness. One force call is one clean energy and gradient.
 # Noise is added after the call. A repeated coordinate keeps that sample.
 # The index uses the clean Hessian. Six rigid modes are removed.
 # A curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6).
 # Energy and Kabsch RMSD are not applied: the problem file has no per-start reference.
-# final coordinate system: DelocalizedInternalCoordinates 219
+# final coordinate system: DelocalizedInternalCoordinates 402
 # geomeTRIC 1.1.1 trust-radius optimizer. The custom engine sees the harness Lennard-Jones energy and the noisy force, in Hartree and Hartree/Bohr. The search stops on the noise rule. Cartesian uses an empty bond list. TRIC uses the two nearest neighbors and labels the atoms H so Schlegel's guess stays defined at these distances. The index is the clean Hessian with the rigid-mode rule.
-force_calls 805
+force_calls 811
 force_calls_min 225
-force_calls_max 2464
-nfailed 8
-median 739
+force_calls_max 5084
+nfailed 14
+median 732
 code geomeTRIC
 code_version 1.1.1
 commit f657e69bae9c81bf7a23e7375db98502ca5c8c30
@@ -20,16 +20,16 @@ tuning default
 counter harness
 problem minimization/lj38-noise
 sigma 0.01
-par2_mean 2744.85388128
-wilson_low 0.85259089996
-wilson_high 0.932720778245
-par2_median 778
+par2_mean 2538.70895522
+wilson_low 0.878512138264
+wilson_high 0.934613265333
+par2_median 776.5
 par2_median_low 741
-par2_median_high 844
-v2_nfailed 22
-v2_successes 197
-n 219
+par2_median_high 816.5
+v2_nfailed 36
+v2_successes 366
+n 402
 cap 10000
-energy_min -169.226954285
-energy_max -143.418800743
+energy_min -170.505661137
+energy_max -137.51831753
 partial true
