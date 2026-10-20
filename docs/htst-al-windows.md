@@ -1,65 +1,86 @@
 # hTST/Al dimer windows
 
-The archive mean is 432 barrier windows and 11 rate windows (`archive/entries/hTST/Al/eon-dimer-cg2/benchmark.dat`): 46 barrier jobs and 21070 saddle force calls, 1671 rate jobs and 766300 saddle force calls. Each window here is one fresh AKMC from state 0 with its own `random_seed`. A barrier seed stops when the eight reference processes, four at 0.233 eV and four at 0.372 eV, have been seen. A rate seed stops when the unique-process rate sum, prefactor `1.2e12` at 300 K, reaches `0.999 * 592041917`. The harness counts every force evaluation. The archive column sums saddle force calls only (search result field 4). Method settings stay the shipped ini.
+The archive entry `archive/entries/hTST/Al/eon-dimer-cg2` is one AKMC. `config.ini` sets `random_seed = 42`, `number_of_cpus = 1`, and `num_jobs = 10000`. `benchmark.dat` averages 432 barrier windows and 11 rate windows: 46 barrier jobs and 21070 saddle force calls, 1671 rate jobs and 766300 saddle force calls.
 
-The archive walks one `search_results.txt` and resets the window after each hit. These windows do not share a process table: each seed starts from state 0 and stops at the first hit. Finished counts are 17 of 432 barrier windows and 1 of 11 rate windows for EON (SVN r2549), and 40 of 432 barrier windows and 0 of 11 rate windows for eOn (develop 500350d9). A rate seed that has not reached the rate still contributes its barrier window. One seed is not a ranked row. Nothing is written under `results/campaign/` for these two runs. The table is `results/htst-al-dimer-cg2/windows/aggregate.json`.
+`report.py` builds the reference process ids from `states/0/processtable`, then walks that same state's `search_results.txt`. It does not start a fresh AKMC per window. Jobs and saddle force calls accumulate, and both counters reset after a hit.
+
+Reference ids, lines 19-48. The barrier multiset is four 0.233 eV and four 0.372 eV. The first processtable row that matches a remaining slot is kept, the slot is removed, and later rows are not added once the multiset is empty:
+
+```
+f = open(join(path, 'processtable'))
+...
+    if barrier in barrier_list:
+        barrier_ids_ref.append(number)
+        i = barrier_list.index(barrier)
+        del barrier_list[i]
+```
+
+The walk and both resets, lines 74-127. Two header lines are skipped. Every later line adds one job and field 4 (`sad-fcs`), including lines that are not `good-*` or `repeat-*`. A barrier window closes when every reference id has been seen, then `search_bnum` and `fcs_bsum` go back to zero. A rate window closes when the unique-process sum, prefactor `1.2e12` at 300 K, reaches `0.999 * 592041917`, then the rate counters go back to zero:
+
+```
+f = open(join(path, 'search_results.txt'))
+...
+for line in f:
+    search_bnum +=1
+    search_rnum +=1
+    ...
+    fcs_bsum += saddle_forcecalls
+    fcs_rsum += saddle_forcecalls
+    ...
+    if len(barrier_ids) == len(barrier_ids_ref):
+        barrier_ids = []
+        searchbarrier_num.append(search_bnum)
+        fcsbarrier_sum.append(fcs_bsum)
+        search_bnum = 0
+        fcs_bsum    = 0
+    ...
+    if rate_sumt >= rate_ref * rate_accuracy:
+        rate_ids    = []
+        searchrate_num.append(search_rnum)
+        fcsrate_sum.append(fcs_rsum)
+        search_rnum = 0
+        fcs_rsum    = 0
+        rate_sumt   = 0.0
+```
+
+The means, lines 139-153, are `np.mean` over those windows. `benchmark.dat` records the lengths:
+
+```
+barrier_jobs 46
+barrier_force_calls 2.107e+04
+average over 432
+rate_jobs 1671
+rate_force_calls  7.663e+05
+average over 11
+```
+
+Barrier windows stay open until the processtable has consumed all eight slots. A short reference list would close on the wrong ids. Rate windows do not use that list. The ranked count is the harness sum on each window. sad-fcs is the archive column, summed from field 4 on the same lines.
+
+The reactant is `website/hTST/Al/eon-dimer-cg2/pos.con`. Archive `displace_atomlist = -1` is the last atom in the r2549 client (`free[-1]`, file index 384). eOn at 500350d9 treats a lone `-1` as every free atom, so both written inis list 384. The harness server runs one search per pass (`num_jobs = 1`, one CPU) so each `search_results.txt` line has its own harness count. Seed 42, temperature 300, confidence 1.95, prefactor `1.2e12`, dimer CG, `rotations_max` 10, `converged_angle` 1, radius 3.3, magnitude 0.5. The problem file states no force-call cap. The server counter does not stop the AKMC.
+
+One run per client. There is no seed shard. `scripts/htst_al_continuous.py` resumes from `results/htst-al-dimer-cg2/continuous/<code>/akmc` and `searches.jsonl`. A checkpoint pauses both runs between searches, commits that directory, and pushes `cells/htst/al-dimer-cg2`. The first pause is after 20 minutes and later pauses are 90 minutes apart.
+
+The per-seed state-0 sample remains on branch `repro/htst-al-eon-dimer-cg2` at `0ae1515d`. This branch does not rank it.
 
 ## Counts
 
-Harness force calls are the count. Saddle force calls are the client `sad-fcs` field, the same field the archive sums. Every finished barrier is 0.23285 eV, which rounds to the archive class 0.233 eV.
+<!-- counts:start -->
+Harness force calls are the count. sad-fcs is archive field 4, shown beside it.
+Mean, median, min, and max are over the closed windows.
 
-| | archive | EON mean | EON median | EON min | EON max | eOn mean | eOn median | eOn min | eOn max |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| barrier windows | 432 | 17 | | | | 40 | | | |
-| barrier jobs | 46 | 44.35 | 41 | 17 | 76 | 34.85 | 32 | 11 | 69 |
-| barrier harness calls | | 34832.5 | 26513 | 11146 | 127441 | 33553 | 20103 | 5909 | 92929 |
-| barrier sad-fcs | 21070 | 27998.7 | 20014 | 8363 | 116258 | 28136.6 | 15242 | 4234 | 84464 |
-| barrier mins-fcs | | 6833.8 | 6499 | 2783 | 11954 | 5416.3 | 4973.5 | 1675 | 10793 |
-| rate windows | 11 | 1 | | | | 0 | | | |
-| rate jobs | 1671 | 3282 | 3282 | 3282 | 3282 | | | | |
-| rate harness calls | | 2692466 | 2692466 | 2692466 | 2692466 | | | | |
-| rate sad-fcs | 766300 | 2187062 | 2187062 | 2187062 | 2187062 | | | | |
-| rate mins-fcs | | 505404 | 505404 | 505404 | 505404 | | | | |
-
-The one EON rate window is seed 42. Its rate sum is 591458408.07, against the archive reference 592041917 and the stop threshold 591449875.08.
-
-## Client counters
-
-EON (SVN r2549) `Potential::fcalls` counts both dimer images. On all 5222 recorded searches, sad-fcs + mins-fcs equals the harness.
-
-eOn is 500350d9 on `fix/develop-regressions-vs-350`. `eonclient -v` prints `3.6.0 (500350d9)`. Commit 44931a78 counts saddle calls through every image potential. On 2853 of 2868 searches, sad-fcs + mins-fcs equals the harness. The other 15 are 14 `Iterations` results and 1 `Energy` result, and on each of those the client total is one call lower than the harness. The harness total stays the count.
-
-## Per-window cost
-
-Barrier wall clock below is for seeds that stopped at the barrier, on this eight-core machine while several clients ran at once.
-
-| | n | mean | median | min | max |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| EON barrier wall (s) | 14 | 250.6 | 133.1 | 63.4 | 1014 |
-| EON seconds per search | 14 | 5.92 | 2.61 | 2.19 | 36.2 |
-| eOn barrier wall (s) | 38 | 188.2 | 77.4 | 22.9 | 1048 |
-| eOn seconds per search | 38 | 5.83 | 2.38 | 1.76 | 49.9 |
-
-EON seed 42, the finished rate window, took 18526 s for 3282 searches (5.64 s/search) while one other client shared the machine. At the median barrier pace, about 2.4–2.6 s/search on one core, a barrier window of the median length is one to two minutes and a rate window of seed 42's length is a few hours. That is why 432 and 11 are sharded.
-
-Four rate seeds are open. Each already has its barrier window. The rate gap is the threshold minus the unique-process sum.
-
-| code | seed | searches | elapsed (s) | barrier jobs | barrier harness | rate gap |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| eOn | 0 | 697 | 4152 | 30 | 19814 | 189511 |
-| eOn | 1 | 838 | 3953 | 31 | 21513 | 212290 |
-| EON | 0 | 696 | 4103 | 36 | 21012 | 279796 |
-| EON | 1 | 584 | 4074 | 41 | 26513 | 242650 |
-
-Their work directories are committed. Run the same command to continue them.
-
-## Records
-
-Records land in `results/htst-al-dimer-cg2/windows/<code>/seed-<seed>.jsonl`. `scripts/htst_al_windows.py report` rewrites each summary from its jsonl and writes `aggregate.json`.
-
-A stop aborted one in-flight search on six seeds. Those calls are stored on the next line as `interrupted_calls` and are not part of `harness_delta`. EON seed 24 was in that set and had not closed a barrier window, so it is not in the record. Start it again with the shard command below.
-
-The work directory `results/htst-al-dimer-cg2/work/<code>/seed-<seed>/` is the resume point. Finished barrier seeds do not need it, and those directories are not in git. A seed whose jsonl is present and whose work directory is absent is left as recorded: the run exits without starting that seed over.
+| | archive | EON (SVN r2549) | eOn (develop 500350d9) |
+| --- | ---: | ---: | ---: |
+| barrier windows | 432 | 0 / 432 | 0 / 432 |
+| rate windows | 11 | 0 / 11 | 0 / 11 |
+| barrier jobs | 46 |  |  |
+| barrier harness calls |  |  |  |
+| barrier sad-fcs | 21070 |  |  |
+| barrier mins-fcs |  |  |  |
+| rate jobs | 1671 |  |  |
+| rate harness calls |  |  |  |
+| rate sad-fcs | 766300 |  |  |
+| rate mins-fcs |  |  |  |
+<!-- counts:end -->
 
 ## Clients
 
@@ -77,30 +98,13 @@ export OPTBENCH_EON_CLIENT=/tmp/eon-500350d9/bbdir/client/eonclient
 export OPTBENCH_EON_ROOT=/tmp/eon-500350d9
 ```
 
-Use the eOn pixi interpreter. It has `vesin`, which the 500350d9 AKMC import needs. The shard command uses that same interpreter for every seed.
+Use the eOn pixi interpreter. It has `vesin`, which the 500350d9 AKMC import needs.
 
 ```
 PY=/tmp/eon-develop-src/.pixi/envs/default/bin/python
+$PY scripts/htst_al_continuous.py selftest
+$PY -u scripts/htst_al_continuous.py run --code svn
+$PY -u scripts/htst_al_continuous.py run --code eon
+$PY -u scripts/htst_al_continuous.py supervise --initial 1200 --interval 5400
+$PY scripts/htst_al_continuous.py report
 ```
-
-## Commands
-
-`--seeds START:STOP` is a half-open range. Give each machine a disjoint slice. `--jobs` is the number of seeds run at once on that machine. A seed whose window is already closed is skipped.
-
-```
-$PY scripts/htst_al_windows.py run --code eon --seed 0 --until rate
-$PY scripts/htst_al_windows.py run --code eon --seed 1 --until rate
-$PY scripts/htst_al_windows.py shard --code eon --seeds 2:11 --until rate --jobs 4
-$PY scripts/htst_al_windows.py shard --code eon --seeds 49:216 --until barrier --jobs 4
-$PY scripts/htst_al_windows.py shard --code eon --seeds 216:432 --until barrier --jobs 4
-
-$PY scripts/htst_al_windows.py run --code svn --seed 0 --until rate
-$PY scripts/htst_al_windows.py run --code svn --seed 1 --until rate
-$PY scripts/htst_al_windows.py shard --code svn --seeds 2:10 --until rate --jobs 4
-$PY scripts/htst_al_windows.py shard --code svn --seeds 24:216 --until barrier --jobs 4
-$PY scripts/htst_al_windows.py shard --code svn --seeds 216:432 --until barrier --jobs 4
-
-$PY scripts/htst_al_windows.py report
-```
-
-EON seeds 10–23 and 42, and eOn seeds 11–48, are already closed barrier windows. EON seed 42 is also the closed rate window.
