@@ -1,0 +1,15 @@
+0 termination_reason
+338603675 random_seed
+ext_pot potential_type
+910 total_force_calls
+169 force_calls_minimization
+741 force_calls_saddle
+-1.206366293847e+03 potential_energy_saddle
+-1.206825824582e+03 potential_energy_reactant
+-1.206825824049e+03 potential_energy_product
+4.595307350073e-01 barrier_reactant_to_product
+4.595302021521e-01 barrier_product_to_reactant
+0.000000000000e+00 displacement_saddle_distance
+0 force_calls_prefactors
+1.200000000000e+12 prefactor_reactant_to_product
+1.200000000000e+12 prefactor_product_to_reactant

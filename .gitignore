@@ -15,3 +15,15 @@ docs/source/generated/
 results/rgsaddle-asv/
 results/campaign/work/
 results/campaign/geometries/
+results/htst-al-dimer-cg2/windows/**/*.log
+results/htst-al-dimer-cg2/work/**
+!results/htst-al-dimer-cg2/work/eon/
+!results/htst-al-dimer-cg2/work/svn/
+!results/htst-al-dimer-cg2/work/eon/seed-0/
+!results/htst-al-dimer-cg2/work/eon/seed-0/**
+!results/htst-al-dimer-cg2/work/eon/seed-1/
+!results/htst-al-dimer-cg2/work/eon/seed-1/**
+!results/htst-al-dimer-cg2/work/svn/seed-0/
+!results/htst-al-dimer-cg2/work/svn/seed-0/**
+!results/htst-al-dimer-cg2/work/svn/seed-1/
+!results/htst-al-dimer-cg2/work/svn/seed-1/**

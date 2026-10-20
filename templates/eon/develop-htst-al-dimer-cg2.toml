@@ -1,9 +1,9 @@
 id = "eon/develop-htst-al-dimer-cg2"
 engine = "eon"
 problem = "hTST/Al"
-code = "eOn (develop a7aa57472fb7)"
-code_version = "a7aa57472fb7"
-commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+code = "eOn (develop 500350d9)"
+code_version = "500350d9"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
 algorithm = "Dimer-CG rotation: max=10 tol=1"
 reducer = "harness"
 failure_cap = 2000000
@@ -13,7 +13,7 @@ geometry = "website/hTST/Al/eon-dimer-cg2/pos.con"
 pass_limit = 1
 workers = 1
 note = """
-eOn, the git code at https://github.com/TheochemUI/eon develop a7aa57472fb7d823953fd36b78cd755fa4842d30. This is not EON and not an SVN revision. The harness replaces the potential with ext_pot and counts every force() through the same Aluminum Fortran kernel as the r2549 row. The ini is the archive convergence and the archive displacement: temperature 300, seed 42, confidence 1.95, prefactor 1.2e12, converged_force 0.001, max_iterations 5000, dimer CG, rotations_max 10, converged_angle 1, radius 3.3, magnitude 0.5, listed adatom 384 (archive displace_atomlist -1). finite_difference, improved, and the optimizer method stay at this tree's defaults. One seeded AKMC on state 0, num_jobs 1, with the same barrier and rate windows as the r2549 row. ExtPot needs its own instance per image, and SaddleSearchJob adds only the centre potential's forceCallCounter into sad-fcs. The forward image still calls force(). The harness counts both, so sad-fcs + mins-fcs is short by the forward-image evaluations. The ranked total is the barrier-window harness count. rate_force_calls is the harness through the rate window.
+eOn at 500350d9 on fix/develop-regressions-vs-350. This is not EON. The binary is unpatched, eonclient -v prints 500350d9, and commit 44931a78 counts saddle calls through every image potential. The harness replaces the potential with ext_pot and counts every force() through the same Aluminum Fortran kernel as the r2549 row. The ini is the archive displacement and convergence: temperature 300, confidence 1.95, prefactor 1.2e12, converged_force 0.001, max_iterations 5000, dimer CG, rotations_max 10, converged_angle 1, radius 3.3, magnitude 0.5, listed adatom 384. finite_difference, improved, and the optimizer method stay at this tree's defaults. Each seed is a fresh AKMC from state 0. A barrier seed stops when the eight reference processes have been seen. A rate seed stops at 0.999 of 592041917. The sample is 432 barrier seeds and 11 rate seeds. The harness total is the count. scripts/htst_al_windows.py runs and resumes the seeds.
 """
 
 [ini.Main]

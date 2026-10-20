@@ -1,0 +1,16 @@
+{"seed": 27, "jobs": 1, "harness_delta": 380, "harness_exit": 1208, "accounted": 380, "client_calls": 380, "sad_fcs": 239, "mins_fcs": 141, "barrier": 0.37203, "result": "good-3669959332915316201"}
+{"seed": 27, "jobs": 2, "harness_delta": 828, "harness_exit": 1762, "accounted": 1208, "client_calls": 828, "sad_fcs": 635, "mins_fcs": 193, "barrier": 0.0, "result": "Connected"}
+{"seed": 27, "jobs": 3, "harness_delta": 554, "harness_exit": 2213, "accounted": 1762, "client_calls": 554, "sad_fcs": 395, "mins_fcs": 159, "barrier": 0.23285, "result": "good-1276561040083902346"}
+{"seed": 27, "jobs": 4, "harness_delta": 451, "harness_exit": 2595, "accounted": 2213, "client_calls": 451, "sad_fcs": 294, "mins_fcs": 157, "barrier": 0.23285, "result": "good-4275111995333055129"}
+{"seed": 27, "jobs": 5, "harness_delta": 382, "harness_exit": 3017, "accounted": 2595, "client_calls": 382, "sad_fcs": 241, "mins_fcs": 141, "barrier": 0.37203, "result": "good-2548637202442056913"}
+{"seed": 27, "jobs": 6, "harness_delta": 422, "harness_exit": 3820, "accounted": 3017, "client_calls": 422, "sad_fcs": 263, "mins_fcs": 159, "barrier": 0.23285, "result": "good-4740219664091571836"}
+{"seed": 27, "jobs": 7, "harness_delta": 803, "harness_exit": 4351, "accounted": 3820, "client_calls": 803, "sad_fcs": 610, "mins_fcs": 193, "barrier": 0.0, "result": "Connected"}
+{"seed": 27, "jobs": 8, "harness_delta": 531, "harness_exit": 5690, "accounted": 4351, "client_calls": 531, "sad_fcs": 372, "mins_fcs": 159, "barrier": 0.23285, "result": "good-6058651720286226538"}
+{"seed": 27, "jobs": 9, "harness_delta": 1339, "harness_exit": 6060, "accounted": 5690, "client_calls": 1339, "sad_fcs": 1144, "mins_fcs": 195, "barrier": 0.0, "result": "Connected"}
+{"seed": 27, "jobs": 10, "harness_delta": 370, "harness_exit": 6514, "accounted": 6060, "client_calls": 370, "sad_fcs": 229, "mins_fcs": 141, "barrier": 0.37203, "result": "good-5136739122400958277"}
+{"seed": 27, "jobs": 11, "harness_delta": 454, "harness_exit": 7160, "accounted": 6514, "client_calls": 454, "sad_fcs": 313, "mins_fcs": 141, "barrier": 0.37203, "result": "repeat-2548637202442056913"}
+{"seed": 27, "jobs": 12, "harness_delta": 646, "harness_exit": 7694, "accounted": 7160, "client_calls": 646, "sad_fcs": 491, "mins_fcs": 155, "barrier": 0.23285, "result": "repeat-4275111995333055129"}
+{"seed": 27, "jobs": 13, "harness_delta": 534, "harness_exit": 8127, "accounted": 7694, "client_calls": 534, "sad_fcs": 379, "mins_fcs": 155, "barrier": 0.23285, "result": "repeat-1276561040083902346"}
+{"seed": 27, "jobs": 14, "harness_delta": 433, "harness_exit": 8480, "accounted": 8127, "client_calls": 433, "sad_fcs": 276, "mins_fcs": 157, "barrier": 0.23285, "result": "repeat-4275111995333055129"}
+{"seed": 27, "jobs": 15, "harness_delta": 353, "harness_exit": 9097, "accounted": 8480, "client_calls": 353, "sad_fcs": 212, "mins_fcs": 141, "barrier": 0.37203, "result": "repeat-2548637202442056913"}
+{"seed": 27, "jobs": 16, "harness_delta": 617, "harness_exit": 9471, "accounted": 9097, "client_calls": 617, "sad_fcs": 476, "mins_fcs": 141, "barrier": 0.37203, "result": "good-2007597863915183262"}

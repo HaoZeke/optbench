@@ -1,0 +1,11 @@
+{"seed": 21, "jobs": 1, "harness_delta": 455, "harness_exit": 888, "accounted": 455, "client_calls": 455, "sad_fcs": 314, "mins_fcs": 141, "barrier": 0.37203, "result": "good-2712160055360195579"}
+{"seed": 21, "jobs": 2, "harness_delta": 433, "harness_exit": 1285, "accounted": 888, "client_calls": 433, "sad_fcs": 292, "mins_fcs": 141, "barrier": 0.37204, "result": "repeat-2712160055360195579"}
+{"seed": 21, "jobs": 3, "harness_delta": 397, "harness_exit": 2376, "accounted": 1285, "client_calls": 397, "sad_fcs": 258, "mins_fcs": 139, "barrier": 0.37203, "result": "good-8949983371339061795"}
+{"seed": 21, "jobs": 4, "harness_delta": 1091, "harness_exit": 2856, "accounted": 2376, "client_calls": 1091, "sad_fcs": 898, "mins_fcs": 193, "barrier": 0.0, "result": "Connected"}
+{"seed": 21, "jobs": 5, "harness_delta": 480, "harness_exit": 3265, "accounted": 2856, "client_calls": 480, "sad_fcs": 317, "mins_fcs": 163, "barrier": 0.23285, "result": "good-319337656413466044"}
+{"seed": 21, "jobs": 6, "harness_delta": 409, "harness_exit": 3952, "accounted": 3265, "client_calls": 409, "sad_fcs": 268, "mins_fcs": 141, "barrier": 0.37203, "result": "repeat-2712160055360195579"}
+{"seed": 21, "jobs": 7, "harness_delta": 687, "harness_exit": 4447, "accounted": 3952, "client_calls": 687, "sad_fcs": 528, "mins_fcs": 159, "barrier": 0.23285, "result": "good-3198029531738692318"}
+{"seed": 21, "jobs": 8, "harness_delta": 495, "harness_exit": 4760, "accounted": 4447, "client_calls": 495, "sad_fcs": 334, "mins_fcs": 161, "barrier": 0.23285, "result": "good-4553905153947126556"}
+{"seed": 21, "jobs": 9, "harness_delta": 313, "harness_exit": 5178, "accounted": 4760, "client_calls": 313, "sad_fcs": 174, "mins_fcs": 139, "barrier": 0.37203, "result": "good-3878714790890373165"}
+{"seed": 21, "jobs": 10, "harness_delta": 418, "harness_exit": 5909, "accounted": 5178, "client_calls": 418, "sad_fcs": 277, "mins_fcs": 141, "barrier": 0.37203, "result": "good-2156515594093100054"}
+{"seed": 21, "jobs": 11, "harness_delta": 731, "harness_exit": 6748, "accounted": 5909, "client_calls": 731, "sad_fcs": 574, "mins_fcs": 157, "barrier": 0.23285, "result": "good-6641612684972047774"}

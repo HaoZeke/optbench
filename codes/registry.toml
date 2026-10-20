@@ -35,14 +35,14 @@ committed = "2026-10-16"
 note = "develop HEAD built from source. The version string is 3.6.0 (7095b23a). GPR-dimer is absent: TheochemUI/gpr_optim is private and eonclient reports GPRD disabled. This pin is not the conda-forge 3.5.0 binary. It is not EON, the SVN code."
 
 [[code]]
-id = "eon-develop-a7aa57472fb7"
-name = "eOn (develop a7aa57472fb7)"
+id = "eon-develop-500350d9"
+name = "eOn (develop 500350d9)"
 role = "minimization and saddle search"
 repository = "https://github.com/TheochemUI/eon"
-ref = "develop"
-commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
-committed = "2026-10-18"
-note = "eOn at develop a7aa57472fb7d823953fd36b78cd755fa4842d30 (2026-10-18). A different code from EON, the SVN client. https://eondocs.org documents this tree. The hTST/Al dimer row is this commit, stock, scored by the harness."
+ref = "fix/develop-regressions-vs-350"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
+committed = "2026-10-20"
+note = "eOn at 500350d9 on fix/develop-regressions-vs-350. eonclient -v prints 500350d9. Commit 44931a78 counts saddle calls on every image potential. A different code from EON, the SVN client. The hTST/Al dimer harness total is this commit."
 
 [[code]]
 id = "eon-svn"

@@ -1,0 +1,2 @@
+optbench ext_pot: cannot read the potential reply
+[ERROR] unhandled exception: Command "cd '/workspace/results/htst-al-dimer-cg2/work/eon/seed-1/akmc/jobs/scratch/0_840/extpot_3644984_1' && export EON_EXTPOT_RUN_DIR='/workspace/results/htst-al-dimer-cg2/work/eon/seed-1/akmc/jobs/scratch/0_840' && '/tmp/optbench-extpot-bridge/edf80b4c3132b707/extpot-bridge'" exited with status 1

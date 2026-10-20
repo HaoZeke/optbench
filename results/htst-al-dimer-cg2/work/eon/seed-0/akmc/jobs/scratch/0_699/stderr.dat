@@ -1,0 +1,2 @@
+optbench ext_pot: potential server closed without a reply
+[ERROR] unhandled exception: Command "cd '/workspace/results/htst-al-dimer-cg2/work/eon/seed-0/akmc/jobs/scratch/0_699/extpot_4081498_1' && export EON_EXTPOT_RUN_DIR='/workspace/results/htst-al-dimer-cg2/work/eon/seed-0/akmc/jobs/scratch/0_699' && '/tmp/optbench-extpot-bridge/edf80b4c3132b707/extpot-bridge'" exited with status 1
