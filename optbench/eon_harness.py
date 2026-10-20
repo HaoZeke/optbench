@@ -1,4 +1,4 @@
-"""Harness runs for eOn SVN r2549 and the 3.5.0 source build.
+"""Harness runs for eOn SVN r2549, the 3.5.0 source build, and eOn develop.
 
 Each force evaluation is one ``HarnessCounter`` charge. eonclient is
 started with ``potential = ext_pot``. A small C program forwards
@@ -23,6 +23,10 @@ SVN r2549 does not read ``Main.parallel``. The 3.5.0 client does. The
 ini written for a C++ job sets it false. The Python AKMC server rejects
 the key, so those inis leave it unset. One server still receives every
 ``force()`` the clients open.
+
+The develop family is eOn at ``500350d9``, not a build of EON SVN r2549.
+``EON_DEVELOP_CLIENT`` points at that ``eonclient``. Its ``--version``
+line contains ``500350d9``.
 """
 
 from __future__ import annotations
@@ -81,6 +85,14 @@ FAMILIES = {
         "flag": "--version",
         "token": "4d8b34ba",
         "cache": "4d8b34ba",
+    },
+    "develop": {
+        "prefix": "eon/develop-",
+        "env": "EON_DEVELOP_CLIENT",
+        "default": Path.home() / "opt" / "eon-develop" / "bin" / "eonclient",
+        "flag": "--version",
+        "token": "500350d9",
+        "cache": "500350d9",
     },
 }
 
@@ -389,7 +401,7 @@ def _family_of(template: dict) -> str:
     for name, spec in FAMILIES.items():
         if ident.startswith(spec["prefix"]) and template.get("kind"):
             return name
-    raise ValueError(f"{ident} is not an r2549 or 3.5.0 harness template")
+    raise ValueError(f"{ident} is not an r2549, 3.5.0, or develop harness template")
 
 
 def _ini_text(template: dict, seed: int, wrapper: Path, *, python_job: bool) -> str:

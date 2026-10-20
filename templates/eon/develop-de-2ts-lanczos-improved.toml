@@ -1,0 +1,31 @@
+id = "eon/develop-de-2ts-lanczos-improved"
+engine = "eon"
+problem = "double-ended-saddle-search/lj38_2ts_separation"
+code = "eOn"
+code_version = "eOn (develop 500350d9)"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
+algorithm = "Lanczos improved L-BFGS"
+reducer = "harness"
+failure_cap = 10000
+kind = "de-2ts-mode"
+kernel = "lj40"
+asv_class = "EonDevelopDe2tsLanczosImproved"
+seeds = [1]
+asv_timeout = 3600
+budget_seconds = 3600
+note = """Lanczos improved L-BFGS from the interpolated midpoint on the 51 LJ38 two-transition pairs. min_mode_method is lanczos, client_displace_type is load, and the optimizer is lbfgs. converged_force is 0.001. Optimizer max_iterations and the harness cap are 10000. The kernel is unshifted lj/cut with epsilon 1, sigma 1, and cutoff 40."""
+
+[ini.Main]
+job = "saddle_search"
+
+[ini.Potential]
+potential = "lammps"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+converged_force = 0.001
+max_iterations = 10000
+
+[ini."Saddle Search"]
+min_mode_method = "lanczos"
+client_displace_type = "load"

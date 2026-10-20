@@ -34,8 +34,8 @@ The number is written only after the run finishes under the problem rule.
    </tr>
    <tr>
    <td>minimization and saddle search</td>
-   <td>develop</td>
-   <td>7095b23ac17d</td>
+   <td>fix/develop-regressions-vs-350</td>
+   <td>500350d9fae8</td>
    <td><a href="https://github.com/TheochemUI/eon">https://github.com/TheochemUI/eon</a></td>
    </tr>
    </tbody></table></div>
@@ -64,15 +64,15 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/pt-island" data-template="eon/develop-de-pt-oci">
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="eon/develop-de-pt-ci">
    <td>pt-island</td>
-   <td data-field="template">eon/develop-de-pt-oci</td>
-   <td data-field="version">eOn 3.6.0</td>
-   <td data-field="commit">7095b23ac17d</td>
-   <td data-field="par2_mean">3080.19</td>
-   <td data-field="mean_calls">3220.9</td>
-   <td data-field="median_calls">2260</td>
-   <td data-field="failures">crash 0, divergence 0, cap 21, wrong_stationary 0</td>
+   <td data-field="template">eon/develop-de-pt-ci</td>
+   <td data-field="version">eOn eOn (develop 500350d9)</td>
+   <td data-field="commit">500350d9fae8</td>
+   <td data-field="par2_mean">311.068</td>
+   <td data-field="mean_calls">260.22</td>
+   <td data-field="median_calls">188</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
    <tr data-problem="globalopt/lj38" data-template="eon-client/bh-lj38">
@@ -119,14 +119,14 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
-   <tr data-problem="neb/Pt-heptamer" data-template="eon/neb-pt-lbfgs">
+   <tr data-problem="neb/Pt-heptamer" data-template="eon/develop-neb-pt-lbfgs">
    <td>Pt-heptamer</td>
-   <td data-field="template">eon/neb-pt-lbfgs</td>
-   <td data-field="version">eOn 3.6.0</td>
-   <td data-field="commit">1d71c9445018</td>
-   <td data-field="par2_mean">3517.69</td>
-   <td data-field="mean_calls">3517.69</td>
-   <td data-field="median_calls">3738</td>
+   <td data-field="template">eon/develop-neb-pt-lbfgs</td>
+   <td data-field="version">eOn eOn (develop 500350d9)</td>
+   <td data-field="commit">500350d9fae8</td>
+   <td data-field="par2_mean">319.538</td>
+   <td data-field="mean_calls">319.538</td>
+   <td data-field="median_calls">330</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
@@ -167,16 +167,14 @@ The number is written only after the run finishes under the problem rule.
    <p>No full ranked run</p><ul>
    <li>Al adatom on Al(100) at 250 K: not yet on the harness counter, partial.</li>
    <li>Al adatom on Al(100) at 150 K: not yet on the harness counter.</li>
-   <li>LJ38 double-ended saddle: not yet on the harness counter, partial.</li>
-   <li>lj38_2ts_separation: partial.</li>
+   <li>LJ38 double-ended saddle: not yet on the harness counter.</li>
    <li>pt-island: not yet on the harness counter, partial.</li>
    <li>Al: partial.</li>
    <li>Pt: partial.</li>
-   <li>lj38: partial.</li>
    <li>Pt-heptamer: not yet on the harness counter, partial.</li>
    <li>Pt heptamer island: not yet on the harness counter, partial.</li>
-   <li>LJ38: not yet on the harness counter, partial.</li>
-   <li>pt-island: not yet on the harness counter, partial.</li>
+   <li>LJ38: not yet on the harness counter.</li>
+   <li>pt-island: not yet on the harness counter.</li>
    <li>eon-ci-neb: no per-start record.</li>
    <li>eon-ci-swdneb: no per-start record.</li>
    <li>eon-cg: no per-start record.</li>
