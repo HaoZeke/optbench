@@ -111,6 +111,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+    "repro/mlopt-emt-pt38-pyamff-adam10-7-fcoeff0": "343285766aa30c32506f87c84be3d071536e10a8",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -199,6 +200,7 @@ MATCHES: list[dict] = [
     {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "branch": "cells/pele/go", "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat", "cause": "pele_bh_defaults"},
     {"key": "hTST/Al/eon-dimer-cg", "template": "eon-svn/htst-al-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-al-dimer.dat", "kind": "htst", "cause": "htst_al"},
     {"key": "hTST/Pt/eon-dimer-cg", "template": "eon-svn/htst-pt-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-pt-dimer.dat", "kind": "htst"},
+    {"key": "mlopt/emt-pt38/pyamff-adam10-7-fcoeff0", "template": "pyamff/emt-pt38", "branch": "repro/mlopt-emt-pt38-pyamff-adam10-7-fcoeff0", "path": "results/campaign/pyamff-240f51d0-emt-pt38-adam.dat"},
 ]
 
 
@@ -810,7 +812,7 @@ def render_markdown(rows: list[dict]) -> str:
         "",
         "OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.",
         "",
-        "PyAMFF EMT Pt38: the archived mean epoch 1103.24 is the paper row. PyAMFF 0.1.0-beta commit 240f51d0 uses one batch, so the max-absolute loss gradient below 0.02 is the full dataset and one epoch is one logged pass. Fifty uniform[-1, 1) starts give harness mean epoch 170.3, median 59, and energy RMSE 0.003307246. The release default of 100 batches checks only the last batch.",
+        "PyAMFF EMT Pt38 ADAM: archive Pyamff 8037eb98 mean epoch 1103.24, median 868.5, energy RMSE 0.0044386312, force RMSE -1. PyAMFF 240f51d0 stock Adam uses learning rate 0.01. The network is 10-7 tanh, force coefficient 0, energy coefficient 1, NoScaler, SSE, and one batch, so the max-absolute loss gradient below 0.02 is the full dataset. One epoch is one logged pass. init_model_parameters is true. Fifty uniform[-1, 1) starts give mean epoch 1003.92, median 940, energy RMSE 0.0043060298, and force RMSE -1.",
         "",
         "EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.",
         "",

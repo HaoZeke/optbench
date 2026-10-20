@@ -2,13 +2,13 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+47 reproduced, 29 not reproduced, 75 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
 OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.
 
-PyAMFF EMT Pt38: the archived mean epoch 1103.24 is the paper row. PyAMFF 0.1.0-beta commit 240f51d0 uses one batch, so the max-absolute loss gradient below 0.02 is the full dataset and one epoch is one logged pass. Fifty uniform[-1, 1) starts give harness mean epoch 170.3, median 59, and energy RMSE 0.003307246. The release default of 100 batches checks only the last batch.
+PyAMFF EMT Pt38 ADAM: archive Pyamff 8037eb98 mean epoch 1103.24, median 868.5, energy RMSE 0.0044386312, force RMSE -1. PyAMFF 240f51d0 stock Adam uses learning rate 0.01. The network is 10-7 tanh, force coefficient 0, energy coefficient 1, NoScaler, SSE, and one batch, so the max-absolute loss gradient below 0.02 is the full dataset. One epoch is one logged pass. init_model_parameters is true. Fifty uniform[-1, 1) starts give mean epoch 1003.92, median 940, energy RMSE 0.0043060298, and force RMSE -1.
 
 EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.
 
@@ -156,7 +156,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | C2H4/pyamff-lbfgs10-7-fcoeff0_1 | — | — | not rerun |
 | C2H4/pyamff-rprop10-7-fcoeff0 | — | — | not rerun |
 | C2H4/pyamff-rprop10-7-fcoeff0_1 | — | — | not rerun |
-| emt-pt38/pyamff-adam10-7-fcoeff0 | — | — | not rerun |
+| emt-pt38/pyamff-adam10-7-fcoeff0 | mean_epoch 1103.24 | 1003.92 | reproduced |
 | emt-pt38/pyamff-adam10-7-fcoeff0_1 | — | — | not rerun |
 | emt-pt38/pyamff-lbfgs10-7-fcoeff0 | — | — | not rerun |
 | emt-pt38/pyamff-lbfgs10-7-fcoeff0_1 | — | — | not rerun |

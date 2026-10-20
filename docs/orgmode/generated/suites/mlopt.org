@@ -34,7 +34,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
-   <td data-code="Pyamff" data-template="pyamff/emt-pt38" data-par2="170.3"><span class="bench-score">170.3</span><a href="#emt-pt38-templates">pyamff/emt-pt38</a></td>
+   <td data-code="Pyamff" data-template="pyamff/emt-pt38" data-par2="1003.92"><span class="bench-score">1003.92</span><a href="#emt-pt38-templates">pyamff/emt-pt38</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -182,7 +182,7 @@
    <table data-board-table="ranked" data-problem="mlopt/emt-pt38">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">pyamff/emt-pt38</td><td data-field="version">Pyamff 0.1.0-beta</td><td data-field="commit">240f51d01ca2</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">170.3</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.928652</td><td data-field="wilson_high">1</td><td data-field="median_calls">59</td><td data-field="mean_calls">170.3</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">50</td></tr>
+   <tr><td data-field="template">pyamff/emt-pt38</td><td data-field="version">Pyamff 240f51d0</td><td data-field="commit">240f51d01ca2</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">1003.92</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.928652</td><td data-field="wilson_high">1</td><td data-field="median_calls">940</td><td data-field="mean_calls">1003.92</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">50</td></tr>
    </tbody></table></div>
    </details>
    </section><section class="bench bench-legacy-section" id="emt-pt38-legacy">

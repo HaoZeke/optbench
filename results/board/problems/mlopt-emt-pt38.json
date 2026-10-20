@@ -6,10 +6,10 @@
   "partial": [],
   "profile": {
     "area_log10": {
-      "pyamff/emt-pt38 0.1.0-beta one-batch campaign 240f51d": 1.2041199826559248
+      "pyamff/emt-pt38 240f51d0 stock campaign 240f51d": 1.2041199826559248
     },
     "rho": {
-      "pyamff/emt-pt38 0.1.0-beta one-batch campaign 240f51d": [
+      "pyamff/emt-pt38 240f51d0 stock campaign 240f51d": [
         1.0,
         1.0,
         1.0,
@@ -18,7 +18,7 @@
       ]
     },
     "solved": {
-      "pyamff/emt-pt38 0.1.0-beta one-batch campaign 240f51d": 1.0
+      "pyamff/emt-pt38 240f51d0 stock campaign 240f51d": 1.0
     },
     "taus": [
       1.0,
@@ -34,12 +34,12 @@
       "call_unit": "total",
       "cap": 10000,
       "code": "Pyamff",
-      "code_version": "0.1.0-beta",
+      "code_version": "240f51d0",
       "commit": "240f51d01ca22969369f9bc21760c61cbb3b6665",
       "comparable": true,
       "counter": "harness",
       "current": true,
-      "entry": "pyamff-0.1.0-beta-emt-pt38",
+      "entry": "pyamff-240f51d0-emt-pt38-adam",
       "failures": {
         "cap": 0,
         "crash": 0,
@@ -48,29 +48,29 @@
       },
       "full_n": null,
       "history": false,
-      "max_calls": 2080.0,
-      "mean_calls": 170.3,
+      "max_calls": 3161.0,
+      "mean_calls": 1003.92,
       "mean_per_image": null,
-      "median": 59.0,
-      "median_calls": 59.0,
-      "median_high": 69.0,
-      "median_low": 46.0,
+      "median": 940.0,
+      "median_calls": 940.0,
+      "median_high": 1059.0,
+      "median_low": 680.5125,
       "median_per_image": null,
-      "min_calls": 11.0,
+      "min_calls": 159.0,
       "n": 50,
       "nfailed": 0,
       "note": "starts.jsonl",
-      "par2_mean": 170.3,
+      "par2_mean": 1003.92,
       "partial": false,
       "partial_reason": "",
-      "path": "results/campaign/pyamff-0.1.0-beta-emt-pt38.dat",
+      "path": "results/campaign/pyamff-240f51d0-emt-pt38-adam.dat",
       "problem": "mlopt/emt-pt38",
       "registry_match": false,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "pyamff/emt-pt38",
-      "tuning": "one-batch",
+      "tuning": "stock",
       "wilson_high": 1.0,
       "wilson_low": 0.9286524008666414
     }
