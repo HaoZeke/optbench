@@ -16262,19 +16262,28 @@
       ],
       "profile": {
         "area_log10": {
-          "eon-svn/htst-pt-lanczos-cg2 r2549 Lanczos-CG rotation: max=50, tol=0.05 campaign r2549": 1.2041199826559248
+          "eon-svn/htst-pt-lanczos-cg2 r2549 Lanczos-CG rotation: max=50, tol=0.05 campaign r2549": 1.0809713480661145,
+          "eon/htst-pt-lanczos-cg2 3.6.0 Lanczos-CG rotation: max=50, tol=0.05 campaign a7aa574": 1.0946545296872043
         },
         "rho": {
           "eon-svn/htst-pt-lanczos-cg2 r2549 Lanczos-CG rotation: max=50, tol=0.05 campaign r2549": [
+            0.5454545454545454,
+            0.8181818181818182,
             1.0,
             1.0,
+            1.0
+          ],
+          "eon/htst-pt-lanczos-cg2 3.6.0 Lanczos-CG rotation: max=50, tol=0.05 campaign a7aa574": [
+            0.45454545454545453,
+            0.9090909090909091,
             1.0,
             1.0,
             1.0
           ]
         },
         "solved": {
-          "eon-svn/htst-pt-lanczos-cg2 r2549 Lanczos-CG rotation: max=50, tol=0.05 campaign r2549": 1.0
+          "eon-svn/htst-pt-lanczos-cg2 r2549 Lanczos-CG rotation: max=50, tol=0.05 campaign r2549": 1.0,
+          "eon/htst-pt-lanczos-cg2 3.6.0 Lanczos-CG rotation: max=50, tol=0.05 campaign a7aa574": 1.0
         },
         "taus": [
           1.0,
@@ -16289,7 +16298,52 @@
           "asv_commit": "",
           "call_unit": "total",
           "cap": null,
-          "code": "Eon svn",
+          "code": "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)",
+          "code_version": "3.6.0",
+          "commit": "a7aa57472fb7d823953fd36b78cd755fa4842d30",
+          "comparable": true,
+          "counter": "htst-reducer",
+          "current": true,
+          "entry": "eon-htst-pt-lanczos-cg2",
+          "failures": {
+            "cap": 0,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 0
+          },
+          "full_n": 11,
+          "history": false,
+          "max_calls": 3751722.0,
+          "mean_calls": 2163238.090909091,
+          "mean_per_image": null,
+          "median": 2097078.0,
+          "median_calls": 2097078.0,
+          "median_high": 2942858.0,
+          "median_low": 1482794.0,
+          "median_per_image": null,
+          "min_calls": 783061.0,
+          "n": 11,
+          "nfailed": 0,
+          "note": "starts.jsonl",
+          "par2_mean": null,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/eon-htst-pt-lanczos-cg2.dat",
+          "problem": "hTST/Pt",
+          "registry_match": true,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 1.0,
+          "template": "eon/htst-pt-lanczos-cg2",
+          "tuning": "Lanczos-CG rotation: max=50, tol=0.05",
+          "wilson_high": 1.0,
+          "wilson_low": 0.7411670330319684
+        },
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": null,
+          "code": "EON (SVN r2549)",
           "code_version": "r2549",
           "commit": "r2549",
           "comparable": true,
@@ -16304,15 +16358,15 @@
           },
           "full_n": 11,
           "history": false,
-          "max_calls": 1193578.0,
-          "mean_calls": 615437.0,
+          "max_calls": 3761203.0,
+          "mean_calls": 2211883.3636363638,
           "mean_per_image": null,
-          "median": 480708.0,
-          "median_calls": 480708.0,
-          "median_high": 831654.0,
-          "median_low": 339825.0,
+          "median": 2176819.0,
+          "median_calls": 2176819.0,
+          "median_high": 2513503.0,
+          "median_low": 1560263.0,
           "median_per_image": null,
-          "min_calls": 231331.0,
+          "min_calls": 1309334.0,
           "n": 11,
           "nfailed": 0,
           "note": "starts.jsonl",
@@ -42192,7 +42246,7 @@
       "title": "pt-island"
     }
   },
-  "ranked_count": 440,
+  "ranked_count": 441,
   "schema": "optbench.board/v1",
   "unmapped": [
     {

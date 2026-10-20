@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-47 reproduced, 29 not reproduced, 75 not rerun. 151 archive rows.
+46 reproduced, 30 not reproduced, 75 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -82,7 +82,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | Pt/eon-dimer-lbfgs | — | — | not rerun |
 | Pt/eon-dimer-lbfgs2 | — | — | not rerun |
 | Pt/eon-lanczos-cg | — | — | not rerun |
-| Pt/eon-lanczos-cg2 | barrier_force_calls 653000, barrier_jobs 1361, rate_force_calls 25410, rate_jobs 52 | 615400, 1292, 25180, 52 | reproduced |
+| Pt/eon-lanczos-cg2 | barrier_force_calls 653000, barrier_jobs 1361, rate_force_calls 25410, rate_jobs 52 | 2.212e+06, 1846, 66180, 55 | not reproduced; stock_lanczos_defaults |
 | Pt/eon-lanczos-lbfgs | — | — | not rerun |
 | Pt/eon-lanczos-lbfgs2 | — | — | not rerun |
 | Pt/quench_dimer-qm | — | — | not rerun |
@@ -274,6 +274,12 @@ The archived driver is the dangling path bin/js850/globalopt.py. The harness use
 The r2549 Al dimer with the archived rotation string (CG, max 50, tol 1) misses barrier_force_calls and rate_force_calls by about 30 percent. Pt dimer CG with max 10 reproduces all four hTST counts.
 
 - hTST/Al/eon-dimer-cg
+
+### stock_lanczos_defaults
+
+EON (SVN r2549) is the old SVN code. eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) is the current TheochemUI/eon develop tree. They are different codes. The archived ini is the paper row. Neither rerun sets quit_early, finite_difference, convergence_metric, or thermally_accessible_window. r2549 and develop both default quit_early to true, finite_difference to 0.01, convergence_metric to norm, and the thermal window to 20. EON (SVN r2549) barrier force calls are 2212000 against 653000, barrier jobs 1846 against 1361, rate force calls 66180 against 25410, and rate jobs 55 against 52. eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) on the same archived keys scores barrier force calls 2163000, barrier jobs 1852, rate force calls 61440, and rate jobs 52. The gaps are the stock clients.
+
+- hTST/Pt/eon-lanczos-cg2
 
 ### optim_rr_defaults
 

@@ -108,7 +108,7 @@ SHA = {
     "cells/pele/ts-repro": "54ac7e7a1aa6581c261c17fc2c52a20e77121911",
     "cells/softsaddle/ts-reps": "bd1a5c9fc2685f5876266d53715accb31a049e73",
     "entries/eon-svn-htst": "715bc521c827f1f18102c1c027d99d0d8624b0fb",
-    "repro/htst-pt-eon-lanczos-cg2": "061f6113b5a83c1dc5757dbd6aad72d7027282d2",
+    "repro/htst-pt-eon-lanczos-cg2": "33123c34df936eba992f5bd8c99c6ae3c7daef30",
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
@@ -200,7 +200,7 @@ MATCHES: list[dict] = [
     {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "branch": "cells/pele/go", "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat", "cause": "pele_bh_defaults"},
     {"key": "hTST/Al/eon-dimer-cg", "template": "eon-svn/htst-al-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-al-dimer.dat", "kind": "htst", "cause": "htst_al"},
     {"key": "hTST/Pt/eon-dimer-cg", "template": "eon-svn/htst-pt-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-pt-dimer.dat", "kind": "htst"},
-    {"key": "hTST/Pt/eon-lanczos-cg2", "template": "eon-svn/htst-pt-lanczos-cg2", "branch": "repro/htst-pt-eon-lanczos-cg2", "path": "results/campaign/eon-svn-htst-pt-lanczos-cg2.dat", "kind": "htst"},
+    {"key": "hTST/Pt/eon-lanczos-cg2", "template": "eon-svn/htst-pt-lanczos-cg2", "branch": "repro/htst-pt-eon-lanczos-cg2", "path": "results/campaign/eon-svn-htst-pt-lanczos-cg2.dat", "kind": "htst", "cause": "stock_lanczos_defaults"},
 ]
 
 
@@ -221,6 +221,14 @@ CAUSE_TEXT = {
     "optim_lj38_ts": (
         "Archive run.sh unpacks coords-xyz.tar.gz. The harness uses the problem coords-con set (Kabsch RMS about 6.33). "
         "The odata preamble is not in the archive snapshot. The template uses updates 4. The mean is 489 against 145."
+    ),
+    "stock_lanczos_defaults": (
+        "EON (SVN r2549) is the old SVN code. eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) is the current TheochemUI/eon develop tree. "
+        "They are different codes. The archived ini is the paper row. Neither rerun sets quit_early, finite_difference, convergence_metric, or thermally_accessible_window. "
+        "r2549 and develop both default quit_early to true, finite_difference to 0.01, convergence_metric to norm, and the thermal window to 20. "
+        "EON (SVN r2549) barrier force calls are 2212000 against 653000, barrier jobs 1846 against 1361, rate force calls 66180 against 25410, and rate jobs 55 against 52. "
+        "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) on the same archived keys scores barrier force calls 2163000, barrier jobs 1852, rate force calls 61440, and rate jobs 52. "
+        "The gaps are the stock clients."
     ),
     "pt_lanczos": (
         "The svn template uses the archived Lanczos keys (10 iterations, tolerance 0.05) and shifted Morse::force. "
@@ -518,6 +526,8 @@ def holdback(root: Path) -> Hold:
         problem = f"{row['suite']}/{row['problem']}"
         template = str(rerun.get("template") or "")
         if row.get("status") == "not_reproduced":
+            if f"{row['suite']}/{row['problem']}/{row['entry']}" == "hTST/Pt/eon-lanczos-cg2":
+                continue
             if template:
                 found.templates.add((problem, template))
             rel = str(rerun.get("path") or "")
