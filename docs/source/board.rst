@@ -77,7 +77,7 @@ It does not run a campaign.
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
-   <td data-code="optim">—</td>
+   <td data-code="optim" data-template="optim/saddle-pt" data-par2="10123.2"><span class="bench-score">10123.2</span><a href="generated/suites/saddle-search.html#pt-island-templates">optim/saddle-pt</a></td>
    <td data-code="tsase">—</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38">

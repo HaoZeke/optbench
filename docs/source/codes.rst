@@ -1098,5 +1098,16 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 87</td>
    <td data-field="n">100</td>
    </tr>
+   <tr data-problem="saddle-search/pt-island" data-template="optim/saddle-pt">
+   <td>Pt heptamer island</td>
+   <td data-field="template">optim/saddle-pt</td>
+   <td data-field="version">optim svn-snapshot</td>
+   <td data-field="commit">02aaf45245af</td>
+   <td data-field="par2_mean">10123.2</td>
+   <td data-field="mean_calls">383.895</td>
+   <td data-field="median_calls">386</td>
+   <td data-field="failures">crash 0, divergence 19980, cap 10, wrong_stationary 0</td>
+   <td data-field="n">20000</td>
+   </tr>
    </tbody></table></div>
    </section>
