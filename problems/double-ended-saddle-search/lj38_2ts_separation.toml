@@ -2,15 +2,15 @@ id = "double-ended-saddle-search/lj38_2ts_separation"
 title = "lj38_2ts_separation"
 suite = "double-ended-saddle-search"
 problem = "lj38_2ts_separation"
-contract = "partial"
+contract = "shared"
 entry_count = 2
 
 # The archive does not state an image count or a force cap. Five interior
-# images is the LJ38 double-ended band. The cap is the run limit used here.
+# images is the LJ38 double-ended band. The cap is 250000 force calls.
 [convergence]
 norm = "l2"
 force_norm = 0.001
-max_force_calls = 10000
+max_force_calls = 250000
 
 [band]
 interior_images = 5
@@ -29,12 +29,12 @@ kind = "xyz-pairs"
 [metrics]
 required = ["force_calls", "force_calls_max", "force_calls_median", "force_calls_min", "nfailed", "transition_states"]
 
-[scoring.legacy]
-label = "legacy"
-rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean. The row stays labelled legacy."
+[scoring.half_even]
+label = "half-even"
+rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean. The row keeps that mean as its published number."
 
 [scoring.v2]
-version = "par2-wilson-bootstrap"
+version = "par2-bootstrap"
 par_factor = 2
 bootstrap_resamples = 2000
 bootstrap_seed = 20261015
@@ -54,8 +54,8 @@ required = [
   "median",
   "median_low",
   "median_high",
-  "wilson_low",
-  "wilson_high",
+  "rate_low",
+  "rate_high",
   "n",
   "nfailed",
   "n_cap",

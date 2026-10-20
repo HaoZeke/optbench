@@ -60,10 +60,10 @@ def check(problems_dir: Path, oracle_path: Path) -> int:
         if problem is None:
             structural.append(f"{ident} has an oracle row and no problem file")
             continue
-        if problem.get("contract") == "partial":
+        if problem.get("contract") in {"partial", "shared"}:
             missing = missing_keys(problem, row["fields"])
             for key in missing:
-                structural.append(f"partial {row['path']} missing {key}")
+                structural.append(f"contract {row['path']} missing {key}")
     for ident, problem in problems.items():
         expected = problem.get("entry_count")
         got = counts.get(ident, 0)
@@ -89,10 +89,12 @@ def check(problems_dir: Path, oracle_path: Path) -> int:
             if line not in gaps:
                 print(f"- {line}")
         return 1
+    from .board import build_board, rank_violations
     from .site_check import check_site
 
     root = oracle_path.resolve().parent.parent
     site_errors = check_site(root)
+    site_errors.extend(rank_violations(build_board(root)))
     if site_errors:
         print(f"site {len(site_errors)}")
         for line in site_errors:

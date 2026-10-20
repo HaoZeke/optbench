@@ -1,0 +1,66 @@
+#+TITLE: pARTn
+#+OPTIONS: toc:nil num:nil author:nil
+
+#+begin_export rst
+.. raw:: html
+
+   <section class="bench" id="code-partn">
+   <h2>pARTn</h2>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>saddle search</td>
+   <td>DEVEL</td>
+   <td>9b753517c6c0</td>
+   <td><a href="https://gitlab.com/mammasmias/artn-plugin">https://gitlab.com/mammasmias/artn-plugin</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-rows">
+   <caption>Every ranked row for this code.</caption>
+   <thead><tr><th>Problem</th><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="lowest-eigenvector/lj38" data-label="pARTn (1.1.0) · ARTn Lanczos">
+   <td>lj38</td>
+   <td data-field="label">pARTn (1.1.0) · ARTn Lanczos</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">18</td>
+   <td data-field="par2_mean">2619.84</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">23</td>
+   <td data-field="mean_calls">23.99</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 26, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="tsopt/LJ38" data-label="pARTn (1.1.0) · ARTn">
+   <td>LJ38</td>
+   <td data-field="label">pARTn (1.1.0) · ARTn</td>
+   <td data-field="family">Single-ended saddle</td>
+   <td data-field="family_rank">7</td>
+   <td data-field="par2_mean">20000</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">45</td>
+   <td data-field="mean_calls">49.045</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 200, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="tsopt/pt-island" data-label="pARTn (1.1.0) · ARTn">
+   <td>pt-island</td>
+   <td data-field="label">pARTn (1.1.0) · ARTn</td>
+   <td data-field="family">Single-ended saddle</td>
+   <td data-field="family_rank">6</td>
+   <td data-field="par2_mean">1970.22</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">265</td>
+   <td data-field="mean_calls">380.224</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 4, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">49</td>
+   </tr>
+   </tbody></table></div>
+   </section>
+#+end_export

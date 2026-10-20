@@ -1,0 +1,34 @@
+#+TITLE: Al
+#+OPTIONS: toc:nil num:nil author:nil
+
+#+begin_export rst
+.. raw:: html
+
+   <section class="bench" id="Al" data-problem="hTST/Al">
+   <h2>Al</h2>
+   <dl class="bench-rule">
+   <dt>v2</dt><dd>par2-bootstrap</dd>
+   <dt>Contract</dt><dd>The columns are the keys shared by every archived file.</dd>
+   </dl>
+   <p>Rows are ranked by cost inside each method family and on one overall table. A run short of the full set, or a run that is not the stock method, stays off the table.</p>
+   <p class="bench-gaps">A run short of the full set, or a run that is not the stock method, stays off the ranked table.</p>
+   <figure class="bench-plot"><a href="../../../_static/board/hTST-Al-cost.svg"><picture><source srcset="../../../_static/board/hTST-Al-cost.webp" type="image/webp"><img src="../../../_static/board/hTST-Al-cost.png" alt="Cost versus success for hTST/Al" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
+   <p class="bench-gaps">No performance profile. The ranked rows have no per-start record.</p>
+   <h3>Minimum mode</h3>
+   <div class="bench-scroll">
+   <table data-board-table="family" data-family="min-mode" data-problem="hTST/Al">
+   <caption>Minimum mode. A row is one code, one version, and one stock method. Lower cost is better. PAR-2 is the harness total. An archived row uses its published primary number. Hessians is the mean analytic Hessian count. FD calls is that count times two force evaluations per coordinate.</caption>
+   <thead><tr><th>Rank</th><th>Row</th><th>Cost</th><th>Hessians</th><th>FD calls</th><th>n</th></tr></thead><tbody>
+   <tr><td data-field="family_rank">1</td><td data-field="label">eOn (r2006) · Dimer-CG rotation: max=10 tol=1</td><td data-field="rank_cost">21070</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="n">0</td></tr>
+   <tr><td data-field="family_rank">2</td><td data-field="label">eOn (r2006) · Dimer-CG rotation: max=50 tol=1</td><td data-field="rank_cost">28870</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="n">0</td></tr>
+   </tbody></table></div>
+   <h3>Overall</h3>
+   <div class="bench-scroll">
+   <table data-board-table="ranked" data-problem="hTST/Al">
+   <caption>A row is one code, one version, and one stock method. Lower cost is better. PAR-2 is the harness total. An archived row uses its published primary number. Hessians is the mean analytic Hessian count. FD calls is that count times two force evaluations per coordinate.</caption>
+   <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td data-field="label">eOn (r2006) · Dimer-CG rotation: max=10 tol=1</td><td data-field="family">Minimum mode</td><td data-field="family_rank">1</td><td data-field="par2_mean"></td><td data-field="published">21070</td><td data-field="median_calls"></td><td data-field="mean_calls">21070</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">0</td></tr>
+   <tr><td data-field="label">eOn (r2006) · Dimer-CG rotation: max=50 tol=1</td><td data-field="family">Minimum mode</td><td data-field="family_rank">2</td><td data-field="par2_mean"></td><td data-field="published">28870</td><td data-field="median_calls"></td><td data-field="mean_calls">28870</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">0</td></tr>
+   </tbody></table></div>
+   </section>
+#+end_export

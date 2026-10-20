@@ -1,8 +1,9 @@
 """ASE 3.29.0 and Sella 2.6.0 template catalog.
 
 The files under ``templates/ase`` and ``templates/sella`` are rendered
-from this module. A default row is the library constructor. A tuned row
-is the archived OptBench script when one exists.
+from this module. A default row is the library constructor. An adjusted
+row is the archived OptBench script when one exists. The template id
+keeps its previous suffix.
 """
 
 from __future__ import annotations
@@ -207,6 +208,13 @@ def _tuned_minimizer(problem: str, name: str) -> tuple[dict, str, str]:
     return table[name]
 
 
+def _id_suffix(profile: str) -> str:
+    """Template ids keep the previous suffix. The stored token is adjusted."""
+    if profile == "adjusted":
+        return "tuned"
+    return profile
+
+
 def _minimization_specs() -> list[dict]:
     problems = (
         (
@@ -229,7 +237,7 @@ def _minimization_specs() -> list[dict]:
     specs = []
     for slug, problem, archive, potential, stop, select in problems:
         for name in OPTIMIZERS:
-            for profile in ("default", "tuned"):
+            for profile in ("default", "adjusted"):
                 if profile == "default":
                     params = {}
                     source = "default"
@@ -246,7 +254,7 @@ def _minimization_specs() -> list[dict]:
                     params, source, note = _tuned_minimizer(problem, name)
                 specs.append(
                     {
-                        "id": f"ase/{slug}-{_opt_slug(name)}-{profile}",
+                        "id": f"ase/{slug}-{_opt_slug(name)}-{_id_suffix(profile)}",
                         "engine": "ase",
                         "code": "ASE",
                         "code_version": ASE_VERSION,
@@ -266,7 +274,7 @@ def _minimization_specs() -> list[dict]:
                     }
                 )
         # Sella can minimize with order 0.
-        for profile in ("default", "tuned"):
+        for profile in ("default", "adjusted"):
             if profile == "default":
                 params = {"order": 0}
                 source = "default"
@@ -281,7 +289,7 @@ def _minimization_specs() -> list[dict]:
                 )
             specs.append(
                 {
-                    "id": f"sella/{slug}-min-{profile}",
+                    "id": f"sella/{slug}-min-{_id_suffix(profile)}",
                     "engine": "sella",
                     "code": "Sella",
                     "code_version": SELLA_VERSION,
@@ -327,7 +335,7 @@ def _ts_specs() -> list[dict]:
     )
     specs = []
     for row in rows:
-        for profile in ("default", "tuned"):
+        for profile in ("default", "adjusted"):
             if profile == "default":
                 params = {"order": 1}
                 source = "default"
@@ -341,7 +349,7 @@ def _ts_specs() -> list[dict]:
                 note = SELLA_TUNED_NOTE + row["pbc_note"]
             specs.append(
                 {
-                    "id": f"sella/{row['slug']}-{profile}",
+                    "id": f"sella/{row['slug']}-{_id_suffix(profile)}",
                     "engine": "sella",
                     "code": "Sella",
                     "code_version": SELLA_VERSION,
@@ -472,8 +480,8 @@ def _neb_specs() -> list[dict]:
             "stop": {
                 "norm": "fmax",
                 "force_norm": 0.001,
-                "max_force_calls": 40000,
-                "max_steps": 40000,
+                "max_force_calls": 250000,
+                "max_steps": 250000,
             },
             "tuned_optimizer": "LBFGS",
             "tuned_parameters": {"maxstep": 0.01, "damping": 0.2},
@@ -483,27 +491,23 @@ def _neb_specs() -> list[dict]:
             "tuned_climb_after": 0.4,
             "tuned_source": "repaired",
             "tuned_note": (
-                "The problem run limit is 10000. "
-                "archive/entries/double-ended-saddle-search/lj38_2ts_separation/pele/benchmark.dat "
-                "records median 20638 and maximum 114490, so this row's harness stop stays 40000 "
-                "instead of that problem cap and instead of the LJ38 eOn exclusion of 2500. "
+                "The problem run limit is 250000. The harness stop is that same limit. "
                 "Campaign rows are scored at the problem cap. This asv class uses the harness stop. "
-                "The previous ASE tuned campaign failed all 51 pairs at 2500. "
+                "The previous ASE campaign failed all 51 pairs at 2500. "
                 "Interpolation is IDPP. LBFGS maxstep is 0.01 and damping is 0.2. "
                 "Climb stays off until the maximum residual is at or below 0.4. "
                 "Five images and spring 5 are unchanged."
             ),
             "default_note": (
                 "ASE NEB defaults on the same pairs: spring 0.1, climb off, FIRE. "
-                "The harness stop is 40000, the same as the tuned row. "
-                "The problem run limit is 10000. Campaign rows use that cap. "
-                "This asv class uses the harness stop."
+                "The harness stop is 250000, the same as the adjusted row. "
+                "Campaign rows use the problem cap. This asv class uses the harness stop."
             ),
         },
     )
     specs = []
     for row in rows:
-        for profile in ("default", "tuned"):
+        for profile in ("default", "adjusted"):
             if profile == "default":
                 optimizer = "FIRE"
                 params: dict = {}
@@ -525,14 +529,14 @@ def _neb_specs() -> list[dict]:
                 "climb": climb,
                 "method": "improvedtangent",
             }
-            if profile == "tuned" and row.get("tuned_interpolate"):
+            if profile == "adjusted" and row.get("tuned_interpolate"):
                 neb["interpolate"] = row["tuned_interpolate"]
-            if profile == "tuned" and row.get("tuned_climb_after") is not None:
+            if profile == "adjusted" and row.get("tuned_climb_after") is not None:
                 neb["climb_after"] = float(row["tuned_climb_after"])
             if "count" in row:
                 neb["count"] = row["count"]
             spec = {
-                "id": f"ase/{row['id']}-{profile}",
+                "id": f"ase/{row['id']}-{_id_suffix(profile)}",
                 "engine": "ase",
                 "code": "ASE",
                 "code_version": ASE_VERSION,
@@ -623,7 +627,7 @@ def _sella_search_specs() -> list[dict]:
             f"Sella {SELLA_VERSION} saddle defaults, order 1. ",
         ),
         (
-            "tuned",
+            "adjusted",
             {"order": 1, **SELLA_TUNED},
             "transferred",
             SELLA_TUNED_NOTE + " ",
@@ -631,7 +635,7 @@ def _sella_search_specs() -> list[dict]:
     ):
         specs.append(
             {
-                "id": f"sella/pt-island-search-{profile}",
+                "id": f"sella/pt-island-search-{_id_suffix(profile)}",
                 "engine": "sella",
                 "code": "Sella",
                 "code_version": SELLA_VERSION,
@@ -680,7 +684,7 @@ def _dimer_specs() -> list[dict]:
             "ASE 3.29.0 DimerControl defaults. One search is not the saddle catalog.",
         ),
         (
-            "tuned",
+            "adjusted",
             {"maximum_translation": 0.2, "max_num_rot": 4, "dimer_separation": 0.01},
             "library",
             "No archived ASE dimer script. Tuned raises the translation cap to 0.2, rotations to 4, and the separation to 0.01.",
@@ -688,7 +692,7 @@ def _dimer_specs() -> list[dict]:
     ):
         specs.append(
             {
-                "id": f"ase/dimer-pt-island-{profile}",
+                "id": f"ase/dimer-pt-island-{_id_suffix(profile)}",
                 "engine": "ase",
                 "code": "ASE",
                 "code_version": ASE_VERSION,

@@ -1,0 +1,122 @@
+#+TITLE: SoftSaddle
+#+OPTIONS: toc:nil num:nil author:nil
+
+#+begin_export rst
+.. raw:: html
+
+   <section class="bench" id="code-softsaddle">
+   <h2>SoftSaddle</h2>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>saddle search</td>
+   <td>website/codes/softsaddle.tar.gz</td>
+   <td>5a00aeede06f</td>
+   <td><a href="https://github.com/henkelmangroup/optbench">https://github.com/henkelmangroup/optbench</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-rows">
+   <caption>Every ranked row for this code.</caption>
+   <thead><tr><th>Problem</th><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="lowest-eigenvector/lj38" data-label="SoftSaddle (2019.04) · Lanczos">
+   <td>lj38</td>
+   <td data-field="label">SoftSaddle (2019.04) · Lanczos</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">20</td>
+   <td data-field="par2_mean">18700.6</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">19</td>
+   <td data-field="mean_calls">18.91</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 187, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="lowest-eigenvector/lj38" data-label="SoftSaddle (2019.04) · Davidson">
+   <td>lj38</td>
+   <td data-field="label">SoftSaddle (2019.04) · Davidson</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">21</td>
+   <td data-field="par2_mean">18925.6</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">695</td>
+   <td data-field="mean_calls">696.475</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 189, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="saddle-search/pt-island" data-label="SoftSaddle (2019.04) · adaptive hypersphere LBFGS Lanczos">
+   <td>Pt heptamer island</td>
+   <td data-field="label">SoftSaddle (2019.04) · adaptive hypersphere LBFGS Lanczos</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">1</td>
+   <td data-field="par2_mean">10124.2</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">389</td>
+   <td data-field="mean_calls">431.839</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 4884, cap 108, wrong_stationary 6</td>
+   <td data-field="n">5000</td>
+   </tr>
+   <tr data-problem="saddle-search/pt-island" data-label="SoftSaddle (2019.04) · adaptive hypersphere LBFGS Davidson">
+   <td>Pt heptamer island</td>
+   <td data-field="label">SoftSaddle (2019.04) · adaptive hypersphere LBFGS Davidson</td>
+   <td data-field="family">Single-ended saddle</td>
+   <td data-field="family_rank">2</td>
+   <td data-field="par2_mean">10128</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1060</td>
+   <td data-field="mean_calls">1059.76</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 5000, wrong_stationary 0</td>
+   <td data-field="n">5000</td>
+   </tr>
+   <tr data-problem="saddle-search/pt-island" data-label="SoftSaddle · adaptive_HSphere-lbfgs-davidson-sm50">
+   <td>Pt heptamer island</td>
+   <td data-field="label">SoftSaddle · adaptive_HSphere-lbfgs-davidson-sm50</td>
+   <td data-field="family">Single-ended saddle</td>
+   <td data-field="family_rank">3</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">423491</td>
+   <td data-field="median_calls"></td>
+   <td data-field="mean_calls">423491</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">0</td>
+   </tr>
+   <tr data-problem="saddle-search/pt-island" data-label="SoftSaddle · adaptive_HSphere-lbfgs-lanczos-sm50">
+   <td>Pt heptamer island</td>
+   <td data-field="label">SoftSaddle · adaptive_HSphere-lbfgs-lanczos-sm50</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">6</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">814519</td>
+   <td data-field="median_calls"></td>
+   <td data-field="mean_calls">814519</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">0</td>
+   </tr>
+   <tr data-problem="saddle-search/pt-island" data-label="SoftSaddle · adaptive_HSphere-lbfgs-lanczos-sm0">
+   <td>Pt heptamer island</td>
+   <td data-field="label">SoftSaddle · adaptive_HSphere-lbfgs-lanczos-sm0</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">7</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">1.00343e+06</td>
+   <td data-field="median_calls"></td>
+   <td data-field="mean_calls">1.00343e+06</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">0</td>
+   </tr>
+   </tbody></table></div>
+   </section>
+#+end_export
