@@ -38,7 +38,7 @@ from .dat import DatError, parse_lenient
 from .failures import FAILURES
 from .problems import load_all
 from .profile import performance_profile, profile_cost
-from .score import normalize_start, score_v2
+from .score import catalog_cap, normalize_start, score_v2
 from .site import SUITE_ORDER, campaign_problem
 from .v2 import parse_repetitions
 
@@ -283,6 +283,10 @@ def _commit_divides_band(root: Path, commit: str) -> bool:
 
 
 def _cap_of(problem: dict | None, template: dict | None, fields: dict[str, str]) -> int | None:
+    if str(fields.get("score_unit") or "") == "repetition":
+        stated = catalog_cap(problem)
+        if stated is not None:
+            return stated
     if problem is not None:
         stated = (problem.get("convergence") or {}).get("max_force_calls")
         if stated not in (None, ""):
@@ -366,6 +370,49 @@ def _record_from_raw(raw: dict, cap: int | None, force_tol: float | None) -> dic
     return record
 
 
+def _repetition_rows(text: str, fields: dict[str, str]) -> list[dict]:
+    """One start per ``# rep`` line.
+
+    The cost is the harness total through the stopping search. A repetition
+    that reaches ``goal`` connected saddles is a success. One that reaches
+    ``max_searches`` without that count is a cap failure.
+    """
+    goal_raw = fields.get("goal")
+    if goal_raw in (None, ""):
+        raise ValueError("score_unit repetition needs a goal")
+    goal = int(float(goal_raw))
+    limit_raw = fields.get("max_searches")
+    search_limit = int(float(limit_raw)) if limit_raw not in (None, "") else None
+    rows = []
+    for line in text.splitlines():
+        if not line.startswith("# rep "):
+            continue
+        parts = line.split()
+        for key in ("force_calls", "connected", "total_searches"):
+            if key not in parts:
+                raise ValueError(f"repetition comment is missing {key}: {line}")
+        calls = float(parts[parts.index("force_calls") + 1])
+        connected = int(float(parts[parts.index("connected") + 1]))
+        searches = int(float(parts[parts.index("total_searches") + 1]))
+        repetition = int(parts[2])
+        success = connected >= goal
+        if success:
+            failure = None
+        elif search_limit is None or searches >= search_limit:
+            failure = "cap"
+        else:
+            failure = "divergence"
+        rows.append(
+            {
+                "force_calls": calls,
+                "success": success,
+                "failure": failure,
+                "start": f"rep{repetition}",
+            }
+        )
+    return rows
+
+
 def _records_from_repetitions(text: str, fields: dict[str, str]) -> list[dict]:
     rows = parse_repetitions(text)
     if not rows:
@@ -385,6 +432,19 @@ def _load_group_records(
     force_tol: float | None,
     images: int | None = None,
 ) -> tuple[list[dict], str]:
+    if "dat" in group:
+        text = group["dat"].read_text(encoding="utf-8")
+        fields, _duplicates = parse_lenient(text)
+        if str(fields.get("score_unit") or "") == "repetition":
+            collected = []
+            for raw in _repetition_rows(text, fields):
+                record = _record_from_raw(raw, cap, force_tol)
+                if record is None:
+                    raise ValueError(f"{group['dat'].name} dropped a repetition")
+                collected.append(record)
+            if not collected:
+                raise ValueError(f"{group['dat'].name} has no repetition to score")
+            return collected, "repetitions"
     if "starts_jsonl" in group:
         collected = []
         for raw in _json_lines(group["starts_jsonl"]):

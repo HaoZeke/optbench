@@ -11,7 +11,7 @@ The reduction is softsaddle/upstream/test_run/get_data_for_web_benchmark.m.
 
 Harness rows use that reduction on the finished repetitions. force_calls is
 the sum of harness calls over the searches. The initial minimization is
-outside the sum. The potential is eOn Morse::force. unique_sp_sofar counts
+not in the sum. The potential is eOn Morse::force. unique_sp_sofar counts
 index-1 saddles that are not an eOn find_repeat of an earlier index-1
 saddle: a barrier difference above 0.01 eV is a different process,
 otherwise the r2205 per-atom test on the saddle. n_connected_sp counts
@@ -19,8 +19,8 @@ the good ones, linked by exactly one endpoint under that per-atom test
 (max distance strictly below 0.1 angstrom) and not a find_repeat.
 A barrier at or above 1.5 eV stays in that count. below_1.5 is the stop
 counter. MATLAB check_if_connected accepts either endpoint. Davidson
-charges one finite-difference product per iteration. The dense anchor
-inside libdavidson is not counted. MATLAB sp_func_calls is report()'s
+charges one finite-difference product per iteration. libdavidson builds
+a dense anchor that is not counted. MATLAB sp_func_calls is report()'s
 iteration count plus one, the same product count, and it is not a
 harness call.
 
@@ -117,3 +117,14 @@ softsaddle/saddle-lanczos-sm50              7   3072         26      179     119
 softsaddle/saddle-lanczos-sm50              8   3072         26      174     1587          0      1328130   0.540039
 softsaddle/saddle-lanczos-sm50              9   3072         26      153      660          0      1244225   0.834961
 softsaddle/saddle-lanczos-sm50             10   3072         26      131      489          0      1169172   0.883464
+
+Scored starts. One repetition is one start. A hit reaches the goal
+count of connected saddles below 1.5 eV. Its cost is the harness
+force calls through that search. A miss stops at the search limit
+and PAR-2 charges twice the problem force budget. mean and median
+are the repetition totals. par2_mean is the penalised mean.
+
+template                                   reps   hits        par2_mean             mean           median
+softsaddle/saddle-davidson-sm50              10      9       20837407.1        1021892.5         932781.0
+softsaddle/saddle-lanczos-sm0                10      9       21347760.7        1612643.2        1617334.0
+softsaddle/saddle-lanczos-sm50               10      7       60964746.8        1618641.9        1732799.5

@@ -226,6 +226,15 @@ def wilson_interval(successes: int, starts: int, z: float = WILSON_Z) -> tuple[f
     return low, high
 
 
+def catalog_cap(problem: dict | None) -> int | None:
+    """Force budget for one saddle-catalog repetition, when the problem states one."""
+    goal = (problem or {}).get("goal") or {}
+    raw = goal.get("max_force_calls")
+    if raw in (None, ""):
+        return None
+    return int(raw)
+
+
 def penalised_cost(force_calls: float, success: bool, cap: int | None, factor: int = PAR_FACTOR) -> float:
     """PAR cost. A failure, or a success at or above the cap, costs ``factor * cap``."""
     if cap is not None and (not success or force_calls >= cap):
@@ -329,7 +338,6 @@ def score_v2(
 
     Each record has ``force_calls`` and ``success``. When ``cap`` is
     ``None`` every record must be a success, and ``par_applied`` is false.
-    That is the Pt-island per-search sample: the problem states no cap.
     """
     if not records:
         raise ValueError("records is empty")

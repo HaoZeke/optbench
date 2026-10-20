@@ -1129,11 +1129,11 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">softsaddle/saddle-davidson-sm50</td>
    <td data-field="version">softsaddle 2019.04</td>
    <td data-field="commit">5a00aeede06f</td>
-   <td data-field="par2_mean">10033.8</td>
-   <td data-field="mean_calls">366.27</td>
-   <td data-field="median_calls">341</td>
-   <td data-field="failures">crash 0, divergence 27513, cap 89, wrong_stationary 29</td>
-   <td data-field="n">27900</td>
+   <td data-field="par2_mean">2.08374e+07</td>
+   <td data-field="mean_calls">1.02189e+06</td>
+   <td data-field="median_calls">932781</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
+   <td data-field="n">10</td>
    </tr>
    </tbody></table></div>
    </section>

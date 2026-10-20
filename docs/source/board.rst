@@ -81,7 +81,7 @@ It does not run a campaign.
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
    <td data-code="optim">—</td>
-   <td data-code="softsaddle" data-template="softsaddle/saddle-davidson-sm50" data-par2="10033.8"><span class="bench-score">10033.8</span><a href="generated/suites/saddle-search.html#pt-island-templates">softsaddle/saddle-davidson-sm50</a></td>
+   <td data-code="softsaddle" data-template="softsaddle/saddle-davidson-sm50" data-par2="2.08374e+07"><span class="bench-score">2.08374e+07</span><a href="generated/suites/saddle-search.html#pt-island-templates">softsaddle/saddle-davidson-sm50</a></td>
    <td data-code="tsase">—</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38">

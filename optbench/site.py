@@ -584,7 +584,7 @@ def _smoke_note(root: Path) -> str:
     if not archived or not smoke_run:
         return ""
     return (
-        f"A {smoke_run.get('searches')}-search SoftSaddle smoke is outside this rank. "
+        f"A {smoke_run.get('searches')}-search SoftSaddle smoke is not in this rank. "
         f"The {archived.get('date')} {archived.get('entry')} entry records "
         f"{archived.get('force_calls')} force calls."
     )

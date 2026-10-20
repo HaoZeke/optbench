@@ -1,6 +1,7 @@
 """SoftSaddle templates and the compiled eigen-solvers."""
 
 import json
+import re
 from pathlib import Path
 
 import numpy as np
@@ -83,15 +84,15 @@ def test_hypersphere_is_the_sorted_5000_point_set():
     assert float(np.linalg.norm(pair)) == pytest.approx(1.924429334848153, rel=1e-9)
     previous = vectors
     for repetition in range(1, 11):
-        current, current_order = hypersphere(repetition)
-        assert current.shape == (5000, 21)
-        assert len(np.unique(current_order)) == 5000
-        assert np.allclose(np.linalg.norm(current, axis=1), 1.0, atol=1e-8)
+        directions, direction_order = hypersphere(repetition)
+        assert directions.shape == (5000, 21)
+        assert len(np.unique(direction_order)) == 5000
+        assert np.allclose(np.linalg.norm(directions, axis=1), 1.0, atol=1e-8)
         assert hypersphere_sha(repetition) == _HYPER_SHA[repetition]
-        assert (int(current_order[0]), int(current_order[1])) == _HYPER_FIRST[repetition]
+        assert (int(direction_order[0]), int(direction_order[1])) == _HYPER_FIRST[repetition]
         if repetition > 1:
-            assert not np.array_equal(current, previous)
-        previous = current
+            assert not np.array_equal(directions, previous)
+        previous = directions
 
 
 def test_later_repetitions_use_a_shifted_seed():
@@ -409,3 +410,103 @@ def test_attach_endpoint_stamps_stored_and_not_minimized(tmp_path: Path):
     assert _records_carry_endpoints(rows) is True
     assert _records_carry_endpoints([{**stored, "endpoint_status": "guessed"}]) is False
     assert [row["endpoint_index"] for row in rows] == [0, 1, 2]
+
+
+_BANNED_WORDING = re.compile(
+    r"reproduced|paper baseline|not_rerun|\blegacy\b|\bcurrent\b|\bband\b|\binside\b|\boutside\b",
+    re.IGNORECASE,
+)
+
+
+def test_repetition_scores_ignore_the_search_log(tmp_path: Path):
+    from optbench.board import _cap_of, _load_group_records, _score_records
+    from optbench.dat import parse_lenient
+
+    problem = resolve_problem(ROOT, "saddle-search/pt-island")
+    assert problem["potential"]["pair_style"] == "eon-morse"
+    assert problem["goal"]["max_force_calls"] == 100_000_000
+    assert problem["goal"]["max_searches"] == 5000
+    assert "max_force_calls" not in (problem.get("convergence") or {})
+    assert _cap_of(problem, {"failure_cap": 20_000_000}, {"cap": "5064"}) == 20_000_000
+    assert _cap_of(problem, {"stop": {"max_force_calls": 10000}}, {}) == 10000
+    campaign = tmp_path / "campaign"
+    campaign.mkdir()
+    dat = campaign / "demo.dat"
+    dat.write_text(
+        "\n".join(
+            [
+                "# rep 1 force_calls 1000 connected 27 total_searches 10",
+                "# rep 2 force_calls 2000 connected 26 total_searches 5000",
+                "score_unit repetition",
+                "goal 27",
+                "max_searches 5000",
+                "cap 5064",
+                "problem saddle-search/pt-island",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    (campaign / "demo.starts.jsonl").write_text(
+        json.dumps({"force_calls": 10, "success": True, "failure": None, "start": "search"}) + "\n",
+        encoding="utf-8",
+    )
+    fields, _duplicates = parse_lenient(dat.read_text(encoding="utf-8"))
+    cap = _cap_of(problem, None, fields)
+    assert cap == 100_000_000
+    records, source = _load_group_records(
+        {"dat": dat, "starts_jsonl": campaign / "demo.starts.jsonl"},
+        cap,
+        None,
+    )
+    assert source == "repetitions"
+    assert [row["start"] for row in records] == ["rep1", "rep2"]
+    summary = _score_records(records, cap)
+    assert summary["n"] == 2
+    assert summary["successes"] == 1
+    assert summary["n_cap"] == 1
+    assert summary["par2_mean"] == (1000 + 2 * 100_000_000) / 2
+
+
+def test_published_saddle_rows_score_ten_repetitions():
+    from optbench.board import _cap_of, _campaign_groups, _load_group_records, _score_records
+    from optbench.dat import parse_lenient
+
+    problem = resolve_problem(ROOT, "saddle-search/pt-island")
+    groups = _campaign_groups(ROOT / "results" / "campaign")
+    expected = {
+        "softsaddle-2019.04-saddle-davidson-sm50": (9, 20837407.1, 1021892.5, 932781.0),
+        "softsaddle-2019.04-saddle-lanczos-sm0": (9, 21347760.7, 1612643.2, 1617334.0),
+        "softsaddle-2019.04-saddle-lanczos-sm50": (7, 60964746.8, 1618641.9, 1732799.5),
+    }
+    for stem, (hits, par2, mean_calls, median_calls) in expected.items():
+        group = groups[stem]
+        fields, _duplicates = parse_lenient(group["dat"].read_text(encoding="utf-8"))
+        cap = _cap_of(problem, None, fields)
+        records, source = _load_group_records(group, cap, None)
+        summary = _score_records(records, cap)
+        assert source == "repetitions"
+        assert summary["n"] == 10
+        assert summary["successes"] == hits
+        assert summary["n_cap"] == 10 - hits
+        assert summary["par2_mean"] == pytest.approx(par2)
+        assert summary["mean_calls"] == pytest.approx(mean_calls)
+        assert summary["median_calls"] == pytest.approx(median_calls)
+        assert cap == 100_000_000
+
+
+def test_softsaddle_prose_states_the_gap_as_numbers():
+    paths = [
+        ROOT / "optbench" / "softsaddle_run.py",
+        ROOT / "results" / "campaign" / "softsaddle-pt-island-repetitions.txt",
+    ]
+    for path in paths:
+        match = _BANNED_WORDING.search(path.read_text(encoding="utf-8"))
+        assert match is None, f"{path.name} has {match.group(0)!r}"
+    problem = resolve_problem(ROOT, "saddle-search/pt-island")
+    version2 = problem["scoring"]["v2"]
+    for key in ("cost", "success", "note"):
+        match = _BANNED_WORDING.search(version2[key])
+        assert match is None, f"scoring.v2.{key} has {match.group(0)!r}"
+    assert "eon-morse" in version2["note"]
+    assert "morse/smooth/linear" not in version2["note"]

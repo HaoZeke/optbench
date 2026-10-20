@@ -18,8 +18,8 @@ different process, and otherwise the same per-atom test is applied to
 the saddle. Each search records its minimized endpoints in
 ``<stem>.endpoints.npz``; a search that stops first is
 ``not_minimized``. Davidson charges one finite-difference
-Hessian-vector product per iteration. The dense anchor built inside
-libdavidson is not a harness call.
+Hessian-vector product per iteration. libdavidson builds a dense anchor
+that is not a harness call.
 """
 
 from __future__ import annotations
@@ -67,7 +67,7 @@ from .rgsaddle_minmode import (
     _unit,
     _vibrational_eigenvalues,
 )
-from .score import half_even, score_v2
+from .score import catalog_cap, half_even, score_v2
 from .stationary import negative_index
 from .surfaces import load_con, potential_from_problem, read_mode
 from .v2 import collect_provenance, write_starts
@@ -303,7 +303,7 @@ def _lambda_zero(xpos: np.ndarray, xneg: np.ndarray, epos: float, eneg: float) -
 
 
 def _analyze(mode, vector, step, accumulated, count: int, tolerance: float):
-    """Reuse the mode while the running step stays inside ``tolerance``."""
+    """Reuse the mode while the running step stays within ``tolerance``."""
     if accumulated is None:
         total = np.array(step, dtype=np.float64, copy=True)
     else:
@@ -1053,7 +1053,7 @@ def _wanted_repetitions(total: int) -> list[int]:
     unique: list[int] = []
     for item in chosen:
         if item < 1 or item > int(total):
-            raise ValueError(f"repetition {item} is outside 1..{total}")
+            raise ValueError(f"repetition {item} is not in 1..{total}")
         if item not in unique:
             unique.append(item)
     if not unique:
@@ -1328,7 +1328,7 @@ def write_archive_comparison(root: Path, campaign: Path | None = None) -> Path:
         "",
         "Harness rows use that reduction on the finished repetitions. force_calls is",
         "the sum of harness calls over the searches. The initial minimization is",
-        "outside the sum. The potential is eOn Morse::force. unique_sp_sofar counts",
+        "not in the sum. The potential is eOn Morse::force. unique_sp_sofar counts",
         "index-1 saddles that are not an eOn find_repeat of an earlier index-1",
         "saddle: a barrier difference above 0.01 eV is a different process,",
         "otherwise the r2205 per-atom test on the saddle. n_connected_sp counts",
@@ -1336,8 +1336,8 @@ def write_archive_comparison(root: Path, campaign: Path | None = None) -> Path:
         "(max distance strictly below 0.1 angstrom) and not a find_repeat.",
         "A barrier at or above 1.5 eV stays in that count. below_1.5 is the stop",
         "counter. MATLAB check_if_connected accepts either endpoint. Davidson",
-        "charges one finite-difference product per iteration. The dense anchor",
-        "inside libdavidson is not counted. MATLAB sp_func_calls is report()'s",
+        "charges one finite-difference product per iteration. libdavidson builds",
+        "a dense anchor that is not counted. MATLAB sp_func_calls is report()'s",
         "iteration count plus one, the same product count, and it is not a",
         "harness call.",
         "",
@@ -1440,6 +1440,44 @@ def write_archive_comparison(root: Path, campaign: Path | None = None) -> Path:
                 f"{statistics.fmean(row['both'] for row in snapshots):10.4g} "
                 f"{statistics.fmean(row['calls'] for row in snapshots):12.4g} "
                 f"{statistics.fmean(row['fraction'] for row in snapshots):10.6f}"
+            )
+    from .problems import load_problem
+
+    problem = load_problem(root / "problems" / "saddle-search" / "pt-island.toml")
+    budget = catalog_cap(problem)
+    search_limit = int((problem.get("goal") or {}).get("max_searches") or 0)
+    goal = int((problem.get("goal") or {}).get("connected_saddles") or 0)
+    if budget is not None and goal and search_limit and detail:
+        lines.extend(
+            [
+                "",
+                "Scored starts. One repetition is one start. A hit reaches the goal",
+                "count of connected saddles below 1.5 eV. Its cost is the harness",
+                "force calls through that search. A miss stops at the search limit",
+                "and PAR-2 charges twice the problem force budget. mean and median",
+                "are the repetition totals. par2_mean is the penalised mean.",
+                "",
+                f"{'template':<40} {'reps':>6} {'hits':>6} {'par2_mean':>16} {'mean':>16} {'median':>16}",
+            ]
+        )
+        for template_id, comments, _pooled in detail:
+            scored = _repetition_starts(comments, goal, search_limit)
+            metrics = score_v2(
+                [
+                    {
+                        "force_calls": row["force_calls"],
+                        "success": row["success"],
+                        "failure": row["failure"],
+                    }
+                    for row in scored
+                ],
+                budget,
+            )
+            calls = [float(row["force_calls"]) for row in scored]
+            lines.append(
+                f"{template_id:<40} {len(scored):6d} {metrics['successes']:6d} "
+                f"{metrics['par2_mean']:16.1f} {statistics.fmean(calls):16.1f} "
+                f"{statistics.median(calls):16.1f}"
             )
     path = destination / "softsaddle-pt-island-repetitions.txt"
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -1839,6 +1877,104 @@ def _campaign_minimum(work, raw, positions, free, cell, force_tol):
     return minimum, float(min_energy), int(potential.calls), bool(min_ok)
 
 
+_SADDLE_V2_NOTE = (
+    "One start is one repetition. The cost is the harness force calls "
+    "through the search that reaches 27 connected saddles below 1.5 eV. "
+    "A repetition that stops at 5000 searches without 27 is a failure "
+    "and costs twice the problem force budget. Pt-island is eOn Morse::force. "
+    "Novelty is AKMCState.find_repeat on the saddle, and the link is the "
+    "eOn r2205 per-atom test. Search logs and endpoint minima stay in the "
+    "starts file and the sibling endpoints archive."
+)
+
+_AGGREGATE_KEYS = {
+    "force_calls",
+    "force_calls_mean_error",
+    "force_calls_min",
+    "force_calls_max",
+    "unique_saddles",
+    "fraction_connected",
+    "total_searches",
+    "benchmark_force_calls",
+    "benchmark_force_calls_mean_error",
+    "benchmark_fraction_connected",
+    "benchmark_total_searches",
+    "benchmark_unique_saddles",
+}
+
+
+def _goal_search_limit(problem: dict, template: dict) -> int:
+    raw = (problem.get("goal") or {}).get("max_searches")
+    if raw not in (None, ""):
+        return int(raw)
+    return int(_settings(template)["max_searches"])
+
+
+def _repetition_starts(summaries: list[dict], goal: int, search_limit: int) -> list[dict]:
+    """One scored start per finished repetition."""
+    records = []
+    for summary in summaries:
+        connected = int(summary["connected"])
+        searches = int(summary["total_searches"])
+        success = connected >= int(goal)
+        if success:
+            failure = None
+        elif searches >= int(search_limit):
+            failure = "cap"
+        else:
+            failure = "divergence"
+        records.append(
+            {
+                "schema": "optbench.start/v2",
+                "start": f"rep{int(summary['repetition'])}",
+                "force_calls": int(summary["force_calls"]),
+                "counter": "harness",
+                "comparable": True,
+                "success": success,
+                "failure": failure,
+                "repetition": int(summary["repetition"]),
+                "total_searches": searches,
+                "connected": connected,
+            }
+        )
+    return records
+
+
+def _score_lines(
+    metrics: dict,
+    records: list[dict],
+    *,
+    failed: int,
+    goal: int,
+    search_limit: int,
+    catalog: int,
+    search_cap: int,
+) -> list[str]:
+    calls = [float(row["force_calls"]) for row in records]
+    return [
+        "score_unit repetition",
+        f"repetitions {len(records)}",
+        f"nfailed {failed}",
+        f"goal {goal}",
+        f"max_searches {search_limit}",
+        f"cap {catalog}",
+        f"search_cap {search_cap}",
+        f"n {metrics['n']}",
+        f"par2_mean {metrics['par2_mean']}",
+        f"successes {metrics['successes']}",
+        f"wilson_low {metrics['wilson_low']}",
+        f"wilson_high {metrics['wilson_high']}",
+        f"par2_median {metrics['median']}",
+        f"mean_calls {statistics.fmean(calls)}",
+        f"median_calls {statistics.median(calls)}",
+        f"n_cap {metrics['n_cap']}",
+        f"n_wrong_stationary {metrics['n_wrong_stationary']}",
+        f"n_divergence {metrics['n_divergence']}",
+        f"n_crash {metrics['n_crash']}",
+        f"v2_nfailed {metrics['nfailed']}",
+    ]
+
+
 def _publish_saddle(
     root: Path,
     problem: dict,
@@ -1886,18 +2022,17 @@ def _publish_saddle(
         f"benchmark_total_searches {pooled['total_searches']}\n"
         f"benchmark_unique_saddles {pooled['unique_saddles']}\n"
     )
-    ok = [int(row["force_calls"]) for row in records if row["success"]]
-    if ok:
-        text += f"success_force_calls {half_even(sum(ok) / len(ok))}\n"
-        text += f"success_force_calls_min {min(ok)}\n"
-        text += f"success_force_calls_median {float(np.median(ok))}\n"
-        text += f"success_force_calls_max {max(ok)}\n"
+    catalog = catalog_cap(problem)
+    if catalog is None:
+        raise ValueError(f"{problem['id']} does not state a repetition force budget")
+    search_limit = _goal_search_limit(problem, template)
+    scored = _repetition_starts(summaries, goal, search_limit)
     metrics = score_v2(
         [
             {"force_calls": row["force_calls"], "success": row["success"], "failure": row["failure"]}
-            for row in records
+            for row in scored
         ],
-        search_cap,
+        catalog,
     )
     text += (
         f"code {template.get('code', 'softsaddle')}\n"
@@ -1908,22 +2043,18 @@ def _publish_saddle(
         f"template {template['id']}\n"
         f"problem {problem['id']}\n"
         f"counter harness\n"
-        f"repetitions {len(summaries)}\n"
-        f"nfailed {failed_reps}\n"
-        f"goal {goal}\n"
-        f"cap {search_cap}\n"
-        f"n {len(records)}\n"
-        f"par2_mean {metrics['par2_mean']}\n"
-        f"successes {metrics['successes']}\n"
-        f"wilson_low {metrics['wilson_low']}\n"
-        f"wilson_high {metrics['wilson_high']}\n"
-        f"par2_median {metrics['median']}\n"
-        f"n_cap {metrics['n_cap']}\n"
-        f"n_wrong_stationary {metrics['n_wrong_stationary']}\n"
-        f"n_divergence {metrics['n_divergence']}\n"
-        f"n_crash {metrics['n_crash']}\n"
-        f"v2_nfailed {metrics['nfailed']}\n"
     )
+    text += "\n".join(
+        _score_lines(
+            metrics,
+            scored,
+            failed=failed_reps,
+            goal=goal,
+            search_limit=search_limit,
+            catalog=catalog,
+            search_cap=search_cap,
+        )
+    ) + "\n"
     output.parent.mkdir(parents=True, exist_ok=True)
     _seal_endpoints(archive, records)
     starts_body = "".join(json.dumps(_jsonable(row), sort_keys=True) + "\n" for row in records)
@@ -1936,7 +2067,9 @@ def _publish_saddle(
         parameters={
             "template": template["id"],
             "problem": problem["id"],
-            "cap": search_cap,
+            "cap": catalog,
+            "search_cap": search_cap,
+            "score_unit": "repetition",
             "solver": settings["solver"],
             "hypersphere_sha256": [hypersphere_sha(int(row["repetition"])) for row in summaries],
             "repetitions": len(summaries),
@@ -1950,15 +2083,7 @@ def _publish_saddle(
         "par_factor": 2,
         "bootstrap_resamples": 2000,
         "bootstrap_seed": 20261015,
-        "note": (
-            "One row is one hypersphere displacement. Each repetition loads one "
-            "archived 5000-direction set and starts again at radius 0.1. The cap "
-            "is the climb budget, 64 calls of overshoot, and the two endpoint "
-            "minimizations. The initial minimization is not in that count. "
-            "Pt-island is eOn Morse::force. Novelty is AKMCState.find_repeat "
-            "on the saddle, and the link is the eOn r2205 per-atom test. "
-            "Endpoint minima are in the sibling endpoints archive."
-        ),
+        "note": _SADDLE_V2_NOTE,
         "runs": [
             {
                 "entry": output.stem,
@@ -1968,10 +2093,10 @@ def _publish_saddle(
                 "commit": template.get("commit", ""),
                 "tuning": template.get("tuning", ""),
                 "present_source": True,
-                "cap": search_cap,
+                "cap": catalog,
                 "provenance": provenance,
                 "metrics": metrics,
-                "starts": records,
+                "starts": scored,
             }
         ],
     }
@@ -1985,7 +2110,7 @@ def _publish_saddle(
     return {
         "force_calls": statistics.fmean(totals),
         "nfailed": failed_reps,
-        "starts": len(records),
+        "starts": len(scored),
         "template": template["id"],
         "problem": problem["id"],
         "connected": connected,
@@ -1996,6 +2121,101 @@ def _atomic_write(path: Path, text: str) -> None:
     temporary = path.with_name(f".{path.name}.tmp")
     temporary.write_text(text, encoding="utf-8")
     temporary.replace(path)
+
+
+def _published_search_cap(fields: dict[str, str]) -> int:
+    if fields.get("search_cap"):
+        return int(float(fields["search_cap"]))
+    raw = fields.get("cap")
+    if raw not in (None, "") and int(float(raw)) < 100_000:
+        return int(float(raw))
+    return 1000 + _SADDLE_CLIMB_OVERSHOOT + 2 * _SADDLE_ENDPOINT_BUDGET
+
+
+def _rescore_v2(path: Path, scored: list[dict], metrics: dict, catalog: int, search_cap: int) -> None:
+    document = json.loads(path.read_text(encoding="utf-8"))
+    document["note"] = _SADDLE_V2_NOTE
+    run = document["runs"][0]
+    run["cap"] = catalog
+    run["metrics"] = metrics
+    run["starts"] = scored
+    parameters = (run.get("provenance") or {}).get("parameters")
+    if isinstance(parameters, dict):
+        parameters["cap"] = catalog
+        parameters["search_cap"] = search_cap
+        parameters["score_unit"] = "repetition"
+    _atomic_write(path, json.dumps(document, indent=2, sort_keys=True) + "\n")
+
+
+def rescore_published_saddles(root: Path) -> list[Path]:
+    """Score each published repetition as one start.
+
+    The search log and the endpoint archive stay beside the result file.
+    """
+    from .dat import parse_lenient
+    from .problems import load_problem
+
+    problem = load_problem(root / "problems" / "saddle-search" / "pt-island.toml")
+    catalog = catalog_cap(problem)
+    if catalog is None:
+        raise ValueError(f"{problem['id']} does not state a repetition force budget")
+    goal = int(problem["goal"]["connected_saddles"])
+    search_limit = int(problem["goal"]["max_searches"])
+    campaign = root / "results" / "campaign"
+    written = []
+    for template_id in _ARCHIVE_ENTRY:
+        dat = campaign / f"{_campaign_stem(template_id)}.dat"
+        text = dat.read_text(encoding="utf-8")
+        fields, _duplicates = parse_lenient(text)
+        summaries = [_parse_rep_comment(line) for line in text.splitlines() if line.startswith("# rep ")]
+        if not summaries:
+            raise RuntimeError(f"{dat.name} has no repetition comments")
+        scored = _repetition_starts(summaries, goal, search_limit)
+        failed = sum(1 for row in scored if not row["success"])
+        metrics = score_v2(
+            [
+                {"force_calls": row["force_calls"], "success": row["success"], "failure": row["failure"]}
+                for row in scored
+            ],
+            catalog,
+        )
+        search_cap = _published_search_cap(fields)
+        preamble = []
+        for line in text.splitlines():
+            if line.startswith("# rep "):
+                preamble.append(line)
+                continue
+            if not line.strip():
+                continue
+            key = line.split(None, 1)[0]
+            if key in _AGGREGATE_KEYS:
+                preamble.append(line)
+        tail = [
+            f"code {fields['code']}",
+            f"code_version {fields['code_version']}",
+            f"commit {fields['commit']}",
+            f"algorithm {fields['algorithm']}",
+            f"tuning {fields['tuning']}",
+            f"template {fields['template']}",
+            f"problem {fields['problem']}",
+            "counter harness",
+        ]
+        tail.extend(
+            _score_lines(
+                metrics,
+                scored,
+                failed=failed,
+                goal=goal,
+                search_limit=search_limit,
+                catalog=catalog,
+                search_cap=search_cap,
+            )
+        )
+        _atomic_write(dat, "\n".join(preamble + tail) + "\n")
+        _rescore_v2(dat.with_suffix(".v2.json"), scored, metrics, catalog, search_cap)
+        written.append(dat)
+    written.append(write_archive_comparison(root, campaign))
+    return written
 
 
 def mode_spec(root: Path, problem: dict, template: dict, row: dict, cap: int, work: Path, index: int) -> dict:
