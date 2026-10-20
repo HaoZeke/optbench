@@ -1496,23 +1496,23 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="double-ended-saddle-search/lj38" data-template="pygsm/de-gsm">
    <td>LJ38 double-ended saddle</td>
    <td data-field="template">pygsm/de-gsm</td>
-   <td data-field="version">pygsm 1.0.0+692.g1b4d5a5.dirty</td>
+   <td data-field="version">pygsm 1.0.0+692.g1b4d5a5</td>
    <td data-field="commit">1b4d5a5557a6</td>
-   <td data-field="par2_mean">3995.04</td>
-   <td data-field="mean_calls">1629.54</td>
-   <td data-field="median_calls">2433.5</td>
-   <td data-field="failures">crash 0, divergence 0, cap 25, not_converged 12, wrong_stationary 0</td>
+   <td data-field="par2_mean">4663.28</td>
+   <td data-field="mean_calls">2335.42</td>
+   <td data-field="median_calls">2500</td>
+   <td data-field="failures">crash 0, divergence 4, cap 40, not_converged 0, wrong_stationary 1</td>
    <td data-field="n">50</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="pygsm/de-gsm">
    <td>lj38_2ts_separation</td>
    <td data-field="template">pygsm/de-gsm</td>
-   <td data-field="version">pygsm 1.0.0+692.g1b4d5a5.dirty</td>
+   <td data-field="version">pygsm 1.0.0+692.g1b4d5a5</td>
    <td data-field="commit">1b4d5a5557a6</td>
-   <td data-field="par2_mean">296472</td>
-   <td data-field="mean_calls">5486.86</td>
-   <td data-field="median_calls">3170</td>
-   <td data-field="failures">crash 0, divergence 20, cap 0, not_converged 10, wrong_stationary 0</td>
+   <td data-field="par2_mean">490215</td>
+   <td data-field="mean_calls">225140</td>
+   <td data-field="median_calls">250000</td>
+   <td data-field="failures">crash 0, divergence 5, cap 45, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
    </tbody></table></div>
