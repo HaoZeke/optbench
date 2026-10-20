@@ -38,7 +38,10 @@ def registry_pin(root: Path, code_id: str) -> dict:
 
 
 def require_pin(template: dict, pin: dict) -> None:
-    if template.get("code") != pin["id"]:
+    code = str(template.get("code") or "")
+    names = {str(pin.get("id") or ""), str(pin.get("name") or "")}
+    names = {item.lower() for item in names if item}
+    if code.lower() not in names:
         raise ValueError(f"{template['id']} code is not {pin['id']}")
     if template.get("commit") != pin["commit"]:
         raise ValueError(f"{template['id']} commit does not match the {pin['id']} registry")

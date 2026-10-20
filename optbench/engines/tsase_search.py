@@ -319,6 +319,25 @@ def _surface(kind: str, free: np.ndarray, box):
     return _Surface
 
 
+class _OverlapReached(Exception):
+    """The mode met the problem overlap inside a rotation iteration."""
+
+    def __init__(self, overlap: float):
+        super().__init__("overlap")
+        self.overlap = float(overlap)
+
+
+def _mode_overlap(mode, n_atoms: int, free: np.ndarray, reference) -> float:
+    current = np.asarray(mode, dtype=np.float64)
+    piece = current[:n_atoms][free].reshape(-1)
+    scale = float(np.linalg.norm(piece))
+    target = np.asarray(reference, dtype=np.float64)
+    target_scale = float(np.linalg.norm(target))
+    if scale <= 1e-14 or target_scale <= 1e-14:
+        return 0.0
+    return abs(float(np.dot(piece / scale, target / target_scale)))
+
+
 def _execute_dimer(job: dict) -> dict:
     os.environ.setdefault("OMP_NUM_THREADS", "1")
     from ase import Atoms
@@ -338,6 +357,11 @@ def _execute_dimer(job: dict) -> dict:
     energy = None
     gradient = None
     point = positions.copy()
+    log_text = ""
+    # rotationMax at the problem cap is the whole lowest-mode search. A
+    # shorter rotationMax still returns between translational steps, and
+    # those runs keep the unchanged-overlap stop.
+    bound_by_cap = task == "mode" and int(job["rotation_max"]) >= cap
     previous = Path.cwd()
     try:
         with tempfile.TemporaryDirectory(prefix="tsase-dimer-") as folder:
@@ -350,49 +374,67 @@ def _execute_dimer(job: dict) -> dict:
             mode[~free] = 0.0
             scale = float(np.linalg.norm(mode))
             mode = mode / scale
-            with log.open("w", encoding="utf-8") as handle, redirect_stdout(handle):
-                dimer = dimer_cls(
-                    R0=atoms,
-                    mode=mode,
-                    maxStep=float(job["max_step"]),
-                    dR=float(job["dr"]),
-                    phi_tol=float(job["phi_tol"]),
-                    rotationMax=int(job["rotation_max"]),
-                    ss=False,
-                    noZeroModes=bool(np.all(free)),
-                    rotationOpt=str(job["rotation_opt"]),
-                )
-                stalled = 0
-                previous_overlap = None
-                while counter.calls < cap:
-                    before = counter.calls
-                    if task == "mode":
-                        dimer.get_forces()
-                        current = np.asarray(dimer.N, dtype=np.float64)
-                        piece = current[: positions.shape[0]][free].reshape(-1)
-                        scale = float(np.linalg.norm(piece))
-                        target = np.asarray(job["reference"], dtype=np.float64)
-                        if scale > 1e-14:
-                            overlap = abs(float(np.dot(piece / scale, target / np.linalg.norm(target))))
-                        if overlap >= float(job["overlap"]):
-                            break
-                        if previous_overlap is not None and abs(overlap - previous_overlap) < 1e-6:
-                            stalled += 1
+            try:
+                with log.open("w", encoding="utf-8") as handle, redirect_stdout(handle):
+                    dimer = dimer_cls(
+                        R0=atoms,
+                        mode=mode,
+                        maxStep=float(job["max_step"]),
+                        dR=float(job["dr"]),
+                        phi_tol=float(job["phi_tol"]),
+                        rotationMax=int(job["rotation_max"]),
+                        ss=False,
+                        noZeroModes=bool(np.all(free)),
+                        rotationOpt=str(job["rotation_opt"]),
+                    )
+                    if bound_by_cap:
+                        original_update = dimer.update_general_forces
+                        n_atoms = positions.shape[0]
+                        reference = job["reference"]
+                        target = float(job["overlap"])
+
+                        def update_general_forces(Ri, original=original_update):
+                            if int(dimer.forceCalls) >= 1:
+                                found = _mode_overlap(dimer.N, n_atoms, free, reference)
+                                if found >= target:
+                                    raise _OverlapReached(found)
+                            return original(Ri)
+
+                        dimer.update_general_forces = update_general_forces
+                    stalled = 0
+                    previous_overlap = None
+                    while counter.calls < cap:
+                        before = counter.calls
+                        if task == "mode":
+                            try:
+                                dimer.get_forces()
+                            except _OverlapReached as hit:
+                                overlap = hit.overlap
+                                break
+                            overlap = _mode_overlap(dimer.N, positions.shape[0], free, job["reference"])
+                            if overlap >= float(job["overlap"]):
+                                break
+                            if not bound_by_cap:
+                                if previous_overlap is not None and abs(overlap - previous_overlap) < 1e-6:
+                                    stalled += 1
+                                else:
+                                    stalled = 0
+                                previous_overlap = overlap
+                                if stalled >= 3:
+                                    break
                         else:
-                            stalled = 0
-                        previous_overlap = overlap
-                        if stalled >= 3:
+                            dimer.step()
+                            coords = atoms.get_positions()
+                            coords[~free] = positions[~free]
+                            atoms.set_positions(coords)
+                            forces = np.asarray(atoms.get_forces(), dtype=np.float64)
+                            if float(np.linalg.norm(forces[free])) <= float(job["force_norm"]) and float(getattr(dimer, "curvature", 1.0)) < 0.0:
+                                break
+                        if counter.calls == before:
                             break
-                    else:
-                        dimer.step()
-                        coords = atoms.get_positions()
-                        coords[~free] = positions[~free]
-                        atoms.set_positions(coords)
-                        forces = np.asarray(atoms.get_forces(), dtype=np.float64)
-                        if float(np.linalg.norm(forces[free])) <= float(job["force_norm"]) and float(getattr(dimer, "curvature", 1.0)) < 0.0:
-                            break
-                    if counter.calls == before:
-                        break
+            finally:
+                if log.is_file():
+                    log_text = log.read_text(encoding="utf-8", errors="replace")
             point = np.asarray(atoms.get_positions(), dtype=np.float64)
             point[~free] = positions[~free]
             atoms.set_positions(point)
@@ -410,6 +452,9 @@ def _execute_dimer(job: dict) -> dict:
     if task == "mode":
         record = judge_mode(job["name"], int(counter.calls), cap, overlap, float(job["overlap"]), error)
         record["seed"] = "0"
+        if not record["success"]:
+            tail = [line.strip() for line in log_text.splitlines() if line.strip()]
+            record["stop_log"] = tail[-12:]
         return record
     prefix: list[str] = []
     if error:
@@ -592,13 +637,23 @@ def _run_points(root, problem, template, settings, output: Path, workers: int, e
         )
     else:
         jobs = [_dimer_job(start, settings, template) for start in starts]
-        rotation = str((template.get("tsase") or {}).get("rotation_opt", "cg"))
-        comment = (
-            "# counter harness. One force call is one ASE calculate inside the solid-state dimer.\n"
-            f"# rotationOpt is {rotation}. Other SSDimer constructor arguments stay at the library default.\n"
-            "# TSASE forceCalls is not this count.\n"
-            "# A mode success is the problem overlap. A saddle success is Hessian index 1."
-        )
+        section = dict(template.get("tsase") or {})
+        rotation = str(section.get("rotation_opt", "cg"))
+        rotation_max = section.get("rotation_max")
+        if settings["task"] == "mode" and rotation_max is not None and int(rotation_max) >= int(settings["cap"]):
+            comment = (
+                "# counter harness. One force call is one ASE calculate inside the solid-state dimer.\n"
+                f"# rotationOpt is {rotation}. rotationMax is the {int(settings['cap'])}-call cap.\n"
+                "# maxStep, dR, and phi_tol stay at the SSDimer constructor defaults.\n"
+                "# The rotation stops at overlap 0.99 or that cap. TSASE forceCalls is not this count."
+            )
+        else:
+            comment = (
+                "# counter harness. One force call is one ASE calculate inside the solid-state dimer.\n"
+                f"# rotationOpt is {rotation}. Other SSDimer constructor arguments stay at the library default.\n"
+                "# TSASE forceCalls is not this count.\n"
+                "# A mode success is the problem overlap. A saddle success is Hessian index 1."
+            )
     records = run_jobs(jobs, executor, workers)
     parameters = {
         "potential": settings["potential"],

@@ -187,26 +187,26 @@
   ],
   "profile": {
     "area_log10": {
-      "eon-client/low-lj38-dimer-cg 3.5.0 campaign 4d8b34b": 0.9632959861247398,
+      "eon-client/low-lj38-dimer-cg 3.5.0 campaign 4d8b34b": 0.9617908361464198,
       "eon-client/low-lj38-dimer-lbfgs 3.5.0 campaign 4d8b34b": 0.9828629358428986,
       "eon-client/low-lj38-lanczos 3.5.0 campaign 4d8b34b": 1.0039350355393772,
-      "eon-svn/low-lj38-dimer-cg r2549 campaign r2549": 0.9632959861247398,
+      "eon-svn/low-lj38-dimer-cg r2549 campaign r2549": 0.9617908361464198,
       "eon-svn/low-lj38-dimer-lbfgs r2549 campaign r2549": 0.9828629358428986,
       "eon-svn/low-lj38-lanczos-ljcut r2549 campaign r2549": 1.0039350355393772,
-      "partn/mode-lj38 1.1.0 default campaign 9b75351": 0.893306512132864,
-      "pysisyphus/lanczos-lj38 0.1.dev1 default campaign a4ce10d": 0.833100513000068,
+      "partn/mode-lj38 1.1.0 default campaign 9b75351": 0.8918013621545442,
+      "pysisyphus/lanczos-lj38 0.1.dev1 default campaign a4ce10d": 0.8315953630217481,
       "rgsaddle/mode-dimer 0.2.2 default campaign, asv c0db2b8": 0.9422238864282612,
-      "rgsaddle/mode-dimer-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.7947191885529103,
+      "rgsaddle/mode-dimer-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.7917088885962705,
       "rgsaddle/mode-lanczos 0.2.2 default campaign, asv c0db2b8": 1.038553485040735,
-      "rgsaddle/mode-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.880512737317145,
-      "sella-0.1.1/lj38-loweig 0.1.1 archive campaign, asv 0.1.1": 1.1732644081003667,
-      "tsase/mode-lj38 1.0 default campaign 98aac60": 0.15804074772359014,
-      "tsase/mode-lj38-bfgs 1.0 default campaign 98aac60": 0.19190662223578803
+      "rgsaddle/mode-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.8775024373605051,
+      "sella-0.1.1/lj38-loweig 0.1.1 archive campaign, asv 0.1.1": 1.1702541081437268,
+      "tsase/mode-lj38 1.0 default campaign 98aac60": 0.15503044776695035,
+      "tsase/mode-lj38-bfgs 98aac60b default campaign 98aac60": 0.7450492392683534
     },
     "rho": {
       "eon-client/low-lj38-dimer-cg 3.5.0 campaign 4d8b34b": [
         0.0,
-        0.715,
+        0.71,
         0.985,
         1.0,
         1.0
@@ -227,7 +227,7 @@
       ],
       "eon-svn/low-lj38-dimer-cg r2549 campaign r2549": [
         0.0,
-        0.715,
+        0.71,
         0.985,
         1.0,
         1.0
@@ -248,13 +248,13 @@
       ],
       "partn/mode-lj38 1.1.0 default campaign 9b75351": [
         0.105,
-        0.745,
+        0.74,
         0.865,
         0.87,
         0.87
       ],
       "pysisyphus/lanczos-lj38 0.1.dev1 default campaign a4ce10d": [
-        0.115,
+        0.105,
         0.715,
         0.795,
         0.8,
@@ -269,9 +269,9 @@
       ],
       "rgsaddle/mode-dimer-tuned 0.2.2 tuned campaign, asv c0db2b8": [
         0.0,
-        0.265,
+        0.26,
         0.885,
-        0.99,
+        0.985,
         1.0
       ],
       "rgsaddle/mode-lanczos 0.2.2 default campaign, asv c0db2b8": [
@@ -283,13 +283,13 @@
       ],
       "rgsaddle/mode-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": [
         0.0,
-        0.465,
+        0.455,
         0.96,
         1.0,
         1.0
       ],
       "sella-0.1.1/lj38-loweig 0.1.1 archive campaign, asv 0.1.1": [
-        0.795,
+        0.775,
         1.0,
         1.0,
         1.0,
@@ -297,17 +297,17 @@
       ],
       "tsase/mode-lj38 1.0 default campaign 98aac60": [
         0.0,
-        0.005,
-        0.04,
+        0.0,
+        0.035,
         0.19,
         0.58
       ],
-      "tsase/mode-lj38-bfgs 1.0 default campaign 98aac60": [
-        0.005,
-        0.01,
-        0.075,
-        0.25,
-        0.6
+      "tsase/mode-lj38-bfgs 98aac60b default campaign 98aac60": [
+        0.05,
+        0.5,
+        0.72,
+        0.805,
+        0.85
       ]
     },
     "solved": {
@@ -325,7 +325,7 @@
       "rgsaddle/mode-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 1.0,
       "sella-0.1.1/lj38-loweig 0.1.1 archive campaign, asv 0.1.1": 1.0,
       "tsase/mode-lj38 1.0 default campaign 98aac60": 0.89,
-      "tsase/mode-lj38-bfgs 1.0 default campaign 98aac60": 0.895
+      "tsase/mode-lj38-bfgs 98aac60b default campaign 98aac60": 0.925
     },
     "taus": [
       1.0,
@@ -835,46 +835,46 @@
       "asv_commit": "",
       "call_unit": "total",
       "cap": 10000,
-      "code": "tsase",
-      "code_version": "1.0",
+      "code": "TSASE",
+      "code_version": "98aac60b",
       "commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218",
       "comparable": true,
       "counter": "harness",
       "current": true,
-      "entry": "tsase-1.0-lowest-eigenvector-lj38--tsase-mode-lj38-bfgs",
+      "entry": "tsase-98aac60b-lowest-eigenvector-lj38--tsase-mode-lj38-bfgs",
       "failures": {
-        "cap": 0,
+        "cap": 15,
         "crash": 0,
-        "divergence": 21,
+        "divergence": 0,
         "wrong_stationary": 0
       },
       "full_n": 200,
       "history": false,
-      "max_calls": 1615.0,
-      "mean_calls": 254.14,
+      "max_calls": 10000.0,
+      "mean_calls": 831.695,
       "mean_per_image": null,
-      "median": 223.0,
-      "median_calls": 220.0,
-      "median_high": 245.5,
-      "median_low": 205.0,
+      "median": 30.0,
+      "median_calls": 30.0,
+      "median_high": 35.5,
+      "median_low": 28.0,
       "median_per_image": null,
-      "min_calls": 16.0,
+      "min_calls": 12.0,
       "n": 200,
-      "nfailed": 21,
+      "nfailed": 15,
       "note": "starts.jsonl",
-      "par2_mean": 2310.55,
+      "par2_mean": 1581.695,
       "partial": false,
       "partial_reason": "",
-      "path": "results/campaign/tsase-1.0-lowest-eigenvector-lj38--tsase-mode-lj38-bfgs.dat",
+      "path": "results/campaign/tsase-98aac60b-lowest-eigenvector-lj38--tsase-mode-lj38-bfgs.dat",
       "problem": "lowest-eigenvector/lj38",
       "registry_match": true,
       "scored": true,
       "source": "campaign",
-      "success_rate": 0.895,
+      "success_rate": 0.925,
       "template": "tsase/mode-lj38-bfgs",
       "tuning": "default",
-      "wilson_high": 0.9302925120731899,
-      "wilson_low": 0.8448196800887696
+      "wilson_high": 0.954025082815618,
+      "wilson_low": 0.8799563897637055
     },
     {
       "asv_commit": "",

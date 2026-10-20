@@ -1,4 +1,4 @@
-"""Stock TSASE 1.0 BFGS dimer stays ranked beside the archived LJ38 row."""
+"""Stock TSASE BFGS dimer stays ranked beside the archived LJ38 row."""
 
 import json
 from pathlib import Path
@@ -6,7 +6,7 @@ from pathlib import Path
 from optbench.reproduction import holdback, load_ledger, row_id
 
 ROOT = Path(__file__).resolve().parents[1]
-CAMPAIGN = ROOT / "results" / "campaign" / "tsase-1.0-lowest-eigenvector-lj38--tsase-mode-lj38-bfgs.dat"
+CAMPAIGN = ROOT / "results" / "campaign" / "tsase-98aac60b-lowest-eigenvector-lj38--tsase-mode-lj38-bfgs.dat"
 
 
 def _fields(path: Path) -> dict[str, str]:
@@ -28,43 +28,57 @@ def test_stock_bfgs_dimer_stays_ranked_beside_the_archive():
     assert row["in_paper"] is True
     assert row["archived_setup"]["code_version"] == "408"
     note = row["note"]
+    assert "TSASE 98aac60b" in note
     assert "98aac60b5d9905e81ee4e6b8c385f169258d0218" in note
+    assert "498dfc6b" not in note
     assert "tsase/mode-lj38-bfgs" in note
     assert "rotationOpt bfgs" in note
-    assert "235" in note
-    assert "nfailed 21" in note
+    assert "rotationMax is the 10000-call cap" in note
+    assert "88" in note
+    assert "nfailed 15" in note
     fields = _fields(CAMPAIGN)
-    assert fields["code"] == "tsase"
-    assert fields["code_version"] == "1.0"
+    assert fields["code"] == "TSASE"
+    assert fields["code_version"] == "98aac60b"
     assert fields["commit"] == "98aac60b5d9905e81ee4e6b8c385f169258d0218"
     assert fields["template"] == "tsase/mode-lj38-bfgs"
     assert fields["algorithm"] == "SSDimer BFGS"
     assert fields["problem"] == "lowest-eigenvector/lj38"
     assert fields["tuning"] == "default"
     assert fields["counter"] == "harness"
-    assert fields["force_calls"] == "235"
-    assert fields["force_calls_min"] == "16"
-    assert fields["force_calls_max"] == "1615"
-    assert fields["nfailed"] == "21"
+    assert fields["force_calls"] == "88"
+    assert fields["force_calls_min"] == "12"
+    assert fields["force_calls_max"] == "1929"
+    assert fields["nfailed"] == "15"
     assert fields["n"] == "200"
     assert fields.get("ranked", "").lower() != "false"
     assert "rotationOpt is bfgs" in CAMPAIGN.read_text(encoding="utf-8")
+    assert "rotationMax is the 10000-call cap" in CAMPAIGN.read_text(encoding="utf-8")
     document = json.loads(CAMPAIGN.with_suffix(".v2.json").read_text(encoding="utf-8"))
+    assert document["provenance"]["code"] == "TSASE"
+    assert document["provenance"]["code_version"] == "98aac60b"
     assert document["provenance"]["parameters"]["rotation_opt"] == "bfgs"
     assert document["provenance"]["parameters"]["max_step"] == 0.2
     assert document["provenance"]["parameters"]["dr"] == 0.001
     assert document["provenance"]["parameters"]["phi_tol"] == 5.0
-    assert document["provenance"]["parameters"]["rotation_max"] == 4
+    assert document["provenance"]["parameters"]["rotation_max"] == 10000
     assert document["score"]["cap"] == 10000
+    assert document["score"]["n_cap"] == 15
+    assert document["score"]["n_divergence"] == 0
     starts = [
         json.loads(line)
         for line in CAMPAIGN.with_suffix(".starts.jsonl").read_text(encoding="utf-8").splitlines()
         if line.strip()
     ]
     assert len(starts) == 200
-    assert sum(1 for item in starts if not item["success"]) == 21
+    failed = [item for item in starts if not item["success"]]
+    assert len(failed) == 15
+    assert {item["failure"] for item in failed} == {"cap"}
+    assert all(item["stop_log"] for item in failed)
+    assert all(any(line.startswith("alpha=") for line in item["stop_log"]) for item in failed)
+    assert all(any(line.startswith("curvature:") for line in item["stop_log"]) for item in failed)
     assert not (ROOT / "results" / "diagnostic" / "tsase-408-lj38-dimer-bfgs.dat").exists()
     assert not (ROOT / "results" / "campaign" / "tsase-408-lj38-dimer-bfgs.dat").exists()
+    assert not (ROOT / "results" / "campaign" / "tsase-1.0-lowest-eigenvector-lj38--tsase-mode-lj38-bfgs.dat").exists()
     held = holdback(ROOT)
     assert ("lowest-eigenvector/lj38", "tsase/mode-lj38-bfgs") not in held.templates
     assert CAMPAIGN.relative_to(ROOT).as_posix() not in held.paths
