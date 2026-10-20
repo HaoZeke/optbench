@@ -112,7 +112,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
-    "repro/mlopt-c2h4-pyamff-adam10-7-fcoeff0-1": "pending",
+    "repro/mlopt-c2h4-pyamff-adam10-7-fcoeff0-1": "0522d721fa768ce0a21f1c4da0dd603f001fdffc",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
