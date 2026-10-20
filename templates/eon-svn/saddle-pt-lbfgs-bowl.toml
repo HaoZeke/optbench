@@ -6,9 +6,9 @@ code_version = "(SVN r2549)"
 commit = "r2549"
 algorithm = "Dimer"
 reducer = "harness"
-failure_cap = 5064
+failure_cap = 100000000
 tuning = "default"
-note = """Stock EON SVN r2549, unpatched, Fortran potentials linked. Label EON (SVN r2549). This is not the git code eOn. Pt-island displacement and stop, with every unset key left at the r2549 default. Dimer rotations_max 5, converged_angle 20, translation L-BFGS, max_energy 5 eV, confine_positive and bowl_breakout on, confine_positive_min_active 20. bowl_active_atoms stays the default 20. improved stays the default true. The dimer rotation optimizer stays the default CG. Displacement is atoms 0-6, radius 3.3, magnitude 0.1. Stop at 27 good saddles below 1.5 eV. The force-call budget is the problem file scoring.v2 note: climb budget 1000, 64 calls of overshoot, and two endpoint budgets of 2000, which is 5064. The initial minimization is outside that count. The harness counts ext_pot calls on r2549 Morse::force (cutoff 9.5, shifted, minimum image). No parameter was moved."""
+note = """Stock EON SVN r2549, unpatched, Fortran potentials linked. Label EON (SVN r2549). This is not the git code eOn. Pt-island displacement and stop, with every unset key left at the r2549 default. Dimer rotations_max 5, converged_angle 20, translation L-BFGS, max_energy 5 eV, confine_positive and bowl_breakout on, confine_positive_min_active 20. bowl_active_atoms stays the default 20. improved stays the default true. The dimer rotation optimizer stays the default CG. Displacement is atoms 0-6, radius 3.3, magnitude 0.1. Stop at 27 good saddles below 1.5 eV. search_budget in the problem file is one displacement search: climb 1000, 64 calls of overshoot, and two endpoint budgets of 2000, which is 5064. That number is not the budget of the 27-saddle campaign. failure_cap is the harness ceiling for one seed so the campaign can record 27 good saddles. The ranked cost is the campaign total of harness force calls through the search that records the 27th good saddle below 1.5 eV. The initial minimization is outside the per-search count. The harness counts ext_pot calls on r2549 Morse::force (cutoff 9.5, shifted, minimum image). No parameter was moved."""
 
 pass_limit = 2000
 

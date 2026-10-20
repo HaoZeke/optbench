@@ -82,31 +82,37 @@ def test_rendered_pages_use_the_board_rank():
     assert 'data-board-table="summary"' in minimization
     assert f'data-par2="{cells["par2_mean"]}"' in minimization
     assert "<details" in minimization
-    assert "Legacy 2014 archive" in minimization
+    assert "2014 archive" in minimization
+    assert "Legacy 2014 archive" not in minimization
     assert "eon-cg" in minimization
     assert ">eon-cg<" in minimization
-    assert "pele-fire · not reproduced" in minimization
+    assert "pele-fire · outside the archive tolerance" in minimization
+    assert "not reproduced" not in minimization
     assert "par2-wilson-bootstrap" in minimization
     assert "Present runs. Fewer force calls first." not in minimization
     neb_page = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "neb.org").read_text(encoding="utf-8")
     assert neb["template"] in neb_page
     assert "not yet on the harness counter" in neb_page
-    assert "Legacy 2014 scores. Fewer calls is to the left." in neb_page
+    assert "2014 archive scores. Fewer calls is to the left." in neb_page
+    assert "Legacy 2014 scores" not in neb_page
     tsopt = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "tsopt.org").read_text(encoding="utf-8")
-    assert "Sella 0.1.1 legacy" in tsopt
+    assert "Sella 0.1.1" in tsopt
+    assert "Sella 0.1.1 legacy" not in tsopt
     assert "2.6.0 legacy" not in tsopt
     ts_ranked = [row["template"] for row in document["problems"]["tsopt/LJ38"]["ranked"]]
     assert "sella/lj38-ts-default" in ts_ranked
     assert "sella/lj38-ts-tuned" not in ts_ranked
-    assert "rgsaddle/dimer-rotskip-tuned" in ts_ranked
+    assert "rgsaddle/dimer-rotskip-tuned" not in ts_ranked
     assert "tsopt-LJ38-profile.svg" in tsopt
     saddle = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "saddle-search.org").read_text(encoding="utf-8")
     assert 'data-board-table="ranked" data-problem="saddle-search/pt-island"' in saddle
-    assert "rgsaddle/saddle-dimer-rotskip-tuned" in saddle
-    assert 'data-field="par2_mean">10127.1<' in saddle
+    assert "rgsaddle/saddle-dimer-rotskip-tuned" not in saddle
+    assert 'data-field="par2_mean">10127.1<' not in saddle
+    assert 'data-field="par2_mean">989115<' in saddle
+    assert 'data-field="template">rgsaddle/saddle-dimer-rotskip<' in saddle
     assert "No full harness row." not in saddle
     assert "eon-3.5.0-saddle-pt-dimer" in saddle
-    assert "not yet on the harness counter" in saddle
+    assert "per-search sample; the ranked cost is the campaign total through the 27th good saddle" in saddle
     assert "Per-search cost" not in saddle
     assert "noise/rgmin-dogleg-s0" in minimization
     assert 'data-field="par2_mean">81.881<' in minimization

@@ -10,15 +10,18 @@ The ranked cost of a band method is the harness force-call total across
 every image. The per-image mean divides that same total by the problem's
 image count, and every code on the problem uses that divisor.
 
-A row whose start count is below the problem's full set is partial.
-An asv result that covers one start is a smoke run and is partial.
+A row whose start count is below the problem's full set stays off the
+ranked table. An asv result that covers one start stays off it too.
 The full set is the problem file's sample, or the Morse archive when
 that file gives no sample count. It is not the largest campaign file.
 A result that sets ``ranked false`` stays off the ranked table.
-A template that does not reproduce the 2014 archive stays off it too.
-Partial rows stay in the output. A campaign file and an asv track for
+A template that missed the 2014 archive tolerance stays off it too.
+Those rows stay in the output. A campaign file and an asv track for
 the same run are one row. Only the newest full version of a template
 is ranked. Older full versions stay in the history list.
+A row whose template or entry name ends with ``-tuned`` is left off
+the board. On a problem whose ranked cost is a campaign total, a
+per-search sample stays off the ranked table.
 """
 
 from __future__ import annotations
@@ -301,6 +304,160 @@ def _cap_of(problem: dict | None, template: dict | None, fields: dict[str, str])
     return None
 
 
+_CAMPAIGN_FIELDS = ("unique_saddles", "fraction_connected", "total_searches")
+_PER_SEARCH_REASON = (
+    "per-search sample; the ranked cost is the campaign total through the 27th good saddle"
+)
+
+
+def _search_budget(problem: dict | None) -> int | None:
+    version2 = ((problem or {}).get("scoring") or {}).get("v2") or {}
+    raw = version2.get("search_budget")
+    if raw in (None, ""):
+        return None
+    return int(raw)
+
+
+def _goal_count(problem: dict | None) -> int | None:
+    raw = ((problem or {}).get("goal") or {}).get("connected_saddles")
+    if raw in (None, ""):
+        return None
+    return int(raw)
+
+
+def _campaign_unit(problem: dict | None) -> bool:
+    return _search_budget(problem) is not None and _goal_count(problem) is not None
+
+
+def _token(parts: list[str], name: str) -> str | None:
+    if name not in parts:
+        return None
+    index = parts.index(name)
+    if index + 1 >= len(parts):
+        return None
+    return parts[index + 1]
+
+
+def _campaign_repetitions(text: str, goal: int) -> list[dict]:
+    """One record per repetition. The cost is that repetition's force-call total."""
+    rows = []
+    for line in text.splitlines():
+        if not line.startswith("# rep "):
+            continue
+        parts = line.split()
+        if "harness_force_calls" in parts:
+            raw_calls = _token(parts, "harness_force_calls")
+        elif "force_calls" in parts:
+            raw_calls = _token(parts, "force_calls")
+        else:
+            continue
+        if raw_calls is None:
+            continue
+        calls = float(raw_calls)
+        qualifying = _token(parts, "qualifying")
+        connected = _token(parts, "connected")
+        success_bit = _token(parts, "success")
+        if qualifying is not None:
+            success = float(qualifying) >= goal
+        elif connected is not None:
+            success = float(connected) >= goal
+        elif success_bit is not None:
+            success = float(success_bit) >= 1.0
+        else:
+            success = False
+        record = {
+            "force_calls": calls,
+            "success": success,
+            "start": _token(parts, "seed") or parts[2],
+        }
+        if not success:
+            record["failure"] = "divergence"
+        rows.append(record)
+    return rows
+
+
+def _raw_starts(group: dict[str, Path]) -> list[dict]:
+    for kind in ("starts_jsonl", "starts"):
+        path = group.get(kind)
+        if path is None:
+            continue
+        try:
+            return _json_lines(path)
+        except (json.JSONDecodeError, OSError):
+            return []
+    return []
+
+
+def _campaign_from_starts(raw: list[dict], goal: int) -> list[dict] | None:
+    """Starts that each record one campaign, with a qualifying-saddle count."""
+    if not raw or any(item.get("qualifying") is None for item in raw):
+        return None
+    records = []
+    for item in raw:
+        calls = item.get("force_calls", item.get("raw"))
+        if calls is None:
+            return None
+        try:
+            calls = float(calls)
+        except (TypeError, ValueError):
+            return None
+        success = float(item["qualifying"]) >= goal
+        record = {
+            "force_calls": calls,
+            "success": success,
+            "start": item.get("seed") or item.get("start") or item.get("geometry"),
+        }
+        if not success:
+            failure = item.get("failure")
+            record["failure"] = failure if failure in FAILURES else "divergence"
+        records.append(record)
+    return records
+
+
+def _select_records(
+    group: dict[str, Path],
+    problem: dict | None,
+    template: dict | None,
+    fields: dict[str, str],
+    text: str,
+    images: int | None = None,
+) -> tuple[list[dict], str, int | None, str, str]:
+    """Records, source, cap, charge, and an off-rank reason.
+
+    ``search_budget`` is the budget of one displacement search. The ranked
+    cost on that problem is the campaign total through the goal. A file
+    that stores one campaign per seed, or a repetition total plus a
+    per-search log, is scored as that total. The per-search budget is
+    not applied to the total.
+    """
+    goal = _goal_count(problem)
+    budget = _search_budget(problem)
+    cap = _cap_of(problem, template, fields)
+    if goal is None or budget is None:
+        records, source = _load_group_records(group, cap, _force_tol(problem, template), images)
+        return records, source, cap, "par", ""
+    raw = _raw_starts(group)
+    campaigns = _campaign_from_starts(raw, goal)
+    if campaigns:
+        return campaigns, "campaign total", None, "spent", ""
+    reps = _campaign_repetitions(text, goal) if text else []
+    if reps and str(fields.get("goal") or "").strip() and (not raw or len(raw) > len(reps)):
+        return reps, "campaign total", None, "spent", ""
+    if cap is not None and cap <= budget:
+        cap = None
+    records, source = _load_group_records(group, cap, _force_tol(problem, template), images)
+    return records, source, cap, "par", _PER_SEARCH_REASON
+
+
+def _is_tuned_row(row: dict) -> bool:
+    for key in ("template", "entry"):
+        name = str(row.get(key) or "")
+        leaf = name.rsplit("/", 1)[-1]
+        if leaf.endswith("-tuned"):
+            return True
+    return False
+
+
 def _force_tol(problem: dict | None, template: dict | None) -> float | None:
     convergence = (problem or {}).get("convergence") or {}
     for key in ("force_norm", "gradient_norm"):
@@ -519,8 +676,49 @@ def _blank_row(**values) -> dict:
     return row
 
 
-def _score_records(records: list[dict], cap: int | None) -> dict:
-    summary = score_v2(records, cap)
+def _rep_metric_means(text: str) -> dict[str, float]:
+    """Means of campaign metrics stored on ``# rep`` lines."""
+    buckets: dict[str, list[float]] = {name: [] for name in _CAMPAIGN_FIELDS}
+    for line in text.splitlines():
+        if not line.startswith("# rep "):
+            continue
+        parts = line.split()
+        for name in _CAMPAIGN_FIELDS:
+            token = _token(parts, name)
+            if token is None:
+                continue
+            try:
+                value = float(token)
+            except ValueError:
+                continue
+            if math.isfinite(value):
+                buckets[name].append(value)
+    return {name: sum(values) / len(values) for name, values in buckets.items() if values}
+
+
+def _copy_campaign_metrics(row: dict, fields: dict[str, str], text: str = "") -> None:
+    """Campaign means travel with the row. They are not a pass or fail test.
+
+    A header field wins. A file that records the mean only on its
+    ``# rep`` line still fills the same columns.
+    """
+    means = _rep_metric_means(text) if text else {}
+    for name in _CAMPAIGN_FIELDS:
+        raw = str(fields.get(name) or "").strip()
+        value = None
+        if raw:
+            try:
+                value = float(raw)
+            except ValueError:
+                value = None
+        if value is None or not math.isfinite(value):
+            value = means.get(name)
+        if value is not None and math.isfinite(value):
+            row[name] = value
+
+
+def _score_records(records: list[dict], cap: int | None, charge: str = "par") -> dict:
+    summary = score_v2(records, cap, charge=charge)
     calls = [float(record["force_calls"]) for record in records]
     ordered = sorted(calls)
     mid = len(ordered) // 2
@@ -582,9 +780,9 @@ def _mark_partial(row: dict, full_n: int | None) -> None:
     if _source_parts(row) == {"asv"} and n <= 1:
         row["partial"] = True
         if full_n:
-            row["partial_reason"] = f"smoke run; scored {n} of {full_n} starts"
+            row["partial_reason"] = f"one-start run; scored {n} of {full_n} starts"
         else:
-            row["partial_reason"] = "smoke run; one start"
+            row["partial_reason"] = "one-start run"
         return
     if full_n is not None and n < full_n:
         row["partial"] = True
@@ -718,11 +916,12 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
             or ""
         )
         problem = problems.get(problem_id)
-        cap = _cap_of(problem, template, fields)
-        force_tol = _force_tol(problem, template)
         images = _image_count(problem, template, fields)
+        dat_text = group["dat"].read_text(encoding="utf-8") if "dat" in group else ""
         try:
-            records, record_source = _load_group_records(group, cap, force_tol, images)
+            records, record_source, cap, charge, off_reason = _select_records(
+                group, problem, template, fields, dat_text, images
+            )
         except (json.JSONDecodeError, OSError, ValueError) as exc:
             unparsed.append(
                 _blank_row(
@@ -768,21 +967,24 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
                 reason = f"{reason}; potential {named}"
             row["_declared_partial"] = reason
         elif str(fields.get("partial") or "").lower() == "true":
-            reason = "result file sets partial true"
+            reason = "result file keeps this row off the rank"
             if named:
                 reason = f"{reason}; potential {named}"
             row["_declared_partial"] = reason
+        elif off_reason:
+            row["_declared_partial"] = off_reason
         if not records:
             row["note"] = "no per-start record"
             unparsed.append(row)
             continue
         try:
-            summary = _score_records(records, cap)
+            summary = _score_records(records, cap, charge)
         except (ValueError, RuntimeError) as exc:
             row["note"] = str(exc)
             unparsed.append(row)
             continue
         _apply_summary(row, summary, records)
+        _copy_campaign_metrics(row, fields, dat_text)
         rows.append(row)
     return rows, unparsed
 
@@ -948,6 +1150,8 @@ def _asv_rows(root: Path, problems: dict[str, dict], templates: dict[str, dict])
                 unparsed.append(row)
                 continue
             _apply_summary(row, summary, records)
+            if _campaign_unit(problem) and int(row.get("n") or 0) > 1:
+                row["_declared_partial"] = _PER_SEARCH_REASON
             rows.append(row)
     return rows, unparsed, unmapped
 
@@ -982,7 +1186,7 @@ def _apply_reproduction_hold(row: dict, held) -> None:
     n = int(row.get("n") or 0)
     if _source_parts(row) == {"asv"} and n <= 1:
         return
-    reason = "does not reproduce the 2014 archive"
+    reason = "missed the 2014 archive tolerance"
     if not row.get("scored"):
         note = str(row.get("note") or "")
         if reason not in note:
@@ -1000,7 +1204,9 @@ def build_board(root: Path) -> dict:
     campaign, unparsed = _campaign_rows(root, problems, templates)
     asv_rows, asv_unparsed, unmapped = _asv_rows(root, problems, templates)
     unparsed.extend(asv_unparsed)
-    rows = _dedup(campaign + asv_rows)
+    rows = [row for row in _dedup(campaign + asv_rows) if not _is_tuned_row(row)]
+    unparsed = [row for row in unparsed if not _is_tuned_row(row)]
+    unmapped = [row for row in unmapped if not _is_tuned_row(row)]
     from .reproduction import holdback
 
     held = holdback(root)
@@ -1024,7 +1230,7 @@ def build_board(root: Path) -> dict:
                     row["partial_reason"] = row["_declared_partial"]
                 elif _source_parts(row) == {"asv"} and int(row.get("n") or 0) <= 1:
                     row["partial"] = True
-                    row["partial_reason"] = "smoke run; one start"
+                    row["partial_reason"] = "one-start run"
                 else:
                     row["partial"] = True
                     row["partial_reason"] = "no problem file states the full set"
@@ -1298,54 +1504,63 @@ def _show_per_image(problem: dict) -> bool:
     return any(row.get("mean_per_image") is not None for row in rows)
 
 
+def _show_campaign_metrics(problem: dict) -> bool:
+    rows = list(problem.get("ranked") or []) + list(problem.get("history") or [])
+    return any(row.get(name) is not None for row in rows for name in _CAMPAIGN_FIELDS)
+
+
 def _headers(problem: dict) -> list[str]:
     headers = [
         "Template",
         "Version",
         "Commit",
         "Source",
-        "Current",
         "PAR-2",
         "Success",
-        "Wilson low",
-        "Wilson high",
+        "Success bounds",
         "Median calls",
         "Mean calls",
     ]
     if _show_per_image(problem):
         headers.append("Per-image mean")
+    if _show_campaign_metrics(problem):
+        headers.extend(["Unique saddles", "Fraction connected", "Total searches"])
     headers.extend(["Failures", "n"])
     return headers
 
 
-def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
+def ranked_cells(row: dict, per_image: bool, campaign_metrics: bool = False) -> list[tuple[str, str]]:
     """Visible ranked-table cells, in column order.
 
     The site check compares these strings with the rendered table.
     """
+    low = _format_number(row.get("wilson_low"))
+    high = _format_number(row.get("wilson_high"))
     cells = [
         ("template", str(row.get("template") or row.get("entry") or "")),
-        ("version", f"{row.get('code') or ''} {row.get('code_version') or ''}"),
+        ("version", f"{row.get('code') or ''} {row.get('code_version') or ''}".strip()),
         ("commit", str(row.get("commit") or "")[:12]),
         ("source", str(row.get("source") or "")),
-        ("current", "yes" if row.get("current") else "no"),
         ("par2_mean", _format_number(row.get("par2_mean"))),
         ("success_rate", _format_number(row.get("success_rate"))),
-        ("wilson_low", _format_number(row.get("wilson_low"))),
-        ("wilson_high", _format_number(row.get("wilson_high"))),
+        ("success_bounds", f"{low}–{high}"),
         ("median_calls", _format_number(row.get("median_calls"))),
         ("mean_calls", _format_number(row.get("mean_calls"))),
     ]
     if per_image:
         cells.append(("mean_per_image", _format_number(row.get("mean_per_image"))))
+    if campaign_metrics:
+        for name in _CAMPAIGN_FIELDS:
+            cells.append((name, _format_number(row.get(name))))
     cells.append(("failures", _failure_text(row.get("failures") or {})))
     cells.append(("n", str(row.get("n"))))
     return cells
 
 
-def _row_cells(row: dict, per_image: bool) -> str:
+def _row_cells(row: dict, per_image: bool, campaign_metrics: bool = False) -> str:
     return "".join(
-        f'<td data-field="{field}">{_cell(value)}</td>' for field, value in ranked_cells(row, per_image)
+        f'<td data-field="{field}">{_cell(value)}</td>'
+        for field, value in ranked_cells(row, per_image, campaign_metrics)
     )
 
 
@@ -1383,7 +1598,7 @@ def gap_paragraph(problem: dict, unparsed: list[dict] | None = None) -> str:
     if other:
         bits.append(f"{_joined_names(other)} {kind} are off the ranked table")
     if problem.get("partial"):
-        bits.append("Partial rows stay off the ranked table")
+        bits.append("Short runs stay off the ranked table")
     if unparsed:
         bits.append("Files with no per-start harness record stay off the ranked table")
     if not bits and not problem.get("ranked"):
@@ -1395,7 +1610,7 @@ def gap_paragraph(problem: dict, unparsed: list[dict] | None = None) -> str:
 
 def _reason_text(row: dict) -> str:
     if row.get("partial"):
-        return str(row.get("partial_reason") or "partial")
+        return str(row.get("partial_reason") or "short run")
     if _off_harness(row):
         return "not yet on the harness counter"
     return f"counter {row.get('counter') or 'unset'}"
@@ -1527,6 +1742,7 @@ def summary_table(problems: list[dict], codes: list[str], link) -> str:
 def headline_table(problem: dict) -> str:
     """One ranked row: the best full harness run."""
     per_image = _show_per_image(problem)
+    campaign_metrics = _show_campaign_metrics(problem)
     headers = _headers(problem)
     lines = [
         '<div class="bench-scroll">',
@@ -1535,7 +1751,7 @@ def headline_table(problem: dict) -> str:
     ]
     ranked = list(problem.get("ranked") or [])
     if ranked:
-        lines.append(f"<tr>{_row_cells(ranked[0], per_image)}</tr>")
+        lines.append(f"<tr>{_row_cells(ranked[0], per_image, campaign_metrics)}</tr>")
     else:
         lines.append(f'<tr><td colspan="{len(headers)}">No full harness row.</td></tr>')
     lines.append("</tbody></table></div>")
@@ -1575,13 +1791,16 @@ def _table(
     heading: str = "h2",
 ) -> str:
     per_image = _show_per_image(problem)
+    campaign_metrics = _show_campaign_metrics(problem)
     headers = _headers(problem)
     caption = (
         "Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. "
-        "Wilson bounds are the 95% interval on the success rate."
+        "Success bounds are the low and high bounds on the success rate."
     )
     if per_image:
         caption += " Per-image mean divides that total by the problem's moving images, the same way for every code."
+    if campaign_metrics:
+        caption += " Unique saddles, fraction connected, and total searches are campaign means."
     ident = section_id or _slug(problem["id"])
     ranked = list(problem.get("ranked") or [])
     lines = [
@@ -1593,7 +1812,7 @@ def _table(
     lines.append(
         "<p>Ranked by the v2 PAR-2 mean of the harness total. "
         "Only the newest full version of a template is in this table. "
-        "A partial row, including a one-start asv smoke run, is not.</p>"
+        "A short run, including a one-start asv run, is not.</p>"
     )
     lead = gap_paragraph(problem, unparsed)
     if lead:
@@ -1613,7 +1832,7 @@ def _table(
     lines.append(f"<caption>{caption}</caption>")
     lines.append("<thead><tr>" + "".join(f"<th>{_cell(header)}</th>" for header in headers) + "</tr></thead><tbody>")
     for row in ranked:
-        lines.append(f"<tr>{_row_cells(row, per_image)}</tr>")
+        lines.append(f"<tr>{_row_cells(row, per_image, campaign_metrics)}</tr>")
     if not ranked:
         lines.append(f'<tr><td colspan="{len(headers)}">No full harness row.</td></tr>')
     lines.append("</tbody></table></div>")
@@ -1629,7 +1848,7 @@ def _table(
             )
         lines.append("</ul>")
     if problem.get("partial"):
-        lines.append("<h3>Partial</h3><ul>")
+        lines.append("<h3>Short runs</h3><ul>")
         for row in problem["partial"]:
             lines.append(
                 "<li>"

@@ -35,13 +35,19 @@ Beside that mean the record carries:
 - the median and the interquartile range of the same penalised costs
 - a percentile bootstrap 95% interval for the median and for the interquartile range, with 2000 resamples and seed `20261015`
 
-The Wilson interval uses `z = 1.959963984540054`. For the published 1000/1000 successes the interval is 0.996173 to 1. For the published 975/1000 successes it is 0.963355 to 0.983010. For 904/1000 it is 0.884165 to 0.920743. Those three intervals use only `k` and `n` from `results/sota-lj38.json`. They do not need the per-start vector.
+The success-rate interval uses `z = 1.959963984540054`. For the published 1000/1000 successes the interval is 0.996173 to 1. For the published 975/1000 successes it is 0.963355 to 0.983010. For 904/1000 it is 0.884165 to 0.920743. Those three intervals use only `k` and `n` from `results/sota-lj38.json`. They do not need the per-start vector.
 
 ## Pt islands
 
-The number in `results/campaign/eon-3.5.0-saddle-pt-dimer.dat` is the mean of ten campaign totals, 4982564.3 force calls. That total grows with the number of searches. The v2 cost of a repetition is `force_calls / total_searches` from that repetition's comment line. The dimer file's ten ratios have mean 263.590450 and median 263.284133, both to 6 decimals. The classic file's ten ratios have mean 470.691074 and median 469.759056, both to 6 decimals. The problem file states no per-search cap and both files record `nfailed 0`, so the PAR-2 penalty is not applied to these ten ratios. The median and its bootstrap interval are the summary.
+`problems/saddle-search/pt-island.toml` states two numbers, and they are not the same budget.
 
-The rgsaddle displacement rows are a different sample. Each start is one search. The result file stores the cap, and PAR-2 uses it. Those rows do not replace the ratios above.
+`search_budget` is 5064. That is the budget of one displacement search: climb 1000, 64 calls of overshoot, and two endpoint minimizations of 2000. The initial minimization is outside that count. A search at or above 5064 fails that search, and the campaign continues. 5064 is not the budget of the 27-saddle campaign.
+
+The ranked cost is the harness force-call total from the start through the search that records the 27th good saddle below 1.5 eV. A campaign that never records that saddle is scored by the harness force calls it spent. There is no campaign cap, so that spent total is not doubled.
+
+`results/campaign/eon-3.5.0-saddle-pt-dimer.dat` stores ten campaign totals. Their mean is 4982564.3 force calls. Dividing each total by `total_searches` gives a per-search figure. Those ten ratios have mean 263.590450 and median 263.284133, both to 6 decimals. The classic file's ten ratios have mean 470.691074 and median 469.759056, both to 6 decimals. That per-search figure is not the ranked cost. A result that stores one row per displacement search, and does not store the campaign total through the 27th good saddle, stays off the ranked table.
+
+A file that records one campaign total, sets `goal` to 27, and keeps a longer per-search log is scored as that campaign total. The rgsaddle rotation-skip row is that shape. A row whose template or entry name ends in `-tuned` is left off the board.
 
 ## Tuning and provenance
 
@@ -49,6 +55,6 @@ The rgsaddle displacement rows are a different sample. Each start is one search.
 
 Provenance is the code name, the version, the commit, the parameter object, and the machine. A score without those fields is not a v2 score.
 
-## What stays legacy
+## What the 2014 mean keeps
 
-The 2014 `benchmark.dat` mean stays the half-even mean of starts under the cap. Archive rows remain on the site with a legacy label. They are not recomputed.
+The 2014 `benchmark.dat` mean stays the half-even mean of starts under the cap. Archive rows remain on the site. They are not recomputed.

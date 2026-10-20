@@ -43,11 +43,11 @@ One point uses the Cartesian distance, because centering a single point would re
 
 `score_v2` reduces the starts.
 
-- Successes `k` out of `n` carry a Wilson 95% interval with `z = 1.959963984540054`.
+- Successes `k` out of `n` carry a 95% interval with `z = 1.959963984540054`.
 - A failure costs `2 * cap`. The ranking number is the mean of the penalised costs.
 - The median and the interquartile range are taken on those same penalised costs. A percentile bootstrap of 2000 resamples, seed `20261015`, gives the 95% interval.
 
-If the problem states no cap and every record is a success, `par_applied` is false and the mean is the mean of the recorded costs. That is how the ten Pt-island repetitions are summarised: each cost is `force_calls / total_searches` from the `# rep` line. The legacy `force_calls` value remains the mean of the campaign totals.
+If the problem states no cap and every record is a success, `par_applied` is false and the mean is the mean of the recorded costs. On `saddle-search/pt-island`, `search_budget` 5064 is the budget of one displacement search. The ranked cost is the campaign total of harness force calls through the search that records the 27th good saddle below 1.5 eV. A campaign that never records that saddle is scored by the calls it spent, and that total is not doubled. Dividing a stored campaign total by `total_searches` is a per-search figure, not the ranked cost.
 
 `tuning` is `default` or `tuned`. Provenance is the code, version, commit, parameters, and machine. `collect_provenance` fills the machine from the process when the caller does not pass one.
 
@@ -61,6 +61,6 @@ The bowl is `(x - 1)^2 + 10 (y + 2)^2`. Gradient descent with step `0.05` from `
 
 `uv run optbench score STARTS.jsonl --cap 5000 --output score.json` reduces a per-start file the same way.
 
-## What is not rerun here
+## Recorded samples
 
-The 1000 Lennard-Jones starts, the Pt-island repetitions, and the NEB bands stay as recorded. The site keeps those rows, labels the 2014 archive as legacy, and adds the v2 tables from counts that are already in the files or from the quadratic smoke.
+The 1000 Lennard-Jones starts, the Pt-island repetitions, and the NEB bands stay as recorded. The site keeps those rows, keeps the 2014 archive, and adds the v2 tables from counts that are already in the files or from the quadratic check.

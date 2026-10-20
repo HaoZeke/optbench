@@ -86,6 +86,6 @@ def test_legacy_rows_that_miss_are_marked_in_place():
     oracle = load_oracle(ROOT / "oracle" / "entries.jsonl")
     html = problem_html(problem, oracle)
     assert ">eon-cg<" in html
-    assert "pele-fire · not reproduced" in html
-    assert "outside the archive tolerance" in html
-    assert "eon-cg · not reproduced" not in html
+    assert "pele-fire · outside the archive tolerance" in html
+    assert "not reproduced" not in html
+    assert "eon-cg · outside the archive tolerance" not in html

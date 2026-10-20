@@ -157,12 +157,16 @@ No ranked row: `rgmin`, `eon`, `sella`.
 
 ### `saddle-search/pt-island`
 
-| Rank | Template | Version | Source | Commit | PAR-2 | Mean | Per-image | Median | Min | Max | nfailed | n |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+`search_budget` 5064 is the budget of one displacement search: climb 1000, 64 calls of overshoot, and two endpoint minimizations of 2000. It is not the budget of the 27-saddle campaign. The ranked cost is the harness force-call total through the search that records the 27th good saddle below 1.5 eV. A campaign that never records that saddle is scored by the calls it spent, and that total is not doubled. A per-search sample stays off this table. A row whose name ends in `-tuned` stays off the board.
 
-No ranked row: `rgmin`, `rgsaddle`, `eon`, `ase`, `sella`.
-
-No full harness row.
+| Rank | Template | Version | Source | Commit | PAR-2 | nfailed | n | Success |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | `eon-svn/saddle-pt-lbfgs-bowl` | EON (SVN r2549) | campaign | `r2549` | 989115 | 0 | 9 | 9/9 |
+| 2 | `eon/develop-saddle-pt-lbfgs-bowl` | eOn (develop 500350d9) | campaign | `500350d9fae8` | 3.78934e+06 | 0 | 9 | 9/9 |
+| 3 | `rgsaddle/saddle-dimer-rotskip` | rgsaddle 0.2.2 | campaign | `c0db2b8d333c` | 9.59961e+06 | 1 | 1 | 0/1 |
+| 4 | `rgsaddle/saddle-lanczos` | rgsaddle 0.2.2 | campaign | `c0db2b8d333c` | 1.99668e+07 | 1 | 1 | 0/1 |
+| 5 | `rgsaddle/saddle-dimer-fire` | rgsaddle 0.2.2 | campaign | `c0db2b8d333c` | 2.02205e+07 | 1 | 1 | 0/1 |
+| 6 | `rgsaddle/saddle-dimer-lbfgs` | rgsaddle 0.2.2 | campaign | `c0db2b8d333c` | 2.02431e+07 | 1 | 1 | 0/1 |
 
 ### `tsopt/LJ38`
 

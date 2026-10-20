@@ -1,20 +1,20 @@
-=============
-Current codes
-=============
+=====
+Codes
+=====
 
 
 The table is the registry pin and the ranked harness runs for that code.
 A code with no full run on a problem is listed with the reason.
 The sections each client reads, and the commands that rerun a score, are in the README and on the Run a score page.
 A timestep or a band method in the wrong section is ignored.
-The Sella 0.1.1 rows stay on the 2014 tables and are labelled legacy.
+The Sella 0.1.1 rows stay on the 2014 tables.
 A new score is entered by Rohit Goswami.
 The number is written only after the run finishes under the problem rule.
 
 .. raw:: html
 
-   <section class="bench" id="current-codes">
-   <h2>Current codes</h2>
+   <section class="bench" id="code-registry">
+   <h2>Codes</h2>
    <p>The benchmark contributor is Rohit Goswami. A ranked row is a full harness run. The commit on that row is the commit that produced the score.</p>
    <h3>eOn</h3>
    <div class="bench-scroll"><table>
@@ -102,10 +102,10 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">eon/develop-saddle-pt-lbfgs-bowl</td>
    <td data-field="version">eOn (develop 500350d9)</td>
    <td data-field="commit">500350d9fae8</td>
-   <td data-field="par2_mean">10128</td>
-   <td data-field="mean_calls">5064</td>
-   <td data-field="median_calls">5064</td>
-   <td data-field="failures">crash 0, divergence 0, cap 9, wrong_stationary 0</td>
+   <td data-field="par2_mean">3.78934e+06</td>
+   <td data-field="mean_calls">3.78934e+06</td>
+   <td data-field="median_calls">3.95714e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">9</td>
    </tr>
    <tr data-problem="tsopt/LJ38" data-template="eon-client/ts-lj38-lanczos-improved">
@@ -132,20 +132,20 @@ The number is written only after the run finishes under the problem rule.
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
-   <li>aladatom: partial.</li>
-   <li>LJ38 double-ended saddle: not yet on the harness counter, partial.</li>
-   <li>lj38_2ts_separation: partial.</li>
-   <li>pt-island: not yet on the harness counter, partial.</li>
-   <li>Al: partial.</li>
-   <li>Pt: partial.</li>
-   <li>lj38: partial.</li>
-   <li>Pt-heptamer: not yet on the harness counter, partial.</li>
-   <li>Pt heptamer island: not yet on the harness counter, partial.</li>
-   <li>LJ38: not yet on the harness counter, partial.</li>
-   <li>pt-island: not yet on the harness counter, partial.</li>
+   <li>aladatom: short run.</li>
+   <li>LJ38 double-ended saddle: not yet on the harness counter, short run.</li>
+   <li>lj38_2ts_separation: short run.</li>
+   <li>pt-island: not yet on the harness counter, short run.</li>
+   <li>Al: short run.</li>
+   <li>Pt: short run.</li>
+   <li>lj38: short run.</li>
+   <li>Pt-heptamer: not yet on the harness counter, short run.</li>
+   <li>Pt heptamer island: short run.</li>
+   <li>LJ38: not yet on the harness counter, short run.</li>
+   <li>pt-island: not yet on the harness counter, short run.</li>
    <li>eon-ci-neb: no per-start record.</li>
-   <li>eon-ci-swdneb: no per-start record; does not reproduce the 2014 archive.</li>
-   <li>eon-cg: no per-start record; does not reproduce the 2014 archive.</li>
+   <li>eon-ci-swdneb: no per-start record; missed the 2014 archive tolerance.</li>
+   <li>eon-cg: no per-start record; missed the 2014 archive tolerance.</li>
    <li>eon-fire: no per-start record.</li>
    <li>eon-lbfgs: no per-start record.</li>
    <li>eon-qm: no per-start record.</li>
@@ -156,7 +156,7 @@ The number is written only after the run finishes under the problem rule.
    <li>eon-client/morse-cg: no per-start record.</li>
    <li>eon-client/morse-fire: no per-start record.</li>
    <li>eon-client/morse-lbfgs: no per-start record.</li>
-   <li>eon-client/morse-sd: no per-start record; does not reproduce the 2014 archive.</li>
+   <li>eon-client/morse-sd: no per-start record; missed the 2014 archive tolerance.</li>
    <li>eon-client/qm: no per-start record.</li>
    <li>eon-client/sd-twopoint: no per-start record.</li>
    <li>eon-client/sd: no per-start record.</li>
@@ -265,17 +265,17 @@ The number is written only after the run finishes under the problem rule.
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
-   <li>aladatom: partial.</li>
-   <li>LJ38 double-ended saddle: partial.</li>
-   <li>lj38_2ts_separation: partial.</li>
-   <li>pt-island: partial.</li>
-   <li>Lennard-Jones 38 global minimum: partial.</li>
-   <li>Al: partial.</li>
-   <li>Pt: partial.</li>
-   <li>lj38: partial.</li>
-   <li>Pt heptamer island: partial.</li>
-   <li>LJ38: partial.</li>
-   <li>pt-island: partial.</li>
+   <li>aladatom: short run.</li>
+   <li>LJ38 double-ended saddle: short run.</li>
+   <li>lj38_2ts_separation: short run.</li>
+   <li>pt-island: short run.</li>
+   <li>Lennard-Jones 38 global minimum: short run.</li>
+   <li>Al: short run.</li>
+   <li>Pt: short run.</li>
+   <li>lj38: short run.</li>
+   <li>Pt heptamer island: short run.</li>
+   <li>LJ38: short run.</li>
+   <li>pt-island: short run.</li>
    <li>eon-svn/cg: no per-start record.</li>
    <li>eon-svn/fire: no per-start record.</li>
    <li>eon-svn/lbfgs-m100: no per-start record.</li>
@@ -307,10 +307,10 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">eon-svn/saddle-pt-lbfgs-bowl</td>
    <td data-field="version">EON (SVN r2549)</td>
    <td data-field="commit">r2549</td>
-   <td data-field="par2_mean">10128</td>
-   <td data-field="mean_calls">5064</td>
-   <td data-field="median_calls">5064</td>
-   <td data-field="failures">crash 0, divergence 0, cap 9, wrong_stationary 0</td>
+   <td data-field="par2_mean">989115</td>
+   <td data-field="mean_calls">989115</td>
+   <td data-field="median_calls">1.00485e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">9</td>
    </tr>
    </tbody></table></div>
@@ -431,26 +431,26 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
-   <tr data-problem="saddle-search/pt-island" data-template="rgsaddle/saddle-dimer-rotskip-tuned">
+   <tr data-problem="saddle-search/pt-island" data-template="rgsaddle/saddle-dimer-rotskip">
    <td>Pt heptamer island</td>
-   <td data-field="template">rgsaddle/saddle-dimer-rotskip-tuned</td>
+   <td data-field="template">rgsaddle/saddle-dimer-rotskip</td>
    <td data-field="version">rgsaddle 0.2.2</td>
    <td data-field="commit">c0db2b8d333c</td>
-   <td data-field="par2_mean">10127.1</td>
-   <td data-field="mean_calls">619.017</td>
-   <td data-field="median_calls">550</td>
-   <td data-field="failures">crash 0, divergence 17717, cap 2246, wrong_stationary 35</td>
-   <td data-field="n">20000</td>
+   <td data-field="par2_mean">9.59961e+06</td>
+   <td data-field="mean_calls">9.59961e+06</td>
+   <td data-field="median_calls">9.59961e+06</td>
+   <td data-field="failures">crash 0, divergence 1, cap 0, wrong_stationary 0</td>
+   <td data-field="n">1</td>
    </tr>
-   <tr data-problem="tsopt/LJ38" data-template="rgsaddle/prfo-tuned">
+   <tr data-problem="tsopt/LJ38" data-template="rgsaddle/dimer-rotskip">
    <td>LJ38</td>
-   <td data-field="template">rgsaddle/prfo-tuned</td>
+   <td data-field="template">rgsaddle/dimer-rotskip</td>
    <td data-field="version">rgsaddle 0.2.2</td>
    <td data-field="commit">c0db2b8d333c</td>
-   <td data-field="par2_mean">192.6</td>
-   <td data-field="mean_calls">192.6</td>
-   <td data-field="median_calls">173</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="par2_mean">7803.19</td>
+   <td data-field="mean_calls">2926.82</td>
+   <td data-field="median_calls">856.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 27, wrong_stationary 47</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="tsopt/pt-island" data-template="rgsaddle/pt-dimer-rotskip">
@@ -479,15 +479,15 @@ The number is written only after the run finishes under the problem rule.
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr data-problem="double-ended-saddle-search/lj38" data-template="ase/de-lj38-tuned">
+   <tr data-problem="double-ended-saddle-search/lj38" data-template="ase/de-lj38-default">
    <td>LJ38 double-ended saddle</td>
-   <td data-field="template">ase/de-lj38-tuned</td>
+   <td data-field="template">ase/de-lj38-default</td>
    <td data-field="version">ASE 3.29.0</td>
    <td data-field="commit">f27c0005ae6a</td>
-   <td data-field="par2_mean">3463.64</td>
-   <td data-field="mean_calls">2014.22</td>
+   <td data-field="par2_mean">4912.84</td>
+   <td data-field="mean_calls">2463.82</td>
    <td data-field="median_calls">2501</td>
-   <td data-field="failures">crash 0, divergence 0, cap 29, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 49, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="ase/de-lj38-2ts-default">
@@ -501,26 +501,26 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 51, cap 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/pt-island" data-template="ase/de-pt-island-tuned">
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="ase/de-pt-island-default">
    <td>pt-island</td>
-   <td data-field="template">ase/de-pt-island-tuned</td>
+   <td data-field="template">ase/de-pt-island-default</td>
    <td data-field="version">ASE 3.29.0</td>
    <td data-field="commit">f27c0005ae6a</td>
-   <td data-field="par2_mean">847.678</td>
-   <td data-field="mean_calls">593.864</td>
-   <td data-field="median_calls">374</td>
-   <td data-field="failures">crash 0, divergence 0, cap 5, wrong_stationary 0</td>
+   <td data-field="par2_mean">926.475</td>
+   <td data-field="mean_calls">875.712</td>
+   <td data-field="median_calls">707</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
-   <tr data-problem="minimization/lj38" data-template="ase/lj38-lbfgs-tuned">
+   <tr data-problem="minimization/lj38" data-template="ase/lj38-lbfgs-default">
    <td>Lennard-Jones 38 clusters</td>
-   <td data-field="template">ase/lj38-lbfgs-tuned</td>
+   <td data-field="template">ase/lj38-lbfgs-default</td>
    <td data-field="version">ASE 3.29.0</td>
    <td data-field="commit">f27c0005ae6a</td>
-   <td data-field="par2_mean">395.645</td>
-   <td data-field="mean_calls">375.645</td>
-   <td data-field="median_calls">319</td>
-   <td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 0</td>
+   <td data-field="par2_mean">532.882</td>
+   <td data-field="mean_calls">344.881</td>
+   <td data-field="median_calls">257</td>
+   <td data-field="failures">crash 0, divergence 0, cap 7, wrong_stationary 6</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38-noise" data-template="noise/ase-lbfgs-s0">
@@ -545,26 +545,26 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
-   <tr data-problem="neb/Pt-heptamer" data-template="ase/neb-pt-heptamer-tuned">
+   <tr data-problem="neb/Pt-heptamer" data-template="ase/neb-pt-heptamer-default">
    <td>Pt-heptamer</td>
-   <td data-field="template">ase/neb-pt-heptamer-tuned</td>
+   <td data-field="template">ase/neb-pt-heptamer-default</td>
    <td data-field="version">ASE 3.29.0</td>
    <td data-field="commit">f27c0005ae6a</td>
-   <td data-field="par2_mean">442.615</td>
-   <td data-field="mean_calls">442.615</td>
-   <td data-field="median_calls">450</td>
+   <td data-field="par2_mean">606.923</td>
+   <td data-field="mean_calls">606.923</td>
+   <td data-field="median_calls">618</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
-   <li>LJ38 double-ended saddle: partial.</li>
-   <li>lj38_2ts_separation: partial.</li>
-   <li>pt-island: partial.</li>
-   <li>Lennard-Jones 38 clusters: partial.</li>
-   <li>Morse bulk: partial.</li>
-   <li>Pt-heptamer: partial.</li>
-   <li>Pt heptamer island: partial.</li>
+   <li>LJ38 double-ended saddle: short run.</li>
+   <li>lj38_2ts_separation: short run.</li>
+   <li>pt-island: short run.</li>
+   <li>Lennard-Jones 38 clusters: short run.</li>
+   <li>Morse bulk: short run.</li>
+   <li>Pt-heptamer: short run.</li>
+   <li>Pt heptamer island: short run.</li>
    </ul>
    <h3>Sella</h3>
    <div class="bench-scroll"><table>
@@ -586,36 +586,36 @@ The number is written only after the run finishes under the problem rule.
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr data-problem="double-ended-saddle-search/lj38" data-template="sella/de-lj38-tuned">
+   <tr data-problem="double-ended-saddle-search/lj38" data-template="sella/de-lj38-default">
    <td>LJ38 double-ended saddle</td>
-   <td data-field="template">sella/de-lj38-tuned</td>
+   <td data-field="template">sella/de-lj38-default</td>
    <td data-field="version">Sella 2.6.0</td>
    <td data-field="commit">6cfb60cdb100</td>
-   <td data-field="par2_mean">1753.96</td>
-   <td data-field="mean_calls">1753.96</td>
-   <td data-field="median_calls">2051.5</td>
+   <td data-field="par2_mean">2055.3</td>
+   <td data-field="mean_calls">2055.3</td>
+   <td data-field="median_calls">2047.5</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="sella/de-lj38-2ts-tuned">
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="sella/de-lj38-2ts-default">
    <td>lj38_2ts_separation</td>
-   <td data-field="template">sella/de-lj38-2ts-tuned</td>
+   <td data-field="template">sella/de-lj38-2ts-default</td>
    <td data-field="version">Sella 2.6.0</td>
    <td data-field="commit">6cfb60cdb100</td>
-   <td data-field="par2_mean">30105.9</td>
-   <td data-field="mean_calls">30105.9</td>
-   <td data-field="median_calls">32141</td>
+   <td data-field="par2_mean">31447.3</td>
+   <td data-field="mean_calls">31447.3</td>
+   <td data-field="median_calls">32178</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/pt-island" data-template="sella/de-pt-island-tuned">
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="sella/de-pt-island-default">
    <td>pt-island</td>
-   <td data-field="template">sella/de-pt-island-tuned</td>
+   <td data-field="template">sella/de-pt-island-default</td>
    <td data-field="version">Sella 2.6.0</td>
    <td data-field="commit">6cfb60cdb100</td>
-   <td data-field="par2_mean">615.153</td>
-   <td data-field="mean_calls">615.153</td>
-   <td data-field="median_calls">374</td>
+   <td data-field="par2_mean">921.847</td>
+   <td data-field="mean_calls">921.847</td>
+   <td data-field="median_calls">756</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
@@ -630,14 +630,14 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
-   <tr data-problem="minimization/lj38" data-template="sella/lj38-min-tuned">
+   <tr data-problem="minimization/lj38" data-template="sella/lj38-min-default">
    <td>Lennard-Jones 38 clusters</td>
-   <td data-field="template">sella/lj38-min-tuned</td>
+   <td data-field="template">sella/lj38-min-default</td>
    <td data-field="version">Sella 2.6.0</td>
    <td data-field="commit">6cfb60cdb100</td>
-   <td data-field="par2_mean">253.921</td>
-   <td data-field="mean_calls">253.921</td>
-   <td data-field="median_calls">248</td>
+   <td data-field="par2_mean">710.089</td>
+   <td data-field="mean_calls">710.089</td>
+   <td data-field="median_calls">692.5</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
@@ -663,17 +663,6 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
-   <tr data-problem="saddle-search/pt-island" data-template="sella/pt-island-search-default">
-   <td>Pt heptamer island</td>
-   <td data-field="template">sella/pt-island-search-default</td>
-   <td data-field="version">Sella 2.6.0</td>
-   <td data-field="commit">6cfb60cdb100</td>
-   <td data-field="par2_mean">5201.62</td>
-   <td data-field="mean_calls">247.812</td>
-   <td data-field="median_calls">225</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 4</td>
-   <td data-field="n">16</td>
-   </tr>
    <tr data-problem="tsopt/LJ38" data-template="sella/lj38-ts-default">
    <td>LJ38</td>
    <td data-field="template">sella/lj38-ts-default</td>
@@ -698,14 +687,14 @@ The number is written only after the run finishes under the problem rule.
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
-   <li>LJ38 double-ended saddle: partial.</li>
-   <li>lj38_2ts_separation: partial.</li>
-   <li>pt-island: partial.</li>
-   <li>Lennard-Jones 38 clusters: partial.</li>
-   <li>Morse bulk: partial.</li>
-   <li>Pt heptamer island: partial.</li>
-   <li>LJ38: partial.</li>
-   <li>pt-island: partial.</li>
+   <li>LJ38 double-ended saddle: short run.</li>
+   <li>lj38_2ts_separation: short run.</li>
+   <li>pt-island: short run.</li>
+   <li>Lennard-Jones 38 clusters: short run.</li>
+   <li>Morse bulk: short run.</li>
+   <li>Pt heptamer island: short run.</li>
+   <li>LJ38: short run.</li>
+   <li>pt-island: short run.</li>
    <li>sella-lj38: no per-start record.</li>
    </ul>
    <h3>pARTn</h3>

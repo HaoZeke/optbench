@@ -324,13 +324,18 @@ def score_v2(
     factor: int = PAR_FACTOR,
     resamples: int = BOOTSTRAP_RESAMPLES,
     seed: int = BOOTSTRAP_SEED,
+    charge: str = "par",
 ) -> dict:
-    """PAR-2 mean, Wilson success interval, and bootstrap median of one run.
+    """PAR-2 mean, success bounds, and bootstrap median of one run.
 
     Each record has ``force_calls`` and ``success``. When ``cap`` is
-    ``None`` every record must be a success, and ``par_applied`` is false.
-    That is the Pt-island per-search sample: the problem states no cap.
+    ``None`` and ``charge`` is ``par``, every record must be a success,
+    and ``par_applied`` is false. ``charge`` ``spent`` keeps the force
+    calls of a failed record instead of doubling a cap. That is the
+    campaign total when the problem states no campaign cap.
     """
+    if charge not in {"par", "spent"}:
+        raise ValueError("charge must be par or spent")
     if not records:
         raise ValueError("records is empty")
     successes = 0
@@ -339,7 +344,10 @@ def score_v2(
         success = bool(record["success"])
         if success:
             successes += 1
-        costs.append(penalised_cost(float(record["force_calls"]), success, cap, factor))
+        if charge == "spent":
+            costs.append(float(record["force_calls"]))
+        else:
+            costs.append(penalised_cost(float(record["force_calls"]), success, cap, factor))
     starts = len(records)
     low, high = wilson_interval(successes, starts)
     summary = distribution_summary(costs, resamples=resamples, seed=seed)
@@ -358,8 +366,8 @@ def score_v2(
             "wilson_high": high,
             "par_factor": factor,
             "cap": cap,
-            "par_applied": cap is not None,
-            "par2_mean": summary["mean"] if cap is not None else None,
+            "par_applied": cap is not None and charge == "par",
+            "par2_mean": summary["mean"] if cap is not None or charge == "spent" else None,
             "includes_failures": True,
             "success_only_mean": (sum(finished) / len(finished)) if finished else None,
             **{f"n_{name}": tally[name] for name in FAILURES},

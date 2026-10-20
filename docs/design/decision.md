@@ -15,7 +15,7 @@ These pieces are shared with the designs that were not selected, and they are pa
 - Wilson 95% interval for the success rate, `z = 1.959963984540054`
 - median and interquartile range of the penalised costs, with a percentile bootstrap of 2000 resamples, seed `20261015`
 - Hessian index 1 for a saddle and index 0 for a minimum, plus an energy tolerance and a Kabsch RMSD tolerance
-- Pt-island cost in force calls per search
+- `saddle-search/pt-island` ranks the campaign total of harness force calls through the 27th good saddle below 1.5 eV. 5064 is the budget of one displacement search, not the campaign budget.
 - `tuning` of `default` or `tuned`
 - provenance of code, version, commit, parameters, and machine
 

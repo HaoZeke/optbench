@@ -402,7 +402,8 @@ def test_one_start_asv_grid_is_partial(tmp_path: Path):
     assert len(partial) == 1
     assert partial[0]["n"] == 1
     assert partial[0]["partial"] is True
-    assert "smoke" in partial[0]["partial_reason"]
+    assert "one-start" in partial[0]["partial_reason"]
+    assert "smoke" not in partial[0]["partial_reason"]
     assert "1 of 1000" in partial[0]["partial_reason"]
     ranked = [
         row
@@ -695,7 +696,8 @@ def test_a_one_start_asv_track_stays_out_of_the_ranked_mean(tmp_path: Path):
     assert smoke[0]["n"] == 1
     assert smoke[0]["mean_calls"] == 100
     assert smoke[0]["code_version"] == "0.4.1"
-    assert "smoke" in smoke[0]["partial_reason"]
+    assert "one-start" in smoke[0]["partial_reason"]
+    assert "smoke" not in smoke[0]["partial_reason"]
 
 
 def test_shipped_band_starts_share_one_call_unit():
@@ -775,6 +777,132 @@ def test_shipped_band_starts_share_one_call_unit():
                 assert norm["force_calls"] == float(raw["force_calls"])
             if norm["force_calls"]:
                 assert abs(norm["force_calls"] / norm["per_image"] - images) < 1e-9
+
+
+def test_pt_island_ranks_the_campaign_total_and_drops_tuned_rows(tmp_path: Path):
+    problem = tmp_path / "problems" / "saddle-search" / "island.toml"
+    problem.parent.mkdir(parents=True)
+    problem.write_text(
+        "\n".join(
+            [
+                'id = "saddle-search/island"',
+                'title = "Island"',
+                'suite = "saddle-search"',
+                'problem = "island"',
+                'contract = "stated"',
+                "",
+                "[goal]",
+                "connected_saddles = 27",
+                "",
+                "[convergence]",
+                "force_norm = 0.001",
+                "",
+                "[metrics]",
+                'required = ["force_calls"]',
+                "",
+                "[scoring.v2]",
+                "search_budget = 5064",
+                'cost = "campaign total through the 27th good saddle"',
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    for template_id in ("toy/bowl", "toy/bowl-tuned", "toy/skip"):
+        path = tmp_path / "templates" / f"{template_id}.toml"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(
+            "\n".join(
+                [
+                    f'id = "{template_id}"',
+                    'engine = "toy"',
+                    'problem = "saddle-search/island"',
+                    'code = "toy"',
+                    'code_version = "1.0"',
+                    f'commit = "{PIN}"',
+                    'tuning = "default"',
+                    "failure_cap = 5064",
+                    "",
+                ]
+            ),
+            encoding="utf-8",
+        )
+    _registry(tmp_path)
+    _dat(tmp_path, "bowl", PIN, template="toy/bowl", problem="saddle-search/island")
+    _starts(
+        tmp_path,
+        "bowl",
+        [
+            {
+                "force_calls": 1000,
+                "success": False,
+                "failure": "cap",
+                "qualifying": 27,
+                "counter": "harness",
+                "seed": "1",
+            },
+            {
+                "force_calls": 3000,
+                "success": False,
+                "failure": "cap",
+                "qualifying": 27,
+                "counter": "harness",
+                "seed": "2",
+            },
+        ],
+    )
+    _dat(tmp_path, "tuned", PIN, template="toy/bowl-tuned", problem="saddle-search/island")
+    _starts(
+        tmp_path,
+        "tuned",
+        [{"force_calls": 10, "success": True, "qualifying": 27, "counter": "harness", "seed": "1"}],
+    )
+    skip = tmp_path / "results" / "campaign" / "skip.dat"
+    skip.write_text(
+        "\n".join(
+            [
+                "# rep 1 force_calls 9000000 unique_saddles 10 fraction_connected 0 total_searches 20 connected 0 seed 1",
+                "force_calls 9000000",
+                "code toy",
+                "code_version 1.0",
+                f"commit {PIN}",
+                "template toy/skip",
+                "problem saddle-search/island",
+                "counter harness",
+                "tuning default",
+                "goal 27",
+                "cap 5064",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    _starts(tmp_path, "skip", [_row(100, False, str(index)) for index in range(5)])
+
+    document = build_board(tmp_path)
+    problem_rows = document["problems"]["saddle-search/island"]
+    ranked = {row["template"]: row for row in problem_rows["ranked"]}
+    assert set(ranked) == {"toy/bowl", "toy/skip"}
+    assert ranked["toy/bowl"]["par2_mean"] == 2000
+    assert ranked["toy/bowl"]["n"] == 2
+    assert ranked["toy/bowl"]["nfailed"] == 0
+    assert ranked["toy/bowl"]["success_rate"] == 1
+    assert ranked["toy/bowl"]["cap"] is None
+    assert ranked["toy/skip"]["par2_mean"] == 9000000
+    assert ranked["toy/skip"]["n"] == 1
+    assert ranked["toy/skip"]["nfailed"] == 1
+    assert ranked["toy/skip"]["failures"]["divergence"] == 1
+    assert ranked["toy/skip"]["success_rate"] == 0
+    assert ranked["toy/skip"]["unique_saddles"] == 10
+    assert ranked["toy/skip"]["fraction_connected"] == 0
+    assert ranked["toy/skip"]["total_searches"] == 20
+    names = [
+        str(row.get("template") or row.get("entry") or "")
+        for bucket in ("ranked", "history", "partial", "not_comparable")
+        for row in problem_rows[bucket]
+    ]
+    names.extend(str(row.get("template") or row.get("entry") or "") for row in document["unparsed"])
+    assert "toy/bowl-tuned" not in names
 
 
 def test_the_current_ase_benchmark_records_the_band_total():

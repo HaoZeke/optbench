@@ -37,7 +37,7 @@
       "note": "starts",
       "par2_mean": 304314.80821917806,
       "partial": true,
-      "partial_reason": "result file sets partial true; potential unshifted lj/cut, epsilon 1, sigma 1, cutoff 40",
+      "partial_reason": "result file keeps this row off the rank; potential unshifted lj/cut, epsilon 1, sigma 1, cutoff 40",
       "path": "results/campaign/eon-svn-bh-lj38.dat",
       "problem": "globalopt/lj38",
       "registry_match": true,
