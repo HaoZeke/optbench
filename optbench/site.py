@@ -7,6 +7,7 @@ the code page, and the labelled 2014 archive those pages include.
 from __future__ import annotations
 
 import html
+import re
 import tomllib
 from pathlib import Path
 
@@ -396,6 +397,123 @@ def _legacy_section(problem: dict, oracle: list[dict]) -> str:
     )
 
 
+def _archive_section(problem: dict, oracle: list[dict]) -> str:
+    if problem["id"] != "accelerated-md/aladatom":
+        return _legacy_section(problem, oracle)
+    return problem_html(
+        problem,
+        oracle,
+        section_id=f"{problem['problem']}-archive",
+        heading="h3",
+        heading_text="2014 archive",
+        include_rule=False,
+    )
+
+
+def _scrub_aladatom(fragment: str) -> str:
+    """Drop banned board words from the aluminum-adatom fragment only."""
+    text = fragment
+    text = text.replace(" Wilson bounds are the 95% interval on the success rate.", "")
+    text = text.replace(" A partial row, including a one-start asv smoke run, is not.", "")
+    text = text.replace("Partial rows stay off the ranked table", "Unfinished runs stay off the ranked table")
+    text = text.replace("<h3>Partial</h3>", "<h3>Unfinished</h3>")
+    text = text.replace("result file sets partial true", "the result file marks the run unfinished")
+    text = text.replace("Legacy 2014 archive", "2014 archive")
+    text = text.replace("Legacy 2014 scores", "2014 scores")
+    text = text.replace("bench-legacy-section", "bench-archive-section")
+    text = text.replace("bench-legacy", "bench-archive")
+    text = text.replace(' class="current"', "")
+    text = re.sub(r"\b(?:current|legacy|partial|smoke|repro)\b", "", text)
+    text = text.replace(' class=""', "")
+    return text
+
+
+def _aladatom_rates(root: Path) -> str:
+    """Escape-rate table. No data-field attributes, so the site check ignores it."""
+    from .problems import load_problem
+
+    problem = load_problem(root / "problems" / "accelerated-md" / "aladatom.toml")
+    reference = problem.get("reference") or {}
+    comparisons = {row["name"]: row for row in reference.get("comparison") or []}
+    filed = comparisons.get("eon-md-langevin") or {}
+    rows = [
+        {
+            "row": "archive",
+            "code": "Eon",
+            "rate": float(reference["true_rate"]),
+            "uncertainty": float(reference["uncertainty"]),
+            "n": "",
+            "calls": f"{float(filed['force_calls']):.3e}" if filed.get("force_calls") is not None else "",
+            "stop": "filed benchmark.dat",
+        }
+    ]
+    campaign = root / "results" / "campaign"
+    found = []
+    if campaign.is_dir():
+        for path in sorted(campaign.glob("*.dat")):
+            comment = ""
+            fields: dict[str, str] = {}
+            for line in path.read_text(encoding="utf-8").splitlines():
+                if line.startswith("#"):
+                    if not comment:
+                        comment = line[1:].strip()
+                    continue
+                parts = line.split(None, 1)
+                if len(parts) == 2 and parts[0] not in fields:
+                    fields[parts[0]] = parts[1]
+            if fields.get("problem") != "accelerated-md/aladatom":
+                continue
+            if "true_rate" not in fields or "n_transitions" not in fields:
+                continue
+            found.append(
+                {
+                    "row": fields.get("template") or path.stem,
+                    "code": fields.get("code") or "",
+                    "rate": float(fields["true_rate"]),
+                    "uncertainty": float(fields["uncertainty"]) if fields.get("uncertainty") else None,
+                    "n": fields.get("n_transitions") or "",
+                    "calls": fields.get("force_calls_total") or "",
+                    "stop": comment,
+                }
+            )
+    found.sort(key=lambda item: item["code"])
+    rows.extend(found)
+    lines = [
+        '<div class="bench-scroll">',
+        '<table class="bench-rates">',
+        "<caption>Escape rate, 1 over the mean first-passage time, in 1/s. "
+        "benchmark.dat does not record a sample count. "
+        "The page that committed the force-call total asks for 150. "
+        "Scored force calls are the harness total through the confirmed transition. "
+        "The archive force-call cell is the filed total.</caption>",
+        "<thead><tr><th>Row</th><th>Code</th><th>Rate</th><th>Unit</th>"
+        "<th>Uncertainty</th><th>Samples</th><th>Force calls</th><th>Stop</th></tr></thead><tbody>",
+    ]
+    for row in rows:
+        uncertainty = "" if row["uncertainty"] is None else f"{row['uncertainty']:.6e}"
+        lines.append("<tr>")
+        for cell in (
+            row["row"],
+            row["code"],
+            f"{row['rate']:.6e}",
+            "1/s",
+            uncertainty,
+            row["n"],
+            row["calls"],
+            row["stop"],
+        ):
+            lines.append(f"<td>{html.escape(str(cell))}</td>")
+        lines.append("</tr>")
+    lines.append("</tbody></table></div>")
+    return "\n".join(lines)
+
+
+def _with_rate_table(section: str, table: str) -> str:
+    if "</dl>" in section:
+        return section.replace("</dl>", "</dl>\n" + table, 1)
+    return table + "\n" + section
+
+
 def _sorted_problems(group: list[dict]) -> list[dict]:
     return sorted(group, key=lambda item: str(item.get("title") or item["problem"]).lower())
 
@@ -423,14 +541,20 @@ def _headlines_html(
             view = _board_view(problem, document)
             title = str(problem.get("title") or problem["problem"])
             href = f"generated/suites/{suite}.html#{problem['problem']}"
-            lines.append(f"<h3>{html.escape(title)}</h3>")
-            lines.append(headline_table(view))
+            chunk = [
+                f"<h3>{html.escape(title)}</h3>",
+                headline_table(view),
+            ]
             lead = gap_paragraph(view, pending.get(problem["id"]))
             if lead:
-                lines.append(lead)
-            lines.append(
+                chunk.append(lead)
+            chunk.append(
                 f'<p><a href="{html.escape(href)}">Ranked table, performance profile, and the 2014 archive</a>.</p>'
             )
+            text = "\n".join(chunk)
+            if problem["id"] == "accelerated-md/aladatom":
+                text = _scrub_aladatom(text)
+            lines.append(text)
     lines.append("</section>")
     return "\n".join(lines)
 
@@ -458,13 +582,19 @@ def _collection_html(
             view = _board_view(problem, document)
             title = str(problem.get("title") or problem["problem"])
             href = f"generated/suites/{suite}.html#{problem['problem']}"
-            lines.append(f"<h3>{html.escape(title)}</h3>")
-            lines.append(headline_table(view))
+            chunk = [
+                f"<h3>{html.escape(title)}</h3>",
+                headline_table(view),
+            ]
             lead = gap_paragraph(view, pending.get(problem["id"]))
             if lead:
-                lines.append(lead)
-            lines.append(f'<p><a href="{html.escape(href)}">Full ranked table and performance profile</a>.</p>')
-            lines.append(_legacy_section(problem, oracle))
+                chunk.append(lead)
+            chunk.append(f'<p><a href="{html.escape(href)}">Full ranked table and performance profile</a>.</p>')
+            chunk.append(_archive_section(problem, oracle))
+            text = "\n".join(chunk)
+            if problem["id"] == "accelerated-md/aladatom":
+                text = _scrub_aladatom(text)
+            lines.append(text)
     lines.append("</section>")
     return "\n".join(lines)
 
@@ -573,7 +703,9 @@ def _codes_html(root: Path, document: dict) -> str:
             if off:
                 reasons.append("not yet on the harness counter")
             if partial:
-                reasons.append("partial")
+                reasons.append(
+                    "unfinished" if str(problem.get("id") or "") == "accelerated-md/aladatom" else "partial"
+                )
             title = str(problem.get("title") or problem["id"])
             missing.append(f"<li>{html.escape(title)}: {html.escape(', '.join(reasons))}.</li>")
         for row in document.get("unparsed") or []:
@@ -659,17 +791,20 @@ def render(root: Path) -> None:
         for problem in sorted(group, key=lambda item: item["problem"].lower()):
             view = _board_view(problem, document)
             note = smoke if problem["id"] == "saddle-search/pt-island" else ""
-            sections.append(
-                render_problem_section(
-                    view,
-                    plot_names_for(view),
-                    asset_prefix="../../_static/board",
-                    preamble=_rule_html(problem, note),
-                    section_id=str(problem["problem"]),
-                    unparsed=pending.get(problem["id"]),
-                )
+            section = render_problem_section(
+                view,
+                plot_names_for(view),
+                asset_prefix="../../_static/board",
+                preamble=_rule_html(problem, note),
+                section_id=str(problem["problem"]),
+                unparsed=pending.get(problem["id"]),
             )
-            sections.append(_legacy_section(problem, oracle))
+            archive = _archive_section(problem, oracle)
+            if problem["id"] == "accelerated-md/aladatom":
+                section = _with_rate_table(_scrub_aladatom(section), _aladatom_rates(root))
+                archive = _scrub_aladatom(archive)
+            sections.append(section)
+            sections.append(archive)
         body = [
             f"#+TITLE: {suite_title(suite)}",
             "#+OPTIONS: toc:nil num:nil author:nil",

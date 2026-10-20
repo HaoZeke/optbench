@@ -7,11 +7,13 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>LAMMPS</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>optking</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>EON (SVN r2549)</th><th>eOn (develop 80e94f88)</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>LAMMPS</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>optking</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="double-ended-saddle-search/lj38">
    <th scope="row"><a href="#lj38">LJ38 double-ended saddle</a></th>
    <td data-code="eOn" data-template="eon-client/de-lj38-lanczos-improved" data-par2="259.46"><span class="bench-score">259.46</span><a href="#lj38-templates">eon-client/de-lj38-lanczos-improved</a></td>
    <td data-code="Eon svn" data-template="eon-svn/de-lj38-lanczos-improved" data-par2="235.2"><span class="bench-score">235.2</span><a href="#lj38-templates">eon-svn/de-lj38-lanczos-improved</a></td>
+   <td data-code="EON (SVN r2549)">—</td>
+   <td data-code="eOn (develop 80e94f88)">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="853.56"><span class="bench-score">853.56</span><a href="#lj38-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
    <td data-code="geodesic" data-template="geodesic/ci-neb-lbfgs" data-par2="1208.42"><span class="bench-score">1208.42</span><a href="#lj38-templates">geodesic/ci-neb-lbfgs</a></td>
@@ -36,6 +38,8 @@
    <th scope="row"><a href="#lj38_2ts_separation">lj38_2ts_separation</a></th>
    <td data-code="eOn" data-template="eon-client/de-2ts-lanczos-improved" data-par2="520.333"><span class="bench-score">520.333</span><a href="#lj38_2ts_separation-templates">eon-client/de-2ts-lanczos-improved</a></td>
    <td data-code="Eon svn" data-template="eon-svn/de-2ts-lanczos-improved" data-par2="502.784"><span class="bench-score">502.784</span><a href="#lj38_2ts_separation-templates">eon-svn/de-2ts-lanczos-improved</a></td>
+   <td data-code="EON (SVN r2549)">—</td>
+   <td data-code="eOn (develop 80e94f88)">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="8024.43"><span class="bench-score">8024.43</span><a href="#lj38_2ts_separation-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
    <td data-code="geodesic" data-template="geodesic/ci-neb-lbfgs" data-par2="16807.4"><span class="bench-score">16807.4</span><a href="#lj38_2ts_separation-templates">geodesic/ci-neb-lbfgs</a></td>
@@ -60,6 +64,8 @@
    <th scope="row"><a href="#pt-island">pt-island</a></th>
    <td data-code="eOn" data-template="eon/develop-de-pt-oci" data-par2="3080.19"><span class="bench-score">3080.19</span><a href="#pt-island-templates">eon/develop-de-pt-oci</a></td>
    <td data-code="Eon svn" data-template="eon-svn/de-pt-lanczos-improved" data-par2="180.644"><span class="bench-score">180.644</span><a href="#pt-island-templates">eon-svn/de-pt-lanczos-improved</a></td>
+   <td data-code="EON (SVN r2549)">—</td>
+   <td data-code="eOn (develop 80e94f88)">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="422.136"><span class="bench-score">422.136</span><a href="#pt-island-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
    <td data-code="geodesic" data-template="geodesic/ase-de-pt-tuned" data-par2="595.983"><span class="bench-score">595.983</span><a href="#pt-island-templates">geodesic/ase-de-pt-tuned</a></td>

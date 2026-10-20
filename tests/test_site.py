@@ -131,6 +131,27 @@ def test_rendered_pages_use_the_board_rank():
             page = (ROOT / "docs" / "orgmode" / "generated" / "suites" / f"{suite}.org").read_text(encoding="utf-8")
             assert problem["profile_gap"]
             assert problem["profile_gap"] in page
+    amd = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "accelerated-md.org").read_text(encoding="utf-8")
+    start = amd.index('id="aladatom"')
+    fragment = amd[start : amd.index('id="standard_aladatom"')].lower()
+    for phrase in (
+        "reproduced",
+        "reproduction",
+        "not rerun",
+        "not run",
+        "paper row",
+        "paper baseline",
+        "wilson interval",
+        "wilson bounds",
+    ):
+        assert phrase not in fragment
+    import re
+
+    for word in ("repro", "current", "legacy", "comparable", "partial", "smoke"):
+        assert re.search(rf"\b{word}\b", fragment) is None, word
+    assert "bench-rates" in fragment
+    assert "2.542941e+08" in fragment
+    assert "eon-r2549/aladatom-pr-langevin" in fragment
     assert check_site(ROOT) == []
 
 

@@ -7,11 +7,13 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>LAMMPS</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>optking</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>EON (SVN r2549)</th><th>eOn (develop 80e94f88)</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>LAMMPS</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>optking</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="accelerated-md/aladatom">
-   <th scope="row"><a href="#aladatom">Al adatom on Al(100) at 250 K</a></th>
+   <th scope="row"><a href="#aladatom">Al adatom on Al(100) at 185 K</a></th>
    <td data-code="eOn">—</td>
    <td data-code="Eon svn">—</td>
+   <td data-code="EON (SVN r2549)" data-template="eon-r2549/aladatom-pr-langevin" data-par2="829272"><span class="bench-score">829272</span><a href="#aladatom-templates">eon-r2549/aladatom-pr-langevin</a></td>
+   <td data-code="eOn (develop 80e94f88)" data-template="eon-develop/aladatom-pr-langevin" data-par2="891081"><span class="bench-score">891081</span><a href="#aladatom-templates">eon-develop/aladatom-pr-langevin</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="geodesic">—</td>
@@ -36,6 +38,8 @@
    <th scope="row"><a href="#standard_aladatom">Al adatom on Al(100) at 150 K</a></th>
    <td data-code="eOn">—</td>
    <td data-code="Eon svn">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
+   <td data-code="eOn (develop 80e94f88)">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="geodesic">—</td>
@@ -57,43 +61,81 @@
    <td data-code="tsase">—</td>
    </tr>
    </tbody></table></div></section><section class="bench" id="aladatom" data-problem="accelerated-md/aladatom">
-   <h2>Al adatom on Al(100) at 250 K</h2>
+   <h2>Al adatom on Al(100) at 185 K</h2>
    <dl class="bench-rule">
    <dt>Potential</dt><dd>eam_al (Voter-Chen aluminum)</dd>
-   <dt>Temperature</dt><dd>250 K</dd>
+   <dt>Temperature</dt><dd>185 K</dd>
    <dt>Reference rate</dt><dd>2.54294e+08 per second</dd>
    <dt>Products</dt><dd>5000</dd>
    <dt>Repetitions</dt><dd>1</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
-   <dt>Note</dt><dd>Aluminum adatom on Al(100). The reactant is the 151-atom legacy con, and the potential is the Voter-Chen EAM built into eOn as eam_al. The reference escape rate is the 250 K parallel-replica row. One repetition is one AKMC catalogue. The published method sample is 5000 products, and that count turns the rate into simulated time.</dd>
+   <dt>Note</dt><dd>Aluminum adatom on Al(100). The reactant is the 151-atom con file, and the potential is the Voter-Chen EAM built into eOn as eam_al. benchmark.dat records thermostat langevin_0.001 and algorithm parallel replica. The rate in that file is 1 over the mean first-passage time. The page added with the file requires the Langevin thermostat, Verlet, and a friction coefficient of 0.001 1/fs. It does not state a temperature or a sample count. The page that committed the force-call total 1.436e+09 asks for 150 sample escape rates at 185 K. The time step is 1 fs. A transition is the first minimized geometry that differs from the reactant. The catalogue probabilities and the AKMC template stay at 250 K. One repetition is one AKMC catalogue. The method sample is 5000 products, and that count turns the rate into simulated time.</dd>
    </dl>
-   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">eOn rows are not yet on the harness counter. Partial rows stay off the ranked table.</p>
+   <div class="bench-scroll">
+   <table class="bench-rates">
+   <caption>Escape rate, 1 over the mean first-passage time, in 1/s. benchmark.dat does not record a sample count. The page that committed the force-call total asks for 150. Scored force calls are the harness total through the confirmed transition. The archive force-call cell is the filed total.</caption>
+   <thead><tr><th>Row</th><th>Code</th><th>Rate</th><th>Unit</th><th>Uncertainty</th><th>Samples</th><th>Force calls</th><th>Stop</th></tr></thead><tbody>
+   <tr>
+   <td>archive</td>
+   <td>Eon</td>
+   <td>2.542941e+08</td>
+   <td>1/s</td>
+   <td>1.785425e+06</td>
+   <td></td>
+   <td>1.436e+09</td>
+   <td>filed benchmark.dat</td>
+   </tr>
+   <tr>
+   <td>eon-r2549/aladatom-pr-langevin</td>
+   <td>EON (SVN r2549)</td>
+   <td>1.267009e+09</td>
+   <td>1/s</td>
+   <td>9.562560e+07</td>
+   <td>150</td>
+   <td>124390765</td>
+   <td>transition confirmed: the product was minimized and it differs from the reactant</td>
+   </tr>
+   <tr>
+   <td>eon-develop/aladatom-pr-langevin</td>
+   <td>eOn (develop 80e94f88)</td>
+   <td>1.179001e+09</td>
+   <td>1/s</td>
+   <td>8.103471e+07</td>
+   <td>150</td>
+   <td>133662185</td>
+   <td>transition confirmed: the product was minimized and it differs from the reactant</td>
+   </tr>
+   </tbody></table></div>
+   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table.</p>
+   <p class="bench-gaps">eOn rows are not yet on the harness counter. Unfinished runs stay off the ranked table.</p>
+   <figure class="bench-plot"><a href="../../_static/board/accelerated-md-aladatom-profile.svg"><picture><source srcset="../../_static/board/accelerated-md-aladatom-profile.webp" type="image/webp"><img src="../../_static/board/accelerated-md-aladatom-profile.png" alt="Dolan-More profile for accelerated-md/aladatom" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="../../_static/board/accelerated-md-aladatom-cost.svg"><picture><source srcset="../../_static/board/accelerated-md-aladatom-cost.webp" type="image/webp"><img src="../../_static/board/accelerated-md-aladatom-cost.png" alt="Cost versus success for accelerated-md/aladatom" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="aladatom-templates">
-   <summary>All templates (0 ranked)</summary>
+   <summary>All templates (2 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="accelerated-md/aladatom">
-   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
+   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="11">No full harness row.</td></tr>
+   <tr><td data-field="template">eon-r2549/aladatom-pr-langevin</td><td data-field="version">EON (SVN r2549) r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="par2_mean">829272</td><td data-field="success_rate">1</td><td data-field="wilson">0.97503–1</td><td data-field="median_calls">557591</td><td data-field="mean_calls">829272</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">150</td></tr>
+   <tr><td data-field="template">eon-develop/aladatom-pr-langevin</td><td data-field="version">eOn (develop 80e94f88) 3.6.0</td><td data-field="commit">80e94f88b54e</td><td data-field="source">campaign</td><td data-field="par2_mean">891081</td><td data-field="success_rate">1</td><td data-field="wilson">0.97503–1</td><td data-field="median_calls">690078</td><td data-field="mean_calls">891081</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">150</td></tr>
    </tbody></table></div>
-   <h3>Partial</h3><ul>
-   <li>eon-client/amd-hyper eOn campaign n=1, result file sets partial true.</li>
-   <li>eon-client/amd-prd eOn campaign n=1, result file sets partial true.</li>
-   <li>eon-svn/amd-hyper Eon svn campaign n=1, result file sets partial true.</li>
-   <li>eon-svn/amd-prd Eon svn campaign n=1, result file sets partial true.</li>
+   <h3>Unfinished</h3><ul>
+   <li>eon-client/amd-hyper eOn campaign n=1, the result file marks the run unfinished.</li>
+   <li>eon-client/amd-prd eOn campaign n=1, the result file marks the run unfinished.</li>
+   <li>eon-svn/amd-hyper Eon svn campaign n=1, the result file marks the run unfinished.</li>
+   <li>eon-svn/amd-prd Eon svn campaign n=1, the result file marks the run unfinished.</li>
    </ul>
    <h3>Not a harness score</h3><ul>
    <li>eon/aladatom-akmc eOn n=1, not yet on the harness counter.</li>
    </ul>
    </details>
-   </section><section class="bench bench-legacy-section" id="aladatom-legacy">
-   <h3>Legacy 2014 archive</h3>
+   </section><section class="bench bench-archive-section" id="aladatom-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Lowest rate first.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Lowest rate first.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -128,7 +170,7 @@
    <dt>Products</dt><dd>5000</dd>
    <dt>Repetitions</dt><dd>1</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
-   <dt>Note</dt><dd>Aluminum adatom on Al(100) at 150 K. The reactant and the Voter-Chen EAM are the same as the 250 K problem. The reference escape rate is the parallel-replica row with Langevin friction 0.001 per fs. The product probabilities are the 250 K molecular dynamics standard, which is the only published catalogue.</dd>
+   <dt>Note</dt><dd>Aluminum adatom on Al(100) at 150 K. The reactant and the Voter-Chen EAM are the same as accelerated-md/aladatom. The reference escape rate is the parallel-replica row with Langevin friction 0.001 per fs. The product probabilities are the 250 K molecular dynamics standard, which is the only published catalogue.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
    <p class="bench-gaps">eOn rows are not yet on the harness counter.</p>

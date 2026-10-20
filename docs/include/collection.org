@@ -2493,21 +2493,21 @@
    
    </details>
    </section>
-   <h3>Al adatom on Al(100) at 250 K</h3>
+   <h3>Al adatom on Al(100) at 185 K</h3>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="accelerated-md/aladatom">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="11">No full harness row.</td></tr>
+   <tr><td data-field="template">eon-r2549/aladatom-pr-langevin</td><td data-field="version">EON (SVN r2549) r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="par2_mean">829272</td><td data-field="success_rate">1</td><td data-field="wilson">0.97503–1</td><td data-field="median_calls">557591</td><td data-field="mean_calls">829272</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">150</td></tr>
    </tbody></table></div>
-   <p class="bench-gaps">eOn rows are not yet on the harness counter. Partial rows stay off the ranked table.</p>
+   <p class="bench-gaps">eOn rows are not yet on the harness counter. Unfinished runs stay off the ranked table.</p>
    <p><a href="generated/suites/accelerated-md.html#aladatom">Full ranked table and performance profile</a>.</p>
-   <section class="bench bench-legacy-section" id="aladatom-legacy">
-   <h3>Legacy 2014 archive</h3>
+   <section class="bench bench-archive-section" id="aladatom-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Lowest rate first.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Lowest rate first.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
