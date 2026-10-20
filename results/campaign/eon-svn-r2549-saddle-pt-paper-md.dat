@@ -1,0 +1,38 @@
+# rep 1 force_calls 1024778 unique_saddles 49 fraction_connected 0.9092558984 total_searches 551 reached 1
+# rep 2 force_calls 1080971 unique_saddles 44 fraction_connected 0.8819561551 total_searches 593 reached 1
+# rep 3 force_calls 1848631 unique_saddles 58 fraction_connected 0.888665998 total_searches 997 reached 1
+# rep 4 force_calls 1621434 unique_saddles 49 fraction_connected 0.899207248 total_searches 883 reached 1
+# rep 5 force_calls 1029328 unique_saddles 46 fraction_connected 0.8707964602 total_searches 565 reached 1
+# rep 6 force_calls 1512915 unique_saddles 51 fraction_connected 0.8884934757 total_searches 843 reached 1
+# rep 7 force_calls 1354055 unique_saddles 54 fraction_connected 0.8908594816 total_searches 733 reached 1
+# rep 8 force_calls 2496570 unique_saddles 56 fraction_connected 0.8917337235 total_searches 1367 reached 1
+# rep 9 force_calls 1806279 unique_saddles 58 fraction_connected 0.8790983607 total_searches 976 reached 1
+# rep 10 force_calls 1731207 unique_saddles 52 fraction_connected 0.9040084388 total_searches 948 reached 1
+code Eon svn
+code_version r2549
+commit r2549
+counter client-search-results
+count_keys sad-fcs+mins-fcs
+contributor Rohit Goswami
+repetitions 10
+saddle_method dynamics
+communicator_jobs 8
+force_calls 1550616.8
+force_calls_mean_error 137677.3248
+force_calls_min 1024778
+force_calls_max 2496570
+unique_saddles 51.7
+fraction_connected 0.890407524
+total_searches 845.6
+nfailed 0
+algorithm Dynamics
+template eon-svn/saddle-pt-paper-md
+problem saddle-search/pt-island
+reducer akmc-until-27
+# report.sh averages run-1 through run-9. run-10 is launched and left out of that mean.
+report_runs 9
+force_calls_9 1530551.222
+force_calls_mean_error_9 151505.5355
+unique_saddles_9 51.66666667
+fraction_connected_9 0.8888963112
+total_searches_9 834.2222222

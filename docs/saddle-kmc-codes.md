@@ -307,6 +307,47 @@ The MATLAB reducer that wrote those rows is
 `1 - (unique_sp_sofar - n_connected_sp) / N_searches`, which is not the
 `done.py` ratio. The harness follows `done.py`.
 
+## r2549 rerun of the r2205 paper rows
+
+The archive paper rows for this problem are `eon-dimer` and `eon-md`, both
+r2205. The seven r2213 directories are later dimer variants. No
+`benchmark.dat` under `archive/entries/saddle-search/pt-island` names
+develop, so this rerun has no develop row. The client is the registry pin
+r2549, git `f817a3f`. `eonclient -v` prints `rUnversioned directory`
+because that checkout embeds no svn revision. The link includes
+`libgfortran` and `Morse`. QSC is absent from the r2549 tree, so the build
+omits it. `potential = morse_pt` is `Morse::force`. The server builds each
+displacement. `draw_search_start` is unused. Seeds are 1000 through 1009.
+The archived ini leaves `random_seed` unset, which reads the clock. There
+is no wall-clock budget and no pass limit. `run.sh` launches ten runs.
+`report.sh` writes `benchmark.dat` inside `run-1` through `run-9`, and the
+published mean is that set. The result files keep all ten `# rep` lines.
+Fields with a `_9` suffix are the `report.sh` mean. The un-suffixed means
+are the ten runs.
+
+| row | sample | unique_saddles | fraction_connected | total_searches | force_calls | force_calls_mean_error |
+| --- | --- | --- | --- | --- | --- | --- |
+| archive eon-dimer r2205 | report.sh, 9 runs | 109.222 | 0.746017 | 11366.8 | 3.77888e+06 | 527337 |
+| r2549 dimer | runs 1-9 | 117.2222222 | 0.7531125773 | 13823.33333 | 4933128 | 510185.4379 |
+| r2549 dimer | runs 1-10 | 118.2 | 0.753475785 | 14227.6 | 5075453.5 | 478607.4904 |
+| archive eon-md r2205 | report.sh, 9 runs | 51.6667 | 0.886966 | 800.222 | 1478168 | 118736 |
+| r2549 MD | runs 1-9 | 51.66666667 | 0.8888963112 | 834.2222222 | 1530551.222 | 151505.5355 |
+| r2549 MD | runs 1-10 | 51.7 | 0.890407524 | 845.6 | 1550616.8 | 137677.3248 |
+
+Every dimer run in the first nine has `fraction_connected` above
+0.746017. The nine-run mean is 0.7531125773 and the rerun standard error
+is 0.0009028144. Unique saddles are 117.2222222 against 109.222. Searches
+are 13823.33333 against 11366.8. Force calls are 4933128 against
+3.77888e+06. The published force-call standard error is 527337. The dimer
+paper row does not reproduce.
+
+The MD nine-run unique-saddle mean is 51.66666667 against 51.6667. The
+fraction is 0.8888963112 against 0.886966. Searches are 834.2222222
+against 800.222. Force calls are 1530551.222 against 1478168. Each of
+those offsets is inside one rerun standard error, and the force-call
+offset is inside the combined standard error with the published 118736.
+The MD paper row reproduces.
+
 The pARTn campaign on this branch stores both endpoint minima in
 `artn-1.1.0-saddle-search-pt-island--partn-saddle-pt.endpoints.npz`
 (187 finite endpoint pairs, 13 `not_minimized` crash rows). Rejudging

@@ -597,6 +597,8 @@ JOBS = {
     "low-lj38-lanczos": ("eon/develop-low-lj38-lanczos", run_lowest),
     "saddle-pt-dimer": ("eon/develop-saddle-pt-dimer", None),
     "saddle-pt-lanczos": ("eon/develop-saddle-pt-lanczos", None),
+    "saddle-pt-paper-dimer": ("eon-svn/saddle-pt-paper-dimer", None),
+    "saddle-pt-paper-md": ("eon-svn/saddle-pt-paper-md", None),
 }
 
 

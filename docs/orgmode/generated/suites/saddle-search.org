@@ -34,7 +34,7 @@
    </dl>
    <p class="bench-smoke">A 2-search SoftSaddle smoke is outside this rank. The April 2019 adaptive_HSphere-lbfgs-davidson-sm50 entry records 423491.1 force calls.</p>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">Eon rows are not yet on the harness counter. Partial rows stay off the ranked table.</p>
+   <p class="bench-gaps">Eon rows are not yet on the harness counter. Eon svn rows are off the ranked table. Partial rows stay off the ranked table.</p>
    <figure class="bench-plot"><a href="../../_static/board/saddle-search-pt-island-cost.svg"><picture><source srcset="../../_static/board/saddle-search-pt-island-cost.webp" type="image/webp"><img src="../../_static/board/saddle-search-pt-island-cost.png" alt="Cost versus success for saddle-search/pt-island" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <p class="bench-gaps">No performance profile. The ranked rows do not share one start set.</p>
    <details class="bench-details" id="pt-island-templates">
@@ -74,6 +74,8 @@
    <h3>Not a harness score</h3><ul>
    <li>eon-3.5.0-saddle-pt-classic Eon n=10, not yet on the harness counter.</li>
    <li>eon-3.5.0-saddle-pt-dimer Eon n=10, not yet on the harness counter.</li>
+   <li>eon-svn/saddle-pt-paper-dimer Eon svn n=10, counter client-search-results.</li>
+   <li>eon-svn/saddle-pt-paper-md Eon svn n=10, counter client-search-results.</li>
    </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="pt-island-legacy">

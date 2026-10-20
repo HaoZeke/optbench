@@ -260,7 +260,7 @@ The number is written only after the run finishes under the problem rule.
    <li>Al: partial.</li>
    <li>Pt: partial.</li>
    <li>lj38: partial.</li>
-   <li>Pt heptamer island: partial.</li>
+   <li>Pt heptamer island: not yet on the harness counter, partial.</li>
    <li>LJ38: partial.</li>
    <li>pt-island: partial.</li>
    <li>eon-svn/cg: no per-start record.</li>

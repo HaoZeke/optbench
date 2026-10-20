@@ -87,6 +87,81 @@ def test_published_eon_r2205_and_softsaddle_rows():
         assert fields["total_searches"] == searches
 
 
+def test_pt_island_archive_has_no_develop_row():
+    versions = set()
+    for path in ARCHIVE.glob("*/benchmark.dat"):
+        versions.add(_fields(path).get("code_version", ""))
+    assert versions == {"", "r2205", "r2213"}
+
+
+def _comment_reps(path: Path) -> list[dict[str, float]]:
+    rows = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if not line.startswith("# rep "):
+            continue
+        parts = line.split()
+
+        def grab(key: str) -> float:
+            return float(parts[parts.index(key) + 1])
+
+        rows.append(
+            {
+                "force_calls": grab("force_calls"),
+                "unique_saddles": grab("unique_saddles"),
+                "fraction_connected": grab("fraction_connected"),
+                "total_searches": grab("total_searches"),
+            }
+        )
+    return rows
+
+
+def test_r2549_paper_rerun_matches_report_sh_mean():
+    campaign = ROOT / "results" / "campaign"
+    expected = {
+        "eon-svn-r2549-saddle-pt-paper-dimer.dat": {
+            "fraction_connected_9": "0.7531125773",
+            "total_searches_9": "13823.33333",
+            "unique_saddles_9": "117.2222222",
+            "force_calls_9": "4933128",
+            "force_calls": "5075453.5",
+            "fraction_connected": "0.753475785",
+            "total_searches": "14227.6",
+            "unique_saddles": "118.2",
+        },
+        "eon-svn-r2549-saddle-pt-paper-md.dat": {
+            "fraction_connected_9": "0.8888963112",
+            "total_searches_9": "834.2222222",
+            "unique_saddles_9": "51.66666667",
+            "force_calls_9": "1530551.222",
+            "force_calls": "1550616.8",
+            "fraction_connected": "0.890407524",
+            "total_searches": "845.6",
+            "unique_saddles": "51.7",
+        },
+    }
+    for name, locked in expected.items():
+        path = campaign / name
+        assert not path.with_suffix(".starts").exists()
+        fields = _fields(path)
+        assert fields["code_version"] == "r2549"
+        assert fields["problem"] == "saddle-search/pt-island"
+        assert fields["reducer"] == "akmc-until-27"
+        assert fields["report_runs"] == "9"
+        assert fields["nfailed"] == "0"
+        assert fields["repetitions"] == "10"
+        reps = _comment_reps(path)
+        assert len(reps) == 10
+        for key, value in locked.items():
+            assert fields[key] == value
+        sample = reps[:9]
+        assert statistics.fmean(row["fraction_connected"] for row in sample) == pytest.approx(
+            float(fields["fraction_connected_9"])
+        )
+        assert statistics.fmean(row["total_searches"] for row in sample) == pytest.approx(
+            float(fields["total_searches_9"])
+        )
+
+
 def test_r2213_per_run_lists_average_to_the_published_row():
     directories = sorted(path for path in ARCHIVE.iterdir() if (path / "calc_benchmarks.py").is_file())
     assert len(directories) == 7

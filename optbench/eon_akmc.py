@@ -262,7 +262,11 @@ def _write_saddle(template: dict, rows: list[dict], output: Path, workers: int) 
     lines.append("count_keys sad-fcs+mins-fcs")
     lines.append("contributor Rohit Goswami")
     lines.append(f"repetitions {len(rows)}")
-    lines.append(f"min_mode_method {template['ini']['Saddle Search']['min_mode_method']}")
+    saddle = template["ini"]["Saddle Search"]
+    if "min_mode_method" in saddle:
+        lines.append(f"min_mode_method {saddle['min_mode_method']}")
+    if "method" in saddle:
+        lines.append(f"saddle_method {saddle['method']}")
     dimer = template["ini"].get("Dimer") or {}
     if "improved" in dimer:
         lines.append(f"dimer_improved {str(dimer['improved']).lower()}")
