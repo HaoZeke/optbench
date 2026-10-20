@@ -1,0 +1,33 @@
+# rep 1 force_calls 7396431 unique_saddles 121 fraction_connected 0.7088056356 total_searches 15615 reached 1
+# rep 2 force_calls 3081671 unique_saddles 91 fraction_connected 0.6971153846 total_searches 6448 reached 1
+# rep 3 force_calls 8305672 unique_saddles 127 fraction_connected 0.7001368457 total_searches 17538 reached 1
+# rep 4 force_calls 4287112 unique_saddles 112 fraction_connected 0.7057145991 total_searches 9117 reached 1
+# rep 5 force_calls 5584331 unique_saddles 105 fraction_connected 0.6976665252 total_searches 11785 reached 1
+# rep 6 force_calls 4208872 unique_saddles 111 fraction_connected 0.7080275488 total_searches 8857 reached 1
+# rep 7 force_calls 3815272 unique_saddles 104 fraction_connected 0.6960967702 total_searches 8019 reached 1
+# rep 8 force_calls 8204348 unique_saddles 131 fraction_connected 0.6999883829 total_searches 17216 reached 1
+# rep 9 force_calls 9414007 unique_saddles 131 fraction_connected 0.6968669332 total_searches 19757 reached 1
+# rep 10 force_calls 2892332 unique_saddles 93 fraction_connected 0.7076298701 total_searches 6160 reached 1
+code EON
+code_version SVN r2549
+commit r2549
+counter client-search-results
+count_keys sad-fcs+mins-fcs
+contributor Rohit Goswami
+repetitions 10
+min_mode_method dimer
+dimer_improved false
+communicator_jobs 6
+force_calls 5719004.8
+force_calls_mean_error 722864.7197
+force_calls_min 2892332
+force_calls_max 9414007
+unique_saddles 112.6
+fraction_connected 0.7018048496
+total_searches 12051.2
+nfailed 0
+n 120512
+algorithm Dimer
+template eon-svn/saddle-pt-dimer
+problem saddle-search/pt-island
+reducer harness
