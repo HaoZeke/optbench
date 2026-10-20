@@ -172,11 +172,40 @@ def _pair_geometry(coords: np.ndarray, box: np.ndarray | None) -> tuple[np.ndarr
     return np.linalg.norm(diff, axis=-1), diff
 
 
-def evaluate(kind: str, coords: np.ndarray, box: np.ndarray | None) -> tuple[float, np.ndarray]:
+def evaluate(
+    kind: str,
+    coords: np.ndarray,
+    box: np.ndarray | None,
+    *,
+    pbc: tuple[bool, bool, bool] | None = None,
+    morse: tuple[float, float, float, float] | None = None,
+) -> tuple[float, np.ndarray]:
+    """Energy and ``dE/dx``.
+
+    ``morse_pt`` is the shifted Morse pair. ``morse_smooth`` is LAMMPS
+    ``morse/smooth/linear``: the slope and the energy are both zero at
+    the cutoff, and ``pbc`` selects the periodic axes. ``morse`` is
+    ``(D, alpha, r0, cutoff)``; omitted, the Pt constants above are used.
+    """
     if kind == "morse_pt":
         return morse_pt(coords, box)
     if kind == "lj":
         return lennard_jones(coords, None)
+    if kind == "morse_smooth":
+        from .surfaces import morse_smooth_linear
+
+        depth, alpha, r0, cutoff = (MORSE_D, MORSE_ALPHA, MORSE_R0, MORSE_CUTOFF) if morse is None else morse
+        flags = (False, False, False) if pbc is None else (bool(pbc[0]), bool(pbc[1]), bool(pbc[2]))
+        cell = None if box is None else np.asarray(box, dtype=np.float64)
+        return morse_smooth_linear(
+            np.asarray(coords, dtype=np.float64),
+            depth=float(depth),
+            alpha=float(alpha),
+            r0=float(r0),
+            cutoff=float(cutoff),
+            cell=cell,
+            pbc=flags,
+        )
     raise ValueError(f"unknown potential {kind}")
 
 

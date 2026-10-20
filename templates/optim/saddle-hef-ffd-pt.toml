@@ -1,0 +1,48 @@
+# Pt-island displacement search. Hybrid eigenvector-following with the
+# gradient-only block: BFGSTS 3000 10 100 0.003, NOHESS, USEDIAG 2,
+# MAXERISE 1.0D-4 1.0D0, BFGSTSPC 0.001, MAXSTEP 0.1, MAXMAX 0.3,
+# MAXBFGS 0.1, UPDATES 25 25.
+# https://www-wales.ch.cam.ac.uk/OPTIM.doc/node4.html
+# https://www-wales.ch.cam.ac.uk/OPTIM.doc/node54.html
+# The socket potential is the problem pair, morse/smooth/linear, with
+# periodic axes x and y. EV and ANG scales are 1. The climb stops at
+# the problem Euclidean force tolerance. One listed atom moves by 0.1 Å.
+
+id = "optim/saddle-hef-ffd-pt"
+engine = "optim"
+problem = "saddle-search/pt-island"
+code = "optim"
+code_version = "df8da599"
+commit = "df8da599267534fbe43a250e578f7396a7946311"
+algorithm = "hybrid eigenvector-following"
+tuning = "default"
+
+[ini.Main]
+method = "hef-ffd"
+
+[ini.Optim]
+nevs = 3000
+nbfgsmax1 = 10
+nbfgsmax2 = 100
+ceig = 0.003
+usediag = 2
+maxstep = 0.1
+maxmax = 0.3
+maxbfgs = 0.1
+maxerise = 1.0e-4
+xmaxerise = 1.0
+bfgstspc = 0.001
+updates = 25
+seed = 2014
+convu = 1.0
+
+[ini.Optimizer]
+converged_force = 0.001
+max_iterations = 1000
+
+[ini.Search]
+repetitions = 1
+displace_atoms = "0,1,2,3,4,5,6"
+displace_magnitude = 0.1
+rmsd_connect = 0.5
+max_searches = 20000

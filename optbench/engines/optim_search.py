@@ -1,11 +1,12 @@
-"""OPTIM L-BFGS through the ASE socket.
+"""OPTIM through the ASE socket.
 
 The binary is the OPTIM target at SVNREV
 ``df8da599267534fbe43a250e578f7396a7946311``. Each ``COMPUTE`` on the relay
 is one ``pes.evaluate``. OPTIM's own counter is not the score.
 
-``optim/unhooked`` and every template that is not minimization L-BFGS
-raise before a file is written. Noise, saddle search, NEB, and PATHSAMPLE
+Minimization L-BFGS and the Pt-island hybrid eigenvector-following
+search call the socket. ``optim/unhooked`` and every other template
+raise before a file is written. Noise, NEB, tsopt, hTST, and PATHSAMPLE
 are not this runner.
 """
 
@@ -79,8 +80,9 @@ def _section(template: dict) -> dict:
 def _unhooked(template_name: str) -> RuntimeError:
     return RuntimeError(
         f"{template_name} writes nothing. The pin is SVNREV {COMMIT}. "
-        "Only a minimization L-BFGS template calls the ASE socket. "
-        "Noise, saddle search, NEB, tsopt, hTST, and PATHSAMPLE are not scored."
+        "Minimization L-BFGS and the Pt-island hybrid eigenvector-following "
+        "search call the ASE socket. "
+        "Noise, NEB, tsopt, hTST, and PATHSAMPLE are not scored."
     )
 
 
@@ -277,7 +279,16 @@ def _job(start: dict, settings: dict, template: dict) -> dict:
     }
 
 
-def run(root: Path, problem_name: str, template_name: str, *, output: Path, workers: int = 1) -> dict:
+def run(
+    root: Path,
+    problem_name: str,
+    template_name: str,
+    *,
+    output: Path,
+    workers: int = 1,
+    limit: int = 0,
+    resume: bool = False,
+) -> dict:
     reason = available()
     if reason:
         raise RuntimeError(reason)
@@ -295,6 +306,19 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
     if stated and stated != problem_name:
         raise ValueError(f"{template_name} belongs to {stated}")
     section = _section(template)
+    main = (template.get("ini") or {}).get("Main") or {}
+    if problem.get("suite") == "saddle-search" and str(main.get("method", "")) == "hef-ffd":
+        from optbench.optim_saddle import run_saddle
+
+        return run_saddle(
+            root,
+            problem,
+            template,
+            output=output,
+            workers=workers,
+            limit=limit,
+            resume=resume,
+        )
     if problem.get("suite") != "minimization" or section["method"] != "lbfgs":
         raise _unhooked(template_name)
     if template.get("noise"):

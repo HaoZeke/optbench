@@ -23,6 +23,20 @@ STATUS_OK = 0
 STATUS_ERR = 1
 
 
+def _ack(conn: socket.socket) -> None:
+    """Acknowledge small packets at once.
+
+    OPTIM sends one evaluation as several short writes. Delayed ACK holds
+    each later write for a kernel timeout, so a climb of a few hundred
+    evaluations spends that timeout on every evaluation.
+    """
+    if hasattr(socket, "TCP_QUICKACK"):
+        try:
+            conn.setsockopt(socket.IPPROTO_TCP, socket.TCP_QUICKACK, 1)
+        except OSError:
+            return
+
+
 def _recv(conn: socket.socket, nbytes: int) -> bytes:
     chunks = []
     left = nbytes
@@ -32,6 +46,7 @@ def _recv(conn: socket.socket, nbytes: int) -> bytes:
             raise ConnectionError("relay socket closed")
         chunks.append(piece)
         left -= len(piece)
+        _ack(conn)
     return b"".join(chunks)
 
 
@@ -42,6 +57,26 @@ def _kind_and_box():
         return kind, None
     values = np.asarray([float(item) for item in raw.split()], dtype=np.float64)
     return kind, values
+
+
+def _pbc():
+    raw = os.environ.get("OPTBENCH_PBC", "").strip()
+    if not raw:
+        return None
+    flags = tuple(int(float(item)) != 0 for item in raw.split())
+    if len(flags) != 3:
+        raise ValueError("OPTBENCH_PBC needs three flags")
+    return flags
+
+
+def _morse():
+    raw = os.environ.get("OPTBENCH_MORSE", "").strip()
+    if not raw:
+        return None
+    values = tuple(float(item) for item in raw.replace(",", " ").split())
+    if len(values) != 4:
+        raise ValueError("OPTBENCH_MORSE needs D, alpha, r0, and cutoff")
+    return values
 
 
 def _write_count(calls: int) -> None:
@@ -68,6 +103,8 @@ def serve(port: int) -> None:
     from optbench.pes import evaluate
 
     kind, box = _kind_and_box()
+    pbc = _pbc()
+    morse = _morse()
     scale_e = float(os.environ.get("OPTBENCH_E_SCALE", "1"))
     scale_l = float(os.environ.get("OPTBENCH_L_SCALE", "1"))
     raw_cap = os.environ.get("OPTBENCH_CAP", "").strip()
@@ -80,6 +117,8 @@ def serve(port: int) -> None:
     sys.stdout.write(f"READY {bound}\n")
     sys.stdout.flush()
     conn, _addr = listener.accept()
+    conn.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+    _ack(conn)
     calls = 0
     _write_count(calls)
     try:
@@ -110,7 +149,7 @@ def serve(port: int) -> None:
                 break
             coords = pos / scale_l
             try:
-                energy, gradient = evaluate(kind, coords, box)
+                energy, gradient = evaluate(kind, coords, box, pbc=pbc, morse=morse)
             except Exception:
                 conn.sendall(struct.pack("<i", STATUS_ERR))
                 break

@@ -202,7 +202,7 @@ repository = "https://www-wales.ch.cam.ac.uk/svn.tar.bz2"
 ref = "df8da599"
 commit = "df8da599267534fbe43a250e578f7396a7946311"
 committed = "2026-10-18"
-note = "Wales group OPTIM. SVNREV df8da599267534fbe43a250e578f7396a7946311, the same revision as the GMIN pin, fetched 2026-10-18. Minimization L-BFGS calls the ASE socket and pes.evaluate. OPTIM's own call counter is not a score. Noise and PATHSAMPLE are not scored."
+note = "Wales group OPTIM. SVNREV df8da599267534fbe43a250e578f7396a7946311, the same revision as the GMIN pin, fetched 2026-10-18. Minimization L-BFGS and the Pt-island hybrid eigenvector-following search call the ASE socket and pes.evaluate. OPTIM's own call counter is not a score. Noise and PATHSAMPLE are not scored."
 
 [[code]]
 id = "airss"

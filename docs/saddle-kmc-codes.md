@@ -154,6 +154,16 @@ Noise is not scored: the relay has no noisy-force window. PATHSAMPLE does
 not call `pes.evaluate`. It writes `odata.*` and submits the `EXEC`
 program, which is OPTIM. No PATHSAMPLE number is written.
 
+The Pt-island search is `optim/saddle-hef-ffd-pt` on this same binary.
+The socket potential is the problem pair `morse/smooth/linear` with
+periodic axes x and y, `EV` and `ANG` scales 1, and the force sent back
+through the socket so OPTIM receives `dE/dx`. The RMS stop is the
+Euclidean force tolerance divided by `sqrt(3N)`, and the harness checks
+the free-atom Euclidean norm itself. The start moves one listed atom by
+0.1 Å. The climb is the stock `BFGSTS` block with `USEDIAG 2`, `STEPS`
+and `BFGSSTEPS` 1000. Each endpoint quench is `BFGSMIN` with budget
+2000. The scored cap is 5064. The initial quench is outside that count.
+
 ## pARTn
 
 Pin `artn`, 1.1.0, DEVEL `9b753517`. `libartn.so` is the engine plugin and
