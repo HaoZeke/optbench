@@ -981,6 +981,21 @@ def _load_resume(path: Path) -> list[dict]:
     return rows
 
 
+def _rows_for_cap(rows: list[dict], cap: int) -> list[dict]:
+    """Keep starts that already finished under this cap.
+
+    A cap stop recorded with fewer calls than ``cap`` is an unfinished
+    start. The search runs again from the archived geometry.
+    """
+    kept = []
+    for row in rows:
+        calls = int(row.get("force_calls") or 0)
+        if row.get("failure") == "cap" and calls < int(cap):
+            continue
+        kept.append(row)
+    return kept
+
+
 def run_template(
     root: Path,
     problem: dict,
@@ -1029,6 +1044,7 @@ def run_template(
     reference, reference_source = reference_energy(root, problem, n_atoms) if n_atoms else (None, "missing")
     target = target_energy(problem, reference)
     done = _load_resume(output.with_suffix(".starts.jsonl")) if resume else []
+    done = _rows_for_cap(done, int(cap))
     done_names = {str(row["start"]) for row in done}
     jobs = []
     for index, (name, coords) in enumerate(loaded):

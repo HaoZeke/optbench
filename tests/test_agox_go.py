@@ -57,7 +57,7 @@ def test_agox_templates_pin_the_registry_and_the_cap():
         assert template["tuning"] == "default"
         assert template["agox"]["method"] in METHODS
         problem = resolve_problem(ROOT, template["problem"])
-        expected = 1000000 if template["problem"] == "globalopt/lj75" else 500000
+        expected = 1000000 if template["problem"] == "globalopt/lj75" else 2000000
         assert _check_stop(problem, template) == expected
         seen.add((template["problem"], template["agox"]["method"]))
     for problem in ("globalopt/lj38", "globalopt/lj75"):
@@ -168,3 +168,16 @@ def test_basin_hopping_stops_at_the_cap(tmp_path: Path):
     assert record["failure"] == "cap"
     assert record["force_calls"] == 60
     assert record["lowest_energy"] < -100
+
+
+def test_resume_repeats_a_start_that_stopped_under_the_cap():
+    from optbench.runners.agox_go import _rows_for_cap
+
+    rows = [
+        {"start": "kept-hit", "failure": None, "force_calls": 1200, "success": True},
+        {"start": "kept-cap", "failure": "cap", "force_calls": 2000000},
+        {"start": "again", "failure": "cap", "force_calls": 500000},
+        {"start": "crash", "failure": "crash", "force_calls": 10},
+    ]
+    kept = _rows_for_cap(rows, 2000000)
+    assert [row["start"] for row in kept] == ["kept-hit", "kept-cap", "crash"]

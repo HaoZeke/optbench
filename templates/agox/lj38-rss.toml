@@ -20,4 +20,4 @@ cell = 40.0
 confinement = 24.0
 
 [stop]
-max_force_calls = 500000
+max_force_calls = 2000000
