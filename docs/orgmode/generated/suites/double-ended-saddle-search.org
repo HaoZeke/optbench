@@ -7,11 +7,13 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>eOn (develop a7aa57472fb7)</th><th>Eon svn</th><th>EON (SVN r2549)</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="double-ended-saddle-search/lj38">
    <th scope="row"><a href="#lj38">LJ38 double-ended saddle</a></th>
    <td data-code="eOn" data-template="eon-client/de-lj38-lanczos-improved" data-par2="259.46"><span class="bench-score">259.46</span><a href="#lj38-templates">eon-client/de-lj38-lanczos-improved</a></td>
+   <td data-code="eOn (develop a7aa57472fb7)">—</td>
    <td data-code="Eon svn" data-template="eon-svn/de-lj38-lanczos-improved" data-par2="235.2"><span class="bench-score">235.2</span><a href="#lj38-templates">eon-svn/de-lj38-lanczos-improved</a></td>
+   <td data-code="EON (SVN r2549)">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="853.56"><span class="bench-score">853.56</span><a href="#lj38-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
    <td data-code="ASE" data-template="ase/de-lj38-tuned" data-par2="3463.64"><span class="bench-score">3463.64</span><a href="#lj38-templates">ase/de-lj38-tuned</a></td>
@@ -27,7 +29,9 @@
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation">
    <th scope="row"><a href="#lj38_2ts_separation">lj38_2ts_separation</a></th>
    <td data-code="eOn" data-template="eon-client/de-2ts-lanczos-improved" data-par2="520.333"><span class="bench-score">520.333</span><a href="#lj38_2ts_separation-templates">eon-client/de-2ts-lanczos-improved</a></td>
+   <td data-code="eOn (develop a7aa57472fb7)">—</td>
    <td data-code="Eon svn" data-template="eon-svn/de-2ts-lanczos-improved" data-par2="502.784"><span class="bench-score">502.784</span><a href="#lj38_2ts_separation-templates">eon-svn/de-2ts-lanczos-improved</a></td>
+   <td data-code="EON (SVN r2549)">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="8024.43"><span class="bench-score">8024.43</span><a href="#lj38_2ts_separation-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
    <td data-code="ASE" data-template="ase/de-lj38-2ts-default" data-par2="20000"><span class="bench-score">20000</span><a href="#lj38_2ts_separation-templates">ase/de-lj38-2ts-default</a></td>
@@ -43,7 +47,9 @@
    <tr data-problem="double-ended-saddle-search/pt-island">
    <th scope="row"><a href="#pt-island">pt-island</a></th>
    <td data-code="eOn">—</td>
+   <td data-code="eOn (develop a7aa57472fb7)" data-template="eon-git/de-pt-lanczos" data-par2="187.186"><span class="bench-score">187.186</span><a href="#pt-island-templates">eon-git/de-pt-lanczos</a></td>
    <td data-code="Eon svn" data-template="eon-svn/de-pt-dimer" data-par2="192.051"><span class="bench-score">192.051</span><a href="#pt-island-templates">eon-svn/de-pt-dimer</a></td>
+   <td data-code="EON (SVN r2549)" data-template="eon-svn-stock/de-pt-lanczos" data-par2="192.814"><span class="bench-score">192.814</span><a href="#pt-island-templates">eon-svn-stock/de-pt-lanczos</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="422.136"><span class="bench-score">422.136</span><a href="#pt-island-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
    <td data-code="ASE" data-template="ase/de-pt-island-tuned" data-par2="847.678"><span class="bench-score">847.678</span><a href="#pt-island-templates">ase/de-pt-island-tuned</a></td>
@@ -371,12 +377,14 @@
    <figure class="bench-plot"><a href="../../_static/board/double-ended-saddle-search-pt-island-profile.svg"><picture><source srcset="../../_static/board/double-ended-saddle-search-pt-island-profile.webp" type="image/webp"><img src="../../_static/board/double-ended-saddle-search-pt-island-profile.png" alt="Dolan-More profile for double-ended-saddle-search/pt-island" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/double-ended-saddle-search-pt-island-cost.svg"><picture><source srcset="../../_static/board/double-ended-saddle-search-pt-island-cost.webp" type="image/webp"><img src="../../_static/board/double-ended-saddle-search-pt-island-cost.png" alt="Cost versus success for double-ended-saddle-search/pt-island" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="pt-island-templates">
-   <summary>All templates (27 ranked)</summary>
+   <summary>All templates (29 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="double-ended-saddle-search/pt-island">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate. Per-image mean divides that total by the problem's moving images, the same way for every code.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Per-image mean</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td data-field="template">eon-git/de-pt-lanczos</td><td data-field="version">eOn (develop a7aa57472fb7) a7aa57472fb7d823953fd36b78cd755fa4842d30</td><td data-field="commit">a7aa57472fb7</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">187.186</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.938871</td><td data-field="wilson_high">1</td><td data-field="median_calls">157</td><td data-field="mean_calls">187.186</td><td data-field="mean_per_image">62.3955</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">59</td></tr>
    <tr><td data-field="template">eon-svn/de-pt-dimer</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">192.051</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.938871</td><td data-field="wilson_high">1</td><td data-field="median_calls">188</td><td data-field="mean_calls">192.051</td><td data-field="mean_per_image">64.0169</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">59</td></tr>
+   <tr><td data-field="template">eon-svn-stock/de-pt-lanczos</td><td data-field="version">EON (SVN r2549) r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">192.814</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.938871</td><td data-field="wilson_high">1</td><td data-field="median_calls">161</td><td data-field="mean_calls">192.814</td><td data-field="mean_per_image">64.2712</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">59</td></tr>
    <tr><td data-field="template">eon-svn/de-pt-ci</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">225.881</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.938871</td><td data-field="wilson_high">1</td><td data-field="median_calls">188</td><td data-field="mean_calls">225.881</td><td data-field="mean_per_image">75.2938</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">59</td></tr>
    <tr><td data-field="template">eon-svn/de-pt-ci-neb</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">225.881</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.938871</td><td data-field="wilson_high">1</td><td data-field="median_calls">188</td><td data-field="mean_calls">225.881</td><td data-field="mean_per_image">75.2938</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">59</td></tr>
    <tr><td data-field="template">eon-svn/de-pt-ci-swdneb</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">246.271</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.938871</td><td data-field="wilson_high">1</td><td data-field="median_calls">218</td><td data-field="mean_calls">246.271</td><td data-field="mean_per_image">82.0904</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">59</td></tr>

@@ -728,59 +728,61 @@
   ],
   "profile": {
     "area_log10": {
-      "ase/de-pt-island-default 3.29.0 default asv f27c000": 0.4847093150521731,
-      "ase/de-pt-island-default 3.29.0 default campaign f27c000": 0.4847093150521731,
-      "ase/de-pt-island-tuned 3.29.0 tuned asv f27c000": 0.729615074236429,
-      "ase/de-pt-island-tuned 3.29.0 tuned campaign f27c000": 0.729615074236429,
-      "compass/sqnm 1.0.0 default campaign 22da7bd": 0.4336872818887865,
+      "ase/de-pt-island-default 3.29.0 default asv f27c000": 0.4745049084194958,
+      "ase/de-pt-island-default 3.29.0 default campaign f27c000": 0.4745049084194958,
+      "ase/de-pt-island-tuned 3.29.0 tuned asv f27c000": 0.699001854338397,
+      "ase/de-pt-island-tuned 3.29.0 tuned campaign f27c000": 0.699001854338397,
+      "compass/sqnm 1.0.0 default campaign 22da7bd": 0.42348287525610917,
+      "eon-git/de-pt-lanczos a7aa57472fb7d823953fd36b78cd755fa4842d30 stock campaign a7aa574": 1.0740137980892888,
+      "eon-svn-stock/de-pt-lanczos r2549 stock campaign r2549": 1.0689115947729502,
       "eon-svn/de-pt-ci r2549 default campaign, asv r2549": 1.0561560864821036,
       "eon-svn/de-pt-ci-neb r2549 campaign r2549": 1.0561560864821036,
       "eon-svn/de-pt-ci-swdneb r2549 campaign r2549": 1.0127873582932247,
-      "eon-svn/de-pt-dimer r2549 campaign r2549": 1.051053883165765,
-      "eon-svn/de-pt-lanczos-improved r2549 campaign r2549": 0.966867528446177,
-      "eon-svn/de-pt-neb r2549 default campaign, asv r2549": 1.043400578191257,
-      "rgsaddle/ci-neb 0.2.2 default campaign, asv c0db2b8": 0.5663445681135918,
-      "rgsaddle/ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 0.951560918497161,
+      "eon-svn/de-pt-dimer r2549 campaign r2549": 1.0434005781912568,
+      "eon-svn/de-pt-lanczos-improved r2549 campaign r2549": 0.905641088650113,
+      "eon-svn/de-pt-neb r2549 default campaign, asv r2549": 1.0331961715585796,
+      "rgsaddle/ci-neb 0.2.2 default campaign, asv c0db2b8": 0.5561401614809145,
+      "rgsaddle/ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 0.9490098168389918,
       "rgsaddle/ew-ci-neb 0.2.2 default campaign, asv c0db2b8": 0.6148154996188091,
-      "rgsaddle/ew-ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 1.0127873582932247,
-      "rgsaddle/idpp-ci-neb 0.2.2 default campaign, asv c0db2b8": 0.5918555846952851,
-      "rgsaddle/idpp-ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 0.9617653251298383,
+      "rgsaddle/ew-ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 1.0025829516605473,
+      "rgsaddle/idpp-ci-neb 0.2.2 default campaign, asv c0db2b8": 0.5816511780626077,
+      "rgsaddle/idpp-ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 0.959214223471669,
       "rgsaddle/neb 0.2.2 default campaign, asv c0db2b8": 0.0,
       "rgsaddle/neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 0.0,
-      "rgsaddle/oci-neb 0.2.2 default campaign, asv c0db2b8": 0.5561401614809145,
+      "rgsaddle/oci-neb 0.2.2 default campaign, asv c0db2b8": 0.5255269415828825,
       "rgsaddle/oci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 0.9362543085481448,
-      "rgsaddle/sidpp-ci-neb 0.2.2 default campaign, asv c0db2b8": 0.6097132963024705,
+      "rgsaddle/sidpp-ci-neb 0.2.2 default campaign, asv c0db2b8": 0.5995088896697931,
       "rgsaddle/sidpp-ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 0.959214223471669,
-      "sella/de-pt-island-default 2.6.0 default asv 6cfb60c": 0.47195380676132637,
-      "sella/de-pt-island-tuned 2.6.0 tuned asv 6cfb60c": 0.7321661758945983,
-      "tsase/ci-neb 1.0 default campaign 98aac60": 0.4234828752561091,
+      "sella/de-pt-island-default 2.6.0 default asv 6cfb60c": 0.4668516034449878,
+      "sella/de-pt-island-tuned 2.6.0 tuned asv 6cfb60c": 0.7015529559965663,
+      "tsase/ci-neb 1.0 default campaign 98aac60": 0.4081762653070931,
       "tsase/neb 1.0 default campaign 98aac60": 0.0
     },
     "rho": {
       "ase/de-pt-island-default 3.29.0 default asv f27c000": [
         0.0,
         0.0,
-        0.3898305084745763,
+        0.3559322033898305,
         0.7288135593220338,
         0.9830508474576272
       ],
       "ase/de-pt-island-default 3.29.0 default campaign f27c000": [
         0.0,
         0.0,
-        0.3898305084745763,
+        0.3559322033898305,
         0.7288135593220338,
         0.9830508474576272
       ],
       "ase/de-pt-island-tuned 3.29.0 tuned asv f27c000": [
         0.0,
-        0.15254237288135594,
+        0.05084745762711865,
         0.8983050847457628,
         0.9152542372881356,
         0.9152542372881356
       ],
       "ase/de-pt-island-tuned 3.29.0 tuned campaign f27c000": [
         0.0,
-        0.15254237288135594,
+        0.05084745762711865,
         0.8983050847457628,
         0.9152542372881356,
         0.9152542372881356
@@ -789,8 +791,22 @@
         0.0,
         0.0,
         0.0,
-        0.9491525423728814,
+        0.9152542372881356,
         0.9830508474576272
+      ],
+      "eon-git/de-pt-lanczos a7aa57472fb7d823953fd36b78cd755fa4842d30 stock campaign a7aa574": [
+        0.3050847457627119,
+        0.9152542372881356,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "eon-svn-stock/de-pt-lanczos r2549 stock campaign r2549": [
+        0.3050847457627119,
+        0.8983050847457628,
+        1.0,
+        1.0,
+        1.0
       ],
       "eon-svn/de-pt-ci r2549 default campaign, asv r2549": [
         0.0847457627118644,
@@ -814,21 +830,21 @@
         1.0
       ],
       "eon-svn/de-pt-dimer r2549 campaign r2549": [
-        0.05084745762711865,
+        0.0,
         0.9661016949152542,
         1.0,
         1.0,
         1.0
       ],
       "eon-svn/de-pt-lanczos-improved r2549 campaign r2549": [
-        0.6271186440677966,
+        0.22033898305084745,
         0.8135593220338984,
         0.8135593220338984,
         0.847457627118644,
         0.847457627118644
       ],
       "eon-svn/de-pt-neb r2549 default campaign, asv r2549": [
-        0.15254237288135594,
+        0.0847457627118644,
         0.9322033898305084,
         0.9830508474576272,
         0.9830508474576272,
@@ -837,12 +853,12 @@
       "rgsaddle/ci-neb 0.2.2 default campaign, asv c0db2b8": [
         0.0,
         0.0,
-        0.6101694915254238,
+        0.576271186440678,
         0.8135593220338984,
         0.9152542372881356
       ],
       "rgsaddle/ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": [
-        0.05084745762711865,
+        0.03389830508474576,
         0.8813559322033898,
         0.8983050847457628,
         0.8983050847457628,
@@ -857,7 +873,7 @@
       ],
       "rgsaddle/ew-ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": [
         0.0,
-        0.9491525423728814,
+        0.9152542372881356,
         0.9661016949152542,
         0.9661016949152542,
         0.9661016949152542
@@ -866,11 +882,11 @@
         0.0,
         0.0,
         0.6610169491525424,
-        0.847457627118644,
+        0.8135593220338984,
         0.9152542372881356
       ],
       "rgsaddle/idpp-ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": [
-        0.01694915254237288,
+        0.0,
         0.8983050847457628,
         0.9152542372881356,
         0.9152542372881356,
@@ -893,7 +909,7 @@
       "rgsaddle/oci-neb 0.2.2 default campaign, asv c0db2b8": [
         0.0,
         0.0,
-        0.576271186440678,
+        0.4745762711864407,
         0.8135593220338984,
         0.9152542372881356
       ],
@@ -907,7 +923,7 @@
       "rgsaddle/sidpp-ci-neb 0.2.2 default campaign, asv c0db2b8": [
         0.0,
         0.0,
-        0.6779661016949152,
+        0.6440677966101694,
         0.8983050847457628,
         0.8983050847457628
       ],
@@ -921,13 +937,13 @@
       "sella/de-pt-island-default 2.6.0 default asv 6cfb60c": [
         0.0,
         0.0,
-        0.3389830508474576,
+        0.3220338983050847,
         0.7288135593220338,
         1.0
       ],
       "sella/de-pt-island-tuned 2.6.0 tuned asv 6cfb60c": [
         0.0,
-        0.15254237288135594,
+        0.05084745762711865,
         0.8983050847457628,
         0.9152542372881356,
         0.9322033898305084
@@ -935,7 +951,7 @@
       "tsase/ci-neb 1.0 default campaign 98aac60": [
         0.0,
         0.0,
-        0.5084745762711864,
+        0.4576271186440678,
         0.576271186440678,
         0.6440677966101694
       ],
@@ -953,6 +969,8 @@
       "ase/de-pt-island-tuned 3.29.0 tuned asv f27c000": 0.9152542372881356,
       "ase/de-pt-island-tuned 3.29.0 tuned campaign f27c000": 0.9152542372881356,
       "compass/sqnm 1.0.0 default campaign 22da7bd": 0.9830508474576272,
+      "eon-git/de-pt-lanczos a7aa57472fb7d823953fd36b78cd755fa4842d30 stock campaign a7aa574": 1.0,
+      "eon-svn-stock/de-pt-lanczos r2549 stock campaign r2549": 1.0,
       "eon-svn/de-pt-ci r2549 default campaign, asv r2549": 1.0,
       "eon-svn/de-pt-ci-neb r2549 campaign r2549": 1.0,
       "eon-svn/de-pt-ci-swdneb r2549 campaign r2549": 1.0,
@@ -985,6 +1003,51 @@
     ]
   },
   "ranked": [
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 3000,
+      "code": "eOn (develop a7aa57472fb7)",
+      "code_version": "a7aa57472fb7d823953fd36b78cd755fa4842d30",
+      "commit": "a7aa57472fb7d823953fd36b78cd755fa4842d30",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "eon-git-de-pt-lanczos",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 59,
+      "history": false,
+      "max_calls": 497.0,
+      "mean_calls": 187.1864406779661,
+      "mean_per_image": 62.395480225988706,
+      "median": 157.0,
+      "median_calls": 157.0,
+      "median_high": 165.0,
+      "median_low": 152.0,
+      "median_per_image": 52.333333333333336,
+      "min_calls": 74.0,
+      "n": 59,
+      "nfailed": 0,
+      "note": "starts",
+      "par2_mean": 187.1864406779661,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/eon-git-de-pt-lanczos.dat",
+      "problem": "double-ended-saddle-search/pt-island",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "eon-git/de-pt-lanczos",
+      "tuning": "stock",
+      "wilson_high": 1.0,
+      "wilson_low": 0.9388706294732116
+    },
     {
       "asv_commit": "",
       "call_unit": "total",
@@ -1027,6 +1090,51 @@
       "success_rate": 1.0,
       "template": "eon-svn/de-pt-dimer",
       "tuning": "",
+      "wilson_high": 1.0,
+      "wilson_low": 0.9388706294732116
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 3000,
+      "code": "EON (SVN r2549)",
+      "code_version": "r2549",
+      "commit": "r2549",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "eon-svn-stock-de-pt-lanczos",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 59,
+      "history": false,
+      "max_calls": 511.0,
+      "mean_calls": 192.8135593220339,
+      "mean_per_image": 64.27118644067797,
+      "median": 161.0,
+      "median_calls": 161.0,
+      "median_high": 172.0,
+      "median_low": 158.0,
+      "median_per_image": 53.666666666666664,
+      "min_calls": 70.0,
+      "n": 59,
+      "nfailed": 0,
+      "note": "starts",
+      "par2_mean": 192.8135593220339,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/eon-svn-stock-de-pt-lanczos.dat",
+      "problem": "double-ended-saddle-search/pt-island",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "eon-svn-stock/de-pt-lanczos",
+      "tuning": "stock",
       "wilson_high": 1.0,
       "wilson_low": 0.9388706294732116
     },

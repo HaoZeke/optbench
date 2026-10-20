@@ -12,6 +12,8 @@ EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.
 
 Table 10 prints EON Lanczos 165. The archive file is 325. CI-NEB(3) prints 3 failures; the archive file has 0.
 
+double-ended-saddle-search/pt-island/eon-lanczos-improved keeps the archived number as the paper row: force_calls 222, nfailed 8. EON and eOn are different codes. EON (SVN r2549), unpatched and Fortran-linked, scores 193 force calls and 0 failures. eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) scores 187 force calls and 0 failures. Both are stock harness runs on the archive problem, starts, and convergence criterion, and both are ranked beside the archive row. The gaps were not tuned.
+
 Endpoint minima are free-atom float32 deltas against the reactant, compressed. A file over 1 MB is a git-LFS pointer, not a loose blob.
 
 ## accelerated-md

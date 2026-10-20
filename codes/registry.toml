@@ -35,6 +35,16 @@ committed = "2026-10-16"
 note = "develop HEAD built from source. The version string is 3.6.0 (7095b23a). GPR-dimer is absent: TheochemUI/gpr_optim is private and eonclient reports GPRD disabled. This pin is not the conda-forge 3.5.0 binary."
 
 [[code]]
+id = "eon-develop-a7aa574"
+name = "eOn (develop a7aa57472fb7)"
+role = "minimization and saddle search"
+repository = "https://github.com/TheochemUI/eon"
+ref = "develop"
+commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+committed = "2026-10-18"
+note = "Current develop, commit a7aa57472fb7d823953fd36b78cd755fa4842d30, 2026-10-18. This is eOn (https://eondocs.org, https://github.com/TheochemUI/eon), a different code from EON SVN. The stock Pt-island Lanczos row uses this commit untuned. The 7095b23 pin above is an older develop pin and is not this commit."
+
+[[code]]
 id = "eon-svn"
 name = "Eon svn"
 role = "minimization and saddle search"
@@ -43,6 +53,16 @@ ref = "r2549"
 commit = "r2549"
 committed = "2026-01-23"
 note = "SVN revision 2549, last changed 2026-01-23 by eboniw. eonclient -v prints r2549. The 2014 tables used earlier revisions. Export of those trees is forbidden, so the runs here are r2549. QSC sources are not in the revision. LAMMPS is not linked. Min-mode methods in this revision are dimer and lanczos. One harness uses r2549 Morse::force: cutoff 9.5, pair energy shifted to zero at the cutoff, minimum image on the box diagonal. The lane harness uses unshifted lj/cut and morse/smooth/linear. github.com/henkelmangroup/eon mirrors the same tree. The conda-forge 3.5.0 binary is a different pin. The name is Eon svn so it does not collide with the git eOn pins."
+
+[[code]]
+id = "eon-svn-r2549"
+name = "EON (SVN r2549)"
+role = "minimization and saddle search"
+repository = "https://theory.cm.utexas.edu/svn/eon"
+ref = "r2549"
+commit = "r2549"
+committed = "2026-01-23"
+note = "EON, the SVN client at theory.cm.utexas.edu/svn/eon, revision 2549. This is not eOn. The binary is unpatched r2549, linked with Fortran. eonclient -v prints r2549. The stock Pt-island Lanczos row uses the archive ini and the harness morse surface, untuned. The Eon svn pin above is the same revision under the older label."
 
 [[code]]
 id = "rgmin"
