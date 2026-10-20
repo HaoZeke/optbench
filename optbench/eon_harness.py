@@ -32,11 +32,13 @@ import ctypes
 import hashlib
 import json
 import os
+import re
 import shutil
 import signal
 import subprocess
 import tarfile
 import tempfile
+import threading
 import time
 from pathlib import Path
 
@@ -81,6 +83,22 @@ FAMILIES = {
         "flag": "--version",
         "token": "4d8b34ba",
         "cache": "4d8b34ba",
+    },
+    "r2549": {
+        "prefix": "eon-r2549/",
+        "env": "EON_R2549_CLIENT",
+        "default": Path("/tmp/eon-hg/client/eonclient"),
+        "flag": "-v",
+        "token": "r2549",
+        "cache": "r2549-rate-cap",
+    },
+    "develop": {
+        "prefix": "eon-develop/",
+        "env": "EON_DEVELOP_CLIENT",
+        "default": Path("/tmp/eon-80-prefix/bin/eonclient"),
+        "flag": "--version",
+        "token": "80e94f88",
+        "cache": "develop-80e94f88",
     },
 }
 
@@ -570,7 +588,17 @@ def default_starts(kind: str) -> list[str]:
     raise ValueError(f"unknown harness kind {kind}")
 
 
-def _run_client(client: str, ini: str, dest: Path, copies, texts, timeout: int | None) -> dict:
+def _run_client(
+    client: str,
+    ini: str,
+    dest: Path,
+    copies,
+    texts,
+    timeout: int | None,
+    *,
+    line_buffer: bool = False,
+    stop_on_transition: bool = False,
+) -> dict:
     if dest.exists():
         shutil.rmtree(dest)
     dest.mkdir(parents=True)
@@ -581,18 +609,165 @@ def _run_client(client: str, ini: str, dest: Path, copies, texts, timeout: int |
         shutil.copy(src, target)
     for name, text in texts:
         (dest / name).write_text(text, encoding="utf-8")
-    proc = subprocess.run(
-        [client],
-        cwd=dest,
-        env=_client_env(client),
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.PIPE,
-        check=False,
-        text=True,
-        timeout=timeout,
-    )
+    command = [client]
+    if line_buffer and shutil.which("stdbuf"):
+        command = ["stdbuf", "-oL", "-eL", client]
+    if not stop_on_transition:
+        proc = subprocess.run(
+            command,
+            cwd=dest,
+            env=_client_env(client),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            check=False,
+            text=True,
+            timeout=timeout,
+        )
+        stdout = proc.stdout or ""
+        stderr = proc.stderr or ""
+        returncode = proc.returncode
+        stopped = False
+    else:
+        streamed = _stream_until_transition(command, dest, _client_env(client), timeout)
+        stdout = streamed["stdout"]
+        stderr = streamed["stderr"]
+        returncode = streamed["returncode"]
+        stopped = streamed["stopped_on_transition"]
     fields = _read_dat(dest / "results.dat")
-    return {"returncode": proc.returncode, "fields": fields, "stderr": proc.stderr or ""}
+    disk_log = ""
+    log_path = dest / "client.log"
+    if log_path.is_file():
+        disk_log = log_path.read_text(encoding="utf-8", errors="replace")
+    return {
+        "returncode": returncode,
+        "fields": fields,
+        "stderr": stderr,
+        "log": stdout + "\n" + disk_log,
+        "product": (dest / "product.con").is_file(),
+        "stopped_on_transition": stopped,
+    }
+
+
+def _stream_until_transition(command, dest: Path, env, timeout: int | None) -> dict:
+    """Stop the client when it logs a refined transition time.
+
+    Unpatched EON keeps integrating after that line. The problem stop is the
+    confirmed transition, so the harness ends the process there and the force
+    calls are the calls up to that line.
+    """
+    proc = subprocess.Popen(
+        command,
+        cwd=dest,
+        env=env,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        bufsize=1,
+    )
+    lines: list[str] = []
+    err_lines: list[str] = []
+    stopped = False
+    assert proc.stdout is not None
+    assert proc.stderr is not None
+
+    def _drain_stderr() -> None:
+        for err_line in proc.stderr:
+            err_lines.append(err_line)
+
+    drain = threading.Thread(target=_drain_stderr, daemon=True)
+    drain.start()
+    try:
+        for line in proc.stdout:
+            lines.append(line)
+            if _TRANSITION_TIME.search(line):
+                stopped = True
+                print(f"STOP_ON_TRANSITION {line.strip()}", flush=True)
+                proc.terminate()
+                break
+        try:
+            proc.wait(timeout=5)
+        except subprocess.TimeoutExpired:
+            proc.kill()
+            proc.wait(timeout=5)
+    finally:
+        if proc.poll() is None:
+            proc.kill()
+            proc.wait(timeout=5)
+        drain.join(timeout=5)
+    return {
+        "stdout": "".join(lines),
+        "stderr": "".join(err_lines),
+        "returncode": proc.returncode,
+        "stopped_on_transition": stopped,
+    }
+
+
+_TRANSITION_TIME = re.compile(r"Transition time:\s*([0-9.eE+-]+)")
+
+
+def _prd_record(found: dict, calls: int, cap: int) -> dict:
+    """A parallel-replica rate. Success is a minimized product distinct from the reactant."""
+    fields = found["fields"]
+    log = found.get("log") or ""
+    stderr = found.get("stderr") or ""
+    transition_time = None
+    raw_time = fields.get("transition_time_s")
+    if raw_time is not None:
+        transition_time = float(raw_time)
+    else:
+        match = _TRANSITION_TIME.search(log)
+        if match:
+            transition_time = float(match.group(1))
+    simulation_time = None
+    raw_simulation = fields.get("simulation_time_s")
+    if raw_simulation is not None:
+        simulation_time = float(raw_simulation)
+    confirmed = (
+        fields.get("transition_found") == "1"
+        or "Transition occurred" in log
+        or bool(found.get("stopped_on_transition"))
+    )
+    stopped = bool(found.get("stopped_on_transition"))
+    killed = found["returncode"] is not None and found["returncode"] < 0 and not stopped
+    cap_hit = (calls >= cap or killed or "force-call cap" in stderr or "ForceCallCap" in stderr) and not stopped
+    if confirmed and transition_time is not None and transition_time > 0.0:
+        reason = "transition confirmed: the product was minimized and it differs from the reactant"
+        if found.get("product"):
+            reason = (
+                "transition confirmed: the product was minimized, written, and it differs from the reactant"
+            )
+        if cap_hit:
+            reason += "; the client kept stepping until the force-call cap"
+        return {
+            "force_calls": float(calls),
+            "success": True,
+            "failure": None,
+            "transition_found": 1,
+            "transition_time_s": transition_time,
+            "true_rate": 1.0 / transition_time,
+            "stop_reason": reason,
+        }
+    ended = "Simulation ended without seeing a transition" in log
+    if cap_hit or ended:
+        record = {
+            "force_calls": float(calls),
+            "success": False,
+            "failure": "cap",
+            "transition_found": 0,
+            "stop_reason": "force-call cap reached before a confirmed transition",
+        }
+        if ended and not cap_hit:
+            record["stop_reason"] = "dynamics window ended without a confirmed transition"
+        if simulation_time is not None:
+            record["simulation_time_s"] = simulation_time
+        return record
+    crashed = found["returncode"] != 0 or ("total_force_calls" not in fields and calls == 0)
+    record = classify_flag(calls=calls, cap=cap, ok=False, crashed=crashed)
+    record["transition_found"] = 0
+    record["stop_reason"] = "client exited without a confirmed transition"
+    if simulation_time is not None:
+        record["simulation_time_s"] = simulation_time
+    return record
 
 
 def _guard(record: dict, client_calls) -> dict:
@@ -802,6 +977,8 @@ def run_case(
                     copies,
                     texts,
                     None,
+                    line_buffer=kind == "prd",
+                    stop_on_transition=kind == "prd",
                 )
                 calls, _verify = remote_count(server.host, server.port)
                 fields = found["fields"]
@@ -824,7 +1001,9 @@ def run_case(
                         crashed=energy is None or found["returncode"] != 0,
                     )
                     record["minimum_energy"] = energy
-                elif kind in {"prd", "hyper"}:
+                elif kind == "prd":
+                    record = _prd_record(found, calls, cap)
+                elif kind == "hyper":
                     transition = fields.get("transition_found") == "1"
                     crashed = found["returncode"] != 0 or "total_force_calls" not in fields and calls == 0
                     record = classify_flag(calls=calls, cap=cap, ok=transition, crashed=crashed)
@@ -935,6 +1114,10 @@ def _start_row(seed: int, start: str, record: dict) -> dict:
         "fraction_connected",
         "passes",
         "transition_found",
+        "transition_time_s",
+        "simulation_time_s",
+        "true_rate",
+        "stop_reason",
         "error",
         "force_norm",
         "hessian_index",
@@ -969,12 +1152,36 @@ def write_campaign(template: dict, rows: list[tuple[int, str, dict]], output: Pa
         summary["force_calls_min"] = int(min(calls))
         summary["force_calls_max"] = int(max(calls))
         summary["force_calls_median"] = float(np.median(calls))
+    times = [
+        float(row["transition_time_s"])
+        for _seed, _start, row in kept
+        if row.get("transition_time_s")
+    ]
+    if times:
+        # 1/mean(first-passage time). Uncertainty is the population
+        # standard deviation of those times, divided by mean squared
+        # and by sqrt(N). info.py in the benchmark svn tree is this estimator.
+        mean_t = sum(times) / len(times)
+        variance = sum((item - mean_t) ** 2 for item in times) / len(times)
+        summary["true_rate"] = 1.0 / mean_t
+        summary["uncertainty"] = (variance ** 0.5) / (mean_t ** 2 * (len(times) ** 0.5))
+        summary["n_transitions"] = len(times)
+    summary["force_calls_total"] = int(round(sum(float(row["force_calls"]) for _seed, _start, row in kept)))
+    reasons = [str(row["stop_reason"]) for _seed, _start, row in kept if row.get("stop_reason")]
     text = benchmark_text(summary, template)
     extra = ["counter harness", "count_keys HarnessCounter"]
+    if summary.get("true_rate") is not None:
+        extra.append(f"true_rate {summary['true_rate']:.6e}")
+    if summary.get("uncertainty") is not None:
+        extra.append(f"uncertainty {summary['uncertainty']:.6e}")
+    if summary.get("n_transitions") is not None:
+        extra.append(f"n_transitions {summary['n_transitions']}")
+        extra.append(f"force_calls_total {summary['force_calls_total']}")
     if partial:
         extra.append("partial true")
+    comment = "# " + reasons[0] + "\n" if reasons else ""
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(text.rstrip("\n") + "\n" + "\n".join(extra) + "\n", encoding="utf-8")
+    output.write_text(comment + text.rstrip("\n") + "\n" + "\n".join(extra) + "\n", encoding="utf-8")
     write_starts(output.with_suffix(".starts"), [_start_row(seed, start, row) for seed, start, row in kept])
     summary["starts"] = len(kept)
     summary["partial"] = partial

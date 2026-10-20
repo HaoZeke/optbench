@@ -1,20 +1,20 @@
 id = "accelerated-md/aladatom"
-title = "Al adatom on Al(100) at 250 K"
+title = "Al adatom on Al(100) at 185 K"
 suite = "accelerated-md"
 problem = "aladatom"
 contract = "stated"
 entry_count = 1
-remark = "Aluminum adatom on Al(100). The reactant is the 151-atom legacy con, and the potential is the Voter-Chen EAM built into eOn as eam_al. The reference escape rate is the 250 K parallel-replica row. One repetition is one AKMC catalogue. The published method sample is 5000 products, and that count turns the rate into simulated time."
+remark = "Aluminum adatom on Al(100). The reactant is the 151-atom con file, and the potential is the Voter-Chen EAM built into eOn as eam_al. benchmark.dat records thermostat langevin_0.001 and algorithm parallel replica. The rate in that file is 1 over the mean first-passage time. The page added with the file requires the Langevin thermostat, Verlet, and a friction coefficient of 0.001 1/fs. It does not state a temperature or a sample count. The page that committed the force-call total 1.436e+09 asks for 150 sample escape rates at 185 K. The time step is 1 fs. A transition is the first minimized geometry that differs from the reactant. The catalogue probabilities and the AKMC template stay at 250 K. One repetition is one AKMC catalogue. The method sample is 5000 products, and that count turns the rate into simulated time."
 
 [potential]
 kind = "eam_al"
 name = "Voter-Chen aluminum"
 
 [thermal]
-temperature_K = 250
+temperature_K = 185
 thermostat = "langevin"
 friction_per_fs = 0.001
-friction_note = "The branching page allows Langevin friction from 0.005 to 0.03 per fs, or an Andersen thermostat with collision strength 0.2 to 0.8 and period 200 to 1000 fs. The archived true rate used Langevin friction 0.001 per fs."
+friction_note = "benchmark.dat records thermostat langevin_0.001. website/accelerated-md.tmpl r89, the page added with that file, says the Langevin thermostat with the Verlet algorithm and a friction coefficient of 0.001 1/fs. The time step is 1 fs."
 
 [reference]
 true_rate = 2.542941e8
@@ -33,7 +33,7 @@ uncertainty = 1.807e6
 percent_uncertainty = 7.104e-1
 force_calls = 1.436e9
 force_calls_per_second = 315.110
-source = "legacy website eon-md-langevin dat files"
+source = "website eon-md-langevin dat files"
 
 [[reference.comparison]]
 name = "eon-md-anderson"
@@ -42,7 +42,7 @@ uncertainty = 1.409e7
 percent_uncertainty = 6.810
 force_calls = 1.548e9
 force_calls_per_second = 338.350
-source = "legacy website eon-md-anderson dat files"
+source = "website eon-md-anderson dat files"
 
 [catalogue]
 channels = 24
@@ -106,7 +106,7 @@ rule = "2014 half-even mean of the starts under the cap. Failures are left out o
 [scoring.escape]
 rate_accuracy = "max(0, 1 - abs(rate - reference) / reference)"
 catalogue_accuracy = "1 minus the total variation distance between the rate-weighted product channels and the published probabilities. Channel -1 is an unmatched product."
-force_calls_per_simulated_time = "Catalogue force calls divided by the seconds 5000 escapes would last at the calculated rate. The legacy force-calls-per-second column is wall-clock throughput, about 315 for the Langevin molecular dynamics row, and is not this score."
+force_calls_per_simulated_time = "Catalogue force calls divided by the seconds 5000 escapes would last at the calculated rate. The force-calls-per-second column on the old page is wall-clock throughput, about 315 for the Langevin molecular dynamics row, and is not this score."
 simulated_time = "sample.products divided by the calculated rate"
 
 [scoring.v2]
