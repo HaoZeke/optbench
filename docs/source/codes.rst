@@ -1080,7 +1080,7 @@ The number is written only after the run finishes under the problem rule.
    <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
    <td>global optimization</td>
-   <td>df8da5992675</td>
+   <td>df8da599</td>
    <td>738fafe3df5a</td>
    <td><a href="https://www-wales.ch.cam.ac.uk/svn.tar.bz2">https://www-wales.ch.cam.ac.uk/svn.tar.bz2</a></td>
    </tr>
@@ -1088,19 +1088,16 @@ The number is written only after the run finishes under the problem rule.
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr data-problem="globalopt/lj38" data-template="gmin/lj38-stock">
+   <tr data-problem="globalopt/lj38" data-template="gmin/lj38-nosym">
    <td>Lennard-Jones 38 global minimum</td>
-   <td data-field="template">gmin/lj38-stock</td>
-   <td data-field="version">GMIN df8da5992675</td>
+   <td data-field="template">gmin/lj38-nosym</td>
+   <td data-field="version">GMIN df8da599</td>
    <td data-field="commit">738fafe3df5a</td>
-   <td data-field="par2_mean">1.89492e+06</td>
-   <td data-field="mean_calls">1.21495e+06</td>
-   <td data-field="median_calls">1.2933e+06</td>
-   <td data-field="failures">crash 0, divergence 0, cap 34, wrong_stationary 0</td>
+   <td data-field="par2_mean">266405</td>
+   <td data-field="mean_calls">266405</td>
+   <td data-field="median_calls">173958</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>
-   <p>No full ranked run</p><ul>
-   <li>Lennard-Jones 38 global minimum: not yet on the harness counter.</li>
-   </ul>
    </section>
