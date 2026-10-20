@@ -1,7 +1,7 @@
-force_calls 221
+force_calls 222
 force_calls_min 97
-force_calls_max 519
-nfailed 262
+force_calls_max 558
+nfailed 0
 code SciPy
 code_version 1.18.1
 algorithm L-BFGS-B
@@ -10,11 +10,11 @@ problem minimization/lj38
 counter harness
 tuning stock
 maxcor 10
-ftol 2.2204460492503131e-09
+ftol 0
 gtol 1e-5
 maxls 20
-maxiter 15000
+maxiter 10000
 maxfun 10000
 force_norm 0.01
 starts 1000
-note SciPy 1.18.1 minimize method L-BFGS-B at the library defaults, including ftol. maxfun is the problem cap. A callback also stops at Euclidean force norm 0.01. ftol can return first, and that start is a harness failure. The potential is unshifted LJ cutoff 40.
+note SciPy 1.18.1 minimize method L-BFGS-B. ftol is 0. maxfun and maxiter are the problem cap. maxcor, gtol, eps, and maxls are the library defaults. A callback stops at Euclidean force norm 0.01. The potential is unshifted LJ cutoff 40.

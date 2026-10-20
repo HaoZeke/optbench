@@ -7,7 +7,7 @@ code_version = "1.18.1"
 commit = "1.18.1"
 algorithm = "L-BFGS-B"
 tuning = "stock"
-note = "scipy.optimize.minimize method L-BFGS-B, SciPy 1.18.1 defaults. maxfun is the problem cap of 10000. The harness stops at Euclidean force norm 0.01 on the unshifted cutoff-40 Lennard-Jones potential."
+note = "scipy.optimize.minimize method L-BFGS-B, SciPy 1.18.1. ftol is 0. maxfun and maxiter are the problem cap of 10000. maxcor, gtol, eps, and maxls stay at the library defaults. A callback stops at Euclidean force norm 0.01 on the unshifted cutoff-40 Lennard-Jones potential."
 
 [stop]
 norm = "l2"

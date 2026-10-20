@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
-"""LJ38 minimization with the current SciPy L-BFGS-B, stock settings.
+"""LJ38 minimization with SciPy 1.18.1 L-BFGS-B.
 
-The archived row is pele's 2013 ``lbfgs_scipy`` score. This run is
-SciPy's own minimizer on the same problem: the harness Lennard-Jones
-(epsilon = sigma = 1, cutoff 40, no shift), the 1000 ``cluster_*.con``
-starts, and the Euclidean force stop 0.01 with a 10000-call cap.
+The archived row is the LJ38 ``lbfgs_scipy`` score. This run is SciPy's
+minimizer on that problem: the harness Lennard-Jones (epsilon = sigma = 1,
+cutoff 40, no shift) and the 1000 ``cluster_*.con`` starts.
 
-``scipy.optimize.minimize(..., method="L-BFGS-B")`` keeps the 1.18.1
-defaults: ``maxcor`` 10, ``ftol`` 2.2204460492503131e-09, ``gtol`` 1e-5,
-``eps`` 1e-8, ``maxls`` 20, ``maxiter`` 15000. ``maxfun`` is the problem
-cap. A callback stops when the harness force norm is at or below 0.01.
-Nothing is tuned toward the archived call counts.
+The stop is the problem criterion, a Euclidean force norm of 0.01.
+``ftol`` is 0 so the relative energy test does not return first.
+``maxfun`` and ``maxiter`` are the 10000-call cap. ``maxcor``, ``gtol``,
+``eps``, and ``maxls`` stay at the SciPy 1.18.1 defaults. A callback
+raises ``StopIteration`` when the force norm is at or below 0.01.
 """
 
 from __future__ import annotations
@@ -54,7 +53,7 @@ def quench(coords: np.ndarray) -> dict:
         method="L-BFGS-B",
         jac=True,
         callback=callback,
-        options={"maxfun": CAP},
+        options={"ftol": 0.0, "maxfun": CAP, "maxiter": CAP},
     )
     gradient = state["gradient"]
     force_norm = float("inf") if gradient is None else float(np.linalg.norm(gradient))
@@ -91,17 +90,17 @@ def write_dat(rows: list[dict], output: Path) -> None:
         "counter harness\n"
         "tuning stock\n"
         "maxcor 10\n"
-        "ftol 2.2204460492503131e-09\n"
+        "ftol 0\n"
         "gtol 1e-5\n"
         "maxls 20\n"
-        "maxiter 15000\n"
+        f"maxiter {CAP}\n"
         f"maxfun {CAP}\n"
         f"force_norm {FORCE_NORM}\n"
         f"starts {len(rows)}\n"
-        "note SciPy 1.18.1 minimize method L-BFGS-B at the library defaults, "
-        "including ftol. maxfun is the problem cap. A callback also stops at "
-        "Euclidean force norm 0.01. ftol can return first, and that start is "
-        "a harness failure. The potential is unshifted LJ cutoff 40.\n"
+        "note SciPy 1.18.1 minimize method L-BFGS-B. ftol is 0. maxfun and "
+        "maxiter are the problem cap. maxcor, gtol, eps, and maxls are the "
+        "library defaults. A callback stops at Euclidean force norm 0.01. "
+        "The potential is unshifted LJ cutoff 40.\n"
     )
     output.write_text(text, encoding="utf-8")
     print(text, end="")
