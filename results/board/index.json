@@ -14597,6 +14597,7 @@
           "eon-svn/de-pt-ci-swdneb r2549 campaign r2549": 1.0434005781912568,
           "eon-svn/de-pt-dimer r2549 campaign r2549": 1.142893542859861,
           "eon-svn/de-pt-neb r2549 default campaign, asv r2549": 1.0485027815075956,
+          "optim/de-pt-stock df8da599 stock campaign 738fafe": 0.3928696553580772,
           "rgsaddle/ci-neb 0.2.2 default campaign, asv c0db2b8": 0.6122643979606397,
           "rgsaddle/ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 0.9566631218134997,
           "rgsaddle/ew-ci-neb 0.2.2 default campaign, asv c0db2b8": 0.6505309228331797,
@@ -14683,6 +14684,13 @@
             0.9491525423728814,
             0.9830508474576272,
             0.9830508474576272,
+            0.9830508474576272
+          ],
+          "optim/de-pt-stock df8da599 stock campaign 738fafe": [
+            0.0,
+            0.0,
+            0.0,
+            0.8135593220338984,
             0.9830508474576272
           ],
           "rgsaddle/ci-neb 0.2.2 default campaign, asv c0db2b8": [
@@ -14809,6 +14817,7 @@
           "eon-svn/de-pt-ci-swdneb r2549 campaign r2549": 1.0,
           "eon-svn/de-pt-dimer r2549 campaign r2549": 1.0,
           "eon-svn/de-pt-neb r2549 default campaign, asv r2549": 0.9830508474576272,
+          "optim/de-pt-stock df8da599 stock campaign 738fafe": 0.9830508474576272,
           "rgsaddle/ci-neb 0.2.2 default campaign, asv c0db2b8": 0.9152542372881356,
           "rgsaddle/ci-neb-lbfgs 0.2.2 tuned campaign, asv c0db2b8": 0.9152542372881356,
           "rgsaddle/ew-ci-neb 0.2.2 default campaign, asv c0db2b8": 0.9322033898305084,
@@ -15734,6 +15743,51 @@
           "tuning": "default",
           "wilson_high": 0.9525520275375955,
           "wilson_low": 0.795361863737675
+        },
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": 3000,
+          "code": "optim",
+          "code_version": "df8da599",
+          "commit": "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31",
+          "comparable": true,
+          "counter": "harness",
+          "current": true,
+          "entry": "optim-df8da599-double-ended-saddle-search-pt-island--optim-de-pt-stock",
+          "failures": {
+            "cap": 1,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 0
+          },
+          "full_n": 59,
+          "history": false,
+          "max_calls": 3361.0,
+          "mean_calls": 1106.8474576271187,
+          "mean_per_image": 368.9491525423729,
+          "median": 919.0,
+          "median_calls": 919.0,
+          "median_high": 1122.0,
+          "median_low": 825.0,
+          "median_per_image": 306.3333333333333,
+          "min_calls": 496.0,
+          "n": 59,
+          "nfailed": 1,
+          "note": "starts.jsonl",
+          "par2_mean": 1151.5762711864406,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/optim-df8da599-double-ended-saddle-search-pt-island--optim-de-pt-stock.dat",
+          "problem": "double-ended-saddle-search/pt-island",
+          "registry_match": true,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 0.9830508474576272,
+          "template": "optim/de-pt-stock",
+          "tuning": "stock",
+          "wilson_high": 0.9970017660816444,
+          "wilson_low": 0.9100427403585771
         },
         {
           "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -42212,7 +42266,7 @@
       "title": "pt-island"
     }
   },
-  "ranked_count": 439,
+  "ranked_count": 440,
   "schema": "optbench.board/v1",
   "unmapped": [
     {

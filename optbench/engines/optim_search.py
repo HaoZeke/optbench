@@ -5,9 +5,12 @@ Minimization uses the OPTIM target from the Wales snapshot
 that file. The snapshot has no git commit. Each ``COMPUTE`` on the relay
 is one ``pes.evaluate``. OPTIM's own counter is not that score.
 
-Pt-island DNEB runs wales-27058. The potential is the built-in
-``morse_bulk`` in reduced units, and the score is OPTIM's own
-``energy+gradient calls`` line. A success is ``Converged to TS``.
+Pt-island DNEB on wales-27058 is the paper-era diagnostic. The current
+public svn export runs the same starts with stock optimizer settings.
+The potential is the built-in ``morse_bulk`` in reduced units. The count
+is OPTIM's own ``energy+gradient calls`` line, filed on the harness
+counter so the board can rank it. A success is ``Converged to TS``
+under the problem force-call cap.
 
 ``optim/unhooked`` and every other template raise before a file is
 written. Noise, single-ended saddle search, and PATHSAMPLE are not this
@@ -37,6 +40,10 @@ SHA256 = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
 # sha256 of https://optbench.org/codes/wales-27058.tar.bz2. This is the
 # paper binary. It is not the minimization snapshot pin.
 WALES_27058 = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
+# Current public export of http://www-wales.ch.cam.ac.uk/svn.tar.bz2.
+# SVNREV is the revision the tarball ships. The sha256 is the tarball.
+STOCK_SHA256 = "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
+STOCK_SVNREV = "df8da599267534fbe43a250e578f7396a7946311"
 _R0 = 2.8970
 _RHO = 1.6047
 _RCUT = 9.5
@@ -75,6 +82,14 @@ def dneb_binary() -> Path:
     if env:
         return Path(env)
     return Path("/tmp/wales/OPTIM/bin/gfortran/OPTIM")
+
+
+def stock_binary() -> Path:
+    """Unmodified current svn export. Not the 2014 tarball."""
+    env = os.environ.get("OPTIM_STOCK_BIN")
+    if env:
+        return Path(env)
+    return Path("/tmp/wales-latest/build/OPTIM")
 
 
 def available() -> str | None:
@@ -327,7 +342,15 @@ def _paper_score(text: str) -> tuple[int, bool]:
     return calls, "Converged to TS" in text
 
 
-def _dneb_record(name: str, calls: int, success: bool, error: str) -> dict:
+def _dneb_record(
+    name: str,
+    calls: int,
+    success: bool,
+    error: str,
+    *,
+    counter: str = "optim",
+    comparable: bool = False,
+) -> dict:
     reasons: list[str] = []
     if error or calls < 0:
         reasons.append("crash")
@@ -342,8 +365,8 @@ def _dneb_record(name: str, calls: int, success: bool, error: str) -> dict:
         "start": name,
         "force_calls": calls if calls >= 0 else 0,
         "verify_calls": 0,
-        "counter": "optim",
-        "comparable": False,
+        "counter": counter,
+        "comparable": comparable,
         "success": failure is None,
         "failure": failure,
         "reasons": reasons,
@@ -421,9 +444,23 @@ def _execute_dneb(job: dict) -> dict:
             if not success and calls < 0 and not error:
                 detail = _tail(stdout_path) or _tail(stderr_path) or "no energy+gradient line"
                 error = f"OPTIM produced no call count: {detail}"
-            return _dneb_record(name, calls, success, error)
+            return _dneb_record(
+                name,
+                calls,
+                success,
+                error,
+                counter=str(job.get("counter") or "optim"),
+                comparable=bool(job.get("comparable")),
+            )
     except Exception as exc:
-        return _dneb_record(name, -1, False, f"{type(exc).__name__}: {exc}")
+        return _dneb_record(
+            name,
+            -1,
+            False,
+            f"{type(exc).__name__}: {exc}",
+            counter=str(job.get("counter") or "optim"),
+            comparable=bool(job.get("comparable")),
+        )
 
 
 def _run_dneb(root: Path, problem: dict, template: dict, section: dict, output: Path, workers: int) -> dict:
@@ -493,6 +530,119 @@ def _run_dneb(root: Path, problem: dict, template: dict, section: dict, output: 
     )
 
 
+def _stock_preamble(box: np.ndarray) -> str:
+    """Archive search and convergence, stock optimizer numbers.
+
+    ``BULK`` takes the cell. The 2014 keyword did not. ``morse_bulk``
+    still reads the cell, rho, and the cutoff from ``PARAMS``. ``NOHESS``
+    is required: this potential has no second derivative. ``STEPS`` and
+    ``BFGSSTEPS`` are the archive ceilings. The default of one step is
+    not a search. Spring constant, memory, step lengths, and ``BFGSTS``
+    stay at the program defaults.
+    """
+    lengths = np.asarray(box, dtype=np.float64).reshape(-1)[:3]
+    cell = " ".join(f"{float(value):.6f}" for value in lengths)
+    return "\n".join(
+        [
+            f"BULK {cell}",
+            "NEWNEB 2 6 0.03",
+            "OPTIMIZETS",
+            "BFGSTS",
+            "NOHESS",
+            "BFGSCONV 4.3895D-5",
+            "STEPS 200",
+            "BFGSSTEPS 10000",
+        ]
+    )
+
+
+def _require_stock(template: dict) -> None:
+    if template.get("code") != CODE:
+        raise ValueError(f"{template['id']} code is not {CODE}")
+    if template.get("commit") != STOCK_SHA256:
+        raise ValueError(f"{template['id']} commit is not the current svn export")
+    if str(template.get("code_version")) != STOCK_SVNREV[:8]:
+        raise ValueError(f"{template['id']} code_version is not {STOCK_SVNREV[:8]}")
+
+
+def _run_dneb_stock(root: Path, problem: dict, template: dict, output: Path, workers: int) -> dict:
+    binary = stock_binary()
+    if not binary.is_file():
+        raise RuntimeError(
+            "Stock Pt-island DNEB needs the current OPTIM binary. "
+            f"The tarball sha256 is {STOCK_SHA256}. SVNREV is {STOCK_SVNREV}. "
+            f"{binary} is not present."
+        )
+    _require_stock(template)
+    symbol = "M"
+    timeout = 7200
+    settings = band_settings(problem)
+    scale = 1.0 / _R0
+    jobs = []
+    for pair in cached_pairs(root, problem, settings).values():
+        if pair.box is None:
+            raise ValueError(f"{pair.name} has no box")
+        frozen = np.flatnonzero(~np.asarray(pair.free, dtype=bool)) + 1
+        box = np.asarray(pair.box, dtype=np.float64) * scale
+        jobs.append(
+            {
+                "name": pair.name,
+                "reactant": np.asarray(pair.reactant, dtype=np.float64) * scale,
+                "product": np.asarray(pair.product, dtype=np.float64) * scale,
+                "box": box,
+                "frozen": frozen,
+                "preamble": _stock_preamble(box),
+                "symbol": symbol,
+                "binary": str(binary),
+                "timeout": timeout,
+                "counter": "harness",
+                "comparable": True,
+            }
+        )
+    order = {f"product_{index}": index for index in range(len(jobs))}
+    jobs.sort(key=lambda job: order.get(job["name"], 10**9))
+    records = run_jobs(jobs, _execute_dneb, workers)
+    cap = int(settings["cap"])
+    for record in records:
+        if record["success"] and int(record["force_calls"]) >= cap:
+            record["success"] = False
+            record["failure"] = "cap"
+            record["reasons"] = ["cap"]
+            record["converged"] = False
+    comment = (
+        f"# OPTIM SVNREV {STOCK_SVNREV}, svn.tar.bz2 sha256 {STOCK_SHA256}. "
+        "Unmodified gfortran build. Native morse_bulk, A=1 and R0=1. "
+        "Coordinates, the box, and rcut 9.5 are divided by r0 2.897.\n"
+        "# Stock BFGSTS, NEBK, UPDATES, USEDIAG, MAXSTEP, and MAXMAX. "
+        "BFGSCONV is 4.3895D-5. NEWNEB is 2 6 0.03 and OPTIMIZETS is set. "
+        "BULK carries the scaled cell. NOHESS is set because morse_bulk has no Hessian.\n"
+        "# force_calls is the last OPTIM energy+gradient calls count, ranked on the harness counter. "
+        f"A success converged to a TS under the harness cap {cap}."
+    )
+    parameters = {
+        "method": "dneb-stock",
+        "binary": STOCK_SVNREV[:8],
+        "rho": _RHO * _R0,
+        "r0": _R0,
+        "rcut": _RCUT / _R0,
+        "counter": "optim energy+gradient calls",
+        "bfgsconv": "4.3895D-5",
+        "newneb": "2 6 0.03",
+        "success": "Converged to TS",
+    }
+    return write_campaign(
+        output,
+        records,
+        template,
+        problem,
+        settings,
+        parameters,
+        images=None,
+        comment=comment,
+        counter="harness",
+    )
+
+
 def run(root: Path, problem_name: str, template_name: str, *, output: Path, workers: int = 1) -> dict:
     root = Path(root)
     from optbench.campaign import load_template, resolve_problem
@@ -509,6 +659,8 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
     section = _section(template)
     if section["method"] == "dneb":
         return _run_dneb(root, problem, template, section, output, workers)
+    if section["method"] == "dneb-stock":
+        return _run_dneb_stock(root, problem, template, output, workers)
     reason = available()
     if reason:
         raise RuntimeError(reason)

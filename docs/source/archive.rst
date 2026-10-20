@@ -884,7 +884,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr></thead><tbody>
    <tr id="double-ended-saddle-search-pt-island-optim" class="best">
    <td class="num">1</td>
-   <td class="text">optim</td>
+   <td class="text">optim · not reproduced</td>
    <td class="text">OPTIM</td>
    <td class="num">1.03000e+02</td>
    <td class="num">1.9400e+02</td>

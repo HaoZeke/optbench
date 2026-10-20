@@ -1,0 +1,19 @@
+# OPTIM SVNREV df8da599267534fbe43a250e578f7396a7946311, svn.tar.bz2 sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. Unmodified gfortran build. Native morse_bulk, A=1 and R0=1. Coordinates, the box, and rcut 9.5 are divided by r0 2.897.
+# Stock BFGSTS, NEBK, UPDATES, USEDIAG, MAXSTEP, and MAXMAX. BFGSCONV is 4.3895D-5. NEWNEB is 2 6 0.03 and OPTIMIZETS is set. BULK carries the scaled cell. NOHESS is set because morse_bulk has no Hessian.
+# force_calls is the last OPTIM energy+gradient calls count, ranked on the harness counter. A success converged to a TS under the harness cap 3000.
+force_calls 1068
+force_calls_min 496
+force_calls_max 2362
+force_calls_median 891
+successes 58
+nfailed 1
+n 59
+transition_states 0
+code optim
+code_version df8da599
+commit 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31
+algorithm DNEB + hybrid eigenvector following
+template optim/de-pt-stock
+problem double-ended-saddle-search/pt-island
+tuning stock
+counter harness
